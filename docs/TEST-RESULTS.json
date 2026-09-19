@@ -80,6 +80,22 @@
       "pass": 58,
       "fail": 0,
       "skipped": 0
+    },
+    {
+      "suite": "c6-core",
+      "exit_code": 0,
+      "tests": 46,
+      "pass": 46,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "c6-runtime",
+      "exit_code": 0,
+      "tests": 72,
+      "pass": 72,
+      "fail": 0,
+      "skipped": 0
     }
   ],
   "typescript": {
@@ -90,8 +106,8 @@
   "real_Cookery_API_modules_loaded": false,
   "Cookery_test_scope": "Only recipe and guide API modules on the mocked event bus, not whole Cookery/game startup.",
   "engine_acceptance": "NOT_RUN",
-  "combined_pass": 392,
+  "combined_pass": 510,
   "combined_fail": 0,
-  "rendering_test_scope": "Mock records animation/sound/particle invocations and state; No GPU, Bedrock client or network latency. C5 injects documented native-use event payloads only; the engine starting generic item use is NOT simulated.",
-  "scenario_note": "Family/quality loops are counted as individual test cases, not hundreds of separate engine tests. Includes all12 recipe adapters, all69 input qualities, C2 end-to-end adapters, C3 session/state/transactions, packaged demo and real Cookery API mock-bus coexistence. Native consumption/renderer/chunk persistence are NOT emulated."
+  "rendering_test_scope": "Mock records animation/sound/particle invocations and state; No GPU, Bedrock client or network latency. C6 injects documented native-use event payloads only; the engine starting generic item use is NOT simulated.",
+  "scenario_note": "Family/quality loops are counted as individual test cases, not hundreds of separate engine tests. Includes all12 recipe adapters, all69 input qualities, C2 end-to-end adapters, C3 session/state/transactions, packaged demo and real Cookery API mock-bus coexistence. C6 adds native rideable mocks/all16 stool and all17 light cycles, source-style sonic geometry, cancellation and protection failures. Native seat offsets, Molang interpolation, light emission, food consumption and real chunk persistence are NOT emulated."
 }

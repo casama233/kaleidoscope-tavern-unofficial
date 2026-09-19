@@ -1,355 +1,355 @@
 TAP version 13
-# (node:4540) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# (node:4989) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 # --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
 # (Use `node --trace-warnings ...` to show where the warning was created)
-# [Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
 # [Tavern C2] TavernError: STALE_POTION
 # Subtest: native onUse does not toggle: start comes only from itemStartUse
 ok 1 - native onUse does not toggle: start comes only from itemStartUse
   ---
-  duration_ms: 7.317016
+  duration_ms: 7.658217
   type: 'test'
   ...
 # Subtest: native start makes ZERO inventory writes and retains type, token and payload
 ok 2 - native start makes ZERO inventory writes and retains type, token and payload
   ---
-  duration_ms: 1.939113
+  duration_ms: 1.938592
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 0
 ok 3 - native remaining duration boundary 0
   ---
-  duration_ms: 1.972096
+  duration_ms: 1.98898
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 18
 ok 4 - native remaining duration boundary 18
   ---
-  duration_ms: 2.868835
+  duration_ms: 2.855753
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 19
 ok 5 - native remaining duration boundary 19
   ---
-  duration_ms: 2.35051
+  duration_ms: 2.335774
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 68
 ok 6 - native remaining duration boundary 68
   ---
-  duration_ms: 5.549468
+  duration_ms: 5.334949
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 69
 ok 7 - native remaining duration boundary 69
   ---
-  duration_ms: 4.456523
+  duration_ms: 4.43253
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 88
 ok 8 - native remaining duration boundary 88
   ---
-  duration_ms: 4.640268
+  duration_ms: 4.575848
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 89
 ok 9 - native remaining duration boundary 89
   ---
-  duration_ms: 5.338585
+  duration_ms: 5.071346
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 98
 ok 10 - native remaining duration boundary 98
   ---
-  duration_ms: 5.838899
+  duration_ms: 5.630686
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 99
 ok 11 - native remaining duration boundary 99
   ---
-  duration_ms: 4.804387
+  duration_ms: 4.613066
   type: 'test'
   ...
 # Subtest: native remaining duration boundary 110
 ok 12 - native remaining duration boundary 110
   ---
-  duration_ms: 6.121954
+  duration_ms: 6.020955
   type: 'test'
   ...
 # Subtest: release then stop callback finalizes only once
 ok 13 - release then stop callback finalizes only once
   ---
-  duration_ms: 3.993212
+  duration_ms: 3.807335
   type: 'test'
   ...
 # Subtest: stop-only platform event also finalizes through the same path
 ok 14 - stop-only platform event also finalizes through the same path
   ---
-  duration_ms: 3.898821
+  duration_ms: 6.131148
   type: 'test'
   ...
 # Subtest: duplicate native start does not reset the session time
 ok 15 - duplicate native start does not reset the session time
   ---
-  duration_ms: 6.510308
+  duration_ms: 6.505399
   type: 'test'
   ...
 # Subtest: 111 watchdog latches held input and never restarts/re-rolls before physical release
 ok 16 - 111 watchdog latches held input and never restarts/re-rolls before physical release
   ---
-  duration_ms: 8.472401
+  duration_ms: 5.436264
   type: 'test'
   ...
 # Subtest: duration mismatch cancels and leaves ingredients intact
 ok 17 - duration mismatch cancels and leaves ingredients intact
   ---
-  duration_ms: 4.040707
+  duration_ms: 3.935296
   type: 'test'
   ...
 # Subtest: undefined stop item (dimension/teleport interruption) cannot count as release
 ok 18 - undefined stop item (dimension/teleport interruption) cannot count as release
   ---
-  duration_ms: 6.233869
+  duration_ms: 5.339031
   type: 'test'
   ...
 # Subtest: switched hotbar cancels native hold without converting/replacing the old tool
 ok 19 - switched hotbar cancels native hold without converting/replacing the old tool
   ---
-  duration_ms: 1.301905
+  duration_ms: 0.81737
   type: 'test'
   ...
 # Subtest: sneaking cancels, and a late release does not create a result
 ok 20 - sneaking cancels, and a late release does not create a result
   ---
-  duration_ms: 4.718914
+  duration_ms: 3.391583
   type: 'test'
   ...
 # Subtest: unavailable native input is not silently converted to two clicks
 ok 21 - unavailable native input is not silently converted to two clicks
   ---
-  duration_ms: 1.150534
+  duration_ms: 1.043863
   type: 'test'
   ...
 # Subtest: explicit fallback works and ignores native-start callbacks
 ok 22 - explicit fallback works and ignores native-start callbacks
   ---
-  duration_ms: 0.924312
+  duration_ms: 0.948452
   type: 'test'
   ...
 # Subtest: server/player registries are independent for simultaneous native uses
 ok 23 - server/player registries are independent for simultaneous native uses
   ---
-  duration_ms: 7.5918
+  duration_ms: 7.063437
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:swiftness/minecraft:consumable
 ok 24 - native potion round-trip minecraft:swiftness/minecraft:consumable
   ---
-  duration_ms: 1.225349
+  duration_ms: 1.216302
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:long_poison/minecraft:consumable
 ok 25 - native potion round-trip minecraft:long_poison/minecraft:consumable
   ---
-  duration_ms: 0.40651
+  duration_ms: 0.451514
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:strong_healing/minecraft:consumable
 ok 26 - native potion round-trip minecraft:strong_healing/minecraft:consumable
   ---
-  duration_ms: 0.565591
+  duration_ms: 0.583514
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:swiftness/minecraft:splash
 ok 27 - native potion round-trip minecraft:swiftness/minecraft:splash
   ---
-  duration_ms: 0.538371
+  duration_ms: 0.50868
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:long_poison/minecraft:splash
 ok 28 - native potion round-trip minecraft:long_poison/minecraft:splash
   ---
-  duration_ms: 0.62896
+  duration_ms: 0.641533
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:strong_healing/minecraft:splash
 ok 29 - native potion round-trip minecraft:strong_healing/minecraft:splash
   ---
-  duration_ms: 0.648617
+  duration_ms: 0.572832
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:swiftness/minecraft:lingering
 ok 30 - native potion round-trip minecraft:swiftness/minecraft:lingering
   ---
-  duration_ms: 0.400065
+  duration_ms: 0.879575
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:long_poison/minecraft:lingering
 ok 31 - native potion round-trip minecraft:long_poison/minecraft:lingering
   ---
-  duration_ms: 0.330385
+  duration_ms: 0.436068
   type: 'test'
   ...
 # Subtest: native potion round-trip minecraft:strong_healing/minecraft:lingering
 ok 32 - native potion round-trip minecraft:strong_healing/minecraft:lingering
   ---
-  duration_ms: 0.558741
+  duration_ms: 0.508271
   type: 'test'
   ...
 # Subtest: native potion duration is recorded in snapshot seconds, not guessed by base ID
 ok 33 - native potion duration is recorded in snapshot seconds, not guessed by base ID
   ---
-  duration_ms: 0.157408
+  duration_ms: 0.183875
   type: 'test'
   ...
 # Subtest: unknown native potion effect rejects intake without taking potion or giving bottle
 ok 34 - unknown native potion effect rejects intake without taking potion or giving bottle
   ---
-  duration_ms: 0.598367
+  duration_ms: 0.567613
   type: 'test'
   ...
 # Subtest: custom named/lore/DP potions rejected intact
 ok 35 - custom named/lore/DP potions rejected intact
   ---
-  duration_ms: 0.526991
+  duration_ms: 0.589866
   type: 'test'
   ...
 # Subtest: potion changed during deferred interaction is not consumed as an older potion
 ok 36 - potion changed during deferred interaction is not consumed as an older potion
   ---
-  duration_ms: 1.0128
+  duration_ms: 1.182311
   type: 'test'
   ...
 # Subtest: potion state survives portable pickup and re-placement
 ok 37 - potion state survives portable pickup and re-placement
   ---
-  duration_ms: 0.738829
+  duration_ms: 0.732353
   type: 'test'
   ...
 # Subtest: save failure during potion insertion returns exact variant without an extra bottle
 ok 38 - save failure during potion insertion returns exact variant without an extra bottle
   ---
-  duration_ms: 0.935451
+  duration_ms: 0.41691
   type: 'test'
   ...
 # Subtest: source WHITE recipe tag now admits drinkable potions, not invented splash tags
 ok 39 - source WHITE recipe tag now admits drinkable potions, not invented splash tags
   ---
-  duration_ms: 1.095126
+  duration_ms: 0.946698
   type: 'test'
   ...
 # Subtest: mixed potion signature applies actual native effects and returns no second glass
 ok 40 - mixed potion signature applies actual native effects and returns no second glass
   ---
-  duration_ms: 1.320342
+  duration_ms: 1.277748
   type: 'test'
   ...
 # Subtest: potion diagnostic reflects actual runtime available registry, not all theoretical specs
 ok 41 - potion diagnostic reflects actual runtime available registry, not all theoretical specs
   ---
-  duration_ms: 0.199674
+  duration_ms: 0.207465
   type: 'test'
   ...
 # Subtest: blood Mary drinking applies a timed custom status, not a replacement native buff
 ok 42 - blood Mary drinking applies a timed custom status, not a replacement native buff
   ---
-  duration_ms: 0.475838
+  duration_ms: 0.538545
   type: 'test'
   ...
 # Subtest: kill heal uses victim maximum health, caps at own maximum and deduplicates
 ok 43 - kill heal uses victim maximum health, caps at own maximum and deduplicates
   ---
-  duration_ms: 0.555753
+  duration_ms: 0.558584
   type: 'test'
   ...
 # Subtest: no status, own death or dead killer grants no healing
 ok 44 - no status, own death or dead killer grants no healing
   ---
-  duration_ms: 0.379529
+  duration_ms: 0.39712
   type: 'test'
   ...
 # Subtest: timed effects expire online and do not become permanent DP buffs
 ok 45 - timed effects expire online and do not become permanent DP buffs
   ---
-  duration_ms: 0.67567
+  duration_ms: 0.661861
   type: 'test'
   ...
 # Subtest: milk clears only Tavern custom status keys
 ok 46 - milk clears only Tavern custom status keys
   ---
-  duration_ms: 0.41327
+  duration_ms: 0.396131
   type: 'test'
   ...
 # Subtest: logout freezes remaining custom time and reconnect restores it
 ok 47 - logout freezes remaining custom time and reconnect restores it
   ---
-  duration_ms: 0.711618
+  duration_ms: 0.7453
   type: 'test'
   ...
 # Subtest: XP drain moves existing orbs without replacing or increasing their values
 ok 48 - XP drain moves existing orbs without replacing or increasing their values
   ---
-  duration_ms: 0.555546
+  duration_ms: 0.599233
   type: 'test'
   ...
 # Subtest: Zenith teleports only to a checked top surface and applies source hunger time
 ok 49 - Zenith teleports only to a checked top surface and applies source hunger time
   ---
-  duration_ms: 0.40051
+  duration_ms: 0.416838
   type: 'test'
   ...
 # Subtest: unsupported source effect still has no fabricated substitute
 ok 50 - unsupported source effect still has no fabricated substitute
   ---
-  duration_ms: 0.342723
+  duration_ms: 0.347332
   type: 'test'
   ...
 # Subtest: missing native stop is recoverable after a hotbar context change
 ok 51 - missing native stop is recoverable after a hotbar context change
   ---
-  duration_ms: 1.41146
+  duration_ms: 1.357536
   type: 'test'
   ...
 # Subtest: auto-complete latch is kept until release, so holding cannot reroll results
 ok 52 - auto-complete latch is kept until release, so holding cannot reroll results
   ---
-  duration_ms: 6.742699
+  duration_ms: 6.676657
   type: 'test'
   ...
 # Subtest: full inventory potion withdrawal preserves the slot snapshot and sixteen glass bottles
 ok 53 - full inventory potion withdrawal preserves the slot snapshot and sixteen glass bottles
   ---
-  duration_ms: 0.777919
+  duration_ms: 1.419873
   type: 'test'
   ...
 # Subtest: potion resolver silently changing type is detected before any consumption
 ok 54 - potion resolver silently changing type is detected before any consumption
   ---
-  duration_ms: 0.315888
+  duration_ms: 0.407319
   type: 'test'
   ...
 # Subtest: potion return save failure rolls back to the exact stored potion identity
 ok 55 - potion return save failure rolls back to the exact stored potion identity
   ---
-  duration_ms: 0.39685
+  duration_ms: 0.448531
   type: 'test'
   ...
 # Subtest: Zenith rejects an unsafe top surface without teleport, hunger or editing blocks
 ok 56 - Zenith rejects an unsafe top surface without teleport, hunger or editing blocks
   ---
-  duration_ms: 0.776047
+  duration_ms: 0.791923
   type: 'test'
   ...
 # Subtest: dead killer remains dead despite an attributed kill event
 ok 57 - dead killer remains dead despite an attributed kill event
   ---
-  duration_ms: 0.242388
+  duration_ms: 0.250508
   type: 'test'
   ...
 # Subtest: native potion extension waits for capability instead of claiming registration on an old host
 ok 58 - native potion extension waits for capability instead of claiming registration on an old host
   ---
-  duration_ms: 43.145043
+  duration_ms: 51.843873
   type: 'test'
   ...
 1..58
@@ -360,4 +360,4 @@ ok 58 - native potion extension waits for capability instead of claiming registr
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 325.044174
+# duration_ms 321.037583

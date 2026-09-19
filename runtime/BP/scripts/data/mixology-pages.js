@@ -223,9 +223,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Sculk Special"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [聲波 PvE 適配已接入]",
+      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [聲波 PvE 適配已接入]",
+      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [sonic PvE adapter implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/sculk_special"
@@ -260,12 +260,36 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c5_effects",
     "title": {
-      "zh_TW": "專屬酒效 C5",
-      "en_US": "C5 custom effects"
+      "zh_TW": "專屬酒效 C6",
+      "zh_CN": "专属酒效 C6",
+      "en_US": "C6 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘9種原作效果仍未實作。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 9 source custom effects remain unimplemented."
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘8種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他8種效果仍待實作。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 8 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Eight other types remain pending."
+    }
+  },
+  {
+    "id": "kaleidoscope_tavern:c6_furniture",
+    "title": {
+      "zh_TW": "高腳凳與彩燈：完整種類",
+      "zh_CN": "高脚凳与彩灯：完整种类",
+      "en_US": "Stools and string lights"
+    },
+    "body": {
+      "zh_TW": "16色高腳凳與17款彩燈全部可合成、潛行放置及回收。高腳凳空手點擊坐下，潛行離座；潛行空手點方塊回收，有人乘坐時不允許拆除。每張凳只有1座，座墊隨乘客轉向，底座不轉。坐點候選為0.875-0.0625=0.8125格，包含原作顯式乘客偏移；實機Steve/Alex、原生騎乘偏移及碰撞仍待驗收。彩燈原作亮度15、使用染料更換成對應原模型；同色不扣料。滿背包回收取消。所有模式投料/放置均消耗物品，回收1原色，避免Creative複製。原生合成冊收錄配方；此頁不注入廚房。",
+      "en_US": "All 16 stool colors and 17 individual string-light designs are craftable. Sneak-use to place. Empty-hand use to sit; sneak to dismount. Sneak-empty-hand or mine the block to recover it; occupied seats and full inventories refuse recovery. One native seat at candidate .8125 height (source .875 anchor minus explicit .0625 rider adjustment); cushion turns, pedestal stays. Lights emit original level 15 and change design with vanilla dye; same color costs nothing. Creative still conserves actual placed items. Waterlogging, exact collision and client seating remain unverified."
+    }
+  },
+  {
+    "id": "kaleidoscope_tavern:c6_sonic",
+    "title": {
+      "zh_TW": "幽匿特調：聲波規則與差異",
+      "en_US": "Sculk Special: sonic rules and limits"
+    },
+    "body": {
+      "zh_TW": "飲用完成時沿視線發射32格声波；傷害採目前生命×Java float1.2，判定半徑為1格加目標半寬。命中後追加水平0.63、垂直0.28速度；每2格一個原生聲波粒子。採原生sonicBoom傷害，不直接覆寫目標HP。明示安全適配：不傷害玩家，不打自己的視覺helper；單次最多256個命中目標，無敵/保護拒傷時也不擊退。也可能命中動物與寵物，請勿對準它們測試。不檢查牆遮擋，與原作穿牆聲波相同；沒有爆炸/破壞方塊。新效果不重扣第二杯，回杯仍由原生food完成。以上仍未在遊戲驗收。",
+      "en_US": "On completed drinking, a 32-block view ray deals current health × Java float1.2; hit radius is 1 + half target width. Adds horizontal .63 / vertical .28 impulse, with 16 native sonic particles. Uses native sonicBoom damage, never overwrites target HP. Explicit PvE-only adaptation: all players and Tavern helpers excluded; at most 256 hit targets; rejected damage has no knockback. May also hit animals and pets. Passes walls as the source does. No block destruction or second cup consumption. Engine testing is still required."
     }
   }
 ];

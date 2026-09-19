@@ -1,0 +1,158 @@
+Compiled from "BarStoolBlockEntity.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.BarStoolBlockEntity extends com.github.ysbbbbbb.kaleidoscopetavern.blockentity.BaseBlockEntity {
+  private final net.minecraft.world.item.DyeColor color;
+
+  private com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity sitEntity;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.BarStoolBlockEntity(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.BAR_STOOL_BE:Ljava/util/function/Supplier;
+       4: invokeinterface #7,  1            // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       9: checkcast     #13                 // class net/minecraft/world/level/block/entity/BlockEntityType
+      12: aload_1
+      13: aload_2
+      14: invokespecial #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity."<init>":(Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      17: aload_0
+      18: aconst_null
+      19: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      22: aload_0
+      23: getstatic     #27                 // Field net/minecraft/world/item/DyeColor.WHITE:Lnet/minecraft/world/item/DyeColor;
+      26: putfield      #33                 // Field color:Lnet/minecraft/world/item/DyeColor;
+      29: return
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.BarStoolBlockEntity(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.item.DyeColor);
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.BAR_STOOL_BE:Ljava/util/function/Supplier;
+       4: invokeinterface #7,  1            // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       9: checkcast     #13                 // class net/minecraft/world/level/block/entity/BlockEntityType
+      12: aload_1
+      13: aload_2
+      14: invokespecial #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity."<init>":(Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      17: aload_0
+      18: aconst_null
+      19: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      22: aload_0
+      23: aload_3
+      24: putfield      #33                 // Field color:Lnet/minecraft/world/item/DyeColor;
+      27: return
+
+  public void tick();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+       4: ifnonnull     8
+       7: return
+       8: aload_0
+       9: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      12: invokevirtual #36                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.isRemoved:()Z
+      15: ifeq          24
+      18: aload_0
+      19: aconst_null
+      20: invokevirtual #42                 // Method setSitEntity:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;)V
+      23: return
+      24: aload_0
+      25: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      28: invokevirtual #46                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.getFirstPassenger:()Lnet/minecraft/world/entity/Entity;
+      31: astore_1
+      32: aload_1
+      33: instanceof    #50                 // class net/minecraft/world/entity/LivingEntity
+      36: ifne          44
+      39: aload_0
+      40: aconst_null
+      41: invokevirtual #42                 // Method setSitEntity:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;)V
+      44: return
+
+  public void loadAdditional(net.minecraft.nbt.CompoundTag, net.minecraft.core.HolderLookup$Provider);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #52                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity.loadAdditional:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+       6: aload_0
+       7: getfield      #56                 // Field level:Lnet/minecraft/world/level/Level;
+      10: ifnull        77
+      13: aload_1
+      14: ldc           #60                 // String SitEntityId
+      16: invokevirtual #62                 // Method net/minecraft/nbt/CompoundTag.getInt:(Ljava/lang/String;)I
+      19: istore_3
+      20: aload_0
+      21: getfield      #56                 // Field level:Lnet/minecraft/world/level/Level;
+      24: iload_3
+      25: invokevirtual #68                 // Method net/minecraft/world/level/Level.getEntity:(I)Lnet/minecraft/world/entity/Entity;
+      28: astore        5
+      30: aload         5
+      32: instanceof    #37                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity
+      35: ifeq          69
+      38: aload         5
+      40: checkcast     #37                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity
+      43: astore        4
+      45: aload         4
+      47: invokevirtual #74                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.blockPosition:()Lnet/minecraft/core/BlockPos;
+      50: aload_0
+      51: getfield      #78                 // Field worldPosition:Lnet/minecraft/core/BlockPos;
+      54: invokevirtual #82                 // Method net/minecraft/core/BlockPos.equals:(Ljava/lang/Object;)Z
+      57: ifeq          69
+      60: aload_0
+      61: aload         4
+      63: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      66: goto          74
+      69: aload_0
+      70: aconst_null
+      71: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      74: goto          82
+      77: aload_0
+      78: aconst_null
+      79: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      82: return
+
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag, net.minecraft.core.HolderLookup$Provider);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #88                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity.saveAdditional:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+       6: aload_0
+       7: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      10: ifnull        53
+      13: aload_0
+      14: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      17: invokevirtual #91                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.isAlive:()Z
+      20: ifeq          53
+      23: aload_0
+      24: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      27: invokevirtual #74                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.blockPosition:()Lnet/minecraft/core/BlockPos;
+      30: aload_0
+      31: getfield      #78                 // Field worldPosition:Lnet/minecraft/core/BlockPos;
+      34: invokevirtual #82                 // Method net/minecraft/core/BlockPos.equals:(Ljava/lang/Object;)Z
+      37: ifeq          53
+      40: aload_1
+      41: ldc           #60                 // String SitEntityId
+      43: aload_0
+      44: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      47: invokevirtual #94                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.getId:()I
+      50: invokevirtual #98                 // Method net/minecraft/nbt/CompoundTag.putInt:(Ljava/lang/String;I)V
+      53: return
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity getSitEntity();
+    Code:
+       0: aload_0
+       1: getfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+       4: areturn
+
+  public void setSitEntity(com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #21                 // Field sitEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+       5: aload_0
+       6: invokevirtual #102                // Method refresh:()V
+       9: return
+
+  public net.minecraft.world.item.DyeColor getColor();
+    Code:
+       0: aload_0
+       1: getfield      #33                 // Field color:Lnet/minecraft/world/item/DyeColor;
+       4: areturn
+}

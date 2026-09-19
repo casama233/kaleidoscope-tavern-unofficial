@@ -1,15 +1,15 @@
 {
   "scope": "Static file/contract checks; NOT Minecraft schema/engine acceptance",
-  "json_files": 741,
-  "items": 177,
-  "blocks": 51,
-  "runtime_visual_entities": 16,
-  "script_files": 38,
+  "json_files": 874,
+  "items": 210,
+  "blocks": 84,
+  "runtime_visual_entities": 32,
+  "script_files": 42,
   "attachables": 3,
   "animation_controllers": 2,
-  "animation_clips": 13,
-  "checks": 3087,
-  "passed": 3087,
+  "animation_clips": 14,
+  "checks": 3729,
+  "passed": 3729,
   "failed": [],
   "engine_acceptance": "NOT_RUN",
   "results": [
@@ -84,7 +84,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_colorless",
       "passed": true,
       "detail": ""
     },
@@ -159,6 +169,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:glowflower_brew_q5",
       "passed": true,
       "detail": ""
@@ -179,7 +194,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:vodka_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_pink",
       "passed": true,
       "detail": ""
     },
@@ -195,6 +225,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:miners_star_q2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:pink_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -225,6 +260,16 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:whiskey_q2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:magenta_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -304,7 +349,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:polaris_sweet_white_q3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_cyan",
       "passed": true,
       "detail": ""
     },
@@ -329,12 +384,32 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:luminous_bride_q6",
       "passed": true,
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:whiskey_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:black_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -384,12 +459,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:gold_grape_bucket",
       "passed": true,
       "detail": ""
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:red_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -489,6 +574,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:plum_wine_q3",
       "passed": true,
       "detail": ""
@@ -534,6 +624,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:honey_wine_q1",
       "passed": true,
       "detail": ""
@@ -549,12 +644,27 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:wine_q6",
       "passed": true,
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:green_grape",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_black",
       "passed": true,
       "detail": ""
     },
@@ -584,6 +694,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:plum_wine_q6",
       "passed": true,
       "detail": ""
@@ -605,6 +720,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:mother_snow_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:lime_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -659,7 +779,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_green",
       "passed": true,
       "detail": ""
     },
@@ -734,6 +864,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rum_q3",
       "passed": true,
       "detail": ""
@@ -779,6 +914,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:glowflower_brew_q1",
       "passed": true,
       "detail": ""
@@ -815,6 +955,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:signature_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_yellow",
       "passed": true,
       "detail": ""
     },
@@ -904,6 +1049,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:white_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:wine_q1",
       "passed": true,
       "detail": ""
@@ -954,6 +1104,16 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:luminous_bride_q5",
       "passed": true,
       "detail": ""
@@ -969,6 +1129,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_pressing_tub_glow_berries_visual",
       "passed": true,
       "detail": ""
@@ -979,7 +1144,27 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_cyan",
       "passed": true,
       "detail": ""
     },
@@ -994,6 +1179,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_pressing_tub_green_grape_visual",
       "passed": true,
       "detail": ""
@@ -1004,12 +1194,32 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_pressing_tub_grape_visual",
       "passed": true,
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_blue",
       "passed": true,
       "detail": ""
     },
@@ -1024,7 +1234,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_purple",
       "passed": true,
       "detail": ""
     },
@@ -1044,12 +1269,37 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:seat_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:seat_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:signature_cup_visual",
       "passed": true,
       "detail": ""
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:cup_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_green",
       "passed": true,
       "detail": ""
     },
@@ -1069,6 +1319,16 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:stool_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:cup_mojito",
       "passed": true,
       "detail": ""
@@ -1084,12 +1344,27 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:stool_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_miners_star",
       "passed": true,
       "detail": ""
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:bottle_wine",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_brown",
       "passed": true,
       "detail": ""
     },
@@ -1109,6 +1384,21 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:cup_allium_garden",
       "passed": true,
       "detail": ""
@@ -1124,7 +1414,32 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_brandy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_lime",
       "passed": true,
       "detail": ""
     },
@@ -1140,6 +1455,26 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:shaker_station",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_red",
       "passed": true,
       "detail": ""
     },
@@ -1169,12 +1504,32 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_plum_wine",
       "passed": true,
       "detail": ""
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:cup_white_lady",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_white",
       "passed": true,
       "detail": ""
     },
@@ -1194,7 +1549,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:light_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:tap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_light_gray",
       "passed": true,
       "detail": ""
     },
@@ -1229,7 +1594,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:stool_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:cup_brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_purple",
       "passed": true,
       "detail": ""
     },
@@ -1239,7 +1619,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:stool_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_red_queen",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:stool_cyan",
       "passed": true,
       "detail": ""
     },
@@ -1250,6 +1640,21 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:ice_grapevine_trellis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_light_gray",
       "passed": true,
       "detail": ""
     },
@@ -1300,6 +1705,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:bottle_polaris_sweet_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:light_orange",
       "passed": true,
       "detail": ""
     },
@@ -4489,12 +4899,187 @@
       "detail": ""
     },
     {
+      "check": "icon_texture:kt_c6_white_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_black_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_red_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_lime_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_light_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_magenta_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_pink_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c6_string_lights_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:emerald",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_colorless",
       "passed": true,
       "detail": ""
     },
@@ -4634,6 +5219,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:glowflower_brew_q5",
       "passed": true,
       "detail": ""
@@ -4674,12 +5264,27 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:vodka_q1",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:vodka_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_pink",
       "passed": true,
       "detail": ""
     },
@@ -4710,6 +5315,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:miners_star_q2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:pink_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -4765,6 +5375,16 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:whiskey_q2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:magenta_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -4909,12 +5529,22 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:polaris_sweet_white_q3",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:polaris_sweet_white_q3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_cyan",
       "passed": true,
       "detail": ""
     },
@@ -4959,6 +5589,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:luminous_bride_q6",
       "passed": true,
       "detail": ""
@@ -4969,12 +5604,27 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:whiskey_q1",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:whiskey_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:black_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -5064,6 +5714,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:gold_grape_bucket",
       "passed": true,
       "detail": ""
@@ -5075,6 +5730,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:red_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -5259,6 +5919,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:plum_wine_q3",
       "passed": true,
       "detail": ""
@@ -5344,6 +6009,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:honey_wine_q1",
       "passed": true,
       "detail": ""
@@ -5374,6 +6044,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:wine_q6",
       "passed": true,
       "detail": ""
@@ -5384,12 +6059,22 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:green_grape",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:green_grape",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_black",
       "passed": true,
       "detail": ""
     },
@@ -5444,6 +6129,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:plum_wine_q6",
       "passed": true,
       "detail": ""
@@ -5490,6 +6180,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:mother_snow_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:lime_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -5589,12 +6284,22 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:brass_heart",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_green",
       "passed": true,
       "detail": ""
     },
@@ -5734,6 +6439,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:rum_q3",
       "passed": true,
       "detail": ""
@@ -5824,6 +6534,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:glowflower_brew_q1",
       "passed": true,
       "detail": ""
@@ -5900,6 +6615,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:signature_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_yellow",
       "passed": true,
       "detail": ""
     },
@@ -6059,6 +6779,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:white_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:wine_q1",
       "passed": true,
       "detail": ""
@@ -6154,6 +6879,16 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:luminous_bride_q5",
       "passed": true,
       "detail": ""
@@ -6184,6 +6919,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:light_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:cup_empty_glassware",
       "passed": true,
       "detail": ""
@@ -6200,6 +6940,21 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:cup_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_green:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_green",
       "passed": true,
       "detail": ""
     },
@@ -6259,6 +7014,41 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:stool_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_pink:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_black:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_black:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:cup_mojito",
       "passed": true,
       "detail": ""
@@ -6314,6 +7104,36 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:stool_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_yellow:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_black:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_miners_star",
       "passed": true,
       "detail": ""
@@ -6340,6 +7160,21 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_wine",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_brown:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_brown",
       "passed": true,
       "detail": ""
     },
@@ -6385,6 +7220,61 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_carignan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_brown:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_brown:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_pink:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_pink:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_red:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_red",
       "passed": true,
       "detail": ""
     },
@@ -6439,6 +7329,66 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:light_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_lime:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_lime:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_yellow:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_yellow:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_white:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_white:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_brandy",
       "passed": true,
       "detail": ""
@@ -6450,6 +7400,41 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_brandy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_colorless:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_colorless:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_lime:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_lime",
       "passed": true,
       "detail": ""
     },
@@ -6500,6 +7485,76 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:shaker_station",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_blue:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_light_blue:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_light_blue:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_orange:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_red:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_red:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_red",
       "passed": true,
       "detail": ""
     },
@@ -6594,6 +7649,56 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:light_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_cyan:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_cyan:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_magenta:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_purple:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_plum_wine",
       "passed": true,
       "detail": ""
@@ -6625,6 +7730,21 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:cup_white_lady",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_white:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_white",
       "passed": true,
       "detail": ""
     },
@@ -6674,6 +7794,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:light_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_green:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_green:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:tap",
       "passed": true,
       "detail": ""
@@ -6685,6 +7825,21 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:tap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_light_gray:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_light_gray",
       "passed": true,
       "detail": ""
     },
@@ -6784,6 +7939,21 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:stool_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_gray:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:cup_brass_heart",
       "passed": true,
       "detail": ""
@@ -6804,6 +7974,46 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:light_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_magenta:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_magenta:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_purple:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_purple:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_champagne",
       "passed": true,
       "detail": ""
@@ -6819,6 +8029,21 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:stool_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_light_blue:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_red_queen",
       "passed": true,
       "detail": ""
@@ -6830,6 +8055,21 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_red_queen",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:stool_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:stool_cyan:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:stool_cyan",
       "passed": true,
       "detail": ""
     },
@@ -6865,6 +8105,66 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:ice_grapevine_trellis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_blue:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_blue:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_gray:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_gray:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:light_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_light_gray:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_light_gray:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_light_gray",
       "passed": true,
       "detail": ""
     },
@@ -7039,6 +8339,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:light_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_orange:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:light_orange:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:light_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "declared_state:kaleidoscope_tavern:cup_empty_glassware:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
@@ -7175,6 +8495,26 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_honey_wine:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_black:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_black:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_black:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_black:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -7684,6 +9024,46 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:light_brown:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_brown:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_brown:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_brown:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_pink:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_pink:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_pink:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_pink:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "declared_state:kaleidoscope_tavern:cup_allium_garden:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
@@ -7864,6 +9244,66 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:light_lime:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_lime:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_lime:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_lime:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_yellow:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_yellow:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_yellow:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_yellow:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_white:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_white:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_white:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_white:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_brandy:0",
       "passed": true,
       "detail": ""
@@ -7925,6 +9365,26 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_brandy:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_colorless:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_colorless:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_colorless:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_colorless:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -8045,6 +9505,46 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:shaker_station:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_red:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_red:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_red:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_red:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -8954,6 +10454,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:light_cyan:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_cyan:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_cyan:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_cyan:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_plum_wine:0",
       "passed": true,
       "detail": ""
@@ -9324,6 +10844,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:light_green:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_green:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_green:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_green:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_mother_snow:0",
       "passed": true,
       "detail": ""
@@ -9600,6 +11140,46 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:cup_brass_heart:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_magenta:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_magenta:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_magenta:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_magenta:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_purple:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_purple:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_purple:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_purple:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -10465,6 +12045,66 @@
     },
     {
       "check": "plant_tick_contract:kaleidoscope_tavern:ice_grapevine_trellis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_blue:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_gray:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_light_gray:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -11744,7 +13384,72 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:light_orange:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_orange:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_orange:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:light_orange:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:pink_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:magenta_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -11754,7 +13459,47 @@
       "detail": ""
     },
     {
+      "check": "crafting_output_exists:brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:black_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:empty_bottle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:red_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -11764,7 +13509,52 @@
       "detail": ""
     },
     {
+      "check": "crafting_output_exists:gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:lime_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:recipe_book",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_green",
       "passed": true,
       "detail": ""
     },
@@ -11779,7 +13569,27 @@
       "detail": ""
     },
     {
+      "check": "crafting_output_exists:string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:string_lights_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:white_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -11789,7 +13599,22 @@
       "detail": ""
     },
     {
+      "check": "crafting_output_exists:string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:trellis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:light_blue_bar_stool",
       "passed": true,
       "detail": ""
     },
@@ -11859,6 +13684,46 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:seat_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual",
       "passed": true,
       "detail": ""
@@ -11875,6 +13740,46 @@
     },
     {
       "check": "entity_controllers:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_cyan",
       "passed": true,
       "detail": ""
     },
@@ -11919,6 +13824,26 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:seat_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_pressing_tub_green_grape_visual",
       "passed": true,
       "detail": ""
@@ -11959,6 +13884,46 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:seat_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_pressing_tub_grape_visual",
       "passed": true,
       "detail": ""
@@ -11979,6 +13944,26 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:seat_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual",
       "passed": true,
       "detail": ""
@@ -11995,6 +13980,26 @@
     },
     {
       "check": "entity_controllers:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_blue",
       "passed": true,
       "detail": ""
     },
@@ -12039,6 +14044,26 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:seat_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual",
       "passed": true,
       "detail": ""
@@ -12055,6 +14080,46 @@
     },
     {
       "check": "entity_controllers:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_purple",
       "passed": true,
       "detail": ""
     },
@@ -12115,6 +14180,86 @@
     },
     {
       "check": "entity_controllers:kaleidoscope_tavern:rig_liquid_barrel_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_client:kaleidoscope_tavern:seat_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:seat_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:seat_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:seat_brown",
       "passed": true,
       "detail": ""
     },
@@ -12234,6 +14379,11 @@
       "detail": ""
     },
     {
+      "check": "unique_animations:animation.kt_runtime.stool.turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_animations:animation.kt_assets_a8.shaker.put",
       "passed": true,
       "detail": ""
@@ -12319,6 +14469,16 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_lime:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_lime:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual:level",
       "passed": true,
       "detail": ""
@@ -12345,6 +14505,36 @@
     },
     {
       "check": "script_animation_alias:kt_assets_a17:sandwich_board_peony_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_light_gray:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_light_gray:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_blue:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_blue:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_light_blue:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_light_blue:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -12419,6 +14609,16 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_orange:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_orange:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual:level",
       "passed": true,
       "detail": ""
@@ -12429,12 +14629,32 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_red:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_red:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kt_assets_a17:sandwich_board_grass_assembled:source_rotation",
       "passed": true,
       "detail": ""
     },
     {
       "check": "script_animation_alias:kt_assets_a17:sandwich_board_grass_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_black:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_black:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -12489,6 +14709,16 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_purple:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_purple:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_sweet_berries_visual:level",
       "passed": true,
       "detail": ""
@@ -12499,12 +14729,32 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_pink:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_pink:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_gold_grape:level",
       "passed": true,
       "detail": ""
     },
     {
       "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_gold_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_green:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_green:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -12569,6 +14819,16 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_brown:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_brown:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kt_assets_a17:sandwich_board_azure_bluet_assembled:source_rotation",
       "passed": true,
       "detail": ""
@@ -12589,6 +14849,16 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_magenta:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_magenta:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_ice_grape_visual:level",
       "passed": true,
       "detail": ""
@@ -12605,6 +14875,16 @@
     },
     {
       "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_green_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_gray:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_gray:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -12645,6 +14925,16 @@
     },
     {
       "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_cyan:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_cyan:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -12714,12 +15004,32 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_white:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_white:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_glow_berries:level",
       "passed": true,
       "detail": ""
     },
     {
       "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_glow_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:seat_yellow:seat_turn",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:seat_yellow:seat_turn",
       "passed": true,
       "detail": ""
     },
@@ -13119,12 +15429,812 @@
       "detail": ""
     },
     {
+      "check": "C6_complete_stool_family",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_complete_light_family",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:white_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:black_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:red_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:lime_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:light_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:magenta_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:pink_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_single_native_seat:pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_seat_turn_property:pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_item_block:kaleidoscope_tavern:string_lights_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_light15_nocollision:pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:white_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:light_gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:gray_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:black_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:brown_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:red_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:orange_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:yellow_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:lime_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:green_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:cyan_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:light_blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:blue_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:purple_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:magenta_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:pink_bar_stool",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_colorless",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_light_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_gray",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_black",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_brown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_red",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_orange",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_yellow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_lime",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_green",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_cyan",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_light_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_blue",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_purple",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_magenta",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_icon_bytes:kaleidoscope_tavern:string_lights_pink",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/white_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/light_gray_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/gray_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/black_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/brown_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/red_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/orange_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/yellow_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/lime_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/green_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/cyan_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/light_blue_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/blue_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/purple_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/magenta_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/pink_bar_stool.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_colorless.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_white.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_light_gray.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_gray.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_black.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_brown.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_red.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_orange.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_yellow.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_lime.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_green.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_cyan.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_light_blue.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_blue.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_purple.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_magenta.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/recipes/string_lights_pink.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/block.deco.BarStoolBlock.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/block.deco.StringLightsBlock.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/blockentity.deco.BarStoolBlockEntity.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/entity.SitEntity.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/item.BarStoolBlockItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c6/javap/item.StringLightsBlockItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source:data/upstream/c5/javap/ShriekAttackEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C6_source_cushion_only",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "A17_art_preserved",
       "passed": true,
       "detail": {
         "files": 999,
         "failures": []
       }
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/furniture.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/combat-effects.js",
+      "passed": true,
+      "detail": ""
     },
     {
       "check": "import:scripts/main.js:./bedrock/custom-effects.js",
@@ -13342,6 +16452,26 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/bedrock/combat-effects.js:../core/combat-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/combat-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/combat-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/bedrock/bottles.js:../core/bottles.js",
       "passed": true,
       "detail": ""
@@ -13418,6 +16548,11 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/bedrock/extension-host.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/custom-effects.js:./combat-effects.js",
       "passed": true,
       "detail": ""
     },
@@ -13647,6 +16782,51 @@
       "detail": ""
     },
     {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:../core/furniture.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:../core/storage.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:../core/util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:../core/inventory.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:../core/bottle-support.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/furniture.js:./transactions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/furniture.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/furniture.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/bedrock/drink-effects.js:../core/drink-effects.js",
       "passed": true,
       "detail": ""
@@ -13743,6 +16923,21 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/core/inventory.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/combat-effects.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/combat-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/combat-effects.js",
       "passed": true,
       "detail": ""
     },
@@ -13893,6 +17088,21 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/core/transport.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/furniture.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/furniture.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/furniture.js",
       "passed": true,
       "detail": ""
     },

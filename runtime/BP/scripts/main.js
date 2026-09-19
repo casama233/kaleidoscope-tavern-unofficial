@@ -1,3 +1,5 @@
+import {registerFurnitureComponents,installFurnitureEvents,furnitureDiagnostics} from './bedrock/furniture.js';
+import {combatDiagnostics} from './bedrock/combat-effects.js';
 import {installCustomEffects,customEffectDiagnostics} from './bedrock/custom-effects.js';
 import {potionDiagnostics,potionCapabilities} from './bedrock/potions.js';
 import {nativeUseDiagnostics} from './bedrock/mixology.js';
@@ -19,14 +21,14 @@ import {SHAKER_RECIPES} from './data/mixology.js';
 import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
 import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mixologyDiagnostics} from './bedrock/mixology.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
-export function diagnosticSnapshot(){return {build:'C5 / 0.5.0',customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
+export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function book(player,recipesOnly=false){if(!registry){player.sendMessage('[Tavern] Initializing / 初始化中。');return;}return openGuide(player,registry,NAMES,diagnosticSnapshot,{recipesOnly});}
 system.beforeEvents.startup.subscribe(ev=>{
- registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerDrinkEffects(ev);
+ registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerDrinkEffects(ev);
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:guidebook',{onUse:e=>void book(e.source,false)});
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:recipe_book',{onUse:e=>void book(e.source,true)});
 });
-installCustomEffects();installMixologyEvents(book);installMachineEvents(book);installCultivation(book);installBottleEvents(book);
+installFurnitureEvents(book);installCustomEffects();installMixologyEvents(book);installMachineEvents(book);installCultivation(book);installBottleEvents(book);
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
  if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});
@@ -39,7 +41,7 @@ system.run(()=>{
   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
   registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
-  console.warn('[Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.');
- }catch(e){console.error('[Tavern C5] Startup halted: '+e);}
+  console.warn('[Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.');
+ }catch(e){console.error('[Tavern C6] Startup halted: '+e);}
 });
 export function runtimeRegistry(){return registry;}

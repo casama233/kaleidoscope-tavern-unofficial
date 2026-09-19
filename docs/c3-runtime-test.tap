@@ -1,8 +1,8 @@
 TAP version 13
-# (node:4485) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# (node:4935) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 # --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
 # (Use `node --trace-warnings ...` to show where the warning was created)
-# [Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
 # [Tavern C2] TavernError: STALE_HAND
 # [Tavern C2] TavernError: DIMENSION_CHANGED
 # [Tavern C2] TavernError: STATE_CONFLICT
@@ -12,380 +12,380 @@ TAP version 13
 # Subtest: entrypoint advertises41 machine recipes and dedicated mixology components
 ok 1 - entrypoint advertises41 machine recipes and dedicated mixology components
   ---
-  duration_ms: 1.337407
+  duration_ms: 1.37709
   type: 'test'
   ...
 # Subtest: shaker placement roundtrip consumes and returns the original one machine
 ok 2 - shaker placement roundtrip consumes and returns the original one machine
   ---
-  duration_ms: 2.281191
+  duration_ms: 2.34204
   type: 'test'
   ...
 # Subtest: unsupported occupied unloaded and distant placement do not spend items
 ok 3 - unsupported occupied unloaded and distant placement do not spend items
   ---
-  duration_ms: 1.388092
+  duration_ms: 1.433512
   type: 'test'
   ...
 # Subtest: place with store exception restores air and original shaker
 ok 4 - place with store exception restores air and original shaker
   ---
-  duration_ms: 0.404346
+  duration_ms: 0.470255
   type: 'test'
   ...
 # Subtest: one from a16 bottle stack is poured and exactly one empty bottle is returned
 ok 5 - one from a16 bottle stack is poured and exactly one empty bottle is returned
   ---
-  duration_ms: 1.555813
+  duration_ms: 1.62774
   type: 'test'
   ...
 # Subtest: all69 supported ingredient qualities run through actual input adapter
 ok 6 - all69 supported ingredient qualities run through actual input adapter
   ---
-  duration_ms: 15.178448
+  duration_ms: 15.282578
   type: 'test'
   ...
 # Subtest: Q1-Q3 and potion inputs fail without a refund or taking input
 ok 7 - Q1-Q3 and potion inputs fail without a refund or taking input
   ---
-  duration_ms: 0.920198
+  duration_ms: 0.896969
   type: 'test'
   ...
 # Subtest: named input or additional item data is not silently erased
 ok 8 - named input or additional item data is not silently erased
   ---
-  duration_ms: 1.191811
+  duration_ms: 2.124364
   type: 'test'
   ...
 # Subtest: full bag rejects poured stacked bottle when no space to return container
 ok 9 - full bag rejects poured stacked bottle when no space to return container
   ---
-  duration_ms: 0.74843
+  duration_ms: 0.737113
   type: 'test'
   ...
 # Subtest: last bottle can exchange in a full bag using its newly freed slot
 ok 10 - last bottle can exchange in a full bag using its newly freed slot
   ---
-  duration_ms: 0.698546
+  duration_ms: 0.605762
   type: 'test'
   ...
 # Subtest: input save or native inventory write failure rolls back material and container
 ok 11 - input save or native inventory write failure rolls back material and container
   ---
-  duration_ms: 0.620039
+  duration_ms: 0.535466
   type: 'test'
   ...
 # Subtest: fourth material never overwrites a full three-slot shaker
 ok 12 - fourth material never overwrites a full three-slot shaker
   ---
-  duration_ms: 0.87042
+  duration_ms: 0.779066
   type: 'test'
   ...
 # Subtest: recover poured ingredient requires and consumes the earlier returned container
 ok 13 - recover poured ingredient requires and consumes the earlier returned container
   ---
-  duration_ms: 0.679528
+  duration_ms: 0.579635
   type: 'test'
   ...
 # Subtest: recover without returned container fails and cannot duplicate a filled bottle
 ok 14 - recover without returned container fails and cannot duplicate a filled bottle
   ---
-  duration_ms: 0.413711
+  duration_ms: 0.366898
   type: 'test'
   ...
 # Subtest: nonempty shaker cannot be destroyed into a blank portable item
 ok 15 - nonempty shaker cannot be destroyed into a blank portable item
   ---
-  duration_ms: 0.320559
+  duration_ms: 0.292612
   type: 'test'
   ...
 # Subtest: shake requires exactly three materials and rejects interleaved mutation
 ok 16 - shake requires exactly three materials and rejects interleaved mutation
   ---
-  duration_ms: 1.407965
+  duration_ms: 1.28447
   type: 'test'
   ...
 # Subtest: each of12 recipes can be shaken and served using actual adapters
 ok 17 - each of12 recipes can be shaken and served using actual adapters
   ---
-  duration_ms: 10.545871
+  duration_ms: 10.120674
   type: 'test'
   ...
 # Subtest: actual adapter covers original timing edges and preserves abort materials
 ok 18 - actual adapter covers original timing edges and preserves abort materials
   ---
-  duration_ms: 5.807925
+  duration_ms: 5.013931
   type: 'test'
   ...
 # Subtest: only owner can stop and duplicate same-tick stop does not finish
 ok 19 - only owner can stop and duplicate same-tick stop does not finish
   ---
-  duration_ms: 0.763032
+  duration_ms: 0.685916
   type: 'test'
   ...
 # Subtest: auto stop at111 ticks makes Mystery once and retains ingredients until poured
 ok 20 - auto stop at111 ticks makes Mystery once and retains ingredients until poured
   ---
-  duration_ms: 4.613895
+  duration_ms: 4.689013
   type: 'test'
   ...
 # Subtest: walking away, changing dimension, logout and unloaded block cancel not complete
 ok 21 - walking away, changing dimension, logout and unloaded block cancel not complete
   ---
-  duration_ms: 2.183471
+  duration_ms: 2.832707
   type: 'test'
   ...
 # Subtest: fresh store reload preserves materials/result but active sessions are not persisted
 ok 22 - fresh store reload preserves materials/result but active sessions are not persisted
   ---
-  duration_ms: 1.254504
+  duration_ms: 1.246721
   type: 'test'
   ...
 # Subtest: finish save failure preserves materials and releases in-memory ownership
 ok 23 - finish save failure preserves materials and releases in-memory ownership
   ---
-  duration_ms: 1.034694
+  duration_ms: 1.03206
   type: 'test'
   ...
 # Subtest: ready result cannot be shaken, extracted as original inputs, or refilled
 ok 24 - ready result cannot be shaken, extracted as original inputs, or refilled
   ---
-  duration_ms: 1.239458
+  duration_ms: 1.255752
   type: 'test'
   ...
 # Subtest: wrong serving container and full bag keep the prepared result
 ok 25 - wrong serving container and full bag keep the prepared result
   ---
-  duration_ms: 1.520805
+  duration_ms: 0.971002
   type: 'test'
   ...
 # Subtest: serving failure rolls back the actual cup and the prepared result
 ok 26 - serving failure rolls back the actual cup and the prepared result
   ---
-  duration_ms: 0.892077
+  duration_ms: 0.810161
   type: 'test'
   ...
 # Subtest: signature output is a nonstackable exact payload preserving all qualities
 ok 27 - signature output is a nonstackable exact payload preserving all qualities
   ---
-  duration_ms: 0.91652
+  duration_ms: 0.894712
   type: 'test'
   ...
 # Subtest: signature place, reload and return preserve effect duration probability andRGB
 ok 28 - signature place, reload and return preserve effect duration probability andRGB
   ---
-  duration_ms: 1.37808
+  duration_ms: 1.482157
   type: 'test'
   ...
 # Subtest: all14 filled cup models and empty glass place and recover correctly
 ok 29 - all14 filled cup models and empty glass place and recover correctly
   ---
-  duration_ms: 11.479502
+  duration_ms: 11.437267
   type: 'test'
   ...
 # Subtest: placed cup takes only1 from16 and cannot be overwritten or merged with another
 ok 30 - placed cup takes only1 from16 and cannot be overwritten or merged with another
   ---
-  duration_ms: 0.387618
+  duration_ms: 0.408236
   type: 'test'
   ...
 # Subtest: full inventory rejects cup recovery without erasing payload
 ok 31 - full inventory rejects cup recovery without erasing payload
   ---
-  duration_ms: 1.771486
+  duration_ms: 1.778687
   type: 'test'
   ...
 # Subtest: unsupported or missing signature metadata is rejected rather than becoming a white drink
 ok 32 - unsupported or missing signature metadata is rejected rather than becoming a white drink
   ---
-  duration_ms: 0.336488
+  duration_ms: 0.394673
   type: 'test'
   ...
 # Subtest: signature helper syncs onlyRGB fields with existing geometry, removes duplicates and cleans up
 ok 33 - signature helper syncs onlyRGB fields with existing geometry, removes duplicates and cleans up
   ---
-  duration_ms: 1.889769
+  duration_ms: 1.912701
   type: 'test'
   ...
 # Subtest: signature helper onEntityLoad removes orphan or bad anchors but defers unloaded owner
 ok 34 - signature helper onEntityLoad removes orphan or bad anchors but defers unloaded owner
   ---
-  duration_ms: 0.728759
+  duration_ms: 0.776233
   type: 'test'
   ...
 # Subtest: adjacent placed empty glass receives output without a second glass deduction
 ok 35 - adjacent placed empty glass receives output without a second glass deduction
   ---
-  duration_ms: 1.803414
+  duration_ms: 1.922721
   type: 'test'
   ...
 # Subtest: nonadjacent cup and nonempty cup are not overwritten
 ok 36 - nonadjacent cup and nonempty cup are not overwritten
   ---
-  duration_ms: 1.574948
+  duration_ms: 1.572047
   type: 'test'
   ...
 # Subtest: two-state pour rolls back BOTHDPs and block when second write fails
 ok 37 - two-state pour rolls back BOTHDPs and block when second write fails
   ---
-  duration_ms: 1.731725
+  duration_ms: 1.714163
   type: 'test'
   ...
 # Subtest: foreign block replacement preserves unreachable state for recovery, never refunds a phantom cup
 ok 38 - foreign block replacement preserves unreachable state for recovery, never refunds a phantom cup
   ---
-  duration_ms: 0.589346
+  duration_ms: 1.370158
   type: 'test'
   ...
 # Subtest: actual before-event two-click timing serves89tick recipe and does not route through barrel handlers
 ok 39 - actual before-event two-click timing serves89tick recipe and does not route through barrel handlers
   ---
-  duration_ms: 5.297107
+  duration_ms: 5.692679
   type: 'test'
   ...
 # Subtest: sneak-top placement event creates machine and cup using existing source art definitions
 ok 40 - sneak-top placement event creates machine and cup using existing source art definitions
   ---
-  duration_ms: 0.609618
+  duration_ms: 0.623995
   type: 'test'
   ...
 # Subtest: deferred placement aborts when hand or dimension changes
 ok 41 - deferred placement aborts when hand or dimension changes
   ---
-  duration_ms: 0.562256
+  duration_ms: 0.471007
   type: 'test'
   ...
 # Subtest: same revision double input event only pours one item and returns one bottle
 ok 42 - same revision double input event only pours one item and returns one bottle
   ---
-  duration_ms: 0.865527
+  duration_ms: 0.799725
   type: 'test'
   ...
 # Subtest: two players cannot both serve the final cocktail
 ok 43 - two players cannot both serve the final cocktail
   ---
-  duration_ms: 2.446616
+  duration_ms: 1.583233
   type: 'test'
   ...
 # Subtest: two players cannot both retrieve a placed signature
 ok 44 - two players cannot both retrieve a placed signature
   ---
-  duration_ms: 1.601918
+  duration_ms: 1.709098
   type: 'test'
   ...
 # Subtest: already cancelled interactions/breaks and held-repeat events are respected
 ok 45 - already cancelled interactions/breaks and held-repeat events are respected
   ---
-  duration_ms: 0.682518
+  duration_ms: 0.684968
   type: 'test'
   ...
 # Subtest: cup event pours one adjacent ready station; sneak retrieves instead
 ok 46 - cup event pours one adjacent ready station; sneak retrieves instead
   ---
-  duration_ms: 2.320272
+  duration_ms: 2.316832
   type: 'test'
   ...
 # Subtest: ambiguous two adjacent prepared shakers never pick an arbitrary drink
 ok 47 - ambiguous two adjacent prepared shakers never pick an arbitrary drink
   ---
-  duration_ms: 2.254811
+  duration_ms: 2.331041
   type: 'test'
   ...
 # Subtest: explosion exclusion composes with other protection callbacks
 ok 48 - explosion exclusion composes with other protection callbacks
   ---
-  duration_ms: 0.653792
+  duration_ms: 0.64392
   type: 'test'
   ...
 # Subtest: adventure/spectator and distant users cannot operate or retrieve
 ok 49 - adventure/spectator and distant users cannot operate or retrieve
   ---
-  duration_ms: 1.118822
+  duration_ms: 1.251644
   type: 'test'
   ...
 # Subtest: Creative roundtrip conserves real machine/cup and ingredient counts
 ok 50 - Creative roundtrip conserves real machine/cup and ingredient counts
   ---
-  duration_ms: 0.700349
+  duration_ms: 0.730961
   type: 'test'
   ...
 # Subtest: signature consumption applies saved native effects only and never modifies native post-drink inventory
 ok 51 - signature consumption applies saved native effects only and never modifies native post-drink inventory
   ---
-  duration_ms: 1.597438
+  duration_ms: 1.549873
   type: 'test'
   ...
 # Subtest: fixed cocktails retain pending custom effects instead of inventing native substitutes
 ok 52 - fixed cocktails retain pending custom effects instead of inventing native substitutes
   ---
-  duration_ms: 0.99271
+  duration_ms: 2.545597
   type: 'test'
   ...
 # Subtest: malformed signature consume and API effect error remain explicit diagnostics
 ok 53 - malformed signature consume and API effect error remain explicit diagnostics
   ---
-  duration_ms: 1.242537
+  duration_ms: 1.251495
   type: 'test'
   ...
 # Subtest: clone-output transaction writes changed payload even if type and amount are identical
 ok 54 - clone-output transaction writes changed payload even if type and amount are identical
   ---
-  duration_ms: 0.311766
+  duration_ms: 0.281964
   type: 'test'
   ...
 # Subtest: extension handshake creates independent recipe page AND executable shaker recipe
 ok 55 - extension handshake creates independent recipe page AND executable shaker recipe
   ---
-  duration_ms: 11.226775
+  duration_ms: 10.685616
   type: 'test'
   ...
 # Subtest: extension recipe snapshot survives unregister while shaking then still serves original result
 ok 56 - extension recipe snapshot survives unregister while shaking then still serves original result
   ---
-  duration_ms: 2.994837
+  duration_ms: 2.32327
   type: 'test'
   ...
 # Subtest: unknown external output pack refuses serving without deducting result or glass
 ok 57 - unknown external output pack refuses serving without deducting result or glass
   ---
-  duration_ms: 0.995454
+  duration_ms: 0.977631
   type: 'test'
   ...
 # Subtest: external result must be received in hand, not put in a nonexistent cup model
 ok 58 - external result must be received in hand, not put in a nonexistent cup model
   ---
-  duration_ms: 0.973169
+  duration_ms: 0.959932
   type: 'test'
   ...
 # Subtest: independent guide lists12 shaker recipes and clearly labels the gesture/custom-effect limits
 ok 59 - independent guide lists12 shaker recipes and clearly labels the gesture/custom-effect limits
   ---
-  duration_ms: 1.077713
+  duration_ms: 1.067238
   type: 'test'
   ...
 # Subtest: entity death immediately cancels session while preserving poured materials
 ok 60 - entity death immediately cancels session while preserving poured materials
   ---
-  duration_ms: 1.014624
+  duration_ms: 1.019623
   type: 'test'
   ...
 # Subtest: public SDK refuses mixology payload to a v1 host lacking the additive capability
 ok 61 - public SDK refuses mixology payload to a v1 host lacking the additive capability
   ---
-  duration_ms: 9.62091
+  duration_ms: 9.55161
   type: 'test'
   ...
 # [Tavern SDK] Registered tavern_mixology_demo
 # Subtest: packaged optional Mixology Demo loads own SDK and actual example recipe is executable
 ok 62 - packaged optional Mixology Demo loads own SDK and actual example recipe is executable
   ---
-  duration_ms: 63.058588
+  duration_ms: 72.841477
   type: 'test'
   ...
 # Subtest: pouring a valid metadata-bearing signature back into a shaker is rejected losslessly
 ok 63 - pouring a valid metadata-bearing signature back into a shaker is rejected losslessly
   ---
-  duration_ms: 1.899798
+  duration_ms: 2.595249
   type: 'test'
   ...
 1..63
@@ -396,4 +396,4 @@ ok 63 - pouring a valid metadata-bearing signature back into a shaker is rejecte
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 350.721603
+# duration_ms 367.856366

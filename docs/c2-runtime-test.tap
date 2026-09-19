@@ -1,294 +1,294 @@
 TAP version 13
-# (node:4458) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# (node:4908) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 # --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
 # (Use `node --trace-warnings ...` to show where the warning was created)
-# [Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
 # [Tavern C2] TavernError: BLOCK_CHANGED
 # [Tavern C2] TavernError: STALE_HAND
 # [Tavern C2] TavernError: DIMENSION_CHANGED
 # [Tavern C2] TavernError: BLOCK_CHANGED
 # [Tavern C2] TavernError: STATE_CONFLICT
 # [Tavern C2] Not substituted: kaleidoscope_tavern:slightly_tipsy
-# Subtest: startup registers9 block and6 item components without any Cookery overrides
-ok 1 - startup registers9 block and6 item components without any Cookery overrides
+# Subtest: startup registers11 block and6 item components without any Cookery overrides
+ok 1 - startup registers11 block and6 item components without any Cookery overrides
   ---
-  duration_ms: 1.004123
+  duration_ms: 1.204863
   type: 'test'
   ...
 # Subtest: all three soil species actually plant consuming one grapevine, not the stack
 ok 2 - all three soil species actually plant consuming one grapevine, not the stack
   ---
-  duration_ms: 2.128813
+  duration_ms: 2.174222
   type: 'test'
   ...
 # Subtest: bad soil and waxed frame reject planting without consuming material
 ok 3 - bad soil and waxed frame reject planting without consuming material
   ---
-  duration_ms: 0.621265
+  duration_ms: 0.620611
   type: 'test'
   ...
 # Subtest: named grapevine or bone meal is not stripped into a raw item
 ok 4 - named grapevine or bone meal is not stripped into a raw item
   ---
-  duration_ms: 0.224935
+  duration_ms: 0.256151
   type: 'test'
   ...
 # Subtest: wax and axe unwax change only requested state, preserving named tool and durability
 ok 5 - wax and axe unwax change only requested state, preserving named tool and durability
   ---
-  duration_ms: 0.361303
+  duration_ms: 0.434919
   type: 'test'
   ...
 # Subtest: native trellis placement against a frame is NOT intercepted as inspection
 ok 6 - native trellis placement against a frame is NOT intercepted as inspection
   ---
-  duration_ms: 0.490992
+  duration_ms: 0.635798
   type: 'test'
   ...
 # Subtest: onPlace source face changes bare frame axis and connects existing neighbors
 ok 7 - onPlace source face changes bare frame axis and connects existing neighbors
   ---
-  duration_ms: 0.384997
+  duration_ms: 0.348994
   type: 'test'
   ...
 # Subtest: three bone meals advance a standalone vine0 to3 using individual items
 ok 8 - three bone meals advance a standalone vine0 to3 using individual items
   ---
-  duration_ms: 1.782413
+  duration_ms: 0.506546
   type: 'test'
   ...
 # Subtest: a non-single young vine matures in one accepted growth
 ok 9 - a non-single young vine matures in one accepted growth
   ---
-  duration_ms: 0.455276
+  duration_ms: 0.35284
   type: 'test'
   ...
 # Subtest: mature spread prioritizes up before east then west and sideways starts ripe
 ok 10 - mature spread prioritizes up before east then west and sideways starts ripe
   ---
-  duration_ms: 0.440391
+  duration_ms: 0.419483
   type: 'test'
   ...
 # Subtest: waxed spread target is skipped and fruit appears only below free mature frame
 ok 11 - waxed spread target is skipped and fruit appears only below free mature frame
   ---
-  duration_ms: 0.208198
+  duration_ms: 0.209821
   type: 'test'
   ...
 # Subtest: unloaded priority neighbor postpones growth and preserves all blocks
 ok 12 - unloaded priority neighbor postpones growth and preserves all blocks
   ---
-  duration_ms: 0.179845
+  duration_ms: 0.174366
   type: 'test'
   ...
 # Subtest: no growth room and ripe fruit do not consume bone meal
 ok 13 - no growth room and ripe fruit do not consume bone meal
   ---
-  duration_ms: 0.322039
+  duration_ms: 0.309933
   type: 'test'
   ...
 # Subtest: random tick callback observes explicit0.25 baseline; does not grow on rejected roll
 ok 14 - random tick callback observes explicit0.25 baseline; does not grow on rejected roll
   ---
-  duration_ms: 0.153425
+  duration_ms: 0.143141
   type: 'test'
   ...
 # Subtest: fruit grows1–2 levels capped5 and does not grow without mature support
 ok 15 - fruit grows1–2 levels capped5 and does not grow without mature support
   ---
-  duration_ms: 0.287959
+  duration_ms: 0.303011
   type: 'test'
   ...
 # Subtest: support loss clears fruit but unloaded support defers cleanup
 ok 16 - support loss clears fruit but unloaded support defers cleanup
   ---
-  duration_ms: 0.123356
+  duration_ms: 0.11993
   type: 'test'
   ...
 # Subtest: shears harvest3 species and2 green on source rolls while preserving custom tool data
 ok 17 - shears harvest3 species and2 green on source rolls while preserving custom tool data
   ---
-  duration_ms: 1.016761
+  duration_ms: 0.902335
   type: 'test'
   ...
 # Subtest: full inventory cancels harvest, retains ripe fruit and causes no tool wear
 ok 18 - full inventory cancels harvest, retains ripe fruit and causes no tool wear
   ---
-  duration_ms: 0.45621
+  duration_ms: 0.446242
   type: 'test'
   ...
 # Subtest: Unbreaking can prevent wear; tool breaks exactly on final durability use
 ok 19 - Unbreaking can prevent wear; tool breaks exactly on final durability use
   ---
-  duration_ms: 0.473405
+  duration_ms: 0.435415
   type: 'test'
   ...
 # Subtest: pruning returns vine and bare frame while removing unsupported child fruit without duplicate loot
 ok 20 - pruning returns vine and bare frame while removing unsupported child fruit without duplicate loot
   ---
-  duration_ms: 0.222824
+  duration_ms: 0.221932
   type: 'test'
   ...
 # Subtest: normal breaking ripe crop follows smaller source loot; immature breaking returns nothing
 ok 21 - normal breaking ripe crop follows smaller source loot; immature breaking returns nothing
   ---
-  duration_ms: 0.339722
+  duration_ms: 0.372327
   type: 'test'
   ...
 # Subtest: block-write failure rolls planting inventory back and keeps bare frame
 ok 22 - block-write failure rolls planting inventory back and keeps bare frame
   ---
-  duration_ms: 0.274435
+  duration_ms: 0.260039
   type: 'test'
   ...
 # Subtest: two player harvest events in one tick award only one crop
 ok 23 - two player harvest events in one tick award only one crop
   ---
-  duration_ms: 0.604843
+  duration_ms: 0.714861
   type: 'test'
   ...
 # Subtest: changed held stack and dimension cancel deferred plant use
 ok 24 - changed held stack and dimension cancel deferred plant use
   ---
-  duration_ms: 0.734751
+  duration_ms: 0.868747
   type: 'test'
   ...
 # Subtest: display actual placement consumes exactly one even from a16-stack
 ok 25 - display actual placement consumes exactly one even from a16-stack
   ---
-  duration_ms: 0.980004
+  duration_ms: 0.956614
   type: 'test'
   ...
 # Subtest: display routes sneak top-face placement, then mixes qualities without averaging
 ok 26 - display routes sneak top-face placement, then mixes qualities without averaging
   ---
-  duration_ms: 0.860221
+  duration_ms: 0.907376
   type: 'test'
   ...
 # Subtest: display break returns all exact qualities, destroys block and removes own state
 ok 27 - display break returns all exact qualities, destroys block and removes own state
   ---
-  duration_ms: 0.396531
+  duration_ms: 0.458561
   type: 'test'
   ...
 # Subtest: three-cap overflow and different drink reject before input is consumed
 ok 28 - three-cap overflow and different drink reject before input is consumed
   ---
-  duration_ms: 0.576675
+  duration_ms: 0.577656
   type: 'test'
   ...
 # Subtest: unsupported, occupied and unloaded placement never consumes bottle
 ok 29 - unsupported, occupied and unloaded placement never consumes bottle
   ---
-  duration_ms: 0.770944
+  duration_ms: 0.782021
   type: 'test'
   ...
 # Subtest: full inventory aborts display retrieval, keeping content and permutation intact
 ok 30 - full inventory aborts display retrieval, keeping content and permutation intact
   ---
-  duration_ms: 0.446429
+  duration_ms: 0.524288
   type: 'test'
   ...
 # Subtest: failed bottle-state save rolls back input and world permutation
 ok 31 - failed bottle-state save rolls back input and world permutation
   ---
-  duration_ms: 0.262464
+  duration_ms: 0.237593
   type: 'test'
   ...
 # Subtest: failed removal save restores bottle content, block and received inventory
 ok 32 - failed removal save restores bottle content, block and received inventory
   ---
-  duration_ms: 0.251296
+  duration_ms: 0.259011
   type: 'test'
   ...
 # Subtest: fresh bottle store reloads exact mixed qualities without recomputing recipe
 ok 33 - fresh bottle store reloads exact mixed qualities without recomputing recipe
   ---
-  duration_ms: 0.272991
+  duration_ms: 0.267821
   type: 'test'
   ...
 # Subtest: same-tick two players cannot take or append the same display revision twice
 ok 34 - same-tick two players cannot take or append the same display revision twice
   ---
-  duration_ms: 0.872599
+  duration_ms: 0.905457
   type: 'test'
   ...
 # Subtest: creative display roundtrip conserves real bottle inventory
 ok 35 - creative display roundtrip conserves real bottle inventory
   ---
-  duration_ms: 0.385604
+  duration_ms: 0.419304
   type: 'test'
   ...
 # Subtest: named quality bottle is not reduced to plain-ID display state
 ok 36 - named quality bottle is not reduced to plain-ID display state
   ---
-  duration_ms: 0.243709
+  duration_ms: 0.207991
   type: 'test'
   ...
 # Subtest: externally mismatched display is kept for recovery, not refunded as invented contents
 ok 37 - externally mismatched display is kept for recovery, not refunded as invented contents
   ---
-  duration_ms: 0.261501
+  duration_ms: 0.256764
   type: 'test'
   ...
 # Subtest: removing support does not silently delete contents and empty-hand take remains possible
 ok 38 - removing support does not silently delete contents and empty-hand take remains possible
   ---
-  duration_ms: 0.308532
+  duration_ms: 0.342096
   type: 'test'
   ...
 # Subtest: adventure and spectator modes cannot exchange cultivated or placed items
 ok 39 - adventure and spectator modes cannot exchange cultivated or placed items
   ---
-  duration_ms: 0.360163
+  duration_ms: 0.333879
   type: 'test'
   ...
 # Subtest: protection filters compose with C1 machines and leave unrelated blocks impacted
 ok 40 - protection filters compose with C1 machines and leave unrelated blocks impacted
   ---
-  duration_ms: 0.380764
+  duration_ms: 0.462783
   type: 'test'
   ...
 # Subtest: Q1 consumption applies600tick nausea but never changes the post-consume inventory itself
 ok 41 - Q1 consumption applies600tick nausea but never changes the post-consume inventory itself
   ---
-  duration_ms: 0.437706
+  duration_ms: 0.411996
   type: 'test'
   ...
 # Subtest: native regeneration gets source duration and custom tipsy is explicitly unsupported
 ok 42 - native regeneration gets source duration and custom tipsy is explicitly unsupported
   ---
-  duration_ms: 0.334506
+  duration_ms: 0.320811
   type: 'test'
   ...
 # Subtest: onConsume registration has no onUse effect shortcut; engine errors are bounded diagnostics
 ok 43 - onConsume registration has no onUse effect shortcut; engine errors are bounded diagnostics
   ---
-  duration_ms: 0.669505
+  duration_ms: 0.694824
   type: 'test'
   ...
 # Subtest: independent guide contains cultivation, bottle handling and24 effect tables, without Cookery writes
 ok 44 - independent guide contains cultivation, bottle handling and24 effect tables, without Cookery writes
   ---
-  duration_ms: 1.77744
+  duration_ms: 3.194534
   type: 'test'
   ...
 # Subtest: end-to-end adapters: cultivate33 grapes, press4 buckets, brew, place and return original quality, then effect hook
 ok 45 - end-to-end adapters: cultivate33 grapes, press4 buckets, brew, place and return original quality, then effect hook
   ---
-  duration_ms: 11.600465
+  duration_ms: 10.576551
   type: 'test'
   ...
 # Subtest: tagged custom top surface supports a bottle without touching pre-release isSolid
 ok 46 - tagged custom top surface supports a bottle without touching pre-release isSolid
   ---
-  duration_ms: 0.345581
+  duration_ms: 0.345662
   type: 'test'
   ...
 # Subtest: already-cancelled third-party interact/break events are respected for crops and bottle displays
 ok 47 - already-cancelled third-party interact/break events are respected for crops and bottle displays
   ---
-  duration_ms: 0.404486
+  duration_ms: 0.451842
   type: 'test'
   ...
 1..47
@@ -299,4 +299,4 @@ ok 47 - already-cancelled third-party interact/break events are respected for cr
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 224.420277
+# duration_ms 221.432858

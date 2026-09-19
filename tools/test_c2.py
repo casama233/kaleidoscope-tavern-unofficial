@@ -1,2 +1,5 @@
-from test_c3 import main
-if __name__=='__main__':raise SystemExit(main())
+#!/usr/bin/env python3
+"""Legacy C2 entrypoint: run ALL current C6 suites."""
+import sys
+from test_c6 import main
+if __name__ == '__main__': sys.exit(main())

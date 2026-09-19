@@ -1,0 +1,324 @@
+Compiled from "StringLightsBlock.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.block.deco.StringLightsBlock extends net.minecraft.world.level.block.HorizontalDirectionalBlock implements net.minecraft.world.level.block.SimpleWaterloggedBlock {
+  public static final com.mojang.serialization.MapCodec<com.github.ysbbbbbb.kaleidoscopetavern.block.deco.StringLightsBlock> CODEC;
+
+  public static final java.util.Map<net.minecraft.world.item.Item, com.github.ysbbbbbb.kaleidoscopetavern.block.deco.StringLightsBlock> TRANSFORM_MAP;
+
+  public static final net.minecraft.world.level.block.state.properties.BooleanProperty WATERLOGGED;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape SOUTH_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape NORTH_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape EAST_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape WEST_SHAPE;
+
+  public final net.minecraft.world.item.DyeItem dyeItem;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.block.deco.StringLightsBlock(net.minecraft.world.item.Item);
+    Code:
+       0: aload_0
+       1: invokestatic  #1                  // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.of:()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+       4: aload_1
+       5: instanceof    #7                  // class net/minecraft/world/item/DyeItem
+       8: ifeq          23
+      11: aload_1
+      12: checkcast     #7                  // class net/minecraft/world/item/DyeItem
+      15: astore_2
+      16: aload_2
+      17: invokevirtual #9                  // Method net/minecraft/world/item/DyeItem.getDyeColor:()Lnet/minecraft/world/item/DyeColor;
+      20: goto          26
+      23: getstatic     #13                 // Field net/minecraft/world/item/DyeColor.WHITE:Lnet/minecraft/world/item/DyeColor;
+      26: invokevirtual #19                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.mapColor:(Lnet/minecraft/world/item/DyeColor;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      29: getstatic     #23                 // Field net/minecraft/world/level/block/state/properties/NoteBlockInstrument.HAT:Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;
+      32: invokevirtual #29                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.instrument:(Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      35: ldc           #33                 // float 0.8f
+      37: invokevirtual #34                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.strength:(F)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      40: getstatic     #38                 // Field net/minecraft/world/level/block/SoundType.CHAIN:Lnet/minecraft/world/level/block/SoundType;
+      43: invokevirtual #44                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.sound:(Lnet/minecraft/world/level/block/SoundType;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      46: invokevirtual #48                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.noCollission:()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      49: invokedynamic #51,  0             // InvokeDynamic #0:applyAsInt:()Ljava/util/function/ToIntFunction;
+      54: invokevirtual #55                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.lightLevel:(Ljava/util/function/ToIntFunction;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      57: invokespecial #59                 // Method net/minecraft/world/level/block/HorizontalDirectionalBlock."<init>":(Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+      60: aload_0
+      61: aload_0
+      62: getfield      #65                 // Field stateDefinition:Lnet/minecraft/world/level/block/state/StateDefinition;
+      65: invokevirtual #71                 // Method net/minecraft/world/level/block/state/StateDefinition.any:()Lnet/minecraft/world/level/block/state/StateHolder;
+      68: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      71: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      74: getstatic     #83                 // Field net/minecraft/core/Direction.NORTH:Lnet/minecraft/core/Direction;
+      77: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      80: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      83: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      86: iconst_0
+      87: invokestatic  #97                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      90: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      93: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      96: invokevirtual #103                // Method registerDefaultState:(Lnet/minecraft/world/level/block/state/BlockState;)V
+      99: aload_1
+     100: instanceof    #7                  // class net/minecraft/world/item/DyeItem
+     103: ifeq          130
+     106: aload_1
+     107: checkcast     #7                  // class net/minecraft/world/item/DyeItem
+     110: astore_2
+     111: aload_0
+     112: aload_2
+     113: putfield      #107                // Field dyeItem:Lnet/minecraft/world/item/DyeItem;
+     116: getstatic     #111                // Field TRANSFORM_MAP:Ljava/util/Map;
+     119: aload_1
+     120: aload_0
+     121: invokeinterface #115,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     126: pop
+     127: goto          135
+     130: aload_0
+     131: aconst_null
+     132: putfield      #107                // Field dyeItem:Lnet/minecraft/world/item/DyeItem;
+     135: return
+
+  public net.minecraft.world.level.block.state.BlockState updateShape(net.minecraft.world.level.block.state.BlockState, net.minecraft.core.Direction, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.LevelAccessor, net.minecraft.core.BlockPos, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_1
+       1: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       4: invokevirtual #121                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       7: checkcast     #98                 // class java/lang/Boolean
+      10: invokevirtual #125                // Method java/lang/Boolean.booleanValue:()Z
+      13: ifeq          36
+      16: aload         4
+      18: aload         5
+      20: getstatic     #129                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      23: getstatic     #129                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      26: aload         4
+      28: invokevirtual #135                // Method net/minecraft/world/level/material/FlowingFluid.getTickDelay:(Lnet/minecraft/world/level/LevelReader;)I
+      31: invokeinterface #141,  4          // InterfaceMethod net/minecraft/world/level/LevelAccessor.scheduleTick:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V
+      36: aload_0
+      37: aload_1
+      38: aload_2
+      39: aload_3
+      40: aload         4
+      42: aload         5
+      44: aload         6
+      46: invokespecial #147                // Method net/minecraft/world/level/block/HorizontalDirectionalBlock.updateShape:(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      49: areturn
+
+  public net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand, net.minecraft.world.phys.BlockHitResult);
+    Code:
+       0: aload_1
+       1: invokevirtual #151                // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+       4: astore        8
+       6: getstatic     #111                // Field TRANSFORM_MAP:Ljava/util/Map;
+       9: aload         8
+      11: invokeinterface #157,  2          // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+      16: ifeq          138
+      19: aload         8
+      21: aload_0
+      22: getfield      #107                // Field dyeItem:Lnet/minecraft/world/item/DyeItem;
+      25: if_acmpeq     138
+      28: getstatic     #111                // Field TRANSFORM_MAP:Ljava/util/Map;
+      31: aload         8
+      33: invokeinterface #161,  2          // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      38: checkcast     #66                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/deco/StringLightsBlock
+      41: invokevirtual #165                // Method defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      44: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      47: aload_2
+      48: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      51: invokevirtual #121                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      54: checkcast     #84                 // class net/minecraft/core/Direction
+      57: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      60: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      63: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      66: aload_2
+      67: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      70: invokevirtual #121                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      73: checkcast     #98                 // class java/lang/Boolean
+      76: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      79: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      82: astore        9
+      84: aload_3
+      85: aload         4
+      87: aload         9
+      89: invokevirtual #169                // Method net/minecraft/world/level/Level.setBlockAndUpdate:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z
+      92: pop
+      93: aload_3
+      94: aconst_null
+      95: aload         4
+      97: getstatic     #175                // Field net/minecraft/sounds/SoundEvents.DYE_USE:Lnet/minecraft/sounds/SoundEvent;
+     100: getstatic     #181                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     103: invokevirtual #187                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V
+     106: aload_3
+     107: aload         5
+     109: sipush        2001
+     112: aload         4
+     114: aload_2
+     115: invokestatic  #193                // Method net/minecraft/world/level/block/Block.getId:(Lnet/minecraft/world/level/block/state/BlockState;)I
+     118: invokevirtual #199                // Method net/minecraft/world/level/Level.levelEvent:(Lnet/minecraft/world/entity/player/Player;ILnet/minecraft/core/BlockPos;I)V
+     121: aload         5
+     123: invokevirtual #203                // Method net/minecraft/world/entity/player/Player.isCreative:()Z
+     126: ifne          134
+     129: aload_1
+     130: iconst_1
+     131: invokevirtual #208                // Method net/minecraft/world/item/ItemStack.shrink:(I)V
+     134: getstatic     #212                // Field net/minecraft/world/ItemInteractionResult.SUCCESS:Lnet/minecraft/world/ItemInteractionResult;
+     137: areturn
+     138: aload_0
+     139: aload_1
+     140: aload_2
+     141: aload_3
+     142: aload         4
+     144: aload         5
+     146: aload         6
+     148: aload         7
+     150: invokespecial #218                // Method net/minecraft/world/level/block/HorizontalDirectionalBlock.useItemOn:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/ItemInteractionResult;
+     153: areturn
+
+  protected void createBlockStateDefinition(net.minecraft.world.level.block.state.StateDefinition$Builder<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.state.BlockState>);
+    Code:
+       0: aload_1
+       1: iconst_2
+       2: anewarray     #222                // class net/minecraft/world/level/block/state/properties/Property
+       5: dup
+       6: iconst_0
+       7: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      16: aastore
+      17: invokevirtual #224                // Method net/minecraft/world/level/block/state/StateDefinition$Builder.add:([Lnet/minecraft/world/level/block/state/properties/Property;)Lnet/minecraft/world/level/block/state/StateDefinition$Builder;
+      20: pop
+      21: return
+
+  public net.minecraft.world.level.block.state.BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext);
+    Code:
+       0: aload_1
+       1: invokevirtual #230                // Method net/minecraft/world/item/context/BlockPlaceContext.getClickedFace:()Lnet/minecraft/core/Direction;
+       4: astore_2
+       5: aload_2
+       6: invokevirtual #236                // Method net/minecraft/core/Direction.getAxis:()Lnet/minecraft/core/Direction$Axis;
+       9: invokevirtual #240                // Method net/minecraft/core/Direction$Axis.isVertical:()Z
+      12: ifeq          23
+      15: aload_1
+      16: invokevirtual #245                // Method net/minecraft/world/item/context/BlockPlaceContext.getHorizontalDirection:()Lnet/minecraft/core/Direction;
+      19: invokevirtual #248                // Method net/minecraft/core/Direction.getOpposite:()Lnet/minecraft/core/Direction;
+      22: astore_2
+      23: aload_1
+      24: invokevirtual #251                // Method net/minecraft/world/item/context/BlockPlaceContext.getLevel:()Lnet/minecraft/world/level/Level;
+      27: aload_1
+      28: invokevirtual #255                // Method net/minecraft/world/item/context/BlockPlaceContext.getClickedPos:()Lnet/minecraft/core/BlockPos;
+      31: invokevirtual #259                // Method net/minecraft/world/level/Level.isWaterAt:(Lnet/minecraft/core/BlockPos;)Z
+      34: istore_3
+      35: aload_0
+      36: invokevirtual #165                // Method defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      39: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      42: aload_2
+      43: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      46: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      49: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      52: iload_3
+      53: invokestatic  #97                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      56: invokevirtual #89                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      59: checkcast     #77                 // class net/minecraft/world/level/block/state/BlockState
+      62: areturn
+
+  public net.minecraft.world.level.material.FluidState getFluidState(net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_1
+       1: getstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       4: invokevirtual #121                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       7: checkcast     #98                 // class java/lang/Boolean
+      10: invokevirtual #125                // Method java/lang/Boolean.booleanValue:()Z
+      13: ifeq          26
+      16: getstatic     #129                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      19: iconst_0
+      20: invokevirtual #263                // Method net/minecraft/world/level/material/FlowingFluid.getSource:(Z)Lnet/minecraft/world/level/material/FluidState;
+      23: goto          31
+      26: aload_0
+      27: aload_1
+      28: invokespecial #267                // Method net/minecraft/world/level/block/HorizontalDirectionalBlock.getFluidState:(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/material/FluidState;
+      31: areturn
+
+  public net.minecraft.world.phys.shapes.VoxelShape getShape(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos, net.minecraft.world.phys.shapes.CollisionContext);
+    Code:
+       0: getstatic     #271                // Field com/github/ysbbbbbb/kaleidoscopetavern/block/deco/StringLightsBlock$1.$SwitchMap$net$minecraft$core$Direction:[I
+       3: aload_1
+       4: getstatic     #79                 // Field FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+       7: invokevirtual #121                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #84                 // class net/minecraft/core/Direction
+      13: invokevirtual #277                // Method net/minecraft/core/Direction.ordinal:()I
+      16: iaload
+      17: tableswitch   { // 1 to 3
+                     1: 44
+                     2: 50
+                     3: 56
+               default: 62
+          }
+      44: getstatic     #281                // Field SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      47: goto          65
+      50: getstatic     #285                // Field EAST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      53: goto          65
+      56: getstatic     #288                // Field WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      59: goto          65
+      62: getstatic     #291                // Field NORTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      65: areturn
+
+  protected com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.HorizontalDirectionalBlock> codec();
+    Code:
+       0: getstatic     #294                // Field CODEC:Lcom/mojang/serialization/MapCodec;
+       3: areturn
+
+  private static int lambda$new$1(net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: bipush        15
+       2: ireturn
+
+  private static com.github.ysbbbbbb.kaleidoscopetavern.block.deco.StringLightsBlock lambda$static$0(net.minecraft.world.level.block.state.BlockBehaviour$Properties);
+    Code:
+       0: new           #66                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/deco/StringLightsBlock
+       3: dup
+       4: getstatic     #298                // Field net/minecraft/world/item/Items.WHITE_DYE:Lnet/minecraft/world/item/Item;
+       7: invokespecial #304                // Method "<init>":(Lnet/minecraft/world/item/Item;)V
+      10: areturn
+
+  static {};
+    Code:
+       0: invokedynamic #307,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+       5: invokestatic  #311                // Method simpleCodec:(Ljava/util/function/Function;)Lcom/mojang/serialization/MapCodec;
+       8: putstatic     #294                // Field CODEC:Lcom/mojang/serialization/MapCodec;
+      11: invokestatic  #315                // Method com/google/common/collect/Maps.newHashMap:()Ljava/util/HashMap;
+      14: putstatic     #111                // Field TRANSFORM_MAP:Ljava/util/Map;
+      17: getstatic     #321                // Field net/minecraft/world/level/block/state/properties/BlockStateProperties.WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      20: putstatic     #93                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      23: dconst_0
+      24: ldc2_w        #324                // double 4.0d
+      27: dconst_0
+      28: ldc2_w        #326                // double 16.0d
+      31: ldc2_w        #326                // double 16.0d
+      34: ldc2_w        #328                // double 6.0d
+      37: invokestatic  #330                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      40: putstatic     #281                // Field SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      43: dconst_0
+      44: ldc2_w        #324                // double 4.0d
+      47: ldc2_w        #334                // double 10.0d
+      50: ldc2_w        #326                // double 16.0d
+      53: ldc2_w        #326                // double 16.0d
+      56: ldc2_w        #326                // double 16.0d
+      59: invokestatic  #330                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      62: putstatic     #291                // Field NORTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      65: dconst_0
+      66: ldc2_w        #324                // double 4.0d
+      69: dconst_0
+      70: ldc2_w        #328                // double 6.0d
+      73: ldc2_w        #326                // double 16.0d
+      76: ldc2_w        #326                // double 16.0d
+      79: invokestatic  #330                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      82: putstatic     #285                // Field EAST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      85: ldc2_w        #334                // double 10.0d
+      88: ldc2_w        #324                // double 4.0d
+      91: dconst_0
+      92: ldc2_w        #326                // double 16.0d
+      95: ldc2_w        #326                // double 16.0d
+      98: ldc2_w        #326                // double 16.0d
+     101: invokestatic  #330                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     104: putstatic     #288                // Field WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     107: return
+}

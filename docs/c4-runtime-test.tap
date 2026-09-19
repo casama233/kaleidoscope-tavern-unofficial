@@ -1,294 +1,294 @@
 TAP version 13
-# (node:4512) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# (node:4962) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 # --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
 # (Use `node --trace-warnings ...` to show where the warning was created)
-# [Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
 # Subtest: custom component registers portable use without consumption callback
 ok 1 - custom component registers portable use without consumption callback
   ---
-  duration_ms: 1.412999
+  duration_ms: 1.368561
   type: 'test'
   ...
 # Subtest: loaded pickup moves all3 quality inputs from world to exactly one item
 ok 2 - loaded pickup moves all3 quality inputs from world to exactly one item
   ---
-  duration_ms: 6.012949
+  duration_ms: 6.002206
   type: 'test'
   ...
 # Subtest: replacing a carried loaded shaker restores all slot snapshots
 ok 3 - replacing a carried loaded shaker restores all slot snapshots
   ---
-  duration_ms: 1.493358
+  duration_ms: 1.511412
   type: 'test'
   ...
 # Subtest: finished signature carries all effects/RGB and result through placement
 ok 4 - finished signature carries all effects/RGB and result through placement
   ---
-  duration_ms: 3.158417
+  duration_ms: 3.168283
   type: 'test'
   ...
 # Subtest: world save failure during pickup rolls back block and original contents
 ok 5 - world save failure during pickup rolls back block and original contents
   ---
-  duration_ms: 1.584073
+  duration_ms: 1.615372
   type: 'test'
   ...
 # Subtest: pickup does not require discarding loaded contents but does require an empty hand
 ok 6 - pickup does not require discarding loaded contents but does require an empty hand
   ---
-  duration_ms: 0.923934
+  duration_ms: 0.929226
   type: 'test'
   ...
 # Subtest: foreign metadata on a carried shaker is rejected without stripping data
 ok 7 - foreign metadata on a carried shaker is rejected without stripping data
   ---
-  duration_ms: 0.874069
+  duration_ms: 0.898635
   type: 'test'
   ...
 # Subtest: placement exception returns the exact loaded item payload
 ok 8 - placement exception returns the exact loaded item payload
   ---
-  duration_ms: 1.023445
+  duration_ms: 0.999465
   type: 'test'
   ...
 # Subtest: incomplete tool never starts an animated session
 ok 9 - incomplete tool never starts an animated session
   ---
-  duration_ms: 0.489102
+  duration_ms: 0.484066
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 18 preserves expected output
 ok 10 - handheld source timing boundary 18 preserves expected output
   ---
-  duration_ms: 1.246883
+  duration_ms: 2.513637
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 19 preserves expected output
 ok 11 - handheld source timing boundary 19 preserves expected output
   ---
-  duration_ms: 1.575502
+  duration_ms: 1.360694
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 68 preserves expected output
 ok 12 - handheld source timing boundary 68 preserves expected output
   ---
-  duration_ms: 2.22833
+  duration_ms: 1.009331
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 69 preserves expected output
 ok 13 - handheld source timing boundary 69 preserves expected output
   ---
-  duration_ms: 1.17175
+  duration_ms: 1.143673
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 88 preserves expected output
 ok 14 - handheld source timing boundary 88 preserves expected output
   ---
-  duration_ms: 1.181814
+  duration_ms: 1.185575
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 89 preserves expected output
 ok 15 - handheld source timing boundary 89 preserves expected output
   ---
-  duration_ms: 1.466969
+  duration_ms: 1.541443
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 98 preserves expected output
 ok 16 - handheld source timing boundary 98 preserves expected output
   ---
-  duration_ms: 1.560363
+  duration_ms: 1.683259
   type: 'test'
   ...
 # Subtest: handheld source timing boundary 99 preserves expected output
 ok 17 - handheld source timing boundary 99 preserves expected output
   ---
-  duration_ms: 1.060768
+  duration_ms: 1.157381
   type: 'test'
   ...
 # Subtest: 111tick watchdog finalizes ONCE, restores neutral tool and stops arm controller
 ok 18 - 111tick watchdog finalizes ONCE, restores neutral tool and stops arm controller
   ---
-  duration_ms: 7.243486
+  duration_ms: 8.035455
   type: 'test'
   ...
 # Subtest: same-tick repeated use never accidentally finishes
 ok 19 - same-tick repeated use never accidentally finishes
   ---
-  duration_ms: 1.769114
+  duration_ms: 1.05058
   type: 'test'
   ...
 # Subtest: switching hotbar cancels without writing over new selected item
 ok 20 - switching hotbar cancels without writing over new selected item
   ---
-  duration_ms: 0.98874
+  duration_ms: 0.972162
   type: 'test'
   ...
 # Subtest: switch to different capsule with same item ID cancels instead of overwriting
 ok 21 - switch to different capsule with same item ID cancels instead of overwriting
   ---
-  duration_ms: 1.434141
+  duration_ms: 1.418068
   type: 'test'
   ...
 # Subtest: dimension change preserves original ingredients without producing a result
 ok 22 - dimension change preserves original ingredients without producing a result
   ---
-  duration_ms: 0.947426
+  duration_ms: 0.941115
   type: 'test'
   ...
 # Subtest: death cancels immediately and does not resurrect missing items
 ok 23 - death cancels immediately and does not resurrect missing items
   ---
-  duration_ms: 0.892379
+  duration_ms: 0.894117
   type: 'test'
   ...
 # Subtest: orphan active item after restart recovers to ordinary data without fabrication
 ok 24 - orphan active item after restart recovers to ordinary data without fabrication
   ---
-  duration_ms: 0.927282
+  duration_ms: 0.896209
   type: 'test'
   ...
 # Subtest: dropped active payload can be recovered by receiver without copying another item
 ok 25 - dropped active payload can be recovered by receiver without copying another item
   ---
-  duration_ms: 1.146974
+  duration_ms: 1.1144
   type: 'test'
   ...
 # Subtest: explicit compatibility onUse toggles and sneak-use cancels
 ok 26 - explicit compatibility onUse toggles and sneak-use cancels
   ---
-  duration_ms: 2.63679
+  duration_ms: 2.758695
   type: 'test'
   ...
 # Subtest: hand operation works in Creative but cannot double-copy items
 ok 27 - hand operation works in Creative but cannot double-copy items
   ---
-  duration_ms: 1.38449
+  duration_ms: 1.385069
   type: 'test'
   ...
 # Subtest: adventure and spectator do not start a carried session
 ok 28 - adventure and spectator do not start a carried session
   ---
-  duration_ms: 1.265305
+  duration_ms: 1.783225
   type: 'test'
   ...
 # Subtest: portable recipe snapshot survives extension removal while shaking
 ok 29 - portable recipe snapshot survives extension removal while shaking
   ---
-  duration_ms: 1.605043
+  duration_ms: 1.622665
   type: 'test'
   ...
 # Subtest: pour does not commit before12ticks; uses already placed glass, not another
 ok 30 - pour does not commit before12ticks; uses already placed glass, not another
   ---
-  duration_ms: 3.212391
+  duration_ms: 2.646728
   type: 'test'
   ...
 # Subtest: interrupted pour cancels before spending a result or the placed glass
 ok 31 - interrupted pour cancels before spending a result or the placed glass
   ---
-  duration_ms: 1.522291
+  duration_ms: 1.500631
   type: 'test'
   ...
 # Subtest: walking away during pour cancels instead of filling from afar
 ok 32 - walking away during pour cancels instead of filling from afar
   ---
-  duration_ms: 1.230546
+  duration_ms: 1.230119
   type: 'test'
   ...
 # Subtest: unloaded cup cancels without clearing portable contents
 ok 33 - unloaded cup cancels without clearing portable contents
   ---
-  duration_ms: 1.167663
+  duration_ms: 1.224972
   type: 'test'
   ...
 # Subtest: two pourers cannot reserve same glass and takeCup cannot bypass reservation
 ok 34 - two pourers cannot reserve same glass and takeCup cannot bypass reservation
   ---
-  duration_ms: 3.080233
+  duration_ms: 3.200026
   type: 'test'
   ...
 # Subtest: pour commit storage exception rolls back both hand result and glass
 ok 35 - pour commit storage exception rolls back both hand result and glass
   ---
-  duration_ms: 1.957955
+  duration_ms: 2.04785
   type: 'test'
   ...
 # Subtest: full-inventory pouring still succeeds because it fills existing glass and same tool slot
 ok 36 - full-inventory pouring still succeeds because it fills existing glass and same tool slot
   ---
-  duration_ms: 2.294261
+  duration_ms: 2.950766
   type: 'test'
   ...
 # Subtest: placed glass interaction event routes to timed hand pour, not item placement
 ok 37 - placed glass interaction event routes to timed hand pour, not item placement
   ---
-  duration_ms: 2.840568
+  duration_ms: 2.481779
   type: 'test'
   ...
 # Subtest: sneak-empty table event picks up loaded machine rather than returning free containers
 ok 38 - sneak-empty table event picks up loaded machine rather than returning free containers
   ---
-  duration_ms: 0.715604
+  duration_ms: 0.7878
   type: 'test'
   ...
 # Subtest: world helper is single, reuses original geometry, and receives PUT only after commit
 ok 39 - world helper is single, reuses original geometry, and receives PUT only after commit
   ---
-  duration_ms: 0.41023
+  duration_ms: 0.413686
   type: 'test'
   ...
 # Subtest: same PUT revision/tick feedback deduplicates, failed transaction never emits PUT
 ok 40 - same PUT revision/tick feedback deduplicates, failed transaction never emits PUT
   ---
-  duration_ms: 0.307677
+  duration_ms: 0.311537
   type: 'test'
   ...
 # Subtest: render/audio/particle exceptions never cancel a successful material transaction
 ok 41 - render/audio/particle exceptions never cancel a successful material transaction
   ---
-  duration_ms: 0.290502
+  duration_ms: 0.32623
   type: 'test'
   ...
 # Subtest: cup pour particle rendering may fail but commit still completes
 ok 42 - cup pour particle rendering may fail but commit still completes
   ---
-  duration_ms: 1.836693
+  duration_ms: 1.815023
   type: 'test'
   ...
 # Subtest: shaking world sound ticks are10 apart and not a per-frame spam
 ok 43 - shaking world sound ticks are10 apart and not a per-frame spam
   ---
-  duration_ms: 2.613518
+  duration_ms: 2.749876
   type: 'test'
   ...
 # Subtest: immersive HUD hides bands by default, precise assistance is opt-in
 ok 44 - immersive HUD hides bands by default, precise assistance is opt-in
   ---
-  duration_ms: 1.830038
+  duration_ms: 1.887665
   type: 'test'
   ...
 # Subtest: book toggles timing preference without touching Cookery keys
 ok 45 - book toggles timing preference without touching Cookery keys
   ---
-  duration_ms: 1.769607
+  duration_ms: 1.67165
   type: 'test'
   ...
 # Subtest: barrel lid transaction uses actual lid action and only its matching sound
 ok 46 - barrel lid transaction uses actual lid action and only its matching sound
   ---
-  duration_ms: 2.9152
+  duration_ms: 2.91759
   type: 'test'
   ...
 # Subtest: failed barrel lid save emits no successful-action cue
 ok 47 - failed barrel lid save emits no successful-action cue
   ---
-  duration_ms: 0.598765
+  duration_ms: 1.22097
   type: 'test'
   ...
 # Subtest: portable pickup does not block containerless extension ingredient retrieval
 ok 48 - portable pickup does not block containerless extension ingredient retrieval
   ---
-  duration_ms: 1.143992
+  duration_ms: 1.232111
   type: 'test'
   ...
 1..48
@@ -299,4 +299,4 @@ ok 48 - portable pickup does not block containerless extension ingredient retrie
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 270.183955
+# duration_ms 264.748025

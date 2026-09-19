@@ -14,7 +14,7 @@ export async function openGuide(player,registry,names,diagnostics,{recipesOnly=f
   const form=new ActionFormData().title(tr('森羅物語：酒館','Kaleidoscope Tavern'));
   const actions=[];const button=(label,action,icon)=>{icon?form.button(label,icon):form.button(label);actions.push(action);};
   if(state.view==='home'){
-   form.body(tr('獨立酒館指南・C4 功能開發版\n配方與附屬頁面不使用廚房的指南資料。','Independent Tavern guide · C4 development build\nRecipes and extensions are separate from Cookery.'));
+   form.body(tr('獨立酒館指南・C6 功能開發版\n配方與附屬頁面不使用廚房的指南資料。','Independent Tavern guide · C6 development build\nRecipes and extensions are separate from Cookery.'));
    for(const[view,tw,en]of [['guides','玩法與指引','Guides'],['recipes','目前可用配方','Active recipes'],['bookmarks','我的書籤','Bookmarks'],['extensions','已註冊附屬','Registered extensions']])button(tr(tw,en),()=>({view,page:0,query:''}));
    button(tr('搜尋','Search'),async()=>{const res=await new ModalFormData().title(tr('搜尋酒館內容','Search Tavern')).textField(tr('名稱、材料、ID','Name, ingredient, ID'),'').show(player);return res.canceled?state:{view:'search',page:0,query:String(res.formValues?.[0]??'').slice(0,100)};});
    button(tr('語言 / Language','Language / 語言'),async()=>{const res=await new ModalFormData().title('Language / 語言').dropdown('Language',['繁體中文','简体中文','English'],{defaultValueIndex:LOCALES.indexOf(l)}).show(player);if(!res.canceled&&LOCALES[res.formValues?.[0]])player.setDynamicProperty(PREF,LOCALES[res.formValues[0]]);return state;});

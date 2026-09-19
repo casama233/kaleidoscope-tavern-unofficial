@@ -1,0 +1,286 @@
+TAP version 13
+# Subtest: source health multiplier uses Java float32 and current HP
+ok 1 - source health multiplier uses Java float32 and current HP
+  ---
+  duration_ms: 1.262249
+  type: 'test'
+  ...
+# Subtest: ray hit boundaries are inclusive at 0 and 32, excludes rear/beyond
+ok 2 - ray hit boundaries are inclusive at 0 and 32, excludes rear/beyond
+  ---
+  duration_ms: 0.475584
+  type: 'test'
+  ...
+# Subtest: halfwidth-aware corridor is Euclidean, not axis-aligned damage cube
+ok 3 - halfwidth-aware corridor is Euclidean, not axis-aligned damage cube
+  ---
+  duration_ms: 0.139225
+  type: 'test'
+  ...
+# Subtest: ray can look vertically or diagonally, no horizontal-only accidental hits
+ok 4 - ray can look vertically or diagonally, no horizontal-only accidental hits
+  ---
+  duration_ms: 0.227471
+  type: 'test'
+  ...
+# Subtest: source knockback threshold and additive vector are exact
+ok 5 - source knockback threshold and additive vector are exact
+  ---
+  duration_ms: 0.731844
+  type: 'test'
+  ...
+# Subtest: exactly16 visual points at2..32 along full normalized direction
+ok 6 - exactly16 visual points at2..32 along full normalized direction
+  ---
+  duration_ms: 0.2652
+  type: 'test'
+  ...
+# Subtest: invalid vectors/negative AABB extents rejected, not guessed
+ok 7 - invalid vectors/negative AABB extents rejected, not guessed
+  ---
+  duration_ms: 0.245678
+  type: 'test'
+  ...
+# Subtest: instant shriek never becomes a persisted ticking effect
+ok 8 - instant shriek never becomes a persisted ticking effect
+  ---
+  duration_ms: 0.310396
+  type: 'test'
+  ...
+# Subtest: source stool color contract: white
+ok 9 - source stool color contract: white
+  ---
+  duration_ms: 0.866922
+  type: 'test'
+  ...
+# Subtest: source stool color contract: light_gray
+ok 10 - source stool color contract: light_gray
+  ---
+  duration_ms: 0.548621
+  type: 'test'
+  ...
+# Subtest: source stool color contract: gray
+ok 11 - source stool color contract: gray
+  ---
+  duration_ms: 0.287283
+  type: 'test'
+  ...
+# Subtest: source stool color contract: black
+ok 12 - source stool color contract: black
+  ---
+  duration_ms: 0.132858
+  type: 'test'
+  ...
+# Subtest: source stool color contract: brown
+ok 13 - source stool color contract: brown
+  ---
+  duration_ms: 0.109623
+  type: 'test'
+  ...
+# Subtest: source stool color contract: red
+ok 14 - source stool color contract: red
+  ---
+  duration_ms: 0.191304
+  type: 'test'
+  ...
+# Subtest: source stool color contract: orange
+ok 15 - source stool color contract: orange
+  ---
+  duration_ms: 0.125451
+  type: 'test'
+  ...
+# Subtest: source stool color contract: yellow
+ok 16 - source stool color contract: yellow
+  ---
+  duration_ms: 0.197932
+  type: 'test'
+  ...
+# Subtest: source stool color contract: lime
+ok 17 - source stool color contract: lime
+  ---
+  duration_ms: 0.181561
+  type: 'test'
+  ...
+# Subtest: source stool color contract: green
+ok 18 - source stool color contract: green
+  ---
+  duration_ms: 0.109462
+  type: 'test'
+  ...
+# Subtest: source stool color contract: cyan
+ok 19 - source stool color contract: cyan
+  ---
+  duration_ms: 0.086535
+  type: 'test'
+  ...
+# Subtest: source stool color contract: light_blue
+ok 20 - source stool color contract: light_blue
+  ---
+  duration_ms: 0.080873
+  type: 'test'
+  ...
+# Subtest: source stool color contract: blue
+ok 21 - source stool color contract: blue
+  ---
+  duration_ms: 0.078388
+  type: 'test'
+  ...
+# Subtest: source stool color contract: purple
+ok 22 - source stool color contract: purple
+  ---
+  duration_ms: 0.083456
+  type: 'test'
+  ...
+# Subtest: source stool color contract: magenta
+ok 23 - source stool color contract: magenta
+  ---
+  duration_ms: 0.081862
+  type: 'test'
+  ...
+# Subtest: source stool color contract: pink
+ok 24 - source stool color contract: pink
+  ---
+  duration_ms: 0.085417
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: colorless
+ok 25 - distinct source light and level15: colorless
+  ---
+  duration_ms: 0.249842
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: white
+ok 26 - distinct source light and level15: white
+  ---
+  duration_ms: 0.10426
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: light_gray
+ok 27 - distinct source light and level15: light_gray
+  ---
+  duration_ms: 0.090472
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: gray
+ok 28 - distinct source light and level15: gray
+  ---
+  duration_ms: 0.40284
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: black
+ok 29 - distinct source light and level15: black
+  ---
+  duration_ms: 0.170121
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: brown
+ok 30 - distinct source light and level15: brown
+  ---
+  duration_ms: 0.828605
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: red
+ok 31 - distinct source light and level15: red
+  ---
+  duration_ms: 0.36427
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: orange
+ok 32 - distinct source light and level15: orange
+  ---
+  duration_ms: 0.18222
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: yellow
+ok 33 - distinct source light and level15: yellow
+  ---
+  duration_ms: 0.178026
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: lime
+ok 34 - distinct source light and level15: lime
+  ---
+  duration_ms: 0.152865
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: green
+ok 35 - distinct source light and level15: green
+  ---
+  duration_ms: 0.257227
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: cyan
+ok 36 - distinct source light and level15: cyan
+  ---
+  duration_ms: 0.161749
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: light_blue
+ok 37 - distinct source light and level15: light_blue
+  ---
+  duration_ms: 0.144259
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: blue
+ok 38 - distinct source light and level15: blue
+  ---
+  duration_ms: 0.140741
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: purple
+ok 39 - distinct source light and level15: purple
+  ---
+  duration_ms: 0.142634
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: magenta
+ok 40 - distinct source light and level15: magenta
+  ---
+  duration_ms: 0.149646
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: pink
+ok 41 - distinct source light and level15: pink
+  ---
+  duration_ms: 0.129647
+  type: 'test'
+  ...
+# Subtest: all source color families remain complete without inventing twentieth colors
+ok 42 - all source color families remain complete without inventing twentieth colors
+  ---
+  duration_ms: 0.227918
+  type: 'test'
+  ...
+# Subtest: anchor roundtrip separates dimensions and supports negative coordinates
+ok 43 - anchor roundtrip separates dimensions and supports negative coordinates
+  ---
+  duration_ms: 0.580736
+  type: 'test'
+  ...
+# Subtest: all4 cardinal directions and seat angles wrap predictably
+ok 44 - all4 cardinal directions and seat angles wrap predictably
+  ---
+  duration_ms: 0.22918
+  type: 'test'
+  ...
+# Subtest: turn animation affects cushion only, not base_root
+ok 45 - turn animation affects cushion only, not base_root
+  ---
+  duration_ms: 0.180268
+  type: 'test'
+  ...
+# Subtest: all33 recipe ingredients and sources are recorded with bytes hash
+ok 46 - all33 recipe ingredients and sources are recorded with bytes hash
+  ---
+  duration_ms: 0.219051
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 115.514835

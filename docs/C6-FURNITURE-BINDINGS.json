@@ -1,0 +1,700 @@
+{
+  "bindings": [
+    {
+      "kind": "stool",
+      "color": "white",
+      "item": "kaleidoscope_tavern:white_bar_stool",
+      "block": "kaleidoscope_tavern:stool_white",
+      "helper": "kaleidoscope_tavern:seat_white",
+      "source_visual": "bar_stool_white",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a14/bar_stool_white_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "light_gray",
+      "item": "kaleidoscope_tavern:light_gray_bar_stool",
+      "block": "kaleidoscope_tavern:stool_light_gray",
+      "helper": "kaleidoscope_tavern:seat_light_gray",
+      "source_visual": "bar_stool_light_gray",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_light_gray_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "gray",
+      "item": "kaleidoscope_tavern:gray_bar_stool",
+      "block": "kaleidoscope_tavern:stool_gray",
+      "helper": "kaleidoscope_tavern:seat_gray",
+      "source_visual": "bar_stool_gray",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_gray_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "black",
+      "item": "kaleidoscope_tavern:black_bar_stool",
+      "block": "kaleidoscope_tavern:stool_black",
+      "helper": "kaleidoscope_tavern:seat_black",
+      "source_visual": "bar_stool_black",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a14/bar_stool_black_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "brown",
+      "item": "kaleidoscope_tavern:brown_bar_stool",
+      "block": "kaleidoscope_tavern:stool_brown",
+      "helper": "kaleidoscope_tavern:seat_brown",
+      "source_visual": "bar_stool_brown",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a14/bar_stool_brown_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "red",
+      "item": "kaleidoscope_tavern:red_bar_stool",
+      "block": "kaleidoscope_tavern:stool_red",
+      "helper": "kaleidoscope_tavern:seat_red",
+      "source_visual": "bar_stool_red",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a14/bar_stool_red_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "orange",
+      "item": "kaleidoscope_tavern:orange_bar_stool",
+      "block": "kaleidoscope_tavern:stool_orange",
+      "helper": "kaleidoscope_tavern:seat_orange",
+      "source_visual": "bar_stool_orange",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a15/bar_stool_orange_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "yellow",
+      "item": "kaleidoscope_tavern:yellow_bar_stool",
+      "block": "kaleidoscope_tavern:stool_yellow",
+      "helper": "kaleidoscope_tavern:seat_yellow",
+      "source_visual": "bar_stool_yellow",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a15/bar_stool_yellow_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "lime",
+      "item": "kaleidoscope_tavern:lime_bar_stool",
+      "block": "kaleidoscope_tavern:stool_lime",
+      "helper": "kaleidoscope_tavern:seat_lime",
+      "source_visual": "bar_stool_lime",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_lime_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "green",
+      "item": "kaleidoscope_tavern:green_bar_stool",
+      "block": "kaleidoscope_tavern:stool_green",
+      "helper": "kaleidoscope_tavern:seat_green",
+      "source_visual": "bar_stool_green",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_green_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "cyan",
+      "item": "kaleidoscope_tavern:cyan_bar_stool",
+      "block": "kaleidoscope_tavern:stool_cyan",
+      "helper": "kaleidoscope_tavern:seat_cyan",
+      "source_visual": "bar_stool_cyan",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a14/bar_stool_cyan_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "light_blue",
+      "item": "kaleidoscope_tavern:light_blue_bar_stool",
+      "block": "kaleidoscope_tavern:stool_light_blue",
+      "helper": "kaleidoscope_tavern:seat_light_blue",
+      "source_visual": "bar_stool_light_blue",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a15/bar_stool_light_blue_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "blue",
+      "item": "kaleidoscope_tavern:blue_bar_stool",
+      "block": "kaleidoscope_tavern:stool_blue",
+      "helper": "kaleidoscope_tavern:seat_blue",
+      "source_visual": "bar_stool_blue",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a13/bar_stool_blue_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "purple",
+      "item": "kaleidoscope_tavern:purple_bar_stool",
+      "block": "kaleidoscope_tavern:stool_purple",
+      "helper": "kaleidoscope_tavern:seat_purple",
+      "source_visual": "bar_stool_purple",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_purple_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "magenta",
+      "item": "kaleidoscope_tavern:magenta_bar_stool",
+      "block": "kaleidoscope_tavern:stool_magenta",
+      "helper": "kaleidoscope_tavern:seat_magenta",
+      "source_visual": "bar_stool_magenta",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a15/bar_stool_magenta_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "stool",
+      "color": "pink",
+      "item": "kaleidoscope_tavern:pink_bar_stool",
+      "block": "kaleidoscope_tavern:stool_pink",
+      "helper": "kaleidoscope_tavern:seat_pink",
+      "source_visual": "bar_stool_pink",
+      "geometry": "geometry.kt_assets_a13.bar_stool_blue",
+      "texture": "textures/kt_derived/a16/bar_stool_pink_atlas",
+      "source_anchor_y": 0.875,
+      "source_explicit_rider_offset": -0.0625,
+      "native_seat_y": 0.8125,
+      "full_collision_parity": false
+    },
+    {
+      "kind": "light",
+      "color": "colorless",
+      "item": "kaleidoscope_tavern:string_lights_colorless",
+      "block": "kaleidoscope_tavern:light_colorless",
+      "source_visual": "string_lights_colorless",
+      "geometry": "geometry.kt_assets_a16.string_lights_colorless",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "white",
+      "item": "kaleidoscope_tavern:string_lights_white",
+      "block": "kaleidoscope_tavern:light_white",
+      "source_visual": "string_lights_white",
+      "geometry": "geometry.kt_assets_a15.string_lights_white",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "light_gray",
+      "item": "kaleidoscope_tavern:string_lights_light_gray",
+      "block": "kaleidoscope_tavern:light_light_gray",
+      "source_visual": "string_lights_light_gray",
+      "geometry": "geometry.kt_assets_a17.string_lights_light_gray",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "gray",
+      "item": "kaleidoscope_tavern:string_lights_gray",
+      "block": "kaleidoscope_tavern:light_gray",
+      "source_visual": "string_lights_gray",
+      "geometry": "geometry.kt_assets_a16.string_lights_gray",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "black",
+      "item": "kaleidoscope_tavern:string_lights_black",
+      "block": "kaleidoscope_tavern:light_black",
+      "source_visual": "string_lights_black",
+      "geometry": "geometry.kt_assets_a15.string_lights_black",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "brown",
+      "item": "kaleidoscope_tavern:string_lights_brown",
+      "block": "kaleidoscope_tavern:light_brown",
+      "source_visual": "string_lights_brown",
+      "geometry": "geometry.kt_assets_a16.string_lights_brown",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "red",
+      "item": "kaleidoscope_tavern:string_lights_red",
+      "block": "kaleidoscope_tavern:light_red",
+      "source_visual": "string_lights_red",
+      "geometry": "geometry.kt_assets_a15.string_lights_red",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "orange",
+      "item": "kaleidoscope_tavern:string_lights_orange",
+      "block": "kaleidoscope_tavern:light_orange",
+      "source_visual": "string_lights_orange",
+      "geometry": "geometry.kt_assets_a17.string_lights_orange",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "yellow",
+      "item": "kaleidoscope_tavern:string_lights_yellow",
+      "block": "kaleidoscope_tavern:light_yellow",
+      "source_visual": "string_lights_yellow",
+      "geometry": "geometry.kt_assets_a17.string_lights_yellow",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "lime",
+      "item": "kaleidoscope_tavern:string_lights_lime",
+      "block": "kaleidoscope_tavern:light_lime",
+      "source_visual": "string_lights_lime",
+      "geometry": "geometry.kt_assets_a17.string_lights_lime",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "green",
+      "item": "kaleidoscope_tavern:string_lights_green",
+      "block": "kaleidoscope_tavern:light_green",
+      "source_visual": "string_lights_green",
+      "geometry": "geometry.kt_assets_a17.string_lights_green",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "cyan",
+      "item": "kaleidoscope_tavern:string_lights_cyan",
+      "block": "kaleidoscope_tavern:light_cyan",
+      "source_visual": "string_lights_cyan",
+      "geometry": "geometry.kt_assets_a16.string_lights_cyan",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "light_blue",
+      "item": "kaleidoscope_tavern:string_lights_light_blue",
+      "block": "kaleidoscope_tavern:light_light_blue",
+      "source_visual": "string_lights_light_blue",
+      "geometry": "geometry.kt_assets_a17.string_lights_light_blue",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "blue",
+      "item": "kaleidoscope_tavern:string_lights_blue",
+      "block": "kaleidoscope_tavern:light_blue",
+      "source_visual": "string_lights_blue",
+      "geometry": "geometry.kt_assets_a14.string_lights_blue",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "purple",
+      "item": "kaleidoscope_tavern:string_lights_purple",
+      "block": "kaleidoscope_tavern:light_purple",
+      "source_visual": "string_lights_purple",
+      "geometry": "geometry.kt_assets_a17.string_lights_purple",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "magenta",
+      "item": "kaleidoscope_tavern:string_lights_magenta",
+      "block": "kaleidoscope_tavern:light_magenta",
+      "source_visual": "string_lights_magenta",
+      "geometry": "geometry.kt_assets_a17.string_lights_magenta",
+      "light_emission": 15,
+      "waterlogged": false
+    },
+    {
+      "kind": "light",
+      "color": "pink",
+      "item": "kaleidoscope_tavern:string_lights_pink",
+      "block": "kaleidoscope_tavern:light_pink",
+      "source_visual": "string_lights_pink",
+      "geometry": "geometry.kt_assets_a17.string_lights_pink",
+      "light_emission": 15,
+      "waterlogged": false
+    }
+  ],
+  "derived_icons": [
+    {
+      "item": "kaleidoscope_tavern:white_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/white_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a14/bar_stool_white_atlas.png",
+      "sha256": "3c6806ab5bdf6cce0ee9eb54f67e250dc9f9e4603ac9b9de3b3ca306024694e8",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:light_gray_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/light_gray_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_light_gray_atlas.png",
+      "sha256": "13c550ef4ed660432f8ef021f57ec0223f6c0f86715447b67ad18e7e18f9b46a",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:gray_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/gray_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_gray_atlas.png",
+      "sha256": "c7d6d7f525b1bd909a1ceb2c2c35ccc5c753dfcfeb3b576ef05215c0fa4d7fa2",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:black_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/black_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a14/bar_stool_black_atlas.png",
+      "sha256": "7fd445ee067fe390c4bd169fd4887435d06903386807e5831db06616667d3d3e",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:brown_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/brown_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a14/bar_stool_brown_atlas.png",
+      "sha256": "2013c214d7aa9612a354a41ba011776c5261c81b2fef6d12be40f1200c3896fa",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:red_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/red_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a14/bar_stool_red_atlas.png",
+      "sha256": "77c855321a0d22615c43d236b29eff870284cf1f73bbc333d62fb5b1040dcb79",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:orange_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/orange_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a15/bar_stool_orange_atlas.png",
+      "sha256": "6103eebe1a54058d4b706823df73468d60ac0269203a6813cd0feca8d971e0ac",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:yellow_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/yellow_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a15/bar_stool_yellow_atlas.png",
+      "sha256": "d1cbe0fc9c05a25d7f6b56ea2ed1d287739a7d83b957899a0d3a4942c3163191",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:lime_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/lime_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_lime_atlas.png",
+      "sha256": "0358025e8eaf681d322562bd86485454a71f446f23bff1cb3e43726e0f578cfa",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:green_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/green_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_green_atlas.png",
+      "sha256": "c03f00ba4220d45acf2e65f8e7688045e3f286ca2a20cc2604ac634657df99a1",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:cyan_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/cyan_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a14/bar_stool_cyan_atlas.png",
+      "sha256": "cf624aa6f58b2a846202422370112378754d777fc6824b0152068433af65ba63",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:light_blue_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/light_blue_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a15/bar_stool_light_blue_atlas.png",
+      "sha256": "792952aee5bfa4d5683550fadd5fd546fd0b251784bd2c833e0e7ef814adec29",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:blue_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/blue_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a13/bar_stool_blue_atlas.png",
+      "sha256": "17779ea244e99c556306193aa1638102a988c6f9d4395b38ba37b96b2dc664c4",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:purple_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/purple_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_purple_atlas.png",
+      "sha256": "57a59d67c2ac67a2300c543459bee2c9f230234b0f794c897c586c46ca32eae4",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:magenta_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/magenta_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a15/bar_stool_magenta_atlas.png",
+      "sha256": "0a9a2a621e02a2b5326aac9c4fee9c4a7a04801e86329460fd0183b0aaf32d62",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:pink_bar_stool",
+      "file": "runtime/RP/textures/kt_runtime/icons/pink_bar_stool.png",
+      "source_geometry": "RP/models/entity/bar_stool_blue.geo.json",
+      "source_texture": "RP/textures/kt_derived/a16/bar_stool_pink_atlas.png",
+      "sha256": "9f302bcb566fc32fb300cb960c44d089e09b57f750641fdcf3b6b09cb72eb6bb",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_colorless",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_colorless.png",
+      "source_geometry": "RP/models/entity/string_lights_colorless.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/colorless.png",
+      "sha256": "fbc512889bdb9b49f6eeb504f50870c5f22172b935ea6d5d40ca167f88053f32",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_white",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_white.png",
+      "source_geometry": "RP/models/entity/string_lights_white.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/white.png",
+      "sha256": "323e6c2c1bc8dd26cc3af00e0445e0abbaecb58d8c26c39592f809cee863298c",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_light_gray",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_light_gray.png",
+      "source_geometry": "RP/models/entity/string_lights_light_gray.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/light_gray.png",
+      "sha256": "9054040f2382b7eb08bd5e79924c13fcdd8b369964274adfcb95372b8217dd1c",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_gray",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_gray.png",
+      "source_geometry": "RP/models/entity/string_lights_gray.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/gray.png",
+      "sha256": "b76107ea6e3b31091cb67fbb7d88f8733fb5b3ac3804f48e6214efcc4dbb83e9",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_black",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_black.png",
+      "source_geometry": "RP/models/entity/string_lights_black.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/black.png",
+      "sha256": "5eeaa845b2f2f6a039fdb103e2fd945eb4270a3d02c88fbe0a981a358903cf27",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_brown",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_brown.png",
+      "source_geometry": "RP/models/entity/string_lights_brown.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/brown.png",
+      "sha256": "fba93bbc96ba8bc101d4a95063451c34ba41bc0023c453b6df21823cc56bfe11",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_red",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_red.png",
+      "source_geometry": "RP/models/entity/string_lights_red.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/red.png",
+      "sha256": "275980637f05f535e308ca0032e2fce3dc378a35e21d899b1ee2c77ac8928166",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_orange",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_orange.png",
+      "source_geometry": "RP/models/entity/string_lights_orange.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/orange.png",
+      "sha256": "624594db68fdbfb79a3b23f8c532cb061b7862adca800eaa8824b3bc69797ce9",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_yellow",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_yellow.png",
+      "source_geometry": "RP/models/entity/string_lights_yellow.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/yellow.png",
+      "sha256": "14b5d5da80cafbbbd0c4db7da345ff13ad2d3e05915e705a44db586062045696",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_lime",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_lime.png",
+      "source_geometry": "RP/models/entity/string_lights_lime.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/lime.png",
+      "sha256": "04eea4405110af5d0259d3fe362911e7d137d97b7d1544e26b8b2aa1071acd64",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_green",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_green.png",
+      "source_geometry": "RP/models/entity/string_lights_green.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/green.png",
+      "sha256": "88b20bef5bd1d7d8fdd43fbf5e936391b16f80b8d88927a0a4c29dc0aa48e842",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_cyan",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_cyan.png",
+      "source_geometry": "RP/models/entity/string_lights_cyan.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/cyan.png",
+      "sha256": "c31b318b2343f2951f1dd3f2f2ae66907acd8f35a6a8f599fe1cbf35fb61efad",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_light_blue",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_light_blue.png",
+      "source_geometry": "RP/models/entity/string_lights_light_blue.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/light_blue.png",
+      "sha256": "4786309e0c864f0830f12d9444e93ef648b3dd6130ff00f9296bd227e5255f3f",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_blue",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_blue.png",
+      "source_geometry": "RP/models/entity/string_lights_blue.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern/block/deco/string_lights/blue.png",
+      "sha256": "b08c12a859c9e6cd2d35fba4c981521483d87137226c01d246284beafe1cdbb7",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_purple",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_purple.png",
+      "source_geometry": "RP/models/entity/string_lights_purple.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/purple.png",
+      "sha256": "1b932181d3d01a2a83a06155d126325396a2b70206af9207cdfea1dede2b6850",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_magenta",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_magenta.png",
+      "source_geometry": "RP/models/entity/string_lights_magenta.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/magenta.png",
+      "sha256": "47456b5a13d99fed2f61d435dd3c5a5905c6cdd07e74d09ecd0da83177c5d20e",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    },
+    {
+      "item": "kaleidoscope_tavern:string_lights_pink",
+      "file": "runtime/RP/textures/kt_runtime/icons/string_lights_pink.png",
+      "source_geometry": "RP/models/entity/string_lights_pink.geo.json",
+      "source_texture": "RP/textures/kaleidoscope_tavern_jar/block/deco/string_lights/pink.png",
+      "sha256": "238532eb1fceb0e89162b7ad0b378064ac4f5d26c62c8191c446f8f1c5b18bf7",
+      "kind": "derived64px_model_render",
+      "engine_gui_parity": false
+    }
+  ],
+  "stools": 16,
+  "lights": 17,
+  "engine_accepted": false
+}

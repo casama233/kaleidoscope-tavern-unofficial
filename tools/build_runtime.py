@@ -165,3 +165,7 @@ if __name__=="__main__":
 if __name__=="__main__":
  import build_c5
  build_c5.main()
+
+if __name__=='__main__':
+ from build_c6 import main as c6
+ c6()

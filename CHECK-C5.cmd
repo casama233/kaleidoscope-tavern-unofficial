@@ -5,5 +5,5 @@ python tools\build_runtime.py
 if errorlevel 1 exit /b 1
 python tools\validate_runtime.py
 if errorlevel 1 exit /b 1
-python tools\test_c5.py
+python tools\test_c6.py %*
 exit /b %errorlevel%

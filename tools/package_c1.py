@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
-"""Compatibility entrypoint: package current C2, never relabel as C1."""
-from package_c2 import main
-if __name__ == "__main__": main()
+"""Legacy C1 entrypoint: package current C6 without overwriting historical archives."""
+from package_c6 import main
+if __name__ == '__main__': main()

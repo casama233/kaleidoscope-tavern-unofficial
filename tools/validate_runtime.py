@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C5-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C6-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,5,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,5,0])
+  check(name+'_version',m['header']['version']==[0,6,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,6,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -131,6 +131,21 @@ def main():
  for time,e in pour.get('particle_effects',{}).items():check('C5_locator_particle:'+time,e.get('locator')in lip['locators'] and e.get('effect')in attach.get('particle_effects',{}) and attach['particle_effects'][e['effect']]in particles)
  check('C5_has_seven_flow_keys',len(pour.get('particle_effects',{}))==7)
  for x in load(ROOT/'docs/C5-SOURCE-AUDIT.json')['files']:check('C5_javap:'+x['file'],sha(ROOT/x['file'])==x['sha256'])
+ # C6 validates emitted native seat/light declarations and recipe/icon source records.
+ bindings=load(ROOT/'docs/C6-FURNITURE-BINDINGS.json')
+ check('C6_complete_stool_family',len([b for b in bindings['bindings']if b['kind']=='stool'])==16)
+ check('C6_complete_light_family',len([b for b in bindings['bindings']if b['kind']=='light'])==17)
+ for b in bindings['bindings']:
+  check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
+  comps=block_defs[b['block']]['components']
+  if b['kind']=='stool':
+   ent=entity_defs[b['helper']];ride=ent['components']['minecraft:rideable']
+   check('C6_single_native_seat:'+b['color'],ride['seat_count']==1 and ride['seats']==[{'position':[0,.8125,0]}] and ride['family_types']==['player'] and not ride['pull_in_entities'])
+   check('C6_seat_turn_property:'+b['color'],ent['description']['properties']['kaleidoscope_tavern:seat_yaw']['client_sync'])
+  else:check('C6_light15_nocollision:'+b['color'],comps['minecraft:light_emission']==15 and comps['minecraft:collision_box'] is False)
+ for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
+ for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
+ check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})
  # Original art payloads kept byte-identical; extra C1 derived helpers are counted separately.
  protected=[]
  for sub in ['models','textures','entity','animations','render_controllers','particles','sounds']:

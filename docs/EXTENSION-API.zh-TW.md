@@ -1,12 +1,14 @@
+> **C6 現行補充：** 套件依賴版本更新為 `[0,6,0]`。本轮新增的家具與聲波是內建功能，**沒有新增任意家具、傷害或特效腳本回呼 API**。既有 v1 握手、配方、指南、藥水能力與傳輸格式不變。
+
 > **C5 現行補充：** API仍為v1，增加`native_potion_inputs`能力。原生藥水不再一概拒收，但只在調酒input走身份驗證適配，詳見文末C5契約。Cookery指南仍獨立。
 
-# Tavern Extension API v1（C5，包含原生藥水輸入能力）— 附屬作者入口
+# Tavern Extension API v1（C6，沿用 C5 藥水與調酒契約）— 附屬作者入口
 
 本接口只管目前真正實作的能力。**它不是Cookery擴充API，也不要求把頁面注入廚房指南。** 指南與實際機器都讀酒館同一份registry。
 
 ## 一、分包方式
 
-附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,5,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
+附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,6,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
 
 完整可用範例在 `examples/Tavern-Extension-Demo/BP`，可獨立匯入。自己的附屬必須產生新的BP/module UUID；不要保留示範UUID。
 

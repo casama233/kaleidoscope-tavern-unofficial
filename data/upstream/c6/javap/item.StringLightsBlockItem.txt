@@ -1,0 +1,19 @@
+Compiled from "StringLightsBlockItem.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.item.StringLightsBlockItem extends net.minecraft.world.item.BlockItem {
+  public com.github.ysbbbbbb.kaleidoscopetavern.item.StringLightsBlockItem(java.util.function.Supplier<? extends net.minecraft.world.level.block.Block>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #1,  1            // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       7: checkcast     #7                  // class net/minecraft/world/level/block/Block
+      10: new           #9                  // class net/minecraft/world/item/Item$Properties
+      13: dup
+      14: invokespecial #11                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+      17: invokespecial #15                 // Method net/minecraft/world/item/BlockItem."<init>":(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item$Properties;)V
+      20: return
+
+  public net.minecraft.world.entity.EquipmentSlot getEquipmentSlot(net.minecraft.world.item.ItemStack);
+    Code:
+       0: getstatic     #20                 // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+       3: areturn
+}

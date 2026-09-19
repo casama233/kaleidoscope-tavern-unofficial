@@ -157,3 +157,7 @@ if __name__=='__main__':
  build_c2.main()
  import build_c3
  build_c3.main()
+
+if __name__=="__main__":
+ import build_c4
+ build_c4.main()

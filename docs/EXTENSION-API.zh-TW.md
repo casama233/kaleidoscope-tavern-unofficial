@@ -1,10 +1,10 @@
-# Tavern Extension API v1（C3 additive capabilities）— 附屬作者入口
+# Tavern Extension API v1（C4，保留 C3 擴充能力）— 附屬作者入口
 
 本接口只管目前真正實作的能力。**它不是Cookery擴充API，也不要求把頁面注入廚房指南。** 指南與實際機器都讀酒館同一份registry。
 
 ## 一、分包方式
 
-附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,2,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
+附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,4,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
 
 完整可用範例在 `examples/Tavern-Extension-Demo/BP`，可獨立匯入。自己的附屬必須產生新的BP/module UUID；不要保留示範UUID。
 
@@ -134,7 +134,7 @@ C2內建種植、酒效及多瓶展示不是任意附屬自動獲得的隱藏API
 
 ## 六、C3新增：調酒配方
 
-API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使用調酒，host需宣告`shaker_recipes`。C3 SDK對含shaker的bundle先檢查此能力，缺少則不傳輸，`registered`保持false；不要將新版調酒payload直接當成可在C1/C2運作。主包manifest依賴版本必須更新到`[0,3,0]`。
+API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使用調酒，host需宣告`shaker_recipes`。C3 SDK對含shaker的bundle先檢查此能力，缺少則不傳輸，`registered`保持false；不要將新版調酒payload直接當成可在C1/C2運作。主包manifest依賴版本必須更新到`[0,4,0]`。
 
 ```json
 {
@@ -171,3 +171,14 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 帶動態資料的特調不接受再投入其他雪克杯，避免失去既有payload；註冊即拒絕此種输入。
 
 額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_DATA_NOT_ADAPTED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。
+
+
+## C4 沉浸流程補充
+
+公開 API v1、配方時間窗口及註冊傳輸不变；兩個附屬範例只更新套件依賴。手持調酒開始時保存配方快照，不在停止時重新選取已修改的附屬。附屬原料的合法ID與效果限制沿用C3。
+
+手持完成的任意附屬產物若不是本包已支援的杯具，不會硬替換已放空杯；請先放回雪克杯，再用其配方指定容器從桌上領取。這不是動態註冊新杯具渲染器。
+
+C4在物品內保存可攜雪克杯狀態（非核心私有API）。請勿直接修改 `shaker_active`、`shaker_pouring` 或 `kaleidoscope_tavern:shaker_data`，也不要把它們作為附屬常规配方輸出。三者是同一工具的內部視覺生命週期，不是三件可複製產品。
+
+無容器的附屬原料：潜行空手點雪克杯側面退回最後一份；點上表面則拿起整個雪克杯。基酒仍需交回先前返還的空酒瓶才能退料。此手勢區分避免攜帶功能讓原料無法退回。

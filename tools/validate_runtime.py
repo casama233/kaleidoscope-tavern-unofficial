@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static validation of C3 links, manifests and source preservation. Not an engine validator."""
+"""Static validation of C4 links, manifests and source preservation. Not an engine validator."""
 from pathlib import Path
 import json,re,hashlib,subprocess,shutil,sys
 ROOT=Path(__file__).resolve().parents[1];BP=ROOT/'runtime/BP';RP=ROOT/'runtime/RP';A=ROOT/'art'
@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C3-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C4-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,3,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,3,0])
+  check(name+'_version',m['header']['version']==[0,4,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,4,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -82,6 +82,46 @@ def main():
   if ident in clients:
    c=clients[ident];check('entity_geometries:'+ident,all(g in geom for g in c.get('geometry',{}).values()));check('entity_textures:'+ident,all(texture_exists(t)for t in c.get('textures',{}).values()))
    check('entity_controllers:'+ident,all(t in controllers for t in c.get('render_controllers',[]) if isinstance(t,str)))
+ # C4 asset contracts: inspect actual attachment/controller references, not just JSON syntax.
+ animations={};animation_controllers={};attachables={};particles={}
+ for p,d in data.items():
+  if not isinstance(d,dict):continue
+  for key,table in [('animations',animations),('animation_controllers',animation_controllers)]:
+   for ident,value in d.get(key,{}).items():
+    check('unique_'+key+':'+ident,ident not in table);table[ident]=value
+  if 'minecraft:attachable'in d:
+   x=d['minecraft:attachable']['description'];check('unique_attachable:'+x['identifier'],x['identifier']not in attachables);attachables[x['identifier']]=x
+  if 'particle_effect'in d:
+   x=d['particle_effect'];ident=x['description']['identifier'];check('unique_particle:'+ident,ident not in particles);particles[ident]=x
+ all_anim=set(animations)|set(animation_controllers)
+ for ident,desc in list(clients.items())+list(attachables.items()):
+  for alias,target in desc.get('animations',{}).items():check('client_animation_reference:'+ident+':'+alias,target in all_anim)
+  for entry in desc.get('scripts',{}).get('animate',[]):
+   for alias in ([entry]if isinstance(entry,str)else entry):check('script_animation_alias:'+ident+':'+alias,alias in desc.get('animations',{}))
+ for ident,desc in attachables.items():
+  check('attachable_item_exists:'+ident,ident in item_defs)
+  check('attachable_item_binding:'+ident,ident in desc.get('item',{}))
+  check('attachable_geometry:'+ident,all(g in geom for g in desc.get('geometry',{}).values()))
+  check('attachable_texture:'+ident,all(texture_exists(t)for t in desc.get('textures',{}).values()))
+  check('attachable_controller:'+ident,all(c in controllers for c in desc.get('render_controllers',[])))
+ for short in ['shaker','shaker_active','shaker_pouring']:
+  ident='kaleidoscope_tavern:'+short;c=item_defs[ident]['components']
+  check('C4_nonconsumable_single_tool:'+short,c.get('minecraft:max_stack_size')==1 and not any(k in c for k in ['minecraft:food','minecraft:shooter','minecraft:throwable','minecraft:use_modifiers']))
+  check('C4_portable_use_registered:'+short,'kaleidoscope_tavern:portable_shaker'in c)
+  check('C4_tool_attachable_present:'+short,ident in attachables)
+ for ident in ['animation.kt_runtime.shaker.first','animation.kt_runtime.shaker.table']:
+  x=animations[ident];check('C4_nonzero_procedural_period:'+ident,0<x.get('animation_length',0)<1)
+ for name,a in animations.items():
+  if not name.startswith('animation.kt_runtime.shaker'):continue
+  if name.endswith(('.arms','.release')):continue # player bones supplied by Minecraft, not our source mesh.
+  allowed=set(b['name']for b in geom['geometry.kt_runtime.shaker_held']['bones'])
+  check('C4_animation_bones:'+name,set(a.get('bones',{}))<=allowed)
+ stream=particles.get('kaleidoscope_tavern:pour_stream',{}).get('components',{})
+ check('C4_bounded_pour_particle',stream.get('minecraft:emitter_rate_instant',{}).get('num_particles')==1 and stream.get('minecraft:particle_lifetime_expression',{}).get('max_lifetime')==.15)
+ for x in load(ROOT/'docs/C4-ANIMATION-SOURCE.json')['sources']:check('C4_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
+ check('C4_original_PUT_present','animation.kt_assets_a8.shaker.put'in animations)
+ check('C4_original_PUT_file_unchanged',sha(RP/'animations/shaker.animation.json')==sha(A/'RP/animations/shaker.animation.json'))
+
  # Original art payloads kept byte-identical; extra C1 derived helpers are counted separately.
  protected=[]
  for sub in ['models','textures','entity','animations','render_controllers','particles','sounds']:
@@ -113,7 +153,7 @@ def main():
  # No downloaded Cookery scripts/JAR/font files in product tree.
  banned=[str(p.relative_to(ROOT))for p in ROOT.rglob('*') if p.is_file()and p.suffix.lower()in {'.ttf','.otf','.ttc','.woff','.woff2','.jar','.class'}]
  check('no_fonts_JAR_or_class',not banned,banned)
- report={'scope':'Static file/contract checks; NOT Minecraft schema/engine acceptance','json_files':len(data),'items':len(item_defs),'blocks':len(block_defs),'runtime_visual_entities':len(entity_defs),'script_files':len(scripts),'checks':len(checks),'passed':sum(x['passed']for x in checks),'failed':[x for x in checks if not x['passed']],'engine_acceptance':'NOT_RUN','results':checks}
+ report={'scope':'Static file/contract checks; NOT Minecraft schema/engine acceptance','json_files':len(data),'items':len(item_defs),'blocks':len(block_defs),'runtime_visual_entities':len(entity_defs),'script_files':len(scripts),'attachables':len(attachables),'animation_controllers':len(animation_controllers),'animation_clips':len(animations),'checks':len(checks),'passed':sum(x['passed']for x in checks),'failed':[x for x in checks if not x['passed']],'engine_acceptance':'NOT_RUN','results':checks}
  (ROOT/'docs/STATIC-VALIDATION.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
  (ROOT/'docs/A17-ART-REGRESSION.json').write_text(json.dumps({'files':len(protected),'unchanged':sum(x['unchanged']for x in protected),'entries':protected},ensure_ascii=False,indent=2)+'\n')
  print(f"Static checks: {report['passed']}/{report['checks']}; {len(item_defs)} items, {len(block_defs)} blocks, {len(entity_defs)} renderer helpers.")

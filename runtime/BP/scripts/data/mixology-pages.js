@@ -1,4 +1,4 @@
-// Generated from C3 locked source data.
+// Generated C4 operation text; original source effect pages retained.
 export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:mixology",
@@ -9,9 +9,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Shaker: three-input mixing"
     },
     "body": {
-      "zh_TW": "C3採桌上點擊式調酒，尚非原作手持長按。潛行手持雪克杯點完整頂面放置；每次倒入一瓶Q4–Q6基酒，立即返空瓶。三槽全滿，空手點一下開始，再點一下停止。<19 tick不製作；19–68神秘；69–88特調；89–98匹配固定配方，未匹配則特調；99以上神秘，111 tick自動停止。離開6格、死亡、切換維度或重載會取消尚未完成的計時，材料保留。成品手持空雞尾酒杯點雪克杯領取，也可空手點其水平相鄰的已放空杯倒入。退料先拿空酒瓶；不會把已返空瓶再送一次。藥水資料尚未適配，拒收而不扣料。",
-      "zh_CN": "C3为桌上两次点击调酒，非手持长按。基酒需Q4–Q6，三槽各一瓶，投入立即返空瓶；持空酒瓶可退回原品质。空手开始/停止：<19不制作，19–68神秘，69–88特调，89–98固定配方（无匹配则特调），99以上神秘。111tick自动停止。药水暂不收取。",
-      "en_US": "C3 uses a placed shaker with click-to-start/click-to-stop, not native held charging. Pour three Q4–Q6 drinks, one per slot; each immediately returns its bottle. Empty hand starts/stops. <19 ticks cancels; 19–68 mystery; 69–88 signature; 89–98 fixed recipe or signature fallback; >=99 mystery; auto-stop at 111. Leaving 6 blocks, dying, changing dimension or reload cancels unfinished timing without losing inputs. Serve with an empty glass in hand or click a horizontally adjacent placed empty glass. Unpour requires the returned container. Potion metadata is not adapted; potions are rejected."
+      "zh_TW": "C4：放下雪克杯投三份Q4以上基酒；成功投料會播放原PUT杯蓋動畫、氣泡及聲音。潛行空手點擊可連材料拿起。手持按使用開始，再按停止；潛行使用取消。手持成品對準已放空杯點擊，12 tick倒酒動作完成後才提交；切換物品或離開會取消並保留內容。桌上兩次點擊仍可用。這不是原作原生長按；手腕座標與動畫融合尚需實機驗收。精確tick HUD可在獨立指南的「沉浸／輔助」開啟。",
+      "zh_CN": "C4：放下雪克杯投料；潜行空手拿起整杯。手持使用开始，再次使用停止；潜行使用取消。对准放好的空杯使用，12 tick倒酒结束才提交。尚未实现原生长按和引擎动画验收。",
+      "en_US": "C4: Load on the table; sneak-empty-hand to pick up the loaded shaker. Use in hand to start/stop; sneak-use cancels. Use a finished shaker on a placed empty glass for a 12-tick reserved pour. Slot/dimension/range changes cancel without spending contents. Native hold/release remains unimplemented. Timing assistance is optional in this independent guide. Animation wrist calibration needs in-game acceptance."
     },
     "recipeIds": []
   },

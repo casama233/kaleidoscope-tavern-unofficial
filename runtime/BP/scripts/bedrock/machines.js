@@ -1,3 +1,4 @@
+import {feedback} from './immersion.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
@@ -83,13 +84,13 @@ export function operate(player,block,action,expected){
   // All material transactions consume even in creative to prevent returning extra containers each click.
   // Free creative placement is the only exemption; the policy is explicit in the guide.
   commitInventory(plan,c,()=>store.save(key,tx.state,state.revision),()=>store.restoreRaw(key,original));
-  safeVisuals(core,tx.state);tell(player,'§a'+tx.message);return tx;
+  safeVisuals(core,tx.state);feedback(core,action==='lid'?(tx.state.open?'open':'close'):action==='remove_ingredient'?'take':action==='extract'?'fill':tx.state.amount>state.amount?'empty':'fill',tx.state.revision);tell(player,'§a'+tx.message);return tx;
  });
 }
 export function press(block,entity,fallDistance){
  if(entity?.typeId!=='minecraft:player'||fallDistance<.5)return;
  return guarded(entity,()=>{writable(entity);const key=keyFor(block);return locks.with([key],()=>{
-  const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);store.save(key,tx.state,state.revision);safeVisuals(block,tx.state);tell(entity,tx.message);return tx;
+  const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);store.save(key,tx.state,state.revision);safeVisuals(block,tx.state);feedback(block,'press',tx.state.revision);tell(entity,tx.message);return tx;
  });});
 }
 export function tickBarrel(block){

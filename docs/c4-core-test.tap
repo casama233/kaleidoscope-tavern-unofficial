@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: portable state is a separate schema and JSON round-trips an empty valid tool
+ok 1 - portable state is a separate schema and JSON round-trips an empty valid tool
+  ---
+  duration_ms: 1.665229
+  type: 'test'
+  ...
+# Subtest: portable data rejects malformed/extra/version/identity/oversized payloads
+ok 2 - portable data rejects malformed/extra/version/identity/oversized payloads
+  ---
+  duration_ms: 2.646458
+  type: 'test'
+  ...
+# Subtest: portable serializer copies state instead of retaining mutable references
+ok 3 - portable serializer copies state instead of retaining mutable references
+  ---
+  duration_ms: 0.321784
+  type: 'test'
+  ...
+# Subtest: source wave and opposite arms retain Java radians frequency/amplitude
+ok 4 - source wave and opposite arms retain Java radians frequency/amplitude
+  ---
+  duration_ms: 2.262315
+  type: 'test'
+  ...
+# Subtest: left/right first-person translation is mirrored only on X
+ok 5 - left/right first-person translation is mirrored only on X
+  ---
+  duration_ms: 0.32414
+  type: 'test'
+  ...
+# Subtest: invalid animation time is rejected
+ok 6 - invalid animation time is rejected
+  ---
+  duration_ms: 0.241842
+  type: 'test'
+  ...
+# Subtest: twelve tick pour has settle/flow/return and no premature complete
+ok 7 - twelve tick pour has settle/flow/return and no premature complete
+  ---
+  duration_ms: 0.239159
+  type: 'test'
+  ...
+# Subtest: immersive HUD hides exact recipe windows until opt-in
+ok 8 - immersive HUD hides exact recipe windows until opt-in
+  ---
+  duration_ms: 0.121595
+  type: 'test'
+  ...
+# Subtest: flow samples are bounded, finite and travel toward target
+ok 9 - flow samples are bounded, finite and travel toward target
+  ---
+  duration_ms: 0.53934
+  type: 'test'
+  ...
+# Subtest: no consumable/projectile workaround is attached to any shaker variant
+ok 10 - no consumable/projectile workaround is attached to any shaker variant
+  ---
+  duration_ms: 0.862374
+  type: 'test'
+  ...
+# Subtest: three attachables have item-specific binding and original texture
+ok 11 - three attachables have item-specific binding and original texture
+  ---
+  duration_ms: 0.339495
+  type: 'test'
+  ...
+# Subtest: new bound mesh retains EVERY original cube and bone pose, adds only hand parent
+ok 12 - new bound mesh retains EVERY original cube and bone pose, adds only hand parent
+  ---
+  duration_ms: 0.489023
+  type: 'test'
+  ...
+# Subtest: original PUT animation remains byte-identical rather than an invented lid bounce
+ok 13 - original PUT animation remains byte-identical rather than an invented lid bounce
+  ---
+  duration_ms: 0.155567
+  type: 'test'
+  ...
+# Subtest: animation provenance hashes describe actual files
+ok 14 - animation provenance hashes describe actual files
+  ---
+  duration_ms: 0.703377
+  type: 'test'
+  ...
+# Subtest: procedural wave has nonzero period and correct radian-to-degree conversion
+ok 15 - procedural wave has nonzero period and correct radian-to-degree conversion
+  ---
+  duration_ms: 0.295173
+  type: 'test'
+  ...
+# Subtest: station animation helper replaces only world mesh, keeps native item visual
+ok 16 - station animation helper replaces only world mesh, keeps native item visual
+  ---
+  duration_ms: 0.59547
+  type: 'test'
+  ...
+# Subtest: stream sprite is explicitly native and short-lived, not fake source sprite
+ok 17 - stream sprite is explicitly native and short-lived, not fake source sprite
+  ---
+  duration_ms: 0.196732
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 82.771794

@@ -1,0 +1,30 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:shaker_visual",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/mixology/shaker"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a8.shaker"
+      },
+      "animations": {
+        "put": "animation.kt_assets_a8.shaker.put",
+        "shake": "animation.kt_runtime.shaker.table",
+        "table_controller": "controller.animation.kt_runtime.shaker_table"
+      },
+      "render_controllers": [
+        "controller.render.kt_assets_a1.static"
+      ],
+      "scripts": {
+        "animate": [
+          "table_controller"
+        ]
+      }
+    }
+  }
+}

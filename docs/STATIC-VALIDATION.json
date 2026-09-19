@@ -1,12 +1,15 @@
 {
   "scope": "Static file/contract checks; NOT Minecraft schema/engine acceptance",
-  "json_files": 727,
-  "items": 175,
+  "json_files": 739,
+  "items": 177,
   "blocks": 51,
-  "runtime_visual_entities": 15,
-  "script_files": 31,
-  "checks": 2841,
-  "passed": 2841,
+  "runtime_visual_entities": 16,
+  "script_files": 33,
+  "attachables": 3,
+  "animation_controllers": 1,
+  "animation_clips": 13,
+  "checks": 3032,
+  "passed": 3032,
   "failed": [],
   "engine_acceptance": "NOT_RUN",
   "results": [
@@ -292,6 +295,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:sauvignon_blanc_dry_white_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:shaker_pouring",
       "passed": true,
       "detail": ""
     },
@@ -691,6 +699,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:riesling_dry_white_q1",
       "passed": true,
       "detail": ""
@@ -1002,6 +1015,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:rig_liquid_pressing_tub_ice_grape_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:shaker_visual",
       "passed": true,
       "detail": ""
     },
@@ -2352,6 +2370,11 @@
     },
     {
       "check": "unique_geometry:geometry.kt_assets_a17.item_display_torchflower_sandwich_board",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_geometry:geometry.kt_runtime.shaker_held",
       "passed": true,
       "detail": ""
     },
@@ -4881,6 +4904,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:polaris_sweet_white_q3",
       "passed": true,
       "detail": ""
@@ -5637,6 +5665,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:brandy_q2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:shaker_active",
       "passed": true,
       "detail": ""
     },
@@ -11986,6 +12019,26 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:shaker_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:shaker_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:shaker_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:shaker_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "entity_client:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual",
       "passed": true,
       "detail": ""
@@ -12086,12 +12139,862 @@
       "detail": ""
     },
     {
+      "check": "unique_particle:kt_assets_a17:ginkgo_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:pine_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:firefly_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:firefly_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:snow_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:pine_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:spore_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:catnip_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:sakura_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:catnip_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:lava_tap_drip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:butterfly_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kaleidoscope_tavern:pour_stream",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:ginkgo_incense",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:water_tap_drip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:butterfly_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_particle:kt_assets_a17:snow_incense_large",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a17.board_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a8.shaker.put",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.arms",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.release",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.table",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_runtime.shaker.pour",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a17.shaker.first_person_source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a17.shaker.third_person_source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a17.liquid_pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animations:animation.kt_assets_a17.liquid_barrel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_attachable:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_attachable:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_attachable:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animation_controllers:controller.animation.kt_runtime.shaker_table",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_poppy_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_poppy_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_peony_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_peony_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_base_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_base_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_ice_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_ice_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_gold_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_gold_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_wither_rose_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_wither_rose_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_sweet_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_sweet_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_green_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_green_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_pink_petals_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_pink_petals_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_green_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_grass_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_grass_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_ice_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_ice_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_visual:put",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_visual:shake",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_visual:table_controller",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_visual:table_controller",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_glow_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_glow_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_sweet_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_sweet_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_gold_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_gold_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_cornflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_cornflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_pitcher_plant_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_pitcher_plant_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_glow_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_glow_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_torchflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_torchflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_tulip_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_tulip_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_azure_bluet_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_azure_bluet_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_green_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_green_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_ice_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_ice_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_green_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_green_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_ice_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_ice_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_pressing_tub_glow_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_pressing_tub_glow_berries_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_orchid_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_orchid_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_pressing_tub_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_pressing_tub_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a8:shaker_animation_rig:put",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_sunflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_sunflower_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:sandwich_board_allium_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:sandwich_board_allium_assembled:source_rotation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_sweet_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_sweet_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:rig_liquid_barrel_gold_grape_visual:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_gold_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_gold_grape:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kt_assets_a17:rig_liquid_barrel_glow_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kt_assets_a17:rig_liquid_barrel_glow_berries:level",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_active:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_active:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_active:shake_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_active:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_active:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_active:shake_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_pouring:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_pouring:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker_pouring:pour",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_pouring:hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_pouring:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker_pouring:pour",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_exists:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_binding:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_geometry:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_texture:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_controller:kaleidoscope_tavern:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_exists:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_binding:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_geometry:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_texture:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_controller:kaleidoscope_tavern:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_exists:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_item_binding:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_geometry:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_texture:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "attachable_controller:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_nonconsumable_single_tool:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_portable_use_registered:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_tool_attachable_present:shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_nonconsumable_single_tool:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_portable_use_registered:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_tool_attachable_present:shaker_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_nonconsumable_single_tool:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_portable_use_registered:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_tool_attachable_present:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_nonzero_procedural_period:animation.kt_runtime.shaker.first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_nonzero_procedural_period:animation.kt_runtime.shaker.table",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_animation_bones:animation.kt_runtime.shaker.hold_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_animation_bones:animation.kt_runtime.shaker.hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_animation_bones:animation.kt_runtime.shaker.first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_animation_bones:animation.kt_runtime.shaker.table",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_animation_bones:animation.kt_runtime.shaker.pour",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_bounded_pour_particle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_source:art/interfaces/shaker-hand-source.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_source:art/RP/animations/shaker.animation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_source:art/RP/models/entity/shaker.geo.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_source:art/interfaces/sound-art-map.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_original_PUT_present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C4_original_PUT_file_unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "A17_art_preserved",
       "passed": true,
       "detail": {
         "files": 999,
         "failures": []
       }
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/immersion.js",
+      "passed": true,
+      "detail": ""
     },
     {
       "check": "only_public_engine_module:@minecraft/server",
@@ -12374,6 +13277,26 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/bedrock/immersion.js:../core/immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/bedrock/mixology.js:../core/util.js",
       "passed": true,
       "detail": ""
@@ -12414,12 +13337,27 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/bedrock/mixology.js:../core/immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:./immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "no_Cookery_mutating_bus:scripts/bedrock/mixology.js",
       "passed": true,
       "detail": ""
     },
     {
       "check": "no_Cookery_player_properties:scripts/bedrock/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/machines.js:./immersion.js",
       "passed": true,
       "detail": ""
     },
@@ -12600,6 +13538,26 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/core/bottles.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/immersion.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/immersion.js:./mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/immersion.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/immersion.js",
       "passed": true,
       "detail": ""
     },

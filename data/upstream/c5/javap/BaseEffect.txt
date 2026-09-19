@@ -1,0 +1,32 @@
+Compiled from "BaseEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect extends net.minecraft.world.effect.MobEffect {
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect(net.minecraft.world.effect.MobEffectCategory, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #1                  // Method net/minecraft/world/effect/MobEffect."<init>":(Lnet/minecraft/world/effect/MobEffectCategory;I)V
+       6: return
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect(int);
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field net/minecraft/world/effect/MobEffectCategory.BENEFICIAL:Lnet/minecraft/world/effect/MobEffectCategory;
+       4: iload_1
+       5: invokespecial #13                 // Method "<init>":(Lnet/minecraft/world/effect/MobEffectCategory;I)V
+       8: return
+
+  public boolean applyEffectTick(net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public void applyInstantenousEffect(net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.entity.LivingEntity, int, double);
+    Code:
+       0: return
+
+  public boolean shouldApplyEffectTickThisTick(int, int);
+    Code:
+       0: iconst_0
+       1: ireturn
+}

@@ -1,4 +1,3 @@
-// Generated C4 operation text; original source effect pages retained.
 export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:mixology",
@@ -9,9 +8,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Shaker: three-input mixing"
     },
     "body": {
-      "zh_TW": "C4：放下雪克杯投三份Q4以上基酒；成功投料會播放原PUT杯蓋動畫、氣泡及聲音。潛行空手點擊可連材料拿起。手持按使用開始，再按停止；潛行使用取消。手持成品對準已放空杯點擊，12 tick倒酒動作完成後才提交；切換物品或離開會取消並保留內容。桌上兩次點擊仍可用。這不是原作原生長按；手腕座標與動畫融合尚需實機驗收。精確tick HUD可在獨立指南的「沉浸／輔助」開啟。",
-      "zh_CN": "C4：放下雪克杯投料；潜行空手拿起整杯。手持使用开始，再次使用停止；潜行使用取消。对准放好的空杯使用，12 tick倒酒结束才提交。尚未实现原生长按和引擎动画验收。",
-      "en_US": "C4: Load on the table; sneak-empty-hand to pick up the loaded shaker. Use in hand to start/stop; sneak-use cancels. Use a finished shaker on a placed empty glass for a 12-tick reserved pour. Slot/dimension/range changes cancel without spending contents. Native hold/release remains unimplemented. Timing assistance is optional in this independent guide. Animation wrist calibration needs in-game acceptance."
+      "zh_TW": "C5：桌上投三份Q4以上基酒或支援的原生藥水。潛行空手拿起整杯；手持按住使用，鬆手完成，111tick自動结算。潛行取消。不要連點當成長按。若平台未觸發原生事件，在酒館指南選擇相容兩次點擊模式。完成後對已放空杯倒酒，12tick後才提交。原作PUT及杯嘴locator已綁定；手腕/窄臂/觸控仍需引擎驗收。藥水保留effect/delivery身份，退料交回原版玻璃瓶。",
+      "zh_CN": "C5：桌上投料，潜行空手拿起；按住使用、松手完成，111tick自动结算；潜行取消。原生输入未触发时可在独立指南明确切换两次点击兼容模式。药水按原生身份保存，退料需玻璃瓶。手腕、触控与真实引擎动画仍需验收。",
+      "en_US": "C5: load on table, pick up, HOLD use and RELEASE to finish. Sneak cancels; 111-tick watchdog. Explicit two-click fallback is available in this independent guide if native events do not fire. Native potion identity/duration are preserved, withdraw with a vanilla glass bottle. Spout locator is geometry-bound; wrist/skin/mobile calibration awaits real-engine testing."
     },
     "recipeIds": []
   },
@@ -23,8 +22,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Signature cups and effect limits"
     },
     "body": {
-      "zh_TW": "特調保留三份原料品質、來源效果與平均RGB；同類效果秒數求和後乘1.2f截斷，強度和機率取最大。特調物品不可堆疊；擺放/取回/存檔保留資料，只對液體染色。手持/物品欄暫用原圖，不代表動態RGB在所有顯示情境已適配。十二款固定雞尾酒及神秘雞尾酒的專屬效果尚未實作，沒有用其他buff冒充；可製作、擺放、喝完返杯，但此時無專屬增益。特調中的原生效果可施加，自訂效果只記錄待移植。支撐消失暫保留可取回杯子，不生成掉落物。",
-      "en_US": "Signature preserves three quality-specific ingredient snapshots, merged source effects and mean RGB. Duration sums are multiplied by Java float 1.2 then truncated; amplifier and probability use maxima. Signature items are non-stackable; storage/placement/retrieval preserve payload and only tint liquid. Held/GUI uses the source sprite (not dynamic RGB). All fixed cocktails and Mystery use Java-specific effects which remain unimplemented. Their crafting, serving, display and native empty-glass return are implemented; no substitute buffs. Native effects in Signature are applied. Unsupported custom effects are reported."
+      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。其餘Java專屬效果仍不生效。原生飲用返杯及玻璃透明排序尚需實機測試。",
+      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. Remaining Java-only effects are still inactive. Native empty-glass return and transparent rendering need engine tests."
     },
     "recipeIds": []
   },
@@ -37,9 +36,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: White Lady"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/white_lady"
@@ -54,9 +53,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Emerald"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/emerald"
@@ -71,9 +70,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Brass Heart"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/brass_heart"
@@ -88,9 +87,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Godfather"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [安全頂面傳送適配]",
+      "zh_CN": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [安全頂面傳送適配]",
+      "en_US": "kaleidoscope_tavern:zenith: 0s / amplifier 0 / 100% [safe-surface teleport adapter]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/godfather"
@@ -105,9 +104,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Grasshopper"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:grass_stealth: 900s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/grasshopper"
@@ -122,9 +121,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Screwdriver"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/screwdriver"
@@ -139,9 +138,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Mojito"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/mojito"
@@ -156,9 +155,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Allium Garden"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [牽引適配／冷卻未還原]",
+      "zh_CN": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [牽引適配／冷卻未還原]",
+      "en_US": "kaleidoscope_tavern:xp_drain: 1800s / amplifier 0 / 100% [attraction adapter / cooldown not ported]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/allium_garden"
@@ -173,9 +172,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Depth Charge"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:ardent_heat: 300s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/depth_charge"
@@ -190,9 +189,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Nether Special"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/nether_special"
@@ -207,9 +206,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Bloody Mary"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [擊殺回血已實作]",
+      "zh_CN": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [擊殺回血已實作]",
+      "en_US": "kaleidoscope_tavern:bloody_mary: 1800s / amplifier 0 / 100% [kill-heal implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/bloody_mary"
@@ -224,9 +223,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Sculk Special"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/sculk_special"
@@ -241,10 +240,32 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Mystery Cocktail"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作 / not implemented]",
-      "zh_CN": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作 / not implemented]",
-      "en_US": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作 / not implemented]"
+      "zh_TW": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作]",
+      "zh_CN": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作]",
+      "en_US": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [not implemented]"
     },
     "recipeIds": []
+  },
+  {
+    "id": "kaleidoscope_tavern:c5_potions",
+    "title": {
+      "zh_TW": "原生藥水與退料",
+      "en_US": "Native potion round-trips"
+    },
+    "body": {
+      "zh_TW": "飲用/噴濺/滯留藥水使用minecraft:potion元件讀取，並以Potions.resolve還原effectId與deliveryId。支援清單外、命名、附魔或額外DP的藥水拒收；不是用普通水瓶代替。顏色按原作特調白色規則；效果使用實際藥水種類/原生durationTicks及明確強度表。Java來源只讀customEffects的行為與此不同，本版刻意使標準基礎藥水有效；不聲稱逐行等價。",
+      "en_US": "Potions use native component identity and Potions.resolve for lossless return. Unknown or customized stacks are rejected. Effects use the recognized vanilla type, native duration and explicit amplifiers. This intentionally includes standard base potion effects, unlike the source helper that only iterates customEffects."
+    }
+  },
+  {
+    "id": "kaleidoscope_tavern:c5_effects",
+    "title": {
+      "zh_TW": "專屬酒效 C5",
+      "en_US": "C5 custom effects"
+    },
+    "body": {
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘9種原作效果仍未實作。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 9 source custom effects remain unimplemented."
+    }
   }
 ];

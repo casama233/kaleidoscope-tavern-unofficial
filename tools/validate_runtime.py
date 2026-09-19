@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C4-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C5-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,4,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,4,0])
+  check(name+'_version',m['header']['version']==[0,5,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,5,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -106,7 +106,7 @@ def main():
   check('attachable_controller:'+ident,all(c in controllers for c in desc.get('render_controllers',[])))
  for short in ['shaker','shaker_active','shaker_pouring']:
   ident='kaleidoscope_tavern:'+short;c=item_defs[ident]['components']
-  check('C4_nonconsumable_single_tool:'+short,c.get('minecraft:max_stack_size')==1 and not any(k in c for k in ['minecraft:food','minecraft:shooter','minecraft:throwable','minecraft:use_modifiers']))
+  check('C4_nonconsumable_single_tool:'+short,c.get('minecraft:max_stack_size')==1 and not any(k in c for k in ['minecraft:food','minecraft:shooter','minecraft:throwable','minecraft:projectile']))
   check('C4_portable_use_registered:'+short,'kaleidoscope_tavern:portable_shaker'in c)
   check('C4_tool_attachable_present:'+short,ident in attachables)
  for ident in ['animation.kt_runtime.shaker.first','animation.kt_runtime.shaker.table']:
@@ -122,6 +122,15 @@ def main():
  check('C4_original_PUT_present','animation.kt_assets_a8.shaker.put'in animations)
  check('C4_original_PUT_file_unchanged',sha(RP/'animations/shaker.animation.json')==sha(A/'RP/animations/shaker.animation.json'))
 
+ # C5: native input and true locator references, not just presence of files.
+ c=item_defs['kaleidoscope_tavern:shaker']['components']
+ check('C5_explicit_native_use',c.get('minecraft:use_modifiers')=={'use_duration':3600,'movement_modifier':.35,'start_using':'always'})
+ lip=next(b for b in geom['geometry.kt_runtime.shaker_held']['bones']if b['name']=='root')
+ check('C5_spout_on_source_lip',lip.get('locators',{}).get('kt_spout')==[-3.5,11,0])
+ pour=animations['animation.kt_runtime.shaker.pour'];attach=attachables['kaleidoscope_tavern:shaker_pouring']
+ for time,e in pour.get('particle_effects',{}).items():check('C5_locator_particle:'+time,e.get('locator')in lip['locators'] and e.get('effect')in attach.get('particle_effects',{}) and attach['particle_effects'][e['effect']]in particles)
+ check('C5_has_seven_flow_keys',len(pour.get('particle_effects',{}))==7)
+ for x in load(ROOT/'docs/C5-SOURCE-AUDIT.json')['files']:check('C5_javap:'+x['file'],sha(ROOT/x['file'])==x['sha256'])
  # Original art payloads kept byte-identical; extra C1 derived helpers are counted separately.
  protected=[]
  for sub in ['models','textures','entity','animations','render_controllers','particles','sounds']:

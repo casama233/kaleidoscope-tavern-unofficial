@@ -1,6 +1,7 @@
 /** Pure C3 mixing rules. Input effects are snapshotted when poured, not re-read at serving. */
 import {check,id,integer,clone,utf8Bytes} from './util.js';
 import {parseBottle} from './bottles.js';
+import {validatePotionIdentity,POTION_ITEMS} from './potions.js';
 import {SHAKER_INPUTS,COCKTAILS} from '../data/mixology.js';
 export const NS='kaleidoscope_tavern',EMPTY_CUP=NS+':empty_glassware',SIGNATURE=NS+':signature_cocktail',MYSTERY=NS+':mystery_cocktail';
 export const SIGNATURE_DATA=NS+':cocktail_data';
@@ -24,11 +25,12 @@ export function emptyShaker(){return {schema:1,revision:0,slots:[],result:null};
 export function validateResult(r){check(r&&typeof r==='object','BAD_COCKTAIL_RESULT');id(r.item);id(r.carrier);if(r.recipeId)id(r.recipeId);if(r.item===SIGNATURE)validatePayload(r.payload);else check(r.payload===undefined,'UNEXPECTED_PAYLOAD');return r;}
 export function validateShaker(s){
  check(s&&s.schema===1,'SHAKER_SCHEMA');integer(s.revision,0,2147483647,'revision');check(Array.isArray(s.slots)&&s.slots.length<=3,'SHAKER_CAPACITY');
- for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);}
+ for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);if(slot.potion){check(POTION_ITEMS.has(slot.item)&&slot.container==='minecraft:glass_bottle','BAD_POTION_SLOT');validatePotionIdentity(slot.potion);}}
  if(s.result){check(s.slots.length===3,'CORRUPT_SHAKER');validateResult(s.result);}else check(s.result===null,'CORRUPT_SHAKER');
  check(utf8Bytes(JSON.stringify(s))<=20000,'STATE_TOO_LARGE');return s;
 }
 export function addInput(s,item,registry){validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length<3,'SHAKER_FULL');const input=inputSnapshot(item,registry);return validateShaker({...clone(s),revision:s.revision+1,slots:[...clone(s.slots),input]});}
+export function addResolvedInput(s,input){validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length<3,'SHAKER_FULL');return validateShaker({...clone(s),revision:s.revision+1,slots:[...clone(s.slots),clone(input)]});}
 export function removeInput(s){validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length,'NO_INGREDIENT');return {input:clone(s.slots.at(-1)),state:validateShaker({...clone(s),revision:s.revision+1,slots:clone(s.slots.slice(0,-1))})};}
 export function signaturePayload(slots){
  check(slots.length===3,'NEED_THREE_INGREDIENTS');const color=[16,8,0].reduce((out,shift)=>out|(Math.trunc(slots.reduce((n,s)=>n+((s.color>>shift)&255),0)/3)<<shift),0);

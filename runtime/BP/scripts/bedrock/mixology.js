@@ -1,9 +1,13 @@
-/** C4 portable shaker + source-timed visual feedback. Native long-press is NOT emulated with food. */
+/** C5 native hold/release and lossless potion input. Table/toggle compatibility retained. */
 import {world,system,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
+import {POTION_ITEMS} from '../core/potions.js';
+import {potionInput,potionIdentity,restorePotion} from './potions.js';
+import {inputMode,nativeElapsed,USE_DURATION_TICKS,HOLD_TAG} from '../core/native-use.js';
+import {applyCustomEffect} from './custom-effects.js';
 import {check,clone,canonical,utf8Bytes} from '../core/util.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,removeInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore,timingBand} from '../core/mixology.js';
+import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,addResolvedInput,removeInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore,timingBand} from '../core/mixology.js';
 import {COCKTAILS} from '../data/mixology.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
@@ -16,7 +20,7 @@ const shakerStore=new MixStore(world,validateShaker),cupStore=new MixStore(world
 const handSessions=new Map(),cupReservations=new Map();let portableSequence=0;
 const NEIGHBORS=[{x:1,y:0,z:0},{x:-1,y:0,z:0},{x:0,y:0,z:1},{x:0,y:0,z:-1}];
 let registry;
-export const mixologyDiagnostics={gesture:'portable_and_table_two_click_with_animation; native_hold_pending',completed:0,cancelled:0,unsupportedEffects:{},errors:[]};
+export const mixologyDiagnostics={gesture:'native_start_release_default; explicit_toggle_fallback; engine_acceptance_pending',completed:0,cancelled:0,unsupportedEffects:{},errors:[]};
 function log(e){mixologyDiagnostics.errors.push(e.code??String(e));if(mixologyDiagnostics.errors.length>16)mixologyDiagnostics.errors.shift();}
 export function setMixologyRegistry(r){registry=r;}
 function facing(p){return Math.floor((((p.getRotation?.().y??0)+225)%360+360)%360/90);}
@@ -30,6 +34,7 @@ function noSession(b){check(!sessions.has(shakerKey(b.dimension.id,b.location)),
 function sound(p,name){try{p.playSound(name);}catch{/* audio failure never rolls back inventory */}}
 function itemExists(item){check(!!ItemTypes.get(item),'OUTPUT_PACK_MISSING',item);}
 function knownItemCheck(stack){
+ if(POTION_ITEMS.has(stack?.typeId))return potionInput(stack);
  if(SHAKER_ITEMS.has(stack?.typeId))return readPortableItem(stack);
  check(stack&&!stack.nameTag&&!stack.getCanDestroy?.().length&&!stack.getCanPlaceOn?.().length,'METADATA_ITEM_REJECTED');
  check(!stack.getComponent?.('minecraft:enchantable')?.getEnchantments?.().length,'METADATA_ITEM_REJECTED');
@@ -56,14 +61,14 @@ export function placeShaker(player,location){
 }
 export function pourIngredient(player,b,{expectedRevision}={}){
  near(player,b);check(registry,'INITIALIZING');const k=shakerKey(b.dimension.id,b.location);
- return locks.with([k,player.id],()=>{noSession(b);const old=getShaker(b);if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const h=hand(player);check(h,'NO_INGREDIENT');knownItemCheck(h);const next=addInput(old,h.typeId,registry),i=next.slots.at(-1);
+ return locks.with([k,player.id],()=>{noSession(b);const old=getShaker(b);if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const h=hand(player);check(h,'NO_INGREDIENT');const resolved=knownItemCheck(h);const next=POTION_ITEMS.has(h.typeId)?addResolvedInput(old,resolved):addInput(old,h.typeId,registry),i=next.slots.at(-1);
   const out=i.container?[{id:i.container,count:1}]:[];const s=transact(player,shakerStore,k,old,next,1,out,b);shakerPut(b,next.revision);tell(player,`§a${next.slots.length}/3 · ${h.typeId}`);return s;});
 }
 export function unpourIngredient(player,b,{expectedRevision}={}){
  near(player,b);const k=shakerKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{noSession(b);const old=getShaker(b);if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const tx=removeInput(old),h=hand(player);
   if(tx.input.container){check(h?.typeId===tx.input.container,'NEED_RETURNED_CONTAINER');knownItemCheck(h);}else check(!h,'EMPTY_HAND_REQUIRED');itemExists(tx.input.item);
-  return transact(player,shakerStore,k,old,tx.state,tx.input.container?1:0,[{id:tx.input.item,count:1}],b);});
+  return transact(player,shakerStore,k,old,tx.state,tx.input.container?1:0,[tx.input.potion?{stack:restorePotion(tx.input),count:1}:{id:tx.input.item,count:1}],b);});
 }
 export function breakShaker(player,b,{expectedRevision}={}){
  near(player,b);const k=shakerKey(b.dimension.id,b.location);
@@ -133,18 +138,18 @@ export function consumeCocktail(event,rng=Math.random){
  try{rows=item.typeId===SIGNATURE?knownItemCheck(item).effects:COCKTAILS[item.typeId].effects;}catch(e){log(e);return [{status:'INVALID_PAYLOAD'}];}
  const outcomes=[];
  for(const row of rows){const roll=rng();check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');if(roll>=row.probability)continue;const bedrockId=NATIVE_EFFECTS[row.effect];
-  if(!bedrockId){mixologyDiagnostics.unsupportedEffects[row.effect]=(mixologyDiagnostics.unsupportedEffects[row.effect]??0)+1;outcomes.push({effect:row.effect,status:'UNIMPLEMENTED_CUSTOM_EFFECT'});continue;}
-  try{p.addEffect(bedrockId,row.effect==='minecraft:instant_health'?1:row.duration*20,{amplifier:row.amplifier,showParticles:true});outcomes.push({effect:row.effect,status:'APPLIED'});}catch(e){log(e);outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});}
+  if(!bedrockId){try{if(applyCustomEffect(p,row)){outcomes.push({effect:row.effect,status:'APPLIED_CUSTOM'});continue;}}catch(e){log(e);outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});continue;}mixologyDiagnostics.unsupportedEffects[row.effect]=(mixologyDiagnostics.unsupportedEffects[row.effect]??0)+1;outcomes.push({effect:row.effect,status:'UNIMPLEMENTED_CUSTOM_EFFECT'});continue;}
+  try{p.addEffect(bedrockId,['minecraft:instant_health','minecraft:instant_damage'].includes(row.effect)?1:row.duration*20,{amplifier:row.amplifier,showParticles:true});outcomes.push({effect:row.effect,status:'APPLIED'});}catch(e){log(e);outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});}
  }
  return outcomes;
 }
 export function registerMixologyComponents({blockComponentRegistry:b,itemComponentRegistry:i}){
  b.registerCustomComponent(NS+':shaker_station',{onTick:e=>{try{syncShakerVisual(e.block,!!getShaker(e.block),sessions.has(shakerKey(e.block.dimension.id,e.block.location)));}catch(err){log(err);}}});b.registerCustomComponent(NS+':cocktail_cup',{onTick:e=>syncCupVisual(e.block)});
- i.registerCustomComponent(NS+':portable_shaker',{onUse:e=>safe(e.source,()=>toggleHeldShake(e.source))});
+ i.registerCustomComponent(NS+':portable_shaker',{onUse:e=>safe(e.source,()=>{if(inputMode(e.source)==='toggle')return toggleHeldShake(e.source);if(e.source.isSneaking)return cancelHeldShake(e.source.id,'SNEAK_CANCEL');})});
  i.registerCustomComponent(NS+':cocktail_effects',{onConsume:e=>consumeCocktail(e)});
 }
-function snapshotItem(player){const h=hand(player);return {basic:handSnapshot(player),data:h?.typeId===SIGNATURE?h.getDynamicProperty(SIGNATURE_DATA):SHAKER_ITEMS.has(h?.typeId)?h.getDynamicProperty(PORTABLE_DATA):undefined};}
-function verifyItem(player,s){sameHand(player,s.basic);if(s.data!==undefined){const item=hand(player);check(item?.getDynamicProperty(item?.typeId===SIGNATURE?SIGNATURE_DATA:PORTABLE_DATA)===s.data,'STALE_HAND');}}
+function snapshotItem(player){const h=hand(player);return {basic:handSnapshot(player),potion:POTION_ITEMS.has(h?.typeId)?canonical(potionIdentity(h)):undefined,data:h?.typeId===SIGNATURE?h.getDynamicProperty(SIGNATURE_DATA):SHAKER_ITEMS.has(h?.typeId)?h.getDynamicProperty(PORTABLE_DATA):undefined};}
+function verifyItem(player,s){sameHand(player,s.basic);if(s.potion!==undefined)check(canonical(potionIdentity(hand(player)))===s.potion,'STALE_POTION');if(s.data!==undefined){const item=hand(player);check(item?.getDynamicProperty(item?.typeId===SIGNATURE?SIGNATURE_DATA:PORTABLE_DATA)===s.data,'STALE_HAND');}}
 export function installMixologyEvents(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const blockId=e.block.typeId,h=snapshotItem(e.player),held=h.basic.id;
@@ -188,7 +193,7 @@ export function installMixologyEvents(openBook){
  world.afterEvents.entityDie.subscribe(e=>{
   try{const owner=e.deadEntity.id;for(const[k,session]of sessions)if(session.playerId===owner){sessions.delete(k);mixologyDiagnostics.cancelled++;const b=blockAt(session.dimension,session.location);if(b)syncShakerVisual(b,true,false);}}catch(err){log(err);}
  });
- installImmersionCleanup();system.runInterval(tickShakers,1);system.runInterval(tickHeldShakers,1);
+ installNativeUseEvents();installImmersionCleanup();system.runInterval(tickShakers,1);system.runInterval(tickHeldShakers,1);
  world.afterEvents.playerLeave?.subscribe(e=>cancelHeldShake(e.playerId,'PLAYER_LEFT'));
  world.afterEvents.entityDie.subscribe(e=>cancelHeldShake(e.deadEntity.id,'PLAYER_DIED'));
  world.afterEvents.playerSpawn?.subscribe(e=>system.run(()=>recoverPortableInventory(e.player)));
@@ -236,20 +241,21 @@ export function cancelHeldShake(playerId,reason='CANCELLED'){
  if(s.cupKey)cupReservations.delete(s.cupKey);
  recoverPortableInventory(s.player,s);handStop(s.player);mixologyDiagnostics.cancelled++;tell(s.player,'§7操作中斷，雪克杯內容保留。');return true;
 }
-export function startHeldShake(p,{tick=system.currentTick}={}){
+export function startHeldShake(p,{tick=system.currentTick,native=false,remaining=USE_DURATION_TICKS}={}){
  canWrite(p);check(registry,'INITIALIZING');noHandSession(p);check(handSessions.size<64,'TOO_MANY_SHAKERS');
  return locks.with([p.id],()=>{
   const item=hand(p);check(item?.typeId===SHAKER,'RECOVER_SHAKER_FIRST');const envelope=readPortableItem(item),state=envelope.state;
   check(!state.result,'RESULT_PENDING');check(state.slots.length===3,'NEED_THREE_INGREDIENTS');
-  const next=portableStack(state,envelope.token,ACTIVE_SHAKER);handExchange(p,item.getDynamicProperty(PORTABLE_DATA),next);
-  const recipe=registry.findShaker(state.slots);handSessions.set(p.id,{kind:'shake',player:p,playerId:p.id,dimensionId:p.dimension.id,slot:p.selectedSlotIndex,start:tick,raw:next.getDynamicProperty(PORTABLE_DATA),itemType:ACTIVE_SHAKER,recipe:recipe?clone(recipe):undefined});
-  handStart(p);tell(p,'§e手持搖杯：再次按使用停止；潛行使用可取消。');return true;
+  // Crucial: do not replace the selected ItemStack or its ID while native use is active.
+  const next=native?item:portableStack(state,envelope.token,ACTIVE_SHAKER);if(!native)handExchange(p,item.getDynamicProperty(PORTABLE_DATA),next);
+  const recipe=registry.findShaker(state.slots);handSessions.set(p.id,{kind:'shake',native,remaining,player:p,playerId:p.id,dimensionId:p.dimension.id,slot:p.selectedSlotIndex,start:tick,raw:next.getDynamicProperty(PORTABLE_DATA),itemType:native?SHAKER:ACTIVE_SHAKER,recipe:recipe?clone(recipe):undefined});
+  handStart(p,native);tell(p,native?'§e按住搖動，鬆手完成；潛行取消。':'§e手持搖杯：再次按使用停止；潛行使用可取消。');return true;
  });
 }
-export function stopHeldShake(p,{tick=system.currentTick,automatic=false}={}){
+export function stopHeldShake(p,{tick=system.currentTick,automatic=false,elapsedTicks}={}){
  const s=handSessions.get(p.id);check(s?.kind==='shake','NOT_SHAKE_OWNER');check(automatic||tick>s.start,'REPEATED_CLICK');
  return locks.with([p.id],()=>{
-  const envelope=verifyHeldSession(p,s),next=finishShake(envelope.state,Math.max(0,tick-s.start),s.recipe),out=portableStack(next,envelope.token);
+  const envelope=verifyHeldSession(p,s),next=finishShake(envelope.state,elapsedTicks??Math.max(0,tick-s.start),s.recipe),out=portableStack(next,envelope.token);
   handExchange(p,s.raw,out);handSessions.delete(p.id);handStop(p);
   if(next.result){mixologyDiagnostics.completed++;finished(p);tell(p,'§a已調好：點已放置的空杯倒酒。');}else tell(p,'§7不足19 tick，材料保留。');return next;
  });
@@ -284,12 +290,14 @@ function completeHeldPour(p,s){
  });
 }
 export function tickHeldShakers(){
+ if(system.currentTick%20===0)pruneNativeLatches();
  if(system.currentTick%20===0)for(const p of world.getAllPlayers())if(!handSessions.has(p.id)){try{if([ACTIVE_SHAKER,POURING_SHAKER].includes(hand(p)?.typeId))recoverPortableInventory(p);}catch(e){log(e);}}
  for(const[id,s]of [...handSessions])try{
   const envelope=verifyHeldSession(s.player,s),elapsed=system.currentTick-s.start;
   if(s.kind==='shake'){
    if(elapsed>=AUTO_STOP_TICKS){stopHeldShake(s.player,{automatic:true});continue;}
-   if(elapsed%5===0)tell(s.player,'§e'+shakeHint(elapsed,s.player.getDynamicProperty('kaleidoscope_tavern:timing_assist')===true));shakeAudio(s.player,elapsed);
+   if(s.native&&s.player.isSneaking){cancelHeldShake(id,'SNEAK_CANCEL');continue;}
+   if(elapsed%5===0)tell(s.player,'§e'+(s.native&&s.player.getDynamicProperty('kaleidoscope_tavern:timing_assist')!==true?'按住搖動 · 鬆手完成':shakeHint(elapsed,s.player.getDynamicProperty('kaleidoscope_tavern:timing_assist')===true)));shakeAudio(s.player,elapsed);
   }else{
    const b=blockAt(s.dimension,s.location);check(b,'UNLOADED_TARGET');near(s.player,b);check(cupStore.raw(s.cupKey)===s.cupRaw,'CUP_CHANGED');
    if(elapsed>=POUR_TICKS){completeHeldPour(s.player,s);continue;}
@@ -297,3 +305,48 @@ export function tickHeldShakers(){
   }
  }catch(e){log(e);cancelHeldShake(id,e.code);}
 }
+
+// Native event bridge: no foods, ammunition, throwable entity, polling mouse state or second click.
+const nativeLatches=new Map();
+export const nativeUseDiagnostics={starts:0,releases:0,duplicateStops:0,cancelled:0,errors:[]};
+export function nativeStart(e){
+ const p=e.source;if(!p||inputMode(p)!=='native'||e.itemStack?.typeId!==SHAKER)return;
+ if(nativeLatches.has(p.id)||handSessions.has(p.id))return;
+ nativeLatches.set(p.id,{player:p,tick:system.currentTick,slot:p.selectedSlotIndex,dimension:p.dimension.id});
+ try{
+  if(p.isSneaking)return;
+  const actual=hand(p);check(actual?.typeId===SHAKER&&actual.getDynamicProperty(PORTABLE_DATA)===e.itemStack.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');
+  check(Number.isInteger(e.useDuration)&&e.useDuration>0&&e.useDuration<=USE_DURATION_TICKS,'NATIVE_START_DURATION');
+  startHeldShake(p,{native:true,remaining:e.useDuration});nativeUseDiagnostics.starts++;
+ }catch(error){log(error);tell(p,'§7'+(error.code??error.message));}
+}
+export function nativeStop(e){
+ const p=e.source;if(!p)return;const latch=nativeLatches.get(p.id);if(!latch){nativeUseDiagnostics.duplicateStops++;return;}
+ nativeLatches.delete(p.id);const s=handSessions.get(p.id);if(!s?.native)return;
+ try{
+  check(e.itemStack?.typeId===SHAKER,'NATIVE_STOP_NO_ITEM');
+  check(p.selectedSlotIndex===latch.slot&&p.dimension.id===latch.dimension,'NATIVE_CONTEXT_CHANGED');
+  check(e.itemStack.getDynamicProperty(PORTABLE_DATA)===s.raw,'STALE_HAND');
+  if(p.isSneaking){cancelHeldShake(p.id,'SNEAK_CANCEL');return;}
+  const elapsed=nativeElapsed(s.remaining,e.useDuration,system.currentTick-s.start);
+  stopHeldShake(p,{automatic:true,elapsedTicks:elapsed});nativeUseDiagnostics.releases++;
+ }catch(error){nativeUseDiagnostics.cancelled++;nativeUseDiagnostics.errors.push(error.code??String(error));if(nativeUseDiagnostics.errors.length>16)nativeUseDiagnostics.errors.shift();cancelHeldShake(p.id,error.code);}
+}
+/** Recover context-cancelled input latches even when a platform omits a stop event. */
+export function pruneNativeLatches(){
+ for(const [id,latch]of nativeLatches){
+  if(handSessions.has(id))continue;
+  try{const p=latch.player;
+   if(!p||p.isValid===false||p.selectedSlotIndex!==latch.slot||p.dimension.id!==latch.dimension||inputMode(p)!=='native'||hand(p)?.typeId!==SHAKER||system.currentTick-latch.tick>USE_DURATION_TICKS+40){nativeLatches.delete(id);if(p)handStop(p);}
+  }catch{nativeLatches.delete(id);}
+ }
+}
+export function installNativeUseEvents(){
+ world.afterEvents.itemStartUse.subscribe(nativeStart);
+ world.afterEvents.itemReleaseUse.subscribe(nativeStop);
+ world.afterEvents.itemStopUse.subscribe(nativeStop);
+ world.afterEvents.playerLeave.subscribe(e=>nativeLatches.delete(e.playerId));
+ world.afterEvents.entityDie.subscribe(e=>nativeLatches.delete(e.deadEntity.id));
+ world.afterEvents.playerSpawn.subscribe(e=>{nativeLatches.delete(e.player.id);if(!handSessions.has(e.player.id))handStop(e.player);});
+}
+export const NATIVE_TEST={nativeLatches};

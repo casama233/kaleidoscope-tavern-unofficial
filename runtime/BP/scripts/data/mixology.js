@@ -1,4 +1,4 @@
-// Generated from C3 locked source data.
+// C5 keeps source white potion tag; effect payload is resolved only at runtime.
 export const SHAKER_INPUTS = {
   "kaleidoscope_tavern:vodka_q4": {
     "item": "kaleidoscope_tavern:vodka_q4",
@@ -1531,7 +1531,8 @@ export const SHAKER_RECIPES = [
         "kaleidoscope_tavern:whiskey_q6",
         "kaleidoscope_tavern:rum_q4",
         "kaleidoscope_tavern:rum_q5",
-        "kaleidoscope_tavern:rum_q6"
+        "kaleidoscope_tavern:rum_q6",
+        "minecraft:potion"
       ]
     ],
     "output": {
@@ -1666,7 +1667,8 @@ export const SHAKER_RECIPES = [
         "kaleidoscope_tavern:whiskey_q6",
         "kaleidoscope_tavern:rum_q4",
         "kaleidoscope_tavern:rum_q5",
-        "kaleidoscope_tavern:rum_q6"
+        "kaleidoscope_tavern:rum_q6",
+        "minecraft:potion"
       ]
     ],
     "output": {
@@ -1693,7 +1695,8 @@ export const SHAKER_RECIPES = [
         "kaleidoscope_tavern:whiskey_q6",
         "kaleidoscope_tavern:rum_q4",
         "kaleidoscope_tavern:rum_q5",
-        "kaleidoscope_tavern:rum_q6"
+        "kaleidoscope_tavern:rum_q6",
+        "minecraft:potion"
       ],
       [
         "kaleidoscope_tavern:vodka_q4",
@@ -1704,7 +1707,8 @@ export const SHAKER_RECIPES = [
         "kaleidoscope_tavern:whiskey_q6",
         "kaleidoscope_tavern:rum_q4",
         "kaleidoscope_tavern:rum_q5",
-        "kaleidoscope_tavern:rum_q6"
+        "kaleidoscope_tavern:rum_q6",
+        "minecraft:potion"
       ],
       [
         "kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
@@ -1895,7 +1899,8 @@ export const SHAKER_RECIPES = [
         "kaleidoscope_tavern:whiskey_q6",
         "kaleidoscope_tavern:rum_q4",
         "kaleidoscope_tavern:rum_q5",
-        "kaleidoscope_tavern:rum_q6"
+        "kaleidoscope_tavern:rum_q6",
+        "minecraft:potion"
       ],
       [
         "kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
@@ -2155,7 +2160,8 @@ export const SHAKER_GROUPS = {
     "kaleidoscope_tavern:whiskey_q6",
     "kaleidoscope_tavern:rum_q4",
     "kaleidoscope_tavern:rum_q5",
-    "kaleidoscope_tavern:rum_q6"
+    "kaleidoscope_tavern:rum_q6",
+    "minecraft:potion"
   ],
   "light_purple": [
     "kaleidoscope_tavern:wine_q4",

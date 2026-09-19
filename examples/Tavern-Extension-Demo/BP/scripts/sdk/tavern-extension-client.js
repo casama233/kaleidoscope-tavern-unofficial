@@ -13,7 +13,7 @@ export function registerTavernExtension(system,payload,{log=console.warn,maxAtte
  };
  const callback=ev=>{
   if(disposed||ev.sourceType!=='Server')return;
-  if(ev.id===EVENTS.ready){try{const info=JSON.parse(ev.message);if(info.api===1){if((payload.recipes??[]).some(r=>r.kind==='shaker')&&!info.capabilities?.includes('shaker_recipes')){if(!warnedCapability){warnedCapability=true;log('[Tavern SDK] Host lacks shaker_recipes; no mixology payload sent.');}return;}transmit();}}catch{log('[Tavern SDK] Invalid ready payload');}}
+  if(ev.id===EVENTS.ready){try{const info=JSON.parse(ev.message);if(info.api===1){if((payload.recipes??[]).some(r=>r.kind==='shaker')&&!info.capabilities?.includes('shaker_recipes')){if(!warnedCapability){warnedCapability=true;log('[Tavern SDK] Host lacks shaker_recipes; no mixology payload sent.');}return;}if((payload.recipes??[]).some(r=>r.kind==='shaker'&&r.ingredients?.flat().some(i=>['minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(i)))&&!info.capabilities?.includes('native_potion_inputs')){if(!warnedCapability){warnedCapability=true;log('[Tavern SDK] Host lacks native_potion_inputs; potion payload not sent.');}return;}transmit();}}catch{log('[Tavern SDK] Invalid ready payload');}}
   if(ev.id===EVENTS.ack){try{const ack=JSON.parse(ev.message);if(ack.source!==payload.source||ack.revision!==revision)return;if(timeout)system.clearRun(timeout);sending=false;
    if(ack.ok){done=true;log('[Tavern SDK] Registered '+payload.source);}else{attempts=maxAttempts;log('[Tavern SDK] Rejected '+payload.source+': '+ack.code);}
   }catch{log('[Tavern SDK] Invalid acknowledgement');}}

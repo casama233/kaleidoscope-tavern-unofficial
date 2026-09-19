@@ -64,6 +64,22 @@
       "pass": 48,
       "fail": 0,
       "skipped": 0
+    },
+    {
+      "suite": "c5-core",
+      "exit_code": 0,
+      "tests": 30,
+      "pass": 30,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "c5-runtime",
+      "exit_code": 0,
+      "tests": 58,
+      "pass": 58,
+      "fail": 0,
+      "skipped": 0
     }
   ],
   "typescript": {
@@ -74,8 +90,8 @@
   "real_Cookery_API_modules_loaded": false,
   "Cookery_test_scope": "Only recipe and guide API modules on the mocked event bus, not whole Cookery/game startup.",
   "engine_acceptance": "NOT_RUN",
-  "combined_pass": 304,
+  "combined_pass": 392,
   "combined_fail": 0,
-  "rendering_test_scope": "Mock records animation/sound/particle invocations and state; no GPU, Bedrock client, network latency or native input simulated.",
+  "rendering_test_scope": "Mock records animation/sound/particle invocations and state; No GPU, Bedrock client or network latency. C5 injects documented native-use event payloads only; the engine starting generic item use is NOT simulated.",
   "scenario_note": "Family/quality loops are counted as individual test cases, not hundreds of separate engine tests. Includes all12 recipe adapters, all69 input qualities, C2 end-to-end adapters, C3 session/state/transactions, packaged demo and real Cookery API mock-bus coexistence. Native consumption/renderer/chunk persistence are NOT emulated."
 }

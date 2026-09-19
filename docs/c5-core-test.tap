@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: remaining-use ticks convert exactly: 0
+ok 1 - remaining-use ticks convert exactly: 0
+  ---
+  duration_ms: 1.011207
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 18
+ok 2 - remaining-use ticks convert exactly: 18
+  ---
+  duration_ms: 0.155336
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 19
+ok 3 - remaining-use ticks convert exactly: 19
+  ---
+  duration_ms: 0.10666
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 68
+ok 4 - remaining-use ticks convert exactly: 68
+  ---
+  duration_ms: 0.138667
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 69
+ok 5 - remaining-use ticks convert exactly: 69
+  ---
+  duration_ms: 0.230535
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 88
+ok 6 - remaining-use ticks convert exactly: 88
+  ---
+  duration_ms: 0.112985
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 89
+ok 7 - remaining-use ticks convert exactly: 89
+  ---
+  duration_ms: 0.157208
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 98
+ok 8 - remaining-use ticks convert exactly: 98
+  ---
+  duration_ms: 0.082554
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 99
+ok 9 - remaining-use ticks convert exactly: 99
+  ---
+  duration_ms: 0.287447
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 110
+ok 10 - remaining-use ticks convert exactly: 110
+  ---
+  duration_ms: 0.299478
+  type: 'test'
+  ...
+# Subtest: remaining-use ticks convert exactly: 111
+ok 11 - remaining-use ticks convert exactly: 111
+  ---
+  duration_ms: 0.10483
+  type: 'test'
+  ...
+# Subtest: native stop rejects a reset or mismatched duration instead of gifting a result
+ok 12 - native stop rejects a reset or mismatched duration instead of gifting a result
+  ---
+  duration_ms: 0.29375
+  type: 'test'
+  ...
+# Subtest: input mode defaults native, legacy requires an explicit player choice
+ok 13 - input mode defaults native, legacy requires an explicit player choice
+  ---
+  duration_ms: 0.122791
+  type: 'test'
+  ...
+# Subtest: strong and long potion durations use native ticks and preserve amplifiers
+ok 14 - strong and long potion durations use native ticks and preserve amplifiers
+  ---
+  duration_ms: 0.612697
+  type: 'test'
+  ...
+# Subtest: turtle master keeps both effects and their unequal strengths
+ok 15 - turtle master keeps both effects and their unequal strengths
+  ---
+  duration_ms: 0.101793
+  type: 'test'
+  ...
+# Subtest: instant harming is not converted into poison or a lasting duration
+ok 16 - instant harming is not converted into poison or a lasting duration
+  ---
+  duration_ms: 0.072589
+  type: 'test'
+  ...
+# Subtest: water and brewing bases have no invented effects
+ok 17 - water and brewing bases have no invented effects
+  ---
+  duration_ms: 0.218839
+  type: 'test'
+  ...
+# Subtest: unknown IDs/unknown duration cannot become guessed potion effects
+ok 18 - unknown IDs/unknown duration cannot become guessed potion effects
+  ---
+  duration_ms: 0.164158
+  type: 'test'
+  ...
+# Subtest: potion state identity survives shaker/portable serialization and withdrawal
+ok 19 - potion state identity survives shaker/portable serialization and withdrawal
+  ---
+  duration_ms: 0.739692
+  type: 'test'
+  ...
+# Subtest: potion metadata on a non-potion slot is rejected
+ok 20 - potion metadata on a non-potion slot is rejected
+  ---
+  duration_ms: 0.269546
+  type: 'test'
+  ...
+# Subtest: Blood Mary exact floor of target max-health third
+ok 21 - Blood Mary exact floor of target max-health third
+  ---
+  duration_ms: 0.139397
+  type: 'test'
+  ...
+# Subtest: XP attraction uses source capped velocity, not invented XP values
+ok 22 - XP attraction uses source capped velocity, not invented XP values
+  ---
+  duration_ms: 0.255456
+  type: 'test'
+  ...
+# Subtest: strong short status expires into weaker longer status
+ok 23 - strong short status expires into weaker longer status
+  ---
+  duration_ms: 0.250907
+  type: 'test'
+  ...
+# Subtest: same-amplifier reapplication extends, never shortens the current duration
+ok 24 - same-amplifier reapplication extends, never shortens the current duration
+  ---
+  duration_ms: 0.079656
+  type: 'test'
+  ...
+# Subtest: status expiry and corrupt persistence fail safely
+ok 25 - status expiry and corrupt persistence fail safely
+  ---
+  duration_ms: 0.094267
+  type: 'test'
+  ...
+# Subtest: native usable shaker is neither food nor weapon and lasts 72000 ticks
+ok 26 - native usable shaker is neither food nor weapon and lasts 72000 ticks
+  ---
+  duration_ms: 0.376324
+  type: 'test'
+  ...
+# Subtest: spout locator is on actual original rim, parented to moving source body
+ok 27 - spout locator is on actual original rim, parented to moving source body
+  ---
+  duration_ms: 0.185444
+  type: 'test'
+  ...
+# Subtest: pour droplet is initialized at model locator, not a head-offset line
+ok 28 - pour droplet is initialized at model locator, not a head-offset line
+  ---
+  duration_ms: 0.205779
+  type: 'test'
+  ...
+# Subtest: all original shaker cube coordinates and UV stay unchanged beneath locator
+ok 29 - all original shaker cube coordinates and UV stay unchanged beneath locator
+  ---
+  duration_ms: 0.253987
+  type: 'test'
+  ...
+# Subtest: calibration profile distinguishes measured rim from unverified wrist
+ok 30 - calibration profile distinguishes measured rim from unverified wrist
+  ---
+  duration_ms: 0.292156
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.224647

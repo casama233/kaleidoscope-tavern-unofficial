@@ -33,7 +33,10 @@
       },
       "render_controllers": [
         "controller.render.kt_runtime.shaker_hand"
-      ]
+      ],
+      "particle_effects": {
+        "spout_drop": "kaleidoscope_tavern:held_pour_drop"
+      }
     }
   }
 }

@@ -17,7 +17,9 @@
       },
       "animations": {
         "hold_first": "animation.kt_runtime.shaker.hold_first",
-        "hold_third": "animation.kt_runtime.shaker.hold_third"
+        "hold_third": "animation.kt_runtime.shaker.hold_third",
+        "native_controller": "controller.animation.kt_runtime.native_shake",
+        "shake_first": "animation.kt_runtime.shaker.first"
       },
       "scripts": {
         "animate": [
@@ -26,7 +28,8 @@
           },
           {
             "hold_third": "!c.is_first_person"
-          }
+          },
+          "native_controller"
         ]
       },
       "render_controllers": [

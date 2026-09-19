@@ -1,10 +1,12 @@
-# Tavern Extension API v1（C4，保留 C3 擴充能力）— 附屬作者入口
+> **C5 現行補充：** API仍為v1，增加`native_potion_inputs`能力。原生藥水不再一概拒收，但只在調酒input走身份驗證適配，詳見文末C5契約。Cookery指南仍獨立。
+
+# Tavern Extension API v1（C5，包含原生藥水輸入能力）— 附屬作者入口
 
 本接口只管目前真正實作的能力。**它不是Cookery擴充API，也不要求把頁面注入廚房指南。** 指南與實際機器都讀酒館同一份registry。
 
 ## 一、分包方式
 
-附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,4,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
+附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,5,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
 
 完整可用範例在 `examples/Tavern-Extension-Demo/BP`，可獨立匯入。自己的附屬必須產生新的BP/module UUID；不要保留示範UUID。
 
@@ -134,7 +136,7 @@ C2內建種植、酒效及多瓶展示不是任意附屬自動獲得的隱藏API
 
 ## 六、C3新增：調酒配方
 
-API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使用調酒，host需宣告`shaker_recipes`。C3 SDK對含shaker的bundle先檢查此能力，缺少則不傳輸，`registered`保持false；不要將新版調酒payload直接當成可在C1/C2運作。主包manifest依賴版本必須更新到`[0,4,0]`。
+API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使用調酒，host需宣告`shaker_recipes`。C3 SDK對含shaker的bundle先檢查此能力，缺少則不傳輸，`registered`保持false；不要將新版調酒payload直接當成可在C1/C2運作。主包manifest依賴版本必須更新到`[0,5,0]`。
 
 ```json
 {
@@ -158,7 +160,7 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 
 這是測試資料，不是原版食譜。`ingredients`恰好三槽，各槽1–16個可擇一ID；每次投料只一件，以回溯演算法做無序匹配，不因重複或重疊選項錯配。所有ID須已被遊戲載入。`output`只能是固定一件，不能用`byQuality`或要求核心憑空產生自己的特調payload。接酒容器預設空雞尾酒杯。
 
-可引用的酒館基酒限`data/mixology.js`的69個Q4–Q6實例。Q1–Q3、醋與未適配的酒館品質物品、原版藥水ID會在註冊時被拒絕，而非顯示一個無法投入的配方。`minecraft:potion`、splash與lingering都未適配，不能把aux／附加藥水資料扔掉再當白色材料。
+可引用的酒館基酒限`data/mixology.js`的69個Q4–Q6實例。Q1–Q3、醋與未適配的酒館品質物品仍在註冊時拒絕。C5可接受明確列出的原生potion/splash/lingering輸入，受native_potion_inputs能力及實例身份驗證限制，不能把附加資料丟掉再當白色材料。
 
 已註冊附屬可另外列普通外部物品，例如Cookery米。這些物品採中性白色、無推測效果、無推測返還容器；帶名稱、附魔、附加資料的實例仍被拒收。**目前沒有公開接口指定外部原料的顏色、效果或返還容器**，不要拿這個接口當成藥水／外部瓶裝飲品適配API。
 
@@ -170,7 +172,7 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 
 帶動態資料的特調不接受再投入其他雪克杯，避免失去既有payload；註冊即拒絕此種输入。
 
-額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_DATA_NOT_ADAPTED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。
+額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_COMPONENT_UNAVAILABLE`、`POTION_EFFECT_UNSUPPORTED`、`POTION_METADATA_UNSUPPORTED`、`POTION_ROUNDTRIP_FAILED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。
 
 
 ## C4 沉浸流程補充
@@ -182,3 +184,14 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 C4在物品內保存可攜雪克杯狀態（非核心私有API）。請勿直接修改 `shaker_active`、`shaker_pouring` 或 `kaleidoscope_tavern:shaker_data`，也不要把它們作為附屬常规配方輸出。三者是同一工具的內部視覺生命週期，不是三件可複製產品。
 
 無容器的附屬原料：潜行空手點雪克杯側面退回最後一份；點上表面則拿起整個雪克杯。基酒仍需交回先前返還的空酒瓶才能退料。此手勢區分避免攜帶功能讓原料無法退回。
+
+
+## C5：原生藥水輸入能力
+
+調酒配方`ingredients`可包含`minecraft:potion`、`minecraft:splash_potion`、`minecraft:lingering_potion`。新的公開SDK在payload含這些item時要求host宣告`native_potion_inputs`；只有舊shaker_recipes能力就不發註冊包，不宣稱已ACK。
+
+這是**物品ID層級**條件，v1沒有PotionEffect/Delivery專用篩選欄位；所有實際實例仍由核心讀取原生元件，未知種/不支持meta/不可重建者拒收。飲用potion的白色內建tag沿原件，其他投送方式必須明確列入附屬固定配方或只做特調。
+
+不允許把三個原生potion ID用作未帶身份的`output.item`；v1沒有輸出藥水payload schema，因此拒絕比回水瓶安全。仍不接受任意執行回呼、外包Signature payload、動態液體註冊。配方時窗不變，輸出快照仍跟隨已開始批次。
+
+正常Cookery米及原附屬配方照舊。C5的自訂效果處理是本體既有12效果中的1規則+2適配，不是任意新增效果註冊API。

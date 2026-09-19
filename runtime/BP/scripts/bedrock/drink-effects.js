@@ -1,4 +1,5 @@
 import {rollDrinkEffects} from '../core/drink-effects.js';
+import {applyCustomEffect} from './custom-effects.js';
 const reported=new Set();
 export const effectDiagnostics={applied:0,unsupported:{},errors:[]};
 /** Runs AFTER native consumption. Never shrinks inventory or returns another empty bottle. */
@@ -8,6 +9,7 @@ export function consumeDrink(event,rng=Math.random){
  const outcomes=[];
  for(const row of rows){
   if(!row.bedrockId){
+   try{if(applyCustomEffect(entity,row)){outcomes.push({effect:row.effect,status:'APPLIED_CUSTOM'});continue;}}catch(error){outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});continue;}
    effectDiagnostics.unsupported[row.effect]=(effectDiagnostics.unsupported[row.effect]??0)+1;
    outcomes.push({effect:row.effect,status:'UNIMPLEMENTED_CUSTOM_EFFECT'});
    if(!reported.has(row.effect)){reported.add(row.effect);console.warn('[Tavern C2] Not substituted: '+row.effect);}

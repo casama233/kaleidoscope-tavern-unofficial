@@ -1,15 +1,15 @@
 {
   "scope": "Static file/contract checks; NOT Minecraft schema/engine acceptance",
-  "json_files": 739,
+  "json_files": 741,
   "items": 177,
   "blocks": 51,
   "runtime_visual_entities": 16,
-  "script_files": 33,
+  "script_files": 38,
   "attachables": 3,
-  "animation_controllers": 1,
+  "animation_controllers": 2,
   "animation_clips": 13,
-  "checks": 3032,
-  "passed": 3032,
+  "checks": 3087,
+  "passed": 3087,
   "failed": [],
   "engine_acceptance": "NOT_RUN",
   "results": [
@@ -12169,6 +12169,11 @@
       "detail": ""
     },
     {
+      "check": "unique_particle:kaleidoscope_tavern:held_pour_drop",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_particle:kt_assets_a17:spore_incense",
       "passed": true,
       "detail": ""
@@ -12300,6 +12305,11 @@
     },
     {
       "check": "unique_attachable:kaleidoscope_tavern:shaker_pouring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_animation_controllers:controller.animation.kt_runtime.native_shake",
       "passed": true,
       "detail": ""
     },
@@ -12754,12 +12764,27 @@
       "detail": ""
     },
     {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker:native_controller",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "client_animation_reference:kaleidoscope_tavern:shaker:shake_first",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "script_animation_alias:kaleidoscope_tavern:shaker:hold_first",
       "passed": true,
       "detail": ""
     },
     {
       "check": "script_animation_alias:kaleidoscope_tavern:shaker:hold_third",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "script_animation_alias:kaleidoscope_tavern:shaker:native_controller",
       "passed": true,
       "detail": ""
     },
@@ -12984,12 +13009,137 @@
       "detail": ""
     },
     {
+      "check": "C5_explicit_native_use",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_spout_on_source_lip",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.15",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.25",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.35",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_locator_particle:0.45",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_has_seven_flow_keys",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/ArdentHeatEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/BaseEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/EffectEvent.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/GrassStealthEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/HighHeelsEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/LongReachEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/ModEffects.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/ShriekAttackEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/UpsideDownEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/VisionEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/XpDrainEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C5_javap:data/upstream/c5/javap/ZenithEffect.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "A17_art_preserved",
       "passed": true,
       "detail": {
         "files": 999,
         "failures": []
       }
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/mixology.js",
+      "passed": true,
+      "detail": ""
     },
     {
       "check": "import:scripts/main.js:./bedrock/immersion.js",
@@ -13277,6 +13427,31 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/bedrock/custom-effects.js:../core/bottle-support.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/custom-effects.js:../core/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/bedrock/immersion.js:../core/immersion.js",
       "passed": true,
       "detail": ""
@@ -13293,6 +13468,26 @@
     },
     {
       "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:./potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/native-use.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:./custom-effects.js",
       "passed": true,
       "detail": ""
     },
@@ -13457,12 +13652,42 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/bedrock/drink-effects.js:./custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "no_Cookery_mutating_bus:scripts/bedrock/drink-effects.js",
       "passed": true,
       "detail": ""
     },
     {
       "check": "no_Cookery_player_properties:scripts/bedrock/drink-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/potions.js:../core/util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/potions.js:../core/potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/potions.js",
       "passed": true,
       "detail": ""
     },
@@ -13542,6 +13767,36 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/core/native-use.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/native-use.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/native-use.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/custom-effects.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/custom-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/core/immersion.js:./util.js",
       "passed": true,
       "detail": ""
@@ -13568,6 +13823,11 @@
     },
     {
       "check": "import:scripts/core/mixology.js:./bottles.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/mixology.js:./potions.js",
       "passed": true,
       "detail": ""
     },
@@ -13668,6 +13928,21 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/core/util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/potions.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/potions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/potions.js",
       "passed": true,
       "detail": ""
     },

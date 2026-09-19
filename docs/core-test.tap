@@ -2,229 +2,229 @@ TAP version 13
 # Subtest: exact production recipe counts and disabled Molotov
 ok 1 - exact production recipe counts and disabled Molotov
   ---
-  duration_ms: 1.297876
+  duration_ms: 1.093335
   type: 'test'
   ...
 # Subtest: all 23 recipes match their concrete ingredients and six output variants
 ok 2 - all 23 recipes match their concrete ingredients and six output variants
   ---
-  duration_ms: 1.10076
+  duration_ms: 1.087966
   type: 'test'
   ...
 # Subtest: alternative matching uses backtracking and duplicate counts
 ok 3 - alternative matching uses backtracking and duplicate counts
   ---
-  duration_ms: 0.13257
+  duration_ms: 0.124819
   type: 'test'
   ...
 # Subtest: eight stomps yield exactly 1000mB and consume eight grapes
 ok 4 - eight stomps yield exactly 1000mB and consume eight grapes
   ---
-  duration_ms: 9.404572
+  duration_ms: 6.548002
   type: 'test'
   ...
 # Subtest: all six pressing recipes resolve to their own fluid
 ok 5 - all six pressing recipes resolve to their own fluid
   ---
-  duration_ms: 3.137161
+  duration_ms: 3.507606
   type: 'test'
   ...
 # Subtest: mixed fluids and partial bucket extraction reject without mutating state
 ok 6 - mixed fluids and partial bucket extraction reject without mutating state
   ---
-  duration_ms: 0.688058
+  duration_ms: 0.713976
   type: 'test'
   ...
 # Subtest: 16 empty buckets retain 15 plus one filled bucket
 ok 7 - 16 empty buckets retain 15 plus one filled bucket
   ---
-  duration_ms: 0.924951
+  duration_ms: 0.72696
   type: 'test'
   ...
 # Subtest: full inventory rejects exchange; no machine mutation
 ok 8 - full inventory rejects exchange; no machine mutation
   ---
-  duration_ms: 0.234774
+  duration_ms: 0.187249
   type: 'test'
   ...
 # Subtest: last empty bucket frees its own slot even when inventory is otherwise full
 ok 9 - last empty bucket frees its own slot even when inventory is otherwise full
   ---
-  duration_ms: 0.582164
+  duration_ms: 0.359022
   type: 'test'
   ...
 # Subtest: inventory write exception restores already written slots
 ok 10 - inventory write exception restores already written slots
   ---
-  duration_ms: 0.757465
+  duration_ms: 0.482442
   type: 'test'
   ...
 # Subtest: storage failure rolls inventory back
 ok 11 - storage failure rolls inventory back
   ---
-  duration_ms: 0.338444
+  duration_ms: 0.707837
   type: 'test'
   ...
 # Subtest: rollback failure is reported, not swallowed
 ok 12 - rollback failure is reported, not swallowed
   ---
-  duration_ms: 0.184465
+  duration_ms: 0.174259
   type: 'test'
   ...
 # Subtest: named, lore, dynamic and durability ingredients rejected; plain filled bucket accepted
 ok 13 - named, lore, dynamic and durability ingredients rejected; plain filled bucket accepted
   ---
-  duration_ms: 0.196799
+  duration_ms: 0.199152
   type: 'test'
   ...
 # Subtest: untouched metadata survives transactions
 ok 14 - untouched metadata survives transactions
   ---
-  duration_ms: 0.144595
+  duration_ms: 0.140082
   type: 'test'
   ...
 # Subtest: randomized bucket conservation for 500 deterministic inventories
 ok 15 - randomized bucket conservation for 500 deterministic inventories
   ---
-  duration_ms: 18.951413
+  duration_ms: 17.344306
   type: 'test'
   ...
 # Subtest: four slots cap at16 and filled-before-ingredients enforcement
 ok 16 - four slots cap at16 and filled-before-ingredients enforcement
   ---
-  duration_ms: 0.954985
+  duration_ms: 0.913831
   type: 'test'
   ...
 # Subtest: fermentation uses snapshot output and minimum ingredient count
 ok 17 - fermentation uses snapshot output and minimum ingredient count
   ---
-  duration_ms: 0.770593
+  duration_ms: 0.767673
   type: 'test'
   ...
 # Subtest: no ingredient and invalid mixtures yield16, invalid→vinegar
 ok 18 - no ingredient and invalid mixtures yield16, invalid→vinegar
   ---
-  duration_ms: 0.696007
+  duration_ms: 0.680498
   type: 'test'
   ...
 # Subtest: open/empty barrel does not advance and source97 cadence stays capped
 ok 19 - open/empty barrel does not advance and source97 cadence stays capped
   ---
-  duration_ms: 106.811369
+  duration_ms: 100.924615
   type: 'test'
   ...
 # Subtest: serving consumes one bottle and exactly one output; final serving resets
 ok 20 - serving consumes one bottle and exactly one output; final serving resets
   ---
-  duration_ms: 4.084796
+  duration_ms: 3.949705
   type: 'test'
   ...
 # Subtest: state roundtrip, revision conflict and malformed data fail closed
 ok 21 - state roundtrip, revision conflict and malformed data fail closed
   ---
-  duration_ms: 1.150223
+  duration_ms: 1.097914
   type: 'test'
   ...
 # Subtest: unsupported future state version is not reset
 ok 22 - unsupported future state version is not reset
   ---
-  duration_ms: 0.142793
+  duration_ms: 0.144366
   type: 'test'
   ...
 # Subtest: reentrancy locks stop double claim and release after failure
 ok 23 - reentrancy locks stop double claim and release after failure
   ---
-  duration_ms: 0.150359
+  duration_ms: 0.150717
   type: 'test'
   ...
 # Subtest: barrel structure has27 unique cells and correct single origin
 ok 24 - barrel structure has27 unique cells and correct single origin
   ---
-  duration_ms: 0.174181
+  duration_ms: 0.198022
   type: 'test'
   ...
 # Subtest: extension install idempotent; core recipes remain first
 ok 25 - extension install idempotent; core recipes remain first
   ---
-  duration_ms: 1.716927
+  duration_ms: 1.488792
   type: 'test'
   ...
 # Subtest: extension ordering does not depend on load order
 ok 26 - extension ordering does not depend on load order
   ---
-  duration_ms: 2.97121
+  duration_ms: 2.93462
   type: 'test'
   ...
 # Subtest: bad bundle cannot overwrite valid previous extension
 ok 27 - bad bundle cannot overwrite valid previous extension
   ---
-  duration_ms: 1.269816
+  duration_ms: 1.24629
   type: 'test'
   ...
 # Subtest: reserved and foreign namespaces reject
 ok 28 - reserved and foreign namespaces reject
   ---
-  duration_ms: 0.435852
+  duration_ms: 0.423718
   type: 'test'
   ...
 # Subtest: unknown kind, fluid, item and API version are rejected
 ok 29 - unknown kind, fluid, item and API version are rejected
   ---
-  duration_ms: 1.13114
+  duration_ms: 1.143006
   type: 'test'
   ...
 # Subtest: session reload removes extensions; stored batch snapshot remains usable
 ok 30 - session reload removes extensions; stored batch snapshot remains usable
   ---
-  duration_ms: 0.621322
+  duration_ms: 0.636244
   type: 'test'
   ...
 # Subtest: out-of-order chunks, duplicate exact chunks and unicode roundtrip
 ok 31 - out-of-order chunks, duplicate exact chunks and unicode roundtrip
   ---
-  duration_ms: 14.997827
+  duration_ms: 14.982213
   type: 'test'
   ...
 # Subtest: incomplete or corrupt transmission never partially installs
 ok 32 - incomplete or corrupt transmission never partially installs
   ---
-  duration_ms: 7.4363
+  duration_ms: 7.523685
   type: 'test'
   ...
 # Subtest: oversize, expiry, pending limit and conflicting duplicate chunk guarded
 ok 33 - oversize, expiry, pending limit and conflicting duplicate chunk guarded
   ---
-  duration_ms: 8.060123
+  duration_ms: 7.436186
   type: 'test'
   ...
 # Subtest: guide recipes are generated from registry not a second recipe table
 ok 34 - guide recipes are generated from registry not a second recipe table
   ---
-  duration_ms: 1.431085
+  duration_ms: 1.35952
   type: 'test'
   ...
 # Subtest: guide pagination respects8 items and removed add-on pages disappear
 ok 35 - guide pagination respects8 items and removed add-on pages disappear
   ---
-  duration_ms: 0.694379
+  duration_ms: 0.75621
   type: 'test'
   ...
 # Subtest: source correction: all Q1–Q6 have native consumption and own remainder
 ok 36 - source correction: all Q1–Q6 have native consumption and own remainder
   ---
-  duration_ms: 0.359771
+  duration_ms: 0.332317
   type: 'test'
   ...
 # Subtest: ack retains caller transfer revision distinct from registry counter
 ok 37 - ack retains caller transfer revision distinct from registry counter
   ---
-  duration_ms: 7.285407
+  duration_ms: 6.929331
   type: 'test'
   ...
 # Subtest: guide and recipe IDs cannot collide within one extension
 ok 38 - guide and recipe IDs cannot collide within one extension
   ---
-  duration_ms: 0.474871
+  duration_ms: 0.509867
   type: 'test'
   ...
 1..38
@@ -235,4 +235,4 @@ ok 38 - guide and recipe IDs cannot collide within one extension
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 317.400343
+# duration_ms 297.18514

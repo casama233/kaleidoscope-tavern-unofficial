@@ -2,199 +2,199 @@ TAP version 13
 # Subtest: all twelve source fixed recipes,14 cocktail artworks and69 qualified input IDs exist
 ok 1 - all twelve source fixed recipes,14 cocktail artworks and69 qualified input IDs exist
   ---
-  duration_ms: 1.08809
+  duration_ms: 1.087756
   type: 'test'
   ...
 # Subtest: all timing values0..250 match source boundary bands, not a common off-by-one table
 ok 2 - all timing values0..250 match source boundary bands, not a common off-by-one table
   ---
-  duration_ms: 0.530419
+  duration_ms: 0.494249
   type: 'test'
   ...
 # Subtest: under19 ticks preserves all three poured quality IDs and revision
 ok 3 - under19 ticks preserves all three poured quality IDs and revision
   ---
-  duration_ms: 5.446952
+  duration_ms: 5.631888
   type: 'test'
   ...
 # Subtest: early and overlong shake are mystery; middle window is signature
 ok 4 - early and overlong shake are mystery; middle window is signature
   ---
-  duration_ms: 3.977254
+  duration_ms: 3.940284
   type: 'test'
   ...
 # Subtest: every one of the twelve fixed recipes can be matched at ticks89 and98 with all slot permutations
 ok 5 - every one of the twelve fixed recipes can be matched at ticks89 and98 with all slot permutations
   ---
-  duration_ms: 68.676321
+  duration_ms: 67.378976
   type: 'test'
   ...
 # Subtest: perfect timing without fixed match makes Signature, never missing-output state
 ok 6 - perfect timing without fixed match makes Signature, never missing-output state
   ---
-  duration_ms: 1.345998
+  duration_ms: 1.293515
   type: 'test'
   ...
 # Subtest: Q1–Q3 reject for all23 base wines before slots change
 ok 7 - Q1–Q3 reject for all23 base wines before slots change
   ---
-  duration_ms: 16.939541
+  duration_ms: 17.224986
   type: 'test'
   ...
 # Subtest: all Q4–Q6 inputs preserve their own effects, container and exact ID
 ok 8 - all Q4–Q6 inputs preserve their own effects, container and exact ID
   ---
-  duration_ms: 17.940231
+  duration_ms: 17.357352
   type: 'test'
   ...
 # Subtest: fourth input, empty removal and re-shaking ready result are rejected
 ok 9 - fourth input, empty removal and re-shaking ready result are rejected
   ---
-  duration_ms: 2.815469
+  duration_ms: 2.42262
   type: 'test'
   ...
 # Subtest: partial unpour preserves original quality and specifies the container owed back
 ok 10 - partial unpour preserves original quality and specifies the container owed back
   ---
-  duration_ms: 1.452475
+  duration_ms: 1.244631
   type: 'test'
   ...
 # Subtest: all vanilla potion IDs reject rather than erasing their effect payload
 ok 11 - all vanilla potion IDs reject rather than erasing their effect payload
   ---
-  duration_ms: 0.927472
+  duration_ms: 0.926648
   type: 'test'
   ...
 # Subtest: Signature uses quality-specific snapshots rather than latest config or an average quality
 ok 12 - Signature uses quality-specific snapshots rather than latest config or an average quality
   ---
-  duration_ms: 1.022739
+  duration_ms: 1.027694
   type: 'test'
   ...
 # Subtest: merge uses max amplifier/probability and1.2f even for singleton effects
 ok 13 - merge uses max amplifier/probability and1.2f even for singleton effects
   ---
-  duration_ms: 0.149659
+  duration_ms: 0.142841
   type: 'test'
   ...
 # Subtest: float32 duration multiplication matches independent expected numeric boundary samples
 ok 14 - float32 duration multiplication matches independent expected numeric boundary samples
   ---
-  duration_ms: 0.115488
+  duration_ms: 0.139803
   type: 'test'
   ...
 # Subtest: colour channels are truncated arithmetic means of original format colours
 ok 15 - colour channels are truncated arithmetic means of original format colours
   ---
-  duration_ms: 1.561838
+  duration_ms: 1.589607
   type: 'test'
   ...
 # Subtest: mutating returned signature does not modify machine input snapshots
 ok 16 - mutating returned signature does not modify machine input snapshots
   ---
-  duration_ms: 2.097393
+  duration_ms: 2.105189
   type: 'test'
   ...
 # Subtest: serve clears all logical contents exactly once and preserves result data
 ok 17 - serve clears all logical contents exactly once and preserves result data
   ---
-  duration_ms: 1.179707
+  duration_ms: 1.380521
   type: 'test'
   ...
 # Subtest: shaker and cup keys cannot collide across dimensions,negative coordinates or each other
 ok 18 - shaker and cup keys cannot collide across dimensions,negative coordinates or each other
   ---
-  duration_ms: 0.322891
+  duration_ms: 0.321618
   type: 'test'
   ...
 # Subtest: independent store reload preserves ready payload and rejects stale revisions
 ok 19 - independent store reload preserves ready payload and rejects stale revisions
   ---
-  duration_ms: 2.988527
+  duration_ms: 1.870014
   type: 'test'
   ...
 # Subtest: invalid future schema never resets existing data
 ok 20 - invalid future schema never resets existing data
   ---
-  duration_ms: 0.959357
+  duration_ms: 0.869785
   type: 'test'
   ...
 # Subtest: oversized or malicious signature fields are rejected
 ok 21 - oversized or malicious signature fields are rejected
   ---
-  duration_ms: 1.02293
+  duration_ms: 1.578308
   type: 'test'
   ...
 # Subtest: fixed cups may not carry arbitrary signature data
 ok 22 - fixed cups may not carry arbitrary signature data
   ---
-  duration_ms: 2.102396
+  duration_ms: 1.002987
   type: 'test'
   ...
 # Subtest: extension shaker registration is atomic and appears in the same guide registry
 ok 23 - extension shaker registration is atomic and appears in the same guide registry
   ---
-  duration_ms: 2.849615
+  duration_ms: 1.767585
   type: 'test'
   ...
 # Subtest: invalid extension ingredient count rejects the whole replacement bundle
 ok 24 - invalid extension ingredient count rejects the whole replacement bundle
   ---
-  duration_ms: 0.669109
+  duration_ms: 0.613242
   type: 'test'
   ...
 # Subtest: extension cannot request arbitrary Signature,undefined quality or raw potion outputs
 ok 25 - extension cannot request arbitrary Signature,undefined quality or raw potion outputs
   ---
-  duration_ms: 1.266542
+  duration_ms: 1.323735
   type: 'test'
   ...
 # Subtest: unknown items and output carriers reject extension before registration
 ok 26 - unknown items and output carriers reject extension before registration
   ---
-  duration_ms: 0.234689
+  duration_ms: 0.26065
   type: 'test'
   ...
 # Subtest: alternative ingredient backtracking handles overlaps and repeated slots
 ok 27 - alternative ingredient backtracking handles overlaps and repeated slots
   ---
-  duration_ms: 0.098628
+  duration_ms: 0.1061
   type: 'test'
   ...
 # Subtest: new plain extension ingredient snapshots have no invented effect or bottle return
 ok 28 - new plain extension ingredient snapshots have no invented effect or bottle return
   ---
-  duration_ms: 0.889747
+  duration_ms: 0.669169
   type: 'test'
   ...
 # Subtest: fixed result snapshots survive extension replacement/removal
 ok 29 - fixed result snapshots survive extension replacement/removal
   ---
-  duration_ms: 0.710965
+  duration_ms: 0.854079
   type: 'test'
   ...
 # Subtest: all fixed cocktail effect definitions are visibly custom,not substitute native buffs
 ok 30 - all fixed cocktail effect definitions are visibly custom,not substitute native buffs
   ---
-  duration_ms: 0.175175
+  duration_ms: 0.126017
   type: 'test'
   ...
 # Subtest: source recipes and tags are traceable to exact local copied JAR members
 ok 31 - source recipes and tags are traceable to exact local copied JAR members
   ---
-  duration_ms: 0.639173
+  duration_ms: 0.480342
   type: 'test'
   ...
 # Subtest: registration rejects unsupported vinegar quality inputs upfront rather than advertising an unusable recipe
 ok 32 - registration rejects unsupported vinegar quality inputs upfront rather than advertising an unusable recipe
   ---
-  duration_ms: 0.415391
+  duration_ms: 0.481474
   type: 'test'
   ...
 # Subtest: a signature cannot be accepted as a plain extension ingredient losing its dynamic payload
 ok 33 - a signature cannot be accepted as a plain extension ingredient losing its dynamic payload
   ---
-  duration_ms: 0.363338
+  duration_ms: 0.496352
   type: 'test'
   ...
 1..33
@@ -205,4 +205,4 @@ ok 33 - a signature cannot be accepted as a plain extension ingredient losing it
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 239.269023
+# duration_ms 226.374963

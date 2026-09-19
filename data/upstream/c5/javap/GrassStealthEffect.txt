@@ -1,0 +1,113 @@
+Compiled from "GrassStealthEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.GrassStealthEffect extends com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect {
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.GrassStealthEffect(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       5: return
+
+  public boolean shouldApplyEffectTickThisTick(int, int);
+    Code:
+       0: iload_1
+       1: bipush        10
+       3: irem
+       4: ifne          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_0
+      12: ireturn
+
+  public boolean applyEffectTick(net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #7                  // Method net/minecraft/world/entity/LivingEntity.isShiftKeyDown:()Z
+       4: ifne          9
+       7: iconst_1
+       8: ireturn
+       9: aload_1
+      10: invokevirtual #13                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+      13: astore_3
+      14: aload_1
+      15: invokevirtual #17                 // Method net/minecraft/world/entity/LivingEntity.blockPosition:()Lnet/minecraft/core/BlockPos;
+      18: astore        4
+      20: aload         4
+      22: invokevirtual #21                 // Method net/minecraft/core/BlockPos.above:()Lnet/minecraft/core/BlockPos;
+      25: astore        5
+      27: aload_3
+      28: aload         4
+      30: invokestatic  #26                 // Method notInGrassStealthPlant:(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
+      33: ifeq          47
+      36: aload_3
+      37: aload         5
+      39: invokestatic  #26                 // Method notInGrassStealthPlant:(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
+      42: ifeq          47
+      45: iconst_1
+      46: ireturn
+      47: aload_1
+      48: instanceof    #32                 // class net/minecraft/world/entity/player/Player
+      51: ifeq          67
+      54: aload_1
+      55: checkcast     #32                 // class net/minecraft/world/entity/player/Player
+      58: astore        6
+      60: aload         6
+      62: ldc           #34                 // float 0.1f
+      64: invokevirtual #35                 // Method net/minecraft/world/entity/player/Player.causeFoodExhaustion:(F)V
+      67: aload_3
+      68: ldc           #39                 // class net/minecraft/world/entity/Mob
+      70: new           #41                 // class net/minecraft/world/phys/AABB
+      73: dup
+      74: aload         4
+      76: invokespecial #43                 // Method net/minecraft/world/phys/AABB."<init>":(Lnet/minecraft/core/BlockPos;)V
+      79: ldc2_w        #46                 // double 32.0d
+      82: invokevirtual #48                 // Method net/minecraft/world/phys/AABB.inflate:(D)Lnet/minecraft/world/phys/AABB;
+      85: invokevirtual #52                 // Method net/minecraft/world/level/Level.getEntitiesOfClass:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;
+      88: aload_1
+      89: invokedynamic #58,  0             // InvokeDynamic #0:accept:(Lnet/minecraft/world/entity/LivingEntity;)Ljava/util/function/Consumer;
+      94: invokeinterface #62,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      99: iconst_1
+     100: ireturn
+
+  public static boolean notInGrassStealthPlant(net.minecraft.world.level.Level, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #68                 // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+       5: astore_2
+       6: aload_2
+       7: invokevirtual #72                 // Method net/minecraft/world/level/block/state/BlockState.getBlock:()Lnet/minecraft/world/level/block/Block;
+      10: astore        4
+      12: aload         4
+      14: instanceof    #78                 // class net/minecraft/world/level/block/CropBlock
+      17: ifeq          40
+      20: aload         4
+      22: checkcast     #78                 // class net/minecraft/world/level/block/CropBlock
+      25: astore_3
+      26: aload_3
+      27: aload_2
+      28: invokevirtual #80                 // Method net/minecraft/world/level/block/CropBlock.isMaxAge:(Lnet/minecraft/world/level/block/state/BlockState;)Z
+      31: ifne          38
+      34: iconst_1
+      35: goto          39
+      38: iconst_0
+      39: ireturn
+      40: aload_2
+      41: getstatic     #84                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.GRASS_STEALTH_PLANTS:Lnet/minecraft/tags/TagKey;
+      44: invokevirtual #90                 // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/tags/TagKey;)Z
+      47: ifne          54
+      50: iconst_1
+      51: goto          55
+      54: iconst_0
+      55: ireturn
+
+  private static void lambda$applyEffectTick$0(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.Mob);
+    Code:
+       0: aload_1
+       1: invokevirtual #94                 // Method net/minecraft/world/entity/Mob.getTarget:()Lnet/minecraft/world/entity/LivingEntity;
+       4: aload_0
+       5: if_acmpne     13
+       8: aload_1
+       9: aconst_null
+      10: invokevirtual #98                 // Method net/minecraft/world/entity/Mob.setTarget:(Lnet/minecraft/world/entity/LivingEntity;)V
+      13: return
+}

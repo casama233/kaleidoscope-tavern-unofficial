@@ -1,8 +1,8 @@
 TAP version 13
-# (node:4038) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# (node:4431) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
 # --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
 # (Use `node --trace-warnings ...` to show where the warning was created)
-# [Tavern C4] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C5] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.
 # [Tavern] tester16: STALE_HAND
 # [Tavern] tester30: NO_PRODUCT
 # [Tavern] machine: STRUCTURE_DAMAGED
@@ -10,139 +10,139 @@ TAP version 13
 # Subtest: entrypoint registers unique independent item/block custom components and41 recipes
 ok 1 - entrypoint registers unique independent item/block custom components and41 recipes
   ---
-  duration_ms: 2.365688
+  duration_ms: 1.197534
   type: 'test'
   ...
 # Subtest: barrel placement uses all27 verified air cells and consumes exactly one
 ok 2 - barrel placement uses all27 verified air cells and consumes exactly one
   ---
-  duration_ms: 2.559664
+  duration_ms: 3.643753
   type: 'test'
   ...
 # Subtest: item useOn placement uses clicked face offset
 ok 3 - item useOn placement uses clicked face offset
   ---
-  duration_ms: 0.612589
+  duration_ms: 0.696342
   type: 'test'
   ...
 # Subtest: occupied or unloaded placement volume makes no state/inventory changes
 ok 4 - occupied or unloaded placement volume makes no state/inventory changes
   ---
-  duration_ms: 0.64316
+  duration_ms: 0.618422
   type: 'test'
   ...
 # Subtest: placement state-write exception restores all cells and original inventory
 ok 5 - placement state-write exception restores all cells and original inventory
   ---
-  duration_ms: 0.605812
+  duration_ms: 0.562671
   type: 'test'
   ...
 # Subtest: tub input/press events preserve original count; only players and adequate fall press
 ok 6 - tub input/press events preserve original count; only players and adequate fall press
   ---
-  duration_ms: 2.260116
+  duration_ms: 2.19656
   type: 'test'
   ...
 # Subtest: actual event route cancels vanilla bucket interaction and keeps15 empty buckets
 ok 7 - actual event route cancels vanilla bucket interaction and keeps15 empty buckets
   ---
-  duration_ms: 2.081692
+  duration_ms: 1.534209
   type: 'test'
   ...
 # Subtest: holding item changed between event and deferred mutation prevents stale hand loss
 ok 8 - holding item changed between event and deferred mutation prevents stale hand loss
   ---
-  duration_ms: 0.55268
+  duration_ms: 0.673437
   type: 'test'
   ...
 # Subtest: full inventory fails before decrementing stored liquid
 ok 9 - full inventory fails before decrementing stored liquid
   ---
-  duration_ms: 1.624529
+  duration_ms: 1.628709
   type: 'test'
   ...
 # Subtest: state-save failure rolls bucket exchange and liquid back together
 ok 10 - state-save failure rolls bucket exchange and liquid back together
   ---
-  duration_ms: 1.657184
+  duration_ms: 2.600351
   type: 'test'
   ...
 # Subtest: real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16 bottles
 ok 11 - real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16 bottles
   ---
-  duration_ms: 9.331753
+  duration_ms: 7.990018
   type: 'test'
   ...
 # Subtest: all four-input barrel adapters preserve minimum stack output and reject metadata
 ok 12 - all four-input barrel adapters preserve minimum stack output and reject metadata
   ---
-  duration_ms: 1.27507
+  duration_ms: 1.403355
   type: 'test'
   ...
 # Subtest: same-tick final serving by two players is issued exactly once
 ok 13 - same-tick final serving by two players is issued exactly once
   ---
-  duration_ms: 1.452875
+  duration_ms: 1.97507
   type: 'test'
   ...
 # Subtest: saved batch can be loaded by a fresh storage object without recomputing recipe
 ok 14 - saved batch can be loaded by a fresh storage object without recomputing recipe
   ---
-  duration_ms: 1.74446
+  duration_ms: 1.639181
   type: 'test'
   ...
 # Subtest: broken or unloaded barrel stops progressing and never erases state
 ok 15 - broken or unloaded barrel stops progressing and never erases state
   ---
-  duration_ms: 1.486978
+  duration_ms: 1.302419
   type: 'test'
   ...
 # Subtest: filled machine destruction is blocked; duplicate empty destruction drops only one
 ok 16 - filled machine destruction is blocked; duplicate empty destruction drops only one
   ---
-  duration_ms: 2.334593
+  duration_ms: 2.143452
   type: 'test'
   ...
 # Subtest: visual synchronization reuses entity and removes duplicates or obsolete fluid
 ok 17 - visual synchronization reuses entity and removes duplicates or obsolete fluid
   ---
-  duration_ms: 0.625437
+  duration_ms: 0.608619
   type: 'test'
   ...
 # Subtest: orphan visual is cleaned after load; foreign entities not touched
 ok 18 - orphan visual is cleaned after load; foreign entities not touched
   ---
-  duration_ms: 0.406069
+  duration_ms: 0.402226
   type: 'test'
   ...
 # Subtest: explosions exclude runtime machine blocks but retain unrelated blocks
 ok 19 - explosions exclude runtime machine blocks but retain unrelated blocks
   ---
-  duration_ms: 0.756775
+  duration_ms: 0.680673
   type: 'test'
   ...
 # Subtest: creative placement is free but ingredient exchanges still conserve containers
 ok 20 - creative placement is free but ingredient exchanges still conserve containers
   ---
-  duration_ms: 1.721114
+  duration_ms: 0.660235
   type: 'test'
   ...
 # Subtest: independent guide and recipe book open different views without Cookery keys
 ok 21 - independent guide and recipe book open different views without Cookery keys
   ---
-  duration_ms: 1.956623
+  duration_ms: 2.262825
   type: 'test'
   ...
 # Subtest: guide language and bookmark operations write only Tavern properties
 ok 22 - guide language and bookmark operations write only Tavern properties
   ---
-  duration_ms: 1.292057
+  duration_ms: 1.574607
   type: 'test'
   ...
 # Subtest: server-only extension registration ignores entity and command-block sources
 ok 23 - server-only extension registration ignores entity and command-block sources
   ---
-  duration_ms: 10.214748
+  duration_ms: 10.247117
   type: 'test'
   ...
 # [Tavern SDK] Registered tavern_demo
@@ -151,49 +151,49 @@ ok 23 - server-only extension registration ignores entity and command-block sour
 # Subtest: separate example add-on receives handshake, sends chunks and receivesack
 ok 24 - separate example add-on receives handshake, sends chunks and receivesack
   ---
-  duration_ms: 33.056868
+  duration_ms: 36.45559
   type: 'test'
   ...
 # Subtest: registered extension recipe is actually processed by the barrel adapter
 ok 25 - registered extension recipe is actually processed by the barrel adapter
   ---
-  duration_ms: 2.508139
+  duration_ms: 2.272379
   type: 'test'
   ...
 # Subtest: SDK disposal before registration does not falsely claim successful registration
 ok 26 - SDK disposal before registration does not falsely claim successful registration
   ---
-  duration_ms: 3.167716
+  duration_ms: 3.397656
   type: 'test'
   ...
 # Subtest: oversized extension messages cannot partially register data
 ok 27 - oversized extension messages cannot partially register data
   ---
-  duration_ms: 0.334469
+  duration_ms: 0.417947
   type: 'test'
   ...
 # Subtest: extension can use an actually observed Cookery material without modifying Cookery
 ok 28 - extension can use an actually observed Cookery material without modifying Cookery
   ---
-  duration_ms: 3.79646
+  duration_ms: 2.775079
   type: 'test'
   ...
 # Subtest: extension pressing recipe and guide appear together and output correct measured liquid
 ok 29 - extension pressing recipe and guide appear together and output correct measured liquid
   ---
-  duration_ms: 2.262364
+  duration_ms: 2.259752
   type: 'test'
   ...
 # Subtest: optional real Cookery API modules coexist on mocked bus without Tavern guide injection
 ok 30 - optional real Cookery API modules coexist on mocked bus without Tavern guide injection # SKIP
   ---
-  duration_ms: 0.054661
+  duration_ms: 0.053005
   type: 'test'
   ...
 # Subtest: already-cancelled event cannot dismantle a machine and dimension-switch cancels deferred action
 ok 31 - already-cancelled event cannot dismantle a machine and dimension-switch cancels deferred action
   ---
-  duration_ms: 0.537957
+  duration_ms: 0.618023
   type: 'test'
   ...
 1..31
@@ -204,4 +204,4 @@ ok 31 - already-cancelled event cannot dismantle a machine and dimension-switch 
 # cancelled 0
 # skipped 1
 # todo 0
-# duration_ms 245.426243
+# duration_ms 245.941095

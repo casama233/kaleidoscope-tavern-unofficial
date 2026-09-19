@@ -1,0 +1,18 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:shaker",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_c3_shaker",
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:shaker.name"
+      },
+      "minecraft:max_stack_size": 1
+    }
+  }
+}

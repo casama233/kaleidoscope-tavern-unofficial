@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static validation of C2 links, manifests and source preservation. Not an engine validator."""
+"""Static validation of C3 links, manifests and source preservation. Not an engine validator."""
 from pathlib import Path
 import json,re,hashlib,subprocess,shutil,sys
 ROOT=Path(__file__).resolve().parents[1];BP=ROOT/'runtime/BP';RP=ROOT/'runtime/RP';A=ROOT/'art'
@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C2-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C3-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,2,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,2,0])
+  check(name+'_version',m['header']['version']==[0,3,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,3,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -72,6 +72,9 @@ def main():
  for p in(BP/'recipes').glob('*.json'):
   v=next(v for k,v in load(p).items()if k.startswith('minecraft:recipe_'))
   result=v['result']['item'];check('crafting_output_exists:'+p.stem,result in item_defs or result in block_defs)
+ check('C3_cup_blocks',sum(x.startswith('kaleidoscope_tavern:cup_')for x in block_defs)==15)
+ check('C3_station_exists','kaleidoscope_tavern:shaker_station'in block_defs)
+ check('C3_signature_nonstackable',item_defs['kaleidoscope_tavern:signature_cocktail']['components']['minecraft:max_stack_size']==1)
  check('24_display_blocks',sum(x.startswith('kaleidoscope_tavern:bottle_')for x in block_defs)==24)
  check('7_cultivation_blocks',sum(x.endswith((':trellis','vine_trellis','_crop'))for x in block_defs)==7)
  for ident in entity_defs:
@@ -100,6 +103,7 @@ def main():
    if run.returncode:broken.append({'file':str(p.relative_to(ROOT)),'stderr':run.stderr})
  check('JS_syntax',not broken,broken)
  check('no_pre_release_solid_or_canPlace_api',not any(re.search(r'\.isSolid\b|\.canPlace\(',p.read_text()) for p in scripts if p.name!='bottle-support.js'))
+ for x in load(ROOT/'data/upstream/c3/source.lock.json')['records']:check('C3_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/c2/source.lock.json')['records']:check('C2_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/recipe-source.lock.json')['records']:check('recipe_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for f in ['protocol.js','util.js','tavern-extension-client.js']:

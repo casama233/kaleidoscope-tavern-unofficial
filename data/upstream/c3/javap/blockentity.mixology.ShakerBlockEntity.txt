@@ -1,0 +1,357 @@
+Compiled from "ShakerBlockEntity.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.blockentity.mixology.ShakerBlockEntity extends com.github.ysbbbbbb.kaleidoscopetavern.blockentity.BaseBlockEntity implements com.github.ysbbbbbb.kaleidoscopetavern.api.blockentity.IShaker {
+  private final net.neoforged.neoforge.items.ItemStackHandler storage;
+
+  private net.minecraft.world.item.ItemStack result;
+
+  public net.minecraft.world.entity.AnimationState putState;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.blockentity.mixology.ShakerBlockEntity(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.SHAKER_BE:Ljava/util/function/Supplier;
+       4: invokeinterface #7,  1            // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       9: checkcast     #13                 // class net/minecraft/world/level/block/entity/BlockEntityType
+      12: aload_1
+      13: aload_2
+      14: invokespecial #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity."<init>":(Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      17: aload_0
+      18: new           #21                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity$1
+      21: dup
+      22: aload_0
+      23: iconst_3
+      24: invokespecial #23                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity$1."<init>":(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity;I)V
+      27: putfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      30: aload_0
+      31: getstatic     #32                 // Field net/minecraft/world/item/ItemStack.EMPTY:Lnet/minecraft/world/item/ItemStack;
+      34: putfield      #38                 // Field result:Lnet/minecraft/world/item/ItemStack;
+      37: aload_0
+      38: new           #41                 // class net/minecraft/world/entity/AnimationState
+      41: dup
+      42: invokespecial #43                 // Method net/minecraft/world/entity/AnimationState."<init>":()V
+      45: putfield      #46                 // Field putState:Lnet/minecraft/world/entity/AnimationState;
+      48: return
+
+  public boolean addIngredient(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: invokevirtual #50                 // Method hasEmptySlots:()Z
+       4: ifne          9
+       7: iconst_0
+       8: ireturn
+       9: aload_1
+      10: invokestatic  #54                 // Method com/github/ysbbbbbb/kaleidoscopetavern/item/BottleBlockItem.isValidForShaker:(Lnet/minecraft/world/item/ItemStack;)Z
+      13: ifne          49
+      16: aload_2
+      17: instanceof    #60                 // class net/minecraft/world/entity/player/Player
+      20: ifeq          47
+      23: aload_2
+      24: checkcast     #60                 // class net/minecraft/world/entity/player/Player
+      27: astore_3
+      28: aload_3
+      29: invokevirtual #62                 // Method net/minecraft/world/entity/player/Player.level:()Lnet/minecraft/world/level/Level;
+      32: getfield      #66                 // Field net/minecraft/world/level/Level.isClientSide:Z
+      35: ifne          47
+      38: aload_3
+      39: ldc           #72                 // String message.kaleidoscope_tavern.shaker.brew_level_too_low
+      41: invokestatic  #74                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      44: invokevirtual #80                 // Method net/minecraft/world/entity/player/Player.sendSystemMessage:(Lnet/minecraft/network/chat/Component;)V
+      47: iconst_0
+      48: ireturn
+      49: aload_1
+      50: iconst_1
+      51: invokevirtual #84                 // Method net/minecraft/world/item/ItemStack.copyWithCount:(I)Lnet/minecraft/world/item/ItemStack;
+      54: astore_3
+      55: aload_0
+      56: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      59: aload_3
+      60: iconst_0
+      61: invokestatic  #88                 // Method net/neoforged/neoforge/items/ItemHandlerHelper.insertItemStacked:(Lnet/neoforged/neoforge/items/IItemHandler;Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/item/ItemStack;
+      64: pop
+      65: aload_0
+      66: invokevirtual #94                 // Method refresh:()V
+      69: aload_1
+      70: invokevirtual #97                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      73: astore        5
+      75: aload         5
+      77: instanceof    #101                // class com/github/ysbbbbbb/kaleidoscopetavern/item/IHasContainer
+      80: ifeq          197
+      83: aload         5
+      85: checkcast     #101                // class com/github/ysbbbbbb/kaleidoscopetavern/item/IHasContainer
+      88: astore        4
+      90: aload_2
+      91: ifnull        197
+      94: aload_0
+      95: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+      98: ifnull        197
+     101: aload         4
+     103: invokeinterface #106,  1          // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/item/IHasContainer.getContainerItem:()Lnet/minecraft/world/item/Item;
+     108: invokevirtual #109                // Method net/minecraft/world/item/Item.getDefaultInstance:()Lnet/minecraft/world/item/ItemStack;
+     111: astore        5
+     113: aload_2
+     114: instanceof    #60                 // class net/minecraft/world/entity/player/Player
+     117: ifeq          136
+     120: aload_2
+     121: checkcast     #60                 // class net/minecraft/world/entity/player/Player
+     124: astore        6
+     126: aload         6
+     128: aload         5
+     130: invokestatic  #115                // Method net/neoforged/neoforge/items/ItemHandlerHelper.giveItemToPlayer:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;)V
+     133: goto          173
+     136: new           #119                // class net/minecraft/world/entity/item/ItemEntity
+     139: dup
+     140: aload_0
+     141: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     144: aload_2
+     145: invokevirtual #121                // Method net/minecraft/world/entity/LivingEntity.getX:()D
+     148: aload_2
+     149: invokevirtual #127                // Method net/minecraft/world/entity/LivingEntity.getY:()D
+     152: aload_2
+     153: invokevirtual #130                // Method net/minecraft/world/entity/LivingEntity.getZ:()D
+     156: aload         5
+     158: invokespecial #133                // Method net/minecraft/world/entity/item/ItemEntity."<init>":(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;)V
+     161: astore        7
+     163: aload_0
+     164: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     167: aload         7
+     169: invokevirtual #136                // Method net/minecraft/world/level/Level.addFreshEntity:(Lnet/minecraft/world/entity/Entity;)Z
+     172: pop
+     173: aload_0
+     174: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     177: aconst_null
+     178: aload_0
+     179: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     182: getstatic     #144                // Field net/minecraft/sounds/SoundEvents.BOTTLE_EMPTY:Lnet/minecraft/sounds/SoundEvent;
+     185: getstatic     #150                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     188: ldc           #156                // float 0.75f
+     190: fconst_1
+     191: invokevirtual #157                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     194: goto          342
+     197: aload_1
+     198: invokevirtual #97                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+     201: instanceof    #161                // class net/minecraft/world/item/PotionItem
+     204: ifeq          314
+     207: aload_2
+     208: ifnull        314
+     211: aload_0
+     212: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     215: ifnull        314
+     218: new           #33                 // class net/minecraft/world/item/ItemStack
+     221: dup
+     222: getstatic     #163                // Field net/minecraft/world/item/Items.GLASS_BOTTLE:Lnet/minecraft/world/item/Item;
+     225: invokespecial #169                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     228: astore        5
+     230: aload_2
+     231: instanceof    #60                 // class net/minecraft/world/entity/player/Player
+     234: ifeq          253
+     237: aload_2
+     238: checkcast     #60                 // class net/minecraft/world/entity/player/Player
+     241: astore        6
+     243: aload         6
+     245: aload         5
+     247: invokestatic  #115                // Method net/neoforged/neoforge/items/ItemHandlerHelper.giveItemToPlayer:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;)V
+     250: goto          290
+     253: new           #119                // class net/minecraft/world/entity/item/ItemEntity
+     256: dup
+     257: aload_0
+     258: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     261: aload_2
+     262: invokevirtual #121                // Method net/minecraft/world/entity/LivingEntity.getX:()D
+     265: aload_2
+     266: invokevirtual #127                // Method net/minecraft/world/entity/LivingEntity.getY:()D
+     269: aload_2
+     270: invokevirtual #130                // Method net/minecraft/world/entity/LivingEntity.getZ:()D
+     273: aload         5
+     275: invokespecial #133                // Method net/minecraft/world/entity/item/ItemEntity."<init>":(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;)V
+     278: astore        7
+     280: aload_0
+     281: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     284: aload         7
+     286: invokevirtual #136                // Method net/minecraft/world/level/Level.addFreshEntity:(Lnet/minecraft/world/entity/Entity;)Z
+     289: pop
+     290: aload_0
+     291: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     294: aconst_null
+     295: aload_0
+     296: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     299: getstatic     #144                // Field net/minecraft/sounds/SoundEvents.BOTTLE_EMPTY:Lnet/minecraft/sounds/SoundEvent;
+     302: getstatic     #150                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     305: ldc           #156                // float 0.75f
+     307: fconst_1
+     308: invokevirtual #157                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     311: goto          342
+     314: aload_0
+     315: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     318: ifnull        342
+     321: aload_0
+     322: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     325: aconst_null
+     326: aload_0
+     327: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     330: getstatic     #172                // Field net/minecraft/sounds/SoundEvents.ITEM_FRAME_ADD_ITEM:Lnet/minecraft/sounds/SoundEvent;
+     333: getstatic     #150                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     336: ldc           #156                // float 0.75f
+     338: fconst_1
+     339: invokevirtual #157                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     342: aload_1
+     343: iconst_1
+     344: invokevirtual #175                // Method net/minecraft/world/item/ItemStack.shrink:(I)V
+     347: aload_0
+     348: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     351: ifnull        369
+     354: aload_0
+     355: getfield      #46                 // Field putState:Lnet/minecraft/world/entity/AnimationState;
+     358: aload_0
+     359: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     362: invokevirtual #179                // Method net/minecraft/world/level/Level.getGameTime:()J
+     365: l2i
+     366: invokevirtual #183                // Method net/minecraft/world/entity/AnimationState.start:(I)V
+     369: aload_0
+     370: getfield      #103                // Field level:Lnet/minecraft/world/level/Level;
+     373: astore        5
+     375: aload         5
+     377: instanceof    #186                // class net/minecraft/server/level/ServerLevel
+     380: ifeq          447
+     383: aload         5
+     385: checkcast     #186                // class net/minecraft/server/level/ServerLevel
+     388: astore        4
+     390: aload         4
+     392: getstatic     #188                // Field net/minecraft/core/particles/ParticleTypes.BUBBLE_POP:Lnet/minecraft/core/particles/SimpleParticleType;
+     395: aload_0
+     396: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     399: invokevirtual #194                // Method net/minecraft/core/BlockPos.getX:()I
+     402: i2d
+     403: ldc2_w        #199                // double 0.5d
+     406: dadd
+     407: aload_0
+     408: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     411: invokevirtual #201                // Method net/minecraft/core/BlockPos.getY:()I
+     414: i2d
+     415: ldc2_w        #203                // double 0.75d
+     418: dadd
+     419: aload_0
+     420: getfield      #140                // Field worldPosition:Lnet/minecraft/core/BlockPos;
+     423: invokevirtual #205                // Method net/minecraft/core/BlockPos.getZ:()I
+     426: i2d
+     427: ldc2_w        #199                // double 0.5d
+     430: dadd
+     431: bipush        8
+     433: ldc2_w        #207                // double 0.2d
+     436: ldc2_w        #209                // double 0.3d
+     439: ldc2_w        #207                // double 0.2d
+     442: dconst_0
+     443: invokevirtual #211                // Method net/minecraft/server/level/ServerLevel.sendParticles:(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I
+     446: pop
+     447: iconst_1
+     448: ireturn
+
+  private boolean hasEmptySlots();
+    Code:
+       0: iconst_0
+       1: istore_1
+       2: iload_1
+       3: aload_0
+       4: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+       7: invokevirtual #215                // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      10: if_icmpge     37
+      13: aload_0
+      14: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      17: iload_1
+      18: invokevirtual #220                // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      21: astore_2
+      22: aload_2
+      23: invokevirtual #223                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      26: ifeq          31
+      29: iconst_1
+      30: ireturn
+      31: iinc          1, 1
+      34: goto          2
+      37: iconst_0
+      38: ireturn
+
+  protected void saveAdditional(net.minecraft.nbt.CompoundTag, net.minecraft.core.HolderLookup$Provider);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #226                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity.saveAdditional:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+       6: aload_1
+       7: ldc           #230                // String Storage
+       9: aload_0
+      10: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      13: aload_2
+      14: invokevirtual #232                // Method net/neoforged/neoforge/items/ItemStackHandler.serializeNBT:(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/CompoundTag;
+      17: invokevirtual #236                // Method net/minecraft/nbt/CompoundTag.put:(Ljava/lang/String;Lnet/minecraft/nbt/Tag;)Lnet/minecraft/nbt/Tag;
+      20: pop
+      21: aload_1
+      22: ldc           #242                // String result
+      24: aload_0
+      25: getfield      #38                 // Field result:Lnet/minecraft/world/item/ItemStack;
+      28: aload_2
+      29: invokevirtual #243                // Method net/minecraft/world/item/ItemStack.saveOptional:(Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/nbt/Tag;
+      32: invokevirtual #236                // Method net/minecraft/nbt/CompoundTag.put:(Ljava/lang/String;Lnet/minecraft/nbt/Tag;)Lnet/minecraft/nbt/Tag;
+      35: pop
+      36: return
+
+  public void loadAdditional(net.minecraft.nbt.CompoundTag, net.minecraft.core.HolderLookup$Provider);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #247                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity.loadAdditional:(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/core/HolderLookup$Provider;)V
+       6: aload_0
+       7: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      10: aload_2
+      11: aload_1
+      12: ldc           #230                // String Storage
+      14: invokevirtual #250                // Method net/minecraft/nbt/CompoundTag.getCompound:(Ljava/lang/String;)Lnet/minecraft/nbt/CompoundTag;
+      17: invokevirtual #254                // Method net/neoforged/neoforge/items/ItemStackHandler.deserializeNBT:(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/CompoundTag;)V
+      20: aload_0
+      21: aload_2
+      22: aload_1
+      23: ldc           #242                // String result
+      25: invokevirtual #250                // Method net/minecraft/nbt/CompoundTag.getCompound:(Ljava/lang/String;)Lnet/minecraft/nbt/CompoundTag;
+      28: invokestatic  #258                // Method net/minecraft/world/item/ItemStack.parseOptional:(Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/item/ItemStack;
+      31: putfield      #38                 // Field result:Lnet/minecraft/world/item/ItemStack;
+      34: return
+
+  public net.neoforged.neoforge.items.ItemStackHandler getStorage();
+    Code:
+       0: aload_0
+       1: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+       4: areturn
+
+  public void setStorage(net.neoforged.neoforge.items.ItemStackHandler);
+    Code:
+       0: iconst_0
+       1: istore_2
+       2: iload_2
+       3: aload_1
+       4: invokevirtual #215                // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+       7: if_icmpge     31
+      10: aload_1
+      11: iload_2
+      12: invokevirtual #220                // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      15: astore_3
+      16: aload_0
+      17: getfield      #26                 // Field storage:Lnet/neoforged/neoforge/items/ItemStackHandler;
+      20: iload_2
+      21: aload_3
+      22: invokevirtual #262                // Method net/neoforged/neoforge/items/ItemStackHandler.setStackInSlot:(ILnet/minecraft/world/item/ItemStack;)V
+      25: iinc          2, 1
+      28: goto          2
+      31: return
+
+  public net.minecraft.world.item.ItemStack getResult();
+    Code:
+       0: aload_0
+       1: getfield      #38                 // Field result:Lnet/minecraft/world/item/ItemStack;
+       4: areturn
+
+  public void setResult(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #38                 // Field result:Lnet/minecraft/world/item/ItemStack;
+       5: return
+}

@@ -3,7 +3,7 @@ import {packetsFor,EVENTS} from './protocol.js';
 import {canonical,digest} from './util.js';
 export function registerTavernExtension(system,payload,{log=console.warn,maxAttempts=3}={}){
  const revision='r'+digest(canonical(payload));const packets=packetsFor(payload,revision);
- let done=false,disposed=false,sending=false,attempts=0,timeout;
+ let done=false,disposed=false,sending=false,attempts=0,timeout,warnedCapability=false;
  if(!Number.isInteger(maxAttempts)||maxAttempts<1||maxAttempts>10)throw new Error('maxAttempts must be 1..10');const queue=[];
  const transmit=()=>{
   if(done||disposed||sending||attempts>=maxAttempts)return;sending=true;attempts++;queue.splice(0,queue.length,...packets);
@@ -13,7 +13,7 @@ export function registerTavernExtension(system,payload,{log=console.warn,maxAtte
  };
  const callback=ev=>{
   if(disposed||ev.sourceType!=='Server')return;
-  if(ev.id===EVENTS.ready){try{const info=JSON.parse(ev.message);if(info.api===1)transmit();}catch{log('[Tavern SDK] Invalid ready payload');}}
+  if(ev.id===EVENTS.ready){try{const info=JSON.parse(ev.message);if(info.api===1){if((payload.recipes??[]).some(r=>r.kind==='shaker')&&!info.capabilities?.includes('shaker_recipes')){if(!warnedCapability){warnedCapability=true;log('[Tavern SDK] Host lacks shaker_recipes; no mixology payload sent.');}return;}transmit();}}catch{log('[Tavern SDK] Invalid ready payload');}}
   if(ev.id===EVENTS.ack){try{const ack=JSON.parse(ev.message);if(ack.source!==payload.source||ack.revision!==revision)return;if(timeout)system.clearRun(timeout);sending=false;
    if(ack.ok){done=true;log('[Tavern SDK] Registered '+payload.source);}else{attempts=maxAttempts;log('[Tavern SDK] Rejected '+payload.source+': '+ack.code);}
   }catch{log('[Tavern SDK] Invalid acknowledgement');}}

@@ -32,6 +32,22 @@
       "pass": 47,
       "fail": 0,
       "skipped": 0
+    },
+    {
+      "suite": "c3-core",
+      "exit_code": 0,
+      "tests": 33,
+      "pass": 33,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "c3-runtime",
+      "exit_code": 0,
+      "tests": 63,
+      "pass": 63,
+      "fail": 0,
+      "skipped": 0
     }
   ],
   "typescript": {
@@ -42,7 +58,7 @@
   "real_Cookery_API_modules_loaded": false,
   "Cookery_test_scope": "Only recipe and guide API modules on the mocked event bus, not whole Cookery/game startup.",
   "engine_acceptance": "NOT_RUN",
-  "combined_pass": 143,
+  "combined_pass": 239,
   "combined_fail": 0,
-  "scenario_note": "Inventory and exhaustive family/quality cases are property tests counted once, not hundreds of separate engine tests. C2 end-to-end test connects actual adapters but explicitly does not emulate native item consumption."
+  "scenario_note": "Family/quality loops are counted as individual test cases, not hundreds of separate engine tests. Includes all12 recipe adapters, all69 input qualities, C2 end-to-end adapters, C3 session/state/transactions, packaged demo and real Cookery API mock-bus coexistence. Native consumption/renderer/chunk persistence are NOT emulated."
 }

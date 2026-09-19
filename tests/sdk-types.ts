@@ -1,4 +1,4 @@
-import {registerTavernExtension,type TavernExtension,type ScriptSystemLike,type BarrelRecipe,type PressingRecipe} from '../sdk/tavern-extension-client.js';
+import {registerTavernExtension,type TavernExtension,type ScriptSystemLike,type BarrelRecipe,type PressingRecipe,type ShakerRecipe} from '../sdk/tavern-extension-client.js';
 const payload:TavernExtension={api:1,source:'example',version:'1.0.0',recipes:[{id:'example:apple',kind:'pressing',input:['minecraft:apple'],fluid:'kaleidoscope_tavern:grape_juice',amount:250},{id:'example:wine',kind:'barrel',fluid:'minecraft:water',ingredients:[['minecraft:glow_berries']],output:{item:'kaleidoscope_tavern:wine_q3'}}],pages:[{id:'example:about',title:{en_US:'About'},body:{zh_TW:'說明'}}]};
 declare const system:ScriptSystemLike;
 registerTavernExtension(system,payload,{maxAttempts:3});
@@ -10,3 +10,12 @@ const badQuality:BarrelRecipe={id:'example:bad',kind:'barrel',fluid:'minecraft:w
 const unsupported:PressingRecipe={id:'example:bad',kind:'shaker',input:[],fluid:'minecraft:water',amount:125};
 // @ts-expect-error Pressing cannot pretend it has barrel quality outputs
 const badPress:PressingRecipe={id:'example:bad',kind:'pressing',input:['minecraft:apple'],fluid:'minecraft:water',amount:125,output:{item:'example:drink'}};
+
+const shaker:ShakerRecipe={id:'example:mix',kind:'shaker',ingredients:[['kaleidoscope_tavern:wine_q4'],['kaleidoscope_cookery:rice'],['minecraft:apple']],output:{item:'kaleidoscope_tavern:emerald'}};
+const mixed:TavernExtension={api:1,source:'example',version:'1.0.0',recipes:[shaker]};
+// @ts-expect-error Shaker requires exactly three ingredient slots
+const badShakerSlots:ShakerRecipe={id:'example:bad',kind:'shaker',ingredients:[['minecraft:apple']],output:{item:'example:cup'}};
+// @ts-expect-error Shaker output is one item, not fermentation qualities
+const badShakerQuality:ShakerRecipe={id:'example:bad',kind:'shaker',ingredients:[['minecraft:apple'],['minecraft:apple'],['minecraft:apple']],output:{byQuality:['a:b','a:c','a:d','a:e','a:f','a:g']}};
+// @ts-expect-error Shaker recipes do not consume a barrel fluid
+const badShakerFluid:ShakerRecipe={id:'example:bad',kind:'shaker',ingredients:[['minecraft:apple'],['minecraft:apple'],['minecraft:apple']],fluid:'minecraft:water',output:{item:'example:cup'}};

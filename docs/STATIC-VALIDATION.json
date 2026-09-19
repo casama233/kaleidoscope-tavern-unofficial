@@ -1,12 +1,12 @@
 {
   "scope": "Static file/contract checks; NOT Minecraft schema/engine acceptance",
-  "json_files": 691,
-  "items": 159,
-  "blocks": 35,
-  "runtime_visual_entities": 14,
-  "script_files": 27,
-  "checks": 2526,
-  "passed": 2526,
+  "json_files": 727,
+  "items": 175,
+  "blocks": 51,
+  "runtime_visual_entities": 15,
+  "script_files": 31,
+  "checks": 2841,
+  "passed": 2841,
   "failed": [],
   "engine_acceptance": "NOT_RUN",
   "results": [
@@ -81,6 +81,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:sunset_glow_q4",
       "passed": true,
       "detail": ""
@@ -106,12 +111,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:champagne_q1",
       "passed": true,
       "detail": ""
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:whiskey_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:nether_special",
       "passed": true,
       "detail": ""
     },
@@ -147,6 +162,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:sherry_q6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:white_lady",
       "passed": true,
       "detail": ""
     },
@@ -221,7 +241,22 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:honey_wine_q3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:screwdriver",
       "passed": true,
       "detail": ""
     },
@@ -326,6 +361,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:sherry_q3",
       "passed": true,
       "detail": ""
@@ -342,6 +382,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:shaker",
       "passed": true,
       "detail": ""
     },
@@ -382,6 +427,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:miners_star_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:depth_charge",
       "passed": true,
       "detail": ""
     },
@@ -447,6 +497,11 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:rum_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:grasshopper",
       "passed": true,
       "detail": ""
     },
@@ -596,6 +651,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:sweet_berry_wine_q5",
       "passed": true,
       "detail": ""
@@ -671,6 +731,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:sunset_glow_q5",
       "passed": true,
       "detail": ""
@@ -726,7 +791,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:sherry_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:signature_cocktail",
       "passed": true,
       "detail": ""
     },
@@ -861,6 +936,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:luminous_bride_q5",
       "passed": true,
       "detail": ""
@@ -946,12 +1026,42 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:signature_cup_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_nether_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_screwdriver",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_honey_wine",
       "passed": true,
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_glowflower_brew",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_signature_cocktail",
       "passed": true,
       "detail": ""
     },
@@ -981,6 +1091,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_ice_wine",
       "passed": true,
       "detail": ""
@@ -1001,6 +1116,21 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_depth_charge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:shaker_station",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_grasshopper",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_sakura_wine",
       "passed": true,
       "detail": ""
@@ -1016,7 +1146,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_plum_wine",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_white_lady",
       "passed": true,
       "detail": ""
     },
@@ -1061,7 +1201,17 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_sauvignon_blanc_dry_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_brass_heart",
       "passed": true,
       "detail": ""
     },
@@ -1096,6 +1246,11 @@
       "detail": ""
     },
     {
+      "check": "unique_definition:kaleidoscope_tavern:cup_godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "unique_definition:kaleidoscope_tavern:bottle_sunset_glow",
       "passed": true,
       "detail": ""
@@ -1107,6 +1262,16 @@
     },
     {
       "check": "unique_definition:kaleidoscope_tavern:bottle_whiskey",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "unique_definition:kaleidoscope_tavern:cup_bloody_mary",
       "passed": true,
       "detail": ""
     },
@@ -4221,6 +4386,96 @@
       "detail": ""
     },
     {
+      "check": "icon_texture:kt_c3_shaker",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_white_lady",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_grasshopper",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_screwdriver",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_depth_charge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_nether_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_signature_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "icon_texture:kt_c3_mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:sunset_glow_q4",
       "passed": true,
       "detail": ""
@@ -4271,6 +4526,11 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:champagne_q1",
       "passed": true,
       "detail": ""
@@ -4287,6 +4547,16 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:whiskey_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:nether_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:nether_special",
       "passed": true,
       "detail": ""
     },
@@ -4357,6 +4627,16 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:sherry_q6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:white_lady",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:white_lady",
       "passed": true,
       "detail": ""
     },
@@ -4496,12 +4776,42 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:honey_wine_q3",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:honey_wine_q3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:screwdriver",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:screwdriver",
       "passed": true,
       "detail": ""
     },
@@ -4696,6 +5006,16 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:sherry_q3",
       "passed": true,
       "detail": ""
@@ -4727,6 +5047,11 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:sauvignon_blanc_dry_white_q4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:shaker",
       "passed": true,
       "detail": ""
     },
@@ -4802,6 +5127,16 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:miners_star_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:depth_charge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:depth_charge",
       "passed": true,
       "detail": ""
     },
@@ -4932,6 +5267,16 @@
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:rum_q1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:grasshopper",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:grasshopper",
       "passed": true,
       "detail": ""
     },
@@ -5216,6 +5561,16 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:sweet_berry_wine_q5",
       "passed": true,
       "detail": ""
@@ -5366,6 +5721,16 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:sunset_glow_q5",
       "passed": true,
       "detail": ""
@@ -5476,12 +5841,32 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:sherry_q5",
       "passed": true,
       "detail": ""
     },
     {
       "check": "food_duration_and_remainder:kaleidoscope_tavern:sherry_q5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "item_icon_binding:kaleidoscope_tavern:signature_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:signature_cocktail",
       "passed": true,
       "detail": ""
     },
@@ -5726,6 +6111,16 @@
       "detail": ""
     },
     {
+      "check": "item_icon_binding:kaleidoscope_tavern:mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "food_duration_and_remainder:kaleidoscope_tavern:mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "item_icon_binding:kaleidoscope_tavern:luminous_bride_q5",
       "passed": true,
       "detail": ""
@@ -5756,6 +6151,66 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_empty_glassware:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_empty_glassware:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_nether_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_nether_special:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_nether_special:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_nether_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_screwdriver",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_screwdriver:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_screwdriver:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_screwdriver",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_honey_wine",
       "passed": true,
       "detail": ""
@@ -5771,6 +6226,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_mojito:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_mojito:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_mojito",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_glowflower_brew",
       "passed": true,
       "detail": ""
@@ -5782,6 +6257,26 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_glowflower_brew",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_signature_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_signature_cocktail:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_signature_cocktail:tint_0_unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_signature_cocktail",
       "passed": true,
       "detail": ""
     },
@@ -5861,6 +6356,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_allium_garden:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_allium_garden:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_allium_garden",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_ice_wine",
       "passed": true,
       "detail": ""
@@ -5921,6 +6436,61 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_depth_charge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_depth_charge:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_depth_charge:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_depth_charge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:shaker_station",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:shaker_station:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:shaker_station",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_grasshopper",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_grasshopper:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_grasshopper:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_grasshopper",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_sakura_wine",
       "passed": true,
       "detail": ""
@@ -5971,6 +6541,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_sculk_special:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_sculk_special:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_sculk_special",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_plum_wine",
       "passed": true,
       "detail": ""
@@ -5982,6 +6572,26 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_plum_wine",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_white_lady",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_white_lady:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_white_lady:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_white_lady",
       "passed": true,
       "detail": ""
     },
@@ -6106,6 +6716,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_emerald:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_emerald:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_emerald",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_sauvignon_blanc_dry_white",
       "passed": true,
       "detail": ""
@@ -6117,6 +6747,26 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_sauvignon_blanc_dry_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_brass_heart",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_brass_heart:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_brass_heart:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_brass_heart",
       "passed": true,
       "detail": ""
     },
@@ -6216,6 +6866,26 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_godfather:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_godfather:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_godfather",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:bottle_sunset_glow",
       "passed": true,
       "detail": ""
@@ -6266,6 +6936,46 @@
       "detail": ""
     },
     {
+      "check": "block_geometry:kaleidoscope_tavern:cup_mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_mystery_cocktail:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_mystery_cocktail:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_mystery_cocktail",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_geometry:kaleidoscope_tavern:cup_bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_bloody_mary:*",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_texture:kaleidoscope_tavern:cup_bloody_mary:unshaded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "block_protected_C2:kaleidoscope_tavern:cup_bloody_mary",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "block_geometry:kaleidoscope_tavern:trellis",
       "passed": true,
       "detail": ""
@@ -6292,6 +7002,66 @@
     },
     {
       "check": "block_protected_C2:kaleidoscope_tavern:bottle_polaris_sweet_white",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_empty_glassware:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_empty_glassware:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_empty_glassware:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_empty_glassware:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_nether_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_nether_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_nether_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_nether_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_screwdriver:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_screwdriver:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_screwdriver:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_screwdriver:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -6376,6 +7146,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_mojito:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mojito:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mojito:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mojito:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_glowflower_brew:0",
       "passed": true,
       "detail": ""
@@ -6452,6 +7242,26 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_glowflower_brew:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_signature_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_signature_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_signature_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_signature_cocktail:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -6841,6 +7651,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_allium_garden:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_allium_garden:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_allium_garden:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_allium_garden:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_ice_wine:0",
       "passed": true,
       "detail": ""
@@ -7142,6 +7972,66 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_luminous_bride:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_depth_charge:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_depth_charge:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_depth_charge:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_depth_charge:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:shaker_station:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:shaker_station:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:shaker_station:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:shaker_station:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_grasshopper:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_grasshopper:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_grasshopper:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_grasshopper:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -8011,6 +8901,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_sculk_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_sculk_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_sculk_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_sculk_special:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_plum_wine:0",
       "passed": true,
       "detail": ""
@@ -8087,6 +8997,26 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_plum_wine:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_white_lady:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_white_lady:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_white_lady:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_white_lady:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -8521,6 +9451,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_emerald:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_emerald:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_emerald:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_emerald:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_sauvignon_blanc_dry_white:0",
       "passed": true,
       "detail": ""
@@ -8597,6 +9547,26 @@
     },
     {
       "check": "declared_state:kaleidoscope_tavern:bottle_sauvignon_blanc_dry_white:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_brass_heart:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_brass_heart:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_brass_heart:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_brass_heart:kaleidoscope_tavern:facing",
       "passed": true,
       "detail": ""
     },
@@ -9641,6 +10611,26 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_godfather:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_godfather:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_godfather:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_godfather:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:bottle_sunset_glow:0",
       "passed": true,
       "detail": ""
@@ -10491,6 +11481,46 @@
       "detail": ""
     },
     {
+      "check": "declared_state:kaleidoscope_tavern:cup_mystery_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mystery_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mystery_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_mystery_cocktail:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_bloody_mary:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_bloody_mary:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_bloody_mary:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "declared_state:kaleidoscope_tavern:cup_bloody_mary:kaleidoscope_tavern:facing",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "permutation_geometry:kaleidoscope_tavern:trellis:0",
       "passed": true,
       "detail": ""
@@ -10681,12 +11711,22 @@
       "detail": ""
     },
     {
+      "check": "crafting_output_exists:empty_glassware",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "crafting_output_exists:guidebook",
       "passed": true,
       "detail": ""
     },
     {
       "check": "crafting_output_exists:empty_bottle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "crafting_output_exists:shaker",
       "passed": true,
       "detail": ""
     },
@@ -10717,6 +11757,21 @@
     },
     {
       "check": "crafting_output_exists:trellis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_cup_blocks",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_station_exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_signature_nonstackable",
       "passed": true,
       "detail": ""
     },
@@ -11011,6 +12066,26 @@
       "detail": ""
     },
     {
+      "check": "entity_client:kaleidoscope_tavern:signature_cup_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_geometries:kaleidoscope_tavern:signature_cup_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_textures:kaleidoscope_tavern:signature_cup_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "entity_controllers:kaleidoscope_tavern:signature_cup_visual",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "A17_art_preserved",
       "passed": true,
       "detail": {
@@ -11084,6 +12159,21 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/main.js:./data/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/main.js:./data/mixology-pages.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/main.js:./bedrock/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "no_Cookery_mutating_bus:scripts/main.js",
       "passed": true,
       "detail": ""
@@ -11134,6 +12224,16 @@
       "detail": ""
     },
     {
+      "check": "no_Cookery_mutating_bus:scripts/data/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/data/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "no_Cookery_mutating_bus:scripts/data/visuals.js",
       "passed": true,
       "detail": ""
@@ -11170,6 +12270,16 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/data/effect-pages.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/data/mixology-pages.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/data/mixology-pages.js",
       "passed": true,
       "detail": ""
     },
@@ -11255,6 +12365,61 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/bedrock/extension-host.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "only_public_engine_module:@minecraft/server",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/storage.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/inventory.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../data/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/bottle-support.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:../core/drink-effects.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/bedrock/mixology.js:./transactions.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/bedrock/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/bedrock/mixology.js",
       "passed": true,
       "detail": ""
     },
@@ -11439,6 +12604,31 @@
       "detail": ""
     },
     {
+      "check": "import:scripts/core/mixology.js:./util.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/mixology.js:./bottles.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/mixology.js:../data/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_mutating_bus:scripts/core/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no_Cookery_player_properties:scripts/core/mixology.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
       "check": "import:scripts/core/machines.js:./util.js",
       "passed": true,
       "detail": ""
@@ -11450,6 +12640,11 @@
     },
     {
       "check": "no_Cookery_player_properties:scripts/core/machines.js",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "import:scripts/core/registry.js:../data/mixology.js",
       "passed": true,
       "detail": ""
     },
@@ -11585,6 +12780,386 @@
     },
     {
       "check": "no_pre_release_solid_or_canPlace_api",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/allium_garden.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/bloody_mary.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/brandy.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/brass_heart.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/carignan.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/champagne.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/depth_charge.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/emerald.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/glowflower_brew.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/godfather.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/grasshopper.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/honey_wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/ice_wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/luminous_bride.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/madame_shexiang.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/miners_star.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/mojito.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/mother_snow.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/mystery_cocktail.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/nether_special.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/plum_wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/polaris_sweet_white.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/red_queen.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/riesling_dry_white.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/rum.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sakura_wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sauvignon_blanc_dry_white.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/screwdriver.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sculk_special.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sherry.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sunset_glow.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/sweet_berry_wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/vinegar.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/vodka.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/whiskey.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/white_lady.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/datamap/drink_effect/wine.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/empty_glassware.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/allium_garden.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/bloody_mary.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/brass_heart.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/depth_charge.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/emerald.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/godfather.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/grasshopper.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/mojito.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/nether_special.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/screwdriver.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/sculk_special.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/recipe/shaker/white_lady.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_aqua.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_black.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_blue.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_aqua.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_blue.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_gray.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_green.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_purple.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_dark_red.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_gold.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_gray.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_green.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_light_purple.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_red.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_white.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/data/kaleidoscope_tavern/tags/item/cocktail_ingredient_yellow.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/item.ShakerItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/item.BottleBlockItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/blockentity.mixology.ShakerBlockEntity.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/util.CocktailEffectHelper.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/util.ColorUtils.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/item.CocktailBlockItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/item.SignatureCocktailBlockItem.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "C3_source:data/upstream/c3/javap/block.mixology.MysteryCocktailBlock.txt",
       "passed": true,
       "detail": ""
     },

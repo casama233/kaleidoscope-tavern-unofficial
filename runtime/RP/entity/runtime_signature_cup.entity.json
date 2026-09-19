@@ -1,0 +1,22 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:signature_cup_visual",
+      "materials": {
+        "default": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/mixology/signature_cocktail"
+      },
+      "geometry": {
+        "glass": "geometry.kt_assets_a17.rig_signature_glass",
+        "liquid": "geometry.kt_assets_a17.rig_signature_liquid"
+      },
+      "render_controllers": [
+        "controller.render.kt_assets_a17.signature_glass",
+        "controller.render.kt_assets_a17.signature_tint"
+      ]
+    }
+  }
+}

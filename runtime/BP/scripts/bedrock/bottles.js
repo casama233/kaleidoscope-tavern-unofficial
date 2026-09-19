@@ -9,7 +9,7 @@ import {FARM_IDS} from './cultivation.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
-const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap'].map(x=>NS+':'+x));
+const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap','shaker_station'].map(x=>NS+':'+x));
 const store=new BottleStore(world),locks=new Locks();
 function supported(d,p){const b=blockAt(d,plus(p,{x:0,y:-1,z:0}));return b?isBottleSupport(b.typeId,b.getTags?.()??[]):false;}
 function permutation(s){return BlockPermutation.resolve(`${NS}:bottle_${s.base}`,{[COUNT]:s.items.length,[FACING]:s.facing});}

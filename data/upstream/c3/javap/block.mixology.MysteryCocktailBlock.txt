@@ -1,0 +1,79 @@
+Compiled from "MysteryCocktailBlock.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.block.mixology.MysteryCocktailBlock extends com.github.ysbbbbbb.kaleidoscopetavern.block.mixology.CocktailBlock {
+  public com.github.ysbbbbbb.kaleidoscopetavern.block.mixology.MysteryCocktailBlock();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/CocktailBlock."<init>":()V
+       4: return
+
+  public void animateTick(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource);
+    Code:
+       0: aload_3
+       1: invokevirtual #7                  // Method net/minecraft/core/BlockPos.getX:()I
+       4: i2d
+       5: ldc2_w        #13                 // double 0.5d
+       8: dadd
+       9: dstore        5
+      11: aload_3
+      12: invokevirtual #15                 // Method net/minecraft/core/BlockPos.getY:()I
+      15: i2d
+      16: ldc2_w        #13                 // double 0.5d
+      19: dadd
+      20: dstore        7
+      22: aload_3
+      23: invokevirtual #18                 // Method net/minecraft/core/BlockPos.getZ:()I
+      26: i2d
+      27: ldc2_w        #13                 // double 0.5d
+      30: dadd
+      31: dstore        9
+      33: aload         4
+      35: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      40: dstore        11
+      42: aload         4
+      44: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      49: dstore        13
+      51: aload         4
+      53: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      58: dstore        15
+      60: aload_2
+      61: getstatic     #27                 // Field net/minecraft/core/particles/ParticleTypes.EFFECT:Lnet/minecraft/core/particles/SimpleParticleType;
+      64: dload         5
+      66: aload         4
+      68: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      73: ldc2_w        #33                 // double 5.0d
+      76: ddiv
+      77: aload         4
+      79: invokeinterface #35,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextBoolean:()Z
+      84: ifeq          91
+      87: iconst_1
+      88: goto          92
+      91: iconst_m1
+      92: i2d
+      93: dmul
+      94: dadd
+      95: dload         7
+      97: aload         4
+      99: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+     104: ldc2_w        #33                 // double 5.0d
+     107: ddiv
+     108: dadd
+     109: dload         9
+     111: aload         4
+     113: invokeinterface #21,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+     118: ldc2_w        #33                 // double 5.0d
+     121: ddiv
+     122: aload         4
+     124: invokeinterface #35,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextBoolean:()Z
+     129: ifeq          136
+     132: iconst_1
+     133: goto          137
+     136: iconst_m1
+     137: i2d
+     138: dmul
+     139: dadd
+     140: dload         11
+     142: dload         13
+     144: dload         15
+     146: invokevirtual #39                 // Method net/minecraft/world/level/Level.addParticle:(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V
+     149: return
+}

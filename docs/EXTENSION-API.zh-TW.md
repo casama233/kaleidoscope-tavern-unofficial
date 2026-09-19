@@ -1,4 +1,4 @@
-# Tavern Extension API v1 — 附屬作者入口
+# Tavern Extension API v1（C3 additive capabilities）— 附屬作者入口
 
 本接口只管目前真正實作的能力。**它不是Cookery擴充API，也不要求把頁面注入廚房指南。** 指南與實際機器都讀酒館同一份registry。
 
@@ -38,9 +38,9 @@ const registration = registerTavernExtension(system, {
 
 ## 二、實際能力
 
-`api_ready`公開：`barrel_recipes`、`pressing_recipes`、`guide_pages`、`recipe_auto_pages`、`atomic_extension_replace`、`chunk_transport`、`acknowledgements`。
+`api_ready`公開：`barrel_recipes`、`pressing_recipes`、`guide_pages`、`recipe_auto_pages`、`atomic_extension_replace`、`chunk_transport`、`acknowledgements`、`shaker_recipes`、`shaker_batch_snapshot`。
 
-目前不支援新增真正流體註冊、自訂槽數工作站、雪克杯配方、任意效果脚本回呼或任意可執行程式碼。不要把未公布的字段當作這些能力存在。
+C3新增三槽雪克杯配方，完整格式見後文。仍不支援新增真正流體註冊、自訂槽數工作站、任意效果脚本回呼或任意可執行程式碼。不要把未公布的字段當作這些能力存在。
 
 ### 酒桶配方
 
@@ -130,3 +130,44 @@ API仍為1；原有配方、指南、能力握手、ACK和分包格式未改。D
 C2內建種植、酒效及多瓶展示不是任意附屬自動獲得的隱藏API；第三方新物品須自備相應美術／效果。酒館內建24族的不同品質可以共同擺放，逐瓶保存ID。
 
 擺瓶支撐有一項靜態opt-in：自訂全頂面方塊可提供`kaleidoscope_tavern:bottle_support`方塊標籤；主機用公開`getTags()`讀取。這不是對所有Cookery桌子自動注入標籤，也不執行未知外包腳本。請自測表面高度，勿給零碰撞植物或液體貼此標籤。
+
+
+## 六、C3新增：調酒配方
+
+API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使用調酒，host需宣告`shaker_recipes`。C3 SDK對含shaker的bundle先檢查此能力，缺少則不傳輸，`registered`保持false；不要將新版調酒payload直接當成可在C1/C2運作。主包manifest依賴版本必須更新到`[0,3,0]`。
+
+```json
+{
+  "api": 1,
+  "source": "my_mixology",
+  "version": "1.0.0",
+  "recipes": [{
+    "id": "my_mixology:rice_mix",
+    "kind": "shaker",
+    "ingredients": [
+      ["kaleidoscope_cookery:rice"],
+      ["kaleidoscope_cookery:rice"],
+      ["kaleidoscope_cookery:rice"]
+    ],
+    "output": {"item": "kaleidoscope_tavern:emerald"},
+    "carrier": "kaleidoscope_tavern:empty_glassware",
+    "title": {"zh_TW": "測試用米調酒"}
+  }]
+}
+```
+
+這是測試資料，不是原版食譜。`ingredients`恰好三槽，各槽1–16個可擇一ID；每次投料只一件，以回溯演算法做無序匹配，不因重複或重疊選項錯配。所有ID須已被遊戲載入。`output`只能是固定一件，不能用`byQuality`或要求核心憑空產生自己的特調payload。接酒容器預設空雞尾酒杯。
+
+可引用的酒館基酒限`data/mixology.js`的69個Q4–Q6實例。Q1–Q3、醋與未適配的酒館品質物品、原版藥水ID會在註冊時被拒絕，而非顯示一個無法投入的配方。`minecraft:potion`、splash與lingering都未適配，不能把aux／附加藥水資料扔掉再當白色材料。
+
+已註冊附屬可另外列普通外部物品，例如Cookery米。這些物品採中性白色、無推測效果、無推測返還容器；帶名稱、附魔、附加資料的實例仍被拒收。**目前沒有公開接口指定外部原料的顏色、效果或返還容器**，不要拿這個接口當成藥水／外部瓶裝飲品適配API。
+
+原作固定時間窗口不可由配方覆蓋。滿三槽後開始計時，主機捕捉當前選中的固定配方快照；89–98tick用此快照，即使附屬在期間更新或卸載，也不改成另一輸出。當次沒有匹配則在固定窗口生成特調；19–68或>=99仍是神秘。品名、顏色和原生效果均來自已保存投料資料，而非取杯時重新查可變註冊表。
+
+內建配方仍優先；附屬不能用相同三色組合覆蓋核心。自訂普通材料可建立不衝突配方。未知輸出包缺失時，接酒拒絕並保留結果。附屬自己的任意產物、任意carrier只支持手持領取；只有本體已定義的杯具且carrier為空雞尾酒杯時可倒入放置空杯，**不自動為未知物品創建模型、飲用效果或擺放方塊**。
+
+配方書直接讀runtime registry，所以調酒配方與頁面一起更新，不會加入Cookery書。示範`examples/Tavern-Mixology-Demo/BP`是獨立BP，完整可打包。公開SDK文件必須一起更新，不能只複製舊client配新版protocol。
+
+帶動態資料的特調不接受再投入其他雪克杯，避免失去既有payload；註冊即拒絕此種输入。
+
+額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_DATA_NOT_ADAPTED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。

@@ -5,7 +5,9 @@ export function recipePage(recipe,locale,names={}){
  const title=localeText(recipe.title,locale)||itemName(recipe.output?.byQuality?.[2]??recipe.output?.item??recipe.fluid);
  const ingredients=recipe.kind==='pressing'?recipe.input.map(itemName).join(' / '):recipe.ingredients.map(s=>s.map(itemName).join(' / ')).join(' + ')||'—';
  const en=locale==='en_US';
- const body=recipe.kind==='pressing'?
+ const body=recipe.kind==='shaker'?
+  `${en?'Shaker':'雪克杯'}\n${ingredients}\n${en?'Three slots; one item each. Tavern drinks must be Q4 or higher.':'三槽，每槽一件；酒館基酒須Q4或以上。'}\n${en?'Stop at 89–98 ticks for this fixed recipe.':'在89–98 tick停止才嘗試此固定配方。'}\n→ ${itemName(recipe.output.item)} ×1\n${en?'Serving container':'接酒容器'}: ${itemName(recipe.carrier)}`:
+  recipe.kind==='pressing'?
   `${en?'Pressing':'壓榨'}\n${ingredients}\n→ ${itemName(recipe.fluid)} ${recipe.amount} mB\n${en?'Jump onto the tub. One item per press.':'跳踩壓榨桶，每次消耗一個原料。'}`:
   `${en?'Barrel':'酒桶'}\n${itemName(recipe.fluid)} × 4000 mB\n${en?'Ingredient slots':'原料槽'}：${ingredients}\n${en?'Maximum per slot':'每槽上限'}：16\n${en?'Next-quality duration':'品質升級時間'}：${recipe.unitTime} tick × ${en?'current quality':'目前品質'}\n${en?'No-ingredient yield':'無原料配方產量'}：${recipe.noIngredientCount}\n${en?'With ingredients: smallest stack, capped at 16.':'有原料：取最少一槽的數量，最多16瓶。'}\n${en?'Serving container':'接酒容器'}：${itemName(recipe.carrier)}`;
  return {id:recipe.id,title,body,source:recipe.source,kind:'recipe'};

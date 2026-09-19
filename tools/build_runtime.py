@@ -155,3 +155,5 @@ if __name__=='__main__':
  main()
  import build_c2
  build_c2.main()
+ import build_c3
+ build_c3.main()

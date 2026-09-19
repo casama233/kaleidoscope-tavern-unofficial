@@ -1,0 +1,86 @@
+Compiled from "IncenseBlockEntity.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.IncenseBlockEntity extends com.github.ysbbbbbb.kaleidoscopetavern.blockentity.BaseBlockEntity {
+  public com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.IncenseBlockEntity(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.INCENSE_BE:Ljava/util/function/Supplier;
+       4: invokeinterface #7,  1            // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+       9: checkcast     #13                 // class net/minecraft/world/level/block/entity/BlockEntityType
+      12: aload_1
+      13: aload_2
+      14: invokespecial #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/BaseBlockEntity."<init>":(Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      17: return
+
+  public static void serverTick(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.IncenseBlockEntity);
+    Code:
+       0: aload_0
+       1: invokevirtual #21                 // Method net/minecraft/world/level/Level.getGameTime:()J
+       4: ldc2_w        #27                 // long 120l
+       7: lrem
+       8: lconst_0
+       9: lcmp
+      10: ifeq          14
+      13: return
+      14: new           #29                 // class net/minecraft/world/phys/AABB
+      17: dup
+      18: aload_1
+      19: invokespecial #31                 // Method net/minecraft/world/phys/AABB."<init>":(Lnet/minecraft/core/BlockPos;)V
+      22: ldc2_w        #34                 // double 32.0d
+      25: invokevirtual #36                 // Method net/minecraft/world/phys/AABB.inflate:(D)Lnet/minecraft/world/phys/AABB;
+      28: astore        4
+      30: aload_0
+      31: ldc           #40                 // class net/minecraft/world/entity/LivingEntity
+      33: aload         4
+      35: invokedynamic #42,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      40: invokevirtual #46                 // Method net/minecraft/world/level/Level.getEntitiesOfClass:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+      43: astore        5
+      45: aload         5
+      47: invokeinterface #50,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      52: astore        6
+      54: aload         6
+      56: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      61: ifeq          126
+      64: aload         6
+      66: invokeinterface #62,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      71: checkcast     #40                 // class net/minecraft/world/entity/LivingEntity
+      74: astore        7
+      76: aload         7
+      78: aload_0
+      79: invokevirtual #65                 // Method net/minecraft/world/level/Level.damageSources:()Lnet/minecraft/world/damagesource/DamageSources;
+      82: invokevirtual #69                 // Method net/minecraft/world/damagesource/DamageSources.magic:()Lnet/minecraft/world/damagesource/DamageSource;
+      85: fconst_1
+      86: invokevirtual #75                 // Method net/minecraft/world/entity/LivingEntity.hurt:(Lnet/minecraft/world/damagesource/DamageSource;F)Z
+      89: pop
+      90: aload         7
+      92: instanceof    #79                 // class net/minecraft/world/entity/monster/ZombieVillager
+      95: ifeq          123
+      98: aload         7
+     100: checkcast     #79                 // class net/minecraft/world/entity/monster/ZombieVillager
+     103: astore        8
+     105: aload         8
+     107: invokevirtual #81                 // Method net/minecraft/world/entity/monster/ZombieVillager.getHealth:()F
+     110: fconst_1
+     111: fcmpg
+     112: ifgt          123
+     115: aload         8
+     117: aconst_null
+     118: bipush        60
+     120: invokevirtual #85                 // Method net/minecraft/world/entity/monster/ZombieVillager.startConverting:(Ljava/util/UUID;I)V
+     123: goto          54
+     126: return
+
+  private static boolean lambda$serverTick$0(net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_0
+       1: invokevirtual #89                 // Method net/minecraft/world/entity/LivingEntity.getType:()Lnet/minecraft/world/entity/EntityType;
+       4: getstatic     #93                 // Field net/minecraft/tags/EntityTypeTags.UNDEAD:Lnet/minecraft/tags/TagKey;
+       7: invokevirtual #99                 // Method net/minecraft/world/entity/EntityType.is:(Lnet/minecraft/tags/TagKey;)Z
+      10: ifeq          24
+      13: aload_0
+      14: invokevirtual #105                // Method net/minecraft/world/entity/LivingEntity.isAlive:()Z
+      17: ifeq          24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+}

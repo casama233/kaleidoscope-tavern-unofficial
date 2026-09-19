@@ -1,0 +1,803 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sauvignon_blanc_dry_white_4",
+  "model_identifier": "kt_assets_a7.sauvignon_blanc_dry_white_4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "sauvignon_blanc_dry_white_4_element0",
+      "type": "cube",
+      "uuid": "15c6dd69-69a3-5a3b-8bd0-cf38e9c87b46",
+      "from": [
+        3,
+        10,
+        -5
+      ],
+      "to": [
+        5,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element1",
+      "type": "cube",
+      "uuid": "4f8e458c-be89-5c18-a1c2-913a03f26b49",
+      "from": [
+        2,
+        0,
+        -6
+      ],
+      "to": [
+        6,
+        11,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            12.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element2",
+      "type": "cube",
+      "uuid": "b85e4342-1532-5968-ba9c-a71dfec67c6c",
+      "from": [
+        -6,
+        0,
+        -6
+      ],
+      "to": [
+        -2,
+        11,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            12.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element3",
+      "type": "cube",
+      "uuid": "720f8341-feb9-5ccb-a0d4-2a083482e766",
+      "from": [
+        -5,
+        10,
+        -5
+      ],
+      "to": [
+        -3,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element4",
+      "type": "cube",
+      "uuid": "d93156f0-7962-578b-9dbc-be3bb94aac22",
+      "from": [
+        -5,
+        10,
+        3
+      ],
+      "to": [
+        -3,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element5",
+      "type": "cube",
+      "uuid": "430f766e-06e0-56ac-a384-864dfc3bc106",
+      "from": [
+        -6,
+        0,
+        2
+      ],
+      "to": [
+        -2,
+        11,
+        6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            12.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element6",
+      "type": "cube",
+      "uuid": "152b1e89-a43d-529c-9ddc-b95e4f3493fa",
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        6,
+        11,
+        6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            12.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_4_element7",
+      "type": "cube",
+      "uuid": "fb52d369-eff9-530b-979a-ba0fcd5ea3e2",
+      "from": [
+        3,
+        10,
+        3
+      ],
+      "to": [
+        5,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "4f85b02e-290c-5e3f-b8fa-77f479b6de2e",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "15c6dd69-69a3-5a3b-8bd0-cf38e9c87b46",
+        "4f8e458c-be89-5c18-a1c2-913a03f26b49",
+        "b85e4342-1532-5968-ba9c-a71dfec67c6c",
+        "720f8341-feb9-5ccb-a0d4-2a083482e766",
+        "d93156f0-7962-578b-9dbc-be3bb94aac22",
+        "430f766e-06e0-56ac-a384-864dfc3bc106",
+        "152b1e89-a43d-529c-9ddc-b95e4f3493fa",
+        "fb52d369-eff9-530b-979a-ba0fcd5ea3e2"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sauvignon_blanc_dry_white.png",
+      "id": "0",
+      "uuid": "7787a6af-f398-5adf-8610-6b948fc4bd73",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvklEQVR4XmNgAIJLq0T+gzCITRb48zr0/7ZS1gE0AOR8igzQ0OT5D8Lo4kSB1jlC/1fusQdjEBuXGAw8vOjzf+9cNYQYSMHL7xNQFIPYIDEQ3y9XAsUAkOYZBcKoBoA0gBQiG/Dw+qb/R7d1YBiAAXAZ8OrVA7AhyAaY2Qr9l5PnAGMQm2QDYJphmP4GEO0FEI0tEEHiO0/6gDFMLUkGwDTDMFgQpAAZw8RAhoAwQQNAfoElZZi/sImBADYvAAAf1i/Sg16MLwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

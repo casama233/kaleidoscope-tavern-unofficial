@@ -1,0 +1,102 @@
+Compiled from "StringLightsLayer.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.StringLightsLayer<T extends net.minecraft.world.entity.LivingEntity, M extends net.minecraft.client.model.EntityModel<T>> extends net.minecraft.client.renderer.entity.layers.RenderLayer<T, M> {
+  private final net.minecraft.client.renderer.ItemInHandRenderer itemRenderer;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.StringLightsLayer(net.minecraft.client.renderer.entity.RenderLayerParent<T, M>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method net/minecraft/client/renderer/entity/layers/RenderLayer."<init>":(Lnet/minecraft/client/renderer/entity/RenderLayerParent;)V
+       5: aload_0
+       6: invokestatic  #7                  // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       9: getfield      #13                 // Field net/minecraft/client/Minecraft.gameRenderer:Lnet/minecraft/client/renderer/GameRenderer;
+      12: getfield      #17                 // Field net/minecraft/client/renderer/GameRenderer.itemInHandRenderer:Lnet/minecraft/client/renderer/ItemInHandRenderer;
+      15: putfield      #23                 // Field itemRenderer:Lnet/minecraft/client/renderer/ItemInHandRenderer;
+      18: return
+
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload         4
+       3: invokevirtual #28                 // Method getStringLightsStack:(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/item/ItemStack;
+       6: astore        11
+       8: aload         11
+      10: invokevirtual #32                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      13: instanceof    #38                 // class com/github/ysbbbbbb/kaleidoscopetavern/item/StringLightsBlockItem
+      16: ifeq          108
+      19: aload_0
+      20: invokevirtual #40                 // Method getParentModel:()Lnet/minecraft/client/model/EntityModel;
+      23: astore        13
+      25: aload         13
+      27: instanceof    #44                 // class net/minecraft/client/model/HumanoidModel
+      30: ifeq          108
+      33: aload         13
+      35: checkcast     #44                 // class net/minecraft/client/model/HumanoidModel
+      38: astore        12
+      40: aload_1
+      41: invokevirtual #46                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      44: aload         12
+      46: getfield      #52                 // Field net/minecraft/client/model/HumanoidModel.body:Lnet/minecraft/client/model/geom/ModelPart;
+      49: aload_1
+      50: invokevirtual #56                 // Method net/minecraft/client/model/geom/ModelPart.translateAndRotate:(Lcom/mojang/blaze3d/vertex/PoseStack;)V
+      53: aload_1
+      54: fconst_0
+      55: ldc           #62                 // float -0.1875f
+      57: ldc           #63                 // float -0.4375f
+      59: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(FFF)V
+      62: aload_1
+      63: getstatic     #68                 // Field com/mojang/math/Axis.YP:Lcom/mojang/math/Axis;
+      66: ldc           #74                 // float 180.0f
+      68: invokeinterface #75,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      73: invokevirtual #79                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      76: aload_1
+      77: ldc           #83                 // float -0.625f
+      79: ldc           #83                 // float -0.625f
+      81: ldc           #84                 // float 0.625f
+      83: invokevirtual #85                 // Method com/mojang/blaze3d/vertex/PoseStack.scale:(FFF)V
+      86: aload_0
+      87: getfield      #23                 // Field itemRenderer:Lnet/minecraft/client/renderer/ItemInHandRenderer;
+      90: aload         4
+      92: aload         11
+      94: getstatic     #88                 // Field net/minecraft/world/item/ItemDisplayContext.HEAD:Lnet/minecraft/world/item/ItemDisplayContext;
+      97: iconst_0
+      98: aload_1
+      99: aload_2
+     100: iload_3
+     101: invokevirtual #94                 // Method net/minecraft/client/renderer/ItemInHandRenderer.renderItem:(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+     104: aload_1
+     105: invokevirtual #100                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     108: return
+
+  private net.minecraft.world.item.ItemStack getStringLightsStack(T);
+    Code:
+       0: aload_1
+       1: getstatic     #103                // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+       4: invokevirtual #109                // Method net/minecraft/world/entity/LivingEntity.getItemBySlot:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+       7: astore_2
+       8: aload_2
+       9: invokevirtual #32                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      12: instanceof    #38                 // class com/github/ysbbbbbb/kaleidoscopetavern/item/StringLightsBlockItem
+      15: ifeq          20
+      18: aload_2
+      19: areturn
+      20: getstatic     #115                // Field net/minecraft/world/item/ItemStack.EMPTY:Lnet/minecraft/world/item/ItemStack;
+      23: areturn
+
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.world.entity.Entity, float, float, float, float, float, float);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: iload_3
+       4: aload         4
+       6: checkcast     #110                // class net/minecraft/world/entity/LivingEntity
+       9: fload         5
+      11: fload         6
+      13: fload         7
+      15: fload         8
+      17: fload         9
+      19: fload         10
+      21: invokevirtual #119                // Method render:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V
+      24: return
+}

@@ -1,0 +1,987 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "madame_shexiang_2",
+  "model_identifier": "kt_assets_a9.madame_shexiang_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "madame_shexiang_2_element0",
+      "type": "cube",
+      "uuid": "91c18ae0-8f07-5543-a9e2-fa92f4c5d068",
+      "from": [
+        -7,
+        1,
+        -3
+      ],
+      "to": [
+        -1,
+        7,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            10.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            10.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element1",
+      "type": "cube",
+      "uuid": "66740c6f-2542-5912-b4df-4e8a6b0d1484",
+      "from": [
+        -6,
+        7,
+        -2
+      ],
+      "to": [
+        -2,
+        9,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            5.0,
+            11.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            4.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element2",
+      "type": "cube",
+      "uuid": "1de8809f-30e7-5c42-8b1f-03097a73819e",
+      "from": [
+        -6.5,
+        0,
+        -2.5
+      ],
+      "to": [
+        -1.5,
+        1,
+        2.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            4.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            4.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element3",
+      "type": "cube",
+      "uuid": "bd66c6ab-c035-54e7-9931-22f19e126996",
+      "from": [
+        -5,
+        7,
+        -1
+      ],
+      "to": [
+        -3,
+        14,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            5.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            5.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element4",
+      "type": "cube",
+      "uuid": "47f92e17-52f6-524f-8ebf-b2057dc5744b",
+      "from": [
+        -5,
+        14,
+        -1
+      ],
+      "to": [
+        -3,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element5",
+      "type": "cube",
+      "uuid": "31362121-b37e-5022-83c3-1fd2b01af6ec",
+      "from": [
+        3,
+        14,
+        -1
+      ],
+      "to": [
+        5,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element6",
+      "type": "cube",
+      "uuid": "c3915aa2-e38d-51ed-a9e4-a1cee0bf2c84",
+      "from": [
+        3,
+        7,
+        -1
+      ],
+      "to": [
+        5,
+        14,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            5.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            5.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element7",
+      "type": "cube",
+      "uuid": "3792081a-29f3-59a7-b08f-c63458935263",
+      "from": [
+        1.5,
+        0,
+        -2.5
+      ],
+      "to": [
+        6.5,
+        1,
+        2.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            15.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            4.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            4.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element8",
+      "type": "cube",
+      "uuid": "459bdd24-d7d8-56c6-a57e-bda48d33a5ec",
+      "from": [
+        2,
+        7,
+        -2
+      ],
+      "to": [
+        6,
+        9,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            6.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            5.0,
+            11.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            4.0,
+            5.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "madame_shexiang_2_element9",
+      "type": "cube",
+      "uuid": "b02bb410-fe93-5bd2-8f74-8bea9e78ba0a",
+      "from": [
+        1,
+        1,
+        -3
+      ],
+      "to": [
+        7,
+        7,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            10.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            10.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "dc5fc641-c46c-5900-b726-8581ff30d541",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "91c18ae0-8f07-5543-a9e2-fa92f4c5d068",
+        "66740c6f-2542-5912-b4df-4e8a6b0d1484",
+        "1de8809f-30e7-5c42-8b1f-03097a73819e",
+        "bd66c6ab-c035-54e7-9931-22f19e126996",
+        "47f92e17-52f6-524f-8ebf-b2057dc5744b",
+        "31362121-b37e-5022-83c3-1fd2b01af6ec",
+        "c3915aa2-e38d-51ed-a9e4-a1cee0bf2c84",
+        "3792081a-29f3-59a7-b08f-c63458935263",
+        "459bdd24-d7d8-56c6-a57e-bda48d33a5ec",
+        "b02bb410-fe93-5bd2-8f74-8bea9e78ba0a"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "madame_shexiang.png",
+      "id": "0",
+      "uuid": "ce26c7c0-7866-568e-88bf-02337c009730",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAx0lEQVR4XqWSuw3CQBAFHVAFCSUQEpIi6iAgpgQ6IKUMxxYRHVADCSkkJBwa5LHOPsOBWenpvm+8u+eiqONSLcJhPQ2ufw7M+/lkOIAMNuPRcMDjtvsfkCvBMlWrZ5TQBRy3s8A+Ys45o2rus7ieVq+Nc7lsIBoFCYjHQYBWBpqRNQrRKKi3BxyEe9UAeAnmZpENTAD4ahcQZxBnkgAw9AEwADdDxF4WYA8E2LS3gNiM/EG4jEkAsATwKQQgS0kAvU9TxzdNfALTnma5ZVl42QAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

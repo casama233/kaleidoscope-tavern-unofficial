@@ -1,0 +1,2024 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "mystery_cocktail",
+  "model_identifier": "kt_assets_a8.mystery_cocktail",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "mystery_cocktail_element0",
+      "type": "cube",
+      "uuid": "7cae9fb0-0296-56e3-b733-d8d5f2f13280",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element1",
+      "type": "cube",
+      "uuid": "b3372024-8bd3-5aa1-b2f9-8235f8fb65cd",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        4,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            15.0,
+            2.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            15.0,
+            2.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element2_north",
+      "type": "cube",
+      "uuid": "8d7d9a37-0a8c-517a-a4f4-4ce2ad28564f",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        -3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            16.0,
+            22.0,
+            22.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element2_east",
+      "type": "cube",
+      "uuid": "c46e9d72-2e5d-5e9b-8e21-f8047f2187b8",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            16.0,
+            22.0,
+            22.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element2_south",
+      "type": "cube",
+      "uuid": "87a5962d-1ffa-587e-a59a-7b0edb64ac04",
+      "from": [
+        -3.0,
+        4.95,
+        3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            16.0,
+            22.0,
+            22.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element2_west",
+      "type": "cube",
+      "uuid": "3b8c078c-22e6-5e5f-8c60-6c19d29c514a",
+      "from": [
+        3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            16.0,
+            22.0,
+            22.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element3",
+      "type": "cube",
+      "uuid": "21315b06-3f61-5fe8-94bc-5ea4bdd17d2f",
+      "from": [
+        -3.5,
+        9.55,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        -2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element4",
+      "type": "cube",
+      "uuid": "2bc65885-ebc1-5fba-9610-309224771b34",
+      "from": [
+        -3.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element5",
+      "type": "cube",
+      "uuid": "dbf018bc-c1d5-5ddd-9cdd-b4cf899468f1",
+      "from": [
+        2.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element6",
+      "type": "cube",
+      "uuid": "19a21e54-3bb0-5ddd-ae3e-d31390c6b1fb",
+      "from": [
+        -3.5,
+        9.55,
+        2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        3.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element7",
+      "type": "cube",
+      "uuid": "553a58d4-a23f-5934-8b6d-56d9bf5faf11",
+      "from": [
+        -3,
+        5,
+        -3
+      ],
+      "to": [
+        3,
+        5,
+        3
+      ],
+      "origin": [
+        4,
+        4,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            24.0,
+            17.0,
+            30.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            24.0,
+            17.0,
+            30.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element8_north",
+      "type": "cube",
+      "uuid": "66b39c30-cf99-5cf4-88d2-82bec3c57edf",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        -2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            20.0,
+            28.0,
+            25.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element8_east",
+      "type": "cube",
+      "uuid": "3db18a24-37b5-5d85-a0b8-bf91b072cf86",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            20.0,
+            28.0,
+            25.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element8_south",
+      "type": "cube",
+      "uuid": "b06e546b-ef74-558d-bc91-60909548170a",
+      "from": [
+        -2.5,
+        5.6,
+        2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            20.0,
+            28.0,
+            25.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element8_west",
+      "type": "cube",
+      "uuid": "06892728-05a3-50e5-aed9-f0466f63cd3b",
+      "from": [
+        2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            20.0,
+            28.0,
+            25.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element9",
+      "type": "cube",
+      "uuid": "e7163d2d-1af9-543e-aaa2-ad1e05095541",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        5.6,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            27.0,
+            32.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            27.0,
+            27.0,
+            32.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element10",
+      "type": "cube",
+      "uuid": "56e2c44d-808c-56b1-babe-9542af6b2e60",
+      "from": [
+        -2.5,
+        9.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        13.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            13.0,
+            29.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            27.0,
+            32.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            27.0,
+            27.0,
+            32.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mystery_cocktail_element11",
+      "type": "cube",
+      "uuid": "b3e7bd0f-2ccc-58d7-a527-3df77bd3e322",
+      "from": [
+        -1.00061,
+        3.99,
+        -1
+      ],
+      "to": [
+        0.99939,
+        4.99,
+        1
+      ],
+      "origin": [
+        0.01004999999999967,
+        3.89792,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            25.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            23.0,
+            6.0,
+            25.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mystery_cocktail_element12",
+      "type": "cube",
+      "uuid": "bd34ce23-cd54-522d-b218-1bef4006bfc5",
+      "from": [
+        1.6500000000000004,
+        5.35,
+        -0.9000000000000004
+      ],
+      "to": [
+        2.4499999999999993,
+        14.15,
+        -0.09999999999999964
+      ],
+      "origin": [
+        2.0500000000000007,
+        11.25,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            18.0,
+            4.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "1034638e-51af-523c-b615-7c16d26f2938",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "7cae9fb0-0296-56e3-b733-d8d5f2f13280",
+        "b3372024-8bd3-5aa1-b2f9-8235f8fb65cd",
+        "8d7d9a37-0a8c-517a-a4f4-4ce2ad28564f",
+        "c46e9d72-2e5d-5e9b-8e21-f8047f2187b8",
+        "87a5962d-1ffa-587e-a59a-7b0edb64ac04",
+        "3b8c078c-22e6-5e5f-8c60-6c19d29c514a",
+        "21315b06-3f61-5fe8-94bc-5ea4bdd17d2f",
+        "2bc65885-ebc1-5fba-9610-309224771b34",
+        "dbf018bc-c1d5-5ddd-9cdd-b4cf899468f1",
+        "19a21e54-3bb0-5ddd-ae3e-d31390c6b1fb",
+        "553a58d4-a23f-5934-8b6d-56d9bf5faf11",
+        "66b39c30-cf99-5cf4-88d2-82bec3c57edf",
+        "3db18a24-37b5-5d85-a0b8-bf91b072cf86",
+        "b06e546b-ef74-558d-bc91-60909548170a",
+        "06892728-05a3-50e5-aed9-f0466f63cd3b",
+        "e7163d2d-1af9-543e-aaa2-ad1e05095541",
+        "56e2c44d-808c-56b1-babe-9542af6b2e60",
+        "b3e7bd0f-2ccc-58d7-a527-3df77bd3e322",
+        "bd34ce23-cd54-522d-b218-1bef4006bfc5"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "mystery_cocktail.png",
+      "id": "0",
+      "uuid": "2a8bc23f-47e7-54b5-ac33-fbe48d762c66",
+      "width": 32,
+      "height": 288,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAEgCAYAAADVDXFAAAAILUlEQVR4Xu1bTWhdRRR+C6HZiRs3gggu3LbGjasuAi5EFKRbQSouoi4M4sZNQagIIqTrLIRu6qboRkojRRctoaA1Fh7+ogkErIqk/sRCm8w43yTn5rzvncvzzr33zSPMBx95c8+Z+b57Z25ezoEMvt3e9h9+vxWJz3o8CHj3+o/eImKA5Ou5+CnxiRAhhlwXM0yd9/a170ZYt6aJOrf/1wDmtzJQlzwzBmRvmTovqwF85qdTt60meLIm56bgjxfu87vbr/i7Nxf83pWHOlmzEe6dOeF3//k6isMEx3uHPAGYwE+O9w48AZiQnxwvKChojeHxE94i5/UGd/Ydb7GK37jsI8+f2+fBWK8REb/VrnzV+DuAhS0DV4/NjdA0ADQVB1h4zEC46zED4Zpeo0KSgZtr3mIVb2IAW8DXJoGFxwxYW9ClgUnQB686jNYZwJ/a8oeI/rN7aoDwZ7f+jkw5C62R3UD2LZgG3MWL3p1+6ZBhzDmt8dpg4N3Wlj8ZfoIYSwyi8irGvDDWczsBFhbxLAZkcSHGEoOgjvViQN9l/K2nRMwzoEsrKbt0ZcR9gdIfYAOY38pAXfLMGOCyXKjzshrAZ346ddtqgidrcm4KSn+g9AcKCo4+hm8c9xY5rze4S2e9xSr+eyjHwPVz+zwY6zUi4rdaSn/AEGcDV08dG6FpAGgqDrDwmIFw12MG1muq4yQDv4Zy3GAVb2IgpTxn4TED1hZ0aWAS9MGrDqN1BrIXpxDOWp5nN5B9C6YBtxFqw09PH3Kjh/7AWydC1bu95U8+OIjEWGIQlVcx5oWxntsJsLCIZzEgiwsxlhgEdawXA/ou4289JWKeAV1aSdmlKyPuC5T+ABvA/FYG6pJnxgCX5UKdl9UAPvPTqdtWEzxZk3NTUPoDpT9QUHD0Mbx03FvkvN7gfgvVsEGJ/+sue9DtnYuUsV4jIn6rpfQHDHE2cOPCYISmAaCpOMDCbAB3zQZwTa9RIcXAnlvzFiXeyEBKec7CbMDagk4NTII+eHIYzTOQvTiFcNbyPLuB7FswDbjboTb867lD3u6hP/Deq+E1u7vln318EImxxCAqr2LMC2M9txNgYRHPYkAWF2IsMQjqWC8G9F3G33pKxDwDurSSsktXRtwXKP0BNoD5rQzUJc+MAS7LhTovqwF85qdTt60meLIm56ag9AdKf6Cg4Ojj4vC4t8h5veG2W/YWJX4r1InghluJlLFeIyJ+qyX0B1jYMvDB+twITQNAU3GAhdkA7poN4Jpeo0KKgTtu6C1KvJGBlPKchdmAtQWdGpgEffDkMJpnIHtxCuGs5Xl2A9m3YBq451bDAVysiDHntMapM6EgdTv+iacHkRhLDKLyKuI6xnpuJ8DCIp7FgCwuxFhiENSxXgzouwS1iHkGdGklZZeujLgvUPoDbADzWxmoS54ZA1yWC3VeVgP4zE+nbltN8GRNzk1B6Q+U/kBBwdHH65vz3iLn9YbVUAlblPj1UIaBH4WSDJSxXiMifqsl9AdY2DLwTPjTTNM0ADQVB1iYDeCu2QCu6TUqpBj4KZTiFiXeyEBKec7CbMDagk4NTII+eHIYzTOQvTiFcNbyPLuB7FswDXwTasHzoSYUYsw5rfHI0sDvuh1//8IgEmOJQVReRVzHWM/tBFhYxLMYkMWFGEsMgjrWiwF9l6AWMc+ALq2k7NKVEfcFSn+ADWB+KwN1yTNjgMtyoc7LagCf+enUbasJnqzJuSko/YHSHygoOPqY37zmLXJeb1h2u96ixNec8+DKAWWs14iI32oJ/QEWtgzMrX88QtMA0FQcYGE2gLtmA7im16iQYmAYFrMo8UYGUspzFmYD1hZ0amAS9MGTw2iegezFKYSzlufZDWTfgmlgNRy+RXenIsac0x5LL/odLLzw5D7DWEIQlVcR1zHWU7sBBEU8hwFZXBjHB4iCKtaLAX2XoBYxz4AuraTs0pUR9wVKf4ANYH4rA3XJM2OAy3KhzstqAJ/56dRtqwmerMm5KSj9gdIfKCg4+ph/c9Nb5LzesPy58xYlvvZFKMUCVz7Zp4z1GhHxWy2lP2CIs4G559dHaBoAmooDLMwGcNdsANf0GhVSDAx/DuW4QYk3MpBSnrMwG7C2oFMDk6APnhxG8wxkL04hnLU8z24g+xZMA6s/hNrwwiEx5pz2eHTJ7+yFhR9Y2GcYSwii8iriOsZ6ajeAoIjnMCCLC+P4AFFQxXoxoO8S1CLmGdCllZRdujLivkDpD7ABzG9loC55ZgxwWS7UeVkN4DM/nbptNcGTNTk3BaU/UPoDBQVHH2fnN71FzusNXy47b1Hibs158JeVfcpYrxERv9US+gMsbBl4eW59hKYBoKk4wMJsAHfNBnBNr1EhxcDe0HmLEm9kIKU8Z2E2YG1BpwYmQR88OYzmGchenEI4a3me3UD2LZgGtlZDPbh4SIw5pzXmB0ve7Tj/8GAhEmOJQVReRVzHWM/tBFhYxLMYkMWFGEsMgjrWiwF9l6AWMc+ALq2k7NKVEfcFSn+ADWB+KwN1yTNjgMtyoc7LagCf+enUbasJnqzJuSko/YHSHygoOPrYnL/gLXJeb3DLW95iFV/b8JErw30ejPUaEfFbLaE/wMKWgfW590doGgCaigMsPGYg3PWYgZXD/84fQZKB4ba3WMWbGEgpz1l4zIC1BV0amAR98KrDaJ2B7MUphLOW59kNZN+CacCt/und4vCQYcw5rbE0eCr2BxYGj0ViLDGIyqsY8xZrXsc2wMIinsWALC7EWGIQ1LFeDOi7jL/1lIh1Bv4Dl5Wz6jI7TGYAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal",
+      "frame_time": 6,
+      "frame_order_type": "loop",
+      "interpolate": true
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "mystery_cocktail_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "mystery_cocktail_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "mystery_cocktail_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "mystery_cocktail_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "mystery_cocktail_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "mystery_cocktail_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "mystery_cocktail_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "mystery_cocktail_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -90,
+          25
+        ],
+        "translation": [
+          1.13,
+          3.2,
+          -3
+        ],
+        "scale": [
+          0.68,
+          0.68,
+          0.68
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -90,
+          25
+        ],
+        "translation": [
+          1.13,
+          3.2,
+          -3
+        ],
+        "scale": [
+          0.68,
+          0.68,
+          0.68
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          2,
+          0
+        ],
+        "scale": [
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "translation": [
+          -0.25,
+          3.75,
+          0
+        ],
+        "scale": [
+          1.1,
+          1.1,
+          1.1
+        ]
+      },
+      "fixed": {
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "translation": [
+          0.25,
+          2,
+          -16
+        ],
+        "scale": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "tint_map": [],
+    "animation": {
+      "id": "mystery_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png.mcmeta",
+      "sheet_size": [
+        32,
+        288
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 9,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ticks_per_frame": 6,
+      "blend_frames": true,
+      "loop_ticks": 54,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/mystery_cocktail/000.png",
+          "rgba_sha256": "155e84faab5ff14cfe4cf465426ea7240a45331f679f412b4b477182bcefcde1"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/mystery_cocktail/001.png",
+          "rgba_sha256": "af00cbbc1f7f1e7369c831f5b8961c04937524706df0a4fab3ad9c81fc19cd5c"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/mystery_cocktail/002.png",
+          "rgba_sha256": "633a4378d900899fb27c819987bc893914999f072f925dd5036b60eb07b39985"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/mystery_cocktail/003.png",
+          "rgba_sha256": "64eecad6c1a485b6582fab957ac785437e21e561147d324e9ca4cba7f35a8296"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/mystery_cocktail/004.png",
+          "rgba_sha256": "1edd1add27eb6cb4180b26e7dd453026bf9f16e8120e299d21f2f5ae9436a83a"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/mystery_cocktail/005.png",
+          "rgba_sha256": "bf4da7ad78932715369cc00b295e25578af742bab0df3267bc38f4bdcb479e51"
+        },
+        {
+          "index": 6,
+          "file": "animation-sources/frames/mystery_cocktail/006.png",
+          "rgba_sha256": "23f9999552c90cfd00b5ee361f91bc394985a8a1e20b9488d5c4ddc5c04b1ab8"
+        },
+        {
+          "index": 7,
+          "file": "animation-sources/frames/mystery_cocktail/007.png",
+          "rgba_sha256": "8992c01882a68bd7f0695dd9ef1850f683504f0665913dc12e35207a9df34a52"
+        },
+        {
+          "index": 8,
+          "file": "animation-sources/frames/mystery_cocktail/008.png",
+          "rgba_sha256": "7d692e8670760d2044520567cd49ba96992d8488cba84cd3164e7017ad954b7a"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a8/mystery_cocktail_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/mystery_cocktail"
+    },
+    "engine_test": "NOT_RUN"
+  }
+}

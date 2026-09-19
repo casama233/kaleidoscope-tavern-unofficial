@@ -1,0 +1,799 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "vodka_2",
+  "model_identifier": "kt_assets_a6.vodka_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "vodka_2_element0",
+      "type": "cube",
+      "uuid": "7438bcfe-e7f9-598f-a425-a7567badb2f6",
+      "from": [
+        1,
+        0,
+        -3
+      ],
+      "to": [
+        7,
+        9,
+        3
+      ],
+      "origin": [
+        3.5,
+        1,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            10.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element1",
+      "type": "cube",
+      "uuid": "38f87116-2732-59e6-9cf1-175feba9444f",
+      "from": [
+        2,
+        9,
+        -2
+      ],
+      "to": [
+        6,
+        11,
+        2
+      ],
+      "origin": [
+        3.5,
+        1,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            3.0,
+            11.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            11.0,
+            14.2,
+            15.2
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element2",
+      "type": "cube",
+      "uuid": "fbbc1410-bd32-50bc-a348-5bc9e8010917",
+      "from": [
+        2.75,
+        11,
+        -1.25
+      ],
+      "to": [
+        5.25,
+        13,
+        1.25
+      ],
+      "origin": [
+        4,
+        1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element3",
+      "type": "cube",
+      "uuid": "a941ae0c-377f-5ecd-8232-b4617081231d",
+      "from": [
+        2.25,
+        13,
+        -1.75
+      ],
+      "to": [
+        5.75,
+        15,
+        1.75
+      ],
+      "origin": [
+        3.75,
+        0,
+        0.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element4",
+      "type": "cube",
+      "uuid": "05602071-139a-54f1-848f-9f96dc9a5e2e",
+      "from": [
+        -7,
+        0,
+        -3
+      ],
+      "to": [
+        -1,
+        9,
+        3
+      ],
+      "origin": [
+        -4.5,
+        1,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            10.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element5",
+      "type": "cube",
+      "uuid": "eaae67f1-21ef-59f1-8e2f-1dc8e5f409a0",
+      "from": [
+        -6,
+        9,
+        -2
+      ],
+      "to": [
+        -2,
+        11,
+        2
+      ],
+      "origin": [
+        -4.5,
+        1,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            11.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            3.0,
+            11.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            11.0,
+            14.2,
+            15.2
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element6",
+      "type": "cube",
+      "uuid": "ea96c767-8cd9-5be0-927f-44491dd35a50",
+      "from": [
+        -5.25,
+        11,
+        -1.25
+      ],
+      "to": [
+        -2.75,
+        13,
+        1.25
+      ],
+      "origin": [
+        -4,
+        1,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            11.0,
+            8.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "vodka_2_element7",
+      "type": "cube",
+      "uuid": "ecb606d2-c0e7-50fe-bf1d-b4683ca4f25e",
+      "from": [
+        -5.75,
+        13,
+        -1.75
+      ],
+      "to": [
+        -2.25,
+        15,
+        1.75
+      ],
+      "origin": [
+        -4.25,
+        0,
+        0.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            7.0,
+            9.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "62839a6e-c9cf-574c-b74f-9508a38e12d0",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "7438bcfe-e7f9-598f-a425-a7567badb2f6",
+        "38f87116-2732-59e6-9cf1-175feba9444f",
+        "fbbc1410-bd32-50bc-a348-5bc9e8010917",
+        "a941ae0c-377f-5ecd-8232-b4617081231d",
+        "05602071-139a-54f1-848f-9f96dc9a5e2e",
+        "eaae67f1-21ef-59f1-8e2f-1dc8e5f409a0",
+        "ea96c767-8cd9-5be0-927f-44491dd35a50",
+        "ecb606d2-c0e7-50fe-bf1d-b4683ca4f25e"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "vodka.png",
+      "id": "0",
+      "uuid": "48c05a33-49d3-5a52-9a0b-747c6387c1e5",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWRJREFUOI2Nkj9PwmAYxH8knZooceBPxaQkykKIAWNYxYWEb6DRxZg4OxonjbOJm5OTn0AHDCziCibgwsJgm4AlMJBi0rUOta+UtsgtzXt97p67t41kyxUbwJpMAZDXVgHo1l8iu0cHzruxKTjmIAHIsShyLCpIV7C+lQHgi57gfAbWZOoRz6Z5vr7xbQxMEIZsuWK75tbYDK7gdp6Fy8mxqKdGaAJrbPoucVlIQbFcWGNTbA67RPGp5ofqhxEaTY1SMc3GSTV0iZTJF9jbz/P22qHXaQujRlOj1jIBbXEFV9TrtD0JSsU04CTgvhtuMHuQY1Fh4sa+3T63oUo6qdoBeqSL41MUVcXI7QhS1z5JbOq20//M019JxgEwhiPHQFFVCqkVCqkc7cG3GHx6MKm1PpgXK0lVnI3hCMnQdUDFef4leHwf/PsbA0h3l1fEE8qvo75w2I3tqdA3+vSN/jLLfCYAPyecl3hr88npAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

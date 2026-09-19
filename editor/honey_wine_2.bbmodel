@@ -1,0 +1,435 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "honey_wine_2",
+  "model_identifier": "kt_assets_a4.honey_wine_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "honey_wine_2_element0",
+      "type": "cube",
+      "uuid": "0c21f9cf-0b3c-5572-8707-f046da780fcb",
+      "from": [
+        3,
+        10,
+        -1
+      ],
+      "to": [
+        5,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            0.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "honey_wine_2_element1",
+      "type": "cube",
+      "uuid": "cfa51590-e3b8-50ff-89c9-9266d7cf6068",
+      "from": [
+        2,
+        0,
+        -2
+      ],
+      "to": [
+        6,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            12.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            12.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "honey_wine_2_element2",
+      "type": "cube",
+      "uuid": "6ec68756-4df1-5ec8-b63c-5b07e379a8b4",
+      "from": [
+        -6,
+        0,
+        -2
+      ],
+      "to": [
+        -2,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            5.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            12.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            12.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "honey_wine_2_element3",
+      "type": "cube",
+      "uuid": "99753886-7076-5084-8900-dd8a5e17655e",
+      "from": [
+        -5,
+        10,
+        -1
+      ],
+      "to": [
+        -3,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            0.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            0.0,
+            6.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "9193afe9-3009-5231-bcff-7a0b536bec43",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "0c21f9cf-0b3c-5572-8707-f046da780fcb",
+        "cfa51590-e3b8-50ff-89c9-9266d7cf6068",
+        "6ec68756-4df1-5ec8-b63c-5b07e379a8b4",
+        "99753886-7076-5084-8900-dd8a5e17655e"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "honey_wine.png",
+      "id": "0",
+      "uuid": "52c31769-9d34-5fb7-8284-013e4f9e8b05",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAkklEQVR4XmNgQAP+Vsb/tXW0/8P45UFB/0FiyGrwAnQD0PkEAcka0AHFBoD8DMLo4kSBZxv4//9/kfUfRIMwujxB8Pf/JrDG3RniA2gAKBC5BHjAXkGXJwhAmkAB6KSvSZ4L/v9eBjeAYhdQ1QBY9MKiGFkPCgApwBaIMM0wjKwHBcCiED0aiTYAJAmKShAm1gsA3grAHnktiEUAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,839 @@
+[
+  {
+    "family": "decorated_board",
+    "fields": {
+      "variant": {
+        "type": "string",
+        "enum": [
+          "base",
+          "allium",
+          "azure_bluet",
+          "cornflower",
+          "grass",
+          "orchid",
+          "peony",
+          "pink_petals",
+          "pitcher_plant",
+          "poppy",
+          "sunflower",
+          "torchflower",
+          "tulip",
+          "wither_rose"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "when": {
+          "variant": "base"
+        },
+        "asset": "sandwich_board_base_assembled"
+      },
+      {
+        "when": {
+          "variant": "allium"
+        },
+        "asset": "sandwich_board_allium_assembled"
+      },
+      {
+        "when": {
+          "variant": "azure_bluet"
+        },
+        "asset": "sandwich_board_azure_bluet_assembled"
+      },
+      {
+        "when": {
+          "variant": "cornflower"
+        },
+        "asset": "sandwich_board_cornflower_assembled"
+      },
+      {
+        "when": {
+          "variant": "grass"
+        },
+        "asset": "sandwich_board_grass_assembled"
+      },
+      {
+        "when": {
+          "variant": "orchid"
+        },
+        "asset": "sandwich_board_orchid_assembled"
+      },
+      {
+        "when": {
+          "variant": "peony"
+        },
+        "asset": "sandwich_board_peony_assembled"
+      },
+      {
+        "when": {
+          "variant": "pink_petals"
+        },
+        "asset": "sandwich_board_pink_petals_assembled"
+      },
+      {
+        "when": {
+          "variant": "pitcher_plant"
+        },
+        "asset": "sandwich_board_pitcher_plant_assembled"
+      },
+      {
+        "when": {
+          "variant": "poppy"
+        },
+        "asset": "sandwich_board_poppy_assembled"
+      },
+      {
+        "when": {
+          "variant": "sunflower"
+        },
+        "asset": "sandwich_board_sunflower_assembled"
+      },
+      {
+        "when": {
+          "variant": "torchflower"
+        },
+        "asset": "sandwich_board_torchflower_assembled"
+      },
+      {
+        "when": {
+          "variant": "tulip"
+        },
+        "asset": "sandwich_board_tulip_assembled"
+      },
+      {
+        "when": {
+          "variant": "wither_rose"
+        },
+        "asset": "sandwich_board_wither_rose_assembled"
+      }
+    ]
+  },
+  {
+    "family": "board_parts",
+    "fields": {
+      "variant": {
+        "type": "string",
+        "enum": [
+          "allium",
+          "azure_bluet",
+          "cornflower",
+          "grass",
+          "orchid",
+          "peony",
+          "pink_petals",
+          "pitcher_plant",
+          "poppy",
+          "sunflower",
+          "torchflower",
+          "tulip",
+          "wither_rose"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "when": {
+          "variant": "allium"
+        },
+        "asset": "sandwich_board_allium_top"
+      },
+      {
+        "when": {
+          "variant": "azure_bluet"
+        },
+        "asset": "sandwich_board_azure_bluet_top"
+      },
+      {
+        "when": {
+          "variant": "cornflower"
+        },
+        "asset": "sandwich_board_cornflower_top"
+      },
+      {
+        "when": {
+          "variant": "grass"
+        },
+        "asset": "sandwich_board_grass_top"
+      },
+      {
+        "when": {
+          "variant": "orchid"
+        },
+        "asset": "sandwich_board_orchid_top"
+      },
+      {
+        "when": {
+          "variant": "peony"
+        },
+        "asset": "sandwich_board_peony_top"
+      },
+      {
+        "when": {
+          "variant": "pink_petals"
+        },
+        "asset": "sandwich_board_pink_petals_top"
+      },
+      {
+        "when": {
+          "variant": "pitcher_plant"
+        },
+        "asset": "sandwich_board_pitcher_plant_top"
+      },
+      {
+        "when": {
+          "variant": "poppy"
+        },
+        "asset": "sandwich_board_poppy_top"
+      },
+      {
+        "when": {
+          "variant": "sunflower"
+        },
+        "asset": "sandwich_board_sunflower_top"
+      },
+      {
+        "when": {
+          "variant": "torchflower"
+        },
+        "asset": "sandwich_board_torchflower_top"
+      },
+      {
+        "when": {
+          "variant": "tulip"
+        },
+        "asset": "sandwich_board_tulip_top"
+      },
+      {
+        "when": {
+          "variant": "wither_rose"
+        },
+        "asset": "sandwich_board_wither_rose_top"
+      }
+    ]
+  },
+  {
+    "family": "chalkboard",
+    "fields": {
+      "size": {
+        "type": "string",
+        "enum": [
+          "small",
+          "large"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "when": {
+          "size": "small"
+        },
+        "asset": "chalkboard_small"
+      },
+      {
+        "when": {
+          "size": "large"
+        },
+        "asset": "chalkboard_large"
+      }
+    ]
+  },
+  {
+    "family": "bottle_display",
+    "fields": {
+      "variant": {
+        "type": "string",
+        "enum": [
+          "molotov",
+          "water_bottle",
+          "potion_bottle",
+          "honey_bottle",
+          "xp_bottle",
+          "dragon_breath_bottle"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "when": {
+          "variant": "molotov"
+        },
+        "asset": "molotov"
+      },
+      {
+        "when": {
+          "variant": "water_bottle"
+        },
+        "asset": "water_bottle"
+      },
+      {
+        "when": {
+          "variant": "potion_bottle"
+        },
+        "asset": "potion_bottle"
+      },
+      {
+        "when": {
+          "variant": "honey_bottle"
+        },
+        "asset": "honey_bottle"
+      },
+      {
+        "when": {
+          "variant": "xp_bottle"
+        },
+        "asset": "xp_bottle"
+      },
+      {
+        "when": {
+          "variant": "dragon_breath_bottle"
+        },
+        "asset": "dragon_breath_bottle"
+      }
+    ]
+  },
+  {
+    "family": "item_display",
+    "fields": {
+      "item": {
+        "type": "string",
+        "enum": [
+          "kaleidoscope_tavern:allium_sandwich_board",
+          "kaleidoscope_tavern:azure_bluet_sandwich_board",
+          "kaleidoscope_tavern:bar_cabinet",
+          "kaleidoscope_tavern:bar_counter",
+          "kaleidoscope_tavern:barrel",
+          "kaleidoscope_tavern:base_sandwich_board",
+          "kaleidoscope_tavern:black_bar_stool",
+          "kaleidoscope_tavern:black_sofa",
+          "kaleidoscope_tavern:blue_bar_stool",
+          "kaleidoscope_tavern:blue_sofa",
+          "kaleidoscope_tavern:brown_bar_stool",
+          "kaleidoscope_tavern:brown_sofa",
+          "kaleidoscope_tavern:cellar_cabinet",
+          "kaleidoscope_tavern:circular_rack",
+          "kaleidoscope_tavern:cornflower_sandwich_board",
+          "kaleidoscope_tavern:cyan_bar_stool",
+          "kaleidoscope_tavern:cyan_sofa",
+          "kaleidoscope_tavern:glass_bar_cabinet",
+          "kaleidoscope_tavern:glassware_holder",
+          "kaleidoscope_tavern:grass_sandwich_board",
+          "kaleidoscope_tavern:gray_bar_stool",
+          "kaleidoscope_tavern:gray_sofa",
+          "kaleidoscope_tavern:green_bar_stool",
+          "kaleidoscope_tavern:green_sofa",
+          "kaleidoscope_tavern:light_blue_bar_stool",
+          "kaleidoscope_tavern:light_blue_sofa",
+          "kaleidoscope_tavern:light_gray_bar_stool",
+          "kaleidoscope_tavern:light_gray_sofa",
+          "kaleidoscope_tavern:lime_bar_stool",
+          "kaleidoscope_tavern:lime_sofa",
+          "kaleidoscope_tavern:magenta_bar_stool",
+          "kaleidoscope_tavern:magenta_sofa",
+          "kaleidoscope_tavern:orange_bar_stool",
+          "kaleidoscope_tavern:orange_sofa",
+          "kaleidoscope_tavern:orchid_sandwich_board",
+          "kaleidoscope_tavern:peony_sandwich_board",
+          "kaleidoscope_tavern:pink_bar_stool",
+          "kaleidoscope_tavern:pink_petals_sandwich_board",
+          "kaleidoscope_tavern:pink_sofa",
+          "kaleidoscope_tavern:pitcher_plant_sandwich_board",
+          "kaleidoscope_tavern:poppy_sandwich_board",
+          "kaleidoscope_tavern:pressing_tub",
+          "kaleidoscope_tavern:purple_bar_stool",
+          "kaleidoscope_tavern:purple_sofa",
+          "kaleidoscope_tavern:red_bar_stool",
+          "kaleidoscope_tavern:red_sofa",
+          "kaleidoscope_tavern:shaker",
+          "kaleidoscope_tavern:shaker_3d",
+          "kaleidoscope_tavern:string_lights_black",
+          "kaleidoscope_tavern:string_lights_blue",
+          "kaleidoscope_tavern:string_lights_brown",
+          "kaleidoscope_tavern:string_lights_colorless",
+          "kaleidoscope_tavern:string_lights_cyan",
+          "kaleidoscope_tavern:string_lights_gray",
+          "kaleidoscope_tavern:string_lights_green",
+          "kaleidoscope_tavern:string_lights_light_blue",
+          "kaleidoscope_tavern:string_lights_light_gray",
+          "kaleidoscope_tavern:string_lights_lime",
+          "kaleidoscope_tavern:string_lights_magenta",
+          "kaleidoscope_tavern:string_lights_orange",
+          "kaleidoscope_tavern:string_lights_pink",
+          "kaleidoscope_tavern:string_lights_purple",
+          "kaleidoscope_tavern:string_lights_red",
+          "kaleidoscope_tavern:string_lights_white",
+          "kaleidoscope_tavern:string_lights_yellow",
+          "kaleidoscope_tavern:sunflower_sandwich_board",
+          "kaleidoscope_tavern:table",
+          "kaleidoscope_tavern:tilted_rack",
+          "kaleidoscope_tavern:torchflower_sandwich_board",
+          "kaleidoscope_tavern:trellis",
+          "kaleidoscope_tavern:tulip_sandwich_board",
+          "kaleidoscope_tavern:white_bar_stool",
+          "kaleidoscope_tavern:white_sofa",
+          "kaleidoscope_tavern:wither_rose_sandwich_board",
+          "kaleidoscope_tavern:yellow_bar_stool",
+          "kaleidoscope_tavern:yellow_sofa"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:allium_sandwich_board"
+        },
+        "asset": "item_display_allium_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:azure_bluet_sandwich_board"
+        },
+        "asset": "item_display_azure_bluet_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:bar_cabinet"
+        },
+        "asset": "item_display_bar_cabinet"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:bar_counter"
+        },
+        "asset": "item_display_bar_counter"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:barrel"
+        },
+        "asset": "item_display_barrel"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:base_sandwich_board"
+        },
+        "asset": "item_display_base_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:black_bar_stool"
+        },
+        "asset": "item_display_black_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:black_sofa"
+        },
+        "asset": "item_display_black_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:blue_bar_stool"
+        },
+        "asset": "item_display_blue_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:blue_sofa"
+        },
+        "asset": "item_display_blue_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:brown_bar_stool"
+        },
+        "asset": "item_display_brown_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:brown_sofa"
+        },
+        "asset": "item_display_brown_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:cellar_cabinet"
+        },
+        "asset": "item_display_cellar_cabinet"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:circular_rack"
+        },
+        "asset": "item_display_circular_rack"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:cornflower_sandwich_board"
+        },
+        "asset": "item_display_cornflower_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:cyan_bar_stool"
+        },
+        "asset": "item_display_cyan_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:cyan_sofa"
+        },
+        "asset": "item_display_cyan_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:glass_bar_cabinet"
+        },
+        "asset": "item_display_glass_bar_cabinet"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:glassware_holder"
+        },
+        "asset": "item_display_glassware_holder"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:grass_sandwich_board"
+        },
+        "asset": "item_display_grass_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:gray_bar_stool"
+        },
+        "asset": "item_display_gray_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:gray_sofa"
+        },
+        "asset": "item_display_gray_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:green_bar_stool"
+        },
+        "asset": "item_display_green_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:green_sofa"
+        },
+        "asset": "item_display_green_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:light_blue_bar_stool"
+        },
+        "asset": "item_display_light_blue_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:light_blue_sofa"
+        },
+        "asset": "item_display_light_blue_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:light_gray_bar_stool"
+        },
+        "asset": "item_display_light_gray_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:light_gray_sofa"
+        },
+        "asset": "item_display_light_gray_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:lime_bar_stool"
+        },
+        "asset": "item_display_lime_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:lime_sofa"
+        },
+        "asset": "item_display_lime_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:magenta_bar_stool"
+        },
+        "asset": "item_display_magenta_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:magenta_sofa"
+        },
+        "asset": "item_display_magenta_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:orange_bar_stool"
+        },
+        "asset": "item_display_orange_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:orange_sofa"
+        },
+        "asset": "item_display_orange_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:orchid_sandwich_board"
+        },
+        "asset": "item_display_orchid_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:peony_sandwich_board"
+        },
+        "asset": "item_display_peony_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:pink_bar_stool"
+        },
+        "asset": "item_display_pink_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:pink_petals_sandwich_board"
+        },
+        "asset": "item_display_pink_petals_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:pink_sofa"
+        },
+        "asset": "item_display_pink_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:pitcher_plant_sandwich_board"
+        },
+        "asset": "item_display_pitcher_plant_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:poppy_sandwich_board"
+        },
+        "asset": "item_display_poppy_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:pressing_tub"
+        },
+        "asset": "item_display_pressing_tub"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:purple_bar_stool"
+        },
+        "asset": "item_display_purple_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:purple_sofa"
+        },
+        "asset": "item_display_purple_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:red_bar_stool"
+        },
+        "asset": "item_display_red_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:red_sofa"
+        },
+        "asset": "item_display_red_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:shaker"
+        },
+        "asset": "item_display_shaker"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:shaker_3d"
+        },
+        "asset": "item_display_shaker_3d"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_black"
+        },
+        "asset": "item_display_string_lights_black"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_blue"
+        },
+        "asset": "item_display_string_lights_blue"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_brown"
+        },
+        "asset": "item_display_string_lights_brown"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_colorless"
+        },
+        "asset": "item_display_string_lights_colorless"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_cyan"
+        },
+        "asset": "item_display_string_lights_cyan"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_gray"
+        },
+        "asset": "item_display_string_lights_gray"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_green"
+        },
+        "asset": "item_display_string_lights_green"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_light_blue"
+        },
+        "asset": "item_display_string_lights_light_blue"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_light_gray"
+        },
+        "asset": "item_display_string_lights_light_gray"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_lime"
+        },
+        "asset": "item_display_string_lights_lime"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_magenta"
+        },
+        "asset": "item_display_string_lights_magenta"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_orange"
+        },
+        "asset": "item_display_string_lights_orange"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_pink"
+        },
+        "asset": "item_display_string_lights_pink"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_purple"
+        },
+        "asset": "item_display_string_lights_purple"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_red"
+        },
+        "asset": "item_display_string_lights_red"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_white"
+        },
+        "asset": "item_display_string_lights_white"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:string_lights_yellow"
+        },
+        "asset": "item_display_string_lights_yellow"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:sunflower_sandwich_board"
+        },
+        "asset": "item_display_sunflower_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:table"
+        },
+        "asset": "item_display_table"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:tilted_rack"
+        },
+        "asset": "item_display_tilted_rack"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:torchflower_sandwich_board"
+        },
+        "asset": "item_display_torchflower_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:trellis"
+        },
+        "asset": "item_display_trellis"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:tulip_sandwich_board"
+        },
+        "asset": "item_display_tulip_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:white_bar_stool"
+        },
+        "asset": "item_display_white_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:white_sofa"
+        },
+        "asset": "item_display_white_sofa"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:wither_rose_sandwich_board"
+        },
+        "asset": "item_display_wither_rose_sandwich_board"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:yellow_bar_stool"
+        },
+        "asset": "item_display_yellow_bar_stool"
+      },
+      {
+        "when": {
+          "item": "kaleidoscope_tavern:yellow_sofa"
+        },
+        "asset": "item_display_yellow_sofa"
+      }
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "white_lady",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "white_lady_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "white_lady_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "white_lady_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "white_lady_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  }
+]

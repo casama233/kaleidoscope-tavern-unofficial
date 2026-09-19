@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "wine_1",
+  "model_identifier": "kt_assets_a1.wine_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "count1_0",
+      "type": "cube",
+      "uuid": "66ff4679-0dd2-53e3-bd6e-b8b92f8ae13c",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        10,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0.0,
+        0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            16.0,
+            0.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      }
+    },
+    {
+      "name": "count1_1",
+      "type": "cube",
+      "uuid": "e8352afe-ab34-51e8-b15b-56ee7dd50780",
+      "from": [
+        -1,
+        10,
+        -1
+      ],
+      "to": [
+        1,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0.0,
+        0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            2.0,
+            9.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      }
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "2a8836e6-63d0-5f0e-b4ac-48b6cbb3a74d",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "66ff4679-0dd2-53e3-bd6e-b8b92f8ae13c",
+        "e8352afe-ab34-51e8-b15b-56ee7dd50780"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "wine.png",
+      "id": "0",
+      "uuid": "17477b68-125b-5dc7-96a7-3eb872a942c6",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAXdJREFUOI2Fk09LAlEUxX/KWEpQiv3R1+AmWpibsKBV1NJlQW0ialULoW3QVwj6BO37CtWiFhFSECRGiaBBMoyNaU2SWFFNi6hm4o2d1eOeew/n/nmeaH/cEqpA13QAGs2yBwmazaYsjFeogvm5RXqCPdKE/+Bdfntn+uCQtN/PRmTAQWZmVq3t8ZTVTkCZ3d1BRCJ4z7NfkanJH/JSK6PdVds6UL4f0WiESuXWQa6c7Unn4RD4LvpbDLA9nrISaoyj3BVrF/tSMWVpIU1yLMlJ5oRWq+UgT/NZ7p+eKBpFdweP5iMAoXCIluYUmIiPklBjWK9AtSQXACgUCj93YMemWWO4L8yxUXZ34PP5eKg/EAgEAGjI78VdoG6WXCdtVNqvEGxrlGErPsJgMEzuw89aNS8X6O6KWUIVAOia7vgLm2YNzBqG4e5EsX8koQoahd+BrQd7/3XgbdfC88sreV3D0+mepuiajr0FO/ydHQwFw+Sub1wFPgFRdYqFfHzBrwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ]
+}

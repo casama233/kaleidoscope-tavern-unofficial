@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "champagne_1",
+  "model_identifier": "kt_assets_a4.champagne_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "champagne_1_element0",
+      "type": "cube",
+      "uuid": "a8d91b54-c623-50f6-a5ef-f694e2e80c40",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        10,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            15.0,
+            5.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            11.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "champagne_1_element1",
+      "type": "cube",
+      "uuid": "f7160ea7-544a-5927-b3f2-f8059b583864",
+      "from": [
+        -1.0999999999999996,
+        10,
+        -1.0999999999999996
+      ],
+      "to": [
+        1.0999999999999996,
+        16,
+        1.0999999999999996
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            0.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            0.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            0.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            0.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            0.0,
+            9.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            0.0,
+            9.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "f3f76286-dd3b-52b6-a953-e72147a0a78e",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "a8d91b54-c623-50f6-a5ef-f694e2e80c40",
+        "f7160ea7-544a-5927-b3f2-f8059b583864"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "champagne.png",
+      "id": "0",
+      "uuid": "d26aa642-a7f9-5ac1-9997-b0b573c952fd",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAWtJREFUOI2VkT1PAkEQhp+7vTN+tX5gARQQEzUWxhgLCjtjoY0df4P4H0wMtSUdFTbaWkhCLNSYIAYKTTwuURSxoBHicrcWcAcqJsfbzGZ259l3ZrRsalXFYyEeHmsAJNN3Gj15dxfnRQ5OXv38oIx4LMRaYhc48yGeCldVnutNnuotHxgOzwJg23WS6TvN6BadDYOT2IgQj4Xgswg0CYdnKdyU6XQUW5vLXQeHmQrJnUkuKzaW9f4DcJipEI02sKyPn7aNfjdGNDoz9Pdhsu06ifUl/wxAKZ9TjtNWDbusSvmcGizIplbV9fG2OtqfV39onhp2+V9AEBm1pzIAXhxV2t7aglqJzAFwX33j9PZl6L7/dTA4+d9bCOQg6MPFaU0BmKbwc1I6GEEBpimYGB8DwHFdhK4jZSs4wCucmhzHcRW4HUxToActltJB6DpC6IyZAtdVmIYYrQWAdqvdcwOyM8IMpHSAr17s6xuZrZ8HSputBgAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

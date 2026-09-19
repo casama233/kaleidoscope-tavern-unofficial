@@ -1,0 +1,48 @@
+Compiled from "SitRenderer.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.SitRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity> {
+  private static final net.minecraft.resources.ResourceLocation EMPTY;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.SitRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method net/minecraft/client/renderer/entity/EntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+       5: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: return
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity);
+    Code:
+       0: getstatic     #7                  // Field EMPTY:Lnet/minecraft/resources/ResourceLocation;
+       3: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #13                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity
+       5: invokevirtual #15                 // Method getTextureLocation:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #13                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity
+       5: fload_2
+       6: fload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: invokevirtual #19                 // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+      16: return
+
+  static {};
+    Code:
+       0: ldc           #23                 // String textures/entity/empty.png
+       2: invokestatic  #25                 // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #7                  // Field EMPTY:Lnet/minecraft/resources/ResourceLocation;
+       8: return
+}

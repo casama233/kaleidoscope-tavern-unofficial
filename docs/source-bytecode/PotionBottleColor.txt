@@ -1,0 +1,46 @@
+Compiled from "PotionBottleColor.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.misc.PotionBottleColor implements net.minecraft.client.color.block.BlockColor {
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.misc.PotionBottleColor();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public int getColor(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.BlockAndTintGetter, net.minecraft.core.BlockPos, int);
+    Code:
+       0: iload         4
+       2: ifne          13
+       5: aload_2
+       6: ifnull        13
+       9: aload_3
+      10: ifnonnull     16
+      13: ldc           #7                  // int 16777215
+      15: ireturn
+      16: aload_2
+      17: aload_3
+      18: invokeinterface #8,  2            // InterfaceMethod net/minecraft/world/level/BlockAndTintGetter.getBlockEntity:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/entity/BlockEntity;
+      23: astore        6
+      25: aload         6
+      27: instanceof    #14                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PotionBottleBlockEntity
+      30: ifeq          78
+      33: aload         6
+      35: checkcast     #14                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PotionBottleBlockEntity
+      38: astore        5
+      40: aload         5
+      42: invokevirtual #16                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PotionBottleBlockEntity.getPotionStack:()Lnet/minecraft/world/item/ItemStack;
+      45: invokevirtual #20                 // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      48: ifne          78
+      51: aload         5
+      53: invokevirtual #16                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PotionBottleBlockEntity.getPotionStack:()Lnet/minecraft/world/item/ItemStack;
+      56: getstatic     #26                 // Field net/minecraft/core/component/DataComponents.POTION_CONTENTS:Lnet/minecraft/core/component/DataComponentType;
+      59: invokevirtual #32                 // Method net/minecraft/world/item/ItemStack.get:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+      62: checkcast     #36                 // class net/minecraft/world/item/alchemy/PotionContents
+      65: astore        6
+      67: aload         6
+      69: ifnull        78
+      72: aload         6
+      74: invokevirtual #38                 // Method net/minecraft/world/item/alchemy/PotionContents.getColor:()I
+      77: ireturn
+      78: ldc           #7                  // int 16777215
+      80: ireturn
+}

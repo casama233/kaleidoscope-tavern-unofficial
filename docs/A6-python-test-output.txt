@@ -1,0 +1,43 @@
+test_actual_png_size_not_unreliable_model_hint (test_a6_assets.A6AssetTests.test_actual_png_size_not_unreliable_model_hint) ... ok
+test_all_25_added_sources_match_upstream_hash (test_a6_assets.A6AssetTests.test_all_25_added_sources_match_upstream_hash) ... ok
+test_cabinet_elements_and_shelf_variants (test_a6_assets.A6AssetTests.test_cabinet_elements_and_shelf_variants) ... ok
+test_every_a5_geometry_editor_texture_retained (test_a6_assets.A6AssetTests.test_every_a5_geometry_editor_texture_retained) ... ok
+test_exact_scope_no_placeholder_or_extra_family (test_a6_assets.A6AssetTests.test_exact_scope_no_placeholder_or_extra_family) ... ok
+test_glass_pane_remains_single_sided (test_a6_assets.A6AssetTests.test_glass_pane_remains_single_sided) ... ok
+test_original_textures_unchanged (test_a6_assets.A6AssetTests.test_original_textures_unchanged) ... ok
+test_vodka_four_distinct_source_arrangements (test_a6_assets.A6AssetTests.test_vodka_four_distinct_source_arrangements) ... ok
+test_applied_manifest_and_requirement_agree (test_interfaces.CookeryTests.test_applied_manifest_and_requirement_agree) ... ok
+test_archive_traversal_refused (test_interfaces.CookeryTests.test_archive_traversal_refused) ... ok
+test_dependency_upgrade_replaces_old_binding_not_duplicates (test_interfaces.CookeryTests.test_dependency_upgrade_replaces_old_binding_not_duplicates) ... ok
+test_dry_run_changes_nothing (test_interfaces.CookeryTests.test_dry_run_changes_nothing) ... ok
+test_header_uuid_and_internal_version_not_module_or_filename (test_interfaces.CookeryTests.test_header_uuid_and_internal_version_not_module_or_filename) ... ok
+test_item_mapping_checks_exact_registry (test_interfaces.CookeryTests.test_item_mapping_checks_exact_registry) ... ok
+test_json_duplicate_keys_refused (test_interfaces.CookeryTests.test_json_duplicate_keys_refused) ... ok
+test_keep_unrelated_dependencies_and_own_ids (test_interfaces.CookeryTests.test_keep_unrelated_dependencies_and_own_ids) ... ok
+test_multifile_write_failure_rolls_back (test_interfaces.CookeryTests.test_multifile_write_failure_rolls_back) ... ok
+test_nested_mcpack (test_interfaces.CookeryTests.test_nested_mcpack) ... ok
+test_path_escape_refused (test_interfaces.CookeryTests.test_path_escape_refused) ... ok
+test_refuse_dependency_cycle (test_interfaces.CookeryTests.test_refuse_dependency_cycle) ... ok
+test_refuse_invalid_version (test_interfaces.CookeryTests.test_refuse_invalid_version) ... ok
+test_refuse_module_collision (test_interfaces.CookeryTests.test_refuse_module_collision) ... ok
+test_refuse_self_binding (test_interfaces.CookeryTests.test_refuse_self_binding) ... ok
+test_repeated_bind_is_idempotent (test_interfaces.CookeryTests.test_repeated_bind_is_idempotent) ... ok
+test_unbound_nonempty_mapping_refused (test_interfaces.CookeryTests.test_unbound_nonempty_mapping_refused) ... ok
+test_all_links_valid (test_interfaces.ProjectLinkTests.test_all_links_valid) ... ok
+test_binding_survives_full_rebuild (test_interfaces.ProjectLinkTests.test_binding_survives_full_rebuild) ... ok
+test_bridge_missing_type_detected (test_interfaces.ProjectLinkTests.test_bridge_missing_type_detected) ... ok
+test_missing_explicit_inventory_binding_detected (test_interfaces.ProjectLinkTests.test_missing_explicit_inventory_binding_detected) ... ok
+test_missing_texture_detected (test_interfaces.ProjectLinkTests.test_missing_texture_detected) ... ok
+test_production_gate_stays_closed (test_interfaces.ProjectLinkTests.test_production_gate_stays_closed) ... ok
+test_production_packaging_refuses_before_writing_archive (test_interfaces.ProjectLinkTests.test_production_packaging_refuses_before_writing_archive) ... ok
+test_registry_deterministic (test_interfaces.ProjectLinkTests.test_registry_deterministic) ... ok
+test_stale_registry_detected (test_interfaces.ProjectLinkTests.test_stale_registry_detected) ... ok
+test_wrong_render_controller_alias_detected (test_interfaces.ProjectLinkTests.test_wrong_render_controller_alias_detected) ... ok
+test_changed_resource_fails (test_interfaces.ReleaseComparisonTests.test_changed_resource_fails) ... ok
+test_main_and_generated_both_compared (test_interfaces.ReleaseComparisonTests.test_main_and_generated_both_compared) ... ok
+test_missing_generated_file_fails (test_interfaces.ReleaseComparisonTests.test_missing_generated_file_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 5.634s
+
+OK

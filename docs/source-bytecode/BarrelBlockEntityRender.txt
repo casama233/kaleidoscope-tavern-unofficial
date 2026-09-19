@@ -1,0 +1,393 @@
+Compiled from "BarrelBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.BarrelBlockEntityRender implements net.minecraft.client.renderer.blockentity.BlockEntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity> {
+  private static final net.minecraft.resources.ResourceLocation LARGE_TEXTURE;
+
+  private final net.minecraft.client.renderer.entity.ItemRenderer itemRenderer;
+
+  private final com.github.ysbbbbbb.kaleidoscopetavern.client.model.brew.BarrelModel model;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.BarrelBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #7                  // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.getItemRenderer:()Lnet/minecraft/client/renderer/entity/ItemRenderer;
+       9: putfield      #13                 // Field itemRenderer:Lnet/minecraft/client/renderer/entity/ItemRenderer;
+      12: aload_0
+      13: new           #19                 // class com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel
+      16: dup
+      17: aload_1
+      18: getstatic     #21                 // Field com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      21: invokevirtual #25                 // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.bakeLayer:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      24: invokespecial #29                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      27: putfield      #32                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel;
+      30: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_3
+       3: aload         4
+       5: iload         5
+       7: iload         6
+       9: invokevirtual #36                 // Method renderBody:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      12: aload_1
+      13: invokevirtual #40                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.isOpen:()Z
+      16: ifeq          42
+      19: aload_0
+      20: aload_1
+      21: aload_3
+      22: aload         4
+      24: iload         5
+      26: invokevirtual #46                 // Method renderFluid:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+      29: aload_0
+      30: aload_1
+      31: aload_3
+      32: aload         4
+      34: iload         5
+      36: iload         6
+      38: fload_2
+      39: invokevirtual #50                 // Method renderItems:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IIF)V
+      42: return
+
+  private void renderBody(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #54                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+       4: getstatic     #58                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BarrelBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+       7: invokevirtual #64                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #70                 // class net/minecraft/core/Direction
+      13: astore        6
+      15: aload_2
+      16: invokevirtual #72                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      19: aload_2
+      20: ldc2_w        #77                 // double 0.5d
+      23: ldc2_w        #79                 // double 1.5d
+      26: ldc2_w        #77                 // double 0.5d
+      29: invokevirtual #81                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      32: aload_2
+      33: getstatic     #85                 // Field com/mojang/math/Axis.ZN:Lcom/mojang/math/Axis;
+      36: ldc           #91                 // float 180.0f
+      38: invokeinterface #92,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      43: invokevirtual #96                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      46: aload_2
+      47: getstatic     #100                // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+      50: sipush        180
+      53: aload         6
+      55: invokevirtual #103                // Method net/minecraft/core/Direction.get2DDataValue:()I
+      58: bipush        90
+      60: imul
+      61: isub
+      62: i2f
+      63: invokeinterface #92,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      68: invokevirtual #96                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      71: aload_1
+      72: invokevirtual #40                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.isOpen:()Z
+      75: istore        7
+      77: aload_0
+      78: getfield      #32                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel;
+      81: invokevirtual #107                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel.getOpen:()Lnet/minecraft/client/model/geom/ModelPart;
+      84: iload         7
+      86: putfield      #111                // Field net/minecraft/client/model/geom/ModelPart.visible:Z
+      89: aload_0
+      90: getfield      #32                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel;
+      93: invokevirtual #117                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel.getClose:()Lnet/minecraft/client/model/geom/ModelPart;
+      96: iload         7
+      98: ifne          105
+     101: iconst_1
+     102: goto          106
+     105: iconst_0
+     106: putfield      #111                // Field net/minecraft/client/model/geom/ModelPart.visible:Z
+     109: aload_3
+     110: getstatic     #120                // Field LARGE_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     113: invokestatic  #124                // Method net/minecraft/client/renderer/RenderType.entityCutoutNoCull:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+     116: invokeinterface #130,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     121: astore        8
+     123: aload_0
+     124: getfield      #32                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel;
+     127: aload_2
+     128: aload         8
+     130: iload         4
+     132: iload         5
+     134: iconst_m1
+     135: invokevirtual #136                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel.renderToBuffer:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V
+     138: aload_2
+     139: invokevirtual #140                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     142: return
+
+  private void renderFluid(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #143                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getFluid:()Lnet/neoforged/neoforge/fluids/capability/templates/FluidTank;
+       4: astore        5
+       6: aload         5
+       8: invokevirtual #147                // Method net/neoforged/neoforge/fluids/capability/templates/FluidTank.getFluidAmount:()I
+      11: istore        6
+      13: iload         6
+      15: ifle          71
+      18: aload_2
+      19: invokevirtual #72                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      22: aload_2
+      23: fconst_0
+      24: fconst_2
+      25: fconst_0
+      26: invokevirtual #152                // Method com/mojang/blaze3d/vertex/PoseStack.translate:(FFF)V
+      29: iload         6
+      31: i2f
+      32: ldc           #157                // float 4000.0f
+      34: fdiv
+      35: fstore        7
+      37: fload         7
+      39: ldc           #158                // float 0.65f
+      41: fmul
+      42: fstore        8
+      44: aload         5
+      46: invokevirtual #159                // Method net/neoforged/neoforge/fluids/capability/templates/FluidTank.getFluid:()Lnet/neoforged/neoforge/fluids/FluidStack;
+      49: invokevirtual #162                // Method net/neoforged/neoforge/fluids/FluidStack.getFluid:()Lnet/minecraft/world/level/material/Fluid;
+      52: astore        9
+      54: aload         9
+      56: aload_2
+      57: aload_3
+      58: iload         4
+      60: bipush        16
+      62: fload         8
+      64: invokestatic  #167                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.renderFluid:(Lnet/minecraft/world/level/material/Fluid;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IIF)V
+      67: aload_2
+      68: invokevirtual #140                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+      71: return
+
+  private void renderItems(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int, float);
+    Code:
+       0: aload_1
+       1: invokevirtual #172                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getLevel:()Lnet/minecraft/world/level/Level;
+       4: ifnonnull     8
+       7: return
+       8: aload_1
+       9: invokevirtual #172                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getLevel:()Lnet/minecraft/world/level/Level;
+      12: invokevirtual #176                // Method net/minecraft/world/level/Level.getGameTime:()J
+      15: l2f
+      16: fload         6
+      18: fadd
+      19: fstore        7
+      21: aload_1
+      22: invokevirtual #182                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+      25: invokevirtual #186                // Method net/minecraft/core/BlockPos.asLong:()J
+      28: lstore        8
+      30: aload_1
+      31: invokevirtual #191                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getIngredient:()Lnet/neoforged/neoforge/items/ItemStackHandler;
+      34: astore        10
+      36: iconst_0
+      37: istore        11
+      39: iconst_0
+      40: istore        12
+      42: iload         12
+      44: aload         10
+      46: invokevirtual #195                // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      49: if_icmpge     319
+      52: aload         10
+      54: iload         12
+      56: invokevirtual #200                // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      59: astore        13
+      61: aload         13
+      63: invokevirtual #204                // Method net/minecraft/world/item/ItemStack.getCount:()I
+      66: iconst_2
+      67: idiv
+      68: iconst_1
+      69: iadd
+      70: istore        14
+      72: aload         13
+      74: invokevirtual #209                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      77: ifne          313
+      80: iconst_0
+      81: istore        15
+      83: iload         15
+      85: iload         14
+      87: if_icmpge     313
+      90: aload_2
+      91: invokevirtual #72                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      94: lload         8
+      96: iload         11
+      98: iload         12
+     100: iconst_1
+     101: iadd
+     102: invokestatic  #212                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.stableRandom:(JII)F
+     105: ldc           #216                // float 0.4f
+     107: fmul
+     108: fstore        16
+     110: lload         8
+     112: iload         11
+     114: iload         12
+     116: iconst_2
+     117: iadd
+     118: invokestatic  #212                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.stableRandom:(JII)F
+     121: ldc           #216                // float 0.4f
+     123: fmul
+     124: fstore        17
+     126: iload         11
+     128: iconst_4
+     129: idiv
+     130: i2f
+     131: ldc           #217                // float 0.025f
+     133: fmul
+     134: lload         8
+     136: iload         11
+     138: iload         12
+     140: iconst_3
+     141: iadd
+     142: invokestatic  #212                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.stableRandom:(JII)F
+     145: ldc           #218                // float 0.05f
+     147: fmul
+     148: fadd
+     149: fstore        18
+     151: fload         18
+     153: fload         7
+     155: ldc           #219                // float 10.0f
+     157: fdiv
+     158: iload         11
+     160: i2f
+     161: fadd
+     162: f2d
+     163: invokestatic  #220                // Method java/lang/Math.sin:(D)D
+     166: ldc2_w        #226                // double 0.019999999552965164d
+     169: dmul
+     170: d2f
+     171: fadd
+     172: fstore        18
+     174: lload         8
+     176: iload         11
+     178: iload         12
+     180: iconst_4
+     181: iadd
+     182: invokestatic  #212                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.stableRandom:(JII)F
+     185: ldc           #228                // float 5.0f
+     187: fmul
+     188: fstore        19
+     190: lload         8
+     192: iload         11
+     194: iload         12
+     196: iconst_5
+     197: iadd
+     198: invokestatic  #212                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.stableRandom:(JII)F
+     201: ldc           #229                // float 360.0f
+     203: fmul
+     204: fstore        20
+     206: aload_2
+     207: ldc           #230                // float 0.5f
+     209: fload         16
+     211: fadd
+     212: ldc           #231                // float 2.7f
+     214: fload         18
+     216: fadd
+     217: ldc           #230                // float 0.5f
+     219: fload         17
+     221: fadd
+     222: invokevirtual #152                // Method com/mojang/blaze3d/vertex/PoseStack.translate:(FFF)V
+     225: aload_2
+     226: ldc           #230                // float 0.5f
+     228: ldc           #230                // float 0.5f
+     230: ldc           #230                // float 0.5f
+     232: invokevirtual #232                // Method com/mojang/blaze3d/vertex/PoseStack.scale:(FFF)V
+     235: aload_2
+     236: getstatic     #235                // Field com/mojang/math/Axis.XN:Lcom/mojang/math/Axis;
+     239: ldc           #238                // float 90.0f
+     241: invokeinterface #92,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     246: invokevirtual #96                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     249: aload_2
+     250: getstatic     #100                // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+     253: fload         19
+     255: invokeinterface #92,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     260: invokevirtual #96                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     263: aload_2
+     264: getstatic     #85                 // Field com/mojang/math/Axis.ZN:Lcom/mojang/math/Axis;
+     267: fload         20
+     269: invokeinterface #92,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     274: invokevirtual #96                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     277: aload_0
+     278: getfield      #13                 // Field itemRenderer:Lnet/minecraft/client/renderer/entity/ItemRenderer;
+     281: aload         13
+     283: getstatic     #239                // Field net/minecraft/world/item/ItemDisplayContext.FIXED:Lnet/minecraft/world/item/ItemDisplayContext;
+     286: iload         4
+     288: iload         5
+     290: aload_2
+     291: aload_3
+     292: aload_1
+     293: invokevirtual #172                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getLevel:()Lnet/minecraft/world/level/Level;
+     296: iconst_0
+     297: invokevirtual #245                // Method net/minecraft/client/renderer/entity/ItemRenderer.renderStatic:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;IILcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/level/Level;I)V
+     300: aload_2
+     301: invokevirtual #140                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     304: iinc          11, 1
+     307: iinc          15, 1
+     310: goto          83
+     313: iinc          12, 1
+     316: goto          42
+     319: return
+
+  public net.minecraft.world.phys.AABB getRenderBoundingBox(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity);
+    Code:
+       0: aload_1
+       1: invokevirtual #182                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+       4: astore_2
+       5: new           #251                // class net/minecraft/world/phys/AABB
+       8: dup
+       9: aload_2
+      10: invokevirtual #253                // Method net/minecraft/core/BlockPos.getX:()I
+      13: iconst_2
+      14: isub
+      15: i2d
+      16: aload_2
+      17: invokevirtual #256                // Method net/minecraft/core/BlockPos.getY:()I
+      20: i2d
+      21: aload_2
+      22: invokevirtual #259                // Method net/minecraft/core/BlockPos.getZ:()I
+      25: iconst_2
+      26: isub
+      27: i2d
+      28: aload_2
+      29: invokevirtual #253                // Method net/minecraft/core/BlockPos.getX:()I
+      32: iconst_2
+      33: iadd
+      34: i2d
+      35: aload_2
+      36: invokevirtual #256                // Method net/minecraft/core/BlockPos.getY:()I
+      39: iconst_3
+      40: iadd
+      41: i2d
+      42: aload_2
+      43: invokevirtual #259                // Method net/minecraft/core/BlockPos.getZ:()I
+      46: iconst_2
+      47: iadd
+      48: i2d
+      49: invokespecial #262                // Method net/minecraft/world/phys/AABB."<init>":(DDDDDD)V
+      52: areturn
+
+  public void render(net.minecraft.world.level.block.entity.BlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #41                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity
+       5: fload_2
+       6: aload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: invokevirtual #265                // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      16: return
+
+  public net.minecraft.world.phys.AABB getRenderBoundingBox(net.minecraft.world.level.block.entity.BlockEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #41                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity
+       5: invokevirtual #269                // Method getRenderBoundingBox:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity;)Lnet/minecraft/world/phys/AABB;
+       8: areturn
+
+  static {};
+    Code:
+       0: ldc_w         #273                // String textures/entity/brew/barrel.png
+       3: invokestatic  #275                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       6: putstatic     #120                // Field LARGE_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       9: return
+}

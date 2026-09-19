@@ -1,0 +1,619 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sofa_lime_middle",
+  "model_identifier": "kt_assets_a4.sofa_lime_middle",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "sofa_lime_middle_element0",
+      "type": "cube",
+      "uuid": "8ef2cfd1-af69-50ec-8373-aee712fe11a6",
+      "from": [
+        -8,
+        8,
+        3
+      ],
+      "to": [
+        8,
+        18,
+        8
+      ],
+      "origin": [
+        0.009999999999999787,
+        13.99,
+        4.710000000000001
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            0.0,
+            41.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            59.0,
+            10.0,
+            64.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            42.0,
+            0.0,
+            58.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            64.0,
+            10.0,
+            59.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            17.0,
+            40.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_lime_middle_element1",
+      "type": "cube",
+      "uuid": "8ab4b6c1-4e31-5cd9-b724-a3cfa0b7e52f",
+      "from": [
+        -8,
+        3,
+        -8
+      ],
+      "to": [
+        8,
+        8,
+        8
+      ],
+      "origin": [
+        0,
+        5.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            42.0,
+            10.0,
+            58.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            39.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_lime_middle_element2",
+      "type": "cube",
+      "uuid": "647d3346-0540-56ab-9376-0b1f2a636327",
+      "from": [
+        -8,
+        0,
+        -7
+      ],
+      "to": [
+        -5,
+        3,
+        -4
+      ],
+      "origin": [
+        -8,
+        0,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_lime_middle_element3",
+      "type": "cube",
+      "uuid": "74c64bde-5b3b-59e1-bfae-95d990f99766",
+      "from": [
+        5,
+        0,
+        -7
+      ],
+      "to": [
+        8,
+        3,
+        -4
+      ],
+      "origin": [
+        5,
+        0,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_lime_middle_element4",
+      "type": "cube",
+      "uuid": "2810a3e4-f8e6-5cea-8c42-306fd60ae749",
+      "from": [
+        5,
+        0,
+        4
+      ],
+      "to": [
+        8,
+        3,
+        7
+      ],
+      "origin": [
+        5,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_lime_middle_element5",
+      "type": "cube",
+      "uuid": "eade9c12-b128-5b49-9d10-66de9f49a5f4",
+      "from": [
+        -8,
+        0,
+        4
+      ],
+      "to": [
+        -5,
+        3,
+        7
+      ],
+      "origin": [
+        -8,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "6b040816-f160-56a9-9bf8-a4d52de7c4f6",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "8ef2cfd1-af69-50ec-8373-aee712fe11a6",
+        "8ab4b6c1-4e31-5cd9-b724-a3cfa0b7e52f",
+        "647d3346-0540-56ab-9376-0b1f2a636327",
+        "74c64bde-5b3b-59e1-bfae-95d990f99766",
+        "2810a3e4-f8e6-5cea-8c42-306fd60ae749",
+        "eade9c12-b128-5b49-9d10-66de9f49a5f4"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "lime.png",
+      "id": "0",
+      "uuid": "011bcb70-6934-5c8e-908d-b81cdc9f0f5e",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACmUlEQVR4Xu2Zsa7UMBBF3wfQ0dJQUCPxDXSP+nU0ID2JDlHQUSMhITq+DcTHBN1IdzXctZ0Zb7Ibh7nS0W4cz3h8nXh3s3cPn59Nl3Dn0KefL6f3X190gVjm6MnDOK0Dtc/tePPq/kkXXgM4YA+v3z2dx7gkB2I1B/LO7TjAZNAQodeA0gq12q9qgAbW6DWgNAbO1doZY3MAz+2guTTH8AZof8Xm3I0BtVut1s6xbA6gK1xilwawGEvPHjCsAaUxcK7Wzhibw55rkQbs0YDavV5r51g2BxjOgDW0hgFFocMIBrz98vxUI2+bFqyPMZrvpGsYsPSlpQW/x1sDIoQMiBAxABPRwrwgFjnwXmvw0qwTJzGZHpqJjdYy4BK0ppO0YxTNVxL66ap48Y6xa62xB2wmDIANpofNi7uGNttdR9F/bwAmwV1dN6Aa0U+BLcR9BQvIBUFN2m9RurJRNF9qNHmer5VgnOYbTpiMXtZecN9pvuFEAzAZruoS/AQ4pAG6ykoacGQDPPsB+qQBaUAacEwDIqQBRzEglUqlUqlUKpVKpVIXCM8K8cvSon12KT7g6MXm0f8X7Ti7lecpUA01AMf2vB1nt6IBevm24EQPZ4CucA2PAcP8b7iWAcOqZIDdyGrcyoDSp00N11W4hgGRohRXkUa2ziXQV+PPxIQ2sZ1kCfalAZGilOhVFBnrJgboCtfgH7FRA2x9S6Cvxp9pTQNaMYrmuJlGMyCy37j2lx4D9PJlrH4VXqLHAFvnEuir8Wda0wDm8aA5vNrMAHtp0YBS0aRkQMs0xcZoTS31GPDt+4/p1+8/E15xfP/mYSKhhMotDGCMB/RFzOOHj/Pk8YpjTBzvZwMim4rCTYaTucYe0GPAPysux38BbDkLgpa44cgAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/lime/middle.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/lime/middle.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/base/middle.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

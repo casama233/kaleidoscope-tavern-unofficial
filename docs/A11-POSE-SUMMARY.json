@@ -1,0 +1,1032 @@
+{
+  "build": "A11",
+  "models": [
+    {
+      "asset": "trellis_single",
+      "category": "trellis",
+      "title_zh": "藤架・直立",
+      "title_en": "Trellis | single",
+      "block_id": "kt_assets_a2:trellis_single",
+      "geometry": "RP/models/entity/trellis_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/single.json"
+    },
+    {
+      "asset": "trellis_east_west",
+      "category": "trellis",
+      "title_zh": "藤架・東西橫桿",
+      "title_en": "Trellis | east_west",
+      "block_id": "kt_assets_a2:trellis_east_west",
+      "geometry": "RP/models/entity/trellis_east_west.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/east_west.json"
+    },
+    {
+      "asset": "trellis_north_south",
+      "category": "trellis",
+      "title_zh": "藤架・南北橫桿",
+      "title_en": "Trellis | north_south",
+      "block_id": "kt_assets_a2:trellis_north_south",
+      "geometry": "RP/models/entity/trellis_north_south.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/north_south.json"
+    },
+    {
+      "asset": "trellis_cross_east_west",
+      "category": "trellis",
+      "title_zh": "藤架・東西十字",
+      "title_en": "Trellis | cross_east_west",
+      "block_id": "kt_assets_a2:trellis_cross_east_west",
+      "geometry": "RP/models/entity/trellis_cross_east_west.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_east_west.json"
+    },
+    {
+      "asset": "trellis_cross_north_south",
+      "category": "trellis",
+      "title_zh": "藤架・南北十字",
+      "title_en": "Trellis | cross_north_south",
+      "block_id": "kt_assets_a2:trellis_cross_north_south",
+      "geometry": "RP/models/entity/trellis_cross_north_south.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_north_south.json"
+    },
+    {
+      "asset": "trellis_cross_up_down",
+      "category": "trellis",
+      "title_zh": "藤架・水平十字",
+      "title_en": "Trellis | cross_up_down",
+      "block_id": "kt_assets_a2:trellis_cross_up_down",
+      "geometry": "RP/models/entity/trellis_cross_up_down.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_up_down.json"
+    },
+    {
+      "asset": "trellis_six_direction",
+      "category": "trellis",
+      "title_zh": "藤架・六向連接",
+      "title_en": "Trellis | six_direction",
+      "block_id": "kt_assets_a2:trellis_six_direction",
+      "geometry": "RP/models/entity/trellis_six_direction.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/six_direction.json"
+    },
+    {
+      "asset": "sofa_white_single",
+      "category": "sofa",
+      "title_zh": "白色沙發・單座",
+      "title_en": "Sofa | white | single",
+      "block_id": "kt_assets_a4:sofa_white_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/white/single.json"
+    },
+    {
+      "asset": "sofa_orange_single",
+      "category": "sofa",
+      "title_zh": "橙色沙發・單座",
+      "title_en": "Sofa | orange | single",
+      "block_id": "kt_assets_a4:sofa_orange_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/orange/single.json"
+    },
+    {
+      "asset": "sofa_magenta_single",
+      "category": "sofa",
+      "title_zh": "洋紅色沙發・單座",
+      "title_en": "Sofa | magenta | single",
+      "block_id": "kt_assets_a4:sofa_magenta_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/single.json"
+    },
+    {
+      "asset": "sofa_light_blue_single",
+      "category": "sofa",
+      "title_zh": "淺藍色沙發・單座",
+      "title_en": "Sofa | light_blue | single",
+      "block_id": "kt_assets_a4:sofa_light_blue_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/single.json"
+    },
+    {
+      "asset": "sofa_yellow_single",
+      "category": "sofa",
+      "title_zh": "黃色沙發・單座",
+      "title_en": "Sofa | yellow | single",
+      "block_id": "kt_assets_a4:sofa_yellow_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/single.json"
+    },
+    {
+      "asset": "sofa_lime_single",
+      "category": "sofa",
+      "title_zh": "淺綠色沙發・單座",
+      "title_en": "Sofa | lime | single",
+      "block_id": "kt_assets_a4:sofa_lime_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/lime/single.json"
+    },
+    {
+      "asset": "sofa_pink_single",
+      "category": "sofa",
+      "title_zh": "粉紅色沙發・單座",
+      "title_en": "Sofa | pink | single",
+      "block_id": "kt_assets_a4:sofa_pink_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/pink/single.json"
+    },
+    {
+      "asset": "sofa_gray_single",
+      "category": "sofa",
+      "title_zh": "灰色沙發・單座",
+      "title_en": "Sofa | gray | single",
+      "block_id": "kt_assets_a4:sofa_gray_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/gray/single.json"
+    },
+    {
+      "asset": "sofa_light_gray_single",
+      "category": "sofa",
+      "title_zh": "淺灰色沙發・單座",
+      "title_en": "Sofa | light_gray | single",
+      "block_id": "kt_assets_a4:sofa_light_gray_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/single.json"
+    },
+    {
+      "asset": "sofa_cyan_single",
+      "category": "sofa",
+      "title_zh": "青色沙發・單座",
+      "title_en": "Sofa | cyan | single",
+      "block_id": "kt_assets_a4:sofa_cyan_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/single.json"
+    },
+    {
+      "asset": "sofa_purple_single",
+      "category": "sofa",
+      "title_zh": "紫色沙發・單座",
+      "title_en": "Sofa | purple | single",
+      "block_id": "kt_assets_a4:sofa_purple_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/purple/single.json"
+    },
+    {
+      "asset": "sofa_blue_single",
+      "category": "sofa",
+      "title_zh": "藍色沙發・單座",
+      "title_en": "Sofa | blue | single",
+      "block_id": "kt_assets_a4:sofa_blue_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/blue/single.json"
+    },
+    {
+      "asset": "sofa_brown_single",
+      "category": "sofa",
+      "title_zh": "棕色沙發・單座",
+      "title_en": "Sofa | brown | single",
+      "block_id": "kt_assets_a4:sofa_brown_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/brown/single.json"
+    },
+    {
+      "asset": "sofa_green_single",
+      "category": "sofa",
+      "title_zh": "綠色沙發・單座",
+      "title_en": "Sofa | green | single",
+      "block_id": "kt_assets_a4:sofa_green_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/green/single.json"
+    },
+    {
+      "asset": "sofa_red_single",
+      "category": "sofa",
+      "title_zh": "紅色沙發・單座",
+      "title_en": "Sofa | red | single",
+      "block_id": "kt_assets_a4:sofa_red_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/red/single.json"
+    },
+    {
+      "asset": "sofa_black_single",
+      "category": "sofa",
+      "title_zh": "黑色沙發・單座",
+      "title_en": "Sofa | black | single",
+      "block_id": "kt_assets_a4:sofa_black_single",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/black/single.json"
+    },
+    {
+      "asset": "emerald",
+      "category": "cocktail",
+      "title_zh": "翡翠雞尾酒・玻璃材質候選",
+      "title_en": "Emerald Cocktail | translucent candidate",
+      "block_id": "kt_assets_a4:emerald",
+      "geometry": "RP/models/entity/emerald.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/emerald.json"
+    },
+    {
+      "asset": "bar_cabinet_single",
+      "category": "cabinet",
+      "title_zh": "酒櫃・單體",
+      "title_en": "bar_cabinet | single",
+      "block_id": "kt_assets_a6:bar_cabinet_single",
+      "geometry": "RP/models/entity/bar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/single.json"
+    },
+    {
+      "asset": "bar_cabinet_left",
+      "category": "cabinet",
+      "title_zh": "酒櫃・左端",
+      "title_en": "bar_cabinet | left",
+      "block_id": "kt_assets_a6:bar_cabinet_left",
+      "geometry": "RP/models/entity/bar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/left.json"
+    },
+    {
+      "asset": "bar_cabinet_middle",
+      "category": "cabinet",
+      "title_zh": "酒櫃・中段",
+      "title_en": "bar_cabinet | middle",
+      "block_id": "kt_assets_a6:bar_cabinet_middle",
+      "geometry": "RP/models/entity/bar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/middle.json"
+    },
+    {
+      "asset": "bar_cabinet_right",
+      "category": "cabinet",
+      "title_zh": "酒櫃・右端",
+      "title_en": "bar_cabinet | right",
+      "block_id": "kt_assets_a6:bar_cabinet_right",
+      "geometry": "RP/models/entity/bar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/right.json"
+    },
+    {
+      "asset": "glass_bar_cabinet_single",
+      "category": "cabinet",
+      "title_zh": "玻璃酒櫃・單體",
+      "title_en": "glass_bar_cabinet | single",
+      "block_id": "kt_assets_a6:glass_bar_cabinet_single",
+      "geometry": "RP/models/entity/glass_bar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json"
+    },
+    {
+      "asset": "glass_bar_cabinet_left",
+      "category": "cabinet",
+      "title_zh": "玻璃酒櫃・左端",
+      "title_en": "glass_bar_cabinet | left",
+      "block_id": "kt_assets_a6:glass_bar_cabinet_left",
+      "geometry": "RP/models/entity/glass_bar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/left.json"
+    },
+    {
+      "asset": "glass_bar_cabinet_middle",
+      "category": "cabinet",
+      "title_zh": "玻璃酒櫃・中段",
+      "title_en": "glass_bar_cabinet | middle",
+      "block_id": "kt_assets_a6:glass_bar_cabinet_middle",
+      "geometry": "RP/models/entity/glass_bar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/middle.json"
+    },
+    {
+      "asset": "glass_bar_cabinet_right",
+      "category": "cabinet",
+      "title_zh": "玻璃酒櫃・右端",
+      "title_en": "glass_bar_cabinet | right",
+      "block_id": "kt_assets_a6:glass_bar_cabinet_right",
+      "geometry": "RP/models/entity/glass_bar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/right.json"
+    },
+    {
+      "asset": "cellar_cabinet_single",
+      "category": "cabinet",
+      "title_zh": "酒窖櫃・單體",
+      "title_en": "cellar_cabinet | single",
+      "block_id": "kt_assets_a6:cellar_cabinet_single",
+      "geometry": "RP/models/entity/cellar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/single.json"
+    },
+    {
+      "asset": "cellar_cabinet_left",
+      "category": "cabinet",
+      "title_zh": "酒窖櫃・左端",
+      "title_en": "cellar_cabinet | left",
+      "block_id": "kt_assets_a6:cellar_cabinet_left",
+      "geometry": "RP/models/entity/cellar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/left.json"
+    },
+    {
+      "asset": "cellar_cabinet_middle",
+      "category": "cabinet",
+      "title_zh": "酒窖櫃・中段",
+      "title_en": "cellar_cabinet | middle",
+      "block_id": "kt_assets_a6:cellar_cabinet_middle",
+      "geometry": "RP/models/entity/cellar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/middle.json"
+    },
+    {
+      "asset": "cellar_cabinet_right",
+      "category": "cabinet",
+      "title_zh": "酒窖櫃・右端",
+      "title_en": "cellar_cabinet | right",
+      "block_id": "kt_assets_a6:cellar_cabinet_right",
+      "geometry": "RP/models/entity/cellar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/right.json"
+    },
+    {
+      "asset": "tilted_rack",
+      "category": "rack",
+      "title_zh": "傾斜酒架",
+      "title_en": "tilted_rack",
+      "block_id": "kt_assets_a6:tilted_rack",
+      "geometry": "RP/models/entity/tilted_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json"
+    },
+    {
+      "asset": "circular_rack",
+      "category": "rack",
+      "title_zh": "圓形酒架",
+      "title_en": "circular_rack",
+      "block_id": "kt_assets_a6:circular_rack",
+      "geometry": "RP/models/entity/circular_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/circular_rack.json"
+    },
+    {
+      "asset": "glassware_holder",
+      "category": "rack",
+      "title_zh": "吊掛杯架",
+      "title_en": "glassware_holder",
+      "block_id": "kt_assets_a6:glassware_holder",
+      "geometry": "RP/models/entity/glassware_holder.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/glassware_holder.json"
+    },
+    {
+      "asset": "empty_glassware",
+      "category": "glassware",
+      "title_zh": "空雞尾酒杯",
+      "title_en": "Empty cocktail glass",
+      "block_id": "kt_assets_a7:empty_glassware",
+      "geometry": "RP/models/entity/empty_glassware.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json"
+    },
+    {
+      "asset": "screwdriver",
+      "category": "cocktail",
+      "title_zh": "螺絲起子雞尾酒",
+      "title_en": "Screwdriver",
+      "block_id": "kt_assets_a7:screwdriver",
+      "geometry": "RP/models/entity/screwdriver.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json"
+    },
+    {
+      "asset": "depth_charge",
+      "category": "cocktail",
+      "title_zh": "深水炸彈",
+      "title_en": "depth_charge",
+      "block_id": "kt_assets_a8:depth_charge",
+      "geometry": "RP/models/entity/depth_charge.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/depth_charge.json"
+    },
+    {
+      "asset": "mojito",
+      "category": "cocktail",
+      "title_zh": "莫希托",
+      "title_en": "mojito",
+      "block_id": "kt_assets_a8:mojito",
+      "geometry": "RP/models/entity/mojito.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json"
+    },
+    {
+      "asset": "signature_cocktail",
+      "category": "cocktail",
+      "title_zh": "特調（原始未染色）",
+      "title_en": "signature_cocktail",
+      "block_id": "kt_assets_a8:signature_cocktail",
+      "geometry": "RP/models/entity/signature_cocktail.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/signature_cocktail.json"
+    },
+    {
+      "asset": "mystery_cocktail",
+      "category": "cocktail",
+      "title_zh": "神秘雞尾酒",
+      "title_en": "mystery_cocktail",
+      "block_id": "kt_assets_a8:mystery_cocktail",
+      "geometry": "RP/models/entity/mystery_cocktail.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json"
+    },
+    {
+      "asset": "white_lady",
+      "category": "cocktail",
+      "title_zh": "白色佳人雞尾酒",
+      "title_en": "White Lady",
+      "block_id": "kt_assets_a9:white_lady",
+      "geometry": "RP/models/entity/white_lady.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json"
+    },
+    {
+      "asset": "allium_garden",
+      "category": "cocktail",
+      "title_zh": "蔥花園",
+      "title_en": "Allium Garden",
+      "block_id": "kt_assets_a10:allium_garden",
+      "geometry": "RP/models/entity/allium_garden.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/allium_garden.json"
+    },
+    {
+      "asset": "bloody_mary",
+      "category": "cocktail",
+      "title_zh": "血腥瑪麗",
+      "title_en": "Bloody Mary",
+      "block_id": "kt_assets_a10:bloody_mary",
+      "geometry": "RP/models/entity/bloody_mary.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json"
+    },
+    {
+      "asset": "brass_heart",
+      "category": "cocktail",
+      "title_zh": "黃銅之心",
+      "title_en": "Brass Heart",
+      "block_id": "kt_assets_a10:brass_heart",
+      "geometry": "RP/models/entity/brass_heart.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/brass_heart.json"
+    },
+    {
+      "asset": "godfather",
+      "category": "cocktail",
+      "title_zh": "教父",
+      "title_en": "Godfather",
+      "block_id": "kt_assets_a10:godfather",
+      "geometry": "RP/models/entity/godfather.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/godfather.json"
+    },
+    {
+      "asset": "grasshopper",
+      "category": "cocktail",
+      "title_zh": "蚱蜢",
+      "title_en": "Grasshopper",
+      "block_id": "kt_assets_a10:grasshopper",
+      "geometry": "RP/models/entity/grasshopper.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json"
+    },
+    {
+      "asset": "nether_special",
+      "category": "cocktail",
+      "title_zh": "下界特調",
+      "title_en": "Nether Special",
+      "block_id": "kt_assets_a10:nether_special",
+      "geometry": "RP/models/entity/nether_special.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/nether_special.json"
+    },
+    {
+      "asset": "sculk_special",
+      "category": "cocktail",
+      "title_zh": "幽匿特調",
+      "title_en": "Sculk Special",
+      "block_id": "kt_assets_a10:sculk_special",
+      "geometry": "RP/models/entity/sculk_special.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json"
+    },
+    {
+      "asset": "bar_counter_single",
+      "category": "bar_counter",
+      "title_zh": "吧檯・單體",
+      "title_en": "Bar Counter | single",
+      "block_id": "kt_assets_a10:bar_counter_single",
+      "geometry": "RP/models/entity/bar_counter_single.geo.json",
+      "contexts": [
+        "gui",
+        "ground",
+        "fixed",
+        "thirdperson_righthand",
+        "firstperson_righthand",
+        "firstperson_lefthand"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bar_counter/single.json"
+    },
+    {
+      "asset": "holder",
+      "category": "rack",
+      "title_zh": "酒瓶展示座",
+      "title_en": "Bottle Holder",
+      "block_id": "kt_assets_a10:holder",
+      "geometry": "RP/models/entity/holder.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/holder.json"
+    }
+  ]
+}

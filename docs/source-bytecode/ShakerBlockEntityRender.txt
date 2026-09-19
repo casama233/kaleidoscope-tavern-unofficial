@@ -1,0 +1,136 @@
+Compiled from "ShakerBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.ShakerBlockEntityRender implements net.minecraft.client.renderer.blockentity.BlockEntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.mixology.ShakerBlockEntity> {
+  private static final net.minecraft.resources.ResourceLocation TEXTURE;
+
+  private static final org.joml.Vector3f ANIMATION_VECTOR_CACHE;
+
+  private final net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context context;
+
+  private final com.github.ysbbbbbb.kaleidoscopetavern.client.model.mixology.ShakerModel model;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.ShakerBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field context:Lnet/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context;
+       9: aload_0
+      10: new           #13                 // class com/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel
+      13: dup
+      14: aload_1
+      15: getstatic     #15                 // Field com/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      18: invokevirtual #19                 // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.bakeLayer:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      21: invokespecial #25                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      24: putfield      #28                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel;
+      27: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.mixology.ShakerBlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #32                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.getLevel:()Lnet/minecraft/world/level/Level;
+       4: astore        7
+       6: aload         7
+       8: ifnonnull     12
+      11: return
+      12: aload_1
+      13: invokevirtual #32                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.getLevel:()Lnet/minecraft/world/level/Level;
+      16: invokevirtual #38                 // Method net/minecraft/world/level/Level.getGameTime:()J
+      19: l2f
+      20: fload_2
+      21: fadd
+      22: fstore        8
+      24: aload_0
+      25: getfield      #28                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel;
+      28: invokevirtual #44                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel.root:()Lnet/minecraft/client/model/geom/ModelPart;
+      31: invokevirtual #48                 // Method net/minecraft/client/model/geom/ModelPart.getAllParts:()Ljava/util/stream/Stream;
+      34: invokedynamic #54,  0             // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+      39: invokeinterface #58,  2           // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      44: aload_0
+      45: aload_1
+      46: getfield      #64                 // Field com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.putState:Lnet/minecraft/world/entity/AnimationState;
+      49: getstatic     #68                 // Field com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.PUT:Lnet/minecraft/client/animation/AnimationDefinition;
+      52: fload         8
+      54: invokevirtual #74                 // Method animate:(Lnet/minecraft/world/entity/AnimationState;Lnet/minecraft/client/animation/AnimationDefinition;F)V
+      57: aload_3
+      58: invokevirtual #78                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      61: aload_3
+      62: ldc2_w        #83                 // double 0.5d
+      65: ldc2_w        #85                 // double 1.5d
+      68: ldc2_w        #83                 // double 0.5d
+      71: invokevirtual #87                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      74: aload_3
+      75: getstatic     #91                 // Field com/mojang/math/Axis.ZN:Lcom/mojang/math/Axis;
+      78: ldc           #97                 // float 180.0f
+      80: invokeinterface #98,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      85: invokevirtual #102                // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      88: aload_3
+      89: getstatic     #106                // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+      92: ldc           #97                 // float 180.0f
+      94: invokeinterface #98,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      99: invokevirtual #102                // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     102: aload         4
+     104: getstatic     #109                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     107: invokestatic  #113                // Method net/minecraft/client/renderer/RenderType.entityCutoutNoCull:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+     110: invokeinterface #119,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     115: astore        9
+     117: aload_0
+     118: getfield      #28                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel;
+     121: aload_3
+     122: aload         9
+     124: iload         5
+     126: iload         6
+     128: invokevirtual #125                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel.renderToBuffer:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;II)V
+     131: aload_3
+     132: invokevirtual #129                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     135: return
+
+  protected void animate(net.minecraft.world.entity.AnimationState, net.minecraft.client.animation.AnimationDefinition, float);
+    Code:
+       0: aload_1
+       1: fload_3
+       2: fconst_1
+       3: invokevirtual #132                // Method net/minecraft/world/entity/AnimationState.updateTime:(FF)V
+       6: aload_1
+       7: aload_0
+       8: aload_2
+       9: invokedynamic #138,  0            // InvokeDynamic #1:accept:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/render/block/ShakerBlockEntityRender;Lnet/minecraft/client/animation/AnimationDefinition;)Ljava/util/function/Consumer;
+      14: invokevirtual #141                // Method net/minecraft/world/entity/AnimationState.ifStarted:(Ljava/util/function/Consumer;)V
+      17: return
+
+  public void render(net.minecraft.world.level.block.entity.BlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #33                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity
+       5: fload_2
+       6: aload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: invokevirtual #144                // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      16: return
+
+  private void lambda$animate$0(net.minecraft.client.animation.AnimationDefinition, net.minecraft.world.entity.AnimationState);
+    Code:
+       0: aload_0
+       1: getfield      #28                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/mixology/ShakerModel;
+       4: aload_1
+       5: aload_2
+       6: invokevirtual #148                // Method net/minecraft/world/entity/AnimationState.getAccumulatedTime:()J
+       9: fconst_1
+      10: getstatic     #151                // Field ANIMATION_VECTOR_CACHE:Lorg/joml/Vector3f;
+      13: invokestatic  #155                // Method net/minecraft/client/animation/KeyframeAnimations.animate:(Lnet/minecraft/client/model/HierarchicalModel;Lnet/minecraft/client/animation/AnimationDefinition;JFLorg/joml/Vector3f;)V
+      16: return
+
+  static {};
+    Code:
+       0: ldc           #160                // String textures/block/mixology/shaker.png
+       2: invokestatic  #162                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #109                // Field TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       8: new           #168                // class org/joml/Vector3f
+      11: dup
+      12: invokespecial #170                // Method org/joml/Vector3f."<init>":()V
+      15: putstatic     #151                // Field ANIMATION_VECTOR_CACHE:Lorg/joml/Vector3f;
+      18: return
+}

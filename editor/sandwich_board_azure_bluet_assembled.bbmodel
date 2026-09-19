@@ -1,0 +1,1145 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_azure_bluet_assembled",
+  "model_identifier": "kt_assets_a17.sandwich_board_azure_bluet_assembled",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "board_source_bottom_element0",
+      "type": "cube",
+      "uuid": "20a8b4b6-119a-5960-aa6b-a12b00ca4cbe",
+      "from": [
+        -6.5,
+        4,
+        -5.7
+      ],
+      "to": [
+        6.5,
+        6,
+        5.300000000000001
+      ],
+      "origin": [
+        0.5,
+        13.25,
+        0.9653799999999997
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            35.0,
+            20.0,
+            48.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            35.0,
+            20.0,
+            46.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            35.0,
+            20.0,
+            48.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            35.0,
+            20.0,
+            46.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            35.0,
+            19.0,
+            48.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            35.0,
+            19.0,
+            48.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element1",
+      "type": "cube",
+      "uuid": "5acbaad5-f72d-543d-9096-ab19c552e816",
+      "from": [
+        3.505000000000001,
+        -0.98975,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        6.5155,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            9.98474,
+            33.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element2",
+      "type": "cube",
+      "uuid": "c5284ebb-a828-53ae-bfeb-d2e5252c9c6e",
+      "from": [
+        3.5,
+        -1.43015,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        6.1397,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element3",
+      "type": "cube",
+      "uuid": "6ad701e9-1b01-5bbe-87a4-da94bbfd29bc",
+      "from": [
+        -5.495,
+        -0.98975,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        6.5155,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            9.98474,
+            33.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            5.48476,
+            33.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element4",
+      "type": "cube",
+      "uuid": "ecec6a62-6edc-5eff-9188-cec9d27fa077",
+      "from": [
+        -5.5,
+        -1.43015,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        6.1397,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            14.43016,
+            34.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            34.0,
+            0.0,
+            32.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element0",
+      "type": "cube",
+      "uuid": "efc491a8-d940-5ea4-a5fd-4b133fe90852",
+      "from": [
+        3.505000000000001,
+        6.515499999999999,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element1",
+      "type": "cube",
+      "uuid": "a36ba13d-4683-5df2-b94c-a8d5ca9e0d13",
+      "from": [
+        3.5,
+        6.1396999999999995,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        20.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.569849999999999,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element2",
+      "type": "cube",
+      "uuid": "dd091001-5e38-575a-9b36-6799940b9718",
+      "from": [
+        -5.495,
+        6.515499999999999,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element3",
+      "type": "cube",
+      "uuid": "1a6bc6dc-1b7b-508c-a4f5-655d6de587de",
+      "from": [
+        -5.5,
+        6.1396999999999995,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        20.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.569849999999999,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            34.0,
+            0.0,
+            32.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element4",
+      "type": "cube",
+      "uuid": "d6c4270c-55ff-5f52-9caa-62befa5b5e39",
+      "from": [
+        -6,
+        5.772399999999999,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        21.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        13.772400000000001,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            35.0,
+            1.0,
+            47.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            1.0,
+            59.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            47.0,
+            1.0,
+            35.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            59.0,
+            1.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element5",
+      "type": "cube",
+      "uuid": "bb12be7b-54cd-5e0d-be12-7bb3fa0dc4bc",
+      "from": [
+        -8,
+        2.7723999999999993,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        23.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        13.772400000000001,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "assembly",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "eb81210b-3055-50a6-8e12-03915c54cc2b",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        {
+          "name": "bottom_root",
+          "origin": [
+            0,
+            8,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "uuid": "a76e750c-dcf5-5a55-8239-6a073c2c01ca",
+          "export": true,
+          "isOpen": true,
+          "visibility": true,
+          "children": [
+            "20a8b4b6-119a-5960-aa6b-a12b00ca4cbe",
+            "5acbaad5-f72d-543d-9096-ab19c552e816",
+            "c5284ebb-a828-53ae-bfeb-d2e5252c9c6e",
+            "6ad701e9-1b01-5bbe-87a4-da94bbfd29bc",
+            "ecec6a62-6edc-5eff-9188-cec9d27fa077"
+          ]
+        },
+        {
+          "name": "top_root",
+          "origin": [
+            0,
+            24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "uuid": "03a52d82-8d19-5744-96b1-881cadd9fb36",
+          "export": true,
+          "isOpen": true,
+          "visibility": true,
+          "children": [
+            "efc491a8-d940-5ea4-a5fd-4b133fe90852",
+            "a36ba13d-4683-5df2-b94c-a8d5ca9e0d13",
+            "dd091001-5e38-575a-9b36-6799940b9718",
+            "1a6bc6dc-1b7b-508c-a4f5-655d6de587de",
+            "d6c4270c-55ff-5f52-9caa-62befa5b5e39",
+            "bb12be7b-54cd-5e0d-be12-7bb3fa0dc4bc"
+          ]
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_azure_bluet_top.png",
+      "id": "0",
+      "uuid": "3d902cd8-08ab-54c8-ab7e-64b68ae3ca94",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAEQklEQVR4nO1ZTWwbRRT+Zr21O2nVlSo7Mj1EWWgkZC45No6QUMyl4mCqhp+DEYcSgXpuRdMKIQRNoHCuVNLeeigqFeKAesEVUlWbA0g9EEPlkA2RgJVtAetQD2s7fhzi3drO+me9duNDP8mydmae34/mvfftM8MeY3Z6kg5xGbfTa6wf+anno+RWJns3ZeuSnQ6sJJOUiEbBOWdCCNIMA5FwmGV0nVRFAee8L2O74bnjL7pyZvX2t8x/cMyVjvK/paZnCQAyuk5CCAIAKsQpEY1CMwxQIU4BbQ6RcJgBgKoouJ5KYSWZdB11NwjwAx0/g4QshKCANgcmj0MIQYxzBnDHw5xz+xYgmaSFWGzgNyHAD0Dm/q7nTPFwIPokzTCwlS6AcjlohtFVQFUUBLQ5JKLRgRjQiF6dl7l/101YOvMuvrx8xbVO+d7qKmZfugsA9lXvBM0woKp3egrW48T5zz7pS05eiMXYiovrbAWJCvGh1gG3uPzhRfxT3AJjDE9PTMAnSchubGDx0jKWzp7D+U8/dpSThRC0/+HrSAhBvVb3jK4T5U4MzPiiqHr+jdPvXWi71855AJCtVuemtVm3wLg2RcqprOdCOOb3ef0JfPfFLaR//AFTkyoAArBjVnZTA2rA4qVlRzm5lpkhqY++bvEDIOzB7LoRPu/N5IXXTvanW4qkm8hOL0JW2qjKjb6UDgPLZ89hSlUBALl8AeOhIOZPv91VzuYBqnqnZ2UWH7iXSvVtcCOq297r6WKHPO8E+XoqhUTUXVujQpxYsLfbMmxQZRsAcHPlKta0dQAMR+s3AQB+1TZAICwuXXSUl1/deAc85q6Q/Vy9AiFuuCqcvcBid93IUFWUm5hgxTTxysJbqJgmAGBfIGCvW88V07TXGyErp7Kuu4CqKEMjQr1Q3FbnrW8nx29+fhVr6+s488H79noj5IyuU0CbQ0bXqV0RzOfzCIVC9vP0NzJ7MO+9+rdDvzy/1cGKaeLlN9/oKCNFwmF27c+POnYAy3khBAkh6MH8PmR0faSYoCfUMjPUjdoKIYgKcaplZmiQzs9OT9LxmaN7FkwJAH45/BVY8GsmhGjrnGYYoFwOW+kCVEV5vFYOETLwiNpqhgFVUeyJkGYYePavE2Dj42DBMBNC0O+HDUSGNBE6eewIVcs1yH5p11679Vvf/+HJlqaRWGMdmK0PPqRwmuXzecSWfmoahbUWRi+wiFBJ7PT0cv27Fe3WvcBxJgg0B8PJ0UE53wi/j4HXX4xEecdZ7vCiJMrb4H6ffcYLRoLNWZieOETAo7fDUg8O3t8sDi4F9hrPHDnouJ43/kNI2e+4d3+z6EnnSAWg1CbHqxVqu+cVIxUAf30u0Jj3Vp532vOCkQpAvmjaeT/m9zXVgN8KpV3nBzFJGqkAPBV0/j+iI9b+9qRzpAIwrDzvhJEKQDse0JjrrftP8ATe8D+I+O5W+rNOlQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_azure_bluet_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/azure_bluet.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

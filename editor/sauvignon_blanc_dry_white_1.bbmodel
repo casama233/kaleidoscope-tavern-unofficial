@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sauvignon_blanc_dry_white_1",
+  "model_identifier": "kt_assets_a7.sauvignon_blanc_dry_white_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "sauvignon_blanc_dry_white_1_element0",
+      "type": "cube",
+      "uuid": "2d19477c-673c-55f4-a5b7-137cdf1ddcdd",
+      "from": [
+        -1,
+        10,
+        -1
+      ],
+      "to": [
+        1,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            0.0,
+            3.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sauvignon_blanc_dry_white_1_element1",
+      "type": "cube",
+      "uuid": "d8e4a054-6bd9-5c4e-8791-b428a3b4d469",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            5.0,
+            9.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            12.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "37e262c3-d9f0-508f-b9e6-b4097e81aedd",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "2d19477c-673c-55f4-a5b7-137cdf1ddcdd",
+        "d8e4a054-6bd9-5c4e-8791-b428a3b4d469"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sauvignon_blanc_dry_white.png",
+      "id": "0",
+      "uuid": "5ff34a1b-0d22-5900-ab74-8d9c80e078d2",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvklEQVR4XmNgAIJLq0T+gzCITRb48zr0/7ZS1gE0AOR8igzQ0OT5D8Lo4kSB1jlC/1fusQdjEBuXGAw8vOjzf+9cNYQYSMHL7xNQFIPYIDEQ3y9XAsUAkOYZBcKoBoA0gBQiG/Dw+qb/R7d1YBiAAXAZ8OrVA7AhyAaY2Qr9l5PnAGMQm2QDYJphmP4GEO0FEI0tEEHiO0/6gDFMLUkGwDTDMFgQpAAZw8RAhoAwQQNAfoElZZi/sImBADYvAAAf1i/Sg16MLwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

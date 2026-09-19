@@ -1,0 +1,477 @@
+{
+  "build": "A17",
+  "source_inventory_complete": true,
+  "static_art_ready_for_code": true,
+  "all_runtime_visuals_verified": false,
+  "rows": [
+    {
+      "index": "0",
+      "category": "Sofa",
+      "status": "SOURCE_FAMILY_COMPLETE_CONVERTED_CANDIDATE",
+      "details": "16 original textures; six inherited shapes; 96 appearances; no seating/connections",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "1",
+      "category": "Wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A1 source retained",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "2",
+      "category": "Champagne",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A4",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "3",
+      "category": "Honey Wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A4",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "4",
+      "category": "Ice Wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A4",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "5",
+      "category": "Vodka",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A6: four exact source arrangements, original PNG; no drinking/quality behavior.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "6",
+      "category": "Emerald",
+      "status": "SINGLE_MODEL_CONVERTED_CANDIDATE",
+      "details": "A4 static cocktail candidate retained; no effect, mixing or drinking behavior.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "7",
+      "category": "All 25 bottled drink families",
+      "status": "ALL_97_PINNED_STATIC_ARRANGEMENTS_CONVERTED_CANDIDATE",
+      "details": "A9 completes the remaining 9 families / 33 files. Brandy, Carignan, Sunset Glow have 1–3; others 1–4. No engine, inventory pose or drinking acceptance implied.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "8",
+      "category": "All 14 cocktail static models",
+      "status": "ALL_14_STATIC_MODELS_CONVERTED_CANDIDATE",
+      "details": "A10 completes the other seven. Five animated sheets are bound; runtime Signature tint, effects and engine acceptance remain incomplete.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "9",
+      "category": "Shaker",
+      "status": "SKELETON_AND_PUT_ANIMATION_CANDIDATE",
+      "details": "A8: two original bones, five boxes, renderer basis preserved, PUT 0.375s / 13 keys converted. Optional lab rig. No hand shaking, mixing, lid interaction or engine acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "10",
+      "category": "Cabinet static bodies",
+      "status": "SOURCE_FAMILIES_CONVERTED_CANDIDATE",
+      "details": "A6: bar_cabinet, glass_bar_cabinet, cellar_cabinet, each single/left/middle/right; 12 static source models. No contents rendering or inventory logic.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "11",
+      "category": "Other furniture",
+      "status": "ALL_SIXTEEN_STOOL_COLORS_COMPLETE_STATIC",
+      "details": "All sixteen original base+seat assemblies retained; table and ladder complete static sources. No seating.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "12",
+      "category": "Lighting and incense",
+      "status": "STATIC_LIGHT_AND_INCENSE_FAMILIES_COMPLETE",
+      "details": "All17 independent string lights,3 pendant styles,8 incense kinds x2 static states. Native particle assets added; runtime emission/lighting require code.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "13",
+      "category": "Paintings and boards",
+      "status": "ALL_PAINTINGS_BOARDS_CHALK_STATIC_FAMILIES",
+      "details": "14 painting originals retained;14 board kinds,13 floral upper pieces,2 original-size chalkboards converted. Source orientation contracts retained; automatic placement/text require code.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "14",
+      "category": "A1-A3 plant resources",
+      "status": "CONVERTED_CANDIDATE_RETAINED",
+      "details": "Trellis, three crop/vine families, wild vine; no growth/world generation",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "15",
+      "category": "A1-A3 brewing fixtures",
+      "status": "CONVERTED_CANDIDATE_RETAINED",
+      "details": "Large barrel open/closed, pressing tub, tap, empty bottle",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "16",
+      "category": "Source release JAR comparison",
+      "status": "USER_JAR_COMPARED_PUBLISHER_CHECKSUM_NOT_VERIFIED",
+      "details": "539 previous locked resources compared:107 byte-identical,377 parsed JSON-identical,55 RGBA-identical,0 missing/different.1295 uploaded-JAR members hash-locked. Not a whole Forge release equivalence claim.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "17",
+      "category": "Cookery dependency",
+      "status": "REQUIRED_NOT_BOUND",
+      "details": "Public candidate updated to v1.0.6 (2026-09-18), archive not obtained; no actual BP/RP UUID or internal version inferred. Production remains required and unbound.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "18",
+      "category": "Minecraft engine acceptance",
+      "status": "NOT_RUN",
+      "details": "No game runtime available in this batch",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "19",
+      "category": "Three display rack bodies",
+      "status": "CONVERTED_CANDIDATE",
+      "details": "A6: tilted_rack, circular_rack, glassware_holder. Static body only; no held/placed item display.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "20",
+      "category": "Holder",
+      "status": "SOURCE_STATIC_BODY_CONVERTED_CANDIDATE",
+      "details": "A10: exact source 23 elements; negative Y element decomposed by directed faces. Actual 16x16 PNG preserved despite 32x32 model hint. No dynamic bottles or inventory.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "21",
+      "category": "Original GUI, first/third-person and dropped display",
+      "status": "SOURCE_ITEM_DISPLAY_DATA_COMPLETE_RUNTIME_PENDING",
+      "details": "160 item source models:158 concrete(76 geometry,82 original sprites),2 templates. Optional PoseLab:143geometry/185appearances. Runtime GUI/hand coordinate acceptance and animated icons pending.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "22",
+      "category": "Particles, liquid rendering and effect animations",
+      "status": "DYNAMIC_RESOURCE_RIGS_BUILT_RUNTIME_PARITY_PENDING",
+      "details": "16 native particle candidates,10 source animation schedules,6 audio clips/4events,12 liquid planes,1 signature tint rig,source hand-pose curves. Particle base physics,drip children,text,auto-trigger and game acceptance require code.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "23",
+      "category": "Complete source art inventory",
+      "status": "ALL_UPLOADED_JAR_NAMESPACE_ASSETS_ACCOUNTED",
+      "details": "All1295 members classified and preserved;305PNGs,790modelJSON,159blockstates. Four Java Ponder resources remain source scenes for guide adapter, not portable Bedrock structures.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "24",
+      "category": "rum",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "25",
+      "category": "sherry",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "26",
+      "category": "red_queen",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "27",
+      "category": "vinegar",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "28",
+      "category": "whiskey",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "29",
+      "category": "miners_star",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "30",
+      "category": "sauvignon_blanc_dry_white",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "31",
+      "category": "sweet_berry_wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "32",
+      "category": "sakura_wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A7: four hash-verified original arrangements and unchanged source PNG; no gameplay or hand/GUI pose acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "33",
+      "category": "empty_glassware",
+      "status": "SINGLE_MODEL_CONVERTED_CANDIDATE",
+      "details": "A7: directed inner faces, unchanged original PNG, blend material candidate. No engine acceptance or runtime behavior.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "34",
+      "category": "screwdriver",
+      "status": "SINGLE_MODEL_CONVERTED_CANDIDATE",
+      "details": "A7: directed inner faces, unchanged original PNG, blend material candidate. No engine acceptance or runtime behavior.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "35",
+      "category": "depth_charge",
+      "status": "STATIC_AND_OPTIONAL_DYNAMIC_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "36",
+      "category": "mojito",
+      "status": "STATIC_AND_OPTIONAL_DYNAMIC_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "37",
+      "category": "signature_cocktail",
+      "status": "STATIC_AND_OPTIONAL_DYNAMIC_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "38",
+      "category": "mystery_cocktail",
+      "status": "STATIC_AND_OPTIONAL_DYNAMIC_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "39",
+      "category": "glowflower_brew",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "40",
+      "category": "luminous_bride",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A8: unchanged original PNG and hash-verified source models; glass directed faces preserved. No gameplay; engine acceptance not run.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "41",
+      "category": "brandy",
+      "status": "COUNT_1_TO_3_CONVERTED_CANDIDATE",
+      "details": "A9: all 3 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "42",
+      "category": "carignan",
+      "status": "COUNT_1_TO_3_CONVERTED_CANDIDATE",
+      "details": "A9: all 3 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "43",
+      "category": "madame_shexiang",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "44",
+      "category": "mother_snow",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "45",
+      "category": "plum_wine",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "46",
+      "category": "polaris_sweet_white",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "47",
+      "category": "riesling_dry_white",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "48",
+      "category": "sunset_glow",
+      "status": "COUNT_1_TO_3_CONVERTED_CANDIDATE",
+      "details": "A9: all 3 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "49",
+      "category": "watermelon_juice",
+      "status": "COUNT_1_TO_4_CONVERTED_CANDIDATE",
+      "details": "A9: all 4 exact pinned source arrangements and original PNG. No invented fourth arrangement for 3-cap families.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "50",
+      "category": "white_lady",
+      "status": "SINGLE_MODEL_CONVERTED_CANDIDATE",
+      "details": "A9: 14 source elements to 17 cubes, including one reversed-X inner wall expanded into oriented faces; original PNG and optional source display transforms.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "51",
+      "category": "Bar counter six static variants",
+      "status": "SOURCE_FAMILY_CONVERTED_CANDIDATE",
+      "details": "A10: single/left/middle/right/left_corner/right_corner; six exact UV layouts, one original 64x32 texture. No automatic neighbor connections.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "52",
+      "category": "Table static family",
+      "status": "SEVEN_SOURCE_PARTS_CONVERTED_CANDIDATE",
+      "details": "A12 single, left, middle, right, left_rot, middle_rot, right_rot; exact source tree matched. Missing original faces remain omitted; no auto-connections.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "53",
+      "category": "Pendant lamp static family",
+      "status": "SIX_PARTS_THREE_DERIVED_ASSEMBLIES",
+      "details": "A12 three lamp styles; full-size two-block inspection entities. Three original PNG paths share one image payload; distinct shapes/UV retained. No runtime illumination.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "54",
+      "category": "Stepladder static family",
+      "status": "TWO_PARTS_ONE_DERIVED_ASSEMBLY",
+      "details": "A12 source lower/upper parts and original leg join coordinates; no climbing, collision or placement logic.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "55",
+      "category": "Plain sandwich board",
+      "status": "ALL_FOURTEEN_BOARD_STATIC_KINDS_AND_ROTATION_CONTRACT",
+      "details": "Prior plain pieces retained;14 assembled kinds,13 floral upper pieces and224 top-rotation source entries. Native16-step art events,not automated placement or editing.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "56",
+      "category": "A11 historical pose helpers",
+      "status": "RETAINED_WITHOUT_EXPANDING_COMPLETION_CLAIM",
+      "details": "Seven original A11 give-only helpers preserved bytewise. Old list is not all-pose completion; new current overlay list lives in pose-candidates.json.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "57",
+      "category": "Incense static source family",
+      "status": "EIGHT_KINDS_TWO_STATES_CONVERTED",
+      "details": "A13 sixteen exact pinned source JSON files and eight untouched PNGs; two shared geometries, sixteen editor appearances. Cross decoration cards preserve rescale. No emitted particles.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "58",
+      "category": "Bar stool complete static color assemblies",
+      "status": "SIXTEEN_OF_SIXTEEN_COLORS_CONVERTED",
+      "details": "A16 adds six original two-image color sets and exact generated parent references. Lossless 128x32 derived atlases; existing complete geometry unchanged. Sixteen static color assemblies, no rider or seating behavior.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "59",
+      "category": "Painting static artwork set",
+      "status": "ALL_FOURTEEN_SOURCE_ARTWORKS_CONVERTED",
+      "details": "Nine new original artworks, generated parent refs and Tartaric animation metadata. Full 14-artwork set; floor-north geometry only. No automatic wall/ceiling placement or engine acceptance.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "60",
+      "category": "String-light static source designs",
+      "status": "SEVENTEEN_OF_SEVENTEEN_CONVERTED",
+      "details": "A17 remaining9 exact JAR models and original PNGs complete17 independent designs; no recoloring. Face directions,UV,shape and per-element shade retained.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "61",
+      "category": "Source concrete item art",
+      "status": "ALL_158_MAPPED",
+      "details": "76 item-side geometries plus82 original sprite items.2 abstract templates are not independently obtainables.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "62",
+      "category": "Extra vanilla-carrier/molotov displays",
+      "status": "SIX_CONVERTED",
+      "details": "Original water,potion,honey,xp,dragon-breath and molotov display model bodies.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "63",
+      "category": "Original sound assets",
+      "status": "SIX_CLIPS_FOUR_EVENTS",
+      "details": "OriginalOGG bytes preserved; events mapped; runtime triggers missing.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "64",
+      "category": "Source particle assets",
+      "status": "SIXTEEN_CANDIDATES",
+      "details": "19 original particlePNGs preserved;2vanilla drip dependencies use nativeBedrockatlas,not pixel-identical cross-edition art. Runtime differences explicit.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "65",
+      "category": "Original localization",
+      "status": "FOUR_SOURCE_LOCALES_PRESERVED",
+      "details": "Source en_US,zh_CN,ja_JP,ru_RU values retained alongside lablabels. Full zh_TW translation is not claimed.",
+      "engine_accepted": "False"
+    },
+    {
+      "index": "66",
+      "category": "Java Ponder guides",
+      "status": "SOURCE_ONLY_NEEDS_GUIDE_ADAPTER",
+      "details": "4Java-specificscene/structure resources preserved but not functional BedrockGuidebook.",
+      "engine_accepted": "False"
+    }
+  ]
+}

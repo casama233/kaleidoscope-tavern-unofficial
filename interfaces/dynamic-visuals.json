@@ -1,0 +1,807 @@
+{
+  "schema_version": 1,
+  "build": "A16",
+  "texture_animations": [
+    {
+      "id": "depth_charge",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png.mcmeta",
+      "sheet_size": [
+        32,
+        128
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 4,
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "ticks_per_frame": 3,
+      "blend_frames": false,
+      "loop_ticks": 12,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/depth_charge/000.png",
+          "rgba_sha256": "75d37e66621398f9d7caf1ab0d5366141b10c779b630b503e687fd85f1609890"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/depth_charge/001.png",
+          "rgba_sha256": "62b9e9295e5b482e190f5c7549878fa62153bc83aabf3d49acdd3a4ff3dd8c41"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/depth_charge/002.png",
+          "rgba_sha256": "4582ac11ad3b21e501af5ea03e214832113666d110b10b837e4040c12da84458"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/depth_charge/003.png",
+          "rgba_sha256": "a8722e58357e9460aa68a9384d8cface04cd6fa8c5d8a5d5934d79c29e77d681"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a8/depth_charge_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/depth_charge",
+      "atlas_tile": "kt_assets_a8_block_mixology_depth_charge"
+    },
+    {
+      "id": "signature_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png.mcmeta",
+      "sheet_size": [
+        32,
+        192
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "ticks_per_frame": 2,
+      "blend_frames": false,
+      "loop_ticks": 12,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/signature_cocktail/000.png",
+          "rgba_sha256": "c7b6680d2e36a9bee7a634d4f1441f613b3ea06af4dffead24da016ce5ec0120"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/signature_cocktail/001.png",
+          "rgba_sha256": "d810bd884e27398fbfc3cdb88b71c1e919068ed2983922186993e87cd56a35a9"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/signature_cocktail/002.png",
+          "rgba_sha256": "de3aec30378c39e9d29b3c60fe1f33ae1571b6a554cc97f5f134002218b9b749"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/signature_cocktail/003.png",
+          "rgba_sha256": "f1d9a0b2baa7fc2aaf1ac0a2fce2e64c70d60cb0e1454dceef30385f2f8b0c6f"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/signature_cocktail/004.png",
+          "rgba_sha256": "eeb0c6fc566fef88b10bb7b36222cb6290af9ebeb277a15b649f0d084ace1a13"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/signature_cocktail/005.png",
+          "rgba_sha256": "f2b2aa371b66aab4fb153a009dd305609b2c8d60326cbe5252fec6bf56bd07a7"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a8/signature_cocktail_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/signature_cocktail",
+      "atlas_tile": "kt_assets_a8_block_mixology_signature_cocktail"
+    },
+    {
+      "id": "mystery_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png.mcmeta",
+      "sheet_size": [
+        32,
+        288
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 9,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ticks_per_frame": 6,
+      "blend_frames": true,
+      "loop_ticks": 54,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/mystery_cocktail/000.png",
+          "rgba_sha256": "155e84faab5ff14cfe4cf465426ea7240a45331f679f412b4b477182bcefcde1"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/mystery_cocktail/001.png",
+          "rgba_sha256": "af00cbbc1f7f1e7369c831f5b8961c04937524706df0a4fab3ad9c81fc19cd5c"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/mystery_cocktail/002.png",
+          "rgba_sha256": "633a4378d900899fb27c819987bc893914999f072f925dd5036b60eb07b39985"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/mystery_cocktail/003.png",
+          "rgba_sha256": "64eecad6c1a485b6582fab957ac785437e21e561147d324e9ca4cba7f35a8296"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/mystery_cocktail/004.png",
+          "rgba_sha256": "1edd1add27eb6cb4180b26e7dd453026bf9f16e8120e299d21f2f5ae9436a83a"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/mystery_cocktail/005.png",
+          "rgba_sha256": "bf4da7ad78932715369cc00b295e25578af742bab0df3267bc38f4bdcb479e51"
+        },
+        {
+          "index": 6,
+          "file": "animation-sources/frames/mystery_cocktail/006.png",
+          "rgba_sha256": "23f9999552c90cfd00b5ee361f91bc394985a8a1e20b9488d5c4ddc5c04b1ab8"
+        },
+        {
+          "index": 7,
+          "file": "animation-sources/frames/mystery_cocktail/007.png",
+          "rgba_sha256": "8992c01882a68bd7f0695dd9ef1850f683504f0665913dc12e35207a9df34a52"
+        },
+        {
+          "index": 8,
+          "file": "animation-sources/frames/mystery_cocktail/008.png",
+          "rgba_sha256": "7d692e8670760d2044520567cd49ba96992d8488cba84cd3164e7017ad954b7a"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a8/mystery_cocktail_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/mystery_cocktail",
+      "atlas_tile": "kt_assets_a8_block_mixology_mystery_cocktail"
+    },
+    {
+      "id": "nether_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        192
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "ticks_per_frame": 50,
+      "blend_frames": true,
+      "loop_ticks": 300,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/nether_special/000.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/nether_special/001.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/nether_special/002.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/nether_special/003.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/nether_special/004.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/nether_special/005.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a10/nether_special_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/nether_special",
+      "atlas_tile": "kt_assets_a10_block_mixology_nether_special"
+    },
+    {
+      "id": "sculk_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        512
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 16,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "ticks_per_frame": 1,
+      "blend_frames": false,
+      "loop_ticks": 16,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/sculk_special/000.png",
+          "rgba_sha256": "f3b025306ce668995b93b70b6671e03378e85f2d55a0214f2a1905ca34032484"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/sculk_special/001.png",
+          "rgba_sha256": "8ef4fedbf30f2174047f56edcba0de23e63e3207f40c5efe2ae2c38fb6f9e0a9"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/sculk_special/002.png",
+          "rgba_sha256": "be3e3aa11cd6f7a2739ebae75861864d0d34c04a1db0f5147385367c9d077c46"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/sculk_special/003.png",
+          "rgba_sha256": "be3e3aa11cd6f7a2739ebae75861864d0d34c04a1db0f5147385367c9d077c46"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/sculk_special/004.png",
+          "rgba_sha256": "1bfe347734a4b6972e0e54e9632cdf07426b82e1e872efa7b9d114894de135f7"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/sculk_special/005.png",
+          "rgba_sha256": "675fef73af39d6bc553f54b6f21eb3c7bd563b0dbfe186da978306f010ea23a7"
+        },
+        {
+          "index": 6,
+          "file": "animation-sources/frames/sculk_special/006.png",
+          "rgba_sha256": "05ede1ff36b707a2cba18115965382862a54d78d9c56f4db7d95858998a28c04"
+        },
+        {
+          "index": 7,
+          "file": "animation-sources/frames/sculk_special/007.png",
+          "rgba_sha256": "dc0bffb483080bd5a542dc4c4a554d077d0d78f1d67239fe8b0ae449c8952e7b"
+        },
+        {
+          "index": 8,
+          "file": "animation-sources/frames/sculk_special/008.png",
+          "rgba_sha256": "2b310a36f211ed0cee678d873d2a5706a775f0d5e069268b68c74183b81935c4"
+        },
+        {
+          "index": 9,
+          "file": "animation-sources/frames/sculk_special/009.png",
+          "rgba_sha256": "78ffcd03817505aa1eb1fc4dbe5562f0d3e645279ce3ebb27a4ef3f87f59db29"
+        },
+        {
+          "index": 10,
+          "file": "animation-sources/frames/sculk_special/010.png",
+          "rgba_sha256": "a35cdf2b83f1bea4d9f51df04597c52eeea56894f3f1c35c9160eea1174624a3"
+        },
+        {
+          "index": 11,
+          "file": "animation-sources/frames/sculk_special/011.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 12,
+          "file": "animation-sources/frames/sculk_special/012.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 13,
+          "file": "animation-sources/frames/sculk_special/013.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 14,
+          "file": "animation-sources/frames/sculk_special/014.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 15,
+          "file": "animation-sources/frames/sculk_special/015.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a10/sculk_special_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/sculk_special",
+      "atlas_tile": "kt_assets_a10_block_mixology_sculk_special"
+    },
+    {
+      "id": "painting_tartaric_acid",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png.mcmeta",
+      "sheet_size": [
+        16,
+        48
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "frame_count": 3,
+      "sequence": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "ticks_per_frame": 10,
+      "blend_frames": false,
+      "loop_ticks": 80,
+      "unused_source_frames": [
+        2
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/painting_tartaric_acid/000.png",
+          "rgba_sha256": "8c63b555015b6e2549e42c960e4ef0de2af48f3f9605ac3dccc41d168443094e"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/painting_tartaric_acid/001.png",
+          "rgba_sha256": "dc4321df980207551f84126e91e70a83254a02e4922a065427e0184956778f13"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/painting_tartaric_acid/002.png",
+          "rgba_sha256": "b9dbab256b69f64ed7836a91feffa04f7f21a878afeca9d13fffc319c439f11f"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a14/painting_tartaric_acid_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/deco/painting/tartaric_acid",
+      "atlas_tile": "kt_assets_a14_block_deco_painting_tartaric_acid"
+    }
+  ],
+  "tints": [
+    {
+      "id": "signature_cocktail",
+      "status": "MASK_PRESERVED_NO_RUNTIME_COLOR",
+      "faces": [
+        {
+          "source_element": 0,
+          "source_face": "north",
+          "output_cube": "signature_cocktail_element0_north",
+          "output_face": "south",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 0,
+          "source_face": "east",
+          "output_cube": "signature_cocktail_element0_east",
+          "output_face": "east",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 0,
+          "source_face": "south",
+          "output_cube": "signature_cocktail_element0_south",
+          "output_face": "north",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 0,
+          "source_face": "west",
+          "output_cube": "signature_cocktail_element0_west",
+          "output_face": "west",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "north",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "north",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "east",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "east",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "south",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "south",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "west",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "west",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "up",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "up",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 1,
+          "source_face": "down",
+          "output_cube": "signature_cocktail_element1",
+          "output_face": "down",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "north",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "north",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "east",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "east",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "south",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "south",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "west",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "west",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "up",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "up",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 2,
+          "source_face": "down",
+          "output_cube": "signature_cocktail_element2",
+          "output_face": "down",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 5,
+          "source_face": "north",
+          "output_cube": "signature_cocktail_element5_north",
+          "output_face": "south",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 5,
+          "source_face": "east",
+          "output_cube": "signature_cocktail_element5_east",
+          "output_face": "east",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 5,
+          "source_face": "south",
+          "output_cube": "signature_cocktail_element5_south",
+          "output_face": "north",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 5,
+          "source_face": "west",
+          "output_cube": "signature_cocktail_element5_west",
+          "output_face": "west",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 10,
+          "source_face": "up",
+          "output_cube": "signature_cocktail_element10",
+          "output_face": "up",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 10,
+          "source_face": "down",
+          "output_cube": "signature_cocktail_element10",
+          "output_face": "down",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 13,
+          "source_face": "north",
+          "output_cube": "signature_cocktail_element13",
+          "output_face": "north",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 13,
+          "source_face": "south",
+          "output_cube": "signature_cocktail_element13",
+          "output_face": "south",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 14,
+          "source_face": "east",
+          "output_cube": "signature_cocktail_element14",
+          "output_face": "east",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        },
+        {
+          "source_element": 14,
+          "source_face": "west",
+          "output_cube": "signature_cocktail_element14",
+          "output_face": "west",
+          "tintindex": 0,
+          "slot": "tint_0_unshaded"
+        }
+      ]
+    }
+  ],
+  "skeletal_animations": [
+    {
+      "source": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "animation": "animation.kt_assets_a8.shaker.put",
+      "length": 0.375,
+      "channels": [
+        {
+          "bone": "root",
+          "channel": "rotation",
+          "keys": [
+            {
+              "time": 0.0,
+              "source_vec": "degreeVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.0833,
+              "source_vec": "degreeVec",
+              "value": [
+                0.0,
+                -4.5,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.1667,
+              "source_vec": "degreeVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            }
+          ]
+        },
+        {
+          "bone": "bone2",
+          "channel": "rotation",
+          "keys": [
+            {
+              "time": 0.0,
+              "source_vec": "degreeVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.0833,
+              "source_vec": "degreeVec",
+              "value": [
+                -15.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.2083,
+              "source_vec": "degreeVec",
+              "value": [
+                7.5,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.2917,
+              "source_vec": "degreeVec",
+              "value": [
+                -7.5,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.375,
+              "source_vec": "degreeVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            }
+          ]
+        },
+        {
+          "bone": "bone2",
+          "channel": "position",
+          "keys": [
+            {
+              "time": 0.0,
+              "source_vec": "posVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.0833,
+              "source_vec": "posVec",
+              "value": [
+                0.0,
+                2.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.2083,
+              "source_vec": "posVec",
+              "value": [
+                0.0,
+                1.5,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.2917,
+              "source_vec": "posVec",
+              "value": [
+                0.0,
+                0.5,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            },
+            {
+              "time": 0.375,
+              "source_vec": "posVec",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "interpolation": "CATMULLROM"
+            }
+          ]
+        }
+      ],
+      "keyframes": 13,
+      "engine_accepted": false,
+      "trigger": "Manual playanimation on the lab rig only; no put-item gameplay event is installed.",
+      "hand_shaking": "Source retained; player-arm and first-person runtime hooks NOT_PORTED"
+    }
+  ],
+  "engine_accepted": false,
+  "gameplay_connected": false
+}

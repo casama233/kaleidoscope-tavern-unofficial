@@ -1,0 +1,617 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "carignan_1",
+  "model_identifier": "kt_assets_a9.carignan_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "carignan_1_element0",
+      "type": "cube",
+      "uuid": "88844429-8cae-5f3b-82b8-38c651d966d4",
+      "from": [
+        -3,
+        0,
+        -2
+      ],
+      "to": [
+        3,
+        1,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            8.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            8.0,
+            14.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            8.0,
+            16.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            8.0,
+            14.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            8.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            8.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "carignan_1_element1",
+      "type": "cube",
+      "uuid": "4050d03b-936a-5769-9333-c7149907ea79",
+      "from": [
+        -5,
+        2,
+        -2
+      ],
+      "to": [
+        -4,
+        7,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.5,
+            0.5,
+            4.5,
+            5.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            1.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            6.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "carignan_1_element2",
+      "type": "cube",
+      "uuid": "cc48a0ba-5c83-51cc-9501-f22d7192ca72",
+      "from": [
+        -4,
+        1,
+        -2
+      ],
+      "to": [
+        4,
+        8,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            0.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            0.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            12.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            12.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "carignan_1_element3",
+      "type": "cube",
+      "uuid": "6cb5058f-c807-51fc-ab45-cf8932d07e8a",
+      "from": [
+        4,
+        2,
+        -2
+      ],
+      "to": [
+        5,
+        7,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            0.0,
+            4.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.5,
+            0.5,
+            6.5,
+            5.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            1.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.5,
+            6.0,
+            4.5,
+            7.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "carignan_1_element4",
+      "type": "cube",
+      "uuid": "13fa39dc-966c-5c5d-95ee-70a8c381c7b1",
+      "from": [
+        -1.5,
+        8,
+        -1.5
+      ],
+      "to": [
+        1.5,
+        9,
+        1.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            9.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            9.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            9.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            9.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "carignan_1_element5",
+      "type": "cube",
+      "uuid": "20040933-23b0-514a-b571-ac8a0f103638",
+      "from": [
+        -2.5,
+        9,
+        -2
+      ],
+      "to": [
+        2.5,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.0,
+            5.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            9.0,
+            4.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            9.0,
+            5.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            9.0,
+            4.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "10cab7f6-7191-5c39-ace3-cdc6697ab28a",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "88844429-8cae-5f3b-82b8-38c651d966d4",
+        "4050d03b-936a-5769-9333-c7149907ea79",
+        "cc48a0ba-5c83-51cc-9501-f22d7192ca72",
+        "6cb5058f-c807-51fc-ab45-cf8932d07e8a",
+        "13fa39dc-966c-5c5d-95ee-70a8c381c7b1",
+        "20040933-23b0-514a-b571-ac8a0f103638"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "carignan.png",
+      "id": "0",
+      "uuid": "04451553-e447-5fb1-b00a-209ed8c7317d",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAUNJREFUOI29k71LA0EQxX8bFglBghYrxCvONDYXUEwTy2CwsbYTO9tUQv6FWFiYVsXGLmAvRCy1SUDJ1jGIpAg2V4SgF87izHofQgKCDxaGN2/ezOyy4myl5BNDezSmmEnjyCwA2nMNF4dore762nMBTAHAzuttEOxdAHD33DS5sF7GHbXnUh080MhtR/j9BYfmh440AZDac3mfTIJi3EjX8ArhBmG9bI/GJvnCJ8VMmkH3kfZoDJmfO6lulaCjiesTKwQCTX2pSK5QMnyjcxkpnkIcLm4mXuFfIeYV1ipl/204jHCWUshapeznbRuAXr8PwEnrPmEcL55ysn6+DGtXAXO6/m0w71wgRf5GzLOJpVRiCkspxMFGwbeUiox1/dQ1jr/9lTBSllLkbducsNkUjsxSPTrGkdlIDJCaOfsM/HmFL7p6g1n6gi5xAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

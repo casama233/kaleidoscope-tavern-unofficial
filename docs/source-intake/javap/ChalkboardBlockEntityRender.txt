@@ -1,0 +1,289 @@
+Compiled from "ChalkboardBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.ChalkboardBlockEntityRender extends com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.TextBlockEntityRender<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.ChalkboardBlockEntity> {
+  private static final net.minecraft.resources.ResourceLocation SMALL_TEXTURE;
+
+  private static final net.minecraft.resources.ResourceLocation LARGE_TEXTURE;
+
+  private static final float TEXT_SCALE;
+
+  private static final int LINE_HEIGHT;
+
+  private static final int MAX_LINES;
+
+  private final com.github.ysbbbbbb.kaleidoscopetavern.client.model.deco.SmallChalkboardModel small;
+
+  private final com.github.ysbbbbbb.kaleidoscopetavern.client.model.deco.SmallChalkboardModel large;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.ChalkboardBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/TextBlockEntityRender."<init>":(Lnet/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context;)V
+       5: aload_0
+       6: new           #7                  // class com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel
+       9: dup
+      10: aload_1
+      11: getstatic     #9                  // Field com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      14: invokevirtual #13                 // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.bakeLayer:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      17: invokespecial #19                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      20: putfield      #22                 // Field small:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel;
+      23: aload_0
+      24: new           #7                  // class com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel
+      27: dup
+      28: aload_1
+      29: getstatic     #28                 // Field com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/LargeChalkboardModel.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      32: invokevirtual #13                 // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.bakeLayer:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      35: invokespecial #19                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      38: putfield      #31                 // Field large:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel;
+      41: return
+
+  protected void renderModel(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.ChalkboardBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #34                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.getBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+       4: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/deco/ChalkboardBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+       7: invokevirtual #46                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #52                 // class net/minecraft/core/Direction
+      13: astore        6
+      15: aload_2
+      16: invokevirtual #54                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      19: aload_2
+      20: ldc2_w        #60                 // double 0.5d
+      23: ldc2_w        #62                 // double 1.5d
+      26: ldc2_w        #60                 // double 0.5d
+      29: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      32: aload_2
+      33: getstatic     #68                 // Field com/mojang/math/Axis.ZN:Lcom/mojang/math/Axis;
+      36: ldc           #74                 // float 180.0f
+      38: invokeinterface #75,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      43: invokevirtual #79                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      46: aload_2
+      47: getstatic     #83                 // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+      50: sipush        180
+      53: aload         6
+      55: invokevirtual #86                 // Method net/minecraft/core/Direction.get2DDataValue:()I
+      58: bipush        90
+      60: imul
+      61: isub
+      62: i2f
+      63: invokeinterface #75,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      68: invokevirtual #79                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      71: aload_1
+      72: invokevirtual #90                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.isLarge:()Z
+      75: ifeq          110
+      78: aload_3
+      79: getstatic     #94                 // Field LARGE_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+      82: invokestatic  #98                 // Method net/minecraft/client/renderer/RenderType.entityCutoutNoCull:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+      85: invokeinterface #104,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      90: astore        7
+      92: aload_0
+      93: getfield      #31                 // Field large:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel;
+      96: aload_2
+      97: aload         7
+      99: iload         4
+     101: iload         5
+     103: iconst_m1
+     104: invokevirtual #110                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel.renderToBuffer:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V
+     107: goto          139
+     110: aload_3
+     111: getstatic     #114                // Field SMALL_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+     114: invokestatic  #98                 // Method net/minecraft/client/renderer/RenderType.entityCutoutNoCull:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+     117: invokeinterface #104,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     122: astore        7
+     124: aload_0
+     125: getfield      #22                 // Field small:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel;
+     128: aload_2
+     129: aload         7
+     131: iload         4
+     133: iload         5
+     135: iconst_m1
+     136: invokevirtual #110                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel.renderToBuffer:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V
+     139: aload_2
+     140: invokevirtual #117                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     143: return
+
+  protected void renderText(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.ChalkboardBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #34                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.getBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+       4: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/deco/ChalkboardBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+       7: invokevirtual #46                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #52                 // class net/minecraft/core/Direction
+      13: astore        6
+      15: aload_2
+      16: invokevirtual #54                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      19: aload         6
+      21: getstatic     #120                // Field net/minecraft/core/Direction.EAST:Lnet/minecraft/core/Direction;
+      24: if_acmpne     43
+      27: aload_2
+      28: ldc2_w        #124                // double 0.08d
+      31: ldc2_w        #126                // double 1.535d
+      34: ldc2_w        #60                 // double 0.5d
+      37: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      40: goto          104
+      43: aload         6
+      45: getstatic     #128                // Field net/minecraft/core/Direction.WEST:Lnet/minecraft/core/Direction;
+      48: if_acmpne     67
+      51: aload_2
+      52: ldc2_w        #131                // double 0.92d
+      55: ldc2_w        #126                // double 1.535d
+      58: ldc2_w        #60                 // double 0.5d
+      61: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      64: goto          104
+      67: aload         6
+      69: getstatic     #133                // Field net/minecraft/core/Direction.SOUTH:Lnet/minecraft/core/Direction;
+      72: if_acmpne     91
+      75: aload_2
+      76: ldc2_w        #60                 // double 0.5d
+      79: ldc2_w        #126                // double 1.535d
+      82: ldc2_w        #124                // double 0.08d
+      85: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      88: goto          104
+      91: aload_2
+      92: ldc2_w        #60                 // double 0.5d
+      95: ldc2_w        #126                // double 1.535d
+      98: ldc2_w        #131                // double 0.92d
+     101: invokevirtual #64                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+     104: aload_2
+     105: getstatic     #83                 // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+     108: aload         6
+     110: invokevirtual #86                 // Method net/minecraft/core/Direction.get2DDataValue:()I
+     113: bipush        90
+     115: imul
+     116: i2f
+     117: invokeinterface #75,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     122: invokevirtual #79                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     125: aload_1
+     126: invokevirtual #90                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.isLarge:()Z
+     129: ifeq          138
+     132: sipush        232
+     135: goto          140
+     138: bipush        63
+     140: istore        7
+     142: aload_0
+     143: aload_1
+     144: aload_2
+     145: aload_3
+     146: iload         4
+     148: aload_1
+     149: invokevirtual #136                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.getText:()Ljava/lang/String;
+     152: iload         7
+     154: ldc           #140                // float 0.012f
+     156: bipush        11
+     158: bipush        12
+     160: invokespecial #141                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/TextBlockEntityRender.doTextRender:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILjava/lang/String;IFII)V
+     163: aload_2
+     164: invokevirtual #117                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     167: return
+
+  public net.minecraft.world.phys.AABB getRenderBoundingBox(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.ChalkboardBlockEntity);
+    Code:
+       0: aload_1
+       1: invokevirtual #145                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+       4: astore_2
+       5: aload_1
+       6: invokevirtual #90                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity.isLarge:()Z
+       9: ifeq          60
+      12: new           #149                // class net/minecraft/world/phys/AABB
+      15: dup
+      16: aload_2
+      17: invokevirtual #151                // Method net/minecraft/core/BlockPos.getX:()I
+      20: iconst_1
+      21: isub
+      22: i2d
+      23: aload_2
+      24: invokevirtual #156                // Method net/minecraft/core/BlockPos.getY:()I
+      27: i2d
+      28: aload_2
+      29: invokevirtual #159                // Method net/minecraft/core/BlockPos.getZ:()I
+      32: iconst_1
+      33: isub
+      34: i2d
+      35: aload_2
+      36: invokevirtual #151                // Method net/minecraft/core/BlockPos.getX:()I
+      39: iconst_2
+      40: iadd
+      41: i2d
+      42: aload_2
+      43: invokevirtual #156                // Method net/minecraft/core/BlockPos.getY:()I
+      46: iconst_2
+      47: iadd
+      48: i2d
+      49: aload_2
+      50: invokevirtual #159                // Method net/minecraft/core/BlockPos.getZ:()I
+      53: iconst_2
+      54: iadd
+      55: i2d
+      56: invokespecial #162                // Method net/minecraft/world/phys/AABB."<init>":(DDDDDD)V
+      59: areturn
+      60: new           #149                // class net/minecraft/world/phys/AABB
+      63: dup
+      64: aload_2
+      65: invokevirtual #151                // Method net/minecraft/core/BlockPos.getX:()I
+      68: i2d
+      69: aload_2
+      70: invokevirtual #156                // Method net/minecraft/core/BlockPos.getY:()I
+      73: i2d
+      74: aload_2
+      75: invokevirtual #159                // Method net/minecraft/core/BlockPos.getZ:()I
+      78: i2d
+      79: aload_2
+      80: invokevirtual #151                // Method net/minecraft/core/BlockPos.getX:()I
+      83: iconst_1
+      84: iadd
+      85: i2d
+      86: aload_2
+      87: invokevirtual #156                // Method net/minecraft/core/BlockPos.getY:()I
+      90: iconst_2
+      91: iadd
+      92: i2d
+      93: aload_2
+      94: invokevirtual #159                // Method net/minecraft/core/BlockPos.getZ:()I
+      97: iconst_1
+      98: iadd
+      99: i2d
+     100: invokespecial #162                // Method net/minecraft/world/phys/AABB."<init>":(DDDDDD)V
+     103: areturn
+
+  protected void renderText(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.TextBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #35                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity
+       5: aload_2
+       6: aload_3
+       7: iload         4
+       9: iload         5
+      11: invokevirtual #165                // Method renderText:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      14: return
+
+  protected void renderModel(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.TextBlockEntity, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #35                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity
+       5: aload_2
+       6: aload_3
+       7: iload         4
+       9: iload         5
+      11: invokevirtual #169                // Method renderModel:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      14: return
+
+  public net.minecraft.world.phys.AABB getRenderBoundingBox(net.minecraft.world.level.block.entity.BlockEntity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #35                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity
+       5: invokevirtual #172                // Method getRenderBoundingBox:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/ChalkboardBlockEntity;)Lnet/minecraft/world/phys/AABB;
+       8: areturn
+
+  static {};
+    Code:
+       0: ldc           #176                // String textures/entity/deco/small_chalkboard.png
+       2: invokestatic  #178                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #114                // Field SMALL_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+       8: ldc           #184                // String textures/entity/deco/large_chalkboard.png
+      10: invokestatic  #178                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      13: putstatic     #94                 // Field LARGE_TEXTURE:Lnet/minecraft/resources/ResourceLocation;
+      16: return
+}

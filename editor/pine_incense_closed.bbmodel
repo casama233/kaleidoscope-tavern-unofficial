@@ -1,0 +1,715 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "pine_incense_closed",
+  "model_identifier": "kt_assets_a13.pine_incense_closed",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "pine_incense_closed_element0",
+      "type": "cube",
+      "uuid": "fd6782c5-6299-56a9-bc7f-27792395043e",
+      "from": [
+        -3,
+        0,
+        -3
+      ],
+      "to": [
+        3,
+        1,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            9.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            9.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "pine_incense_closed_element1",
+      "type": "cube",
+      "uuid": "29222dfa-d4a6-5c73-88a5-dfd9981678bd",
+      "from": [
+        -2,
+        4,
+        -2
+      ],
+      "to": [
+        2,
+        6,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "pine_incense_closed_element2",
+      "type": "cube",
+      "uuid": "e43174eb-b36c-5b8a-83e5-ddfd978618af",
+      "from": [
+        -3,
+        1,
+        -3
+      ],
+      "to": [
+        3,
+        4,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            0.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "pine_incense_closed_element3",
+      "type": "cube",
+      "uuid": "e6e36bdd-9f69-5978-af4f-f46ab72a06d2",
+      "from": [
+        -2,
+        1,
+        -2
+      ],
+      "to": [
+        2,
+        3,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "pine_incense_closed_element4",
+      "type": "cube",
+      "uuid": "847d5130-162b-50ef-b7d7-5a1ba9f8e4e5",
+      "from": [
+        0.0,
+        0,
+        -4.242640687119285
+      ],
+      "to": [
+        0.0,
+        16,
+        4.242640687119284
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "pine_incense_closed_element5",
+      "type": "cube",
+      "uuid": "388d8caf-71fb-56ed-94b3-2cb8c3e81543",
+      "from": [
+        -4.242640687119285,
+        0,
+        0.0
+      ],
+      "to": [
+        4.242640687119284,
+        16,
+        0.0
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "89335d91-0496-5e23-a1d2-0152f1d24c39",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "fd6782c5-6299-56a9-bc7f-27792395043e",
+        "29222dfa-d4a6-5c73-88a5-dfd9981678bd",
+        "e43174eb-b36c-5b8a-83e5-ddfd978618af",
+        "e6e36bdd-9f69-5978-af4f-f46ab72a06d2",
+        "847d5130-162b-50ef-b7d7-5a1ba9f8e4e5",
+        "388d8caf-71fb-56ed-94b3-2cb8c3e81543"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "pine_incense.png",
+      "id": "0",
+      "uuid": "df253575-4d2a-54ff-b36f-ad223daff439",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABIElEQVR4XmNgIADufvnxnxgxUoBFpAWq/tycnP9trW1gDGKjSFIRgCxGxnAJkMVXrlz5v3nzZrAjkPRQHeh66P5XMlECY7ggyFKQ5bR2AMznIEfAMFiCXlGA7HuUEMAHsCU4bGKEAMhy5BDASAf0AlhDAZYGaB0FyDkAHv8gEBgY+D8hIeE/iAZhJD1UA8gJDyUEsMUnshiIDcKbLj/7P+nALThGVk8K8DeV+q8ry4XQT4wDkOVAgBIHxDsp/7dSE0DoB/kMSR5DjJA8qQAUAlR1wAszl/87hW3BGMRGVocNYDgAFJzo8YscxNiCG9kBIIvz2MTAGMRGVocNYKQBQgDmIJClsASJnC5IdQDVAalRMApGwSgYBaNgFIyCUYAOALPRLGuNRL+6AAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/pine_incense.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/pine_incense.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "engine_test": "NOT_RUN",
+    "derived_atlas": null,
+    "additional_sources": []
+  }
+}

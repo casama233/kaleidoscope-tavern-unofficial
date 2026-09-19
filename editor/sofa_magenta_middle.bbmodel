@@ -1,0 +1,619 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sofa_magenta_middle",
+  "model_identifier": "kt_assets_a4.sofa_magenta_middle",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "sofa_magenta_middle_element0",
+      "type": "cube",
+      "uuid": "8b4787f4-4dce-5118-aa55-d4815bd7cd76",
+      "from": [
+        -8,
+        8,
+        3
+      ],
+      "to": [
+        8,
+        18,
+        8
+      ],
+      "origin": [
+        0.009999999999999787,
+        13.99,
+        4.710000000000001
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            0.0,
+            41.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            59.0,
+            10.0,
+            64.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            42.0,
+            0.0,
+            58.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            64.0,
+            10.0,
+            59.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            17.0,
+            40.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_magenta_middle_element1",
+      "type": "cube",
+      "uuid": "61ba7846-4c8e-5be5-905c-c1b314f7c2f5",
+      "from": [
+        -8,
+        3,
+        -8
+      ],
+      "to": [
+        8,
+        8,
+        8
+      ],
+      "origin": [
+        0,
+        5.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            42.0,
+            10.0,
+            58.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            39.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_magenta_middle_element2",
+      "type": "cube",
+      "uuid": "ff8f44e1-0057-51ec-a2bd-861f3b54b4da",
+      "from": [
+        -8,
+        0,
+        -7
+      ],
+      "to": [
+        -5,
+        3,
+        -4
+      ],
+      "origin": [
+        -8,
+        0,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_magenta_middle_element3",
+      "type": "cube",
+      "uuid": "5d864869-6dcf-5b7c-a8d8-bdb2ec680232",
+      "from": [
+        5,
+        0,
+        -7
+      ],
+      "to": [
+        8,
+        3,
+        -4
+      ],
+      "origin": [
+        5,
+        0,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_magenta_middle_element4",
+      "type": "cube",
+      "uuid": "c92223b9-b71b-57c3-9f2d-eeecb9b65e15",
+      "from": [
+        5,
+        0,
+        4
+      ],
+      "to": [
+        8,
+        3,
+        7
+      ],
+      "origin": [
+        5,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_magenta_middle_element5",
+      "type": "cube",
+      "uuid": "a7dd2d3e-738e-594c-be48-ef901ab426ab",
+      "from": [
+        -8,
+        0,
+        4
+      ],
+      "to": [
+        -5,
+        3,
+        7
+      ],
+      "origin": [
+        -8,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            57.0,
+            61.0,
+            60.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            61.0,
+            61.0,
+            64.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "54e75e5d-4c88-5089-89f2-1b4d7acc4d9f",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "8b4787f4-4dce-5118-aa55-d4815bd7cd76",
+        "61ba7846-4c8e-5be5-905c-c1b314f7c2f5",
+        "ff8f44e1-0057-51ec-a2bd-861f3b54b4da",
+        "5d864869-6dcf-5b7c-a8d8-bdb2ec680232",
+        "c92223b9-b71b-57c3-9f2d-eeecb9b65e15",
+        "a7dd2d3e-738e-594c-be48-ef901ab426ab"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "magenta.png",
+      "id": "0",
+      "uuid": "2f667071-af42-5e17-b625-02a9d1bf7e81",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACm0lEQVR4Xu2Zu07DMBSGu/ZtmHkGhooRViQYOsLIyoTUARgZGXkgEO8S9Ec6lfv7Eh/HSe04w6c2p/bxyefEuXTzevXcjWG73W6G+H746j5vPpJAX8mRkkf6cR2oHdsbfLm72CURK0AGTOHp8r4fY0wO9OUcyIvtowAENKQKcM1QKD6rAO7oI1WAawz85otLHy4+5nTgXJyjegHcnjFzFiPAd6r54jIWF88z7KJIAVKMScoaUK0A1xj4zReXPlz8KqBWAb5z3ReXsbj46gTkIIcAF9UIeN+9HGuU0yaE1Cd9OJ8wi4Chm5YQch9vCtCgEqBBIwA7woXFgr7Ige9cQyyhOot/GDIFjIFrOhEwBk7oAu14VmKJHSMVKzAFOdaAqeiLwwKTwtTFzcFkq2strAKwE7Kq8wLkQ3sVKJlZrgI5wRHLsTFYgRKRoxPCISDn1SHL6+aaGXWXhlnhhLVx8rJCZnUIORwXKYBnmVkFLFlAzHqANquAVcAqYJkCNKwCliKAA61hBVrDCrSGFWgNK9AaVqA1rEBrWIHWsAKtYQVawwq0hhVoDSvQGlYgFbwrxJOlCbcpkf5xmB91NUgi5OH/F3mwEsn2x4j5pkjgwUrkKIAP3xCyo4sTwDPsI0ZALf8bZhNQK04B5kLm41wCXFcbHzFHYRYBmqKYmCJNzDqHQFvuzwQFcEIzsbTTFsVojyLNWGcRwDPsQ/6I1Qow6xsCbbk/k1VAqA/DOc5FdQI0603M+pIkgA9f6cu3wkOkCDDrHAJtuT+TVYDkiYFzxDKZAPPQEgGuogWXgJA0xuzDRYVIEXA4vHU/v38dPrF9vbvtBFVC5hwCpE8MaIs++/1jv/P4FAH43gvQLCqMLDKyM3OsASkCzBnn7X+fnMAkd2iy/AAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/middle.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/middle.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/base/middle.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

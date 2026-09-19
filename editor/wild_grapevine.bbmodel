@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "wild_grapevine",
+  "model_identifier": "kt_assets_a3.wild_grapevine",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "wild_grapevine_0",
+      "type": "cube",
+      "uuid": "5c15723e-35bd-59e2-b079-232eefc04a33",
+      "from": [
+        -10.182337649086284,
+        0,
+        0.0
+      ],
+      "to": [
+        10.182337649086282,
+        16,
+        0.0
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "wild_grapevine_1",
+      "type": "cube",
+      "uuid": "16a33bde-47bd-5b23-b66d-78c9813eb7c9",
+      "from": [
+        0.0,
+        0,
+        -10.182337649086284
+      ],
+      "to": [
+        0.0,
+        16,
+        10.182337649086282
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "ef9e2734-dd43-57ac-9f5b-2381a953cad3",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "5c15723e-35bd-59e2-b079-232eefc04a33",
+        "16a33bde-47bd-5b23-b66d-78c9813eb7c9"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "wild_grapevine.png",
+      "id": "0",
+      "uuid": "5838cceb-f876-5710-b77c-95b59809b995",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAyklEQVR4XuWSsQrCQBBEr8oXCPoFqbSIIoKVZQoLsbC3FATFwtrKD7Dyb0/eweh4nAZrB5Yktzezu7MJwVBV1TO20zq29SBuDuN4us6i54gi5ss6LtbDRJKAyJyRI4oCTj7fJ4nsXSin95wfVrsXmapcgtz0e29kcjxzfjjeRimpltUuIu4FBYojABmkalzWGJy7mUV4ZVVEwM37KuAmESLnG/goIIPcRDeuUwDsL03EUKqzAc0u8zoFgO9fK3NypwDwP5HvnwX+CA/RT6ya7pBOEgAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/plant/wild_grapevine.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/plant/wild_grapevine.json",
+      "references/minecraft-1.20.1/cross.json"
+    ],
+    "notes": [
+      "element 0: Java rescale(45) baked about original pivot",
+      "element 1: Java rescale(45) baked about original pivot",
+      "Resolved minecraft:block/cross from versioned vanilla asset mirror; see external_references provenance."
+    ]
+  }
+}

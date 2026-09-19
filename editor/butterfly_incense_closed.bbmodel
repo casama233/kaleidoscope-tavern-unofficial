@@ -1,0 +1,715 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "butterfly_incense_closed",
+  "model_identifier": "kt_assets_a13.butterfly_incense_closed",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "butterfly_incense_closed_element0",
+      "type": "cube",
+      "uuid": "515be397-c4fe-51b2-9993-cb273e7c56fd",
+      "from": [
+        -3,
+        0,
+        -3
+      ],
+      "to": [
+        3,
+        1,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            13.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            9.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            9.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "butterfly_incense_closed_element1",
+      "type": "cube",
+      "uuid": "910fe345-53f9-52fb-8f74-5d655d9f6a9e",
+      "from": [
+        -2,
+        4,
+        -2
+      ],
+      "to": [
+        2,
+        6,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            7.0,
+            5.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "butterfly_incense_closed_element2",
+      "type": "cube",
+      "uuid": "718c8edf-05c4-5062-9fa0-0eb1ee0f77e5",
+      "from": [
+        -3,
+        1,
+        -3
+      ],
+      "to": [
+        3,
+        4,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            9.0,
+            6.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            0.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "butterfly_incense_closed_element3",
+      "type": "cube",
+      "uuid": "2012dd2a-28ce-5aef-b2a7-3844b64b3e7d",
+      "from": [
+        -2,
+        1,
+        -2
+      ],
+      "to": [
+        2,
+        3,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            12.0,
+            20.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "butterfly_incense_closed_element4",
+      "type": "cube",
+      "uuid": "c5d32362-5866-57aa-8fc8-dfcee675a240",
+      "from": [
+        0.0,
+        0,
+        -4.242640687119285
+      ],
+      "to": [
+        0.0,
+        16,
+        4.242640687119284
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "butterfly_incense_closed_element5",
+      "type": "cube",
+      "uuid": "35c396c2-612c-5b80-88e6-f82eadf50da2",
+      "from": [
+        -4.242640687119285,
+        0,
+        0.0
+      ],
+      "to": [
+        4.242640687119284,
+        16,
+        0.0
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            26.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            26.0,
+            0.0,
+            26.0,
+            6.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "2ec623db-2060-533a-821f-667420de9589",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "515be397-c4fe-51b2-9993-cb273e7c56fd",
+        "910fe345-53f9-52fb-8f74-5d655d9f6a9e",
+        "718c8edf-05c4-5062-9fa0-0eb1ee0f77e5",
+        "2012dd2a-28ce-5aef-b2a7-3844b64b3e7d",
+        "c5d32362-5866-57aa-8fc8-dfcee675a240",
+        "35c396c2-612c-5b80-88e6-f82eadf50da2"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "butterfly_incense.png",
+      "id": "0",
+      "uuid": "22012b57-8538-5b09-ad33-0b76169bc3fa",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABDElEQVR4XmNgIADufvnxnxgxikBe9qn/k5sfgzGIjS5PcwCy+N7Z///3zPoDdgS6PM0ByFKQ5bR0QNenk/+rLh6Fmw9ig8TAkvSIApjnYObDPI2uDgNgS3DYxAgBmOU+wdP/W8sYgtm0Cm2coGrNUbDFYbqe/0FsuAQ90gAIgOIdhGFsuAQsOEA0rdIACIASHSzhwRMgtvhEFgOxQXjT5Wf/Jx24BcfI6ikCxDgAWQ4EqOoAkM/wiRGSpxhgM4wUB8AKmJYNlxAFCykAFJzo8YscxNiCG9kBIIthCRjERlZHFQBzEMhSWIJEThcg38OyL0rWohcABTvI5yhl+ygYBaNgFIyCUTAKRgEJAAAOsEePFKJSNQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/butterfly_incense.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/butterfly_incense.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "engine_test": "NOT_RUN",
+    "derived_atlas": null,
+    "additional_sources": []
+  }
+}

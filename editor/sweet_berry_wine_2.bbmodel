@@ -1,0 +1,619 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sweet_berry_wine_2",
+  "model_identifier": "kt_assets_a7.sweet_berry_wine_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "sweet_berry_wine_2_element0",
+      "type": "cube",
+      "uuid": "2eebcd28-3998-5f5a-821f-8ae6f80f45e9",
+      "from": [
+        3,
+        11,
+        -1
+      ],
+      "to": [
+        5,
+        15,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            0.0,
+            5.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sweet_berry_wine_2_element1",
+      "type": "cube",
+      "uuid": "6059fe00-9ef4-5422-8d92-844a834070ec",
+      "from": [
+        1,
+        0,
+        -3
+      ],
+      "to": [
+        7,
+        10,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            10.0,
+            14.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            10.0,
+            14.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sweet_berry_wine_2_element2",
+      "type": "cube",
+      "uuid": "8bc07313-a1cc-57f2-bd7b-0e2ff4946711",
+      "from": [
+        2,
+        10,
+        -2
+      ],
+      "to": [
+        6,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            11.0,
+            13.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            7.0,
+            6.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sweet_berry_wine_2_element3",
+      "type": "cube",
+      "uuid": "f5ddf5a3-042e-58e8-8922-7ffb7ccf0ddd",
+      "from": [
+        -6,
+        10,
+        -2
+      ],
+      "to": [
+        -2,
+        11,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            5.0,
+            6.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            11.0,
+            13.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            7.0,
+            6.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sweet_berry_wine_2_element4",
+      "type": "cube",
+      "uuid": "fd8f1ff3-938f-5f1d-82db-487aaa01f760",
+      "from": [
+        -7,
+        0,
+        -3
+      ],
+      "to": [
+        -1,
+        10,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            10.0,
+            14.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            10.0,
+            14.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sweet_berry_wine_2_element5",
+      "type": "cube",
+      "uuid": "046528ca-0633-54f5-ae58-293fb1e3026d",
+      "from": [
+        -5,
+        11,
+        -1
+      ],
+      "to": [
+        -3,
+        15,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            1.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            12.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            0.0,
+            5.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "f413c422-df98-52d5-93f0-022728de694d",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "2eebcd28-3998-5f5a-821f-8ae6f80f45e9",
+        "6059fe00-9ef4-5422-8d92-844a834070ec",
+        "8bc07313-a1cc-57f2-bd7b-0e2ff4946711",
+        "f5ddf5a3-042e-58e8-8922-7ffb7ccf0ddd",
+        "fd8f1ff3-938f-5f1d-82db-487aaa01f760",
+        "046528ca-0633-54f5-ae58-293fb1e3026d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sweet_berry_wine.png",
+      "id": "0",
+      "uuid": "bb8093c9-d9d3-5468-a58b-9c4fa49a0660",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA0ElEQVR4XmNgoCZwVJb7byAp9h9dnGhQGBH0H2QIujg64OXlRReCAKoYQLYX1GI8/xtMqfwPokEYWQ5kY2Gg338fJYX/WG0HaSjbO///7p/3wTQIIxsC0gTSbCAshN0AkM0gzeKOZmAMcwm6OpwAZoCQlgIYD4wBIH8jewFEg+TkQtz+6+eGg8VAGMQGiaEYkG+q/X9LfNB/EI3MBsnBNIBoZDbRBsBsRXYBiMYwAIStJEXAGMYm2gBYIMLSAHIYEOUFQVUJsAYQjcwGyREKRAC/lN7lDVU70wAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

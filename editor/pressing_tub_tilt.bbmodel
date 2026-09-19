@@ -1,0 +1,507 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "pressing_tub_tilt",
+  "model_identifier": "kt_assets_a1.pressing_tub_tilt",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "pressing_tub_tilt_0",
+      "type": "cube",
+      "uuid": "83cc3515-43c3-54ab-95dc-ebff76368cc2",
+      "from": [
+        -6,
+        1.41777,
+        1.0459399999999999
+      ],
+      "to": [
+        6,
+        13.41777,
+        3.04594
+      ],
+      "origin": [
+        0,
+        7.41777,
+        0.5459399999999999
+      ],
+      "rotation": [
+        45,
+        0.0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            18.0,
+            14.0,
+            30.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            2.0,
+            18.0,
+            14.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      }
+    },
+    {
+      "name": "pressing_tub_tilt_1",
+      "type": "cube",
+      "uuid": "a39c192d-214f-597c-8d91-bd3a1f558b9f",
+      "from": [
+        -8,
+        -0.58223,
+        -3.50406
+      ],
+      "to": [
+        8,
+        1.41777,
+        3.04594
+      ],
+      "origin": [
+        0,
+        7.41777,
+        0.5459399999999999
+      ],
+      "rotation": [
+        45,
+        0.0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            8.0,
+            0.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            30.0,
+            16.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            8.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            8.0,
+            0.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      }
+    },
+    {
+      "name": "pressing_tub_tilt_2",
+      "type": "cube",
+      "uuid": "e2e53e5b-f331-5e0d-96d5-8a1c94734230",
+      "from": [
+        -8,
+        1.41777,
+        -3.50406
+      ],
+      "to": [
+        -6,
+        13.41777,
+        3.04594
+      ],
+      "origin": [
+        0,
+        7.41777,
+        0.5459399999999999
+      ],
+      "rotation": [
+        45,
+        0.0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            2.0,
+            18.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            14.0,
+            8.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            8.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            7.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            7.0,
+            0.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      }
+    },
+    {
+      "name": "pressing_tub_tilt_3",
+      "type": "cube",
+      "uuid": "20a565ad-1c1b-5231-b1da-f7d3eb31af02",
+      "from": [
+        6,
+        1.41777,
+        -3.50406
+      ],
+      "to": [
+        8,
+        13.41777,
+        3.04594
+      ],
+      "origin": [
+        0,
+        7.41777,
+        0.5459399999999999
+      ],
+      "rotation": [
+        45,
+        0.0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            30.0,
+            2.0,
+            32.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            14.0,
+            8.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            14.0,
+            18.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            8.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            7.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            7.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      }
+    },
+    {
+      "name": "pressing_tub_tilt_4",
+      "type": "cube",
+      "uuid": "edec3e10-2f8b-5b5a-b362-74965e31ec69",
+      "from": [
+        -8,
+        13.41777,
+        -3.50406
+      ],
+      "to": [
+        8,
+        15.41777,
+        3.04594
+      ],
+      "origin": [
+        0,
+        7.41777,
+        0.5459399999999999
+      ],
+      "rotation": [
+        45,
+        0.0,
+        0.0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            14.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            16.0,
+            8.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            8.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            8.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            8.0,
+            0.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      }
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "33264638-459b-53e8-be91-816f95c5f18e",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "83cc3515-43c3-54ab-95dc-ebff76368cc2",
+        "a39c192d-214f-597c-8d91-bd3a1f558b9f",
+        "e2e53e5b-f331-5e0d-96d5-8a1c94734230",
+        "20a565ad-1c1b-5231-b1da-f7d3eb31af02",
+        "edec3e10-2f8b-5b5a-b362-74965e31ec69"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "pressing_tub.png",
+      "id": "0",
+      "uuid": "d5570177-a01f-5b1e-a1b0-421b23666a3d",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACOUlEQVR4Xq1Wu0oEQRC8DxEEMThBREQET0EDjcREEeQC4QI1MNFMjMRI8Av82pVaqba22L2eubWhb6anpx/TXTO3k++X0+br8bjBSK6RMX+4nLYj+P3uoLmZrYeMPaqHDD32QZ7QAZ2tIj9d7w3qMUKPOYJS7iSAjGjAE6isDlVPh62jSgq785OjZnd7q8HYx9CRfS/mPLUHyCjsphtrjTKD+foQsyoeIKOwY0kxvt7+ciajJZQxh94DZBR2BA1LUovi0RjAzxgUkz1ARmGnAelUE8IaZeq9QmAPkFHY0SEE9LQvAb12ngD24gAeIKOwo0OCyjHQl6BiguwBMgo7v+f+Bvhb4GusigfIKOz8Xte+A6MxwJLrPa+R0ctV3oGwgyP2lGXxt3+Z3jHhGMK+Ze9IpwJkvnRk16sMJ2PekcnbfL9R/rw/7LCv+x4vbTXBCU60uNhpGfP52WY7f776Y+opY9+/JQDHH4tZyzihzskIqjJsMLq/amIFeGow5ljjOmVfL6kAseDrQawATuj99zWtCmxKEiAwfT2I5aVzlpp919KzNWCuuz8not/XgzSo912xoToCsSSB+PAYIjjRXjsGHAvcU3oLUgxoP/WUjgdn4sP9OaUYoDMtteJBy+34KGlB+mfFBLy/GljZde7PKf1gQQLL3gHV6ZsALkkgbQExgLKzv3rV+vquOvfnFH86Q6QJ0LH2Gqy44Fj6EKUYgDOU03vPq8a2uL60BekHC5xomR10md791dIP5hwFd06yDaAAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ]
+}

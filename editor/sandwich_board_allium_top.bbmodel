@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_allium_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_allium_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_allium_top_element0",
+      "type": "cube",
+      "uuid": "620a9e8c-182d-5ced-a820-ae46acca90a8",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_allium_top_element1",
+      "type": "cube",
+      "uuid": "a43bbf75-1c57-59aa-b0f0-ed5fd9bc02b1",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_allium_top_element2",
+      "type": "cube",
+      "uuid": "2c400277-6626-52de-b6c1-4d191ce1ae06",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_allium_top_element3",
+      "type": "cube",
+      "uuid": "3271c7be-79b8-5cbb-982f-fc91bbb97ef9",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            34.0,
+            0.0,
+            32.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_allium_top_element4",
+      "type": "cube",
+      "uuid": "f74807a9-1cb3-5e48-8354-08d3008c68df",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            35.0,
+            1.0,
+            47.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            1.0,
+            59.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            47.0,
+            1.0,
+            35.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            59.0,
+            1.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_allium_top_element5",
+      "type": "cube",
+      "uuid": "f3cf5c85-9a67-5f8c-821e-a90d8bdcc35d",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "47e936a4-d375-5fbf-83d2-768b8607b347",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "620a9e8c-182d-5ced-a820-ae46acca90a8",
+        "a43bbf75-1c57-59aa-b0f0-ed5fd9bc02b1",
+        "2c400277-6626-52de-b6c1-4d191ce1ae06",
+        "3271c7be-79b8-5cbb-982f-fc91bbb97ef9",
+        "f74807a9-1cb3-5e48-8354-08d3008c68df",
+        "f3cf5c85-9a67-5f8c-821e-a90d8bdcc35d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_allium_top.png",
+      "id": "0",
+      "uuid": "25e7a71d-f141-53fe-b3a7-45fc133f3446",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAETElEQVR4nO1ZX2hbVRj/neR4m5uEydqtzDzUthrpKL2s7GU4hCmCtTCQbhehan2YRhj4MNgwnYiKrI1TKCj4EOeLSEDC+jJYKwwcCM4HiyPdUGhN/yAB16TRmOT25s+ODzf3Nk1yk9zchN6H/V5u7vnOd7/zfed83/e7NwR1sOhPMI/AQ5h0knrzzODksX52gKdYuLPakg3vc88yozorP/2s2aIAEAllWe9RB46M2ggAiOERFhaXiUfgEYtImAgKzH6Q4dzSbahjnQjM8MsvGnLm/sItwrmdhmzk0tk99xQAeo868OD3nd0dFxXHVAfF8AgrJgk8Ao97i1uGDLaCLt5VVy5LmbbZogBwZNRGVOdjEalqUlhcJgDg80vaDnkEvm2LKEcX7wLluYbz2hUEqv4oP9p6UGV6gTKLZp2vNWfm4nt4ZnAQZ8+/Y8gmBZQj/lHyBOYDkbo5LUw6yURQYL7Ij9iOpbHoT7CxQE/HCqQRXP7805b0KAAUkwT2g83Vn3lfhJydSrNujxvbsXRLRjuBrz65gn9S/4EQgsG+PthtNqysr2P66ixmLvlx+bNATT0amtpg3VE3jOyk6ny3x92WxaekgulnnP/gfV2ZnvMAQI3u5PjcEAu6nm+YLkbg5Oymn3H7++u4s/QrvP0DABgAZXkrm2vAQ2D66mxNPToW6CETQYGJp5Xe38iQw8VhJ5PTuILplQOgdvOPOfXqmdZsA4AvqhS1c353w6I274sQMTzCACA0tcEmv33SEkVw9pIf3oEBAMCDrTh6Dx9qqiNQAFo+N5sKmb/yeP23H9pWAwpFw2y2CtN18rweKGC8qKnOW6EFsnwRABD++hpW16IACJ4unQQA+HNtHQwM0zNXaurTiaDAvsicxM3AH4a7wPjcELt5oXm9RlDZXSMyVJBye5hgXpYhvv0W8rIMAHisq0sbV+/zsqyNl4PuZHJwuBqzr3KMBXrI+NwQM6rXDJqhuJXOq9dajoeD17AajeLixx9q4+Wg6g5GQlkWi0gNj/WiP8G2Y2l0/925FGiV51c6mJdlvPLmG3V1NCocW1LeAzQHS8f8u9GX4HBxmPcpfd9owbQ6NCr8zfFTCIvLJDS1wRLJOBLJOLzD/VrfV9FuFgjs8oD7C7cMn6jyjxst2Qag7S6gOJhIxgEou60yvi9PL7GFF17D2IX9r/ztBK0c2I6l4R3ur9rld28cJ7jR2cWcOeFhhdxDUM5WJdMbv/5LzPwJKMd+MDuVCGUlpafnStdK6I2bQVUA9hOcnYAvvRhJOcVZvsaLkpQrgufs2hwzsFQ+H+s7wIDdt8NsEw7e3Uy1NwX2E0/pdJatf3dw+HFHTdndzZQpm5YKQFYnxwt5piszC0sFgCvxgfK8V/O8nswMLBWArZSs5b2Ts++pARvxbNX8dnxJslQAnjjUwn8Nq0lTNi0VgE7leT1YKgB6PKA81yvlj/AI5vA/bpvZoiXHvjEAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_allium_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/allium.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

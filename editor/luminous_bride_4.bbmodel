@@ -1,0 +1,4549 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "luminous_bride_4",
+  "model_identifier": "kt_assets_a8.luminous_bride_4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "luminous_bride_4_element0_north",
+      "type": "cube",
+      "uuid": "00cb7681-a2a1-5f04-8047-8d87a4191ca7",
+      "from": [
+        -6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element0_east",
+      "type": "cube",
+      "uuid": "e5961d21-7d3f-5a3c-ad6f-d446a0b52b76",
+      "from": [
+        -6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element0_south",
+      "type": "cube",
+      "uuid": "82da62d4-bae9-5d9c-aa95-4ac52040eea6",
+      "from": [
+        -6.0,
+        0.1,
+        6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element0_west",
+      "type": "cube",
+      "uuid": "5ad54038-8871-5e68-9e99-fbfcd9f97762",
+      "from": [
+        -2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element1",
+      "type": "cube",
+      "uuid": "df40da65-8d07-5ba0-b037-774b18d3daf3",
+      "from": [
+        -6,
+        0.1,
+        2
+      ],
+      "to": [
+        -2,
+        1.1,
+        6
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element2_north",
+      "type": "cube",
+      "uuid": "56ffb8b4-276e-5fa5-a807-d6dde9019536",
+      "from": [
+        -5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element2_east",
+      "type": "cube",
+      "uuid": "f110084b-47ce-5659-ba6c-39b6e67ce959",
+      "from": [
+        -5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element2_south",
+      "type": "cube",
+      "uuid": "4829ff77-dcb0-5386-89b7-8f9cc46a636e",
+      "from": [
+        -5.65,
+        1.0,
+        5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element2_west",
+      "type": "cube",
+      "uuid": "e405bfc6-931a-5549-8855-18bc8d007747",
+      "from": [
+        -2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element3",
+      "type": "cube",
+      "uuid": "66b64418-b87e-5d3b-afc8-959c76593e34",
+      "from": [
+        -6,
+        11.1,
+        2
+      ],
+      "to": [
+        -2,
+        11.1,
+        6
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element4",
+      "type": "cube",
+      "uuid": "e07c7c0e-2a00-5ed2-afee-d29973ffea2a",
+      "from": [
+        -5,
+        11.2,
+        3
+      ],
+      "to": [
+        -3,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element5",
+      "type": "cube",
+      "uuid": "9843a9ca-5042-54c5-a040-5f02fd4285d0",
+      "from": [
+        3,
+        11.2,
+        3
+      ],
+      "to": [
+        5,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element6",
+      "type": "cube",
+      "uuid": "796c3909-e085-5764-bf6f-b31b5884666d",
+      "from": [
+        2,
+        11.1,
+        2
+      ],
+      "to": [
+        6,
+        11.1,
+        6
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element7_north",
+      "type": "cube",
+      "uuid": "c329b927-9508-5b3d-8d6a-6cc8c592a1a6",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element7_east",
+      "type": "cube",
+      "uuid": "6b626d8d-d3d5-5c1c-b5bd-3c5723578462",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element7_south",
+      "type": "cube",
+      "uuid": "873217e2-4799-5873-b44b-cf05ea7a422f",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element7_west",
+      "type": "cube",
+      "uuid": "7ac0a6b6-d674-5f7a-80ed-b240acd31eeb",
+      "from": [
+        5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element8",
+      "type": "cube",
+      "uuid": "09a8b827-f882-5398-a351-224ce11ced03",
+      "from": [
+        2,
+        0.1,
+        2
+      ],
+      "to": [
+        6,
+        1.1,
+        6
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element9_north",
+      "type": "cube",
+      "uuid": "5473a415-357a-5fe6-82c5-dacff4e96d80",
+      "from": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element9_east",
+      "type": "cube",
+      "uuid": "336f45f4-f61b-5f5b-b91c-272affdbe279",
+      "from": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element9_south",
+      "type": "cube",
+      "uuid": "c2baabba-ce96-5aed-b706-80b8d07a2741",
+      "from": [
+        2.0,
+        0.1,
+        6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element9_west",
+      "type": "cube",
+      "uuid": "3fa27a91-ca13-5424-9b2a-baa6e25c3fba",
+      "from": [
+        6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element10_north",
+      "type": "cube",
+      "uuid": "13e30a51-70e2-5070-8dfd-01eadacb312b",
+      "from": [
+        2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element10_east",
+      "type": "cube",
+      "uuid": "f27b327c-f25f-57ef-9f14-b0fd350816c1",
+      "from": [
+        2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element10_south",
+      "type": "cube",
+      "uuid": "164e4ef0-00c2-56f5-a4a5-b6883b0c6e27",
+      "from": [
+        2.0,
+        0.1,
+        -2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element10_west",
+      "type": "cube",
+      "uuid": "bad793da-6e88-5557-a60e-f02004e1decd",
+      "from": [
+        6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element11",
+      "type": "cube",
+      "uuid": "1b74f334-4f59-5c1c-9b9d-ae2b2ea818eb",
+      "from": [
+        2,
+        0.1,
+        -6
+      ],
+      "to": [
+        6,
+        1.1,
+        -2
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element12_north",
+      "type": "cube",
+      "uuid": "32661727-7a0e-51a8-97db-0c97fee9103f",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element12_east",
+      "type": "cube",
+      "uuid": "d7c809a2-e172-5aeb-a5c4-51583de7a437",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element12_south",
+      "type": "cube",
+      "uuid": "2ba26d84-a1f2-5721-9854-2c7a0c0707b0",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element12_west",
+      "type": "cube",
+      "uuid": "13e59752-9401-566b-97a6-9e6f6b52841b",
+      "from": [
+        5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element13",
+      "type": "cube",
+      "uuid": "4f01362b-c2e6-59af-86eb-bf6eb284b1a2",
+      "from": [
+        2,
+        11.1,
+        -6
+      ],
+      "to": [
+        6,
+        11.1,
+        -2
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element14",
+      "type": "cube",
+      "uuid": "786ca08c-69e5-5016-a1b5-c9dd201db5a2",
+      "from": [
+        3,
+        11.2,
+        -5
+      ],
+      "to": [
+        5,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element15",
+      "type": "cube",
+      "uuid": "dcc835ae-0f22-54f4-aca3-13af625bac6d",
+      "from": [
+        -5,
+        11.2,
+        -5
+      ],
+      "to": [
+        -3,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element16",
+      "type": "cube",
+      "uuid": "7e2b4937-ff64-5e62-b383-011e868abb91",
+      "from": [
+        -6,
+        11.1,
+        -6
+      ],
+      "to": [
+        -2,
+        11.1,
+        -2
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element17_north",
+      "type": "cube",
+      "uuid": "2f6a9031-a98a-5ff0-9445-312c76ab1cc3",
+      "from": [
+        -5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element17_east",
+      "type": "cube",
+      "uuid": "01902ac5-4248-51b9-932e-dc4fae05841c",
+      "from": [
+        -5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element17_south",
+      "type": "cube",
+      "uuid": "6b42457e-2240-50e2-9d9c-6115a1a5ccd0",
+      "from": [
+        -5.65,
+        1.0,
+        -2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element17_west",
+      "type": "cube",
+      "uuid": "95c62794-bfe2-5dc6-bad3-8ed0e4677a53",
+      "from": [
+        -2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element18",
+      "type": "cube",
+      "uuid": "8d82598f-3458-5876-b81c-285ef371cff6",
+      "from": [
+        -6,
+        0.1,
+        -6
+      ],
+      "to": [
+        -2,
+        1.1,
+        -2
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element19_north",
+      "type": "cube",
+      "uuid": "4cbb693c-0f25-561c-9166-b754657b2d9a",
+      "from": [
+        -6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element19_east",
+      "type": "cube",
+      "uuid": "ea0ac851-938a-531e-a161-ecf49de34743",
+      "from": [
+        -6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element19_south",
+      "type": "cube",
+      "uuid": "8b5e3a49-76d0-5e3e-9d35-fcd00a5c3c27",
+      "from": [
+        -6.0,
+        0.1,
+        -2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element19_west",
+      "type": "cube",
+      "uuid": "e25c0bef-f8f3-5487-8324-b2b963512cea",
+      "from": [
+        -2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element20",
+      "type": "cube",
+      "uuid": "d39807d1-acd6-51d0-adc8-7c74a0975f9e",
+      "from": [
+        -5.67071,
+        8.749,
+        -5.6
+      ],
+      "to": [
+        -2.37071,
+        8.749,
+        -2.3
+      ],
+      "origin": [
+        -4.07071,
+        6.699,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element21",
+      "type": "cube",
+      "uuid": "6e067747-1c16-5534-b115-b238faeb30a6",
+      "from": [
+        1.6221800000000002,
+        8.749,
+        2.6928900000000002
+      ],
+      "to": [
+        4.922180000000001,
+        8.749,
+        5.992889999999999
+      ],
+      "origin": [
+        3.22218,
+        6.699,
+        3.29289
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element22",
+      "type": "cube",
+      "uuid": "53923ebb-44d6-51da-b134-3880ab83c81b",
+      "from": [
+        -5.67071,
+        8.749,
+        2.4000000000000004
+      ],
+      "to": [
+        -2.37071,
+        8.749,
+        5.699999999999999
+      ],
+      "origin": [
+        -4.07071,
+        6.699,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "luminous_bride_4_element23",
+      "type": "cube",
+      "uuid": "846c98cd-3eb2-5389-9bf0-cc0923b9ce78",
+      "from": [
+        2.3292900000000003,
+        8.749,
+        -5.6
+      ],
+      "to": [
+        5.629289999999999,
+        8.749,
+        -2.3
+      ],
+      "origin": [
+        3.92929,
+        6.699,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "11b69a35-d0a7-527a-8555-8acc0e36a7d1",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "00cb7681-a2a1-5f04-8047-8d87a4191ca7",
+        "e5961d21-7d3f-5a3c-ad6f-d446a0b52b76",
+        "82da62d4-bae9-5d9c-aa95-4ac52040eea6",
+        "5ad54038-8871-5e68-9e99-fbfcd9f97762",
+        "df40da65-8d07-5ba0-b037-774b18d3daf3",
+        "56ffb8b4-276e-5fa5-a807-d6dde9019536",
+        "f110084b-47ce-5659-ba6c-39b6e67ce959",
+        "4829ff77-dcb0-5386-89b7-8f9cc46a636e",
+        "e405bfc6-931a-5549-8855-18bc8d007747",
+        "66b64418-b87e-5d3b-afc8-959c76593e34",
+        "e07c7c0e-2a00-5ed2-afee-d29973ffea2a",
+        "9843a9ca-5042-54c5-a040-5f02fd4285d0",
+        "796c3909-e085-5764-bf6f-b31b5884666d",
+        "c329b927-9508-5b3d-8d6a-6cc8c592a1a6",
+        "6b626d8d-d3d5-5c1c-b5bd-3c5723578462",
+        "873217e2-4799-5873-b44b-cf05ea7a422f",
+        "7ac0a6b6-d674-5f7a-80ed-b240acd31eeb",
+        "09a8b827-f882-5398-a351-224ce11ced03",
+        "5473a415-357a-5fe6-82c5-dacff4e96d80",
+        "336f45f4-f61b-5f5b-b91c-272affdbe279",
+        "c2baabba-ce96-5aed-b706-80b8d07a2741",
+        "3fa27a91-ca13-5424-9b2a-baa6e25c3fba",
+        "13e30a51-70e2-5070-8dfd-01eadacb312b",
+        "f27b327c-f25f-57ef-9f14-b0fd350816c1",
+        "164e4ef0-00c2-56f5-a4a5-b6883b0c6e27",
+        "bad793da-6e88-5557-a60e-f02004e1decd",
+        "1b74f334-4f59-5c1c-9b9d-ae2b2ea818eb",
+        "32661727-7a0e-51a8-97db-0c97fee9103f",
+        "d7c809a2-e172-5aeb-a5c4-51583de7a437",
+        "2ba26d84-a1f2-5721-9854-2c7a0c0707b0",
+        "13e59752-9401-566b-97a6-9e6f6b52841b",
+        "4f01362b-c2e6-59af-86eb-bf6eb284b1a2",
+        "786ca08c-69e5-5016-a1b5-c9dd201db5a2",
+        "dcc835ae-0f22-54f4-aca3-13af625bac6d",
+        "7e2b4937-ff64-5e62-b383-011e868abb91",
+        "2f6a9031-a98a-5ff0-9445-312c76ab1cc3",
+        "01902ac5-4248-51b9-932e-dc4fae05841c",
+        "6b42457e-2240-50e2-9d9c-6115a1a5ccd0",
+        "95c62794-bfe2-5dc6-bad3-8ed0e4677a53",
+        "8d82598f-3458-5876-b81c-285ef371cff6",
+        "4cbb693c-0f25-561c-9166-b754657b2d9a",
+        "ea0ac851-938a-531e-a161-ecf49de34743",
+        "8b5e3a49-76d0-5e3e-9d35-fcd00a5c3c27",
+        "e25c0bef-f8f3-5487-8324-b2b963512cea",
+        "d39807d1-acd6-51d0-adc8-7c74a0975f9e",
+        "6e067747-1c16-5534-b115-b238faeb30a6",
+        "53923ebb-44d6-51da-b134-3880ab83c81b",
+        "846c98cd-3eb2-5389-9bf0-cc0923b9ce78"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "luminous_bride.png",
+      "id": "0",
+      "uuid": "cce041c8-b5c8-5f40-9e70-7a85d3f5cf23",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAV9JREFUOI2VkjFIAlEYx/8nR2BdUZOgVkrRcmGQQVkEJVhrRLU1tAaBIE25hTSYg4tbhKCLZVtLTkE0tATS5HIFV9B01nlCIH4NcU/Pe5L+l/e+9/j+/9/He0CfOo14aD8wSmYt9mvg9/sBKACqLQN61QkABN+wIHnHmHtN1YT/DB28Q1douWci0Uxub3ZvhP8Irm5tDYqioPJpWAnqcozopMDQvcE1blqTiA4KFZzdv+OieEfMwLm1COwuAQBLN9d2fVTryGdzyGdzHSMk9gQkWuny9DyXoNj4wfOECwAQWl1ojdCpowFuP1c2AzO9G0WnbB8pPiII8d4B+CP0I8d3g+jhiyha1ila1tlTNolI1QxSNYPMJ+NJLBtAuvQCABiXpyyXqWQGADAbnOtOcP1WY8W228n2lzcltt8Mr3Q1EAHAM+PDzqSEwJD1MnZ8aKldj084X48glcxAokEAwC/0SmvIrHw/SAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count4.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count4.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element17_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element17_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element17_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element17_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element19_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element19_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element19_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element19_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {},
+    "tint_map": [],
+    "animation": null,
+    "engine_test": "NOT_RUN"
+  }
+}

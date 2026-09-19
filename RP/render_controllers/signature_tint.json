@@ -1,0 +1,53 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_assets_a17.signature_glass": {
+      "geometry": "Geometry.glass",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "uv_anim": {
+        "offset": [
+          0,
+          "math.mod(math.floor(query.life_time * 10), 6) / 6"
+        ],
+        "scale": [
+          1,
+          0.16666666666666666
+        ]
+      }
+    },
+    "controller.render.kt_assets_a17.signature_tint": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "color": {
+        "r": "query.property('kt_art:red') / 255",
+        "g": "query.property('kt_art:green') / 255",
+        "b": "query.property('kt_art:blue') / 255",
+        "a": 1
+      },
+      "uv_anim": {
+        "offset": [
+          0,
+          "math.mod(math.floor(query.life_time * 10), 6) / 6"
+        ],
+        "scale": [
+          1,
+          0.16666666666666666
+        ]
+      }
+    }
+  }
+}

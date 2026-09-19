@@ -1,0 +1,1145 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_peony_assembled",
+  "model_identifier": "kt_assets_a17.sandwich_board_peony_assembled",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "board_source_bottom_element0",
+      "type": "cube",
+      "uuid": "e7be87c4-9339-5a0c-a9a9-d3d8241f8b6c",
+      "from": [
+        -6.5,
+        4,
+        -5.7
+      ],
+      "to": [
+        6.5,
+        6,
+        5.300000000000001
+      ],
+      "origin": [
+        0.5,
+        13.25,
+        0.9653799999999997
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element1",
+      "type": "cube",
+      "uuid": "c680e61a-8fbe-5ee1-bd23-780abd1cac03",
+      "from": [
+        3.505000000000001,
+        -0.98975,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        6.5155,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.98474,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element2",
+      "type": "cube",
+      "uuid": "3de6fcb4-2ea7-58d8-bb7e-cf6337c84fe2",
+      "from": [
+        3.5,
+        -1.43015,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        6.1397,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element3",
+      "type": "cube",
+      "uuid": "2788b52f-fe59-5d9a-bbaf-02192ce4ef78",
+      "from": [
+        -5.495,
+        -0.98975,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        6.5155,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.98474,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.48476,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "board_source_bottom_element4",
+      "type": "cube",
+      "uuid": "6b095f86-0ba0-5f72-bcee-357ba616582d",
+      "from": [
+        -5.5,
+        -1.43015,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        6.1397,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            14.43016,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element0",
+      "type": "cube",
+      "uuid": "3f3854c5-37fd-50d9-b374-00507008591b",
+      "from": [
+        3.505000000000001,
+        6.515499999999999,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element1",
+      "type": "cube",
+      "uuid": "7a58e7fd-e4b7-5341-a67d-f2e9bd8c851c",
+      "from": [
+        3.5,
+        6.1396999999999995,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        20.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.569849999999999,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element2",
+      "type": "cube",
+      "uuid": "f61635b9-1674-5905-9d84-9012c953e5d7",
+      "from": [
+        -5.495,
+        6.515499999999999,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element3",
+      "type": "cube",
+      "uuid": "210cc3ed-1076-51a3-ac24-b6c73f0f1a48",
+      "from": [
+        -5.5,
+        6.1396999999999995,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        20.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.569849999999999,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element4",
+      "type": "cube",
+      "uuid": "775ae922-a4b3-5cf7-bdde-78625f076292",
+      "from": [
+        -6,
+        5.772399999999999,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        21.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        13.772400000000001,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_peony_top_element5",
+      "type": "cube",
+      "uuid": "7327b856-63e3-55ce-84c9-67e866764cfe",
+      "from": [
+        -8,
+        2.7723999999999993,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        23.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        13.772400000000001,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "assembly",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "cc65f8dc-2799-517c-9b34-d4e991303792",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        {
+          "name": "bottom_root",
+          "origin": [
+            0,
+            8,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "uuid": "c1e7268f-247e-5353-8e06-65b982cffe7f",
+          "export": true,
+          "isOpen": true,
+          "visibility": true,
+          "children": [
+            "e7be87c4-9339-5a0c-a9a9-d3d8241f8b6c",
+            "c680e61a-8fbe-5ee1-bd23-780abd1cac03",
+            "3de6fcb4-2ea7-58d8-bb7e-cf6337c84fe2",
+            "2788b52f-fe59-5d9a-bbaf-02192ce4ef78",
+            "6b095f86-0ba0-5f72-bcee-357ba616582d"
+          ]
+        },
+        {
+          "name": "top_root",
+          "origin": [
+            0,
+            24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "uuid": "81f94465-d7a8-56ae-a7e0-2893f11547f1",
+          "export": true,
+          "isOpen": true,
+          "visibility": true,
+          "children": [
+            "3f3854c5-37fd-50d9-b374-00507008591b",
+            "7a58e7fd-e4b7-5341-a67d-f2e9bd8c851c",
+            "f61635b9-1674-5905-9d84-9012c953e5d7",
+            "210cc3ed-1076-51a3-ac24-b6c73f0f1a48",
+            "775ae922-a4b3-5cf7-bdde-78625f076292",
+            "7327b856-63e3-55ce-84c9-67e866764cfe"
+          ]
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_peony_top.png",
+      "id": "0",
+      "uuid": "f616e1a0-9354-56e9-adbf-8d9215cf8394",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAEjUlEQVR4nO2Zb2gbZRzHv09zuzRdSAKuFkdTmpo7AiPtXllZbVEqgu8cU3wlg50iDvZqjv6xQsGuddN3wopohCJ9IVoQfFEIK0glToeT0RAol7jERixbpnZt2utdkj2+SJPlmsv1Lrl1VvaBI9zveX7P8/x+9/x+93supO94J3U5GMxfSxDUAdd/gprVif/wo6G5MpECBYDWPltdazMCU3lz7OUXTRkTm79KWGeLqQmV7JZuOy9wNHJmGQCwnVAAPHBE3xcBiKG4pc5o0hLaHYd1r4cBL3A0EylQMRQnPee7IN+RQFwFPPFCMzZ+zaLnfBfEUJxkIgXKC5zpXVeLKgfYHYfBOFjdy2on8AJHFwaWsJ1QwAscZV12PHPpGJQ/Cvj7xiaem+0G67KDFzi6nVCwMLAEq5ygckDJ+L3QcsLku0P45sqndS1CSRMMLnZjLZmAkiZgvRTXh2LoOucm7Sed5PpQDKyXQkkTrCUTGFzshpK2JhKYvbsYY/TjS3XrfndiDh6fH97TjrJV7SFnub39pLMsD4aDSM9IdC2ZQDAcrHvOEpY54MoHF7G2vgFCCLo6OmBrakI8lcLI5SlMXhjG6EcfaupFx6PU4/OjdzpgeK7e6QB+fmcZ0fEoDY4HG9oKDACsS/lGxgAAnH3/vZpttYwHAI/Pj8HFYowbhXXZMbjYjYWBJVNr1IIBgBbW1vBA3381h2s3fgHX6QNAARQfTHwlCdwHRi5Paer1z/YAKMa9UUr5oKjbGAwAMBbUGc+/fqouvVRYJOkZiTb7WbSGjD2IyJllbCcUVc6oF8tywNSFYXA+HwDgTuYunmw9glfPvm1Y30y119pnI+kZyZLXIAMA+ULjY43oxLkevMDR3umAqYQWHY/S3ukAeIGjjVaGDe8AmisAAL7+7HMkkrcAEPh3dgIA/JZMgYJiZPKipr4YipPOl3jq8fkNz+nx+cG67BBDorUhIEubReEexVBeUsp9ASAny3jtrTeRk2UAwCG7vSwv3edkuSzfDeulphJa/2yPqaSpR1UpLEubyEuK7rXb+NLvIbu9bGzp/tuZLzE1PKrqWwkvcDQbU5AKG3+aqbBIsjHFknJYMwQqDTTDbgNzsoxXTr+hq1MKATPxzAscVdLEkhDQPA3uN6mwSMzU9kqamNoxeqjqgNj8VdODGv24sResl6JtjKG3J/K647WNMZRdtew0/N/YAUAxFNyrPrSNMRQoGpqJFOitT+7RSpl71WfpRxFVDjj17FGaV+6DYav9Uks+99Ofli1GDMUJL3DULYCKE3Gy0Zalm3+t4PZEnvACR7EKy78IqQqhLan4Tld2fndTS24llQZ2nXMTLbmVqHYAayNw7ByMJKVorEPjoCQpBThYW7nPQUbl1eMdLgo8OB1uGTDw5sr6Q/tiux+odsDTR52anTL3ttHqbtZsu7mybv2q9hGVA7ZqxHg+R2u2HXSqcgCgjvtSnOu1HWRUDsisy+W4b2Ftqhzw+93qPzSs+JL0qFE54KkjDvMjJP6xai2PBEM54P+MoTqgMtZ3tz/mMQebfwElDfQrXBswzQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_peony_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/peony.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

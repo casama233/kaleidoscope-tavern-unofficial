@@ -1,0 +1,803 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "plum_wine_4",
+  "model_identifier": "kt_assets_a9.plum_wine_4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "plum_wine_4_element0",
+      "type": "cube",
+      "uuid": "b224b673-3a23-5b6b-9338-d4e427912307",
+      "from": [
+        2,
+        7,
+        2
+      ],
+      "to": [
+        4,
+        12,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            29.0,
+            0.0,
+            31.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element1",
+      "type": "cube",
+      "uuid": "77ab8377-ab8f-5517-8299-8e968de4aab8",
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        5,
+        7,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            10.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            0.0,
+            1.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            23.0,
+            0.0,
+            27.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            23.0,
+            0.0,
+            27.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element2",
+      "type": "cube",
+      "uuid": "3795757a-e3cc-58a7-a01b-31d1077290a3",
+      "from": [
+        -4,
+        7,
+        2
+      ],
+      "to": [
+        -2,
+        12,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            29.0,
+            8.0,
+            31.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element3",
+      "type": "cube",
+      "uuid": "8cb8e65e-4b66-5d35-8160-b2f254139e74",
+      "from": [
+        -5,
+        0,
+        1
+      ],
+      "to": [
+        -1,
+        7,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            8.0,
+            10.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            8.0,
+            5.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            8.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            8.0,
+            1.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            23.0,
+            8.0,
+            27.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            23.0,
+            8.0,
+            27.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element4",
+      "type": "cube",
+      "uuid": "a524f30e-392d-5ff9-9eb6-3f38e0b8fd80",
+      "from": [
+        1,
+        0,
+        -5
+      ],
+      "to": [
+        5,
+        7,
+        -1
+      ],
+      "origin": [
+        6,
+        0,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            8.0,
+            10.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            8.0,
+            5.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            8.0,
+            16.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            8.0,
+            1.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            23.0,
+            8.0,
+            27.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            23.0,
+            8.0,
+            27.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element5",
+      "type": "cube",
+      "uuid": "dfdaa948-4d5f-52b4-8a32-8a184a35476f",
+      "from": [
+        2,
+        7,
+        -4
+      ],
+      "to": [
+        4,
+        12,
+        -2
+      ],
+      "origin": [
+        6,
+        0,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            29.0,
+            8.0,
+            31.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            8.0,
+            20.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element6",
+      "type": "cube",
+      "uuid": "1567d39f-e093-558a-b1bd-fb4a978c5e60",
+      "from": [
+        -5,
+        0,
+        -5
+      ],
+      "to": [
+        -1,
+        7,
+        -1
+      ],
+      "origin": [
+        0,
+        0,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            10.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            0.0,
+            1.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            23.0,
+            0.0,
+            27.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            23.0,
+            0.0,
+            27.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "plum_wine_4_element7",
+      "type": "cube",
+      "uuid": "144dbbba-d2a8-5735-a087-a93561f59d5b",
+      "from": [
+        -4,
+        7,
+        -4
+      ],
+      "to": [
+        -2,
+        12,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            29.0,
+            0.0,
+            31.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            0.0,
+            20.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "f6912a1e-064f-5a0c-9b31-6f4c3d598ef4",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "b224b673-3a23-5b6b-9338-d4e427912307",
+        "77ab8377-ab8f-5517-8299-8e968de4aab8",
+        "3795757a-e3cc-58a7-a01b-31d1077290a3",
+        "8cb8e65e-4b66-5d35-8160-b2f254139e74",
+        "a524f30e-392d-5ff9-9eb6-3f38e0b8fd80",
+        "dfdaa948-4d5f-52b4-8a32-8a184a35476f",
+        "1567d39f-e093-558a-b1bd-fb4a978c5e60",
+        "144dbbba-d2a8-5735-a087-a93561f59d5b"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "plum_wine.png",
+      "id": "0",
+      "uuid": "9d00b546-dbe2-53d4-bd54-89b864d13cfc",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABRZJREFUWIWtlmtsFFUUx39jNhVstWlnZndt2UBbIraUUKElotavSiIWCQETA5posCQSS0iJMaZp/GCMj7QSY0wTE1MQswVEYjASDBAgNGl5tKX0IbvtQunancdukDYtlWT8MMx0Zrp9Cf8v985/zr3nnP+9c+YIADs/XWkUl0BvDwA01V0XnJw6MMaxH2OC19bJ1+zabShqgkNHWgQe4I13lhlyYSbgtt2x7S1D1VVkUcYHUFwCG19+CbhgrfVwmXPy17q7uPV3HCcs5965qqt0dF+jrHSVGYCZ+QVbASfnhdNWHRiz+dc+1OjtyeBG3bQl0yCLMmWlq6YUABjT7rN/71EAmupK2b83bEarRaECmuqq5t7ZA3VgDOcRWGgO/2Qfk2/qZSaqFiU2HAGgvfMkyWSC3NzAtE2d0lvwKgLYZz4bbAWsxcvyl9ujNU+XmRdNddfndObF9+vWGT6ASWUlANW7mojHzYv0elU9eXl50xbFOnJs3rSNLdSvjeq2tgUH/cghANS/+IxREBIZHNIB+LY/KXywItfmIskJDvbeEiRJYiZ+26YthpbSCR89LEiSBMCr8hPG8txFAGltpRyRxwAKQiIbX1hDQUikICTi5axNZuP7b/TT7fyOwfXeOddSOt29PWgp3byEg0M6v128Yivg5Lxw2kaSEza//ekJBu//y3VA0zQsFdJByhEpLS5ByhGnvgKAj44dN4+gpNKe68MxAOqf2zDjhjMhkpzAeQQWwr8ecdcB86WOPhzj5qVWAK4c/xlV1ZBldyaWrRdeRTRN46DG/OuAtXhp+XrgO5aWr2fpLJk5oWka9ZpmO5tNfie+WrPGEAAqyisMv98PgKIoDMYGhYJlBTYHcOL3E4IkSTh5RVFov9QuzNdhOqSVSJIkNE1bEP+/Azi/tcYQ/TIAuqICUNnSaPO6oqKmzDPffOqAiwdQUzqbTx0QnP9462dzfmuNYa0FkHNEKlsaXbY+0S8TELNtI2tj0S9T/Nluxk93cPnQL3YQTj7253l7XU9fD8OJEVd2akpHzhFdz5CmH0gHXVGnOXHy41e7CIjZdsDNlVsIiNn09EaobGmcVXZXP9DX3wcrngWg8JMqCgFaGqnY/57JPV/Fk0NRKkJFEDwAwPjVLgAS+h2cEs8X0/oBK4tCQB2KgmOUQ0Wu54VAzhHx3gEvpvqBlI46FOUf3TxHa7TmT4lB2y6hT11CC7qi0tff5+IqWxpnLUR2P2Ch/eMj9rz/6+n9oNOZV/q5nKVDdVub4Ns30EowGLTJkREz8/nwFvcw8BWVv0+GYNaBSUOlaAlEorVY/KShMpqIEwhBJNrg4ouWwGgiTiTaQM2+PYaSUPEHZBq/aBAAXtn2pTGamGrVswJ5nAzXCjve3WGoiobsl/BlCDKLM8wAmDSDAMgQZGr2vE3X1cv8ceYM1kZO/vTZbrIe9KxdHV3cvjnkym40EScrkOd6BlAVjc7LHaxeWzZzHZg0VNtJOr71YoLFGTKT98yAM3O3UxaUuXOvh7/6a2eVXfZLrF5bZiqQHOkkN7gagMON5QAsCtdy/Bvz/79rUznqUBQ5tIFFwQYAWi8mABifVHFKPF80/9DsrgOW7PBo60BWIA/vHfDCPoLRRHxedWA0EScjKLuCtpJI3up0cSfDtQurA2/WnrXnOz+3iop3xP4yFuIsHarb2gTfxN1ziNn5PP7ghzh8exiAibvnyF+Sbxs7ecve4h4G/wGe7dfBT3EnJwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count4.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count4.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

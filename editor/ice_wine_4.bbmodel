@@ -1,0 +1,803 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "ice_wine_4",
+  "model_identifier": "kt_assets_a4.ice_wine_4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "ice_wine_4_element0",
+      "type": "cube",
+      "uuid": "8dd56241-ad66-5dc0-b841-9c448808f0ff",
+      "from": [
+        -6,
+        0,
+        2
+      ],
+      "to": [
+        -2,
+        10,
+        6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            4.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element1",
+      "type": "cube",
+      "uuid": "c534e72d-8dd1-5383-9935-e38dc0dc3c3d",
+      "from": [
+        -5,
+        10,
+        3
+      ],
+      "to": [
+        -3,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element2",
+      "type": "cube",
+      "uuid": "fd977787-1eeb-5ac8-87a8-c2c8c946cf68",
+      "from": [
+        2,
+        0,
+        -6
+      ],
+      "to": [
+        6,
+        10,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            4.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element3",
+      "type": "cube",
+      "uuid": "1df9f8fd-d175-5330-98ed-82012bcdd6c7",
+      "from": [
+        3,
+        10,
+        -5
+      ],
+      "to": [
+        5,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element4",
+      "type": "cube",
+      "uuid": "265c169e-9d0b-518f-b7a1-a6442b1e6f8f",
+      "from": [
+        -5,
+        10,
+        -5
+      ],
+      "to": [
+        -3,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element5",
+      "type": "cube",
+      "uuid": "cbc5b404-7ff7-5d42-a28a-2030d9ff85ad",
+      "from": [
+        -6,
+        0,
+        -6
+      ],
+      "to": [
+        -2,
+        10,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            4.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element6",
+      "type": "cube",
+      "uuid": "cc48ba94-57fb-5a32-91ac-5edc5beaf52a",
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        6,
+        10,
+        6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            6.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            6.0,
+            11.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            4.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            5.0,
+            4.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "ice_wine_4_element7",
+      "type": "cube",
+      "uuid": "4faa7fab-5a70-5ee9-ae9e-513c55d6346b",
+      "from": [
+        3,
+        10,
+        3
+      ],
+      "to": [
+        5,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "248b12ac-ee2c-5756-a1c6-ef0148ef225d",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "8dd56241-ad66-5dc0-b841-9c448808f0ff",
+        "c534e72d-8dd1-5383-9935-e38dc0dc3c3d",
+        "fd977787-1eeb-5ac8-87a8-c2c8c946cf68",
+        "1df9f8fd-d175-5330-98ed-82012bcdd6c7",
+        "265c169e-9d0b-518f-b7a1-a6442b1e6f8f",
+        "cbc5b404-7ff7-5d42-a28a-2030d9ff85ad",
+        "cc48ba94-57fb-5a32-91ac-5edc5beaf52a",
+        "4faa7fab-5a70-5ee9-ae9e-513c55d6346b"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "ice_wine.png",
+      "id": "0",
+      "uuid": "ee6dedcd-98b3-5e53-84b4-0810ba572d02",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAATxJREFUOI2lUkFLAkEYfbt4GZalEDS6hAuKGm5Qu0S4e+skdImOnRa7BZ2Tfkp/xyKCNQg0QYPWQ6HCoogMnaZLu83O2mD0YOB7b2befN83H0zbYPVGjdUbNWbaBoMA17EYIYQBwEXTY65jJc6oek6LCR9HqFT24rjff8Zs/pnYz6RuSNC+8xVRUxfTZUz4mH/1X2henaR60yoXfzghhPFLNGiVi+zWOUzpERRCCLMOdgEAfqcHSmlcp2kbTM9peO2+AwDGo1CJtKhcVZa+ntNQLRUAAPn8RkoDvn/B7/RWGlRLBRy5+3i878Zf7HmnODs+RxAMcXlzjQyf8rrYzG7HsbSEl8EbHtpPCU3kUoPfTHmsNYmTyXylvpgu/54BAMzCDwTBEAAgbeDWTjYxQONRqIia1ECcTEqpImpfTLltuLQrJ18AAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count4.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count4.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

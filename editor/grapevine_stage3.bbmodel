@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "grapevine_stage3",
+  "model_identifier": "kt_assets_a2.grapevine_stage3",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "stage3_0",
+      "type": "cube",
+      "uuid": "79f80696-7349-5df2-bf76-4a8d248b63a1",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        16,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            54.0,
+            0.0,
+            58.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            54.0,
+            0.0,
+            58.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            54.0,
+            0.0,
+            58.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            54.0,
+            0.0,
+            58.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            50.0,
+            16.0,
+            54.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            50.0,
+            16.0,
+            54.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "stage3_1",
+      "type": "cube",
+      "uuid": "f160ad5a-2124-5ce0-8b2e-89ef19b9be32",
+      "from": [
+        -11.31370849898476,
+        0,
+        0.0
+      ],
+      "to": [
+        11.31370849898476,
+        16,
+        0.0
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        -45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            34.0,
+            16.0,
+            50.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            34.0,
+            16.0,
+            50.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "stage3_2",
+      "type": "cube",
+      "uuid": "b7162db8-8d93-5858-b23f-e2439a4a755a",
+      "from": [
+        -11.31370849898476,
+        0,
+        0.0
+      ],
+      "to": [
+        11.31370849898476,
+        16,
+        0.0
+      ],
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            34.0,
+            16.0,
+            50.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            34.0,
+            16.0,
+            50.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "236f26e1-a4b5-5a25-bcb2-3b20f15581c4",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "79f80696-7349-5df2-bf76-4a8d248b63a1",
+        "f160ad5a-2124-5ce0-8b2e-89ef19b9be32",
+        "b7162db8-8d93-5858-b23f-e2439a4a755a"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "grapevine_trellis.png",
+      "id": "0",
+      "uuid": "21bb41ff-04b8-5a4a-bb1b-ae8a81ead839",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,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",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/single_stage3.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "java_display_recorded_not_applied": {},
+    "notes": [
+      "element 1: Java rescale(-45) baked about original pivot",
+      "element 2: Java rescale(45) baked about original pivot"
+    ]
+  }
+}

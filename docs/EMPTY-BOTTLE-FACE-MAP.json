@@ -1,0 +1,36 @@
+{
+  "original_elements": 4,
+  "emitted_cubes": 7,
+  "mapping": [
+    {
+      "source_element": 3,
+      "source_face": "north",
+      "output_cube": "bone_3_north",
+      "output_face": "south",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 3,
+      "source_face": "east",
+      "output_cube": "bone_3_east",
+      "output_face": "east",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 3,
+      "source_face": "south",
+      "output_cube": "bone_3_south",
+      "output_face": "north",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 3,
+      "source_face": "west",
+      "output_cube": "bone_3_west",
+      "output_face": "west",
+      "ordered_position_uv_match": true
+    }
+  ],
+  "engine_visual_test": "NOT_RUN",
+  "material": "alpha_test_single_sided"
+}

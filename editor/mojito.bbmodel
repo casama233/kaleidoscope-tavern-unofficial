@@ -1,0 +1,2114 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "mojito",
+  "model_identifier": "kt_assets_a8.mojito",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "mojito_element0",
+      "type": "cube",
+      "uuid": "59f9d4c4-f07e-5289-b146-4ac46ae0b035",
+      "from": [
+        -1,
+        2,
+        0.25
+      ],
+      "to": [
+        0,
+        13,
+        1.25
+      ],
+      "origin": [
+        -0.5,
+        10,
+        0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            12.0,
+            3.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element1_north",
+      "type": "cube",
+      "uuid": "ca105a0f-57a6-5356-9151-28a4ca2ee176",
+      "from": [
+        -2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        -2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element1_east",
+      "type": "cube",
+      "uuid": "f9dd9974-8c71-55ce-9a26-7094a1ef4809",
+      "from": [
+        -2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element1_south",
+      "type": "cube",
+      "uuid": "a0d875fd-aac5-5327-9f2d-e6786f552068",
+      "from": [
+        -2.5,
+        1.0,
+        2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element1_west",
+      "type": "cube",
+      "uuid": "856c4e96-fb8f-5230-aec8-a42fae31f862",
+      "from": [
+        2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element2",
+      "type": "cube",
+      "uuid": "e14385b4-1c65-5f7d-8d67-5194cc453119",
+      "from": [
+        -2.5,
+        0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        1,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element3",
+      "type": "cube",
+      "uuid": "41c01989-a6d1-56b7-a4f0-d689ff440c23",
+      "from": [
+        -2.5025000000000004,
+        7.98,
+        -2.5025000000000004
+      ],
+      "to": [
+        2.5024999999999995,
+        8.89,
+        -1.5925000000000002
+      ],
+      "origin": [
+        0,
+        12.06363,
+        -0.22750000000000004
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            4.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element4",
+      "type": "cube",
+      "uuid": "8deab190-29a0-5caa-9091-810a6b864ce8",
+      "from": [
+        -2.5025000000000004,
+        7.98,
+        -1.5925000000000002
+      ],
+      "to": [
+        -1.5925000000000002,
+        8.89,
+        1.5924999999999994
+      ],
+      "origin": [
+        -0.22750000000000004,
+        12.06363,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element5",
+      "type": "cube",
+      "uuid": "f7642e2d-dd9d-5dc8-94d0-6c4751385f42",
+      "from": [
+        1.5924999999999994,
+        7.98,
+        -1.5925000000000002
+      ],
+      "to": [
+        2.5024999999999995,
+        8.89,
+        1.5924999999999994
+      ],
+      "origin": [
+        0.22749999999999915,
+        12.06363,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            1.0,
+            11.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            1.0,
+            11.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element6",
+      "type": "cube",
+      "uuid": "53e8293a-829b-5619-8577-44678cdf4549",
+      "from": [
+        -2.5025000000000004,
+        7.98,
+        1.5924999999999994
+      ],
+      "to": [
+        2.5024999999999995,
+        8.89,
+        2.5024999999999995
+      ],
+      "origin": [
+        0,
+        12.06363,
+        0.22749999999999915
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            4.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element7_north",
+      "type": "cube",
+      "uuid": "345d7a4f-0632-583c-87b6-d5b8810accea",
+      "from": [
+        -2.0,
+        1.25,
+        -2.0
+      ],
+      "to": [
+        2.0,
+        8.25,
+        -2.0
+      ],
+      "origin": [
+        4,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            27.0,
+            7.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element7_east",
+      "type": "cube",
+      "uuid": "5c98c75c-8d7a-5ed1-a0b4-a8aac8381f04",
+      "from": [
+        -2.0,
+        1.25,
+        -2.0
+      ],
+      "to": [
+        -2.0,
+        8.25,
+        2.0
+      ],
+      "origin": [
+        4,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            27.0,
+            7.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element7_south",
+      "type": "cube",
+      "uuid": "5ea86bf5-5949-5bb1-b9de-7016f68b02a7",
+      "from": [
+        -2.0,
+        1.25,
+        2.0
+      ],
+      "to": [
+        2.0,
+        8.25,
+        2.0
+      ],
+      "origin": [
+        4,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            7.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element7_west",
+      "type": "cube",
+      "uuid": "96726136-b9ad-5829-abe0-1db06b6264c8",
+      "from": [
+        2.0,
+        1.25,
+        -2.0
+      ],
+      "to": [
+        2.0,
+        8.25,
+        2.0
+      ],
+      "origin": [
+        4,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            27.0,
+            7.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "mojito_element8",
+      "type": "cube",
+      "uuid": "e552b90e-d0b8-571b-b6ca-fb63739c8835",
+      "from": [
+        -2,
+        1.25,
+        -2
+      ],
+      "to": [
+        2,
+        1.25,
+        2
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element9",
+      "type": "cube",
+      "uuid": "1147d3e6-74cd-5c09-84bc-537f7dcdea3e",
+      "from": [
+        -2,
+        8.25,
+        -2
+      ],
+      "to": [
+        2,
+        8.25,
+        2
+      ],
+      "origin": [
+        0,
+        11.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element10",
+      "type": "cube",
+      "uuid": "8c4fdac5-ae81-5829-a5f2-70a52ce10ff6",
+      "from": [
+        -1.4464499999999996,
+        5.64645,
+        -1.5
+      ],
+      "to": [
+        1.5535499999999995,
+        6.64645,
+        1.5
+      ],
+      "origin": [
+        0.05354999999999954,
+        6.14645,
+        0
+      ],
+      "rotation": [
+        0,
+        22.5,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            28.0,
+            18.0,
+            25.0,
+            19.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            16.0,
+            26.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            28.0,
+            16.0,
+            25.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element11",
+      "type": "cube",
+      "uuid": "7c272b5d-7941-5fbb-8a21-ba2036991311",
+      "from": [
+        -1.3964499999999997,
+        4.39645,
+        -1.5
+      ],
+      "to": [
+        1.6035500000000003,
+        5.39645,
+        1.5
+      ],
+      "origin": [
+        0.10355000000000025,
+        4.89645,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            16.0,
+            26.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            28.0,
+            16.0,
+            25.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            28.0,
+            18.0,
+            25.0,
+            19.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element12",
+      "type": "cube",
+      "uuid": "617d3caf-8659-54fe-8dc0-165ffad1ed3b",
+      "from": [
+        0.5,
+        8,
+        -3.1355339059327374
+      ],
+      "to": [
+        0.5,
+        12,
+        2.5213203435596423
+      ],
+      "origin": [
+        0.5,
+        9.5,
+        0.40000000000000036
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            28.0,
+            18.0,
+            25.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            15.0,
+            20.0,
+            19.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            28.0,
+            16.0,
+            25.0,
+            17.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            15.0,
+            20.0,
+            19.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            16.0,
+            26.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element13",
+      "type": "cube",
+      "uuid": "14b7d298-c707-54bb-b5f3-4260273bea17",
+      "from": [
+        -2.5355293538430974,
+        8,
+        -0.09999999999999964
+      ],
+      "to": [
+        3.1213248956492823,
+        12,
+        -0.09999999999999964
+      ],
+      "origin": [
+        0,
+        10,
+        -0.09999999999999964
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            15.0,
+            20.0,
+            19.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            28.0,
+            16.0,
+            25.0,
+            17.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            20.0,
+            19.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            28.0,
+            18.0,
+            25.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            16.0,
+            28.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            16.0,
+            26.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "mojito_element14",
+      "type": "cube",
+      "uuid": "08e6f4b9-1cb6-55b2-aca5-826f8b56c2e7",
+      "from": [
+        -1.25,
+        7,
+        -1.5
+      ],
+      "to": [
+        0.75,
+        9,
+        0.5
+      ],
+      "origin": [
+        -0.25,
+        8,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "86ea1eb0-5d44-5ab5-8d1c-46c16ffe83db",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "59f9d4c4-f07e-5289-b146-4ac46ae0b035",
+        "ca105a0f-57a6-5356-9151-28a4ca2ee176",
+        "f9dd9974-8c71-55ce-9a26-7094a1ef4809",
+        "a0d875fd-aac5-5327-9f2d-e6786f552068",
+        "856c4e96-fb8f-5230-aec8-a42fae31f862",
+        "e14385b4-1c65-5f7d-8d67-5194cc453119",
+        "41c01989-a6d1-56b7-a4f0-d689ff440c23",
+        "8deab190-29a0-5caa-9091-810a6b864ce8",
+        "f7642e2d-dd9d-5dc8-94d0-6c4751385f42",
+        "53e8293a-829b-5619-8577-44678cdf4549",
+        "345d7a4f-0632-583c-87b6-d5b8810accea",
+        "5c98c75c-8d7a-5ed1-a0b4-a8aac8381f04",
+        "5ea86bf5-5949-5bb1-b9de-7016f68b02a7",
+        "96726136-b9ad-5829-abe0-1db06b6264c8",
+        "e552b90e-d0b8-571b-b6ca-fb63739c8835",
+        "1147d3e6-74cd-5c09-84bc-537f7dcdea3e",
+        "8c4fdac5-ae81-5829-a5f2-70a52ce10ff6",
+        "7c272b5d-7941-5fbb-8a21-ba2036991311",
+        "617d3caf-8659-54fe-8dc0-165ffad1ed3b",
+        "14b7d298-c707-54bb-b5f3-4260273bea17",
+        "08e6f4b9-1cb6-55b2-aca5-826f8b56c2e7"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "mojito.png",
+      "id": "0",
+      "uuid": "a9e87223-94b7-53f5-b26d-727cf30f9963",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADDUlEQVR4XtVWW0hUQRheNisoyDCIUlBDkq1AkNWsCKELhLShQlKgZpeHSjHItJfM7gWBEEK0UNBL0EM36MFeNiItlCLFUrIHw81El9Z2vay6u2f72n+22eaMx213PQp98HHmzD8z3zf//Ic5hl6XCzINQfD24157mNSvO0QBUYieW1sQ5oIboN0viAE5/fwI5Azwft0hi4sGiLwORANyfTS2dTP+XTUGyOmPJtVaY+I2IO+e79Ry5yGqn9jCpHc+R1cDs4FEaVGeYnrnMS0DWn0ysvfch0g5rgIJisciGtDarVykNgDlrhCpTX0kurf2FWNUBmbLAO8XC1Q2QMIFz0OkNvWR6L4HPxj/aSBSDUQDLQO0c26A2vIcXaF1BCRa8mGScYaBbabVrMNxfTNEqgbNEbTz86NgpLYqyA20H1ijq6gI2jk3QG1VsDA3WTcDh+6aYl9jU2qSLgZI/OabHbGvIdaAHBMxUp4AxVUJ38ddCLxM0Rz76HOJysTZZ2a0fzvJKI5TQasG3g0AT7tDFczhv5ANZaKLiZMJMcZB4uIxkIHbnZbIBngNiBkg8Vsv/KpJPANkgp5ijKCV/tLGNJAJohwLQ8uAFigDZII/5XjcNRCtgXkDNxAPaMcRz3e+QKK84OS0029cnvW16reOKI6ZM+Rq/78RaNqO2SiPjQSvdTebo9zIxa+GdATq0+Bt2sm+GHdDIjxdrfB6JjHlke4CgiwcjwHf5RwEruWwz9R3LhPuylWYvrgRUw2Z8F0x4+clM6YnPMyEPFcXA9PNjfBUJ8FzOhXjpzbAvn8xpuq3wFWTAUfZMjhrU+G8Vzd/BpwHjRirSsdwaRJGTmTAeXwdHFVZcFSshDvYHjyaAOfVYDY+nZm5riwcj4GRY+sxHBTptxgwXmdCf5ERQ0fWwjt0GMpoM7ydZVBsyfB/qZ65riwcj4GBoiXoKzBisGI5vpemwF705/bsKISvxcwuMX9bHpS3WTGtGzW+Fi6FvXgFevIN6CteBP+YNXR7dtQg0JoI5X0+u0V9PQXMwG+mRtfCZs3eeAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 1,
+        "source_face": "north",
+        "output_cube": "mojito_element1_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "east",
+        "output_cube": "mojito_element1_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "south",
+        "output_cube": "mojito_element1_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "west",
+        "output_cube": "mojito_element1_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "mojito_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "mojito_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "mojito_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "mojito_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "tint_map": [],
+    "animation": null,
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,868 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "blue_pendant_lamp_bottom",
+  "model_identifier": "kt_assets_a12.blue_pendant_lamp_bottom",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "blue_pendant_lamp_bottom_element0",
+      "type": "cube",
+      "uuid": "617834ed-5e7e-5c1f-8d8d-b21c9bd4b46c",
+      "from": [
+        3,
+        6,
+        -1
+      ],
+      "to": [
+        5,
+        7,
+        1
+      ],
+      "origin": [
+        3,
+        5,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element1",
+      "type": "cube",
+      "uuid": "b1b2a4ff-cbe4-5621-aee6-d65be58bcdba",
+      "from": [
+        -5,
+        6,
+        -1
+      ],
+      "to": [
+        -3,
+        7,
+        1
+      ],
+      "origin": [
+        -5,
+        5,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            18.0,
+            2.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element2",
+      "type": "cube",
+      "uuid": "dabf4e67-03ba-5465-be4f-8581cd3cef6b",
+      "from": [
+        3.5,
+        6,
+        0
+      ],
+      "to": [
+        4.5,
+        16,
+        0
+      ],
+      "origin": [
+        -2.5,
+        -5,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            18.0,
+            1.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element3",
+      "type": "cube",
+      "uuid": "444b37ee-59c1-5425-bd3c-0f60dedf8edb",
+      "from": [
+        -4.5,
+        6,
+        0
+      ],
+      "to": [
+        -3.5,
+        16,
+        0
+      ],
+      "origin": [
+        -10.5,
+        -5,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.38462,
+            18.0,
+            12.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            18.0,
+            1.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element4",
+      "type": "cube",
+      "uuid": "96678774-1d01-5ab1-9645-a2545c442c03",
+      "from": [
+        -7,
+        1,
+        -3
+      ],
+      "to": [
+        -1,
+        6,
+        3
+      ],
+      "origin": [
+        -5,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            6.0,
+            14.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element5",
+      "type": "cube",
+      "uuid": "25e4f7a5-5c7f-50da-b795-7305c9fcdf62",
+      "from": [
+        1,
+        1,
+        -3
+      ],
+      "to": [
+        7,
+        6,
+        3
+      ],
+      "origin": [
+        3,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            6.0,
+            14.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            6.0,
+            7.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element6",
+      "type": "cube",
+      "uuid": "87b80b4d-f567-512c-bc68-356b5ee573c6",
+      "from": [
+        2.5,
+        2,
+        -1.5
+      ],
+      "to": [
+        5.5,
+        5,
+        1.5
+      ],
+      "origin": [
+        2.5,
+        1,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            13.0,
+            3.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            13.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "blue_pendant_lamp_bottom_element7",
+      "type": "cube",
+      "uuid": "d3b4d79b-eb36-59a4-a7bb-0003649cc511",
+      "from": [
+        -5.5,
+        2,
+        -1.5
+      ],
+      "to": [
+        -2.5,
+        5,
+        1.5
+      ],
+      "origin": [
+        -5.5,
+        1,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            12.0,
+            8.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            13.0,
+            3.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            13.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "d4e87d9c-fbbc-5e26-bcdb-1acc9704273a",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "617834ed-5e7e-5c1f-8d8d-b21c9bd4b46c",
+        "b1b2a4ff-cbe4-5621-aee6-d65be58bcdba",
+        "dabf4e67-03ba-5465-be4f-8581cd3cef6b",
+        "444b37ee-59c1-5425-bd3c-0f60dedf8edb",
+        "96678774-1d01-5ab1-9645-a2545c442c03",
+        "25e4f7a5-5c7f-50da-b795-7305c9fcdf62",
+        "87b80b4d-f567-512c-bc68-356b5ee573c6",
+        "d3b4d79b-eb36-59a4-a7bb-0003649cc511"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "blue_pendant_lamp.png",
+      "id": "0",
+      "uuid": "57a15741-55e7-52c5-a18e-52f4ac364b26",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABlElEQVR4Xs2TvUoDQRDH41vkBQRBX0ErP7ALWAiptROsxNpCUHwE7UPwAVL4BgZs7s4HsJMgWCgknDjuf5O5LJO9D9zdu/vBsDP/GXbmdvc6HUUcx2Nll8LGyNUCGkZRtGcaNFkna2T+37R6ALVOuE7WLHdwpOobCDZA46ivTZWNhKVG7tfQ4eucN7BxnoaGSZI88LHDhybrnSgZYLRo/ANbPNCVeidsG7ZpgFquoOgREhoaOnySe3jl5PaTzh+/CavMVeGlv0mT633CKnMr2Johvnudap01xM9fpHXWgK0ZYhr0tM7abNgnej8jrKxpqjZDDLCyBmzNEKMZ1kxDnL5pnTWN7QRs2IYCthOwkXsCruzsHtFh75Swrm9ta4PPMftcJ2vlfvVT5QtMXdbSxwFRsjE35Zt7p0/dZU4ZYjPvBd6Ym8ncxfFaZjLvhSoDDK66AQcouYLgJ1BELW+g9QQ/Bb57fgu2fFHsTDbA7L6hAbg5EH+BzoceoIzgb6Bx9BVMb+bGjxF+zpV4R/4FmeX8FZI/IHIRXQs6vHMAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json"
+    ],
+    "source_model_not_modified": true,
+    "derived_assembly": null,
+    "source_warnings": [],
+    "java_cullface_recorded_not_implemented": [
+      {
+        "element": 2,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "firstperson_righthand": {
+        "translation": [
+          0,
+          4.25,
+          0
+        ],
+        "scale": [
+          0.18,
+          0.18,
+          0.18
+        ]
+      },
+      "firstperson_lefthand": {
+        "translation": [
+          0,
+          6.5,
+          0
+        ],
+        "scale": [
+          0.26,
+          0.26,
+          0.26
+        ]
+      },
+      "gui": {
+        "translation": [
+          0,
+          -4,
+          0
+        ],
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      "fixed": {
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "translation": [
+          -2,
+          0,
+          -47
+        ],
+        "scale": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    "engine_test": "NOT_RUN"
+  }
+}

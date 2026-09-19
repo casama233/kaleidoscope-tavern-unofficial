@@ -1,0 +1,2283 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "nether_special",
+  "model_identifier": "kt_assets_a10.nether_special",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "nether_special_element0",
+      "type": "cube",
+      "uuid": "566552d7-6288-5d09-9164-0c97bbd34680",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            5.0,
+            14.0,
+            9.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element1",
+      "type": "cube",
+      "uuid": "1d645871-99d8-5b83-a9eb-0ab7d8a4525f",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        4,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            1.0,
+            12.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            1.0,
+            12.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            1.0,
+            12.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            1.0,
+            12.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element2_north",
+      "type": "cube",
+      "uuid": "cb927c55-1af6-5b9d-93a4-6fc9b43511d9",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        -3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            22.0,
+            6.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element2_east",
+      "type": "cube",
+      "uuid": "de50991f-57c3-5611-85ad-85c9a82ac98f",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            0.0,
+            22.0,
+            6.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element2_south",
+      "type": "cube",
+      "uuid": "3fc2ba09-6714-56e1-bf57-59f8157ac754",
+      "from": [
+        -3.0,
+        4.95,
+        3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            0.0,
+            22.0,
+            6.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element2_west",
+      "type": "cube",
+      "uuid": "56a7b2ad-7486-50e0-b642-0e17b94e9245",
+      "from": [
+        3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            22.0,
+            6.05
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element3",
+      "type": "cube",
+      "uuid": "9ab2657f-9bb5-52c7-acd9-4bd080c4752d",
+      "from": [
+        -3.5,
+        9.55,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        -2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element4",
+      "type": "cube",
+      "uuid": "883421b1-ab74-5127-a7bb-2949344d8752",
+      "from": [
+        -3.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element5",
+      "type": "cube",
+      "uuid": "1aac4797-ca60-5841-a22b-5362d9fd7b65",
+      "from": [
+        2.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element6",
+      "type": "cube",
+      "uuid": "8286b829-61cd-50b3-8543-ba61ad95441a",
+      "from": [
+        -3.5,
+        9.55,
+        2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        3.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element7",
+      "type": "cube",
+      "uuid": "f2526202-1e46-56a2-8824-c79187561355",
+      "from": [
+        -3,
+        5,
+        -3
+      ],
+      "to": [
+        3,
+        5,
+        3
+      ],
+      "origin": [
+        4,
+        4,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            24.0,
+            1.0,
+            30.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            24.0,
+            1.0,
+            30.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element8_north",
+      "type": "cube",
+      "uuid": "2c80692d-24b8-586d-baaa-e430323fe073",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        -2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            20.0,
+            12.0,
+            25.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element8_east",
+      "type": "cube",
+      "uuid": "14bf8e68-0267-52be-a213-6df7b4359d6f",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            20.0,
+            12.0,
+            25.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element8_south",
+      "type": "cube",
+      "uuid": "fbc98272-dfdc-5702-8aff-7fd476fdc7c6",
+      "from": [
+        -2.5,
+        5.6,
+        2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            20.0,
+            12.0,
+            25.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element8_west",
+      "type": "cube",
+      "uuid": "ea5cef7d-aa5d-543a-9106-c8da1b7a6a20",
+      "from": [
+        2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            20.0,
+            12.0,
+            25.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element9",
+      "type": "cube",
+      "uuid": "f09615b3-7db7-526e-82f7-e4cbdbf5ec73",
+      "from": [
+        -2.5,
+        5.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        5.6,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            11.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            27.0,
+            11.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element10",
+      "type": "cube",
+      "uuid": "b6372347-386a-500e-9d44-4574af5c567a",
+      "from": [
+        -2.5,
+        9.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        13.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            24.0,
+            18.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            11.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            27.0,
+            11.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "nether_special_element11",
+      "type": "cube",
+      "uuid": "5f8cde60-1bb0-5e2f-8b33-20c973fc1686",
+      "from": [
+        -1.00061,
+        3.99,
+        -1
+      ],
+      "to": [
+        0.99939,
+        4.99,
+        1
+      ],
+      "origin": [
+        0.01004999999999967,
+        3.89792,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            5.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element12",
+      "type": "cube",
+      "uuid": "2d24255f-158c-52cb-9788-b80b58d2d6d3",
+      "from": [
+        -5.5,
+        11.25,
+        -2
+      ],
+      "to": [
+        -0.5,
+        12.25,
+        3
+      ],
+      "origin": [
+        -2.75,
+        12,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            18.0,
+            32.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            18.0,
+            32.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            18.0,
+            32.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            18.0,
+            32.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            22.0,
+            18.0,
+            27.0,
+            23.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            18.0,
+            21.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element13",
+      "type": "cube",
+      "uuid": "7feb914d-c774-500e-81d8-90f0a4437786",
+      "from": [
+        -3.25,
+        13,
+        -1
+      ],
+      "to": [
+        0.75,
+        14,
+        3
+      ],
+      "origin": [
+        -6.5,
+        2.5,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            30.0,
+            20.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            16.0,
+            30.0,
+            20.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            30.0,
+            20.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            16.0,
+            26.0,
+            20.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            25.0,
+            20.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            25.0,
+            20.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element14",
+      "type": "cube",
+      "uuid": "fb4f1e66-7b37-53d9-b1cc-1e8c40584184",
+      "from": [
+        -2.75,
+        7.5,
+        0
+      ],
+      "to": [
+        -1.75,
+        11.5,
+        1
+      ],
+      "origin": [
+        -1.75,
+        10.5,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            27.0,
+            21.0,
+            28.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "nether_special_element15",
+      "type": "cube",
+      "uuid": "5b60f75f-957a-5e34-b15a-d580e80188be",
+      "from": [
+        1.6500000000000004,
+        5.1,
+        -1.9000000000000004
+      ],
+      "to": [
+        2.4499999999999993,
+        13.9,
+        -1.0999999999999996
+      ],
+      "origin": [
+        2.0500000000000007,
+        11,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            0.0,
+            12.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "f6ef51a3-9581-59c0-b223-4e237ce582f8",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "566552d7-6288-5d09-9164-0c97bbd34680",
+        "1d645871-99d8-5b83-a9eb-0ab7d8a4525f",
+        "cb927c55-1af6-5b9d-93a4-6fc9b43511d9",
+        "de50991f-57c3-5611-85ad-85c9a82ac98f",
+        "3fc2ba09-6714-56e1-bf57-59f8157ac754",
+        "56a7b2ad-7486-50e0-b642-0e17b94e9245",
+        "9ab2657f-9bb5-52c7-acd9-4bd080c4752d",
+        "883421b1-ab74-5127-a7bb-2949344d8752",
+        "1aac4797-ca60-5841-a22b-5362d9fd7b65",
+        "8286b829-61cd-50b3-8543-ba61ad95441a",
+        "f2526202-1e46-56a2-8824-c79187561355",
+        "2c80692d-24b8-586d-baaa-e430323fe073",
+        "14bf8e68-0267-52be-a213-6df7b4359d6f",
+        "fbc98272-dfdc-5702-8aff-7fd476fdc7c6",
+        "ea5cef7d-aa5d-543a-9106-c8da1b7a6a20",
+        "f09615b3-7db7-526e-82f7-e4cbdbf5ec73",
+        "b6372347-386a-500e-9d44-4574af5c567a",
+        "5f8cde60-1bb0-5e2f-8b33-20c973fc1686",
+        "2d24255f-158c-52cb-9788-b80b58d2d6d3",
+        "7feb914d-c774-500e-81d8-90f0a4437786",
+        "fb4f1e66-7b37-53d9-b1cc-1e8c40584184",
+        "5b60f75f-957a-5e34-b15a-d580e80188be"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "nether_special.png",
+      "id": "0",
+      "uuid": "ca36bf66-3c49-52d7-b210-8d2ab30645ef",
+      "width": 32,
+      "height": 192,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAADACAYAAABlPmF2AAAAAXNSR0IArs4c6QAABABJREFUeJztmM1rE2kcgJ/JZktppatCNS21bluaasouLqIoWLAVix5WWcGPg9T4D0g9efG2sNRTS/+A3RpEagUvHloL2y60IB6KYcWio6naBhutNDVokX69HpJJM8mkJM6kQfg9EDK/30zeeb9n8mjPolEVnPsMwL7KcgCM+IK3RiNBvx5W+swc3l2VpvzkiZMKC3xDg5pVPh13cO6zqcDUG6bGF7w1Wr8eVunX7j11yrrkoUEA1NOxeDl6KJ73NgCgNbdoAG6j1YXk4e9+U3z4fl/y2GV0dy7oM3P5391oeZacO/8S02g7ZOvnrlwv7Hr0Unl3VdKvh1XXo5eWE8+SxJhnww2ZE86Kn7eVsrPip4y8tue3jWe7HjKNOXrIVCm31QpwEu0P/4bl5zwHXke/WB4Ldino+KejHjxQjIyuJ9paHdgH0ugE1R2J0O7xANAM9BgNHRnl4d27AAxMhegmj30gH4yb54LjFThX30AzJD/n6s0b0cBUiIEpJ7fiNA6fPQuJbk7GN7riQVsr3akXt7U6ffvvENvLsOxGr+VzZKlhLXlcEopPtS2fYizXKH6ogtVZ+DGsOTMHFl88X69QYxOLL57jbmhkeaSTUn8PS6xREnLx/s/rGQ12fBKmUurvAWB5pBOC1t1dkH2grLGJkpCL1WlYnQaC8fzVuuMZw+VIBcoam5IfgMVrVzRYH/vy072Un+7lf77hlc5JjtXtK0wP5MqvVGbkbE/CvupqU6v8b99mXdpWQ+BID/g8tfg8tVy6vLLhdf++CmZUznYFfJ5aDpycAuDmP/l3qO0hmIxMw2B9/Pt7xPazoK+6Wvk8tUxGpgnPx7j+5dOmvubZRhM/IH4g/xLTED8gfkCwifgB8QPiB4qO+AHxA+IHxA+IHxA/IH5A/ID4AfED4gfEDxQd8QPiB8QPFB3xA+IHxA+IHxA/IH5A/IBtP3Bk6Jbl03D8xMXN8QPePTstCx5PfP+nIgpgODYLQHtFFQBHNY8G4NoMPxB484RI9AOR6AcCb56YzhXcDxgtz5azvQ907P7FMv93jr8vuB8wxjwbtv2AMZmyMRybNfXScGyW9ooq/krEOW8a/XpYGRV4F/touXK+BfEDRWdTHxw7Zm6rhYn5ZLx1/3bn3wldZ86rI4ujirqDirqDynXmfHKFLUzMsxIYYyUwxtLVAAsT84V5KR1vvpbztY7/M3J3tLCSFi/du5OM1x6/KmwFtu7fzgItpvh96rnuDtM5QfyA+AHxA+IHxA+IHxA/IH5A/ID4AfED4geKjvgB8QPiB4qO+AHxA+IHxA+IHxA/IH5A/ID4AfED4gfEDxQd8QPiB8QPFB3xA+IHxA+IHxA/IH5A/MBXEHmwx6Wkx+MAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal",
+      "frame_time": 50,
+      "frame_order_type": "loop",
+      "interpolate": true
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/nether_special.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/nether_special.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "nether_special_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "nether_special_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "nether_special_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "nether_special_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "nether_special_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "nether_special_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "nether_special_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "nether_special_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          2,
+          0
+        ],
+        "scale": [
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "translation": [
+          -1.25,
+          1,
+          0
+        ],
+        "scale": [
+          1.1,
+          1.1,
+          1.1
+        ]
+      },
+      "head": {
+        "translation": [
+          1,
+          15,
+          -2
+        ]
+      },
+      "fixed": {
+        "rotation": [
+          -90,
+          -180,
+          0
+        ],
+        "translation": [
+          2,
+          0.25,
+          -13.25
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          1.7
+        ]
+      }
+    },
+    "animation": {
+      "id": "nether_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        192
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "ticks_per_frame": 50,
+      "blend_frames": true,
+      "loop_ticks": 300,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/nether_special/000.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/nether_special/001.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/nether_special/002.png",
+          "rgba_sha256": "d610313d605e6b8cf97eeb3a7708be5b70860f0897e8173e2464e02603e95d08"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/nether_special/003.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/nether_special/004.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/nether_special/005.png",
+          "rgba_sha256": "292c421ad7ce36e3b810df5b46c3449b520b71c895795e399beecd458083ed3f"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a10/nether_special_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/nether_special"
+    },
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

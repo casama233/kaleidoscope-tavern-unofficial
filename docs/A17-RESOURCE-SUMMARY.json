@@ -1,0 +1,70 @@
+{
+  "ready": {
+    "build": "A17",
+    "source_jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "all_source_files_accounted": true,
+    "source_files": 1295,
+    "source_pngs": 305,
+    "source_model_jsons": 790,
+    "source_blockstates": 159,
+    "source_sound_files": 6,
+    "source_particle_definitions": 16,
+    "source_animation_schedules": 10,
+    "full_static_families": {
+      "bar_stool": 16,
+      "string_lights": 17,
+      "sandwich_board": 14,
+      "chalkboard": 2,
+      "paintings": 14,
+      "cocktails": 14,
+      "bottle_arrangements": 97
+    },
+    "source_item_models": 160,
+    "concrete_item_models": 158,
+    "abstract_item_templates": 2,
+    "converted_appearance_candidates": 491,
+    "geometries_main": 363,
+    "editor_files": 493,
+    "native_liquid_rigs": 12,
+    "native_particle_assets": 16,
+    "signature_color_rig": 1,
+    "art_source_and_static_data_ready_for_code": true,
+    "all_art_runtime_parity_verified": false,
+    "gameplay_implemented": false,
+    "minecraft_engine_test": "NOT_RUN",
+    "real_cookery_dependency_bound": false,
+    "code_phase_visual_work": [
+      "World text renderer and UI layout binding",
+      "Use-time shaker hand/arm binding",
+      "Source-exact particle inherited base physics, emitter cadence and native drip children",
+      "Inventory display anchors, auto orientation, light emission and effect overlays",
+      "Animated inventory sprites and renderer-specific transparency/UV checks"
+    ],
+    "release_status": "ART_SOURCE_BASELINE_FOR_CODE_NOT_PLAYABLE_RELEASE"
+  },
+  "pose_overlay": {
+    "geometry_files": 143,
+    "appearance_bindings": 185
+  },
+  "source_disposition_counts": {
+    "SOURCE_STATE_TO_ART_CONTRACT": 159,
+    "LANG_VALUES_PRESERVED": 4,
+    "CONVERTED": 392,
+    "JAVA_RENDERER_GEOMETRY": 3,
+    "ABSTRACT_PARENT_TEMPLATE": 8,
+    "SHARED_GEOMETRY_WITH_SOURCE_ORIENTATION": 226,
+    "ABSTRACT_TWO_TEXTURE_TEMPLATE": 1,
+    "ITEM_ORIGINAL_SPRITE": 82,
+    "ITEM_GEOMETRY": 76,
+    "ITEM_ABSTRACT_PARENT_TEMPLATE": 2,
+    "PARTICLE_ASSET_CANDIDATE": 16,
+    "JAVA_GUIDE_SCENE_RETAINED_FOR_CODE_ADAPTER": 4,
+    "SOUND_EVENTS_CONVERTED": 1,
+    "ORIGINAL_AUDIO_PACKAGED": 6,
+    "ORIGINAL_PIXELS_PACKAGED": 305,
+    "ANIMATION_SCHEDULE_CONVERTED": 10
+  },
+  "lab_blocks": 438,
+  "lab_entities": 67,
+  "icons": 92
+}

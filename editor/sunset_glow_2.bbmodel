@@ -1,0 +1,987 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sunset_glow_2",
+  "model_identifier": "kt_assets_a9.sunset_glow_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "sunset_glow_2_element0",
+      "type": "cube",
+      "uuid": "02069996-40be-57c0-a454-438c3201c2f0",
+      "from": [
+        1,
+        10,
+        -4
+      ],
+      "to": [
+        3,
+        11,
+        -2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            2.0,
+            16.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            14.0,
+            5.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element1",
+      "type": "cube",
+      "uuid": "4ce1e76e-72a0-5b23-ac81-dbd828f6b963",
+      "from": [
+        0.5,
+        11,
+        -4.5
+      ],
+      "to": [
+        3.5,
+        13,
+        -1.5
+      ],
+      "origin": [
+        2,
+        12,
+        -3
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.0,
+            8.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            3.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element2",
+      "type": "cube",
+      "uuid": "e7cbbc7d-c094-5860-84a2-6631516ff14d",
+      "from": [
+        -0.5,
+        8,
+        -4.5
+      ],
+      "to": [
+        4.5,
+        10,
+        -1.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            3.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            3.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element3",
+      "type": "cube",
+      "uuid": "3834a8f3-7c31-5a2c-97e7-380ffa5f0942",
+      "from": [
+        -2,
+        0,
+        -5
+      ],
+      "to": [
+        6,
+        8,
+        -1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            8.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            8.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            8.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            8.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element4",
+      "type": "cube",
+      "uuid": "5f63c42b-fa8d-5696-8974-5b5070187e51",
+      "from": [
+        -1,
+        8,
+        -5
+      ],
+      "to": [
+        5,
+        9,
+        -1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            7.0,
+            15.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            4.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            7.0,
+            15.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            4.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element5",
+      "type": "cube",
+      "uuid": "06907763-1828-5a84-8609-3c3fbc30c7fd",
+      "from": [
+        -5,
+        8,
+        1
+      ],
+      "to": [
+        1,
+        9,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            7.0,
+            15.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            4.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            7.0,
+            15.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            4.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            7.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element6",
+      "type": "cube",
+      "uuid": "acb00bd8-052c-5a91-a671-d2dd685b8e19",
+      "from": [
+        -6,
+        0,
+        1
+      ],
+      "to": [
+        2,
+        8,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            8.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            8.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            8.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            8.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element7",
+      "type": "cube",
+      "uuid": "1a8f98a5-e620-5f60-935d-10a194b86cd7",
+      "from": [
+        -4.5,
+        8,
+        1.5
+      ],
+      "to": [
+        0.5,
+        10,
+        4.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            3.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            0.0,
+            13.0,
+            3.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element8",
+      "type": "cube",
+      "uuid": "213542a6-8b05-5f7c-9a71-0c775cc86c1c",
+      "from": [
+        -3.5,
+        11,
+        1.5
+      ],
+      "to": [
+        -0.5,
+        13,
+        4.5
+      ],
+      "origin": [
+        -2,
+        12,
+        3
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            4.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.0,
+            8.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            3.0,
+            14.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sunset_glow_2_element9",
+      "type": "cube",
+      "uuid": "ef613fac-9c0a-5145-aa69-470fb4254fd9",
+      "from": [
+        -3,
+        10,
+        2
+      ],
+      "to": [
+        -1,
+        11,
+        4
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            1.0,
+            10.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            14.0,
+            2.0,
+            16.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            14.0,
+            5.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "e35076a9-3818-505c-bf60-9d4a2867eeb6",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "02069996-40be-57c0-a454-438c3201c2f0",
+        "4ce1e76e-72a0-5b23-ac81-dbd828f6b963",
+        "e7cbbc7d-c094-5860-84a2-6631516ff14d",
+        "3834a8f3-7c31-5a2c-97e7-380ffa5f0942",
+        "5f63c42b-fa8d-5696-8974-5b5070187e51",
+        "06907763-1828-5a84-8609-3c3fbc30c7fd",
+        "acb00bd8-052c-5a91-a671-d2dd685b8e19",
+        "1a8f98a5-e620-5f60-935d-10a194b86cd7",
+        "213542a6-8b05-5f7c-9a71-0c775cc86c1c",
+        "ef613fac-9c0a-5145-aa69-470fb4254fd9"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sunset_glow.png",
+      "id": "0",
+      "uuid": "95e48d39-2ff7-5a89-90c7-81cf6aa907e7",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA/UlEQVR4Xq1RKw7CQBCtqqiqBAQVDWAAU1XDEUgIjiMQLBdAcgRICOEAcAUsd6hGoLFk6Zt2yutSaEiY5GVn5/Pm5zg1Mo0aZtD0DOsK/J1k0jOPVd+Y47AE2ODbLcZZYCqcrHA0GS9DbUxQ2cEvBJVSN8I16ZjNNhaC9WwkZF8JIQhEZbxsvxyWYsdbGH3fF7Bo23hLjlw0R/J0BG0ZAdwB+zWGIQTmdpa5obeDsATxYy/3LMbeUXaFnAA6kuLQE0AXf5rM1XXpLwI6o02g1RF8cl2BdoX4WgKu9neCtx18WqLOzwRqqzwjC/v5AkX8PgrMvNsSQLcJ2G8Dvich8c7ZdOz3fAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,710 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sofa_light_blue_right_corner",
+  "model_identifier": "kt_assets_a4.sofa_light_blue_right_corner",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "sofa_light_blue_right_corner_element0",
+      "type": "cube",
+      "uuid": "a142f286-fbde-57fc-8eb1-3de343a6e628",
+      "from": [
+        -8,
+        3,
+        -8
+      ],
+      "to": [
+        8,
+        8,
+        8
+      ],
+      "origin": [
+        0,
+        5.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            27.0,
+            0.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            16.0,
+            27.0,
+            0.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            58.0,
+            10.0,
+            42.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            58.0,
+            10.0,
+            42.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            48.0,
+            0.0,
+            64.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            16.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element1",
+      "type": "cube",
+      "uuid": "6589f326-2fa7-5933-82fd-7af994d48d52",
+      "from": [
+        -7,
+        0,
+        -8
+      ],
+      "to": [
+        -4,
+        3,
+        -5
+      ],
+      "origin": [
+        -4,
+        0,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            64.0,
+            61.0,
+            61.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element2",
+      "type": "cube",
+      "uuid": "8da68e91-0d1d-523c-af45-b191a6a16b8e",
+      "from": [
+        -7,
+        0,
+        4
+      ],
+      "to": [
+        -4,
+        3,
+        7
+      ],
+      "origin": [
+        -4,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            64.0,
+            61.0,
+            61.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element3",
+      "type": "cube",
+      "uuid": "f8e5506b-b3c8-5c75-a08e-dc21dfac7e40",
+      "from": [
+        5,
+        0,
+        4
+      ],
+      "to": [
+        8,
+        3,
+        7
+      ],
+      "origin": [
+        8,
+        0,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            60.0,
+            61.0,
+            57.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            64.0,
+            61.0,
+            61.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element4",
+      "type": "cube",
+      "uuid": "607959c6-7663-58ea-ba25-56674aacf363",
+      "from": [
+        -3.01,
+        8,
+        3
+      ],
+      "to": [
+        8,
+        18,
+        8
+      ],
+      "origin": [
+        -0.009999999999999787,
+        13.99,
+        4.710000000000001
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            33.0,
+            54.0,
+            21.99,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            59.0,
+            10.0,
+            64.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            53.01,
+            0.0,
+            42.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            64.0,
+            10.0,
+            59.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            40.0,
+            17.0,
+            28.99,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element5",
+      "type": "cube",
+      "uuid": "44064995-baa6-5296-b174-4347b835c05e",
+      "from": [
+        -8,
+        8,
+        -8
+      ],
+      "to": [
+        -3,
+        18,
+        3
+      ],
+      "origin": [
+        -5.5,
+        13,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            64.0,
+            10.0,
+            59.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            28.0,
+            54.0,
+            17.0,
+            64.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            59.0,
+            10.0,
+            64.0,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            58.0,
+            0.0,
+            47.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            26.0,
+            12.0,
+            37.0,
+            17.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sofa_light_blue_right_corner_element6",
+      "type": "cube",
+      "uuid": "342f224f-7b6f-5180-ab82-e7ce525da226",
+      "from": [
+        -8,
+        8,
+        3
+      ],
+      "to": [
+        -3,
+        18,
+        8
+      ],
+      "origin": [
+        -3,
+        16,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            0.0,
+            0.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            5.0,
+            0.0,
+            0.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            58.0,
+            0.0,
+            53.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            47.0,
+            0.0,
+            42.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            23.0,
+            47.0,
+            18.0,
+            52.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "6ad6a2c4-56f1-5496-b8b1-2163a8d8faa7",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "a142f286-fbde-57fc-8eb1-3de343a6e628",
+        "6589f326-2fa7-5933-82fd-7af994d48d52",
+        "8da68e91-0d1d-523c-af45-b191a6a16b8e",
+        "f8e5506b-b3c8-5c75-a08e-dc21dfac7e40",
+        "607959c6-7663-58ea-ba25-56674aacf363",
+        "44064995-baa6-5296-b174-4347b835c05e",
+        "342f224f-7b6f-5180-ab82-e7ce525da226"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "light_blue.png",
+      "id": "0",
+      "uuid": "0ffd6509-04e4-5563-a064-e4221dcf79b7",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACnUlEQVR4Xu2ZMU4kMRBFuQcp6SZEhMRsivYEBBAgkRISoV0h7QFWG5NzBG4AHKjRb6lGxR/bXeVxz7Sb+tIX025Xufzs9gwzRz/u/w+7+Mig83+vw9nflyojVnLU5JE4rgO1j+14cfzrrspWADJgjU9unsYxdsmBWM6BvGM7LjAZNHhcCyC1QqX2vQLgwJxrAaTGwL1cu8ToHLDlceBcnKN7ANyfrXMuBkDuUcu1y1g6B8wrnPIiAUgx2jVnQLcAUmPgXq5dYnQOfa/kALBEALlnPdcuY+kccHcAWqgFgKTQoQcApw/PmxrlsSlZ6pMYzrfRPgBMfWgpWT7HawAeuwB47AGAiXBhViMWOfCaa7C6WCduYjI1LiZWagVgF3NNG3FHrzlfSujHq2K1dYxFq8UZMJswAA6YGs9e3D402+nai749AExCTnU+gHL2vgssWryyXnO+uYUdy22rl+xOAAeApu8Olu/XUpY4ztedMBne1lZjVThfdxIAmIys6pRlO64SAK8yOwCsGYDlPECfABAAAsA6AXgcANYCIBQKhUKhUCgUCoVCOwjfFeI/S23us0jJFxy11nn490U9zmJl+RYoZwaAa31fj7NYCQDeviXLRFcHgFc4ZwuAbn43bAWgW6UA6IMs50MBSL3b5GzahS0AeIpim4pU0nVOGX05fkuSUCfWk0xZ+goAT1Fs7y7yjHUQALzCOcsPsV4Aur4poy/Hb6klgFIMm3McTL0B8Jw3pvOlBgBvX4nlj8JTrgGg65wy+nL8lloCkDwWcw6rZgOgt5YASBUtTgEoQWPrGK6ppBoAj7//DG/vHwP+4vri5+UgdiVkHwKAxFiMvoi5ur4dJ4+/uMbE8XoE4DlU2HLIyGT2cQbUAPiy4nT9CWFpZNX36qWhAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/right_corner.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/right_corner.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/base/right_corner.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

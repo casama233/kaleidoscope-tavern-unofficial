@@ -1,0 +1,1737 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "grasshopper",
+  "model_identifier": "kt_assets_a10.grasshopper",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "grasshopper_element0",
+      "type": "cube",
+      "uuid": "031db299-0273-59a9-96e9-9bfef9b4d1b6",
+      "from": [
+        0.75,
+        9.55,
+        -0.25
+      ],
+      "to": [
+        5.75,
+        9.55,
+        4.75
+      ],
+      "origin": [
+        2.25,
+        9.55,
+        2.25
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            8.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element1",
+      "type": "cube",
+      "uuid": "38b3da53-095e-57e9-a188-6c4eb7ec1cf5",
+      "from": [
+        -2.25,
+        10.5,
+        0.5
+      ],
+      "to": [
+        2.75,
+        10.5,
+        5.5
+      ],
+      "origin": [
+        0.25,
+        10.25,
+        2.25
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            2.0,
+            2.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            8.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element2",
+      "type": "cube",
+      "uuid": "3001e8c9-8bcc-589f-a420-921f6758506f",
+      "from": [
+        -0.25,
+        5.75,
+        0.25
+      ],
+      "to": [
+        4.75,
+        10.75,
+        0.25
+      ],
+      "origin": [
+        0.25,
+        10.25,
+        2.25
+      ],
+      "rotation": [
+        45,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            8.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            2.0,
+            8.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element3_north",
+      "type": "cube",
+      "uuid": "11859faf-4f70-5f67-9a27-bb7bd31e3e11",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        -3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element3_east",
+      "type": "cube",
+      "uuid": "2f71f88c-1e95-5d4a-9647-2128ecc9dc43",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element3_south",
+      "type": "cube",
+      "uuid": "13f6be2b-dae1-5b8b-b428-f80883b24f5c",
+      "from": [
+        -3.0,
+        6.05,
+        3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element3_west",
+      "type": "cube",
+      "uuid": "703d7ad6-9d6b-5a1f-a420-30fd40fd8f64",
+      "from": [
+        3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element4",
+      "type": "cube",
+      "uuid": "6a1ab5ab-f51c-51a3-9877-826618656848",
+      "from": [
+        -3,
+        6.05,
+        -3
+      ],
+      "to": [
+        3,
+        6.05,
+        3
+      ],
+      "origin": [
+        3,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element5",
+      "type": "cube",
+      "uuid": "7b7b1be4-ce40-5888-9989-369c16db6744",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        -1,
+        0,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element6",
+      "type": "cube",
+      "uuid": "1830a4a0-9777-5042-b8cd-0587643d9076",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        6,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            24.0,
+            13.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            24.0,
+            13.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element7",
+      "type": "cube",
+      "uuid": "2d642b51-a04c-5b4e-8442-218cd5b381c8",
+      "from": [
+        -2.5,
+        6.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.4,
+        2.5
+      ],
+      "origin": [
+        -0.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            21.0,
+            0.0,
+            26.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            21.0,
+            0.0,
+            26.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "grasshopper_element8",
+      "type": "cube",
+      "uuid": "80b63482-9240-5fb1-965b-ba7e840ee645",
+      "from": [
+        -3,
+        6.05,
+        -3
+      ],
+      "to": [
+        3,
+        6.05,
+        3
+      ],
+      "origin": [
+        3,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element9",
+      "type": "cube",
+      "uuid": "5b1f72d0-feb1-5096-8e9c-b2fac2987b2a",
+      "from": [
+        -3.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        -2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            3.0,
+            16.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            11.0,
+            10.0,
+            11.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            12.0,
+            9.75,
+            5.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element10",
+      "type": "cube",
+      "uuid": "5c789ee1-3003-5cbc-9177-9a7cd20b81e3",
+      "from": [
+        2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            3.0,
+            16.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element11",
+      "type": "cube",
+      "uuid": "2e1d3703-7217-5a21-81ab-6bd90e6a2ef7",
+      "from": [
+        -2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        -2.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            15.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            3.0,
+            15.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            15.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            5.0,
+            15.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element12",
+      "type": "cube",
+      "uuid": "32512a5f-afed-5a2d-ac27-37f778840206",
+      "from": [
+        -2.5,
+        8.2,
+        2.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            3.0,
+            15.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            5.0,
+            9.75,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            11.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "grasshopper_element13",
+      "type": "cube",
+      "uuid": "f14f2459-8c0d-50ad-ab20-ce3042c80c5d",
+      "from": [
+        -2,
+        7,
+        -1
+      ],
+      "to": [
+        -1,
+        13,
+        0
+      ],
+      "origin": [
+        -1.5,
+        9,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        45
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            29.0,
+            13.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            29.0,
+            13.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            29.0,
+            13.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            29.0,
+            13.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            27.0,
+            13.0,
+            26.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            24.0,
+            13.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "43ea2ebe-3802-5d34-aca2-10c2facecd25",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "031db299-0273-59a9-96e9-9bfef9b4d1b6",
+        "38b3da53-095e-57e9-a188-6c4eb7ec1cf5",
+        "3001e8c9-8bcc-589f-a420-921f6758506f",
+        "11859faf-4f70-5f67-9a27-bb7bd31e3e11",
+        "2f71f88c-1e95-5d4a-9647-2128ecc9dc43",
+        "13f6be2b-dae1-5b8b-b428-f80883b24f5c",
+        "703d7ad6-9d6b-5a1f-a420-30fd40fd8f64",
+        "6a1ab5ab-f51c-51a3-9877-826618656848",
+        "7b7b1be4-ce40-5888-9989-369c16db6744",
+        "1830a4a0-9777-5042-b8cd-0587643d9076",
+        "2d642b51-a04c-5b4e-8442-218cd5b381c8",
+        "80b63482-9240-5fb1-965b-ba7e840ee645",
+        "5b1f72d0-feb1-5096-8e9c-b2fac2987b2a",
+        "5c789ee1-3003-5cbc-9177-9a7cd20b81e3",
+        "2e1d3703-7217-5a21-81ab-6bd90e6a2ef7",
+        "32512a5f-afed-5a2d-ac27-37f778840206",
+        "f14f2459-8c0d-50ad-ab20-ce3042c80c5d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "grasshopper.png",
+      "id": "0",
+      "uuid": "d081cda4-8d80-594f-b732-8c6bb3dd3e1c",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABfUlEQVR4XuVWPUsDQRAN+C+sREkUBP0LUUjhTxArJX9A7C20svAHWKZOStMIwUL86LQRYqc2SpoUYieMvoE5xvH2bi+58UAfPG52d27f29m9j1rNAe3nPu1/3DMRgzbHFRC+ojvmIfWKGxitLtPJ/GyxmxTEAMRBtG1OKiA8qC+xuMToP6MRhWjnALBiEb/5MhJlQAT3Fmb4Ok0VZN/1ObA5PwBBTS0+HI+pN3xiIpY2rnqOqbBxvMgrn2s1qLFZJ7RlDGI6V6D7Y1aM/kd6z86z4kBopdoAJjylF2Zoz9cud2mlu5UQbZuTilAFtLEYAxMjxkDMFkyMkIFQf+nQp94+ETZX4FqRGGxf7CTfAcR23B3NzjoLg4jteGHgtSslFYZexS6AYLPT/sbSH7cs5BmwH6nSqxNjQA4d+PcM5B1CdwN5sPtfugE7uYtIFmz5hTbPHZW81zUqWbXGweD2nxv4tZ+QNBxdPyQ/I4jtuDsgfP76xqykEpUb8NiCT5npjquxWshiAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 3,
+        "source_face": "north",
+        "output_cube": "grasshopper_element3_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "east",
+        "output_cube": "grasshopper_element3_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "south",
+        "output_cube": "grasshopper_element3_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "west",
+        "output_cube": "grasshopper_element3_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "animation": null,
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

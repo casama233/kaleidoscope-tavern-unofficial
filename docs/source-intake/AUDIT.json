@@ -1,0 +1,90 @@
+{
+  "input": {
+    "file": "kaleidoscopetavern-1.2.0-neoforge+mc1.21.1.jar",
+    "bytes": 1708047,
+    "sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "identity": "1.2.0-neoforge+mc1.21.1",
+    "origin": "user_upload",
+    "publisher_checksum_verified": false,
+    "jar_executed": false
+  },
+  "archive": {
+    "entries_including_directories": 2336,
+    "files": 2085,
+    "duplicate_entries": false,
+    "crc": "PASS",
+    "extracted_namespace_asset_files": 1295,
+    "category_counts": {
+      "blockstates": 159,
+      "lang": 4,
+      "models": 790,
+      "particles": 16,
+      "ponder": 4,
+      "__root__": 1,
+      "sounds": 6,
+      "textures": 315
+    },
+    "png_files": 305
+  },
+  "comparison_to_A16": {
+    "baseline_archive": "Tavern-Assets-A16.zip",
+    "baseline_pinned_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "compared_resource_files": 539,
+    "statuses": {
+      "RGBA_PIXELS_IDENTICAL": 55,
+      "BYTE_IDENTICAL": 107,
+      "PARSED_JSON_IDENTICAL": 377
+    },
+    "compared_png_files": 155,
+    "png_statuses": {
+      "RGBA_PIXELS_IDENTICAL": 55,
+      "BYTE_IDENTICAL": 100
+    },
+    "whole_release_equivalence_claimed": false,
+    "same_loader_or_game_version_claimed": false,
+    "baseline_files_overwritten": false
+  },
+  "priority_sources": {
+    "string_light_models": 17,
+    "string_light_textures": 17,
+    "nine_previous_missing_models_found": true,
+    "nine_previous_missing_textures_found": true,
+    "board_variants": 14,
+    "board_floral_variants": 13,
+    "board_rotation_models": 240,
+    "board_static_template_models": 3,
+    "chalkboards": [
+      {
+        "size": "small",
+        "texture": "assets/kaleidoscope_tavern/textures/entity/deco/small_chalkboard.png",
+        "texture_dimensions": [
+          64,
+          64
+        ],
+        "model_class": "com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel.class"
+      },
+      {
+        "size": "large",
+        "texture": "assets/kaleidoscope_tavern/textures/entity/deco/large_chalkboard.png",
+        "texture_dimensions": [
+          128,
+          64
+        ],
+        "model_class": "com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/LargeChalkboardModel.class"
+      }
+    ]
+  },
+  "validation": {
+    "JSON_and_PNG_errors": [],
+    "all_required_board_sources_present": true,
+    "all_light_textures_present": true
+  },
+  "remaining_limits": [
+    "Extraction is not a Bedrock conversion.",
+    "No Minecraft/bridge/Blockbench runtime acceptance.",
+    "No real Bedrock Cookery package bound.",
+    "Uploaded NeoForge JAR is not the previously targeted Forge release archive.",
+    "Matching selected resources does not prove all assets or code match across versions.",
+    "Dynamic text and particle behavior remain porting tasks."
+  ]
+}

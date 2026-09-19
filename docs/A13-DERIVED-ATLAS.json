@@ -1,0 +1,37 @@
+{
+  "id": "bar_stool_blue",
+  "status": "DERIVED_LOSSLESS_ATLAS",
+  "file": "RP/textures/kt_derived/a13/bar_stool_blue_atlas.png",
+  "size": [
+    128,
+    32
+  ],
+  "sha256": "a01bfc233dcc78400c81e394664f4739698d7410b1898c0c5089cb84ff52f3e0",
+  "parts": [
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/blue.png",
+      "offset": [
+        0,
+        0
+      ],
+      "size": [
+        64,
+        32
+      ]
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/deco/bar_stool/blue.png",
+      "offset": [
+        64,
+        0
+      ],
+      "size": [
+        32,
+        32
+      ]
+    }
+  ],
+  "resampling": false,
+  "recoloring": false,
+  "counts_as_original_png": false
+}

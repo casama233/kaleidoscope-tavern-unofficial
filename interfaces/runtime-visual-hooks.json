@@ -1,0 +1,376 @@
+{
+  "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+  "ready_for_gameplay_adapter_implementation": true,
+  "engine_accepted": false,
+  "all_gameplay_functions_implemented": false,
+  "liquid_rigs": [
+    {
+      "fixture": "pressing_tub",
+      "fluid": "grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_grape",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "pressing_tub",
+      "fluid": "ice_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_ice_grape",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/ice_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "pressing_tub",
+      "fluid": "gold_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_gold_grape",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/gold_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "pressing_tub",
+      "fluid": "green_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_green_grape",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/green_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "pressing_tub",
+      "fluid": "sweet_berries_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_sweet_berries",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/sweet_berries_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "pressing_tub",
+      "fluid": "glow_berries_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_pressing_tub_glow_berries",
+      "capacity_mb": 1000,
+      "y_pixels_base": 2,
+      "y_pixels_range": 4,
+      "width_pixels": 12,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/PressingTubBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/glow_berries_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_grape",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "ice_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_ice_grape",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/ice_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "gold_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_gold_grape",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/gold_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "green_grape_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_green_grape",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/green_grape_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "sweet_berries_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_sweet_berries",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/sweet_berries_juice_still.png",
+      "gameplay_connected": false
+    },
+    {
+      "fixture": "barrel",
+      "fluid": "glow_berries_juice",
+      "entity_id": "kt_assets_a17:rig_liquid_barrel_glow_berries",
+      "capacity_mb": 4000,
+      "y_pixels_base": 32,
+      "y_pixels_range": 10.4,
+      "width_pixels": 16,
+      "amount_property": "kt_art:amount",
+      "inspection_events": [
+        "kt_art:level_0",
+        "kt_art:level_1",
+        "kt_art:level_2",
+        "kt_art:level_3",
+        "kt_art:level_4",
+        "kt_art:level_5",
+        "kt_art:level_6",
+        "kt_art:level_7",
+        "kt_art:level_8"
+      ],
+      "source": "docs/source-bytecode/BarrelBlockEntityRender.txt",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/block/glow_berries_juice_still.png",
+      "gameplay_connected": false
+    }
+  ],
+  "signature_color_rig": {
+    "entity_id": "kt_assets_a17:rig_signature_color",
+    "tinted_faces": 26,
+    "original_texture_unchanged": true,
+    "whole_glass_tint": false,
+    "properties": [
+      "kt_art:red",
+      "kt_art:green",
+      "kt_art:blue"
+    ],
+    "engine_accepted": false,
+    "computed_cocktail_color_connected": false,
+    "sprite_animation_in_entity": "SOURCE_6_FRAMES_AT_2_TICKS_UV_CANDIDATE"
+  },
+  "particles": {
+    "registry": "interfaces/particle-art-map.json",
+    "count": 16,
+    "all_source_sprites_accounted": true
+  },
+  "sounds": {
+    "registry": "interfaces/sound-art-map.json",
+    "events": 4
+  },
+  "animated_textures": {
+    "registry": "interfaces/texture-animations.json",
+    "schedules": 10
+  },
+  "boards": {
+    "registry": "interfaces/board-orientations.json",
+    "appearance_variants": 14,
+    "orientations_per_variant": 16
+  },
+  "text": {
+    "small_chalkboard": "chalkboard_small",
+    "large_chalkboard": "chalkboard_large",
+    "source_renderer": "docs/source-bytecode/TextBlockEntityRender.txt",
+    "input_fields": [
+      "text",
+      "color",
+      "glow",
+      "alignment",
+      "waxed"
+    ],
+    "in_world_dynamic_text": "REQUIRES_CODE_AND_RENDERING_PROTOTYPE"
+  },
+  "displayed_items": {
+    "assets": "interfaces/item-art-map.json",
+    "anchors_source_directory": "docs/source-bytecode",
+    "targets": [
+      "bar_cabinet",
+      "glass_bar_cabinet",
+      "cellar_cabinet",
+      "tilted_rack",
+      "circular_rack",
+      "holder",
+      "glassware_holder"
+    ],
+    "inventory_contents_connected": false
+  },
+  "shaker": {
+    "model": "shaker",
+    "put_animation": "RP/animations/shaker.animation.json",
+    "source_hand_hook": "interfaces/shaker-hand-source.json",
+    "hand_animation_connected": false
+  },
+  "native_vanilla_dependencies": [
+    "minecraft:water",
+    "minecraft:lava",
+    "minecraft:potion",
+    "minecraft:bucket",
+    "textures/particle/particles"
+  ],
+  "known_visual_acceptance_gates": [
+    "Native particle texture substitutions and default inherited physics require review.",
+    "Animated item GUI sprites and entity texture UV animation require renderer integration.",
+    "In-world arbitrary text and hand shaker pose require code-side render prototypes.",
+    "Light level / glow, auto orientation, displayed contents, effect overlays and source GUI layout are not gameplay-connected.",
+    "No actual Minecraft/bridge/Blockbench engine test.",
+    "Cookery real BP/RP package not supplied."
+  ]
+}

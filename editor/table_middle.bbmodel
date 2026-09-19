@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "table_middle",
+  "model_identifier": "kt_assets_a12.table_middle",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "table_middle_element0",
+      "type": "cube",
+      "uuid": "d6ae9731-7ff0-51a1-86a2-339905eb5d6c",
+      "from": [
+        -8,
+        13,
+        -8
+      ],
+      "to": [
+        8,
+        16,
+        8
+      ],
+      "origin": [
+        0,
+        14.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            18.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            18.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "cf6dcf19-bfe1-5e21-859c-16c758c7b181",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "d6ae9731-7ff0-51a1-86a2-339905eb5d6c"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "table.png",
+      "id": "0",
+      "uuid": "fea1f6b4-e0d6-5aca-b6a2-077fb498cbb0",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABt0lEQVR4Xu2WwUrDQBCG+xLSo/TYgxd7yxvYi94sCoI3D4rgwdcQkeKD9CA+j0gRH2JlhC3Tn4Rkm4TsTP4PftpuyDTzdbu7k+n0KFjOpC2z2XFYLE5NplMB8mopnQmQIlIQp1buic+M/SSji+EXxPGy60OnVwG5Ny/pTYCF5iW9CLDQPD4f9pNMWdHcm9fvsZ9kqgrnFvxxehFgoXl8VuwnGV0sx5Q1r8exn2R0MUvpTIAUGvVROBazmE4E4NSyFuyHkERwcbGW2Mf5xXWQ6N4aIUVkQVkuz/4T3+sxfW2o4LNJtICXt3XY/vymC8BFxVpiHyjgdf0evr634e7haRcZi9fdcf/4HDYfn7sGV1c3oSiKvciYvscVOANGB84AmfLyi+vImL7HFShAGp7PT/ZS+hfAbSU1WG8oWgmo2mbqkpMAOQOIhPi5sQDcVlKD9YbiYAFeiPt+/Dy6RfBydev7oFOHHHREAo6TOnBRSw3WM4c0gdtb07gSgAecurgUgNO7Kq4FNBHhWkCTUAAFUAAFjE6AXNc7BQWMTQDKcCkgJe4EHBI3AtoE6xFCCCGEEEIIIYTkzh//xAES0hCDIwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle.json"
+    ],
+    "source_model_not_modified": true,
+    "derived_assembly": null,
+    "source_warnings": [],
+    "java_cullface_recorded_not_implemented": [],
+    "java_display_recorded_not_applied": {},
+    "engine_test": "NOT_RUN"
+  }
+}

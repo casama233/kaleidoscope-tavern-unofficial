@@ -1,0 +1,32 @@
+{
+  "profile": "production",
+  "allowed": false,
+  "scope": "static packaging preflight only",
+  "static_checks": {
+    "run": 4467,
+    "failed": 0
+  },
+  "engine_test": "NOT_RUN",
+  "blockers": [
+    {
+      "code": "COOKERY_UNBOUND",
+      "details": "No real archive has been bound."
+    },
+    {
+      "code": "SELECTED_RESOURCE_BYTES_DIFFER",
+      "details": "Raw hashes differ. Consult JAR-COMPARISON-EXPLAINED.zh-TW.md for separate parsed-JSON/RGBA equivalence; this is not a claim of different visible art."
+    },
+    {
+      "code": "RUNTIME_VISUAL_PARITY_NOT_ACCEPTED",
+      "details": "Static/source art baseline is ready; text, hand binding, inherited particle physics, UI and game-render validation remain. See ART-READINESS.json."
+    },
+    {
+      "code": "ENGINE_ACCEPTANCE_NOT_RUN",
+      "details": "JSON/source checks and the local viewer are not Minecraft testing."
+    },
+    {
+      "code": "GAMEPLAY_NOT_IMPLEMENTED",
+      "details": "This pack is intentionally an asset-only lab; a production export is not provided."
+    }
+  ]
+}

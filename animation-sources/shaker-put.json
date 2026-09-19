@@ -1,0 +1,159 @@
+{
+  "source": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+  "animation": "animation.kt_assets_a8.shaker.put",
+  "length": 0.375,
+  "channels": [
+    {
+      "bone": "root",
+      "channel": "rotation",
+      "keys": [
+        {
+          "time": 0.0,
+          "source_vec": "degreeVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.0833,
+          "source_vec": "degreeVec",
+          "value": [
+            0.0,
+            -4.5,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.1667,
+          "source_vec": "degreeVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        }
+      ]
+    },
+    {
+      "bone": "bone2",
+      "channel": "rotation",
+      "keys": [
+        {
+          "time": 0.0,
+          "source_vec": "degreeVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.0833,
+          "source_vec": "degreeVec",
+          "value": [
+            -15.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.2083,
+          "source_vec": "degreeVec",
+          "value": [
+            7.5,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.2917,
+          "source_vec": "degreeVec",
+          "value": [
+            -7.5,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.375,
+          "source_vec": "degreeVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        }
+      ]
+    },
+    {
+      "bone": "bone2",
+      "channel": "position",
+      "keys": [
+        {
+          "time": 0.0,
+          "source_vec": "posVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.0833,
+          "source_vec": "posVec",
+          "value": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.2083,
+          "source_vec": "posVec",
+          "value": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.2917,
+          "source_vec": "posVec",
+          "value": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        },
+        {
+          "time": 0.375,
+          "source_vec": "posVec",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "CATMULLROM"
+        }
+      ]
+    }
+  ],
+  "keyframes": 13,
+  "engine_accepted": false,
+  "trigger": "Manual playanimation on the lab rig only; no put-item gameplay event is installed.",
+  "hand_shaking": "Source retained; player-arm and first-person runtime hooks NOT_PORTED"
+}

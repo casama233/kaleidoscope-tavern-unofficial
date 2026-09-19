@@ -1,0 +1,86 @@
+{
+  "batch": "A5",
+  "unit_test_count": 46,
+  "suites": [
+    {
+      "suite": "python",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "output": "A5-python-test-output.txt",
+      "tests": 30
+    },
+    {
+      "suite": "node",
+      "command": [
+        "node",
+        "--test",
+        "tests/interfaces.test.mjs"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "output": "A5-node-test-output.txt",
+      "tests": 16,
+      "failed": 0
+    },
+    {
+      "suite": "typescript",
+      "command": [
+        "tsc",
+        "-p",
+        "tests/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "output": "A5-typescript-test-output.txt",
+      "scope": "tsc --noEmit plus expected compile-error fixtures"
+    }
+  ],
+  "covered_appearance_variants": 177,
+  "covered_icons": 10,
+  "cookery_archive_used": "SYNTHETIC_TEST_FIXTURES_ONLY",
+  "actual_Cookery_integration": "NOT_RUN",
+  "engine": "NOT_RUN",
+  "inputs_sha256": {
+    "sdk/example.mjs": "713f4f8e24c64db71d4099bf0785d5fad82b149b161a01a55fa552eca3b2925f",
+    "sdk/index.mjs": "bbb3360621983beb456b19acca7cbeb498970d2399325859f47a9a80e41ab056",
+    "sdk/index.d.mts": "1f8129bce3f64f6ee87c2c76fd13894026ba50d24cacb26c8a1f3ed409c76553",
+    "tools/build_a1_base.py": "a6059ff723065b0c4ab8f043f784c2d097d6366c8baa2b4700a0e62a384345e8",
+    "tools/package_assets.py": "c23f19a7b497ad5eabaaf85351e4c96dfc11fd5f82c976ce0e070cea186ba93d",
+    "tools/dependency_overlay.py": "795e51c160d422fd26bc69f61b1112fd10bc4bcc98f129eb899eb062ed0b3fad",
+    "tools/build_a4_base.py": "8f86190be480db1acba3457eb67cb013e423cf5d818d79acb672ada92ffeb1d0",
+    "tools/model_ops.py": "3f1adff1f2abb69779848c8064391596c2b3f3ee9dc44c216621b006eca173d8",
+    "tools/render_a2_preview.py": "254e5949ba42acb3c5e94d4a07b85f685490df08cd009609d83cb0fa81ce0f22",
+    "tools/build_a2_base.py": "1d1db413331f7fbedd28dba0d840700ede698fc1ea0e6cd2f136ad39bbf3f048",
+    "tools/build_interfaces.py": "71b823b3827f82ade3ca728f5ff9c8ea3aa4efcc962bfc8f5efa41487b0e4a17",
+    "tools/release_gate.py": "f0c6c6863d545823b45e6debdbf870aa7d3ed37de3cb3d181400e30f43b0c468",
+    "tools/validate_interfaces.py": "e8f47ef8e2e03159b0470be8cf71f72645a6cf0b588e83df30a6672e63c50e06",
+    "tools/verify_assets.py": "a920dcc2e365d7c93e63f48dca59a8ca42bd5359ff8b0d135327e3f5782c7a99",
+    "tools/project.py": "316fa16d18d42b37888e6547045a9f52cf4627516668d11b544acb2ac1bf9fc8",
+    "tools/test_viewer.py": "4eb2659e4562b68974d7403e1abfefc8bfd3b518c4d415417731f61e37be470e",
+    "tools/render_a4_preview.py": "257b68e4ed0c62b0ef405a86195453040df8f98e9864f5ebb9e1ec17911a55b6",
+    "tools/interface_common.py": "641efe05a7dce84ea4d45d735a186b30c6f244510c21153ec053923b96019571",
+    "tools/build_assets.py": "712925fb3f30bf49ce77554eee72b30e10d8d7d29a7ea45c6c15e02b9d21c73a",
+    "tools/verify_a4_base.py": "afd20a96a4775ddc7e0fbdb83cc2292c3f4d0d997094567c380bfa8153087aa8",
+    "tools/compare_release.py": "22423d03a50a634f033704aeac1971140371bdaa73e8f5eb002635bf11b0dd30",
+    "tools/cookery_dependency.py": "5d3587e3d6a6d9aa65ba82dc365bf9104bb3c62003aff4afa360a57881e4173b",
+    "tools/render_a3_preview.py": "d26d1a1fba71c083983cb9d0f5202ee533bbc67dcd13f59ca2cbf664ce033b2d",
+    "tools/build_a3_base.py": "8ede68facf3caedb76686b9346791ea8a08c10e422a213fd5173664bf1806554",
+    "tools/render_preview.py": "b725311623aa38aa179392b02981bc3ced31f2c597b4c04f1356b99c4bf3003f",
+    "tests/typecheck.mts": "66ddf7a615874710ccb6f9f03a5ee91a52d1b8eb26f33138cedd066ce572441f",
+    "tests/interfaces.test.mjs": "8b8a44ae6a5075ad03a51b8a8cab3215fd9e15ce0c98b89194ffe729524de170",
+    "tests/test_interfaces.py": "583a7421fbe0ab4ba77c231c508b4de375c652e11d7be55d5b9178e9edb6946d",
+    "tests/tsconfig.json": "e928b4c8a9f7ad3203f2a375eb34cc949b099e8ade93bdd398e1cca55f561958",
+    "interfaces/asset-registry.json": "37c4b132e0b4a08b2769f8cefb9a7eab6ce031def13b95bbdb32aa6aefa7899c"
+  }
+}

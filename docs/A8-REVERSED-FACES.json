@@ -1,0 +1,1418 @@
+[
+  {
+    "id": "depth_charge",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/depth_charge.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "depth_charge_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "depth_charge_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "depth_charge_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "depth_charge_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "depth_charge_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "depth_charge_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "depth_charge_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "depth_charge_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "mojito",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json",
+    "face_map": [
+      {
+        "source_element": 1,
+        "source_face": "north",
+        "output_cube": "mojito_element1_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "east",
+        "output_cube": "mojito_element1_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "south",
+        "output_cube": "mojito_element1_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 1,
+        "source_face": "west",
+        "output_cube": "mojito_element1_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "mojito_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "mojito_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "mojito_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "mojito_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "signature_cocktail",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/signature_cocktail.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "signature_cocktail_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "signature_cocktail_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "signature_cocktail_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "signature_cocktail_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 5,
+        "source_face": "north",
+        "output_cube": "signature_cocktail_element5_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 5,
+        "source_face": "east",
+        "output_cube": "signature_cocktail_element5_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 5,
+        "source_face": "south",
+        "output_cube": "signature_cocktail_element5_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 5,
+        "source_face": "west",
+        "output_cube": "signature_cocktail_element5_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "mystery_cocktail",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json",
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "mystery_cocktail_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "mystery_cocktail_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "mystery_cocktail_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "mystery_cocktail_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "mystery_cocktail_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "mystery_cocktail_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "mystery_cocktail_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "mystery_cocktail_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "glowflower_brew_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count1.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_1_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_1_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_1_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_1_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_1_element4_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_1_element4_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_1_element4_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_1_element4_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "glowflower_brew_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count2.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_2_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_2_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_2_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_2_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_2_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_2_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_2_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_2_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_2_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_2_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_2_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_2_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_2_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_2_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_2_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_2_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "glowflower_brew_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count3.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_3_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_3_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_3_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_3_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "glowflower_brew_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count4.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element17_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element17_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element17_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element17_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element19_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element19_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element19_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element19_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "luminous_bride_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count1.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "luminous_bride_1_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "luminous_bride_1_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "luminous_bride_1_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "luminous_bride_1_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "north",
+        "output_cube": "luminous_bride_1_element4_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "east",
+        "output_cube": "luminous_bride_1_element4_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "south",
+        "output_cube": "luminous_bride_1_element4_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "west",
+        "output_cube": "luminous_bride_1_element4_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "luminous_bride_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count2.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "luminous_bride_2_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "luminous_bride_2_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "luminous_bride_2_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "luminous_bride_2_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "luminous_bride_2_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "luminous_bride_2_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "luminous_bride_2_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "luminous_bride_2_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "luminous_bride_2_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "luminous_bride_2_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "luminous_bride_2_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "luminous_bride_2_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "luminous_bride_2_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "luminous_bride_2_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "luminous_bride_2_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "luminous_bride_2_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "luminous_bride_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count3.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "luminous_bride_3_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "luminous_bride_3_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "luminous_bride_3_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "luminous_bride_3_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "luminous_bride_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count4.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element17_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element17_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element17_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element17_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "north",
+        "output_cube": "luminous_bride_4_element19_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "east",
+        "output_cube": "luminous_bride_4_element19_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "south",
+        "output_cube": "luminous_bride_4_element19_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "west",
+        "output_cube": "luminous_bride_4_element19_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  }
+]

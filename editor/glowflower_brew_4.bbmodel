@@ -1,0 +1,4549 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "glowflower_brew_4",
+  "model_identifier": "kt_assets_a8.glowflower_brew_4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "glowflower_brew_4_element0_north",
+      "type": "cube",
+      "uuid": "7533cd1b-4afc-536f-8b75-2ca182bcf6c7",
+      "from": [
+        -6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element0_east",
+      "type": "cube",
+      "uuid": "407fd29f-b9e9-5b18-8608-ef58cc6424a1",
+      "from": [
+        -6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element0_south",
+      "type": "cube",
+      "uuid": "35135dab-c71e-5656-802f-28de373e57b1",
+      "from": [
+        -6.0,
+        0.1,
+        6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element0_west",
+      "type": "cube",
+      "uuid": "0f580ed4-8c98-5f5a-a64a-9251a4e78e1c",
+      "from": [
+        -2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element1",
+      "type": "cube",
+      "uuid": "73d47d7e-ad1c-51dc-9b82-e92b595fb9de",
+      "from": [
+        -6,
+        0.1,
+        2
+      ],
+      "to": [
+        -2,
+        1.1,
+        6
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element2_north",
+      "type": "cube",
+      "uuid": "99de55ff-2a4a-5236-8fdb-f12da7d329f8",
+      "from": [
+        -5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element2_east",
+      "type": "cube",
+      "uuid": "d98a3029-c186-50fe-be2c-76cfabdd4415",
+      "from": [
+        -5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element2_south",
+      "type": "cube",
+      "uuid": "1837de78-dd81-58ec-83b3-ff31008bdde4",
+      "from": [
+        -5.65,
+        1.0,
+        5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element2_west",
+      "type": "cube",
+      "uuid": "f81ae1bd-66c4-51bb-b348-a9afc7fbf3bf",
+      "from": [
+        -2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element3",
+      "type": "cube",
+      "uuid": "c4657082-9756-5c97-b0c9-26ddaedd38eb",
+      "from": [
+        -6,
+        11.1,
+        2
+      ],
+      "to": [
+        -2,
+        11.1,
+        6
+      ],
+      "origin": [
+        -4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element4",
+      "type": "cube",
+      "uuid": "356ea884-4f49-5bfa-8065-54af3c247d79",
+      "from": [
+        -5,
+        11.2,
+        3
+      ],
+      "to": [
+        -3,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element5",
+      "type": "cube",
+      "uuid": "e73684b0-9f73-5eb2-8b46-b8ba3adb1f86",
+      "from": [
+        3,
+        11.2,
+        3
+      ],
+      "to": [
+        5,
+        16,
+        5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element6",
+      "type": "cube",
+      "uuid": "722ac1ce-e0b8-5553-b170-b0de820897ff",
+      "from": [
+        2,
+        11.1,
+        2
+      ],
+      "to": [
+        6,
+        11.1,
+        6
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element7_north",
+      "type": "cube",
+      "uuid": "83b7e9c3-4809-5a00-8609-2b9101779a2f",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element7_east",
+      "type": "cube",
+      "uuid": "ccc36d38-ef97-528e-924f-444fe7c8f565",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        2.3499999999999996,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element7_south",
+      "type": "cube",
+      "uuid": "b59cc4d6-9be3-5d6a-a1de-90524eb1159f",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element7_west",
+      "type": "cube",
+      "uuid": "c5dbf3ac-2d2a-5f3b-8653-151880e47bc8",
+      "from": [
+        5.65,
+        1.0,
+        2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element8",
+      "type": "cube",
+      "uuid": "6ba1bb30-b7c2-5bb4-9b0d-34c883495c79",
+      "from": [
+        2,
+        0.1,
+        2
+      ],
+      "to": [
+        6,
+        1.1,
+        6
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element9_north",
+      "type": "cube",
+      "uuid": "832bb5fb-193b-5049-af1e-f540abdb1965",
+      "from": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element9_east",
+      "type": "cube",
+      "uuid": "18d96bdc-20cd-5202-8a40-d60f71e18870",
+      "from": [
+        2.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        2.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element9_south",
+      "type": "cube",
+      "uuid": "68c039ff-e209-5deb-980c-5a263bea75ca",
+      "from": [
+        2.0,
+        0.1,
+        6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element9_west",
+      "type": "cube",
+      "uuid": "9b830212-17bd-551a-8fc4-bc5b7aa499b5",
+      "from": [
+        6.0,
+        0.1,
+        2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element10_north",
+      "type": "cube",
+      "uuid": "d6482f39-cfef-52f0-aa16-faed7edd6c0c",
+      "from": [
+        2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -6.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element10_east",
+      "type": "cube",
+      "uuid": "7ce05cbd-404a-577e-ad7f-fdb4b3d0d8b7",
+      "from": [
+        2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element10_south",
+      "type": "cube",
+      "uuid": "d40a00ce-2e81-530a-b6eb-472ce193ce89",
+      "from": [
+        2.0,
+        0.1,
+        -2.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element10_west",
+      "type": "cube",
+      "uuid": "ea5b611f-dae4-5c23-9be6-fce04bc62166",
+      "from": [
+        6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element11",
+      "type": "cube",
+      "uuid": "46235577-b2be-5494-bdcb-336e237f3672",
+      "from": [
+        2,
+        0.1,
+        -6
+      ],
+      "to": [
+        6,
+        1.1,
+        -2
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element12_north",
+      "type": "cube",
+      "uuid": "7655ad85-43e7-58a1-b206-d84db408df4e",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -5.65
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element12_east",
+      "type": "cube",
+      "uuid": "1bfd5fb3-d0d7-5453-ae4f-2a3cc4cbb40c",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element12_south",
+      "type": "cube",
+      "uuid": "ad95a2c4-b540-59f1-9078-85678a8d5e6f",
+      "from": [
+        2.3499999999999996,
+        1.0,
+        -2.3499999999999996
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element12_west",
+      "type": "cube",
+      "uuid": "34ecfd13-3f34-50b9-aeb3-a4e0bfb2dbe6",
+      "from": [
+        5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element13",
+      "type": "cube",
+      "uuid": "c7cdf999-8ed1-58b1-8f9f-46e5b89be9b6",
+      "from": [
+        2,
+        11.1,
+        -6
+      ],
+      "to": [
+        6,
+        11.1,
+        -2
+      ],
+      "origin": [
+        4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element14",
+      "type": "cube",
+      "uuid": "5d025f4a-83cd-599f-bf05-bc5d6e270dc0",
+      "from": [
+        3,
+        11.2,
+        -5
+      ],
+      "to": [
+        5,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element15",
+      "type": "cube",
+      "uuid": "604669cf-98cb-578f-be9a-fa116bc86a90",
+      "from": [
+        -5,
+        11.2,
+        -5
+      ],
+      "to": [
+        -3,
+        16,
+        -3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            0.0,
+            14.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element16",
+      "type": "cube",
+      "uuid": "0cd96cf8-483b-5af8-9aae-7ed6787218f4",
+      "from": [
+        -6,
+        11.1,
+        -6
+      ],
+      "to": [
+        -2,
+        11.1,
+        -2
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element17_north",
+      "type": "cube",
+      "uuid": "7ac234d0-9541-541a-adf5-fcced6e8aa2a",
+      "from": [
+        -5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -5.65
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element17_east",
+      "type": "cube",
+      "uuid": "6a679887-cba8-500e-bfba-a87223156ff2",
+      "from": [
+        -5.65,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -5.65,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element17_south",
+      "type": "cube",
+      "uuid": "4a3c0a0e-2821-5b7c-ab9f-7d44279ca03b",
+      "from": [
+        -5.65,
+        1.0,
+        -2.3499999999999996
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element17_west",
+      "type": "cube",
+      "uuid": "0d253b29-f359-5ad6-b418-d23ae2d064e7",
+      "from": [
+        -2.3499999999999996,
+        1.0,
+        -5.65
+      ],
+      "to": [
+        -2.3499999999999996,
+        8.75,
+        -2.3499999999999996
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            4.0,
+            2.0,
+            7.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element18",
+      "type": "cube",
+      "uuid": "e0212ca7-84bc-564d-8fdb-d5eeb0c7b39a",
+      "from": [
+        -6,
+        0.1,
+        -6
+      ],
+      "to": [
+        -2,
+        1.1,
+        -2
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            12.0,
+            10.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element19_north",
+      "type": "cube",
+      "uuid": "dde5b164-2b55-5df1-b978-7b150e9fa2a4",
+      "from": [
+        -6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -6.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element19_east",
+      "type": "cube",
+      "uuid": "6d338e12-93d6-5465-b526-274131db0a32",
+      "from": [
+        -6.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -6.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element19_south",
+      "type": "cube",
+      "uuid": "4e4b8470-271f-5d1d-a7e9-6c0e3633da67",
+      "from": [
+        -6.0,
+        0.1,
+        -2.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element19_west",
+      "type": "cube",
+      "uuid": "1b36349f-1d9f-5dc3-8724-4f72eba2edf8",
+      "from": [
+        -2.0,
+        0.1,
+        -6.0
+      ],
+      "to": [
+        -2.0,
+        11.1,
+        -2.0
+      ],
+      "origin": [
+        -4,
+        7.05,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            11.0,
+            5.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element20",
+      "type": "cube",
+      "uuid": "8d83f314-d1b2-5800-9ec4-d798062a6123",
+      "from": [
+        -5.67071,
+        8.749,
+        -5.6
+      ],
+      "to": [
+        -2.37071,
+        8.749,
+        -2.3
+      ],
+      "origin": [
+        -4.07071,
+        6.699,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element21",
+      "type": "cube",
+      "uuid": "f9d32951-56ca-5b53-a4a3-e25e62a6cc4f",
+      "from": [
+        1.6221800000000002,
+        8.749,
+        2.6928900000000002
+      ],
+      "to": [
+        4.922180000000001,
+        8.749,
+        5.992889999999999
+      ],
+      "origin": [
+        3.22218,
+        6.699,
+        3.29289
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element22",
+      "type": "cube",
+      "uuid": "e62a1f06-be87-5a9a-8606-b2837f5690e3",
+      "from": [
+        -5.67071,
+        8.749,
+        2.4000000000000004
+      ],
+      "to": [
+        -2.37071,
+        8.749,
+        5.699999999999999
+      ],
+      "origin": [
+        -4.07071,
+        6.699,
+        4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glowflower_brew_4_element23",
+      "type": "cube",
+      "uuid": "600de064-f855-544a-912a-a29b43ec161c",
+      "from": [
+        2.3292900000000003,
+        8.749,
+        -5.6
+      ],
+      "to": [
+        5.629289999999999,
+        8.749,
+        -2.3
+      ],
+      "origin": [
+        3.92929,
+        6.699,
+        -4
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            15.0,
+            15.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "d22271db-ef6b-5db7-9fe8-b6d94998e659",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "7533cd1b-4afc-536f-8b75-2ca182bcf6c7",
+        "407fd29f-b9e9-5b18-8608-ef58cc6424a1",
+        "35135dab-c71e-5656-802f-28de373e57b1",
+        "0f580ed4-8c98-5f5a-a64a-9251a4e78e1c",
+        "73d47d7e-ad1c-51dc-9b82-e92b595fb9de",
+        "99de55ff-2a4a-5236-8fdb-f12da7d329f8",
+        "d98a3029-c186-50fe-be2c-76cfabdd4415",
+        "1837de78-dd81-58ec-83b3-ff31008bdde4",
+        "f81ae1bd-66c4-51bb-b348-a9afc7fbf3bf",
+        "c4657082-9756-5c97-b0c9-26ddaedd38eb",
+        "356ea884-4f49-5bfa-8065-54af3c247d79",
+        "e73684b0-9f73-5eb2-8b46-b8ba3adb1f86",
+        "722ac1ce-e0b8-5553-b170-b0de820897ff",
+        "83b7e9c3-4809-5a00-8609-2b9101779a2f",
+        "ccc36d38-ef97-528e-924f-444fe7c8f565",
+        "b59cc4d6-9be3-5d6a-a1de-90524eb1159f",
+        "c5dbf3ac-2d2a-5f3b-8653-151880e47bc8",
+        "6ba1bb30-b7c2-5bb4-9b0d-34c883495c79",
+        "832bb5fb-193b-5049-af1e-f540abdb1965",
+        "18d96bdc-20cd-5202-8a40-d60f71e18870",
+        "68c039ff-e209-5deb-980c-5a263bea75ca",
+        "9b830212-17bd-551a-8fc4-bc5b7aa499b5",
+        "d6482f39-cfef-52f0-aa16-faed7edd6c0c",
+        "7ce05cbd-404a-577e-ad7f-fdb4b3d0d8b7",
+        "d40a00ce-2e81-530a-b6eb-472ce193ce89",
+        "ea5b611f-dae4-5c23-9be6-fce04bc62166",
+        "46235577-b2be-5494-bdcb-336e237f3672",
+        "7655ad85-43e7-58a1-b206-d84db408df4e",
+        "1bfd5fb3-d0d7-5453-ae4f-2a3cc4cbb40c",
+        "ad95a2c4-b540-59f1-9078-85678a8d5e6f",
+        "34ecfd13-3f34-50b9-aeb3-a4e0bfb2dbe6",
+        "c7cdf999-8ed1-58b1-8f9f-46e5b89be9b6",
+        "5d025f4a-83cd-599f-bf05-bc5d6e270dc0",
+        "604669cf-98cb-578f-be9a-fa116bc86a90",
+        "0cd96cf8-483b-5af8-9aae-7ed6787218f4",
+        "7ac234d0-9541-541a-adf5-fcced6e8aa2a",
+        "6a679887-cba8-500e-bfba-a87223156ff2",
+        "4a3c0a0e-2821-5b7c-ab9f-7d44279ca03b",
+        "0d253b29-f359-5ad6-b418-d23ae2d064e7",
+        "e0212ca7-84bc-564d-8fdb-d5eeb0c7b39a",
+        "dde5b164-2b55-5df1-b978-7b150e9fa2a4",
+        "6d338e12-93d6-5465-b526-274131db0a32",
+        "4e4b8470-271f-5d1d-a7e9-6c0e3633da67",
+        "1b36349f-1d9f-5dc3-8724-4f72eba2edf8",
+        "8d83f314-d1b2-5800-9ec4-d798062a6123",
+        "f9d32951-56ca-5b53-a4a3-e25e62a6cc4f",
+        "e62a1f06-be87-5a9a-8606-b2837f5690e3",
+        "600de064-f855-544a-912a-a29b43ec161c"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "glowflower_brew.png",
+      "id": "0",
+      "uuid": "46c9db4d-6062-5a37-8f71-5a07a1cb8d12",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAV5JREFUOI2dkr1LQmEUxn/5AQ13CAvKjwhxSCiIEHTQKaQI2oLabWsKIqS/oCGipraooMaCoKWMGqTFgmYHociPkkKTdDDzNIi3bvda2bO85znPy3Oe9+VAmwj6fTLgdEiTm9o1sPf24XLaVa4zKCUiItWklBIR+a4B5B4fSGdyKrd8v7A+cwQc/ZgA4C6TNU4A4A7YWhr8msAdsOHxKw1y+6zR6iKSLVYAODm/lLnp8Q6dAYA3oJBKvOr62WKF/d09AHr63cZP8PgVbEOTnym+wJrZwNN5jKfzmKnBK2MDALqWDdtG0Bl4AwoUVxrnH6D7g+5QvAPi/0/QLkzV6pNIJSa1fFRq+ai6fXURSRfKki6UZevg1HArASzW2g331zsAOLwujbi2ugnAsG+kdYL31zOVmJWwWm8fxtR6YizY0sDSnGxWwrxZRjXi4tK8hl+kfIRmF1hb3eQl2Uj1AY7McVfGp6yQAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count4.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count4.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element7_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element7_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element7_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 7,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element7_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element10_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element10_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element10_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 10,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element10_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element12_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element12_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element12_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 12,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element12_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element17_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element17_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element17_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 17,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element17_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "north",
+        "output_cube": "glowflower_brew_4_element19_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "east",
+        "output_cube": "glowflower_brew_4_element19_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "south",
+        "output_cube": "glowflower_brew_4_element19_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 19,
+        "source_face": "west",
+        "output_cube": "glowflower_brew_4_element19_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {},
+    "tint_map": [],
+    "animation": null,
+    "engine_test": "NOT_RUN"
+  }
+}

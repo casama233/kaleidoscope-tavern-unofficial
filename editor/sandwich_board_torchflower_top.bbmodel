@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_torchflower_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_torchflower_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_torchflower_top_element0",
+      "type": "cube",
+      "uuid": "75bffbe2-a7db-54fe-b89d-eda51e1b8363",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_torchflower_top_element1",
+      "type": "cube",
+      "uuid": "8fc6c7d6-dec4-55eb-91cc-03fffc2f71cc",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_torchflower_top_element2",
+      "type": "cube",
+      "uuid": "4ffbaff3-5922-5728-96db-e85193963890",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_torchflower_top_element3",
+      "type": "cube",
+      "uuid": "2caa6787-7d44-5f15-bf8d-92099afbc834",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_torchflower_top_element4",
+      "type": "cube",
+      "uuid": "bae43248-5a14-58f0-a840-f1155761245a",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_torchflower_top_element5",
+      "type": "cube",
+      "uuid": "8688950b-26fe-515c-bf5b-79aeecc07602",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "3d258547-1f67-5a57-bb4a-8d46546ef159",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "75bffbe2-a7db-54fe-b89d-eda51e1b8363",
+        "8fc6c7d6-dec4-55eb-91cc-03fffc2f71cc",
+        "4ffbaff3-5922-5728-96db-e85193963890",
+        "2caa6787-7d44-5f15-bf8d-92099afbc834",
+        "bae43248-5a14-58f0-a840-f1155761245a",
+        "8688950b-26fe-515c-bf5b-79aeecc07602"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_torchflower_top.png",
+      "id": "0",
+      "uuid": "c32c2aae-9572-57ed-9201-5d0ce44a620f",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAFPUlEQVR4nN2YXUxURxTHf5e9Xdjd1n6w0PWj+N0NReUjsTE0tSUpGGKaNqENJmaXl2ITn4jRVKxNY7pKaxvCk0nFl2KaSKwPTdMQ1ITSpmq0xRXcEhQR6IdbwUqx7LrLwvRhuSt32e+9FNL/y83MnJk559z/OXNmpJeKVoklBpm2i/0SKWD9y6Ui2Tk3f7iQ0l7zAXl2o6DytaSMcbWdl/SPG5Pa0P+PJyn5+YYcqTPTYIo5yeed0FyRL55/SgAUmmQsZXaWbPtWNT7evh13RwvXJgIA1NwY04RFcxyQaTAhG/RxJ86HE2pujEnOYrOwNDZKNIaP9uEsNouaG2OS4iwtkDG7kajxskE/hyVH9r7HV8c+T1mRQpOMs9gslD8cCdcmAjiLzaLQFJG4KUGzlQ589kla8y1ldiyNjTFprdDevWeP4OociqQEzRxw7KPDjI0/QJIk1uTlocvI4ObgIPVHGziybz8HPv1Yq600hQww7o1Ou0Sx+4P3o44lYrxn6TcJ75WMbDzIAEa9Lu2Fvms9w8Wff2L9qtWAAIJsvjl8G6ah/mhDzPmWTRkxx1OVjQcZQNalf6K8Wl2V9hoLAc1yQMO+/axfvRqAuyOj5OaYeWv3uwnP1+cXAX2ay8aDDBCYSv9YrV+kSS4e0maAmJwC4HTzCfpvDwAS62aYAHDr9iACQf2Rw+luNS9QOUCp7uIVQwGvX1UJTvp8vF37DpM+HwCPZWaG+pX2pM8X6g+H1WET/t7LCSvt73ViddhE38GTaSevOQxIpMQNN175RjL89PET9A8MsPfQh6H+xYSIIZBqnR9u4KTPx5s1tphzVuwMXqeTToJXgnN/+zK9q7V2B6oGsDpscbNxIjKzERiujikvpfsgki4Cw9ViVf2vmPLXcnXzZfT5RRS0BHNQ5185ALzyzAgALrsff6+T4isvMtF7i8GG55DzWqPqrRgfS0a7a1WKkPNaJU+7Vbi7R3B3gwUnLnsRo03LcXe0ANBZZsdc9zv+Xifu7mnaMi9hsWcg50Wnv6fdKiCYMGPuP7tRtWWZCPinkfVzIyNa/5lLf6TNHOO2Pim7vERcqXiAu3saY/ty1eMHHS2AHc/SLgA2n32Ce/u6Yu7r7p4mL39G9+FqEY0FqkLI4w2e6f6Zbzii9WuBe+e6pK25wYRoyh+BqkoOtAQvPdVVlcAIE86cGdnEEp/CGAvOqDIqBuh1EoaZi5HXHzTWEOGi5PVPYdDrQjJa4VFGvwBAjTJw8GTSa1k2ZQTZdOd1xu9AtBNG/tE5GPLm0GjwwVK5HXo0NvC/QO3GOtHc0ySNt29nvKMFYxmhXBIJKipVbVkW8cgY+fshOU9mRVxAixygNRQnKE9ssx9QK3bsEgArXcHXbFUIeKLEeGBSRB1bjGjuaZIqduwSRaeOS85ic+inWh02MYSXra3ZNPc0SRAhB4A67pU4jzW2kKjdWKdi7VCBh7Onjku/6K5jddhEj34NXD0UKqBWXjeEjIewEChd97RQ4t6o18XNAUa9jgv99xdFCNRurBNDBR6GNngB6Dt4Ulqxs1Q0FJbj8A8AMNF7i/DSWcWApWZD8jv3309VZ03R3NMkrdhUKugNtq0OmxjtdPH9VFC/2cZX7NgllByg8kZl4bNJv4y0XftzwRmghIFCbeWCZcpfy2inC0NuFt67DzHkZvHC1AZWuowhWZXyb5RYRKQ6YHash49/3eVecAfAIycoOSC7vEQYcrPmOOHeOXUFuSiU1xLZ5SUCUP11792HAHOMh/+hAxSEOyKS8QD/AmtdNbBPCwVEAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_torchflower_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/torchflower.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

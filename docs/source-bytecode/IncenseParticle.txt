@@ -1,0 +1,169 @@
+Compiled from "IncenseParticle.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.particle.IncenseParticle extends net.minecraft.client.particle.TextureSheetParticle {
+  protected final float baseAlpha;
+
+  protected com.github.ysbbbbbb.kaleidoscopetavern.client.particle.IncenseParticle(net.minecraft.client.multiplayer.ClientLevel, double, double, double, double, double, double);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: dload_2
+       3: dload         4
+       5: dload         6
+       7: invokespecial #1                  // Method net/minecraft/client/particle/TextureSheetParticle."<init>":(Lnet/minecraft/client/multiplayer/ClientLevel;DDD)V
+      10: aload_0
+      11: dload         8
+      13: putfield      #7                  // Field xd:D
+      16: aload_0
+      17: dload         10
+      19: putfield      #13                 // Field yd:D
+      22: aload_0
+      23: dload         12
+      25: putfield      #16                 // Field zd:D
+      28: aload_0
+      29: bipush        40
+      31: aload_1
+      32: getfield      #19                 // Field net/minecraft/client/multiplayer/ClientLevel.random:Lnet/minecraft/util/RandomSource;
+      35: bipush        20
+      37: invokeinterface #25,  2           // InterfaceMethod net/minecraft/util/RandomSource.nextInt:(I)I
+      42: iadd
+      43: putfield      #31                 // Field lifetime:I
+      46: aload_0
+      47: ldc           #35                 // float -0.002f
+      49: putfield      #36                 // Field gravity:F
+      52: aload_0
+      53: ldc           #40                 // float 0.15f
+      55: aload_1
+      56: getfield      #19                 // Field net/minecraft/client/multiplayer/ClientLevel.random:Lnet/minecraft/util/RandomSource;
+      59: invokeinterface #41,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextFloat:()F
+      64: ldc           #45                 // float 0.05f
+      66: fmul
+      67: fadd
+      68: putfield      #46                 // Field quadSize:F
+      71: aload_0
+      72: ldc           #49                 // float 0.8f
+      74: putfield      #50                 // Field baseAlpha:F
+      77: aload_0
+      78: aload_0
+      79: getfield      #50                 // Field baseAlpha:F
+      82: putfield      #53                 // Field alpha:F
+      85: aload_0
+      86: iconst_0
+      87: putfield      #56                 // Field hasPhysics:Z
+      90: return
+
+  public net.minecraft.client.particle.ParticleRenderType getRenderType();
+    Code:
+       0: getstatic     #60                 // Field net/minecraft/client/particle/ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT:Lnet/minecraft/client/particle/ParticleRenderType;
+       3: areturn
+
+  public void tick();
+    Code:
+       0: aload_0
+       1: aload_0
+       2: getfield      #66                 // Field x:D
+       5: putfield      #69                 // Field xo:D
+       8: aload_0
+       9: aload_0
+      10: getfield      #72                 // Field y:D
+      13: putfield      #75                 // Field yo:D
+      16: aload_0
+      17: aload_0
+      18: getfield      #78                 // Field z:D
+      21: putfield      #81                 // Field zo:D
+      24: aload_0
+      25: dup
+      26: getfield      #84                 // Field age:I
+      29: dup_x1
+      30: iconst_1
+      31: iadd
+      32: putfield      #84                 // Field age:I
+      35: aload_0
+      36: getfield      #31                 // Field lifetime:I
+      39: if_icmplt     47
+      42: aload_0
+      43: invokevirtual #87                 // Method remove:()V
+      46: return
+      47: aload_0
+      48: dup
+      49: getfield      #7                  // Field xd:D
+      52: aload_0
+      53: getfield      #91                 // Field random:Lnet/minecraft/util/RandomSource;
+      56: invokeinterface #92,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      61: ldc2_w        #96                 // double 0.5d
+      64: dsub
+      65: ldc2_w        #98                 // double 0.001d
+      68: dmul
+      69: dadd
+      70: putfield      #7                  // Field xd:D
+      73: aload_0
+      74: dup
+      75: getfield      #16                 // Field zd:D
+      78: aload_0
+      79: getfield      #91                 // Field random:Lnet/minecraft/util/RandomSource;
+      82: invokeinterface #92,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextDouble:()D
+      87: ldc2_w        #96                 // double 0.5d
+      90: dsub
+      91: ldc2_w        #98                 // double 0.001d
+      94: dmul
+      95: dadd
+      96: putfield      #16                 // Field zd:D
+      99: aload_0
+     100: getfield      #84                 // Field age:I
+     103: i2f
+     104: aload_0
+     105: getfield      #31                 // Field lifetime:I
+     108: i2f
+     109: fdiv
+     110: fstore_1
+     111: fload_1
+     112: ldc           #100                // float 0.75f
+     114: fcmpl
+     115: ifle          136
+     118: aload_0
+     119: aload_0
+     120: getfield      #50                 // Field baseAlpha:F
+     123: fconst_1
+     124: fload_1
+     125: ldc           #100                // float 0.75f
+     127: fsub
+     128: ldc           #101                // float 4.0f
+     130: fmul
+     131: fsub
+     132: fmul
+     133: putfield      #53                 // Field alpha:F
+     136: aload_0
+     137: aload_0
+     138: getfield      #7                  // Field xd:D
+     141: aload_0
+     142: getfield      #13                 // Field yd:D
+     145: aload_0
+     146: getfield      #16                 // Field zd:D
+     149: invokevirtual #102                // Method move:(DDD)V
+     152: aload_0
+     153: dup
+     154: getfield      #7                  // Field xd:D
+     157: ldc2_w        #106                // double 0.95d
+     160: dmul
+     161: putfield      #7                  // Field xd:D
+     164: aload_0
+     165: dup
+     166: getfield      #16                 // Field zd:D
+     169: ldc2_w        #106                // double 0.95d
+     172: dmul
+     173: putfield      #16                 // Field zd:D
+     176: return
+
+  public static net.minecraft.client.particle.TextureSheetParticle create(net.minecraft.core.particles.SimpleParticleType, net.minecraft.client.multiplayer.ClientLevel, double, double, double, double, double, double);
+    Code:
+       0: new           #8                  // class com/github/ysbbbbbb/kaleidoscopetavern/client/particle/IncenseParticle
+       3: dup
+       4: aload_1
+       5: dload_2
+       6: dload         4
+       8: dload         6
+      10: dload         8
+      12: dload         10
+      14: dload         12
+      16: invokespecial #108                // Method "<init>":(Lnet/minecraft/client/multiplayer/ClientLevel;DDDDDD)V
+      19: areturn
+}

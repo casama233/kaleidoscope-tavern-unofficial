@@ -1,0 +1,435 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "miners_star_2",
+  "model_identifier": "kt_assets_a7.miners_star_2",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "miners_star_2_element0",
+      "type": "cube",
+      "uuid": "4aa5ee79-f258-50fb-b38a-bec38a78dc13",
+      "from": [
+        2.5,
+        8,
+        -1.5
+      ],
+      "to": [
+        5.5,
+        15,
+        1.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            3.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            13.0,
+            9.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "miners_star_2_element1",
+      "type": "cube",
+      "uuid": "82edceac-9bb0-56d4-9b95-63b96fbcd407",
+      "from": [
+        0.5,
+        0,
+        -2
+      ],
+      "to": [
+        7.5,
+        9,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            7.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            7.0,
+            8.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            7.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            7.0,
+            8.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            1.0,
+            10.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            1.0,
+            10.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "miners_star_2_element2",
+      "type": "cube",
+      "uuid": "539ae5ed-6850-5fa1-9a2b-2cd2dd3fdad4",
+      "from": [
+        -7.5,
+        0,
+        -2
+      ],
+      "to": [
+        -0.5,
+        9,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            7.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            7.0,
+            8.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            7.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            7.0,
+            8.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            1.0,
+            10.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            1.0,
+            10.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "miners_star_2_element3",
+      "type": "cube",
+      "uuid": "4e517f4f-90d7-5eee-b8ef-7c1904a291ea",
+      "from": [
+        -5.5,
+        8,
+        -1.5
+      ],
+      "to": [
+        -2.5,
+        15,
+        1.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            0.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            3.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            13.0,
+            9.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "e8c6d0e5-0f76-5962-a804-bac622ceb75b",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "4aa5ee79-f258-50fb-b38a-bec38a78dc13",
+        "82edceac-9bb0-56d4-9b95-63b96fbcd407",
+        "539ae5ed-6850-5fa1-9a2b-2cd2dd3fdad4",
+        "4e517f4f-90d7-5eee-b8ef-7c1904a291ea"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "miners_star.png",
+      "id": "0",
+      "uuid": "0b99d73f-660c-5c03-a190-d13654340aa7",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA/0lEQVR4XrWSvw4BQRDGr1RcJzrvwBuoVK5V8w4anUYrnoNCIkEpXkAhSoWCuBcg0TD2m9tZa87liNjky+3On1++29kg+GLRZUnXbY/lgjhIgvYtokmZFXdLTjgLYD6o0G7WfgIkiC8KV/UwJUBQGx1PFC0SOYDvAIW6GXIOjEPfUWq9s84yjZJfN4vZgLwF0E+Ajxbdb8k07EQ4hj3i3i/KXvdz8bgWUr9aeAVY+6JsgEmkAPYieYxWiGFCup+LkQDEB6DpvOk44S3kAsQiO4indBg1nHD+D0BeI+4Al4UYYPyEh57MGXHdzwC5RAHwc1ZTkDrdH0gS8h0AqIX4A8+3lTS/v4NjAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

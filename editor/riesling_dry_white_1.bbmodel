@@ -1,0 +1,343 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "riesling_dry_white_1",
+  "model_identifier": "kt_assets_a9.riesling_dry_white_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "riesling_dry_white_1_element0",
+      "type": "cube",
+      "uuid": "dd6d4d8a-890b-5719-a916-facde96447d1",
+      "from": [
+        -1,
+        9,
+        -1
+      ],
+      "to": [
+        1,
+        15,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            1.0,
+            14.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "riesling_dry_white_1_element1",
+      "type": "cube",
+      "uuid": "58c45d6e-b359-5cfe-8a2a-342230251cfd",
+      "from": [
+        -2.5,
+        8,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9,
+        2.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            6.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            6.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            6.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            6.0,
+            16.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            11.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            11.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "riesling_dry_white_1_element2",
+      "type": "cube",
+      "uuid": "3415058c-0123-5718-8e5a-e48cc68680cc",
+      "from": [
+        -3,
+        0,
+        -3
+      ],
+      "to": [
+        3,
+        8,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            8.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            8.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            8.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            6.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            6.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "7f44a5f5-e8aa-5fbd-bb47-e1eb48d3987e",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "dd6d4d8a-890b-5719-a916-facde96447d1",
+        "58c45d6e-b359-5cfe-8a2a-342230251cfd",
+        "3415058c-0123-5718-8e5a-e48cc68680cc"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "riesling_dry_white.png",
+      "id": "0",
+      "uuid": "391abb55-aea3-58f8-a570-92ecbf519fab",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvUlEQVR4XmNgoBTUtvP/37hB+f/HtylgDGKDxGDiMAzig9Tb2hv/5+RkBLPBACTp7cOOgmGa0MVA6lNyg/7rGqgiDADZim4AzCU0MYBoL+AKA2Q2GOAKRLgCJABTh2wwuhrSAcxU9KiDycHEkeUxDPj1c+f/DAd2MIY5kZAcigEgCWyK8MnBQau61P+TnuYoGCRGSA7FAGyYkBwcwJwJs4FkL8BCFqQZObSR5dBjAsUADT11kAAKhorhlYMBAC67ceVvc+rcAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

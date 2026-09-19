@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_trellis",
+  "model_identifier": "kt_assets_a17.item_display_trellis",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "item_display_trellis_element0",
+      "type": "cube",
+      "uuid": "706d4487-8e10-5dcb-b883-f83a18988e2b",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        16,
+        2
+      ],
+      "origin": [
+        -1,
+        0,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            0.0,
+            8.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            0.0,
+            8.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "405b9885-9bfa-5341-842d-8230d510d4b8",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "706d4487-8e10-5dcb-b883-f83a18988e2b"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "trellis.png",
+      "id": "0",
+      "uuid": "ee42e29d-6e1a-544c-a784-fae29fe1a3fd",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAiElEQVR4XmPwN5D6H2Eh999GVeR/uovqfxAfJgbiMxAC2AwwUxQCY5A4unoMANIIUgjSCDIAxIYZABJDV48B0A2AGQLzCrp6DGCtgnA6UU5GBzCbKTYA5hV0eYIAORbIMgCmERaN6PIEAXo6QJcnCCgOA5jNFBsAcwm6PEFAsQGwQKTYAHJjAQAp4YIjjUu6qAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/trellis.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/trellis.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/plant/trellis/single.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,698 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "glass_bar_cabinet_single",
+  "model_identifier": "kt_assets_a6.glass_bar_cabinet_single",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "glass_bar_cabinet_single_element0",
+      "type": "cube",
+      "uuid": "f448c81a-ca1f-5845-828b-af5902ac7a52",
+      "from": [
+        -8,
+        1,
+        -8
+      ],
+      "to": [
+        -7,
+        15,
+        7
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            61.0,
+            16.0,
+            62.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            30.0,
+            46.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            61.0,
+            16.0,
+            46.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glass_bar_cabinet_single_element1",
+      "type": "cube",
+      "uuid": "4c09219f-515b-5d65-a794-f8849115bb07",
+      "from": [
+        -8,
+        0,
+        7
+      ],
+      "to": [
+        8,
+        16,
+        8
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            63.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            63.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            63.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            32.0,
+            16.0,
+            33.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glass_bar_cabinet_single_element2",
+      "type": "cube",
+      "uuid": "4ece39d3-f1fd-50cc-b03c-2b122c96a340",
+      "from": [
+        -8,
+        0,
+        -8
+      ],
+      "to": [
+        8,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            63.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            16.0,
+            62.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            62.0,
+            16.0,
+            63.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            62.0,
+            16.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            48.0,
+            0.0,
+            63.0,
+            16.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            48.0,
+            0.0,
+            63.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glass_bar_cabinet_single_element3",
+      "type": "cube",
+      "uuid": "54c55479-5ea6-5aea-9b18-40c848a6c08d",
+      "from": [
+        -7,
+        1,
+        -6
+      ],
+      "to": [
+        7,
+        15,
+        -6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            45.0,
+            30.0,
+            59.0,
+            44.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glass_bar_cabinet_single_element4",
+      "type": "cube",
+      "uuid": "13ddda5c-1695-5a01-b7b0-ae3842081983",
+      "from": [
+        7,
+        1,
+        -8
+      ],
+      "to": [
+        8,
+        15,
+        7
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            61.0,
+            16.0,
+            62.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            30.0,
+            46.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            61.0,
+            16.0,
+            46.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "glass_bar_cabinet_single_element5",
+      "type": "cube",
+      "uuid": "4ccaaff4-1c6e-5b61-92b7-bffbe5d41c9d",
+      "from": [
+        -8,
+        15,
+        -8
+      ],
+      "to": [
+        8,
+        16,
+        7
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            63.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            62.0,
+            16.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            63.0,
+            16.0,
+            64.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            62.0,
+            16.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            63.0,
+            0.0,
+            48.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            48.0,
+            16.0,
+            63.0,
+            0.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "6167ed53-8fd6-5288-92ae-7b67897e76f4",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "f448c81a-ca1f-5845-828b-af5902ac7a52",
+        "4c09219f-515b-5d65-a794-f8849115bb07",
+        "4ece39d3-f1fd-50cc-b03c-2b122c96a340",
+        "54c55479-5ea6-5aea-9b18-40c848a6c08d",
+        "13ddda5c-1695-5a01-b7b0-ae3842081983",
+        "4ccaaff4-1c6e-5b61-92b7-bffbe5d41c9d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "glass_bar_cabinet.png",
+      "id": "0",
+      "uuid": "1a50e0db-9159-52fe-a1e7-315f3ab16390",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA1VJREFUeJztmU9u2kAUxj9XXkQRCJQqaWqJbqhFltlk0ZyBXRKpt+g6+1ygWfQMHACpPUD/LCohK91gIbKoJTeAQrBsoezcRTN0AGN73mAGgn8rGPjG7z2NZ95nax/q9bDruqBQNQwAAFWvEha73nVd3Ps+bZanxMn6JaBRhU+x6+z720oltdYLAgweHqbGRPTLpOs4OKnVUq/C34MBAGCvWATAFQD4l1ipUIAXBJFi9ps/Hkf+nqTPiq7rYkhchS/4L0nBxyWfRr+OTBUgTfDF3d2Fv21a8sBMAbaRvACqA1BNXgDVAahm7hhMIukY3DTmjsG4BP3xOPEYjNOvI5NOkA8+qQhRpNVnRfD4SNJNCjDb24siq6eiARj6Pgo7OyS9XjWMiTMShVlKql4lLHbt1DTDvWIxtZlgS+3N/j6Gvg+q9urLZ0LYQNsdAQCuL+okPXOBzVZLe2eaoZ7w/8w4PnhFtvIAcGqaIdUGN1stDQB+dDqasgIsAxkbzMgbIdUBqCYvgOoAVJMXQHUAqskLoDoA1Wx9ATa6EwToNpgxKYDsRKI0LDtknx0vQKVUgOPFv1eolP4/cbq+qEvZYIYOyPlpKkdGee4zPxYFc4JHRhmfvn0Vul7bHeH9cW3OgOnMHopSNQwMbZukZVAdodXvhaJafsXx6FXDIL3f77ouTmo1fGw2hZO4cRxcAVMBUZIS0f66vY0c13/aNvmhBiX5KLJOPg79e6dDEt84DvWaUzQsm5yAjJahvA+I2piy0JZfHkSOKy/Aqhjd9yPHt6YAW78CFpEXQNWFWVeXtdbq9yIbIIayAiS1vcvQpukRnvUK4JPnjRTPUjo5Cqw3pzhBhqhWpufIea6Qe3CAtpGx+zJpd14E7+sblh1SN1M2D+mRGPVemk1a1MgsKprMPGvTCKVZEW13NLXhOV5AOk34edaiALKeXgblT4VFPP3s/V4pFUj7EK9RvgJE9pPLs/O5W+Dy7Fz4mvw8ygsgwp+7u1RjIvNsVAGyYKMK8PrwMNUYZZ6VwB91lEbI6vdC/vl+w7JD2XlWsgJYkPyZLXt+AxvSB/DHXNTrMNVkXgD+mJNdAVlAaoRm3+zGwfx6lJ9vWHaY1tMvupbjBULzpL1WTk7OdvAX4ujrqetMkXUAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

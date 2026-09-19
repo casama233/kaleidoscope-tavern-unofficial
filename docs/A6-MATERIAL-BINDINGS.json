@@ -1,0 +1,394 @@
+[
+  {
+    "id": "bar_cabinet_single",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/single.json",
+    "original_elements": 5,
+    "geometry": "RP/models/entity/bar_cabinet_single.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "bar_cabinet_left",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/left.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/bar_cabinet_left.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "bar_cabinet_middle",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/middle.json",
+    "original_elements": 3,
+    "geometry": "RP/models/entity/bar_cabinet_middle.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "bar_cabinet_right",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/right.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/bar_cabinet_right.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "glass_bar_cabinet_single",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/glass_bar_cabinet_single.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_glass_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "glass_bar_cabinet_left",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/left.json",
+    "original_elements": 5,
+    "geometry": "RP/models/entity/glass_bar_cabinet_left.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_glass_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "glass_bar_cabinet_middle",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/middle.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/glass_bar_cabinet_middle.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_glass_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "glass_bar_cabinet_right",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/right.json",
+    "original_elements": 5,
+    "geometry": "RP/models/entity/glass_bar_cabinet_right.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_glass_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "cellar_cabinet_single",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/single.json",
+    "original_elements": 7,
+    "geometry": "RP/models/entity/cellar_cabinet_single.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "cellar_cabinet_left",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/left.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/cellar_cabinet_left.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "cellar_cabinet_middle",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/middle.json",
+    "original_elements": 5,
+    "geometry": "RP/models/entity/cellar_cabinet_middle.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "cellar_cabinet_right",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/right.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/cellar_cabinet_right.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_bar_cabinet",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/bar_cabinet",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "tilted_rack",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json",
+    "original_elements": 5,
+    "geometry": "RP/models/entity/tilted_rack.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_deco_tilted_rack",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/deco/tilted_rack",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "circular_rack",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/circular_rack.json",
+    "original_elements": 9,
+    "geometry": "RP/models/entity/circular_rack.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_deco_circular_rack",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a6_block_deco_circular_rack",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/deco/circular_rack",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "glassware_holder",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/glassware_holder.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/glassware_holder.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_deco_glassware_holder",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a6_block_deco_glassware_holder",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "java_render_type": "unspecified",
+    "java_particle_reference": "kaleidoscope_tavern:block/deco/glassware_holder_particle",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vodka_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count1.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/vodka_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_vodka",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vodka",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vodka_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count2.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/vodka_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_vodka",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vodka",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vodka_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count3.json",
+    "original_elements": 12,
+    "geometry": "RP/models/entity/vodka_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_vodka",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vodka",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vodka_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count4.json",
+    "original_elements": 16,
+    "geometry": "RP/models/entity/vodka_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a6_block_brew_vodka",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vodka",
+    "world_display": "STATIC_CANDIDATE",
+    "container_contents": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  }
+]

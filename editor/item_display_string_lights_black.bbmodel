@@ -1,0 +1,525 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_string_lights_black",
+  "model_identifier": "kt_assets_a17.item_display_string_lights_black",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "item_display_string_lights_black_element0",
+      "type": "cube",
+      "uuid": "46979064-54f4-5724-a4bc-48c235db72b8",
+      "from": [
+        -1,
+        5,
+        4.9
+      ],
+      "to": [
+        8,
+        11,
+        4.9
+      ],
+      "origin": [
+        3.5,
+        8,
+        4.9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            6.0,
+            9.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            6.0,
+            9.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            3.5,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            3.5,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_black_element1",
+      "type": "cube",
+      "uuid": "a8f01275-85ba-5f00-9a71-83f6974c332b",
+      "from": [
+        -8,
+        3,
+        4.9
+      ],
+      "to": [
+        1,
+        9,
+        4.9
+      ],
+      "origin": [
+        -3.5,
+        6,
+        4.9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            6.0,
+            9.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            6.0,
+            9.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            3.5,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            3.5,
+            0.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_black_element2",
+      "type": "cube",
+      "uuid": "d69b2f44-305d-5012-8891-27b2b704d183",
+      "from": [
+        2,
+        6,
+        3.9000000000000004
+      ],
+      "to": [
+        5,
+        10,
+        5.9
+      ],
+      "origin": [
+        3.5,
+        8,
+        4.9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            7.0,
+            6.0,
+            11.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_black_element3",
+      "type": "cube",
+      "uuid": "ddcbf046-8db7-5690-88ea-ee0d82a7b93d",
+      "from": [
+        -5,
+        4,
+        3.9000000000000004
+      ],
+      "to": [
+        -2,
+        8,
+        5.9
+      ],
+      "origin": [
+        -3.5,
+        6,
+        4.9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            7.0,
+            6.0,
+            11.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            12.0,
+            5.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            12.0,
+            6.0,
+            14.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_black_element4",
+      "type": "cube",
+      "uuid": "0f5b308c-1578-5583-bfad-bc1122e19b6e",
+      "from": [
+        -8,
+        10,
+        5
+      ],
+      "to": [
+        8,
+        15,
+        5
+      ],
+      "origin": [
+        -8,
+        11,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "fe76660f-0dcd-505d-bdb5-c615bfb1f449",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "46979064-54f4-5724-a4bc-48c235db72b8",
+        "a8f01275-85ba-5f00-9a71-83f6974c332b",
+        "d69b2f44-305d-5012-8891-27b2b704d183",
+        "ddcbf046-8db7-5690-88ea-ee0d82a7b93d",
+        "0f5b308c-1578-5583-bfad-bc1122e19b6e"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "black.png",
+      "id": "0",
+      "uuid": "5b89d4ef-9f5f-59b0-8f36-7cdb5b468972",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAkUlEQVR4XrWPMQ6AIAxFGTmBJu5OXkEnFzcTz+DFOYmmhE+g0ComvoRA+K8tmHGaL/ORWLvtZ3OTZT3ympaXFMWAAqxaRkNeD6JvkSw1/Ieh7/wk7DVUhy6xeAYKhw7WWr+ccz6gHXeQJSfrCikt5JO5gzxK1SDh0RGDBNHBM0XBPDjp/3gGVEftHlAdNQxw5wZ1tXu+sPRCGQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_black.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_black.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/black.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

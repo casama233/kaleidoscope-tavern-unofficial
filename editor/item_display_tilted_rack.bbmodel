@@ -1,0 +1,525 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_tilted_rack",
+  "model_identifier": "kt_assets_a17.item_display_tilted_rack",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "item_display_tilted_rack_element0",
+      "type": "cube",
+      "uuid": "7a2a6e2e-67dc-5f08-a3bd-0b95f37a02f3",
+      "from": [
+        -8,
+        5.63535,
+        3.72279
+      ],
+      "to": [
+        8,
+        8.63535,
+        5.72279
+      ],
+      "origin": [
+        0,
+        8.7455,
+        2.37448
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            6.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            3.0,
+            2.0,
+            6.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            6.0,
+            2.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_tilted_rack_element1",
+      "type": "cube",
+      "uuid": "123008fe-276f-58f4-8183-8a0f15fc3bca",
+      "from": [
+        -8,
+        -0.01,
+        -2.25406
+      ],
+      "to": [
+        8,
+        0.99,
+        2.745939999999999
+      ],
+      "origin": [
+        0,
+        1.39,
+        0.24593999999999916
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            22.0,
+            19.0,
+            27.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            19.0,
+            22.0,
+            18.0,
+            27.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            27.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_tilted_rack_element2",
+      "type": "cube",
+      "uuid": "b6e01d61-6044-581c-b9ba-cac4c9649234",
+      "from": [
+        4,
+        0.26401,
+        4.48784
+      ],
+      "to": [
+        6,
+        9.26401,
+        4.48784
+      ],
+      "origin": [
+        0,
+        6.76401,
+        7.98784
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_tilted_rack_element3",
+      "type": "cube",
+      "uuid": "fb0b812e-6b50-5b09-871d-1f9938d320b8",
+      "from": [
+        -8,
+        -1.02314,
+        3.5196299999999994
+      ],
+      "to": [
+        8,
+        6.97686,
+        3.5196299999999994
+      ],
+      "origin": [
+        5,
+        3.57686,
+        5.519629999999999
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            12.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            12.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_tilted_rack_element4",
+      "type": "cube",
+      "uuid": "2ece989c-1596-550d-bb67-59cc2728580d",
+      "from": [
+        -6,
+        0.26401,
+        4.48784
+      ],
+      "to": [
+        -4,
+        9.26401,
+        4.48784
+      ],
+      "origin": [
+        0,
+        6.76401,
+        7.98784
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "9d455524-2153-5149-8acc-9e32ff9fee2c",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "7a2a6e2e-67dc-5f08-a3bd-0b95f37a02f3",
+        "123008fe-276f-58f4-8183-8a0f15fc3bca",
+        "b6e01d61-6044-581c-b9ba-cac4c9649234",
+        "fb0b812e-6b50-5b09-871d-1f9938d320b8",
+        "2ece989c-1596-550d-bb67-59cc2728580d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "tilted_rack.png",
+      "id": "0",
+      "uuid": "198b5db0-cdd6-5f97-8e59-05030ed01b41",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3klEQVR4Xu2WQQoCMQxF5xBd9wy9Sg/jRtC9CxHxHi7EI4l4i8ofCGSKtW0mGIQ+CAMf8vub6TCdpoE1McYUQhAVenO/bmDkvRcVesnneL4kFPduQmsC4gBaPJ6vhMr1KtiFxru83u4JletVaJy53os4gNYEMH5RAC3MA2Bx069gBFh9Bshgs93NJnh+05bdChPgxvvDaX5yU9JKAUp6M3wx2nFN46wOQAa0Uz7uT9qyuxzsZ5gH+F+0LiTinxqM8qtWa/HfOPlw7yao0TnXVeoBJKUSQPMMiAIMBta8AY3vpeltkKZiAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/tilted_rack.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/tilted_rack.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

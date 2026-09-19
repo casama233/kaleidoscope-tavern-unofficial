@@ -1,0 +1,36 @@
+{
+  "batch": "A11",
+  "focus": "Fill remaining visual-gap scope that can be advanced without new upstream art acquisition.",
+  "new_upstream_source_files": 0,
+  "new_main_pack_geometries": 0,
+  "new_main_pack_original_png": 0,
+  "pose_overlay_geometry_files": 40,
+  "pose_overlay_appearance_bindings": 55,
+  "pose_contexts_supported": [
+    "gui",
+    "ground",
+    "fixed",
+    "head",
+    "firstperson_righthand",
+    "firstperson_lefthand",
+    "thirdperson_righthand",
+    "thirdperson_lefthand"
+  ],
+  "new_helper_functions": [
+    "pose_all.mcfunction",
+    "pose_cabinets.mcfunction",
+    "pose_cocktails.mcfunction",
+    "pose_misc.mcfunction",
+    "pose_racks.mcfunction",
+    "pose_sofa_palette.mcfunction",
+    "pose_trellis.mcfunction"
+  ],
+  "remaining_blocked_art_categories": [
+    "Other furniture",
+    "Lighting and incense",
+    "Paintings and boards"
+  ],
+  "blocked_reason": "Current local upstream source set does not yet include the original model/texture files for those families; this batch does not invent stand-in art.",
+  "engine_test": "NOT_RUN",
+  "gameplay": "NONE"
+}

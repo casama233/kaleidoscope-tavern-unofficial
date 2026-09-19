@@ -1,0 +1,252 @@
+Compiled from "ModParticles.java"
+public interface com.github.ysbbbbbb.kaleidoscopetavern.init.ModParticles {
+  public static final net.neoforged.neoforge.registries.DeferredRegister<net.minecraft.core.particles.ParticleType<?>> PARTICLES;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> WATER_TAP_DRIP;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> LAVA_TAP_DRIP;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> SAKURA_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> PINE_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> GINKGO_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> SPORE_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> CATNIP_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> SNOW_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> BUTTERFLY_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> FIREFLY_INCENSE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> PINE_INCENSE_LARGE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> GINKGO_INCENSE_LARGE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> CATNIP_INCENSE_LARGE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> SNOW_INCENSE_LARGE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> BUTTERFLY_INCENSE_LARGE_PARTICLE;
+
+  public static final java.util.function.Supplier<net.minecraft.core.particles.SimpleParticleType> FIREFLY_INCENSE_LARGE_PARTICLE;
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$15();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$14();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$13();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$12();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$11();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$10();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$9();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$8();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$7();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$6();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$5();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$4();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$3();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$2();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_0
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$1();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_1
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  private static net.minecraft.core.particles.SimpleParticleType lambda$static$0();
+    Code:
+       0: new           #1                  // class net/minecraft/core/particles/SimpleParticleType
+       3: dup
+       4: iconst_1
+       5: invokespecial #3                  // Method net/minecraft/core/particles/SimpleParticleType."<init>":(Z)V
+       8: areturn
+
+  static {};
+    Code:
+       0: getstatic     #7                  // Field net/minecraft/core/registries/Registries.PARTICLE_TYPE:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #15                 // String kaleidoscope_tavern
+       5: invokestatic  #17                 // Method net/neoforged/neoforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister;
+       8: putstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      11: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      14: ldc           #29                 // String water_tap_drip
+      16: invokedynamic #31,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      21: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      24: putstatic     #39                 // Field WATER_TAP_DRIP:Ljava/util/function/Supplier;
+      27: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      30: ldc           #43                 // String lava_tap_drip
+      32: invokedynamic #45,  0             // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      37: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      40: putstatic     #46                 // Field LAVA_TAP_DRIP:Ljava/util/function/Supplier;
+      43: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      46: ldc           #49                 // String sakura_incense
+      48: invokedynamic #51,  0             // InvokeDynamic #2:get:()Ljava/util/function/Supplier;
+      53: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      56: putstatic     #52                 // Field SAKURA_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+      59: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      62: ldc           #55                 // String pine_incense
+      64: invokedynamic #57,  0             // InvokeDynamic #3:get:()Ljava/util/function/Supplier;
+      69: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      72: putstatic     #58                 // Field PINE_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+      75: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      78: ldc           #61                 // String ginkgo_incense
+      80: invokedynamic #63,  0             // InvokeDynamic #4:get:()Ljava/util/function/Supplier;
+      85: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      88: putstatic     #64                 // Field GINKGO_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+      91: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      94: ldc           #67                 // String spore_incense
+      96: invokedynamic #69,  0             // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+     101: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     104: putstatic     #70                 // Field SPORE_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+     107: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     110: ldc           #73                 // String catnip_incense
+     112: invokedynamic #75,  0             // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+     117: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     120: putstatic     #76                 // Field CATNIP_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+     123: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     126: ldc           #79                 // String snow_incense
+     128: invokedynamic #81,  0             // InvokeDynamic #7:get:()Ljava/util/function/Supplier;
+     133: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     136: putstatic     #82                 // Field SNOW_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+     139: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     142: ldc           #85                 // String butterfly_incense
+     144: invokedynamic #87,  0             // InvokeDynamic #8:get:()Ljava/util/function/Supplier;
+     149: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     152: putstatic     #88                 // Field BUTTERFLY_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+     155: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     158: ldc           #91                 // String firefly_incense
+     160: invokedynamic #93,  0             // InvokeDynamic #9:get:()Ljava/util/function/Supplier;
+     165: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     168: putstatic     #94                 // Field FIREFLY_INCENSE_PARTICLE:Ljava/util/function/Supplier;
+     171: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     174: ldc           #97                 // String pine_incense_large
+     176: invokedynamic #99,  0             // InvokeDynamic #10:get:()Ljava/util/function/Supplier;
+     181: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     184: putstatic     #100                // Field PINE_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     187: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     190: ldc           #103                // String ginkgo_incense_large
+     192: invokedynamic #105,  0            // InvokeDynamic #11:get:()Ljava/util/function/Supplier;
+     197: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     200: putstatic     #106                // Field GINKGO_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     203: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     206: ldc           #109                // String catnip_incense_large
+     208: invokedynamic #111,  0            // InvokeDynamic #12:get:()Ljava/util/function/Supplier;
+     213: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     216: putstatic     #112                // Field CATNIP_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     219: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     222: ldc           #115                // String snow_incense_large
+     224: invokedynamic #117,  0            // InvokeDynamic #13:get:()Ljava/util/function/Supplier;
+     229: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     232: putstatic     #118                // Field SNOW_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     235: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     238: ldc           #121                // String butterfly_incense_large
+     240: invokedynamic #123,  0            // InvokeDynamic #14:get:()Ljava/util/function/Supplier;
+     245: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     248: putstatic     #124                // Field BUTTERFLY_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     251: getstatic     #23                 // Field PARTICLES:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     254: ldc           #127                // String firefly_incense_large
+     256: invokedynamic #129,  0            // InvokeDynamic #15:get:()Ljava/util/function/Supplier;
+     261: invokevirtual #35                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     264: putstatic     #130                // Field FIREFLY_INCENSE_LARGE_PARTICLE:Ljava/util/function/Supplier;
+     267: return
+}

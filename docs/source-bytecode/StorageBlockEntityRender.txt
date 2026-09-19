@@ -1,0 +1,102 @@
+Compiled from "StorageBlockEntityRender.java"
+public abstract class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.StorageBlockEntityRender<T extends com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.StorageBlockEntity> implements net.minecraft.client.renderer.blockentity.BlockEntityRenderer<T> {
+  protected final net.minecraft.client.renderer.block.BlockRenderDispatcher blockRender;
+
+  protected com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.StorageBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #7                  // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.getBlockRenderDispatcher:()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+       9: putfield      #13                 // Field blockRender:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+      12: return
+
+  protected void applyFacingRotation(net.minecraft.core.Direction, com.mojang.blaze3d.vertex.PoseStack);
+    Code:
+       0: ldc           #19                 // float 180.0f
+       2: aload_1
+       3: invokevirtual #20                 // Method net/minecraft/core/Direction.get2DDataValue:()I
+       6: i2f
+       7: ldc           #26                 // float 90.0f
+       9: fmul
+      10: fsub
+      11: fstore_3
+      12: aload_2
+      13: ldc2_w        #27                 // double 0.5d
+      16: dconst_0
+      17: ldc2_w        #27                 // double 0.5d
+      20: invokevirtual #29                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      23: aload_2
+      24: getstatic     #35                 // Field com/mojang/math/Axis.YP:Lcom/mojang/math/Axis;
+      27: fload_3
+      28: invokeinterface #41,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      33: invokevirtual #45                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      36: aload_2
+      37: ldc2_w        #49                 // double -0.5d
+      40: dconst_0
+      41: ldc2_w        #49                 // double -0.5d
+      44: invokevirtual #29                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      47: return
+
+  protected void renderStack(net.minecraft.world.item.ItemStack, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int, double, double, double, float, double, double);
+    Code:
+       0: aload_1
+       1: invokevirtual #51                 // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+       4: ifne          31
+       7: aload_1
+       8: invokevirtual #57                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      11: astore        18
+      13: aload         18
+      15: instanceof    #61                 // class net/minecraft/world/item/BlockItem
+      18: ifeq          31
+      21: aload         18
+      23: checkcast     #61                 // class net/minecraft/world/item/BlockItem
+      26: astore        17
+      28: goto          32
+      31: return
+      32: aload_2
+      33: invokevirtual #63                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      36: aload         17
+      38: invokevirtual #66                 // Method net/minecraft/world/item/BlockItem.getBlock:()Lnet/minecraft/world/level/block/Block;
+      41: invokevirtual #70                 // Method net/minecraft/world/level/block/Block.defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      44: astore        18
+      46: aload_2
+      47: dload         6
+      49: dload         8
+      51: dload         10
+      53: invokevirtual #29                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      56: aload_2
+      57: getstatic     #35                 // Field com/mojang/math/Axis.YP:Lcom/mojang/math/Axis;
+      60: dload         13
+      62: d2f
+      63: invokeinterface #41,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      68: invokevirtual #45                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      71: aload_2
+      72: getstatic     #76                 // Field com/mojang/math/Axis.XP:Lcom/mojang/math/Axis;
+      75: dload         15
+      77: d2f
+      78: invokeinterface #41,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      83: invokevirtual #45                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      86: aload_2
+      87: fload         12
+      89: fload         12
+      91: fload         12
+      93: invokevirtual #79                 // Method com/mojang/blaze3d/vertex/PoseStack.scale:(FFF)V
+      96: aload_2
+      97: ldc2_w        #49                 // double -0.5d
+     100: dconst_0
+     101: ldc2_w        #49                 // double -0.5d
+     104: invokevirtual #29                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+     107: aload_0
+     108: getfield      #13                 // Field blockRender:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+     111: aload         18
+     113: aload_2
+     114: aload_3
+     115: iload         4
+     117: iload         5
+     119: invokevirtual #83                 // Method net/minecraft/client/renderer/block/BlockRenderDispatcher.renderSingleBlock:(Lnet/minecraft/world/level/block/state/BlockState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+     122: aload_2
+     123: invokevirtual #89                 // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     126: return
+}

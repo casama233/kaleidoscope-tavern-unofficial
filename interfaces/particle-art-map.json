@@ -1,0 +1,434 @@
+{
+  "particles": [
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/butterfly_incense.json",
+      "particle_id": "kt_assets_a17:butterfly_incense",
+      "textures": [
+        "kaleidoscope_tavern:butterfly"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/butterfly_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/butterfly_incense_large.json",
+      "particle_id": "kt_assets_a17:butterfly_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:butterfly_large/1",
+        "kaleidoscope_tavern:butterfly_large/2",
+        "kaleidoscope_tavern:butterfly_large/3"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "derived_sheet": {
+        "file": "RP/textures/kt_derived/a17/particle_butterfly_incense_large.png",
+        "source_images": [
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/1.png",
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/2.png",
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/3.png"
+        ],
+        "resampled": false
+      },
+      "frame_mode": "AGE_DIV_5_LOOP",
+      "behavior_source": "docs/source-bytecode/ButterflyIncenseLargeParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": [
+          500,
+          1000
+        ],
+        "gravity_field": 0.01,
+        "friction": 1,
+        "size_multiplier": [
+          0.6,
+          1.2
+        ],
+        "offset_y": -0.125
+      },
+      "parity_limits": [
+        "Vanilla base quad size and inherited particle acceleration require runtime inputs; preview defaults are not source-equivalence claims."
+      ],
+      "file": "RP/particles/butterfly_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/1.png",
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/2.png",
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/butterfly_large/3.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/catnip_incense.json",
+      "particle_id": "kt_assets_a17:catnip_incense",
+      "textures": [
+        "kaleidoscope_tavern:catnip"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/catnip_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/catnip.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/catnip_incense_large.json",
+      "particle_id": "kt_assets_a17:catnip_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:catnip_large"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseSuspendedParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": [
+          500,
+          1000
+        ],
+        "gravity_field": 0.01,
+        "friction": 1,
+        "size_multiplier": [
+          0.6,
+          1.2
+        ],
+        "offset_y": -0.125
+      },
+      "parity_limits": [
+        "Vanilla base quad size and inherited particle acceleration require runtime inputs; preview defaults are not source-equivalence claims."
+      ],
+      "file": "RP/particles/catnip_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/catnip_large.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/firefly_incense.json",
+      "particle_id": "kt_assets_a17:firefly_incense",
+      "textures": [
+        "kaleidoscope_tavern:firefly"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/firefly_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/firefly.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/firefly_incense_large.json",
+      "particle_id": "kt_assets_a17:firefly_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:firefly_large"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/FireflyIncenseLargeParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/firefly_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/firefly_large.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/ginkgo_incense.json",
+      "particle_id": "kt_assets_a17:ginkgo_incense",
+      "textures": [
+        "kaleidoscope_tavern:ginkgo"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/ginkgo_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/ginkgo.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/ginkgo_incense_large.json",
+      "particle_id": "kt_assets_a17:ginkgo_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:ginkgo_large"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseSuspendedParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": [
+          500,
+          1000
+        ],
+        "gravity_field": 0.01,
+        "friction": 1,
+        "size_multiplier": [
+          0.6,
+          1.2
+        ],
+        "offset_y": -0.125
+      },
+      "parity_limits": [
+        "Vanilla base quad size and inherited particle acceleration require runtime inputs; preview defaults are not source-equivalence claims."
+      ],
+      "file": "RP/particles/ginkgo_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/ginkgo_large.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/lava_tap_drip.json",
+      "particle_id": "kt_assets_a17:lava_tap_drip",
+      "textures": [
+        "minecraft:drip_hang"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "native_texture_dependency": {
+        "java": "minecraft:drip_hang",
+        "bedrock_atlas": "textures/particle/particles",
+        "uv": [
+          8,
+          56,
+          8,
+          8
+        ],
+        "reference": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/particles/water_drip.json",
+        "art_equivalence": "CROSS_EDITION_NATIVE_SUBSTITUTION_NOT_PIXEL_EQUIVALENCE"
+      },
+      "behavior_source": "docs/source-bytecode/TapDripParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": 18,
+        "gravity_multiplier": 0.02,
+        "velocity_multiplier": 0.02,
+        "emits_falling_drip_every_tick": true
+      },
+      "parity_limits": [
+        "Uses target-edition native sprite. Falling native child emission and fluid colors are runtime adapter work; this is the hanging drop inspection."
+      ],
+      "file": "RP/particles/lava_tap_drip.json",
+      "texture_files": []
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/pine_incense.json",
+      "particle_id": "kt_assets_a17:pine_incense",
+      "textures": [
+        "kaleidoscope_tavern:pine"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/pine_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/pine_incense_large.json",
+      "particle_id": "kt_assets_a17:pine_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:pine_large/1",
+        "kaleidoscope_tavern:pine_large/2",
+        "kaleidoscope_tavern:pine_large/3"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "derived_sheet": {
+        "file": "RP/textures/kt_derived/a17/particle_pine_incense_large.png",
+        "source_images": [
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/1.png",
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/2.png",
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/3.png"
+        ],
+        "resampled": false
+      },
+      "frame_mode": "RANDOM_ON_SPAWN",
+      "behavior_source": "docs/source-bytecode/IncenseSuspendedParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": [
+          500,
+          1000
+        ],
+        "gravity_field": 0.01,
+        "friction": 1,
+        "size_multiplier": [
+          0.6,
+          1.2
+        ],
+        "offset_y": -0.125
+      },
+      "parity_limits": [
+        "Vanilla base quad size and inherited particle acceleration require runtime inputs; preview defaults are not source-equivalence claims."
+      ],
+      "file": "RP/particles/pine_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/1.png",
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/2.png",
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/pine_large/3.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/sakura_incense.json",
+      "particle_id": "kt_assets_a17:sakura_incense",
+      "textures": [
+        "kaleidoscope_tavern:sakura"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/sakura_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/sakura.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/snow_incense.json",
+      "particle_id": "kt_assets_a17:snow_incense",
+      "textures": [
+        "kaleidoscope_tavern:snow_incense"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/snow_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/snow_incense.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/snow_incense_large.json",
+      "particle_id": "kt_assets_a17:snow_incense_large",
+      "textures": [
+        "kaleidoscope_tavern:snow_incense_large/1",
+        "kaleidoscope_tavern:snow_incense_large/2"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "derived_sheet": {
+        "file": "RP/textures/kt_derived/a17/particle_snow_incense_large.png",
+        "source_images": [
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/snow_incense_large/1.png",
+          "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/snow_incense_large/2.png"
+        ],
+        "resampled": false
+      },
+      "frame_mode": "RANDOM_ON_SPAWN",
+      "behavior_source": "docs/source-bytecode/IncenseSuspendedParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": [
+          500,
+          1000
+        ],
+        "gravity_field": 0.01,
+        "friction": 1,
+        "size_multiplier": [
+          0.6,
+          1.2
+        ],
+        "offset_y": -0.125
+      },
+      "parity_limits": [
+        "Vanilla base quad size and inherited particle acceleration require runtime inputs; preview defaults are not source-equivalence claims."
+      ],
+      "file": "RP/particles/snow_incense_large.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/snow_incense_large/1.png",
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/snow_incense_large/2.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/spore_incense.json",
+      "particle_id": "kt_assets_a17:spore_incense",
+      "textures": [
+        "kaleidoscope_tavern:spore"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "frame_mode": "SINGLE",
+      "behavior_source": "docs/source-bytecode/IncenseParticle.txt",
+      "parity_limits": [
+        "Molang and Java RNG sequences differ; transition law and source constants preserved.",
+        "Emitter inputs/emission cadence and in-engine 20-Hz behavior require runtime testing."
+      ],
+      "file": "RP/particles/spore_incense.json",
+      "texture_files": [
+        "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/particle/spore.png"
+      ]
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/particles/water_tap_drip.json",
+      "particle_id": "kt_assets_a17:water_tap_drip",
+      "textures": [
+        "minecraft:drip_hang"
+      ],
+      "engine_accepted": false,
+      "runtime_emission_connected": false,
+      "native_texture_dependency": {
+        "java": "minecraft:drip_hang",
+        "bedrock_atlas": "textures/particle/particles",
+        "uv": [
+          8,
+          56,
+          8,
+          8
+        ],
+        "reference": "https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/particles/water_drip.json",
+        "art_equivalence": "CROSS_EDITION_NATIVE_SUBSTITUTION_NOT_PIXEL_EQUIVALENCE"
+      },
+      "behavior_source": "docs/source-bytecode/TapDripParticle.txt",
+      "source_parameters": {
+        "lifetime_ticks": 18,
+        "gravity_multiplier": 0.02,
+        "velocity_multiplier": 0.02,
+        "emits_falling_drip_every_tick": true
+      },
+      "parity_limits": [
+        "Uses target-edition native sprite. Falling native child emission and fluid colors are runtime adapter work; this is the hanging drop inspection."
+      ],
+      "file": "RP/particles/water_tap_drip.json",
+      "texture_files": []
+    }
+  ],
+  "note": "All original sprite references accounted. Native substitutions and runtime-dependent base behavior explicitly listed.",
+  "engine_accepted": false
+}

@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_poppy_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_poppy_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_poppy_top_element0",
+      "type": "cube",
+      "uuid": "f0faca47-6717-547f-8b2b-1080db4c2636",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_poppy_top_element1",
+      "type": "cube",
+      "uuid": "fd3bb0c8-762c-5d7f-b650-d49afbe52f0f",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_poppy_top_element2",
+      "type": "cube",
+      "uuid": "fa5eb7b0-e0ae-52e4-bbc8-3919f59f450e",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_poppy_top_element3",
+      "type": "cube",
+      "uuid": "3c7a97a0-7c0a-5db2-8203-2621c72dfea0",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_poppy_top_element4",
+      "type": "cube",
+      "uuid": "c7aa5892-3738-574b-8927-ccc4c5a23600",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_poppy_top_element5",
+      "type": "cube",
+      "uuid": "a0920904-aeba-55ec-9676-f6646f05885b",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "501a7e6d-35af-5004-b231-440566daec90",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "f0faca47-6717-547f-8b2b-1080db4c2636",
+        "fd3bb0c8-762c-5d7f-b650-d49afbe52f0f",
+        "fa5eb7b0-e0ae-52e4-bbc8-3919f59f450e",
+        "3c7a97a0-7c0a-5db2-8203-2621c72dfea0",
+        "c7aa5892-3738-574b-8927-ccc4c5a23600",
+        "a0920904-aeba-55ec-9676-f6646f05885b"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_poppy_top.png",
+      "id": "0",
+      "uuid": "d1fe83c9-8c0b-5343-938a-c10464ecae74",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAEq0lEQVR4nO1Zb2gbZRj/vb1LYprRSZdWnFCSZneSNJTACLPKYAEN+EVkU4SCSEEJ7NM+bNhW/CRrdeuHfpBBcVBEKIjdkMEYBCGDgVVqIRSbsrt0if0g2KbVRdN4l7u+fmgv5vL3mrvZTfaDI7zvvc/7Ps9zz9835JWQh3Y5WdxZSBO0Ae70y/SgNOK97+uexQ9z1NZrQyGlIBsXymsSnJ8CQCysQJgT2+KzEdjKwcDrrx5ImJU73xH7kc4DHSj/tVN3PsH56UhOxcwiRSxM4Yny1BVg8fltikEXg5v5bSykunFsfz0/zFErlMHWm3Q4XU2JpGLB7Lk1GPGqmM0wuq/Muzl6e/cBzvScxlkAywUVnihP7W5qmSXUKMDhdIF12lsSWq2E2QwDADrBhDmRzEd5irV7AIB5nw+zGQYjUJHg/HTQxeBY8mdTiuioHBgVnnXaa6xk4uKHmL820xYTW6EgTasPMehiyv6uIRsXyNSaSm6d6kc2LpCIuEqycYGMeFUsF9S2zqtEXRdoB+NTn7VNu1xQcbarG909bkSSd+t+0UrL0NwgEl99NDGgHVz75DL+yP8JQgj6+/rAdHRAzGYxdmUSE5dGMX7104a0sbCCN34U8GL+uZbn8MMclXOwNgbki4rpjc5//FHDd82EB4CZRRYjPp8u9TWCMCeSBOen4Pw0IlpkAZ12xuw+uPv1DSws/QTO4wVAAezxJq5ngF1g7MpkXboE56exsIKllKOc4prhoo+hWlrcCgWp2SDIAgDLmLemM++ca4tu0MVAzqkYCkhAsvX6qTWVXH3NTbW0aBaWxYDJS6PgvF4AwMZmDr09brx1PtaSbiggwdVrw8p0ytBX8ER5ej0t4D75DbdO9QOiOb5ZAFDUA1ezNRhr4eeNIMyJhB/mDDPgCrCYDjyL0kbzYs0oTFsALe2Z4TdfXEc68wAAwYl9SwCAtUwWFBRjE5eb7mO0tF2ZTpGtUJCe7CWGgmYr6BSgVXetiiGlKOsqwZIk4e0P3kdJkgAANoejPK+NS5JUnq+GnCOYzTCIGGR6KCBhdpE1vL4ZOqonpGIBSlFu+lQLr/3aHI6ysNr42y+/wuTouG5tNbQewBPlDbmCnCOwIgUCDVyg3Tq/WsCSJOHN995tSRcRV8mWK0iXCyqM5PdsXCBWdYM1FnAY2AoF6c38NrR+ANiLCZ4oTysDpGYhnihP5Zw11wLE7IWIVdC6u+4eN4IDGwD2Ap6mgPubL2B7M4eTvTKWNuymu0ANj40CgOY3Qlr1d4I5apn/A1Ux4NxLx6ki74K113pGo/kbP/xqGTPCnEgGLgRodXqLhRXMLMJy4YH9GKAVQjtFFbJKsVNUa55G81ZjZTpFBi4EarJBLKxYLjxQZQF2hsC53xgV5T3hnHUapaKswmlnymusRnVZbPVFaCV0G4f6uijwb3e4Y0DA5Hr+0GOHGegswHf8SN1Fmw//Rs/RZ+q+S67nrefqP4ROAY18WinRR+LvjwNqYgCg93vNz5u9e5KhU8BmXir7faed0cWAX3K1f2hYcZN02NAp4Hm38+A7pH+3ipdDgaEY8H+GoTqg0ter3z/FUzzZ+AeeHzxDbzZViAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_poppy_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/poppy.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

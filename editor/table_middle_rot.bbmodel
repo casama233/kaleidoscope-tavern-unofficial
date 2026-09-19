@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "table_middle_rot",
+  "model_identifier": "kt_assets_a12.table_middle_rot",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "table_middle_rot_element0",
+      "type": "cube",
+      "uuid": "2534b074-d1ff-5db5-b35c-75a01de8d637",
+      "from": [
+        -8,
+        13,
+        -8
+      ],
+      "to": [
+        8,
+        16,
+        8
+      ],
+      "origin": [
+        0,
+        14.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            18.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            18.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "89973a37-06e5-5381-b98c-70f7119f9c9f",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "2534b074-d1ff-5db5-b35c-75a01de8d637"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "table.png",
+      "id": "0",
+      "uuid": "a9dfaa1e-be4a-5744-a5b2-43092f46a64a",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABt0lEQVR4Xu2WwUrDQBCG+xLSo/TYgxd7yxvYi94sCoI3D4rgwdcQkeKD9CA+j0gRH2JlhC3Tn4Rkm4TsTP4PftpuyDTzdbu7k+n0KFjOpC2z2XFYLE5NplMB8mopnQmQIlIQp1buic+M/SSji+EXxPGy60OnVwG5Ny/pTYCF5iW9CLDQPD4f9pNMWdHcm9fvsZ9kqgrnFvxxehFgoXl8VuwnGV0sx5Q1r8exn2R0MUvpTIAUGvVROBazmE4E4NSyFuyHkERwcbGW2Mf5xXWQ6N4aIUVkQVkuz/4T3+sxfW2o4LNJtICXt3XY/vymC8BFxVpiHyjgdf0evr634e7haRcZi9fdcf/4HDYfn7sGV1c3oSiKvciYvscVOANGB84AmfLyi+vImL7HFShAGp7PT/ZS+hfAbSU1WG8oWgmo2mbqkpMAOQOIhPi5sQDcVlKD9YbiYAFeiPt+/Dy6RfBydev7oFOHHHREAo6TOnBRSw3WM4c0gdtb07gSgAecurgUgNO7Kq4FNBHhWkCTUAAFUAAFjE6AXNc7BQWMTQDKcCkgJe4EHBI3AtoE6xFCCCGEEEIIIYTkzh//xAES0hCDIwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle_rot.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle_rot.json"
+    ],
+    "source_model_not_modified": true,
+    "derived_assembly": null,
+    "source_warnings": [],
+    "java_cullface_recorded_not_implemented": [],
+    "java_display_recorded_not_applied": {},
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,99 @@
+Compiled from "GlasswareHolderBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.GlasswareHolderBlockEntityRender implements net.minecraft.client.renderer.blockentity.BlockEntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.GlasswareHolderBlockEntity> {
+  private final net.minecraft.client.renderer.block.BlockRenderDispatcher dispatcher;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.GlasswareHolderBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #7                  // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.getBlockRenderDispatcher:()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+       9: putfield      #13                 // Field dispatcher:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+      12: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.GlasswareHolderBlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #19                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/GlasswareHolderBlockEntity.getItems:()Lnet/neoforged/neoforge/items/ItemStackHandler;
+       4: astore        7
+       6: iconst_0
+       7: istore        8
+       9: iload         8
+      11: aload         7
+      13: invokevirtual #25                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      16: if_icmpge     150
+      19: aload         7
+      21: iload         8
+      23: invokevirtual #31                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      26: astore        9
+      28: aload         9
+      30: invokevirtual #35                 // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      33: ifne          144
+      36: aload         9
+      38: invokevirtual #41                 // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      41: astore        11
+      43: aload         11
+      45: instanceof    #45                 // class net/minecraft/world/item/BlockItem
+      48: ifeq          144
+      51: aload         11
+      53: checkcast     #45                 // class net/minecraft/world/item/BlockItem
+      56: astore        10
+      58: aload_3
+      59: invokevirtual #47                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      62: aload_3
+      63: ldc2_w        #52                 // double -0.25d
+      66: ldc2_w        #54                 // double 0.76d
+      69: ldc2_w        #56                 // double 0.75d
+      72: invokevirtual #58                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      75: aload_3
+      76: ldc2_w        #62                 // double 0.5d
+      79: iload         8
+      81: iconst_2
+      82: irem
+      83: i2d
+      84: dmul
+      85: dconst_0
+      86: ldc2_w        #62                 // double 0.5d
+      89: iload         8
+      91: iconst_2
+      92: idiv
+      93: i2d
+      94: dmul
+      95: invokevirtual #58                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      98: aload_3
+      99: getstatic     #64                 // Field com/mojang/math/Axis.XN:Lcom/mojang/math/Axis;
+     102: ldc           #70                 // float 180.0f
+     104: invokeinterface #71,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     109: invokevirtual #75                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     112: aload_0
+     113: getfield      #13                 // Field dispatcher:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+     116: aload         10
+     118: invokevirtual #79                 // Method net/minecraft/world/item/BlockItem.getBlock:()Lnet/minecraft/world/level/block/Block;
+     121: invokevirtual #83                 // Method net/minecraft/world/level/block/Block.defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+     124: aload_3
+     125: aload         4
+     127: iload         5
+     129: iload         6
+     131: getstatic     #89                 // Field net/neoforged/neoforge/client/model/data/ModelData.EMPTY:Lnet/neoforged/neoforge/client/model/data/ModelData;
+     134: invokestatic  #95                 // Method net/minecraft/client/renderer/RenderType.cutout:()Lnet/minecraft/client/renderer/RenderType;
+     137: invokevirtual #101                // Method net/minecraft/client/renderer/block/BlockRenderDispatcher.renderSingleBlock:(Lnet/minecraft/world/level/block/state/BlockState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/neoforged/neoforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;)V
+     140: aload_3
+     141: invokevirtual #107                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     144: iinc          8, 1
+     147: goto          9
+     150: return
+
+  public void render(net.minecraft.world.level.block.entity.BlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #20                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/GlasswareHolderBlockEntity
+       5: fload_2
+       6: aload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: invokevirtual #110                // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/GlasswareHolderBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      16: return
+}

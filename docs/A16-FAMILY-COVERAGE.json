@@ -1,0 +1,234 @@
+{
+  "batch": "A16",
+  "scope": "Pinned source families only; not full-project or engine completion",
+  "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "bar_stool": {
+    "expected_colors": [
+      "white",
+      "orange",
+      "magenta",
+      "light_blue",
+      "yellow",
+      "lime",
+      "pink",
+      "gray",
+      "light_gray",
+      "cyan",
+      "purple",
+      "blue",
+      "brown",
+      "green",
+      "red",
+      "black"
+    ],
+    "converted": 16,
+    "missing": [],
+    "models": [
+      {
+        "color": "white",
+        "id": "kt_assets_a14:bar_stool_white",
+        "editor": "editor/bar_stool_white.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A14"
+      },
+      {
+        "color": "orange",
+        "id": "kt_assets_a15:bar_stool_orange",
+        "editor": "editor/bar_stool_orange.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "magenta",
+        "id": "kt_assets_a15:bar_stool_magenta",
+        "editor": "editor/bar_stool_magenta.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "light_blue",
+        "id": "kt_assets_a15:bar_stool_light_blue",
+        "editor": "editor/bar_stool_light_blue.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "yellow",
+        "id": "kt_assets_a15:bar_stool_yellow",
+        "editor": "editor/bar_stool_yellow.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "lime",
+        "id": "kt_assets_a16:bar_stool_lime",
+        "editor": "editor/bar_stool_lime.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "pink",
+        "id": "kt_assets_a16:bar_stool_pink",
+        "editor": "editor/bar_stool_pink.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "gray",
+        "id": "kt_assets_a16:bar_stool_gray",
+        "editor": "editor/bar_stool_gray.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "light_gray",
+        "id": "kt_assets_a16:bar_stool_light_gray",
+        "editor": "editor/bar_stool_light_gray.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "cyan",
+        "id": "kt_assets_a14:bar_stool_cyan",
+        "editor": "editor/bar_stool_cyan.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A14"
+      },
+      {
+        "color": "purple",
+        "id": "kt_assets_a16:bar_stool_purple",
+        "editor": "editor/bar_stool_purple.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "blue",
+        "id": "kt_assets_a13:bar_stool_blue",
+        "editor": "editor/bar_stool_blue.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A13"
+      },
+      {
+        "color": "brown",
+        "id": "kt_assets_a14:bar_stool_brown",
+        "editor": "editor/bar_stool_brown.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A14"
+      },
+      {
+        "color": "green",
+        "id": "kt_assets_a16:bar_stool_green",
+        "editor": "editor/bar_stool_green.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "red",
+        "id": "kt_assets_a14:bar_stool_red",
+        "editor": "editor/bar_stool_red.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A14"
+      },
+      {
+        "color": "black",
+        "id": "kt_assets_a14:bar_stool_black",
+        "editor": "editor/bar_stool_black.bbmodel",
+        "geometry": "RP/models/entity/bar_stool_blue.geo.json",
+        "batch": "A14"
+      }
+    ]
+  },
+  "string_lights": {
+    "expected_designs": [
+      "colorless",
+      "white",
+      "orange",
+      "magenta",
+      "light_blue",
+      "yellow",
+      "lime",
+      "pink",
+      "gray",
+      "light_gray",
+      "cyan",
+      "purple",
+      "blue",
+      "brown",
+      "green",
+      "red",
+      "black"
+    ],
+    "converted": 8,
+    "missing": [
+      "orange",
+      "magenta",
+      "light_blue",
+      "yellow",
+      "lime",
+      "pink",
+      "light_gray",
+      "purple",
+      "green"
+    ],
+    "models": [
+      {
+        "color": "black",
+        "id": "kt_assets_a15:string_lights_black",
+        "editor": "editor/string_lights_black.bbmodel",
+        "geometry": "RP/models/entity/string_lights_black.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "blue",
+        "id": "kt_assets_a14:string_lights_blue",
+        "editor": "editor/string_lights_blue.bbmodel",
+        "geometry": "RP/models/entity/string_lights_blue.geo.json",
+        "batch": "A14"
+      },
+      {
+        "color": "brown",
+        "id": "kt_assets_a16:string_lights_brown",
+        "editor": "editor/string_lights_brown.bbmodel",
+        "geometry": "RP/models/entity/string_lights_brown.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "colorless",
+        "id": "kt_assets_a16:string_lights_colorless",
+        "editor": "editor/string_lights_colorless.bbmodel",
+        "geometry": "RP/models/entity/string_lights_colorless.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "cyan",
+        "id": "kt_assets_a16:string_lights_cyan",
+        "editor": "editor/string_lights_cyan.bbmodel",
+        "geometry": "RP/models/entity/string_lights_cyan.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "gray",
+        "id": "kt_assets_a16:string_lights_gray",
+        "editor": "editor/string_lights_gray.bbmodel",
+        "geometry": "RP/models/entity/string_lights_gray.geo.json",
+        "batch": "A16"
+      },
+      {
+        "color": "red",
+        "id": "kt_assets_a15:string_lights_red",
+        "editor": "editor/string_lights_red.bbmodel",
+        "geometry": "RP/models/entity/string_lights_red.geo.json",
+        "batch": "A15"
+      },
+      {
+        "color": "white",
+        "id": "kt_assets_a15:string_lights_white",
+        "editor": "editor/string_lights_white.bbmodel",
+        "geometry": "RP/models/entity/string_lights_white.geo.json",
+        "batch": "A15"
+      }
+    ]
+  },
+  "gameplay": "NONE",
+  "engine_acceptance": "NOT_RUN"
+}

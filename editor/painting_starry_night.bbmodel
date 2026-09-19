@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_starry_night",
+  "model_identifier": "kt_assets_a14.painting_starry_night",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_starry_night_element0",
+      "type": "cube",
+      "uuid": "debfb15b-d0db-5e0e-8f34-fcc4f101f303",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "86fa99eb-bc49-584f-8ae0-687af7c51b6f",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "debfb15b-d0db-5e0e-8f34-fcc4f101f303"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "starry_night.png",
+      "id": "0",
+      "uuid": "830285c6-5f00-585e-8739-97210cdb1cb5",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAlVJREFUOI2lkk9I03EYxj+LWfJz0rS5skJwLpyaDWFCVKNRHpJUTFke9DC8GSJBDOlkoUR/EJKkyENOiSBrIFQYZHO0Q6KzkJmSoWu/Sdnc2mRrjgrsMDeZBwt6j9/v+zzv53l54T9LAjBwpXodwB+KopAL2woSPf5QlEu3X0ukiY+n3gsUnNWQnScDwFRqx+Iy0N3WCUB+USV1LTp2xn7z3hdjbbAagB0JVwBtngxTqR0xEMPiMjAtRsgvqsTYYaauRYepxI4sXUpWRnIuUgCFXMA9MYIYOIzFZaCxPE6RppICGvL2pGMqtcNsK6aSXiwfDPzKztwkABh+foMnV2+hV8nof+vDsRjhKOnoDHICkZ9YXAYojovFQIyV7+FUgxfTAYIeK4/efEG9V0CvilM47SH2HRFIU0mxuOJi8WMgNQLA8nJ8D0M3ezB2mHFsvIeXVhl7uErmwd2El1aZfTlKOCRyXLnF4NmdXgCCHivOoUpiFQXMjC7gnhsBIGe/FoDiMxWcOHaA8S5bqoHulJFX/VYA6lp0APhWclFqm/FNf0WpzeVyU2ESfXxrhJO1Gpy2eoIeazK/XrUhaCpknBiOxQj9XXdZmOyjqjwrdYl6lYygJ05QW9WeFAA4FiM8Ng/S3dbJwmQfgl6dukR/KEptVTsAgl6Neu0djRmj1NyTce3HdQDKggKusWYaaj4xKx4CpW2TQCEXktN3iVomnW7One/BPTfC/EArZUGBqQkvDTUPmJrwsjZnSxJIALovnl6f//yNnI3rShzJ3+r+8Izknxq3qz96a+NSKBGMUwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/starry_night.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/starry_night.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": null,
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

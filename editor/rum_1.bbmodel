@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "rum_1",
+  "model_identifier": "kt_assets_a7.rum_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "rum_1_element0",
+      "type": "cube",
+      "uuid": "0c496384-76d7-55d3-9252-100ab9f35486",
+      "from": [
+        -1.5,
+        9,
+        -1.5
+      ],
+      "to": [
+        1.5,
+        14,
+        1.5
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            2.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            2.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            2.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            2.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            3.0,
+            9.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            2.0,
+            5.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "rum_1_element1",
+      "type": "cube",
+      "uuid": "3b24a34d-b7d8-5b31-8652-486a5ed0b2eb",
+      "from": [
+        -3.5,
+        0,
+        -2
+      ],
+      "to": [
+        3.5,
+        9,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8.0,
+            7.0,
+            12.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8.0,
+            7.0,
+            12.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            0.0,
+            16.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            5.0,
+            16.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "0dc0b191-3a07-51bf-a3e0-9ac68170d8d3",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "0c496384-76d7-55d3-9252-100ab9f35486",
+        "3b24a34d-b7d8-5b31-8652-486a5ed0b2eb"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "rum.png",
+      "id": "0",
+      "uuid": "dd037c52-0973-5aec-b571-4fcc91bac588",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA7UlEQVR4XqVRMQoCQQy0s1AsRC0sLW20UkGsre4XV9jYCn7AP/gCX2An1vY+QmxEEASryARmmds7jwMDwyaTZMgmtVoFuyyGBjyP6wBycW2h3bZLA1SAXCiaDyYG9JqdnGolgdc1Nfuc7LwaOUlBoNIX4gno4w1FZVYkQGhd0qibIiTiL/wyNO36bYcL0CGpMRoYk8tNgEUgYYfUHsnUgZgLYl65jLGAW9VY86UCRV9QAY5bKICt81x6CV6DvnIZY/N7Pza7z/yNzwkeiE/q9vcE+DM2r0vkJZCHv+m2HPDjfhfQRXFZFNDbk1P7AsxpONacJ6mgAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

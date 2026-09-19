@@ -1,0 +1,566 @@
+[
+  {
+    "id": "table_single",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/single.json",
+    "source_elements": 3,
+    "output_cubes": 3,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_single",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_left",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/left.json",
+    "source_elements": 3,
+    "output_cubes": 3,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_left",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_middle",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle.json",
+    "source_elements": 1,
+    "output_cubes": 1,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_middle",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_right",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/right.json",
+    "source_elements": 3,
+    "output_cubes": 3,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_right",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_left_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/left_rot.json",
+    "source_elements": 3,
+    "output_cubes": 3,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_left_rot",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_middle_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle_rot.json",
+    "source_elements": 1,
+    "output_cubes": 1,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_middle_rot",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "table_right_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/right_rot.json",
+    "source_elements": 3,
+    "output_cubes": 3,
+    "texture": "block/table",
+    "size": [
+      64,
+      64
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_table",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:table_right_rot",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "bell_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+    "source_elements": 8,
+    "output_cubes": 8,
+    "texture": "block/deco/bell_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_bell_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_bell_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:bell_pendant_lamp_bottom",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "bell_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+    "source_elements": 6,
+    "output_cubes": 6,
+    "texture": "block/deco/bell_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_bell_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:bell_pendant_lamp_top",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "blue_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+    "source_elements": 8,
+    "output_cubes": 8,
+    "texture": "block/deco/blue_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_blue_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_blue_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:blue_pendant_lamp_bottom",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "blue_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+    "source_elements": 6,
+    "output_cubes": 6,
+    "texture": "block/deco/blue_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_blue_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:blue_pendant_lamp_top",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "yellow_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+    "source_elements": 8,
+    "output_cubes": 8,
+    "texture": "block/deco/yellow_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_yellow_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_yellow_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:yellow_pendant_lamp_bottom",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "yellow_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+    "source_elements": 6,
+    "output_cubes": 6,
+    "texture": "block/deco/yellow_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_yellow_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:yellow_pendant_lamp_top",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "stepladder_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+    "source_elements": 9,
+    "output_cubes": 9,
+    "texture": "block/deco/stepladder",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_stepladder",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:stepladder_bottom",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "stepladder_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/top.json",
+    "source_elements": 10,
+    "output_cubes": 10,
+    "texture": "block/deco/stepladder",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_stepladder",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:stepladder_top",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "sandwich_board_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+    "source_elements": 5,
+    "output_cubes": 5,
+    "texture": "block/deco/sandwich_board/body",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_sandwich_board_body",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "block",
+    "fixture_id": "kt_assets_a12:sandwich_board_bottom",
+    "engine_accepted": false,
+    "entity_face_shading": "PER_FACE_SLOT_DECLARED"
+  },
+  {
+    "id": "sandwich_board_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base_top.json",
+    "source_elements": 5,
+    "output_cubes": 5,
+    "texture": "block/deco/sandwich_board/body",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_sandwich_board_body",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:sandwich_board_top",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  },
+  {
+    "id": "bell_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+    "source_elements": null,
+    "output_cubes": 14,
+    "texture": "block/deco/bell_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_bell_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_bell_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:bell_pendant_lamp_assembled",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  },
+  {
+    "id": "blue_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+    "source_elements": null,
+    "output_cubes": 14,
+    "texture": "block/deco/blue_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_blue_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_blue_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:blue_pendant_lamp_assembled",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  },
+  {
+    "id": "yellow_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+    "source_elements": null,
+    "output_cubes": 14,
+    "texture": "block/deco/yellow_pendant_lamp",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 101,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_yellow_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a12_block_deco_yellow_pendant_lamp",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:yellow_pendant_lamp_assembled",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  },
+  {
+    "id": "stepladder_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+    "source_elements": null,
+    "output_cubes": 19,
+    "texture": "block/deco/stepladder",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_stepladder",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:stepladder_assembled",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  },
+  {
+    "id": "sandwich_board_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+    "source_elements": null,
+    "output_cubes": 10,
+    "texture": "block/deco/sandwich_board/body",
+    "size": [
+      32,
+      32
+    ],
+    "partial_alpha_pixels": 0,
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a12_block_deco_sandwich_board_body",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "fixture_kind": "entity",
+    "fixture_id": "kt_assets_a12:sandwich_board_assembled",
+    "engine_accepted": false,
+    "entity_face_shading": "NOT_PARITY_VERIFIED"
+  }
+]

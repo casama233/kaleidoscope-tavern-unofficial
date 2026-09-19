@@ -1,0 +1,151 @@
+{
+  "build": "A10",
+  "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "scope": "14 named cocktail static source models only. Excludes empty glass, shaker, effect logic and dynamic color acceptance.",
+  "expected_family_count": 14,
+  "converted_static_models": 14,
+  "engine_accepted": false,
+  "all_art_completed": false,
+  "families": [
+    {
+      "id": "emerald",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/emerald.json",
+      "source_blob_sha1": "32c700a689fa5de94170320fd84f34726ab855e9",
+      "geometry": "RP/models/entity/emerald.geo.json",
+      "texture": "block/mixology/emerald",
+      "batch": "A4",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "screwdriver",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+      "source_blob_sha1": "b1fdb0d34432078aa7c702b6122671d612a3d178",
+      "geometry": "RP/models/entity/screwdriver.geo.json",
+      "texture": "block/mixology/screwdriver",
+      "batch": "A7",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "depth_charge",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/depth_charge.json",
+      "source_blob_sha1": "aacc9949b355c6412129774ddac9bdf5a5fcf62b",
+      "geometry": "RP/models/entity/depth_charge.geo.json",
+      "texture": "block/mixology/depth_charge",
+      "batch": "A8",
+      "animation": true,
+      "engine_accepted": false
+    },
+    {
+      "id": "mojito",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json",
+      "source_blob_sha1": "008eca38fd3679539971fc9582de6a767099b840",
+      "geometry": "RP/models/entity/mojito.geo.json",
+      "texture": "block/mixology/mojito",
+      "batch": "A8",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "signature_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/signature_cocktail.json",
+      "source_blob_sha1": "1cd76e0b3d8bb0508338b38b363bc7128fbc8476",
+      "geometry": "RP/models/entity/signature_cocktail.geo.json",
+      "texture": "block/mixology/signature_cocktail",
+      "batch": "A8",
+      "animation": true,
+      "engine_accepted": false
+    },
+    {
+      "id": "mystery_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json",
+      "source_blob_sha1": "9a34f8b29a314c50303ace0c635c60771d56a517",
+      "geometry": "RP/models/entity/mystery_cocktail.geo.json",
+      "texture": "block/mixology/mystery_cocktail",
+      "batch": "A8",
+      "animation": true,
+      "engine_accepted": false
+    },
+    {
+      "id": "white_lady",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json",
+      "source_blob_sha1": "3b8c42d6e6abd568e8e5bd5219b68b335c322d6f",
+      "geometry": "RP/models/entity/white_lady.geo.json",
+      "texture": "block/mixology/white_lady",
+      "batch": "A9",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "allium_garden",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/allium_garden.json",
+      "source_blob_sha1": "8b9d1580ecb55c347d2a4fcb8201840e36a2d25a",
+      "geometry": "RP/models/entity/allium_garden.geo.json",
+      "texture": "block/mixology/allium_garden",
+      "batch": "A10",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "bloody_mary",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json",
+      "source_blob_sha1": "4f4fa1f54ea19eaa39fdd54929a53ee9db01355f",
+      "geometry": "RP/models/entity/bloody_mary.geo.json",
+      "texture": "block/mixology/bloody_mary",
+      "batch": "A10",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "brass_heart",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/brass_heart.json",
+      "source_blob_sha1": "09d8293f09032f8a0cec6c2965923a04c32f4fd1",
+      "geometry": "RP/models/entity/brass_heart.geo.json",
+      "texture": "block/mixology/brass_heart",
+      "batch": "A10",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "godfather",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/godfather.json",
+      "source_blob_sha1": "f36150898029322d8438c8a2c6b0a6f970970557",
+      "geometry": "RP/models/entity/godfather.geo.json",
+      "texture": "block/mixology/godfather",
+      "batch": "A10",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "grasshopper",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json",
+      "source_blob_sha1": "de8e596c20c20dcaf990b66f588edd6832aaf633",
+      "geometry": "RP/models/entity/grasshopper.geo.json",
+      "texture": "block/mixology/grasshopper",
+      "batch": "A10",
+      "animation": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "nether_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/nether_special.json",
+      "source_blob_sha1": "2c00e84cda4770b03e07baf579b0e97cd661fc0d",
+      "geometry": "RP/models/entity/nether_special.geo.json",
+      "texture": "block/mixology/nether_special",
+      "batch": "A10",
+      "animation": true,
+      "engine_accepted": false
+    },
+    {
+      "id": "sculk_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json",
+      "source_blob_sha1": "8de1fc844025ce598efc2232aa5c01eebea7a6e8",
+      "geometry": "RP/models/entity/sculk_special.geo.json",
+      "texture": "block/mixology/sculk_special",
+      "batch": "A10",
+      "animation": true,
+      "engine_accepted": false
+    }
+  ]
+}

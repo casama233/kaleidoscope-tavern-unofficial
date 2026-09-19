@@ -1,0 +1,79 @@
+Compiled from "LargeChalkboardModel.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.model.deco.LargeChalkboardModel extends net.minecraft.client.model.Model {
+  public static final net.minecraft.client.model.geom.ModelLayerLocation LAYER_LOCATION;
+
+  private final net.minecraft.client.model.geom.ModelPart bone;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.model.deco.LargeChalkboardModel(net.minecraft.client.model.geom.ModelPart);
+    Code:
+       0: aload_0
+       1: invokedynamic #1,  0              // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+       6: invokespecial #5                  // Method net/minecraft/client/model/Model."<init>":(Ljava/util/function/Function;)V
+       9: aload_0
+      10: aload_1
+      11: ldc           #11                 // String bone
+      13: invokevirtual #13                 // Method net/minecraft/client/model/geom/ModelPart.getChild:(Ljava/lang/String;)Lnet/minecraft/client/model/geom/ModelPart;
+      16: putfield      #19                 // Field bone:Lnet/minecraft/client/model/geom/ModelPart;
+      19: return
+
+  public static net.minecraft.client.model.geom.builders.LayerDefinition createBodyLayer();
+    Code:
+       0: new           #24                 // class net/minecraft/client/model/geom/builders/MeshDefinition
+       3: dup
+       4: invokespecial #26                 // Method net/minecraft/client/model/geom/builders/MeshDefinition."<init>":()V
+       7: astore_0
+       8: aload_0
+       9: invokevirtual #29                 // Method net/minecraft/client/model/geom/builders/MeshDefinition.getRoot:()Lnet/minecraft/client/model/geom/builders/PartDefinition;
+      12: astore_1
+      13: aload_1
+      14: ldc           #11                 // String bone
+      16: invokestatic  #33                 // Method net/minecraft/client/model/geom/builders/CubeListBuilder.create:()Lnet/minecraft/client/model/geom/builders/CubeListBuilder;
+      19: iconst_0
+      20: iconst_0
+      21: invokevirtual #39                 // Method net/minecraft/client/model/geom/builders/CubeListBuilder.texOffs:(II)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;
+      24: ldc           #43                 // float -32.0f
+      26: ldc           #44                 // float -30.0f
+      28: ldc           #45                 // float 15.0f
+      30: ldc           #46                 // float 48.0f
+      32: ldc           #47                 // float 28.0f
+      34: fconst_1
+      35: new           #48                 // class net/minecraft/client/model/geom/builders/CubeDeformation
+      38: dup
+      39: fconst_0
+      40: invokespecial #50                 // Method net/minecraft/client/model/geom/builders/CubeDeformation."<init>":(F)V
+      43: invokevirtual #53                 // Method net/minecraft/client/model/geom/builders/CubeListBuilder.addBox:(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;
+      46: ldc           #57                 // float 8.0f
+      48: ldc           #58                 // float 24.0f
+      50: ldc           #59                 // float -8.0f
+      52: invokestatic  #60                 // Method net/minecraft/client/model/geom/PartPose.offset:(FFF)Lnet/minecraft/client/model/geom/PartPose;
+      55: invokevirtual #66                 // Method net/minecraft/client/model/geom/builders/PartDefinition.addOrReplaceChild:(Ljava/lang/String;Lnet/minecraft/client/model/geom/builders/CubeListBuilder;Lnet/minecraft/client/model/geom/PartPose;)Lnet/minecraft/client/model/geom/builders/PartDefinition;
+      58: pop
+      59: aload_0
+      60: sipush        128
+      63: bipush        64
+      65: invokestatic  #72                 // Method net/minecraft/client/model/geom/builders/LayerDefinition.create:(Lnet/minecraft/client/model/geom/builders/MeshDefinition;II)Lnet/minecraft/client/model/geom/builders/LayerDefinition;
+      68: areturn
+
+  public void renderToBuffer(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, int, int, int);
+    Code:
+       0: aload_0
+       1: getfield      #19                 // Field bone:Lnet/minecraft/client/model/geom/ModelPart;
+       4: aload_1
+       5: aload_2
+       6: iload_3
+       7: iload         4
+       9: iload         5
+      11: invokevirtual #77                 // Method net/minecraft/client/model/geom/ModelPart.render:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;III)V
+      14: return
+
+  static {};
+    Code:
+       0: new           #81                 // class net/minecraft/client/model/geom/ModelLayerLocation
+       3: dup
+       4: ldc           #83                 // String large_chalk
+       6: invokestatic  #85                 // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       9: ldc           #91                 // String main
+      11: invokespecial #93                 // Method net/minecraft/client/model/geom/ModelLayerLocation."<init>":(Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)V
+      14: putstatic     #96                 // Field LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      17: return
+}

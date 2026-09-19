@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_tartaric_acid",
+  "model_identifier": "kt_assets_a14.painting_tartaric_acid",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_tartaric_acid_element0",
+      "type": "cube",
+      "uuid": "ac008040-35a9-57eb-9c4e-be8418056e0e",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "ff5e18a8-f8b8-5a0c-a795-45e67ef1fb37",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "ac008040-35a9-57eb-9c4e-be8418056e0e"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "tartaric_acid.png",
+      "id": "0",
+      "uuid": "b71c8fd3-6b70-5dfb-818a-428c73844f33",
+      "width": 16,
+      "height": 48,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAwCAYAAAAYX/pXAAAAAXNSR0IArs4c6QAAAi9JREFUSIntlj9oE3EUxz8XkrS9xBiSWAupSwuO7SBFEUGhk6BLQdJFKBJr0A4ROzhVocVOgpBBxYqIZNepU8Epph4lBrIYU6IlgcQkpTZ/7kgi55De5R9oiqAd8pZ7P+5739973OPDg78MAeD1w6sqQH6vgssu/vYDTZPfq3DvyYZg1F7snAk0nj3cugOkXl4BwKi5alF7dhpVBYtJpVIXABCNzdzki7eZGQBcdpF0odzsS+i8U9Wzz98ypAtlTjiONSsAcDstpAtlTgl1RLOBoUEjA0odgKFBI3agsF/VtandYruBVoHTZmYtVAWqLRU0cu95c5tWb0FzdTstrIWqhBMy7okZJCmAJAUIJ2TGpjwHxg1tl4EWofVVFEUmGduili9Ry5dQFJl4RCK0vtop727BdM6KSQ4S3VzURSY5SOTDXTq1bQaT4yNd7tl3H7GJZgamJzEYmr9mcnyET50tRLcz+C44qIhzzPpz5MVbeLK3uZz0smv1MevPURHneHPnLNHtTHsF2iAtLxfZ/6EAsDC/gvA9hXrpJgvzKwA8WCpjO/6TkqOIpdXAZRf5Aty/9hSA6w09J4dHyb5/AcOjADzyvgLgxsZFvQIB4LF/Wo1/zerTlTsYkj/F87exrpn999HnwZHlgXtihnBC1nkwNuUhnJB750EytoWiyDoP4hEJRZF750F0cxHkILisAA0WtJz7POjzoM+D/7UfHJoHnfvBoXnQuR/0eXDUefALbM0RHjxZYGYAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal",
+      "frame_time": 10
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/tartaric_acid.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/tartaric_acid.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": {
+      "id": "painting_tartaric_acid",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png.mcmeta",
+      "sheet_size": [
+        16,
+        48
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "frame_count": 3,
+      "sequence": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "ticks_per_frame": 10,
+      "blend_frames": false,
+      "loop_ticks": 80,
+      "unused_source_frames": [
+        2
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/painting_tartaric_acid/000.png",
+          "rgba_sha256": "8c63b555015b6e2549e42c960e4ef0de2af48f3f9605ac3dccc41d168443094e"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/painting_tartaric_acid/001.png",
+          "rgba_sha256": "dc4321df980207551f84126e91e70a83254a02e4922a065427e0184956778f13"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/painting_tartaric_acid/002.png",
+          "rgba_sha256": "b9dbab256b69f64ed7836a91feffa04f7f21a878afeca9d13fffc319c439f11f"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a14/painting_tartaric_acid_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/deco/painting/tartaric_acid"
+    },
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

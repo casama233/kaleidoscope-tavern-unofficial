@@ -1,0 +1,18 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kt_assets_a2:gold_grape",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_assets_a2_gold_grape",
+      "minecraft:display_name": {
+        "value": "item.kt_assets_a2:gold_grape.name"
+      },
+      "minecraft:max_stack_size": 64
+    }
+  }
+}

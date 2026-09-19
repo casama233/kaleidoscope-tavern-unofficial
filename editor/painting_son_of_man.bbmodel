@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_son_of_man",
+  "model_identifier": "kt_assets_a14.painting_son_of_man",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_son_of_man_element0",
+      "type": "cube",
+      "uuid": "58c5fe38-d3cb-5ae4-9c7c-b9e18a3bf63d",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "8e0f6486-1409-5260-beee-e7d14d4301ba",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "58c5fe38-d3cb-5ae4-9c7c-b9e18a3bf63d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "son_of_man.png",
+      "id": "0",
+      "uuid": "8a98ec18-97a2-50c9-b6f6-32ca6e8ca4b2",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAgpJREFUOI2lkj9oE2EYxn9pk8ZLe/GMV5PULAEXxdCCg6AUBHGMi4UgHdrBopMYdVdx0EUUKUJ1kFBUlCIduomTYqBQaLD4jzZJ05hLzCWEpLlEc1Kn+5rrUAWf6eH73u/3Pe/LC/8pB0DiZnQLQK8ZqIpn1wdWjV4zuPbgrcNpXciRSY4fPoLkdrG0nAJgKBQGoJDPCD9YKdFuGXyYvQGA06LKQK3RQnK7ODYyzPjYBP5gQPxc0oo8m0sIoCUnYIut6XWCqhfTNEmvrQLgcvXR29MLgCJLEAoz6JMB6Onur1opCW/+NoXvdH4JL7ldKLJEudqwA4ZCYdotg6Dq5Vw0BsDJswGmLu7j4fQJOmZHnEtul72FbgjA9NMn5Bbu8rzYBOCTlmYmPsq6bxRNr3c/2U6gyBJB1Yum1ynkM5SrNbKfi7xP6uRrTtZyBfZIHtsAbQmsWEHVC4QxfQpTw2IKAPj2+7cHuRPQ+tkREEWWuL7wndn5+wQORGi1q1y9fJtbqpedEoCl9A8A3rx8QWoxSb9ngL3eg7yKnSKaeE1qMcn42ASHjkY4EztvB+g1gwAw9/gR5Y08/Z4BmsYmxnoBgI3ldwD4gwFWVz7SqJRR+7qGqCoeMrkK2a9fAGgamwBEYxcYiceZvHQHQCxWSSuKBA6Ae1dOb33LlsR2WUvyN83Mrzj+qXA3/QHIHL0kQj9ngwAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/son_of_man.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/son_of_man.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": null,
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

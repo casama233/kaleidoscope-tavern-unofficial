@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_girl_with_pearl_earring",
+  "model_identifier": "kt_assets_a14.painting_girl_with_pearl_earring",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_girl_with_pearl_earring_element0",
+      "type": "cube",
+      "uuid": "d3732adc-02fd-5363-9eeb-200ad2b47861",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "10240c55-2e3f-5d40-b31a-7dad293f49ef",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "d3732adc-02fd-5363-9eeb-200ad2b47861"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "girl_with_pearl_earring.png",
+      "id": "0",
+      "uuid": "fd7e90d4-b17e-5585-a00f-349e87056cfc",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAfBJREFUOI2lkk1oE1EUhb/xhSaOjJkkrdCiEhTBSqNgBOMf8ZcKUl0El9YqFDcuim7cWFwLRd3psoo/3YguDBRR6EII1O7qJqK2m0q1dqLTvMxfGhdhJqRRs/DA27x7z3nnnXvhP6EAjN8aqAEslSSduvpPgt+zVJJcv/tGCfmFsefzhEIhwPgr2bZtAIQQHNi2CkDIV/WLdZEGxm9fYqYwxaeFMq8KiwBUKhVANAQ6dZVarUa1Wg2IyVQOofYyOgHGj1MM7X2Nbdt4ngdAV1wHYJ1PcF0XKSWmaZJM5UhszqDHo8iyBCCdyXL5zHYcx8FxHL4vm80CQggikQixWIx7FzRGj33gy8c5erZ0AzB0cxoATdMQQgROAwFFUYJLVdPp2bGbJyMKv37WX9K6D5HY2NESbCDgeR6WZWEYBh3rNzD56A7v374EILEpgfn1HelMFtM0m7IKIlfV+vzD4TBqNAHAvuPn6N8/wMGjwwFB0zQsy2p1IKVESolhGOw8Oczhs4PYciUgTz69AsDF00lc1211sBbp3A0AZqfzVFaWKZe+MVOYaukLFmkt9vRu5fHD++SfXQMgPzEPQLZ/F1fPpygWPze+8Kf9P9IXrZMXqB/fWSbbNA0FYGzkRK04t0hXXAMIlqQdHryYVdp3tcFvm7Oy6ODDzM8AAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/girl_with_pearl_earring.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/girl_with_pearl_earring.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": null,
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

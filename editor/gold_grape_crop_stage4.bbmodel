@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "gold_grape_crop_stage4",
+  "model_identifier": "kt_assets_a2.gold_grape_crop_stage4",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "stage4_0",
+      "type": "cube",
+      "uuid": "6eed1316-dd5f-5d99-9b5c-17775e251fbb",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            32.0,
+            16.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            32.0,
+            16.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "stage4_1",
+      "type": "cube",
+      "uuid": "d42c7185-69bd-55bf-b9fb-80a07090c0ae",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        -45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            32.0,
+            16.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            32.0,
+            16.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "5dd59c2f-348a-537e-8309-4d6f01777a45",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "6eed1316-dd5f-5d99-9b5c-17775e251fbb",
+        "d42c7185-69bd-55bf-b9fb-80a07090c0ae"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "gold_grape_crop.png",
+      "id": "0",
+      "uuid": "efa86df6-bfc7-509d-ac6a-ae9c878cfc28",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFTUlEQVR4Xu2aP4gdVRTGUwqmShotLV3QaLOLweCKWUXZJvWCnWCnW9iIwUpstLC0ETFYiGIRw3ZKCAjbrO5iIZhCIk8EizWsFpLijfO7z2/2m7Nz33uTp76J3A8O98/cM3O+756Z++C8U6cyeO6xR6o41wcL+59b0P/RxfwTga0Ljzc32Vk9X8l8XQ4L+9cCbD157N8XCLB1vqe/B0jw2kXmdi890bK25wSL+EeBIO9Z4Ne7RNxZXa9kjCHvWeDXtaaF3c06MKwObmdttbr+xUOJgIKf9nAQ/d956+xc/rdeXa/cuAdr6EuAdI96Pq5N/i/XfbPdDfwnfQnAmPm41uNIUIAKePuFC61xfHjE3fq7OFyjJQO2n5/4+7ys7X+8sxCjJQO2n8W/PZ/NAAWWAv57F8iCSCCXwl3+ZMEs/yZzbOdp2X3aK+/f15r39ck2js2Jsvu0+5dPt+Z9PdYQIKj0kM9eSgHe/H4tCUCrsQjEHezyxxcBaKf5SzgXwMcIoPR3cWVdqe9jBFD6S4BsJvCwO4dXU7BqRURj+i0ngwhzH/oy5jRP6z5NZmxOREqCb04E5Jo2QfNRKJGG2M1v15LRv/4p/uvV6OOV6ujgYrKYKSe+AwToO6++z+cE4Pro4MO0VuvVx2de8fQ87bBEc2H9lWj83zybSGNX3sN/Ig4ZgAgY/S9febAR4EQGAAWtB+qhauN6IYrmGUQ7LYN0Xc+LAvpc1yYc/XixuvPr1URcxhxkMYhjzI2uraQ592+BB3nw0x7siDvl/hIhd48ongvm94uvpfwhBTkRpB3/sdeM99+dkPe5rAgevB7k/bjeoZ2Sj4+nZZHuHwWLIrrIUQAZux8FQQC9GlqXFQBEIgTSFXgEa7VL+Ht/1j2iWC6Ib0pOSKU+3wJMRCGvDEAErjGeKYCIK4j4wC64D+vjDk67x+jzlWp8VKfoD/Wu1X0XJL4OXffhIze+vZe+9vRdEL4PEkBz0f8EFHTugTm4n5t2Nq4XIA15F8DFmxWLH3cSQIT9dJiLvDAr6BwI1L/60wIX9t8+nYhj9OOOSxiuRV8Qjzt+DzhpCcO16PuPw9O/j4iQE/mY9i5O9BN03EGetHcRXJzo96+gD/GIru+PxIlruwDpmAESJ64dJCA8z3ufQ/xV2Ou9HwqUQX3JCzoO70nyBQUFBQUFBQUFBQXLw6L19UX/H7B03FV93RD/HzB4xHpZ3/o6JXEZY/9/QLyuNYOA18tjkXGe+vqt1+q+WaoE1wTpN3+QqMepKBrWehxLhe+samZ96uu+sxCjJQPS/wPC/OAywGvlTnTe+rrq/b7ztOnfIXWbipE27+uxGM9/jq7U9/Gs+npX6vsYAZT+EmBQmSDSEFM9jT5lJa7Nqq+LNMR+/+aZZPR//ujhdO2nN85Vh59sJIuZMqjvAPUyr6dph2PBIVdfZx7S2MHr9zc7vPvUmSQCRv+rFx9ovRIew9Kg+roKiSomzltfZ9fHv+0l4jLm1Ic4xhwCIYL7Lx2xnBxr6bPq65BS+quPIBpLEJ8blAhKfZGNgmjOX5MogKd/FERzagcnAFDqK+1dEGWAiHfV15XuEMNcEGWAiGud+y8dow9WqvEve9XtG09X9F2Q+DpE8oCP3J+HX6evPX0XJL4OgyMPIA15FyCmfY488ONOAsS0Hyx58N3lM4k4Rj/uuIThWvQF8biLOy5huBZ9BwPIiXxMexcn+gl+3MW0d3Gi3+CgU8AzQOLEtV3QKeAZIHHi2kEingK59z6HeAoM9r2fBh2HfckLOg7vSfIFBQUFBQUFBQUFBf97/AV1MMpk2kCXAgAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage4.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "java_display_recorded_not_applied": {},
+    "notes": []
+  }
+}

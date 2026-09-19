@@ -1,0 +1,5224 @@
+{
+  "scope": "Read-only source extraction and content comparison; not game-runtime testing.",
+  "checks": [
+    {
+      "check": "input_jar_sha256_matches_lock",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/allium_garden.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/allium_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/azure_bluet_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/bar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/bar_counter.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/barrel.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/base_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/bell_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/black_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/black_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/bloody_mary.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/blue_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/blue_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/blue_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/brandy.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/brass_heart.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/brown_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/brown_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/butterfly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/carignan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/catnip_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/cellar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/chalkboard.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/champagne.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/circular_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/cornflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/cr019_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/cyan_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/cyan_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/david_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/depth_charge.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/dragon_breath_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/emerald.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/empty_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/empty_glassware.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/father_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/firefly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/ginkgo_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/girl_with_pearl_earring_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/glass_bar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/glassware_holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/glowflower_brew.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/godfather.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/gold_grape_crop.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/gold_grapevine_trellis.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/grape_crop.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/grapevine_trellis.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/grass_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/grasshopper.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/gray_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/gray_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/great_wave_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/green_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/green_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/honey_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/honey_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/ice_grape_crop.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/ice_grapevine_trellis.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/ice_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/light_blue_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/light_blue_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/light_gray_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/light_gray_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/lime_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/lime_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/luminous_bride.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/madame_shexiang.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/magenta_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/magenta_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/master_marisa_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/miners_star.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/mojito.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/molotov.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/mona_lisa_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/mondrian_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/mother_snow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/mystery_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/nether_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/orange_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/orange_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/orchid_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/peony_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pine_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pink_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pink_petals_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pink_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pitcher_plant_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/plum_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/polaris_sweet_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/poppy_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/potion_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/pressing_tub.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/purple_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/purple_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/red_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/red_queen.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/red_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/riesling_dry_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/rum.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sakura_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sakura_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sauvignon_blanc_dry_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/screwdriver.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sculk_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/shaker.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sherry.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/signature_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/snow_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/son_of_man_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/spore_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/starry_night_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/stepladder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_black.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_brown.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_colorless.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_cyan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_green.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_light_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_light_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_lime.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_magenta.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_orange.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_pink.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_purple.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_red.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/string_lights_yellow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sunflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sunset_glow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/sweet_berry_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/table.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/tap.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/tartaric_acid_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/tilted_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/torchflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/trellis.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/tulip_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/unknown_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/van_gogh_self_portrait_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/vinegar.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/vodka.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/water_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/watermelon_juice.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/whiskey.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/white_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/white_lady.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/white_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/wild_grapevine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/wild_grapevine_plant.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/wither_rose_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/xp_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/yellow_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/yellow_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/yellow_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/blockstates/ysbb_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/lang/en_us.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/lang/ja_jp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/lang/ru_ru.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/lang/zh_cn.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/barrel.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/dragon_breath_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/rum/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/rum/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/rum/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/wine/count1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/wine/count2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/wine/count3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/drink/wine/count4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/empty_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/honey_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/molotov.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/potion_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/pressing_tub.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/tap/close.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/tap/open.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/tilt_pressing_tub.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/water_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/brew/xp_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_counter/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/base.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/black.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/brown.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/cyan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/green.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/light_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/light_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/lime.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/magenta.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/orange.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/pink.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/purple.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/red.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bar_stool/yellow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/chalkboard.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/circular_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/glassware_holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/butterfly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/catnip_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/firefly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/ginkgo_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/pine_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/sakura_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/snow_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense/spore_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/butterfly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/catnip_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/firefly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/ginkgo_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/pine_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/sakura_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/snow_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/incense_open/spore_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/base.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/cr019.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/david.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/father.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/girl_with_pearl_earring.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/great_wave.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/master_marisa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/mona_lisa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/mondrian.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/son_of_man.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/starry_night.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/tartaric_acid.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/unknown.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/van_gogh_self_portrait.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/painting/ysbb.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/allium/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base_top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/bottom/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/grass/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/peony/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pink_petals/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/pitcher_plant/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/poppy/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/sunflower/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/torchflower/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_10.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_11.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_12.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_13.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_14.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_15.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_6.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_7.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_8.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sandwich_board/wither_rose/rot_9.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/base/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/black/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/blue/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/brown/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/gray/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/green/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/lime/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/orange/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/pink/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/purple/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/red/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/white/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/left_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/right_corner.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/stepladder/top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/black.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/brown.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/colorless.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/cyan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/green.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/light_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/light_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/lime.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/orange.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/pink.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/purple.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/red.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/string_lights/yellow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/left.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/left_rot.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/middle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/middle_rot.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/right.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/right_rot.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/table/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/allium_garden.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/brass_heart.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/depth_charge.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/emerald.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/godfather.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/mojito.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/nether_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/shaker.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/signature_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/mixology/white_lady.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grape_crop/stage5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/cross_east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/cross_north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/cross_up_down.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/single_stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/single_stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/single_stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/single_stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/gold_grapevine_trellis/six_direction.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/cross_east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/cross_north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/cross_up_down.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/single_stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/single_stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/single_stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/single_stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/grapevine_trellis/six_direction.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage4.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage5.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/cross_east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/cross_north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/cross_up_down.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/single_stage0.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/single_stage1.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/single_stage2.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/single_stage3.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/ice_grapevine_trellis/six_direction.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/cross_east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/cross_north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/cross_up_down.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/east_west.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/north_south.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/single.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/trellis/six_direction.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/wild_grapevine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/block/plant/wild_grapevine_plant.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/allium_garden.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/allium_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/azure_bluet_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/bar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/bar_counter.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/bar_stool_base.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/barrel.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/base_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/bell_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/black_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/black_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/bloody_mary.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/blue_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/blue_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/blue_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/brandy.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/brass_heart.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/brown_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/brown_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/butterfly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/carignan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/catnip_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/cellar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/chalkboard.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/champagne.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/circular_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/cornflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/cr019_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/cyan_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/cyan_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/david_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/deco_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/depth_charge.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/emerald.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/empty_bottle.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/empty_glassware.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/father_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/firefly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/ginkgo_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/girl_with_pearl_earring_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/glass_bar_cabinet.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/glassware_holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/glow_berries_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/glowflower_brew.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/godfather.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/gold_grape.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/gold_grape_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/grape.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/grape_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/grapevine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/grass_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/grasshopper.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/gray_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/gray_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/great_wave_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/green_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/green_grape.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/green_grape_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/green_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/holder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/honey_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/ice_grape.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/ice_grape_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/ice_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/light_blue_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/light_blue_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/light_gray_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/light_gray_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/lime_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/lime_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/luminous_bride.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/madame_shexiang.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/magenta_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/magenta_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/master_marisa_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/miners_star.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/mojito.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/molotov.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/mona_lisa_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/mondrian_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/mother_snow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/mystery_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/nether_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/orange_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/orange_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/orchid_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/peony_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pine_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pink_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pink_petals_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pink_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pitcher_plant_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/plum_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/polaris_sweet_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/poppy_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/pressing_tub.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/purple_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/purple_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/red_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/red_queen.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/red_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/riesling_dry_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/rum.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sakura_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sakura_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sauvignon_blanc_dry_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/screwdriver.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sculk_special.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/shaker.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/shaker_3d.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sherry.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/signature_cocktail.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/snow_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/son_of_man_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/spore_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/starry_night_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/stepladder.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_black.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_brown.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_colorless.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_cyan.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_green.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_light_blue.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_light_gray.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_lime.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_magenta.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_orange.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_pink.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_purple.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_red.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_white.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/string_lights_yellow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sunflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sunset_glow.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sweet_berries_bucket.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/sweet_berry_wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/table.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/tap.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/tartaric_acid_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/tilted_rack.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/torchflower_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/trellis.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/tulip_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/unknown_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/van_gogh_self_portrait_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/vinegar.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/vodka.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/watermelon_juice.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/whiskey.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/white_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/white_lady.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/white_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/wine.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/wither_rose_sandwich_board.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/yellow_bar_stool.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/yellow_pendant_lamp.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/yellow_sofa.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/models/item/ysbb_painting.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/butterfly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/butterfly_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/catnip_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/catnip_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/firefly_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/firefly_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/ginkgo_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/ginkgo_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/lava_tap_drip.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/pine_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/pine_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/sakura_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/snow_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/snow_incense_large.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/spore_incense.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/particles/water_tap_drip.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/ponder/barrel/introduction.nbt",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/ponder/grapevine/planting.nbt",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/ponder/grapevine/wild_generation.nbt",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/ponder/pressing_tub/introduction.nbt",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds.json",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/block/holder_pop.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/effect/vision.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/item/shaker/end.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/item/shaker/shaking_1.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/item/shaker/shaking_2.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/sounds/item/shaker/shaking_3.ogg",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/bar_cabinet.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/brandy.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/carignan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/champagne.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/dragon_breath_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/empty_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/glass_bar_cabinet.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/glowflower_brew.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/honey_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/honey_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/ice_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/luminous_bride.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/madame_shexiang.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/miners_star.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/molotov.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/mother_snow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/plum_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/polaris_sweet_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/potion_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/pressing_tub.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/red_queen.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/riesling_dry_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/rum.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/sakura_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/sauvignon_blanc_dry_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/sherry.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/sunset_glow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/sweet_berry_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/tap.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/vinegar.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/vodka.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/water_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/watermelon_juice.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/whiskey.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/brew/xp_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_counter.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/black.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/brown.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/cyan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/green.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/light_blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/light_gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/lime.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/magenta.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/orange.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/pink.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/purple.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/red.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bar_stool/yellow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/bell_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/blue_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/chalkboard_particle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/circular_rack.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/glassware_holder.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/glassware_holder_particle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/holder.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/butterfly_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/catnip_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/firefly_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/ginkgo_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/pine_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/sakura_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/snow_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/incense/spore_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/cr019.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/david.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/father.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/girl_with_pearl_earring.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/great_wave.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/master_marisa.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/mona_lisa.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/mondrian.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/son_of_man.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/starry_night.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/unknown.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/van_gogh_self_portrait.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/painting/ysbb.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/allium.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/azure_bluet.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/cornflower.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/grass.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/orchid.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/peony.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/pink_petals.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/pitcher_plant.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/poppy.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/sunflower.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/torchflower.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/tulip.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/wither_rose.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/black.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/brown.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/cyan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/green.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/light_blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/light_gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/lime.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/magenta.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/orange.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/pink.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/purple.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/red.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/sofa/yellow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/stepladder.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/black.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/brown.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/colorless.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/cyan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/green.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/light_blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/light_gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/lime.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/magenta.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/orange.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/pink.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/purple.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/red.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/string_lights/yellow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/tilted_rack.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/deco/yellow_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/glow_berries_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/glow_berries_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/gold_grape_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/gold_grape_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/grape_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/grape_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/green_grape_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/green_grape_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/ice_grape_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/ice_grape_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/allium_garden.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/bloody_mary.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/brass_heart.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/emerald.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/empty_glassware.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/godfather.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/grasshopper.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/mojito.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/screwdriver.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/shaker.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/shaker_particle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail_2.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail_overlay.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/mixology/white_lady.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/gold_grape_crop.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/gold_grapevine_trellis.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape/particle_1.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape/particle_2.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape/particle_3.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape/particle_4.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape/particle_5.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grape_crop.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/grapevine_trellis.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/ice_grape_crop.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/ice_grapevine_trellis.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/trellis.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/wild_grapevine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/plant/wild_grapevine_plant.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/sweet_berries_juice_flow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/sweet_berries_juice_still.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/block/table.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/brew/barrel.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/black.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/brown.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/cyan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/green.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/light_blue.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/light_gray.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/lime.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/magenta.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/orange.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/pink.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/purple.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/red.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/bar_stool/yellow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/large_chalkboard.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/entity/deco/small_chalkboard.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/gui/jei/barrel.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/gui/jei/pressing_tub.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/gui/jei/shaker.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/gui/rhombus.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/gui/shaker.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/allium_garden.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/barrel.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/barrel_1.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/bell_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/bloody_mary.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/blue_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/brandy.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/brass_heart.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/butterfly_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/carignan.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/catnip_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/chalkboard.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/champagne.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/depth_charge.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/depth_charge.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/emerald.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/empty_bottle.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/empty_glassware.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/firefly_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/ginkgo_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/glow_berries_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/glowflower_brew.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/godfather.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/gold_grape.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/gold_grape_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/grape.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/grape_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/grapevine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/grasshopper.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/green_grape.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/green_grape_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/holder.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/honey_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/ice_grape.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/ice_grape.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/ice_grape_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/ice_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/luminous_bride.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/madame_shexiang.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/miners_star.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/mojito.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/molotov.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/mother_snow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/mystery_cocktail.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/mystery_cocktail.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/nether_special.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/nether_special.png.mcmeta",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/pine_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/plum_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/polaris_sweet_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/red_queen.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/riesling_dry_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/rum.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sakura_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sakura_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sauvignon_blanc_dry_white.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/screwdriver.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sculk_special.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/shaker.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sherry.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/signature_cocktail.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/signature_cocktail_tint.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/snow_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/spore_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/stepladder.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sunset_glow.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sweet_berries_bucket.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/sweet_berry_wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/tap.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/vinegar.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/vodka.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/watermelon_juice.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/whiskey.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/white_lady.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/wine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/item/yellow_pendant_lamp.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/ardent_heat.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/bloody_mary.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/grass_stealth.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/high_heels.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/long_reach.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/shriek_attack.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/slightly_tipsy.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/tomb_raider.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/upside_down.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/vision.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/xp_drain.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/mob_effect/zenith.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/butterfly.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/butterfly_large/1.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/butterfly_large/2.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/butterfly_large/3.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/catnip.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/catnip_large.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/firefly.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/firefly_large.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/ginkgo.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/ginkgo_large.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/pine.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/pine_large/1.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/pine_large/2.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/pine_large/3.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/sakura.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/snow_incense.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/snow_incense_large/1.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/snow_incense_large/2.png",
+      "passed": true
+    },
+    {
+      "check": "raw_member_sha256:assets/kaleidoscope_tavern/textures/particle/spore.png",
+      "passed": true
+    },
+    {
+      "check": "github_source_full_blob:src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/SmallChalkboardModel.java",
+      "passed": true
+    },
+    {
+      "check": "github_source_full_blob:src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/LargeChalkboardModel.java",
+      "passed": true
+    },
+    {
+      "check": "github_source_full_blob:src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/ChalkboardBlockEntityRender.java",
+      "passed": true
+    },
+    {
+      "check": "nine_missing_lights_have_both_model_and_texture",
+      "passed": true
+    },
+    {
+      "check": "fourteen_board_variants_have_textures_16_rotations_items_and_blockstates",
+      "passed": true
+    },
+    {
+      "check": "no_selected_resource_missing_or_different",
+      "passed": true
+    },
+    {
+      "check": "json_and_png_validation_has_no_errors",
+      "passed": true
+    },
+    {
+      "check": "no_packaging_of_fonts",
+      "passed": true
+    }
+  ],
+  "passed": 1304,
+  "failed": 0,
+  "minecraft_engine_test": "NOT_RUN"
+}

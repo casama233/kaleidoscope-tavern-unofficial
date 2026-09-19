@@ -1,0 +1,123 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "kt_assets_a17:sandwich_board_poppy_assembled",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "kt_art:rotation": {
+          "type": "int",
+          "range": [
+            0,
+            15
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:persistent": {},
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      }
+    },
+    "events": {
+      "kt_art:rotation_0": {
+        "set_property": {
+          "kt_art:rotation": 0
+        }
+      },
+      "kt_art:rotation_1": {
+        "set_property": {
+          "kt_art:rotation": 1
+        }
+      },
+      "kt_art:rotation_2": {
+        "set_property": {
+          "kt_art:rotation": 2
+        }
+      },
+      "kt_art:rotation_3": {
+        "set_property": {
+          "kt_art:rotation": 3
+        }
+      },
+      "kt_art:rotation_4": {
+        "set_property": {
+          "kt_art:rotation": 4
+        }
+      },
+      "kt_art:rotation_5": {
+        "set_property": {
+          "kt_art:rotation": 5
+        }
+      },
+      "kt_art:rotation_6": {
+        "set_property": {
+          "kt_art:rotation": 6
+        }
+      },
+      "kt_art:rotation_7": {
+        "set_property": {
+          "kt_art:rotation": 7
+        }
+      },
+      "kt_art:rotation_8": {
+        "set_property": {
+          "kt_art:rotation": 8
+        }
+      },
+      "kt_art:rotation_9": {
+        "set_property": {
+          "kt_art:rotation": 9
+        }
+      },
+      "kt_art:rotation_10": {
+        "set_property": {
+          "kt_art:rotation": 10
+        }
+      },
+      "kt_art:rotation_11": {
+        "set_property": {
+          "kt_art:rotation": 11
+        }
+      },
+      "kt_art:rotation_12": {
+        "set_property": {
+          "kt_art:rotation": 12
+        }
+      },
+      "kt_art:rotation_13": {
+        "set_property": {
+          "kt_art:rotation": 13
+        }
+      },
+      "kt_art:rotation_14": {
+        "set_property": {
+          "kt_art:rotation": 14
+        }
+      },
+      "kt_art:rotation_15": {
+        "set_property": {
+          "kt_art:rotation": 15
+        }
+      }
+    }
+  }
+}

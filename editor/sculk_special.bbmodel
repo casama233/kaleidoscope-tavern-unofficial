@@ -1,0 +1,2238 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sculk_special",
+  "model_identifier": "kt_assets_a10.sculk_special",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sculk_special_element0",
+      "type": "cube",
+      "uuid": "52d97d76-7ee9-5350-a937-6f6b0988d603",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            23.0,
+            6.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sculk_special_element1",
+      "type": "cube",
+      "uuid": "07869ea9-af10-5644-96b2-c842f6459518",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        4,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            19.0,
+            4.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            15.0,
+            2.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            15.0,
+            2.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sculk_special_element2_north",
+      "type": "cube",
+      "uuid": "d1d9b496-4629-50e5-a016-eea02d0ae36f",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        -3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element2_east",
+      "type": "cube",
+      "uuid": "9c428565-a7fa-59cd-9437-af7359025d22",
+      "from": [
+        -3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element2_south",
+      "type": "cube",
+      "uuid": "8f9f091c-0af4-5385-bb8f-fd037ecd6d04",
+      "from": [
+        -3.0,
+        4.95,
+        3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element2_west",
+      "type": "cube",
+      "uuid": "085f31b8-d1f0-5358-bf38-ab554a9aad93",
+      "from": [
+        3.0,
+        4.95,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        10.0,
+        3.0
+      ],
+      "origin": [
+        10,
+        4,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element3",
+      "type": "cube",
+      "uuid": "4ac66957-ab4b-51d3-b4c3-133e1d7110c2",
+      "from": [
+        -3.5,
+        9.55,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        -2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element4",
+      "type": "cube",
+      "uuid": "5835e9de-6b2b-539c-adef-9d4d711ff7bd",
+      "from": [
+        -3.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            1.0,
+            1.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element5",
+      "type": "cube",
+      "uuid": "1bbb9d9a-1a13-513a-b536-e2383c89483b",
+      "from": [
+        2.5,
+        9.55,
+        -2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        2.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            0.0,
+            6.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element6",
+      "type": "cube",
+      "uuid": "20fd22db-96b9-5927-b7b9-f4c89241d3d3",
+      "from": [
+        -3.5,
+        9.55,
+        2.5
+      ],
+      "to": [
+        3.5,
+        10.3,
+        3.5
+      ],
+      "origin": [
+        0,
+        9.8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            6.0,
+            7.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element7",
+      "type": "cube",
+      "uuid": "977800cd-40a3-5ddc-a660-3806ccb73dea",
+      "from": [
+        -3,
+        5,
+        -3
+      ],
+      "to": [
+        3,
+        5,
+        3
+      ],
+      "origin": [
+        4,
+        4,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            5.0,
+            13.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8.0,
+            8.0,
+            14.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8.0,
+            8.0,
+            14.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element8_north",
+      "type": "cube",
+      "uuid": "b29ee2b2-5263-5c93-a9b6-7b77ff4d650c",
+      "from": [
+        -2.5,
+        5.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        -2.5
+      ],
+      "origin": [
+        10.5,
+        5,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            3.95
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element8_east",
+      "type": "cube",
+      "uuid": "aa9c3d48-00bf-5616-8ad4-2c64213f1cc8",
+      "from": [
+        -2.5,
+        5.4,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        5,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            3.95
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element8_south",
+      "type": "cube",
+      "uuid": "4311cb2d-ebea-5ebc-884e-eb67c647a432",
+      "from": [
+        -2.5,
+        5.4,
+        2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        5,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            3.95
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element8_west",
+      "type": "cube",
+      "uuid": "1d71fddb-0a1f-5cb1-bb15-8d99d3069722",
+      "from": [
+        2.5,
+        5.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        10.5,
+        5,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            3.95
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element9",
+      "type": "cube",
+      "uuid": "02884539-4585-5961-81d9-d60fe9d8a783",
+      "from": [
+        -2.5,
+        5.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        5.4,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        5,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            25.0,
+            0.0,
+            30.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element10",
+      "type": "cube",
+      "uuid": "3163739e-09ae-59f4-bb2e-ef89ffc71ae2",
+      "from": [
+        -2.5,
+        9.6,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.6,
+        2.5
+      ],
+      "origin": [
+        5.5,
+        9.2,
+        -2.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            25.0,
+            0.0,
+            30.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            19.0,
+            0.0,
+            24.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element11",
+      "type": "cube",
+      "uuid": "cabb19a0-cd71-56b5-86aa-6f71662bc2e4",
+      "from": [
+        -1.50061,
+        4.00147,
+        -1.5
+      ],
+      "to": [
+        1.49939,
+        5.00147,
+        1.5
+      ],
+      "origin": [
+        0.5100499999999997,
+        3.99792,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            18.0,
+            5.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            18.0,
+            5.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2.0,
+            18.0,
+            5.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            18.0,
+            5.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            17.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            17.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sculk_special_element12",
+      "type": "cube",
+      "uuid": "d4fed2e9-9798-576c-86d8-0172a2b79186",
+      "from": [
+        -8,
+        0.1,
+        -8
+      ],
+      "to": [
+        8,
+        0.1,
+        8
+      ],
+      "origin": [
+        -8,
+        0.1,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            16.0,
+            16.0,
+            32.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "sculk_special_element13",
+      "type": "cube",
+      "uuid": "46983b12-6e71-5565-97c9-2deabe3832b8",
+      "from": [
+        -7,
+        5.5,
+        0
+      ],
+      "to": [
+        -2,
+        13.5,
+        0
+      ],
+      "origin": [
+        -3.5,
+        10,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            23.0,
+            16.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            23.0,
+            11.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sculk_special_element14",
+      "type": "cube",
+      "uuid": "d9d9ff71-6d48-52c1-bc8e-a9aa7262fb39",
+      "from": [
+        2,
+        5.5,
+        0
+      ],
+      "to": [
+        7,
+        13.5,
+        0
+      ],
+      "origin": [
+        5.5,
+        10,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            23.0,
+            11.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            23.0,
+            16.0,
+            31.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "e434c8fd-3e29-56c5-9a5b-9b974ddbac65",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "52d97d76-7ee9-5350-a937-6f6b0988d603",
+        "07869ea9-af10-5644-96b2-c842f6459518",
+        "d1d9b496-4629-50e5-a016-eea02d0ae36f",
+        "9c428565-a7fa-59cd-9437-af7359025d22",
+        "8f9f091c-0af4-5385-bb8f-fd037ecd6d04",
+        "085f31b8-d1f0-5358-bf38-ab554a9aad93",
+        "4ac66957-ab4b-51d3-b4c3-133e1d7110c2",
+        "5835e9de-6b2b-539c-adef-9d4d711ff7bd",
+        "1bbb9d9a-1a13-513a-b536-e2383c89483b",
+        "20fd22db-96b9-5927-b7b9-f4c89241d3d3",
+        "977800cd-40a3-5ddc-a660-3806ccb73dea",
+        "b29ee2b2-5263-5c93-a9b6-7b77ff4d650c",
+        "aa9c3d48-00bf-5616-8ad4-2c64213f1cc8",
+        "4311cb2d-ebea-5ebc-884e-eb67c647a432",
+        "1d71fddb-0a1f-5cb1-bb15-8d99d3069722",
+        "02884539-4585-5961-81d9-d60fe9d8a783",
+        "3163739e-09ae-59f4-bb2e-ef89ffc71ae2",
+        "cabb19a0-cd71-56b5-86aa-6f71662bc2e4",
+        "d4fed2e9-9798-576c-86d8-0172a2b79186",
+        "46983b12-6e71-5565-97c9-2deabe3832b8",
+        "d9d9ff71-6d48-52c1-bc8e-a9aa7262fb39"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sculk_special.png",
+      "id": "0",
+      "uuid": "5b732836-f0b6-56f2-841e-464ba1b7b468",
+      "width": 32,
+      "height": 512,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,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",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "interpolate": false
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "sculk_special_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "sculk_special_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "sculk_special_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "sculk_special_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "sculk_special_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "sculk_special_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "sculk_special_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "sculk_special_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          2,
+          0
+        ],
+        "scale": [
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "translation": [
+          -1.25,
+          1,
+          0
+        ],
+        "scale": [
+          1.1,
+          1.1,
+          1.1
+        ]
+      },
+      "head": {
+        "translation": [
+          1,
+          15,
+          -2
+        ]
+      },
+      "fixed": {
+        "rotation": [
+          -90,
+          -180,
+          0
+        ],
+        "translation": [
+          2,
+          0.25,
+          -13.25
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          1.7
+        ]
+      }
+    },
+    "animation": {
+      "id": "sculk_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png",
+      "metadata": "src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        512
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "frame_count": 16,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "ticks_per_frame": 1,
+      "blend_frames": false,
+      "loop_ticks": 16,
+      "frames": [
+        {
+          "index": 0,
+          "file": "animation-sources/frames/sculk_special/000.png",
+          "rgba_sha256": "f3b025306ce668995b93b70b6671e03378e85f2d55a0214f2a1905ca34032484"
+        },
+        {
+          "index": 1,
+          "file": "animation-sources/frames/sculk_special/001.png",
+          "rgba_sha256": "8ef4fedbf30f2174047f56edcba0de23e63e3207f40c5efe2ae2c38fb6f9e0a9"
+        },
+        {
+          "index": 2,
+          "file": "animation-sources/frames/sculk_special/002.png",
+          "rgba_sha256": "be3e3aa11cd6f7a2739ebae75861864d0d34c04a1db0f5147385367c9d077c46"
+        },
+        {
+          "index": 3,
+          "file": "animation-sources/frames/sculk_special/003.png",
+          "rgba_sha256": "be3e3aa11cd6f7a2739ebae75861864d0d34c04a1db0f5147385367c9d077c46"
+        },
+        {
+          "index": 4,
+          "file": "animation-sources/frames/sculk_special/004.png",
+          "rgba_sha256": "1bfe347734a4b6972e0e54e9632cdf07426b82e1e872efa7b9d114894de135f7"
+        },
+        {
+          "index": 5,
+          "file": "animation-sources/frames/sculk_special/005.png",
+          "rgba_sha256": "675fef73af39d6bc553f54b6f21eb3c7bd563b0dbfe186da978306f010ea23a7"
+        },
+        {
+          "index": 6,
+          "file": "animation-sources/frames/sculk_special/006.png",
+          "rgba_sha256": "05ede1ff36b707a2cba18115965382862a54d78d9c56f4db7d95858998a28c04"
+        },
+        {
+          "index": 7,
+          "file": "animation-sources/frames/sculk_special/007.png",
+          "rgba_sha256": "dc0bffb483080bd5a542dc4c4a554d077d0d78f1d67239fe8b0ae449c8952e7b"
+        },
+        {
+          "index": 8,
+          "file": "animation-sources/frames/sculk_special/008.png",
+          "rgba_sha256": "2b310a36f211ed0cee678d873d2a5706a775f0d5e069268b68c74183b81935c4"
+        },
+        {
+          "index": 9,
+          "file": "animation-sources/frames/sculk_special/009.png",
+          "rgba_sha256": "78ffcd03817505aa1eb1fc4dbe5562f0d3e645279ce3ebb27a4ef3f87f59db29"
+        },
+        {
+          "index": 10,
+          "file": "animation-sources/frames/sculk_special/010.png",
+          "rgba_sha256": "a35cdf2b83f1bea4d9f51df04597c52eeea56894f3f1c35c9160eea1174624a3"
+        },
+        {
+          "index": 11,
+          "file": "animation-sources/frames/sculk_special/011.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 12,
+          "file": "animation-sources/frames/sculk_special/012.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 13,
+          "file": "animation-sources/frames/sculk_special/013.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 14,
+          "file": "animation-sources/frames/sculk_special/014.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        },
+        {
+          "index": 15,
+          "file": "animation-sources/frames/sculk_special/015.png",
+          "rgba_sha256": "ca915de635952cf179949c0187e44f9d88698eaf2b4ab9022fea778d74febad9"
+        }
+      ],
+      "engine_accepted": false,
+      "atlas_base": "textures/kt_derived/a10/sculk_special_frame0",
+      "original_strip": "textures/kaleidoscope_tavern/block/mixology/sculk_special"
+    },
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

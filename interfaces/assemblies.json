@@ -1,0 +1,142 @@
+{
+  "batch": "A12",
+  "units": "model pixels,16 pixels=1 block",
+  "assemblies": [
+    {
+      "id": "bell_pendant_lamp_assembled",
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "bell_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "bell_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "blue_pendant_lamp_assembled",
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "blue_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "blue_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "yellow_pendant_lamp_assembled",
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "yellow_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "yellow_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "stepladder_assembled",
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "stepladder_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "stepladder_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    },
+    {
+      "id": "sandwich_board_assembled",
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "sandwich_board_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "sandwich_board_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base_top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  ],
+  "engine_accepted": false
+}

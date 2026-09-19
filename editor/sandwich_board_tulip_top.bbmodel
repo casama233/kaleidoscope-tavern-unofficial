@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_tulip_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_tulip_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_tulip_top_element0",
+      "type": "cube",
+      "uuid": "72789d1a-2ebd-52f5-8c6d-395a9cf1dee4",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_tulip_top_element1",
+      "type": "cube",
+      "uuid": "3e57b2f6-fbb2-59ab-9abb-599f3df649d5",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_tulip_top_element2",
+      "type": "cube",
+      "uuid": "026335e4-af8d-5e8c-886b-5376f9b181f7",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_tulip_top_element3",
+      "type": "cube",
+      "uuid": "ea934408-c11b-5419-bf00-dbda0026cb0a",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_tulip_top_element4",
+      "type": "cube",
+      "uuid": "0aeca1df-0ab0-5e66-b06d-42d5d690bbba",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_tulip_top_element5",
+      "type": "cube",
+      "uuid": "0d160a99-9ad5-5c65-84b7-f1c88ca34ab5",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "4034abc3-db43-54f9-9505-72ed5393ab7b",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "72789d1a-2ebd-52f5-8c6d-395a9cf1dee4",
+        "3e57b2f6-fbb2-59ab-9abb-599f3df649d5",
+        "026335e4-af8d-5e8c-886b-5376f9b181f7",
+        "ea934408-c11b-5419-bf00-dbda0026cb0a",
+        "0aeca1df-0ab0-5e66-b06d-42d5d690bbba",
+        "0d160a99-9ad5-5c65-84b7-f1c88ca34ab5"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_tulip_top.png",
+      "id": "0",
+      "uuid": "a21fe848-f501-5095-8211-85229f88531a",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAFjElEQVR4nO1ZX2xTVRj/HdZ1dMzVMPbHCpNNatgmfxJfVDCpVBONewDRSGIIJpRo1uxBAWWYxZkJAxRNNC4RxkMTXwwufYHMB5aQuD9qWAJCy5LNtbZj6VpWuXVt6dru86G7l9723vberQtg+CU3J/c75/vO+X4933e+c8u2bV1P5ToN+obHGRYB40svklqdsV+HFjXXckCT/tL0+iuqnHH0XWLaslJVE87NRvLb3dhAANA0epM5fT4CgMaaGnbtYB0BwJbTroIRuEJKWKJblfNZDjh9PnL6fMQ72biuGpP2WarT6wEA1w7W0fpGjTBWqd1oNEq5dLIIKNGtgkanzfkUmgSnzyc4WrH9Ok61Mry30w8AmPkliZO9OwAAbmcCz3zhVGXbxXECCVIQEcA7nw9SJBw/9Al+7v5B1eLS4eI4lA+XCe/Fhiqs3VXG1u4qYwDwdb0OmosrhXGT9lnFu8DFcRh0OCT7NJLSReDoVycXrcvH9wzS4/veL22zOhkAfLyxgRr27sGtlgtY/dwqTNpniScol+2z/f10wGyWHFcwAro7j+FO6F8wxlBfW4uiFSsw5naj7VQXjh8+gqNfnpDVdWxsIFwEEm/czTlH0+hNtq+V0UcDmwBcV7w2OeeBBQJC0YRiY3Joaf9Uti+X8xa7idA2jcZ11WCnL+fN7jark317zkjugU34bvtTi1tsGjQAUKotWrKhyz/1YnjkCozr6wAQgJQvYx4XMA+0neqS1ItP+fFNVzV6duV3nod+/xiz2E0Un/Ived0aANAULf1YNb2ze1F6NquTmTvdZLGbSCkJFruJXDf+QH97RDR+ZuuzVHH1BuNbXs6dM5J+/xjj23SdguWArsNHYKyrAwD4A7dRVbkGb7W8r0i3vz3C9n3vV5zV41P+LOd50KsmuuyezpJz54zkcT+WJdcAQCKpuprNQluOOM+F9EpPqY7N6mRSen+Gk9iM2xhPcqLxV0aSqKp4HP6ZO1m2lrwDKJ4EAJw/24Nx1wQAhg0LOwEA/nK5QSC0HT8ma6N8uAwRD1FpLVNEQsRDFBwOo+I1ce56eewmO1tvoAMTUyI75u4J1t9ST+buiSz7IgJi0XBKmKcYSkTnhLEAEI/F8PYBC+KxGACguKREkPPv8VhMkKejsaaGWewm6hi5kHPOdARHwuhAM3p02Tkj03keUs4DEjsg3TE5ZDrPt1KOnz/Tg/GJCRz6/DNBnon4lB8dhua88/LoQDMKcQIAMiGghAQpZDoYj8Wwc9/evHqdAQb9ylvoAYQSN7PCi3iIgiOpbe/iOFU5Ixckb4P3A5xXmyqKAIRemBVdYCx2EwVHUj/Kj0NDGHQ44OloWnrmRkYd4Oi7pJrVQnzcaK8kFBuq8GHbNJ5c14y+8nYMIuX46eAtcNcCCH0wi4a9e7DdO40TrQy/b6lSNYe5s5RSx20jFRuqhMLrgdgBNquT8TE96p3GwGgr3jXuQAcugPOmEvLJ3h0Y9abO98mgW1XlCAD66g0wd5ZSsUFMnCgH7H7eQIm5eWi02bzIyXt/k866amGzOpmNf7ECxwxhAlK7I6u/Xd4Of5wGBpNUue1eibu6cjW4hfooGAgK40WFUCSaOtPnFtpMyMmXA/muuXIIe+cR8RCFvfNZffrqDQAAbnpckIl2gLaIQbdwMYrOpZzVSVyUonNJ6LRFwpgHCTF/FIBuoU3hzTObhYQZDARFZbSI5a215QTcux1GFDh41RN6YL7w8lDyoYSHaAc8bSiTHBTg7qJSv1Ky76onpHZ9yw414SMiICIT44k4yfY97MjKAYA47vk4z9X3MENEQCAUE+K+VFskygF/387+Q6MQX5LuN0QEPLFGp97C+D+FWst9gaIc8H+GojogPdYz+x/hER5u/AcVdG3dOBRMTAAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/tulip/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_tulip_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/tulip.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

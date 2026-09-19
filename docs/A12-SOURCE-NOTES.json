@@ -1,0 +1,354 @@
+[
+  {
+    "id": "table_single",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/single.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_left",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/left.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_middle",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_right",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/right.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_left_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/left_rot.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_middle_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/middle_rot.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "table_right_rot",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/right_rot.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "bell_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 2,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "bell_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 4,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "blue_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 2,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "blue_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 4,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 5,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "yellow_pendant_lamp_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 2,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "yellow_pendant_lamp_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+    "warnings": [],
+    "cullface": [
+      {
+        "element": 0,
+        "side": "up",
+        "cullface": "up"
+      },
+      {
+        "element": 3,
+        "side": "up",
+        "cullface": "up"
+      }
+    ],
+    "assembly": null
+  },
+  {
+    "id": "stepladder_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "stepladder_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/top.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "sandwich_board_bottom",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "sandwich_board_top",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base_top.json",
+    "warnings": [
+      {
+        "type": "DANGLING_EDITOR_GROUP_INDEX",
+        "index": 5,
+        "elements": 5,
+        "handling": "Raw source unchanged; export groups only actual elements. No ghost cube."
+      }
+    ],
+    "cullface": [],
+    "assembly": null
+  },
+  {
+    "id": "bell_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": {
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "bell_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "bell_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  },
+  {
+    "id": "blue_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": {
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "blue_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "blue_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  },
+  {
+    "id": "yellow_pendant_lamp_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": {
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "yellow_pendant_lamp_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "yellow_pendant_lamp_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  },
+  {
+    "id": "stepladder_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": {
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "stepladder_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/bottom.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "stepladder_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/stepladder/top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  },
+  {
+    "id": "sandwich_board_assembled",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+    "warnings": [],
+    "cullface": [],
+    "assembly": {
+      "kind": "DERIVED_INSPECTION_ASSEMBLY",
+      "parts": [
+        {
+          "asset": "sandwich_board_bottom",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base.json",
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "asset": "sandwich_board_top",
+          "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/base_top.json",
+          "translation": [
+            0,
+            16,
+            0
+          ]
+        }
+      ],
+      "basis": "Pinned upper/lower blockstate references; pure one-block vertical composition.",
+      "gameplay_connected": false,
+      "engine_accepted": false
+    }
+  }
+]

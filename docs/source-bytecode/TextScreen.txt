@@ -1,0 +1,308 @@
+Compiled from "TextScreen.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.gui.block.TextScreen extends net.minecraft.client.gui.screens.Screen {
+  private final com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.TextBlockEntity blockEntity;
+
+  private java.lang.String text;
+
+  private com.github.ysbbbbbb.kaleidoscopetavern.util.TextAlignment textAlignment;
+
+  private net.minecraft.client.gui.components.MultiLineEditBox customSetting;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.gui.block.TextScreen(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.TextBlockEntity);
+    Code:
+       0: aload_0
+       1: ldc           #1                  // String Text Edit Screen
+       3: invokestatic  #3                  // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       6: invokespecial #9                  // Method net/minecraft/client/gui/screens/Screen."<init>":(Lnet/minecraft/network/chat/Component;)V
+       9: aload_0
+      10: aload_1
+      11: putfield      #15                 // Field blockEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity;
+      14: aload_0
+      15: aload_1
+      16: invokevirtual #21                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.getText:()Ljava/lang/String;
+      19: putfield      #27                 // Field text:Ljava/lang/String;
+      22: aload_0
+      23: aload_1
+      24: invokevirtual #31                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.getTextAlignment:()Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+      27: putfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+      30: return
+
+  protected void init();
+    Code:
+       0: aload_0
+       1: invokevirtual #39                 // Method clearWidgets:()V
+       4: aload_0
+       5: getfield      #43                 // Field width:I
+       8: iconst_2
+       9: idiv
+      10: sipush        165
+      13: isub
+      14: istore_1
+      15: aload_0
+      16: getfield      #47                 // Field height:I
+      19: iconst_2
+      20: idiv
+      21: bipush        80
+      23: isub
+      24: istore_2
+      25: sipush        256
+      28: istore_3
+      29: aload_0
+      30: getfield      #15                 // Field blockEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity;
+      33: invokevirtual #50                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.getMaxTextLength:()I
+      36: istore        4
+      38: aload_0
+      39: aload_0
+      40: new           #54                 // class net/minecraft/client/gui/components/MultiLineEditBox
+      43: dup
+      44: aload_0
+      45: getfield      #56                 // Field font:Lnet/minecraft/client/gui/Font;
+      48: iload_1
+      49: iload_2
+      50: iload_3
+      51: bipush        120
+      53: ldc           #60                 // String gui.kaleidoscope_tavern.text.edit.placeholder
+      55: invokestatic  #62                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      58: ldc           #65                 // String Custom Setting Box
+      60: invokestatic  #3                  // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      63: invokespecial #67                 // Method net/minecraft/client/gui/components/MultiLineEditBox."<init>":(Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)V
+      66: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+      69: checkcast     #54                 // class net/minecraft/client/gui/components/MultiLineEditBox
+      72: putfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      75: aload_0
+      76: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      79: aload_0
+      80: getfield      #27                 // Field text:Ljava/lang/String;
+      83: invokevirtual #78                 // Method net/minecraft/client/gui/components/MultiLineEditBox.setValue:(Ljava/lang/String;)V
+      86: aload_0
+      87: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      90: iload         4
+      92: invokevirtual #82                 // Method net/minecraft/client/gui/components/MultiLineEditBox.setCharacterLimit:(I)V
+      95: aload_0
+      96: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      99: aload_0
+     100: invokedynamic #86,  0             // InvokeDynamic #0:accept:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Ljava/util/function/Consumer;
+     105: invokevirtual #90                 // Method net/minecraft/client/gui/components/MultiLineEditBox.setValueListener:(Ljava/util/function/Consumer;)V
+     108: aload_0
+     109: getstatic     #94                 // Field net/minecraft/network/chat/CommonComponents.GUI_CANCEL:Lnet/minecraft/network/chat/Component;
+     112: aload_0
+     113: invokedynamic #100,  0            // InvokeDynamic #1:onPress:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     118: invokestatic  #104                // Method net/minecraft/client/gui/components/Button.builder:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     121: iload_1
+     122: iload_2
+     123: sipush        135
+     126: iadd
+     127: bipush        126
+     129: bipush        20
+     131: invokevirtual #110                // Method net/minecraft/client/gui/components/Button$Builder.bounds:(IIII)Lnet/minecraft/client/gui/components/Button$Builder;
+     134: invokevirtual #116                // Method net/minecraft/client/gui/components/Button$Builder.build:()Lnet/minecraft/client/gui/components/Button;
+     137: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     140: pop
+     141: aload_0
+     142: getstatic     #120                // Field net/minecraft/network/chat/CommonComponents.GUI_DONE:Lnet/minecraft/network/chat/Component;
+     145: aload_0
+     146: invokedynamic #123,  0            // InvokeDynamic #2:onPress:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     151: invokestatic  #104                // Method net/minecraft/client/gui/components/Button.builder:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     154: iload_1
+     155: sipush        130
+     158: iadd
+     159: iload_2
+     160: sipush        135
+     163: iadd
+     164: bipush        126
+     166: bipush        20
+     168: invokevirtual #110                // Method net/minecraft/client/gui/components/Button$Builder.bounds:(IIII)Lnet/minecraft/client/gui/components/Button$Builder;
+     171: invokevirtual #116                // Method net/minecraft/client/gui/components/Button$Builder.build:()Lnet/minecraft/client/gui/components/Button;
+     174: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     177: pop
+     178: ldc           #124                // String gui.kaleidoscope_tavern.text.edit.text_alignment.left
+     180: invokestatic  #62                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     183: aload_0
+     184: invokedynamic #126,  0            // InvokeDynamic #3:onPress:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     189: invokestatic  #104                // Method net/minecraft/client/gui/components/Button.builder:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     192: iload_1
+     193: iload_3
+     194: iadd
+     195: iconst_5
+     196: iadd
+     197: iload_2
+     198: bipush        25
+     200: iadd
+     201: bipush        80
+     203: bipush        20
+     205: invokevirtual #110                // Method net/minecraft/client/gui/components/Button$Builder.bounds:(IIII)Lnet/minecraft/client/gui/components/Button$Builder;
+     208: invokevirtual #116                // Method net/minecraft/client/gui/components/Button$Builder.build:()Lnet/minecraft/client/gui/components/Button;
+     211: astore        5
+     213: ldc           #127                // String gui.kaleidoscope_tavern.text.edit.text_alignment.center
+     215: invokestatic  #62                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     218: aload_0
+     219: invokedynamic #129,  0            // InvokeDynamic #4:onPress:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     224: invokestatic  #104                // Method net/minecraft/client/gui/components/Button.builder:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     227: iload_1
+     228: iload_3
+     229: iadd
+     230: iconst_5
+     231: iadd
+     232: iload_2
+     233: bipush        50
+     235: iadd
+     236: bipush        80
+     238: bipush        20
+     240: invokevirtual #110                // Method net/minecraft/client/gui/components/Button$Builder.bounds:(IIII)Lnet/minecraft/client/gui/components/Button$Builder;
+     243: invokevirtual #116                // Method net/minecraft/client/gui/components/Button$Builder.build:()Lnet/minecraft/client/gui/components/Button;
+     246: astore        6
+     248: ldc           #130                // String gui.kaleidoscope_tavern.text.edit.text_alignment.right
+     250: invokestatic  #62                 // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     253: aload_0
+     254: invokedynamic #132,  0            // InvokeDynamic #5:onPress:(Lcom/github/ysbbbbbb/kaleidoscopetavern/client/gui/block/TextScreen;)Lnet/minecraft/client/gui/components/Button$OnPress;
+     259: invokestatic  #104                // Method net/minecraft/client/gui/components/Button.builder:(Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/gui/components/Button$OnPress;)Lnet/minecraft/client/gui/components/Button$Builder;
+     262: iload_1
+     263: iload_3
+     264: iadd
+     265: iconst_5
+     266: iadd
+     267: iload_2
+     268: bipush        75
+     270: iadd
+     271: bipush        80
+     273: bipush        20
+     275: invokevirtual #110                // Method net/minecraft/client/gui/components/Button$Builder.bounds:(IIII)Lnet/minecraft/client/gui/components/Button$Builder;
+     278: invokevirtual #116                // Method net/minecraft/client/gui/components/Button$Builder.build:()Lnet/minecraft/client/gui/components/Button;
+     281: astore        7
+     283: aload_0
+     284: getfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     287: getstatic     #133                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.LEFT:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     290: if_acmpne     302
+     293: aload         5
+     295: iconst_0
+     296: putfield      #138                // Field net/minecraft/client/gui/components/Button.active:Z
+     299: goto          337
+     302: aload_0
+     303: getfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     306: getstatic     #142                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.CENTER:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     309: if_acmpne     321
+     312: aload         6
+     314: iconst_0
+     315: putfield      #138                // Field net/minecraft/client/gui/components/Button.active:Z
+     318: goto          337
+     321: aload_0
+     322: getfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     325: getstatic     #145                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.RIGHT:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+     328: if_acmpne     337
+     331: aload         7
+     333: iconst_0
+     334: putfield      #138                // Field net/minecraft/client/gui/components/Button.active:Z
+     337: aload_0
+     338: aload         5
+     340: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     343: pop
+     344: aload_0
+     345: aload         6
+     347: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     350: pop
+     351: aload_0
+     352: aload         7
+     354: invokevirtual #70                 // Method addRenderableWidget:(Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+     357: pop
+     358: return
+
+  public void resize(net.minecraft.client.Minecraft, int, int);
+    Code:
+       0: aload_0
+       1: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+       4: invokevirtual #148                // Method net/minecraft/client/gui/components/MultiLineEditBox.getValue:()Ljava/lang/String;
+       7: astore        4
+       9: aload_0
+      10: aload_1
+      11: iload_2
+      12: iload_3
+      13: invokespecial #151                // Method net/minecraft/client/gui/screens/Screen.resize:(Lnet/minecraft/client/Minecraft;II)V
+      16: aload_0
+      17: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      20: aload         4
+      22: invokevirtual #78                 // Method net/minecraft/client/gui/components/MultiLineEditBox.setValue:(Ljava/lang/String;)V
+      25: return
+
+  private void onDone();
+    Code:
+       0: new           #155                // class com/github/ysbbbbbb/kaleidoscopetavern/network/message/TextUpdateC2SMessage
+       3: dup
+       4: aload_0
+       5: getfield      #15                 // Field blockEntity:Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity;
+       8: invokevirtual #157                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.getBlockPos:()Lnet/minecraft/core/BlockPos;
+      11: aload_0
+      12: getfield      #27                 // Field text:Ljava/lang/String;
+      15: aload_0
+      16: getfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+      19: invokespecial #161                // Method com/github/ysbbbbbb/kaleidoscopetavern/network/message/TextUpdateC2SMessage."<init>":(Lnet/minecraft/core/BlockPos;Ljava/lang/String;Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;)V
+      22: invokestatic  #164                // Method com/github/ysbbbbbb/kaleidoscopetavern/network/NetworkHandler.sendToServer:(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V
+      25: aload_0
+      26: invokevirtual #170                // Method onClose:()V
+      29: return
+
+  public boolean mouseReleased(double, double, int);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: iload         5
+       5: invokespecial #173                // Method net/minecraft/client/gui/screens/Screen.mouseReleased:(DDI)Z
+       8: ifne          25
+      11: aload_0
+      12: getfield      #74                 // Field customSetting:Lnet/minecraft/client/gui/components/MultiLineEditBox;
+      15: dload_1
+      16: dload_3
+      17: iload         5
+      19: invokevirtual #177                // Method net/minecraft/client/gui/components/MultiLineEditBox.mouseReleased:(DDI)Z
+      22: ifeq          29
+      25: iconst_1
+      26: goto          30
+      29: iconst_0
+      30: ireturn
+
+  private void lambda$init$5(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: getstatic     #145                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.RIGHT:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       4: putfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       7: aload_0
+       8: invokevirtual #178                // Method init:()V
+      11: return
+
+  private void lambda$init$4(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: getstatic     #142                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.CENTER:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       4: putfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       7: aload_0
+       8: invokevirtual #178                // Method init:()V
+      11: return
+
+  private void lambda$init$3(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: getstatic     #133                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment.LEFT:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       4: putfield      #35                 // Field textAlignment:Lcom/github/ysbbbbbb/kaleidoscopetavern/util/TextAlignment;
+       7: aload_0
+       8: invokevirtual #178                // Method init:()V
+      11: return
+
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: invokevirtual #181                // Method onDone:()V
+       4: return
+
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+    Code:
+       0: aload_0
+       1: invokevirtual #170                // Method onClose:()V
+       4: return
+
+  private void lambda$init$0(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #27                 // Field text:Ljava/lang/String;
+       5: return
+}

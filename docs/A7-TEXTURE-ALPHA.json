@@ -1,0 +1,540 @@
+[
+  {
+    "id": "rum_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/rum",
+    "transparent_pixels": 93,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 163,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "rum_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/rum",
+    "transparent_pixels": 93,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 163,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "rum_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/rum",
+    "transparent_pixels": 93,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 163,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "rum_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/rum",
+    "transparent_pixels": 93,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 163,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sherry_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sherry",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sherry_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sherry",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sherry_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sherry",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sherry_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sherry",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "red_queen_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/red_queen",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "red_queen_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/red_queen",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "red_queen_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/red_queen",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "red_queen_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/red_queen",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "vinegar_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/vinegar",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "vinegar_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/vinegar",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "vinegar_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/vinegar",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "vinegar_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/vinegar",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "whiskey_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/whiskey",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "whiskey_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/whiskey",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "whiskey_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/whiskey",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "whiskey_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/whiskey",
+    "transparent_pixels": 183,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 73,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "miners_star_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/miners_star",
+    "transparent_pixels": 102,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 154,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "miners_star_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/miners_star",
+    "transparent_pixels": 102,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 154,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "miners_star_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/miners_star",
+    "transparent_pixels": 102,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 154,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "miners_star_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/miners_star",
+    "transparent_pixels": 102,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 154,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sauvignon_blanc_dry_white",
+    "transparent_pixels": 122,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 134,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sauvignon_blanc_dry_white",
+    "transparent_pixels": 122,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 134,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sauvignon_blanc_dry_white",
+    "transparent_pixels": 122,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 134,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sauvignon_blanc_dry_white",
+    "transparent_pixels": 122,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 134,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sweet_berry_wine_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sweet_berry_wine",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sweet_berry_wine_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sweet_berry_wine",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sweet_berry_wine_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sweet_berry_wine",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sweet_berry_wine_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sweet_berry_wine",
+    "transparent_pixels": 144,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 112,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sakura_wine_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sakura_wine",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sakura_wine_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count2.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sakura_wine",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sakura_wine_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count3.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sakura_wine",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "sakura_wine_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count4.json",
+    "actual_texture_size": [
+      16,
+      16
+    ],
+    "source_texture_size_hint": null,
+    "texture": "block/brew/sakura_wine",
+    "transparent_pixels": 182,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 74,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "empty_glassware",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json",
+    "actual_texture_size": [
+      32,
+      32
+    ],
+    "source_texture_size_hint": [
+      32,
+      32
+    ],
+    "texture": "block/mixology/empty_glassware",
+    "transparent_pixels": 727,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 297,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  },
+  {
+    "id": "screwdriver",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+    "actual_texture_size": [
+      32,
+      32
+    ],
+    "source_texture_size_hint": [
+      32,
+      32
+    ],
+    "texture": "block/mixology/screwdriver",
+    "transparent_pixels": 744,
+    "partial_alpha_pixels": 0,
+    "opaque_pixels": 280,
+    "uv_scaling": "Actual PNG dimensions; Java UV coordinates use a 16-unit domain."
+  }
+]

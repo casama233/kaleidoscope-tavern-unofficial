@@ -1,0 +1,739 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_wither_rose_sandwich_board",
+  "model_identifier": "kt_assets_a17.item_display_wither_rose_sandwich_board",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "item_display_wither_rose_sandwich_board_element0",
+      "type": "cube",
+      "uuid": "825b1b97-c02c-5ea1-ae8a-6687bfde1dd3",
+      "from": [
+        3.505000000000001,
+        0.01025,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element1",
+      "type": "cube",
+      "uuid": "34580312-35ee-5363-aff9-313a9d8456a3",
+      "from": [
+        3.5,
+        -0.43015,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        19.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element2",
+      "type": "cube",
+      "uuid": "d7b667c1-c724-5049-b923-590879f371b1",
+      "from": [
+        -5.495,
+        0.01025,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element3",
+      "type": "cube",
+      "uuid": "29fa601b-d468-5988-960d-4d3af793a1fe",
+      "from": [
+        -5.5,
+        -0.43015,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        19.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element4",
+      "type": "cube",
+      "uuid": "46b54b54-5362-5f72-a6ed-faafe185febc",
+      "from": [
+        -6.5,
+        4,
+        -5.7
+      ],
+      "to": [
+        6.5,
+        6,
+        5.300000000000001
+      ],
+      "origin": [
+        0.5,
+        13.25,
+        0.9653799999999997
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element5",
+      "type": "cube",
+      "uuid": "dacba3ea-e442-5c0b-975f-227736e07308",
+      "from": [
+        -6,
+        5.7724,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        21.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        13.7724,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            1.0,
+            28.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_wither_rose_sandwich_board_element6",
+      "type": "cube",
+      "uuid": "be491aa0-a384-5a8d-84ef-f258ecc7d178",
+      "from": [
+        -8,
+        2.7724,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        23.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        13.7724,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "da24b62d-65ce-55d9-b614-efe395e085d0",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "825b1b97-c02c-5ea1-ae8a-6687bfde1dd3",
+        "34580312-35ee-5363-aff9-313a9d8456a3",
+        "d7b667c1-c724-5049-b923-590879f371b1",
+        "29fa601b-d468-5988-960d-4d3af793a1fe",
+        "46b54b54-5362-5f72-a6ed-faafe185febc",
+        "dacba3ea-e442-5c0b-975f-227736e07308",
+        "be491aa0-a384-5a8d-84ef-f258ecc7d178"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "item_display_wither_rose_sandwich_board.png",
+      "id": "0",
+      "uuid": "e5586ec3-8421-59ed-a5a1-13486de0e4bf",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAE90lEQVR4nO2YTWgbRxTH/6OPlbVWY8fxBxGuI1fVlq7jVAcHlX6AiYugt0JaCobSS0shpxwaarv0VGK3aQ8+BUp7KQFDaQO9GUQLgZamhrSoBKtlZcXyB0r0FdmWvfKuJE8P1ipafa6kTZ2U/ECInZ03M+/te2/eDHnZ7aDHrCYs3lwhaAHXqy/RZmWCv/xWdS5u0kXN/WbsBXII+4RiHw/vpACQchsgLARbWmctTKUPI6+/1pQyy4s/EcbGNjWhvCtWbffwThpNEBz3S8i6DXB4OdrJm2DzSbCxLJLbaTwtsBAK/blJF9XDGKZqjRZrZ10hKbPX7rwVRAeNGNjMq74y1+uisa00uFODAIBdUYTDy1Gml+rmCRUGsFg7YbIyDQX1NsLAZh4AVIoJC0Hi8HL017/+BgDQ090Y2MwjCiM8vJPaWBY/37rdliEMpQ9alTdZmQovmf3wI/xw9auWFjExNkqlbB42li3Gu0LYJ5DVSIyYx7sQ9glkKRAiYZ9AooNG7IrVw6kZqoZAK8x8+XnLsruiiBNdT8He14Nri9W/aKlnKGGw5As9nBzQClc/vYytnTQIIXhmaAhGgwHBcBjTV+Ywe2kKM198VlM25TYgdiOK5Ha64TzcpIvKCbSUA86dPUMB4F4sjsDaXQIUDLCTyTU7VgUXPvm45rt6ygPAcf8Boqe74S/Z+mohLASJh3fSAd5JlwLaPeDc2TN0ObSOEecQkukM+FMnaWDtLjEBAMsYtY5TkxvfXcfNP27B5RgGQAEcri24vgocANNX5qrKeXgnTbkNcAoWhDXMM2zvp8q2ODE2SrUmwX/urIPtYHAvFgfbwWBrNwOg4AEmY/s7yvjb51uSs7EsogkJG9w+cKtx/9VIjLzywvMUQFNJMJLcIvYT3RRgIEkyIsmtByGgB3OXpuAaHgYAxOIJ9Pf14s0LHzSU2+D20dlvxvJ8QNNXcHg5entlDdt7IszjXUBA+xoVpUsxAUAu33Q1W8F0gzivhbAQJNykS/MCOnkTsrwJ5pi5pfnKadsDaPawgPn+62+wsnoHAMGzBU8AgNBqGBQU07OX646jtbRdng+QibFRGupRnxdaRWUApbprVAzlMrKqEsxKEt56/z1kJQkAYLZYiu3Kc1aSiu3lyAlSrAS1sMHtY8B/oClpNsJQ3iBl9pDLyHV/5cor/2aLpais8vzjt9cwNzWj6luOcgZweDlNoSAnCJrZAutRNQRarfPLFcxKEt54952GckuBEJlgR+muKELL/h72CUSv02CFBxwFE2OjNLmdhnIeAA5zgsPL0dIEqXiIw8tROaHPtQBp90JEL5TTnb2vB38+FwdwmPAUA3hSdkTi9xHqkeC8b2n7FKjwyBgAqH8jpFR/FrNRt/gHynLA+RftNCcfwMRURkat9uu/R3RbjLAQJCMXeVq+vaXcBsAv6q48UMgBSiEkZvKQ8xRiJl/xq9WuN8vzATJyka/YDVJug+7KA2UewBgJrIWDUUY+VM5a5aCUkfOwMsZiH70pL4v1vggtRTWwe+gYBR6cDkUNCvrXd448d7SDygOcdlvVTvHtffR1dVR951/f0X9V/yEqA9SK6VyWPpR4fxSoyAGAOu6VOK/37nFGZYD4jlSMe5YxqnLAWqLy8kGPm6SjRmWAk73W5kdYSem1liNBUw74P6OpDiiN9fL3T3jC482/MNhm3psWkWEAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/wither_rose_sandwich_board.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/wither_rose_sandwich_board.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/deco_sandwich_board.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/item_display_wither_rose_sandwich_board.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/wither_rose.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,63 @@
+Compiled from "CameraAnglesEvent.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.event.CameraAnglesEvent {
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.event.CameraAnglesEvent();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onCameraAngles(net.neoforged.neoforge.client.event.ViewportEvent$ComputeCameraAngles);
+    Code:
+       0: invokestatic  #7                  // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       3: getfield      #13                 // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+       6: astore_1
+       7: aload_1
+       8: ifnonnull     12
+      11: return
+      12: aload_1
+      13: getstatic     #17                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.SLIGHTLY_TIPSY:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      16: invokevirtual #23                 // Method net/minecraft/client/player/LocalPlayer.hasEffect:(Lnet/minecraft/core/Holder;)Z
+      19: ifeq          97
+      22: aload_1
+      23: getfield      #29                 // Field net/minecraft/client/player/LocalPlayer.tickCount:I
+      26: i2d
+      27: aload_0
+      28: invokevirtual #33                 // Method net/neoforged/neoforge/client/event/ViewportEvent$ComputeCameraAngles.getPartialTick:()D
+      31: dadd
+      32: dstore_2
+      33: dload_2
+      34: ldc2_w        #39                 // double 19.0d
+      37: ddiv
+      38: invokestatic  #41                 // Method java/lang/Math.sin:(D)D
+      41: ldc2_w        #47                 // double 0.6d
+      44: dmul
+      45: dstore        4
+      47: dload_2
+      48: ldc2_w        #49                 // double 13.0d
+      51: ddiv
+      52: invokestatic  #51                 // Method java/lang/Math.cos:(D)D
+      55: ldc2_w        #54                 // double 0.3d
+      58: dmul
+      59: dstore        6
+      61: dload_2
+      62: ldc2_w        #56                 // double 9.0d
+      65: ddiv
+      66: invokestatic  #41                 // Method java/lang/Math.sin:(D)D
+      69: ldc2_w        #58                 // double 0.1d
+      72: dmul
+      73: dstore        8
+      75: dload         4
+      77: dload         6
+      79: dadd
+      80: dload         8
+      82: dadd
+      83: dstore        10
+      85: aload_0
+      86: aload_0
+      87: invokevirtual #60                 // Method net/neoforged/neoforge/client/event/ViewportEvent$ComputeCameraAngles.getRoll:()F
+      90: dload         10
+      92: d2f
+      93: fadd
+      94: invokevirtual #64                 // Method net/neoforged/neoforge/client/event/ViewportEvent$ComputeCameraAngles.setRoll:(F)V
+      97: return
+}

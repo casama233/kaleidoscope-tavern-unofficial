@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "grape_crop_stage1",
+  "model_identifier": "kt_assets_a2.grape_crop_stage1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "stage1_0",
+      "type": "cube",
+      "uuid": "14187500-0a20-5cfa-ac8a-321639d8f7b0",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "stage1_1",
+      "type": "cube",
+      "uuid": "fcbaed60-f203-5bff-85bc-c74cbc4a8fa9",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        -45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "31b92344-b45d-5a00-9c2b-526c59756d0b",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "14187500-0a20-5cfa-ac8a-321639d8f7b0",
+        "fcbaed60-f203-5bff-85bc-c74cbc4a8fa9"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "grape_crop.png",
+      "id": "0",
+      "uuid": "7f3aef90-d8de-5eb2-b42d-b0c2a634a839",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,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",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/grape_crop/stage1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "java_display_recorded_not_applied": {},
+    "notes": []
+  }
+}

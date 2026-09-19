@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_cornflower_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_cornflower_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_cornflower_top_element0",
+      "type": "cube",
+      "uuid": "a88961a5-4ff0-5cad-8aa0-dd38ff53cc3f",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_cornflower_top_element1",
+      "type": "cube",
+      "uuid": "df7cee12-f479-5b56-b95c-52de0c52730a",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_cornflower_top_element2",
+      "type": "cube",
+      "uuid": "2dde2ec0-6622-52d7-8f35-28b11c0b2a62",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_cornflower_top_element3",
+      "type": "cube",
+      "uuid": "4f55c295-9041-598a-b40f-74c9c8db9a4f",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_cornflower_top_element4",
+      "type": "cube",
+      "uuid": "9330b65f-06c9-5ee8-bf62-502bbbda7600",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_cornflower_top_element5",
+      "type": "cube",
+      "uuid": "fcf323dc-5810-59d7-9f39-b866f264f174",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "c4401829-c358-5ee4-a7a7-59ae7df03fac",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "a88961a5-4ff0-5cad-8aa0-dd38ff53cc3f",
+        "df7cee12-f479-5b56-b95c-52de0c52730a",
+        "2dde2ec0-6622-52d7-8f35-28b11c0b2a62",
+        "4f55c295-9041-598a-b40f-74c9c8db9a4f",
+        "9330b65f-06c9-5ee8-bf62-502bbbda7600",
+        "fcf323dc-5810-59d7-9f39-b866f264f174"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_cornflower_top.png",
+      "id": "0",
+      "uuid": "717aec09-c37a-5cf9-9a9f-43011abb58a5",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,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",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/cornflower/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_cornflower_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/cornflower.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,38 @@
+Compiled from "LeftClickEvent.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.event.LeftClickEvent {
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.event.LeftClickEvent();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onLeftClickItem(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent$LeftClickEmpty);
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$LeftClickEmpty.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_1
+       5: aload_1
+       6: invokevirtual #13                 // Method net/minecraft/world/entity/player/Player.isSecondaryUseActive:()Z
+       9: ifeq          60
+      12: aload_0
+      13: invokevirtual #19                 // Method net/neoforged/neoforge/event/entity/player/PlayerInteractEvent$LeftClickEmpty.getHand:()Lnet/minecraft/world/InteractionHand;
+      16: getstatic     #23                 // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+      19: if_acmpne     60
+      22: aload_1
+      23: invokevirtual #29                 // Method net/minecraft/world/entity/player/Player.getMainHandItem:()Lnet/minecraft/world/item/ItemStack;
+      26: astore_2
+      27: aload_2
+      28: getstatic     #33                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.SHAKER:Lnet/neoforged/neoforge/registries/DeferredItem;
+      31: invokevirtual #39                 // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+      34: checkcast     #45                 // class net/minecraft/world/item/Item
+      37: invokevirtual #47                 // Method net/minecraft/world/item/ItemStack.is:(Lnet/minecraft/world/item/Item;)Z
+      40: ifeq          60
+      43: aload_2
+      44: invokestatic  #53                 // Method com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem.hasStorage:(Lnet/minecraft/world/item/ItemStack;)Z
+      47: ifeq          60
+      50: new           #59                 // class com/github/ysbbbbbb/kaleidoscopetavern/network/message/ClearShakerC2SMessage
+      53: dup
+      54: invokespecial #61                 // Method com/github/ysbbbbbb/kaleidoscopetavern/network/message/ClearShakerC2SMessage."<init>":()V
+      57: invokestatic  #62                 // Method com/github/ysbbbbbb/kaleidoscopetavern/network/NetworkHandler.sendToServer:(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V
+      60: return
+}

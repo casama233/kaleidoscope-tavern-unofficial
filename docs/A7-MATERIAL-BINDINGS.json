@@ -1,0 +1,774 @@
+[
+  {
+    "id": "rum_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/rum_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_rum",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/rum",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "rum_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/rum_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_rum",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/rum",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "rum_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/rum_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_rum",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/rum",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "rum_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/rum_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_rum",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/rum",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sherry_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/sherry_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sherry",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sherry",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sherry_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/sherry_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sherry",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sherry",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sherry_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/sherry_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sherry",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sherry",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sherry_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/sherry_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sherry",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sherry",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "red_queen_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/red_queen_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_red_queen",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/red_queen",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "red_queen_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/red_queen_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_red_queen",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/red_queen",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "red_queen_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/red_queen_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_red_queen",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/red_queen",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "red_queen_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/red_queen_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_red_queen",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/red_queen",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vinegar_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/vinegar_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_vinegar",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vinegar",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vinegar_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/vinegar_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_vinegar",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vinegar",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vinegar_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/vinegar_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_vinegar",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vinegar",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "vinegar_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/vinegar_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_vinegar",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/vinegar",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "whiskey_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/whiskey_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_whiskey",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/whiskey",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "whiskey_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/whiskey_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_whiskey",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/whiskey",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "whiskey_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/whiskey_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_whiskey",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/whiskey",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "whiskey_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/whiskey_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_whiskey",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/whiskey",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "miners_star_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/miners_star_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_miners_star",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/miners_star",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "miners_star_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/miners_star_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_miners_star",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/miners_star",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "miners_star_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/miners_star_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_miners_star",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/miners_star",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "miners_star_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/miners_star_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_miners_star",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/miners_star",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/sauvignon_blanc_dry_white_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sauvignon_blanc_dry_white",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sauvignon_blanc_dry_white",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/sauvignon_blanc_dry_white_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sauvignon_blanc_dry_white",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sauvignon_blanc_dry_white",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/sauvignon_blanc_dry_white_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sauvignon_blanc_dry_white",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sauvignon_blanc_dry_white",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sauvignon_blanc_dry_white_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/sauvignon_blanc_dry_white_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sauvignon_blanc_dry_white",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sauvignon_blanc_dry_white",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sweet_berry_wine_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count1.json",
+    "original_elements": 3,
+    "geometry": "RP/models/entity/sweet_berry_wine_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sweet_berry_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sweet_berry_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sweet_berry_wine_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/sweet_berry_wine_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sweet_berry_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sweet_berry_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sweet_berry_wine_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count3.json",
+    "original_elements": 9,
+    "geometry": "RP/models/entity/sweet_berry_wine_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sweet_berry_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sweet_berry_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sweet_berry_wine_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count4.json",
+    "original_elements": 12,
+    "geometry": "RP/models/entity/sweet_berry_wine_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sweet_berry_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sweet_berry_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sakura_wine_1",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json",
+    "original_elements": 2,
+    "geometry": "RP/models/entity/sakura_wine_1.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sakura_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sakura_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sakura_wine_2",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count2.json",
+    "original_elements": 4,
+    "geometry": "RP/models/entity/sakura_wine_2.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sakura_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sakura_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sakura_wine_3",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count3.json",
+    "original_elements": 6,
+    "geometry": "RP/models/entity/sakura_wine_3.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sakura_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sakura_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "sakura_wine_4",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count4.json",
+    "original_elements": 8,
+    "geometry": "RP/models/entity/sakura_wine_4.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_brew_sakura_wine",
+        "render_method": "alpha_test_single_sided",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      }
+    },
+    "java_render_type": "cutout",
+    "java_particle_reference": "kaleidoscope_tavern:block/brew/sakura_wine",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "empty_glassware",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json",
+    "original_elements": 11,
+    "geometry": "RP/models/entity/empty_glassware.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_mixology_empty_glassware",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a7_block_mixology_empty_glassware",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "java_render_type": "translucent",
+    "java_particle_reference": "block/glass",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  },
+  {
+    "id": "screwdriver",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+    "original_elements": 10,
+    "geometry": "RP/models/entity/screwdriver.geo.json",
+    "materials": {
+      "*": {
+        "texture": "kt_assets_a7_block_mixology_screwdriver",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": true
+      },
+      "unshaded": {
+        "texture": "kt_assets_a7_block_mixology_screwdriver",
+        "render_method": "blend",
+        "ambient_occlusion": 0.0,
+        "face_dimming": false
+      }
+    },
+    "java_render_type": "translucent",
+    "java_particle_reference": "block/glass",
+    "world_display": "STATIC_CANDIDATE",
+    "drink_effects": "NOT_IMPLEMENTED",
+    "handheld_gui_pose": "RECORDED_NOT_PORTED",
+    "engine_accepted": false
+  }
+]

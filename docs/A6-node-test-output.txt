@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: every one of the 196 appearances round-trips through state and exact fixture ID
+ok 1 - every one of the 196 appearances round-trips through state and exact fixture ID
+  ---
+  duration_ms: 3.462321
+  type: 'test'
+  ...
+# Subtest: all 10 actual icon definitions resolve
+ok 2 - all 10 actual icon definitions resolve
+  ---
+  duration_ms: 0.197291
+  type: 'test'
+  ...
+# Subtest: all 194 blocks export both world and explicit inventory bindings
+ok 3 - all 194 blocks export both world and explicit inventory bindings
+  ---
+  duration_ms: 1.490766
+  type: 'test'
+  ...
+# Subtest: entity fixtures are never mistaken for blocks
+ok 4 - entity fixtures are never mistaken for blocks
+  ---
+  duration_ms: 0.398247
+  type: 'test'
+  ...
+# Subtest: unsupported display poses fail rather than claiming a ported pose
+ok 5 - unsupported display poses fail rather than claiming a ported pose
+  ---
+  duration_ms: 0.114759
+  type: 'test'
+  ...
+# Subtest: unknown drink or missing family does not fall back to Wine
+ok 6 - unknown drink or missing family does not fall back to Wine
+  ---
+  duration_ms: 0.167657
+  type: 'test'
+  ...
+# Subtest: bad integer types, bounds, NaN and infinity rejected
+ok 7 - bad integer types, bounds, NaN and infinity rejected
+  ---
+  duration_ms: 0.364247
+  type: 'test'
+  ...
+# Subtest: missing, extra and misspelled states rejected
+ok 8 - missing, extra and misspelled states rejected
+  ---
+  duration_ms: 0.178263
+  type: 'test'
+  ...
+# Subtest: null and array requests rejected
+ok 9 - null and array requests rejected
+  ---
+  duration_ms: 0.27844
+  type: 'test'
+  ...
+# Subtest: assets, selector tables and returned descriptors are immutable
+ok 10 - assets, selector tables and returned descriptors are immutable
+  ---
+  duration_ms: 0.412137
+  type: 'test'
+  ...
+# Subtest: modifying input after creation cannot change the registry
+ok 11 - modifying input after creation cannot change the registry
+  ---
+  duration_ms: 6.688154
+  type: 'test'
+  ...
+# Subtest: duplicate and dangling registry bindings rejected
+ok 12 - duplicate and dangling registry bindings rejected
+  ---
+  duration_ms: 12.741944
+  type: 'test'
+  ...
+# Subtest: localized catalog is data only, not a fake Cookery guide injection
+ok 13 - localized catalog is data only, not a fake Cookery guide injection
+  ---
+  duration_ms: 0.657188
+  type: 'test'
+  ...
+# Subtest: ice grape remains explicitly a first-frame candidate
+ok 14 - ice grape remains explicitly a first-frame candidate
+  ---
+  duration_ms: 0.064184
+  type: 'test'
+  ...
+# Subtest: Cookery IDs require an inspected archive and an exact mapping
+ok 15 - Cookery IDs require an inspected archive and an exact mapping
+  ---
+  duration_ms: 0.222357
+  type: 'test'
+  ...
+# Subtest: prototype property names cannot masquerade as an item mapping
+ok 16 - prototype property names cannot masquerade as an item mapping
+  ---
+  duration_ms: 0.090724
+  type: 'test'
+  ...
+# Subtest: A6 cabinet state contracts resolve all twelve source shapes
+ok 17 - A6 cabinet state contracts resolve all twelve source shapes
+  ---
+  duration_ms: 0.143171
+  type: 'test'
+  ...
+# Subtest: A6 rack contracts name only the three converted display racks
+ok 18 - A6 rack contracts name only the three converted display racks
+  ---
+  duration_ms: 0.157612
+  type: 'test'
+  ...
+# Subtest: A6 Vodka includes all four independently sourced arrangements
+ok 19 - A6 Vodka includes all four independently sourced arrangements
+  ---
+  duration_ms: 0.11492
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 94.118622

@@ -1,0 +1,126 @@
+Compiled from "BarStoolBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.BarStoolBlockEntityRender implements net.minecraft.client.renderer.blockentity.BlockEntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.BarStoolBlockEntity> {
+  private final com.github.ysbbbbbb.kaleidoscopetavern.client.model.deco.BarStoolBodyModel model;
+
+  private final java.util.function.Function<net.minecraft.world.item.DyeColor, net.minecraft.resources.ResourceLocation> texture;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.BarStoolBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: invokedynamic #7,  0              // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      10: invokestatic  #11                 // Method net/minecraft/Util.memoize:(Ljava/util/function/Function;)Ljava/util/function/Function;
+      13: putfield      #17                 // Field texture:Ljava/util/function/Function;
+      16: aload_0
+      17: new           #23                 // class com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel
+      20: dup
+      21: aload_1
+      22: getstatic     #25                 // Field com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel.LAYER_LOCATION:Lnet/minecraft/client/model/geom/ModelLayerLocation;
+      25: invokevirtual #29                 // Method net/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context.bakeLayer:(Lnet/minecraft/client/model/geom/ModelLayerLocation;)Lnet/minecraft/client/model/geom/ModelPart;
+      28: invokespecial #35                 // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel."<init>":(Lnet/minecraft/client/model/geom/ModelPart;)V
+      31: putfield      #38                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel;
+      34: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.BarStoolBlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #42                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/BarStoolBlockEntity.getBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+       4: getstatic     #48                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/deco/BarStoolBlock.FACING:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+       7: invokevirtual #54                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #60                 // class net/minecraft/core/Direction
+      13: invokevirtual #62                 // Method net/minecraft/core/Direction.toYRot:()F
+      16: fstore        7
+      18: aload_1
+      19: invokevirtual #66                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/BarStoolBlockEntity.getSitEntity:()Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity;
+      22: astore        8
+      24: aload         8
+      26: ifnull        70
+      29: aload         8
+      31: invokevirtual #70                 // Method com/github/ysbbbbbb/kaleidoscopetavern/entity/SitEntity.getFirstPassenger:()Lnet/minecraft/world/entity/Entity;
+      34: astore        10
+      36: aload         10
+      38: instanceof    #76                 // class net/minecraft/world/entity/LivingEntity
+      41: ifeq          70
+      44: aload         10
+      46: checkcast     #76                 // class net/minecraft/world/entity/LivingEntity
+      49: astore        9
+      51: fload_2
+      52: aload         9
+      54: getfield      #78                 // Field net/minecraft/world/entity/LivingEntity.yBodyRotO:F
+      57: aload         9
+      59: getfield      #82                 // Field net/minecraft/world/entity/LivingEntity.yBodyRot:F
+      62: invokestatic  #85                 // Method net/minecraft/util/Mth.lerp:(FFF)F
+      65: invokestatic  #91                 // Method net/minecraft/util/Mth.wrapDegrees:(F)F
+      68: fstore        7
+      70: aload_3
+      71: invokevirtual #95                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      74: aload_3
+      75: ldc2_w        #100                // double 0.5d
+      78: ldc2_w        #102                // double 1.5d
+      81: ldc2_w        #100                // double 0.5d
+      84: invokevirtual #104                // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      87: aload_3
+      88: getstatic     #108                // Field com/mojang/math/Axis.ZN:Lcom/mojang/math/Axis;
+      91: ldc           #114                // float 180.0f
+      93: invokeinterface #115,  2          // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      98: invokevirtual #119                // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     101: aload_3
+     102: getstatic     #123                // Field com/mojang/math/Axis.YN:Lcom/mojang/math/Axis;
+     105: ldc           #114                // float 180.0f
+     107: fload         7
+     109: fsub
+     110: invokeinterface #115,  2          // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+     115: invokevirtual #119                // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+     118: aload_0
+     119: getfield      #17                 // Field texture:Ljava/util/function/Function;
+     122: aload_1
+     123: invokevirtual #126                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/BarStoolBlockEntity.getColor:()Lnet/minecraft/world/item/DyeColor;
+     126: invokeinterface #130,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+     131: checkcast     #135                // class net/minecraft/resources/ResourceLocation
+     134: astore        9
+     136: aload         4
+     138: aload         9
+     140: invokestatic  #137                // Method net/minecraft/client/renderer/RenderType.entityCutoutNoCull:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+     143: invokeinterface #143,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     148: astore        10
+     150: aload_0
+     151: getfield      #38                 // Field model:Lcom/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel;
+     154: aload_3
+     155: aload         10
+     157: iload         5
+     159: iload         6
+     161: invokevirtual #149                // Method com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/BarStoolBodyModel.renderToBuffer:(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;II)V
+     164: aload_3
+     165: invokevirtual #153                // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     168: return
+
+  public void render(net.minecraft.world.level.block.entity.BlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #43                 // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/BarStoolBlockEntity
+       5: fload_2
+       6: aload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: invokevirtual #156                // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/BarStoolBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      16: return
+
+  private static net.minecraft.resources.ResourceLocation lambda$new$0(net.minecraft.world.item.DyeColor);
+    Code:
+       0: ldc           #160                // String textures/entity/deco/bar_stool/%s.png
+       2: iconst_1
+       3: anewarray     #2                  // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: aload_0
+       9: invokevirtual #162                // Method net/minecraft/world/item/DyeColor.getName:()Ljava/lang/String;
+      12: aastore
+      13: invokevirtual #168                // Method java/lang/String.formatted:([Ljava/lang/Object;)Ljava/lang/String;
+      16: astore_1
+      17: aload_1
+      18: invokestatic  #174                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      21: areturn
+}

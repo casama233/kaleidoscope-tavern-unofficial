@@ -1,0 +1,11 @@
+{
+  "profile": "lab",
+  "allowed": true,
+  "scope": "static packaging preflight only",
+  "static_checks": {
+    "run": 4467,
+    "failed": 0
+  },
+  "engine_test": "NOT_RUN",
+  "blockers": []
+}

@@ -1,0 +1,688 @@
+{
+  "batch": "A9",
+  "scope": "All static bottled arrangement sources in pinned directory",
+  "model_count": 97,
+  "families": 25,
+  "engine": "NOT_RUN",
+  "models": [
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count1.json",
+      "id": "wine_1",
+      "geometry": "RP/models/entity/wine_1.geo.json",
+      "editor": "editor/wine_1.bbmodel",
+      "texture": "block/brew/wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count2.json",
+      "id": "wine_2",
+      "geometry": "RP/models/entity/wine_2.geo.json",
+      "editor": "editor/wine_2.bbmodel",
+      "texture": "block/brew/wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count3.json",
+      "id": "wine_3",
+      "geometry": "RP/models/entity/wine_3.geo.json",
+      "editor": "editor/wine_3.bbmodel",
+      "texture": "block/brew/wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count4.json",
+      "id": "wine_4",
+      "geometry": "RP/models/entity/wine_4.geo.json",
+      "editor": "editor/wine_4.bbmodel",
+      "texture": "block/brew/wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count1.json",
+      "id": "champagne_1",
+      "geometry": "RP/models/entity/champagne_1.geo.json",
+      "editor": "editor/champagne_1.bbmodel",
+      "texture": "block/brew/champagne"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count2.json",
+      "id": "champagne_2",
+      "geometry": "RP/models/entity/champagne_2.geo.json",
+      "editor": "editor/champagne_2.bbmodel",
+      "texture": "block/brew/champagne"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count3.json",
+      "id": "champagne_3",
+      "geometry": "RP/models/entity/champagne_3.geo.json",
+      "editor": "editor/champagne_3.bbmodel",
+      "texture": "block/brew/champagne"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/champagne/count4.json",
+      "id": "champagne_4",
+      "geometry": "RP/models/entity/champagne_4.geo.json",
+      "editor": "editor/champagne_4.bbmodel",
+      "texture": "block/brew/champagne"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count1.json",
+      "id": "honey_wine_1",
+      "geometry": "RP/models/entity/honey_wine_1.geo.json",
+      "editor": "editor/honey_wine_1.bbmodel",
+      "texture": "block/brew/honey_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count2.json",
+      "id": "honey_wine_2",
+      "geometry": "RP/models/entity/honey_wine_2.geo.json",
+      "editor": "editor/honey_wine_2.bbmodel",
+      "texture": "block/brew/honey_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count3.json",
+      "id": "honey_wine_3",
+      "geometry": "RP/models/entity/honey_wine_3.geo.json",
+      "editor": "editor/honey_wine_3.bbmodel",
+      "texture": "block/brew/honey_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/honey_wine/count4.json",
+      "id": "honey_wine_4",
+      "geometry": "RP/models/entity/honey_wine_4.geo.json",
+      "editor": "editor/honey_wine_4.bbmodel",
+      "texture": "block/brew/honey_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count1.json",
+      "id": "ice_wine_1",
+      "geometry": "RP/models/entity/ice_wine_1.geo.json",
+      "editor": "editor/ice_wine_1.bbmodel",
+      "texture": "block/brew/ice_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count2.json",
+      "id": "ice_wine_2",
+      "geometry": "RP/models/entity/ice_wine_2.geo.json",
+      "editor": "editor/ice_wine_2.bbmodel",
+      "texture": "block/brew/ice_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count3.json",
+      "id": "ice_wine_3",
+      "geometry": "RP/models/entity/ice_wine_3.geo.json",
+      "editor": "editor/ice_wine_3.bbmodel",
+      "texture": "block/brew/ice_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/ice_wine/count4.json",
+      "id": "ice_wine_4",
+      "geometry": "RP/models/entity/ice_wine_4.geo.json",
+      "editor": "editor/ice_wine_4.bbmodel",
+      "texture": "block/brew/ice_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count1.json",
+      "id": "vodka_1",
+      "geometry": "RP/models/entity/vodka_1.geo.json",
+      "editor": "editor/vodka_1.bbmodel",
+      "texture": "block/brew/vodka"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count2.json",
+      "id": "vodka_2",
+      "geometry": "RP/models/entity/vodka_2.geo.json",
+      "editor": "editor/vodka_2.bbmodel",
+      "texture": "block/brew/vodka"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count3.json",
+      "id": "vodka_3",
+      "geometry": "RP/models/entity/vodka_3.geo.json",
+      "editor": "editor/vodka_3.bbmodel",
+      "texture": "block/brew/vodka"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vodka/count4.json",
+      "id": "vodka_4",
+      "geometry": "RP/models/entity/vodka_4.geo.json",
+      "editor": "editor/vodka_4.bbmodel",
+      "texture": "block/brew/vodka"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count1.json",
+      "id": "rum_1",
+      "geometry": "RP/models/entity/rum_1.geo.json",
+      "editor": "editor/rum_1.bbmodel",
+      "texture": "block/brew/rum"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count2.json",
+      "id": "rum_2",
+      "geometry": "RP/models/entity/rum_2.geo.json",
+      "editor": "editor/rum_2.bbmodel",
+      "texture": "block/brew/rum"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count3.json",
+      "id": "rum_3",
+      "geometry": "RP/models/entity/rum_3.geo.json",
+      "editor": "editor/rum_3.bbmodel",
+      "texture": "block/brew/rum"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/rum/count4.json",
+      "id": "rum_4",
+      "geometry": "RP/models/entity/rum_4.geo.json",
+      "editor": "editor/rum_4.bbmodel",
+      "texture": "block/brew/rum"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count1.json",
+      "id": "sherry_1",
+      "geometry": "RP/models/entity/sherry_1.geo.json",
+      "editor": "editor/sherry_1.bbmodel",
+      "texture": "block/brew/sherry"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count2.json",
+      "id": "sherry_2",
+      "geometry": "RP/models/entity/sherry_2.geo.json",
+      "editor": "editor/sherry_2.bbmodel",
+      "texture": "block/brew/sherry"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count3.json",
+      "id": "sherry_3",
+      "geometry": "RP/models/entity/sherry_3.geo.json",
+      "editor": "editor/sherry_3.bbmodel",
+      "texture": "block/brew/sherry"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sherry/count4.json",
+      "id": "sherry_4",
+      "geometry": "RP/models/entity/sherry_4.geo.json",
+      "editor": "editor/sherry_4.bbmodel",
+      "texture": "block/brew/sherry"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count1.json",
+      "id": "red_queen_1",
+      "geometry": "RP/models/entity/red_queen_1.geo.json",
+      "editor": "editor/red_queen_1.bbmodel",
+      "texture": "block/brew/red_queen"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count2.json",
+      "id": "red_queen_2",
+      "geometry": "RP/models/entity/red_queen_2.geo.json",
+      "editor": "editor/red_queen_2.bbmodel",
+      "texture": "block/brew/red_queen"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count3.json",
+      "id": "red_queen_3",
+      "geometry": "RP/models/entity/red_queen_3.geo.json",
+      "editor": "editor/red_queen_3.bbmodel",
+      "texture": "block/brew/red_queen"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/red_queen/count4.json",
+      "id": "red_queen_4",
+      "geometry": "RP/models/entity/red_queen_4.geo.json",
+      "editor": "editor/red_queen_4.bbmodel",
+      "texture": "block/brew/red_queen"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count1.json",
+      "id": "vinegar_1",
+      "geometry": "RP/models/entity/vinegar_1.geo.json",
+      "editor": "editor/vinegar_1.bbmodel",
+      "texture": "block/brew/vinegar"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count2.json",
+      "id": "vinegar_2",
+      "geometry": "RP/models/entity/vinegar_2.geo.json",
+      "editor": "editor/vinegar_2.bbmodel",
+      "texture": "block/brew/vinegar"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count3.json",
+      "id": "vinegar_3",
+      "geometry": "RP/models/entity/vinegar_3.geo.json",
+      "editor": "editor/vinegar_3.bbmodel",
+      "texture": "block/brew/vinegar"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/vinegar/count4.json",
+      "id": "vinegar_4",
+      "geometry": "RP/models/entity/vinegar_4.geo.json",
+      "editor": "editor/vinegar_4.bbmodel",
+      "texture": "block/brew/vinegar"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json",
+      "id": "whiskey_1",
+      "geometry": "RP/models/entity/whiskey_1.geo.json",
+      "editor": "editor/whiskey_1.bbmodel",
+      "texture": "block/brew/whiskey"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count2.json",
+      "id": "whiskey_2",
+      "geometry": "RP/models/entity/whiskey_2.geo.json",
+      "editor": "editor/whiskey_2.bbmodel",
+      "texture": "block/brew/whiskey"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count3.json",
+      "id": "whiskey_3",
+      "geometry": "RP/models/entity/whiskey_3.geo.json",
+      "editor": "editor/whiskey_3.bbmodel",
+      "texture": "block/brew/whiskey"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count4.json",
+      "id": "whiskey_4",
+      "geometry": "RP/models/entity/whiskey_4.geo.json",
+      "editor": "editor/whiskey_4.bbmodel",
+      "texture": "block/brew/whiskey"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count1.json",
+      "id": "miners_star_1",
+      "geometry": "RP/models/entity/miners_star_1.geo.json",
+      "editor": "editor/miners_star_1.bbmodel",
+      "texture": "block/brew/miners_star"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count2.json",
+      "id": "miners_star_2",
+      "geometry": "RP/models/entity/miners_star_2.geo.json",
+      "editor": "editor/miners_star_2.bbmodel",
+      "texture": "block/brew/miners_star"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count3.json",
+      "id": "miners_star_3",
+      "geometry": "RP/models/entity/miners_star_3.geo.json",
+      "editor": "editor/miners_star_3.bbmodel",
+      "texture": "block/brew/miners_star"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/miners_star/count4.json",
+      "id": "miners_star_4",
+      "geometry": "RP/models/entity/miners_star_4.geo.json",
+      "editor": "editor/miners_star_4.bbmodel",
+      "texture": "block/brew/miners_star"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count1.json",
+      "id": "sauvignon_blanc_dry_white_1",
+      "geometry": "RP/models/entity/sauvignon_blanc_dry_white_1.geo.json",
+      "editor": "editor/sauvignon_blanc_dry_white_1.bbmodel",
+      "texture": "block/brew/sauvignon_blanc_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count2.json",
+      "id": "sauvignon_blanc_dry_white_2",
+      "geometry": "RP/models/entity/sauvignon_blanc_dry_white_2.geo.json",
+      "editor": "editor/sauvignon_blanc_dry_white_2.bbmodel",
+      "texture": "block/brew/sauvignon_blanc_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count3.json",
+      "id": "sauvignon_blanc_dry_white_3",
+      "geometry": "RP/models/entity/sauvignon_blanc_dry_white_3.geo.json",
+      "editor": "editor/sauvignon_blanc_dry_white_3.bbmodel",
+      "texture": "block/brew/sauvignon_blanc_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sauvignon_blanc_dry_white/count4.json",
+      "id": "sauvignon_blanc_dry_white_4",
+      "geometry": "RP/models/entity/sauvignon_blanc_dry_white_4.geo.json",
+      "editor": "editor/sauvignon_blanc_dry_white_4.bbmodel",
+      "texture": "block/brew/sauvignon_blanc_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count1.json",
+      "id": "sweet_berry_wine_1",
+      "geometry": "RP/models/entity/sweet_berry_wine_1.geo.json",
+      "editor": "editor/sweet_berry_wine_1.bbmodel",
+      "texture": "block/brew/sweet_berry_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count2.json",
+      "id": "sweet_berry_wine_2",
+      "geometry": "RP/models/entity/sweet_berry_wine_2.geo.json",
+      "editor": "editor/sweet_berry_wine_2.bbmodel",
+      "texture": "block/brew/sweet_berry_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count3.json",
+      "id": "sweet_berry_wine_3",
+      "geometry": "RP/models/entity/sweet_berry_wine_3.geo.json",
+      "editor": "editor/sweet_berry_wine_3.bbmodel",
+      "texture": "block/brew/sweet_berry_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sweet_berry_wine/count4.json",
+      "id": "sweet_berry_wine_4",
+      "geometry": "RP/models/entity/sweet_berry_wine_4.geo.json",
+      "editor": "editor/sweet_berry_wine_4.bbmodel",
+      "texture": "block/brew/sweet_berry_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json",
+      "id": "sakura_wine_1",
+      "geometry": "RP/models/entity/sakura_wine_1.geo.json",
+      "editor": "editor/sakura_wine_1.bbmodel",
+      "texture": "block/brew/sakura_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count2.json",
+      "id": "sakura_wine_2",
+      "geometry": "RP/models/entity/sakura_wine_2.geo.json",
+      "editor": "editor/sakura_wine_2.bbmodel",
+      "texture": "block/brew/sakura_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count3.json",
+      "id": "sakura_wine_3",
+      "geometry": "RP/models/entity/sakura_wine_3.geo.json",
+      "editor": "editor/sakura_wine_3.bbmodel",
+      "texture": "block/brew/sakura_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count4.json",
+      "id": "sakura_wine_4",
+      "geometry": "RP/models/entity/sakura_wine_4.geo.json",
+      "editor": "editor/sakura_wine_4.bbmodel",
+      "texture": "block/brew/sakura_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count1.json",
+      "id": "glowflower_brew_1",
+      "geometry": "RP/models/entity/glowflower_brew_1.geo.json",
+      "editor": "editor/glowflower_brew_1.bbmodel",
+      "texture": "block/brew/glowflower_brew"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count2.json",
+      "id": "glowflower_brew_2",
+      "geometry": "RP/models/entity/glowflower_brew_2.geo.json",
+      "editor": "editor/glowflower_brew_2.bbmodel",
+      "texture": "block/brew/glowflower_brew"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count3.json",
+      "id": "glowflower_brew_3",
+      "geometry": "RP/models/entity/glowflower_brew_3.geo.json",
+      "editor": "editor/glowflower_brew_3.bbmodel",
+      "texture": "block/brew/glowflower_brew"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/glowflower_brew/count4.json",
+      "id": "glowflower_brew_4",
+      "geometry": "RP/models/entity/glowflower_brew_4.geo.json",
+      "editor": "editor/glowflower_brew_4.bbmodel",
+      "texture": "block/brew/glowflower_brew"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count1.json",
+      "id": "luminous_bride_1",
+      "geometry": "RP/models/entity/luminous_bride_1.geo.json",
+      "editor": "editor/luminous_bride_1.bbmodel",
+      "texture": "block/brew/luminous_bride"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count2.json",
+      "id": "luminous_bride_2",
+      "geometry": "RP/models/entity/luminous_bride_2.geo.json",
+      "editor": "editor/luminous_bride_2.bbmodel",
+      "texture": "block/brew/luminous_bride"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count3.json",
+      "id": "luminous_bride_3",
+      "geometry": "RP/models/entity/luminous_bride_3.geo.json",
+      "editor": "editor/luminous_bride_3.bbmodel",
+      "texture": "block/brew/luminous_bride"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count4.json",
+      "id": "luminous_bride_4",
+      "geometry": "RP/models/entity/luminous_bride_4.geo.json",
+      "editor": "editor/luminous_bride_4.bbmodel",
+      "texture": "block/brew/luminous_bride"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count1.json",
+      "id": "brandy_1",
+      "geometry": "RP/models/entity/brandy_1.geo.json",
+      "editor": "editor/brandy_1.bbmodel",
+      "texture": "block/brew/brandy"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count2.json",
+      "id": "brandy_2",
+      "geometry": "RP/models/entity/brandy_2.geo.json",
+      "editor": "editor/brandy_2.bbmodel",
+      "texture": "block/brew/brandy"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/brandy/count3.json",
+      "id": "brandy_3",
+      "geometry": "RP/models/entity/brandy_3.geo.json",
+      "editor": "editor/brandy_3.bbmodel",
+      "texture": "block/brew/brandy"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count1.json",
+      "id": "carignan_1",
+      "geometry": "RP/models/entity/carignan_1.geo.json",
+      "editor": "editor/carignan_1.bbmodel",
+      "texture": "block/brew/carignan"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count2.json",
+      "id": "carignan_2",
+      "geometry": "RP/models/entity/carignan_2.geo.json",
+      "editor": "editor/carignan_2.bbmodel",
+      "texture": "block/brew/carignan"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/carignan/count3.json",
+      "id": "carignan_3",
+      "geometry": "RP/models/entity/carignan_3.geo.json",
+      "editor": "editor/carignan_3.bbmodel",
+      "texture": "block/brew/carignan"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count1.json",
+      "id": "madame_shexiang_1",
+      "geometry": "RP/models/entity/madame_shexiang_1.geo.json",
+      "editor": "editor/madame_shexiang_1.bbmodel",
+      "texture": "block/brew/madame_shexiang"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count2.json",
+      "id": "madame_shexiang_2",
+      "geometry": "RP/models/entity/madame_shexiang_2.geo.json",
+      "editor": "editor/madame_shexiang_2.bbmodel",
+      "texture": "block/brew/madame_shexiang"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count3.json",
+      "id": "madame_shexiang_3",
+      "geometry": "RP/models/entity/madame_shexiang_3.geo.json",
+      "editor": "editor/madame_shexiang_3.bbmodel",
+      "texture": "block/brew/madame_shexiang"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/madame_shexiang/count4.json",
+      "id": "madame_shexiang_4",
+      "geometry": "RP/models/entity/madame_shexiang_4.geo.json",
+      "editor": "editor/madame_shexiang_4.bbmodel",
+      "texture": "block/brew/madame_shexiang"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count1.json",
+      "id": "mother_snow_1",
+      "geometry": "RP/models/entity/mother_snow_1.geo.json",
+      "editor": "editor/mother_snow_1.bbmodel",
+      "texture": "block/brew/mother_snow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count2.json",
+      "id": "mother_snow_2",
+      "geometry": "RP/models/entity/mother_snow_2.geo.json",
+      "editor": "editor/mother_snow_2.bbmodel",
+      "texture": "block/brew/mother_snow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count3.json",
+      "id": "mother_snow_3",
+      "geometry": "RP/models/entity/mother_snow_3.geo.json",
+      "editor": "editor/mother_snow_3.bbmodel",
+      "texture": "block/brew/mother_snow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/mother_snow/count4.json",
+      "id": "mother_snow_4",
+      "geometry": "RP/models/entity/mother_snow_4.geo.json",
+      "editor": "editor/mother_snow_4.bbmodel",
+      "texture": "block/brew/mother_snow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count1.json",
+      "id": "plum_wine_1",
+      "geometry": "RP/models/entity/plum_wine_1.geo.json",
+      "editor": "editor/plum_wine_1.bbmodel",
+      "texture": "block/brew/plum_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count2.json",
+      "id": "plum_wine_2",
+      "geometry": "RP/models/entity/plum_wine_2.geo.json",
+      "editor": "editor/plum_wine_2.bbmodel",
+      "texture": "block/brew/plum_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count3.json",
+      "id": "plum_wine_3",
+      "geometry": "RP/models/entity/plum_wine_3.geo.json",
+      "editor": "editor/plum_wine_3.bbmodel",
+      "texture": "block/brew/plum_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/plum_wine/count4.json",
+      "id": "plum_wine_4",
+      "geometry": "RP/models/entity/plum_wine_4.geo.json",
+      "editor": "editor/plum_wine_4.bbmodel",
+      "texture": "block/brew/plum_wine"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count1.json",
+      "id": "polaris_sweet_white_1",
+      "geometry": "RP/models/entity/polaris_sweet_white_1.geo.json",
+      "editor": "editor/polaris_sweet_white_1.bbmodel",
+      "texture": "block/brew/polaris_sweet_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count2.json",
+      "id": "polaris_sweet_white_2",
+      "geometry": "RP/models/entity/polaris_sweet_white_2.geo.json",
+      "editor": "editor/polaris_sweet_white_2.bbmodel",
+      "texture": "block/brew/polaris_sweet_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count3.json",
+      "id": "polaris_sweet_white_3",
+      "geometry": "RP/models/entity/polaris_sweet_white_3.geo.json",
+      "editor": "editor/polaris_sweet_white_3.bbmodel",
+      "texture": "block/brew/polaris_sweet_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/polaris_sweet_white/count4.json",
+      "id": "polaris_sweet_white_4",
+      "geometry": "RP/models/entity/polaris_sweet_white_4.geo.json",
+      "editor": "editor/polaris_sweet_white_4.bbmodel",
+      "texture": "block/brew/polaris_sweet_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count1.json",
+      "id": "riesling_dry_white_1",
+      "geometry": "RP/models/entity/riesling_dry_white_1.geo.json",
+      "editor": "editor/riesling_dry_white_1.bbmodel",
+      "texture": "block/brew/riesling_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count2.json",
+      "id": "riesling_dry_white_2",
+      "geometry": "RP/models/entity/riesling_dry_white_2.geo.json",
+      "editor": "editor/riesling_dry_white_2.bbmodel",
+      "texture": "block/brew/riesling_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count3.json",
+      "id": "riesling_dry_white_3",
+      "geometry": "RP/models/entity/riesling_dry_white_3.geo.json",
+      "editor": "editor/riesling_dry_white_3.bbmodel",
+      "texture": "block/brew/riesling_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/riesling_dry_white/count4.json",
+      "id": "riesling_dry_white_4",
+      "geometry": "RP/models/entity/riesling_dry_white_4.geo.json",
+      "editor": "editor/riesling_dry_white_4.bbmodel",
+      "texture": "block/brew/riesling_dry_white"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count1.json",
+      "id": "sunset_glow_1",
+      "geometry": "RP/models/entity/sunset_glow_1.geo.json",
+      "editor": "editor/sunset_glow_1.bbmodel",
+      "texture": "block/brew/sunset_glow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count2.json",
+      "id": "sunset_glow_2",
+      "geometry": "RP/models/entity/sunset_glow_2.geo.json",
+      "editor": "editor/sunset_glow_2.bbmodel",
+      "texture": "block/brew/sunset_glow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sunset_glow/count3.json",
+      "id": "sunset_glow_3",
+      "geometry": "RP/models/entity/sunset_glow_3.geo.json",
+      "editor": "editor/sunset_glow_3.bbmodel",
+      "texture": "block/brew/sunset_glow"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count1.json",
+      "id": "watermelon_juice_1",
+      "geometry": "RP/models/entity/watermelon_juice_1.geo.json",
+      "editor": "editor/watermelon_juice_1.bbmodel",
+      "texture": "block/brew/watermelon_juice"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count2.json",
+      "id": "watermelon_juice_2",
+      "geometry": "RP/models/entity/watermelon_juice_2.geo.json",
+      "editor": "editor/watermelon_juice_2.bbmodel",
+      "texture": "block/brew/watermelon_juice"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count3.json",
+      "id": "watermelon_juice_3",
+      "geometry": "RP/models/entity/watermelon_juice_3.geo.json",
+      "editor": "editor/watermelon_juice_3.bbmodel",
+      "texture": "block/brew/watermelon_juice"
+    },
+    {
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count4.json",
+      "id": "watermelon_juice_4",
+      "geometry": "RP/models/entity/watermelon_juice_4.geo.json",
+      "editor": "editor/watermelon_juice_4.bbmodel",
+      "texture": "block/brew/watermelon_juice"
+    }
+  ]
+}

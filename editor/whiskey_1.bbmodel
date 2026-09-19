@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "whiskey_1",
+  "model_identifier": "kt_assets_a7.whiskey_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "whiskey_1_element0",
+      "type": "cube",
+      "uuid": "c58949b8-a0b7-501b-8681-4efeb52633ae",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        10,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            6.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            6.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            6.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            6.0,
+            13.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            4.0,
+            0.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "whiskey_1_element1",
+      "type": "cube",
+      "uuid": "2156f7f5-9c9b-5b16-916f-3219acc32a80",
+      "from": [
+        -1,
+        10,
+        -1
+      ],
+      "to": [
+        1,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            0.0,
+            12.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            2.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.5,
+            2.5,
+            5.5,
+            4.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "c14bb58f-067a-5b43-b0f7-0f150817c695",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "c58949b8-a0b7-501b-8681-4efeb52633ae",
+        "2156f7f5-9c9b-5b16-916f-3219acc32a80"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "whiskey.png",
+      "id": "0",
+      "uuid": "0b556c79-9f80-5b57-9c7c-8e5ed5a40ab6",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAATRJREFUOI29kj9Iw0AYxd9JiBkz1ZA1QwbHQgm4iOIqQlx0dnQtgtDVpaturgpCMzmICC4q3JLqojZDCJEQ0tJqQYQ2g+dgEvJHMc3gbzq+9+7dffcd6W7VmKwpAACf2tCMMTncqTO/P8TBuUsQcdXeZpZlYffYJGEYxmVwsqbgrmMDAJY2FcAwoapqJLuJ0bIs+P0h8nCFCoC15inJ1y6fp3h6dAtezqf298lRC7PCacaYwDBn3hgzV9Z4tDGPk1WxWsBLu87iNdVFltYyAa3WfkZMs9BYRjzuNITn+T9vQHWRyZoCn9pwPEC/GSRTKhVwf9thUk0CAASDAIuN9SSg9CP+xo8fKc+ktwdBWEHv4bpaALkY4f2tC0JHcLys9j8tOB6AaAKVAs5ePyFNBQQfk4L2BecNZeSsI99eAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/whiskey/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

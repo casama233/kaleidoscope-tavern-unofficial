@@ -1,0 +1,1369 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "screwdriver",
+  "model_identifier": "kt_assets_a7.screwdriver",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "screwdriver_element0_north",
+      "type": "cube",
+      "uuid": "0e343f24-65dc-5ed9-85b0-afeace4119e9",
+      "from": [
+        -2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        -2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element0_east",
+      "type": "cube",
+      "uuid": "c163b84e-2d53-5125-baaa-de28330a1f6c",
+      "from": [
+        -2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element0_south",
+      "type": "cube",
+      "uuid": "ffe6a220-f61a-52b0-b940-0a6efec850ad",
+      "from": [
+        -2.5,
+        1.0,
+        2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element0_west",
+      "type": "cube",
+      "uuid": "8ba40cb3-f309-54fb-b0ce-0a7a437618c4",
+      "from": [
+        2.5,
+        1.0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.0,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element1",
+      "type": "cube",
+      "uuid": "2afc8834-2280-5a15-9d3d-67e19f65e658",
+      "from": [
+        -2.5,
+        0,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        1,
+        2.5
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element2",
+      "type": "cube",
+      "uuid": "f05b3c80-d9fe-5e2a-877c-20a6c195963a",
+      "from": [
+        -2.5025000000000004,
+        7.37,
+        -2.5025000000000004
+      ],
+      "to": [
+        2.5024999999999995,
+        8.28,
+        -1.5925000000000002
+      ],
+      "origin": [
+        0,
+        11.45363,
+        -0.22750000000000004
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            4.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element3",
+      "type": "cube",
+      "uuid": "72fd439f-fa36-5480-bd89-9fef2a144aa3",
+      "from": [
+        -2.5025000000000004,
+        7.37,
+        -1.5925000000000002
+      ],
+      "to": [
+        -1.5925000000000002,
+        8.28,
+        1.5924999999999994
+      ],
+      "origin": [
+        -0.22750000000000004,
+        11.45363,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            1.0,
+            7.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element4",
+      "type": "cube",
+      "uuid": "c0de37b7-8f8e-55be-85ef-1921881a2d73",
+      "from": [
+        1.5924999999999994,
+        7.37,
+        -1.5925000000000002
+      ],
+      "to": [
+        2.5024999999999995,
+        8.28,
+        1.5924999999999994
+      ],
+      "origin": [
+        0.22749999999999915,
+        11.45363,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            0.0,
+            10.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            1.0,
+            11.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            1.0,
+            11.0,
+            4.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element5",
+      "type": "cube",
+      "uuid": "90ffb8fb-6fc6-5294-b412-363c9fa790d6",
+      "from": [
+        -2.5025000000000004,
+        7.37,
+        1.5924999999999994
+      ],
+      "to": [
+        2.5024999999999995,
+        8.28,
+        2.5024999999999995
+      ],
+      "origin": [
+        0,
+        11.45363,
+        0.22749999999999915
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            4.0,
+            11.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            0.0,
+            11.0,
+            1.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element6",
+      "type": "cube",
+      "uuid": "3422bb02-2f27-5d1e-883b-08744e8ce3a7",
+      "from": [
+        -2,
+        1.25,
+        -2
+      ],
+      "to": [
+        2,
+        7.25,
+        2
+      ],
+      "origin": [
+        0,
+        4.4875,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            8.0,
+            31.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            22.0,
+            8.0,
+            26.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element7",
+      "type": "cube",
+      "uuid": "e24ff00f-1754-5d9a-a5e2-9563c848ddaf",
+      "from": [
+        -5.75,
+        7,
+        1.4000000000000004
+      ],
+      "to": [
+        0.25,
+        16,
+        1.4000000000000004
+      ],
+      "origin": [
+        -2.7456699999999996,
+        11.48097,
+        1.4000000000000004
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            21.0,
+            14.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            14.0,
+            21.0,
+            8.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "screwdriver_element8",
+      "type": "cube",
+      "uuid": "4432bd0c-812f-558a-a09e-ceb56af609f1",
+      "from": [
+        0.75,
+        5,
+        -1
+      ],
+      "to": [
+        1.75,
+        12,
+        0
+      ],
+      "origin": [
+        1.25,
+        8,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "screwdriver_element9",
+      "type": "cube",
+      "uuid": "6900e50a-610d-53dd-a989-2ff01d7b9a17",
+      "from": [
+        -4.88896,
+        6,
+        -1.42807
+      ],
+      "to": [
+        -0.88896,
+        10,
+        -0.42806999999999995
+      ],
+      "origin": [
+        -2.88896,
+        8,
+        1.07193
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            16.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            15.0,
+            16.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            16.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            16.0,
+            13.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            16.0,
+            13.0,
+            20.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            15.0,
+            16.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "5b9b2ac3-f400-5fa1-b10f-949cc1e8bb40",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "0e343f24-65dc-5ed9-85b0-afeace4119e9",
+        "c163b84e-2d53-5125-baaa-de28330a1f6c",
+        "ffe6a220-f61a-52b0-b940-0a6efec850ad",
+        "8ba40cb3-f309-54fb-b0ce-0a7a437618c4",
+        "2afc8834-2280-5a15-9d3d-67e19f65e658",
+        "f05b3c80-d9fe-5e2a-877c-20a6c195963a",
+        "72fd439f-fa36-5480-bd89-9fef2a144aa3",
+        "c0de37b7-8f8e-55be-85ef-1921881a2d73",
+        "90ffb8fb-6fc6-5294-b412-363c9fa790d6",
+        "3422bb02-2f27-5d1e-883b-08744e8ce3a7",
+        "e24ff00f-1754-5d9a-a5e2-9563c848ddaf",
+        "4432bd0c-812f-558a-a09e-ceb56af609f1",
+        "6900e50a-610d-53dd-a989-2ff01d7b9a17"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "screwdriver.png",
+      "id": "0",
+      "uuid": "6c159746-2bb0-5598-b448-b7f2b52bcdb1",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACwklEQVR4Xu1VS0hUURgeJisoyJjASsEsy6xAkNGSKBflRpBmhKDAEcuIQhkh01XD9LLHxo2bXLSvRW2lhW2SmCCwTAUjrBlKdGCmeTnN605f9z92ptvpzu3OOI2bPvi45/zn8X3nP//lGOYCAYg0yODtJ3OeDClecCB0ESIpToJhd1+GRTdApy+KAaUIJ8XFDPCrKThEcaUBIq8DpQGxPoZdM4y/ds0BYvr5FWhB7TryNiD+AfykbQ8ewf50PEPq8zUFNZANJEqb8hRTn4+pGVCLrQokyO+YqDSgdlqxSEOu44h8sjFSm2LKPo9lhVYGeFxZoKIBEoI0w0htipEo7//VgFYN6IGaAe/jw6xNX6K4pqBQuwISpfaHoT1/GjhaW7Yy6a7sTsHfJq0Sugy8OrOjoKJKqGUlA0tj+T83oIlDlaa1NaCsAXFMCX9nCaRAD5LvTiL9vEJzbk7QWwOp6/WQlqeYOJkQx/MGrwG9GSAT9BXH84ZeA5QBMsG/4nje0GvgP9YEkvcUiKnpJnY9nff3FveaSDz8bD8zUHRxAglzkhFxXInEaAvSI8cg3WvEd2cV0o5dSIycYH9M0FmK6NQEEtFviMkU12qCTk7ibx31mguTtxqQvtPAftPktRoEe7YhfuMgYs4aJG+b8fWmGfHlKDMhrlUFiVoGynSnPj42jKjdhOiVSkT6DsBzej1ijiYE+qvhtW2Cb6ASvoeD+g0QWrq3657sO2tEuLcKSx0m+C9Xw3dpN7y9dfB2bUVQbi90l8A3JGdj+qruPQ2UATGWDf4L+7Aki7jbDIgM1sJtNWLx/E4kFs9BCo0h8cYGabwcqfd23XvmZOCzdQPmW41Y6NqMLx0V8Fh/vp6TFiRfmNkjlnIdgfSyTveeOeGjZSM87Vsw22zAfPs6pMKjK6/nZD/SE6WQXjezVzQ528oM/AAgVTnHbA6L7AAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "original_render_type": "translucent",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "screwdriver_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "screwdriver_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "screwdriver_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "screwdriver_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "batch": "A17",
+  "unit_test_count": 275,
+  "suites": [
+    {
+      "suite": "python",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": 213,
+      "passed": true,
+      "output": "A17-python-test-output.txt"
+    },
+    {
+      "suite": "node",
+      "command": [
+        "node",
+        "--test",
+        "tests/interfaces.test.mjs",
+        "tests/visual-state.test.mjs"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": 62,
+      "passed": true,
+      "output": "A17-node-test-output.txt"
+    },
+    {
+      "suite": "typescript",
+      "command": [
+        "tsc",
+        "-p",
+        "tests/tsconfig.json"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "tests": null,
+      "passed": true,
+      "output": "A17-typescript-test-output.txt"
+    }
+  ],
+  "covered_appearance_variants": 491,
+  "covered_icons": 92,
+  "cookery_archive_used": "SYNTHETIC_TEST_FIXTURES_ONLY",
+  "actual_Cookery_integration": "NOT_RUN",
+  "engine": "NOT_RUN"
+}

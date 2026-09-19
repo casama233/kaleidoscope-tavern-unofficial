@@ -1,0 +1,697 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_string_lights_pink",
+  "model_identifier": "kt_assets_a17.item_display_string_lights_pink",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "item_display_string_lights_pink_element0",
+      "type": "cube",
+      "uuid": "43d98644-eedf-537e-a25e-de6f089e09f9",
+      "from": [
+        2,
+        6,
+        6.4
+      ],
+      "to": [
+        8,
+        10,
+        6.4
+      ],
+      "origin": [
+        4.75,
+        7.6125,
+        6.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element1",
+      "type": "cube",
+      "uuid": "07e5c83a-537c-561c-820c-5bd7ca6ef918",
+      "from": [
+        -3,
+        4,
+        6.4
+      ],
+      "to": [
+        3,
+        8,
+        6.4
+      ],
+      "origin": [
+        -0.25,
+        5.6125,
+        6.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element2",
+      "type": "cube",
+      "uuid": "b87b3249-9970-5cdd-a4b0-bcb142b6ae73",
+      "from": [
+        -8,
+        6,
+        6.4
+      ],
+      "to": [
+        -2,
+        10,
+        6.4
+      ],
+      "origin": [
+        -5,
+        7.75,
+        6.449999999999999
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            8.0,
+            7.0,
+            14.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element3",
+      "type": "cube",
+      "uuid": "58a33b38-afda-5f89-92ae-396e618a1a71",
+      "from": [
+        3,
+        6,
+        5
+      ],
+      "to": [
+        7,
+        9,
+        8
+      ],
+      "origin": [
+        5,
+        7.7625,
+        6.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            8.0,
+            13.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            12.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element4",
+      "type": "cube",
+      "uuid": "7a6ef82b-eb20-503a-80b4-a6c35fccd6c5",
+      "from": [
+        -7,
+        6,
+        5
+      ],
+      "to": [
+        -3,
+        9,
+        8
+      ],
+      "origin": [
+        -5,
+        7.75,
+        6.449999999999999
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            8.0,
+            13.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            12.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element5",
+      "type": "cube",
+      "uuid": "3727dabd-481d-52e4-b0dc-a6391e773eba",
+      "from": [
+        -2,
+        4,
+        5
+      ],
+      "to": [
+        2,
+        7,
+        8
+      ],
+      "origin": [
+        0,
+        5.75,
+        6.449999999999999
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            8.0,
+            13.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            8.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            12.0,
+            9.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            12.0,
+            14.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_string_lights_pink_element6",
+      "type": "cube",
+      "uuid": "dc1ee1d3-4aa7-5499-8aff-cdb28e963af1",
+      "from": [
+        -8,
+        10,
+        6.5
+      ],
+      "to": [
+        8,
+        15,
+        6.5
+      ],
+      "origin": [
+        -8,
+        10,
+        6.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "4f02be05-2fa4-5e4f-849c-e546b84e62de",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "43d98644-eedf-537e-a25e-de6f089e09f9",
+        "07e5c83a-537c-561c-820c-5bd7ca6ef918",
+        "b87b3249-9970-5cdd-a4b0-bcb142b6ae73",
+        "58a33b38-afda-5f89-92ae-396e618a1a71",
+        "7a6ef82b-eb20-503a-80b4-a6c35fccd6c5",
+        "3727dabd-481d-52e4-b0dc-a6391e773eba",
+        "dc1ee1d3-4aa7-5499-8aff-cdb28e963af1"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "pink.png",
+      "id": "0",
+      "uuid": "eed7aab7-5b08-5c06-b187-52b5d81f81cf",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAiklEQVR4XmNQ1bb5z0AmgOv18E8h2RBb5yBUPaS4BEMzDIAkYBibHMgSoi0CeQukGJeBQwx8cq+DewGZjRX8P/30///rr/+DaBAfpAEshoTxGgLTDKJhYtkSjhBDgRjERlaPAf6vO/EfhkF8sAtq98HFQGy8LqAYwJyKgpFchew6rABDM90NIBUAAKsm382xefldAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_pink.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_pink.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/pink.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

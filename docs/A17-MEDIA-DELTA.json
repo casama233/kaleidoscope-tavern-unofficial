@@ -1,0 +1,25 @@
+{
+  "source_animations": 10,
+  "sound_events": 4,
+  "original_audio_files": 6,
+  "particle_effects": 16,
+  "particle_original_images": 19,
+  "liquid_visual_rigs": 12,
+  "liquid_geometry_files": 2,
+  "signature_split_rig": {
+    "entity_id": "kt_assets_a17:rig_signature_color",
+    "tinted_faces": 26,
+    "original_texture_unchanged": true,
+    "whole_glass_tint": false,
+    "properties": [
+      "kt_art:red",
+      "kt_art:green",
+      "kt_art:blue"
+    ],
+    "engine_accepted": false,
+    "computed_cocktail_color_connected": false,
+    "sprite_animation_in_entity": "SOURCE_6_FRAMES_AT_2_TICKS_UV_CANDIDATE"
+  },
+  "runtime_connected": false,
+  "engine_test": "NOT_RUN"
+}

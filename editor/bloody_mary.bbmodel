@@ -1,0 +1,1841 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "bloody_mary",
+  "model_identifier": "kt_assets_a10.bloody_mary",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "bloody_mary_element0",
+      "type": "cube",
+      "uuid": "d25a2290-48fe-5873-8493-7b3e1820a58b",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        -1,
+        0,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            6.0,
+            28.0,
+            10.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element1",
+      "type": "cube",
+      "uuid": "be00b0f7-a8ba-5ab5-afc1-ab62d90e14f3",
+      "from": [
+        1,
+        0.1,
+        -5
+      ],
+      "to": [
+        5,
+        0.1,
+        -1
+      ],
+      "origin": [
+        2,
+        -0.9,
+        -6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            27.0,
+            3.0,
+            31.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element2",
+      "type": "cube",
+      "uuid": "993d00aa-d92b-5fd2-95ae-dc05b08d6a0b",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        6,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            23.0,
+            8.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            23.0,
+            8.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            23.0,
+            8.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            23.0,
+            8.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            24.0,
+            8.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            24.0,
+            8.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element3",
+      "type": "cube",
+      "uuid": "b2d1a50c-67a1-55dd-99a9-a2475d5cd24f",
+      "from": [
+        -2.5,
+        6.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.4,
+        2.5
+      ],
+      "origin": [
+        -0.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            8.0,
+            23.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            8.0,
+            23.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            8.0,
+            23.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            8.0,
+            23.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            18.0,
+            2.0,
+            23.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            2.0,
+            23.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element4_north",
+      "type": "cube",
+      "uuid": "43a05186-d50a-52d4-bf47-f29b09c3e4ce",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        -3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            5.0,
+            21.1,
+            11.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element4_east",
+      "type": "cube",
+      "uuid": "c4bfc2ba-55c8-5b9f-a36b-a62a9e87abef",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            5.0,
+            21.1,
+            11.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element4_south",
+      "type": "cube",
+      "uuid": "c401fea6-6615-5242-8b79-d6348ef34c72",
+      "from": [
+        -3.0,
+        6.05,
+        3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            21.1,
+            11.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element4_west",
+      "type": "cube",
+      "uuid": "68a32b1a-9355-55d4-a11c-9bef67194e73",
+      "from": [
+        3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            5.0,
+            21.1,
+            11.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element4_down",
+      "type": "cube",
+      "uuid": "be0d456d-d6c6-5bcc-9385-c1e1c4093d41",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        6.05,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            18.0,
+            2.0,
+            23.0,
+            7.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "bloody_mary_element5",
+      "type": "cube",
+      "uuid": "1b2d4c2d-889c-5333-a570-788e540fe70f",
+      "from": [
+        -3,
+        6.05,
+        -3
+      ],
+      "to": [
+        3,
+        6.05,
+        3
+      ],
+      "origin": [
+        3,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            22.1,
+            11.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            5.0,
+            22.1,
+            11.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            22.1,
+            11.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            5.0,
+            22.1,
+            11.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            18.0,
+            2.0,
+            23.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element6",
+      "type": "cube",
+      "uuid": "5f3f4dba-0223-516e-93d7-102d9f0c9f39",
+      "from": [
+        -3.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        -2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            3.0,
+            11.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            11.0,
+            5.0,
+            11.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            12.0,
+            4.75,
+            5.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element7",
+      "type": "cube",
+      "uuid": "c4379321-ba0e-5431-b3a1-a1a80a9d798e",
+      "from": [
+        2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            5.0,
+            11.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            3.0,
+            11.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element8",
+      "type": "cube",
+      "uuid": "5e14e515-331d-5093-b42f-b8965718e371",
+      "from": [
+        -2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        -2.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            5.0,
+            5.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5.0,
+            3.0,
+            10.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.0,
+            5.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            5.0,
+            5.0,
+            10.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element9",
+      "type": "cube",
+      "uuid": "db2de814-d192-53d5-874b-413a1b94e25c",
+      "from": [
+        -2.5,
+        8.2,
+        2.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            3.0,
+            10.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4.0,
+            5.0,
+            4.75,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            5.0,
+            11.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            5.0,
+            11.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            5.0,
+            5.0,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element10",
+      "type": "cube",
+      "uuid": "42cd4b7d-185c-57ae-84c0-493c2b2787be",
+      "from": [
+        2,
+        8.95,
+        0.5
+      ],
+      "to": [
+        4,
+        10.95,
+        2.5
+      ],
+      "origin": [
+        3,
+        9.95,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element11",
+      "type": "cube",
+      "uuid": "e86e2405-7fe4-5823-8318-fd4f93728548",
+      "from": [
+        0.25,
+        7.95,
+        2
+      ],
+      "to": [
+        2.25,
+        9.95,
+        4
+      ],
+      "origin": [
+        1.25,
+        8.95,
+        3
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            26.0,
+            27.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element12",
+      "type": "cube",
+      "uuid": "a0620c97-e8ee-59a2-88fc-99336a9f666a",
+      "from": [
+        0.5,
+        9.85,
+        2.8000000000000007
+      ],
+      "to": [
+        2.5,
+        11.85,
+        2.8000000000000007
+      ],
+      "origin": [
+        1.5,
+        10.85,
+        2.8000000000000007
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            22.0,
+            25.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            22.0,
+            25.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "bloody_mary_element13",
+      "type": "cube",
+      "uuid": "6c6613ee-359c-54ff-a59f-d1437914a464",
+      "from": [
+        -1.3499999999999996,
+        8.85,
+        3
+      ],
+      "to": [
+        0.6500000000000004,
+        10.85,
+        3
+      ],
+      "origin": [
+        -0.34999999999999964,
+        9.85,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        -45
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            24.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            22.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            24.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            22.0,
+            27.0,
+            22.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            22.0,
+            25.0,
+            24.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            22.0,
+            25.0,
+            24.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "59c85e4b-aca9-568d-9390-0d6c8189f7ce",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "d25a2290-48fe-5873-8493-7b3e1820a58b",
+        "be00b0f7-a8ba-5ab5-afc1-ab62d90e14f3",
+        "993d00aa-d92b-5fd2-95ae-dc05b08d6a0b",
+        "b2d1a50c-67a1-55dd-99a9-a2475d5cd24f",
+        "43a05186-d50a-52d4-bf47-f29b09c3e4ce",
+        "c4bfc2ba-55c8-5b9f-a36b-a62a9e87abef",
+        "c401fea6-6615-5242-8b79-d6348ef34c72",
+        "68a32b1a-9355-55d4-a11c-9bef67194e73",
+        "be0d456d-d6c6-5bcc-9385-c1e1c4093d41",
+        "1b2d4c2d-889c-5333-a570-788e540fe70f",
+        "5f3f4dba-0223-516e-93d7-102d9f0c9f39",
+        "c4379321-ba0e-5431-b3a1-a1a80a9d798e",
+        "5e14e515-331d-5093-b42f-b8965718e371",
+        "db2de814-d192-53d5-874b-413a1b94e25c",
+        "42cd4b7d-185c-57ae-84c0-493c2b2787be",
+        "e86e2405-7fe4-5823-8318-fd4f93728548",
+        "a0620c97-e8ee-59a2-88fc-99336a9f666a",
+        "6c6613ee-359c-54ff-a59f-d1437914a464"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "bloody_mary.png",
+      "id": "0",
+      "uuid": "d532ec33-88c1-510e-8067-795aa98225c6",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABU0lEQVR4Xu2Wv0pDMRTGQ0EcfIguTh0cdCh9gK4uPkGHDt1dBelm30KKm7uTiDh07NpCEboJDlXEOfoFTkk/crx/TG6W/uDj3pyc5nxJTuEasycSH72eFdnh0IlzSoEFHtpttxCeIow51wfzl8Y4nf4qZAAxrMXxKLCBkGHZDMd3WGw29n6xdsK7jPHkXB/sDoVFIQOlQDGOAS0uyL37vcA5PupJaDstMhANrZBmTMCOpMlK3bVGXQPSfKLzVuvPfBXNgBaPjt/1/I/g3D3J+H5+tdDn3YuTjDkvGSi2Hox21KgB7JoNIMZ5ychuIPsVZG/C7MiOWZyXjPfJrQ2J88pyNr6wJ4Nu9d+j+ThWBxQ/7neqr9XosYcYP87/beD66MBOD43Fk+cKiWEAxVf9K2eC5wqJ8RFS+wRuZsvtxwjeeT45KPz09uUU4yQqk91AU1fwAy5VqFMFr/CYAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 4,
+        "source_face": "north",
+        "output_cube": "bloody_mary_element4_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "east",
+        "output_cube": "bloody_mary_element4_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "south",
+        "output_cube": "bloody_mary_element4_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "west",
+        "output_cube": "bloody_mary_element4_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "down",
+        "output_cube": "bloody_mary_element4_down",
+        "output_face": "up",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          45,
+          0,
+          0
+        ],
+        "translation": [
+          0,
+          3,
+          1
+        ],
+        "scale": [
+          0.55,
+          0.55,
+          0.55
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          2,
+          0
+        ],
+        "scale": [
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "translation": [
+          -1.25,
+          1,
+          0
+        ],
+        "scale": [
+          1.1,
+          1.1,
+          1.1
+        ]
+      },
+      "head": {
+        "translation": [
+          1,
+          15,
+          -2
+        ]
+      },
+      "fixed": {
+        "rotation": [
+          -90,
+          -180,
+          0
+        ],
+        "translation": [
+          2,
+          0.25,
+          -13.25
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          1.7
+        ]
+      }
+    },
+    "animation": null,
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

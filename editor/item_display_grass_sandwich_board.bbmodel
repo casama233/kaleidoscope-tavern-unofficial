@@ -1,0 +1,739 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_grass_sandwich_board",
+  "model_identifier": "kt_assets_a17.item_display_grass_sandwich_board",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "item_display_grass_sandwich_board_element0",
+      "type": "cube",
+      "uuid": "cab6e9b5-3b8a-5ff0-8fd5-f78089440015",
+      "from": [
+        3.505000000000001,
+        0.01025,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element1",
+      "type": "cube",
+      "uuid": "b6f3ee8a-9142-5302-8ae3-63bb7cfb2d9e",
+      "from": [
+        3.5,
+        -0.43015,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        19.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element2",
+      "type": "cube",
+      "uuid": "64d8f888-d51b-5c47-bd10-1163b398e668",
+      "from": [
+        -5.495,
+        0.01025,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        12.00025,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        5.50525,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            17.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            12.99
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element3",
+      "type": "cube",
+      "uuid": "359ff423-d00f-526b-b7cf-f559392c9c75",
+      "from": [
+        -5.5,
+        -0.43015,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        19.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        9.56985,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element4",
+      "type": "cube",
+      "uuid": "08f89dc2-797d-5116-a280-f37bd5fe997e",
+      "from": [
+        -6.5,
+        4,
+        -5.7
+      ],
+      "to": [
+        6.5,
+        6,
+        5.300000000000001
+      ],
+      "origin": [
+        0.5,
+        13.25,
+        0.9653799999999997
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3.0,
+            20.0,
+            16.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            3.0,
+            20.0,
+            14.0,
+            22.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            19.0,
+            16.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element5",
+      "type": "cube",
+      "uuid": "ca46264b-0057-52b0-a5a0-418c58664087",
+      "from": [
+        -6,
+        5.7724,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        21.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        13.7724,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            1.0,
+            28.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_grass_sandwich_board_element6",
+      "type": "cube",
+      "uuid": "3788cb29-147a-596b-9c9e-ae7215f54f67",
+      "from": [
+        -8,
+        2.7724,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        23.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        13.7724,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "07b686af-4372-5c14-a2cb-b630591a85f9",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "cab6e9b5-3b8a-5ff0-8fd5-f78089440015",
+        "b6f3ee8a-9142-5302-8ae3-63bb7cfb2d9e",
+        "64d8f888-d51b-5c47-bd10-1163b398e668",
+        "359ff423-d00f-526b-b7cf-f559392c9c75",
+        "08f89dc2-797d-5116-a280-f37bd5fe997e",
+        "ca46264b-0057-52b0-a5a0-418c58664087",
+        "3788cb29-147a-596b-9c9e-ae7215f54f67"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "item_display_grass_sandwich_board.png",
+      "id": "0",
+      "uuid": "b0ef4551-d0d3-51fc-8c03-c2fe27529754",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAADJElEQVR4nO2ZT0gUURzHv88dZ5tV7KK57WHRylMogh6iEDrUoVtg0UGiSxF4lJVcw1O4WyYdhahLRIcooZsHOwQL2UFBkk5amofIFKotd5rZ1ddhdqaZ2dndGefnLht+YHi8P/Pe+333/X7vvVl2pruNN0kCZuZWGPZAR99p7vWd5dRbT2P1DHTxhWfv9zS/cgjmzMkL5zwZ82HmNRMbQ54GVH9nPLXvHOrl2FDROdTLlx7MM2ox6pwKg1JDyaeShCMS1FYR4YikiQEYKQUFAgSlBgiSWPKppAizsRQLRyQj1cWgwiKAbnw5nERIxG7h5dRDsomZmY2lmJ7qYvQMdJGsAqF8E3eMTt6j6qoks7EUs8cFP/2RCTB1Zxw/0r/AGMOxaBSBujosr60hPpFEYngEo/fvUg2FcETC13y65LMvAQDScs73pAbHbhetozQe0FbB+ck+rruGHwQACIkB35N683wacwvz6GhrB8ABaHNbXl8FdoH4RNL3GDo9A10kxgN5AYSA/77OXun33YcbKP0fIIwByeERdLS3AwC+bW7hSEszLg3epOregNL/gbwAuR3/O0qc2M+LQen/AMEK4NkdAMCLR4+xsvoJAMOJ/EoAgI+ra+DgiCfG/Q5lQGU8YBNAkbe1wjKHoZysGm0BIKsouHzjOrKKAgCoDwaNcj2fVRSj3M5+XnbKUXAUVuRt5GS15GM3Xk/rg0HDWD3/6slTJEdGLW3N7Mf53guOLmA20At2A7OKgovXrpZ8hzqoecXxNlhJzOd7QHOHSo7P/H4QoaRzqJeLGyrUVhEUe7wbqr4CzOzHdbcclhjQfyrCc+ouBLFQl2Ll0+++kP1S1Hu8GywHoYys7elqPrVTrJySShoP2FaAGGCQ8hcjWdWMlRwuSrK6A0kMGG1qGYva3dEmDvy7HWZcGLi4nq568PSDZQUcjzQ6Ntr8+Qcthw851i2up+lnVUEsAmSK+Hguy4vW1ToFMQCw+r3u56XqahmLAJtpxfD7kBiwxIDPW4V/aFB8Sao2FgGONu/hALLynWouVcFVDPifcXUOMPu6vf6AA2qbvyXgXavltkYlAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/grass_sandwich_board.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/grass_sandwich_board.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/deco_sandwich_board.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/item_display_grass_sandwich_board.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/grass.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

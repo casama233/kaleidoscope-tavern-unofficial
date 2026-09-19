@@ -1,0 +1,2973 @@
+{
+  "scope": "In-memory browser rendering and interaction of bundled inspector, not file-open or Minecraft acceptance",
+  "transport": "page.set_content with bundled JS inlined; original data unchanged",
+  "direct_file_navigation": "NOT_TESTED_IN_A17; inherited runner uses in-memory transport",
+  "loopback_navigation": "NOT_TESTED_IN_A17",
+  "agent_browser_cli": "NOT_INSTALLED; Playwright fallback used",
+  "browser": "Chromium 144.0.7559.96",
+  "renderer": "Canvas2D software textured triangles, no WebGL dependency; 420x320 bounded render surface during all-model test",
+  "models_rendered": 491,
+  "checks_run": 591,
+  "passed": 591,
+  "failed": 0,
+  "minecraft_engine": "NOT_RUN",
+  "bridge_interactive_load": "NOT_RUN",
+  "blockbench_interactive_load": "NOT_RUN",
+  "checks": [
+    {
+      "name": "default_A17_filter",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "default_A17_selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_all",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A17",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A8",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A9",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A13",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A14",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A15",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "filter_A16",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "search_empty",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "click_empty_selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "empty_search",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "render_pressing_tub",
+      "passed": true,
+      "detail": 37302
+    },
+    {
+      "name": "render_pressing_tub_tilt",
+      "passed": true,
+      "detail": 41358
+    },
+    {
+      "name": "render_tap_closed",
+      "passed": true,
+      "detail": 26045
+    },
+    {
+      "name": "render_tap_open",
+      "passed": true,
+      "detail": 25884
+    },
+    {
+      "name": "render_wine_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_wine_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_wine_3",
+      "passed": true,
+      "detail": 24867
+    },
+    {
+      "name": "render_wine_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_barrel_closed",
+      "passed": true,
+      "detail": 39186
+    },
+    {
+      "name": "render_barrel_open",
+      "passed": true,
+      "detail": 36590
+    },
+    {
+      "name": "render_trellis_single",
+      "passed": true,
+      "detail": 23910
+    },
+    {
+      "name": "render_trellis_east_west",
+      "passed": true,
+      "detail": 22966
+    },
+    {
+      "name": "render_trellis_north_south",
+      "passed": true,
+      "detail": 19860
+    },
+    {
+      "name": "render_trellis_cross_east_west",
+      "passed": true,
+      "detail": 38160
+    },
+    {
+      "name": "render_trellis_cross_north_south",
+      "passed": true,
+      "detail": 33568
+    },
+    {
+      "name": "render_trellis_cross_up_down",
+      "passed": true,
+      "detail": 31626
+    },
+    {
+      "name": "render_trellis_six_direction",
+      "passed": true,
+      "detail": 44036
+    },
+    {
+      "name": "render_grapevine_stage0",
+      "passed": true,
+      "detail": 12757
+    },
+    {
+      "name": "render_grapevine_stage1",
+      "passed": true,
+      "detail": 14412
+    },
+    {
+      "name": "render_grapevine_stage2",
+      "passed": true,
+      "detail": 16865
+    },
+    {
+      "name": "render_grapevine_stage3",
+      "passed": true,
+      "detail": 23684
+    },
+    {
+      "name": "render_grape_crop_stage0",
+      "passed": true,
+      "detail": 11967
+    },
+    {
+      "name": "render_grape_crop_stage1",
+      "passed": true,
+      "detail": 15910
+    },
+    {
+      "name": "render_grape_crop_stage2",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_grape_crop_stage3",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_grape_crop_stage4",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_grape_crop_stage5",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_ice_grape_crop_stage0",
+      "passed": true,
+      "detail": 11967
+    },
+    {
+      "name": "render_ice_grape_crop_stage1",
+      "passed": true,
+      "detail": 15910
+    },
+    {
+      "name": "render_ice_grape_crop_stage2",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_ice_grape_crop_stage3",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_ice_grape_crop_stage4",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_ice_grape_crop_stage5",
+      "passed": true,
+      "detail": 22272
+    },
+    {
+      "name": "render_gold_grape_crop_stage0",
+      "passed": true,
+      "detail": 13808
+    },
+    {
+      "name": "render_gold_grape_crop_stage1",
+      "passed": true,
+      "detail": 17011
+    },
+    {
+      "name": "render_gold_grape_crop_stage2",
+      "passed": true,
+      "detail": 24004
+    },
+    {
+      "name": "render_gold_grape_crop_stage3",
+      "passed": true,
+      "detail": 24004
+    },
+    {
+      "name": "render_gold_grape_crop_stage4",
+      "passed": true,
+      "detail": 24004
+    },
+    {
+      "name": "render_gold_grape_crop_stage5",
+      "passed": true,
+      "detail": 24004
+    },
+    {
+      "name": "render_grapevine_east_west",
+      "passed": true,
+      "detail": 33165
+    },
+    {
+      "name": "render_grapevine_north_south",
+      "passed": true,
+      "detail": 33186
+    },
+    {
+      "name": "render_grapevine_cross_east_west",
+      "passed": true,
+      "detail": 33232
+    },
+    {
+      "name": "render_grapevine_cross_north_south",
+      "passed": true,
+      "detail": 33244
+    },
+    {
+      "name": "render_grapevine_cross_up_down",
+      "passed": true,
+      "detail": 33347
+    },
+    {
+      "name": "render_grapevine_six_direction",
+      "passed": true,
+      "detail": 33405
+    },
+    {
+      "name": "render_ice_grapevine_stage0",
+      "passed": true,
+      "detail": 12757
+    },
+    {
+      "name": "render_ice_grapevine_stage1",
+      "passed": true,
+      "detail": 14412
+    },
+    {
+      "name": "render_ice_grapevine_stage2",
+      "passed": true,
+      "detail": 16865
+    },
+    {
+      "name": "render_ice_grapevine_stage3",
+      "passed": true,
+      "detail": 23684
+    },
+    {
+      "name": "render_ice_grapevine_east_west",
+      "passed": true,
+      "detail": 33165
+    },
+    {
+      "name": "render_ice_grapevine_north_south",
+      "passed": true,
+      "detail": 33186
+    },
+    {
+      "name": "render_ice_grapevine_cross_east_west",
+      "passed": true,
+      "detail": 33232
+    },
+    {
+      "name": "render_ice_grapevine_cross_north_south",
+      "passed": true,
+      "detail": 33244
+    },
+    {
+      "name": "render_ice_grapevine_cross_up_down",
+      "passed": true,
+      "detail": 33347
+    },
+    {
+      "name": "render_ice_grapevine_six_direction",
+      "passed": true,
+      "detail": 33405
+    },
+    {
+      "name": "render_gold_grapevine_stage0",
+      "passed": true,
+      "detail": 12757
+    },
+    {
+      "name": "render_gold_grapevine_stage1",
+      "passed": true,
+      "detail": 14412
+    },
+    {
+      "name": "render_gold_grapevine_stage2",
+      "passed": true,
+      "detail": 16865
+    },
+    {
+      "name": "render_gold_grapevine_stage3",
+      "passed": true,
+      "detail": 23684
+    },
+    {
+      "name": "render_gold_grapevine_east_west",
+      "passed": true,
+      "detail": 33165
+    },
+    {
+      "name": "render_gold_grapevine_north_south",
+      "passed": true,
+      "detail": 33186
+    },
+    {
+      "name": "render_gold_grapevine_cross_east_west",
+      "passed": true,
+      "detail": 33232
+    },
+    {
+      "name": "render_gold_grapevine_cross_north_south",
+      "passed": true,
+      "detail": 33244
+    },
+    {
+      "name": "render_gold_grapevine_cross_up_down",
+      "passed": true,
+      "detail": 33347
+    },
+    {
+      "name": "render_gold_grapevine_six_direction",
+      "passed": true,
+      "detail": 33405
+    },
+    {
+      "name": "render_wild_grapevine",
+      "passed": true,
+      "detail": 12333
+    },
+    {
+      "name": "render_wild_grapevine_plant",
+      "passed": true,
+      "detail": 22999
+    },
+    {
+      "name": "render_empty_bottle_faces",
+      "passed": true,
+      "detail": 13825
+    },
+    {
+      "name": "render_champagne_1",
+      "passed": true,
+      "detail": 19685
+    },
+    {
+      "name": "render_champagne_2",
+      "passed": true,
+      "detail": 27554
+    },
+    {
+      "name": "render_champagne_3",
+      "passed": true,
+      "detail": 25338
+    },
+    {
+      "name": "render_champagne_4",
+      "passed": true,
+      "detail": 35610
+    },
+    {
+      "name": "render_honey_wine_1",
+      "passed": true,
+      "detail": 20004
+    },
+    {
+      "name": "render_honey_wine_2",
+      "passed": true,
+      "detail": 27897
+    },
+    {
+      "name": "render_honey_wine_3",
+      "passed": true,
+      "detail": 25592
+    },
+    {
+      "name": "render_honey_wine_4",
+      "passed": true,
+      "detail": 35714
+    },
+    {
+      "name": "render_ice_wine_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_ice_wine_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_ice_wine_3",
+      "passed": true,
+      "detail": 24867
+    },
+    {
+      "name": "render_ice_wine_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_sofa_white_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_orange_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_magenta_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_light_blue_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_yellow_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_lime_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_pink_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_gray_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_light_gray_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_cyan_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_purple_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_blue_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_brown_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_green_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_red_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_black_single",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_sofa_white_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_orange_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_magenta_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_light_blue_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_yellow_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_lime_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_pink_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_gray_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_light_gray_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_cyan_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_purple_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_blue_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_brown_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_green_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_red_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_black_left",
+      "passed": true,
+      "detail": 33758
+    },
+    {
+      "name": "render_sofa_white_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_orange_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_magenta_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_light_blue_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_yellow_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_lime_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_pink_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_gray_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_light_gray_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_cyan_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_purple_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_blue_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_brown_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_green_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_red_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_black_middle",
+      "passed": true,
+      "detail": 36201
+    },
+    {
+      "name": "render_sofa_white_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_orange_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_magenta_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_light_blue_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_yellow_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_lime_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_pink_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_gray_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_light_gray_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_cyan_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_purple_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_blue_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_brown_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_green_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_red_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_black_right",
+      "passed": true,
+      "detail": 36557
+    },
+    {
+      "name": "render_sofa_white_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_orange_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_magenta_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_light_blue_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_yellow_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_lime_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_pink_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_gray_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_light_gray_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_cyan_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_purple_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_blue_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_brown_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_green_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_red_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_black_left_corner",
+      "passed": true,
+      "detail": 35202
+    },
+    {
+      "name": "render_sofa_white_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_orange_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_magenta_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_light_blue_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_yellow_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_lime_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_pink_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_gray_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_light_gray_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_cyan_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_purple_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_blue_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_brown_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_green_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_red_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_sofa_black_right_corner",
+      "passed": true,
+      "detail": 40709
+    },
+    {
+      "name": "render_emerald",
+      "passed": true,
+      "detail": 24968
+    },
+    {
+      "name": "render_bar_cabinet_single",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_cabinet_left",
+      "passed": true,
+      "detail": 37019
+    },
+    {
+      "name": "render_bar_cabinet_middle",
+      "passed": true,
+      "detail": 37019
+    },
+    {
+      "name": "render_bar_cabinet_right",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_glass_bar_cabinet_single",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_glass_bar_cabinet_left",
+      "passed": true,
+      "detail": 37068
+    },
+    {
+      "name": "render_glass_bar_cabinet_middle",
+      "passed": true,
+      "detail": 37068
+    },
+    {
+      "name": "render_glass_bar_cabinet_right",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_cellar_cabinet_single",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_cellar_cabinet_left",
+      "passed": true,
+      "detail": 42433
+    },
+    {
+      "name": "render_cellar_cabinet_middle",
+      "passed": true,
+      "detail": 42433
+    },
+    {
+      "name": "render_cellar_cabinet_right",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_tilted_rack",
+      "passed": true,
+      "detail": 25725
+    },
+    {
+      "name": "render_circular_rack",
+      "passed": true,
+      "detail": 19706
+    },
+    {
+      "name": "render_glassware_holder",
+      "passed": true,
+      "detail": 31555
+    },
+    {
+      "name": "render_vodka_1",
+      "passed": true,
+      "detail": 27916
+    },
+    {
+      "name": "render_vodka_2",
+      "passed": true,
+      "detail": 34229
+    },
+    {
+      "name": "render_vodka_3",
+      "passed": true,
+      "detail": 30314
+    },
+    {
+      "name": "render_vodka_4",
+      "passed": true,
+      "detail": 38536
+    },
+    {
+      "name": "render_rum_1",
+      "passed": true,
+      "detail": 28411
+    },
+    {
+      "name": "render_rum_2",
+      "passed": true,
+      "detail": 32271
+    },
+    {
+      "name": "render_rum_3",
+      "passed": true,
+      "detail": 30463
+    },
+    {
+      "name": "render_rum_4",
+      "passed": true,
+      "detail": 38628
+    },
+    {
+      "name": "render_sherry_1",
+      "passed": true,
+      "detail": 20004
+    },
+    {
+      "name": "render_sherry_2",
+      "passed": true,
+      "detail": 27897
+    },
+    {
+      "name": "render_sherry_3",
+      "passed": true,
+      "detail": 25592
+    },
+    {
+      "name": "render_sherry_4",
+      "passed": true,
+      "detail": 35714
+    },
+    {
+      "name": "render_red_queen_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_red_queen_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_red_queen_3",
+      "passed": true,
+      "detail": 24867
+    },
+    {
+      "name": "render_red_queen_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_vinegar_1",
+      "passed": true,
+      "detail": 18629
+    },
+    {
+      "name": "render_vinegar_2",
+      "passed": true,
+      "detail": 26008
+    },
+    {
+      "name": "render_vinegar_3",
+      "passed": true,
+      "detail": 24137
+    },
+    {
+      "name": "render_vinegar_4",
+      "passed": true,
+      "detail": 33998
+    },
+    {
+      "name": "render_whiskey_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_whiskey_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_whiskey_3",
+      "passed": true,
+      "detail": 24867
+    },
+    {
+      "name": "render_whiskey_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_miners_star_1",
+      "passed": true,
+      "detail": 26457
+    },
+    {
+      "name": "render_miners_star_2",
+      "passed": true,
+      "detail": 31219
+    },
+    {
+      "name": "render_miners_star_3",
+      "passed": true,
+      "detail": 29738
+    },
+    {
+      "name": "render_miners_star_4",
+      "passed": true,
+      "detail": 38203
+    },
+    {
+      "name": "render_sauvignon_blanc_dry_white_1",
+      "passed": true,
+      "detail": 20004
+    },
+    {
+      "name": "render_sauvignon_blanc_dry_white_2",
+      "passed": true,
+      "detail": 27897
+    },
+    {
+      "name": "render_sauvignon_blanc_dry_white_3",
+      "passed": true,
+      "detail": 25592
+    },
+    {
+      "name": "render_sauvignon_blanc_dry_white_4",
+      "passed": true,
+      "detail": 35714
+    },
+    {
+      "name": "render_sweet_berry_wine_1",
+      "passed": true,
+      "detail": 26850
+    },
+    {
+      "name": "render_sweet_berry_wine_2",
+      "passed": true,
+      "detail": 32577
+    },
+    {
+      "name": "render_sweet_berry_wine_3",
+      "passed": true,
+      "detail": 29031
+    },
+    {
+      "name": "render_sweet_berry_wine_4",
+      "passed": true,
+      "detail": 36485
+    },
+    {
+      "name": "render_sakura_wine_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_sakura_wine_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_sakura_wine_3",
+      "passed": true,
+      "detail": 25041
+    },
+    {
+      "name": "render_sakura_wine_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_empty_glassware",
+      "passed": true,
+      "detail": 28149
+    },
+    {
+      "name": "render_screwdriver",
+      "passed": true,
+      "detail": 20038
+    },
+    {
+      "name": "render_depth_charge",
+      "passed": true,
+      "detail": 30723
+    },
+    {
+      "name": "render_mojito",
+      "passed": true,
+      "detail": 26437
+    },
+    {
+      "name": "render_signature_cocktail",
+      "passed": true,
+      "detail": 25149
+    },
+    {
+      "name": "render_mystery_cocktail",
+      "passed": true,
+      "detail": 25149
+    },
+    {
+      "name": "render_shaker",
+      "passed": true,
+      "detail": 32711
+    },
+    {
+      "name": "render_glowflower_brew_1",
+      "passed": true,
+      "detail": 17781
+    },
+    {
+      "name": "render_glowflower_brew_2",
+      "passed": true,
+      "detail": 23099
+    },
+    {
+      "name": "render_glowflower_brew_3",
+      "passed": true,
+      "detail": 24670
+    },
+    {
+      "name": "render_glowflower_brew_4",
+      "passed": true,
+      "detail": 36273
+    },
+    {
+      "name": "render_luminous_bride_1",
+      "passed": true,
+      "detail": 17781
+    },
+    {
+      "name": "render_luminous_bride_2",
+      "passed": true,
+      "detail": 23099
+    },
+    {
+      "name": "render_luminous_bride_3",
+      "passed": true,
+      "detail": 24670
+    },
+    {
+      "name": "render_luminous_bride_4",
+      "passed": true,
+      "detail": 36273
+    },
+    {
+      "name": "render_brandy_1",
+      "passed": true,
+      "detail": 27794
+    },
+    {
+      "name": "render_brandy_2",
+      "passed": true,
+      "detail": 22411
+    },
+    {
+      "name": "render_brandy_3",
+      "passed": true,
+      "detail": 31134
+    },
+    {
+      "name": "render_carignan_1",
+      "passed": true,
+      "detail": 44909
+    },
+    {
+      "name": "render_carignan_2",
+      "passed": true,
+      "detail": 31048
+    },
+    {
+      "name": "render_carignan_3",
+      "passed": true,
+      "detail": 36321
+    },
+    {
+      "name": "render_madame_shexiang_1",
+      "passed": true,
+      "detail": 22515
+    },
+    {
+      "name": "render_madame_shexiang_2",
+      "passed": true,
+      "detail": 29391
+    },
+    {
+      "name": "render_madame_shexiang_3",
+      "passed": true,
+      "detail": 27085
+    },
+    {
+      "name": "render_madame_shexiang_4",
+      "passed": true,
+      "detail": 35124
+    },
+    {
+      "name": "render_mother_snow_1",
+      "passed": true,
+      "detail": 25657
+    },
+    {
+      "name": "render_mother_snow_2",
+      "passed": true,
+      "detail": 31828
+    },
+    {
+      "name": "render_mother_snow_3",
+      "passed": true,
+      "detail": 28756
+    },
+    {
+      "name": "render_mother_snow_4",
+      "passed": true,
+      "detail": 37654
+    },
+    {
+      "name": "render_plum_wine_1",
+      "passed": true,
+      "detail": 23875
+    },
+    {
+      "name": "render_plum_wine_2",
+      "passed": true,
+      "detail": 31422
+    },
+    {
+      "name": "render_plum_wine_3",
+      "passed": true,
+      "detail": 28433
+    },
+    {
+      "name": "render_plum_wine_4",
+      "passed": true,
+      "detail": 36979
+    },
+    {
+      "name": "render_polaris_sweet_white_1",
+      "passed": true,
+      "detail": 20004
+    },
+    {
+      "name": "render_polaris_sweet_white_2",
+      "passed": true,
+      "detail": 27897
+    },
+    {
+      "name": "render_polaris_sweet_white_3",
+      "passed": true,
+      "detail": 25592
+    },
+    {
+      "name": "render_polaris_sweet_white_4",
+      "passed": true,
+      "detail": 35714
+    },
+    {
+      "name": "render_riesling_dry_white_1",
+      "passed": true,
+      "detail": 24661
+    },
+    {
+      "name": "render_riesling_dry_white_2",
+      "passed": true,
+      "detail": 30180
+    },
+    {
+      "name": "render_riesling_dry_white_3",
+      "passed": true,
+      "detail": 27450
+    },
+    {
+      "name": "render_riesling_dry_white_4",
+      "passed": true,
+      "detail": 34991
+    },
+    {
+      "name": "render_sunset_glow_1",
+      "passed": true,
+      "detail": 30225
+    },
+    {
+      "name": "render_sunset_glow_2",
+      "passed": true,
+      "detail": 23697
+    },
+    {
+      "name": "render_sunset_glow_3",
+      "passed": true,
+      "detail": 27651
+    },
+    {
+      "name": "render_watermelon_juice_1",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_watermelon_juice_2",
+      "passed": true,
+      "detail": 26954
+    },
+    {
+      "name": "render_watermelon_juice_3",
+      "passed": true,
+      "detail": 24867
+    },
+    {
+      "name": "render_watermelon_juice_4",
+      "passed": true,
+      "detail": 34827
+    },
+    {
+      "name": "render_white_lady",
+      "passed": true,
+      "detail": 22927
+    },
+    {
+      "name": "render_allium_garden",
+      "passed": true,
+      "detail": 17650
+    },
+    {
+      "name": "render_bloody_mary",
+      "passed": true,
+      "detail": 17106
+    },
+    {
+      "name": "render_brass_heart",
+      "passed": true,
+      "detail": 15385
+    },
+    {
+      "name": "render_godfather",
+      "passed": true,
+      "detail": 25042
+    },
+    {
+      "name": "render_grasshopper",
+      "passed": true,
+      "detail": 22907
+    },
+    {
+      "name": "render_nether_special",
+      "passed": true,
+      "detail": 27515
+    },
+    {
+      "name": "render_sculk_special",
+      "passed": true,
+      "detail": 10471
+    },
+    {
+      "name": "render_bar_counter_single",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_counter_left",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_counter_middle",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_counter_right",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_counter_left_corner",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_bar_counter_right_corner",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_holder",
+      "passed": true,
+      "detail": 24350
+    },
+    {
+      "name": "render_table_single",
+      "passed": true,
+      "detail": 22041
+    },
+    {
+      "name": "render_table_left",
+      "passed": true,
+      "detail": 21909
+    },
+    {
+      "name": "render_table_middle",
+      "passed": true,
+      "detail": 22380
+    },
+    {
+      "name": "render_table_right",
+      "passed": true,
+      "detail": 19384
+    },
+    {
+      "name": "render_table_left_rot",
+      "passed": true,
+      "detail": 19130
+    },
+    {
+      "name": "render_table_middle_rot",
+      "passed": true,
+      "detail": 20649
+    },
+    {
+      "name": "render_table_right_rot",
+      "passed": true,
+      "detail": 22041
+    },
+    {
+      "name": "render_bell_pendant_lamp_bottom",
+      "passed": true,
+      "detail": 16492
+    },
+    {
+      "name": "render_bell_pendant_lamp_top",
+      "passed": true,
+      "detail": 8546
+    },
+    {
+      "name": "render_blue_pendant_lamp_bottom",
+      "passed": true,
+      "detail": 19656
+    },
+    {
+      "name": "render_blue_pendant_lamp_top",
+      "passed": true,
+      "detail": 8546
+    },
+    {
+      "name": "render_yellow_pendant_lamp_bottom",
+      "passed": true,
+      "detail": 19656
+    },
+    {
+      "name": "render_yellow_pendant_lamp_top",
+      "passed": true,
+      "detail": 8546
+    },
+    {
+      "name": "render_stepladder_bottom",
+      "passed": true,
+      "detail": 18562
+    },
+    {
+      "name": "render_stepladder_top",
+      "passed": true,
+      "detail": 29804
+    },
+    {
+      "name": "render_sandwich_board_bottom",
+      "passed": true,
+      "detail": 29252
+    },
+    {
+      "name": "render_sandwich_board_top",
+      "passed": true,
+      "detail": 35984
+    },
+    {
+      "name": "render_bell_pendant_lamp_assembled",
+      "passed": true,
+      "detail": 9157
+    },
+    {
+      "name": "render_blue_pendant_lamp_assembled",
+      "passed": true,
+      "detail": 10346
+    },
+    {
+      "name": "render_yellow_pendant_lamp_assembled",
+      "passed": true,
+      "detail": 10346
+    },
+    {
+      "name": "render_stepladder_assembled",
+      "passed": true,
+      "detail": 21397
+    },
+    {
+      "name": "render_sandwich_board_assembled",
+      "passed": true,
+      "detail": 30453
+    },
+    {
+      "name": "render_sakura_incense_closed",
+      "passed": true,
+      "detail": 19618
+    },
+    {
+      "name": "render_sakura_incense_open",
+      "passed": true,
+      "detail": 18399
+    },
+    {
+      "name": "render_pine_incense_closed",
+      "passed": true,
+      "detail": 22827
+    },
+    {
+      "name": "render_pine_incense_open",
+      "passed": true,
+      "detail": 21315
+    },
+    {
+      "name": "render_ginkgo_incense_closed",
+      "passed": true,
+      "detail": 23204
+    },
+    {
+      "name": "render_ginkgo_incense_open",
+      "passed": true,
+      "detail": 21963
+    },
+    {
+      "name": "render_spore_incense_closed",
+      "passed": true,
+      "detail": 19685
+    },
+    {
+      "name": "render_spore_incense_open",
+      "passed": true,
+      "detail": 18657
+    },
+    {
+      "name": "render_catnip_incense_closed",
+      "passed": true,
+      "detail": 18590
+    },
+    {
+      "name": "render_catnip_incense_open",
+      "passed": true,
+      "detail": 17630
+    },
+    {
+      "name": "render_snow_incense_closed",
+      "passed": true,
+      "detail": 17792
+    },
+    {
+      "name": "render_snow_incense_open",
+      "passed": true,
+      "detail": 16780
+    },
+    {
+      "name": "render_butterfly_incense_closed",
+      "passed": true,
+      "detail": 19861
+    },
+    {
+      "name": "render_butterfly_incense_open",
+      "passed": true,
+      "detail": 18150
+    },
+    {
+      "name": "render_firefly_incense_closed",
+      "passed": true,
+      "detail": 22184
+    },
+    {
+      "name": "render_firefly_incense_open",
+      "passed": true,
+      "detail": 20411
+    },
+    {
+      "name": "render_painting_mondrian",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_great_wave",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_mona_lisa",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_cr019",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_david",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_bar_stool_blue",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_painting_father",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_girl_with_pearl_earring",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_master_marisa",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_son_of_man",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_starry_night",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_van_gogh_self_portrait",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_ysbb",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_tartaric_acid",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_painting_unknown",
+      "passed": true,
+      "detail": 20732
+    },
+    {
+      "name": "render_bar_stool_red",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_white",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_black",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_brown",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_cyan",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_string_lights_blue",
+      "passed": true,
+      "detail": 13045
+    },
+    {
+      "name": "render_bar_stool_orange",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_magenta",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_light_blue",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_yellow",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_string_lights_red",
+      "passed": true,
+      "detail": 17312
+    },
+    {
+      "name": "render_string_lights_white",
+      "passed": true,
+      "detail": 14434
+    },
+    {
+      "name": "render_string_lights_black",
+      "passed": true,
+      "detail": 11124
+    },
+    {
+      "name": "render_bar_stool_lime",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_pink",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_gray",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_light_gray",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_purple",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_bar_stool_green",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_string_lights_colorless",
+      "passed": true,
+      "detail": 17007
+    },
+    {
+      "name": "render_string_lights_brown",
+      "passed": true,
+      "detail": 16504
+    },
+    {
+      "name": "render_string_lights_cyan",
+      "passed": true,
+      "detail": 21201
+    },
+    {
+      "name": "render_string_lights_gray",
+      "passed": true,
+      "detail": 13221
+    },
+    {
+      "name": "render_string_lights_green",
+      "passed": true,
+      "detail": 13680
+    },
+    {
+      "name": "render_string_lights_light_blue",
+      "passed": true,
+      "detail": 19091
+    },
+    {
+      "name": "render_string_lights_light_gray",
+      "passed": true,
+      "detail": 14494
+    },
+    {
+      "name": "render_string_lights_lime",
+      "passed": true,
+      "detail": 17312
+    },
+    {
+      "name": "render_string_lights_magenta",
+      "passed": true,
+      "detail": 13895
+    },
+    {
+      "name": "render_string_lights_orange",
+      "passed": true,
+      "detail": 17310
+    },
+    {
+      "name": "render_string_lights_pink",
+      "passed": true,
+      "detail": 14408
+    },
+    {
+      "name": "render_string_lights_purple",
+      "passed": true,
+      "detail": 17098
+    },
+    {
+      "name": "render_string_lights_yellow",
+      "passed": true,
+      "detail": 11248
+    },
+    {
+      "name": "render_sandwich_board_base_assembled",
+      "passed": true,
+      "detail": 30453
+    },
+    {
+      "name": "render_sandwich_board_allium_top",
+      "passed": true,
+      "detail": 24787
+    },
+    {
+      "name": "render_sandwich_board_allium_assembled",
+      "passed": true,
+      "detail": 27425
+    },
+    {
+      "name": "render_sandwich_board_azure_bluet_top",
+      "passed": true,
+      "detail": 24181
+    },
+    {
+      "name": "render_sandwich_board_azure_bluet_assembled",
+      "passed": true,
+      "detail": 26383
+    },
+    {
+      "name": "render_sandwich_board_cornflower_top",
+      "passed": true,
+      "detail": 24504
+    },
+    {
+      "name": "render_sandwich_board_cornflower_assembled",
+      "passed": true,
+      "detail": 27045
+    },
+    {
+      "name": "render_sandwich_board_grass_top",
+      "passed": true,
+      "detail": 22173
+    },
+    {
+      "name": "render_sandwich_board_grass_assembled",
+      "passed": true,
+      "detail": 25677
+    },
+    {
+      "name": "render_sandwich_board_orchid_top",
+      "passed": true,
+      "detail": 25091
+    },
+    {
+      "name": "render_sandwich_board_orchid_assembled",
+      "passed": true,
+      "detail": 26772
+    },
+    {
+      "name": "render_sandwich_board_peony_top",
+      "passed": true,
+      "detail": 24487
+    },
+    {
+      "name": "render_sandwich_board_peony_assembled",
+      "passed": true,
+      "detail": 26895
+    },
+    {
+      "name": "render_sandwich_board_pink_petals_top",
+      "passed": true,
+      "detail": 22415
+    },
+    {
+      "name": "render_sandwich_board_pink_petals_assembled",
+      "passed": true,
+      "detail": 25864
+    },
+    {
+      "name": "render_sandwich_board_pitcher_plant_top",
+      "passed": true,
+      "detail": 22719
+    },
+    {
+      "name": "render_sandwich_board_pitcher_plant_assembled",
+      "passed": true,
+      "detail": 25892
+    },
+    {
+      "name": "render_sandwich_board_poppy_top",
+      "passed": true,
+      "detail": 25104
+    },
+    {
+      "name": "render_sandwich_board_poppy_assembled",
+      "passed": true,
+      "detail": 27422
+    },
+    {
+      "name": "render_sandwich_board_sunflower_top",
+      "passed": true,
+      "detail": 23517
+    },
+    {
+      "name": "render_sandwich_board_sunflower_assembled",
+      "passed": true,
+      "detail": 26655
+    },
+    {
+      "name": "render_sandwich_board_torchflower_top",
+      "passed": true,
+      "detail": 25082
+    },
+    {
+      "name": "render_sandwich_board_torchflower_assembled",
+      "passed": true,
+      "detail": 25867
+    },
+    {
+      "name": "render_sandwich_board_tulip_top",
+      "passed": true,
+      "detail": 24425
+    },
+    {
+      "name": "render_sandwich_board_tulip_assembled",
+      "passed": true,
+      "detail": 26641
+    },
+    {
+      "name": "render_sandwich_board_wither_rose_top",
+      "passed": true,
+      "detail": 25104
+    },
+    {
+      "name": "render_sandwich_board_wither_rose_assembled",
+      "passed": true,
+      "detail": 27422
+    },
+    {
+      "name": "render_chalkboard_small",
+      "passed": true,
+      "detail": 26938
+    },
+    {
+      "name": "render_chalkboard_large",
+      "passed": true,
+      "detail": 26596
+    },
+    {
+      "name": "render_molotov",
+      "passed": true,
+      "detail": 19318
+    },
+    {
+      "name": "render_water_bottle",
+      "passed": true,
+      "detail": 36591
+    },
+    {
+      "name": "render_potion_bottle",
+      "passed": true,
+      "detail": 36591
+    },
+    {
+      "name": "render_honey_bottle",
+      "passed": true,
+      "detail": 36591
+    },
+    {
+      "name": "render_xp_bottle",
+      "passed": true,
+      "detail": 37538
+    },
+    {
+      "name": "render_dragon_breath_bottle",
+      "passed": true,
+      "detail": 36591
+    },
+    {
+      "name": "render_item_display_allium_sandwich_board",
+      "passed": true,
+      "detail": 28031
+    },
+    {
+      "name": "render_item_display_azure_bluet_sandwich_board",
+      "passed": true,
+      "detail": 26948
+    },
+    {
+      "name": "render_item_display_bar_cabinet",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_item_display_bar_counter",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_item_display_barrel",
+      "passed": true,
+      "detail": 41101
+    },
+    {
+      "name": "render_item_display_base_sandwich_board",
+      "passed": true,
+      "detail": 32088
+    },
+    {
+      "name": "render_item_display_black_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_black_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_blue_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_blue_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_brown_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_brown_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_cellar_cabinet",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_item_display_circular_rack",
+      "passed": true,
+      "detail": 19706
+    },
+    {
+      "name": "render_item_display_cornflower_sandwich_board",
+      "passed": true,
+      "detail": 27644
+    },
+    {
+      "name": "render_item_display_cyan_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_cyan_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_glass_bar_cabinet",
+      "passed": true,
+      "detail": 44586
+    },
+    {
+      "name": "render_item_display_glassware_holder",
+      "passed": true,
+      "detail": 31555
+    },
+    {
+      "name": "render_item_display_grass_sandwich_board",
+      "passed": true,
+      "detail": 26201
+    },
+    {
+      "name": "render_item_display_gray_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_gray_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_green_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_green_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_light_blue_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_light_blue_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_light_gray_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_light_gray_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_lime_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_lime_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_magenta_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_magenta_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_orange_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_orange_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_orchid_sandwich_board",
+      "passed": true,
+      "detail": 27346
+    },
+    {
+      "name": "render_item_display_peony_sandwich_board",
+      "passed": true,
+      "detail": 27470
+    },
+    {
+      "name": "render_item_display_pink_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_pink_petals_sandwich_board",
+      "passed": true,
+      "detail": 26392
+    },
+    {
+      "name": "render_item_display_pink_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_pitcher_plant_sandwich_board",
+      "passed": true,
+      "detail": 26417
+    },
+    {
+      "name": "render_item_display_poppy_sandwich_board",
+      "passed": true,
+      "detail": 28021
+    },
+    {
+      "name": "render_item_display_pressing_tub",
+      "passed": true,
+      "detail": 37302
+    },
+    {
+      "name": "render_item_display_purple_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_purple_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_red_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_red_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_shaker",
+      "passed": true,
+      "detail": 32711
+    },
+    {
+      "name": "render_item_display_shaker_3d",
+      "passed": true,
+      "detail": 32711
+    },
+    {
+      "name": "render_item_display_string_lights_black",
+      "passed": true,
+      "detail": 11124
+    },
+    {
+      "name": "render_item_display_string_lights_blue",
+      "passed": true,
+      "detail": 13045
+    },
+    {
+      "name": "render_item_display_string_lights_brown",
+      "passed": true,
+      "detail": 16504
+    },
+    {
+      "name": "render_item_display_string_lights_colorless",
+      "passed": true,
+      "detail": 17007
+    },
+    {
+      "name": "render_item_display_string_lights_cyan",
+      "passed": true,
+      "detail": 21201
+    },
+    {
+      "name": "render_item_display_string_lights_gray",
+      "passed": true,
+      "detail": 13221
+    },
+    {
+      "name": "render_item_display_string_lights_green",
+      "passed": true,
+      "detail": 13680
+    },
+    {
+      "name": "render_item_display_string_lights_light_blue",
+      "passed": true,
+      "detail": 19091
+    },
+    {
+      "name": "render_item_display_string_lights_light_gray",
+      "passed": true,
+      "detail": 14494
+    },
+    {
+      "name": "render_item_display_string_lights_lime",
+      "passed": true,
+      "detail": 17312
+    },
+    {
+      "name": "render_item_display_string_lights_magenta",
+      "passed": true,
+      "detail": 13895
+    },
+    {
+      "name": "render_item_display_string_lights_orange",
+      "passed": true,
+      "detail": 17310
+    },
+    {
+      "name": "render_item_display_string_lights_pink",
+      "passed": true,
+      "detail": 14408
+    },
+    {
+      "name": "render_item_display_string_lights_purple",
+      "passed": true,
+      "detail": 17098
+    },
+    {
+      "name": "render_item_display_string_lights_red",
+      "passed": true,
+      "detail": 17312
+    },
+    {
+      "name": "render_item_display_string_lights_white",
+      "passed": true,
+      "detail": 14434
+    },
+    {
+      "name": "render_item_display_string_lights_yellow",
+      "passed": true,
+      "detail": 11248
+    },
+    {
+      "name": "render_item_display_sunflower_sandwich_board",
+      "passed": true,
+      "detail": 27226
+    },
+    {
+      "name": "render_item_display_table",
+      "passed": true,
+      "detail": 22041
+    },
+    {
+      "name": "render_item_display_tilted_rack",
+      "passed": true,
+      "detail": 25725
+    },
+    {
+      "name": "render_item_display_torchflower_sandwich_board",
+      "passed": true,
+      "detail": 26397
+    },
+    {
+      "name": "render_item_display_trellis",
+      "passed": true,
+      "detail": 23910
+    },
+    {
+      "name": "render_item_display_tulip_sandwich_board",
+      "passed": true,
+      "detail": 27204
+    },
+    {
+      "name": "render_item_display_white_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_white_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "render_item_display_wither_rose_sandwich_board",
+      "passed": true,
+      "detail": 28021
+    },
+    {
+      "name": "render_item_display_yellow_bar_stool",
+      "passed": true,
+      "detail": 25179
+    },
+    {
+      "name": "render_item_display_yellow_sofa",
+      "passed": true,
+      "detail": 39760
+    },
+    {
+      "name": "sprite_dimensions_depth_charge_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_depth_charge_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_depth_charge_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_depth_charge_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_visual_frames_differ_depth_charge",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_playback_advances_depth_charge",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_signature_cocktail_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_visual_frames_differ_signature_cocktail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_playback_advances_signature_cocktail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_mystery_cocktail_8",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_visual_frames_differ_mystery_cocktail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_playback_advances_mystery_cocktail",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_nether_special_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_visual_frames_differ_nether_special",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_playback_advances_nether_special",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_8",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_9",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_11",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_12",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_13",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_14",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_dimensions_sculk_special_15",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_visual_frames_differ_sculk_special",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sprite_playback_advances_sculk_special",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_4",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_5",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_6",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_frame_dimensions_7",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_seven_repeated_zeros",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_final_step_differs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_never_plays_source_slot_two",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "painting_timeline_advances",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "static_sprite_not_treated_as_strip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "invalid_frame_rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "front_camera",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "back_camera",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "top_camera",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "reset_camera",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pointer_rotation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "keyboard_zoom",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "wheel_zoom",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "auto_rotation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "inspection_toggles",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "A15_stool_note_not_stale",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "gallery_491_embedded_thumbnails",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "mobile_no_horizontal_overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no_js_exceptions",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no_external_http_requests",
+      "passed": true,
+      "detail": []
+    }
+  ]
+}

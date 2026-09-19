@@ -1,0 +1,250 @@
+TAP version 13
+# Subtest: every one of the 317 appearances round-trips through state and exact fixture ID
+ok 1 - every one of the 317 appearances round-trips through state and exact fixture ID
+  ---
+  duration_ms: 5.676377
+  type: 'test'
+  ...
+# Subtest: all 10 actual icon definitions resolve
+ok 2 - all 10 actual icon definitions resolve
+  ---
+  duration_ms: 0.25756
+  type: 'test'
+  ...
+# Subtest: all 309 blocks export both world and explicit inventory bindings
+ok 3 - all 309 blocks export both world and explicit inventory bindings
+  ---
+  duration_ms: 2.151011
+  type: 'test'
+  ...
+# Subtest: entity fixtures are never mistaken for blocks
+ok 4 - entity fixtures are never mistaken for blocks
+  ---
+  duration_ms: 0.367064
+  type: 'test'
+  ...
+# Subtest: unsupported display poses fail rather than claiming a ported pose
+ok 5 - unsupported display poses fail rather than claiming a ported pose
+  ---
+  duration_ms: 0.112901
+  type: 'test'
+  ...
+# Subtest: unknown drink or missing family does not fall back to Wine
+ok 6 - unknown drink or missing family does not fall back to Wine
+  ---
+  duration_ms: 0.187523
+  type: 'test'
+  ...
+# Subtest: bad integer types, bounds, NaN and infinity rejected
+ok 7 - bad integer types, bounds, NaN and infinity rejected
+  ---
+  duration_ms: 0.331681
+  type: 'test'
+  ...
+# Subtest: missing, extra and misspelled states rejected
+ok 8 - missing, extra and misspelled states rejected
+  ---
+  duration_ms: 0.169446
+  type: 'test'
+  ...
+# Subtest: null and array requests rejected
+ok 9 - null and array requests rejected
+  ---
+  duration_ms: 0.265691
+  type: 'test'
+  ...
+# Subtest: assets, selector tables and returned descriptors are immutable
+ok 10 - assets, selector tables and returned descriptors are immutable
+  ---
+  duration_ms: 0.41021
+  type: 'test'
+  ...
+# Subtest: modifying input after creation cannot change the registry
+ok 11 - modifying input after creation cannot change the registry
+  ---
+  duration_ms: 10.847191
+  type: 'test'
+  ...
+# Subtest: duplicate and dangling registry bindings rejected
+ok 12 - duplicate and dangling registry bindings rejected
+  ---
+  duration_ms: 20.393046
+  type: 'test'
+  ...
+# Subtest: localized catalog is data only, not a fake Cookery guide injection
+ok 13 - localized catalog is data only, not a fake Cookery guide injection
+  ---
+  duration_ms: 0.951057
+  type: 'test'
+  ...
+# Subtest: ice grape remains explicitly a first-frame candidate
+ok 14 - ice grape remains explicitly a first-frame candidate
+  ---
+  duration_ms: 0.070247
+  type: 'test'
+  ...
+# Subtest: Cookery IDs require an inspected archive and an exact mapping
+ok 15 - Cookery IDs require an inspected archive and an exact mapping
+  ---
+  duration_ms: 0.189086
+  type: 'test'
+  ...
+# Subtest: prototype property names cannot masquerade as an item mapping
+ok 16 - prototype property names cannot masquerade as an item mapping
+  ---
+  duration_ms: 0.130197
+  type: 'test'
+  ...
+# Subtest: A6 cabinet state contracts resolve all twelve source shapes
+ok 17 - A6 cabinet state contracts resolve all twelve source shapes
+  ---
+  duration_ms: 0.248565
+  type: 'test'
+  ...
+# Subtest: A6 rack contracts retain prior three IDs and reject nonexistent types
+ok 18 - A6 rack contracts retain prior three IDs and reject nonexistent types
+  ---
+  duration_ms: 0.389087
+  type: 'test'
+  ...
+# Subtest: A6 Vodka includes all four independently sourced arrangements
+ok 19 - A6 Vodka includes all four independently sourced arrangements
+  ---
+  duration_ms: 0.149656
+  type: 'test'
+  ...
+# Subtest: A7 nine complete bottle families resolve to 36 exact fixture IDs
+ok 20 - A7 nine complete bottle families resolve to 36 exact fixture IDs
+  ---
+  duration_ms: 0.49619
+  type: 'test'
+  ...
+# Subtest: A7 empty glass resolves with no invented states
+ok 21 - A7 empty glass resolves with no invented states
+  ---
+  duration_ms: 0.119621
+  type: 'test'
+  ...
+# Subtest: A7 Screwdriver is a distinct cocktail from Emerald
+ok 22 - A7 Screwdriver is a distinct cocktail from Emerald
+  ---
+  duration_ms: 0.096636
+  type: 'test'
+  ...
+# Subtest: A7 glass world and inventory materials keep original translucent intent
+ok 23 - A7 glass world and inventory materials keep original translucent intent
+  ---
+  duration_ms: 0.719658
+  type: 'test'
+  ...
+# Subtest: A7 rejects undefined fifth-bottle states for all new families
+ok 24 - A7 rejects undefined fifth-bottle states for all new families
+  ---
+  duration_ms: 0.220803
+  type: 'test'
+  ...
+# Subtest: A8 two added bottle families resolve to eight actual source arrangements
+ok 25 - A8 two added bottle families resolve to eight actual source arrangements
+  ---
+  duration_ms: 0.170337
+  type: 'test'
+  ...
+# Subtest: A8 Shaker uses its own geometry, not a generic placeholder
+ok 26 - A8 Shaker uses its own geometry, not a generic placeholder
+  ---
+  duration_ms: 0.070236
+  type: 'test'
+  ...
+# Subtest: A8 four new cocktails are individually selectable
+ok 27 - A8 four new cocktails are individually selectable
+  ---
+  duration_ms: 0.105519
+  type: 'test'
+  ...
+# Subtest: A8 unsupported cocktails are not silently substituted
+ok 28 - A8 unsupported cocktails are not silently substituted
+  ---
+  duration_ms: 0.086481
+  type: 'test'
+  ...
+# Subtest: A9 all 25 bottled families expose exactly their 97 source arrangements
+ok 29 - A9 all 25 bottled families expose exactly their 97 source arrangements
+  ---
+  duration_ms: 1.114704
+  type: 'test'
+  ...
+# Subtest: A9 three-bottle families do not acquire a fabricated fourth bottle
+ok 30 - A9 three-bottle families do not acquire a fabricated fourth bottle
+  ---
+  duration_ms: 0.257129
+  type: 'test'
+  ...
+# Subtest: A9 White Lady resolves to its original model rather than another cocktail
+ok 31 - A9 White Lady resolves to its original model rather than another cocktail
+  ---
+  duration_ms: 0.202807
+  type: 'test'
+  ...
+# Subtest: A9 all new static art bindings preserve explicit inventory geometry/material links
+ok 32 - A9 all new static art bindings preserve explicit inventory geometry/material links
+  ---
+  duration_ms: 0.601689
+  type: 'test'
+  ...
+# Subtest: A10 all remaining cocktails map to their exact IDs
+ok 33 - A10 all remaining cocktails map to their exact IDs
+  ---
+  duration_ms: 0.117508
+  type: 'test'
+  ...
+# Subtest: A10 counter shapes are exact, not a color fallback
+ok 34 - A10 counter shapes are exact, not a color fallback
+  ---
+  duration_ms: 0.124939
+  type: 'test'
+  ...
+# Subtest: A10 Holder is distinct from all prior racks
+ok 35 - A10 Holder is distinct from all prior racks
+  ---
+  duration_ms: 0.058669
+  type: 'test'
+  ...
+# Subtest: A10 does not claim art selection operates furniture
+ok 36 - A10 does not claim art selection operates furniture
+  ---
+  duration_ms: 0.054152
+  type: 'test'
+  ...
+# Subtest: A12 exact table variants and invalid corner rejected
+ok 37 - A12 exact table variants and invalid corner rejected
+  ---
+  duration_ms: 0.143046
+  type: 'test'
+  ...
+# Subtest: A12 three lamps retain two parts and an entity-only assembly
+ok 38 - A12 three lamps retain two parts and an entity-only assembly
+  ---
+  duration_ms: 0.118829
+  type: 'test'
+  ...
+# Subtest: A12 ladder and plain board assemblies cannot masquerade as blocks
+ok 39 - A12 ladder and plain board assemblies cannot masquerade as blocks
+  ---
+  duration_ms: 0.110848
+  type: 'test'
+  ...
+# Subtest: A12 assembly fields do not accept unsupported colors or flower variants
+ok 40 - A12 assembly fields do not accept unsupported colors or flower variants
+  ---
+  duration_ms: 0.107182
+  type: 'test'
+  ...
+1..40
+# tests 40
+# suites 0
+# pass 40
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 136.09899

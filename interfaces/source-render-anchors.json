@@ -1,0 +1,97 @@
+{
+  "sandwich_text": {
+    "source": "docs/source-bytecode/SandwichBlockEntityRender.txt",
+    "rotation_radians": "radians(rotation * 22.5 + 180)",
+    "translation_blocks": [
+      "0.5 - sin(angle) * 0.06",
+      1.06,
+      "0.5 + cos(angle) * 0.06"
+    ],
+    "tilt_degrees": 22.5,
+    "tilt_axis": [
+      "-cos(angle)",
+      0,
+      "-sin(angle)"
+    ],
+    "text_scale": 0.01,
+    "line_height": 10,
+    "max_lines": 8,
+    "max_width": 55,
+    "bold": true
+  },
+  "chalk_text": {
+    "source": "docs/source-bytecode/ChalkboardBlockEntityRender.txt",
+    "translation_by_facing": {
+      "east": [
+        0.08,
+        1.535,
+        0.5
+      ],
+      "west": [
+        0.92,
+        1.535,
+        0.5
+      ],
+      "south": [
+        0.5,
+        1.535,
+        0.08
+      ],
+      "north": [
+        0.5,
+        1.535,
+        0.92
+      ]
+    },
+    "scale": 0.012,
+    "line_height": 12,
+    "max_lines": 11,
+    "width_small": 63,
+    "width_large": 232
+  },
+  "cellar_slots": {
+    "source": "docs/source-bytecode/CellarCabinetBlockEntityRender.txt",
+    "position": [
+      "0.825 - 0.325 * (slot % 3)",
+      "0.78 - 0.29 * floor(slot / 3)",
+      0.875
+    ],
+    "scale": 1,
+    "source_render_stack_angles": [
+      0,
+      -90
+    ]
+  },
+  "holder_slot": {
+    "source": "docs/source-bytecode/HolderBlockEntityRender.txt",
+    "position": [
+      0.5,
+      0.125,
+      0.75
+    ],
+    "scale": 0.95,
+    "source_render_stack_angles": [
+      0,
+      -45
+    ]
+  },
+  "glassware_holder": {
+    "source": "docs/source-bytecode/GlasswareHolderBlockEntityRender.txt",
+    "position": [
+      "-0.25 + 0.5 * (slot % 2)",
+      0.76,
+      "0.75 + 0.5 * floor(slot / 2)"
+    ],
+    "axis_XN_angle_deg": 180
+  },
+  "other_storage": {
+    "sources": [
+      "docs/source-bytecode/BarCabinetBlockEntityRender.txt",
+      "docs/source-bytecode/TiltedRackBlockEntityRender.txt",
+      "docs/source-bytecode/CircularRackBlockEntityRender.txt"
+    ],
+    "status": "Full source disassembly provided; code adapter must implement source branching and stack presentation."
+  },
+  "coordinate_convention": "Java render pose-stack space. Do not use as entity world coordinates without model anchor/facing transform.",
+  "engine_accepted": false
+}

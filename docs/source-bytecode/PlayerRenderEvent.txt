@@ -1,0 +1,47 @@
+Compiled from "PlayerRenderEvent.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.event.PlayerRenderEvent {
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.event.PlayerRenderEvent();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onPlayerRender(net.neoforged.neoforge.client.event.RenderPlayerEvent$Pre);
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method net/neoforged/neoforge/client/event/RenderPlayerEvent$Pre.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_1
+       5: aload_1
+       6: invokevirtual #13                 // Method net/minecraft/world/entity/player/Player.isAlive:()Z
+       9: ifne          13
+      12: return
+      13: aload_1
+      14: getstatic     #19                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.GRASS_STEALTH:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      17: invokevirtual #25                 // Method net/minecraft/world/entity/player/Player.hasEffect:(Lnet/minecraft/core/Holder;)Z
+      20: ifeq          69
+      23: aload_1
+      24: invokevirtual #29                 // Method net/minecraft/world/entity/player/Player.isShiftKeyDown:()Z
+      27: ifeq          69
+      30: aload_1
+      31: invokevirtual #32                 // Method net/minecraft/world/entity/player/Player.level:()Lnet/minecraft/world/level/Level;
+      34: astore_2
+      35: aload_1
+      36: invokevirtual #36                 // Method net/minecraft/world/entity/player/Player.blockPosition:()Lnet/minecraft/core/BlockPos;
+      39: astore_3
+      40: aload_3
+      41: invokevirtual #40                 // Method net/minecraft/core/BlockPos.above:()Lnet/minecraft/core/BlockPos;
+      44: astore        4
+      46: aload_2
+      47: aload_3
+      48: invokestatic  #45                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/GrassStealthEffect.notInGrassStealthPlant:(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
+      51: ifeq          64
+      54: aload_2
+      55: aload         4
+      57: invokestatic  #45                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/GrassStealthEffect.notInGrassStealthPlant:(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
+      60: ifeq          64
+      63: return
+      64: aload_0
+      65: iconst_1
+      66: invokevirtual #51                 // Method net/neoforged/neoforge/client/event/RenderPlayerEvent$Pre.setCanceled:(Z)V
+      69: return
+}

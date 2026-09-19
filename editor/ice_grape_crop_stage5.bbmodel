@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "ice_grape_crop_stage5",
+  "model_identifier": "kt_assets_a2.ice_grape_crop_stage5",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "stage5_0",
+      "type": "cube",
+      "uuid": "17328a5f-a69c-528d-9ed3-62a515d75efb",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            32.0,
+            32.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            32.0,
+            32.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "stage5_1",
+      "type": "cube",
+      "uuid": "08261cbe-a018-5ec7-962b-177cb42fa05d",
+      "from": [
+        -0.25,
+        3,
+        -9.35
+      ],
+      "to": [
+        -0.25,
+        21,
+        8.649999999999999
+      ],
+      "origin": [
+        -0.25,
+        13,
+        -0.34999999999999964
+      ],
+      "rotation": [
+        0,
+        -45,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            16.0,
+            32.0,
+            32.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            16.0,
+            32.0,
+            32.0,
+            52.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "606aa890-1c1b-5e6a-b9b9-050724a41df5",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "17328a5f-a69c-528d-9ed3-62a515d75efb",
+        "08261cbe-a018-5ec7-962b-177cb42fa05d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "ice_grape_crop.png",
+      "id": "0",
+      "uuid": "159af553-e7ce-5a54-8da3-ae86e01f643a",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAFK0lEQVR4Xu2ZT4sVRxTF56PkCwhGRNEwGJ/Kc0LCgJL4F9SFs3BjxqwmGGcRhpiFi2SQWYSgoOBSlwqCf9bqKII7yVpw4ReQTv+aOZ0793VV97x6OO2kDly6u6pOVZ3Tt6oer6emIjg1/WXhy7piuH3b2Fywafxthw8VX+zcUQWdcKVM4duHANcbOAl+1z7G5lux899M1wYcuDBXXXed/D7aAe25MrjeggwlYny14T7Ej80hlT9FhRW6eOxWdQ+RciJEplzGqb3NIF09D3hujN/URyq/hgyQ+DuLz2oSzxrI8wS1JXgDNoOImIGWG+NzbeojlV/j7MHlQoFoGcHzkd0/B4kyTyIZiPYanD6UUU1cP0He3rWZv6tnRPj+u/AvD2904tdA5KvHRTVZXZk0QvQcMkED26yhrQxUX54H/OQk6OL+H+u+/ij5FwJZGOKf+Hq+5l/55Xlx/IfbjfwaGKCJ2knb8pABQIKVLQplkrLK82Teg3IMQpPGAEQjXgZ8dfa7IH+lFEmIjwGIRrwM2Hvu4Ah/HWz66x4RbUtAWSOOlo14sewBiL1ZjkksHbhazJRtKZMJxGzZF+WeCxB7BbFlzA1+L/bsulwZIBOIwfB6Ve6562CXwUbevs8a24fMCZnA26Ue4QrKECzRGEF2YBD3ls/bffqoqIQrKEOwRGME2YFB3Fv+OljBEm3vfXtBWeNNU3nMRJ/mMkTPmID4D2VZkwk+zWWInjEB8a/Lss4mKHU1+aaJe3iefY4tI6W4xHpDVEYmaJl4A2yae0NURiZombQaYN9aaOIeNvXtUlJGxPqw6U5YQwiZQR1LxC8Dm+6ENYSQGdSxRKIGAJnQVTzwqe6XQawfxPm0lyG+3IsHiPNpL0N8eat4Qanry2Owxtlo6yuU9rrqPnQKhNJeV923ngKTgE3/2Nq38EK12elItBnhucAL1WanI9FmhOdOHDb92968hUT6HR8T2jIASKTf8THhk2YA2IhwD0Rb8ax5bY6+bRMQbcWz5rU5+ra9hP9V2LTpxeB/FXbe9PoE/QzeqHhBP4M/S/EZGRkZGRkZ/x/on9rYx5MtDfstIfif/VaG/tfX1ddveeijRvSrzafG2N/X15DKT0Xy+GN/X19DKj8VY42vT8vcj/N9PZWfirHH1w6so4hgPXb9vp7KT8VExlelYqPf11P5qUgaXw7aBrj35+DX6plOdEQ17dQh/vnFJ534qQiNT12n8X2lOpzbebp2b+Wnh8X87Epd14U/mF2o+b8tvSlOH7vXyE9FaHzqNL5tOzK+XFtaflOFSBiAaMTLgJnB8sjkxb92/58qxMcARCNeBgz3LYzwU6Hx7fOIyDYcHSwUJ8oJEkdKkYhXIJw4NX21+HbHpcaOEUvKE8Mzf1XiFQgnMG84mLwByeDtvrj7vhKuIBN0j2gmTxkGYZbl89ZX3xeVcAVl9XPZnqAMgzDF8jcdPs0Ruvq2qAXLEFtmTUCU0l/37z4W9bMMwaRemqAUV5ojUPuBDKCOTNAy8QbY9PeGqMwuk14ZABCuNW6FahkoO6jj2S8DpbvWvTVEGSDhamf5mw7E+rTX+md/kAGY5MUDNrnVl8V/u70xxKZ+L8WDUNojuMspMHLcraW9rr0WDxBs094agWi7PDwXcErY486/ca69PQYFewT65dCWAQCBEu/Tvte/Azy0HCSeNR97+x46BdZlwNpvAd+2l/C/Cps2vRj8KdDbdR8DohW+rgt0HH6W4jMyMjIyMjIyMjIytjz+BTrqpABplgV6AAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/ice_grape_crop/stage5.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "java_display_recorded_not_applied": {},
+    "notes": []
+  }
+}

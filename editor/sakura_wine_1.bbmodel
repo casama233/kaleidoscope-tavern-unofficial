@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sakura_wine_1",
+  "model_identifier": "kt_assets_a7.sakura_wine_1",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "sakura_wine_1_element0",
+      "type": "cube",
+      "uuid": "583cbe7e-80bf-5d27-9ef4-1fb60d0e8d3f",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        10,
+        2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            4.0,
+            10.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            4.0,
+            16.0,
+            0.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            12.0,
+            4.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sakura_wine_1_element1",
+      "type": "cube",
+      "uuid": "f3a92385-ecd2-5df4-bd94-0912cbfef115",
+      "from": [
+        -1,
+        10,
+        -1
+      ],
+      "to": [
+        1,
+        16,
+        1
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            5.0,
+            7.0,
+            11.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            7.0,
+            5.0,
+            9.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "b1809f36-ea60-5af4-88d5-62dc9bcf0d4d",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "583cbe7e-80bf-5d27-9ef4-1fb60d0e8d3f",
+        "f3a92385-ecd2-5df4-bd94-0912cbfef115"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sakura_wine.png",
+      "id": "0",
+      "uuid": "568d6830-03a2-5632-8be9-292c1c490a8d",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAASNJREFUOI2Vk7FLw1AQxn8JWV+npEFqSyCgkyCdxMVBxEVLBwdHZyenLoKLm3+OaMXFDO5BkFJQC6EPKyEBCVmVOMRqqy+F9y2Pu3v3ve/u3Rk3G5uFY3sAJGnE4XBgoECWZSo3lmN7+G23tEKAgfJiFUy/7VLrdrSS5hSMwhifS0ZhTJJG+gT1izNEs0FdvvIZS+ge6BEsCp423KIpWsh8TC/LlM213mIJwPScRVO0WF1a/rae1ApWgj61bgcR9BmFsY76kmC2iX8h8zEyHy8muHt+IUkjHt8//gV3eies7+7xcHsFR8dqgvPJ0GDy6zBNU6sEQwgx56giqBzlYGu/mA6QY3ts318rv6sK1mz9a0Q6uQDoFaxS4Njez8vlWutt4xdLEl/EDFrrawAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/sakura_wine/count1.json"
+    ],
+    "java_display_recorded_not_applied": {},
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

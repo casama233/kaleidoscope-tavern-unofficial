@@ -1,0 +1,224 @@
+Compiled from "RenderUtils.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.util.RenderUtils {
+  public com.github.ysbbbbbb.kaleidoscopetavern.util.RenderUtils();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void renderFluid(net.minecraft.world.level.material.Fluid, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int, float);
+    Code:
+       0: aload_0
+       1: invokestatic  #7                  // Method getStillFluidSprite:(Lnet/minecraft/world/level/material/Fluid;)Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;
+       4: astore        6
+       6: aload_0
+       7: invokestatic  #13                 // Method getFluidColor:(Lnet/minecraft/world/level/material/Fluid;)I
+      10: istore        7
+      12: aload_1
+      13: aload_2
+      14: aload         6
+      16: iload         7
+      18: iload_3
+      19: iload         4
+      21: iconst_1
+      22: bipush        16
+      24: invokestatic  #17                 // Method net/minecraft/util/Mth.clamp:(III)I
+      27: fload         5
+      29: invokestatic  #23                 // Method renderSurface:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;IIIF)V
+      32: return
+
+  public static void renderSurface(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.texture.TextureAtlasSprite, int, int, int, float);
+    Code:
+       0: aload_1
+       1: invokestatic  #27                 // Method net/minecraft/client/renderer/RenderType.translucent:()Lnet/minecraft/client/renderer/RenderType;
+       4: invokeinterface #33,  2           // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.getBuffer:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+       9: astore        7
+      11: aload_0
+      12: invokevirtual #39                 // Method com/mojang/blaze3d/vertex/PoseStack.last:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      15: invokevirtual #45                 // Method com/mojang/blaze3d/vertex/PoseStack$Pose.pose:()Lorg/joml/Matrix4f;
+      18: astore        8
+      20: bipush        16
+      22: iload         5
+      24: isub
+      25: iconst_2
+      26: idiv
+      27: istore        9
+      29: iload         9
+      31: i2f
+      32: ldc           #51                 // float 16.0f
+      34: fdiv
+      35: fstore        10
+      37: fconst_1
+      38: iload         9
+      40: i2f
+      41: ldc           #51                 // float 16.0f
+      43: fdiv
+      44: fsub
+      45: fstore        11
+      47: iload         5
+      49: i2f
+      50: ldc           #51                 // float 16.0f
+      52: fdiv
+      53: fstore        12
+      55: aload         7
+      57: aload         8
+      59: fload         10
+      61: fload         6
+      63: fload         10
+      65: invokeinterface #52,  5           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.addVertex:(Lorg/joml/Matrix4f;FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      70: iload_3
+      71: invokeinterface #58,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setColor:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      76: aload_2
+      77: invokevirtual #62                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getU0:()F
+      80: aload_2
+      81: invokevirtual #68                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getV0:()F
+      84: invokeinterface #71,  3           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setUv:(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      89: getstatic     #75                 // Field net/minecraft/client/renderer/texture/OverlayTexture.NO_OVERLAY:I
+      92: invokeinterface #81,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setOverlay:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      97: iload         4
+      99: invokeinterface #84,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setLight:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     104: fconst_0
+     105: fconst_1
+     106: fconst_0
+     107: invokeinterface #87,  4           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setNormal:(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     112: pop
+     113: aload         7
+     115: aload         8
+     117: fload         10
+     119: fload         6
+     121: fload         11
+     123: invokeinterface #52,  5           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.addVertex:(Lorg/joml/Matrix4f;FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     128: iload_3
+     129: invokeinterface #58,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setColor:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     134: aload_2
+     135: invokevirtual #62                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getU0:()F
+     138: aload_2
+     139: fload         12
+     141: invokevirtual #91                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getV:(F)F
+     144: invokeinterface #71,  3           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setUv:(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     149: getstatic     #75                 // Field net/minecraft/client/renderer/texture/OverlayTexture.NO_OVERLAY:I
+     152: invokeinterface #81,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setOverlay:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     157: iload         4
+     159: invokeinterface #84,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setLight:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     164: fconst_0
+     165: fconst_1
+     166: fconst_0
+     167: invokeinterface #87,  4           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setNormal:(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     172: pop
+     173: aload         7
+     175: aload         8
+     177: fload         11
+     179: fload         6
+     181: fload         11
+     183: invokeinterface #52,  5           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.addVertex:(Lorg/joml/Matrix4f;FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     188: iload_3
+     189: invokeinterface #58,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setColor:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     194: aload_2
+     195: fload         12
+     197: invokevirtual #95                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getU:(F)F
+     200: aload_2
+     201: fload         12
+     203: invokevirtual #91                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getV:(F)F
+     206: invokeinterface #71,  3           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setUv:(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     211: getstatic     #75                 // Field net/minecraft/client/renderer/texture/OverlayTexture.NO_OVERLAY:I
+     214: invokeinterface #81,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setOverlay:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     219: iload         4
+     221: invokeinterface #84,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setLight:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     226: fconst_0
+     227: fconst_1
+     228: fconst_0
+     229: invokeinterface #87,  4           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setNormal:(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     234: pop
+     235: aload         7
+     237: aload         8
+     239: fload         11
+     241: fload         6
+     243: fload         10
+     245: invokeinterface #52,  5           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.addVertex:(Lorg/joml/Matrix4f;FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     250: iload_3
+     251: invokeinterface #58,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setColor:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     256: aload_2
+     257: fload         12
+     259: invokevirtual #95                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getU:(F)F
+     262: aload_2
+     263: invokevirtual #68                 // Method net/minecraft/client/renderer/texture/TextureAtlasSprite.getV0:()F
+     266: invokeinterface #71,  3           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setUv:(FF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     271: getstatic     #75                 // Field net/minecraft/client/renderer/texture/OverlayTexture.NO_OVERLAY:I
+     274: invokeinterface #81,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setOverlay:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     279: iload         4
+     281: invokeinterface #84,  2           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setLight:(I)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     286: fconst_0
+     287: fconst_1
+     288: fconst_0
+     289: invokeinterface #87,  4           // InterfaceMethod com/mojang/blaze3d/vertex/VertexConsumer.setNormal:(FFF)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     294: pop
+     295: return
+
+  public static float stableRandom(long, int, int);
+    Code:
+       0: lload_0
+       1: iload_2
+       2: i2l
+       3: ldc2_w        #98                 // long -7046029254386353131l
+       6: lmul
+       7: lxor
+       8: iload_3
+       9: i2l
+      10: ldc2_w        #100                // long 7809847782465536322l
+      13: lmul
+      14: lxor
+      15: lstore        4
+      17: lload         4
+      19: lload         4
+      21: bipush        30
+      23: lushr
+      24: lxor
+      25: ldc2_w        #102                // long -4658895280553007687l
+      28: lmul
+      29: lstore        4
+      31: lload         4
+      33: lload         4
+      35: bipush        27
+      37: lushr
+      38: lxor
+      39: ldc2_w        #104                // long -7723592293110705685l
+      42: lmul
+      43: lstore        4
+      45: lload         4
+      47: lload         4
+      49: bipush        31
+      51: lushr
+      52: lxor
+      53: lstore        4
+      55: lload         4
+      57: l2i
+      58: i2f
+      59: ldc           #108                // float 2.1474836E9f
+      61: fdiv
+      62: freturn
+
+  private static net.minecraft.client.renderer.texture.TextureAtlasSprite getStillFluidSprite(net.minecraft.world.level.material.Fluid);
+    Code:
+       0: aload_0
+       1: invokestatic  #109                // InterfaceMethod net/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions.of:(Lnet/minecraft/world/level/material/Fluid;)Lnet/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions;
+       4: astore_1
+       5: aload_1
+       6: invokeinterface #115,  1          // InterfaceMethod net/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions.getStillTexture:()Lnet/minecraft/resources/ResourceLocation;
+      11: astore_2
+      12: invokestatic  #119                // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+      15: getstatic     #125                // Field net/minecraft/world/inventory/InventoryMenu.BLOCK_ATLAS:Lnet/minecraft/resources/ResourceLocation;
+      18: invokevirtual #131                // Method net/minecraft/client/Minecraft.getTextureAtlas:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/function/Function;
+      21: aload_2
+      22: invokeinterface #135,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+      27: checkcast     #63                 // class net/minecraft/client/renderer/texture/TextureAtlasSprite
+      30: areturn
+
+  private static int getFluidColor(net.minecraft.world.level.material.Fluid);
+    Code:
+       0: aload_0
+       1: invokestatic  #109                // InterfaceMethod net/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions.of:(Lnet/minecraft/world/level/material/Fluid;)Lnet/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions;
+       4: astore_1
+       5: aload_1
+       6: invokeinterface #141,  1          // InterfaceMethod net/neoforged/neoforge/client/extensions/common/IClientFluidTypeExtensions.getTintColor:()I
+      11: ireturn
+}

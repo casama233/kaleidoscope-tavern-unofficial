@@ -1,0 +1,392 @@
+{
+  "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+  "schedules": [
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/painting/tartaric_acid.png.mcmeta",
+      "sheet_size": [
+        16,
+        48
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "slots": 3,
+      "sequence": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "durations": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_deco_painting_tartaric_acid"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/depth_charge.png.mcmeta",
+      "sheet_size": [
+        32,
+        128
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "slots": 4,
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "durations": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_mixology_depth_charge"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/mystery_cocktail.png.mcmeta",
+      "sheet_size": [
+        32,
+        288
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "slots": 9,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "durations": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ],
+      "interpolate": true,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_mixology_mystery_cocktail"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/nether_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        192
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "slots": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "interpolate": true,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_mixology_nether_special"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/sculk_special.png.mcmeta",
+      "sheet_size": [
+        32,
+        512
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "slots": 16,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "durations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_mixology_sculk_special"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/mixology/signature_cocktail.png.mcmeta",
+      "sheet_size": [
+        32,
+        192
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "slots": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_block_mixology_signature_cocktail"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_APPLICABLE",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/depth_charge.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/depth_charge.png.mcmeta",
+      "sheet_size": [
+        16,
+        32
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "slots": 2,
+      "sequence": [
+        0,
+        1
+      ],
+      "durations": [
+        5,
+        5
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_item_depth_charge"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_IMPLEMENTED",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ice_grape.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ice_grape.png.mcmeta",
+      "sheet_size": [
+        16,
+        192
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "slots": 12,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "durations": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "interpolate": true,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_item_ice_grape"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_IMPLEMENTED",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/mystery_cocktail.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/mystery_cocktail.png.mcmeta",
+      "sheet_size": [
+        16,
+        96
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "slots": 6,
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "interpolate": false,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_item_mystery_cocktail"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_IMPLEMENTED",
+      "engine_accepted": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/nether_special.png",
+      "metadata": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/nether_special.png.mcmeta",
+      "sheet_size": [
+        16,
+        64
+      ],
+      "frame_size": [
+        16,
+        16
+      ],
+      "slots": 4,
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "durations": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "interpolate": true,
+      "terrain_tiles": [
+        "kt_assets_a17_animation_item_nether_special"
+      ],
+      "source_png_preserved": true,
+      "item_gui_playback": "NOT_IMPLEMENTED",
+      "engine_accepted": false
+    }
+  ],
+  "engine_accepted": false
+}

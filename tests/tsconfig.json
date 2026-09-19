@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": false
+  },
+  "include": [
+    "typecheck.mts",
+    "../sdk/index.d.mts",
+    "current-bindings.mts"
+  ]
+}

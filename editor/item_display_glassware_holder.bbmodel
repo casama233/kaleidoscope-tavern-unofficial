@@ -1,0 +1,616 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_glassware_holder",
+  "model_identifier": "kt_assets_a17.item_display_glassware_holder",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "item_display_glassware_holder_element0",
+      "type": "cube",
+      "uuid": "5e0fdf7f-fd2f-50d8-9641-b9c565842ac0",
+      "from": [
+        -8,
+        13,
+        -7
+      ],
+      "to": [
+        8,
+        16,
+        7
+      ],
+      "origin": [
+        -8,
+        2,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            4.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            4.0,
+            14.0,
+            7.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            14.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            16.0,
+            32.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_glassware_holder_element1",
+      "type": "cube",
+      "uuid": "4713459b-5319-533f-b719-84b3a2c7d976",
+      "from": [
+        -8,
+        12.9,
+        -7
+      ],
+      "to": [
+        8,
+        12.9,
+        7
+      ],
+      "origin": [
+        -8,
+        1.9,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            16.0,
+            16.0,
+            32.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "item_display_glassware_holder_element2",
+      "type": "cube",
+      "uuid": "32cb2c2e-7c61-5130-95d9-39792ef8ac9e",
+      "from": [
+        -8,
+        11,
+        5
+      ],
+      "to": [
+        8,
+        13,
+        7
+      ],
+      "origin": [
+        -8,
+        11,
+        -7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            25.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_glassware_holder_element3",
+      "type": "cube",
+      "uuid": "2111d8e8-04a2-52c6-bd26-8aa365a6015e",
+      "from": [
+        -8,
+        11,
+        0
+      ],
+      "to": [
+        8,
+        13,
+        2
+      ],
+      "origin": [
+        -8,
+        11,
+        -12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            17.0,
+            16.0,
+            19.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_glassware_holder_element4",
+      "type": "cube",
+      "uuid": "d6eee9e4-fe09-5e10-9141-5cd951732483",
+      "from": [
+        -8,
+        11,
+        -7
+      ],
+      "to": [
+        8,
+        13,
+        -5
+      ],
+      "origin": [
+        -8,
+        11,
+        -19
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            25.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            16.0,
+            16.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "item_display_glassware_holder_element5",
+      "type": "cube",
+      "uuid": "5364737f-4676-543a-a28a-986d57d90273",
+      "from": [
+        -8,
+        11,
+        -2
+      ],
+      "to": [
+        8,
+        13,
+        0
+      ],
+      "origin": [
+        -8,
+        11,
+        -14
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            16.0,
+            0.0,
+            18.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            19.0,
+            16.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "3f2a6c78-0ed9-5774-9a4b-e5cac8723e16",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "5e0fdf7f-fd2f-50d8-9641-b9c565842ac0",
+        "4713459b-5319-533f-b719-84b3a2c7d976",
+        "32cb2c2e-7c61-5130-95d9-39792ef8ac9e",
+        "2111d8e8-04a2-52c6-bd26-8aa365a6015e",
+        "d6eee9e4-fe09-5e10-9141-5cd951732483",
+        "5364737f-4676-543a-a28a-986d57d90273"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "glassware_holder.png",
+      "id": "0",
+      "uuid": "ae8f6da8-726f-507c-a5cb-d9d590f42cd7",
+      "width": 64,
+      "height": 64,
+      "uv_width": 64,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACJUlEQVR4Xu2YvUoDQRSFfSIrn8AmPoGWvoFgk87KB/AVBPEhxEYLC7GxMilESCFiIQhiIQRWz5Kb3BwncXbWMZN4Pji4Oz+7957dubNxbXtnp1qUNjudam0GD8NhdXI3GAvnJvTvnl5XIdn8495zFdLkDiMskBT5RFK0vrHxPaARSJrbQBMDDi/vpxQ0wAJJkZngE7L2kLgfxxyPMcsAa+fEkw1oy9IbwOsyVn4+JxqreQbYq85kMYAD+0mzDOAlEpK/Tm4DQppcaURs4JyEzWcD2CwWj/exeHzV592Axy4UTogTZvF4vt7SwUuIa0VIRRmAgDgQa4Nw7Pu4jQ1oIr5vU7AcLl7eavmPpOP+01RdwDnPHfObBvgaERL3832bgoR9okkGtGWRBuDJ+0RxPq89C4tcArMSxV88dVMWA3xBsyebIr5uE/xWaXWAx2TDDOD2f8PKGIAkut1uksyEVGH5cDx/DoLgwGJlc7m4xaptDfgVEAQHFivMhQEvR1u1qtu96n2wP1cYY+NjDMD3/8HZTf07gPuKAAbUiX30JgL+2PBjvoyIMQAUmzzI/QaA4g3gpRGrWAOwBLitGHwxbKoiDGjzBC2RnAYcXvXH/wzBMfe3BsHz52msLPE21+B4GCR+/vhaq8haAANyFsGlMKBOzG9xoe0vcRvMvgTakvsNKB6rASlaCQPaFMCVMEAIIYQQQgghhBBCCCGEEEIIIYQQQhTOJ59aHapiiyrUAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/glassware_holder.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/glassware_holder.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/glassware_holder.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

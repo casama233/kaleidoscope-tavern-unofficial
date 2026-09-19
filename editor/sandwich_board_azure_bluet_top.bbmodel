@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_azure_bluet_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_azure_bluet_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_azure_bluet_top_element0",
+      "type": "cube",
+      "uuid": "28843ef0-3880-5d14-bbb7-3b981cc9fedb",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element1",
+      "type": "cube",
+      "uuid": "a4af6072-a11a-59d9-bac0-682e9471bc10",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element2",
+      "type": "cube",
+      "uuid": "0428faf1-0ffe-596b-8dcd-6bc83c2c951a",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            33.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            32.0,
+            4.5,
+            33.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element3",
+      "type": "cube",
+      "uuid": "2a22b64a-a174-5e84-ba6c-99d58aa12aed",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            32.0,
+            0.0,
+            34.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            34.0,
+            0.0,
+            32.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            34.0,
+            4.5,
+            32.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element4",
+      "type": "cube",
+      "uuid": "7b299401-dfe3-5ce5-a87f-d055a3d3630f",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            35.0,
+            1.0,
+            47.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            61.0,
+            1.0,
+            59.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            47.0,
+            1.0,
+            35.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            59.0,
+            1.0,
+            61.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            48.0,
+            0.0,
+            60.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_azure_bluet_top_element5",
+      "type": "cube",
+      "uuid": "b28b0d43-d553-5fec-b62d-eac89379595f",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "b0398a48-ee88-58be-8bfb-6f4e5901fbb0",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "28843ef0-3880-5d14-bbb7-3b981cc9fedb",
+        "a4af6072-a11a-59d9-bac0-682e9471bc10",
+        "0428faf1-0ffe-596b-8dcd-6bc83c2c951a",
+        "2a22b64a-a174-5e84-ba6c-99d58aa12aed",
+        "7b299401-dfe3-5ce5-a87f-d055a3d3630f",
+        "b28b0d43-d553-5fec-b62d-eac89379595f"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_azure_bluet_top.png",
+      "id": "0",
+      "uuid": "296b1be9-2e0a-5268-af0a-fe7541f6a24d",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAEQklEQVR4nO1ZTWwbRRT+Zr21O2nVlSo7Mj1EWWgkZC45No6QUMyl4mCqhp+DEYcSgXpuRdMKIQRNoHCuVNLeeigqFeKAesEVUlWbA0g9EEPlkA2RgJVtAetQD2s7fhzi3drO+me9duNDP8mydmae34/mvfftM8MeY3Z6kg5xGbfTa6wf+anno+RWJns3ZeuSnQ6sJJOUiEbBOWdCCNIMA5FwmGV0nVRFAee8L2O74bnjL7pyZvX2t8x/cMyVjvK/paZnCQAyuk5CCAIAKsQpEY1CMwxQIU4BbQ6RcJgBgKoouJ5KYSWZdB11NwjwAx0/g4QshKCANgcmj0MIQYxzBnDHw5xz+xYgmaSFWGzgNyHAD0Dm/q7nTPFwIPokzTCwlS6AcjlohtFVQFUUBLQ5JKLRgRjQiF6dl7l/101YOvMuvrx8xbVO+d7qKmZfugsA9lXvBM0woKp3egrW48T5zz7pS05eiMXYiovrbAWJCvGh1gG3uPzhRfxT3AJjDE9PTMAnSchubGDx0jKWzp7D+U8/dpSThRC0/+HrSAhBvVb3jK4T5U4MzPiiqHr+jdPvXWi71855AJCtVuemtVm3wLg2RcqprOdCOOb3ef0JfPfFLaR//AFTkyoAArBjVnZTA2rA4qVlRzm5lpkhqY++bvEDIOzB7LoRPu/N5IXXTvanW4qkm8hOL0JW2qjKjb6UDgPLZ89hSlUBALl8AeOhIOZPv91VzuYBqnqnZ2UWH7iXSvVtcCOq297r6WKHPO8E+XoqhUTUXVujQpxYsLfbMmxQZRsAcHPlKta0dQAMR+s3AQB+1TZAICwuXXSUl1/deAc85q6Q/Vy9AiFuuCqcvcBid93IUFWUm5hgxTTxysJbqJgmAGBfIGCvW88V07TXGyErp7Kuu4CqKEMjQr1Q3FbnrW8nx29+fhVr6+s488H79noj5IyuU0CbQ0bXqV0RzOfzCIVC9vP0NzJ7MO+9+rdDvzy/1cGKaeLlN9/oKCNFwmF27c+POnYAy3khBAkh6MH8PmR0faSYoCfUMjPUjdoKIYgKcaplZmiQzs9OT9LxmaN7FkwJAH45/BVY8GsmhGjrnGYYoFwOW+kCVEV5vFYOETLwiNpqhgFVUeyJkGYYePavE2Dj42DBMBNC0O+HDUSGNBE6eewIVcs1yH5p11679Vvf/+HJlqaRWGMdmK0PPqRwmuXzecSWfmoahbUWRi+wiFBJ7PT0cv27Fe3WvcBxJgg0B8PJ0UE53wi/j4HXX4xEecdZ7vCiJMrb4H6ffcYLRoLNWZieOETAo7fDUg8O3t8sDi4F9hrPHDnouJ43/kNI2e+4d3+z6EnnSAWg1CbHqxVqu+cVIxUAf30u0Jj3Vp532vOCkQpAvmjaeT/m9zXVgN8KpV3nBzFJGqkAPBV0/j+iI9b+9qRzpAIwrDzvhJEKQDse0JjrrftP8ATe8D+I+O5W+rNOlQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/azure_bluet/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_azure_bluet_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/azure_bluet.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

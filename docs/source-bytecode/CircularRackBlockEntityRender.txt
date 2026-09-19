@@ -1,0 +1,129 @@
+Compiled from "CircularRackBlockEntityRender.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.CircularRackBlockEntityRender extends com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.StorageBlockEntityRender<com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.CircularRackBlockEntity> {
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.block.CircularRackBlockEntityRender(net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/StorageBlockEntityRender."<init>":(Lnet/minecraft/client/renderer/blockentity/BlockEntityRendererProvider$Context;)V
+       5: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.blockentity.deco.CircularRackBlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_1
+       1: invokevirtual #7                  // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/CircularRackBlockEntity.getBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+       4: getstatic     #13                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/deco/CircularRackBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+       7: invokevirtual #19                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      10: checkcast     #25                 // class net/minecraft/core/Direction
+      13: astore        7
+      15: aload_1
+      16: invokevirtual #27                 // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/CircularRackBlockEntity.getItems:()Lnet/neoforged/neoforge/items/ItemStackHandler;
+      19: astore        8
+      21: aload_3
+      22: invokevirtual #31                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+      25: aload_0
+      26: aload         7
+      28: aload_3
+      29: invokevirtual #37                 // Method applyFacingRotation:(Lnet/minecraft/core/Direction;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+      32: iconst_0
+      33: istore        9
+      35: iload         9
+      37: aload         8
+      39: invokevirtual #43                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      42: if_icmpge     250
+      45: aload         8
+      47: iload         9
+      49: invokevirtual #49                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      52: astore        10
+      54: aload         10
+      56: invokevirtual #53                 // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      59: ifeq          65
+      62: goto          244
+      65: dconst_0
+      66: dstore        11
+      68: dconst_0
+      69: dstore        13
+      71: dconst_0
+      72: dstore        15
+      74: iload         9
+      76: tableswitch   { // 0 to 5
+                     0: 116
+                     1: 132
+                     2: 150
+                     3: 168
+                     4: 186
+                     5: 204
+               default: 219
+          }
+     116: ldc2_w        #59                 // double 0.5d
+     119: dstore        11
+     121: ldc2_w        #61                 // double 0.125d
+     124: dstore        13
+     126: dconst_0
+     127: dstore        15
+     129: goto          219
+     132: ldc2_w        #63                 // double 0.875d
+     135: dstore        11
+     137: ldc2_w        #65                 // double 0.3125d
+     140: dstore        13
+     142: ldc2_w        #67                 // double 22.5d
+     145: dstore        15
+     147: goto          219
+     150: ldc2_w        #63                 // double 0.875d
+     153: dstore        11
+     155: ldc2_w        #69                 // double 0.6875d
+     158: dstore        13
+     160: ldc2_w        #71                 // double -22.5d
+     163: dstore        15
+     165: goto          219
+     168: ldc2_w        #59                 // double 0.5d
+     171: dstore        11
+     173: ldc2_w        #63                 // double 0.875d
+     176: dstore        13
+     178: ldc2_w        #73                 // double 180.0d
+     181: dstore        15
+     183: goto          219
+     186: ldc2_w        #61                 // double 0.125d
+     189: dstore        11
+     191: ldc2_w        #69                 // double 0.6875d
+     194: dstore        13
+     196: ldc2_w        #75                 // double 157.5d
+     199: dstore        15
+     201: goto          219
+     204: ldc2_w        #61                 // double 0.125d
+     207: dstore        11
+     209: ldc2_w        #65                 // double 0.3125d
+     212: dstore        13
+     214: ldc2_w        #77                 // double -157.5d
+     217: dstore        15
+     219: aload_0
+     220: aload         10
+     222: aload_3
+     223: aload         4
+     225: iload         5
+     227: iload         6
+     229: dload         11
+     231: ldc2_w        #61                 // double 0.125d
+     234: dload         13
+     236: ldc           #79                 // float 0.82f
+     238: dload         15
+     240: dconst_0
+     241: invokevirtual #80                 // Method renderStack:(Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IIDDDFDD)V
+     244: iinc          9, 1
+     247: goto          35
+     250: aload_3
+     251: invokevirtual #84                 // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     254: return
+
+  public void render(net.minecraft.world.level.block.entity.BlockEntity, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #8                  // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/CircularRackBlockEntity
+       5: fload_2
+       6: aload_3
+       7: aload         4
+       9: iload         5
+      11: iload         6
+      13: invokevirtual #87                 // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/CircularRackBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+      16: return
+}

@@ -1,0 +1,2012 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "godfather",
+  "model_identifier": "kt_assets_a10.godfather",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "godfather_element0_north",
+      "type": "cube",
+      "uuid": "66d7f617-0c0a-5141-9097-9571d7a479e7",
+      "from": [
+        -2.5,
+        1.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        6.4,
+        -2.5
+      ],
+      "origin": [
+        4.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            25.0,
+            19.0,
+            30.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element0_east",
+      "type": "cube",
+      "uuid": "ad027234-d457-5c43-8de0-4c0ee9c144bf",
+      "from": [
+        -2.5,
+        1.4,
+        -2.5
+      ],
+      "to": [
+        -2.5,
+        6.4,
+        2.5
+      ],
+      "origin": [
+        4.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            25.0,
+            19.0,
+            30.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element0_south",
+      "type": "cube",
+      "uuid": "ebe8c067-cfcb-51d5-98d4-7760bddc1b25",
+      "from": [
+        -2.5,
+        1.4,
+        2.5
+      ],
+      "to": [
+        2.5,
+        6.4,
+        2.5
+      ],
+      "origin": [
+        4.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            19.0,
+            30.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element0_west",
+      "type": "cube",
+      "uuid": "699e99c7-20a6-52f2-a64a-9e542c3c6ce8",
+      "from": [
+        2.5,
+        1.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        6.4,
+        2.5
+      ],
+      "origin": [
+        4.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            25.0,
+            19.0,
+            30.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element1",
+      "type": "cube",
+      "uuid": "cfa24156-d0a0-5014-b141-1127395b68b0",
+      "from": [
+        -2.5,
+        1.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        1.4,
+        2.5
+      ],
+      "origin": [
+        -0.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element2",
+      "type": "cube",
+      "uuid": "016cc0c7-8d15-551b-8231-6d6a3d40ab35",
+      "from": [
+        -2.5,
+        6.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        6.4,
+        2.5
+      ],
+      "origin": [
+        -0.5,
+        10.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element3_north",
+      "type": "cube",
+      "uuid": "8056126f-feab-53ef-8ce0-52e86cda9179",
+      "from": [
+        -3.0,
+        1.0,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        7.0,
+        -3.0
+      ],
+      "origin": [
+        7,
+        1,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            17.0,
+            15.0,
+            23.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element3_east",
+      "type": "cube",
+      "uuid": "206ba453-c8bc-5d84-9040-0b2ef93ab2d7",
+      "from": [
+        -3.0,
+        1.0,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        7.0,
+        3.0
+      ],
+      "origin": [
+        7,
+        1,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            17.0,
+            15.0,
+            23.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element3_south",
+      "type": "cube",
+      "uuid": "2021fb7e-a987-52ca-99a0-09739f2b7441",
+      "from": [
+        -3.0,
+        1.0,
+        3.0
+      ],
+      "to": [
+        3.0,
+        7.0,
+        3.0
+      ],
+      "origin": [
+        7,
+        1,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            15.0,
+            23.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element3_west",
+      "type": "cube",
+      "uuid": "77ac778c-6057-56c8-bb90-e35dd0dcb21f",
+      "from": [
+        3.0,
+        1.0,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        7.0,
+        3.0
+      ],
+      "origin": [
+        7,
+        1,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            17.0,
+            15.0,
+            23.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element4",
+      "type": "cube",
+      "uuid": "c840d519-b639-5b4e-a609-f3f390f2465c",
+      "from": [
+        -3,
+        0,
+        -3
+      ],
+      "to": [
+        3,
+        1,
+        3
+      ],
+      "origin": [
+        0,
+        0,
+        -3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            22.0,
+            23.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            17.0,
+            22.0,
+            23.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            17.0,
+            22.0,
+            23.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            17.0,
+            22.0,
+            23.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            17.0,
+            24.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            17.0,
+            24.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element5",
+      "type": "cube",
+      "uuid": "115d32c4-5ff9-5c5c-b318-118d94891b87",
+      "from": [
+        -3,
+        7,
+        -3
+      ],
+      "to": [
+        3,
+        8,
+        -2
+      ],
+      "origin": [
+        -1,
+        6,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            22.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            17.0,
+            29.0,
+            18.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            17.0,
+            24.0,
+            23.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element6",
+      "type": "cube",
+      "uuid": "55f8ab16-a7ce-5a6c-a033-b3ff9a00d0ae",
+      "from": [
+        -3,
+        7,
+        -2
+      ],
+      "to": [
+        -2,
+        8,
+        2
+      ],
+      "origin": [
+        -1,
+        6,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            22.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            29.0,
+            22.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            17.0,
+            29.0,
+            18.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            29.0,
+            22.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            17.0,
+            25.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            17.0,
+            25.0,
+            18.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element7",
+      "type": "cube",
+      "uuid": "5a89ca80-9b6e-5ce3-9205-520b36603b7b",
+      "from": [
+        2,
+        7,
+        -2
+      ],
+      "to": [
+        3,
+        8,
+        2
+      ],
+      "origin": [
+        -1,
+        6,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            29.0,
+            18.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            29.0,
+            22.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            22.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            29.0,
+            22.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            22.0,
+            25.0,
+            23.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            22.0,
+            25.0,
+            23.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element8",
+      "type": "cube",
+      "uuid": "635fbb03-c6eb-56c6-baaa-454f7280fefa",
+      "from": [
+        -3,
+        7,
+        2
+      ],
+      "to": [
+        3,
+        8,
+        3
+      ],
+      "origin": [
+        -1,
+        6,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            17.0,
+            29.0,
+            18.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            22.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            17.0,
+            29.0,
+            23.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            17.0,
+            24.0,
+            23.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element9",
+      "type": "cube",
+      "uuid": "3c8b039a-555e-58bf-b88b-7f282de6e54a",
+      "from": [
+        -1,
+        5.35,
+        0
+      ],
+      "to": [
+        1,
+        7.35,
+        2
+      ],
+      "origin": [
+        0,
+        6.35,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            7.0,
+            18.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            7.0,
+            18.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            18.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            7.0,
+            18.0,
+            9.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            7.0,
+            17.0,
+            9.0,
+            19.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element10",
+      "type": "cube",
+      "uuid": "8d0e7029-351c-51ee-9a09-ce806046aa33",
+      "from": [
+        -2,
+        4,
+        -2
+      ],
+      "to": [
+        0,
+        6,
+        0
+      ],
+      "origin": [
+        -1,
+        5,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        -22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element11",
+      "type": "cube",
+      "uuid": "f3202c67-cd6b-546d-8821-d53babee0ee5",
+      "from": [
+        0,
+        3.8,
+        -1
+      ],
+      "to": [
+        2,
+        5.8,
+        1
+      ],
+      "origin": [
+        1,
+        4.8,
+        0
+      ],
+      "rotation": [
+        45,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            18.0,
+            12.0,
+            20.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "godfather_element12",
+      "type": "cube",
+      "uuid": "817215a9-d75b-5eb6-a9da-29d3c28813a2",
+      "from": [
+        -5,
+        6.4,
+        -1
+      ],
+      "to": [
+        -1,
+        10.4,
+        0
+      ],
+      "origin": [
+        -3,
+        8.4,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            5.0,
+            18.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            14.0,
+            5.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            14.0,
+            5.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            1.0,
+            17.0,
+            5.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            14.0,
+            2.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            4.0,
+            14.0,
+            5.0,
+            18.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "godfather_element13",
+      "type": "cube",
+      "uuid": "27c4e9cb-2cc4-5738-b177-d16c84b5b4be",
+      "from": [
+        -1,
+        8,
+        1
+      ],
+      "to": [
+        4,
+        14,
+        1
+      ],
+      "origin": [
+        1.5,
+        11,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            24.0,
+            7.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7.0,
+            24.0,
+            12.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "b9e65183-cf35-50ab-b36f-40e5447bd005",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "66d7f617-0c0a-5141-9097-9571d7a479e7",
+        "ad027234-d457-5c43-8de0-4c0ee9c144bf",
+        "ebe8c067-cfcb-51d5-98d4-7760bddc1b25",
+        "699e99c7-20a6-52f2-a64a-9e542c3c6ce8",
+        "cfa24156-d0a0-5014-b141-1127395b68b0",
+        "016cc0c7-8d15-551b-8231-6d6a3d40ab35",
+        "8056126f-feab-53ef-8ce0-52e86cda9179",
+        "206ba453-c8bc-5d84-9040-0b2ef93ab2d7",
+        "2021fb7e-a987-52ca-99a0-09739f2b7441",
+        "77ac778c-6057-56c8-bb90-e35dd0dcb21f",
+        "c840d519-b639-5b4e-a609-f3f390f2465c",
+        "115d32c4-5ff9-5c5c-b318-118d94891b87",
+        "55f8ab16-a7ce-5a6c-a033-b3ff9a00d0ae",
+        "5a89ca80-9b6e-5ce3-9205-520b36603b7b",
+        "635fbb03-c6eb-56c6-baaa-454f7280fefa",
+        "3c8b039a-555e-58bf-b88b-7f282de6e54a",
+        "8d0e7029-351c-51ee-9a09-ce806046aa33",
+        "f3202c67-cd6b-546d-8821-d53babee0ee5",
+        "817215a9-d75b-5eb6-a9da-29d3c28813a2",
+        "27c4e9cb-2cc4-5738-b177-d16c84b5b4be"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "godfather.png",
+      "id": "0",
+      "uuid": "fca652c8-4374-5bed-8b38-20d513855ce9",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB2UlEQVR4Xu1UPUsDURA8JZAiiK1oY6ed5DcE9AeIgpj8AbGwslMb6xBIZWthFRRBYqNgbRe1CIiF2GnkRBNFE1mdFyecy513Se44QQeG97H7bmb3vcS6kicpP1QFI+eg9QXuu5E5fWH2oGgEV873BXMQc8YhhDWNhW7AD84OwUhsBiBOA+yIzo0E+t5pKBYDsb0BL+rcf4QOuzYp4MnliKGORw6Iv0hJbuuFeAxAFOIwATM6HjnYel6Fjv8aNLZXxY06zxP3uYS07CV5O8vI+/FY8INhobmRlla9YsRhQsf9UKpeC1i1bUOudZ4n2AGYwKjjfmiUP1vuQp3nCXQAJjhy//RGZPdCfD+khbWBTHJARi2rQ6yd5z0B8cJh0yRL3pLHnOV68C6/IG5kvGcDEKyk26LOuYYW1gaWhxK9GQgK3Xp9BTAAURJr5/nIsZVqV01irXP6An+CNZFvP0XGIYiqydAN+OFoImlESax1Tl9wdoBd6OqPyA9T2UXzsfn1NdePQvB5b1Nkp2CIOfYYf51rV42RdJ73BIXHZ6bFSxxA1RSmEewxDvHisNVhVwYgDAMgDWkENZBNDRoGfgOs/KfqgSBX0LMBVu5VPeD3CHnvEOZbcJ7/2/gAgkbqgng2uP4AAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/godfather.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/godfather.json"
+    ],
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "godfather_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "godfather_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "godfather_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "godfather_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "north",
+        "output_cube": "godfather_element3_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "east",
+        "output_cube": "godfather_element3_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "south",
+        "output_cube": "godfather_element3_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "west",
+        "output_cube": "godfather_element3_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "animation": null,
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

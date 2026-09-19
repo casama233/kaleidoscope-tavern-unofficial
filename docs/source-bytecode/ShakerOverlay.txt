@@ -1,0 +1,297 @@
+Compiled from "ShakerOverlay.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.gui.overlay.ShakerOverlay implements net.minecraft.client.gui.LayeredDraw$Layer {
+  private static final net.minecraft.resources.ResourceLocation IMG;
+
+  private static final net.minecraft.resources.ResourceLocation ICON;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.gui.overlay.ShakerOverlay();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void render(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    Code:
+       0: invokestatic  #7                  // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+       3: astore_3
+       4: aload_3
+       5: getfield      #13                 // Field net/minecraft/client/Minecraft.gameMode:Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;
+       8: ifnull        24
+      11: aload_3
+      12: getfield      #13                 // Field net/minecraft/client/Minecraft.gameMode:Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;
+      15: invokevirtual #17                 // Method net/minecraft/client/multiplayer/MultiPlayerGameMode.getPlayerMode:()Lnet/minecraft/world/level/GameType;
+      18: getstatic     #23                 // Field net/minecraft/world/level/GameType.SPECTATOR:Lnet/minecraft/world/level/GameType;
+      21: if_acmpne     25
+      24: return
+      25: aload_3
+      26: getfield      #29                 // Field net/minecraft/client/Minecraft.player:Lnet/minecraft/client/player/LocalPlayer;
+      29: astore        4
+      31: aload         4
+      33: ifnonnull     37
+      36: return
+      37: aload_1
+      38: invokevirtual #33                 // Method net/minecraft/client/gui/GuiGraphics.guiWidth:()I
+      41: istore        5
+      43: aload_1
+      44: invokevirtual #39                 // Method net/minecraft/client/gui/GuiGraphics.guiHeight:()I
+      47: istore        6
+      49: aload_2
+      50: iconst_0
+      51: invokeinterface #42,  2           // InterfaceMethod net/minecraft/client/DeltaTracker.getGameTimeDeltaPartialTick:(Z)F
+      56: fstore        7
+      58: aload_0
+      59: aload_1
+      60: iload         5
+      62: iload         6
+      64: aload_3
+      65: aload         4
+      67: invokevirtual #48                 // Method renderShakerBlockTips:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/client/Minecraft;Lnet/minecraft/client/player/LocalPlayer;)V
+      70: aload_0
+      71: aload_1
+      72: iload         5
+      74: iload         6
+      76: aload         4
+      78: fload         7
+      80: invokevirtual #54                 // Method renderShakerProgress:(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/client/player/LocalPlayer;F)V
+      83: return
+
+  private void renderShakerProgress(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.client.player.LocalPlayer, float);
+    Code:
+       0: aload         4
+       2: invokevirtual #58                 // Method net/minecraft/client/player/LocalPlayer.getUseItemRemainingTicks:()I
+       5: istore        6
+       7: iload         6
+       9: ifle          108
+      12: aload         4
+      14: invokevirtual #63                 // Method net/minecraft/client/player/LocalPlayer.getUseItem:()Lnet/minecraft/world/item/ItemStack;
+      17: getstatic     #67                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.SHAKER:Lnet/neoforged/neoforge/registries/DeferredItem;
+      20: invokevirtual #73                 // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+      23: checkcast     #79                 // class net/minecraft/world/item/Item
+      26: invokevirtual #81                 // Method net/minecraft/world/item/ItemStack.is:(Lnet/minecraft/world/item/Item;)Z
+      29: ifeq          108
+      32: aload_1
+      33: getstatic     #87                 // Field IMG:Lnet/minecraft/resources/ResourceLocation;
+      36: iload_2
+      37: iconst_2
+      38: idiv
+      39: bipush        91
+      41: isub
+      42: iload_3
+      43: iconst_2
+      44: idiv
+      45: bipush        32
+      47: iadd
+      48: iconst_0
+      49: iconst_0
+      50: sipush        181
+      53: bipush        17
+      55: invokevirtual #91                 // Method net/minecraft/client/gui/GuiGraphics.blit:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+      58: aload         4
+      60: invokevirtual #95                 // Method net/minecraft/client/player/LocalPlayer.getTicksUsingItem:()I
+      63: i2f
+      64: fload         5
+      66: fadd
+      67: f2d
+      68: ldc2_w        #98                 // double 1.5d
+      71: dmul
+      72: invokestatic  #100                // Method java/lang/Math.round:(D)J
+      75: l2i
+      76: istore        7
+      78: aload_1
+      79: getstatic     #87                 // Field IMG:Lnet/minecraft/resources/ResourceLocation;
+      82: iload_2
+      83: iconst_2
+      84: idiv
+      85: bipush        91
+      87: isub
+      88: iload         7
+      90: iadd
+      91: iload_3
+      92: iconst_2
+      93: idiv
+      94: bipush        26
+      96: iadd
+      97: sipush        181
+     100: iconst_0
+     101: bipush        11
+     103: bipush        13
+     105: invokevirtual #91                 // Method net/minecraft/client/gui/GuiGraphics.blit:(Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+     108: return
+
+  private void renderShakerBlockTips(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.client.Minecraft, net.minecraft.client.player.LocalPlayer);
+    Code:
+       0: aload         4
+       2: getfield      #106                // Field net/minecraft/client/Minecraft.hitResult:Lnet/minecraft/world/phys/HitResult;
+       5: astore        6
+       7: aload         6
+       9: instanceof    #110                // class net/minecraft/world/phys/BlockHitResult
+      12: ifeq          25
+      15: aload         6
+      17: checkcast     #110                // class net/minecraft/world/phys/BlockHitResult
+      20: astore        7
+      22: goto          26
+      25: return
+      26: aload         5
+      28: invokevirtual #112                // Method net/minecraft/client/player/LocalPlayer.level:()Lnet/minecraft/world/level/Level;
+      31: astore        8
+      33: aload         7
+      35: invokevirtual #116                // Method net/minecraft/world/phys/BlockHitResult.getBlockPos:()Lnet/minecraft/core/BlockPos;
+      38: astore        9
+      40: aload         5
+      42: invokevirtual #112                // Method net/minecraft/client/player/LocalPlayer.level:()Lnet/minecraft/world/level/Level;
+      45: aload         9
+      47: invokevirtual #120                // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      50: astore        10
+      52: aload         10
+      54: getstatic     #126                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.SHAKER:Lnet/neoforged/neoforge/registries/DeferredBlock;
+      57: invokevirtual #131                // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+      60: checkcast     #134                // class net/minecraft/world/level/block/Block
+      63: invokevirtual #136                // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/world/level/block/Block;)Z
+      66: ifne          70
+      69: return
+      70: aload         8
+      72: aload         9
+      74: invokevirtual #141                // Method net/minecraft/world/level/Level.getBlockEntity:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/entity/BlockEntity;
+      77: astore        11
+      79: aload         11
+      81: instanceof    #145                // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity
+      84: ifeq          97
+      87: aload         11
+      89: checkcast     #145                // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity
+      92: astore        12
+      94: goto          98
+      97: return
+      98: invokestatic  #7                  // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+     101: getfield      #147                // Field net/minecraft/client/Minecraft.font:Lnet/minecraft/client/gui/Font;
+     104: astore        13
+     106: iload_2
+     107: iconst_2
+     108: idiv
+     109: bipush        28
+     111: isub
+     112: istore        14
+     114: iload_3
+     115: iconst_2
+     116: idiv
+     117: bipush        26
+     119: iadd
+     120: istore        15
+     122: aload         12
+     124: invokevirtual #151                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.getStorage:()Lnet/neoforged/neoforge/items/ItemStackHandler;
+     127: astore        16
+     129: iconst_0
+     130: istore        17
+     132: iload         17
+     134: aload         16
+     136: invokevirtual #155                // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+     139: if_icmpge     259
+     142: aload         16
+     144: iload         17
+     146: invokevirtual #160                // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+     149: astore        18
+     151: aload         18
+     153: invokevirtual #164                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+     156: ifeq          162
+     159: goto          253
+     162: getstatic     #168                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/ColorUtils.ITEM_COLOR_CACHE:Ljava/util/function/Function;
+     165: aload         18
+     167: invokevirtual #174                // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+     170: invokeinterface #178,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+     175: checkcast     #184                // class net/minecraft/ChatFormatting
+     178: astore        19
+     180: aload         19
+     182: getstatic     #186                // Field net/minecraft/ChatFormatting.RESET:Lnet/minecraft/ChatFormatting;
+     185: if_acmpne     213
+     188: aload_1
+     189: aload         18
+     191: iload         14
+     193: iload         15
+     195: invokevirtual #190                // Method net/minecraft/client/gui/GuiGraphics.renderFakeItem:(Lnet/minecraft/world/item/ItemStack;II)V
+     198: aload_1
+     199: aload         13
+     201: aload         18
+     203: iload         14
+     205: iload         15
+     207: invokevirtual #194                // Method net/minecraft/client/gui/GuiGraphics.renderItemDecorations:(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;II)V
+     210: goto          246
+     213: aload         19
+     215: invokevirtual #198                // Method net/minecraft/ChatFormatting.getColor:()Ljava/lang/Integer;
+     218: invokestatic  #202                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     221: checkcast     #207                // class java/lang/Integer
+     224: invokevirtual #209                // Method java/lang/Integer.intValue:()I
+     227: ldc           #212                // int -16777216
+     229: ior
+     230: istore        20
+     232: aload_0
+     233: aload_1
+     234: iload         14
+     236: iload         15
+     238: bipush        6
+     240: iadd
+     241: iload         20
+     243: invokevirtual #213                // Method renderIcon:(Lnet/minecraft/client/gui/GuiGraphics;III)V
+     246: iload         14
+     248: bipush        20
+     250: iadd
+     251: istore        14
+     253: iinc          17, 1
+     256: goto          132
+     259: return
+
+  private void renderIcon(net.minecraft.client.gui.GuiGraphics, int, int, int);
+    Code:
+       0: iload         4
+       2: invokestatic  #217                // Method net/minecraft/util/FastColor$ARGB32.alpha:(I)I
+       5: i2f
+       6: ldc           #223                // float 255.0f
+       8: fdiv
+       9: fstore        5
+      11: iload         4
+      13: invokestatic  #224                // Method net/minecraft/util/FastColor$ARGB32.red:(I)I
+      16: i2f
+      17: ldc           #223                // float 255.0f
+      19: fdiv
+      20: fstore        6
+      22: iload         4
+      24: invokestatic  #227                // Method net/minecraft/util/FastColor$ARGB32.green:(I)I
+      27: i2f
+      28: ldc           #223                // float 255.0f
+      30: fdiv
+      31: fstore        7
+      33: iload         4
+      35: invokestatic  #230                // Method net/minecraft/util/FastColor$ARGB32.blue:(I)I
+      38: i2f
+      39: ldc           #223                // float 255.0f
+      41: fdiv
+      42: fstore        8
+      44: invokestatic  #7                  // Method net/minecraft/client/Minecraft.getInstance:()Lnet/minecraft/client/Minecraft;
+      47: getstatic     #233                // Field net/minecraft/client/renderer/texture/TextureAtlas.LOCATION_BLOCKS:Lnet/minecraft/resources/ResourceLocation;
+      50: invokevirtual #238                // Method net/minecraft/client/Minecraft.getTextureAtlas:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/function/Function;
+      53: getstatic     #242                // Field ICON:Lnet/minecraft/resources/ResourceLocation;
+      56: invokeinterface #178,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+      61: checkcast     #245                // class net/minecraft/client/renderer/texture/TextureAtlasSprite
+      64: astore        9
+      66: aload_1
+      67: iload_2
+      68: iload_3
+      69: iconst_0
+      70: bipush        16
+      72: bipush        16
+      74: aload         9
+      76: fload         6
+      78: fload         7
+      80: fload         8
+      82: fload         5
+      84: invokevirtual #247                // Method net/minecraft/client/gui/GuiGraphics.blit:(IIIIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;FFFF)V
+      87: return
+
+  static {};
+    Code:
+       0: ldc           #250                // String textures/gui/shaker.png
+       2: invokestatic  #252                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+       5: putstatic     #87                 // Field IMG:Lnet/minecraft/resources/ResourceLocation;
+       8: ldc_w         #258                // String gui/rhombus
+      11: invokestatic  #252                // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      14: putstatic     #242                // Field ICON:Lnet/minecraft/resources/ResourceLocation;
+      17: return
+}

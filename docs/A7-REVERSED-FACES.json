@@ -1,0 +1,98 @@
+[
+  {
+    "id": "empty_glassware",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "empty_glassware_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "empty_glassware_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "empty_glassware_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "empty_glassware_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "north",
+        "output_cube": "empty_glassware_element4_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "east",
+        "output_cube": "empty_glassware_element4_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "south",
+        "output_cube": "empty_glassware_element4_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "west",
+        "output_cube": "empty_glassware_element4_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "screwdriver",
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "screwdriver_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "screwdriver_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "screwdriver_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "screwdriver_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  }
+]

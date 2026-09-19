@@ -1,0 +1,39 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Tavern A17 | OPTIONAL PoseLab (Unverified)",
+    "description": "Original display values, opt-in candidate. Engine/feature-toggle requirements NOT VERIFIED in A12.",
+    "uuid": "88f1d112-dcb2-5701-9d55-2f7c35d14057",
+    "version": [
+      0,
+      18,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "ae455bb4-261a-5ff7-ab19-6b6479e93c34",
+      "version": [
+        0,
+        18,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "2ae8d261-516c-5f15-a97b-44c686222e28",
+      "version": [
+        0,
+        18,
+        0
+      ]
+    }
+  ]
+}

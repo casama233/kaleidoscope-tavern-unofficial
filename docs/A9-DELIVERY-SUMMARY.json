@@ -1,0 +1,104 @@
+{
+  "batch": "A9",
+  "scope": "Pinned static bottled model directory completed; all art/gameplay still incomplete",
+  "new": {
+    "batch": "A9",
+    "new_source_files": 44,
+    "new_geometries": 34,
+    "new_appearances": 34,
+    "new_editor_files": 34,
+    "new_original_png": 10,
+    "categories": {
+      "bottle_models": 33,
+      "cocktail_models": 1
+    },
+    "total_geometries": 191,
+    "total_appearances": 281,
+    "total_editor_files": 283,
+    "total_original_png": 78,
+    "total_source_files": 372,
+    "all_art_completed": false,
+    "gameplay": "NONE",
+    "engine_test": "NOT_RUN"
+  },
+  "counts": {
+    "geometries": 191,
+    "appearances": 281,
+    "editor_files": 283,
+    "original_tavern_png": 78
+  },
+  "checks": {
+    "assets": {
+      "checks_run": 4453,
+      "passed": 4453,
+      "failed": 0
+    },
+    "interfaces": {
+      "checks_run": 2543,
+      "passed": 2543,
+      "failed": 0
+    },
+    "unit_tests": [
+      {
+        "suite": "python",
+        "command": [
+          "/opt/pyvenv/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "tests": 73,
+        "passed": true,
+        "output": "A9-python-test-output.txt"
+      },
+      {
+        "suite": "node",
+        "command": [
+          "node",
+          "--test",
+          "tests/interfaces.test.mjs"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "tests": 32,
+        "passed": true,
+        "output": "A9-node-test-output.txt"
+      },
+      {
+        "suite": "typescript",
+        "command": [
+          "tsc",
+          "-p",
+          "tests/tsconfig.json"
+        ],
+        "exit_code": 0,
+        "status": "PASS",
+        "tests": null,
+        "passed": true,
+        "output": "A9-typescript-test-output.txt"
+      }
+    ],
+    "browser": {
+      "models_rendered": 281,
+      "checks_run": 335,
+      "passed": 335,
+      "failed": 0
+    },
+    "deterministic_build_files": 1009,
+    "unchanged_A8_resource_files": 474
+  },
+  "not_run": [
+    "Minecraft load/render",
+    "bridge interactive load",
+    "Blockbench interactive load",
+    "official release JAR comparison",
+    "real Cookery integration"
+  ]
+}

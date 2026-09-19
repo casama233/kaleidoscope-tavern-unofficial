@@ -1,0 +1,3102 @@
+{
+  "build": "A17",
+  "default_pack_modified": false,
+  "overlay": "extras/PoseLab_RP",
+  "reference": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference/examples/itemdisplaytransforms?view=minecraft-bedrock-stable",
+  "reference_gate": "Documentation still mentions Upcoming Creator Features; current engine behavior not tested.",
+  "geometry_files": 143,
+  "appearance_bindings": 185,
+  "models": [
+    {
+      "asset": "trellis_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/single.json",
+      "geometry": "RP/models/entity/trellis_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_east_west",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/east_west.json",
+      "geometry": "RP/models/entity/trellis_east_west.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_north_south",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/north_south.json",
+      "geometry": "RP/models/entity/trellis_north_south.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_cross_east_west",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_east_west.json",
+      "geometry": "RP/models/entity/trellis_cross_east_west.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_cross_north_south",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_north_south.json",
+      "geometry": "RP/models/entity/trellis_cross_north_south.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_cross_up_down",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/cross_up_down.json",
+      "geometry": "RP/models/entity/trellis_cross_up_down.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "trellis_six_direction",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/plant/trellis/six_direction.json",
+      "geometry": "RP/models/entity/trellis_six_direction.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_white_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/white/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_orange_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/orange/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_magenta_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/magenta/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_light_blue_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_blue/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_yellow_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/yellow/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_lime_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/lime/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_pink_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/pink/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_gray_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/gray/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_light_gray_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/light_gray/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_cyan_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/cyan/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_purple_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/purple/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_blue_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/blue/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_brown_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/brown/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_green_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/green/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_red_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/red/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sofa_black_single",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/sofa/black/single.json",
+      "geometry": "RP/models/entity/sofa_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "emerald",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/emerald.json",
+      "geometry": "RP/models/entity/emerald.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bar_cabinet_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/single.json",
+      "geometry": "RP/models/entity/bar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bar_cabinet_left",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/left.json",
+      "geometry": "RP/models/entity/bar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bar_cabinet_middle",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/middle.json",
+      "geometry": "RP/models/entity/bar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bar_cabinet_right",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/bar_cabinet/right.json",
+      "geometry": "RP/models/entity/bar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "glass_bar_cabinet_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/single.json",
+      "geometry": "RP/models/entity/glass_bar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "glass_bar_cabinet_left",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/left.json",
+      "geometry": "RP/models/entity/glass_bar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "glass_bar_cabinet_middle",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/middle.json",
+      "geometry": "RP/models/entity/glass_bar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "glass_bar_cabinet_right",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/glass_bar_cabinet/right.json",
+      "geometry": "RP/models/entity/glass_bar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "cellar_cabinet_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/single.json",
+      "geometry": "RP/models/entity/cellar_cabinet_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "cellar_cabinet_left",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/left.json",
+      "geometry": "RP/models/entity/cellar_cabinet_left.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "cellar_cabinet_middle",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/middle.json",
+      "geometry": "RP/models/entity/cellar_cabinet_middle.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "cellar_cabinet_right",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/cellar_cabinet/right.json",
+      "geometry": "RP/models/entity/cellar_cabinet_right.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "tilted_rack",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json",
+      "geometry": "RP/models/entity/tilted_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "circular_rack",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/circular_rack.json",
+      "geometry": "RP/models/entity/circular_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "glassware_holder",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/glassware_holder.json",
+      "geometry": "RP/models/entity/glassware_holder.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "empty_glassware",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/empty_glassware.json",
+      "geometry": "RP/models/entity/empty_glassware.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "screwdriver",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/screwdriver.json",
+      "geometry": "RP/models/entity/screwdriver.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "depth_charge",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/depth_charge.json",
+      "geometry": "RP/models/entity/depth_charge.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "mojito",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mojito.json",
+      "geometry": "RP/models/entity/mojito.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "signature_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/signature_cocktail.json",
+      "geometry": "RP/models/entity/signature_cocktail.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "mystery_cocktail",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/mystery_cocktail.json",
+      "geometry": "RP/models/entity/mystery_cocktail.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "white_lady",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json",
+      "geometry": "RP/models/entity/white_lady.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "allium_garden",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/allium_garden.json",
+      "geometry": "RP/models/entity/allium_garden.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bloody_mary",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/bloody_mary.json",
+      "geometry": "RP/models/entity/bloody_mary.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "brass_heart",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/brass_heart.json",
+      "geometry": "RP/models/entity/brass_heart.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "godfather",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/godfather.json",
+      "geometry": "RP/models/entity/godfather.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "grasshopper",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/grasshopper.json",
+      "geometry": "RP/models/entity/grasshopper.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "nether_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/nether_special.json",
+      "geometry": "RP/models/entity/nether_special.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sculk_special",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/sculk_special.json",
+      "geometry": "RP/models/entity/sculk_special.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bar_counter_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bar_counter/single.json",
+      "geometry": "RP/models/entity/bar_counter_single.geo.json",
+      "contexts": [
+        "gui",
+        "ground",
+        "fixed",
+        "thirdperson_righthand",
+        "firstperson_righthand",
+        "firstperson_lefthand"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "holder",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/holder.json",
+      "geometry": "RP/models/entity/holder.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "table_single",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/table/single.json",
+      "geometry": "RP/models/entity/table_single.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bell_pendant_lamp_bottom",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/bottom.json",
+      "geometry": "RP/models/entity/bell_pendant_lamp_bottom.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "bell_pendant_lamp_top",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bell_pendant_lamp/top.json",
+      "geometry": "RP/models/entity/bell_pendant_lamp_top.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "blue_pendant_lamp_bottom",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/bottom.json",
+      "geometry": "RP/models/entity/blue_pendant_lamp_bottom.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "blue_pendant_lamp_top",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/blue_pendant_lamp/top.json",
+      "geometry": "RP/models/entity/blue_pendant_lamp_top.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "yellow_pendant_lamp_bottom",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/bottom.json",
+      "geometry": "RP/models/entity/yellow_pendant_lamp_bottom.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "yellow_pendant_lamp_top",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/yellow_pendant_lamp/top.json",
+      "geometry": "RP/models/entity/yellow_pendant_lamp_top.geo.json",
+      "contexts": [
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sakura_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/sakura_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "sakura_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/sakura_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "pine_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/pine_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "pine_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/pine_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "ginkgo_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/ginkgo_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "ginkgo_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/ginkgo_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "spore_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/spore_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "spore_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/spore_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "catnip_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/catnip_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "catnip_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/catnip_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "snow_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/snow_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "snow_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/snow_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "butterfly_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/butterfly_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "butterfly_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/butterfly_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "firefly_incense_closed",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/firefly_incense.json",
+      "geometry": "RP/models/entity/incense_closed.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "firefly_incense_open",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/firefly_incense.json",
+      "geometry": "RP/models/entity/incense_open.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_mondrian",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/mondrian.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_great_wave",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/great_wave.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_mona_lisa",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/mona_lisa.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_cr019",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/cr019.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_david",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/david.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_father",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/father.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_girl_with_pearl_earring",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/girl_with_pearl_earring.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_master_marisa",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/master_marisa.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_son_of_man",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/son_of_man.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_starry_night",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/starry_night.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_van_gogh_self_portrait",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/van_gogh_self_portrait.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_ysbb",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/ysbb.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_tartaric_acid",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/tartaric_acid.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "painting_unknown",
+      "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/unknown.json",
+      "geometry": "RP/models/entity/painting_base.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_blue",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/blue.json",
+      "geometry": "RP/models/entity/string_lights_blue.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_red",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/red.json",
+      "geometry": "RP/models/entity/string_lights_red.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_white",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/white.json",
+      "geometry": "RP/models/entity/string_lights_white.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_black",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/black.json",
+      "geometry": "RP/models/entity/string_lights_black.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_colorless",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/colorless.json",
+      "geometry": "RP/models/entity/string_lights_colorless.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_brown",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/brown.json",
+      "geometry": "RP/models/entity/string_lights_brown.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_cyan",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/cyan.json",
+      "geometry": "RP/models/entity/string_lights_cyan.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_gray",
+      "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/gray.json",
+      "geometry": "RP/models/entity/string_lights_gray.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_green",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/green.json",
+      "geometry": "RP/models/entity/string_lights_green.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_light_blue",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/light_blue.json",
+      "geometry": "RP/models/entity/string_lights_light_blue.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_light_gray",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/light_gray.json",
+      "geometry": "RP/models/entity/string_lights_light_gray.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_lime",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/lime.json",
+      "geometry": "RP/models/entity/string_lights_lime.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_magenta",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
+      "geometry": "RP/models/entity/string_lights_magenta.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_orange",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/orange.json",
+      "geometry": "RP/models/entity/string_lights_orange.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_pink",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/pink.json",
+      "geometry": "RP/models/entity/string_lights_pink.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_purple",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/purple.json",
+      "geometry": "RP/models/entity/string_lights_purple.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "string_lights_yellow",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/string_lights/yellow.json",
+      "geometry": "RP/models/entity/string_lights_yellow.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_allium_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/allium_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_allium_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_azure_bluet_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/azure_bluet_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_azure_bluet_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_bar_cabinet",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/bar_cabinet.json",
+      "geometry": "RP/models/entity/item_display_bar_cabinet.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_bar_counter",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/bar_counter.json",
+      "geometry": "RP/models/entity/item_display_bar_counter.geo.json",
+      "contexts": [
+        "gui",
+        "ground",
+        "fixed",
+        "thirdperson_righthand",
+        "firstperson_righthand",
+        "firstperson_lefthand"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_barrel",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/barrel.json",
+      "geometry": "RP/models/entity/item_display_barrel.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_base_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/base_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_base_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_black_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/black_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_black_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_black_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/black_sofa.json",
+      "geometry": "RP/models/entity/item_display_black_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_blue_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/blue_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_blue_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_blue_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/blue_sofa.json",
+      "geometry": "RP/models/entity/item_display_blue_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_brown_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/brown_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_brown_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_brown_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/brown_sofa.json",
+      "geometry": "RP/models/entity/item_display_brown_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_cellar_cabinet",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/cellar_cabinet.json",
+      "geometry": "RP/models/entity/item_display_cellar_cabinet.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_circular_rack",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/circular_rack.json",
+      "geometry": "RP/models/entity/item_display_circular_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_cornflower_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/cornflower_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_cornflower_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_cyan_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/cyan_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_cyan_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_cyan_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/cyan_sofa.json",
+      "geometry": "RP/models/entity/item_display_cyan_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_glass_bar_cabinet",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/glass_bar_cabinet.json",
+      "geometry": "RP/models/entity/item_display_glass_bar_cabinet.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_glassware_holder",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/glassware_holder.json",
+      "geometry": "RP/models/entity/item_display_glassware_holder.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_grass_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/grass_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_grass_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_gray_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/gray_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_gray_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_gray_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/gray_sofa.json",
+      "geometry": "RP/models/entity/item_display_gray_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_green_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/green_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_green_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_green_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/green_sofa.json",
+      "geometry": "RP/models/entity/item_display_green_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_light_blue_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/light_blue_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_light_blue_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_light_blue_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/light_blue_sofa.json",
+      "geometry": "RP/models/entity/item_display_light_blue_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_light_gray_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/light_gray_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_light_gray_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_light_gray_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/light_gray_sofa.json",
+      "geometry": "RP/models/entity/item_display_light_gray_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_lime_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/lime_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_lime_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_lime_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/lime_sofa.json",
+      "geometry": "RP/models/entity/item_display_lime_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_magenta_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/magenta_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_magenta_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_magenta_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/magenta_sofa.json",
+      "geometry": "RP/models/entity/item_display_magenta_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_orange_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/orange_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_orange_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_orange_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/orange_sofa.json",
+      "geometry": "RP/models/entity/item_display_orange_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_orchid_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/orchid_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_orchid_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_peony_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/peony_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_peony_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_pink_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/pink_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_pink_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_pink_petals_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/pink_petals_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_pink_petals_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_pink_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/pink_sofa.json",
+      "geometry": "RP/models/entity/item_display_pink_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_pitcher_plant_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/pitcher_plant_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_pitcher_plant_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_poppy_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/poppy_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_poppy_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_pressing_tub",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/pressing_tub.json",
+      "geometry": "RP/models/entity/item_display_pressing_tub.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_purple_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/purple_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_purple_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_purple_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/purple_sofa.json",
+      "geometry": "RP/models/entity/item_display_purple_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_red_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/red_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_red_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_red_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/red_sofa.json",
+      "geometry": "RP/models/entity/item_display_red_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_shaker",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/shaker.json",
+      "geometry": "RP/models/entity/item_display_shaker.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "head"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_shaker_3d",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/shaker_3d.json",
+      "geometry": "RP/models/entity/item_display_shaker_3d.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "head"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_black",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_black.json",
+      "geometry": "RP/models/entity/item_display_string_lights_black.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_blue",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_blue.json",
+      "geometry": "RP/models/entity/item_display_string_lights_blue.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_brown",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_brown.json",
+      "geometry": "RP/models/entity/item_display_string_lights_brown.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_colorless",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_colorless.json",
+      "geometry": "RP/models/entity/item_display_string_lights_colorless.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_cyan",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_cyan.json",
+      "geometry": "RP/models/entity/item_display_string_lights_cyan.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_gray",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_gray.json",
+      "geometry": "RP/models/entity/item_display_string_lights_gray.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_green",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_green.json",
+      "geometry": "RP/models/entity/item_display_string_lights_green.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_light_blue",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_light_blue.json",
+      "geometry": "RP/models/entity/item_display_string_lights_light_blue.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_light_gray",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_light_gray.json",
+      "geometry": "RP/models/entity/item_display_string_lights_light_gray.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_lime",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_lime.json",
+      "geometry": "RP/models/entity/item_display_string_lights_lime.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_magenta",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_magenta.json",
+      "geometry": "RP/models/entity/item_display_string_lights_magenta.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_orange",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_orange.json",
+      "geometry": "RP/models/entity/item_display_string_lights_orange.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_pink",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_pink.json",
+      "geometry": "RP/models/entity/item_display_string_lights_pink.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_purple",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_purple.json",
+      "geometry": "RP/models/entity/item_display_string_lights_purple.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_red",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_red.json",
+      "geometry": "RP/models/entity/item_display_string_lights_red.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_white",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_white.json",
+      "geometry": "RP/models/entity/item_display_string_lights_white.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_string_lights_yellow",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/string_lights_yellow.json",
+      "geometry": "RP/models/entity/item_display_string_lights_yellow.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_sunflower_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/sunflower_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_sunflower_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_table",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/table.json",
+      "geometry": "RP/models/entity/item_display_table.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_tilted_rack",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/tilted_rack.json",
+      "geometry": "RP/models/entity/item_display_tilted_rack.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_torchflower_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/torchflower_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_torchflower_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_trellis",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/trellis.json",
+      "geometry": "RP/models/entity/item_display_trellis.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_tulip_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/tulip_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_tulip_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_white_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/white_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_white_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_white_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/white_sofa.json",
+      "geometry": "RP/models/entity/item_display_white_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_wither_rose_sandwich_board",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/wither_rose_sandwich_board.json",
+      "geometry": "RP/models/entity/item_display_wither_rose_sandwich_board.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_yellow_bar_stool",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/yellow_bar_stool.json",
+      "geometry": "RP/models/entity/item_display_yellow_bar_stool.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    },
+    {
+      "asset": "item_display_yellow_sofa",
+      "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/yellow_sofa.json",
+      "geometry": "RP/models/entity/item_display_yellow_sofa.geo.json",
+      "contexts": [
+        "thirdperson_righthand",
+        "thirdperson_lefthand",
+        "firstperson_righthand",
+        "firstperson_lefthand",
+        "ground",
+        "gui",
+        "head",
+        "fixed"
+      ],
+      "status": "SOURCE_VALUE_CANDIDATE_OPTIONAL_UCF",
+      "engine_accepted": false
+    }
+  ],
+  "engine_accepted": false
+}

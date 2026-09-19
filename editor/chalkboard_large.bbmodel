@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "chalkboard_large",
+  "model_identifier": "kt_assets_a17.chalkboard_large",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 128,
+    "height": 64
+  },
+  "elements": [
+    {
+      "name": "source_board",
+      "type": "cube",
+      "uuid": "be48002d-3b9b-5f9d-a235-ca0f26c5d04e",
+      "from": [
+        -24,
+        2,
+        7
+      ],
+      "to": [
+        24,
+        30,
+        8
+      ],
+      "origin": [
+        -8,
+        0,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": true,
+      "autouv": 0,
+      "export": true,
+      "uv_offset": [
+        0,
+        0
+      ],
+      "mirror_uv": false,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "board",
+      "origin": [
+        -8,
+        0,
+        -8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "03518ca3-3e85-5a04-8d13-855515fa2f1e",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "be48002d-3b9b-5f9d-a235-ca0f26c5d04e"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "large_chalkboard.png",
+      "id": "0",
+      "uuid": "85b62ad1-4e61-5aaa-a55c-2beee21bd44a",
+      "width": 128,
+      "height": 64,
+      "uv_width": 128,
+      "uv_height": 64,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAABACAYAAADS1n9/AAACNUlEQVR4Xu2by0oDQRBF/QxXCroJqKBCXBlcCHHl2p3//xdqBwrKS2XSpkNP9XgOHJJMpnuK6ZupkMfZ2Q/PNxdf5vb+MqW+xil1XBa1Tm9Zg9nQYrTwLGqdU+rYLGqdXl2XblgBq6f1zruXzRBavXoiR1XXpRtWgF/8x+1rSq02HwI9kfqqy26aAGRe+Mh9AfjYrEI/3253+vuqjjmkjvdz6LF0rDl7ACyJIwfAv5re11c7bZs9PkZ9tfrtum+tOhcBaLDU7APwcH3+6yRnt9RaaiYARxoFQNUWMZdal9ao69KNJQWg3NceW9OvT6nOf+hYBKDBKABRn53S9q0do/vXjNk3vjy2K4SuSzesmCUEYMT3AASgwSgA2nszanXyHqDRKADaY7U36/a5JQANagDK/R4tQPv6VI/Xsfq8XRV0XbphxRCA/hKARqMAjCCfA5zIKADaY7NLABqMAjDVj09p7dx+P7U8b1cFXZduWDFLCYCe5MwSgEajAIwmLaDBKADaY80e3wMU9TiHjmVB0HXpxtICoH1Xe3Kk3/8Ydb4pdRwBaDAKgC5OT3WBa7YTgAajAIwm7wEajAKgPXaqN6s6plYbq/PVzD17ACyJowWg1Bv9KDS6zP5VP1bna51b57e6dV26YQXYz8L1RGfRaiu3Zk0AMpsuAJn/GGK1WZ3RH0P8Z+vZTfNdgBaG86jrAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/nm8FOTc8n1rVQQAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "neoforge-source/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/model/deco/LargeChalkboardModel.java",
+    "parent_chain": [],
+    "derived_atlas": null,
+    "source_transform": null,
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "sandwich_board_orchid_top",
+  "model_identifier": "kt_assets_a17.sandwich_board_orchid_top",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "sandwich_board_orchid_top_element0",
+      "type": "cube",
+      "uuid": "4c39b213-1167-5ee6-b27c-d4796fdf8f8f",
+      "from": [
+        3.505000000000001,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        5.494999999999999,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_orchid_top_element1",
+      "type": "cube",
+      "uuid": "9744d61b-03e1-5d04-a96b-37453addd7fe",
+      "from": [
+        3.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        5.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_orchid_top_element2",
+      "type": "cube",
+      "uuid": "5a2aaf6a-9b38-541d-801d-b8e6c80d42e8",
+      "from": [
+        -5.495,
+        -9.4845,
+        1.31963
+      ],
+      "to": [
+        -3.505,
+        -3.99975,
+        3.3096300000000003
+      ],
+      "origin": [
+        -4.5,
+        -10.49475,
+        2.3146299999999993
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            9.98474
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            1.99,
+            5.48476
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0.0,
+            4.5,
+            1.99,
+            6.49
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_orchid_top_element3",
+      "type": "cube",
+      "uuid": "ec9a7537-8486-5d59-a23e-b5c6e3c485a1",
+      "from": [
+        -5.5,
+        -9.8603,
+        -2.07707
+      ],
+      "to": [
+        -3.5,
+        4.56985,
+        -0.07706999999999997
+      ],
+      "origin": [
+        -4.5,
+        -6.43015,
+        -1.07707
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            14.43016
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            2.0,
+            4.5,
+            0.0,
+            6.5
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_orchid_top_element4",
+      "type": "cube",
+      "uuid": "5bb9ce6f-adcc-5ff6-8ff9-9591af89f7f2",
+      "from": [
+        -6,
+        -10.2276,
+        -2.1551400000000003
+      ],
+      "to": [
+        6,
+        5.7724,
+        -0.4051400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            3.0,
+            1.0,
+            15.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            1.0,
+            27.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            1.0,
+            3.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            1.0,
+            29.0,
+            17.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            28.0,
+            2.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "sandwich_board_orchid_top_element5",
+      "type": "cube",
+      "uuid": "825c851f-a40f-5723-86b0-1dc88ac2862b",
+      "from": [
+        -8,
+        -13.2276,
+        -2.6551400000000003
+      ],
+      "to": [
+        8,
+        7.7724,
+        -2.6551400000000003
+      ],
+      "origin": [
+        0,
+        -2.2276,
+        -1.2801400000000003
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            32.0,
+            0.0,
+            48.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            48.0,
+            0.0,
+            32.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "02f552ed-bbd0-5ede-ab5e-e8e1762ec30c",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "4c39b213-1167-5ee6-b27c-d4796fdf8f8f",
+        "9744d61b-03e1-5d04-a96b-37453addd7fe",
+        "5a2aaf6a-9b38-541d-801d-b8e6c80d42e8",
+        "ec9a7537-8486-5d59-a23e-b5c6e3c485a1",
+        "5bb9ce6f-adcc-5ff6-8ff9-9591af89f7f2",
+        "825c851f-a40f-5723-86b0-1dc88ac2862b"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "sandwich_board_orchid_top.png",
+      "id": "0",
+      "uuid": "b2a8a8ee-5253-5af1-ab3c-7666c65db686",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAElElEQVR4nO1ZTWgbRxT+xrvWjyViSBOZmiBita6Iamw3NGClKdQQHwo+FNIiX4qD0lDIwaeExi6llBK5TXvKoYc2GOVmEXIz+NCACzWVwantGEdFkf8qQqjl1K1U2auVtJ4e1itrpV1lpV01ccl3GXbevJl5b+b9zZK3uo/TQ1YWk+FlghrQ/vZpWi1P7OdfalqrHmCLP15/92xVwjyYvEtM9qaqFsymd1RpXXMCBYD7JxkifWdiHKI+e90Uxip1mq22ikw8t234RrrmBJpLAkKCg2dKoJ1rPZiPcQX6+QkvzSTy+K17BsC+kvSiTAFmqw2s1fRURqOVkIlx2Ho4D3PzS7DBCYuDRbR//+Ql4SUldc0J1AglyBSgVXilMYHLn+A1lwvvX/q4qg0UX3t3KE0BIOqzk+ge3TMl0EgvQ8b9s8Qd4uj2Rhx88k+0tp+uah01KJpALRj59uuaeXNJwB1KU6+tD8H+MJGEBgCpBQCvrQ/hlh9ha3HWzwRqxXdfXsPfqX9ACIHL6QTT0IDY+jqGr48icOUqRr75SpHv/kmGHLsRoQAQHAqXCV2MYH+YDIz10qU/VsocZq1gASDF5fXMAQC49NmnqjQ14QFgYOwUtTguAACCGtYRTSFNd5NAY3OVm1QACwBNJkb3RD+F7iD86z20H28DQAGIBxOLrwG7wPD1UUW+cf8sOXYjQs/YB9EROEyXRrZUT1Qyje2NOLABPBryGOMEWQPM6R3fuZr4pPC3iBl0ogdL2FIdG+llSEfgMO2wD2LcP/t8+YDRK1fR3tYGAEhsPoHj6BHNEUFIiPFei1BvdrqRSeRR7Cj1gAWAvFB1NluG4Qp2XgknFnownb6Fs64LYDQIJUWJxmYxcujNEnXfAJoTAAC3f7iJ5bVVAASv7t0EAFhZWwcFxXDgmiL/uH+WDIwN0nuLK4iMaDvRSK+YM2xvxPVuX64AKbt7WjKU57KyTDDH8/jg4kfI8TwAoNFsLvRL3zmeL/QXwx1K00WHFRG/9ut8fsJLgb5C2NSDshugJcUtFV5qlQS//f1NLK+u4vIXnxf6iyF5dK2QagKLwxj3pThLrXl+qYA5nsd7gx9W5Hk05CEDY6eoZcJLS7NANUgFEaA/fDfonsEAWBws5lun0TWnLrxnSvTU863TyCXF4knKBvVAlgc8mLxbtU0Z8bghCVWpypMUk4lxMLIgMiwP0INSoUQnJ4Y8QDx9IcHBa+sDYGxBJFPAuZ5Wms/ugjWVW4Za/52Zx7o3EfXZiTuUprYWJ954fAaZRB7T6Vtwh5w06rMTISEqCC7xXSDqN+6FSJYI7XBiTM/utaVQ6zcCUkIjvQO4Q07KOKwyWrAO68pugIkhsO4VRlxWFNaqUChxWQFWE1MYUw/U8x2wGLJFup2HKLBfHe5oEHAhnnpuXnhrgewGvNJqVxy0mczgaLNFkbYQTxm/q/8QMgXsqNh4PkdVaQcdZT4AkNu9ZOeVaAcZMgVspviC3TeZGJkP+P1J+Q8NI16SnjVkCnj5iLX6GZb/MmovzwSafMD/GZrygGJbL6W/wAscbPwLEF8fuJe+f+sAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_0.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/orchid/rot_0.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/sandwich_board/deco_top.json"
+    ],
+    "derived_atlas": {
+      "file": "RP/textures/kt_derived/a17/sandwich_board_orchid_top.png",
+      "parts": [
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/body.png",
+          "offset": [
+            0,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        },
+        {
+          "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/block/deco/sandwich_board/orchid.png",
+          "offset": [
+            32,
+            0
+          ],
+          "size": [
+            32,
+            32
+          ]
+        }
+      ],
+      "size": [
+        64,
+        32
+      ],
+      "resampled": false,
+      "recolored": false
+    },
+    "source_transform": {
+      "origin": "center"
+    },
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

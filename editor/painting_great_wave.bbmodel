@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_great_wave",
+  "model_identifier": "kt_assets_a13.painting_great_wave",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_great_wave_element0",
+      "type": "cube",
+      "uuid": "f274be37-fdb7-5d90-9c15-d64eb6677f99",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "86229dc1-97b1-5844-8e98-67ff1c5a38af",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "f274be37-fdb7-5d90-9c15-d64eb6677f99"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "great_wave.png",
+      "id": "0",
+      "uuid": "4e793726-b83a-5d23-b610-3c0299b2d36e",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAhFJREFUOI2lk0toU0EUhr/k3jy1WEMfaAsGBYUgQpUuLIFgIkV8oAha3HRTqS4ES9wpVC3UgFAxYBYuCgoialBEKkqgqOiVIoguslGMpsEaY0KoafO6eYyLem+NAUX8V8OcOd/5Z/gH/lMGgOvn9gmAzHyBtlb7Hxu0M5n5AqcuTxtkrbDdewQAyQiSZECWjHpTsVwFwGaRyZcq1Gp1gsGLABg1KgjMJgOSZGiaarPImOQl4AqrCekXuAzQ1mpH/m1qV+/hBsjszC0AqrU6FpNEu6NlGQBQLFUoliq4vIOoqko09onwzBtevnjNw+BZ8gW1AZjOLixfQZPLOwjAeHiKrX1HCfhD9Lm3sefkeb0GoFbrjVfQmt8lPtO+0s5Qv4cAIZ7cGwNgYM0m3kauUaxUqdVFgxPdwccvKW4+fwWAw2ZBTU3jNM+xuhwDwCwbWWUzs1gos1goNwPWr+3kzKG9BB89xbFhP4qi8H2hRCKdw+p0Y3W6SaRzAKzb4msGmDt9jIenCPhDAOw4OEoinWNj727y+TzJZJIul4eW7h6y2WzzGwB6s6ZdAyf09ePbV6C7h0g8RZMmRnxCCCFMHV5h6vAKTbPfMmL0xl0Rm/vasLfz+Glx7MBmoTvQ8v8hegcARVEAiMRTS64uwVC/B4DJyDMmx/xcGH4A/PxMEyM+8T6e0tOlheRvuno/2pz7f9UPPpDUCUMy34wAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/great_wave.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/great_wave.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "engine_test": "NOT_RUN",
+    "derived_atlas": null,
+    "additional_sources": []
+  }
+}

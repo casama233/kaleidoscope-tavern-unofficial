@@ -1,0 +1,542 @@
+{
+  "gui": [
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/gui/jei/barrel.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/gui/jei/barrel.png",
+      "sha256": "2fad8b305300d94a1eff84639f90d8a7a9422d386ef4cd15d179374824e29d4e",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/gui/jei/pressing_tub.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/gui/jei/pressing_tub.png",
+      "sha256": "6816bdd779fc1320546a4e5238fd64e81a81c002e3aac67cbeda131e1d8a7ccb",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/gui/jei/shaker.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/gui/jei/shaker.png",
+      "sha256": "f4371bad55b6cb74d518e6e4c31f1d9894eec98212bc6c7c2b36aa61f96883bb",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/gui/rhombus.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/gui/rhombus.png",
+      "sha256": "0e6217a219b13172a9aa7699ea05936d158a96baf70a4b038c9bb56d95204388",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/gui/shaker.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/gui/shaker.png",
+      "sha256": "88c245944f13b66f450ff9e3825b1c76b60908112dbe52ef22530deaef9773db",
+      "runtime_layout_connected": false
+    }
+  ],
+  "mob_effect": [
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/ardent_heat.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/ardent_heat.png",
+      "sha256": "93f62c880bef6dcd9ca9a6fc5dde8f824e22404fba7c5b6883f443e9dde58ffd",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/bloody_mary.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/bloody_mary.png",
+      "sha256": "965e064c3c9f8c8d3902687ffdbf486c20a69aa548f104a05dc3a74d9dcd2af2",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/grass_stealth.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/grass_stealth.png",
+      "sha256": "a5612f1204209d80dd6ccc55a2f9f5a056a600b38439224e05da1f3cae539cb7",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/high_heels.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/high_heels.png",
+      "sha256": "c2921992e6c723a241131873a09ee564c3c3c29b6acb86e23123b7ed4c546d73",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/long_reach.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/long_reach.png",
+      "sha256": "47eaa0a187db9bd4da70e20ead9be30db230f6273af087e750ac775bd75f63b2",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/shriek_attack.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/shriek_attack.png",
+      "sha256": "fb54bfc489215555c7515381dbdae13eba3ed171b24189a32a71d4ad149bd01d",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/slightly_tipsy.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/slightly_tipsy.png",
+      "sha256": "d62a704dc2cfbb581f92e542219bfc93f5d379038b69d774ecf6e8dce999577e",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/tomb_raider.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/tomb_raider.png",
+      "sha256": "7adbdbef77ad7390949ca73804aa6e2a65a60f9e86ca067e26d48befd0a8f8ef",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/upside_down.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/upside_down.png",
+      "sha256": "06674f48eae319f1a961e4d7891959437ec30cedfa78b99eb72bdc06f04f31a2",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/vision.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/vision.png",
+      "sha256": "9a2aa34658fddfc71c2b8f3b8931ae65e6fa6cf38727bf385d80f57615b4df01",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/xp_drain.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/xp_drain.png",
+      "sha256": "8a7e2245e1e9cbdee9e272d659a0bf582c051da477209dc905004e13cc3b8d37",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/mob_effect/zenith.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/mob_effect/zenith.png",
+      "sha256": "1cee6ee7687efe75194f8f999c273a8d7a2fdc507cb6a379732cdd00b4e5f73e",
+      "runtime_layout_connected": false
+    }
+  ],
+  "item": [
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/allium_garden.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/allium_garden.png",
+      "sha256": "2ef7a57bed65b162dc2e825bac3da0e973bfa10c4177d4ea0a43112a5c9456ed",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/barrel.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/barrel.png",
+      "sha256": "a9268627781c3bd88c1b91f7169c484d1496e511eecf5435616d0df1f93961e9",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/barrel_1.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/barrel_1.png",
+      "sha256": "777f7e5a846460feaa7abe7b40c97c8c8da63b8be8c3820dbb798e640b21eb58",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/bell_pendant_lamp.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/bell_pendant_lamp.png",
+      "sha256": "9cf080ffce4b9f55c6e077d85b4228a4cb04e76da78e95bad296fdf7c1bdeda4",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/bloody_mary.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/bloody_mary.png",
+      "sha256": "e49ca3796bed38b0e48624ba0c830635c7630ed37012466e869aa498c172bacd",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/blue_pendant_lamp.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/blue_pendant_lamp.png",
+      "sha256": "642bb08b43f0f2e146aa46dab82be84cab4eaf86e387645fdf4f9bd135f305ce",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/brandy.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/brandy.png",
+      "sha256": "5d682476026ba80bbc04cd4f828a7d3be3cc38d46c05c3dcd04709dba483adf7",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/brass_heart.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/brass_heart.png",
+      "sha256": "27ee7f5d8542e5189138921d0f8acc3425587187e0537eb1c41e343d21ac99e8",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/butterfly_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/butterfly_incense.png",
+      "sha256": "2454545c4a684f60874689db5d74e636ae224b7f6dcd0aeb03c4680a8760cf6c",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/carignan.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/carignan.png",
+      "sha256": "f53768bca2034f9e94267ea76927d3b158e1e6c6fe93d0ae3b143d11c3eb00be",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/catnip_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/catnip_incense.png",
+      "sha256": "a38a3239d5477fbd24fa396574a8b5830e322dbd2b9925ee34c6db711ffbbd71",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/chalkboard.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/chalkboard.png",
+      "sha256": "5a65a79d52be2833d45554fd7612703388b873ac3bff75197a12ac79a08d064e",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/champagne.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/champagne.png",
+      "sha256": "abefa19b97e0e16881a1af12f622c116f215a878efec0cf6a4b697c742a5f591",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/depth_charge.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/depth_charge.png",
+      "sha256": "e1802b25d1d7bd0535110574848d1c17217787e4fc1debef8cbce00560529a76",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/emerald.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/emerald.png",
+      "sha256": "eed32609d14bfb56e269a61ad347351ec7383dfe165f3d56bc67f4d280216c75",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/empty_bottle.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/empty_bottle.png",
+      "sha256": "1f88e97880d471125e5e27a23d4e931816061267143e0dd36d6fa8a8973b22a6",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/empty_glassware.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/empty_glassware.png",
+      "sha256": "e0fad07882c07201647be1acac3faaa8e32b457f6443abbbe5d29fb20e74b9eb",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/firefly_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/firefly_incense.png",
+      "sha256": "d854b74566a5dc0bd0449a2a8cd11d7c1dfbfb7a6468de6f6a41ed1da008037b",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ginkgo_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/ginkgo_incense.png",
+      "sha256": "6ec076428ce642258e892d9f6f8aaa26d73f6817989de4580326d885edc5f1a3",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/glow_berries_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/glow_berries_bucket.png",
+      "sha256": "a5952a6eb9024d814eb8dbcf222589ed948f2716a469470c2938edd45ec5e1fc",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/glowflower_brew.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/glowflower_brew.png",
+      "sha256": "50148f7c1160725eb621fbc03dfd34ade81c1077ee761288ce2a5f801f338d7f",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/godfather.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/godfather.png",
+      "sha256": "ea010cfa4bad140111397663cc2fcb59b398e9b369f0ce2b192bc4e5d92e883f",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/gold_grape.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/gold_grape.png",
+      "sha256": "b967647188105bb9f6860336ec8bb42e1489ffdec57b6e8e1fc83e953a2f347b",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/gold_grape_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png",
+      "sha256": "744c7458e007ffc68baaabaa5d3e8f8d1557a252c3d2a4a1fb3e6282579ee447",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/grape.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/grape.png",
+      "sha256": "c22222b57b74f14e44fed0400618ece76f96fba2adf27dee1ccb17db56624739",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/grape_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/grape_bucket.png",
+      "sha256": "5ec3b300604b6b59029e480734616e1518c71fbe7ea2aee2bfc0f1bd5f33f8e6",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/grapevine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/grapevine.png",
+      "sha256": "def700b5784ea9b8eb47163221bb5c4fcf1e7d17ba25d11429139fdf04f2b9d4",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/grasshopper.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/grasshopper.png",
+      "sha256": "f45fab8b8a00aa36606dd0789ba94f6fed841e44def7648ae84b397e628d09db",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/green_grape.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/green_grape.png",
+      "sha256": "a0a690779aff7e0510c83589ea52f5616c567bacf92a4d19f3e744b80ed3cab0",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/green_grape_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/green_grape_bucket.png",
+      "sha256": "34fc646950bcd69ff7c37d4949360e0fdf3976db0cbc05af6335e076d206fc06",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/holder.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/holder.png",
+      "sha256": "afb2f2cb37a7f2d4ca11978b66bea0f9f5b966a54d6817fadab9a5c9f9cef0cd",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/honey_wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/honey_wine.png",
+      "sha256": "443f3ab55d72bda5bd49bf7696974053c58975cd2bfb14c9c608e7b4322d1c29",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ice_grape.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/ice_grape.png",
+      "sha256": "1880628091b9382b14e678a8f3191bc16d60eacccdca432d970391d4c03a76a0",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ice_grape_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/ice_grape_bucket.png",
+      "sha256": "77e8a603b532e820aedcd4513a4df58265632ad2f863e465ffa3fd4fffc2956e",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/ice_wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/ice_wine.png",
+      "sha256": "760b0c77670899eeae1c2e749da9b770989bea2bd15d232c1e003728b5192ed0",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/luminous_bride.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/luminous_bride.png",
+      "sha256": "622605fe99ba03ad040863a0ea16e7806ac119ebb4b63bac9f3740cbd85ba4b3",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/madame_shexiang.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/madame_shexiang.png",
+      "sha256": "952a29f111c0cbdc5ab3fe0a536292e06c1d8cf4911c6ff6f1e87121a4074233",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/miners_star.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/miners_star.png",
+      "sha256": "94c4ff34e785bfd92b51534ed7a7ebbbd70c421e772c2a31c98a31a6a92b2e5b",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/mojito.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/mojito.png",
+      "sha256": "2a6c03049d472b7e05862c83f585301f8d4f5b1c3261d19ad8c354b0a9e868d3",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/molotov.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/molotov.png",
+      "sha256": "8b2c211e896b5d6dd371ed79fea7eb6201a87da70b7e23693241141b9814bbcf",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/mother_snow.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/mother_snow.png",
+      "sha256": "be636ffd924802e56e4d8c548e0e80489f12a578330f663fb93d7c460249032c",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/mystery_cocktail.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/mystery_cocktail.png",
+      "sha256": "33152b8a5d28a6d0e4932b52f82e4dda4b419bde7b8470f7dfb1b7d8435410f6",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/nether_special.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/nether_special.png",
+      "sha256": "ba31b2cedbce3dd5012ff51a0e0d4865ddbec4cec0adebaa985727a5df7b8088",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/pine_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/pine_incense.png",
+      "sha256": "1e59af45cecfdef90661b2b75cfa06ada81d2404ee6594748756f36808575c10",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/plum_wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/plum_wine.png",
+      "sha256": "2493724eefeaa79e2555b2c265e3081fca0cee116b0899b87433eeba8e0dfbf9",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/polaris_sweet_white.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/polaris_sweet_white.png",
+      "sha256": "c63f3cdf3f4e398ba4cd730eb8cec0060a7ca394b2044efbaf7ccc2a3d8c0cb1",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/red_queen.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/red_queen.png",
+      "sha256": "5259db3d549d7268950d41d6b4fa3deeb9dc77253d674971dd67f034330fe4fb",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/riesling_dry_white.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/riesling_dry_white.png",
+      "sha256": "5a12720ec415ae824a5b620a3a13f63281033809e2fbef4caf7044fe1072e7e6",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/rum.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/rum.png",
+      "sha256": "0a50cb2c10dd438c19f17f9134a5db0cdbd5eda0bbfc2730606b2962050fb21d",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sakura_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sakura_incense.png",
+      "sha256": "7d8bd1480f90be405ba8f4fb6ba38af147dfcb53c6bd2dd43d45d2d306268764",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sakura_wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sakura_wine.png",
+      "sha256": "cfd34e2a387b8ab5392570690cfc55e285a1ea1fc985afcf86a99cb6048e72d5",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sauvignon_blanc_dry_white.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white.png",
+      "sha256": "63d9cb8810687e5b44ff20faf7928a41b593f54660c50c0b88ed186bc8d5a19a",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/screwdriver.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/screwdriver.png",
+      "sha256": "83e8e7a6da79480fd60d57dc2da0a7eb80f2e33c0bd9a752bb1747d14b5099ff",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sculk_special.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sculk_special.png",
+      "sha256": "41318a7105da2b797aaea4d6eccaaef5c90b3e9bf1da21cfe6e96bbdc4acf890",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/shaker.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/shaker.png",
+      "sha256": "d122adb5bf056939e3d4e98d713402516f7de0b483d34552540c7873247f5e00",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sherry.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sherry.png",
+      "sha256": "6091319ff069fe12d2e2ff52c2e3fde268fb69f722cd17bf17d9ffba550585ce",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/signature_cocktail.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/signature_cocktail.png",
+      "sha256": "638666b933421fbfefb00e261512164df871a8ba5f79fdc2fae9868f86649206",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/signature_cocktail_tint.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/signature_cocktail_tint.png",
+      "sha256": "5b4b2c2b90671c96ea8bfb43f174d94e54ae7a9b065588813255372d2acfa82e",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/snow_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/snow_incense.png",
+      "sha256": "effd79adf4f89b5fe6655fa482d486dfc166664fcb1f468ff5343ee888698d5f",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/spore_incense.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/spore_incense.png",
+      "sha256": "2bb60064a29ef16f2d20c1204e46d4688526ddf231523aeaeec131095db3a766",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/stepladder.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/stepladder.png",
+      "sha256": "e2228f20606d2edd5b7dd92a70d495926a62bcf69ed5c2f64baa5245a55862be",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sunset_glow.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sunset_glow.png",
+      "sha256": "817a8d4d50488d557b0d0468eba4555a91208b539dbe999e4f045a40a895f4cc",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sweet_berries_bucket.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sweet_berries_bucket.png",
+      "sha256": "44d745fc7a8037648c6e0ecaf3d25cbcecb44373eae20a5d56a19d5d86ed6835",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/sweet_berry_wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/sweet_berry_wine.png",
+      "sha256": "d6fbcad070041ef630abc9dd109bdf56a7871d0cf3fb87b44523acac82b6f128",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/tap.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/tap.png",
+      "sha256": "ea4576ad6d209231a0af74abc0cc639b46dfb5d32d2c24e4dcc5d90b93eb8806",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/vinegar.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/vinegar.png",
+      "sha256": "44775b37fd56e21961bba1f3c5093667e07c412f445a8058f188ac02bc5ac843",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/vodka.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/vodka.png",
+      "sha256": "52aa78e87fab1c3417f9f16857f574e6a2593b8585c73a83971ef4c9bdbd25ff",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/watermelon_juice.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/watermelon_juice.png",
+      "sha256": "03ff9277c60456a312f4536389742fff62e5b3f7bb45299451bc5f263dc9dfd2",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/whiskey.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/whiskey.png",
+      "sha256": "9c087f70bc059d388e8c3303a70a37440c65870358e17f99701d302d10b3cae6",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/white_lady.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/white_lady.png",
+      "sha256": "0132977e2c5f55a1c3bc43560768ef938298e6ab71806f741b4e3e21b56a0c5d",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/wine.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/wine.png",
+      "sha256": "8349edd852b3ea7c51a48716c8a7cd81fa344a48171edcdbfd7042e278e7e021",
+      "runtime_layout_connected": false
+    },
+    {
+      "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/textures/item/yellow_pendant_lamp.png",
+      "texture": "RP/textures/kaleidoscope_tavern_jar/item/yellow_pendant_lamp.png",
+      "sha256": "1d6a49100f34e95c0cf7ce9f128633e801b0831dcd65172c901b90d947f809fa",
+      "runtime_layout_connected": false
+    }
+  ]
+}

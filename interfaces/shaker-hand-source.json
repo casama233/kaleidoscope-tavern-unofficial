@@ -1,0 +1,26 @@
+{
+  "time_unit": "ticks_plus_partial",
+  "source_files": [
+    "docs/source-bytecode/ShakerAnimation.txt",
+    "docs/source-bytecode/ShakerAnimation$ShakerExtensions.txt"
+  ],
+  "wave": "sin(timeTicks * 1.5) * 0.25",
+  "first_person": {
+    "translation_blocks": [
+      "right ? 0.56 : -0.56",
+      "-0.52 - wave * 0.6",
+      -0.72
+    ],
+    "axis_XN_angle_deg": -15
+  },
+  "third_person": {
+    "right_x_radians": "4.31969 - PI * wave",
+    "left_x_radians": "4.31969 + PI * wave",
+    "right_z_radians": -0.15707964,
+    "left_z_radians": 0.15707964
+  },
+  "condition": "source getUseItemRemainingTicks() != 0",
+  "animation_file": "RP/animations/shaker_hand_source.animation.json",
+  "binding": "Template bone names are deliberately not bound to vanilla player.json. Attachable/player-arm adapter must validate coordinate basis and only activate while using shaker.",
+  "engine_accepted": false
+}

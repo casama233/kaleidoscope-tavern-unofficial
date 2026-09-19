@@ -1,0 +1,110 @@
+Compiled from "ThrownMolotovRenderer.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.ThrownMolotovRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<com.github.ysbbbbbb.kaleidoscopetavern.entity.ThrownMolotovEntity> {
+  private final net.minecraft.client.renderer.block.BlockRenderDispatcher renderer;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.client.render.entity.ThrownMolotovRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method net/minecraft/client/renderer/entity/EntityRenderer."<init>":(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+       5: aload_0
+       6: aload_1
+       7: invokevirtual #7                  // Method net/minecraft/client/renderer/entity/EntityRendererProvider$Context.getBlockRenderDispatcher:()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+      10: putfield      #13                 // Field renderer:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+      13: return
+
+  public void render(com.github.ysbbbbbb.kaleidoscopetavern.entity.ThrownMolotovEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload         4
+       2: invokevirtual #19                 // Method com/mojang/blaze3d/vertex/PoseStack.pushPose:()V
+       5: aload         4
+       7: ldc           #25                 // float 0.5f
+       9: ldc           #25                 // float 0.5f
+      11: ldc           #25                 // float 0.5f
+      13: invokevirtual #26                 // Method com/mojang/blaze3d/vertex/PoseStack.scale:(FFF)V
+      16: aload         4
+      18: ldc2_w        #30                 // double -0.5d
+      21: dconst_0
+      22: ldc2_w        #30                 // double -0.5d
+      25: invokevirtual #32                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      28: aload_1
+      29: getfield      #36                 // Field com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.tickCount:I
+      32: i2f
+      33: fload_3
+      34: fadd
+      35: ldc           #42                 // float 20.0f
+      37: fmul
+      38: fstore        7
+      40: aload         4
+      42: ldc2_w        #43                 // double 0.5d
+      45: ldc2_w        #43                 // double 0.5d
+      48: ldc2_w        #43                 // double 0.5d
+      51: invokevirtual #32                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+      54: aload         4
+      56: getstatic     #45                 // Field com/mojang/math/Axis.YP:Lcom/mojang/math/Axis;
+      59: fload         7
+      61: invokeinterface #51,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      66: invokevirtual #55                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      69: aload         4
+      71: getstatic     #59                 // Field com/mojang/math/Axis.XP:Lcom/mojang/math/Axis;
+      74: fload         7
+      76: ldc           #62                 // float 0.7f
+      78: fmul
+      79: invokeinterface #51,  2           // InterfaceMethod com/mojang/math/Axis.rotationDegrees:(F)Lorg/joml/Quaternionf;
+      84: invokevirtual #55                 // Method com/mojang/blaze3d/vertex/PoseStack.mulPose:(Lorg/joml/Quaternionf;)V
+      87: aload         4
+      89: ldc2_w        #30                 // double -0.5d
+      92: ldc2_w        #30                 // double -0.5d
+      95: ldc2_w        #30                 // double -0.5d
+      98: invokevirtual #32                 // Method com/mojang/blaze3d/vertex/PoseStack.translate:(DDD)V
+     101: getstatic     #63                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.MOLOTOV:Lnet/neoforged/neoforge/registries/DeferredBlock;
+     104: invokevirtual #69                 // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+     107: checkcast     #75                 // class net/minecraft/world/level/block/Block
+     110: invokevirtual #77                 // Method net/minecraft/world/level/block/Block.defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+     113: astore        8
+     115: aload_0
+     116: getfield      #13                 // Field renderer:Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+     119: aload         8
+     121: aload         4
+     123: aload         5
+     125: iload         6
+     127: getstatic     #81                 // Field net/minecraft/client/renderer/texture/OverlayTexture.NO_OVERLAY:I
+     130: invokevirtual #86                 // Method net/minecraft/client/renderer/block/BlockRenderDispatcher.renderSingleBlock:(Lnet/minecraft/world/level/block/state/BlockState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V
+     133: aload         4
+     135: invokevirtual #92                 // Method com/mojang/blaze3d/vertex/PoseStack.popPose:()V
+     138: aload_0
+     139: aload_1
+     140: fload_2
+     141: fload_3
+     142: aload         4
+     144: aload         5
+     146: iload         6
+     148: invokespecial #95                 // Method net/minecraft/client/renderer/entity/EntityRenderer.render:(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+     151: return
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(com.github.ysbbbbbb.kaleidoscopetavern.entity.ThrownMolotovEntity);
+    Code:
+       0: getstatic     #99                 // Field net/minecraft/world/inventory/InventoryMenu.BLOCK_ATLAS:Lnet/minecraft/resources/ResourceLocation;
+       3: areturn
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #37                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity
+       5: invokevirtual #105                // Method getTextureLocation:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity;)Lnet/minecraft/resources/ResourceLocation;
+       8: areturn
+
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #37                 // class com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity
+       5: fload_2
+       6: fload_3
+       7: aload         4
+       9: aload         5
+      11: iload         6
+      13: invokevirtual #109                // Method render:(Lcom/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+      16: return
+}

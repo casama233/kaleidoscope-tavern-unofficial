@@ -1,0 +1,1731 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "white_lady",
+  "model_identifier": "kt_assets_a9.white_lady",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "white_lady_element0_north",
+      "type": "cube",
+      "uuid": "435c37a7-4600-5580-9f68-0289005117e0",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        -3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element0_east",
+      "type": "cube",
+      "uuid": "0cf65c51-040b-5650-b23f-424d401fda7f",
+      "from": [
+        -3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        -3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element0_south",
+      "type": "cube",
+      "uuid": "f2e8da61-0e83-58a0-a45c-8c5433304a10",
+      "from": [
+        -3.0,
+        6.05,
+        3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element0_west",
+      "type": "cube",
+      "uuid": "31c2092b-a9c0-5a94-b33c-2aac92c0c2c9",
+      "from": [
+        3.0,
+        6.05,
+        -3.0
+      ],
+      "to": [
+        3.0,
+        8.3,
+        3.0
+      ],
+      "origin": [
+        9,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element1",
+      "type": "cube",
+      "uuid": "a953043c-8214-5f20-bfd5-9a092a773518",
+      "from": [
+        -3,
+        6.05,
+        -3
+      ],
+      "to": [
+        3,
+        6.05,
+        3
+      ],
+      "origin": [
+        3,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            21.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element2",
+      "type": "cube",
+      "uuid": "3d82a5ac-b3a0-5d5e-b6ea-d91d64425914",
+      "from": [
+        -2.5,
+        9.15,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        9.15,
+        2.5
+      ],
+      "origin": [
+        2.5,
+        6.4,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0.0,
+            16.0,
+            5.0,
+            21.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element3",
+      "type": "cube",
+      "uuid": "6ae9dd90-66d2-5ece-be0a-d4ab69a786fc",
+      "from": [
+        -2,
+        0,
+        -2
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "origin": [
+        -1,
+        0,
+        -1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            29.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11.0,
+            28.0,
+            15.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element4",
+      "type": "cube",
+      "uuid": "d31514f6-3a28-51e5-b49e-ff5964506824",
+      "from": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "to": [
+        0.5,
+        6,
+        0.5
+      ],
+      "origin": [
+        -0.5,
+        1,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            12.0,
+            23.0,
+            13.0,
+            28.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            12.0,
+            24.0,
+            13.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            12.0,
+            24.0,
+            13.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element5",
+      "type": "cube",
+      "uuid": "b9a8df9c-68ef-5f67-a2f3-5607e489e5a6",
+      "from": [
+        -2.5,
+        6.4,
+        -2.5
+      ],
+      "to": [
+        2.5,
+        8.4,
+        2.5
+      ],
+      "origin": [
+        -0.5,
+        5.9,
+        -1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            27.0,
+            6.0,
+            32.0,
+            8.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            21.0,
+            0.0,
+            26.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            21.0,
+            0.0,
+            26.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element6",
+      "type": "cube",
+      "uuid": "2c731ef6-f27f-50ee-b21b-556d201d7938",
+      "from": [
+        -3,
+        6.05,
+        -3
+      ],
+      "to": [
+        3,
+        6.05,
+        3
+      ],
+      "origin": [
+        3,
+        3.3,
+        -2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            10.0,
+            22.1,
+            16.0,
+            24.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            10.0,
+            14.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element7",
+      "type": "cube",
+      "uuid": "d071f7ed-5110-5af4-997d-1ac295a0bcf0",
+      "from": [
+        -3.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        -2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            3.0,
+            16.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            11.0,
+            10.0,
+            11.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            12.0,
+            9.75,
+            5.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            12.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element8",
+      "type": "cube",
+      "uuid": "184a5a3b-ee81-5352-99a9-ccf6ce7e8411",
+      "from": [
+        2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        3.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            3.0,
+            16.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element9",
+      "type": "cube",
+      "uuid": "7c45255c-bf89-5d77-83e4-1f449f40d40d",
+      "from": [
+        -2.5,
+        8.2,
+        -3.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        -2.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            15.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10.0,
+            3.0,
+            15.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            5.0,
+            15.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            10.0,
+            5.0,
+            15.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element10",
+      "type": "cube",
+      "uuid": "209df5d8-bbea-5979-924a-efbb4acbccc6",
+      "from": [
+        -2.5,
+        8.2,
+        2.5
+      ],
+      "to": [
+        2.5,
+        8.95,
+        3.5
+      ],
+      "origin": [
+        -2.5,
+        7.2,
+        -1.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            3.0,
+            15.0,
+            3.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            9.0,
+            5.0,
+            9.75,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            15.0,
+            5.0,
+            16.0,
+            5.75
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            10.0,
+            11.0,
+            15.0,
+            12.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            9.0,
+            5.0,
+            10.0,
+            10.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "white_lady_element11",
+      "type": "cube",
+      "uuid": "9ae85a56-acd7-5187-b35b-8e707562a4d1",
+      "from": [
+        -1.5,
+        6.85,
+        3.3215699999999995
+      ],
+      "to": [
+        3.5,
+        11.85,
+        3.3215699999999995
+      ],
+      "origin": [
+        1,
+        9.35,
+        3.3215699999999995
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            17.0,
+            25.0,
+            22.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            22.0,
+            30.0,
+            17.0,
+            25.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element12",
+      "type": "cube",
+      "uuid": "192badd4-1cb4-583f-a8c6-bae31fcc35ca",
+      "from": [
+        -0.5,
+        10.35,
+        -2.1784299999999996
+      ],
+      "to": [
+        4.5,
+        10.35,
+        2.8215699999999995
+      ],
+      "origin": [
+        2,
+        10.35,
+        0.32156999999999947
+      ],
+      "rotation": [
+        -45,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            30.0,
+            30.0,
+            25.0,
+            25.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            30.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": false
+    },
+    {
+      "name": "white_lady_element13",
+      "type": "cube",
+      "uuid": "b146c20d-5b9f-5c9e-a123-30b9a6a20e13",
+      "from": [
+        4,
+        7.85,
+        -0.17842999999999964
+      ],
+      "to": [
+        4,
+        12.85,
+        4.8215699999999995
+      ],
+      "origin": [
+        4,
+        10.35,
+        2.3215699999999995
+      ],
+      "rotation": [
+        0,
+        0,
+        22.5
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            30.0,
+            30.0,
+            25.0,
+            25.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            30.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            25.0,
+            25.0,
+            30.0,
+            25.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": false
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "3b28a7cc-4bd8-5811-afef-f68f92a036a7",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "435c37a7-4600-5580-9f68-0289005117e0",
+        "0cf65c51-040b-5650-b23f-424d401fda7f",
+        "f2e8da61-0e83-58a0-a45c-8c5433304a10",
+        "31c2092b-a9c0-5a94-b33c-2aac92c0c2c9",
+        "a953043c-8214-5f20-bfd5-9a092a773518",
+        "3d82a5ac-b3a0-5d5e-b6ea-d91d64425914",
+        "6ae9dd90-66d2-5ece-be0a-d4ab69a786fc",
+        "d31514f6-3a28-51e5-b49e-ff5964506824",
+        "b9a8df9c-68ef-5f67-a2f3-5607e489e5a6",
+        "2c731ef6-f27f-50ee-b21b-556d201d7938",
+        "d071f7ed-5110-5af4-997d-1ac295a0bcf0",
+        "184a5a3b-ee81-5352-99a9-ccf6ce7e8411",
+        "7c45255c-bf89-5d77-83e4-1f449f40d40d",
+        "209df5d8-bbea-5979-924a-efbb4acbccc6",
+        "9ae85a56-acd7-5187-b35b-8e707562a4d1",
+        "192badd4-1cb4-583f-a8c6-bae31fcc35ca",
+        "b146c20d-5b9f-5c9e-a123-30b9a6a20e13"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "white_lady.png",
+      "id": "0",
+      "uuid": "037dc091-0abe-5718-8c5c-29ea4c92f3f0",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACG0lEQVR4Xr2WPUsDQRCGAzY2NpZiIYrRIOp/UCzExtZOUQsrUX9AwEYsRDuxEaxsBBstg4jfIFhY+NFIikiMYEwUEUFH34UJ42TX7OVyPvCyc7dz987O3l0Si0VAsTBJz5Q0QgzpnEiB8eNZwuhquzF4AbneLlprbQp2kUAXgGOdYwXGqfZOY84xzn/SMbmk7wGwYhizvApgw7m2OjOG6QLvu3wOdE4ZMJSS5lvXaWJd5/OlEZL3CMXgUodZectAnOIj7YRjnoOhzGXk+dzDBL2+LxghlnnMfXGSvihDGFk6J6bNgWulsgAYf9K+EWKZx9zu1tPpekNJONY5VlwdkIX5FFA1PgX4bEHVuApwna85+smXb4TOZSLtiA8Hy7PGGEKs5yNnY3rYGEOI9Xxg8NnllrJcn+JIgOHz3fgv1ex1ox8wYkXAtrJKBegfKds9rBhHYcpF6DyfAvihg7wL4EQuIkwHqioA2Iqw5fz1EFZdAJtV6kAlcI2WzrEiTSt1wCadFxnpn5bbpPMCI7fANmpq/l23td+1DaBmHx+G99E1auZTF2XnE6kPghD377wRJOdnlp4IQjyWzBAk5wPhKqDn/IM6NgtGtgJgOjCVNQpVgOtPCIzrRw+peeXSOg/jvu5VSgwdWee9WDy5Kf0ZQcznYY4OwBzCsbyOVw1zCMdy3hsY72VfjGQnuPU6Zrj1Og6Mq4B/w7UFYfgGvAPFLZtPnDcAAAAASUVORK5CYII=",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/mixology/white_lady.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "scale": [
+          0.625,
+          0.625,
+          0.625
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "original_render_type": "translucent",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "white_lady_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "white_lady_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "white_lady_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "white_lady_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ],
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "bar_counter_right_corner",
+  "model_identifier": "kt_assets_a10.bar_counter_right_corner",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "bar_counter_right_corner_element0",
+      "type": "cube",
+      "uuid": "5ba2ee99-2422-5dfa-a73c-0864dddedf9d",
+      "from": [
+        -8,
+        0,
+        -8
+      ],
+      "to": [
+        8,
+        16,
+        8
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            48.0,
+            0.0,
+            64.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "60342835-bc04-5dc8-a572-0a7f58ff118b",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "5ba2ee99-2422-5dfa-a73c-0864dddedf9d"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "bar_counter.png",
+      "id": "0",
+      "uuid": "a30b3fb4-253a-527e-a1db-70cc0b1825ba",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAw5JREFUaIHdWUFrE0EU/jZsSZymBJJKk7i5Cz0oLYT24qkXFelFeiwJeBd78Cd4a4p3/QPFg3jx0nuh0ICIIDl4yRINNVGJTgMt1EM6k9nNbrI7b5KI3yX7Zua9yXvz9s17b6319bUrEOC6TQr73GF3ux2SAMYYstmcFq/rNuE4JdL+FLhuEzbnnCSEMQYAiGtIYTTqAehC7G/XX23KweLD58MVZ/VAxtbJEYrlLbROjgAAa0+OAQCccxwevsHe3rPQ18JxSqjVDrCz81iOUQ9AB+LQAMDavlu8yi8vyoFv3/8gDv32408wxsA5h+OUJsYEsUbwhP3BaRpGvLau24TdaPfkRH55EV9/9XEjZeO8f+mhASCTTqLR7nloFVEC4qQ1VOXj8icASIUAoNe/8CwQ9Hn/UvtPxcEslQeAxFJqQWuzWRkkDnSMlxAPqhf4lVNpXYP9q0gAkxVUjfO/IRE0qCrsN4g/RswS6vVlCtIAfrcfd+ph73+UrE438zNxOwRh5BagoFY7GKugSIR0MK3bwRYuLYygXnuZdHLE5ZdSCzJPEMJFWlmp7MqxIHS7HVQqu5KHc27MrccZaNycDQBf2r8BAIVrpQQtoNK9/oVvfhAjdAsiXb4g6HiJvV8t4M7mbTlQLG8NHnKrg9/OJw+DqAE+HH8GAFRf/yC5p4lymlJRWisrN0n9gHb7zIrLQ+1BnJ7W5Z5UWTbFerqlrMkSmCpLuyFCeXdNVnpUWZEbIsJT1Hped3NPD+L+0+GEEm9ErAGGcUmM3Xr0Ts5tFGipeWAMCLs31TparNGJAZQexHbZwoMXDcuELOD6GvQrGXaynHMj7kvpQQApY7Iy6eRoLTCrFpVuD0K9sqmygJBiaNow2YOgypqLAQRM9iB0Zc3NACZ7EBRZc/UAFSZ7EHFkxTIAY8zolxwTPQiqrMgGcJwSstmcdj3vh24PQhRhJmQBgB21Hhcps1rP64LagzApyzZZj8eBfg8ibVAWYM/j8/Z+tSCfRWIz0ocA0Hr/0sMX5P73VvMeWk1zo9B/AXEH679ZmVYHAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bar_counter/right_corner.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/bar_counter/right_corner.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {},
+    "animation": null,
+    "tint_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

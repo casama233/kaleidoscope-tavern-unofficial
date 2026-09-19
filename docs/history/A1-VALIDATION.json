@@ -1,0 +1,410 @@
+{
+  "scope": "offline asset integrity / references / numerical conversion checks only",
+  "checks_run": 79,
+  "passed": 79,
+  "failed": 0,
+  "source_files": 18,
+  "source_jar_comparison": "NOT_RUN",
+  "minecraft_engine": "NOT_RUN",
+  "bridge_interactive_load": "NOT_RUN",
+  "blockbench_interactive_load": "NOT_RUN",
+  "cookery_runtime_integration": "NOT_RUN",
+  "preview_renderer": "local CPU projection of decoded exported geometry, not a screenshot",
+  "checks": [
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/item/grape.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/block/brew/pressing_tub.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:LICENSE-ASSETS",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/entity/brew/barrel.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/block/brew/tap.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/block/brew/empty_bottle.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/model/brew/BarrelModel.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count1.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count2.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count3.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/wine/count4.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/pressing_tub.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/textures/block/brew/wine.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/tap/close.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/tap/open.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/empty_bottle.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:src/main/resources/assets/kaleidoscope_tavern/models/block/brew/tilt_pressing_tub.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "source:LICENSE-CODE",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "all_pack_JSON_parse",
+      "passed": true,
+      "detail": "29 JSON documents"
+    },
+    {
+      "name": "texture_byte_identical:item/grape.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_byte_identical:entity/brew/barrel.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_byte_identical:block/brew/wine.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_byte_identical:block/brew/empty_bottle.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_byte_identical:block/brew/tap.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_byte_identical:block/brew/pressing_tub.png",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unique_geometry:pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:pressing_tub",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:pressing_tub_tilt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:pressing_tub_tilt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:pressing_tub_tilt",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:tap_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:tap_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:tap_closed",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:tap_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:tap_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:tap_open",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:wine_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:wine_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:wine_1",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:wine_2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:wine_2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:wine_2",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:wine_3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:wine_3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:wine_3",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:wine_4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:wine_4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:wine_4",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "blocked_not_registered:empty_bottle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unique_geometry:barrel_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:barrel_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:barrel_closed",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "unique_geometry:barrel_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cube_count:barrel_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "coordinate_and_UV_roundtrip:barrel_open",
+      "passed": true,
+      "detail": "Export -> independent decode -> face coordinates and UV endpoints. Not engine validation."
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_pressing_tub_tilt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_tap_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_tap_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_wine_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_wine_2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_wine_3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "texture_reference:kt_assets_a1_wine_4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:tap_open",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:pressing_tub_tilt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:wine_4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:pressing_tub",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:tap_closed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:wine_1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:wine_3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "block_references:wine_2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "entity_references:barrel_closed.entity",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "entity_references:barrel_open.entity",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_runtime_scripts",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_player_override",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "lab_manifest_dependency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "cookery_not_fabricated",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reversed_empty_bottle_explicit",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Tavern A17 | Visual Lab BP",
+    "description": "Static appearance test fixtures; no gameplay scripts. Cookery integration remains pending.",
+    "uuid": "354de909-b82b-5a51-b681-5a10de091611",
+    "version": [
+      0,
+      18,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "a5329118-3031-528c-9f57-73cda8514c53",
+      "version": [
+        0,
+        18,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "2ae8d261-516c-5f15-a97b-44c686222e28",
+      "version": [
+        0,
+        18,
+        0
+      ]
+    }
+  ]
+}

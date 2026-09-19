@@ -1,0 +1,625 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "tilted_rack",
+  "model_identifier": "kt_assets_a6.tilted_rack",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 32,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "tilted_rack_element0",
+      "type": "cube",
+      "uuid": "ef59cef8-5f86-5c0d-82b7-6864d269ade1",
+      "from": [
+        -8,
+        5.63535,
+        3.72279
+      ],
+      "to": [
+        8,
+        8.63535,
+        5.72279
+      ],
+      "origin": [
+        0,
+        8.7455,
+        2.37448
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            16.0,
+            6.0,
+            0.0,
+            3.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0.0,
+            3.0,
+            2.0,
+            6.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            6.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            6.0,
+            2.0,
+            3.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            3.0,
+            16.0,
+            5.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "tilted_rack_element1",
+      "type": "cube",
+      "uuid": "f8403423-ba5f-5771-9cf1-d4f869bc878f",
+      "from": [
+        -8,
+        -0.01,
+        -2.25406
+      ],
+      "to": [
+        8,
+        0.99,
+        2.745939999999999
+      ],
+      "origin": [
+        0,
+        1.39,
+        0.24593999999999916
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            22.0,
+            19.0,
+            27.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            23.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            19.0,
+            22.0,
+            18.0,
+            27.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            27.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0.0,
+            22.0,
+            16.0,
+            27.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "tilted_rack_element2",
+      "type": "cube",
+      "uuid": "c76d7c93-85d9-5585-834a-a9da43169271",
+      "from": [
+        4,
+        0.26401,
+        4.48784
+      ],
+      "to": [
+        6,
+        9.26401,
+        4.48784
+      ],
+      "origin": [
+        0,
+        6.76401,
+        7.98784
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "tilted_rack_element3",
+      "type": "cube",
+      "uuid": "be993636-9941-5998-bc02-b70e2ad90a5b",
+      "from": [
+        -8,
+        -1.02314,
+        3.5196299999999994
+      ],
+      "to": [
+        8,
+        6.97686,
+        3.5196299999999994
+      ],
+      "origin": [
+        5,
+        3.57686,
+        5.519629999999999
+      ],
+      "rotation": [
+        22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            12.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "south": {
+          "uv": [
+            0.0,
+            12.0,
+            16.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "texture": null
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "tilted_rack_element4",
+      "type": "cube",
+      "uuid": "1c40ed1f-31eb-5333-ab85-cc96fdc8b359",
+      "from": [
+        -6,
+        0.26401,
+        4.48784
+      ],
+      "to": [
+        -4,
+        9.26401,
+        4.48784
+      ],
+      "origin": [
+        0,
+        6.76401,
+        7.98784
+      ],
+      "rotation": [
+        -22.5,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            18.0,
+            11.0,
+            20.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            20.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            18.0,
+            11.0,
+            18.0,
+            13.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "9ee02a15-5858-5d83-a2ef-116f37078c4a",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "ef59cef8-5f86-5c0d-82b7-6864d269ade1",
+        "f8403423-ba5f-5771-9cf1-d4f869bc878f",
+        "c76d7c93-85d9-5585-834a-a9da43169271",
+        "be993636-9941-5998-bc02-b70e2ad90a5b",
+        "1c40ed1f-31eb-5333-ab85-cc96fdc8b359"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "tilted_rack.png",
+      "id": "0",
+      "uuid": "611ceb61-c04c-55cf-9f7c-33a16f03bf9e",
+      "width": 32,
+      "height": 32,
+      "uv_width": 32,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA3klEQVR4Xu2WQQoCMQxF5xBd9wy9Sg/jRtC9CxHxHi7EI4l4i8ofCGSKtW0mGIQ+CAMf8vub6TCdpoE1McYUQhAVenO/bmDkvRcVesnneL4kFPduQmsC4gBaPJ6vhMr1KtiFxru83u4JletVaJy53os4gNYEMH5RAC3MA2Bx069gBFh9Bshgs93NJnh+05bdChPgxvvDaX5yU9JKAUp6M3wx2nFN46wOQAa0Uz7uT9qyuxzsZ5gH+F+0LiTinxqM8qtWa/HfOPlw7yao0TnXVeoBJKUSQPMMiAIMBta8AY3vpeltkKZiAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json",
+    "source_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/tilted_rack.json"
+    ],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          45,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -135,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          30,
+          -135,
+          0
+        ],
+        "translation": [
+          1,
+          3,
+          0
+        ],
+        "scale": [
+          0.95,
+          0.95,
+          0.95
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "scale": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "original_render_type": "cutout",
+    "face_map": [],
+    "engine_test": "NOT_RUN"
+  }
+}

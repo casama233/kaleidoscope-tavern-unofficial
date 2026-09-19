@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "item_display_bar_counter",
+  "model_identifier": "kt_assets_a17.item_display_bar_counter",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 64,
+    "height": 32
+  },
+  "elements": [
+    {
+      "name": "item_display_bar_counter_element0",
+      "type": "cube",
+      "uuid": "49f69737-c530-50a4-8f14-196fd011aa28",
+      "from": [
+        -8,
+        0,
+        -8
+      ],
+      "to": [
+        8,
+        16,
+        8
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            48.0,
+            16.0,
+            64.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            29.0,
+            16.0,
+            45.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            45.0,
+            16.0,
+            29.0,
+            32.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            16.0,
+            0.0,
+            32.0,
+            16.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        8,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "075bdc5e-6763-5cb5-81c5-39283db901ea",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "49f69737-c530-50a4-8f14-196fd011aa28"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "bar_counter.png",
+      "id": "0",
+      "uuid": "aa07c7c2-1adc-52c9-97e4-21e8a4c66bbb",
+      "width": 64,
+      "height": 32,
+      "uv_width": 64,
+      "uv_height": 32,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAACdElEQVR4XuWYQUrFMBCG3wXcCPLQhfIWCu7EB+IBXOvWG3gHj+FVBHcuHngVF95BrE71r5O/mTaTxFax8FEmTSYzf5Im7WK9Pm1KWC53/jSL1eqgKYVFSUUC4LIpaQVgRbxAABZlDATA5VPRCfB8f9mA5u3pm5e7KG29r7uAJOS+2Ww6xzHkmdTRbeYgEODqZK+5uTjs8NpwKPeh5IEeeX4Ghp7VIBDgeHerTQqJna22m+vz/Z4tiC31tQ2H3MkYVhurPJWU9j0BdMKp9k8JUEKqz0AAHnErYcv2dMxBcNlURAXQU1wvCbZZMDjkTsbIaVOLngCSDASAbY34vxBgKGEWBA65kzGmahMjKgAnbAnCSwIO5V5rG4zhrc/o9j0BYiOeI8BvPQhxX4EAvK3xFGebBYEzuXvQM6EGnPQQUj8QQJLCUvDacJaDBMBluXhECAR4uD3qzvU457e8Pn4S+RYQpJ3AzuegSAB+6GWRcfHoeanqiws8iJI6mNSL16+Xqr64IJUSAXgWeanqiwssMOq8jelgUq/gnYN3Db1vYu8l2NoXtuRcogIgOQYjXyqAdCxbKPDY8uKt5UvoCWAlz5QIwIcpPlvwYUyfVViAEl9RAVIpFWDosGXZAi8Bq+6YPasAPEpWkDGbBSjxNbsAGAWexmzrJC0BcnzNKoAEgKBhW6M0JkCur18lwFCQY0sg15dbgFrbII8ST+NY0KhvCZDjyyVAzYMQB+UJmrdBruvx1QogieRQchTGNESQPC3Z1kmwACW+WgH4A8dDiQASCKavx44JYNVNsZOXgIUOJvXCvwT9L6L3H+ID/T0goI32JaNYwju8iHqVHnU+5gAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "origin": "uploaded_jar",
+    "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+    "source": "uploaded-jar/assets/kaleidoscope_tavern/models/item/bar_counter.json",
+    "parent_chain": [
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/item/bar_counter.json",
+      "upstream/uploaded-jar/assets/kaleidoscope_tavern/models/block/deco/bar_counter/single.json"
+    ],
+    "derived_atlas": null,
+    "source_transform": {},
+    "note": "Resource conversion; no engine acceptance",
+    "engine_test": "NOT_RUN"
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_van_gogh_self_portrait",
+  "model_identifier": "kt_assets_a14.painting_van_gogh_self_portrait",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_van_gogh_self_portrait_element0",
+      "type": "cube",
+      "uuid": "9f4d77b9-46c5-55f2-826d-284be09d5ee1",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "6fc0b6cc-22a5-5504-8e4e-51171c7252e6",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "9f4d77b9-46c5-55f2-826d-284be09d5ee1"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "van_gogh_self_portrait.png",
+      "id": "0",
+      "uuid": "78a972d5-2b05-5608-b5e1-2c2a7fddcd25",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAitJREFUOI2lkl1IU3EYxn8bq+HOjmxLp4uNWUk3+VFkDAlGIEY3XYQRUQThnRgSRBF000UXhQTdRB/QUJCujLzwtsgZ6FhBSg7UJTvt47TpdM5tJ3VjXawdOwUW9Nz93/d5f++flwf+UzqA4btnywArmQJ1FtOuA1XPSqbAjUdvdIZq42QWcnEjM3kbc6KN6cAii+Fv6mB/s5mLHpHNDSNGPQxGkgAYqtRc3MiMpZ4XoTSL4TkEUUEQIb9RgyAqDCUVCFCBrJdUsAGgzmLidUxBEW0kkh8QRGg/2kYqnVGN9n0Whj7Ncm7dxHYW6m3iDgDg+WSGK5crGwFS6Qzh0DIAgqgAOz2A5dUNLWDK30un16cawqFlvrzsRFdrpiglONw/R3+zme2s9qj6Xx/zoQdMXK1labybgZYChy5NqcMLj4/gKZUBUHLFPwFOtxeT0EDjrTsUpQQ9HY0sjXcDMNBSQA5GMVuNAOTWNrVHBCjkk6yuzON0e4m1enD8rMvBKD0djUgTJcxWg2a75gfHLlzj9O0nxCQ/TrcXgHI2h+u8B4BX36MMy2HNdg3A0eai/dRxtnyjxCQ/cjBKaS1LUUpQY6vh7QGBhuaD/C49VIKUisjMvPtI75aBLd8oADfvTSIHo3RNf8Xe5GBkLc575x4NQA0SUqWQisjsvd8HwOCJAOlWD/anYzia9gMwMhvljNWlAnQAD693lRciSTVd1ZD8Tc/GPuv+ybibfgCFhd3pX0ys9AAAAABJRU5ErkJggg==",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/van_gogh_self_portrait.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/van_gogh_self_portrait.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": null,
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

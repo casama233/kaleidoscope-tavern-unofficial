@@ -1,0 +1,60 @@
+{
+  "emerald": [
+    {
+      "source_element": 0,
+      "source_face": "north",
+      "output_cube": "emerald_element0_north",
+      "output_face": "south",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 0,
+      "source_face": "east",
+      "output_cube": "emerald_element0_east",
+      "output_face": "east",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 0,
+      "source_face": "south",
+      "output_cube": "emerald_element0_south",
+      "output_face": "north",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 0,
+      "source_face": "west",
+      "output_cube": "emerald_element0_west",
+      "output_face": "west",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 2,
+      "source_face": "north",
+      "output_cube": "emerald_element2_north",
+      "output_face": "south",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 2,
+      "source_face": "east",
+      "output_cube": "emerald_element2_east",
+      "output_face": "east",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 2,
+      "source_face": "south",
+      "output_cube": "emerald_element2_south",
+      "output_face": "north",
+      "ordered_position_uv_match": true
+    },
+    {
+      "source_element": 2,
+      "source_face": "west",
+      "output_cube": "emerald_element2_west",
+      "output_face": "west",
+      "ordered_position_uv_match": true
+    }
+  ]
+}

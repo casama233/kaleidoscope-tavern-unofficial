@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "bedrock",
+    "box_uv": false
+  },
+  "name": "painting_master_marisa",
+  "model_identifier": "kt_assets_a14.painting_master_marisa",
+  "visible_box": [
+    2,
+    3,
+    0.5
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "painting_master_marisa_element0",
+      "type": "cube",
+      "uuid": "02299639-ebeb-5b1b-b5e0-4d1b3509c163",
+      "from": [
+        -7,
+        0,
+        -7
+      ],
+      "to": [
+        7,
+        1,
+        7
+      ],
+      "origin": [
+        0,
+        0.5,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "box_uv": false,
+      "autouv": 0,
+      "export": true,
+      "faces": {
+        "north": {
+          "uv": [
+            1.0,
+            14.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            1.0,
+            1.0,
+            2.0,
+            15.0
+          ],
+          "rotation": 270,
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            2.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            14.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 90,
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 180,
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            1.0,
+            1.0,
+            15.0,
+            15.0
+          ],
+          "rotation": 0,
+          "texture": 0
+        }
+      },
+      "shade": true
+    }
+  ],
+  "outliner": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "uuid": "caffa8a8-fd8c-5d1e-9e23-7c69a68e9beb",
+      "export": true,
+      "isOpen": true,
+      "visibility": true,
+      "children": [
+        "02299639-ebeb-5b1b-b5e0-4d1b3509c163"
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "name": "master_marisa.png",
+      "id": "0",
+      "uuid": "f46b319c-506a-5d3c-8a97-4086045b1081",
+      "width": 16,
+      "height": 16,
+      "uv_width": 16,
+      "uv_height": 16,
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAeVJREFUOI2lkkFIFHEUxn+7s4HNsLVuuzEwCNKCscliQR3CbjJLoJ1MQtrFbh2CCCIPgRXeNAohPHgR0u0QaHVQkKQo8LC5EEkrpbTooaFpHXJpZ8dDoh7kPzLsZoEf/OHxf9/7+L7HgwPCB/D0waVtAKvkEAnJ+w4IjlVyuD30xhcQDZsn1IXA/svgeKYTgHRqEhtYXu0AICBU60K7xLSerSmQ1u+Q7HnIeKaTdGrS/Q8AREIy34wKqqYAcDiyWVNk6Op93n/5imlUiIaDAPhFU9UUTKNCcckCYMNy03nqlx+fo2oKa7/KXgHTqADwKfcDAGfdgSPs1cD34gfOnxt2uVUOVE3hQnsMgJ67Y/CbvRrcnojqERDoH5wgN7WF3tDIn+JpAPSGRnJTW/QPTlTtxQ0nbN3rvczxtm7Oyu+Q4grQys2OtwSudXPi5CYDz6gdoblFpblFZW66QDk/g9TV55Kkrj7K+Rnmpgsut0pgccHkyvVDxDSZ2dEs/qPHPG92NEtMk3k8dorFBdMbwSrtbnltfoWC4ZBMJdDPtHuyvhi5wevMZ7T5FWx7w+tA3H80Xk/yYgKApnAQyS8h+SWawkGKSxbJVIJovN4j7AN4dKtte3n1p3td4kj+hZFXed9/EffDDvvupJAXt+2GAAAAAElFTkSuQmCC",
+      "mode": "bitmap",
+      "saved": false,
+      "render_mode": "normal"
+    }
+  ],
+  "tavern_provenance": {
+    "source": "src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/master_marisa.json",
+    "commit": "6b0d619145316492f055e03d70427107cd73efa8",
+    "parent_chain": [
+      "upstream/src/generated/resources/assets/kaleidoscope_tavern/models/block/deco/painting/master_marisa.json",
+      "upstream/src/main/resources/assets/kaleidoscope_tavern/models/block/deco/painting/base.json"
+    ],
+    "face_map": [],
+    "java_display_recorded_not_applied": {
+      "thirdperson_righthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "thirdperson_lefthand": {
+        "rotation": [
+          75,
+          45,
+          0
+        ],
+        "translation": [
+          0,
+          2.5,
+          0
+        ],
+        "scale": [
+          0.375,
+          0.375,
+          0.375
+        ]
+      },
+      "firstperson_righthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [
+          0,
+          -180,
+          0
+        ],
+        "translation": [
+          5,
+          2.25,
+          0
+        ],
+        "scale": [
+          0.4,
+          0.4,
+          0.4
+        ]
+      },
+      "ground": {
+        "translation": [
+          0,
+          3,
+          0
+        ],
+        "scale": [
+          0.25,
+          0.25,
+          0.25
+        ]
+      },
+      "gui": {
+        "rotation": [
+          18,
+          147,
+          0
+        ],
+        "translation": [
+          -3.25,
+          -1.5,
+          0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ]
+      },
+      "head": {
+        "translation": [
+          0,
+          14.25,
+          0.75
+        ]
+      },
+      "fixed": {
+        "translation": [
+          0,
+          0,
+          -6.75
+        ]
+      }
+    },
+    "derived_atlas": null,
+    "animation": null,
+    "engine_test": "NOT_RUN",
+    "additional_sources": []
+  }
+}

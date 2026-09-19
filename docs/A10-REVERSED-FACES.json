@@ -1,0 +1,462 @@
+[
+  {
+    "id": "allium_garden",
+    "face_map": [
+      {
+        "source_element": 3,
+        "source_face": "north",
+        "output_cube": "allium_garden_element3_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "east",
+        "output_cube": "allium_garden_element3_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "south",
+        "output_cube": "allium_garden_element3_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "west",
+        "output_cube": "allium_garden_element3_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "north",
+        "output_cube": "allium_garden_element9_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "east",
+        "output_cube": "allium_garden_element9_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "south",
+        "output_cube": "allium_garden_element9_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 9,
+        "source_face": "west",
+        "output_cube": "allium_garden_element9_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "bloody_mary",
+    "face_map": [
+      {
+        "source_element": 4,
+        "source_face": "north",
+        "output_cube": "bloody_mary_element4_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "east",
+        "output_cube": "bloody_mary_element4_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "south",
+        "output_cube": "bloody_mary_element4_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "west",
+        "output_cube": "bloody_mary_element4_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 4,
+        "source_face": "down",
+        "output_cube": "bloody_mary_element4_down",
+        "output_face": "up",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "brass_heart",
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "brass_heart_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "brass_heart_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "brass_heart_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "brass_heart_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "brass_heart_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "brass_heart_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "brass_heart_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "brass_heart_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "north",
+        "output_cube": "brass_heart_element13_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "east",
+        "output_cube": "brass_heart_element13_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "south",
+        "output_cube": "brass_heart_element13_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "west",
+        "output_cube": "brass_heart_element13_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "up",
+        "output_cube": "brass_heart_element13_up",
+        "output_face": "down",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 13,
+        "source_face": "down",
+        "output_cube": "brass_heart_element13_down",
+        "output_face": "up",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "godfather",
+    "face_map": [
+      {
+        "source_element": 0,
+        "source_face": "north",
+        "output_cube": "godfather_element0_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "east",
+        "output_cube": "godfather_element0_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "south",
+        "output_cube": "godfather_element0_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 0,
+        "source_face": "west",
+        "output_cube": "godfather_element0_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "north",
+        "output_cube": "godfather_element3_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "east",
+        "output_cube": "godfather_element3_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "south",
+        "output_cube": "godfather_element3_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "west",
+        "output_cube": "godfather_element3_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "grasshopper",
+    "face_map": [
+      {
+        "source_element": 3,
+        "source_face": "north",
+        "output_cube": "grasshopper_element3_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "east",
+        "output_cube": "grasshopper_element3_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "south",
+        "output_cube": "grasshopper_element3_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 3,
+        "source_face": "west",
+        "output_cube": "grasshopper_element3_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "nether_special",
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "nether_special_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "nether_special_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "nether_special_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "nether_special_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "nether_special_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "nether_special_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "nether_special_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "nether_special_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "sculk_special",
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "north",
+        "output_cube": "sculk_special_element2_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "sculk_special_element2_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "sculk_special_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "sculk_special_element2_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "north",
+        "output_cube": "sculk_special_element8_north",
+        "output_face": "south",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "east",
+        "output_cube": "sculk_special_element8_east",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "south",
+        "output_cube": "sculk_special_element8_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 8,
+        "source_face": "west",
+        "output_cube": "sculk_special_element8_west",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      }
+    ]
+  },
+  {
+    "id": "holder",
+    "face_map": [
+      {
+        "source_element": 2,
+        "source_face": "east",
+        "output_cube": "holder_element2_east",
+        "output_face": "west",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "south",
+        "output_cube": "holder_element2_south",
+        "output_face": "north",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "west",
+        "output_cube": "holder_element2_west",
+        "output_face": "east",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "up",
+        "output_cube": "holder_element2_up",
+        "output_face": "up",
+        "ordered_position_uv_match": true
+      },
+      {
+        "source_element": 2,
+        "source_face": "down",
+        "output_cube": "holder_element2_down",
+        "output_face": "down",
+        "ordered_position_uv_match": true
+      }
+    ]
+  }
+]

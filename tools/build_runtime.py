@@ -151,4 +151,7 @@ def main():
  (BP/'functions/kt_c1_kit.mcfunction').write_text('\n'.join(['# Development kit: gives items only; no world replacement.']+['give @s '+x for x in [NS+':guidebook 1',NS+':recipe_book 1',NS+':barrel 1',NS+':pressing_tub 1',NS+':tap 1',NS+':grape 32','minecraft:bucket 16',NS+':empty_bottle 16']])+'\n')
  dump(ROOT/'docs/C1-BUILD.json',{'runtime_bp_uuid':bpuid,'runtime_rp_uuid':rpuid,'version':[0,1,0],'cookery_bp_dependency':lock['bp']['uuid'],'cookery_rp_dependency':lock['rp']['uuid'],'cookery_internal_version':lock['bp']['version'],'script_api':'2.7.0','ui_api':'2.0.0','builtin_barrel_recipes':sum(r['kind']=='barrel'for r in recipes),'builtin_pressing_recipes':sum(r['kind']=='pressing'for r in recipes),'native_crafting_recipes':6,'quality_drink_items':len(drink_bases)*6,'planned_recipe_exclusions':planned,'art_copied_without_geometry_repaint':True,'engine_acceptance':'NOT_RUN','is_production_release':False})
  print('C1 build:',len(recipes),'machine recipes,',len(drink_bases)*6,'drink quality items.')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ main()
+ import build_c2
+ build_c2.main()

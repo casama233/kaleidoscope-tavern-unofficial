@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: new immutable source records all have original SHA256
+ok 1 - new immutable source records all have original SHA256
+  ---
+  duration_ms: 3.297852
+  type: 'test'
+  ...
+# Subtest: normal, cold and nether soils select three vines; green is not a planted species
+ok 2 - normal, cold and nether soils select three vines; green is not a planted species
+  ---
+  duration_ms: 0.26352
+  type: 'test'
+  ...
+# Subtest: trellis placement axes source truth table exhaustively covers24 combinations
+ok 3 - trellis placement axes source truth table exhaustively covers24 combinations
+  ---
+  duration_ms: 0.542221
+  type: 'test'
+  ...
+# Subtest: disconnected basic frames preserve their placement axes
+ok 4 - disconnected basic frames preserve their placement axes
+  ---
+  duration_ms: 0.202735
+  type: 'test'
+  ...
+# Subtest: cross and six-way frames degrade according to surviving neighbor axes
+ok 5 - cross and six-way frames degrade according to surviving neighbor axes
+  ---
+  duration_ms: 0.47644
+  type: 'test'
+  ...
+# Subtest: climate rule supports exact source thresholds but missing temperatures use0.25
+ok 6 - climate rule supports exact source thresholds but missing temperatures use0.25
+  ---
+  duration_ms: 0.156838
+  type: 'test'
+  ...
+# Subtest: fruit increment1 or2 clamps at5 and rejects invalid RNG
+ok 7 - fruit increment1 or2 clamps at5 and rejects invalid RNG
+  ---
+  duration_ms: 0.505569
+  type: 'test'
+  ...
+# Subtest: immature fruit has no loot and does not draw random values
+ok 8 - immature fruit has no loot and does not draw random values
+  ---
+  duration_ms: 0.81702
+  type: 'test'
+  ...
+# Subtest: shears return3 primary plus1 or2 green with strict30% threshold
+ok 9 - shears return3 primary plus1 or2 green with strict30% threshold
+  ---
+  duration_ms: 0.509665
+  type: 'test'
+  ...
+# Subtest: normal ripe break uses source1–2 primary and at most1 green
+ok 10 - normal ripe break uses source1–2 primary and at most1 green
+  ---
+  duration_ms: 0.392647
+  type: 'test'
+  ...
+# Subtest: 24 actual bottle families use93 exact count arrangements, three families cap3
+ok 11 - 24 actual bottle families use93 exact count arrangements, three families cap3
+  ---
+  duration_ms: 0.307251
+  type: 'test'
+  ...
+# Subtest: bottle IDs strictly validate family and all six quality values
+ok 12 - bottle IDs strictly validate family and all six quality values
+  ---
+  duration_ms: 1.35527
+  type: 'test'
+  ...
+# Subtest: mixed qualities are retained in order and inputs never mutated
+ok 13 - mixed qualities are retained in order and inputs never mutated
+  ---
+  duration_ms: 0.354028
+  type: 'test'
+  ...
+# Subtest: taking all mixed-quality bottles does not average, reorder or relabel
+ok 14 - taking all mixed-quality bottles does not average, reorder or relabel
+  ---
+  duration_ms: 0.257757
+  type: 'test'
+  ...
+# Subtest: different drinks and fourth bottle for3-cap families reject before state changes
+ok 15 - different drinks and fourth bottle for3-cap families reject before state changes
+  ---
+  duration_ms: 0.140365
+  type: 'test'
+  ...
+# Subtest: all families return exactly placed quality inventory across exhaustive quality sequences
+ok 16 - all families return exactly placed quality inventory across exhaustive quality sequences
+  ---
+  duration_ms: 26.928138
+  type: 'test'
+  ...
+# Subtest: bottle storage is persistent by dimension with revision conflict guard
+ok 17 - bottle storage is persistent by dimension with revision conflict guard
+  ---
+  duration_ms: 0.658201
+  type: 'test'
+  ...
+# Subtest: malformed stored qualities or future schema cannot produce substituted output
+ok 18 - malformed stored qualities or future schema cannot produce substituted output
+  ---
+  duration_ms: 0.243834
+  type: 'test'
+  ...
+# Subtest: generated effect data is exactly the24 uploaded JAR JSON rows
+ok 19 - generated effect data is exactly the24 uploaded JAR JSON rows
+  ---
+  duration_ms: 1.487804
+  type: 'test'
+  ...
+# Subtest: Q1 indexes first source row and nausea30seconds becomes600ticks
+ok 20 - Q1 indexes first source row and nausea30seconds becomes600ticks
+  ---
+  duration_ms: 0.331187
+  type: 'test'
+  ...
+# Subtest: Q3/Q6 regeneration uses source seconds and zero-based amplifier
+ok 21 - Q3/Q6 regeneration uses source seconds and zero-based amplifier
+  ---
+  duration_ms: 0.166785
+  type: 'test'
+  ...
+# Subtest: probability rolls are independent and strictly below source probability
+ok 22 - probability rolls are independent and strictly below source probability
+  ---
+  duration_ms: 0.418647
+  type: 'test'
+  ...
+# Subtest: instant health uses one tick; source instant duration is not reused as a timed buff
+ok 23 - instant health uses one tick; source instant duration is not reused as a timed buff
+  ---
+  duration_ms: 0.320995
+  type: 'test'
+  ...
+# Subtest: custom effects have no fabricated vanilla mapping and original rows remain unchanged
+ok 24 - custom effects have no fabricated vanilla mapping and original rows remain unchanged
+  ---
+  duration_ms: 0.362463
+  type: 'test'
+  ...
+# Subtest: every existing quality item has consumption-only custom hook and native single remainder
+ok 25 - every existing quality item has consumption-only custom hook and native single remainder
+  ---
+  duration_ms: 3.11391
+  type: 'test'
+  ...
+# Subtest: eight crafting recipes include exact source trellis and clearly separate port starter
+ok 26 - eight crafting recipes include exact source trellis and clearly separate port starter
+  ---
+  duration_ms: 0.274661
+  type: 'test'
+  ...
+# Subtest: independent guides explicitly report climate/worldgen/custom-effect limitations and show24 effect pages
+ok 27 - independent guides explicitly report climate/worldgen/custom-effect limitations and show24 effect pages
+  ---
+  duration_ms: 0.158221
+  type: 'test'
+  ...
+# Subtest: stable support whitelist rejects uncertain partial blocks, third-party block tag opts in
+ok 28 - stable support whitelist rejects uncertain partial blocks, third-party block tag opts in
+  ---
+  duration_ms: 0.834112
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 131.870893

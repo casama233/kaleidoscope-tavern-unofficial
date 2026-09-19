@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static validation of C1 links, manifests and source preservation. Not an engine validator."""
+"""Static validation of C2 links, manifests and source preservation. Not an engine validator."""
 from pathlib import Path
 import json,re,hashlib,subprocess,shutil,sys
 ROOT=Path(__file__).resolve().parents[1];BP=ROOT/'runtime/BP';RP=ROOT/'runtime/RP';A=ROOT/'art'
@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C1-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C2-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,1,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,1,0])
+  check(name+'_version',m['header']['version']==[0,2,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,2,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -55,11 +55,25 @@ def main():
  for ident,x in item_defs.items():
   icon=x['components'].get('minecraft:icon');check('item_icon_binding:'+ident,isinstance(icon,str)and icon in icons)
   food=x['components'].get('minecraft:food')
-  if food:check('food_duration_and_remainder:'+ident,'minecraft:use_modifiers'in x['components'] and food.get('using_converts_to') in item_defs)
+  if food:check('food_duration_and_remainder:'+ident,'minecraft:use_modifiers'in x['components'] and ('using_converts_to'not in food or food['using_converts_to'] in item_defs))
  for ident,x in block_defs.items():
   c=x['components'];g=c['minecraft:geometry'];check('block_geometry:'+ident,(g if isinstance(g,str)else g['identifier'])in geom)
   for slot,material in c['minecraft:material_instances'].items():check('block_texture:'+ident+':'+slot,material.get('texture')in terrain)
-  check('block_fixed_for_C1:'+ident,c['minecraft:movable']=={'movement_type':'immovable'})
+  check('block_protected_C2:'+ident,c['minecraft:movable']=={'movement_type':'immovable'})
+ for ident,x in block_defs.items():
+  for index,perm in enumerate(x.get('permutations',[])):
+   comps=perm['components']
+   g=comps.get('minecraft:geometry')
+   if g:check('permutation_geometry:'+ident+':'+str(index),(g if isinstance(g,str)else g['identifier']) in geom)
+   for slot,m in comps.get('minecraft:material_instances',{}).items():check('permutation_texture:'+ident+':'+str(index)+':'+slot,m['texture'] in terrain)
+   for state in re.findall(r"q\.block_state\('([^']+)'\)",perm['condition']):check('declared_state:'+ident+':'+state,state in x['description'].get('states',{}))
+  if any(k in x['components'] for k in ['kaleidoscope_tavern:trellis','kaleidoscope_tavern:grape_crop']):
+   check('plant_tick_contract:'+ident,x['components'].get('minecraft:tick',{}).get('interval_range')==[40,40] and 'minecraft:random_ticking'not in x['components'])
+ for p in(BP/'recipes').glob('*.json'):
+  v=next(v for k,v in load(p).items()if k.startswith('minecraft:recipe_'))
+  result=v['result']['item'];check('crafting_output_exists:'+p.stem,result in item_defs or result in block_defs)
+ check('24_display_blocks',sum(x.startswith('kaleidoscope_tavern:bottle_')for x in block_defs)==24)
+ check('7_cultivation_blocks',sum(x.endswith((':trellis','vine_trellis','_crop'))for x in block_defs)==7)
  for ident in entity_defs:
   check('entity_client:'+ident,ident in clients)
   if ident in clients:
@@ -85,6 +99,8 @@ def main():
    run=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
    if run.returncode:broken.append({'file':str(p.relative_to(ROOT)),'stderr':run.stderr})
  check('JS_syntax',not broken,broken)
+ check('no_pre_release_solid_or_canPlace_api',not any(re.search(r'\.isSolid\b|\.canPlace\(',p.read_text()) for p in scripts if p.name!='bottle-support.js'))
+ for x in load(ROOT/'data/upstream/c2/source.lock.json')['records']:check('C2_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/recipe-source.lock.json')['records']:check('recipe_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for f in ['protocol.js','util.js','tavern-extension-client.js']:
   check('public_sdk_demo_copy:'+f,(ROOT/'sdk'/f).read_bytes()==(ROOT/'examples/Tavern-Extension-Demo/BP/scripts/sdk'/f).read_bytes())

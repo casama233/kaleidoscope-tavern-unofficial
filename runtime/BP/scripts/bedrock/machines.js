@@ -126,10 +126,11 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
 }
 export function installMachineEvents(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(ev=>{
+  if(ev.cancel)return;
   if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;if(ev.isFirstEvent===false)return;
   const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId,player=ev.player;const item=held(player);const expected={id:item?.typeId??'',count:item?.amount??0,slot:player.selectedSlotIndex};
   system.run(()=>guarded(player,()=>{
-   const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
+   check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
    if([NS+':guidebook',NS+':recipe_book'].includes(expected.id)){openBook(player,expected.id.endsWith(':recipe_book'));return;}
    if(type===TAP){const c=findTapCore(b);check(c,'NO_NEARBY_BARREL');operate(player,c,'extract',expected);return;}
    const core=requireCore(b),s=store.load(keyFor(core));check(s,'MISSING_STATE');
@@ -137,7 +138,7 @@ export function installMachineEvents(openBook){
    return operate(player,b,action,expected);
   }));
  });
- world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return dismantle(ev.player,b);}));});
+ world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(ev.cancel)return;if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{check(ev.player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return dismantle(ev.player,b);}));});
  world.beforeEvents.explosion.subscribe(ev=>ev.setImpactedBlocks(ev.getImpactedBlocks().filter(b=>!OWN_BLOCKS.has(b.typeId))));
  if(world.afterEvents.entityLoad)world.afterEvents.entityLoad.subscribe(({entity})=>{
   if(!RUNTIME_VISUALS.includes(entity.typeId))return;

@@ -4,7 +4,7 @@
 
 ## 一、分包方式
 
-附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,1,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
+附屬是單獨BP。依賴酒館BP header UUID `f54f37f9-485a-55bf-8f89-6558aca988c5`、version `[0,2,0]`，以及`@minecraft/server 2.7.0`。有自己的新貼圖／模型才另附RP；單純添加配方／指南不需要新RP。
 
 完整可用範例在 `examples/Tavern-Extension-Demo/BP`，可獨立匯入。自己的附屬必須產生新的BP/module UUID；不要保留示範UUID。
 
@@ -76,7 +76,7 @@ const registration = registerTavernExtension(system, {
 
 `kaleidoscope_tavern:grape_juice`、`ice_grape_juice`、`gold_grape_juice`、`green_grape_juice`、`sweet_berries_juice`、`glow_berries_juice`，以及`minecraft:water`。所有自訂果汁ID都帶前面的完整namespace。填入不存在的液體會拒絕整包，不是假裝建立流體。
 
-六種果汁有液面helper；水面渲染目前未接。移除附屬前先清空依賴其特殊壓榨配方的機器，尤其非整桶液體；C1無管理員清空／遷移UI，保留存檔備份。
+六種果汁有液面helper；水面渲染目前未接。移除附屬前先清空依賴其特殊壓榨配方的機器，尤其非整桶液體；目前無管理員清空／遷移UI，保留存檔備份。
 
 ### 指南頁
 
@@ -121,3 +121,12 @@ const registration = registerTavernExtension(system, {
 ## 五、測試與相容性聲明
 
 示範BP、Cookery API模組、酒館host已在Node模擬事件總線中聯測，包含新增配方真正走完酒桶adapter。**未在Minecraft引擎、Realms、BDS或手機執行。** 實機驗收前不要把API1視為永久凍結的發布承諾；若將來有不相容變更，使用新API版本及能力宣告，不默默改現有schema。
+
+
+## C2 相容補充
+
+API仍為1；原有配方、指南、能力握手、ACK和分包格式未改。Demo只把酒館套件依賴提高到[0,2,0]，不新增需依賴廚房指南的程序。
+
+C2內建種植、酒效及多瓶展示不是任意附屬自動獲得的隱藏API；第三方新物品須自備相應美術／效果。酒館內建24族的不同品質可以共同擺放，逐瓶保存ID。
+
+擺瓶支撐有一項靜態opt-in：自訂全頂面方塊可提供`kaleidoscope_tavern:bottle_support`方塊標籤；主機用公開`getTags()`讀取。這不是對所有Cookery桌子自動注入標籤，也不執行未知外包腳本。請自測表面高度，勿給零碰撞植物或液體貼此標籤。

@@ -1,0 +1,48 @@
+{
+  "test_environment": "Node.js with deterministic local @minecraft/server and server-ui test doubles. Not Minecraft.",
+  "suites": [
+    {
+      "suite": "core",
+      "exit_code": 0,
+      "tests": 38,
+      "pass": 38,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "runtime",
+      "exit_code": 0,
+      "tests": 31,
+      "pass": 30,
+      "fail": 0,
+      "skipped": 1
+    },
+    {
+      "suite": "c2-core",
+      "exit_code": 0,
+      "tests": 28,
+      "pass": 28,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "c2-runtime",
+      "exit_code": 0,
+      "tests": 47,
+      "pass": 47,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "typescript": {
+    "status": "PASS",
+    "exit_code": 0,
+    "scope": "Public SDK declaration and positive/negative examples, not Minecraft API types"
+  },
+  "real_Cookery_API_modules_loaded": false,
+  "Cookery_test_scope": "Only recipe and guide API modules on the mocked event bus, not whole Cookery/game startup.",
+  "engine_acceptance": "NOT_RUN",
+  "combined_pass": 143,
+  "combined_fail": 0,
+  "scenario_note": "Inventory and exhaustive family/quality cases are property tests counted once, not hundreds of separate engine tests. C2 end-to-end test connects actual adapters but explicitly does not emulate native item consumption."
+}

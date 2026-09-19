@@ -1,13 +1,13 @@
 {
-  "name": "kaleidoscope-tavern-bedrock-c1",
-  "version": "0.1.0",
+  "name": "kaleidoscope-tavern-bedrock-c2",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "python tools/build_runtime.py",
-    "test": "python tools/test_c1.py",
+    "test": "python tools/test_c2.py",
     "check": "python tools/validate_runtime.py",
-    "package": "python tools/package_c1.py",
+    "package": "python tools/package_c2.py",
     "audit": "python tools/audit_rebuild.py"
   },
   "devDependencies": {}

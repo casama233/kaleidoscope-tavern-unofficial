@@ -1,15 +1,14 @@
 {
-  "name": "tavern-assets-a17",
-  "version": "0.18.0",
+  "name": "kaleidoscope-tavern-bedrock-c1",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Offline asset interfaces; not a Minecraft runtime script pack",
   "scripts": {
-    "test": "node --test tests/interfaces.test.mjs tests/visual-state.test.mjs",
-    "example": "node sdk/example.mjs",
-    "typecheck": "tsc -p tests/tsconfig.json"
+    "build": "python tools/build_runtime.py",
+    "test": "python tools/test_c1.py",
+    "check": "python tools/validate_runtime.py",
+    "package": "python tools/package_c1.py",
+    "audit": "python tools/audit_rebuild.py"
   },
-  "engines": {
-    "node": ">=18"
-  }
+  "devDependencies": {}
 }

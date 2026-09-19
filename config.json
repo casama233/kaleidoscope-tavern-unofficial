@@ -1,21 +1,14 @@
 {
-  "name": "Tavern A17 | Complete Source Art & Code Handoff",
-  "namespace": "kt_assets_a17",
+  "type": "minecraftBedrock",
+  "name": "Kaleidoscope Tavern C1",
+  "namespace": "kaleidoscope_tavern",
   "targetVersion": "1.26.50",
   "packs": {
-    "behaviorPack": "./VisualLab_BP",
-    "resourcePack": "./RP"
+    "behaviorPack": "./runtime/BP",
+    "resourcePack": "./runtime/RP"
   },
   "experimentalGameplay": {},
-  "description": "JAR art inventory, complete static families and visual rigs; gameplay and engine acceptance pending.",
   "authors": [
-    "Unofficial Tavern asset conversion contributors"
-  ],
-  "worlds": [],
-  "packDefinitions": {},
-  "bdsProject": false,
-  "bridge": {
-    "v1CompatMode": false
-  },
-  "type": "minecraftBedrock"
+    "Unofficial Tavern port contributors"
+  ]
 }

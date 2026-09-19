@@ -1,115 +1,96 @@
-# Tavern A17 — 完整原版來源、美術家族與程式接入基線
+# 森羅物語：酒館 C1 — 獨立指南、附屬 API 與第一批功能程式
 
-**原版 JAR 的來源盤點與主要靜態家族已收齊；A17 可以作為下一階段程式接入的資源基線。它不是已通過遊戲驗收的完整移植，更不是可玩的 Tavern。**
+**這一版已進入功能實作，不再只是美術展示包；但仍是未經 Minecraft 引擎驗收的開發版，不能當成完整可玩／正式發布版。**
 
-本批由使用者上傳的 NeoForge／MC1.21.1 版1.2.0取得原件，不再逐個顏色取件。所有1295份資源都有來源雜湊與處理記錄。圖片305張、模型JSON790份含父模板與旋轉引用，**不等於790件獨立物品**。
+A17 的原圖、模型與動態測試層原樣保存在 `art/`。C1 將它們接入新的正式命名空間 `kaleidoscope_tavern`，沒有批量改名或破壞舊 VisualLab。不要將歷史 A1–A17 文件中的「前置未取得」當作 C1 狀態：**本次已讀取使用者提供的 Cookery v1.0.6 並綁定真實 UUID／內部版本。**
 
-## 一次完成的靜態範圍
+## 本輪完成範圍
 
-| 家族 | 現在的範圍 |
-|---|---|
-| 彩燈 | 17／17款；新增最後9款，各自原模型和原图，不是重染 |
-| 高腳凳 | 16／16色；保留已有完整底座／座墊／靠背／扶手 |
-| 告示牌 | 14／14類：素面＋13種花草；新增完整組合及13款上板分件 |
-| 黑板 | 小、大兩種原作尺寸；Java骨架參數依來源重建 |
-| 酒瓶／雞尾酒／畫 | 97個排列、14種雞尾酒、14幅畫，沿用已核對資源 |
-| 補漏的瓶類 | 水瓶、藥水瓶、蜂蜜瓶、經驗瓶、龍息瓶、燃燒瓶六種展示模型 |
-| 物品側美術 | 160個item來源：76個幾何、82個原作圖示、2個抽象模板；158個具體物品皆有對應 |
-
-本輪新增120種外觀：9彩燈＋14完整告示牌＋13花草上板＋2黑板＋6瓶類＋76物品側模型。
-累積**491種外觀、359份外觀幾何、另4份動態測試幾何，合计363份主RP幾何；493份.bbmodel**。
-原版305張PNG全量獨立存放，舊155份Git來源原圖另行保留以便回歸，不把兩組相加當成460張不同原作美術。
-
-## 動態美術已交付到哪一層
-
-| 項目 | 已有資源／測試入口 | 程式階段仍須完成 |
+| 系統 | 已實作 | 邊界 |
 |---|---|---|
-| 動畫貼圖 | 全10個原作.mcmeta序列、原長條與拆幀；重複幀／速度／插值設定保留 | 動畫物品GUI仍以首幀為基礎，需專用渲染適配；引擎動畫驗收 |
-| 粒子 | 16個Bedrock候選、19張原作粒子PNG、原作參數／運動步進 | 大型粒子繼承原版基類物理、發射頻率、落地水滴子粒子及Molang實測 |
-| 音效 | 6份原OGG、4個sound event；原字幕鍵也記錄 | 在相應投料、取物、搖杯、效果事件觸發 |
-| 液位 | 酒桶／壓榨桶×6果汁＝12個獨立液面測試實體；容量0時隱藏，0–满液位可調 | 附著正確機器座標，隨存檔／容量／拆除更新；倒酒液柱仍需渲染程式 |
-| 特調顏色 | 玻璃與液體分離，26個指定染色面；獨立RGB與6幀UV動畫候選 | 配方決定顏色、狀態同步及引擎透明排序 |
-| 搖杯姿態 | PUT骨架動畫、原第一／第三人稱曲線、純數學接口 | 使用時激活，實際手部／手臂／attachable綁定；沒有player.json覆寫 |
-| 黑板文字／櫃內物品 | 原文字區域、角度、槽位錨點及物品模型對應 | 字體渲染、換行、雙面、UI與背包內容聯動，不是靜態模型能獨立完成 |
+| 酒館指南／配方書 | 兩個独立物品、原生表單、搜尋、分頁、語言選擇、書籤、附屬列表、診斷；配方頁由當前註冊表產生 | 沒有修改 Cookery 的書、已學配方、書籤或 UI 檔；基本合成由工作台顯示，書內配方清單是機器配方 |
+| 附屬 API v1 | Script Event 握手、分塊、完整驗證後套用、ACK、逾時／重送、同來源替換、內建優先、獨立指南頁 | 支援酒桶及壓榨配方；不虛構調酒、自訂液體、效果腳本或家具 API |
+| 真實 Cookery 前置 | BP／RP header UUID、內部版本 `[1,0,6]`、來源 SHA-256、只讀核對 | 真實遊戲相容性尚未驗收；Cookery 本體不隨本包重散布 |
+| 酒桶 | 真正 3×3×3 代理方塊、原作桶身視覺、開關蓋、四邏輯槽、每槽16、4000mB、23種釀造配方、失敗醋、97tick檢查、品質1–6 | 原生四格容器UI未使用；先採手持互動。不能在發酵中開蓋 |
+| 壓榨桶 | 六種來源配方、64件原料上限、玩家落下0.5格觸發、125mB／次、1000mB容量 | 其他生物不觸發，精細碰撞仍未還原 |
+| 酒嘴 | 找相鄰酒桶，手持空酒瓶接一瓶；清空成品後開桶 | 尚非原作「下方擺放容器自動接酒」 |
+| 品質物品 | 23酒類＋醋，各六個品質ID，共144定義；同品質可堆疊，Q1不可飲、Q2–6以原生food返空瓶 | 特殊酒效、品質對應buff未完成；返瓶元件配置已查驗，實機消耗行為未測 |
+| 保存／物品交換 | 世界DP按維度座標保存；revision檢查、同步鎖；預檢空間、只扣一個容器、異常嘗試回退 | 不聲稱引擎崩潰級原子交易。帶自訂名稱／附魔／附加資料的原料拒收，不清空資料 |
+| 動態美術接線 | 桶蓋、六果汁液面 helper、amount屬性、重複／孤兒helper清理 | 水量可存，水面專用渲染未接；其他家具／粒子仍保留在藝術基線 |
 
-**兩項明確差異：** 原Java滴水／熔岩粒子的原生貼圖不在此mod JAR內，使用已核對的Bedrock原生atlas位置替代；這不是跨版本逐像素等價。若原版Minecraft基類未包含在JAR，大型粒子保留可輸入參數與檢查預設，不將預設值標成完全還原。
+原作資料：23個已啟用酒桶配方＋6個壓榨配方＝**29個機器配方**。第24個原始酒桶配方是燃燒瓶，因投擲／點火尚未實作，本版不啟用；西瓜汁特殊酒嘴行為亦未做。醋是fallback，不是額外登記配方。
 
-4份Java Ponder場景／結構原件保留供Guidebook適配，**沒有冒充可直接用的.mcstructure或Bedrock指南UI**。4份原語言en_US/zh_CN/ja_JP/ru_RU的值已保留；完整人工繁中翻譯不在此完成聲明內。
+葡萄目前是測試原料物品，**未加入葡萄藤生長、世界生成或未核實的營養值**。生存流程可先由原版甜莓／螢光莓及其果汁配方開始；不能宣稱已完成從種葡萄開始的完整閉環。
 
-## 使用
+## 交付檔案
 
-- `Tavern-Assets-A17.zip`：完整累積專案、原件、模型、貼圖、測試、接口與離線檢視器。
-- `Tavern-A17-VisualLab.mcaddon`：外觀實驗室BP/RP，不含釀造／戰鬥／背包腳本。
-- `Tavern-A17-PoseLab-OPTIONAL.mcpack`：可選姿態候選，不預設加入主包。
+- `Tavern-Bedrock-C1.zip`：完整專案，含原樣 A17 美術基線、C1程式、資料、SDK、測試及文件。
+- `Tavern-C1-Gameplay-DEV.mcaddon`：酒館C1 BP＋RP；**不含Cookery**。
+- `Tavern-C1-Extension-Demo-OPTIONAL.mcpack`：獨立附屬BP，測試一頁指南和一種加速測試配方。不是原版平衡內容，不自動啟用。
 
-A17包含A1–A16；**不要同時啟用舊VisualLab**。保持舊UUID及ID，新內容使用`kt_assets_a17`，manifest版本`[0,18,0]`。
-沿用既定`1.26.50`格式與26.51驗收目標，不把它當成本輪查證的最新版本。Minecraft／bridge／Blockbench實際載入均尚未執行。
+## 匯入與測試世界
 
-解壓後查看`previews/index.html`：491種外觀可搜尋、旋轉、逐幀。`previews/original-art-gallery.html`列出全部305張原圖。這些畫面是離線模型投影，不是Minecraft截圖。
-bridge根目錄為`config.json`所在處，BP為`VisualLab_BP`，RP為`RP`。編輯模型在`editor/`；PoseLab目前143份幾何／185種外觀，**僅來源數值候選，手持基準仍須遊戲檢查**。
+先備份。建立新的測試世界，啟用你提供的 **Cookery v1.0.6 BP／RP**，再啟用 **Tavern C1 BP／RP**；資源順序讓酒館位於 Cookery 上方。需要測試附屬才額外啟用 Demo BP。
 
-## 外觀實驗室指令（尚未實機驗收）
+**不要在同一世界再開 A17 VisualLab 或 PoseLab。** C1 RP已有原作美術資料，但其正式BP不是歷史展示BP；舊 `kt_assets_a*` 的測試function也不屬於C1。
 
-請使用新的測試世界，空出背包及周圍空間。以下兩個function只give物品：
+程式套件版本 `[0,1,0]` 使用自己的UUID，不是A17 `[0,18,0]` 的直接存檔升級。沿用工程1.26.50格式／26.51驗收目標；腳本依賴選擇與實際Cookery相同的 `@minecraft/server 2.7.0`、`@minecraft/server-ui 2.0.0`。這不是宣稱它們是當前最新版本，或所有引擎元件已驗收。
 
-```mcfunction
-/function kt_a17/all_string_lights
-/function kt_a17/bottle_display
-```
+本包不含 `player.json`、全域 JSON UI 覆蓋或beta API依賴，也不要求開啟實驗設定；不把這些靜態條件當成 Achievement／Realm 兼容證明。
 
-以下function會在身旁**生成整排展示實體**，不是只give，不會自動清空建築：
+## 第一輪實際操作
 
-```mcfunction
-/function kt_a17/decorated_board
-/function kt_a17/chalkboard
-```
-
-可只生成一個模型及旋轉它：
+開啟作弊僅供開發世界取得測試套件：
 
 ```mcfunction
-/summon kt_assets_a17:sandwich_board_allium_assembled ~ ~ ~
-/event entity @e[type=kt_assets_a17:sandwich_board_allium_assembled,r=5,c=1] kt_art:rotation_4
+/function kt_c1_kit
 ```
 
-液位與特調測試實體是獨立渲染層，需要和容器組合，不能據此宣稱機器功能已完成：
+得到兩本書、酒桶、壓榨桶、酒嘴、32葡萄、16空桶、16空酒瓶。指令只給物品，不清空或建造世界。先預留背包與3×3×3空間。
 
-```mcfunction
-/summon kt_assets_a17:rig_liquid_pressing_tub_grape ~ ~ ~
-/event entity @e[type=kt_assets_a17:rig_liquid_pressing_tub_grape,r=5,c=1] kt_art:level_4
-/summon kt_assets_a17:rig_signature_color ~2 ~ ~
-/event entity @e[type=kt_assets_a17:rig_signature_color,r=5,c=1] kt_art:color_red
-```
+1. 手持酒館指南使用，核對首頁、搜尋、書籤；配方書直接進入機器配方清單。
+2. 放置壓榨桶，手持32葡萄點擊投料；跳踩八次，累積1000mB。
+3. 手持整疊16空桶取汁，應只扣一個，留下15空桶＋一個葡萄汁桶。
+4. 放置酒桶，使用葡萄汁桶灌入；重複壓榨與搬運，共4桶／4000mB。
+5. 普通Wine不添加原料。潛行＋空手點酒桶關蓋；正常載入時每97tick檢查。
+6. 下一次檢查開始品質1，之後按當前品質×2400tick升級，最高6；區塊卸載／離線不補算。
+7. 將酒嘴放在任一酒桶部件旁，手持空酒瓶點擊接酒。品質1未熟不可飲；至少品質2才測試飲用和返瓶。
+8. 先取空原料、液體和成品，再拆除；C1只允许拆空機器，先防止物品丟失。對按指令直接破壞結構，C1只會停機保留狀態，不自動改回世界。
 
-`/function kt_a17/particles`在附近生成16個單次粒子樣本；`/function kt_a17/sounds`播放4個事件，可能重疊。更精細ID見`interfaces/*-art-map.json`。執行指令是主動改動測試世界，**不在此環境偷偷代你執行**。
+原作基本合成配方已轉換：酒桶、壓榨桶、酒嘴、空瓶。獨立書本採新增配方：**普通書＋酒館空瓶→酒館指南；酒館指南＋紙→酒館配方書**。這兩個書本配方是本移植版設計，不冒稱原作配方。
 
-## 程式準備
+創造模式免費放置／拆除不掉物；機器投料與容器交換仍正常消耗並返還容器，以免無限複製空桶。需要測試飲用返瓶時使用生存模式。
 
-先讀`docs/CODE-HANDOFF.zh-TW.md`與`interfaces/runtime-visual-hooks.json`。
-` sdk/visual-state.mjs `提供純函數：容量轉液位、原作動畫幀序、16方向角度、RGB檢查、搖杯曲線與小粒子步進。它不匯入Minecraft API，不改世界／背包。
-資源SDK已同步全部17彩燈、16色高腳凳和新板類／黑板／物品模型的TypeScript型別，不再出現「JS可用但型別仍只認藍色」的舊缺口。
+## 附屬怎麼加
 
-下一階段M0應先做**遊戲載入與持久化測試、Cookery真實依賴綁定、穩定的物品交换**；再接種植→壓榨→發酵→取酒。不要沿用最早v0.1會覆蓋整疊空桶的helper。
+先看 `docs/EXTENSION-API.zh-TW.md`。作者在自己的BP中放入 `sdk/tavern-extension-client.js`、`protocol.js`、`util.js`，只匯入自己的副本和公開Minecraft API。**不能匯入酒館或廚房的私有腳本路徑。**
 
-## 驗證與來源
+附屬可新增酒桶／壓榨配方，引用實際已註冊的Cookery、酒館或自己的物品。酒館書從同一份runtime registry產生配方頁，附屬條目不會塞入Cookery書。卸載附屬後重新載入世界，配方與頁面不再註冊；已開始釀造的batch保留配方輸出快照。產物所屬包不在場時拒絕領取而不扣成品。
 
-完整結果見`docs/TEST-RESULTS.json`、`VALIDATION.json`、`INTERFACE-VALIDATION.json`、`VIEWER-BROWSER-TEST.json`、`REBUILD-REGRESSION.json`。
-瀏覽器測試使用Chromium/Playwright在記憶體載入包內檢視器；不是下載後雙擊檔案／Minecraft／bridge／Blockbench驗收。
+示範附屬：4桶水＋螢光莓→既有酒館Wine品質系列；單位時間100tick。它故意沿用既有圖片與產物，測的是擴充入口，不是新美術或正式平衡配方。
+
+## 實際驗證範圍
+
+`docs/TEST-RESULTS.json` 為本轮結果：純邏輯、物品保全、表單流程、事件路由、分包握手、附屬開關、存取快照等。另在模擬事件總線上只讀載入上傳Cookery的**配方API與指南API兩個模組**，核對酒館註冊不改它們的配方／指南。沒有執行Cookery整包或Minecraft。
+
+`docs/STATIC-VALIDATION.json`檢查JSON、JS語法、引用、UUID及來源保全。`docs/A17-ART-REGRESSION.json`確認原作渲染資料沒有被覆寫。**沒有Minecraft／bridge／Blockbench實際載入驗收；尤其真實UI、堆疊飲用返瓶、chunk卸載／重載、helper渲染和多人同步仍須依清單測。**
 
 ```text
-python tools/project.py build --force
-python tools/project.py test
-python tools/render_a17_preview.py
-python tools/test_viewer.py --chromium /path/to/chromium
-python tools/audit_build.py --force
-python tools/project.py package
+python tools/build_runtime.py
+python tools/validate_runtime.py
+python tools/test_c1.py
+python tools/audit_rebuild.py
+python tools/package_c1.py
 ```
 
-建置只讀本地原件，不下載、執行JAR或改動原ZIP。先備份手改生成檔。包含所有原件與轉換來源，不包含字型、可執行JAR、class或Cookery本體。
+需要 Python3.10+、Node22；型別測試需要已安裝的TypeScript。沒有自動下載第三方內容。一般測試會跳過需外部Cookery解包路徑的那一項；有原件时可傳 `--cookery-reference "實際Cookery BP資料夾"` 進行mock-bus測試。Node測試loader與Minecraft實驗設定無關。
 
-uploaded JAR SHA256：`03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff`。原版來源305張PNG和6個OGG逐位元組保存；539份歷史來源與上傳JAR比較沒有缺件或模型／像素差異。但**沒有核驗發行方官方雜湊，也不把NeoForge/1.21.1冒認成原先Forge/1.20.1整包完全相同**。
+## 尚未完成的功能
 
-## 尚未解除的發布條件
+特殊酒效、雪克杯／雞尾酒、種植與生成、可擺放多瓶、家具乘坐與連接、容器內容展示、黑板任意文字渲染、自动下方接酒、更多粒子/姿態適配、精細碰撞、手機／Realms／BDS驗收。舊A17所有這些原件仍保留；本輪沒有用占位美術或猜測效果冒充完成。
 
-完整來源／靜態美術資料已可凍結進入程式階段，但任意文字渲染、動態顯示適配、粒子繼承物理、動畫GUI、Cookery真實綁定、玩法與遊戲驗收仍未完成。`ART-READINESS.json`刻意保留`all_art_runtime_parity_verified:false`，production匯出仍禁止。
+保存格式為schema1，遇到舊原型／未來格式會拒絕，不聲稱已寫完跨版本遷移。管理員 `/fill`、`/setblock`、外部結構替换可能留下失配狀態；本版停機保留資料，不會自行刪除玩家結構。請勿在主存檔部署。
 
-原作Kaleidoscope Official Production Team；素材及衍生物遵循`LICENSE-ASSETS`，工具及其他來源保留各自授權。歷史A1–A16文件為歷史記錄；當前範圍以本README與完整JAR來源覆蓋清單為準。
+## 授權與來源
+
+原作Kaleidoscope Official Production Team；A17來源PNG／模型／衍生圖集等按 `LICENSE-ASSETS`，上游及移植程式按其各自BSD條款。C1新程式為独立實作；Cookery只做設計與接口參考，不复制其程式或資產。`compat/cookery/cookery.lock.json`記錄原件和被檢查文件的SHA-256。兩本指南使用原版Minecraft書本圖示，不偷搬Cookery封面。沒有重新散布字型、可執行JAR或Cookery本體。

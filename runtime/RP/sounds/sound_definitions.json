@@ -1,0 +1,49 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "kt_assets_a17.block.holder.pop": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/block/holder_pop",
+          "stream": false
+        }
+      ]
+    },
+    "kt_assets_a17.effect.vision": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/effect/vision",
+          "stream": false
+        }
+      ]
+    },
+    "kt_assets_a17.item.shaker.end": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/item/shaker/end",
+          "stream": false
+        }
+      ]
+    },
+    "kt_assets_a17.item.shaker.shaking": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/item/shaker/shaking_1",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/item/shaker/shaking_2",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/item/shaker/shaking_3",
+          "stream": false
+        }
+      ]
+    }
+  }
+}

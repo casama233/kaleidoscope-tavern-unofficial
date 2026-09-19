@@ -1,0 +1,12 @@
+import {registerTavernExtension,type TavernExtension,type ScriptSystemLike,type BarrelRecipe,type PressingRecipe} from '../sdk/tavern-extension-client.js';
+const payload:TavernExtension={api:1,source:'example',version:'1.0.0',recipes:[{id:'example:apple',kind:'pressing',input:['minecraft:apple'],fluid:'kaleidoscope_tavern:grape_juice',amount:250},{id:'example:wine',kind:'barrel',fluid:'minecraft:water',ingredients:[['minecraft:glow_berries']],output:{item:'kaleidoscope_tavern:wine_q3'}}],pages:[{id:'example:about',title:{en_US:'About'},body:{zh_TW:'說明'}}]};
+declare const system:ScriptSystemLike;
+registerTavernExtension(system,payload,{maxAttempts:3});
+// @ts-expect-error API1 only
+const wrongApi:TavernExtension={api:2,source:'example',version:'1.0.0'};
+// @ts-expect-error Six quality IDs, never fewer
+const badQuality:BarrelRecipe={id:'example:bad',kind:'barrel',fluid:'minecraft:water',ingredients:[],output:{byQuality:['x:a','x:b']}};
+// @ts-expect-error unknown recipe kinds are deliberately not advertised
+const unsupported:PressingRecipe={id:'example:bad',kind:'shaker',input:[],fluid:'minecraft:water',amount:125};
+// @ts-expect-error Pressing cannot pretend it has barrel quality outputs
+const badPress:PressingRecipe={id:'example:bad',kind:'pressing',input:['minecraft:apple'],fluid:'minecraft:water',amount:125,output:{item:'example:drink'}};

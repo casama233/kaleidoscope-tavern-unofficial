@@ -1,0 +1,756 @@
+{
+  "resource_pack_name": "tavern_a2",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "kt_a1_grape": {
+      "textures": "textures/kaleidoscope_tavern/item/grape"
+    },
+    "kt_assets_a2_ice_grape": {
+      "textures": "textures/derived/ice_grape/frame_00"
+    },
+    "kt_assets_a2_gold_grape": {
+      "textures": "textures/kaleidoscope_tavern/item/gold_grape"
+    },
+    "kt_assets_a2_green_grape": {
+      "textures": "textures/kaleidoscope_tavern/item/green_grape"
+    },
+    "kt_assets_a2_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/grape_bucket"
+    },
+    "kt_assets_a2_ice_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/ice_grape_bucket"
+    },
+    "kt_assets_a2_gold_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/gold_grape_bucket"
+    },
+    "kt_assets_a2_green_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/green_grape_bucket"
+    },
+    "kt_assets_a2_sweet_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/sweet_berries_bucket"
+    },
+    "kt_assets_a2_glow_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern/item/glow_berries_bucket"
+    },
+    "kt_sourceicon_allium_garden": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/allium_garden"
+    },
+    "kt_sourceicon_bell_pendant_lamp": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/bell_pendant_lamp"
+    },
+    "kt_sourceicon_bloody_mary": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/bloody_mary"
+    },
+    "kt_sourceicon_blue_pendant_lamp": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/blue_pendant_lamp"
+    },
+    "kt_sourceicon_brandy": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_sourceicon_brass_heart": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brass_heart"
+    },
+    "kt_sourceicon_butterfly_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/butterfly_incense"
+    },
+    "kt_sourceicon_carignan": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_sourceicon_catnip_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/catnip_incense"
+    },
+    "kt_sourceicon_chalkboard": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/chalkboard"
+    },
+    "kt_sourceicon_champagne": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_sourceicon_cr019_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/cr019"
+    },
+    "kt_sourceicon_david_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/david"
+    },
+    "kt_sourceicon_depth_charge": {
+      "textures": "textures/kt_derived/a17/icon_depth_charge"
+    },
+    "kt_sourceicon_emerald": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/emerald"
+    },
+    "kt_sourceicon_empty_bottle": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/empty_bottle"
+    },
+    "kt_sourceicon_empty_glassware": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/empty_glassware"
+    },
+    "kt_sourceicon_father_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/father"
+    },
+    "kt_sourceicon_firefly_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/firefly_incense"
+    },
+    "kt_sourceicon_ginkgo_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ginkgo_incense"
+    },
+    "kt_sourceicon_girl_with_pearl_earring_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/girl_with_pearl_earring"
+    },
+    "kt_sourceicon_glow_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glow_berries_bucket"
+    },
+    "kt_sourceicon_glowflower_brew": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_sourceicon_godfather": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/godfather"
+    },
+    "kt_sourceicon_gold_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/gold_grape"
+    },
+    "kt_sourceicon_gold_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/gold_grape_bucket"
+    },
+    "kt_sourceicon_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grape"
+    },
+    "kt_sourceicon_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grape_bucket"
+    },
+    "kt_sourceicon_grapevine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grapevine"
+    },
+    "kt_sourceicon_grasshopper": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grasshopper"
+    },
+    "kt_sourceicon_great_wave_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/great_wave"
+    },
+    "kt_sourceicon_green_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/green_grape"
+    },
+    "kt_sourceicon_green_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/green_grape_bucket"
+    },
+    "kt_sourceicon_holder": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/holder"
+    },
+    "kt_sourceicon_honey_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_sourceicon_ice_grape": {
+      "textures": "textures/kt_derived/a17/icon_ice_grape"
+    },
+    "kt_sourceicon_ice_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_grape_bucket"
+    },
+    "kt_sourceicon_ice_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_sourceicon_luminous_bride": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_sourceicon_madame_shexiang": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_sourceicon_master_marisa_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/master_marisa"
+    },
+    "kt_sourceicon_miners_star": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_sourceicon_mojito": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mojito"
+    },
+    "kt_sourceicon_molotov": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/molotov"
+    },
+    "kt_sourceicon_mona_lisa_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/mona_lisa"
+    },
+    "kt_sourceicon_mondrian_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/mondrian"
+    },
+    "kt_sourceicon_mother_snow": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_sourceicon_mystery_cocktail": {
+      "textures": "textures/kt_derived/a17/icon_mystery_cocktail"
+    },
+    "kt_sourceicon_nether_special": {
+      "textures": "textures/kt_derived/a17/icon_nether_special"
+    },
+    "kt_sourceicon_pine_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/pine_incense"
+    },
+    "kt_sourceicon_plum_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_sourceicon_polaris_sweet_white": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_sourceicon_red_queen": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_sourceicon_riesling_dry_white": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_sourceicon_rum": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_sourceicon_sakura_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_incense"
+    },
+    "kt_sourceicon_sakura_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_sourceicon_sauvignon_blanc_dry_white": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_sourceicon_screwdriver": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/screwdriver"
+    },
+    "kt_sourceicon_sculk_special": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sculk_special"
+    },
+    "kt_sourceicon_sherry": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_sourceicon_signature_cocktail": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/signature_cocktail"
+    },
+    "kt_sourceicon_snow_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/snow_incense"
+    },
+    "kt_sourceicon_son_of_man_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/son_of_man"
+    },
+    "kt_sourceicon_spore_incense": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/spore_incense"
+    },
+    "kt_sourceicon_starry_night_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/starry_night"
+    },
+    "kt_sourceicon_stepladder": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/stepladder"
+    },
+    "kt_sourceicon_sunset_glow": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_sourceicon_sweet_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berries_bucket"
+    },
+    "kt_sourceicon_sweet_berry_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_sourceicon_tap": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/tap"
+    },
+    "kt_sourceicon_tartaric_acid_painting": {
+      "textures": "textures/kt_derived/a17/icon_tartaric_acid_painting"
+    },
+    "kt_sourceicon_unknown_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/unknown"
+    },
+    "kt_sourceicon_van_gogh_self_portrait_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/van_gogh_self_portrait"
+    },
+    "kt_sourceicon_vinegar": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_sourceicon_vodka": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_sourceicon_watermelon_juice": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/watermelon_juice"
+    },
+    "kt_sourceicon_whiskey": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_sourceicon_white_lady": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/white_lady"
+    },
+    "kt_sourceicon_wine": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_sourceicon_yellow_pendant_lamp": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/yellow_pendant_lamp"
+    },
+    "kt_sourceicon_ysbb_painting": {
+      "textures": "textures/kaleidoscope_tavern_jar/block/deco/painting/ysbb"
+    },
+    "kt_c1_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grape"
+    },
+    "kt_c1_ice_grape": {
+      "textures": "textures/kt_derived/a17/icon_ice_grape"
+    },
+    "kt_c1_gold_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/gold_grape"
+    },
+    "kt_c1_green_grape": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/green_grape"
+    },
+    "kt_c1_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/grape_bucket"
+    },
+    "kt_c1_ice_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_grape_bucket"
+    },
+    "kt_c1_gold_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/gold_grape_bucket"
+    },
+    "kt_c1_green_grape_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/green_grape_bucket"
+    },
+    "kt_c1_sweet_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berries_bucket"
+    },
+    "kt_c1_glow_berries_bucket": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glow_berries_bucket"
+    },
+    "kt_c1_empty_bottle": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/empty_bottle"
+    },
+    "kt_c1_guidebook": {
+      "textures": "textures/items/book_normal"
+    },
+    "kt_c1_recipe_book": {
+      "textures": "textures/items/book_writable"
+    },
+    "kt_c1_barrel": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/barrel"
+    },
+    "kt_c1_brandy_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_brandy_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_brandy_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_brandy_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_brandy_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_brandy_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/brandy"
+    },
+    "kt_c1_carignan_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_carignan_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_carignan_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_carignan_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_carignan_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_carignan_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/carignan"
+    },
+    "kt_c1_champagne_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_champagne_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_champagne_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_champagne_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_champagne_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_champagne_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/champagne"
+    },
+    "kt_c1_glowflower_brew_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_glowflower_brew_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_glowflower_brew_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_glowflower_brew_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_glowflower_brew_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_glowflower_brew_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/glowflower_brew"
+    },
+    "kt_c1_honey_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_honey_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_honey_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_honey_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_honey_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_honey_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/honey_wine"
+    },
+    "kt_c1_ice_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_ice_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_ice_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_ice_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_ice_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_ice_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/ice_wine"
+    },
+    "kt_c1_luminous_bride_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_luminous_bride_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_luminous_bride_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_luminous_bride_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_luminous_bride_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_luminous_bride_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/luminous_bride"
+    },
+    "kt_c1_madame_shexiang_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_madame_shexiang_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_madame_shexiang_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_madame_shexiang_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_madame_shexiang_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_madame_shexiang_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/madame_shexiang"
+    },
+    "kt_c1_miners_star_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_miners_star_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_miners_star_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_miners_star_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_miners_star_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_miners_star_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/miners_star"
+    },
+    "kt_c1_mother_snow_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_mother_snow_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_mother_snow_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_mother_snow_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_mother_snow_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_mother_snow_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/mother_snow"
+    },
+    "kt_c1_plum_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_plum_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_plum_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_plum_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_plum_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_plum_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/plum_wine"
+    },
+    "kt_c1_polaris_sweet_white_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_polaris_sweet_white_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_polaris_sweet_white_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_polaris_sweet_white_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_polaris_sweet_white_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_polaris_sweet_white_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white"
+    },
+    "kt_c1_red_queen_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_red_queen_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_red_queen_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_red_queen_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_red_queen_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_red_queen_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/red_queen"
+    },
+    "kt_c1_riesling_dry_white_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_riesling_dry_white_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_riesling_dry_white_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_riesling_dry_white_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_riesling_dry_white_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_riesling_dry_white_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white"
+    },
+    "kt_c1_rum_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_rum_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_rum_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_rum_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_rum_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_rum_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/rum"
+    },
+    "kt_c1_sakura_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sakura_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sakura_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sakura_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sakura_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sakura_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sakura_wine"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sauvignon_blanc_dry_white_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white"
+    },
+    "kt_c1_sherry_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sherry_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sherry_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sherry_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sherry_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sherry_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
+    },
+    "kt_c1_sunset_glow_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sunset_glow_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sunset_glow_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sunset_glow_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sunset_glow_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sunset_glow_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sunset_glow"
+    },
+    "kt_c1_sweet_berry_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_sweet_berry_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_sweet_berry_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_sweet_berry_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_sweet_berry_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_sweet_berry_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine"
+    },
+    "kt_c1_vinegar_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vinegar_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vinegar_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vinegar_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vinegar_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vinegar_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vinegar"
+    },
+    "kt_c1_vodka_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_vodka_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_vodka_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_vodka_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_vodka_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_vodka_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/vodka"
+    },
+    "kt_c1_whiskey_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_whiskey_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_whiskey_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_whiskey_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_whiskey_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_whiskey_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/whiskey"
+    },
+    "kt_c1_wine_q1": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_c1_wine_q2": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_c1_wine_q3": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_c1_wine_q4": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_c1_wine_q5": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    },
+    "kt_c1_wine_q6": {
+      "textures": "textures/kaleidoscope_tavern_jar/item/wine"
+    }
+  }
+}

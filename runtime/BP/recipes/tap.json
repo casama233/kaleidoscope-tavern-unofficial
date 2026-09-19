@@ -1,0 +1,27 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:tap"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "result": {
+      "item": "kaleidoscope_tavern:tap",
+      "count": 1
+    },
+    "pattern": [
+      "L",
+      "H"
+    ],
+    "key": {
+      "H": {
+        "item": "minecraft:hopper"
+      },
+      "L": {
+        "item": "minecraft:lever"
+      }
+    }
+  }
+}

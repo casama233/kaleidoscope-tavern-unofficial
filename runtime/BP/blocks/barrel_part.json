@@ -1,0 +1,50 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:barrel_part",
+      "states": {
+        "kaleidoscope_tavern:dx": [
+          -1,
+          0,
+          1
+        ],
+        "kaleidoscope_tavern:dy": [
+          0,
+          1,
+          2
+        ],
+        "kaleidoscope_tavern:dz": [
+          -1,
+          0,
+          1
+        ]
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_runtime.invisible"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a1_pressing_tub",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:collision_box": true,
+      "minecraft:selection_box": true,
+      "kaleidoscope_tavern:barrel_part": {},
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3600000
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:light_dampening": 0
+    }
+  }
+}

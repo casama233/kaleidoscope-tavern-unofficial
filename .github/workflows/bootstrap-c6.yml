@@ -1,0 +1,60 @@
+name: Bootstrap Tavern C6 main
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".bootstrap/**"
+      - ".github/workflows/bootstrap-c6.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tavern-c6-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify and restore C6 source tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f .bootstrap/manifest.json
+          test "$(find .bootstrap -maxdepth 1 -name 'part-*.b64' | wc -l)" -eq 12
+          cat .bootstrap/part-*.b64 | tr -d '\r\n' | base64 --decode > /tmp/tavern-c6.tar.gz
+          echo "a2d6372070cadcad13ad2b35a098bb1df2763876b1e39595c140db6f2e92037d  /tmp/tavern-c6.tar.gz" | sha256sum --check -
+          tar -tzf /tmp/tavern-c6.tar.gz > /tmp/tavern-c6-files.txt
+          if grep -Eq '(^/|(^|/)\.\.(/|$))' /tmp/tavern-c6-files.txt; then
+            echo "Unsafe path in archive" >&2
+            exit 1
+          fi
+          tar -xzf /tmp/tavern-c6.tar.gz -C .
+          rm -rf .bootstrap .github/workflows/bootstrap-c6.yml
+          test -f README.zh-TW.md
+          test -f runtime/BP/scripts/main.js
+          test -f runtime/BP/manifest.json
+          test -f runtime/RP/manifest.json
+          test -f tools/build_c6.py
+          test -f tests/c6-runtime.test.js
+          test -f docs/C6-FUNCTIONS.zh-TW.md
+          test -f art/interfaces/asset-registry.json
+          test "$(find . -type f -not -path './.git/*' | wc -l)" -eq 2071
+
+      - name: Commit restored project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "Nothing to commit"; exit 0; }
+          git commit -m "restore: publish Tavern C6 development baseline"
+          git push origin HEAD:main

@@ -8,3 +8,8 @@ node_modules/
 Tavern-Bedrock-*.zip
 Tavern-*-Gameplay-*.mcaddon
 Tavern-*-OPTIONAL.mcpack
+
+# Historical milestone packages are intentionally versioned under history/.
+# This does NOT unignore current root delivery archives.
+!history/**/*.mcaddon
+!history/**/*.mcpack

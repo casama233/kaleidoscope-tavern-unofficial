@@ -1,0 +1,66 @@
+name: Bootstrap Tavern A17-C5 history
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".history-bootstrap/**"
+      - ".github/workflows/bootstrap-history-a17-c5.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tavern-history-a17-c5
+  cancel-in-progress: false
+
+jobs:
+  restore-history:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staged history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify and restore A17-C5 history
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f .history-bootstrap/manifest.json
+          test "$(find .history-bootstrap -maxdepth 1 -name 'part-*.b64' | wc -l)" -eq 24
+          cat .history-bootstrap/part-*.b64 | tr -d '\r\n' | base64 --decode > /tmp/tavern-history.tar.gz
+          echo "fcb8b3a80787bf0ff2a53a94a0ef7622da66e75a5c35fb29fc73d8f1cbc204af  /tmp/tavern-history.tar.gz" | sha256sum --check -
+          tar -tzf /tmp/tavern-history.tar.gz > /tmp/history-files.txt
+          if grep -Eq '(^/|(^|/)\.\.(/|$))' /tmp/history-files.txt; then
+            echo "Unsafe path in history archive" >&2
+            exit 1
+          fi
+          if grep -Ev '^history/' /tmp/history-files.txt | grep -q .; then
+            echo "History archive contains paths outside history/" >&2
+            exit 1
+          fi
+          tar -xzf /tmp/tavern-history.tar.gz -C .
+          rm -rf .history-bootstrap .github/workflows/bootstrap-history-a17-c5.yml
+          test -f history/README.md
+          test -f history/A17/Tavern-A17-VisualLab.mcaddon
+          test -f history/C1/C1-source-snapshot.zip
+          test -f history/C2/C2-source-snapshot.zip
+          test -f history/C3/C3-source-snapshot.zip
+          test -f history/C4/C4-source-snapshot.zip
+          test -f history/C5/C5-source-snapshot.zip
+          test -f README.zh-TW.md
+          test -f runtime/BP/scripts/main.js
+          test "$(find history -type f | wc -l)" -eq 25
+          (cd . && sha256sum --check history/CHECKSUMS.sha256)
+
+      - name: Commit historical archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "Nothing to commit"; exit 0; }
+          git commit -m "history: add A17-C5 archived milestones"
+          git push origin HEAD:main

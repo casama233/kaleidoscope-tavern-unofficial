@@ -45,9 +45,18 @@ def prepare_a17(dest,boot,jar,upstream):
     assert lock['commit']=='6b0d619145316492f055e03d70427107cd73efa8'
     for row in lock['assets']:
         src=upstream/row['path'];dst=dest/'upstream'/row['path']
-        if not src.is_file():raise FileNotFoundError(src)
-        raw=src.read_bytes();sha=hashlib.sha256(raw).hexdigest()
+        blob=row.get('git_blob_sha1')
+        if blob and (upstream/'.git').exists():
+            # Git checkout may apply text attributes; cat-file returns the exact locked blob bytes.
+            raw=subprocess.check_output(['git','-C',str(upstream),'cat-file','blob',blob])
+        else:
+            if not src.is_file():raise FileNotFoundError(src)
+            raw=src.read_bytes()
+        sha=hashlib.sha256(raw).hexdigest()
         if sha!=row['local_sha256']:raise ValueError(f"source sha mismatch {row['path']} {sha}")
+        if blob:
+            got=subprocess.run(['git','hash-object','--stdin'],input=raw,capture_output=True,check=True).stdout.decode().strip()
+            if got!=blob:raise ValueError(f"git blob mismatch {row['path']} {got} != {blob}")
         dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(raw)
     jar_sha=hashlib.sha256(jar.read_bytes()).hexdigest();assert jar_sha=='03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff',jar_sha
     with zipfile.ZipFile(jar) as z:

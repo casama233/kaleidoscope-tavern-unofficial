@@ -36,11 +36,11 @@ jobs:
             echo "Unsafe path in history archive" >&2
             exit 1
           fi
-          if grep -Ev '^history(/|$)' /tmp/history-files.txt | grep -q .; then
+          if grep -Ev '^history-git/history(/|$)' /tmp/history-files.txt | grep -q .; then
             echo "History archive contains paths outside history/" >&2
             exit 1
           fi
-          tar -xzf /tmp/tavern-history.tar.gz -C .
+          tar -xzf /tmp/tavern-history.tar.gz --strip-components=1 -C .
           rm -rf .history-bootstrap .github/workflows/bootstrap-history-a17-c5.yml
           test -f history/README.md
           test -f history/A17/Tavern-A17-VisualLab.mcaddon

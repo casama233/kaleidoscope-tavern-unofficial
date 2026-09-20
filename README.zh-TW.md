@@ -2,6 +2,12 @@
 
 **這是功能開發測試版，未經 Minecraft／手機／Realms／BDS／bridge／Blockbench 的實機載入與行為驗收，不是完整發布版。** C6 包含 C1–C5；本輪補實際互動，不再重新收集顏色或重畫原作模型。
 
+## 歷史階段
+
+A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說明集中在 [\`history/\`](history/README.md)。**目前可開發主幹仍是根目錄 C6。**
+
+為避免 Git 重複五遍相同 A17 大型美術，C1～C5 保存的是當時程式／測試／工具／docs／SDK／資料鎖快照，共用美術回指 A17／現行 \`art/\`。歷史生成的 DEV \`.mcaddon\`／Demo \`.mcpack\` 不直接提交，精確檔名、大小與 SHA-256 記錄於 [\`history/artifact-catalog.json\`](history/artifact-catalog.json)。
+
 ## 真正新增
 
 | 系統 | C6 已寫入 | 仍有的差異 |

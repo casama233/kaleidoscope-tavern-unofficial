@@ -2,103 +2,103 @@ TAP version 13
 # Subtest: portable state is a separate schema and JSON round-trips an empty valid tool
 ok 1 - portable state is a separate schema and JSON round-trips an empty valid tool
   ---
-  duration_ms: 1.628764
+  duration_ms: 1.671385
   type: 'test'
   ...
 # Subtest: portable data rejects malformed/extra/version/identity/oversized payloads
 ok 2 - portable data rejects malformed/extra/version/identity/oversized payloads
   ---
-  duration_ms: 2.474502
+  duration_ms: 2.52315
   type: 'test'
   ...
 # Subtest: portable serializer copies state instead of retaining mutable references
 ok 3 - portable serializer copies state instead of retaining mutable references
   ---
-  duration_ms: 0.349875
+  duration_ms: 0.32689
   type: 'test'
   ...
 # Subtest: source wave and opposite arms retain Java radians frequency/amplitude
 ok 4 - source wave and opposite arms retain Java radians frequency/amplitude
   ---
-  duration_ms: 2.239283
+  duration_ms: 2.284219
   type: 'test'
   ...
 # Subtest: left/right first-person translation is mirrored only on X
 ok 5 - left/right first-person translation is mirrored only on X
   ---
-  duration_ms: 0.285859
+  duration_ms: 0.287506
   type: 'test'
   ...
 # Subtest: invalid animation time is rejected
 ok 6 - invalid animation time is rejected
   ---
-  duration_ms: 0.256652
+  duration_ms: 0.238202
   type: 'test'
   ...
 # Subtest: twelve tick pour has settle/flow/return and no premature complete
 ok 7 - twelve tick pour has settle/flow/return and no premature complete
   ---
-  duration_ms: 0.236246
+  duration_ms: 0.260355
   type: 'test'
   ...
 # Subtest: immersive HUD hides exact recipe windows until opt-in
 ok 8 - immersive HUD hides exact recipe windows until opt-in
   ---
-  duration_ms: 0.114668
+  duration_ms: 0.135116
   type: 'test'
   ...
 # Subtest: flow samples are bounded, finite and travel toward target
 ok 9 - flow samples are bounded, finite and travel toward target
   ---
-  duration_ms: 0.495066
+  duration_ms: 0.466486
   type: 'test'
   ...
 # Subtest: no consumable/projectile workaround is attached to any shaker variant
 ok 10 - no consumable/projectile workaround is attached to any shaker variant
   ---
-  duration_ms: 0.801508
+  duration_ms: 0.840334
   type: 'test'
   ...
 # Subtest: three attachables have item-specific binding and original texture
 ok 11 - three attachables have item-specific binding and original texture
   ---
-  duration_ms: 0.334352
+  duration_ms: 0.371445
   type: 'test'
   ...
 # Subtest: new bound mesh retains EVERY original cube and bone pose, adds only hand parent
 ok 12 - new bound mesh retains EVERY original cube and bone pose, adds only hand parent
   ---
-  duration_ms: 0.486963
+  duration_ms: 0.493521
   type: 'test'
   ...
 # Subtest: original PUT animation remains byte-identical rather than an invented lid bounce
 ok 13 - original PUT animation remains byte-identical rather than an invented lid bounce
   ---
-  duration_ms: 0.205522
+  duration_ms: 0.154408
   type: 'test'
   ...
 # Subtest: animation provenance hashes describe actual files
 ok 14 - animation provenance hashes describe actual files
   ---
-  duration_ms: 1.054757
+  duration_ms: 1.132555
   type: 'test'
   ...
 # Subtest: procedural wave has nonzero period and correct radian-to-degree conversion
 ok 15 - procedural wave has nonzero period and correct radian-to-degree conversion
   ---
-  duration_ms: 0.36093
+  duration_ms: 0.345354
   type: 'test'
   ...
 # Subtest: station animation helper replaces only world mesh, keeps native item visual
 ok 16 - station animation helper replaces only world mesh, keeps native item visual
   ---
-  duration_ms: 0.192663
+  duration_ms: 0.180822
   type: 'test'
   ...
 # Subtest: stream sprite is explicitly native and short-lived, not fake source sprite
 ok 17 - stream sprite is explicitly native and short-lived, not fake source sprite
   ---
-  duration_ms: 0.14828
+  duration_ms: 0.110002
   type: 'test'
   ...
 1..17
@@ -109,4 +109,4 @@ ok 17 - stream sprite is explicitly native and short-lived, not fake source spri
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 81.51807
+# duration_ms 82.914325

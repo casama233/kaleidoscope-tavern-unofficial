@@ -3,6 +3,7 @@ import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,isFrame,frameType,updateFrame,speci
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
+import {estimatedJavaTemperature} from './climate-c7.js';
 import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air} from './transactions.js';
 const locks=new Locks(),AGE=NS+':age',SHAPE=NS+':shape',WAX=NS+':waxed';
 export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS)]);
@@ -50,7 +51,7 @@ export function growthChanges(b,rng=Math.random){
 export function grow(b,{force=false,rng=Math.random}={}){
  if(!VINES[b.typeId]&&!CROPS[b.typeId])return false;
  const kind=VINES[b.typeId]??CROPS[b.typeId];
- if(!force&&rng()>=growthProbability(kind))return false;
+ if(!force&&rng()>=growthProbability(kind,estimatedJavaTemperature(b,kind)))return false;
  const edits=growthChanges(b,rng);if(!edits.length)return false;
  return locks.with(edits.map(e=>key(e.block)),()=>{applyBlocks(edits);for(const e of edits)refreshAround(e.block);return true;});
 }

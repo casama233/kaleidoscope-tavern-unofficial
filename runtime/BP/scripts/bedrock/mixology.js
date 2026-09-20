@@ -3,7 +3,7 @@ import {world,system,ItemTypes,BlockPermutation,GameMode} from '@minecraft/serve
 import {POTION_ITEMS} from '../core/potions.js';
 import {potionInput,potionIdentity,restorePotion} from './potions.js';
 import {inputMode,nativeElapsed,USE_DURATION_TICKS,HOLD_TAG} from '../core/native-use.js';
-import {applyCustomEffect} from './custom-effects.js';
+import {applyCustomEffect} from './effects-router.js';
 import {check,clone,canonical,utf8Bytes} from '../core/util.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';

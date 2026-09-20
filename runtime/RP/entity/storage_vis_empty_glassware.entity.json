@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:storage_vis_empty_glassware",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/mixology/empty_glassware"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a7.empty_glassware"
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

@@ -38,7 +38,7 @@ export function interact(state,command,registry,fluids){
   const inbound=fluids.find(f=>f.filled===held.id);
   if(inbound){
    check(s.kind==='barrel','TUB_BUCKET_INPUT_UNSUPPORTED');check(!s.slots.some(Boolean),'REMOVE_INGREDIENTS_FIRST');check(!s.fluid||s.fluid===inbound.id,'MIXED_FLUID');
-   check(s.amount+1000<=4000,'FLUID_FULL');check(inbound.id!=='minecraft:lava','MOLOTOV_NOT_ENABLED');
+   check(s.amount+1000<=4000,'FLUID_FULL');
    s.fluid=inbound.id;s.amount+=1000;tx.take=1;tx.give=[{id:inbound.empty,count:1}];
   }else if(held.id==='minecraft:bucket'){
    check(!s.slots.some(Boolean)||s.kind==='pressing_tub','REMOVE_INGREDIENTS_FIRST');check(s.amount>=1000,'NOT_ENOUGH_FLUID');

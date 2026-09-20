@@ -1,54 +1,7 @@
 {
-  "test_environment": "Node.js with deterministic local @minecraft/server and server-ui test doubles. Not Minecraft.",
+  "phase": "C7",
+  "test_environment": "Node.js/Python deterministic local doubles. Minecraft is NOT started.",
   "suites": [
-    {
-      "suite": "core",
-      "exit_code": 0,
-      "tests": 38,
-      "pass": 38,
-      "fail": 0,
-      "skipped": 0
-    },
-    {
-      "suite": "runtime",
-      "exit_code": 0,
-      "tests": 31,
-      "pass": 30,
-      "fail": 0,
-      "skipped": 1
-    },
-    {
-      "suite": "c2-core",
-      "exit_code": 0,
-      "tests": 28,
-      "pass": 28,
-      "fail": 0,
-      "skipped": 0
-    },
-    {
-      "suite": "c2-runtime",
-      "exit_code": 0,
-      "tests": 47,
-      "pass": 47,
-      "fail": 0,
-      "skipped": 0
-    },
-    {
-      "suite": "c3-core",
-      "exit_code": 0,
-      "tests": 33,
-      "pass": 33,
-      "fail": 0,
-      "skipped": 0
-    },
-    {
-      "suite": "c3-runtime",
-      "exit_code": 0,
-      "tests": 63,
-      "pass": 63,
-      "fail": 0,
-      "skipped": 0
-    },
     {
       "suite": "c4-core",
       "exit_code": 0,
@@ -74,14 +27,6 @@
       "skipped": 0
     },
     {
-      "suite": "c5-runtime",
-      "exit_code": 0,
-      "tests": 58,
-      "pass": 58,
-      "fail": 0,
-      "skipped": 0
-    },
-    {
       "suite": "c6-core",
       "exit_code": 0,
       "tests": 46,
@@ -90,24 +35,52 @@
       "skipped": 0
     },
     {
-      "suite": "c6-runtime",
+      "suite": "c7-core",
       "exit_code": 0,
-      "tests": 72,
-      "pass": 72,
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "c7-runtime",
+      "exit_code": 0,
+      "tests": 9,
+      "pass": 9,
       "fail": 0,
       "skipped": 0
     }
   ],
-  "typescript": {
+  "main_import": {
     "status": "PASS",
     "exit_code": 0,
-    "scope": "Public SDK declaration and positive/negative examples, not Minecraft API types"
+    "stdout": "MAIN_IMPORT_OK\n",
+    "stderr": "(node:5557) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n--import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"./tests/mock-loader.mjs\", pathToFileURL(\"./\"));'\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
   },
-  "real_Cookery_API_modules_loaded": false,
-  "Cookery_test_scope": "Only recipe and guide API modules on the mocked event bus, not whole Cookery/game startup.",
-  "engine_acceptance": "NOT_RUN",
-  "combined_pass": 510,
+  "static_validation": {
+    "status": "PASS",
+    "exit_code": 0,
+    "summary": "Static checks: 5480/5480; 238 items, 118 blocks, 78 renderer helpers.\n"
+  },
+  "typescript": {
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "combined_pass": 158,
   "combined_fail": 0,
-  "rendering_test_scope": "Mock records animation/sound/particle invocations and state; No GPU, Bedrock client or network latency. C6 injects documented native-use event payloads only; the engine starting generic item use is NOT simulated.",
-  "scenario_note": "Family/quality loops are counted as individual test cases, not hundreds of separate engine tests. Includes all12 recipe adapters, all69 input qualities, C2 end-to-end adapters, C3 session/state/transactions, packaged demo and real Cookery API mock-bus coexistence. C6 adds native rideable mocks/all16 stool and all17 light cycles, source-style sonic geometry, cancellation and protection failures. Native seat offsets, Molang interpolation, light emission, food consumption and real chunk persistence are NOT emulated."
+  "historical_tests_not_used_as_C7_gate": {
+    "C1/C2 immediate handheld tap expectations": "C7 replaces them with source-style below-container 30-tick tap flow.",
+    "C5 unsupported-custom-effect expectation": "C7 implements/adapts seven of the previously pending effects.",
+    "C6 41-machine-recipe expectation": "C7 enables the original Molotov barrel recipe, so built-in machine recipes are now 42.",
+    "C1 barrel recipe count 23": "C7 enables original Molotov, making 24 barrel + 6 pressing + 12 shaker = 42."
+  },
+  "cookery_reference_supplied": false,
+  "engine_acceptance": "NOT_RUN",
+  "important_limits": [
+    "Native long-press events are wired/probed but not confirmed on a Minecraft client here.",
+    "Wrist/spout rendering is not engine-calibrated.",
+    "Long Reach has no source-equivalent stable per-player interaction-range implementation in this build.",
+    "World generation is a deterministic loaded-chunk adapter, not vanilla tree-decorator injection.",
+    "Chalkboard world text uses a helper/nameTag rendering adapter."
+  ]
 }

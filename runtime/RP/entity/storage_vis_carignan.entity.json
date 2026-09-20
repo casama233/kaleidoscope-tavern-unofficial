@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:storage_vis_carignan",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/brew/carignan"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a9.carignan_1"
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

@@ -1,105 +1,103 @@
-# 森羅物語：酒館 C6 — 幽匿聲波、十六色座椅與十七款彩燈
+# 森羅物語：酒館 C7 — 家具／文字／世界生成、燃燒瓶與來源式酒嘴
 
-**這是功能開發測試版，未經 Minecraft／手機／Realms／BDS／bridge／Blockbench 的實機載入與行為驗收，不是完整發布版。** C6 包含 C1–C5；本輪補實際互動，不再重新收集顏色或重畫原作模型。
+**C7 是功能開發測試版，不是正式發布版。沒有在本環境啟動 Minecraft、手機、Realms 或 BDS；原生長按與手腕／杯嘴位置因此仍不能標為實機確認。** C7 包含 C1–C6，繼續依賴使用者提供的 Kaleidoscope Cookery v1.0.6，酒館指南／配方書及附屬 API 仍與 Cookery 本體分離。
 
-## 真正新增
+## 本輪新增
 
-| 系統 | C6 已寫入 | 仍有的差異 |
+| 系統 | C7 已實作 | 明確差異／待驗收 |
 |---|---|---|
-| 幽匿特調／shriek_attack | 飲用完成後按視線做32格聲波命中，傷害為施用者**目前生命**×Java float1.2，追加水平0.63／垂直0.28速度；每2格一個原生聲波粒子，共16個，播放原生聲波聲音 | **明示PvE-only適配**：不傷害任何玩家，不攻擊本包helper；最多256個命中目標。使用原生sonicBoom，不繞過引擎拒傷。不是所有專屬酒效完成 |
-| 十六色高腳凳 | 所有原作配色可合成、潛行放置、空手乘坐、潛行離座、回收；每張一個原生座位；座墊／靠背／扶手一起隨乘客轉向，底座不转 | 坐點與原生人物偏移、碰撞、Steve/Alex、手機、多人動畫待實機校正；使用look yaw而非Java yBodyRot |
-| 十七款彩燈 | 原作各款獨立幾何與貼圖、四方向、亮度15、原生染料換款；同色不消耗；可回收當前款式 | 不支援水浸、紅石開關或彩色動態光源；選取框為近似，無自然掛接/掉落還原 |
-| 原作家具合成 | 16凳＋17彩燈，共33個新增工作台配方 | Java `c:ingots/iron`明示映射到原版iron_ingot，不冒充任意模組鐵錠標籤 |
-| 獨立指南 | 新家具、聲波頁；現有幽匿特調頁與酒效完成度更新 | 不注入Cookery指南、語言、書籤或玩家偏好 |
+| 調酒長按診斷 | 保留原生 `itemStartUse/release/stop` 路徑；新增 `/function kt_c7_native_probe` 顯示實際事件計數與杯嘴 locator | 本環境沒有 Minecraft 客戶端，**不能宣稱原生長按已實機通過**；雙點相容模式不能替代驗收 |
+| 手腕／杯嘴 | 杯嘴沿用原模型 `root/kt_spout=(-3.5,11,0)`；第一／第三人稱候選集中在 calibration 資料 | 腕部仍 `NOT_CALIBRATED`；需 Steve/Alex、FOV、觸控實機截圖調整 |
+| 專屬酒效 | 新接微醺、高跟鞋、穿草隱身、靈視、醇熱、摸金校尉、倒立；沿用 C5/C6 的血腥瑪麗、XP Drain、Zenith、Shriek | `Long Reach` 仍沒有可信的穩定 per-player 交互距離等價能力，不用其他 buff 冒充；部分效果是有文件的 Bedrock 適配 |
+| 沙發／吧檯／桌 | 沙發16色跨色自動連接＋原生座位；吧檯六種連接；桌 X/Z 行連接 | 水浸、精確聯集碰撞與實際玩家坐姿待引擎驗收 |
+| 展示家具 | 酒櫃2、玻璃酒櫃2、酒窖櫃9、傾斜架3、圓架6、Holder1、杯架4；真實物品資料保存＋來源錨點 helper | renderer helper 的姿態、透明排序及網路同步待實測 |
+| 黑板 | 小1×2/350字、大3×2/1500字，三空白板自動合併；16色、左中右、發光、蜂蠟、8格編輯鎖 | 世界文字使用 nameTag helper 適配，不是 Java 字體／glow renderer 1:1 |
+| 野生葡萄／氣候 | loaded-chunk 野藤生成；冰/金葡萄加入冷/熱環境 proxy 的0.8加速 | 不是 Java 原版 tree decorator 注入或 biome base-temperature 精確值 |
+| 燃燒瓶 | 原熔岩酒桶配方啟用；按住至少10tick投擲；來源半徑3＋外延2格點火概率 | Bedrock 可放火判斷為安全適配；請只在測試場驗收 |
+| 酒嘴 | 改為「來源在後、容器在下」，30tick 才結算、前5tick滴液；revision/容器變更取消 | 酒桶、熔岩煉藥鍋→燃燒瓶、西瓜→西瓜汁、蜂巢/蜂箱→蜂蜜瓶、龍首→龍息瓶已接；紅石及水煉藥鍋仍待後續 |
 
-**C6不是聲稱其餘工作全部做完。** 原有41個機器配方不變；工作台合成由10個增至43個。效果狀態為血腥瑪麗規則實作，經驗汲取／Zenith／聲波三項明示適配；其餘8個Java效果仍未實作。
+| 家具手持 | 背包继续使用源模型渲染图标；57个有来源3D item display的家具/灯具改用 attachable 候选 | 直接沿用 Java first/third-person display 数值，左右手/Bedrock手腕坐标仍须实机校正 |
 
-## 安裝與版本
+C7 啟用 Molotov 後，內建機器配方為 **42 = 24 酒桶 + 6 壓榨 + 12 調酒**。舊 C6 的「41配方」是歷史狀態，不是回歸失敗。
 
-- 先備份並建立新的測試世界。啟用已提供的 **Cookery v1.0.6 BP/RP**，再啟用 C6 BP/RP，酒館RP位於Cookery上方。
-- 不同時啟用舊 C1–C5、A17 VisualLab 或 PoseLab。C6沿用相同UUID，套件版本提高至 **`[0,6,0]`**；真實存檔升級未測。
-- Cookery依賴不變：BP `10f37ae2-9ccf-435f-b34b-0eec8191cd94`、RP `c89dc8df-c3fc-4bc8-8bd0-527abba76681`，內部版本均`[1,0,6]`。不重散布Cookery。
-- 維持工程`1.26.50`格式、既定26.51驗收目標與Cookery實包基線`@minecraft/server 2.7.0`／`@minecraft/server-ui 2.0.0`。不是本輪最新版本或實機相容性聲明。
-- 不包含player.json、全域JSON UI覆蓋或新的實驗開關要求。這些靜態條件不代表成就／Realms相容已證實。
+## 安裝
 
-## 第一輪使用
+1. 備份，建立新的測試世界。
+2. 啟用你提供的 **Cookery v1.0.6 BP/RP**。
+3. 啟用 `Tavern-C7-Gameplay-DEV.mcaddon` 的 C7 BP/RP，酒館 RP 放在 Cookery 上方。
+4. 不要同時啟用 C1–C6、A17 VisualLab 或 PoseLab。
+
+C7 沿用 Tavern UUID，版本提高到 **`[0,7,0]`**。Cookery 依賴仍為 BP `10f37ae2-9ccf-435f-b34b-0eec8191cd94`、RP `c89dc8df-c3fc-4bc8-8bd0-527abba76681`，皆 `[1,0,6]`。Script API 仍沿用實包基線 `@minecraft/server 2.7.0` / UI `2.0.0`；不是最新 API 聲明或實機相容認證。
+
+## 測試套件
 
 ```mcfunction
-/function kt_c6_kit
+/function kt_c7_kit
 ```
 
-只給獨立兩本書、藍／紅高腳凳、無色彩燈、染料和幽匿特調；**不自動搭建世界、不自動生成攻擊目標或發射聲波**。預留背包與周围空間。
+只給物品，不清空或自動建造世界。
 
-### 高腳凳
+### 原生長按 probe
 
-1. 潛行手持高腳凳，點擊石頭等已允許完整支撐方塊的上表面。目標與上一格需空氣，實際消耗一個物品。
-2. 空手、不潛行，點凳子方塊坐下；同一凳只允許一名玩家。已坐船、馬或其他座位時拒絕，不強制搶走原坐騎。
-3. 轉動視角，座墊／靠背／扶手更新角度；底座與腳踏不一起轉。客戶端使用最短角度插值減少±180度跳轉，但Molang尚未在引擎驗收。
-4. 潛行離座，再潛行空手點方塊回收。正常破壞也走相同保全交易；有人坐時不能拆，背包放不下也取消。
-5. 回收只由方塊產生一個**當前配色**物品，座椅helper不產掉落。Creative同樣消耗實際放置物品，回收返原件，避免複製。
+```mcfunction
+/function kt_c7_native_probe
+```
 
-坐點候選使用原作方塊錨點0.875格，加原作顯式乘客修正-0.0625，得到0.8125。Java基類和Bedrock原生騎乘仍可能另有偏移，所以**不是已完成像素級座高／腿部校正**。当前十字/扶手等精細聯集碰撞尚未還原。
+先跑一次，實際拿滿料雪克杯按住／鬆手，再跑一次。只有 `native start` 和 `release` 計數真的增加，才能把**該客戶端**標為進入原生路徑。這個 probe 不會自動把 `engineAcceptance` 改成 PASS。
 
-### 彩燈
+### 30 tick 酒嘴
 
-1. 潛行持任一彩燈點擊方塊面，在相鄰空氣放置；按水平面與玩家朝向保存四方向。
-2. 拿原生染料點擊彩燈，消耗一份染料，切成該款**自己的原模型和材質**。不是將一個共用燈泡重新染色；同色不扣料。
-3. 空手潛行或正常破壞回收一個當前款式。滿背包拒絕回收。無色款可直接合成，但沒有用水/漂白自動退色功能。
-4. 所有款式原生`light_emission=15`；這是普通方塊光，不是RGB光照或shader光線追蹤實作。
+1. 把酒嘴朝向酒桶，使來源位於酒嘴後方。
+2. 潛行拿空酒瓶點支撐方塊上表面，先放一個 `empty_bottle_placed` 到酒嘴下方。
+3. 點酒嘴開啟。前5tick滴液，第30tick才變為實際品質成品。
+4. 中途拿走/替換空瓶或酒桶 revision 改變時，本次取消。
 
-`/function kt_c6_all_stools`給16款凳子，`/function kt_c6_all_lights`給17款彩燈，均為給物品而非自動放置。
+Molotov 走相同下方空瓶流程；取出成品後按住至少10tick再投擲。西瓜、蜂巢/蜂箱、龍首、熔岩煉藥鍋也可作後方來源：分別得到西瓜汁、蜂蜜瓶、龍息瓶、燃燒瓶。蜂巢成功取蜜會降低一級 `honey_level`。水煉藥鍋目前刻意未接，避免把無法實機確認身份的普通 `minecraft:potion` 當成正確水瓶。
 
-### 合成
+## 專屬酒效狀態
 
-- 凳子：對應顏色羊毛、鎖鏈、鐵錠由上而下排列，產1張。
-- 無色彩燈：上排3鎖鏈、下排3燈籠，產8件。
-- 各色彩燈：前兩排同上，第三排3對應染料，產8件。
+來源規則與適配差異見 `docs/C7-EFFECT-COVERAGE.json`。
 
-以上來自已上傳JAR的33份配方，雜湊見`C6-SOURCE-AUDIT.json`，且33份與實際上傳JAR逐位元組一致（`C6-RECIPE-JAR-COMPARISON.json`）。原生合成冊是這些配方的入口，酒館書新增操作說明；41個機器配方仍讀同一registry。
+- **來源規則/近似直接表達**：Vision、Tomb Raider、Upside Down，以及先前 Bloody Mary。
+- **明示適配**：Slightly Tipsy、High Heels、Grass Stealth、Ardent Heat、XP Drain、Zenith、Shriek Attack。
+- **仍待實作**：Long Reach（來源是 +3 block/entity interaction range）。
 
-## 幽匿特調：危險範圍與明示適配
+## 家具與庫存
 
-完成飲用時瞬時發射32格視線射線。範例：施用者當前20生命，基礎傷害24；當前10生命則12。不是按最大生命，也不是無條件秒殺。命中判定使用目標AABB中心與半寬；垂直/斜向也計算，不以整個方形範圍取代。
+沙發、吧檯和桌會定期重算鄰接外觀；沙發座位 helper 不保存物品。展示家具則由 world DP 保存真實物品；helper 只渲染，所以 helper 被清理後不会凭空补发/删除库存。
 
-**只排除玩家，不排除所有友善生物：動物、寵物也可能被擊中，請只在空曠測試場對測試生物使用。** 聲波按原規則不檢查牆遮擋，不會爆炸、挖方塊或生成掉落。此版明確不做PvP，且最多處理256個命中目標。
+完整槽位与源 renderer 锚点说明见 `docs/C7-FUNCTIONS.zh-TW.md`。
 
-傷害走`EntityDamageCause.sonicBoom`和原生`applyDamage`。只有返回成功才追加`applyImpulse`，不清除既有速度，也不直接覆寫HP去繞過無敵/保護。不同附屬是否實際攔截傷害需引擎測試，不宣稱通用領地插件相容。
+## 黑板
 
-新效果不再扣第二個雞尾酒或返第二個杯子；原生food仍負責消耗/返杯。效果不保存成循環狀態，重複同玩家同tick回呼只施放一次。藥水/特調資料、原生長按与杯嘴locator沿用C5，沒有在本輪宣稱它們已獲實機認證。
+放一个黑板建立 1×2 小板；三个空白、同向、相邻小板可合并为 3×2 大板。空手编辑，染料改色，萤光墨开 glow、墨囊关 glow，蜂蜡锁定。文字保存格式独立于当前 nameTag renderer，后续若换真正世界文字渲染层无需迁移文本数据。
 
-## 資源與持久化
+## 野生葡萄
 
-所有既有A17模型/貼圖保持。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
+C7 不去伪造 Java 的 configured-tree decorator 注入。它在玩家附近已加载的主世界 chunk 只扫描一次 oak/birch 顶层叶片并做 deterministic 生成，保存 bitset 避免来回加载重复长藤。该策略属于 Bedrock 适配。
 
-家具由方塊類型與facing保存狀態，不另存一份家具物品庫存到world DP。高腳凳helper只提供視覺和原生rideable，按座標錨點重建/去重。區塊未載入不當空氣；helper錯色、失去主方塊或移位則 eject/remove，不生成第二份物品。
-
-人工`/fill`／`/setblock`等外部替換可繞過本包回收；清掉helper不會補發家具。支撐被拆時可能留下可回收浮空家具。此DEV版防爆、不可推動，不把這個策略當成完整自然破壞物理。API例外有普通交易回退，不保證引擎硬崩潰級原子保存。
-
-## 離線檢查圖
-
-`previews/C6-furniture-overview.png`展示本包33張派生圖示，`previews/C6-stool-turn.gif`只採樣原作座椅上層骨架轉動。它们**不是Minecraft畫面**，不包含玩家模型、坐姿、原生乘客附加偏移或真正的Molang/網路求值。原底座骨架在全部48幀中保持不變。可用`python tools/render_c6_preview.py`重建；字型僅用本機已有字型，不隨包提供。
-
-## 測試與建置
+## 建置與測試
 
 ```text
 python tools/build_runtime.py
 python tools/validate_runtime.py
-python tools/test_c6.py --cookery-reference "外部Cookery BP資料夾"
+python tools/test_c7.py
 python tools/audit_rebuild.py
-python tools/package_c6.py
+python tools/package_c7.py
 ```
 
-不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其他511總量中的510例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+当前 C7 gate 使用仍有效的历史不变量测试 + 新 C7 测试；不会把旧版本“功能必须未实现”的断言硬改成绿勾。说明见 `docs/C7-REGRESSION-NOTES.zh-TW.md`。
 
-本輪新增46核心＋72適配層測試，累積192核心＋319適配層＝511例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+**本环境未启动 Minecraft。** 实机清单见 `docs/ENGINE-TEST-CHECKLIST.zh-TW.md`。在原生长按、腕部/杯嘴、helper 渲染、返瓶、chunk、多人与存档升级没有真实记录前，`--production` 仍应拒绝输出。
 
-**沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
+## 仍未完成
 
-## 未完成範圍
+- Long Reach 的源等价交互距离。
+- 原生长按的真实平台确认，Steve/Alex/手机的精确手腕与杯嘴校准。
+- Java 完整 Ardent Heat 护甲耐久／exhaustion、Grass Stealth 客户端真正隐藏等细节。
+- 酒嘴红石自动触发及水炼药锅输出；蜂巢／西瓜／龙首／熔岩炼药锅已经接入30tick下方空瓶流程。
+- 黑板 Java 字体/glow/精确行宽渲染。
+- 世界生成与气候的 Java 级逐配置等价、水浸、自然爆炸/活塞物理。
+- Minecraft/手机/Realm/BDS/真实存档升级验收。
 
-- 八種專屬效果：slightly_tipsy、high_heels、grass_stealth、vision、ardent_heat、long_reach、tomb_raider、upside_down。
-- 原生長按、Steve/Alex手腕/座高、杯嘴流束、跨端动画、藥水/飲用原生消耗及返瓶實測。
-- 沙發/吧檯/桌自動連接與乘坐、櫃內物品展示、任意中文黑板文字、指南場景、野生生成/氣候、水浸/自然破壞。
-- 燃燒瓶、西瓜汁特殊酒嘴、下方容器自動接酒；其他原作動態粒子適配。
-
-原版來源、授權與Cookery隔離均保留。沒有字型、JAR/class或Cookery本體再散布。C1–C5具名文件及`docs/history/`為歷史記錄，當前狀態以本README、C6報告為準。
+原作美术继续使用冻结的 A17 来源，不重画、不包含字型、Java JAR/class 或 Cookery 本体。

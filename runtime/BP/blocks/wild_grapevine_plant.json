@@ -1,0 +1,72 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:wild_grapevine_plant",
+      "states": {}
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_assets_a3.wild_grapevine_plant"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a3_wild_grapevine_plant",
+          "render_method": "alpha_test_single_sided",
+          "ambient_occlusion": 0.0,
+          "face_dimming": true
+        },
+        "unshaded": {
+          "texture": "kt_assets_a3_wild_grapevine_plant",
+          "render_method": "alpha_test_single_sided",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a3.wild_grapevine_plant"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a3_wild_grapevine_plant",
+            "render_method": "alpha_test_single_sided",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a3_wild_grapevine_plant",
+            "render_method": "alpha_test_single_sided",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3600000
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "kaleidoscope_tavern:wild_vine": {},
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": {
+        "origin": [
+          -6,
+          0,
+          -6
+        ],
+        "size": [
+          12,
+          16,
+          12
+        ]
+      }
+    },
+    "permutations": []
+  }
+}

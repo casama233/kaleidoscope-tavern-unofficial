@@ -1,4 +1,4 @@
-// Generated from locked data. Do not hand-edit.
+// C7 generated recipe registry.
 export const BUILTIN_RECIPES = [
   {
     "id": "kaleidoscope_tavern:barrel/brandy",
@@ -754,5 +754,23 @@ export const BUILTIN_RECIPES = [
       "en_US": "sweet_berries"
     },
     "source": "kaleidoscope_tavern"
+  },
+  {
+    "id": "kaleidoscope_tavern:molotov",
+    "kind": "barrel",
+    "fluid": "minecraft:lava",
+    "ingredients": [],
+    "carrier": "kaleidoscope_tavern:empty_bottle",
+    "unitTime": 2400,
+    "noIngredientCount": 16,
+    "output": {
+      "item": "kaleidoscope_tavern:molotov"
+    },
+    "title": {
+      "zh_TW": "燃燒瓶",
+      "zh_CN": "燃烧瓶",
+      "en_US": "Molotov"
+    },
+    "source": "original_jar"
   }
 ];

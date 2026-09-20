@@ -1,0 +1,43 @@
+/** C7 source-like tap flow: source behind tap, destination below, 30 tick commit. */
+import {world,system,BlockPermutation} from '@minecraft/server';
+import {NS,filledItem} from '../core/machines.js';
+import {BottleStore,bottleKey,displayAdd,parseBottle} from '../core/bottles.js';
+import {machineKey} from '../core/storage.js';
+import {TEST_ACCESS,syncVisuals,resolveCore} from './machines.js';
+import {blockAt,tell,safe,hand,exchangeBlocks,plus,canWrite,air} from './transactions.js';
+import {check} from '../core/util.js';
+import {faceOffset,facingForYaw} from '../core/furniture.js';
+const TAP=NS+':tap',EMPTY=NS+':empty_bottle_placed',MOLOTOV_PLACED=NS+':molotov_placed';
+const SPECIAL_PLACED={watermelon:NS+':watermelon_juice_placed',honey:NS+':honey_bottle_placed',dragon:NS+':dragon_breath_bottle_placed',lava:NS+':molotov_placed'};
+const SPECIAL_GIVE={[NS+':watermelon_juice_placed']:NS+':watermelon_juice',[NS+':honey_bottle_placed']:'minecraft:honey_bottle',[NS+':dragon_breath_bottle_placed']:'minecraft:dragon_breath',[NS+':molotov_placed']:NS+':molotov'};
+const FACING=NS+':facing',OPEN=NS+':open';
+const dirs=[{x:0,y:0,z:-1},{x:1,y:0,z:0},{x:0,y:0,z:1},{x:-1,y:0,z:0}];
+const sessions=new Map(), bottles=new BottleStore(world);export const tapDiagnostics={started:0,completed:0,empty:0,cancelled:0,molotov:0,special:{watermelon:0,honey:0,dragon:0,lava:0},errors:[]};
+function log(e){tapDiagnostics.errors.push(String(e));if(tapDiagnostics.errors.length>16)tapDiagnostics.errors.shift();}
+function k(b){return `${b.dimension.id}/${b.location.x}_${b.location.y}_${b.location.z}`;}
+function behind(tap){const f=tap.permutation.getState(FACING)??0,d=dirs[f];return blockAt(tap.dimension,{x:tap.location.x-d.x,y:tap.location.y,z:tap.location.z-d.z});}
+function below(tap){return blockAt(tap.dimension,{x:tap.location.x,y:tap.location.y-1,z:tap.location.z});}
+function sourceCore(tap){const b=behind(tap);return resolveCore(b);}
+function sourceDescriptor(tap){const raw=behind(tap),core=resolveCore(raw);if(core)return {kind:'barrel',raw,core};if(!raw)return undefined;
+ if(raw.typeId==='minecraft:melon')return {kind:'watermelon',raw};
+ if(raw.typeId==='minecraft:bee_nest'||raw.typeId==='minecraft:beehive'){const level=Number(raw.permutation.getState('honey_level')??0);if(level>0)return {kind:'honey',raw,honeyLevel:level};return undefined;}
+ if(raw.typeId==='minecraft:dragon_head'||raw.typeId==='minecraft:dragon_wall_head')return {kind:'dragon',raw};
+ if(raw.typeId==='minecraft:lava_cauldron')return {kind:'lava',raw};
+ return undefined;}
+function close(tap){try{tap.setPermutation(tap.permutation.withState(OPEN,false));}catch{}}
+function particle(tap,lava=false){try{tap.dimension.spawnParticle(lava?'minecraft:basic_flame_particle':'minecraft:water_drip_particle',{x:tap.location.x+.5,y:tap.location.y+.25,z:tap.location.z+.5});}catch{}}
+function outputPlan(dest,state){const out=filledItem(state);check(out,'NO_PRODUCT');if(out===NS+':molotov')return {out,molotov:true,permutation:BlockPermutation.resolve(MOLOTOV_PLACED,{[FACING]:0})};
+ const p=parseBottle(out);check(p,'UNSUPPORTED_TAP_OUTPUT');return {out,molotov:false,key:bottleKey(dest.dimension.id,dest.location),display:displayAdd(undefined,out,0),permutation:BlockPermutation.resolve(NS+':bottle_'+p.base,{[NS+':count']:1,[FACING]:0})};
+}
+function commitBarrel(tap,session){const core=sourceCore(tap),dest=below(tap);check(core&&core.typeId===NS+':barrel_core','TAP_SOURCE_CHANGED');check(dest?.typeId===EMPTY,'TAP_DESTINATION_CHANGED');const mkey=machineKey(core.dimension.id,core.location),state=TEST_ACCESS.store.load(mkey);check(state?.batch,'NO_PRODUCT');check(state.revision===session.revision,'STATE_CONFLICT');const plan=outputPlan(dest,state),machineRaw=TEST_ACCESS.store.raw(mkey),bottleRaw=plan.key?bottles.raw(plan.key):undefined,oldPermutation=dest.permutation;const next=structuredClone(state);next.batch.remaining--;if(next.batch.remaining<=0){next.batch=null;next.open=true;}next.revision++;
+ try{TEST_ACCESS.store.save(mkey,next,state.revision);dest.setPermutation(plan.permutation);if(plan.key)bottles.save(plan.key,plan.display,-1);}
+ catch(e){try{TEST_ACCESS.store.restoreRaw(mkey,machineRaw);}catch(x){log(x);}try{dest.setPermutation(oldPermutation);}catch(x){log(x);}if(plan.key)try{bottles.restore(plan.key,bottleRaw);}catch(x){log(x);}throw e;}
+ try{syncVisuals(core,next);}catch(e){log(e);}if(plan.molotov)tapDiagnostics.molotov++;tapDiagnostics.completed++;try{tap.dimension.playSound('random.brewed',tap.location,{volume:1,pitch:1});}catch{} }
+function commitSpecial(tap,session){const src=sourceDescriptor(tap),dest=below(tap);check(src&&src.kind===session.kind,'TAP_SOURCE_CHANGED');check(dest?.typeId===EMPTY,'TAP_DESTINATION_CHANGED');const oldDest=dest.permutation,oldSrc=src.raw.permutation,out=SPECIAL_PLACED[src.kind];check(out,'UNKNOWN_TAP_SOURCE');try{if(src.kind==='honey'){const now=Number(src.raw.permutation.getState('honey_level')??0);check(now===session.honeyLevel&&now>0,'TAP_SOURCE_CHANGED');src.raw.setPermutation(src.raw.permutation.withState('honey_level',now-1));}dest.setPermutation(BlockPermutation.resolve(out,{[FACING]:0}));}catch(e){try{dest.setPermutation(oldDest);}catch(x){log(x);}try{src.raw.setPermutation(oldSrc);}catch(x){log(x);}throw e;}tapDiagnostics.special[src.kind]++;if(src.kind==='lava'){tapDiagnostics.molotov++;}tapDiagnostics.completed++;try{tap.dimension.playSound('random.brewed',tap.location,{volume:1,pitch:1});}catch{}}
+function commit(tap,session){return session.kind==='barrel'?commitBarrel(tap,session):commitSpecial(tap,session);}
+export function startTap(tap,player){check(tap?.typeId===TAP,'NOT_TAP');const id=k(tap);if(sessions.has(id)){sessions.delete(id);close(tap);tapDiagnostics.cancelled++;return false;}const src=sourceDescriptor(tap),dest=below(tap);if(!src||!dest||dest.typeId!==EMPTY){tap.setPermutation(tap.permutation.withState(OPEN,true));tapDiagnostics.empty++;system.runTimeout(()=>{const b=blockAt(tap.dimension,tap.location);if(b?.typeId===TAP)close(b);},5);tell(player,'§7龍頭空轉。下方放置空酒瓶，後方需要有效來源。');return false;}let state,session;if(src.kind==='barrel'){state=TEST_ACCESS.store.load(machineKey(src.core.dimension.id,src.core.location));if(!state?.batch){tell(player,'§e酒桶沒有可接出的成品。');return false;}session={kind:'barrel',start:system.currentTick,revision:state.revision};}else session={kind:src.kind,start:system.currentTick,honeyLevel:src.honeyLevel};tap.setPermutation(tap.permutation.withState(OPEN,true));const s=session;sessions.set(id,s);tapDiagnostics.started++;
+ const lava=src.kind==='lava'||src.kind==='honey'||(src.kind==='barrel'&&filledItem(state)===NS+':molotov');for(let i=1;i<=5;i++)system.runTimeout(()=>{const b=blockAt(tap.dimension,tap.location);if(b?.typeId===TAP&&sessions.get(id)===s)particle(b,lava);},i);
+ system.runTimeout(()=>{const b=blockAt(tap.dimension,tap.location);if(!b||b.typeId!==TAP||sessions.get(id)!==s)return;try{commit(b,s);}catch(e){log(e);}finally{sessions.delete(id);close(b);}},30);return true;}
+export function registerTapC7({blockComponentRegistry:r}){r.registerCustomComponent(NS+':empty_bottle_placed',{});r.registerCustomComponent(NS+':molotov_placed',{});r.registerCustomComponent(NS+':special_bottle_placed',{});}
+export function installTapC7(){world.beforeEvents.playerInteractWithBlock.subscribe(e=>{if(e.cancel)return;const held=hand(e.player);if(e.block.typeId===TAP){e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location};system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===TAP,'BLOCK_CHANGED');return startTap(b,e.player);}));return;}if(held?.typeId===NS+':empty_bottle'&&e.player.isSneaking&&String(e.blockFace)==='Up'){e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,target=plus(e.block.location,faceOffset(e.blockFace));system.run(()=>safe(e.player,()=>{canWrite(e.player);const b=blockAt(d,target);check(b?.isAir,'SPACE_NOT_CLEAR');exchangeBlocks(e.player,1,[],[{block:b,permutation:BlockPermutation.resolve(EMPTY,{[FACING]:facingForYaw(e.player.getRotation().y)})}]);}));}});world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||![EMPTY,MOLOTOV_PLACED,...Object.values(SPECIAL_PLACED)].includes(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');const give=id===EMPTY?NS+':empty_bottle':(SPECIAL_GIVE[id]??NS+':molotov');exchangeBlocks(e.player,0,[{id:give,count:1}],[{block:b,permutation:air()}]);}));});}
+export const TAP_C7_TEST={sessions,sourceCore,sourceDescriptor,behind,below,outputPlan,commit,commitSpecial};

@@ -1,0 +1,46 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:chalkboard_part",
+      "states": {
+        "kaleidoscope_tavern:dx": [
+          -1,
+          0,
+          1
+        ],
+        "kaleidoscope_tavern:dy": [
+          0,
+          1
+        ],
+        "kaleidoscope_tavern:dz": [
+          -1,
+          0,
+          1
+        ]
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_runtime.invisible"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_c7_transparent",
+          "render_method": "blend"
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3600000
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "kaleidoscope_tavern:chalk_part": {}
+    }
+  }
+}

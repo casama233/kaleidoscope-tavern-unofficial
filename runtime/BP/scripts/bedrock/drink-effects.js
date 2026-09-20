@@ -1,5 +1,5 @@
 import {rollDrinkEffects} from '../core/drink-effects.js';
-import {applyCustomEffect} from './custom-effects.js';
+import {applyCustomEffect} from './effects-router.js';
 const reported=new Set();
 export const effectDiagnostics={applied:0,unsupported:{},errors:[]};
 /** Runs AFTER native consumption. Never shrinks inventory or returns another empty bottle. */

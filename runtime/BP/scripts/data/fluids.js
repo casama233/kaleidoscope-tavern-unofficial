@@ -1,4 +1,4 @@
-// Generated from locked data. Do not hand-edit.
+// C7: includes source Molotov lava medium.
 export const FLUIDS = [
   {
     "id": "kaleidoscope_tavern:grape_juice",
@@ -75,6 +75,17 @@ export const FLUIDS = [
       "en_US": "Water",
       "zh_TW": "水",
       "zh_CN": "水"
+    }
+  },
+  {
+    "id": "minecraft:lava",
+    "filled": "minecraft:lava_bucket",
+    "empty": "minecraft:bucket",
+    "rigSuffix": null,
+    "title": {
+      "zh_TW": "熔岩",
+      "zh_CN": "熔岩",
+      "en_US": "Lava"
     }
   }
 ];

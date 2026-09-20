@@ -1,0 +1,67 @@
+TAP version 13
+# (node:5549) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: C7 manifests version and Cookery dependencies remain
+ok 1 - C7 manifests version and Cookery dependencies remain
+  ---
+  duration_ms: 1.496979
+  type: 'test'
+  ...
+# Subtest: all connected/static C7 blocks exist
+ok 2 - all connected/static C7 blocks exist
+  ---
+  duration_ms: 0.380426
+  type: 'test'
+  ...
+# Subtest: all 16 sofas exist
+ok 3 - all 16 sofas exist
+  ---
+  duration_ms: 0.298862
+  type: 'test'
+  ...
+# Subtest: Molotov recipe and lava medium are active
+ok 4 - Molotov recipe and lava medium are active
+  ---
+  duration_ms: 0.31996
+  type: 'test'
+  ...
+# Subtest: source capacities and visual data generated
+ok 5 - source capacities and visual data generated
+  ---
+  duration_ms: 0.153196
+  type: 'test'
+  ...
+# Subtest: native shaker probe and C7 calibration are explicit not engine accepted
+ok 6 - native shaker probe and C7 calibration are explicit not engine accepted
+  ---
+  duration_ms: 0.123665
+  type: 'test'
+  ...
+# Subtest: main wires all C7 systems
+ok 7 - main wires all C7 systems
+  ---
+  duration_ms: 0.261794
+  type: 'test'
+  ...
+# Subtest: C7 held furniture uses source-display 3D attachable candidates
+ok 8 - C7 held furniture uses source-display 3D attachable candidates
+  ---
+  duration_ms: 0.43783
+  type: 'test'
+  ...
+# Subtest: special source taps and output displays are generated
+ok 9 - special source taps and output displays are generated
+  ---
+  duration_ms: 0.442733
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 101.036045

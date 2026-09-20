@@ -1,0 +1,37 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:green_bar_stool",
+      "item": {
+        "kaleidoscope_tavern:green_bar_stool": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/deco/bar_stool/green"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a17.item_display_green_bar_stool"
+      },
+      "animations": {
+        "first": "animation.kt_runtime.item.green_bar_stool.first",
+        "third": "animation.kt_runtime.item.green_bar_stool.third"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "first": "c.is_first_person"
+          },
+          {
+            "third": "!c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

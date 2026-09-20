@@ -1,0 +1,37 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:tilted_rack",
+      "item": {
+        "kaleidoscope_tavern:tilted_rack": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/deco/tilted_rack"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a17.item_display_tilted_rack"
+      },
+      "animations": {
+        "first": "animation.kt_runtime.item.tilted_rack.first",
+        "third": "animation.kt_runtime.item.tilted_rack.third"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "first": "c.is_first_person"
+          },
+          {
+            "third": "!c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

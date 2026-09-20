@@ -1,0 +1,37 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:black_sofa",
+      "item": {
+        "kaleidoscope_tavern:black_sofa": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/deco/sofa/black"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a17.item_display_black_sofa"
+      },
+      "animations": {
+        "first": "animation.kt_runtime.item.black_sofa.first",
+        "third": "animation.kt_runtime.item.black_sofa.third"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "first": "c.is_first_person"
+          },
+          {
+            "third": "!c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

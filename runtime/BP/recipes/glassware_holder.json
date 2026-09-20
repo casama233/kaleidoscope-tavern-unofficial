@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:glassware_holder"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "NNN",
+      "CCC",
+      "NNN"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:chain"
+      },
+      "N": {
+        "item": "minecraft:iron_nugget"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:glassware_holder",
+      "count": 1
+    }
+  }
+}

@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {computeConnection,cabinetPosition,tablePosition,rotateLocal} from '../runtime/BP/scripts/core/decor-c7.js';
+import {STORAGE_SPECS,emptyStorage,putStorage,takeStorage} from '../runtime/BP/scripts/core/storage-display.js';
+import {newChalk,editChalk,dyeChalk,glowChalk,waxChalk} from '../runtime/BP/scripts/core/chalkboard-c7.js';
+import {regionOf,markChunk,hasChunk,vineLength,shouldTry} from '../runtime/BP/scripts/core/worldgen-c7.js';
+import {throwReady,launchVelocity,ignitionOffsets} from '../runtime/BP/scripts/core/molotov-c7.js';
+import {tipsyRoll,visionRadius,ardentFront,tombRoll,C7_PENDING} from '../runtime/BP/scripts/core/effects-c7.js';
+const n=(f='single')=>({same:true,facing:0,connection:f});
+test('source connection rules cover straight and corner',()=>{assert.equal(computeConnection(0,n(),n(),{same:false}),'middle');assert.equal(computeConnection(0,{same:false},{same:false},{same:true,facing:1,connection:'single'}),'right_corner');});
+test('cabinet/table positions',()=>{assert.equal(cabinetPosition(true,true),'middle');assert.equal(tablePosition('x',false,true),'left');assert.deepEqual(rotateLocal({x:.5,y:.2,z:.125},2),{x:.5,y:.2,z:.875});});
+test('storage capacities match source',()=>{assert.deepEqual(Object.fromEntries(Object.entries(STORAGE_SPECS).map(([k,v])=>[k,v.slots])),{bar_cabinet:2,glass_bar_cabinet:2,cellar_cabinet:9,tilted_rack:3,circular_rack:6,holder:1,glassware_holder:4});});
+test('bar cabinet irregular bottle becomes single',()=>{let s=emptyStorage('bar_cabinet');s=putStorage(s,0,{id:'kaleidoscope_tavern:brandy_q4'});assert.equal(s.single,true);assert.throws(()=>putStorage(s,1,{id:'kaleidoscope_tavern:wine_q4'}));assert.equal(takeStorage(s,0).state.single,false);});
+test('chalk limits and wax',()=>{let s=newChalk('small',2);s=editChalk(s,{text:'abc',alignment:'left'});s=dyeChalk(s,'blue');s=glowChalk(s,true);s=waxChalk(s);assert.equal(s.text,'abc');assert.equal(s.waxed,true);assert.throws(()=>editChalk(s,{text:'x'}));assert.throws(()=>editChalk(newChalk('small'),{text:'x'.repeat(351)}));});
+test('worldgen region bitset handles negatives',()=>{const r=regionOf(-1,-17);assert.equal(r.lx,15);let raw=markChunk(undefined,-1,-17);assert.equal(hasChunk(raw,-1,-17),true);assert.equal(hasChunk(raw,0,0),false);assert(vineLength(10,20,7)>=1);assert.equal(shouldTry(1,2,0),false);});
+test('molotov source thresholds and velocity',()=>{assert.equal(throwReady(9),false);assert.equal(throwReady(10),true);const v=launchVelocity({x:0,y:0,z:2});assert.equal(v.z,.8);assert(ignitionOffsets(()=>0).some(x=>x.dx===0&&x.dz===0));});
+test('effect source math',()=>{assert.equal(visionRadius(0),6);assert.equal(visionRadius(5),18);assert.equal(ardentFront({x:0,y:64,z:0},{x:1,z:0}).length,9);assert.equal(tombRoll(.299),true);assert.equal(tombRoll(.3),false);assert(Number.isFinite(tipsyRoll(123)));assert(C7_PENDING['kaleidoscope_tavern:long_reach']);});

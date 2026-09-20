@@ -1,0 +1,13 @@
+import {check,clone,integer,utf8Bytes} from './util.js';
+export const NS='kaleidoscope_tavern',CHALK_SCHEMA=1;
+export const DYE_COLORS=Object.freeze(['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']);
+export const ALIGNMENTS=Object.freeze(['left','center','right']);
+export function chalkKey(d,p){check(/^minecraft:[a-z_]+$/.test(d),'INVALID_DIMENSION');check([p.x,p.y,p.z].every(Number.isInteger),'INVALID_LOCATION');return `kt:chalk/${d.split(':')[1]}/${p.x}_${p.y}_${p.z}`;}
+export function newChalk(size='small',facing=0){check(['small','large'].includes(size),'BAD_CHALK_SIZE');integer(facing,0,3);return {schema:1,revision:0,size,facing,text:'',color:'white',alignment:'center',waxed:false,glowing:false};}
+export function validateChalk(s){check(s&&s.schema===1&&['small','large'].includes(s.size),'CHALK_SCHEMA');integer(s.revision,0,Number.MAX_SAFE_INTEGER);integer(s.facing,0,3);check(typeof s.text==='string'&&s.text.length<=(s.size==='large'?1500:350)&&utf8Bytes(s.text)<=6000,'TEXT_TOO_LONG');check(DYE_COLORS.includes(s.color),'BAD_TEXT_COLOR');check(ALIGNMENTS.includes(s.alignment),'BAD_ALIGNMENT');check(typeof s.waxed==='boolean'&&typeof s.glowing==='boolean','CHALK_SCHEMA');return s;}
+export function editChalk(s,{text=s.text,alignment=s.alignment}){validateChalk(s);check(!s.waxed,'CHALK_WAXED');const n=clone(s);n.text=String(text);n.alignment=alignment;n.revision++;return validateChalk(n);}
+export function dyeChalk(s,color){validateChalk(s);check(!s.waxed,'CHALK_WAXED');check(DYE_COLORS.includes(color),'BAD_TEXT_COLOR');if(s.color===color)return s;return validateChalk({...clone(s),color,revision:s.revision+1});}
+export function glowChalk(s,value){validateChalk(s);check(!s.waxed,'CHALK_WAXED');if(s.glowing===value)return s;return validateChalk({...clone(s),glowing:value,revision:s.revision+1});}
+export function waxChalk(s){validateChalk(s);if(s.waxed)return s;return validateChalk({...clone(s),waxed:true,revision:s.revision+1});}
+export function mergeableChalk(s,facing){return !!s&&!s.text.trim()&&!s.waxed&&s.size==='small'&&s.facing===facing;}
+export class ChalkStore{constructor(b){this.b=b;}raw(k){return this.b.getDynamicProperty(k);}load(k){const r=this.raw(k);if(r===undefined)return undefined;check(typeof r==='string','CHALK_CORRUPT');return validateChalk(JSON.parse(r));}save(k,s,rev){const p=this.load(k);check((p?.revision??-1)===rev,'STATE_CONFLICT');this.b.setDynamicProperty(k,JSON.stringify(validateChalk(s)));}remove(k,rev){const p=this.load(k);check(p?.revision===rev,'STATE_CONFLICT');this.b.setDynamicProperty(k,undefined);}restore(k,r){this.b.setDynamicProperty(k,r);}}

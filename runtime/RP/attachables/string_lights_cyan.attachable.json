@@ -1,0 +1,37 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:string_lights_cyan",
+      "item": {
+        "kaleidoscope_tavern:string_lights_cyan": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/deco/string_lights/cyan"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a17.item_display_string_lights_cyan"
+      },
+      "animations": {
+        "first": "animation.kt_runtime.item.string_lights_cyan.first",
+        "third": "animation.kt_runtime.item.string_lights_cyan.third"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "first": "c.is_first_person"
+          },
+          {
+            "third": "!c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.furniture"
+      ]
+    }
+  }
+}

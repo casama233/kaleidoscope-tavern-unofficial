@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: source connection rules cover straight and corner
+ok 1 - source connection rules cover straight and corner
+  ---
+  duration_ms: 0.937806
+  type: 'test'
+  ...
+# Subtest: cabinet/table positions
+ok 2 - cabinet/table positions
+  ---
+  duration_ms: 0.685835
+  type: 'test'
+  ...
+# Subtest: storage capacities match source
+ok 3 - storage capacities match source
+  ---
+  duration_ms: 0.158681
+  type: 'test'
+  ...
+# Subtest: bar cabinet irregular bottle becomes single
+ok 4 - bar cabinet irregular bottle becomes single
+  ---
+  duration_ms: 0.724007
+  type: 'test'
+  ...
+# Subtest: chalk limits and wax
+ok 5 - chalk limits and wax
+  ---
+  duration_ms: 0.436839
+  type: 'test'
+  ...
+# Subtest: worldgen region bitset handles negatives
+ok 6 - worldgen region bitset handles negatives
+  ---
+  duration_ms: 1.349174
+  type: 'test'
+  ...
+# Subtest: molotov source thresholds and velocity
+ok 7 - molotov source thresholds and velocity
+  ---
+  duration_ms: 0.306585
+  type: 'test'
+  ...
+# Subtest: effect source math
+ok 8 - effect source math
+  ---
+  duration_ms: 0.216554
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 72.337696

@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:glass_bar_cabinet",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_c7_glass_bar_cabinet",
+      "minecraft:max_stack_size": 64,
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:glass_bar_cabinet.name"
+      },
+      "minecraft:interact_button": "action.interact.kt_furniture"
+    }
+  }
+}

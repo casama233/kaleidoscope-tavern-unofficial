@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:molotov",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_sourceicon_molotov",
+      "minecraft:max_stack_size": 16,
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:molotov.name"
+      },
+      "minecraft:interact_button": "action.interact.kt_throw",
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 0.35,
+        "start_using": "always"
+      }
+    }
+  }
+}

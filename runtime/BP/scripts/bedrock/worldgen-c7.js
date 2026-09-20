@@ -1,0 +1,11 @@
+/** Loaded-chunk wild-vine adapter. It does not patch vanilla tree configured features like Java. */
+import {world,system,BlockPermutation} from '@minecraft/server';
+import {NS,chunkOf,regionKey,hasChunk,markChunk,shouldTry,vineLength,isTreeLeaf} from '../core/worldgen-c7.js';
+const HEAD=NS+':wild_grapevine',BODY=NS+':wild_grapevine_plant',seenPlayers=new Map(),queue=[];
+export const worldgenDiagnostics={chunksSeen:0,chunksGenerated:0,vines:0,blocks:0,errors:[],adapter:'loaded-chunk top-leaf scan; source tree-decorator injection unavailable'};
+function err(e){worldgenDiagnostics.errors.push(String(e));if(worldgenDiagnostics.errors.length>16)worldgenDiagnostics.errors.shift();}
+function key(c){return c.x+','+c.z;}
+function processChunk(dim,cx,cz){if(dim.id!=='minecraft:overworld')return;const rk=regionKey(dim.id,cx,cz),raw=world.getDynamicProperty(rk);if(hasChunk(raw,cx,cz))return;let count=0;try{for(let lx=0;lx<16&&count<3;lx++)for(let lz=0;lz<16&&count<3;lz++){const x=cx*16+lx,z=cz*16+lz;if(!shouldTry(x,z,.02))continue;const top=dim.getTopmostBlock({x,z});if(!top||!isTreeLeaf(top.typeId))continue;const b1=dim.getBlock({x,y:top.location.y-1,z}),b2=dim.getBlock({x,y:top.location.y-2,z});if(!b1?.isAir||!b2?.isAir)continue;const len=vineLength(x,z,3);let placed=0;for(let i=0;i<len;i++){const p={x,y:top.location.y-1-i,z},b=dim.getBlock(p);if(!b?.isAir)break;const below=dim.getBlock({x,y:p.y-1,z});const head=i===len-1||!below?.isAir;b.setPermutation(BlockPermutation.resolve(head?HEAD:BODY));placed++;worldgenDiagnostics.blocks++;if(head)break;}if(placed){count++;worldgenDiagnostics.vines++;}}world.setDynamicProperty(rk,markChunk(raw,cx,cz));worldgenDiagnostics.chunksGenerated++;}catch(e){err(e);}}
+function enqueueAround(p){const c=chunkOf(p.location),old=seenPlayers.get(p.id);if(old&&old.x===c.x&&old.z===c.z)return;seenPlayers.set(p.id,c);for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++)queue.push({dim:p.dimension,cx:c.x+dx,cz:c.z+dz});}
+export function tickWorldgen(){for(const p of world.getAllPlayers())enqueueAround(p);const task=queue.shift();if(task){worldgenDiagnostics.chunksSeen++;processChunk(task.dim,task.cx,task.cz);}}
+export function installWorldgenC7(){system.runInterval(tickWorldgen,10);world.afterEvents.playerLeave?.subscribe(e=>seenPlayers.delete(e.playerId));}

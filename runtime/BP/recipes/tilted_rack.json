@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:tilted_rack"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "I  ",
+      "CI ",
+      "C I"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:chain"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:tilted_rack",
+      "count": 3
+    }
+  }
+}

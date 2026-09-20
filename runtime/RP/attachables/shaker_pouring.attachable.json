@@ -1,0 +1,42 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:shaker_pouring",
+      "item": {
+        "kaleidoscope_tavern:shaker_pouring": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/mixology/shaker"
+      },
+      "geometry": {
+        "default": "geometry.kt_runtime.shaker_held"
+      },
+      "animations": {
+        "hold_first": "animation.kt_runtime.shaker.hold_first",
+        "hold_third": "animation.kt_runtime.shaker.hold_third",
+        "pour": "animation.kt_runtime.shaker.pour"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "hold_first": "c.is_first_person"
+          },
+          {
+            "hold_third": "!c.is_first_person"
+          },
+          "pour"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.shaker_hand"
+      ],
+      "particle_effects": {
+        "spout_drop": "kaleidoscope_tavern:held_pour_drop"
+      }
+    }
+  }
+}

@@ -1,0 +1,361 @@
+Compiled from "TrellisBlock.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.block.plant.TrellisBlock extends net.minecraft.world.level.block.Block implements net.minecraft.world.level.block.SimpleWaterloggedBlock,com.github.ysbbbbbb.kaleidoscopetavern.block.plant.ITrellis {
+  public static final net.minecraft.world.level.block.state.properties.BooleanProperty WATERLOGGED;
+
+  public static final net.minecraft.world.level.block.state.properties.BooleanProperty WAXED;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.block.plant.TrellisBlock();
+    Code:
+       0: aload_0
+       1: invokestatic  #1                  // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.of:()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+       4: getstatic     #7                  // Field net/minecraft/world/level/material/MapColor.WOOD:Lnet/minecraft/world/level/material/MapColor;
+       7: invokevirtual #13                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.mapColor:(Lnet/minecraft/world/level/material/MapColor;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      10: getstatic     #17                 // Field net/minecraft/world/level/block/state/properties/NoteBlockInstrument.GUITAR:Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;
+      13: invokevirtual #23                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.instrument:(Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      16: ldc           #27                 // float 0.8f
+      18: invokevirtual #28                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.strength:(F)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      21: getstatic     #32                 // Field net/minecraft/world/level/block/SoundType.WOOD:Lnet/minecraft/world/level/block/SoundType;
+      24: invokevirtual #37                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.sound:(Lnet/minecraft/world/level/block/SoundType;)Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      27: invokevirtual #41                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.noOcclusion:()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      30: invokevirtual #44                 // Method net/minecraft/world/level/block/state/BlockBehaviour$Properties.ignitedByLava:()Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;
+      33: invokespecial #47                 // Method net/minecraft/world/level/block/Block."<init>":(Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+      36: aload_0
+      37: aload_0
+      38: getfield      #53                 // Field stateDefinition:Lnet/minecraft/world/level/block/state/StateDefinition;
+      41: invokevirtual #59                 // Method net/minecraft/world/level/block/state/StateDefinition.any:()Lnet/minecraft/world/level/block/state/StateHolder;
+      44: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      47: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      50: getstatic     #71                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      53: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      56: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      59: getstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      62: iconst_0
+      63: invokestatic  #85                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      66: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      69: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      72: getstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      75: iconst_0
+      76: invokestatic  #85                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      79: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      82: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      85: invokevirtual #94                 // Method registerDefaultState:(Lnet/minecraft/world/level/block/state/BlockState;)V
+      88: return
+
+  public net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand, net.minecraft.world.phys.BlockHitResult);
+    Code:
+       0: aload_2
+       1: getstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       4: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       7: checkcast     #86                 // class java/lang/Boolean
+      10: invokevirtual #102                // Method java/lang/Boolean.booleanValue:()Z
+      13: istore        8
+      15: iload         8
+      17: ifeq          89
+      20: aload         5
+      22: aload         6
+      24: invokevirtual #106                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+      27: getstatic     #112                // Field net/neoforged/neoforge/common/ItemAbilities.AXE_WAX_OFF:Lnet/neoforged/neoforge/common/ItemAbility;
+      30: invokevirtual #118                // Method net/minecraft/world/item/ItemStack.canPerformAction:(Lnet/neoforged/neoforge/common/ItemAbility;)Z
+      33: ifeq          89
+      36: aload_3
+      37: aload         4
+      39: aload_2
+      40: getstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      43: iconst_0
+      44: invokestatic  #85                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      47: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      50: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      53: invokevirtual #124                // Method net/minecraft/world/level/Level.setBlockAndUpdate:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z
+      56: pop
+      57: aload_3
+      58: aload         5
+      60: aload         4
+      62: getstatic     #130                // Field net/minecraft/sounds/SoundEvents.AXE_WAX_OFF:Lnet/minecraft/sounds/SoundEvent;
+      65: getstatic     #135                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+      68: fconst_1
+      69: fconst_1
+      70: invokevirtual #141                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+      73: aload_3
+      74: aload         5
+      76: sipush        3004
+      79: aload         4
+      81: iconst_0
+      82: invokevirtual #147                // Method net/minecraft/world/level/Level.levelEvent:(Lnet/minecraft/world/entity/player/Player;ILnet/minecraft/core/BlockPos;I)V
+      85: getstatic     #151                // Field net/minecraft/world/ItemInteractionResult.SUCCESS:Lnet/minecraft/world/ItemInteractionResult;
+      88: areturn
+      89: iload         8
+      91: ifne          163
+      94: aload         5
+      96: aload         6
+      98: invokevirtual #106                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+     101: getstatic     #157                // Field net/minecraft/world/item/Items.HONEYCOMB:Lnet/minecraft/world/item/Item;
+     104: invokevirtual #163                // Method net/minecraft/world/item/ItemStack.is:(Lnet/minecraft/world/item/Item;)Z
+     107: ifeq          163
+     110: aload_3
+     111: aload         4
+     113: aload_2
+     114: getstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+     117: iconst_1
+     118: invokestatic  #85                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+     121: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+     124: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+     127: invokevirtual #124                // Method net/minecraft/world/level/Level.setBlockAndUpdate:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z
+     130: pop
+     131: aload_3
+     132: aload         5
+     134: aload         4
+     136: getstatic     #167                // Field net/minecraft/sounds/SoundEvents.HONEYCOMB_WAX_ON:Lnet/minecraft/sounds/SoundEvent;
+     139: getstatic     #135                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     142: fconst_1
+     143: fconst_1
+     144: invokevirtual #141                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     147: aload_3
+     148: aload         5
+     150: sipush        3003
+     153: aload         4
+     155: iconst_0
+     156: invokevirtual #147                // Method net/minecraft/world/level/Level.levelEvent:(Lnet/minecraft/world/entity/player/Player;ILnet/minecraft/core/BlockPos;I)V
+     159: getstatic     #151                // Field net/minecraft/world/ItemInteractionResult.SUCCESS:Lnet/minecraft/world/ItemInteractionResult;
+     162: areturn
+     163: aload         5
+     165: aload         6
+     167: invokevirtual #106                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+     170: astore        9
+     172: aload         9
+     174: getstatic     #170                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.GRAPEVINE:Lnet/neoforged/neoforge/registries/DeferredItem;
+     177: invokevirtual #176                // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+     180: checkcast     #182                // class net/minecraft/world/item/Item
+     183: invokevirtual #163                // Method net/minecraft/world/item/ItemStack.is:(Lnet/minecraft/world/item/Item;)Z
+     186: ifne          205
+     189: aload_0
+     190: aload_1
+     191: aload_2
+     192: aload_3
+     193: aload         4
+     195: aload         5
+     197: aload         6
+     199: aload         7
+     201: invokespecial #184                // Method net/minecraft/world/level/block/Block.useItemOn:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/ItemInteractionResult;
+     204: areturn
+     205: aload_2
+     206: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+     209: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+     212: checkcast     #72                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType
+     215: astore        10
+     217: aload         10
+     219: getstatic     #71                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     222: if_acmpeq     241
+     225: aload_0
+     226: aload_1
+     227: aload_2
+     228: aload_3
+     229: aload         4
+     231: aload         5
+     233: aload         6
+     235: aload         7
+     237: invokespecial #184                // Method net/minecraft/world/level/block/Block.useItemOn:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/ItemInteractionResult;
+     240: areturn
+     241: getstatic     #188                // Field net/neoforged/neoforge/common/NeoForge.EVENT_BUS:Lnet/neoforged/bus/api/IEventBus;
+     244: new           #194                // class com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent
+     247: dup
+     248: aload_2
+     249: aload_3
+     250: aload         4
+     252: aload         5
+     254: aload         6
+     256: aload         7
+     258: invokespecial #196                // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent."<init>":(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)V
+     261: invokeinterface #199,  2          // InterfaceMethod net/neoforged/bus/api/IEventBus.post:(Lnet/neoforged/bus/api/Event;)Lnet/neoforged/bus/api/Event;
+     266: pop
+     267: getstatic     #151                // Field net/minecraft/world/ItemInteractionResult.SUCCESS:Lnet/minecraft/world/ItemInteractionResult;
+     270: areturn
+
+  public net.minecraft.world.level.block.state.BlockState updateShape(net.minecraft.world.level.block.state.BlockState, net.minecraft.core.Direction, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.LevelAccessor, net.minecraft.core.BlockPos, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_1
+       1: getstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       4: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       7: checkcast     #86                 // class java/lang/Boolean
+      10: invokevirtual #102                // Method java/lang/Boolean.booleanValue:()Z
+      13: ifeq          36
+      16: aload         4
+      18: aload         5
+      20: getstatic     #205                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      23: getstatic     #205                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      26: aload         4
+      28: invokevirtual #211                // Method net/minecraft/world/level/material/FlowingFluid.getTickDelay:(Lnet/minecraft/world/level/LevelReader;)I
+      31: invokeinterface #217,  4          // InterfaceMethod net/minecraft/world/level/LevelAccessor.scheduleTick:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/material/Fluid;I)V
+      36: aload         4
+      38: aload         5
+      40: getstatic     #223                // Field net/minecraft/core/Direction$Axis.X:Lnet/minecraft/core/Direction$Axis;
+      43: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      46: istore        7
+      48: aload         4
+      50: aload         5
+      52: getstatic     #235                // Field net/minecraft/core/Direction$Axis.Y:Lnet/minecraft/core/Direction$Axis;
+      55: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      58: istore        8
+      60: aload         4
+      62: aload         5
+      64: getstatic     #238                // Field net/minecraft/core/Direction$Axis.Z:Lnet/minecraft/core/Direction$Axis;
+      67: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      70: istore        9
+      72: aload_1
+      73: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      76: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      79: checkcast     #72                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType
+      82: iload         7
+      84: iload         8
+      86: iload         9
+      88: invokestatic  #241                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.updateType:(Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;ZZZ)Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      91: astore        10
+      93: aload_1
+      94: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      97: aload         10
+      99: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+     102: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+     105: astore_1
+     106: aload_0
+     107: aload_1
+     108: aload_2
+     109: aload_3
+     110: aload         4
+     112: aload         5
+     114: aload         6
+     116: invokespecial #245                // Method net/minecraft/world/level/block/Block.updateShape:(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/Direction;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     119: areturn
+
+  public boolean sameType(net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_1
+       1: getstatic     #249                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.TRELLIS:Lnet/neoforged/neoforge/registries/DeferredBlock;
+       4: invokevirtual #255                // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+       7: checkcast     #48                 // class net/minecraft/world/level/block/Block
+      10: invokevirtual #258                // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/world/level/block/Block;)Z
+      13: ifne          32
+      16: aload_1
+      17: getstatic     #261                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.GRAPEVINE_TRELLIS:Lnet/neoforged/neoforge/registries/DeferredBlock;
+      20: invokevirtual #255                // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+      23: checkcast     #48                 // class net/minecraft/world/level/block/Block
+      26: invokevirtual #258                // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/world/level/block/Block;)Z
+      29: ifeq          36
+      32: iconst_1
+      33: goto          37
+      36: iconst_0
+      37: ireturn
+
+  public net.minecraft.world.level.block.state.BlockState getStateForPlacement(net.minecraft.world.item.context.BlockPlaceContext);
+    Code:
+       0: aload_1
+       1: invokevirtual #264                // Method net/minecraft/world/item/context/BlockPlaceContext.getLevel:()Lnet/minecraft/world/level/Level;
+       4: astore_2
+       5: aload_1
+       6: invokevirtual #270                // Method net/minecraft/world/item/context/BlockPlaceContext.getClickedPos:()Lnet/minecraft/core/BlockPos;
+       9: astore_3
+      10: aload_1
+      11: invokevirtual #274                // Method net/minecraft/world/item/context/BlockPlaceContext.getClickedFace:()Lnet/minecraft/core/Direction;
+      14: invokevirtual #278                // Method net/minecraft/core/Direction.getAxis:()Lnet/minecraft/core/Direction$Axis;
+      17: astore        4
+      19: aload_2
+      20: aload_3
+      21: getstatic     #223                // Field net/minecraft/core/Direction$Axis.X:Lnet/minecraft/core/Direction$Axis;
+      24: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      27: istore        5
+      29: aload_2
+      30: aload_3
+      31: getstatic     #235                // Field net/minecraft/core/Direction$Axis.Y:Lnet/minecraft/core/Direction$Axis;
+      34: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      37: istore        6
+      39: aload_2
+      40: aload_3
+      41: getstatic     #238                // Field net/minecraft/core/Direction$Axis.Z:Lnet/minecraft/core/Direction$Axis;
+      44: invokestatic  #229                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.axisHasTrellis:(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Z
+      47: istore        7
+      49: iload         5
+      51: iload         6
+      53: iload         7
+      55: aload         4
+      57: invokestatic  #284                // InterfaceMethod com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.getTypeForPlacement:(ZZZLnet/minecraft/core/Direction$Axis;)Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      60: astore        8
+      62: aload_0
+      63: invokevirtual #288                // Method defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      66: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      69: aload         8
+      71: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      74: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      77: getstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      80: aload_2
+      81: aload_3
+      82: invokevirtual #292                // Method net/minecraft/world/level/Level.isWaterAt:(Lnet/minecraft/core/BlockPos;)Z
+      85: invokestatic  #85                 // Method java/lang/Boolean.valueOf:(Z)Ljava/lang/Boolean;
+      88: invokevirtual #77                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      91: checkcast     #65                 // class net/minecraft/world/level/block/state/BlockState
+      94: areturn
+
+  public net.minecraft.world.phys.shapes.VoxelShape getCollisionShape(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos, net.minecraft.world.phys.shapes.CollisionContext);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+       5: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       8: checkcast     #72                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType
+      11: invokevirtual #296                // Method collisionShape:(Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      14: areturn
+
+  public net.minecraft.world.phys.shapes.VoxelShape getShape(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos, net.minecraft.world.phys.shapes.CollisionContext);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+       5: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       8: checkcast     #72                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType
+      11: invokevirtual #300                // Method selectShape:(Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      14: areturn
+
+  protected void createBlockStateDefinition(net.minecraft.world.level.block.state.StateDefinition$Builder<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.state.BlockState>);
+    Code:
+       0: aload_1
+       1: iconst_3
+       2: anewarray     #303                // class net/minecraft/world/level/block/state/properties/Property
+       5: dup
+       6: iconst_0
+       7: getstatic     #67                 // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      10: aastore
+      11: dup
+      12: iconst_1
+      13: getstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      16: aastore
+      17: dup
+      18: iconst_2
+      19: getstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      22: aastore
+      23: invokevirtual #305                // Method net/minecraft/world/level/block/state/StateDefinition$Builder.add:([Lnet/minecraft/world/level/block/state/properties/Property;)Lnet/minecraft/world/level/block/state/StateDefinition$Builder;
+      26: pop
+      27: return
+
+  public net.minecraft.world.level.material.FluidState getFluidState(net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_1
+       1: getstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       4: invokevirtual #98                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+       7: checkcast     #86                 // class java/lang/Boolean
+      10: invokevirtual #102                // Method java/lang/Boolean.booleanValue:()Z
+      13: ifeq          26
+      16: getstatic     #205                // Field net/minecraft/world/level/material/Fluids.WATER:Lnet/minecraft/world/level/material/FlowingFluid;
+      19: iconst_0
+      20: invokevirtual #311                // Method net/minecraft/world/level/material/FlowingFluid.getSource:(Z)Lnet/minecraft/world/level/material/FluidState;
+      23: goto          31
+      26: aload_0
+      27: aload_1
+      28: invokespecial #315                // Method net/minecraft/world/level/block/Block.getFluidState:(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/material/FluidState;
+      31: areturn
+
+  static {};
+    Code:
+       0: getstatic     #319                // Field net/minecraft/world/level/block/state/properties/BlockStateProperties.WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       3: putstatic     #91                 // Field WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+       6: ldc_w         #322                // String waxed
+       9: invokestatic  #324                // Method net/minecraft/world/level/block/state/properties/BooleanProperty.create:(Ljava/lang/String;)Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      12: putstatic     #81                 // Field WAXED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      15: return
+}

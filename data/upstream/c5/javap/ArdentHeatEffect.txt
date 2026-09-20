@@ -1,0 +1,257 @@
+Compiled from "ArdentHeatEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.ArdentHeatEffect extends com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect {
+  private static final java.lang.String COLLISION_COUNT_TAG;
+
+  private static final net.minecraft.world.entity.EquipmentSlot[] ARMOR_SLOTS;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.ArdentHeatEffect(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       5: return
+
+  public boolean shouldApplyEffectTickThisTick(int, int);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public boolean applyEffectTick(net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: aload_1
+       1: instanceof    #7                  // class net/minecraft/world/entity/player/Player
+       4: ifeq          15
+       7: aload_1
+       8: checkcast     #7                  // class net/minecraft/world/entity/player/Player
+      11: astore_3
+      12: goto          17
+      15: iconst_1
+      16: ireturn
+      17: aload_3
+      18: invokevirtual #9                  // Method net/minecraft/world/entity/player/Player.level:()Lnet/minecraft/world/level/Level;
+      21: astore        4
+      23: aload         4
+      25: invokevirtual #13                 // Method net/minecraft/world/level/Level.isClientSide:()Z
+      28: ifeq          33
+      31: iconst_1
+      32: ireturn
+      33: aload_3
+      34: getstatic     #19                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.ARDENT_HEAT:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      37: invokevirtual #25                 // Method net/minecraft/world/entity/player/Player.getEffect:(Lnet/minecraft/core/Holder;)Lnet/minecraft/world/effect/MobEffectInstance;
+      40: astore        5
+      42: aload         5
+      44: ifnull        75
+      47: aload         5
+      49: invokevirtual #29                 // Method net/minecraft/world/effect/MobEffectInstance.getDuration:()I
+      52: iconst_1
+      53: if_icmpgt     75
+      56: aload_3
+      57: new           #30                 // class net/minecraft/world/effect/MobEffectInstance
+      60: dup
+      61: getstatic     #35                 // Field net/minecraft/world/effect/MobEffects.HUNGER:Lnet/minecraft/core/Holder;
+      64: sipush        600
+      67: iconst_0
+      68: invokespecial #41                 // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/core/Holder;II)V
+      71: invokevirtual #44                 // Method net/minecraft/world/entity/player/Player.addEffect:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      74: pop
+      75: aload_3
+      76: invokevirtual #48                 // Method net/minecraft/world/entity/player/Player.isSprinting:()Z
+      79: ifne          84
+      82: iconst_1
+      83: ireturn
+      84: aload_3
+      85: invokevirtual #51                 // Method net/minecraft/world/entity/player/Player.getDirection:()Lnet/minecraft/core/Direction;
+      88: astore        6
+      90: iconst_0
+      91: istore        7
+      93: aload_3
+      94: invokevirtual #55                 // Method net/minecraft/world/entity/player/Player.blockPosition:()Lnet/minecraft/core/BlockPos;
+      97: aload         6
+      99: invokestatic  #59                 // Method getFrontBlocks:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Ljava/util/List;
+     102: invokeinterface #65,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     107: astore        8
+     109: aload         8
+     111: invokeinterface #71,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+     116: ifeq          167
+     119: aload         8
+     121: invokeinterface #76,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     126: checkcast     #80                 // class net/minecraft/core/BlockPos
+     129: astore        9
+     131: aload         4
+     133: aload         9
+     135: invokevirtual #82                 // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+     138: astore        10
+     140: aload         10
+     142: getstatic     #86                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.ARDENT_HEAT_BREAKABLE:Lnet/minecraft/tags/TagKey;
+     145: invokevirtual #92                 // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/tags/TagKey;)Z
+     148: ifeq          164
+     151: aload         4
+     153: aload         9
+     155: iconst_1
+     156: aload_3
+     157: invokevirtual #98                 // Method net/minecraft/world/level/Level.destroyBlock:(Lnet/minecraft/core/BlockPos;ZLnet/minecraft/world/entity/Entity;)Z
+     160: pop
+     161: iconst_1
+     162: istore        7
+     164: goto          109
+     167: iload         7
+     169: ifeq          361
+     172: aload_3
+     173: ldc           #102                // float 1.2f
+     175: invokevirtual #103                // Method net/minecraft/world/entity/player/Player.causeFoodExhaustion:(F)V
+     178: invokestatic  #107                // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+     181: astore        8
+     183: getstatic     #113                // Field ARMOR_SLOTS:[Lnet/minecraft/world/entity/EquipmentSlot;
+     186: astore        9
+     188: aload         9
+     190: arraylength
+     191: istore        10
+     193: iconst_0
+     194: istore        11
+     196: iload         11
+     198: iload         10
+     200: if_icmpge     242
+     203: aload         9
+     205: iload         11
+     207: aaload
+     208: astore        12
+     210: aload_3
+     211: aload         12
+     213: invokevirtual #117                // Method net/minecraft/world/entity/player/Player.getItemBySlot:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     216: astore        13
+     218: aload         13
+     220: invokevirtual #121                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+     223: ifne          236
+     226: aload         8
+     228: aload         12
+     230: invokeinterface #126,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     235: pop
+     236: iinc          11, 1
+     239: goto          196
+     242: aload         8
+     244: invokeinterface #130,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     249: ifne          313
+     252: aload         4
+     254: getfield      #131                // Field net/minecraft/world/level/Level.random:Lnet/minecraft/util/RandomSource;
+     257: aload         8
+     259: invokeinterface #135,  1          // InterfaceMethod java/util/List.size:()I
+     264: invokeinterface #138,  2          // InterfaceMethod net/minecraft/util/RandomSource.nextInt:(I)I
+     269: istore        9
+     271: aload         8
+     273: iload         9
+     275: invokeinterface #144,  2          // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+     280: checkcast     #148                // class net/minecraft/world/entity/EquipmentSlot
+     283: astore        10
+     285: aload_3
+     286: aload         10
+     288: invokevirtual #117                // Method net/minecraft/world/entity/player/Player.getItemBySlot:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+     291: astore        11
+     293: aload         11
+     295: invokevirtual #150                // Method net/minecraft/world/item/ItemStack.isDamageableItem:()Z
+     298: ifeq          310
+     301: aload         11
+     303: iconst_1
+     304: aload_3
+     305: aload         10
+     307: invokevirtual #153                // Method net/minecraft/world/item/ItemStack.hurtAndBreak:(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V
+     310: goto          361
+     313: aload_3
+     314: invokevirtual #157                // Method net/minecraft/world/entity/player/Player.getPersistentData:()Lnet/minecraft/nbt/CompoundTag;
+     317: astore        9
+     319: aload         9
+     321: ldc           #161                // String kaleidoscope_tavern:ardent_heat_collision_count
+     323: invokevirtual #163                // Method net/minecraft/nbt/CompoundTag.getInt:(Ljava/lang/String;)I
+     326: iconst_1
+     327: iadd
+     328: istore        10
+     330: iload         10
+     332: iconst_5
+     333: if_icmplt     352
+     336: aload_3
+     337: aload_3
+     338: invokevirtual #169                // Method net/minecraft/world/entity/player/Player.damageSources:()Lnet/minecraft/world/damagesource/DamageSources;
+     341: invokevirtual #173                // Method net/minecraft/world/damagesource/DamageSources.generic:()Lnet/minecraft/world/damagesource/DamageSource;
+     344: fconst_1
+     345: invokevirtual #179                // Method net/minecraft/world/entity/player/Player.hurt:(Lnet/minecraft/world/damagesource/DamageSource;F)Z
+     348: pop
+     349: iinc          10, -5
+     352: aload         9
+     354: ldc           #161                // String kaleidoscope_tavern:ardent_heat_collision_count
+     356: iload         10
+     358: invokevirtual #183                // Method net/minecraft/nbt/CompoundTag.putInt:(Ljava/lang/String;I)V
+     361: iconst_1
+     362: ireturn
+
+  private static java.util.List<net.minecraft.core.BlockPos> getFrontBlocks(net.minecraft.core.BlockPos, net.minecraft.core.Direction);
+    Code:
+       0: new           #187                // class java/util/ArrayList
+       3: dup
+       4: invokespecial #189                // Method java/util/ArrayList."<init>":()V
+       7: astore_2
+       8: aload_0
+       9: aload_1
+      10: invokevirtual #192                // Method net/minecraft/core/BlockPos.relative:(Lnet/minecraft/core/Direction;)Lnet/minecraft/core/BlockPos;
+      13: astore_3
+      14: aload_1
+      15: invokevirtual #196                // Method net/minecraft/core/Direction.getAxis:()Lnet/minecraft/core/Direction$Axis;
+      18: astore        4
+      20: iconst_0
+      21: istore        5
+      23: iload         5
+      25: iconst_2
+      26: if_icmpgt     92
+      29: iconst_m1
+      30: istore        6
+      32: iload         6
+      34: iconst_1
+      35: if_icmpgt     86
+      38: aload         4
+      40: getstatic     #202                // Field net/minecraft/core/Direction$Axis.Z:Lnet/minecraft/core/Direction$Axis;
+      43: if_acmpne     60
+      46: aload_3
+      47: iload         6
+      49: iload         5
+      51: iconst_0
+      52: invokevirtual #208                // Method net/minecraft/core/BlockPos.offset:(III)Lnet/minecraft/core/BlockPos;
+      55: astore        7
+      57: goto          71
+      60: aload_3
+      61: iconst_0
+      62: iload         5
+      64: iload         6
+      66: invokevirtual #208                // Method net/minecraft/core/BlockPos.offset:(III)Lnet/minecraft/core/BlockPos;
+      69: astore        7
+      71: aload_2
+      72: aload         7
+      74: invokeinterface #126,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      79: pop
+      80: iinc          6, 1
+      83: goto          32
+      86: iinc          5, 1
+      89: goto          23
+      92: aload_2
+      93: areturn
+
+  static {};
+    Code:
+       0: iconst_4
+       1: anewarray     #148                // class net/minecraft/world/entity/EquipmentSlot
+       4: dup
+       5: iconst_0
+       6: getstatic     #212                // Field net/minecraft/world/entity/EquipmentSlot.HEAD:Lnet/minecraft/world/entity/EquipmentSlot;
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: getstatic     #216                // Field net/minecraft/world/entity/EquipmentSlot.CHEST:Lnet/minecraft/world/entity/EquipmentSlot;
+      15: aastore
+      16: dup
+      17: iconst_2
+      18: getstatic     #219                // Field net/minecraft/world/entity/EquipmentSlot.LEGS:Lnet/minecraft/world/entity/EquipmentSlot;
+      21: aastore
+      22: dup
+      23: iconst_3
+      24: getstatic     #222                // Field net/minecraft/world/entity/EquipmentSlot.FEET:Lnet/minecraft/world/entity/EquipmentSlot;
+      27: aastore
+      28: putstatic     #113                // Field ARMOR_SLOTS:[Lnet/minecraft/world/entity/EquipmentSlot;
+      31: return
+}

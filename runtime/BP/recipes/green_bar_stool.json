@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:green_bar_stool"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "W",
+      "C",
+      "L"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:chain"
+      },
+      "L": {
+        "item": "minecraft:iron_ingot"
+      },
+      "W": {
+        "item": "minecraft:green_wool"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:green_bar_stool",
+      "count": 1
+    }
+  }
+}

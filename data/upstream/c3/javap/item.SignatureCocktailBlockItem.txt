@@ -1,0 +1,180 @@
+Compiled from "SignatureCocktailBlockItem.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.item.SignatureCocktailBlockItem extends com.github.ysbbbbbb.kaleidoscopetavern.item.CocktailBlockItem {
+  public com.github.ysbbbbbb.kaleidoscopetavern.item.SignatureCocktailBlockItem(net.minecraft.world.level.block.Block);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/item/CocktailBlockItem."<init>":(Lnet/minecraft/world/level/block/Block;)V
+       5: return
+
+  public static boolean hasEffects(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SIGNATURE_COCKTAIL_EFFECTS:Ljava/util/function/Supplier;
+       4: invokevirtual #13                 // Method net/minecraft/world/item/ItemStack.has:(Ljava/util/function/Supplier;)Z
+       7: ireturn
+
+  public static java.util.List<com.github.ysbbbbbb.kaleidoscopetavern.datamap.data.DrinkEffectData$Entry> getEffects(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SIGNATURE_COCKTAIL_EFFECTS:Ljava/util/function/Supplier;
+       4: invokestatic  #19                 // InterfaceMethod java/util/List.of:()Ljava/util/List;
+       7: invokevirtual #25                 // Method net/minecraft/world/item/ItemStack.getOrDefault:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #20                 // class java/util/List
+      13: areturn
+
+  public static void setEffects(net.minecraft.world.item.ItemStack, java.util.List<com.github.ysbbbbbb.kaleidoscopetavern.datamap.data.DrinkEffectData$Entry>);
+    Code:
+       0: aload_0
+       1: getstatic     #7                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SIGNATURE_COCKTAIL_EFFECTS:Ljava/util/function/Supplier;
+       4: aload_1
+       5: invokestatic  #29                 // InterfaceMethod java/util/List.copyOf:(Ljava/util/Collection;)Ljava/util/List;
+       8: invokevirtual #33                 // Method net/minecraft/world/item/ItemStack.set:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: return
+
+  public static int getColor(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #36                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SIGNATURE_COCKTAIL_COLOR:Ljava/util/function/Supplier;
+       4: ldc           #39                 // int 5592575
+       6: invokestatic  #40                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       9: invokevirtual #25                 // Method net/minecraft/world/item/ItemStack.getOrDefault:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      12: checkcast     #41                 // class java/lang/Integer
+      15: invokevirtual #46                 // Method java/lang/Integer.intValue:()I
+      18: ireturn
+
+  public static void setColor(net.minecraft.world.item.ItemStack, int);
+    Code:
+       0: aload_0
+       1: getstatic     #36                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SIGNATURE_COCKTAIL_COLOR:Ljava/util/function/Supplier;
+       4: iload_1
+       5: invokestatic  #40                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       8: invokevirtual #33                 // Method net/minecraft/world/item/ItemStack.set:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      11: pop
+      12: return
+
+  protected void addDrinkEffect(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_1
+       1: invokestatic  #50                 // Method getEffects:(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;
+       4: astore        4
+       6: aload         4
+       8: invokeinterface #56,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      13: astore        5
+      15: aload         5
+      17: invokeinterface #60,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      22: ifeq          144
+      25: aload         5
+      27: invokeinterface #66,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      32: checkcast     #70                 // class com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry
+      35: astore        6
+      37: aload_2
+      38: getfield      #72                 // Field net/minecraft/world/level/Level.isClientSide:Z
+      41: ifne          141
+      44: aload_2
+      45: getfield      #78                 // Field net/minecraft/world/level/Level.random:Lnet/minecraft/util/RandomSource;
+      48: invokeinterface #82,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextFloat:()F
+      53: aload         6
+      55: invokevirtual #88                 // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.probability:()F
+      58: fcmpg
+      59: ifge          141
+      62: aload         6
+      64: invokevirtual #91                 // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.effect:()Lnet/minecraft/core/Holder;
+      67: invokeinterface #95,  1           // InterfaceMethod net/minecraft/core/Holder.value:()Ljava/lang/Object;
+      72: checkcast     #100                // class net/minecraft/world/effect/MobEffect
+      75: astore        7
+      77: aload         6
+      79: invokevirtual #102                // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.amplifier:()I
+      82: istore        8
+      84: aload         7
+      86: invokevirtual #105                // Method net/minecraft/world/effect/MobEffect.isInstantenous:()Z
+      89: ifeq          106
+      92: aload         7
+      94: aload_3
+      95: aload_3
+      96: aload_3
+      97: iload         8
+      99: dconst_1
+     100: invokevirtual #108                // Method net/minecraft/world/effect/MobEffect.applyInstantenousEffect:(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/entity/LivingEntity;ID)V
+     103: goto          141
+     106: aload         6
+     108: invokevirtual #112                // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.duration:()I
+     111: bipush        20
+     113: imul
+     114: istore        9
+     116: new           #115                // class net/minecraft/world/effect/MobEffectInstance
+     119: dup
+     120: aload         6
+     122: invokevirtual #91                 // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.effect:()Lnet/minecraft/core/Holder;
+     125: iload         9
+     127: iload         8
+     129: invokespecial #117                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/core/Holder;II)V
+     132: astore        10
+     134: aload_3
+     135: aload         10
+     137: invokevirtual #120                // Method net/minecraft/world/entity/LivingEntity.addEffect:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+     140: pop
+     141: goto          15
+     144: return
+
+  public void appendHoverText(net.minecraft.world.item.ItemStack, net.minecraft.world.item.Item$TooltipContext, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_1
+       1: invokestatic  #50                 // Method getEffects:(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;
+       4: astore        5
+       6: invokestatic  #126                // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+       9: astore        6
+      11: aload         5
+      13: invokeinterface #56,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      18: astore        7
+      20: aload         7
+      22: invokeinterface #60,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      27: ifeq          96
+      30: aload         7
+      32: invokeinterface #66,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      37: checkcast     #70                 // class com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry
+      40: astore        8
+      42: aload         8
+      44: invokevirtual #88                 // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.probability:()F
+      47: fconst_1
+      48: fcmpl
+      49: iflt          93
+      52: aload         8
+      54: invokevirtual #112                // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.duration:()I
+      57: bipush        20
+      59: imul
+      60: istore        9
+      62: aload         8
+      64: invokevirtual #102                // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.amplifier:()I
+      67: istore        10
+      69: aload         6
+      71: new           #115                // class net/minecraft/world/effect/MobEffectInstance
+      74: dup
+      75: aload         8
+      77: invokevirtual #91                 // Method com/github/ysbbbbbb/kaleidoscopetavern/datamap/data/DrinkEffectData$Entry.effect:()Lnet/minecraft/core/Holder;
+      80: iload         9
+      82: iload         10
+      84: invokespecial #117                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/core/Holder;II)V
+      87: invokeinterface #132,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      92: pop
+      93: goto          20
+      96: aload         6
+      98: invokeinterface #136,  1          // InterfaceMethod java/util/List.isEmpty:()Z
+     103: ifne          139
+     106: aload_3
+     107: invokestatic  #139                // Method net/minecraft/network/chat/CommonComponents.space:()Lnet/minecraft/network/chat/MutableComponent;
+     110: invokeinterface #132,  2          // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     115: pop
+     116: aload         6
+     118: aload_3
+     119: dup
+     120: invokestatic  #145                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+     123: pop
+     124: invokedynamic #151,  0            // InvokeDynamic #0:accept:(Ljava/util/List;)Ljava/util/function/Consumer;
+     129: fconst_1
+     130: aload_2
+     131: invokeinterface #155,  1          // InterfaceMethod net/minecraft/world/item/Item$TooltipContext.tickRate:()F
+     136: invokestatic  #160                // Method net/minecraft/world/item/alchemy/PotionContents.addPotionTooltip:(Ljava/lang/Iterable;Ljava/util/function/Consumer;FF)V
+     139: return
+}

@@ -1,0 +1,18 @@
+Compiled from "ModFoods.java"
+public interface com.github.ysbbbbbb.kaleidoscopetavern.init.ModFoods {
+  public static final net.minecraft.world.food.FoodProperties GRAPE;
+
+  static {};
+    Code:
+       0: new           #1                  // class net/minecraft/world/food/FoodProperties$Builder
+       3: dup
+       4: invokespecial #3                  // Method net/minecraft/world/food/FoodProperties$Builder."<init>":()V
+       7: iconst_2
+       8: invokevirtual #7                  // Method net/minecraft/world/food/FoodProperties$Builder.nutrition:(I)Lnet/minecraft/world/food/FoodProperties$Builder;
+      11: ldc           #11                 // float 0.5f
+      13: invokevirtual #12                 // Method net/minecraft/world/food/FoodProperties$Builder.saturationModifier:(F)Lnet/minecraft/world/food/FoodProperties$Builder;
+      16: invokevirtual #16                 // Method net/minecraft/world/food/FoodProperties$Builder.alwaysEdible:()Lnet/minecraft/world/food/FoodProperties$Builder;
+      19: invokevirtual #20                 // Method net/minecraft/world/food/FoodProperties$Builder.build:()Lnet/minecraft/world/food/FoodProperties;
+      22: putstatic     #24                 // Field GRAPE:Lnet/minecraft/world/food/FoodProperties;
+      25: return
+}

@@ -1,0 +1,45 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "酒館附屬接口示範（可選）",
+    "description": "Optional v1 recipe + guide extension. Reuses Tavern wine items; not an upstream/balanced recipe.",
+    "uuid": "d6b6fb4a-8bc9-57ad-9c48-506a1554557a",
+    "version": [
+      0,
+      6,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "7c8b9888-5291-5924-94ae-0d42dcb98a34",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.7.0"
+    }
+  ]
+}

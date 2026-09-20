@@ -1,0 +1,40 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:shaker",
+      "item": {
+        "kaleidoscope_tavern:shaker": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/mixology/shaker"
+      },
+      "geometry": {
+        "default": "geometry.kt_runtime.shaker_held"
+      },
+      "animations": {
+        "hold_first": "animation.kt_runtime.shaker.hold_first",
+        "hold_third": "animation.kt_runtime.shaker.hold_third",
+        "native_controller": "controller.animation.kt_runtime.native_shake",
+        "shake_first": "animation.kt_runtime.shaker.first"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "hold_first": "c.is_first_person"
+          },
+          {
+            "hold_third": "!c.is_first_person"
+          },
+          "native_controller"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.shaker_hand"
+      ]
+    }
+  }
+}

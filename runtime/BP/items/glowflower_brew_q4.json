@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:glowflower_brew_q4",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:glowflower_brew_q4.name"
+      },
+      "minecraft:icon": "kt_c1_glowflower_brew_q4",
+      "minecraft:max_stack_size": 16,
+      "minecraft:food": {
+        "nutrition": 0,
+        "saturation_modifier": 0.0,
+        "can_always_eat": true,
+        "using_converts_to": "kaleidoscope_tavern:empty_bottle"
+      },
+      "minecraft:use_animation": "drink",
+      "minecraft:use_modifiers": {
+        "use_duration": 1.6,
+        "movement_modifier": 0.35
+      },
+      "kaleidoscope_tavern:drink_effects": {}
+    }
+  }
+}

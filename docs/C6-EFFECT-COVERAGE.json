@@ -1,0 +1,28 @@
+{
+  "rules_implemented": [
+    "bloody_mary"
+  ],
+  "adaptations_implemented": [
+    "xp_drain",
+    "zenith",
+    "shriek_attack"
+  ],
+  "not_implemented": [
+    "slightly_tipsy",
+    "high_heels",
+    "grass_stealth",
+    "vision",
+    "ardent_heat",
+    "long_reach",
+    "tomb_raider",
+    "upside_down"
+  ],
+  "scope": "Players as effect owners; Shriek is explicitly PvE-only, other timed effects as C5",
+  "engine_accepted": false,
+  "shriek_limits": [
+    "players excluded",
+    "max256 hit targets",
+    "reject damage = no impulse",
+    "not engine tested"
+  ]
+}

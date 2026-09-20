@@ -1,0 +1,193 @@
+Compiled from "ModEffects.java"
+public interface com.github.ysbbbbbb.kaleidoscopetavern.init.ModEffects {
+  public static final net.neoforged.neoforge.registries.DeferredRegister<net.minecraft.world.effect.MobEffect> EFFECTS;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> SLIGHTLY_TIPSY;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> HIGH_HEELS;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> GRASS_STEALTH;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> VISION;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> BLOODY_MARY;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> ARDENT_HEAT;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> LONG_REACH;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> TOMB_RAIDER;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> XP_DRAIN;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> UPSIDE_DOWN;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> ZENITH;
+
+  public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.effect.MobEffect, net.minecraft.world.effect.MobEffect> SHRIEK_ATTACK;
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$11();
+    Code:
+       0: new           #1                  // class com/github/ysbbbbbb/kaleidoscopetavern/effect/ShriekAttackEffect
+       3: dup
+       4: ldc           #3                  // int 871498
+       6: invokespecial #4                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/ShriekAttackEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$10();
+    Code:
+       0: new           #8                  // class com/github/ysbbbbbb/kaleidoscopetavern/effect/ZenithEffect
+       3: dup
+       4: ldc           #10                 // int 8900331
+       6: invokespecial #11                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/ZenithEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$9();
+    Code:
+       0: new           #12                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/UpsideDownEffect
+       3: dup
+       4: ldc           #14                 // int 10181046
+       6: invokespecial #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/UpsideDownEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$8();
+    Code:
+       0: new           #16                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/XpDrainEffect
+       3: dup
+       4: ldc           #18                 // int 8190976
+       6: invokespecial #19                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/XpDrainEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$7();
+    Code:
+       0: new           #20                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect
+       3: dup
+       4: ldc           #22                 // int 14329120
+       6: invokespecial #23                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$6();
+    Code:
+       0: new           #24                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/LongReachEffect
+       3: dup
+       4: ldc           #26                 // int 9136404
+       6: invokespecial #27                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/LongReachEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$5();
+    Code:
+       0: new           #28                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/ArdentHeatEffect
+       3: dup
+       4: ldc           #30                 // int 16739125
+       6: invokespecial #31                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/ArdentHeatEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$4();
+    Code:
+       0: new           #20                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect
+       3: dup
+       4: ldc           #32                 // int 16202294
+       6: invokespecial #23                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$3();
+    Code:
+       0: new           #33                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/VisionEffect
+       3: dup
+       4: ldc           #35                 // int 4229527
+       6: invokespecial #36                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/VisionEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$2();
+    Code:
+       0: new           #37                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/GrassStealthEffect
+       3: dup
+       4: ldc           #39                 // int 7454183
+       6: invokespecial #40                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/GrassStealthEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$1();
+    Code:
+       0: new           #41                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/HighHeelsEffect
+       3: dup
+       4: ldc           #43                 // int 15227818
+       6: invokespecial #44                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/HighHeelsEffect."<init>":(I)V
+       9: areturn
+
+  private static net.minecraft.world.effect.MobEffect lambda$static$0();
+    Code:
+       0: new           #20                 // class com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect
+       3: dup
+       4: getstatic     #45                 // Field net/minecraft/world/effect/MobEffectCategory.NEUTRAL:Lnet/minecraft/world/effect/MobEffectCategory;
+       7: ldc           #51                 // int 16767306
+       9: invokespecial #52                 // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(Lnet/minecraft/world/effect/MobEffectCategory;I)V
+      12: areturn
+
+  static {};
+    Code:
+       0: getstatic     #55                 // Field net/minecraft/core/registries/Registries.MOB_EFFECT:Lnet/minecraft/resources/ResourceKey;
+       3: ldc           #63                 // String kaleidoscope_tavern
+       5: invokestatic  #65                 // Method net/neoforged/neoforge/registries/DeferredRegister.create:(Lnet/minecraft/resources/ResourceKey;Ljava/lang/String;)Lnet/neoforged/neoforge/registries/DeferredRegister;
+       8: putstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      11: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      14: ldc           #77                 // String slightly_tipsy
+      16: invokedynamic #79,  0             // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+      21: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      24: putstatic     #87                 // Field SLIGHTLY_TIPSY:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      27: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      30: ldc           #91                 // String high_heels
+      32: invokedynamic #93,  0             // InvokeDynamic #1:get:()Ljava/util/function/Supplier;
+      37: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      40: putstatic     #94                 // Field HIGH_HEELS:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      43: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      46: ldc           #97                 // String grass_stealth
+      48: invokedynamic #99,  0             // InvokeDynamic #2:get:()Ljava/util/function/Supplier;
+      53: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      56: putstatic     #100                // Field GRASS_STEALTH:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      59: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      62: ldc           #103                // String vision
+      64: invokedynamic #105,  0            // InvokeDynamic #3:get:()Ljava/util/function/Supplier;
+      69: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      72: putstatic     #106                // Field VISION:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      75: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      78: ldc           #109                // String bloody_mary
+      80: invokedynamic #111,  0            // InvokeDynamic #4:get:()Ljava/util/function/Supplier;
+      85: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+      88: putstatic     #112                // Field BLOODY_MARY:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      91: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+      94: ldc           #115                // String ardent_heat
+      96: invokedynamic #117,  0            // InvokeDynamic #5:get:()Ljava/util/function/Supplier;
+     101: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     104: putstatic     #118                // Field ARDENT_HEAT:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     107: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     110: ldc           #121                // String long_reach
+     112: invokedynamic #123,  0            // InvokeDynamic #6:get:()Ljava/util/function/Supplier;
+     117: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     120: putstatic     #124                // Field LONG_REACH:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     123: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     126: ldc           #127                // String tomb_raider
+     128: invokedynamic #129,  0            // InvokeDynamic #7:get:()Ljava/util/function/Supplier;
+     133: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     136: putstatic     #130                // Field TOMB_RAIDER:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     139: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     142: ldc           #133                // String xp_drain
+     144: invokedynamic #135,  0            // InvokeDynamic #8:get:()Ljava/util/function/Supplier;
+     149: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     152: putstatic     #136                // Field XP_DRAIN:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     155: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     158: ldc           #139                // String upside_down
+     160: invokedynamic #141,  0            // InvokeDynamic #9:get:()Ljava/util/function/Supplier;
+     165: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     168: putstatic     #142                // Field UPSIDE_DOWN:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     171: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     174: ldc           #145                // String zenith
+     176: invokedynamic #147,  0            // InvokeDynamic #10:get:()Ljava/util/function/Supplier;
+     181: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     184: putstatic     #148                // Field ZENITH:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     187: getstatic     #71                 // Field EFFECTS:Lnet/neoforged/neoforge/registries/DeferredRegister;
+     190: ldc           #151                // String shriek_attack
+     192: invokedynamic #153,  0            // InvokeDynamic #11:get:()Ljava/util/function/Supplier;
+     197: invokevirtual #83                 // Method net/neoforged/neoforge/registries/DeferredRegister.register:(Ljava/lang/String;Ljava/util/function/Supplier;)Lnet/neoforged/neoforge/registries/DeferredHolder;
+     200: putstatic     #154                // Field SHRIEK_ATTACK:Lnet/neoforged/neoforge/registries/DeferredHolder;
+     203: return
+}

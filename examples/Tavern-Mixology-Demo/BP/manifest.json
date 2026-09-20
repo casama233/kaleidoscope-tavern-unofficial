@@ -1,0 +1,54 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Tavern C6 | OPTIONAL Mixology Demo",
+    "description": "Test-only rice-to-Emerald recipe and separate Tavern guide page. Not source balance.",
+    "uuid": "63d3d6bb-e682-5c27-82c0-6a7c5bed6fbc",
+    "version": [
+      0,
+      6,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "21b20532-964c-5425-9509-5292b20dfa5a",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "uuid": "52890793-d4bb-5d45-931d-7e02c2c79684",
+      "version": [
+        0,
+        6,
+        0
+      ],
+      "language": "javascript",
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.7.0"
+    }
+  ]
+}

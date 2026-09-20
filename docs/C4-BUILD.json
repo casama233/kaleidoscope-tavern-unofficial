@@ -1,0 +1,72 @@
+{
+  "runtime_bp_uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+  "runtime_rp_uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+  "version": [
+    0,
+    4,
+    0
+  ],
+  "cookery_bp_dependency": "10f37ae2-9ccf-435f-b34b-0eec8191cd94",
+  "cookery_rp_dependency": "c89dc8df-c3fc-4bc8-8bd0-527abba76681",
+  "cookery_internal_version": [
+    1,
+    0,
+    6
+  ],
+  "script_api": "2.7.0",
+  "ui_api": "2.0.0",
+  "builtin_barrel_recipes": 23,
+  "builtin_pressing_recipes": 6,
+  "native_crafting_recipes": 10,
+  "quality_drink_items": 144,
+  "planned_recipe_exclusions": [
+    {
+      "id": "kaleidoscope_tavern:barrel/molotov",
+      "reason": "Projectile/fire gameplay not enabled in C4."
+    }
+  ],
+  "art_copied_without_geometry_repaint": true,
+  "engine_acceptance": "NOT_RUN",
+  "is_production_release": false,
+  "phase": "C4",
+  "crop_blocks": 7,
+  "display_blocks": 24,
+  "display_arrangements": 93,
+  "source_effect_families": 24,
+  "q1_drinkable": true,
+  "soil_temperature_acceleration": "NOT_ADAPTED; natural fallback probability 0.25",
+  "worldgen": "NOT_ADAPTED; explicit port-only starter crafting",
+  "native_effect_types": 14,
+  "custom_effect_types_pending": [
+    "kaleidoscope_tavern:ardent_heat",
+    "kaleidoscope_tavern:bloody_mary",
+    "kaleidoscope_tavern:grass_stealth",
+    "kaleidoscope_tavern:high_heels",
+    "kaleidoscope_tavern:long_reach",
+    "kaleidoscope_tavern:shriek_attack",
+    "kaleidoscope_tavern:slightly_tipsy",
+    "kaleidoscope_tavern:tomb_raider",
+    "kaleidoscope_tavern:upside_down",
+    "kaleidoscope_tavern:vision",
+    "kaleidoscope_tavern:xp_drain",
+    "kaleidoscope_tavern:zenith"
+  ],
+  "shaker_recipes": 12,
+  "total_machine_recipes": 41,
+  "cocktail_items": 14,
+  "cup_blocks": 15,
+  "shaker_station_blocks": 1,
+  "shaker_input_drink_ids": 69,
+  "gesture": "portable and station two-click; native hold/release not enabled",
+  "potion_input": "REJECTED_NOT_ADAPTED",
+  "effect_hooks": "Signature native effects only; fixed cocktails have unsupported Java-only effects",
+  "portable_payload": "kaleidoscope_tavern:shaker_data schema1",
+  "pour_duration_ticks": 12,
+  "original_put_animation": "bound to successful station ingredient commits",
+  "source_wave": "sin(ticks * 1.5) * 0.25",
+  "adapted_not_source_authored": [
+    "wrist anchor",
+    "table shake",
+    "12-tick pour and droplet stream"
+  ]
+}

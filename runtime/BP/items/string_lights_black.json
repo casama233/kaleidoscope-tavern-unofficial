@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:string_lights_black",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_c6_string_lights_black",
+      "minecraft:max_stack_size": 64,
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:string_lights_black.name"
+      },
+      "minecraft:interact_button": "action.interact.kt_furniture"
+    }
+  }
+}

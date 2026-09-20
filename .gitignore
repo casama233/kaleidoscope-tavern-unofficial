@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.log
+*.tmp
+node_modules/
+.DS_Store
+# generated delivery archives are published separately, not committed
+Tavern-Bedrock-*.zip
+Tavern-*-Gameplay-*.mcaddon
+Tavern-*-OPTIONAL.mcpack

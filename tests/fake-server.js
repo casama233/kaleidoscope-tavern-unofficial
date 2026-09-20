@@ -1,0 +1,68 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+export class Signal{constructor(){this.listeners=[];}subscribe(fn,options){this.listeners.push({fn,options});return fn;}unsubscribe(fn){this.listeners=this.listeners.filter(x=>x.fn!==fn);}emit(ev){for(const x of [...this.listeners])if(!x.options?.namespaces||x.options.namespaces.includes(ev.id?.split(':')[0]))x.fn(ev);}}
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const itemInfo=new Map();
+for(const type of ['items','blocks'])for(const f of fs.readdirSync(root+'/runtime/BP/'+type)){if(!f.endsWith('.json'))continue;const d=JSON.parse(fs.readFileSync(root+'/runtime/BP/'+type+'/'+f));const v=d['minecraft:item']??d['minecraft:block'];itemInfo.set(v.description.identifier,{max:v.components?.['minecraft:max_stack_size']??64,definition:v});}
+const native=['chain','lantern',...['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink'].flatMap(c=>[c+'_dye',c+'_wool']),'milk_bucket','iron_ingot','glass_pane','potion','splash_potion','lingering_potion','sugar','sugar_cane','apple','sweet_berries','pink_petals','packed_ice','ice','blue_ice','iron_nugget','honeycomb','gold_nugget','blaze_powder','gunpowder','glow_ink_sac','glowstone_dust','redstone','potato','wheat','glow_berries','water_bucket','lava_bucket','bucket','rotten_flesh','dirt','stone','barrel','hopper','lever','glass_bottle','book','paper','book_writable','cobblestone','stick','diamond_sword','bone_meal','shears','wooden_axe','vine','grass_block','grass','coarse_dirt','rooted_dirt','podzol','mycelium','moss_block','mud','muddy_mangrove_roots','frosted_ice','snow','snow_block','netherrack','magma','magma_block'];
+for(const n of native)itemInfo.set('minecraft:'+n,{max:n.endsWith('_bucket')||['diamond_sword','shears','wooden_axe','potion','splash_potion','lingering_potion'].includes(n)?1:n==='bucket'?16:64});
+const cookeryIds=JSON.parse(fs.readFileSync(root+'/compat/cookery/observed-ids.json'));
+for(const id of [...cookeryIds.items,...cookeryIds.blocks])itemInfo.set(id,{max:64});
+itemInfo.set('kaleidoscope_cookery:guidebook',{max:1});
+export const ItemTypes={get:id=>itemInfo.has(id)?{id}:undefined};
+export class ItemStack{
+ constructor(typeId,amount=1){if(!ItemTypes.get(typeId))throw new Error('Unknown item '+typeId);this.typeId=typeId;this.amount=amount;this.maxAmount=itemInfo.get(typeId).max;this.meta={};this.nameTag=undefined;if(['minecraft:shears','minecraft:wooden_axe'].includes(typeId))this.meta['minecraft:durability']={damage:0,maxDurability:typeId==='minecraft:shears'?238:59};}
+ clone(){const n=new ItemStack(this.typeId,this.amount);n.meta=structuredClone(this.meta);n.nameTag=this.nameTag;return n;}
+ isStackableWith(x){return this.maxAmount>1&&x.typeId===this.typeId&&JSON.stringify(x.meta)===JSON.stringify(this.meta)&&x.nameTag===this.nameTag;}
+ getLore(){return this.meta.lore??[];}setLore(v){this.meta.lore=[...v];}getDynamicProperty(k){return this.meta.dp?.[k];}setDynamicProperty(k,v){if(this.maxAmount!==1)throw Error('MOCK_NONSTACKABLE_DP_REQUIRED');this.meta.dp??={};if(v===undefined)delete this.meta.dp[k];else this.meta.dp[k]=v;}getDynamicPropertyIds(){return Object.keys(this.meta.dp??{});}getComponent(kind){if(kind==='minecraft:enchantable'&&this.meta.enchantments)return {getEnchantments:()=>structuredClone(this.meta.enchantments)};return this.meta[kind];}getCanDestroy(){return this.meta.canDestroy??[];}getCanPlaceOn(){return this.meta.canPlaceOn??[];}
+}
+export class Container{constructor(size=36){this.size=size;this.items=Array(size);this.failAt=-1;this.writes=0;}getItem(i){return this.items[i]?.clone();}setItem(i,x){if(this.writes++===this.failAt)throw new Error('INJECTED_WRITE_FAILURE');this.items[i]=x?.clone();}addItem(x){let n=x.clone();for(let i=0;i<this.size;i++)if(!this.items[i]){this.setItem(i,n);return undefined;}return n;}}
+export class Properties{constructor(){this.dp=new Map();this.failSet=false;this.tags=new Set();}addTag(t){this.tags.add(t);return true;}removeTag(t){return this.tags.delete(t);}hasTag(t){return this.tags.has(t);}getDynamicProperty(k){return this.dp.get(k);}setDynamicProperty(k,v){if(this.failSet){this.failSet=false;throw new Error('INJECTED_SAVE_FAILURE');}v===undefined?this.dp.delete(k):this.dp.set(k,v);}}
+export class Permutation{constructor(typeId,states={}){this.type={id:typeId};this.states={...states};}getState(k){return this.states[k];}withState(k,v){return new Permutation(this.type.id,{...this.states,[k]:v});}}
+export const BlockPermutation={resolve:(id,states={})=>{
+ const def=itemInfo.get(id)?.definition,defaults={};
+ for(const[k,range]of Object.entries(def?.description?.states??{}))defaults[k]=Array.isArray(range)?range[0]:range.values.min;
+ const trait=def?.description?.traits?.['minecraft:placement_position'];
+ for(const k of trait?.enabled_states??[])if(k==='minecraft:block_face')defaults[k]='up';
+ for(const[k,v]of Object.entries(states)){
+  const range=def?.description?.states?.[k];
+  if(def&&!range&&!(k in defaults))throw Error('Unknown mock state '+id+'/'+k);
+  if(range&&(Array.isArray(range)?!range.includes(v):!Number.isInteger(v)||v<range.values.min||v>range.values.max))throw Error('Invalid mock state '+k+'/'+v);
+ }
+ return new Permutation(id,{...defaults,...states});
+}};
+export class Block{constructor(d,p){this.dimension=d;this.location={x:p.x,y:p.y,z:p.z};this.permutation=new Permutation('minecraft:air');}get typeId(){return this.permutation.type.id;}get isAir(){return this.typeId==='minecraft:air';}getTags(){return this.tags??[];}get isSolid(){throw Error('PRE_RELEASE_API_FORBIDDEN_IN_STABLE_TEST');}setType(id){this.setPermutation(BlockPermutation.resolve(id));}setPermutation(p){if(this.failSet){this.failSet=false;throw Error('INJECTED_BLOCK_FAILURE');}this.permutation=p;}}
+let entId=0;
+export class Entity extends Properties{getComponent(id){return id==='minecraft:health'?this.health:undefined;}clearVelocity(){this.velocity={x:0,y:0,z:0};}applyImpulse(v){this.velocity={...v};}tryTeleport(p){if(this.failTeleport)return false;this.location={...p};return true;}constructor(type,d,p){super();this.typeId=type;this.dimension=d;this.location={...p};this.id='e'+(++entId);this.properties={};this.removed=false;}setProperty(k,v){this.properties[k]=v;}getProperty(k){return this.properties[k];}playAnimation(id,options){(this.animations??=[]).push({id,options});if(this.failAnimation)throw Error('INJECTED_RENDER_FAILURE');}setRotation(r){this.rotation={...r};}remove(){this.removed=true;this.dimension.entities.delete(this.id);}}
+export class Dimension{getTopmostBlock(p){const a=[...this.blocks.values()].filter(b=>b.location.x===Math.floor(p.x)&&b.location.z===Math.floor(p.z)&&!b.isAir).sort((a,b)=>b.location.y-a.location.y);return a[0];}constructor(id){this.id=id;this.blocks=new Map();this.entities=new Map();this.unloaded=new Set();}getBlock(p){const key=`${p.x}_${p.y}_${p.z}`;if(this.unloaded.has(key))return undefined;if(!this.blocks.has(key))this.blocks.set(key,new Block(this,p));return this.blocks.get(key);}playSound(id,p,options){if(this.failAudio)throw Error('INJECTED_AUDIO_FAILURE');(this.sounds??=[]).push({id,p,options});}spawnParticle(id,p,vars){if(this.failParticles)throw Error('INJECTED_PARTICLE_FAILURE');(this.particles??=[]).push({id,p,vars});}spawnEntity(id,p){const e=new Entity(id,this,p);this.entities.set(e.id,e);return e;}getEntities(opts={}){return [...this.entities.values()].filter(e=>!e.removed&&(!opts.type||e.typeId===opts.type)&&(!opts.location||Math.hypot(e.location.x-opts.location.x,e.location.y-opts.location.y,e.location.z-opts.location.z)<=opts.maxDistance));}}
+export const GameMode={Creative:'Creative',Survival:'Survival',Adventure:'Adventure',Spectator:'Spectator'};
+export class Player extends Properties{clearVelocity(){this.velocity={x:0,y:0,z:0};}tryTeleport(p){if(this.failTeleport)return false;this.location={...p};return true;}constructor(name,dimension,mode=GameMode.Survival){super();this.id=name;this.typeId='minecraft:player';this.dimension=dimension;this.mode=mode;this.selectedSlotIndex=0;this.inventory=new Container();this.isSneaking=false;this.messages=[];this.effects=[];this.rotation={x:0,y:0};this.location={x:0,y:2,z:0};this.onScreenDisplay={setActionBar:m=>this.messages.push(m)};}getComponent(id){return id==='minecraft:inventory'?{container:this.inventory}:id==='minecraft:health'?this.health:undefined;}getRotation(){return this.rotation;}playAnimation(id,options){(this.animations??=[]).push({id,options});if(this.failAnimation)throw Error('INJECTED_RENDER_FAILURE');}getHeadLocation(){return {...this.location,y:this.location.y+1.5};}getViewDirection(){return {x:0,y:0,z:1};}addEffect(id,ticks,options){if(this.failEffect)throw Error('INJECTED_EFFECT_FAILURE');this.effects.push({id,ticks,...options});}playSound(name){(this.sounds??=[]).push(name);}getGameMode(){return this.mode;}sendMessage(m){this.messages.push(m);}}
+class System{constructor(){this.currentTick=0;this.beforeEvents={startup:new Signal()};this.afterEvents={scriptEventReceive:new Signal()};this.queue=new Map();this.seq=0;this.sent=[];}run(fn){return this.runTimeout(fn,1);}runTimeout(fn,n=1){const id=++this.seq;this.queue.set(id,{tick:this.currentTick+Math.max(1,n),fn});return id;}runInterval(fn,n){const id=++this.seq;this.queue.set(id,{tick:this.currentTick+n,fn,interval:n});return id;}clearRun(id){this.queue.delete(id);}sendScriptEvent(id,message){this.sent.push({id,message,tick:this.currentTick});this.run(()=>this.afterEvents.scriptEventReceive.emit({id,message,sourceType:'Server'}));}advance(n=1){for(let j=0;j<n;j++){this.currentTick++;for(const[id,t]of [...this.queue])if(t.tick<=this.currentTick){if(t.interval)t.tick+=t.interval;else this.queue.delete(id);t.fn();}}}}
+export const system=new System();export const ScriptEventSource={Server:'Server',Block:'Block',Entity:'Entity',NPCDialogue:'NPCDialogue'};
+export const world=new Properties();world.beforeEvents={playerInteractWithBlock:new Signal(),playerBreakBlock:new Signal(),explosion:new Signal()};world.afterEvents={entityLoad:new Signal(),entityDie:new Signal(),playerLeave:new Signal(),playerSpawn:new Signal(),itemStartUse:new Signal(),itemReleaseUse:new Signal(),itemStopUse:new Signal(),itemCompleteUse:new Signal()};world.dimensions=new Map(['overworld','nether','the_end'].map(n=>['minecraft:'+n,new Dimension('minecraft:'+n)]));world.getDimension=id=>world.dimensions.get(id.startsWith('minecraft:')?id:'minecraft:'+id);world.getAllPlayers=()=>[];
+export function startup(){const blocks=new Map(),items=new Map();system.beforeEvents.startup.emit({blockComponentRegistry:{registerCustomComponent:(id,x)=>{if(blocks.has(id))throw Error('duplicate');blocks.set(id,x);}},itemComponentRegistry:{registerCustomComponent:(id,x)=>items.set(id,x)}});return {blocks,items};}
+
+export class MolangVariableMap{constructor(){this.values={};}setColorRGBA(name,value){this.values[name]=value;}setVector3(name,value){this.values[name]=value;}setFloat(name,value){this.values[name]=value;}}
+
+// Deterministic native-potion test double. These fixtures do NOT validate the actual engine registry.
+const potionTypes=new Map();
+export const POTION_FIXTURES={
+ 'minecraft:water':0,'minecraft:awkward':0,'minecraft:mundane':0,'minecraft:long_mundane':0,'minecraft:thick':0,
+ 'minecraft:swiftness':3600,'minecraft:long_swiftness':9600,'minecraft:strong_swiftness':1800,
+ 'minecraft:healing':1,'minecraft:strong_healing':1,'minecraft:harming':1,'minecraft:strong_harming':1,
+ 'minecraft:poison':900,'minecraft:long_poison':1800,'minecraft:strong_poison':440,
+ 'minecraft:turtle_master':400,'minecraft:long_turtle_master':800,'minecraft:strong_turtle_master':400,
+ 'minecraft:nightvision':3600,'minecraft:invisibility':3600,'minecraft:weaving':3600
+};
+for(const[id,durationTicks]of Object.entries(POTION_FIXTURES))potionTypes.set(id,{id,durationTicks});
+const potionDeliveries=new Map([['minecraft:consumable','minecraft:potion'],['minecraft:splash','minecraft:splash_potion'],['minecraft:lingering','minecraft:lingering_potion']]);
+export const Potions={
+ getEffectType:id=>potionTypes.get(id),getDeliveryType:id=>potionDeliveries.has(id)?{id}:undefined,
+ getAllEffectTypes:()=>[...potionTypes.values()],getAllDeliveryTypes:()=>[...potionDeliveries.keys()].map(id=>({id})),
+ resolve(effect,delivery){const e=typeof effect==='string'?effect:effect.id,d=typeof delivery==='string'?delivery:delivery.id;if(!potionTypes.has(e)||!potionDeliveries.has(d))throw Error('INVALID_POTION_TYPE');const item=new ItemStack(potionDeliveries.get(d),1);item.meta['minecraft:potion']={potionEffectType:{...potionTypes.get(e)},potionDeliveryType:{id:d}};return item;}
+};
+export function mockHealth(current=20,maximum=20){return {currentValue:current,effectiveMax:maximum,setCurrentValue(n){if(this.fail)throw Error('HEALTH_FAIL');this.currentValue=n;}};}
+
+// Official native damage-cause enum, test double only.
+export const EntityDamageCause={sonicBoom:"sonicBoom"};

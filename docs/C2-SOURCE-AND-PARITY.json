@@ -1,0 +1,83 @@
+{
+  "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+  "source": "user_uploaded_NeoForge_1.2.0_MC1.21.1",
+  "new_data_members": 49,
+  "jar_executed": false,
+  "javap": [
+    {
+      "path": "data/upstream/javap/block.plant.GrapeCropBlock.txt",
+      "sha256": "ea89c4e733f5d2430502b5bdd43cfb728023d721d2bb38e237ff4c8e6e089416",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/block.plant.GrapevineTrellisBlock.txt",
+      "sha256": "68e2190a006c54e60715e338ab04965037b5ffe95abe16a84a60afd547963211",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/block.plant.ITrellis.txt",
+      "sha256": "a654ba4c178654d86c99a27968f300715c954f9071c4b40b47a5310224078343",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/block.plant.TrellisBlock.txt",
+      "sha256": "3fed4d3e16ee9b2e085924c764fe2bb150c659ab52e4da84218fcc21d380709d",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/game.grape.GoldGrapePlant.txt",
+      "sha256": "9c399ad0058b61555e32d95250bf3b02758b9a5fa6c3381fdce79992fbad5315",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/game.grape.IceGrapePlant.txt",
+      "sha256": "3e649fe1b1ab46693ccddc9b61faacc19366ae98e2c2689e865021ad69d7ac3c",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/game.grape.NormalGrapePlant.txt",
+      "sha256": "c924fe300115ff9af2e87ef8b80469c4f58d801dbdd915923cf6f952fdef3065",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/init.ModBlocks.txt",
+      "sha256": "e64cb5e662db397e43b7c42d0b4a296efa565010e1f8aead303adc50fc6e4293",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/init.ModFoods.txt",
+      "sha256": "46953172aab2c84806bfdedd01f441485f02e430e7dc43fc67a22f3b600632a4",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/item.DrinkBlockItem.txt",
+      "sha256": "e02c8085f6ff7e97a43e52144059a9488f74df484c31fb8ceb3c102222cf528f",
+      "kind": "javap_read_only_disassembly"
+    },
+    {
+      "path": "data/upstream/javap/item.GrapevineItem.txt",
+      "sha256": "34d87839df16e88f528e65929051440463427739002649c2d18ff5dd9745a2fb",
+      "kind": "javap_read_only_disassembly"
+    }
+  ],
+  "github_reference_commit": "a1afba34981a00e89d57130d3dc8f1e64f1820a2",
+  "github_is_exact_jar_build_commit_claimed": false,
+  "reference_paths": [
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/GrapeCropBlock.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/GrapevineTrellisBlock.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/DrinkBlockItem.java"
+  ],
+  "cross_edition_adaptations": {
+    "survival_starter": "explicit_port_recipe_vine_plus_sweet_berries",
+    "soil_tags": "explicit_vanilla_ID_expansion_not_dynamic_Java_tags",
+    "climate_growth": "base0.25_no_temperature_mapping",
+    "cross_frame_collision": "bounding_box_not_multi_box_union",
+    "bottle_support": "stable_explicit_vanilla_whitelist_or_custom_block_tag_not_pre_release_isSolid",
+    "physics": "plants_and_bottles_explosion_piston_protected",
+    "support_loss": "fruit_despawns_without_drops; bottle_stack_retained_for_recovery",
+    "creative_bottles": "consume_one_return_one",
+    "drink_effects": "14_native_types;5_custom_types_explicitly_unsupported"
+  },
+  "engine_acceptance": "NOT_RUN"
+}

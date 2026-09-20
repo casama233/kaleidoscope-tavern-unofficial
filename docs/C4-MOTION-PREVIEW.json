@@ -1,0 +1,20 @@
+{
+  "scope": "Offline CPU textured model animation samples only; no Minecraft, player model, GPU or native animation engine.",
+  "frames": 50,
+  "fps": 25,
+  "loop_pause_ms": 800,
+  "unique_rendered_frames": {
+    "put": 10,
+    "shake": 50,
+    "pour": 4
+  },
+  "all_motion_nonstatic": true,
+  "original_texture_sha256": "8cf12cd2ab194d976735419a1366799f6260399fecf4f65f926d59157e311e6f",
+  "limitations": [
+    "No player skeleton / wrist or third-person appearance simulated.",
+    "Source PUT Catmull-Rom independently sampled with clamped endpoint tangents; Bedrock interpolation not certified.",
+    "Shake camera mount/scale are omitted to display the relative source curve.",
+    "Pour tilt is C4-adapted, not a recovered original animation.",
+    "No particles, sound, network latency or in-game synchronization simulated."
+  ]
+}

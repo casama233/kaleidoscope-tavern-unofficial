@@ -1,0 +1,174 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:gold_grape_crop",
+      "states": {
+        "kaleidoscope_tavern:age": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage0"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a2_gold_grape_crop_stage0",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": true
+        }
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage0"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a2_gold_grape_crop_stage0",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          }
+        }
+      },
+      "kaleidoscope_tavern:grape_crop": {},
+      "minecraft:tick": {
+        "interval_range": [
+          40,
+          40
+        ],
+        "looping": true
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": {
+        "origin": [
+          -6,
+          6,
+          -6
+        ],
+        "size": [
+          12,
+          10,
+          12
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.6
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3600000
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:light_dampening": 0
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 0",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage0"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage0",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 1",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage1"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage1",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 2",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage2"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage2",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 3",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage3"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage3",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 4",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage4"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage4",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:age') == 5",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a2.gold_grape_crop_stage5"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a2_gold_grape_crop_stage5",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            }
+          }
+        }
+      }
+    ]
+  }
+}

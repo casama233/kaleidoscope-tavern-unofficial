@@ -1,0 +1,180 @@
+Compiled from "EffectEvent.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.event.EffectEvent {
+  public com.github.ysbbbbbb.kaleidoscopetavern.event.EffectEvent();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onLivingDeath(net.neoforged.neoforge.event.entity.living.LivingDeathEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method net/neoforged/neoforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: invokevirtual #13                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+       7: getfield      #19                 // Field net/minecraft/world/level/Level.isClientSide:Z
+      10: ifeq          14
+      13: return
+      14: aload_0
+      15: invokevirtual #7                  // Method net/neoforged/neoforge/event/entity/living/LivingDeathEvent.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      18: astore_1
+      19: aload_0
+      20: invokevirtual #25                 // Method net/neoforged/neoforge/event/entity/living/LivingDeathEvent.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      23: invokevirtual #29                 // Method net/minecraft/world/damagesource/DamageSource.getEntity:()Lnet/minecraft/world/entity/Entity;
+      26: astore_2
+      27: aload_2
+      28: instanceof    #14                 // class net/minecraft/world/entity/LivingEntity
+      31: ifeq          49
+      34: aload_2
+      35: checkcast     #14                 // class net/minecraft/world/entity/LivingEntity
+      38: astore_3
+      39: aload_3
+      40: getstatic     #34                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.BLOODY_MARY:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      43: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.hasEffect:(Lnet/minecraft/core/Holder;)Z
+      46: ifne          50
+      49: return
+      50: aload_1
+      51: aload_3
+      52: if_acmpne     56
+      55: return
+      56: aload_1
+      57: invokevirtual #44                 // Method net/minecraft/world/entity/LivingEntity.getMaxHealth:()F
+      60: ldc           #48                 // float 3.0f
+      62: fdiv
+      63: f2d
+      64: invokestatic  #49                 // Method java/lang/Math.floor:(D)D
+      67: d2i
+      68: istore        4
+      70: iload         4
+      72: ifle          82
+      75: aload_3
+      76: iload         4
+      78: i2f
+      79: invokevirtual #55                 // Method net/minecraft/world/entity/LivingEntity.heal:(F)V
+      82: return
+
+  public static void onLivingHurt(net.neoforged.neoforge.event.entity.living.LivingDamageEvent$Pre);
+    Code:
+       0: aload_0
+       1: invokevirtual #59                 // Method net/neoforged/neoforge/event/entity/living/LivingDamageEvent$Pre.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+       4: invokevirtual #13                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+       7: getfield      #19                 // Field net/minecraft/world/level/Level.isClientSide:Z
+      10: ifeq          14
+      13: return
+      14: aload_0
+      15: invokevirtual #62                 // Method net/neoforged/neoforge/event/entity/living/LivingDamageEvent$Pre.getSource:()Lnet/minecraft/world/damagesource/DamageSource;
+      18: invokevirtual #29                 // Method net/minecraft/world/damagesource/DamageSource.getEntity:()Lnet/minecraft/world/entity/Entity;
+      21: astore_1
+      22: aload_1
+      23: instanceof    #14                 // class net/minecraft/world/entity/LivingEntity
+      26: ifeq          44
+      29: aload_1
+      30: checkcast     #14                 // class net/minecraft/world/entity/LivingEntity
+      33: astore_2
+      34: aload_2
+      35: getstatic     #63                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.TOMB_RAIDER:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      38: invokevirtual #40                 // Method net/minecraft/world/entity/LivingEntity.hasEffect:(Lnet/minecraft/core/Holder;)Z
+      41: ifne          45
+      44: return
+      45: aload_0
+      46: invokevirtual #59                 // Method net/neoforged/neoforge/event/entity/living/LivingDamageEvent$Pre.getEntity:()Lnet/minecraft/world/entity/LivingEntity;
+      49: astore_3
+      50: aload_3
+      51: invokevirtual #66                 // Method net/minecraft/world/entity/LivingEntity.getType:()Lnet/minecraft/world/entity/EntityType;
+      54: getstatic     #70                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.TOMB_RAIDER_DISARMABLE:Lnet/minecraft/tags/TagKey;
+      57: invokevirtual #76                 // Method net/minecraft/world/entity/EntityType.is:(Lnet/minecraft/tags/TagKey;)Z
+      60: ifne          64
+      63: return
+      64: aload_3
+      65: invokevirtual #82                 // Method net/minecraft/world/entity/LivingEntity.getRandom:()Lnet/minecraft/util/RandomSource;
+      68: invokeinterface #86,  1           // InterfaceMethod net/minecraft/util/RandomSource.nextFloat:()F
+      73: ldc           #91                 // float 0.3f
+      75: fcmpl
+      76: iflt          80
+      79: return
+      80: aload_3
+      81: getstatic     #92                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+      84: invokevirtual #98                 // Method net/minecraft/world/entity/LivingEntity.getItemBySlot:(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;
+      87: astore        4
+      89: aload         4
+      91: invokevirtual #102                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      94: ifeq          98
+      97: return
+      98: aload         4
+     100: invokevirtual #108                // Method net/minecraft/world/item/ItemStack.isDamageableItem:()Z
+     103: ifeq          118
+     106: aload         4
+     108: aload         4
+     110: invokevirtual #111                // Method net/minecraft/world/item/ItemStack.getMaxDamage:()I
+     113: iconst_1
+     114: isub
+     115: invokevirtual #115                // Method net/minecraft/world/item/ItemStack.setDamageValue:(I)V
+     118: aload_3
+     119: getstatic     #92                 // Field net/minecraft/world/entity/EquipmentSlot.MAINHAND:Lnet/minecraft/world/entity/EquipmentSlot;
+     122: getstatic     #119                // Field net/minecraft/world/item/ItemStack.EMPTY:Lnet/minecraft/world/item/ItemStack;
+     125: invokevirtual #123                // Method net/minecraft/world/entity/LivingEntity.setItemSlot:(Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;)V
+     128: new           #127                // class net/minecraft/world/entity/item/ItemEntity
+     131: dup
+     132: aload_3
+     133: invokevirtual #13                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+     136: aload_3
+     137: invokevirtual #129                // Method net/minecraft/world/entity/LivingEntity.getX:()D
+     140: aload_3
+     141: invokevirtual #133                // Method net/minecraft/world/entity/LivingEntity.getY:()D
+     144: aload_3
+     145: invokevirtual #136                // Method net/minecraft/world/entity/LivingEntity.getZ:()D
+     148: aload         4
+     150: invokespecial #139                // Method net/minecraft/world/entity/item/ItemEntity."<init>":(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;)V
+     153: astore        5
+     155: aload         5
+     157: bipush        40
+     159: invokevirtual #142                // Method net/minecraft/world/entity/item/ItemEntity.setPickUpDelay:(I)V
+     162: aload_3
+     163: invokevirtual #13                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+     166: aload         5
+     168: invokevirtual #145                // Method net/minecraft/world/level/Level.addFreshEntity:(Lnet/minecraft/world/entity/Entity;)Z
+     171: pop
+     172: return
+
+  public static void onPlayerTick(net.neoforged.neoforge.event.tick.PlayerTickEvent$Post);
+    Code:
+       0: aload_0
+       1: invokevirtual #149                // Method net/neoforged/neoforge/event/tick/PlayerTickEvent$Post.getEntity:()Lnet/minecraft/world/entity/player/Player;
+       4: astore_1
+       5: aload_1
+       6: invokevirtual #154                // Method net/minecraft/world/entity/player/Player.level:()Lnet/minecraft/world/level/Level;
+       9: invokevirtual #157                // Method net/minecraft/world/level/Level.isClientSide:()Z
+      12: ifeq          16
+      15: return
+      16: aload_1
+      17: getstatic     #159                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.ARDENT_HEAT:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      20: invokevirtual #162                // Method net/minecraft/world/entity/player/Player.getEffect:(Lnet/minecraft/core/Holder;)Lnet/minecraft/world/effect/MobEffectInstance;
+      23: astore_2
+      24: aload_2
+      25: ifnonnull     29
+      28: return
+      29: aload_1
+      30: invokevirtual #166                // Method net/minecraft/world/entity/player/Player.getFoodData:()Lnet/minecraft/world/food/FoodData;
+      33: astore_3
+      34: aload_3
+      35: invokevirtual #170                // Method net/minecraft/world/food/FoodData.getFoodLevel:()I
+      38: ifgt          78
+      41: aload_3
+      42: invokevirtual #175                // Method net/minecraft/world/food/FoodData.getSaturationLevel:()F
+      45: ldc           #178                // float 0.01f
+      47: fcmpg
+      48: ifgt          78
+      51: aload_1
+      52: getstatic     #159                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.ARDENT_HEAT:Lnet/neoforged/neoforge/registries/DeferredHolder;
+      55: invokevirtual #179                // Method net/minecraft/world/entity/player/Player.removeEffect:(Lnet/minecraft/core/Holder;)Z
+      58: pop
+      59: aload_1
+      60: new           #182                // class net/minecraft/world/effect/MobEffectInstance
+      63: dup
+      64: getstatic     #184                // Field net/minecraft/world/effect/MobEffects.HUNGER:Lnet/minecraft/core/Holder;
+      67: sipush        600
+      70: iconst_0
+      71: invokespecial #190                // Method net/minecraft/world/effect/MobEffectInstance."<init>":(Lnet/minecraft/core/Holder;II)V
+      74: invokevirtual #193                // Method net/minecraft/world/entity/player/Player.addEffect:(Lnet/minecraft/world/effect/MobEffectInstance;)Z
+      77: pop
+      78: return
+}

@@ -1,0 +1,20 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:empty_bottle"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "result": {
+      "item": "kaleidoscope_tavern:empty_bottle",
+      "count": 1
+    },
+    "ingredients": [
+      {
+        "item": "minecraft:glass_bottle"
+      }
+    ]
+  }
+}

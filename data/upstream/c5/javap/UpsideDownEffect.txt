@@ -1,0 +1,90 @@
+Compiled from "UpsideDownEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.UpsideDownEffect extends com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect {
+  private static final double RANGE;
+
+  private static final net.minecraft.network.chat.Component GRUMM;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.UpsideDownEffect(int);
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field net/minecraft/world/effect/MobEffectCategory.NEUTRAL:Lnet/minecraft/world/effect/MobEffectCategory;
+       4: iload_1
+       5: invokespecial #7                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(Lnet/minecraft/world/effect/MobEffectCategory;I)V
+       8: return
+
+  public boolean isInstantenous();
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public void applyInstantenousEffect(net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.entity.LivingEntity, int, double);
+    Code:
+       0: aload_0
+       1: aload_3
+       2: invokevirtual #13                 // Method performEffect:(Lnet/minecraft/world/entity/LivingEntity;)V
+       5: return
+
+  public boolean applyEffectTick(net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #13                 // Method performEffect:(Lnet/minecraft/world/entity/LivingEntity;)V
+       5: iconst_1
+       6: ireturn
+
+  public boolean shouldApplyEffectTickThisTick(int, int);
+    Code:
+       0: iload_1
+       1: iconst_1
+       2: if_icmpne     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+
+  private void performEffect(net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: aload_1
+       1: invokevirtual #19                 // Method net/minecraft/world/entity/LivingEntity.level:()Lnet/minecraft/world/level/Level;
+       4: astore_2
+       5: aload_2
+       6: invokevirtual #25                 // Method net/minecraft/world/level/Level.isClientSide:()Z
+       9: ifeq          13
+      12: return
+      13: aload_1
+      14: invokevirtual #31                 // Method net/minecraft/world/entity/LivingEntity.getBoundingBox:()Lnet/minecraft/world/phys/AABB;
+      17: ldc2_w        #35                 // double 16.0d
+      20: invokevirtual #37                 // Method net/minecraft/world/phys/AABB.inflate:(D)Lnet/minecraft/world/phys/AABB;
+      23: astore_3
+      24: aload_2
+      25: ldc           #43                 // class net/minecraft/world/entity/Mob
+      27: aload_3
+      28: invokedynamic #45,  0             // InvokeDynamic #0:test:()Ljava/util/function/Predicate;
+      33: invokevirtual #49                 // Method net/minecraft/world/level/Level.getEntitiesOfClass:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;)Ljava/util/List;
+      36: astore        4
+      38: aload         4
+      40: invokeinterface #53,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      45: astore        5
+      47: aload         5
+      49: invokeinterface #59,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      54: ifeq          86
+      57: aload         5
+      59: invokeinterface #64,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      64: checkcast     #43                 // class net/minecraft/world/entity/Mob
+      67: astore        6
+      69: aload         6
+      71: getstatic     #68                 // Field GRUMM:Lnet/minecraft/network/chat/Component;
+      74: invokevirtual #72                 // Method net/minecraft/world/entity/Mob.setCustomName:(Lnet/minecraft/network/chat/Component;)V
+      77: aload         6
+      79: iconst_0
+      80: invokevirtual #76                 // Method net/minecraft/world/entity/Mob.setCustomNameVisible:(Z)V
+      83: goto          47
+      86: return
+
+  static {};
+    Code:
+       0: ldc           #80                 // String Grumm
+       2: invokestatic  #82                 // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+       5: putstatic     #68                 // Field GRUMM:Lnet/minecraft/network/chat/Component;
+       8: return
+}

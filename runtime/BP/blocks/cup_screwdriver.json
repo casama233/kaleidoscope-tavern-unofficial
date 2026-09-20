@@ -1,0 +1,136 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:cup_screwdriver",
+      "states": {
+        "kaleidoscope_tavern:facing": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_assets_a7.screwdriver"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a7_block_mixology_screwdriver",
+          "render_method": "blend",
+          "ambient_occlusion": 0.0,
+          "face_dimming": true
+        },
+        "unshaded": {
+          "texture": "kt_assets_a7_block_mixology_screwdriver",
+          "render_method": "blend",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a7.screwdriver"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a7_block_mixology_screwdriver",
+            "render_method": "blend",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a7_block_mixology_screwdriver",
+            "render_method": "blend",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      },
+      "kaleidoscope_tavern:cocktail_cup": {},
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": {
+        "origin": [
+          -6,
+          0,
+          -6
+        ],
+        "size": [
+          12,
+          16,
+          12
+        ]
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          20,
+          20
+        ],
+        "looping": true
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.4
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3600000
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:light_dampening": 0
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 0",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 1",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 2",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -180,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 3",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -270,
+              0
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "森羅物語：酒館 C6 | 功能開發版",
+    "description": "Independent Tavern guides + extension API + first brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.",
+    "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+    "version": [
+      0,
+      6,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "7ef0dab4-2bd9-5cc6-a84c-a0b6fac17ab1",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "733b7540-9264-51f0-9c5b-e834378cb3ae",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+      "version": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "uuid": "10f37ae2-9ccf-435f-b34b-0eec8191cd94",
+      "version": [
+        1,
+        0,
+        6
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.7.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    }
+  ]
+}

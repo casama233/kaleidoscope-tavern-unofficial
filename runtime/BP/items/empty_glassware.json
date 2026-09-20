@@ -1,0 +1,18 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:empty_glassware",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_c3_empty_glassware",
+      "minecraft:display_name": {
+        "value": "%item.kaleidoscope_tavern:empty_glassware.name"
+      },
+      "minecraft:max_stack_size": 16
+    }
+  }
+}

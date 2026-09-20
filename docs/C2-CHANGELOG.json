@@ -1,0 +1,709 @@
+{
+  "phase": "C2",
+  "version": [
+    0,
+    2,
+    0
+  ],
+  "baseline": "C1",
+  "added_runtime_files": [
+    "runtime/BP/functions/kt_c2_kit.mcfunction",
+    "runtime/BP/recipes/grapevine_starter.json",
+    "runtime/BP/recipes/trellis.json",
+    "runtime/BP/blocks/ice_grapevine_trellis.json",
+    "runtime/BP/blocks/bottle_sweet_berry_wine.json",
+    "runtime/BP/blocks/bottle_riesling_dry_white.json",
+    "runtime/BP/blocks/grapevine_trellis.json",
+    "runtime/BP/blocks/bottle_sunset_glow.json",
+    "runtime/BP/blocks/bottle_miners_star.json",
+    "runtime/BP/blocks/bottle_sauvignon_blanc_dry_white.json",
+    "runtime/BP/blocks/bottle_rum.json",
+    "runtime/BP/blocks/bottle_champagne.json",
+    "runtime/BP/blocks/bottle_whiskey.json",
+    "runtime/BP/blocks/gold_grape_crop.json",
+    "runtime/BP/blocks/bottle_ice_wine.json",
+    "runtime/BP/blocks/bottle_carignan.json",
+    "runtime/BP/blocks/bottle_wine.json",
+    "runtime/BP/blocks/bottle_sherry.json",
+    "runtime/BP/blocks/ice_grape_crop.json",
+    "runtime/BP/blocks/bottle_sakura_wine.json",
+    "runtime/BP/blocks/bottle_brandy.json",
+    "runtime/BP/blocks/bottle_vinegar.json",
+    "runtime/BP/blocks/bottle_luminous_bride.json",
+    "runtime/BP/blocks/grape_crop.json",
+    "runtime/BP/blocks/bottle_mother_snow.json",
+    "runtime/BP/blocks/bottle_vodka.json",
+    "runtime/BP/blocks/bottle_red_queen.json",
+    "runtime/BP/blocks/bottle_plum_wine.json",
+    "runtime/BP/blocks/bottle_madame_shexiang.json",
+    "runtime/BP/blocks/bottle_glowflower_brew.json",
+    "runtime/BP/blocks/bottle_polaris_sweet_white.json",
+    "runtime/BP/blocks/bottle_honey_wine.json",
+    "runtime/BP/blocks/gold_grapevine_trellis.json",
+    "runtime/BP/blocks/trellis.json",
+    "runtime/BP/items/grapevine.json",
+    "runtime/BP/scripts/core/drink-effects.js",
+    "runtime/BP/scripts/core/cultivation.js",
+    "runtime/BP/scripts/core/bottles.js",
+    "runtime/BP/scripts/core/bottle-support.js",
+    "runtime/BP/scripts/bedrock/transactions.js",
+    "runtime/BP/scripts/bedrock/drink-effects.js",
+    "runtime/BP/scripts/bedrock/cultivation.js",
+    "runtime/BP/scripts/bedrock/bottles.js",
+    "runtime/BP/scripts/data/drink-effects.js",
+    "runtime/BP/scripts/data/effect-pages.js",
+    "runtime/BP/scripts/data/bottles.js"
+  ],
+  "changed_runtime_files": [
+    {
+      "path": "runtime/BP/items/brandy_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/brandy_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/brandy_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/brandy_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/brandy_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/brandy_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/carignan_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/champagne_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/glowflower_brew_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/gold_grape.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/grape.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/green_grape.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/honey_wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_grape.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/ice_wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/luminous_bride_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/madame_shexiang_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/miners_star_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/mother_snow_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/plum_wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/polaris_sweet_white_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/red_queen_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/riesling_dry_white_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/rum_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sakura_wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sauvignon_blanc_dry_white_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sherry_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sunset_glow_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/sweet_berry_wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vinegar_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/vodka_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/whiskey_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q1.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q2.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q3.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q4.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q5.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/items/wine_q6.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/manifest.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/scripts/bedrock/guidebook.js",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/scripts/bedrock/machines.js",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/scripts/data/guide-pages.js",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/BP/scripts/main.js",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/RP/manifest.json",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/RP/texts/en_US.lang",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/RP/texts/zh_CN.lang",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/RP/texts/zh_TW.lang",
+      "change": "modified"
+    },
+    {
+      "path": "runtime/RP/textures/item_texture.json",
+      "change": "modified"
+    }
+  ],
+  "new_features": [
+    "three-species trellis cultivation",
+    "wax/prune/bonemeal/shears handling",
+    "24 bottle families with93 arrangements and individual quality retention",
+    "14 native effect types from24 source quality tables",
+    "independent cultivation and bottle guide pages plus24 source effect pages"
+  ],
+  "source_rule_correction": "Q1 is drinkable, not blocked. Source effect duration is seconds.",
+  "known_limits": [
+    "5 custom effect types not implemented",
+    "native consumption/return-container not engine-tested",
+    "biome acceleration/wildgen/waterlogging not implemented",
+    "support collision whitelist/tag is intentionally conservative",
+    "plant and display protection differs from Java explosion behavior",
+    "C1/C2 world upgrade not engine-tested"
+  ],
+  "tests": 144,
+  "engine_acceptance": "NOT_RUN"
+}

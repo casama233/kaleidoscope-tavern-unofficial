@@ -12,7 +12,7 @@ MSGS={
 'C5':'C5: native use lifecycle, potion data and custom effects',
 'C6':'C6: sonic effect, stools and string lights gameplay',
 'C7':'C7: furniture, text, worldgen, Molotov and source-style tap flow'}
-PROHIBITED={'.jar','.class','.ttf','.otf','.ttc','.woff','.woff2'}
+PROHIBITED={'.jar','.class','.pyc','.ttf','.otf','.ttc','.woff','.woff2'}
 
 def run(cmd,cwd,env=None):
     print('+',*map(str,cmd),flush=True)
@@ -30,6 +30,8 @@ def clean_prohibited(stage):
     for p in stage.rglob('*'):
         if p.is_file() and p.suffix.lower() in PROHIBITED:bad.append(p)
     for p in bad:p.unlink()
+    for d in list(stage.rglob('__pycache__')):
+        if d.is_dir():shutil.rmtree(d,ignore_errors=True)
     # never vendor Cookery archives/binaries even if a future snapshot accidentally includes one
     for p in list(stage.rglob('*')):
         if p.is_file() and 'cookery' in p.name.lower() and p.suffix.lower() in {'.mcaddon','.mcpack','.zip','.jar'}:p.unlink()

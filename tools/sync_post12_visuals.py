@@ -114,7 +114,19 @@ def patch_registry(text,key,method,apply):
 
 def _add_material(face):
     if '"material_instance"' in face: return face
-    m=re.search(r'\n(\s*)\}\s*    text=path.read_text(encoding='utf-8'); parsed=json.loads(text)
+    m=re.search(r'\n(\s*)\}\s*$',face)
+    if not m: raise AssertionError('face object close not found')
+    indent=m.group(1); body=face[:m.start()].rstrip()
+    return body+',\n'+indent+'  "material_instance": "unshaded"\n'+indent+'}'
+
+def _replace_pair(face,field,values):
+    p=re.compile(rf'("{re.escape(field)}"\s*:\s*\[\s*)([-+0-9.eE]+)(\s*,\s*)([-+0-9.eE]+)(\s*\])')
+    m=p.search(face)
+    if not m: raise AssertionError(f'{field} pair not found')
+    return face[:m.start()]+m.group(1)+json.dumps(values[0])+m.group(3)+json.dumps(values[1])+m.group(5)+face[m.end():]
+
+def patch_geo(path,cube_indices,uv_changes,apply):
+    text=path.read_text(encoding='utf-8'); parsed=json.loads(text)
     cubes=parsed['minecraft:geometry'][0]['bones'][0]['cubes']
     for idx in cube_indices:
         if idx<0 or idx>=len(cubes): raise AssertionError(f'{path}: cube {idx} out of range')

@@ -6,7 +6,7 @@ import {runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js'
 import {placeFurniture,sitOnFurniture,recoverFurniture,recolorLight,ensureSeat,maintainSeat,tickFurniture,FURNITURE_TEST,furnitureDiagnostics} from '../runtime/BP/scripts/bedrock/furniture.js';
 import {NS,COLORS,LIGHT_COLORS,FACING,SEAT_ANCHOR,anchorKey,seatId} from '../runtime/BP/scripts/core/furniture.js';
 import {performShriek,COMBAT_TEST,combatDiagnostics} from '../runtime/BP/scripts/bedrock/combat-effects.js';
-import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics} from '../runtime/BP/scripts/bedrock/custom-effects.js';
+import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics,pulseVision} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 import {consumeCocktail} from '../runtime/BP/scripts/bedrock/mixology.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
 const pos={x:0,y:64,z:0};
@@ -61,3 +61,15 @@ test('Shriek applied through signature/custom dispatcher is instant, no saved ti
 test('Screwdriver upside-down renames only alive mobs inside Java-style inflated AABB and stays instant',()=>{const p=player(),near=mob(p,{z:16.5}),far=mob(p,{z:16.61}),dead=mob(p,{z:8,health:0}),q=player('upside-friend');q.location={...p.location,z:p.location.z+8};q.health=mockHealth(20,20);q.box={center:{x:q.location.x,y:q.location.y+1,z:q.location.z},extent:{x:.3,y:1,z:.3}};d.entities.set(q.id,q);hand(p,NS+':screwdriver');const before=customEffectDiagnostics.upsideDownRenames;const out=consumeCocktail({source:p,itemStack:p.inventory.getItem(0)},()=>0);assert.equal(out[0].status,'APPLIED_CUSTOM');assert.equal(near.nameTag,'Grumm');assert.equal(far.nameTag,undefined);assert.equal(dead.nameTag,undefined);assert.equal(q.nameTag,undefined);assert.equal(p.getDynamicProperty(NS+':custom_effects'),undefined);assert.equal(customEffectDiagnostics.upsideDownRenames,before+1);});
 test('remaining unsupported effects are still not substituted with arbitrary buffs',()=>{const p=player();assert.equal(applyCustomEffect(p,{effect:NS+':long_reach',duration:100,amplifier:0}),false);assert.equal(p.effects.length,0);});
 test('independent guide includes new furniture/effect pages; recipe API count stays41',()=>{assert.equal(runtimeRegistry().allRecipes().length,41);const ids=runtimeRegistry().allPages().map(x=>x.id);assert(ids.includes(NS+':c6_furniture'));assert(ids.includes(NS+':c6_sonic'));assert.equal(diagnosticSnapshot().build,'C6 / 0.6.0');assert.equal(diagnosticSnapshot().independentGuidebook,true);});
+
+test('Mojito Vision persists as timed custom effect then pulses Glowing every Java 50-tick boundary',()=>{
+ const p=player(),near=mob(p,{z:5}),q=player('vision-friend');q.location={...p.location,z:p.location.z+4};q.health=mockHealth(20,20);q.box={center:{x:q.location.x,y:q.location.y+1,z:q.location.z},extent:{x:.3,y:1,z:.3}};d.entities.set(q.id,q);
+ hand(p,NS+':mojito');const out=consumeCocktail({source:p,itemStack:p.inventory.getItem(0)},()=>0);assert.equal(out[0].status,'APPLIED_CUSTOM');
+ const saved=JSON.parse(p.getDynamicProperty(NS+':custom_effects'));assert(saved.entries.some(e=>e.id===NS+':vision'&&e.ticks===36000&&e.amplifier===0));
+ const before=customEffectDiagnostics.visionPulses;system.advance(5);assert(customEffectDiagnostics.visionPulses>before);assert.equal(near.getEffect('glowing').ticks,60);assert.equal(q.getEffect('glowing').ticks,60);assert(d.sounds.some(s=>s.id==='kt_assets_a17.effect.vision'));
+ const sounds=d.sounds.length;system.advance(50);assert.equal(d.sounds.length,sounds);
+});
+test('Vision amplifier radius caps at18 and excludes dead/self/outside AABB targets',()=>{
+ const p=player(),edge=mob(p,{x:18.2,z:0}),outside=mob(p,{x:18.61,z:0}),dead=mob(p,{x:3,z:0,health:0});const sounds=d.sounds.length;
+ const n=pulseVision(p,2);assert.equal(n,1);assert.equal(edge.getEffect('glowing').ticks,60);assert.equal(outside.getEffect('glowing'),undefined);assert.equal(dead.getEffect('glowing'),undefined);assert.equal(d.sounds.length,sounds+1);
+});

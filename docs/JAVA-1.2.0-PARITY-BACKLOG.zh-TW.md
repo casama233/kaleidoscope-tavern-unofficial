@@ -17,7 +17,7 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽的手動存取／精確品質返還／來源瓶型展示已完成；Circular亮度14與End Rod粒子已適配** | Bar/Cellar Cabinet；Holder/Rack 紅石彈射仍未移植 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽，以及木質／玻璃 Bar Cabinet 雙槽存取、精確品質返還與來源展示已完成** | Cellar Cabinet 九槽；Holder/Rack 紅石彈射仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
@@ -184,3 +184,15 @@ Java 原本使用共同名稱「掛畫」再用 tooltip 顯示作品名；Bedroc
 ## Stepladder 暫緩原因
 
 Stepladder 的雙格放置可以直接復用 Batch 11 的 vertical-double 核心，但 Java 每個 half 的碰撞都是兩個 VoxelShape box 的聯集。Bedrock 穩定 custom block `minecraft:collision_box` 只能描述單一 AABB；直接取包圍盒會把人字梯變成大實心牆，明顯損害可玩性。因此目前只完成來源核對，不用錯誤碰撞宣稱完成；找到穩定複合碰撞方案後再回補。
+
+## Batch 15：Bar Cabinet / Glass Bar Cabinet
+
+Java 1.2.0 的 `BAR_CABINET` 與 `GLASS_BAR_CABINET` 都直接註冊 `BarCabinetBlock::new`，因此兩者只差模型／貼圖／配方，互動與存儲完全共用。每個櫃體有 left/right 兩個物品位與 `is_single`。普通 BottleBlockItem 可放兩瓶；若只有一側已佔用，玩家點到已佔用側再次放瓶時來源會自動改放空側，空手點到空側時也會自動改取唯一瓶子。
+
+`bar_cabinet_irregular` 來源 tag 精確只有 brandy、carignan。異形瓶只能在完全空櫃放入，強制寫入 left 並設 `single=true`，渲染時置中；single 狀態不接受第二瓶。取出後 single 恢復 false。Bedrock world DP 保存 left/right 完整品質 ID 與 single flag，validation 禁止非法 single/異形組合。
+
+櫃體連接依 Java `updateShape/getStateForPlacement` 還原 single/left/middle/right 四態，只承認「同一 Block 類型 + 同 facing」鄰居，所以木質 Bar Cabinet 與 Glass Bar Cabinet 不互連。瓶子展示使用最多兩個 `bar_cabinet_bottle_visual`，復用既有25種來源瓶型；scale 0.9，普通瓶左右分置，異形 single 居中。櫃體未覆寫 shape，因此完整方塊碰撞。
+
+木櫃配方 GGG/G G/GGG 使用 grapevine。玻璃櫃 Java 配方中央為 `c:glass_panes`；Bedrock shaped recipe 支援 tag ingredient，但無法可靠假設 Java common tag 名在 Bedrock 端存在，因此本移植明確展開成無色 glass_pane + 16色 stained_glass_pane，共17份等價配方。
+
+Batch 14 的14款掛畫與其 generator/測試全部保留。實機瓶型位置、Glass Cabinet cutout/透明效果、多人重連與手機左右點擊仍為 **NOT_RUN**。

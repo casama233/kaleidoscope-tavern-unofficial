@@ -17,7 +17,7 @@
   "ui_api": "2.0.0",
   "builtin_barrel_recipes": 23,
   "builtin_pressing_recipes": 6,
-  "native_crafting_recipes": 82,
+  "native_crafting_recipes": 100,
   "quality_drink_items": 144,
   "planned_recipe_exclusions": [
     {
@@ -86,7 +86,8 @@
     "tilted_racks": 1,
     "circular_racks": 1,
     "paintings": 14,
-    "new_shaped_recipes": 59,
+    "bar_cabinets": 2,
+    "new_shaped_recipes": 77,
     "new_shapeless_recipes": 13,
     "source_anchor_y": 0.875,
     "source_explicit_rider_offset": -0.0625,
@@ -110,6 +111,10 @@
     "circular_rack_light": 14,
     "circular_rack_particle": "minecraft:endrod / 20-tick Bedrock cadence",
     "circular_rack_redstone": "NOT_ADAPTED",
+    "bar_cabinet_slots": 2,
+    "bar_cabinet_irregular_bases": 2,
+    "bar_cabinet_connection_states": 4,
+    "glass_bar_cabinet_pane_recipes": 17,
     "table_axis_states": 2,
     "table_position_states": 4,
     "table_collision_y": [

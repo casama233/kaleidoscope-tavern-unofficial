@@ -1152,6 +1152,132 @@
       "engine_accepted": false
     },
     {
+      "kind": "bar_cabinet",
+      "style": "wood",
+      "item": "kaleidoscope_tavern:bar_cabinet",
+      "block": "kaleidoscope_tavern:bar_cabinet",
+      "helper": "kaleidoscope_tavern:bar_cabinet_bottle_visual",
+      "geometry_by_position": {
+        "single": "geometry.kt_assets_a6.bar_cabinet_single",
+        "left": "geometry.kt_assets_a6.bar_cabinet_left",
+        "middle": "geometry.kt_assets_a6.bar_cabinet_middle",
+        "right": "geometry.kt_assets_a6.bar_cabinet_right"
+      },
+      "item_geometry": "geometry.kt_assets_a17.item_display_bar_cabinet",
+      "slots": 2,
+      "irregular_bases": [
+        "brandy",
+        "carignan"
+      ],
+      "single_mode": true,
+      "connection_states": 4,
+      "same_type_connect_only": true,
+      "display_kinds": [
+        "empty_bottle",
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine",
+        "brandy",
+        "carignan",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "state_exact_item_id": true,
+      "source_collision": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "engine_accepted": false
+    },
+    {
+      "kind": "bar_cabinet",
+      "style": "glass",
+      "item": "kaleidoscope_tavern:glass_bar_cabinet",
+      "block": "kaleidoscope_tavern:glass_bar_cabinet",
+      "helper": "kaleidoscope_tavern:bar_cabinet_bottle_visual",
+      "geometry_by_position": {
+        "single": "geometry.kt_assets_a6.glass_bar_cabinet_single",
+        "left": "geometry.kt_assets_a6.glass_bar_cabinet_left",
+        "middle": "geometry.kt_assets_a6.glass_bar_cabinet_middle",
+        "right": "geometry.kt_assets_a6.glass_bar_cabinet_right"
+      },
+      "item_geometry": "geometry.kt_assets_a17.item_display_glass_bar_cabinet",
+      "slots": 2,
+      "irregular_bases": [
+        "brandy",
+        "carignan"
+      ],
+      "single_mode": true,
+      "connection_states": 4,
+      "same_type_connect_only": true,
+      "display_kinds": [
+        "empty_bottle",
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine",
+        "brandy",
+        "carignan",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "state_exact_item_id": true,
+      "source_collision": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "engine_accepted": false
+    },
+    {
       "kind": "pendant_lamp",
       "style": "bell",
       "item": "kaleidoscope_tavern:bell_pendant_lamp",
@@ -2892,5 +3018,6 @@
   "tilted_racks": 1,
   "circular_racks": 1,
   "paintings": 14,
+  "bar_cabinets": 2,
   "engine_accepted": false
 }

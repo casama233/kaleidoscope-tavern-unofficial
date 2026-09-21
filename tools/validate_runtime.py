@@ -143,9 +143,10 @@ def main():
  check('C6_complete_pendant_lamp_family',len([b for b in bindings['bindings']if b['kind']=='pendant_lamp'])==3)
  check('C6_complete_tilted_rack_family',len([b for b in bindings['bindings']if b['kind']=='tilted_rack'])==1)
  check('C6_complete_circular_rack_family',len([b for b in bindings['bindings']if b['kind']=='circular_rack'])==1)
+ check('C6_complete_bar_cabinet_family',len([b for b in bindings['bindings']if b['kind']=='bar_cabinet'])==2)
  check('C6_complete_painting_family',len([b for b in bindings['bindings']if b['kind']=='painting'])==14)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack','painting']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack','painting','bar_cabinet']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -234,6 +235,15 @@ def main():
    check('C6_circular_rack_client_maps',len(cc['geometry'])==25 and len(cc['textures'])==25 and cc['scripts']['scale']=='0.82' and cc['render_controllers']==['controller.render.kt_runtime.circular_rack_bottle'])
    check('C6_circular_rack_render_arrays',len(crc['arrays']['geometries']['Array.kind'])==25 and len(crc['arrays']['textures']['Array.kind'])==25 and 'storage_kind'in crc['geometry'])
    check('C6_circular_rack_source_scope',b['slots']==6 and len(b['allowed_bases'])==24 and b['blocked_bases']==[] and b['light_emission']==14 and b['particle']=='minecraft:endrod' and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
+  elif b['kind']=='bar_cabinet':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_bar_cabinet_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3])
+   check('C6_bar_cabinet_geometries:'+b['style'],all(g in geom for g in b['geometry_by_position'].values()) and sum('kaleidoscope_tavern:position'in x['condition']for x in perms)==4 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
+   check('C6_bar_cabinet_shape_item:'+b['style'],comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
+   check('C6_bar_cabinet_component:'+b['style'],'kaleidoscope_tavern:bar_cabinet'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
+   check('C6_bar_cabinet_helper:'+b['style'],prop['range']==[1,25] and prop['client_sync'] and 'kt_bar_cabinet_visual'in helper['components']['minecraft:type_family']['family'])
+   check('C6_bar_cabinet_source_scope:'+b['style'],b['slots']==2 and b['irregular_bases']==['brandy','carignan'] and b['single_mode'] and b['connection_states']==4 and b['same_type_connect_only'])
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -264,6 +274,10 @@ def main():
   check('C6_painting_shapeless_recipe:'+style,pr['ingredients']==[{'item':'minecraft:item_frame'},{'item':second}] and pr['result']=={'item':f'kaleidoscope_tavern:{style}_painting','count':1})
  mondrian=load(BP/'recipes/mondrian_painting.json')['minecraft:recipe_shaped']
  check('C6_painting_mondrian_recipe',mondrian['pattern']==[' B ','WFY',' R '] and mondrian['key']=={'B':{'item':'minecraft:blue_dye'},'F':{'item':'minecraft:item_frame'},'R':{'item':'minecraft:red_dye'},'W':{'item':'minecraft:white_dye'},'Y':{'item':'minecraft:yellow_dye'}} and mondrian['result']=={'item':'kaleidoscope_tavern:mondrian_painting','count':1})
+ bar_cabinet_recipe=load(BP/'recipes/bar_cabinet.json')['minecraft:recipe_shaped']
+ check('C6_bar_cabinet_source_recipe',bar_cabinet_recipe['pattern']==['GGG','G G','GGG'] and bar_cabinet_recipe['key']=={'G':{'item':'kaleidoscope_tavern:grapevine'}} and bar_cabinet_recipe['result']=={'item':'kaleidoscope_tavern:bar_cabinet','count':1})
+ pane_recipes=sorted((BP/'recipes').glob('glass_bar_cabinet*.json'));panes={load(x)['minecraft:recipe_shaped']['key']['P']['item']for x in pane_recipes}
+ check('C6_glass_bar_cabinet_source_tag_expansion',len(pane_recipes)==17 and len(panes)==17 and 'minecraft:glass_pane'in panes and 'minecraft:black_stained_glass_pane'in panes and all(load(x)['minecraft:recipe_shaped']['result']=={'item':'kaleidoscope_tavern:glass_bar_cabinet','count':1}for x in pane_recipes))
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

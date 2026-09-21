@@ -19,7 +19,7 @@
         ]
       },
       "menu_category": {
-        "category": "construction"
+        "category": "items"
       },
       "traits": {
         "minecraft:placement_position": {
@@ -37,7 +37,7 @@
         "*": {
           "texture": "kt_assets_a2_trellis_single",
           "render_method": "alpha_test",
-          "ambient_occlusion": 0.0,
+          "ambient_occlusion": 0,
           "face_dimming": true
         }
       },
@@ -49,7 +49,7 @@
           "*": {
             "texture": "kt_assets_a2_trellis_single",
             "render_method": "alpha_test",
-            "ambient_occlusion": 0.0,
+            "ambient_occlusion": 0,
             "face_dimming": true
           }
         }
@@ -109,7 +109,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_single",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -138,7 +138,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_east_west",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -167,7 +167,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_north_south",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -196,7 +196,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_cross_east_west",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -225,7 +225,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_cross_north_south",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -254,7 +254,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_cross_up_down",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },
@@ -283,7 +283,7 @@
             "*": {
               "texture": "kt_assets_a2_trellis_six_direction",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             }
           },

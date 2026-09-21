@@ -6,6 +6,13 @@
       "menu_category": {
         "category": "construction"
       },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ]
+        }
+      },
       "states": {
         "kaleidoscope_tavern:axis": [
           0,
@@ -94,7 +101,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 0 && q.block_state('kaleidoscope_tavern:position') == 1",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'north' || q.block_state('minecraft:cardinal_direction') == 'south') && q.block_state('kaleidoscope_tavern:position') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_right"
@@ -102,7 +109,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 0 && q.block_state('kaleidoscope_tavern:position') == 2",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'north' || q.block_state('minecraft:cardinal_direction') == 'south') && q.block_state('kaleidoscope_tavern:position') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_middle"
@@ -110,7 +117,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 0 && q.block_state('kaleidoscope_tavern:position') == 3",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'north' || q.block_state('minecraft:cardinal_direction') == 'south') && q.block_state('kaleidoscope_tavern:position') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_left"
@@ -118,7 +125,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 1 && q.block_state('kaleidoscope_tavern:position') == 1",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'east' || q.block_state('minecraft:cardinal_direction') == 'west') && q.block_state('kaleidoscope_tavern:position') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_right_rot"
@@ -126,7 +133,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 1 && q.block_state('kaleidoscope_tavern:position') == 2",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'east' || q.block_state('minecraft:cardinal_direction') == 'west') && q.block_state('kaleidoscope_tavern:position') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_middle_rot"
@@ -134,7 +141,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:axis') == 1 && q.block_state('kaleidoscope_tavern:position') == 3",
+        "condition": "(q.block_state('minecraft:cardinal_direction') == 'east' || q.block_state('minecraft:cardinal_direction') == 'west') && q.block_state('kaleidoscope_tavern:position') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a12.table_left_rot"

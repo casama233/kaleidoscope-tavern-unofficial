@@ -3,10 +3,12 @@ import {check} from './util.js';
 export const NS='kaleidoscope_tavern';
 export const COLORS=Object.freeze(['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']);
 export const LIGHT_COLORS=Object.freeze(['colorless',...COLORS]);
-export const FACING=NS+':facing',CONNECTION=NS+':connection',AXIS=NS+':axis',POSITION=NS+':position',HALF=NS+':half',ATTACH_FACE=NS+':attach_face',SEAT_ANCHOR=NS+':seat_anchor';
+export const FACING=NS+':facing',CONNECTION=NS+':connection',AXIS=NS+':axis',POSITION=NS+':position',HALF=NS+':half',ATTACH_FACE=NS+':attach_face',SEAT_ANCHOR=NS+':seat_anchor',TABLE_CARDINAL='minecraft:cardinal_direction';
 export const SOFA_CONNECTION=Object.freeze({SINGLE:0,LEFT:1,RIGHT:2,MIDDLE:3,LEFT_CORNER:4,RIGHT_CORNER:5});
 export const SOFA_SEAT_ID=NS+':sofa_seat';
 export const TABLE_AXIS=Object.freeze({X:0,Z:1}),TABLE_POSITION=Object.freeze({SINGLE:0,LEFT:1,MIDDLE:2,RIGHT:3});
+export function tableAxisFromCardinal(direction){check(['north','south','east','west'].includes(direction),'INVALID_TABLE_CARDINAL');return direction==='east'||direction==='west'?TABLE_AXIS.Z:TABLE_AXIS.X;}
+export function tableCardinalForAxis(axis){check([TABLE_AXIS.X,TABLE_AXIS.Z].includes(axis),'INVALID_TABLE_AXIS');return axis===TABLE_AXIS.X?'north':'east';}
 export const DOUBLE_HALF=Object.freeze({UPPER:0,LOWER:1});
 export const PENDANT_LAMP_STYLES=Object.freeze(['bell','blue','yellow']);
 export const PAINTING_ATTACH=Object.freeze({WALL:0,FLOOR:1,CEILING:2});

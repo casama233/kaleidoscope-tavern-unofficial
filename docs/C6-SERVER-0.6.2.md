@@ -62,5 +62,5 @@ python tools/build_server_edition.py           # 版本 0.6.2、補 unlock、修
 
 ### 待上游確認（隔離引擎觀察）
 
-- **酒館桌跨重啟不保留**：在乾淨的隔離世界以模擬玩家放置 `kaleidoscope_tavern:table`（放置與連接狀態正常），完整重啟後原座標為空氣；同批的大缸、烤爐、作物等自訂方塊均正常保留。需上游檢查 Batch 7 桌面的存檔路徑。
+- **酒館桌跨重啟不保留**：隔離 BDS 已確認舊 Batch 7 表格會在完整重啟後變空氣。上游修復改為用 Bedrock 原生 `minecraft:cardinal_direction` trait 保存實際 X/Z 軸，舊 `kaleidoscope_tavern:axis` 僅保留為相容欄位並在 tick 遷移回預設值；這可避免新放置桌子依賴腳本自訂 axis 作為持久化方向。CI 已覆蓋狀態遷移，但仍需在同一隔離 BDS 流程重跑一次「放置→停服→啟服」作最終引擎驗收。
 - 廚房指南章節（#28/#33）與伺服器修正版指南入口的相容性需在真實客戶端驗證（本版仍以 0.6.1 補丁的指南入口為準）。

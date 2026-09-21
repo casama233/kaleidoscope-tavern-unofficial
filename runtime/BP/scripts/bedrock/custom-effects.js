@@ -1,18 +1,33 @@
 import {performShriek} from './combat-effects.js';
-/** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {system,world} from '@minecraft/server';
+/** Source-backed custom effects. Cross-edition differences are explicit; no fake native replacement buffs. */
+import {system,world,EquipmentSlot} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,tombRaiderDisarmable,tombRaiderTriggers,intersectsInflatedAabb} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map();
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,disarms:0,upsideNamed:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 export function statusNow(p){const old=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id);return advanceStatus(old,track?Math.max(0,system.currentTick-track.tick):0);}
 export function clearCustomEffects(p){write(p,{schema:1,entries:[]});tracks.delete(p.id);}
+export function applyUpsideDown(p){
+ try{
+  const source=p.getAABB(),query=Math.hypot(source.extent.x+16,source.extent.y+16,source.extent.z+16)+2;
+  for(const entity of p.dimension.getEntities({location:source.center,maxDistance:query})){
+   try{
+    if(entity.id===p.id||typeof entity.matches!=='function'||!entity.matches({families:['mob']}))continue;
+    const health=entity.getComponent('minecraft:health');if(!health||health.currentValue<=0)continue;
+    if(!intersectsInflatedAabb(source,entity.getAABB(),16))continue;
+    entity.nameTag='Grumm';customEffectDiagnostics.upsideNamed++;
+   }catch(e){error(e);}
+  }
+  return true;
+ }catch(e){error(e);return false;}
+}
 export function applyCustomEffect(p,row){
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
  if(p?.typeId!=='minecraft:player')return false;
  if(row.effect==='kaleidoscope_tavern:shriek_attack')return performShriek(p);
+ if(row.effect==='kaleidoscope_tavern:upside_down')return applyUpsideDown(p);
  if(row.effect==='kaleidoscope_tavern:zenith'){
   // Heightmap/safety adapter: no excavation, no unsafe forced teleport, no fake success.
   const here=p.location,d=p.dimension;
@@ -38,6 +53,22 @@ export function handleKill(event){
   health.setCurrentValue(Math.min(health.effectiveMax,health.currentValue+amount));customEffectDiagnostics.killHeals++;
  }catch(e){error(e);}
 }
+export function handleTombRaiderHurt(event,rng=Math.random){
+ const victim=event.hurtEntity,p=event.damageSource?.damagingEntity;
+ try{
+  if(!victim||!p||p.typeId!=='minecraft:player'||p.id===victim.id)return false;
+  if(!activeStatus(statusNow(p),'kaleidoscope_tavern:tomb_raider'))return false;
+  if(!tombRaiderDisarmable(victim.typeId)||!tombRaiderTriggers(rng()))return false;
+  const equipment=victim.getComponent('minecraft:equippable');if(!equipment)return false;
+  const held=equipment.getEquipment(EquipmentSlot.Mainhand);if(!held)return false;
+  const drop=held.clone(),durability=drop.getComponent('minecraft:durability');
+  if(durability&&Number.isFinite(durability.maxDurability)&&durability.maxDurability>0)durability.damage=Math.max(0,durability.maxDurability-1);
+  if(!equipment.setEquipment(EquipmentSlot.Mainhand,undefined))return false;
+  try{victim.dimension.spawnItem(drop,victim.location);}
+  catch(e){try{equipment.setEquipment(EquipmentSlot.Mainhand,held);}catch(restore){error(restore);}throw e;}
+  customEffectDiagnostics.disarms++;return true;
+ }catch(e){error(e);return false;}
+}
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));
  for(const p of players)try{
@@ -59,6 +90,7 @@ export function tickCustomEffects(){
 }
 export function installCustomEffects(){
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
+ world.afterEvents.entityHurt?.subscribe(e=>handleTombRaiderHurt(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
  world.afterEvents.playerSpawn.subscribe(e=>{tracks.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
  world.afterEvents.playerLeave.subscribe(e=>{const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);});

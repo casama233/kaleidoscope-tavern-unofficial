@@ -1,6 +1,6 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
@@ -73,6 +73,7 @@ export function placeFurniture(player,target,{face='Up'}={}){
   else if(f.kind==='table'){const t=tablePlacementState(facingForYaw(player.getRotation().y),tableNeighbors(d,p));states[AXIS]=t.axis;states[POSITION]=t.position;}
   else if(f.kind==='bar_counter'){states[FACING]=facingForYaw(player.getRotation().y);states[CONNECTION]=SOFA_CONNECTION.SINGLE;}
   else if(f.kind==='glassware_holder'){states[FACING]=facingForYaw(player.getRotation().y);for(const state of GLASSWARE_SLOTS)states[state]=0;}
+  else if(f.kind==='painting'){const ps=paintingPlacementState(face,player.getRotation().y);states[FACING]=ps.facing;states[ATTACH_FACE]=ps.attach;}
   else check(false,'UNKNOWN_FURNITURE');
   exchangeBlocks(player,1,[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),states)}]);placed=b;furnitureDiagnostics.placed++;
  });

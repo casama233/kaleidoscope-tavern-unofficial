@@ -143,8 +143,9 @@ def main():
  check('C6_complete_pendant_lamp_family',len([b for b in bindings['bindings']if b['kind']=='pendant_lamp'])==3)
  check('C6_complete_tilted_rack_family',len([b for b in bindings['bindings']if b['kind']=='tilted_rack'])==1)
  check('C6_complete_circular_rack_family',len([b for b in bindings['bindings']if b['kind']=='circular_rack'])==1)
+ check('C6_complete_painting_family',len([b for b in bindings['bindings']if b['kind']=='painting'])==14)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack','painting']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -190,6 +191,13 @@ def main():
    check('C6_pendant_light_collision:'+b['style'],comps.get('minecraft:collision_box') is False and sum(x['components'].get('minecraft:light_emission')==13 for x in perms)==4 and sum(x['components'].get('minecraft:light_emission')==0 for x in perms)==4)
    check('C6_pendant_component_item:'+b['style'],'kaleidoscope_tavern:pendant_lamp'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['bottom_geometry'])
    check('C6_pendant_selection:'+b['style'],len(perms)==8 and all('minecraft:selection_box'in x['components']for x in perms))
+  elif b['kind']=='painting':
+   states=block['description'].get('states',{});perms=block.get('permutations',[]);shapes=b['source_shapes']
+   check('C6_painting_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:attach_face')==[0,1,2] and 'kaleidoscope_tavern:waterlogged'not in states)
+   check('C6_painting_geometry:'+b['style'],b['geometry']=='geometry.kt_assets_a13.painting_base' and comps.get('minecraft:geometry',{}).get('identifier')==b['geometry'] and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['geometry'])
+   check('C6_painting_permutations:'+b['style'],len(perms)==12 and sum("attach_face') == 0"in x['condition']for x in perms)==4 and sum("attach_face') == 1"in x['condition']for x in perms)==4 and sum("attach_face') == 2"in x['condition']for x in perms)==4)
+   check('C6_painting_shapes:'+b['style'],comps.get('minecraft:collision_box')==shapes['north'] and all(x['components'].get('minecraft:collision_box')==x['components'].get('minecraft:selection_box')for x in perms) and {tuple(x['components']['minecraft:collision_box']['origin']+x['components']['minecraft:collision_box']['size'])for x in perms}=={tuple(shapes[k]['origin']+shapes[k]['size'])for k in ['north','east','south','west','floor','ceiling']})
+   check('C6_painting_source_scope:'+b['style'],b['attach_states']==3 and b['facing_states']==4 and b['waterlogged'] is False and b['exact_collision_parity'] and b['java_item_sprite_replaced_by_block_visual'])
   elif b['kind']=='holder':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_holder_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:holder_kind')==list(range(16)))
@@ -246,6 +254,16 @@ def main():
  check('C6_tilted_rack_source_recipe',tilted_rack_recipe['pattern']==['I  ','CI ','C I'] and tilted_rack_recipe['key']['C']=={'item':'minecraft:chain'} and tilted_rack_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and tilted_rack_recipe['result']=={'item':'kaleidoscope_tavern:tilted_rack','count':3})
  circular_rack_recipe=load(BP/'recipes/circular_rack.json')['minecraft:recipe_shaped']
  check('C6_circular_rack_source_recipe',circular_rack_recipe['pattern']==['IRI','IRI','IRI'] and circular_rack_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and circular_rack_recipe['key']['R']=={'item':'minecraft:end_rod'} and circular_rack_recipe['result']=={'item':'kaleidoscope_tavern:circular_rack','count':2})
+ painting_shapeless={
+  'ysbb':'minecraft:lime_dye','tartaric_acid':'minecraft:light_blue_dye','cr019':'minecraft:red_dye','unknown':'minecraft:yellow_dye','master_marisa':'minecraft:purple_dye',
+  'son_of_man':'minecraft:apple','david':'minecraft:white_dye','girl_with_pearl_earring':'minecraft:ender_pearl','starry_night':'minecraft:echo_shard',
+  'van_gogh_self_portrait':'minecraft:painting','father':'minecraft:iron_hoe','great_wave':'minecraft:bamboo_raft','mona_lisa':'minecraft:diamond'
+ }
+ for style,second in painting_shapeless.items():
+  pr=load(BP/f'recipes/{style}_painting.json')['minecraft:recipe_shapeless']
+  check('C6_painting_shapeless_recipe:'+style,pr['ingredients']==[{'item':'minecraft:item_frame'},{'item':second}] and pr['result']=={'item':f'kaleidoscope_tavern:{style}_painting','count':1})
+ mondrian=load(BP/'recipes/mondrian_painting.json')['minecraft:recipe_shaped']
+ check('C6_painting_mondrian_recipe',mondrian['pattern']==[' B ','WFY',' R '] and mondrian['key']=={'B':{'item':'minecraft:blue_dye'},'F':{'item':'minecraft:item_frame'},'R':{'item':'minecraft:red_dye'},'W':{'item':'minecraft:white_dye'},'Y':{'item':'minecraft:yellow_dye'}} and mondrian['result']=={'item':'kaleidoscope_tavern:mondrian_painting','count':1})
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

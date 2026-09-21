@@ -1,6 +1,6 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,sofaConnection} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,TABLE_AXIS,TABLE_POSITION,SEAT_ANCHOR,CONNECTION_TYPE,SOFA_CONNECTION,TABLE_AXIS_TYPE,TABLE_POSITION_TYPE,SOFA_SEAT_ID,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,connectionType,tableConnection} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
@@ -17,10 +17,18 @@ function nativeRide(e){const r=e.getComponent('minecraft:rideable');check(r,'SEA
 function seated(f){return f&&(['stool','sofa'].includes(f.kind));}
 function atAnchor(d,p){const key=anchorKey(d.id,p);return d.getEntities({location:center(p),maxDistance:1.5}).filter(e=>seatFurniture(e.typeId)&&e.getDynamicProperty(SEAT_ANCHOR)===key);}
 function discard(e,reason){nativeRide(e).ejectRiders();e.remove();helpers.delete(e.id);furnitureDiagnostics[reason]=(furnitureDiagnostics[reason]??0)+1;}
-function sofaDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='sofa')return undefined;return {facing:block.permutation.getState(FACING)??0,connection:block.permutation.getState(CONNECTION)??SOFA_CONNECTION.SINGLE};}
-function sofaConnectionFor(block){const facing=block.permutation.getState(FACING)??0,d=block.dimension,p=block.location,cw=(facing+1)%4,ccw=(facing+3)%4;return sofaConnection(facing,{left:sofaDescriptor(blockAt(d,plus(p,facingVector(cw)))),right:sofaDescriptor(blockAt(d,plus(p,facingVector(ccw)))),front:sofaDescriptor(blockAt(d,plus(p,facingVector(facing))))});}
-export function syncSofa(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='sofa')return false;const wanted=sofaConnectionFor(block),current=block.permutation.getState(CONNECTION)??SOFA_CONNECTION.SINGLE;if(wanted===current)return false;block.setPermutation(block.permutation.withState(CONNECTION,wanted));return true;}
-export function syncSofaNeighborhood(d,p){const positions=[p,...[0,1,2,3].map(f=>plus(p,facingVector(f)))];let changed=0;for(let pass=0;pass<3;pass++)for(const q of positions){const b=blockAt(d,q);if(b)try{if(syncSofa(b))changed++;}catch(e){error(e);}}return changed;}
+function connectionDescriptor(block,kind){const f=furnitureBlock(block?.typeId);if(f?.kind!==kind)return undefined;return {facing:block.permutation.getState(FACING)??0,connection:block.permutation.getState(CONNECTION)??CONNECTION_TYPE.SINGLE};}
+function connectionFor(block,kind){const facing=block.permutation.getState(FACING)??0,d=block.dimension,p=block.location,cw=(facing+1)%4,ccw=(facing+3)%4;return connectionType(facing,{left:connectionDescriptor(blockAt(d,plus(p,facingVector(cw))),kind),right:connectionDescriptor(blockAt(d,plus(p,facingVector(ccw))),kind),front:connectionDescriptor(blockAt(d,plus(p,facingVector(facing))),kind)});}
+function syncConnectionBlock(block,kind){const f=furnitureBlock(block?.typeId);if(f?.kind!==kind)return false;const wanted=connectionFor(block,kind),current=block.permutation.getState(CONNECTION)??CONNECTION_TYPE.SINGLE;if(wanted===current)return false;block.setPermutation(block.permutation.withState(CONNECTION,wanted));return true;}
+function syncConnectionNeighborhood(d,p,kind){const positions=[p,...[0,1,2,3].map(f=>plus(p,facingVector(f)))];let changed=0;for(let pass=0;pass<3;pass++)for(const q of positions){const b=blockAt(d,q);if(b)try{if(syncConnectionBlock(b,kind))changed++;}catch(e){error(e);}}return changed;}
+export function syncSofa(block){return syncConnectionBlock(block,'sofa');}
+export function syncSofaNeighborhood(d,p){return syncConnectionNeighborhood(d,p,'sofa');}
+export function syncBarCounter(block){return syncConnectionBlock(block,'bar_counter');}
+export function syncBarCounterNeighborhood(d,p){return syncConnectionNeighborhood(d,p,'bar_counter');}
+function tableDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return undefined;return {axis:block.permutation.getState(TABLE_AXIS)??TABLE_AXIS_TYPE.Z,position:block.permutation.getState(TABLE_POSITION)??TABLE_POSITION_TYPE.SINGLE};}
+function tableNeighbors(block){const d=block.dimension,p=block.location;return {north:tableDescriptor(blockAt(d,plus(p,facingVector(0)))),east:tableDescriptor(blockAt(d,plus(p,facingVector(1)))),south:tableDescriptor(blockAt(d,plus(p,facingVector(2)))),west:tableDescriptor(blockAt(d,plus(p,facingVector(3))))};}
+export function syncTable(block,updateAxis){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableConnection(current,tableNeighbors(block),updateAxis);if(wanted.axis===current.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(TABLE_AXIS,wanted.axis).withState(TABLE_POSITION,wanted.position));return true;}
+export function syncTableNeighborhood(d,p,placedFacing){const preferred=placedFacing===undefined?undefined:(placedFacing%2===0?TABLE_AXIS_TYPE.X:TABLE_AXIS_TYPE.Z),entries=[[p,preferred],[plus(p,facingVector(0)),TABLE_AXIS_TYPE.Z],[plus(p,facingVector(1)),TABLE_AXIS_TYPE.X],[plus(p,facingVector(2)),TABLE_AXIS_TYPE.Z],[plus(p,facingVector(3)),TABLE_AXIS_TYPE.X]];let changed=0;for(let pass=0;pass<3;pass++)for(const [q,axis] of entries){const b=blockAt(d,q);if(b)try{if(syncTable(b,axis))changed++;}catch(e){error(e);}}return changed;}
 /** Stool helpers also render the stool; sofa helpers are invisible and exist only while occupied. */
 export function ensureSeat(block){
  const f=furnitureBlock(block.typeId);check(seated(f),'NOT_SEAT');const d=block.dimension,p=block.location,key=anchorKey(d.id,p),expected=seatEntityId(f);
@@ -42,10 +50,10 @@ export function placeFurniture(player,target,{face='Up'}={}){
    check(face==='Up',f.kind==='stool'?'STOOL_TOP_ONLY':'SOFA_TOP_ONLY');check(permittedSupport(blockAt(d,plus(p,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
    const above=blockAt(d,plus(p,{x:0,y:1,z:0}));check(above,'UNLOADED_CLEARANCE');check(above.isAir,'SEAT_HEADROOM');
   }
-  const facing=seated(f)?facingForYaw(player.getRotation().y):facingForFace(face,player.getRotation().y),states={[FACING]:facing};if(f.kind==='sofa')states[CONNECTION]=SOFA_CONNECTION.SINGLE;
+  const yawFacing=facingForYaw(player.getRotation().y),states={};if(f.kind==='light')states[FACING]=facingForFace(face,player.getRotation().y);else if(['stool','sofa','bar_counter'].includes(f.kind))states[FACING]=yawFacing;if(['sofa','bar_counter'].includes(f.kind))states[CONNECTION]=CONNECTION_TYPE.SINGLE;if(f.kind==='table'){states[TABLE_AXIS]=TABLE_AXIS_TYPE.Z;states[TABLE_POSITION]=TABLE_POSITION_TYPE.SINGLE;}
   exchangeBlocks(player,1,[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),states)}]);placed=b;furnitureDiagnostics.placed++;
  });
- if(f.kind==='stool')optional(()=>ensureSeat(placed));if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));
+ if(f.kind==='stool')optional(()=>ensureSeat(placed));if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p,facingForYaw(player.getRotation().y)));
  optional(()=>d.playSound('dig.wood',center(p),{volume:.65,pitch:1}));return placed;
 }
 export function sitOnFurniture(player,block){
@@ -63,7 +71,7 @@ export function recoverFurniture(player,block){
   const seats=seated(f)?atAnchor(d,p):[];check(seats.every(e=>nativeRide(e).getRiders().length===0),'SEAT_OCCUPIED');
   exchangeBlocks(player,0,[{id:itemId(f),count:1}],[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
  });
- if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));return result;
+ if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p));return result;
 }
 export function recolorLight(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId),h=hand(player),color=dyeColor(h?.typeId);
@@ -81,12 +89,12 @@ export function maintainSeat(e){
  }catch(x){error(x);helpers.delete(e.id);}
 }
 export function tickFurniture(){const list=[...helpers.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainSeat(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
-export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':string_light',{});}
+export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id);if(!existing&&!heldFurniture)return;e.cancel=true;if(e.isFirstEvent===false)return;
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,target=existing?p:plus(p,faceOffset(face));
-  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料。');}));
+  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 座椅空手坐下；潛行空手收回家具；彩燈使用染料。');}));
  });
  world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||!furnitureBlock(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),hs=handSnapshot(e.player);system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');return recoverFurniture(e.player,b);}));});
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!furnitureBlock(b.typeId))));

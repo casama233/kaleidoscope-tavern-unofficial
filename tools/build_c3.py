@@ -52,7 +52,7 @@ def main():
   # Source icon is separate from placed geometry in the original; no placeholder icon.
   texture='textures/kaleidoscope_tavern_jar/item/'+short;assert(RP/(texture+'.png')).exists(),texture
   icons['texture_data']['kt_c3_'+short]={'textures':texture}
-  c={'minecraft:icon':'kt_c3_'+short,'minecraft:display_name':{'value':'%item.'+N+':'+short+'.name'},'minecraft:max_stack_size':1 if short in ['shaker','signature_cocktail'] else 16}
+  c={'minecraft:icon':'kt_c3_'+short,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:max_stack_size':1 if short in ['shaker','signature_cocktail'] else 16}
   if short not in ['shaker','empty_glassware']:
    c.update({'minecraft:food':{'nutrition':0,'saturation_modifier':0.0,'can_always_eat':True,'using_converts_to':N+':empty_glassware'},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':.35},N+':cocktail_effects':{}})
   dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'items'}},'components':c}})

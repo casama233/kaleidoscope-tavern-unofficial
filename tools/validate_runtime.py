@@ -68,6 +68,12 @@ def main():
  check('no_player_json_or_global_UI_override',not list((ROOT/'runtime').rglob('player.json')) and not(RP/'ui').exists())
  legacy=['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']
  check('legacy_guides_are_migration_aliases',all(x in item_defs and item_defs[x]['components'].get('kaleidoscope_tavern:legacy_guide')=={} for x in legacy))
+ legacy_gives=[]
+ for p in sorted((BP/'functions').glob('*.mcfunction')):
+  raw=p.read_text(encoding='utf-8')
+  for ident in legacy:
+   if f'give @s {ident}' in raw:legacy_gives.append(str(p.relative_to(ROOT))+':'+ident)
+ check('legacy_guides_not_generated_by_kits',not legacy_gives,legacy_gives)
  check('no_duplicate_Tavern_guide_UI',not(BP/'scripts/bedrock/guidebook.js').exists() and not(BP/'recipes/guidebook.json').exists() and not(BP/'recipes/recipe_book.json').exists())
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}

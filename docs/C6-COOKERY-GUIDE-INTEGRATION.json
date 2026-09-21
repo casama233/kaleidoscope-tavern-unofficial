@@ -24,14 +24,15 @@
       "tavern"
     ],
     "entries": 12,
-    "primary_access": "Cookery guide chapter",
-    "legacy_books": "craftable fallback only; hidden from Creative catalog"
+    "primary_access": "Cookery guide chapter only",
+    "legacy_books": "hidden migration aliases only; using either converts it to kaleidoscope_cookery:guidebook; no Tavern book recipes or standalone UI"
   },
   "behavior": [
     "Publisher sends only public Script Events; it never imports or overwrites Cookery scripts.",
     "A host-ready event triggers one bounded begin/chunk/end transfer; repeated ready events are rate-limited.",
     "Tavern recipes and Cookery recipe registries remain separate; this integration publishes guide content only.",
-    "Cookery v1 host owns language selection, root navigation, cancel/back behavior and coexistence with other extensions."
+    "Cookery v1 host owns language selection, root navigation, cancel/back behavior and coexistence with other extensions.",
+    "Tavern does not render a second guide UI; Cookery owns navigation, localization and guide presentation."
   ],
   "known_host_limitations": [
     "Guidebook API v1 mechanics text has no reliable per-locale mechanicsByLocale path in the verified host; Tavern uses concise Traditional Chinese fallback mechanics while titles/categories/names are localized for zh_CN, zh_TW and en_US.",
@@ -39,8 +40,8 @@
   ],
   "creative_policy": {
     "standalone_material_group": false,
-    "fallback_guide_items_hidden": true,
-    "cookery_material_merge": "Deferred until exact Cookery Bedrock catalog group identifiers are pinned; no guessed duplicate host groups."
+    "cookery_material_merge": "Deferred until exact Cookery Bedrock catalog group identifiers are pinned; no guessed duplicate host groups.",
+    "legacy_guide_aliases_hidden": true
   },
   "engine_acceptance": "NOT_RUN"
 }

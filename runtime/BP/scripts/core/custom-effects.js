@@ -33,4 +33,4 @@ export const TOMB_RAIDER_TYPES=Object.freeze([
 const TOMB_RAIDER_SET=new Set(TOMB_RAIDER_TYPES);
 export const TOMB_RAIDER_CHANCE=Math.fround(.3);
 export function tombRaiderTarget(typeId){return typeof typeId==='string'&&TOMB_RAIDER_SET.has(typeId);}
-export function tombRaiderProc(roll){check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');return roll<TOMB_RAIDER_CHANCE;}
+export function tombRaiderProc(roll){check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');return Math.fround(roll)<TOMB_RAIDER_CHANCE;}

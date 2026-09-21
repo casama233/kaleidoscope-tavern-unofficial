@@ -7,7 +7,7 @@ import {circularRackItem,circularRackSlot,emptyCircularRack,circularRackPut,circ
 import {CABINET_TYPES,CABINET_POSITION,BAR_CABINET_IRREGULAR,barCabinetItem,barCabinetIrregular,emptyBarCabinet,validateBarCabinet,barCabinetClickedLeft,barCabinetPut,barCabinetTake,barCabinetPosition,barCabinetKey,barCabinetAnchor,parseBarCabinetAnchor,barCabinetVisualPose} from '../runtime/BP/scripts/core/bar-cabinet.js';
 import {cellarCabinetItem,cellarCabinetSlot,emptyCellarCabinet,validateCellarCabinet,cellarCabinetPut,cellarCabinetTake,cellarCabinetPosition,cellarCabinetKey,cellarCabinetAnchor,parseCellarCabinetAnchor,cellarCabinetVisualPose} from '../runtime/BP/scripts/core/cellar-cabinet.js';
 import {COOKERY_GUIDE_EVENTS,COOKERY_GUIDE_SOURCE,COOKERY_GUIDE_REVISION,encodeCookeryGuideMessages} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
-import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
+import {COOKERY_GUIDE_PAYLOAD,buildCookeryGuidePayload} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 import {readStatus,addStatus,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,TOMB_RAIDER_TYPES,TOMB_RAIDER_CHANCE,tombRaiderTarget,tombRaiderProc,ARDENT_HEAT_BLOCKS,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,HIGH_HEELS_INPUT_MIN,HIGH_HEELS_SPEED_MAX,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../runtime/BP/scripts/core/custom-effects.js';
 const bytes=p=>fs.readFileSync(new URL('../'+p,import.meta.url));const load=p=>JSON.parse(bytes(p));const sha256=p=>createHash('sha256').update(bytes(p)).digest('hex');const gitBlob=p=>{const b=bytes(p);return createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');};const zero={x:0,y:0,z:0},forward={x:0,y:0,z:1};
 const box=(x,y,z,width=.6)=>({center:{x,y,z},extent:{x:width/2,y:1,z:width/2}});
@@ -92,6 +92,17 @@ test('Cookery guide payload is one organized Tavern family chapter',()=>{
  assert.equal(new Set(COOKERY_GUIDE_PAYLOAD.entries.map(x=>x.id)).size,COOKERY_GUIDE_PAYLOAD.entries.length);
  assert.equal(COOKERY_GUIDE_PAYLOAD.text.zh_TW.title,'森羅物語：酒館');
  assert.equal(COOKERY_GUIDE_PAYLOAD.names.zh_TW['kaleidoscope_tavern:guide_bottle_display'],'擺放酒瓶');
+});
+test('Tavern extension pages and auto recipe pages are projected into the Cookery family guide',()=>{
+ const registry={
+  list:()=>[{source:'world_liquor',version:'1.0.0',recipes:1,pages:1}],
+  allPages:()=>[{id:'world_liquor:about',source:'world_liquor',title:{zh_TW:'異世界酒館',en_US:'World Liquor'},body:{zh_TW:'附屬說明',en_US:'Addon notes'},recipeIds:['world_liquor:apple_wine']}],
+  allRecipes:()=>[{id:'world_liquor:apple_wine',source:'world_liquor',kind:'barrel',title:{zh_TW:'蘋果酒',en_US:'Apple Wine'},fluid:'minecraft:water',ingredients:[['minecraft:apple']],carrier:NS+':empty_bottle',output:{item:NS+':wine_q3'}}]
+ };
+ const payload=buildCookeryGuidePayload(registry),ids=payload.entries.map(x=>x.id);
+ assert(payload.categories.some(x=>x.id==='extensions'));assert(ids.includes('world_liquor:about'));assert(ids.includes('world_liquor:apple_wine'));
+ assert.equal(payload.names.zh_TW['world_liquor:about'],'異世界酒館');assert.equal(payload.names.en_US['world_liquor:apple_wine'],'Apple Wine');
+ assert(payload.entries.find(x=>x.id==='world_liquor:about').mechanics.includes('Addon notes'));
 });
 test('Cookery guide publisher uses bounded ASCII begin/chunk/end packets and roundtrips payload',()=>{
  const packets=encodeCookeryGuideMessages(COOKERY_GUIDE_PAYLOAD);

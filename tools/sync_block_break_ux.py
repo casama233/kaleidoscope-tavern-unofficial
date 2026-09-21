@@ -26,12 +26,12 @@ STATEFUL_NATIVE_EMPTY = {
     "cup_signature_cocktail",
 }
 SOUND_EVENT = {
-    "wood": {"sound": "dig.wood", "volume": 1.0, "pitch": 0.9},
-    "cloth": {"sound": "dig.cloth", "volume": 1.0, "pitch": 0.9},
-    "glass": {"sound": "random.glass", "volume": 1.0, "pitch": 0.9},
-    "chain": {"sound": "dig.chain", "volume": 1.0, "pitch": 0.9},
-    "metal": {"sound": "dig.stone", "volume": 1.0, "pitch": 1.15},
-    "lantern": {"sound": "block.lantern.break", "volume": 1.0, "pitch": 0.9},
+    "wood": {"sound": "dig.wood", "volume": 1, "pitch": 0.9},
+    "cloth": {"sound": "dig.cloth", "volume": 1, "pitch": 0.9},
+    "glass": {"sound": "random.glass", "volume": 1, "pitch": 0.9},
+    "chain": {"sound": "dig.chain", "volume": 1, "pitch": 0.9},
+    "metal": {"sound": "dig.stone", "volume": 1, "pitch": 1.15},
+    "lantern": {"sound": "block.lantern.break", "volume": 1, "pitch": 0.9},
     "grass": {"sound": "dig.grass", "volume": 0.7, "pitch": 0.9},
 }
 

@@ -46,3 +46,21 @@ git archive HEAD runtime | tar -x -C <build>
 patch -p1 -i ../server-edition.patch           # 0.6.1 修正差異
 python tools/build_server_edition.py           # 版本 0.6.2、補 unlock、修 fences 標籤
 ```
+
+## 6. 0.6.3（上游 Batch 9–16 與 #42–44 之後的重建）
+
+上游推進到 `c1a11a9`（Batch 9–16：酒窖櫃、畫作、吊燈等；指南併入廚房家族指南 #28/#33；瓶裝與飲用分離 #44 等）。0.6.3 相對上游 runtime 的差異：
+
+- `server-edition.patch` 重套：上游改寫了 BP manifest 描述與 main.js 兩處橫幅字串，3 個 hunk 不再適用，由工具直接改寫（名稱、診斷版本串、初始化訊息）。
+- 版本 0.6.2 → 0.6.3（內容大幅變更，不能與已部署的 0.6.2 同版本號）。
+- 新增配方 unlock 補齊：77 個（17 沙發、酒館桌、吧檯、酒窖櫃、13 幅畫作等；shaped 以鐵錠／金粒／羊毛等推導，shapeless 取首個材料）。
+- 上游以 Java 版物品 ID 命名兩種材料，本版 BDS 判為無效並整條拒絕：`minecraft:item_frame` → `minecraft:frame`（13+1 幅畫作），`minecraft:oak_trapdoor` → `minecraft:trapdoor`（酒窖櫃）。
+- 創意目錄 `item_catalog/crafting_item_catalog.json` 的 group name 缺命名空間（schema 拒絕），補為 `kaleidoscope_tavern:tavern_main`／`tavern_deco`。
+- 初始化訊息更新為 `Server edition 0.6.3.`。
+
+正式服部署後 Content Log 對比：0.6.2 時代的 `TavernError: EMPTY_HAND_REQUIRED／SNEAK_TO_PLACE`、`FILL_BARREL_FIRST／SPACE_NOT_CLEAR`、`Not substituted: slightly_tipsy` 等執行期錯誤全部消失，無新增錯誤；酒館包腳本錯誤 0。
+
+### 待上游確認（隔離引擎觀察）
+
+- **酒館桌跨重啟不保留**：在乾淨的隔離世界以模擬玩家放置 `kaleidoscope_tavern:table`（放置與連接狀態正常），完整重啟後原座標為空氣；同批的大缸、烤爐、作物等自訂方塊均正常保留。需上游檢查 Batch 7 桌面的存檔路徑。
+- 廚房指南章節（#28/#33）與伺服器修正版指南入口的相容性需在真實客戶端驗證（本版仍以 0.6.1 補丁的指南入口為準）。

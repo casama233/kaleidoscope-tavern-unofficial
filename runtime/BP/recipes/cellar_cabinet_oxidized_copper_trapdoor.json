@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:cellar_cabinet_oxidized_copper_trapdoor"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "GGG",
+      "GTG",
+      "GGG"
+    ],
+    "key": {
+      "G": {
+        "item": "kaleidoscope_tavern:grapevine"
+      },
+      "T": {
+        "item": "minecraft:oxidized_copper_trapdoor"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:cellar_cabinet",
+      "count": 1
+    }
+  }
+}

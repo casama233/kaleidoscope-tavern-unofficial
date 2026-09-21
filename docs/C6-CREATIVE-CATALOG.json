@@ -150,6 +150,10 @@
     }
   },
   "quality_drinks": "creative catalog exposes Q6 only, matching Java getMaxLevelDrink",
+  "fallback_books_hidden_from_creative": [
+    "kaleidoscope_tavern:guidebook",
+    "kaleidoscope_tavern:recipe_book"
+  ],
   "materials_policy": "No standalone Tavern materials group; cultivation ingredients stay in Tavern main until a verified host merge is safe.",
   "cookery_merge": {
     "status": "DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED",
@@ -162,9 +166,5 @@
     "reasonable_main_candidate": "kaleidoscope_tavern:grapevine",
     "rule": "Never guess Cookery Bedrock group identifiers: a wrong identifier creates a duplicate group instead of merging with the host."
   },
-  "engine_acceptance": "NOT_RUN",
-  "fallback_books_hidden_from_creative": [
-    "kaleidoscope_tavern:guidebook",
-    "kaleidoscope_tavern:recipe_book"
-  ]
+  "engine_acceptance": "NOT_RUN"
 }

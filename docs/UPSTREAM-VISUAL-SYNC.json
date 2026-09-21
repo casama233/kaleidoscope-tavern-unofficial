@@ -80,6 +80,23 @@
       "semantic_diff": "Allium Garden keeps the same 14 elements and display transforms. Official changes are translucent->cutout, element 3 shade true->false, element 12 north UV [7.5,10.5,13,15.5] -> [7.5,10,13,15], and a revised block PNG. Bedrock maps element 3 to cubes 3-6 as unshaded, maps the UV change to cube 18 north [15,21] -> [15,20], and copies the official updated PNG byte-for-byte to both runtime block-texture copies.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "grasshopper",
+      "assets": [
+        "grasshopper"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/grasshopper/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "de8e596c20c20dcaf990b66f588edd6832aaf633",
+      "model_updated_blob": "458016486a3f9714ce0cc8f63d9a4c4807f473a4",
+      "texture_baseline_blob": "75794e7e5eda9d6cf98496b21b8fdb95b8bf0bf2",
+      "texture_updated_blob": "ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0",
+      "semantic_diff": "Grasshopper keeps 14 Java elements but 11 change geometry/face content. A locked old Bedrock geo proves the source-driven converter reproduces the historical 17-cube mapping before regenerating only changed elements from the updated Java model; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

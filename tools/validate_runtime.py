@@ -135,14 +135,30 @@ def main():
  bindings=load(ROOT/'docs/C6-FURNITURE-BINDINGS.json')
  check('C6_complete_stool_family',len([b for b in bindings['bindings']if b['kind']=='stool'])==16)
  check('C6_complete_light_family',len([b for b in bindings['bindings']if b['kind']=='light'])==17)
+ check('C6_complete_sofa_family',len([b for b in bindings['bindings']if b['kind']=='sofa'])==16)
  for b in bindings['bindings']:
-  check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
-  comps=block_defs[b['block']]['components']
+  if b['kind']=='sofa':
+   check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
+  else:
+   check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
+  block=block_defs[b['block']];comps=block['components']
   if b['kind']=='stool':
    ent=entity_defs[b['helper']];ride=ent['components']['minecraft:rideable']
    check('C6_single_native_seat:'+b['color'],ride['seat_count']==1 and ride['seats']==[{'position':[0,.8125,0]}] and ride['family_types']==['player'] and not ride['pull_in_entities'])
    check('C6_seat_turn_property:'+b['color'],ent['description']['properties']['kaleidoscope_tavern:seat_yaw']['client_sync'])
-  else:check('C6_light15_nocollision:'+b['color'],comps['minecraft:light_emission']==15 and comps['minecraft:collision_box'] is False)
+  elif b['kind']=='light':
+   check('C6_light15_nocollision:'+b['color'],comps['minecraft:light_emission']==15 and comps['minecraft:collision_box'] is False)
+  elif b['kind']=='sofa':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_sofa_states:'+b['color'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5])
+   check('C6_sofa_geometry_set:'+b['color'],set(b['geometry_by_connection'].values())=={'geometry.kt_assets_a4.sofa_single','geometry.kt_assets_a4.sofa_left','geometry.kt_assets_a4.sofa_right','geometry.kt_assets_a4.sofa_middle','geometry.kt_assets_a4.sofa_left_corner','geometry.kt_assets_a4.sofa_right_corner'} and all(g in geom for g in b['geometry_by_connection'].values()))
+   check('C6_sofa_permutations:'+b['color'],sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("kaleidoscope_tavern:facing" in x['condition'] for x in perms)==4)
+   check('C6_sofa_item_visual:'+b['color'],comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
+  else:
+   check('C6_known_furniture_kind:'+str(b.get('kind')),False)
+ sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
+ check('C6_sofa_native_seat',ride.get('seat_count')==1 and ride.get('seats')==[{'position':[0,.45,0]}] and ride.get('family_types')==['player'] and not ride.get('pull_in_entities',True))
+ check('C6_sofa_invisible_client',clients.get('kaleidoscope_tavern:sofa_seat',{}).get('geometry',{}).get('default')=='geometry.kt_runtime.invisible')
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

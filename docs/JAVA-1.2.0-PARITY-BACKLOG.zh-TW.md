@@ -17,9 +17,9 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | **Glassware Holder 已移植4槽空杯存取、倒掛顯示、亮度8、方向碰撞與拆除返還** | Bar/Cellar Cabinet、Circular/Tilted Rack、Holder 的飲品展示存儲與紅石彈射 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 4槽已完成；Holder 已完成空瓶＋14種允許品質酒瓶的手動存取、原品質返還與來源瓶型展示** | Bar/Cellar Cabinet、Circular/Tilted Rack；Holder/酒架紅石彈射仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
-| 其他裝飾 | **3款 Pendant Lamp 已移植雙格上/下半結構、下半亮度13、無碰撞、單件回收與孤兒半格修復**；部分資產/靜態展示已收錄 | Incense、Painting、Stepladder、Holder 等逐個核對放置、形狀、狀態與掉落 |
+| 其他裝飾 | **3款 Pendant Lamp 已移植雙格上/下半結構、下半亮度13、無碰撞、單件回收與孤兒半格修復**；部分資產/靜態展示已收錄 | Incense、Painting、Stepladder 等逐個核對放置、形狀、狀態與掉落 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
@@ -131,8 +131,20 @@ Java 1.2.0 的 `GlasswareHolderBlock` 固定4槽、每槽上限1，互動只接�
 
 Bedrock 直接使用4個0/1 custom block state作存儲權威，不建立世界DP、inventory helper或展示entity。穩定 Script API 的 `faceLocation` 提供方塊局部座標；資源包將4個來源 empty-glassware 模型依 Java renderer 的位置與 X 180° 旋轉做成4個倒掛 bone，`bone_visibility` 直接讀槽位 state。自訂metadata空杯為避免資料遺失會拒收；Creative沿用本專案守恆交易規則。實機 blend 透明排序、手機點位與多人仍為 **NOT_RUN**。
 
+## Batch 10：Holder 單瓶架
 
-## Batch 10：Pendant Lamp 雙格吊燈
+Java 1.2.0 `HolderBlock` 繼承 `AbstractStorageBlock`，只有1槽。它接受 `BottleBlockItem`，但會用 `holder_blocklist` 拒絕10種瓶型：brandy、carignan、mother_snow、miners_star、madame_shexiang、sunset_glow、riesling_dry_white、sweet_berry_wine、vodka、rum。雞尾酒是 `GlasswareBlockItem`，本來就不是 Holder 的合法輸入。Molotov 雖屬 BottleBlockItem，但 Bedrock 移植仍依既定範圍明示排除。
+
+本批次支援 `empty_bottle` 加14種未被 blocklist 排除的品質飲品 base。精確物品 ID（例如 `wine_q5`）保存於 Tavern world dynamic property 的單槽 HolderStore，方塊 `holder_kind=0..15` 只同步空/瓶型，因此取出時品質完整返還，不靠猜測。命名、Lore、額外 DP 等 metadata 物品拒收，避免靜默丟資料。
+
+來源 renderer 以 `(0.5,0.125,0.75)`、scale `0.95`、X `-45°` 顯示實際瓶子。本版在 Holder 有內容時生成最多1個無碰撞 `holder_bottle_visual`，直接重用既有15種來源 geometry/texture；沒有內容即移除，20tick維護會清孤兒與重複 helper。方向 shape 直接還原：N/S 為 origin [-3,0,-6] size [6,16,12]，E/W 為 [-6,0,-3] size [12,16,6]。
+
+Java 的紅石上升沿會隨機挑瓶並投擲 DrinkBlockItem，Molotov 走另一投擲實體路徑。考慮到 Molotov 本身明示排除、且這部分不是簡單穩定的 Bedrock 等價，本批次只完成高價值的手動存取／展示，不做紅石彈射。實機瓶型朝向、helper 重連、多人與觸控仍為 **NOT_RUN**。
+
+
+## Batch 11：Pendant Lamp 雙格吊燈
+
+> 註：Holder 單瓶架已由並行 Batch 10 / PR #19 先行合併，因此本批在最新 main 上編號順延為 Batch 11。
 
 Java 1.2.0 的 `PendantLampBlock` 由同一方塊的 `upper/lower` 兩半構成。放置位置是上半格，要求其下方仍可替換，隨後自動在下方生成 lower；方向直接取玩家水平朝向。只有 lower 發光，來源亮度為 13；方塊本身 `noCollission()`，但上／下半仍各有方向選擇框。破壞時只有 lower 具有正常掉落，因此完整結構無論從哪一半開始回收，都只應返還 1 件。三個來源款式為 bell / blue / yellow，配方產量分別為 8 / 4 / 4。
 

@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "酒館家具與四槽酒杯架",
-      "zh_CN": "酒馆家具与四槽酒杯架",
-      "en_US": "Tavern furniture and four-slot glassware holder"
+      "zh_TW": "酒館家具、杯架與單瓶架",
+      "zh_CN": "酒馆家具、杯架与单瓶架",
+      "en_US": "Tavern furniture, glassware and bottle holder"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發、酒館桌、吧台、4槽酒杯架與17款彩燈皆可合成、放置及回收。沙發／吧台復用Java IConnectionBlock六態規則；桌子保留X/Z軸四態。Batch 9酒杯架完全以方塊狀態保存4個0/1槽位，只接受普通empty_glassware；點擊方塊內X/Z四象限選槽，手持空杯放入、空手取出，潛行空手回收整架並返還所有杯。4個倒掛杯直接作為方塊geometry bone顯示，不生成展示entity。來源亮度8與方向碰撞已還原；自訂metadata空杯為避免資料遺失會拒收。Creative仍採本移植既有守恆交易規則。實機透明排序、手機點位與多人仍待驗收。",
-      "zh_CN": "16色高脚凳、16色沙发、酒馆桌、吧台、4槽酒杯架与17款彩灯均可合成、放置和回收。Batch 9酒杯架用4个方块状态保存槽位，只接受普通empty_glassware；按X/Z四象限选槽，手持空杯放入、空手取出，潜行空手回收整架并返还全部杯。倒挂杯直接作为方块geometry bone显示，不生成展示实体。来源亮度8和方向碰撞已还原；自定义metadata空杯为避免数据丢失会拒收。实机透明排序、手机点位与多人仍待验收。",
-      "en_US": "Stools, sofas, Tavern table, Bar Counter, a four-slot Glassware Holder and all 17 string-light designs are craftable/placeable/recoverable. Batch 9 stores the holder as four 0/1 block states: plain empty_glassware inserts into the clicked X/Z quadrant, empty hand removes it, and sneak-empty-hand recovers the holder plus every stored glass. Four inverted source glass meshes are block-geometry bones controlled by bone_visibility, so no display entities or hidden inventory state are created. Source light level 8 and directional collision are preserved. Metadata-bearing glasses are rejected to avoid silent data loss; real-client transparency/touch/multiplayer acceptance remains NOT_RUN."
+      "zh_TW": "16色高腳凳、16色沙發、酒館桌、吧台、4槽酒杯架、單瓶Holder與17款彩燈皆可合成、放置及回收。Batch 9酒杯架用4個block state保存空杯。Batch 10單瓶Holder直接復用既有品質酒瓶資料：world DP保存精確*_q1..q6 item ID，holder_kind只同步15種瓶型（empty_bottle + 14種Java允許的飲品base）；取出可原樣返還品質。來源holder_blocklist的10種瓶型精確拒收，雞尾酒與Molotov也不當作BottleBlockItem適配。佔用時只生成1個無碰撞visual helper，直接引用既有來源瓶子geometry/texture，位置0.5/0.125/0.75、scale 0.95、X -45°按Java renderer適配。來源方向碰撞與配方已還原。Java紅石上升沿隨機彈射飲品／Molotov本批次不做，避免為projectile路徑硬做不穩定近似。實機透明/模型朝向/多人仍待驗收。",
+      "zh_CN": "16色高脚凳、16色沙发、酒馆桌、吧台、4槽酒杯架、单瓶Holder与17款彩灯均可合成、放置和回收。Batch 10使用world DP保存精确*_q1..q6 item ID，holder_kind只同步empty_bottle加14种Java允许瓶型，取出保持原品质；来源blocklist的10种瓶型精确拒收，鸡尾酒与Molotov不纳入。占用时只生成1个无碰撞visual helper并直接引用既有来源瓶子模型。Java红石弹射本批次不做。实机模型朝向与多人仍待验收。",
+      "en_US": "Stools, sofas, Tavern table, Bar Counter, four-slot Glassware Holder, single Bottle Holder and all 17 string-light designs are craftable/placeable/recoverable. Batch 10 reuses the existing quality-bottle model: world DP stores the exact *_q1..q6 item ID while holder_kind syncs only 15 visual shapes (empty_bottle plus the 14 Java-allowed drink bases), so extraction preserves quality exactly. The 10 source holder_blocklist bases are rejected exactly; cocktails and excluded Molotov are not treated as Holder bottles. One occupied Holder spawns one collisionless visual helper that directly references existing source bottle geometry/textures at the Java renderer pose (0.5/0.125/0.75, scale .95, X -45°). Source directional collision and recipe are preserved. Java rising-edge redstone bottle/Molotov ejection is deliberately not adapted in this batch; real-client orientation/multiplayer acceptance remains NOT_RUN."
     }
   },
   {

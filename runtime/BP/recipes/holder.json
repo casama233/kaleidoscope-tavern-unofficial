@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:holder"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      " C ",
+      "I I"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:chain"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:holder",
+      "count": 1
+    }
+  }
+}

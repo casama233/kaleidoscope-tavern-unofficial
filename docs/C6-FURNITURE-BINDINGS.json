@@ -874,6 +874,86 @@
       "exact_collision_parity": true
     },
     {
+      "kind": "holder",
+      "item": "kaleidoscope_tavern:holder",
+      "block": "kaleidoscope_tavern:holder",
+      "helper": "kaleidoscope_tavern:holder_bottle_visual",
+      "source_geometry": "geometry.kt_assets_a10.holder",
+      "display_kinds": [
+        "empty_bottle",
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine"
+      ],
+      "allowed_bases": [
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine"
+      ],
+      "blocked_bases": [
+        "brandy",
+        "carignan",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "state_exact_item_id": true,
+      "source_collision_ns": {
+        "origin": [
+          -3,
+          0,
+          -6
+        ],
+        "size": [
+          6,
+          16,
+          12
+        ]
+      },
+      "source_collision_ew": {
+        "origin": [
+          -6,
+          0,
+          -3
+        ],
+        "size": [
+          12,
+          16,
+          6
+        ]
+      },
+      "redstone_pop": "NOT_ADAPTED",
+      "molotov": "EXCLUDED",
+      "engine_accepted": false
+    },
+    {
       "kind": "pendant_lamp",
       "style": "bell",
       "item": "kaleidoscope_tavern:bell_pendant_lamp",
@@ -1377,6 +1457,7 @@
   "tables": 1,
   "bar_counters": 1,
   "glassware_holders": 1,
+  "holders": 1,
   "pendant_lamps": 3,
   "engine_accepted": false
 }

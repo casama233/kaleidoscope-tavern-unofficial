@@ -22,3 +22,6 @@ give @s kaleidoscope_tavern:bell_pendant_lamp 2
 give @s kaleidoscope_tavern:blue_pendant_lamp 2
 give @s kaleidoscope_tavern:yellow_pendant_lamp 2
 give @s kaleidoscope_tavern:empty_glassware 8
+give @s kaleidoscope_tavern:holder 2
+give @s kaleidoscope_tavern:wine_q5 2
+give @s kaleidoscope_tavern:empty_bottle 2

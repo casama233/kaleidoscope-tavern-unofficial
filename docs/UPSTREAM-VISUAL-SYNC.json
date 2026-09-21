@@ -97,6 +97,23 @@
       "semantic_diff": "Grasshopper keeps 14 Java elements but 11 change geometry/face content. A locked old Bedrock geo proves the source-driven converter reproduces the historical 17-cube mapping before regenerating only changed elements from the updated Java model; the official block PNG is copied byte-for-byte.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "bloody-mary",
+      "assets": [
+        "bloody_mary"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/bloody-mary/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "4f4fa1f54ea19eaa39fdd54929a53ee9db01355f",
+      "model_updated_blob": "f2efeedade97c31dd8f15bddda9d3c3652ded624",
+      "texture_baseline_blob": "6b389971a45f53606d7fff96197d50ed74bb9246",
+      "texture_updated_blob": "07f47d76f7b9e5ede07eeee3a968471b1ee59a2d",
+      "semantic_diff": "Bloody Mary keeps 14 Java elements but 9 change geometry/UV. The locked old Bedrock geo proves the 14-to-18 source-driven mapping. One reversed-X source element maps four side faces plus Java down -> Bedrock up with explicit 180-degree UV rotation. Only changed elements are regenerated; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

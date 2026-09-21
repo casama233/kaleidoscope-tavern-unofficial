@@ -86,7 +86,7 @@ def build_creative_catalog():
    'construction':{'name':keys[1],'icon':NS+':bar_cabinet','items':deco_items}
   },
   'quality_drinks':'creative catalog exposes Q6 only, matching Java getMaxLevelDrink',
-  'fallback_books_hidden_from_creative':[NS+':guidebook',NS+':recipe_book],
+  'fallback_books_hidden_from_creative':[NS+':guidebook',NS+':recipe_book'],
   'materials_policy':'No standalone Tavern materials group; cultivation ingredients stay in Tavern main until a verified host merge is safe.',
   'cookery_merge':{
    'status':'DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED',

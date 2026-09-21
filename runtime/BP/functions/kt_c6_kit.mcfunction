@@ -17,3 +17,5 @@ give @s kaleidoscope_tavern:blue_sofa 2
 give @s kaleidoscope_tavern:red_sofa 2
 give @s kaleidoscope_tavern:table 3
 give @s kaleidoscope_tavern:bar_counter 3
+give @s kaleidoscope_tavern:glassware_holder 2
+give @s kaleidoscope_tavern:empty_glassware 8

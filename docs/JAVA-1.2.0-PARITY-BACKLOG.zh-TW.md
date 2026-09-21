@@ -17,7 +17,7 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | 多數原始模型/貼圖已有 | `BarCabinetBlock`、`CellarCabinetBlock`、`CircularRackBlock`、`TiltedRackBlock`、`GlasswareHolderBlock` 的存放、展示與互動 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 已移植4槽空杯存取、倒掛顯示、亮度8、方向碰撞與拆除返還** | Bar/Cellar Cabinet、Circular/Tilted Rack、Holder 的飲品展示存儲與紅石彈射 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | 部分資產/靜態展示已收錄 | Pendant Lamp、Incense、Painting、Stepladder、Holder 等逐個核對放置、形狀、狀態與掉落 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
@@ -124,3 +124,9 @@ Bedrock 本批次保留軸鎖定與四個 position state，直接使用原作7�
 Java 1.2.0 `BarCounterBlock` 直接實作與 Sofa 相同的 `IConnectionBlock`：`single / left / right / middle / left_corner / right_corner` 六態，左右鄰居與前方轉角採同一優先級。本批沒有再寫第二套判定，而是把現有 Sofa 連接核心提升為共用 `connectedFurnitureConnection`，Sofa 與 Bar Counter 的鄰居描述、三輪刷新和20tick陳舊狀態修復也走同一框架。
 
 吧台直接使用倉庫已轉換的原作六套幾何、原貼圖與 item-display 模型，不新增美術。原配方 `NNN / WWW / WWW` 中 `c:nuggets/gold` 映射 vanilla `gold_nugget`，`minecraft:planks` 保留原生 recipe tag。方塊可潛行放置、空手回收，支援直線連接與左右轉角。實際 Minecraft／手機／多人／BDS／Realms 仍為 **NOT_RUN**。
+
+## Batch 9：Glassware Holder 四槽酒杯架
+
+Java 1.2.0 的 `GlasswareHolderBlock` 固定4槽、每槽上限1，互動只接受 `empty_glassware`。點擊位置按方塊局部 X/Z 四象限分槽：左前0、右前1、左後2、右後3；空手取出、手持空酒杯放入，破壞時槽內內容一併掉落。來源亮度為8；N/S shape 為 `Block.box(0,11,1,16,16,15)`，E/W 為 `Block.box(1,11,0,15,16,16)`。
+
+Bedrock 直接使用4個0/1 custom block state作存儲權威，不建立世界DP、inventory helper或展示entity。穩定 Script API 的 `faceLocation` 提供方塊局部座標；資源包將4個來源 empty-glassware 模型依 Java renderer 的位置與 X 180° 旋轉做成4個倒掛 bone，`bone_visibility` 直接讀槽位 state。自訂metadata空杯為避免資料遺失會拒收；Creative沿用本專案守恆交易規則。實機 blend 透明排序、手機點位與多人仍為 **NOT_RUN**。

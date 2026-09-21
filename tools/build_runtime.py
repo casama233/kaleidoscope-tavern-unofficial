@@ -69,7 +69,7 @@ def main():
   # JAR c:fruits/grapes is explicitly resolved; cross-pack extra grape tags are extension inputs, not guessed.
   recipes.append({'id':NS+':pressing/'+p.stem,'kind':'pressing','input':input_ids,'fluid':d['fluid'],'amount':d.get('amount',125),'title':title(p.stem.replace('_bucket','')),'source':NS})
  js(BP/'scripts/data/recipes.js','BUILTIN_RECIPES',recipes);js(BP/'scripts/data/fluids.js','FLUIDS',fluids)
- quality=['未熟','劣質','普通','優良','精製','陳釀'];icons=json.loads((RP/'textures/item_texture.json').read_text());icons.setdefault('texture_data',{})
+ quality={'zh_TW':['未熟','劣質','普通','優良','精製','陳釀'],'zh_CN':['未熟','劣质','普通','优良','精制','陈酿']};icons=json.loads((RP/'textures/item_texture.json').read_text());icons.setdefault('texture_data',{})
  def item(name,icon=None,components=None,stack=64):
   full=name if ':' in name else NS+':'+name;short=full.split(':')[1]
   ico='kt_c1_'+short
@@ -95,7 +95,7 @@ def main():
    c={}
    if q>=2:c={'minecraft:food':{'nutrition':0,'saturation_modifier':0.0,'can_always_eat':True,'using_converts_to':NS+':empty_bottle'},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':0.35}}
    item(base+'_q'+str(q),'textures/kaleidoscope_tavern_jar/item/'+base,c,16)
-   for lc in locales:locales[lc][NS+':'+base+'_q'+str(q)]=locales[lc].get(NS+':'+base,base)+(' (Quality '+str(q)+'/6)'if lc=='en_US'else f'（{quality[q-1]}・{q}/6）')
+   for lc in locales:locales[lc][NS+':'+base+'_q'+str(q)]=locales[lc].get(NS+':'+base,base)+(' (Quality '+str(q)+'/6)'if lc=='en_US'else f'（{quality[lc][q-1]}・{q}/6）')
  for lc in locales:
   for f in fluids[:-1]:locales[lc][f['filled']]=locale_name=locales[lc].get(f['filled'],f['filled'].split(':')[1]);locales[lc][f['id']]=locale_name.replace(' Bucket','').replace('桶','')
   locales[lc][NS+':guidebook']={'zh_TW':'酒館指南','zh_CN':'酒馆指南','en_US':'Tavern Guide'}[lc]

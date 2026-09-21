@@ -86,6 +86,7 @@ def main():
    creative_doc=load(ROOT/'docs/C6-CREATIVE-CATALOG.json')
    check('creative_catalog_doc_matches_runtime',creative_doc['bedrock_groups']['items']['items']==main_items and creative_doc['bedrock_groups']['construction']['items']==deco_items)
    check('creative_no_material_microgroup',creative_doc['materials_policy'].startswith('No standalone Tavern materials group') and creative_doc['cookery_merge']['status']=='DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED')
+   check('creative_fallback_books_hidden',all(x not in set(listed) for x in ['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']) and all(item_defs[x]['description'].get('menu_category') is None for x in ['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']))
  check('no_player_json_or_global_UI_override',not list((ROOT/'runtime').rglob('player.json')) and not(RP/'ui').exists())
  check('two_independent_books',all('kaleidoscope_tavern:'+k in item_defs for k in ['guidebook','recipe_book']))
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
@@ -353,19 +354,28 @@ def main():
    if p.is_file()and p.suffix not in{'.pyc'} and p.name not in{'item_texture.json','terrain_texture.json'}:
     q=RP/p.relative_to(A/'RP');protected.append({'path':str(p.relative_to(A/'RP')),'sha256':sha(p),'unchanged':q.exists()and sha(p)==sha(q)})
  check('A17_art_preserved',all(x['unchanged']for x in protected),{'files':len(protected),'failures':[x['path']for x in protected if not x['unchanged']]})
- # Scripts may read Cookery's announced capability but must never write Cookery recipes/pages/properties.
+ # Scripts never mutate Cookery recipes/properties. One audited bridge may publish a
+ # static Tavern chapter through Cookery Guidebook Extension API v1.
  scripts=list((BP/'scripts').rglob('*.js'));broken=[]
  for p in scripts:
-  text=p.read_text()
+  text=p.read_text();rel=str(p.relative_to(BP))
   for spec in re.findall(r'from\s+[\"\']([^\"\']+)[\"\']',text):
-   if spec.startswith('.'):check('import:'+str(p.relative_to(BP))+':'+spec,(p.parent/spec).is_file())
+   if spec.startswith('.'):check('import:'+rel+':'+spec,(p.parent/spec).is_file())
    else:check('only_public_engine_module:'+spec,spec in{'@minecraft/server','@minecraft/server-ui'})
-  check('no_Cookery_mutating_bus:'+str(p.relative_to(BP)),not re.search(r'kaleidoscope_cookery:(register_|guidebook_(begin|chunk|end))',text))
-  check('no_Cookery_player_properties:'+str(p.relative_to(BP)),not re.search(r'getDynamicProperty\([\"\']kc:|setDynamicProperty\([\"\']kc:',text))
+  allow_guide=rel=='scripts/core/cookery-guide-publisher.js'
+  forbidden_register=bool(re.search(r'kaleidoscope_cookery:register_',text))
+  forbidden_guide=bool(re.search(r'kaleidoscope_cookery:guidebook_(begin|chunk|end)',text))
+  check('no_unapproved_Cookery_mutating_bus:'+rel,not forbidden_register and (allow_guide or not forbidden_guide))
+  check('no_Cookery_player_properties:'+rel,not re.search(r'getDynamicProperty\([\"\']kc:|setDynamicProperty\([\"\']kc:',text))
   if shutil.which('node'):
    run=subprocess.run(['node','--check',str(p)],capture_output=True,text=True)
    if run.returncode:broken.append({'file':str(p.relative_to(ROOT)),'stderr':run.stderr})
  check('JS_syntax',not broken,broken)
+ guide_payload=(BP/'scripts/data/cookery-guide-payload.js').read_text(encoding='utf-8')
+ guide_publisher=(BP/'scripts/core/cookery-guide-publisher.js').read_text(encoding='utf-8')
+ check('Cookery_guide_v1_exact_events',all(x in guide_publisher for x in ['kaleidoscope_cookery:guidebook_ready','kaleidoscope_cookery:guidebook_ping','kaleidoscope_cookery:guidebook_begin','kaleidoscope_cookery:guidebook_chunk','kaleidoscope_cookery:guidebook_end']))
+ check('Cookery_guide_static_Tavern_identity',"id:'kaleidoscope_tavern:tavern'" in guide_payload and "title:'森羅物語：酒館'" in guide_payload)
+ check('Cookery_guide_no_direct_host_import','scripts/api/' not in guide_publisher and 'kaleidoscope_cookery/' not in guide_publisher)
  check('no_pre_release_solid_or_canPlace_api',not any(re.search(r'\.isSolid\b|\.canPlace\(',p.read_text()) for p in scripts if p.name!='bottle-support.js'))
  for x in load(ROOT/'data/upstream/c3/source.lock.json')['records']:check('C3_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/c2/source.lock.json')['records']:check('C2_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])

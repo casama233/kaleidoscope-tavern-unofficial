@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共10/15個模型（含 Allium Garden、Grasshopper 官方block貼圖）的 cutout/幾何/UV 修正已同步 | `c70eec1` 其餘5個模型與5張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共11/15個模型（含 Allium Garden、Grasshopper、Bloody Mary 官方block貼圖）的 cutout/幾何/UV 修正已同步 | `c70eec1` 其餘4個模型與4張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -134,6 +134,14 @@ Grasshopper 保持14個 Java elements，但官方 `c70eec1` 對其中11個調整
 為防轉換器『自洽但錯』，另鎖定同步前 `grasshopper.geo.json`（Git blob `87393074bf6bd1460cf46eaa749b6511ee23f18f`）。每次 apply/check 都先用舊 Java model 重新生成17個舊 cubes，必須逐字段等於這份 baseline geo；通過後才用新版 source 重建11個 changed elements。官方 block PNG 同步由舊 blob `75794e7e5eda9d6cf98496b21b8fdb95b8bf0bf2`（438 B）更新到 `ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0`（676 B），兩份 runtime block texture 原樣使用新版 bytes。
 
 完成後 c70eec 模型覆蓋為 **10/15**；尚餘 Bloody Mary、Depth Charge、Mojito、Screwdriver、White Lady 共5個模型，及其5張 block PNG，另有 Depth Charge item PNG。實機模型朝向、薄面剔除與alpha-test邊緣仍為 **NOT_RUN**。
+
+## Post-1.2 視覺同步 Batch 7：Bloody Mary
+
+Bloody Mary 仍是14個 Java elements，但官方 `c70eec1` 修改其中9個。沿用上一批 source-driven geometry regeneration，本批鎖定舊 Java model、舊 Bedrock `bloody_mary.geo.json`（Git blob `7304d36b0bff91dc7ab377f44b986092ee4f1a76`）、新版 Java model與14→18 element/cube 映射；每次 apply/check 先用舊 Java source 重建18個 baseline cubes並逐字段比對，通過後才生成新版9個 changed elements。
+
+這批補上一個可重用的 face-remap 能力：反向X尺寸的 source element 4 會拆成四個側面 cube，並把 Java `down` 明示映射到 Bedrock `up`，同時保留 A17 既有的 `uv_rotation:180`。這個行為寫在 plan，不做全域硬編碼。官方 block PNG 從 blob `6b389971a45f53606d7fff96197d50ed74bb9246`（396 B）同步到 `07f47d76f7b9e5ede07eeee3a968471b1ee59a2d`（593 B），兩份 runtime block texture 都使用原始新版 bytes。
+
+完成後 c70eec 模型覆蓋為 **11/15**；尚餘 Depth Charge、Mojito、Screwdriver、White Lady 共4個模型及4張 block PNG，另有 Depth Charge item PNG。實機杯壁、裝飾薄片與alpha-test邊緣仍為 **NOT_RUN**。
 
 ## Batch 7：Table 連接桌
 

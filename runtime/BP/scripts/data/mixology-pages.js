@@ -272,13 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "高腳凳與彩燈：完整種類",
-      "zh_CN": "高脚凳与彩灯：完整种类",
-      "en_US": "Stools and string lights"
+      "zh_TW": "高腳凳、沙發與彩燈",
+      "zh_CN": "高脚凳、沙发与彩灯",
+      "en_US": "Stools, sofas and string lights"
     },
     "body": {
-      "zh_TW": "16色高腳凳與17款彩燈全部可合成、潛行放置及回收。高腳凳空手點擊坐下，潛行離座；潛行空手點方塊回收，有人乘坐時不允許拆除。每張凳只有1座，座墊隨乘客轉向，底座不轉。坐點候選為0.875-0.0625=0.8125格，包含原作顯式乘客偏移；實機Steve/Alex、原生騎乘偏移及碰撞仍待驗收。彩燈原作亮度15、使用染料更換成對應原模型；同色不扣料。滿背包回收取消。所有模式投料/放置均消耗物品，回收1原色，避免Creative複製。原生合成冊收錄配方；此頁不注入廚房。",
-      "en_US": "All 16 stool colors and 17 individual string-light designs are craftable. Sneak-use to place. Empty-hand use to sit; sneak to dismount. Sneak-empty-hand or mine the block to recover it; occupied seats and full inventories refuse recovery. One native seat at candidate .8125 height (source .875 anchor minus explicit .0625 rider adjustment); cushion turns, pedestal stays. Lights emit original level 15 and change design with vanilla dye; same color costs nothing. Creative still conserves actual placed items. Waterlogging, exact collision and client seating remain unverified."
+      "zh_TW": "16色高腳凳、16色沙發與17款彩燈皆可合成、放置及回收。沙發沿用原作6種連接狀態，包含直線左右／中段與兩種轉角；不同顏色也能相連。每格沙發可空手坐1人，潛行離座，空位不保留helper實體；候選坐點0.45格來自原作0.5125座位錨點沿用現有-0.0625 Bedrock校正。高腳凳仍為0.8125格座點。彩燈可用染料換款。沙發waterlogging、背靠複合碰撞、Steve/Alex/手機多人座高仍待實機驗收。",
+      "zh_CN": "16色高脚凳、16色沙发与17款彩灯均可合成、放置和回收。沙发保留原作6种连接状态，且不同颜色可以连接；每格可空手坐1人，潜行离座，空位不会保留helper实体。waterlogging、复合碰撞与真实客户端座高仍待实机。",
+      "en_US": "All 16 stool colors, 16 sofa colors and 17 string-light designs are craftable/placeable/recoverable. Sofas preserve the six source connection states, including both corners, and different colors connect. Each sofa block seats one player; the invisible helper exists only while occupied. Candidate seat height .45 derives from the source .5125 anchor using the existing -.0625 Bedrock correction. Sofa waterlogging, compound backrest collision and real-client/mobile seating remain unverified."
     }
   },
   {

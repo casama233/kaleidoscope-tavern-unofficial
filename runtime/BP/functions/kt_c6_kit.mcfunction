@@ -13,3 +13,5 @@ give @s kaleidoscope_tavern:nether_special 2
 give @s kaleidoscope_tavern:depth_charge 2
 give @s kaleidoscope_tavern:brass_heart 2
 give @s kaleidoscope_tavern:white_lady 2
+give @s kaleidoscope_tavern:blue_sofa 2
+give @s kaleidoscope_tavern:red_sofa 2

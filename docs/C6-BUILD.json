@@ -17,7 +17,7 @@
   "ui_api": "2.0.0",
   "builtin_barrel_recipes": 23,
   "builtin_pressing_recipes": 6,
-  "native_crafting_recipes": 43,
+  "native_crafting_recipes": 59,
   "quality_drink_items": 144,
   "planned_recipe_exclusions": [
     {
@@ -77,10 +77,14 @@
   "furniture": {
     "stools": 16,
     "lights": 17,
-    "new_shaped_recipes": 33,
+    "sofas": 16,
+    "new_shaped_recipes": 49,
     "source_anchor_y": 0.875,
     "source_explicit_rider_offset": -0.0625,
     "native_seat_y": 0.8125,
+    "sofa_source_anchor_y": 0.5125,
+    "sofa_native_seat_y": 0.45,
+    "sofa_connection_states": 6,
     "light_emission": 15
   },
   "upstream_visual_sync": [

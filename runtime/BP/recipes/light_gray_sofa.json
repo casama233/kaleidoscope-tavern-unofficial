@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:light_gray_sofa"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "W W",
+      "WWW",
+      "L L"
+    ],
+    "key": {
+      "L": {
+        "item": "minecraft:iron_ingot"
+      },
+      "W": {
+        "item": "minecraft:light_gray_wool"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:light_gray_sofa",
+      "count": 1
+    }
+  }
+}

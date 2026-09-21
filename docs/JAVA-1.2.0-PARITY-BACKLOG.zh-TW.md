@@ -17,7 +17,7 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽手動存取／精確品質返還／來源瓶型展示已完成** | Circular Rack、Bar/Cellar Cabinet；Holder/Rack 紅石彈射仍未移植 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽的手動存取／精確品質返還／來源瓶型展示已完成；Circular亮度14與End Rod粒子已適配** | Bar/Cellar Cabinet；Holder/Rack 紅石彈射仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | **3款 Pendant Lamp 已移植雙格上/下半結構、下半亮度13、無碰撞、單件回收與孤兒半格修復**；部分資產/靜態展示已收錄 | Incense、Painting、Stepladder 等逐個核對放置、形狀、狀態與掉落 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
@@ -161,3 +161,13 @@ Bedrock Batch 12 把 Batch 10 的瓶型表抽成共用25種 visual kind，但保
 來源 renderer 先 scale 0.9，再依槽位 translate，最後 X +22.5°；本版將 Java block-model中心換算成3個 helper 錨點並隨 facing 旋轉。每個有內容槽最多1個 `tilted_rack_bottle_visual`，直接引用既有25種來源單瓶 geometry/texture；空槽不保留 helper。來源方向 shape 亦直接移植：North [-8,0,-3]/[16,14,10]、South [-8,0,-7]/[16,14,10]、East [-7,0,-8]/[10,14,16]、West [-3,0,-8]/[10,14,16]。來源配方輸出3個 Tilted Rack。
 
 Java 紅石上升沿會隨機挑非空槽並把 DrinkBlockItem 投擲出去，Molotov 另走 ThrownMolotovEntity。依既定「沒有簡單穩定 Bedrock 對等就不硬做」原則，本批次僅完成高價值手動存取／展示，紅石彈射仍為 **NOT_ADAPTED**。實機 helper 角度、多人重連、手機精準點位仍為 **NOT_RUN**。
+
+## Batch 13：Circular Rack 六槽圓形酒架
+
+Java 1.2.0 `CircularRackBlock` 固定6槽，`circular_rack_blocklist` 為空。點擊槽位先依 facing 套用 `getLocalX/getLocalZ`，再以 `atan2(localZ-0.5, localX-0.5)` 取得0–360°角度，依來源邊界順序分成六個60°扇區。Bedrock 因 Molotov 整體仍明示排除，因此支援 `empty_bottle` 與全部24種品質飲品 base，world DP 保存6個獨立完整 ID，可混放任意品質並原樣返還。
+
+展示復用 Batch 12 的25種來源瓶型映射；每個非空槽最多1個 `circular_rack_bottle_visual`。來源六個位置為 (0.5,0.125)、(0.875,0.3125)、(0.875,0.6875)、(0.5,0.875)、(0.125,0.6875)、(0.125,0.3125)，scale 0.82，slot yRot 依序 0 / 22.5 / -22.5 / 180 / 157.5 / -157.5，再按 facing 旋轉。空槽不保留 helper。
+
+來源方塊固定亮度14、shape `Block.box(0,0,0,16,2,16)`，Bedrock 對應 origin [-8,0,-8] size [16,2,16]；配方 IRI 三行（I=iron ingot、R=end rod）輸出2個。Java `animateTick` 在有物品時以1/8機率沿邊線生成 End Rod 粒子；Bedrock 使用穩定 `Dimension.spawnParticle('minecraft:endrod')`，在20tick custom block cadence 每次生成1個隨機邊線粒子，明示為較低頻的視覺適配而非逐tick等價。
+
+Java紅石上升沿投擲酒瓶／Molotov仍按既定原則保持 **NOT_ADAPTED**。實機 helper 朝向、粒子密度、多人重連與手機角度點選仍為 **NOT_RUN**。

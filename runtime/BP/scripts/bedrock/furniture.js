@@ -1,13 +1,13 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {makeStack,hand,canWrite,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air} from './transactions.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
-export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
+export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
 function optional(fn){try{return fn();}catch(e){error(e);}}
 function center(p){return {x:p.x+.5,y:p.y,z:p.z+.5};}
@@ -30,6 +30,14 @@ function tableNeighbors(d,p){return {north:tableDescriptor(blockAt(d,plus(p,faci
 export function syncTable(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableRepairState(current,tableNeighbors(block.dimension,block.location));if(wanted.axis===current.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(AXIS,wanted.axis).withState(POSITION,wanted.position));return true;}
 export function syncTableNeighborhood(d,p){const positions=[p,...[0,1,2,3].map(f=>plus(p,facingVector(f)))];let changed=0;for(let pass=0;pass<3;pass++)for(const q of positions){const b=blockAt(d,q);if(b)try{if(syncTable(b))changed++;}catch(e){error(e);}}return changed;}
 function glasswareHolderCount(block){return GLASSWARE_SLOTS.reduce((n,state)=>n+(block.permutation.getState(state)===1?1:0),0);}
+function verticalDoublePair(block){
+ const half=block.permutation.getState(HALF),spec=verticalDoublePartner(half),other=blockAt(block.dimension,plus(block.location,spec.offset));if(!other)return {half,spec,other,valid:false,loaded:false};
+ const valid=other.typeId===block.typeId&&other.permutation.getState(HALF)===spec.half&&other.permutation.getState(FACING)===block.permutation.getState(FACING);
+ return {half,spec,other,valid,loaded:true};
+}
+export function repairVerticalDouble(block){
+ const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;block.setPermutation(air());furnitureDiagnostics.multiblockRepairs++;return true;
+}
 export function useGlasswareHolder(player,block,faceLocation){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
@@ -55,6 +63,10 @@ export function placeFurniture(player,target,{face='Up'}={}){
    check(face==='Up',f.kind==='stool'?'STOOL_TOP_ONLY':'SOFA_TOP_ONLY');check(permittedSupport(blockAt(d,plus(p,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
    const above=blockAt(d,plus(p,{x:0,y:1,z:0}));check(above,'UNLOADED_CLEARANCE');check(above.isAir,'SEAT_HEADROOM');
   }
+  if(f.kind==='pendant_lamp'){
+   const lower=blockAt(d,plus(p,{x:0,y:-1,z:0}));check(lower,'UNLOADED_CLEARANCE');check(lower.isAir,'PENDANT_LOWER_BLOCKED');const facing=facingForYaw(player.getRotation().y);
+   exchangeBlocks(player,1,[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),{[FACING]:facing,[HALF]:DOUBLE_HALF.UPPER})},{block:lower,permutation:BlockPermutation.resolve(blockId(f),{[FACING]:facing,[HALF]:DOUBLE_HALF.LOWER})}]);placed=b;furnitureDiagnostics.placed++;return;
+  }
   const states={};
   if(seated(f)){states[FACING]=facingForYaw(player.getRotation().y);if(f.kind==='sofa')states[CONNECTION]=SOFA_CONNECTION.SINGLE;}
   else if(f.kind==='light')states[FACING]=facingForFace(face,player.getRotation().y);
@@ -78,6 +90,10 @@ export function sitOnFurniture(player,block){
 }
 export function recoverFurniture(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f,'NOT_FURNITURE');const key=anchorKey(block.dimension.id,block.location),d=block.dimension,p={...block.location};
+ if(f.kind==='pendant_lamp'){
+  const pair=verticalDoublePair(block);check(pair.loaded&&pair.valid,'MULTIBLOCK_INCOMPLETE');const otherKey=anchorKey(d.id,pair.other.location);
+  return locks.with([key,otherKey,player.id],()=>{exchangeBlocks(player,0,[{id:itemId(f),count:1}],[{block,permutation:air()},{block:pair.other,permutation:air()}]);furnitureDiagnostics.recovered++;return itemId(f);});
+ }
  const result=locks.with([key,player.id],()=>{
   const seats=seated(f)?atAnchor(d,p):[];check(seats.every(e=>nativeRide(e).getRiders().length===0),'SEAT_OCCUPIED');const give=[{id:itemId(f),count:1}];if(f.kind==='glassware_holder'){const n=glasswareHolderCount(block);if(n)give.push({id:EMPTY_GLASSWARE,count:n});}
   exchangeBlocks(player,0,give,[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
@@ -100,12 +116,12 @@ export function maintainSeat(e){
  }catch(x){error(x);helpers.delete(e.id);}
 }
 export function tickFurniture(){const list=[...helpers.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainSeat(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
-export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':string_light',{});}
+export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id);if(!existing&&!heldFurniture)return;e.cancel=true;if(e.isFirstEvent===false)return;
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));
-  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料。');}));
+  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料；雙格吊燈可從任一半回收。');}));
  });
  world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||!furnitureBlock(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),hs=handSnapshot(e.player);system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');return recoverFurniture(e.player,b);}));});
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!furnitureBlock(b.typeId))));

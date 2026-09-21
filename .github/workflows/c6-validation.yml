@@ -1,0 +1,45 @@
+name: C6 validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install build and type-test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          npm install --global typescript
+
+      - name: Rebuild runtime
+        run: python tools/build_runtime.py
+
+      - name: Generated runtime must be committed
+        run: git diff --exit-code
+
+      - name: Static contract validation
+        run: python tools/validate_runtime.py
+
+      - name: Node adapter tests
+        run: python tools/test_c6.py

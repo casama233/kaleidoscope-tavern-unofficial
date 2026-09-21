@@ -35,24 +35,7 @@
     },
     "components": {
       "minecraft:geometry": {
-        "identifier": "geometry.kt_runtime.holder",
-        "bone_visibility": {
-          "bottle_empty_bottle": "q.block_state('kaleidoscope_tavern:holder_kind') == 1",
-          "bottle_champagne": "q.block_state('kaleidoscope_tavern:holder_kind') == 2",
-          "bottle_glowflower_brew": "q.block_state('kaleidoscope_tavern:holder_kind') == 3",
-          "bottle_honey_wine": "q.block_state('kaleidoscope_tavern:holder_kind') == 4",
-          "bottle_ice_wine": "q.block_state('kaleidoscope_tavern:holder_kind') == 5",
-          "bottle_luminous_bride": "q.block_state('kaleidoscope_tavern:holder_kind') == 6",
-          "bottle_plum_wine": "q.block_state('kaleidoscope_tavern:holder_kind') == 7",
-          "bottle_polaris_sweet_white": "q.block_state('kaleidoscope_tavern:holder_kind') == 8",
-          "bottle_red_queen": "q.block_state('kaleidoscope_tavern:holder_kind') == 9",
-          "bottle_sakura_wine": "q.block_state('kaleidoscope_tavern:holder_kind') == 10",
-          "bottle_sauvignon_blanc_dry_white": "q.block_state('kaleidoscope_tavern:holder_kind') == 11",
-          "bottle_sherry": "q.block_state('kaleidoscope_tavern:holder_kind') == 12",
-          "bottle_vinegar": "q.block_state('kaleidoscope_tavern:holder_kind') == 13",
-          "bottle_whiskey": "q.block_state('kaleidoscope_tavern:holder_kind') == 14",
-          "bottle_wine": "q.block_state('kaleidoscope_tavern:holder_kind') == 15"
-        }
+        "identifier": "geometry.kt_assets_a10.holder"
       },
       "minecraft:material_instances": {
         "*": {

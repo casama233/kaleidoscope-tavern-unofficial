@@ -25,8 +25,8 @@ test('Vision source radius is 6/12/18 and caps at amplifier2',()=>{assert.equal(
 test('Vision 50-tick countdown pulse detects crossed Java modulo boundaries',()=>{assert(countdownPulseCrossed(36000,35997,50));assert(!countdownPulseCrossed(35997,35992,50));assert(countdownPulseCrossed(35952,35947,50));assert(countdownPulseCrossed(50,45,50));assert(!countdownPulseCrossed(45,40,50));assert.throws(()=>countdownPulseCrossed(40,45,50));});
 
 test('Tomb Raider maps exact Java disarmable families to Bedrock IDs',()=>{
- assert.equal(TOMB_RAIDER_TYPES.length,14);
- for(const id of['minecraft:skeleton','minecraft:stray','minecraft:wither_skeleton','minecraft:bogged','minecraft:zombie','minecraft:zombie_villager','minecraft:drowned','minecraft:husk','minecraft:piglin','minecraft:piglin_brute','minecraft:zombie_pigman','minecraft:vindicator','minecraft:pillager','minecraft:witch'])assert(tombRaiderTarget(id),id);
+ assert.equal(TOMB_RAIDER_TYPES.length,15);
+ for(const id of['minecraft:skeleton','minecraft:stray','minecraft:wither_skeleton','minecraft:bogged','minecraft:skeleton_horse','minecraft:zombie','minecraft:zombie_villager','minecraft:drowned','minecraft:husk','minecraft:piglin','minecraft:piglin_brute','minecraft:zombie_pigman','minecraft:vindicator','minecraft:pillager','minecraft:witch'])assert(tombRaiderTarget(id),id);
  for(const id of['minecraft:creeper','minecraft:evocation_illager','minecraft:player','minecraft:zombified_piglin'])assert(!tombRaiderTarget(id),id);
 });
 test('Tomb Raider 30 percent roll preserves Java float32 boundary',()=>{

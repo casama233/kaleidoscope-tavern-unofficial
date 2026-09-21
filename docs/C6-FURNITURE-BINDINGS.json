@@ -1278,6 +1278,87 @@
       "engine_accepted": false
     },
     {
+      "kind": "cellar_cabinet",
+      "item": "kaleidoscope_tavern:cellar_cabinet",
+      "block": "kaleidoscope_tavern:cellar_cabinet",
+      "helper": "kaleidoscope_tavern:cellar_cabinet_bottle_visual",
+      "geometry_by_position": {
+        "single": "geometry.kt_assets_a6.cellar_cabinet_single",
+        "left": "geometry.kt_assets_a6.cellar_cabinet_left",
+        "middle": "geometry.kt_assets_a6.cellar_cabinet_middle",
+        "right": "geometry.kt_assets_a6.cellar_cabinet_right"
+      },
+      "item_geometry": "geometry.kt_assets_a17.item_display_cellar_cabinet",
+      "slots": 9,
+      "allowed_bases": [
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine"
+      ],
+      "blocked_bases": [
+        "brandy",
+        "carignan",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "front_face_only": true,
+      "connection_states": 4,
+      "display_kinds": [
+        "empty_bottle",
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine"
+      ],
+      "state_exact_item_id": true,
+      "source_collision": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "source_shade_brightness": 0.2,
+      "shade_brightness": "NOT_ADAPTED",
+      "powered_state": "OMITTED_WITH_REDSTONE_EJECTION",
+      "redstone_pop": "NOT_ADAPTED",
+      "molotov": "EXCLUDED",
+      "trapdoor_recipes": 20,
+      "engine_accepted": false
+    },
+    {
       "kind": "pendant_lamp",
       "style": "bell",
       "item": "kaleidoscope_tavern:bell_pendant_lamp",
@@ -3019,5 +3100,6 @@
   "circular_racks": 1,
   "paintings": 14,
   "bar_cabinets": 2,
+  "cellar_cabinets": 1,
   "engine_accepted": false
 }

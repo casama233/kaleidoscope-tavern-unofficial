@@ -1,0 +1,1942 @@
+--- a/runtime/BP/manifest.json
++++ b/runtime/BP/manifest.json
+@@ -1,13 +1,13 @@
+ {
+   "format_version": 2,
+   "header": {
+-    "name": "森羅物語：酒館 C6 | 功能開發版",
+-    "description": "Independent Tavern guides + extension API + first brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.",
++    "name": "森羅物語：酒館 0.6.1 | 伺服器修正版 BP",
++    "description": "Tavern C6 server fixes: native loading, pressing, recipes and Cookery table support.",
+     "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+     "version": [
+       0,
+       6,
+-      0
++      1
+     ],
+     "min_engine_version": [
+       1,
+@@ -22,7 +22,7 @@
+       "version": [
+         0,
+         6,
+-        0
++        1
+       ]
+     },
+     {
+@@ -33,7 +33,7 @@
+       "version": [
+         0,
+         6,
+-        0
++        1
+       ]
+     }
+   ],
+@@ -43,11 +43,11 @@
+       "version": [
+         0,
+         6,
+-        0
++        1
+       ]
+     },
+     {
+-      "uuid": "10f37ae2-9ccf-435f-b34b-0eec8191cd94",
++      "uuid": "403f7a4a-a837-42c8-b5d3-76d5079ef269",
+       "version": [
+         1,
+         0,
+--- a/runtime/BP/scripts/main.js
++++ b/runtime/BP/scripts/main.js
+@@ -21,7 +21,7 @@
+ import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
+ import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mixologyDiagnostics} from './bedrock/mixology.js';
+ let registry;let cookeryReady=false,cookeryCapabilities=[];
+-export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
++export function diagnosticSnapshot(){return {build:'C6 / 0.6.1-server',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'BDS_1.26.51_CORE_FLOW_TESTED; CLIENT_VISUAL_REVIEW_PENDING'};}
+ export function book(player,recipesOnly=false){if(!registry){player.sendMessage('[Tavern] Initializing / 初始化中。');return;}return openGuide(player,registry,NAMES,diagnosticSnapshot,{recipesOnly});}
+ system.beforeEvents.startup.subscribe(ev=>{
+  registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerDrinkEffects(ev);
+@@ -41,7 +41,7 @@
+   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
+   registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);
+   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
+-  console.warn('[Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.');
++  console.warn('[Tavern C6] Independent books and extension v1 initialized. Server edition 0.6.1.');
+  }catch(e){console.error('[Tavern C6] Startup halted: '+e);}
+ });
+ export function runtimeRegistry(){return registry;}
+--- a/runtime/BP/blocks/light_lime.json
++++ b/runtime/BP/blocks/light_lime.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_lime",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_lime",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_lime",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_lime",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/gold_grapevine_trellis.json
++++ b/runtime/BP/blocks/gold_grapevine_trellis.json
+@@ -111,7 +111,7 @@
+     },
+     "permutations": [
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage0"
+@@ -146,7 +146,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage1"
+@@ -181,7 +181,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage2"
+@@ -216,7 +216,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage3"
+@@ -251,7 +251,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
+@@ -286,7 +286,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
+@@ -321,7 +321,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
+@@ -356,7 +356,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
+@@ -391,7 +391,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
+@@ -426,7 +426,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
+@@ -461,7 +461,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
+@@ -496,7 +496,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
+@@ -531,7 +531,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
+@@ -566,7 +566,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
+@@ -601,7 +601,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
+@@ -636,7 +636,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
+@@ -671,7 +671,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
+@@ -706,7 +706,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
+@@ -741,7 +741,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
+@@ -776,7 +776,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
+@@ -811,7 +811,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
+@@ -846,7 +846,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
+@@ -881,7 +881,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
+@@ -916,7 +916,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
+@@ -951,7 +951,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
+@@ -986,7 +986,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
+@@ -1021,7 +1021,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
+@@ -1056,7 +1056,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
+--- a/runtime/BP/blocks/ice_grapevine_trellis.json
++++ b/runtime/BP/blocks/ice_grapevine_trellis.json
+@@ -111,7 +111,7 @@
+     },
+     "permutations": [
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_stage0"
+@@ -146,7 +146,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_stage1"
+@@ -181,7 +181,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_stage2"
+@@ -216,7 +216,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_stage3"
+@@ -251,7 +251,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_east_west"
+@@ -286,7 +286,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_east_west"
+@@ -321,7 +321,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_east_west"
+@@ -356,7 +356,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_east_west"
+@@ -391,7 +391,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_north_south"
+@@ -426,7 +426,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_north_south"
+@@ -461,7 +461,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_north_south"
+@@ -496,7 +496,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_north_south"
+@@ -531,7 +531,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_east_west"
+@@ -566,7 +566,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_east_west"
+@@ -601,7 +601,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_east_west"
+@@ -636,7 +636,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_east_west"
+@@ -671,7 +671,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_north_south"
+@@ -706,7 +706,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_north_south"
+@@ -741,7 +741,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_north_south"
+@@ -776,7 +776,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_north_south"
+@@ -811,7 +811,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_up_down"
+@@ -846,7 +846,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_up_down"
+@@ -881,7 +881,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_up_down"
+@@ -916,7 +916,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_cross_up_down"
+@@ -951,7 +951,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_six_direction"
+@@ -986,7 +986,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_six_direction"
+@@ -1021,7 +1021,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_six_direction"
+@@ -1056,7 +1056,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.ice_grapevine_six_direction"
+--- a/runtime/BP/blocks/light_orange.json
++++ b/runtime/BP/blocks/light_orange.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_orange",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_orange",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_orange",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_orange",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/light_light_blue.json
++++ b/runtime/BP/blocks/light_light_blue.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_light_blue",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_light_blue",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_light_blue",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_light_blue",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/grapevine_trellis.json
++++ b/runtime/BP/blocks/grapevine_trellis.json
+@@ -111,7 +111,7 @@
+     },
+     "permutations": [
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.grapevine_stage0"
+@@ -146,7 +146,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.grapevine_stage1"
+@@ -181,7 +181,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.grapevine_stage2"
+@@ -216,7 +216,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.grapevine_stage3"
+@@ -251,7 +251,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_east_west"
+@@ -286,7 +286,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_east_west"
+@@ -321,7 +321,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_east_west"
+@@ -356,7 +356,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_east_west"
+@@ -391,7 +391,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_north_south"
+@@ -426,7 +426,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_north_south"
+@@ -461,7 +461,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_north_south"
+@@ -496,7 +496,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_north_south"
+@@ -531,7 +531,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_east_west"
+@@ -566,7 +566,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_east_west"
+@@ -601,7 +601,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_east_west"
+@@ -636,7 +636,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_east_west"
+@@ -671,7 +671,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_north_south"
+@@ -706,7 +706,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_north_south"
+@@ -741,7 +741,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_north_south"
+@@ -776,7 +776,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_north_south"
+@@ -811,7 +811,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_up_down"
+@@ -846,7 +846,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_up_down"
+@@ -881,7 +881,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_up_down"
+@@ -916,7 +916,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_cross_up_down"
+@@ -951,7 +951,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 0",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 0",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_six_direction"
+@@ -986,7 +986,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 1",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 1",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_six_direction"
+@@ -1021,7 +1021,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 2",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 2",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_six_direction"
+@@ -1056,7 +1056,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 3",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 3",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a3.grapevine_six_direction"
+--- a/runtime/BP/blocks/pressing_tub.json
++++ b/runtime/BP/blocks/pressing_tub.json
+@@ -40,7 +40,7 @@
+         ],
+         "size": [
+           16,
+-          2,
++          4,
+           16
+         ]
+       },
+@@ -57,7 +57,7 @@
+         ]
+       },
+       "minecraft:entity_fall_on": {
+-        "minimum_fall_distance": 0.5
++        "min_fall_distance": 0.5
+       },
+       "minecraft:tick": {
+         "interval_range": [
+--- a/runtime/BP/blocks/light_light_gray.json
++++ b/runtime/BP/blocks/light_light_gray.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_light_gray",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_light_gray",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_light_gray",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_light_gray",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/light_purple.json
++++ b/runtime/BP/blocks/light_purple.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_purple",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_purple",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_purple",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_purple",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/trellis.json
++++ b/runtime/BP/blocks/trellis.json
+@@ -100,7 +100,7 @@
+     },
+     "permutations": [
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_single"
+@@ -129,7 +129,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_east_west"
+@@ -158,7 +158,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_north_south"
+@@ -187,7 +187,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_cross_east_west"
+@@ -216,7 +216,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_cross_north_south"
+@@ -245,7 +245,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_cross_up_down"
+@@ -274,7 +274,7 @@
+         }
+       },
+       {
+-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\"",
++        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction'",
+         "components": {
+           "minecraft:geometry": {
+             "identifier": "geometry.kt_assets_a2.trellis_six_direction"
+--- a/runtime/BP/blocks/light_magenta.json
++++ b/runtime/BP/blocks/light_magenta.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_magenta",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_magenta",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_magenta",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_magenta",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/light_yellow.json
++++ b/runtime/BP/blocks/light_yellow.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_yellow",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_yellow",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_yellow",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_yellow",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/light_green.json
++++ b/runtime/BP/blocks/light_green.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_green",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_green",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_green",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_green",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/blocks/light_pink.json
++++ b/runtime/BP/blocks/light_pink.json
+@@ -20,13 +20,13 @@
+         "*": {
+           "texture": "kt_assets_a17_string_lights_pink",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": true
+         },
+         "unshaded": {
+           "texture": "kt_assets_a17_string_lights_pink",
+           "render_method": "alpha_test_single_sided",
+-          "ambient_occlusion": false,
++          "ambient_occlusion": 0,
+           "face_dimming": false
+         }
+       },
+@@ -64,13 +64,13 @@
+           "*": {
+             "texture": "kt_assets_a17_string_lights_pink",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": true
+           },
+           "unshaded": {
+             "texture": "kt_assets_a17_string_lights_pink",
+             "render_method": "alpha_test_single_sided",
+-            "ambient_occlusion": false,
++            "ambient_occlusion": 0,
+             "face_dimming": false
+           }
+         }
+--- a/runtime/BP/recipes/string_lights_cyan.json
++++ b/runtime/BP/recipes/string_lights_cyan.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_cyan",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/green_bar_stool.json
++++ b/runtime/BP/recipes/green_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:green_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/blue_bar_stool.json
++++ b/runtime/BP/recipes/blue_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:blue_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/magenta_bar_stool.json
++++ b/runtime/BP/recipes/magenta_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:magenta_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_purple.json
++++ b/runtime/BP/recipes/string_lights_purple.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_purple",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_light_blue.json
++++ b/runtime/BP/recipes/string_lights_light_blue.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_light_blue",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/light_blue_bar_stool.json
++++ b/runtime/BP/recipes/light_blue_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:light_blue_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/pink_bar_stool.json
++++ b/runtime/BP/recipes/pink_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:pink_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_magenta.json
++++ b/runtime/BP/recipes/string_lights_magenta.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_magenta",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_brown.json
++++ b/runtime/BP/recipes/string_lights_brown.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_brown",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/lime_bar_stool.json
++++ b/runtime/BP/recipes/lime_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:lime_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_colorless.json
++++ b/runtime/BP/recipes/string_lights_colorless.json
+@@ -22,6 +22,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_colorless",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/black_bar_stool.json
++++ b/runtime/BP/recipes/black_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:black_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/cyan_bar_stool.json
++++ b/runtime/BP/recipes/cyan_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:cyan_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/recipe_book.json
++++ b/runtime/BP/recipes/recipe_book.json
+@@ -18,6 +18,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:recipe_book",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "kaleidoscope_tavern:guidebook"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_light_gray.json
++++ b/runtime/BP/recipes/string_lights_light_gray.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_light_gray",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_white.json
++++ b/runtime/BP/recipes/string_lights_white.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_white",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_gray.json
++++ b/runtime/BP/recipes/string_lights_gray.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_gray",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/empty_glassware.json
++++ b/runtime/BP/recipes/empty_glassware.json
+@@ -19,6 +19,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:empty_glassware",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:glass_pane"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/grapevine_starter.json
++++ b/runtime/BP/recipes/grapevine_starter.json
+@@ -18,6 +18,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:grapevine",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:vine"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_red.json
++++ b/runtime/BP/recipes/string_lights_red.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_red",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/purple_bar_stool.json
++++ b/runtime/BP/recipes/purple_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:purple_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_pink.json
++++ b/runtime/BP/recipes/string_lights_pink.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_pink",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/guidebook.json
++++ b/runtime/BP/recipes/guidebook.json
+@@ -18,6 +18,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:guidebook",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:book"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_green.json
++++ b/runtime/BP/recipes/string_lights_green.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_green",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/pressing_tub.json
++++ b/runtime/BP/recipes/pressing_tub.json
+@@ -15,6 +15,11 @@
+       {
+         "item": "minecraft:barrel"
+       }
++    ],
++    "unlock": [
++      {
++        "item": "minecraft:barrel"
++      }
+     ]
+   }
+ }
+--- a/runtime/BP/recipes/red_bar_stool.json
++++ b/runtime/BP/recipes/red_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:red_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_orange.json
++++ b/runtime/BP/recipes/string_lights_orange.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_orange",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/gray_bar_stool.json
++++ b/runtime/BP/recipes/gray_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:gray_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_lime.json
++++ b/runtime/BP/recipes/string_lights_lime.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_lime",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/orange_bar_stool.json
++++ b/runtime/BP/recipes/orange_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:orange_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/yellow_bar_stool.json
++++ b/runtime/BP/recipes/yellow_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:yellow_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/empty_bottle.json
++++ b/runtime/BP/recipes/empty_bottle.json
+@@ -15,6 +15,11 @@
+       {
+         "item": "minecraft:glass_bottle"
+       }
++    ],
++    "unlock": [
++      {
++        "item": "minecraft:glass_bottle"
++      }
+     ]
+   }
+ }
+--- a/runtime/BP/recipes/shaker.json
++++ b/runtime/BP/recipes/shaker.json
+@@ -22,6 +22,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:shaker",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:bucket"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/white_bar_stool.json
++++ b/runtime/BP/recipes/white_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:white_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/trellis.json
++++ b/runtime/BP/recipes/trellis.json
+@@ -20,6 +20,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:trellis",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "kaleidoscope_tavern:grapevine"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_black.json
++++ b/runtime/BP/recipes/string_lights_black.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_black",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_yellow.json
++++ b/runtime/BP/recipes/string_lights_yellow.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_yellow",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/light_gray_bar_stool.json
++++ b/runtime/BP/recipes/light_gray_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:light_gray_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/brown_bar_stool.json
++++ b/runtime/BP/recipes/brown_bar_stool.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:brown_bar_stool",
+       "count": 1
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/string_lights_blue.json
++++ b/runtime/BP/recipes/string_lights_blue.json
+@@ -26,6 +26,11 @@
+     "result": {
+       "item": "kaleidoscope_tavern:string_lights_blue",
+       "count": 8
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:chain"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/barrel.json
++++ b/runtime/BP/recipes/barrel.json
+@@ -20,6 +20,11 @@
+       "B": {
+         "item": "minecraft:barrel"
+       }
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:barrel"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/recipes/tap.json
++++ b/runtime/BP/recipes/tap.json
+@@ -22,6 +22,11 @@
+       "L": {
+         "item": "minecraft:lever"
+       }
+-    }
++    },
++    "unlock": [
++      {
++        "item": "minecraft:hopper"
++      }
++    ]
+   }
+ }
+--- a/runtime/BP/scripts/core/bottle-support.js
++++ b/runtime/BP/scripts/core/bottle-support.js
+@@ -15,4 +15,4 @@
+ ].map(x=>'minecraft:'+x));
+ const WOOD=/^minecraft:(?:stripped_)?(?:oak|spruce|birch|jungle|acacia|dark_oak|mangrove|cherry|pale_oak|bamboo|crimson|warped)_(?:planks|log|wood|stem|hyphae|block)$/;
+ const COLORED=/^minecraft:(?:white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black)_(?:wool|concrete|terracotta|glazed_terracotta|stained_glass)$/;
+-export function isBottleSupport(id,tags=[]){return FULL.has(id)||WOOD.test(id)||COLORED.test(id)||tags.includes(SUPPORT_TAG);}
++export function isBottleSupport(id,tags=[]){return /^kaleidoscope_cookery:table_(?:oak|spruce|birch|jungle|acacia|dark_oak|mangrove|cherry|bamboo|crimson|warped)$/.test(id)||FULL.has(id)||WOOD.test(id)||COLORED.test(id)||tags.includes(SUPPORT_TAG);}
+--- a/runtime/BP/scripts/core/machines.js
++++ b/runtime/BP/scripts/core/machines.js
+@@ -22,7 +22,7 @@
+  validateMachine(state);const s=clone(state),tx={state:s,take:0,give:[],message:''};const held=command.held;
+  if(command.action==='inspect')return {...tx,message:statusText(s)};
+  if(command.action==='lid'){
+-  check(s.kind==='barrel','NOT_A_BARREL');check(!s.batch,'FERMENTING_LID_LOCKED');s.open=!s.open;tx.message=s.open?'酒桶已開蓋。':'酒桶已關蓋；下次檢查開始發酵。';
++  check(s.kind==='barrel','NOT_A_BARREL');check(!s.batch,'FERMENTING_LID_LOCKED');if(s.open){const counts=s.slots.filter(Boolean).map(x=>x.count);check(counts.every(n=>n===counts[0]),'UNEQUAL_INGREDIENT_COUNTS');}s.open=!s.open;tx.message=s.open?'酒桶已開蓋。':'酒桶已關蓋；下次檢查開始發酵。';
+  }else if(command.action==='press'){
+   check(s.kind==='pressing_tub','NOT_A_PRESS');const input=s.slots[0];check(input,'NO_INGREDIENT');const r=registry.findPress(input.id);check(r,'RECIPE_UNAVAILABLE');
+   check(!s.fluid||s.fluid===r.fluid,'MIXED_FLUID');check(s.amount+r.amount<=1000,'FLUID_FULL');
+--- a/runtime/BP/scripts/data/guide-pages.js
++++ b/runtime/BP/scripts/data/guide-pages.js
+@@ -25,3 +25,7 @@
+  '潛行，手持酒點擊實心方塊的上表面，擺放第一瓶。點擊同一瓶堆可加入同種酒；不必相同品質。空手點瓶堆取回最後放入的一瓶，破壞則取回整堆。\n白蘭地、佳麗釀、落日餘暉最多3瓶，其餘本版24種最多4瓶；形狀均使用原作各數量模型。每瓶以自己的q1–q6 ID保存，不平均品質、不覆蓋第一瓶。\n背包滿取消領取；同tick多人領取只結算一次；區塊重載時瓶堆內容保存在世界資料。Creative擺放也消耗真實一瓶，取回返原瓶，避免白拿增殖。\n暫支援明確清單中的石頭、泥土、完整木材／羊毛等方塊，或附有kaleidoscope_tavern:bottle_support標籤的自訂支撐。不把所有外部桌面視為支援。下方方塊被移除不自動掉瓶，原位保留方便取回；外部指令替換造成狀態不符時拒絕操作並保留資料。',
+  'Sneak-use a solid top face with a drink to place the first bottle. Use another bottle of the same drink on its display to add; quality may differ. Empty hand returns the newest bottle; breaking returns all original qualities. Brandy, Carignan and Sunset Glow cap at3; other current families4. Each count uses its own source geometry. Quality IDs persist individually, never averaged. Full inventory cancels; simultaneous requests settle once. Creative placement consumes a real bottle as an anti-duplication rule. Support uses an explicit vanilla full-block allowlist or the kaleidoscope_tavern:bottle_support block tag; unknown surfaces are rejected. Removed support leaves a recoverable display; external command mismatch blocks exchange and preserves stored data.')
+ ];
++
++// Server edition: current player instructions supersede historical C2 text.
++const serverGuideUpdates={"welcome": ["歡迎來到酒館。可種葡萄、跳踩榨汁、釀酒、調酒，並擺放酒瓶、酒杯、吧檯椅和彩燈。\n普通書＋酒館空瓶→酒館指南；指南＋紙→酒館配方書。搜尋酒名可查看配方與各品質效果。\n指南與廚房各自獨立；酒杯、酒瓶和雪克杯支援森羅廚房餐桌。", "Grow grapes, press juice, brew wine, mix cocktails and decorate with bottles, cups, stools and string lights. Book + Tavern empty bottle makes this guide; guide + paper makes the recipe book. Search a drink for recipes and quality effects. Tavern and Cookery keep independent guides. Cookery tables support bottles, cups and shakers."], "first_brew": ["1. 普通藤蔓＋甜莓→葡萄藤；三個葡萄藤豎列→8個藤架。\n2. 在泥土上的藤架種藤，延伸架子，等待下方結果；剪刀採收成熟葡萄。\n3. 對壓榨桶使用水果，再站入桶內跳踩；8顆水果榨成1000mB，以原版空桶取汁。\n4. 酒桶需要3×3×3空間，先灌入4桶相同液體，再加入配方原料。各種原料數量必須相同；空手點擊可取回一槽。\n5. 潛行空手點擊關蓋，保持區塊載入即可釀酒。\n6. 在相鄰酒嘴上使用酒館空瓶取酒。Q1即可飲用，等待可提升品質至Q6。", "Craft a vine with sweet berries for a grapevine; three vertically make eight trellises. Plant over dirt, extend frames and shear ripe fruit. Add fruit to a pressing tub, then jump inside: eight fruit yield 1000 mB. Extract with a vanilla bucket. A barrel needs a clear 3x3x3 space and four matching buckets. Add recipe ingredients in equal stack counts; empty hand retrieves a slot. Sneak with an empty hand to close. Keep the chunk loaded, then use a Tavern bottle on an adjacent tap. Q1 is drinkable; waiting improves quality up to Q6."], "quality": ["品質1即可飲用，也可能帶負面效果。區塊載入時酒桶持續熟成，最高品質6；離線不補算。\n無原料配方產16瓶；有原料配方的各槽必須同數量，最多16瓶。多種材料數量不同會拒絕關蓋，原料全部保留，可空手取回重放。配方不符會釀成醋。\nQ4以上基酒可用於調酒。部分Java專屬效果尚未移植，請查看酒效頁的標記。", "Q1 can be drunk and may have negative effects. Barrels mature in loaded chunks up to Q6 without offline progress. Ingredient-free recipes yield sixteen bottles; ingredient slots must have equal counts, up to sixteen. Unequal counts prevent closing and preserve every ingredient. Unmatched recipes produce vinegar. Q4+ base wines can be mixed. Some Java-specific effects remain unavailable; see drink effect pages."], "limitations": ["本版提供葡萄種植、榨汁、釀酒、手持／桌面調酒、酒瓶與酒杯展示、16色可乘坐吧檯椅、17種彩燈。\n尚未移植：部分Java專屬酒效、野生葡萄世界生成、氣候加速、水浸藤架、任意黑板文字、酒嘴下方自動接酒與燃燒瓶。\n葡萄可由藤蔓＋甜莓起步。支撐物被拆除時展示品會暫留原位，可手動取回。", "Available: cultivation, pressing, brewing, held/table mixing, bottle and cup displays, sixteen rideable stool colors and seventeen string lights. Remaining omissions include some Java-specific effects, wild grape generation, climate acceleration, waterlogged frames, custom blackboard text, automatic tap collection and Molotovs. Craft vines with sweet berries to start. Displays remain recoverable if their support is removed."]};
++for(const page of GUIDE_PAGES){const text=serverGuideUpdates[page.id.split(':')[1]];if(text)page.body={zh_TW:text[0],zh_CN:text[0],en_US:text[1]};}
+--- a/runtime/BP/scripts/bedrock/machines.js
++++ b/runtime/BP/scripts/bedrock/machines.js
+@@ -16,7 +16,7 @@
+  const code=error.code??String(error);diagnostics.errors.push({tick:system.currentTick,key,code});if(diagnostics.errors.length>12)diagnostics.errors.shift();
+  if((warningTimes.get(key)??-1000)+100<=system.currentTick){console.warn(`[Tavern] ${key}: ${code}`);warningTimes.set(key,system.currentTick);}
+ }
+-const CN={INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
++const CN={UNEQUAL_INGREDIENT_COUNTS:'各種原料數量必須相同；請空手取回後重新投料。',INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
+ function tell(player,message){try{player?.onScreenDisplay.setActionBar(message);}catch{}}
+ function guarded(player,fn){try{return fn();}catch(e){tell(player,'§e'+(CN[e.code]??e.code??'Tavern error'));warn(e,player?.id??'machine');return undefined;}}
+ function blockAt(dim,p){try{return dim.getBlock(p);}catch{return undefined;}}
+--- a/runtime/RP/manifest.json
++++ b/runtime/RP/manifest.json
+@@ -1,13 +1,13 @@
+ {
+   "format_version": 2,
+   "header": {
+-    "name": "森羅物語：酒館 C6 | 原作資源",
+-    "description": "A17 source art reused unchanged; no Cookery assets bundled. CC BY-NC-SA 4.0.",
++    "name": "森羅物語：酒館 0.6.1 | 伺服器修正版 RP",
++    "description": "Tavern C6 server fixes: native loading, pressing, recipes and Cookery table support.",
+     "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+     "version": [
+       0,
+       6,
+-      0
++      1
+     ],
+     "min_engine_version": [
+       1,
+@@ -22,13 +22,13 @@
+       "version": [
+         0,
+         6,
+-        0
++        1
+       ]
+     }
+   ],
+   "dependencies": [
+     {
+-      "uuid": "c89dc8df-c3fc-4bc8-8bd0-527abba76681",
++      "uuid": "8f39983b-00a6-4818-b489-0a73daf3bc87",
+       "version": [
+         1,
+         0,

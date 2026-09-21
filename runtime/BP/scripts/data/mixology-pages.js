@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "酒館家具、酒架、掛畫與雙槽酒櫃",
-      "zh_CN": "酒馆家具、酒架、挂画与双槽酒柜",
-      "en_US": "Tavern furniture, racks, paintings and Bar Cabinets"
+      "zh_TW": "酒館家具、酒架與九槽窖藏酒櫃",
+      "zh_CN": "酒馆家具、酒架与九槽窖藏酒柜",
+      "en_US": "Tavern furniture, racks and nine-slot Cellar Cabinet"
     },
     "body": {
-      "zh_TW": "家具線已包含高腳凳、沙發、桌子、吧台、彩燈、Glassware Holder、Holder、Pendant Lamps、Tilted/Circular Rack、Batch 14全部14款掛畫，以及Batch 15木質Bar Cabinet與Glass Bar Cabinet。掛畫保留Java牆面／地面／天花板附著與1/16薄碰撞。兩種Bar Cabinet共用Java BarCabinetBlock：每櫃保存left/right兩個精確*_q1..q6瓶子ID；普通瓶可左右各放1瓶，單側佔用時放入／取出會按來源規則自動導向另一／唯一側。來源bar_cabinet_irregular只有brandy與carignan，只能空櫃放入，強制left並single居中，single禁止第二瓶。木櫃與玻璃櫃各自只連同款同朝向櫃體形成single/left/middle/right四態，兩者不互連。Glass Cabinet的Java c:glass_panes展開為無色+16色共17份Bedrock配方。Circular Rack亮度14與低頻End Rod粒子適配仍保留。實機玻璃透明、瓶型位置、掛畫waterlogging、多人與觸控仍待驗收。",
-      "zh_CN": "家具线已包含多槽酒架、Batch 14全部14款挂画，以及Batch 15木质Bar Cabinet和Glass Bar Cabinet。两种酒柜共享Java逻辑：每柜保存left/right两个精确品质瓶ID；brandy/carignan为异形瓶，只能空柜single居中并禁止第二瓶。同款同朝向柜体形成四态连接，木柜与玻璃柜不互连。Glass Cabinet把Java c:glass_panes展开为无色+16色共17份Bedrock配方。挂画与Circular Rack现有适配均保留。实机透明/多人/触控仍待验收。",
-      "en_US": "The furniture line now includes the existing racks, all 14 Batch 14 paintings, and Batch 15 wooden Bar Cabinet plus Glass Bar Cabinet. Both cabinets use Java BarCabinetBlock semantics: exact left/right *_q1..q6 IDs, Java side redirection when only one regular bottle is present, and source irregular brandy/carignan restricted to an empty cabinet, forced left and rendered centered in single mode with no second bottle. Each cabinet style connects only to the same block type and facing using single/left/middle/right states; wood and glass do not interconnect. Glass Cabinet expands Java c:glass_panes to clear plus all 16 stained panes as 17 Bedrock recipes. Painting attachment and Circular Rack light/particle adaptations remain intact. Real-client glass transparency, bottle placement, painting waterlogging, multiplayer and touch remain NOT_RUN."
+      "zh_TW": "Batch 16完成Cellar Cabinet九槽窖藏酒櫃。它只允許點正面，依Java getLocalX與點擊Y把正面切成3×3九宮格；world DP保存9個獨立精確*_q1..q6 ID。來源cellar_cabinet_blocklist與Holder相同，拒絕10種大瓶型，因此支援empty_bottle+14種品質飲品base。櫃體同款同朝向連成single/left/middle/right四態，九個非空槽各最多1個無碰撞helper，按來源3×3位置、scale1與X -90°展示。來源櫃體沒有自訂shape，因此完整方塊碰撞。Java配方中央minecraft:trapdoors展開為11種木／菌木活板門、iron trapdoor與8種copper/waxed trapdoor，共20份Bedrock配方。來源POWERED只服務紅石彈射且所有powered模型相同；因projectile路徑仍NOT_ADAPTED，本批不添加沒有實際作用的powered state。Batch 14掛畫與Batch 15雙槽Bar Cabinets全部保留。實機九瓶位置、正面觸控、多人重連仍待驗收。",
+      "zh_CN": "Batch 16完成Cellar Cabinet九槽窖藏酒柜。只允许点击正面，按Java局部X和Y切成3×3九宫格；world DP保存9个独立精确品质ID。来源blocklist与Holder相同，支持empty_bottle+14种品质酒瓶。柜体同款同朝向形成四态连接，每个非空槽最多1个无碰撞helper。Java minecraft:trapdoors配方展开为20份Bedrock活板门等价配方。POWERED只服务尚未适配的红石投掷，因此本批省略无行为state。实机多人/触控仍待验收。",
+      "en_US": "Batch 16 ports the nine-slot Cellar Cabinet. Interaction is front-face only; Java getLocalX plus hit Y divides the front into an exact 3×3 grid, with nine independent exact *_q1..q6 IDs in world DP. The source blocklist matches Holder, rejecting ten large bottle bases, so empty_bottle plus 14 regular quality-drink bases are accepted. Same-facing Cellar Cabinets connect through single/left/middle/right states. Each occupied slot has at most one collisionless helper at the source 3×3 renderer position, scale 1 and X -90°. The cabinet has default full-block collision. Java minecraft:trapdoors is expanded to 20 Bedrock recipes covering 11 wood/fungus trapdoors, iron, and eight copper/waxed variants. Source POWERED only drives projectile ejection and does not change the model; since redstone/projectile behavior remains NOT_ADAPTED, this batch omits a behaviorless powered state. Batch 14 Paintings and Batch 15 Bar Cabinets remain intact. Real-client nine-bottle placement, front-face touch and multiplayer reconnect remain NOT_RUN."
     }
   },
   {

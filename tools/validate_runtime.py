@@ -144,10 +144,11 @@ def main():
  check('C6_complete_tilted_rack_family',len([b for b in bindings['bindings']if b['kind']=='tilted_rack'])==1)
  check('C6_complete_circular_rack_family',len([b for b in bindings['bindings']if b['kind']=='circular_rack'])==1)
  check('C6_complete_bar_cabinet_family',len([b for b in bindings['bindings']if b['kind']=='bar_cabinet'])==2)
+ check('C6_complete_cellar_cabinet_family',len([b for b in bindings['bindings']if b['kind']=='cellar_cabinet'])==1)
  check('C6_complete_painting_family',len([b for b in bindings['bindings']if b['kind']=='painting'])==14)
  check('C6_complete_incense_family',len([b for b in bindings['bindings']if b['kind']=='incense'])==8)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack','painting','bar_cabinet','incense']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack','circular_rack','painting','bar_cabinet','cellar_cabinet','incense']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -236,13 +237,6 @@ def main():
    check('C6_circular_rack_client_maps',len(cc['geometry'])==25 and len(cc['textures'])==25 and cc['scripts']['scale']=='0.82' and cc['render_controllers']==['controller.render.kt_runtime.circular_rack_bottle'])
    check('C6_circular_rack_render_arrays',len(crc['arrays']['geometries']['Array.kind'])==25 and len(crc['arrays']['textures']['Array.kind'])==25 and 'storage_kind'in crc['geometry'])
    check('C6_circular_rack_source_scope',b['slots']==6 and len(b['allowed_bases'])==24 and b['blocked_bases']==[] and b['light_emission']==14 and b['particle']=='minecraft:endrod' and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
-  elif b['kind']=='incense':
-   states=block['description'].get('states',{});perms=block.get('permutations',[])
-   check('C6_incense_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:open')==[0,1] and states.get('kaleidoscope_tavern:powered')==[0,1])
-   check('C6_incense_geometries:'+b['style'],b['closed_geometry']=='geometry.kt_assets_a13.incense_closed' and b['open_geometry']=='geometry.kt_assets_a13.incense_open' and comps.get('minecraft:geometry',{}).get('identifier')==b['closed_geometry'] and sum(x['components'].get('minecraft:geometry',{}).get('identifier')==b['open_geometry']for x in perms)==1 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
-   check('C6_incense_shape_tick:'+b['style'],comps.get('minecraft:collision_box')=={'origin':[-3,0,-3],'size':[6,7,6]} and comps.get('minecraft:selection_box')=={'origin':[-3,0,-3],'size':[6,7,6]} and comps.get('minecraft:tick')=={'interval_range':[3,3],'looping':True} and 'kaleidoscope_tavern:incense'in comps)
-   check('C6_incense_item_particles:'+b['style'],comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['closed_geometry'] and b['small_particle']in particles and b['large_particle']in particles)
-   check('C6_incense_source_scope:'+b['style'],b['tick_step']==3 and b['damage_period']==120 and b['range']==32 and b['magic_damage']==1 and b['redstone_edge_sync'] and b['zombie_villager_conversion']=='NOT_ADAPTED_60_TICK' and b['source_push_reaction']=='DESTROY' and b['bedrock_movable']=='IMMOVABLE_SAFETY_DIVERGENCE')
   elif b['kind']=='bar_cabinet':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_bar_cabinet_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3])
@@ -252,6 +246,25 @@ def main():
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
    check('C6_bar_cabinet_helper:'+b['style'],prop['range']==[1,25] and prop['client_sync'] and 'kt_bar_cabinet_visual'in helper['components']['minecraft:type_family']['family'])
    check('C6_bar_cabinet_source_scope:'+b['style'],b['slots']==2 and b['irregular_bases']==['brandy','carignan'] and b['single_mode'] and b['connection_states']==4 and b['same_type_connect_only'])
+  elif b['kind']=='incense':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_incense_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:open')==[0,1] and states.get('kaleidoscope_tavern:powered')==[0,1])
+   check('C6_incense_geometries:'+b['style'],b['closed_geometry']=='geometry.kt_assets_a13.incense_closed' and b['open_geometry']=='geometry.kt_assets_a13.incense_open' and comps.get('minecraft:geometry',{}).get('identifier')==b['closed_geometry'] and sum(x['components'].get('minecraft:geometry',{}).get('identifier')==b['open_geometry']for x in perms)==1 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
+   check('C6_incense_shape_tick:'+b['style'],comps.get('minecraft:collision_box')=={'origin':[-3,0,-3],'size':[6,7,6]} and comps.get('minecraft:selection_box')=={'origin':[-3,0,-3],'size':[6,7,6]} and comps.get('minecraft:tick')=={'interval_range':[3,3],'looping':True} and 'kaleidoscope_tavern:incense'in comps)
+   check('C6_incense_item_particles:'+b['style'],comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['closed_geometry'] and b['small_particle']in particles and b['large_particle']in particles)
+   check('C6_incense_source_scope:'+b['style'],b['tick_step']==3 and b['damage_period']==120 and b['range']==32 and b['magic_damage']==1 and b['redstone_edge_sync'] and b['zombie_villager_conversion']=='NOT_ADAPTED_60_TICK' and b['source_push_reaction']=='DESTROY' and b['bedrock_movable']=='IMMOVABLE_SAFETY_DIVERGENCE')
+  elif b['kind']=='cellar_cabinet':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_cellar_cabinet_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3] and 'kaleidoscope_tavern:powered'not in states)
+   check('C6_cellar_cabinet_geometries',all(g in geom for g in b['geometry_by_position'].values()) and sum('kaleidoscope_tavern:position'in x['condition']for x in perms)==4 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
+   check('C6_cellar_cabinet_shape_item',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
+   check('C6_cellar_cabinet_component','kaleidoscope_tavern:cellar_cabinet'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
+   check('C6_cellar_cabinet_helper',prop['range']==[1,15] and prop['client_sync'] and 'kt_cellar_cabinet_visual'in helper['components']['minecraft:type_family']['family'])
+   cc=load(RP/'entity/runtime_cellar_cabinet_bottle_visual.entity.json')['minecraft:client_entity']['description'];crc=load(RP/'render_controllers/runtime_cellar_cabinet.render_controllers.json')['render_controllers']['controller.render.kt_runtime.cellar_cabinet_bottle']
+   check('C6_cellar_cabinet_client_maps',len(cc['geometry'])==15 and len(cc['textures'])==15 and cc['scripts']['scale']=='1.0' and cc['render_controllers']==['controller.render.kt_runtime.cellar_cabinet_bottle'])
+   check('C6_cellar_cabinet_render_arrays',len(crc['arrays']['geometries']['Array.kind'])==15 and len(crc['arrays']['textures']['Array.kind'])==15 and 'storage_kind'in crc['geometry'])
+   check('C6_cellar_cabinet_source_scope',b['slots']==9 and len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['front_face_only'] and b['connection_states']==4 and b['powered_state']=='OMITTED_WITH_REDSTONE_EJECTION' and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED' and b['trapdoor_recipes']==20)
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -286,6 +299,8 @@ def main():
  check('C6_bar_cabinet_source_recipe',bar_cabinet_recipe['pattern']==['GGG','G G','GGG'] and bar_cabinet_recipe['key']=={'G':{'item':'kaleidoscope_tavern:grapevine'}} and bar_cabinet_recipe['result']=={'item':'kaleidoscope_tavern:bar_cabinet','count':1})
  pane_recipes=sorted((BP/'recipes').glob('glass_bar_cabinet*.json'));panes={load(x)['minecraft:recipe_shaped']['key']['P']['item']for x in pane_recipes}
  check('C6_glass_bar_cabinet_source_tag_expansion',len(pane_recipes)==17 and len(panes)==17 and 'minecraft:glass_pane'in panes and 'minecraft:black_stained_glass_pane'in panes and all(load(x)['minecraft:recipe_shaped']['result']=={'item':'kaleidoscope_tavern:glass_bar_cabinet','count':1}for x in pane_recipes))
+ cellar_recipes=sorted((BP/'recipes').glob('cellar_cabinet*.json'));traps={load(x)['minecraft:recipe_shaped']['key']['T']['item']for x in cellar_recipes}
+ check('C6_cellar_cabinet_source_tag_expansion',len(cellar_recipes)==20 and len(traps)==20 and 'minecraft:oak_trapdoor'in traps and 'minecraft:iron_trapdoor'in traps and 'minecraft:copper_trapdoor'in traps and 'minecraft:waxed_oxidized_copper_trapdoor'in traps and all(load(x)['minecraft:recipe_shaped']['pattern']==['GGG','GTG','GGG'] and load(x)['minecraft:recipe_shaped']['key']['G']=={'item':'kaleidoscope_tavern:grapevine'} and load(x)['minecraft:recipe_shaped']['result']=={'item':'kaleidoscope_tavern:cellar_cabinet','count':1}for x in cellar_recipes))
  incense_recipe_center={'sakura':'minecraft:cherry_sapling','pine':'minecraft:spruce_sapling','ginkgo':'minecraft:yellow_dye','spore':'minecraft:spore_blossom','catnip':'minecraft:allium','snow':'minecraft:snowball','butterfly':'minecraft:pitcher_plant','firefly':'minecraft:glowstone_dust'}
  for style,center_item in incense_recipe_center.items():
   pr=load(BP/f'recipes/{style}_incense.json')['minecraft:recipe_shaped']

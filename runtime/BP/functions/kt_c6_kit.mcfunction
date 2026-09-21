@@ -35,3 +35,4 @@ give @s kaleidoscope_tavern:brandy_q6 2
 give @s kaleidoscope_tavern:carignan_q3 2
 give @s kaleidoscope_tavern:bar_cabinet 2
 give @s kaleidoscope_tavern:glass_bar_cabinet 2
+give @s kaleidoscope_tavern:cellar_cabinet 2

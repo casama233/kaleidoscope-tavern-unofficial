@@ -17,7 +17,7 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽，以及木質／玻璃 Bar Cabinet 雙槽存取、精確品質返還與來源展示已完成** | Cellar Cabinet 九槽；Holder/Rack 紅石彈射仍未移植 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽、木質／玻璃 Bar Cabinet 雙槽，以及 Cellar Cabinet 九槽手動存取／精確品質返還／來源展示已完成** | Holder/Rack/Cellar 的紅石酒瓶投擲仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | **3款 Pendant Lamp＋14款 Painting＋8款 Incense 已移植**；Incense 含手動/紅石 OPEN、粒子與每120 tick 亡靈 magic 傷害 | Stepladder；Incense 殭屍村民精確60 tick轉化；Stepladder Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
@@ -197,13 +197,25 @@ Java 1.2.0 的 `BAR_CABINET` 與 `GLASS_BAR_CABINET` 都直接註冊 `BarCabinet
 
 Batch 14 的14款掛畫與其 generator/測試全部保留。實機瓶型位置、Glass Cabinet cutout/透明效果、多人重連與手機左右點擊仍為 **NOT_RUN**。
 
+## Batch 16：Cellar Cabinet 九槽窖藏酒櫃
 
-## Batch 16：8 款 Incense 香薰
+Java 1.2.0 `CellarCabinetBlock` 繼承 `AbstractStorageBlock`，固定9槽，只允許點擊方塊正面。來源 `getClickedSlot` 先以 facing 套用 `getLocalX`，再用 `column=floor(localX*3)%3`、`row=2-floor(relativeY*3)%3` 建立3×3九宮格，最後 `slot=column+row*3`。Bedrock 直接使用 `blockFace + faceLocation`，側面／背面返回無操作，不猜測槽位。
 
-Java 1.2.0 的 Sakura/Pine/Ginkgo/Spore/Catnip/Snow/Butterfly/Firefly 共用同一 `IncenseBlock`。本批保留 `FACING + OPEN + POWERED` 三態契約：放置時 facing 取玩家水平朝向反向，初始 OPEN/POWERED 讀取紅石；玩家互動只翻轉 OPEN，不修改 POWERED；只有實際紅石訊號與 POWERED 發生邊沿差異時，才把 OPEN/POWERED 同步到新訊號。這保留了 Java「手動關閉已通電香薰後，在紅石電平不變時不會立刻被強制打開」的細節。
+`cellar_cabinet_blocklist` 與 Holder 相同，拒絕 brandy、carignan、mother_snow、miners_star、madame_shexiang、sunset_glow、riesling_dry_white、sweet_berry_wine、vodka、rum；因此支援 `empty_bottle` + 14種普通品質飲品 base。world DP 保存9個獨立完整 `*_q1..q6` ID，抽取與拆除原樣返還，背包不足整筆 rollback。
 
-來源碰撞為單一 `Block.box(5,0,5,11,7,11)`，Bedrock 精確映射為 origin `[-3,0,-3]` / size `[6,7,6]`。8款共用 A13 closed/open 幾何，保留各自貼圖與來源配方。關閉狀態仍以3-tick block component cadence 生成小粒子；OPEN 時額外以低密度 server cadence 在來源32×32水平區域散佈大型粒子。Pine/Ginkgo/Catnip/Snow/Butterfly/Firefly 直接使用既有 A17 large 粒子；Sakura/Spore 的 Java large 粒子是 Java vanilla `CHERRY_LEAVES` / `SPORE_BLOSSOM_AIR`，本批為避免跨版粒子名稱硬猜，遠場使用同款 A17 style 粒子作明示 fallback。
+Cellar Cabinet 亦沿用 Java single/left/middle/right 連接規則，只連相同 block + 相同 facing。每個非空槽最多1個 `cellar_cabinet_bottle_visual`，共最多9個；來源 renderer 位置為三列 `x=0.825/0.5/0.175`、三行 `y=0.78/0.49/0.20`、`z=0.875`，scale 1、X -90°，再按 facing 旋轉。來源未覆寫 shape，因此完整方塊碰撞；`getShadeBrightness=0.2` 沒有直接穩定 Bedrock 方塊等價，本批標記為 **NOT_ADAPTED**。
+
+Java 配方中央使用 `minecraft:trapdoors` item tag。1.21.1 tag 包含11種木／菌木活板門、iron trapdoor，以及 copper / exposed / weathered / oxidized 加四種 waxed 版本，共20個 item；Bedrock 本批明確展開成20份等價 shaped recipe，避免假設 Java tag 名可直接跨版使用。
+
+來源 `POWERED` 僅用於紅石上升沿隨機投擲 DrinkBlockItem／Molotov，所有 powered blockstate 仍引用同一模型。因 projectile 路徑仍依既定原則保持 **NOT_ADAPTED**，本批省略沒有實際作用的 powered state，待未來真正接紅石投擲時一起加入。實機九瓶位置、正面觸控、多人重連仍為 **NOT_RUN**。
+
+
+## Batch 17：8 款 Incense 香薰
+
+Java 1.2.0 的 Sakura/Pine/Ginkgo/Spore/Catnip/Snow/Butterfly/Firefly 共用同一 `IncenseBlock`。本批保留 `FACING + OPEN + POWERED` 三態契約：放置時 facing 取玩家水平朝向反向，初始 OPEN/POWERED 讀取紅石；玩家互動只翻轉 OPEN，不修改 POWERED；只有實際紅石訊號與 POWERED 發生邊沿差異時，才把 OPEN/POWERED 同步到新訊號。這保留 Java「手動關閉已通電香薰後，在紅石電平不變時不會立刻被強制打開」的細節。
+
+來源碰撞 `Block.box(5,0,5,11,7,11)` 精確映射為 origin `[-3,0,-3]` / size `[6,7,6]`。8款共用 A13 closed/open 幾何，保留各自貼圖與來源配方。關閉狀態仍以3-tick block component cadence 生成小粒子；OPEN 時額外以低密度 server cadence 在來源32×32水平區域散佈大型粒子。Pine/Ginkgo/Catnip/Snow/Butterfly/Firefly 使用既有 A17 large 粒子；Sakura/Spore 的 Java large 粒子是 Java vanilla `CHERRY_LEAVES` / `SPORE_BLOSSOM_AIR`，本批為避免跨版粒子 identifier 硬猜，遠場使用同款 A17 style 粒子作明示 fallback。
 
 伺服器效果保留 Java 全域120-tick節點：OPEN 香薰查詢來源方塊 AABB 向外膨脹32格的 65×65×65 區域，只處理 undead family 且存活實體，使用 Bedrock native `magic` damage 每次造成1點傷害。Java 在殭屍村民受傷後生命<=1時呼叫 `startConverting(null,60)`；Bedrock vanilla curing 有不同長時序，本批只記錄 conversion-eligible 診斷，**不**用 kill+spawn 或不同時序事件冒充精確移植。
 
-明示差異：Java client `animateTick` 的大型粒子密度遠高於伺服器廣播可接受值，因此本批採低密度 server cadence；紅石 neighbor callback 改由3-tick component 輪詢，最多有數 tick 延遲；Java push reaction DESTROY 因現有自訂方塊安全策略仍標為 immovable divergence。Minecraft／手機／多人／BDS／Realms 的紅石、粒子密度、undead family 與傷害表現仍為 **NOT_RUN**。
+明示差異：Java client `animateTick` 的大型粒子密度遠高於伺服器廣播可接受值，因此本批採低密度 server cadence；紅石 neighbor callback 改由3-tick component 輪詢，最多有數 tick 延遲；Java push reaction DESTROY 因現有自訂方塊安全策略仍標為 immovable divergence。Batch 16 Cellar Cabinet 的九槽、20份 trapdoor 配方與相關測試完整保留。Minecraft／手機／多人／BDS／Realms 的紅石、粒子密度、undead family 與傷害表現仍為 **NOT_RUN**。

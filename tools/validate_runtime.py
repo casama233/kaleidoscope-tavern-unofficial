@@ -119,7 +119,8 @@ def main():
    g=comps.get('minecraft:geometry')
    if g:check('permutation_geometry:'+ident+':'+str(index),(g if isinstance(g,str)else g['identifier']) in geom)
    for slot,m in comps.get('minecraft:material_instances',{}).items():check('permutation_texture:'+ident+':'+str(index)+':'+slot,m['texture'] in terrain)
-   for state in re.findall(r"q\.block_state\('([^']+)'\)",perm['condition']):check('declared_state:'+ident+':'+state,state in x['description'].get('states',{}))
+   trait_states={s for trait in x['description'].get('traits',{}).values() for s in trait.get('enabled_states',[])}
+   for state in re.findall(r"q\.block_state\('([^']+)'\)",perm['condition']):check('declared_state:'+ident+':'+state,state in x['description'].get('states',{}) or state in trait_states)
   if any(k in x['components'] for k in ['kaleidoscope_tavern:trellis','kaleidoscope_tavern:grape_crop']):
    check('plant_tick_contract:'+ident,x['components'].get('minecraft:tick',{}).get('interval_range')==[40,40] and 'minecraft:random_ticking'not in x['components'])
  for p in(BP/'recipes').glob('*.json'):

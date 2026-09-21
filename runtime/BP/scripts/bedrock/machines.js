@@ -1,4 +1,5 @@
 import {feedback} from './immersion.js';
+import {finishPlayerBreak} from './transactions.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
@@ -139,7 +140,7 @@ export function installMachineEvents(openBook){
    return operate(player,b,action,expected);
   }));
  });
- world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(ev.cancel)return;if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{check(ev.player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return dismantle(ev.player,b);}));});
+ world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(ev.cancel)return;if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{check(ev.player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return finishPlayerBreak(ev.player,dimension,location,type,()=>dismantle(ev.player,b));}));});
  world.beforeEvents.explosion.subscribe(ev=>ev.setImpactedBlocks(ev.getImpactedBlocks().filter(b=>!OWN_BLOCKS.has(b.typeId))));
  if(world.afterEvents.entityLoad)world.afterEvents.entityLoad.subscribe(({entity})=>{
   if(!RUNTIME_VISUALS.includes(entity.typeId))return;

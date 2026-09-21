@@ -4,7 +4,7 @@ import {NS,FACING,facingForYaw,faceOffset} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,air} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
@@ -60,7 +60,7 @@ export function installHolderEvents(openBook){
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}
   system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeHolder(e.player,target);}const b=clicked;if(!hs.id)return e.player.isSneaking?recoverHolder(e.player,b,{expectedRevision:revision}):takeHolderBottle(e.player,b,{expectedRevision:revision});if(holderBlockedItem(hs.id)){tell(e.player,'§e[Tavern] 此瓶型在 Java holder_blocklist 中，單瓶架拒收。');return;}if(holderItem(hs.id))return putHolderBottle(e.player,b,{expectedRevision:revision});tell(e.player,'§e[Tavern] 單瓶架只接受空酒瓶或來源允許的品質酒瓶；空手取出。');}));
  });
- world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==HOLDER_BLOCK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===HOLDER_BLOCK,'BLOCK_CHANGED');return recoverHolder(e.player,b,{expectedRevision:revision});}));});
+ world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==HOLDER_BLOCK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===HOLDER_BLOCK,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,HOLDER_BLOCK,()=>recoverHolder(e.player,b,{expectedRevision:revision}));}));});
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>b.typeId!==HOLDER_BLOCK)));
  world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
  system.runInterval(tickHolderVisuals,20);

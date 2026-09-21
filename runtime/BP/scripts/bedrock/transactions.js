@@ -35,4 +35,66 @@ export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.ran
  commitInventory(plan,container,()=>{rollback=applyBlocks(changes);},()=>rollback());
  return plan;
 }
+
+function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
+function breakSound(id){
+ const short=typeof id==='string'&&id.startsWith('kaleidoscope_tavern:')?id.slice('kaleidoscope_tavern:'.length):'';
+ if(/^bottle_|^cup_/.test(short))return 'random.glass';
+ if(/_sofa$/.test(short))return 'dig.cloth';
+ if(/_crop$/.test(short))return 'dig.grass';
+ if(/^(holder|tilted_rack|circular_rack|tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'break.iron';
+ return 'dig.wood';
+}
+function center(location){return {x:location.x+.5,y:location.y+.5,z:location.z+.5};}
+function pureAddedDrops(before,after){
+ const drops=[],restore=[];
+ for(let i=0;i<after.length;i++){
+  const a=after[i],b=before[i];
+  if(!b&&!a)continue;
+  if(!b&&a){drops.push(a.clone());restore.push([i,undefined]);continue;}
+  if(b&&!a)return undefined;
+  let compatible=false;try{compatible=b.isStackableWith(a);}catch{}
+  if(!compatible||a.amount<b.amount)return undefined;
+  if(a.amount===b.amount)continue;
+  const d=a.clone();d.amount=a.amount-b.amount;drops.push(d);restore.push([i,b]);
+ }
+ return {drops,restore};
+}
+/**
+ * Complete a scripted player break with vanilla-like feedback.
+ * Stateful Tavern blocks keep their existing atomic recovery logic; this adapter only
+ * converts successful Survival inventory returns into world drops and plays one material
+ * break sound. If spawning or inventory restoration fails, the already-returned inventory
+ * items are kept instead, so the feedback layer never turns a successful recovery into loss.
+ */
+export function finishPlayerBreak(player,dimension,location,blockId,recover){
+ const container=inventory(player),before=inventorySnapshot(container);
+ const result=recover();
+ const current=blockAt(dimension,location);
+ if(current?.typeId===blockId)return result;
+ if(player.getGameMode()===GameMode.Survival){
+  const after=inventorySnapshot(container),delta=pureAddedDrops(before,after);
+  if(delta?.drops.length){
+   const spawned=[];
+   try{
+    for(const stack of delta.drops)spawned.push(dimension.spawnItem(stack,center(location)));
+    const restored=[];
+    try{
+     for(const [slot,value] of delta.restore){container.setItem(slot,value);restored.push(slot);}
+    }catch(e){
+     for(const slot of restored)container.setItem(slot,after[slot]);
+     for(const entity of spawned)try{entity.remove();}catch{}
+     throw e;
+    }
+   }catch{
+    for(const entity of spawned)try{entity.remove();}catch{}
+    // Inventory remains the authoritative fallback when visual world-drop conversion fails.
+   }
+  }
+ }
+ try{dimension.playSound(breakSound(blockId),center(location),{volume:.75,pitch:1});}catch{}
+ return result;
+}
+export const BREAK_TEST={breakSound,pureAddedDrops};
+
 export const air=()=>BlockPermutation.resolve('minecraft:air');

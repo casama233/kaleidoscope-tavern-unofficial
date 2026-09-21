@@ -171,6 +171,12 @@
       "asset": "cocktail_bloody_mary",
       "fix": "Bloody Mary: source-driven regeneration of 9 changed Java elements into 18 mapped Bedrock cubes, including explicit down->up face remap with 180-degree UV rotation, plus exact official block PNG blob 07f47d76f7b9e5ede07eeee3a968471b1ee59a2d",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "asset": "cocktail_screwdriver",
+      "fix": "Screwdriver: source-driven regeneration of all 10 changed Java elements into 13 mapped Bedrock cubes plus exact official block PNG blob 125669746daa8b7db1049c698757b788423da014; no new converter exception",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "screwdriver",
+      "visual_key": "screwdriver",
+      "baseline": "baseline/screwdriver.json",
+      "updated": "updated/screwdriver.json",
+      "baseline_blob": "b1fdb0d34432078aa7c702b6122671d612a3d178",
+      "updated_blob": "e9055a754d690ba17fecd2dd35e4bd5b3c0486f6",
+      "baseline_geo": "baseline/screwdriver.geo.json",
+      "baseline_geo_blob": "b981b34b15e5c8a2d3e980450f9b891adc9ff512",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "faces": [
+            [
+              "south",
+              0
+            ],
+            [
+              "east",
+              1
+            ],
+            [
+              "north",
+              2
+            ],
+            [
+              "west",
+              3
+            ]
+          ]
+        },
+        {
+          "element": 1,
+          "cube": 4
+        },
+        {
+          "element": 2,
+          "cube": 5
+        },
+        {
+          "element": 3,
+          "cube": 6
+        },
+        {
+          "element": 4,
+          "cube": 7
+        },
+        {
+          "element": 5,
+          "cube": 8
+        },
+        {
+          "element": 6,
+          "cube": 9
+        },
+        {
+          "element": 7,
+          "cube": 10
+        },
+        {
+          "element": 8,
+          "cube": 11
+        },
+        {
+          "element": 9,
+          "cube": 12
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/screwdriver.geo.json",
+      "block": "runtime/BP/blocks/cup_screwdriver.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "screwdriver_block",
+      "baseline": "baseline/screwdriver.png",
+      "updated": "updated/screwdriver.png",
+      "baseline_blob": "3fb9e5995929620f04a60bce85db127d2d39ee4d",
+      "updated_blob": "125669746daa8b7db1049c698757b788423da014",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/screwdriver.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/screwdriver.png"
+      ]
+    }
+  ]
+}

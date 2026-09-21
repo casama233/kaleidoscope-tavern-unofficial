@@ -3,7 +3,7 @@ import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holder
 import {NS,FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,tell,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
@@ -24,11 +24,7 @@ export function syncHolder(block){
  if(block?.typeId!==HOLDER_BLOCK)return false;const k=holderKey(block.dimension.id,block.location),state=store.load(k),wanted=state?.kind??0,current=kind(block);
  if(current!==wanted){block.setPermutation(block.permutation.withState(HOLDER_KIND,wanted));holderDiagnostics.repairs++;syncHolderVisual(block,state);return true;}syncHolderVisual(block,state);return false;
 }
-function transact(player,block,old,next,take,give,permutation){
- const k=holderKey(block.dimension.id,block.location),raw=store.raw(k),oldPermutation=block.permutation,c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,take,give,makeStack);
- commitInventory(plan,c,()=>{block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},()=>{block.setPermutation(oldPermutation);store.restore(k,raw);});
- syncHolderVisual(block,next);return next;
-}
+function transact(player,block,old,next,take,give,permutation){return commitStoredStateTransaction(player,{block,key:holderKey(block.dimension.id,block.location),store,old,next,take,give,permutation,afterCommit:syncHolderVisual});}
 export function placeHolder(player,target){
  canWrite(player);const d=player.dimension;requireBlockReach(player,d,target);const b=blockAt(d,target);check(b&&b.isAir,'SPACE_NOT_CLEAR');const h=hand(player);check(h?.typeId===HOLDER_BLOCK,'NEED_HOLDER');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');const k=holderKey(d.id,target);check(store.raw(k)===undefined,'STORAGE_CONFLICT');
  const facing=facingForYaw(player.getRotation().y);const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,1,[],makeStack),old=b.permutation;

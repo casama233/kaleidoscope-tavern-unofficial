@@ -1,7 +1,7 @@
 /** C5 native events/potions/health simulation. No client rendering or native engine consumption. */
 import test from 'node:test';import assert from 'node:assert/strict';
 import {world,system,startup,Player,ItemStack,Potions,Entity,mockHealth} from './fake-server.js';
-import {runtimeRegistry,book} from '../runtime/BP/scripts/main.js';
+import {runtimeRegistry} from '../runtime/BP/scripts/main.js';
 import {placeShaker,pourIngredient,unpourIngredient,pickupShaker,readPortableItem,MIX_TEST,NATIVE_TEST,pruneNativeLatches,cancelHeldShake,consumeCocktail,startShake,stopShake,serveInHand} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {potionIdentity,potionInput,restorePotion,potionCapabilities} from '../runtime/BP/scripts/bedrock/potions.js';
 import {statusNow,clearCustomEffects,applyCustomEffect,handleKill,tickCustomEffects,CUSTOM_TEST} from '../runtime/BP/scripts/bedrock/custom-effects.js';

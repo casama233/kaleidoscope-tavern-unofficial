@@ -114,7 +114,7 @@ def main():
  for m in d['modules']:m['version']=[0,2,0]
  dump(p,d)
  config=load(ROOT/'config.json');config['name']='Kaleidoscope Tavern C2';dump(ROOT/'config.json',config)
- build=load(ROOT/'docs/C1-BUILD.json');build.update({'version':[0,2,0],'phase':'C2','crop_blocks':7,'display_blocks':len(bottles),'display_arrangements':sum(b['maxCount']for b in bottles.values()),'native_crafting_recipes':8,'source_effect_families':len(effects),'q1_drinkable':True,'soil_temperature_acceleration':'NOT_ADAPTED; natural fallback probability 0.25','worldgen':'NOT_ADAPTED; explicit port-only starter crafting','native_effect_types':len(report['native_effects']),'custom_effect_types_pending':len(report['custom_unimplemented'])});dump(ROOT/'docs/C2-BUILD.json',build)
+ build=load(ROOT/'docs/C1-BUILD.json');build.update({'version':[0,2,0],'phase':'C2','crop_blocks':7,'display_blocks':len(bottles),'display_arrangements':sum(b['maxCount']for b in bottles.values()),'native_crafting_recipes':6,'source_effect_families':len(effects),'q1_drinkable':True,'soil_temperature_acceleration':'NOT_ADAPTED; natural fallback probability 0.25','worldgen':'NOT_ADAPTED; explicit port-only starter crafting','native_effect_types':len(report['native_effects']),'custom_effect_types_pending':len(report['custom_unimplemented'])});dump(ROOT/'docs/C2-BUILD.json',build)
  for x in build['planned_recipe_exclusions']:x['reason']=x['reason'].replace('C1','C2')
  dump(ROOT/'docs/C2-BUILD.json',build)
  print('C2 build:',len(bottles),'bottle families,',sum(b['maxCount']for b in bottles.values()),'arrangements, 7 farming blocks.')

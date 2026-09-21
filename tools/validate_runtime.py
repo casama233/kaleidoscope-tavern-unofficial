@@ -63,9 +63,12 @@ def main():
    creative_doc=load(ROOT/'docs/C6-CREATIVE-CATALOG.json')
    check('creative_catalog_doc_matches_runtime',creative_doc['bedrock_groups']['items']['items']==main_items and creative_doc['bedrock_groups']['construction']['items']==deco_items)
    check('creative_no_material_microgroup',creative_doc['materials_policy'].startswith('No standalone Tavern materials group') and creative_doc['cookery_merge']['status']=='DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED')
-   check('creative_fallback_books_hidden',all(x not in set(listed) for x in ['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']) and all(item_defs[x]['description'].get('menu_category') is None for x in ['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']))
+   legacy=['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']
+   check('creative_legacy_guide_aliases_hidden',all(x not in set(listed) for x in legacy) and all(item_defs[x]['description'].get('menu_category') is None for x in legacy) and creative_doc['legacy_guide_aliases_hidden_from_creative']==legacy)
  check('no_player_json_or_global_UI_override',not list((ROOT/'runtime').rglob('player.json')) and not(RP/'ui').exists())
- check('two_independent_books',all('kaleidoscope_tavern:'+k in item_defs for k in ['guidebook','recipe_book']))
+ legacy=['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']
+ check('legacy_guides_are_migration_aliases',all(x in item_defs and item_defs[x]['components'].get('kaleidoscope_tavern:legacy_guide')=={} for x in legacy))
+ check('no_duplicate_Tavern_guide_UI',not(BP/'scripts/bedrock/guidebook.js').exists() and not(BP/'recipes/guidebook.json').exists() and not(BP/'recipes/recipe_book.json').exists())
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

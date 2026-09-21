@@ -126,14 +126,14 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{});
  i.registerCustomComponent(NS+':place_barrel',{onUseOn:ev=>guarded(ev.source,()=>{const d=DIRECTIONS[ev.blockFace];check(d,'UNKNOWN_FACE');return createBarrel(ev.source,offset(ev.block.location,d));})});
 }
-export function installMachineEvents(openBook){
+export function installMachineEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(ev=>{
   if(ev.cancel)return;
   if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;if(ev.isFirstEvent===false)return;
   const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId,player=ev.player;const item=held(player);const expected={id:item?.typeId??'',count:item?.amount??0,slot:player.selectedSlotIndex};
   system.run(()=>guarded(player,()=>{
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
-   if([NS+':guidebook',NS+':recipe_book'].includes(expected.id)){openBook(player,expected.id.endsWith(':recipe_book'));return;}
+   
    if(type===TAP){const c=findTapCore(b);check(c,'NO_NEARBY_BARREL');operate(player,c,'extract',expected);return;}
    const core=requireCore(b),s=store.load(keyFor(core));check(s,'MISSING_STATE');
    const action=!expected.id?(player.isSneaking&&s.kind==='barrel'?'lid':s.open&&s.slots.some(Boolean)?'remove_ingredient':'inspect'):'use';

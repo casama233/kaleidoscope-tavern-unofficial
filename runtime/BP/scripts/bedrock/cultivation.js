@@ -124,7 +124,7 @@ export function installCultivation(openBook){
   e.cancel=true;if(e.isFirstEvent===false)return;
   const d=e.block.dimension,p={...e.block.location},sig=current(e.block),hs=handSnapshot(e.player);
   system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);
-   if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));
+   
    return farmUse(e.player,b);
   }));
  });

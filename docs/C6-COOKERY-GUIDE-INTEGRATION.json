@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "host": {
+    "name": "Kaleidoscope Cookery v1.0.6",
+    "package_sha256": "c589efb60277bea295ac12ef760d8f2c7e8af3ea62e809b320862bd786033351",
+    "guide_item": "kaleidoscope_cookery:guidebook",
+    "api": "KC Guidebook Extension API v1",
+    "events": {
+      "ready": "kaleidoscope_cookery:guidebook_ready",
+      "ping": "kaleidoscope_cookery:guidebook_ping",
+      "begin": "kaleidoscope_cookery:guidebook_begin",
+      "chunk": "kaleidoscope_cookery:guidebook_chunk",
+      "end": "kaleidoscope_cookery:guidebook_end"
+    }
+  },
+  "tavern": {
+    "id": "kaleidoscope_tavern:tavern",
+    "source": "kt_tavern",
+    "revision": "c6_guide_1",
+    "title_zh_TW": "森羅物語：酒館",
+    "categories": [
+      "brewing",
+      "mixology",
+      "tavern"
+    ],
+    "entries": 12,
+    "primary_access": "Cookery guide chapter",
+    "legacy_books": "craftable fallback only; hidden from Creative catalog"
+  },
+  "behavior": [
+    "Publisher sends only public Script Events; it never imports or overwrites Cookery scripts.",
+    "A host-ready event triggers one bounded begin/chunk/end transfer; repeated ready events are rate-limited.",
+    "Tavern recipes and Cookery recipe registries remain separate; this integration publishes guide content only.",
+    "Cookery v1 host owns language selection, root navigation, cancel/back behavior and coexistence with other extensions."
+  ],
+  "known_host_limitations": [
+    "Guidebook API v1 mechanics text has no reliable per-locale mechanicsByLocale path in the verified host; Tavern uses concise Traditional Chinese fallback mechanics while titles/categories/names are localized for zh_CN, zh_TW and en_US.",
+    "Minecraft/BDS/mobile/controller rendering still requires real-engine acceptance."
+  ],
+  "creative_policy": {
+    "standalone_material_group": false,
+    "fallback_guide_items_hidden": true,
+    "cookery_material_merge": "Deferred until exact Cookery Bedrock catalog group identifiers are pinned; no guessed duplicate host groups."
+  },
+  "engine_acceptance": "NOT_RUN"
+}

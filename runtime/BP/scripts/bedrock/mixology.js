@@ -150,7 +150,7 @@ export function registerMixologyComponents({blockComponentRegistry:b,itemCompone
 }
 function snapshotItem(player){const h=hand(player);return {basic:handSnapshot(player),potion:POTION_ITEMS.has(h?.typeId)?canonical(potionIdentity(h)):undefined,data:h?.typeId===SIGNATURE?h.getDynamicProperty(SIGNATURE_DATA):SHAKER_ITEMS.has(h?.typeId)?h.getDynamicProperty(PORTABLE_DATA):undefined};}
 function verifyItem(player,s){sameHand(player,s.basic);if(s.potion!==undefined)check(canonical(potionIdentity(hand(player)))===s.potion,'STALE_POTION');if(s.data!==undefined){const item=hand(player);check(item?.getDynamicProperty(item?.typeId===SIGNATURE?SIGNATURE_DATA:PORTABLE_DATA)===s.data,'STALE_HAND');}}
-export function installMixologyEvents(openBook){
+export function installMixologyEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const blockId=e.block.typeId,h=snapshotItem(e.player),held=h.basic.id;
   const onMachine=blockId===STATION,onCup=MIX_BLOCKS.has(blockId)&&!onMachine,newPlace=!onMachine&&!onCup&&e.player.isSneaking&&(held===SHAKER||isCupItem(held));
@@ -160,7 +160,7 @@ export function installMixologyEvents(openBook){
   if(newPlace&&e.blockFace!=='Up'){system.run(()=>tell(e.player,'§e請潛行點擊完整支撐方塊上面。'));return;}
   system.run(()=>safe(e.player,()=>{
    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');verifyItem(e.player,h);const b=blockAt(d,at);check(b?.typeId===blockId,'BLOCK_CHANGED');near(e.player,b);
-   if([NS+':guidebook',NS+':recipe_book'].includes(held))return openBook(e.player,held.endsWith(':recipe_book'));
+   
    if(newPlace){noHandSession(e.player);const target=plus(at,{x:0,y:1,z:0});return held===SHAKER?placeShaker(e.player,target):placeCup(e.player,target);}
    if(onMachine){noHandSession(e.player);const s=getShaker(b);check(s.revision===oldRevision,'STATE_CONFLICT');const k=shakerKey(d.id,at);
     if(sessions.has(k)){check(!held,'EMPTY_HAND_REQUIRED');return stopShake(e.player,b,{tick:clickedTick});}

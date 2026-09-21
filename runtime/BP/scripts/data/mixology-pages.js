@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "高腳凳、沙發與彩燈",
-      "zh_CN": "高脚凳、沙发与彩灯",
-      "en_US": "Stools, sofas and string lights"
+      "zh_TW": "高腳凳、沙發、桌子與彩燈",
+      "zh_CN": "高脚凳、沙发、桌子与彩灯",
+      "en_US": "Stools, sofas, tables and string lights"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發與17款彩燈皆可合成、放置及回收。沙發沿用原作6種連接狀態，包含直線左右／中段與兩種轉角；不同顏色也能相連。每格沙發可空手坐1人，潛行離座，空位不保留helper實體；候選坐點0.45格來自原作0.5125座位錨點沿用現有-0.0625 Bedrock校正。高腳凳仍為0.8125格座點。彩燈可用染料換款。沙發waterlogging、背靠複合碰撞、Steve/Alex/手機多人座高仍待實機驗收。",
-      "zh_CN": "16色高脚凳、16色沙发与17款彩灯均可合成、放置和回收。沙发保留原作6种连接状态，且不同颜色可以连接；每格可空手坐1人，潜行离座，空位不会保留helper实体。waterlogging、复合碰撞与真实客户端座高仍待实机。",
-      "en_US": "All 16 stool colors, 16 sofa colors and 17 string-light designs are craftable/placeable/recoverable. Sofas preserve the six source connection states, including both corners, and different colors connect. Each sofa block seats one player; the invisible helper exists only while occupied. Candidate seat height .45 derives from the source .5125 anchor using the existing -.0625 Bedrock correction. Sofa waterlogging, compound backrest collision and real-client/mobile seating remain unverified."
+      "zh_TW": "16色高腳凳、16色沙發、酒館桌與17款彩燈皆可合成、放置及回收。沙發保留6種跨色連接狀態；桌子保留Java的X/Z軸與single/left/middle/right四態，成排後鎖定軸向，避免垂直鄰桌把整排扭轉。桌面碰撞直接使用原作13/16到16/16薄板。桌子配方保留minecraft:planks與minecraft:fences原生tag，鐵錠tag映射原版iron_ingot。沙發每格可坐1人；高腳凳與彩燈規則不變。Sofa/Table waterlogging及實機多人/觸控仍待驗收。",
+      "zh_CN": "16色高脚凳、16色沙发、酒馆桌与17款彩灯均可合成、放置和回收。桌子保留Java的X/Z轴与single/left/middle/right四态；成排后锁定连接轴，避免垂直邻桌扭转整排。桌面碰撞直接采用原作13/16到16/16薄板。Sofa/Table waterlogging与实机多人/触控仍待验收。",
+      "en_US": "All 16 stool colors, 16 sofa colors, the Tavern table and 17 string-light designs are craftable/placeable/recoverable. Tables preserve Java X/Z-axis locking plus single/left/middle/right states so a connected row cannot be stolen by a perpendicular neighbor. The collision/selection slab exactly uses the source 13/16..16/16 tabletop shape. The source planks/fences recipe tags are preserved; only c:ingots/iron maps to vanilla iron_ingot. Sofa/Table waterlogging and real-client multiplayer/touch behavior remain unverified."
     }
   },
   {

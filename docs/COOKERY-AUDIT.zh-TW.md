@@ -52,22 +52,30 @@
 |---|---|---|---|
 | 獨立 Tavern Guide UI | `bedrock/guidebook.js` + `core/guide.js` + 自己的語言／書籤／搜尋／server-ui | **明顯重複** | Cookery 指南作唯一正常入口；舊 Tavern 書只保留短期 legacy redirect，之後刪除獨立 UI |
 | Tavern `guidebook` / `recipe_book` 物品 | manifest 已硬依賴 Cookery 1.0.6，但仍保留兩套書 | **重複入口** | 不再新增功能；舊世界兼容期只提示玩家使用 `kaleidoscope_cookery:guidebook` |
-| Tavern Extension Host / Transport / SDK / Demo | `extension-host.js`、`transport.js`、`sdk/`、`examples/Tavern-Extension-*` 讓 Tavern 再成為一個附屬平台 | **對移植目標屬於 scope creep** | 凍結，不再擴張；沒有真實下游 consumer 前，不為它增加協議、UI、能力 |
+| Tavern Extension Host / Transport / SDK / Demo | `extension-host.js`、`transport.js`、`sdk/`、`examples/Tavern-Extension-*` 提供 Tavern 專屬玩法擴展 | **必要，但必須限界** | 已知目標 consumer 是 `Kaleidoscope World Liquor`；保留 recipe/飲品/調酒等 Tavern 專屬 API，但不複製 Cookery 的家族 UI、指南宿主或通用平台能力 |
 | 動態 guide pages 綁 Tavern registry | 第三方 Tavern page 主要服務舊獨立書 | **與家族單一指南方向衝突** | 若未來真有 Tavern 下游附屬，應轉發到 Cookery Guidebook Extension API，而不是復活第二本書 |
 | 通用放置／互動路由 | bottle/furniture 等多處自己攔截 `beforeEvents` | **高風險重複模式** | 每新增一種通用互動前先掃 Cookery 同類實作；能照宿主既有事件順序／元件模式就照，不再另造全域 router |
 | 家具通用行為 | Cookery 實包已有 chair/cook_stool/table 家族，Tavern 也維護大套 placement/seat/connection 邏輯 | **需逐項對照後收斂** | Tavern 特有模型／狀態可保留；坐下、朝向、放置、回收、連接等通用規則優先照 Cookery 做法 |
 | 方塊破壞回收 | 曾在各系統自行處理 | **已開始收斂** | #31 的共享 Survival drop/sound adapter 是正確方向；後續不要再做每方塊一套 break controller |
 
-## 關於 Tavern 自己的 Extension API：不要誤砍，也不要再擴張
+## 關於 Tavern 自己的 Extension API：World Liquor 是明確 consumer
 
-Cookery 的 `extensionRegistry.js` 是 Cookery 的 recipe 宿主；Tavern 現有 registry 還承擔 barrel / pressing / shaker 這些 Cookery 未證實理解的 recipe kind。因此不能只因名稱相似就直接以 Cookery registry 取代 Tavern 的內部配方查找。
+Cookery 的 `extensionRegistry.js` 是 Cookery 的 recipe 宿主；Tavern 現有 registry 承擔 barrel / pressing / shaker 這些酒館專屬 recipe kind。因此不能只因名稱相似就直接以 Cookery registry 取代 Tavern 的配方宿主。
 
-但「內部需要 registry」不等於「必須維護一整套公開 Tavern 平台」。目前沒有已知正式下游附屬依賴 Tavern SDK，所以：
+而且這個公開 API 並不是為「也許未來有人用」而做：`Kaleidoscope World Liquor` 本身就是 Tavern 的正式附屬。其 Java/Fabric 實作直接：
 
-1. 保留內部 built-in recipe registry / lookup，服務 Tavern 自己的機器。
-2. 凍結公開 `kaleidoscope_tavern:extension_*` 協議、SDK、demo，不再為移植工作增加成本。
-3. 等真的出現需要擴充 Tavern 酒桶／雪克杯的第三方附屬，再決定是否恢復／精簡公開 API。
-4. 玩家可見指南頁一律走 Cookery host；不要讓公開 Tavern API 成為第二本指南存在的理由。
+- 使用 `type: "kaleidoscope_tavern:barrel"` 註冊酒桶配方；
+- 使用 `type: "kaleidoscope_tavern:shaker"` 註冊雪克杯配方；
+- 以 Tavern `DrinkBlockItem` / `CocktailBlockItem` 作為飲品與雞尾酒基類；
+- 依賴 Tavern 的瓶裝飲品、雞尾酒與家具／酒櫃資料模型。
+
+因此 Tavern 必須保留一個**真正可供下游附屬使用的玩法 API**。收斂目標改為：
+
+1. 保留並測試 `kaleidoscope_tavern:extension_*` recipe transport，至少穩定支援 barrel / pressing / shaker。
+2. SDK 不再做「泛用插件平台」；每增加能力都必須由 World Liquor 或另一個已知 Tavern 附屬的真實需求驅動。
+3. 玩家可見指南仍統一發布到 Cookery Guidebook host；Tavern Extension API 的 guide page 應轉成 Cookery chapter payload，而不是復活第二本 Tavern 書。
+4. 為 World Liquor 補齊的下一層 API 應是「飲品描述／可放置飲品／雞尾酒原料色／酒櫃可接受類型」等 Tavern 專屬資料，不是另一套 UI、語言、存檔或插件管理器。
+5. Freezer、World Liquor 自有家具、狀態效果等它自己獨有的機制留在 World Liquor BP；Tavern 只提供它原作真正依賴的宿主能力。
 
 ## 接下來每個 Batch 的「不造輪子」檢查
 
@@ -77,7 +85,7 @@ Cookery 的 `extensionRegistry.js` 是 Cookery 的 recipe 宿主；Tavern 現有
 2. 是否有公開 API 可直接註冊？有就用 API，不讀宿主私有檔。
 3. 沒有公開 API 時，是否能照 Cookery 已驗證的 Bedrock 事件順序、元件、state、helper 生命週期實作？
 4. 只有 Tavern 原作確實獨有的資料模型才建立新 core。
-5. 不為「將來也許有附屬」先做 SDK、registry、UI、搜尋、書籤、傳輸層。
+5. 公開 API 的新增能力必須能對應到 World Liquor 或其他已知 Tavern 附屬的實際依賴；不為假想需求增加 UI、搜尋、書籤或泛用插件層。
 6. 所有共用互動優先一個共享 adapter，不允許各模組再各寫一份。
 
 ## 第一批建議收斂順序
@@ -85,7 +93,7 @@ Cookery 的 `extensionRegistry.js` 是 Cookery 的 recipe 宿主；Tavern 現有
 1. **指南**：把獨立 Tavern guide 由 fallback UI 降成 legacy redirect，最後移除 `server-ui` 依賴（若確認其他模組未使用）。
 2. **放置／飲用**：直接對照 Cookery placeable food 的真實事件路由，替換 Tavern bottle 的「潛行放置 + 原生飲用取消」特殊補丁；這是目前最容易互相打架的地方。
 3. **家具**：對照 Cookery chair / cook_stool / table 的 placement、seat helper、回收、connection 做法，抽出 Tavern 真正不同的部分。
-4. **公開 Tavern SDK**：凍結並移出 parity 主線；不再讓它影響指南、機器或測試優先級。
+4. **Tavern Extension API**：保留，並以 World Liquor 為第一個正式 consumer 做契約測試；只擴充 barrel/shaker/飲品/酒櫃等真實需要，指南仍轉交 Cookery host。
 5. **破壞／聲音／掉落**：延續 #31 共用 adapter，將仍存在的 ad-hoc break 邏輯逐批併入。
 
 ## 測試與證據邊界

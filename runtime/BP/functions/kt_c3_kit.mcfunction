@@ -1,6 +1,5 @@
 # Gives only; use a new test world and leave inventory space.
-give @s kaleidoscope_tavern:guidebook 1
-give @s kaleidoscope_tavern:recipe_book 1
+give @s kaleidoscope_cookery:guidebook 1
 give @s kaleidoscope_tavern:shaker 1
 give @s kaleidoscope_tavern:empty_glassware 16
 give @s kaleidoscope_tavern:empty_bottle 16

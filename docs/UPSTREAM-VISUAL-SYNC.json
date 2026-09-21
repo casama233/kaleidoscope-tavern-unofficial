@@ -63,6 +63,23 @@
       "semantic_diff": "For these four models, element count/coordinates/UV/display/shade are unchanged. Official change is translucent->cutout only; Bedrock maps cutout to alpha_test_single_sided with no geometry edits.",
       "texture_changed": false,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "allium-garden",
+      "assets": [
+        "allium_garden"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/allium-garden/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "8b9d1580ecb55c347d2a4fcb8201840e36a2d25a",
+      "model_updated_blob": "179aeda05570a47f7b292fdba400b577c8a1d759",
+      "texture_baseline_blob": "39a25d464bf350af5ae464e27c7f57fc5688f9eb",
+      "texture_updated_blob": "42d41bb699d7c5f31aa38d4ec0faee55309379a8",
+      "semantic_diff": "Allium Garden keeps the same 14 elements and display transforms. Official changes are translucent->cutout, element 3 shade true->false, element 12 north UV [7.5,10.5,13,15.5] -> [7.5,10,13,15], and a revised block PNG. Bedrock maps element 3 to cubes 3-6 as unshaded, maps the UV change to cube 18 north [15,21] -> [15,20], and copies the official updated PNG byte-for-byte to both runtime block-texture copies.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

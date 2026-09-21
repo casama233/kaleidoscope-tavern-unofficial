@@ -81,7 +81,7 @@ def main():
   desc='\n'.join(f"{e['effect']}: {e['duration']}s / amplifier {e['amplifier']} / {e['probability']*100:g}% [未實作 / not implemented]"for e in c['effects'])
   pages.append({'id':N+':cocktail_effects/'+c['name'],'source':N,'title':{lc:('Cocktail: 'if lc=='en_US'else'調酒：')+title(c['name'])[lc]for lc in names},'body':{lc:desc for lc in names},'recipeIds':[]if c['name']=='mystery_cocktail'else[N+':shaker/'+c['name']]})
  js(BP/'scripts/data/mixology-pages.js','MIXOLOGY_PAGES',pages)
- (BP/'functions/kt_c3_kit.mcfunction').write_text('\n'.join(['# Gives only; use a new test world and leave inventory space.',f'give @s {N}:guidebook 1',f'give @s {N}:recipe_book 1',f'give @s {N}:shaker 1',f'give @s {N}:empty_glassware 16',f'give @s {N}:empty_bottle 16']+[f'give @s {N}:{s}_q4 6'for s in ['vodka','riesling_dry_white','glowflower_brew','wine','red_queen','honey_wine','ice_wine']])+'\n')
+ (BP/'functions/kt_c3_kit.mcfunction').write_text('\n'.join(['# Gives only; use a new test world and leave inventory space.','give @s kaleidoscope_cookery:guidebook 1',f'give @s {N}:shaker 1',f'give @s {N}:empty_glassware 16',f'give @s {N}:empty_bottle 16']+[f'give @s {N}:{s}_q4 6'for s in ['vodka','riesling_dry_white','glowflower_brew','wine','red_queen','honey_wine','ice_wine']])+'\n')
  v=[0,3,0];bpuid=load(BP/'manifest.json')['header']['uuid'];rpuid=load(RP/'manifest.json')['header']['uuid']
  for p in [BP/'manifest.json',RP/'manifest.json',R/'examples/Tavern-Extension-Demo/BP/manifest.json']:
   d=load(p);d['header']['version']=v;d['header']['name']=d['header']['name'].replace('C1','C3').replace('C2','C3')

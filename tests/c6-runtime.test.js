@@ -164,6 +164,21 @@ test('Ardent Heat natural expiry respects duration and ends within the existing5
 test('White Lady High Heels persists source 3600 seconds and climbs one blocked one-block obstacle',()=>{const p=player();hand(p,NS+':white_lady');const out=consumeCocktail({source:p,itemStack:p.inventory.getItem(0)},()=>0);assert.equal(out[0].status,'APPLIED_CUSTOM');const saved=JSON.parse(p.getDynamicProperty(NS+':custom_effects'));assert(saved.entries.some(e=>e.id===NS+':high_heels'&&e.ticks===72000&&e.amplifier===0));p.location={x:.5,y:65,z:2.7};p.inputInfo.movement={x:0,y:1};p.velocity={x:0,y:0,z:0};d.getBlock({x:0,y:65,z:3}).setType('minecraft:stone');const before=customEffectDiagnostics.highHeelsSteps;assert(pulseHighHeels(p));assert.equal(p.location.y,66);assert(Math.abs(p.location.z-2.9)<1e-12);assert.equal(customEffectDiagnostics.highHeelsSteps,before+1);});
 test('High Heels refuses normal motion, jumping, two-block walls and repeated vertical wall climbing',()=>{const p=player();assert(applyCustomEffect(p,{effect:NS+':high_heels',duration:100,amplifier:0}));p.location={x:.5,y:65,z:2.7};p.inputInfo.movement={x:0,y:1};d.getBlock({x:0,y:65,z:3}).setType('minecraft:stone');p.velocity={x:0,y:0,z:.1};assert.equal(pulseHighHeels(p),false);p.velocity={x:0,y:0,z:0};p.isJumping=true;assert.equal(pulseHighHeels(p),false);p.isJumping=false;d.getBlock({x:0,y:66,z:3}).setType('minecraft:stone');assert.equal(pulseHighHeels(p),false);d.getBlock({x:0,y:66,z:3}).setType('minecraft:air');assert(pulseHighHeels(p));d.getBlock({x:0,y:66,z:3}).setType('minecraft:stone');d.getBlock({x:0,y:67,z:3}).setType('minecraft:air');d.getBlock({x:0,y:68,z:3}).setType('minecraft:air');assert.equal(pulseHighHeels(p),false);assert.equal(p.location.y,66);});
 test('remaining unsupported effects are still not substituted with arbitrary buffs',()=>{for(const id of['slightly_tipsy','grass_stealth','long_reach']){const p=player();assert.equal(applyCustomEffect(p,{effect:NS+':'+id,duration:100,amplifier:0}),false);assert.equal(p.effects.length,0);}});
+test('legacy guide aliases migrate the originally used slot to the Cookery guide',()=>{
+ const redirect=regs.items.get(NS+':legacy_guide');assert(redirect);
+ for(const legacy of [NS+':guidebook',NS+':recipe_book']){
+  const p=player();p.selectedSlotIndex=0;hand(p,legacy);redirect.onUse({source:p,itemStack:new ItemStack(legacy,1)});
+  p.selectedSlotIndex=1;hand(p,'minecraft:stone');system.advance();
+  assert.equal(p.inventory.getItem(0)?.typeId,'kaleidoscope_cookery:guidebook');
+  assert.equal(p.inventory.getItem(1)?.typeId,'minecraft:stone');
+  assert(p.messages.some(m=>m.includes('請再次使用')));
+ }
+});
+test('legacy guide migration never overwrites a slot changed before the deferred redirect',()=>{
+ const redirect=regs.items.get(NS+':legacy_guide'),p=player();p.selectedSlotIndex=0;hand(p,NS+':guidebook');
+ redirect.onUse({source:p,itemStack:new ItemStack(NS+':guidebook',1)});hand(p,'minecraft:stone');system.advance();
+ assert.equal(p.inventory.getItem(0)?.typeId,'minecraft:stone');
+});
 test('Cookery owns guide UI while Tavern registry pages remain available to its extension API',()=>{assert.equal(runtimeRegistry().allRecipes().length,41);const ids=runtimeRegistry().allPages().map(x=>x.id);assert(ids.includes(NS+':c6_furniture'));assert(ids.includes(NS+':c6_sonic'));assert.equal(diagnosticSnapshot().build,'C6 / 0.6.0');assert.equal(diagnosticSnapshot().guideAuthority,'kaleidoscope_cookery:guidebook');assert.equal(diagnosticSnapshot().legacyGuideAliases,true);assert(diagnosticSnapshot().cookeryGuideChapter.messageCount>2);});
 
 test('Cookery guide publisher republishes a changed Tavern chapter after registry refresh',()=>{

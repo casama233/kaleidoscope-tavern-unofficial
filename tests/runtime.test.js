@@ -30,7 +30,7 @@ function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_buck
 function code(fn,want){assert.throws(fn,e=>e.code===want);}
 
 test('entrypoint registers unique independent item/block custom components and41 recipes',()=>{
- assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,13);assert.equal(regs.items.size,6);
+ assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,14);assert.equal(regs.items.size,6);
  assert(regs.items.has(NS+':guidebook'));assert(regs.items.has(NS+':recipe_book'));assert(!regs.items.has('kaleidoscope_cookery:guidebook'));
  assert.equal(diagnosticSnapshot().cookeryManifestBound,true);assert.equal(diagnosticSnapshot().engineAcceptance,'NOT_RUN_BY_AUTHOR');
 });

@@ -8,6 +8,20 @@ COLORS=['white','light_gray','gray','black','brown','red','orange','yellow','lim
 CN=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];TW=dict(zip(COLORS,CN));TW['colorless']='無'
 def load(p):return json.loads(p.read_text(encoding='utf-8'))
 def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def dedupe_lang(p,keep_last=False):
+ lines=p.read_text(encoding='utf-8-sig').splitlines();chosen={}
+ seq=range(len(lines)-1,-1,-1) if keep_last else range(len(lines))
+ for i in seq:
+  s=lines[i].strip()
+  if s and not s.startswith('#') and '=' in s:
+   key=s.split('=',1)[0]
+   if key not in chosen:chosen[key]=i
+ out=[]
+ for i,line in enumerate(lines):
+  s=line.strip()
+  if s and not s.startswith('#') and '=' in s and chosen.get(s.split('=',1)[0])!=i:continue
+  out.append(line)
+ p.write_text('\n'.join(out).rstrip()+'\n',encoding='utf-8')
 def mod(p):return json.loads(p.read_text(encoding='utf-8').split(' = ',1)[1].rsplit(';',1)[0])
 def main():
  vis={v['key']:v for v in load(A/'interfaces/asset-registry.json')['visuals']};terrain=load(RP/'textures/terrain_texture.json');icons=load(RP/'textures/item_texture.json');names=mod(BP/'scripts/data/names.js')
@@ -98,5 +112,8 @@ def main():
  build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':43,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'new_shaped_recipes':33,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter'),'engine_acceptance':'NOT_RUN'})
  for exclusion in build.get('planned_recipe_exclusions',[]):exclusion['reason']=exclusion['reason'].replace('C5','C6')
  dump(R/'docs/C6-BUILD.json',build)
+ # Final runtime locale pass: no duplicate keys. Preserve upstream en/zh_CN wording; prefer curated zh_TW overrides.
+ for lc in ['en_US','zh_CN']:dedupe_lang(RP/f'texts/{lc}.lang',False)
+ dedupe_lang(RP/'texts/zh_TW.lang',True)
  print('C6 generated: 16 native stools, 17 light designs, 33 source recipes and source-rendered icons; no original art modified.')
 if __name__=='__main__':main()

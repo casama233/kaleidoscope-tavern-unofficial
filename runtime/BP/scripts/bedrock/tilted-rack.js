@@ -5,6 +5,7 @@ import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {installStatefulStorageRoutes} from './stateful-storage-router.js';
 const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
 export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'NOT_ADAPTED'};
 function error(e){tiltedRackDiagnostics.errors.push(String(e));if(tiltedRackDiagnostics.errors.length>16)tiltedRackDiagnostics.errors.shift();}
@@ -23,5 +24,21 @@ export function recoverTiltedRack(player,block,{expectedRevision}={}){canWrite(p
 export function maintainTiltedRackVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseTiltedRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==TILTED_RACK){discard(e,'orphans');return;}const state=store.load(tiltedRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncTiltedRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickTiltedRackVisuals(){const list=[...visuals.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainTiltedRackVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
 export function registerTiltedRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':tilted_rack',{onTick:e=>{try{const s=store.load(tiltedRackKey(e.block.dimension.id,e.block.location));if(s)syncTiltedRackVisuals(e.block,s);}catch(x){error(x);}}});}
-export function installTiltedRackEvents(){world.beforeEvents.playerInteractWithBlock.subscribe(e=>{if(e.cancel)return;const existing=e.block.typeId===TILTED_RACK,hs=handSnapshot(e.player),placing=!existing&&hs.id===TILTED_RACK;if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(tiltedRackKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeTiltedRack(e.player,target);}if(!hs.id)return e.player.isSneaking?recoverTiltedRack(e.player,clicked,{expectedRevision:revision}):takeTiltedRackBottle(e.player,clicked,faceLocation,{expectedRevision:revision});if(tiltedRackBlockedItem(hs.id)){tell(e.player,'§e[Tavern] 此瓶型在 Java tilted_rack_blocklist 中，斜酒架拒收。');return;}if(tiltedRackItem(hs.id))return putTiltedRackBottle(e.player,clicked,faceLocation,{expectedRevision:revision});tell(e.player,'§e[Tavern] 斜酒架只接受空酒瓶或來源允許的品質酒瓶；空手取指定槽。');}));});world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==TILTED_RACK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(tiltedRackKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===TILTED_RACK,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,TILTED_RACK,()=>recoverTiltedRack(e.player,b,{expectedRevision:revision}));}));});world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>b.typeId!==TILTED_RACK)));world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainTiltedRackVisual(e.entity));}});system.runInterval(tickTiltedRackVisuals,20);}
+export function installTiltedRackEvents(){
+ installStatefulStorageRoutes({
+  isBlock:block=>block?.typeId===TILTED_RACK,
+  isPlacementItem:id=>id===TILTED_RACK,
+  readRevision:block=>store.load(tiltedRackKey(block.dimension.id,block.location))?.revision??-1,
+  place:({player,target})=>placeTiltedRack(player,target),
+  interact:({player,block,held,faceLocation,revision})=>{
+   if(!held.id)return player.isSneaking?recoverTiltedRack(player,block,{expectedRevision:revision}):takeTiltedRackBottle(player,block,faceLocation,{expectedRevision:revision});
+   if(tiltedRackBlockedItem(held.id)){tell(player,'§e[Tavern] 此瓶型在 Java tilted_rack_blocklist 中，斜酒架拒收。');return;}
+   if(tiltedRackItem(held.id))return putTiltedRackBottle(player,block,faceLocation,{expectedRevision:revision});
+   tell(player,'§e[Tavern] 斜酒架只接受空酒瓶或來源允許的品質酒瓶；空手取指定槽。');
+  },
+  recover:({player,block,revision})=>recoverTiltedRack(player,block,{expectedRevision:revision})
+ });
+ world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainTiltedRackVisual(e.entity));}});
+ system.runInterval(tickTiltedRackVisuals,20);
+}
 export const TILTED_RACK_TEST={store,visuals,HELPER,ANCHOR};

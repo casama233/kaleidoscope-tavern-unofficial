@@ -12,7 +12,7 @@
 
 完整可用範例在 `examples/Tavern-Extension-Demo/BP`，可獨立匯入。自己的附屬必須產生新的BP/module UUID；不要保留示範UUID。
 
-把公開的三個SDK文件複製進自己的 `scripts/sdk/`：`tavern-extension-client.js`、`protocol.js`、`util.js`。它們只處理公開資料與訊息，不匯入核心BP私有程式。型別宣告可使用 `sdk/tavern-extension-client.d.ts`。
+把公開的三個SDK文件複製進自己的 `scripts/sdk/`：`tavern-extension-client.js`、`protocol.js`、`util.js`。它們只處理公開資料與訊息，不匯入核心BP私有程式。型別宣告可使用 `sdk/tavern-extension-client.d.ts`。 `protocol.js` 是**附屬端最小傳輸器**，不再複製主包的 `ExtensionTransport`、TTL/pending 組包狀態或 registry 驗證器；那些只屬於 Tavern host。
 
 ```javascript
 import {system} from '@minecraft/server';

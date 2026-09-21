@@ -219,9 +219,10 @@ def main():
    check('C6_sofa_item_visual:'+b['color'],comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   elif b['kind']=='table':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
-   check('C6_table_states',states.get('kaleidoscope_tavern:axis')==[0,1] and states.get('kaleidoscope_tavern:position')==[0,1,2,3])
+   check('C6_table_states',states.get('kaleidoscope_tavern:axis')==[0,1] and states.get('kaleidoscope_tavern:position')==[0,1,2,3] and block['description'].get('traits',{}).get('minecraft:placement_direction',{}).get('enabled_states')==['minecraft:cardinal_direction'])
    check('C6_table_geometry_set',set(b['geometry_by_state'].values())=={'geometry.kt_assets_a12.table_single','geometry.kt_assets_a12.table_left','geometry.kt_assets_a12.table_middle','geometry.kt_assets_a12.table_right','geometry.kt_assets_a12.table_left_rot','geometry.kt_assets_a12.table_middle_rot','geometry.kt_assets_a12.table_right_rot'} and all(g in geom for g in b['geometry_by_state'].values()))
-   check('C6_table_permutations',len(perms)==7 and sum("kaleidoscope_tavern:position" in x['condition'] for x in perms)==7 and sum("kaleidoscope_tavern:axis" in x['condition'] for x in perms)==6)
+   check('C6_table_permutations',len(perms)==7 and sum("kaleidoscope_tavern:position" in x['condition'] for x in perms)==7 and sum("minecraft:cardinal_direction" in x['condition'] for x in perms)==6 and not any("kaleidoscope_tavern:axis" in x['condition'] for x in perms))
+   check('C6_table_persistence_state',b.get('engine_axis_state')=='minecraft:cardinal_direction' and b.get('legacy_axis_state')=='kaleidoscope_tavern:axis')
    check('C6_table_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,13,-8],'size':[16,3,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,13,-8],'size':[16,3,16]})
    check('C6_table_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   elif b['kind']=='bar_counter':

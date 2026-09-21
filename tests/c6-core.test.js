@@ -97,7 +97,7 @@ test('Cookery guide publisher uses bounded ASCII begin/chunk/end packets and rou
  const packets=encodeCookeryGuideMessages(COOKERY_GUIDE_PAYLOAD);
  assert.equal(packets[0].id,COOKERY_GUIDE_EVENTS.begin);assert.equal(packets.at(-1).id,COOKERY_GUIDE_EVENTS.end);
  assert(packets.slice(1,-1).every(x=>x.id===COOKERY_GUIDE_EVENTS.chunk));
- assert(packets.every(x=>x.message.length<=2048&&/^[\\x00-\\x7f]*$/.test(x.message)));
+ assert(packets.every(x=>x.message.length<=2048&&/^[\x00-\x7f]*$/.test(x.message)));
  const begin=JSON.parse(packets[0].message);assert.equal(begin.source,COOKERY_GUIDE_SOURCE);assert.equal(begin.revision,COOKERY_GUIDE_REVISION);
  const raw=packets.slice(1,-1).map(x=>x.message.split('\n').slice(4).join('\n')).join('');
  assert.deepEqual(JSON.parse(raw),COOKERY_GUIDE_PAYLOAD);

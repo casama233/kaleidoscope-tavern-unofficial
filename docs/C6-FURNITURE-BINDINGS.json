@@ -954,6 +954,122 @@
       "engine_accepted": false
     },
     {
+      "kind": "tilted_rack",
+      "item": "kaleidoscope_tavern:tilted_rack",
+      "block": "kaleidoscope_tavern:tilted_rack",
+      "helper": "kaleidoscope_tavern:tilted_rack_bottle_visual",
+      "source_geometry": "geometry.kt_assets_a6.tilted_rack",
+      "item_geometry": "geometry.kt_assets_a17.item_display_tilted_rack",
+      "slots": 3,
+      "display_kinds": [
+        "empty_bottle",
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine",
+        "brandy",
+        "carignan",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "allowed_bases": [
+        "champagne",
+        "glowflower_brew",
+        "honey_wine",
+        "ice_wine",
+        "luminous_bride",
+        "plum_wine",
+        "polaris_sweet_white",
+        "red_queen",
+        "sakura_wine",
+        "sauvignon_blanc_dry_white",
+        "sherry",
+        "vinegar",
+        "whiskey",
+        "wine",
+        "mother_snow",
+        "miners_star",
+        "madame_shexiang",
+        "sunset_glow",
+        "riesling_dry_white",
+        "sweet_berry_wine",
+        "vodka",
+        "rum"
+      ],
+      "blocked_bases": [
+        "brandy",
+        "carignan"
+      ],
+      "state_exact_item_id": true,
+      "source_collision_north": {
+        "origin": [
+          -8,
+          0,
+          -3
+        ],
+        "size": [
+          16,
+          14,
+          10
+        ]
+      },
+      "source_collision_south": {
+        "origin": [
+          -8,
+          0,
+          -7
+        ],
+        "size": [
+          16,
+          14,
+          10
+        ]
+      },
+      "source_collision_east": {
+        "origin": [
+          -7,
+          0,
+          -8
+        ],
+        "size": [
+          10,
+          14,
+          16
+        ]
+      },
+      "source_collision_west": {
+        "origin": [
+          -3,
+          0,
+          -8
+        ],
+        "size": [
+          10,
+          14,
+          16
+        ]
+      },
+      "redstone_pop": "NOT_ADAPTED",
+      "molotov": "EXCLUDED",
+      "engine_accepted": false
+    },
+    {
       "kind": "pendant_lamp",
       "style": "bell",
       "item": "kaleidoscope_tavern:bell_pendant_lamp",
@@ -1149,122 +1265,6 @@
         }
       },
       "waterlogged": false,
-      "engine_accepted": false
-    },
-    {
-      "kind": "tilted_rack",
-      "item": "kaleidoscope_tavern:tilted_rack",
-      "block": "kaleidoscope_tavern:tilted_rack",
-      "helper": "kaleidoscope_tavern:tilted_rack_bottle_visual",
-      "source_geometry": "geometry.kt_assets_a6.tilted_rack",
-      "item_geometry": "geometry.kt_assets_a17.item_display_tilted_rack",
-      "slots": 3,
-      "display_kinds": [
-        "empty_bottle",
-        "champagne",
-        "glowflower_brew",
-        "honey_wine",
-        "ice_wine",
-        "luminous_bride",
-        "plum_wine",
-        "polaris_sweet_white",
-        "red_queen",
-        "sakura_wine",
-        "sauvignon_blanc_dry_white",
-        "sherry",
-        "vinegar",
-        "whiskey",
-        "wine",
-        "brandy",
-        "carignan",
-        "mother_snow",
-        "miners_star",
-        "madame_shexiang",
-        "sunset_glow",
-        "riesling_dry_white",
-        "sweet_berry_wine",
-        "vodka",
-        "rum"
-      ],
-      "allowed_bases": [
-        "champagne",
-        "glowflower_brew",
-        "honey_wine",
-        "ice_wine",
-        "luminous_bride",
-        "plum_wine",
-        "polaris_sweet_white",
-        "red_queen",
-        "sakura_wine",
-        "sauvignon_blanc_dry_white",
-        "sherry",
-        "vinegar",
-        "whiskey",
-        "wine",
-        "mother_snow",
-        "miners_star",
-        "madame_shexiang",
-        "sunset_glow",
-        "riesling_dry_white",
-        "sweet_berry_wine",
-        "vodka",
-        "rum"
-      ],
-      "blocked_bases": [
-        "brandy",
-        "carignan"
-      ],
-      "state_exact_item_id": true,
-      "source_collision_north": {
-        "origin": [
-          -8,
-          0,
-          -3
-        ],
-        "size": [
-          16,
-          14,
-          10
-        ]
-      },
-      "source_collision_south": {
-        "origin": [
-          -8,
-          0,
-          -7
-        ],
-        "size": [
-          16,
-          14,
-          10
-        ]
-      },
-      "source_collision_east": {
-        "origin": [
-          -7,
-          0,
-          -8
-        ],
-        "size": [
-          10,
-          14,
-          16
-        ]
-      },
-      "source_collision_west": {
-        "origin": [
-          -3,
-          0,
-          -8
-        ],
-        "size": [
-          10,
-          14,
-          16
-        ]
-      },
-      "redstone_pop": "NOT_ADAPTED",
-      "molotov": "EXCLUDED",
       "engine_accepted": false
     }
   ],

@@ -21,6 +21,8 @@ import {placeCellarCabinet,useCellarCabinet,recoverCellarCabinet,syncCellarCabin
 import {cellarCabinetKey} from '../runtime/BP/scripts/core/cellar-cabinet.js';
 import {installCookeryGuidePublisher,COOKERY_GUIDE_EVENTS} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
 import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
+import {tickStorageVisuals} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
+import {blockCenter,requireBlockReach} from '../runtime/BP/scripts/bedrock/transactions.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
 const pos={x:0,y:64,z:0};
 const hand=(p,id,n=1)=>p.inventory.setItem(p.selectedSlotIndex,id?typeof id==='string'?new ItemStack(id,n):id:undefined);
@@ -46,6 +48,16 @@ function equipPlayer(p,entries={Head:'minecraft:iron_helmet'}){const worn=new Ma
 function click(p,b,face='Up',faceLocation={x:.5,y:.5,z:.5}){const event={player:p,block:b,blockFace:face,faceLocation,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(event);system.advance();return event;}
 function full(p){for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));}
 test.beforeEach(()=>{d.blocks.clear();d.entities.clear();d.unloaded.clear();d.failSpawn=false;d.failSpawnItem=false;d.failAudio=false;d.failParticles=false;d.sounds=[];d.particles=[];world.dp.clear();online=[];FURNITURE_TEST.helpers.clear();HOLDER_TEST.visuals.clear();TILTED_RACK_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();BAR_CABINET_TEST.visuals.clear();CELLAR_CABINET_TEST.visuals.clear();COMBAT_TEST.lastCast.clear();});
+test('shared storage spatial helpers preserve the six-block center-distance contract',()=>{
+ const p=player(),at={x:0,y:64,z:0};p.location=blockCenter(at);assert.doesNotThrow(()=>requireBlockReach(p,d,at));
+ p.location={...blockCenter(at),x:blockCenter(at).x+6};assert.doesNotThrow(()=>requireBlockReach(p,d,at));
+ p.location.x+=.001;assert.throws(()=>requireBlockReach(p,d,at),e=>e.code==='OUT_OF_REACH');
+});
+test('shared storage visual scheduler advances a bounded round-robin cursor',()=>{
+ const visuals=new Map([['a',{id:'a'}],['b',{id:'b'}],['c',{id:'c'}]]),seen=[];let cursor=0;
+ cursor=tickStorageVisuals(visuals,cursor,e=>seen.push(e.id),2);assert.equal(cursor,2);assert.deepEqual(seen,['a','b']);
+ cursor=tickStorageVisuals(visuals,cursor,e=>seen.push(e.id),2);assert.equal(cursor,1);assert.deepEqual(seen,['a','b','c','a']);
+});
 for(const c of COLORS)test('full place -> sit -> turn -> dismount -> recover '+c,()=>{const {p,b,e}=stool(c);assert.equal(count(p,NS+':'+c+'_bar_stool'),1);assert.equal(b.typeId,NS+':stool_'+c);assert.equal(e.typeId,seatId(c));assert.equal(sitOnFurniture(p,b),e);assert.equal(e.rideable.getRiders()[0],p);p.rotation.y=45;tickFurniture();assert.equal(e.getProperty(NS+':seat_yaw'),-135);assert.deepEqual(e.rotation,{x:0,y:180});p.isSneaking=true;tickFurniture();assert.equal(e.rideable.getRiders().length,0);recoverFurniture(p,b);assert(b.isAir);assert(e.removed);assert.equal(count(p,NS+':'+c+'_bar_stool'),2);});
 for(const c of LIGHT_COLORS)test('place and recover exact light design '+c,()=>{const {p,b}=light(c);assert.equal(b.typeId,NS+':light_'+c);assert.equal(recoverFurniture(p,b),NS+':string_lights_'+c);assert(b.isAir);assert.equal(count(p,NS+':string_lights_'+c),2);});
 test('three mixed-color sofas auto-connect as right-middle-left using source connection rules',()=>{const p=player(),a=sofa('blue',p,{x:0,y:64,z:0}).b,b=sofa('red',p,{x:1,y:64,z:0}).b,c=sofa('green',p,{x:-1,y:64,z:0}).b;assert.equal(c.permutation.getState(CONNECTION),SOFA_CONNECTION.RIGHT);assert.equal(a.permutation.getState(CONNECTION),SOFA_CONNECTION.MIDDLE);assert.equal(b.permutation.getState(CONNECTION),SOFA_CONNECTION.LEFT);});

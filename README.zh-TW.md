@@ -15,12 +15,13 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 | 幽匿特調／shriek_attack | 飲用完成後按視線做32格聲波命中，傷害為施用者**目前生命**×Java float1.2，追加水平0.63／垂直0.28速度；每2格一個原生聲波粒子，共16個，播放原生聲波聲音 | **明示PvE-only適配**：不傷害任何玩家，不攻擊本包helper；最多256個命中目標。使用原生sonicBoom，不繞過引擎拒傷。不是所有專屬酒效完成 |
 | 螺絲起子／upside_down | 飲用完成時，以玩家AABB向外16格，將範圍內存活 `mob` 命名為 `Grumm`，觸發原生倒立彩蛋；使用目標AABB再次做相交判定 | Java `Mob.class` 以Bedrock `mob` family對應；Script API無通用 `setCustomNameVisible(false)` 對等項，名稱牌顯示差異待實機驗收 |
 | 莫希托／vision | 以持續自訂狀態保存；每跨過Java 50 tick倒數節點，按 `min(amplifier+1,3)×6` 半徑掃描其他存活實體並刷新60 tick原生 Glowing；只在至少一個目標新獲發光時播放原作靈視音效 | 沿用C6每5 tick狀態巡檢，所以 pulse 可比Java精確實體tick晚最多一個巡檢窗口；聲音與發光渲染仍待實機驗收 |
+| 下界特調／tomb_raider | 效果持續期間，傷害指定骷髏／殭屍／豬靈／災厄村民／女巫系目標時按Java float32 30%機率卸下主手；可損耗物改為僅剩1耐久後原地掉落；前40 tick攔截拾取 | Java `#minecraft:skeletons` 映射含 Bogged 與 Skeleton Horse；Bedrock 殭屍豬布林ID為 `zombie_pigman`。C6效果持有者仍限定玩家，且Bedrock `entityHurt` 為受傷後事件，致死一擊順序待實機驗收 |
 | 十六色高腳凳 | 所有原作配色可合成、潛行放置、空手乘坐、潛行離座、回收；每張一個原生座位；座墊／靠背／扶手一起隨乘客轉向，底座不转 | 坐點與原生人物偏移、碰撞、Steve/Alex、手機、多人動畫待實機校正；使用look yaw而非Java yBodyRot |
 | 十七款彩燈 | 原作各款獨立幾何與貼圖、四方向、亮度15、原生染料換款；同色不消耗；可回收當前款式 | 不支援水浸、紅石開關或彩色動態光源；選取框為近似，無自然掛接/掉落還原 |
 | 原作家具合成 | 16凳＋17彩燈，共33個新增工作台配方 | Java `c:ingots/iron`明示映射到原版iron_ingot，不冒充任意模組鐵錠標籤 |
 | 獨立指南 | 新家具、聲波頁；現有幽匿特調頁與酒效完成度更新 | 不注入Cookery指南、語言、書籤或玩家偏好 |
 
-**C6不是聲稱其餘工作全部做完。** 原有41個機器配方不變；工作台合成由10個增至43個。效果狀態為血腥瑪麗規則實作，經驗汲取／Zenith／聲波／倒立／靈視五項明示適配；其餘6個Java效果仍未實作。
+**C6不是聲稱其餘工作全部做完。** 原有41個機器配方不變；工作台合成由10個增至43個。效果狀態為血腥瑪麗規則實作，經驗汲取／Zenith／聲波／倒立／靈視／摸金校尉六項明示適配；其餘5個Java效果仍未實作。
 
 ## 安裝與版本
 
@@ -36,7 +37,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 /function kt_c6_kit
 ```
 
-只給獨立兩本書、藍／紅高腳凳、無色彩燈、染料、幽匿特調、螺絲起子與莫希托；**不自動搭建世界、不自動生成攻擊目標或發射聲波**。預留背包與周围空間。
+只給獨立兩本書、藍／紅高腳凳、無色彩燈、染料、幽匿特調、螺絲起子、莫希托與下界特調；**不自動搭建世界、不自動生成攻擊目標或發射聲波**。預留背包與周围空間。
 
 ### 高腳凳
 
@@ -97,15 +98,15 @@ python tools/audit_rebuild.py
 python tools/package_c6.py
 ```
 
-不提供Cookery-reference仍會跳過那一個外部原模組共存案例。`docs/TEST-RESULTS.json`目前仍是上一個已執行基線的511例結果；Batch 1＋2又新增6個靜態回歸案例，但本分支沒有Actions或本機Node執行紀錄，因此不能把它們宣稱為已通過。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+不提供Cookery-reference仍會跳過那一個外部原模組共存案例。`docs/TEST-RESULTS.json`目前仍是上一個已執行基線的511例結果；Batch 1～3又新增11個靜態回歸案例，但本分支沒有Actions或本機Node執行紀錄，因此不能把它們宣稱為已通過。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
 
-目前C6測試檔靜態定義較原基線新增6例（Batch 1：2例；Batch 2：4例），若全部執行則總案例數預期為517；實際最新已落盤報告仍是511例。包含16配色/17款逐件測試；這些是單元案例，不是517場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+目前C6測試檔靜態定義較原基線新增11例（Batch 1：2例；Batch 2：4例；Batch 3：5例），若全部執行則總案例數預期為522；實際最新已落盤報告仍是511例。包含16配色/17款逐件測試；這些是單元案例，不是522場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
 
 **沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
 
 ## 未完成範圍
 
-- 六種專屬效果：slightly_tipsy、high_heels、grass_stealth、ardent_heat、long_reach、tomb_raider。
+- 五種專屬效果：slightly_tipsy、high_heels、grass_stealth、ardent_heat、long_reach。
 - 原生長按、Steve/Alex手腕/座高、杯嘴流束、跨端动画、藥水/飲用原生消耗及返瓶實測。
 - 沙發/吧檯/桌自動連接與乘坐、櫃內物品展示、任意中文黑板文字、指南場景、野生生成/氣候、水浸/自然破壞。
 - 燃燒瓶、西瓜汁特殊酒嘴、下方容器自動接酒；其他原作動態粒子適配。

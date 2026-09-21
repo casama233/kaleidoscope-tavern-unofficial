@@ -25,6 +25,8 @@ export const BlockPermutation={resolve:(id,states={})=>{
  for(const[k,range]of Object.entries(def?.description?.states??{}))defaults[k]=Array.isArray(range)?range[0]:range.values.min;
  const trait=def?.description?.traits?.['minecraft:placement_position'];
  for(const k of trait?.enabled_states??[])if(k==='minecraft:block_face')defaults[k]='up';
+ const directionTrait=def?.description?.traits?.['minecraft:placement_direction'];
+ for(const k of directionTrait?.enabled_states??[])if(k==='minecraft:cardinal_direction')defaults[k]='south';
  for(const[k,v]of Object.entries(states)){
   const range=def?.description?.states?.[k];
   if(def&&!range&&!(k in defaults))throw Error('Unknown mock state '+id+'/'+k);

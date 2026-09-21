@@ -184,10 +184,12 @@ def _clean_numbers(values): return [_clean_number(x) for x in values]
 
 def _convert_face(face,entry,shade,scale):
     u1,v1,u2,v2=entry['uv']; top=face in ('up','down')
+    # Keep source float arithmetic for UVs: the locked A17 converter preserved values
+    # such as 2*(12-11.05) as 1.8999999999999986 rather than rounding to 1.9.
     if top:
-        out={'uv':_clean_numbers([u2*scale,v2*scale]),'uv_size':_clean_numbers([(u1-u2)*scale,(v1-v2)*scale])}
+        out={'uv':[u2*scale,v2*scale],'uv_size':[(u1-u2)*scale,(v1-v2)*scale]}
     else:
-        out={'uv':_clean_numbers([u1*scale,v1*scale]),'uv_size':_clean_numbers([(u2-u1)*scale,(v2-v1)*scale])}
+        out={'uv':[u1*scale,v1*scale],'uv_size':[(u2-u1)*scale,(v2-v1)*scale]}
     if 'rotation' in entry: out['uv_rotation']=entry['rotation']
     if shade is False: out['material_instance']='unshaded'
     return out

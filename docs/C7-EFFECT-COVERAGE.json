@@ -1,0 +1,37 @@
+{
+  "rules_implemented": [
+    "bloody_mary"
+  ],
+  "adaptations_implemented": [
+    "xp_drain",
+    "zenith",
+    "shriek_attack",
+    "tomb_raider",
+    "upside_down"
+  ],
+  "not_implemented": [
+    "slightly_tipsy",
+    "high_heels",
+    "grass_stealth",
+    "vision",
+    "ardent_heat",
+    "long_reach"
+  ],
+  "scope": "Players as effect owners; Tomb Raider uses stable equipment/drop APIs; Upside Down uses source AABB naming adapter; Shriek remains explicitly PvE-only.",
+  "engine_accepted": false,
+  "shriek_limits": [
+    "players excluded",
+    "max256 hit targets",
+    "reject damage = no impulse",
+    "not engine tested"
+  ],
+  "tomb_raider_limits": [
+    "Java 40-tick dropped-item pickup delay unavailable in stable Script API",
+    "zombified_piglin mapped to Bedrock zombie_pigman with forward alias retained",
+    "not engine tested"
+  ],
+  "upside_down_limits": [
+    "customNameVisible(false) has no equivalent stable script flag",
+    "not engine tested"
+  ]
+}

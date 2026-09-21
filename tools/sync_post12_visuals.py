@@ -26,6 +26,11 @@ def semantic_check(plan_path, model):
     if {k:v for k,v in old.get('textures',{}).items() if k!='particle'}!={k:v for k,v in new.get('textures',{}).items() if k!='particle'}:
         raise AssertionError(f"{model['id']}: non-particle texture reference changed")
     if len(old.get('elements',[]))!=len(new.get('elements',[])): raise AssertionError(f"{model['id']}: element count changed")
+    regenerate=set(model.get('regenerate_elements',[]))
+    if any(not isinstance(i,int) or i<0 or i>=len(old['elements']) for i in regenerate):
+        raise AssertionError(f"{model['id']}: regenerate element out of range")
+    for i in regenerate:
+        if old['elements'][i]==new['elements'][i]: raise AssertionError(f"{model['id']}: regenerate element {i} did not change")
     uv_by_element={}
     for change in model.get('uv_changes',[]):
         idx=change['element']; face=change['face']; key=(idx,face)
@@ -39,11 +44,12 @@ def semantic_check(plan_path, model):
         uv_by_element.setdefault(idx,[]).append(change)
     changed=[]
     for i,(a,b) in enumerate(zip(old['elements'],new['elements'])):
+        if i in regenerate: continue
         aa=normalize_element(a); bb=normalize_element(b)
         for change in uv_by_element.get(i,[]):
             aa['faces'][change['face']]['uv']='__DECLARED_UV__'
             bb['faces'][change['face']]['uv']='__DECLARED_UV__'
-        if aa!=bb: raise AssertionError(f"{model['id']}: element {i} changed beyond declared shade/UV")
+        if aa!=bb: raise AssertionError(f"{model['id']}: element {i} changed beyond declared shade/UV/regeneration")
         if a.get('shade',True)!=b.get('shade',True):
             if not a.get('shade',True) or b.get('shade',True): raise AssertionError(f"{model['id']}: element {i} is not true -> false shade")
             changed.append(i)
@@ -170,6 +176,102 @@ def patch_geo(path,cube_indices,uv_changes,apply):
         if face.get('uv')!=change['bedrock_uv'] or face.get('uv_size')!=change['bedrock_uv_size']:
             raise AssertionError(f"{path}: Bedrock UV {change['geo_cube']}/{change['geo_face']} not synced")
 
+def _clean_number(value):
+    value=round(float(value),8)
+    return int(value) if value.is_integer() else value
+
+def _clean_numbers(values): return [_clean_number(x) for x in values]
+
+def _convert_face(face,entry,shade,scale):
+    u1,v1,u2,v2=entry['uv']; top=face in ('up','down')
+    if top:
+        out={'uv':_clean_numbers([u2*scale,v2*scale]),'uv_size':_clean_numbers([(u1-u2)*scale,(v1-v2)*scale])}
+    else:
+        out={'uv':_clean_numbers([u1*scale,v1*scale]),'uv_size':_clean_numbers([(u2-u1)*scale,(v2-v1)*scale])}
+    if 'rotation' in entry: out['uv_rotation']=entry['rotation']
+    if shade is False: out['material_instance']='unshaded'
+    return out
+
+def _element_box(element):
+    fx,fy,fz=element['from']; tx,ty,tz=element['to']
+    return (
+        _clean_numbers([8-max(fx,tx),min(fy,ty),min(fz,tz)-8]),
+        _clean_numbers([abs(tx-fx),abs(ty-fy),abs(tz-fz)])
+    )
+
+def _element_rotation(element,out):
+    r=element.get('rotation')
+    if not r or not r.get('angle'): return
+    x,y,z=r['origin']; angle=r['angle']; axis=r['axis']
+    out['pivot']=_clean_numbers([8-x,y,z-8])
+    out['rotation']=_clean_numbers(
+        [-angle,0,0] if axis=='x' else [0,-angle,0] if axis=='y' else [0,0,angle]
+    )
+
+def _convert_element(element,scale):
+    origin,size=_element_box(element); out={'origin':origin,'size':size}; _element_rotation(element,out)
+    out['uv']={face:_convert_face(face,entry,element.get('shade',True),scale) for face,entry in element.get('faces',{}).items()}
+    return out
+
+def _convert_element_face(element,face,scale):
+    if face not in element.get('faces',{}): raise AssertionError(f'element face missing: {face}')
+    origin,size=_element_box(element); origin=list(origin); size=list(size)
+    if face=='north': origin[2]=_clean_number(origin[2]+size[2]); size[2]=0
+    elif face=='south': size[2]=0
+    elif face=='east': origin[0]=_clean_number(origin[0]+size[0]); size[0]=0
+    elif face=='west': size[0]=0
+    elif face=='up': origin[1]=_clean_number(origin[1]+size[1]); size[1]=0
+    elif face=='down': size[1]=0
+    else: raise AssertionError(f'unsupported face: {face}')
+    out={'origin':origin,'size':size}; _element_rotation(element,out)
+    out['uv']={face:_convert_face(face,element['faces'][face],element.get('shade',True),scale)}
+    return out
+
+def _mapped_cubes(element,mapping,scale):
+    if 'cube' in mapping:
+        return [(mapping['cube'],_convert_element(element,scale))]
+    pairs=mapping.get('faces')
+    if not isinstance(pairs,list) or not pairs: raise AssertionError(f"element {mapping.get('element')}: bad cube mapping")
+    return [(cube,_convert_element_face(element,face,scale)) for face,cube in pairs]
+
+def regenerate_geo(plan_path,model,apply):
+    regenerate=set(model.get('regenerate_elements',[]))
+    if not regenerate: return
+    base_model=load(plan_path.parent/model['baseline']); updated_model=load(plan_path.parent/model['updated'])
+    baseline_geo_path=plan_path.parent/model['baseline_geo']
+    if git_blob_sha(baseline_geo_path)!=model['baseline_geo_blob']:
+        raise AssertionError(f"{model['id']}: baseline Bedrock geo blob mismatch")
+    baseline_geo=load(baseline_geo_path); runtime_path=R/model['geo']; runtime=load(runtime_path)
+    baseline_cubes=baseline_geo['minecraft:geometry'][0]['bones'][0]['cubes']
+    runtime_cubes=runtime['minecraft:geometry'][0]['bones'][0]['cubes']
+    if len(runtime_cubes)!=len(baseline_cubes): raise AssertionError(f"{model['id']}: runtime cube count changed")
+    mapping={}
+    used=set()
+    scale=model.get('uv_scale',2)
+    for entry in model.get('element_map',[]):
+        idx=entry.get('element')
+        if idx in mapping or not isinstance(idx,int) or idx<0 or idx>=len(base_model['elements']):
+            raise AssertionError(f"{model['id']}: bad/duplicate element mapping {idx}")
+        mapping[idx]=entry
+        for cube,_ in _mapped_cubes(base_model['elements'][idx],entry,scale):
+            if cube in used or cube<0 or cube>=len(baseline_cubes): raise AssertionError(f"{model['id']}: bad/duplicate cube mapping {cube}")
+            used.add(cube)
+    if set(mapping)!=set(range(len(base_model['elements']))):
+        raise AssertionError(f"{model['id']}: element map must cover every source element")
+    for idx,entry in mapping.items():
+        for cube,expected in _mapped_cubes(base_model['elements'][idx],entry,scale):
+            if baseline_cubes[cube]!=expected:
+                raise AssertionError(f"{model['id']}: baseline converter mismatch at element {idx} / cube {cube}")
+    replacements={}
+    for idx in regenerate:
+        for cube,expected in _mapped_cubes(updated_model['elements'][idx],mapping[idx],scale): replacements[cube]=expected
+    if apply:
+        for cube,expected in replacements.items(): runtime_cubes[cube]=expected
+        runtime_path.write_text(json.dumps(runtime,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    else:
+        for cube,expected in replacements.items():
+            if runtime_cubes[cube]!=expected: raise AssertionError(f"{model['id']}: regenerated cube {cube} not synced")
+
 def patch_block(path,method,apply):
     text=path.read_text(encoding='utf-8')
     old='"render_method": "blend"'; new=f'"render_method": "{method}"'
@@ -211,6 +313,7 @@ def run(plans,apply=False):
             semantic_check(plan_path,model)
             registry=patch_registry(registry,model['visual_key'],method,apply)
             patch_geo(R/model['geo'],model['unshaded_cubes'],model.get('uv_changes',[]),apply)
+            regenerate_geo(plan_path,model,apply)
             patch_block(R/model['block'],method,apply)
             total+=1
         texture_total+=sync_textures(plan_path,plan.get('textures',[]),apply)

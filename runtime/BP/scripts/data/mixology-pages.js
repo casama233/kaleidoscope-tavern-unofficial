@@ -123,7 +123,7 @@ export const MIXOLOGY_PAGES = [
     "body": {
       "zh_TW": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
       "zh_CN": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [not implemented]"
+      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [Bedrock adapter implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/screwdriver"
@@ -191,7 +191,7 @@ export const MIXOLOGY_PAGES = [
     "body": {
       "zh_TW": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
       "zh_CN": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [not implemented]"
+      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [Bedrock adapter implemented]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/nether_special"
@@ -260,13 +260,13 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c5_effects",
     "title": {
-      "zh_TW": "專屬酒效 C6",
-      "zh_CN": "专属酒效 C6",
-      "en_US": "C6 custom effects"
+      "zh_TW": "專屬酒效 C7",
+      "zh_CN": "专属酒效 C7",
+      "en_US": "C7 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘8種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他8種效果仍待實作。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 8 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Eight other types remain pending."
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘6種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他6種效果仍待實作。\nC7更新：摸金校尉與倒立適配已接入，仍有6種原作效果待移植。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 6 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Eight other types remain pending.\nC7: Tomb Raider and Upside Down adapters are enabled; six source effects remain pending."
     }
   },
   {
@@ -290,6 +290,19 @@ export const MIXOLOGY_PAGES = [
     "body": {
       "zh_TW": "飲用完成時沿視線發射32格声波；傷害採目前生命×Java float1.2，判定半徑為1格加目標半寬。命中後追加水平0.63、垂直0.28速度；每2格一個原生聲波粒子。採原生sonicBoom傷害，不直接覆寫目標HP。明示安全適配：不傷害玩家，不打自己的視覺helper；單次最多256個命中目標，無敵/保護拒傷時也不擊退。也可能命中動物與寵物，請勿對準它們測試。不檢查牆遮擋，與原作穿牆聲波相同；沒有爆炸/破壞方塊。新效果不重扣第二杯，回杯仍由原生food完成。以上仍未在遊戲驗收。",
       "en_US": "On completed drinking, a 32-block view ray deals current health × Java float1.2; hit radius is 1 + half target width. Adds horizontal .63 / vertical .28 impulse, with 16 native sonic particles. Uses native sonicBoom damage, never overwrites target HP. Explicit PvE-only adaptation: all players and Tavern helpers excluded; at most 256 hit targets; rejected damage has no knockback. May also hit animals and pets. Passes walls as the source does. No block destruction or second cup consumption. Engine testing is still required."
+    }
+  },
+  {
+    "id": "kaleidoscope_tavern:c7_java_parity",
+    "title": {
+      "zh_TW": "C7：Java 1.2.0 效果差異",
+      "zh_CN": "C7：Java 1.2.0 效果差异",
+      "en_US": "C7: Java 1.2.0 effect parity"
+    },
+    "body": {
+      "zh_TW": "C7 接入摸金校尉與倒立。摸金校尉沿原作 30% 機率卸下指定生物主手；可損耗物先降到剩1耐久再掉落。Bedrock穩定API沒有Java ItemEntity 40 tick拾取延遲欄位，因此掉落可立即拾取。倒立沿原作16格膨脹AABB把存活Mob命名為Grumm；Bedrock沒有相同的customNameVisible(false)腳本旗標。仍待：微醺、高跟鞋、穿草隱身、靈視、醇熱、長臂。",
+      "zh_CN": "C7 接入摸金校尉与倒立。摸金校尉沿原作 30% 概率卸下指定生物主手；可损耗物先降到剩1耐久再掉落。Bedrock稳定API没有Java ItemEntity 40 tick拾取延迟字段，因此掉落可立即拾取。倒立沿原作16格膨胀AABB把存活Mob命名为Grumm；Bedrock没有相同的customNameVisible(false)脚本旗标。仍待：微醺、高跟鞋、穿草隐身、灵视、醇热、长臂。",
+      "en_US": "C7 implements Tomb Raider and Upside Down. Tomb Raider follows the source 30% chance, source target tag and main-hand disarm; damageable equipment drops with one durability remaining. Stable Bedrock Script API exposes no Java ItemEntity 40-tick pickup-delay field. Upside Down follows the source inflated-16 AABB and names living mobs Grumm. Bedrock has no equivalent script flag for customNameVisible(false). Remaining: Slightly Tipsy, High Heels, Grass Stealth, Vision, Ardent Heat and Long Reach."
     }
   }
 ];

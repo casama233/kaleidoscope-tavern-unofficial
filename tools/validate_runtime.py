@@ -141,8 +141,9 @@ def main():
  check('C6_complete_glassware_holder_family',len([b for b in bindings['bindings']if b['kind']=='glassware_holder'])==1)
  check('C6_complete_holder_family',len([b for b in bindings['bindings']if b['kind']=='holder'])==1)
  check('C6_complete_pendant_lamp_family',len([b for b in bindings['bindings']if b['kind']=='pendant_lamp'])==3)
+ check('C6_complete_tilted_rack_family',len([b for b in bindings['bindings']if b['kind']=='tilted_rack'])==1)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','pendant_lamp','tilted_rack']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -200,6 +201,18 @@ def main():
    check('C6_holder_client_maps',len(hc['geometry'])==15 and len(hc['textures'])==15 and hc['scripts']['scale']=='0.95' and hc['render_controllers']==['controller.render.kt_runtime.holder_bottle'])
    check('C6_holder_render_arrays',len(rc['arrays']['geometries']['Array.kind'])==15 and len(rc['arrays']['textures']['Array.kind'])==15 and "holder_kind" in rc['geometry'])
    check('C6_holder_source_scope',len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
+  elif b['kind']=='tilted_rack':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_tilted_rack_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and len(perms)==4)
+   check('C6_tilted_rack_source_geometry',comps.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a6.tilted_rack' and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')=='geometry.kt_assets_a17.item_display_tilted_rack')
+   check('C6_tilted_rack_collision',comps.get('minecraft:collision_box')=={'origin':[-8,0,-3],'size':[16,14,10]} and perms[1]['components'].get('minecraft:collision_box')=={'origin':[-7,0,-8],'size':[10,14,16]} and perms[2]['components'].get('minecraft:collision_box')=={'origin':[-8,0,-7],'size':[16,14,10]} and perms[3]['components'].get('minecraft:collision_box')=={'origin':[-3,0,-8],'size':[10,14,16]})
+   check('C6_tilted_rack_component','kaleidoscope_tavern:tilted_rack'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
+   check('C6_tilted_rack_helper',prop['range']==[1,25] and prop['client_sync'] and 'kt_tilted_rack_visual'in helper['components']['minecraft:type_family']['family'])
+   tc=load(RP/'entity/runtime_tilted_rack_bottle_visual.entity.json')['minecraft:client_entity']['description'];trc=load(RP/'render_controllers/runtime_tilted_rack.render_controllers.json')['render_controllers']['controller.render.kt_runtime.tilted_rack_bottle']
+   check('C6_tilted_rack_client_maps',len(tc['geometry'])==25 and len(tc['textures'])==25 and tc['scripts']['scale']=='0.9' and tc['render_controllers']==['controller.render.kt_runtime.tilted_rack_bottle'])
+   check('C6_tilted_rack_render_arrays',len(trc['arrays']['geometries']['Array.kind'])==25 and len(trc['arrays']['textures']['Array.kind'])==25 and 'storage_kind'in trc['geometry'])
+   check('C6_tilted_rack_source_scope',b['slots']==3 and len(b['allowed_bases'])==22 and b['blocked_bases']==['brandy','carignan'] and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -216,6 +229,8 @@ def main():
   check('C6_pendant_source_recipe:'+style,pendant_recipe['pattern']==['C','C','B'] and pendant_recipe['key']['C']=={'item':'minecraft:chain'} and pendant_recipe['key']['B']=={'item':source} and pendant_recipe['result']=={'item':f'kaleidoscope_tavern:{style}_pendant_lamp','count':count})
  holder_recipe=load(BP/'recipes/holder.json')['minecraft:recipe_shaped']
  check('C6_holder_source_recipe',holder_recipe['pattern']==[' C ',' C ','I I'] and holder_recipe['key']['C']=={'item':'minecraft:chain'} and holder_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and holder_recipe['result']=={'item':'kaleidoscope_tavern:holder','count':1})
+ tilted_rack_recipe=load(BP/'recipes/tilted_rack.json')['minecraft:recipe_shaped']
+ check('C6_tilted_rack_source_recipe',tilted_rack_recipe['pattern']==['I  ','CI ','C I'] and tilted_rack_recipe['key']['C']=={'item':'minecraft:chain'} and tilted_rack_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and tilted_rack_recipe['result']=={'item':'kaleidoscope_tavern:tilted_rack','count':3})
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

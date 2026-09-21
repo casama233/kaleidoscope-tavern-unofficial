@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "酒館家具、杯架與單瓶架",
-      "zh_CN": "酒馆家具、杯架与单瓶架",
-      "en_US": "Tavern furniture, glassware and bottle holder"
+      "zh_TW": "酒館家具、單瓶架與三槽斜酒架",
+      "zh_CN": "酒馆家具、单瓶架与三槽斜酒架",
+      "en_US": "Tavern furniture, Holder and three-slot Tilted Rack"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發、酒館桌、吧台、4槽酒杯架、單瓶Holder與17款彩燈皆可合成、放置及回收。Batch 9酒杯架用4個block state保存空杯。Batch 10單瓶Holder直接復用既有品質酒瓶資料：world DP保存精確*_q1..q6 item ID，holder_kind只同步15種瓶型（empty_bottle + 14種Java允許的飲品base）；取出可原樣返還品質。來源holder_blocklist的10種瓶型精確拒收，雞尾酒與Molotov也不當作BottleBlockItem適配。佔用時只生成1個無碰撞visual helper，直接引用既有來源瓶子geometry/texture，位置0.5/0.125/0.75、scale 0.95、X -45°按Java renderer適配。來源方向碰撞與配方已還原。Java紅石上升沿隨機彈射飲品／Molotov本批次不做，避免為projectile路徑硬做不穩定近似。實機透明/模型朝向/多人仍待驗收。",
-      "zh_CN": "16色高脚凳、16色沙发、酒馆桌、吧台、4槽酒杯架、单瓶Holder与17款彩灯均可合成、放置和回收。Batch 10使用world DP保存精确*_q1..q6 item ID，holder_kind只同步empty_bottle加14种Java允许瓶型，取出保持原品质；来源blocklist的10种瓶型精确拒收，鸡尾酒与Molotov不纳入。占用时只生成1个无碰撞visual helper并直接引用既有来源瓶子模型。Java红石弹射本批次不做。实机模型朝向与多人仍待验收。",
-      "en_US": "Stools, sofas, Tavern table, Bar Counter, four-slot Glassware Holder, single Bottle Holder and all 17 string-light designs are craftable/placeable/recoverable. Batch 10 reuses the existing quality-bottle model: world DP stores the exact *_q1..q6 item ID while holder_kind syncs only 15 visual shapes (empty_bottle plus the 14 Java-allowed drink bases), so extraction preserves quality exactly. The 10 source holder_blocklist bases are rejected exactly; cocktails and excluded Molotov are not treated as Holder bottles. One occupied Holder spawns one collisionless visual helper that directly references existing source bottle geometry/textures at the Java renderer pose (0.5/0.125/0.75, scale .95, X -45°). Source directional collision and recipe are preserved. Java rising-edge redstone bottle/Molotov ejection is deliberately not adapted in this batch; real-client orientation/multiplayer acceptance remains NOT_RUN."
+      "zh_TW": "家具線已包含16色高腳凳、16色沙發、桌子、吧台、17款彩燈、4槽Glassware Holder、單瓶Holder、3款雙格吊燈與Batch 12三槽Tilted Rack。Tilted Rack完全復用品質瓶資料契約：world DP保存3個獨立精確*_q1..q6 ID，可混放不同瓶型；點擊位置依Java getLocalX規則隨朝向切成左／中／右三槽。來源blocklist只拒絕brandy與carignan，因此empty_bottle加22種品質飲品base可用；雞尾酒與Molotov不納入。每個有內容槽最多1個無碰撞visual helper，直接引用25種既有來源單瓶geometry/texture，按Java renderer scale0.9、X +22.5°與三個槽位位置適配。方向碰撞與輸出3個酒架的來源配方已還原。Java紅石上升沿隨機彈射飲品／Molotov仍不做，避免projectile路徑硬近似。實機瓶子位置、多人重連與觸控仍待驗收。",
+      "zh_CN": "家具线已包含高脚凳、沙发、桌子、吧台、彩灯、4槽杯架、单瓶Holder、3款双格吊灯与Batch 12三槽Tilted Rack。Tilted Rack用world DP保存3个独立精确*_q1..q6 ID，可混放不同瓶型；点击按Java getLocalX随朝向切成左/中/右三槽。来源blocklist只拒绝brandy与carignan，empty_bottle加22种品质饮品base可用。每槽最多1个无碰撞visual helper，复用25种来源瓶型。Java红石弹射仍不做。实机多人/触控仍待验收。",
+      "en_US": "The furniture line now includes stools, sofas, table, bar counter, 17 string lights, four-slot Glassware Holder, single Bottle Holder, three two-block Pendant Lamps, and Batch 12 three-slot Tilted Rack. Tilted Rack reuses exact-quality storage: world DP keeps three independent *_q1..q6 IDs and slots may hold different bottle bases. Java getLocalX is preserved for facing-aware left/middle/right hit selection. Only brandy and carignan are source-blocklisted, so empty_bottle plus 22 quality-drink bases are accepted; cocktails and excluded Molotov are not. Each occupied slot has at most one collisionless helper reusing one of 25 source bottle geometries/textures, adapted from Java scale .9, X +22.5° and slot positions. Directional collision and source recipe output 3 are preserved. Java redstone projectile ejection remains deliberately NOT_ADAPTED; real-client multiplayer/touch placement remains NOT_RUN."
     }
   },
   {

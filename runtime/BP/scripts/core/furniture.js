@@ -7,10 +7,10 @@ export const FACING=NS+':facing',CONNECTION=NS+':connection',AXIS=NS+':axis',POS
 export const SOFA_CONNECTION=Object.freeze({SINGLE:0,LEFT:1,RIGHT:2,MIDDLE:3,LEFT_CORNER:4,RIGHT_CORNER:5});
 export const SOFA_SEAT_ID=NS+':sofa_seat';
 export const TABLE_AXIS=Object.freeze({X:0,Z:1}),TABLE_POSITION=Object.freeze({SINGLE:0,LEFT:1,MIDDLE:2,RIGHT:3});
-export function furnitureItem(id){if(typeof id!=='string'||!id.startsWith(NS+':'))return undefined;const short=id.slice(NS.length+1);for(const color of COLORS){if(short===color+'_bar_stool')return {kind:'stool',color};if(short===color+'_sofa')return {kind:'sofa',color};}for(const color of LIGHT_COLORS)if(short==='string_lights_'+color)return {kind:'light',color};if(short==='table')return {kind:'table'};}
-export function furnitureBlock(id){if(typeof id!=='string'||!id.startsWith(NS+':'))return undefined;const short=id.slice(NS.length+1);for(const color of COLORS){if(short==='stool_'+color)return {kind:'stool',color};if(short===color+'_sofa')return {kind:'sofa',color};}for(const color of LIGHT_COLORS)if(short==='light_'+color)return {kind:'light',color};if(short==='table')return {kind:'table'};}
-export function itemId(f){const valid=f&&((['stool','sofa'].includes(f.kind)&&COLORS.includes(f.color))||(f.kind==='light'&&LIGHT_COLORS.includes(f.color))||f.kind==='table');check(valid,'UNKNOWN_FURNITURE');if(f.kind==='table')return NS+':table';return NS+':'+(f.kind==='stool'?f.color+'_bar_stool':f.kind==='sofa'?f.color+'_sofa':'string_lights_'+f.color);}
-export function blockId(f){itemId(f);if(['sofa','table'].includes(f.kind))return itemId(f);return NS+':'+(f.kind==='stool'?'stool_':'light_')+f.color;}
+export function furnitureItem(id){if(typeof id!=='string'||!id.startsWith(NS+':'))return undefined;const short=id.slice(NS.length+1);for(const color of COLORS){if(short===color+'_bar_stool')return {kind:'stool',color};if(short===color+'_sofa')return {kind:'sofa',color};}for(const color of LIGHT_COLORS)if(short==='string_lights_'+color)return {kind:'light',color};if(short==='table'||short==='bar_counter')return {kind:short};}
+export function furnitureBlock(id){if(typeof id!=='string'||!id.startsWith(NS+':'))return undefined;const short=id.slice(NS.length+1);for(const color of COLORS){if(short==='stool_'+color)return {kind:'stool',color};if(short===color+'_sofa')return {kind:'sofa',color};}for(const color of LIGHT_COLORS)if(short==='light_'+color)return {kind:'light',color};if(short==='table'||short==='bar_counter')return {kind:short};}
+export function itemId(f){const valid=f&&((['stool','sofa'].includes(f.kind)&&COLORS.includes(f.color))||(f.kind==='light'&&LIGHT_COLORS.includes(f.color))||['table','bar_counter'].includes(f.kind));check(valid,'UNKNOWN_FURNITURE');if(['table','bar_counter'].includes(f.kind))return NS+':'+f.kind;return NS+':'+(f.kind==='stool'?f.color+'_bar_stool':f.kind==='sofa'?f.color+'_sofa':'string_lights_'+f.color);}
+export function blockId(f){itemId(f);if(['sofa','table','bar_counter'].includes(f.kind))return itemId(f);return NS+':'+(f.kind==='stool'?'stool_':'light_')+f.color;}
 export function seatId(color){check(COLORS.includes(color),'UNKNOWN_COLOR');return NS+':seat_'+color;}
 export function seatColor(id){return COLORS.find(c=>seatId(c)===id);}
 export function seatFurniture(id){const color=seatColor(id);if(color)return {kind:'stool',color};if(id===SOFA_SEAT_ID)return {kind:'sofa'};}
@@ -24,8 +24,8 @@ export function facingYaw(facing){check(Number.isInteger(facing)&&facing>=0&&fac
 export function facingVector(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');return [{x:0,y:0,z:-1},{x:1,y:0,z:0},{x:0,y:0,z:1},{x:-1,y:0,z:0}][facing];}
 export function relativeSeatYaw(playerYaw,baseYaw){check(Number.isFinite(playerYaw)&&Number.isFinite(baseYaw),'INVALID_ROTATION');return Math.round(((playerYaw-baseYaw+180)%360+360)%360-180);}
 export function faceOffset(face){const o={Up:[0,1,0],Down:[0,-1,0],North:[0,0,-1],South:[0,0,1],East:[1,0,0],West:[-1,0,0]}[face];check(o,'INVALID_FACE');return {x:o[0],y:o[1],z:o[2]};}
-function sofaState(s){if(s===undefined)return undefined;check(Number.isInteger(s?.facing)&&s.facing>=0&&s.facing<=3&&Number.isInteger(s?.connection)&&s.connection>=0&&s.connection<=5,'INVALID_SOFA_STATE');return s;}
-export function sofaConnection(selfFacing,{left,right,front}={}){check(Number.isInteger(selfFacing)&&selfFacing>=0&&selfFacing<=3,'INVALID_FACING');left=sofaState(left);right=sofaState(right);front=sofaState(front);const cw=(selfFacing+1)%4,ccw=(selfFacing+3)%4;
+function connectionState(s){if(s===undefined)return undefined;check(Number.isInteger(s?.facing)&&s.facing>=0&&s.facing<=3&&Number.isInteger(s?.connection)&&s.connection>=0&&s.connection<=5,'INVALID_CONNECTION_STATE');return s;}
+export function connectedFurnitureConnection(selfFacing,{left,right,front}={}){check(Number.isInteger(selfFacing)&&selfFacing>=0&&selfFacing<=3,'INVALID_FACING');left=connectionState(left);right=connectionState(right);front=connectionState(front);const cw=(selfFacing+1)%4,ccw=(selfFacing+3)%4;
  const leftConnected=!!left&&(left.facing===ccw?[SOFA_CONNECTION.SINGLE,SOFA_CONNECTION.RIGHT,SOFA_CONNECTION.RIGHT_CORNER].includes(left.connection):left.facing===selfFacing);
  const rightConnected=!!right&&(right.facing===cw?[SOFA_CONNECTION.SINGLE,SOFA_CONNECTION.LEFT,SOFA_CONNECTION.LEFT_CORNER].includes(right.connection):right.facing===selfFacing);
  const frontLeftConnected=!!front&&front.facing===cw&&front.connection!==SOFA_CONNECTION.LEFT_CORNER;
@@ -37,6 +37,8 @@ export function sofaConnection(selfFacing,{left,right,front}={}){check(Number.is
  if(rightConnected)return SOFA_CONNECTION.LEFT;
  return SOFA_CONNECTION.SINGLE;
 }
+export function sofaConnection(selfFacing,neighbors={}){return connectedFurnitureConnection(selfFacing,neighbors);}
+export function barCounterConnection(selfFacing,neighbors={}){return connectedFurnitureConnection(selfFacing,neighbors);}
 function tableState(s){check(s&&[TABLE_AXIS.X,TABLE_AXIS.Z].includes(s.axis)&&Number.isInteger(s.position)&&s.position>=0&&s.position<=3,'INVALID_TABLE_STATE');return {axis:s.axis,position:s.position};}
 export function tableShouldLink(state,correctionAxis){check([TABLE_AXIS.X,TABLE_AXIS.Z].includes(correctionAxis),'INVALID_TABLE_AXIS');if(state===undefined)return false;state=tableState(state);return state.axis===correctionAxis?state.position===TABLE_POSITION.SINGLE:true;}
 export function tableCheckEastWest(base,{west,east}={}){base=tableState(base);if(base.axis===TABLE_AXIS.Z&&base.position!==TABLE_POSITION.SINGLE)return base;const e=tableShouldLink(east,TABLE_AXIS.Z),w=tableShouldLink(west,TABLE_AXIS.Z);if(e&&w)return {axis:TABLE_AXIS.X,position:TABLE_POSITION.MIDDLE};if(e)return {axis:TABLE_AXIS.X,position:TABLE_POSITION.LEFT};if(w)return {axis:TABLE_AXIS.X,position:TABLE_POSITION.RIGHT};return {axis:base.axis,position:TABLE_POSITION.SINGLE};}

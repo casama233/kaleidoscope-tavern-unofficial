@@ -13,7 +13,7 @@
 |---|---|---|
 | 釀造／壓榨 | 23酒桶＋6壓榨配方、品質飲品、容器交易、Cookery 隔離 | 原作特殊自動化與外部模組互動仍需實機逐項核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
-| 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat 適配 | **4項**：slightly_tipsy、high_heels、grass_stealth、long_reach |
+| 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | 美術資產已在基線 | `SofaBlock`、`TableBlock`、`BarCounterBlock`、`IConnectionBlock` 的連接狀態、碰撞與沙發乘坐 |
@@ -27,12 +27,11 @@
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188` 與金色果汁桶 `b30f34a` 官方修正已同步 | Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏、動態飲品色、透明排序、第一/三人稱精準姿態 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
-## 專屬效果剩餘 4 項：Java 真實語義
+## 專屬效果剩餘 3 項：Java 真實語義
 
 1. `slightly_tipsy`：客戶端相機 roll，由三個不同週期的 sin/cos 波疊加。
-2. `high_heels`：`STEP_HEIGHT_ADDITION +0.5`。
-3. `grass_stealth`：潛行且位於成熟作物/指定植物；週期性耗體力、清除32格內仇恨並阻止新鎖定；Java客戶端還隱藏玩家渲染。
-4. `long_reach`：方塊與實體互動距離各 `+3.0`。
+2. `grass_stealth`：潛行且位於成熟作物/指定植物；週期性耗體力、清除32格內仇恨並阻止新鎖定；Java客戶端還隱藏玩家渲染。
+3. `long_reach`：方塊與實體互動距離各 `+3.0`。
 
 ## Batch 1：Upside Down
 
@@ -86,3 +85,10 @@ Bedrock 轉換同步只為對應12個旋轉零厚度 cube 加入反面 UV，保�
 
 這是物品貼圖的官方顏色校正；遊戲內物品欄、手持與不同顯示設定的實際顏色仍為 **NOT_RUN**。
 
+## Batch 5：High Heels
+
+Java 1.2.0 的 `HighHeelsEffect` 沒有週期 tick 邏輯，而是對 Forge `STEP_HEIGHT_ADDITION` 加上固定 `+0.5`；目前來源酒效均為 amplifier 0，因此實際意圖是把原本約半格的自然跨步提升到可順暢跨越完整一格障礙。上游目前 `c4ec1880` 的該類仍與鎖定 1.2.0 語義一致。
+
+Bedrock 穩定 Script API 沒有可直接寫入玩家 step-height 的屬性，因此本批次採保守的「被障礙卡住才跨步」適配，而不是常駐跳躍增益或修改 `player.json`。每 tick 僅對持有效果、著地且非跳躍／飛行／滑翔／游泳／攀爬的玩家工作；讀取原生 movement input 與 yaw 算出移動方向，要求輸入強度足夠、水平速度已降到近乎 0、玩家已抵達方塊邊緣、正前方腳部是一格障礙且其上兩格為空，最後用 `tryTeleport(..., {checkForBlocks:true})` 上移 1 格並向前帶 0.2 格。另記錄上一次跨步的水平位置，沒有至少 0.35 格水平進展前拒絕再次抬升，避免沿兩格直牆連續「爬牆」。
+
+明示差異：這不是原生碰撞屬性的逐 tick 等價，而是碰撞觸發式移動適配；自訂非完整方塊、柵欄／牆、觸控搖桿、控制器與多人延遲仍必須實機驗收。White Lady 的 3600 秒 High Heels 已由實際飲用派發鏈路接通；酒桶品質資料中既有的 High Heels 也會走同一持續狀態適配。

@@ -8,7 +8,8 @@ export const CUSTOM_IMPLEMENTED=Object.freeze({
  'kaleidoscope_tavern:upside_down':'grumm_radius_name_adapter',
  'kaleidoscope_tavern:vision':'glowing_radius_adapter',
  'kaleidoscope_tavern:tomb_raider':'disarm_drop_adapter',
- 'kaleidoscope_tavern:ardent_heat':'sprint_break_adapter'
+ 'kaleidoscope_tavern:ardent_heat':'sprint_break_adapter',
+ 'kaleidoscope_tavern:high_heels':'one_block_auto_step_adapter'
 });
 export const CUSTOM_INSTANT=Object.freeze(['kaleidoscope_tavern:zenith','kaleidoscope_tavern:shriek_attack','kaleidoscope_tavern:upside_down']);
 const instant=id=>CUSTOM_INSTANT.includes(id);
@@ -44,3 +45,11 @@ export function ardentHeatBreakable(typeId){return typeof typeId==='string'&&ARD
 export function ardentHeatDrop(typeId){return ardentHeatBreakable(typeId)?(ARDENT_HEAT_DROPS[typeId]??typeId):undefined;}
 export function ardentFacingVector(yaw){check(Number.isFinite(yaw),'INVALID_YAW');const i=((Math.floor(yaw/90+.5)%4)+4)%4;return [{x:0,z:1},{x:-1,z:0},{x:0,z:-1},{x:1,z:0}][i];}
 export function ardentFrontBlocks(base,yaw){for(const axis of['x','y','z'])check(Number.isInteger(base?.[axis]),'INVALID_BLOCK_POS');const f=ardentFacingVector(yaw),out=[];const center={x:base.x+f.x,y:base.y,z:base.z+f.z};for(let dy=0;dy<=2;dy++)for(let d=-1;d<=1;d++)out.push(f.z!==0?{x:center.x+d,y:center.y+dy,z:center.z}:{x:center.x,y:center.y+dy,z:center.z+d});return out;}
+export const HIGH_HEELS_INPUT_MIN=.55;
+export const HIGH_HEELS_SPEED_MAX=.045;
+export const HIGH_HEELS_EDGE=.58;
+export function highHeelsDirection(yaw,movement){check(Number.isFinite(yaw)&&Number.isFinite(movement?.x)&&Number.isFinite(movement?.y),'INVALID_MOVEMENT');if(Math.hypot(movement.x,movement.y)<HIGH_HEELS_INPUT_MIN)return undefined;const r=yaw*Math.PI/180,c=Math.cos(r),sn=Math.sin(r),x=c*movement.x-sn*movement.y,z=sn*movement.x+c*movement.y;if(Math.abs(x)>=Math.abs(z))return {x:Math.sign(x),z:0};return {x:0,z:Math.sign(z)};}
+export function highHeelsBlocked(input,velocity){check(Number.isFinite(input?.x)&&Number.isFinite(input?.y)&&Number.isFinite(velocity?.x)&&Number.isFinite(velocity?.y)&&Number.isFinite(velocity?.z),'INVALID_MOVEMENT');return Math.hypot(input.x,input.y)>=HIGH_HEELS_INPUT_MIN&&Math.hypot(velocity.x,velocity.z)<=HIGH_HEELS_SPEED_MAX&&Math.abs(velocity.y)<=.08;}
+function highHeelsCardinal(direction){return (Math.abs(direction?.x)===1&&direction?.z===0)||(direction?.x===0&&Math.abs(direction?.z)===1);}
+export function highHeelsNearBoundary(location,direction){check(Number.isFinite(location?.x)&&Number.isFinite(location?.y)&&Number.isFinite(location?.z),'INVALID_LOCATION');check(highHeelsCardinal(direction),'INVALID_DIRECTION');const fx=location.x-Math.floor(location.x),fz=location.z-Math.floor(location.z),low=1-HIGH_HEELS_EDGE;if(direction.x>0)return fx>=HIGH_HEELS_EDGE;if(direction.x<0)return fx<=low;if(direction.z>0)return fz>=HIGH_HEELS_EDGE;return fz<=low;}
+export function highHeelsTarget(location,direction){check(Number.isFinite(location?.x)&&Number.isFinite(location?.y)&&Number.isFinite(location?.z),'INVALID_LOCATION');check(highHeelsCardinal(direction),'INVALID_DIRECTION');return {x:location.x+direction.x*.2,y:location.y+1,z:location.z+direction.z*.2};}

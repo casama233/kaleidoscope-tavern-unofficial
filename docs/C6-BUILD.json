@@ -39,7 +39,6 @@
   "native_effect_types": 21,
   "custom_effect_types_pending": [
     "slightly_tipsy",
-    "high_heels",
     "grass_stealth",
     "long_reach"
   ],
@@ -51,7 +50,7 @@
   "shaker_input_drink_ids": 69,
   "gesture": "native start/release/stop; no item replacement on start; explicit two-click fallback",
   "potion_input": "VALIDATED_NATIVE_IDENTITY",
-  "effect_hooks": "native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown/Vision/TombRaider/ArdentHeat adapters",
+  "effect_hooks": "native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown/Vision/TombRaider/ArdentHeat/HighHeels adapters",
   "portable_payload": "kaleidoscope_tavern:shaker_data schema1",
   "pour_duration_ticks": 12,
   "original_put_animation": "bound to successful station ingredient commits",
@@ -70,7 +69,8 @@
     "upside_down": "Grumm naming adapter over Java 16-block inflated AABB using Bedrock mob-family query",
     "vision": "native Glowing radius adapter on Java 50-tick countdown cadence",
     "tomb_raider": "30% disarm/drop adapter with 40-tick pickup lock",
-    "ardent_heat": "per-tick sprint 3x3 source-stone breaking adapter with exhaustion/armor/bare-collision costs"
+    "ardent_heat": "per-tick sprint 3x3 source-stone breaking adapter with exhaustion/armor/bare-collision costs",
+    "high_heels": "grounded blocked-movement one-block auto-step adapter for source +0.5 step-height intent"
   },
   "potion_data": "native potion identity snapshot + checked resolve; unknown/custom metadata rejected",
   "source_drink_native_effect_types": 14,

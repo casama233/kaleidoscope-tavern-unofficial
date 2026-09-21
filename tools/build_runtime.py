@@ -13,7 +13,6 @@ def build_creative_catalog():
  # A few source-main blocks are normalized into the Items category so they can stay
  # beside brewing materials/tools rather than being scattered into Construction.
  source_main=[
-  'guidebook','recipe_book', # Bedrock access helpers; source has no standalone guide items.
   'grapevine','grape','ice_grape','gold_grape','green_grape','trellis',
   'pressing_tub','barrel','tap','shaker',
   'grape_bucket','ice_grape_bucket','gold_grape_bucket','green_grape_bucket','sweet_berries_bucket','glow_berries_bucket',
@@ -39,6 +38,12 @@ def build_creative_catalog():
   *[f'{p}_painting' for p in paintings]
  ]
  def exists(short):return (BP/'items'/f'{short}.json').is_file() or (BP/'blocks'/f'{short}.json').is_file()
+ # The Cookery family guide is now primary. Keep the old Tavern books craftable only
+ # as compatibility/fallback items, but do not expose a second guide family in Creative.
+ for short in ['guidebook','recipe_book']:
+  p=BP/'items'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:item']['description'].pop('menu_category',None);dump(p,d)
  # These are source Tavern-main stations/frames. Keep their actual block IDs but move
  # only the creative-menu category; gameplay/block behavior is untouched.
  for short in ['trellis','pressing_tub','tap']:
@@ -81,7 +86,7 @@ def build_creative_catalog():
    'construction':{'name':keys[1],'icon':NS+':bar_cabinet','items':deco_items}
   },
   'quality_drinks':'creative catalog exposes Q6 only, matching Java getMaxLevelDrink',
-  'bedrock_only_front_items':[NS+':guidebook',NS+':recipe_book'],
+  'fallback_books_hidden_from_creative':[NS+':guidebook',NS+':recipe_book],
   'materials_policy':'No standalone Tavern materials group; cultivation ingredients stay in Tavern main until a verified host merge is safe.',
   'cookery_merge':{
    'status':'DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED',
@@ -94,7 +99,7 @@ def build_creative_catalog():
 def main():
  lock=json.loads((ROOT/'compat/cookery/cookery.lock.json').read_text());v=[0,1,0]
  bpuid=uid('bp');rpuid=uid('rp');
- dump(BP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 功能開發版','description':'Independent Tavern guides + extension API + first brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.','uuid':bpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':uid('data'),'version':v},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':uid('script'),'version':v}],'dependencies':[{'uuid':rpuid,'version':v},{'uuid':lock['bp']['uuid'],'version':lock['bp']['version']},{'module_name':'@minecraft/server','version':'2.7.0'},{'module_name':'@minecraft/server-ui','version':'2.0.0'}]})
+ dump(BP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 功能開發版','description':'Cookery guide chapter + fallback Tavern guides, extension API and brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.','uuid':bpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':uid('data'),'version':v},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':uid('script'),'version':v}],'dependencies':[{'uuid':rpuid,'version':v},{'uuid':lock['bp']['uuid'],'version':lock['bp']['version']},{'module_name':'@minecraft/server','version':'2.7.0'},{'module_name':'@minecraft/server-ui','version':'2.0.0'}]})
  dump(RP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 原作資源','description':'A17 source art reused unchanged; no Cookery assets bundled. CC BY-NC-SA 4.0.','uuid':rpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'resources','uuid':uid('resources'),'version':v}],'dependencies':[{'uuid':lock['rp']['uuid'],'version':lock['rp']['version']}]})
  dump(ROOT/'config.json',{'type':'minecraftBedrock','name':'Kaleidoscope Tavern C1','namespace':NS,'targetVersion':'1.26.50','packs':{'behaviorPack':'./runtime/BP','resourcePack':'./runtime/RP'},'experimentalGameplay':{},'authors':['Unofficial Tavern port contributors']})
  reg=json.loads((A/'interfaces/asset-registry.json').read_text());vis={x['key']:x for x in reg['visuals']}; itemart={x.get('item'):x for x in json.loads((A/'interfaces/item-art-map.json').read_text())['entries'] if x.get('item')}

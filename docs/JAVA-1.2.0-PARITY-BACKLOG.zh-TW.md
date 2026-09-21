@@ -15,7 +15,7 @@
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat 適配 | **4項**：slightly_tipsy、high_heels、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
-| String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向 | waterlogging、自然支撐/掉落、精確 selection |
+| String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | 美術資產已在基線 | `SofaBlock`、`TableBlock`、`BarCounterBlock`、`IConnectionBlock` 的連接狀態、碰撞與沙發乘坐 |
 | 酒櫃／酒架／杯架 | 多數原始模型/貼圖已有 | `BarCabinetBlock`、`CellarCabinetBlock`、`CircularRackBlock`、`TiltedRackBlock`、`GlasswareHolderBlock` 的存放、展示與互動 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
@@ -69,4 +69,12 @@ Java 1.2.0 的 `ArdentHeatEffect` 每tick只處理玩家。效果自然剩餘<=1
 Bedrock適配精確列出10種可撞碎方塊，不使用名稱模糊匹配；以1tick排程讀 `Entity.isSprinting`，對前方3×3逐塊交易式設air並生成明確原版掉落（stone→cobblestone、deepslate→cobbled_deepslate，其餘自身），掉落失敗時恢復原方塊。本tick有成功破塊才增加 exhaustion 1.2，並按已穿裝備或裸裝DP計數施加一次成本。5tick持續狀態層處理自然到期與飢餓／飽和耗盡後的600tick Hunger。
 
 明示差異：Java使用方塊loot-table和世界RNG；本適配不模擬工具／附魔／完整loot-table，裝備選擇也不宣稱同一RNG序列。Exhaustion到食物／飽和的換算交給Bedrock 2.7.0玩家exhaustion元件；到期／耗盡偵測最多晚現有5tick巡檢窗口。實機仍需驗證掉落、盔甲破損、飢餓換算、多人同步與每tick衝刺巡檢負載。
+
+## Post-1.2 視覺同步 Batch 1：洋紅彩燈
+
+官方上游在 2026-07-21 的 `c4ec1880bd44cf3139d3ba744ab30bb379cf1416` 提交「修复品红色小灯的模型面剔除问题」。與前一提交 `b30f34a` 做結構比對後，兩版仍是同一組19個元素，座標、旋轉與貼圖均未改；唯一功能差異是12個斜向零厚度燈面由只有 `up`，改成同時具有 `up + down`。
+
+Bedrock 轉換同步只為對應12個旋轉零厚度 cube 加入反面 UV，保持 geometry identifier、19個 cube、材質、貼圖與方塊四方向不變。官方 Java 模型快照鎖在 `data/upstream/post-1.2/c4ec1880/string_lights_magenta.json`，來源與轉換說明見 `docs/UPSTREAM-VISUAL-SYNC.json`。
+
+這解決的是單面 alpha-test 幾何在背視角被剔除的來源問題；Minecraft Bedrock 實機的正反面、四方向、手持 item_visual 與行動端渲染仍為 **NOT_RUN**。
 

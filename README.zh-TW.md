@@ -18,7 +18,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 | 下界特調／tomb_raider | 玩家持續效果生效時，攻擊原作指定15類目標有30% Java float32機率卸下主手；耐久物直接改到僅剩1耐久，生成真實掉落並封鎖拾取40 tick | Bedrock用 `afterEvents.entityHurt` 安全改裝，晚於Java `LivingHurtEvent`；致死一擊時序與非玩家效果持有者不宣稱等價 |
 | 深水炸彈／黃銅之心／ardent_heat | 兩杯都給300秒醇熱；衝刺時每tick檢查正前方3×3，只撞碎原作10種基礎石材；成功撞牆一次追加1.2 exhaustion，隨機損1件已穿盔甲1耐久，裸裝則每第5次成功撞擊受1傷；效果自然結束或飢餓+飽和耗盡後補600tick Hunger | 方塊掉落用明確原版對照（stone→cobblestone、deepslate→cobbled_deepslate，其餘自掉），不是Java loot-table完整模擬；飢餓換算交由Bedrock exhaustion元件，結束判定最多晚5tick |
 | 十六色高腳凳 | 所有原作配色可合成、潛行放置、空手乘坐、潛行離座、回收；每張一個原生座位；座墊／靠背／扶手一起隨乘客轉向，底座不转 | 坐點與原生人物偏移、碰撞、Steve/Alex、手機、多人動畫待實機校正；使用look yaw而非Java yBodyRot |
-| 十七款彩燈 | 原作各款獨立幾何與貼圖、四方向、亮度15、原生染料換款；同色不消耗；可回收當前款式 | 不支援水浸、紅石開關或彩色動態光源；選取框為近似，無自然掛接/掉落還原 |
+| 十七款彩燈 | 原作各款獨立幾何與貼圖、四方向、亮度15、原生染料換款；同色不消耗；可回收當前款式；洋紅款已同步官方 `c4ec188` 斜面背面剔除修正 | 不支援水浸、紅石開關或彩色動態光源；選取框為近似，無自然掛接/掉落還原；洋紅修正仍待實機多視角驗收 |
 | 原作家具合成 | 16凳＋17彩燈，共33個新增工作台配方 | Java `c:ingots/iron`明示映射到原版iron_ingot，不冒充任意模組鐵錠標籤 |
 | 獨立指南 | 新家具、聲波頁；現有幽匿特調頁與酒效完成度更新 | 不注入Cookery指南、語言、書籤或玩家偏好 |
 
@@ -79,7 +79,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 
 ## 資源與持久化
 
-所有既有A17模型/貼圖保持。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
+大多數 A17 模型／貼圖保持；唯一例外是洋紅彩燈幾何已同步官方 post-1.2 提交 `c4ec188` 的面剔除修正（貼圖未變，19個元素位置未變，只為12個斜向零厚度面補背面）。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
 
 家具由方塊類型與facing保存狀態，不另存一份家具物品庫存到world DP。高腳凳helper只提供視覺和原生rideable，按座標錨點重建/去重。區塊未載入不當空氣；helper錯色、失去主方塊或移位則 eject/remove，不生成第二份物品。
 
@@ -99,9 +99,9 @@ python tools/audit_rebuild.py
 python tools/package_c6.py
 ```
 
-不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其餘531總量中的530例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其餘532總量中的531例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
 
-目前累積200個核心測試＋331個適配層測試＝531例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+目前累積201個核心測試＋331個適配層測試＝532例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
 
 **沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
 

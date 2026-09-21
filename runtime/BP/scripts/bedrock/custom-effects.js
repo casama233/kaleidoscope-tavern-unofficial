@@ -1,10 +1,11 @@
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {system,world} from '@minecraft/server';
+import {EquipmentSlot,system,world} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,tombRaiderTarget,tombRaiderProc} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map();
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
@@ -53,6 +54,38 @@ export function pulseVision(p,amplifier){
  if(newGlow)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}
  return targets;
 }
+export function handleTombRaider(event,rng=Math.random){
+ const attacker=event.damageSource?.damagingEntity,target=event.hurtEntity;
+ try{
+  if(!attacker||attacker.typeId!=='minecraft:player'||!target||attacker.id===target.id)return false;
+  if(!activeStatus(statusNow(attacker),'kaleidoscope_tavern:tomb_raider')||!tombRaiderTarget(target.typeId))return false;
+  customEffectDiagnostics.tombAttempts++;
+  if(!tombRaiderProc(rng()))return false;
+  const equipment=target.getComponent?.('minecraft:equippable'),original=equipment?.getEquipment?.(EquipmentSlot.Mainhand);
+  if(!equipment||!original)return false;
+  const drop=original.clone();
+  const durability=drop.getComponent?.('minecraft:durability');
+  if(durability&&!durability.unbreakable)durability.damage=Math.max(0,durability.maxDurability-1);
+  if(equipment.setEquipment(EquipmentSlot.Mainhand,undefined)===false)return false;
+  let itemEntity;
+  try{
+   itemEntity=target.dimension.spawnItem(drop,target.location);
+   itemEntity.setDynamicProperty(TOMB_PICKUP_UNLOCK,system.currentTick+40);
+  }catch(e){
+   try{itemEntity?.remove();}catch{}
+   try{if(equipment.setEquipment(EquipmentSlot.Mainhand,original)===false)customEffectDiagnostics.tombRollbackFailures++;}catch{customEffectDiagnostics.tombRollbackFailures++;}
+   throw e;
+  }
+  customEffectDiagnostics.tombDisarms++;return true;
+ }catch(e){error(e);return false;}
+}
+export function blockTombPickup(event){
+ try{
+  const unlock=event.item?.getDynamicProperty?.(TOMB_PICKUP_UNLOCK);
+  if(typeof unlock==='number'&&system.currentTick<unlock){event.cancel=true;customEffectDiagnostics.tombPickupBlocks++;return true;}
+ }catch(e){error(e);}
+ return false;
+}
 export function handleKill(event){
  const victim=event.deadEntity,p=event.damageSource?.damagingEntity;
  try{
@@ -88,6 +121,8 @@ export function tickCustomEffects(){
 }
 export function installCustomEffects(){
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
+ world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
+ world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
  world.afterEvents.playerSpawn.subscribe(e=>{tracks.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
  world.afterEvents.playerLeave.subscribe(e=>{const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);});

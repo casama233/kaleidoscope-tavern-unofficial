@@ -36,6 +36,7 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
  const provider=typeof payloadOrProvider==='function'?payloadOrProvider:()=>payloadOrProvider;
  const dynamic=typeof payloadOrProvider==='function';
  let active=false,disposed=false,hostReady=false,dirty=true,lastSent=-Infinity,successfulTransfers=0,sendFailures=0,runningHandle,queuedHandle,lastRevision=null,lastMessageCount=0;
+ try{const initial=provider(),revision=dynamic?cookeryGuideRevision(initial):COOKERY_GUIDE_REVISION;lastMessageCount=encodeCookeryGuideMessages(initial,{revision}).length;}catch{/* surfaced on first host-ready publish */}
  const scheduled=new Set();
  const later=(fn,ticks)=>{const handle=system.runTimeout(()=>{scheduled.delete(handle);if(!disposed)fn();},ticks);scheduled.add(handle);return handle;};
  const queue=()=>{

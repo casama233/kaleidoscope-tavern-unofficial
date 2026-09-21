@@ -3,7 +3,7 @@ import {NS,CABINET_TYPES,CABINET_POSITION,barCabinetItem,barCabinetClickedLeft,b
 import {FACING,POSITION,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,plus,tell,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const HELPER=NS+':bar_cabinet_bottle_visual',ANCHOR=NS+':bar_cabinet_anchor',store=new BarCabinetStore(world),visuals=new Map();let cursor=0;
 export const barCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};

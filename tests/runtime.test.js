@@ -90,16 +90,21 @@ test('extension pressing recipe and guide appear together and output correct mea
 });
 
 const reference=process.env.COOKERY_REFERENCE_ROOT;
-test('optional real Cookery API modules coexist on mocked bus without Tavern guide injection',{skip:!reference},async()=>{
+test('optional real Cookery API modules keep recipes intact and accept one Tavern guide chapter',{skip:!reference},async()=>{
  // Read-only execution of uploaded API modules in test doubles. NOT full Cookery/game startup.
  const recipes=await import(pathToFileURL(path.join(reference,'scripts/api/extensionRegistry.js')));
  const guides=await import(pathToFileURL(path.join(reference,'scripts/api/guidebookExtensionRegistry.js')));
- const before=JSON.stringify({w:recipes.getWokRecipes(),s:recipes.getStockpotExactRecipes(),g:guides.getGuidebookExtensions()});
+ const beforeRecipes=JSON.stringify({w:recipes.getWokRecipes(),s:recipes.getStockpotExactRecipes()});
+ const beforeGuides=guides.getGuidebookExtensions().length;
  system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
- const client=registerTavernExtension(system,payload,{log:()=>{}});system.advance(60);
+ system.sendScriptEvent('kaleidoscope_cookery:guidebook_ping',JSON.stringify({api:1,source:'runtime_test'}));
+ const client=registerTavernExtension(system,payload,{log:()=>{}});system.advance(80);
  assert(client.registered);assert.equal(diagnosticSnapshot().cookeryHandshakeObserved,true);
- assert.equal(JSON.stringify({w:recipes.getWokRecipes(),s:recipes.getStockpotExactRecipes(),g:guides.getGuidebookExtensions()}),before);
- assert(!system.sent.some(x=>/^kaleidoscope_cookery:(?:register_|guidebook_(?:begin|chunk|end))/.test(x.id)));
+ assert.equal(JSON.stringify({w:recipes.getWokRecipes(),s:recipes.getStockpotExactRecipes()}),beforeRecipes);
+ const afterGuides=guides.getGuidebookExtensions();assert.equal(afterGuides.length,beforeGuides+1);
+ assert(JSON.stringify(afterGuides).includes('kaleidoscope_tavern:tavern'));
+ assert(system.sent.some(x=>x.id==='kaleidoscope_cookery:guidebook_begin'));
+ assert(system.sent.some(x=>x.id==='kaleidoscope_cookery:guidebook_end'));
  client.dispose();
 });
 

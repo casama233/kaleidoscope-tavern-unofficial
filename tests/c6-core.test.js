@@ -6,6 +6,8 @@ import {TILTED_BLOCKED,tiltedRackItem,tiltedRackBlockedItem,tiltedRackSlot,empty
 import {circularRackItem,circularRackSlot,emptyCircularRack,circularRackPut,circularRackTake,circularRackKey,circularRackAnchor,parseCircularRackAnchor,circularRackVisualPose,circularParticlePoint,validateCircularRack} from '../runtime/BP/scripts/core/circular-rack.js';
 import {CABINET_TYPES,CABINET_POSITION,BAR_CABINET_IRREGULAR,barCabinetItem,barCabinetIrregular,emptyBarCabinet,validateBarCabinet,barCabinetClickedLeft,barCabinetPut,barCabinetTake,barCabinetPosition,barCabinetKey,barCabinetAnchor,parseBarCabinetAnchor,barCabinetVisualPose} from '../runtime/BP/scripts/core/bar-cabinet.js';
 import {cellarCabinetItem,cellarCabinetSlot,emptyCellarCabinet,validateCellarCabinet,cellarCabinetPut,cellarCabinetTake,cellarCabinetPosition,cellarCabinetKey,cellarCabinetAnchor,parseCellarCabinetAnchor,cellarCabinetVisualPose} from '../runtime/BP/scripts/core/cellar-cabinet.js';
+import {COOKERY_GUIDE_EVENTS,COOKERY_GUIDE_SOURCE,COOKERY_GUIDE_REVISION,encodeCookeryGuideMessages} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
+import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 import {readStatus,addStatus,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,TOMB_RAIDER_TYPES,TOMB_RAIDER_CHANCE,tombRaiderTarget,tombRaiderProc,ARDENT_HEAT_BLOCKS,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,HIGH_HEELS_INPUT_MIN,HIGH_HEELS_SPEED_MAX,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../runtime/BP/scripts/core/custom-effects.js';
 const bytes=p=>fs.readFileSync(new URL('../'+p,import.meta.url));const load=p=>JSON.parse(bytes(p));const sha256=p=>createHash('sha256').update(bytes(p)).digest('hex');const gitBlob=p=>{const b=bytes(p);return createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');};const zero={x:0,y:0,z:0},forward={x:0,y:0,z:1};
 const box=(x,y,z,width=.6)=>({center:{x,y,z},extent:{x:width/2,y:1,z:width/2}});
@@ -81,3 +83,22 @@ test('Cellar Cabinet state preserves nine independent exact-quality IDs',()=>{le
 test('Cellar Cabinet same-facing line connection uses source single-left-middle-right states',()=>{const n={typeId:NS+':cellar_cabinet',facing:0};assert.equal(cellarCabinetPosition(0,{}),CABINET_POSITION.SINGLE);assert.equal(cellarCabinetPosition(0,{left:n}),CABINET_POSITION.RIGHT);assert.equal(cellarCabinetPosition(0,{right:n}),CABINET_POSITION.LEFT);assert.equal(cellarCabinetPosition(0,{left:n,right:n}),CABINET_POSITION.MIDDLE);assert.equal(cellarCabinetPosition(0,{left:{typeId:NS+':bar_cabinet',facing:0}}),CABINET_POSITION.SINGLE);});
 test('Cellar Cabinet source renderer positions form3x3 shelf with scale1 and -90 X rotation',()=>{const a=cellarCabinetVisualPose(0,0);assert(Math.abs(a.offset.x-.825)<1e-12);assert(Math.abs(a.offset.y-.78)<1e-12);assert.equal(a.offset.z,.875);assert.deepEqual(a.rotation,{x:-90,y:0});const m=cellarCabinetVisualPose(4,0);assert(Math.abs(m.offset.x-.5)<1e-12);assert(Math.abs(m.offset.y-.49)<1e-12);assert.equal(m.offset.z,.875);assert.deepEqual(m.rotation,{x:-90,y:0});const p=cellarCabinetVisualPose(8,0);assert(Math.abs(p.offset.x-.175)<1e-12);assert(Math.abs(p.offset.y-.2)<1e-12);assert.deepEqual(cellarCabinetVisualPose(4,1).rotation,{x:-90,y:90});const c=load('runtime/RP/entity/runtime_cellar_cabinet_bottle_visual.entity.json')['minecraft:client_entity'].description;assert.equal(c.scripts.scale,'1.0');assert.equal(Object.keys(c.geometry).length,15);});
 test('Cellar Cabinet uses source four geometries, full block collision and20 trapdoor-expanded recipes',()=>{const b=load('runtime/BP/blocks/cellar_cabinet.json')['minecraft:block'];assert.deepEqual(b.description.states[POSITION],[0,1,2,3]);assert.deepEqual(b.description.states[FACING],[0,1,2,3]);assert.deepEqual(b.components['minecraft:collision_box'],{origin:[-8,0,-8],size:[16,16,16]});assert.equal(b.permutations.filter(x=>x.condition.includes('position')).length,4);const names=fs.readdirSync(new URL('../runtime/BP/recipes/',import.meta.url)).filter(x=>x.startsWith('cellar_cabinet')&&x.endsWith('.json'));assert.equal(names.length,20);const traps=new Set(names.map(n=>load('runtime/BP/recipes/'+n)['minecraft:recipe_shaped'].key.T.item));assert.equal(traps.size,20);assert(traps.has('minecraft:oak_trapdoor'));assert(traps.has('minecraft:waxed_oxidized_copper_trapdoor'));});
+
+test('Cookery guide payload is one organized Tavern family chapter',()=>{
+ assert.equal(COOKERY_GUIDE_PAYLOAD.api,1);assert.equal(COOKERY_GUIDE_PAYLOAD.id,'kaleidoscope_tavern:tavern');
+ assert.deepEqual(COOKERY_GUIDE_PAYLOAD.categories.map(x=>x.id),['brewing','mixology','tavern']);
+ assert.equal(COOKERY_GUIDE_PAYLOAD.entries.length,12);
+ assert(COOKERY_GUIDE_PAYLOAD.entries.every(x=>COOKERY_GUIDE_PAYLOAD.categories.some(c=>c.id===x.category)));
+ assert.equal(new Set(COOKERY_GUIDE_PAYLOAD.entries.map(x=>x.id)).size,COOKERY_GUIDE_PAYLOAD.entries.length);
+ assert.equal(COOKERY_GUIDE_PAYLOAD.text.zh_TW.title,'森羅物語：酒館');
+ assert.equal(COOKERY_GUIDE_PAYLOAD.names.zh_TW['kaleidoscope_tavern:guide_bottle_display'],'擺放酒瓶');
+});
+test('Cookery guide publisher uses bounded ASCII begin/chunk/end packets and roundtrips payload',()=>{
+ const packets=encodeCookeryGuideMessages(COOKERY_GUIDE_PAYLOAD);
+ assert.equal(packets[0].id,COOKERY_GUIDE_EVENTS.begin);assert.equal(packets.at(-1).id,COOKERY_GUIDE_EVENTS.end);
+ assert(packets.slice(1,-1).every(x=>x.id===COOKERY_GUIDE_EVENTS.chunk));
+ assert(packets.every(x=>x.message.length<=2048&&/^[\x00-\x7f]*$/.test(x.message)));
+ const begin=JSON.parse(packets[0].message);assert.equal(begin.source,COOKERY_GUIDE_SOURCE);assert.equal(begin.revision,COOKERY_GUIDE_REVISION);
+ const raw=packets.slice(1,-1).map(x=>x.message.split('\n').slice(4).join('\n')).join('');
+ assert.deepEqual(JSON.parse(raw),COOKERY_GUIDE_PAYLOAD);
+});

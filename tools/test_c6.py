@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run C6 accumulated logic and event-adapter tests. No Minecraft is started."""
+"""Run C6 accumulated logic and event-adapter tests; print failing TAP. No Minecraft is started."""
 from pathlib import Path
 import argparse,os,re,json,subprocess,sys,shutil
 ROOT=Path(__file__).resolve().parents[1]
@@ -12,6 +12,9 @@ def main():
   run=subprocess.run(cmd,cwd=ROOT,env=env,text=True,capture_output=True);text=run.stdout+run.stderr;(ROOT/f'docs/{name}-test.tap').write_text(text)
   totals={k:int(re.search(r'^# '+k+r' (\d+)',text,re.M).group(1))for k in['tests','pass','fail','skipped'] if re.search(r'^# '+k+r' (\d+)',text,re.M)}
   reports.append({'suite':name,'exit_code':run.returncode,**totals});print(name,totals)
+  if run.returncode:
+   print(f'--- {name} failure output ---')
+   print(text)
  typecmd=['tsc','--noEmit','--strict','--module','NodeNext','--moduleResolution','NodeNext','--target','ES2022','tests/sdk-types.ts']
  if shutil.which('tsc'):
   t=subprocess.run(typecmd,cwd=ROOT,capture_output=True,text=True);(ROOT/'docs/sdk-types.log').write_text(t.stdout+t.stderr);typed={'status':'PASS'if t.returncode==0 else'FAIL','exit_code':t.returncode,'scope':'Public SDK declaration and positive/negative examples, not Minecraft API types'}

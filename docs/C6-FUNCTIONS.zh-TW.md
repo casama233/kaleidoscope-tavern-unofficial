@@ -3,6 +3,7 @@
 | 項目 | 原作依據 | C6 接法 | 不能據此宣稱 |
 |---|---|---|---|
 | Shriek Attack | 已上傳JAR的ShriekAttackEffect：32距離、1+半寬射線，當前生命×float1.2，水平.63/垂直.28，2格粒子步距 | core/combat-effects.js獨立幾何；bedrock/combat-effects.js原生sonicBoom傷害、addImpulse與聲波粒子 | PvP等价、每種保護插件、無敵穿透、原生引擎已測 |
+| Upside Down | 1.2.0 `UpsideDownEffect`：使用者AABB inflate 16；存活 `Mob` 全部 `setCustomName("Grumm")`，名稱不強制顯示 | `core/custom-effects.js` 做AABB相交；`bedrock/custom-effects.js` 用 `families:['mob']` + health + `getAABB()`，寫入 `Entity.nameTag='Grumm'` | `setCustomNameVisible(false)` 沒有通用Script API直接對等；Grumm倒立與名稱牌表現仍需實機驗收 |
 | 輸出安全 | 原作射線可能命中玩家 | 明確PvE-only、排除自家helper、最多256命中、拒傷不擊退 | 所有友善生物安全；寵物仍可能被擊中 |
 | 座位幾何 | 原作SitEntity anchor .875，getPassengerRidingPosition另有顯式-.0625 | native rideable seat位置 .8125候選；一名player；不自動吸入附近生物 | Java基類與Bedrock原生人物附加偏移相同、腿部已校正 |
 | 座墊轉動 | source renderRot/moveRenderRot 隨乘客yBodyRot插值，非乘客則保留 | 每5tick用player look yaw更新同步屬性；只轉上層bone，客戶端math.lerprotate短弧度插值 | head/body yaw完全等價、Steve/Alex所有skin已驗收 |
@@ -15,6 +16,8 @@
 
 - `runtime/BP/scripts/core/combat-effects.js`：純向量、射線、float32傷害、擊退、粒子位置。
 - `runtime/BP/scripts/bedrock/combat-effects.js`：世界查詢、原生傷害、逐目標例外、PvE政策、去重。
+- `core/custom-effects.js`：持續/瞬時自訂效果契約，以及 Upside Down 的AABB相交判定。
+- `bedrock/custom-effects.js`：Bloody Mary、XP Drain、Zenith、Shriek、Upside Down 的引擎適配。
 - `core/furniture.js`：顏色/物品/方塊/錨點/朝向契約。
 - `bedrock/furniture.js`：投放、騎乘、染色、回收交易、helper去重与卸載清理。
 - `tools/build_c6.py`：33家具物品、33行為方塊、16座位实体、33配方、衍生圖示与獨立指南。

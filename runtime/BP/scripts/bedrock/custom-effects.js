@@ -2,9 +2,9 @@ import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {system,world} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map();
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 export function statusNow(p){const old=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id);return advanceStatus(old,track?Math.max(0,system.currentTick-track.tick):0);}
@@ -13,6 +13,18 @@ export function applyCustomEffect(p,row){
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
  if(p?.typeId!=='minecraft:player')return false;
  if(row.effect==='kaleidoscope_tavern:shriek_attack')return performShriek(p);
+ if(row.effect==='kaleidoscope_tavern:upside_down'){
+  // Java uses user.getBoundingBox().inflate(16) and only living Mob entities.
+  // Bedrock family=mob is the closest class filter; exact AABB overlap is rechecked below.
+  const sourceBox=p.getAABB();let renamed=0;
+  for(const entity of p.dimension.getEntities({families:['mob']}))try{
+   if(entity.typeId==='minecraft:player'||entity.typeId.startsWith('kaleidoscope_tavern:seat_'))continue;
+   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
+   if(!inflatedAabbIntersects(sourceBox,entity.getAABB(),16))continue;
+   entity.nameTag='Grumm';renamed++;
+  }catch(e){error(e);}
+  customEffectDiagnostics.upsideDownRenames+=renamed;return true;
+ }
  if(row.effect==='kaleidoscope_tavern:zenith'){
   // Heightmap/safety adapter: no excavation, no unsafe forced teleport, no fake success.
   const here=p.location,d=p.dimension;

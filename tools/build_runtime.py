@@ -258,3 +258,5 @@ if __name__=='__main__':
  import sync_post12_visuals
  sync_post12_visuals.apply_all()
  build_creative_catalog()
+ import sync_block_break_ux
+ sync_block_break_ux.apply_all()

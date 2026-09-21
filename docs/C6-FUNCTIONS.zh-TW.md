@@ -22,7 +22,7 @@
 - `core/furniture.js`：顏色/物品/方塊/錨點/朝向契約。
 - `bedrock/furniture.js`：投放、騎乘、染色、回收交易、helper去重与卸載清理。
 - `tools/build_c6.py`：33家具物品、33行為方塊、16座位实体、33配方、衍生圖示与獨立指南。
-- `tests/c6-core.test.js`／`tests/c6-runtime.test.js`：C6新增118個回歸案例。
+- `tests/c6-core.test.js`／`tests/c6-runtime.test.js`：C6基線118例，Batch 1＋2再增加6例；新6例尚未有此分支Node執行紀錄。
 
 ## 文件核實來源
 

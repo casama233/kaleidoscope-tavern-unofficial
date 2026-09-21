@@ -6,6 +6,13 @@
       "menu_category": {
         "category": "construction"
       },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ]
+        }
+      },
       "states": {
         "kaleidoscope_tavern:axis": [
           0,
@@ -17,13 +24,6 @@
           2,
           3
         ]
-      },
-      "traits": {
-        "minecraft:placement_direction": {
-          "enabled_states": [
-            "minecraft:cardinal_direction"
-          ]
-        }
       }
     },
     "components": {

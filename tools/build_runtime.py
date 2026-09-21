@@ -38,8 +38,8 @@ def build_creative_catalog():
   *[f'{p}_painting' for p in paintings]
  ]
  def exists(short):return (BP/'items'/f'{short}.json').is_file() or (BP/'blocks'/f'{short}.json').is_file()
- # The Cookery family guide is now primary. Keep the old Tavern books craftable only
- # as compatibility/fallback items, but do not expose a second guide family in Creative.
+ # Cookery owns the only guide UI. Old Tavern book IDs stay hidden solely as world-save
+ # migration aliases; they are no longer craftable and never form a second guide family.
  for short in ['guidebook','recipe_book']:
   p=BP/'items'/f'{short}.json'
   if p.is_file():
@@ -86,7 +86,7 @@ def build_creative_catalog():
    'construction':{'name':keys[1],'icon':NS+':bar_cabinet','items':deco_items}
   },
   'quality_drinks':'creative catalog exposes Q6 only, matching Java getMaxLevelDrink',
-  'fallback_books_hidden_from_creative':[NS+':guidebook',NS+':recipe_book'],
+  'legacy_guide_aliases_hidden_from_creative':[NS+':guidebook',NS+':recipe_book'],
   'materials_policy':'No standalone Tavern materials group; cultivation ingredients stay in Tavern main until a verified host merge is safe.',
   'cookery_merge':{
    'status':'DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED',
@@ -99,7 +99,7 @@ def build_creative_catalog():
 def main():
  lock=json.loads((ROOT/'compat/cookery/cookery.lock.json').read_text());v=[0,1,0]
  bpuid=uid('bp');rpuid=uid('rp');
- dump(BP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 功能開發版','description':'Cookery guide chapter + fallback Tavern guides, extension API and brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.','uuid':bpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':uid('data'),'version':v},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':uid('script'),'version':v}],'dependencies':[{'uuid':rpuid,'version':v},{'uuid':lock['bp']['uuid'],'version':lock['bp']['version']},{'module_name':'@minecraft/server','version':'2.7.0'},{'module_name':'@minecraft/server-ui','version':'2.0.0'}]})
+ dump(BP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 功能開發版','description':'Cookery guide chapter, Tavern extension API and brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.','uuid':bpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':uid('data'),'version':v},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':uid('script'),'version':v}],'dependencies':[{'uuid':rpuid,'version':v},{'uuid':lock['bp']['uuid'],'version':lock['bp']['version']},{'module_name':'@minecraft/server','version':'2.7.0'},{'module_name':'@minecraft/server-ui','version':'2.0.0'}]})
  dump(RP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 原作資源','description':'A17 source art reused unchanged; no Cookery assets bundled. CC BY-NC-SA 4.0.','uuid':rpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'resources','uuid':uid('resources'),'version':v}],'dependencies':[{'uuid':lock['rp']['uuid'],'version':lock['rp']['version']}]})
  dump(ROOT/'config.json',{'type':'minecraftBedrock','name':'Kaleidoscope Tavern C1','namespace':NS,'targetVersion':'1.26.50','packs':{'behaviorPack':'./runtime/BP','resourcePack':'./runtime/RP'},'experimentalGameplay':{},'authors':['Unofficial Tavern port contributors']})
  reg=json.loads((A/'interfaces/asset-registry.json').read_text());vis={x['key']:x for x in reg['visuals']}; itemart={x.get('item'):x for x in json.loads((A/'interfaces/item-art-map.json').read_text())['entries'] if x.get('item')}
@@ -138,7 +138,7 @@ def main():
     if k.startswith(prefix):names[NS+':'+k[len(prefix):]]=val
   locales[lc]=names
  # Explicit traditional vocabulary for every implemented station/drink; no claim of all 158-item TW proofreading.
- tw={'wine':'葡萄酒','vinegar':'醋','champagne':'香檳','brandy':'白蘭地','carignan':'佳麗釀','ice_wine':'冰葡萄酒','polaris_sweet_white':'北極星甜白','mother_snow':'雪之母','sherry':'雪莉','miners_star':'礦工之星','honey_wine':'蜂蜜葡萄酒','madame_shexiang':'麝香夫人','sunset_glow':'落日餘暉','sauvignon_blanc_dry_white':'長相思乾白','riesling_dry_white':'雷司令乾白','luminous_bride':'流明新娘','glowflower_brew':'螢花釀','plum_wine':'梅酒','sweet_berry_wine':'甜莓酒','red_queen':'紅皇后','vodka':'伏特加','whiskey':'威士忌','rum':'朗姆酒','sakura_wine':'櫻花酒','barrel':'酒桶','pressing_tub':'壓榨桶','tap':'酒嘴','empty_bottle':'空酒瓶','guidebook':'酒館指南','recipe_book':'酒館配方書','grape':'葡萄','ice_grape':'冰葡萄','gold_grape':'金葡萄','green_grape':'青提','grapevine':'葡萄藤','trellis':'葡萄藤架'}
+ tw={'wine':'葡萄酒','vinegar':'醋','champagne':'香檳','brandy':'白蘭地','carignan':'佳麗釀','ice_wine':'冰葡萄酒','polaris_sweet_white':'北極星甜白','mother_snow':'雪之母','sherry':'雪莉','miners_star':'礦工之星','honey_wine':'蜂蜜葡萄酒','madame_shexiang':'麝香夫人','sunset_glow':'落日餘暉','sauvignon_blanc_dry_white':'長相思乾白','riesling_dry_white':'雷司令乾白','luminous_bride':'流明新娘','glowflower_brew':'螢花釀','plum_wine':'梅酒','sweet_berry_wine':'甜莓酒','red_queen':'紅皇后','vodka':'伏特加','whiskey':'威士忌','rum':'朗姆酒','sakura_wine':'櫻花酒','barrel':'酒桶','pressing_tub':'壓榨桶','tap':'酒嘴','empty_bottle':'空酒瓶','guidebook':'舊版酒館指南','recipe_book':'舊版酒館配方書','grape':'葡萄','ice_grape':'冰葡萄','gold_grape':'金葡萄','green_grape':'青提','grapevine':'葡萄藤','trellis':'葡萄藤架'}
  for k,val in tw.items():locales['zh_TW'][NS+':'+k]=val
  for lc in locales:
   locales[lc].update({'minecraft:water':'Water' if lc=='en_US' else '水','minecraft:bucket':'Bucket' if lc=='en_US' else '空桶','minecraft:sugar':'Sugar' if lc=='en_US' else '糖','minecraft:glow_berries':'Glow Berries' if lc=='en_US' else '螢光莓','minecraft:sweet_berries':'Sweet Berries' if lc=='en_US' else '甜莓'})
@@ -177,8 +177,8 @@ def main():
   item(n)  # Ingredient-only until source food values/effects are implemented; no guessed nutrition.
  for f in fluids[:-1]:item(f['filled'],stack=1)
  item('empty_bottle',stack=16)
- item('guidebook','textures/items/book_normal',{NS+':guidebook':{}},1)
- item('recipe_book','textures/items/book_writable',{NS+':recipe_book':{}},1)
+ item('guidebook','textures/items/book_normal',{NS+':legacy_guide':{}},1)
+ item('recipe_book','textures/items/book_writable',{NS+':legacy_guide':{}},1)
  item('barrel',components={NS+':place_barrel':{}},stack=16)
  drink_bases=sorted({r['output']['byQuality'][0].split(':')[1][:-3]for r in recipes if r['kind']=='barrel'}|{'vinegar'})
  for base in drink_bases:
@@ -189,8 +189,8 @@ def main():
    for lc in locales:locales[lc][NS+':'+base+'_q'+str(q)]=locales[lc].get(NS+':'+base,base)+(' (Quality '+str(q)+'/6)'if lc=='en_US'else f'（{quality[lc][q-1]}・{q}/6）')
  for lc in locales:
   for f in fluids[:-1]:locales[lc][f['filled']]=locale_name=locales[lc].get(f['filled'],f['filled'].split(':')[1]);locales[lc][f['id']]=locale_name.replace(' Bucket','').replace('桶','')
-  locales[lc][NS+':guidebook']={'zh_TW':'酒館指南','zh_CN':'酒馆指南','en_US':'Tavern Guide'}[lc]
-  locales[lc][NS+':recipe_book']={'zh_TW':'酒館配方書','zh_CN':'酒馆配方书','en_US':'Tavern Recipe Book'}[lc]
+  locales[lc][NS+':guidebook']={'zh_TW':'舊版酒館指南','zh_CN':'旧版酒馆指南','en_US':'Legacy Tavern Guide'}[lc]
+  locales[lc][NS+':recipe_book']={'zh_TW':'舊版酒館配方書','zh_CN':'旧版酒馆配方书','en_US':'Legacy Tavern Recipe Book'}[lc]
   langpath=RP/f'texts/{lc}.lang';old=langpath.read_text()if langpath.exists()else''
   # On rebuild strip only own previously generated key block; all A17 art language keys remain unchanged.
   old=old.split('## C1 RUNTIME START')[0].rstrip()+'\n'
@@ -236,11 +236,13 @@ def main():
   if kind=='shaped':v.update({'pattern':d['pattern'],'key':{k:{'item':i['item']}for k,i in d['key'].items()}})
   else:v['ingredients']=[{'item':i['item']}for i in d['ingredients']]
   dump(BP/'recipes'/f'{name}.json',{'format_version':'1.20.10','minecraft:recipe_'+kind:v})
- for name,ingredients in [('guidebook',['minecraft:book',NS+':empty_bottle']),('recipe_book',[NS+':guidebook','minecraft:paper'])]:
-  dump(BP/'recipes'/f'{name}.json',{'format_version':'1.20.10','minecraft:recipe_shapeless':{'description':{'identifier':NS+':'+name},'tags':['crafting_table'],'ingredients':[{'item':x}for x in ingredients],'result':{'item':NS+':'+name,'count':1}}})
+ # Legacy Tavern guide items are migration aliases only; Cookery owns guide acquisition.
+ for name in ['guidebook','recipe_book']:
+  p=BP/'recipes'/f'{name}.json'
+  if p.exists():p.unlink()
  (BP/'functions').mkdir(exist_ok=True)
- (BP/'functions/kt_c1_kit.mcfunction').write_text('\n'.join(['# Development kit: gives items only; no world replacement.']+['give @s '+x for x in [NS+':guidebook 1',NS+':recipe_book 1',NS+':barrel 1',NS+':pressing_tub 1',NS+':tap 1',NS+':grape 32','minecraft:bucket 16',NS+':empty_bottle 16']])+'\n')
- dump(ROOT/'docs/C1-BUILD.json',{'runtime_bp_uuid':bpuid,'runtime_rp_uuid':rpuid,'version':[0,1,0],'cookery_bp_dependency':lock['bp']['uuid'],'cookery_rp_dependency':lock['rp']['uuid'],'cookery_internal_version':lock['bp']['version'],'script_api':'2.7.0','ui_api':'2.0.0','builtin_barrel_recipes':sum(r['kind']=='barrel'for r in recipes),'builtin_pressing_recipes':sum(r['kind']=='pressing'for r in recipes),'native_crafting_recipes':6,'quality_drink_items':len(drink_bases)*6,'planned_recipe_exclusions':planned,'art_copied_without_geometry_repaint':True,'engine_acceptance':'NOT_RUN','is_production_release':False})
+ (BP/'functions/kt_c1_kit.mcfunction').write_text('\n'.join(['# Development kit: gives items only; no world replacement.']+['give @s '+x for x in [NS+':barrel 1',NS+':pressing_tub 1',NS+':tap 1',NS+':grape 32','minecraft:bucket 16',NS+':empty_bottle 16']])+'\n')
+ dump(ROOT/'docs/C1-BUILD.json',{'runtime_bp_uuid':bpuid,'runtime_rp_uuid':rpuid,'version':[0,1,0],'cookery_bp_dependency':lock['bp']['uuid'],'cookery_rp_dependency':lock['rp']['uuid'],'cookery_internal_version':lock['bp']['version'],'script_api':'2.7.0','ui_api':'2.0.0','builtin_barrel_recipes':sum(r['kind']=='barrel'for r in recipes),'builtin_pressing_recipes':sum(r['kind']=='pressing'for r in recipes),'native_crafting_recipes':4,'quality_drink_items':len(drink_bases)*6,'planned_recipe_exclusions':planned,'art_copied_without_geometry_repaint':True,'engine_acceptance':'NOT_RUN','is_production_release':False})
  print('C1 build:',len(recipes),'machine recipes,',len(drink_bases)*6,'drink quality items.')
 if __name__=='__main__':
  main()

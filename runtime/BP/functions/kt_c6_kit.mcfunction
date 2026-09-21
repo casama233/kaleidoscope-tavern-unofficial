@@ -7,3 +7,4 @@ give @s kaleidoscope_tavern:string_lights_colorless 4
 give @s minecraft:green_dye 4
 give @s minecraft:red_dye 4
 give @s kaleidoscope_tavern:sculk_special 2
+give @s kaleidoscope_tavern:screwdriver 2

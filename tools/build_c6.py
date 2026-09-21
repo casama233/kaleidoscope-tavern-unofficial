@@ -80,6 +80,8 @@ def main():
  for page in pages:
   if page['id']==N+':cocktail_effects/sculk_special':
    page['body']={lc:body.replace('未實作','聲波 PvE 適配已接入').replace('not implemented','sonic PvE adapter implemented')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_effects/screwdriver':
+   page['body']={lc:body.replace('[未實作 / not implemented]','[C6 Grumm 倒立適配已接入 / C6 Grumm adapter implemented; engine test pending]')for lc,body in page['body'].items()}
  pages.extend([
  {'id':N+':c6_furniture','title':{'zh_TW':'高腳凳與彩燈：完整種類','zh_CN':'高脚凳与彩灯：完整种类','en_US':'Stools and string lights'},'body':{'zh_TW':'16色高腳凳與17款彩燈全部可合成、潛行放置及回收。高腳凳空手點擊坐下，潛行離座；潛行空手點方塊回收，有人乘坐時不允許拆除。每張凳只有1座，座墊隨乘客轉向，底座不轉。坐點候選為0.875-0.0625=0.8125格，包含原作顯式乘客偏移；實機Steve/Alex、原生騎乘偏移及碰撞仍待驗收。彩燈原作亮度15、使用染料更換成對應原模型；同色不扣料。滿背包回收取消。所有模式投料/放置均消耗物品，回收1原色，避免Creative複製。原生合成冊收錄配方；此頁不注入廚房。','en_US':'All 16 stool colors and 17 individual string-light designs are craftable. Sneak-use to place. Empty-hand use to sit; sneak to dismount. Sneak-empty-hand or mine the block to recover it; occupied seats and full inventories refuse recovery. One native seat at candidate .8125 height (source .875 anchor minus explicit .0625 rider adjustment); cushion turns, pedestal stays. Lights emit original level 15 and change design with vanilla dye; same color costs nothing. Creative still conserves actual placed items. Waterlogging, exact collision and client seating remain unverified.'}},
  {'id':N+':c6_sonic','title':{'zh_TW':'幽匿特調：聲波規則與差異','en_US':'Sculk Special: sonic rules and limits'},'body':{'zh_TW':'飲用完成時沿視線發射32格声波；傷害採目前生命×Java float1.2，判定半徑為1格加目標半寬。命中後追加水平0.63、垂直0.28速度；每2格一個原生聲波粒子。採原生sonicBoom傷害，不直接覆寫目標HP。明示安全適配：不傷害玩家，不打自己的視覺helper；單次最多256個命中目標，無敵/保護拒傷時也不擊退。也可能命中動物與寵物，請勿對準它們測試。不檢查牆遮擋，與原作穿牆聲波相同；沒有爆炸/破壞方塊。新效果不重扣第二杯，回杯仍由原生food完成。以上仍未在遊戲驗收。','en_US':'On completed drinking, a 32-block view ray deals current health × Java float1.2; hit radius is 1 + half target width. Adds horizontal .63 / vertical .28 impulse, with 16 native sonic particles. Uses native sonicBoom damage, never overwrites target HP. Explicit PvE-only adaptation: all players and Tavern helpers excluded; at most 256 hit targets; rejected damage has no knockback. May also hit animals and pets. Passes walls as the source does. No block destruction or second cup consumption. Engine testing is still required.'}}
@@ -89,8 +91,8 @@ def main():
  for page in pages:
   if page['id']==N+':c5_effects':
    page['title']={'zh_TW':'專屬酒效 C6','zh_CN':'专属酒效 C6','en_US':'C6 custom effects'}
-   for lc in page['body']:page['body'][lc]+=('\nC6: Shriek Attack PvE adapter is now enabled. Eight other types remain pending.'if lc=='en_US'else'\nC6更新：幽匿特調聲波PvE適配已接入，其他8種效果仍待實作。')
-   for lc in page['body']:page['body'][lc]=page['body'][lc].replace('其餘9種','其餘8種').replace('Other 9','Other 8')
+   for lc in page['body']:page['body'][lc]+=('\nC6: Shriek Attack PvE and Upside Down adapters are now enabled. Seven other types remain pending.'if lc=='en_US'else'\nC6更新：幽匿特調聲波與倒立適配已接入，其他7種效果仍待實作。')
+   for lc in page['body']:page['body'][lc]=page['body'][lc].replace('其餘9種','其餘7種').replace('Other 9','Other 7')
  p.write_text('export const MIXOLOGY_PAGES = '+json.dumps(pages,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
  for p in [BP/'manifest.json',RP/'manifest.json',R/'examples/Tavern-Extension-Demo/BP/manifest.json',R/'examples/Tavern-Mixology-Demo/BP/manifest.json']:
   d=load(p);d['header']['version']=V;d['header']['name']=d['header']['name'].replace('C5','C6')
@@ -101,15 +103,22 @@ def main():
   dump(p,d)
  config=load(R/'config.json');config['name']='Kaleidoscope Tavern C6';dump(R/'config.json',config)
  # Keep kits small, only give; never place mobs/blocks or fire the sonic effect automatically.
- (BP/'functions/kt_c6_kit.mcfunction').write_text('# C6 give-only focused kit. Leaves existing builds/world untouched.\ngive @s kaleidoscope_tavern:guidebook 1\ngive @s kaleidoscope_tavern:recipe_book 1\ngive @s kaleidoscope_tavern:blue_bar_stool 2\ngive @s kaleidoscope_tavern:red_bar_stool 2\ngive @s kaleidoscope_tavern:string_lights_colorless 4\ngive @s minecraft:green_dye 4\ngive @s minecraft:red_dye 4\ngive @s kaleidoscope_tavern:sculk_special 2\n')
+ (BP/'functions/kt_c6_kit.mcfunction').write_text('# C6 give-only focused kit. Leaves existing builds/world untouched.\ngive @s kaleidoscope_tavern:guidebook 1\ngive @s kaleidoscope_tavern:recipe_book 1\ngive @s kaleidoscope_tavern:blue_bar_stool 2\ngive @s kaleidoscope_tavern:red_bar_stool 2\ngive @s kaleidoscope_tavern:string_lights_colorless 4\ngive @s minecraft:green_dye 4\ngive @s minecraft:red_dye 4\ngive @s kaleidoscope_tavern:sculk_special 2\ngive @s kaleidoscope_tavern:screwdriver 2\n')
  (BP/'functions/kt_c6_all_stools.mcfunction').write_text('# 16 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':'+c+'_bar_stool 1'for c in COLORS)+'\n')
  (BP/'functions/kt_c6_all_lights.mcfunction').write_text('# 17 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':string_lights_'+c+' 1'for c in ['colorless',*COLORS])+'\n')
  for p in sorted((R/'data/upstream/c6/javap').glob('*.txt')):protect(p,'read-only javap; source JAR not executed')
  protect(R/'data/upstream/c5/javap/ShriekAttackEffect.txt','read-only source bytecode, already locked in C5')
  dump(R/'docs/C6-SOURCE-AUDIT.json',{'jar_sha256':'03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff','files':source_records,'jar_executed':False,'original_art_modified':False})
  dump(R/'docs/C6-FURNITURE-BINDINGS.json',{'bindings':bindings,'derived_icons':icon_records,'stools':16,'lights':17,'engine_accepted':False})
- coverage=load(R/'docs/C5-EFFECT-COVERAGE.json');coverage['adaptations_implemented'].append('shriek_attack');coverage['not_implemented'].remove('shriek_attack');coverage['scope']='Players as effect owners; Shriek is explicitly PvE-only, other timed effects as C5';coverage['shriek_limits']=['players excluded','max256 hit targets','reject damage = no impulse','not engine tested'];dump(R/'docs/C6-EFFECT-COVERAGE.json',coverage)
- build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':43,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'new_shaped_recipes':33,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter'),'engine_acceptance':'NOT_RUN'})
+ coverage=load(R/'docs/C5-EFFECT-COVERAGE.json')
+ for effect in ['shriek_attack','upside_down']:
+  if effect not in coverage['adaptations_implemented']:coverage['adaptations_implemented'].append(effect)
+  if effect in coverage['not_implemented']:coverage['not_implemented'].remove(effect)
+ coverage['scope']='Players as effect owners; Shriek is explicitly PvE-only; Upside Down uses Bedrock mob-family + exact AABB overlap naming adapter; other timed effects as C5'
+ coverage['shriek_limits']=['players excluded','max256 hit targets','reject damage = no impulse','not engine tested']
+ coverage['upside_down']={'source':'Java 1.2.0: living Mob entities intersecting user AABB inflated by 16 are custom-named Grumm','adapter':"Bedrock mob-family query, living health check, exact getAABB overlap against source box inflated by 16, set Entity.nameTag='Grumm'",'divergence':'Bedrock Script API exposes nameTag but no generic equivalent of Java setCustomNameVisible(false); visual/nameplate behavior requires engine acceptance','engine_tested':False}
+ dump(R/'docs/C6-EFFECT-COVERAGE.json',coverage)
+ build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':43,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'new_shaped_recipes':33,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter',upside_down='Grumm naming adapter over Java 16-block inflated AABB using Bedrock mob-family query'),'engine_acceptance':'NOT_RUN'})
  for exclusion in build.get('planned_recipe_exclusions',[]):exclusion['reason']=exclusion['reason'].replace('C5','C6')
  dump(R/'docs/C6-BUILD.json',build)
  # Final runtime locale pass: no duplicate keys. Preserve upstream en/zh_CN wording; prefer curated zh_TW overrides.

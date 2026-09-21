@@ -80,7 +80,7 @@ def main():
    path=RP/(itemart.get(full,{}).get('texture',f'textures/kaleidoscope_tavern_jar/item/{short}')+'.png')
    if path.exists():icons['texture_data'][ico]={'textures':str(path.relative_to(RP)).removesuffix('.png')}
    else:raise ValueError('No original icon for '+short)
-  c={'minecraft:display_name':{'value':'%item.'+full+'.name'},'minecraft:icon':ico,'minecraft:max_stack_size':stack};c.update(components or {})
+  c={'minecraft:display_name':{'value':'item.'+full+'.name'},'minecraft:icon':ico,'minecraft:max_stack_size':stack};c.update(components or {})
   dump(BP/'items'/f'{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':full,'menu_category':{'category':'items'}},'components':c}})
  for n in ['grape','ice_grape','gold_grape','green_grape']:
   item(n)  # Ingredient-only until source food values/effects are implemented; no guessed nutrition.

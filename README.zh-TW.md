@@ -1,29 +1,31 @@
-# 森羅物語：酒館 C6 — 幽匿聲波、十六色座椅與十七款彩燈
+# 森羅物語：酒館 C7 — Java 1.2.0 效果差異繼續收斂
 
-**這是功能開發測試版，未經 Minecraft／手機／Realms／BDS／bridge／Blockbench 的實機載入與行為驗收，不是完整發布版。** C6 包含 C1–C5；本輪補實際互動，不再重新收集顏色或重畫原作模型。
+**這是功能開發測試版，未經 Minecraft／手機／Realms／BDS／bridge／Blockbench 的實機載入與行為驗收，不是完整發布版。** C7 包含既有 C1–C6 功能；本輪以 Java 1.2.0 原始碼為基準，繼續補專屬效果並建立可機器核對的 parity 清單。
 
 ## 歷史階段
 
-A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說明集中在 [\`history/\`](history/README.md)。**目前可開發主幹仍是根目錄 C6。**
+A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說明集中在 [\`history/\`](history/README.md)。**目前可開發主幹已進入根目錄 C7。**
 
 為避免 Git 重複五遍相同 A17 大型美術，C1～C5 保存的是當時程式／測試／工具／docs／SDK／資料鎖快照，共用美術回指 A17／現行 \`art/\`。歷史生成的 DEV \`.mcaddon\`／Demo \`.mcpack\` 不直接提交，精確檔名、大小與 SHA-256 記錄於 [\`history/artifact-catalog.json\`](history/artifact-catalog.json)。
 
 ## 真正新增
 
-| 系統 | C6 已寫入 | 仍有的差異 |
+| 系統 | C7 已寫入 | 仍有的差異 |
 |---|---|---|
+| 摸金校尉 / Tomb Raider | 效果期間攻擊原作 tag 內生物時按 Java 規則 30% 卸下主手；可損耗物降至剩 1 耐久後掉落；掉落失敗嘗試回滾裝備 | Bedrock 穩定 API 無 Java `ItemEntity` 40 tick 拾取延遲欄位；殭屍豬布林 ID 做跨版映射 |
+| 倒立 / Upside Down | 依 Java `AABB.inflate(16)` 交集掃描存活 Mob，命名為 `Grumm` | Bedrock Script API 無等價 `customNameVisible(false)` 旗標；需實機確認各客戶端名稱顯示 |
 | 幽匿特調／shriek_attack | 飲用完成後按視線做32格聲波命中，傷害為施用者**目前生命**×Java float1.2，追加水平0.63／垂直0.28速度；每2格一個原生聲波粒子，共16個，播放原生聲波聲音 | **明示PvE-only適配**：不傷害任何玩家，不攻擊本包helper；最多256個命中目標。使用原生sonicBoom，不繞過引擎拒傷。不是所有專屬酒效完成 |
 | 十六色高腳凳 | 所有原作配色可合成、潛行放置、空手乘坐、潛行離座、回收；每張一個原生座位；座墊／靠背／扶手一起隨乘客轉向，底座不转 | 坐點與原生人物偏移、碰撞、Steve/Alex、手機、多人動畫待實機校正；使用look yaw而非Java yBodyRot |
 | 十七款彩燈 | 原作各款獨立幾何與貼圖、四方向、亮度15、原生染料換款；同色不消耗；可回收當前款式 | 不支援水浸、紅石開關或彩色動態光源；選取框為近似，無自然掛接/掉落還原 |
 | 原作家具合成 | 16凳＋17彩燈，共33個新增工作台配方 | Java `c:ingots/iron`明示映射到原版iron_ingot，不冒充任意模組鐵錠標籤 |
 | 獨立指南 | 新家具、聲波頁；現有幽匿特調頁與酒效完成度更新 | 不注入Cookery指南、語言、書籤或玩家偏好 |
 
-**C6不是聲稱其餘工作全部做完。** 原有41個機器配方不變；工作台合成由10個增至43個。效果狀態為血腥瑪麗規則實作，經驗汲取／Zenith／聲波三項明示適配；其餘8個Java效果仍未實作。
+**C7 仍不是聲稱其餘工作全部做完。** 原有41個機器配方不變；工作台合成由10個增至43個。效果狀態為血腥瑪麗規則實作，經驗汲取／Zenith／聲波三項明示適配；其餘6個Java效果仍未實作：slightly_tipsy、high_heels、grass_stealth、vision、ardent_heat、long_reach。
 
 ## 安裝與版本
 
 - 先備份並建立新的測試世界。啟用已提供的 **Cookery v1.0.6 BP/RP**，再啟用 C6 BP/RP，酒館RP位於Cookery上方。
-- 不同時啟用舊 C1–C5、A17 VisualLab 或 PoseLab。C6沿用相同UUID，套件版本提高至 **`[0,6,0]`**；真實存檔升級未測。
+- 不同時啟用舊 C1–C6、A17 VisualLab 或 PoseLab。C6沿用相同UUID，套件版本提高至 **`[0,7,0]`**；真實存檔升級未測。
 - Cookery依賴不變：BP `10f37ae2-9ccf-435f-b34b-0eec8191cd94`、RP `c89dc8df-c3fc-4bc8-8bd0-527abba76681`，內部版本均`[1,0,6]`。不重散布Cookery。
 - 維持工程`1.26.50`格式、既定26.51驗收目標與Cookery實包基線`@minecraft/server 2.7.0`／`@minecraft/server-ui 2.0.0`。不是本輪最新版本或實機相容性聲明。
 - 不包含player.json、全域JSON UI覆蓋或新的實驗開關要求。這些靜態條件不代表成就／Realms相容已證實。
@@ -31,10 +33,10 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 ## 第一輪使用
 
 ```mcfunction
-/function kt_c6_kit
+/function kt_c7_kit
 ```
 
-只給獨立兩本書、藍／紅高腳凳、無色彩燈、染料和幽匿特調；**不自動搭建世界、不自動生成攻擊目標或發射聲波**。預留背包與周围空間。
+C7 聚焦測試包只給下界特調、螺絲起子與酒館指南；**不自動生成敵人、不自動造成傷害或改名**。家具/聲波測試仍可使用 C6 的給物 function。
 
 ### 高腳凳
 
@@ -90,22 +92,22 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 ```text
 python tools/build_runtime.py
 python tools/validate_runtime.py
-python tools/test_c6.py --cookery-reference "外部Cookery BP資料夾"
+python tools/test_c7.py --cookery-reference "外部Cookery BP資料夾"
 python tools/audit_rebuild.py
-python tools/package_c6.py
+python tools/package_c7.py
 ```
 
-不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其他511總量中的510例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其他511總量中的510例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C7.cmd` 與 npm scripts 已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
 
-本輪新增46核心＋72適配層測試，累積192核心＋319適配層＝511例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+C7 在 C6 測試基線上新增 6 個核心規則＋8 個適配層案例，覆蓋 30% 邊界、原作目標 tag、耐久降至 1、原生掉落失敗回滾、16 格 AABB 邊界、存活 Mob 過濾與 unsupported-effect 保全。累積實際 pass/fail 以 `docs/TEST-RESULTS.json` 為準，不把 Node mock 當 Minecraft 實機測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
 
 **沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
 
 ## 未完成範圍
 
-- 八種專屬效果：slightly_tipsy、high_heels、grass_stealth、vision、ardent_heat、long_reach、tomb_raider、upside_down。
+- 六種專屬效果：slightly_tipsy、high_heels、grass_stealth、vision、ardent_heat、long_reach。
 - 原生長按、Steve/Alex手腕/座高、杯嘴流束、跨端动画、藥水/飲用原生消耗及返瓶實測。
 - 沙發/吧檯/桌自動連接與乘坐、櫃內物品展示、任意中文黑板文字、指南場景、野生生成/氣候、水浸/自然破壞。
 - 燃燒瓶、西瓜汁特殊酒嘴、下方容器自動接酒；其他原作動態粒子適配。
 
-原版來源、授權與Cookery隔離均保留。沒有字型、JAR/class或Cookery本體再散布。C1–C5具名文件及`docs/history/`為歷史記錄，當前狀態以本README、C6報告為準。
+原版來源、授權與Cookery隔離均保留。沒有字型、JAR/class或Cookery本體再散布。C1–C5具名文件及`docs/history/`為歷史記錄，當前狀態以本 README、`docs/C7-BUILD.json`、`docs/C7-EFFECT-COVERAGE.json` 與 `docs/C7-JAVA-PARITY.zh-TW.md` 為準。

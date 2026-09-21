@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:glass_bar_cabinet_white"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "GGG",
+      "GPG",
+      "GGG"
+    ],
+    "key": {
+      "G": {
+        "item": "kaleidoscope_tavern:grapevine"
+      },
+      "P": {
+        "item": "minecraft:white_stained_glass_pane"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:glass_bar_cabinet",
+      "count": 1
+    }
+  }
+}

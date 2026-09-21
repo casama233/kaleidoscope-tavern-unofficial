@@ -5,7 +5,8 @@ export const CUSTOM_IMPLEMENTED=Object.freeze({
  'kaleidoscope_tavern:xp_drain':'orb_attraction_adapter',
  'kaleidoscope_tavern:zenith':'safe_surface_teleport_adapter',
  'kaleidoscope_tavern:shriek_attack':'sonic_ray_pve_adapter',
- 'kaleidoscope_tavern:upside_down':'grumm_radius_name_adapter'
+ 'kaleidoscope_tavern:upside_down':'grumm_radius_name_adapter',
+ 'kaleidoscope_tavern:vision':'glowing_radius_adapter'
 });
 export const CUSTOM_INSTANT=Object.freeze(['kaleidoscope_tavern:zenith','kaleidoscope_tavern:shriek_attack','kaleidoscope_tavern:upside_down']);
 const instant=id=>CUSTOM_INSTANT.includes(id);
@@ -18,3 +19,5 @@ export function advanceStatus(s,ticks){integer(ticks,0,2147483647);return {schem
 export function activeStatus(s,id){return s.entries.filter(e=>e.id===id).sort((a,b)=>b.amplifier-a.amplifier||b.ticks-a.ticks)[0];}
 
 export function inflatedAabbIntersects(source,target,padding=0){check(Number.isFinite(padding)&&padding>=0,'INVALID_AABB');for(const box of[source,target])for(const axis of['x','y','z'])check(Number.isFinite(box?.center?.[axis])&&Number.isFinite(box?.extent?.[axis])&&box.extent[axis]>=0,'INVALID_AABB');for(const axis of['x','y','z']){const lo=source.center[axis]-source.extent[axis]-padding,hi=source.center[axis]+source.extent[axis]+padding,tlo=target.center[axis]-target.extent[axis],thi=target.center[axis]+target.extent[axis];if(thi<=lo||tlo>=hi)return false;}return true;}
+export function countdownPulseCrossed(beforeTicks,afterTicks,interval){integer(beforeTicks,1,20000000);integer(afterTicks,0,20000000);integer(interval,1,20000000);check(afterTicks<=beforeTicks,'INVALID_COUNTDOWN');return Math.floor(beforeTicks/interval)>Math.floor(afterTicks/interval);}
+export function visionRadius(amplifier){integer(amplifier,0,255);return Math.min(amplifier+1,3)*6;}

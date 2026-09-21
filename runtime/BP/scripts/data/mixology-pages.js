@@ -121,9 +121,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Screwdriver"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [C6 Grumm 倒立適配已接入；名稱牌待實機]",
+      "zh_CN": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [C6 Grumm 倒立适配已接入；名称牌待实机]",
+      "en_US": "kaleidoscope_tavern:upside_down: 0s / amplifier 0 / 100% [C6 Grumm adapter implemented; nameplate engine test pending]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/screwdriver"
@@ -138,9 +138,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Mojito"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [C6 靈視發光適配已接入；引擎驗收待執行]",
+      "zh_CN": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [C6 灵视发光适配已接入；引擎验收待执行]",
+      "en_US": "kaleidoscope_tavern:vision: 1800s / amplifier 0 / 100% [C6 Vision glowing adapter implemented; engine test pending]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/mojito"
@@ -265,8 +265,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "C6 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘7種原作效果仍未實作。\nC6更新：幽匿特調聲波與倒立適配已接入，其他7種效果仍待實作。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 7 source custom effects remain unimplemented.\nC6: Shriek Attack PvE and Upside Down adapters are now enabled. Seven other types remain pending."
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘6種原作效果仍未實作。\nC6更新：幽匿特調聲波、倒立與靈視適配已接入，其他6種效果仍待實作。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 6 source custom effects remain unimplemented.\nC6: Shriek Attack PvE, Upside Down and Vision adapters are now enabled. Six other types remain pending."
     }
   },
   {

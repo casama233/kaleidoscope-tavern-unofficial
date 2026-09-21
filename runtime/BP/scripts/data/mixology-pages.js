@@ -189,9 +189,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Nether Special"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [C6 摸金校尉卸裝適配已接入；實機驗收待執行]",
+      "zh_CN": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [C6 摸金校尉卸裝適配已接入；實機驗收待執行]",
+      "en_US": "kaleidoscope_tavern:tomb_raider: 90s / amplifier 0 / 100% [C6 Tomb Raider disarm adapter implemented; engine test pending]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/nether_special"
@@ -265,8 +265,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "C6 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘6種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他6種效果仍待實作。\nC6 第二批：靈視發光範圍適配已接入。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 6 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Six other types remain pending.\nC6 batch 2: Vision glowing-radius adapter is enabled."
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘5種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他5種效果仍待實作。\nC6 第二批：靈視發光範圍適配已接入。\nC6 第三批：摸金校尉卸裝／掉落適配已接入。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 5 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Five other types remain pending.\nC6 batch 2: Vision glowing-radius adapter is enabled.\nC6 batch 3: Tomb Raider disarm/drop adapter is enabled."
     }
   },
   {

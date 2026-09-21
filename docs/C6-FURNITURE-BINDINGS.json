@@ -809,7 +809,9 @@
         ]
       },
       "waterlogged": false,
-      "exact_collision_parity": true
+      "exact_collision_parity": true,
+      "engine_axis_state": "minecraft:cardinal_direction",
+      "legacy_axis_state": "kaleidoscope_tavern:axis"
     },
     {
       "kind": "bar_counter",

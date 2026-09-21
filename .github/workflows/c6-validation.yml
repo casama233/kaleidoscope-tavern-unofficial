@@ -38,6 +38,9 @@ jobs:
       - name: Generated runtime must be committed
         run: git diff --exit-code
 
+      - name: Localization contract validation
+        run: python tools/validate_localization.py
+
       - name: Static contract validation
         run: python tools/validate_runtime.py
 

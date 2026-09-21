@@ -70,7 +70,7 @@ def main():
   recipes.append({'id':NS+':pressing/'+p.stem,'kind':'pressing','input':input_ids,'fluid':d['fluid'],'amount':d.get('amount',125),'title':title(p.stem.replace('_bucket','')),'source':NS})
  js(BP/'scripts/data/recipes.js','BUILTIN_RECIPES',recipes);js(BP/'scripts/data/fluids.js','FLUIDS',fluids)
  quality={'zh_TW':['未熟','劣質','普通','優良','精製','陳釀'],'zh_CN':['未熟','劣质','普通','优良','精制','陈酿']};icons=json.loads((RP/'textures/item_texture.json').read_text());icons.setdefault('texture_data',{})
- def item(name,icon=None,components=None,stack=64):
+ def item(name,icon=None,components=None,stack=64,creative=True):
   full=name if ':' in name else NS+':'+name;short=full.split(':')[1]
   ico='kt_c1_'+short
   if icon:
@@ -81,7 +81,9 @@ def main():
    if path.exists():icons['texture_data'][ico]={'textures':str(path.relative_to(RP)).removesuffix('.png')}
    else:raise ValueError('No original icon for '+short)
   c={'minecraft:display_name':{'value':'item.'+full+'.name'},'minecraft:icon':ico,'minecraft:max_stack_size':stack};c.update(components or {})
-  dump(BP/'items'/f'{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':full,'menu_category':{'category':'items'}},'components':c}})
+  desc={'identifier':full};
+  if creative:desc['menu_category']={'category':'items'}
+  dump(BP/'items'/f'{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':desc,'components':c}})
  for n in ['grape','ice_grape','gold_grape','green_grape']:
   item(n)  # Ingredient-only until source food values/effects are implemented; no guessed nutrition.
  for f in fluids[:-1]:item(f['filled'],stack=1)
@@ -94,7 +96,7 @@ def main():
   for q in range(1,7):
    c={}
    if q>=2:c={'minecraft:food':{'nutrition':0,'saturation_modifier':0.0,'can_always_eat':True,'using_converts_to':NS+':empty_bottle'},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':0.35}}
-   item(base+'_q'+str(q),'textures/kaleidoscope_tavern_jar/item/'+base,c,16)
+   item(base+'_q'+str(q),'textures/kaleidoscope_tavern_jar/item/'+base,c,16,creative=(q==6))
    for lc in locales:locales[lc][NS+':'+base+'_q'+str(q)]=locales[lc].get(NS+':'+base,base)+(' (Quality '+str(q)+'/6)'if lc=='en_US'else f'（{quality[lc][q-1]}・{q}/6）')
  for lc in locales:
   for f in fluids[:-1]:locales[lc][f['filled']]=locale_name=locales[lc].get(f['filled'],f['filled'].split(':')[1]);locales[lc][f['id']]=locale_name.replace(' Bucket','').replace('桶','')

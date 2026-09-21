@@ -36,13 +36,13 @@
         "*": {
           "texture": "kt_assets_a2_grapevine_stage0",
           "render_method": "alpha_test",
-          "ambient_occlusion": 0.0,
+          "ambient_occlusion": 0,
           "face_dimming": true
         },
         "unshaded": {
           "texture": "kt_assets_a2_grapevine_stage0",
           "render_method": "alpha_test",
-          "ambient_occlusion": 0.0,
+          "ambient_occlusion": 0,
           "face_dimming": false
         }
       },
@@ -54,13 +54,13 @@
           "*": {
             "texture": "kt_assets_a2_grapevine_stage0",
             "render_method": "alpha_test",
-            "ambient_occlusion": 0.0,
+            "ambient_occlusion": 0,
             "face_dimming": true
           },
           "unshaded": {
             "texture": "kt_assets_a2_grapevine_stage0",
             "render_method": "alpha_test",
-            "ambient_occlusion": 0.0,
+            "ambient_occlusion": 0,
             "face_dimming": false
           }
         }
@@ -106,7 +106,7 @@
       "minecraft:movable": {
         "movement_type": "immovable"
       },
-      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:loot": "loot_tables/blocks/grapevine_trellis.json",
       "minecraft:light_dampening": 0
     },
     "permutations": [
@@ -120,13 +120,13 @@
             "*": {
               "texture": "kt_assets_a2_grapevine_stage0",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a2_grapevine_stage0",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -155,13 +155,13 @@
             "*": {
               "texture": "kt_assets_a2_grapevine_stage1",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a2_grapevine_stage1",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -190,13 +190,13 @@
             "*": {
               "texture": "kt_assets_a2_grapevine_stage2",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a2_grapevine_stage2",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -225,13 +225,13 @@
             "*": {
               "texture": "kt_assets_a2_grapevine_stage3",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a2_grapevine_stage3",
               "render_method": "alpha_test",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -260,13 +260,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -295,13 +295,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -330,13 +330,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -365,13 +365,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -400,13 +400,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -435,13 +435,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -470,13 +470,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -505,13 +505,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -540,13 +540,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -575,13 +575,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -610,13 +610,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -645,13 +645,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_east_west",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -680,13 +680,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -715,13 +715,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -750,13 +750,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -785,13 +785,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_north_south",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -820,13 +820,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -855,13 +855,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -890,13 +890,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -925,13 +925,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_cross_up_down",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -960,13 +960,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -995,13 +995,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -1030,13 +1030,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },
@@ -1065,13 +1065,13 @@
             "*": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a3_grapevine_six_direction",
               "render_method": "alpha_test_single_sided",
-              "ambient_occlusion": 0.0,
+              "ambient_occlusion": 0,
               "face_dimming": false
             }
           },

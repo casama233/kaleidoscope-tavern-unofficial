@@ -8,16 +8,16 @@
     "shriek_attack",
     "upside_down",
     "vision",
-    "tomb_raider"
+    "tomb_raider",
+    "ardent_heat"
   ],
   "not_implemented": [
     "slightly_tipsy",
     "high_heels",
     "grass_stealth",
-    "ardent_heat",
     "long_reach"
   ],
-  "scope": "Players as custom-effect owners; Shriek is PvE-only; Upside Down/Vision/Tomb Raider use explicit Bedrock adapters; other timed effects as C5",
+  "scope": "Players as custom-effect owners; Shriek/Upside Down/Vision/Tomb Raider/Ardent Heat use explicit Bedrock adapters; remaining timed effects as C5",
   "engine_accepted": false,
   "shriek_limits": [
     "players excluded",
@@ -41,6 +41,12 @@
     "source": "Java 1.2.0 EffectEvent.onLivingHurt: attacker with Tomb Raider, target in tomb_raider_disarmable, target RNG nextFloat < 0.3F, mainhand required, damageable item set to maxDamage-1, drop with pickup delay 40",
     "adapter": "Bedrock player-owned timed status; afterEvents.entityHurt; exact 15-source target mapping with zombified piglin -> zombie_pigman; EquipmentSlot.Mainhand; native spawnItem; item-entity dynamic property blocks entityItemPickup for 40 ticks; spawn/property failure restores original mainhand",
     "divergence": "Bedrock safe mutation uses entityHurt after-event whereas Java LivingHurtEvent occurs earlier in the damage pipeline; lethal-hit ordering and arbitrary non-player LivingEntity attackers are not claimed equivalent",
+    "engine_tested": false
+  },
+  "ardent_heat": {
+    "source": "Java 1.2.0: every tick while sprinting, break the front 3x3 plane of BASE_STONE_OVERWORLD + BASE_STONE_NETHER + END_STONE; if any broke, add 1.2 exhaustion and damage one random worn armor item by 1, or with no armor deal 1 generic damage every fifth successful collision; natural expiry or zero hunger+saturation adds 600-tick Hunger",
+    "adapter": "Bedrock exact 10-block source tag expansion; one-tick sprint adapter; transactional set-air + explicit vanilla no-silk drop mapping (stone->cobblestone, deepslate->cobbled_deepslate); player exhaustion attribute +1.2 capped to component max; one random armor durability step or persistent bare collision counter; 5-tick status layer handles expiry/starvation Hunger",
+    "divergence": "Block loot is an explicit source-tag drop mapping rather than Java loot-table execution; exhaustion overflow/food conversion is delegated to Bedrock player exhaustion; Hunger end detection may occur within the 5-tick status window",
     "engine_tested": false
   }
 }

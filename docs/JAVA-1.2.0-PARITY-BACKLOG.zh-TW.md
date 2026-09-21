@@ -13,7 +13,7 @@
 |---|---|---|
 | 釀造／壓榨 | 23酒桶＋6壓榨配方、品質飲品、容器交易、Cookery 隔離 | 原作特殊自動化與外部模組互動仍需實機逐項核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
-| 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider 適配 | **5項**：slightly_tipsy、high_heels、grass_stealth、ardent_heat、long_reach |
+| 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat 適配 | **4項**：slightly_tipsy、high_heels、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向 | waterlogging、自然支撐/掉落、精確 selection |
 | Sofa / Table / Bar Counter | 美術資產已在基線 | `SofaBlock`、`TableBlock`、`BarCounterBlock`、`IConnectionBlock` 的連接狀態、碰撞與沙發乘坐 |
@@ -27,13 +27,12 @@
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配 | Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏、動態飲品色、透明排序、第一/三人稱精準姿態 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
-## 專屬效果剩餘 5 項：Java 真實語義
+## 專屬效果剩餘 4 項：Java 真實語義
 
 1. `slightly_tipsy`：客戶端相機 roll，由三個不同週期的 sin/cos 波疊加。
 2. `high_heels`：`STEP_HEIGHT_ADDITION +0.5`。
 3. `grass_stealth`：潛行且位於成熟作物/指定植物；週期性耗體力、清除32格內仇恨並阻止新鎖定；Java客戶端還隱藏玩家渲染。
-4. `ardent_heat`：衝刺撞破前方3×3指定方塊；加速飢餓消耗、撞牆耗護甲；裸裝累積5次受1傷；飢餓耗盡或效果結束後附加30秒 Hunger。
-5. `long_reach`：方塊與實體互動距離各 `+3.0`。
+4. `long_reach`：方塊與實體互動距離各 `+3.0`。
 
 ## Batch 1：Upside Down
 
@@ -60,4 +59,14 @@ Java 1.2.0 的摸金校尉不是獨立 MobEffect tick 類，而是 `EffectEvent.
 Bedrock 2.7.0 以玩家持續狀態＋`afterEvents.entityHurt` 觸發；讀寫 `EquipmentSlot.Mainhand`，用 `Dimension.spawnItem` 生成真實掉落，item entity動態屬性記解鎖tick，`beforeEvents.entityItemPickup` 在前40tick取消拾取。若生成或寫入解鎖標記失敗，移除半成品並回滾原主手，避免吞裝。
 
 明示差異：Java `LivingHurtEvent` 位於傷害流程更早位置；Bedrock before-hurt 回呼禁止安全修改世界，因此本適配使用 after-hurt。致死一擊時序，以及Java允許任意帶效果 `LivingEntity` 攻擊者而本包效果持有者層目前只支援玩家，均不宣稱完全等價，需實機驗收。
+
+## Batch 4：Ardent Heat
+
+Java 1.2.0 的 `ArdentHeatEffect` 每tick只處理玩家。效果自然剩餘<=1 tick時給600tick Hunger；非衝刺時不做破牆。衝刺時依玩家水平朝向取得正前方3×3平面（腳部高度、上方1格、上方2格，左右各1），只破壞 `base_stone_overworld`、`base_stone_nether` 與 end_stone。這些來源tag在1.21系展開為10種：stone、granite、diorite、andesite、tuff、deepslate、netherrack、basalt、blackstone、end_stone。
+
+只要本tick至少成功破一塊，Java追加1.2 exhaustion；若有任何已穿盔甲，從非空 HEAD/CHEST/LEGS/FEET 隨機選一件，若可損耗則扣1耐久。完全沒穿盔甲則累積撞擊次數，每第5次受1 generic傷害。另由 `EffectEvent.onPlayerTick` 在 food<=0 且 saturation<=0.01 時提前移除醇熱並給600tick Hunger。Depth Charge與Brass Heart兩杯的datamap都固定提供300秒 amplifier 0；上述 Java source/tag/datamap 已核對至 `c4ec1880`，與鎖定1.2.0一致。
+
+Bedrock適配精確列出10種可撞碎方塊，不使用名稱模糊匹配；以1tick排程讀 `Entity.isSprinting`，對前方3×3逐塊交易式設air並生成明確原版掉落（stone→cobblestone、deepslate→cobbled_deepslate，其餘自身），掉落失敗時恢復原方塊。本tick有成功破塊才增加 exhaustion 1.2，並按已穿裝備或裸裝DP計數施加一次成本。5tick持續狀態層處理自然到期與飢餓／飽和耗盡後的600tick Hunger。
+
+明示差異：Java使用方塊loot-table和世界RNG；本適配不模擬工具／附魔／完整loot-table，裝備選擇也不宣稱同一RNG序列。Exhaustion到食物／飽和的換算交給Bedrock 2.7.0玩家exhaustion元件；到期／耗盡偵測最多晚現有5tick巡檢窗口。實機仍需驗證掉落、盔甲破損、飢餓換算、多人同步與每tick衝刺巡檢負載。
 

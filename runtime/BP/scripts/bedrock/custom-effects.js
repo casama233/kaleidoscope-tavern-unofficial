@@ -1,11 +1,12 @@
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,system,world} from '@minecraft/server';
+import {EquipmentSlot,ItemStack,system,world} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,tombRaiderTarget,tombRaiderProc} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
@@ -85,6 +86,51 @@ export function blockTombPickup(event){
  }catch(e){error(e);}
  return false;
 }
+function breakArdentBlock(p,block){
+ if(!block||!ardentHeatBreakable(block.typeId))return false;
+ const old=block.permutation,dropId=ardentHeatDrop(block.typeId);let item;
+ try{
+  block.setType('minecraft:air');
+  item=p.dimension.spawnItem(new ItemStack(dropId,1),{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});
+  return true;
+ }catch(e){
+  try{item?.remove();}catch{}
+  if(block.isAir)try{block.setPermutation(old);}catch{customEffectDiagnostics.ardentRollbackFailures++;}
+  error(e);return false;
+ }
+}
+function addArdentExhaustion(p){
+ const c=p.getComponent?.('minecraft:player.exhaustion');if(!c)return false;
+ c.setCurrentValue(Math.min(c.effectiveMax,c.currentValue+1.2));return true;
+}
+function ardentArmorOrBare(p,rng){
+ const equipment=p.getComponent?.('minecraft:equippable'),slots=[EquipmentSlot.Head,EquipmentSlot.Chest,EquipmentSlot.Legs,EquipmentSlot.Feet],worn=[];
+ if(equipment)for(const slot of slots){const item=equipment.getEquipment?.(slot);if(item)worn.push({slot,item});}
+ if(worn.length){
+  const roll=rng();if(!Number.isFinite(roll)||roll<0||roll>=1)throw Error('INVALID_RNG');
+  const selected=worn[Math.min(worn.length-1,Math.floor(roll*worn.length))],durability=selected.item.getComponent?.('minecraft:durability');
+  if(durability&&!durability.unbreakable){
+   if(durability.damage+1>=durability.maxDurability)equipment.setEquipment(selected.slot,undefined);
+   else{durability.damage+=1;equipment.setEquipment(selected.slot,selected.item);}
+   customEffectDiagnostics.ardentArmorDamage++;
+  }
+  return;
+ }
+ const raw=p.getDynamicProperty(ARDENT_COLLISION_COUNT),old=Number.isInteger(raw)&&raw>=0&&raw<5?raw:0;let count=old+1;
+ if(count>=5){try{p.applyDamage(1);}catch(e){error(e);}count-=5;customEffectDiagnostics.ardentBareHits++;}
+ p.setDynamicProperty(ARDENT_COLLISION_COUNT,count);
+}
+export function pulseArdentHeat(p,rng=Math.random){
+ if(p?.typeId!=='minecraft:player'||!p.isSprinting)return 0;
+ const base={x:Math.floor(p.location.x),y:Math.floor(p.location.y),z:Math.floor(p.location.z)},yaw=p.getRotation?.().y??0;let broke=0;
+ for(const pos of ardentFrontBlocks(base,yaw))try{if(breakArdentBlock(p,p.dimension.getBlock(pos)))broke++;}catch(e){error(e);}
+ if(!broke)return 0;
+ addArdentExhaustion(p);try{ardentArmorOrBare(p,rng);}catch(e){error(e);}
+ customEffectDiagnostics.ardentPulses++;customEffectDiagnostics.ardentBlocks+=broke;return broke;
+}
+export function tickArdentHeat(){
+ for(const p of world.getAllPlayers())try{if(activeStatus(statusNow(p),'kaleidoscope_tavern:ardent_heat'))pulseArdentHeat(p);}catch(e){error(e);}
+}
 export function handleKill(event){
  const victim=event.deadEntity,p=event.damageSource?.damagingEntity;
  try{
@@ -100,12 +146,14 @@ export function handleKill(event){
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));
  for(const p of players)try{
-  const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision');
+  const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision'),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;
   if(previousVision){const afterTicks=currentVision?.amplifier===previousVision.amplifier?currentVision.ticks:0;if(countdownPulseCrossed(previousVision.ticks,afterTicks,50))pulseVision(p,previousVision.amplifier);}
-  if(!state.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
+  if(previousArdent&&!currentArdent){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
+  if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}
+  if(!nextState.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
-  write(p,state);
-  if(activeStatus(state,'kaleidoscope_tavern:xp_drain')){
+  write(p,nextState);
+  if(activeStatus(nextState,'kaleidoscope_tavern:xp_drain')){
    const center={...p.location,y:p.location.y+.5};
    for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location:p.location,maxDistance:14}).slice(0,128)){
     try{const a=orb.location;if(Math.abs(a.x-p.location.x)>8||Math.abs(a.y-p.location.y)>8||Math.abs(a.z-p.location.z)>8)continue;
@@ -126,5 +174,6 @@ export function installCustomEffects(){
  world.afterEvents.playerSpawn.subscribe(e=>{tracks.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
  world.afterEvents.playerLeave.subscribe(e=>{const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);});
  system.runInterval(tickCustomEffects,5);
+ system.runInterval(tickArdentHeat,1);
 }
 export const CUSTOM_TEST={tracks,deaths};

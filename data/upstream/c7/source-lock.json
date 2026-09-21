@@ -1,0 +1,42 @@
+{
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "release_reference": "1.2.0",
+  "upstream_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "upstream_commit_date": "2026-07-21T02:35:04Z",
+  "audited_paths": [
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/init/ModEffects.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/event/EffectEvent.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/UpsideDownEffect.java",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/datagen/tag/TagEntityType.java",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/entity_types/tomb_raider_disarmable.json",
+    "src/generated/resources/data/kaleidoscope_tavern/datamap/drink_effect/nether_special.json",
+    "src/generated/resources/data/kaleidoscope_tavern/datamap/drink_effect/screwdriver.json"
+  ],
+  "tomb_raider_java_tag_values": [
+    "#minecraft:skeletons",
+    "minecraft:zombie",
+    "minecraft:zombie_villager",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:zombified_piglin",
+    "minecraft:vindicator",
+    "minecraft:pillager",
+    "minecraft:witch"
+  ],
+  "bedrock_type_mapping": {
+    "minecraft:zombified_piglin": "minecraft:zombie_pigman",
+    "#minecraft:skeletons": [
+      "minecraft:skeleton",
+      "minecraft:stray",
+      "minecraft:wither_skeleton",
+      "minecraft:bogged"
+    ]
+  },
+  "semantic_contracts": {
+    "tomb_raider": "While effect is active, hurt tagged living target has 30% chance to lose main-hand item; damageable item is set to maxDamage-1 before drop; Java drop pickup delay is 40 ticks.",
+    "upside_down": "Instant effect: every living Mob intersecting user AABB inflated by 16 is custom-named Grumm with customNameVisible false."
+  },
+  "jar_or_class_redistributed": false
+}

@@ -4,7 +4,7 @@ import {FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=new CircularRackStore(world),visuals=new Map();let cursor=0;
 export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'NOT_ADAPTED'};
 function error(e){circularRackDiagnostics.errors.push(String(e));if(circularRackDiagnostics.errors.length>16)circularRackDiagnostics.errors.shift();}
@@ -20,7 +20,7 @@ export function takeCircularRackBottle(player,block,faceLocation,{expectedRevisi
 export function recoverCircularRack(player,block,{expectedRevision}={}){canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===CIRCULAR_RACK,'NOT_CIRCULAR_RACK');const k=circularRackKey(block.dimension.id,block.location),old=store.load(k);check(old,'MISSING_CIRCULAR_RACK_STATE');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const give=[{id:CIRCULAR_RACK,count:1},...old.slots.filter(Boolean).map(id=>({id,count:1}))];transact(player,block,old,undefined,0,give,air());circularRackDiagnostics.recovered++;return give;}
 export function pulseCircularRackParticle(block,random=Math.random){try{if(block?.typeId!==CIRCULAR_RACK)return false;const state=store.load(circularRackKey(block.dimension.id,block.location));if(!state?.slots.some(Boolean))return false;block.dimension.spawnParticle('minecraft:endrod',circularParticlePoint(block.location,random));circularRackDiagnostics.particles++;return true;}catch(e){error(e);return false;}}
 export function maintainCircularRackVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseCircularRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==CIRCULAR_RACK){discard(e,'orphans');return;}const state=store.load(circularRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncCircularRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
-export function tickCircularRackVisuals(){const list=[...visuals.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainCircularRackVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
+export function tickCircularRackVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainCircularRackVisual);}
 export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}}});}
 export function installCircularRackEvents(){
  installStatefulStorageRoutes({

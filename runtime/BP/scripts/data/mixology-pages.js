@@ -22,8 +22,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Signature cups and effect limits"
     },
     "body": {
-      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。其餘Java專屬效果仍不生效。原生飲用返杯及玻璃透明排序尚需實機測試。",
-      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. Remaining Java-only effects are still inactive. Native empty-glass return and transparent rendering need engine tests."
+      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，強度與機率取最大；物品不可堆疊，擺放取回不丟資料。C6現有：血腥瑪麗規則實作；經驗汲取、Zenith、Shriek Attack、Upside Down、Vision、Tomb Raider為明示Bedrock適配。仍未實作 slightly_tipsy、high_heels、grass_stealth、ardent_heat、long_reach。原生飲用返杯、事件時序與客戶端渲染仍需實機測試。",
+      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C6 implements Bloody Mary rules and explicit Bedrock adapters for XP Drain, Zenith, Shriek Attack, Upside Down, Vision and Tomb Raider. Still pending: slightly_tipsy, high_heels, grass_stealth, ardent_heat and long_reach. Native empty-glass return, event ordering and client rendering still need engine tests."
     },
     "recipeIds": []
   },
@@ -265,8 +265,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "C6 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘5種原作效果仍未實作。\nC6更新：幽匿特調聲波PvE適配已接入，其他5種效果仍待實作。\nC6 第二批：靈視發光範圍適配已接入。\nC6 第三批：摸金校尉卸裝／掉落適配已接入。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 5 source custom effects remain unimplemented.\nC6: Shriek Attack PvE adapter is now enabled. Five other types remain pending.\nC6 batch 2: Vision glowing-radius adapter is enabled.\nC6 batch 3: Tomb Raider disarm/drop adapter is enabled."
+      "zh_TW": "血腥瑪麗：擊殺回血 floor(目標最大生命/3)。經驗汲取：保留原經驗球的牽引適配。Zenith：安全頂面傳送適配。Shriek Attack：PvE聲波適配。Upside Down：Grumm命名倒立適配。Vision：週期發光適配。Tomb Raider：指定生物30%主手卸裝、只剩1耐久並40tick禁止拾取。持續效果由酒館玩家DP保存，離線暫停，牛奶及死亡清除。仍有5種Java專屬效果待移植；所有項目仍需Minecraft實機驗收。",
+      "en_US": "C6 custom effects: Bloody Mary kill-heal; XP Drain orb attraction; Zenith safe-surface teleport; Shriek Attack PvE sonic adapter; Upside Down Grumm naming; Vision periodic Glowing; Tomb Raider 30% mapped-mob mainhand disarm with one durability remaining and a 40-tick pickup lock. Timed effects use Tavern-owned player DP, pause offline, and clear on milk/death. Five Java-specific effects remain pending. Minecraft engine acceptance is still required."
     }
   },
   {

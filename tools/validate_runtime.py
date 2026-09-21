@@ -139,8 +139,9 @@ def main():
  check('C6_complete_table_family',len([b for b in bindings['bindings']if b['kind']=='table'])==1)
  check('C6_complete_bar_counter_family',len([b for b in bindings['bindings']if b['kind']=='bar_counter'])==1)
  check('C6_complete_glassware_holder_family',len([b for b in bindings['bindings']if b['kind']=='glassware_holder'])==1)
+ check('C6_complete_holder_family',len([b for b in bindings['bindings']if b['kind']=='holder'])==1)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter','glassware_holder']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -179,6 +180,18 @@ def main():
    check('C6_glassware_holder_visibility',comps.get('minecraft:geometry',{}).get('bone_visibility',{})=={f'slot_{i}':f"q.block_state('kaleidoscope_tavern:glass_slot_{i}') == 1"for i in range(4)})
    check('C6_glassware_holder_collision',comps.get('minecraft:collision_box')=={'origin':[-8,11,-7],'size':[16,5,14]} and sum('minecraft:collision_box'in x['components']for x in perms)==2)
    check('C6_glassware_holder_light_item',comps.get('minecraft:light_emission')==8 and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'] and b.get('display_helpers')==0)
+  elif b['kind']=='holder':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_holder_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:holder_kind')==list(range(16)))
+   check('C6_holder_source_geometry',comps.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a10.holder' and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')=='geometry.kt_assets_a10.holder')
+   check('C6_holder_collision',comps.get('minecraft:collision_box')=={'origin':[-3,0,-6],'size':[6,16,12]} and sum('minecraft:collision_box'in x['components']for x in perms)==2)
+   check('C6_holder_component','kaleidoscope_tavern:holder'in comps and comps.get('minecraft:tick',{}).get('interval_range')==[20,20])
+   helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:holder_kind']
+   check('C6_holder_helper',prop['range']==[1,15] and prop['client_sync'] and 'kt_holder_visual'in helper['components']['minecraft:type_family']['family'])
+   hc=load(RP/'entity/runtime_holder_bottle_visual.entity.json')['minecraft:client_entity']['description'];rc=load(RP/'render_controllers/runtime_holder.render_controllers.json')['render_controllers']['controller.render.kt_runtime.holder_bottle']
+   check('C6_holder_client_maps',len(hc['geometry'])==15 and len(hc['textures'])==15 and hc['scripts']['scale']=='0.95' and hc['render_controllers']==['controller.render.kt_runtime.holder_bottle'])
+   check('C6_holder_render_arrays',len(rc['arrays']['geometries']['Array.kind'])==15 and len(rc['arrays']['textures']['Array.kind'])==15 and "holder_kind" in rc['geometry'])
+   check('C6_holder_source_scope',len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -190,6 +203,8 @@ def main():
  check('C6_bar_counter_source_recipe_tags',bar_counter_recipe['pattern']==['NNN','WWW','WWW'] and bar_counter_recipe['key']['N']=={'item':'minecraft:gold_nugget'} and bar_counter_recipe['key']['W']=={'tag':'minecraft:planks'} and bar_counter_recipe['result']=={'item':'kaleidoscope_tavern:bar_counter','count':1})
  glassware_holder_recipe=load(BP/'recipes/glassware_holder.json')['minecraft:recipe_shaped']
  check('C6_glassware_holder_source_recipe',glassware_holder_recipe['pattern']==['NNN','CCC','NNN'] and glassware_holder_recipe['key']['C']=={'item':'minecraft:chain'} and glassware_holder_recipe['key']['N']=={'item':'minecraft:iron_nugget'} and glassware_holder_recipe['result']=={'item':'kaleidoscope_tavern:glassware_holder','count':1})
+ holder_recipe=load(BP/'recipes/holder.json')['minecraft:recipe_shaped']
+ check('C6_holder_source_recipe',holder_recipe['pattern']==[' C ',' C ','I I'] and holder_recipe['key']['C']=={'item':'minecraft:chain'} and holder_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and holder_recipe['result']=={'item':'kaleidoscope_tavern:holder','count':1})
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

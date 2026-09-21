@@ -17,7 +17,7 @@
   "ui_api": "2.0.0",
   "builtin_barrel_recipes": 23,
   "builtin_pressing_recipes": 6,
-  "native_crafting_recipes": 62,
+  "native_crafting_recipes": 63,
   "quality_drink_items": 144,
   "planned_recipe_exclusions": [
     {
@@ -81,7 +81,8 @@
     "tables": 1,
     "bar_counters": 1,
     "glassware_holders": 1,
-    "new_shaped_recipes": 52,
+    "holders": 1,
+    "new_shaped_recipes": 53,
     "source_anchor_y": 0.875,
     "source_explicit_rider_offset": -0.0625,
     "native_seat_y": 0.8125,
@@ -91,6 +92,9 @@
     "bar_counter_connection_states": 6,
     "glassware_holder_slots": 4,
     "glassware_holder_light": 8,
+    "holder_allowed_bases": 14,
+    "holder_display_kinds": 15,
+    "holder_redstone": "NOT_ADAPTED",
     "table_axis_states": 2,
     "table_position_states": 4,
     "table_collision_y": [

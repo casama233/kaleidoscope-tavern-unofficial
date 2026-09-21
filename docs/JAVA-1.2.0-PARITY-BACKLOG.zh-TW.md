@@ -17,7 +17,7 @@
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
-| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽，以及木質／玻璃 Bar Cabinet 雙槽存取、精確品質返還與來源展示已完成** | Cellar Cabinet 九槽；Holder/Rack 紅石彈射仍未移植 |
+| 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽、木質／玻璃 Bar Cabinet 雙槽，以及 Cellar Cabinet 九槽手動存取／精確品質返還／來源展示已完成** | Holder/Rack/Cellar 的紅石酒瓶投擲仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
@@ -196,3 +196,15 @@ Java 1.2.0 的 `BAR_CABINET` 與 `GLASS_BAR_CABINET` 都直接註冊 `BarCabinet
 木櫃配方 GGG/G G/GGG 使用 grapevine。玻璃櫃 Java 配方中央為 `c:glass_panes`；Bedrock shaped recipe 支援 tag ingredient，但無法可靠假設 Java common tag 名在 Bedrock 端存在，因此本移植明確展開成無色 glass_pane + 16色 stained_glass_pane，共17份等價配方。
 
 Batch 14 的14款掛畫與其 generator/測試全部保留。實機瓶型位置、Glass Cabinet cutout/透明效果、多人重連與手機左右點擊仍為 **NOT_RUN**。
+
+## Batch 16：Cellar Cabinet 九槽窖藏酒櫃
+
+Java 1.2.0 `CellarCabinetBlock` 繼承 `AbstractStorageBlock`，固定9槽，只允許點擊方塊正面。來源 `getClickedSlot` 先以 facing 套用 `getLocalX`，再用 `column=floor(localX*3)%3`、`row=2-floor(relativeY*3)%3` 建立3×3九宮格，最後 `slot=column+row*3`。Bedrock 直接使用 `blockFace + faceLocation`，側面／背面返回無操作，不猜測槽位。
+
+`cellar_cabinet_blocklist` 與 Holder 相同，拒絕 brandy、carignan、mother_snow、miners_star、madame_shexiang、sunset_glow、riesling_dry_white、sweet_berry_wine、vodka、rum；因此支援 `empty_bottle` + 14種普通品質飲品 base。world DP 保存9個獨立完整 `*_q1..q6` ID，抽取與拆除原樣返還，背包不足整筆 rollback。
+
+Cellar Cabinet 亦沿用 Java single/left/middle/right 連接規則，只連相同 block + 相同 facing。每個非空槽最多1個 `cellar_cabinet_bottle_visual`，共最多9個；來源 renderer 位置為三列 `x=0.825/0.5/0.175`、三行 `y=0.78/0.49/0.20`、`z=0.875`，scale 1、X -90°，再按 facing 旋轉。來源未覆寫 shape，因此完整方塊碰撞；`getShadeBrightness=0.2` 沒有直接穩定 Bedrock 方塊等價，本批標記為 **NOT_ADAPTED**。
+
+Java 配方中央使用 `minecraft:trapdoors` item tag。1.21.1 tag 包含11種木／菌木活板門、iron trapdoor，以及 copper / exposed / weathered / oxidized 加四種 waxed 版本，共20個 item；Bedrock 本批明確展開成20份等價 shaped recipe，避免假設 Java tag 名可直接跨版使用。
+
+來源 `POWERED` 僅用於紅石上升沿隨機投擲 DrinkBlockItem／Molotov，所有 powered blockstate 仍引用同一模型。因 projectile 路徑仍依既定原則保持 **NOT_ADAPTED**，本批省略沒有實際作用的 powered state，待未來真正接紅石投擲時一起加入。實機九瓶位置、正面觸控、多人重連仍為 **NOT_RUN**。

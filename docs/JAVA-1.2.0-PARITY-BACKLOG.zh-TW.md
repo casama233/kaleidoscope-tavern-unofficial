@@ -16,7 +16,7 @@
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
-| Sofa / Table / Bar Counter | **16色 Sofa 已可合成、放置／回收、6態自動連接（跨色可連）與每格1人乘坐** | Table、Bar Counter 連接狀態；Sofa waterlogging、背靠複合碰撞與實機座高 |
+| Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock，Table 為4位置＋X/Z軸鎖定；Sofa 每格1人乘坐 | Sofa/Table waterlogging、Sofa 背靠複合碰撞與實機座高；連接/碰撞仍待實機驗收 |
 | 酒櫃／酒架／杯架 | 多數原始模型/貼圖已有 | `BarCabinetBlock`、`CellarCabinetBlock`、`CircularRackBlock`、`TiltedRackBlock`、`GlasswareHolderBlock` 的存放、展示與互動 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | 部分資產/靜態展示已收錄 | Pendant Lamp、Incense、Painting、Stepladder、Holder 等逐個核對放置、形狀、狀態與掉落 |
@@ -111,3 +111,11 @@ Bedrock 本批次加入全部16色來源沙發與16份原配方，直接使用�
 
 本批只覆蓋 c70eec 的4/15個模型；其餘模型／貼圖會繼續小批次推進。實際 Minecraft 的 cutout 邊緣、透明排序、內外杯面、手持／物品欄效果仍為 **NOT_RUN**。
 
+
+## Batch 7：Table / Bar Counter 家具
+
+Java 1.2.0 的 `BarCounterBlock` 與 `SofaBlock` 共用同一個 `IConnectionBlock`：六種 `single / left / right / middle / left_corner / right_corner` 狀態及完全相同的左右／前方轉角優先級。本批 Bedrock 不再複製一套演算法，而是把原 Sofa 核心抽成共用 `connectionType`，Sofa 與 Bar Counter 都由同一份規則驅動；吧台直接使用倉庫既有六套原作幾何與原貼圖。
+
+Java `TableBlock` 是另一套較簡單的連桌規則：`single / left / middle / right` 四位置，並在連成一列後鎖定 X 或 Z 軸，避免十字交叉時改向；相鄰桌若已沿垂直方向形成非單體組合，也不可被另一方向強行接入。本批按這套規則移植，使用既有 single/left/middle/right 與三套 rot 幾何。來源碰撞只包含 Y=13..16 的 3/16 高桌面，本批保留這個特性，而不是把桌腿錯做成實心方塊。
+
+兩者加入原作合成配方、潛行放置／空手回收、鄰居即時刷新與20tick陳舊狀態修復。Table 的 waterlogging 與 Minecraft／手機／Realms／BDS 實機狀態刷新仍為 **NOT_RUN**。

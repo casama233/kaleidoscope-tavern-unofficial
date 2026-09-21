@@ -27,19 +27,22 @@ import {installCookeryGuidePublisher} from './core/cookery-guide-publisher.js';
 import {COOKERY_GUIDE_PAYLOAD} from './data/cookery-guide-payload.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
+const COOKERY_GUIDE='kaleidoscope_cookery:guidebook';
 const cookeryGuidePublisher=installCookeryGuidePublisher(system,COOKERY_GUIDE_PAYLOAD);
 export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
-export function migrateLegacyGuide(player){
- const container=player?.getComponent?.('minecraft:inventory')?.container,slot=player?.selectedSlotIndex;
+export function migrateLegacyGuide(player,{slot=player?.selectedSlotIndex,expectedId}={}){
+ const container=player?.getComponent?.('minecraft:inventory')?.container;
  if(!container||!Number.isInteger(slot))return false;
- const held=container.getItem(slot);if(!LEGACY_GUIDES.has(held?.typeId))return false;
- container.setItem(slot,new ItemStack('kaleidoscope_cookery:guidebook',1));
- try{player.sendMessage('§7[Tavern] 已改用森羅物語本體指南。');}catch{}
+ const held=container.getItem(slot),legacyId=expectedId??held?.typeId;
+ if(!LEGACY_GUIDES.has(legacyId)||held?.typeId!==legacyId)return false;
+ try{container.setItem(slot,new ItemStack(COOKERY_GUIDE,1));}
+ catch(error){try{player.sendMessage('§c[Tavern] 舊版指南轉換失敗；物品已保留。');}catch{}console.warn('[Tavern legacy guide] '+error);return false;}
+ try{player.sendMessage('§7[Tavern] 舊版指南已轉換為森羅物語本體指南；請再次使用以開啟。');}catch{}
  return true;
 }
 system.beforeEvents.startup.subscribe(ev=>{
  registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
- ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>system.run(()=>migrateLegacyGuide(e.source))});
+ ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});
 });
 installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{

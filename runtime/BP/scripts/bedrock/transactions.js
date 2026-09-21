@@ -8,6 +8,8 @@ export function hand(player){return inventory(player).getItem(player.selectedSlo
 export function canWrite(player){check(player&&![GameMode.Spectator,GameMode.Adventure].includes(player.getGameMode()),'GAME_MODE_LOCKED');}
 export function blockAt(d,p){try{return d.getBlock(p);}catch{return undefined;}}
 export function plus(p,d){return {x:p.x+d.x,y:p.y+d.y,z:p.z+d.z};}
+export function blockCenter(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}
+export function requireBlockReach(player,dimension,location,maxDistance=6){check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const c=blockCenter(location);check(Math.hypot(player.location.x-c.x,player.location.y-c.y,player.location.z-c.z)<=maxDistance,'OUT_OF_REACH');}
 export function tell(p,s){try{p?.onScreenDisplay.setActionBar(s);}catch{}}
 export function handSnapshot(p){const h=hand(p);return {slot:p.selectedSlotIndex,id:h?.typeId??'',amount:h?.amount??0};}
 export function sameHand(p,s){const h=hand(p);check(p.selectedSlotIndex===s.slot&&(h?.typeId??'')===s.id&&(h?.amount??0)===s.amount,'STALE_HAND');}
@@ -45,7 +47,6 @@ function breakSound(id){
  if(/^(holder|tilted_rack|circular_rack|tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'break.iron';
  return 'dig.wood';
 }
-function center(location){return {x:location.x+.5,y:location.y+.5,z:location.z+.5};}
 function pureAddedDrops(before,after){
  const drops=[],restore=[];
  for(let i=0;i<after.length;i++){
@@ -77,7 +78,7 @@ export function finishPlayerBreak(player,dimension,location,blockId,recover){
   if(delta?.drops.length){
    const spawned=[];
    try{
-    for(const stack of delta.drops)spawned.push(dimension.spawnItem(stack,center(location)));
+    for(const stack of delta.drops)spawned.push(dimension.spawnItem(stack,blockCenter(location)));
     const restored=[];
     try{
      for(const [slot,value] of delta.restore){container.setItem(slot,value);restored.push(slot);}
@@ -92,7 +93,7 @@ export function finishPlayerBreak(player,dimension,location,blockId,recover){
    }
   }
  }
- try{dimension.playSound(breakSound(blockId),center(location),{volume:.75,pitch:1});}catch{}
+ try{dimension.playSound(breakSound(blockId),blockCenter(location),{volume:.75,pitch:1});}catch{}
  return result;
 }
 export const BREAK_TEST={breakSound,pureAddedDrops};

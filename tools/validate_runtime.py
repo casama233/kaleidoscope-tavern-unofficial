@@ -33,6 +33,29 @@ def main():
   for key,out in [('minecraft:item',item_defs),('minecraft:block',block_defs),('minecraft:entity',entity_defs)]:
    if key in d:
     ident=d[key]['description']['identifier'];check('unique_definition:'+ident,ident not in out);out[ident]=d[key]
+ # Native drop/audio parity: generated post-pass must cover every Tavern block.
+ sound_path=RP/'blocks.json';check('block_sound_config_present',sound_path.is_file())
+ if sound_path.is_file():
+  sound_doc=load(sound_path);sound_entries={k:v for k,v in sound_doc.items() if k!='format_version'}
+  check('block_sound_config_format',sound_doc.get('format_version')=='1.19.30')
+  check('block_sound_complete',set(sound_entries)==set(block_defs),{'missing':sorted(set(block_defs)-set(sound_entries)),'extra':sorted(set(sound_entries)-set(block_defs))})
+  allowed_sounds={'wood','cloth','glass','chain','metal','lantern','grass'}
+  check('block_sound_sets_known',all(v.get('sound') in allowed_sounds for v in sound_entries.values()))
+ stateful_native_empty={'kaleidoscope_tavern:barrel_core','kaleidoscope_tavern:barrel_part','kaleidoscope_tavern:shaker_station','kaleidoscope_tavern:cup_signature_cocktail'}|{x for x in block_defs if x.startswith('kaleidoscope_tavern:bottle_')}
+ for ident,d in block_defs.items():
+  loot=d['components'].get('minecraft:loot');check('block_loot_declared:'+ident,isinstance(loot,str) and (BP/loot).is_file(),loot)
+  if ident in stateful_native_empty:check('stateful_native_loot_stays_scripted:'+ident,loot=='loot_tables/empty.json')
+  else:check('native_loot_fallback:'+ident,loot!='loot_tables/empty.json')
+ if (BP/'loot_tables/blocks/stool_white.json').is_file():
+  check('stool_loot_maps_to_item',load(BP/'loot_tables/blocks/stool_white.json')['pools'][0]['entries'][0]['name']=='kaleidoscope_tavern:white_bar_stool')
+ if (BP/'loot_tables/blocks/light_colorless.json').is_file():
+  check('light_loot_maps_to_item',load(BP/'loot_tables/blocks/light_colorless.json')['pools'][0]['entries'][0]['name']=='kaleidoscope_tavern:string_lights_colorless')
+ if (BP/'loot_tables/blocks/grapevine_trellis.json').is_file():
+  vine_loot=load(BP/'loot_tables/blocks/grapevine_trellis.json')
+  check('trellised_vine_java_loot',sorted(p['entries'][0]['name'] for p in vine_loot['pools'])==['kaleidoscope_tavern:grapevine','kaleidoscope_tavern:trellis'])
+ if (BP/'loot_tables/blocks/grape_crop.json').is_file():
+  crop_loot=load(BP/'loot_tables/blocks/grape_crop.json');main_entry=crop_loot['pools'][0]['entries'][0]
+  check('grape_crop_java_loot',main_entry['name']=='kaleidoscope_tavern:grape' and main_entry['functions'][0]['count']=={'min':1,'max':2} and crop_loot['pools'][1]['conditions']==[{'condition':'random_chance','chance':.3}] and crop_loot['pools'][1]['entries'][0]['name']=='kaleidoscope_tavern:green_grape')
  observed=load(ROOT/'compat/cookery/observed-ids.json');cookery_ids=set(observed['items']+observed['blocks'])
  check('no_Cookery_item_block_redefinitions',not(cookery_ids&(set(item_defs)|set(block_defs))))
  check('formal_runtime_namespace',all(x.startswith('kaleidoscope_tavern:')for x in list(item_defs)+list(block_defs)+list(entity_defs)))

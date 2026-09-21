@@ -29,6 +29,33 @@ def main():
  icon_records=[];bindings=[];source_records=[]
  def protect(p,kind):source_records.append({'path':str(p.relative_to(R)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'kind':kind})
  def components(geometry,materials):return {'minecraft:geometry':geometry,'minecraft:material_instances':materials,'minecraft:destructible_by_mining':{'seconds_to_destroy':.5},'minecraft:destructible_by_explosion':{'explosion_resistance':3600000},'minecraft:movable':{'movement_type':'immovable'},'minecraft:loot':'loot_tables/empty.json','minecraft:light_dampening':0}
+ def glassware_holder_geometry():
+  holder=copy.deepcopy(load(RP/'models/entity/glassware_holder.geo.json')['minecraft:geometry'][0]);glass=copy.deepcopy(load(RP/'models/entity/empty_glassware.geo.json')['minecraft:geometry'][0])
+  holder['description']['identifier']='geometry.kt_runtime.glassware_holder';root=copy.deepcopy(holder['bones'][0]);root['name']='holder'
+  def remap(cube,prefix,scale=1,offset=None):
+   cube=copy.deepcopy(cube)
+   if offset:
+    for key in ['origin','pivot']:
+     if key in cube:cube[key]=[cube[key][0]+offset[0],cube[key][1]+offset[1],cube[key][2]+offset[2]]
+   uv=cube.get('uv',{})
+   if isinstance(uv,dict):
+    for face in uv.values():
+     if not isinstance(face,dict):continue
+     face['material_instance']=prefix+'_unshaded' if face.get('material_instance')=='unshaded' else prefix
+     if scale!=1:
+      if 'uv'in face:face['uv']=[v*scale for v in face['uv']]
+      if 'uv_size'in face:face['uv_size']=[v*scale for v in face['uv_size']]
+   return cube
+  root['cubes']=[remap(c,'holder')for c in root['cubes']];bones=[root]
+  for i,(x,z) in enumerate([(-4,-4),(4,-4),(-4,4),(4,4)]):
+   offset=[x,12.16,z];bones.append({'name':f'slot_{i}','pivot':offset,'rotation':[180,0,0],'cubes':[remap(c,'glass',2,offset)for c in glass['bones'][0]['cubes']]})
+  holder['bones']=bones
+  def clean(v):
+   if isinstance(v,float)and v.is_integer():return int(v)
+   if isinstance(v,list):return [clean(x)for x in v]
+   if isinstance(v,dict):return {k:clean(x)for k,x in v.items()}
+   return v
+  return clean({'format_version':'1.21.0','minecraft:geometry':[holder]})
  def item(short,visual):
   # Rasterized original model/texture icon: explicitly derived, NOT an untouched original GUI sprite.
   geom=load(A/visual['geometry']['file']);tex=A/visual['textures'][0]['file'];teximg=Image.open(tex).convert('RGBA')
@@ -45,6 +72,7 @@ def main():
     tag=val.get('tag')
     if tag=='c:ingots/iron':key[letter]={'item':'minecraft:iron_ingot'}
     elif tag=='c:nuggets/gold':key[letter]={'item':'minecraft:gold_nugget'}
+    elif tag=='c:nuggets/iron':key[letter]={'item':'minecraft:iron_nugget'}
     else:assert tag in {'minecraft:planks','minecraft:fences'};key[letter]={'tag':tag}
   dump(BP/f'recipes/{short}.json',{'format_version':'1.20.10','minecraft:recipe_shaped':{'description':{'identifier':N+':'+short},'tags':['crafting_table'],'pattern':d['pattern'],'key':key,'result':{'item':d['result']['id'],'count':d['result']['count']}}})
   if record:protect(src,'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
@@ -100,6 +128,17 @@ def main():
  bp=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':bar_geo[name]}}}for i,name in enumerate(connection_names)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
  dump(BP/'blocks/bar_counter.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':bar_counter','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]}},'components':bc,'permutations':bp}})
  bindings.append({'kind':'bar_counter','item':N+':bar_counter','block':N+':bar_counter','geometry_by_connection':bar_geo,'world_texture':'kt_assets_a10_block_deco_bar_counter','item_geometry':bar_itemgeo,'item_texture':'kt_assets_a17_item_display_bar_counter','connection_states':6,'waterlogged':False,'exact_collision_parity':True})
+ dump(RP/'models/entity/runtime_glassware_holder.geo.json',glassware_holder_geometry());recipe('glassware_holder',False);holder_itemgeo=load(RP/'models/entity/item_display_glassware_holder.geo.json')['minecraft:geometry'][0]['description']['identifier'];slot_states=[N+':glass_slot_'+str(i)for i in range(4)]
+ bone_visibility={f'slot_{i}':f"q.block_state('{slot_states[i]}') == 1"for i in range(4)}
+ hm={'*':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'alpha_test'},'holder':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'alpha_test','face_dimming':True},'holder_unshaded':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'alpha_test','ambient_occlusion':0,'face_dimming':False},'glass':{'texture':'kt_assets_a7_block_mixology_empty_glassware','render_method':'blend','ambient_occlusion':0,'face_dimming':True},'glass_unshaded':{'texture':'kt_assets_a7_block_mixology_empty_glassware','render_method':'blend','ambient_occlusion':0,'face_dimming':False}}
+ hc=components({'identifier':'geometry.kt_runtime.glassware_holder','bone_visibility':bone_visibility},hm);hc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':.8},'minecraft:destructible_by_explosion':{'explosion_resistance':.8},'minecraft:collision_box':{'origin':[-8,11,-7],'size':[16,5,14]},'minecraft:selection_box':{'origin':[-8,11,-7],'size':[16,5,14]},'minecraft:light_emission':8,'minecraft:item_visual':{'geometry':{'identifier':holder_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_glassware_holder','render_method':'alpha_test'},'unshaded':{'texture':'kt_assets_a17_item_display_glassware_holder','render_method':'alpha_test','ambient_occlusion':0,'face_dimming':False}}}})
+ hp=[]
+ for i in range(4):
+  pc={'minecraft:transformation':{'rotation':[0,-90*i,0]}}
+  if i%2==1:pc.update({'minecraft:collision_box':{'origin':[-7,11,-8],'size':[14,5,16]},'minecraft:selection_box':{'origin':[-7,11,-8],'size':[14,5,16]}})
+  hp.append({'condition':f"q.block_state('{N}:facing') == {i}",'components':pc})
+ dump(BP/'blocks/glassware_holder.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':glassware_holder','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],**{state:[0,1]for state in slot_states}}},'components':hc,'permutations':hp}})
+ bindings.append({'kind':'glassware_holder','item':N+':glassware_holder','block':N+':glassware_holder','geometry':'geometry.kt_runtime.glassware_holder','source_geometry':'geometry.kt_assets_a6.glassware_holder','item_geometry':holder_itemgeo,'slot_states':slot_states,'slot_count':4,'light_emission':8,'source_collision_ns':{'origin':[-8,11,-7],'size':[16,5,14]},'source_collision_ew':{'origin':[-7,11,-8],'size':[14,5,16]},'display_helpers':0,'metadata_items_supported':False,'exact_collision_parity':True})
  dump(RP/'render_controllers/runtime_furniture.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.furniture':{'geometry':'Geometry.default','materials':[{'*':'Material.default'}],'textures':['Texture.default']}}})
  dump(RP/'animations/runtime_furniture.animation.json',{'format_version':'1.8.0','animations':{'animation.kt_runtime.stool.turn':{'loop':True,'bones':{'bone':{'rotation':[0,'v.kt_seat_angle',0]}}}}})
  dump(RP/'textures/terrain_texture.json',terrain);dump(RP/'textures/item_texture.json',icons)
@@ -107,7 +146,7 @@ def main():
  for lc in ['zh_TW','zh_CN','en_US']:
   p=RP/f'texts/{lc}.lang';s=p.read_text(encoding='utf-8').split('## C6 ADDITIONS')[0].rstrip()+'\n## C6 ADDITIONS\n'
   for b in bindings:
-   if b['kind'] in ['sofa','table','bar_counter']:continue
+   if b['kind'] in ['sofa','table','bar_counter','glassware_holder']:continue
    s+='item.'+b['item']+'.name='+names[lc][b['item']]+'\n'+'tile.'+b['block']+'.name='+names[lc][b['item']]+'\n'
   s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Sneak: place furniture'if lc=='en_US'else'潜行放置家具'if lc=='zh_CN'else'潛行放置家具')+'\n';p.write_text(s,encoding='utf-8')
  # Native all-player inventory/book APIs are never edited. These pages belong to Tavern alone.
@@ -135,11 +174,8 @@ def main():
  # Preserve historical page/bookmark IDs but point their old completion counts to the current report.
  for page in pages:
   if page['id']==N+':c6_furniture':
-   page['title']={'zh_TW':'高腳凳、沙發、桌子、吧台與彩燈','zh_CN':'高脚凳、沙发、桌子、吧台与彩灯','en_US':'Stools, sofas, tables, bar counters and string lights'}
-   page['body']={'zh_TW':'16色高腳凳、16色沙發、酒館桌與17款彩燈皆可合成、放置及回收。沙發保留6種跨色連接狀態；桌子保留Java的X/Z軸與single/left/middle/right四態，成排後鎖定軸向，避免垂直鄰桌把整排扭轉。桌面碰撞直接使用原作13/16到16/16薄板。桌子配方保留minecraft:planks與minecraft:fences原生tag，鐵錠tag映射原版iron_ingot。沙發每格可坐1人；高腳凳與彩燈規則不變。Sofa/Table waterlogging及實機多人/觸控仍待驗收。','zh_CN':'16色高脚凳、16色沙发、酒馆桌与17款彩灯均可合成、放置和回收。桌子保留Java的X/Z轴与single/left/middle/right四态；成排后锁定连接轴，避免垂直邻桌扭转整排。桌面碰撞直接采用原作13/16到16/16薄板。Sofa/Table waterlogging与实机多人/触控仍待验收。','en_US':'All 16 stool colors, 16 sofa colors, the Tavern table and 17 string-light designs are craftable/placeable/recoverable. Tables preserve Java X/Z-axis locking plus single/left/middle/right states so a connected row cannot be stolen by a perpendicular neighbor. The collision/selection slab exactly uses the source 13/16..16/16 tabletop shape. The source planks/fences recipe tags are preserved; only c:ingots/iron maps to vanilla iron_ingot. Sofa/Table waterlogging and real-client multiplayer/touch behavior remain unverified.'}
-   page['body']['zh_TW']+='\nBatch 8：吧台直接復用沙發同一份Java IConnectionBlock六態連接規則與鄰居刷新框架，使用倉庫既有原作6套幾何／貼圖；可合成、放置、回收並自動形成直線與左右轉角。'
-   page['body']['zh_CN']+='\nBatch 8：吧台直接复用沙发同一份Java IConnectionBlock六态连接规则与邻居刷新框架，使用仓库既有原作6套几何／贴图；可合成、放置、回收并自动形成直线与左右转角。'
-   page['body']['en_US']+='\nBatch 8 ports Bar Counter by reusing the exact shared Java IConnectionBlock six-state logic and neighbor-refresh framework already used by sofas. Existing source geometries/textures are reused; counters are craftable/placeable/recoverable and form straight runs plus both corners.'
+   page['title']={'zh_TW':'酒館家具與四槽酒杯架','zh_CN':'酒馆家具与四槽酒杯架','en_US':'Tavern furniture and four-slot glassware holder'}
+   page['body']={'zh_TW':'16色高腳凳、16色沙發、酒館桌、吧台、4槽酒杯架與17款彩燈皆可合成、放置及回收。沙發／吧台復用Java IConnectionBlock六態規則；桌子保留X/Z軸四態。Batch 9酒杯架完全以方塊狀態保存4個0/1槽位，只接受普通empty_glassware；點擊方塊內X/Z四象限選槽，手持空杯放入、空手取出，潛行空手回收整架並返還所有杯。4個倒掛杯直接作為方塊geometry bone顯示，不生成展示entity。來源亮度8與方向碰撞已還原；自訂metadata空杯為避免資料遺失會拒收。Creative仍採本移植既有守恆交易規則。實機透明排序、手機點位與多人仍待驗收。','zh_CN':'16色高脚凳、16色沙发、酒馆桌、吧台、4槽酒杯架与17款彩灯均可合成、放置和回收。Batch 9酒杯架用4个方块状态保存槽位，只接受普通empty_glassware；按X/Z四象限选槽，手持空杯放入、空手取出，潜行空手回收整架并返还全部杯。倒挂杯直接作为方块geometry bone显示，不生成展示实体。来源亮度8和方向碰撞已还原；自定义metadata空杯为避免数据丢失会拒收。实机透明排序、手机点位与多人仍待验收。','en_US':'Stools, sofas, Tavern table, Bar Counter, a four-slot Glassware Holder and all 17 string-light designs are craftable/placeable/recoverable. Batch 9 stores the holder as four 0/1 block states: plain empty_glassware inserts into the clicked X/Z quadrant, empty hand removes it, and sneak-empty-hand recovers the holder plus every stored glass. Four inverted source glass meshes are block-geometry bones controlled by bone_visibility, so no display entities or hidden inventory state are created. Source light level 8 and directional collision are preserved. Metadata-bearing glasses are rejected to avoid silent data loss; real-client transparency/touch/multiplayer acceptance remains NOT_RUN.'}
   if page['id']==N+':c5_effects':
    page['title']={'zh_TW':'專屬酒效 C6','zh_CN':'专属酒效 C6','en_US':'C6 custom effects'}
    for lc in page['body']:page['body'][lc]+=('\nC6: Shriek Attack PvE, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters are now enabled. Three other types remain pending.'if lc=='en_US'else'\nC6更新：幽匿特調聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配已接入，其他3種效果仍待實作。')
@@ -154,14 +190,14 @@ def main():
   dump(p,d)
  config=load(R/'config.json');config['name']='Kaleidoscope Tavern C6';dump(R/'config.json',config)
  # Keep kits small, only give; never place mobs/blocks or fire the sonic effect automatically.
- (BP/'functions/kt_c6_kit.mcfunction').write_text('# C6 give-only focused kit. Leaves existing builds/world untouched.\ngive @s kaleidoscope_tavern:guidebook 1\ngive @s kaleidoscope_tavern:recipe_book 1\ngive @s kaleidoscope_tavern:blue_bar_stool 2\ngive @s kaleidoscope_tavern:red_bar_stool 2\ngive @s kaleidoscope_tavern:string_lights_colorless 4\ngive @s minecraft:green_dye 4\ngive @s minecraft:red_dye 4\ngive @s kaleidoscope_tavern:sculk_special 2\ngive @s kaleidoscope_tavern:screwdriver 2\ngive @s kaleidoscope_tavern:mojito 2\ngive @s kaleidoscope_tavern:nether_special 2\ngive @s kaleidoscope_tavern:depth_charge 2\ngive @s kaleidoscope_tavern:brass_heart 2\ngive @s kaleidoscope_tavern:white_lady 2\ngive @s kaleidoscope_tavern:blue_sofa 2\ngive @s kaleidoscope_tavern:red_sofa 2\ngive @s kaleidoscope_tavern:table 3\ngive @s kaleidoscope_tavern:bar_counter 3\n')
+ (BP/'functions/kt_c6_kit.mcfunction').write_text('# C6 give-only focused kit. Leaves existing builds/world untouched.\ngive @s kaleidoscope_tavern:guidebook 1\ngive @s kaleidoscope_tavern:recipe_book 1\ngive @s kaleidoscope_tavern:blue_bar_stool 2\ngive @s kaleidoscope_tavern:red_bar_stool 2\ngive @s kaleidoscope_tavern:string_lights_colorless 4\ngive @s minecraft:green_dye 4\ngive @s minecraft:red_dye 4\ngive @s kaleidoscope_tavern:sculk_special 2\ngive @s kaleidoscope_tavern:screwdriver 2\ngive @s kaleidoscope_tavern:mojito 2\ngive @s kaleidoscope_tavern:nether_special 2\ngive @s kaleidoscope_tavern:depth_charge 2\ngive @s kaleidoscope_tavern:brass_heart 2\ngive @s kaleidoscope_tavern:white_lady 2\ngive @s kaleidoscope_tavern:blue_sofa 2\ngive @s kaleidoscope_tavern:red_sofa 2\ngive @s kaleidoscope_tavern:table 3\ngive @s kaleidoscope_tavern:bar_counter 3\ngive @s kaleidoscope_tavern:glassware_holder 2\ngive @s kaleidoscope_tavern:empty_glassware 8\n')
  (BP/'functions/kt_c6_all_stools.mcfunction').write_text('# 16 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':'+c+'_bar_stool 1'for c in COLORS)+'\n')
  (BP/'functions/kt_c6_all_lights.mcfunction').write_text('# 17 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':string_lights_'+c+' 1'for c in ['colorless',*COLORS])+'\n')
  (BP/'functions/kt_c6_all_sofas.mcfunction').write_text('# 16 sofas, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':'+c+'_sofa 1'for c in COLORS)+'\n')
  for p in sorted((R/'data/upstream/c6/javap').glob('*.txt')):protect(p,'read-only javap; source JAR not executed')
  protect(R/'data/upstream/c5/javap/ShriekAttackEffect.txt','read-only source bytecode, already locked in C5')
  dump(R/'docs/C6-SOURCE-AUDIT.json',{'jar_sha256':'03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff','files':source_records,'jar_executed':False,'original_art_modified':False,'post_1_2_official_visual_sync':['c4ec1880bd44cf3139d3ba744ab30bb379cf1416:string_lights_magenta','b30f34a2e340fed1528954104f93cf2c7e90fd79:gold_grape_bucket','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_model_only_1']})
- dump(R/'docs/C6-FURNITURE-BINDINGS.json',{'bindings':bindings,'derived_icons':icon_records,'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'engine_accepted':False})
+ dump(R/'docs/C6-FURNITURE-BINDINGS.json',{'bindings':bindings,'derived_icons':icon_records,'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'glassware_holders':1,'engine_accepted':False})
  coverage=load(R/'docs/C5-EFFECT-COVERAGE.json')
  for effect in ['shriek_attack','upside_down','vision','tomb_raider','ardent_heat','high_heels']:
   if effect not in coverage['adaptations_implemented']:coverage['adaptations_implemented'].append(effect)
@@ -174,11 +210,11 @@ def main():
  coverage['ardent_heat']={'source':'Java 1.2.0: every tick while sprinting, break the front 3x3 plane of BASE_STONE_OVERWORLD + BASE_STONE_NETHER + END_STONE; if any broke, add 1.2 exhaustion and damage one random worn armor item by 1, or with no armor deal 1 generic damage every fifth successful collision; natural expiry or zero hunger+saturation adds 600-tick Hunger','adapter':'Bedrock exact 10-block source tag expansion; one-tick sprint adapter; transactional set-air + explicit vanilla no-silk drop mapping (stone->cobblestone, deepslate->cobbled_deepslate); player exhaustion attribute +1.2 capped to component max; one random armor durability step or persistent bare collision counter; 5-tick status layer handles expiry/starvation Hunger','divergence':'Block loot is an explicit source-tag drop mapping rather than Java loot-table execution; exhaustion overflow/food conversion is delegated to Bedrock player exhaustion; Hunger end detection may occur within the 5-tick status window','engine_tested':False}
  coverage['high_heels']={'source':'Java 1.2.0 HighHeelsEffect: STEP_HEIGHT_ADDITION +0.5; all source drink/datamap uses are amplifier 0','adapter':'Bedrock 2.7.0 grounded blocked-movement auto-step: raw movement input + yaw choose the cardinal obstacle; only near the collision edge with low horizontal velocity and two clear blocks above; tryTeleport raises exactly 1 block and carries 0.2 forward with checkForBlocks','divergence':'Bedrock stable Script API has no writable player step-height attribute, so this is a collision-triggered movement adapter rather than native attribute parity; partial/custom collision shapes and touch/controller feel require engine acceptance','engine_tested':False}
  dump(R/'docs/C6-EFFECT-COVERAGE.json',coverage)
- build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':61,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown/Vision/TombRaider/ArdentHeat/HighHeels adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'new_shaped_recipes':51,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'sofa_source_anchor_y':.5125,'sofa_native_seat_y':.45,'sofa_connection_states':6,'bar_counter_connection_states':6,'table_axis_states':2,'table_position_states':4,'table_collision_y':[13,16],'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter',upside_down='Grumm naming adapter over Java 16-block inflated AABB using Bedrock mob-family query',vision='native Glowing radius adapter on Java 50-tick countdown cadence',tomb_raider='30% disarm/drop adapter with 40-tick pickup lock',ardent_heat='per-tick sprint 3x3 source-stone breaking adapter with exhaustion/armor/bare-collision costs',high_heels='grounded blocked-movement one-block auto-step adapter for source +0.5 step-height intent'),'upstream_visual_sync':[{'commit':'c4ec1880bd44cf3139d3ba744ab30bb379cf1416','asset':'string_lights_magenta','fix':'12 rotated zero-thickness planes now have reverse faces; no texture change','engine_acceptance':'NOT_RUN'},{'commit':'b30f34a2e340fed1528954104f93cf2c7e90fd79','asset':'gold_grape_bucket','fix':'official item texture color correction; exact upstream Git blob 7d2452dc5a07f82fd114db6df9e1fb5998878fef / SHA-256 ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_model_only_1','fix':'Brass Heart/Emerald/Godfather/Nether Special: translucent->cutout plus source shade=false faces; automated by sync-plan','engine_acceptance':'NOT_RUN'}],'engine_acceptance':'NOT_RUN'})
+ build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':62,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown/Vision/TombRaider/ArdentHeat/HighHeels adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'glassware_holders':1,'new_shaped_recipes':52,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'sofa_source_anchor_y':.5125,'sofa_native_seat_y':.45,'sofa_connection_states':6,'bar_counter_connection_states':6,'glassware_holder_slots':4,'glassware_holder_light':8,'table_axis_states':2,'table_position_states':4,'table_collision_y':[13,16],'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter',upside_down='Grumm naming adapter over Java 16-block inflated AABB using Bedrock mob-family query',vision='native Glowing radius adapter on Java 50-tick countdown cadence',tomb_raider='30% disarm/drop adapter with 40-tick pickup lock',ardent_heat='per-tick sprint 3x3 source-stone breaking adapter with exhaustion/armor/bare-collision costs',high_heels='grounded blocked-movement one-block auto-step adapter for source +0.5 step-height intent'),'upstream_visual_sync':[{'commit':'c4ec1880bd44cf3139d3ba744ab30bb379cf1416','asset':'string_lights_magenta','fix':'12 rotated zero-thickness planes now have reverse faces; no texture change','engine_acceptance':'NOT_RUN'},{'commit':'b30f34a2e340fed1528954104f93cf2c7e90fd79','asset':'gold_grape_bucket','fix':'official item texture color correction; exact upstream Git blob 7d2452dc5a07f82fd114db6df9e1fb5998878fef / SHA-256 ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_model_only_1','fix':'Brass Heart/Emerald/Godfather/Nether Special: translucent->cutout plus source shade=false faces; automated by sync-plan','engine_acceptance':'NOT_RUN'}],'engine_acceptance':'NOT_RUN'})
  for exclusion in build.get('planned_recipe_exclusions',[]):exclusion['reason']=exclusion['reason'].replace('C5','C6')
  dump(R/'docs/C6-BUILD.json',build)
  # Final runtime locale pass: no duplicate keys. Preserve upstream en/zh_CN wording; prefer curated zh_TW overrides.
  for lc in ['en_US','zh_CN']:dedupe_lang(RP/f'texts/{lc}.lang',False)
  dedupe_lang(RP/'texts/zh_TW.lang',True)
- print('C6 generated: stools, sofas, source-connected Tavern table + Bar Counter and 17 light designs; official post-1.2 visual syncs retained (magenta light + gold grape texture + first c70eec cocktail cutout group).')
+ print('C6 generated: stools, sofas, connected table/counter, four-slot Glassware Holder and 17 light designs; official post-1.2 visual syncs retained (magenta light + gold grape texture + first c70eec cocktail cutout group).')
 if __name__=='__main__':main()

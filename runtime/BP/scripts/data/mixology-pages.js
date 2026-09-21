@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "高腳凳、沙發、桌子、吧台與彩燈",
-      "zh_CN": "高脚凳、沙发、桌子、吧台与彩灯",
-      "en_US": "Stools, sofas, tables, bar counters and string lights"
+      "zh_TW": "酒館家具與四槽酒杯架",
+      "zh_CN": "酒馆家具与四槽酒杯架",
+      "en_US": "Tavern furniture and four-slot glassware holder"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發、酒館桌與17款彩燈皆可合成、放置及回收。沙發保留6種跨色連接狀態；桌子保留Java的X/Z軸與single/left/middle/right四態，成排後鎖定軸向，避免垂直鄰桌把整排扭轉。桌面碰撞直接使用原作13/16到16/16薄板。桌子配方保留minecraft:planks與minecraft:fences原生tag，鐵錠tag映射原版iron_ingot。沙發每格可坐1人；高腳凳與彩燈規則不變。Sofa/Table waterlogging及實機多人/觸控仍待驗收。\nBatch 8：吧台直接復用沙發同一份Java IConnectionBlock六態連接規則與鄰居刷新框架，使用倉庫既有原作6套幾何／貼圖；可合成、放置、回收並自動形成直線與左右轉角。",
-      "zh_CN": "16色高脚凳、16色沙发、酒馆桌与17款彩灯均可合成、放置和回收。桌子保留Java的X/Z轴与single/left/middle/right四态；成排后锁定连接轴，避免垂直邻桌扭转整排。桌面碰撞直接采用原作13/16到16/16薄板。Sofa/Table waterlogging与实机多人/触控仍待验收。\nBatch 8：吧台直接复用沙发同一份Java IConnectionBlock六态连接规则与邻居刷新框架，使用仓库既有原作6套几何／贴图；可合成、放置、回收并自动形成直线与左右转角。",
-      "en_US": "All 16 stool colors, 16 sofa colors, the Tavern table and 17 string-light designs are craftable/placeable/recoverable. Tables preserve Java X/Z-axis locking plus single/left/middle/right states so a connected row cannot be stolen by a perpendicular neighbor. The collision/selection slab exactly uses the source 13/16..16/16 tabletop shape. The source planks/fences recipe tags are preserved; only c:ingots/iron maps to vanilla iron_ingot. Sofa/Table waterlogging and real-client multiplayer/touch behavior remain unverified.\nBatch 8 ports Bar Counter by reusing the exact shared Java IConnectionBlock six-state logic and neighbor-refresh framework already used by sofas. Existing source geometries/textures are reused; counters are craftable/placeable/recoverable and form straight runs plus both corners."
+      "zh_TW": "16色高腳凳、16色沙發、酒館桌、吧台、4槽酒杯架與17款彩燈皆可合成、放置及回收。沙發／吧台復用Java IConnectionBlock六態規則；桌子保留X/Z軸四態。Batch 9酒杯架完全以方塊狀態保存4個0/1槽位，只接受普通empty_glassware；點擊方塊內X/Z四象限選槽，手持空杯放入、空手取出，潛行空手回收整架並返還所有杯。4個倒掛杯直接作為方塊geometry bone顯示，不生成展示entity。來源亮度8與方向碰撞已還原；自訂metadata空杯為避免資料遺失會拒收。Creative仍採本移植既有守恆交易規則。實機透明排序、手機點位與多人仍待驗收。",
+      "zh_CN": "16色高脚凳、16色沙发、酒馆桌、吧台、4槽酒杯架与17款彩灯均可合成、放置和回收。Batch 9酒杯架用4个方块状态保存槽位，只接受普通empty_glassware；按X/Z四象限选槽，手持空杯放入、空手取出，潜行空手回收整架并返还全部杯。倒挂杯直接作为方块geometry bone显示，不生成展示实体。来源亮度8和方向碰撞已还原；自定义metadata空杯为避免数据丢失会拒收。实机透明排序、手机点位与多人仍待验收。",
+      "en_US": "Stools, sofas, Tavern table, Bar Counter, a four-slot Glassware Holder and all 17 string-light designs are craftable/placeable/recoverable. Batch 9 stores the holder as four 0/1 block states: plain empty_glassware inserts into the clicked X/Z quadrant, empty hand removes it, and sneak-empty-hand recovers the holder plus every stored glass. Four inverted source glass meshes are block-geometry bones controlled by bone_visibility, so no display entities or hidden inventory state are created. Source light level 8 and directional collision are preserved. Metadata-bearing glasses are rejected to avoid silent data loss; real-client transparency/touch/multiplayer acceptance remains NOT_RUN."
     }
   },
   {

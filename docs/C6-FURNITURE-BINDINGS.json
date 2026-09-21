@@ -829,6 +829,49 @@
       "connection_states": 6,
       "waterlogged": false,
       "exact_collision_parity": true
+    },
+    {
+      "kind": "glassware_holder",
+      "item": "kaleidoscope_tavern:glassware_holder",
+      "block": "kaleidoscope_tavern:glassware_holder",
+      "geometry": "geometry.kt_runtime.glassware_holder",
+      "source_geometry": "geometry.kt_assets_a6.glassware_holder",
+      "item_geometry": "geometry.kt_assets_a17.item_display_glassware_holder",
+      "slot_states": [
+        "kaleidoscope_tavern:glass_slot_0",
+        "kaleidoscope_tavern:glass_slot_1",
+        "kaleidoscope_tavern:glass_slot_2",
+        "kaleidoscope_tavern:glass_slot_3"
+      ],
+      "slot_count": 4,
+      "light_emission": 8,
+      "source_collision_ns": {
+        "origin": [
+          -8,
+          11,
+          -7
+        ],
+        "size": [
+          16,
+          5,
+          14
+        ]
+      },
+      "source_collision_ew": {
+        "origin": [
+          -7,
+          11,
+          -8
+        ],
+        "size": [
+          14,
+          5,
+          16
+        ]
+      },
+      "display_helpers": 0,
+      "metadata_items_supported": false,
+      "exact_collision_parity": true
     }
   ],
   "derived_icons": [
@@ -1135,5 +1178,6 @@
   "sofas": 16,
   "tables": 1,
   "bar_counters": 1,
+  "glassware_holders": 1,
   "engine_accepted": false
 }

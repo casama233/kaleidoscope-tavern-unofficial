@@ -1,12 +1,12 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,connectedFurnitureConnection,tablePlacementState,tableRepairState} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {makeStack,hand,canWrite,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air} from './transactions.js';
-const locks=new Locks(),helpers=new Map();let cursor=0;
+const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
 function optional(fn){try{return fn();}catch(e){error(e);}}
@@ -29,6 +29,11 @@ function tableDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind
 function tableNeighbors(d,p){return {north:tableDescriptor(blockAt(d,plus(p,facingVector(0)))),east:tableDescriptor(blockAt(d,plus(p,facingVector(1)))),south:tableDescriptor(blockAt(d,plus(p,facingVector(2)))),west:tableDescriptor(blockAt(d,plus(p,facingVector(3))))};}
 export function syncTable(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableRepairState(current,tableNeighbors(block.dimension,block.location));if(wanted.axis===current.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(AXIS,wanted.axis).withState(POSITION,wanted.position));return true;}
 export function syncTableNeighborhood(d,p){const positions=[p,...[0,1,2,3].map(f=>plus(p,facingVector(f)))];let changed=0;for(let pass=0;pass<3;pass++)for(const q of positions){const b=blockAt(d,q);if(b)try{if(syncTable(b))changed++;}catch(e){error(e);}}return changed;}
+function glasswareHolderCount(block){return GLASSWARE_SLOTS.reduce((n,state)=>n+(block.permutation.getState(state)===1?1:0),0);}
+export function useGlasswareHolder(player,block,faceLocation){
+ canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
+ return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
+}
 /** Stool helpers also render the stool; sofa helpers are invisible and exist only while occupied. */
 export function ensureSeat(block){
  const f=furnitureBlock(block.typeId);check(seated(f),'NOT_SEAT');const d=block.dimension,p=block.location,key=anchorKey(d.id,p),expected=seatEntityId(f);
@@ -55,6 +60,7 @@ export function placeFurniture(player,target,{face='Up'}={}){
   else if(f.kind==='light')states[FACING]=facingForFace(face,player.getRotation().y);
   else if(f.kind==='table'){const t=tablePlacementState(facingForYaw(player.getRotation().y),tableNeighbors(d,p));states[AXIS]=t.axis;states[POSITION]=t.position;}
   else if(f.kind==='bar_counter'){states[FACING]=facingForYaw(player.getRotation().y);states[CONNECTION]=SOFA_CONNECTION.SINGLE;}
+  else if(f.kind==='glassware_holder'){states[FACING]=facingForYaw(player.getRotation().y);for(const state of GLASSWARE_SLOTS)states[state]=0;}
   else check(false,'UNKNOWN_FURNITURE');
   exchangeBlocks(player,1,[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),states)}]);placed=b;furnitureDiagnostics.placed++;
  });
@@ -73,8 +79,8 @@ export function sitOnFurniture(player,block){
 export function recoverFurniture(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f,'NOT_FURNITURE');const key=anchorKey(block.dimension.id,block.location),d=block.dimension,p={...block.location};
  const result=locks.with([key,player.id],()=>{
-  const seats=seated(f)?atAnchor(d,p):[];check(seats.every(e=>nativeRide(e).getRiders().length===0),'SEAT_OCCUPIED');
-  exchangeBlocks(player,0,[{id:itemId(f),count:1}],[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
+  const seats=seated(f)?atAnchor(d,p):[];check(seats.every(e=>nativeRide(e).getRiders().length===0),'SEAT_OCCUPIED');const give=[{id:itemId(f),count:1}];if(f.kind==='glassware_holder'){const n=glasswareHolderCount(block);if(n)give.push({id:EMPTY_GLASSWARE,count:n});}
+  exchangeBlocks(player,0,give,[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
  });
  if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));return result;
 }
@@ -98,8 +104,8 @@ export function registerFurnitureComponents({blockComponentRegistry:r}){r.regist
 export function installFurnitureEvents(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id);if(!existing&&!heldFurniture)return;e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,target=existing?p:plus(p,faceOffset(face));
-  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料。');}));
+  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));
+  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料。');}));
  });
  world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||!furnitureBlock(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),hs=handSnapshot(e.player);system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');return recoverFurniture(e.player,b);}));});
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!furnitureBlock(b.typeId))));

@@ -138,8 +138,9 @@ def main():
  check('C6_complete_sofa_family',len([b for b in bindings['bindings']if b['kind']=='sofa'])==16)
  check('C6_complete_table_family',len([b for b in bindings['bindings']if b['kind']=='table'])==1)
  check('C6_complete_bar_counter_family',len([b for b in bindings['bindings']if b['kind']=='bar_counter'])==1)
+ check('C6_complete_glassware_holder_family',len([b for b in bindings['bindings']if b['kind']=='glassware_holder'])==1)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table','bar_counter']:
+  if b['kind'] in ['sofa','table','bar_counter','glassware_holder']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -170,6 +171,14 @@ def main():
    check('C6_bar_counter_permutations',sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("kaleidoscope_tavern:facing" in x['condition'] for x in perms)==4)
    check('C6_bar_counter_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,16,16]})
    check('C6_bar_counter_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
+  elif b['kind']=='glassware_holder':
+   states=block['description'].get('states',{});perms=block.get('permutations',[]);slot_states=['kaleidoscope_tavern:glass_slot_'+str(i)for i in range(4)]
+   check('C6_glassware_holder_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and all(states.get(x)==[0,1]for x in slot_states))
+   g=load(RP/'models/entity/runtime_glassware_holder.geo.json')['minecraft:geometry'][0];bones={x['name']:x for x in g['bones']}
+   check('C6_glassware_holder_bones',set(bones)=={'holder','slot_0','slot_1','slot_2','slot_3'} and all(bones['slot_'+str(i)].get('rotation')==[180,0,0]for i in range(4)))
+   check('C6_glassware_holder_visibility',comps.get('minecraft:geometry',{}).get('bone_visibility',{})=={f'slot_{i}':f"q.block_state('kaleidoscope_tavern:glass_slot_{i}') == 1"for i in range(4)})
+   check('C6_glassware_holder_collision',comps.get('minecraft:collision_box')=={'origin':[-8,11,-7],'size':[16,5,14]} and sum('minecraft:collision_box'in x['components']for x in perms)==2)
+   check('C6_glassware_holder_light_item',comps.get('minecraft:light_emission')==8 and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'] and b.get('display_helpers')==0)
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -179,6 +188,8 @@ def main():
  check('C6_table_source_recipe_tags',table_recipe['pattern']==['WWW',' F ',' I '] and table_recipe['key']['W']=={'tag':'minecraft:planks'} and table_recipe['key']['F']=={'tag':'minecraft:fences'} and table_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and table_recipe['result']=={'item':'kaleidoscope_tavern:table','count':1})
  bar_counter_recipe=load(BP/'recipes/bar_counter.json')['minecraft:recipe_shaped']
  check('C6_bar_counter_source_recipe_tags',bar_counter_recipe['pattern']==['NNN','WWW','WWW'] and bar_counter_recipe['key']['N']=={'item':'minecraft:gold_nugget'} and bar_counter_recipe['key']['W']=={'tag':'minecraft:planks'} and bar_counter_recipe['result']=={'item':'kaleidoscope_tavern:bar_counter','count':1})
+ glassware_holder_recipe=load(BP/'recipes/glassware_holder.json')['minecraft:recipe_shaped']
+ check('C6_glassware_holder_source_recipe',glassware_holder_recipe['pattern']==['NNN','CCC','NNN'] and glassware_holder_recipe['key']['C']=={'item':'minecraft:chain'} and glassware_holder_recipe['key']['N']=={'item':'minecraft:iron_nugget'} and glassware_holder_recipe['result']=={'item':'kaleidoscope_tavern:glassware_holder','count':1})
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

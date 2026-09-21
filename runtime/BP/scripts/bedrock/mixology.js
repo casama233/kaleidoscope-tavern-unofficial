@@ -11,7 +11,7 @@ import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validat
 import {COCKTAILS} from '../data/mixology.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak} from './transactions.js';
 import {SHAKER_ITEMS,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable,POUR_TICKS,AUTO_STOP_TICKS,shakeHint} from '../core/immersion.js';
 import {syncShakerVisual,shakerPut,feedback,handStart,handStop,shakeAudio,finished,pourVisual,installImmersionCleanup} from './immersion.js';
 const SHAKER=NS+':shaker',STATION=NS+':shaker_station',FACING=NS+':facing',HELPER=NS+':signature_cup_visual',ANCHOR=NS+':cup_anchor';
@@ -183,7 +183,7 @@ export function installMixologyEvents(openBook){
  world.beforeEvents.playerBreakBlock.subscribe(e=>{
   if(e.cancel||!MIX_BLOCKS.has(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,loc={...e.block.location},id=e.block.typeId;
   let rev;try{rev=id===STATION?getShaker(e.block).revision:cupStore.load(cupKey(d.id,loc))?.revision;}catch{return;}
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return id===STATION?breakShaker(e.player,b,{expectedRevision:rev}):takeCup(e.player,b,{expectedRevision:rev});}));
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,loc,id,()=>id===STATION?breakShaker(e.player,b,{expectedRevision:rev}):takeCup(e.player,b,{expectedRevision:rev}));}));
  });
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!MIX_BLOCKS.has(b.typeId))));
  world.afterEvents.entityLoad.subscribe(e=>{

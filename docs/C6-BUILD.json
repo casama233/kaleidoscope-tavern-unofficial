@@ -82,5 +82,13 @@
     "source_explicit_rider_offset": -0.0625,
     "native_seat_y": 0.8125,
     "light_emission": 15
-  }
+  },
+  "upstream_visual_sync": [
+    {
+      "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+      "asset": "string_lights_magenta",
+      "fix": "12 rotated zero-thickness planes now have reverse faces; no texture change",
+      "engine_acceptance": "NOT_RUN"
+    }
+  ]
 }

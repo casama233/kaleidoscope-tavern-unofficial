@@ -1,0 +1,14 @@
+{
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "upstream_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "upstream_message": "修复品红色小灯的模型面剔除问题",
+  "source_path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
+  "locked_copy": "data/upstream/post-1.2/c4ec1880/string_lights_magenta.json",
+  "bedrock_converted_paths": [
+    "art/RP/models/entity/string_lights_magenta.geo.json",
+    "runtime/RP/models/entity/string_lights_magenta.geo.json"
+  ],
+  "semantic_diff": "Same 19 elements/positions/rotations as previous model; adds the missing down face to all 12 rotated zero-thickness light planes so single-sided rendering no longer culls them from the reverse view.",
+  "texture_changed": false,
+  "engine_acceptance": "NOT_RUN"
+}

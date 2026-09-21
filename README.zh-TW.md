@@ -80,7 +80,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 
 ## 資源與持久化
 
-大多數 A17 模型／貼圖保持；目前已有六組有來源的官方 post-1.2 同步：洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 已同步 10/15 個模型。最新 Grasshopper 批次把舊 Java→Bedrock 轉換規則抽成 source-driven geometry regeneration，並同步官方 block PNG；所有 c70eec 批次都由 `sync-plan.json + tools/sync_post12_visuals.py` 自動套用與 CI 驗證。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
+大多數 A17 模型／貼圖保持；目前已有七組有來源的官方 post-1.2 同步：洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 已同步 11/15 個模型。最新 Bloody Mary 批次沿用 source-driven geometry regeneration，並新增可審查的 source-face→Bedrock-face 重映射後同步官方 block PNG；所有 c70eec 批次都由 `sync-plan.json + tools/sync_post12_visuals.py` 自動套用與 CI 驗證。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
 
 家具由方塊類型與facing保存狀態，不另存一份家具物品庫存到world DP。高腳凳helper只提供視覺和原生rideable，按座標錨點重建/去重。區塊未載入不當空氣；helper錯色、失去主方塊或移位則 eject/remove，不生成第二份物品。
 

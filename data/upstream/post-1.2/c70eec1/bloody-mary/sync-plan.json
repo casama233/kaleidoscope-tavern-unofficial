@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "bloody_mary",
+      "visual_key": "bloody_mary",
+      "baseline": "baseline/bloody_mary.json",
+      "updated": "updated/bloody_mary.json",
+      "baseline_blob": "4f4fa1f54ea19eaa39fdd54929a53ee9db01355f",
+      "updated_blob": "f2efeedade97c31dd8f15bddda9d3c3652ded624",
+      "baseline_geo": "baseline/bloody_mary.geo.json",
+      "baseline_geo_blob": "7304d36b0bff91dc7ab377f44b986092ee4f1a76",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12,
+        13
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "cube": 0
+        },
+        {
+          "element": 1,
+          "cube": 1
+        },
+        {
+          "element": 2,
+          "cube": 2
+        },
+        {
+          "element": 3,
+          "cube": 3
+        },
+        {
+          "element": 4,
+          "faces": [
+            [
+              "south",
+              4
+            ],
+            [
+              "east",
+              5
+            ],
+            [
+              "north",
+              6
+            ],
+            [
+              "west",
+              7
+            ],
+            [
+              "down",
+              8,
+              "up",
+              180
+            ]
+          ]
+        },
+        {
+          "element": 5,
+          "cube": 9
+        },
+        {
+          "element": 6,
+          "cube": 10
+        },
+        {
+          "element": 7,
+          "cube": 11
+        },
+        {
+          "element": 8,
+          "cube": 12
+        },
+        {
+          "element": 9,
+          "cube": 13
+        },
+        {
+          "element": 10,
+          "cube": 14
+        },
+        {
+          "element": 11,
+          "cube": 15
+        },
+        {
+          "element": 12,
+          "cube": 16
+        },
+        {
+          "element": 13,
+          "cube": 17
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/bloody_mary.geo.json",
+      "block": "runtime/BP/blocks/cup_bloody_mary.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "bloody_mary_block",
+      "baseline": "baseline/bloody_mary.png",
+      "updated": "updated/bloody_mary.png",
+      "baseline_blob": "6b389971a45f53606d7fff96197d50ed74bb9246",
+      "updated_blob": "07f47d76f7b9e5ede07eeee3a968471b1ee59a2d",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/bloody_mary.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/bloody_mary.png"
+      ]
+    }
+  ]
+}

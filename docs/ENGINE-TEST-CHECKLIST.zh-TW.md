@@ -62,6 +62,16 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 注入掉落生成失敗，原主手必須回滾，不得吞物。另專測致死一擊：Java使用 `LivingHurtEvent`，Bedrock本適配使用可安全寫裝備／生物的 `afterEvents.entityHurt`，因此需要記錄致死時是否仍能穩定取得裝備、生成掉落；未實機前這一項是明示時序差異。
 
+## 4.8 深水炸彈／黃銅之心／醇熱
+
+分別喝深水炸彈與黃銅之心，兩者都應取得300秒醇熱。站著不衝刺時不得破塊；衝刺時用四個基本朝向撞測試牆，確認只處理玩家正前方一格、腳部高度到上方2格、左右各1格的3×3平面。
+
+可破壞清單只允許：stone、granite、diorite、andesite、tuff、deepslate、netherrack、basalt、blackstone、end_stone。cobblestone、stone_bricks、end_stone_bricks與酒館家具必須保留。核對stone掉cobblestone、deepslate掉cobbled_deepslate，其餘目前明確映射為自身物品；這是Bedrock適配，不宣稱完整Java loot-table/附魔/工具規則。
+
+同一tick即使撞碎多塊，也只追加一次1.2 exhaustion與一次盔甲／裸裝代價。有盔甲時在非空四槽中選一件：有耐久就扣1，最後1耐久應正常破壞；裸裝時每第5次「至少成功破一塊」才受1 generic傷害。注入掉落生成失敗時方塊應回滾，且不得追加exhaustion、盔甲損耗或裸裝撞擊次數。
+
+效果自然到期應補600tick Hunger；食物值<=0且飽和<=0.01時也應提前移除醇熱並補600tick Hunger。實機需特別記錄 Bedrock exhaustion→食物／飽和的真實換算、方塊掉落、盔甲破損動畫／音效、多人同步及1tick衝刺巡檢成本。
+
 ## 5. C5 及之前功能回歸
 
 至少走一次種植→壓榨→釀造→Q4投料→拿起雪克杯→原生長按/鬆手→倒入已放空杯→擺取特調→飲用。16空桶/空杯交換保留15；退藥水保留effect/delivery，不變水瓶；本輪不得讓家具beforeEvent吃掉原機器互動或其他包已取消事件。
@@ -72,4 +82,4 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 C5副本世界關掉正在使用的雪克杯session，再換C6，核對舊machine/cup/potionpayload/書籤不變。不能在主世界直接升級。BDS、Realm、多玩家延遲與手機需要各自驗收，桌面單人不能代替。
 
-全部條目目前NOT_RUN。五個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。
+全部條目目前NOT_RUN。四個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。

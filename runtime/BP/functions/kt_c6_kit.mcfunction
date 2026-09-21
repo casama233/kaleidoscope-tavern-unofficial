@@ -10,3 +10,5 @@ give @s kaleidoscope_tavern:sculk_special 2
 give @s kaleidoscope_tavern:screwdriver 2
 give @s kaleidoscope_tavern:mojito 2
 give @s kaleidoscope_tavern:nether_special 2
+give @s kaleidoscope_tavern:depth_charge 2
+give @s kaleidoscope_tavern:brass_heart 2

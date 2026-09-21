@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static validation of C4 links, manifests and source preservation. Not an engine validator."""
+"""Static validation through C7 links, manifests and source preservation. Not an engine validator."""
 from pathlib import Path
 import json,re,hashlib,subprocess,shutil,sys
 ROOT=Path(__file__).resolve().parents[1];BP=ROOT/'runtime/BP';RP=ROOT/'runtime/RP';A=ROOT/'art'
@@ -14,10 +14,10 @@ def main():
   try:data[p]=load(p)
   except Exception as e:errors.append({'file':str(p.relative_to(ROOT)),'error':str(e)})
  check('runtime_json_parse',not errors,errors)
- bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C6-BUILD.json')
+ bp=load(BP/'manifest.json');rp=load(RP/'manifest.json');lock=load(ROOT/'compat/cookery/cookery.lock.json');build=load(ROOT/'docs/C7-BUILD.json')
  for m,name in [(bp,'BP'),(rp,'RP')]:
-  check(name+'_version',m['header']['version']==[0,6,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
- check('build_metadata_version',build['version']==[0,6,0])
+  check(name+'_version',m['header']['version']==[0,7,0]);check(name+'_own_uuid',m['header']['uuid'] not in {lock['bp']['uuid'],lock['rp']['uuid']})
+ check('build_metadata_version',build['version']==[0,7,0])
  check('Cookery_BP_exact_header_dependency',any(x.get('uuid')==lock['bp']['uuid'] and x['version']==lock['bp']['version'] for x in bp['dependencies']))
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
@@ -146,6 +146,14 @@ def main():
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})
+ # C7 source-backed custom-effect parity contracts.
+ c7=load(ROOT/'docs/C7-EFFECT-COVERAGE.json')
+ check('C7_tomb_raider_adapter','tomb_raider' in c7['adaptations_implemented'])
+ check('C7_upside_down_adapter','upside_down' in c7['adaptations_implemented'])
+ check('C7_pending_effects_exact',c7['not_implemented']==['slightly_tipsy','high_heels','grass_stealth','vision','ardent_heat','long_reach'])
+ source=load(ROOT/'data/upstream/c7/source-lock.json')
+ check('C7_upstream_commit_locked',source['upstream_commit']=='c4ec1880bd44cf3139d3ba744ab30bb379cf1416')
+ check('C7_source_tag_snapshot',load(ROOT/'data/upstream/c7/tomb_raider_disarmable.json')['values']==source['tomb_raider_java_tag_values'])
  # Original art payloads kept byte-identical; extra C1 derived helpers are counted separately.
  protected=[]
  for sub in ['models','textures','entity','animations','render_controllers','particles','sounds']:

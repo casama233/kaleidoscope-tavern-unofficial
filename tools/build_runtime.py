@@ -171,3 +171,5 @@ if __name__=="__main__":
 if __name__=='__main__':
  from build_c6 import main as c6
  c6()
+ import sync_post12_visuals
+ sync_post12_visuals.apply_all()

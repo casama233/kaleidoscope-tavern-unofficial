@@ -72,6 +72,12 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 效果自然到期應補600tick Hunger；食物值<=0且飽和<=0.01時也應提前移除醇熱並補600tick Hunger。實機需特別記錄 Bedrock exhaustion→食物／飽和的真實換算、方塊掉落、盔甲破損動畫／音效、多人同步及1tick衝刺巡檢成本。
 
+## 4.10 c70eec 雞尾酒 cutout 第一組
+
+依序擺放與手持黃銅之心、翡翠、教父、下界特調，四個水平朝向都觀察杯身內外面、液面／裝飾薄片、透明邊緣與遠近距離排序。確認相較舊 blend 不再出現明顯混素／半透明疊色，同時不能因 single-sided cutout 遺失原作有定義的面。
+
+本批 source 嚴格限定為 render_type translucent→cutout 與 plan 指定 element shade true→false；PNG、座標與UV未變。Node/Python只能驗證這個結構契約，**真實 alpha-test 邊緣、MSAA／手機 GPU、第一/三人稱 item_visual 仍需實機畫面**。
+
 ## 5. C5 及之前功能回歸
 
 至少走一次種植→壓榨→釀造→Q4投料→拿起雪克杯→原生長按/鬆手→倒入已放空杯→擺取特調→飲用。16空桶/空杯交換保留15；退藥水保留effect/delivery，不變水瓶；本輪不得讓家具beforeEvent吃掉原機器互動或其他包已取消事件。
@@ -82,4 +88,4 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 C5副本世界關掉正在使用的雪克杯session，再換C6，核對舊machine/cup/potionpayload/書籤不變。不能在主世界直接升級。BDS、Realm、多玩家延遲與手機需要各自驗收，桌面單人不能代替。
 
-全部條目目前NOT_RUN。四個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。
+全部條目目前NOT_RUN。三個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。

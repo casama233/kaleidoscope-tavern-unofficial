@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188` 與金色果汁桶 `b30f34a` 官方修正已同步 | Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏、動態飲品色、透明排序、第一/三人稱精準姿態 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 第一組4杯 cutout/shade 修正已同步 | `c70eec1` 其餘11個模型與7張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -100,3 +100,14 @@ Java 1.2.0 的 `SofaBlock` 使用 `IConnectionBlock` 共6種狀態：`single / l
 Bedrock 本批次加入全部16色來源沙發與16份原配方，直接使用已收錄的6套原作 sofa geometry；方塊以 `kaleidoscope_tavern:connection` 0..5 保存連接狀態。放置／回收時立即刷新自己與四鄰，並保留20tick方塊巡檢修復外部命令造成的陳舊狀態。連接判定按 Java `IConnectionBlock` 的左右、前方轉角與優先級移植。每格沙發只在有人坐下時生成不可見 `sofa_seat` rideable helper，離座後即刪除，避免大型酒館堆積空座實體；候選 Bedrock 坐點為0.45格（來源0.5125沿用現有-0.0625座位校正）。
 
 明示差異：目前碰撞以可玩的8/16格座墊主體 AABB 近似，未模擬 Java 背靠／轉角的複合 VoxelShape；waterlogging 暫未移植。這兩項不影響核心裝修、連接與乘坐流程，留待實機或有直接 API 時再補。
+
+## Post-1.2 視覺同步 Batch 3：c70eec1 第一組
+
+官方 `c70eec14b4d8cede23f7274910b8424a8fd49f89` 的目標是「整體優化雞尾酒模型，改為 cutout、減少混素感」。為降低一次同步23個資源檔的風險，本批先選 **Brass Heart／Emerald／Godfather／Nether Special** 四個「模型-only、PNG未變」的項目建立自動化流程。
+
+這四個模型經舊/新 source 結構比對後，元素數、座標、UV、display transform 與非 particle texture reference 全部不變；差異只有 `render_type: translucent -> cutout`，以及少數指定 element 的 `shade: true -> false`。Bedrock 對普通立體 cutout 模型沿用工程既有 `alpha_test_single_sided` 映射，並把 plan 指定 cube 的 face material 標成 `unshaded`。
+
+來源 old/new JSON 均逐位元組鎖定在 `data/upstream/post-1.2/c70eec1/model-only-1/`，Git blob SHA 寫入 `sync-plan.json`。新增 `tools/sync_post12_visuals.py`：完整 rebuild 會自動 apply 所有 plan，CI 另用 `--check` 驗證來源語義、Git blob、registry、runtime block 與 geo。之後同類模型不再手改多處，只需新增 source snapshot + plan。
+
+本批只覆蓋 c70eec 的4/15個模型；其餘模型／貼圖會繼續小批次推進。實際 Minecraft 的 cutout 邊緣、透明排序、內外杯面、手持／物品欄效果仍為 **NOT_RUN**。
+

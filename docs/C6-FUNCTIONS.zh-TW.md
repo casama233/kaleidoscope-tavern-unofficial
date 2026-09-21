@@ -23,8 +23,8 @@
 - `bedrock/custom-effects.js`：Bloody Mary、XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat 的引擎適配。
 - `core/furniture.js`：顏色/物品/方塊/錨點/朝向契約。
 - `bedrock/furniture.js`：投放、騎乘、染色、回收交易、helper去重与卸載清理。
-- `tools/build_c6.py`：33家具物品、33行為方塊、16座位实体、33配方、衍生圖示与獨立指南。
-- `tests/c6-core.test.js`／`tests/c6-runtime.test.js`：目前53個核心＋84個runtime案例，共137個C6回歸案例。
+- `tools/build_c6.py`：C6 家具、配方、衍生圖示與獨立指南生成。\n- `tools/sync_post12_visuals.py`：離線、plan-driven 的 post-1.2 視覺同步 apply/check；驗證官方 Git blob 與允許的語義差異，最小化 registry/runtime diff。
+- `tests/c6-core.test.js`／`tests/c6-runtime.test.js`：目前77個核心＋91個runtime案例，共168個C6回歸案例。
 
 ## 文件核實來源
 

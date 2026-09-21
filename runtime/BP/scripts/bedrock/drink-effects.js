@@ -1,8 +1,15 @@
+import {GameMode} from '@minecraft/server';
 import {rollDrinkEffects} from '../core/drink-effects.js';
+import {parseBottle} from '../core/bottles.js';
+import {planInventory,commitInventory} from '../core/inventory.js';
+import {check} from '../core/util.js';
 import {applyCustomEffect} from './custom-effects.js';
+import {inventory,makeStack} from './transactions.js';
+const EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
 const reported=new Set();
-export const effectDiagnostics={applied:0,unsupported:{},errors:[]};
-/** Runs AFTER native consumption. Never shrinks inventory or returns another empty bottle. */
+export const effectDiagnostics={applied:0,unsupported:{},errors:[],completed:0,containerDrops:0};
+
+/** Effect half of DrinkBlockItem.finishUsingItem; inventory/container exchange is owned by completeDrink. */
 export function consumeDrink(event,rng=Math.random){
  const rows=rollDrinkEffects(event.itemStack?.typeId,rng),entity=event.source;
  if(!entity)return [];
@@ -20,4 +27,43 @@ export function consumeDrink(event,rng=Math.random){
  }
  return outcomes;
 }
-export function registerDrinkEffects({itemComponentRegistry:r}){r.registerCustomComponent('kaleidoscope_tavern:drink_effects',{onConsume:e=>consumeDrink(e)});}
+
+function finishBottleContainer(player,itemId){
+ const c=inventory(player),slot=player.selectedSlotIndex,current=c.getItem(slot);
+ check(parseBottle(itemId)&&current?.typeId===itemId,'STALE_DRINK_HAND');
+ const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:EMPTY_BOTTLE,count:1};
+ try{
+  const plan=planInventory(c,slot,take,[output],makeStack);
+  commitInventory(plan,c,()=>{},()=>{});
+ }catch(error){
+  // Java giveItemToPlayer falls back to a world item when the inventory is full.
+  // This case only occurs for a stacked Survival drink or a full Creative inventory:
+  // a single Survival bottle frees its selected slot for the empty container.
+  if(error?.code!=='INVENTORY_FULL')throw error;
+  const old=current.clone(),next=current.clone();
+  if(!creative){
+   check(next.amount>1,'DRINK_CONTAINER_SPACE');
+   next.amount--;
+   c.setItem(slot,next);
+  }
+  try{player.dimension.spawnItem(makeStack(EMPTY_BOTTLE,1),{...player.location});effectDiagnostics.containerDrops++;}
+  catch(spawnError){if(!creative)c.setItem(slot,old);throw spawnError;}
+ }
+}
+
+/**
+ * Bedrock equivalent of Java DrinkBlockItem.finishUsingItem.
+ * minecraft:use_modifiers drives the native 1.6 s use lifecycle; this callback fires
+ * once on completion, consumes exactly one bottle in Survival, returns the container,
+ * then applies the quality-specific drink effects. Creative keeps the drink, matching Java.
+ */
+export function completeDrink(event,rng=Math.random){
+ const player=event.source,itemId=event.itemStack?.typeId;
+ if(!player||!parseBottle(itemId))return [];
+ finishBottleContainer(player,itemId);
+ const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;
+}
+
+export function registerDrinkEffects({itemComponentRegistry:r}){
+ r.registerCustomComponent('kaleidoscope_tavern:drink_effects',{onCompleteUse:e=>completeDrink(e)});
+}

@@ -8,7 +8,8 @@ import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,
 import {performShriek,COMBAT_TEST,combatDiagnostics} from '../runtime/BP/scripts/bedrock/combat-effects.js';
 import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics,pulseVision,handleTombRaider,TOMB_PICKUP_UNLOCK,pulseArdentHeat,ARDENT_COLLISION_COUNT,pulseHighHeels} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 import {consumeCocktail} from '../runtime/BP/scripts/bedrock/mixology.js';
-import {placeBottle} from '../runtime/BP/scripts/bedrock/bottles.js';
+import {placeBottle,BOTTLE_TEST} from '../runtime/BP/scripts/bedrock/bottles.js';
+import {completeDrink} from '../runtime/BP/scripts/bedrock/drink-effects.js';
 import {placeHolder,putHolderBottle,takeHolderBottle,recoverHolder,syncHolder,HOLDER_TEST} from '../runtime/BP/scripts/bedrock/holder.js';
 import {HOLDER_KIND,holderKey,holderItem} from '../runtime/BP/scripts/core/holder.js';
 import {placeTiltedRack,putTiltedRackBottle,takeTiltedRackBottle,recoverTiltedRack,syncTiltedRackVisuals,TILTED_RACK_TEST} from '../runtime/BP/scripts/bedrock/tilted-rack.js';
@@ -84,6 +85,33 @@ test('Holder stores exact quality ID while helper renders base bottle kind',()=>
 test('Holder rejects Java blocklist bottles, cocktails and metadata without consuming them',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':vodka_q6',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='HOLDER_BLOCKLIST');assert.equal(count(p,NS+':vodka_q6'),1);hand(p,NS+':white_lady',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='NOT_HOLDER_BOTTLE');const custom=new ItemStack(NS+':wine_q4',1);custom.nameTag='preserve';hand(p,custom);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='METADATA_ITEM_REJECTED');assert.equal(p.inventory.getItem(0).nameTag,'preserve');assert.equal(b.permutation.getState(HOLDER_KIND),0);});
 test('Survival break of occupied Holder drops holder and exact stored bottle with metal break sound',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':champagne_q2',1);putHolderBottle(p,b);p.selectedSlotIndex=1;hand(p,undefined);const event={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(event);system.advance();assert(event.cancel);assert(b.isAir);assert.equal(dropCount(NS+':holder'),1);assert.equal(dropCount(NS+':champagne_q2'),1);assert(d.sounds.some(s=>s.id==='break.iron'));});
 test('Holder occupied slot refuses replacement and recovery returns holder plus exact bottle atomically',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':champagne_q2',1);putHolderBottle(p,b);hand(p,NS+':wine_q6',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='HOLDER_OCCUPIED');hand(p,undefined);const h=count(p,NS+':holder');recoverHolder(p,b);assert(b.isAir);assert.equal(count(p,NS+':holder'),h+1);assert.equal(count(p,NS+':champagne_q2'),1);});
+test('bottle block-use route places only on sneak and leaves ordinary support click for drinking',()=>{
+ const p=player(),support=d.getBlock({...pos,y:63});support.setType('minecraft:stone');hand(p,NS+':wine_q4',2);p.isSneaking=true;
+ const placed=click(p,support);assert(placed.cancel);assert.equal(d.getBlock(pos).typeId,NS+':bottle_wine');assert.equal(count(p,NS+':wine_q4'),1);assert.equal(count(p,NS+':empty_bottle'),0);
+ const other=d.getBlock({x:2,y:63,z:0});other.setType('minecraft:stone');p.isSneaking=false;
+ const normal=click(p,other);assert.equal(normal.cancel,false);assert(d.getBlock({x:2,y:64,z:0}).isAir);assert.equal(count(p,NS+':wine_q4'),1);
+});
+test('DrinkBlockItem parity stacks same drink first, but different or full display falls back to non-sneak drink',()=>{
+ const p=player(),support=d.getBlock({...pos,y:63});support.setType('minecraft:stone');hand(p,NS+':wine_q4',6);placeBottle(p,pos);const b=d.getBlock(pos);
+ p.isSneaking=false;let e=click(p,b);assert(e.cancel);assert.equal(b.permutation.getState(BOTTLE_TEST.COUNT),2);assert.equal(count(p,NS+':wine_q4'),4);
+ hand(p,NS+':vodka_q6',1);e=click(p,b);assert.equal(e.cancel,false);assert.equal(b.permutation.getState(BOTTLE_TEST.COUNT),2);assert.equal(count(p,NS+':vodka_q6'),1);
+ hand(p,NS+':wine_q5',3);placeBottle(p,pos);placeBottle(p,pos);assert.equal(b.permutation.getState(BOTTLE_TEST.COUNT),4);
+ e=click(p,b);assert.equal(e.cancel,false);assert.equal(b.permutation.getState(BOTTLE_TEST.COUNT),4);assert.equal(count(p,NS+':wine_q5'),1);
+});
+test('quality bottle complete-use consumes once, returns container and is registered onCompleteUse only',()=>{
+ const component=regs.items.get(NS+':drink_effects');assert.equal(typeof component?.onCompleteUse,'function');assert.equal(component?.onConsume,undefined);
+ const p=player();hand(p,NS+':wine_q4',1);const used=p.inventory.getItem(0);completeDrink({source:p,itemStack:used},()=>.999999);
+ assert.equal(count(p,NS+':wine_q4'),0);assert.equal(count(p,NS+':empty_bottle'),1);
+ assert.throws(()=>completeDrink({source:p,itemStack:used},()=>.999999),e=>e.code==='STALE_DRINK_HAND');
+});
+test('stacked and Creative drinks preserve Java container semantics, with full inventory world-drop fallback',()=>{
+ const p=player();hand(p,NS+':wine_q3',2);completeDrink({source:p,itemStack:p.inventory.getItem(0)},()=>.999999);
+ assert.equal(count(p,NS+':wine_q3'),1);assert.equal(count(p,NS+':empty_bottle'),1);
+ const q=player('creative-drink');q.mode=GameMode.Creative;hand(q,NS+':wine_q3',1);completeDrink({source:q,itemStack:q.inventory.getItem(0)},()=>.999999);
+ assert.equal(count(q,NS+':wine_q3'),1);assert.equal(count(q,NS+':empty_bottle'),1);
+ const r=player('full-drink');full(r);r.selectedSlotIndex=0;hand(r,NS+':wine_q3',2);completeDrink({source:r,itemStack:r.inventory.getItem(0)},()=>.999999);
+ assert.equal(count(r,NS+':wine_q3'),1);assert.equal(dropCount(NS+':empty_bottle'),1);
+});
 test('Survival break of placed quality bottle preserves exact quality as a glass world drop',()=>{const p=player();d.getBlock({...pos,y:63}).setType('minecraft:stone');p.selectedSlotIndex=0;hand(p,NS+':wine_q4',1);placeBottle(p,pos);const b=d.getBlock(pos);p.selectedSlotIndex=1;hand(p,undefined);const event={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(event);system.advance();assert(event.cancel);assert(b.isAir);assert.equal(dropCount(NS+':wine_q4'),1);assert(d.sounds.some(s=>s.id==='random.glass'));});
 test('Holder recovery rolls back block and stored bottle when inventory has room for only one returned stack',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':wine_q4',1);putHolderBottle(p,b);p.selectedSlotIndex=0;for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));p.inventory.setItem(0,undefined);assert.throws(()=>recoverHolder(p,b),x=>x.code==='INVENTORY_FULL');assert.equal(b.typeId,NS+':holder');assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)).item,NS+':wine_q4');});
 test('Holder tick repair restores display kind from authoritative stored item',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':sherry_q6',1);const s=putHolderBottle(p,b);b.setPermutation(b.permutation.withState(HOLDER_KIND,0));assert(syncHolder(b));assert.equal(b.permutation.getState(HOLDER_KIND),s.kind);});

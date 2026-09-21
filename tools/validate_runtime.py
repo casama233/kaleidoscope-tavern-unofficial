@@ -103,6 +103,12 @@ def main():
   icon=x['components'].get('minecraft:icon');check('item_icon_binding:'+ident,isinstance(icon,str)and icon in icons)
   food=x['components'].get('minecraft:food')
   if food:check('food_duration_and_remainder:'+ident,'minecraft:use_modifiers'in x['components'] and ('using_converts_to'not in food or food['using_converts_to'] in item_defs))
+ quality_drinks={ident:x for ident,x in item_defs.items() if re.fullmatch(r'kaleidoscope_tavern:[a-z_]+_q[1-6]',ident)}
+ check('quality_drink_item_count',len(quality_drinks)==144,len(quality_drinks))
+ for ident,x in quality_drinks.items():
+  c=x['components'];use=c.get('minecraft:use_modifiers')
+  check('quality_drink_no_food_conflict:'+ident,'minecraft:food' not in c)
+  check('quality_drink_complete_use_contract:'+ident,c.get('kaleidoscope_tavern:drink_effects')=={} and c.get('minecraft:use_animation')=='drink' and use=={'use_duration':1.6,'movement_modifier':0.35,'start_using':'if_first'})
  for ident,x in block_defs.items():
   c=x['components'];g=c['minecraft:geometry'];check('block_geometry:'+ident,(g if isinstance(g,str)else g['identifier'])in geom)
   for slot,material in c['minecraft:material_instances'].items():check('block_texture:'+ident+':'+slot,material.get('texture')in terrain)
@@ -375,6 +381,10 @@ def main():
  main_script=(BP/'scripts/main.js').read_text(encoding='utf-8')
  check('Cookery_guide_refreshes_after_registry_change','registry.subscribe(()=>cookeryGuidePublisher.refresh())' in main_script and 'buildCookeryGuidePayload(registry)' in main_script)
  check('Cookery_guide_no_direct_host_import','scripts/api/' not in guide_publisher and 'kaleidoscope_cookery/' not in guide_publisher)
+ bottle_router=(BP/'scripts/bedrock/bottles.js').read_text(encoding='utf-8')
+ drink_bridge=(BP/'scripts/bedrock/drink-effects.js').read_text(encoding='utf-8')
+ check('bottle_single_authoritative_block_use_router','playerInteractWithBlock.subscribe' in bottle_router and 'beforeEvents.itemUse' not in bottle_router and 'getBlockFromViewDirection' not in bottle_router)
+ check('bottle_complete_use_not_food_consume','onCompleteUse' in drink_bridge and 'onConsume:' not in drink_bridge)
  check('no_pre_release_solid_or_canPlace_api',not any(re.search(r'\.isSolid\b|\.canPlace\(',p.read_text()) for p in scripts if p.name!='bottle-support.js'))
  for x in load(ROOT/'data/upstream/c3/source.lock.json')['records']:check('C3_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/c2/source.lock.json')['records']:check('C2_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])

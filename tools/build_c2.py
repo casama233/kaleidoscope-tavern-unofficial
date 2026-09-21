@@ -65,7 +65,7 @@ def main():
   perms += [{'condition':cond('facing',i),'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
   block('bottle_'+base,c,{NS+':count':list(range(1,len(keys)+1)),NS+':facing':list(range(4))},perms)
   for q in range(1,7):
-   p=BP/'items'/f'{base}_q{q}.json';d=load(p);d['minecraft:item']['components'].update({NS+':drink_effects':{},'minecraft:food':{'nutrition':0,'saturation_modifier':(0.0 if q==6 else 0),'can_always_eat':True,'using_converts_to':NS+':empty_bottle'},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':.35}});dump(p,d)
+   p=BP/'items'/f'{base}_q{q}.json';d=load(p);components=d['minecraft:item']['components'];components.pop('minecraft:food',None);components.update({NS+':drink_effects':{},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':.35,'start_using':'if_first'}});dump(p,d)
  js(BP/'scripts/data/bottles.js','BOTTLES',bottles)
  effects={base:load(ROOT/f'data/upstream/c2/data/{NS}/datamap/drink_effect/{base}.json')['effects'] for base in bases}
  js(BP/'scripts/data/drink-effects.js','DRINK_EFFECTS',effects)

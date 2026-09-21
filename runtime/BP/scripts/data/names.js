@@ -300,7 +300,21 @@ export const NAMES = {
     "kaleidoscope_tavern:wine_q3": "葡萄酒（普通・3/6）",
     "kaleidoscope_tavern:wine_q4": "葡萄酒（優良・4/6）",
     "kaleidoscope_tavern:wine_q5": "葡萄酒（精製・5/6）",
-    "kaleidoscope_tavern:wine_q6": "葡萄酒（陳釀・6/6）"
+    "kaleidoscope_tavern:wine_q6": "葡萄酒（陳釀・6/6）",
+    "kaleidoscope_tavern:ysbb_painting": "掛畫・藥水棒冰",
+    "kaleidoscope_tavern:tartaric_acid_painting": "掛畫・酒石酸菌",
+    "kaleidoscope_tavern:cr019_painting": "掛畫・CR019",
+    "kaleidoscope_tavern:unknown_painting": "掛畫・Unknown",
+    "kaleidoscope_tavern:master_marisa_painting": "掛畫・摸里傻",
+    "kaleidoscope_tavern:son_of_man_painting": "掛畫・人類之子",
+    "kaleidoscope_tavern:david_painting": "掛畫・大衛",
+    "kaleidoscope_tavern:girl_with_pearl_earring_painting": "掛畫・戴珍珠耳環的少女",
+    "kaleidoscope_tavern:starry_night_painting": "掛畫・星夜",
+    "kaleidoscope_tavern:van_gogh_self_portrait_painting": "掛畫・梵谷自畫像",
+    "kaleidoscope_tavern:father_painting": "掛畫・父親",
+    "kaleidoscope_tavern:great_wave_painting": "掛畫・神奈川沖浪裏",
+    "kaleidoscope_tavern:mona_lisa_painting": "掛畫・蒙娜麗莎",
+    "kaleidoscope_tavern:mondrian_painting": "掛畫・蒙德里安"
   },
   "zh_CN": {
     "kaleidoscope_tavern:white_sofa": "白色沙发",
@@ -603,7 +617,21 @@ export const NAMES = {
     "kaleidoscope_tavern:wine_q5": "葡萄酒（精制・5/6）",
     "kaleidoscope_tavern:wine_q6": "葡萄酒（陈酿・6/6）",
     "kaleidoscope_tavern:guidebook": "酒馆指南",
-    "kaleidoscope_tavern:recipe_book": "酒馆配方书"
+    "kaleidoscope_tavern:recipe_book": "酒馆配方书",
+    "kaleidoscope_tavern:ysbb_painting": "挂画・药水棒冰",
+    "kaleidoscope_tavern:tartaric_acid_painting": "挂画・酒石酸菌",
+    "kaleidoscope_tavern:cr019_painting": "挂画・CR019",
+    "kaleidoscope_tavern:unknown_painting": "挂画・Unknown",
+    "kaleidoscope_tavern:master_marisa_painting": "挂画・摸里傻",
+    "kaleidoscope_tavern:son_of_man_painting": "挂画・人类之子",
+    "kaleidoscope_tavern:david_painting": "挂画・大卫",
+    "kaleidoscope_tavern:girl_with_pearl_earring_painting": "挂画・戴珍珠耳环的少女",
+    "kaleidoscope_tavern:starry_night_painting": "挂画・星夜",
+    "kaleidoscope_tavern:van_gogh_self_portrait_painting": "挂画・梵高自画像",
+    "kaleidoscope_tavern:father_painting": "挂画・父亲",
+    "kaleidoscope_tavern:great_wave_painting": "挂画・神奈川冲浪里",
+    "kaleidoscope_tavern:mona_lisa_painting": "挂画・蒙娜丽莎",
+    "kaleidoscope_tavern:mondrian_painting": "挂画・蒙德里安"
   },
   "en_US": {
     "kaleidoscope_tavern:white_sofa": "White Sofa",
@@ -906,6 +934,20 @@ export const NAMES = {
     "kaleidoscope_tavern:wine_q5": "Wine (Quality 5/6)",
     "kaleidoscope_tavern:wine_q6": "Wine (Quality 6/6)",
     "kaleidoscope_tavern:guidebook": "Tavern Guide",
-    "kaleidoscope_tavern:recipe_book": "Tavern Recipe Book"
+    "kaleidoscope_tavern:recipe_book": "Tavern Recipe Book",
+    "kaleidoscope_tavern:ysbb_painting": "Painting · YSBB",
+    "kaleidoscope_tavern:tartaric_acid_painting": "Painting · Tartaric Acid",
+    "kaleidoscope_tavern:cr019_painting": "Painting · CR019",
+    "kaleidoscope_tavern:unknown_painting": "Painting · Unknown",
+    "kaleidoscope_tavern:master_marisa_painting": "Painting · Master Marisa",
+    "kaleidoscope_tavern:son_of_man_painting": "Painting · Son of Man",
+    "kaleidoscope_tavern:david_painting": "Painting · David",
+    "kaleidoscope_tavern:girl_with_pearl_earring_painting": "Painting · Girl with a Pearl Earring",
+    "kaleidoscope_tavern:starry_night_painting": "Painting · Starry Night",
+    "kaleidoscope_tavern:van_gogh_self_portrait_painting": "Painting · Van Gogh Self-Portrait",
+    "kaleidoscope_tavern:father_painting": "Painting · Father",
+    "kaleidoscope_tavern:great_wave_painting": "Painting · The Great Wave off Kanagawa",
+    "kaleidoscope_tavern:mona_lisa_painting": "Painting · Mona Lisa",
+    "kaleidoscope_tavern:mondrian_painting": "Painting · Mondrian"
   }
 };

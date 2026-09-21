@@ -1,0 +1,23 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:van_gogh_self_portrait_painting"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:item_frame"
+      },
+      {
+        "item": "minecraft:painting"
+      }
+    ],
+    "result": {
+      "item": "kaleidoscope_tavern:van_gogh_self_portrait_painting",
+      "count": 1
+    }
+  }
+}

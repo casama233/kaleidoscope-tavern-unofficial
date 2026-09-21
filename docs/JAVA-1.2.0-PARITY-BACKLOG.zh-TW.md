@@ -19,7 +19,7 @@
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
 | 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽的手動存取／精確品質返還／來源瓶型展示已完成；Circular亮度14與End Rod粒子已適配** | Bar/Cellar Cabinet；Holder/Rack 紅石彈射仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
-| 其他裝飾 | **3款 Pendant Lamp 已移植雙格上/下半結構、下半亮度13、無碰撞、單件回收與孤兒半格修復**；部分資產/靜態展示已收錄 | Incense、Painting、Stepladder 等逐個核對放置、形狀、狀態與掉落 |
+| 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
@@ -171,3 +171,16 @@ Java 1.2.0 `CircularRackBlock` 固定6槽，`circular_rack_blocklist` 為空。�
 來源方塊固定亮度14、shape `Block.box(0,0,0,16,2,16)`，Bedrock 對應 origin [-8,0,-8] size [16,2,16]；配方 IRI 三行（I=iron ingot、R=end rod）輸出2個。Java `animateTick` 在有物品時以1/8機率沿邊線生成 End Rod 粒子；Bedrock 使用穩定 `Dimension.spawnParticle('minecraft:endrod')`，在20tick custom block cadence 每次生成1個隨機邊線粒子，明示為較低頻的視覺適配而非逐tick等價。
 
 Java紅石上升沿投擲酒瓶／Molotov仍按既定原則保持 **NOT_ADAPTED**。實機 helper 朝向、粒子密度、多人重連與手機角度點選仍為 **NOT_RUN**。
+
+
+## Batch 14：14 款 Painting 掛畫
+
+Java 1.2.0 的 `PaintingBlock` 共14個註冊變體，共用相同方塊邏輯與基礎模型。來源放置規則完整保留：點側面為 `wall` 並使用被點擊面作 facing；點上表面為 `floor`，facing 取玩家水平朝向的反向；點下表面為 `ceiling`，facing 取玩家原水平朝向。三種 attach face × 四方向共12態。
+
+六種來源碰撞／選擇形狀都是單一 1/16 格薄 AABB，因此 Bedrock 可逐態等價，不需要 helper entity。14款直接復用 A13/A14 已轉換的 `geometry.kt_assets_a13.painting_base` 與來源貼圖。13份 shapeless 配方及 Mondrian shaped 配方由鎖定 Java recipe 自動轉換；`c:dyes/*` 映射原版染料，`c:gems/diamond` 映射原版 diamond。
+
+Java 原本使用共同名稱「掛畫」再用 tooltip 顯示作品名；Bedrock 方塊物品缺少同等 tooltip 流程，因此顯示名合併為「掛畫・作品名」保留辨識資訊。明示差異：waterlogging 暫不移植；Java inventory 的獨立2D item sprite 改用既有 block item visual。Minecraft／手機／多人／BDS／Realms 的牆/地/天花板旋轉與單面材質仍為 **NOT_RUN**。
+
+## Stepladder 暫緩原因
+
+Stepladder 的雙格放置可以直接復用 Batch 11 的 vertical-double 核心，但 Java 每個 half 的碰撞都是兩個 VoxelShape box 的聯集。Bedrock 穩定 custom block `minecraft:collision_box` 只能描述單一 AABB；直接取包圍盒會把人字梯變成大實心牆，明顯損害可玩性。因此目前只完成來源核對，不用錯誤碰撞宣稱完成；找到穩定複合碰撞方案後再回補。

@@ -777,6 +777,39 @@
       "connection_states": 6,
       "waterlogged": false,
       "full_collision_parity": false
+    },
+    {
+      "kind": "table",
+      "item": "kaleidoscope_tavern:table",
+      "block": "kaleidoscope_tavern:table",
+      "geometry_by_state": {
+        "single": "geometry.kt_assets_a12.table_single",
+        "left": "geometry.kt_assets_a12.table_left",
+        "middle": "geometry.kt_assets_a12.table_middle",
+        "right": "geometry.kt_assets_a12.table_right",
+        "left_rot": "geometry.kt_assets_a12.table_left_rot",
+        "middle_rot": "geometry.kt_assets_a12.table_middle_rot",
+        "right_rot": "geometry.kt_assets_a12.table_right_rot"
+      },
+      "world_texture": "kt_assets_a12_block_table",
+      "item_geometry": "geometry.kt_assets_a17.item_display_table",
+      "item_texture": "kt_assets_a17_item_display_table",
+      "axis_states": 2,
+      "position_states": 4,
+      "source_collision": {
+        "origin": [
+          -8,
+          13,
+          -8
+        ],
+        "size": [
+          16,
+          3,
+          16
+        ]
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true
     }
   ],
   "derived_icons": [
@@ -1081,5 +1114,6 @@
   "stools": 16,
   "lights": 17,
   "sofas": 16,
+  "tables": 1,
   "engine_accepted": false
 }

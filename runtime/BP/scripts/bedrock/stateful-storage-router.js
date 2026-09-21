@@ -8,6 +8,14 @@ function revisionOf(read,block){
  try{return read(block)??-1;}catch{return -1;}
 }
 
+export function tickStorageVisuals(visuals,cursor,maintain,budget=128){
+ const list=[...visuals.values()];
+ if(!list.length)return cursor;
+ const n=Math.min(budget,list.length);
+ for(let i=0;i<n;i++)maintain(list[(cursor+i)%list.length]);
+ return (cursor+n)%list.length;
+}
+
 /**
  * Shared Bedrock event shell for one-block Tavern storage furniture.
  * Domain modules still own item rules, slot mapping, state validation and recovery.

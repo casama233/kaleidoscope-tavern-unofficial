@@ -18,6 +18,8 @@ import {placeBarCabinet,useBarCabinet,recoverBarCabinet,syncBarCabinetConnection
 import {CABINET_POSITION,barCabinetKey} from '../runtime/BP/scripts/core/bar-cabinet.js';
 import {placeCellarCabinet,useCellarCabinet,recoverCellarCabinet,syncCellarCabinetConnection,syncCellarCabinetVisuals,CELLAR_CABINET_TEST} from '../runtime/BP/scripts/bedrock/cellar-cabinet.js';
 import {cellarCabinetKey} from '../runtime/BP/scripts/core/cellar-cabinet.js';
+import {installCookeryGuidePublisher,COOKERY_GUIDE_EVENTS} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
+import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
 const pos={x:0,y:64,z:0};
 const hand=(p,id,n=1)=>p.inventory.setItem(p.selectedSlotIndex,id?typeof id==='string'?new ItemStack(id,n):id:undefined);
@@ -159,3 +161,14 @@ test('White Lady High Heels persists source 3600 seconds and climbs one blocked 
 test('High Heels refuses normal motion, jumping, two-block walls and repeated vertical wall climbing',()=>{const p=player();assert(applyCustomEffect(p,{effect:NS+':high_heels',duration:100,amplifier:0}));p.location={x:.5,y:65,z:2.7};p.inputInfo.movement={x:0,y:1};d.getBlock({x:0,y:65,z:3}).setType('minecraft:stone');p.velocity={x:0,y:0,z:.1};assert.equal(pulseHighHeels(p),false);p.velocity={x:0,y:0,z:0};p.isJumping=true;assert.equal(pulseHighHeels(p),false);p.isJumping=false;d.getBlock({x:0,y:66,z:3}).setType('minecraft:stone');assert.equal(pulseHighHeels(p),false);d.getBlock({x:0,y:66,z:3}).setType('minecraft:air');assert(pulseHighHeels(p));d.getBlock({x:0,y:66,z:3}).setType('minecraft:stone');d.getBlock({x:0,y:67,z:3}).setType('minecraft:air');d.getBlock({x:0,y:68,z:3}).setType('minecraft:air');assert.equal(pulseHighHeels(p),false);assert.equal(p.location.y,66);});
 test('remaining unsupported effects are still not substituted with arbitrary buffs',()=>{for(const id of['slightly_tipsy','grass_stealth','long_reach']){const p=player();assert.equal(applyCustomEffect(p,{effect:NS+':'+id,duration:100,amplifier:0}),false);assert.equal(p.effects.length,0);}});
 test('independent guide includes new furniture/effect pages; recipe API count stays41',()=>{assert.equal(runtimeRegistry().allRecipes().length,41);const ids=runtimeRegistry().allPages().map(x=>x.id);assert(ids.includes(NS+':c6_furniture'));assert(ids.includes(NS+':c6_sonic'));assert.equal(diagnosticSnapshot().build,'C6 / 0.6.0');assert.equal(diagnosticSnapshot().independentGuidebook,true);});
+
+test('Cookery guide publisher waits for host ready, then sends one complete Tavern chapter',()=>{
+ const bus=new system.constructor(),logs=[];const publisher=installCookeryGuidePublisher(bus,COOKERY_GUIDE_PAYLOAD,m=>logs.push(m));
+ bus.advance(2);assert(bus.sent.some(x=>x.id===COOKERY_GUIDE_EVENTS.ping));assert(!bus.sent.some(x=>x.id===COOKERY_GUIDE_EVENTS.begin));
+ bus.afterEvents.scriptEventReceive.emit({id:COOKERY_GUIDE_EVENTS.ready,message:JSON.stringify({api:1})});
+ bus.advance(20);
+ assert.equal(bus.sent.filter(x=>x.id===COOKERY_GUIDE_EVENTS.begin).length,1);
+ assert.equal(bus.sent.filter(x=>x.id===COOKERY_GUIDE_EVENTS.end).length,1);
+ assert(bus.sent.some(x=>x.id===COOKERY_GUIDE_EVENTS.chunk));
+ assert.equal(publisher.getStatus().successfulTransfers,1);assert.equal(logs.length,0);publisher.dispose();
+});

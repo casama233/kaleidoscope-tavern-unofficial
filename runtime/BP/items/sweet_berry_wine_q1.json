@@ -2,10 +2,7 @@
   "format_version": "1.26.50",
   "minecraft:item": {
     "description": {
-      "identifier": "kaleidoscope_tavern:sweet_berry_wine_q1",
-      "menu_category": {
-        "category": "items"
-      }
+      "identifier": "kaleidoscope_tavern:sweet_berry_wine_q1"
     },
     "components": {
       "minecraft:display_name": {
@@ -16,7 +13,7 @@
       "kaleidoscope_tavern:drink_effects": {},
       "minecraft:food": {
         "nutrition": 0,
-        "saturation_modifier": 0.0,
+        "saturation_modifier": 0,
         "can_always_eat": true,
         "using_converts_to": "kaleidoscope_tavern:empty_bottle"
       },

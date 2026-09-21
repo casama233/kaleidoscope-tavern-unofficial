@@ -5,13 +5,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {world,system,startup,Player,ItemStack,Container,Entity,GameMode} from './fake-server.js';
-import {ui} from './fake-ui.js';
-import {book,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
+import {migrateLegacyGuide,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
 import {initializeTub,createBarrel,operate,press,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';
 import {barrelCells} from '../runtime/BP/scripts/core/machines.js';
 import {packetsFor,EVENTS} from '../runtime/BP/scripts/core/transport.js';
-import {guideEntries} from '../runtime/BP/scripts/core/guide.js';
 import {registerTavernExtension} from '../sdk/tavern-extension-client.js';
 const NS='kaleidoscope_tavern',dim=world.getDimension('overworld');
 const payload=JSON.parse(fs.readFileSync(new URL('../examples/extension-payload.json',import.meta.url)));
@@ -30,10 +28,10 @@ function click(p,b){const e={player:p,block:b,isFirstEvent:true,cancel:false};wo
 function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_bucket');operate(p,b,'use');}}
 function code(fn,want){assert.throws(fn,e=>e.code===want);}
 
-test('entrypoint registers unique independent item/block custom components and41 recipes',()=>{
- assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,20);assert.equal(regs.items.size,6);
- assert(regs.items.has(NS+':guidebook'));assert(regs.items.has(NS+':recipe_book'));assert(!regs.items.has('kaleidoscope_cookery:guidebook'));
- assert.equal(diagnosticSnapshot().cookeryManifestBound,true);assert.equal(diagnosticSnapshot().engineAcceptance,'NOT_RUN_BY_AUTHOR');
+test('entrypoint registers one legacy-guide migrator and41 recipes',()=>{
+ assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,20);assert.equal(regs.items.size,5);
+ assert(regs.items.has(NS+':legacy_guide'));assert(!regs.items.has(NS+':guidebook'));assert(!regs.items.has(NS+':recipe_book'));
+ assert.equal(diagnosticSnapshot().cookeryManifestBound,true);assert.equal(diagnosticSnapshot().guideAuthority,'kaleidoscope_cookery:guidebook');assert.equal(diagnosticSnapshot().engineAcceptance,'NOT_RUN_BY_AUTHOR');
 });
 test('barrel placement uses all27 verified air cells and consumes exactly one',()=>{
  const p=player(),b=barrel(p);assert.equal(count(p,NS+':barrel'),1);assert.equal(state(b).kind,'barrel');
@@ -69,11 +67,10 @@ test('visual synchronization reuses entity and removes duplicates or obsolete fl
 test('orphan visual is cleaned after load; foreign entities not touched',()=>{const pos=target(),e=dim.spawnEntity(NS+':barrel_open_visual',pos),f=dim.spawnEntity('minecraft:pig',pos);e.setDynamicProperty('kt:core',JSON.stringify(pos));e.setDynamicProperty('kt:anchor',machineKey(dim.id,pos));world.afterEvents.entityLoad.emit({entity:e});world.afterEvents.entityLoad.emit({entity:f});system.advance();assert(e.removed);assert(!f.removed);});
 test('explosions exclude runtime machine blocks but retain unrelated blocks',()=>{const p=player(),b=barrel(p),stone=dim.getBlock(target());stone.setType('minecraft:stone');let impacted=[b,stone];world.beforeEvents.explosion.emit({getImpactedBlocks:()=>impacted,setImpactedBlocks:r=>impacted=r});assert.deepEqual(impacted,[stone]);});
 test('creative placement is free but ingredient exchanges still conserve containers',()=>{const p=new Player('creative',dim,GameMode.Creative),b=barrel(p);assert.equal(count(p,NS+':barrel'),2);hand(p,NS+':grape_bucket');operate(p,b,'use');assert.equal(count(p,NS+':grape_bucket'),0);assert.equal(count(p,'minecraft:bucket'),1);assert.equal(state(b).amount,1000);});
-test('independent guide and recipe book open different views without Cookery keys',async()=>{const p=player();p.setDynamicProperty('kc:guidebook_language','en_US');ui.forms=[];ui.responses=[];await book(p,false);assert.match(ui.forms[0].content,/獨立酒館/);ui.forms=[];await book(p,true);assert.match(ui.forms[0].content,/41/);assert.equal(p.getDynamicProperty('kc:guidebook_language'),'en_US');assert.equal(p.getDynamicProperty('kc:known_recipes'),undefined);});
-test('guide language and bookmark operations write only Tavern properties',async()=>{const p=player();p.setDynamicProperty('kc:guidebook_language','zh_CN');ui.forms=[];ui.responses=[{selection:5},{formValues:[2]},{canceled:true}];await book(p);assert.equal(p.getDynamicProperty('kaleidoscope_tavern:guide_locale'),'en_US');assert.equal(p.getDynamicProperty('kc:guidebook_language'),'zh_CN');ui.responses=[{selection:0},{selection:0},{selection:1},{canceled:true}];await book(p);const marks=JSON.parse(p.getDynamicProperty('kaleidoscope_tavern:guide_bookmarks'));assert.equal(marks.length,1);assert(marks[0].startsWith(NS+':'));});
+test('legacy Tavern guide items migrate to the required Cookery guide instead of opening a second UI',()=>{for(const id of[NS+':guidebook',NS+':recipe_book']){const p=player();hand(p,id);assert(migrateLegacyGuide(p));assert.equal(p.inventory.getItem(0).typeId,'kaleidoscope_cookery:guidebook');assert.equal(migrateLegacyGuide(p),false);}});
 test('server-only extension registration ignores entity and command-block sources',()=>{const before=runtimeRegistry().list().length,ps=packetsFor(payload);for(const sourceType of ['Entity','Block'])for(const p of ps)system.afterEvents.scriptEventReceive.emit({...p,sourceType});assert.equal(runtimeRegistry().list().length,before);});
-test('separate example add-on receives handshake, sends chunks and receivesack',async()=>{const demo=await import('../examples/Tavern-Extension-Demo/BP/scripts/main.js');system.advance(60);assert(demo.registration.registered);assert.equal(runtimeRegistry().list().filter(x=>x.source==='tavern_demo').length,1);assert(guideEntries(runtimeRegistry(),'en_US').some(x=>x.id==='tavern_demo:introduction'));assert(system.sent.some(x=>x.id===EVENTS.ack&&JSON.parse(x.message).ok));});
-test('registered extension recipe is actually processed by the barrel adapter',()=>{const p=player(),b=barrel(p);for(let i=0;i<4;i++){hand(p,'minecraft:water_bucket');operate(p,b,'use');}hand(p,'minecraft:glow_berries',3);operate(p,b,'use');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.recipeId,'tavern_demo:berry_test');assert.equal(state(b).batch.remaining,3);runtimeRegistry().remove('tavern_demo');assert(!guideEntries(runtimeRegistry(),'en_US').some(x=>x.source==='tavern_demo'));hand(p,NS+':empty_bottle');operate(p,b,'extract');assert.equal(count(p,NS+':wine_q1'),1);});
+test('separate example add-on receives handshake, sends chunks and receivesack',async()=>{const demo=await import('../examples/Tavern-Extension-Demo/BP/scripts/main.js');system.advance(60);assert(demo.registration.registered);assert.equal(runtimeRegistry().list().filter(x=>x.source==='tavern_demo').length,1);assert(runtimeRegistry().allPages().some(x=>x.id==='tavern_demo:introduction'));assert(system.sent.some(x=>x.id===EVENTS.ack&&JSON.parse(x.message).ok));});
+test('registered extension recipe is actually processed by the barrel adapter',()=>{const p=player(),b=barrel(p);for(let i=0;i<4;i++){hand(p,'minecraft:water_bucket');operate(p,b,'use');}hand(p,'minecraft:glow_berries',3);operate(p,b,'use');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.recipeId,'tavern_demo:berry_test');assert.equal(state(b).batch.remaining,3);runtimeRegistry().remove('tavern_demo');assert(!runtimeRegistry().allPages().some(x=>x.source==='tavern_demo'));hand(p,NS+':empty_bottle');operate(p,b,'extract');assert.equal(count(p,NS+':wine_q1'),1);});
 test('SDK disposal before registration does not falsely claim successful registration',()=>{const p=structuredClone(payload);p.source='dispose_test';p.recipes=[];p.pages=[];const h=registerTavernExtension(system,p,{log:()=>{}});h.dispose();system.advance(10);assert.equal(h.registered,false);assert.equal(h.attempts,0);});
 test('oversized extension messages cannot partially register data',()=>{system.afterEvents.scriptEventReceive.emit({id:EVENTS.begin,message:'x'.repeat(1901),sourceType:'Server'});assert.equal(runtimeRegistry().list().length,0);assert(system.sent.some(x=>x.id===EVENTS.ack&&JSON.parse(x.message).ok===false));});
 
@@ -87,7 +84,7 @@ test('extension can use an actually observed Cookery material without modifying 
 test('extension pressing recipe and guide appear together and output correct measured liquid',()=>{
  const ext={api:1,source:'press_demo',version:'1.0.0',recipes:[{id:'press_demo:apple_test',kind:'pressing',input:['minecraft:apple'],fluid:NS+':grape_juice',amount:250}],pages:[{id:'press_demo:instructions',title:{en_US:'Experimental apple press'},body:{en_US:'A test recipe.'},recipeIds:['press_demo:apple_test']}]};
  for(const packet of packetsFor(ext))system.afterEvents.scriptEventReceive.emit({...packet,sourceType:'Server'});
- const b=tub(),p=player();hand(p,'minecraft:apple',4);operate(p,b,'use');for(let i=0;i<4;i++)press(b,p,1);assert.equal(state(b).amount,1000);assert.equal(state(b).slots[0],null);assert(guideEntries(runtimeRegistry(),'en_US').some(x=>x.id==='press_demo:instructions'));runtimeRegistry().remove('press_demo');
+ const b=tub(),p=player();hand(p,'minecraft:apple',4);operate(p,b,'use');for(let i=0;i<4;i++)press(b,p,1);assert.equal(state(b).amount,1000);assert.equal(state(b).slots[0],null);assert(runtimeRegistry().allPages().some(x=>x.id==='press_demo:instructions'));runtimeRegistry().remove('press_demo');
 });
 
 const reference=process.env.COOKERY_REFERENCE_ROOT;

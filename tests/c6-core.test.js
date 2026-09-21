@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {unit,shriekDamage,shriekHit,shriekImpulse,shriekParticles} from '../runtime/BP/scripts/core/combat-effects.js';
 import {COLORS,LIGHT_COLORS,furnitureItem,furnitureBlock,itemId,blockId,dyeColor,seatId,seatColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,relativeSeatYaw,faceOffset} from '../runtime/BP/scripts/core/furniture.js';
-import {readStatus,addStatus,inflatedAabbIntersects} from '../runtime/BP/scripts/core/custom-effects.js';
+import {readStatus,addStatus,inflatedAabbIntersects,countdownPulseCrossed,visionRadius} from '../runtime/BP/scripts/core/custom-effects.js';
 const load=p=>JSON.parse(fs.readFileSync(new URL('../'+p,import.meta.url)));const zero={x:0,y:0,z:0},forward={x:0,y:0,z:1};
 const box=(x,y,z,width=.6)=>({center:{x,y,z},extent:{x:width/2,y:1,z:width/2}});
 test('source health multiplier uses Java float32 and current HP',()=>{assert.equal(shriekDamage(20),24);assert.equal(shriekDamage(7),Math.fround(Math.fround(7)*Math.fround(1.2)));assert.equal(shriekDamage(.5),Math.fround(.6));for(const bad of[0,-1,NaN,Infinity])assert.throws(()=>shriekDamage(bad));});
@@ -20,3 +20,6 @@ test('anchor roundtrip separates dimensions and supports negative coordinates',(
 test('all4 cardinal directions and seat angles wrap predictably',()=>{assert.deepEqual([0,90,180,270].map(facingForYaw),[0,1,2,3]);assert.deepEqual([0,1,2,3].map(facingYaw),[180,-90,0,90]);assert.equal(relativeSeatYaw(-170,170),20);assert.equal(facingForFace('North',0),0);assert.deepEqual(faceOffset('Up'),{x:0,y:1,z:0});assert.throws(()=>faceOffset('invalid'));});
 test('turn animation affects cushion only, not base_root',()=>{const a=load('runtime/RP/animations/runtime_furniture.animation.json').animations['animation.kt_runtime.stool.turn'];assert.deepEqual(Object.keys(a.bones),['bone']);assert.equal(a.bones.bone.rotation[1],'v.kt_seat_angle');const cl=load('runtime/RP/entity/runtime_seat_blue.entity.json')['minecraft:client_entity'].description;assert(cl.scripts.pre_animation[0].includes('math.lerprotate'));assert(cl.scripts.pre_animation[0].includes('q.delta_time'));});
 test('all33 recipe ingredients and sources are recorded with bytes hash',()=>{const report=load('docs/C6-SOURCE-AUDIT.json');assert.equal(report.files.filter(x=>x.kind.startsWith('original JAR recipe')).length,33);assert(report.files.every(f=>/^[a-f0-9]{64}$/.test(f.sha256)));});
+
+test('Vision source radius is 6/12/18 and caps at amplifier2',()=>{assert.equal(visionRadius(0),6);assert.equal(visionRadius(1),12);assert.equal(visionRadius(2),18);assert.equal(visionRadius(255),18);assert.throws(()=>visionRadius(-1));});
+test('Vision 50-tick countdown pulse detects crossed Java modulo boundaries',()=>{assert(countdownPulseCrossed(36000,35997,50));assert(!countdownPulseCrossed(35997,35992,50));assert(countdownPulseCrossed(35952,35947,50));assert(countdownPulseCrossed(50,45,50));assert(!countdownPulseCrossed(45,40,50));assert.throws(()=>countdownPulseCrossed(40,45,50));});

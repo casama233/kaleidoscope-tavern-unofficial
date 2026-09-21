@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "高腳凳、沙發、桌子與彩燈",
-      "zh_CN": "高脚凳、沙发、桌子与彩灯",
-      "en_US": "Stools, sofas, tables and string lights"
+      "zh_TW": "高腳凳、沙發、桌子、吧台與彩燈",
+      "zh_CN": "高脚凳、沙发、桌子、吧台与彩灯",
+      "en_US": "Stools, sofas, tables, bar counters and string lights"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發、酒館桌與17款彩燈皆可合成、放置及回收。沙發保留6種跨色連接狀態；桌子保留Java的X/Z軸與single/left/middle/right四態，成排後鎖定軸向，避免垂直鄰桌把整排扭轉。桌面碰撞直接使用原作13/16到16/16薄板。桌子配方保留minecraft:planks與minecraft:fences原生tag，鐵錠tag映射原版iron_ingot。沙發每格可坐1人；高腳凳與彩燈規則不變。Sofa/Table waterlogging及實機多人/觸控仍待驗收。",
-      "zh_CN": "16色高脚凳、16色沙发、酒馆桌与17款彩灯均可合成、放置和回收。桌子保留Java的X/Z轴与single/left/middle/right四态；成排后锁定连接轴，避免垂直邻桌扭转整排。桌面碰撞直接采用原作13/16到16/16薄板。Sofa/Table waterlogging与实机多人/触控仍待验收。",
-      "en_US": "All 16 stool colors, 16 sofa colors, the Tavern table and 17 string-light designs are craftable/placeable/recoverable. Tables preserve Java X/Z-axis locking plus single/left/middle/right states so a connected row cannot be stolen by a perpendicular neighbor. The collision/selection slab exactly uses the source 13/16..16/16 tabletop shape. The source planks/fences recipe tags are preserved; only c:ingots/iron maps to vanilla iron_ingot. Sofa/Table waterlogging and real-client multiplayer/touch behavior remain unverified."
+      "zh_TW": "16色高腳凳、16色沙發、酒館桌與17款彩燈皆可合成、放置及回收。沙發保留6種跨色連接狀態；桌子保留Java的X/Z軸與single/left/middle/right四態，成排後鎖定軸向，避免垂直鄰桌把整排扭轉。桌面碰撞直接使用原作13/16到16/16薄板。桌子配方保留minecraft:planks與minecraft:fences原生tag，鐵錠tag映射原版iron_ingot。沙發每格可坐1人；高腳凳與彩燈規則不變。Sofa/Table waterlogging及實機多人/觸控仍待驗收。\nBatch 8：吧台直接復用沙發同一份Java IConnectionBlock六態連接規則與鄰居刷新框架，使用倉庫既有原作6套幾何／貼圖；可合成、放置、回收並自動形成直線與左右轉角。",
+      "zh_CN": "16色高脚凳、16色沙发、酒馆桌与17款彩灯均可合成、放置和回收。桌子保留Java的X/Z轴与single/left/middle/right四态；成排后锁定连接轴，避免垂直邻桌扭转整排。桌面碰撞直接采用原作13/16到16/16薄板。Sofa/Table waterlogging与实机多人/触控仍待验收。\nBatch 8：吧台直接复用沙发同一份Java IConnectionBlock六态连接规则与邻居刷新框架，使用仓库既有原作6套几何／贴图；可合成、放置、回收并自动形成直线与左右转角。",
+      "en_US": "All 16 stool colors, 16 sofa colors, the Tavern table and 17 string-light designs are craftable/placeable/recoverable. Tables preserve Java X/Z-axis locking plus single/left/middle/right states so a connected row cannot be stolen by a perpendicular neighbor. The collision/selection slab exactly uses the source 13/16..16/16 tabletop shape. The source planks/fences recipe tags are preserved; only c:ingots/iron maps to vanilla iron_ingot. Sofa/Table waterlogging and real-client multiplayer/touch behavior remain unverified.\nBatch 8 ports Bar Counter by reusing the exact shared Java IConnectionBlock six-state logic and neighbor-refresh framework already used by sofas. Existing source geometries/textures are reused; counters are craftable/placeable/recoverable and form straight runs plus both corners."
     }
   },
   {

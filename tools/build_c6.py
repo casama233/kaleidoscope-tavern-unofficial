@@ -5,7 +5,7 @@ import json,copy,hashlib,importlib.util,re
 from PIL import Image
 R=Path(__file__).resolve().parents[1];BP=R/'runtime/BP';RP=R/'runtime/RP';A=R/'art';N='kaleidoscope_tavern';V=[0,6,0]
 COLORS=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
-CN=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];TW=dict(zip(COLORS,CN));TW['colorless']='無'
+TC=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];SC=['白','浅灰','灰','黑','棕','红','橙','黄','浅绿','绿','青','浅蓝','蓝','紫','洋红','粉红'];TW=dict(zip(COLORS,TC));CN=dict(zip(COLORS,SC));TW['colorless']='無';CN['colorless']='无'
 def load(p):return json.loads(p.read_text(encoding='utf-8'))
 def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def dedupe_lang(p,keep_last=False):
@@ -46,7 +46,7 @@ def main():
   protect(src,'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
  def labels(short,color,family):
   for lc in ['zh_TW','zh_CN','en_US']:
-   label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈')
+   label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else (TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈') if lc=='zh_TW' else CN[color]+'色'+('高脚凳'if family=='stool'else'彩灯'))
    names[lc][N+':'+short]=label
  for color in COLORS:
   visual=vis['bar_stool_'+color];short=color+'_bar_stool';block='stool_'+color;entity='seat_'+color
@@ -74,7 +74,7 @@ def main():
  for lc in ['zh_TW','zh_CN','en_US']:
   p=RP/f'texts/{lc}.lang';s=p.read_text(encoding='utf-8').split('## C6 ADDITIONS')[0].rstrip()+'\n## C6 ADDITIONS\n'
   for b in bindings:s+='item.'+b['item']+'.name='+names[lc][b['item']]+'\n'+'tile.'+b['block']+'.name='+names[lc][b['item']]+'\n'
-  s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Sneak: place furniture'if lc=='en_US'else'潛行放置家具')+'\n';p.write_text(s,encoding='utf-8')
+  s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Sneak: place furniture'if lc=='en_US'else'潜行放置家具'if lc=='zh_CN'else'潛行放置家具')+'\n';p.write_text(s,encoding='utf-8')
  # Native all-player inventory/book APIs are never edited. These pages belong to Tavern alone.
  p=BP/'scripts/data/mixology-pages.js';pages=mod(p)
  for page in pages:

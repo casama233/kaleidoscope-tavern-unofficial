@@ -25,3 +25,6 @@ give @s kaleidoscope_tavern:empty_glassware 8
 give @s kaleidoscope_tavern:holder 2
 give @s kaleidoscope_tavern:wine_q5 2
 give @s kaleidoscope_tavern:empty_bottle 2
+give @s kaleidoscope_tavern:tilted_rack 2
+give @s kaleidoscope_tavern:vodka_q6 2
+give @s kaleidoscope_tavern:mother_snow_q2 2

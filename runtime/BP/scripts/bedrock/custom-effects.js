@@ -2,12 +2,13 @@ import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {system,world} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map();
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
-export function statusNow(p){const old=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id);return advanceStatus(old,track?Math.max(0,system.currentTick-track.tick):0);}
+function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
+export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){write(p,{schema:1,entries:[]});tracks.delete(p.id);}
 export function applyCustomEffect(p,row){
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
@@ -38,6 +39,20 @@ export function applyCustomEffect(p,row){
  }
  const state=addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier);write(p,state);customEffectDiagnostics.applied++;return true;
 }
+export function pulseVision(p,amplifier){
+ const radius=visionRadius(amplifier),source=p.getAABB(),min={x:source.center.x-source.extent.x-radius,y:source.center.y-source.extent.y-radius,z:source.center.z-source.extent.z-radius},volume={x:2*(source.extent.x+radius),y:2*(source.extent.y+radius),z:2*(source.extent.z+radius)};
+ let targets=0,newGlow=false;
+ for(const entity of p.dimension.getEntities({location:min,volume}))try{
+  if(entity.id===p.id)continue;
+  const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
+  if(!inflatedAabbIntersects(source,entity.getAABB(),radius))continue;
+  if(!entity.getEffect?.('glowing'))newGlow=true;
+  entity.addEffect('glowing',60,{amplifier:0,showParticles:true});targets++;
+ }catch(e){error(e);}
+ customEffectDiagnostics.visionPulses++;customEffectDiagnostics.visionTargets+=targets;
+ if(newGlow)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}
+ return targets;
+}
 export function handleKill(event){
  const victim=event.deadEntity,p=event.damageSource?.damagingEntity;
  try{
@@ -53,9 +68,11 @@ export function handleKill(event){
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));
  for(const p of players)try{
-  const state=statusNow(p);if(!state.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
+  const {before,state}=statusWindow(p);if(!state.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
   write(p,state);
+  const vision=activeStatus(state,'kaleidoscope_tavern:vision');
+  if(vision){const previous=before.entries.find(e=>e.id==='kaleidoscope_tavern:vision'&&e.amplifier===vision.amplifier);if(previous&&countdownPulseCrossed(previous.ticks,vision.ticks,50))pulseVision(p,vision.amplifier);}
   if(activeStatus(state,'kaleidoscope_tavern:xp_drain')){
    const center={...p.location,y:p.location.y+.5};
    for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location:p.location,maxDistance:14}).slice(0,128)){

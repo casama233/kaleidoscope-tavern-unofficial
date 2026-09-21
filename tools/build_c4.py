@@ -45,7 +45,7 @@ def main():
  # Reuse the SAME declared native drop cell as A17; no invented source-image claim.
  dump(RP/'particles/runtime_pour_stream.json',{'format_version':'1.10.0','particle_effect':{'description':{'identifier':N+':pour_stream','basic_render_parameters':{'material':'particles_alpha','texture':'textures/particle/particles'}},'components':{'minecraft:emitter_lifetime_once':{'active_time':.01},'minecraft:emitter_rate_instant':{'num_particles':1},'minecraft:emitter_shape_point':{},'minecraft:particle_lifetime_expression':{'max_lifetime':.15},'minecraft:particle_initial_speed':0,'minecraft:particle_appearance_billboard':{'size':[.025,.045],'facing_camera_mode':'lookat_xyz','uv':{'texture_width':128,'texture_height':128,'uv':[8,56],'uv_size':[8,8]}},'minecraft:particle_appearance_tinting':{'color':['variable.kt_tint.r','variable.kt_tint.g','variable.kt_tint.b','1.0 - variable.particle_age / variable.particle_lifetime']}}}})
  for lc in ['zh_TW','zh_CN','en_US']:
-  p=RP/f'texts/{lc}.lang';text=p.read_text(encoding='utf-8').split('## C4 ADDITIONS')[0].rstrip()+'\n## C4 ADDITIONS\n';text+='action.interact.kt_shake='+('Shake / stop' if lc=='en_US' else '搖杯／停止')+'\n';p.write_text(text,encoding='utf-8')
+  p=RP/f'texts/{lc}.lang';text=p.read_text(encoding='utf-8').split('## C4 ADDITIONS')[0].rstrip()+'\n## C4 ADDITIONS\n';text+='action.interact.kt_shake='+('Shake / stop' if lc=='en_US' else '摇杯／停止' if lc=='zh_CN' else '搖杯／停止')+'\n';p.write_text(text,encoding='utf-8')
  # Keep the original C3 page IDs/bookmarks, replace their outdated operation description in the generated map.
  pages=BP/'scripts/data/mixology-pages.js';txt=pages.read_text(encoding='utf-8');data=json.loads(txt.split(' = ',1)[1].rsplit(';',1)[0]);
  for page in data:

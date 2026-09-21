@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 import {unit,shriekDamage,shriekHit,shriekImpulse,shriekParticles} from '../runtime/BP/scripts/core/combat-effects.js';
 import {COLORS,LIGHT_COLORS,furnitureItem,furnitureBlock,itemId,blockId,dyeColor,seatId,seatColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,relativeSeatYaw,faceOffset} from '../runtime/BP/scripts/core/furniture.js';
-import {readStatus,addStatus,inflatedAabbIntersects,countdownPulseCrossed,visionRadius} from '../runtime/BP/scripts/core/custom-effects.js';
+import {readStatus,addStatus,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,TOMB_RAIDER_TYPES,TOMB_RAIDER_CHANCE,tombRaiderTarget,tombRaiderProc} from '../runtime/BP/scripts/core/custom-effects.js';
 const load=p=>JSON.parse(fs.readFileSync(new URL('../'+p,import.meta.url)));const zero={x:0,y:0,z:0},forward={x:0,y:0,z:1};
 const box=(x,y,z,width=.6)=>({center:{x,y,z},extent:{x:width/2,y:1,z:width/2}});
 test('source health multiplier uses Java float32 and current HP',()=>{assert.equal(shriekDamage(20),24);assert.equal(shriekDamage(7),Math.fround(Math.fround(7)*Math.fround(1.2)));assert.equal(shriekDamage(.5),Math.fround(.6));for(const bad of[0,-1,NaN,Infinity])assert.throws(()=>shriekDamage(bad));});
@@ -23,3 +23,16 @@ test('all33 recipe ingredients and sources are recorded with bytes hash',()=>{co
 
 test('Vision source radius is 6/12/18 and caps at amplifier2',()=>{assert.equal(visionRadius(0),6);assert.equal(visionRadius(1),12);assert.equal(visionRadius(2),18);assert.equal(visionRadius(255),18);assert.throws(()=>visionRadius(-1));});
 test('Vision 50-tick countdown pulse detects crossed Java modulo boundaries',()=>{assert(countdownPulseCrossed(36000,35997,50));assert(!countdownPulseCrossed(35997,35992,50));assert(countdownPulseCrossed(35952,35947,50));assert(countdownPulseCrossed(50,45,50));assert(!countdownPulseCrossed(45,40,50));assert.throws(()=>countdownPulseCrossed(40,45,50));});
+
+test('Tomb Raider maps exact Java disarmable families to Bedrock IDs',()=>{
+ assert.equal(TOMB_RAIDER_TYPES.length,14);
+ for(const id of['minecraft:skeleton','minecraft:stray','minecraft:wither_skeleton','minecraft:bogged','minecraft:zombie','minecraft:zombie_villager','minecraft:drowned','minecraft:husk','minecraft:piglin','minecraft:piglin_brute','minecraft:zombie_pigman','minecraft:vindicator','minecraft:pillager','minecraft:witch'])assert(tombRaiderTarget(id),id);
+ for(const id of['minecraft:creeper','minecraft:evocation_illager','minecraft:player','minecraft:zombified_piglin'])assert(!tombRaiderTarget(id),id);
+});
+test('Tomb Raider 30 percent roll preserves Java float32 boundary',()=>{
+ assert.equal(TOMB_RAIDER_CHANCE,Math.fround(.3));
+ assert(tombRaiderProc(.299999));
+ assert.equal(tombRaiderProc(.3),false);
+ assert.equal(tombRaiderProc(.300001),false);
+ for(const bad of[-.1,1,NaN,Infinity])assert.throws(()=>tombRaiderProc(bad));
+});

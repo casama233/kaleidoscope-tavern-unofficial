@@ -1348,6 +1348,1238 @@
       },
       "waterlogged": false,
       "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "ysbb",
+      "item": "kaleidoscope_tavern:ysbb_painting",
+      "block": "kaleidoscope_tavern:ysbb_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_ysbb",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "tartaric_acid",
+      "item": "kaleidoscope_tavern:tartaric_acid_painting",
+      "block": "kaleidoscope_tavern:tartaric_acid_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_tartaric_acid",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "cr019",
+      "item": "kaleidoscope_tavern:cr019_painting",
+      "block": "kaleidoscope_tavern:cr019_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a13_block_deco_painting_cr019",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "unknown",
+      "item": "kaleidoscope_tavern:unknown_painting",
+      "block": "kaleidoscope_tavern:unknown_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_unknown",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "master_marisa",
+      "item": "kaleidoscope_tavern:master_marisa_painting",
+      "block": "kaleidoscope_tavern:master_marisa_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_master_marisa",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "son_of_man",
+      "item": "kaleidoscope_tavern:son_of_man_painting",
+      "block": "kaleidoscope_tavern:son_of_man_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_son_of_man",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "david",
+      "item": "kaleidoscope_tavern:david_painting",
+      "block": "kaleidoscope_tavern:david_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a13_block_deco_painting_david",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "girl_with_pearl_earring",
+      "item": "kaleidoscope_tavern:girl_with_pearl_earring_painting",
+      "block": "kaleidoscope_tavern:girl_with_pearl_earring_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_girl_with_pearl_earring",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "starry_night",
+      "item": "kaleidoscope_tavern:starry_night_painting",
+      "block": "kaleidoscope_tavern:starry_night_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_starry_night",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "van_gogh_self_portrait",
+      "item": "kaleidoscope_tavern:van_gogh_self_portrait_painting",
+      "block": "kaleidoscope_tavern:van_gogh_self_portrait_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_van_gogh_self_portrait",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "father",
+      "item": "kaleidoscope_tavern:father_painting",
+      "block": "kaleidoscope_tavern:father_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a14_block_deco_painting_father",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "great_wave",
+      "item": "kaleidoscope_tavern:great_wave_painting",
+      "block": "kaleidoscope_tavern:great_wave_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a13_block_deco_painting_great_wave",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "mona_lisa",
+      "item": "kaleidoscope_tavern:mona_lisa_painting",
+      "block": "kaleidoscope_tavern:mona_lisa_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a13_block_deco_painting_mona_lisa",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
+    },
+    {
+      "kind": "painting",
+      "style": "mondrian",
+      "item": "kaleidoscope_tavern:mondrian_painting",
+      "block": "kaleidoscope_tavern:mondrian_painting",
+      "geometry": "geometry.kt_assets_a13.painting_base",
+      "texture": "kt_assets_a13_block_deco_painting_mondrian",
+      "attach_states": 3,
+      "facing_states": 4,
+      "source_shapes": {
+        "north": {
+          "origin": [
+            -7,
+            1,
+            7
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "east": {
+          "origin": [
+            -8,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "south": {
+          "origin": [
+            -7,
+            1,
+            -8
+          ],
+          "size": [
+            14,
+            14,
+            1
+          ]
+        },
+        "west": {
+          "origin": [
+            7,
+            1,
+            -7
+          ],
+          "size": [
+            1,
+            14,
+            14
+          ]
+        },
+        "floor": {
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        },
+        "ceiling": {
+          "origin": [
+            -7,
+            15,
+            -7
+          ],
+          "size": [
+            14,
+            1,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "exact_collision_parity": true,
+      "java_item_sprite_replaced_by_block_visual": true,
+      "engine_accepted": false
     }
   ],
   "derived_icons": [
@@ -1659,5 +2891,6 @@
   "pendant_lamps": 3,
   "tilted_racks": 1,
   "circular_racks": 1,
+  "paintings": 14,
   "engine_accepted": false
 }

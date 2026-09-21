@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:mondrian_painting"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " B ",
+      "WFY",
+      " R "
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:blue_dye"
+      },
+      "F": {
+        "item": "minecraft:item_frame"
+      },
+      "R": {
+        "item": "minecraft:red_dye"
+      },
+      "W": {
+        "item": "minecraft:white_dye"
+      },
+      "Y": {
+        "item": "minecraft:yellow_dye"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:mondrian_painting",
+      "count": 1
+    }
+  }
+}

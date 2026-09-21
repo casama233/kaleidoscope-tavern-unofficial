@@ -29,5 +29,7 @@ give @s kaleidoscope_tavern:tilted_rack 2
 give @s kaleidoscope_tavern:vodka_q6 2
 give @s kaleidoscope_tavern:mother_snow_q2 2
 give @s kaleidoscope_tavern:circular_rack 2
+give @s kaleidoscope_tavern:mona_lisa_painting 1
+give @s kaleidoscope_tavern:great_wave_painting 1
 give @s kaleidoscope_tavern:brandy_q6 2
 give @s kaleidoscope_tavern:carignan_q3 2

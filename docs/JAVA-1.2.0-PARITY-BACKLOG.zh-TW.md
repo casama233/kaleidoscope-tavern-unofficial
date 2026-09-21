@@ -19,7 +19,7 @@
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
 | 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽，以及木質／玻璃 Bar Cabinet 雙槽存取、精確品質返還與來源展示已完成** | Cellar Cabinet 九槽；Holder/Rack 紅石彈射仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
-| 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
+| 其他裝飾 | **3款 Pendant Lamp＋14款 Painting＋8款 Incense 已移植**；Incense 含手動/紅石 OPEN、粒子與每120 tick 亡靈 magic 傷害 | Stepladder；Incense 殭屍村民精確60 tick轉化；Stepladder Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
@@ -196,3 +196,14 @@ Java 1.2.0 的 `BAR_CABINET` 與 `GLASS_BAR_CABINET` 都直接註冊 `BarCabinet
 木櫃配方 GGG/G G/GGG 使用 grapevine。玻璃櫃 Java 配方中央為 `c:glass_panes`；Bedrock shaped recipe 支援 tag ingredient，但無法可靠假設 Java common tag 名在 Bedrock 端存在，因此本移植明確展開成無色 glass_pane + 16色 stained_glass_pane，共17份等價配方。
 
 Batch 14 的14款掛畫與其 generator/測試全部保留。實機瓶型位置、Glass Cabinet cutout/透明效果、多人重連與手機左右點擊仍為 **NOT_RUN**。
+
+
+## Batch 16：8 款 Incense 香薰
+
+Java 1.2.0 的 Sakura/Pine/Ginkgo/Spore/Catnip/Snow/Butterfly/Firefly 共用同一 `IncenseBlock`。本批保留 `FACING + OPEN + POWERED` 三態契約：放置時 facing 取玩家水平朝向反向，初始 OPEN/POWERED 讀取紅石；玩家互動只翻轉 OPEN，不修改 POWERED；只有實際紅石訊號與 POWERED 發生邊沿差異時，才把 OPEN/POWERED 同步到新訊號。這保留了 Java「手動關閉已通電香薰後，在紅石電平不變時不會立刻被強制打開」的細節。
+
+來源碰撞為單一 `Block.box(5,0,5,11,7,11)`，Bedrock 精確映射為 origin `[-3,0,-3]` / size `[6,7,6]`。8款共用 A13 closed/open 幾何，保留各自貼圖與來源配方。關閉狀態仍以3-tick block component cadence 生成小粒子；OPEN 時額外以低密度 server cadence 在來源32×32水平區域散佈大型粒子。Pine/Ginkgo/Catnip/Snow/Butterfly/Firefly 直接使用既有 A17 large 粒子；Sakura/Spore 的 Java large 粒子是 Java vanilla `CHERRY_LEAVES` / `SPORE_BLOSSOM_AIR`，本批為避免跨版粒子名稱硬猜，遠場使用同款 A17 style 粒子作明示 fallback。
+
+伺服器效果保留 Java 全域120-tick節點：OPEN 香薰查詢來源方塊 AABB 向外膨脹32格的 65×65×65 區域，只處理 undead family 且存活實體，使用 Bedrock native `magic` damage 每次造成1點傷害。Java 在殭屍村民受傷後生命<=1時呼叫 `startConverting(null,60)`；Bedrock vanilla curing 有不同長時序，本批只記錄 conversion-eligible 診斷，**不**用 kill+spawn 或不同時序事件冒充精確移植。
+
+明示差異：Java client `animateTick` 的大型粒子密度遠高於伺服器廣播可接受值，因此本批採低密度 server cadence；紅石 neighbor callback 改由3-tick component 輪詢，最多有數 tick 延遲；Java push reaction DESTROY 因現有自訂方塊安全策略仍標為 immovable divergence。Minecraft／手機／多人／BDS／Realms 的紅石、粒子密度、undead family 與傷害表現仍為 **NOT_RUN**。

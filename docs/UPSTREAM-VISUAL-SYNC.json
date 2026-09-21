@@ -114,6 +114,23 @@
       "semantic_diff": "Bloody Mary keeps 14 Java elements but 9 change geometry/UV. The locked old Bedrock geo proves the 14-to-18 source-driven mapping. One reversed-X source element maps four side faces plus Java down -> Bedrock up with explicit 180-degree UV rotation. Only changed elements are regenerated; the official block PNG is copied byte-for-byte.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "screwdriver",
+      "assets": [
+        "screwdriver"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/screwdriver/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "b1fdb0d34432078aa7c702b6122671d612a3d178",
+      "model_updated_blob": "e9055a754d690ba17fecd2dd35e4bd5b3c0486f6",
+      "texture_baseline_blob": "3fb9e5995929620f04a60bce85db127d2d39ee4d",
+      "texture_updated_blob": "125669746daa8b7db1049c698757b788423da014",
+      "semantic_diff": "Screwdriver keeps 10 Java elements but all 10 change. The locked old Bedrock geo proves the 10-to-13 mapping: source element 0 splits into four side-face cubes, while elements 1-9 map one-to-one. The existing source-driven converter regenerates every changed element without new conversion exceptions; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

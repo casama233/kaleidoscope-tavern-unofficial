@@ -6,7 +6,7 @@ import {runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js'
 import {placeFurniture,sitOnFurniture,recoverFurniture,recolorLight,ensureSeat,maintainSeat,tickFurniture,FURNITURE_TEST,furnitureDiagnostics} from '../runtime/BP/scripts/bedrock/furniture.js';
 import {NS,COLORS,LIGHT_COLORS,FACING,SEAT_ANCHOR,anchorKey,seatId} from '../runtime/BP/scripts/core/furniture.js';
 import {performShriek,COMBAT_TEST,combatDiagnostics} from '../runtime/BP/scripts/bedrock/combat-effects.js';
-import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics,pulseVision} from '../runtime/BP/scripts/bedrock/custom-effects.js';
+import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics,pulseVision,handleTombRaider,TOMB_PICKUP_UNLOCK} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 import {consumeCocktail} from '../runtime/BP/scripts/bedrock/mixology.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
 const pos={x:0,y:64,z:0};
@@ -16,9 +16,14 @@ function player(name){const p=new Player(name??'c6-'+(++seq),d);p.location={x:.5
 function stool(color='blue',p=player()){d.getBlock({...pos,y:63}).setType('minecraft:stone');hand(p,NS+':'+color+'_bar_stool',2);const b=placeFurniture(p,pos);p.selectedSlotIndex=1;hand(p,undefined);return {p,b,e:ensureSeat(b)};}
 function light(color='colorless',p=player()){d.getBlock({...pos,y:63}).setType('minecraft:stone');hand(p,NS+':string_lights_'+color,2);const b=placeFurniture(p,pos);p.selectedSlotIndex=1;hand(p,undefined);return {p,b};}
 function mob(p,{x=0,y=0,z=8,type='minecraft:zombie',health=100,extent=.3}={}){const h=p.getHeadLocation(),e=d.spawnEntity(type,{x:h.x+x,y:h.y+y-1,z:h.z+z});e.health=mockHealth(health,health);e.box={center:{x:h.x+x,y:h.y+y,z:h.z+z},extent:{x:extent,y:1,z:extent}};return e;}
+function equipMob(e,item='minecraft:diamond_sword'){
+ e._held=typeof item==='string'?new ItemStack(item,1):item?.clone();
+ e.equippable={getEquipment:slot=>slot==='Mainhand'?e._held?.clone():undefined,setEquipment:(slot,value)=>{if(slot!=='Mainhand'||e.rejectEquipment)return false;e._held=value?.clone();return true;}};
+ return e;
+}
 function click(p,b,face='Up'){const event={player:p,block:b,blockFace:face,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(event);system.advance();return event;}
 function full(p){for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));}
-test.beforeEach(()=>{d.blocks.clear();d.entities.clear();d.unloaded.clear();d.failSpawn=false;d.failAudio=false;d.failParticles=false;d.sounds=[];d.particles=[];world.dp.clear();online=[];FURNITURE_TEST.helpers.clear();COMBAT_TEST.lastCast.clear();});
+test.beforeEach(()=>{d.blocks.clear();d.entities.clear();d.unloaded.clear();d.failSpawn=false;d.failSpawnItem=false;d.failAudio=false;d.failParticles=false;d.sounds=[];d.particles=[];world.dp.clear();online=[];FURNITURE_TEST.helpers.clear();COMBAT_TEST.lastCast.clear();});
 for(const c of COLORS)test('full place -> sit -> turn -> dismount -> recover '+c,()=>{const {p,b,e}=stool(c);assert.equal(count(p,NS+':'+c+'_bar_stool'),1);assert.equal(b.typeId,NS+':stool_'+c);assert.equal(e.typeId,seatId(c));assert.equal(sitOnFurniture(p,b),e);assert.equal(e.rideable.getRiders()[0],p);p.rotation.y=45;tickFurniture();assert.equal(e.getProperty(NS+':seat_yaw'),-135);assert.deepEqual(e.rotation,{x:0,y:180});p.isSneaking=true;tickFurniture();assert.equal(e.rideable.getRiders().length,0);recoverFurniture(p,b);assert(b.isAir);assert(e.removed);assert.equal(count(p,NS+':'+c+'_bar_stool'),2);});
 for(const c of LIGHT_COLORS)test('place and recover exact light design '+c,()=>{const {p,b}=light(c);assert.equal(b.typeId,NS+':light_'+c);assert.equal(recoverFurniture(p,b),NS+':string_lights_'+c);assert(b.isAir);assert.equal(count(p,NS+':string_lights_'+c),2);});
 test('before-event furniture route consumes1 from stack, no vanilla duplicate',()=>{const p=player();d.getBlock({...pos,y:63}).setType('minecraft:stone');p.isSneaking=true;hand(p,NS+':blue_bar_stool',16);const e=click(p,d.getBlock({...pos,y:63}));assert(e.cancel);assert.equal(d.getBlock(pos).typeId,NS+':stool_blue');assert.equal(count(p,NS+':blue_bar_stool'),15);});
@@ -72,4 +77,33 @@ test('Mojito Vision persists as timed custom effect then pulses Glowing every Ja
 test('Vision amplifier radius caps at18 and excludes dead/self/outside AABB targets',()=>{
  const p=player(),edge=mob(p,{x:18.2,z:0}),outside=mob(p,{x:18.61,z:0}),dead=mob(p,{x:3,z:0,health:0});const sounds=d.sounds.length;
  const n=pulseVision(p,2);assert.equal(n,1);assert.equal(edge.getEffect('glowing').ticks,60);assert.equal(outside.getEffect('glowing'),undefined);assert.equal(dead.getEffect('glowing'),undefined);assert.equal(d.sounds.length,sounds+1);
+});
+
+test('Nether Special Tomb Raider disarms eligible mob, wears item to1 durability and enforces40tick pickup delay',()=>{
+ const p=player(),target=equipMob(mob(p,{type:'minecraft:pillager',z:3}));
+ target._held.nameTag='source weapon';
+ assert(applyCustomEffect(p,{effect:NS+':tomb_raider,duration:90,amplifier:0}));
+ const before=system.currentTick;assert(handleTombRaider({hurtEntity:target,damageSource:{damagingEntity:p}},()=>.299));
+ assert.equal(target._held,undefined);
+ const drop=[...d.entities.values()].find(e=>e.typeId==='minecraft:item');assert(drop);
+ const stack=drop.getComponent('minecraft:item').itemStack,dur=stack.getComponent('minecraft:durability');
+ assert.equal(stack.typeId,'minecraft:diamond_sword');assert.equal(stack.nameTag,'source weapon');assert.equal(dur.damage,dur.maxDurability-1);
+ assert.equal(drop.getDynamicProperty(TOMB_PICKUP_UNLOCK),before+40);
+ let ev={entity:p,item:drop,cancel:false};world.beforeEvents.entityItemPickup.emit(ev);assert(ev.cancel);
+ system.advance(39);ev={entity:p,item:drop,cancel:false};world.beforeEvents.entityItemPickup.emit(ev);assert(ev.cancel);
+ system.advance(1);ev={entity:p,item:drop,cancel:false};world.beforeEvents.entityItemPickup.emit(ev);assert.equal(ev.cancel,false);
+});
+test('Tomb Raider excludes non-source mobs and Java 0.3F boundary does not proc',()=>{
+ const p=player(),creeper=equipMob(mob(p,{type:'minecraft:creeper'})),pillager=equipMob(mob(p,{type:'minecraft:pillager',z:4}));
+ assert(applyCustomEffect(p,{effect:NS+':tomb_raider,duration:90,amplifier:0}));
+ assert.equal(handleTombRaider({hurtEntity:creeper,damageSource:{damagingEntity:p}},()=>0),false);
+ assert.equal(handleTombRaider({hurtEntity:pillager,damageSource:{damagingEntity:p}},()=>.3),false);
+ assert.equal(creeper._held.typeId,'minecraft:diamond_sword');assert.equal(pillager._held.typeId,'minecraft:diamond_sword');
+ assert.equal([...d.entities.values()].filter(e=>e.typeId==='minecraft:item').length,0);
+});
+test('Tomb Raider spawn failure restores original mainhand instead of deleting it',()=>{
+ const p=player(),target=equipMob(mob(p,{type:'minecraft:wither_skeleton'}));target._held.nameTag='keep me';const original=target._held.clone();
+ assert(applyCustomEffect(p,{effect:NS+':tomb_raider,duration:90,amplifier:0}));d.failSpawnItem=true;
+ assert.equal(handleTombRaider({hurtEntity:target,damageSource:{damagingEntity:p}},()=>0),false);
+ assert.deepEqual(target._held,original);assert.equal([...d.entities.values()].filter(e=>e.typeId==='minecraft:item').length,0);
 });

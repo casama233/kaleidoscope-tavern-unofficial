@@ -1,14 +1,36 @@
 {
+  "schema": 1,
   "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
-  "upstream_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
-  "upstream_message": "修复品红色小灯的模型面剔除问题",
-  "source_path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
-  "locked_copy": "data/upstream/post-1.2/c4ec1880/string_lights_magenta.json",
-  "bedrock_converted_paths": [
-    "art/RP/models/entity/string_lights_magenta.geo.json",
-    "runtime/RP/models/entity/string_lights_magenta.geo.json"
-  ],
-  "semantic_diff": "Same 19 elements/positions/rotations as previous model; adds the missing down face to all 12 rotated zero-thickness light planes so single-sided rendering no longer culls them from the reverse view.",
-  "texture_changed": false,
-  "engine_acceptance": "NOT_RUN"
+  "syncs": [
+    {
+      "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+      "message": "修复品红色小灯的模型面剔除问题",
+      "source_path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
+      "locked_copy": "data/upstream/post-1.2/c4ec1880/string_lights_magenta.json",
+      "bedrock_paths": [
+        "art/RP/models/entity/string_lights_magenta.geo.json",
+        "runtime/RP/models/entity/string_lights_magenta.geo.json"
+      ],
+      "semantic_diff": "Same 19 elements/positions/rotations as previous model; adds the missing down face to all 12 rotated zero-thickness light planes so single-sided rendering no longer culls them from the reverse view.",
+      "texture_changed": false,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "b30f34a2e340fed1528954104f93cf2c7e90fd79",
+      "message": "校正金色果汁颜色",
+      "source_path": "src/main/resources/assets/kaleidoscope_tavern/textures/item/gold_grape_bucket.png",
+      "locked_copy": "data/upstream/post-1.2/b30f34a/gold_grape_bucket.png",
+      "bedrock_paths": [
+        "runtime/RP/textures/kaleidoscope_tavern/item/gold_grape_bucket.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png"
+      ],
+      "previous_git_blob": "90836790746091ae951b03035e2d0f2fbe84d771",
+      "upstream_git_blob": "7d2452dc5a07f82fd114db6df9e1fb5998878fef",
+      "sha256": "ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0",
+      "previous_size": 245,
+      "size": 388,
+      "semantic_diff": "Official upstream changes only the gold grape bucket item PNG; the Bedrock pre-sync bytes exactly matched the previous upstream Git blob, and both runtime copies are replaced byte-for-byte with b30f34a.",
+      "engine_acceptance": "NOT_RUN"
+    }
+  ]
 }

@@ -89,6 +89,12 @@
       "asset": "string_lights_magenta",
       "fix": "12 rotated zero-thickness planes now have reverse faces; no texture change",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "b30f34a2e340fed1528954104f93cf2c7e90fd79",
+      "asset": "gold_grape_bucket",
+      "fix": "official item texture color correction; exact upstream Git blob 7d2452dc5a07f82fd114db6df9e1fb5998878fef / SHA-256 ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run C6 accumulated logic and event-adapter tests. No Minecraft is started."""
+"""Run C6 accumulated logic and event-adapter tests; print failing TAP. No Minecraft is started."""
 from pathlib import Path
 import argparse,os,re,json,subprocess,sys,shutil
 ROOT=Path(__file__).resolve().parents[1]

@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "empty_glassware",
+      "visual_key": "empty_glassware",
+      "baseline": "baseline/empty_glassware.json",
+      "updated": "updated/empty_glassware.json",
+      "baseline_blob": "a11f4fc13c541ce0b5539268a13809c22dc550a1",
+      "updated_blob": "c0784f61db642ebeaf5e77bee50bed990bb854ec",
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "geo": "runtime/RP/models/entity/empty_glassware.geo.json",
+      "block": "runtime/BP/blocks/cup_empty_glassware.json"
+    },
+    {
+      "id": "mystery_cocktail",
+      "visual_key": "mystery_cocktail",
+      "baseline": "baseline/mystery_cocktail.json",
+      "updated": "updated/mystery_cocktail.json",
+      "baseline_blob": "9a34f8b29a314c50303ace0c635c60771d56a517",
+      "updated_blob": "ffd15e77a2293a13b0980d3baf1ed16ac9cd5a77",
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "geo": "runtime/RP/models/entity/mystery_cocktail.geo.json",
+      "block": "runtime/BP/blocks/cup_mystery_cocktail.json"
+    },
+    {
+      "id": "sculk_special",
+      "visual_key": "sculk_special",
+      "baseline": "baseline/sculk_special.json",
+      "updated": "updated/sculk_special.json",
+      "baseline_blob": "8de1fc844025ce598efc2232aa5c01eebea7a6e8",
+      "updated_blob": "bf81c71e0b9ce3548c3a9dd0ca24798e4da26134",
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "geo": "runtime/RP/models/entity/sculk_special.geo.json",
+      "block": "runtime/BP/blocks/cup_sculk_special.json"
+    },
+    {
+      "id": "signature_cocktail",
+      "visual_key": "signature_cocktail",
+      "baseline": "baseline/signature_cocktail.json",
+      "updated": "updated/signature_cocktail.json",
+      "baseline_blob": "1cd76e0b3d8bb0508338b38b363bc7128fbc8476",
+      "updated_blob": "2efdab29f14f0c71b73bd81192dc7574c829aeb2",
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "geo": "runtime/RP/models/entity/signature_cocktail.geo.json",
+      "block": "runtime/BP/blocks/cup_signature_cocktail.json"
+    }
+  ]
+}

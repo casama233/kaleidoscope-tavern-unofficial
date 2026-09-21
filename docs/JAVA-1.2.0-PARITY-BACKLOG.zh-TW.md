@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 第一組4杯 cutout/shade 修正已同步 | `c70eec1` 其餘11個模型與7張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 兩組共8個模型的 cutout/shade 修正已同步 | `c70eec1` 其餘7個模型與7張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -110,6 +110,14 @@ Bedrock 本批次加入全部16色來源沙發與16份原配方，直接使用�
 來源 old/new JSON 均逐位元組鎖定在 `data/upstream/post-1.2/c70eec1/model-only-1/`，Git blob SHA 寫入 `sync-plan.json`。新增 `tools/sync_post12_visuals.py`：完整 rebuild 會自動 apply 所有 plan，CI 另用 `--check` 驗證來源語義、Git blob、registry、runtime block 與 geo。之後同類模型不再手改多處，只需新增 source snapshot + plan。
 
 本批只覆蓋 c70eec 的4/15個模型；其餘模型／貼圖會繼續小批次推進。實際 Minecraft 的 cutout 邊緣、透明排序、內外杯面、手持／物品欄效果仍為 **NOT_RUN**。
+
+## Post-1.2 視覺同步 Batch 4：c70eec1 第二組
+
+第二組選擇 **Empty Glassware／Mystery Cocktail／Sculk Special／Signature Cocktail**。逐份比對鎖定的 Java 1.2.0 提交 `6b0d619` 與官方 `c70eec1` 後，四個模型都只有 `render_type: translucent -> cutout`；元素數、座標、旋轉、UV、display transform、非 particle 貼圖引用與 `shade` 均完全不變。
+
+因此 Bedrock 本批不改任何 geometry cube，只把四個 visual binding 與對應 runtime cup block 的材質從 `blend` 切到 `alpha_test_single_sided`。old/new 原始 JSON 逐位元組鎖在 `data/upstream/post-1.2/c70eec1/model-only-2/`，其 Git blob SHA 寫入第二份 `sync-plan.json`，並繼續由同一個 `tools/sync_post12_visuals.py` apply/check；沒有建立第二套同步工具。
+
+完成後 c70eec 模型覆蓋由 **4/15 提升到 8/15**，尚餘7個模型與7張 block PNG、另有 Depth Charge item PNG。實際 Minecraft 的 alpha-test 邊緣、杯體內外面與各平台透明排序仍為 **NOT_RUN**。
 
 ## Batch 7：Table 連接桌
 

@@ -80,7 +80,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 
 ## 資源與持久化
 
-大多數 A17 模型／貼圖保持；目前已有三組有來源的官方 post-1.2 同步：洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 第一組 4 杯（黃銅之心／翡翠／教父／下界特調）的 cutout／unshaded 修正。後者由 `sync-plan.json + tools/sync_post12_visuals.py` 自動套用與 CI 驗證。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
+大多數 A17 模型／貼圖保持；目前已有四組有來源的官方 post-1.2 同步：洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 兩組共 8 個模型的 cutout／unshaded 修正（第二組為空酒杯／神秘雞尾酒／幽匿特調／特調雞尾酒，僅需切換 cutout）。後兩組都由 `sync-plan.json + tools/sync_post12_visuals.py` 自動套用與 CI 驗證。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
 
 家具由方塊類型與facing保存狀態，不另存一份家具物品庫存到world DP。高腳凳helper只提供視覺和原生rideable，按座標錨點重建/去重。區塊未載入不當空氣；helper錯色、失去主方塊或移位則 eject/remove，不生成第二份物品。
 

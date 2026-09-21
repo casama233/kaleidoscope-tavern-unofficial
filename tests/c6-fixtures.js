@@ -5,6 +5,7 @@ const ownEntity=Entity.prototype.getComponent,ownPlayer=Player.prototype.getComp
 Entity.prototype.getComponent=function(id){return id==='minecraft:rideable'?this.rideable:ownEntity.call(this,id);};
 Player.prototype.getComponent=function(id){return id==='minecraft:riding'&&this.ridingOn?{entityRidingOn:this.ridingOn}:ownPlayer.call(this,id);};
 Entity.prototype.getAABB=function(){if(this.failAABB)throw Error('AABB_FAIL');return this.box??{center:{x:this.location.x,y:this.location.y+1,z:this.location.z},extent:{x:.3,y:1,z:.3}};};
+Player.prototype.getAABB=function(){if(this.failAABB)throw Error('AABB_FAIL');return this.box??{center:{x:this.location.x,y:this.location.y+1,z:this.location.z},extent:{x:.3,y:1,z:.3}};};
 Entity.prototype.applyDamage=function(amount,opts){if(this.failDamage)throw Error('DAMAGE_FAIL');if(this.rejectDamage)return false;(this.damageCalls??=[]).push({amount,opts});if(this.health)this.health.setCurrentValue(Math.max(0,this.health.currentValue-amount));return true;};
 Entity.prototype.applyImpulse=function(v){if(this.failImpulse)throw Error('IMPULSE_FAIL');const p=this.velocity??{x:0,y:0,z:0};this.velocity={x:p.x+v.x,y:p.y+v.y,z:p.z+v.z};};
 Entity.prototype.getRotation=function(){return this.rotation??{x:0,y:0};};

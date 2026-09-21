@@ -31,6 +31,22 @@
       "size": 388,
       "semantic_diff": "Official upstream changes only the gold grape bucket item PNG; the Bedrock pre-sync bytes exactly matched the previous upstream Git blob, and both runtime copies are replaced byte-for-byte with b30f34a.",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "model-only-1",
+      "assets": [
+        "brass_heart",
+        "emerald",
+        "godfather",
+        "nether_special"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/model-only-1/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "semantic_diff": "For these four models, element count/coordinates/UV/display are unchanged. Official changes are translucent->cutout plus shade true->false on the plan-listed elements; Bedrock maps cutout to alpha_test_single_sided and marks the corresponding plan-listed cube faces unshaded.",
+      "texture_changed": false,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

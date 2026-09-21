@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "brass_heart",
+      "visual_key": "brass_heart",
+      "baseline": "baseline/brass_heart.json",
+      "updated": "updated/brass_heart.json",
+      "baseline_blob": "09d8293f09032f8a0cec6c2965923a04c32f4fd1",
+      "updated_blob": "04590e701beed6213092f09f23cbd102cadbfc89",
+      "shade_elements": [
+        2,
+        11
+      ],
+      "unshaded_cubes": [
+        2,
+        3,
+        4,
+        5,
+        17
+      ],
+      "geo": "runtime/RP/models/entity/brass_heart.geo.json",
+      "block": "runtime/BP/blocks/cup_brass_heart.json"
+    },
+    {
+      "id": "emerald",
+      "visual_key": "emerald",
+      "baseline": "baseline/emerald.json",
+      "updated": "updated/emerald.json",
+      "baseline_blob": "32c700a689fa5de94170320fd84f34726ab855e9",
+      "updated_blob": "cab953f9accfcb630ec77b0951a603cb25082a89",
+      "shade_elements": [
+        2
+      ],
+      "unshaded_cubes": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "geo": "runtime/RP/models/entity/emerald.geo.json",
+      "block": "runtime/BP/blocks/cup_emerald.json"
+    },
+    {
+      "id": "godfather",
+      "visual_key": "godfather",
+      "baseline": "baseline/godfather.json",
+      "updated": "updated/godfather.json",
+      "baseline_blob": "f36150898029322d8438c8a2c6b0a6f970970557",
+      "updated_blob": "8288aff66f9569c586b8319660b969271ae8c559",
+      "shade_elements": [
+        3
+      ],
+      "unshaded_cubes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "geo": "runtime/RP/models/entity/godfather.geo.json",
+      "block": "runtime/BP/blocks/cup_godfather.json"
+    },
+    {
+      "id": "nether_special",
+      "visual_key": "nether_special",
+      "baseline": "baseline/nether_special.json",
+      "updated": "updated/nether_special.json",
+      "baseline_blob": "2c00e84cda4770b03e07baf579b0e97cd661fc0d",
+      "updated_blob": "ae6d625392115b94499e2d9a56666a10b2b65863",
+      "shade_elements": [
+        2
+      ],
+      "unshaded_cubes": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "geo": "runtime/RP/models/entity/nether_special.geo.json",
+      "block": "runtime/BP/blocks/cup_nether_special.json"
+    }
+  ]
+}

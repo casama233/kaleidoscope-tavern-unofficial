@@ -37,6 +37,8 @@ jobs:
 
       - name: Generated runtime must be committed
         run: git diff --exit-code
+      - name: Post-1.2 visual sync validation
+        run: python tools/sync_post12_visuals.py --check
 
       - name: Localization contract validation
         run: python tools/validate_localization.py

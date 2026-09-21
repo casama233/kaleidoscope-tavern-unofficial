@@ -11,7 +11,7 @@ import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validat
 import {COCKTAILS} from '../data/mixology.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,breakDropTransaction} from './transactions.js';
 import {SHAKER_ITEMS,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable,POUR_TICKS,AUTO_STOP_TICKS,shakeHint} from '../core/immersion.js';
 import {syncShakerVisual,shakerPut,feedback,handStart,handStop,shakeAudio,finished,pourVisual,installImmersionCleanup} from './immersion.js';
 const SHAKER=NS+':shaker',STATION=NS+':shaker_station',FACING=NS+':facing',HELPER=NS+':signature_cup_visual',ANCHOR=NS+':cup_anchor';
@@ -49,10 +49,9 @@ export function resultStack(result){
  if(result.item===SIGNATURE){validatePayload(result.payload);item.setDynamicProperty(SIGNATURE_DATA,JSON.stringify(result.payload));}
  return item;
 }
-function transact(p,store,k,old,next,take,outputs,block,permutation){
- const c=inventory(p),raw=store.raw(k),oldperm=block.permutation;
- const plan=planInventory(c,p.selectedSlotIndex,take,outputs,makeStack);
- commitInventory(plan,c,()=>{if(permutation)block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},()=>{if(permutation)block.setPermutation(oldperm);store.restore(k,raw);});
+function transact(p,store,k,old,next,take,outputs,block,permutation,dropSound){
+ const raw=store.raw(k),oldperm=block.permutation,commit=()=>{if(permutation)block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},rollback=()=>{if(permutation)block.setPermutation(oldperm);store.restore(k,raw);};
+ if(dropSound){check(take===0,'BREAK_TAKE_UNSUPPORTED');breakDropTransaction(p,block,outputs,commit,rollback,dropSound);}else{const c=inventory(p),plan=planInventory(c,p.selectedSlotIndex,take,outputs,makeStack);commitInventory(plan,c,commit,rollback);}
  return next;
 }
 export function placeShaker(player,location){
@@ -70,9 +69,9 @@ export function unpourIngredient(player,b,{expectedRevision}={}){
   if(tx.input.container){check(h?.typeId===tx.input.container,'NEED_RETURNED_CONTAINER');knownItemCheck(h);}else check(!h,'EMPTY_HAND_REQUIRED');itemExists(tx.input.item);
   return transact(player,shakerStore,k,old,tx.state,tx.input.container?1:0,[tx.input.potion?{stack:restorePotion(tx.input),count:1}:{id:tx.input.item,count:1}],b);});
 }
-export function breakShaker(player,b,{expectedRevision}={}){
+export function breakShaker(player,b,{expectedRevision,drop=false}={}){
  near(player,b);const k=shakerKey(b.dimension.id,b.location);
- return locks.with([k,player.id],()=>{noSession(b);const old=getShaker(b);if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');check(!old.result&&old.slots.length===0,'EMPTY_SHAKER_FIRST');const result=transact(player,shakerStore,k,old,undefined,0,[{id:SHAKER,count:1}],b,BlockPermutation.resolve('minecraft:air'));syncShakerVisual(b,false);return result;});
+ return locks.with([k,player.id],()=>{noSession(b);const old=getShaker(b);if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');check(!old.result&&old.slots.length===0,'EMPTY_SHAKER_FIRST');const result=transact(player,shakerStore,k,old,undefined,0,[{id:SHAKER,count:1}],b,BlockPermutation.resolve('minecraft:air'),drop?'lantern':undefined);syncShakerVisual(b,false);return result;});
 }
 export function startShake(player,b,{expectedRevision,tick=system.currentTick}={}){
  near(player,b);check(registry,'INITIALIZING');const k=shakerKey(b.dimension.id,b.location);
@@ -107,10 +106,10 @@ export function placeCup(player,location){
   transact(player,cupStore,k,undefined,next,1,[],b,perm('cup_'+h.typeId.split(':')[1],next.facing));syncCupVisual(b);return next;});
 }
 function intactCup(b,s){return b?.typeId===NS+':cup_'+s.item.split(':')[1]&&b.permutation.getState(FACING)===s.facing;}
-export function takeCup(player,b,{expectedRevision}={}){
+export function takeCup(player,b,{expectedRevision,drop=false}={}){
  near(player,b);const k=cupKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{check(!cupReservations.has(k),'CUP_BUSY');const s=cupStore.load(k);check(s&&intactCup(b,s),'CUP_MISMATCH');if(expectedRevision!==undefined)check(s.revision===expectedRevision,'STATE_CONFLICT');const stack=resultStack(s);
-  transact(player,cupStore,k,s,undefined,0,[{stack,count:1}],b,BlockPermutation.resolve('minecraft:air'));cleanupCupVisual(b);return s;});
+  transact(player,cupStore,k,s,undefined,0,[{stack,count:1}],b,BlockPermutation.resolve('minecraft:air'),drop?'glass':undefined);cleanupCupVisual(b);return s;});
 }
 export function pourIntoPlacedCup(player,cup,shaker){
  near(player,cup);near(player,shaker);check(Math.abs(cup.location.x-shaker.location.x)+Math.abs(cup.location.z-shaker.location.z)===1&&cup.location.y===shaker.location.y,'CUP_NOT_ADJACENT');
@@ -183,7 +182,7 @@ export function installMixologyEvents(openBook){
  world.beforeEvents.playerBreakBlock.subscribe(e=>{
   if(e.cancel||!MIX_BLOCKS.has(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,loc={...e.block.location},id=e.block.typeId;
   let rev;try{rev=id===STATION?getShaker(e.block).revision:cupStore.load(cupKey(d.id,loc))?.revision;}catch{return;}
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return id===STATION?breakShaker(e.player,b,{expectedRevision:rev}):takeCup(e.player,b,{expectedRevision:rev});}));
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return id===STATION?breakShaker(e.player,b,{expectedRevision:rev,drop:true}):takeCup(e.player,b,{expectedRevision:rev,drop:true});}));
  });
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!MIX_BLOCKS.has(b.typeId))));
  world.afterEvents.entityLoad.subscribe(e=>{

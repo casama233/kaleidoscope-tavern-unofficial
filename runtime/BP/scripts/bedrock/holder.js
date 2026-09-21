@@ -4,7 +4,7 @@ import {NS,FACING,facingForYaw,faceOffset} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,air} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,air,breakDropTransaction} from './transactions.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
@@ -26,11 +26,7 @@ export function syncHolder(block){
  if(block?.typeId!==HOLDER_BLOCK)return false;const k=holderKey(block.dimension.id,block.location),state=store.load(k),wanted=state?.kind??0,current=kind(block);
  if(current!==wanted){block.setPermutation(block.permutation.withState(HOLDER_KIND,wanted));holderDiagnostics.repairs++;syncHolderVisual(block,state);return true;}syncHolderVisual(block,state);return false;
 }
-function transact(player,block,old,next,take,give,permutation){
- const k=holderKey(block.dimension.id,block.location),raw=store.raw(k),oldPermutation=block.permutation,c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,take,give,makeStack);
- commitInventory(plan,c,()=>{block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},()=>{block.setPermutation(oldPermutation);store.restore(k,raw);});
- syncHolderVisual(block,next);return next;
-}
+function transact(player,block,old,next,take,give,permutation,dropSound){const k=holderKey(block.dimension.id,block.location),raw=store.raw(k),oldPermutation=block.permutation;if(dropSound)breakDropTransaction(player,block,give,()=>{block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},()=>{block.setPermutation(oldPermutation);store.restore(k,raw);},dropSound);else{const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,take,give,makeStack);commitInventory(plan,c,()=>{block.setPermutation(permutation);store.save(k,next,old?.revision??-1);},()=>{block.setPermutation(oldPermutation);store.restore(k,raw);});}syncHolderVisual(block,next);return next;}
 export function placeHolder(player,target){
  canWrite(player);const d=player.dimension;near(player,d,target);const b=blockAt(d,target);check(b&&b.isAir,'SPACE_NOT_CLEAR');const h=hand(player);check(h?.typeId===HOLDER_BLOCK,'NEED_HOLDER');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');const k=holderKey(d.id,target);check(store.raw(k)===undefined,'STORAGE_CONFLICT');
  const facing=facingForYaw(player.getRotation().y);const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,1,[],makeStack),old=b.permutation;
@@ -45,9 +41,9 @@ export function takeHolderBottle(player,block,{expectedRevision}={}){
  canWrite(player);near(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(old,'HOLDER_EMPTY');check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
  transact(player,block,old,undefined,0,[{id:old.item,count:1}],block.permutation.withState(HOLDER_KIND,0));holderDiagnostics.taken++;return old.item;
 }
-export function recoverHolder(player,block,{expectedRevision}={}){
+export function recoverHolder(player,block,{expectedRevision,drop=false}={}){
  canWrite(player);near(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');const give=[{id:HOLDER_BLOCK,count:1},...(old?[{id:old.item,count:1}]:[])];
- transact(player,block,old,undefined,0,give,air());holderDiagnostics.recovered++;return give;
+ transact(player,block,old,undefined,0,give,air(),drop?'wood':undefined);holderDiagnostics.recovered++;return give;
 }
 export function maintainHolderVisual(e){
  if(e?.typeId!==HELPER)return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
@@ -60,7 +56,7 @@ export function installHolderEvents(openBook){
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}
   system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeHolder(e.player,target);}const b=clicked;if(!hs.id)return e.player.isSneaking?recoverHolder(e.player,b,{expectedRevision:revision}):takeHolderBottle(e.player,b,{expectedRevision:revision});if(holderBlockedItem(hs.id)){tell(e.player,'§e[Tavern] 此瓶型在 Java holder_blocklist 中，單瓶架拒收。');return;}if(holderItem(hs.id))return putHolderBottle(e.player,b,{expectedRevision:revision});tell(e.player,'§e[Tavern] 單瓶架只接受空酒瓶或來源允許的品質酒瓶；空手取出。');}));
  });
- world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==HOLDER_BLOCK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===HOLDER_BLOCK,'BLOCK_CHANGED');return recoverHolder(e.player,b,{expectedRevision:revision});}));});
+ world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==HOLDER_BLOCK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===HOLDER_BLOCK,'BLOCK_CHANGED');return recoverHolder(e.player,b,{expectedRevision:revision,drop:true});}));});
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>b.typeId!==HOLDER_BLOCK)));
  world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
  system.runInterval(tickHolderVisuals,20);

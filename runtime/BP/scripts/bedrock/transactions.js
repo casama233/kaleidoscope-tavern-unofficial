@@ -12,6 +12,20 @@ export function tell(p,s){try{p?.onScreenDisplay.setActionBar(s);}catch{}}
 export function handSnapshot(p){const h=hand(p);return {slot:p.selectedSlotIndex,id:h?.typeId??'',amount:h?.amount??0};}
 export function sameHand(p,s){const h=hand(p);check(p.selectedSlotIndex===s.slot&&(h?.typeId??'')===s.id&&(h?.amount??0)===s.amount,'STALE_HAND');}
 export function safe(p,fn){try{return fn();}catch(e){tell(p,'§e[Tavern] '+(e.code??String(e)));console.warn('[Tavern C2] '+e);return undefined;}}
+export const BREAK_SOUNDS=Object.freeze({
+ wood:{id:'dig.wood',pitch:1},glass:{id:'random.glass',pitch:1},metal:{id:'dig.stone',pitch:1.15},chain:{id:'dig.chain',pitch:.9},cloth:{id:'dig.cloth',pitch:.9},lantern:{id:'block.lantern.break',pitch:1},grass:{id:'dig.grass',pitch:1}
+});
+export function spawnOutputs(dimension,location,outputs){
+ const at={x:location.x+.5,y:location.y+.35,z:location.z+.5},spawned=[];
+ try{for(const output of outputs??[]){let remaining=output.count??1;check(Number.isInteger(remaining)&&remaining>0,'INVALID_DROP_COUNT');const template=output.stack?output.stack.clone():makeStack(output.id,1),max=Math.max(1,template.maxAmount??64);while(remaining>0){const stack=template.clone(),amount=Math.min(remaining,max);stack.amount=amount;spawned.push(dimension.spawnItem(stack,at));remaining-=amount;}}return spawned;}
+ catch(error){for(const entity of spawned)try{entity.remove();}catch{}throw error;}
+}
+/** Mining path: mutate authoritative state, spawn exact world drops, rollback both on failure, then play a native Bedrock material sound. */
+export function breakDropTransaction(player,block,outputs,commit,rollback,sound='wood'){
+ canWrite(player);const dimension=block.dimension,location={...block.location};let spawned=[];
+ try{commit();spawned=spawnOutputs(dimension,location,outputs);}catch(error){for(const entity of spawned)try{entity.remove();}catch{}let failed=false;try{rollback();}catch{failed=true;}check(!failed,'ROLLBACK_FAILED');throw error;}
+ const spec=BREAK_SOUNDS[sound]??BREAK_SOUNDS.wood;try{dimension.playSound(spec.id,{x:location.x+.5,y:location.y+.5,z:location.z+.5},{volume:1,pitch:spec.pitch});}catch{}return spawned;
+}
 export function withToolWear(plan,slot,creative=false,rng=Math.random) {
  if(creative)return;
  const item=plan.after[slot];check(item,'NO_TOOL');const durability=item.getComponent('minecraft:durability');check(durability,'NO_DURABILITY');

@@ -96,6 +96,21 @@ def build_creative_catalog():
   },
   'engine_acceptance':'NOT_RUN'
  })
+def build_block_sounds():
+ # Reuse Bedrock's native material sound groups instead of custom per-addon audio.
+ # Mapping follows Java SoundType where Bedrock exposes an equivalent group.
+ out={'format_version':'1.19.30'}
+ for p in sorted((BP/'blocks').glob('*.json')):
+  d=json.loads(p.read_text(encoding='utf-8'));identifier=d['minecraft:block']['description']['identifier'];short=identifier.split(':',1)[1]
+  if short.startswith(('bottle_','cup_')):sound='glass'
+  elif short=='shaker_station':sound='lantern'
+  elif short in {'tap','glassware_holder'}:sound='metal'
+  elif short.startswith('light_') or short.endswith('_pendant_lamp'):sound='chain'
+  elif short.endswith('_sofa'):sound='cloth'
+  elif short.endswith('_crop'):sound='grass'
+  else:sound='wood'
+  out[identifier]={'sound':sound}
+ dump(RP/'blocks.json',out)
 def main():
  lock=json.loads((ROOT/'compat/cookery/cookery.lock.json').read_text());v=[0,1,0]
  bpuid=uid('bp');rpuid=uid('rp');
@@ -263,3 +278,4 @@ if __name__=='__main__':
  import sync_post12_visuals
  sync_post12_visuals.apply_all()
  build_creative_catalog()
+ build_block_sounds()

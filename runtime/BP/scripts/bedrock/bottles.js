@@ -6,7 +6,7 @@ import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
 import {FARM_IDS} from './cultivation.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,breakDropTransaction} from './transactions.js';
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
 const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap','shaker_station'].map(x=>NS+':'+x));
@@ -34,15 +34,15 @@ export function placeBottle(player,target,{expectedRevision}={}){
   tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
  });
 }
-export function takeBottles(player,b,{all=false,expectedRevision}={}){
+export function takeBottles(player,b,{all=false,expectedRevision,drop=false}={}){
  canWrite(player);const k=bottleKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{
   const old=store.load(k);check(old,'MISSING_BOTTLE_STATE');check(intact(b,old),'DISPLAY_MISMATCH');
   if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
-  const tx=displayTake(old,all),raw=store.raw(k),oldBlock=b.permutation,c=inventory(player);
-  const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);
-  commitInventory(plan,c,()=>{b.setPermutation(tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});
-  tell(player,'§a已取回原品質酒瓶。');return tx;
+  const tx=displayTake(old,all),raw=store.raw(k),oldBlock=b.permutation,nextPermutation=tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air');
+  if(drop)breakDropTransaction(player,b,tx.give,()=>{b.setPermutation(nextPermutation);store.save(k,tx.state,old.revision);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);},'glass');
+  else{const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);commitInventory(plan,c,()=>{b.setPermutation(nextPermutation);store.save(k,tx.state,old.revision);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});}
+  tell(player,drop?'§a已破壞酒瓶展示；原品質酒瓶已掉落。':'§a已取回原品質酒瓶。');return tx;
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
@@ -78,7 +78,7 @@ export function installBottleEvents(openBook){
   if(!DISPLAY_IDS.has(e.block.typeId))return;e.cancel=true;
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;
   let rev;try{rev=store.load(bottleKey(d.id,p))?.revision;}catch{return;}
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return takeBottles(e.player,b,{all:true,expectedRevision:rev});}));
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return takeBottles(e.player,b,{all:true,expectedRevision:rev,drop:true});}));
  });
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!DISPLAY_IDS.has(b.typeId))));
 }

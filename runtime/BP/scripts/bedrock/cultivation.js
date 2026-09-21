@@ -3,7 +3,7 @@ import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,isFrame,frameType,updateFrame,speci
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air,breakDropTransaction} from './transactions.js';
 const locks=new Locks(),AGE=NS+':age',SHAPE=NS+':shape',WAX=NS+':waxed';
 export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS)]);
 const key=b=>`${b.dimension.id}/${b.location.x}_${b.location.y}_${b.location.z}`;
@@ -97,13 +97,13 @@ export function farmUse(player,b,{rng=Math.random}={}){
   return 'inspect';
  });
 }
-export function farmBreak(player,b,{rng=Math.random}={}){
+export function farmBreak(player,b,{rng=Math.random,drop=false}={}){
  canWrite(player);check(FARM_IDS.has(b.typeId),'BLOCK_CHANGED');
  return locks.with([key(b),player.id],()=>{
-  const outputs=player.getGameMode()===GameMode.Creative?[]:CROPS[b.typeId]?fruitHarvest(CROPS[b.typeId],age(b),false,rng):[{id:BARE,count:1},...(VINES[b.typeId]?[{id:NS+':grapevine',count:1}]:[])];
+  const crop=!!CROPS[b.typeId],outputs=player.getGameMode()===GameMode.Creative?[]:crop?fruitHarvest(CROPS[b.typeId],age(b),false,rng):[{id:BARE,count:1},...(VINES[b.typeId]?[{id:NS+':grapevine',count:1}]:[])];
   const edits=[{block:b,permutation:air()}];
   if(VINES[b.typeId]){const child=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(child,'UNLOADED_CROP');if(CROPS[child.typeId])edits.push({block:child,permutation:air()});}
-  exchangeBlocks(player,0,outputs,edits);refreshAround(b);return outputs;
+  if(drop){let undo=()=>{};breakDropTransaction(player,b,outputs,()=>{undo=applyBlocks(edits);},()=>undo(),crop?'grass':'wood');}else exchangeBlocks(player,0,outputs,edits);refreshAround(b);return outputs;
  });
 }
 export function registerCultivation({blockComponentRegistry:r}){
@@ -132,7 +132,7 @@ export function installCultivation(openBook){
   if(e.cancel)return;
   if(!FARM_IDS.has(e.block.typeId))return;e.cancel=true;
   const d=e.block.dimension,p={...e.block.location},sig=current(e.block);
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');return farmBreak(e.player,b);}));
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');return farmBreak(e.player,b,{drop:true});}));
  });
  // Same safety policy as C1 machines; native explosion drops are not yet modeled.
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!FARM_IDS.has(b.typeId))));

@@ -102,3 +102,5 @@ test('Cookery guide publisher uses bounded ASCII begin/chunk/end packets and rou
  const raw=packets.slice(1,-1).map(x=>x.message.split('\n').slice(4).join('\n')).join('');
  assert.deepEqual(JSON.parse(raw),COOKERY_GUIDE_PAYLOAD);
 });
+
+test('every generated Tavern block has one native Bedrock material sound mapping',()=>{const rp=load('runtime/RP/blocks.json'),allowed=new Set(['wood','glass','metal','chain','cloth','lantern','grass']),files=fs.readdirSync(new URL('../runtime/BP/blocks/',import.meta.url)).filter(x=>x.endsWith('.json'));for(const file of files){const id=load('runtime/BP/blocks/'+file)['minecraft:block'].description.identifier;assert(rp[id],id+' missing RP sound');assert(allowed.has(rp[id].sound),id+' unknown sound '+rp[id].sound);}assert.equal(rp[NS+':bottle_wine'].sound,'glass');assert.equal(rp[NS+':shaker_station'].sound,'lantern');assert.equal(rp[NS+':glassware_holder'].sound,'metal');assert.equal(rp[NS+':light_red'].sound,'chain');assert.equal(rp[NS+':blue_sofa'].sound,'cloth');assert.equal(rp[NS+':grape_crop'].sound,'grass');assert.equal(rp[NS+':bar_counter'].sound,'wood');});

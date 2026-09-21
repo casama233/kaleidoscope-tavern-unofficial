@@ -4,6 +4,7 @@ import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
+import {breakDropTransaction} from './transactions.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
 const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap';
@@ -103,17 +104,17 @@ export function findTapCore(tap){
  for(const d of Object.values(DIRECTIONS)){const core=resolveCore(blockAt(tap.dimension,offset(tap.location,d)));if(core?.typeId===CORE)return core;}
  return undefined;
 }
-export function dismantle(player,block){
+export function dismantle(player,block,{drop=false}={}){
  writable(player);
- if(block?.typeId===TAP){const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,0,player.getGameMode()===GameMode.Creative?[]:[{id:TAP,count:1}],make),old=block.permutation;
-  commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
+ if(block?.typeId===TAP){const give=player.getGameMode()===GameMode.Creative?[]:[{id:TAP,count:1}],old=block.permutation;if(drop)breakDropTransaction(player,block,give,()=>block.setType('minecraft:air'),()=>block.setPermutation(old),'metal');else{const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,0,give,make);commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));}return;
  }
  const core=requireCore(block),key=keyFor(core);
  return locks.with([key,player.id],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state,'MISSING_STATE');check(machineEmpty(state),'MACHINE_NOT_EMPTY');
-  const positions=state.kind==='barrel'?barrelCells(core.location):[core.location];const blocks=positions.map(p=>blockAt(core.dimension,p));check(blocks.every(Boolean),'CORE_UNAVAILABLE');
-  const old=blocks.map(b=>b.permutation),raw=store.raw(key);const plan=planInventory(inv(player),player.selectedSlotIndex,0,player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1}],make);
-  let touched=0;commitInventory(plan,inv(player),()=>{for(let i=0;i<blocks.length;i++){touched=i+1;blocks[i].setType('minecraft:air');}store.remove(key,state.revision);},()=>{for(let i=0;i<touched;i++)blocks[i].setPermutation(old[i]);store.restoreRaw(key,raw);});
+  const positions=state.kind==='barrel'?barrelCells(core.location):[core.location],blocks=positions.map(p=>blockAt(core.dimension,p));check(blocks.every(Boolean),'CORE_UNAVAILABLE');
+  const old=blocks.map(b=>b.permutation),raw=store.raw(key),give=player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1}];
+  if(drop)breakDropTransaction(player,block,give,()=>{for(const b of blocks)b.setType('minecraft:air');store.remove(key,state.revision);},()=>{for(let i=0;i<blocks.length;i++)blocks[i].setPermutation(old[i]);store.restoreRaw(key,raw);},'wood');
+  else{const plan=planInventory(inv(player),player.selectedSlotIndex,0,give,make);let touched=0;commitInventory(plan,inv(player),()=>{for(let i=0;i<blocks.length;i++){touched=i+1;blocks[i].setType('minecraft:air');}store.remove(key,state.revision);},()=>{for(let i=0;i<touched;i++)blocks[i].setPermutation(old[i]);store.restoreRaw(key,raw);});}
   try{removeVisuals(core);}catch(e){warn(e,key);}tell(player,'§a已拆除空機器。');
  });
 }
@@ -139,7 +140,7 @@ export function installMachineEvents(openBook){
    return operate(player,b,action,expected);
   }));
  });
- world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(ev.cancel)return;if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{check(ev.player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return dismantle(ev.player,b);}));});
+ world.beforeEvents.playerBreakBlock.subscribe(ev=>{if(ev.cancel)return;if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(ev.player,()=>{check(ev.player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');return dismantle(ev.player,b,{drop:true});}));});
  world.beforeEvents.explosion.subscribe(ev=>ev.setImpactedBlocks(ev.getImpactedBlocks().filter(b=>!OWN_BLOCKS.has(b.typeId))));
  if(world.afterEvents.entityLoad)world.afterEvents.entityLoad.subscribe(({entity})=>{
   if(!RUNTIME_VISUALS.includes(entity.typeId))return;

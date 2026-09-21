@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:firefly_incense"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "F",
+      "C",
+      "B"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:glass_bottle"
+      },
+      "C": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "F": {
+        "item": "minecraft:feather"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:firefly_incense",
+      "count": 1
+    }
+  }
+}

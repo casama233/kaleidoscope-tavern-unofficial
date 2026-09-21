@@ -17,7 +17,7 @@
   "ui_api": "2.0.0",
   "builtin_barrel_recipes": 23,
   "builtin_pressing_recipes": 6,
-  "native_crafting_recipes": 120,
+  "native_crafting_recipes": 128,
   "quality_drink_items": 144,
   "planned_recipe_exclusions": [
     {
@@ -88,7 +88,8 @@
     "paintings": 14,
     "bar_cabinets": 2,
     "cellar_cabinets": 1,
-    "new_shaped_recipes": 97,
+    "incenses": 8,
+    "new_shaped_recipes": 105,
     "new_shapeless_recipes": 13,
     "source_anchor_y": 0.875,
     "source_explicit_rider_offset": -0.0625,
@@ -122,6 +123,11 @@
     "cellar_cabinet_trapdoor_recipes": 20,
     "cellar_cabinet_powered_state": "OMITTED_WITH_REDSTONE_EJECTION",
     "cellar_cabinet_redstone": "NOT_ADAPTED",
+    "incense_tick_step": 3,
+    "incense_damage_period": 120,
+    "incense_range": 32,
+    "incense_magic_damage": 1,
+    "incense_zombie_villager_conversion": "NOT_ADAPTED_60_TICK",
     "table_axis_states": 2,
     "table_position_states": 4,
     "table_collision_y": [

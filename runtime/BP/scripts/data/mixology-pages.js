@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "酒館家具、酒架與九槽窖藏酒櫃",
-      "zh_CN": "酒馆家具、酒架与九槽窖藏酒柜",
-      "en_US": "Tavern furniture, racks and nine-slot Cellar Cabinet"
+      "zh_TW": "酒館家具、九槽酒櫃與香薰",
+      "zh_CN": "酒馆家具、九槽酒柜与香薰",
+      "en_US": "Tavern furniture, Cellar Cabinet and Incense"
     },
     "body": {
-      "zh_TW": "Batch 16完成Cellar Cabinet九槽窖藏酒櫃。它只允許點正面，依Java getLocalX與點擊Y把正面切成3×3九宮格；world DP保存9個獨立精確*_q1..q6 ID。來源cellar_cabinet_blocklist與Holder相同，拒絕10種大瓶型，因此支援empty_bottle+14種品質飲品base。櫃體同款同朝向連成single/left/middle/right四態，九個非空槽各最多1個無碰撞helper，按來源3×3位置、scale1與X -90°展示。來源櫃體沒有自訂shape，因此完整方塊碰撞。Java配方中央minecraft:trapdoors展開為11種木／菌木活板門、iron trapdoor與8種copper/waxed trapdoor，共20份Bedrock配方。來源POWERED只服務紅石彈射且所有powered模型相同；因projectile路徑仍NOT_ADAPTED，本批不添加沒有實際作用的powered state。Batch 14掛畫與Batch 15雙槽Bar Cabinets全部保留。實機九瓶位置、正面觸控、多人重連仍待驗收。",
-      "zh_CN": "Batch 16完成Cellar Cabinet九槽窖藏酒柜。只允许点击正面，按Java局部X和Y切成3×3九宫格；world DP保存9个独立精确品质ID。来源blocklist与Holder相同，支持empty_bottle+14种品质酒瓶。柜体同款同朝向形成四态连接，每个非空槽最多1个无碰撞helper。Java minecraft:trapdoors配方展开为20份Bedrock活板门等价配方。POWERED只服务尚未适配的红石投掷，因此本批省略无行为state。实机多人/触控仍待验收。",
-      "en_US": "Batch 16 ports the nine-slot Cellar Cabinet. Interaction is front-face only; Java getLocalX plus hit Y divides the front into an exact 3×3 grid, with nine independent exact *_q1..q6 IDs in world DP. The source blocklist matches Holder, rejecting ten large bottle bases, so empty_bottle plus 14 regular quality-drink bases are accepted. Same-facing Cellar Cabinets connect through single/left/middle/right states. Each occupied slot has at most one collisionless helper at the source 3×3 renderer position, scale 1 and X -90°. The cabinet has default full-block collision. Java minecraft:trapdoors is expanded to 20 Bedrock recipes covering 11 wood/fungus trapdoors, iron, and eight copper/waxed variants. Source POWERED only drives projectile ejection and does not change the model; since redstone/projectile behavior remains NOT_ADAPTED, this batch omits a behaviorless powered state. Batch 14 Paintings and Batch 15 Bar Cabinets remain intact. Real-client nine-bottle placement, front-face touch and multiplayer reconnect remain NOT_RUN."
+      "zh_TW": "Batch 16 Cellar Cabinet 九槽窖藏酒櫃完整保留；Batch 17再加入全部8款Incense。香薰依Java保留FACING/OPEN/POWERED：放置時讀紅石，玩家互動只翻OPEN，只有紅石電平與POWERED發生邊沿差異時才同步OPEN/POWERED。關閉也持續小粒子，開啟後以低密度server cadence散佈大型粒子；每120 tick對來源方塊AABB膨脹32格內undead造成1點magic傷害。Java殭屍村民生命<=1後精確60 tick轉化暫不以不同Bedrock curing時序冒充。Cellar Cabinet的九槽、20份trapdoor配方與Batch 14/15內容全部保留。實機紅石、粒子、亡靈判定、多人與觸控仍待驗收。",
+      "zh_CN": "Batch 16九槽Cellar Cabinet完整保留；Batch 17加入全部8款Incense。香薰保留Java FACING/OPEN/POWERED边沿语义，关闭也有小粒子，开启后低密度生成大粒子，并每120 tick对32格膨胀范围内undead造成1点magic伤害。Java僵尸村民精确60 tick转化不以Bedrock不同治愈时序替代。实机红石/粒子/多人仍待验收。",
+      "en_US": "Batch 16 nine-slot Cellar Cabinet remains intact; Batch 17 adds all eight Incense variants. Incense preserves Java FACING/OPEN/POWERED edge semantics: placement samples redstone, manual use changes only OPEN, and OPEN/POWERED synchronize only when the actual redstone level crosses the stored POWERED state. Small particles continue while closed; OPEN adds a lower-density server large-particle cadence, and every 120 ticks deals 1 magic damage to undead in the source block AABB inflated by 32. Java exact 60-tick zombie-villager conversion is not replaced with Bedrock different cure timing. Real-client redstone, particles, undead-family behavior, multiplayer and touch remain NOT_RUN."
     }
   },
   {

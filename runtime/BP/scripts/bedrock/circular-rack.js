@@ -1,9 +1,9 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,CIRCULAR_RACK,circularRackItem,circularRackSlot,emptyCircularRack,circularRackPut,circularRackTake,circularRackKey,circularRackAnchor,parseCircularRackAnchor,circularRackVisualPose,circularParticlePoint,CircularRackStore} from '../core/circular-rack.js';
-import {FACING,facingForYaw,faceOffset} from '../core/furniture.js';
+import {FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes} from './stateful-storage-router.js';
 const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=new CircularRackStore(world),visuals=new Map();let cursor=0;
 export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'NOT_ADAPTED'};

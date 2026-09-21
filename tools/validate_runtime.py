@@ -369,9 +369,14 @@ def main():
  for x in load(ROOT/'data/upstream/c3/source.lock.json')['records']:check('C3_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/c2/source.lock.json')['records']:check('C2_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
  for x in load(ROOT/'data/upstream/recipe-source.lock.json')['records']:check('recipe_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])
- for f in ['protocol.js','util.js','tavern-extension-client.js']:
-  check('public_sdk_demo_copy:'+f,(ROOT/'sdk'/f).read_bytes()==(ROOT/'examples/Tavern-Extension-Demo/BP/scripts/sdk'/f).read_bytes())
- check('public_protocol_host_agrees',(ROOT/'sdk/protocol.js').read_bytes()==(BP/'scripts/core/transport.js').read_bytes())
+ for demo_name in ['Tavern-Extension-Demo','Tavern-Mixology-Demo']:
+  for f in ['protocol.js','util.js','tavern-extension-client.js']:
+   check('public_sdk_demo_copy:'+demo_name+':'+f,(ROOT/'sdk'/f).read_bytes()==(ROOT/'examples'/demo_name/'BP/scripts/sdk'/f).read_bytes())
+ sdk_protocol=(ROOT/'sdk/protocol.js').read_text(encoding='utf-8');host_protocol=(BP/'scripts/core/transport.js').read_text(encoding='utf-8');sdk_util=(ROOT/'sdk/util.js').read_text(encoding='utf-8')
+ protocol_events=['api_ping','api_ready','extension_begin','extension_chunk','extension_commit','extension_ack','extension_unregister']
+ check('public_protocol_events_match_host',all(x in sdk_protocol and x in host_protocol for x in protocol_events))
+ check('public_protocol_limits_match_host',all(x in sdk_protocol and x in host_protocol for x in ['1900','48000']))
+ check('public_sdk_is_client_only','class ExtensionTransport' not in sdk_protocol and 'TTL=600' not in sdk_protocol and all(x not in sdk_util for x in ['localeMap','sorted(','integer(','freeze(']))
  demo=load(ROOT/'examples/Tavern-Extension-Demo/BP/manifest.json');check('demo_depends_on_Tavern',any(x.get('uuid')==bp['header']['uuid']and x['version']==bp['header']['version']for x in demo['dependencies']))
  # No downloaded Cookery scripts/JAR/font files in product tree.
  banned=[str(p.relative_to(ROOT))for p in ROOT.rglob('*') if p.is_file()and p.suffix.lower()in {'.ttf','.otf','.ttc','.woff','.woff2','.jar','.class'}]

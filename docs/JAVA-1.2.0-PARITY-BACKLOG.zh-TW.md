@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 兩組共8個模型的 cutout/shade 修正已同步 | `c70eec1` 其餘7個模型與7張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共9/15個模型（含 Allium Garden 模型＋官方block貼圖）的 cutout/shade/UV 修正已同步 | `c70eec1` 其餘6個模型與6張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -118,6 +118,14 @@ Bedrock 本批次加入全部16色來源沙發與16份原配方，直接使用�
 因此 Bedrock 本批不改任何 geometry cube，只把四個 visual binding 與對應 runtime cup block 的材質從 `blend` 切到 `alpha_test_single_sided`。old/new 原始 JSON 逐位元組鎖在 `data/upstream/post-1.2/c70eec1/model-only-2/`，其 Git blob SHA 寫入第二份 `sync-plan.json`，並繼續由同一個 `tools/sync_post12_visuals.py` apply/check；沒有建立第二套同步工具。
 
 完成後 c70eec 模型覆蓋由 **4/15 提升到 8/15**，尚餘7個模型與7張 block PNG、另有 Depth Charge item PNG。實際 Minecraft 的 alpha-test 邊緣、杯體內外面與各平台透明排序仍為 **NOT_RUN**。
+
+## Post-1.2 視覺同步 Batch 5：Allium Garden
+
+Allium Garden 是剩餘模型中最小的非純 render-mode 差異。逐份核對 `6b0d619` 與官方 `c70eec1` 後，14個 element 數量、display transform 與非 particle 貼圖引用不變；實際模型差異只有：`render_type: translucent -> cutout`、element 3 新增 `shade:false`，以及 element 12 north UV `[7.5,10.5,13,15.5] -> [7.5,10,13,15]`。同一官方提交亦更新 `textures/block/mixology/allium_garden.png`。
+
+Bedrock 對應中，Java element 3 轉換為四個杯壁 cube 3–6，因此四面全部標成 `unshaded`；element 12 對應 cube 18，north UV 由 `[15,21]` 修正為 `[15,20]`。材質仍沿用既有映射，把 cutout 轉為 `alpha_test_single_sided`。官方 block PNG 的舊／新 Git blob 分別為 `39a25d464bf350af5ae464e27c7f57fc5688f9eb` 與 `42d41bb699d7c5f31aa38d4ec0faee55309379a8`；兩份來源快照與兩個 runtime block-texture target 均由同一 `sync-plan + tools/sync_post12_visuals.py` 離線驗證／套用，不經重編碼。
+
+同步器因此新增兩個可重用能力：plan 可聲明精確 source UV→Bedrock UV 映射，以及可鎖定／複製二進位 texture blob。完成本批後 c70eec 模型覆蓋為 **9/15**，剩餘6個模型、6張 block PNG 與 Depth Charge item PNG。實機透明邊緣、花瓣細節與不同圖形設定仍為 **NOT_RUN**。
 
 ## Batch 7：Table 連接桌
 

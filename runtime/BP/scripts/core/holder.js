@@ -1,0 +1,14 @@
+import {check,utf8Bytes} from './util.js';
+import {parseBottle} from './bottles.js';
+export const NS='kaleidoscope_tavern',HOLDER_BLOCK=NS+':holder',HOLDER_KIND=NS+':holder_kind';
+export const HOLDER_BASES=Object.freeze(["champagne","glowflower_brew","honey_wine","ice_wine","luminous_bride","plum_wine","polaris_sweet_white","red_queen","sakura_wine","sauvignon_blanc_dry_white","sherry","vinegar","whiskey","wine"]);
+export const HOLDER_BLOCKED_BASES=Object.freeze(["brandy","carignan","mother_snow","miners_star","madame_shexiang","sunset_glow","riesling_dry_white","sweet_berry_wine","vodka","rum"]);
+export const HOLDER_KINDS=Object.freeze(['empty_bottle',...HOLDER_BASES]);
+export function holderItem(id){if(id===NS+':empty_bottle')return {item:id,base:'empty_bottle',kind:1};const b=parseBottle(id);if(!b||!HOLDER_BASES.includes(b.base))return undefined;return {...b,kind:HOLDER_KINDS.indexOf(b.base)+1};}
+export function holderBlockedItem(id){const b=parseBottle(id);return !!b&&HOLDER_BLOCKED_BASES.includes(b.base);}
+export function holderState(item,revision=0){const h=holderItem(item);check(h,'NOT_HOLDER_BOTTLE');check(Number.isInteger(revision)&&revision>=0,'HOLDER_REVISION');return {schema:1,revision,item:h.item,kind:h.kind};}
+export function validateHolderState(s){check(s&&s.schema===1,'HOLDER_SCHEMA');check(Number.isInteger(s.revision)&&s.revision>=0,'HOLDER_REVISION');const h=holderItem(s.item);check(h&&h.kind===s.kind,'HOLDER_ITEM_KIND');return s;}
+export function holderKey(d,p){check(/^minecraft:[a-z_]+$/.test(d),'INVALID_DIMENSION');check([p.x,p.y,p.z].every(Number.isInteger),'INVALID_LOCATION');return `kt:holder/${d.split(':')[1]}/${p.x}_${p.y}_${p.z}`;}
+export function holderAnchor(raw){check(typeof raw==='string','MISSING_HOLDER_ANCHOR');const m=/^kt:holder\/([a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(raw);check(m,'INVALID_HOLDER_ANCHOR');return {dimension:'minecraft:'+m[1],position:{x:Number(m[2]),y:Number(m[3]),z:Number(m[4])}};}
+export function holderVisualPose(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');const v=[{x:0,z:-1},{x:1,z:0},{x:0,z:1},{x:-1,z:0}][facing];return {offset:{x:.5-v.x*.25,y:.125,z:.5-v.z*.25},rotation:{x:-45,y:[0,90,180,-90][facing]}};}
+export class HolderStore{constructor(backend){this.backend=backend;}raw(k){return this.backend.getDynamicProperty(k);}load(k){const raw=this.raw(k);if(raw===undefined)return undefined;check(typeof raw==='string','CORRUPT_HOLDER_STATE');return validateHolderState(JSON.parse(raw));}save(k,s,expected){const prev=this.load(k);check((prev?.revision??-1)===expected,'STATE_CONFLICT');const raw=s?JSON.stringify(validateHolderState(s)):undefined;check(!raw||utf8Bytes(raw)<=512,'STATE_TOO_LARGE');this.backend.setDynamicProperty(k,raw);}restore(k,raw){this.backend.setDynamicProperty(k,raw);}}

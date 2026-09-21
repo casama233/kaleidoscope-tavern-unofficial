@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """C6: source-mesh native stools, seventeen lights and sonic-effect guidance. No network/JAR execution."""
 from pathlib import Path
-import json,copy,hashlib,importlib.util,re
+import json,copy,hashlib,importlib.util,re,base64
 from PIL import Image
 R=Path(__file__).resolve().parents[1];BP=R/'runtime/BP';RP=R/'runtime/RP';A=R/'art';N='kaleidoscope_tavern';V=[0,6,0]
 COLORS=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
@@ -134,4 +134,5 @@ def main():
  for lc in ['en_US','zh_CN']:dedupe_lang(RP/f'texts/{lc}.lang',False)
  dedupe_lang(RP/'texts/zh_TW.lang',True)
  print('C6 generated: 16 native stools, 17 light designs, 33 source recipes and source-rendered icons; official post-1.2 magenta light geometry sync retained, no texture repaint.')
+ print('MAGENTA_ICON_BASE64='+base64.b64encode((RP/'textures/kt_runtime/icons/string_lights_magenta.png').read_bytes()).decode())
 if __name__=='__main__':main()

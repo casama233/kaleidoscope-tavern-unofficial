@@ -21,7 +21,7 @@ def main():
   image=renderer.raster(renderer.all_faces(renderer.decode_geo(geom)),teximg,size=64,yaw=35,pitch=25,cull=True)
   target=RP/f'textures/kt_runtime/icons/{short}.png';target.parent.mkdir(parents=True,exist_ok=True);image.save(target)
   key='kt_c6_'+short;icons['texture_data'][key]={'textures':'textures/kt_runtime/icons/'+short}
-  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'%item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
+  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
   icon_records.append({'item':N+':'+short,'file':str(target.relative_to(R)),'source_geometry':visual['geometry']['file'],'source_texture':str(tex.relative_to(A)),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'kind':'derived64px_model_render','engine_gui_parity':False})
  def recipe(short):
   src=R/f'data/upstream/recipes/{short}.json';d=load(src);assert d['type']=='minecraft:crafting_shaped';key={}

@@ -46,8 +46,8 @@ export function pulseVision(p,amplifier){
   if(entity.id===p.id)continue;
   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
   if(!inflatedAabbIntersects(source,entity.getAABB(),radius))continue;
-  if(!entity.getEffect?.('glowing'))newGlow=true;
-  entity.addEffect('glowing',60,{amplifier:0,showParticles:true});targets++;
+  const wasGlowing=!!entity.getEffect?.('glowing');
+  entity.addEffect('glowing',60,{amplifier:0,showParticles:true});if(!wasGlowing)newGlow=true;targets++;
  }catch(e){error(e);}
  customEffectDiagnostics.visionPulses++;customEffectDiagnostics.visionTargets+=targets;
  if(newGlow)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}

@@ -94,3 +94,42 @@ export const COOKERY_GUIDE_PAYLOAD={
     en_US:{title:'Kaleidoscope Tavern',intro:'A guide to grapes, brewing, mixology, Tavern equipment and decor.',all:'All entries',select:'Choose a topic.',back:'Back',language_note:'See each entry for quality, slot and effect details.',brewing:'Brewing basics',mixology:'Mixology & effects',tavern:'Tavern equipment'}
   }
 };
+
+const GUIDE_LOCALES=['zh_CN','zh_TW','en_US'];
+const copy=v=>JSON.parse(JSON.stringify(v));
+const firstText=(m,fallback)=>m?.zh_TW??m?.zh_CN??m?.en_US??Object.values(m??{})[0]??fallback;
+function addLocalizedName(payload,id,map,fallback){
+ for(const lc of GUIDE_LOCALES)payload.names[lc][id]=map?.[lc]??map?.en_US??map?.zh_TW??map?.zh_CN??fallback;
+}
+function recipeMechanics(recipe){
+ const alts=x=>(x??[]).map(slot=>slot.join(' / ')).join(' + ')||'—';
+ if(recipe.kind==='pressing')return [`Input: ${(recipe.input??[]).join(' / ')}`,`→ ${recipe.fluid} ${recipe.amount} mB`];
+ if(recipe.kind==='shaker')return [`Shaker: ${alts(recipe.ingredients)}`,`→ ${recipe.output?.item??recipe.id}`,`Carrier: ${recipe.carrier??'kaleidoscope_tavern:empty_glassware'}`];
+ const output=recipe.output?.item??recipe.output?.byQuality?.join(' / ')??recipe.id;
+ return [`${recipe.fluid} × 4000 mB`,`Ingredients: ${alts(recipe.ingredients)}`,`→ ${output}`,`Carrier: ${recipe.carrier??'kaleidoscope_tavern:empty_bottle'}`];
+}
+/**
+ * Project Tavern extension pages/auto-generated recipe pages into the one Cookery
+ * family guide. The registry remains Tavern-owned because barrel/shaker semantics
+ * are Tavern-specific; only player-facing navigation/rendering is delegated.
+ */
+export function buildCookeryGuidePayload(registry){
+ const payload=copy(COOKERY_GUIDE_PAYLOAD);
+ payload.categories.push({id:'extensions',labelKey:'extensions',fallback:'Tavern add-ons',icon:'textures/kaleidoscope_tavern_jar/item/empty_bottle'});
+ payload.text.zh_CN.extensions='酒馆附属';payload.text.zh_TW.extensions='酒館附屬';payload.text.en_US.extensions='Tavern add-ons';
+ if(!registry)return payload;
+ const sources=new Set((registry.list?.()??[]).map(x=>x.source));
+ const pages=(registry.allPages?.()??[]).filter(x=>sources.has(x.source));
+ const recipes=(registry.allRecipes?.()??[]).filter(x=>sources.has(x.source));
+ for(const page of pages){
+  const primary=firstText(page.body,page.id),english=page.body?.en_US;
+  const mechanics=[primary];if(english&&english!==primary)mechanics.push(english);
+  payload.entries.push({id:page.id,category:'extensions',icon:page.icon??'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[],mechanics});
+  addLocalizedName(payload,page.id,page.title,page.id);
+ }
+ for(const recipe of recipes){
+  payload.entries.push({id:recipe.id,category:'extensions',icon:'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[recipe.kind],mechanics:recipeMechanics(recipe)});
+  addLocalizedName(payload,recipe.id,recipe.title,recipe.id);
+ }
+ return payload;
+}

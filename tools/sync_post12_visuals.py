@@ -215,18 +215,21 @@ def _convert_element(element,scale):
     out['uv']={face:_convert_face(face,entry,element.get('shade',True),scale) for face,entry in element.get('faces',{}).items()}
     return out
 
-def _convert_element_face(element,face,scale):
-    if face not in element.get('faces',{}): raise AssertionError(f'element face missing: {face}')
+def _convert_element_face(element,source_face,scale,target_face=None,target_rotation=None):
+    if source_face not in element.get('faces',{}): raise AssertionError(f'element face missing: {source_face}')
     origin,size=_element_box(element); origin=list(origin); size=list(size)
-    if face=='north': origin[2]=_clean_number(origin[2]+size[2]); size[2]=0
-    elif face=='south': size[2]=0
-    elif face=='east': origin[0]=_clean_number(origin[0]+size[0]); size[0]=0
-    elif face=='west': size[0]=0
-    elif face=='up': origin[1]=_clean_number(origin[1]+size[1]); size[1]=0
-    elif face=='down': size[1]=0
-    else: raise AssertionError(f'unsupported face: {face}')
+    if source_face=='north': origin[2]=_clean_number(origin[2]+size[2]); size[2]=0
+    elif source_face=='south': size[2]=0
+    elif source_face=='east': origin[0]=_clean_number(origin[0]+size[0]); size[0]=0
+    elif source_face=='west': size[0]=0
+    elif source_face=='up': origin[1]=_clean_number(origin[1]+size[1]); size[1]=0
+    elif source_face=='down': size[1]=0
+    else: raise AssertionError(f'unsupported face: {source_face}')
     out={'origin':origin,'size':size}; _element_rotation(element,out)
-    out['uv']={face:_convert_face(face,element['faces'][face],element.get('shade',True),scale)}
+    target_face=target_face or source_face
+    face_data=_convert_face(source_face,element['faces'][source_face],element.get('shade',True),scale)
+    if target_rotation is not None: face_data['uv_rotation']=target_rotation
+    out['uv']={target_face:face_data}
     return out
 
 def _mapped_cubes(element,mapping,scale):
@@ -234,7 +237,15 @@ def _mapped_cubes(element,mapping,scale):
         return [(mapping['cube'],_convert_element(element,scale))]
     pairs=mapping.get('faces')
     if not isinstance(pairs,list) or not pairs: raise AssertionError(f"element {mapping.get('element')}: bad cube mapping")
-    return [(cube,_convert_element_face(element,face,scale)) for face,cube in pairs]
+    out=[]
+    for spec in pairs:
+        if not isinstance(spec,list) or len(spec)<2 or len(spec)>4:
+            raise AssertionError(f"element {mapping.get('element')}: bad face mapping {spec}")
+        source_face,cube=spec[0],spec[1]
+        target_face=spec[2] if len(spec)>=3 else source_face
+        target_rotation=spec[3] if len(spec)>=4 else None
+        out.append((cube,_convert_element_face(element,source_face,scale,target_face,target_rotation)))
+    return out
 
 def regenerate_geo(plan_path,model,apply):
     regenerate=set(model.get('regenerate_elements',[]))

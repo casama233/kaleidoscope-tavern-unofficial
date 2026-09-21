@@ -5,7 +5,8 @@
   "adaptations_implemented": [
     "xp_drain",
     "zenith",
-    "shriek_attack"
+    "shriek_attack",
+    "upside_down"
   ],
   "not_implemented": [
     "slightly_tipsy",
@@ -14,15 +15,20 @@
     "vision",
     "ardent_heat",
     "long_reach",
-    "tomb_raider",
-    "upside_down"
+    "tomb_raider"
   ],
-  "scope": "Players as effect owners; Shriek is explicitly PvE-only, other timed effects as C5",
+  "scope": "Players as effect owners; Shriek is explicitly PvE-only; Upside Down uses Bedrock mob-family + exact AABB overlap naming adapter; other timed effects as C5",
   "engine_accepted": false,
   "shriek_limits": [
     "players excluded",
     "max256 hit targets",
     "reject damage = no impulse",
     "not engine tested"
-  ]
+  ],
+  "upside_down": {
+    "source": "Java 1.2.0: living Mob entities intersecting user AABB inflated by 16 are custom-named Grumm",
+    "adapter": "Bedrock mob-family query, living health check, exact getAABB overlap against source box inflated by 16, set Entity.nameTag='Grumm'",
+    "divergence": "Bedrock Script API exposes nameTag but no generic equivalent of Java setCustomNameVisible(false); visual/nameplate behavior requires engine acceptance",
+    "engine_tested": false
+  }
 }

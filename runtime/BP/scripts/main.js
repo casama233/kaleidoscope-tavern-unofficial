@@ -21,7 +21,7 @@ import {SHAKER_RECIPES} from './data/mixology.js';
 import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
 import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mixologyDiagnostics} from './bedrock/mixology.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
-export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
+export function diagnosticSnapshot(){return {build:'C7 / 0.7.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,independentGuidebook:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function book(player,recipesOnly=false){if(!registry){player.sendMessage('[Tavern] Initializing / 初始化中。');return;}return openGuide(player,registry,NAMES,diagnosticSnapshot,{recipesOnly});}
 system.beforeEvents.startup.subscribe(ev=>{
  registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerDrinkEffects(ev);
@@ -41,7 +41,7 @@ system.run(()=>{
   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
   registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
-  console.warn('[Tavern C6] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.');
- }catch(e){console.error('[Tavern C6] Startup halted: '+e);}
+  console.warn('[Tavern C7] Independent books and extension v1 initialized. Development build: engine/visual acceptance required.');
+ }catch(e){console.error('[Tavern C7] Startup halted: '+e);}
 });
 export function runtimeRegistry(){return registry;}

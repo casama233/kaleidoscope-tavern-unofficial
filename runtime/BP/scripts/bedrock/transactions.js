@@ -39,10 +39,10 @@ export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.ran
 function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
 function breakSound(id){
  const short=typeof id==='string'&&id.startsWith('kaleidoscope_tavern:')?id.slice('kaleidoscope_tavern:'.length):'';
- if(/^bottle_|^cup_/.test(short))return 'dig.glass';
+ if(/^bottle_|^cup_/.test(short))return 'random.glass';
  if(/_sofa$/.test(short))return 'dig.cloth';
  if(/_crop$/.test(short))return 'dig.grass';
- if(/^(holder|tilted_rack|circular_rack|tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'dig.metal';
+ if(/^(holder|tilted_rack|circular_rack|tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'break.iron';
  return 'dig.wood';
 }
 function center(location){return {x:location.x+.5,y:location.y+.5,z:location.z+.5};}

@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配 | Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏、動態飲品色、透明排序、第一/三人稱精準姿態 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188` 與金色果汁桶 `b30f34a` 官方修正已同步 | Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏、動態飲品色、透明排序、第一/三人稱精準姿態 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 4 項：Java 真實語義
@@ -77,4 +77,12 @@ Bedrock適配精確列出10種可撞碎方塊，不使用名稱模糊匹配；�
 Bedrock 轉換同步只為對應12個旋轉零厚度 cube 加入反面 UV，保持 geometry identifier、19個 cube、材質、貼圖與方塊四方向不變。官方 Java 模型快照鎖在 `data/upstream/post-1.2/c4ec1880/string_lights_magenta.json`，來源與轉換說明見 `docs/UPSTREAM-VISUAL-SYNC.json`。
 
 這解決的是單面 alpha-test 幾何在背視角被剔除的來源問題；Minecraft Bedrock 實機的正反面、四方向、手持 item_visual 與行動端渲染仍為 **NOT_RUN**。
+
+## Post-1.2 視覺同步 Batch 2：金色果汁顏色
+
+官方上游在 2026-07-06 的 `b30f34a2e340fed1528954104f93cf2c7e90fd79` 提交「校正金色果汁颜色」，相對前一提交 `c70eec1` **只修改** `textures/item/gold_grape_bucket.png`。同步前本倉庫兩份 Bedrock runtime PNG 的 Git blob 都是 `90836790746091ae951b03035e2d0f2fbe84d771`，與官方修正前檔案完全相同；官方修正後 blob 為 `7d2452dc5a07f82fd114db6df9e1fb5998878fef`，檔案由245 bytes變為388 bytes，SHA-256 為 `ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0`。
+
+本批把官方 388-byte PNG 原樣鎖定到 `data/upstream/post-1.2/b30f34a/gold_grape_bucket.png`，並逐位元組同步到 `runtime/RP/textures/kaleidoscope_tavern/item/gold_grape_bucket.png` 與 `runtime/RP/textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png`。回歸測試直接對三份二進位檔做 SHA-256，不接受截圖、重編碼或近似顏色。
+
+這是物品貼圖的官方顏色校正；遊戲內物品欄、手持與不同顯示設定的實際顏色仍為 **NOT_RUN**。
 

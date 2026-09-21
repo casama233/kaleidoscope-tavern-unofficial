@@ -79,7 +79,7 @@ A17 與 C1～C5 的可追溯程式快照、來源索引、SHA-256 與階段說�
 
 ## 資源與持久化
 
-大多數 A17 模型／貼圖保持；唯一例外是洋紅彩燈幾何已同步官方 post-1.2 提交 `c4ec188` 的面剔除修正（貼圖未變，19個元素位置未變，只為12個斜向零厚度面補背面）。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
+大多數 A17 模型／貼圖保持；目前有兩個有來源的官方 post-1.2 同步：洋紅彩燈幾何採 `c4ec188` 面剔除修正（貼圖未變，19個元素位置未變，只為12個斜向零厚度面補背面），金色果汁桶物品貼圖採 `b30f34a` 官方顏色校正（PNG 原檔逐位元組同步，SHA-256 `ae8dd1d9…691d0`）。新家具的**物品欄／手持暫用33張64px原模型渲染圖示**；它們是明確的派生圖，不是原作PNG，也不算已完成家具3D手持姿態。世界中使用完整原作形狀。`C6-FURNITURE-BINDINGS.json`記錄每個源模型、貼圖、圖示和實際ID。
 
 家具由方塊類型與facing保存狀態，不另存一份家具物品庫存到world DP。高腳凳helper只提供視覺和原生rideable，按座標錨點重建/去重。區塊未載入不當空氣；helper錯色、失去主方塊或移位則 eject/remove，不生成第二份物品。
 
@@ -99,9 +99,9 @@ python tools/audit_rebuild.py
 python tools/package_c6.py
 ```
 
-不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其餘532總量中的531例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其餘533總量中的532例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
 
-目前累積201個核心測試＋331個適配層測試＝532例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+目前累積202個核心測試＋331個適配層測試＝533例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
 
 **沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
 

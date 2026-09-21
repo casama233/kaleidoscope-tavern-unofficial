@@ -10,13 +10,13 @@
       },
       "minecraft:icon": "kt_c1_sauvignon_blanc_dry_white_q3",
       "minecraft:max_stack_size": 16,
-      "kaleidoscope_tavern:drink_effects": {},
       "minecraft:use_animation": "drink",
       "minecraft:use_modifiers": {
         "use_duration": 1.6,
         "movement_modifier": 0.35,
         "start_using": "if_first"
-      }
+      },
+      "kaleidoscope_tavern:drink_effects": {}
     }
   }
 }

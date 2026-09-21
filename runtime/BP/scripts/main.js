@@ -24,10 +24,10 @@ import {SHAKER_RECIPES} from './data/mixology.js';
 import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
 import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mixologyDiagnostics} from './bedrock/mixology.js';
 import {installCookeryGuidePublisher} from './core/cookery-guide-publisher.js';
-import {COOKERY_GUIDE_PAYLOAD} from './data/cookery-guide-payload.js';
+import {buildCookeryGuidePayload} from './data/cookery-guide-payload.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
-const cookeryGuidePublisher=installCookeryGuidePublisher(system,COOKERY_GUIDE_PAYLOAD);
+const cookeryGuidePublisher=installCookeryGuidePublisher(system,()=>buildCookeryGuidePayload(registry));
 export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function migrateLegacyGuide(player){
  const container=player?.getComponent?.('minecraft:inventory')?.container,slot=player?.selectedSlotIndex;
@@ -52,7 +52,7 @@ system.run(()=>{
   const recipes=[...BUILTIN_RECIPES,...SHAKER_RECIPES].map(r=>r.kind==='barrel'?{...r,ingredients:r.ingredients.map(s=>s.map(native))}:r);
   const missing=[];for(const r of recipes){const ids=r.kind!=='pressing'?[...r.ingredients.flat(),r.carrier,...(r.output.byQuality??[r.output.item])]:r.input;for(const id of ids)if(!ItemTypes.get(id))missing.push(id);}
   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
-  registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);
+  registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);cookeryGuidePublisher.refresh();
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
   console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.');
  }catch(e){console.error('[Tavern C6] Startup halted: '+e);}

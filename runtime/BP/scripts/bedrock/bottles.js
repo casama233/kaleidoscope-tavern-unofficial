@@ -10,7 +10,12 @@ import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tel
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
 const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap','shaker_station'].map(x=>NS+':'+x));
+const FACE_OFFSET=Object.freeze({Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},West:{x:-1,y:0,z:0},East:{x:1,y:0,z:0}});
 const store=new BottleStore(world),locks=new Locks();
+function placementTarget(clicked,face){const offset=FACE_OFFSET[face];check(offset,'BAD_BLOCK_FACE');return plus(clicked,offset);}
+function sneakUseTargetsBlock(player){
+ try{const hit=player.getBlockFromViewDirection?.({maxDistance:6});return hit===undefined?true:!!hit?.block;}catch{return true;}
+}
 function supported(d,p){const b=blockAt(d,plus(p,{x:0,y:-1,z:0}));return b?isBottleSupport(b.typeId,b.getTags?.()??[]):false;}
 function permutation(s){return BlockPermutation.resolve(`${NS}:bottle_${s.base}`,{[COUNT]:s.items.length,[FACING]:s.facing});}
 function intact(b,s){return b.typeId===`${NS}:bottle_${s.base}`&&b.permutation.getState(COUNT)===s.items.length&&b.permutation.getState(FACING)===s.facing;}
@@ -42,6 +47,14 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
 export function installBottleEvents(openBook){
+ // Java DrinkBlockItem.useOn reserves sneak-use on a block for placement. Bedrock can
+ // independently start minecraft:food in the same input, so cancel that native use
+ // path while a sneaking player has a block target; the block-interaction handlers
+ // below (and storage/rack handlers installed earlier) remain responsible for placement.
+ world.beforeEvents.itemUse?.subscribe(e=>{
+  if(e.cancel||!parseBottle(e.itemStack?.typeId)||!e.source?.isSneaking)return;
+  if(sneakUseTargetsBlock(e.source))e.cancel=true;
+ });
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;
   const id=e.block.typeId;if(MACHINES.has(id)||FARM_IDS.has(id))return;
@@ -49,8 +62,7 @@ export function installBottleEvents(openBook){
   const newPlacement=parseBottle(hs.id)&&e.player.isSneaking;
   if(!existing&&!newPlacement)return;
   e.cancel=true;if(e.isFirstEvent===false)return;
-  if(!existing&&e.blockFace!=='Up'){system.run(()=>tell(e.player,'§e請潛行點擊實心方塊的上表面擺瓶。'));return;}
-  const d=e.block.dimension,clicked={...e.block.location},target=existing?clicked:plus(clicked,{x:0,y:1,z:0});
+  const d=e.block.dimension,clicked={...e.block.location},target=existing?clicked:placementTarget(clicked,e.blockFace);
   let revision;try{revision=store.load(bottleKey(d.id,target))?.revision??-1;}catch{return;}
   system.run(()=>safe(e.player,()=>{
    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');sameHand(e.player,hs);

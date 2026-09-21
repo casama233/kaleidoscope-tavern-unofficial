@@ -137,8 +137,9 @@ def main():
  check('C6_complete_light_family',len([b for b in bindings['bindings']if b['kind']=='light'])==17)
  check('C6_complete_sofa_family',len([b for b in bindings['bindings']if b['kind']=='sofa'])==16)
  check('C6_complete_table_family',len([b for b in bindings['bindings']if b['kind']=='table'])==1)
+ check('C6_complete_bar_counter_family',len([b for b in bindings['bindings']if b['kind']=='bar_counter'])==1)
  for b in bindings['bindings']:
-  if b['kind'] in ['sofa','table']:
+  if b['kind'] in ['sofa','table','bar_counter']:
    check('C6_item_block:'+b['item'],b['item']==b['block'] and b['block']in block_defs)
   else:
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
@@ -162,6 +163,13 @@ def main():
    check('C6_table_permutations',len(perms)==7 and sum("kaleidoscope_tavern:position" in x['condition'] for x in perms)==7 and sum("kaleidoscope_tavern:axis" in x['condition'] for x in perms)==6)
    check('C6_table_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,13,-8],'size':[16,3,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,13,-8],'size':[16,3,16]})
    check('C6_table_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
+  elif b['kind']=='bar_counter':
+   states=block['description'].get('states',{});perms=block.get('permutations',[])
+   check('C6_bar_counter_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5])
+   check('C6_bar_counter_geometry_set',set(b['geometry_by_connection'].values())=={'geometry.kt_assets_a10.bar_counter_single','geometry.kt_assets_a10.bar_counter_left','geometry.kt_assets_a10.bar_counter_right','geometry.kt_assets_a10.bar_counter_middle','geometry.kt_assets_a10.bar_counter_left_corner','geometry.kt_assets_a10.bar_counter_right_corner'} and all(g in geom for g in b['geometry_by_connection'].values()))
+   check('C6_bar_counter_permutations',sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("kaleidoscope_tavern:facing" in x['condition'] for x in perms)==4)
+   check('C6_bar_counter_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,16,16]})
+   check('C6_bar_counter_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
@@ -169,6 +177,8 @@ def main():
  check('C6_sofa_invisible_client',clients.get('kaleidoscope_tavern:sofa_seat',{}).get('geometry',{}).get('default')=='geometry.kt_runtime.invisible')
  table_recipe=load(BP/'recipes/table.json')['minecraft:recipe_shaped']
  check('C6_table_source_recipe_tags',table_recipe['pattern']==['WWW',' F ',' I '] and table_recipe['key']['W']=={'tag':'minecraft:planks'} and table_recipe['key']['F']=={'tag':'minecraft:fences'} and table_recipe['key']['I']=={'item':'minecraft:iron_ingot'} and table_recipe['result']=={'item':'kaleidoscope_tavern:table','count':1})
+ bar_counter_recipe=load(BP/'recipes/bar_counter.json')['minecraft:recipe_shaped']
+ check('C6_bar_counter_source_recipe_tags',bar_counter_recipe['pattern']==['NNN','WWW','WWW'] and bar_counter_recipe['key']['N']=={'item':'minecraft:gold_nugget'} and bar_counter_recipe['key']['W']=={'tag':'minecraft:planks'} and bar_counter_recipe['result']=={'item':'kaleidoscope_tavern:bar_counter','count':1})
  for entry in bindings['derived_icons']:check('C6_icon_bytes:'+entry['item'],sha(ROOT/entry['file'])==entry['sha256'])
  for entry in load(ROOT/'docs/C6-SOURCE-AUDIT.json')['files']:check('C6_source:'+entry['path'],sha(ROOT/entry['path'])==entry['sha256'])
  check('C6_source_cushion_only',set(animations['animation.kt_runtime.stool.turn']['bones'])=={'bone'})

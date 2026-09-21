@@ -38,6 +38,33 @@ def main():
  check('formal_runtime_namespace',all(x.startswith('kaleidoscope_tavern:')for x in list(item_defs)+list(block_defs)+list(entity_defs)))
  check('no_player_json_or_global_UI_override',not list((ROOT/'runtime').rglob('player.json')) and not(RP/'ui').exists())
  check('two_independent_books',all('kaleidoscope_tavern:'+k in item_defs for k in ['guidebook','recipe_book']))
+ # Localization is an engine-facing contract: display_name values are localization keys, never RawText-style % prefixes.
+ advertised=load(RP/'texts/languages.json')
+ check('localization_has_en_US','en_US'in advertised,advertised)
+ lang_maps={};lang_duplicates={}
+ for lc in advertised:
+  p=RP/f'texts/{lc}.lang';check('localization_file:'+lc,p.is_file(),str(p.relative_to(ROOT)))
+  rows={};dups=[]
+  if p.is_file():
+   for line in p.read_text(encoding='utf-8-sig').splitlines():
+    line=line.strip()
+    if not line or line.startswith('#') or '=' not in line:continue
+    key,value=line.split('=',1)
+    if key in rows:dups.append(key)
+    rows[key]=value
+  lang_maps[lc]=rows;lang_duplicates[lc]=dups
+  check('localization_unique_keys:'+lc,not dups,dups[:64])
+ for ident,x in item_defs.items():
+  display=x['components'].get('minecraft:display_name')
+  value=display.get('value') if isinstance(display,dict) else display
+  check('item_display_name_present:'+ident,isinstance(value,str)and bool(value))
+  if isinstance(value,str):
+   check('item_display_name_not_percent:'+ident,not value.startswith('%'),value)
+   if not value.startswith('%'):
+    check('item_display_name_localized:'+ident,all(value in lang_maps[lc] for lc in advertised),{'key':value,'missing':[lc for lc in advertised if value not in lang_maps[lc]]})
+  button=x['components'].get('minecraft:interact_button')
+  if isinstance(button,str):
+   check('item_interact_button_localized:'+ident,all(button in lang_maps[lc] for lc in advertised),{'key':button,'missing':[lc for lc in advertised if button not in lang_maps[lc]]})
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

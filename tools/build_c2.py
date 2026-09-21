@@ -49,7 +49,7 @@ def main():
  # Full crop/item visuals are from A17; bootstrap crafting is explicitly a port-only recipe.
  icons=load(RP/'textures/item_texture.json');icons['texture_data']['kt_c2_grapevine']={'textures':'textures/kaleidoscope_tavern_jar/item/grapevine'}
  dump(RP/'textures/item_texture.json',icons)
- dump(BP/'items/grapevine.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':NS+':grapevine','menu_category':{'category':'items'}},'components':{'minecraft:icon':'kt_c2_grapevine','minecraft:display_name':{'value':'%item.'+NS+':grapevine.name'},'minecraft:max_stack_size':64}}})
+ dump(BP/'items/grapevine.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':NS+':grapevine','menu_category':{'category':'items'}},'components':{'minecraft:icon':'kt_c2_grapevine','minecraft:display_name':{'value':'item.'+NS+':grapevine.name'},'minecraft:max_stack_size':64}}})
  for kind in KINDS+['green_grape']:
   p=BP/'items'/f'{kind}.json';d=load(p);d['minecraft:item']['components'].update({'minecraft:food':{'nutrition':2,'saturation_modifier':.5,'can_always_eat':True},'minecraft:use_animation':'eat','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':.35}});dump(p,d)
  trellis=load(ROOT/'data/upstream/recipes/trellis.json')

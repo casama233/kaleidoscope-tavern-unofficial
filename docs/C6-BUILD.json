@@ -154,6 +154,12 @@
       "asset": "cocktail_model_only_2",
       "fix": "Empty Glassware/Mystery Cocktail/Sculk Special/Signature Cocktail: translucent->cutout only; no geometry edits; automated by sync-plan",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "asset": "cocktail_allium_garden",
+      "fix": "Allium Garden: translucent->cutout, source shade=false on element3, one north-face UV correction, and exact official block PNG blob 42d41bb699d7c5f31aa38d4ec0faee55309379a8; automated by extended sync-plan",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

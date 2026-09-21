@@ -36,6 +36,33 @@ def main():
  observed=load(ROOT/'compat/cookery/observed-ids.json');cookery_ids=set(observed['items']+observed['blocks'])
  check('no_Cookery_item_block_redefinitions',not(cookery_ids&(set(item_defs)|set(block_defs))))
  check('formal_runtime_namespace',all(x.startswith('kaleidoscope_tavern:')for x in list(item_defs)+list(block_defs)+list(entity_defs)))
+ # Creative inventory parity: one Tavern gameplay group + one Tavern deco group.
+ # Materials are intentionally not split into their own mini-groups.
+ catalog_path=BP/'item_catalog/crafting_item_catalog.json'
+ check('creative_catalog_present',catalog_path.is_file())
+ if catalog_path.is_file():
+  catalog=load(catalog_path);root=catalog.get('minecraft:crafting_items_catalog',{});categories=root.get('categories',[])
+  check('creative_catalog_format',catalog.get('format_version')=='1.21.60')
+  check('creative_two_source_groups',len(categories)==2 and [x.get('category_name')for x in categories]==['items','construction'] and all(len(x.get('groups',[]))==1 for x in categories))
+  if len(categories)==2 and all(x.get('groups') for x in categories):
+   main_group=categories[0]['groups'][0];deco_group=categories[1]['groups'][0]
+   main_items=main_group.get('items',[]);deco_items=deco_group.get('items',[]);listed=main_items+deco_items
+   check('creative_source_group_names',main_group.get('group_identifier')=={'icon':'kaleidoscope_tavern:wine_q6','name':'item_group.kaleidoscope_tavern.tavern_main.name'} and deco_group.get('group_identifier')=={'icon':'kaleidoscope_tavern:bar_cabinet','name':'item_group.kaleidoscope_tavern.tavern_deco.name'})
+   check('creative_no_duplicate_entries',len(listed)==len(set(listed)))
+   check('creative_all_entries_exist',all(x in item_defs or x in block_defs for x in listed))
+   qitems={x for x in item_defs if re.fullmatch(r'kaleidoscope_tavern:[a-z_]+_q[1-6]',x)}
+   q6={x for x in qitems if x.endswith('_q6')};lower=qitems-q6
+   check('creative_only_max_quality_drinks',q6<=set(main_items) and not(lower&set(listed)) and len(q6)==24)
+   check('creative_source_main_blocks_in_items',all(block_defs[x]['description'].get('menu_category')=={'category':'items'} for x in ['kaleidoscope_tavern:trellis','kaleidoscope_tavern:pressing_tub','kaleidoscope_tavern:tap']))
+   visible=set()
+   for ident,d in item_defs.items():
+    if d['description'].get('menu_category',{}).get('category') in {'items','construction'}:visible.add(ident)
+   for ident,d in block_defs.items():
+    if d['description'].get('menu_category',{}).get('category') in {'items','construction'}:visible.add(ident)
+   check('creative_catalog_covers_all_visible_Tavern_content',set(listed)==visible,{'missing':sorted(visible-set(listed)),'extra':sorted(set(listed)-visible)})
+   creative_doc=load(ROOT/'docs/C6-CREATIVE-CATALOG.json')
+   check('creative_catalog_doc_matches_runtime',creative_doc['bedrock_groups']['items']['items']==main_items and creative_doc['bedrock_groups']['construction']['items']==deco_items)
+   check('creative_no_material_microgroup',creative_doc['materials_policy'].startswith('No standalone Tavern materials group') and creative_doc['cookery_merge']['status']=='DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED')
  check('no_player_json_or_global_UI_override',not list((ROOT/'runtime').rglob('player.json')) and not(RP/'ui').exists())
  check('two_independent_books',all('kaleidoscope_tavern:'+k in item_defs for k in ['guidebook','recipe_book']))
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))

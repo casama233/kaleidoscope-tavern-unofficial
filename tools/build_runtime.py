@@ -7,6 +7,90 @@ def dump(p,d):
  p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def js(p,name,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text('// Generated from locked data. Do not hand-edit.\nexport const '+name+' = '+json.dumps(d,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
 def uid(s):return str(uuid.uuid5(uuid.NAMESPACE_URL,'urn:kaleidoscope-tavern-bedrock-c1:'+s))
+def build_creative_catalog():
+ # Java 1.2.0 has exactly two Tavern creative tabs. Bedrock maps those tabs to
+ # two collapsible catalog groups instead of inventing one group per material family.
+ # A few source-main blocks are normalized into the Items category so they can stay
+ # beside brewing materials/tools rather than being scattered into Construction.
+ source_main=[
+  'guidebook','recipe_book', # Bedrock access helpers; source has no standalone guide items.
+  'grapevine','grape','ice_grape','gold_grape','green_grape','trellis',
+  'pressing_tub','barrel','tap','shaker',
+  'grape_bucket','ice_grape_bucket','gold_grape_bucket','green_grape_bucket','sweet_berries_bucket','glow_berries_bucket',
+  'empty_bottle','empty_glassware',
+  'vinegar_q6',
+  'wine_q6','sakura_wine_q6','champagne_q6','brandy_q6','carignan_q6',
+  'ice_wine_q6','polaris_sweet_white_q6','sherry_q6','mother_snow_q6',
+  'miners_star_q6','honey_wine_q6','madame_shexiang_q6','sunset_glow_q6',
+  'sauvignon_blanc_dry_white_q6','riesling_dry_white_q6',
+  'luminous_bride_q6','glowflower_brew_q6',
+  'plum_wine_q6','sweet_berry_wine_q6','red_queen_q6',
+  'vodka_q6','whiskey_q6','rum_q6',
+  'signature_cocktail','mystery_cocktail','white_lady','emerald','brass_heart','godfather','grasshopper','screwdriver','mojito','allium_garden','depth_charge','nether_special','bloody_mary','sculk_special'
+ ]
+ colors=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
+ paintings=['ysbb','tartaric_acid','cr019','unknown','master_marisa','son_of_man','david','girl_with_pearl_earring','starry_night','van_gogh_self_portrait','father','great_wave','mona_lisa','mondrian']
+ source_deco=[
+  'bar_cabinet','glass_bar_cabinet','cellar_cabinet','bar_counter','table','tilted_rack','circular_rack','holder','glassware_holder',
+  'string_lights_colorless',*[f'string_lights_{c}' for c in colors],
+  'bell_pendant_lamp','yellow_pendant_lamp','blue_pendant_lamp',
+  *[f'{c}_sofa' for c in colors],
+  *[f'{c}_bar_stool' for c in colors],
+  *[f'{p}_painting' for p in paintings]
+ ]
+ def exists(short):return (BP/'items'/f'{short}.json').is_file() or (BP/'blocks'/f'{short}.json').is_file()
+ # These are source Tavern-main stations/frames. Keep their actual block IDs but move
+ # only the creative-menu category; gameplay/block behavior is untouched.
+ for short in ['trellis','pressing_tub','tap']:
+  p=BP/'blocks'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:block']['description']['menu_category']={'category':'items'};dump(p,d)
+ main_items=[NS+':'+x for x in source_main if exists(x)]
+ deco_items=[NS+':'+x for x in source_deco if exists(x)]
+ catalog={'format_version':'1.21.60','minecraft:crafting_items_catalog':{'categories':[
+  {'category_name':'items','groups':[{'group_identifier':{'icon':NS+':wine_q6','name':'item_group.kaleidoscope_tavern.tavern_main.name'},'items':main_items}]},
+  {'category_name':'construction','groups':[{'group_identifier':{'icon':NS+':bar_cabinet','name':'item_group.kaleidoscope_tavern.tavern_deco.name'},'items':deco_items}]}
+ ]}}
+ dump(BP/'item_catalog/crafting_item_catalog.json',catalog)
+ labels={
+  'zh_TW':('森羅物語：酒館','森羅物語：酒館裝飾'),
+  'zh_CN':('森罗物语：酒馆','森罗物语：酒馆装饰'),
+  'en_US':('Kaleidoscope: Tavern','Kaleidoscope: Tavern Deco'),
+  'ja_JP':('カレイドスコープ：酒場','カレイドスコープ：酒場装飾'),
+  'ru_RU':('Kaleidoscope: Таверна','Kaleidoscope: Декор таверны')
+ }
+ keys=['item_group.kaleidoscope_tavern.tavern_main.name','item_group.kaleidoscope_tavern.tavern_deco.name']
+ for lc,values in labels.items():
+  p=RP/f'texts/{lc}.lang'
+  if not p.is_file():continue
+  lines=p.read_text(encoding='utf-8-sig').splitlines();seen=set();out=[]
+  for line in lines:
+   k=line.split('=',1)[0] if '=' in line and not line.lstrip().startswith('#') else None
+   if k in keys:
+    if k in seen:continue
+    out.append(k+'='+values[keys.index(k)]);seen.add(k)
+   else:out.append(line)
+  for k,v in zip(keys,values):
+   if k not in seen:out.append(k+'='+v)
+  p.write_text('\n'.join(out).rstrip()+'\n',encoding='utf-8')
+ dump(ROOT/'docs/C6-CREATIVE-CATALOG.json',{
+  'source':'KaleidoscopeMods/KaleidoscopeTavern ModCreativeTabs.java / Java 1.2.0',
+  'source_tabs':['tavern_main','tavern_deco'],
+  'bedrock_groups':{
+   'items':{'name':keys[0],'icon':NS+':wine_q6','items':main_items},
+   'construction':{'name':keys[1],'icon':NS+':bar_cabinet','items':deco_items}
+  },
+  'quality_drinks':'creative catalog exposes Q6 only, matching Java getMaxLevelDrink',
+  'bedrock_only_front_items':[NS+':guidebook',NS+':recipe_book'],
+  'materials_policy':'No standalone Tavern materials group; cultivation ingredients stay in Tavern main until a verified host merge is safe.',
+  'cookery_merge':{
+   'status':'DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED',
+   'reasonable_food_candidates':[NS+':grape',NS+':ice_grape',NS+':gold_grape',NS+':green_grape'],
+   'reasonable_main_candidate':NS+':grapevine',
+   'rule':'Never guess Cookery Bedrock group identifiers: a wrong identifier creates a duplicate group instead of merging with the host.'
+  },
+  'engine_acceptance':'NOT_RUN'
+ })
 def main():
  lock=json.loads((ROOT/'compat/cookery/cookery.lock.json').read_text());v=[0,1,0]
  bpuid=uid('bp');rpuid=uid('rp');
@@ -173,3 +257,4 @@ if __name__=='__main__':
  c6()
  import sync_post12_visuals
  sync_post12_visuals.apply_all()
+ build_creative_catalog()

@@ -125,10 +125,11 @@ def main():
  tc=components({'identifier':table_geo['single']},{'*':{'texture':'kt_assets_a12_block_table','render_method':'alpha_test'}})
  tc.update({'minecraft:collision_box':{'origin':[-8,13,-8],'size':[16,3,16]},'minecraft:selection_box':{'origin':[-8,13,-8],'size':[16,3,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':table':{},'minecraft:item_visual':{'geometry':{'identifier':table_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_table','render_method':'alpha_test'}}}})
  tp=[{'condition':f"q.block_state('{N}:position') == 0",'components':{'minecraft:geometry':{'identifier':table_geo['single']}}}]
- for axis,suffix in [(0,''),(1,'_rot')]:
-  for pos,name in [(1,'right'),(2,'middle'),(3,'left')]:tp.append({'condition':f"q.block_state('{N}:axis') == {axis} && q.block_state('{N}:position') == {pos}",'components':{'minecraft:geometry':{'identifier':table_geo[name+suffix]}}})
- dump(BP/'blocks/table.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':table','menu_category':{'category':'construction'},'states':{N+':axis':[0,1],N+':position':[0,1,2,3]}},'components':tc,'permutations':tp}})
- bindings.append({'kind':'table','item':N+':table','block':N+':table','geometry_by_state':table_geo,'world_texture':'kt_assets_a12_block_table','item_geometry':table_itemgeo,'item_texture':'kt_assets_a17_item_display_table','axis_states':2,'position_states':4,'source_collision':{'origin':[-8,13,-8],'size':[16,3,16]},'waterlogged':False,'exact_collision_parity':True})
+ for directions,suffix in [(('north','south'),''),(('east','west'),'_rot')]:
+  axis_cond=' || '.join([f"q.block_state('minecraft:cardinal_direction') == '{d}'" for d in directions])
+  for pos,name in [(1,'right'),(2,'middle'),(3,'left')]:tp.append({'condition':f"({axis_cond}) && q.block_state('{N}:position') == {pos}",'components':{'minecraft:geometry':{'identifier':table_geo[name+suffix]}}})
+ dump(BP/'blocks/table.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':table','menu_category':{'category':'construction'},'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}},'states':{N+':axis':[0,1],N+':position':[0,1,2,3]}},'components':tc,'permutations':tp}})
+ bindings.append({'kind':'table','item':N+':table','block':N+':table','geometry_by_state':table_geo,'world_texture':'kt_assets_a12_block_table','item_geometry':table_itemgeo,'item_texture':'kt_assets_a17_item_display_table','engine_axis_state':'minecraft:cardinal_direction','legacy_axis_state':N+':axis','axis_states':2,'position_states':4,'source_collision':{'origin':[-8,13,-8],'size':[16,3,16]},'waterlogged':False,'exact_collision_parity':True})
  bar_geo={name:'geometry.kt_assets_a10.bar_counter_'+name for name in connection_names}
  recipe('bar_counter',False);bar_itemgeo=load(RP/'models/entity/item_display_bar_counter.geo.json')['minecraft:geometry'][0]['description']['identifier']
  bc=components({'identifier':bar_geo['single']},{'*':{'texture':'kt_assets_a10_block_deco_bar_counter','render_method':'alpha_test'}})

@@ -82,6 +82,8 @@ def main():
   text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
   check('shared_storage_router_used:'+name,'installStatefulStorageRoutes' in text)
   check('no_duplicate_storage_event_shell:'+name,not any(x in text for x in ['playerInteractWithBlock.subscribe','playerBreakBlock.subscribe','beforeEvents.explosion.subscribe']))
+  check('shared_storage_spatial_helpers:'+name,'requireBlockReach' in text and 'blockCenter' in text and 'function near(' not in text and 'function center(' not in text)
+  check('shared_storage_visual_scheduler:'+name,'tickStorageVisuals' in text and 'Math.min(128' not in text)
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

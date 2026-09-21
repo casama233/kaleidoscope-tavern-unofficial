@@ -19,7 +19,7 @@
 | Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
 | 酒櫃／酒架／杯架 | **Glassware Holder 已移植4槽空杯存取、倒掛顯示、亮度8、方向碰撞與拆除返還** | Bar/Cellar Cabinet、Circular/Tilted Rack、Holder 的飲品展示存儲與紅石彈射 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
-| 其他裝飾 | 部分資產/靜態展示已收錄 | Pendant Lamp、Incense、Painting、Stepladder、Holder 等逐個核對放置、形狀、狀態與掉落 |
+| 其他裝飾 | **3款 Pendant Lamp 已移植雙格上/下半結構、下半亮度13、無碰撞、單件回收與孤兒半格修復**；部分資產/靜態展示已收錄 | Incense、Painting、Stepladder、Holder 等逐個核對放置、形狀、狀態與掉落 |
 | 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
@@ -130,3 +130,12 @@ Java 1.2.0 `BarCounterBlock` 直接實作與 Sofa 相同的 `IConnectionBlock`�
 Java 1.2.0 的 `GlasswareHolderBlock` 固定4槽、每槽上限1，互動只接受 `empty_glassware`。點擊位置按方塊局部 X/Z 四象限分槽：左前0、右前1、左後2、右後3；空手取出、手持空酒杯放入，破壞時槽內內容一併掉落。來源亮度為8；N/S shape 為 `Block.box(0,11,1,16,16,15)`，E/W 為 `Block.box(1,11,0,15,16,16)`。
 
 Bedrock 直接使用4個0/1 custom block state作存儲權威，不建立世界DP、inventory helper或展示entity。穩定 Script API 的 `faceLocation` 提供方塊局部座標；資源包將4個來源 empty-glassware 模型依 Java renderer 的位置與 X 180° 旋轉做成4個倒掛 bone，`bone_visibility` 直接讀槽位 state。自訂metadata空杯為避免資料遺失會拒收；Creative沿用本專案守恆交易規則。實機 blend 透明排序、手機點位與多人仍為 **NOT_RUN**。
+
+
+## Batch 10：Pendant Lamp 雙格吊燈
+
+Java 1.2.0 的 `PendantLampBlock` 由同一方塊的 `upper/lower` 兩半構成。放置位置是上半格，要求其下方仍可替換，隨後自動在下方生成 lower；方向直接取玩家水平朝向。只有 lower 發光，來源亮度為 13；方塊本身 `noCollission()`，但上／下半仍各有方向選擇框。破壞時只有 lower 具有正常掉落，因此完整結構無論從哪一半開始回收，都只應返還 1 件。三個來源款式為 bell / blue / yellow，配方產量分別為 8 / 4 / 4。
+
+Bedrock 本批把 `half=upper/lower` 與 facing 都保存為方塊狀態，放置時用同一筆守恆交易一次寫入兩格；下半格被佔用或任一寫入失敗都會回滾，不扣物品。從任一半回收時，要求另一半仍為同款、同方向與互補 half，再一次清空兩格並只返還 1 件。兩半每 20 tick 檢查配對；命令或外部修改留下的孤兒半格只清理、不憑空補發物品。三款直接使用倉庫已由鎖定 Java 資產轉換的 top / bottom geometry；lower=13、upper=0，碰撞關閉，四方向 selection box 依 Java VoxelShape 換算。
+
+明示差異：Java 物品欄使用獨立 2D item sprite；Bedrock 方塊物品沿用已轉換的 lower 模型 item visual，不宣稱 GUI 顯示逐像素一致。沿用本專案既有家具守恆策略，需要潛行放置／回收；爆炸仍採 Tavern 家具通用安全策略。Minecraft／手機／多人／BDS／Realms 實機仍為 **NOT_RUN**。

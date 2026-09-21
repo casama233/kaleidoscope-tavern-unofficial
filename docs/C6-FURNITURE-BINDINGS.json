@@ -872,6 +872,204 @@
       "display_helpers": 0,
       "metadata_items_supported": false,
       "exact_collision_parity": true
+    },
+    {
+      "kind": "pendant_lamp",
+      "style": "bell",
+      "item": "kaleidoscope_tavern:bell_pendant_lamp",
+      "block": "kaleidoscope_tavern:bell_pendant_lamp",
+      "top_geometry": "geometry.kt_assets_a12.bell_pendant_lamp_top",
+      "bottom_geometry": "geometry.kt_assets_a12.bell_pendant_lamp_bottom",
+      "light_emission_upper": 0,
+      "light_emission_lower": 13,
+      "half_states": 2,
+      "collision": false,
+      "source_selection_ns": {
+        "upper": {
+          "origin": [
+            -7,
+            0,
+            -3
+          ],
+          "size": [
+            14,
+            16,
+            6
+          ]
+        },
+        "lower": {
+          "origin": [
+            -7,
+            1,
+            -3
+          ],
+          "size": [
+            14,
+            15,
+            6
+          ]
+        }
+      },
+      "source_selection_ew": {
+        "upper": {
+          "origin": [
+            -3,
+            0,
+            -7
+          ],
+          "size": [
+            6,
+            16,
+            14
+          ]
+        },
+        "lower": {
+          "origin": [
+            -3,
+            1,
+            -7
+          ],
+          "size": [
+            6,
+            15,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "engine_accepted": false
+    },
+    {
+      "kind": "pendant_lamp",
+      "style": "blue",
+      "item": "kaleidoscope_tavern:blue_pendant_lamp",
+      "block": "kaleidoscope_tavern:blue_pendant_lamp",
+      "top_geometry": "geometry.kt_assets_a12.blue_pendant_lamp_top",
+      "bottom_geometry": "geometry.kt_assets_a12.blue_pendant_lamp_bottom",
+      "light_emission_upper": 0,
+      "light_emission_lower": 13,
+      "half_states": 2,
+      "collision": false,
+      "source_selection_ns": {
+        "upper": {
+          "origin": [
+            -7,
+            0,
+            -3
+          ],
+          "size": [
+            14,
+            16,
+            6
+          ]
+        },
+        "lower": {
+          "origin": [
+            -7,
+            1,
+            -3
+          ],
+          "size": [
+            14,
+            15,
+            6
+          ]
+        }
+      },
+      "source_selection_ew": {
+        "upper": {
+          "origin": [
+            -3,
+            0,
+            -7
+          ],
+          "size": [
+            6,
+            16,
+            14
+          ]
+        },
+        "lower": {
+          "origin": [
+            -3,
+            1,
+            -7
+          ],
+          "size": [
+            6,
+            15,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "engine_accepted": false
+    },
+    {
+      "kind": "pendant_lamp",
+      "style": "yellow",
+      "item": "kaleidoscope_tavern:yellow_pendant_lamp",
+      "block": "kaleidoscope_tavern:yellow_pendant_lamp",
+      "top_geometry": "geometry.kt_assets_a12.yellow_pendant_lamp_top",
+      "bottom_geometry": "geometry.kt_assets_a12.yellow_pendant_lamp_bottom",
+      "light_emission_upper": 0,
+      "light_emission_lower": 13,
+      "half_states": 2,
+      "collision": false,
+      "source_selection_ns": {
+        "upper": {
+          "origin": [
+            -7,
+            0,
+            -3
+          ],
+          "size": [
+            14,
+            16,
+            6
+          ]
+        },
+        "lower": {
+          "origin": [
+            -7,
+            1,
+            -3
+          ],
+          "size": [
+            14,
+            15,
+            6
+          ]
+        }
+      },
+      "source_selection_ew": {
+        "upper": {
+          "origin": [
+            -3,
+            0,
+            -7
+          ],
+          "size": [
+            6,
+            16,
+            14
+          ]
+        },
+        "lower": {
+          "origin": [
+            -3,
+            1,
+            -7
+          ],
+          "size": [
+            6,
+            15,
+            14
+          ]
+        }
+      },
+      "waterlogged": false,
+      "engine_accepted": false
     }
   ],
   "derived_icons": [
@@ -1179,5 +1377,6 @@
   "tables": 1,
   "bar_counters": 1,
   "glassware_holders": 1,
+  "pendant_lamps": 3,
   "engine_accepted": false
 }

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:blue_pendant_lamp"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "C",
+      "C",
+      "B"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:soul_lantern"
+      },
+      "C": {
+        "item": "minecraft:chain"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:blue_pendant_lamp",
+      "count": 4
+    }
+  }
+}

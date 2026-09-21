@@ -137,7 +137,7 @@ export function consumeCocktail(event,rng=Math.random){
  let rows;
  try{rows=item.typeId===SIGNATURE?knownItemCheck(item).effects:COCKTAILS[item.typeId].effects;}catch(e){log(e);return [{status:'INVALID_PAYLOAD'}];}
  const outcomes=[];
- for(const row of rows){const roll=rng();check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');if(roll>=row.probability)continue;const bedrockId=NATIVE_EFFECTS[row.effect];
+ for(const row of rows){const roll=rng();check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');if(Math.fround(roll)>=Math.fround(row.probability))continue;const bedrockId=NATIVE_EFFECTS[row.effect];
   if(!bedrockId){try{if(applyCustomEffect(p,row)){outcomes.push({effect:row.effect,status:'APPLIED_CUSTOM'});continue;}}catch(e){log(e);outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});continue;}mixologyDiagnostics.unsupportedEffects[row.effect]=(mixologyDiagnostics.unsupportedEffects[row.effect]??0)+1;outcomes.push({effect:row.effect,status:'UNIMPLEMENTED_CUSTOM_EFFECT'});continue;}
   try{p.addEffect(bedrockId,['minecraft:instant_health','minecraft:instant_damage'].includes(row.effect)?1:row.duration*20,{amplifier:row.amplifier,showParticles:true});outcomes.push({effect:row.effect,status:'APPLIED'});}catch(e){log(e);outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});}
  }

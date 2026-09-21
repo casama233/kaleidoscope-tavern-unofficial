@@ -5,9 +5,23 @@ import json,copy,hashlib,importlib.util,re
 from PIL import Image
 R=Path(__file__).resolve().parents[1];BP=R/'runtime/BP';RP=R/'runtime/RP';A=R/'art';N='kaleidoscope_tavern';V=[0,6,0]
 COLORS=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
-CN=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];TW=dict(zip(COLORS,CN));TW['colorless']='無'
+TC=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];SC=['白','浅灰','灰','黑','棕','红','橙','黄','浅绿','绿','青','浅蓝','蓝','紫','洋红','粉红'];TW=dict(zip(COLORS,TC));CN=dict(zip(COLORS,SC));TW['colorless']='無';CN['colorless']='无'
 def load(p):return json.loads(p.read_text(encoding='utf-8'))
 def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def dedupe_lang(p,keep_last=False):
+ lines=p.read_text(encoding='utf-8-sig').splitlines();chosen={}
+ seq=range(len(lines)-1,-1,-1) if keep_last else range(len(lines))
+ for i in seq:
+  s=lines[i].strip()
+  if s and not s.startswith('#') and '=' in s:
+   key=s.split('=',1)[0]
+   if key not in chosen:chosen[key]=i
+ out=[]
+ for i,line in enumerate(lines):
+  s=line.strip()
+  if s and not s.startswith('#') and '=' in s and chosen.get(s.split('=',1)[0])!=i:continue
+  out.append(line)
+ p.write_text('\n'.join(out).rstrip()+'\n',encoding='utf-8')
 def mod(p):return json.loads(p.read_text(encoding='utf-8').split(' = ',1)[1].rsplit(';',1)[0])
 def main():
  vis={v['key']:v for v in load(A/'interfaces/asset-registry.json')['visuals']};terrain=load(RP/'textures/terrain_texture.json');icons=load(RP/'textures/item_texture.json');names=mod(BP/'scripts/data/names.js')
@@ -21,7 +35,7 @@ def main():
   image=renderer.raster(renderer.all_faces(renderer.decode_geo(geom)),teximg,size=64,yaw=35,pitch=25,cull=True)
   target=RP/f'textures/kt_runtime/icons/{short}.png';target.parent.mkdir(parents=True,exist_ok=True);image.save(target)
   key='kt_c6_'+short;icons['texture_data'][key]={'textures':'textures/kt_runtime/icons/'+short}
-  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'%item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
+  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
   icon_records.append({'item':N+':'+short,'file':str(target.relative_to(R)),'source_geometry':visual['geometry']['file'],'source_texture':str(tex.relative_to(A)),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'kind':'derived64px_model_render','engine_gui_parity':False})
  def recipe(short):
   src=R/f'data/upstream/recipes/{short}.json';d=load(src);assert d['type']=='minecraft:crafting_shaped';key={}
@@ -32,7 +46,7 @@ def main():
   protect(src,'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
  def labels(short,color,family):
   for lc in ['zh_TW','zh_CN','en_US']:
-   label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈')
+   label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else (TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈') if lc=='zh_TW' else CN[color]+'色'+('高脚凳'if family=='stool'else'彩灯'))
    names[lc][N+':'+short]=label
  for color in COLORS:
   visual=vis['bar_stool_'+color];short=color+'_bar_stool';block='stool_'+color;entity='seat_'+color
@@ -60,7 +74,7 @@ def main():
  for lc in ['zh_TW','zh_CN','en_US']:
   p=RP/f'texts/{lc}.lang';s=p.read_text(encoding='utf-8').split('## C6 ADDITIONS')[0].rstrip()+'\n## C6 ADDITIONS\n'
   for b in bindings:s+='item.'+b['item']+'.name='+names[lc][b['item']]+'\n'+'tile.'+b['block']+'.name='+names[lc][b['item']]+'\n'
-  s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Sneak: place furniture'if lc=='en_US'else'潛行放置家具')+'\n';p.write_text(s,encoding='utf-8')
+  s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Sneak: place furniture'if lc=='en_US'else'潜行放置家具'if lc=='zh_CN'else'潛行放置家具')+'\n';p.write_text(s,encoding='utf-8')
  # Native all-player inventory/book APIs are never edited. These pages belong to Tavern alone.
  p=BP/'scripts/data/mixology-pages.js';pages=mod(p)
  for page in pages:
@@ -98,5 +112,8 @@ def main():
  build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':43,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'new_shaped_recipes':33,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter'),'engine_acceptance':'NOT_RUN'})
  for exclusion in build.get('planned_recipe_exclusions',[]):exclusion['reason']=exclusion['reason'].replace('C5','C6')
  dump(R/'docs/C6-BUILD.json',build)
+ # Final runtime locale pass: no duplicate keys. Preserve upstream en/zh_CN wording; prefer curated zh_TW overrides.
+ for lc in ['en_US','zh_CN']:dedupe_lang(RP/f'texts/{lc}.lang',False)
+ dedupe_lang(RP/'texts/zh_TW.lang',True)
  print('C6 generated: 16 native stools, 17 light designs, 33 source recipes and source-rendered icons; no original art modified.')
 if __name__=='__main__':main()

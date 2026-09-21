@@ -2,6 +2,16 @@
 
 **這是待執行清單，不是通過報告。** 每項記錄遊戲版本、裝置/控制方式、世界副本、Content Log、實際結果與畫面。Node替身不驗證Molang、坐姿、亮度、原生扣量或網路。
 
+## 0. P0 顯示／本地化基線
+
+**這一節先於所有功能驗收。只要出現 raw localization key，就停止後續功能測試。**
+
+以遊戲語言分別切換簡體中文、繁體中文、英文並重開世界／資源包。打開創造物品欄、背包、配方書，至少抽查：酒館配方書、雪克杯、任一 Q2 基酒（例如落日餘暉）、固定雞尾酒、葡萄／桶／空杯、16色高腳凳與17款彩燈。任何名稱都不得顯示 `item.kaleidoscope_tavern:*.name`、`tile.kaleidoscope_tavern:*.name` 或其他 localization key。
+
+另外驗證雪克杯使用按鈕、家具放置／坐下按鈕不顯示 `action.interact.*`。簡中不得由生成器重新混入明顯繁體品質詞（劣質／優良／精製／陳釀）或家具字樣（高腳凳／彩燈／潛行）。
+
+本地靜態門檻：210個 runtime item 的 `minecraft:display_name` 不得以 `%` 開頭；每個 display key 與 interact button key 必須存在於 `languages.json` 宣告的所有語言檔；語言檔不得有重複 key。這些檢查只能防結構回歸，**實際客戶端仍需看到正確名稱才算通過**。
+
 ## 1. 載入與資料隔離
 
 新世界啟用Cookery v1.0.6 BP/RP與C6 BP/RP，不開舊VisualLab/PoseLab。檢查11個block custom components、33新增家具物品、16座位entity、所有幾何/動畫/材質引用，不得有整包跳過或缺元件。指南、配方書仍獨立，Cookery原書、偏好與配方不變。兩個示範附屬按需測，全部啟用時43機器配方，核心仍41。

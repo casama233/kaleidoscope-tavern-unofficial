@@ -2,21 +2,18 @@
   "format_version": "1.26.50",
   "minecraft:item": {
     "description": {
-      "identifier": "kaleidoscope_tavern:vinegar_q1",
-      "menu_category": {
-        "category": "items"
-      }
+      "identifier": "kaleidoscope_tavern:vinegar_q1"
     },
     "components": {
       "minecraft:display_name": {
-        "value": "%item.kaleidoscope_tavern:vinegar_q1.name"
+        "value": "item.kaleidoscope_tavern:vinegar_q1.name"
       },
       "minecraft:icon": "kt_c1_vinegar_q1",
       "minecraft:max_stack_size": 16,
       "kaleidoscope_tavern:drink_effects": {},
       "minecraft:food": {
         "nutrition": 0,
-        "saturation_modifier": 0.0,
+        "saturation_modifier": 0,
         "can_always_eat": true,
         "using_converts_to": "kaleidoscope_tavern:empty_bottle"
       },

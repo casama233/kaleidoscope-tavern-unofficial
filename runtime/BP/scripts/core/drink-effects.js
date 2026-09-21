@@ -11,7 +11,7 @@ export function rollDrinkEffects(itemId,rng=Math.random){
  const selected=[];
  for(const e of drinkRows(itemId)){
   const roll=rng();check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');
-  if(roll<e.probability)selected.push({...e,bedrockId:NATIVE_EFFECTS[e.effect]??null,ticks:['minecraft:instant_health','minecraft:instant_damage'].includes(e.effect)?1:e.duration*20});
+  if(Math.fround(roll)<Math.fround(e.probability))selected.push({...e,bedrockId:NATIVE_EFFECTS[e.effect]??null,ticks:['minecraft:instant_health','minecraft:instant_damage'].includes(e.effect)?1:e.duration*20});
  }
  return selected;
 }

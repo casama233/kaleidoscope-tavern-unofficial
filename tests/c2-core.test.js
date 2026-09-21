@@ -45,3 +45,5 @@ test('independent guides explicitly report climate/worldgen/custom-effect limita
 
 import {isBottleSupport,SUPPORT_TAG} from '../runtime/BP/scripts/core/bottle-support.js';
 test('stable support whitelist rejects uncertain partial blocks, third-party block tag opts in',()=>{for(const id of ['minecraft:stone','minecraft:oak_planks','minecraft:purple_wool','minecraft:glass'])assert(isBottleSupport(id));for(const id of ['minecraft:air','minecraft:water','minecraft:oak_stairs','minecraft:fence','foreign:table'])assert(!isBottleSupport(id));assert(isBottleSupport('foreign:table',[SUPPORT_TAG]));});
+
+test('probability comparison uses Java float32 semantics at a 0.15 source boundary',()=>{const id15=Object.entries(DRINK_EFFECTS).flatMap(([b,rows])=>rows.map((r,q)=>({b,q:q+1,r}))).find(x=>x.r.some(e=>Math.fround(e.probability)===Math.fround(.15)));assert(id15);const effect=id15.r.find(e=>Math.fround(e.probability)===Math.fround(.15));const exact=rollDrinkEffects(id(id15.b,id15.q),()=>.15);assert(!exact.some(x=>x.effect===effect.effect));const below=rollDrinkEffects(id(id15.b,id15.q),()=>.149999);assert(below.some(x=>x.effect===effect.effect));});

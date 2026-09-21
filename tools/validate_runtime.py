@@ -238,7 +238,7 @@ def main():
   elif b['kind']=='bar_cabinet':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_bar_cabinet_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3])
-   check('C6_bar_cabinet_geometries:'+b['style'],set(b['geometry_by_position'].values())<=geom and sum('kaleidoscope_tavern:position'in x['condition']for x in perms)==4 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
+   check('C6_bar_cabinet_geometries:'+b['style'],all(g in geom for g in b['geometry_by_position'].values()) and sum('kaleidoscope_tavern:position'in x['condition']for x in perms)==4 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
    check('C6_bar_cabinet_shape_item:'+b['style'],comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
    check('C6_bar_cabinet_component:'+b['style'],'kaleidoscope_tavern:bar_cabinet'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']

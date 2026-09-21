@@ -75,6 +75,13 @@ def main():
    if f'give @s {ident}' in raw:legacy_gives.append(str(p.relative_to(ROOT))+':'+ident)
  check('legacy_guides_not_generated_by_kits',not legacy_gives,legacy_gives)
  check('no_duplicate_Tavern_guide_UI',not(BP/'scripts/bedrock/guidebook.js').exists() and not(BP/'recipes/guidebook.json').exists() and not(BP/'recipes/recipe_book.json').exists())
+ shared_storage=['holder.js','tilted-rack.js','circular-rack.js','bar-cabinet.js','cellar-cabinet.js']
+ router=(BP/'scripts/bedrock/stateful-storage-router.js').read_text(encoding='utf-8')
+ check('shared_storage_router_owns_common_events',all(x in router for x in ['playerInteractWithBlock.subscribe','playerBreakBlock.subscribe','beforeEvents.explosion.subscribe']))
+ for name in shared_storage:
+  text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
+  check('shared_storage_router_used:'+name,'installStatefulStorageRoutes' in text)
+  check('no_duplicate_storage_event_shell:'+name,not any(x in text for x in ['playerInteractWithBlock.subscribe','playerBreakBlock.subscribe','beforeEvents.explosion.subscribe']))
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

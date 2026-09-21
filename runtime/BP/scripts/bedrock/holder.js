@@ -1,11 +1,11 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
-import {NS,FACING,facingForYaw,faceOffset} from '../core/furniture.js';
-import {Locks} from '../core/storage.js';
+import {NS,FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
-const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
+import {makeStack,hand,inventory,canWrite,blockAt,tell,air} from './transactions.js';
+import {installStatefulStorageRoutes} from './stateful-storage-router.js';
+const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
 function center(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}
@@ -55,13 +55,19 @@ export function maintainHolderVisual(e){
 export function tickHolderVisuals(){const list=[...visuals.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainHolderVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
 export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}}});}
 export function installHolderEvents(){
- world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;const existing=e.block.typeId===HOLDER_BLOCK,hs=handSnapshot(e.player),placing=!existing&&hs.id===HOLDER_BLOCK;if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}
-  system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeHolder(e.player,target);}const b=clicked;if(!hs.id)return e.player.isSneaking?recoverHolder(e.player,b,{expectedRevision:revision}):takeHolderBottle(e.player,b,{expectedRevision:revision});if(holderBlockedItem(hs.id)){tell(e.player,'§e[Tavern] 此瓶型在 Java holder_blocklist 中，單瓶架拒收。');return;}if(holderItem(hs.id))return putHolderBottle(e.player,b,{expectedRevision:revision});tell(e.player,'§e[Tavern] 單瓶架只接受空酒瓶或來源允許的品質酒瓶；空手取出。');}));
+ installStatefulStorageRoutes({
+  isBlock:block=>block?.typeId===HOLDER_BLOCK,
+  isPlacementItem:id=>id===HOLDER_BLOCK,
+  readRevision:block=>store.load(holderKey(block.dimension.id,block.location))?.revision??-1,
+  place:({player,target})=>placeHolder(player,target),
+  interact:({player,block,held,revision})=>{
+   if(!held.id)return player.isSneaking?recoverHolder(player,block,{expectedRevision:revision}):takeHolderBottle(player,block,{expectedRevision:revision});
+   if(holderBlockedItem(held.id)){tell(player,'§e[Tavern] 此瓶型在 Java holder_blocklist 中，單瓶架拒收。');return;}
+   if(holderItem(held.id))return putHolderBottle(player,block,{expectedRevision:revision});
+   tell(player,'§e[Tavern] 單瓶架只接受空酒瓶或來源允許的品質酒瓶；空手取出。');
+  },
+  recover:({player,block,revision})=>recoverHolder(player,block,{expectedRevision:revision})
  });
- world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==HOLDER_BLOCK)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(holderKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===HOLDER_BLOCK,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,HOLDER_BLOCK,()=>recoverHolder(e.player,b,{expectedRevision:revision}));}));});
- world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>b.typeId!==HOLDER_BLOCK)));
  world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
  system.runInterval(tickHolderVisuals,20);
 }

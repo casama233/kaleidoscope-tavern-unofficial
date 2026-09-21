@@ -1,9 +1,10 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,CELLAR_CABINET,cellarCabinetItem,cellarCabinetSlot,emptyCellarCabinet,cellarCabinetPut,cellarCabinetTake,cellarCabinetPosition,cellarCabinetKey,cellarCabinetAnchor,parseCellarCabinetAnchor,cellarCabinetVisualPose,CellarCabinetStore} from '../core/cellar-cabinet.js';
-import {FACING,POSITION,facingForYaw,facingVector,faceOffset} from '../core/furniture.js';
+import {FACING,POSITION,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,plus,tell,air} from './transactions.js';
+import {installStatefulStorageRoutes} from './stateful-storage-router.js';
 const HELPER=NS+':cellar_cabinet_bottle_visual',ANCHOR=NS+':cellar_cabinet_anchor',store=new CellarCabinetStore(world),visuals=new Map();let cursor=0;
 export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'NOT_ADAPTED'};
 function error(e){cellarCabinetDiagnostics.errors.push(String(e));if(cellarCabinetDiagnostics.errors.length>16)cellarCabinetDiagnostics.errors.shift();}
@@ -24,5 +25,20 @@ export function recoverCellarCabinet(player,block,{expectedRevision}={}){canWrit
 export function maintainCellarCabinetVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseCellarCabinetAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==CELLAR_CABINET){discard(e,'orphans');return;}const state=store.load(cellarCabinetKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncCellarCabinetVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickCellarCabinets(){const list=[...visuals.values()];if(list.length){const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainCellarCabinetVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}}
 export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}}});}
-export function installCellarCabinetEvents(){world.beforeEvents.playerInteractWithBlock.subscribe(e=>{if(e.cancel)return;const existing=e.block.typeId===CELLAR_CABINET,hs=handSnapshot(e.player),placing=!existing&&hs.id===CELLAR_CABINET;if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,loc=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(cellarCabinetKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeCellarCabinet(e.player,target);}if(!hs.id&&e.player.isSneaking)return recoverCellarCabinet(e.player,clicked,{expectedRevision:revision});if(!hs.id||cellarCabinetItem(hs.id))return useCellarCabinet(e.player,clicked,face,loc,{expectedRevision:revision});tell(e.player,'§e[Tavern] 窖藏酒櫃只接受來源允許的酒瓶；必須點正面九宮格。');}));});world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||e.block.typeId!==CELLAR_CABINET)return;e.cancel=true;const d=e.block.dimension,p={...e.block.location};let revision=-1;try{revision=store.load(cellarCabinetKey(d.id,p))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===CELLAR_CABINET,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,CELLAR_CABINET,()=>recoverCellarCabinet(e.player,b,{expectedRevision:revision}));}));});world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>b.typeId!==CELLAR_CABINET)));world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainCellarCabinetVisual(e.entity));}});system.runInterval(tickCellarCabinets,20);}
+export function installCellarCabinetEvents(){
+ installStatefulStorageRoutes({
+  isBlock:block=>block?.typeId===CELLAR_CABINET,
+  isPlacementItem:id=>id===CELLAR_CABINET,
+  readRevision:block=>store.load(cellarCabinetKey(block.dimension.id,block.location))?.revision??-1,
+  place:({player,target})=>placeCellarCabinet(player,target),
+  interact:({player,block,held,face,faceLocation,revision})=>{
+   if(!held.id&&player.isSneaking)return recoverCellarCabinet(player,block,{expectedRevision:revision});
+   if(!held.id||cellarCabinetItem(held.id))return useCellarCabinet(player,block,face,faceLocation,{expectedRevision:revision});
+   tell(player,'§e[Tavern] 窖藏酒櫃只接受來源允許的酒瓶；必須點正面九宮格。');
+  },
+  recover:({player,block,revision})=>recoverCellarCabinet(player,block,{expectedRevision:revision})
+ });
+ world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainCellarCabinetVisual(e.entity));}});
+ system.runInterval(tickCellarCabinets,20);
+}
 export const CELLAR_CABINET_TEST={store,visuals,HELPER,ANCHOR};

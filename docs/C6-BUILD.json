@@ -165,6 +165,12 @@
       "asset": "cocktail_grasshopper",
       "fix": "Grasshopper: source-driven regeneration of 11 changed Java elements into 17 mapped Bedrock cubes plus exact official block PNG blob ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "asset": "cocktail_bloody_mary",
+      "fix": "Bloody Mary: source-driven regeneration of 9 changed Java elements into 18 mapped Bedrock cubes, including explicit down->up face remap with 180-degree UV rotation, plus exact official block PNG blob 07f47d76f7b9e5ede07eeee3a968471b1ee59a2d",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

@@ -22,8 +22,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Signature cups and effect limits"
     },
     "body": {
-      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。其餘Java專屬效果仍不生效。原生飲用返杯及玻璃透明排序尚需實機測試。",
-      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. Remaining Java-only effects are still inactive. Native empty-glass return and transparent rendering need engine tests."
+      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。C6另已接入聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配；尚餘3項Java專屬效果未實作。原生飲用返杯及玻璃透明排序尚需實機測試。",
+      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. C6 also enables Shriek, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters; three Java-only effects remain inactive. Native empty-glass return and transparent rendering need engine tests."
     },
     "recipeIds": []
   },
@@ -36,9 +36,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: White Lady"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [C6 高跟鞋一格自動跨步適配已接入；碰撞/手機待實機]",
+      "zh_CN": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [C6 高跟鞋一格自动跨步适配已接入；碰撞/手机待实机]",
+      "en_US": "kaleidoscope_tavern:high_heels: 3600s / amplifier 0 / 100% [C6 High Heels one-block auto-step adapter implemented; collision/mobile engine test pending]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/white_lady"
@@ -265,8 +265,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "C6 custom effects"
     },
     "body": {
-      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘4種原作效果仍未實作。\nC6更新：幽匿特調聲波、倒立、靈視、摸金校尉與醇熱適配已接入，其他4種效果仍待實作。",
-      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 4 source custom effects remain unimplemented.\nC6: Shriek Attack PvE, Upside Down, Vision, Tomb Raider and Ardent Heat adapters are now enabled. Four other types remain pending."
+      "zh_TW": "血腥瑪麗：持有效狀態擊殺，回復floor(目標最大生命/3)，最多自身生命上限。經驗汲取：每5tick牽引8格範圍經驗球，保留原球及原生拾取；未移植Java拾取冷卻歸零。Zenith：可用時傳送至同柱安全頂面並飢餓600tick，沒有破壞方塊；不同於Java精確高度圖/落距重置。持續效果以酒館自己的玩家DP保存，離線暫停，牛奶及死亡清除。僅玩家，不冒充原生狀態圖示；其餘3種原作效果仍未實作。\nC6更新：幽匿特調聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配已接入，其他3種效果仍待實作。",
+      "en_US": "Bloody Mary: kill heal floor(victim max health/3), capped. XP Drain: 5-tick orb attraction adapter; original XP values and native pickup are retained. Zenith: safe topmost-column teleport + 600-tick hunger, not exact Java heightmap/fall reset. Timed status persists in Tavern-owned player DP, pauses offline, clears on milk/death. Players only; no fake native status icons. Other 3 source custom effects remain unimplemented.\nC6: Shriek Attack PvE, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters are now enabled. Three other types remain pending."
     }
   },
   {

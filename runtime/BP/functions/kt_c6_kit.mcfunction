@@ -12,3 +12,4 @@ give @s kaleidoscope_tavern:mojito 2
 give @s kaleidoscope_tavern:nether_special 2
 give @s kaleidoscope_tavern:depth_charge 2
 give @s kaleidoscope_tavern:brass_heart 2
+give @s kaleidoscope_tavern:white_lady 2

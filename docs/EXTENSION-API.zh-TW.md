@@ -1,10 +1,10 @@
 > **C6 現行補充：** 套件依賴版本更新為 `[0,6,0]`。本轮新增的家具與聲波是內建功能，**沒有新增任意家具、傷害或特效腳本回呼 API**。既有 v1 握手、配方、指南、藥水能力與傳輸格式不變。
 
-> **C5 現行補充：** API仍為v1，增加`native_potion_inputs`能力。原生藥水不再一概拒收，但只在調酒input走身份驗證適配，詳見文末C5契約。Cookery指南仍獨立。
+> **C5 現行補充：** API仍為v1，增加`native_potion_inputs`能力。原生藥水不再一概拒收，但只在調酒input走身份驗證適配，詳見文末C5契約。Cookery 指南是唯一玩家指南；Tavern 附屬頁面會由 host bridge 發佈到 Cookery Guidebook Extension API。
 
 # Tavern Extension API v1（C6，沿用 C5 藥水與調酒契約）— 附屬作者入口
 
-本接口只管目前真正實作的能力。**它不是Cookery擴充API，也不要求把頁面注入廚房指南。** 指南與實際機器都讀酒館同一份registry。
+本接口只管 Tavern 自己真正實作的酒桶、壓榨、雪克杯與品質酒能力。配方與頁面仍以酒館 runtime registry 為權威資料；**玩家指南不再由 Tavern 自己渲染，而是把附屬頁面與自動配方頁投影到 Cookery Guidebook Extension API v1。**
 
 ## 一、分包方式
 
@@ -86,7 +86,7 @@ C3新增三槽雪克杯配方，完整格式見後文。仍不支援新增真正
 
 每頁有自有`id`、`title`、`body`的locale map，支援`zh_TW`、`zh_CN`、`en_US`；可選`recipeIds`最多32個、`icon`為自己的`textures/...`路徑，不含副檔名、URL、`..`。自有圖示要由附屬RP提供，主機不保證圖像引用真的可顯示。
 
-頁面只能連到本bundle配方或內建配方；不建立對另一個可移除附屬的隱藏依賴。頁ID和配方ID也不能相同，避免指南索引碰撞。書的搜尋、分頁及書籤由酒館提供，Cookery的語言與已學配方完全不動。
+頁面只能連到本bundle配方或內建配方；不建立對另一個可移除附屬的隱藏依賴。頁ID和配方ID也不能相同，避免指南索引碰撞。根層導航、語言、返回／取消流程由 Cookery host 提供。Tavern 只轉發靜態目錄資料，不讀寫 Cookery 的玩家語言或已學配方資料。
 
 ## 三、優先與生命週期
 
@@ -170,7 +170,7 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 
 內建配方仍優先；附屬不能用相同三色組合覆蓋核心。自訂普通材料可建立不衝突配方。未知輸出包缺失時，接酒拒絕並保留結果。附屬自己的任意產物、任意carrier只支持手持領取；只有本體已定義的杯具且carrier為空雞尾酒杯時可倒入放置空杯，**不自動為未知物品創建模型、飲用效果或擺放方塊**。
 
-配方書直接讀runtime registry，所以調酒配方與頁面一起更新，不會加入Cookery書。示範`examples/Tavern-Mixology-Demo/BP`是獨立BP，完整可打包。公開SDK文件必須一起更新，不能只複製舊client配新版protocol。
+runtime registry 仍是調酒配方與附屬頁面的唯一資料源；registry 更新後 Guide bridge 會重發同一個 Tavern 章節，因此新增／移除的附屬頁面與自動配方頁會同步出現在 Cookery 指南。示範`examples/Tavern-Mixology-Demo/BP`是獨立BP，完整可打包。公開SDK文件必須一起更新，不能只複製舊client配新版protocol。
 
 帶動態資料的特調不接受再投入其他雪克杯，避免失去既有payload；註冊即拒絕此種输入。
 

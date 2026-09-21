@@ -181,6 +181,17 @@ test('legacy guide migration never overwrites a slot changed before the deferred
 });
 test('Cookery owns guide UI while Tavern registry pages remain available to its extension API',()=>{assert.equal(runtimeRegistry().allRecipes().length,41);const ids=runtimeRegistry().allPages().map(x=>x.id);assert(ids.includes(NS+':c6_furniture'));assert(ids.includes(NS+':c6_sonic'));assert.equal(diagnosticSnapshot().build,'C6 / 0.6.0');assert.equal(diagnosticSnapshot().guideAuthority,'kaleidoscope_cookery:guidebook');assert.equal(diagnosticSnapshot().legacyGuideAliases,true);assert(diagnosticSnapshot().cookeryGuideChapter.messageCount>2);});
 
+test('Cookery guide publisher republishes a changed Tavern chapter after registry refresh',()=>{
+ const bus=new system.constructor();let extended=false;
+ const provider=()=>extended?{...COOKERY_GUIDE_PAYLOAD,entries:[...COOKERY_GUIDE_PAYLOAD.entries,{id:'demo:page',category:'tavern',kinds:[],mechanics:['demo']}]}:COOKERY_GUIDE_PAYLOAD;
+ const publisher=installCookeryGuidePublisher(bus,provider);
+ bus.advance(2);bus.afterEvents.scriptEventReceive.emit({id:COOKERY_GUIDE_EVENTS.ready,message:JSON.stringify({api:1})});bus.advance(20);
+ let begins=bus.sent.filter(x=>x.id===COOKERY_GUIDE_EVENTS.begin);assert.equal(begins.length,1);const first=JSON.parse(begins[0].message).revision;
+ extended=true;assert(publisher.refresh());bus.advance(130);
+ begins=bus.sent.filter(x=>x.id===COOKERY_GUIDE_EVENTS.begin);assert.equal(begins.length,2);assert.notEqual(JSON.parse(begins[1].message).revision,first);
+ assert.equal(publisher.getStatus().successfulTransfers,2);publisher.dispose();
+});
+
 test('Cookery guide publisher waits for host ready, then sends one complete Tavern chapter',()=>{
  const bus=new system.constructor(),logs=[];const publisher=installCookeryGuidePublisher(bus,COOKERY_GUIDE_PAYLOAD,m=>logs.push(m));
  bus.advance(2);assert(bus.sent.some(x=>x.id===COOKERY_GUIDE_EVENTS.ping));assert(!bus.sent.some(x=>x.id===COOKERY_GUIDE_EVENTS.begin));

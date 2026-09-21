@@ -46,7 +46,7 @@ def main():
    else:
     assert val.get('tag','').startswith('minecraft:');key[letter]={'tag':val['tag']}
   dump(BP/f'recipes/{short}.json',{'format_version':'1.20.10','minecraft:recipe_shaped':{'description':{'identifier':N+':'+short},'tags':['crafting_table'],'pattern':d['pattern'],'key':key,'result':{'item':d['result']['id'],'count':d['result']['count']}}})
-  if record:protect(src,'original JAR recipe; common iron/gold tags mapped to vanilla items, minecraft recipe tags preserved')
+  if record:protect(src,'original JAR recipe; table/bar tags mapped/preserved for Bedrock' if short in ['table','bar_counter'] else 'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
  def labels(short,color,family):
   for lc in ['zh_TW','zh_CN','en_US']:
    label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else (TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈') if lc=='zh_TW' else CN[color]+'色'+('高脚凳'if family=='stool'else'彩灯'))

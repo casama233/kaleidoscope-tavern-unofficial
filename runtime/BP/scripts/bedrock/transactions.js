@@ -38,6 +38,17 @@ export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.ran
  return plan;
 }
 
+export function commitStoredStateTransaction(player,{block,key,store,old,next,take,give,permutation,afterCommit}){
+ const raw=store.raw(key),oldPermutation=block.permutation,container=inventory(player);
+ const plan=planInventory(container,player.selectedSlotIndex,take,give,makeStack);
+ commitInventory(plan,container,
+  ()=>{block.setPermutation(permutation);store.save(key,next,old?.revision??-1);},
+  ()=>{block.setPermutation(oldPermutation);store.restore(key,raw);}
+ );
+ if(afterCommit)afterCommit(block,next);
+ return next;
+}
+
 function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
 function breakSound(id){
  const short=typeof id==='string'&&id.startsWith('kaleidoscope_tavern:')?id.slice('kaleidoscope_tavern:'.length):'';

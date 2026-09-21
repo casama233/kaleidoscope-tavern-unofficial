@@ -4,6 +4,7 @@ import {FACING,POSITION,facingForYaw,facingVector,faceOffset} from '../core/furn
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {installStatefulStorageRoutes} from './stateful-storage-router.js';
 const HELPER=NS+':bar_cabinet_bottle_visual',ANCHOR=NS+':bar_cabinet_anchor',store=new BarCabinetStore(world),visuals=new Map();let cursor=0;
 export const barCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){barCabinetDiagnostics.errors.push(String(e));if(barCabinetDiagnostics.errors.length>16)barCabinetDiagnostics.errors.shift();}
@@ -24,5 +25,20 @@ export function recoverBarCabinet(player,block,{expectedRevision}={}){canWrite(p
 export function maintainBarCabinetVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseBarCabinetAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==a.typeId){discard(e,'orphans');return;}const state=store.load(barCabinetKey(e.dimension.id,a.position,a.typeId));if(!state?.[a.side]){discard(e,'orphans');return;}visuals.set(e.id,e);syncBarCabinetVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickBarCabinets(){const list=[...visuals.values()];if(list.length){const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainBarCabinetVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}}
 export function registerBarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bar_cabinet',{onTick:e=>{try{syncBarCabinetConnection(e.block);const s=store.load(barCabinetKey(e.block.dimension.id,e.block.location,e.block.typeId));if(s)syncBarCabinetVisuals(e.block,s);}catch(x){error(x);}}});}
-export function installBarCabinetEvents(){world.beforeEvents.playerInteractWithBlock.subscribe(e=>{if(e.cancel)return;const existing=cabinet(e.block),hs=handSnapshot(e.player),placing=!existing&&CABINET_TYPES.includes(hs.id);if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,face=e.blockFace,loc=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));let revision=-1;if(existing)try{revision=store.load(barCabinetKey(d.id,p,id))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{sameHand(e.player,hs);check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const clicked=blockAt(d,p);check(clicked?.typeId===id,'BLOCK_CHANGED');if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeBarCabinet(e.player,target,hs.id);}if(!hs.id&&e.player.isSneaking)return recoverBarCabinet(e.player,clicked,{expectedRevision:revision});if(!hs.id||barCabinetItem(hs.id))return useBarCabinet(e.player,clicked,loc,{expectedRevision:revision});tell(e.player,'§e[Tavern] 酒櫃只接受空酒瓶或品質酒瓶；空手取瓶，潛行空手回收。');}));});world.beforeEvents.playerBreakBlock.subscribe(e=>{if(e.cancel||!cabinet(e.block))return;e.cancel=true;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;let revision=-1;try{revision=store.load(barCabinetKey(d.id,p,id))?.revision??-1;}catch{}system.run(()=>safe(e.player,()=>{const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,id,()=>recoverBarCabinet(e.player,b,{expectedRevision:revision}));}));});world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!cabinet(b))));world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainBarCabinetVisual(e.entity));}});system.runInterval(tickBarCabinets,20);}
+export function installBarCabinetEvents(){
+ installStatefulStorageRoutes({
+  isBlock:block=>cabinet(block),
+  isPlacementItem:id=>CABINET_TYPES.includes(id),
+  readRevision:block=>store.load(barCabinetKey(block.dimension.id,block.location,block.typeId))?.revision??-1,
+  place:({player,target,held})=>placeBarCabinet(player,target,held.id),
+  interact:({player,block,held,faceLocation,revision})=>{
+   if(!held.id&&player.isSneaking)return recoverBarCabinet(player,block,{expectedRevision:revision});
+   if(!held.id||barCabinetItem(held.id))return useBarCabinet(player,block,faceLocation,{expectedRevision:revision});
+   tell(player,'§e[Tavern] 酒櫃只接受空酒瓶或品質酒瓶；空手取瓶，潛行空手回收。');
+  },
+  recover:({player,block,revision})=>recoverBarCabinet(player,block,{expectedRevision:revision})
+ });
+ world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainBarCabinetVisual(e.entity));}});
+ system.runInterval(tickBarCabinets,20);
+}
 export const BAR_CABINET_TEST={store,visuals,HELPER,ANCHOR};

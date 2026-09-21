@@ -3,7 +3,7 @@ import {NS,CELLAR_CABINET,cellarCabinetItem,cellarCabinetSlot,emptyCellarCabinet
 import {FACING,POSITION,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,plus,tell,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const HELPER=NS+':cellar_cabinet_bottle_visual',ANCHOR=NS+':cellar_cabinet_anchor',store=new CellarCabinetStore(world),visuals=new Map();let cursor=0;
 export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'NOT_ADAPTED'};

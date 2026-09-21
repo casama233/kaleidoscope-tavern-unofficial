@@ -15,3 +15,5 @@ give @s kaleidoscope_tavern:brass_heart 2
 give @s kaleidoscope_tavern:white_lady 2
 give @s kaleidoscope_tavern:blue_sofa 2
 give @s kaleidoscope_tavern:red_sofa 2
+give @s kaleidoscope_tavern:table 2
+give @s kaleidoscope_tavern:bar_counter 3

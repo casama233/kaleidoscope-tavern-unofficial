@@ -4,7 +4,7 @@ import {FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),visuals=new Map();let cursor=0;
 export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'NOT_ADAPTED'};
 function error(e){tiltedRackDiagnostics.errors.push(String(e));if(tiltedRackDiagnostics.errors.length>16)tiltedRackDiagnostics.errors.shift();}
@@ -19,7 +19,7 @@ export function putTiltedRackBottle(player,block,faceLocation,{expectedRevision}
 export function takeTiltedRackBottle(player,block,faceLocation,{expectedRevision}={}){canWrite(player);requireBlockReach(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');const k=tiltedRackKey(block.dimension.id,block.location),old=store.load(k);check(old,'MISSING_TILTED_RACK_STATE');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const slot=tiltedRackSlot(block.permutation.getState(FACING)??0,faceLocation);if(old.slots[slot]===null)return false;const tx=tiltedRackTake(old,slot);transact(player,block,old,tx.state,0,[{id:tx.item,count:1}],block.permutation);tiltedRackDiagnostics.taken++;return {slot,item:tx.item,state:tx.state};}
 export function recoverTiltedRack(player,block,{expectedRevision}={}){canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===TILTED_RACK,'NOT_TILTED_RACK');const k=tiltedRackKey(block.dimension.id,block.location),old=store.load(k);check(old,'MISSING_TILTED_RACK_STATE');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const give=[{id:TILTED_RACK,count:1},...old.slots.filter(Boolean).map(id=>({id,count:1}))];transact(player,block,old,undefined,0,give,air());tiltedRackDiagnostics.recovered++;return give;}
 export function maintainTiltedRackVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseTiltedRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==TILTED_RACK){discard(e,'orphans');return;}const state=store.load(tiltedRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncTiltedRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
-export function tickTiltedRackVisuals(){const list=[...visuals.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainTiltedRackVisual(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
+export function tickTiltedRackVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainTiltedRackVisual);}
 export function registerTiltedRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':tilted_rack',{onTick:e=>{try{const s=store.load(tiltedRackKey(e.block.dimension.id,e.block.location));if(s)syncTiltedRackVisuals(e.block,s);}catch(x){error(x);}}});}
 export function installTiltedRackEvents(){
  installStatefulStorageRoutes({

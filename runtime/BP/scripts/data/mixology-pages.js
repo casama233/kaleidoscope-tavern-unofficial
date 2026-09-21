@@ -272,14 +272,14 @@ export const MIXOLOGY_PAGES = [
   {
     "id": "kaleidoscope_tavern:c6_furniture",
     "title": {
-      "zh_TW": "高腳凳、沙發與彩燈",
-      "zh_CN": "高脚凳、沙发与彩灯",
-      "en_US": "Stools, sofas and string lights"
+      "zh_TW": "高腳凳、沙發、桌與吧台",
+      "zh_CN": "高脚凳、沙发、桌与吧台",
+      "en_US": "Stools, sofas, tables and bar counters"
     },
     "body": {
-      "zh_TW": "16色高腳凳、16色沙發與17款彩燈皆可合成、放置及回收。沙發沿用原作6種連接狀態，包含直線左右／中段與兩種轉角；不同顏色也能相連。每格沙發可空手坐1人，潛行離座，空位不保留helper實體；候選坐點0.45格來自原作0.5125座位錨點沿用現有-0.0625 Bedrock校正。高腳凳仍為0.8125格座點。彩燈可用染料換款。沙發waterlogging、背靠複合碰撞、Steve/Alex/手機多人座高仍待實機驗收。",
-      "zh_CN": "16色高脚凳、16色沙发与17款彩灯均可合成、放置和回收。沙发保留原作6种连接状态，且不同颜色可以连接；每格可空手坐1人，潜行离座，空位不会保留helper实体。waterlogging、复合碰撞与真实客户端座高仍待实机。",
-      "en_US": "All 16 stool colors, 16 sofa colors and 17 string-light designs are craftable/placeable/recoverable. Sofas preserve the six source connection states, including both corners, and different colors connect. Each sofa block seats one player; the invisible helper exists only while occupied. Candidate seat height .45 derives from the source .5125 anchor using the existing -.0625 Bedrock correction. Sofa waterlogging, compound backrest collision and real-client/mobile seating remain unverified."
+      "zh_TW": "16色高腳凳、16色沙發與17款彩燈皆可合成、放置及回收。沙發沿用原作6種連接狀態，包含直線左右／中段與兩種轉角；不同顏色也能相連。每格沙發可空手坐1人，潛行離座，空位不保留helper實體；候選坐點0.45格來自原作0.5125座位錨點沿用現有-0.0625 Bedrock校正。高腳凳仍為0.8125格座點。彩燈可用染料換款。沙發waterlogging、背靠複合碰撞、Steve/Alex/手機多人座高仍待實機驗收。\nBatch 7：桌子已移植單體／左／中／右4態與X/Z軸向鎖定；吧台直接復用沙發同源IConnectionBlock的6態直線／轉角規則。兩者均可合成、放置、回收並自動刷新鄰居。桌子保留原作僅桌面3/16高的碰撞；waterlogging仍未移植。",
+      "zh_CN": "16色高脚凳、16色沙发与17款彩灯均可合成、放置和回收。沙发保留原作6种连接状态，且不同颜色可以连接；每格可空手坐1人，潜行离座，空位不会保留helper实体。waterlogging、复合碰撞与真实客户端座高仍待实机。\nBatch 7：桌子已移植单体／左／中／右4态与X/Z轴向锁定；吧台直接复用沙发同源IConnectionBlock的6态直线／转角规则。两者均可合成、放置、回收并自动刷新邻居。桌子保留原作仅桌面3/16高的碰撞；waterlogging仍未移植。",
+      "en_US": "All 16 stool colors, 16 sofa colors and 17 string-light designs are craftable/placeable/recoverable. Sofas preserve the six source connection states, including both corners, and different colors connect. Each sofa block seats one player; the invisible helper exists only while occupied. Candidate seat height .45 derives from the source .5125 anchor using the existing -.0625 Bedrock correction. Sofa waterlogging, compound backrest collision and real-client/mobile seating remain unverified.\nBatch 7 ports Table single/left/middle/right with X/Z run locking and Bar Counter through the same six-state Java IConnectionBlock logic already shared by sofas. Both are craftable/placeable/recoverable with neighbor refresh. Table keeps the source 3/16-high tabletop collision; waterlogging remains unported."
     }
   },
   {

@@ -1,0 +1,90 @@
+{
+  "runtime_bp_uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+  "runtime_rp_uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+  "version": [
+    0,
+    7,
+    0
+  ],
+  "cookery_bp_dependency": "10f37ae2-9ccf-435f-b34b-0eec8191cd94",
+  "cookery_rp_dependency": "c89dc8df-c3fc-4bc8-8bd0-527abba76681",
+  "cookery_internal_version": [
+    1,
+    0,
+    6
+  ],
+  "script_api": "2.7.0",
+  "ui_api": "2.0.0",
+  "builtin_barrel_recipes": 23,
+  "builtin_pressing_recipes": 6,
+  "native_crafting_recipes": 43,
+  "quality_drink_items": 144,
+  "planned_recipe_exclusions": [
+    {
+      "id": "kaleidoscope_tavern:barrel/molotov",
+      "reason": "Projectile/fire gameplay not enabled in C7."
+    }
+  ],
+  "art_copied_without_geometry_repaint": true,
+  "engine_acceptance": "NOT_RUN",
+  "is_production_release": false,
+  "phase": "C7",
+  "crop_blocks": 7,
+  "display_blocks": 24,
+  "display_arrangements": 93,
+  "source_effect_families": 24,
+  "q1_drinkable": true,
+  "soil_temperature_acceleration": "NOT_ADAPTED; natural fallback probability 0.25",
+  "worldgen": "NOT_ADAPTED; explicit port-only starter crafting",
+  "native_effect_types": 21,
+  "custom_effect_types_pending": [
+    "slightly_tipsy",
+    "high_heels",
+    "grass_stealth",
+    "vision",
+    "ardent_heat",
+    "long_reach"
+  ],
+  "shaker_recipes": 12,
+  "total_machine_recipes": 41,
+  "cocktail_items": 14,
+  "cup_blocks": 15,
+  "shaker_station_blocks": 1,
+  "shaker_input_drink_ids": 69,
+  "gesture": "native start/release/stop; no item replacement on start; explicit two-click fallback",
+  "potion_input": "VALIDATED_NATIVE_IDENTITY",
+  "effect_hooks": "native + BloodyMary + XPDrain/Zenith/Shriek/TombRaider/UpsideDown adapters",
+  "portable_payload": "kaleidoscope_tavern:shaker_data schema1",
+  "pour_duration_ticks": 12,
+  "original_put_animation": "bound to successful station ingredient commits",
+  "source_wave": "sin(ticks * 1.5) * 0.25",
+  "adapted_not_source_authored": [
+    "wrist anchor",
+    "table shake",
+    "12-tick pour and droplet stream"
+  ],
+  "held_spout": "root/kt_spout (-3.5,11,0) on original body lip",
+  "custom_effects": {
+    "bloody_mary": "source kill-heal rule for players",
+    "xp_drain": "orb physics/pickup adaptation",
+    "zenith": "safe heightmap/teleport adaptation",
+    "shriek_attack": "native sonicBoom/PvE-only ray adapter",
+    "tomb_raider": "source 30% main-hand disarm/drop adapter",
+    "upside_down": "source inflated-16 AABB Grumm naming adapter"
+  },
+  "potion_data": "native potion identity snapshot + checked resolve; unknown/custom metadata rejected",
+  "source_drink_native_effect_types": 14,
+  "furniture": {
+    "stools": 16,
+    "lights": 17,
+    "new_shaped_recipes": 33,
+    "source_anchor_y": 0.875,
+    "source_explicit_rider_offset": -0.0625,
+    "native_seat_y": 0.8125,
+    "light_emission": 15
+  },
+  "java_reference": {
+    "release": "1.2.0",
+    "upstream_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416"
+  }
+}

@@ -44,6 +44,14 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 另以測試資料注入 amplifier 1/2，確認半徑12/18且2以上封頂18。測AABB邊界與角落，不應退化成單純球形距離。記錄原作 `effect.vision` 音效在單人／多人客戶端的可聽範圍，以及發光描邊對玩家與各類生物的實際表現。C6沿用5tick巡檢，因此pulse允許比Java精確tick最多晚一個巡檢窗口，但不可漏掉50tick節點。
 
+## 4.7 下界特調／摸金校尉
+
+喝下下界特調後，分別攻擊 Skeleton、Stray、Wither Skeleton、Bogged、Skeleton Horse、Zombie、Zombie Villager、Drowned、Husk、Piglin、Piglin Brute、Zombified Piglin、Vindicator、Pillager、Witch。對能持主手物品的目標反覆測試，長期觸發率應接近30%；Creeper、Evoker等不在來源tag的生物不得被卸裝。
+
+觸發時確認主手立刻清空，原物品的名稱／附魔／其他metadata保持；有耐久物應只剩1耐久，無耐久或Unbreakable物品不應被偽造耐久。掉落物立即可見，但前40 tick任何玩家／生物拾取都應被阻止，第40 tick後可正常拾取。測試物品生成失敗/區塊邊界時不得默默刪除原武器。
+
+特別測致死一擊、弓箭／投射物、多人同時攻擊與重載。Java使用Forge `LivingHurtEvent`，Bedrock使用 `entityHurt` after-event；若致死一擊時Bedrock已使實體無效，需記錄並決定是否另做before-event安全適配。C6自訂效果目前只有玩家持有，不宣稱任意生物 `/effect` 等價。
+
 ## 5. C5 及之前功能回歸
 
 至少走一次種植→壓榨→釀造→Q4投料→拿起雪克杯→原生長按/鬆手→倒入已放空杯→擺取特調→飲用。16空桶/空杯交換保留15；退藥水保留effect/delivery，不變水瓶；本輪不得讓家具beforeEvent吃掉原機器互動或其他包已取消事件。
@@ -54,4 +62,4 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 C5副本世界關掉正在使用的雪克杯session，再換C6，核對舊machine/cup/potionpayload/書籤不變。不能在主世界直接升級。BDS、Realm、多玩家延遲與手機需要各自驗收，桌面單人不能代替。
 
-全部條目目前NOT_RUN。六個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。
+全部條目目前NOT_RUN。五個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。

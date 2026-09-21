@@ -6,7 +6,7 @@ import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
 import {FARM_IDS} from './cultivation.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak} from './transactions.js';
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
 const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap','shaker_station'].map(x=>NS+':'+x));
@@ -78,7 +78,7 @@ export function installBottleEvents(openBook){
   if(!DISPLAY_IDS.has(e.block.typeId))return;e.cancel=true;
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;
   let rev;try{rev=store.load(bottleKey(d.id,p))?.revision;}catch{return;}
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return takeBottles(e.player,b,{all:true,expectedRevision:rev});}));
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,id,()=>takeBottles(e.player,b,{all:true,expectedRevision:rev}));}));
  });
  world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!DISPLAY_IDS.has(b.typeId))));
 }

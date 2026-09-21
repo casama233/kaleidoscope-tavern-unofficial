@@ -22,7 +22,7 @@ def main():
  check('Cookery_RP_exact_header_dependency',any(x.get('uuid')==lock['rp']['uuid'] and x['version']==lock['rp']['version'] for x in rp['dependencies']))
  check('Tavern_BP_own_RP_dependency',any(x.get('uuid')==rp['header']['uuid'] and x['version']==rp['header']['version'] for x in bp['dependencies']))
  check('no_reverse_Tavern_dependency',not any(x.get('uuid')==bp['header']['uuid'] for x in rp['dependencies']))
- check('stable_modules_match_actual_Cookery',[(x['module_name'],x['version']) for x in bp['dependencies'] if 'module_name'in x]==[(x['module_name'],x['version']) for x in lock['script_dependencies']])
+ check('Tavern_script_modules_minimal',[(x['module_name'],x['version']) for x in bp['dependencies'] if 'module_name'in x]==[('@minecraft/server','2.7.0')])
  check('script_entry_exists',(BP/'scripts/main.js').is_file())
  check('bridge_runtime_paths',load(ROOT/'config.json')['packs']=={'behaviorPack':'./runtime/BP','resourcePack':'./runtime/RP'})
  uuids=[m['header']['uuid'] for m in [bp,rp]]+[v['uuid']for m in[bp,rp]for v in m['modules']]
@@ -341,7 +341,7 @@ def main():
   text=p.read_text();rel=str(p.relative_to(BP))
   for spec in re.findall(r'from\s+[\"\']([^\"\']+)[\"\']',text):
    if spec.startswith('.'):check('import:'+rel+':'+spec,(p.parent/spec).is_file())
-   else:check('only_public_engine_module:'+spec,spec in{'@minecraft/server','@minecraft/server-ui'})
+   else:check('only_public_engine_module:'+spec,spec in{'@minecraft/server'})
   allow_guide=rel=='scripts/core/cookery-guide-publisher.js'
   forbidden_register=bool(re.search(r'kaleidoscope_cookery:register_',text))
   forbidden_guide=bool(re.search(r'kaleidoscope_cookery:guidebook_(begin|chunk|end)',text))

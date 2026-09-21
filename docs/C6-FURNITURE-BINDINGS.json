@@ -810,6 +810,25 @@
       },
       "waterlogged": false,
       "exact_collision_parity": true
+    },
+    {
+      "kind": "bar_counter",
+      "item": "kaleidoscope_tavern:bar_counter",
+      "block": "kaleidoscope_tavern:bar_counter",
+      "geometry_by_connection": {
+        "single": "geometry.kt_assets_a10.bar_counter_single",
+        "left": "geometry.kt_assets_a10.bar_counter_left",
+        "right": "geometry.kt_assets_a10.bar_counter_right",
+        "middle": "geometry.kt_assets_a10.bar_counter_middle",
+        "left_corner": "geometry.kt_assets_a10.bar_counter_left_corner",
+        "right_corner": "geometry.kt_assets_a10.bar_counter_right_corner"
+      },
+      "world_texture": "kt_assets_a10_block_deco_bar_counter",
+      "item_geometry": "geometry.kt_assets_a17.item_display_bar_counter",
+      "item_texture": "kt_assets_a17_item_display_bar_counter",
+      "connection_states": 6,
+      "waterlogged": false,
+      "exact_collision_parity": true
     }
   ],
   "derived_icons": [
@@ -1115,5 +1134,6 @@
   "lights": 17,
   "sofas": 16,
   "tables": 1,
+  "bar_counters": 1,
   "engine_accepted": false
 }

@@ -1,4 +1,4 @@
-name: temp bloody mary source fetch
+name: temp bloody mary materialize
 
 on:
   push:
@@ -6,22 +6,28 @@ on:
       - sync/c70eec1-bloody-mary
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  fetch:
+  materialize:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Emit locked upstream Bloody Mary PNG blobs
-        shell: python
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: sync/c70eec1-bloody-mary
+
+      - name: Apply locked Bloody Mary visual sync
+        run: python tools/sync_post12_visuals.py --plan data/upstream/post-1.2/c70eec1/bloody-mary/sync-plan.json
+
+      - name: Commit generated runtime outputs
         run: |
-          import base64, urllib.request
-          urls = {
-              "BASE": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/6b0d619145316492f055e03d70427107cd73efa8/src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/bloody_mary.png",
-              "UPDATED": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/c70eec14b4d8cede23f7274910b8424a8fd49f89/src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/bloody_mary.png",
-          }
-          for label, url in urls.items():
-              data = urllib.request.urlopen(url, timeout=30).read()
-              print(f"BEGIN_{label}")
-              print(base64.b64encode(data).decode("ascii"))
-              print(f"END_{label}")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add art/interfaces/asset-registry.json runtime/BP/blocks/cup_bloody_mary.json runtime/RP/models/entity/bloody_mary.geo.json runtime/RP/textures/kaleidoscope_tavern/block/mixology/bloody_mary.png runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/bloody_mary.png
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Materialize Bloody Mary post-1.2 sync"
+          git push origin HEAD:sync/c70eec1-bloody-mary

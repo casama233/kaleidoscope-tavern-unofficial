@@ -3,8 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {world,system,startup,Player,ItemStack,Container,GameMode,BlockPermutation} from './fake-server.js';
-import {ui} from './fake-ui.js';
-import {book,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
+import {runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
 import {NS,BARE} from '../runtime/BP/scripts/core/cultivation.js';
 import {FARM_IDS,framePermutation,refreshFrame,refreshAround,growthChanges,grow,maintain,farmUse,farmBreak} from '../runtime/BP/scripts/bedrock/cultivation.js';
 import {placeBottle,takeBottles,BOTTLE_TEST,DISPLAY_IDS} from '../runtime/BP/scripts/bedrock/bottles.js';
@@ -75,7 +74,7 @@ test('protection filters compose with C1 machines and leave unrelated blocks imp
 test('Q1 consumption applies600tick nausea but never changes the post-consume inventory itself',()=>{const p=player();h(p,NS+':wine_q1',15);p.inventory.setItem(1,new ItemStack(NS+':empty_bottle'));const before=JSON.stringify(p.inventory.items);const out=consumeDrink({source:p,itemStack:new ItemStack(NS+':wine_q1')},()=>0);assert.equal(out[0].status,'APPLIED');assert.deepEqual(p.effects,[{id:'nausea',ticks:600,amplifier:0,showParticles:true}]);assert.equal(JSON.stringify(p.inventory.items),before);});
 test('native regeneration gets source duration and custom tipsy is explicitly unsupported',()=>{const p=player(),out=consumeDrink({source:p,itemStack:new ItemStack(NS+':wine_q6')},()=>0);assert.equal(out.find(x=>x.effect===NS+':slightly_tipsy').status,'UNIMPLEMENTED_CUSTOM_EFFECT');assert.deepEqual(p.effects,[{id:'regeneration',ticks:10800,amplifier:1,showParticles:true}]);assert(effectDiagnostics.unsupported[NS+':slightly_tipsy']>0);});
 test('onConsume registration has no onUse effect shortcut; engine errors are bounded diagnostics',()=>{const c=regs.items.get(NS+':drink_effects');assert.equal(typeof c.onConsume,'function');assert.equal(c.onUse,undefined);const p=player();p.failEffect=true;for(let i=0;i<20;i++)consumeDrink({source:p,itemStack:new ItemStack(NS+':wine_q1')},()=>0);assert.equal(effectDiagnostics.errors.length,16);assert.equal(p.effects.length,0);});
-test('independent guide contains cultivation, bottle handling and24 effect tables, without Cookery writes',async()=>{const p=player();p.setDynamicProperty('kc:guidebook_language','en_US');const entries=guideEntries(runtimeRegistry(),'zh_TW');assert(entries.some(x=>x.id===NS+':cultivation'));assert.equal(entries.filter(x=>x.id.startsWith(NS+':effects/')).length,24);assert(searchEntries(entries,'Q6').length>=24);ui.forms=[];ui.responses=[];await book(p);assert.match(ui.forms[0].content,/C6/);assert.equal(p.getDynamicProperty('kc:guidebook_language'),'en_US');assert.equal(diagnosticSnapshot().bottlePlacement,true);});
+test('Tavern guide data keeps cultivation, bottle handling and24 effect tables for the Cookery publisher',()=>{const entries=guideEntries(runtimeRegistry(),'zh_TW');assert(entries.some(x=>x.id===NS+':cultivation'));assert.equal(entries.filter(x=>x.id.startsWith(NS+':effects/')).length,24);assert(searchEntries(entries,'Q6').length>=24);assert.equal(diagnosticSnapshot().guideAuthority,'kaleidoscope_cookery:guidebook');assert.equal(diagnosticSnapshot().bottlePlacement,true);});
 test('end-to-end adapters: cultivate33 grapes, press4 buckets, brew, place and return original quality, then effect hook',()=>{
  const p=player(),vine=frame({kind:'grape',age:3,shape:'east_west',soil:null});
  h(p,'minecraft:shears');

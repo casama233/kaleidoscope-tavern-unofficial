@@ -49,7 +49,7 @@ def main():
  dump(RP/'particles/held_pour_drop.json',drop)
  for lc in ['zh_TW','zh_CN','en_US']:
   p=RP/f'texts/{lc}.lang';text=p.read_text(encoding='utf-8').split('## C5 ADDITIONS')[0].rstrip()+'\n## C5 ADDITIONS\n'
-  text+='action.interact.kt_hold_shaker='+('Hold to shake / release to finish'if lc=='en_US'else'按住搖動／鬆手完成')+'\n';p.write_text(text,encoding='utf-8')
+  text+='action.interact.kt_hold_shaker='+('Hold to shake / release to finish'if lc=='en_US'else'按住摇动／松手完成'if lc=='zh_CN'else'按住搖動／鬆手完成')+'\n';p.write_text(text,encoding='utf-8')
  pagespath=BP/'scripts/data/mixology-pages.js';pages=module(pagespath,'MIXOLOGY_PAGES')
  for page in pages:
   if page['id']==N+':mixology':page['body']={'zh_TW':'C5：桌上投三份Q4以上基酒或支援的原生藥水。潛行空手拿起整杯；手持按住使用，鬆手完成，111tick自動结算。潛行取消。不要連點當成長按。若平台未觸發原生事件，在酒館指南選擇相容兩次點擊模式。完成後對已放空杯倒酒，12tick後才提交。原作PUT及杯嘴locator已綁定；手腕/窄臂/觸控仍需引擎驗收。藥水保留effect/delivery身份，退料交回原版玻璃瓶。','zh_CN':'C5：桌上投料，潜行空手拿起；按住使用、松手完成，111tick自动结算；潜行取消。原生输入未触发时可在独立指南明确切换两次点击兼容模式。药水按原生身份保存，退料需玻璃瓶。手腕、触控与真实引擎动画仍需验收。','en_US':'C5: load on table, pick up, HOLD use and RELEASE to finish. Sneak cancels; 111-tick watchdog. Explicit two-click fallback is available in this independent guide if native events do not fire. Native potion identity/duration are preserved, withdraw with a vanilla glass bottle. Spout locator is geometry-bound; wrist/skin/mobile calibration awaits real-engine testing.'}

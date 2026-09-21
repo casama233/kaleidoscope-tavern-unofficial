@@ -21,6 +21,7 @@ import {registerCircularRackComponents,installCircularRackEvents,circularRackDia
 import {registerBarCabinetComponents,installBarCabinetEvents,barCabinetDiagnostics} from './bedrock/bar-cabinet.js';
 import {registerCellarCabinetComponents,installCellarCabinetEvents,cellarCabinetDiagnostics} from './bedrock/cellar-cabinet.js';
 import {registerDrinkEffects,effectDiagnostics} from './bedrock/drink-effects.js';
+import {installBlockBreakUX} from './bedrock/block-break-ux.js';
 import {EFFECT_PAGES} from './data/effect-pages.js';
 import {SHAKER_RECIPES} from './data/mixology.js';
 import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
@@ -33,7 +34,7 @@ system.beforeEvents.startup.subscribe(ev=>{
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:guidebook',{onUse:e=>void book(e.source,false)});
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:recipe_book',{onUse:e=>void book(e.source,true)});
 });
-installFurnitureEvents(book);installCustomEffects();installMixologyEvents(book);installMachineEvents(book);installCultivation(book);installHolderEvents(book);installTiltedRackEvents(book);installCircularRackEvents(book);installBarCabinetEvents(book);installCellarCabinetEvents(book);installBottleEvents(book);
+installFurnitureEvents(book);installCustomEffects();installMixologyEvents(book);installMachineEvents(book);installCultivation(book);installHolderEvents(book);installTiltedRackEvents(book);installCircularRackEvents(book);installBarCabinetEvents(book);installCellarCabinetEvents(book);installBottleEvents(book);installBlockBreakUX();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
  if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});

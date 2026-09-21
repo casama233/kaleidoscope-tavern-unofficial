@@ -54,6 +54,14 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 另以測試資料注入 amplifier 1／2，確認半徑12／18且2以上封頂18。測 AABB 邊界與角落，剛好貼面不得算相交；玩家自己、本包座位／視覺helper、死亡實體不得被錯誤發光。記錄原作 `effect.vision` 音效在單人／多人客戶端的可聽範圍，以及發光描邊對玩家與各類生物的實際表現。C6沿用5tick巡檢，因此pulse允許比Java精確tick最多晚一個巡檢窗口，但不可漏掉50tick節點。
 
+## 4.7 下界特調／摸金校尉
+
+喝下下界特調後，分別攻擊原作允許的骷髏系、殭屍系、豬靈系、衛道士／掠奪者與女巫，確認只有主手有物品且30%判定命中時卸裝。另測 creeper、evoker、玩家等非清單目標不得觸發；Bedrock 的殭屍化豬靈ID使用 `minecraft:zombie_pigman`。
+
+用有耐久武器測掉落後應直接變成「僅剩1耐久」，不是只扣1耐久；已高度損壞的武器也應被改回僅剩1耐久。不可損耗物保留原樣。掉落必須是真實item entity，前40 tick任何實體拾取都被取消，第40 tick後恢復原生拾取。
+
+注入掉落生成失敗，原主手必須回滾，不得吞物。另專測致死一擊：Java使用 `LivingHurtEvent`，Bedrock本適配使用可安全寫裝備／生物的 `afterEvents.entityHurt`，因此需要記錄致死時是否仍能穩定取得裝備、生成掉落；未實機前這一項是明示時序差異。
+
 ## 5. C5 及之前功能回歸
 
 至少走一次種植→壓榨→釀造→Q4投料→拿起雪克杯→原生長按/鬆手→倒入已放空杯→擺取特調→飲用。16空桶/空杯交換保留15；退藥水保留effect/delivery，不變水瓶；本輪不得讓家具beforeEvent吃掉原機器互動或其他包已取消事件。
@@ -64,4 +72,4 @@ Java原作另呼叫 `setCustomNameVisible(false)`；Bedrock Script API沒有通�
 
 C5副本世界關掉正在使用的雪克杯session，再換C6，核對舊machine/cup/potionpayload/書籤不變。不能在主世界直接升級。BDS、Realm、多玩家延遲與手機需要各自驗收，桌面單人不能代替。
 
-全部條目目前NOT_RUN。六個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。
+全部條目目前NOT_RUN。五個尚未實作專屬效果、其他家具/黑板文字/生成/自動接酒另列缺口，不由測試清單偽裝完成；production匯出繼續拒絕。

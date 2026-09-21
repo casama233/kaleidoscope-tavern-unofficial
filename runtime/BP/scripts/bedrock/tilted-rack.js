@@ -1,12 +1,11 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,TILTED_RACK,tiltedRackItem,tiltedRackBlockedItem,tiltedRackSlot,emptyTiltedRack,tiltedRackPut,tiltedRackTake,tiltedRackKey,tiltedRackAnchor,parseTiltedRackAnchor,tiltedRackVisualPose,TiltedRackStore} from '../core/tilted-rack.js';
-import {FACING,facingForYaw,faceOffset} from '../core/furniture.js';
-import {Locks} from '../core/storage.js';
+import {FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes} from './stateful-storage-router.js';
-const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
+const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),visuals=new Map();let cursor=0;
 export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'NOT_ADAPTED'};
 function error(e){tiltedRackDiagnostics.errors.push(String(e));if(tiltedRackDiagnostics.errors.length>16)tiltedRackDiagnostics.errors.shift();}
 function center(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}

@@ -46,7 +46,7 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
-export function installBottleEvents(openBook){
+export function installBottleEvents(){
  // Java DrinkBlockItem.useOn reserves sneak-use on a block for placement. Bedrock can
  // independently start minecraft:food in the same input, so cancel that native use
  // path while a sneaking player has a block target; the block-interaction handlers
@@ -67,7 +67,7 @@ export function installBottleEvents(openBook){
   system.run(()=>safe(e.player,()=>{
    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');sameHand(e.player,hs);
    const b=blockAt(d,clicked);check(b?.typeId===id,'BLOCK_CHANGED');
-   if([NS+':guidebook',NS+':recipe_book'].includes(hs.id))return openBook(e.player,hs.id.endsWith(':recipe_book'));
+   
    if(parseBottle(hs.id))return placeBottle(e.player,target,{expectedRevision:revision});
    if(!hs.id)return takeBottles(e.player,b,{expectedRevision:revision});
    tell(e.player,'§e空手取回一瓶；同種酒可疊放。');

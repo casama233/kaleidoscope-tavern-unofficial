@@ -97,9 +97,9 @@ python tools/audit_rebuild.py
 python tools/package_c6.py
 ```
 
-不提供Cookery-reference就明確跳過那一個外部原模組共存案例；其他511總量中的510例仍執行。提供時也只讀兩個Cookery API模組到mock bus，不啟動Cookery整包。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
+不提供Cookery-reference仍會跳過那一個外部原模組共存案例。`docs/TEST-RESULTS.json`目前仍是上一個已執行基線的511例結果；Batch 1＋2又新增6個靜態回歸案例，但本分支沒有Actions或本機Node執行紀錄，因此不能把它們宣稱為已通過。`CHECK-C6.cmd`与npm scripts已更新；舊test/package工具名轉到C6，避免把新檔錯標成C5。
 
-本輪新增46核心＋72適配層測試，累積192核心＋319適配層＝511例。包含16配色/17款逐件測試；是具體單元案例數，不是511場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
+目前C6測試檔靜態定義較原基線新增6例（Batch 1：2例；Batch 2：4例），若全部執行則總案例數預期為517；實際最新已落盤報告仍是511例。包含16配色/17款逐件測試；這些是單元案例，不是517場遊戲測試。原生rideable由測試替身模擬；不模擬真實人物坐姿、Molang、light emission、客戶端音畫、返瓶或真實chunk保存。報告在`docs/TEST-RESULTS.json`與`STATIC-VALIDATION.json`。
 
 **沒有Minecraft／bridge／Blockbench／Realms／BDS／手機實機驗收。** 核對清單見`ENGINE-TEST-CHECKLIST.zh-TW.md`，一律NOT_RUN。`--production`仍拒絕匯出。
 

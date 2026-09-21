@@ -1,12 +1,11 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
-import {NS,FACING,facingForYaw,faceOffset} from '../core/furniture.js';
-import {Locks} from '../core/storage.js';
+import {NS,FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,blockAt,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes} from './stateful-storage-router.js';
-const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),locks=new Locks(),visuals=new Map();let cursor=0;
+const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
 function center(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}

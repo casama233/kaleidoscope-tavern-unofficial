@@ -64,6 +64,8 @@ def main():
  # Native all-player inventory/book APIs are never edited. These pages belong to Tavern alone.
  p=BP/'scripts/data/mixology-pages.js';pages=mod(p)
  for page in pages:
+  if page['id']==N+':cocktail_limits':
+   page['body']={'zh_TW':'特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，強度與機率取最大；物品不可堆疊，擺放取回不丟資料。C6現有：血腥瑪麗規則實作；經驗汲取、Zenith、Shriek Attack、Upside Down、Vision、Tomb Raider為明示Bedrock適配。仍未實作 slightly_tipsy、high_heels、grass_stealth、ardent_heat、long_reach。原生飲用返杯、事件時序與客戶端渲染仍需實機測試。','en_US':'Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C6 implements Bloody Mary rules and explicit Bedrock adapters for XP Drain, Zenith, Shriek Attack, Upside Down, Vision and Tomb Raider. Still pending: slightly_tipsy, high_heels, grass_stealth, ardent_heat and long_reach. Native empty-glass return, event ordering and client rendering still need engine tests.'}
   if page['id']==N+':cocktail_effects/sculk_special':
    page['body']={lc:body.replace('未實作','聲波 PvE 適配已接入').replace('not implemented','sonic PvE adapter implemented')for lc,body in page['body'].items()}
   if page['id']==N+':cocktail_effects/screwdriver':
@@ -81,8 +83,7 @@ def main():
  for page in pages:
   if page['id']==N+':c5_effects':
    page['title']={'zh_TW':'專屬酒效 C6','zh_CN':'专属酒效 C6','en_US':'C6 custom effects'}
-   for lc in page['body']:page['body'][lc]+=('\nC6: Shriek Attack, Upside Down, Vision and Tomb Raider adapters are enabled. Five other types remain pending.'if lc=='en_US'else'\nC6更新：幽匿聲波、倒立、靈視與摸金校尉適配已接入，其他5種效果仍待實作。')
-   for lc in page['body']:page['body'][lc]=page['body'][lc].replace('其餘9種','其餘5種').replace('Other 9','Other 5')
+   page['body']={'zh_TW':'血腥瑪麗：擊殺回血 floor(目標最大生命/3)。經驗汲取：保留原經驗球的牽引適配。Zenith：安全頂面傳送適配。Shriek Attack：PvE聲波適配。Upside Down：Grumm命名倒立適配。Vision：週期發光適配。Tomb Raider：指定生物30%主手卸裝、只剩1耐久並40tick禁止拾取。持續效果由酒館玩家DP保存，離線暫停，牛奶及死亡清除。仍有5種Java專屬效果待移植；所有項目仍需Minecraft實機驗收。','en_US':'C6 custom effects: Bloody Mary kill-heal; XP Drain orb attraction; Zenith safe-surface teleport; Shriek Attack PvE sonic adapter; Upside Down Grumm naming; Vision periodic Glowing; Tomb Raider 30% mapped-mob mainhand disarm with one durability remaining and a 40-tick pickup lock. Timed effects use Tavern-owned player DP, pause offline, and clear on milk/death. Five Java-specific effects remain pending. Minecraft engine acceptance is still required.'}
  p.write_text('export const MIXOLOGY_PAGES = '+json.dumps(pages,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
  for p in [BP/'manifest.json',RP/'manifest.json',R/'examples/Tavern-Extension-Demo/BP/manifest.json',R/'examples/Tavern-Mixology-Demo/BP/manifest.json']:
   d=load(p);d['header']['version']=V;d['header']['name']=d['header']['name'].replace('C5','C6')

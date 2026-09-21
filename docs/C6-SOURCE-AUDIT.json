@@ -167,6 +167,16 @@
       "kind": "original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot"
     },
     {
+      "path": "data/upstream/recipes/table.json",
+      "sha256": "dc37b3fae31da88a9bac82d2d17bc40990d682a1340bfff2689d77317d7d4002",
+      "kind": "original JAR recipe; table/bar tags mapped/preserved for Bedrock"
+    },
+    {
+      "path": "data/upstream/recipes/bar_counter.json",
+      "sha256": "f11a4497f4d76e9becacf13e3067031e34c44009e1c1c22852a78e20bb3565f5",
+      "kind": "original JAR recipe; table/bar tags mapped/preserved for Bedrock"
+    },
+    {
       "path": "data/upstream/c6/javap/block.deco.BarStoolBlock.txt",
       "sha256": "da4333b6ec15023448cd43d41efcc2fa3226a9ffd63a287cd6c248f8d556ebc9",
       "kind": "read-only javap; source JAR not executed"

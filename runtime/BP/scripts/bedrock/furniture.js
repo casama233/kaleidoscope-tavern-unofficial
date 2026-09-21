@@ -1,6 +1,6 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,TABLE_CARDINAL,tableAxisFromCardinal,tableCardinalForAxis,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
@@ -25,9 +25,9 @@ export function syncSofa(block){return syncConnectedBlock(block,'sofa');}
 export function syncSofaNeighborhood(d,p){return syncConnectedNeighborhood(d,p,'sofa');}
 export function syncBarCounter(block){return syncConnectedBlock(block,'bar_counter');}
 export function syncBarCounterNeighborhood(d,p){return syncConnectedNeighborhood(d,p,'bar_counter');}
-function tableDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return undefined;return {axis:block.permutation.getState(AXIS)??TABLE_AXIS.Z,position:block.permutation.getState(POSITION)??TABLE_POSITION.SINGLE};}
+function tableDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return undefined;const legacy=block.permutation.getState(AXIS)??0,cardinal=block.permutation.getState(TABLE_CARDINAL)??'north';return {axis:legacy===TABLE_AXIS.Z?TABLE_AXIS.Z:tableAxisFromCardinal(cardinal),position:block.permutation.getState(POSITION)??TABLE_POSITION.SINGLE};}
 function tableNeighbors(d,p){return {north:tableDescriptor(blockAt(d,plus(p,facingVector(0)))),east:tableDescriptor(blockAt(d,plus(p,facingVector(1)))),south:tableDescriptor(blockAt(d,plus(p,facingVector(2)))),west:tableDescriptor(blockAt(d,plus(p,facingVector(3))))};}
-export function syncTable(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableRepairState(current,tableNeighbors(block.dimension,block.location));if(wanted.axis===current.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(AXIS,wanted.axis).withState(POSITION,wanted.position));return true;}
+export function syncTable(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableRepairState(current,tableNeighbors(block.dimension,block.location)),legacy=block.permutation.getState(AXIS)??0,cardinal=block.permutation.getState(TABLE_CARDINAL)??'north',wantedCardinal=tableCardinalForAxis(wanted.axis);if(legacy===0&&tableAxisFromCardinal(cardinal)===wanted.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(AXIS,0).withState(TABLE_CARDINAL,wantedCardinal).withState(POSITION,wanted.position));return true;}
 export function syncTableNeighborhood(d,p){const positions=[p,...[0,1,2,3].map(f=>plus(p,facingVector(f)))];let changed=0;for(let pass=0;pass<3;pass++)for(const q of positions){const b=blockAt(d,q);if(b)try{if(syncTable(b))changed++;}catch(e){error(e);}}return changed;}
 function glasswareHolderCount(block){return GLASSWARE_SLOTS.reduce((n,state)=>n+(block.permutation.getState(state)===1?1:0),0);}
 function verticalDoublePair(block){
@@ -70,7 +70,7 @@ export function placeFurniture(player,target,{face='Up'}={}){
   const states={};
   if(seated(f)){states[FACING]=facingForYaw(player.getRotation().y);if(f.kind==='sofa')states[CONNECTION]=SOFA_CONNECTION.SINGLE;}
   else if(f.kind==='light')states[FACING]=facingForFace(face,player.getRotation().y);
-  else if(f.kind==='table'){const t=tablePlacementState(facingForYaw(player.getRotation().y),tableNeighbors(d,p));states[AXIS]=t.axis;states[POSITION]=t.position;}
+  else if(f.kind==='table'){const t=tablePlacementState(facingForYaw(player.getRotation().y),tableNeighbors(d,p));states[AXIS]=0;states[TABLE_CARDINAL]=tableCardinalForAxis(t.axis);states[POSITION]=t.position;}
   else if(f.kind==='bar_counter'){states[FACING]=facingForYaw(player.getRotation().y);states[CONNECTION]=SOFA_CONNECTION.SINGLE;}
   else if(f.kind==='glassware_holder'){states[FACING]=facingForYaw(player.getRotation().y);for(const state of GLASSWARE_SLOTS)states[state]=0;}
   else if(f.kind==='painting'){const ps=paintingPlacementState(face,player.getRotation().y);states[FACING]=ps.facing;states[ATTACH_FACE]=ps.attach;}

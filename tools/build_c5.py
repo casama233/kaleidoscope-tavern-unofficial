@@ -19,6 +19,7 @@ def main():
  item=load(BP/'items/shaker.json');c=item['minecraft:item']['components']
  c['minecraft:use_modifiers']={'use_duration':3600,'movement_modifier':.35,'start_using':'always'}
  c['minecraft:interact_button']='action.interact.kt_hold_shaker'
+ c['minecraft:hand_equipped']=True
  assert all(k not in c for k in ['minecraft:food','minecraft:shooter','minecraft:throwable','minecraft:projectile'])
  dump(BP/'items/shaker.json',item)
  # The exact geometry-local body lip is independent of the hand anchor/skin. All raw cubes are unchanged.
@@ -26,11 +27,11 @@ def main():
  next(b for b in geo['bones']if b['name']=='root')['locators']={'kt_spout':[-3.5,11,0]}
  dump(RP/'models/entity/runtime_shaker_held.geo.json',g)
  profile_file=R/'data/hand-calibration.json'
- if not profile_file.exists():dump(profile_file,{'schema':1,'units':'model_units_16_per_block','first':{'position':[0,0,0],'rotation':[15,0,0],'scale':.6},'third':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6},'spout':{'bone':'root','position':[-3.5,11,0]},'status':'geometry lip measured from original body; wrist values inherited adaptation, NOT engine calibrated'})
+ if not profile_file.exists():dump(profile_file,{'schema':1,'units':'model_units_16_per_block','first':{'position':[8.96,-8.32,-11.52],'rotation':[15,0,0],'scale':.6},'third':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6},'spout':{'bone':'root','position':[-3.5,11,0]},'status':'Java first-person translation is wired to render_anchor; real-client visual acceptance still required'})
  profile=load(profile_file)
  anim=load(RP/'animations/runtime_shaker.animation.json');a=anim['animations']
  for context in ['first','third']:
-  a[f'animation.kt_runtime.shaker.hold_{context}']['bones']['hand_mount']=copy.deepcopy(profile[context])
+  a[f'animation.kt_runtime.shaker.hold_{context}']['bones']['render_anchor']=copy.deepcopy(profile[context]);a[f'animation.kt_runtime.shaker.hold_{context}']['bones'].pop('hand_mount',None)
  # Local particle keyframes follow the same hand/lid animation, including yaw and first/third person.
  a['animation.kt_runtime.shaker.pour']['particle_effects']={str(t/20):{'effect':'spout_drop','locator':'kt_spout','bind_to_actor':False}for t in range(3,10)}
  dump(RP/'animations/runtime_shaker.animation.json',anim)

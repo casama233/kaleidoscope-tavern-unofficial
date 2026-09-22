@@ -215,8 +215,15 @@ def main():
  for facing,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
   tub_perms.append({'condition':f"(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == '{facing}'",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.pressing_tub'},'minecraft:transformation':{'rotation':[0,rot,0]}}})
  tub_block['minecraft:block']['permutations']=tub_perms;dump(BP/'blocks/pressing_tub.json',tub_block)
- c=visual('tap_closed');c.update({'minecraft:collision_box':False,'minecraft:selection_box':{'origin':[-4,0,-4],'size':[8,16,8]},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:tick':{'interval_range':[20,20],'looping':True},NS+':tap':{}});block('tap',c,{NS+':open':[0,1]})
- tap_block=json.loads((BP/'blocks/tap.json').read_text());tap_block['minecraft:block']['permutations']=[{'condition':f"q.block_state('{NS}:open') == 1",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.tap_open'}}}];dump(BP/'blocks/tap.json',tap_block)
+ c=visual('tap_closed');c.update({'minecraft:collision_box':False,'minecraft:selection_box':{'origin':[-3,5,-2],'size':[6,8,10]},'minecraft:liquid_detection':{'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}]},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:tick':{'interval_range':[20,20],'looping':True},NS+':tap':{}});block('tap',c,{NS+':open':[0,1]})
+ tap_block=json.loads((BP/'blocks/tap.json').read_text());tap_desc=tap_block['minecraft:block']['description'];tap_desc['traits']={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}}
+ tap_perms=[]
+ for face,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
+  tap_perms.append({'condition':f"q.block_state('minecraft:block_face') == '{face}'",'components':{'minecraft:transformation':{'rotation':[0,rot,0]}}})
+ for facing,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
+  tap_perms.append({'condition':f"(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == '{facing}'",'components':{'minecraft:transformation':{'rotation':[0,rot,0]}}})
+ tap_perms.append({'condition':f"q.block_state('{NS}:open') == 1",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.tap_open'}}})
+ tap_block['minecraft:block']['permutations']=tap_perms;dump(BP/'blocks/tap.json',tap_block)
  # Invisible proxy uses an empty derived geometry, never a placeholder texture.
  dump(RP/'models/entity/runtime_invisible.geo.json',{'format_version':'1.12.0','minecraft:geometry':[{'description':{'identifier':'geometry.kt_runtime.invisible','texture_width':16,'texture_height':16},'bones':[{'name':'root','pivot':[0,0,0]}]}]})
  proxy={'minecraft:geometry':{'identifier':'geometry.kt_runtime.invisible'},'minecraft:material_instances':{'*':{'texture':'kt_assets_a1_pressing_tub','render_method':'alpha_test'}},'minecraft:collision_box':True,'minecraft:selection_box':True}

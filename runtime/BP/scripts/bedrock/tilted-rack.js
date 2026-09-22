@@ -1,12 +1,12 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,TILTED_RACK,tiltedRackItem,tiltedRackBlockedItem,tiltedRackSlot,emptyTiltedRack,tiltedRackPut,tiltedRackTake,tiltedRackKey,tiltedRackAnchor,parseTiltedRackAnchor,tiltedRackVisualPose,TiltedRackStore} from '../core/tilted-rack.js';
-import {FACING,facingForYaw} from '../core/furniture.js';
+import {FACING,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),visuals=new Map();let cursor=0;
-export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'NOT_ADAPTED'};
+export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){tiltedRackDiagnostics.errors.push(String(e));if(tiltedRackDiagnostics.errors.length>16)tiltedRackDiagnostics.errors.shift();}
 function slotHelpers(block,slot){const a=tiltedRackAnchor(tiltedRackKey(block.dimension.id,block.location),slot);return block.dimension.getEntities({type:HELPER,location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}
 function discard(e,reason){e.remove();visuals.delete(e.id);tiltedRackDiagnostics[reason]=(tiltedRackDiagnostics[reason]??0)+1;}
@@ -20,7 +20,20 @@ export function takeTiltedRackBottle(player,block,faceLocation,{expectedRevision
 export function recoverTiltedRack(player,block,{expectedRevision}={}){canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===TILTED_RACK,'NOT_TILTED_RACK');const k=tiltedRackKey(block.dimension.id,block.location),old=store.load(k);check(old,'MISSING_TILTED_RACK_STATE');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const give=[{id:TILTED_RACK,count:1},...old.slots.filter(Boolean).map(id=>({id,count:1}))];transact(player,block,old,undefined,0,give,air());tiltedRackDiagnostics.recovered++;return give;}
 export function maintainTiltedRackVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseTiltedRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==TILTED_RACK){discard(e,'orphans');return;}const state=store.load(tiltedRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncTiltedRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickTiltedRackVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainTiltedRackVisual);}
-export function registerTiltedRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':tilted_rack',{onTick:e=>{try{const s=store.load(tiltedRackKey(e.block.dimension.id,e.block.location));if(s)syncTiltedRackVisuals(e.block,s);}catch(x){error(x);}}});}
+function rngFactor(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return .5+n;}
+export function tiltedRackRedstoneLaunch(block,{rng=Math.random}={}){
+ const facing=((block.permutation.getState(FACING)??0)+2)%4,v=facingVector(facing),factor=rngFactor(rng);
+ return {position:{x:block.location.x+.5+v.x*.5,y:block.location.y+.875,z:block.location.z+.5+v.z*.5},velocity:{x:v.x*factor,y:.75*factor,z:v.z*factor}};
+}
+export function popTiltedRackRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){
+ check(block?.typeId===TILTED_RACK,'NOT_TILTED_RACK');const key=tiltedRackKey(block.dimension.id,block.location),state=store.load(key);check(state,'MISSING_TILTED_RACK_STATE');
+ const candidates=state.slots.flatMap((item,slot)=>item?[{slot,item}]:[]);
+ try{
+  const out=popRandomStoredBottle({block,store,key,state,candidates,remove:(s,slot)=>tiltedRackTake(s,slot).state,pose:({block,rng})=>tiltedRackRedstoneLaunch(block,{rng}),sync:syncTiltedRackVisuals,selectionRng,motionRng,...(spawn?{spawn}:{})});
+  if(out.status==='LAUNCHED')tiltedRackDiagnostics.redstonePops++;else tiltedRackDiagnostics.redstoneNoops++;return out;
+ }catch(e){tiltedRackDiagnostics.redstoneErrors++;throw e;}
+}
+export function registerTiltedRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':tilted_rack',{onTick:e=>{try{const s=store.load(tiltedRackKey(e.block.dimension.id,e.block.location));if(s)syncTiltedRackVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popTiltedRackRedstone(b),x=>{tiltedRackDiagnostics.redstoneErrors++;error(x);})});}
 export function installTiltedRackEvents(){
  installStatefulStorageRoutes({
   isBlock:block=>block?.typeId===TILTED_RACK,

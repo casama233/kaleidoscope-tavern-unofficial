@@ -19,6 +19,7 @@ import {registerCircularRackComponents,installCircularRackEvents,circularRackDia
 import {registerBarCabinetComponents,installBarCabinetEvents,barCabinetDiagnostics} from './bedrock/bar-cabinet.js';
 import {registerCellarCabinetComponents,installCellarCabinetEvents,cellarCabinetDiagnostics} from './bedrock/cellar-cabinet.js';
 import {registerDrinkEffects,effectDiagnostics} from './bedrock/drink-effects.js';
+import {installStorageProjectileEvents,storageProjectileDiagnostics} from './bedrock/storage-projectile.js';
 import {EFFECT_PAGES} from './data/effect-pages.js';
 import {SHAKER_RECIPES} from './data/mixology.js';
 import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
@@ -29,7 +30,7 @@ let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
 const COOKERY_GUIDE='kaleidoscope_cookery:guidebook';
 const cookeryGuidePublisher=installCookeryGuidePublisher(system,()=>buildCookeryGuidePayload(registry));
-export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
+export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function migrateLegacyGuide(player,{slot=player?.selectedSlotIndex,expectedId}={}){
  const container=player?.getComponent?.('minecraft:inventory')?.container;
  if(!container||!Number.isInteger(slot))return false;
@@ -44,7 +45,7 @@ system.beforeEvents.startup.subscribe(ev=>{
  registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});
 });
-installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();
+installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installStorageProjectileEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
  if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});

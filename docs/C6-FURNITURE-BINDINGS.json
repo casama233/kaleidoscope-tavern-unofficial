@@ -951,8 +951,8 @@
           6
         ]
       },
-      "redstone_pop": "NOT_ADAPTED",
-      "molotov": "EXCLUDED",
+      "redstone_pop": "ADAPTED_DRINKS",
+      "molotov": "PENDING_PROJECTILE_TYPE",
       "engine_accepted": false
     },
     {
@@ -1067,8 +1067,8 @@
           16
         ]
       },
-      "redstone_pop": "NOT_ADAPTED",
-      "molotov": "EXCLUDED",
+      "redstone_pop": "ADAPTED_DRINKS",
+      "molotov": "PENDING_PROJECTILE_TYPE",
       "engine_accepted": false
     },
     {
@@ -1149,8 +1149,8 @@
       "light_emission": 14,
       "particle": "minecraft:endrod",
       "particle_cadence": "20-tick Bedrock adapter; source Java client animateTick 1/8 chance",
-      "redstone_pop": "NOT_ADAPTED",
-      "molotov": "EXCLUDED",
+      "redstone_pop": "ADAPTED_DRINKS",
+      "molotov": "PENDING_PROJECTILE_TYPE",
       "engine_accepted": false
     },
     {
@@ -1354,9 +1354,9 @@
       },
       "source_shade_brightness": 0.2,
       "shade_brightness": "NOT_ADAPTED",
-      "powered_state": "OMITTED_WITH_REDSTONE_EJECTION",
-      "redstone_pop": "NOT_ADAPTED",
-      "molotov": "EXCLUDED",
+      "powered_state": "NATIVE_REDSTONE_CONSUMER_EDGE_EVENT",
+      "redstone_pop": "ADAPTED_DRINKS",
+      "molotov": "PENDING_PROJECTILE_TYPE",
       "trapdoor_recipes": 20,
       "engine_accepted": false
     },

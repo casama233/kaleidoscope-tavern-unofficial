@@ -32,7 +32,7 @@ function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_buck
 function code(fn,want){assert.throws(fn,e=>e.code===want);}
 
 test('entrypoint registers one legacy-guide migrator and41 recipes',()=>{
- assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,20);assert.equal(regs.items.size,5);
+ assert.equal(runtimeRegistry().allRecipes().length,41);assert.equal(regs.blocks.size,21);assert.equal(regs.items.size,5);
  assert(regs.items.has(NS+':legacy_guide'));assert(!regs.items.has(NS+':guidebook'));assert(!regs.items.has(NS+':recipe_book'));
  assert.equal(diagnosticSnapshot().cookeryManifestBound,true);assert.equal(diagnosticSnapshot().guideAuthority,'kaleidoscope_cookery:guidebook');assert.equal(diagnosticSnapshot().engineAcceptance,'NOT_RUN_BY_AUTHOR');
 });

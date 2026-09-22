@@ -29,6 +29,14 @@
           0,
           1
         ]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation_offset": 180
+        }
       }
     },
     "components": {
@@ -122,7 +130,8 @@
             "face_dimming": false
           }
         }
-      }
+      },
+      "kaleidoscope_tavern:glassware_holder": {}
     },
     "permutations": [
       {

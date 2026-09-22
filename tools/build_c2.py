@@ -66,6 +66,9 @@ def main():
   block('bottle_'+base,c,{NS+':count':list(range(1,len(keys)+1)),NS+':facing':list(range(4))},perms)
   for q in range(1,7):
    p=BP/'items'/f'{base}_q{q}.json';d=load(p);components=d['minecraft:item']['components'];components.pop('minecraft:food',None);components.update({NS+':drink_effects':{},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':.35,'start_using':'if_first'}});dump(p,d)
+ empty={'minecraft:geometry':{'identifier':'geometry.kt_assets_a3.empty_bottle_faces'},'minecraft:material_instances':{'*':{'texture':'kt_assets_a3_empty_bottle_faces','render_method':'alpha_test','ambient_occlusion':0.0,'face_dimming':True}},'minecraft:collision_box':{'origin':[-3,0,-3],'size':[6,14,6]},'minecraft:selection_box':{'origin':[-3,0,-3],'size':[6,14,6]}}
+ empty_perms=[{'condition':cond('facing',i),'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+ block('bottle_empty',empty,{NS+':facing':list(range(4))},empty_perms)
  js(BP/'scripts/data/bottles.js','BOTTLES',bottles)
  effects={base:load(ROOT/f'data/upstream/c2/data/{NS}/datamap/drink_effect/{base}.json')['effects'] for base in bases}
  js(BP/'scripts/data/drink-effects.js','DRINK_EFFECTS',effects)

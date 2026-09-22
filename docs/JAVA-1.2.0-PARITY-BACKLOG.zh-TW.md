@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿與下方 empty_bottle item entity 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 placed empty-bottle block carrier、Facing／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿，以及下方 placed empty-bottle block／empty_bottle item entity 兩種 carrier 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Facing／嚴格 barrel front-layer connection／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -37,7 +37,7 @@
 - Java `resetIfOutputEmpty()` 在最後一份成品取完後只清 batch／recipe／時間，**不會自動開桶蓋**。Bedrock 已改為同樣保持關蓋，下一輪必須由玩家重新開蓋後才能灌液。
 - Java `PressingTubBlock.use` 空手普通互動只移除 1 個原料；潛行空手才請求移除最多 64 個。Bedrock 先前固定整組取出，本批已改為 1／64 分流；Barrel 的原料移除仍保持整槽返還。
 - 葡萄核心生長規則已確認：普通葡萄固定 25%；冰葡萄在 Java biome base temperature `< 0.15` 時 80%，否則 25%；金葡萄在 `> 1.0` 時 80%，否則 25%。Bedrock Script API 2.7 可取得 biome identity/tags，但沒有 Java base-temperature 數值，因此目前維持 25% 保守降級，不用猜測 biome 表冒充等價。
-- Tap 的 Barrel＋item-entity carrier 核心閉環已在下一批完成；仍需 placed carrier block、其他 TapBehavior、Facing／waterlogging。Pressing Tub 的側面放置 tilt／waterlogging、WildGrapevine 世界生成與 biome 溫度加速仍待後續小批。  
+- Tap 的 Barrel＋item-entity carrier 核心閉環已完成，placed empty-bottle block carrier 亦在後續 Batch 4 補齊；仍需其他 TapBehavior、Facing／waterlogging。Pressing Tub 側掛／water containment 已完成，WildGrapevine 世界生成與 biome 溫度加速仍待後續小批。  
 
 
 ## 釀酒閉環核對 Batch 2：Tap × Barrel item-entity carrier
@@ -57,7 +57,7 @@ Java `TapBlock` 並不是「玩家手持空瓶點一下立即取酒」。來源�
 
 deterministic adapter 測試已覆蓋：32葡萄→4桶汁→4000mB→Q2→16份成品完整鏈、每份30 tick延遲、第一份轉成 placed bottle display、其餘在已佔用 destination 時成為 item drops、最後一份後 Barrel batch 清空而 lid 保持 closed；另有手動取消與紅石上升沿／持續高電平不重啟測試。
 
-**本批刻意未宣稱完成**：Java 的 placed `EMPTY_BOTTLE` block carrier 尚未有 Bedrock 對等 block；Tap 的 horizontal facing／嚴格 barrel front-layer connection、waterlogging，以及 `WaterCauldronTapBehavior`、`WaterloggedBehavior`、`LavaCauldronTapBehavior`、`BeehiveTapBehavior`、`WatermelonTapBehavior`、`DragonHeadTapBehavior` 仍待後續批次。Minecraft／BDS／Realms 的 redstone callback、30-tick 實機時序、particle／sound 與 item-entity AABB 也仍為 **NOT_RUN**。
+**本批當時刻意未宣稱完成**：Java 的 placed `EMPTY_BOTTLE` block carrier 已由後續 Batch 4 補齊；Tap 的 horizontal facing／嚴格 barrel front-layer connection、waterlogging，以及 `WaterCauldronTapBehavior`、`WaterloggedBehavior`、`LavaCauldronTapBehavior`、`BeehiveTapBehavior`、`WatermelonTapBehavior`、`DragonHeadTapBehavior` 仍待後續批次。Minecraft／BDS／Realms 的 redstone callback、30-tick 實機時序、particle／sound 與 carrier AABB 也仍為 **NOT_RUN**。
 
 
 
@@ -78,6 +78,25 @@ waterlogging 使用穩定 `minecraft:liquid_detection` 的 water rule（`can_con
 碰撞有一個明示的引擎級降級：Java 傾斜形狀是三個 AABB 的聯集；目前穩定 custom-block `minecraft:collision_box` 只給單一 AABB。本批使用 Java 三段形狀中**中間那一段的原尺寸 AABB**作保守碰撞，不使用整個 1×1×1 包圍盒製造幽靈牆；selection 維持完整格，精確複合碰撞仍列為 pending。
 
 Minecraft／手機／BDS／Realms 的實際側掛方向、含水渲染、流體更新與落下傷害仍為 **NOT_RUN**。
+
+
+## 釀酒閉環核對 Batch 4：Placed Empty Bottle Carrier
+
+Java `EMPTY_BOTTLE` 直接註冊為普通 `BottleBlock::new`，因此它不是多瓶展示容器，也沒有 BottleBlockEntity；一格只放一瓶。其 `BottleBlock.SHAPE` 為 `Block.box(5,0,5,11,14,11)`，即6×14×6，具有水平 facing；空手使用會取回該瓶，普通 `BottleBlockItem` 使用即可放置，不要求潛行。
+
+Bedrock 本批新增**隱藏內部 block** `kaleidoscope_tavern:bottle_empty`，玩家物品 ID 仍只有 `kaleidoscope_tavern:empty_bottle`：
+
+- geometry 使用已存在的 `geometry.kt_assets_a3.empty_bottle_faces`，texture 使用 `kt_assets_a3_empty_bottle_faces`；內部 block 不進 creative catalog。
+- collision／selection 都鎖為 Java 的6×14×6範圍，facing 0–3 使用既有水平旋轉規則。
+- `empty_bottle` item 透過現有 Java item-use-on router 在 clicked-block use PASS 後普通放置；不另造 itemUse raycast，也不要求 sneaking。Survival 消耗1瓶，Creative 按 Java BlockItem 語義不消耗。
+- 空手使用 placed empty bottle 返還1個 `empty_bottle`；生存破壞復用 bottles protected-break route，因此以玻璃聲回收，不依賴原生 loot table。
+- 自訂名稱／lore 等 metadata 空瓶拒絕放置，避免普通無 BlockEntity 的 placed bottle 靜默丟失 metadata。
+
+Barrel Tap carrier resolver 現在先檢查正下方 block：只有目前配方 carrier 為 `empty_bottle` 且 block 為 `bottle_empty` 才匹配；否則再回退到既有 item-entity carrier。30 tick 結束時先原子移除 carrier，再建立品質輸出、最後提交 Barrel state；任何一步失敗都回滾。placed carrier 的 facing 會保留到 `bottle_<base>` 品質 display，精確 `*_q1..q6` 仍存入 BottleStore。
+
+deterministic 測試覆蓋：普通非潛行放置、空手取回、Creative 不消耗放置、生存 break 世界掉落＋玻璃聲、metadata 拒絕，以及 placed carrier 經 Tap 30 tick 原地轉為同 facing 的 Q2 `bottle_wine` 並保存 `wine_q2`。
+
+**仍待**：BottleBlock waterlogging、projectile 打碎 placed bottle 的 Java `onProjectileHit` 等價；Tap 的 facing／嚴格 barrel front-layer connection 與其他 TapBehavior；Minecraft／BDS／Realms 實機碰撞、選框、破壞音效與 Tap carrier 時序仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

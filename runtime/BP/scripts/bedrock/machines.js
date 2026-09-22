@@ -1,5 +1,6 @@
 import {feedback} from './immersion.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {inventory as sharedInventory} from './transactions.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
@@ -24,7 +25,7 @@ function tell(player,message){try{player?.onScreenDisplay.setActionBar(message);
 function guarded(player,fn){try{return fn();}catch(e){tell(player,'§e'+(CN[e.code]??e.code??'Tavern error'));warn(e,player?.id??'machine');return undefined;}}
 function blockAt(dim,p){try{return dim.getBlock(p);}catch{return undefined;}}
 function writable(player){check(player&&![GameMode.Adventure,GameMode.Spectator].includes(player.getGameMode()),'GAME_MODE_LOCKED');}
-function inv(player){const c=player.getComponent('minecraft:inventory')?.container;check(c,'NO_INVENTORY');return c;}
+function inv(player){return sharedInventory(player);}
 function held(player){return inv(player).getItem(player.selectedSlotIndex);}
 function offset(p,d){return {x:p.x+d.x,y:p.y+d.y,z:p.z+d.z};}
 export function resolveCore(block){

@@ -5,6 +5,19 @@
       "identifier": "kaleidoscope_tavern:pressing_tub",
       "menu_category": {
         "category": "items"
+      },
+      "traits": {
+        "minecraft:placement_position": {
+          "enabled_states": [
+            "minecraft:block_face"
+          ]
+        },
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation_offset": 180.0
+        }
       }
     },
     "components": {
@@ -59,6 +72,16 @@
       "minecraft:entity_fall_on": {
         "minimum_fall_distance": 0.5
       },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": false
+          }
+        ]
+      },
       "minecraft:tick": {
         "interval_range": [
           100,
@@ -78,6 +101,180 @@
       },
       "minecraft:loot": "loot_tables/empty.json",
       "minecraft:light_dampening": 0
-    }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('minecraft:block_face') == 'north'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub_tilt"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              4,
+              -4
+            ],
+            "size": [
+              16,
+              8,
+              8
+            ]
+          },
+          "minecraft:selection_box": true
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:block_face') == 'east'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub_tilt"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -4,
+              4,
+              -8
+            ],
+            "size": [
+              8,
+              8,
+              16
+            ]
+          },
+          "minecraft:selection_box": true
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:block_face') == 'south'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub_tilt"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -180,
+              0
+            ]
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              4,
+              -4
+            ],
+            "size": [
+              16,
+              8,
+              8
+            ]
+          },
+          "minecraft:selection_box": true
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:block_face') == 'west'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub_tilt"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -270,
+              0
+            ]
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -4,
+              4,
+              -8
+            ],
+            "size": [
+              8,
+              8,
+              16
+            ]
+          },
+          "minecraft:selection_box": true
+        }
+      },
+      {
+        "condition": "(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == 'north'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -90,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -180,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "condition": "(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.pressing_tub"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              -270,
+              0
+            ]
+          }
+        }
+      }
+    ]
   }
 }

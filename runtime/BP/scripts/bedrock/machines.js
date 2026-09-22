@@ -9,7 +9,7 @@ import {check} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
-const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open';
+const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
 const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
@@ -92,8 +92,9 @@ export function operate(player,block,action,expected){
   safeVisuals(core,tx.state);feedback(core,action==='lid'?(tx.state.open?'open':'close'):action==='remove_ingredient'?'take':action==='extract'?'fill':tx.state.amount>state.amount?'empty':'fill',tx.state.revision);tell(player,'§a'+tx.message);return tx;
  });
 }
+export function tubTilted(block){return ['north','east','south','west'].includes(block?.permutation.getState(TUB_FACE));}
 export function press(block,entity,fallDistance){
- if(entity?.typeId!=='minecraft:player'||fallDistance<.5)return;
+ if(entity?.typeId!=='minecraft:player'||fallDistance<.5||tubTilted(block))return;
  return guarded(entity,()=>{writable(entity);const key=keyFor(block);return locks.with([key],()=>{
   const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);store.save(key,tx.state,state.revision);safeVisuals(block,tx.state);feedback(block,'press',tx.state.revision);tell(entity,tx.message);return tx;
  });});

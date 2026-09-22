@@ -81,6 +81,13 @@ test('Tap redstone rising edge opens once and extracts after30 ticks; sustained 
  const comp=regs.blocks.get(NS+':tap');comp.onRedstoneUpdate({block:tap,previousPowerLevel:0,powerLevel:15,firstUpdate:false});system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
  comp.onRedstoneUpdate({block:tap,previousPowerLevel:15,powerLevel:15,firstUpdate:false});system.advance(29);assert.equal(state(b).batch.remaining,2);system.advance(1);assert.equal(state(b).batch.remaining,1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
 });
+test('Tap converts a placed empty-bottle carrier in place and preserves its facing and exact quality',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
+ let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};
+ dim.getBlock(below).setPermutation(BlockPermutation.resolve(NS+':bottle_empty',{[NS+':facing']:3}));hand(p,undefined);click(p,tap);system.advance(30);
+ const out=dim.getBlock(below),saved=TEST_ACCESS.bottleStore.load(bottleKey(dim.id,below));assert.equal(out.typeId,NS+':bottle_wine');assert.equal(out.permutation.getState(NS+':facing'),3);assert.deepEqual(saved.items,[NS+':wine_q2']);assert.equal(saved.facing,3);assert.equal(state(b).batch,null);
+});
 test('Tap barrel-save failure restores carrier and removes half-created output without decrementing batch',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
  const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);

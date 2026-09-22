@@ -57,6 +57,8 @@ jobs:
               draw.text((x+135,y+425),name,font=label,fill=(225,225,225))
           draw.text((28,1012),"baseline: 21 cubes  →  c70eec1 materialized: 20 cubes",font=label,fill=(183,193,200))
           canvas.save(out/"mojito-clean-before-after.webp",format="WEBP",quality=88,method=6)
+          compact=canvas.resize((600,650),Image.Resampling.LANCZOS)
+          compact.save(out/"mojito-clean-compact.webp",format="WEBP",quality=58,method=6)
 
       - name: Commit temporary clean preview
         run: |

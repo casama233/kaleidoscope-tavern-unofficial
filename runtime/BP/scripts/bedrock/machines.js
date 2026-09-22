@@ -111,14 +111,14 @@ export function tickBarrel(block){
   if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
  });});
 }
-function tapFacing(tap){
+export function tapCardinal(tap){
  const face=tap?.permutation.getState('minecraft:block_face');
  if(['north','east','south','west'].includes(face))return face;
  return tap?.permutation.getState('minecraft:cardinal_direction');
 }
 const TAP_BACK=Object.freeze({north:{x:0,y:0,z:1},south:{x:0,y:0,z:-1},east:{x:-1,y:0,z:0},west:{x:1,y:0,z:0}});
 export function findTapCore(tap){
- const facing=tapFacing(tap),d=TAP_BACK[facing];if(!d)return undefined;
+ const facing=tapCardinal(tap),d=TAP_BACK[facing];if(!d)return undefined;
  const source=blockAt(tap.dimension,offset(tap.location,d));if(source?.typeId!==PART)return undefined;
  const dy=source.permutation.getState(NS+':dy'),dx=source.permutation.getState(NS+':dx'),dz=source.permutation.getState(NS+':dz');
  if(dy!==1||barrelCardinal(source)!==facing)return undefined;

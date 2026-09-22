@@ -70,6 +70,10 @@ def main():
  empty_perms=[{'condition':f"q.block_state('minecraft:cardinal_direction') == '{direction}'",'components':{'minecraft:transformation':{'rotation':[0,rotation,0]}}}for direction,rotation in [('north',0),('east',-90),('south',-180),('west',-270)]]
  block('bottle_empty',empty,{},empty_perms,False,{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}})
  p=BP/'blocks/bottle_empty.json';d=load(p);d['minecraft:block']['description'].pop('states',None);dump(p,d)
+ simple_water={'minecraft:geometry':{'identifier':'geometry.kt_assets_a17.water_bottle'},'minecraft:material_instances':{'*':{'texture':'kt_assets_a17_water_bottle','render_method':'alpha_test','ambient_occlusion':0.0,'face_dimming':True}},'minecraft:collision_box':{'origin':[-3,0,-3],'size':[6,10,6]},'minecraft:selection_box':{'origin':[-3,0,-3],'size':[6,10,6]},'minecraft:liquid_detection':{'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':True}]}}
+ simple_perms=[{'condition':f"q.block_state('minecraft:cardinal_direction') == '{direction}'",'components':{'minecraft:transformation':{'rotation':[0,rotation,0]}}}for direction,rotation in [('north',0),('east',-90),('south',-180),('west',-270)]]
+ block('bottle_water',simple_water,{},simple_perms,False,{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}})
+ p=BP/'blocks/bottle_water.json';d=load(p);d['minecraft:block']['description'].pop('states',None);dump(p,d)
  js(BP/'scripts/data/bottles.js','BOTTLES',bottles)
  effects={base:load(ROOT/f'data/upstream/c2/data/{NS}/datamap/drink_effect/{base}.json')['effects'] for base in bases}
  js(BP/'scripts/data/drink-effects.js','DRINK_EFFECTS',effects)

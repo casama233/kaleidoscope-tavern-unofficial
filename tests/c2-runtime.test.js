@@ -6,7 +6,7 @@ import {world,system,startup,Player,ItemStack,Container,GameMode,BlockPermutatio
 import {runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
 import {NS,BARE} from '../runtime/BP/scripts/core/cultivation.js';
 import {FARM_IDS,framePermutation,refreshFrame,refreshAround,growthChanges,grow,maintain,farmUse,farmBreak} from '../runtime/BP/scripts/bedrock/cultivation.js';
-import {placeBottle,takeBottles,placeEmptyBottle,takeEmptyBottle,BOTTLE_TEST,DISPLAY_IDS} from '../runtime/BP/scripts/bedrock/bottles.js';
+import {placeBottle,takeBottles,takeEmptyBottle,bottleFacingForYaw,BOTTLE_TEST,DISPLAY_IDS} from '../runtime/BP/scripts/bedrock/bottles.js';
 import {BottleStore,bottleKey} from '../runtime/BP/scripts/core/bottles.js';
 import {consumeDrink,effectDiagnostics} from '../runtime/BP/scripts/bedrock/drink-effects.js';
 import {initializeTub,createBarrel,operate,press,tickBarrel,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
@@ -67,18 +67,13 @@ test('shared break router gives bare trellis a Survival world drop and Java wood
  const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();
  assert(e.cancel);assert(b.isAir);assert.equal(count(p,BARE),0);assert.equal(dropCount(BARE),before+1);assert.equal((dim.sounds??[]).filter(s=>s.id==='dig.wood').length,sounds+1);
 });
-test('empty BottleBlockItem normal use places one hidden bottle block without sneak, then empty hand returns it',()=>{
- const p=player(),pos=site(),support=dim.getBlock(beneath(pos));h(p,NS+':empty_bottle',4);p.isSneaking=false;const e=click(p,support);assert(e.cancel);system.advance();
- const b=dim.getBlock(pos);assert.equal(b.typeId,BOTTLE_TEST.EMPTY_BLOCK);assert.equal(count(p,NS+':empty_bottle'),3);assert.equal(b.permutation.getState(BOTTLE_TEST.FACING),2);
- p.selectedSlotIndex=1;click(p,b);system.advance();assert(b.isAir);assert.equal(count(p,NS+':empty_bottle'),4);
+test('BottleBlock source facing maps Bedrock player yaw to the Java opposite direction',()=>{assert.equal(bottleFacingForYaw(0),0);assert.equal(bottleFacingForYaw(90),1);assert.equal(bottleFacingForYaw(180),2);assert.equal(bottleFacingForYaw(-90),3);});
+test('placed empty bottle native cardinal can be recovered by empty hand in Survival and Creative',()=>{
+ for(const mode of[GameMode.Survival,GameMode.Creative]){const p=new Player('empty-'+mode+'-'+(++n),dim,mode),pos=site(),b=dim.getBlock(pos);b.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'east'}));h(p,undefined);takeEmptyBottle(p,b);assert(b.isAir);assert.equal(count(p,NS+':empty_bottle'),1);}
 });
-test('placed empty bottle follows Java Creative placement and Survival break feedback',()=>{
- const p=new Player('empty-creative-'+(++n),dim,GameMode.Creative),pos=site();h(p,NS+':empty_bottle',5);placeEmptyBottle(p,pos);assert.equal(count(p,NS+':empty_bottle'),5);takeEmptyBottle(p,dim.getBlock(pos));assert.equal(count(p,NS+':empty_bottle'),6);
- const s=player(),breakPos=site();h(s,NS+':empty_bottle');placeEmptyBottle(s,breakPos);h(s,undefined);const before=dropCount(NS+':empty_bottle'),sounds=dim.sounds?.filter(x=>x.id==='random.glass').length??0;
- const ev={player:s,block:dim.getBlock(breakPos),cancel:false};world.beforeEvents.playerBreakBlock.emit(ev);system.advance();assert(ev.cancel);assert(dim.getBlock(breakPos).isAir);assert.equal(dropCount(NS+':empty_bottle'),before+1);assert.equal((dim.sounds??[]).filter(x=>x.id==='random.glass').length,sounds+1);
-});
-test('named empty bottle placement is rejected instead of silently losing metadata',()=>{
- const p=player(),pos=site();h(p,NS+':empty_bottle');const x=p.inventory.getItem(0);x.nameTag='Keep label';p.inventory.setItem(0,x);code(()=>placeEmptyBottle(p,pos),'METADATA_ITEM_REJECTED');assert.equal(p.inventory.getItem(0).nameTag,'Keep label');assert(dim.getBlock(pos).isAir);
+test('placed empty bottle Survival break still uses shared glass world-drop feedback',()=>{
+ const s=player(),breakPos=site(),b=dim.getBlock(breakPos);b.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'west'}));h(s,undefined);const before=dropCount(NS+':empty_bottle'),sounds=dim.sounds?.filter(x=>x.id==='random.glass').length??0;
+ const ev={player:s,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(ev);system.advance();assert(ev.cancel);assert(b.isAir);assert.equal(dropCount(NS+':empty_bottle'),before+1);assert.equal((dim.sounds??[]).filter(x=>x.id==='random.glass').length,sounds+1);
 });
 test('display actual placement consumes exactly one even from a16-stack',()=>{const p=player(),pos=site();h(p,NS+':wine_q3',16);placeBottle(p,pos);assert.equal(count(p,NS+':wine_q3'),15);const b=dim.getBlock(pos);assert.equal(b.typeId,NS+':bottle_wine');assert.deepEqual(state(b).items,[NS+':wine_q3']);});
 test('display routes sneak top-face placement, then mixes qualities without averaging',()=>{const p=player(),pos=site(),support=dim.getBlock(beneath(pos));h(p,NS+':wine_q1',2);p.isSneaking=true;assert(click(p,support).cancel);system.advance();const b=dim.getBlock(pos);h(p,NS+':wine_q6');p.isSneaking=false;click(p,b);system.advance();assert.deepEqual(state(b).items,[NS+':wine_q1',NS+':wine_q6']);h(p,undefined);click(p,b);system.advance();assert.equal(count(p,NS+':wine_q6'),1);assert.deepEqual(state(b).items,[NS+':wine_q1']);});

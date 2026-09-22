@@ -17,8 +17,9 @@ export function inputSnapshot(itemId,registry){
  id(itemId);check(itemId!==SIGNATURE,'SIGNATURE_INPUT_NOT_ADAPTED');check(!['minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(itemId),'POTION_DATA_NOT_ADAPTED');
  const bottle=parseBottle(itemId);if(bottle)check(bottle.quality>=4,'QUALITY_TOO_LOW');
  if(SHAKER_INPUTS[itemId])return clone(SHAKER_INPUTS[itemId]);
+ const external=registry?.shakerInput?.(itemId);if(external)return clone(external);
  check(!bottle,'NOT_MIXABLE_DRINK');check(registry?.acceptsShakerInput(itemId),'NOT_SHAKER_INGREDIENT');
- // Plain external ingredients have no inferred container/effects; authors must not use this as a potion API.
+ // Backward-compatible recipe-only ingredients remain neutral. Add-ons that model drinks should register shakerInputs.
  return {item:itemId,container:null,color:0xffffff,effects:[]};
 }
 export function emptyShaker(){return {schema:1,revision:0,slots:[],result:null};}

@@ -6,6 +6,7 @@ import {MachineStore,machineKey,Locks}from '../runtime/BP/scripts/core/storage.j
 import {planInventory,commitInventory,isPlainIngredient}from '../runtime/BP/scripts/core/inventory.js';
 import {BUILTIN_RECIPES}from '../runtime/BP/scripts/data/recipes.js';import {FLUIDS}from '../runtime/BP/scripts/data/fluids.js';
 import {GUIDE_PAGES}from '../runtime/BP/scripts/data/guide-pages.js';import {NAMES}from '../runtime/BP/scripts/data/names.js';
+import {inputSnapshot}from '../runtime/BP/scripts/core/mixology.js';
 import {guideEntries,searchEntries,paginate}from '../runtime/BP/scripts/core/guide.js';import {utf8Bytes,canonical,digest}from '../runtime/BP/scripts/core/util.js';
 import {ItemStack,Container,Properties}from './fake-server.js';
 const NS='kaleidoscope_tavern',make=(id,n)=>new ItemStack(id,n),reg=()=>new ExtensionRegistry({recipes:BUILTIN_RECIPES,fluids:FLUIDS,pages:GUIDE_PAGES});
@@ -55,3 +56,16 @@ test('source correction: all Q1–Q6 use one complete-use drink lifecycle withou
 test("ack retains caller transfer revision distinct from registry counter",()=>{const r=reg(),t=new ExtensionTransport(r);let result;for(const p of packetsFor(payload,"request_revision_123"))result=t.receive(p.id,p.message,10);assert.equal(result.revision,"request_revision_123");assert.equal(typeof result.registryRevision,"number");});
 
 test('guide and recipe IDs cannot collide within one extension',()=>{const r=reg(),x=structuredClone(payload);x.pages[0].id=x.recipes[0].id;throws(()=>r.install(x),'PAGE_RECIPE_ID_COLLISION');assert.equal(r.list().length,0);});
+
+
+test('World Liquor-style external shaker input descriptor is explicit, snapshotted and removable',()=>{
+ const r=new ExtensionRegistry({fluids:FLUIDS,itemExists:()=>true});
+ const x={api:1,source:'world_liquor_demo',version:'1.0.0',shakerInputs:[{item:'world_liquor_demo:gin',container:'minecraft:glass_bottle',color:0x77aaff,effects:[{effect:'minecraft:speed',duration:30,amplifier:0,probability:1}]}]};
+ const installed=r.install(x);assert.equal(installed.shakerInputs,1);assert.equal(r.list()[0].shakerInputs,1);assert(r.acceptsShakerInput('world_liquor_demo:gin'));
+ assert.deepEqual(inputSnapshot('world_liquor_demo:gin',r),{item:'world_liquor_demo:gin',container:'minecraft:glass_bottle',color:0x77aaff,effects:[{effect:'minecraft:speed',duration:30,amplifier:0,probability:1}]});
+ r.remove('world_liquor_demo');assert.equal(r.acceptsShakerInput('world_liquor_demo:gin'),false);
+});
+test('external shaker descriptors cannot claim another add-on namespace or partially replace a valid bundle',()=>{
+ const r=new ExtensionRegistry({fluids:FLUIDS,itemExists:()=>true}),good={api:1,source:'world_liquor_demo',version:'1.0.0',shakerInputs:[{item:'world_liquor_demo:gin',color:0x123456}]};
+ r.install(good);const before=canonical(r.list()),bad=structuredClone(good);bad.shakerInputs[0].item='other_addon:gin';throws(()=>r.install(bad),'FOREIGN_NAMESPACE');assert.equal(canonical(r.list()),before);assert(r.shakerInput('world_liquor_demo:gin'));
+});

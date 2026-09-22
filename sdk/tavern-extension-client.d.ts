@@ -4,6 +4,8 @@ export type PressingRecipe = {id:string;kind:'pressing';input:string[];fluid:str
 export type BarrelRecipe = {id:string;kind:'barrel';fluid:string;ingredients:string[][];carrier?:string;unitTime?:number;noIngredientCount?:number;output:Output;title?:LocaleText};
 export type ShakerRecipe = {id:string;kind:'shaker';ingredients:[string[],string[],string[]];output:{item:string;byQuality?:never};carrier?:string;title?:LocaleText};
 export type GuidePage = {id:string;title:LocaleText;body:LocaleText;recipeIds?:string[];icon?:string};
-export type TavernExtension = {api:1;source:string;version:string;title?:LocaleText;recipes?:(PressingRecipe|BarrelRecipe|ShakerRecipe)[];pages?:GuidePage[]};
+export type EffectSnapshot = {effect:string;duration:number;amplifier:number;probability:number};
+export type ShakerInputDescriptor = {item:string;container?:string|null;color?:number;effects?:EffectSnapshot[]};
+export type TavernExtension = {api:1;source:string;version:string;title?:LocaleText;recipes?:(PressingRecipe|BarrelRecipe|ShakerRecipe)[];pages?:GuidePage[];shakerInputs?:ShakerInputDescriptor[]};
 export interface ScriptSystemLike {run(fn:()=>void):number;runTimeout(fn:()=>void,ticks:number):number;clearRun(id:number):void;sendScriptEvent(id:string,message:string):void;afterEvents:{scriptEventReceive:{subscribe(fn:(event:{id:string;message:string;sourceType:string})=>void,options?:{namespaces:string[]}):unknown;unsubscribe(fn:(event:{id:string;message:string;sourceType:string})=>void):void}};}
 export declare function registerTavernExtension(system:ScriptSystemLike,payload:TavernExtension,options?:{log?:(message:string)=>void;maxAttempts?:number}):{readonly registered:boolean;readonly attempts:number;dispose():void};

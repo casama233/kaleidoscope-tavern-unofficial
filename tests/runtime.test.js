@@ -6,7 +6,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {world,system,startup,Player,ItemStack,Container,Entity,GameMode} from './fake-server.js';
 import {migrateLegacyGuide,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
-import {initializeTub,createBarrel,operate,press,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
+import {initializeTub,createBarrel,operate,press,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,finishTapExtraction,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';
 import {barrelCells} from '../runtime/BP/scripts/core/machines.js';
 import {bottleKey} from '../runtime/BP/scripts/core/bottles.js';
@@ -79,6 +79,12 @@ test('Tap redstone rising edge opens once and extracts after30 ticks; sustained 
  const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
  const comp=regs.blocks.get(NS+':tap');comp.onRedstoneUpdate({block:tap,previousPowerLevel:0,powerLevel:15,firstUpdate:false});system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
  comp.onRedstoneUpdate({block:tap,previousPowerLevel:15,powerLevel:15,firstUpdate:false});system.advance(29);assert.equal(state(b).batch.remaining,2);system.advance(1);assert.equal(state(b).batch.remaining,1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
+});
+test('Tap barrel-save failure restores carrier and removes half-created output without decrementing batch',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);
+ const beforeDrops=dropCount(NS+':wine_q1');world.failSet=true;assert.throws(()=>finishTapExtraction(tap,b.location),/INJECTED_SAVE/);
+ assert.equal(state(b).batch.remaining,2);assert.equal(dropCount(NS+':wine_q1'),beforeDrops);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
 });
 test('saved batch can be loaded by a fresh storage object without recomputing recipe',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const s=new MachineStore(world).load(machineKey(dim.id,b.location));assert.deepEqual(s,state(b));assert.equal(s.batch.remaining,16);assert.equal(s.batch.output.byQuality.length,6);});
 test('broken or unloaded barrel stops progressing and never erases state',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const part=dim.getBlock({x:b.location.x+1,y:b.location.y,z:b.location.z});part.setType('minecraft:air');const raw=TEST_ACCESS.store.raw(machineKey(dim.id,b.location));tickBarrel(b);assert.equal(TEST_ACCESS.store.raw(machineKey(dim.id,b.location)),raw);});

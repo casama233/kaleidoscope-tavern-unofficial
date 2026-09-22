@@ -149,7 +149,7 @@ function createTapOutput(tap,itemId,facing=0){
  if(below.isAir&&parsed){
   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
   const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
-  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:0}));bottleStore.save(key,state,-1);}
+  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:facing}));bottleStore.save(key,state,-1);}
   catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
   return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
  }

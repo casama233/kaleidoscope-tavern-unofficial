@@ -428,6 +428,7 @@ def main():
  bottle_router=(BP/'scripts/bedrock/bottles.js').read_text(encoding='utf-8')
  drink_bridge=(BP/'scripts/bedrock/drink-effects.js').read_text(encoding='utf-8')
  check('bottle_single_authoritative_block_use_router','playerInteractWithBlock.subscribe' in bottle_router and 'beforeEvents.itemUse' not in bottle_router and 'getBlockFromViewDirection' not in bottle_router)
+ check('C2_bottle_projectile_shatter_route','projectileHitBlock' in bottle_router and 'getBlockHit' in bottle_router and 'shatterBottle' in bottle_router and "setType('minecraft:air')" in bottle_router)
  check('bottle_complete_use_not_food_consume','onCompleteUse' in drink_bridge and 'onConsume:' not in drink_bridge)
  check('no_pre_release_solid_or_canPlace_api',not any(re.search(r'\.isSolid\b|\.canPlace\(',p.read_text()) for p in scripts if p.name!='bottle-support.js'))
  for x in load(ROOT/'data/upstream/c3/source.lock.json')['records']:check('C3_source:'+x['path'],sha(ROOT/x['path'])==x['sha256'])

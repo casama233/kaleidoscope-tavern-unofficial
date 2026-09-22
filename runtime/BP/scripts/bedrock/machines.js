@@ -184,7 +184,8 @@ function consumeTapCarrier(tap,carrier,carrierId){
  return ()=>{diagnostics.tap.carrierRollbacks++;try{remainder?.remove();}catch{}try{tap.dimension.spawnItem(original,at);}catch(err){warn(err,'tap-carrier-rollback');}};
 }
 export function finishTapExtraction(tap,expectedCoreLocation){
- check(tap?.typeId===TAP,'NOT_TAP');const core=expectedCoreLocation?blockAt(tap.dimension,expectedCoreLocation):findTapCore(tap);if(!core||core.typeId!==CORE)return false;
+ check(tap?.typeId===TAP,'NOT_TAP');const core=findTapCore(tap);if(!core||core.typeId!==CORE)return false;
+ if(expectedCoreLocation&&['x','y','z'].some(k=>core.location[k]!==expectedCoreLocation[k]))return false;
  const key=keyFor(core);
  return locks.with([key,tapKey(tap)],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');

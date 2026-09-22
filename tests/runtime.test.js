@@ -59,7 +59,7 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
  // Java BarrelBlock: with lid open, empty-hand use on another top-layer board closes it.
  p.selectedSlotIndex=3;p.isSneaking=false;const topSide=dim.getBlock({x:b.location.x+1,y:b.location.y+2,z:b.location.z});click(p,topSide);assert.equal(state(b).open,false);tickBarrel(b);assert.equal(state(b).batch.quality,1);
  for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
- const tap=tapAt(b);assert.equal(findTapCore(tap),b);const wrong=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});wrong.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':'east','minecraft:cardinal_direction':'east'}));assert.equal(findTapCore(wrong),undefined);tap.setPermutation(tap.permutation.withState('minecraft:block_face','west'));assert.equal(findTapCore(tap),undefined);tap.setPermutation(tap.permutation.withState('minecraft:block_face','east'));
+ const tap=tapAt(b);assert.equal(findTapCore(tap),b);const wrong=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});wrong.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':'east','minecraft:cardinal_direction':'east'}));assert.equal(findTapCore(wrong),undefined);wrong.setType('minecraft:air');tap.setPermutation(tap.permutation.withState('minecraft:block_face','west'));assert.equal(findTapCore(tap),undefined);tap.setPermutation(tap.permutation.withState('minecraft:block_face','east'));
  const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z},carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};
  p.isSneaking=false;hand(p,undefined);
  for(let i=0;i<16;i++){

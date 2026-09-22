@@ -60,6 +60,9 @@ def main():
    check('C1_tap_native_facing_waterlogging',tap_desc.get('traits')=={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}} and tap_components.get('minecraft:selection_box')=={'origin':[-3,5,-2],'size':[6,8,10]} and tap_components.get('minecraft:liquid_detection',{}).get('detection_rules')==[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}] and len(tap_perms)==9)
    for ident in ['kaleidoscope_tavern:barrel_core','kaleidoscope_tavern:barrel_part']:
     check('C1_barrel_native_facing:'+ident,block_defs[ident]['description'].get('traits')=={'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}})
+   water_bottle=block_defs['kaleidoscope_tavern:water_bottle'];wb_desc=water_bottle['description'];wb_components=water_bottle['components']
+   check('C2_water_bottle_java_simple_shape',wb_desc.get('menu_category') is None and wb_desc.get('traits')=={'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}} and wb_components.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a17.water_bottle' and wb_components.get('minecraft:collision_box')=={'origin':[-3,0,-3],'size':[6,10,6]} and wb_components.get('minecraft:selection_box')=={'origin':[-3,0,-3],'size':[6,10,6]} and wb_components.get('minecraft:liquid_detection',{}).get('detection_rules')==[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':True}])
+
 
 
    visible=set()

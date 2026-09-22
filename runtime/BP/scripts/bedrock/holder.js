@@ -63,12 +63,20 @@ export function popHolderRedstone(block,{selectionRng=Math.random,motionRng=Math
 export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popHolderRedstone(b),x=>{holderDiagnostics.redstoneErrors++;error(x);})});}
 export function installHolderEvents(){
  installStatefulStorageRoutes({
+  routeId:'holder',
   isBlock:block=>block?.typeId===HOLDER_BLOCK,
   isPlacementItem:id=>id===HOLDER_BLOCK,
   readRevision:block=>store.load(holderKey(block.dimension.id,block.location))?.revision??-1,
   place:({player,target})=>placeHolder(player,target),
+  shouldInteract:({block,held})=>{
+   const state=store.load(holderKey(block.dimension.id,block.location));
+   if(!held.id)return !!state;
+   if(holderBlockedItem(held.id))return true;
+   const accepted=holderItem(held.id);if(!accepted)return true;
+   return !state&&kind(block)===0;
+  },
   interact:({player,block,held,revision})=>{
-   if(!held.id)return player.isSneaking?recoverHolder(player,block,{expectedRevision:revision}):takeHolderBottle(player,block,{expectedRevision:revision});
+   if(!held.id)return takeHolderBottle(player,block,{expectedRevision:revision});
    if(holderBlockedItem(held.id)){tell(player,'§e[Tavern] 此瓶型在 Java holder_blocklist 中，單瓶架拒收。');return;}
    if(holderItem(held.id))return putHolderBottle(player,block,{expectedRevision:revision});
    tell(player,'§e[Tavern] 單瓶架只接受空酒瓶或來源允許的品質酒瓶；空手取出。');

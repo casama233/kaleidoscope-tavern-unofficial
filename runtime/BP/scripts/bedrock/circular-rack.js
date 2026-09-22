@@ -36,12 +36,20 @@ export function popCircularRackRedstone(block,{selectionRng=Math.random,motionRn
 export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCircularRackRedstone(b),x=>{circularRackDiagnostics.redstoneErrors++;error(x);})});}
 export function installCircularRackEvents(){
  installStatefulStorageRoutes({
+  routeId:'circular-rack',
   isBlock:block=>block?.typeId===CIRCULAR_RACK,
   isPlacementItem:id=>id===CIRCULAR_RACK,
   readRevision:block=>store.load(circularRackKey(block.dimension.id,block.location))?.revision??-1,
   place:({player,target})=>placeCircularRack(player,target),
+  shouldInteract:({block,held,faceLocation})=>{
+   const state=store.load(circularRackKey(block.dimension.id,block.location));if(!state)return false;
+   const slot=circularRackSlot(block.permutation.getState(FACING)??0,faceLocation);
+   if(!held.id)return state.slots[slot]!==null;
+   const accepted=circularRackItem(held.id);if(!accepted)return true;
+   return state.slots[slot]===null;
+  },
   interact:({player,block,held,faceLocation,revision})=>{
-   if(!held.id)return player.isSneaking?recoverCircularRack(player,block,{expectedRevision:revision}):takeCircularRackBottle(player,block,faceLocation,{expectedRevision:revision});
+   if(!held.id)return takeCircularRackBottle(player,block,faceLocation,{expectedRevision:revision});
    if(circularRackItem(held.id))return putCircularRackBottle(player,block,faceLocation,{expectedRevision:revision});
    tell(player,'§e[Tavern] 圓形酒架只接受空酒瓶或品質酒瓶；空手取指定槽。');
   },

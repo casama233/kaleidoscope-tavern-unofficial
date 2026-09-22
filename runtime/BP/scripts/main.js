@@ -26,6 +26,7 @@ import {MIXOLOGY_PAGES} from './data/mixology-pages.js';
 import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mixologyDiagnostics} from './bedrock/mixology.js';
 import {installCookeryGuidePublisher} from './core/cookery-guide-publisher.js';
 import {buildCookeryGuidePayload} from './data/cookery-guide-payload.js';
+import {installJavaItemUseOnEvents} from './bedrock/java-placement-router.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
 const COOKERY_GUIDE='kaleidoscope_cookery:guidebook';
@@ -45,7 +46,7 @@ system.beforeEvents.startup.subscribe(ev=>{
  registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});
 });
-installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installStorageProjectileEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();
+installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installStorageProjectileEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installJavaItemUseOnEvents();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
  if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});

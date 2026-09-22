@@ -5,6 +5,7 @@ import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
+import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
 const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap';
@@ -128,18 +129,37 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{});
  i.registerCustomComponent(NS+':place_barrel',{onUseOn:ev=>guarded(ev.source,()=>{const d=DIRECTIONS[ev.blockFace];check(d,'UNKNOWN_FACE');return createBarrel(ev.source,offset(ev.block.location,d));})});
 }
+function machineUsePlan(block,item){
+ const type=block.typeId,heldItem=item?{id:item.typeId,count:item.amount}:undefined;
+ if(type===TAP)return {kind:'tap'};
+ if(type===TUB){
+  const state=store.load(keyFor(block));if(!state)return undefined;
+  const action=!heldItem?(state.slots.some(Boolean)?'remove_ingredient':undefined):'use';if(!action)return undefined;
+  try{interact(state,{action,held:heldItem},registry,FLUIDS);return {kind:'machine',action};}catch{return undefined;}
+ }
+ if(type!==PART)return undefined;
+ const dy=block.permutation.getState(NS+':dy'),dx=block.permutation.getState(NS+':dx'),dz=block.permutation.getState(NS+':dz');
+ if(dy!==2)return undefined;const core=resolveCore(block);if(!core)return undefined;
+ const state=store.load(keyFor(core));if(!state)return undefined;
+ let action;
+ if(!state.open)action='lid';
+ else if(dx===0&&dz===0)action=heldItem?'use':state.slots.some(Boolean)?'remove_ingredient':undefined;
+ else if(!heldItem)action='lid';
+ if(!action)return undefined;
+ try{interact(state,{action,held:heldItem},registry,FLUIDS);return {kind:'machine',action};}catch{return undefined;}
+}
 export function installMachineEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(ev=>{
-  if(ev.cancel)return;
-  if(!OWN_BLOCKS.has(ev.block.typeId))return;ev.cancel=true;if(ev.isFirstEvent===false)return;
-  const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId,player=ev.player;const item=held(player);const expected={id:item?.typeId??'',count:item?.amount??0,slot:player.selectedSlotIndex};
+  if(ev.cancel||!OWN_BLOCKS.has(ev.block.typeId))return;
+  const player=ev.player,item=held(player),expected={id:item?.typeId??'',count:item?.amount??0,slot:player.selectedSlotIndex};
+  if(javaSecondaryBypass(player,expected.id))return;
+  const plan=machineUsePlan(ev.block,item);if(!plan)return;
+  ev.cancel=true;if(ev.isFirstEvent===false)return;
+  const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;
   system.run(()=>guarded(player,()=>{
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
-   
-   if(type===TAP){const c=findTapCore(b);check(c,'NO_NEARBY_BARREL');operate(player,c,'extract',expected);return;}
-   const core=requireCore(b),s=store.load(keyFor(core));check(s,'MISSING_STATE');
-   const action=!expected.id?(player.isSneaking&&s.kind==='barrel'?'lid':s.open&&s.slots.some(Boolean)?'remove_ingredient':'inspect'):'use';
-   return operate(player,b,action,expected);
+   if(plan.kind==='tap'){const core=findTapCore(b);check(core,'NO_NEARBY_BARREL');return operate(player,core,'extract',expected);}
+   return operate(player,b,plan.action,expected);
   }));
  });
  registerProtectedBreakRoute({id:'machines',isBlock:block=>OWN_BLOCKS.has(block?.typeId),guard:guarded,recover:({player,block})=>dismantle(player,block)});

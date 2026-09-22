@@ -25,12 +25,19 @@ export function tickBarCabinets(){cursor=tickStorageVisuals(visuals,cursor,maint
 export function registerBarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bar_cabinet',{onTick:e=>{try{syncBarCabinetConnection(e.block);const s=store.load(barCabinetKey(e.block.dimension.id,e.block.location,e.block.typeId));if(s)syncBarCabinetVisuals(e.block,s);}catch(x){error(x);}}});}
 export function installBarCabinetEvents(){
  installStatefulStorageRoutes({
+  routeId:'bar-cabinet',
   isBlock:block=>cabinet(block),
   isPlacementItem:id=>CABINET_TYPES.includes(id),
   readRevision:block=>store.load(barCabinetKey(block.dimension.id,block.location,block.typeId))?.revision??-1,
   place:({player,target,held})=>placeBarCabinet(player,target,held.id),
+  shouldInteract:({block,held,faceLocation})=>{
+   const state=store.load(barCabinetKey(block.dimension.id,block.location,block.typeId));if(!state)return false;
+   const clicked=barCabinetClickedLeft(block.permutation.getState(FACING)??0,faceLocation);
+   if(!held.id)return barCabinetTake(state,clicked).changed;
+   if(!barCabinetItem(held.id))return false;
+   return barCabinetPut(state,clicked,held.id).changed;
+  },
   interact:({player,block,held,faceLocation,revision})=>{
-   if(!held.id&&player.isSneaking)return recoverBarCabinet(player,block,{expectedRevision:revision});
    if(!held.id||barCabinetItem(held.id))return useBarCabinet(player,block,faceLocation,{expectedRevision:revision});
    tell(player,'§e[Tavern] 酒櫃只接受空酒瓶或品質酒瓶；空手取瓶，潛行空手回收。');
   },

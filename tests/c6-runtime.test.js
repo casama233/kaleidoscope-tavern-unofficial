@@ -55,6 +55,29 @@ test('shared break/drop/sound adapter owns one global break and explosion listen
  assert.equal(BREAK_ROUTE_TEST.routes.length,10);
  assert.equal(new Set(BREAK_ROUTE_TEST.routes.map(route=>route.id)).size,10);
 });
+test('all current Tavern block resources have exactly one protected break route, no native loot, and an explicit source-like sound material',()=>{
+ const dir=new URL('../runtime/BP/blocks/',import.meta.url),issues=[];
+ const defs=fs.readdirSync(dir).filter(name=>name.endsWith('.json')).map(name=>JSON.parse(fs.readFileSync(new URL(name,dir)))['minecraft:block']);
+ assert(defs.length>100);
+ for(const def of defs){
+  const id=def.description.identifier,matches=BREAK_ROUTE_TEST.matchingRoutes({typeId:id});
+  if(matches.length!==1)issues.push({id,problem:'route_count',count:matches.length,routes:matches.map(x=>x.id)});
+  else if(matches[0].protectExplosions!==true)issues.push({id,problem:'explosion_unprotected',route:matches[0].id});
+  if(!BREAK_ROUTE_TEST.breakMaterial(id))issues.push({id,problem:'sound_unclassified'});
+  if(def.components?.['minecraft:loot']!=='loot_tables/empty.json')issues.push({id,problem:'native_loot_not_disabled',loot:def.components?.['minecraft:loot']});
+ }
+ assert.deepEqual(issues,[]);
+});
+test('break sound profiles follow Java source materials for storage, furniture, cultivation and mixology',()=>{
+ const cases={
+  wood:['holder','tilted_rack','circular_rack','bar_cabinet','glass_bar_cabinet','cellar_cabinet','barrel_core','pressing_tub','trellis','grapevine_trellis','stool_blue','table','bar_counter','mona_lisa_painting'],
+  metal:['tap','shaker_station','glassware_holder','light_red','bell_pendant_lamp'],
+  glass:['bottle_wine','cup_mojito'],
+  wool:['blue_sofa'],
+  crop:['grape_crop']
+ };
+ for(const [material,ids] of Object.entries(cases))for(const short of ids)assert.equal(BREAK_ROUTE_TEST.breakMaterial(NS+':'+short),material,short);
+});
 test.beforeEach(()=>{d.blocks.clear();d.entities.clear();d.unloaded.clear();d.failSpawn=false;d.failSpawnItem=false;d.failAudio=false;d.failParticles=false;d.sounds=[];d.particles=[];world.dp.clear();online=[];FURNITURE_TEST.helpers.clear();HOLDER_TEST.visuals.clear();TILTED_RACK_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();BAR_CABINET_TEST.visuals.clear();CELLAR_CABINET_TEST.visuals.clear();COMBAT_TEST.lastCast.clear();});
 test('shared storage spatial helpers preserve the six-block center-distance contract',()=>{
  const p=player(),at={x:0,y:64,z:0};p.location=blockCenter(at);assert.doesNotThrow(()=>requireBlockReach(p,d,at));
@@ -90,7 +113,7 @@ test('Glassware Holder recovery returns all occupied glasses with holder',()=>{c
 test('Glassware Holder event route uses faceLocation quadrant',()=>{const {p,b}=glasswareHolder();hand(p,NS+':empty_glassware',2);const e=click(p,b,'Down',{x:.8,y:.1,z:.2});assert(e.cancel);assert.equal(b.permutation.getState(GLASSWARE_SLOTS[1]),1);p.selectedSlotIndex=2;hand(p,undefined);click(p,b,'Down',{x:.8,y:.1,z:.2});assert.equal(b.permutation.getState(GLASSWARE_SLOTS[1]),0);});
 test('Holder stores exact quality ID while helper renders base bottle kind',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':wine_q5',2);const s=putHolderBottle(p,b);assert.equal(s.item,NS+':wine_q5');assert.equal(count(p,NS+':wine_q5'),1);assert.equal(b.permutation.getState(HOLDER_KIND),holderItem(NS+':wine_q5').kind);assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)).item,NS+':wine_q5');const helper=[...d.entities.values()].find(e=>e.typeId===NS+':holder_bottle_visual');assert(helper);assert.equal(helper.getProperty(HOLDER_KIND),s.kind);p.selectedSlotIndex=2;hand(p,undefined);assert.equal(takeHolderBottle(p,b),NS+':wine_q5');assert.equal(count(p,NS+':wine_q5'),2);assert.equal(b.permutation.getState(HOLDER_KIND),0);});
 test('Holder rejects Java blocklist bottles, cocktails and metadata without consuming them',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':vodka_q6',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='HOLDER_BLOCKLIST');assert.equal(count(p,NS+':vodka_q6'),1);hand(p,NS+':white_lady',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='NOT_HOLDER_BOTTLE');const custom=new ItemStack(NS+':wine_q4',1);custom.nameTag='preserve';hand(p,custom);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='METADATA_ITEM_REJECTED');assert.equal(p.inventory.getItem(0).nameTag,'preserve');assert.equal(b.permutation.getState(HOLDER_KIND),0);});
-test('Survival break of occupied Holder drops holder and exact stored bottle with metal break sound',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':champagne_q2',1);putHolderBottle(p,b);p.selectedSlotIndex=1;hand(p,undefined);const event={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(event);system.advance();assert(event.cancel);assert(b.isAir);assert.equal(dropCount(NS+':holder'),1);assert.equal(dropCount(NS+':champagne_q2'),1);assert(d.sounds.some(s=>s.id==='break.iron'));});
+test('Survival break of occupied Holder drops holder and exact stored bottle with source wood break sound',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':champagne_q2',1);putHolderBottle(p,b);p.selectedSlotIndex=1;hand(p,undefined);const event={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(event);system.advance();assert(event.cancel);assert(b.isAir);assert.equal(dropCount(NS+':holder'),1);assert.equal(dropCount(NS+':champagne_q2'),1);assert(d.sounds.some(s=>s.id==='dig.wood'));});
 test('Holder occupied slot refuses replacement and recovery returns holder plus exact bottle atomically',()=>{const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':champagne_q2',1);putHolderBottle(p,b);hand(p,NS+':wine_q6',1);assert.throws(()=>putHolderBottle(p,b),x=>x.code==='HOLDER_OCCUPIED');hand(p,undefined);const h=count(p,NS+':holder');recoverHolder(p,b);assert(b.isAir);assert.equal(count(p,NS+':holder'),h+1);assert.equal(count(p,NS+':champagne_q2'),1);});
 test('bottle block-use route places only on sneak and leaves ordinary support click for drinking',()=>{
  const p=player(),support=d.getBlock({...pos,y:63});support.setType('minecraft:stone');hand(p,NS+':wine_q4',2);p.isSneaking=true;

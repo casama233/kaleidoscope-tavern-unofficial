@@ -80,6 +80,7 @@ def main():
  break_router=(BP/'scripts/bedrock/protected-break-router.js').read_text(encoding='utf-8')
  check('shared_storage_router_owns_interaction_only','playerInteractWithBlock.subscribe' in router and 'registerProtectedBreakRoute' in router and 'playerBreakBlock.subscribe' not in router and 'beforeEvents.explosion.subscribe' not in router)
  check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','dimension.spawnItem','dimension.playSound']))
+ check('shared_break_router_has_explicit_material_profiles',all(x in break_router for x in ['breakMaterial','holder|tilted_rack|circular_rack','tap|shaker_station|glassware_holder','grapevine_trellis','_painting']))
  for name in shared_storage:
   text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
   check('shared_storage_router_used:'+name,'installStatefulStorageRoutes' in text)
@@ -121,6 +122,7 @@ def main():
   c=x['components'];g=c['minecraft:geometry'];check('block_geometry:'+ident,(g if isinstance(g,str)else g['identifier'])in geom)
   for slot,material in c['minecraft:material_instances'].items():check('block_texture:'+ident+':'+slot,material.get('texture')in terrain)
   check('block_protected_C2:'+ident,c['minecraft:movable']=={'movement_type':'immovable'})
+  check('scripted_break_disables_native_loot:'+ident,c.get('minecraft:loot')=='loot_tables/empty.json')
  for ident,x in block_defs.items():
   for index,perm in enumerate(x.get('permutations',[])):
    comps=perm['components']

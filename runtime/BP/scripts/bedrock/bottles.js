@@ -52,8 +52,29 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
   playMaterialInteraction(b.dimension,b.location,`${NS}:bottle_${old.base}`);tell(player,'§a已取回原品質酒瓶。');return tx;
  });
 }
+export function shatterBottle(block){
+ check(block&&(block.typeId===EMPTY_BLOCK||DISPLAY_IDS.has(block.typeId)),'NOT_BOTTLE_BLOCK');
+ const d=block.dimension,at={...block.location},old=block.permutation;
+ if(block.typeId===EMPTY_BLOCK)return locks.with([emptyKey(block)],()=>{
+  block.setType('minecraft:air');try{d.playSound('random.glass',{x:at.x+.5,y:at.y+.5,z:at.z+.5},{volume:.8,pitch:1});}catch{}return true;
+ });
+ const key=bottleKey(d.id,at);
+ return locks.with([key],()=>{
+  const state=store.load(key),raw=store.raw(key);if(state)check(intact(block,state),'DISPLAY_MISMATCH');
+  try{block.setType('minecraft:air');if(state)store.save(key,undefined,state.revision);}
+  catch(e){try{block.setPermutation(old);}catch{}try{store.restore(key,raw);}catch{}throw e;}
+  try{d.playSound('random.glass',{x:at.x+.5,y:at.y+.5,z:at.z+.5},{volume:.8,pitch:1});}catch{}return true;
+ });
+}
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
 export function installBottleEvents(){
+ // Java BottleBlock.onProjectileHit: bottle shatters with no item recovery.
+ world.afterEvents.projectileHitBlock?.subscribe(e=>{
+  let hit;try{hit=e.getBlockHit?.();}catch{return;}const block=hit?.block;
+  if(!block||(block.typeId!==EMPTY_BLOCK&&!DISPLAY_IDS.has(block.typeId)))return;
+  const d=block.dimension,p={...block.location},id=block.typeId;
+  system.run(()=>safe(undefined,()=>{const current=blockAt(d,p);check(current?.typeId===id,'BLOCK_CHANGED');return shatterBottle(current);}));
+ });
  // Java BottleBlock.use: placed empty bottle returns itself on empty hand; non-empty hand PASSes.
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel||e.block.typeId!==EMPTY_BLOCK)return;const hs=handSnapshot(e.player);if(hs.id)return;
@@ -106,4 +127,4 @@ export function installBottleEvents(){
   recover:({player,block,snapshot})=>block.typeId===EMPTY_BLOCK?takeEmptyBottle(player,block):takeBottles(player,block,{all:true,expectedRevision:snapshot})
  });
 }
-export const BOTTLE_TEST={store,COUNT,FACING,EMPTY_ITEM,EMPTY_BLOCK};
+export const BOTTLE_TEST={store,COUNT,FACING,EMPTY_ITEM,EMPTY_BLOCK,shatterBottle};

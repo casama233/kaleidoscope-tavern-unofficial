@@ -14,14 +14,9 @@ const store=new BottleStore(world),locks=new Locks();
 function placementTarget(clicked,face){const offset=FACE_OFFSET[face];check(offset,'BAD_BLOCK_FACE');return plus(clicked,offset);}
 function permutation(s){return BlockPermutation.resolve(`${NS}:bottle_${s.base}`,{[COUNT]:s.items.length,[FACING]:s.facing});}
 function intact(b,s){return b.typeId===`${NS}:bottle_${s.base}`&&b.permutation.getState(COUNT)===s.items.length&&b.permutation.getState(FACING)===s.facing;}
-function facingFor(player){return Math.floor((((player.getRotation?.().y??0)+180+45)%360+360)%360/90);}
+export function bottleFacingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor(((((yaw+45)%360)+360)%360)/90);}
+function facingFor(player){return bottleFacingForYaw(player.getRotation?.().y??0);}
 function emptyKey(block){const p=block.location;return `empty-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
-export function placeEmptyBottle(player,target){
- canWrite(player);const d=player.dimension,b=blockAt(d,target);check(b,'UNLOADED_TARGET');check(b.isAir,'SPACE_NOT_CLEAR');
- const h=hand(player);check(h?.typeId===EMPTY_ITEM,'NOT_EMPTY_BOTTLE');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
- const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack),old=b.permutation,facing=facingFor(player);
- return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setPermutation(BlockPermutation.resolve(EMPTY_BLOCK,{[FACING]:facing})),()=>b.setPermutation(old));playMaterialInteraction(d,target,EMPTY_BLOCK);return out;});
-}
 export function takeEmptyBottle(player,b){
  canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=b.permutation;
  return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setType('minecraft:air'),()=>b.setPermutation(old));playMaterialInteraction(b.dimension,b.location,EMPTY_BLOCK);return out;});
@@ -33,7 +28,7 @@ export function placeBottle(player,target,{expectedRevision}={}){
   check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
   const old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');
   if(old)check(intact(b,old),'DISPLAY_MISMATCH');else check(b.isAir,'SPACE_NOT_CLEAR');
-  const next=displayAdd(old,h.typeId,Math.floor((((player.getRotation?.().y??0)+180+45)%360+360)%360/90));
+  const next=displayAdd(old,h.typeId,facingFor(player));
   const raw=store.raw(k),oldBlock=b.permutation,c=inventory(player);
   // Match Java DrinkBlockItem/BlockItem: successful Creative placement/stacking does not shrink the stack.
   const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
@@ -73,12 +68,7 @@ export function installBottleEvents(){
    return takeBottles(e.player,b,{expectedRevision:revision});
   }));
  });
- // Empty BottleBlockItem follows normal Java BlockItem useOn after clicked-block use PASSes.
- registerJavaItemUseOnRoute({
-  id:'empty-bottle-block-item',matches:id=>id===EMPTY_ITEM,
-  plan:({block,face})=>({target:placementTarget(block.location,face)}),
-  execute:({player,plan})=>placeEmptyBottle(player,plan.target)
- });
+ // Empty BottleBlockItem placement is native via minecraft:block_placer.
  // DrinkBlockItem.useOn: same-drink stacking first; otherwise only secondary-use places.
  registerJavaItemUseOnRoute({
   id:'quality-drink-block-items',

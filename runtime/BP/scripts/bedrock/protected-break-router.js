@@ -7,14 +7,18 @@ const routes=[];let installed=false,sequence=0;
 function routeMatches(route,block){try{return !!route.isBlock(block);}catch{return false;}}
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
 function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
-function breakSound(id){
- const short=typeof id==='string'&&id.startsWith('kaleidoscope_tavern:')?id.slice('kaleidoscope_tavern:'.length):'';
- if(/^bottle_|^cup_/.test(short))return 'random.glass';
- if(/_sofa$/.test(short))return 'dig.cloth';
- if(/_crop$/.test(short))return 'dig.grass';
- if(/^(holder|tilted_rack|circular_rack|tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'break.iron';
- return 'dig.wood';
+const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',wood:'dig.wood'});
+function breakMaterial(id){
+ if(typeof id!=='string'||!id.startsWith('kaleidoscope_tavern:'))return undefined;
+ const short=id.slice('kaleidoscope_tavern:'.length);
+ if(/^bottle_|^cup_/.test(short))return 'glass';
+ if(/_sofa$/.test(short))return 'wool';
+ if(/_crop$/.test(short))return 'crop';
+ if(/^(tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'metal';
+ if(/^(barrel_core|barrel_part|pressing_tub|trellis|table|bar_counter|bar_cabinet|glass_bar_cabinet|cellar_cabinet|holder|tilted_rack|circular_rack)$/.test(short)||/^stool_/.test(short)||/(^|_)grapevine_trellis$/.test(short)||/_painting$/.test(short))return 'wood';
+ return undefined;
 }
+function breakSound(id){return BREAK_SOUNDS[breakMaterial(id)]??'dig.wood';}
 function pureAddedDrops(before,after){
  const drops=[],restore=[];
  for(let i=0;i<after.length;i++){
@@ -100,4 +104,4 @@ export function registerProtectedBreakRoute({id,isBlock,capture,verify,recover,g
  installGlobalRoutes();return routeId;
 }
 
-export const BREAK_ROUTE_TEST={routes,matchingRoutes,breakSound,pureAddedDrops};
+export const BREAK_ROUTE_TEST={routes,matchingRoutes,breakMaterial,breakSound,pureAddedDrops};

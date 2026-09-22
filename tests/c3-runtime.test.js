@@ -14,6 +14,7 @@ const regs=startup();system.advance(2);const dim=world.getDimension('overworld')
 const registry=()=>runtimeRegistry();
 const code=(fn,c)=>assert.throws(fn,e=>e.code===c);
 const count=(p,id)=>p.inventory.items.filter(i=>i?.typeId===id).reduce((n,i)=>n+i.amount,0);
+const dropCount=id=>[...dim.entities.values()].filter(e=>e.typeId==='minecraft:item'&&e.getComponent('minecraft:item')?.itemStack.typeId===id).reduce((n,e)=>n+e.getComponent('minecraft:item').itemStack.amount,0);
 const h=(p,id,n=1)=>{p.selectedSlotIndex=0;p.inventory.setItem(0,id?new ItemStack(id,n):undefined);};
 const pos=()=>({x:(++index)*20,y:64,z:0});
 function site(d=dim,at=pos()){d.getBlock({...at,y:at.y-1}).setType('minecraft:stone');return at;}
@@ -29,6 +30,16 @@ function eventClick(p,b,{sneak=false,first=true,cancel=false,face='Up'}={}){p.is
 test.beforeEach(()=>MIX_TEST.sessions.clear());
 
 test('entrypoint advertises41 machine recipes and dedicated mixology components',()=>{assert.equal(registry().allRecipes().length,41);assert.equal(registry().allRecipes().filter(r=>r.kind==='shaker').length,12);assert(regs.blocks.has(NS+':shaker_station'));assert(regs.blocks.has(NS+':cocktail_cup'));assert.equal(typeof regs.items.get(NS+':cocktail_effects').onConsume,'function');});
+test('shared break router makes an empty placed shaker a Survival drop with lantern/metal feedback',()=>{
+ const {p,b}=setup(),before=dropCount(NS+':shaker'),sounds=dim.sounds?.filter(s=>s.id==='break.iron').length??0;h(p,undefined);
+ const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();
+ assert(e.cancel);assert(b.isAir);assert.equal(count(p,NS+':shaker'),0);assert.equal(dropCount(NS+':shaker'),before+1);assert.equal((dim.sounds??[]).filter(s=>s.id==='break.iron').length,sounds+1);
+});
+test('shared break router preserves placed glassware item identity and glass feedback',()=>{
+ const at=site(),p=actor(at);h(p,EMPTY_CUP);placeCup(p,at);const b=dim.getBlock(at),before=dropCount(EMPTY_CUP),sounds=dim.sounds?.filter(s=>s.id==='random.glass').length??0;h(p,undefined);
+ const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();
+ assert(e.cancel);assert(b.isAir);assert.equal(count(p,EMPTY_CUP),0);assert.equal(dropCount(EMPTY_CUP),before+1);assert.equal((dim.sounds??[]).filter(s=>s.id==='random.glass').length,sounds+1);
+});
 test('shaker placement roundtrip consumes and returns the original one machine',()=>{const {p,b}=setup();assert.equal(count(p,NS+':shaker'),0);assert.equal(state(b).slots.length,0);breakShaker(p,b);assert(b.isAir);assert.equal(count(p,NS+':shaker'),1);assert.equal(state(b),undefined);});
 test('unsupported occupied unloaded and distant placement do not spend items',()=>{for(const kind of['unsupported','occupied','unloaded','far']){const at=site(),p=actor(at);h(p,NS+':shaker');if(kind==='unsupported')dim.getBlock({...at,y:at.y-1}).setType('minecraft:air');if(kind==='occupied')dim.getBlock(at).setType('minecraft:stone');if(kind==='unloaded')dim.unloaded.add(`${at.x}_${at.y}_${at.z}`);if(kind==='far')p.location.x+=10;code(()=>placeShaker(p,at),{unsupported:'NEEDS_SOLID_SUPPORT',occupied:'SPACE_NOT_CLEAR',unloaded:'UNLOADED_TARGET',far:'OUT_OF_REACH'}[kind]);assert.equal(count(p,NS+':shaker'),1);dim.unloaded.delete(`${at.x}_${at.y}_${at.z}`);}});
 test('place with store exception restores air and original shaker',()=>{const at=site(),p=actor(at);h(p,NS+':shaker');world.failSet=true;assert.throws(()=>placeShaker(p,at),/INJECTED_SAVE/);assert(dim.getBlock(at).isAir);assert.equal(count(p,NS+':shaker'),1);});

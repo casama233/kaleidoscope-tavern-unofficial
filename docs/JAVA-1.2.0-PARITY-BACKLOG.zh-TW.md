@@ -22,7 +22,7 @@
 | 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks、三種土壤種別、藤架生長／擴散優先序、果實 1–2 級成長、剪刀收穫與骨粉適配 | `WildGrapevine*` 世界生成；冰葡萄 `<0.15`／金葡萄 `>1.0` 的 Java biome base-temperature 80% 加速；藤架 waterlogging 與實機隨機 tick 驗收 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
-| 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
+| 發射器／原版互動 | 基本手動瓶/杯流程；**BottleBlock 被 projectile 命中會直接碎掉、不掉物品，placed empty bottle 與品質 display 均已接入** | `BottleBlockDispenseBehavior`；projectile `mayInteract` 權限細節與 Java destroy-block 粒子仍需引擎等價／實機驗收 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` **15/15模型與該提交全部變更的block/item貼圖均已同步**；來源快照、blob SHA、source-driven geometry regeneration 與CI離線驗證已收束 | `c70eec1` 資產差異已清零；仍剩 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏與各批次標記為 NOT_RUN 的 Minecraft 實機視覺驗收 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
@@ -96,7 +96,24 @@ Barrel Tap carrier resolver 現在先檢查正下方 block：只有目前配方 
 
 deterministic 測試覆蓋：普通非潛行放置、空手取回、Creative 不消耗放置、生存 break 世界掉落＋玻璃聲、metadata 拒絕，以及 placed carrier 經 Tap 30 tick 原地轉為同 facing 的 Q2 `bottle_wine` 並保存 `wine_q2`。
 
-**仍待**：BottleBlock waterlogging、projectile 打碎 placed bottle 的 Java `onProjectileHit` 等價；Tap 的 facing／嚴格 barrel front-layer connection 與其他 TapBehavior；Minecraft／BDS／Realms 實機碰撞、選框、破壞音效與 Tap carrier 時序仍為 **NOT_RUN**。
+**仍待**：BottleBlock waterlogging；projectile 打碎行為已由 Batch 5 補齊核心 block/state 語義，但 Java `mayInteract` 與 destroy-block 粒子仍有引擎差異；Tap 的 facing／嚴格 barrel front-layer connection 與其他 TapBehavior；Minecraft／BDS／Realms 實機碰撞、選框、破壞音效與 Tap carrier 時序仍為 **NOT_RUN**。
+
+
+## 釀酒閉環核對 Batch 5：BottleBlock Projectile Shatter
+
+Java `BottleBlock.onProjectileHit` 在伺服端收到可互動 projectile 命中後會直接移除瓶方塊，使用玻璃方塊的 destroy-block level event；**不走普通玩家 break drops**。DrinkBlock／品質酒瓶繼承這條 BottleBlock 行為，因此被射中時整個 placed bottle 會碎掉，不應把內含品質酒重新掉回玩家。
+
+Bedrock 2.7 stable 已提供 `world.afterEvents.projectileHitBlock` 與 `ProjectileHitBlockAfterEvent.getBlockHit()`；本批在 bottles domain 直接訂閱該事件：
+
+- 命中 `bottle_empty` 時直接設 air，不產生 `empty_bottle` 回收。
+- 命中任一 `bottle_<base>` 品質 display 時，先讀並驗證 BottleStore revision／permutation，移除 block，再把對應 BottleStore state 刪除；不生成任何品質 item。
+- BottleStore state save 失敗時恢復原 block permutation，原 dynamic property 因失敗未提交而保持不變，避免形成「方塊消失但品質資料仍在」的幽靈狀態。
+- 成功碎裂播放一次 `random.glass`；不借用 player protected-break recovery，因此不會被 Survival drop-conversion 邏輯重新生成物品。
+- unrelated block 的 projectile hit 不攔截、不修改。
+
+deterministic 測試覆蓋：混合品質 display projectile shatter 後 block/state 同時消失且零品質掉落；placed empty bottle 零回收；普通 stone 不受影響；注入 BottleStore save failure 時 block/state 均保持原狀。
+
+**明示差異**：Java `Projectile.mayInteract(level,pos)` 會依 projectile owner／世界規則判斷是否可改動方塊，Bedrock stable event 沒有同一個通用 helper，本批不猜測完整權限矩陣；Java destroy-block level event 的玻璃粒子也沒有硬套不精確替代物，目前只保留玻璃破碎聲。Minecraft／BDS／Realms 的箭／雪球／Tavern thrown drink 命中時序與粒子仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

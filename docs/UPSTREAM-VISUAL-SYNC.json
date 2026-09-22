@@ -148,6 +148,23 @@
       "semantic_diff": "White Lady changes from 14 to 13 Java elements. The locked baseline proves the old 14-to-17 mapping; old element 6 / Bedrock cube 9 is explicitly deleted, old elements 7-13 remap to updated elements 6-12, and the runtime becomes 16 cubes. The official block PNG is copied byte-for-byte.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "mojito",
+      "assets": [
+        "mojito"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/mojito/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "008eca38fd3679539971fc9582de6a767099b840",
+      "model_updated_blob": "9ca2831e3542ec95af7530ad0b56f4e0f2b1ee96",
+      "texture_baseline_blob": "db879ba67959610ae87e75b0f4a678ff85a3e546",
+      "texture_updated_blob": "ed3b8944a1624b14a0905c77a46d23b0399e956e",
+      "semantic_diff": "Mojito changes from 15 to 14 Java elements and from 21 to 20 Bedrock cubes. The locked baseline proves both historical rescale:true 45-degree elements. The updated mapping deletes old element 10, remaps old 11->new10, old12->new11, old14->new12, and reuses the old one-cube element13 slot to materialize the new element13 zero-thickness garnish plane, while output order follows updated source indices.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

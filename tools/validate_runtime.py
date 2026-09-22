@@ -192,26 +192,33 @@ def main():
   for alias,target in desc.get('animations',{}).items():check('client_animation_reference:'+ident+':'+alias,target in all_anim)
   for entry in desc.get('scripts',{}).get('animate',[]):
    for alias in ([entry]if isinstance(entry,str)else entry):check('script_animation_alias:'+ident+':'+alias,alias in desc.get('animations',{}))
+ native_render_controllers={'controller.render.item_default'}
  for ident,desc in attachables.items():
   check('attachable_item_exists:'+ident,ident in item_defs)
   check('attachable_item_binding:'+ident,ident in desc.get('item',{}))
   check('attachable_geometry:'+ident,all(g in geom for g in desc.get('geometry',{}).values()))
   check('attachable_texture:'+ident,all(texture_exists(t)for t in desc.get('textures',{}).values()))
-  check('attachable_controller:'+ident,all(c in controllers for c in desc.get('render_controllers',[])))
+  check('attachable_controller:'+ident,all(c in controllers or c in native_render_controllers for c in desc.get('render_controllers',[])))
  for short in ['shaker','shaker_active','shaker_pouring']:
   ident='kaleidoscope_tavern:'+short;c=item_defs[ident]['components']
   check('C4_nonconsumable_single_tool:'+short,c.get('minecraft:max_stack_size')==1 and not any(k in c for k in ['minecraft:food','minecraft:shooter','minecraft:throwable','minecraft:projectile']))
   check('C4_portable_use_registered:'+short,'kaleidoscope_tavern:portable_shaker'in c)
   check('C4_tool_attachable_present:'+short,ident in attachables)
   check('C4_tool_hand_equipped:'+short,c.get('minecraft:hand_equipped') is True)
- held_geo=geom['geometry.kt_runtime.shaker_held'];mount=next(b for b in held_geo['bones'] if b['name']=='hand_mount');render_anchor=next(b for b in held_geo['bones'] if b['name']=='render_anchor')
- check('C4_hand_mount_binding_is_anchor_only',mount.get('binding')=='q.item_slot_to_bone_name(context.item_slot)' and render_anchor.get('parent')=='hand_mount')
+ held_geo=geom['geometry.kt_runtime.shaker_held'];render_anchor=next(b for b in held_geo['bones'] if b['name']=='render_anchor')
+ check('C4_official_direct_slot_binding',render_anchor.get('binding')=='q.item_slot_to_bone_name(context.item_slot)' and not any(b['name']=='hand_mount' for b in held_geo['bones']))
  calibration=load(ROOT/'data/hand-calibration.json');source_hand=load(ROOT/'art/interfaces/shaker-hand-source.json')
  expected_first=[8.96,-8.32,-11.52]
  hold_first=animations['animation.kt_runtime.shaker.hold_first']['bones'];hold_third=animations['animation.kt_runtime.shaker.hold_third']['bones']
- check('C4_first_person_source_translation_wired',hold_first.get('render_anchor')==calibration['first'] and calibration['first']['position']==expected_first and 'hand_mount' not in hold_first)
- check('C4_third_person_transform_off_binding_bone',hold_third.get('render_anchor')==calibration['third'] and 'hand_mount' not in hold_third)
+ check('C4_first_person_source_translation_wired',hold_first.get('render_anchor')==calibration['first'] and calibration['first']['position']==expected_first)
+ check('C4_third_person_source_transform_wired',hold_third.get('render_anchor')==calibration['third'])
  check('C4_documented_attachable_context_predicates',all(any(isinstance(e,dict) and (e.get('hold_first')=='context.is_first_person == 1.0' or e.get('hold_third')=='context.is_first_person == 0.0') for e in attachables[ident].get('scripts',{}).get('animate',[])) for ident in ['kaleidoscope_tavern:shaker','kaleidoscope_tavern:shaker_active','kaleidoscope_tavern:shaker_pouring']))
+ check('C4_official_item_default_controller',all(attachables[ident].get('render_controllers')==['controller.render.item_default'] for ident in ['kaleidoscope_tavern:shaker','kaleidoscope_tavern:shaker_active','kaleidoscope_tavern:shaker_pouring']))
+ active_attach=attachables['kaleidoscope_tavern:shaker_active'];normal_attach=attachables['kaleidoscope_tavern:shaker'];native_ctrl=animation_controllers['controller.animation.kt_runtime.native_shake']
+ check('C4_attachable_owns_java_arm_shake',active_attach.get('animations',{}).get('shake_arms')=='animation.kt_runtime.shaker.arms' and any(isinstance(e,dict) and e.get('shake_arms')=='context.is_first_person == 0.0' for e in active_attach.get('scripts',{}).get('animate',[])) and normal_attach.get('animations',{}).get('shake_arms')=='animation.kt_runtime.shaker.arms' and any(isinstance(e,dict) and e.get('shake_arms')=='context.is_first_person == 0.0' for e in native_ctrl['states']['shaking'].get('animations',[])))
+ immersion_text=(BP/'scripts/bedrock/immersion.js').read_text(encoding='utf-8')
+ check('C4_no_server_player_arm_animation',"player.playAnimation('animation.kt_runtime.shaker.arms'" not in immersion_text and "controller.animation.kt_runtime.shaker_hands" not in immersion_text)
+ check('C4_no_custom_hand_render_controller',not (RP/'render_controllers/runtime_shaker_hand.json').exists())
  for ident in ['animation.kt_runtime.shaker.first','animation.kt_runtime.shaker.table']:
   x=animations[ident];check('C4_nonzero_procedural_period:'+ident,0<x.get('animation_length',0)<1)
  for name,a in animations.items():
@@ -231,7 +238,7 @@ def main():
  lip=next(b for b in geom['geometry.kt_runtime.shaker_held']['bones']if b['name']=='root')
  check('C5_spout_on_source_lip',lip.get('locators',{}).get('kt_spout')==[-3.5,11,0])
  pour=animations['animation.kt_runtime.shaker.pour'];attach=attachables['kaleidoscope_tavern:shaker_pouring']
- check('C5_pour_rotates_visible_model_not_binding_bone','render_anchor' in pour.get('bones',{}) and 'hand_mount' not in pour.get('bones',{}))
+ check('C5_pour_rotates_directly_bound_visible_anchor','render_anchor' in pour.get('bones',{}))
  for time,e in pour.get('particle_effects',{}).items():check('C5_locator_particle:'+time,e.get('locator')in lip['locators'] and e.get('effect')in attach.get('particle_effects',{}) and attach['particle_effects'][e['effect']]in particles)
  check('C5_has_seven_flow_keys',len(pour.get('particle_effects',{}))==7)
  for x in load(ROOT/'docs/C5-SOURCE-AUDIT.json')['files']:check('C5_javap:'+x['file'],sha(ROOT/x['file'])==x['sha256'])

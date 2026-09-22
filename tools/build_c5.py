@@ -36,10 +36,10 @@ def main():
  a['animation.kt_runtime.shaker.pour']['particle_effects']={str(t/20):{'effect':'spout_drop','locator':'kt_spout','bind_to_actor':False}for t in range(3,10)}
  dump(RP/'animations/runtime_shaker.animation.json',anim)
  p=RP/'attachables/shaker.attachable.json';d=load(p);desc=d['minecraft:attachable']['description']
- desc['animations'].update({'native_controller':'controller.animation.kt_runtime.native_shake','shake_first':'animation.kt_runtime.shaker.first'})
+ desc['animations'].update({'native_controller':'controller.animation.kt_runtime.native_shake','shake_first':'animation.kt_runtime.shaker.first','shake_arms':'animation.kt_runtime.shaker.arms'})
  desc['scripts']['animate'].append('native_controller');dump(p,d)
  condition="q.has_tag('kaleidoscope_tavern:holding_shaker') && q.is_item_name_any('slot.weapon.mainhand', 0, 'kaleidoscope_tavern:shaker')"
- dump(RP/'animation_controllers/native_shaker.controller.json',{'format_version':'1.10.0','animation_controllers':{'controller.animation.kt_runtime.native_shake':{'initial_state':'idle','states':{'idle':{'transitions':[{'shaking':condition}]},'shaking':{'animations':[{'shake_first':'c.is_first_person'}],'blend_transition':.06,'transitions':[{'idle':'!('+condition+')'}]}}}}})
+ dump(RP/'animation_controllers/native_shaker.controller.json',{'format_version':'1.10.0','animation_controllers':{'controller.animation.kt_runtime.native_shake':{'initial_state':'idle','states':{'idle':{'transitions':[{'shaking':condition}]},'shaking':{'animations':[{'shake_first':'context.is_first_person == 1.0'},{'shake_arms':'context.is_first_person == 0.0'}],'blend_transition':.06,'transitions':[{'idle':'!('+condition+')'}]}}}}})
  p=RP/'attachables/shaker_pouring.attachable.json';d=load(p);d['minecraft:attachable']['description']['particle_effects']={'spout_drop':N+':held_pour_drop'};dump(p,d)
  drop=load(RP/'particles/runtime_pour_stream.json');desc=drop['particle_effect']['description'];desc['identifier']=N+':held_pour_drop';components=drop['particle_effect']['components']
  components['minecraft:particle_lifetime_expression']={'max_lifetime':.45}

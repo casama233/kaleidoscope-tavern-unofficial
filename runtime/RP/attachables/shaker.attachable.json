@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.20.30",
   "minecraft:attachable": {
     "description": {
       "identifier": "kaleidoscope_tavern:shaker",
@@ -19,7 +19,8 @@
         "hold_first": "animation.kt_runtime.shaker.hold_first",
         "hold_third": "animation.kt_runtime.shaker.hold_third",
         "native_controller": "controller.animation.kt_runtime.native_shake",
-        "shake_first": "animation.kt_runtime.shaker.first"
+        "shake_first": "animation.kt_runtime.shaker.first",
+        "shake_arms": "animation.kt_runtime.shaker.arms"
       },
       "scripts": {
         "animate": [
@@ -33,7 +34,7 @@
         ]
       },
       "render_controllers": [
-        "controller.render.kt_runtime.shaker_hand"
+        "controller.render.item_default"
       ]
     }
   }

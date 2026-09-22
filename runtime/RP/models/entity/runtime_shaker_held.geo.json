@@ -16,15 +16,6 @@
       },
       "bones": [
         {
-          "name": "hand_mount",
-          "pivot": [
-            0,
-            0,
-            0
-          ],
-          "binding": "q.item_slot_to_bone_name(context.item_slot)"
-        },
-        {
           "name": "render_anchor",
           "pivot": [
             0,
@@ -36,7 +27,7 @@
             -180,
             0
           ],
-          "parent": "hand_mount"
+          "binding": "q.item_slot_to_bone_name(context.item_slot)"
         },
         {
           "name": "root",

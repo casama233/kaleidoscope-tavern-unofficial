@@ -24,7 +24,7 @@ function findSlot(p,id){return Array.from({length:p.inventory.size},(_,i)=>i).fi
 function tub(){const b=dim.getBlock(target());b.setType(NS+':pressing_tub');initializeTub(b);return b;}
 function barrel(p){const pos=target();hand(p,NS+':barrel',2);createBarrel(p,pos);return dim.getBlock(pos);}
 function state(b){return TEST_ACCESS.store.load(machineKey(dim.id,b.location));}
-function click(p,b){const e={player:p,block:b,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(e);system.advance();return e;}
+function click(p,b,blockFace='Up'){const e={player:p,block:b,blockFace,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(e);system.advance();return e;}
 function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_bucket');operate(p,b,'use');}}
 function code(fn,want){assert.throws(fn,e=>e.code===want);}
 
@@ -53,8 +53,8 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
  const p=player(),b=barrel(p),t=tub();p.inventory=new Container();hand(p,NS+':grape',32);operate(p,t,'use');hand(p,'minecraft:bucket',16);
  for(let n=0;n<4;n++){for(let i=0;i<8;i++)press(t,p,1);p.selectedSlotIndex=findSlot(p,'minecraft:bucket');operate(p,t,'use');p.selectedSlotIndex=findSlot(p,NS+':grape_bucket');operate(p,b,'use');}
  assert.equal(count(p,'minecraft:bucket'),16);assert.equal(state(t).slots[0],null);assert.equal(state(t).amount,0);assert.equal(state(b).amount,4000);
- // Sneak empty hand closes; ordinary player never sees storage metadata items.
- p.selectedSlotIndex=3;p.isSneaking=true;click(p,b);assert.equal(state(b).open,false);tickBarrel(b);assert.equal(state(b).batch.quality,1);
+ // Java BarrelBlock: with lid open, empty-hand use on another top-layer board closes it.
+ p.selectedSlotIndex=3;p.isSneaking=false;const topSide=dim.getBlock({x:b.location.x+1,y:b.location.y+2,z:b.location.z});click(p,topSide);assert.equal(state(b).open,false);tickBarrel(b);assert.equal(state(b).batch.quality,1);
  for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
  const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');assert.equal(findTapCore(tap),b);
  p.isSneaking=false;hand(p,NS+':empty_bottle',16);for(let i=0;i<16;i++)click(p,tap);assert.equal(count(p,NS+':wine_q2'),16);assert.equal(count(p,NS+':empty_bottle'),0);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);

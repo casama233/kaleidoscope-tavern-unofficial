@@ -5,6 +5,8 @@ import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {javaSecondaryBypass} from '../core/java-use-order.js';
+import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 const locks=new Locks(),AGE=NS+':age',SHAPE=NS+':shape',WAX=NS+':waxed';
 export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS)]);
 const key=b=>`${b.dimension.id}/${b.location.x}_${b.location.y}_${b.location.z}`;
@@ -116,24 +118,34 @@ export function registerCultivation({blockComponentRegistry:r}){
   onRandomTick:e=>safe(undefined,()=>grow(e.block)),onTick:e=>safe(undefined,()=>maintain(e.block))
  });
 }
+function farmBlockConsumes(block,itemId){
+ if(block.typeId===BARE){
+  if(itemId===NS+':grapevine')return shape(block)==='single';
+  if(itemId==='minecraft:honeycomb')return !waxed(block);
+  if(itemId?.endsWith('_axe'))return waxed(block);
+ }
+ if(itemId==='minecraft:shears')return !!VINES[block.typeId]||(!!CROPS[block.typeId]&&age(block)===5);
+ return false;
+}
 export function installCultivation(openBook){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;
-  if(!FARM_IDS.has(e.block.typeId))return;
-  // Let the engine place a new frame against an existing frame; onPlace updates connections.
-  if(hand(e.player)?.typeId===BARE&&isFrame(e.block.typeId))return;
+  if(e.cancel||!FARM_IDS.has(e.block.typeId))return;
+  const hs=handSnapshot(e.player);if(javaSecondaryBypass(e.player,hs.id)||!farmBlockConsumes(e.block,hs.id))return;
   e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,p={...e.block.location},sig=current(e.block),hs=handSnapshot(e.player);
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);
-   
+  const d=e.block.dimension,p={...e.block.location},sig=current(e.block);
+  system.run(()=>safe(e.player,()=>{
+   check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);
    return farmUse(e.player,b);
   }));
  });
+ registerJavaItemUseOnRoute({
+  id:'cultivation-bone-meal',matches:id=>id==='minecraft:bone_meal',
+  plan:({block})=>FARM_IDS.has(block.typeId)?{}:undefined,
+  execute:({player,block})=>farmUse(player,block)
+ });
  registerProtectedBreakRoute({
-  id:'cultivation',
-  isBlock:block=>FARM_IDS.has(block?.typeId),
-  capture:({block})=>current(block),
-  verify:({block,snapshot})=>check(current(block)===snapshot,'BLOCK_CHANGED'),
+  id:'cultivation',isBlock:block=>FARM_IDS.has(block?.typeId),
+  capture:({block})=>current(block),verify:({block,snapshot})=>check(current(block)===snapshot,'BLOCK_CHANGED'),
   recover:({player,block})=>farmBreak(player,block)
  });
 }

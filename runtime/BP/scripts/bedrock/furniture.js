@@ -4,15 +4,15 @@ import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {isBottleSupport} from '../core/bottle-support.js';
 import {makeStack,hand,canWrite,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {javaSecondaryBypass} from '../core/java-use-order.js';
+import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
 function optional(fn){try{return fn();}catch(e){error(e);}}
 function center(p){return {x:p.x+.5,y:p.y,z:p.z+.5};}
-function permittedSupport(b){return b&&isBottleSupport(b.typeId,b.getTags?.()??[]);}
 function isNear(player,d,p){check(player.dimension.id===d.id,'DIMENSION_CHANGED');check(Math.hypot(player.location.x-p.x-.5,player.location.y-p.y,player.location.z-p.z-.5)<=6,'OUT_OF_REACH');}
 function nativeRide(e){const r=e.getComponent('minecraft:rideable');check(r,'SEAT_COMPONENT_MISSING');return r;}
 function seated(f){return f&&(['stool','sofa'].includes(f.kind));}
@@ -60,10 +60,6 @@ export function placeFurniture(player,target,{face='Up'}={}){
  const p={...target},key=anchorKey(d.id,p);let placed;
  locks.with([key,player.id],()=>{
   const b=blockAt(d,p);check(b,'UNLOADED_TARGET');check(b.isAir,'SPACE_NOT_CLEAR');
-  if(seated(f)){
-   check(permittedSupport(blockAt(d,plus(p,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
-   const above=blockAt(d,plus(p,{x:0,y:1,z:0}));check(above,'UNLOADED_CLEARANCE');check(above.isAir,'SEAT_HEADROOM');
-  }
   if(f.kind==='pendant_lamp'){
    const lower=blockAt(d,plus(p,{x:0,y:-1,z:0}));check(lower,'UNLOADED_CLEARANCE');check(lower.isAir,'PENDANT_LOWER_BLOCKED');const facing=facingForYaw(player.getRotation().y);
    exchangeBlocks(player,1,[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),{[FACING]:facing,[HALF]:DOUBLE_HALF.UPPER})},{block:lower,permutation:BlockPermutation.resolve(blockId(f),{[FACING]:facing,[HALF]:DOUBLE_HALF.LOWER})}]);placed=b;furnitureDiagnostics.placed++;return;
@@ -82,11 +78,9 @@ export function placeFurniture(player,target,{face='Up'}={}){
  optional(()=>d.playSound('dig.wood',center(p),{volume:.65,pitch:1}));return placed;
 }
 export function sitOnFurniture(player,block){
- canWrite(player);isNear(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');check(!player.isSneaking,'SNEAK_TO_RECOVER');
+ canWrite(player);isNear(player,block.dimension,block.location);
  const f=furnitureBlock(block.typeId);check(seated(f),'NOT_SEAT');
  check(!player.getComponent('minecraft:riding')?.entityRidingOn,'ALREADY_RIDING');
- const upper=blockAt(block.dimension,plus(block.location,{x:0,y:1,z:0}));check(upper,'UNLOADED_CLEARANCE');check(upper.isAir,'SEAT_HEADROOM');
- check(permittedSupport(blockAt(block.dimension,plus(block.location,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
  const e=ensureSeat(block),key=anchorKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{const ride=nativeRide(e);check(ride.getRiders().length===0,'SEAT_OCCUPIED');check(ride.addRider(player),'SEAT_REJECTED');furnitureDiagnostics.seated++;return e;});
 }
@@ -121,9 +115,34 @@ export function tickFurniture(){const list=[...helpers.values()];if(!list.length
 export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id),placing=!!heldFurniture;if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=placing?plus(p,faceOffset(face)):p;
-  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if(placing)return placeFurniture(e.player,target,{face});if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 手持家具直接放置；空手坐下；潛行空手收回；彩燈使用染料。');}));
+  if(e.cancel)return;const existing=furnitureBlock(e.block.typeId);if(!existing)return;
+  const hs=handSnapshot(e.player);if(javaSecondaryBypass(e.player,hs.id))return;
+  const faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
+  let consume=false;
+  if(seated(existing)){
+   const seats=atAnchor(e.block.dimension,e.block.location),occupied=seats.some(x=>nativeRide(x).getRiders().length>0);
+   consume=!occupied;
+  }else if(existing.kind==='light'){
+   const color=dyeColor(hs.id);consume=!!color&&color!==existing.color;
+  }else if(existing.kind==='glassware_holder'){
+   const slot=glasswareHolderSlot(faceLocation),occupied=e.block.permutation.getState(GLASSWARE_SLOTS[slot])===1;
+   consume=hs.id===EMPTY_GLASSWARE||(!hs.id&&occupied);
+  }
+  if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;
+  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING);
+  system.run(()=>safe(e.player,()=>{
+   isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);
+   check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');
+   if(seated(existing))return sitOnFurniture(e.player,b);
+   if(existing.kind==='light')return recolorLight(e.player,b);
+   return useGlasswareHolder(e.player,b,faceLocation);
+  }));
+ });
+ registerJavaItemUseOnRoute({
+  id:'furniture-block-items',
+  matches:id=>!!furnitureItem(id),
+  plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
+  execute:({player,plan})=>placeFurniture(player,plan.target,{face:plan.face})
  });
  registerProtectedBreakRoute({
   id:'furniture',

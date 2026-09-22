@@ -39,16 +39,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       'Q1 也能飲用，但低品質酒可能帶來負面效果。'
     ]},
     {id:'kaleidoscope_tavern:guide_bottle_display',category:'brewing',icon:'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[],mechanics:[
-      '潛行手持酒瓶對可支撐的方塊面使用即可擺酒；位置依實際點擊面決定。',
+      '品質酒瓶遵循原作 DrinkBlockItem：同種已擺酒先嘗試疊放；否則潛行使用才按點擊面放置，非潛行維持飲用。',
       '同種酒可疊放且每瓶保留自己的 Q1–Q6 品質；空手取回最後一瓶，破壞則取回整組。'
     ]},
     {id:'kaleidoscope_tavern:guide_shaker',category:'mixology',icon:'textures/kaleidoscope_tavern_jar/item/shaker',kinds:[],mechanics:[
-      '雪克杯放入三份材料；酒館基酒需 Q4 或以上。投入酒瓶後會返還空瓶。',
-      '完成投料後按住使用並在合適時間鬆手；不同時機會得到固定配方、特調或神秘雞尾酒。'
+      '雪克杯遵循原作 BlockItem：可直接按點擊面放置；空手點已放雪克杯會把其材料／成品完整拿回。酒館基酒需 Q4 或以上。',
+      '手持雪克杯完成投料後按住使用並在合適時間鬆手；有成品的雪克杯對已放置空杯使用會直接倒入。'
     ]},
     {id:'kaleidoscope_tavern:guide_cocktails',category:'mixology',icon:'textures/kaleidoscope_tavern_jar/item/mojito',kinds:[],mechanics:[
       '固定雞尾酒由三槽顏色／材料組合決定；89–98 tick 是固定配方判定窗口。',
-      '特調會保存三份原料的品質與效果資料；空雞尾酒杯可接取成品，也能先擺杯再倒入。'
+      '特調會保存三份原料的品質與效果資料；空酒杯是普通 BlockItem 可直接放置，裝有雞尾酒的杯子則非潛行飲用、潛行放置。'
     ]},
     {id:'kaleidoscope_tavern:guide_quality_effects',category:'mixology',icon:'textures/kaleidoscope_tavern_jar/item/wine',kinds:[],mechanics:[
       '品質酒的效果按 Q1–Q6 分級；效果時長、強度與機率以原作資料為準。',
@@ -56,11 +56,11 @@ export const COOKERY_GUIDE_PAYLOAD={
     ]},
     {id:'kaleidoscope_tavern:guide_racks',category:'tavern',icon:'textures/kaleidoscope_tavern_jar/item/holder',kinds:[],mechanics:[
       'Holder、斜置酒架、環形酒架、吧台酒櫃與窖藏酒櫃都能保存原本的精確酒瓶品質。',
-      '不同設備有不同槽位與可接受瓶型；手持酒架／酒櫃可直接放置，空手點對應位置取回，潛行空手可回收設備。'
+      '交互順序跟隨 Java：非潛行先讓酒架／酒櫃處理槽位；只有方塊回傳 PASS 才繼續手持 BlockItem 放置。潛行且手持物品時會略過方塊互動，直接嘗試放置。'
     ]},
     {id:'kaleidoscope_tavern:guide_furniture',category:'tavern',icon:'textures/kt_runtime/icons/blue_bar_stool',kinds:[],mechanics:[
       '沙發、桌子與吧台會依相鄰方塊自動連接；高腳凳可空手坐下，潛行離座。',
-      '手持家具直接使用即可放置，不需要潛行；潛行空手用於回收。有人乘坐或背包無法安全回收時，不會強制拆除。'
+      '家具遵循 Java BlockItem 順序：普通方塊面可直接放置；點到可互動家具時先執行家具互動，潛行且手持物品才略過該互動並嘗試貼面放置。回收設備使用正常破壞流程。'
     ]},
     {id:'kaleidoscope_tavern:guide_lighting',category:'tavern',icon:'textures/kt_runtime/icons/string_lights_colorless',kinds:[],mechanics:[
       '彩燈有無色與 16 種染色款，可用染料更換外觀；同色不重複消耗染料。',

@@ -9,10 +9,12 @@ import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,addResolvedInput,removeInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore,timingBand} from '../core/mixology.js';
 import {COCKTAILS} from '../data/mixology.js';
-import {isBottleSupport} from '../core/bottle-support.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {faceOffset} from '../core/furniture.js';
+import {javaSecondaryBypass} from '../core/java-use-order.js';
+import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {SHAKER_ITEMS,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable,POUR_TICKS,AUTO_STOP_TICKS,shakeHint} from '../core/immersion.js';
 import {syncShakerVisual,shakerPut,feedback,handStart,handStop,shakeAudio,finished,pourVisual,installImmersionCleanup} from './immersion.js';
 const SHAKER=NS+':shaker',STATION=NS+':shaker_station',FACING=NS+':facing',HELPER=NS+':signature_cup_visual',ANCHOR=NS+':cup_anchor';
@@ -26,7 +28,6 @@ function log(e){mixologyDiagnostics.errors.push(e.code??String(e));if(mixologyDi
 export function setMixologyRegistry(r){registry=r;}
 function facing(p){return Math.floor((((p.getRotation?.().y??0)+225)%360+360)%360/90);}
 function near(p,b){check(p.isValid!==false&&p.dimension.id===b.dimension.id,'DIMENSION_CHANGED');canWrite(p);check(Math.hypot(p.location.x-b.location.x-.5,p.location.y-b.location.y-.5,p.location.z-b.location.z-.5)<=6,'OUT_OF_REACH');}
-function support(b){const s=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(s&&isBottleSupport(s.typeId,s.getTags?.()??[]),'NEEDS_SOLID_SUPPORT');}
 function perm(short,f=0){return BlockPermutation.resolve(NS+':'+short,{[FACING]:f});}
 function checkStation(b){check(b?.typeId===STATION,'NOT_SHAKER');}
 function getShaker(b){checkStation(b);const s=shakerStore.load(shakerKey(b.dimension.id,b.location));check(s,'MISSING_SHAKER_STATE');return s;}
@@ -45,6 +46,16 @@ function knownItemCheck(stack){
  }
  check(isPlainIngredient(stack,makeStack),'METADATA_ITEM_REJECTED');return undefined;
 }
+function shakerAcceptsHeld(block,item){
+ if(!item||!registry)return false;
+ try{
+  const state=getShaker(block);if(state.result||state.slots.length>=3)return false;
+  const resolved=knownItemCheck(item);
+  if(POTION_ITEMS.has(item.typeId))addResolvedInput(state,resolved);else addInput(state,item.typeId,registry);
+  return true;
+ }catch{return false;}
+}
+
 export function resultStack(result){
  itemExists(result.item);const item=makeStack(result.item,1);
  if(result.item===SIGNATURE){validatePayload(result.payload);item.setDynamicProperty(SIGNATURE_DATA,JSON.stringify(result.payload));}
@@ -57,7 +68,7 @@ function transact(p,store,k,old,next,take,outputs,block,permutation){
  return next;
 }
 export function placeShaker(player,location){
- const b=blockAt(player.dimension,location);check(b,'UNLOADED_TARGET');near(player,b);support(b);const k=shakerKey(b.dimension.id,location);
+ const b=blockAt(player.dimension,location);check(b,'UNLOADED_TARGET');near(player,b);const k=shakerKey(b.dimension.id,location);
  return locks.with([k,player.id],()=>{const h=hand(player);check(h?.typeId===SHAKER,'NEED_SHAKER');knownItemCheck(h);check(b.isAir&&!shakerStore.load(k),'SPACE_NOT_CLEAR');noHandSession(player);const carried=readPortableItem(h);const next=transact(player,shakerStore,k,undefined,carried.state,1,[],b,perm('shaker_station',facing(player)));syncShakerVisual(b);return next;});
 }
 export function pourIngredient(player,b,{expectedRevision}={}){
@@ -103,7 +114,7 @@ export function serveInHand(player,b,{expectedRevision}={}){
   const stack=resultStack(tx.result);const result=transact(player,shakerStore,k,old,tx.state,1,[{stack,count:1}],b);feedback(b,'fill',tx.state.revision);return result;});
 }
 export function placeCup(player,location){
- const b=blockAt(player.dimension,location);check(b,'UNLOADED_TARGET');near(player,b);support(b);const k=cupKey(b.dimension.id,location);
+ const b=blockAt(player.dimension,location);check(b,'UNLOADED_TARGET');near(player,b);const k=cupKey(b.dimension.id,location);
  return locks.with([k,player.id],()=>{const h=hand(player);check(isCupItem(h?.typeId),'NOT_CUP');const payload=knownItemCheck(h);check(b.isAir&&!cupStore.load(k),'SPACE_NOT_CLEAR');const next={schema:1,revision:0,item:h.typeId,facing:facing(player)};if(payload)next.payload=clone(payload);validateCup(next);
   transact(player,cupStore,k,undefined,next,1,[],b,perm('cup_'+h.typeId.split(':')[1],next.facing));syncCupVisual(b);return next;});
 }
@@ -112,7 +123,19 @@ export function takeCup(player,b,{expectedRevision}={}){
  near(player,b);const k=cupKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{check(!cupReservations.has(k),'CUP_BUSY');const s=cupStore.load(k);check(s&&intactCup(b,s),'CUP_MISMATCH');if(expectedRevision!==undefined)check(s.revision===expectedRevision,'STATE_CONFLICT');const stack=resultStack(s);
   transact(player,cupStore,k,s,undefined,0,[{stack,count:1}],b,BlockPermutation.resolve('minecraft:air'));cleanupCupVisual(b);return s;});
+}export function pourHeldShakerNow(player,cup){
+ near(player,cup);noHandSession(player);const ck=cupKey(cup.dimension.id,cup.location);
+ return locks.with([ck,player.id],()=>{
+  const item=hand(player);check(item?.typeId===SHAKER,'NEED_SHAKER');const envelope=readPortableItem(item),tx=serveShaker(envelope.state);
+  check(tx.result.carrier===EMPTY_CUP&&isCupItem(tx.result.item),'EXTERNAL_OUTPUT_USE_TABLE_HAND');itemExists(tx.result.item);
+  const oldCup=cupStore.load(ck);check(oldCup&&intactCup(cup,oldCup)&&oldCup.item===EMPTY_CUP,'NEED_PLACED_EMPTY_GLASS');
+  const next={schema:1,revision:oldCup.revision+1,item:tx.result.item,facing:oldCup.facing};if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
+  const container=inventory(player),plan=planInventory(container,player.selectedSlotIndex,1,[{stack:portableStack(tx.state,envelope.token),count:1}],makeStack),raw=cupStore.raw(ck),oldPermutation=cup.permutation;
+  commitInventory(plan,container,()=>{cup.setPermutation(perm('cup_'+next.item.split(':')[1],next.facing));cupStore.save(ck,next,oldCup.revision);},()=>{cup.setPermutation(oldPermutation);cupStore.restore(ck,raw);});
+  syncCupVisual(cup);feedback(cup,'fill',next.revision);return next;
+ });
 }
+
 export function pourIntoPlacedCup(player,cup,shaker){
  near(player,cup);near(player,shaker);check(Math.abs(cup.location.x-shaker.location.x)+Math.abs(cup.location.z-shaker.location.z)===1&&cup.location.y===shaker.location.y,'CUP_NOT_ADJACENT');
  const ck=cupKey(cup.dimension.id,cup.location),sk=shakerKey(shaker.dimension.id,shaker.location);
@@ -153,33 +176,53 @@ function snapshotItem(player){const h=hand(player);return {basic:handSnapshot(pl
 function verifyItem(player,s){sameHand(player,s.basic);if(s.potion!==undefined)check(canonical(potionIdentity(hand(player)))===s.potion,'STALE_POTION');if(s.data!==undefined){const item=hand(player);check(item?.getDynamicProperty(item?.typeId===SIGNATURE?SIGNATURE_DATA:PORTABLE_DATA)===s.data,'STALE_HAND');}}
 export function installMixologyEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;const blockId=e.block.typeId,h=snapshotItem(e.player),held=h.basic.id;
-  const onMachine=blockId===STATION,onCup=MIX_BLOCKS.has(blockId)&&!onMachine,newPlace=!onMachine&&!onCup&&e.player.isSneaking&&(held===SHAKER||isCupItem(held));
-  if(!onMachine&&!onCup&&!newPlace)return;e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,at={...e.block.location},clickedTick=system.currentTick,sneak=e.player.isSneaking,clickedFace=e.blockFace;
-  let oldRevision;try{oldRevision=onMachine?shakerStore.load(shakerKey(d.id,at))?.revision:onCup?cupStore.load(cupKey(d.id,at))?.revision:undefined;}catch{return;}
-  if(newPlace&&e.blockFace!=='Up'){system.run(()=>tell(e.player,'§e請潛行點擊完整支撐方塊上面。'));return;}
+  if(e.cancel)return;const blockId=e.block.typeId,onMachine=blockId===STATION,onCup=MIX_BLOCKS.has(blockId)&&!onMachine;
+  if(!onMachine&&!onCup)return;
+  const h=snapshotItem(e.player),held=h.basic.id;if(javaSecondaryBypass(e.player,held))return;
+  const d=e.block.dimension,at={...e.block.location},clickedTick=system.currentTick,clickedFace=e.blockFace;
+  let revision;try{revision=onMachine?shakerStore.load(shakerKey(d.id,at))?.revision:cupStore.load(cupKey(d.id,at))?.revision;}catch{return;}
+  if(onCup){
+   if(held)return; // GlasswareBlock.use PASSes with an item; item useOn gets the next chance.
+   e.cancel=true;if(e.isFirstEvent===false)return;
+   system.run(()=>safe(e.player,()=>{
+    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');verifyItem(e.player,h);const b=blockAt(d,at);check(b?.typeId===blockId,'BLOCK_CHANGED');
+    return takeCup(e.player,b,{expectedRevision:revision});
+   }));return;
+  }
+  if(held){
+   if(!shakerAcceptsHeld(e.block,hand(e.player)))return; // ShakerBlock.use PASSes unsupported held items.
+   e.cancel=true;if(e.isFirstEvent===false)return;
+   system.run(()=>safe(e.player,()=>{
+    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');verifyItem(e.player,h);const b=blockAt(d,at);check(b?.typeId===STATION,'BLOCK_CHANGED');
+    return pourIngredient(e.player,b,{expectedRevision:revision});
+   }));return;
+  }
+  // Java ShakerBlock.use: empty hand always takes the placed shaker with its full stored state.
+  e.cancel=true;if(e.isFirstEvent===false)return;
   system.run(()=>safe(e.player,()=>{
-   check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');verifyItem(e.player,h);const b=blockAt(d,at);check(b?.typeId===blockId,'BLOCK_CHANGED');near(e.player,b);
-   
-   if(newPlace){noHandSession(e.player);const target=plus(at,{x:0,y:1,z:0});return held===SHAKER?placeShaker(e.player,target):placeCup(e.player,target);}
-   if(onMachine){noHandSession(e.player);const s=getShaker(b);check(s.revision===oldRevision,'STATE_CONFLICT');const k=shakerKey(d.id,at);
-    if(sessions.has(k)){check(!held,'EMPTY_HAND_REQUIRED');return stopShake(e.player,b,{tick:clickedTick});}
-    if(!held&&sneak){if(!s.result&&s.slots.length&&!s.slots.at(-1).container&&clickedFace&&clickedFace!=='Up')return unpourIngredient(e.player,b,{expectedRevision:oldRevision});return pickupShaker(e.player,b,{expectedRevision:oldRevision});}
-    if(s.result)return serveInHand(e.player,b,{expectedRevision:oldRevision});
-    if(!held){if(s.slots.length===3)return startShake(e.player,b,{expectedRevision:oldRevision,tick:clickedTick});tell(e.player,`§e${s.slots.length}/3 · 倒入Q4或以上基酒`);return;}
-    if(s.slots.length&&held===s.slots.at(-1).container)return unpourIngredient(e.player,b,{expectedRevision:oldRevision});
-    return pourIngredient(e.player,b,{expectedRevision:oldRevision});
-   }
-   const c=cupStore.load(cupKey(d.id,at));check(c?.revision===oldRevision,'STATE_CONFLICT');
-   if(SHAKER_ITEMS.has(held))return beginHeldPour(e.player,b);
-   noHandSession(e.player);
-   if(!held&&!sneak&&c.item===EMPTY_CUP){
-    const ready=NEIGHBORS.map(o=>blockAt(d,plus(at,o))).filter(x=>x?.typeId===STATION).filter(x=>getShaker(x).result);
-    check(ready.length<=1,'AMBIGUOUS_ADJACENT_SHAKERS');if(ready.length===1)return pourIntoPlacedCup(e.player,b,ready[0]);
-   }
-   check(!held,'EMPTY_HAND_REQUIRED');return takeCup(e.player,b,{expectedRevision:oldRevision});
+   check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');verifyItem(e.player,h);const b=blockAt(d,at);check(b?.typeId===STATION,'BLOCK_CHANGED');
+   return pickupShaker(e.player,b,{expectedRevision:revision});
   }));
+ });
+ registerJavaItemUseOnRoute({
+  id:'shaker-block-item',matches:id=>id===SHAKER,
+  plan:({player,block,face})=>{
+   if(block.typeId===NS+':cup_empty_glassware'){
+    try{if(readPortableItem(hand(player)).state.result)return {kind:'pour'};}catch{}
+   }
+   return {kind:'place',target:plus(block.location,faceOffset(face))};
+  },
+  execute:({player,block,plan})=>plan.kind==='pour'?pourHeldShakerNow(player,block):placeShaker(player,plan.target)
+ });
+ registerJavaItemUseOnRoute({
+  id:'empty-glassware-block-item',matches:id=>id===EMPTY_CUP,
+  plan:({block,face})=>({target:plus(block.location,faceOffset(face))}),
+  execute:({player,plan})=>placeCup(player,plan.target)
+ });
+ registerJavaItemUseOnRoute({
+  id:'cocktail-block-items',matches:id=>isCupItem(id)&&id!==EMPTY_CUP,
+  plan:({player,block,face})=>player.isSneaking?{target:plus(block.location,faceOffset(face))}:undefined,
+  execute:({player,plan})=>placeCup(player,plan.target)
  });
  registerProtectedBreakRoute({
   id:'mixology',
@@ -191,9 +234,7 @@ export function installMixologyEvents(){
   const entity=e.entity;if(entity.typeId!==HELPER)return;
   system.run(()=>{try{const k=entity.getDynamicProperty(ANCHOR),m=/^kt:cup\/([a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(k??'');if(!m){entity.remove();return;}const b=blockAt(entity.dimension,{x:+m[2],y:+m[3],z:+m[4]});if(!b)return;if(entity.dimension.id!=='minecraft:'+m[1]||!MIX_BLOCKS.has(b.typeId)){entity.remove();return;}syncCupVisual(b);}catch(err){log(err);}});
  });
- world.afterEvents.entityDie.subscribe(e=>{
-  try{const owner=e.deadEntity.id;for(const[k,session]of sessions)if(session.playerId===owner){sessions.delete(k);mixologyDiagnostics.cancelled++;const b=blockAt(session.dimension,session.location);if(b)syncShakerVisual(b,true,false);}}catch(err){log(err);}
- });
+ world.afterEvents.entityDie.subscribe(e=>{try{const owner=e.deadEntity.id;for(const[k,session]of sessions)if(session.playerId===owner){sessions.delete(k);mixologyDiagnostics.cancelled++;const b=blockAt(session.dimension,session.location);if(b)syncShakerVisual(b,true,false);}}catch(err){log(err);}});
  installNativeUseEvents();installImmersionCleanup();system.runInterval(tickShakers,1);system.runInterval(tickHeldShakers,1);
  world.afterEvents.playerLeave?.subscribe(e=>cancelHeldShake(e.playerId,'PLAYER_LEFT'));
  world.afterEvents.entityDie.subscribe(e=>cancelHeldShake(e.deadEntity.id,'PLAYER_DIED'));

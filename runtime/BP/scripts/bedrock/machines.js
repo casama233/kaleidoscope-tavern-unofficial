@@ -9,12 +9,12 @@ import {check} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
-const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face';
+const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',BOTTLE_FACING=NS+':facing';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
 const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
 const warningTimes=new Map();
-export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_ITEM_ENTITY_CARRIER; placed carrier pending'}};
+export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_PLACED_AND_ITEM_ENTITY_CARRIER'}};
 function warn(error,key='global'){
  const code=error.code??String(error);diagnostics.errors.push({tick:system.currentTick,key,code});if(diagnostics.errors.length>12)diagnostics.errors.shift();
  if((warningTimes.get(key)??-1000)+100<=system.currentTick){console.warn(`[Tavern] ${key}: ${code}`);warningTimes.set(key,system.currentTick);}
@@ -121,6 +121,11 @@ function tapCarrierEntity(tap,carrierId){
  }
  return undefined;
 }
+function tapCarrier(tap,carrierId){
+ const below=blockAt(tap.dimension,tapBelow(tap));
+ if(carrierId===NS+':empty_bottle'&&below?.typeId===PLACED_EMPTY)return {kind:'block',block:below,facing:below.permutation.getState(BOTTLE_FACING)??0};
+ const entity=tapCarrierEntity(tap,carrierId);return entity?{kind:'entity',entity,facing:0}:undefined;
+}
 function tapSound(block,open){try{block.dimension.playSound(open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}catch{}}
 function tapParticle(block,empty=false){try{block.dimension.spawnParticle(empty?'minecraft:basic_smoke_particle':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});}catch{}}
 function cancelTapSession(block,manual=false){
@@ -134,16 +139,16 @@ function scheduleTapParticles(block,key,empty){
 function tapCanExtract(core,tap,player){
  try{
   const state=store.load(keyFor(core));if(!state?.batch){if(player)tell(player,'§e'+CN.TAP_NO_PRODUCT);return false;}
-  const carrier=state.batch.carrier;if(!tapCarrierEntity(tap,carrier)){if(player)tell(player,'§e'+CN.TAP_NEEDS_CARRIER);return false;}
+  const carrier=state.batch.carrier;if(!tapCarrier(tap,carrier)){if(player)tell(player,'§e'+CN.TAP_NEEDS_CARRIER);return false;}
   return true;
  }catch(e){if(player)warn(e,player.id);return false;}
 }
-function createTapOutput(tap,itemId){
+function createTapOutput(tap,itemId,facing=0){
  check(ItemTypes.get(itemId),'UNKNOWN_ITEM');const belowPos=tapBelow(tap),below=blockAt(tap.dimension,belowPos);check(below,'CORE_UNAVAILABLE');
  const parsed=parseBottle(itemId);
  if(below.isAir&&parsed){
   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
-  const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,0);
+  const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
   try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:0}));bottleStore.save(key,state,-1);}
   catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
   return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
@@ -151,8 +156,13 @@ function createTapOutput(tap,itemId){
  const drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});
  return ()=>{try{drop.remove();}catch{}};
 }
-function consumeTapCarrier(tap,entity,carrierId){
- const comp=entity?.getComponent?.('minecraft:item'),stack=comp?.itemStack;check(stack?.typeId===carrierId&&stack.amount>0,'TAP_CARRIER_CHANGED');
+function consumeTapCarrier(tap,carrier,carrierId){
+ if(carrier?.kind==='block'){
+  const block=carrier.block;check(carrierId===NS+':empty_bottle'&&block?.typeId===PLACED_EMPTY,'TAP_CARRIER_CHANGED');const old=block.permutation;
+  block.setType('minecraft:air');
+  return ()=>{diagnostics.tap.carrierRollbacks++;try{block.setPermutation(old);}catch(err){warn(err,'tap-carrier-rollback');}};
+ }
+ const entity=carrier?.entity,comp=entity?.getComponent?.('minecraft:item'),stack=comp?.itemStack;check(stack?.typeId===carrierId&&stack.amount>0,'TAP_CARRIER_CHANGED');
  const original=stack.clone(),at={...entity.location};let remainder;
  try{
   if(original.amount>1){const rest=original.clone();rest.amount--;remainder=tap.dimension.spawnItem(rest,at);}
@@ -165,14 +175,15 @@ export function finishTapExtraction(tap,expectedCoreLocation){
  const key=keyFor(core);
  return locks.with([key,tapKey(tap)],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
-  const carrierId=state.batch.carrier,carrier=tapCarrierEntity(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
+  const carrierId=state.batch.carrier,carrier=tapCarrier(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
   const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
-  const raw=store.raw(key),undoOutput=createTapOutput(tap,tx.give[0].id);let undoCarrier;
+  const raw=store.raw(key);let undoCarrier,undoOutput;
   try{
    undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
+   undoOutput=createTapOutput(tap,tx.give[0].id,carrier.facing??0);
    store.save(key,tx.state,state.revision);
   }catch(e){
-   try{undoCarrier?.();}catch{}try{undoOutput();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
+   try{undoOutput?.();}catch{}try{undoCarrier?.();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
   }
   safeVisuals(core,tx.state);try{tap.dimension.playSound('random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});}catch{}diagnostics.tap.extracted++;return tx;
  });

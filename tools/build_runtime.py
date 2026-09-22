@@ -229,6 +229,8 @@ def main():
  proxy={'minecraft:geometry':{'identifier':'geometry.kt_runtime.invisible'},'minecraft:material_instances':{'*':{'texture':'kt_assets_a1_pressing_tub','render_method':'alpha_test'}},'minecraft:collision_box':True,'minecraft:selection_box':True}
  c=copy.deepcopy(proxy);c.update({'minecraft:tick':{'interval_range':[97,97],'looping':True},NS+':barrel_core':{}});block('barrel_core',c)
  c=copy.deepcopy(proxy);c[NS+':barrel_part']={};block('barrel_part',c,{NS+':dx':[-1,0,1],NS+':dy':[0,1,2],NS+':dz':[-1,0,1]})
+ for name in ['barrel_core','barrel_part']:
+  p=BP/'blocks'/f'{name}.json';d=json.loads(p.read_text());d['minecraft:block']['description']['traits']={'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}};dump(p,d)
  # Copy and rename visual entity definitions; geometry and images themselves are unchanged.
  runtime_entities=[]
  def rename_entity(src,short):

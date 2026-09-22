@@ -60,8 +60,9 @@ test('shared break/drop/sound adapter owns one global break and explosion listen
  assert.equal(new Set(BREAK_ROUTE_TEST.routes.map(route=>route.id)).size,10);
 });
 test('Java item-use-on stage has one non-overlapping route per Tavern placement family',()=>{
- assert.equal(JAVA_PLACEMENT_TEST.routes.length,11);
- assert.equal(new Set(JAVA_PLACEMENT_TEST.routes.map(route=>route.id)).size,11);
+ assert.equal(JAVA_PLACEMENT_TEST.routes.length,12);
+ assert.equal(new Set(JAVA_PLACEMENT_TEST.routes.map(route=>route.id)).size,12);
+ assert(JAVA_PLACEMENT_TEST.routes.some(route=>route.id==='empty-bottle-block-item'));
 });
 test('all current Tavern block resources have exactly one protected break route, no native loot, and an explicit source-like sound material',()=>{
  const dir=new URL('../runtime/BP/blocks/',import.meta.url),issues=[];

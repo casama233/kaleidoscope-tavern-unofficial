@@ -27,8 +27,9 @@ def semantic_check(plan_path, model):
         raise AssertionError(f"{model['id']}: non-particle texture reference changed")
 
     entries=model.get('element_map',[])
+    added=model.get('added_elements',[])
     source_map={entry.get('element'):entry for entry in entries}
-    remapped=any('updated_element' in entry for entry in entries)
+    remapped=any('updated_element' in entry for entry in entries) or bool(added)
     if remapped:
         if set(source_map)!=set(range(len(old.get('elements',[])))):
             raise AssertionError(f"{model['id']}: remapped element_map must cover every baseline source element")
@@ -40,10 +41,16 @@ def semantic_check(plan_path, model):
                 raise AssertionError(f"{model['id']}: updated element index out of range for baseline element {idx}")
             if ui in seen: raise AssertionError(f"{model['id']}: duplicate updated element mapping {ui}")
             seen.append(ui)
+        for spec in added:
+            ui=spec.get('updated_element')
+            if not isinstance(ui,int) or ui<0 or ui>=len(new.get('elements',[])):
+                raise AssertionError(f"{model['id']}: added updated element index out of range: {ui}")
+            if ui in seen: raise AssertionError(f"{model['id']}: duplicate added updated element mapping {ui}")
+            seen.append(ui)
         if set(seen)!=set(range(len(new.get('elements',[])))):
             raise AssertionError(f"{model['id']}: updated element mapping must cover every updated source element exactly once")
     elif len(old.get('elements',[]))!=len(new.get('elements',[])):
-        raise AssertionError(f"{model['id']}: element count changed without updated_element mapping")
+        raise AssertionError(f"{model['id']}: element count changed without updated_element/added_elements mapping")
 
     regenerate=set(model.get('regenerate_elements',[]))
     if any(not isinstance(i,int) or i<0 or i>=len(old['elements']) for i in regenerate):
@@ -316,7 +323,8 @@ def regenerate_geo(plan_path,model,apply):
             if baseline_cubes[cube]!=expected:
                 raise AssertionError(f"{model['id']}: baseline converter mismatch at element {idx} / cube {cube}")
 
-    remapped=any('updated_element' in entry for entry in mapping.values())
+    added=model.get('added_elements',[])
+    remapped=any('updated_element' in entry for entry in mapping.values()) or bool(added)
     if remapped:
         target=[]
         for idx,entry in mapping.items():
@@ -331,6 +339,20 @@ def regenerate_geo(plan_path,model,apply):
                 pairs=[(cube,baseline_cubes[cube]) for cube,_ in old_pairs]
             for suborder,(cube,value) in enumerate(pairs):
                 target.append((ui,suborder,cube,value))
+        for add_order,spec in enumerate(added):
+            ui=spec['updated_element']
+            element=updated_model['elements'][ui]
+            if spec.get('faces'):
+                values=[]
+                for face_order,face_spec in enumerate(spec['faces']):
+                    source_face=face_spec[0]
+                    target_face=face_spec[1] if len(face_spec)>=2 else source_face
+                    target_rotation=face_spec[2] if len(face_spec)>=3 else None
+                    values.append(_convert_element_face(element,source_face,scale,target_face,target_rotation))
+            else:
+                values=[_convert_element(element,scale)]
+            for suborder,value in enumerate(values):
+                target.append((ui,suborder,10**9+add_order,value))
         target_cubes=[value for _,_,_,value in sorted(target,key=lambda x:(x[0],x[1],x[2]))]
         if apply:
             runtime['minecraft:geometry'][0]['bones'][0]['cubes']=target_cubes

@@ -3,7 +3,7 @@ import {check} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {faceOffset} from '../core/furniture.js';
 import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
-import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
 import {spawnThrownDrink} from './storage-projectile.js';
@@ -96,7 +96,7 @@ export function installStatefulStorageRoutes({
  registerJavaItemUseOnRoute({
   id:'storage:'+routeId,matches:isPlacementItem,
   plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
-  execute:({player,held,face,faceLocation,block,plan})=>place({player,target:plan.target,held,face,faceLocation,clicked:block})
+  execute:({player,held,face,faceLocation,block,plan})=>{const placed=place({player,target:plan.target,held,face,faceLocation,clicked:block});if(placed?.typeId)playMaterialInteraction(block.dimension,plan.target,placed.typeId);return placed;}
  });
  registerProtectedBreakRoute({
   id:'storage:'+routeId,isBlock,capture:({block})=>revisionOf(readRevision,block),

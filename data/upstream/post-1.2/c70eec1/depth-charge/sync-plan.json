@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "depth_charge",
+      "visual_key": "depth_charge",
+      "baseline": "baseline/depth_charge.json",
+      "updated": "updated/depth_charge.json",
+      "baseline_blob": "aacc9949b355c6412129774ddac9bdf5a5fcf62b",
+      "updated_blob": "4b79a1dc8ea8f1f36135ba2b5803e7a569a11095",
+      "baseline_geo": "baseline/depth_charge.geo.json",
+      "baseline_geo_blob": "2143d5c9e6a50f942dbac0d51eb0ca88ea2ef7dc",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "updated_element": 0,
+          "faces": [
+            [
+              "south",
+              0
+            ],
+            [
+              "east",
+              1
+            ],
+            [
+              "north",
+              2
+            ],
+            [
+              "west",
+              3
+            ]
+          ]
+        },
+        {
+          "element": 1,
+          "updated_element": 1,
+          "cube": 4
+        },
+        {
+          "element": 2,
+          "updated_element": 2,
+          "faces": [
+            [
+              "south",
+              5
+            ],
+            [
+              "east",
+              6
+            ],
+            [
+              "north",
+              7
+            ],
+            [
+              "west",
+              8
+            ]
+          ]
+        },
+        {
+          "element": 3,
+          "updated_element": 3,
+          "cube": 9
+        },
+        {
+          "element": 4,
+          "updated_element": 12,
+          "cube": 10
+        },
+        {
+          "element": 5,
+          "updated_element": 4,
+          "cube": 11
+        },
+        {
+          "element": 6,
+          "updated_element": 5,
+          "cube": 12
+        },
+        {
+          "element": 7,
+          "updated_element": 8,
+          "cube": 13
+        },
+        {
+          "element": 8,
+          "updated_element": 11,
+          "cube": 14
+        },
+        {
+          "element": 9,
+          "updated_element": null,
+          "cube": 15
+        },
+        {
+          "element": 10,
+          "updated_element": 9,
+          "cube": 16
+        },
+        {
+          "element": 11,
+          "updated_element": 10,
+          "cube": 17
+        }
+      ],
+      "added_elements": [
+        {
+          "updated_element": 6
+        },
+        {
+          "updated_element": 7
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/depth_charge.geo.json",
+      "block": "runtime/BP/blocks/cup_depth_charge.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "depth_charge_block",
+      "baseline": "baseline/depth_charge_block.png",
+      "updated": "updated/depth_charge_block.png",
+      "baseline_blob": "5ee0738a935f880bf9d643e0500cee182cd761a7",
+      "updated_blob": "962980356fbecf1548ec5991feac3facee10db00",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/depth_charge.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/depth_charge.png"
+      ]
+    },
+    {
+      "id": "depth_charge_item",
+      "baseline": "baseline/depth_charge_item.png",
+      "updated": "updated/depth_charge_item.png",
+      "baseline_blob": "30a9abbeb4176a96d0ab0f7375df7495efab23e4",
+      "updated_blob": "25703204a0c40bb8cf4bcce59211e50fd8b6594e",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern_jar/item/depth_charge.png"
+      ]
+    }
+  ]
+}

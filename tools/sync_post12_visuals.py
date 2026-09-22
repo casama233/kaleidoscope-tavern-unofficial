@@ -25,26 +25,54 @@ def semantic_check(plan_path, model):
     if old.get('display')!=new.get('display'): raise AssertionError(f"{model['id']}: display transform changed")
     if {k:v for k,v in old.get('textures',{}).items() if k!='particle'}!={k:v for k,v in new.get('textures',{}).items() if k!='particle'}:
         raise AssertionError(f"{model['id']}: non-particle texture reference changed")
-    if len(old.get('elements',[]))!=len(new.get('elements',[])): raise AssertionError(f"{model['id']}: element count changed")
+
+    entries=model.get('element_map',[])
+    source_map={entry.get('element'):entry for entry in entries}
+    remapped=any('updated_element' in entry for entry in entries)
+    if remapped:
+        if set(source_map)!=set(range(len(old.get('elements',[])))):
+            raise AssertionError(f"{model['id']}: remapped element_map must cover every baseline source element")
+        seen=[]
+        for idx in range(len(old['elements'])):
+            ui=source_map[idx].get('updated_element',idx)
+            if ui is None: continue
+            if not isinstance(ui,int) or ui<0 or ui>=len(new.get('elements',[])):
+                raise AssertionError(f"{model['id']}: updated element index out of range for baseline element {idx}")
+            if ui in seen: raise AssertionError(f"{model['id']}: duplicate updated element mapping {ui}")
+            seen.append(ui)
+        if set(seen)!=set(range(len(new.get('elements',[])))):
+            raise AssertionError(f"{model['id']}: updated element mapping must cover every updated source element exactly once")
+    elif len(old.get('elements',[]))!=len(new.get('elements',[])):
+        raise AssertionError(f"{model['id']}: element count changed without updated_element mapping")
+
     regenerate=set(model.get('regenerate_elements',[]))
     if any(not isinstance(i,int) or i<0 or i>=len(old['elements']) for i in regenerate):
         raise AssertionError(f"{model['id']}: regenerate element out of range")
     for i in regenerate:
-        if old['elements'][i]==new['elements'][i]: raise AssertionError(f"{model['id']}: regenerate element {i} did not change")
+        ui=source_map.get(i,{}).get('updated_element',i) if remapped else i
+        if ui is not None and old['elements'][i]==new['elements'][ui]:
+            raise AssertionError(f"{model['id']}: regenerate element {i} did not change")
+
     uv_by_element={}
     for change in model.get('uv_changes',[]):
         idx=change['element']; face=change['face']; key=(idx,face)
         if idx<0 or idx>=len(old['elements']): raise AssertionError(f"{model['id']}: UV element {idx} out of range")
         if key in {(x['element'],x['face']) for x in sum(uv_by_element.values(),[])}: raise AssertionError(f"{model['id']}: duplicate UV declaration {key}")
+        ui=source_map.get(idx,{}).get('updated_element',idx) if remapped else idx
+        if ui is None: raise AssertionError(f"{model['id']}: UV change declared on deleted element {idx}")
         try:
-            before=old['elements'][idx]['faces'][face]['uv']; after=new['elements'][idx]['faces'][face]['uv']
+            before=old['elements'][idx]['faces'][face]['uv']; after=new['elements'][ui]['faces'][face]['uv']
         except KeyError as e: raise AssertionError(f"{model['id']}: missing declared UV face {idx}/{face}") from e
         if before!=change['baseline'] or after!=change['updated']:
             raise AssertionError(f"{model['id']}: source UV {idx}/{face} does not match plan")
         uv_by_element.setdefault(idx,[]).append(change)
+
     changed=[]
-    for i,(a,b) in enumerate(zip(old['elements'],new['elements'])):
+    for i,a in enumerate(old['elements']):
         if i in regenerate: continue
+        ui=source_map.get(i,{}).get('updated_element',i) if remapped else i
+        if ui is None: raise AssertionError(f"{model['id']}: deleted element {i} must be declared for regeneration")
+        b=new['elements'][ui]
         aa=normalize_element(a); bb=normalize_element(b)
         for change in uv_by_element.get(i,[]):
             aa['faces'][change['face']]['uv']='__DECLARED_UV__'
@@ -257,7 +285,6 @@ def regenerate_geo(plan_path,model,apply):
     baseline_geo=load(baseline_geo_path); runtime_path=R/model['geo']; runtime=load(runtime_path)
     baseline_cubes=baseline_geo['minecraft:geometry'][0]['bones'][0]['cubes']
     runtime_cubes=runtime['minecraft:geometry'][0]['bones'][0]['cubes']
-    if len(runtime_cubes)!=len(baseline_cubes): raise AssertionError(f"{model['id']}: runtime cube count changed")
     mapping={}
     used=set()
     scale=model.get('uv_scale',2)
@@ -271,10 +298,36 @@ def regenerate_geo(plan_path,model,apply):
             used.add(cube)
     if set(mapping)!=set(range(len(base_model['elements']))):
         raise AssertionError(f"{model['id']}: element map must cover every source element")
+    if used!=set(range(len(baseline_cubes))):
+        raise AssertionError(f"{model['id']}: element map must cover every baseline Bedrock cube")
     for idx,entry in mapping.items():
         for cube,expected in _mapped_cubes(base_model['elements'][idx],entry,scale):
             if baseline_cubes[cube]!=expected:
                 raise AssertionError(f"{model['id']}: baseline converter mismatch at element {idx} / cube {cube}")
+
+    remapped=any('updated_element' in entry for entry in mapping.values())
+    if remapped:
+        target=[]
+        for idx,entry in mapping.items():
+            ui=entry.get('updated_element',idx)
+            if ui is None: continue
+            old_pairs=_mapped_cubes(base_model['elements'][idx],entry,scale)
+            if idx in regenerate:
+                new_pairs=_mapped_cubes(updated_model['elements'][ui],entry,scale)
+                if [cube for cube,_ in old_pairs]!=[cube for cube,_ in new_pairs]:
+                    raise AssertionError(f"{model['id']}: updated cube mapping changed for element {idx}")
+                target.extend(new_pairs)
+            else:
+                target.extend((cube,baseline_cubes[cube]) for cube,_ in old_pairs)
+        target_cubes=[cube for _,cube in sorted(target,key=lambda x:x[0])]
+        if apply:
+            runtime['minecraft:geometry'][0]['bones'][0]['cubes']=target_cubes
+            runtime_path.write_text(json.dumps(runtime,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        elif runtime_cubes!=target_cubes:
+            raise AssertionError(f"{model['id']}: regenerated cube list not synced")
+        return
+
+    if len(runtime_cubes)!=len(baseline_cubes): raise AssertionError(f"{model['id']}: runtime cube count changed")
     replacements={}
     for idx in regenerate:
         for cube,expected in _mapped_cubes(updated_model['elements'][idx],mapping[idx],scale): replacements[cube]=expected

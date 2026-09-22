@@ -27,7 +27,7 @@ def main():
  next(b for b in geo['bones']if b['name']=='root')['locators']={'kt_spout':[-3.5,11,0]}
  dump(RP/'models/entity/runtime_shaker_held.geo.json',g)
  profile_file=R/'data/hand-calibration.json'
- if not profile_file.exists():dump(profile_file,{'schema':1,'units':'model_units_16_per_block','first':{'position':[8.96,-8.32,-11.52],'rotation':[15,0,0],'scale':.6},'third':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6},'spout':{'bone':'root','position':[-3.5,11,0]},'status':'Java first-person translation is wired to render_anchor; real-client visual acceptance still required'})
+ if not profile_file.exists():dump(profile_file,{'schema':1,'units':'model_units_16_per_block','first':{'position':[8.96,-8.32,-11.52],'rotation':[15,0,0],'scale':.6},'third':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6},'spout':{'bone':'root','position':[-3.5,11,0]},'status':'Java first-person translation is wired to render_anchor; NOT engine calibrated, real-client visual acceptance still required'})
  profile=load(profile_file)
  anim=load(RP/'animations/runtime_shaker.animation.json');a=anim['animations']
  for context in ['first','third']:

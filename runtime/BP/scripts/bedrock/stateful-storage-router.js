@@ -1,13 +1,12 @@
 import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
+import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {faceOffset} from '../core/furniture.js';
 import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
 import {spawnThrownDrink} from './storage-projectile.js';
-
-const placementMatchers=[];
-function anyPlacementItem(id){for(const match of placementMatchers)try{if(match(id))return true;}catch{}return false;}
 
 function revisionOf(read,block){
  if(typeof read!=='function')return -1;
@@ -75,13 +74,7 @@ export function popRandomStoredBottle({
  * This adapter owns the repeated interaction ordering/snapshot/defer contract; break/drop/sound is delegated to the shared protected-break router.
  */
 export function installStatefulStorageRoutes({
- isBlock,
- isPlacementItem,
- readRevision,
- place,
- interact,
- recover,
- protectExplosions=true
+ routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=true
 }){
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function','INVALID_STORAGE_ROUTE');
  check(typeof place==='function'&&typeof interact==='function'&&typeof recover==='function','INVALID_STORAGE_ROUTE');

@@ -64,3 +64,9 @@ python tools/build_server_edition.py           # 版本 0.6.2、補 unlock、修
 
 - **酒館桌跨重啟不保留**：隔離 BDS 已確認舊 Batch 7 表格會在完整重啟後變空氣。上游修復改為用 Bedrock 原生 `minecraft:cardinal_direction` trait 保存實際 X/Z 軸，舊 `kaleidoscope_tavern:axis` 僅保留為相容欄位並在 tick 遷移回預設值；這可避免新放置桌子依賴腳本自訂 axis 作為持久化方向。CI 已覆蓋狀態遷移，但仍需在同一隔離 BDS 流程重跑一次「放置→停服→啟服」作最終引擎驗收。
 - 廚房指南章節（#28/#33）與伺服器修正版指南入口的相容性需在真實客戶端驗證（本版仍以 0.6.1 補丁的指南入口為準）。
+
+## 7. 0.6.4（上游 d47f4ac 之後）
+
+上游 `d47f4ac`（#45–#56：Depth Charge、Mojito/Screwdriver/Bloody Mary/White Lady 幾何同步、共用破壞與掉落路由、非潛行放置家具、World Liquor 可用的擴充 API、酒館桌重啟穩定 #46）。伺服器版差異與 0.6.3 相同一組（補丁重套、版本 0.6.3 → 0.6.4、77 個配方 unlock、Java 版物品 ID 改名、目錄命名空間），工具無須改動即可建置。
+
+正式服部署後：兩包內容日誌 0 錯誤，酒館初始化訊息 `Server edition 0.6.4.`。

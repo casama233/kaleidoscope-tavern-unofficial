@@ -5,6 +5,12 @@
       "identifier": "kaleidoscope_tavern:tap",
       "menu_category": {
         "category": "items"
+      },
+      "states": {
+        "kaleidoscope_tavern:open": [
+          0,
+          1
+        ]
       }
     },
     "components": {
@@ -45,6 +51,17 @@
           8
         ]
       },
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          20,
+          20
+        ],
+        "looping": true
+      },
       "kaleidoscope_tavern:tap": {},
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 2
@@ -57,6 +74,16 @@
       },
       "minecraft:loot": "loot_tables/empty.json",
       "minecraft:light_dampening": 0
-    }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:open') == 1",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a1.tap_open"
+          }
+        }
+      }
+    ]
   }
 }

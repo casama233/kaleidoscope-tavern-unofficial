@@ -142,13 +142,25 @@ function tapCanExtract(core,tap,player){
   return true;
  }catch(e){if(player)warn(e,player.id);return false;}
 }
-function createTapOutput(tap,itemId){
+function createTapOutput(tap,itemId,carrier){
  check(ItemTypes.get(itemId),'UNKNOWN_ITEM');const belowPos=tapBelow(tap),below=blockAt(tap.dimension,belowPos);check(below,'CORE_UNAVAILABLE');
  const parsed=parseBottle(itemId);
+ if(carrier?.kind==='block'){
+  check(carrier.block===below&&below.typeId===EMPTY_BOTTLE_BLOCK,'TAP_CARRIER_CHANGED');const old=below.permutation,facing=old.getState(BOTTLE_FACING)??0;
+  if(parsed){
+   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');const raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
+   try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[BOTTLE_FACING]:facing}));bottleStore.save(key,state,-1);}
+   catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
+   return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
+  }
+  let drop;try{below.setPermutation(BlockPermutation.resolve('minecraft:air'));drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});}
+  catch(e){try{drop?.remove();}catch{}try{below.setPermutation(old);}catch{}throw e;}
+  return ()=>{try{drop?.remove();}catch{}try{below.setPermutation(old);}catch{}};
+ }
  if(below.isAir&&parsed){
   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
   const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,0);
-  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:0}));bottleStore.save(key,state,-1);}
+  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[BOTTLE_FACING]:0}));bottleStore.save(key,state,-1);}
   catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
   return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
  }
@@ -169,11 +181,11 @@ export function finishTapExtraction(tap,expectedCoreLocation){
  const key=keyFor(core);
  return locks.with([key,tapKey(tap)],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
-  const carrierId=state.batch.carrier,carrier=tapCarrierEntity(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
+  const carrierId=state.batch.carrier,carrier=tapCarrier(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
   const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
-  const raw=store.raw(key),undoOutput=createTapOutput(tap,tx.give[0].id);let undoCarrier;
+  const raw=store.raw(key),undoOutput=createTapOutput(tap,tx.give[0].id,carrier);let undoCarrier;
   try{
-   undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
+   if(carrier.kind==='entity')undoCarrier=consumeTapCarrier(tap,carrier.entity,carrierId);
    store.save(key,tx.state,state.revision);
   }catch(e){
    try{undoCarrier?.();}catch{}try{undoOutput();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;

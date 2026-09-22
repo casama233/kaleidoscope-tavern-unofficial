@@ -6,7 +6,7 @@ import {world,system,startup,Player,ItemStack,Container,GameMode,BlockPermutatio
 import {runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
 import {NS,BARE} from '../runtime/BP/scripts/core/cultivation.js';
 import {FARM_IDS,framePermutation,refreshFrame,refreshAround,growthChanges,grow,maintain,farmUse,farmBreak} from '../runtime/BP/scripts/bedrock/cultivation.js';
-import {placeBottle,takeBottles,takeEmptyBottle,bottleFacingForYaw,BOTTLE_TEST,DISPLAY_IDS} from '../runtime/BP/scripts/bedrock/bottles.js';
+import {placeBottle,takeBottles,takeEmptyBottle,takeWaterBottle,bottleFacingForYaw,BOTTLE_TEST,DISPLAY_IDS} from '../runtime/BP/scripts/bedrock/bottles.js';
 import {BottleStore,bottleKey} from '../runtime/BP/scripts/core/bottles.js';
 import {consumeDrink,effectDiagnostics} from '../runtime/BP/scripts/bedrock/drink-effects.js';
 import {initializeTub,createBarrel,operate,press,tickBarrel,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
@@ -71,6 +71,7 @@ test('BottleBlock source facing maps Bedrock player yaw to the Java opposite dir
 test('placed empty bottle native cardinal can be recovered by empty hand in Survival and Creative',()=>{
  for(const mode of[GameMode.Survival,GameMode.Creative]){const p=new Player('empty-'+mode+'-'+(++n),dim,mode),pos=site(),b=dim.getBlock(pos);b.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'east'}));h(p,undefined);takeEmptyBottle(p,b);assert(b.isAir);assert.equal(count(p,NS+':empty_bottle'),1);}
 });
+test('placed water-bottle display returns a real native water potion, not a blank potion item',()=>{const p=player(),pos=site(),b=dim.getBlock(pos);b.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.WATER_BLOCK,{'minecraft:cardinal_direction':'south'}));h(p,undefined);takeWaterBottle(p,b);assert(b.isAir);const item=p.inventory.items.find(x=>x?.typeId==='minecraft:potion');assert(item);const potion=item.getComponent('minecraft:potion');assert.equal(potion.potionEffectType.id,'minecraft:water');assert.equal(potion.potionDeliveryType.id,'minecraft:consumable');});
 test('placed empty bottle Survival break still uses shared glass world-drop feedback',()=>{
  const s=player(),breakPos=site(),b=dim.getBlock(breakPos);b.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'west'}));h(s,undefined);const before=dropCount(NS+':empty_bottle'),sounds=dim.sounds?.filter(x=>x.id==='random.glass').length??0;
  const ev={player:s,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(ev);system.advance();assert(ev.cancel);assert(b.isAir);assert.equal(dropCount(NS+':empty_bottle'),before+1);assert.equal((dim.sounds??[]).filter(x=>x.id==='random.glass').length,sounds+1);

@@ -1,11 +1,11 @@
-import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
+import {world,system,BlockPermutation} from '@minecraft/server';
 import {BottleStore,bottleKey,parseBottle,displayAdd,displayTake} from '../core/bottles.js';
 import {BOTTLES} from '../data/bottles.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
-import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';
+import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
@@ -23,10 +23,10 @@ export function placeBottle(player,target,{expectedRevision}={}){
   if(old)check(intact(b,old),'DISPLAY_MISMATCH');else check(b.isAir,'SPACE_NOT_CLEAR');
   const next=displayAdd(old,h.typeId,Math.floor((((player.getRotation?.().y??0)+180+45)%360+360)%360/90));
   const raw=store.raw(k),oldBlock=b.permutation,c=inventory(player);
-  // Placed bottles remain real inventory, even in Creative: consume to avoid free display extraction.
-  const plan=planInventory(c,player.selectedSlotIndex,1,[],makeStack);
+  // Match Java DrinkBlockItem/BlockItem: successful Creative placement/stacking does not shrink the stack.
+  const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
   commitInventory(plan,c,()=>{b.setPermutation(permutation(next));store.save(k,next,old?.revision??-1);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});
-  tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
+  playMaterialInteraction(d,target,`${NS}:bottle_${next.base}`);tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
  });
 }
 export function takeBottles(player,b,{all=false,expectedRevision}={}){
@@ -37,7 +37,7 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
   const tx=displayTake(old,all),raw=store.raw(k),oldBlock=b.permutation,c=inventory(player);
   const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);
   commitInventory(plan,c,()=>{b.setPermutation(tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});
-  tell(player,'§a已取回原品質酒瓶。');return tx;
+  playMaterialInteraction(b.dimension,b.location,`${NS}:bottle_${old.base}`);tell(player,'§a已取回原品質酒瓶。');return tx;
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}

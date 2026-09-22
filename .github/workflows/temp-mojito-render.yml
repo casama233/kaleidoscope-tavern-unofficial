@@ -59,6 +59,8 @@ jobs:
           draw.text((190,1180),"BEFORE · yaw -35°",font=small,fill=(220,220,220))
           draw.text((750,1180),"AFTER · yaw -35°",font=small,fill=(220,220,220))
           canvas.save(out/"mojito-before-after.png")
+          compact=canvas.resize((760,812),Image.Resampling.LANCZOS)
+          compact.save(out/"mojito-before-after.webp",format="WEBP",quality=68,method=6)
 
           hero=render(new_geo,new_tex,35,pitch=24,size=720)
           hero.save(out/"mojito-after.png")

@@ -78,7 +78,9 @@ export function operate(player,block,action,expected){
   if(expected)check(expected.slot===player.selectedSlotIndex&&expected.id===(h?.typeId??'')&&expected.count===(h?.amount??0),'STALE_HAND');
   const state=store.load(key);check(state,'MISSING_STATE');
   if(['use','extract'].includes(action)&&h)check(isPlainIngredient(h,make),'METADATA_ITEM_REJECTED');
-  const tx=interact(state,{action,held:h?{id:h.typeId,count:h.amount}:undefined},registry,FLUIDS);
+  const command={action,held:h?{id:h.typeId,count:h.amount}:undefined};
+  if(action==='remove_ingredient'&&state.kind==='pressing_tub')command.removeCount=player.isSneaking?64:1;
+  const tx=interact(state,command,registry,FLUIDS);
   if(action==='inspect'){tell(player,tx.message);return tx;}
   for(const out of tx.give)check(ItemTypes.get(out.id),'UNKNOWN_ITEM',out.id);
   const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,tx.take,tx.give,make),original=store.raw(key);

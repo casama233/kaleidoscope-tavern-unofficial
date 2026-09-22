@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿與下方 empty_bottle item entity 接酒** | Tap 的 placed empty-bottle block carrier、Facing／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub tilt／waterlogging／Forge capability；實機時序仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿與下方 empty_bottle item entity 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 placed empty-bottle block carrier、Facing／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -58,6 +58,26 @@ Java `TapBlock` 並不是「玩家手持空瓶點一下立即取酒」。來源�
 deterministic adapter 測試已覆蓋：32葡萄→4桶汁→4000mB→Q2→16份成品完整鏈、每份30 tick延遲、第一份轉成 placed bottle display、其餘在已佔用 destination 時成為 item drops、最後一份後 Barrel batch 清空而 lid 保持 closed；另有手動取消與紅石上升沿／持續高電平不重啟測試。
 
 **本批刻意未宣稱完成**：Java 的 placed `EMPTY_BOTTLE` block carrier 尚未有 Bedrock 對等 block；Tap 的 horizontal facing／嚴格 barrel front-layer connection、waterlogging，以及 `WaterCauldronTapBehavior`、`WaterloggedBehavior`、`LavaCauldronTapBehavior`、`BeehiveTapBehavior`、`WatermelonTapBehavior`、`DragonHeadTapBehavior` 仍待後續批次。Minecraft／BDS／Realms 的 redstone callback、30-tick 實機時序、particle／sound 與 item-entity AABB 也仍為 **NOT_RUN**。
+
+
+
+## 釀酒閉環核對 Batch 3：Pressing Tub 放置姿態／waterlogging
+
+Java `PressingTubBlock.getStateForPlacement` 的規則不是固定平放：
+
+- 點擊上／下表面放置時，`tilt=false`，朝向為玩家水平朝向的反向。
+- 點擊東／西／南／北側面放置時，`tilt=true`，朝向直接使用被點擊的側面。
+- 傾斜果盆在 `fallOn` 不進入壓榨流程，而是回到普通方塊的落下處理；只有平放狀態可踩踏壓榨。
+- Java 同時實作 `SimpleWaterloggedBlock`。
+
+Bedrock 本批不新增 Tavern 私有 facing/tilt 狀態，而是直接使用引擎提供的 placement traits：
+`minecraft:block_face` 保存放置所依附的六向面，`minecraft:cardinal_direction` 搭配 `y_rotation_offset:180` 保存平放時的玩家反向。四個水平 `block_face` 直接選用倉庫早已存在的原作 `geometry.kt_assets_a1.pressing_tub_tilt`，四個垂直放置組合保持正常模型。
+
+waterlogging 使用穩定 `minecraft:liquid_detection` 的 water rule（`can_contain_liquid:true`），不另存一份容易漂移的自訂 waterlogged state。傾斜時 `press()` 讀原生 `minecraft:block_face`，水平面立即拒絕壓榨。
+
+碰撞有一個明示的引擎級降級：Java 傾斜形狀是三個 AABB 的聯集；目前穩定 custom-block `minecraft:collision_box` 只給單一 AABB。本批使用 Java 三段形狀中**中間那一段的原尺寸 AABB**作保守碰撞，不使用整個 1×1×1 包圍盒製造幽靈牆；selection 維持完整格，精確複合碰撞仍列為 pending。
+
+Minecraft／手機／BDS／Realms 的實際側掛方向、含水渲染、流體更新與落下傷害仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

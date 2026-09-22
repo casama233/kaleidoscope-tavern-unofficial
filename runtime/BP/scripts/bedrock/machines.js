@@ -218,7 +218,6 @@ export function finishWaterCauldronTap(tap,expectedSourceLocation){
   else destination.block.setPermutation(destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
  }catch(e){try{destination.block.setPermutation(old);}catch{}throw e;}
  try{tap.dimension.playSound(destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});}catch{}
- try{tap.dimension.spawnParticle('minecraft:wax_particle', {x:tap.location.x+.5,y:tap.location.y-.5,z:tap.location.z+.5});}catch{}
  diagnostics.tap.waterCauldronExtracted++;return true;
 }
 function finishTapSession(key){

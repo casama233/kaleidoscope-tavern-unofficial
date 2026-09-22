@@ -26,6 +26,7 @@ function tub(){const b=dim.getBlock(target());b.setType(NS+':pressing_tub');init
 function barrel(p){const pos=target();hand(p,NS+':barrel',2);createBarrel(p,pos);return dim.getBlock(pos);}
 const CARDINAL_VECTOR={north:{x:0,z:-1},east:{x:1,z:0},south:{x:0,z:1},west:{x:-1,z:0}};
 function frontTap(b){const cardinal=b.permutation.getState('minecraft:cardinal_direction'),v=CARDINAL_VECTOR[cardinal],tap=dim.getBlock({x:b.location.x+v.x*2,y:b.location.y+1,z:b.location.z+v.z*2});tap.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':cardinal,'minecraft:cardinal_direction':cardinal}));return tap;}
+function sourceTap(source,facing='east'){const v=CARDINAL_VECTOR[facing],tap=dim.getBlock({x:source.location.x+v.x,y:source.location.y,z:source.location.z+v.z});tap.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':facing,'minecraft:cardinal_direction':facing}));return tap;}
 function state(b){return TEST_ACCESS.store.load(machineKey(dim.id,b.location));}
 function click(p,b,blockFace='Up'){const e={player:p,block:b,blockFace,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(e);system.advance();return e;}
 function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_bucket');operate(p,b,'use');}}
@@ -107,6 +108,22 @@ test('Tap barrel-save failure restores carrier and removes half-created output w
  const tap=frontTap(b);const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);
  const beforeDrops=dropCount(NS+':wine_q1');world.failSet=true;assert.throws(()=>finishTapExtraction(tap,b.location),/INJECTED_SAVE/);
  assert.equal(state(b).batch.remaining,2);assert.equal(dropCount(NS+':wine_q1'),beforeDrops);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
+});
+test('Water-cauldron Tap waits30 ticks then turns placed empty bottle into Java simple water bottle without draining source',()=>{
+ const p=player(),source=dim.getBlock(target());source.setPermutation(BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:2}));const tap=sourceTap(source,'east'),below=dim.getBlock({x:tap.location.x,y:tap.location.y-1,z:tap.location.z});
+ below.setPermutation(BlockPermutation.resolve(NS+':bottle_empty',{'minecraft:cardinal_direction':'west'}));hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(29);assert.equal(below.typeId,NS+':bottle_empty');system.advance(1);
+ assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);assert.equal(below.typeId,NS+':water_bottle');assert.equal(below.permutation.getState('minecraft:cardinal_direction'),'north');assert.equal(source.permutation.getState('fill_level'),2);
+ click(p,below);const water=p.inventory.getItem(0);assert.equal(water.typeId,'minecraft:potion');assert.equal(water.getComponent('minecraft:potion').potionEffectType.id,'minecraft:water');assert.equal(below.typeId,'minecraft:air');
+});
+test('Waterlogged fallback Tap fills a partial water cauldron to Bedrock max6 and preserves source waterlogging',()=>{
+ const p=player(),source=dim.getBlock(target());source.setType('minecraft:stone');source.setWaterlogged(true);const tap=sourceTap(source,'south'),below=dim.getBlock({x:tap.location.x,y:tap.location.y-1,z:tap.location.z});
+ below.setPermutation(BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:2}));hand(p,undefined);click(p,tap);system.advance(30);
+ assert.equal(below.typeId,'minecraft:cauldron');assert.equal(below.permutation.getState('cauldron_liquid'),'water');assert.equal(below.permutation.getState('fill_level'),6);assert.equal(source.isWaterlogged,true);
+});
+test('Water Tap rejects empty source cauldron and already-full destination with Java empty-open timing',()=>{
+ const p=player(),source=dim.getBlock(target());source.setPermutation(BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:0}));const tap=sourceTap(source,'west'),below=dim.getBlock({x:tap.location.x,y:tap.location.y-1,z:tap.location.z});
+ below.setPermutation(BlockPermutation.resolve(NS+':bottle_empty',{'minecraft:cardinal_direction':'north'}));hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(5);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);assert.equal(below.typeId,NS+':bottle_empty');
+ source.setPermutation(BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:2}));below.setPermutation(BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:6}));click(p,tap);system.advance(5);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);assert.equal(below.permutation.getState('fill_level'),6);
 });
 test('saved batch can be loaded by a fresh storage object without recomputing recipe',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const s=new MachineStore(world).load(machineKey(dim.id,b.location));assert.deepEqual(s,state(b));assert.equal(s.batch.remaining,16);assert.equal(s.batch.output.byQuality.length,6);});
 test('broken or unloaded barrel stops progressing and never erases state',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const part=dim.getBlock({x:b.location.x+1,y:b.location.y,z:b.location.z});part.setType('minecraft:air');const raw=TEST_ACCESS.store.raw(machineKey(dim.id,b.location));tickBarrel(b);assert.equal(TEST_ACCESS.store.raw(machineKey(dim.id,b.location)),raw);});

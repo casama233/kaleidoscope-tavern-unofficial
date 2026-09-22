@@ -2,7 +2,7 @@ import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {faceOffset} from '../core/furniture.js';
 import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
-import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {storageBottleItem} from '../core/holder.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
@@ -105,7 +105,7 @@ export function installStatefulStorageRoutes({
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
    const clicked=blockAt(dimension,location);
    check(clicked?.typeId===typeId,'BLOCK_CHANGED');
-   if(placing)return place({player,target,held,face,faceLocation,clicked});
+   if(placing){const placed=place({player,target,held,face,faceLocation,clicked});if(placed?.typeId)playMaterialInteraction(dimension,target,placed.typeId);return placed;}
    return interact({player,block:clicked,held,face,faceLocation,revision});
   }));
  });

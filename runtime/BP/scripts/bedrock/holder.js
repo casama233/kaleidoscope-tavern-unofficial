@@ -3,7 +3,7 @@ import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holder
 import {NS,FACING,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
@@ -27,7 +27,7 @@ export function syncHolder(block){
 function transact(player,block,old,next,take,give,permutation){return commitStoredStateTransaction(player,{block,key:holderKey(block.dimension.id,block.location),store,old,next,take,give,permutation,afterCommit:syncHolderVisual});}
 export function placeHolder(player,target){
  canWrite(player);const d=player.dimension;requireBlockReach(player,d,target);const b=blockAt(d,target);check(b&&b.isAir,'SPACE_NOT_CLEAR');const h=hand(player);check(h?.typeId===HOLDER_BLOCK,'NEED_HOLDER');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');const k=holderKey(d.id,target);check(store.raw(k)===undefined,'STORAGE_CONFLICT');
- const facing=facingForYaw(player.getRotation().y);const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,1,[],makeStack),old=b.permutation;
+ const facing=facingForYaw(player.getRotation().y);const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack),old=b.permutation;
  commitInventory(plan,c,()=>b.setPermutation(BlockPermutation.resolve(HOLDER_BLOCK,{[FACING]:facing,[HOLDER_KIND]:0})),()=>b.setPermutation(old));holderDiagnostics.placed++;return b;
 }
 export function putHolderBottle(player,block,{expectedRevision}={}){

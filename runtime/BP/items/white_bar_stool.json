@@ -13,7 +13,10 @@
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:white_bar_stool.name"
       },
-      "minecraft:interact_button": "action.interact.kt_furniture"
+      "minecraft:interact_button": "action.interact.kt_furniture",
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:stool_white"
+      }
     }
   }
 }

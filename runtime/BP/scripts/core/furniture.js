@@ -3,7 +3,7 @@ import {check} from './util.js';
 export const NS='kaleidoscope_tavern';
 export const COLORS=Object.freeze(['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']);
 export const LIGHT_COLORS=Object.freeze(['colorless',...COLORS]);
-export const FACING=NS+':facing',CONNECTION=NS+':connection',AXIS=NS+':axis',POSITION=NS+':position',HALF=NS+':half',ATTACH_FACE=NS+':attach_face',SEAT_ANCHOR=NS+':seat_anchor',TABLE_CARDINAL='minecraft:cardinal_direction';
+export const FACING=NS+':facing',CONNECTION=NS+':connection',AXIS=NS+':axis',POSITION=NS+':position',HALF=NS+':half',ATTACH_FACE=NS+':attach_face',SEAT_ANCHOR=NS+':seat_anchor',TABLE_CARDINAL='minecraft:cardinal_direction',NATIVE_FACING=TABLE_CARDINAL;
 export const SOFA_CONNECTION=Object.freeze({SINGLE:0,LEFT:1,RIGHT:2,MIDDLE:3,LEFT_CORNER:4,RIGHT_CORNER:5});
 export const SOFA_SEAT_ID=NS+':sofa_seat';
 export const TABLE_AXIS=Object.freeze({X:0,Z:1}),TABLE_POSITION=Object.freeze({SINGLE:0,LEFT:1,MIDDLE:2,RIGHT:3});
@@ -26,6 +26,9 @@ export function dyeColor(id){return COLORS.find(c=>'minecraft:'+c+'_dye'===id);}
 export function anchorKey(d,p){check(/^minecraft:[a-z_]+$/.test(d),'INVALID_DIMENSION');check(['x','y','z'].every(k=>Number.isInteger(p[k])),'INVALID_LOCATION');return `kt:seat/${d}/${p.x}_${p.y}_${p.z}`;}
 export function anchorPosition(raw){check(typeof raw==='string','MISSING_SEAT_ANCHOR');const m=/^kt:seat\/(minecraft:[a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(raw);check(m,'INVALID_SEAT_ANCHOR');const p={x:Number(m[2]),y:Number(m[3]),z:Number(m[4])};check(Object.values(p).every(Number.isSafeInteger),'INVALID_LOCATION');return {dimension:m[1],position:p};}
 export function facingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor((((yaw+45)%360)+360)%360/90);}
+/** Native placement_direction records the player's facing; Tavern's legacy facing stores the opposite/front-facing model orientation. */
+export function facingFromCardinal(direction){check(['north','south','east','west'].includes(direction),'INVALID_CARDINAL');return ({south:0,west:1,north:2,east:3})[direction];}
+export function cardinalForFacing(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');return ['south','west','north','east'][facing];}
 export function facingForFace(face,yaw){return ({North:0,East:1,South:2,West:3})[face]??facingForYaw(yaw);}
 export function facingYaw(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');return [180,-90,0,90][facing];}
 export function facingVector(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');return [{x:0,y:0,z:-1},{x:1,y:0,z:0},{x:0,y:0,z:1},{x:-1,y:0,z:0}][facing];}

@@ -207,7 +207,7 @@ def main():
   dump(BP/'blocks'/f'{name}.json',{'format_version':'1.26.50','minecraft:block':{'description':desc,'components':c}})
  dump(BP/'loot_tables/empty.json',{'pools':[]})
  c=visual('pressing_tub');c.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,2,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,8,16]},'minecraft:entity_fall_on':{'minimum_fall_distance':0.5},'minecraft:liquid_detection':{'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}]},'minecraft:tick':{'interval_range':[100,100],'looping':True},NS+':pressing_tub':{}});block('pressing_tub',c)
- tub_block=load(BP/'blocks/pressing_tub.json');tub_desc=tub_block['minecraft:block']['description']
+ tub_block=json.loads((BP/'blocks/pressing_tub.json').read_text());tub_desc=tub_block['minecraft:block']['description']
  tub_desc['traits']={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}}
  tub_perms=[]
  for face,rot,box in [('north',0,{'origin':[-8,4,-4],'size':[16,8,8]}),('east',-90,{'origin':[-4,4,-8],'size':[8,8,16]}),('south',-180,{'origin':[-8,4,-4],'size':[16,8,8]}),('west',-270,{'origin':[-4,4,-8],'size':[8,8,16]})]:

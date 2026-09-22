@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿，以及下方 placed empty-bottle block／empty_bottle item entity 兩種 carrier 接酒**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Facing／嚴格 barrel front-layer connection／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock waterlogging／projectile 打碎；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging 與第二層正面中心嚴格連接**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock waterlogging／projectile 打碎；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -99,6 +99,23 @@ Barrel Tap carrier resolver 現在先檢查正下方 block：只有目前配方 
 deterministic 測試覆蓋：普通非潛行放置、空手取回、Creative 不消耗放置、生存 break 世界掉落＋玻璃聲、metadata 拒絕，以及 placed carrier 經 Tap 30 tick 原地轉為同 facing 的 Q2 `bottle_wine` 並保存 `wine_q2`。
 
 **仍待**：filled DrinkBlock/BottleBlock 的 waterlogging、projectile 打碎 placed bottle 的 Java `onProjectileHit` 等價；Tap 的 facing／嚴格 barrel front-layer connection 與其他 TapBehavior；Minecraft／BDS／Realms 的 native block_placer、水中放置、碰撞、選框、破壞音效與 Tap carrier 時序仍為 **NOT_RUN**。
+
+
+
+## 釀酒閉環核對 Batch 5：Tap native facing／waterlogging／Barrel front
+
+這批先查官方成功案例再動手，而不是延長自訂狀態機：
+
+- Mojang 穩定 custom-block placement traits 已能用 `minecraft:placement_position → minecraft:block_face` 保存玩家點擊的面，並用 `minecraft:placement_direction → minecraft:cardinal_direction` 保存水平玩家朝向；因此 Tap 不新增 Tavern 私有 facing。
+- 與 #70 的 placed empty bottle 相同，waterlogging 繼續使用穩定 `minecraft:liquid_detection` 的 water containment，不再模擬一份 Java `WATERLOGGED` 布林。
+- Java `TapBlock.getStateForPlacement`：點水平側面時 facing=clickedFace；點上／下面時 facing=player horizontal opposite。本批直接用 `block_face` + `cardinal_direction(y_rotation_offset=180)` 表達。
+- Java Tap shape 原始 north AABB 是 `[5,5,6]→[11,13,16]`。Bedrock selection 改為同尺寸 origin `[-3,5,-2]` / size `[6,8,10]`，並由四方向 permutation 旋轉，不再使用過大的 8×16×8 泛用選框。
+- Java Barrel Tap 只允許緊貼**第二層正面中心**：north=index1、south=index7、west=index3、east=index5。Bedrock barrel proxy 的 `dx/dy/dz` 已經等價保存這些世界位置，因此不需要新增 Barrel facing state；Tap facing 自身即可唯一決定背後應是哪個 `dy=1` front-center part。
+- `findTapCore()` 因此不再掃六鄰居。它只檢查 Tap facing 的背面一格，要求該格是 `barrel_part`、`dy=1` 且 world offset 恰好是該 facing 的 front-center。錯層、桶側面、Tap 反向都不再誤連。
+
+這個設計刻意復用 Bedrock 原生 placement/liquid 能力和既有 barrel part offset，不建立第二套 facing、front-index 或 waterlogged adapter。
+
+Minecraft／手機／BDS／Realms 的側放方向、含水渲染、selection rotation、紅石與 Tap front connection 仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

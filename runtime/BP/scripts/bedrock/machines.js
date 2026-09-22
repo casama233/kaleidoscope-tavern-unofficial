@@ -106,9 +106,19 @@ export function tickBarrel(block){
   if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
  });});
 }
+function tapFacing(tap){
+ const face=tap?.permutation.getState('minecraft:block_face');
+ if(['north','east','south','west'].includes(face))return face;
+ return tap?.permutation.getState('minecraft:cardinal_direction');
+}
+const TAP_BACK=Object.freeze({north:{x:0,y:0,z:1},south:{x:0,y:0,z:-1},east:{x:-1,y:0,z:0},west:{x:1,y:0,z:0}});
 export function findTapCore(tap){
- for(const d of Object.values(DIRECTIONS)){const core=resolveCore(blockAt(tap.dimension,offset(tap.location,d)));if(core?.typeId===CORE)return core;}
- return undefined;
+ const facing=tapFacing(tap),d=TAP_BACK[facing];if(!d)return undefined;
+ const source=blockAt(tap.dimension,offset(tap.location,d));if(source?.typeId!==PART)return undefined;
+ const dy=source.permutation.getState(NS+':dy'),dx=source.permutation.getState(NS+':dx'),dz=source.permutation.getState(NS+':dz');
+ if(dy!==1)return undefined;
+ const valid=(facing==='north'&&dx===0&&dz===-1)||(facing==='south'&&dx===0&&dz===1)||(facing==='west'&&dx===-1&&dz===0)||(facing==='east'&&dx===1&&dz===0);
+ if(!valid)return undefined;const core=resolveCore(source);return core?.typeId===CORE?core:undefined;
 }
 
 function tapKey(block){const p=block.location;return `${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}

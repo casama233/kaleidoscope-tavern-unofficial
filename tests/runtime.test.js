@@ -24,6 +24,7 @@ function dropCount(id){return [...dim.entities.values()].filter(e=>e.typeId==='m
 function findSlot(p,id){return Array.from({length:p.inventory.size},(_,i)=>i).find(i=>p.inventory.getItem(i)?.typeId===id);}
 function tub(){const b=dim.getBlock(target());b.setType(NS+':pressing_tub');initializeTub(b);return b;}
 function barrel(p){const pos=target();hand(p,NS+':barrel',2);createBarrel(p,pos);return dim.getBlock(pos);}
+function tapAt(b){const tap=dim.getBlock({x:b.location.x+2,y:b.location.y+1,z:b.location.z});tap.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':'east','minecraft:cardinal_direction':'east'}));return tap;}
 function state(b){return TEST_ACCESS.store.load(machineKey(dim.id,b.location));}
 function click(p,b,blockFace='Up'){const e={player:p,block:b,blockFace,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(e);system.advance();return e;}
 function fill(p,b,fluid='grape'){for(let i=0;i<4;i++){hand(p,NS+':'+fluid+'_bucket');operate(p,b,'use');}}
@@ -58,7 +59,7 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
  // Java BarrelBlock: with lid open, empty-hand use on another top-layer board closes it.
  p.selectedSlotIndex=3;p.isSneaking=false;const topSide=dim.getBlock({x:b.location.x+1,y:b.location.y+2,z:b.location.z});click(p,topSide);assert.equal(state(b).open,false);tickBarrel(b);assert.equal(state(b).batch.quality,1);
  for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
- const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');assert.equal(findTapCore(tap),b);
+ const tap=tapAt(b);assert.equal(findTapCore(tap),b);const wrong=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});wrong.setPermutation(BlockPermutation.resolve(NS+':tap',{'minecraft:block_face':'east','minecraft:cardinal_direction':'east'}));assert.equal(findTapCore(wrong),undefined);wrong.setType('minecraft:air');tap.setPermutation(tap.permutation.withState('minecraft:block_face','west'));assert.equal(findTapCore(tap),undefined);tap.setPermutation(tap.permutation.withState('minecraft:block_face','east'));
  const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z},carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};
  p.isSneaking=false;hand(p,undefined);
  for(let i=0;i<16;i++){
@@ -71,26 +72,26 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
 test('all four-input barrel adapters preserve minimum stack output and reject metadata',()=>{const b=barrel(player()),p=player();fill(p,b,'green_grape');hand(p,'minecraft:sugar_cane',9);operate(p,b,'use');hand(p,'minecraft:sugar',3);operate(p,b,'use');hand(p,NS+':grape');const named=p.inventory.getItem(0);named.nameTag='Keep';p.inventory.setItem(0,named);code(()=>operate(p,b,'use'),'METADATA_ITEM_REJECTED');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.remaining,3);assert.equal(state(b).batch.recipeId,NS+':barrel/sauvignon_blanc_dry_white');assert.equal(p.inventory.getItem(0).nameTag,'Keep');});
 test('Tap second manual click closes immediately and cancels the scheduled extraction',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
- const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
+ const tap=tapAt(b);const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
  hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);system.advance(35);
  assert.equal(state(b).batch.remaining,1);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
 });
 test('Tap redstone rising edge opens once and extracts after30 ticks; sustained high power does not restart',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
- const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
+ const tap=tapAt(b);const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
  const comp=regs.blocks.get(NS+':tap');comp.onRedstoneUpdate({block:tap,previousPowerLevel:0,powerLevel:15,firstUpdate:false});system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
  comp.onRedstoneUpdate({block:tap,previousPowerLevel:15,powerLevel:15,firstUpdate:false});system.advance(29);assert.equal(state(b).batch.remaining,2);system.advance(1);assert.equal(state(b).batch.remaining,1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
 });
 test('Tap converts a placed empty-bottle carrier in place and preserves its facing and exact quality',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
  let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
- const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};
+ const tap=tapAt(b);const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};
  dim.getBlock(below).setPermutation(BlockPermutation.resolve(NS+':bottle_empty',{'minecraft:cardinal_direction':'west'}));hand(p,undefined);click(p,tap);system.advance(30);
  const out=dim.getBlock(below),saved=TEST_ACCESS.bottleStore.load(bottleKey(dim.id,below));assert.equal(out.typeId,NS+':bottle_wine');assert.equal(out.permutation.getState(NS+':facing'),3);assert.deepEqual(saved.items,[NS+':wine_q2']);assert.equal(saved.facing,3);assert.equal(state(b).batch,null);
 });
 test('Tap barrel-save failure restores carrier and removes half-created output without decrementing batch',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
- const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);
+ const tap=tapAt(b);const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);
  const beforeDrops=dropCount(NS+':wine_q1');world.failSet=true;assert.throws(()=>finishTapExtraction(tap,b.location),/INJECTED_SAVE/);
  assert.equal(state(b).batch.remaining,2);assert.equal(dropCount(NS+':wine_q1'),beforeDrops);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
 });

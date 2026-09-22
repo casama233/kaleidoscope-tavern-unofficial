@@ -1,6 +1,6 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,TABLE_CARDINAL,tableAxisFromCardinal,tableCardinalForAxis,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingFromCardinal,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,TABLE_CARDINAL,tableAxisFromCardinal,tableCardinalForAxis,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,scriptedFurnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingFromCardinal,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
@@ -143,7 +143,7 @@ export function installFurnitureEvents(){
   id:'furniture-block-items',
   // Table is a native custom-block item: placement_direction writes minecraft:cardinal_direction.
   // Keep the script route only for furniture that still needs custom placement state.
-  matches:id=>{const f=furnitureItem(id);return !!f&&!['table','glassware_holder'].includes(f.kind);},
+  matches:id=>!!scriptedFurnitureItem(id),
   plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
   execute:({player,plan})=>placeFurniture(player,plan.target,{face:plan.face})
  });

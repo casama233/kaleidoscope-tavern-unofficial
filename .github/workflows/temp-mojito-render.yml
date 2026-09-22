@@ -17,6 +17,9 @@ jobs:
         with:
           ref: sync/c70eec1-mojito
 
+      - name: Install render dependencies
+        run: python -m pip install --disable-pip-version-check pillow numpy
+
       - name: Render actual Mojito geometry
         shell: python
         run: |

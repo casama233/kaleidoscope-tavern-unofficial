@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging 與第二層正面中心嚴格連接**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock waterlogging／projectile 打碎；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging，以及 Barrel 自身 facing＋第二層正面中心嚴格連接**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock waterlogging／projectile 打碎；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -110,12 +110,30 @@ deterministic 測試覆蓋：普通非潛行放置、空手取回、Creative 不
 - 與 #70 的 placed empty bottle 相同，waterlogging 繼續使用穩定 `minecraft:liquid_detection` 的 water containment，不再模擬一份 Java `WATERLOGGED` 布林。
 - Java `TapBlock.getStateForPlacement`：點水平側面時 facing=clickedFace；點上／下面時 facing=player horizontal opposite。本批直接用 `block_face` + `cardinal_direction(y_rotation_offset=180)` 表達。
 - Java Tap shape 原始 north AABB 是 `[5,5,6]→[11,13,16]`。Bedrock selection 改為同尺寸 origin `[-3,5,-2]` / size `[6,8,10]`，並由四方向 permutation 旋轉，不再使用過大的 8×16×8 泛用選框。
-- Java Barrel Tap 只允許緊貼**第二層正面中心**：north=index1、south=index7、west=index3、east=index5。Bedrock barrel proxy 的 `dx/dy/dz` 已經等價保存這些世界位置，因此不需要新增 Barrel facing state；Tap facing 自身即可唯一決定背後應是哪個 `dy=1` front-center part。
+- Java Barrel Tap 只允許緊貼**第二層正面中心**：north=index1、south=index7、west=index3、east=index5。Batch 5 先用 barrel proxy 的 `dx/dy/dz` 收窄到對應世界位置；但 Java 還要求 `barrelFacing == tapFacing`，所以僅靠 Tap facing 仍會把任意桶側誤當成「正面」。這一點由後續 Batch 6 補齊。
 - `findTapCore()` 因此不再掃六鄰居。它只檢查 Tap facing 的背面一格，要求該格是 `barrel_part`、`dy=1` 且 world offset 恰好是該 facing 的 front-center。錯層、桶側面、Tap 反向都不再誤連。
 
 這個設計刻意復用 Bedrock 原生 placement/liquid 能力和既有 barrel part offset，不建立第二套 facing、front-index 或 waterlogged adapter。
 
 Minecraft／手機／BDS／Realms 的側放方向、含水渲染、selection rotation、紅石與 Tap front connection 仍為 **NOT_RUN**。
+
+
+## 釀酒閉環核對 Batch 6：Barrel facing 持久化／真正正面 Tap
+
+重新核對 Java `BarrelBlock` 後，Batch 5 的「只靠世界 `dx/dy/dz` 就足夠」結論不完整。Java 在放置 Barrel 時先保存 `context.getHorizontalDirection().getOpposite()`，再把同一個 `FACING` 寫入全部 27 個 Barrel cell；`BarrelTapBehavior.isValidConnection` 同時檢查 **Barrel facing、WALL 層、index 與 Tap facing**。因此同一個 3×3×3 世界位置只有 Barrel 自己認定的那一面才是正面。
+
+本批在不重造第二套方向算法的前提下補齊：
+
+- `barrel_core`／`barrel_part` 啟用原生 `minecraft:placement_direction → minecraft:cardinal_direction` state；實際 27-cell scripted placement 仍由 `createBarrel()` 一次交易式寫入，方向用既有共用 `facingForYaw` 映射到 Java 的玩家反向。
+- 全部 27 格必須保存相同 cardinal；`intact()` 把 cardinal 一致性納入結構驗證，避免局部狀態漂移後仍被當成合法 Barrel。
+- open／closed Barrel visual helper 讀 core cardinal 並用共用 `facingYaw` 旋轉；機器 state schema 不新增 facing 欄位，方向權威仍是方塊 permutation。
+- `findTapCore()` 保留 Batch 5 的「只查 Tap 背後一格＋dy=1＋front-center world offset」，再增加 `barrelCardinal(part) == tapFacing` 與 core cardinal 同步檢查。這才等價於 Java 的 `barrelFacing == tapFacing`。
+- 30 tick Tap session 完成時不再因保存了 core 座標就直接繞過連接檢查；會重新執行 `findTapCore()`，並確認仍是原本那個 core。期間若 Tap 被轉向、Barrel facing/state 被破壞或前後關係失效，不消耗 carrier，也不減少 batch。
+- 舊世界在升級到帶 `minecraft:cardinal_direction` 的 proxy block 後，其引擎預設 cardinal 仍需 Minecraft 實機存檔升級驗收；不在 mock 測試中假裝已證實。
+
+deterministic adapter 測試覆蓋：玩家 yaw→Java 反向 cardinal、27-cell facing 一致、Barrel helper rotation、正面中層 Tap 成功、同位置錯向／低一層／其他側面拒絕，以及 30 tick 中途改 Tap facing 後不消耗 carrier／batch。
+
+Minecraft／手機／BDS／Realms 的舊存檔 cardinal migration、實際 helper 朝向、原生 placement state 與多人同步仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

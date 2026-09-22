@@ -72,6 +72,20 @@ test('placed empty bottle follows Java Creative placement and Survival break fee
  const s=player(),breakPos=site();h(s,NS+':empty_bottle');placeEmptyBottle(s,breakPos);h(s,undefined);const before=dropCount(NS+':empty_bottle'),sounds=dim.sounds?.filter(x=>x.id==='random.glass').length??0;
  const ev={player:s,block:dim.getBlock(breakPos),cancel:false};world.beforeEvents.playerBreakBlock.emit(ev);system.advance();assert(ev.cancel);assert(dim.getBlock(breakPos).isAir);assert.equal(dropCount(NS+':empty_bottle'),before+1);assert.equal((dim.sounds??[]).filter(x=>x.id==='random.glass').length,sounds+1);
 });
+test('projectile hit shatters quality display with no drops and removes BottleStore state',()=>{
+ const p=player(),b=bottle(p,2);h(p,NS+':wine_q5');placeBottle(p,b.location);const beforeDrops=dropCount(NS+':wine_q2')+dropCount(NS+':wine_q5'),sounds=dim.sounds?.filter(x=>x.id==='random.glass').length??0;
+ const arrow=dim.spawnEntity('minecraft:arrow',{x:b.location.x+.5,y:b.location.y+.5,z:b.location.z+.5});world.afterEvents.projectileHitBlock.emit({projectile:arrow,getBlockHit:()=>({block:b})});system.advance();
+ assert(b.isAir);assert.equal(state(b),undefined);assert.equal(dropCount(NS+':wine_q2')+dropCount(NS+':wine_q5'),beforeDrops);assert.equal((dim.sounds??[]).filter(x=>x.id==='random.glass').length,sounds+1);
+});
+test('projectile hit shatters placed empty bottle with no recovery and ignores unrelated blocks',()=>{
+ const p=player(),pos=site();h(p,NS+':empty_bottle');placeEmptyBottle(p,pos);const b=dim.getBlock(pos),before=dropCount(NS+':empty_bottle');
+ world.afterEvents.projectileHitBlock.emit({projectile:dim.spawnEntity('minecraft:snowball',b.location),getBlockHit:()=>({block:b})});system.advance();assert(b.isAir);assert.equal(dropCount(NS+':empty_bottle'),before);
+ const stone=dim.getBlock(target());stone.setType('minecraft:stone');world.afterEvents.projectileHitBlock.emit({projectile:dim.spawnEntity('minecraft:arrow',stone.location),getBlockHit:()=>({block:stone})});system.advance();assert.equal(stone.typeId,'minecraft:stone');
+});
+test('projectile display shatter state-save failure restores block and exact qualities',()=>{
+ const p=player(),b=bottle(p,4);h(p,NS+':wine_q6');placeBottle(p,b.location);const before=JSON.stringify(state(b)),perm=b.permutation;
+ world.failSet=true;assert.throws(()=>BOTTLE_TEST.shatterBottle(b),/INJECTED_SAVE_FAILURE/);assert.equal(b.typeId,NS+':bottle_wine');assert.deepEqual(b.permutation.getAllStates(),perm.getAllStates());assert.equal(JSON.stringify(state(b)),before);
+});
 test('named empty bottle placement is rejected instead of silently losing metadata',()=>{
  const p=player(),pos=site();h(p,NS+':empty_bottle');const x=p.inventory.getItem(0);x.nameTag='Keep label';p.inventory.setItem(0,x);code(()=>placeEmptyBottle(p,pos),'METADATA_ITEM_REJECTED');assert.equal(p.inventory.getItem(0).nameTag,'Keep label');assert(dim.getBlock(pos).isAir);
 });

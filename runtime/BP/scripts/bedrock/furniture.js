@@ -5,7 +5,7 @@ import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,placementTake,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air} from './transactions.js';
-import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
@@ -73,7 +73,7 @@ export function placeFurniture(player,target,{face='Up'}={}){
   exchangeBlocks(player,placementTake(player),[],[{block:b,permutation:BlockPermutation.resolve(blockId(f),states)}]);placed=b;furnitureDiagnostics.placed++;
  });
  if(f.kind==='stool')optional(()=>ensureSeat(placed));if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));
- optional(()=>d.playSound('dig.wood',center(p),{volume:.65,pitch:1}));return placed;
+ playMaterialInteraction(d,p,blockId(f));return placed;
 }
 export function sitOnFurniture(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);check(!player.isSneaking,'SNEAK_TO_RECOVER');

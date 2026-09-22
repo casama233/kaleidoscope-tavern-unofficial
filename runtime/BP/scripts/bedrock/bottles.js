@@ -21,7 +21,7 @@ function simpleKey(block){const p=block.location;return `simple-bottle/${block.d
 function waterPotionStack(){const effect=Potions.getEffectType('minecraft:water'),delivery=Potions.getDeliveryType('minecraft:consumable');check(effect&&delivery,'WATER_POTION_UNAVAILABLE');return Potions.resolve(effect,delivery);}
 export function takeSimpleBottle(player,b){
  canWrite(player);check(b?.typeId===WATER_BLOCK,'NOT_SIMPLE_BOTTLE_BLOCK');const c=inventory(player),stack=waterPotionStack(),plan=planInventory(c,player.selectedSlotIndex,0,[{stack,count:1}],makeStack),old=b.permutation;
- return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setType('minecraft:air'),()=>b.setPermutation(old));playMaterialInteraction(b.dimension,b.location,b.typeId);return out;});
+ return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setType('minecraft:air'),()=>b.setPermutation(old));playMaterialInteraction(b.dimension,b.location,WATER_BLOCK);return out;});
 }
 export function takeEmptyBottle(player,b){
  canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=b.permutation;

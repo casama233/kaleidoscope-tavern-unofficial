@@ -12,7 +12,11 @@
         "value": "item.kaleidoscope_tavern:empty_bottle.name"
       },
       "minecraft:icon": "kt_c1_empty_bottle",
-      "minecraft:max_stack_size": 16
+      "minecraft:max_stack_size": 16,
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:bottle_empty"
+      },
+      "minecraft:liquid_clipped": true
     }
   }
 }

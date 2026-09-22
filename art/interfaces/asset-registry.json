@@ -5967,13 +5967,13 @@
         "materials": {
           "*": {
             "texture": "kt_assets_a8_block_mixology_depth_charge",
-            "render_method": "blend",
+            "render_method": "alpha_test_single_sided",
             "ambient_occlusion": 0.0,
             "face_dimming": true
           },
           "unshaded": {
             "texture": "kt_assets_a8_block_mixology_depth_charge",
-            "render_method": "blend",
+            "render_method": "alpha_test_single_sided",
             "ambient_occlusion": 0.0,
             "face_dimming": false
           }
@@ -5985,13 +5985,13 @@
           "material_instances": {
             "*": {
               "texture": "kt_assets_a8_block_mixology_depth_charge",
-              "render_method": "blend",
+              "render_method": "alpha_test_single_sided",
               "ambient_occlusion": 0.0,
               "face_dimming": true
             },
             "unshaded": {
               "texture": "kt_assets_a8_block_mixology_depth_charge",
-              "render_method": "blend",
+              "render_method": "alpha_test_single_sided",
               "ambient_occlusion": 0.0,
               "face_dimming": false
             }

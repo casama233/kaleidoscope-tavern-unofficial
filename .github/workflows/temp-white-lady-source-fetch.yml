@@ -1,0 +1,27 @@
+name: temp white lady source fetch
+
+on:
+  push:
+    branches:
+      - sync/c70eec1-white-lady
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Emit locked upstream White Lady PNG blobs
+        shell: python
+        run: |
+          import base64, urllib.request
+          urls = {
+              "BASE": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/6b0d619145316492f055e03d70427107cd73efa8/src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/white_lady.png",
+              "UPDATED": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/c70eec14b4d8cede23f7274910b8424a8fd49f89/src/main/resources/assets/kaleidoscope_tavern/textures/block/mixology/white_lady.png",
+          }
+          for label, url in urls.items():
+              data = urllib.request.urlopen(url, timeout=30).read()
+              print(f"BEGIN_{label}")
+              print(base64.b64encode(data).decode("ascii"))
+              print(f"END_{label}")

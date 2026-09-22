@@ -36,12 +36,21 @@ export function popTiltedRackRedstone(block,{selectionRng=Math.random,motionRng=
 export function registerTiltedRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':tilted_rack',{onTick:e=>{try{const s=store.load(tiltedRackKey(e.block.dimension.id,e.block.location));if(s)syncTiltedRackVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popTiltedRackRedstone(b),x=>{tiltedRackDiagnostics.redstoneErrors++;error(x);})});}
 export function installTiltedRackEvents(){
  installStatefulStorageRoutes({
+  routeId:'tilted-rack',
   isBlock:block=>block?.typeId===TILTED_RACK,
   isPlacementItem:id=>id===TILTED_RACK,
   readRevision:block=>store.load(tiltedRackKey(block.dimension.id,block.location))?.revision??-1,
   place:({player,target})=>placeTiltedRack(player,target),
+  shouldInteract:({block,held,faceLocation})=>{
+   const state=store.load(tiltedRackKey(block.dimension.id,block.location));if(!state)return false;
+   const slot=tiltedRackSlot(block.permutation.getState(FACING)??0,faceLocation);
+   if(!held.id)return state.slots[slot]!==null;
+   if(tiltedRackBlockedItem(held.id))return true;
+   const accepted=tiltedRackItem(held.id);if(!accepted)return true;
+   return state.slots[slot]===null;
+  },
   interact:({player,block,held,faceLocation,revision})=>{
-   if(!held.id)return player.isSneaking?recoverTiltedRack(player,block,{expectedRevision:revision}):takeTiltedRackBottle(player,block,faceLocation,{expectedRevision:revision});
+   if(!held.id)return takeTiltedRackBottle(player,block,faceLocation,{expectedRevision:revision});
    if(tiltedRackBlockedItem(held.id)){tell(player,'§e[Tavern] 此瓶型在 Java tilted_rack_blocklist 中，斜酒架拒收。');return;}
    if(tiltedRackItem(held.id))return putTiltedRackBottle(player,block,faceLocation,{expectedRevision:revision});
    tell(player,'§e[Tavern] 斜酒架只接受空酒瓶或來源允許的品質酒瓶；空手取指定槽。');

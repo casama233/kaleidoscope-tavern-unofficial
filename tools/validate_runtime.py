@@ -87,7 +87,7 @@ def main():
  check('java_use_order_contract',all(x in java_use for x in ['javaSecondaryBypass','heldId','isSneaking']))
  check('java_item_use_on_is_final_stage',all(x in java_place for x in ['registerJavaItemUseOnRoute','installJavaItemUseOnEvents','if(e.cancel)return']))
  check('storage_uses_java_block_then_item_order','javaSecondaryBypass' in router and 'shouldInteract' in router and 'registerJavaItemUseOnRoute' in router and 'placementMatchers' not in router)
- check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','dimension.spawnItem','dimension.playSound']))
+ check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','withBreakInventory','dimension.playSound']))
  transactions_text=(BP/'scripts/bedrock/transactions.js').read_text(encoding='utf-8')
  check('shared_break_world_drop_sink','withBreakInventory' in break_router and all(x in transactions_text for x in ['withBreakInventory','breakSinkContainer','BREAK_RECOVERY_MUTATED_INVENTORY']))
  check('shared_break_router_has_explicit_material_profiles',all(x in break_router for x in ['breakMaterial','holder|tilted_rack|circular_rack','tap|shaker_station|glassware_holder','_pendant_lamp','^light_','grapevine_trellis','_painting','playMaterialInteraction']))

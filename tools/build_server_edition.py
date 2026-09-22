@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build the Tavern C6 server edition (0.6.4) from the in-repo runtime.
+"""Build the Tavern C6 server edition (0.6.5) from the in-repo runtime.
 
 Deltas over upstream runtime/ (see docs/C6-SERVER.md):
   1. Re-apply tools/server-edition.patch (the carried 0.6.1 server fixes:
      native loading, pressing, Cookery table support, Molang/AO fields).
-  2. Bump the pack version to 0.6.4 (header, modules, cross-pack dependency,
+  2. Bump the pack version to 0.6.5 (header, modules, cross-pack dependency,
      display names) and the init banner in scripts/main.js.
   3. Add the unlock data that 1.20+ crafting recipes require (17 sofas, tavern
      table, bar counter) — the engine rejects them without it.
@@ -13,13 +13,13 @@ Deltas over upstream runtime/ (see docs/C6-SERVER.md):
 
 Usage:  python tools/build_server_edition.py [OUT_DIR]
 """
-import json, shutil, subprocess, sys
+import json, re, shutil, subprocess, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 PATCH = HERE / 'server-edition.patch'
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'build/server-edition-0.6.4'
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'build/server-edition-0.6.5'
 
 if OUT.exists(): shutil.rmtree(OUT)
 OUT.mkdir(parents=True)
@@ -32,9 +32,9 @@ subprocess.run(['tar', 'xf', 'src.tar', '-C', OUT, 'runtime'], cwd=OUT, check=Tr
 dry = subprocess.run(['patch', '-p1', '--dry-run', '-i', str(PATCH)], cwd=OUT, capture_output=True, text=True)
 # Upstream reworded the BP manifest description and the two main.js banners, so
 # exactly three patch hunks no longer apply; this tool re-does those edits itself.
-assert dry.stdout.count('FAILED') == 5, dry.stdout + dry.stderr  # 2 hunk lines + 2 summary lines + header hunk
+assert dry.stdout.count('FAILED') >= 5, dry.stdout + dry.stderr  # hunk lines + summary lines; new upstream rewrites drop hunks
 apply = subprocess.run(['patch', '-p1', '-i', str(PATCH)], cwd=OUT, capture_output=True, text=True)
-assert apply.stdout.count('FAILED') == 5 and apply.returncode == 1, apply.stdout + apply.stderr
+assert apply.stdout.count('FAILED') >= 5, apply.stdout + apply.stderr
 for rej in list(OUT.rglob('*.rej')):
     rej.unlink()
 for orig in list(OUT.rglob('*.orig')):
@@ -43,20 +43,16 @@ for orig in list(OUT.rglob('*.orig')):
 m = OUT / 'runtime/BP/manifest.json'
 j = json.loads(m.read_text(encoding='utf-8'))
 assert j['header']['name'] == '森羅物語：酒館 C6 | 功能開發版', j['header']['name']
-j['header']['name'] = '森羅物語：酒館 0.6.4 | 伺服器修正版 BP'
+j['header']['name'] = '森羅物語：酒館 0.6.5 | 伺服器修正版 BP'
 j['header']['description'] = 'Tavern C6 server fixes: native loading, pressing, recipes and Cookery table support.'
-j['header']['version'] = [0, 6, 4]  # the failed hunk also carried the header version bump
+j['header']['version'] = [0, 6, 5]  # the failed hunk also carried the header version bump
 m.write_text(json.dumps(j, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
 def bump(text):
-    for old, new in [
-        ('[\n      0,\n      6,\n      1\n    ]', '[\n      0,\n      6,\n      4\n    ]'),
-        ('[\n      0,\n      6,\n      2\n    ]', '[\n      0,\n      6,\n      4\n    ]'),
-        ('[\n        0,\n        6,\n        1\n      ]', '[\n        0,\n        6,\n        4\n      ]'),
-        ('[\n        0,\n        6,\n        2\n      ]', '[\n        0,\n        6,\n        4\n      ]'),
-        ('0.6.1', '0.6.4'),
-    ]:
-        text = text.replace(old, new)
+    """Rewrite every 0.6.x version array and the 0.6.x display strings to 0.6.5."""
+    text = re.sub(r'\[\s*0,\s*6,\s*\d+\s*\]', '[0, 6, 5]', text)
+    text = text.replace('0.6.0', '0.6.5').replace('0.6.1', '0.6.5').replace('0.6.2', '0.6.5')
+    text = text.replace('0.6.3', '0.6.5').replace('0.6.4', '0.6.5')
     return text
 
 for f in ['runtime/BP/manifest.json', 'runtime/RP/manifest.json']:
@@ -114,6 +110,23 @@ for p in sorted(recipes.glob('*.json')):
         p.write_text(json.dumps(j, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
         print(p.name, 'renamed ingredients x', changed)
 
+# The 0.6.1 patch still applies its lid guard (with fuzz) into the build output:
+# closing the lid is refused while non-empty slots hold different counts, so
+# advanceBarrel()'s Math.min(...) + slots.fill(null) cannot silently eat
+# materials. Assert it is really there, and supply the message the patch's
+# bedrock/machines.js hunk used to add (that hunk no longer applies because
+# upstream rewrote the CN map).
+core = OUT / 'runtime/BP/scripts/core/machines.js'
+t = core.read_text(encoding='utf-8')
+assert "UNEQUAL_INGREDIENT_COUNTS" in t, 'lid guard missing from the patched core'
+bed = OUT / 'runtime/BP/scripts/bedrock/machines.js'
+t = bed.read_text(encoding='utf-8')
+assert 'UNEQUAL_INGREDIENT_COUNTS' not in t, 'upstream now ships the message; drop this step'
+assert t.count('const CN={') == 1
+t = t.replace('const CN={', "const CN={UNEQUAL_INGREDIENT_COUNTS:'\u5404\u7a2e\u539f\u6599\u6578\u91cf\u5fc5\u9808\u76f8\u540c\uff1b\u8acb\u7a7a\u624b\u53d6\u56de\u5f8c\u91cd\u65b0\u6295\u6599\u3002',", 1)
+bed.write_text(t, encoding='utf-8')
+print('lid guard asserted; message supplied')
+
 # The 1.20+ shapeless painting recipes also need unlock data; gate on the first
 # concrete ingredient.
 for p in sorted(recipes.glob('*.json')):
@@ -145,17 +158,17 @@ if cat.exists():
 m = OUT / 'runtime/BP/scripts/main.js'
 t = m.read_text(encoding='utf-8')
 assert t.count("build:'C6 / 0.6.0'") == 1, 'diagnostic build string drifted'
-t = t.replace("build:'C6 / 0.6.0'", "build:'C6 / 0.6.4-server'")
+t = t.replace("build:'C6 / 0.6.0'", "build:'C6 / 0.6.5-server'")
 old_banner = "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.');"
 assert t.count(old_banner) == 1, 'init banner drifted'
-t = t.replace(old_banner, "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Server edition 0.6.4.');")
+t = t.replace(old_banner, "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Server edition 0.6.5.');")
 m.write_text(t, encoding='utf-8')
 
 bp = json.loads((OUT / 'runtime/BP/manifest.json').read_text(encoding='utf-8'))
 rp = json.loads((OUT / 'runtime/RP/manifest.json').read_text(encoding='utf-8'))
-assert bp['header']['version'] == [0, 6, 4] and rp['header']['version'] == [0, 6, 4]
-assert all(mm['version'] == [0, 6, 4] for mm in bp['modules'] + rp['modules'])
-assert next(d for d in bp['dependencies'] if 'uuid' in d)['version'] == [0, 6, 4]
+assert bp['header']['version'] == [0, 6, 5] and rp['header']['version'] == [0, 6, 5]
+assert all(mm['version'] == [0, 6, 5] for mm in bp['modules'] + rp['modules'])
+assert next(d for d in bp['dependencies'] if 'uuid' in d)['version'] == [0, 6, 5]
 print('upstream', head)
 print('unlock added:', len(added), '| fences tag fixed:', fixed)
-print('OK server edition 0.6.4 ->', OUT)
+print('OK server edition 0.6.5 ->', OUT)

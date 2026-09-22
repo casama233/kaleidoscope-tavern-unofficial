@@ -72,3 +72,13 @@ python tools/build_server_edition.py           # 版本 0.6.2、補 unlock、修
 上游 `d47f4ac`（#45–#56：Depth Charge、Mojito/Screwdriver/Bloody Mary/White Lady 幾何同步、共用破壞與掉落路由、非潛行放置家具、World Liquor 可用的擴充 API、酒館桌重啟穩定 #46）。伺服器版差異與 0.6.3 相同一組（補丁重套、版本 0.6.3 → 0.6.4、77 個配方 unlock、Java 版物品 ID 改名、目錄命名空間），工具無須改動即可建置。
 
 正式服部署後：兩包內容日誌 0 錯誤，酒館初始化訊息 `Server edition 0.6.4.`。
+
+## 8. 0.6.5（上游 5ebf626 之後）
+
+上游 `5ebf626`（#59–#72：Java 放置與使用順序、壓榨桶傾斜放置與積水、酒嘴延遲取酒與紅石邊緣、空瓶改用 Mojang 原生 `block_placer`、雪克杯 attachable 動畫、修復滿背包挖礦掉落、Tap 朝向／積水與酒桶前面連接）。伺服器版差異：
+
+- **重新植入材料保護**：上游重寫釀酒流程時移除了 0.6.1 的 `UNEQUAL_INGREDIENT_COUNTS` 檢查與訊息，但 `advanceBarrel()` 仍是「以最少數量釀造後 `slots.fill(null)`」——投料數量不同時會白白吃掉多出的材料。0.6.1 補丁的瓶蓋守護仍會套用到建置輸出（以 fuzz 套用），本版另外補回該錯誤訊息（0.6.1 補丁的 `bedrock/machines.js` hunk 因上游改寫 CN 對照表而失效），並在建置時斷言守護確實存在。
+- `server-edition.patch` 其餘 hunk 以 fuzz 套用；版本 0.6.4 → 0.6.5（版本改寫改為正則，涵蓋任何 0.6.x）；配方 unlock 77 筆與 Java 版物品 ID 改名照舊。
+- 建置時斷言：若上游日後自行補上該訊息，工具會直接報錯提醒移除本步驟。
+
+正式服部署後：兩包內容日誌 0 錯誤，酒館初始化訊息 `Server edition 0.6.5.`。

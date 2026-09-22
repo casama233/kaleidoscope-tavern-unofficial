@@ -131,6 +131,23 @@
       "semantic_diff": "Screwdriver keeps 10 Java elements but all 10 change. The locked old Bedrock geo proves the 10-to-13 mapping: source element 0 splits into four side-face cubes, while elements 1-9 map one-to-one. The existing source-driven converter regenerates every changed element without new conversion exceptions; the official block PNG is copied byte-for-byte.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "white-lady",
+      "assets": [
+        "white_lady"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/white-lady/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "3b8c42d6e6abd568e8e5bd5219b68b335c322d6f",
+      "model_updated_blob": "23d0635b163b871cdcc22fb4a35242ba878b28c3",
+      "texture_baseline_blob": "3da7ad25918346745807da46c23c2d11b50d99cf",
+      "texture_updated_blob": "c3796b7eaa62fcf34515eee8ad0227f7392c4c7c",
+      "semantic_diff": "White Lady changes from 14 to 13 Java elements. The locked baseline proves the old 14-to-17 mapping; old element 6 / Bedrock cube 9 is explicitly deleted, old elements 7-13 remap to updated elements 6-12, and the runtime becomes 16 cubes. The official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

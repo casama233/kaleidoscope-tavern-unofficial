@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、品質飲品、容器交易、Cookery 隔離 | 原作特殊自動化與外部模組互動仍需實機逐項核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊 | Tap 的原作開關／紅石上升沿／下方容器或掉落物接酒；Pressing Tub 的 tilt／waterlogging／Forge capability 自動化；實機時序仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -20,12 +20,25 @@
 | 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽、木質／玻璃 Bar Cabinet 雙槽，以及 Cellar Cabinet 九槽手動存取／精確品質返還／來源展示已完成** | Holder/Rack/Cellar 的紅石酒瓶投擲仍未移植 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
 | 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
-| 葡萄／種植 | 7 crop blocks 與基本生長適配 | `WildGrapevine*` 世界生成、氣候/土壤加速、藤架連接與野生生成 |
+| 葡萄／種植 | 7 crop blocks、三種土壤種別、藤架生長／擴散優先序、果實 1–2 級成長、剪刀收穫與骨粉適配 | `WildGrapevine*` 世界生成；冰葡萄 `<0.15`／金葡萄 `>1.0` 的 Java biome base-temperature 80% 加速；藤架 waterlogging 與實機隨機 tick 驗收 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` **15/15模型與該提交全部變更的block/item貼圖均已同步**；來源快照、blob SHA、source-driven geometry regeneration 與CI離線驗證已收束 | `c70eec1` 資產差異已清零；仍剩 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏與各批次標記為 NOT_RUN 的 Minecraft 實機視覺驗收 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
+
+
+## 釀酒閉環核對 Batch 1：Barrel／Pressing Tub／Grape
+
+本批重新以鎖定 Java 1.2.0 提交 `6b0d619145316492f055e03d70427107cd73efa8` 核對完整鏈路，而不是只看既有 Bedrock 行為。
+
+- `IBarrel`／`BarrelBlockEntity`：4 個原料槽、每槽上限 16、液體必須滿 4000 mB 才能開始；關蓋後每 97 tick 檢查。開始時快照輸出數量，正常配方取所有非空原料槽的最小數量（上限 16），無匹配配方固定轉成 16 份醋。
+- 發酵品質實際為 `brewLevel 1..6`；每階段時間是 `unitTime × 當前 brewLevel`。Java 沒有卸載區塊離線補時，因此 Bedrock 的 loaded-block cadence 不是差異，不另造 real-time catch-up。
+- Java `resetIfOutputEmpty()` 在最後一份成品取完後只清 batch／recipe／時間，**不會自動開桶蓋**。Bedrock 已改為同樣保持關蓋，下一輪必須由玩家重新開蓋後才能灌液。
+- Java `PressingTubBlock.use` 空手普通互動只移除 1 個原料；潛行空手才請求移除最多 64 個。Bedrock 先前固定整組取出，本批已改為 1／64 分流；Barrel 的原料移除仍保持整槽返還。
+- 葡萄核心生長規則已確認：普通葡萄固定 25%；冰葡萄在 Java biome base temperature `< 0.15` 時 80%，否則 25%；金葡萄在 `> 1.0` 時 80%，否則 25%。Bedrock Script API 2.7 可取得 biome identity/tags，但沒有 Java base-temperature 數值，因此目前維持 25% 保守降級，不用猜測 biome 表冒充等價。
+- 仍需下一小批：Tap 必須改成來源的「開啟→延遲→關閉→下方 carrier block/item entity 接酒」流程並補紅石上升沿；Pressing Tub 的側面放置 tilt、waterlogging 與對應碰撞；WildGrapevine 世界生成；biome 溫度加速的可驗證映射。
+
 
 ## 下一批功能目標：紅石儲存家具投瓶
 

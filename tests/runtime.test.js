@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {world,system,startup,Player,ItemStack,Container,Entity,GameMode} from './fake-server.js';
+import {world,system,startup,Player,ItemStack,Container,Entity,GameMode,BlockPermutation} from './fake-server.js';
 import {migrateLegacyGuide,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
 import {initializeTub,createBarrel,operate,press,tubTilted,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,finishTapExtraction,bottleFacingFromCardinal,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';

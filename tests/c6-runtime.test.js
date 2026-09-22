@@ -10,19 +10,20 @@ import {applyCustomEffect,clearCustomEffects,customEffectDiagnostics,pulseVision
 import {consumeCocktail} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {placeBottle,BOTTLE_TEST} from '../runtime/BP/scripts/bedrock/bottles.js';
 import {completeDrink} from '../runtime/BP/scripts/bedrock/drink-effects.js';
-import {placeHolder,putHolderBottle,takeHolderBottle,recoverHolder,syncHolder,HOLDER_TEST} from '../runtime/BP/scripts/bedrock/holder.js';
+import {placeHolder,putHolderBottle,takeHolderBottle,recoverHolder,syncHolder,popHolderRedstone,holderRedstoneLaunch,HOLDER_TEST} from '../runtime/BP/scripts/bedrock/holder.js';
 import {HOLDER_KIND,holderKey,holderItem} from '../runtime/BP/scripts/core/holder.js';
-import {placeTiltedRack,putTiltedRackBottle,takeTiltedRackBottle,recoverTiltedRack,syncTiltedRackVisuals,TILTED_RACK_TEST} from '../runtime/BP/scripts/bedrock/tilted-rack.js';
+import {placeTiltedRack,putTiltedRackBottle,takeTiltedRackBottle,recoverTiltedRack,syncTiltedRackVisuals,popTiltedRackRedstone,tiltedRackRedstoneLaunch,TILTED_RACK_TEST} from '../runtime/BP/scripts/bedrock/tilted-rack.js';
 import {tiltedRackKey,tiltedRackItem} from '../runtime/BP/scripts/core/tilted-rack.js';
-import {placeCircularRack,putCircularRackBottle,takeCircularRackBottle,recoverCircularRack,syncCircularRackVisuals,pulseCircularRackParticle,CIRCULAR_RACK_TEST} from '../runtime/BP/scripts/bedrock/circular-rack.js';
+import {placeCircularRack,putCircularRackBottle,takeCircularRackBottle,recoverCircularRack,syncCircularRackVisuals,pulseCircularRackParticle,popCircularRackRedstone,circularRackRedstoneLaunch,CIRCULAR_RACK_TEST} from '../runtime/BP/scripts/bedrock/circular-rack.js';
 import {circularRackKey,circularRackItem} from '../runtime/BP/scripts/core/circular-rack.js';
 import {placeBarCabinet,useBarCabinet,recoverBarCabinet,syncBarCabinetConnection,syncBarCabinetVisuals,BAR_CABINET_TEST} from '../runtime/BP/scripts/bedrock/bar-cabinet.js';
 import {CABINET_POSITION,barCabinetKey} from '../runtime/BP/scripts/core/bar-cabinet.js';
-import {placeCellarCabinet,useCellarCabinet,recoverCellarCabinet,syncCellarCabinetConnection,syncCellarCabinetVisuals,CELLAR_CABINET_TEST} from '../runtime/BP/scripts/bedrock/cellar-cabinet.js';
+import {placeCellarCabinet,useCellarCabinet,recoverCellarCabinet,syncCellarCabinetConnection,syncCellarCabinetVisuals,popCellarCabinetRedstone,cellarCabinetRedstoneLaunch,CELLAR_CABINET_TEST} from '../runtime/BP/scripts/bedrock/cellar-cabinet.js';
 import {cellarCabinetKey} from '../runtime/BP/scripts/core/cellar-cabinet.js';
 import {installCookeryGuidePublisher,COOKERY_GUIDE_EVENTS} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
 import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
-import {tickStorageVisuals} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
+import {tickStorageVisuals,routeStatefulStorageRedstone} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
+import {THROWN_DRINK,THROWN_ITEM,storageProjectileDiagnostics} from '../runtime/BP/scripts/bedrock/storage-projectile.js';
 import {BREAK_ROUTE_TEST} from '../runtime/BP/scripts/bedrock/protected-break-router.js';
 import {blockCenter,requireBlockReach} from '../runtime/BP/scripts/bedrock/transactions.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
@@ -49,6 +50,8 @@ function equipMob(e,item='minecraft:diamond_sword'){e._held=typeof item==='strin
 function equipPlayer(p,entries={Head:'minecraft:iron_helmet'}){const worn=new Map(Object.entries(entries).map(([slot,item])=>[slot,typeof item==='string'?new ItemStack(item,1):item.clone()]));p._armor=worn;p.equippable={getEquipment:slot=>worn.get(slot)?.clone(),setEquipment:(slot,value)=>{if(p.rejectEquipment)return false;if(value)worn.set(slot,value.clone());else worn.delete(slot);return true;}};return p;}
 function click(p,b,face='Up',faceLocation={x:.5,y:.5,z:.5}){const event={player:p,block:b,blockFace:face,faceLocation,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(event);system.advance();return event;}
 function full(p){for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));}
+function redstone(component,block,previousPowerLevel,powerLevel,{firstUpdate=false}={}){const e={block,previousPowerLevel,powerLevel,firstUpdate};component.onRedstoneUpdate(e);system.advance();return e;}
+const thrownDrinks=()=>[...d.entities.values()].filter(e=>e.typeId===THROWN_DRINK);
 test('shared break/drop/sound adapter owns one global break and explosion listener',()=>{
  assert.equal(world.beforeEvents.playerBreakBlock.listeners.length,1);
  assert.equal(world.beforeEvents.explosion.listeners.length,1);
@@ -88,6 +91,65 @@ test('shared storage visual scheduler advances a bounded round-robin cursor',()=
  const visuals=new Map([['a',{id:'a'}],['b',{id:'b'}],['c',{id:'c'}]]),seen=[];let cursor=0;
  cursor=tickStorageVisuals(visuals,cursor,e=>seen.push(e.id),2);assert.equal(cursor,2);assert.deepEqual(seen,['a','b']);
  cursor=tickStorageVisuals(visuals,cursor,e=>seen.push(e.id),2);assert.equal(cursor,1);assert.deepEqual(seen,['a','b','c','a']);
+});
+
+test('storage redstone edge router ignores first observation and non-rising updates',()=>{
+ const b=d.getBlock(pos),calls=[];b.setType(NS+':holder');
+ assert.equal(routeStatefulStorageRedstone({block:b,powerLevel:15,previousPowerLevel:0,firstUpdate:true},x=>calls.push(x)),false);
+ assert.equal(routeStatefulStorageRedstone({block:b,powerLevel:15,previousPowerLevel:15},x=>calls.push(x)),false);
+ assert.equal(routeStatefulStorageRedstone({block:b,powerLevel:0,previousPowerLevel:15},x=>calls.push(x)),false);
+ assert.equal(calls.length,0);
+ assert(routeStatefulStorageRedstone({block:b,powerLevel:15,previousPowerLevel:0},x=>calls.push(x)));system.advance();assert.equal(calls.length,1);assert.equal(calls[0],b);
+});
+test('four storage blocks expose native redstone consumers and redstone callbacks',()=>{
+ for(const short of['holder','tilted_rack','circular_rack','cellar_cabinet']){
+  const def=JSON.parse(fs.readFileSync(new URL('../runtime/BP/blocks/'+short+'.json',import.meta.url)))['minecraft:block'];
+  assert.deepEqual(def.components['minecraft:redstone_consumer'],{min_power:0,propagates_power:false},short);
+  assert.equal(typeof regs.blocks.get(NS+':'+short)?.onRedstoneUpdate,'function',short);
+ }
+});
+test('Holder rising edge launches exact quality once, high level does not repeat, and first update does not eject',()=>{
+ const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':wine_q5',1);putHolderBottle(p,b);const component=regs.blocks.get(NS+':holder');
+ redstone(component,b,0,15,{firstUpdate:true});assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)).item,NS+':wine_q5');assert.equal(thrownDrinks().length,0);
+ redstone(component,b,0,15);let thrown=thrownDrinks();assert.equal(thrown.length,1);assert.equal(thrown[0].getDynamicProperty(THROWN_ITEM),NS+':wine_q5');assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)),undefined);assert.equal(b.permutation.getState(HOLDER_KIND),0);assert(d.sounds.some(s=>s.id==='kt_assets_a17.block.holder.pop'));
+ p.selectedSlotIndex=0;hand(p,NS+':wine_q4',1);putHolderBottle(p,b);redstone(component,b,15,15);assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)).item,NS+':wine_q4');assert.equal(thrownDrinks().length,1);
+ redstone(component,b,15,0);redstone(component,b,0,15);assert.equal(thrownDrinks().length,2);assert.equal(thrownDrinks().at(-1).getDynamicProperty(THROWN_ITEM),NS+':wine_q4');
+});
+test('randomly selected empty bottle consumes the redstone pulse as a Java-style no-op',()=>{
+ const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':empty_bottle',1);putHolderBottle(p,b);const before=thrownDrinks().length,out=popHolderRedstone(b,{selectionRng:()=>0,motionRng:()=>0});
+ assert.equal(out.status,'NON_DRINK');assert.equal(HOLDER_TEST.store.load(holderKey(d.id,b.location)).item,NS+':empty_bottle');assert.equal(thrownDrinks().length,before);
+});
+test('storage launch poses follow Java Holder/Tilted/Circular/Cellar direction formulas for all facings',()=>{
+ const at={x:10,y:64,z:20};
+ for(let facing=0;facing<4;facing++){
+  const h=d.getBlock({...at,x:at.x+facing*4});h.setPermutation(BlockPermutation.resolve(NS+':holder',{[FACING]:facing,[HOLDER_KIND]:0}));
+  const hp=holderRedstoneLaunch(h,{rng:()=>0});const v=[{x:0,z:-1},{x:1,z:0},{x:0,z:1},{x:-1,z:0}][facing];
+  assert.deepEqual(hp.velocity,{x:v.x*.5,y:.1875,z:v.z*.5});assert.equal(hp.position.y,h.location.y+.875);assert.equal(hp.position.x,h.location.x+.5+v.x*.5);assert.equal(hp.position.z,h.location.z+.5+v.z*.5);
+  const t=d.getBlock({...at,x:at.x+facing*4,z:at.z+4});t.setPermutation(BlockPermutation.resolve(NS+':tilted_rack',{[FACING]:facing}));
+  const tp=tiltedRackRedstoneLaunch(t,{rng:()=>0}),ov=[{x:0,z:1},{x:-1,z:0},{x:0,z:-1},{x:1,z:0}][facing];
+  assert.deepEqual(tp.velocity,{x:ov.x*.5,y:.375,z:ov.z*.5});assert.equal(tp.position.x,t.location.x+.5+ov.x*.5);assert.equal(tp.position.z,t.location.z+.5+ov.z*.5);
+  const cc=d.getBlock({...at,x:at.x+facing*4,z:at.z+8});cc.setPermutation(BlockPermutation.resolve(NS+':cellar_cabinet',{[FACING]:facing,[POSITION]:0}));
+  const cp=cellarCabinetRedstoneLaunch(cc,{rng:()=>0});assert.deepEqual(cp.velocity,{x:v.x*.5,y:.05,z:v.z*.5});
+ }
+ const r=d.getBlock({x:30,y:64,z:30});r.setPermutation(BlockPermutation.resolve(NS+':circular_rack',{[FACING]:0}));assert.deepEqual(circularRackRedstoneLaunch(r,{rng:()=>0}),{position:{x:30.5,y:64.5,z:30.5},velocity:{x:0,y:.5,z:0}});
+});
+test('Tilted/Circular/Cellar random slot ejection consumes only one exact bottle and updates visuals',()=>{
+ {const {p,b}=tiltedRack();p.selectedSlotIndex=0;hand(p,NS+':wine_q2',1);putTiltedRackBottle(p,b,{x:.9,z:.5});hand(p,NS+':sherry_q5',1);putTiltedRackBottle(p,b,{x:.5,z:.5});const out=popTiltedRackRedstone(b,{selectionRng:()=>.75,motionRng:()=>0});assert.equal(out.item,NS+':sherry_q5');assert.deepEqual(TILTED_RACK_TEST.store.load(tiltedRackKey(d.id,b.location)).slots,[NS+':wine_q2',null,null]);}
+ d.blocks.clear();d.entities.clear();world.dp.clear();
+ {const {p,b}=circularRack();p.selectedSlotIndex=0;hand(p,NS+':wine_q3',1);putCircularRackBottle(p,b,{x:.5,z:.1});hand(p,NS+':vodka_q6',1);putCircularRackBottle(p,b,{x:.85,z:.3});const out=popCircularRackRedstone(b,{selectionRng:()=>.9,motionRng:()=>0});assert.equal(out.item,NS+':vodka_q6');assert.equal(CIRCULAR_RACK_TEST.store.load(circularRackKey(d.id,b.location)).slots.filter(Boolean).length,1);}
+ d.blocks.clear();d.entities.clear();world.dp.clear();
+ {const {p,b}=cellarCabinet();p.selectedSlotIndex=0;hand(p,NS+':wine_q4',1);useCellarCabinet(p,b,'North',{x:.9,y:.9,z:0});hand(p,NS+':sherry_q6',1);useCellarCabinet(p,b,'North',{x:.5,y:.9,z:0});const out=popCellarCabinetRedstone(b,{selectionRng:()=>.99,motionRng:()=>0});assert.equal(out.item,NS+':sherry_q6');assert.equal(CELLAR_CABINET_TEST.store.load(cellarCabinetKey(d.id,b.location)).slots.filter(Boolean).length,1);}
+});
+test('projectile spawn or state-save failure rolls storage back without swallowing the bottle',()=>{
+ const {p,b}=circularRack();p.selectedSlotIndex=0;hand(p,NS+':wine_q5',1);putCircularRackBottle(p,b,{x:.5,z:.1});const before=structuredClone(CIRCULAR_RACK_TEST.store.load(circularRackKey(d.id,b.location)));
+ d.failSpawn=true;assert.throws(()=>popCircularRackRedstone(b,{selectionRng:()=>0,motionRng:()=>0}),/SPAWN_FAIL/);d.failSpawn=false;assert.deepEqual(CIRCULAR_RACK_TEST.store.load(circularRackKey(d.id,b.location)),before);assert.equal(thrownDrinks().length,0);
+ world.failSet=true;assert.throws(()=>popCircularRackRedstone(b,{selectionRng:()=>0,motionRng:()=>0}),/SAVE_FAILURE/);assert.deepEqual(CIRCULAR_RACK_TEST.store.load(circularRackKey(d.id,b.location)),before);assert.equal(thrownDrinks().length,0);
+});
+test('thrown drink impact keeps exact quality payload and applies native splash effects in four-block radius',()=>{
+ const {p,b}=bottleHolder();p.selectedSlotIndex=0;hand(p,NS+':wine_q6',1);putHolderBottle(p,b);const before=storageProjectileDiagnostics.impacts;
+ const out=popHolderRedstone(b,{selectionRng:()=>0,motionRng:()=>0}),projectile=out.projectile,target=d.spawnEntity('minecraft:zombie',{...projectile.location,x:projectile.location.x+1});target.health=mockHealth(20,20);
+ world.afterEvents.projectileHitEntity.emit({projectile,getEntityHit:()=>({entity:target})});
+ assert(projectile.removed);assert.equal(projectile.getDynamicProperty(THROWN_ITEM),NS+':wine_q6');assert(target.getEffect('regeneration'));assert.equal(storageProjectileDiagnostics.impacts,before+1);
 });
 for(const c of COLORS)test('full place -> sit -> turn -> dismount -> recover '+c,()=>{const {p,b,e}=stool(c);assert.equal(count(p,NS+':'+c+'_bar_stool'),1);assert.equal(b.typeId,NS+':stool_'+c);assert.equal(e.typeId,seatId(c));assert.equal(sitOnFurniture(p,b),e);assert.equal(e.rideable.getRiders()[0],p);p.rotation.y=45;tickFurniture();assert.equal(e.getProperty(NS+':seat_yaw'),-135);assert.deepEqual(e.rotation,{x:0,y:180});p.isSneaking=true;tickFurniture();assert.equal(e.rideable.getRiders().length,0);recoverFurniture(p,b);assert(b.isAir);assert(e.removed);assert.equal(count(p,NS+':'+c+'_bar_stool'),2);});
 for(const c of LIGHT_COLORS)test('place and recover exact light design '+c,()=>{const {p,b}=light(c);assert.equal(b.typeId,NS+':light_'+c);assert.equal(recoverFurniture(p,b),NS+':string_lights_'+c);assert(b.isAir);assert.equal(count(p,NS+':string_lights_'+c),2);});

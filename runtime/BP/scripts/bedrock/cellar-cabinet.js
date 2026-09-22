@@ -4,9 +4,9 @@ import {FACING,POSITION,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':cellar_cabinet_bottle_visual',ANCHOR=NS+':cellar_cabinet_anchor',store=new CellarCabinetStore(world),visuals=new Map();let cursor=0;
-export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'NOT_ADAPTED'};
+export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){cellarCabinetDiagnostics.errors.push(String(e));if(cellarCabinetDiagnostics.errors.length>16)cellarCabinetDiagnostics.errors.shift();}
 function neighborState(block,p){const b=blockAt(block.dimension,p);return b?.typeId===CELLAR_CABINET?{typeId:b.typeId,facing:b.permutation.getState(FACING)}:undefined;}
 function cabinetNeighbors(block){const f=block.permutation.getState(FACING)??0;return {left:neighborState(block,plus(block.location,facingVector((f+1)%4))),right:neighborState(block,plus(block.location,facingVector((f+3)%4)))};}
@@ -22,7 +22,20 @@ export function useCellarCabinet(player,block,face,faceLocation,{expectedRevisio
 export function recoverCellarCabinet(player,block,{expectedRevision}={}){canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===CELLAR_CABINET,'NOT_CELLAR_CABINET');const k=cellarCabinetKey(block.dimension.id,block.location),old=store.load(k);check(old,'MISSING_CELLAR_CABINET_STATE');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');const give=[{id:CELLAR_CABINET,count:1},...old.slots.filter(Boolean).map(id=>({id,count:1}))],f=block.permutation.getState(FACING)??0;transact(player,block,old,undefined,0,give,air());for(const p of[plus(block.location,facingVector((f+1)%4)),plus(block.location,facingVector((f+3)%4))]){const b=blockAt(block.dimension,p);if(b?.typeId===CELLAR_CABINET)syncCellarCabinetNeighborhood(b);}cellarCabinetDiagnostics.recovered++;return give;}
 export function maintainCellarCabinetVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseCellarCabinetAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==CELLAR_CABINET){discard(e,'orphans');return;}const state=store.load(cellarCabinetKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncCellarCabinetVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickCellarCabinets(){cursor=tickStorageVisuals(visuals,cursor,maintainCellarCabinetVisual);}
-export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}}});}
+function rngFactor(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return .5+n*2;}
+export function cellarCabinetRedstoneLaunch(block,{rng=Math.random}={}){
+ const facing=block.permutation.getState(FACING)??0,v=facingVector(facing),factor=rngFactor(rng);
+ return {position:{x:block.location.x+.5+v.x*.5,y:block.location.y+.5,z:block.location.z+.5+v.z*.5},velocity:{x:v.x*factor,y:.1*factor,z:v.z*factor}};
+}
+export function popCellarCabinetRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){
+ check(block?.typeId===CELLAR_CABINET,'NOT_CELLAR_CABINET');const key=cellarCabinetKey(block.dimension.id,block.location),state=store.load(key);check(state,'MISSING_CELLAR_CABINET_STATE');
+ const candidates=state.slots.flatMap((item,slot)=>item?[{slot,item}]:[]);
+ try{
+  const out=popRandomStoredBottle({block,store,key,state,candidates,remove:(s,slot)=>cellarCabinetTake(s,slot).state,pose:({block,rng})=>cellarCabinetRedstoneLaunch(block,{rng}),sync:syncCellarCabinetVisuals,selectionRng,motionRng,...(spawn?{spawn}:{})});
+  if(out.status==='LAUNCHED')cellarCabinetDiagnostics.redstonePops++;else cellarCabinetDiagnostics.redstoneNoops++;return out;
+ }catch(e){cellarCabinetDiagnostics.redstoneErrors++;throw e;}
+}
+export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCellarCabinetRedstone(b),x=>{cellarCabinetDiagnostics.redstoneErrors++;error(x);})});}
 export function installCellarCabinetEvents(){
  installStatefulStorageRoutes({
   isBlock:block=>block?.typeId===CELLAR_CABINET,

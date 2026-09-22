@@ -36,6 +36,10 @@
       },
       "minecraft:loot": "loot_tables/empty.json",
       "minecraft:light_dampening": 0,
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
       "minecraft:collision_box": {
         "origin": [
           -8,

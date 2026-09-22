@@ -273,37 +273,37 @@ def main():
    check('C6_holder_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:holder_kind')==list(range(16)))
    check('C6_holder_source_geometry',comps.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a10.holder' and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')=='geometry.kt_assets_a10.holder')
    check('C6_holder_collision',comps.get('minecraft:collision_box')=={'origin':[-3,0,-6],'size':[6,16,12]} and sum('minecraft:collision_box'in x['components']for x in perms)==2)
-   check('C6_holder_component','kaleidoscope_tavern:holder'in comps and comps.get('minecraft:tick',{}).get('interval_range')==[20,20])
+   check('C6_holder_component','kaleidoscope_tavern:holder'in comps and comps.get('minecraft:tick',{}).get('interval_range')==[20,20] and comps.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False})
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:holder_kind']
    check('C6_holder_helper',prop['range']==[1,15] and prop['client_sync'] and 'kt_holder_visual'in helper['components']['minecraft:type_family']['family'])
    hc=load(RP/'entity/runtime_holder_bottle_visual.entity.json')['minecraft:client_entity']['description'];rc=load(RP/'render_controllers/runtime_holder.render_controllers.json')['render_controllers']['controller.render.kt_runtime.holder_bottle']
    check('C6_holder_client_maps',len(hc['geometry'])==15 and len(hc['textures'])==15 and hc['scripts']['scale']=='0.95' and hc['render_controllers']==['controller.render.kt_runtime.holder_bottle'])
    check('C6_holder_render_arrays',len(rc['arrays']['geometries']['Array.kind'])==15 and len(rc['arrays']['textures']['Array.kind'])==15 and "holder_kind" in rc['geometry'])
-   check('C6_holder_source_scope',len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
+   check('C6_holder_source_scope',len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['redstone_pop']=='ADAPTED_DRINKS' and b['molotov']=='PENDING_PROJECTILE_TYPE')
   elif b['kind']=='tilted_rack':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_tilted_rack_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and len(perms)==4)
    check('C6_tilted_rack_source_geometry',comps.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a6.tilted_rack' and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')=='geometry.kt_assets_a17.item_display_tilted_rack')
    check('C6_tilted_rack_collision',comps.get('minecraft:collision_box')=={'origin':[-8,0,-3],'size':[16,14,10]} and perms[1]['components'].get('minecraft:collision_box')=={'origin':[-7,0,-8],'size':[10,14,16]} and perms[2]['components'].get('minecraft:collision_box')=={'origin':[-8,0,-7],'size':[16,14,10]} and perms[3]['components'].get('minecraft:collision_box')=={'origin':[-3,0,-8],'size':[10,14,16]})
-   check('C6_tilted_rack_component','kaleidoscope_tavern:tilted_rack'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   check('C6_tilted_rack_component','kaleidoscope_tavern:tilted_rack'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and comps.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False})
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
    check('C6_tilted_rack_helper',prop['range']==[1,25] and prop['client_sync'] and 'kt_tilted_rack_visual'in helper['components']['minecraft:type_family']['family'])
    tc=load(RP/'entity/runtime_tilted_rack_bottle_visual.entity.json')['minecraft:client_entity']['description'];trc=load(RP/'render_controllers/runtime_tilted_rack.render_controllers.json')['render_controllers']['controller.render.kt_runtime.tilted_rack_bottle']
    check('C6_tilted_rack_client_maps',len(tc['geometry'])==25 and len(tc['textures'])==25 and tc['scripts']['scale']=='0.9' and tc['render_controllers']==['controller.render.kt_runtime.tilted_rack_bottle'])
    check('C6_tilted_rack_render_arrays',len(trc['arrays']['geometries']['Array.kind'])==25 and len(trc['arrays']['textures']['Array.kind'])==25 and 'storage_kind'in trc['geometry'])
-   check('C6_tilted_rack_source_scope',b['slots']==3 and len(b['allowed_bases'])==22 and b['blocked_bases']==['brandy','carignan'] and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
+   check('C6_tilted_rack_source_scope',b['slots']==3 and len(b['allowed_bases'])==22 and b['blocked_bases']==['brandy','carignan'] and b['redstone_pop']=='ADAPTED_DRINKS' and b['molotov']=='PENDING_PROJECTILE_TYPE')
   elif b['kind']=='circular_rack':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_circular_rack_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and len(perms)==4)
    check('C6_circular_rack_source_geometry',comps.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a6.circular_rack' and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')=='geometry.kt_assets_a17.item_display_circular_rack')
    check('C6_circular_rack_shape_light',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,2,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,2,16]} and comps.get('minecraft:light_emission')==14)
-   check('C6_circular_rack_component','kaleidoscope_tavern:circular_rack'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   check('C6_circular_rack_component','kaleidoscope_tavern:circular_rack'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and comps.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False})
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
    check('C6_circular_rack_helper',prop['range']==[1,25] and prop['client_sync'] and 'kt_circular_rack_visual'in helper['components']['minecraft:type_family']['family'])
    cc=load(RP/'entity/runtime_circular_rack_bottle_visual.entity.json')['minecraft:client_entity']['description'];crc=load(RP/'render_controllers/runtime_circular_rack.render_controllers.json')['render_controllers']['controller.render.kt_runtime.circular_rack_bottle']
    check('C6_circular_rack_client_maps',len(cc['geometry'])==25 and len(cc['textures'])==25 and cc['scripts']['scale']=='0.82' and cc['render_controllers']==['controller.render.kt_runtime.circular_rack_bottle'])
    check('C6_circular_rack_render_arrays',len(crc['arrays']['geometries']['Array.kind'])==25 and len(crc['arrays']['textures']['Array.kind'])==25 and 'storage_kind'in crc['geometry'])
-   check('C6_circular_rack_source_scope',b['slots']==6 and len(b['allowed_bases'])==24 and b['blocked_bases']==[] and b['light_emission']==14 and b['particle']=='minecraft:endrod' and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED')
+   check('C6_circular_rack_source_scope',b['slots']==6 and len(b['allowed_bases'])==24 and b['blocked_bases']==[] and b['light_emission']==14 and b['particle']=='minecraft:endrod' and b['redstone_pop']=='ADAPTED_DRINKS' and b['molotov']=='PENDING_PROJECTILE_TYPE')
   elif b['kind']=='bar_cabinet':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_bar_cabinet_states:'+b['style'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3])
@@ -318,15 +318,19 @@ def main():
    check('C6_cellar_cabinet_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:position')==[0,1,2,3] and 'kaleidoscope_tavern:powered'not in states)
    check('C6_cellar_cabinet_geometries',all(g in geom for g in b['geometry_by_position'].values()) and sum('kaleidoscope_tavern:position'in x['condition']for x in perms)==4 and sum('kaleidoscope_tavern:facing'in x['condition']for x in perms)==4)
    check('C6_cellar_cabinet_shape_item',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
-   check('C6_cellar_cabinet_component','kaleidoscope_tavern:cellar_cabinet'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True})
+   check('C6_cellar_cabinet_component','kaleidoscope_tavern:cellar_cabinet'in comps and comps.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and comps.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False})
    helper=entity_defs[b['helper']];prop=helper['description']['properties']['kaleidoscope_tavern:storage_kind']
    check('C6_cellar_cabinet_helper',prop['range']==[1,15] and prop['client_sync'] and 'kt_cellar_cabinet_visual'in helper['components']['minecraft:type_family']['family'])
    cc=load(RP/'entity/runtime_cellar_cabinet_bottle_visual.entity.json')['minecraft:client_entity']['description'];crc=load(RP/'render_controllers/runtime_cellar_cabinet.render_controllers.json')['render_controllers']['controller.render.kt_runtime.cellar_cabinet_bottle']
    check('C6_cellar_cabinet_client_maps',len(cc['geometry'])==15 and len(cc['textures'])==15 and cc['scripts']['scale']=='1.0' and cc['render_controllers']==['controller.render.kt_runtime.cellar_cabinet_bottle'])
    check('C6_cellar_cabinet_render_arrays',len(crc['arrays']['geometries']['Array.kind'])==15 and len(crc['arrays']['textures']['Array.kind'])==15 and 'storage_kind'in crc['geometry'])
-   check('C6_cellar_cabinet_source_scope',b['slots']==9 and len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['front_face_only'] and b['connection_states']==4 and b['powered_state']=='OMITTED_WITH_REDSTONE_EJECTION' and b['redstone_pop']=='NOT_ADAPTED' and b['molotov']=='EXCLUDED' and b['trapdoor_recipes']==20)
+   check('C6_cellar_cabinet_source_scope',b['slots']==9 and len(b['allowed_bases'])==14 and len(b['blocked_bases'])==10 and b['front_face_only'] and b['connection_states']==4 and b['powered_state']=='NATIVE_REDSTONE_CONSUMER_EDGE_EVENT' and b['redstone_pop']=='ADAPTED_DRINKS' and b['molotov']=='PENDING_PROJECTILE_TYPE' and b['trapdoor_recipes']==20)
   else:
    check('C6_known_furniture_kind:'+str(b.get('kind')),False)
+ thrown=entity_defs.get('kaleidoscope_tavern:thrown_drink',{});tdesc=thrown.get('description',{});tcomp=thrown.get('components',{});tprop=tdesc.get('properties',{}).get('kaleidoscope_tavern:storage_kind',{});proj=tcomp.get('minecraft:projectile',{})
+ check('C6_storage_thrown_drink_entity',tdesc.get('is_summonable') is True and tprop.get('range')==[1,25] and tprop.get('client_sync') is True and 'kt_thrown_drink' in tcomp.get('minecraft:type_family',{}).get('family',[]) and proj.get('gravity')==.05 and proj.get('hit_sound')=='glass' and proj.get('uncertainty_base')==0 and proj.get('uncertainty_multiplier')==0)
+ thrown_client=clients.get('kaleidoscope_tavern:thrown_drink',{})
+ check('C6_storage_thrown_drink_client',len(thrown_client.get('geometry',{}))==25 and len(thrown_client.get('textures',{}))==25 and thrown_client.get('scripts',{}).get('scale')=='0.6' and thrown_client.get('render_controllers')==['controller.render.kt_runtime.circular_rack_bottle'])
  sofa=entity_defs.get('kaleidoscope_tavern:sofa_seat',{});ride=sofa.get('components',{}).get('minecraft:rideable',{})
  check('C6_sofa_native_seat',ride.get('seat_count')==1 and ride.get('seats')==[{'position':[0,.45,0]}] and ride.get('family_types')==['player'] and not ride.get('pull_in_entities',True))
  check('C6_sofa_invisible_client',clients.get('kaleidoscope_tavern:sofa_seat',{}).get('geometry',{}).get('default')=='geometry.kt_runtime.invisible')

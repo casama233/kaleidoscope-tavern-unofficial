@@ -1,12 +1,12 @@
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
-import {NS,FACING,facingForYaw} from '../core/furniture.js';
+import {NS,FACING,facingForYaw,facingVector} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
-export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
+export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
 function kind(block){return block.permutation.getState(HOLDER_KIND)??0;}
 function intact(block,state){return block?.typeId===HOLDER_BLOCK&&kind(block)===(state?.kind??0);}
@@ -47,7 +47,20 @@ export function maintainHolderVisual(e){
  if(e?.typeId!==HELPER)return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
 }
 export function tickHolderVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainHolderVisual);}
-export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}}});}
+function rngFactor(rng,scale=1,base=.5){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return base+n*scale;}
+export function holderRedstoneLaunch(block,{rng=Math.random}={}){
+ const facing=block.permutation.getState(FACING)??0,v=facingVector(facing),factor=rngFactor(rng);
+ return {position:{x:block.location.x+.5+v.x*.5,y:block.location.y+.875,z:block.location.z+.5+v.z*.5},velocity:{x:v.x*factor,y:.375*factor,z:v.z*factor}};
+}
+export function popHolderRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){
+ check(block?.typeId===HOLDER_BLOCK,'NOT_HOLDER');const key=holderKey(block.dimension.id,block.location),state=store.load(key);
+ if(!state){holderDiagnostics.redstoneNoops++;return {status:'EMPTY'};}check(intact(block,state),'HOLDER_STATE_MISMATCH');
+ try{
+  const out=popRandomStoredBottle({block,store,key,state,candidates:[{slot:0,item:state.item}],remove:()=>undefined,pose:({block,rng})=>holderRedstoneLaunch(block,{rng}),permutation:b=>b.permutation.withState(HOLDER_KIND,0),sync:syncHolderVisual,selectionRng,motionRng,...(spawn?{spawn}:{})});
+  if(out.status==='LAUNCHED')holderDiagnostics.redstonePops++;else holderDiagnostics.redstoneNoops++;return out;
+ }catch(e){holderDiagnostics.redstoneErrors++;throw e;}
+}
+export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popHolderRedstone(b),x=>{holderDiagnostics.redstoneErrors++;error(x);})});}
 export function installHolderEvents(){
  installStatefulStorageRoutes({
   isBlock:block=>block?.typeId===HOLDER_BLOCK,

@@ -4,9 +4,9 @@ import {FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
-import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=new CircularRackStore(world),visuals=new Map();let cursor=0;
-export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'NOT_ADAPTED'};
+export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){circularRackDiagnostics.errors.push(String(e));if(circularRackDiagnostics.errors.length>16)circularRackDiagnostics.errors.shift();}
 function slotHelpers(block,slot){const a=circularRackAnchor(circularRackKey(block.dimension.id,block.location),slot);return block.dimension.getEntities({type:HELPER,location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}
 function discard(e,reason){e.remove();visuals.delete(e.id);circularRackDiagnostics[reason]=(circularRackDiagnostics[reason]??0)+1;}
@@ -21,7 +21,19 @@ export function recoverCircularRack(player,block,{expectedRevision}={}){canWrite
 export function pulseCircularRackParticle(block,random=Math.random){try{if(block?.typeId!==CIRCULAR_RACK)return false;const state=store.load(circularRackKey(block.dimension.id,block.location));if(!state?.slots.some(Boolean))return false;block.dimension.spawnParticle('minecraft:endrod',circularParticlePoint(block.location,random));circularRackDiagnostics.particles++;return true;}catch(e){error(e);return false;}}
 export function maintainCircularRackVisual(e){if(e?.typeId!==HELPER)return;try{const a=parseCircularRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==CIRCULAR_RACK){discard(e,'orphans');return;}const state=store.load(circularRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncCircularRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickCircularRackVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainCircularRackVisual);}
-export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}}});}
+function rngFactor(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return .5+n*2;}
+export function circularRackRedstoneLaunch(block,{rng=Math.random}={}){
+ return {position:{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5},velocity:{x:0,y:rngFactor(rng),z:0}};
+}
+export function popCircularRackRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){
+ check(block?.typeId===CIRCULAR_RACK,'NOT_CIRCULAR_RACK');const key=circularRackKey(block.dimension.id,block.location),state=store.load(key);check(state,'MISSING_CIRCULAR_RACK_STATE');
+ const candidates=state.slots.flatMap((item,slot)=>item?[{slot,item}]:[]);
+ try{
+  const out=popRandomStoredBottle({block,store,key,state,candidates,remove:(s,slot)=>circularRackTake(s,slot).state,pose:({block,rng})=>circularRackRedstoneLaunch(block,{rng}),sync:syncCircularRackVisuals,selectionRng,motionRng,...(spawn?{spawn}:{})});
+  if(out.status==='LAUNCHED')circularRackDiagnostics.redstonePops++;else circularRackDiagnostics.redstoneNoops++;return out;
+ }catch(e){circularRackDiagnostics.redstoneErrors++;throw e;}
+}
+export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCircularRackRedstone(b),x=>{circularRackDiagnostics.redstoneErrors++;error(x);})});}
 export function installCircularRackEvents(){
  installStatefulStorageRoutes({
   isBlock:block=>block?.typeId===CIRCULAR_RACK,

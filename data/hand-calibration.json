@@ -3,9 +3,9 @@
   "units": "model_units_16_per_block",
   "first": {
     "position": [
-      0,
-      0,
-      0
+      8.96,
+      -8.32,
+      -11.52
     ],
     "rotation": [
       15,
@@ -35,5 +35,5 @@
       0
     ]
   },
-  "status": "geometry lip measured from original body; wrist values inherited adaptation, NOT engine calibrated"
+  "status": "Java first-person translation is wired to render_anchor; NOT engine calibrated, real-client visual acceptance still required"
 }

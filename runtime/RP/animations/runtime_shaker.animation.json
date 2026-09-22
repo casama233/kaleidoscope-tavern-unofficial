@@ -4,11 +4,11 @@
     "animation.kt_runtime.shaker.hold_first": {
       "loop": true,
       "bones": {
-        "hand_mount": {
+        "render_anchor": {
           "position": [
-            0,
-            0,
-            0
+            8.96,
+            -8.32,
+            -11.52
           ],
           "rotation": [
             15,
@@ -22,7 +22,7 @@
     "animation.kt_runtime.shaker.hold_third": {
       "loop": true,
       "bones": {
-        "hand_mount": {
+        "render_anchor": {
           "position": [
             0,
             4,
@@ -40,7 +40,7 @@
     "animation.kt_runtime.shaker.first": {
       "loop": true,
       "bones": {
-        "hand_mount": {
+        "render_anchor": {
           "position": [
             0,
             "-(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 9.6",
@@ -97,7 +97,7 @@
       "loop": false,
       "animation_length": 0.6,
       "bones": {
-        "hand_mount": {
+        "render_anchor": {
           "rotation": {
             "0": [
               0,

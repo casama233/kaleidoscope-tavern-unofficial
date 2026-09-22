@@ -7,7 +7,7 @@ def load(p):return json.loads(p.read_text(encoding='utf-8'))
 def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def main():
  # Native nonconsumable tools. No food/shooter/throwable used as a fake hold sensor.
- item=load(BP/'items/shaker.json');c=item['minecraft:item']['components'];c[N+':portable_shaker']={};c['minecraft:interact_button']='action.interact.kt_shake';c['minecraft:allow_off_hand']=False
+ item=load(BP/'items/shaker.json');c=item['minecraft:item']['components'];c[N+':portable_shaker']={};c['minecraft:interact_button']='action.interact.kt_shake';c['minecraft:allow_off_hand']=False;c['minecraft:hand_equipped']=True
  dump(BP/'items/shaker.json',item)
  for phase in ['active','pouring']:
   d=copy.deepcopy(item);d['minecraft:item']['description'].pop('menu_category',None);d['minecraft:item']['description']['identifier']=N+':shaker_'+phase;dump(BP/f'items/shaker_{phase}.json',d)
@@ -24,21 +24,21 @@ def main():
  wave='(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25)'
  # Source motion constants are exact; wrist anchor/blending is an explicit Bedrock adapter candidate.
  animations={
- 'animation.kt_runtime.shaker.hold_first':{'loop':True,'bones':{'hand_mount':{'position':[0,0,0],'rotation':[15,0,0],'scale':.6}}},
- 'animation.kt_runtime.shaker.hold_third':{'loop':True,'bones':{'hand_mount':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6}}},
- 'animation.kt_runtime.shaker.first':{'loop':True,'bones':{'hand_mount':{'position':[0,f'-{wave} * 9.6',0]}}},
+ 'animation.kt_runtime.shaker.hold_first':{'loop':True,'bones':{'render_anchor':{'position':[8.96,-8.32,-11.52],'rotation':[15,0,0],'scale':.6}}},
+ 'animation.kt_runtime.shaker.hold_third':{'loop':True,'bones':{'render_anchor':{'position':[0,4,-2],'rotation':[0,0,0],'scale':.6}}},
+ 'animation.kt_runtime.shaker.first':{'loop':True,'bones':{'render_anchor':{'position':[0,f'-{wave} * 9.6',0]}}},
  'animation.kt_runtime.shaker.arms':{'loop':True,'animation_length':6,'bones':{'rightarm':{'rotation':[f'247.50000580486656 - {wave} * 180',0,-9]},'leftarm':{'rotation':[f'247.50000580486656 + {wave} * 180',0,9]}}},
  'animation.kt_runtime.shaker.release':{'loop':False,'animation_length':.08,'bones':{}},
  'animation.kt_runtime.shaker.table':{'loop':True,'bones':{'root':{'rotation':[0,0,f'{wave} * 20'],'position':[0,f'{wave} * 1.2',0]}}},
- 'animation.kt_runtime.shaker.pour':{'loop':False,'animation_length':.6,'bones':{'hand_mount':{'rotation':{'0':[0,0,0],'0.12':[0,0,65],'0.48':[0,0,65],'0.6':[0,0,0]}},'bone2':{'position':{'0':[0,0,0],'0.12':[0,2,0],'0.48':[0,2,0],'0.6':[0,0,0]}}}}
+ 'animation.kt_runtime.shaker.pour':{'loop':False,'animation_length':.6,'bones':{'render_anchor':{'rotation':{'0':[0,0,0],'0.12':[0,0,65],'0.48':[0,0,65],'0.6':[0,0,0]}},'bone2':{'position':{'0':[0,0,0],'0.12':[0,2,0],'0.48':[0,2,0],'0.6':[0,0,0]}}}}
  }
  for key in ['animation.kt_runtime.shaker.first','animation.kt_runtime.shaker.table']:
   animations[key]['animation_length']=0.20943951023931953
  dump(RP/'animations/runtime_shaker.animation.json',{'format_version':'1.8.0','animations':animations})
  dump(RP/'render_controllers/runtime_shaker_hand.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.shaker_hand':{'geometry':'Geometry.default','materials':[{'*':'Material.default'}],'textures':['Texture.default']}}})
  for short in ['shaker','shaker_active','shaker_pouring']:
-  anim={'hold_first':'animation.kt_runtime.shaker.hold_first','hold_third':'animation.kt_runtime.shaker.hold_third'};scripts=[{'hold_first':'c.is_first_person'},{'hold_third':'!c.is_first_person'}]
-  if short=='shaker_active':anim['shake_first']='animation.kt_runtime.shaker.first';scripts.append({'shake_first':'c.is_first_person'})
+  anim={'hold_first':'animation.kt_runtime.shaker.hold_first','hold_third':'animation.kt_runtime.shaker.hold_third'};scripts=[{'hold_first':'context.is_first_person == 1.0'},{'hold_third':'context.is_first_person == 0.0'}]
+  if short=='shaker_active':anim['shake_first']='animation.kt_runtime.shaker.first';scripts.append({'shake_first':'context.is_first_person == 1.0'})
   if short=='shaker_pouring':anim['pour']='animation.kt_runtime.shaker.pour';scripts.append('pour')
   d={'identifier':N+':'+short,'item':{N+':'+short:"q.is_owner_identifier_any('minecraft:player')"},'materials':{'default':'entity_alphatest'},'textures':{'default':'textures/kaleidoscope_tavern/block/mixology/shaker'},'geometry':{'default':'geometry.kt_runtime.shaker_held'},'animations':anim,'scripts':{'animate':scripts},'render_controllers':['controller.render.kt_runtime.shaker_hand']}
   dump(RP/f'attachables/{short}.attachable.json',{'format_version':'1.10.0','minecraft:attachable':{'description':d}})

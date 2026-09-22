@@ -23,13 +23,13 @@
       "scripts": {
         "animate": [
           {
-            "hold_first": "c.is_first_person"
+            "hold_first": "context.is_first_person == 1.0"
           },
           {
-            "hold_third": "!c.is_first_person"
+            "hold_third": "context.is_first_person == 0.0"
           },
           {
-            "shake_first": "c.is_first_person"
+            "shake_first": "context.is_first_person == 1.0"
           }
         ]
       },

@@ -65,7 +65,7 @@ test('shared break router gives bare trellis a Survival world drop and Java wood
 test('empty BottleBlockItem normal use places one hidden bottle block without sneak, then empty hand returns it',()=>{
  const p=player(),pos=site(),support=dim.getBlock(beneath(pos));h(p,NS+':empty_bottle',4);p.isSneaking=false;const e=click(p,support);assert(e.cancel);system.advance();
  const b=dim.getBlock(pos);assert.equal(b.typeId,BOTTLE_TEST.EMPTY_BLOCK);assert.equal(count(p,NS+':empty_bottle'),3);assert.equal(b.permutation.getState(BOTTLE_TEST.FACING),2);
- h(p,undefined);click(p,b);system.advance();assert(b.isAir);assert.equal(count(p,NS+':empty_bottle'),4);
+ p.selectedSlotIndex=1;click(p,b);system.advance();assert(b.isAir);assert.equal(count(p,NS+':empty_bottle'),4);
 });
 test('placed empty bottle uses Java creative placement conservation and Survival break glass route',()=>{
  const p=new Player('empty-creative-'+(++n),dim,GameMode.Creative),pos=site();h(p,NS+':empty_bottle',5);placeEmptyBottle(p,pos);assert.equal(count(p,NS+':empty_bottle'),5);takeEmptyBottle(p,dim.getBlock(pos));assert.equal(count(p,NS+':empty_bottle'),6);

@@ -161,7 +161,9 @@ def main():
  check('C3_cup_blocks',sum(x.startswith('kaleidoscope_tavern:cup_')for x in block_defs)==15)
  check('C3_station_exists','kaleidoscope_tavern:shaker_station'in block_defs)
  check('C3_signature_nonstackable',item_defs['kaleidoscope_tavern:signature_cocktail']['components']['minecraft:max_stack_size']==1)
- check('24_display_blocks',sum(x.startswith('kaleidoscope_tavern:bottle_')for x in block_defs)==24)
+ check('24_display_blocks',sum(x.startswith('kaleidoscope_tavern:bottle_') and x!='kaleidoscope_tavern:bottle_empty' for x in block_defs)==24)
+ empty_bottle=block_defs.get('kaleidoscope_tavern:bottle_empty',{});ebd=empty_bottle.get('description',{});ebc=empty_bottle.get('components',{})
+ check('C2_placed_empty_bottle_internal_block',ebd.get('menu_category') is None and ebd.get('states',{}).get('kaleidoscope_tavern:facing')==[0,1,2,3] and ebc.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a3.empty_bottle_faces' and ebc.get('minecraft:material_instances',{}).get('*',{}).get('texture')=='kt_assets_a3_empty_bottle_faces' and ebc.get('minecraft:collision_box')=={'origin':[-3,0,-3],'size':[6,14,6]} and ebc.get('minecraft:selection_box')=={'origin':[-3,0,-3],'size':[6,14,6]})
  check('7_cultivation_blocks',sum(x.endswith((':trellis','vine_trellis','_crop'))for x in block_defs)==7)
  for ident in entity_defs:
   check('entity_client:'+ident,ident in clients)

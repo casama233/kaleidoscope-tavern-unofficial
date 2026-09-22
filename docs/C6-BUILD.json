@@ -189,6 +189,12 @@
       "asset": "cocktail_mojito",
       "fix": "Mojito: source-driven 15->14 element remap and 21->20 Bedrock cube regeneration, including locked Java rescale:true compatibility and updated-element ordering, plus exact official block PNG blob ed3b8944a1624b14a0905c77a46d23b0399e956e",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "asset": "cocktail_depth_charge",
+      "fix": "Depth Charge: source-driven 12->13 element remap with explicit added_elements and 18->19 Bedrock cube regeneration; old handle element expands with new elements 6/7, old crossed planes collapse via old8->new11 and old9 deletion; exact official block PNG blob 962980356fbecf1548ec5991feac3facee10db00 and item PNG blob 25703204a0c40bb8cf4bcce59211e50fd8b6594e",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

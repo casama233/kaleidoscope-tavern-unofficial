@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共14/15個模型（含 Allium Garden、Grasshopper、Bloody Mary、Screwdriver、White Lady、Mojito 官方block貼圖）的 cutout/幾何/UV 修正已同步 | `c70eec1` 只剩 Depth Charge 模型與block/item兩張貼圖待同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` **15/15模型與該提交全部變更的block/item貼圖均已同步**；來源快照、blob SHA、source-driven geometry regeneration 與CI離線驗證已收束 | `c70eec1` 資產差異已清零；仍剩 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏與各批次標記為 NOT_RUN 的 Minecraft 實機視覺驗收 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -166,6 +166,14 @@ Mojito 從15個 Java elements 收束為14個；Bedrock runtime 由21 cubes 收�
 新版 mapping 明示刪除舊 element 10，舊 11→新10、舊12→新11、舊14→新12；新版 element 13 是新的大型雙面薄平面，因此復用舊 element 13 的單-cube Bedrock 槽位來 materialize 新 element 13，並讓 remap 後輸出順序依 `updated_element` 排列，而不是依舊 cube index。官方 block PNG 由 blob `db879ba67959610ae87e75b0f4a678ff85a3e546` 更新到 `ed3b8944a1624b14a0905c77a46d23b0399e956e`，兩份 runtime texture byte-for-byte 同步。
 
 本批另外使用倉庫既有 `art/tools/render_preview.py` 對 baseline 與 materialized Mojito 的實際 `geo.json + PNG` 做離線 raster 比較；此圖只用於幾何/貼圖人工檢查，**不是 Minecraft 引擎截圖，也不替代 engine acceptance**。完成後 c70eec 模型覆蓋為 **14/15**，只剩 Depth Charge：12→13 elements、block PNG 與 item PNG。
+
+## Post-1.2 視覺同步 Batch 11：Depth Charge（c70eec1 收尾）
+
+Depth Charge 是 `c70eec1` 最後一個模型：Java 從12個 elements 增加到13個，Bedrock 由18 cubes 增加到19 cubes。同步前鎖定舊 Java model、舊 Bedrock `depth_charge.geo.json`（Git blob `2143d5c9e6a50f942dbac0d51eb0ca88ea2ef7dc`）、新版 Java model，以及官方 block/item PNG 的 old/new blobs。每次 apply/check 都先由舊 Java source 完整重建18個 baseline cubes，通過後才生成新版。
+
+這批新增最後一個可重用 mapping 能力 `added_elements`：舊 handle element 6 對應新版 element 5，新版 elements 6/7 以新增 cuboid 明示加入，形成三段式把手；舊交叉平面 element 8 對應新版 element 11，舊 element 9 明示刪除；舊 element 4 則重排到新版 element 12。新版 target 依 updated source element index 決定 cube 順序，因此最終為19 cubes。官方 block PNG 由 `5ee0738a935f880bf9d643e0500cee182cd761a7`（958 B）同步到 `962980356fbecf1548ec5991feac3facee10db00`（1408 B）；實際物品圖示 `textures/kaleidoscope_tavern_jar/item/depth_charge.png` 由官方 baseline blob `30a9abbeb4176a96d0ab0f7375df7495efab23e4` 更新到 `25703204a0c40bb8cf4bcce59211e50fd8b6594e`。
+
+本批也用實際 baseline/materialized `geo.json` 做3D人工檢查，並直接比較官方 old/new item PNG；檢查圖不進正式主線。完成後 **`c70eec1` 的15/15模型與該提交涉及的block/item貼圖差異全部收束**。Minecraft 遊戲內alpha-test、手持、第一/三人稱與不同圖形模式仍標記 **NOT_RUN**，不能用離線渲染代替實機驗收。
 
 ## Batch 7：Table 連接桌
 

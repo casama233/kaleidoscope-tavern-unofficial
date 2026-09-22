@@ -56,13 +56,15 @@ def main():
    if isinstance(v,dict):return {k:clean(x)for k,x in v.items()}
    return v
   return clean({'format_version':'1.21.0','minecraft:geometry':[holder]})
- def item(short,visual):
+ def item(short,visual,placed_block=None):
   # Rasterized original model/texture icon: explicitly derived, NOT an untouched original GUI sprite.
   geom=load(A/visual['geometry']['file']);tex=A/visual['textures'][0]['file'];teximg=Image.open(tex).convert('RGBA')
   image=renderer.raster(renderer.all_faces(renderer.decode_geo(geom)),teximg,size=64,yaw=35,pitch=25,cull=True)
   target=RP/f'textures/kt_runtime/icons/{short}.png';target.parent.mkdir(parents=True,exist_ok=True);image.save(target)
   key='kt_c6_'+short;icons['texture_data'][key]={'textures':'textures/kt_runtime/icons/'+short}
-  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
+  item_components={'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}
+  if placed_block:item_components['minecraft:block_placer']={'block':N+':'+placed_block}
+  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':item_components}})
   icon_records.append({'item':N+':'+short,'file':str(target.relative_to(R)),'source_geometry':visual['geometry']['file'],'source_texture':str(tex.relative_to(A)),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'kind':'derived64px_model_render','engine_gui_parity':False})
  def recipe_ingredient(val):
   if 'item'in val:return {'item':val['item']}
@@ -84,22 +86,26 @@ def main():
    dump(BP/f'recipes/{short}.json',{'format_version':'1.20.10','minecraft:recipe_shapeless':{'description':{'identifier':N+':'+short},'tags':['crafting_table'],'ingredients':[recipe_ingredient(x)for x in d['ingredients']],'result':result}})
   else:raise AssertionError('unsupported crafting type '+str(d['type']))
   if record:protect(src,'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
+ def native_facing_perms():
+  # placement_direction stores the player's facing; legacy Tavern facing stored the model-facing opposite.
+  native=[('south',0),('west',-90),('north',-180),('east',-270)]
+  return [{'condition':f"q.block_state('{N}:facing') == 0 && q.block_state('minecraft:cardinal_direction') == '{cardinal}'",'components':{'minecraft:transformation':{'rotation':[0,rotation,0]}}}for cardinal,rotation in native]+[{'condition':f"q.block_state('{N}:facing') == {legacy}",'components':{'minecraft:transformation':{'rotation':[0,-90*legacy,0]}}}for legacy in [1,2,3]]
  def labels(short,color,family):
   for lc in ['zh_TW','zh_CN','en_US']:
    label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else (TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈') if lc=='zh_TW' else CN[color]+'色'+('高脚凳'if family=='stool'else'彩灯'))
    names[lc][N+':'+short]=label
  for color in COLORS:
   visual=vis['bar_stool_'+color];short=color+'_bar_stool';block='stool_'+color;entity='seat_'+color
-  item(short,visual);labels(short,color,'stool');recipe(short)
+  item(short,visual,block);labels(short,color,'stool');recipe(short)
   atlas=visual['binding']['texture_aliases']['default'];texkey='kt_c6_stool_'+color;terrain['texture_data'][texkey]={'textures':atlas}
   c=components({'identifier':'geometry.kt_runtime.invisible'},{'*':{'texture':texkey,'render_method':'alpha_test'}})
   c.update({'minecraft:collision_box':{'origin':[-5,0,-5],'size':[10,14,10]},'minecraft:selection_box':{'origin':[-6,0,-6],'size':[12,16,12]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':stool':{},'minecraft:item_visual':{'geometry':{'identifier':visual['geometry']['identifier']},'material_instances':{'*':{'texture':texkey,'render_method':'alpha_test'}}}})
-  dump(BP/f'blocks/{block}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+block,'states':{N+':facing':[0,1,2,3]}},'components':c}})
+  dump(BP/f'blocks/{block}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+block,'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}},'states':{N+':facing':[0,1,2,3]}},'components':c}})
   ent={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':'+entity,'is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':seat_yaw':{'type':'int','range':[-180,180],'default':0,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]},'minecraft:rideable':{'seat_count':1,'family_types':['player'],'pull_in_entities':False,'crouching_skip_interact':True,'rider_can_interact':False,'interact_text':'action.interact.kt_sit','dismount_mode':'default','seats':[{'position':[0,.8125,0]}]}}}}
   dump(BP/f'entities/{entity}.json',ent)
   client={'identifier':N+':'+entity,'materials':{'default':'entity_alphatest'},'textures':{'default':atlas},'geometry':{'default':visual['geometry']['identifier']},'animations':{'seat_turn':'animation.kt_runtime.stool.turn'},'scripts':{'initialize':["v.kt_seat_angle = 0;"],'pre_animation':["v.kt_seat_angle = math.lerprotate(v.kt_seat_angle, q.property('kaleidoscope_tavern:seat_yaw'), math.clamp(q.delta_time * 12, 0, 1));"],'animate':['seat_turn']},'render_controllers':['controller.render.kt_runtime.furniture']}
   dump(RP/f'entity/runtime_{entity}.entity.json',{'format_version':'1.10.0','minecraft:client_entity':{'description':client}})
-  bindings.append({'kind':'stool','color':color,'item':N+':'+short,'block':N+':'+block,'helper':N+':'+entity,'source_visual':visual['key'],'geometry':visual['geometry']['identifier'],'texture':atlas,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'full_collision_parity':False})
+  bindings.append({'kind':'stool','color':color,'item':N+':'+short,'block':N+':'+block,'helper':N+':'+entity,'source_visual':visual['key'],'geometry':visual['geometry']['identifier'],'texture':atlas,'source_anchor_y':.875,'source_explicit_rider_offset':-.0625,'native_seat_y':.8125,'engine_facing_state':'minecraft:cardinal_direction','legacy_facing_state':N+':facing','native_block_placement':True,'full_collision_parity':False})
  for color in ['colorless',*COLORS]:
   short='string_lights_'+color;block='light_'+color;visual=vis[short];item(short,visual);labels(short,color,'light');recipe(short)
   c=components(copy.deepcopy(visual['binding']['geometry']),copy.deepcopy(visual['binding']['materials']))
@@ -113,9 +119,9 @@ def main():
   short=color+'_sofa';recipe(short,False);texkey='kt_assets_a4_block_deco_sofa_'+color;itemtex='kt_assets_a17_item_display_'+color+'_sofa';itemgeo=load(RP/f'models/entity/item_display_{color}_sofa.geo.json')['minecraft:geometry'][0]['description']['identifier']
   c=components({'identifier':sofa_geo['single']},{'*':{'texture':texkey,'render_method':'alpha_test'}})
   c.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,8,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':sofa':{},'minecraft:item_visual':{'geometry':{'identifier':itemgeo},'material_instances':{'*':{'texture':itemtex,'render_method':'alpha_test'}}}})
-  perms=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':sofa_geo[name]}}}for i,name in enumerate(connection_names)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
-  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]}},'components':c,'permutations':perms}})
-  bindings.append({'kind':'sofa','color':color,'item':N+':'+short,'block':N+':'+short,'helper':N+':sofa_seat','geometry_by_connection':sofa_geo,'world_texture':texkey,'item_geometry':itemgeo,'item_texture':itemtex,'source_anchor_y':.5125,'source_explicit_rider_offset':-.0625,'native_seat_y':.45,'connection_states':6,'waterlogged':False,'full_collision_parity':False})
+  perms=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':sofa_geo[name]}}}for i,name in enumerate(connection_names)]+native_facing_perms()
+  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]}},'components':c,'permutations':perms}})
+  bindings.append({'kind':'sofa','color':color,'item':N+':'+short,'block':N+':'+short,'helper':N+':sofa_seat','geometry_by_connection':sofa_geo,'world_texture':texkey,'item_geometry':itemgeo,'item_texture':itemtex,'source_anchor_y':.5125,'source_explicit_rider_offset':-.0625,'native_seat_y':.45,'connection_states':6,'engine_facing_state':'minecraft:cardinal_direction','legacy_facing_state':N+':facing','native_block_placement':True,'waterlogged':False,'full_collision_parity':False})
  sofa_ent={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':sofa_seat','is_spawnable':False,'is_summonable':True,'is_experimental':False},'components':{'minecraft:type_family':{'family':['kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]},'minecraft:rideable':{'seat_count':1,'family_types':['player'],'pull_in_entities':False,'crouching_skip_interact':True,'rider_can_interact':False,'interact_text':'action.interact.kt_sit','dismount_mode':'default','seats':[{'position':[0,.45,0]}]}}}}
  dump(BP/'entities/sofa_seat.json',sofa_ent)
  sofa_client={'identifier':N+':sofa_seat','materials':{'default':'entity_alphatest'},'textures':{'default':'textures/kaleidoscope_tavern/block/deco/sofa/blue'},'geometry':{'default':'geometry.kt_runtime.invisible'},'render_controllers':['controller.render.kt_runtime.furniture']}
@@ -134,7 +140,7 @@ def main():
  recipe('bar_counter',False);bar_itemgeo=load(RP/'models/entity/item_display_bar_counter.geo.json')['minecraft:geometry'][0]['description']['identifier']
  bc=components({'identifier':bar_geo['single']},{'*':{'texture':'kt_assets_a10_block_deco_bar_counter','render_method':'alpha_test'}})
  bc.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':bar_counter':{},'minecraft:item_visual':{'geometry':{'identifier':bar_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_bar_counter','render_method':'alpha_test'}}}})
- bp=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':bar_geo[name]}}}for i,name in enumerate(connection_names)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+ bp=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':bar_geo[name]}}}for i,name in enumerate(connection_names)]+native_facing_perms()
  dump(BP/'blocks/bar_counter.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':bar_counter','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]}},'components':bc,'permutations':bp}})
  bindings.append({'kind':'bar_counter','item':N+':bar_counter','block':N+':bar_counter','geometry_by_connection':bar_geo,'world_texture':'kt_assets_a10_block_deco_bar_counter','item_geometry':bar_itemgeo,'item_texture':'kt_assets_a17_item_display_bar_counter','connection_states':6,'waterlogged':False,'exact_collision_parity':True})
  dump(RP/'models/entity/runtime_glassware_holder.geo.json',glassware_holder_geometry());recipe('glassware_holder',False);holder_itemgeo=load(RP/'models/entity/item_display_glassware_holder.geo.json')['minecraft:geometry'][0]['description']['identifier'];slot_states=[N+':glass_slot_'+str(i)for i in range(4)]

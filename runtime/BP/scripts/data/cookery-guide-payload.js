@@ -56,11 +56,11 @@ export const COOKERY_GUIDE_PAYLOAD={
     ]},
     {id:'kaleidoscope_tavern:guide_racks',category:'tavern',icon:'textures/kaleidoscope_tavern_jar/item/holder',kinds:[],mechanics:[
       'Holder、斜置酒架、環形酒架、吧台酒櫃與窖藏酒櫃都能保存原本的精確酒瓶品質。',
-      '不同設備有不同槽位與可接受瓶型；空手點對應位置取回，拆除時會整體返還可保存內容。'
+      '不同設備有不同槽位與可接受瓶型；手持酒架／酒櫃可直接放置，空手點對應位置取回，潛行空手可回收設備。'
     ]},
     {id:'kaleidoscope_tavern:guide_furniture',category:'tavern',icon:'textures/kt_runtime/icons/blue_bar_stool',kinds:[],mechanics:[
       '沙發、桌子與吧台會依相鄰方塊自動連接；高腳凳可空手坐下，潛行離座。',
-      '家具以潛行使用放置；有人乘坐或背包無法安全回收時，不會強制拆除。'
+      '手持家具直接使用即可放置，不需要潛行；潛行空手用於回收。有人乘坐或背包無法安全回收時，不會強制拆除。'
     ]},
     {id:'kaleidoscope_tavern:guide_lighting',category:'tavern',icon:'textures/kt_runtime/icons/string_lights_colorless',kinds:[],mechanics:[
       '彩燈有無色與 16 種染色款，可用染料更換外觀；同色不重複消耗染料。',

@@ -61,7 +61,7 @@ export function placeFurniture(player,target,{face='Up'}={}){
  locks.with([key,player.id],()=>{
   const b=blockAt(d,p);check(b,'UNLOADED_TARGET');check(b.isAir,'SPACE_NOT_CLEAR');
   if(seated(f)){
-   check(face==='Up',f.kind==='stool'?'STOOL_TOP_ONLY':'SOFA_TOP_ONLY');check(permittedSupport(blockAt(d,plus(p,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
+   check(permittedSupport(blockAt(d,plus(p,{x:0,y:-1,z:0}))),'NEEDS_SOLID_SUPPORT');
    const above=blockAt(d,plus(p,{x:0,y:1,z:0}));check(above,'UNLOADED_CLEARANCE');check(above.isAir,'SEAT_HEADROOM');
   }
   if(f.kind==='pendant_lamp'){
@@ -121,9 +121,9 @@ export function tickFurniture(){const list=[...helpers.values()];if(!list.length
 export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id);if(!existing&&!heldFurniture)return;e.cancel=true;if(e.isFirstEvent===false)return;
-  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=existing?p:plus(p,faceOffset(face));
-  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if(!existing){check(e.player.isSneaking,'SNEAK_TO_PLACE');return placeFurniture(e.player,target,{face});}if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 空手坐下；潛行空手收回；彩燈使用染料；雙格吊燈可從任一半回收。');}));
+  if(e.cancel)return;const existing=furnitureBlock(e.block.typeId),hs=handSnapshot(e.player),heldFurniture=furnitureItem(hs.id),placing=!!heldFurniture;if(!existing&&!placing)return;e.cancel=true;if(e.isFirstEvent===false)return;
+  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,facing=e.block.permutation.getState(FACING),face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined,target=placing?plus(p,faceOffset(face)):p;
+  system.run(()=>safe(e.player,()=>{isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');if(placing)return placeFurniture(e.player,target,{face});if(existing.kind==='light'&&dyeColor(hs.id))return recolorLight(e.player,b);if(existing.kind==='glassware_holder'&&(hs.id===EMPTY_GLASSWARE||!hs.id)){if(!hs.id&&e.player.isSneaking)return recoverFurniture(e.player,b);return useGlasswareHolder(e.player,b,faceLocation);}if(!hs.id){if(e.player.isSneaking)return recoverFurniture(e.player,b);if(seated(existing))return sitOnFurniture(e.player,b);}tell(e.player,'§e[Tavern] 手持家具直接放置；空手坐下；潛行空手收回；彩燈使用染料。');}));
  });
  registerProtectedBreakRoute({
   id:'furniture',

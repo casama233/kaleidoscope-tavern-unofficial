@@ -4,6 +4,9 @@ import {faceOffset} from '../core/furniture.js';
 import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 
+const placementMatchers=[];
+function anyPlacementItem(id){for(const match of placementMatchers)try{if(match(id))return true;}catch{}return false;}
+
 function revisionOf(read,block){
  if(typeof read!=='function')return -1;
  try{return read(block)??-1;}catch{return -1;}
@@ -33,26 +36,27 @@ export function installStatefulStorageRoutes({
 }){
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function','INVALID_STORAGE_ROUTE');
  check(typeof place==='function'&&typeof interact==='function'&&typeof recover==='function','INVALID_STORAGE_ROUTE');
+ placementMatchers.push(isPlacementItem);
 
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;
-  const existing=!!isBlock(e.block),held=handSnapshot(e.player),placing=!existing&&!!isPlacementItem(held.id);
+  const existing=!!isBlock(e.block),held=handSnapshot(e.player),placing=!!isPlacementItem(held.id),otherStoragePlacement=!placing&&anyPlacementItem(held.id);
+  // A storage placement item owns the click. Existing storage from another route must
+  // yield so the matching placement route can place beside it instead of swallowing it.
+  if(existing&&otherStoragePlacement)return;
   if(!existing&&!placing)return;
   e.cancel=true;
   if(e.isFirstEvent===false)return;
   const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId,face=e.blockFace;
   const faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
-  const target=existing?location:plus(location,faceOffset(face));
-  const revision=existing?revisionOf(readRevision,e.block):-1;
+  const target=placing?plus(location,faceOffset(face)):location;
+  const revision=existing&&!placing?revisionOf(readRevision,e.block):-1;
   system.run(()=>safe(player,()=>{
    sameHand(player,held);
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
    const clicked=blockAt(dimension,location);
    check(clicked?.typeId===typeId,'BLOCK_CHANGED');
-   if(!existing){
-    check(player.isSneaking,'SNEAK_TO_PLACE');
-    return place({player,target,held,face,faceLocation,clicked});
-   }
+   if(placing)return place({player,target,held,face,faceLocation,clicked});
    return interact({player,block:clicked,held,face,faceLocation,revision});
   }));
  });

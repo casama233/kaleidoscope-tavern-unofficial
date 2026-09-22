@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊 | Tap 的原作開關／紅石上升沿／下方容器或掉落物接酒；Pressing Tub 的 tilt／waterlogging／Forge capability 自動化；實機時序仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿與下方 empty_bottle item entity 接酒** | Tap 的 placed empty-bottle block carrier、Facing／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub tilt／waterlogging／Forge capability；實機時序仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -37,7 +37,27 @@
 - Java `resetIfOutputEmpty()` 在最後一份成品取完後只清 batch／recipe／時間，**不會自動開桶蓋**。Bedrock 已改為同樣保持關蓋，下一輪必須由玩家重新開蓋後才能灌液。
 - Java `PressingTubBlock.use` 空手普通互動只移除 1 個原料；潛行空手才請求移除最多 64 個。Bedrock 先前固定整組取出，本批已改為 1／64 分流；Barrel 的原料移除仍保持整槽返還。
 - 葡萄核心生長規則已確認：普通葡萄固定 25%；冰葡萄在 Java biome base temperature `< 0.15` 時 80%，否則 25%；金葡萄在 `> 1.0` 時 80%，否則 25%。Bedrock Script API 2.7 可取得 biome identity/tags，但沒有 Java base-temperature 數值，因此目前維持 25% 保守降級，不用猜測 biome 表冒充等價。
-- 仍需下一小批：Tap 必須改成來源的「開啟→延遲→關閉→下方 carrier block/item entity 接酒」流程並補紅石上升沿；Pressing Tub 的側面放置 tilt、waterlogging 與對應碰撞；WildGrapevine 世界生成；biome 溫度加速的可驗證映射。
+- Tap 的 Barrel＋item-entity carrier 核心閉環已在下一批完成；仍需 placed carrier block、其他 TapBehavior、Facing／waterlogging。Pressing Tub 的側面放置 tilt／waterlogging、WildGrapevine 世界生成與 biome 溫度加速仍待後續小批。  
+
+
+## 釀酒閉環核對 Batch 2：Tap × Barrel item-entity carrier
+
+Java `TapBlock` 並不是「玩家手持空瓶點一下立即取酒」。來源流程是：關閉狀態嘗試開啟 → `TapBlockEntity` 進入取酒狀態 → **30 tick 後 Tap scheduled tick 先關閉，再重新驗證 source／destination，最後才由 Barrel 消耗 1 份成品**。玩家在 Tap 開著時再次點擊會直接關閉，因此能取消尚未完成的取酒；紅石只在未觸發→有訊號的上升沿嘗試開啟。
+
+本批先完成最小而真實的 Barrel carrier 路徑：
+
+- Tap block 新增 `kaleidoscope_tavern:open=[0,1]`，closed/open 分別使用原作 `geometry.kt_assets_a1.tap_closed/tap_open`；item visual 繼續保持 closed。
+- 使用原生 `minecraft:redstone_consumer {min_power:0, propagates_power:false}`，custom component 只在 `previousPowerLevel<=0 && powerLevel>0` 時開啟；`firstUpdate` 不製造假的上升沿。
+- 有有效 Barrel batch 且 Tap 正下方 1×1×1 AABB 內存在符合 carrier 的 item entity 時進入 30 tick extraction；不符合時仍依 Java 做 **5 tick 空擰**，不直接報錯或消耗內容。
+- 取酒前 5 tick 使用已收錄的 `kt_assets_a17:water_tap_drip` 粒子。Tap open session 只存在 Script 記憶體；若存檔／Script 重啟後留下 open block state，20 tick repair 會保守關閉而不補發成品，避免重複產物。
+- 30 tick 結束時重新解析相鄰 Barrel、batch 與 carrier。Barrel output 仍透過既有 `interact(... action:'extract')` 計算，因此保持 Q1–Q6、remaining、最後一瓶 reset／關蓋語義。
+- carrier item entity 支援 stack：多於1瓶時先生成 remainder，再移除原 entity；任一步失敗不提交 Barrel state。若 output placement／barrel save 失敗，會回滾 carrier、下方 bottle display／drop 與 machine raw state。
+- 下方為 air 且成品是品質酒瓶時，直接建立既有 `bottle_<base>` display block，並寫入同一 `BottleStore` 的精確 `*_q1..q6` item ID；若下方不是 air，則像 Java 一樣把結果生成為 item entity。
+- 手動第二次點擊 Tap 會立即關閉並取消 timer；不再把玩家手上的空瓶當作 Tap carrier。
+
+deterministic adapter 測試已覆蓋：32葡萄→4桶汁→4000mB→Q2→16份成品完整鏈、每份30 tick延遲、第一份轉成 placed bottle display、其餘在已佔用 destination 時成為 item drops、最後一份後 Barrel batch 清空而 lid 保持 closed；另有手動取消與紅石上升沿／持續高電平不重啟測試。
+
+**本批刻意未宣稱完成**：Java 的 placed `EMPTY_BOTTLE` block carrier 尚未有 Bedrock 對等 block；Tap 的 horizontal facing／嚴格 barrel front-layer connection、waterlogging，以及 `WaterCauldronTapBehavior`、`WaterloggedBehavior`、`LavaCauldronTapBehavior`、`BeehiveTapBehavior`、`WatermelonTapBehavior`、`DragonHeadTapBehavior` 仍待後續批次。Minecraft／BDS／Realms 的 redstone callback、30-tick 實機時序、particle／sound 與 item-entity AABB 也仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

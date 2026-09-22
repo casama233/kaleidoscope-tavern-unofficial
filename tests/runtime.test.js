@@ -6,9 +6,10 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {world,system,startup,Player,ItemStack,Container,Entity,GameMode} from './fake-server.js';
 import {migrateLegacyGuide,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
-import {initializeTub,createBarrel,operate,press,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
+import {initializeTub,createBarrel,operate,press,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,finishTapExtraction,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';
 import {barrelCells} from '../runtime/BP/scripts/core/machines.js';
+import {bottleKey} from '../runtime/BP/scripts/core/bottles.js';
 import {packetsFor,EVENTS} from '../runtime/BP/scripts/core/transport.js';
 import {registerTavernExtension} from '../sdk/tavern-extension-client.js';
 const NS='kaleidoscope_tavern',dim=world.getDimension('overworld');
@@ -57,10 +58,34 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
  p.selectedSlotIndex=3;p.isSneaking=false;const topSide=dim.getBlock({x:b.location.x+1,y:b.location.y+2,z:b.location.z});click(p,topSide);assert.equal(state(b).open,false);tickBarrel(b);assert.equal(state(b).batch.quality,1);
  for(let i=0;i<26;i++)tickBarrel(b);assert.equal(state(b).batch.quality,2);
  const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');assert.equal(findTapCore(tap),b);
- p.isSneaking=false;hand(p,NS+':empty_bottle',16);for(let i=0;i<16;i++)click(p,tap);assert.equal(count(p,NS+':wine_q2'),16);assert.equal(count(p,NS+':empty_bottle'),0);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);
+ const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z},carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};
+ p.isSneaking=false;hand(p,undefined);
+ for(let i=0;i<16;i++){
+  dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+  system.advance(29);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
+ }
+ assert.equal(dim.getBlock(below).typeId,NS+':bottle_wine');assert.equal(TEST_ACCESS.bottleStore.load(bottleKey(dim.id,below)).items[0],NS+':wine_q2');
+ assert.equal(dropCount(NS+':wine_q2'),15);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);
 });
 test('all four-input barrel adapters preserve minimum stack output and reject metadata',()=>{const b=barrel(player()),p=player();fill(p,b,'green_grape');hand(p,'minecraft:sugar_cane',9);operate(p,b,'use');hand(p,'minecraft:sugar',3);operate(p,b,'use');hand(p,NS+':grape');const named=p.inventory.getItem(0);named.nameTag='Keep';p.inventory.setItem(0,named);code(()=>operate(p,b,'use'),'METADATA_ITEM_REJECTED');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.remaining,3);assert.equal(state(b).batch.recipeId,NS+':barrel/sauvignon_blanc_dry_white');assert.equal(p.inventory.getItem(0).nameTag,'Keep');});
-test('same-tick final serving by two players is issued exactly once',()=>{const b=barrel(player()),p=player(),q=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');hand(p,NS+':empty_bottle');hand(q,NS+':empty_bottle');for(const a of [p,q])world.beforeEvents.playerInteractWithBlock.emit({player:a,block:tap,isFirstEvent:true,cancel:false});system.advance();assert.equal(count(p,NS+':wine_q1')+count(q,NS+':wine_q1'),1);assert.equal(count(p,NS+':empty_bottle')+count(q,NS+':empty_bottle'),1);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);});
+test('Tap second manual click closes immediately and cancels the scheduled extraction',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
+ hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);system.advance(35);
+ assert.equal(state(b).batch.remaining,1);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
+});
+test('Tap redstone rising edge opens once and extracts after30 ticks; sustained high power does not restart',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
+ const comp=regs.blocks.get(NS+':tap');comp.onRedstoneUpdate({block:tap,previousPowerLevel:0,powerLevel:15,firstUpdate:false});system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+ comp.onRedstoneUpdate({block:tap,previousPowerLevel:15,powerLevel:15,firstUpdate:false});system.advance(29);assert.equal(state(b).batch.remaining,2);system.advance(1);assert.equal(state(b).batch.remaining,1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
+});
+test('Tap barrel-save failure restores carrier and removes half-created output without decrementing batch',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setType('minecraft:stone');const carrierAt={x:below.x+.5,y:below.y+.5,z:below.z+.5};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),carrierAt);
+ const beforeDrops=dropCount(NS+':wine_q1');world.failSet=true;assert.throws(()=>finishTapExtraction(tap,b.location),/INJECTED_SAVE/);
+ assert.equal(state(b).batch.remaining,2);assert.equal(dropCount(NS+':wine_q1'),beforeDrops);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
+});
 test('saved batch can be loaded by a fresh storage object without recomputing recipe',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const s=new MachineStore(world).load(machineKey(dim.id,b.location));assert.deepEqual(s,state(b));assert.equal(s.batch.remaining,16);assert.equal(s.batch.output.byQuality.length,6);});
 test('broken or unloaded barrel stops progressing and never erases state',()=>{const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);const part=dim.getBlock({x:b.location.x+1,y:b.location.y,z:b.location.z});part.setType('minecraft:air');const raw=TEST_ACCESS.store.raw(machineKey(dim.id,b.location));tickBarrel(b);assert.equal(TEST_ACCESS.store.raw(machineKey(dim.id,b.location)),raw);});
 test('filled machine destruction is blocked; duplicate empty destruction drops only one',()=>{const b=barrel(player()),p=player();fill(p,b);code(()=>dismantle(p,b),'MACHINE_NOT_EMPTY');const empty=barrel(player()),q=player();const part=dim.getBlock({x:empty.location.x+1,y:empty.location.y,z:empty.location.z}),beforeDrops=dropCount(NS+':barrel');for(let i=0;i<2;i++){const e={player:q,block:part,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);assert(e.cancel);}system.advance();assert.equal(count(q,NS+':barrel'),0);assert.equal(dropCount(NS+':barrel'),beforeDrops+1);assert(barrelCells(empty.location).every(c=>dim.getBlock(c).isAir));assert.equal(state(empty),undefined);});

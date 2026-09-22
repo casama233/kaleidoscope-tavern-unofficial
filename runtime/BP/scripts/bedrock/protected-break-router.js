@@ -8,7 +8,7 @@ function routeMatches(route,block){try{return !!route.isBlock(block);}catch{retu
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
 function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
 const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',chain:'dig.chain',wood:'dig.wood'});
-const INTERACTION_SOUNDS=Object.freeze({wool:'hit.cloth',metal:'hit.iron',chain:'hit.chain',wood:'hit.wood'});
+const INTERACTION_SOUNDS=Object.freeze({glass:'place.stone',wool:'place.cloth',metal:'place.iron',chain:'place.chain',wood:'place.wood'});
 function breakMaterial(id){
  if(typeof id!=='string'||!id.startsWith('kaleidoscope_tavern:'))return undefined;
  const short=id.slice('kaleidoscope_tavern:'.length);

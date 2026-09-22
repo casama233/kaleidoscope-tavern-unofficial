@@ -25,6 +25,7 @@ export function seatEntityId(f){if(f?.kind==='stool'&&COLORS.includes(f.color))r
 export function dyeColor(id){return COLORS.find(c=>'minecraft:'+c+'_dye'===id);}
 export function anchorKey(d,p){check(/^minecraft:[a-z_]+$/.test(d),'INVALID_DIMENSION');check(['x','y','z'].every(k=>Number.isInteger(p[k])),'INVALID_LOCATION');return `kt:seat/${d}/${p.x}_${p.y}_${p.z}`;}
 export function anchorPosition(raw){check(typeof raw==='string','MISSING_SEAT_ANCHOR');const m=/^kt:seat\/(minecraft:[a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(raw);check(m,'INVALID_SEAT_ANCHOR');const p={x:Number(m[2]),y:Number(m[3]),z:Number(m[4])};check(Object.values(p).every(Number.isSafeInteger),'INVALID_LOCATION');return {dimension:m[1],position:p};}
+export function facingFromCardinal(direction){const n={north:0,east:1,south:2,west:3}[direction];check(n!==undefined,'INVALID_CARDINAL');return n;}
 export function facingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor((((yaw+45)%360)+360)%360/90);}
 export function facingForFace(face,yaw){return ({North:0,East:1,South:2,West:3})[face]??facingForYaw(yaw);}
 export function facingYaw(facing){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');return [180,-90,0,90][facing];}

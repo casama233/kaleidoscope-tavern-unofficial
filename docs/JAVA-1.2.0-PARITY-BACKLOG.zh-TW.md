@@ -27,6 +27,39 @@
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` **15/15模型與該提交全部變更的block/item貼圖均已同步**；來源快照、blob SHA、source-driven geometry regeneration 與CI離線驗證已收束 | `c70eec1` 資產差異已清零；仍剩 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏與各批次標記為 NOT_RUN 的 Minecraft 實機視覺驗收 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
+## 下一批功能目標：紅石儲存家具投瓶
+
+視覺資產線已完成 `c70eec1` 15/15，本輪開始回到 Java 玩法差異。下一批優先收束 `AbstractStorageBlock` 共用紅石語義，範圍固定為 **Holder／Tilted Rack／Circular Rack／Cellar Cabinet**；四者都直接繼承 Java `AbstractStorageBlock`，不把 Bar Cabinet 等未繼承該基類的家具硬塞進同一行為。
+
+Java 1.2.0 的共同規則已重新核對鎖定提交：
+
+- 只在鄰接紅石由未通電→通電的**上升沿**觸發；`POWERED` 狀態防止持續高電平連續發射。
+- 從全部非空且為 `BottleBlockItem` 的槽位中**隨機選一槽**，每次脈衝最多消耗一瓶。
+- 若為 `DrinkBlockItem`，保留原瓶的 brew level／品質身份建立投擲飲品實體，成功後播放 `holder_pop`。
+- Java 同一基類也支援 `MolotovBlockItem`；Bedrock 目前 Molotov 本體尚未移植，因此本批只預留同一發射接口並明示依賴，不把 Molotov 路徑標成完成。
+- Holder 發射點為方塊中心 Y=0.875 再沿正面偏移0.5；初速為正面法線＋Y 0.375，再乘 0.5～1.5 隨機係數。
+- Tilted Rack 往**背向自身 facing**發射，發射點同樣 Y=0.875；初速使用反向法線＋Y 0.75，再乘 0.5～1.5。
+- Circular Rack 從方塊中心垂直向上，Y 初速 0.5～2.5。
+- Cellar Cabinet 從方塊中心沿正面偏移0.5，初速為正面法線＋Y 0.1，再乘 0.5～2.5。
+
+Bedrock 實作目標：
+
+1. 在既有 `stateful-storage-router.js` 增加**共用紅石 edge-trigger 路由**，domain 模組只提供槽位狀態、隨機候選與各自 launch pose；不在四個模組複製同一套 powered/revision/rollback 邏輯。
+2. Holder／Tilted Rack／Circular Rack／Cellar Cabinet 全部接入共用路由；空架、只有不合法內容物、持續高電平均不產生第二次副作用。
+3. 投擲前後沿用既有 state revision 與交易式持久化：只有投擲實體真正建立成功才清空選中槽；失敗保留原 state／helper，避免吞瓶。
+4. 保留品質瓶／雞尾酒身份；helper visual、slot state、破壞返還與多人並發不能因紅石脈衝產生重複物品或幽靈瓶。
+5. 測試至少覆蓋四種家具、四朝向、空槽、多槽只消耗一瓶、斷電→通電只觸發一次、持續高電平不重複、投擲建立失敗回滾、revision conflict 與視覺同步。
+
+**完成條件**：上述四種家具 diagnostics 不再標 `redstone: NOT_ADAPTED`，parity 表中的「Holder/Rack/Cellar 的紅石酒瓶投擲」移出尚缺欄；Molotov 仍單獨保留在 Molotov backlog，不因本批被誤標完成。
+
+### 後續優先序
+
+1. **Dispenser／Tap 原版互動**：`BottleBlockDispenseBehavior` 的 dispenser 放置酒瓶；Tap 的紅石上升沿、下方容器自動接酒與特殊酒嘴／西瓜汁流程。
+2. **黑板／立牌文字系統**：`ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的輸入、中文、同步與渲染。
+3. **剩餘3個效果**：`slightly_tipsy`、`grass_stealth`、`long_reach`；其中相機 roll／玩家隱藏／reach 屬客戶端或引擎能力差異，先做可證實的 Bedrock 等價部分。
+4. **世界與裝飾內容**：WildGrapevine 世界生成／氣候與土壤加速，Incense、Stepladder。
+5. **Molotov**：方塊／物品／投擲實體／命中與火焰行為，完成後回接本批預留的 storage redstone launch 接口。
+
 ## 專屬效果剩餘 3 項：Java 真實語義
 
 1. `slightly_tipsy`：客戶端相機 roll，由三個不同週期的 sin/cos 波疊加。

@@ -23,6 +23,7 @@ import {cellarCabinetKey} from '../runtime/BP/scripts/core/cellar-cabinet.js';
 import {installCookeryGuidePublisher,COOKERY_GUIDE_EVENTS} from '../runtime/BP/scripts/core/cookery-guide-publisher.js';
 import {COOKERY_GUIDE_PAYLOAD} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 import {tickStorageVisuals} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
+import {BREAK_ROUTE_TEST} from '../runtime/BP/scripts/bedrock/protected-break-router.js';
 import {blockCenter,requireBlockReach} from '../runtime/BP/scripts/bedrock/transactions.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let seq=0,online=[];world.getAllPlayers=()=>online;
 const pos={x:0,y:64,z:0};
@@ -48,6 +49,12 @@ function equipMob(e,item='minecraft:diamond_sword'){e._held=typeof item==='strin
 function equipPlayer(p,entries={Head:'minecraft:iron_helmet'}){const worn=new Map(Object.entries(entries).map(([slot,item])=>[slot,typeof item==='string'?new ItemStack(item,1):item.clone()]));p._armor=worn;p.equippable={getEquipment:slot=>worn.get(slot)?.clone(),setEquipment:(slot,value)=>{if(p.rejectEquipment)return false;if(value)worn.set(slot,value.clone());else worn.delete(slot);return true;}};return p;}
 function click(p,b,face='Up',faceLocation={x:.5,y:.5,z:.5}){const event={player:p,block:b,blockFace:face,faceLocation,isFirstEvent:true,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(event);system.advance();return event;}
 function full(p){for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));}
+test('shared break/drop/sound adapter owns one global break and explosion listener',()=>{
+ assert.equal(world.beforeEvents.playerBreakBlock.listeners.length,1);
+ assert.equal(world.beforeEvents.explosion.listeners.length,1);
+ assert.equal(BREAK_ROUTE_TEST.routes.length,10);
+ assert.equal(new Set(BREAK_ROUTE_TEST.routes.map(route=>route.id)).size,10);
+});
 test.beforeEach(()=>{d.blocks.clear();d.entities.clear();d.unloaded.clear();d.failSpawn=false;d.failSpawnItem=false;d.failAudio=false;d.failParticles=false;d.sounds=[];d.particles=[];world.dp.clear();online=[];FURNITURE_TEST.helpers.clear();HOLDER_TEST.visuals.clear();TILTED_RACK_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();BAR_CABINET_TEST.visuals.clear();CELLAR_CABINET_TEST.visuals.clear();COMBAT_TEST.lastCast.clear();});
 test('shared storage spatial helpers preserve the six-block center-distance contract',()=>{
  const p=player(),at={x:0,y:64,z:0};p.location=blockCenter(at);assert.doesNotThrow(()=>requireBlockReach(p,d,at));

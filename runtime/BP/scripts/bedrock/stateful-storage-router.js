@@ -1,7 +1,8 @@
 import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {faceOffset} from '../core/furniture.js';
-import {handSnapshot,sameHand,blockAt,plus,safe,finishPlayerBreak} from './transactions.js';
+import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
+import {registerProtectedBreakRoute} from './protected-break-router.js';
 
 function revisionOf(read,block){
  if(typeof read!=='function')return -1;
@@ -19,7 +20,7 @@ export function tickStorageVisuals(visuals,cursor,maintain,budget=128){
 /**
  * Shared Bedrock event shell for one-block Tavern storage furniture.
  * Domain modules still own item rules, slot mapping, state validation and recovery.
- * This adapter owns only the repeated Bedrock event ordering/snapshot/defer contract.
+ * This adapter owns the repeated interaction ordering/snapshot/defer contract; break/drop/sound is delegated to the shared protected-break router.
  */
 export function installStatefulStorageRoutes({
  isBlock,
@@ -56,17 +57,10 @@ export function installStatefulStorageRoutes({
   }));
  });
 
- world.beforeEvents.playerBreakBlock.subscribe(e=>{
-  if(e.cancel||!isBlock(e.block))return;
-  e.cancel=true;
-  const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
-  const revision=revisionOf(readRevision,e.block);
-  system.run(()=>safe(player,()=>{
-   const block=blockAt(dimension,location);
-   check(block?.typeId===typeId&&isBlock(block),'BLOCK_CHANGED');
-   return finishPlayerBreak(player,dimension,location,typeId,()=>recover({player,block,revision}));
-  }));
+ registerProtectedBreakRoute({
+  isBlock,
+  capture:({block})=>revisionOf(readRevision,block),
+  recover:({player,block,snapshot})=>recover({player,block,revision:snapshot}),
+  protectExplosions
  });
-
- if(protectExplosions)world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(block=>!isBlock(block))));
 }

@@ -1,6 +1,6 @@
 /** C6 static furniture authority + recoverable native seat helpers. No Cookery/player.json changes. */
 import {world,system,BlockPermutation} from '@minecraft/server';
-import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,TABLE_CARDINAL,tableAxisFromCardinal,tableCardinalForAxis,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
+import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,SEAT_ANCHOR,SOFA_CONNECTION,SOFA_SEAT_ID,TABLE_AXIS,TABLE_POSITION,TABLE_CARDINAL,tableAxisFromCardinal,tableCardinalForAxis,DOUBLE_HALF,GLASSWARE_SLOTS,furnitureItem,furnitureBlock,itemId,blockId,seatEntityId,seatFurniture,dyeColor,anchorKey,anchorPosition,facingFromCardinal,facingForYaw,facingForFace,facingYaw,facingVector,relativeSeatYaw,faceOffset,verticalDoublePartner,paintingPlacementState,connectedFurnitureConnection,tablePlacementState,tableRepairState,glasswareHolderSlot} from '../core/furniture.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
@@ -26,6 +26,7 @@ export function syncSofa(block){return syncConnectedBlock(block,'sofa');}
 export function syncSofaNeighborhood(d,p){return syncConnectedNeighborhood(d,p,'sofa');}
 export function syncBarCounter(block){return syncConnectedBlock(block,'bar_counter');}
 export function syncBarCounterNeighborhood(d,p){return syncConnectedNeighborhood(d,p,'bar_counter');}
+export function syncNativeFurnitureFacing(block,kind){const f=furnitureBlock(block?.typeId);check(f?.kind===kind,'NOT_NATIVE_FACING_FURNITURE');const wanted=facingFromCardinal(block.permutation.getState(TABLE_CARDINAL)),current=block.permutation.getState(FACING)??0;if(current===wanted)return false;block.setPermutation(block.permutation.withState(FACING,wanted));return true;}
 function tableDescriptor(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return undefined;const legacy=block.permutation.getState(AXIS)??0,cardinal=block.permutation.getState(TABLE_CARDINAL)??'north';return {axis:legacy===TABLE_AXIS.Z?TABLE_AXIS.Z:tableAxisFromCardinal(cardinal),position:block.permutation.getState(POSITION)??TABLE_POSITION.SINGLE};}
 function tableNeighbors(d,p){return {north:tableDescriptor(blockAt(d,plus(p,facingVector(0)))),east:tableDescriptor(blockAt(d,plus(p,facingVector(1)))),south:tableDescriptor(blockAt(d,plus(p,facingVector(2)))),west:tableDescriptor(blockAt(d,plus(p,facingVector(3))))};}
 export function syncTable(block){const f=furnitureBlock(block?.typeId);if(f?.kind!=='table')return false;const current=tableDescriptor(block),wanted=tableRepairState(current,tableNeighbors(block.dimension,block.location)),legacy=block.permutation.getState(AXIS)??0,cardinal=block.permutation.getState(TABLE_CARDINAL)??'north',wantedCardinal=tableCardinalForAxis(wanted.axis);if(legacy===0&&tableAxisFromCardinal(cardinal)===wanted.axis&&wanted.position===current.position)return false;block.setPermutation(block.permutation.withState(AXIS,0).withState(TABLE_CARDINAL,wantedCardinal).withState(POSITION,wanted.position));return true;}
@@ -112,7 +113,7 @@ export function maintainSeat(e){
  }catch(x){error(x);helpers.delete(e.id);}
 }
 export function tickFurniture(){const list=[...helpers.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainSeat(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
-export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onPlace:e=>optional(()=>syncTableNeighborhood(e.block.dimension,e.block.location)),onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
+export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onPlace:e=>optional(()=>syncTableNeighborhood(e.block.dimension,e.block.location)),onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':glassware_holder',{onPlace:e=>optional(()=>syncNativeFurnitureFacing(e.block,'glassware_holder'))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId);if(!existing)return;
@@ -142,7 +143,7 @@ export function installFurnitureEvents(){
   id:'furniture-block-items',
   // Table is a native custom-block item: placement_direction writes minecraft:cardinal_direction.
   // Keep the script route only for furniture that still needs custom placement state.
-  matches:id=>{const f=furnitureItem(id);return !!f&&f.kind!=='table';},
+  matches:id=>{const f=furnitureItem(id);return !!f&&!['table','glassware_holder'].includes(f.kind);},
   plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
   execute:({player,plan})=>placeFurniture(player,plan.target,{face:plan.face})
  });

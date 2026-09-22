@@ -24,7 +24,7 @@
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
-| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共13/15個模型（含 Allium Garden、Grasshopper、Bloody Mary、Screwdriver、White Lady 官方block貼圖）的 cutout/幾何/UV 修正已同步 | `c70eec1` 其餘2個模型與2張block貼圖＋Depth Charge item貼圖仍待分組同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
+| 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` 共14/15個模型（含 Allium Garden、Grasshopper、Bloody Mary、Screwdriver、White Lady、Mojito 官方block貼圖）的 cutout/幾何/UV 修正已同步 | `c70eec1` 只剩 Depth Charge 模型與block/item兩張貼圖待同步；另有 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏等引擎差異 |
 | 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
 
 ## 專屬效果剩餘 3 項：Java 真實語義
@@ -158,6 +158,14 @@ White Lady 是第一個 source element 數量減少的同步：Java 從14個 ele
 同步器因此新增可重用的 old→updated element index mapping／deletion 支援：baseline 仍必須完整重建全部舊 cubes；新版生成時只允許 plan 明示的刪除，並重新組裝 cube list。官方 block PNG 從 blob `3da7ad25918346745807da46c23c2d11b50d99cf`（596 B）同步到 `c3796b7eaa62fcf34515eee8ad0227f7392c4c7c`（879 B），兩份 runtime block texture 使用官方新版原始 bytes。
 
 完成後 c70eec 模型覆蓋為 **13/15**；只剩 Mojito、Depth Charge 兩個模型與兩張 block PNG，另有 Depth Charge item PNG。Mojito 同樣屬於 element 刪除型，下一批可直接復用本批 deletion mapping；Depth Charge 則是最後的 element 新增型。實機薄面、杯口與alpha-test邊緣仍為 **NOT_RUN**。
+
+## Post-1.2 視覺同步 Batch 10：Mojito
+
+Mojito 從15個 Java elements 收束為14個；Bedrock runtime 由21 cubes 收束為20 cubes。舊 source 的 elements 12、13 含 `rotation.rescale:true` 的45°旋轉平面，因此同步器新增了對 Java rescale 語義的鎖定轉換：先以 `1/cos(angle)` 沿旋轉軸垂直方向、相對 source rotation origin 擴張 cube，再用舊 `mojito.geo.json` 逐 cube 驗證；21個 baseline cubes 全部重建一致後才允許生成新版。
+
+新版 mapping 明示刪除舊 element 10，舊 11→新10、舊12→新11、舊14→新12；新版 element 13 是新的大型雙面薄平面，因此復用舊 element 13 的單-cube Bedrock 槽位來 materialize 新 element 13，並讓 remap 後輸出順序依 `updated_element` 排列，而不是依舊 cube index。官方 block PNG 由 blob `db879ba67959610ae87e75b0f4a678ff85a3e546` 更新到 `ed3b8944a1624b14a0905c77a46d23b0399e956e`，兩份 runtime texture byte-for-byte 同步。
+
+本批另外使用倉庫既有 `art/tools/render_preview.py` 對 baseline 與 materialized Mojito 的實際 `geo.json + PNG` 做離線 raster 比較；此圖只用於幾何/貼圖人工檢查，**不是 Minecraft 引擎截圖，也不替代 engine acceptance**。完成後 c70eec 模型覆蓋為 **14/15**，只剩 Depth Charge：12→13 elements、block PNG 與 item PNG。
 
 ## Batch 7：Table 連接桌
 

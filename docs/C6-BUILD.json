@@ -183,6 +183,12 @@
       "asset": "cocktail_white_lady",
       "fix": "White Lady: source-driven regeneration with explicit old->updated element mapping; baseline element 6 / Bedrock cube 9 is deleted, reducing 17 cubes to 16, plus exact official block PNG blob c3796b7eaa62fcf34515eee8ad0227f7392c4c7c",
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "asset": "cocktail_mojito",
+      "fix": "Mojito: source-driven 15->14 element remap and 21->20 Bedrock cube regeneration, including locked Java rescale:true compatibility and updated-element ordering, plus exact official block PNG blob ed3b8944a1624b14a0905c77a46d23b0399e956e",
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

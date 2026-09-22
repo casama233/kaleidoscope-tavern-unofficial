@@ -7,7 +7,8 @@ import {check} from '../core/util.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
-const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing',EMPTY_ITEM=NS+':empty_bottle',EMPTY_BLOCK=NS+':bottle_empty';
+import {restorePotion} from './potions.js';
+const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing',EMPTY_ITEM=NS+':empty_bottle',EMPTY_BLOCK=NS+':bottle_empty',WATER_BLOCK=NS+':bottle_water';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
 const FACE_OFFSET=Object.freeze({Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},West:{x:-1,y:0,z:0},East:{x:1,y:0,z:0}});
 const store=new BottleStore(world),locks=new Locks();
@@ -17,9 +18,15 @@ function intact(b,s){return b.typeId===`${NS}:bottle_${s.base}`&&b.permutation.g
 export function bottleFacingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor(((((yaw+45)%360)+360)%360)/90);}
 function facingFor(player){return bottleFacingForYaw(player.getRotation?.().y??0);}
 function emptyKey(block){const p=block.location;return `empty-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
+function waterBottleStack(){return restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'minecraft:consumable'}});}
+function simpleKey(block){const p=block.location;return `simple-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
 export function takeEmptyBottle(player,b){
  canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=b.permutation;
  return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setType('minecraft:air'),()=>b.setPermutation(old));playMaterialInteraction(b.dimension,b.location,EMPTY_BLOCK);return out;});
+}
+export function takeWaterBottle(player,b){
+ canWrite(player);check(b?.typeId===WATER_BLOCK,'NOT_WATER_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:waterBottleStack(),count:1}],makeStack),old=b.permutation;
+ return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>b.setType('minecraft:air'),()=>b.setPermutation(old));playMaterialInteraction(b.dimension,b.location,WATER_BLOCK);return out;});
 }
 export function placeBottle(player,target,{expectedRevision}={}){
  canWrite(player);const d=player.dimension,k=bottleKey(d.id,target);
@@ -49,11 +56,11 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
 export function installBottleEvents(){
- // Java BottleBlock.use: placed empty bottle returns itself on empty hand; non-empty hand PASSes.
+ // Java BottleBlock.use: placed simple bottles return their native item on empty hand; non-empty hand PASSes.
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel||e.block.typeId!==EMPTY_BLOCK)return;const hs=handSnapshot(e.player);if(hs.id)return;
-  e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location};
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===EMPTY_BLOCK,'BLOCK_CHANGED');return takeEmptyBottle(e.player,b);}));
+  if(e.cancel||![EMPTY_BLOCK,WATER_BLOCK].includes(e.block.typeId))return;const hs=handSnapshot(e.player);if(hs.id)return;
+  e.cancel=true;if(e.isFirstEvent===false)return;const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;
+  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');sameHand(e.player,hs);const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');return id===EMPTY_BLOCK?takeEmptyBottle(e.player,b):takeWaterBottle(e.player,b);}));
  });
  // DrinkBlock.use: only empty hand consumes (take newest bottle). Non-empty hand PASSes.
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
@@ -91,9 +98,9 @@ export function installBottleEvents(){
  });
  registerProtectedBreakRoute({
   id:'bottles',
-  isBlock:block=>DISPLAY_IDS.has(block?.typeId)||block?.typeId===EMPTY_BLOCK,
-  capture:({block})=>block.typeId===EMPTY_BLOCK?undefined:store.load(bottleKey(block.dimension.id,block.location))?.revision,
-  recover:({player,block,snapshot})=>block.typeId===EMPTY_BLOCK?takeEmptyBottle(player,block):takeBottles(player,block,{all:true,expectedRevision:snapshot})
+  isBlock:block=>DISPLAY_IDS.has(block?.typeId)||[EMPTY_BLOCK,WATER_BLOCK].includes(block?.typeId),
+  capture:({block})=>[EMPTY_BLOCK,WATER_BLOCK].includes(block.typeId)?undefined:store.load(bottleKey(block.dimension.id,block.location))?.revision,
+  recover:({player,block,snapshot})=>block.typeId===EMPTY_BLOCK?takeEmptyBottle(player,block):block.typeId===WATER_BLOCK?takeWaterBottle(player,block):takeBottles(player,block,{all:true,expectedRevision:snapshot})
  });
 }
-export const BOTTLE_TEST={store,COUNT,FACING,EMPTY_ITEM,EMPTY_BLOCK};
+export const BOTTLE_TEST={store,COUNT,FACING,EMPTY_ITEM,EMPTY_BLOCK,WATER_BLOCK,waterBottleStack};

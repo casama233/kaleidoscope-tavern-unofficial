@@ -165,6 +165,25 @@
       "semantic_diff": "Mojito changes from 15 to 14 Java elements and from 21 to 20 Bedrock cubes. The locked baseline proves both historical rescale:true 45-degree elements. The updated mapping deletes old element 10, remaps old 11->new10, old12->new11, old14->new12, and reuses the old one-cube element13 slot to materialize the new element13 zero-thickness garnish plane, while output order follows updated source indices.",
       "texture_changed": true,
       "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "depth-charge",
+      "assets": [
+        "depth_charge"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/depth-charge/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "aacc9949b355c6412129774ddac9bdf5a5fcf62b",
+      "model_updated_blob": "4b79a1dc8ea8f1f36135ba2b5803e7a569a11095",
+      "texture_baseline_blob": "5ee0738a935f880bf9d643e0500cee182cd761a7",
+      "texture_updated_blob": "962980356fbecf1548ec5991feac3facee10db00",
+      "item_texture_baseline_blob": "30a9abbeb4176a96d0ab0f7375df7495efab23e4",
+      "item_texture_updated_blob": "25703204a0c40bb8cf4bcce59211e50fd8b6594e",
+      "semantic_diff": "Depth Charge changes from 12 to 13 Java elements and from 18 to 19 Bedrock cubes. Baseline elements 0/2 are split-face cup walls; old element 6 maps to updated 5 while updated elements 6/7 are explicitly added to form the revised three-piece handle. Old element 8 maps to updated 11, old element 9 is deleted, old element 4 remaps to updated 12, and target cube order follows updated source-element order. Both official block and item PNGs are copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
     }
   ]
 }

@@ -207,30 +207,33 @@ def main():
    check('C6_item_block:'+b['item'],b['item']in item_defs and b['block']in block_defs)
   block=block_defs[b['block']];comps=block['components']
   if b['kind']=='stool':
-   ent=entity_defs[b['helper']];ride=ent['components']['minecraft:rideable']
+   ent=entity_defs[b['helper']];ride=ent['components']['minecraft:rideable'];states=block['description'].get('states',{});traits=block['description'].get('traits',{})
    check('C6_single_native_seat:'+b['color'],ride['seat_count']==1 and ride['seats']==[{'position':[0,.8125,0]}] and ride['family_types']==['player'] and not ride['pull_in_entities'])
    check('C6_seat_turn_property:'+b['color'],ent['description']['properties']['kaleidoscope_tavern:seat_yaw']['client_sync'])
+   check('C6_stool_native_placement:'+b['color'],traits.get('minecraft:placement_direction',{}).get('enabled_states')==['minecraft:cardinal_direction'] and states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and item_defs[b['item']]['components'].get('minecraft:block_placer')=={'block':b['block']} and b.get('engine_facing_state')=='minecraft:cardinal_direction' and b.get('legacy_facing_state')=='kaleidoscope_tavern:facing' and b.get('native_block_placement') is True)
   elif b['kind']=='light':
    check('C6_light15_nocollision:'+b['color'],comps['minecraft:light_emission']==15 and comps['minecraft:collision_box'] is False)
   elif b['kind']=='sofa':
-   states=block['description'].get('states',{});perms=block.get('permutations',[])
-   check('C6_sofa_states:'+b['color'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5])
+   states=block['description'].get('states',{});perms=block.get('permutations',[]);traits=block['description'].get('traits',{})
+   check('C6_sofa_states:'+b['color'],states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5] and traits.get('minecraft:placement_direction',{}).get('enabled_states')==['minecraft:cardinal_direction'])
    check('C6_sofa_geometry_set:'+b['color'],set(b['geometry_by_connection'].values())=={'geometry.kt_assets_a4.sofa_single','geometry.kt_assets_a4.sofa_left','geometry.kt_assets_a4.sofa_right','geometry.kt_assets_a4.sofa_middle','geometry.kt_assets_a4.sofa_left_corner','geometry.kt_assets_a4.sofa_right_corner'} and all(g in geom for g in b['geometry_by_connection'].values()))
-   check('C6_sofa_permutations:'+b['color'],sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("kaleidoscope_tavern:facing" in x['condition'] for x in perms)==4)
+   check('C6_sofa_permutations:'+b['color'],sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("minecraft:cardinal_direction" in x['condition'] for x in perms)==4 and sum("kaleidoscope_tavern:facing" in x['condition'] and "minecraft:cardinal_direction" not in x['condition'] for x in perms)==3)
+   check('C6_sofa_native_placement:'+b['color'],b.get('engine_facing_state')=='minecraft:cardinal_direction' and b.get('legacy_facing_state')=='kaleidoscope_tavern:facing' and b.get('native_block_placement') is True)
    check('C6_sofa_item_visual:'+b['color'],comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   elif b['kind']=='table':
    states=block['description'].get('states',{});perms=block.get('permutations',[])
    check('C6_table_states',states.get('kaleidoscope_tavern:axis')==[0,1] and states.get('kaleidoscope_tavern:position')==[0,1,2,3] and block['description'].get('traits',{}).get('minecraft:placement_direction',{}).get('enabled_states')==['minecraft:cardinal_direction'])
    check('C6_table_geometry_set',set(b['geometry_by_state'].values())=={'geometry.kt_assets_a12.table_single','geometry.kt_assets_a12.table_left','geometry.kt_assets_a12.table_middle','geometry.kt_assets_a12.table_right','geometry.kt_assets_a12.table_left_rot','geometry.kt_assets_a12.table_middle_rot','geometry.kt_assets_a12.table_right_rot'} and all(g in geom for g in b['geometry_by_state'].values()))
    check('C6_table_permutations',len(perms)==7 and sum("kaleidoscope_tavern:position" in x['condition'] for x in perms)==7 and sum("minecraft:cardinal_direction" in x['condition'] for x in perms)==6 and not any("kaleidoscope_tavern:axis" in x['condition'] for x in perms))
-   check('C6_table_persistence_state',b.get('engine_axis_state')=='minecraft:cardinal_direction' and b.get('legacy_axis_state')=='kaleidoscope_tavern:axis')
+   check('C6_table_persistence_state',b.get('engine_axis_state')=='minecraft:cardinal_direction' and b.get('legacy_axis_state')=='kaleidoscope_tavern:axis' and b.get('native_block_placement') is True)
    check('C6_table_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,13,-8],'size':[16,3,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,13,-8],'size':[16,3,16]})
    check('C6_table_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   elif b['kind']=='bar_counter':
-   states=block['description'].get('states',{});perms=block.get('permutations',[])
-   check('C6_bar_counter_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5])
+   states=block['description'].get('states',{});perms=block.get('permutations',[]);traits=block['description'].get('traits',{})
+   check('C6_bar_counter_states',states.get('kaleidoscope_tavern:facing')==[0,1,2,3] and states.get('kaleidoscope_tavern:connection')==[0,1,2,3,4,5] and traits.get('minecraft:placement_direction',{}).get('enabled_states')==['minecraft:cardinal_direction'])
    check('C6_bar_counter_geometry_set',set(b['geometry_by_connection'].values())=={'geometry.kt_assets_a10.bar_counter_single','geometry.kt_assets_a10.bar_counter_left','geometry.kt_assets_a10.bar_counter_right','geometry.kt_assets_a10.bar_counter_middle','geometry.kt_assets_a10.bar_counter_left_corner','geometry.kt_assets_a10.bar_counter_right_corner'} and all(g in geom for g in b['geometry_by_connection'].values()))
-   check('C6_bar_counter_permutations',sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("kaleidoscope_tavern:facing" in x['condition'] for x in perms)==4)
+   check('C6_bar_counter_permutations',sum("kaleidoscope_tavern:connection" in x['condition'] for x in perms)==6 and sum("minecraft:cardinal_direction" in x['condition'] for x in perms)==4 and sum("kaleidoscope_tavern:facing" in x['condition'] and "minecraft:cardinal_direction" not in x['condition'] for x in perms)==3)
+   check('C6_bar_counter_native_placement',b.get('engine_facing_state')=='minecraft:cardinal_direction' and b.get('legacy_facing_state')=='kaleidoscope_tavern:facing' and b.get('native_block_placement') is True)
    check('C6_bar_counter_exact_collision',comps.get('minecraft:collision_box')=={'origin':[-8,0,-8],'size':[16,16,16]} and comps.get('minecraft:selection_box')=={'origin':[-8,0,-8],'size':[16,16,16]})
    check('C6_bar_counter_item_visual',comps.get('minecraft:item_visual',{}).get('geometry',{}).get('identifier')==b['item_geometry'])
   elif b['kind']=='glassware_holder':

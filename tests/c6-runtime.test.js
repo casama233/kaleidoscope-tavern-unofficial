@@ -187,7 +187,7 @@ test('bottle block-use route places only on sneak and leaves ordinary support cl
 test('bottle placement follows Java BlockItem rules without an invented full-top support gate',()=>{const p=player();hand(p,NS+':wine_q4',1);const state=placeBottle(p,pos);assert.equal(state.items.length,1);assert.equal(d.getBlock(pos).typeId,NS+':bottle_wine');assert.equal(count(p,NS+':wine_q4'),0);});
 test('Creative bottle placement and same-drink stacking do not consume held bottles',()=>{const p=player();p.mode=GameMode.Creative;hand(p,NS+':wine_q4',2);placeBottle(p,pos);placeBottle(p,pos);assert.equal(count(p,NS+':wine_q4'),2);assert.equal(d.getBlock(pos).permutation.getState(BOTTLE_TEST.COUNT),2);assert(d.sounds.filter(x=>x.id==='place.stone').length>=2);});
 test('seat event route permits ordinary held items instead of requiring an empty hand',()=>{const {p,b}=stool();hand(p,'minecraft:apple');p.isSneaking=false;const e=click(p,b);assert(e.cancel);const seat=[...d.entities.values()].find(x=>x.typeId===seatId('blue'));assert.equal(seat?.rideable.getRiders()[0],p);assert.equal(count(p,'minecraft:apple'),1);});
-test('shared material interaction feedback distinguishes wood, wool and chain furniture',()=>{stool('blue');assert(d.sounds.some(x=>x.id==='place.wood'));d.sounds=[];sofa('blue');assert(d.sounds.some(x=>x.id==='place.cloth'));d.sounds=[];light('red');assert(d.sounds.some(x=>x.id==='place.chain'));});
+test('shared material interaction feedback distinguishes wood, wool and chain furniture',()=>{const a=stool('blue');assert(d.sounds.some(x=>x.id==='place.wood'));recoverFurniture(a.p,a.b);d.sounds=[];sofa('blue',player(),{x:2,y:64,z:0});assert(d.sounds.some(x=>x.id==='place.cloth'));d.sounds=[];light('red',player());assert(d.sounds.some(x=>x.id==='place.chain'));});
 test('DrinkBlockItem parity stacks same drink first, but different or full display falls back to non-sneak drink',()=>{
  const p=player(),support=d.getBlock({...pos,y:63});support.setType('minecraft:stone');hand(p,NS+':wine_q4',6);placeBottle(p,pos);const b=d.getBlock(pos);
  p.isSneaking=false;let e=click(p,b);assert(e.cancel);assert.equal(b.permutation.getState(BOTTLE_TEST.COUNT),2);assert.equal(count(p,NS+':wine_q4'),4);
@@ -261,7 +261,7 @@ test('Creative storage BlockItems place without decrement across all five shared
   [NS+':bar_cabinet',(at)=>placeBarCabinet(p,at,NS+':bar_cabinet')],
   [NS+':cellar_cabinet',(at)=>placeCellarCabinet(p,at)]
  ];
- cases.forEach(([id,place],i)=>{p.selectedSlotIndex=0;hand(p,id,1);const b=place({x:i*2,y:64,z:0});assert.equal(b.typeId,id);assert.equal(count(p,id),1);});
+ cases.forEach(([id,place],i)=>{const at={x:i*2,y:64,z:0};p.location=blockCenter(at);p.selectedSlotIndex=0;hand(p,id,1);const b=place(at);assert.equal(b.typeId,id);assert.equal(count(p,id),1);});
 });
 test('shared storage placement route adds source-material placement feedback',()=>{const p=player();hand(p,NS+':holder',1);const support=d.getBlock({x:0,y:63,z:0});support.setType('minecraft:stone');const e=click(p,support,'Up');assert(e.cancel);assert(d.sounds.some(x=>x.id==='place.wood'));});
 test('stateful storage places directly without sneak on ordinary support',()=>{const p=player();p.isSneaking=false;hand(p,NS+':holder',1);const support=d.getBlock({x:0,y:63,z:0});support.setType('minecraft:stone');const e=click(p,support,'Up');assert(e.cancel);assert.equal(d.getBlock(pos).typeId,NS+':holder');assert.equal(count(p,NS+':holder'),0);});

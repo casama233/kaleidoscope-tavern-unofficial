@@ -830,7 +830,8 @@
       "item_texture": "kt_assets_a17_item_display_bar_counter",
       "connection_states": 6,
       "waterlogged": false,
-      "exact_collision_parity": true
+      "exact_collision_parity": true,
+      "native_placement": "implicit_block_item+placement_direction"
     },
     {
       "kind": "glassware_holder",

@@ -18,8 +18,7 @@ def main():
  dump(RP/'animation_controllers/runtime_shaker.controller.json',{'format_version':'1.10.0','animation_controllers':{'controller.animation.kt_runtime.shaker_table':{'initial_state':'idle','states':{'idle':{'transitions':[{'shake':"q.property('kt_runtime:shaking')"}]},'shake':{'animations':['shake'],'transitions':[{'idle':"!q.property('kt_runtime:shaking')"}],'blend_transition':.08}}}}})
  # Dedicated bound geometry: preserve cube positions/UV and original bone2 hierarchy.
  g=load(A/'RP/models/entity/shaker.geo.json');geo=g['minecraft:geometry'][0];geo['description']['identifier']='geometry.kt_runtime.shaker_held';geo['description']['visible_bounds_width']=4
- geo['bones'].insert(0,{'name':'hand_mount','pivot':[0,0,0],'binding':'q.item_slot_to_bone_name(context.item_slot)'})
- next(b for b in geo['bones'] if b['name']=='render_anchor')['parent']='hand_mount'
+ anchor=next(b for b in geo['bones'] if b['name']=='render_anchor');anchor['binding']='q.item_slot_to_bone_name(context.item_slot)';anchor.pop('parent',None)
  dump(RP/'models/entity/runtime_shaker_held.geo.json',g)
  wave='(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25)'
  # Source motion constants are exact; wrist anchor/blending is an explicit Bedrock adapter candidate.
@@ -35,13 +34,12 @@ def main():
  for key in ['animation.kt_runtime.shaker.first','animation.kt_runtime.shaker.table']:
   animations[key]['animation_length']=0.20943951023931953
  dump(RP/'animations/runtime_shaker.animation.json',{'format_version':'1.8.0','animations':animations})
- dump(RP/'render_controllers/runtime_shaker_hand.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.shaker_hand':{'geometry':'Geometry.default','materials':[{'*':'Material.default'}],'textures':['Texture.default']}}})
  for short in ['shaker','shaker_active','shaker_pouring']:
   anim={'hold_first':'animation.kt_runtime.shaker.hold_first','hold_third':'animation.kt_runtime.shaker.hold_third'};scripts=[{'hold_first':'context.is_first_person == 1.0'},{'hold_third':'context.is_first_person == 0.0'}]
-  if short=='shaker_active':anim['shake_first']='animation.kt_runtime.shaker.first';scripts.append({'shake_first':'context.is_first_person == 1.0'})
+  if short=='shaker_active':anim.update({'shake_first':'animation.kt_runtime.shaker.first','shake_arms':'animation.kt_runtime.shaker.arms'});scripts.extend([{'shake_first':'context.is_first_person == 1.0'},{'shake_arms':'context.is_first_person == 0.0'}])
   if short=='shaker_pouring':anim['pour']='animation.kt_runtime.shaker.pour';scripts.append('pour')
-  d={'identifier':N+':'+short,'item':{N+':'+short:"q.is_owner_identifier_any('minecraft:player')"},'materials':{'default':'entity_alphatest'},'textures':{'default':'textures/kaleidoscope_tavern/block/mixology/shaker'},'geometry':{'default':'geometry.kt_runtime.shaker_held'},'animations':anim,'scripts':{'animate':scripts},'render_controllers':['controller.render.kt_runtime.shaker_hand']}
-  dump(RP/f'attachables/{short}.attachable.json',{'format_version':'1.10.0','minecraft:attachable':{'description':d}})
+  d={'identifier':N+':'+short,'item':{N+':'+short:"q.is_owner_identifier_any('minecraft:player')"},'materials':{'default':'entity_alphatest'},'textures':{'default':'textures/kaleidoscope_tavern/block/mixology/shaker'},'geometry':{'default':'geometry.kt_runtime.shaker_held'},'animations':anim,'scripts':{'animate':scripts},'render_controllers':['controller.render.item_default']}
+  dump(RP/f'attachables/{short}.attachable.json',{'format_version':'1.20.30','minecraft:attachable':{'description':d}})
  # Reuse the SAME declared native drop cell as A17; no invented source-image claim.
  dump(RP/'particles/runtime_pour_stream.json',{'format_version':'1.10.0','particle_effect':{'description':{'identifier':N+':pour_stream','basic_render_parameters':{'material':'particles_alpha','texture':'textures/particle/particles'}},'components':{'minecraft:emitter_lifetime_once':{'active_time':.01},'minecraft:emitter_rate_instant':{'num_particles':1},'minecraft:emitter_shape_point':{},'minecraft:particle_lifetime_expression':{'max_lifetime':.15},'minecraft:particle_initial_speed':0,'minecraft:particle_appearance_billboard':{'size':[.025,.045],'facing_camera_mode':'lookat_xyz','uv':{'texture_width':128,'texture_height':128,'uv':[8,56],'uv_size':[8,8]}},'minecraft:particle_appearance_tinting':{'color':['variable.kt_tint.r','variable.kt_tint.g','variable.kt_tint.b','1.0 - variable.particle_age / variable.particle_lifetime']}}}})
  for lc in ['zh_TW','zh_CN','en_US']:

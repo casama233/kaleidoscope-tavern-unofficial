@@ -27,8 +27,8 @@ export function feedback(block,kind,revision=0){return cueOnce(`${kind}/${block.
  worldSound(block.dimension,p,id,kind==='press'?.4:.6,kind==='press'?1.25:1);
  if(kind==='press'||kind==='fill')sparkle(block.dimension,p);
  });}
-export function handStart(player,native=false){if(native)protect(()=>player.addTag('kaleidoscope_tavern:holding_shaker'));return protect(()=>player.playAnimation('animation.kt_runtime.shaker.arms',{controller:'controller.animation.kt_runtime.shaker_hands',blendOutTime:.12,stopExpression:native?"!q.has_tag('kaleidoscope_tavern:holding_shaker')":"!q.is_item_name_any('slot.weapon.mainhand', 0, 'kaleidoscope_tavern:shaker_active')"}));}
-export function handStop(player){protect(()=>player.removeTag('kaleidoscope_tavern:holding_shaker'));return protect(()=>player.playAnimation('animation.kt_runtime.shaker.release',{controller:'controller.animation.kt_runtime.shaker_hands',blendOutTime:.12}));}
+export function handStart(player,native=false){if(native)return protect(()=>player.addTag('kaleidoscope_tavern:holding_shaker'));return true;}
+export function handStop(player){protect(()=>player.removeTag('kaleidoscope_tavern:holding_shaker'));return true;}
 export function shakeAudio(player,tick){if(tick%10===0)cueOnce(`shake/${player.id}/${tick}`,()=>worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.shaking',.75,.9));}
 export function finished(player){worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.end',.75,1);}
 export function pourVisual(player,block,elapsed,color=0xffffff){

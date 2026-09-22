@@ -14,7 +14,10 @@
         "shaking": {
           "animations": [
             {
-              "shake_first": "c.is_first_person"
+              "shake_first": "context.is_first_person == 1.0"
+            },
+            {
+              "shake_arms": "context.is_first_person == 0.0"
             }
           ],
           "blend_transition": 0.06,

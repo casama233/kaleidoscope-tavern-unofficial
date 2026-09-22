@@ -1,5 +1,5 @@
 {
-  "format_version": "1.10.0",
+  "format_version": "1.20.30",
   "minecraft:attachable": {
     "description": {
       "identifier": "kaleidoscope_tavern:shaker_pouring",
@@ -32,7 +32,7 @@
         ]
       },
       "render_controllers": [
-        "controller.render.kt_runtime.shaker_hand"
+        "controller.render.item_default"
       ],
       "particle_effects": {
         "spout_drop": "kaleidoscope_tavern:held_pour_drop"

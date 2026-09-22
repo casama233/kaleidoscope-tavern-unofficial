@@ -38,12 +38,20 @@ export function popCellarCabinetRedstone(block,{selectionRng=Math.random,motionR
 export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCellarCabinetRedstone(b),x=>{cellarCabinetDiagnostics.redstoneErrors++;error(x);})});}
 export function installCellarCabinetEvents(){
  installStatefulStorageRoutes({
+  routeId:'cellar-cabinet',
   isBlock:block=>block?.typeId===CELLAR_CABINET,
   isPlacementItem:id=>id===CELLAR_CABINET,
   readRevision:block=>store.load(cellarCabinetKey(block.dimension.id,block.location))?.revision??-1,
   place:({player,target})=>placeCellarCabinet(player,target),
+  shouldInteract:({block,held,face,faceLocation})=>{
+   const slot=cellarCabinetSlot(block.permutation.getState(FACING)??0,face,faceLocation);
+   if(slot<0)return true;
+   const state=store.load(cellarCabinetKey(block.dimension.id,block.location));if(!state)return false;
+   if(!held.id)return state.slots[slot]!==null;
+   const accepted=cellarCabinetItem(held.id);if(!accepted)return true;
+   return state.slots[slot]===null;
+  },
   interact:({player,block,held,face,faceLocation,revision})=>{
-   if(!held.id&&player.isSneaking)return recoverCellarCabinet(player,block,{expectedRevision:revision});
    if(!held.id||cellarCabinetItem(held.id))return useCellarCabinet(player,block,face,faceLocation,{expectedRevision:revision});
    tell(player,'§e[Tavern] 窖藏酒櫃只接受來源允許的酒瓶；必須點正面九宮格。');
   },

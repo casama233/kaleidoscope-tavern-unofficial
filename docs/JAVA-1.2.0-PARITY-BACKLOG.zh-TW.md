@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿與下方 empty_bottle item entity 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 placed empty-bottle block carrier、Facing／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、掉落物與已放置 empty_bottle carrier 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Facing／嚴格酒桶第二層正面連接、waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -78,6 +78,26 @@ waterlogging 使用穩定 `minecraft:liquid_detection` 的 water rule（`can_con
 碰撞有一個明示的引擎級降級：Java 傾斜形狀是三個 AABB 的聯集；目前穩定 custom-block `minecraft:collision_box` 只給單一 AABB。本批使用 Java 三段形狀中**中間那一段的原尺寸 AABB**作保守碰撞，不使用整個 1×1×1 包圍盒製造幽靈牆；selection 維持完整格，精確複合碰撞仍列為 pending。
 
 Minecraft／手機／BDS／Realms 的實際側掛方向、含水渲染、流體更新與落下傷害仍為 **NOT_RUN**。
+
+
+
+## 釀酒閉環核對 Batch 4：Tap × 已放置 Empty Bottle carrier
+
+Java `BarrelBlockEntity.canTapExtract`／`transform` 的 carrier 優先序是：先看 Tap 正下方的**已放置容器方塊**，若不匹配才在同一格 AABB 查找掉落物 carrier。對酒館標準酒類，`empty_bottle` 本身就是 `BottleBlockItem` 對應的可放置 `BottleBlock`。
+
+本批補齊這條主線，不把空瓶硬塞進品質飲品的 `BottleStore`：
+
+- 新增內部方塊 `kaleidoscope_tavern:bottle_empty`，直接使用已存在的原作 `geometry.kt_assets_a3.empty_bottle_faces` 與原貼圖；物品 ID 仍保持來源的 `kaleidoscope_tavern:empty_bottle`。
+- 空瓶與品質酒瓶共用既有 Java item-use-on placement 路由。空瓶是普通 `BottleBlockItem`，因此**不需要潛行**即可放置；品質飲品仍維持 `DrinkBlockItem` 的「同類先堆疊、否則只有潛行才放置」規則。
+- 放置空瓶只保存朝向 block state，不建立額外 world DP；空手互動與受保護破壞都精確返還一個原 `empty_bottle`。
+- 空瓶方塊使用來源 6×14×6 selection 尺寸與穩定 `minecraft:liquid_detection` 水容納規則；不建立第二套 waterlogged 布林狀態。
+- Tap 開啟時先檢查 placed empty bottle，再檢查 item entity。30 tick 結束後再次驗證 carrier；若是 placed carrier，直接在原位置替換為既有 `bottle_<drink>` 方塊並把精確 `*_q1..q6` ID 寫入 `BottleStore`。
+- 替換時保留原空瓶朝向。若 machine state 最後提交失敗，filled display／BottleStore 會回滾，原 empty bottle block 與 facing 原樣恢復。
+- 非 Tavern 品質瓶的外部輸出若使用 placed carrier，保守移除 carrier 後生成對應 item drop；不猜測第三方 block-item identity。
+
+本批沒有偽造「酒桶正面」：Java Tap 的嚴格連接依賴 Barrel 自己的 `FACING + WALL layer + index`。目前 Bedrock 27 格 barrel proxy 尚未持久化 facing，因此下一批應先把 Barrel facing 寫進 core／part 結構與 visual rotation，再讓 Tap 只接受第二層正面中心，而不是從 Tap 端猜方向。
+
+Minecraft／手機／BDS／Realms 的空瓶放置、waterlogging 與 Tap 原地替換仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

@@ -6,6 +6,8 @@ export const makeStack=(id,count)=>new ItemStack(id,count);
 export function inventory(player) {const c=player.getComponent('minecraft:inventory')?.container;check(c,'NO_INVENTORY');return c;}
 export function hand(player){return inventory(player).getItem(player.selectedSlotIndex);}
 export function canWrite(player){check(player&&![GameMode.Spectator,GameMode.Adventure].includes(player.getGameMode()),'GAME_MODE_LOCKED');}
+/** Vanilla BlockItem-style placement: Creative places without consuming the held stack. */
+export function placementTake(player,count=1){check(Number.isInteger(count)&&count>=0,'INVALID_PLACEMENT_COUNT');return player.getGameMode()===GameMode.Creative?0:count;}
 export function blockAt(d,p){try{return d.getBlock(p);}catch{return undefined;}}
 export function plus(p,d){return {x:p.x+d.x,y:p.y+d.y,z:p.z+d.z};}
 export function blockCenter(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}

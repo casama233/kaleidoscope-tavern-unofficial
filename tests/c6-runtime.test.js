@@ -59,11 +59,12 @@ test('shared break/drop/sound adapter owns one global break and explosion listen
  assert.equal(BREAK_ROUTE_TEST.routes.length,10);
  assert.equal(new Set(BREAK_ROUTE_TEST.routes.map(route=>route.id)).size,10);
 });
-test('Java item-use-on stage keeps only scripted placement families; empty bottle and table stay native',()=>{
+test('Java item-use-on stage keeps only scripted placement families; empty bottle, table and Glassware Holder stay native',()=>{
  assert.equal(JAVA_PLACEMENT_TEST.routes.length,11);
  assert.equal(new Set(JAVA_PLACEMENT_TEST.routes.map(route=>route.id)).size,11);
  assert.equal(JAVA_PLACEMENT_TEST.routes.some(route=>route.id==='empty-bottle-block-item'),false);
  assert.equal(JAVA_PLACEMENT_TEST.matching(NS+':table').length,0);
+ assert.equal(JAVA_PLACEMENT_TEST.matching(NS+':glassware_holder').length,0);
  assert.equal(JAVA_PLACEMENT_TEST.matching(NS+':bar_counter').length,1);
 });
 test('all current Tavern block resources have exactly one protected break route, no native loot, and an explicit source-like sound material',()=>{
@@ -178,6 +179,12 @@ test('Pendant Lamp orphan repair removes survivor without minting an item',()=>{
 test('Painting places on wall with clicked-face facing and recovers exact item',()=>{const {p,b}=painting('mona_lisa',undefined,pos,'North',180);assert.equal(b.typeId,NS+':mona_lisa_painting');assert.equal(b.permutation.getState(ATTACH_FACE),PAINTING_ATTACH.WALL);assert.equal(b.permutation.getState(FACING),0);assert.equal(count(p,NS+':mona_lisa_painting'),1);recoverFurniture(p,b);assert(b.isAir);assert.equal(count(p,NS+':mona_lisa_painting'),2);});
 test('Painting floor and ceiling preserve Java opposite/original player facing',()=>{const {p:pa,b:a}=painting('great_wave',undefined,{x:0,y:64,z:0},'Up',90);assert.equal(a.permutation.getState(ATTACH_FACE),PAINTING_ATTACH.FLOOR);assert.equal(a.permutation.getState(FACING),3);recoverFurniture(pa,a);const {p,b}=painting('starry_night',undefined,{x:2,y:64,z:0},'Down',0);assert.equal(b.permutation.getState(ATTACH_FACE),PAINTING_ATTACH.CEILING);assert.equal(b.permutation.getState(FACING),0);recoverFurniture(p,b);});
 test('Painting metadata item is rejected before placement',()=>{const p=player(),custom=new ItemStack(NS+':david_painting',1);custom.nameTag='keep';hand(p,custom);assert.throws(()=>placeFurniture(p,pos,{face:'South'}),x=>x.code==='METADATA_ITEM_REJECTED');assert(d.getBlock(pos).isAir);assert.equal(p.inventory.getItem(0).nameTag,'keep');});
+test('native Glassware Holder onPlace maps Mojang cardinal direction into legacy facing without touching slots',()=>{
+ const component=regs.blocks.get(NS+':glassware_holder');assert.equal(typeof component?.onPlace,'function');
+ const states={[TABLE_CARDINAL]:'east',[FACING]:0};for(const st of GLASSWARE_SLOTS)states[st]=0;
+ const b=d.getBlock(pos);b.setPermutation(BlockPermutation.resolve(NS+':glassware_holder',states));component.onPlace({block:b});
+ assert.equal(b.permutation.getState(FACING),1);for(const st of GLASSWARE_SLOTS)assert.equal(b.permutation.getState(st),0);
+});
 test('Glassware Holder fills four exact quadrants and extracts into empty hand',()=>{const {p,b}=glasswareHolder();hand(p,NS+':empty_glassware',4);for(const q of[{x:.25,z:.25},{x:.75,z:.25},{x:.25,z:.75},{x:.75,z:.75}])assert(useGlasswareHolder(p,b,q));assert.equal(count(p,NS+':empty_glassware'),0);for(const st of GLASSWARE_SLOTS)assert.equal(b.permutation.getState(st),1);assert(useGlasswareHolder(p,b,{x:.75,z:.75}));assert.equal(count(p,NS+':empty_glassware'),1);assert.equal(b.permutation.getState(GLASSWARE_SLOTS[3]),0);});
 test('Glassware Holder rejects occupied insert and metadata without loss',()=>{const {p,b}=glasswareHolder();hand(p,NS+':empty_glassware',2);assert(useGlasswareHolder(p,b,{x:.25,z:.25}));const n=count(p,NS+':empty_glassware');assert.equal(useGlasswareHolder(p,b,{x:.25,z:.25}),false);assert.equal(count(p,NS+':empty_glassware'),n);const custom=new ItemStack(NS+':empty_glassware',1);custom.nameTag='keep';hand(p,custom);assert.throws(()=>useGlasswareHolder(p,b,{x:.75,z:.25}),x=>x.code==='METADATA_ITEM_REJECTED');assert.equal(p.inventory.getItem(p.selectedSlotIndex).nameTag,'keep');});
 test('Glassware Holder recovery returns all occupied glasses with holder',()=>{const {p,b}=glasswareHolder();hand(p,NS+':empty_glassware',3);for(const q of[{x:.25,z:.25},{x:.75,z:.25},{x:.25,z:.75}])assert(useGlasswareHolder(p,b,q));hand(p,undefined);const before=count(p,NS+':glassware_holder');recoverFurniture(p,b);assert(b.isAir);assert.equal(count(p,NS+':glassware_holder'),before+1);assert.equal(count(p,NS+':empty_glassware'),3);});

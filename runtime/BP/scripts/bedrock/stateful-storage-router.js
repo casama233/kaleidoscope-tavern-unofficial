@@ -76,37 +76,30 @@ export function popRandomStoredBottle({
 export function installStatefulStorageRoutes({
  routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=true
 }){
- check(typeof isBlock==='function'&&typeof isPlacementItem==='function','INVALID_STORAGE_ROUTE');
+ check(typeof routeId==='string'&&routeId,'INVALID_STORAGE_ROUTE');
+ check(typeof isBlock==='function'&&typeof isPlacementItem==='function'&&typeof shouldInteract==='function','INVALID_STORAGE_ROUTE');
  check(typeof place==='function'&&typeof interact==='function'&&typeof recover==='function','INVALID_STORAGE_ROUTE');
- placementMatchers.push(isPlacementItem);
-
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
-  if(e.cancel)return;
-  const existing=!!isBlock(e.block),held=handSnapshot(e.player),placing=!!isPlacementItem(held.id),otherStoragePlacement=!placing&&anyPlacementItem(held.id);
-  // A storage placement item owns the click. Existing storage from another route must
-  // yield so the matching placement route can place beside it instead of swallowing it.
-  if(existing&&otherStoragePlacement)return;
-  if(!existing&&!placing)return;
-  e.cancel=true;
-  if(e.isFirstEvent===false)return;
-  const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId,face=e.blockFace;
-  const faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
-  const target=placing?plus(location,faceOffset(face)):location;
-  const revision=existing&&!placing?revisionOf(readRevision,e.block):-1;
+  if(e.cancel||!isBlock(e.block))return;
+  const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
+  const face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
+  let revision,consume=false;
+  try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch{return;}
+  if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;
+  const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
   system.run(()=>safe(player,()=>{
-   sameHand(player,held);
-   check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
-   const clicked=blockAt(dimension,location);
-   check(clicked?.typeId===typeId,'BLOCK_CHANGED');
-   if(placing)return place({player,target,held,face,faceLocation,clicked});
+   sameHand(player,held);check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
+   const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId&&isBlock(clicked),'BLOCK_CHANGED');
    return interact({player,block:clicked,held,face,faceLocation,revision});
   }));
  });
-
+ registerJavaItemUseOnRoute({
+  id:'storage:'+routeId,matches:isPlacementItem,
+  plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
+  execute:({player,held,face,faceLocation,block,plan})=>place({player,target:plan.target,held,face,faceLocation,clicked:block})
+ });
  registerProtectedBreakRoute({
-  isBlock,
-  capture:({block})=>revisionOf(readRevision,block),
-  recover:({player,block,snapshot})=>recover({player,block,revision:snapshot}),
-  protectExplosions
+  id:'storage:'+routeId,isBlock,capture:({block})=>revisionOf(readRevision,block),
+  recover:({player,block,snapshot})=>recover({player,block,revision:snapshot}),protectExplosions
  });
 }

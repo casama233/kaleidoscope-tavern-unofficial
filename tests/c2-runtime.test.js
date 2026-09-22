@@ -57,6 +57,11 @@ test('changed held stack and dimension cancel deferred plant use',()=>{const b=f
 test('Java secondary-use parity: sneak+held grapevine bypasses TrellisBlock.use instead of planting',()=>{const b=frame(),p=player();h(p,NS+':grapevine',2);p.isSneaking=true;const e=click(p,b);assert.equal(e.cancel,false);system.advance();assert.equal(b.typeId,BARE);assert.equal(count(p,NS+':grapevine'),2);});
 test('BoneMealItem parity: item useOn still reaches Tavern growth after block use PASS, including while sneaking',()=>{const b=frame({kind:'grape',age:0}),p=player();h(p,'minecraft:bone_meal',2);p.isSneaking=true;const e=click(p,b);assert(e.cancel);system.advance();assert.equal(b.permutation.getState(NS+':age'),1);assert.equal(count(p,'minecraft:bone_meal'),1);});
 
+test('full-inventory trellis mining still drops to world and leaves the real inventory unchanged',()=>{
+ const b=frame(),p=player();for(let i=0;i<p.inventory.size;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));const before=p.inventory.items.map(x=>x&&[x.typeId,x.amount]);
+ const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();
+ assert(e.cancel);assert(b.isAir);assert.equal(dropCount(BARE),1);assert.deepEqual(p.inventory.items.map(x=>x&&[x.typeId,x.amount]),before);
+});
 test('shared break router gives bare trellis a Survival world drop and Java wood feedback',()=>{
  const b=frame(),p=player(),before=dropCount(BARE),sounds=dim.sounds?.filter(s=>s.id==='dig.wood').length??0;
  const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();

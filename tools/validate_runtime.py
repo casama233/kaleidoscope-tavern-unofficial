@@ -54,8 +54,11 @@ def main():
    q6={x for x in qitems if x.endswith('_q6')};lower=qitems-q6
    check('creative_only_max_quality_drinks',q6<=set(main_items) and not(lower&set(listed)) and len(q6)==24)
    check('creative_source_main_blocks_in_items',all(block_defs[x]['description'].get('menu_category')=={'category':'items'} for x in ['kaleidoscope_tavern:trellis','kaleidoscope_tavern:pressing_tub','kaleidoscope_tavern:tap']))
-   tap=block_defs['kaleidoscope_tavern:tap'];tap_states=tap['description'].get('states',{});tap_components=tap.get('components',{});tap_perms=tap.get('permutations',[])
+   tap=block_defs['kaleidoscope_tavern:tap'];tap_desc=tap['description'];tap_states=tap_desc.get('states',{});tap_components=tap.get('components',{});tap_perms=tap.get('permutations',[])
    check('C1_tap_delayed_barrel_state',tap_states.get('kaleidoscope_tavern:open')==[0,1] and tap_components.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False} and tap_components.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and tap_components.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a1.tap_closed' and any(p.get('condition')=="q.block_state('kaleidoscope_tavern:open') == 1" and p.get('components',{}).get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a1.tap_open' for p in tap_perms))
+   check('C1_tap_native_facing_waterlogging',tap_desc.get('traits')=={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}} and tap_components.get('minecraft:liquid_detection',{}).get('detection_rules')==[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}] and len(tap_perms)==9)
+   for ident in ['kaleidoscope_tavern:barrel_core','kaleidoscope_tavern:barrel_part']:
+    check('C1_barrel_native_facing:'+ident,block_defs[ident]['description'].get('traits')=={'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}})
 
    visible=set()
    for ident,d in item_defs.items():

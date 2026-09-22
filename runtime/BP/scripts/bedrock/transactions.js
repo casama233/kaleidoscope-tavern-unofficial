@@ -3,7 +3,44 @@ import {BlockPermutation,GameMode,ItemStack} from '@minecraft/server';
 import {planInventory,commitInventory} from '../core/inventory.js';
 import {check} from '../core/util.js';
 export const makeStack=(id,count)=>new ItemStack(id,count);
-export function inventory(player) {const c=player.getComponent('minecraft:inventory')?.container;check(c,'NO_INVENTORY');return c;}
+const inventoryScopes=new Map();
+function nativeInventory(player){const c=player.getComponent('minecraft:inventory')?.container;check(c,'NO_INVENTORY');return c;}
+export function inventory(player){return inventoryScopes.get(player.id)??nativeInventory(player);}
+function breakSinkContainer(player,dimension,location,mode){
+ check(mode==='drop'||mode==='discard','BAD_BREAK_SINK');
+ const real=nativeInventory(player),base=Array.from({length:real.size},(_,i)=>real.getItem(i)?.clone());
+ const virtual=[...base.map(x=>x?.clone()),...Array(256)],entities=new Map();
+ return {
+  size:virtual.length,
+  getItem(i){return virtual[i]?.clone();},
+  setItem(i,value){
+   check(Number.isInteger(i)&&i>=0&&i<virtual.length,'BAD_SLOT');
+   const original=base[i],next=value?.clone();let delta;
+   if(!original){if(next)delta=next.clone();}
+   else{
+    check(next,'BREAK_RECOVERY_MUTATED_INVENTORY');
+    let compatible=false;try{compatible=original.isStackableWith(next);}catch{}
+    check(compatible&&next.amount>=original.amount,'BREAK_RECOVERY_MUTATED_INVENTORY');
+    if(next.amount>original.amount){delta=next.clone();delta.amount-=original.amount;}
+   }
+   let spawned;
+   if(mode==='drop'&&delta?.amount)spawned=dimension.spawnItem(delta,blockCenter(location));
+   const previous=entities.get(i);if(previous)previous.remove();
+   if(spawned)entities.set(i,spawned);else entities.delete(i);
+   virtual[i]=next;
+  }
+ };
+}
+/**
+ * During scripted block breaking, recovery transactions see a lossless virtual inventory:
+ * Survival outputs are spawned before block/state commit; Creative outputs are discarded.
+ * The real player inventory is never mutated, so full inventories cannot block vanilla-like drops.
+ */
+export function withBreakInventory(player,dimension,location,mode,fn){
+ check(!inventoryScopes.has(player.id),'BREAK_INVENTORY_SCOPE_CONFLICT');
+ const scoped=breakSinkContainer(player,dimension,location,mode);inventoryScopes.set(player.id,scoped);
+ try{return fn();}finally{inventoryScopes.delete(player.id);}
+}
 export function hand(player){return inventory(player).getItem(player.selectedSlotIndex);}
 export function canWrite(player){check(player&&![GameMode.Spectator,GameMode.Adventure].includes(player.getGameMode()),'GAME_MODE_LOCKED');}
 /** Java/vanilla BlockItem placement does not decrement the held stack in Creative. */

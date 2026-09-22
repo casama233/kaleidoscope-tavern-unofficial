@@ -7,18 +7,21 @@ const routes=[];let installed=false,sequence=0;
 function routeMatches(route,block){try{return !!route.isBlock(block);}catch{return false;}}
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
 function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
-const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',wood:'dig.wood'});
+const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',chain:'dig.chain',wood:'dig.wood'});
+const INTERACTION_SOUNDS=Object.freeze({glass:'place.stone',wool:'place.cloth',metal:'place.iron',chain:'place.chain',wood:'place.wood'});
 function breakMaterial(id){
  if(typeof id!=='string'||!id.startsWith('kaleidoscope_tavern:'))return undefined;
  const short=id.slice('kaleidoscope_tavern:'.length);
  if(/^bottle_|^cup_/.test(short))return 'glass';
  if(/_sofa$/.test(short))return 'wool';
  if(/_crop$/.test(short))return 'crop';
- if(/^(tap|shaker_station|glassware_holder)$/.test(short)||/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'metal';
+ if(/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'chain';
+ if(/^(tap|shaker_station|glassware_holder)$/.test(short))return 'metal';
  if(/^(barrel_core|barrel_part|pressing_tub|trellis|table|bar_counter|bar_cabinet|glass_bar_cabinet|cellar_cabinet|holder|tilted_rack|circular_rack)$/.test(short)||/^stool_/.test(short)||/(^|_)grapevine_trellis$/.test(short)||/_painting$/.test(short))return 'wood';
  return undefined;
 }
 function breakSound(id){return BREAK_SOUNDS[breakMaterial(id)]??'dig.wood';}
+export function playMaterialInteraction(dimension,location,blockId){const sound=INTERACTION_SOUNDS[breakMaterial(blockId)];if(!sound)return false;try{dimension.playSound(sound,blockCenter(location),{volume:.65,pitch:1});return true;}catch{return false;}}
 function pureAddedDrops(before,after){
  const drops=[],restore=[];
  for(let i=0;i<after.length;i++){

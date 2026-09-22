@@ -54,6 +54,9 @@ def main():
    q6={x for x in qitems if x.endswith('_q6')};lower=qitems-q6
    check('creative_only_max_quality_drinks',q6<=set(main_items) and not(lower&set(listed)) and len(q6)==24)
    check('creative_source_main_blocks_in_items',all(block_defs[x]['description'].get('menu_category')=={'category':'items'} for x in ['kaleidoscope_tavern:trellis','kaleidoscope_tavern:pressing_tub','kaleidoscope_tavern:tap']))
+   tap=block_defs['kaleidoscope_tavern:tap'];tap_states=tap['description'].get('states',{});tap_components=tap.get('components',{});tap_perms=tap.get('permutations',[])
+   check('C1_tap_delayed_barrel_state',tap_states.get('kaleidoscope_tavern:open')==[0,1] and tap_components.get('minecraft:redstone_consumer')=={'min_power':0,'propagates_power':False} and tap_components.get('minecraft:tick')=={'interval_range':[20,20],'looping':True} and tap_components.get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a1.tap_closed' and any(p.get('condition')=="q.block_state('kaleidoscope_tavern:open') == 1" and p.get('components',{}).get('minecraft:geometry',{}).get('identifier')=='geometry.kt_assets_a1.tap_open' for p in tap_perms))
+
    visible=set()
    for ident,d in item_defs.items():
     if d['description'].get('menu_category',{}).get('category') in {'items','construction'}:visible.add(ident)

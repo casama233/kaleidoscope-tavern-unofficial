@@ -79,6 +79,7 @@ def main():
  router=(BP/'scripts/bedrock/stateful-storage-router.js').read_text(encoding='utf-8')
  break_router=(BP/'scripts/bedrock/protected-break-router.js').read_text(encoding='utf-8')
  check('shared_storage_router_owns_interaction_only','playerInteractWithBlock.subscribe' in router and 'registerProtectedBreakRoute' in router and 'playerBreakBlock.subscribe' not in router and 'beforeEvents.explosion.subscribe' not in router)
+ check('ordinary_storage_placement_never_requires_sneak','SNEAK_TO_PLACE' not in router and 'placementMatchers' in router and 'anyPlacementItem' in router)
  check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','dimension.spawnItem','dimension.playSound']))
  check('shared_break_router_has_explicit_material_profiles',all(x in break_router for x in ['breakMaterial','holder|tilted_rack|circular_rack','tap|shaker_station|glassware_holder','grapevine_trellis','_painting']))
  for name in shared_storage:
@@ -94,6 +95,8 @@ def main():
   check('shared_break_router_used:'+name,'registerProtectedBreakRoute' in text)
   check('no_duplicate_break_event_shell:'+name,'playerBreakBlock.subscribe' not in text and 'beforeEvents.explosion.subscribe' not in text and 'finishPlayerBreak' not in text)
  check('break_feedback_removed_from_transactions','finishPlayerBreak' not in (BP/'scripts/bedrock/transactions.js').read_text(encoding='utf-8'))
+ furniture_text=(BP/'scripts/bedrock/furniture.js').read_text(encoding='utf-8')
+ check('ordinary_furniture_placement_never_requires_sneak','SNEAK_TO_PLACE' not in furniture_text and 'if(placing)return placeFurniture' in furniture_text)
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

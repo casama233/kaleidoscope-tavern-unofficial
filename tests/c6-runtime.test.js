@@ -77,6 +77,14 @@ test('all current Tavern block resources have exactly one protected break route,
  }
  assert.deepEqual(issues,[]);
 });
+test('Java SimpleWaterloggedBlock furniture uses the shared Bedrock water-containment contract only on source families',()=>{
+ const dir=new URL('../runtime/BP/blocks/',import.meta.url),defs=fs.readdirSync(dir).filter(name=>name.endsWith('.json')).map(name=>JSON.parse(fs.readFileSync(new URL(name,dir)))['minecraft:block']);
+ const expected=defs.filter(def=>{const short=def.description.identifier.slice(NS.length+1);return /^stool_/.test(short)||/^light_/.test(short)||/_sofa$/.test(short)||short==='table'||/_painting$/.test(short);});
+ assert.equal(expected.length,64);
+ const rule={detection_rules:[{liquid_type:'water',can_contain_liquid:true,on_liquid_touches:'blocking',use_liquid_clipping:false}]};
+ for(const def of expected)assert.deepEqual(def.components['minecraft:liquid_detection'],rule,def.description.identifier);
+ for(const short of['bar_counter','glassware_holder','holder','circular_rack','bell_pendant_lamp']){const def=defs.find(x=>x.description.identifier===NS+':'+short);assert(def);assert.equal(def.components['minecraft:liquid_detection'],undefined,short);}
+});
 test('break sound profiles follow Java source materials for storage, furniture, cultivation and mixology',()=>{
  const cases={
   wood:['holder','tilted_rack','circular_rack','bar_cabinet','glass_bar_cabinet','cellar_cabinet','barrel_core','pressing_tub','trellis','grapevine_trellis','stool_blue','table','bar_counter','mona_lisa_painting'],

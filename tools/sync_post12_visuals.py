@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Apply/verify locked post-1.2 upstream visual sync plans. Offline, idempotent, minimal-diff."""
 from pathlib import Path
-import argparse, copy, hashlib, json, re
+import argparse, copy, hashlib, json, math, re
 
 R=Path(__file__).resolve().parents[1]
 REGISTRY=R/'art/interfaces/asset-registry.json'
@@ -224,10 +224,21 @@ def _convert_face(face,entry,shade,scale):
 
 def _element_box(element):
     fx,fy,fz=element['from']; tx,ty,tz=element['to']
-    return (
-        _clean_numbers([8-max(fx,tx),min(fy,ty),min(fz,tz)-8]),
-        _clean_numbers([abs(tx-fx),abs(ty-fy),abs(tz-fz)])
-    )
+    origin=_clean_numbers([8-max(fx,tx),min(fy,ty),min(fz,tz)-8])
+    size=_clean_numbers([abs(tx-fx),abs(ty-fy),abs(tz-fz)])
+    r=element.get('rotation')
+    if r and r.get('rescale') and r.get('angle'):
+        x,y,z=r['origin']; pivot=[8-x,y,z-8]
+        factor=1/math.cos(math.radians(float(r['angle'])))
+        axis=r['axis']; axes={'x':(1,2),'y':(0,2),'z':(0,1)}[axis]
+        for i in axes:
+            lo=origin[i]; hi=origin[i]+size[i]; p=pivot[i]
+            a=p+(lo-p)*factor; b=p+(hi-p)*factor
+            origin[i]=round(min(a,b),7)
+            size[i]=round(abs(b-a),7)
+            if float(origin[i]).is_integer(): origin[i]=int(origin[i])
+            if float(size[i]).is_integer(): size[i]=int(size[i])
+    return origin,size
 
 def _element_rotation(element,out):
     r=element.get('rotation')
@@ -313,13 +324,14 @@ def regenerate_geo(plan_path,model,apply):
             if ui is None: continue
             old_pairs=_mapped_cubes(base_model['elements'][idx],entry,scale)
             if idx in regenerate:
-                new_pairs=_mapped_cubes(updated_model['elements'][ui],entry,scale)
-                if [cube for cube,_ in old_pairs]!=[cube for cube,_ in new_pairs]:
+                pairs=_mapped_cubes(updated_model['elements'][ui],entry,scale)
+                if [cube for cube,_ in old_pairs]!=[cube for cube,_ in pairs]:
                     raise AssertionError(f"{model['id']}: updated cube mapping changed for element {idx}")
-                target.extend(new_pairs)
             else:
-                target.extend((cube,baseline_cubes[cube]) for cube,_ in old_pairs)
-        target_cubes=[cube for _,cube in sorted(target,key=lambda x:x[0])]
+                pairs=[(cube,baseline_cubes[cube]) for cube,_ in old_pairs]
+            for suborder,(cube,value) in enumerate(pairs):
+                target.append((ui,suborder,cube,value))
+        target_cubes=[value for _,_,_,value in sorted(target,key=lambda x:(x[0],x[1],x[2]))]
         if apply:
             runtime['minecraft:geometry'][0]['bones'][0]['cubes']=target_cubes
             runtime_path.write_text(json.dumps(runtime,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

@@ -1,12 +1,11 @@
 import {world,system,GameMode} from '@minecraft/server';
 import {check} from '../core/util.js';
-import {inventory,blockAt,blockCenter,safe} from './transactions.js';
+import {withBreakInventory,blockAt,blockCenter,safe} from './transactions.js';
 
 const routes=[];let installed=false,sequence=0;
 
 function routeMatches(route,block){try{return !!route.isBlock(block);}catch{return false;}}
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
-function inventorySnapshot(container){return Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone());}
 const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',chain:'dig.chain',wood:'dig.wood'});
 const INTERACTION_SOUNDS=Object.freeze({glass:'place.stone',wool:'place.cloth',metal:'place.iron',chain:'place.chain',wood:'place.wood'});
 function breakMaterial(id){
@@ -38,34 +37,14 @@ function pureAddedDrops(before,after){
 }
 
 /**
- * Convert a successful scripted recovery into vanilla-like Survival world drops and
- * one material break sound. Recovery remains authoritative: feedback failure never
- * turns a successful state/inventory transaction into item loss.
+ * Run scripted recovery against a scoped output sink instead of the player's real inventory.
+ * Survival outputs become world drops; Creative outputs are discarded. Spawn failure occurs
+ * before the domain save() commit and therefore uses the existing transaction rollback.
  */
 export function finishPlayerBreak(player,dimension,location,blockId,recover){
- const container=inventory(player),before=inventorySnapshot(container);
- const result=recover(),current=blockAt(dimension,location);
+ const mode=player.getGameMode()===GameMode.Survival?'drop':'discard';
+ const result=withBreakInventory(player,dimension,location,mode,recover),current=blockAt(dimension,location);
  if(current?.typeId===blockId)return result;
- if(player.getGameMode()===GameMode.Survival){
-  const after=inventorySnapshot(container),delta=pureAddedDrops(before,after);
-  if(delta?.drops.length){
-   const spawned=[];
-   try{
-    for(const stack of delta.drops)spawned.push(dimension.spawnItem(stack,blockCenter(location)));
-    const restored=[];
-    try{
-     for(const [slot,value] of delta.restore){container.setItem(slot,value);restored.push(slot);}
-    }catch(error){
-     for(const slot of restored)container.setItem(slot,after[slot]);
-     for(const entity of spawned)try{entity.remove();}catch{}
-     throw error;
-    }
-   }catch{
-    for(const entity of spawned)try{entity.remove();}catch{}
-    // Inventory remains the lossless fallback if visual world-drop conversion fails.
-   }
-  }
- }
  try{dimension.playSound(breakSound(blockId),blockCenter(location),{volume:.75,pitch:1});}catch{}
  return result;
 }

@@ -6,10 +6,11 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {world,system,startup,Player,ItemStack,Container,Entity,GameMode} from './fake-server.js';
 import {migrateLegacyGuide,runtimeRegistry,diagnosticSnapshot} from '../runtime/BP/scripts/main.js';
-import {initializeTub,createBarrel,operate,press,tubTilted,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,finishTapExtraction,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
+import {initializeTub,createBarrel,operate,press,tubTilted,tickBarrel,dismantle,syncVisuals,findTapCore,resolveCore,finishTapExtraction,bottleFacingFromCardinal,TEST_ACCESS} from '../runtime/BP/scripts/bedrock/machines.js';
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';
 import {barrelCells} from '../runtime/BP/scripts/core/machines.js';
 import {bottleKey} from '../runtime/BP/scripts/core/bottles.js';
+import {BOTTLE_TEST} from '../runtime/BP/scripts/bedrock/bottles.js';
 import {packetsFor,EVENTS} from '../runtime/BP/scripts/core/transport.js';
 import {registerTavernExtension} from '../sdk/tavern-extension-client.js';
 const NS='kaleidoscope_tavern',dim=world.getDimension('overworld');
@@ -69,6 +70,24 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
  assert.equal(dropCount(NS+':wine_q2'),15);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);
 });
 test('all four-input barrel adapters preserve minimum stack output and reject metadata',()=>{const b=barrel(player()),p=player();fill(p,b,'green_grape');hand(p,'minecraft:sugar_cane',9);operate(p,b,'use');hand(p,'minecraft:sugar',3);operate(p,b,'use');hand(p,NS+':grape');const named=p.inventory.getItem(0);named.nameTag='Keep';p.inventory.setItem(0,named);code(()=>operate(p,b,'use'),'METADATA_ITEM_REJECTED');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.remaining,3);assert.equal(state(b).batch.recipeId,NS+':barrel/sauvignon_blanc_dry_white');assert.equal(p.inventory.getItem(0).nameTag,'Keep');});
+test('Tap transforms native placed empty bottle into exact-quality display and preserves source facing',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z},empty=dim.getBlock(below);empty.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'east'}));
+ assert.equal(bottleFacingFromCardinal('east'),1);hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(30);
+ const filled=dim.getBlock(below);assert.equal(filled.typeId,NS+':bottle_wine');assert.equal(filled.permutation.getState(BOTTLE_TEST.FACING),1);assert.deepEqual(TEST_ACCESS.bottleStore.load(bottleKey(dim.id,below)).items,[NS+':wine_q1']);assert.equal(state(b).batch,null);assert.equal(state(b).open,false);
+});
+test('Tap prefers placed empty bottle over dropped carrier in the same destination cell',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.getBlock(below).setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'north'}));dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});
+ finishTapExtraction(tap,b.location);assert.equal(dim.getBlock(below).typeId,NS+':bottle_wine');assert.equal(state(b).batch.remaining,1);assert.equal(dim.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}}).filter(e=>e.getComponent('minecraft:item')?.itemStack.typeId===NS+':empty_bottle').length,1);
+});
+test('placed Tap carrier rolls back block, facing and BottleStore when machine save fails',()=>{
+ const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=2;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
+ const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z},empty=dim.getBlock(below);empty.setPermutation(BlockPermutation.resolve(BOTTLE_TEST.EMPTY_BLOCK,{'minecraft:cardinal_direction':'west'}));
+ const mkey=machineKey(dim.id,b.location),originalSet=world.setDynamicProperty;world.setDynamicProperty=function(k,v){if(k===mkey)throw Error('INJECTED_MACHINE_SAVE');return originalSet.call(this,k,v);};
+ try{assert.throws(()=>finishTapExtraction(tap,b.location),/INJECTED_MACHINE_SAVE/);}finally{world.setDynamicProperty=originalSet;}
+ const restored=dim.getBlock(below);assert.equal(restored.typeId,BOTTLE_TEST.EMPTY_BLOCK);assert.equal(restored.permutation.getState('minecraft:cardinal_direction'),'west');assert.equal(TEST_ACCESS.bottleStore.load(bottleKey(dim.id,below)),undefined);assert.equal(state(b).batch.remaining,2);
+});
 test('Tap second manual click closes immediately and cancels the scheduled extraction',()=>{
  const b=barrel(player()),p=player();fill(p,b);operate(p,b,'lid');tickBarrel(b);let s=state(b);s.batch.remaining=1;const old=s.revision++;TEST_ACCESS.store.save(machineKey(dim.id,b.location),s,old);
  const tap=dim.getBlock({x:b.location.x+2,y:b.location.y,z:b.location.z});tap.setType(NS+':tap');const below={x:tap.location.x,y:tap.location.y-1,z:tap.location.z};dim.spawnItem(new ItemStack(NS+':empty_bottle',1),{x:below.x+.5,y:below.y+.5,z:below.z+.5});

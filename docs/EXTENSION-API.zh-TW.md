@@ -1,4 +1,4 @@
-> **C6 現行補充：** 套件依賴版本更新為 `[0,6,0]`。本轮新增的家具與聲波是內建功能，**沒有新增任意家具、傷害或特效腳本回呼 API**。既有 v1 握手、配方、指南、藥水能力與傳輸格式不變。
+> **C6 現行補充：** 套件依賴版本更新為 `[0,6,0]`。為正式支援 World Liquor 類 Tavern 下游附屬，v1 新增能力 `external_shaker_inputs` 與可選 `shakerInputs` 描述；它只提供靜態調酒輸入快照，**沒有新增任意家具、傷害或特效腳本回呼 API**。既有 barrel / pressing / shaker 配方、指南、藥水與傳輸事件格式不變。
 
 > **C5 現行補充：** API仍為v1，增加`native_potion_inputs`能力。原生藥水不再一概拒收，但只在調酒input走身份驗證適配，詳見文末C5契約。Cookery 指南是唯一玩家指南；Tavern 附屬頁面會由 host bridge 發佈到 Cookery Guidebook Extension API。
 
@@ -42,7 +42,7 @@ const registration = registerTavernExtension(system, {
 
 ## 二、實際能力
 
-`api_ready`公開：`barrel_recipes`、`pressing_recipes`、`guide_pages`、`recipe_auto_pages`、`atomic_extension_replace`、`chunk_transport`、`acknowledgements`、`shaker_recipes`、`shaker_batch_snapshot`。
+`api_ready`公開：`barrel_recipes`、`pressing_recipes`、`guide_pages`、`recipe_auto_pages`、`atomic_extension_replace`、`chunk_transport`、`acknowledgements`、`shaker_recipes`、`shaker_batch_snapshot`、`native_potion_inputs`、`external_shaker_inputs`。
 
 C3新增三槽雪克杯配方，完整格式見後文。仍不支援新增真正流體註冊、自訂槽數工作站、任意效果脚本回呼或任意可執行程式碼。不要把未公布的字段當作這些能力存在。
 
@@ -114,7 +114,7 @@ C3新增三槽雪克杯配方，完整格式見後文。仍不支援新增真正
 
 成功ACK的`revision`原樣回覆呼叫者的傳輸revision，`registryRevision`另給主機計數；兩者不混用。失敗ACK有`ok:false`及`code`，可能包含source/revision。SDK只接受與自身source、revision匹配的Server回覆。
 
-每封包上限**1900 UTF-8 bytes**；整包上限**48000 bytes**、最多64段。16個待組裝傳輸；TTL600tick；每tick最多256個傳入處理。每附屬最多128配方＋64頁，全域最多64附屬、2048條記錄。SDK每tick至多送4段，缺ACK時預設最多重試3次；長篇文檔不要整本一次塞入body。
+每封包上限**1900 UTF-8 bytes**；整包上限**48000 bytes**、最多64段。16個待組裝傳輸；TTL600tick；每tick最多256個傳入處理。每附屬最多128配方＋64頁＋128個 `shakerInputs`；全域最多64附屬、2048條配方／頁面／輸入描述記錄。SDK每tick至多送4段，缺ACK時預設最多重試3次；長篇文檔不要整本一次塞入body。
 
 可乱序到達，但段索引與內容須一致。相同段重送不重複累積，不同內容的重覆段拒绝。缺段、錯誤digest或不合法資料都不能半註冊。
 
@@ -164,7 +164,39 @@ API仍為1；增加能力，沒有改舊barrel／pressing封包結構。要使�
 
 可引用的酒館基酒限`data/mixology.js`的69個Q4–Q6實例。Q1–Q3、醋與未適配的酒館品質物品仍在註冊時拒絕。C5可接受明確列出的原生potion/splash/lingering輸入，受native_potion_inputs能力及實例身份驗證限制，不能把附加資料丟掉再當白色材料。
 
-已註冊附屬可另外列普通外部物品，例如Cookery米。這些物品採中性白色、無推測效果、無推測返還容器；帶名稱、附魔、附加資料的實例仍被拒收。**目前沒有公開接口指定外部原料的顏色、效果或返還容器**，不要拿這個接口當成藥水／外部瓶裝飲品適配API。
+已註冊附屬可另外列普通外部物品，例如Cookery米。只在 recipe 中出現、沒有 `shakerInputs` 描述的普通外部物品仍採中性白色、無推測效果、無推測返還容器；這個舊行為只為向後相容。
+
+### World Liquor 類外部飲品：`shakerInputs`
+
+若附屬真的提供自己的瓶裝酒，而不是普通食材，應在同一 bundle 額外聲明：
+
+```json
+{
+  "shakerInputs": [{
+    "item": "my_liquor:gin",
+    "container": "minecraft:glass_bottle",
+    "color": 7846655,
+    "effects": [{
+      "effect": "minecraft:speed",
+      "duration": 30,
+      "amplifier": 0,
+      "probability": 1.0
+    }]
+  }]
+}
+```
+
+這是對 Java World Liquor 直接擴充 Tavern `BottleBlockItem.isValidForShaker` 行為的 Bedrock 等價契約：
+
+- `item` 必須屬於該 extension 的 `source` namespace，避免一個附屬覆寫另一包飲品描述。
+- `container` 可為任意已載入物品 ID 或 `null`；倒入雪克杯時立即把它保存為返還容器快照。
+- `color` 為 `0x000000..0xFFFFFF`，供特調平均顏色使用。
+- `effects` 最多 32 筆，與 Tavern 的固定 effect snapshot 結構相同；它們會在倒入時快照，不因附屬之後重註冊而改變已在杯中的內容。
+- 單純聲明 `shakerInputs` 就可以把該飲品倒進雪克杯，不必製造一條假的固定 shaker recipe 來「解鎖」它。
+- 帶名稱、附魔、額外資料的實例仍由 runtime 拒收；描述器不是把任意 NBT/動態資料洗成普通物品的接口。
+- 外部自訂 effect ID 若 Tavern/Bedrock 沒有對應執行器，特調飲用時會按既有 unsupported-effect 路徑忽略並記錄；這個欄位不是任意腳本回呼 API。
+
+SDK 若 payload 含 `shakerInputs`，會先要求 host 宣告 `external_shaker_inputs`；舊 host 不會收到自己不理解的新 bundle。
 
 原作固定時間窗口不可由配方覆蓋。滿三槽後開始計時，主機捕捉當前選中的固定配方快照；89–98tick用此快照，即使附屬在期間更新或卸載，也不改成另一輸出。當次沒有匹配則在固定窗口生成特調；19–68或>=99仍是神秘。品名、顏色和原生效果均來自已保存投料資料，而非取杯時重新查可變註冊表。
 
@@ -174,7 +206,7 @@ runtime registry 仍是調酒配方與附屬頁面的唯一資料源；registry 
 
 帶動態資料的特調不接受再投入其他雪克杯，避免失去既有payload；註冊即拒絕此種输入。
 
-額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_COMPONENT_UNAVAILABLE`、`POTION_EFFECT_UNSUPPORTED`、`POTION_METADATA_UNSUPPORTED`、`POTION_ROUNDTRIP_FAILED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。
+額外錯誤：`SIGNATURE_INPUT_NOT_ADAPTED`、`INVALID_SHAKER_SLOTS`、`INVALID_SHAKER_OUTPUT`、`INVALID_SHAKER_INPUT`、`DUPLICATE_SHAKER_INPUT`、`SHAKER_INPUT_LIMIT`、`QUALITY_TOO_LOW`、`NOT_MIXABLE_DRINK`、`POTION_COMPONENT_UNAVAILABLE`、`POTION_EFFECT_UNSUPPORTED`、`POTION_METADATA_UNSUPPORTED`、`POTION_ROUNDTRIP_FAILED`、`EXTERNAL_OUTPUT_USE_HAND`。沒有把`api_ready`或FNV摘要當成不受信任插件的安全沙箱。
 
 
 ## C4 沉浸流程補充

@@ -3,22 +3,23 @@ import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS} from '../core/machines.js';
+import {parseBottle,displayAdd,bottleKey,BottleStore} from '../core/bottles.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
-const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap';
+const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
-const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),locks=new Locks();let serial=0;let registry;
+const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
 const warningTimes=new Map();
-export const diagnostics={errors:[],active:true};
+export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_ITEM_ENTITY_CARRIER; placed carrier pending'}};
 function warn(error,key='global'){
  const code=error.code??String(error);diagnostics.errors.push({tick:system.currentTick,key,code});if(diagnostics.errors.length>12)diagnostics.errors.shift();
  if((warningTimes.get(key)??-1000)+100<=system.currentTick){console.warn(`[Tavern] ${key}: ${code}`);warningTimes.set(key,system.currentTick);}
 }
-const CN={INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
+const CN={TAP_NEEDS_CARRIER:'請在酒嘴正下方丟下一個酒館空瓶。',TAP_NO_PRODUCT:'酒桶目前沒有可接出的成品。',INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
 function tell(player,message){try{player?.onScreenDisplay.setActionBar(message);}catch{}}
 function guarded(player,fn){try{return fn();}catch(e){tell(player,'§e'+(CN[e.code]??e.code??'Tavern error'));warn(e,player?.id??'machine');return undefined;}}
 function blockAt(dim,p){try{return dim.getBlock(p);}catch{return undefined;}}
@@ -107,10 +108,104 @@ export function findTapCore(tap){
  for(const d of Object.values(DIRECTIONS)){const core=resolveCore(blockAt(tap.dimension,offset(tap.location,d)));if(core?.typeId===CORE)return core;}
  return undefined;
 }
+
+function tapKey(block){const p=block.location;return `${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
+function tapOpen(block){return (block?.permutation.getState(TAP_OPEN)??0)===1;}
+function setTapOpen(block,value){block.setPermutation(block.permutation.withState(TAP_OPEN,value?1:0));}
+function tapBelow(block){return {x:block.location.x,y:block.location.y-1,z:block.location.z};}
+function tapCarrierEntity(tap,carrierId){
+ const below=tapBelow(tap);
+ for(const e of tap.dimension.getEntities({type:'minecraft:item',location:below,volume:{x:1,y:1,z:1}})){
+  try{const stack=e.getComponent('minecraft:item')?.itemStack;if(stack?.typeId===carrierId&&stack.amount>0)return e;}catch{}
+ }
+ return undefined;
+}
+function tapSound(block,open){try{block.dimension.playSound(open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}catch{}}
+function tapParticle(block,empty=false){try{block.dimension.spawnParticle(empty?'minecraft:basic_smoke_particle':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});}catch{}}
+function cancelTapSession(block,manual=false){
+ const key=tapKey(block),s=tapSessions.get(key);if(s?.timer)system.clearRun(s.timer);tapSessions.delete(key);
+ if(tapOpen(block)){setTapOpen(block,false);tapSound(block,false);}if(manual)diagnostics.tap.manualCancels++;return !!s;
+}
+function scheduleTapParticles(block,key,empty){
+ const count=empty?3:5;
+ for(let i=1;i<=count;i++)system.runTimeout(()=>{const s=tapSessions.get(key),b=blockAt(block.dimension,block.location);if(!s||!b||b.typeId!==TAP||!tapOpen(b))return;if(empty&&i%2===1)return;tapParticle(b,empty);},i);
+}
+function tapCanExtract(core,tap,player){
+ try{
+  const state=store.load(keyFor(core));if(!state?.batch){if(player)tell(player,'§e'+CN.TAP_NO_PRODUCT);return false;}
+  const carrier=state.batch.carrier;if(!tapCarrierEntity(tap,carrier)){if(player)tell(player,'§e'+CN.TAP_NEEDS_CARRIER);return false;}
+  return true;
+ }catch(e){if(player)warn(e,player.id);return false;}
+}
+function createTapOutput(tap,itemId){
+ check(ItemTypes.get(itemId),'UNKNOWN_ITEM');const belowPos=tapBelow(tap),below=blockAt(tap.dimension,belowPos);check(below,'CORE_UNAVAILABLE');
+ const parsed=parseBottle(itemId);
+ if(below.isAir&&parsed){
+  const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
+  const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,0);
+  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:0}));bottleStore.save(key,state,-1);}
+  catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
+  return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
+ }
+ const drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});
+ return ()=>{try{drop.remove();}catch{}};
+}
+function consumeTapCarrier(tap,entity,carrierId){
+ const comp=entity?.getComponent?.('minecraft:item'),stack=comp?.itemStack;check(stack?.typeId===carrierId&&stack.amount>0,'TAP_CARRIER_CHANGED');
+ const original=stack.clone(),at={...entity.location};let remainder;
+ try{
+  if(original.amount>1){const rest=original.clone();rest.amount--;remainder=tap.dimension.spawnItem(rest,at);}
+  entity.remove();
+ }catch(e){try{remainder?.remove();}catch{}throw e;}
+ return ()=>{diagnostics.tap.carrierRollbacks++;try{remainder?.remove();}catch{}try{tap.dimension.spawnItem(original,at);}catch(err){warn(err,'tap-carrier-rollback');}};
+}
+export function finishTapExtraction(tap,expectedCoreLocation){
+ check(tap?.typeId===TAP,'NOT_TAP');const core=expectedCoreLocation?blockAt(tap.dimension,expectedCoreLocation):findTapCore(tap);if(!core||core.typeId!==CORE)return false;
+ const key=keyFor(core);
+ return locks.with([key,tapKey(tap)],()=>{
+  check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
+  const carrierId=state.batch.carrier,carrier=tapCarrierEntity(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
+  const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
+  const raw=store.raw(key),undoOutput=createTapOutput(tap,tx.give[0].id);let undoCarrier;
+  try{
+   undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
+   store.save(key,tx.state,state.revision);
+  }catch(e){
+   try{undoCarrier?.();}catch{}try{undoOutput();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
+  }
+  safeVisuals(core,tx.state);try{tap.dimension.playSound('random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});}catch{}diagnostics.tap.extracted++;return tx;
+ });
+}
+function finishTapSession(key){
+ const s=tapSessions.get(key);if(!s)return;tapSessions.delete(key);
+ const tap=blockAt(s.dimension,s.location);if(!tap||tap.typeId!==TAP)return;
+ if(tapOpen(tap)){setTapOpen(tap,false);tapSound(tap,false);}
+ if(s.kind!=='extract')return;
+ guarded(undefined,()=>finishTapExtraction(tap,s.coreLocation));
+}
+export function tryOpenTap(tap,player,{redstone=false}={}){
+ check(tap?.typeId===TAP,'NOT_TAP');if(tapOpen(tap))return false;
+ const key=tapKey(tap),core=findTapCore(tap),extract=!!(core&&tapCanExtract(core,tap,player)),ticks=extract?30:5;
+ setTapOpen(tap,true);tapSound(tap,true);diagnostics.tap.opened++;if(redstone)diagnostics.tap.redstoneOpens++;if(!extract)diagnostics.tap.emptyOpens++;
+ const session={kind:extract?'extract':'empty',dimension:tap.dimension,location:{...tap.location},coreLocation:extract?{...core.location}:undefined,start:system.currentTick};
+ session.timer=system.runTimeout(()=>finishTapSession(key),ticks);tapSessions.set(key,session);scheduleTapParticles(tap,key,!extract);return true;
+}
+export function toggleTap(tap,player){
+ if(tapOpen(tap)){cancelTapSession(tap,true);return false;}return tryOpenTap(tap,player);
+}
+export function repairTap(tap){
+ if(tap?.typeId!==TAP)return false;const key=tapKey(tap),s=tapSessions.get(key);
+ if(tapOpen(tap)&&!s){setTapOpen(tap,false);diagnostics.tap.orphanRepairs++;return true;}
+ if(!tapOpen(tap)&&s){if(s.timer)system.clearRun(s.timer);tapSessions.delete(key);diagnostics.tap.orphanRepairs++;return true;}return false;
+}
+export function tapRedstoneUpdate(ev){
+ if(ev?.firstUpdate===true||!Number.isFinite(ev?.powerLevel)||!Number.isFinite(ev?.previousPowerLevel)||ev.powerLevel<=0||ev.previousPowerLevel>0)return false;
+ const d=ev.block.dimension,at={...ev.block.location},type=ev.block.typeId;system.run(()=>guarded(undefined,()=>{const tap=blockAt(d,at);check(tap?.typeId===type,'BLOCK_CHANGED');tryOpenTap(tap,undefined,{redstone:true});}));return true;
+}
 export function dismantle(player,block){
  writable(player);
  if(block?.typeId===TAP){const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,0,player.getGameMode()===GameMode.Creative?[]:[{id:TAP,count:1}],make),old=block.permutation;
-  commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
+  cancelTapSession(block,false);commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
  }
  const core=requireCore(block),key=keyFor(core);
  return locks.with([key,player.id],()=>{
@@ -126,7 +221,7 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':pressing_tub',{
   beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
   onPlace:ev=>guarded(undefined,()=>initializeTub(ev.block)),onEntityFallOn:ev=>press(ev.block,ev.entity,ev.fallDistance),onTick:ev=>guarded(undefined,()=>{const s=store.load(keyFor(ev.block));if(s)safeVisuals(ev.block,s);})});
- b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{});
+ b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate});
  i.registerCustomComponent(NS+':place_barrel',{onUseOn:ev=>guarded(ev.source,()=>{const d=DIRECTIONS[ev.blockFace];check(d,'UNKNOWN_FACE');return createBarrel(ev.source,offset(ev.block.location,d));})});
 }
 function machineUsePlan(block,item){
@@ -158,7 +253,7 @@ export function installMachineEvents(){
   const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;
   system.run(()=>guarded(player,()=>{
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
-   if(plan.kind==='tap'){const core=findTapCore(b);check(core,'NO_NEARBY_BARREL');return operate(player,core,'extract',expected);}
+   if(plan.kind==='tap'){toggleTap(b,player);return;}
    return operate(player,b,plan.action,expected);
   }));
  });
@@ -170,4 +265,4 @@ export function installMachineEvents(){
   }catch(e){warn(e,'entityLoad');}});
  });
 }
-export const TEST_ACCESS={store,locks,CORE,PART,TUB,TAP};
+export const TEST_ACCESS={store,bottleStore,locks,tapSessions,CORE,PART,TUB,TAP,TAP_OPEN};

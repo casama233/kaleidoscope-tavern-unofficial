@@ -176,7 +176,7 @@ def main():
  for n in ['grape','ice_grape','gold_grape','green_grape']:
   item(n)  # Ingredient-only until source food values/effects are implemented; no guessed nutrition.
  for f in fluids[:-1]:item(f['filled'],stack=1)
- item('empty_bottle',stack=16)
+ item('empty_bottle',components={'minecraft:block_placer':{'block':NS+':bottle_empty'},'minecraft:liquid_clipped':True},stack=16)
  item('guidebook','textures/items/book_normal',{NS+':legacy_guide':{}},1)
  item('recipe_book','textures/items/book_writable',{NS+':legacy_guide':{}},1)
  item('barrel',components={NS+':place_barrel':{}},stack=16)

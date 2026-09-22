@@ -112,7 +112,7 @@ export function maintainSeat(e){
  }catch(x){error(x);helpers.delete(e.id);}
 }
 export function tickFurniture(){const list=[...helpers.values()];if(!list.length)return;const n=Math.min(128,list.length);for(let i=0;i<n;i++)maintainSeat(list[(cursor+i)%list.length]);cursor=(cursor+n)%Math.max(list.length,1);}
-export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
+export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onPlace:e=>optional(()=>syncTableNeighborhood(e.block.dimension,e.block.location)),onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':bar_counter',{onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}
 export function installFurnitureEvents(){
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId);if(!existing)return;
@@ -140,7 +140,9 @@ export function installFurnitureEvents(){
  });
  registerJavaItemUseOnRoute({
   id:'furniture-block-items',
-  matches:id=>!!furnitureItem(id),
+  // Table is a native custom-block item: placement_direction writes minecraft:cardinal_direction.
+  // Keep the script route only for furniture that still needs custom placement state.
+  matches:id=>{const f=furnitureItem(id);return !!f&&f.kind!=='table';},
   plan:({block,face})=>({target:plus(block.location,faceOffset(face)),face}),
   execute:({player,plan})=>placeFurniture(player,plan.target,{face:plan.face})
  });

@@ -36,6 +36,11 @@ def main():
  observed=load(ROOT/'compat/cookery/observed-ids.json');cookery_ids=set(observed['items']+observed['blocks'])
  check('no_Cookery_item_block_redefinitions',not(cookery_ids&(set(item_defs)|set(block_defs))))
  check('formal_runtime_namespace',all(x.startswith('kaleidoscope_tavern:')for x in list(item_defs)+list(block_defs)+list(entity_defs)))
+ water_rule={'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}]}
+ waterlogged_source={ident for ident in block_defs if re.fullmatch(r'kaleidoscope_tavern:(stool_[a-z_]+|light_[a-z_]+|[a-z_]+_sofa|table|[a-z0-9_]+_painting)',ident)}
+ check('C6_source_waterlogged_furniture_count',len(waterlogged_source)==64,len(waterlogged_source))
+ check('C6_source_waterlogged_furniture_contract',all(block_defs[x].get('components',{}).get('minecraft:liquid_detection')==water_rule for x in waterlogged_source))
+ check('C6_nonwaterlogged_furniture_not_overgeneralized',all(block_defs['kaleidoscope_tavern:'+x].get('components',{}).get('minecraft:liquid_detection') is None for x in ['bar_counter','glassware_holder','holder','circular_rack','bell_pendant_lamp']))
  # Creative inventory parity: one Tavern gameplay group + one Tavern deco group.
  # Materials are intentionally not split into their own mini-groups.
  catalog_path=BP/'item_catalog/crafting_item_catalog.json'

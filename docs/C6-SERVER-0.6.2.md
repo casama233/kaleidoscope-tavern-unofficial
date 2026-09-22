@@ -60,10 +60,12 @@ python tools/build_server_edition.py           # 版本 0.6.2、補 unlock、修
 
 正式服部署後 Content Log 對比：0.6.2 時代的 `TavernError: EMPTY_HAND_REQUIRED／SNEAK_TO_PLACE`、`FILL_BARREL_FIRST／SPACE_NOT_CLEAR`、`Not substituted: slightly_tipsy` 等執行期錯誤全部消失，無新增錯誤；酒館包腳本錯誤 0。
 
-### 待上游確認（隔離引擎觀察）
+### 酒館桌重啟保留：最終引擎驗收已通過（並更正先前的誤報）
 
-- **酒館桌跨重啟不保留**：隔離 BDS 已確認舊 Batch 7 表格會在完整重啟後變空氣。上游修復改為用 Bedrock 原生 `minecraft:cardinal_direction` trait 保存實際 X/Z 軸，舊 `kaleidoscope_tavern:axis` 僅保留為相容欄位並在 tick 遷移回預設值；這可避免新放置桌子依賴腳本自訂 axis 作為持久化方向。CI 已覆蓋狀態遷移，但仍需在同一隔離 BDS 流程重跑一次「放置→停服→啟服」作最終引擎驗收。
-- 廚房指南章節（#28/#33）與伺服器修正版指南入口的相容性需在真實客戶端驗證（本版仍以 0.6.1 補丁的指南入口為準）。
+- **結論**：在同一隔離 BDS 流程完成「放置 → 停服 → 啟服 → 讀取」，`table`／`white_bar_stool`／`bar_counter` 三者皆在原座標，狀態完整保留：桌面 `kaleidoscope_tavern:axis=0`、`position=0`、`minecraft:cardinal_direction=east`（即 #46 改用的原生 trait），椅與吧檯的 `facing`／`connection` 亦保留。
+- **更正**：較早記錄的「舊 Batch 7 表格重啟後變空氣」是**本地測試工具缺陷**造成的誤報——測試第二階段未等待區塊載入，未載入區塊的 `dimension.getBlock()` 回傳 `undefined`，斷言因此失敗；並非模組把方塊寫壞。因此該誤報不構成上游缺陷的證據，先前的失敗紀錄不應再被引用。
+- 進行驗收的測試流程已修正：兩個階段都先等待測試區四角可讀取再斷言。
+- 廚房指南章節（#28/#33）與伺服器修正版指南入口的相容性仍需在真實客戶端驗證（本版仍以 0.6.1 補丁的指南入口為準）。
 
 ## 7. 0.6.4（上游 d47f4ac 之後）
 

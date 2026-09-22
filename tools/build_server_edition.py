@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build the Tavern C6 server edition (0.6.3) from the in-repo runtime.
+"""Build the Tavern C6 server edition (0.6.4) from the in-repo runtime.
 
 Deltas over upstream runtime/ (see docs/C6-SERVER.md):
   1. Re-apply tools/server-edition.patch (the carried 0.6.1 server fixes:
      native loading, pressing, Cookery table support, Molang/AO fields).
-  2. Bump the pack version to 0.6.3 (header, modules, cross-pack dependency,
+  2. Bump the pack version to 0.6.4 (header, modules, cross-pack dependency,
      display names) and the init banner in scripts/main.js.
   3. Add the unlock data that 1.20+ crafting recipes require (17 sofas, tavern
      table, bar counter) — the engine rejects them without it.
@@ -19,7 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 PATCH = HERE / 'server-edition.patch'
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'build/server-edition-0.6.3'
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'build/server-edition-0.6.4'
 
 if OUT.exists(): shutil.rmtree(OUT)
 OUT.mkdir(parents=True)
@@ -43,18 +43,18 @@ for orig in list(OUT.rglob('*.orig')):
 m = OUT / 'runtime/BP/manifest.json'
 j = json.loads(m.read_text(encoding='utf-8'))
 assert j['header']['name'] == '森羅物語：酒館 C6 | 功能開發版', j['header']['name']
-j['header']['name'] = '森羅物語：酒館 0.6.3 | 伺服器修正版 BP'
+j['header']['name'] = '森羅物語：酒館 0.6.4 | 伺服器修正版 BP'
 j['header']['description'] = 'Tavern C6 server fixes: native loading, pressing, recipes and Cookery table support.'
-j['header']['version'] = [0, 6, 3]  # the failed hunk also carried the header version bump
+j['header']['version'] = [0, 6, 4]  # the failed hunk also carried the header version bump
 m.write_text(json.dumps(j, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
 def bump(text):
     for old, new in [
-        ('[\n      0,\n      6,\n      1\n    ]', '[\n      0,\n      6,\n      3\n    ]'),
-        ('[\n      0,\n      6,\n      2\n    ]', '[\n      0,\n      6,\n      3\n    ]'),
-        ('[\n        0,\n        6,\n        1\n      ]', '[\n        0,\n        6,\n        3\n      ]'),
-        ('[\n        0,\n        6,\n        2\n      ]', '[\n        0,\n        6,\n        3\n      ]'),
-        ('0.6.1', '0.6.3'),
+        ('[\n      0,\n      6,\n      1\n    ]', '[\n      0,\n      6,\n      4\n    ]'),
+        ('[\n      0,\n      6,\n      2\n    ]', '[\n      0,\n      6,\n      4\n    ]'),
+        ('[\n        0,\n        6,\n        1\n      ]', '[\n        0,\n        6,\n        4\n      ]'),
+        ('[\n        0,\n        6,\n        2\n      ]', '[\n        0,\n        6,\n        4\n      ]'),
+        ('0.6.1', '0.6.4'),
     ]:
         text = text.replace(old, new)
     return text
@@ -145,17 +145,17 @@ if cat.exists():
 m = OUT / 'runtime/BP/scripts/main.js'
 t = m.read_text(encoding='utf-8')
 assert t.count("build:'C6 / 0.6.0'") == 1, 'diagnostic build string drifted'
-t = t.replace("build:'C6 / 0.6.0'", "build:'C6 / 0.6.3-server'")
+t = t.replace("build:'C6 / 0.6.0'", "build:'C6 / 0.6.4-server'")
 old_banner = "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.');"
 assert t.count(old_banner) == 1, 'init banner drifted'
-t = t.replace(old_banner, "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Server edition 0.6.3.');")
+t = t.replace(old_banner, "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Server edition 0.6.4.');")
 m.write_text(t, encoding='utf-8')
 
 bp = json.loads((OUT / 'runtime/BP/manifest.json').read_text(encoding='utf-8'))
 rp = json.loads((OUT / 'runtime/RP/manifest.json').read_text(encoding='utf-8'))
-assert bp['header']['version'] == [0, 6, 3] and rp['header']['version'] == [0, 6, 3]
-assert all(mm['version'] == [0, 6, 3] for mm in bp['modules'] + rp['modules'])
-assert next(d for d in bp['dependencies'] if 'uuid' in d)['version'] == [0, 6, 3]
+assert bp['header']['version'] == [0, 6, 4] and rp['header']['version'] == [0, 6, 4]
+assert all(mm['version'] == [0, 6, 4] for mm in bp['modules'] + rp['modules'])
+assert next(d for d in bp['dependencies'] if 'uuid' in d)['version'] == [0, 6, 4]
 print('upstream', head)
 print('unlock added:', len(added), '| fences tag fixed:', fixed)
-print('OK server edition 0.6.3 ->', OUT)
+print('OK server edition 0.6.4 ->', OUT)

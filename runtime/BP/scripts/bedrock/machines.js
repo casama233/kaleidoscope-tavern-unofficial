@@ -7,11 +7,13 @@ import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,NS
 import {parseBottle,displayAdd,bottleKey,BottleStore} from '../core/bottles.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
+import {facingForYaw,facingYaw,facingVector} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
-const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',BOTTLE_FACING=NS+':facing',CARDINAL='minecraft:cardinal_direction';
+const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',TAP_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',BOTTLE_FACING=NS+':facing',CARDINAL='minecraft:cardinal_direction';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
+const CARDINALS=Object.freeze(['north','east','south','west']);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
 const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
 const warningTimes=new Map();
@@ -35,9 +37,11 @@ export function resolveCore(block){
 }
 function requireCore(block){const core=resolveCore(block);check(core&&[CORE,TUB].includes(core.typeId),'CORE_UNAVAILABLE');return core;}
 function keyFor(core){return machineKey(core.dimension.id,core.location);}
+export function barrelCardinalForYaw(yaw){return CARDINALS[facingForYaw(yaw)];}
+function barrelCardinal(block){const cardinal=block?.permutation.getState(CARDINAL);return CARDINALS.includes(cardinal)?cardinal:undefined;}
 function intact(core){
- if(core.typeId===TUB)return true;
- return barrelCells(core.location).every(p=>{const b=blockAt(core.dimension,p);if(!b||b.typeId!==(p.core?CORE:PART))return false;return p.core||['x','y','z'].every(k=>b.permutation.getState(NS+':d'+k)===p['d'+k]);});
+ if(core.typeId===TUB)return true;const cardinal=barrelCardinal(core);if(!cardinal)return false;
+ return barrelCells(core.location).every(p=>{const b=blockAt(core.dimension,p);if(!b||b.typeId!==(p.core?CORE:PART)||barrelCardinal(b)!==cardinal)return false;return p.core||['x','y','z'].every(k=>b.permutation.getState(NS+':d'+k)===p['d'+k]);});
 }
 function nearbyVisuals(core){return core.dimension.getEntities({families:['kt_runtime_visual'],location:{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},maxDistance:1});}
 export function syncVisuals(core,state){
@@ -50,6 +54,7 @@ export function syncVisuals(core,state){
  for(const e of existing){if(!wanted.includes(e.typeId)||chosen.has(e.typeId)||e.getDynamicProperty('kt:token')!==state.token)e.remove();else chosen.set(e.typeId,e);}
  for(const type of wanted){let entity=chosen.get(type);
   if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}
+  if(state.kind==='barrel'&&(type===NS+':barrel_open_visual'||type===NS+':barrel_closed_visual')){const cardinal=barrelCardinal(core);if(cardinal)entity.setRotation({x:0,y:facingYaw(bottleFacingFromCardinal(cardinal))});}
   if(type.includes('rig_liquid_'))entity.setProperty('kt_art:amount',state.amount);
  }
 }
@@ -64,11 +69,11 @@ export function createBarrel(player,target){
  return locks.with([key,player.id],()=>{
   const h=held(player);check(h?.typeId===NS+':barrel','STALE_HAND');check(store.raw(key)===undefined,'STORAGE_CONFLICT');
   const positions=barrelCells(target),blocks=positions.map(p=>blockAt(dimension,p));check(blocks.every(b=>b?.isAir),'SPACE_NOT_CLEAR');
-  const original=blocks.map(b=>b.permutation);const state=newMachine('barrel',`${system.currentTick}-${++serial}`);let touched=0;
+  const original=blocks.map(b=>b.permutation),cardinal=barrelCardinalForYaw(player.getRotation?.().y??0);const state=newMachine('barrel',`${system.currentTick}-${++serial}`);let touched=0;
   const plan=planInventory(inv(player),player.selectedSlotIndex,player.getGameMode()===GameMode.Creative?0:1,[],make);
   const rollback=()=>{for(let i=0;i<touched;i++)blocks[i].setPermutation(original[i]);store.restoreRaw(key,undefined);};
   commitInventory(plan,inv(player),()=>{
-   for(let i=0;i<blocks.length;i++){const p=positions[i];touched=i+1;blocks[i].setPermutation(BlockPermutation.resolve(p.core?CORE:PART,p.core?{}:{[NS+':dx']:p.dx,[NS+':dy']:p.dy,[NS+':dz']:p.dz}));}
+   for(let i=0;i<blocks.length;i++){const p=positions[i],states=p.core?{[CARDINAL]:cardinal}:{[NS+':dx']:p.dx,[NS+':dy']:p.dy,[NS+':dz']:p.dz,[CARDINAL]:cardinal};touched=i+1;blocks[i].setPermutation(BlockPermutation.resolve(p.core?CORE:PART,states));}
    store.save(key,state,-1);
   },rollback);
   const core=blockAt(dimension,target);safeVisuals(core,state);tell(player,'§a酒桶已建立；潛行空手點擊可開關蓋。');return state;
@@ -106,9 +111,15 @@ export function tickBarrel(block){
   if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
  });});
 }
+export function tapCardinal(tap){
+ const face=tap?.permutation.getState(TAP_FACE);if(CARDINALS.includes(face))return face;
+ const cardinal=tap?.permutation.getState(CARDINAL);return CARDINALS.includes(cardinal)?cardinal:undefined;
+}
 export function findTapCore(tap){
- for(const d of Object.values(DIRECTIONS)){const core=resolveCore(blockAt(tap.dimension,offset(tap.location,d)));if(core?.typeId===CORE)return core;}
- return undefined;
+ if(tap?.typeId!==TAP)return undefined;const cardinal=tapCardinal(tap);if(!cardinal)return undefined;
+ const facing=bottleFacingFromCardinal(cardinal),v=facingVector(facing),part=blockAt(tap.dimension,{x:tap.location.x-v.x,y:tap.location.y,z:tap.location.z-v.z});
+ if(part?.typeId!==PART||part.permutation.getState(NS+':dy')!==1||part.permutation.getState(NS+':dx')!==v.x||part.permutation.getState(NS+':dz')!==v.z||barrelCardinal(part)!==cardinal)return undefined;
+ const core=resolveCore(part);return core?.typeId===CORE&&barrelCardinal(core)===cardinal?core:undefined;
 }
 
 function tapKey(block){const p=block.location;return `${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}

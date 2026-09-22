@@ -78,10 +78,10 @@ def main():
  shared_storage=['holder.js','tilted-rack.js','circular-rack.js','bar-cabinet.js','cellar-cabinet.js']
  router=(BP/'scripts/bedrock/stateful-storage-router.js').read_text(encoding='utf-8')
  break_router=(BP/'scripts/bedrock/protected-break-router.js').read_text(encoding='utf-8')
- check('shared_storage_router_owns_interaction_only','playerInteractWithBlock.subscribe' in router and 'registerProtectedBreakRoute' in router and 'playerBreakBlock.subscribe' not in router and 'beforeEvents.explosion.subscribe' not in router)
+ check('shared_storage_router_owns_interaction_only','playerInteractWithBlock.subscribe' in router and 'registerProtectedBreakRoute' in router and 'playMaterialInteraction' in router and 'playerBreakBlock.subscribe' not in router and 'beforeEvents.explosion.subscribe' not in router)
  check('ordinary_storage_placement_never_requires_sneak','SNEAK_TO_PLACE' not in router and 'placementMatchers' in router and 'anyPlacementItem' in router)
  check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','dimension.spawnItem','dimension.playSound']))
- check('shared_break_router_has_explicit_material_profiles',all(x in break_router for x in ['breakMaterial','holder|tilted_rack|circular_rack','tap|shaker_station|glassware_holder','grapevine_trellis','_painting']))
+ check('shared_break_router_has_explicit_material_profiles',all(x in break_router for x in ['breakMaterial','holder|tilted_rack|circular_rack','tap|shaker_station|glassware_holder','_pendant_lamp','^light_','grapevine_trellis','_painting','playMaterialInteraction']))
  for name in shared_storage:
   text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
   check('shared_storage_router_used:'+name,'installStatefulStorageRoutes' in text)
@@ -89,6 +89,7 @@ def main():
   check('shared_storage_spatial_helpers:'+name,'requireBlockReach' in text and 'blockCenter' in text and 'function near(' not in text and 'function center(' not in text)
   check('shared_storage_visual_scheduler:'+name,'tickStorageVisuals' in text and 'Math.min(128' not in text)
   check('shared_storage_state_transaction:'+name,'commitStoredStateTransaction' in text and 'store.restore(' not in text)
+  check('shared_storage_creative_BlockItem_placement:'+name,'placementTake' in text)
  break_clients=['machines.js','cultivation.js','bottles.js','furniture.js','mixology.js','stateful-storage-router.js']
  for name in break_clients:
   text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
@@ -97,6 +98,11 @@ def main():
  check('break_feedback_removed_from_transactions','finishPlayerBreak' not in (BP/'scripts/bedrock/transactions.js').read_text(encoding='utf-8'))
  furniture_text=(BP/'scripts/bedrock/furniture.js').read_text(encoding='utf-8')
  check('ordinary_furniture_placement_never_requires_sneak','SNEAK_TO_PLACE' not in furniture_text and 'if(placing)return placeFurniture' in furniture_text)
+ check('furniture_seating_does_not_invent_support_headroom_or_empty_hand_gates',all(x not in furniture_text for x in ["'NEEDS_SOLID_SUPPORT'","'SEAT_HEADROOM'","check(!hand(player),'EMPTY_HAND_REQUIRED')"]))
+ bottle_text=(BP/'scripts/bedrock/bottles.js').read_text(encoding='utf-8')
+ check('bottle_placement_has_no_custom_full_top_support_gate','isBottleSupport' not in bottle_text and "'NEEDS_SOLID_SUPPORT'" not in bottle_text)
+ transactions_text=(BP/'scripts/bedrock/transactions.js').read_text(encoding='utf-8')
+ check('shared_creative_placement_semantics','placementTake' in transactions_text and 'placementTake(player)' in furniture_text and 'placementTake(player)' in bottle_text)
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

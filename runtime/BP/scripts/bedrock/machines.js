@@ -11,13 +11,13 @@ import {facingForYaw,facingYaw} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {FLUIDS} from '../data/fluids.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
-const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',BOTTLE_FACING=NS+':facing',CARDINAL='minecraft:cardinal_direction';
+const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',WATER_BOTTLE=NS+':bottle_water',BOTTLE_FACING=NS+':facing',CARDINAL='minecraft:cardinal_direction',CAULDRON='minecraft:cauldron',CAULDRON_LIQUID='cauldron_liquid',FILL_LEVEL='fill_level';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const CARDINALS=Object.freeze(['north','east','south','west']);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
 const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
 const warningTimes=new Map();
-export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_PLACED_AND_ITEM_ENTITY_CARRIER'}};
+export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,waterCauldronExtracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_CARRIERS_AND_WATER_CAULDRON'}};
 function warn(error,key='global'){
  const code=error.code??String(error);diagnostics.errors.push({tick:system.currentTick,key,code});if(diagnostics.errors.length>12)diagnostics.errors.shift();
  if((warningTimes.get(key)??-1000)+100<=system.currentTick){console.warn(`[Tavern] ${key}: ${code}`);warningTimes.set(key,system.currentTick);}
@@ -117,13 +117,22 @@ export function tapCardinal(tap){
  return tap?.permutation.getState('minecraft:cardinal_direction');
 }
 const TAP_BACK=Object.freeze({north:{x:0,y:0,z:1},south:{x:0,y:0,z:-1},east:{x:-1,y:0,z:0},west:{x:1,y:0,z:0}});
+function tapSourceBlock(tap){const facing=tapCardinal(tap),d=TAP_BACK[facing];return d?blockAt(tap.dimension,offset(tap.location,d)):undefined;}
 export function findTapCore(tap){
- const facing=tapCardinal(tap),d=TAP_BACK[facing];if(!d)return undefined;
- const source=blockAt(tap.dimension,offset(tap.location,d));if(source?.typeId!==PART)return undefined;
+ const facing=tapCardinal(tap),source=tapSourceBlock(tap);if(source?.typeId!==PART)return undefined;
  const dy=source.permutation.getState(NS+':dy'),dx=source.permutation.getState(NS+':dx'),dz=source.permutation.getState(NS+':dz');
  if(dy!==1||barrelCardinal(source)!==facing)return undefined;
  const valid=(facing==='north'&&dx===0&&dz===-1)||(facing==='south'&&dx===0&&dz===1)||(facing==='west'&&dx===-1&&dz===0)||(facing==='east'&&dx===1&&dz===0);
  if(!valid)return undefined;const core=resolveCore(source);return core?.typeId===CORE&&barrelCardinal(core)===facing?core:undefined;
+}
+function cauldronState(block){
+ if(block?.typeId!==CAULDRON)return undefined;const liquid=block.permutation.getState(CAULDRON_LIQUID),level=block.permutation.getState(FILL_LEVEL);
+ return typeof liquid==='string'&&Number.isInteger(level)?{block,liquid,level}:undefined;
+}
+function waterCauldronSource(tap){const state=cauldronState(tapSourceBlock(tap));return state?.liquid==='water'&&state.level>0?state:undefined;}
+function waterCauldronDestination(tap){
+ const block=blockAt(tap.dimension,tapBelow(tap));if(block?.typeId===PLACED_EMPTY)return {kind:'bottle',block};
+ const state=cauldronState(block);return state?.liquid==='water'&&state.level<6?{kind:'cauldron',...state}:undefined;
 }
 
 function tapKey(block){const p=block.location;return `${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
@@ -206,18 +215,32 @@ export function finishTapExtraction(tap,expectedCoreLocation){
   safeVisuals(core,tx.state);try{tap.dimension.playSound('random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});}catch{}diagnostics.tap.extracted++;return tx;
  });
 }
+function sameLocation(a,b){return !!a&&!!b&&a.x===b.x&&a.y===b.y&&a.z===b.z;}
+export function finishWaterCauldronTap(tap,expectedSourceLocation){
+ check(tap?.typeId===TAP,'NOT_TAP');const source=waterCauldronSource(tap);if(!source||expectedSourceLocation&&!sameLocation(source.block.location,expectedSourceLocation))return false;
+ const destination=waterCauldronDestination(tap);if(!destination)return false;const old=destination.block.permutation;
+ try{
+  if(destination.kind==='bottle')destination.block.setPermutation(BlockPermutation.resolve(WATER_BOTTLE,{[CARDINAL]:'north'}));
+  else destination.block.setPermutation(destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
+ }catch(e){try{destination.block.setPermutation(old);}catch{}throw e;}
+ try{tap.dimension.playSound(destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});}catch{}
+ diagnostics.tap.waterCauldronExtracted++;return true;
+}
 function finishTapSession(key){
  const s=tapSessions.get(key);if(!s)return;tapSessions.delete(key);
  const tap=blockAt(s.dimension,s.location);if(!tap||tap.typeId!==TAP)return;
  if(tapOpen(tap)){setTapOpen(tap,false);tapSound(tap,false);}
- if(s.kind!=='extract')return;
- guarded(undefined,()=>finishTapExtraction(tap,s.coreLocation));
+ if(s.kind==='barrel')guarded(undefined,()=>finishTapExtraction(tap,s.coreLocation));
+ else if(s.kind==='water_cauldron')guarded(undefined,()=>finishWaterCauldronTap(tap,s.sourceLocation));
 }
 export function tryOpenTap(tap,player,{redstone=false}={}){
  check(tap?.typeId===TAP,'NOT_TAP');if(tapOpen(tap))return false;
- const key=tapKey(tap),core=findTapCore(tap),extract=!!(core&&tapCanExtract(core,tap,player)),ticks=extract?30:5;
+ const key=tapKey(tap),core=findTapCore(tap);let kind='empty',coreLocation,sourceLocation;
+ if(core&&tapCanExtract(core,tap,player)){kind='barrel';coreLocation={...core.location};}
+ else{const source=waterCauldronSource(tap),destination=waterCauldronDestination(tap);if(source&&destination){kind='water_cauldron';sourceLocation={...source.block.location};}}
+ const extract=kind!=='empty',ticks=extract?30:5;
  setTapOpen(tap,true);tapSound(tap,true);diagnostics.tap.opened++;if(redstone)diagnostics.tap.redstoneOpens++;if(!extract)diagnostics.tap.emptyOpens++;
- const session={kind:extract?'extract':'empty',dimension:tap.dimension,location:{...tap.location},coreLocation:extract?{...core.location}:undefined,start:system.currentTick};
+ const session={kind,dimension:tap.dimension,location:{...tap.location},coreLocation,sourceLocation,start:system.currentTick};
  session.timer=system.runTimeout(()=>finishTapSession(key),ticks);tapSessions.set(key,session);scheduleTapParticles(tap,key,!extract);return true;
 }
 export function toggleTap(tap,player){

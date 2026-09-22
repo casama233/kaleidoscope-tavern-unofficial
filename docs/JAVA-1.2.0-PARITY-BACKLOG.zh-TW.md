@@ -14,12 +14,12 @@
 | 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿，以及下方 placed empty-bottle block／empty_bottle item entity 兩種 carrier 接酒**；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Facing／嚴格 barrel front-layer connection／waterlogging、Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；Pressing Tub Forge capability 與精確複合碰撞；實機時序／waterlogging 仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
-| 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
-| String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
-| Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐 | Sofa/Table waterlogging、Sofa背靠複合碰撞與連接/座高實機驗收 |
+| 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向；依 Java `SimpleWaterloggedBlock` 補齊 water containment | Steve/Alex 座高、精細碰撞、手機/多人/重連與含水實機 |
+| String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正；依來源補齊 water containment | 自然支撐/掉落、精確 selection；water containment 與洋紅雙面薄片仍待實機多視角驗收 |
+| Sofa / Table / Bar Counter | **16色 Sofa、Table、Bar Counter 均已可合成、放置／回收與自動連接**；Sofa/Bar Counter 共用原作6態 IConnectionBlock；Table 使用X/Z軸四態；Sofa可乘坐；Java 明確 waterlogged 的 Sofa/Table 已補 water containment（Bar Counter 來源不屬於此接口） | Sofa背靠複合碰撞與連接/座高/含水實機驗收 |
 | 酒櫃／酒架／杯架 | **Glassware Holder 4槽、Holder單槽、Tilted Rack三槽、Circular Rack六槽、木質／玻璃 Bar Cabinet 雙槽，以及 Cellar Cabinet 九槽手動存取／精確品質返還／來源展示已完成**；Holder／Tilted Rack／Circular Rack／Cellar Cabinet 已按 Java `AbstractStorageBlock` 上升沿隨機彈出一瓶品質飲品 | Molotov 本體與其 storage 紅石發射仍待 Molotov 批；projectile 軌跡／splash／多人仍需實機驗收 |
 | 黑板／立牌 | 原始模型已有 | `ChalkboardBlock`、`SandwichBoardBlock`、`TextScreen` 的文字輸入、中文、同步與渲染 |
-| 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向與來源1/16薄碰撞；部分資產/靜態展示已收錄 | Incense、Stepladder；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
+| 其他裝飾 | **3款 Pendant Lamp＋14款 Painting 已移植**；Painting 支援牆/地/天花板三種附著、四方向、來源1/16薄碰撞與 Java `SimpleWaterloggedBlock` water containment；部分資產/靜態展示已收錄 | Incense、Stepladder；Painting 含水仍待實機；Stepladder 的 Java 複合 VoxelShape 暫無單一 Bedrock collision box 等價 |
 | 葡萄／種植 | 7 crop blocks、三種土壤種別、藤架生長／擴散優先序、果實 1–2 級成長、剪刀收穫與骨粉適配 | `WildGrapevine*` 世界生成；冰葡萄 `<0.15`／金葡萄 `>1.0` 的 Java biome base-temperature 80% 加速；藤架 waterlogging 與實機隨機 tick 驗收 |
 | Molotov | 配方明示排除 | `MolotovBlock/Item`、投擲實體、火焰/命中行為、渲染 |
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |

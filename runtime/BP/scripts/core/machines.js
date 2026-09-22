@@ -30,9 +30,11 @@ export function interact(state,command,registry,fluids){
  }else if(command.action==='extract'){
   check(s.kind==='barrel'&&s.batch,'NO_PRODUCT');check(held?.id===s.batch.carrier,'WRONG_CARRIER');
   tx.take=1;tx.give=[{id:filledItem(s),count:1}];tx.message=`已取出品質 ${s.batch.quality}/6 成品。`;
-  if(--s.batch.remaining===0){s.batch=null;s.open=true;}
+  if(--s.batch.remaining===0)s.batch=null;
  }else if(command.action==='remove_ingredient'){
-  check(!s.batch&&s.open,'LID_CLOSED');let index=-1;for(let i=s.slots.length-1;i>=0;i--)if(s.slots[i]){index=i;break;}check(index>=0,'NO_INGREDIENT');tx.give=[s.slots[index]];s.slots[index]=null;
+  check(!s.batch&&s.open,'LID_CLOSED');let index=-1;for(let i=s.slots.length-1;i>=0;i--)if(s.slots[i]){index=i;break;}check(index>=0,'NO_INGREDIENT');
+  const item=s.slots[index],limit=s.kind==='pressing_tub'?(command.removeCount??1):item.count;integer(limit,1,64);const count=Math.min(item.count,limit);
+  tx.give=[{id:item.id,count}];item.count-=count;if(item.count===0)s.slots[index]=null;
  }else if(command.action==='use'){
   check(held,'EMPTY_HAND');check(s.open&&!s.batch,'LID_CLOSED');
   const inbound=fluids.find(f=>f.filled===held.id);

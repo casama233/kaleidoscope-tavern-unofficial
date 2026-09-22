@@ -6,7 +6,7 @@ import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory
 import {check} from '../core/util.js';
 import {FARM_IDS} from './cultivation.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';
-import {registerProtectedBreakRoute} from './protected-break-router.js';
+import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 const NS='kaleidoscope_tavern',COUNT=NS+':count',FACING=NS+':facing';
 export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`));
 const MACHINES=new Set(['barrel_core','barrel_part','pressing_tub','tap','shaker_station'].map(x=>NS+':'+x));
@@ -27,7 +27,7 @@ export function placeBottle(player,target,{expectedRevision}={}){
   // Match Java DrinkBlockItem/BlockItem semantics: Creative placement and stacking are free.
   const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
   commitInventory(plan,c,()=>{b.setPermutation(permutation(next));store.save(k,next,old?.revision??-1);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});
-  tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
+  playMaterialInteraction(d,target,`${NS}:bottle_${next.base}`);tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
  });
 }
 export function takeBottles(player,b,{all=false,expectedRevision}={}){
@@ -38,7 +38,7 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
   const tx=displayTake(old,all),raw=store.raw(k),oldBlock=b.permutation,c=inventory(player);
   const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);
   commitInventory(plan,c,()=>{b.setPermutation(tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{b.setPermutation(oldBlock);store.restore(k,raw);});
-  tell(player,'§a已取回原品質酒瓶。');return tx;
+  playMaterialInteraction(b.dimension,b.location,`${NS}:bottle_${old.base}`);tell(player,'§a已取回原品質酒瓶。');return tx;
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}

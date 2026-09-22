@@ -158,8 +158,8 @@ function consumeTapCarrier(tap,entity,carrierId){
  }catch(e){try{remainder?.remove();}catch{}throw e;}
  return ()=>{diagnostics.tap.carrierRollbacks++;try{remainder?.remove();}catch{}try{tap.dimension.spawnItem(original,at);}catch(err){warn(err,'tap-carrier-rollback');}};
 }
-export function finishTapExtraction(tap){
- check(tap?.typeId===TAP,'NOT_TAP');const core=findTapCore(tap);if(!core)return false;
+export function finishTapExtraction(tap,expectedCoreLocation){
+ check(tap?.typeId===TAP,'NOT_TAP');const core=expectedCoreLocation?blockAt(tap.dimension,expectedCoreLocation):findTapCore(tap);if(!core||core.typeId!==CORE)return false;
  const key=keyFor(core);
  return locks.with([key,tapKey(tap)],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
@@ -180,13 +180,13 @@ function finishTapSession(key){
  const tap=blockAt(s.dimension,s.location);if(!tap||tap.typeId!==TAP)return;
  if(tapOpen(tap)){setTapOpen(tap,false);tapSound(tap,false);}
  if(s.kind!=='extract')return;
- guarded(undefined,()=>finishTapExtraction(tap));
+ guarded(undefined,()=>finishTapExtraction(tap,s.coreLocation));
 }
 export function tryOpenTap(tap,player,{redstone=false}={}){
  check(tap?.typeId===TAP,'NOT_TAP');if(tapOpen(tap))return false;
  const key=tapKey(tap),core=findTapCore(tap),extract=!!(core&&tapCanExtract(core,tap,player)),ticks=extract?30:5;
  setTapOpen(tap,true);tapSound(tap,true);diagnostics.tap.opened++;if(redstone)diagnostics.tap.redstoneOpens++;if(!extract)diagnostics.tap.emptyOpens++;
- const session={kind:extract?'extract':'empty',dimension:tap.dimension,location:{...tap.location},start:system.currentTick};
+ const session={kind:extract?'extract':'empty',dimension:tap.dimension,location:{...tap.location},coreLocation:extract?{...core.location}:undefined,start:system.currentTick};
  session.timer=system.runTimeout(()=>finishTapSession(key),ticks);tapSessions.set(key,session);scheduleTapParticles(tap,key,!extract);return true;
 }
 export function toggleTap(tap,player){
@@ -204,7 +204,7 @@ export function tapRedstoneUpdate(ev){
 export function dismantle(player,block){
  writable(player);
  if(block?.typeId===TAP){const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,0,player.getGameMode()===GameMode.Creative?[]:[{id:TAP,count:1}],make),old=block.permutation;
-  commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
+  cancelTapSession(block,false);commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
  }
  const core=requireCore(block),key=keyFor(core);
  return locks.with([key,player.id],()=>{

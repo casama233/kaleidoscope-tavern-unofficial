@@ -11,7 +11,7 @@
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
-| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging，以及 Barrel 自身 facing＋第二層正面中心嚴格連接**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 Water/Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock waterlogging／projectile 打碎；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
+| 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging，以及 Barrel 自身 facing＋第二層正面中心嚴格連接**；**WaterCauldronTapBehavior 已用原生 cauldron states 適配空瓶／未滿水鍋輸出**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 generic Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock projectile 打碎與其他原版可放置瓶；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
 | 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
@@ -134,6 +134,32 @@ Minecraft／手機／BDS／Realms 的側放方向、含水渲染、selection rot
 deterministic adapter 測試覆蓋：玩家 yaw→Java 反向 cardinal、27-cell facing 一致、Barrel helper rotation、正面中層 Tap 成功、同位置錯向／低一層／其他側面拒絕，以及 30 tick 中途改 Tap facing 後不消耗 carrier／batch。
 
 Minecraft／手機／BDS／Realms 的舊存檔 cardinal migration、實際 helper 朝向、原生 placement state 與多人同步仍為 **NOT_RUN**。
+
+
+
+## 釀酒閉環核對 Batch 7：Water Cauldron TapBehavior
+
+這批先用 Mojang／Bedrock 已公開的原生資料模型對照 Java，而不是自己維護 cauldron 狀態。Bedrock 的 `minecraft:cauldron` 直接透過 `cauldron_liquid` 與 `fill_level` 表示液體與液位；目前 full water 對應 `fill_level=6`。
+
+Java `WaterCauldronTapBehavior` 的來源語義：
+
+- source 必須是 `Blocks.WATER_CAULDRON`；來源**不扣液位**，所以這條本來就是無限水源行為。
+- destination 可以是 empty cauldron、未滿 water cauldron，或 Tavern placed `EMPTY_BOTTLE`。
+- cauldron destination 一次直接補滿；empty bottle 直接替換成 `WATER_BOTTLE`。
+- 和 Barrel 一樣走 Tap 的 open → 30 tick → close；結束時重新檢查 source/destination。
+
+Bedrock 本批適配：
+
+1. Tap 後方只讀原生 `minecraft:cauldron` permutation；只有 `cauldron_liquid='water'` 且 `fill_level>0` 才視為 Java Water Cauldron source。empty / lava cauldron 不誤匹配。
+2. 下方若為 `bottle_empty`，30 tick 後替換成隱藏 display block `bottle_water`。它直接使用已收錄來源 `geometry.kt_assets_a17.water_bottle`／`kt_assets_a17_water_bottle`，Java `simpleBottle()` 的 6×10×6 shape，以及原生 cardinal／water containment。
+3. `bottle_water` 空手取回時不建立空白 `ItemStack('minecraft:potion')`；復用既有 `Potions.resolve` 路徑返回身份為 `minecraft:water + minecraft:consumable` 的真正原生水瓶。
+4. 下方若為 water cauldron 且 `fill_level<6`，30 tick 後直接把原生 `fill_level` 設為6；source cauldron 保持原液位。
+5. 30 tick 結束時會重新解析 source 與 destination，避免開始後環境被換掉仍強行產物。
+6. Java 結束時還有 `WAX_OFF` 粒子；目前沒有找到可證實的 Bedrock 穩定對等 particle ID，因此本批**不猜 ID**。開啟期間仍沿用已收錄的 `water_tap_drip`。
+
+明示未完成：generic `WaterloggedBehavior`。Bedrock `Block.isLiquid` 明確不把 waterlogged block 視為 liquid；雖然 `BlockPermutation.canContainLiquid(water)` 能表示「可含水」，它不等於「當前真的含水」。在沒有可靠的實際 waterlogged occupancy 讀取方法前，不把「可含水」誤當成「已含水」。
+
+deterministic 測試覆蓋：水鍋→placed empty bottle、partial water cauldron→full level6、empty/lava source 不匹配，以及 placed water bottle 回收後原生 potion identity 仍為 water/consumable。Minecraft／手機／BDS／Realms 的 cauldron state、native potion、流體與 Tap 30-tick 時序仍為 **NOT_RUN**。
 
 
 ## 功能 Batch：紅石儲存家具投瓶

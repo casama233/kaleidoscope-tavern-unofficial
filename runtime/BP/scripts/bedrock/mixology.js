@@ -11,7 +11,8 @@ import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validat
 import {COCKTAILS} from '../data/mixology.js';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,finishPlayerBreak} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
+import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {SHAKER_ITEMS,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable,POUR_TICKS,AUTO_STOP_TICKS,shakeHint} from '../core/immersion.js';
 import {syncShakerVisual,shakerPut,feedback,handStart,handStop,shakeAudio,finished,pourVisual,installImmersionCleanup} from './immersion.js';
 const SHAKER=NS+':shaker',STATION=NS+':shaker_station',FACING=NS+':facing',HELPER=NS+':signature_cup_visual',ANCHOR=NS+':cup_anchor';
@@ -180,12 +181,12 @@ export function installMixologyEvents(){
    check(!held,'EMPTY_HAND_REQUIRED');return takeCup(e.player,b,{expectedRevision:oldRevision});
   }));
  });
- world.beforeEvents.playerBreakBlock.subscribe(e=>{
-  if(e.cancel||!MIX_BLOCKS.has(e.block.typeId))return;e.cancel=true;const d=e.block.dimension,loc={...e.block.location},id=e.block.typeId;
-  let rev;try{rev=id===STATION?getShaker(e.block).revision:cupStore.load(cupKey(d.id,loc))?.revision;}catch{return;}
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,loc,id,()=>id===STATION?breakShaker(e.player,b,{expectedRevision:rev}):takeCup(e.player,b,{expectedRevision:rev}));}));
+ registerProtectedBreakRoute({
+  id:'mixology',
+  isBlock:block=>MIX_BLOCKS.has(block?.typeId),
+  capture:({block})=>block.typeId===STATION?getShaker(block).revision:cupStore.load(cupKey(block.dimension.id,block.location))?.revision,
+  recover:({player,block,snapshot})=>block.typeId===STATION?breakShaker(player,block,{expectedRevision:snapshot}):takeCup(player,block,{expectedRevision:snapshot})
  });
- world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!MIX_BLOCKS.has(b.typeId))));
  world.afterEvents.entityLoad.subscribe(e=>{
   const entity=e.entity;if(entity.typeId!==HELPER)return;
   system.run(()=>{try{const k=entity.getDynamicProperty(ANCHOR),m=/^kt:cup\/([a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(k??'');if(!m){entity.remove();return;}const b=blockAt(entity.dimension,{x:+m[2],y:+m[3],z:+m[4]});if(!b)return;if(entity.dimension.id!=='minecraft:'+m[1]||!MIX_BLOCKS.has(b.typeId)){entity.remove();return;}syncCupVisual(b);}catch(err){log(err);}});

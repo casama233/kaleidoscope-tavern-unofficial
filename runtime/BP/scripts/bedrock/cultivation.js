@@ -3,7 +3,8 @@ import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,isFrame,frameType,updateFrame,speci
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,finishPlayerBreak,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air} from './transactions.js';
+import {registerProtectedBreakRoute} from './protected-break-router.js';
 const locks=new Locks(),AGE=NS+':age',SHAPE=NS+':shape',WAX=NS+':waxed';
 export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS)]);
 const key=b=>`${b.dimension.id}/${b.location.x}_${b.location.y}_${b.location.z}`;
@@ -128,12 +129,11 @@ export function installCultivation(openBook){
    return farmUse(e.player,b);
   }));
  });
- world.beforeEvents.playerBreakBlock.subscribe(e=>{
-  if(e.cancel)return;
-  if(!FARM_IDS.has(e.block.typeId))return;e.cancel=true;
-  const d=e.block.dimension,p={...e.block.location},id=e.block.typeId,sig=current(e.block);
-  system.run(()=>safe(e.player,()=>{check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');return finishPlayerBreak(e.player,d,p,id,()=>farmBreak(e.player,b));}));
+ registerProtectedBreakRoute({
+  id:'cultivation',
+  isBlock:block=>FARM_IDS.has(block?.typeId),
+  capture:({block})=>current(block),
+  verify:({block,snapshot})=>check(current(block)===snapshot,'BLOCK_CHANGED'),
+  recover:({player,block})=>farmBreak(player,block)
  });
- // Same safety policy as C1 machines; native explosion drops are not yet modeled.
- world.beforeEvents.explosion.subscribe(e=>e.setImpactedBlocks(e.getImpactedBlocks().filter(b=>!FARM_IDS.has(b.typeId))));
 }

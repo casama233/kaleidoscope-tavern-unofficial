@@ -77,7 +77,9 @@ def main():
  check('no_duplicate_Tavern_guide_UI',not(BP/'scripts/bedrock/guidebook.js').exists() and not(BP/'recipes/guidebook.json').exists() and not(BP/'recipes/recipe_book.json').exists())
  shared_storage=['holder.js','tilted-rack.js','circular-rack.js','bar-cabinet.js','cellar-cabinet.js']
  router=(BP/'scripts/bedrock/stateful-storage-router.js').read_text(encoding='utf-8')
- check('shared_storage_router_owns_common_events',all(x in router for x in ['playerInteractWithBlock.subscribe','playerBreakBlock.subscribe','beforeEvents.explosion.subscribe']))
+ break_router=(BP/'scripts/bedrock/protected-break-router.js').read_text(encoding='utf-8')
+ check('shared_storage_router_owns_interaction_only','playerInteractWithBlock.subscribe' in router and 'registerProtectedBreakRoute' in router and 'playerBreakBlock.subscribe' not in router and 'beforeEvents.explosion.subscribe' not in router)
+ check('shared_break_router_owns_global_events',all(x in break_router for x in ['playerBreakBlock.subscribe','beforeEvents.explosion.subscribe','finishPlayerBreak','dimension.spawnItem','dimension.playSound']))
  for name in shared_storage:
   text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
   check('shared_storage_router_used:'+name,'installStatefulStorageRoutes' in text)
@@ -85,6 +87,12 @@ def main():
   check('shared_storage_spatial_helpers:'+name,'requireBlockReach' in text and 'blockCenter' in text and 'function near(' not in text and 'function center(' not in text)
   check('shared_storage_visual_scheduler:'+name,'tickStorageVisuals' in text and 'Math.min(128' not in text)
   check('shared_storage_state_transaction:'+name,'commitStoredStateTransaction' in text and 'store.restore(' not in text)
+ break_clients=['machines.js','cultivation.js','bottles.js','furniture.js','mixology.js','stateful-storage-router.js']
+ for name in break_clients:
+  text=(BP/'scripts/bedrock'/name).read_text(encoding='utf-8')
+  check('shared_break_router_used:'+name,'registerProtectedBreakRoute' in text)
+  check('no_duplicate_break_event_shell:'+name,'playerBreakBlock.subscribe' not in text and 'beforeEvents.explosion.subscribe' not in text and 'finishPlayerBreak' not in text)
+ check('break_feedback_removed_from_transactions','finishPlayerBreak' not in (BP/'scripts/bedrock/transactions.js').read_text(encoding='utf-8'))
  check('no_native_experimental_block_container',all('minecraft:block_entity'not in d['components'] for d in block_defs.values()))
  geom={};controllers=set();clients={}
  for p,d in data.items():

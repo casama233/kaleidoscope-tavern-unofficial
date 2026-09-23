@@ -9,16 +9,13 @@ export function cueOnce(key,fn){const now=system.currentTick;if(recent.get(key)=
 export function worldSound(d,p,id,volume=.65,pitch=1){return protect(()=>d.playSound(id,p,{volume,pitch}));}
 export function sparkle(d,p,id='minecraft:bubble_pop_particle'){return protect(()=>d.spawnParticle(id,p));}
 export function syncShakerVisual(block,exists=true,shaking=false){return protect(()=>{
+ // The block owns the stationary model. Retire older helper entities left by
+ // previous versions so a failed spawn cannot turn the shaker into a cube.
  const key=`${block.dimension.id}/${block.location.x}_${block.location.y}_${block.location.z}`,p={x:block.location.x+.5,y:block.location.y,z:block.location.z+.5};
  const found=block.dimension.getEntities({type:TYPE,location:p,maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===key);
- if(!exists||block.typeId!==NS+':shaker_station'){for(const e of found)e.remove();return;}
- const entity=found[0]??block.dimension.spawnEntity(TYPE,p);for(const e of found.slice(1))e.remove();
- entity.setDynamicProperty(ANCHOR,key);entity.setRotation({x:0,y:(block.permutation.getState(NS+':facing')??0)*90});
- if(entity.getProperty?.('kt_runtime:shaking')!==shaking)entity.setProperty('kt_runtime:shaking',shaking);
- return entity;
+ for(const e of found)e.remove();
  });}
 export function shakerPut(block,revision){return cueOnce(`put/${block.dimension.id}/${JSON.stringify(block.location)}/${revision}`,()=>{
- const e=syncShakerVisual(block);e?.playAnimation('animation.kt_assets_a8.shaker.put',{controller:'controller.animation.kt_runtime.put',blendOutTime:.06});
  const p={x:block.location.x+.5,y:block.location.y+.78,z:block.location.z+.5};worldSound(block.dimension,p,'bottle.empty');sparkle(block.dimension,p);
  });}
 export function feedback(block,kind,revision=0){return cueOnce(`${kind}/${block.dimension.id}/${JSON.stringify(block.location)}/${revision}`,()=>{
@@ -42,9 +39,6 @@ export function pourVisual(player,block,elapsed,color=0xffffff){
  });
 }
 export function installImmersionCleanup(){world.afterEvents.entityLoad.subscribe(({entity})=>{if(entity.typeId!==TYPE)return;system.run(()=>protect(()=>{
- const key=entity.getDynamicProperty(ANCHOR),m=/^(minecraft:[a-z_]+)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(key??'');
- if(!m||m[1]!==entity.dimension.id){entity.remove();return;}
- let b;try{b=entity.dimension.getBlock({x:+m[2],y:+m[3],z:+m[4]});}catch{return;}
- if(b&&b.typeId!==NS+':shaker_station')entity.remove();
+ entity.remove();
  }));});}
 export const IMMERSION_TEST={recent,TYPE,ANCHOR};

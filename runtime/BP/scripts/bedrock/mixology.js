@@ -10,6 +10,7 @@ import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory
 import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,addResolvedInput,removeInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore,timingBand} from '../core/mixology.js';
 import {COCKTAILS} from '../data/mixology.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
+import {finishDrinkContainer} from './drink-effects.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {faceOffset} from '../core/furniture.js';
@@ -167,10 +168,21 @@ export function consumeCocktail(event,rng=Math.random){
  }
  return outcomes;
 }
+export function completeCocktail(event,rng=Math.random){
+ const player=event.source,item=event.itemStack;if(!player||!COCKTAILS[item?.typeId])return [];
+ // Validate dynamic recipe data before touching the inventory. Native use only
+ // supplies the timing; this shares the bottle/container exchange path.
+ if(item.typeId===SIGNATURE){
+  knownItemCheck(item);
+  check(hand(player)?.getDynamicProperty(SIGNATURE_DATA)===item.getDynamicProperty(SIGNATURE_DATA),'STALE_DRINK_HAND');
+ }
+ finishDrinkContainer(player,item.typeId,EMPTY_CUP);
+ return consumeCocktail(event,rng);
+}
 export function registerMixologyComponents({blockComponentRegistry:b,itemComponentRegistry:i}){
- b.registerCustomComponent(NS+':shaker_station',{onTick:e=>{try{syncShakerVisual(e.block,!!getShaker(e.block),sessions.has(shakerKey(e.block.dimension.id,e.block.location)));}catch(err){log(err);}}});b.registerCustomComponent(NS+':cocktail_cup',{onTick:e=>syncCupVisual(e.block)});
+ b.registerCustomComponent(NS+':shaker_station',{});b.registerCustomComponent(NS+':cocktail_cup',{onTick:e=>syncCupVisual(e.block)});
  i.registerCustomComponent(NS+':portable_shaker',{onUse:e=>safe(e.source,()=>{if(inputMode(e.source)==='toggle')return toggleHeldShake(e.source);if(e.source.isSneaking)return cancelHeldShake(e.source.id,'SNEAK_CANCEL');})});
- i.registerCustomComponent(NS+':cocktail_effects',{onConsume:e=>consumeCocktail(e)});
+ i.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:e=>completeCocktail(e)});
 }
 function snapshotItem(player){const h=hand(player);return {basic:handSnapshot(player),potion:POTION_ITEMS.has(h?.typeId)?canonical(potionIdentity(h)):undefined,data:h?.typeId===SIGNATURE?h.getDynamicProperty(SIGNATURE_DATA):SHAKER_ITEMS.has(h?.typeId)?h.getDynamicProperty(PORTABLE_DATA):undefined};}
 function verifyItem(player,s){sameHand(player,s.basic);if(s.potion!==undefined)check(canonical(potionIdentity(hand(player)))===s.potion,'STALE_POTION');if(s.data!==undefined){const item=hand(player);check(item?.getDynamicProperty(item?.typeId===SIGNATURE?SIGNATURE_DATA:PORTABLE_DATA)===s.data,'STALE_HAND');}}
@@ -206,13 +218,10 @@ export function installMixologyEvents(){
  });
  registerJavaItemUseOnRoute({
   id:'shaker-block-item',matches:id=>id===SHAKER,
-  plan:({player,block,face})=>{
-   if(block.typeId===NS+':cup_empty_glassware'){
-    try{if(readPortableItem(hand(player)).state.result)return {kind:'pour'};}catch{}
-   }
-   return {kind:'place',target:plus(block.location,faceOffset(face))};
-  },
-  execute:({player,block,plan})=>plan.kind==='pour'?pourHeldShakerNow(player,block):placeShaker(player,plan.target)
+  // Item metadata cannot be inspected reliably in the before-event phase.
+  // Defer the Java pour-or-place choice until normal execution.
+  plan:({block,face})=>({onEmptyCup:block.typeId===NS+':cup_empty_glassware',target:plus(block.location,faceOffset(face))}),
+  execute:({player,block,plan})=>plan.onEmptyCup&&readPortableItem(hand(player)).state.result?pourHeldShakerNow(player,block):placeShaker(player,plan.target)
  });
  registerJavaItemUseOnRoute({
   id:'empty-glassware-block-item',matches:id=>id===EMPTY_CUP,

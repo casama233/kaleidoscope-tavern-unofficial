@@ -10,6 +10,7 @@ import {initializeTub,createBarrel,operate,press,tubTilted,tickBarrel,dismantle,
 import {MachineStore,machineKey} from '../runtime/BP/scripts/core/storage.js';
 import {barrelCells} from '../runtime/BP/scripts/core/machines.js';
 import {bottleKey} from '../runtime/BP/scripts/core/bottles.js';
+import {placeBottle,BOTTLE_TEST} from '../runtime/BP/scripts/bedrock/bottles.js';
 import {packetsFor,EVENTS} from '../runtime/BP/scripts/core/transport.js';
 import {registerTavernExtension} from '../sdk/tavern-extension-client.js';
 const NS='kaleidoscope_tavern',dim=world.getDimension('overworld');
@@ -41,6 +42,14 @@ test('barrel placement writes one Java source facing across all27 cells and rota
  const p=player();p.rotation.y=90;const b=barrel(p);assert.equal(count(p,NS+':barrel'),1);assert.equal(state(b).kind,'barrel');assert.equal(barrelCardinalForYaw(90),'east');assert.equal(b.permutation.getState('minecraft:cardinal_direction'),'east');
  const cells=barrelCells(b.location);assert.equal(cells.length,27);for(const c of cells){const x=dim.getBlock(c);assert.equal(x.typeId,c.core?NS+':barrel_core':NS+':barrel_part');assert.equal(resolveCore(x),b);assert.equal(x.permutation.getState('minecraft:cardinal_direction'),'east');}
  const visuals=dim.getEntities().filter(e=>e.getDynamicProperty('kt:anchor')===machineKey(dim.id,b.location));assert.equal(visuals.length,1);assert.equal(visuals[0].rotation.y,-90);
+});
+test('creative display block initializes Java max quality without replacing scripted bottle quality',()=>{
+ const component=regs.blocks.get(NS+':bottle_display');
+ const direct=dim.getBlock(target());direct.setType(NS+':bottle_wine');component.onPlace({block:direct});system.advance();
+ assert.deepEqual(BOTTLE_TEST.store.load(bottleKey(dim.id,direct.location)).items,[NS+':wine_q6']);
+ const p=player(),at=target();hand(p,NS+':wine_q2');placeBottle(p,at);
+ const scripted=dim.getBlock(at);component.onPlace({block:scripted});system.advance();
+ assert.deepEqual(BOTTLE_TEST.store.load(bottleKey(dim.id,at)).items,[NS+':wine_q2']);
 });
 test('Tap only resolves Java middle-front center when Tap and Barrel facing match',()=>{
  const p=player();p.rotation.y=90;const b=barrel(p),tap=frontTap(b);assert.equal(tapCardinal(tap),'east');assert.equal(findTapCore(tap),b);
@@ -80,6 +89,21 @@ test('real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16
 });
 test('all four-input barrel adapters preserve minimum stack output and reject metadata',()=>{const b=barrel(player()),p=player();fill(p,b,'green_grape');hand(p,'minecraft:sugar_cane',9);operate(p,b,'use');hand(p,'minecraft:sugar',3);operate(p,b,'use');hand(p,NS+':grape');const named=p.inventory.getItem(0);named.nameTag='Keep';p.inventory.setItem(0,named);code(()=>operate(p,b,'use'),'METADATA_ITEM_REJECTED');operate(p,b,'lid');tickBarrel(b);assert.equal(state(b).batch.remaining,3);assert.equal(state(b).batch.recipeId,NS+':barrel/sauvignon_blanc_dry_white');assert.equal(p.inventory.getItem(0).nameTag,'Keep');});
 test('Water Cauldron Tap fills a placed empty bottle after30 ticks without consuming source water',()=>{const p=player(),{tap,source,below}=waterTap({sourceLevel:2});hand(p,undefined);click(p,tap);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(29);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);system.advance(1);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);assert.equal(below.typeId,NS+':bottle_water');assert.equal(below.permutation.getState('minecraft:cardinal_direction'),'north');assert.equal(source.permutation.getState('cauldron_liquid'),'water');assert.equal(source.permutation.getState('fill_level'),2);});
+test('touch-style false first event opens tap once and a new gesture closes it',()=>{
+ const p=player(),{tap,below}=waterTap();hand(p,undefined);
+ const pulse=()=>world.beforeEvents.playerInteractWithBlock.emit({player:p,block:tap,blockFace:'Up',isFirstEvent:false,cancel:false});
+ pulse();pulse();system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+ pulse();system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+ system.advance(3);pulse();system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);
+ system.advance(30);assert.equal(below.typeId,NS+':bottle_empty');
+});
+test('tap custom interaction handles empty hand and deduplicates the before event',()=>{
+ const p=player(),{tap}=waterTap(),component=regs.blocks.get(NS+':tap');hand(p,undefined);
+ component.onPlayerInteract({player:p,block:tap});system.advance();
+ assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+ world.beforeEvents.playerInteractWithBlock.emit({player:p,block:tap,blockFace:'Up',isFirstEvent:false,cancel:false});
+ system.advance();assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),1);
+});
 test('Water Cauldron Tap fills a partial water cauldron to Bedrock full level6 and leaves source unchanged',()=>{const p=player(),{tap,source,below}=waterTap({sourceLevel:4,destination:'cauldron',destinationLevel:2});hand(p,undefined);click(p,tap);system.advance(30);assert.equal(below.typeId,'minecraft:cauldron');assert.equal(below.permutation.getState('cauldron_liquid'),'water');assert.equal(below.permutation.getState('fill_level'),6);assert.equal(source.permutation.getState('fill_level'),4);});
 test('empty or non-water source cauldron does not enter the30-tick extraction path',()=>{for(const permutation of[BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'water',fill_level:0}),BlockPermutation.resolve('minecraft:cauldron',{cauldron_liquid:'lava',fill_level:6})]){const p=player(),{tap,source,below}=waterTap();source.setPermutation(permutation);hand(p,undefined);click(p,tap);system.advance(5);assert.equal(tap.permutation.getState(TEST_ACCESS.TAP_OPEN),0);assert.equal(below.typeId,NS+':bottle_empty');assert.equal(source.permutation.getState('fill_level'),permutation.getState('fill_level'));}});
 test('Tap completion revalidates the same Barrel-facing front connection after30 ticks',()=>{

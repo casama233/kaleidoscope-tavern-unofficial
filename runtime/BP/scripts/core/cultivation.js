@@ -33,7 +33,7 @@ export function updateFrame(shape,x,y,z) {
  return frameType(x,y,z,x?'x':z?'z':'y');
 }
 // Explicit vanilla expansion, not claiming dynamic #minecraft:dirt or third-party soil tags.
-const SOILS = new Set(['dirt','grass_block','grass','coarse_dirt','rooted_dirt','podzol','mycelium','moss_block','mud','muddy_mangrove_roots'].map(x=>'minecraft:'+x));
+const SOILS = new Set(['dirt','grass_block','grass','coarse_dirt','dirt_with_roots','podzol','mycelium','moss_block','mud','muddy_mangrove_roots'].map(x=>'minecraft:'+x));
 const ICE = new Set(['ice','packed_ice','blue_ice','frosted_ice','snow','snow_block'].map(x=>'minecraft:'+x));
 export function speciesForSoil(id) {
  if(ICE.has(id))return 'ice_grape';

@@ -54,7 +54,21 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
   playMaterialInteraction(b.dimension,b.location,`${NS}:bottle_${old.base}`);tell(player,'§a已取回原品質酒瓶。');return tx;
  });
 }
-export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{});}
+export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{
+ onPlace:ev=>{
+  const d=ev.block.dimension,p={...ev.block.location},id=ev.block.typeId;
+  const base=id.startsWith(NS+':bottle_')?id.slice((NS+':bottle_').length):'';
+  if(!BOTTLES[base])return;
+  // Creative's placeable block has no per-item quality. Initialize it to the
+  // Java creative preview (maximum level). Scripted quality-item placement
+  // writes its exact contents before this deferred callback and is untouched.
+  system.run(()=>safe(undefined,()=>{
+   const b=blockAt(d,p);if(b?.typeId!==id)return;
+   const k=bottleKey(d.id,p);if(store.raw(k)!==undefined)return;
+   store.save(k,displayAdd(undefined,`${NS}:${base}_q6`,0),-1);
+  }));
+ }
+});}
 export function installBottleEvents(){
  // Java BottleBlock.use: placed simple bottles return their native item on empty hand; non-empty hand PASSes.
  world.beforeEvents.playerInteractWithBlock.subscribe(e=>{

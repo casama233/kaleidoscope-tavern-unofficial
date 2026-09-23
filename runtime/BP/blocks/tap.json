@@ -51,7 +51,10 @@
           }
         }
       },
-      "minecraft:collision_box": false,
+      "minecraft:collision_box": {
+        "origin": [-3, 5, -2],
+        "size": [6, 8, 10]
+      },
       "minecraft:selection_box": {
         "origin": [
           -3,

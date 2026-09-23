@@ -2,11 +2,11 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {world,system,startup,Player,ItemStack,Potions,Entity,mockHealth} from './fake-server.js';
 import {runtimeRegistry} from '../runtime/BP/scripts/main.js';
-import {placeShaker,pourIngredient,unpourIngredient,pickupShaker,readPortableItem,MIX_TEST,NATIVE_TEST,pruneNativeLatches,cancelHeldShake,consumeCocktail,startShake,stopShake,serveInHand} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {placeShaker,pourIngredient,unpourIngredient,pickupShaker,readPortableItem,MIX_TEST,NATIVE_TEST,pruneNativeLatches,cancelHeldShake,consumeCocktail,completeCocktail,startShake,stopShake,serveInHand} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {potionIdentity,potionInput,restorePotion,potionCapabilities} from '../runtime/BP/scripts/bedrock/potions.js';
 import {statusNow,clearCustomEffects,applyCustomEffect,handleKill,tickCustomEffects,CUSTOM_TEST} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 import {CUSTOM_STATUS_KEY,activeStatus} from '../runtime/BP/scripts/core/custom-effects.js';
-import {NS,EMPTY_CUP,SIGNATURE,shakerKey} from '../runtime/BP/scripts/core/mixology.js';
+import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,shakerKey} from '../runtime/BP/scripts/core/mixology.js';
 import {PORTABLE_DATA} from '../runtime/BP/scripts/core/immersion.js';
 import {INPUT_MODE_KEY,HOLD_TAG} from '../runtime/BP/scripts/core/native-use.js';
 const regs=startup();system.advance(2);const d=world.getDimension('overworld');let counter=0,online=[];world.getAllPlayers=()=>online;
@@ -19,6 +19,8 @@ function portable(){const r=setup();pickupShaker(r.p,r.b);return r;}
 function start(p){world.afterEvents.itemStartUse.emit({source:p,itemStack:hand(p),useDuration:72000});}
 function stop(p,t,kind='itemReleaseUse'){world.afterEvents[kind].emit({source:p,itemStack:hand(p),useDuration:72000-t});}
 test.afterEach(()=>{for(const id of [...MIX_TEST.handSessions.keys()])cancelHeldShake(id);NATIVE_TEST.nativeLatches.clear();for(const k of [...MIX_TEST.sessions.keys()])MIX_TEST.sessions.delete(k);online=[];CUSTOM_TEST.tracks.clear();CUSTOM_TEST.deaths.clear();d.failAudio=false;d.failParticles=false;});
+test('completed signature cocktail returns one glass and applies its stored effects',()=>{const {p}=setup(false),cup=new ItemStack(SIGNATURE),payload={schema:1,color:0x65abcc,effects:[{effect:'minecraft:speed',duration:30,amplifier:0,probability:1}],ingredients:['minecraft:apple','minecraft:sugar','minecraft:ice']};cup.setDynamicProperty(SIGNATURE_DATA,JSON.stringify(payload));put(p,cup);const out=completeCocktail({source:p,itemStack:cup},()=>0);assert.equal(count(p,SIGNATURE),0);assert.equal(count(p,EMPTY_CUP),1);assert.equal(out[0].status,'APPLIED');assert.deepEqual(p.effects,[{id:'speed',ticks:600,amplifier:0,showParticles:true}]);});
+test('completed signature cocktail rejects a changed held payload without consuming it',()=>{const {p}=setup(false),eventItem=new ItemStack(SIGNATURE),heldItem=new ItemStack(SIGNATURE),payload={schema:1,color:0x123456,effects:[],ingredients:['minecraft:apple','minecraft:sugar','minecraft:ice']};eventItem.setDynamicProperty(SIGNATURE_DATA,JSON.stringify(payload));heldItem.setDynamicProperty(SIGNATURE_DATA,JSON.stringify({...payload,color:0x654321}));put(p,heldItem);assert.throws(()=>completeCocktail({source:p,itemStack:eventItem}),e=>e.code==='STALE_DRINK_HAND');assert.equal(count(p,SIGNATURE),1);assert.equal(count(p,EMPTY_CUP),0);});
 test('native onUse does not toggle: start comes only from itemStartUse',()=>{const {p}=portable();regs.items.get(NS+':portable_shaker').onUse({source:p,itemStack:hand(p)});assert(!MIX_TEST.handSessions.has(p.id));start(p);assert(MIX_TEST.handSessions.get(p.id).native);});
 test('native start makes ZERO inventory writes and retains type, token and payload',()=>{const {p}=portable(),before=hand(p),writes=p.inventory.writes;start(p);assert.equal(p.inventory.writes,writes);assert.deepEqual(hand(p),before);assert(p.hasTag(HOLD_TAG));});
 for(const [t,id]of[[0,null],[18,null],[19,'mystery_cocktail'],[68,'mystery_cocktail'],[69,'signature_cocktail'],[88,'signature_cocktail'],[89,'white_lady'],[98,'white_lady'],[99,'mystery_cocktail'],[110,'mystery_cocktail']])test('native remaining duration boundary '+t,()=>{const {p}=portable();start(p);system.advance(t);stop(p,t);assert.equal(readPortableItem(hand(p)).state.result?.item??null,id?NS+':'+id:null);assert.equal(hand(p).typeId,NS+':shaker');assert(!p.hasTag(HOLD_TAG));});

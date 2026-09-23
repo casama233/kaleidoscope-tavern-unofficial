@@ -29,7 +29,7 @@ const fillBag=(p)=>{for(let i=1;i<p.inventory.size;i++)p.inventory.setItem(i,new
 function eventClick(p,b,{sneak=false,first=true,cancel=false,face='Up'}={}){p.isSneaking=sneak;const e={player:p,block:b,blockFace:face,isFirstEvent:first,cancel};world.beforeEvents.playerInteractWithBlock.emit(e);return e;}
 test.beforeEach(()=>MIX_TEST.sessions.clear());
 
-test('entrypoint advertises41 machine recipes and dedicated mixology components',()=>{assert.equal(registry().allRecipes().length,41);assert.equal(registry().allRecipes().filter(r=>r.kind==='shaker').length,12);assert(regs.blocks.has(NS+':shaker_station'));assert(regs.blocks.has(NS+':cocktail_cup'));assert.equal(typeof regs.items.get(NS+':cocktail_effects').onConsume,'function');});
+test('entrypoint advertises41 machine recipes and dedicated mixology components',()=>{assert.equal(registry().allRecipes().length,41);assert.equal(registry().allRecipes().filter(r=>r.kind==='shaker').length,12);assert(regs.blocks.has(NS+':shaker_station'));assert(regs.blocks.has(NS+':cocktail_cup'));assert.equal(typeof regs.items.get(NS+':cocktail_effects').onCompleteUse,'function');});
 test('shared break router makes an empty placed shaker a Survival drop with lantern/metal feedback',()=>{
  const {p,b}=setup(),before=dropCount(NS+':shaker'),sounds=dim.sounds?.filter(s=>s.id==='break.iron').length??0;h(p,undefined);
  const e={player:p,block:b,cancel:false};world.beforeEvents.playerBreakBlock.emit(e);system.advance();

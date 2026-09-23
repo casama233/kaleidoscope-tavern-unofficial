@@ -15,14 +15,14 @@ const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=N
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const CARDINALS=Object.freeze(['north','east','south','west']);
 const DIRECTIONS={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}};
-const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map();let serial=0;let registry;
+const make=(id,count)=>new ItemStack(id,count),store=new MachineStore(world),bottleStore=new BottleStore(world),locks=new Locks(),tapSessions=new Map(),tapGestures=new Map();let serial=0;let registry;
 const warningTimes=new Map();
 export const diagnostics={errors:[],active:true,tap:{opened:0,emptyOpens:0,manualCancels:0,redstoneOpens:0,extracted:0,waterCauldronExtracted:0,carrierRollbacks:0,orphanRepairs:0,scope:'BARREL_CARRIERS_AND_WATER_CAULDRON'}};
 function warn(error,key='global'){
  const code=error.code??String(error);diagnostics.errors.push({tick:system.currentTick,key,code});if(diagnostics.errors.length>12)diagnostics.errors.shift();
  if((warningTimes.get(key)??-1000)+100<=system.currentTick){console.warn(`[Tavern] ${key}: ${code}`);warningTimes.set(key,system.currentTick);}
 }
-const CN={TAP_NEEDS_CARRIER:'請在酒嘴正下方放置或丟下一個酒館空瓶。',TAP_NO_PRODUCT:'酒桶目前沒有可接出的成品。',INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
+const CN={UNEQUAL_INGREDIENT_COUNTS:'各種原料數量必須相同；請空手取回後重新投料。',TAP_NEEDS_CARRIER:'請在酒嘴正下方放置或丟下一個酒館空瓶。',TAP_NO_PRODUCT:'酒桶目前沒有可接出的成品。',INVENTORY_FULL:'背包已滿，交易取消，沒有扣料。',FILL_BARREL_FIRST:'請先装滿4桶相同液體。',FLUID_FULL:'液體已滿。',NO_PRODUCT:'還沒有可接出的成品。',WRONG_CARRIER:'請手持酒館空瓶接酒。',LID_CLOSED:'請先開蓋；發酵時不能再投料。',FERMENTING_LID_LOCKED:'正在發酵，請先取空成品。',MIXED_FLUID:'不能混入不同液體。',NOT_ENOUGH_FLUID:'尚未滿1000 mB，不能裝滿一桶。',BUSY:'機器忙碌，請再試一次。',NO_INGREDIENT:'沒有原料。',UNSUPPORTED_INGREDIENT:'此原料未由可用配方註冊。',REMOVE_INGREDIENTS_FIRST:'請先取出原料。',METADATA_ITEM_REJECTED:'原料有自訂資料，本版拒收，沒有清除資料。',MACHINE_NOT_EMPTY:'只允許拆除空機器；先取回原料、液體和成品。',SPACE_NOT_CLEAR:'酒桶需要完整3×3×3空氣空間，不能跨入未載入區塊。',STRUCTURE_DAMAGED:'酒桶結構不完整，狀態已保留並停止操作。',STATE_CONFLICT:'狀態已變更，沒有重複扣料。',CORE_UNAVAILABLE:'核心未載入，請移近後再試。',STALE_HAND:'手持物已變更，操作取消。',NO_NEARBY_BARREL:'旁邊未找到酒桶。',RECIPE_UNAVAILABLE:'配方來源目前未註冊，原料已保留。',UNKNOWN_ITEM:'附屬產物不存在；原料或成品計數已保留。'};
 function tell(player,message){try{player?.onScreenDisplay.setActionBar(message);}catch{}}
 function guarded(player,fn){try{return fn();}catch(e){tell(player,'§e'+(CN[e.code]??e.code??'Tavern error'));warn(e,player?.id??'machine');return undefined;}}
 function blockAt(dim,p){try{return dim.getBlock(p);}catch{return undefined;}}
@@ -105,9 +105,9 @@ export function press(block,entity,fallDistance){
   const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);store.save(key,tx.state,state.revision);safeVisuals(block,tx.state);feedback(block,'press',tx.state.revision);tell(entity,tx.message);return tx;
  });});
 }
-export function tickBarrel(block){
+export function tickBarrel(block,elapsed=97){
  return guarded(undefined,()=>{if(!registry)return;const key=keyFor(block);return locks.with([key],()=>{
-  const s=store.load(key);check(s,'MISSING_STATE');check(intact(block),'STRUCTURE_DAMAGED');const next=advanceBarrel(s,registry,97);
+  const s=store.load(key);check(s,'MISSING_STATE');check(intact(block),'STRUCTURE_DAMAGED');const next=advanceBarrel(s,registry,elapsed);
   if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
  });});
 }
@@ -136,6 +136,13 @@ function waterCauldronDestination(tap){
 }
 
 function tapKey(block){const p=block.location;return `${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
+function tapGesture(player,tap,first){
+ const key=`${player.id}/${tapKey(tap)}`,now=system.currentTick,old=tapGestures.get(key);
+ const edge=first===true||!old||now-old.lastEvent>2;
+ tapGestures.set(key,{lastEvent:now,lastAction:edge?now:old.lastAction});
+ if(tapGestures.size>256)for(const[k,v]of tapGestures)if(now-v.lastEvent>100)tapGestures.delete(k);
+ return edge&&old?.lastAction!==now;
+}
 function tapOpen(block){return (block?.permutation.getState(TAP_OPEN)??0)===1;}
 function setTapOpen(block,value){block.setPermutation(block.permutation.withState(TAP_OPEN,value?1:0));}
 function tapBelow(block){return {x:block.location.x,y:block.location.y-1,z:block.location.z};}
@@ -274,7 +281,13 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':pressing_tub',{
   beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
   onPlace:ev=>guarded(undefined,()=>initializeTub(ev.block)),onEntityFallOn:ev=>press(ev.block,ev.entity,ev.fallDistance),onTick:ev=>guarded(undefined,()=>{const s=store.load(keyFor(ev.block));if(s)safeVisuals(ev.block,s);})});
- b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate});
+ b.registerCustomComponent(NS+':barrel_core',{onTick:ev=>tickBarrel(ev.block,20)});b.registerCustomComponent(NS+':barrel_part',{});b.registerCustomComponent(NS+':tap',{
+  onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate,
+  onPlayerInteract:ev=>{
+   const player=ev.player,block=ev.block;if(!player||javaSecondaryBypass(player,held(player)?.typeId)||!tapGesture(player,block,true))return;
+   const d=block.dimension,p={...block.location};system.run(()=>guarded(player,()=>{const tap=blockAt(d,p);check(tap?.typeId===TAP,'BLOCK_CHANGED');toggleTap(tap,player);}));
+  }
+ });
  i.registerCustomComponent(NS+':place_barrel',{onUseOn:ev=>guarded(ev.source,()=>{const d=DIRECTIONS[ev.blockFace];check(d,'UNKNOWN_FACE');return createBarrel(ev.source,offset(ev.block.location,d));})});
 }
 function machineUsePlan(block,item){
@@ -302,7 +315,8 @@ export function installMachineEvents(){
   const player=ev.player,item=held(player),expected={id:item?.typeId??'',count:item?.amount??0,slot:player.selectedSlotIndex};
   if(javaSecondaryBypass(player,expected.id))return;
   const plan=machineUsePlan(ev.block,item);if(!plan)return;
-  ev.cancel=true;if(ev.isFirstEvent===false)return;
+  ev.cancel=true;
+  if(plan.kind==='tap'?!tapGesture(player,ev.block,ev.isFirstEvent):ev.isFirstEvent===false)return;
   const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;
   system.run(()=>guarded(player,()=>{
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');
@@ -314,7 +328,7 @@ export function installMachineEvents(){
  if(world.afterEvents.entityLoad)world.afterEvents.entityLoad.subscribe(({entity})=>{
   if(!RUNTIME_VISUALS.includes(entity.typeId))return;
   system.run(()=>{try{const raw=entity.getDynamicProperty('kt:core'),key=entity.getDynamicProperty('kt:anchor');if(!raw||!key)return;const p=JSON.parse(raw),block=blockAt(entity.dimension,p);if(!block)return;
-   const s=store.load(key);if(!s||![TUB,CORE].includes(block.typeId)||s.token!==entity.getDynamicProperty('kt:token'))entity.remove();
+   const s=store.load(key);if(!s||![TUB,CORE].includes(block.typeId)||s.token!==entity.getDynamicProperty('kt:token')){entity.remove();if(s&&[TUB,CORE].includes(block.typeId))safeVisuals(block,s);}
   }catch(e){warn(e,'entityLoad');}});
  });
 }

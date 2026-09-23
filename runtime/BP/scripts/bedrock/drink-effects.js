@@ -28,10 +28,10 @@ export function consumeDrink(event,rng=Math.random){
  return outcomes;
 }
 
-function finishBottleContainer(player,itemId){
+export function finishDrinkContainer(player,itemId,emptyId){
  const c=inventory(player),slot=player.selectedSlotIndex,current=c.getItem(slot);
- check(parseBottle(itemId)&&current?.typeId===itemId,'STALE_DRINK_HAND');
- const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:EMPTY_BOTTLE,count:1};
+ check(current?.typeId===itemId,'STALE_DRINK_HAND');
+ const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:emptyId,count:1};
  try{
   const plan=planInventory(c,slot,take,[output],makeStack);
   commitInventory(plan,c,()=>{},()=>{});
@@ -46,7 +46,7 @@ function finishBottleContainer(player,itemId){
    next.amount--;
    c.setItem(slot,next);
   }
-  try{player.dimension.spawnItem(makeStack(EMPTY_BOTTLE,1),{...player.location});effectDiagnostics.containerDrops++;}
+  try{player.dimension.spawnItem(makeStack(emptyId,1),{...player.location});effectDiagnostics.containerDrops++;}
   catch(spawnError){if(!creative)c.setItem(slot,old);throw spawnError;}
  }
 }
@@ -60,7 +60,7 @@ function finishBottleContainer(player,itemId){
 export function completeDrink(event,rng=Math.random){
  const player=event.source,itemId=event.itemStack?.typeId;
  if(!player||!parseBottle(itemId))return [];
- finishBottleContainer(player,itemId);
+ finishDrinkContainer(player,itemId,EMPTY_BOTTLE);
  const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;
 }
 

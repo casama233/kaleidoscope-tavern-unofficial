@@ -5,14 +5,14 @@
 - 上游：`KaleidoscopeMods/KaleidoscopeTavern`
 - 本倉庫鎖定來源提交：`6b0d619145316492f055e03d70427107cd73efa8`（2026-07-01）
 - release JAR SHA-256：`03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff`
-- 目前 Bedrock 主開發階段：C6；Minecraft／手機／Realms／BDS 實機驗收仍為 **NOT_RUN**。
+- 目前 Bedrock 主開發階段：C6；BDS 已驗證一條雪克杯調酒到飲用路徑，手機／Realms／真實客戶端外觀及其餘釀造流程仍待驗收。
 
 「已適配」表示已有 Bedrock 等價或明示適配，不表示兩個引擎逐像素或逐事件完全相同。
 
 | 類別 | 已有 | 尚缺／仍需核對 |
 |---|---|---|
 | 釀造／壓榨 | 23酒桶＋6壓榨配方、4000 mB／4×16 酒桶輸入、Q1–Q6 分段發酵、醋 fallback、容器交易；最後一瓶後維持關蓋與壓榨桶 1／64 取料語義已對齊；**Barrel Tap 已完成 open→30 tick→close、紅石上升沿、placed/item carrier、原生 facing／waterlogging，以及 Barrel 自身 facing＋第二層正面中心嚴格連接**；**WaterCauldronTapBehavior 已用原生 cauldron states 適配空瓶／未滿水鍋輸出**；placed empty bottle 已改用 Mojang `block_placer`＋原生 cardinal／waterlogging；Pressing Tub 已使用原生 placement traits 對齊平放／側掛 tilt 與 water containment | Tap 的 generic Waterlogged/Lava/Beehive/Watermelon/DragonHead behaviors；filled BottleBlock projectile 打碎與其他原版可放置瓶；Pressing Tub Forge capability 與精確複合碰撞；實機時序仍需核對 |
-| 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份、長按/倒酒適配 | 原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
+| 雪克杯／雞尾酒 | 12固定配方、14雞尾酒、特調 payload、藥水身份；隔離 BDS 已跑通白色佳人長按調酒→瞄準空杯倒出→取回→飲用退杯 | 其餘配方與特調的 BDS 全路徑、原生手腕/杯嘴動畫、下方容器自動接酒、西瓜汁等特殊酒嘴 |
 | 專屬效果 | Bloody Mary 規則；XP Drain、Zenith、Shriek、Upside Down、Vision、Tomb Raider、Ardent Heat、High Heels 適配 | **3項**：slightly_tipsy、grass_stealth、long_reach |
 | 高腳凳 | 16色、放置/回收、原生座位、座墊隨乘客轉向 | Steve/Alex 座高、精細碰撞、手機/多人/重連實機 |
 | String Lights | 17款、原模型/貼圖、染料換款、亮度15、四方向；洋紅款已同步官方 post-1.2 `c4ec188` 面剔除修正 | waterlogging、自然支撐/掉落、精確 selection；洋紅雙面薄片仍待實機多視角驗收 |
@@ -25,7 +25,14 @@
 | 發射器／原版互動 | 基本手動瓶/杯流程 | `BottleBlockDispenseBehavior` 等 dispenser 行為及部分原版事件 |
 | GUI／整合 | 獨立 Tavern 指南與原生配方冊 | Java Jade/JEI/REI/EMI 類整合需按 Bedrock UI 能力另做等價入口 |
 | 視覺/客戶端 | 原作資產大量沿用；C4-C6已有動畫適配；post-1.2 洋紅彩燈 `c4ec188`、金色果汁桶 `b30f34a`，以及 `c70eec1` **15/15模型與該提交全部變更的block/item貼圖均已同步**；來源快照、blob SHA、source-driven geometry regeneration 與CI離線驗證已收束 | `c70eec1` 資產差異已清零；仍剩 Slightly Tipsy 相機 roll、Grass Stealth 玩家渲染隱藏與各批次標記為 NOT_RUN 的 Minecraft 實機視覺驗收 |
-| 引擎驗收 | Node/mock 測試框架 | Minecraft、觸控、控制器、多人、BDS、Realms、存檔升級、Molang/rideable/food 原生事件最終驗收 |
+| 引擎驗收 | Node/mock 測試框架；隔離 BDS 的白色佳人原生事件與杯子／背包閉環 | 真實客戶端、觸控、控制器、多人、Realms、存檔升級及其他 BDS 玩法驗收 |
+
+## 2026-09-23 小批：雪克杯可玩性與葡萄土壤
+
+- 酒館移植倉庫 `origin/main` 核對後仍是 `74fc719`。官方 Java 1.2.0 有 24 酒桶、6 壓榨、12 雪克杯配方；目前 Bedrock 有 23 酒桶、6 壓榨、12 雪克杯配方，差的一款酒桶配方是尚未移植的 Molotov。Java 酒桶品質的 0 是未開始，成品為 1–6；Bedrock 的 Q1–Q6 不是少了一個可飲用品質。Java 也只在載入區塊時計時，無需補造離線發酵。
+- 隔離 BDS 找到兩個真正斷點：對準空杯時在 `beforeEvents` 讀雪克杯動態資料會失敗，靜默退回放置路徑；14 款調酒成品仍沿用 `minecraft:food` 與獨立的 `onConsume`，和酒瓶的完成使用交易不同。現在延後倒酒判斷，調酒與酒瓶共用一次性容器交易，並保留特調 payload 核對。
+- 隔離 BDS 的模擬玩家已跑通三種原料→手持雪克杯按住 90 tick→白色佳人→對準已放置空杯倒出→拿回白色佳人→飲用→退回空杯。`itemReleaseUse` 和 `itemStopUse` 連續到達時只完成一次；測試腳本沒有進正式包。這只證明該實例路徑，不代表全部 14 款、手機畫面或多人已驗收。
+- 種植土壤把 Java `rooted_dirt` 對應到 Bedrock 實際 ID `dirt_with_roots`。Java 的野生葡萄藤世界生成目前仍缺；現有 `grapevine_starter` 合成只提供取得藤蔓的替代入口，不能算作世界生成移植。後續先完成野生葡萄自然取得及實際種植，再用隔離 BDS 跑葡萄→壓榨→四桶汁→97 tick 分段發酵→酒嘴取酒的完整生存流程。
 
 
 ## 釀酒閉環核對 Batch 1：Barrel／Pressing Tub／Grape

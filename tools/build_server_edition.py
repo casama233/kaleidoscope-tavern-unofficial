@@ -163,9 +163,9 @@ assert t.count(old_banner) == 1, 'init banner drifted'
 t = t.replace(old_banner, "console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Server edition 0.6.5.');")
 m.write_text(t, encoding='utf-8')
 
-# Derive native placed-block geometry from the original entity models at build
-# time. Keep one editable model source in Git; the distributable pack contains
-# separate block identifiers in models/blocks for the Bedrock client.
+# Keep one geometry identifier per model. The earlier alias compiler duplicated
+# the drink models without client-render evidence; only the barrel's empty
+# collision-cell geometry is generated now.
 subprocess.run([sys.executable, str(HERE / 'prepare_placed_models.py'), str(OUT / 'runtime')], check=True)
 
 bp = json.loads((OUT / 'runtime/BP/manifest.json').read_text(encoding='utf-8'))

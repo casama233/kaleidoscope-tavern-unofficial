@@ -316,7 +316,10 @@ export function installMachineEvents(){
   if(javaSecondaryBypass(player,expected.id))return;
   const plan=machineUsePlan(ev.block,item);if(!plan)return;
   ev.cancel=true;
-  if(plan.kind==='tap'?!tapGesture(player,ev.block,ev.isFirstEvent):ev.isFirstEvent===false)return;
+  // Touch clients can deliver only an isFirstEvent=false callback for a new
+  // press. Use the same per-block gesture edge as the tap, so the first such
+  // callback works while duplicate callbacks from one press are ignored.
+  if(!tapGesture(player,ev.block,ev.isFirstEvent))return;
   const dimension=ev.block.dimension,location={...ev.block.location},type=ev.block.typeId;
   system.run(()=>guarded(player,()=>{
    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const b=blockAt(dimension,location);check(b?.typeId===type,'BLOCK_CHANGED');

@@ -113,19 +113,18 @@ for p in sorted(recipes.glob('*.json')):
 # The 0.6.1 patch still applies its lid guard (with fuzz) into the build output:
 # closing the lid is refused while non-empty slots hold different counts, so
 # advanceBarrel()'s Math.min(...) + slots.fill(null) cannot silently eat
-# materials. Assert it is really there, and supply the message the patch's
-# bedrock/machines.js hunk used to add (that hunk no longer applies because
-# upstream rewrote the CN map).
+# materials. Assert it is really there, and supply the message only when the
+# source runtime has not already incorporated it.
 core = OUT / 'runtime/BP/scripts/core/machines.js'
 t = core.read_text(encoding='utf-8')
 assert "UNEQUAL_INGREDIENT_COUNTS" in t, 'lid guard missing from the patched core'
 bed = OUT / 'runtime/BP/scripts/bedrock/machines.js'
 t = bed.read_text(encoding='utf-8')
-assert 'UNEQUAL_INGREDIENT_COUNTS' not in t, 'upstream now ships the message; drop this step'
-assert t.count('const CN={') == 1
-t = t.replace('const CN={', "const CN={UNEQUAL_INGREDIENT_COUNTS:'\u5404\u7a2e\u539f\u6599\u6578\u91cf\u5fc5\u9808\u76f8\u540c\uff1b\u8acb\u7a7a\u624b\u53d6\u56de\u5f8c\u91cd\u65b0\u6295\u6599\u3002',", 1)
-bed.write_text(t, encoding='utf-8')
-print('lid guard asserted; message supplied')
+if 'UNEQUAL_INGREDIENT_COUNTS' not in t:
+    assert t.count('const CN={') == 1
+    t = t.replace('const CN={', "const CN={UNEQUAL_INGREDIENT_COUNTS:'\u5404\u7a2e\u539f\u6599\u6578\u91cf\u5fc5\u9808\u76f8\u540c\uff1b\u8acb\u7a7a\u624b\u53d6\u56de\u5f8c\u91cd\u65b0\u6295\u6599\u3002',", 1)
+    bed.write_text(t, encoding='utf-8')
+print('lid guard and message asserted')
 
 # The 1.20+ shapeless painting recipes also need unlock data; gate on the first
 # concrete ingredient.

@@ -152,7 +152,7 @@ function cleanupCupVisual(b){try{for(const e of helpers(b))e.remove();}catch(e){
 export function syncCupVisual(b){
  try{const s=cupStore.load(cupKey(b.dimension.id,b.location)),found=helpers(b);
   if(!s||s.item!==SIGNATURE||!intactCup(b,s)){found.forEach(e=>e.remove());return;}
-  const e=found[0]??b.dimension.spawnEntity(HELPER,{x:b.location.x+.5,y:b.location.y,z:b.location.z+.5});for(const duplicate of found.slice(1))duplicate.remove();
+  const e=found[0]??b.dimension.spawnEntity(HELPER,{x:b.location.x+.5,y:b.location.y,z:b.location.z+.5},{initialRotation:s.facing*90});for(const duplicate of found.slice(1))duplicate.remove();
   e.setDynamicProperty(ANCHOR,cupKey(b.dimension.id,b.location));e.setProperty('kt_art:red',(s.payload.color>>16)&255);e.setProperty('kt_art:green',(s.payload.color>>8)&255);e.setProperty('kt_art:blue',s.payload.color&255);e.setRotation({x:0,y:s.facing*90});
  }catch(e){log(e);}
 }

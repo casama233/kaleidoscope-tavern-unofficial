@@ -17,7 +17,7 @@
       },
       "scripts": {
         "initialize": [
-          "v.kt_seat_angle = 0;"
+          "v.kt_seat_angle = q.property('kaleidoscope_tavern:seat_yaw');"
         ],
         "pre_animation": [
           "v.kt_seat_angle = math.lerprotate(v.kt_seat_angle, q.property('kaleidoscope_tavern:seat_yaw'), math.clamp(q.delta_time * 12, 0, 1));"

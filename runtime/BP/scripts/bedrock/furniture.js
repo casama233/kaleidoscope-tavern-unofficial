@@ -52,8 +52,10 @@ export function ensureSeat(block){
   for(const e of all){if(e.typeId!==expected){discard(e,'orphans');continue;}valid.push(e);}
   valid.sort((a,b)=>nativeRide(b).getRiders().length-nativeRide(a).getRiders().length||a.id.localeCompare(b.id));
   let e=valid[0];for(const extra of valid.slice(1))discard(extra,'duplicates');
-  if(!e){e=d.spawnEntity(expected,center(p));try{e.setDynamicProperty(SEAT_ANCHOR,key);e.addTag('kaleidoscope_tavern:visual_helper');}catch(x){optional(()=>e.remove());throw x;}furnitureDiagnostics.spawned++;}
-  helpers.set(e.id,e);e.setRotation({x:0,y:facingYaw(block.permutation.getState(FACING)??0)});return e;
+  const yaw=facingYaw(block.permutation.getState(FACING)??0);
+  if(!e){e=d.spawnEntity(expected,center(p),{initialRotation:yaw});try{e.setDynamicProperty(SEAT_ANCHOR,key);e.addTag('kaleidoscope_tavern:visual_helper');}catch(x){optional(()=>e.remove());throw x;}furnitureDiagnostics.spawned++;}
+  else e.setRotation({x:0,y:yaw});
+  helpers.set(e.id,e);return e;
  });
 }
 export function placeFurniture(player,target,{face='Up'}={}){

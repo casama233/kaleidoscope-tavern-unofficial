@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Give placed drinks their own block models, preserving entity/attachable models.
+"""Compile placed models with Cookery-style explicit per-face material bindings.
 
-Cookery's placed foods resolve geometry from models/blocks. Tavern's imported
-models were all under models/entity, even when referenced by native blocks.
-The block copies use distinct identifiers so the two model registries cannot
-compete for one geometry identifier. Running this twice changes nothing.
+Imported entity faces omit material_instance because the entity render controller
+supplies their texture. Give the native block faces a named surface, while keeping
+the original geometry for entity render controllers and held-item attachables.
+Directory placement alone does not establish whether a client can render a model.
 """
 import json
 import sys
@@ -32,6 +32,7 @@ for path in sorted((rp / 'blocks').rglob('*.geo.json')) if (rp / 'blocks').exist
         block_models[identifier] = path
 
 promoted = set()
+surface = 'kt_surface'
 for path in sorted(bp.glob('*.json')):
     if not (path.stem.startswith(('bottle_', 'cup_')) or path.stem in {'shaker_station', 'tap'}):
         continue
@@ -54,6 +55,27 @@ for path in sorted(bp.glob('*.json')):
         if len(copy['minecraft:geometry']) != 1:
             raise ValueError(f'block alias source contains several geometries: {source}')
         copy['minecraft:geometry'][0]['description']['identifier'] = alias
+        materials = set()
+        for bone in copy['minecraft:geometry'][0].get('bones', []):
+            for cube in bone.get('cubes', []):
+                if not isinstance(cube.get('uv'), dict):
+                    raise ValueError(f'placed model needs per-face UVs: {source}')
+                for face in cube['uv'].values():
+                    if not face.get('material_instance'):
+                        face['material_instance'] = surface
+                    materials.add(face['material_instance'])
+        # A geometry-only permutation inherits the base component. Resolve each
+        # face through that effective mapping, then emit explicit named entries.
+        bindings = component.get('minecraft:material_instances', block['components'].get('minecraft:material_instances', {}))
+        explicit = json.loads(json.dumps(bindings))
+        for name in sorted(materials):
+            if name not in explicit:
+                if '*' not in bindings:
+                    raise ValueError(f'unbound block material: {path.name}: {name}')
+                explicit[name] = json.loads(json.dumps(bindings['*']))
+        if materials and component.get('minecraft:material_instances') != explicit:
+            component['minecraft:material_instances'] = explicit
+            changed = True
         destination = rp / 'blocks' / 'placed' / source.name
         destination.parent.mkdir(parents=True, exist_ok=True)
         payload = json.dumps(copy, ensure_ascii=False, indent=2) + '\n'

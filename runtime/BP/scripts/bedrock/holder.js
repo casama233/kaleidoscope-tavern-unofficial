@@ -17,7 +17,7 @@ export function syncHolderVisual(block,state=store.load(holderKey(block.dimensio
  const all=helperAt(block);if(!state){for(const e of all)discard(e,'orphans');return undefined;}
  all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];for(const x of all.slice(1))discard(x,'duplicates');
  const facing=block.permutation.getState(FACING)??0,pose=holderVisualPose(facing),at=position(block,facing);
- if(!e){e=block.dimension.spawnEntity(HELPER,at);e.setDynamicProperty(ANCHOR,holderKey(block.dimension.id,block.location));e.addTag('kaleidoscope_tavern:visual_helper');visuals.set(e.id,e);holderDiagnostics.spawned++;}
+ if(!e){e=block.dimension.spawnEntity(HELPER,at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,holderKey(block.dimension.id,block.location));e.addTag('kaleidoscope_tavern:visual_helper');visuals.set(e.id,e);holderDiagnostics.spawned++;}
  e.setProperty(HOLDER_KIND,state.kind);e.setRotation(pose.rotation);e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);return e;
 }
 export function syncHolder(block){

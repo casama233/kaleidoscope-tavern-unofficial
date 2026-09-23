@@ -53,8 +53,10 @@ export function syncVisuals(core,state){
  const chosen=new Map();
  for(const e of existing){if(!wanted.includes(e.typeId)||chosen.has(e.typeId)||e.getDynamicProperty('kt:token')!==state.token)e.remove();else chosen.set(e.typeId,e);}
  for(const type of wanted){let entity=chosen.get(type);
-  if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}
-  if(state.kind==='barrel'&&(type===NS+':barrel_open_visual'||type===NS+':barrel_closed_visual')){const cardinal=barrelCardinal(core);if(cardinal)entity.setRotation({x:0,y:facingYaw(bottleFacingFromCardinal(cardinal))});}
+  const shell=type===NS+':barrel_open_visual'||type===NS+':barrel_closed_visual';
+  const yaw=shell?facingYaw(bottleFacingFromCardinal(barrelCardinal(core))):0;
+  if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},{initialRotation:yaw});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}
+  else if(shell)entity.setRotation({x:0,y:yaw});
   if(type.includes('rig_liquid_'))entity.setProperty('kt_art:amount',state.amount);
  }
 }

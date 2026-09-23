@@ -58,8 +58,13 @@ for path in sorted(bp.glob('*.json')):
         materials = set()
         for bone in copy['minecraft:geometry'][0].get('bones', []):
             for cube in bone.get('cubes', []):
+                if isinstance(cube.get('uv'), list):
+                    # Box UVs (the shaker) use the native directional slots.
+                    # Preserve the original unfolding, including mirrored UVs.
+                    materials.update(('north', 'south', 'east', 'west', 'up', 'down'))
+                    continue
                 if not isinstance(cube.get('uv'), dict):
-                    raise ValueError(f'placed model needs per-face UVs: {source}')
+                    raise ValueError(f'placed model has no UVs: {source}')
                 for face in cube['uv'].values():
                     if not face.get('material_instance'):
                         face['material_instance'] = surface

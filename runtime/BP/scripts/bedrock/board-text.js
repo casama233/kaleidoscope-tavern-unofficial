@@ -52,7 +52,7 @@ export function renderBoardText(d,info,data,unused,key){
    if(ch===' '||cp===0x200c)continue;
    const glyphLocation={x:location.x+Math.cos(f.r)*offset*f.scale,y:location.y,z:location.z+Math.sin(f.r)*offset*f.scale};
    const anchor=`${key}|${row}|${index}`;
-   const signature=JSON.stringify({version:28,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
+   const signature=JSON.stringify({version:34,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
    expected.push({anchor,signature,cp,location:glyphLocation});
   }
  }

@@ -22,6 +22,12 @@
           "render_method": "alpha_test",
           "ambient_occlusion": 0.0,
           "face_dimming": true
+        },
+        "unshaded": {
+          "texture": "kt_assets_a17_xp_bottle",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
         }
       },
       "minecraft:item_visual": {
@@ -34,6 +40,12 @@
             "render_method": "alpha_test",
             "ambient_occlusion": 0.0,
             "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_xp_bottle",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
           }
         }
       },
@@ -82,6 +94,20 @@
               0,
               0
             ]
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            },
+            "unshaded": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": false
+            }
           }
         }
       },
@@ -94,6 +120,20 @@
               -90,
               0
             ]
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            },
+            "unshaded": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": false
+            }
           }
         }
       },
@@ -106,6 +146,20 @@
               -180,
               0
             ]
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            },
+            "unshaded": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": false
+            }
           }
         }
       },
@@ -118,6 +172,20 @@
               -270,
               0
             ]
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            },
+            "unshaded": {
+              "texture": "kt_assets_a17_xp_bottle",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": false
+            }
           }
         }
       }

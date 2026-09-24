@@ -2,10 +2,10 @@ import {BlockPermutation,world,system} from '@minecraft/server';
 import {BottleStore,bottleKey,displayAdd} from '../core/bottles.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {planInventory,commitInventory} from '../core/inventory.js';
-import {inventory,makeStack,safe,canWrite,handSnapshot,sameHand,blockAt,requireBlockReach} from './transactions.js';
+import {inventory,makeStack,safe,canWrite,handSnapshot,sameHand,blockAt,requireBlockReach,exchangeBlocks,placementTake} from './transactions.js';
 import {check} from '../core/util.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
-import {registerJavaBlockUseHandler,nativeEmptyHandBlockUse} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {Locks} from '../core/storage.js';
 
 const NS='kaleidoscope_tavern',TAP=NS+':tap',EMPTY=NS+':bottle_empty',WATER_BOTTLE=NS+':bottle_water';
@@ -101,6 +101,10 @@ export function registerTapSourceComponents({blockComponentRegistry:r}){
  registerProtectedBreakRoute({id:'tap-source-products',isBlock:b=>productIds.has(b?.typeId),recover:({player,block})=>recoverSimpleProduct(player,block)});
 }
 export function installTapSourceEvents(){
+ registerJavaItemUseOnRoute({id:'molotov-placement',matches:id=>id===NS+':molotov',
+  plan:({block,face})=>{const d={Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},East:{x:1,y:0,z:0},West:{x:-1,y:0,z:0}}[face];check(d,'UNKNOWN_FACE');return {target:offset(block.location,d)};},
+  execute:({player,plan})=>{canWrite(player);const block=blockAt(player.dimension,plan.target);check(block?.isAir,'SPACE_BLOCKED');exchangeBlocks(player,placementTake(player),[],[{block,permutation:BlockPermutation.resolve(NS+':molotov')}]);}
+ });
  registerJavaBlockUseHandler(e=>{
   const id=e.block?.typeId;if(!productIds.has(id))return;const hs=handSnapshot(e.player);if(hs.id)return;
   e.cancel=true;if(e.isFirstEvent===false||!claimProductTake(e.player,e.block))return;scheduleProductTake(e.player,e.block);

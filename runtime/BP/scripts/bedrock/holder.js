@@ -7,10 +7,12 @@ import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory
 import {makeStack,hand,inventory,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
-export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
+export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
+// Block state has a 16-value engine limit. DP and entity kind retain exact bottle identity.
+function blockKind(state){return Math.min(state?.kind??0,15);}
 function kind(block){return block.permutation.getState(HOLDER_KIND)??0;}
-function intact(block,state){return block?.typeId===HOLDER_BLOCK&&kind(block)===(state?.kind??0);}
+function intact(block,state){return block?.typeId===HOLDER_BLOCK&&kind(block)===blockKind(state);}
 function helperAt(block){const k=holderKey(block.dimension.id,block.location);return block.dimension.getEntities({type:HELPER,location:blockCenter(block.location),maxDistance:1.5}).filter(e=>e.getDynamicProperty(ANCHOR)===k);}
 function discard(e,reason){e.remove();visuals.delete(e.id);holderDiagnostics[reason]=(holderDiagnostics[reason]??0)+1;}
 function position(block,facing){const p=holderVisualPose(facing).offset;return {x:block.location.x+p.x,y:block.location.y+p.y,z:block.location.z+p.z};}
@@ -22,7 +24,7 @@ export function syncHolderVisual(block,state=store.load(holderKey(block.dimensio
  e.setProperty(HOLDER_KIND,state.kind);e.setRotation({x:0,y:pose.rotation.y});e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);return e;
 }
 export function syncHolder(block){
- if(block?.typeId!==HOLDER_BLOCK)return false;const k=holderKey(block.dimension.id,block.location),state=store.load(k),wanted=state?.kind??0,current=kind(block);
+ if(block?.typeId!==HOLDER_BLOCK)return false;const k=holderKey(block.dimension.id,block.location),state=store.load(k),wanted=blockKind(state),current=kind(block);
  if(current!==wanted){block.setPermutation(block.permutation.withState(HOLDER_KIND,wanted));holderDiagnostics.repairs++;syncHolderVisual(block,state);return true;}syncHolderVisual(block,state);return false;
 }
 function transact(player,block,old,next,take,give,permutation){return commitStoredStateTransaction(player,{block,key:holderKey(block.dimension.id,block.location),store,old,next,take,give,permutation,afterCommit:syncHolderVisual});}
@@ -34,7 +36,7 @@ export function placeHolder(player,target){
 export function putHolderBottle(player,block,{expectedRevision}={}){
  canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');check(!old&&kind(block)===0,'HOLDER_OCCUPIED');
  const h=hand(player);if(holderBlockedItem(h?.typeId))check(false,'HOLDER_BLOCKLIST');const accepted=holderItem(h?.typeId);check(accepted,'NOT_HOLDER_BOTTLE');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');const next=holderState(h.typeId,0);
- transact(player,block,undefined,next,1,[],block.permutation.withState(HOLDER_KIND,next.kind));holderDiagnostics.inserted++;return next;
+ transact(player,block,undefined,next,1,[],block.permutation.withState(HOLDER_KIND,blockKind(next)));holderDiagnostics.inserted++;return next;
 }
 export function takeHolderBottle(player,block,{expectedRevision}={}){
  canWrite(player);requireBlockReach(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(old,'HOLDER_EMPTY');check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');

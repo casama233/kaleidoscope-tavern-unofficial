@@ -1,3 +1,4 @@
+import {GUIDE_ENTRY_ICONS} from './guide-icons.js';
 /** One encyclopedia page per product, using Cookery's native entry renderer. */
 const LOCALES=['zh_CN','zh_TW','en_US'];
 const CATEGORY={gear:'equipment',mix_tools:'equipment',press:'equipment',barrel_drinks:'barrel',
@@ -70,11 +71,20 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
  payload.entries=payload.entries.filter(e=>!removed.has(e.id));
  for(const e of payload.entries){
   e.category=CATEGORY[e.category]??e.category;
+  if(GUIDE_ENTRY_ICONS[e.id])e.icon=GUIDE_ENTRY_ICONS[e.id];
   if(e.usedBy)e.usedBy=[...new Set(e.usedBy.map(id=>aliases.get(id)??id).filter(id=>!removed.has(id)))];
  }
  payload.categories=payload.categories.filter(c=>!CATEGORY[c.id]);
  const used=new Set(payload.entries.map(e=>e.category));
  for(const c of payload.categories)if(used.has(c.id)&&c.parent)used.add(c.parent);
  payload.categories=payload.categories.filter(c=>used.has(c.id));
+ const categoryItems={equipment:'barrel',barrel:'barrel',cocktail:'shaker',storage:'holder',cultivation:'grapevine',decor:'bell_pendant_lamp',furniture:'bar_counter',lighting:'bell_pendant_lamp',incense:'sakura_incense',art:'tartaric_acid_painting',boards:'chalkboard'};
+ for(const c of payload.categories){const icon=GUIDE_ENTRY_ICONS['kaleidoscope_tavern:'+categoryItems[c.id]];if(icon)c.icon=icon;}
+ const molotov=payload.entries.find(e=>e.id==='kaleidoscope_tavern:molotov');
+ if(molotov)append(molotov,{mechanicsByLocale:{
+  zh_TW:['這是燃燒彈，不能飲用。對空按住使用至少半秒，鬆手投擲；擊中後會在落點周圍點火。','酒桶加入 4000 mB 熔岩，關蓋釀製，以空酒瓶取出；也可在裝有熔岩的鍋上接酒嘴，於嘴下擺空酒瓶取用。','對方塊使用可擺放；空手取回。可存入單瓶架、傾斜酒架、圓形酒架及酒櫃，紅石上升沿會發射燃燒瓶。'],
+  zh_CN:['这是燃烧弹，不能饮用。对空按住使用至少半秒，松手投掷；击中后会在落点周围点火。','酒桶加入 4000 mB 熔岩，关盖酿制，以空酒瓶取出；也可在装有熔岩的炼药锅上接酒嘴，于嘴下摆空酒瓶取用。','对方块使用可摆放；空手取回。可存入单瓶架、倾斜酒架、圆形酒架及酒柜，红石上升沿会发射燃烧瓶。'],
+  en_US:['An incendiary projectile, not a drink. Hold use while aiming into air for at least half a second, then release to throw. It ignites the area around its impact.','Fill a barrel with 4000 mB of lava, close the lid, then collect the brewed result with empty bottles. Alternatively, fit a tap to a lava cauldron and place an empty bottle below the tap.','Use on a block to place it; collect with an empty hand. Holders, tilted/circular racks and cabinets accept it. A rising redstone edge launches it as an incendiary projectile.']
+ }});
  return payload;
 }

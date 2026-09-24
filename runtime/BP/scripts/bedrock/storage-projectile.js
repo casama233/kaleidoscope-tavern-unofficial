@@ -25,6 +25,11 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
  const bottle=storageBottleItem(itemId);check(bottle&&bottle.base!=='empty_bottle','NOT_THROWABLE_DRINK');
  check(dimension&&position&&velocity&&['x','y','z'].every(k=>Number.isFinite(position[k])&&Number.isFinite(velocity[k])),'INVALID_PROJECTILE_VECTOR');
  let entity;
+ // Java storage dispatches MolotovBlockItem to its incendiary projectile.
+ if(bottle.base==='molotov'){
+  try{entity=dimension.spawnEntity(NS+':thrown_molotov',position);entity.getComponent('minecraft:projectile').shoot(velocity);storageProjectileDiagnostics.spawned++;system.runTimeout(()=>{try{entity.remove();}catch{}},200);return entity;}
+  catch(error){try{entity?.remove();}catch{}throw error;}
+ }
  try{
   entity=dimension.spawnEntity(THROWN_DRINK,position);
   entity.setProperty(STORAGE_KIND,bottle.kind);

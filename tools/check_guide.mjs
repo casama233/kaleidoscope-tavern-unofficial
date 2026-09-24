@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import {GUIDE_ENTRY_ICONS} from '../runtime/BP/scripts/data/guide-icons.js';
 // Inspect the actual data projection. No Minecraft server/player substitutes.
 import assert from 'node:assert/strict';
 import {buildCookeryGuidePayload} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
@@ -9,6 +11,8 @@ const ids=new Set(payload.entries.map(e=>e.id));assert.equal(ids.size,payload.en
 const cats=new Set(payload.categories.map(c=>c.id));
 for(const e of payload.entries){
  assert(cats.has(e.category),e.id);
+ assert.equal(e.icon,GUIDE_ENTRY_ICONS[e.id],e.id+' exact icon');
+ assert(fs.existsSync(new URL('../runtime/RP/'+e.icon+'.png',import.meta.url)),e.id+' image');
  for(const lc of ['zh_CN','zh_TW','en_US']){
   assert(payload.names[lc][e.id],`${lc} ${e.id}`);
   assert(e.mechanicsByLocale[lc]?.length,`${lc} ${e.id} instructions`);

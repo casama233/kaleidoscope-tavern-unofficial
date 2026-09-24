@@ -1,3 +1,4 @@
+import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
@@ -13,14 +14,14 @@ function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.
 function blockKind(state){return Math.min(state?.kind??0,15);}
 function kind(block){return block.permutation.getState(HOLDER_KIND)??0;}
 function intact(block,state){return block?.typeId===HOLDER_BLOCK&&kind(block)===blockKind(state);}
-function helperAt(block){const k=holderKey(block.dimension.id,block.location);return block.dimension.getEntities({type:HELPER,location:blockCenter(block.location),maxDistance:1.5}).filter(e=>e.getDynamicProperty(ANCHOR)===k);}
+function helperAt(block){const k=holderKey(block.dimension.id,block.location);return block.dimension.getEntities({location:blockCenter(block.location),maxDistance:1.5}).filter(e=>e.getDynamicProperty(ANCHOR)===k);}
 function discard(e,reason){e.remove();visuals.delete(e.id);holderDiagnostics[reason]=(holderDiagnostics[reason]??0)+1;}
 function position(block,facing){const p=holderVisualPose(facing).offset;return {x:block.location.x+p.x,y:block.location.y+p.y,z:block.location.z+p.z};}
 export function syncHolderVisual(block,state=store.load(holderKey(block.dimension.id,block.location))){
  const all=helperAt(block);if(!state){for(const e of all)discard(e,'orphans');return undefined;}
- all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];for(const x of all.slice(1))discard(x,'duplicates');
+ all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];if(e&&e.typeId!==externalVisual(HELPER,state.item)){discard(e,'repairs');e=undefined;}for(const x of all.slice(1))discard(x,'duplicates');
  const facing=block.permutation.getState(FACING)??0,pose=holderVisualPose(facing),at=position(block,facing);
- if(!e){e=block.dimension.spawnEntity(HELPER,at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,holderKey(block.dimension.id,block.location));e.addTag('kaleidoscope_tavern:visual_helper');visuals.set(e.id,e);holderDiagnostics.spawned++;}
+ if(!e){e=block.dimension.spawnEntity(externalVisual(HELPER,state.item),at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,holderKey(block.dimension.id,block.location));e.addTag('kaleidoscope_tavern:visual_helper');visuals.set(e.id,e);holderDiagnostics.spawned++;}
  e.setProperty(HOLDER_KIND,state.kind);e.setRotation({x:0,y:pose.rotation.y});e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);return e;
 }
 export function syncHolder(block){
@@ -47,7 +48,7 @@ export function recoverHolder(player,block,{expectedRevision}={}){
  transact(player,block,old,undefined,0,give,air());holderDiagnostics.recovered++;return give;
 }
 export function maintainHolderVisual(e){
- if(e?.typeId!==HELPER)return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
+ if(!isExternalVisual(e?.typeId,HELPER))return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
 }
 export function tickHolderVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainHolderVisual);}
 function rngFactor(rng,scale=1,base=.5){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return base+n*scale;}
@@ -86,7 +87,7 @@ export function installHolderEvents(){
   },
   recover:({player,block,revision})=>recoverHolder(player,block,{expectedRevision:revision})
  });
- world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.typeId===HELPER){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
+ world.afterEvents.entityLoad.subscribe(e=>{if(isExternalVisual(e.entity.typeId,HELPER)){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
  system.runInterval(tickHolderVisuals,20);
 }
 export const HOLDER_TEST={store,visuals,HELPER,ANCHOR};

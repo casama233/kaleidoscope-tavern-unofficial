@@ -1,6 +1,6 @@
 import {check,integer,text,canonical,utf8Bytes,digest,TavernError} from './util.js';
 export const EVENTS=Object.freeze({ping:'kaleidoscope_tavern:api_ping',ready:'kaleidoscope_tavern:api_ready',begin:'kaleidoscope_tavern:extension_begin',chunk:'kaleidoscope_tavern:extension_chunk',commit:'kaleidoscope_tavern:extension_commit',ack:'kaleidoscope_tavern:extension_ack',unregister:'kaleidoscope_tavern:extension_unregister'});
-const MAX_PACKET_BYTES=1900,MAX_DATA_BYTES=48000,TTL=600;
+const MAX_PACKET_BYTES=1900,MAX_DATA_BYTES=192000,TTL=600;
 export function packetsFor(extension,revision='r1'){
  const data=canonical(extension);check(utf8Bytes(data)<=MAX_DATA_BYTES,'PAYLOAD_TOO_LARGE');
  const parts=[];let part='';for(const c of data){if(utf8Bytes(JSON.stringify(part+c))>1100){parts.push(part);part='';}part+=c;}if(part)parts.push(part);
@@ -19,7 +19,7 @@ export class ExtensionTransport {
   if(eventId===EVENTS.unregister){check(p.api===1,'API_VERSION_MISMATCH');this.pending.delete(p.source);return {ok:true,source:p.source,removed:this.registry.remove(p.source)};}
   text(p.revision,64);check(/^[a-zA-Z0-9_.-]+$/.test(p.revision),'INVALID_REVISION');
   if(eventId===EVENTS.begin){
-   check(p.api===1,'API_VERSION_MISMATCH');integer(p.parts,1,64);integer(p.bytes,2,MAX_DATA_BYTES);check(/^[0-9a-f]{8}$/.test(p.digest),'INVALID_DIGEST');
+   check(p.api===1,'API_VERSION_MISMATCH');integer(p.parts,1,256);integer(p.bytes,2,MAX_DATA_BYTES);check(/^[0-9a-f]{8}$/.test(p.digest),'INVALID_DIGEST');
    check(this.pending.has(p.source)||this.pending.size<16,'PENDING_LIMIT');
    this.pending.set(p.source,{...p,tick,partsData:new Map(),actualBytes:0});return null;
   }

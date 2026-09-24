@@ -1,9 +1,22 @@
 {
   "format_version": "1.21.60",
   "minecraft:search_feature": {
-    "description": {"identifier": "kaleidoscope_tavern:wild_grapevine_search"},
+    "description": {
+      "identifier": "kaleidoscope_tavern:wild_grapevine_search"
+    },
     "places_feature": "kaleidoscope_tavern:wild_grapevine_body",
-    "search_volume": {"min": [-4,-8,-4], "max": [4,0,4]},
+    "search_volume": {
+      "min": [
+        -4,
+        -24,
+        -4
+      ],
+      "max": [
+        4,
+        0,
+        4
+      ]
+    },
     "search_axis": "-y",
     "required_successes": 1
   }

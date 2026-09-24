@@ -5,7 +5,7 @@ import {utf8Bytes} from '../core/util.js';
 export function installExtensionHost(registry){
  const transport=new ExtensionTransport(registry);let countTick=-1,eventsThisTick=0;
  const send=(id,p)=>system.sendScriptEvent(id,JSON.stringify(p));
- const ready=()=>send(EVENTS.ready,{api:1,version:'0.3.0',capabilities:CAPABILITIES,maxPacketBytes:1900,maxPayloadBytes:48000});
+ const ready=()=>send(EVENTS.ready,{api:1,version:'0.3.0',capabilities:CAPABILITIES,maxPacketBytes:1900,maxPayloadBytes:192000});
  system.afterEvents.scriptEventReceive.subscribe(ev=>{
   if(!Object.values(EVENTS).includes(ev.id)||ev.id===EVENTS.ready||ev.id===EVENTS.ack)return;
   // Server-script-origin is required. Pack namespaces are cooperative, not authenticated identities.

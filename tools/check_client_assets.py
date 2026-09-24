@@ -32,3 +32,17 @@ for p in (RT/'RP/textures').rglob('*.texture_set.json'):
  for key in ['color','metalness_emissive_roughness']:
   if isinstance(t.get(key),str):assert (p.parent/(t[key]+'.png')).is_file(),(p,key)
 print('Painting UVs, glyph origins, Molotov storage/use and texture-set references passed.')
+# Every client entity using a shared controller must declare every friendly name,
+# including names in arrays even when its current property range cannot select them.
+controllers={}
+for p in (RT/'RP/render_controllers').rglob('*.json'):controllers.update(read(p).get('render_controllers',{}))
+for p in (RT/'RP/entity').rglob('*.json'):
+ d=read(p)['minecraft:client_entity']['description']
+ for entry in d.get('render_controllers',[]):
+  name=entry if isinstance(entry,str) else next(iter(entry))
+  rc=controllers.get(name)
+  if not rc:continue
+  for kind,key in [('geometry','geometry'),('texture','textures'),('material','materials')]:
+   refs=re.findall(r'\b'+kind+r'\.([A-Za-z0-9_]+)',json.dumps(rc),re.I)
+   assert all(ref in d.get(key,{}) for ref in refs),(p,name,kind,set(refs)-d.get(key,{}).keys())
+print('Shared render-controller friendly names passed for all client entities.')

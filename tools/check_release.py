@@ -15,7 +15,8 @@ for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
-hud=docs[RT/'RP/ui/hud_screen.json'];assert set(hud)=={'namespace','kt_mixology_root','root_panel','hud_title_text',*[f'kt_barrel_edge_{side}' for side in ['top','right','bottom','left']]}
+hud=docs[RT/'RP/ui/hud_screen.json'];assert set(hud)=={'namespace','kt_mixology_root','root_panel','hud_title_text'}
+assert 'pbr' in docs[RT/'RP/manifest.json'].get('capabilities',[])
 # Custom entity materials must be in the client-discovered entry point, not
 # simply in any parseable .material file. BDS does not exercise this renderer.
 material_path=RT/'RP/materials/entity.material'
@@ -27,9 +28,6 @@ for p in (RT/'RP/entity').glob('*.json'):
         if name.startswith('kt_'):assert name in registered,(p,'unregistered material',name)
 assert 'USE_UV_ANIM' in registered['kt_signature_animated']['+defines']
 assert not (RT/'RP/materials/kt_signature.material').exists()
-for side in ['top','right','bottom','left']:
-    animation=hud[f'kt_barrel_edge_{side}']
-    assert animation['next'].removeprefix('@hud.') in hud
 geometry={g['description']['identifier'] for p,j in docs.items() if 'models' in p.parts for g in j.get('minecraft:geometry',[])}
 assert len(geometry)==sum(len(j.get('minecraft:geometry',[])) for p,j in docs.items() if 'models' in p.parts),'duplicate geometry identifiers'
 for p,j in docs.items():

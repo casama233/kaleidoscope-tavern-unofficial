@@ -11,11 +11,11 @@
 
 ## Validation completed
 
-Static validation passed for 1483 JSON files and 928 geometry identifiers. The generated guide contains 140 unique entries in 11 categories. A fresh BDS 1.26.51.1 world loaded only official Cookery 1.0.6 and Tavern 0.6.31 successfully, with zero ERROR lines after creating the load harness allowlist file. No simulated interactions were run. See `VALIDATION-0.6.31.json`.
+Static validation passed for 1486 JSON files and 929 geometry identifiers. The generated guide contains 140 unique entries in 11 categories. A fresh BDS 1.26.51.1 world loaded only official Cookery 1.0.6 and Tavern 0.6.32 successfully, with zero ERROR lines after creating the load harness allowlist file. No simulated interactions were run. See `VALIDATION-0.6.32.json`.
 
 ## Before a public CurseForge upload
 
-- Client acceptance of the 0.6.31 visual fixes and the public pack stack: mixed drink color, held shaker/animation, board text placement, barrel tooltip clearing, and guide pages.
+- Client acceptance of the 0.6.32 visual fixes and the public pack stack: mixed drink color, held shaker/animation, board text placement, barrel tooltip clearing, and guide pages.
 - Confirm distribution terms for the Minecraft bitmap-provider glyph subset used in the board atlases, or replace that subset with a distributable font while preserving the renderer's layout. The Unifont license notice alone does not cover those bitmap glyphs.
 - Confirm intended support beyond the tested BDS version; no Realms/all-mobile guarantee is made.
 

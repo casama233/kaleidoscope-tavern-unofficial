@@ -54,15 +54,15 @@ export function lookedAtBarrelStatus(player,hit){
   if(core?.typeId!==CORE)return undefined;
   const state=store.load(keyFor(core));
   if(!state)return undefined;
-  const text=[{translate:'item.kaleidoscope_tavern:barrel.name'},{text:'丨'}];
+  const text=[{translate:'item.kaleidoscope_tavern:barrel.name'},{text:'  丨  '}];
   if(!intact(core))return [...text,{translate:'kt.barrel.damaged'}];
   if(!state.batch)return [...text,{translate:'kt.barrel.not_brewing'}];
   // Same fields as Java BarrelComponentProvider: product/count, quality,
   // and time to the next level (or maximum quality).
   const batch=state.batch,seconds=Math.max(0,Math.floor(batch.ticksRemaining/20));
   text.length=0;
-  text.push({translate:`item.${filledItem(state)}.name`},{text:` ×${batch.remaining}丨`},
-   {translate:`message.kaleidoscope_tavern.barrel.brew_level.${batch.quality}`},{text:'§r丨'});
+  text.push({translate:`item.${filledItem(state)}.name`},{text:` ×${batch.remaining}  丨  `},
+   {translate:`message.kaleidoscope_tavern.barrel.brew_level.${batch.quality}`},{text:'§r  丨  '});
   if(batch.quality===6)text.push({text:'§6'},{translate:'kt.barrel.maximum'});
   else text.push({text:`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`});
   text.push({text:'§r'});

@@ -23,7 +23,7 @@ import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {firstBlockGesture} from './block-gesture.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {registerJavaBlockUseHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse} from './java-placement-router.js';
-import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,playShakerPour} from './immersion.js';
+import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,playShakerPour,cocktailEffect} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
@@ -185,7 +185,7 @@ export function pourHeldShakerNow(player,block){
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};
   if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
   commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm('cup_'+next.item.split(':')[1],next.facing));
-  syncCupVisual(block);feedback(block,'fill',next.revision);playShakerPour(player);hideShakerHud(player);return next;
+  syncCupVisual(block);feedback(block,'fill',next.revision);cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;
  });
 }
 export function syncCupVisual(block){
@@ -260,7 +260,10 @@ function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot
 function verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}
 export function registerMixologyComponents({blockComponentRegistry:blocks,itemComponentRegistry:items}){
  blocks.registerCustomComponent(NS+':shaker_station',{onTick:event=>repairShakerPutVisual(event.block),onPlayerInteract:nativeEmptyHandBlockUse});
- blocks.registerCustomComponent(NS+':cocktail_cup',{onTick:event=>syncCupVisual(event.block)});
+ blocks.registerCustomComponent(NS+':cocktail_cup',{onTick:({block})=>{
+  syncCupVisual(block);
+  if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);
+ }});
  items.registerCustomComponent(NS+':portable_shaker',{});
  items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:completeCocktail});
 }

@@ -62,6 +62,12 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
    mechanics:[usage[1]],mechanicsByLocale:Object.fromEntries(LOCALES.map((lc,i)=>[lc,[usage[i]]]))});
   LOCALES.forEach((lc,i)=>payload.names[lc][id]=names[i]);
  }
+ if(!payload.entries.some(e=>e.id==='kaleidoscope_tavern:watermelon_juice')){
+  const id='kaleidoscope_tavern:watermelon_juice';
+  const details={zh_CN:'对西瓜安装酒嘴，并在酒嘴下放置空酒瓶，即可接取西瓜汁。西瓜汁不经过酒桶熟成，也没有酒的品质等级；饮用后返回空酒瓶。',zh_TW:'對西瓜安裝酒嘴，並在酒嘴下放置空酒瓶，即可接取西瓜汁。西瓜汁不經過酒桶熟成，也沒有酒的品質等級；飲用後歸還空酒瓶。',en_US:'Fit a tap to a melon and put an empty bottle beneath it to collect watermelon juice. It is not barrel aged and has no wine quality level. Drinking it returns an empty bottle.'};
+  payload.entries.push({id,category:'cultivation',icon:items.icons?.[id],kinds:[],mechanics:[details.zh_TW],mechanicsByLocale:Object.fromEntries(LOCALES.map(lc=>[lc,[details[lc]]]))});
+  for(const lc of LOCALES)payload.names[lc][id]=({zh_CN:'西瓜汁',zh_TW:'西瓜汁',en_US:'Watermelon Juice'})[lc];
+ }
  // Cocktail operation instructions are useful on the drink page itself.
  const cocktailGuide=payload.entries.find(e=>e.id==='kaleidoscope_tavern:guide_cocktails');
  if(cocktailGuide){

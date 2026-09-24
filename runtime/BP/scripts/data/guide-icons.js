@@ -139,5 +139,6 @@ export const GUIDE_ENTRY_ICONS={
   "kaleidoscope_tavern:pressing/ice_grape_bucket": "textures/ui/tavern_entries/pressing__ice_grape_bucket",
   "kaleidoscope_tavern:pressing/sweet_berries_bucket": "textures/ui/tavern_entries/pressing__sweet_berries_bucket",
   "kaleidoscope_tavern:signature_cocktail": "textures/ui/tavern_entries/signature_cocktail",
-  "kaleidoscope_tavern:mystery_cocktail": "textures/ui/tavern_entries/mystery_cocktail"
+  "kaleidoscope_tavern:mystery_cocktail": "textures/ui/tavern_entries/mystery_cocktail",
+  "kaleidoscope_tavern:watermelon_juice": "textures/ui/tavern_entries/watermelon_juice"
 };

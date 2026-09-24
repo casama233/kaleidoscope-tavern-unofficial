@@ -2,7 +2,7 @@
 
 Minecraft 基岩版非官方移植，作為 [森羅物語廚房基岩移植版（Kaleidoscope Cookery (Unofficial)）](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) 的附屬使用。
 
-目前為 **0.6.36-beta.1 公開測試版**。玩法、模型及素材以 Java 原作為依據；本專案未代表原作者、廚房移植作者、Mojang 或 Microsoft。
+目前為 **0.6.37-beta.1 公開測試版**。玩法、模型及素材以 Java 原作為依據；本專案未代表原作者、廚房移植作者、Mojang 或 Microsoft。
 
 ## 內容
 
@@ -32,10 +32,10 @@ python3 tools/build_release.py
 
 ## 發布狀態與授權
 
-詳見 [版本說明](docs/RELEASE-NOTES-0.6.36.md)、[驗收狀態](docs/RELEASE-READINESS.md)、[原作與素材署名](CREDITS.md)。代碼與美術使用不同授權，字型另依各自的第三方條款。已完成靜態資源、腳本、多語言檢查及 BDS 1.26.51.1 載入檢查；Android 實際畫面與各裝置相容性仍由公開測試收集回饋。
+詳見 [版本說明](docs/RELEASE-NOTES-0.6.37.md)、[驗收狀態](docs/RELEASE-READINESS.md)、[原作與素材署名](CREDITS.md)。代碼與美術使用不同授權，字型另依各自的第三方條款。已完成靜態資源、腳本、多語言檢查及 BDS 1.26.51.1 載入檢查；Android 實際畫面與各裝置相容性仍由公開測試收集回饋。
 
 ## 語言與下載
 
 支援英文、簡體中文、繁體中文，每種語言均有 1,658 個語言鍵。告示牌編輯介面跟隨遊戲語言，圖鑑跟隨廚房本體的語言選項。日文及俄文保留部分舊翻譯，未列為完整支援。
 
-[下載 0.6.36-beta.1 公開測試包](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.36-beta.1)。
+[下載 0.6.37-beta.1 公開測試包](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.37-beta.1)。

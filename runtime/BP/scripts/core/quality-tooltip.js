@@ -15,6 +15,8 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
 });
 
 export function qualityBottleLore(item){
+ // The tapped melon drink has no aging or quality level in Java.
+ if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
  if(!parsed)return undefined;
  const lines=[];

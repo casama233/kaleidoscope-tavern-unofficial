@@ -1,0 +1,42 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:table_fence_cherry"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "WWW",
+      " F ",
+      " I "
+    ],
+    "key": {
+      "F": {
+        "item": "minecraft:cherry_fence"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "W": {
+        "tag": "minecraft:planks"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:table",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:cherry_fence"
+      },
+      {
+        "item": "minecraft:iron_ingot"
+      },
+      {
+        "tag": "minecraft:planks"
+      }
+    ]
+  }
+}

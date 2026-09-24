@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:table",
       "menu_category": {
-        "category": "construction"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
       },
       "traits": {
         "minecraft:placement_direction": {
@@ -89,6 +90,16 @@
             "render_method": "alpha_test"
           }
         }
+      },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": true
+          }
+        ]
       }
     },
     "permutations": [

@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:ginkgo_incense",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_sourceicon_ginkgo_incense",
+      "minecraft:display_name": {
+        "value": "item.kaleidoscope_tavern:ginkgo_incense.name"
+      },
+      "minecraft:max_stack_size": 64,
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:ginkgo_incense"
+      }
+    }
+  }
+}

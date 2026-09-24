@@ -9,7 +9,7 @@
     ],
     "ingredients": [
       {
-        "item": "minecraft:item_frame"
+        "item": "minecraft:frame"
       },
       {
         "item": "minecraft:diamond"
@@ -18,6 +18,11 @@
     "result": {
       "item": "kaleidoscope_tavern:mona_lisa_painting",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:frame"
+      }
+    ]
   }
 }

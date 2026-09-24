@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: new immutable source records all have original SHA256
+ok 1 - new immutable source records all have original SHA256
+  ---
+  duration_ms: 5.555228
+  type: 'test'
+  ...
+# Subtest: normal, cold and nether soils follow the Java tag members plus Bedrock aliases; green is not a planted species
+ok 2 - normal, cold and nether soils follow the Java tag members plus Bedrock aliases; green is not a planted species
+  ---
+  duration_ms: 0.321515
+  type: 'test'
+  ...
+# Subtest: wild grapevine age uses two native-safe states with at most16 values per state
+ok 3 - wild grapevine age uses two native-safe states with at most16 values per state
+  ---
+  duration_ms: 1.267946
+  type: 'test'
+  ...
+# Subtest: trellis placement axes source truth table exhaustively covers24 combinations
+ok 4 - trellis placement axes source truth table exhaustively covers24 combinations
+  ---
+  duration_ms: 0.600721
+  type: 'test'
+  ...
+# Subtest: disconnected basic frames preserve their placement axes
+ok 5 - disconnected basic frames preserve their placement axes
+  ---
+  duration_ms: 0.276495
+  type: 'test'
+  ...
+# Subtest: cross and six-way frames degrade according to surviving neighbor axes
+ok 6 - cross and six-way frames degrade according to surviving neighbor axes
+  ---
+  duration_ms: 0.496042
+  type: 'test'
+  ...
+# Subtest: climate rule supports exact source thresholds but missing temperatures use0.25
+ok 7 - climate rule supports exact source thresholds but missing temperatures use0.25
+  ---
+  duration_ms: 0.251289
+  type: 'test'
+  ...
+# Subtest: vanilla biome temperature table comes from actual biome IDs and leaves unknown add-on climates unclassified
+ok 8 - vanilla biome temperature table comes from actual biome IDs and leaves unknown add-on climates unclassified
+  ---
+  duration_ms: 0.240713
+  type: 'test'
+  ...
+# Subtest: fruit increment1 or2 clamps at5 and rejects invalid RNG
+ok 9 - fruit increment1 or2 clamps at5 and rejects invalid RNG
+  ---
+  duration_ms: 1.959807
+  type: 'test'
+  ...
+# Subtest: immature fruit has no loot and does not draw random values
+ok 10 - immature fruit has no loot and does not draw random values
+  ---
+  duration_ms: 0.885424
+  type: 'test'
+  ...
+# Subtest: shears return3 primary plus1 or2 green with strict30% threshold
+ok 11 - shears return3 primary plus1 or2 green with strict30% threshold
+  ---
+  duration_ms: 0.468113
+  type: 'test'
+  ...
+# Subtest: normal ripe break uses source1–2 primary and at most1 green
+ok 12 - normal ripe break uses source1–2 primary and at most1 green
+  ---
+  duration_ms: 0.242839
+  type: 'test'
+  ...
+# Subtest: 24 quality bottle families use93 exact count arrangements plus the singular watermelon drink
+ok 13 - 24 quality bottle families use93 exact count arrangements plus the singular watermelon drink
+  ---
+  duration_ms: 0.375157
+  type: 'test'
+  ...
+# Subtest: bottle IDs strictly validate 24 quality families and all six quality values
+ok 14 - bottle IDs strictly validate 24 quality families and all six quality values
+  ---
+  duration_ms: 1.012566
+  type: 'test'
+  ...
+# Subtest: mixed qualities are retained in order and inputs never mutated
+ok 15 - mixed qualities are retained in order and inputs never mutated
+  ---
+  duration_ms: 0.596553
+  type: 'test'
+  ...
+# Subtest: taking all mixed-quality bottles does not average, reorder or relabel
+ok 16 - taking all mixed-quality bottles does not average, reorder or relabel
+  ---
+  duration_ms: 0.377737
+  type: 'test'
+  ...
+# Subtest: different drinks and fourth bottle for3-cap families reject before state changes
+ok 17 - different drinks and fourth bottle for3-cap families reject before state changes
+  ---
+  duration_ms: 0.323107
+  type: 'test'
+  ...
+# Subtest: all quality families return exact placed inventory across exhaustive quality sequences
+ok 18 - all quality families return exact placed inventory across exhaustive quality sequences
+  ---
+  duration_ms: 21.214225
+  type: 'test'
+  ...
+# Subtest: bottle storage is persistent by dimension with revision conflict guard
+ok 19 - bottle storage is persistent by dimension with revision conflict guard
+  ---
+  duration_ms: 0.696981
+  type: 'test'
+  ...
+# Subtest: malformed stored qualities or future schema cannot produce substituted output
+ok 20 - malformed stored qualities or future schema cannot produce substituted output
+  ---
+  duration_ms: 0.322146
+  type: 'test'
+  ...
+# Subtest: generated effect data is exactly the24 uploaded JAR JSON rows
+ok 21 - generated effect data is exactly the24 uploaded JAR JSON rows
+  ---
+  duration_ms: 1.982755
+  type: 'test'
+  ...
+# Subtest: Q1 indexes first source row and nausea30seconds becomes600ticks
+ok 22 - Q1 indexes first source row and nausea30seconds becomes600ticks
+  ---
+  duration_ms: 0.325983
+  type: 'test'
+  ...
+# Subtest: Q3/Q6 regeneration uses source seconds and zero-based amplifier
+ok 23 - Q3/Q6 regeneration uses source seconds and zero-based amplifier
+  ---
+  duration_ms: 0.258031
+  type: 'test'
+  ...
+# Subtest: probability rolls are independent and strictly below source probability
+ok 24 - probability rolls are independent and strictly below source probability
+  ---
+  duration_ms: 0.536834
+  type: 'test'
+  ...
+# Subtest: instant health uses one tick; source instant duration is not reused as a timed buff
+ok 25 - instant health uses one tick; source instant duration is not reused as a timed buff
+  ---
+  duration_ms: 0.500623
+  type: 'test'
+  ...
+# Subtest: custom effects have no fabricated vanilla mapping and original rows remain unchanged
+ok 26 - custom effects have no fabricated vanilla mapping and original rows remain unchanged
+  ---
+  duration_ms: 0.40384
+  type: 'test'
+  ...
+# Subtest: every existing quality item uses the complete-use hook and singular watermelon juice stays separate
+ok 27 - every existing quality item uses the complete-use hook and singular watermelon juice stays separate
+  ---
+  duration_ms: 6.714851
+  type: 'test'
+  ...
+# Subtest: eight crafting recipes include exact source trellis and clearly separate port starter
+ok 28 - eight crafting recipes include exact source trellis and clearly separate port starter
+  ---
+  duration_ms: 0.364455
+  type: 'test'
+  ...
+# Subtest: independent cultivation entries are localized and the24 effect pages remain available
+ok 29 - independent cultivation entries are localized and the24 effect pages remain available
+  ---
+  duration_ms: 0.360582
+  type: 'test'
+  ...
+# Subtest: stable support whitelist rejects uncertain partial blocks, third-party block tag opts in
+ok 30 - stable support whitelist rejects uncertain partial blocks, third-party block tag opts in
+  ---
+  duration_ms: 1.249179
+  type: 'test'
+  ...
+# Subtest: probability comparison uses Java float32 semantics at a 0.15 source boundary
+ok 31 - probability comparison uses Java float32 semantics at a 0.15 source boundary
+  ---
+  duration_ms: 0.790021
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 175.819234

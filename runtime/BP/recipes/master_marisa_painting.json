@@ -9,7 +9,7 @@
     ],
     "ingredients": [
       {
-        "item": "minecraft:item_frame"
+        "item": "minecraft:frame"
       },
       {
         "item": "minecraft:purple_dye"
@@ -18,6 +18,11 @@
     "result": {
       "item": "kaleidoscope_tavern:master_marisa_painting",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:frame"
+      }
+    ]
   }
 }

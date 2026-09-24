@@ -14,7 +14,7 @@
     ],
     "key": {
       "F": {
-        "tag": "minecraft:fences"
+        "item": "minecraft:oak_fence"
       },
       "I": {
         "item": "minecraft:iron_ingot"
@@ -26,6 +26,17 @@
     "result": {
       "item": "kaleidoscope_tavern:table",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:oak_fence"
+      },
+      {
+        "item": "minecraft:iron_ingot"
+      },
+      {
+        "tag": "minecraft:planks"
+      }
+    ]
   }
 }

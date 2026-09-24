@@ -3,118 +3,20 @@
   "minecraft:geometry": [
     {
       "description": {
-        "identifier": "geometry.kt_assets_a3.wild_grapevine",
+        "identifier": "geometry.kt_assets_a2.wild_grapevine",
         "texture_width": 16,
         "texture_height": 16,
         "visible_bounds_width": 2,
-        "visible_bounds_height": 3,
-        "visible_bounds_offset": [
-          0,
-          0.5,
-          0
-        ]
+        "visible_bounds_height": 2,
+        "visible_bounds_offset": [0, 0.5, 0]
       },
       "bones": [
         {
           "name": "root",
-          "pivot": [
-            0,
-            0,
-            0
-          ],
+          "pivot": [0, 0, 0],
           "cubes": [
-            {
-              "origin": [
-                -10.1823376,
-                0,
-                0
-              ],
-              "size": [
-                20.3646753,
-                16,
-                0
-              ],
-              "pivot": [
-                0,
-                8,
-                0
-              ],
-              "rotation": [
-                0,
-                -45,
-                0
-              ],
-              "uv": {
-                "north": {
-                  "uv": [
-                    0.0,
-                    0.0
-                  ],
-                  "uv_size": [
-                    16.0,
-                    16.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    0.0,
-                    0.0
-                  ],
-                  "uv_size": [
-                    16.0,
-                    16.0
-                  ],
-                  "material_instance": "unshaded"
-                }
-              }
-            },
-            {
-              "origin": [
-                0,
-                0,
-                -10.1823376
-              ],
-              "size": [
-                0,
-                16,
-                20.3646753
-              ],
-              "pivot": [
-                0,
-                8,
-                0
-              ],
-              "rotation": [
-                0,
-                -45,
-                0
-              ],
-              "uv": {
-                "west": {
-                  "uv": [
-                    0.0,
-                    0.0
-                  ],
-                  "uv_size": [
-                    16.0,
-                    16.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    0.0,
-                    0.0
-                  ],
-                  "uv_size": [
-                    16.0,
-                    16.0
-                  ],
-                  "material_instance": "unshaded"
-                }
-              }
-            }
+            {"origin": [-8, 0, -0.05], "size": [16, 16, 0.1], "uv": [0, 0], "rotation": [0, 45, 0]},
+            {"origin": [-8, 0, -0.05], "size": [16, 16, 0.1], "uv": [0, 0], "rotation": [0, -45, 0]}
           ]
         }
       ]

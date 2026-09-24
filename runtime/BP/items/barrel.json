@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:barrel",
       "menu_category": {
-        "category": "items"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
       }
     },
     "components": {
@@ -12,7 +13,7 @@
         "value": "item.kaleidoscope_tavern:barrel.name"
       },
       "minecraft:icon": "kt_c1_barrel",
-      "minecraft:max_stack_size": 16,
+      "minecraft:max_stack_size": 64,
       "kaleidoscope_tavern:place_barrel": {}
     }
   }

@@ -14,17 +14,14 @@
       },
       "animations": {
         "put": "animation.kt_assets_a8.shaker.put",
-        "shake": "animation.kt_runtime.shaker.table",
-        "table_controller": "controller.animation.kt_runtime.shaker_table"
+        "put_controller": "controller.animation.kt_runtime.shaker_put"
+      },
+      "scripts": {
+        "animate": ["put_controller"]
       },
       "render_controllers": [
         "controller.render.kt_assets_a1.static"
-      ],
-      "scripts": {
-        "animate": [
-          "table_controller"
-        ]
-      }
+      ]
     }
   }
 }

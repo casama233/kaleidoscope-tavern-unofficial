@@ -1,0 +1,34 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:molotov",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "item.kaleidoscope_tavern:molotov.name"
+      },
+      "minecraft:icon": "kt_sourceicon_molotov",
+      "minecraft:max_stack_size": 16,
+      "minecraft:throwable": {
+        "do_swing_animation": true,
+        "min_draw_duration": 0.5,
+        "max_draw_duration": 3600,
+        "launch_power_scale": 0.8,
+        "max_launch_power": 0.8,
+        "scale_power_by_draw_duration": false
+      },
+      "minecraft:projectile": {
+        "projectile_entity": "kaleidoscope_tavern:thrown_molotov"
+      },
+      "minecraft:use_modifiers": {
+        "use_duration": 0.25,
+        "movement_modifier": 1.0
+      }
+    }
+  }
+}

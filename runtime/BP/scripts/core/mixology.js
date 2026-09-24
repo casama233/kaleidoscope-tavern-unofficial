@@ -20,7 +20,7 @@ export function inputSnapshot(itemId,registry){
  const external=registry?.shakerInput?.(itemId);if(external)return clone(external);
  check(!bottle,'NOT_MIXABLE_DRINK');check(registry?.acceptsShakerInput(itemId),'NOT_SHAKER_INGREDIENT');
  // Backward-compatible recipe-only ingredients remain neutral. Add-ons that model drinks should register shakerInputs.
- return {item:itemId,container:null,color:0xffffff,effects:[]};
+ return {item:itemId,container:null,color:0xffffff,colorIgnored:true,effects:[]};
 }
 export function emptyShaker(){return {schema:1,revision:0,slots:[],result:null};}
 export function validateResult(r){check(r&&typeof r==='object','BAD_COCKTAIL_RESULT');id(r.item);id(r.carrier);if(r.recipeId)id(r.recipeId);if(r.item===SIGNATURE)validatePayload(r.payload);else check(r.payload===undefined,'UNEXPECTED_PAYLOAD');return r;}
@@ -34,7 +34,10 @@ export function addInput(s,item,registry){validateShaker(s);check(!s.result,'RES
 export function addResolvedInput(s,input){validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length<3,'SHAKER_FULL');return validateShaker({...clone(s),revision:s.revision+1,slots:[...clone(s.slots),clone(input)]});}
 export function removeInput(s){validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length,'NO_INGREDIENT');return {input:clone(s.slots.at(-1)),state:validateShaker({...clone(s),revision:s.revision+1,slots:clone(s.slots.slice(0,-1))})};}
 export function signaturePayload(slots){
- check(slots.length===3,'NEED_THREE_INGREDIENTS');const color=[16,8,0].reduce((out,shift)=>out|(Math.trunc(slots.reduce((n,s)=>n+((s.color>>shift)&255),0)/3)<<shift),0);
+ check(slots.length===3,'NEED_THREE_INGREDIENTS');
+ // Java excludes ChatFormatting.RESET (untagged recipe ingredients).
+ const colored=slots.filter(s=>!s.colorIgnored);
+ const color=colored.length?[16,8,0].reduce((out,shift)=>out|(Math.trunc(colored.reduce((n,s)=>n+((s.color>>shift)&255),0)/colored.length)<<shift),0):0xffffff;
  return validatePayload({schema:1,color,effects:mergeEffects(slots.flatMap(s=>s.effects)),ingredients:slots.map(s=>s.item)});
 }
 export function finishShake(s,ticks,recipe){

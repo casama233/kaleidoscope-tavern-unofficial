@@ -1,4 +1,7 @@
+import {registerFamilyDisplays} from './familyDisplayRules.js';
 import {registerFurnitureComponents,installFurnitureEvents,furnitureDiagnostics} from './bedrock/furniture.js';
+import {registerDecorationComponents,installDecorationEvents,decorationDiagnostics} from './bedrock/decorations.js';
+import {registerWritingBoardComponents,installWritingBoardEvents,WRITING_BOARD_DIAGNOSTICS} from './bedrock/writing-boards.js';
 import {combatDiagnostics} from './bedrock/combat-effects.js';
 import {installCustomEffects,customEffectDiagnostics} from './bedrock/custom-effects.js';
 import {potionDiagnostics,potionCapabilities} from './bedrock/potions.js';
@@ -27,11 +30,15 @@ import {setMixologyRegistry,registerMixologyComponents,installMixologyEvents,mix
 import {installCookeryGuidePublisher} from './core/cookery-guide-publisher.js';
 import {buildCookeryGuidePayload} from './data/cookery-guide-payload.js';
 import {installJavaItemUseOnEvents} from './bedrock/java-placement-router.js';
+import {registerTapSourceComponents,installTapSourceEvents} from './bedrock/tap-sources.js';
+import {installVanillaBottleDisplayEvents} from './bedrock/vanilla-bottle-displays.js';
+import {installDisplayProjectileEvents,displayProjectileDiagnostics} from './bedrock/display-projectiles.js';
+import {installQualityTooltipEvents,qualityTooltipDiagnostics} from './bedrock/quality-tooltip.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
 const COOKERY_GUIDE='kaleidoscope_cookery:guidebook';
 const cookeryGuidePublisher=installCookeryGuidePublisher(system,()=>buildCookeryGuidePayload(registry));
-export function diagnosticSnapshot(){return {build:'C6 / 0.6.0',furniture:furnitureDiagnostics,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
+export function diagnosticSnapshot(){return {build:'0.6.33-beta.1',furniture:furnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function migrateLegacyGuide(player,{slot=player?.selectedSlotIndex,expectedId}={}){
  const container=player?.getComponent?.('minecraft:inventory')?.container;
  if(!container||!Number.isInteger(slot))return false;
@@ -43,12 +50,12 @@ export function migrateLegacyGuide(player,{slot=player?.selectedSlotIndex,expect
  return true;
 }
 system.beforeEvents.startup.subscribe(ev=>{
- registerFurnitureComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
+ registerFurnitureComponents(ev);registerDecorationComponents(ev);registerWritingBoardComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerTapSourceComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});
 });
-installFurnitureEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installStorageProjectileEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installJavaItemUseOnEvents();
+installFurnitureEvents();installDecorationEvents();installWritingBoardEvents();installCustomEffects();installMixologyEvents();installMachineEvents();installCultivation();installStorageProjectileEvents();installTapSourceEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installVanillaBottleDisplayEvents();installDisplayProjectileEvents();installQualityTooltipEvents();installJavaItemUseOnEvents();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
- if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
+ if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;registerFamilyDisplays(p);cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});
 system.run(()=>{
  try{
@@ -59,7 +66,7 @@ system.run(()=>{
   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
   registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);installExtensionHost(registry);cookeryGuidePublisher.refresh();
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
-  console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.');
+  console.warn('[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.33-beta.1.');
  }catch(e){console.error('[Tavern C6] Startup halted: '+e);}
 });
 export function runtimeRegistry(){return registry;}

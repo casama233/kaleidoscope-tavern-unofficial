@@ -1,0 +1,13 @@
+{
+  "base_runtime": "0.6.28 family server build",
+  "base_archive_sha256": "bbcc020c2e23ef541e08043dc19bcf3a3374d7444e8c8a17a6d80cf97c3f5c98",
+  "java_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "java_repository": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern",
+  "public_changes": [
+    "guide consolidation",
+    "public Cookery UUID binding",
+    "own HUD only",
+    "remove unrelated player override",
+    "release documentation and direct packaging"
+  ]
+}

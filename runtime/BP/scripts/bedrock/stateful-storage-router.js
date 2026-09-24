@@ -1,3 +1,4 @@
+import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
@@ -79,7 +80,7 @@ export function installStatefulStorageRoutes({
  check(typeof routeId==='string'&&routeId,'INVALID_STORAGE_ROUTE');
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function'&&typeof shouldInteract==='function','INVALID_STORAGE_ROUTE');
  check(typeof place==='function'&&typeof interact==='function'&&typeof recover==='function','INVALID_STORAGE_ROUTE');
- world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
+ registerJavaBlockUseHandler(e=>{
   if(e.cancel||!isBlock(e.block))return;
   const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
   const face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined;

@@ -1,21 +1,48 @@
+import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
-import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
+import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
+import {biomeBaseTemperature} from '../data/biome-temperatures.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,applyBlocks,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 const locks=new Locks(),AGE=NS+':age',SHAPE=NS+':shape',WAX=NS+':waxed';
-export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS)]);
+const WILD_HEAD=NS+':wild_grapevine',WILD_BODY=NS+':wild_grapevine_plant',WILD_AGE_LOW=NS+':age_low',WILD_AGE_HIGH=NS+':age_high',WILD_SHEARED=NS+':sheared';
+export const FARM_IDS=new Set([BARE,...Object.keys(VINES),...Object.keys(CROPS),WILD_HEAD,WILD_BODY]);
 const key=b=>`${b.dimension.id}/${b.location.x}_${b.location.y}_${b.location.z}`;
 const age=b=>Number(b.permutation.getState(AGE)??0);
 const shape=b=>b.permutation.getState(SHAPE)??'single';
 const waxed=b=>!!b.permutation.getState(WAX);
-const current=b=>[b.typeId,age(b),shape(b),waxed(b)].join('|');
+const waterlogged=b=>!!b.permutation.getState(WATERLOGGED);
+export function encodeWildVineAge(years){check(Number.isInteger(years)&&years>=0&&years<=25,'WILD_AGE_RANGE');return {[WILD_AGE_LOW]:years&15,[WILD_AGE_HIGH]:years>>4};}
+export function wildVineAge(block){const low=Number(block.permutation.getState(WILD_AGE_LOW)??0),high=Number(block.permutation.getState(WILD_AGE_HIGH)??0);return Math.min(25,((high&1)<<4)|(low&15));}
+export function withWildVineAge(permutation,years){const states=encodeWildVineAge(years);return permutation.withState(WILD_AGE_LOW,states[WILD_AGE_LOW]).withState(WILD_AGE_HIGH,states[WILD_AGE_HIGH]);}
+const current=b=>[b.typeId,age(b),shape(b),waxed(b),waterlogged(b),b.typeId===WILD_HEAD?wildVineAge(b):undefined,b.permutation.getState(WILD_SHEARED)].join('|');
+const wildBelow=b=>blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));
+function bottomWildHead(b){
+ if(b?.typeId===WILD_HEAD)return b;
+ if(b?.typeId!==WILD_BODY)return undefined;
+ let cursor=b;
+ for(let n=0;n<64;n++){
+  const below=wildBelow(cursor);if(!below)return undefined;
+  if(below.typeId===WILD_HEAD)return below;
+  if(below.typeId!==WILD_BODY)return undefined;
+  cursor=below;
+ }
+ return undefined;
+}
+function makeWildHead(permutation,years=0,sheared=false){return withWildVineAge(permutation.withState(WILD_SHEARED,sheared),years);}
+function canAnchorWildVine(block){
+ if(!block)return false;
+ if(block.typeId===WILD_HEAD||block.typeId===WILD_BODY)return true;
+ try{if(block.hasTag?.('minecraft:leaves'))return true;}catch{}
+ return !block.isAir&&!/water|lava|tall_grass|fern|vine|flower|mushroom|snow_layer/.test(block.typeId);
+}
 const axisForFace=f=>['East','West','east','west'].includes(f)?'x':['North','South','north','south'].includes(f)?'z':'y';
-export function framePermutation(id,which='single',years=0,wax=false){return BlockPermutation.resolve(id,{[SHAPE]:which,...(id===BARE?{[WAX]:wax}:{[AGE]:years})});}
+export function framePermutation(id,which='single',years=0,wax=false,water=false){return BlockPermutation.resolve(id,{[SHAPE]:which,[WATERLOGGED]:water,...(id===BARE?{[WAX]:wax}:{[AGE]:years})});}
 function axes(b){
  const n=NEIGHBORS.map(d=>({d,b:blockAt(b.dimension,plus(b.location,d))}));
  if(n.some(x=>!x.b))return undefined;
@@ -36,6 +63,12 @@ function cropSupported(c){
 }
 /** Plan growth first; do not consume bone meal if all possible cells are blocked/unloaded. */
 export function growthChanges(b,rng=Math.random){
+ if(b.typeId===WILD_HEAD||b.typeId===WILD_BODY){
+  const head=bottomWildHead(b);if(!head||head.permutation.getState(WILD_SHEARED)===true)return [];
+  const years=wildVineAge(head);if(years>=25)return [];
+  const below=wildBelow(head);if(!below?.isAir)return [];
+  return [{block:head,permutation:BlockPermutation.resolve(WILD_BODY)},{block:below,permutation:makeWildHead(BlockPermutation.resolve(WILD_HEAD),years+1,false)}];
+ }
  if(Object.hasOwn(CROPS,b.typeId)){
   if(cropSupported(b)!==true||age(b)>=5)return [];
   return [{block:b,permutation:b.permutation.withState(AGE,nextFruitAge(age(b),rng))}];
@@ -45,20 +78,29 @@ export function growthChanges(b,rng=Math.random){
  for(const d of SPREAD){
   const t=blockAt(b.dimension,plus(b.location,d));
   if(!t)return []; // preserve source direction priority across an unloaded edge
-  if(t.typeId===BARE&&!waxed(t))return [{block:t,permutation:framePermutation(b.typeId,shape(t),d.y===1?0:3)}];
+  if(t.typeId===BARE&&!waxed(t))return [{block:t,permutation:framePermutation(b.typeId,shape(t),d.y===1?0:3,false,waterlogged(t))}];
  }
  const below=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));
  return below?.isAir?[{block:below,permutation:BlockPermutation.resolve(`${NS}:${kind}_crop`,{[AGE]:0})}]:[];
 }
 export function grow(b,{force=false,rng=Math.random}={}){
+ if(b.typeId===WILD_HEAD||b.typeId===WILD_BODY){const head=bottomWildHead(b);if(!head||wildVineAge(head)>=25||head.permutation.getState(WILD_SHEARED)===true)return false;if(!force&&rng()>=.15)return false;const edits=growthChanges(head,rng);if(!edits.length)return false;return locks.with(edits.map(e=>key(e.block)),()=>{applyBlocks(edits);return true;});}
  if(!VINES[b.typeId]&&!CROPS[b.typeId])return false;
  const kind=VINES[b.typeId]??CROPS[b.typeId];
- if(!force&&rng()>=growthProbability(kind))return false;
+ let temperature;
+ try{temperature=biomeBaseTemperature(b.dimension.getBiome(b.location)?.id);}catch{/* unloaded/unsupported/custom biome: preserve Java's normal 0.25 probability */}
+ if(!force&&rng()>=growthProbability(kind,temperature))return false;
  const edits=growthChanges(b,rng);if(!edits.length)return false;
  return locks.with(edits.map(e=>key(e.block)),()=>{applyBlocks(edits);for(const e of edits)refreshAround(e.block);return true;});
 }
 export function maintain(b){
- if(isFrame(b.typeId))refreshAround(b);
+ if(b.typeId===WILD_HEAD||b.typeId===WILD_BODY){
+  const above=blockAt(b.dimension,plus(b.location,{x:0,y:1,z:0}));
+  if(!above)return; // An unloaded support is unknown, not a missing block.
+  if(!canAnchorWildVine(above)){b.setType('minecraft:air');return;}
+  if(b.typeId===WILD_BODY){const below=wildBelow(b);if(!below)return;if(below.typeId!==WILD_BODY&&below.typeId!==WILD_HEAD)b.setPermutation(makeWildHead(BlockPermutation.resolve(WILD_HEAD),0,false));}
+ }
+ else if(isFrame(b.typeId))refreshAround(b);
  else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)b.setType('minecraft:air');
 }
 export function farmUse(player,b,{rng=Math.random}={}){
@@ -69,7 +111,7 @@ export function farmUse(player,b,{rng=Math.random}={}){
    check(!waxed(b),'WAXED_TRELLIS');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const soil=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(soil,'UNLOADED_SOIL');
    const kind=speciesForSoil(soil.typeId);check(kind,'UNSUITABLE_SOIL');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:framePermutation(`${NS}:${kind}vine_trellis`,shape(b),0)}]);refreshAround(b);return 'planted';
+   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:framePermutation(`${NS}:${kind}vine_trellis`,shape(b),0,false,waterlogged(b))}]);refreshAround(b);return 'planted';
   }
   if(b.typeId===BARE&&h?.typeId==='minecraft:honeycomb'){
    check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
@@ -84,26 +126,27 @@ export function farmUse(player,b,{rng=Math.random}={}){
    exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);return 'grown';
   }
   if(h?.typeId==='minecraft:shears'){
+  if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}
    if(VINES[b.typeId]){
-    const edits=[{block:b,permutation:framePermutation(BARE,shape(b))}];
+   const edits=[{block:b,permutation:framePermutation(BARE,shape(b),0,false,waterlogged(b))}];
     const child=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(child,'UNLOADED_CROP');
     if(CROPS[child.typeId])edits.push({block:child,permutation:air()});
-    exchangeBlocks(player,0,[{id:NS+':grapevine',count:1}],edits,{wear:true,rng});refreshAround(b);return 'pruned';
+    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng});refreshAround(b);return 'pruned';
    }
    if(CROPS[b.typeId]){
     check(age(b)===5,'NOT_RIPE');check(cropSupported(b)===true,'MISSING_TRELLIS');
     const outputs=fruitHarvest(CROPS[b.typeId],age(b),true,rng);
-    exchangeBlocks(player,0,outputs,[{block:b,permutation:air()}],{wear:true,rng});return outputs;
+    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});return outputs;
    }
   }
-  tell(player,`§a[Tavern] ${b.typeId.split(':')[1]} | ${isFrame(b.typeId)?shape(b):'fruit'} | age ${age(b)}${waxed(b)?' | waxed':''}`);
+  tell(player,`§a[Tavern] ${b.typeId.split(':')[1]} | ${isFrame(b.typeId)?shape(b):'fruit'} | age ${b.typeId===WILD_HEAD?wildVineAge(b):age(b)}${waxed(b)?' | waxed':''}`);
   return 'inspect';
  });
 }
 export function farmBreak(player,b,{rng=Math.random}={}){
  canWrite(player);check(FARM_IDS.has(b.typeId),'BLOCK_CHANGED');
  return locks.with([key(b),player.id],()=>{
-  const outputs=player.getGameMode()===GameMode.Creative?[]:CROPS[b.typeId]?fruitHarvest(CROPS[b.typeId],age(b),false,rng):[{id:BARE,count:1},...(VINES[b.typeId]?[{id:NS+':grapevine',count:1}]:[])];
+  const outputs=player.getGameMode()===GameMode.Creative?[]:CROPS[b.typeId]?fruitHarvest(CROPS[b.typeId],age(b),false,rng):b.typeId===WILD_HEAD||b.typeId===WILD_BODY?[{id:NS+':grapevine',count:1}]:[{id:BARE,count:1},...(VINES[b.typeId]?[{id:NS+':grapevine',count:1}]:[])];
   const edits=[{block:b,permutation:air()}];
   if(VINES[b.typeId]){const child=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(child,'UNLOADED_CROP');if(CROPS[child.typeId])edits.push({block:child,permutation:air()});}
   exchangeBlocks(player,0,outputs,edits);refreshAround(b);return outputs;
@@ -117,6 +160,10 @@ export function registerCultivation({blockComponentRegistry:r}){
  r.registerCustomComponent(NS+':grape_crop',{
   onRandomTick:e=>safe(undefined,()=>grow(e.block)),onTick:e=>safe(undefined,()=>maintain(e.block))
  });
+ r.registerCustomComponent(NS+':wild_grapevine',{
+  onTick:e=>safe(undefined,()=>{maintain(e.block);if(e.block.typeId===WILD_HEAD&&!e.block.permutation.getState(WILD_SHEARED)&&Math.random()<.15)grow(e.block,{force:true});})
+ });
+ r.registerCustomComponent(NS+':wild_grapevine_plant',{onTick:e=>safe(undefined,()=>maintain(e.block))});
 }
 function farmBlockConsumes(block,itemId){
  if(block.typeId===BARE){
@@ -124,11 +171,11 @@ function farmBlockConsumes(block,itemId){
   if(itemId==='minecraft:honeycomb')return !waxed(block);
   if(itemId?.endsWith('_axe'))return waxed(block);
  }
- if(itemId==='minecraft:shears')return !!VINES[block.typeId]||(!!CROPS[block.typeId]&&age(block)===5);
+ if(itemId==='minecraft:shears')return block.typeId===WILD_HEAD&&block.permutation.getState(WILD_SHEARED)!==true||!!VINES[block.typeId]||(!!CROPS[block.typeId]&&age(block)===5);
  return false;
 }
 export function installCultivation(openBook){
- world.beforeEvents.playerInteractWithBlock.subscribe(e=>{
+ registerJavaBlockUseHandler(e=>{
   if(e.cancel||!FARM_IDS.has(e.block.typeId))return;
   const hs=handSnapshot(e.player);if(javaSecondaryBypass(e.player,hs.id)||!farmBlockConsumes(e.block,hs.id))return;
   e.cancel=true;if(e.isFirstEvent===false)return;

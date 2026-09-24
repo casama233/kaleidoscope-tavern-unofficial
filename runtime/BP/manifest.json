@@ -1,13 +1,13 @@
 {
   "format_version": 2,
   "header": {
-    "name": "森羅物語：酒館 C6 | 功能開發版",
-    "description": "Cookery guide chapter, Tavern extension API and brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.",
+    "name": "Kaleidoscope Tavern (Unofficial) 0.6.33 BP",
+    "description": "Unofficial Java-to-Bedrock port and companion to Kaleidoscope Cookery (Unofficial). Public beta.",
     "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
     "version": [
       0,
       6,
-      0
+      33
     ],
     "min_engine_version": [
       1,
@@ -22,7 +22,7 @@
       "version": [
         0,
         6,
-        0
+        33
       ]
     },
     {
@@ -33,7 +33,7 @@
       "version": [
         0,
         6,
-        0
+        33
       ]
     }
   ],
@@ -43,7 +43,7 @@
       "version": [
         0,
         6,
-        0
+        33
       ]
     },
     {
@@ -57,6 +57,10 @@
     {
       "module_name": "@minecraft/server",
       "version": "2.7.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
     }
   ]
 }

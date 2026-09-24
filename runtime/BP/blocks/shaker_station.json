@@ -9,6 +9,10 @@
           1,
           2,
           3
+        ],
+        "kaleidoscope_tavern:put_visual": [
+          0,
+          1
         ]
       }
     },
@@ -50,6 +54,13 @@
           16,
           12
         ]
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          8,
+          8
+        ],
+        "looping": true
       },
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 0.4
@@ -109,6 +120,20 @@
               -270,
               0
             ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:put_visual') == 1",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.shaker_put_hidden"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_runtime_transparent",
+              "render_method": "blend"
+            }
           }
         }
       }

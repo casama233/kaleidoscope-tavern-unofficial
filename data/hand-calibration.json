@@ -3,29 +3,29 @@
   "units": "model_units_16_per_block",
   "first": {
     "position": [
-      8.96,
-      -8.32,
-      -11.52
+      0,
+      2.75,
+      0
     ],
     "rotation": [
-      15,
+      0,
       0,
       0
     ],
-    "scale": 0.6
+    "scale": 0.5
   },
   "third": {
     "position": [
       0,
-      4,
-      -2
+      -0.25,
+      0
     ],
     "rotation": [
       0,
       0,
       0
     ],
-    "scale": 0.6
+    "scale": 0.5
   },
   "spout": {
     "bone": "root",
@@ -35,5 +35,5 @@
       0
     ]
   },
-  "status": "Java transforms on Mojang-style directly bound attachable anchor; NOT engine calibrated, real-client visual acceptance still required"
+  "status": "Java shaker_3d display transforms on directly bound attachable; NOT engine calibrated; real-client visual acceptance required"
 }

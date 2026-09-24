@@ -216,7 +216,7 @@
       "textures": "textures/kaleidoscope_tavern_jar/item/sherry"
     },
     "kt_sourceicon_signature_cocktail": {
-      "textures": "textures/kaleidoscope_tavern_jar/item/signature_cocktail"
+      "textures": "textures/kt_runtime/signature/icon_default"
     },
     "kt_sourceicon_snow_incense": {
       "textures": "textures/kaleidoscope_tavern_jar/item/snow_incense"
@@ -786,10 +786,10 @@
       "textures": "textures/kaleidoscope_tavern_jar/item/allium_garden"
     },
     "kt_c3_depth_charge": {
-      "textures": "textures/kaleidoscope_tavern_jar/item/depth_charge"
+      "textures": "textures/items/family/kt_c3_depth_charge"
     },
     "kt_c3_nether_special": {
-      "textures": "textures/kaleidoscope_tavern_jar/item/nether_special"
+      "textures": "textures/items/family/kt_c3_nether_special"
     },
     "kt_c3_bloody_mary": {
       "textures": "textures/kaleidoscope_tavern_jar/item/bloody_mary"
@@ -798,10 +798,10 @@
       "textures": "textures/kaleidoscope_tavern_jar/item/sculk_special"
     },
     "kt_c3_signature_cocktail": {
-      "textures": "textures/kaleidoscope_tavern_jar/item/signature_cocktail"
+      "textures": "textures/kt_runtime/signature/icon_default"
     },
     "kt_c3_mystery_cocktail": {
-      "textures": "textures/kaleidoscope_tavern_jar/item/mystery_cocktail"
+      "textures": "textures/items/family/kt_c3_mystery_cocktail"
     },
     "kt_c6_white_bar_stool": {
       "textures": "textures/kt_runtime/icons/white_bar_stool"
@@ -901,6 +901,51 @@
     },
     "kt_c6_string_lights_pink": {
       "textures": "textures/kt_runtime/icons/string_lights_pink"
+    },
+    "kt_sourceicon_base_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_base_sandwich_board"
+    },
+    "kt_sourceicon_grass_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_grass_sandwich_board"
+    },
+    "kt_sourceicon_allium_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_allium_sandwich_board"
+    },
+    "kt_sourceicon_azure_bluet_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_azure_bluet_sandwich_board"
+    },
+    "kt_sourceicon_cornflower_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_cornflower_sandwich_board"
+    },
+    "kt_sourceicon_orchid_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_orchid_sandwich_board"
+    },
+    "kt_sourceicon_peony_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_peony_sandwich_board"
+    },
+    "kt_sourceicon_pink_petals_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_pink_petals_sandwich_board"
+    },
+    "kt_sourceicon_pitcher_plant_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_pitcher_plant_sandwich_board"
+    },
+    "kt_sourceicon_poppy_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_poppy_sandwich_board"
+    },
+    "kt_sourceicon_sunflower_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_sunflower_sandwich_board"
+    },
+    "kt_sourceicon_torchflower_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_torchflower_sandwich_board"
+    },
+    "kt_sourceicon_tulip_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_tulip_sandwich_board"
+    },
+    "kt_sourceicon_wither_rose_sandwich_board": {
+      "textures": "textures/items/family/kt_sourceicon_wither_rose_sandwich_board"
+    },
+    "kt_signature_dyed": {
+      "textures": "textures/kt_runtime/signature/icon_dyed.tga"
     }
   }
 }

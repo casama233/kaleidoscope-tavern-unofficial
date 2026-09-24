@@ -1,14 +1,11 @@
 {
-  "name": "kaleidoscope-tavern-bedrock-c6",
-  "version": "0.6.0",
+  "name": "kaleidoscope-tavern-unofficial",
+  "version": "0.6.33",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "python tools/build_runtime.py",
-    "test": "python tools/test_c6.py",
-    "check": "python tools/validate_runtime.py",
-    "package": "python tools/package_c6.py",
-    "audit": "python tools/audit_rebuild.py"
-  },
-  "devDependencies": {}
+    "check": "python3 tools/check_release.py",
+    "build": "python3 tools/build_release.py",
+    "package": "python3 tools/build_release.py"
+  }
 }

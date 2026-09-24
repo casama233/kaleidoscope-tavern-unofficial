@@ -1,11 +1,24 @@
-# C1 Credits and licensing boundary
+# Credits and licensing
 
-Original Kaleidoscope Tavern art and source data: Kaleidoscope Official Production Team. The preserved A17 art/source history is in `art/CREDITS.md`, `art/source-jar.lock.json` and its per-file source inventories. Art is governed by LICENSE-ASSETS (CC BY-NC-SA 4.0); applicable upstream code/logic by LICENSE-CODE (BSD-3-Clause).
+## Original Java project
 
-C1 runtime, tests and public extension SDK: unofficial Bedrock port contributors, independently implemented for this project, under the BSD-3-Clause terms. Its recipe and behavior rules reference the user's provided Tavern JAR, not a claim to have authored the original game content.
+**Kaleidoscope Official Production Team / YSBB** — [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/KaleidoscopeTavern).
 
-Cookery Bedrock v1.0.6 by Loyallay: architecture and compatibility reference only. Actual BP/RP identities and read-only inspected file hashes are in `compat/cookery/cookery.lock.json`. No Cookery code, guide art or installed archive is redistributed by C1. Two provided API modules were used externally in a mock-bus test, not in production imports.
+Reference checkout: `c4ec1880bd44cf3139d3ba744ab30bb379cf1416`. The port adapts gameplay rules, recipes, models, textures and animations for Bedrock APIs. Preserved source locks and asset inventories are under `art/` and `data/`.
 
-Guide items reference Minecraft's existing book icons; no extracted Minecraft fonts or additional Mojang binaries are packaged.
+- Original code and this port's code: BSD-3-Clause, see `LICENSE-CODE`.
+- Original Tavern artwork and derivatives: CC BY-NC-SA 4.0, see `LICENSE-ASSETS` and [license text](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-This is an unofficial development build, not endorsed by the original teams, Microsoft or Mojang. Native game rendering, state reload and multiplayer acceptance are still pending.
+## Bedrock companion
+
+**Loyallay** — [Kaleidoscope Cookery (Unofficial)](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial), installed separately. Tavern uses its published Guidebook Extension API v1. This repository does not imply sponsorship or endorsement by that author and does not ship Cookery's BP/RP.
+
+**casama233 and port contributors** — Bedrock adaptation, integration and release maintenance.
+
+## Text rendering and other notices
+
+The public beta board renderer uses **Tavern Board Font**, a format conversion of GNU Unifont 15.0.06, under the SIL Open Font License 1.1 (alternatively GPL with the font embedding exception). The font retains its own terms, separate from Tavern art. See `runtime/RP/font/NOTICE-Unifont.txt` and `art/fonts/README.md`. The original font source is included for reproducibility; `tools/build_board_font.py` builds the atlases without Minecraft bitmap-provider glyphs. Existing board geometry and placement transforms are preserved. The earlier font path also retains `NOTICE-Noto-Sans-CJK.txt`.
+
+Minecraft client JARs/classes and server executables are not included in the release package.
+
+This unofficial port is not endorsed by the original development team, the Cookery Bedrock author, Mojang or Microsoft.

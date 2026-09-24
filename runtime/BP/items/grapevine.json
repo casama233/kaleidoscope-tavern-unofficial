@@ -4,10 +4,15 @@
     "description": {
       "identifier": "kaleidoscope_tavern:grapevine",
       "menu_category": {
-        "category": "items"
+        "category": "nature",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation"
       }
     },
     "components": {
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:wild_grapevine",
+        "replace_block_item": false
+      },
       "minecraft:icon": "kt_c2_grapevine",
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:grapevine.name"

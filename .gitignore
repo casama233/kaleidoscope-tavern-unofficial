@@ -8,3 +8,15 @@ node_modules/
 Tavern-Bedrock-*.zip
 Tavern-*-Gameplay-*.mcaddon
 Tavern-*-OPTIONAL.mcpack
+
+# Release output and local-only operational material
+/dist/
+/build/
+*.mcaddon
+*.mcpack
+*.tar
+*.tar.gz
+.env
+.env.*
+*.token
+session.token

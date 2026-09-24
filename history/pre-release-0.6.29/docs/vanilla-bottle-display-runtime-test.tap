@@ -1,0 +1,93 @@
+TAP version 13
+# (node:1788547) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C2] Error: INJECTED_SAVE_FAILURE
+# Subtest: sneak placement stores potion identity, consumes once, and empty-hand pickup restores it
+ok 1 - sneak placement stores potion identity, consumes once, and empty-hand pickup restores it
+  ---
+  duration_ms: 6.515717
+  type: 'test'
+  ...
+# Subtest: vanilla water potion uses the water display and creative does not consume the held item
+ok 2 - vanilla water potion uses the water display and creative does not consume the held item
+  ---
+  duration_ms: 0.674378
+  type: 'test'
+  ...
+# Subtest: Java simple potion bottle placement into water stores a waterlogged display and retrieval restores water
+ok 3 - Java simple potion bottle placement into water stores a waterlogged display and retrieval restores water
+  ---
+  duration_ms: 1.258553
+  type: 'test'
+  ...
+# Subtest: potion state save failure restores the source item and waterlogged target atomically
+ok 4 - potion state save failure restores the source item and waterlogged target atomically
+  ---
+  duration_ms: 0.851618
+  type: 'test'
+  ...
+# Subtest: vanilla honey, dragon breath, and XP bottles place and recover with their original item ids
+ok 5 - vanilla honey, dragon breath, and XP bottles place and recover with their original item ids
+  ---
+  duration_ms: 2.308295
+  type: 'test'
+  ...
+# Subtest: Java BottleBlock Molotov display is waterloggable and throwable has its use duration
+ok 6 - Java BottleBlock Molotov display is waterloggable and throwable has its use duration
+  ---
+  duration_ms: 0.307868
+  type: 'test'
+  ...
+# Subtest: ordinary projectile breaks only a Tavern display and Q6 applies its own brew rows
+ok 7 - ordinary projectile breaks only a Tavern display and Q6 applies its own brew rows
+  ---
+  duration_ms: 3.260325
+  type: 'test'
+  ...
+# Subtest: projectile owned by a spectator cannot edit even a listed Tavern bottle block
+ok 8 - projectile owned by a spectator cannot edit even a listed Tavern bottle block
+  ---
+  duration_ms: 0.303675
+  type: 'test'
+  ...
+# Subtest: ordinary projectile adapter leaves vanilla and foreign blocks completely untouched
+ok 9 - ordinary projectile adapter leaves vanilla and foreign blocks completely untouched
+  ---
+  duration_ms: 0.439513
+  type: 'test'
+  ...
+# Subtest: ownerless dispenser projectile may break glass but adventure owners may not
+ok 10 - ownerless dispenser projectile may break glass but adventure owners may not
+  ---
+  duration_ms: 0.628502
+  type: 'test'
+  ...
+# Subtest: mob-owned projectile obeys the vanilla mobGriefing gate
+ok 11 - mob-owned projectile obeys the vanilla mobGriefing gate
+  ---
+  duration_ms: 0.269335
+  type: 'test'
+  ...
+# Subtest: vanilla potion projectile break clears stored identity and supports native non-enumerable Block getters
+ok 12 - vanilla potion projectile break clears stored identity and supports native non-enumerable Block getters
+  ---
+  duration_ms: 0.334645
+  type: 'test'
+  ...
+# Subtest: cup placement and projectile shatter preserve a water layer and discard its cocktail state
+ok 13 - cup placement and projectile shatter preserve a water layer and discard its cocktail state
+  ---
+  duration_ms: 1.14576
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 367.299241

@@ -2,11 +2,11 @@ import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,ItemStack,system,world} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
@@ -41,6 +41,32 @@ export function applyCustomEffect(p,row){
  }
  const state=addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier);write(p,state);customEffectDiagnostics.applied++;return true;
 }
+const RIPE_CROP_AGE=Object.freeze({
+ 'minecraft:wheat':7,'minecraft:carrots':7,'minecraft:potatoes':7,'minecraft:beetroot':3,
+ 'minecraft:nether_wart':3,'minecraft:sweet_berry_bush':3,
+ ["kaleidoscope_tavern:grape_crop"]:5,["kaleidoscope_tavern:ice_grape_crop"]:5,["kaleidoscope_tavern:gold_grape_crop"]:5
+});
+function stealthPlant(block){
+ if(!block)return false;
+ try{if(block.hasTag?.('kaleidoscope_tavern:grass_stealth_plants'))return true;}catch{}
+ const max=RIPE_CROP_AGE[block.typeId];if(max===undefined)return false;
+ try{return Number(block.permutation.getState('kaleidoscope_tavern:age')??block.permutation.getState('growth')??block.permutation.getState('age'))>=max;}catch{return false;}
+}
+export function pulseGrassStealth(p){
+ try{
+  if(p?.typeId!=='minecraft:player'||p.isSneaking!==true||!activeStatus(statusNow(p),'kaleidoscope_tavern:grass_stealth'))return false;
+  const pos={x:Math.floor(p.location.x),y:Math.floor(p.location.y),z:Math.floor(p.location.z)},feet=p.dimension.getBlock(pos),head=p.dimension.getBlock({...pos,y:pos.y+1});
+  if(!grassStealthEligible({sneaking:p.isSneaking,feetEligible:stealthPlant(feet),headEligible:stealthPlant(head)}))return false;
+  const exhaustion=p.getComponent?.('minecraft:player.exhaustion');
+  if(exhaustion)exhaustion.setCurrentValue(Math.min(exhaustion.effectiveMax,exhaustion.currentValue+.1));
+  // Native invisibility reduces new mob acquisition while the player is concealed.
+  // Bedrock Script API exposes no mob-target getter/setter to clear existing targets as Java does.
+  p.addEffect('invisibility',12,{amplifier:0,showParticles:false});
+  customEffectDiagnostics.grassStealthPulses++;customEffectDiagnostics.grassStealthEligible++;return true;
+ }catch(e){error(e);return false;}
+}
+export function hasExtendedReach(p){try{return !!activeStatus(statusNow(p),'kaleidoscope_tavern:long_reach');}catch{return false;}}
+export function itemUseRayDistance(p){return extendedReachDistance(hasExtendedReach(p));}
 export function pulseVision(p,amplifier){
  const radius=visionRadius(amplifier),source=p.getAABB(),min={x:source.center.x-source.extent.x-radius,y:source.center.y-source.extent.y-radius,z:source.center.z-source.extent.z-radius},volume={x:2*(source.extent.x+radius),y:2*(source.extent.y+radius),z:2*(source.extent.z+radius)};
  let targets=0,newGlow=false;
@@ -168,6 +194,8 @@ export function tickCustomEffects(){
   const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision'),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;
   if(previousVision){const afterTicks=currentVision?.amplifier===previousVision.amplifier?currentVision.ticks:0;if(countdownPulseCrossed(previousVision.ticks,afterTicks,50))pulseVision(p,previousVision.amplifier);}
   if(previousArdent&&!currentArdent){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
+  const previousGrass=activeStatus(before,'kaleidoscope_tavern:grass_stealth'),currentGrass=activeStatus(state,'kaleidoscope_tavern:grass_stealth');
+  if(previousGrass){const afterTicks=currentGrass?.amplifier===previousGrass.amplifier?currentGrass.ticks:0;if(countdownPulseCrossed(previousGrass.ticks,afterTicks,10))pulseGrassStealth(p);}
   if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}
   if(!activeStatus(nextState,'kaleidoscope_tavern:high_heels'))heelsSteps.delete(p.id);
   if(!nextState.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}

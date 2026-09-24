@@ -1,8 +1,9 @@
 import {check} from './util.js';
 import {BOTTLES} from '../data/bottles.js';
 export function parseBottle(id){
+ if(id==='kaleidoscope_tavern:watermelon_juice')return {base:'watermelon_juice',quality:1,id};
  const m=/^kaleidoscope_tavern:([a-z_]+)_q([1-6])$/.exec(id??'');
- return m&&BOTTLES[m[1]]?{base:m[1],quality:Number(m[2]),id}:undefined;
+ return m&&BOTTLES[m[1]]?.qualities===6?{base:m[1],quality:Number(m[2]),id}:undefined;
 }
 export function validateDisplay(s){
  check(s&&s.schema===1,'BOTTLE_SCHEMA');check(Number.isInteger(s.revision)&&s.revision>=0,'CORRUPT_BOTTLES');

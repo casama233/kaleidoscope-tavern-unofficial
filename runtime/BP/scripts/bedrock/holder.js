@@ -1,3 +1,4 @@
+import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
 import {NS,FACING,facingForYaw,facingVector} from '../core/furniture.js';
@@ -18,7 +19,7 @@ export function syncHolderVisual(block,state=store.load(holderKey(block.dimensio
  all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];for(const x of all.slice(1))discard(x,'duplicates');
  const facing=block.permutation.getState(FACING)??0,pose=holderVisualPose(facing),at=position(block,facing);
  if(!e){e=block.dimension.spawnEntity(HELPER,at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,holderKey(block.dimension.id,block.location));e.addTag('kaleidoscope_tavern:visual_helper');visuals.set(e.id,e);holderDiagnostics.spawned++;}
- e.setProperty(HOLDER_KIND,state.kind);e.setRotation(pose.rotation);e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);return e;
+ e.setProperty(HOLDER_KIND,state.kind);e.setRotation({x:0,y:pose.rotation.y});e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);return e;
 }
 export function syncHolder(block){
  if(block?.typeId!==HOLDER_BLOCK)return false;const k=holderKey(block.dimension.id,block.location),state=store.load(k),wanted=state?.kind??0,current=kind(block);
@@ -60,7 +61,7 @@ export function popHolderRedstone(block,{selectionRng=Math.random,motionRng=Math
   if(out.status==='LAUNCHED')holderDiagnostics.redstonePops++;else holderDiagnostics.redstoneNoops++;return out;
  }catch(e){holderDiagnostics.redstoneErrors++;throw e;}
 }
-export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popHolderRedstone(b),x=>{holderDiagnostics.redstoneErrors++;error(x);})});}
+export function registerHolderComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':holder',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:e=>{try{syncHolder(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popHolderRedstone(b),x=>{holderDiagnostics.redstoneErrors++;error(x);})});}
 export function installHolderEvents(){
  installStatefulStorageRoutes({
   routeId:'holder',

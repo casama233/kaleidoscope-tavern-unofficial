@@ -1,0 +1,275 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:wither_rose_sandwich_board",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
+      },
+      "states": {
+        "kaleidoscope_tavern:half": [
+          0,
+          1
+        ],
+        "kaleidoscope_tavern:rotation": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "kaleidoscope_tavern:waterlogged": [
+          false,
+          true
+        ]
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_java.sandwich_wither_rose_0"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a17_sandwich_board_wither_rose_assembled",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -6,
+          0,
+          -6
+        ],
+        "size": [
+          12,
+          16,
+          12
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -6,
+          0,
+          -6
+        ],
+        "size": [
+          12,
+          16,
+          12
+        ]
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          20,
+          20
+        ],
+        "looping": true
+      },
+      "kaleidoscope_tavern:writing_board": {
+        "kind": "sandwich"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.8
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 0.8
+      },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": false
+          }
+        ]
+      }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 0",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_0"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 1",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_1"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 2",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_2"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 3",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_3"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 4",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_4"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 5",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_5"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 6",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_6"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 7",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_7"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 8",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_8"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 9",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_9"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 10",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_10"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 11",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_11"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 12",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_12"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 13",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_13"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 14",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_14"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 0 && q.block_state('kaleidoscope_tavern:rotation') == 15",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_java.sandwich_wither_rose_15"
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:half') == 1",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.board_blank"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_runtime_board_blank",
+              "render_method": "alpha_test"
+            }
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -6,
+              0,
+              -6
+            ],
+            "size": [
+              12,
+              6,
+              12
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -6,
+              0,
+              -6
+            ],
+            "size": [
+              12,
+              6,
+              12
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

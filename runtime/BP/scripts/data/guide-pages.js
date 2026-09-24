@@ -1,27 +1,43 @@
-const page=(name,tw,en,body,enBody)=>({id:'kaleidoscope_tavern:'+name,title:{zh_TW:tw,zh_CN:tw,en_US:en},body:{zh_TW:body,zh_CN:body,en_US:enBody},source:'kaleidoscope_tavern',recipeIds:[]});
+const page=(name,cn,tw,en,body)=>({id:'kaleidoscope_tavern:'+name,title:{zh_CN:cn,zh_TW:tw,en_US:en},body,source:'kaleidoscope_tavern',recipeIds:[]});
 export const GUIDE_PAGES=[
- page('welcome','酒館指南：從這裡開始','Welcome to Tavern',
- '這是獨立酒館指南，不修改廚房的指南、已學配方、語言或書籤。\nC2 已接入種植、23種釀造配方、6種壓榨配方、24類酒瓶擺放與原版原生酒效；尚未在Minecraft實機驗收。Java專屬效果不會被猜測buff取代。\n普通書＋空酒瓶→酒館指南；指南＋紙→酒館配方書。搜尋酒名可找到原作六級酒效表，未移植效果會明確標記。',
- 'Independent Tavern guide; Cookery knowledge, bookmarks and language stay unchanged. C2 connects cultivation, 23 barrel and 6 pressing recipes, 24 bottle display families and native effects. Minecraft engine acceptance is pending. Custom Java effects are never substituted. Book + Tavern empty bottle makes the guide; guide + paper makes the recipe book. Search a drink name for its six source quality effect rows.'),
- page('first_brew','第一桶酒','First batch',
- '1. 普通藤蔓＋甜莓→葡萄藤（移植版新增取得配方，不是Java原配方）；三個葡萄藤垂直合成8個藤架。\n2. 在泥土上的藤架種藤，延伸架子，等藤長滿、下方結果；成熟後用剪刀採收。\n3. 水果投入壓榨桶，跳踩8次得1000mB，原版空桶取汁。\n4. 3×3×3酒桶灌入4桶同類液體；Wine不加原料，其他配方在滿桶後投料。\n5. 潛行空手點酒桶關蓋。正常載入時每97tick檢查。\n6. 相鄰酒嘴手持空瓶取酒；Q1也可以飲用，但可能有負面效果。\n7. 潛行點實心方塊頂部可擺酒瓶，空手點瓶取回。\n原生返瓶與真實使用事件仍需遊戲驗收；開發套件為 /function kt_c2_kit。',
- 'Craft vine + sweet berries into grapevine (port-only acquisition recipe), then three grapevines vertically into eight trellises. Plant on a trellis over dirt; let it spread and fruit, then harvest ripe grapes with shears. Stomp fruit eight times for 1000 mB; fill a barrel with four equal buckets. Plain Wine needs no extra ingredient. Sneak-empty-hand closes the lid; checks run every 97 loaded ticks. Extract with a bottle at an adjacent tap. Q1 can be drunk but may cause negative effects. Sneak-use a solid top face to place bottles; empty hand retrieves one. Native return-container and use events still need game tests. /function kt_c2_kit gives test supplies.'),
- page('safety','保存、拆除與背包安全','Storage and inventory safety',
- '機器與瓶堆保存於酒館專屬世界動態屬性，按維度／座標分開；植物階段存在方塊狀態。附屬配方每次重載重新登記。\n採收、取瓶、空桶交換都先檢查背包；放不下就不扣料、不改數量、不損耗剪刀。普通原料的自訂名稱／附魔／附加資料會拒收；工具本身資料保留。\n只拆空機器；瓶堆破壞則返回每一瓶原品質。植物、瓶堆及機器目前採防爆／不可推動保全策略，不是原作爆炸平衡。\n管理員 /fill、/setblock 和外部替換不在交易範圍。酒瓶放置不再使用移植版自訂的完整方塊支撐白名單；位置依原作 BlockItem 點擊面邏輯決定。正常例外有回退，但不保證引擎崩潰時跨存檔／背包原子性。',
- 'Machines and bottle stacks use separate Tavern world-property keys; plants keep state in block permutations. Harvest, take and bucket exchange preflight inventory space. Failure changes no items, quantities or shear durability. Metadata-bearing raw ingredients are rejected; tool metadata is preserved. Only empty machines dismantle. Breaking bottle stacks returns each original quality. Crops, displays and machines are currently explosion/piston protected, an explicit port safety policy. Admin commands bypass transactions. Removed bottle supports leave recoverable floating displays for now. Normal exceptions have rollback; crash-level atomicity is not claimed.'),
- page('quality','品質與產量','Quality and yield',
- '品質1可飲用，不是禁止飲用等級。C1把它寫成不可飲是錯誤，C2已修正；請查看各酒效表的負面效果。\n每97tick檢查一次；目前品質×2400tick後升級，最高6。只在區塊載入時前進，離線不補算。四個邏輯原料槽，每槽16；無原料配方產16瓶，有原料取最少槽的數量。無效滿桶產16瓶醋。\n效果資料的duration是秒，程式×20轉tick；amplifier從0開始。每個效果分開抽選。原生效果已接，微醺等Java專屬效果仍明確待移植。',
- 'Q1 is drinkable; C1 incorrectly disabled it. See each drink effect page for negative effects. Loaded barrels check every 97 ticks; current quality x 2400 ticks per next level, capped at six, without offline catch-up. Four slots hold up to16 each; zero-ingredient recipes yield16, otherwise the smallest slot controls yield. An unmatched full batch yields vinegar16. Source duration is seconds, multiplied by20; amplifier is zero-based. Each effect rolls independently. Native effects are connected; tipsy and other Java-specific effects remain explicit omissions.'),
- page('extensions','讓酒館接受附屬','Add-ons for Tavern',
- '酒館保留獨立v1 Script Event協議，新增功能不改API版本。附屬先詢問能力，begin/chunk/commit傳入完整配方／頁面，驗證後才生效。同來源替換而不重複，核心優先。\n附屬頁仍只加入酒館指南，可連結內建配方。壓榨／酒桶仍支援附屬食材，Cookery真實米ID可引用。\nC2擺瓶及原生酒效僅覆蓋酒館既有24族；附屬自行註冊的任意新飲品不會自動擁有模型、效果或多瓶展示。API v1沒有新增液體、調酒機、效果回呼或任意程式注入能力。',
- 'The independent v1 Script Event protocol is unchanged. Ping capabilities; begin/chunk/commit sends an atomic recipe/page bundle. Re-registration replaces, core wins. Pages remain in Tavern only, and can reference core recipes. Cookery ingredients still work through real registered IDs. C2 bottle placement and native effect tables cover24 core families only; arbitrary extension drinks do not automatically gain geometry, effects or displays. v1 does not advertise new fluids, shakers, effect callbacks or executable code injection.'),
- page('limitations','本版未完成項目','Current limitations',
- '尚未完成：微醺等Java專屬酒效、雞尾酒／雪克杯玩法、野生葡萄世界生成、氣候加速、水浸藤架、家具乘坐／連接、任意黑板文字、下方自動接酒容器、完整碰撞／手持動畫、手機／Realm／BDS驗收。\n三種葡萄自然生长目前每次隨機tick以0.25機率嘗試；冰／金的適溫0.8加速尚未映射，沒有用時間或亮度胡亂替代。十字藤架碰撞暫用包圍盒，不是多細桿的精確聯集。\n水量可存但水面專用渲染未接；六種果汁已有液面。特殊效果不生效會記入診斷，不假装已完成。',
- 'Pending: Java custom effects, cocktails/shaker gameplay, wild grape worldgen, biome-temperature acceleration, waterlogging, furniture, arbitrary world text, containers below taps, precise collisions, complete held animation and game/mobile/Realms/BDS acceptance. All three species currently use0.25 per random tick. The source favourable-temperature0.8 boost is not adapted or replaced with guessed light/time rules. Cross-frame collisions use a bounding box. Water amount saves but its special surface rendering is not connected. Unsupported effects are recorded rather than fabricated.'),
- page('cultivation','葡萄種植、藤架與採收','Cultivation, trellises and harvest',
- '起步配方：原版藤蔓＋甜莓→1葡萄藤（移植版新增）；3葡萄藤豎列→8藤架（原作配方）。\n葡萄藤對裸藤架使用：下方泥土類→普通葡萄；冰／雪塊→冰葡萄；地獄石／岩漿塊→金葡萄。青提不是第四種藤。\n藤階段0–3，單立柱逐級生長；橫架較快滿齡。成熟後先上，再東、西、南、北找未上蠟裸架；無可延伸架才在下方空氣長果實。上方新藤age0、側邊新藤age3。果實age0–5，每次長1–2級。\n骨粉可推進，無空間／已成熟果實不消耗。蜂巢上蠟阻止蔓延，斧頭刮蠟。剪刀剪藤退回裸架和葡萄藤；剪成熟果實產3個同種葡萄，另30%得1–2青提。每次剪切消耗1耐久，保留工具名稱、附魔並處理耐久附魔。\n尚無自然野生生成、Java氣候加速與水浸支援。',
- 'Starter: vanilla vine + sweet berries ->1 grapevine (port addition); three grapevines vertically ->8 trellises (source recipe). Plant on a bare frame: dirt-type soil gives normal, ice/snow blocks gives ice grapes, netherrack/magma gives gold. Green grapes are harvest by-products, not a fourth vine. Vine ages0–3, fruit0–5. Mature vines spread up,E,W,S,N to unwaxed frames before producing a fruit below. New upward vines start0, sideways3; fruit advances1–2 stages. Bone meal does not consume when blocked. Honeycomb waxes bare frames; axes unwax. Shears prune vines or harvest ripe fruit:3 primary fruit plus30% chance of1–2 green grapes. Tool wear preserves metadata and observes Unbreaking. No wildgen, climate boost or waterlogging yet.'),
- page('bottle_display','擺放酒瓶與逐瓶品質','Bottle displays and individual quality',
- '手持品質酒瓶時，同種已擺酒會先疊放；否則潛行使用才依點擊面擺放，非潛行維持飲用。點擊同一瓶堆可加入同種酒；不必相同品質。空手點瓶堆取回最後放入的一瓶，破壞則取回整堆。\n白蘭地、佳麗釀、落日餘暉最多3瓶，其餘本版24種最多4瓶；形狀均使用原作各數量模型。每瓶以自己的q1–q6 ID保存，不平均品質、不覆蓋第一瓶。\n背包滿取消領取；同tick多人領取只結算一次；區塊重載時瓶堆內容保存在世界資料。Creative擺放也消耗真實一瓶，取回返原瓶，避免白拿增殖。\n暫支援明確清單中的石頭、泥土、完整木材／羊毛等方塊，或附有kaleidoscope_tavern:bottle_support標籤的自訂支撐。不把所有外部桌面視為支援。下方方塊被移除不自動掉瓶，原位保留方便取回；外部指令替換造成狀態不符時拒絕操作並保留資料。',
- 'Sneak-use with a drink to place it on the clicked face; same-drink displays stack first. Use another bottle of the same drink on its display to add; quality may differ. Empty hand returns the newest bottle; breaking returns all original qualities. Brandy, Carignan and Sunset Glow cap at3; other current families4. Each count uses its own source geometry. Quality IDs persist individually, never averaged. Full inventory cancels; simultaneous requests settle once. Creative placement consumes a real bottle as an anti-duplication rule. Placement follows the source BlockItem clicked-face context instead of a port-only full-block support allowlist. Removed support leaves a recoverable display; external command mismatch blocks exchange and preserves stored data.')
+ page('welcome','酒馆指南','酒館指南','Tavern Guide',{
+  zh_CN:'按目录查阅种植采收、压榨果汁、酒桶配方、鸡尾酒、品质效果、收纳和装饰。酒桶酒、鸡尾酒与品质效果都按名称分别列出。',
+  zh_TW:'依目錄查閱種植採收、壓榨果汁、酒桶配方、雞尾酒、品質效果、收納與裝飾。酒桶酒、雞尾酒與品質效果都依名稱分別列出。',
+  en_US:'Browse growing and harvest, juice pressing, barrel recipes, cocktails, quality effects, storage and decor. Barrel drinks, cocktails and their quality effects each have separate named entries.'
+ }),
+ page('first_brew','從水果到成酒','從水果到成酒','From fruit to drink',{
+  zh_CN:'1. 将藤蔓与甜浆果合成葡萄藤，再把三株葡萄藤竖向合成八个藤架。\n2. 在藤架上种葡萄藤；藤架正下方的方块决定果实种类：土壤类长普通葡萄，冰雪类长冰葡萄，下界岩或岩浆块长金葡萄。成熟后用剪刀采收。\n3. 将水果放入果盆，跳上去踩踏。同种水果成功踩踏八次可得到一桶果汁；空桶可以取出果汁。\n4. 完整酒桶装满四桶同种果汁后，按配方加入材料。潜行并空手合上桶盖开始熟成。\n5. 用空瓶对酒桶旁的酒嘴装瓶。品质一也可以饮用，但请先查看对应酒款的效果。',
+  zh_TW:'1. 藤蔓與甜莓可合成葡萄藤，再把三株葡萄藤豎向合成八個藤架。\n2. 在藤架上種葡萄藤；藤架正下方的方塊決定果實種類：土壤類長普通葡萄，冰雪類長冰葡萄，地獄石或岩漿塊長金葡萄。成熟後用剪刀採收。\n3. 水果放入果盆後，玩家跳上去踩踏。同種水果成功踩踏八次可得到一桶果汁；空桶可取出果汁。\n4. 完整酒桶裝滿四桶同種果汁後，按配方加入材料。潛行並空手合上桶蓋開始熟成。\n5. 用空瓶對酒桶旁的酒嘴裝瓶。品質一也能飲用，飲用前可先查看該酒款的效果。',
+  en_US:'1. Craft grapevines from a vanilla vine and sweet berries; arrange three grapevines vertically to make eight trellises.\n2. Plant grapevines on the trellis. The block directly below the trellis determines the fruit: soil grows regular grapes, ice or snow grows ice grapes, and Nether stone or magma grows gold grapes. Shear ripe fruit.\n3. Put fruit in a fruit basket and jump on it. Eight successful presses of one fruit make a bucket of juice; collect it with an empty bucket.\n4. Fill a complete barrel with four buckets of one juice, add the recipe ingredients, then sneak and use an empty hand to close the lid and begin aging.\n5. Fill an empty bottle at a tap beside the barrel. Quality 1 is drinkable; check the drink’s effect entry first.'
+ }),
+ page('quality','酒桶熟成與產量','酒桶熟成與產量','Aging and yield',{
+  zh_CN:'每升一个品质约需熟成两分钟，最高为品质六；酒桶只有在所在区块载入时才会熟成。没有配料的配方产出十六瓶；有配料时按最少的一种材料数量决定产量，每种材料最多存放十六份。装满酒桶却不符合配方时会得到醋。每瓶都保留自己的品质。',
+  zh_TW:'每升一個品質約需熟成兩分鐘，最高為品質六；酒桶只會在所在區塊載入時熟成。無配料的配方產出十六瓶；有配料時依數量最少的材料決定產量，每種材料最多存放十六份。裝滿酒桶卻不符合配方時會得到醋。每瓶酒都保留自己的品質。',
+  en_US:'Each quality step takes about two minutes of game time, up to quality 6. A barrel ages while its chunk is loaded. Ingredient-free recipes yield 16 bottles; recipes with ingredients yield the smallest ingredient count, with up to 16 of each ingredient. A full barrel with no matching recipe makes vinegar. Every bottle keeps its own quality.'
+ }),
+ page('mixology','雪克杯與雞尾酒','雪克杯與雞尾酒','Shaker and cocktails',{
+  zh_CN:'将雪克杯放在方块上，把配方所需的三种材料逐一加入空槽；酒类基酒需要达到品质四。用空手拿起装好材料的雪克杯，按住使用开始摇酒，再依提示松手。命中配方时机才会得到对应鸡尾酒，其他时机会得到特调或神秘鸡尾酒。将空杯放在方块上，再手持雪克杯对空杯倒酒。潜行使用可取消摇酒。',
+  zh_TW:'將雪克杯放在方塊上，把配方所需的三種材料逐一加入空槽；酒類基酒須達品質四。用空手拿起裝好材料的雪克杯，按住使用開始搖酒，再依提示鬆手。命中配方時機才會調出對應雞尾酒，其他時機會調成特調或神秘雞尾酒。將空杯放在方塊上，再手持雪克杯對空杯倒酒。潛行使用可取消搖酒。',
+  en_US:'Place the shaker on a block and add the three recipe ingredients, one per slot. A Tavern drink used as a base must be quality 4 or better. Use an empty hand to pick up the loaded shaker, hold use to shake, and release when prompted. Only the recipe timing makes its named cocktail; other timings make a signature or mystery cocktail. Place an empty glass and use the held shaker on it to pour. Sneak-use cancels a shake.'
+ }),
+ page('storage','收納酒瓶與家具','收納酒瓶與家具','Bottle storage and furniture',{
+  zh_CN:'酒瓶架和酒柜可以存放酒瓶。用空手从单个展示取回最近放入的瓶子；破坏整组展示会取回全部酒瓶和各自品质。果汁桶、酒桶只有内容物清空后才能拆除。放置家具后可空手互动取回；椅凳、沙发可供玩家乘坐。',
+  zh_TW:'酒瓶架與酒櫃可收納酒瓶。用空手從單個展示取回最近放入的酒瓶；破壞整組展示會取回全部酒瓶及各自品質。果汁桶、酒桶須清空內容物後才能拆除。家具放置後可空手互動取回；椅凳與沙發可供玩家乘坐。',
+  en_US:'Bottle racks and cabinets store bottles. Use an empty hand to retrieve the newest bottle from a display; breaking the display returns every bottle at its original quality. Empty a juice tub or barrel before dismantling it. Furniture can be recovered by interacting with an empty hand; stools and sofas provide seats.'
+ }),
+ page('cultivation','藤架與葡萄採收','藤架與葡萄採收','Trellises and grape harvest',{
+  zh_CN:'葡萄藤种在藤架上，藤架正下方的方块决定果实种类：土壤类生长普通葡萄，冰或雪方块生长冰葡萄，下界岩或岩浆块生长金葡萄。葡萄成熟后用剪刀采收，可得到三颗对应葡萄；有机会额外得到青提。骨粉可帮助藤蔓生长。蜂巢可为藤架上蜡，斧头可以刮除蜡层。森林中会自然生成野生葡萄藤；藤架可在浸水状态下种植并生长。',
+  zh_TW:'葡萄藤種在藤架上，藤架下方的地面決定果實種類：泥土類生長普通葡萄，冰或雪方塊生長冰葡萄，地獄石或岩漿塊生長金葡萄。葡萄成熟後用剪刀採收，可得到三顆對應葡萄；也有機會額外取得青提。骨粉可幫助藤蔓生長。蜂巢可為藤架上蠟，斧頭可以刮除蠟層。森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。',
+  en_US:'Plant grapevines on trellises. The ground below determines the fruit: dirt-type soil grows regular grapes, ice or snow grows ice grapes, and Nether stone or magma grows gold grapes. Shear ripe fruit to collect three matching grapes, with a chance of extra green grapes. Bone meal helps growth. Honeycomb waxes a trellis; an axe removes the wax. Wild grapevines can generate naturally in forests; trellises can be planted and grow while waterlogged.'
+ }),
+ page('bottle_display','酒瓶展示','酒瓶展示','Bottle displays',{
+  zh_CN:'潜行并手持酒瓶对方块表面使用，可以摆放酒瓶；同款酒瓶会优先叠放在现有展示上。手持同款酒再对展示使用，可继续添加，即使品质不同也会分别保留。空手互动取回最近放入的一瓶；破坏展示可取回整组。三款酒的展示最多放三瓶，其余酒款最多四瓶。',
+  zh_TW:'潛行並手持酒瓶對方塊表面使用，可擺放酒瓶；同款酒瓶會優先疊放在現有展示上。手持同款酒對展示使用，可繼續添加，即使品質不同也會分別保留。空手互動取回最近放入的一瓶；破壞展示可取回整組。三款酒的展示最多放三瓶，其餘酒款最多四瓶。',
+  en_US:'Sneak-use a drink on a block face to place it; a matching drink stacks on an existing display first. Use another bottle of the same drink on the display to add it, even at a different quality. Empty-hand interaction retrieves the newest bottle; breaking the display returns the full stack. Three drink types hold up to three bottles; the others hold up to four.'
+ }),
+ page('availability','目前可用內容','目前可用內容','Available features',{
+  zh_CN:'本指南列出的酒桶配方、果汁压榨、鸡尾酒、酒瓶收纳、座椅、灯饰、挂画、香薰和文字看板均可在酒馆中使用。森林会自然生成野生葡萄藤，葡萄藤也可在浸水藤架上生长。',
+  zh_TW:'本指南列出的酒桶配方、果汁壓榨、雞尾酒、酒瓶收納、座椅、燈飾、掛畫、香薰與文字看板皆可在酒館中使用。森林會自然生成野生葡萄藤，葡萄藤也可在浸水藤架上生長。',
+  en_US:'Barrel recipes, juice pressing, cocktails, bottle storage, seats, lights, paintings, incense and writing boards listed in this guide are available in the Tavern. Wild grapevines can generate in forests and grow on waterlogged trellises.'
+ })
 ];

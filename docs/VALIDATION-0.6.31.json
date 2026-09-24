@@ -1,0 +1,21 @@
+{
+  "version": "0.6.31-rc.1",
+  "static": {
+    "json_files": 1483,
+    "geometry_identifiers": 928,
+    "custom_entity_material_entrypoint": "materials/entity.material",
+    "registered_custom_material": "kt_signature_animated",
+    "uv_animation_enabled": true,
+    "hud_animation_references_resolved": true,
+    "interaction_simulations": false
+  },
+  "load": {
+    "engine": "1.26.51.1",
+    "cookery": "1.0.6",
+    "server_started": true,
+    "script_initialized": true,
+    "error_lines": 0
+  },
+  "android_visual_acceptance": "pending; BDS does not load the client renderer",
+  "archive_sha256": "2db732149c9288fe233006104231f3ebf29caf3bd8e9f8960d00d57cfaea3d15"
+}

@@ -17,12 +17,20 @@
         "item": "kaleidoscope_tavern:grapevine"
       },
       "T": {
-        "item": "minecraft:oak_trapdoor"
+        "item": "minecraft:trapdoor"
       }
     },
     "result": {
       "item": "kaleidoscope_tavern:cellar_cabinet",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "item": "kaleidoscope_tavern:grapevine"
+      },
+      {
+        "item": "minecraft:trapdoor"
+      }
+    ]
   }
 }

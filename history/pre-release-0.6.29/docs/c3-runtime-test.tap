@@ -1,0 +1,483 @@
+TAP version 13
+# (node:1788378) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/3740_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/3740_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"OWNED_DUPLICATE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6180_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern C2] TavernError: STALE_HAND
+# [Tavern C2] TavernError: DIMENSION_CHANGED
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6460_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6460_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"STATE_CONFLICT"}
+# [Tavern C2] TavernError: STATE_CONFLICT
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6520_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern C2] TavernError: BLOCK_CHANGED
+# [Tavern C2] TavernError: BLOCK_CHANGED
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6640_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"FOREIGN_CANCEL"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/6640_64_0","itemId":"kaleidoscope_tavern:wine_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# Subtest: Signature Cocktail placement follows Java sneak-to-place / normal-use-to-drink behavior and documents it
+ok 1 - Signature Cocktail placement follows Java sneak-to-place / normal-use-to-drink behavior and documents it
+  ---
+  duration_ms: 4.496383
+  type: 'test'
+  ...
+# Subtest: entrypoint advertises42 machine recipes and dedicated mixology components
+ok 2 - entrypoint advertises42 machine recipes and dedicated mixology components
+  ---
+  duration_ms: 0.431
+  type: 'test'
+  ...
+# Subtest: shared break router makes an empty placed shaker a Survival drop with lantern/metal feedback
+ok 3 - shared break router makes an empty placed shaker a Survival drop with lantern/metal feedback
+  ---
+  duration_ms: 7.383077
+  type: 'test'
+  ...
+# Subtest: shared break router preserves placed glassware item identity and glass feedback
+ok 4 - shared break router preserves placed glassware item identity and glass feedback
+  ---
+  duration_ms: 2.745164
+  type: 'test'
+  ...
+# Subtest: shaker placement roundtrip consumes and returns the original one machine
+ok 5 - shaker placement roundtrip consumes and returns the original one machine
+  ---
+  duration_ms: 1.71248
+  type: 'test'
+  ...
+# Subtest: Java ShakerBlock has no custom floor-support gate; occupied unloaded and distant placement still fail losslessly
+ok 6 - Java ShakerBlock has no custom floor-support gate; occupied unloaded and distant placement still fail losslessly
+  ---
+  duration_ms: 1.833006
+  type: 'test'
+  ...
+# Subtest: place with store exception restores air and original shaker
+ok 7 - place with store exception restores air and original shaker
+  ---
+  duration_ms: 0.888508
+  type: 'test'
+  ...
+# Subtest: one from a16 bottle stack is poured and exactly one empty bottle is returned
+ok 8 - one from a16 bottle stack is poured and exactly one empty bottle is returned
+  ---
+  duration_ms: 2.75894
+  type: 'test'
+  ...
+# Subtest: all69 supported ingredient qualities run through actual input adapter
+ok 9 - all69 supported ingredient qualities run through actual input adapter
+  ---
+  duration_ms: 31.351811
+  type: 'test'
+  ...
+# Subtest: Q1-Q3 and potion inputs fail without a refund or taking input
+ok 10 - Q1-Q3 and potion inputs fail without a refund or taking input
+  ---
+  duration_ms: 2.35529
+  type: 'test'
+  ...
+# Subtest: named input or additional item data is not silently erased
+ok 11 - named input or additional item data is not silently erased
+  ---
+  duration_ms: 1.428756
+  type: 'test'
+  ...
+# Subtest: full bag rejects poured stacked bottle when no space to return container
+ok 12 - full bag rejects poured stacked bottle when no space to return container
+  ---
+  duration_ms: 1.307836
+  type: 'test'
+  ...
+# Subtest: last bottle can exchange in a full bag using its newly freed slot
+ok 13 - last bottle can exchange in a full bag using its newly freed slot
+  ---
+  duration_ms: 1.225884
+  type: 'test'
+  ...
+# Subtest: input save or native inventory write failure rolls back material and container
+ok 14 - input save or native inventory write failure rolls back material and container
+  ---
+  duration_ms: 1.404193
+  type: 'test'
+  ...
+# Subtest: fourth material never overwrites a full three-slot shaker
+ok 15 - fourth material never overwrites a full three-slot shaker
+  ---
+  duration_ms: 2.022015
+  type: 'test'
+  ...
+# Subtest: recover poured ingredient requires and consumes the earlier returned container
+ok 16 - recover poured ingredient requires and consumes the earlier returned container
+  ---
+  duration_ms: 1.403473
+  type: 'test'
+  ...
+# Subtest: recover without returned container fails and cannot duplicate a filled bottle
+ok 17 - recover without returned container fails and cannot duplicate a filled bottle
+  ---
+  duration_ms: 0.965522
+  type: 'test'
+  ...
+# Subtest: breaking a loaded shaker returns the portable item with its exact contents
+ok 18 - breaking a loaded shaker returns the portable item with its exact contents
+  ---
+  duration_ms: 1.547476
+  type: 'test'
+  ...
+# Subtest: breaking one of two adjacent shakers leaves the neighbour and both stores intact
+ok 19 - breaking one of two adjacent shakers leaves the neighbour and both stores intact
+  ---
+  duration_ms: 3.230559
+  type: 'test'
+  ...
+# Subtest: touch-only non-first use pours once and duplicate callback cannot consume twice
+ok 20 - touch-only non-first use pours once and duplicate callback cannot consume twice
+  ---
+  duration_ms: 3.124107
+  type: 'test'
+  ...
+# Subtest: shake requires exactly three materials and rejects interleaved mutation
+ok 21 - shake requires exactly three materials and rejects interleaved mutation
+  ---
+  duration_ms: 2.225845
+  type: 'test'
+  ...
+# Subtest: each of12 recipes can be shaken and served using actual adapters
+ok 22 - each of12 recipes can be shaken and served using actual adapters
+  ---
+  duration_ms: 19.967458
+  type: 'test'
+  ...
+# Subtest: actual adapter covers original timing edges and preserves abort materials
+ok 23 - actual adapter covers original timing edges and preserves abort materials
+  ---
+  duration_ms: 11.501372
+  type: 'test'
+  ...
+# Subtest: only owner can stop and duplicate same-tick stop does not finish
+ok 24 - only owner can stop and duplicate same-tick stop does not finish
+  ---
+  duration_ms: 1.689168
+  type: 'test'
+  ...
+# Subtest: auto stop at111 ticks makes Mystery once and retains ingredients until poured
+ok 25 - auto stop at111 ticks makes Mystery once and retains ingredients until poured
+  ---
+  duration_ms: 14.417376
+  type: 'test'
+  ...
+# Subtest: drinking Mystery gives a visible 180 second Slightly Tipsy countdown
+ok 26 - drinking Mystery gives a visible 180 second Slightly Tipsy countdown
+  ---
+  duration_ms: 2.681482
+  type: 'test'
+  ...
+# Subtest: walking away, changing dimension, logout and unloaded block cancel not complete
+ok 27 - walking away, changing dimension, logout and unloaded block cancel not complete
+  ---
+  duration_ms: 4.774281
+  type: 'test'
+  ...
+# Subtest: fresh store reload preserves materials/result but active sessions are not persisted
+ok 28 - fresh store reload preserves materials/result but active sessions are not persisted
+  ---
+  duration_ms: 2.03138
+  type: 'test'
+  ...
+# Subtest: finish save failure preserves materials and releases in-memory ownership
+ok 29 - finish save failure preserves materials and releases in-memory ownership
+  ---
+  duration_ms: 1.606043
+  type: 'test'
+  ...
+# Subtest: ready result cannot be shaken, extracted as original inputs, or refilled
+ok 30 - ready result cannot be shaken, extracted as original inputs, or refilled
+  ---
+  duration_ms: 1.769787
+  type: 'test'
+  ...
+# Subtest: wrong serving container and full bag keep the prepared result
+ok 31 - wrong serving container and full bag keep the prepared result
+  ---
+  duration_ms: 1.998529
+  type: 'test'
+  ...
+# Subtest: serving failure rolls back the actual cup and the prepared result
+ok 32 - serving failure rolls back the actual cup and the prepared result
+  ---
+  duration_ms: 1.752167
+  type: 'test'
+  ...
+# Subtest: signature output is a nonstackable exact payload preserving all qualities
+ok 33 - signature output is a nonstackable exact payload preserving all qualities
+  ---
+  duration_ms: 1.860791
+  type: 'test'
+  ...
+# Subtest: signature place, reload and return preserve effect duration probability andRGB
+ok 34 - signature place, reload and return preserve effect duration probability andRGB
+  ---
+  duration_ms: 2.43465
+  type: 'test'
+  ...
+# Subtest: all14 filled cup models and empty glass place and recover correctly
+ok 35 - all14 filled cup models and empty glass place and recover correctly
+  ---
+  duration_ms: 22.336361
+  type: 'test'
+  ...
+# Subtest: placed cup takes only1 from16 and cannot be overwritten or merged with another
+ok 36 - placed cup takes only1 from16 and cannot be overwritten or merged with another
+  ---
+  duration_ms: 0.504515
+  type: 'test'
+  ...
+# Subtest: full inventory rejects cup recovery without erasing payload
+ok 37 - full inventory rejects cup recovery without erasing payload
+  ---
+  duration_ms: 2.375136
+  type: 'test'
+  ...
+# Subtest: unsupported or missing signature metadata is rejected rather than becoming a white drink
+ok 38 - unsupported or missing signature metadata is rejected rather than becoming a white drink
+  ---
+  duration_ms: 0.479017
+  type: 'test'
+  ...
+# Subtest: signature helper syncs onlyRGB fields with existing geometry, removes duplicates and cleans up
+ok 39 - signature helper syncs onlyRGB fields with existing geometry, removes duplicates and cleans up
+  ---
+  duration_ms: 2.250252
+  type: 'test'
+  ...
+# Subtest: signature helper onEntityLoad removes orphan or bad anchors but defers unloaded owner
+ok 40 - signature helper onEntityLoad removes orphan or bad anchors but defers unloaded owner
+  ---
+  duration_ms: 1.139142
+  type: 'test'
+  ...
+# Subtest: adjacent placed empty glass receives output without a second glass deduction
+ok 41 - adjacent placed empty glass receives output without a second glass deduction
+  ---
+  duration_ms: 2.054728
+  type: 'test'
+  ...
+# Subtest: nonadjacent cup and nonempty cup are not overwritten
+ok 42 - nonadjacent cup and nonempty cup are not overwritten
+  ---
+  duration_ms: 1.877983
+  type: 'test'
+  ...
+# Subtest: two-state pour rolls back BOTHDPs and block when second write fails
+ok 43 - two-state pour rolls back BOTHDPs and block when second write fails
+  ---
+  duration_ms: 1.95475
+  type: 'test'
+  ...
+# Subtest: foreign block replacement preserves unreachable state for recovery, never refunds a phantom cup
+ok 44 - foreign block replacement preserves unreachable state for recovery, never refunds a phantom cup
+  ---
+  duration_ms: 0.610372
+  type: 'test'
+  ...
+# Subtest: Java ShakerBlock empty-hand use picks up the placed shaker with exact stored result
+ok 45 - Java ShakerBlock empty-hand use picks up the placed shaker with exact stored result
+  ---
+  duration_ms: 2.347353
+  type: 'test'
+  ...
+# Subtest: Java BlockItem parity: Shaker and empty glassware place without sneaking, including side-face targets
+ok 46 - Java BlockItem parity: Shaker and empty glassware place without sneaking, including side-face targets
+  ---
+  duration_ms: 2.517013
+  type: 'test'
+  ...
+# Subtest: CocktailBlockItem parity: non-sneak remains drink use, sneak use places the cocktail block
+ok 47 - CocktailBlockItem parity: non-sneak remains drink use, sneak use places the cocktail block
+  ---
+  duration_ms: 0.908551
+  type: 'test'
+  ...
+# Subtest: deferred Java BlockItem placement aborts when hand or dimension changes
+ok 48 - deferred Java BlockItem placement aborts when hand or dimension changes
+  ---
+  duration_ms: 0.937114
+  type: 'test'
+  ...
+# Subtest: same revision double input event only pours one item and returns one bottle
+ok 49 - same revision double input event only pours one item and returns one bottle
+  ---
+  duration_ms: 1.507316
+  type: 'test'
+  ...
+# Subtest: two players racing empty-hand pickup can retrieve one placed Shaker state only once
+ok 50 - two players racing empty-hand pickup can retrieve one placed Shaker state only once
+  ---
+  duration_ms: 2.330573
+  type: 'test'
+  ...
+# Subtest: two players cannot both retrieve a placed signature
+ok 51 - two players cannot both retrieve a placed signature
+  ---
+  duration_ms: 2.245807
+  type: 'test'
+  ...
+# Subtest: cancelled events stay cancelled while a touch-only non-first press is accepted once
+ok 52 - cancelled events stay cancelled while a touch-only non-first press is accepted once
+  ---
+  duration_ms: 1.24119
+  type: 'test'
+  ...
+# Subtest: Java GlasswareBlock empty-hand use retrieves the cup; it never auto-selects an adjacent Shaker
+ok 53 - Java GlasswareBlock empty-hand use retrieves the cup; it never auto-selects an adjacent Shaker
+  ---
+  duration_ms: 1.672385
+  type: 'test'
+  ...
+# Subtest: Java ShakerItem useOn pours its carried result into a placed empty glass before standard placement
+ok 54 - Java ShakerItem useOn pours its carried result into a placed empty glass before standard placement
+  ---
+  duration_ms: 3.400629
+  type: 'test'
+  ...
+# Subtest: explosion exclusion composes with other protection callbacks
+ok 55 - explosion exclusion composes with other protection callbacks
+  ---
+  duration_ms: 0.670307
+  type: 'test'
+  ...
+# Subtest: adventure/spectator and distant users cannot operate or retrieve
+ok 56 - adventure/spectator and distant users cannot operate or retrieve
+  ---
+  duration_ms: 1.469824
+  type: 'test'
+  ...
+# Subtest: Creative roundtrip conserves real machine/cup and ingredient counts
+ok 57 - Creative roundtrip conserves real machine/cup and ingredient counts
+  ---
+  duration_ms: 1.093617
+  type: 'test'
+  ...
+# Subtest: signature consumption applies saved native effects only and never modifies native post-drink inventory
+ok 58 - signature consumption applies saved native effects only and never modifies native post-drink inventory
+  ---
+  duration_ms: 1.954193
+  type: 'test'
+  ...
+# Subtest: fixed cocktails retain pending custom effects instead of inventing native substitutes
+ok 59 - fixed cocktails retain pending custom effects instead of inventing native substitutes
+  ---
+  duration_ms: 1.502961
+  type: 'test'
+  ...
+# Subtest: malformed signature consume and API effect error remain explicit diagnostics
+ok 60 - malformed signature consume and API effect error remain explicit diagnostics
+  ---
+  duration_ms: 1.711676
+  type: 'test'
+  ...
+# Subtest: clone-output transaction writes changed payload even if type and amount are identical
+ok 61 - clone-output transaction writes changed payload even if type and amount are identical
+  ---
+  duration_ms: 0.346825
+  type: 'test'
+  ...
+# Subtest: extension handshake creates independent recipe page AND executable shaker recipe
+ok 62 - extension handshake creates independent recipe page AND executable shaker recipe
+  ---
+  duration_ms: 12.474868
+  type: 'test'
+  ...
+# Subtest: extension recipe snapshot survives unregister while shaking then still serves original result
+ok 63 - extension recipe snapshot survives unregister while shaking then still serves original result
+  ---
+  duration_ms: 1.64027
+  type: 'test'
+  ...
+# Subtest: unknown external output pack refuses serving without deducting result or glass
+ok 64 - unknown external output pack refuses serving without deducting result or glass
+  ---
+  duration_ms: 1.601652
+  type: 'test'
+  ...
+# Subtest: external result must be received in hand, not put in a nonexistent cup model
+ok 65 - external result must be received in hand, not put in a nonexistent cup model
+  ---
+  duration_ms: 1.927954
+  type: 'test'
+  ...
+# Subtest: Cookery-published guide data lists12 shaker recipes and keeps shaker-specific descriptions
+ok 66 - Cookery-published guide data lists12 shaker recipes and keeps shaker-specific descriptions
+  ---
+  duration_ms: 1.096258
+  type: 'test'
+  ...
+# Subtest: entity death immediately cancels session while preserving poured materials
+ok 67 - entity death immediately cancels session while preserving poured materials
+  ---
+  duration_ms: 2.01814
+  type: 'test'
+  ...
+# Subtest: public SDK refuses mixology payload to a v1 host lacking the additive capability
+ok 68 - public SDK refuses mixology payload to a v1 host lacking the additive capability
+  ---
+  duration_ms: 13.910846
+  type: 'test'
+  ...
+# [Tavern SDK] Registered tavern_mixology_demo
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/7920_64_0","itemId":"kaleidoscope_tavern:vodka_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/7920_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/7960_64_0","itemId":"kaleidoscope_tavern:riesling_dry_white_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/8000_64_0","itemId":"minecraft:stone","cancelled":false,"handled":false,"rejection":"PASS"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/8060_64_0","itemId":"kaleidoscope_tavern:vodka_q4","cancelled":true,"handled":true,"rejection":"NONE"}
+# Subtest: packaged optional Mixology Demo loads own SDK and actual example recipe is executable
+ok 69 - packaged optional Mixology Demo loads own SDK and actual example recipe is executable
+  ---
+  duration_ms: 66.791663
+  type: 'test'
+  ...
+# Subtest: pouring a valid metadata-bearing signature back into a shaker is rejected losslessly
+ok 70 - pouring a valid metadata-bearing signature back into a shaker is rejected losslessly
+  ---
+  duration_ms: 3.282
+  type: 'test'
+  ...
+# Subtest: orphan shaker station recovers missing state on held Q4 pour and empty-hand pickup
+ok 71 - orphan shaker station recovers missing state on held Q4 pour and empty-hand pickup
+  ---
+  duration_ms: 1.507659
+  type: 'test'
+  ...
+# Subtest: missing shaker state recovery never replaces an existing state or its contents
+ok 72 - missing shaker state recovery never replaces an existing state or its contents
+  ---
+  duration_ms: 1.325789
+  type: 'test'
+  ...
+# Subtest: orphan recovery does not intercept ordinary blocks or unsupported held items
+ok 73 - orphan recovery does not intercept ordinary blocks or unsupported held items
+  ---
+  duration_ms: 0.897096
+  type: 'test'
+  ...
+# Subtest: duplicate same-tick callbacks recover an orphan shaker with one bottle exchange
+ok 74 - duplicate same-tick callbacks recover an orphan shaker with one bottle exchange
+  ---
+  duration_ms: 0.814454
+  type: 'test'
+  ...
+# Subtest: native RawMessage property ordering does not reject a managed quality wine
+ok 75 - native RawMessage property ordering does not reject a managed quality wine
+  ---
+  duration_ms: 0.42405
+  type: 'test'
+  ...
+1..75
+# tests 75
+# suites 0
+# pass 75
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 689.861582

@@ -4,10 +4,17 @@
     "description": {
       "identifier": "kt_assets_a17:rig_signature_color",
       "materials": {
-        "default": "entity_alphablend"
+        "default": "entity_alphatest_one_sided",
+        "liquid": "kt_signature_animated"
       },
       "textures": {
-        "default": "textures/kaleidoscope_tavern_jar/block/mixology/signature_cocktail"
+        "frame_0": "textures/kt_runtime/signature/frame_0",
+        "frame_1": "textures/kt_runtime/signature/frame_1",
+        "frame_2": "textures/kt_runtime/signature/frame_2",
+        "frame_3": "textures/kt_runtime/signature/frame_3",
+        "frame_4": "textures/kt_runtime/signature/frame_4",
+        "frame_5": "textures/kt_runtime/signature/frame_5",
+        "mixtures": "textures/kt_runtime/signature/mixtures"
       },
       "geometry": {
         "glass": "geometry.kt_assets_a17.rig_signature_glass",

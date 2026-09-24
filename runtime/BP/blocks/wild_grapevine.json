@@ -1,0 +1,97 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:wild_grapevine",
+      "states": {
+        "kaleidoscope_tavern:age_low": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "kaleidoscope_tavern:age_high": [
+          0,
+          1
+        ],
+        "kaleidoscope_tavern:sheared": [
+          false,
+          true
+        ]
+      },
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_assets_a2.wild_grapevine"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a2_wild_grapevine",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a2.wild_grapevine"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a2_wild_grapevine",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": {
+        "origin": [
+          -7,
+          0,
+          -7
+        ],
+        "size": [
+          14,
+          16,
+          14
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.0
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 0.0
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:tick": {
+        "interval_range": [
+          80,
+          140
+        ],
+        "looping": true
+      },
+      "kaleidoscope_tavern:wild_grapevine": {},
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      }
+    }
+  }
+}

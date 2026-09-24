@@ -1,0 +1,34 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_runtime.animated_item_ice_grape": {
+      "arrays": {
+        "textures": {
+          "Array.frames": [
+            "Texture.f0",
+            "Texture.f1",
+            "Texture.f2",
+            "Texture.f3",
+            "Texture.f4",
+            "Texture.f5",
+            "Texture.f6",
+            "Texture.f7",
+            "Texture.f8",
+            "Texture.f9",
+            "Texture.f10",
+            "Texture.f11"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Array.frames[math.mod(math.floor(query.life_time * 20 / 2), 12)]"
+      ]
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:pressing_tub_ingredients_6_visual",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "kind_1": "textures/kaleidoscope_tavern/item/grape",
+        "kind_2": "textures/kt_derived/a17/icon_ice_grape",
+        "kind_3": "textures/kaleidoscope_tavern/item/gold_grape",
+        "kind_4": "textures/kaleidoscope_tavern/item/green_grape",
+        "kind_5": "textures/items/sweet_berries",
+        "kind_6": "textures/items/glow_berries",
+        "kind_7": "textures/items/apple",
+        "kind_8": "textures/items/blaze_powder",
+        "kind_9": "textures/items/dye_powder_glow",
+        "kind_10": "textures/items/glowstone_dust",
+        "kind_11": "textures/items/gold_nugget",
+        "kind_12": "textures/items/gunpowder",
+        "kind_13": "textures/items/honeycomb",
+        "kind_14": "textures/items/iron_nugget",
+        "kind_15": "textures/items/potato",
+        "kind_16": "textures/items/redstone_dust",
+        "kind_17": "textures/items/sugar",
+        "kind_18": "textures/items/reeds",
+        "kind_19": "textures/items/wheat",
+        "kind_20": "textures/items/rotten_flesh",
+        "kind_21": "textures/blocks/blue_ice",
+        "kind_22": "textures/blocks/ice",
+        "kind_23": "textures/blocks/ice_packed",
+        "kind_24": "textures/blocks/dirt",
+        "kind_25": "textures/blocks/stone",
+        "kind_26": "textures/items/pink_petals"
+      },
+      "geometry": {
+        "card": "geometry.kt_runtime.pressing_card",
+        "cube": "geometry.kt_runtime.pressing_cube"
+      },
+      "animations": {
+        "layout": "animation.kt_runtime.pressing.layout"
+      },
+      "scripts": {
+        "animate": [
+          "layout"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.pressing_ingredients"
+      ]
+    }
+  }
+}

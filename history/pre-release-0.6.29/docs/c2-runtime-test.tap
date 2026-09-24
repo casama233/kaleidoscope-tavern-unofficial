@@ -1,0 +1,415 @@
+TAP version 13
+# (node:1788255) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C2] TavernError: BLOCK_CHANGED
+# [Tavern C2] TavernError: STALE_HAND
+# [Tavern C2] TavernError: DIMENSION_CHANGED
+# [Tavern C2] TavernError: BLOCK_CHANGED
+# [Tavern C2] TavernError: STATE_CONFLICT
+# Subtest: startup registers exactly the custom components declared by runtime resources without any Cookery overrides
+ok 1 - startup registers exactly the custom components declared by runtime resources without any Cookery overrides
+  ---
+  duration_ms: 34.379683
+  type: 'test'
+  ...
+# Subtest: pressing tub displays all six ingredient kinds and exact remaining stack count
+ok 2 - pressing tub displays all six ingredient kinds and exact remaining stack count
+  ---
+  duration_ms: 14.406433
+  type: 'test'
+  ...
+# Subtest: all three soil species actually plant consuming one grapevine, not the stack
+ok 3 - all three soil species actually plant consuming one grapevine, not the stack
+  ---
+  duration_ms: 3.101549
+  type: 'test'
+  ...
+# Subtest: waterlogged source trellises preserve water when planted and when the vine is pruned
+ok 4 - waterlogged source trellises preserve water when planted and when the vine is pruned
+  ---
+  duration_ms: 1.181967
+  type: 'test'
+  ...
+# Subtest: wild grapevine age split round-trips Java boundaries0/15/16/25 and rejects invalid years
+ok 5 - wild grapevine age split round-trips Java boundaries0/15/16/25 and rejects invalid years
+  ---
+  duration_ms: 0.790543
+  type: 'test'
+  ...
+# Subtest: wild grapevine head is the descending tip; each growth converts old head to body and sheared tip stops
+ok 6 - wild grapevine head is the descending tip; each growth converts old head to body and sheared tip stops
+  ---
+  duration_ms: 1.177445
+  type: 'test'
+  ...
+# Subtest: worldgen body chains normalize their lowest segment to a head and bonemeal works from a top body
+ok 7 - worldgen body chains normalize their lowest segment to a head and bonemeal works from a top body
+  ---
+  duration_ms: 1.109387
+  type: 'test'
+  ...
+# Subtest: wild grapevine stops at age25, unloaded support is preserved, and loss of loaded support removes the full chain
+ok 8 - wild grapevine stops at age25, unloaded support is preserved, and loss of loaded support removes the full chain
+  ---
+  duration_ms: 1.10799
+  type: 'test'
+  ...
+# Subtest: wild grapevine body break drops the registered head item once
+ok 9 - wild grapevine body break drops the registered head item once
+  ---
+  duration_ms: 0.84613
+  type: 'test'
+  ...
+# Subtest: bad soil and waxed frame reject planting without consuming material
+ok 10 - bad soil and waxed frame reject planting without consuming material
+  ---
+  duration_ms: 0.967251
+  type: 'test'
+  ...
+# Subtest: named grapevine or bone meal is not stripped into a raw item
+ok 11 - named grapevine or bone meal is not stripped into a raw item
+  ---
+  duration_ms: 0.389066
+  type: 'test'
+  ...
+# Subtest: wax and axe unwax change only requested state, preserving named tool and durability
+ok 12 - wax and axe unwax change only requested state, preserving named tool and durability
+  ---
+  duration_ms: 0.495849
+  type: 'test'
+  ...
+# Subtest: native trellis placement against a frame is NOT intercepted as inspection
+ok 13 - native trellis placement against a frame is NOT intercepted as inspection
+  ---
+  duration_ms: 2.430745
+  type: 'test'
+  ...
+# Subtest: onPlace source face changes bare frame axis and connects existing neighbors
+ok 14 - onPlace source face changes bare frame axis and connects existing neighbors
+  ---
+  duration_ms: 0.510201
+  type: 'test'
+  ...
+# Subtest: three bone meals advance a standalone vine0 to3 using individual items
+ok 15 - three bone meals advance a standalone vine0 to3 using individual items
+  ---
+  duration_ms: 0.57547
+  type: 'test'
+  ...
+# Subtest: a non-single young vine matures in one accepted growth
+ok 16 - a non-single young vine matures in one accepted growth
+  ---
+  duration_ms: 0.450387
+  type: 'test'
+  ...
+# Subtest: mature spread prioritizes up before east then west and sideways starts ripe
+ok 17 - mature spread prioritizes up before east then west and sideways starts ripe
+  ---
+  duration_ms: 0.659892
+  type: 'test'
+  ...
+# Subtest: waxed spread target is skipped and fruit appears only below free mature frame
+ok 18 - waxed spread target is skipped and fruit appears only below free mature frame
+  ---
+  duration_ms: 0.444949
+  type: 'test'
+  ...
+# Subtest: unloaded priority neighbor postpones growth and preserves all blocks
+ok 19 - unloaded priority neighbor postpones growth and preserves all blocks
+  ---
+  duration_ms: 0.656972
+  type: 'test'
+  ...
+# Subtest: no growth room and ripe fruit do not consume bone meal
+ok 20 - no growth room and ripe fruit do not consume bone meal
+  ---
+  duration_ms: 0.636332
+  type: 'test'
+  ...
+# Subtest: random tick callback observes explicit0.25 baseline; does not grow on rejected roll
+ok 21 - random tick callback observes explicit0.25 baseline; does not grow on rejected roll
+  ---
+  duration_ms: 0.539301
+  type: 'test'
+  ...
+# Subtest: fruit grows1–2 levels capped5 and does not grow without mature support
+ok 22 - fruit grows1–2 levels capped5 and does not grow without mature support
+  ---
+  duration_ms: 0.75
+  type: 'test'
+  ...
+# Subtest: support loss clears fruit but unloaded support defers cleanup
+ok 23 - support loss clears fruit but unloaded support defers cleanup
+  ---
+  duration_ms: 0.236569
+  type: 'test'
+  ...
+# Subtest: shears drop three fruit and two green fruit in the world while preserving custom tool data
+ok 24 - shears drop three fruit and two green fruit in the world while preserving custom tool data
+  ---
+  duration_ms: 0.928285
+  type: 'test'
+  ...
+# Subtest: full inventory still allows shears harvest and leaves the real inventory unchanged
+ok 25 - full inventory still allows shears harvest and leaves the real inventory unchanged
+  ---
+  duration_ms: 1.376927
+  type: 'test'
+  ...
+# Subtest: failed world item spawn rolls shears harvest back without losing fruit or wearing the tool
+ok 26 - failed world item spawn rolls shears harvest back without losing fruit or wearing the tool
+  ---
+  duration_ms: 0.758501
+  type: 'test'
+  ...
+# Subtest: Unbreaking can prevent wear; tool breaks exactly on final durability use
+ok 27 - Unbreaking can prevent wear; tool breaks exactly on final durability use
+  ---
+  duration_ms: 0.940807
+  type: 'test'
+  ...
+# Subtest: pruning drops vine and bare frame while removing unsupported child fruit without duplicate loot
+ok 28 - pruning drops vine and bare frame while removing unsupported child fruit without duplicate loot
+  ---
+  duration_ms: 0.660353
+  type: 'test'
+  ...
+# Subtest: normal breaking ripe crop follows smaller source loot; immature breaking returns nothing
+ok 29 - normal breaking ripe crop follows smaller source loot; immature breaking returns nothing
+  ---
+  duration_ms: 0.527571
+  type: 'test'
+  ...
+# Subtest: block-write failure rolls planting inventory back and keeps bare frame
+ok 30 - block-write failure rolls planting inventory back and keeps bare frame
+  ---
+  duration_ms: 0.524187
+  type: 'test'
+  ...
+# Subtest: two player harvest events in one tick drop only one crop
+ok 31 - two player harvest events in one tick drop only one crop
+  ---
+  duration_ms: 1.330318
+  type: 'test'
+  ...
+# Subtest: changed held stack and dimension cancel deferred plant use
+ok 32 - changed held stack and dimension cancel deferred plant use
+  ---
+  duration_ms: 0.933543
+  type: 'test'
+  ...
+# Subtest: Java secondary-use parity: sneak+held grapevine bypasses TrellisBlock.use instead of planting
+ok 33 - Java secondary-use parity: sneak+held grapevine bypasses TrellisBlock.use instead of planting
+  ---
+  duration_ms: 0.634036
+  type: 'test'
+  ...
+# Subtest: BoneMealItem parity: item useOn still reaches Tavern growth after block use PASS, including while sneaking
+ok 34 - BoneMealItem parity: item useOn still reaches Tavern growth after block use PASS, including while sneaking
+  ---
+  duration_ms: 0.674554
+  type: 'test'
+  ...
+# Subtest: full-inventory trellis mining still drops to world and leaves the real inventory unchanged
+ok 35 - full-inventory trellis mining still drops to world and leaves the real inventory unchanged
+  ---
+  duration_ms: 2.978757
+  type: 'test'
+  ...
+# Subtest: shared break router gives bare trellis a Survival world drop and Java wood feedback
+ok 36 - shared break router gives bare trellis a Survival world drop and Java wood feedback
+  ---
+  duration_ms: 1.388943
+  type: 'test'
+  ...
+# Subtest: BottleBlock source facing maps Bedrock player yaw to the Java opposite direction
+ok 37 - BottleBlock source facing maps Bedrock player yaw to the Java opposite direction
+  ---
+  duration_ms: 0.17792
+  type: 'test'
+  ...
+# Subtest: placed empty bottle native cardinal can be recovered by empty hand in Survival and Creative
+ok 38 - placed empty bottle native cardinal can be recovered by empty hand in Survival and Creative
+  ---
+  duration_ms: 0.74874
+  type: 'test'
+  ...
+# Subtest: placed water-bottle display returns a real native water potion, not a blank potion item
+ok 39 - placed water-bottle display returns a real native water potion, not a blank potion item
+  ---
+  duration_ms: 0.865228
+  type: 'test'
+  ...
+# Subtest: placed empty bottle Survival break still uses shared glass world-drop feedback
+ok 40 - placed empty bottle Survival break still uses shared glass world-drop feedback
+  ---
+  duration_ms: 0.813196
+  type: 'test'
+  ...
+# Subtest: display actual placement consumes exactly one even from a16-stack
+ok 41 - display actual placement consumes exactly one even from a16-stack
+  ---
+  duration_ms: 1.321281
+  type: 'test'
+  ...
+# Subtest: display routes sneak top-face placement, then mixes qualities without averaging
+ok 42 - display routes sneak top-face placement, then mixes qualities without averaging
+  ---
+  duration_ms: 2.296074
+  type: 'test'
+  ...
+# Subtest: Java item-use-on stage owns quality-bottle placement; raw itemUse is never raycast-cancelled
+ok 43 - Java item-use-on stage owns quality-bottle placement; raw itemUse is never raycast-cancelled
+  ---
+  duration_ms: 1.465655
+  type: 'test'
+  ...
+# Subtest: DrinkBlockItem parity: sneak side-face placement uses adjacent BlockPlaceContext target without port-only support whitelist
+ok 44 - DrinkBlockItem parity: sneak side-face placement uses adjacent BlockPlaceContext target without port-only support whitelist
+  ---
+  duration_ms: 0.715158
+  type: 'test'
+  ...
+# Subtest: display break returns all exact qualities, destroys block and removes own state
+ok 45 - display break returns all exact qualities, destroys block and removes own state
+  ---
+  duration_ms: 1.195693
+  type: 'test'
+  ...
+# Subtest: three-cap overflow and different drink reject before input is consumed
+ok 46 - three-cap overflow and different drink reject before input is consumed
+  ---
+  duration_ms: 1.415783
+  type: 'test'
+  ...
+# Subtest: DrinkBlock has no custom support gate; occupied and unloaded placement still preserve inventory
+ok 47 - DrinkBlock has no custom support gate; occupied and unloaded placement still preserve inventory
+  ---
+  duration_ms: 0.700049
+  type: 'test'
+  ...
+# Subtest: full inventory aborts display retrieval, keeping content and permutation intact
+ok 48 - full inventory aborts display retrieval, keeping content and permutation intact
+  ---
+  duration_ms: 0.919114
+  type: 'test'
+  ...
+# Subtest: failed bottle-state save rolls back input and world permutation
+ok 49 - failed bottle-state save rolls back input and world permutation
+  ---
+  duration_ms: 0.602254
+  type: 'test'
+  ...
+# Subtest: failed removal save restores bottle content, block and received inventory
+ok 50 - failed removal save restores bottle content, block and received inventory
+  ---
+  duration_ms: 0.734544
+  type: 'test'
+  ...
+# Subtest: fresh bottle store reloads exact mixed qualities without recomputing recipe
+ok 51 - fresh bottle store reloads exact mixed qualities without recomputing recipe
+  ---
+  duration_ms: 0.684523
+  type: 'test'
+  ...
+# Subtest: same-tick two players cannot take or append the same display revision twice
+ok 52 - same-tick two players cannot take or append the same display revision twice
+  ---
+  duration_ms: 1.656904
+  type: 'test'
+  ...
+# Subtest: Creative DrinkBlockItem placement is free while source empty-hand retrieval still returns the displayed bottle
+ok 53 - Creative DrinkBlockItem placement is free while source empty-hand retrieval still returns the displayed bottle
+  ---
+  duration_ms: 0.493593
+  type: 'test'
+  ...
+# Subtest: named quality bottle is not reduced to plain-ID display state
+ok 54 - named quality bottle is not reduced to plain-ID display state
+  ---
+  duration_ms: 0.35931
+  type: 'test'
+  ...
+# Subtest: externally mismatched display is kept for recovery, not refunded as invented contents
+ok 55 - externally mismatched display is kept for recovery, not refunded as invented contents
+  ---
+  duration_ms: 0.466201
+  type: 'test'
+  ...
+# Subtest: removing support does not silently delete contents and empty-hand take remains possible
+ok 56 - removing support does not silently delete contents and empty-hand take remains possible
+  ---
+  duration_ms: 0.467914
+  type: 'test'
+  ...
+# Subtest: adventure and spectator modes cannot exchange cultivated or placed items
+ok 57 - adventure and spectator modes cannot exchange cultivated or placed items
+  ---
+  duration_ms: 0.439687
+  type: 'test'
+  ...
+# Subtest: protection filters compose with C1 machines and leave unrelated blocks impacted
+ok 58 - protection filters compose with C1 machines and leave unrelated blocks impacted
+  ---
+  duration_ms: 0.637159
+  type: 'test'
+  ...
+# Subtest: Q1 consumption applies600tick nausea but never changes the post-consume inventory itself
+ok 59 - Q1 consumption applies600tick nausea but never changes the post-consume inventory itself
+  ---
+  duration_ms: 0.618823
+  type: 'test'
+  ...
+# Subtest: native regeneration keeps its source duration and Slightly Tipsy retains timed custom status only
+ok 60 - native regeneration keeps its source duration and Slightly Tipsy retains timed custom status only
+  ---
+  duration_ms: 0.707431
+  type: 'test'
+  ...
+# Subtest: onCompleteUse owns drink completion; no onConsume/onUse shortcut remains and engine errors stay bounded
+ok 61 - onCompleteUse owns drink completion; no onConsume/onUse shortcut remains and engine errors stay bounded
+  ---
+  duration_ms: 1.061014
+  type: 'test'
+  ...
+# Subtest: Tavern guide data keeps cultivation, bottle handling and24 effect tables for the Cookery publisher
+ok 62 - Tavern guide data keeps cultivation, bottle handling and24 effect tables for the Cookery publisher
+  ---
+  duration_ms: 1.84538
+  type: 'test'
+  ...
+# Subtest: end-to-end adapters: cultivate33 grapes, press4 buckets, brew, place and return original quality, then effect hook
+ok 63 - end-to-end adapters: cultivate33 grapes, press4 buckets, brew, place and return original quality, then effect hook
+  ---
+  duration_ms: 27.39221
+  type: 'test'
+  ...
+# Subtest: tagged custom top surface supports a bottle without touching pre-release isSolid
+ok 64 - tagged custom top surface supports a bottle without touching pre-release isSolid
+  ---
+  duration_ms: 0.445823
+  type: 'test'
+  ...
+# Subtest: already-cancelled third-party interact/break events are respected for crops and bottle displays
+ok 65 - already-cancelled third-party interact/break events are respected for crops and bottle displays
+  ---
+  duration_ms: 0.610204
+  type: 'test'
+  ...
+# Subtest: all six juice buckets drink for32 ticks, stack16, return one bucket and preserve unrelated effects
+ok 66 - all six juice buckets drink for32 ticks, stack16, return one bucket and preserve unrelated effects
+  ---
+  duration_ms: 1.746697
+  type: 'test'
+  ...
+1..66
+# tests 66
+# suites 0
+# pass 66
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 552.096936

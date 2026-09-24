@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:poppy_sandwich_board",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_sourceicon_poppy_sandwich_board",
+      "minecraft:display_name": {
+        "value": "item.kaleidoscope_tavern:poppy_sandwich_board.name"
+      },
+      "minecraft:max_stack_size": 64,
+      "kaleidoscope_tavern:place_writing_board": {}
+    }
+  }
+}

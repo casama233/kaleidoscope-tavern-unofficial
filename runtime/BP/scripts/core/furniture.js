@@ -1,3 +1,4 @@
+import {paintingPlacement} from './java-placement.js';
 /** Furniture identity and state: the placed block is authoritative; helpers never own/drop items. */
 import {check} from './util.js';
 export const NS='kaleidoscope_tavern';
@@ -35,7 +36,7 @@ export function facingVector(facing){check(Number.isInteger(facing)&&facing>=0&&
 export function relativeSeatYaw(playerYaw,baseYaw){check(Number.isFinite(playerYaw)&&Number.isFinite(baseYaw),'INVALID_ROTATION');return Math.round(((playerYaw-baseYaw+180)%360+360)%360-180);}
 export function faceOffset(face){const o={Up:[0,1,0],Down:[0,-1,0],North:[0,0,-1],South:[0,0,1],East:[1,0,0],West:[-1,0,0]}[face];check(o,'INVALID_FACE');return {x:o[0],y:o[1],z:o[2]};}
 export function verticalDoublePartner(half){check([DOUBLE_HALF.UPPER,DOUBLE_HALF.LOWER].includes(half),'INVALID_DOUBLE_HALF');return half===DOUBLE_HALF.UPPER?{half:DOUBLE_HALF.LOWER,offset:{x:0,y:-1,z:0}}:{half:DOUBLE_HALF.UPPER,offset:{x:0,y:1,z:0}};}
-export function paintingPlacementState(face,yaw){const pf=facingForYaw(yaw);if(face==='Up')return {attach:PAINTING_ATTACH.FLOOR,facing:(pf+2)%4};if(face==='Down')return {attach:PAINTING_ATTACH.CEILING,facing:pf};const facing=({North:0,East:1,South:2,West:3})[face];check(facing!==undefined,'INVALID_FACE');return {attach:PAINTING_ATTACH.WALL,facing};}
+export const paintingPlacementState=paintingPlacement;
 function connectionState(s){if(s===undefined)return undefined;check(Number.isInteger(s?.facing)&&s.facing>=0&&s.facing<=3&&Number.isInteger(s?.connection)&&s.connection>=0&&s.connection<=5,'INVALID_CONNECTION_STATE');return s;}
 export function connectedFurnitureConnection(selfFacing,{left,right,front}={}){check(Number.isInteger(selfFacing)&&selfFacing>=0&&selfFacing<=3,'INVALID_FACING');left=connectionState(left);right=connectionState(right);front=connectionState(front);const cw=(selfFacing+1)%4,ccw=(selfFacing+3)%4;
  const leftConnected=!!left&&(left.facing===ccw?[SOFA_CONNECTION.SINGLE,SOFA_CONNECTION.RIGHT,SOFA_CONNECTION.RIGHT_CORNER].includes(left.connection):left.facing===selfFacing);

@@ -1,3 +1,4 @@
+import {waterSnapshot,setWithWater,restoreWater} from './waterlogging.js';
 /** Shared synchronous inventory/block transaction tools. Not crash-level atomicity. */
 import {BlockPermutation,GameMode,ItemStack} from '@minecraft/server';
 import {planInventory,commitInventory} from '../core/inventory.js';
@@ -43,11 +44,15 @@ export function placementTake(player,count=1){check(Number.isInteger(count)&&cou
 export function blockAt(d,p){try{return d.getBlock(p);}catch{return undefined;}}
 export function plus(p,d){return {x:p.x+d.x,y:p.y+d.y,z:p.z+d.z};}
 export function blockCenter(p){return {x:p.x+.5,y:p.y+.5,z:p.z+.5};}
-export function requireBlockReach(player,dimension,location,maxDistance=6){check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const c=blockCenter(location);check(Math.hypot(player.location.x-c.x,player.location.y-c.y,player.location.z-c.z)<=maxDistance,'OUT_OF_REACH');}
+export function playerInteractionReach(player){
+ try{const raw=player?.getDynamicProperty?.('kaleidoscope_tavern:custom_effects');if(typeof raw==='string'){const s=JSON.parse(raw);if(s?.schema===1&&Array.isArray(s.entries)&&s.entries.some(e=>e?.id==='kaleidoscope_tavern:long_reach'&&Number.isInteger(e.ticks)&&e.ticks>0))return 9;}}catch{}
+ return 6;
+}
+export function requireBlockReach(player,dimension,location,maxDistance){check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');const c=blockCenter(location),reach=maxDistance??playerInteractionReach(player);check(Math.hypot(player.location.x-c.x,player.location.y-c.y,player.location.z-c.z)<=reach,'OUT_OF_REACH');}
 export function tell(p,s){try{p?.onScreenDisplay.setActionBar(s);}catch{}}
 export function handSnapshot(p){const h=hand(p);return {slot:p.selectedSlotIndex,id:h?.typeId??'',amount:h?.amount??0};}
 export function sameHand(p,s){const h=hand(p);check(p.selectedSlotIndex===s.slot&&(h?.typeId??'')===s.id&&(h?.amount??0)===s.amount,'STALE_HAND');}
-export function safe(p,fn){try{return fn();}catch(e){tell(p,'§e[Tavern] '+(e.code??String(e)));console.warn('[Tavern C2] '+e);return undefined;}}
+export function safe(p,fn){try{return fn();}catch(e){tell(p,{rawtext:[{text:'§e[Tavern] '},{translate:'kt.action.error'}]});console.warn('[Tavern C2] '+e);return undefined;}}
 export function withToolWear(plan,slot,creative=false,rng=Math.random) {
  if(creative)return;
  const item=plan.after[slot];check(item,'NO_TOOL');const durability=item.getComponent('minecraft:durability');check(durability,'NO_DURABILITY');
@@ -58,10 +63,10 @@ export function withToolWear(plan,slot,creative=false,rng=Math.random) {
  if(!plan.changes.includes(slot))plan.changes.push(slot);
 }
 export function applyBlocks(changes) {
- const saved=changes.map(x=>({block:x.block,permutation:x.block.permutation}));let touched=0;
- try{for(const x of changes){touched++;x.block.setPermutation(x.permutation);}}
- catch(e){for(let i=touched-1;i>=0;i--)saved[i].block.setPermutation(saved[i].permutation);throw e;}
- return ()=>{for(const x of saved)x.block.setPermutation(x.permutation);};
+ const saved=changes.map(x=>({block:x.block,...waterSnapshot(x.block)}));let touched=0;
+ try{for(const x of changes){touched++;setWithWater(x.block,x.permutation);}}
+ catch(e){for(let i=touched-1;i>=0;i--)restoreWater(saved[i].block,saved[i]);throw e;}
+ return ()=>{for(const x of saved)restoreWater(x.block,x);};
 }
 export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.random}={}) {
  canWrite(player);
@@ -72,12 +77,30 @@ export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.ran
  return plan;
 }
 
+/** Shearing leaves the harvest in the world, even when the player's inventory is full. */
+export function exchangeBlocksToWorld(player,outputs,changes,location,{wear=false,rng=Math.random}={}) {
+ canWrite(player);
+ const container=inventory(player),plan=planInventory(container,player.selectedSlotIndex,0,[],makeStack);
+ if(wear)withToolWear(plan,player.selectedSlotIndex,player.getGameMode()===GameMode.Creative,rng);
+ const dimension=changes[0]?.block?.dimension;check(dimension&&location,'MISSING_DROP_LOCATION');
+ let rollback=()=>{};const spawned=[];
+ commitInventory(plan,container,()=>{
+  rollback=applyBlocks(changes);
+  for(const output of outputs){
+   let count=output.count;check(Number.isInteger(count)&&count>0&&count<=1024,'BAD_GIVE');
+   const template=output.stack?output.stack.clone():makeStack(output.id,1);
+   while(count){const part=template.clone(),amount=Math.min(count,part.maxAmount);part.amount=amount;spawned.push(dimension.spawnItem(part,blockCenter(location)));count-=amount;}
+  }
+ },()=>{for(const entity of spawned)try{entity.remove();}catch{}rollback();});
+ return plan;
+}
+
 export function commitStoredStateTransaction(player,{block,key,store,old,next,take,give,permutation,afterCommit}){
- const raw=store.raw(key),oldPermutation=block.permutation,container=inventory(player);
+ const raw=store.raw(key),oldWater=waterSnapshot(block),container=inventory(player);
  const plan=planInventory(container,player.selectedSlotIndex,take,give,makeStack);
  commitInventory(plan,container,
-  ()=>{block.setPermutation(permutation);store.save(key,next,old?.revision??-1);},
-  ()=>{block.setPermutation(oldPermutation);store.restore(key,raw);}
+  ()=>{setWithWater(block,permutation);store.save(key,next,old?.revision??-1);},
+  ()=>{restoreWater(block,oldWater);store.restore(key,raw);}
  );
  if(afterCommit)afterCommit(block,next);
  return next;

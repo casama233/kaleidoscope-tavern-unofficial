@@ -1,0 +1,1181 @@
+TAP version 13
+# (node:1788561) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C2] Error: INJECTED_ITEM_SPAWN_FAILURE
+# [Tavern C2] TavernError: METADATA_ITEM_REJECTED
+# [Tavern C2] TavernError: BLOCK_CHANGED
+# Subtest: shared break/drop/sound adapter owns one global break and explosion listener
+ok 1 - shared break/drop/sound adapter owns one global break and explosion listener
+  ---
+  duration_ms: 6.028222
+  type: 'test'
+  ...
+# Subtest: Java item-use-on stage keeps only scripted placement families; empty bottle, Table, Glassware Holder and Bar Counter stay native
+ok 2 - Java item-use-on stage keeps only scripted placement families; empty bottle, Table, Glassware Holder and Bar Counter stay native
+  ---
+  duration_ms: 1.146317
+  type: 'test'
+  ...
+# Subtest: all current Tavern block resources have exactly one protected break route, no native loot, and an explicit source-like sound material
+ok 3 - all current Tavern block resources have exactly one protected break route, no native loot, and an explicit source-like sound material
+  ---
+  duration_ms: 16.291497
+  type: 'test'
+  ...
+# Subtest: break sound profiles follow Java source materials for storage, furniture, cultivation and mixology
+ok 4 - break sound profiles follow Java source materials for storage, furniture, cultivation and mixology
+  ---
+  duration_ms: 0.595038
+  type: 'test'
+  ...
+# Subtest: shared storage spatial helpers preserve the six-block center-distance contract
+ok 5 - shared storage spatial helpers preserve the six-block center-distance contract
+  ---
+  duration_ms: 1.82542
+  type: 'test'
+  ...
+# Subtest: shared storage visual scheduler advances a bounded round-robin cursor
+ok 6 - shared storage visual scheduler advances a bounded round-robin cursor
+  ---
+  duration_ms: 0.584354
+  type: 'test'
+  ...
+# Subtest: storage redstone edge router ignores first observation and non-rising updates
+ok 7 - storage redstone edge router ignores first observation and non-rising updates
+  ---
+  duration_ms: 1.25939
+  type: 'test'
+  ...
+# Subtest: four storage blocks expose native redstone consumers and redstone callbacks
+ok 8 - four storage blocks expose native redstone consumers and redstone callbacks
+  ---
+  duration_ms: 0.781763
+  type: 'test'
+  ...
+# Subtest: Holder rising edge launches exact quality once, high level does not repeat, and first update does not eject
+ok 9 - Holder rising edge launches exact quality once, high level does not repeat, and first update does not eject
+  ---
+  duration_ms: 8.956891
+  type: 'test'
+  ...
+# Subtest: randomly selected empty bottle consumes the redstone pulse as a Java-style no-op
+ok 10 - randomly selected empty bottle consumes the redstone pulse as a Java-style no-op
+  ---
+  duration_ms: 1.147493
+  type: 'test'
+  ...
+# Subtest: storage launch poses follow Java Holder/Tilted/Circular/Cellar direction formulas for all facings
+ok 11 - storage launch poses follow Java Holder/Tilted/Circular/Cellar direction formulas for all facings
+  ---
+  duration_ms: 1.579747
+  type: 'test'
+  ...
+# Subtest: Tilted/Circular/Cellar random slot ejection consumes only one exact bottle and updates visuals
+ok 12 - Tilted/Circular/Cellar random slot ejection consumes only one exact bottle and updates visuals
+  ---
+  duration_ms: 11.167357
+  type: 'test'
+  ...
+# Subtest: projectile spawn or state-save failure rolls storage back without swallowing the bottle
+ok 13 - projectile spawn or state-save failure rolls storage back without swallowing the bottle
+  ---
+  duration_ms: 1.769789
+  type: 'test'
+  ...
+# Subtest: thrown drink impact keeps exact quality payload and applies native splash effects in four-block radius
+ok 14 - thrown drink impact keeps exact quality payload and applies native splash effects in four-block radius
+  ---
+  duration_ms: 1.641755
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover white
+ok 15 - full place -> sit -> turn -> dismount -> recover white
+  ---
+  duration_ms: 4.20252
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover light_gray
+ok 16 - full place -> sit -> turn -> dismount -> recover light_gray
+  ---
+  duration_ms: 1.135075
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover gray
+ok 17 - full place -> sit -> turn -> dismount -> recover gray
+  ---
+  duration_ms: 1.177227
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover black
+ok 18 - full place -> sit -> turn -> dismount -> recover black
+  ---
+  duration_ms: 1.135652
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover brown
+ok 19 - full place -> sit -> turn -> dismount -> recover brown
+  ---
+  duration_ms: 0.884263
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover red
+ok 20 - full place -> sit -> turn -> dismount -> recover red
+  ---
+  duration_ms: 0.851447
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover orange
+ok 21 - full place -> sit -> turn -> dismount -> recover orange
+  ---
+  duration_ms: 0.907686
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover yellow
+ok 22 - full place -> sit -> turn -> dismount -> recover yellow
+  ---
+  duration_ms: 0.868903
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover lime
+ok 23 - full place -> sit -> turn -> dismount -> recover lime
+  ---
+  duration_ms: 1.157476
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover green
+ok 24 - full place -> sit -> turn -> dismount -> recover green
+  ---
+  duration_ms: 1.010969
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover cyan
+ok 25 - full place -> sit -> turn -> dismount -> recover cyan
+  ---
+  duration_ms: 0.76385
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover light_blue
+ok 26 - full place -> sit -> turn -> dismount -> recover light_blue
+  ---
+  duration_ms: 0.786037
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover blue
+ok 27 - full place -> sit -> turn -> dismount -> recover blue
+  ---
+  duration_ms: 0.702993
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover purple
+ok 28 - full place -> sit -> turn -> dismount -> recover purple
+  ---
+  duration_ms: 0.750094
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover magenta
+ok 29 - full place -> sit -> turn -> dismount -> recover magenta
+  ---
+  duration_ms: 0.715923
+  type: 'test'
+  ...
+# Subtest: full place -> sit -> turn -> dismount -> recover pink
+ok 30 - full place -> sit -> turn -> dismount -> recover pink
+  ---
+  duration_ms: 0.725761
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design colorless
+ok 31 - place and recover exact light design colorless
+  ---
+  duration_ms: 0.690495
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design white
+ok 32 - place and recover exact light design white
+  ---
+  duration_ms: 0.467043
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design light_gray
+ok 33 - place and recover exact light design light_gray
+  ---
+  duration_ms: 0.506119
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design gray
+ok 34 - place and recover exact light design gray
+  ---
+  duration_ms: 0.439797
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design black
+ok 35 - place and recover exact light design black
+  ---
+  duration_ms: 0.458098
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design brown
+ok 36 - place and recover exact light design brown
+  ---
+  duration_ms: 0.43236
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design red
+ok 37 - place and recover exact light design red
+  ---
+  duration_ms: 0.448287
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design orange
+ok 38 - place and recover exact light design orange
+  ---
+  duration_ms: 0.432207
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design yellow
+ok 39 - place and recover exact light design yellow
+  ---
+  duration_ms: 0.671063
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design lime
+ok 40 - place and recover exact light design lime
+  ---
+  duration_ms: 2.321256
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design green
+ok 41 - place and recover exact light design green
+  ---
+  duration_ms: 0.379436
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design cyan
+ok 42 - place and recover exact light design cyan
+  ---
+  duration_ms: 0.351111
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design light_blue
+ok 43 - place and recover exact light design light_blue
+  ---
+  duration_ms: 0.3515
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design blue
+ok 44 - place and recover exact light design blue
+  ---
+  duration_ms: 0.348638
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design purple
+ok 45 - place and recover exact light design purple
+  ---
+  duration_ms: 0.336798
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design magenta
+ok 46 - place and recover exact light design magenta
+  ---
+  duration_ms: 0.347525
+  type: 'test'
+  ...
+# Subtest: place and recover exact light design pink
+ok 47 - place and recover exact light design pink
+  ---
+  duration_ms: 0.455484
+  type: 'test'
+  ...
+# Subtest: three mixed-color sofas auto-connect as right-middle-left using source connection rules
+ok 48 - three mixed-color sofas auto-connect as right-middle-left using source connection rules
+  ---
+  duration_ms: 2.539894
+  type: 'test'
+  ...
+# Subtest: perpendicular sofa front connection selects source corner geometry state
+ok 49 - perpendicular sofa front connection selects source corner geometry state
+  ---
+  duration_ms: 0.75292
+  type: 'test'
+  ...
+# Subtest: sofa seat helper is lazy, one-rider, invisible helper and disappears after sneak dismount
+ok 50 - sofa seat helper is lazy, one-rider, invisible helper and disappears after sneak dismount
+  ---
+  duration_ms: 1.005195
+  type: 'test'
+  ...
+# Subtest: breaking an occupied sofa ejects its rider and reconnects neighboring pieces
+ok 51 - breaking an occupied sofa ejects its rider and reconnects neighboring pieces
+  ---
+  duration_ms: 1.467927
+  type: 'test'
+  ...
+# Subtest: sofa tick repair recomputes externally stale connection state
+ok 52 - sofa tick repair recomputes externally stale connection state
+  ---
+  duration_ms: 0.561335
+  type: 'test'
+  ...
+# Subtest: three Bar Counters reuse Sofa right-middle-left connection states
+ok 53 - three Bar Counters reuse Sofa right-middle-left connection states
+  ---
+  duration_ms: 1.324405
+  type: 'test'
+  ...
+# Subtest: perpendicular Bar Counter forms the same source corner state as Sofa
+ok 54 - perpendicular Bar Counter forms the same source corner state as Sofa
+  ---
+  duration_ms: 3.049773
+  type: 'test'
+  ...
+# Subtest: removing middle Bar Counter reconnects both remaining ends and returns one item
+ok 55 - removing middle Bar Counter reconnects both remaining ends and returns one item
+  ---
+  duration_ms: 1.20063
+  type: 'test'
+  ...
+# Subtest: Bar Counter 20-tick repair collapses stale state without neighbors
+ok 56 - Bar Counter 20-tick repair collapses stale state without neighbors
+  ---
+  duration_ms: 0.466024
+  type: 'test'
+  ...
+# Subtest: Pendant Lamp places upper/lower atomically and recovers one item from lower half
+ok 57 - Pendant Lamp places upper/lower atomically and recovers one item from lower half
+  ---
+  duration_ms: 0.885646
+  type: 'test'
+  ...
+# Subtest: Pendant Lamp refuses blocked lower cell without consuming item
+ok 58 - Pendant Lamp refuses blocked lower cell without consuming item
+  ---
+  duration_ms: 0.444013
+  type: 'test'
+  ...
+# Subtest: Pendant Lamp second-block write failure rolls back upper half and inventory
+ok 59 - Pendant Lamp second-block write failure rolls back upper half and inventory
+  ---
+  duration_ms: 0.62213
+  type: 'test'
+  ...
+# Subtest: Pendant Lamp orphan repair removes survivor without minting an item
+ok 60 - Pendant Lamp orphan repair removes survivor without minting an item
+  ---
+  duration_ms: 0.488884
+  type: 'test'
+  ...
+# Subtest: Painting places on wall with clicked-face facing and recovers exact item
+ok 61 - Painting places on wall with clicked-face facing and recovers exact item
+  ---
+  duration_ms: 0.692027
+  type: 'test'
+  ...
+# Subtest: Painting floor and ceiling preserve Java opposite/original player facing
+ok 62 - Painting floor and ceiling preserve Java opposite/original player facing
+  ---
+  duration_ms: 0.754288
+  type: 'test'
+  ...
+# Subtest: Painting metadata item is rejected before placement
+ok 63 - Painting metadata item is rejected before placement
+  ---
+  duration_ms: 0.393348
+  type: 'test'
+  ...
+# Subtest: native Glassware Holder onPlace maps Mojang cardinal direction into legacy facing without touching slots
+ok 64 - native Glassware Holder onPlace maps Mojang cardinal direction into legacy facing without touching slots
+  ---
+  duration_ms: 0.482973
+  type: 'test'
+  ...
+# Subtest: Glassware Holder fills four exact quadrants and extracts into empty hand
+ok 65 - Glassware Holder fills four exact quadrants and extracts into empty hand
+  ---
+  duration_ms: 1.233186
+  type: 'test'
+  ...
+# Subtest: Glassware Holder rejects occupied insert and metadata without loss
+ok 66 - Glassware Holder rejects occupied insert and metadata without loss
+  ---
+  duration_ms: 0.694338
+  type: 'test'
+  ...
+# Subtest: Glassware Holder recovery returns all occupied glasses with holder
+ok 67 - Glassware Holder recovery returns all occupied glasses with holder
+  ---
+  duration_ms: 0.976013
+  type: 'test'
+  ...
+# Subtest: Glassware Holder event route uses faceLocation quadrant
+ok 68 - Glassware Holder event route uses faceLocation quadrant
+  ---
+  duration_ms: 2.12673
+  type: 'test'
+  ...
+# Subtest: Holder stores exact quality ID while helper renders base bottle kind
+ok 69 - Holder stores exact quality ID while helper renders base bottle kind
+  ---
+  duration_ms: 1.258239
+  type: 'test'
+  ...
+# Subtest: native Holder after-interact takes one bottle once without before event and respects foreign cancellation
+ok 70 - native Holder after-interact takes one bottle once without before event and respects foreign cancellation
+  ---
+  duration_ms: 2.772118
+  type: 'test'
+  ...
+# Subtest: Holder rejects Java blocklist bottles, cocktails and metadata without consuming them
+ok 71 - Holder rejects Java blocklist bottles, cocktails and metadata without consuming them
+  ---
+  duration_ms: 0.870579
+  type: 'test'
+  ...
+# Subtest: full-inventory Survival break drops occupied Holder contents without mutating real inventory
+ok 72 - full-inventory Survival break drops occupied Holder contents without mutating real inventory
+  ---
+  duration_ms: 3.172423
+  type: 'test'
+  ...
+# Subtest: world-drop spawn failure rolls break recovery back before block/state commit
+ok 73 - world-drop spawn failure rolls break recovery back before block/state commit
+  ---
+  duration_ms: 2.117745
+  type: 'test'
+  ...
+# Subtest: Survival break of occupied Holder drops holder and exact stored bottle with source wood break sound
+ok 74 - Survival break of occupied Holder drops holder and exact stored bottle with source wood break sound
+  ---
+  duration_ms: 1.293922
+  type: 'test'
+  ...
+# Subtest: Holder occupied slot refuses replacement and recovery returns holder plus exact bottle atomically
+ok 75 - Holder occupied slot refuses replacement and recovery returns holder plus exact bottle atomically
+  ---
+  duration_ms: 0.924813
+  type: 'test'
+  ...
+# Subtest: bottle block-use route places only on sneak and leaves ordinary support click for drinking
+ok 76 - bottle block-use route places only on sneak and leaves ordinary support click for drinking
+  ---
+  duration_ms: 2.133616
+  type: 'test'
+  ...
+# Subtest: DrinkBlockItem parity stacks same drink first, but different or full display falls back to non-sneak drink
+ok 77 - DrinkBlockItem parity stacks same drink first, but different or full display falls back to non-sneak drink
+  ---
+  duration_ms: 2.258755
+  type: 'test'
+  ...
+# Subtest: Creative quality-bottle placement and same-drink stacking are free like Java DrinkBlockItem
+ok 78 - Creative quality-bottle placement and same-drink stacking are free like Java DrinkBlockItem
+  ---
+  duration_ms: 0.666406
+  type: 'test'
+  ...
+# Subtest: quality bottle complete-use consumes once, returns container and is registered onCompleteUse only
+ok 79 - quality bottle complete-use consumes once, returns container and is registered onCompleteUse only
+  ---
+  duration_ms: 1.312137
+  type: 'test'
+  ...
+# Subtest: stacked and Creative drinks preserve Java container semantics, with full inventory world-drop fallback
+ok 80 - stacked and Creative drinks preserve Java container semantics, with full inventory world-drop fallback
+  ---
+  duration_ms: 1.347236
+  type: 'test'
+  ...
+# Subtest: Survival break of placed quality bottle preserves exact quality as a glass world drop
+ok 81 - Survival break of placed quality bottle preserves exact quality as a glass world drop
+  ---
+  duration_ms: 1.432127
+  type: 'test'
+  ...
+# Subtest: Holder recovery rolls back block and stored bottle when inventory has room for only one returned stack
+ok 82 - Holder recovery rolls back block and stored bottle when inventory has room for only one returned stack
+  ---
+  duration_ms: 1.09818
+  type: 'test'
+  ...
+# Subtest: Holder tick repair restores display kind from authoritative stored item
+ok 83 - Holder tick repair restores display kind from authoritative stored item
+  ---
+  duration_ms: 0.612506
+  type: 'test'
+  ...
+# Subtest: Holder event route wins before normal bottle placement and inserts instead of placing a floor display
+ok 84 - Holder event route wins before normal bottle placement and inserts instead of placing a floor display
+  ---
+  duration_ms: 0.842945
+  type: 'test'
+  ...
+# Subtest: Tilted Rack stores three different exact-quality ids and one visual per occupied slot
+ok 85 - Tilted Rack stores three different exact-quality ids and one visual per occupied slot
+  ---
+  duration_ms: 1.959053
+  type: 'test'
+  ...
+# Subtest: Tilted Rack facing-aware hit mapping chooses source slot after rotation
+ok 86 - Tilted Rack facing-aware hit mapping chooses source slot after rotation
+  ---
+  duration_ms: 0.6512
+  type: 'test'
+  ...
+# Subtest: Tilted Rack rejects source brandy/carignan blocklist and metadata without loss
+ok 87 - Tilted Rack rejects source brandy/carignan blocklist and metadata without loss
+  ---
+  duration_ms: 0.846459
+  type: 'test'
+  ...
+# Subtest: Tilted Rack occupied and empty clicked slots are source-style no-ops
+ok 88 - Tilted Rack occupied and empty clicked slots are source-style no-ops
+  ---
+  duration_ms: 0.724484
+  type: 'test'
+  ...
+# Subtest: Tilted Rack recovery returns rack plus all exact bottles atomically
+ok 89 - Tilted Rack recovery returns rack plus all exact bottles atomically
+  ---
+  duration_ms: 1.282724
+  type: 'test'
+  ...
+# Subtest: Tilted Rack recovery rolls back when inventory cannot fit rack plus bottles
+ok 90 - Tilted Rack recovery rolls back when inventory cannot fit rack plus bottles
+  ---
+  duration_ms: 1.462249
+  type: 'test'
+  ...
+# Subtest: Tilted Rack sync recreates missing visuals from authoritative store
+ok 91 - Tilted Rack sync recreates missing visuals from authoritative store
+  ---
+  duration_ms: 0.67071
+  type: 'test'
+  ...
+# Subtest: Tilted Rack event route inserts before ordinary floor-bottle display
+ok 92 - Tilted Rack event route inserts before ordinary floor-bottle display
+  ---
+  duration_ms: 1.203099
+  type: 'test'
+  ...
+# Subtest: Circular Rack stores six mixed exact bottles and one helper per occupied slot
+ok 93 - Circular Rack stores six mixed exact bottles and one helper per occupied slot
+  ---
+  duration_ms: 2.762475
+  type: 'test'
+  ...
+# Subtest: Circular Rack facing-aware angle hit mapping follows Java getLocalX/getLocalZ
+ok 94 - Circular Rack facing-aware angle hit mapping follows Java getLocalX/getLocalZ
+  ---
+  duration_ms: 0.652056
+  type: 'test'
+  ...
+# Subtest: Circular Rack accepts source-wide brandy/carignan but rejects cocktails and metadata without loss
+ok 95 - Circular Rack accepts source-wide brandy/carignan but rejects cocktails and metadata without loss
+  ---
+  duration_ms: 0.927787
+  type: 'test'
+  ...
+# Subtest: Circular Rack occupied and empty clicked sectors are source-style no-ops
+ok 96 - Circular Rack occupied and empty clicked sectors are source-style no-ops
+  ---
+  duration_ms: 0.688753
+  type: 'test'
+  ...
+# Subtest: Circular Rack recovery returns rack plus all exact bottles atomically
+ok 97 - Circular Rack recovery returns rack plus all exact bottles atomically
+  ---
+  duration_ms: 1.331921
+  type: 'test'
+  ...
+# Subtest: Circular Rack recovery rolls back when inventory cannot fit rack plus stored bottles
+ok 98 - Circular Rack recovery rolls back when inventory cannot fit rack plus stored bottles
+  ---
+  duration_ms: 1.379385
+  type: 'test'
+  ...
+# Subtest: Circular Rack sync recreates missing visual helpers from six-slot store
+ok 99 - Circular Rack sync recreates missing visual helpers from six-slot store
+  ---
+  duration_ms: 0.668781
+  type: 'test'
+  ...
+# Subtest: Circular Rack particle emits only while occupied and uses endrod emitter
+ok 100 - Circular Rack particle emits only while occupied and uses endrod emitter
+  ---
+  duration_ms: 0.921965
+  type: 'test'
+  ...
+# Subtest: Circular Rack event route inserts before ordinary floor-bottle display
+ok 101 - Circular Rack event route inserts before ordinary floor-bottle display
+  ---
+  duration_ms: 1.313716
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet stores two regular exact-quality bottles with Java occupied-side redirect
+ok 102 - Bar Cabinet stores two regular exact-quality bottles with Java occupied-side redirect
+  ---
+  duration_ms: 3.086707
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet irregular brandy/carignan force one centered bottle and block second insertion
+ok 103 - Bar Cabinet irregular brandy/carignan force one centered bottle and block second insertion
+  ---
+  duration_ms: 1.411527
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet and Glass Bar Cabinet connect only to same type with source left-middle-right positions
+ok 104 - Bar Cabinet and Glass Bar Cabinet connect only to same type with source left-middle-right positions
+  ---
+  duration_ms: 2.536539
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet recovery returns cabinet plus both exact bottles atomically and reconnects neighbors
+ok 105 - Bar Cabinet recovery returns cabinet plus both exact bottles atomically and reconnects neighbors
+  ---
+  duration_ms: 1.923749
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet inventory-full recovery rolls back block and exact two-slot state
+ok 106 - Bar Cabinet inventory-full recovery rolls back block and exact two-slot state
+  ---
+  duration_ms: 1.583187
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet tick repair restores stale connection and missing bottle visuals
+ok 107 - Bar Cabinet tick repair restores stale connection and missing bottle visuals
+  ---
+  duration_ms: 0.797979
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet event route inserts before ordinary floor-bottle display
+ok 108 - Bar Cabinet event route inserts before ordinary floor-bottle display
+  ---
+  duration_ms: 1.485182
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet stores nine exact regular bottles in front-face3x3 slots and spawns nine helpers
+ok 109 - Cellar Cabinet stores nine exact regular bottles in front-face3x3 slots and spawns nine helpers
+  ---
+  duration_ms: 3.674134
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet rejects side/back clicks and source blocklist without consuming items
+ok 110 - Cellar Cabinet rejects side/back clicks and source blocklist without consuming items
+  ---
+  duration_ms: 0.628642
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet occupied/empty front slots are source-style no-ops and metadata is rejected
+ok 111 - Cellar Cabinet occupied/empty front slots are source-style no-ops and metadata is rejected
+  ---
+  duration_ms: 0.952723
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet same-type neighbors form source connection states and repair after middle removal
+ok 112 - Cellar Cabinet same-type neighbors form source connection states and repair after middle removal
+  ---
+  duration_ms: 1.269179
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet recovery returns cabinet plus all exact bottles atomically
+ok 113 - Cellar Cabinet recovery returns cabinet plus all exact bottles atomically
+  ---
+  duration_ms: 1.278542
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet inventory-full recovery rolls back block and nine-slot state
+ok 114 - Cellar Cabinet inventory-full recovery rolls back block and nine-slot state
+  ---
+  duration_ms: 1.523019
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet tick repair restores stale connection and missing shelf visuals
+ok 115 - Cellar Cabinet tick repair restores stale connection and missing shelf visuals
+  ---
+  duration_ms: 0.762701
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet event route requires front face and wins before ordinary bottle display
+ok 116 - Cellar Cabinet event route requires front face and wins before ordinary bottle display
+  ---
+  duration_ms: 1.226707
+  type: 'test'
+  ...
+# Subtest: native Bar Counter onPlace bridges cardinal facing and immediately repairs source connections
+ok 117 - native Bar Counter onPlace bridges cardinal facing and immediately repairs source connections
+  ---
+  duration_ms: 0.759346
+  type: 'test'
+  ...
+# Subtest: native table onPlace consumes placement_direction state and immediately repairs neighbor connections
+ok 118 - native table onPlace consumes placement_direction state and immediately repairs neighbor connections
+  ---
+  duration_ms: 1.773311
+  type: 'test'
+  ...
+# Subtest: three source tables form X-axis LEFT/MIDDLE/RIGHT using native persistent direction state
+ok 119 - three source tables form X-axis LEFT/MIDDLE/RIGHT using native persistent direction state
+  ---
+  duration_ms: 1.393483
+  type: 'test'
+  ...
+# Subtest: connected table row rejects perpendicular takeover while a standalone table can form a Z row
+ok 120 - connected table row rejects perpendicular takeover while a standalone table can form a Z row
+  ---
+  duration_ms: 2.158828
+  type: 'test'
+  ...
+# Subtest: removing middle table reconnects both remaining ends to SINGLE and returns exactly one table
+ok 121 - removing middle table reconnects both remaining ends to SINGLE and returns exactly one table
+  ---
+  duration_ms: 1.363471
+  type: 'test'
+  ...
+# Subtest: table tick migrates legacy non-default axis state onto native cardinal direction
+ok 122 - table tick migrates legacy non-default axis state onto native cardinal direction
+  ---
+  duration_ms: 0.46723
+  type: 'test'
+  ...
+# Subtest: table 20-tick repair collapses stale connected state without a neighbor
+ok 123 - table 20-tick repair collapses stale connected state without a neighbor
+  ---
+  duration_ms: 0.461595
+  type: 'test'
+  ...
+# Subtest: ordinary furniture places directly without sneaking and consumes1 from stack
+ok 124 - ordinary furniture places directly without sneaking and consumes1 from stack
+  ---
+  duration_ms: 0.895797
+  type: 'test'
+  ...
+# Subtest: held scripted furniture placement still wins over passive existing furniture for build chaining
+ok 125 - held scripted furniture placement still wins over passive existing furniture for build chaining
+  ---
+  duration_ms: 0.69209
+  type: 'test'
+  ...
+# Subtest: Java order: empty stool consumes non-sneak click before held BlockItem, sneak+held bypasses and places
+ok 126 - Java order: empty stool consumes non-sneak click before held BlockItem, sneak+held bypasses and places
+  ---
+  duration_ms: 1.405037
+  type: 'test'
+  ...
+# Subtest: Creative storage BlockItems place without decrement across all five storage families
+ok 127 - Creative storage BlockItems place without decrement across all five storage families
+  ---
+  duration_ms: 1.204418
+  type: 'test'
+  ...
+# Subtest: shared placement feedback follows Java source material families
+ok 128 - shared placement feedback follows Java source material families
+  ---
+  duration_ms: 1.543965
+  type: 'test'
+  ...
+# Subtest: stateful storage places directly without sneak on ordinary support
+ok 129 - stateful storage places directly without sneak on ordinary support
+  ---
+  duration_ms: 0.497858
+  type: 'test'
+  ...
+# Subtest: Java order: occupied Holder slot PASSes accepted bottle so DrinkBlockItem continues instead of forced insert
+ok 130 - Java order: occupied Holder slot PASSes accepted bottle so DrinkBlockItem continues instead of forced insert
+  ---
+  duration_ms: 0.68613
+  type: 'test'
+  ...
+# Subtest: Java order: blocked Holder bottle FAIL consumes interaction and never falls through to DrinkBlockItem
+ok 131 - Java order: blocked Holder bottle FAIL consumes interaction and never falls through to DrinkBlockItem
+  ---
+  duration_ms: 0.48496
+  type: 'test'
+  ...
+# Subtest: Java order: occupied seat PASS lets another held scripted BlockItem place beside it
+ok 132 - Java order: occupied seat PASS lets another held scripted BlockItem place beside it
+  ---
+  duration_ms: 0.906854
+  type: 'test'
+  ...
+# Subtest: Java order: Tap consumes normal held scripted BlockItem use but sneak+held bypasses to placement
+ok 133 - Java order: Tap consumes normal held scripted BlockItem use but sneak+held bypasses to placement
+  ---
+  duration_ms: 2.310047
+  type: 'test'
+  ...
+# Subtest: Java order: AbstractStorage FAIL blocks non-sneak foreign BlockItem; sneak+held bypass places it
+ok 134 - Java order: AbstractStorage FAIL blocks non-sneak foreign BlockItem; sneak+held bypass places it
+  ---
+  duration_ms: 0.869385
+  type: 'test'
+  ...
+# Subtest: other addon cancelled event is respected
+ok 135 - other addon cancelled event is respected
+  ---
+  duration_ms: 0.412805
+  type: 'test'
+  ...
+# Subtest: touch-style false first press is accepted once and consumes one placed item
+ok 136 - touch-style false first press is accepted once and consumes one placed item
+  ---
+  duration_ms: 0.904006
+  type: 'test'
+  ...
+# Subtest: stale hand, metadata changes and changed dimensions do not place
+ok 137 - stale hand, metadata changes and changed dimensions do not place
+  ---
+  duration_ms: 0.585221
+  type: 'test'
+  ...
+# Subtest: two players attempting same seat get one rider only
+ok 138 - two players attempting same seat get one rider only
+  ---
+  duration_ms: 0.672458
+  type: 'test'
+  ...
+# Subtest: occupied stool breaks once, ejects its rider and drops one stool
+ok 139 - occupied stool breaks once, ejects its rider and drops one stool
+  ---
+  duration_ms: 1.17928
+  type: 'test'
+  ...
+# Subtest: riding a boat or horse is not interrupted by stool interaction
+ok 140 - riding a boat or horse is not interrupted by stool interaction
+  ---
+  duration_ms: 0.593484
+  type: 'test'
+  ...
+# Subtest: native addRider rejection never fabricates success
+ok 141 - native addRider rejection never fabricates success
+  ---
+  duration_ms: 0.641534
+  type: 'test'
+  ...
+# Subtest: full inventory recovery keeps physical block and native helper
+ok 142 - full inventory recovery keeps physical block and native helper
+  ---
+  duration_ms: 2.67289
+  type: 'test'
+  ...
+# Subtest: native stool after-interact seats once without before event and ignores foreign cancellation
+ok 143 - native stool after-interact seats once without before event and ignores foreign cancellation
+  ---
+  duration_ms: 1.339594
+  type: 'test'
+  ...
+# Subtest: full-inventory Survival mining uses world-drop sink while manual recovery still refuses
+ok 144 - full-inventory Survival mining uses world-drop sink while manual recovery still refuses
+  ---
+  duration_ms: 1.966508
+  type: 'test'
+  ...
+# Subtest: Creative mining discards scripted recovery output instead of minting inventory or world drops
+ok 145 - Creative mining discards scripted recovery output instead of minting inventory or world drops
+  ---
+  duration_ms: 0.878579
+  type: 'test'
+  ...
+# Subtest: two deferred Survival break callbacks create exactly one furniture drop and one break sound
+ok 146 - two deferred Survival break callbacks create exactly one furniture drop and one break sound
+  ---
+  duration_ms: 1.308365
+  type: 'test'
+  ...
+# Subtest: block write exception restores held stack, no helper spawned
+ok 147 - block write exception restores held stack, no helper spawned
+  ---
+  duration_ms: 0.506131
+  type: 'test'
+  ...
+# Subtest: inventory write exception prevents block placement
+ok 148 - inventory write exception prevents block placement
+  ---
+  duration_ms: 0.45596
+  type: 'test'
+  ...
+# Subtest: helper failure leaves one recoverable block, reconstructs without paying twice
+ok 149 - helper failure leaves one recoverable block, reconstructs without paying twice
+  ---
+  duration_ms: 0.799292
+  type: 'test'
+  ...
+# Subtest: lost helper reconstructed from block without world DP inventory state
+ok 150 - lost helper reconstructed from block without world DP inventory state
+  ---
+  duration_ms: 0.591332
+  type: 'test'
+  ...
+# Subtest: occupied duplicate wins and empty duplicate cannot drop another stool
+ok 151 - occupied duplicate wins and empty duplicate cannot drop another stool
+  ---
+  duration_ms: 0.662616
+  type: 'test'
+  ...
+# Subtest: unloaded block is not considered air and does not eject or delete helper
+ok 152 - unloaded block is not considered air and does not eject or delete helper
+  ---
+  duration_ms: 0.537855
+  type: 'test'
+  ...
+# Subtest: external command replacing stool ejects rider, removes helper, no item minted
+ok 153 - external command replacing stool ejects rider, removes helper, no item minted
+  ---
+  duration_ms: 0.539245
+  type: 'test'
+  ...
+# Subtest: unanchored manually summoned helper is deleted rather than becoming a free chair
+ok 154 - unanchored manually summoned helper is deleted rather than becoming a free chair
+  ---
+  duration_ms: 0.666494
+  type: 'test'
+  ...
+# Subtest: Java BarStool BlockItem has no port-only support or headroom placement gate
+ok 155 - Java BarStool BlockItem has no port-only support or headroom placement gate
+  ---
+  duration_ms: 0.751075
+  type: 'test'
+  ...
+# Subtest: Java BarStool use does not add port-only support or headroom checks before sitting
+ok 156 - Java BarStool use does not add port-only support or headroom checks before sitting
+  ---
+  duration_ms: 0.675909
+  type: 'test'
+  ...
+# Subtest: dye switches full design and preserves facing; same color costs nothing
+ok 157 - dye switches full design and preserves facing; same color costs nothing
+  ---
+  duration_ms: 0.760938
+  type: 'test'
+  ...
+# Subtest: dye write failure restores16 dyes and old light variant
+ok 158 - dye write failure restores16 dyes and old light variant
+  ---
+  duration_ms: 0.536188
+  type: 'test'
+  ...
+# Subtest: source metadata dye rejected with source stack preserved
+ok 159 - source metadata dye rejected with source stack preserved
+  ---
+  duration_ms: 0.466074
+  type: 'test'
+  ...
+# Subtest: Creative furniture BlockItem placement does not decrement the held stack
+ok 160 - Creative furniture BlockItem placement does not decrement the held stack
+  ---
+  duration_ms: 0.456641
+  type: 'test'
+  ...
+# Subtest: spectator/adventure cannot place/sit/recover furniture
+ok 161 - spectator/adventure cannot place/sit/recover furniture
+  ---
+  duration_ms: 0.647904
+  type: 'test'
+  ...
+# Subtest: explosion protection leaves unrelated blocks in impacted list
+ok 162 - explosion protection leaves unrelated blocks in impacted list
+  ---
+  duration_ms: 0.501659
+  type: 'test'
+  ...
+# Subtest: Shriek completed drink applies source damage, additive impulse and16 particles
+ok 163 - Shriek completed drink applies source damage, additive impulse and16 particles
+  ---
+  duration_ms: 1.741152
+  type: 'test'
+  ...
+# Subtest: Shriek source rules hit in corridor only and do not stop at walls
+ok 164 - Shriek source rules hit in corridor only and do not stop at walls
+  ---
+  duration_ms: 0.658172
+  type: 'test'
+  ...
+# Subtest: PvE only excludes players, own helpers, XP orbs and dead mobs
+ok 165 - PvE only excludes players, own helpers, XP orbs and dead mobs
+  ---
+  duration_ms: 12.953584
+  type: 'test'
+  ...
+# Subtest: rejected native damage produces no forced HP change or knockback
+ok 166 - rejected native damage produces no forced HP change or knockback
+  ---
+  duration_ms: 0.495178
+  type: 'test'
+  ...
+# Subtest: bad target and cosmetic failures do not repeat attack or cancel later target
+ok 167 - bad target and cosmetic failures do not repeat attack or cancel later target
+  ---
+  duration_ms: 0.666995
+  type: 'test'
+  ...
+# Subtest: missing engine AABB capability skips unsupported target, not guessed hitbox
+ok 168 - missing engine AABB capability skips unsupported target, not guessed hitbox
+  ---
+  duration_ms: 0.284643
+  type: 'test'
+  ...
+# Subtest: duplicate same-tick callback does not damage twice or repeat particles
+ok 169 - duplicate same-tick callback does not damage twice or repeat particles
+  ---
+  duration_ms: 0.540687
+  type: 'test'
+  ...
+# Subtest: dead or locked source produces no sonic attack
+ok 170 - dead or locked source produces no sonic attack
+  ---
+  duration_ms: 0.196596
+  type: 'test'
+  ...
+# Subtest: wide-target halfwidth expands hit radius, diagonal source uses full ray
+ok 171 - wide-target halfwidth expands hit radius, diagonal source uses full ray
+  ---
+  duration_ms: 0.289882
+  type: 'test'
+  ...
+# Subtest: target cap bounds damage to256, records truncation, no invulnerability bypass
+ok 172 - target cap bounds damage to256, records truncation, no invulnerability bypass
+  ---
+  duration_ms: 2.181705
+  type: 'test'
+  ...
+# Subtest: Shriek applied through signature/custom dispatcher is instant, no saved timer
+ok 173 - Shriek applied through signature/custom dispatcher is instant, no saved timer
+  ---
+  duration_ms: 0.268436
+  type: 'test'
+  ...
+# Subtest: Screwdriver upside-down renames only alive mobs inside Java-style inflated AABB and stays instant
+ok 174 - Screwdriver upside-down renames only alive mobs inside Java-style inflated AABB and stays instant
+  ---
+  duration_ms: 0.626038
+  type: 'test'
+  ...
+# Subtest: Mojito Vision persists then refreshes Glowing on Java 50-tick countdown boundaries
+ok 175 - Mojito Vision persists then refreshes Glowing on Java 50-tick countdown boundaries
+  ---
+  duration_ms: 5.142489
+  type: 'test'
+  ...
+# Subtest: Vision radius caps at18 and excludes dead self outside and Tavern helpers
+ok 176 - Vision radius caps at18 and excludes dead self outside and Tavern helpers
+  ---
+  duration_ms: 0.476387
+  type: 'test'
+  ...
+# Subtest: Nether Special Tomb Raider disarms eligible mob, wears item to1 durability and enforces40tick pickup delay
+ok 177 - Nether Special Tomb Raider disarms eligible mob, wears item to1 durability and enforces40tick pickup delay
+  ---
+  duration_ms: 2.400571
+  type: 'test'
+  ...
+# Subtest: Tomb Raider excludes non-source mobs and Java 0.3F boundary does not proc
+ok 178 - Tomb Raider excludes non-source mobs and Java 0.3F boundary does not proc
+  ---
+  duration_ms: 0.503449
+  type: 'test'
+  ...
+# Subtest: Tomb Raider spawn failure restores original mainhand instead of deleting it
+ok 179 - Tomb Raider spawn failure restores original mainhand instead of deleting it
+  ---
+  duration_ms: 0.483775
+  type: 'test'
+  ...
+# Subtest: Depth Charge and Brass Heart both persist source 300-second Ardent Heat
+ok 180 - Depth Charge and Brass Heart both persist source 300-second Ardent Heat
+  ---
+  duration_ms: 0.535747
+  type: 'test'
+  ...
+# Subtest: Ardent Heat sprint breaks exact front-plane source stones, maps vanilla drops and charges exhaustion once
+ok 181 - Ardent Heat sprint breaks exact front-plane source stones, maps vanilla drops and charges exhaustion once
+  ---
+  duration_ms: 1.067041
+  type: 'test'
+  ...
+# Subtest: Ardent Heat damages one randomly selected worn armor item once per successful sprint collision tick
+ok 182 - Ardent Heat damages one randomly selected worn armor item once per successful sprint collision tick
+  ---
+  duration_ms: 0.647099
+  type: 'test'
+  ...
+# Subtest: Ardent Heat bare collision counter deals one generic damage every fifth successful tick
+ok 183 - Ardent Heat bare collision counter deals one generic damage every fifth successful tick
+  ---
+  duration_ms: 0.803822
+  type: 'test'
+  ...
+# Subtest: Ardent Heat item-spawn failure restores the source block and does not charge collision costs
+ok 184 - Ardent Heat item-spawn failure restores the source block and does not charge collision costs
+  ---
+  duration_ms: 0.340911
+  type: 'test'
+  ...
+# Subtest: Ardent Heat natural expiry respects duration and ends within the existing5-tick scheduler window; starvation also adds Hunger
+ok 185 - Ardent Heat natural expiry respects duration and ends within the existing5-tick scheduler window; starvation also adds Hunger
+  ---
+  duration_ms: 1.60698
+  type: 'test'
+  ...
+# Subtest: White Lady High Heels persists source 3600 seconds and climbs one blocked one-block obstacle
+ok 186 - White Lady High Heels persists source 3600 seconds and climbs one blocked one-block obstacle
+  ---
+  duration_ms: 0.830316
+  type: 'test'
+  ...
+# Subtest: High Heels refuses normal motion, jumping, two-block walls and repeated vertical wall climbing
+ok 187 - High Heels refuses normal motion, jumping, two-block walls and repeated vertical wall climbing
+  ---
+  duration_ms: 0.412578
+  type: 'test'
+  ...
+# Subtest: custom effects without equivalent native potion effects stay as timed Tavern status
+ok 188 - custom effects without equivalent native potion effects stay as timed Tavern status
+  ---
+  duration_ms: 0.357191
+  type: 'test'
+  ...
+# Subtest: legacy guide aliases migrate the originally used slot to the Cookery guide
+ok 189 - legacy guide aliases migrate the originally used slot to the Cookery guide
+  ---
+  duration_ms: 2.607839
+  type: 'test'
+  ...
+# Subtest: legacy guide migration never overwrites a slot changed before the deferred redirect
+ok 190 - legacy guide migration never overwrites a slot changed before the deferred redirect
+  ---
+  duration_ms: 0.33136
+  type: 'test'
+  ...
+# Subtest: Cookery owns guide UI while Tavern registry pages remain available to its extension API
+ok 191 - Cookery owns guide UI while Tavern registry pages remain available to its extension API
+  ---
+  duration_ms: 0.986695
+  type: 'test'
+  ...
+# Subtest: Cookery guide publisher republishes a changed Tavern chapter after registry refresh
+ok 192 - Cookery guide publisher republishes a changed Tavern chapter after registry refresh
+  ---
+  duration_ms: 67.636966
+  type: 'test'
+  ...
+# Subtest: Cookery guide publisher waits for host ready, then sends one complete Tavern chapter
+ok 193 - Cookery guide publisher waits for host ready, then sends one complete Tavern chapter
+  ---
+  duration_ms: 38.341272
+  type: 'test'
+  ...
+# Subtest: waterlogged furniture keeps water through placement, recolor, removal and rollback
+ok 194 - waterlogged furniture keeps water through placement, recolor, removal and rollback
+  ---
+  duration_ms: 1.216205
+  type: 'test'
+  ...
+1..194
+# tests 194
+# suites 0
+# pass 194
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 872.117487

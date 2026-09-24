@@ -1,0 +1,69 @@
+TAP version 13
+# (node:1788489) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern C2] Error: INJECTED_BLOCK_FAILURE
+# Subtest: incense interaction is empty hand only, deduplicated, foreign-cancel aware and Adventure guarded
+ok 1 - incense interaction is empty hand only, deduplicated, foreign-cancel aware and Adventure guarded
+  ---
+  duration_ms: 11.894216
+  type: 'test'
+  ...
+# Subtest: native custom-component incense fallback toggles on empty hand when no before-event is emitted
+ok 2 - native custom-component incense fallback toggles on empty hand when no before-event is emitted
+  ---
+  duration_ms: 1.450569
+  type: 'test'
+  ...
+# Subtest: placing a one-item incense stack does not let its same-tick empty-hand callback toggle the new block
+ok 3 - placing a one-item incense stack does not let its same-tick empty-hand callback toggle the new block
+  ---
+  duration_ms: 1.448449
+  type: 'test'
+  ...
+# Subtest: incense redstone drives open state; particle exceptions do not suppress the 120 tick undead damage pulse
+ok 4 - incense redstone drives open state; particle exceptions do not suppress the 120 tick undead damage pulse
+  ---
+  duration_ms: 2.000236
+  type: 'test'
+  ...
+# Subtest: incense uses the Java 32-block AABB, damages normal undead, and starts one native cure for critical zombie villagers
+ok 5 - incense uses the Java 32-block AABB, damages normal undead, and starts one native cure for critical zombie villagers
+  ---
+  duration_ms: 3.188452
+  type: 'test'
+  ...
+# Subtest: stepladder adapter places matched halves, respects Creative count and rolls back block writes
+ok 6 - stepladder adapter places matched halves, respects Creative count and rolls back block writes
+  ---
+  duration_ms: 2.816438
+  type: 'test'
+  ...
+# Subtest: stepladder break recovers one item from either half; Creative discards and unloaded counterpart is retained
+ok 7 - stepladder break recovers one item from either half; Creative discards and unloaded counterpart is retained
+  ---
+  duration_ms: 4.468161
+  type: 'test'
+  ...
+# Subtest: runtime climb adapter raises jumping players and lowers sneaking players while they are at the ladder
+ok 8 - runtime climb adapter raises jumping players and lowers sneaking players while they are at the ladder
+  ---
+  duration_ms: 1.16638
+  type: 'test'
+  ...
+# Subtest: incense protected break returns its source block and source diagnostics list the registered routes
+ok 9 - incense protected break returns its source block and source diagnostics list the registered routes
+  ---
+  duration_ms: 1.604539
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 425.755818

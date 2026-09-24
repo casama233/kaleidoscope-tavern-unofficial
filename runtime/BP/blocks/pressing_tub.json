@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:pressing_tub",
       "menu_category": {
-        "category": "items"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
       },
       "traits": {
         "minecraft:placement_position": {
@@ -45,18 +46,68 @@
           }
         }
       },
-      "minecraft:collision_box": {
-        "origin": [
-          -8,
-          0,
-          -8
-        ],
-        "size": [
-          16,
-          2,
-          16
-        ]
-      },
+      "minecraft:collision_box": [
+        {
+          "origin": [
+            -8,
+            0,
+            -8
+          ],
+          "size": [
+            16,
+            4,
+            16
+          ]
+        },
+        {
+          "origin": [
+            -8,
+            4,
+            -8
+          ],
+          "size": [
+            2,
+            4,
+            16
+          ]
+        },
+        {
+          "origin": [
+            6,
+            4,
+            -8
+          ],
+          "size": [
+            2,
+            4,
+            16
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            4,
+            -8
+          ],
+          "size": [
+            12,
+            4,
+            2
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            4,
+            6
+          ],
+          "size": [
+            12,
+            4,
+            2
+          ]
+        }
+      ],
       "minecraft:selection_box": {
         "origin": [
           -8,
@@ -70,7 +121,7 @@
         ]
       },
       "minecraft:entity_fall_on": {
-        "minimum_fall_distance": 0.5
+        "min_fall_distance": 0.5
       },
       "minecraft:liquid_detection": {
         "detection_rules": [
@@ -78,7 +129,7 @@
             "liquid_type": "water",
             "can_contain_liquid": true,
             "on_liquid_touches": "blocking",
-            "use_liquid_clipping": false
+            "use_liquid_clipping": true
           }
         ]
       },
@@ -116,18 +167,44 @@
               0
             ]
           },
-          "minecraft:collision_box": {
-            "origin": [
-              -8,
-              4,
-              -4
-            ],
-            "size": [
-              16,
-              8,
-              8
-            ]
-          },
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                4,
+                -4
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                0
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            }
+          ],
           "minecraft:selection_box": true
         }
       },
@@ -144,18 +221,44 @@
               0
             ]
           },
-          "minecraft:collision_box": {
-            "origin": [
-              -4,
-              4,
-              -8
-            ],
-            "size": [
-              8,
-              8,
-              16
-            ]
-          },
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                4,
+                -4
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                0
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            }
+          ],
           "minecraft:selection_box": true
         }
       },
@@ -172,18 +275,44 @@
               0
             ]
           },
-          "minecraft:collision_box": {
-            "origin": [
-              -8,
-              4,
-              -4
-            ],
-            "size": [
-              16,
-              8,
-              8
-            ]
-          },
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                4,
+                -4
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                0
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            }
+          ],
           "minecraft:selection_box": true
         }
       },
@@ -200,18 +329,44 @@
               0
             ]
           },
-          "minecraft:collision_box": {
-            "origin": [
-              -4,
-              4,
-              -8
-            ],
-            "size": [
-              8,
-              8,
-              16
-            ]
-          },
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                4,
+                -4
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                0
+              ],
+              "size": [
+                16,
+                8,
+                8
+              ]
+            }
+          ],
           "minecraft:selection_box": true
         }
       },

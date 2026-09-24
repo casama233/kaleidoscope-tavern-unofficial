@@ -40,8 +40,14 @@
         "kind_14": "geometry.kt_assets_a7.whiskey_1",
         "kind_15": "geometry.kt_assets_a1.wine_1"
       },
+      "animations": {
+        "rest": "animation.kt_runtime.storage_bottle.cellar"
+      },
       "scripts": {
-        "scale": "1.0"
+        "scale": "1.0",
+        "animate": [
+          "rest"
+        ]
       },
       "render_controllers": [
         "controller.render.kt_runtime.cellar_cabinet_bottle"

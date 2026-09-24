@@ -13,20 +13,42 @@
     },
     "components": {
       "minecraft:geometry": {
-        "identifier": "minecraft:empty"
+        "identifier": "geometry.kt_block.empty_cell"
       },
       "minecraft:material_instances": {
         "*": {
-          "texture": "kt_assets_a1_pressing_tub",
+          "texture": "kt_runtime_transparent",
           "render_method": "alpha_test"
         }
       },
-      "minecraft:collision_box": true,
-      "minecraft:selection_box": true,
+      "minecraft:collision_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
       "minecraft:tick": {
         "interval_range": [
-          20,
-          20
+          97,
+          97
         ],
         "looping": true
       },

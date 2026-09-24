@@ -15,6 +15,21 @@ export const MIXOLOGY_PAGES = [
     "recipeIds": []
   },
   {
+    "id": "kaleidoscope_tavern:signature_cocktail_controls",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "特調雞尾酒：放置與飲用",
+      "zh_CN": "特调鸡尾酒：放置与饮用",
+      "en_US": "Signature Cocktail: placing and drinking"
+    },
+    "body": {
+      "zh_TW": "潛行時點擊方塊可放置特調雞尾酒；一般點擊是飲用。特調的物品欄圖示使用固定原圖，不會依每杯保存的液體顏色變化。",
+      "zh_CN": "潜行时点击方块可放置特调鸡尾酒；普通点击是饮用。特调的物品栏图标使用固定原图，不会随每杯保存的液体颜色变化。",
+      "en_US": "Sneak and use on a block to place a Signature Cocktail; normal use drinks it. Its inventory icon is a fixed sprite and does not change with the liquid color stored in each cocktail."
+    },
+    "recipeIds": []
+  },
+  {
     "id": "kaleidoscope_tavern:cocktail_limits",
     "source": "kaleidoscope_tavern",
     "title": {
@@ -240,9 +255,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Mystery Cocktail"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:slightly_tipsy: 180s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "微醺：飲用後持續 180 秒；畫面提示列顯示剩餘時間。原版效果圖示尚未移植。",
+      "zh_CN": "微醺：饮用后持续 180 秒；画面提示栏显示剩余时间。原版效果图标尚未移植。",
+      "en_US": "Slightly Tipsy lasts 180 seconds after drinking; the action bar shows the remaining time. The Java effect icon is not yet ported."
     },
     "recipeIds": []
   },

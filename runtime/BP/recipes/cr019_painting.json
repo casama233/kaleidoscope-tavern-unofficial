@@ -9,7 +9,7 @@
     ],
     "ingredients": [
       {
-        "item": "minecraft:item_frame"
+        "item": "minecraft:frame"
       },
       {
         "item": "minecraft:red_dye"
@@ -18,6 +18,11 @@
     "result": {
       "item": "kaleidoscope_tavern:cr019_painting",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:frame"
+      }
+    ]
   }
 }

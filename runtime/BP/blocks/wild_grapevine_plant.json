@@ -1,0 +1,68 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:wild_grapevine_plant",
+      "menu_category": {
+        "category": "none"
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_assets_a2.wild_grapevine"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a2_wild_grapevine_plant",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a2.wild_grapevine"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a2_wild_grapevine_plant",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": {
+        "origin": [
+          -7,
+          0,
+          -7
+        ],
+        "size": [
+          14,
+          16,
+          14
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.0
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 0.0
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:tick": {
+        "interval_range": [
+          80,
+          140
+        ],
+        "looping": true
+      },
+      "kaleidoscope_tavern:wild_grapevine_plant": {},
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      }
+    }
+  }
+}

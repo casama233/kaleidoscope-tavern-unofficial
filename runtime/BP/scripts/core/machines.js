@@ -22,11 +22,17 @@ export function interact(state,command,registry,fluids){
  validateMachine(state);const s=clone(state),tx={state:s,take:0,give:[],message:''};const held=command.held;
  if(command.action==='inspect')return {...tx,message:statusText(s)};
  if(command.action==='lid'){
-  check(s.kind==='barrel','NOT_A_BARREL');check(!s.batch,'FERMENTING_LID_LOCKED');s.open=!s.open;tx.message=s.open?'酒桶已開蓋。':'酒桶已關蓋；下次檢查開始發酵。';
+  check(s.kind==='barrel','NOT_A_BARREL');check(!s.batch,'FERMENTING_LID_LOCKED');
+  s.open=!s.open;tx.message=s.open?'酒桶已開蓋。':'酒桶已關蓋；下次檢查開始發酵。';
  }else if(command.action==='press'){
-  check(s.kind==='pressing_tub','NOT_A_PRESS');const input=s.slots[0];check(input,'NO_INGREDIENT');const r=registry.findPress(input.id);check(r,'RECIPE_UNAVAILABLE');
-  check(!s.fluid||s.fluid===r.fluid,'MIXED_FLUID');check(s.amount+r.amount<=1000,'FLUID_FULL');
-  s.fluid=r.fluid;s.amount+=r.amount;if(--input.count===0)s.slots[0]=null;tx.message=`壓榨成功：${s.amount}/1000 mB`;
+  check(s.kind==='pressing_tub','NOT_A_PRESS');const input=s.slots[0],r=input?registry.findPress(input.id):undefined;
+  tx.pressed=false;
+  if(!input){tx.pressEffect=s.amount>0?'success':'fail';tx.message=s.amount>0?'盆中只剩果汁。':'果盆是空的。';}
+  else if(!r||s.fluid&&s.fluid!==r.fluid){
+   tx.pressEffect='fail';tx.eject=[{id:input.id,count:input.count}];s.slots[0]=null;tx.message='無法榨汁，原料已彈出。';
+  }else if(s.amount>=1000){tx.pressEffect='finished';tx.message='果盆已滿，請用空桶取出果汁。';}
+  else{s.fluid=r.fluid;s.amount=Math.min(1000,s.amount+r.amount);if(--input.count===0)s.slots[0]=null;tx.pressed=true;tx.pressEffect='success';tx.message=`壓榨成功：${s.amount}/1000 mB`;}
+  tx.pressItem=input?.id;
  }else if(command.action==='extract'){
   check(s.kind==='barrel'&&s.batch,'NO_PRODUCT');check(held?.id===s.batch.carrier,'WRONG_CARRIER');
   tx.take=1;tx.give=[{id:filledItem(s),count:1}];tx.message=`已取出品質 ${s.batch.quality}/6 成品。`;
@@ -38,18 +44,16 @@ export function interact(state,command,registry,fluids){
  }else if(command.action==='use'){
   check(held,'EMPTY_HAND');check(s.open&&!s.batch,'LID_CLOSED');
   const inbound=fluids.find(f=>f.filled===held.id);
-  if(inbound){
-   check(s.kind==='barrel','TUB_BUCKET_INPUT_UNSUPPORTED');check(!s.slots.some(Boolean),'REMOVE_INGREDIENTS_FIRST');check(!s.fluid||s.fluid===inbound.id,'MIXED_FLUID');
-   check(s.amount+1000<=4000,'FLUID_FULL');check(inbound.id!=='minecraft:lava','MOLOTOV_NOT_ENABLED');
+  if(inbound&&s.kind==='barrel'){
+   check(!s.slots.some(Boolean),'REMOVE_INGREDIENTS_FIRST');check(!s.fluid||s.fluid===inbound.id,'MIXED_FLUID');
+   check(s.amount+1000<=4000,'FLUID_FULL');
    s.fluid=inbound.id;s.amount+=1000;tx.take=1;tx.give=[{id:inbound.empty,count:1}];
-  }else if(held.id==='minecraft:bucket'){
+  }else if(held.id==='minecraft:bucket'&&(s.kind==='barrel'||s.amount>=1000)){
    check(!s.slots.some(Boolean)||s.kind==='pressing_tub','REMOVE_INGREDIENTS_FIRST');check(s.amount>=1000,'NOT_ENOUGH_FLUID');
    const f=fluids.find(f=>f.id===s.fluid);check(f,'FLUID_UNAVAILABLE');tx.take=1;tx.give=[{id:f.filled,count:1}];s.amount-=1000;if(!s.amount)s.fluid='';
   }else{
-   if(s.kind==='pressing_tub'){
-    const r=registry.findPress(held.id);check(r,'INVALID_PRESS_INGREDIENT');check(!s.fluid||s.fluid===r.fluid,'MIXED_FLUID');
-   }else{check(s.amount===4000,'FILL_BARREL_FIRST');check(registry.allowedIngredient(held.id),'UNSUPPORTED_INGREDIENT');}
-   const cap=s.kind==='barrel'?16:64;
+   if(s.kind==='barrel'){check(s.amount===4000,'FILL_BARREL_FIRST');check(registry.allowedIngredient(held.id),'UNSUPPORTED_INGREDIENT');}
+   const cap=s.kind==='barrel'?16:Math.min(64,held.maxAmount??64);
    let slot=s.slots.findIndex(x=>x?.id===held.id&&x.count<cap);if(slot<0)slot=s.slots.findIndex(x=>!x);
    check(slot>=0,'INGREDIENT_SLOTS_FULL');const n=Math.min(cap-(s.slots[slot]?.count??0),held.count);integer(n,1,cap);
    s.slots[slot]={id:held.id,count:(s.slots[slot]?.count??0)+n};tx.take=n;

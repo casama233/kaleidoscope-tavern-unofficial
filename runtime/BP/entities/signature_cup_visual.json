@@ -33,6 +33,15 @@
           ],
           "default": 255,
           "client_sync": true
+        },
+        "kt_art:palette": {
+          "type": "int",
+          "range": [
+            -1,
+            335
+          ],
+          "default": 84,
+          "client_sync": true
         }
       }
     },
@@ -73,28 +82,32 @@
         "set_property": {
           "kt_art:red": 255,
           "kt_art:green": 255,
-          "kt_art:blue": 255
+          "kt_art:blue": 255,
+          "kt_art:palette": 335
         }
       },
       "kt_art:color_red": {
         "set_property": {
           "kt_art:red": 255,
           "kt_art:green": 0,
-          "kt_art:blue": 0
+          "kt_art:blue": 0,
+          "kt_art:palette": -1
         }
       },
       "kt_art:color_green": {
         "set_property": {
           "kt_art:red": 0,
           "kt_art:green": 255,
-          "kt_art:blue": 0
+          "kt_art:blue": 0,
+          "kt_art:palette": -1
         }
       },
       "kt_art:color_blue": {
         "set_property": {
           "kt_art:red": 0,
           "kt_art:green": 0,
-          "kt_art:blue": 255
+          "kt_art:blue": 255,
+          "kt_art:palette": -1
         }
       }
     }

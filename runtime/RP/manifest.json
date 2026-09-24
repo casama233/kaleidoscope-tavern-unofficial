@@ -1,13 +1,13 @@
 {
   "format_version": 2,
   "header": {
-    "name": "森羅物語：酒館 C6 | 原作資源",
-    "description": "A17 source art reused unchanged; no Cookery assets bundled. CC BY-NC-SA 4.0.",
+    "name": "Kaleidoscope Tavern (Unofficial) 0.6.33 RP",
+    "description": "Unofficial Java-to-Bedrock port and companion to Kaleidoscope Cookery (Unofficial). Public beta.",
     "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
     "version": [
       0,
       6,
-      0
+      33
     ],
     "min_engine_version": [
       1,
@@ -22,7 +22,7 @@
       "version": [
         0,
         6,
-        0
+        33
       ]
     }
   ],
@@ -35,5 +35,8 @@
         6
       ]
     }
+  ],
+  "capabilities": [
+    "pbr"
   ]
 }

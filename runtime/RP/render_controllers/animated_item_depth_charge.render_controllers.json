@@ -1,0 +1,24 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_runtime.animated_item_depth_charge": {
+      "arrays": {
+        "textures": {
+          "Array.frames": [
+            "Texture.f0",
+            "Texture.f1"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Array.frames[math.mod(math.floor(query.life_time * 20 / 5), 2)]"
+      ]
+    }
+  }
+}

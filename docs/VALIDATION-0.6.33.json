@@ -1,0 +1,33 @@
+{
+  "version": "0.6.33-beta.1",
+  "static": {
+    "json_files": 1486,
+    "geometry_identifiers": 929,
+    "interaction_simulations": false,
+    "resource_pack_capability": "pbr"
+  },
+  "localization": {
+    "locales": [
+      "en_US",
+      "zh_CN",
+      "zh_TW"
+    ],
+    "keys_per_locale": 1655,
+    "runtime_label_references": 356,
+    "duplicate_keys": 0,
+    "missing_keys": 0,
+    "placeholder_mismatches": 0,
+    "guide_entries": 140,
+    "guide_categories": 11,
+    "english_guide_contains_cjk": false
+  },
+  "load": {
+    "engine": "1.26.51.1",
+    "cookery": "1.0.6",
+    "server_started": true,
+    "script_initialized": true,
+    "error_lines": 0
+  },
+  "android_visual_acceptance": "public test; BDS does not render client assets",
+  "archive_sha256": "88b6a395552ee41898acd80bafcac9f66789b082b44a56527d2445973cb89092"
+}

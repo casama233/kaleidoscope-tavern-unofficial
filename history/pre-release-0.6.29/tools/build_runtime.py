@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+"""Build C1 from locked A17 art and extracted, hash-recorded recipe data. No network."""
+from pathlib import Path
+import json, shutil, hashlib, uuid, zipfile, copy
+ROOT=Path(__file__).resolve().parents[1]; A=ROOT/'art'; BP=ROOT/'runtime/BP'; RP=ROOT/'runtime/RP'; NS='kaleidoscope_tavern'
+def dump(p,d):
+ p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def js(p,name,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text('// Generated from locked data. Do not hand-edit.\nexport const '+name+' = '+json.dumps(d,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
+def uid(s):return str(uuid.uuid5(uuid.NAMESPACE_URL,'urn:kaleidoscope-tavern-bedrock-c1:'+s))
+def build_creative_catalog():
+ # Bedrock has fixed categories but allows multiple collapsible catalog groups.
+ source_cultivation=[
+  'grapevine','wild_grapevine','grape','ice_grape','gold_grape','green_grape','trellis',
+  'grape_bucket','ice_grape_bucket','gold_grape_bucket','green_grape_bucket','sweet_berries_bucket','glow_berries_bucket',
+ ]
+ source_brewing=[
+  'pressing_tub','barrel','tap','shaker','empty_bottle','empty_glassware',
+  'molotov','honey_bottle','dragon_breath_bottle','watermelon_juice'
+ ]
+ source_wines=['vinegar_q6','wine_q6','sakura_wine_q6','champagne_q6','brandy_q6','carignan_q6',
+  'ice_wine_q6','polaris_sweet_white_q6','sherry_q6','mother_snow_q6',
+  'miners_star_q6','honey_wine_q6','madame_shexiang_q6','sunset_glow_q6',
+  'sauvignon_blanc_dry_white_q6','riesling_dry_white_q6','luminous_bride_q6','glowflower_brew_q6',
+  'plum_wine_q6','sweet_berry_wine_q6','red_queen_q6','vodka_q6','whiskey_q6','rum_q6']
+ source_cocktails=['signature_cocktail','mystery_cocktail','white_lady','emerald','brass_heart','godfather','grasshopper','screwdriver','mojito','allium_garden','depth_charge','nether_special','bloody_mary','sculk_special']
+ colors=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
+ paintings=['ysbb','tartaric_acid','cr019','unknown','master_marisa','son_of_man','david','girl_with_pearl_earring','starry_night','van_gogh_self_portrait','father','great_wave','mona_lisa','mondrian']
+ source_deco=[
+  'bar_cabinet','glass_bar_cabinet','cellar_cabinet','bar_counter','table','tilted_rack','circular_rack','holder','glassware_holder',
+  'string_lights_colorless',*[f'string_lights_{c}' for c in colors],
+  'bell_pendant_lamp','yellow_pendant_lamp','blue_pendant_lamp',
+  *[f'{c}_sofa' for c in colors],
+  *[f'{c}_bar_stool' for c in colors],
+  *[f'{p}_painting' for p in paintings],
+  'stepladder','chalkboard',
+  *[f'{p}_sandwich_board' for p in ['base','grass','allium','azure_bluet','cornflower','orchid','peony','pink_petals','pitcher_plant','poppy','sunflower','torchflower','tulip','wither_rose']],
+  *[f'{p}_incense' for p in ['sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly']]
+ ]
+ def exists(short):return (BP/'items'/f'{short}.json').is_file() or (BP/'blocks'/f'{short}.json').is_file()
+ # Cookery owns the only guide UI. Old Tavern book IDs stay hidden solely as world-save
+ # migration aliases; they are no longer craftable and never form a second guide family.
+ for short in ['guidebook','recipe_book']:
+  p=BP/'items'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:item']['description'].pop('menu_category',None);dump(p,d)
+ # Keep cultivation objects with the in-game Nature category; only menu placement changes.
+ for short in ['grapevine','trellis']:
+  p=BP/'blocks'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:block']['description']['menu_category']={'category':'nature'};dump(p,d)
+  p=BP/'items'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:item']['description']['menu_category']={'category':'nature'};dump(p,d)
+ # Brewing stations remain in Items rather than Construction.
+ for short in ['pressing_tub','tap']:
+  p=BP/'blocks'/f'{short}.json'
+  if p.is_file():
+   d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:block']['description']['menu_category']={'category':'items'};dump(p,d)
+ # Molotov is a throwable item with a matching placeable display block.
+ # Keep only the explicit item visible so Bedrock's merged item/block ID appears once.
+ p=BP/'items/molotov.json'
+ if p.is_file():
+  d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:item']['description']['menu_category']={'category':'items'};d['minecraft:item']['components']['minecraft:use_modifiers']={'use_duration':0.25,'movement_modifier':1.0};dump(p,d)
+ p=BP/'blocks/molotov.json'
+ if p.is_file():
+  d=json.loads(p.read_text(encoding='utf-8'));d['minecraft:block']['description'].pop('menu_category',None);dump(p,d)
+ cultivation_items=[NS+':'+x for x in source_cultivation if exists(x)]
+ brewing_items=[NS+':'+x for x in source_brewing if exists(x)]
+ wine_items=[NS+':'+x for x in source_wines if exists(x)]
+ cocktail_items=[NS+':'+x for x in source_cocktails if exists(x)]
+ main_items=cultivation_items+brewing_items+wine_items+cocktail_items
+ deco_items=[NS+':'+x for x in source_deco if exists(x)]
+ catalog={'format_version':'1.21.60','minecraft:crafting_items_catalog':{'categories':[
+  {'category_name':'nature','groups':[{'group_identifier':{'icon':NS+':grape','name':'item_group.kaleidoscope_tavern.tavern_cultivation.name'},'items':cultivation_items}]},
+  {'category_name':'items','groups':[
+   {'group_identifier':{'icon':NS+':barrel','name':'item_group.kaleidoscope_tavern.tavern_brewing.name'},'items':brewing_items},
+   {'group_identifier':{'icon':NS+':wine_q6','name':'item_group.kaleidoscope_tavern.tavern_wines.name'},'items':wine_items},
+   {'group_identifier':{'icon':NS+':mojito','name':'item_group.kaleidoscope_tavern.tavern_cocktails.name'},'items':cocktail_items}]},
+  {'category_name':'construction','groups':[{'group_identifier':{'icon':NS+':bar_cabinet','name':'item_group.kaleidoscope_tavern.tavern_deco.name'},'items':deco_items}]}
+ ]}}
+ dump(BP/'item_catalog/crafting_item_catalog.json',catalog)
+ labels={
+  'zh_TW':('森羅物語酒館・種植','森羅物語酒館・釀造','森羅物語酒館・酒款','森羅物語酒館・調酒','森羅物語酒館・裝飾'),
+  'zh_CN':('森罗物语酒馆·种植','森罗物语酒馆·酿造','森罗物语酒馆·酒款','森罗物语酒馆·调酒','森罗物语酒馆·装饰'),
+  'en_US':('Kaleidoscope Tavern: Cultivation','Kaleidoscope Tavern: Brewing','Kaleidoscope Tavern: Wines','Kaleidoscope Tavern: Cocktails','Kaleidoscope Tavern: Decor'),
+  'ja_JP':('カレイドスコープ酒場・栽培','カレイドスコープ酒場・醸造','カレイドスコープ酒場・酒類','カレイドスコープ酒場・カクテル','カレイドスコープ酒場・装飾'),
+  'ru_RU':('Kaleidoscope Tavern: Растения','Kaleidoscope Tavern: Варка','Kaleidoscope Tavern: Напитки','Kaleidoscope Tavern: Коктейли','Kaleidoscope Tavern: Декор')
+ }
+ keys=['item_group.kaleidoscope_tavern.tavern_cultivation.name','item_group.kaleidoscope_tavern.tavern_brewing.name','item_group.kaleidoscope_tavern.tavern_wines.name','item_group.kaleidoscope_tavern.tavern_cocktails.name','item_group.kaleidoscope_tavern.tavern_deco.name']
+ for lc,values in labels.items():
+  p=RP/f'texts/{lc}.lang'
+  if not p.is_file():continue
+  lines=p.read_text(encoding='utf-8-sig').splitlines();seen=set();out=[]
+  for line in lines:
+   k=line.split('=',1)[0] if '=' in line and not line.lstrip().startswith('#') else None
+   if k in keys:
+    if k in seen:continue
+    out.append(k+'='+values[keys.index(k)]);seen.add(k)
+   else:out.append(line)
+  for k,v in zip(keys,values):
+   if k not in seen:out.append(k+'='+v)
+  p.write_text('\n'.join(out).rstrip()+'\n',encoding='utf-8')
+ dump(ROOT/'docs/C6-CREATIVE-CATALOG.json',{
+  'source':'KaleidoscopeMods/KaleidoscopeTavern ModCreativeTabs.java / Java 1.2.0',
+  'source_tabs':['tavern_main','tavern_deco'],
+  'bedrock_groups':{
+   'nature':{'name':keys[0],'icon':NS+':grape','items':cultivation_items},
+   'items':{'groups':[{'name':keys[1],'icon':NS+':barrel','items':brewing_items},{'name':keys[2],'icon':NS+':wine_q6','items':wine_items},{'name':keys[3],'icon':NS+':mojito','items':cocktail_items}]},
+   'construction':{'name':keys[4],'icon':NS+':bar_cabinet','items':deco_items}
+  },
+  'quality_drinks':'creative catalog exposes Q6 only, matching Java getMaxLevelDrink',
+  'legacy_guide_aliases_hidden_from_creative':[NS+':guidebook',NS+':recipe_book'],
+  'materials_policy':'Cultivation inputs and grapevine/trellis are in Nature; brewing tools, wine bottles, cocktails, and decor have separate groups.',
+  'cookery_merge':{
+   'status':'DEFERRED_UNTIL_HOST_GROUP_IDENTIFIERS_ARE_PINNED',
+   'reasonable_food_candidates':[NS+':grape',NS+':ice_grape',NS+':gold_grape',NS+':green_grape'],
+   'reasonable_main_candidate':NS+':grapevine',
+   'rule':'Never guess Cookery Bedrock group identifiers: a wrong identifier creates a duplicate group instead of merging with the host.'
+  },
+  'engine_acceptance':'NOT_RUN'
+ })
+def main():
+ lock=json.loads((ROOT/'compat/cookery/cookery.lock.json').read_text());v=[0,1,0]
+ bpuid=uid('bp');rpuid=uid('rp');
+ dump(BP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 功能開發版','description':'Cookery guide chapter, Tavern extension API and brewing runtime. Requires Cookery 1.0.6. Not engine-accepted.','uuid':bpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':uid('data'),'version':v},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':uid('script'),'version':v}],'dependencies':[{'uuid':rpuid,'version':v},{'uuid':lock['bp']['uuid'],'version':lock['bp']['version']},{'module_name':'@minecraft/server','version':'2.7.0'},{'module_name':'@minecraft/server-ui','version':'2.0.0'}]})
+ dump(RP/'manifest.json',{'format_version':2,'header':{'name':'森羅物語：酒館 C1 | 原作資源','description':'A17 source art reused unchanged; no Cookery assets bundled. CC BY-NC-SA 4.0.','uuid':rpuid,'version':v,'min_engine_version':[1,26,50]},'modules':[{'type':'resources','uuid':uid('resources'),'version':v}],'dependencies':[{'uuid':lock['rp']['uuid'],'version':lock['rp']['version']}]})
+ dump(ROOT/'config.json',{'type':'minecraftBedrock','name':'Kaleidoscope Tavern C1','namespace':NS,'targetVersion':'1.26.50','packs':{'behaviorPack':'./runtime/BP','resourcePack':'./runtime/RP'},'experimentalGameplay':{},'authors':['Unofficial Tavern port contributors']})
+ reg=json.loads((A/'interfaces/asset-registry.json').read_text());vis={x['key']:x for x in reg['visuals']}; itemart={x.get('item'):x for x in json.loads((A/'interfaces/item-art-map.json').read_text())['entries'] if x.get('item')}
+ jar_resources=ROOT/'data/upstream';recdir=jar_resources/'recipes';recdir.mkdir(parents=True,exist_ok=True)
+ # First acquisition is from the user's local JAR; subsequent builds use the locked local recipe copies.
+ source_jar=Path('/mnt/data/kaleidoscopetavern-1.2.0-neoforge+mc1.21.1.jar')
+ if not (jar_resources/'recipe-source.lock.json').exists():
+  records=[]
+  with zipfile.ZipFile(source_jar) as z:
+   for n in z.namelist():
+    if n.startswith('data/kaleidoscope_tavern/recipe/') and n.endswith('.json'):
+     p=recdir/n.split('/recipe/')[1];p.parent.mkdir(parents=True,exist_ok=True);raw=z.read(n);p.write_bytes(raw);records.append({'member':n,'path':str(p.relative_to(ROOT)),'sha256':hashlib.sha256(raw).hexdigest()})
+   for n in z.namelist():
+    if n.startswith('data/') and '/tags/item/'in n and n.endswith('.json'):
+     p=jar_resources/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(z.read(n))
+  dump(jar_resources/'recipe-source.lock.json',{'jar_sha256':hashlib.sha256(source_jar.read_bytes()).hexdigest(),'source':'user_upload','records':records})
+ for x in json.loads((jar_resources/'recipe-source.lock.json').read_text())['records']:
+  assert hashlib.sha256((ROOT/x['path']).read_bytes()).hexdigest()==x['sha256']
+ for x in json.loads((jar_resources/'tag-source.lock.json').read_text())['records']:
+  assert hashlib.sha256((ROOT/x['path']).read_bytes()).hexdigest()==x['sha256']
+ def resolve_ingredient(value,seen=()):
+  if 'item' in value:return [value['item']]
+  tag=value.get('tag');assert isinstance(tag,str) and tag not in seen, 'Unknown/cyclic ingredient tag'
+  namespace,key=tag.split(':',1);path=jar_resources/f'data/{namespace}/tags/item/{key}.json'
+  if not path.is_file():raise ValueError('Required source tag not found: '+tag)
+  output=[]
+  for entry in json.loads(path.read_text())['values']:
+   value=entry if isinstance(entry,str) else entry['id']
+   output.extend(resolve_ingredient({'tag':value[1:]},seen+(tag,)) if value.startswith('#') else [value])
+  assert output, 'Empty ingredient tag';return list(dict.fromkeys(output))
+ locales={}
+ for lc,rawlc in [('zh_TW','zh_cn'),('zh_CN','zh_cn'),('en_US','en_us')]:
+  lang=json.loads((A/f'upstream/uploaded-jar/assets/{NS}/lang/{rawlc}.json').read_text());names={}
+  for k,val in lang.items():
+   for prefix in [f'item.{NS}.',f'block.{NS}.']:
+    if k.startswith(prefix):names[NS+':'+k[len(prefix):]]=val
+  locales[lc]=names
+ # JA/RU artwork names are carried by their hand-checked RP files rather than the
+ # uploaded JAR language subset; expose those names to generated Bedrock item IDs too.
+ for lc in ['ja_JP','ru_RU']:
+  names={};langpath=RP/f'texts/{lc}.lang'
+  if langpath.is_file():
+   for line in langpath.read_text(encoding='utf-8-sig').splitlines():
+    if '=' not in line:continue
+    key,val=line.split('=',1)
+    if key.startswith('block.'+NS+'.') or key.startswith('item.'+NS+'.'):
+     names[NS+':'+key.split('.',2)[2]]=val
+  for key,val in locales['en_US'].items():names.setdefault(key,val)
+  locales[lc]=names
+ # Explicit traditional vocabulary for every implemented station/drink; no claim of all 158-item TW proofreading.
+ tw={'wine':'葡萄酒','vinegar':'醋','champagne':'香檳','brandy':'白蘭地','carignan':'佳麗釀','ice_wine':'冰葡萄酒','polaris_sweet_white':'北極星甜白','mother_snow':'雪之母','sherry':'雪莉','miners_star':'礦工之星','honey_wine':'蜂蜜葡萄酒','madame_shexiang':'麝香夫人','sunset_glow':'落日餘暉','sauvignon_blanc_dry_white':'長相思乾白','riesling_dry_white':'雷司令乾白','luminous_bride':'流明新娘','glowflower_brew':'螢花釀','plum_wine':'梅酒','sweet_berry_wine':'甜漿果酒','red_queen':'紅皇后','vodka':'伏特加','whiskey':'威士忌','rum':'朗姆酒','sakura_wine':'櫻花酒','barrel':'酒桶','pressing_tub':'壓榨桶','tap':'酒嘴','empty_bottle':'空酒瓶','guidebook':'舊版酒館指南','recipe_book':'舊版酒館配方書','grape':'葡萄','ice_grape':'冰葡萄','gold_grape':'金葡萄','green_grape':'青提','grapevine':'葡萄藤','trellis':'葡萄藤架','molotov':'莫洛托夫雞尾酒','watermelon_juice':'西瓜汁'}
+ for k,val in tw.items():locales['zh_TW'][NS+':'+k]=val
+ for lc in locales:
+  english=lc=='en_US';trad=lc=='zh_TW';simpl=lc=='zh_CN'
+  locales[lc].update({'minecraft:water':'Water' if english else '水','minecraft:bucket':'Bucket' if english else ('空桶' if trad or simpl else 'バケツ' if lc=='ja_JP' else 'Ведро'),'minecraft:sugar':'Sugar' if english else ('糖' if trad or simpl else '砂糖' if lc=='ja_JP' else 'Сахар'),'minecraft:glow_berries':'Glow Berries' if english else ('螢光莓' if trad else '发光浆果' if simpl else 'グロウベリー' if lc=='ja_JP' else 'Светящиеся ягоды'),'minecraft:sweet_berries':'Sweet Berries' if english else ('甜莓' if trad else '甜浆果' if simpl else 'スイートベリー' if lc=='ja_JP' else 'Сладкие ягоды')})
+ def title(name):return {lc:locales[lc].get(NS+':'+name,name) for lc in locales}
+ fluids=[]
+ for name in ['grape','ice_grape','gold_grape','green_grape','sweet_berries','glow_berries']:
+  fluids.append({'id':NS+':'+name+'_juice','filled':NS+':'+name+'_bucket','empty':'minecraft:bucket','rigSuffix':name,'title':title(name+'_juice')})
+ fluids.append({'id':'minecraft:water','filled':'minecraft:water_bucket','empty':'minecraft:bucket','rigSuffix':None,'title':{'en_US':'Water','zh_TW':'水','zh_CN':'水'}})
+ fluids.append({'id':'minecraft:lava','filled':'minecraft:lava_bucket','empty':'minecraft:bucket','rigSuffix':None,'title':{'en_US':'Lava','zh_TW':'熔岩','zh_CN':'熔岩'}})
+ recipes=[];planned=[]
+ for p in sorted((recdir/'barrel').glob('*.json')):
+  d=json.loads(p.read_text());base=d['result']['id'].split(':')[1]
+  is_molotov=base=='molotov'
+  r={'id':NS+':barrel/'+base,'kind':'barrel','title':title(base),'fluid':d['fluid'],'ingredients':[resolve_ingredient(x)for x in d.get('ingredients',[])],'carrier':d['carrier']['item'],'unitTime':d.get('unit_time',2400),'noIngredientCount':16,'output':{'item':d['result']['id']} if is_molotov else {'byQuality':[NS+':'+base+'_q'+str(q)for q in range(1,7)]},'source':NS}
+  recipes.append(r)
+ for p in sorted((recdir/'pressing_tub').glob('*.json')):
+  d=json.loads(p.read_text());ingredient=d['ingredient'];input_ids=resolve_ingredient(ingredient)
+  # JAR c:fruits/grapes is explicitly resolved; cross-pack extra grape tags are extension inputs, not guessed.
+  recipes.append({'id':NS+':pressing/'+p.stem,'kind':'pressing','input':input_ids,'fluid':d['fluid'],'amount':d.get('amount',125),'title':title(p.stem.replace('_bucket','')),'source':NS})
+ js(BP/'scripts/data/recipes.js','BUILTIN_RECIPES',recipes);js(BP/'scripts/data/fluids.js','FLUIDS',fluids)
+ quality={'zh_TW':['難以下嚥','劣質','普通','優質','精釀','典藏'],'zh_CN':['难以下咽','劣质','普通','优质','精酿','典藏']};icons=json.loads((RP/'textures/item_texture.json').read_text());icons.setdefault('texture_data',{})
+ def item(name,icon=None,components=None,stack=64,creative=True):
+  full=name if ':' in name else NS+':'+name;short=full.split(':')[1]
+  ico='kt_c1_'+short
+  if icon:
+   icons['texture_data'][ico]={'textures':icon}
+  else:
+   # Original icon if present. Never recolor/repaint the source.
+   path=RP/(itemart.get(full,{}).get('texture',f'textures/kaleidoscope_tavern_jar/item/{short}')+'.png')
+   if path.exists():icons['texture_data'][ico]={'textures':str(path.relative_to(RP)).removesuffix('.png')}
+   else:raise ValueError('No original icon for '+short)
+  c={'minecraft:display_name':{'value':'item.'+full+'.name'},'minecraft:icon':ico,'minecraft:max_stack_size':stack};c.update(components or {})
+  desc={'identifier':full};
+  if creative:desc['menu_category']={'category':'nature' if short in {'grape','ice_grape','gold_grape','green_grape','grape_bucket','ice_grape_bucket','gold_grape_bucket','green_grape_bucket','sweet_berries_bucket','glow_berries_bucket'} else 'items'}
+  dump(BP/'items'/f'{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':desc,'components':c}})
+ for n in ['grape','ice_grape','gold_grape','green_grape']:
+  item(n)  # Ingredient-only until source food values/effects are implemented; no guessed nutrition.
+ for f in fluids:
+  if f['id'].startswith(NS+':'):item(f['filled'],stack=1)
+ item('empty_bottle',components={'minecraft:block_placer':{'block':NS+':bottle_empty'},'minecraft:liquid_clipped':True},stack=16)
+ item('guidebook','textures/items/book_normal',{NS+':legacy_guide':{}},1)
+ item('recipe_book','textures/items/book_writable',{NS+':legacy_guide':{}},1)
+ item('barrel',components={NS+':place_barrel':{}},stack=16)
+ drink_bases=sorted({r['output']['byQuality'][0].split(':')[1][:-3]for r in recipes if r['kind']=='barrel' and 'byQuality' in r['output']}|{'vinegar'})
+ for base in drink_bases:
+  for q in range(1,7):
+   c={}
+   if q>=2:c={'minecraft:food':{'nutrition':0,'saturation_modifier':0.0,'can_always_eat':True,'using_converts_to':NS+':empty_bottle'},'minecraft:use_animation':'drink','minecraft:use_modifiers':{'use_duration':1.6,'movement_modifier':0.35}}
+   item(base+'_q'+str(q),'textures/kaleidoscope_tavern_jar/item/'+base,c,16,creative=(q==6))
+   for lc in locales:locales[lc][NS+':'+base+'_q'+str(q)]=locales[lc].get(NS+':'+base,base)
+ tooltip_translations={
+  'zh_TW':{'color.kaleidoscope_tavern.prefix':'顏色：','tooltip.kaleidoscope_tavern.bottle_block.brew_level':'品質：%s','mod.kaleidoscope_tavern.tavern':'森羅物語酒館','colors':{'light_purple':'淡紫色','blue':'藍色','gold':'金色','green':'綠色','red':'紅色','yellow':'黃色','white':'白色'},'quality':quality['zh_TW']},
+  'zh_CN':{'color.kaleidoscope_tavern.prefix':'颜色：','tooltip.kaleidoscope_tavern.bottle_block.brew_level':'品质：%s','mod.kaleidoscope_tavern.tavern':'森罗物语酒馆','colors':{'light_purple':'淡紫色','blue':'蓝色','gold':'金色','green':'绿色','red':'红色','yellow':'黄色','white':'白色'},'quality':quality['zh_CN']},
+  'en_US':{'color.kaleidoscope_tavern.prefix':'Color: ','tooltip.kaleidoscope_tavern.bottle_block.brew_level':'Brew quality: %s','mod.kaleidoscope_tavern.tavern':'Kaleidoscope Tavern','colors':{'light_purple':'Light purple','blue':'Blue','gold':'Gold','green':'Green','red':'Red','yellow':'Yellow','white':'White'},'quality':['Undrinkable','Inferior','Common','Fine','Crafted','Vintage']},
+  'ja_JP':{'color.kaleidoscope_tavern.prefix':'色：','tooltip.kaleidoscope_tavern.bottle_block.brew_level':'品質：%s','mod.kaleidoscope_tavern.tavern':'カレイドスコープ酒場','colors':{'light_purple':'薄紫色','blue':'青色','gold':'金色','green':'緑色','red':'赤色','yellow':'黄色','white':'白色'},'quality':['飲めない','粗悪品','普通','良好','上質','秘蔵']},
+  'ru_RU':{'color.kaleidoscope_tavern.prefix':'Цвет: ','tooltip.kaleidoscope_tavern.bottle_block.brew_level':'Качество варки: %s','mod.kaleidoscope_tavern.tavern':'Kaleidoscope Tavern','colors':{'light_purple':'Светло-фиолетовый','blue':'Синий','gold':'Золотой','green':'Зелёный','red':'Красный','yellow':'Жёлтый','white':'Белый'},'quality':['Непригодно для питья','Низкое качество','Обычное','Хорошее','Мастеровое','Выдержанное']}
+ }
+ effect_labels={
+  'zh_TW':{'slightly_tipsy':'微醺','high_heels':'高跟鞋','grass_stealth':'穿草隱身','vision':'靈視','bloody_mary':'血腥瑪麗'},
+  'zh_CN':{'slightly_tipsy':'微醺','high_heels':'高跟鞋','grass_stealth':'穿草隐身','vision':'灵视','bloody_mary':'血腥玛丽'},
+  'en_US':{'slightly_tipsy':'Slightly Tipsy','high_heels':'High Heels','grass_stealth':'Grass Stealth','vision':'Spirit Vision','bloody_mary':'Bloody Mary'},
+  'ja_JP':{'slightly_tipsy':'ほろ酔い','high_heels':'ハイヒール','grass_stealth':'草隠れ','vision':'霊視','bloody_mary':'ブラッディ・マリー'},
+  'ru_RU':{'slightly_tipsy':'Slightly Tipsy','high_heels':'High Heels','grass_stealth':'Grass Stealth','vision':'Spirit Vision','bloody_mary':'Bloody Mary'}
+ }
+ native_effect_labels={
+  'zh_TW':['凶兆','失明','抗火','急迫','瞬間治療','跳躍提升','挖掘疲勞','反胃','夜視','生命回復','抗性提升','速度','力量','水下呼吸'],
+  'zh_CN':['不祥之兆','失明','抗火','急迫','瞬间治疗','跳跃提升','挖掘疲劳','反胃','夜视','生命恢复','抗性提升','速度','力量','水下呼吸'],
+  'en_US':['Bad Omen','Blindness','Fire Resistance','Haste','Instant Health','Jump Boost','Mining Fatigue','Nausea','Night Vision','Regeneration','Resistance','Speed','Strength','Water Breathing'],
+  'ja_JP':['不吉な予感','盲目','火炎耐性','採掘速度上昇','即時回復','跳躍力上昇','採掘速度低下','吐き気','暗視','再生能力','耐性','移動速度上昇','攻撃力上昇','水中呼吸'],
+  'ru_RU':['Дурное знамение','Слепота','Огнестойкость','Спешка','Мгновенное лечение','Прыгучесть','Утомление','Тошнота','Ночное зрение','Регенерация','Сопротивление','Скорость','Сила','Подводное дыхание']
+ }
+ native_effect_keys=['bad_omen','blindness','fire_resistance','haste','instant_health','jump_boost','mining_fatigue','nausea','night_vision','regeneration','resistance','speed','strength','water_breathing']
+ for lc in locales:
+  for f in fluids:
+   if f['id'].startswith(NS+':'):locales[lc][f['filled']]=locale_name=locales[lc].get(f['filled'],f['filled'].split(':')[1]);locales[lc][f['id']]=locale_name.replace(' Bucket','').replace('桶','')
+  locales[lc][NS+':guidebook']={'zh_TW':'舊版酒館指南','zh_CN':'旧版酒馆指南','en_US':'Legacy Tavern Guide'}[lc]
+  locales[lc][NS+':recipe_book']={'zh_TW':'舊版酒館配方書','zh_CN':'旧版酒馆配方书','en_US':'Legacy Tavern Recipe Book'}[lc]
+  langpath=RP/f'texts/{lc}.lang';old=langpath.read_text()if langpath.exists()else''
+  # On rebuild strip only own previously generated key block; all A17 art language keys remain unchanged.
+  old=old.split('## C1 RUNTIME START')[0].rstrip()+'\n'
+  extra=tooltip_translations[lc]
+  for effect,val in effect_labels[lc].items():extra[f'effect.kaleidoscope_tavern.{effect}']=val
+  for effect,val in zip(native_effect_keys,native_effect_labels[lc]):extra[f'effect.minecraft.{effect}']=val
+  for color,val in extra.pop('colors').items():extra['color.kaleidoscope_tavern.'+color]=val
+  levels=extra.pop('quality')
+  for i,val in enumerate(levels,1):extra[f'message.kaleidoscope_tavern.barrel.brew_level.{i}']=val
+  extra['item.kaleidoscope_tavern.mod_name']=extra.pop('mod.kaleidoscope_tavern.tavern')
+  additions=['## C1 RUNTIME START']+[f'item.{key}.name={val}'for key,val in sorted(locales[lc].items())]+[f'tile.{key}.name={val}'for key,val in sorted(locales[lc].items())]+[f'{key}={val}'for key,val in sorted(extra.items())]
+  langpath.write_text(old+'\n'.join(additions)+'\n',encoding='utf-8')
+ dump(RP/'textures/item_texture.json',icons);js(BP/'scripts/data/names.js','NAMES',locales)
+ # Runtime custom blocks use original art, with explicit physics separate from artwork.
+ def visual(key):x=vis[key]['binding'];return {'minecraft:geometry':copy.deepcopy(x['geometry']),'minecraft:material_instances':copy.deepcopy(x['materials']),'minecraft:item_visual':copy.deepcopy(x.get('item_visual',{}))}
+ def block(name,c,states=None):
+  c.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2},'minecraft:destructible_by_explosion':{'explosion_resistance':3600000},'minecraft:movable':{'movement_type':'immovable'},'minecraft:loot':'loot_tables/empty.json','minecraft:light_dampening':0})
+  desc={'identifier':NS+':'+name};
+  if not name.startswith('barrel_'):desc['menu_category']={'category':'construction'}
+  if states:desc['states']=states
+  dump(BP/'blocks'/f'{name}.json',{'format_version':'1.26.50','minecraft:block':{'description':desc,'components':c}})
+ dump(BP/'loot_tables/empty.json',{'pools':[]})
+ c=visual('pressing_tub');c.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,2,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,8,16]},'minecraft:entity_fall_on':{'minimum_fall_distance':0.5},'minecraft:liquid_detection':{'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}]},'minecraft:tick':{'interval_range':[100,100],'looping':True},NS+':pressing_tub':{}});block('pressing_tub',c)
+ tub_block=json.loads((BP/'blocks/pressing_tub.json').read_text());tub_desc=tub_block['minecraft:block']['description']
+ tub_desc['traits']={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}}
+ tub_perms=[]
+ for face,rot,box in [('north',0,{'origin':[-8,4,-4],'size':[16,8,8]}),('east',-90,{'origin':[-4,4,-8],'size':[8,8,16]}),('south',-180,{'origin':[-8,4,-4],'size':[16,8,8]}),('west',-270,{'origin':[-4,4,-8],'size':[8,8,16]})]:
+  tub_perms.append({'condition':f"q.block_state('minecraft:block_face') == '{face}'",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.pressing_tub_tilt'},'minecraft:transformation':{'rotation':[0,rot,0]},'minecraft:collision_box':box,'minecraft:selection_box':True}})
+ for facing,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
+  tub_perms.append({'condition':f"(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == '{facing}'",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.pressing_tub'},'minecraft:transformation':{'rotation':[0,rot,0]}}})
+ tub_block['minecraft:block']['permutations']=tub_perms;dump(BP/'blocks/pressing_tub.json',tub_block)
+ tap_box={'origin':[-3,5,-2],'size':[6,8,10]}
+ c=visual('tap_closed');c.update({'minecraft:collision_box':tap_box,'minecraft:selection_box':tap_box,'minecraft:liquid_detection':{'detection_rules':[{'liquid_type':'water','can_contain_liquid':True,'on_liquid_touches':'blocking','use_liquid_clipping':False}]},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:tick':{'interval_range':[20,20],'looping':True},NS+':tap':{}});block('tap',c,{NS+':open':[0,1]})
+ tap_block=json.loads((BP/'blocks/tap.json').read_text());tap_desc=tap_block['minecraft:block']['description'];tap_desc['traits']={'minecraft:placement_position':{'enabled_states':['minecraft:block_face']},'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180.0}}
+ tap_perms=[]
+ for face,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
+  tap_perms.append({'condition':f"q.block_state('minecraft:block_face') == '{face}'",'components':{'minecraft:transformation':{'rotation':[0,rot,0]}}})
+ for facing,rot in [('north',0),('east',-90),('south',-180),('west',-270)]:
+  tap_perms.append({'condition':f"(q.block_state('minecraft:block_face') == 'up' || q.block_state('minecraft:block_face') == 'down') && q.block_state('minecraft:cardinal_direction') == '{facing}'",'components':{'minecraft:transformation':{'rotation':[0,rot,0]}}})
+ tap_perms.append({'condition':f"q.block_state('{NS}:open') == 1",'components':{'minecraft:geometry':{'identifier':'geometry.kt_assets_a1.tap_open'}}})
+ tap_block['minecraft:block']['permutations']=tap_perms;dump(BP/'blocks/tap.json',tap_block)
+ # Invisible proxy uses an empty derived geometry, never a placeholder texture.
+ dump(RP/'models/entity/runtime_invisible.geo.json',{'format_version':'1.12.0','minecraft:geometry':[{'description':{'identifier':'geometry.kt_runtime.invisible','texture_width':16,'texture_height':16,'visible_bounds_width':1.0,'visible_bounds_height':1.0,'visible_bounds_offset':[0,0,0]},'bones':[{'name':'root','pivot':[0,0,0]}]}]})
+ proxy={'minecraft:geometry':{'identifier':'geometry.kt_runtime.invisible'},'minecraft:material_instances':{'*':{'texture':'kt_assets_a1_pressing_tub','render_method':'alpha_test'}},'minecraft:collision_box':True,'minecraft:selection_box':True}
+ c=copy.deepcopy(proxy);c.update({'minecraft:tick':{'interval_range':[97,97],'looping':True},NS+':barrel_core':{}});block('barrel_core',c)
+ c=copy.deepcopy(proxy);c[NS+':barrel_part']={};block('barrel_part',c,{NS+':dx':[-1,0,1],NS+':dy':[0,1,2],NS+':dz':[-1,0,1]})
+ for name in ['barrel_core','barrel_part']:
+  p=BP/'blocks'/f'{name}.json';d=json.loads(p.read_text());d['minecraft:block']['description']['traits']={'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}};dump(p,d)
+ # Copy and rename visual entity definitions; geometry and images themselves are unchanged.
+ runtime_entities=[]
+ def rename_entity(src,short):
+  srcid=src['minecraft:entity']['description']['identifier'];newid=NS+':'+short
+  raw=json.dumps(src).replace(srcid,newid);d=json.loads(raw);d['minecraft:entity']['description']['is_spawnable']=False
+  comps=d['minecraft:entity'].setdefault('components',{});comps['minecraft:type_family']={'family':['kt_runtime_visual']};comps['minecraft:collision_box']={'width':0,'height':0};comps['minecraft:pushable']={'is_pushable':False,'is_pushable_by_piston':False};comps['minecraft:physics']={'has_gravity':False,'has_collision':False};comps['minecraft:damage_sensor']={'triggers':[{'cause':'all','deals_damage':'no'}]}
+  dump(BP/'entities'/f'{short}.json',d);runtime_entities.append(newid);return srcid,newid
+ # Open/closed are separate renderer helpers; changing lid replaces visual only, state stays on core.
+ for short in ['barrel_open','barrel_closed']:
+  d=json.loads((A/f'VisualLab_BP/entities/{short}.json').read_text());old,new=rename_entity(d,short+'_visual')
+  cr=json.loads((A/f'RP/entity/{short}.entity.json').read_text());cr['minecraft:client_entity']['description']['identifier']=new;dump(RP/'entity'/f'runtime_{short}.entity.json',cr)
+ for f in fluids:
+  if not f['rigSuffix']:continue
+  for fixture in ['barrel','pressing_tub']:
+   orig=f"rig_liquid_{fixture}_{f['rigSuffix']}";short=orig+'_visual';d=json.loads((A/f'VisualLab_BP/entities/{orig}.json').read_text());old,new=rename_entity(d,short)
+   cr=json.loads((A/f'RP/entity/{orig}.entity.json').read_text());cr['minecraft:client_entity']['description']['identifier']=new;dump(RP/'entity'/f'runtime_{orig}.entity.json',cr)
+ js(BP/'scripts/data/visuals.js','RUNTIME_VISUALS',runtime_entities)
+ # Exact upstream basic crafting recipes. No speculative crop/worldgen recipes.
+ for name in ['barrel','pressing_tub','tap','empty_bottle']:
+  d=json.loads((recdir/(name+'.json')).read_text());kind='shaped'if d['type'].endswith('shaped')and not d['type'].endswith('shapeless')else'shapeless'
+  v={'description':{'identifier':NS+':'+name},'tags':['crafting_table'],'result':{'item':d['result']['id'],'count':d['result'].get('count',1)}}
+  if kind=='shaped':v.update({'pattern':d['pattern'],'key':{k:{'item':i['item']}for k,i in d['key'].items()}})
+  else:v['ingredients']=[{'item':i['item']}for i in d['ingredients']]
+  dump(BP/'recipes'/f'{name}.json',{'format_version':'1.20.10','minecraft:recipe_'+kind:v})
+ # Legacy Tavern guide items are migration aliases only; Cookery owns guide acquisition.
+ for name in ['guidebook','recipe_book']:
+  p=BP/'recipes'/f'{name}.json'
+  if p.exists():p.unlink()
+ (BP/'functions').mkdir(exist_ok=True)
+ (BP/'functions/kt_c1_kit.mcfunction').write_text('\n'.join(['# Development kit: gives items only; no world replacement.']+['give @s '+x for x in [NS+':barrel 1',NS+':pressing_tub 1',NS+':tap 1',NS+':grape 32','minecraft:bucket 16',NS+':empty_bottle 16']])+'\n')
+ dump(ROOT/'docs/C1-BUILD.json',{'runtime_bp_uuid':bpuid,'runtime_rp_uuid':rpuid,'version':[0,1,0],'cookery_bp_dependency':lock['bp']['uuid'],'cookery_rp_dependency':lock['rp']['uuid'],'cookery_internal_version':lock['bp']['version'],'script_api':'2.7.0','builtin_barrel_recipes':sum(r['kind']=='barrel'for r in recipes),'builtin_pressing_recipes':sum(r['kind']=='pressing'for r in recipes),'native_crafting_recipes':4,'quality_drink_items':len(drink_bases)*6,'planned_recipe_exclusions':planned,'art_copied_without_geometry_repaint':True,'engine_acceptance':'NOT_RUN','is_production_release':False})
+ print('C1 build:',len(recipes),'machine recipes,',len(drink_bases)*6,'drink quality items.')
+if __name__=='__main__':
+ main()
+ import build_c2
+ build_c2.main()
+ import build_c3
+ build_c3.main()
+
+if __name__=="__main__":
+ import build_c4
+ build_c4.main()
+
+if __name__=="__main__":
+ import build_c5
+ build_c5.main()
+
+if __name__=='__main__':
+ from build_c6 import main as c6
+ c6()
+ import sync_post12_visuals
+ sync_post12_visuals.apply_all()
+ build_creative_catalog()
+ import build_vanilla_bottle_displays
+ build_vanilla_bottle_displays.main()
+ import build_tap_drip_particles
+ build_tap_drip_particles.main()

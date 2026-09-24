@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:tap",
       "menu_category": {
-        "category": "items"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
       },
       "states": {
         "kaleidoscope_tavern:open": [
@@ -52,8 +53,16 @@
         }
       },
       "minecraft:collision_box": {
-        "origin": [-3, 5, -2],
-        "size": [6, 8, 10]
+        "origin": [
+          -3,
+          5,
+          -2
+        ],
+        "size": [
+          6,
+          8,
+          10
+        ]
       },
       "minecraft:selection_box": {
         "origin": [

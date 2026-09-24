@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:shaker",
       "menu_category": {
-        "category": "items"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
       }
     },
     "components": {
@@ -17,11 +18,17 @@
       "minecraft:interact_button": "action.interact.kt_hold_shaker",
       "minecraft:allow_off_hand": false,
       "minecraft:hand_equipped": true,
+      "minecraft:food": {
+        "nutrition": 0,
+        "saturation_modifier": 0.0,
+        "can_always_eat": true
+      },
       "minecraft:use_modifiers": {
         "use_duration": 3600,
         "movement_modifier": 0.35,
         "start_using": "always"
-      }
+      },
+      "minecraft:use_animation": "none"
     }
   }
 }

@@ -3089,39 +3089,200 @@
       },
       {
         "barrel": {
-          "type": "label",
+          "type": "panel",
           "size": [
-            "100% - 20px",
-            12
+            252,
+            18
           ],
           "anchor_from": "bottom_middle",
           "anchor_to": "bottom_middle",
           "offset": [
             0,
-            -62
+            -39
           ],
           "layer": 41,
-          "text": "#text",
-          "text_alignment": "center",
-          "shadow": true,
-          "color": [
-            1,
-            1,
-            1
-          ],
-          "localize": false,
           "bindings": [
-            {
-              "binding_type": "view",
-              "source_control_name": "kt_mixology_data",
-              "source_property_name": "(#stored_text - 'ktmix:barrel/')",
-              "target_property_name": "#text"
-            },
             {
               "binding_type": "view",
               "source_control_name": "kt_mixology_data",
               "source_property_name": "(not ((#stored_text - 'ktmix:barrel/') = #stored_text))",
               "target_property_name": "#visible"
+            }
+          ],
+          "controls": [
+            {
+              "background": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  "100%",
+                  "100%"
+                ],
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "offset": [
+                  0,
+                  0
+                ],
+                "color": [
+                  0.06,
+                  0.07,
+                  0.07
+                ],
+                "alpha": 0.72,
+                "layer": 0,
+                "bilinear": false
+              }
+            },
+            {
+              "top": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  "100%",
+                  1
+                ],
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle",
+                "offset": [
+                  0,
+                  0
+                ],
+                "color": [
+                  0.72,
+                  0.62,
+                  0.38
+                ],
+                "alpha": 0.7,
+                "layer": 1,
+                "bilinear": false
+              }
+            },
+            {
+              "bottom": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  "100%",
+                  1
+                ],
+                "anchor_from": "bottom_middle",
+                "anchor_to": "bottom_middle",
+                "offset": [
+                  0,
+                  0
+                ],
+                "color": [
+                  0.72,
+                  0.62,
+                  0.38
+                ],
+                "alpha": 0.7,
+                "layer": 1,
+                "bilinear": false
+              }
+            },
+            {
+              "left": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  1,
+                  "100%"
+                ],
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "offset": [
+                  0,
+                  0
+                ],
+                "color": [
+                  0.72,
+                  0.62,
+                  0.38
+                ],
+                "alpha": 0.7,
+                "layer": 1,
+                "bilinear": false
+              }
+            },
+            {
+              "right": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  1,
+                  "100%"
+                ],
+                "anchor_from": "right_middle",
+                "anchor_to": "right_middle",
+                "offset": [
+                  0,
+                  0
+                ],
+                "color": [
+                  0.72,
+                  0.62,
+                  0.38
+                ],
+                "alpha": 0.7,
+                "layer": 1,
+                "bilinear": false
+              }
+            },
+            {
+              "edge_glow": {
+                "type": "image",
+                "texture": "textures/ui/kt_mixology/barrel_pixel",
+                "size": [
+                  2,
+                  2
+                ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": "@hud.kt_barrel_edge_top",
+                "color": [
+                  1,
+                  0.87,
+                  0.52
+                ],
+                "alpha": 1,
+                "layer": 3,
+                "bilinear": false
+              }
+            },
+            {
+              "text": {
+                "type": "label",
+                "size": [
+                  "100% - 12px",
+                  10
+                ],
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "offset": [
+                  0,
+                  0
+                ],
+                "layer": 2,
+                "text": "#text",
+                "text_alignment": "center",
+                "shadow": true,
+                "color": [
+                  1,
+                  1,
+                  1
+                ],
+                "localize": false,
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "kt_mixology_data",
+                    "source_property_name": "(#stored_text - 'ktmix:barrel/')",
+                    "target_property_name": "#text"
+                  }
+                ]
+              }
             }
           ]
         }
@@ -3152,5 +3313,61 @@
         "target_property_name": "#visible"
       }
     ]
+  },
+  "kt_barrel_edge_top": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 2.5,
+    "from": [
+      0,
+      0
+    ],
+    "to": [
+      250,
+      0
+    ],
+    "next": "@hud.kt_barrel_edge_right"
+  },
+  "kt_barrel_edge_right": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.16,
+    "from": [
+      250,
+      0
+    ],
+    "to": [
+      250,
+      16
+    ],
+    "next": "@hud.kt_barrel_edge_bottom"
+  },
+  "kt_barrel_edge_bottom": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 2.5,
+    "from": [
+      250,
+      16
+    ],
+    "to": [
+      0,
+      16
+    ],
+    "next": "@hud.kt_barrel_edge_left"
+  },
+  "kt_barrel_edge_left": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.16,
+    "from": [
+      0,
+      16
+    ],
+    "to": [
+      0,
+      0
+    ],
+    "next": "@hud.kt_barrel_edge_top"
   }
 }

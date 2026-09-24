@@ -38,4 +38,4 @@ python3 tools/build_release.py
 
 支援英文、簡體中文、繁體中文，每種語言均有 1,658 個語言鍵。告示牌編輯介面跟隨遊戲語言，圖鑑跟隨廚房本體的語言選項。日文及俄文保留部分舊翻譯，未列為完整支援。
 
-[下載 0.6.37-beta.1 公開測試包](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.37-beta.1)。
+[下載 0.6.37-beta.1 公開測試包](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon)。

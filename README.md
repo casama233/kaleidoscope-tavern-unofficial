@@ -39,7 +39,7 @@ The checks parse resources, validate references and scripts, and inspect guide d
 
 The public beta has static resource/script/language checks and a successful BDS 1.26.51.1 load with Cookery 1.0.6. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
 
-[Download the public beta](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.37-beta.1). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
+[Download the public beta](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
 
 ## Licensing
 

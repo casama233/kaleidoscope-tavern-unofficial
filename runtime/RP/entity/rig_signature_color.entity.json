@@ -5,7 +5,7 @@
       "identifier": "kt_assets_a17:rig_signature_color",
       "materials": {
         "default": "entity_alphatest_one_sided",
-        "liquid": "entity_alphatest_change_color"
+        "liquid": "kt_signature_animated"
       },
       "textures": {
         "frame_0": "textures/kt_runtime/signature/frame_0",
@@ -13,7 +13,8 @@
         "frame_2": "textures/kt_runtime/signature/frame_2",
         "frame_3": "textures/kt_runtime/signature/frame_3",
         "frame_4": "textures/kt_runtime/signature/frame_4",
-        "frame_5": "textures/kt_runtime/signature/frame_5"
+        "frame_5": "textures/kt_runtime/signature/frame_5",
+        "mixtures": "textures/kt_runtime/signature/mixtures"
       },
       "geometry": {
         "glass": "geometry.kt_assets_a17.rig_signature_glass",

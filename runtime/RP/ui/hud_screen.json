@@ -3089,95 +3089,39 @@
       },
       {
         "barrel": {
-          "type": "panel",
+          "type": "label",
           "size": [
-            192,
-            64
+            "100% - 20px",
+            12
           ],
-          "anchor_from": "top_middle",
-          "anchor_to": "top_middle",
-          "$barrel_y": 2,
-          "variables": [
-            {
-              "requires": "($ui_profile = 'pocket')",
-              "$barrel_y": 26
-            }
-          ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
           "offset": [
             0,
-            "$barrel_y"
+            -62
           ],
           "layer": 41,
+          "text": "#text",
+          "text_alignment": "center",
+          "shadow": true,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "localize": false,
           "bindings": [
+            {
+              "binding_type": "view",
+              "source_control_name": "kt_mixology_data",
+              "source_property_name": "(#stored_text - 'ktmix:barrel/')",
+              "target_property_name": "#text"
+            },
             {
               "binding_type": "view",
               "source_control_name": "kt_mixology_data",
               "source_property_name": "(not ((#stored_text - 'ktmix:barrel/') = #stored_text))",
               "target_property_name": "#visible"
-            }
-          ],
-          "controls": [
-            {
-              "background": {
-                "type": "image",
-                "size": [
-                  "100%",
-                  "100%"
-                ],
-                "texture": "textures/ui/kt_mixology/barrel_tooltip",
-                "bilinear": false
-              }
-            },
-            {
-              "icon": {
-                "type": "image",
-                "size": [
-                  20,
-                  20
-                ],
-                "anchor_from": "top_left",
-                "anchor_to": "top_left",
-                "offset": [
-                  5,
-                  5
-                ],
-                "texture": "textures/kaleidoscope_tavern_jar/item/barrel",
-                "bilinear": false,
-                "layer": 1
-              }
-            },
-            {
-              "text": {
-                "type": "label",
-                "size": [
-                  158,
-                  56
-                ],
-                "anchor_from": "top_left",
-                "anchor_to": "top_left",
-                "offset": [
-                  29,
-                  4
-                ],
-                "text": "#text",
-                "text_alignment": "left",
-                "shadow": true,
-                "color": [
-                  1,
-                  1,
-                  1
-                ],
-                "localize": false,
-                "layer": 1,
-                "bindings": [
-                  {
-                    "binding_type": "view",
-                    "source_control_name": "kt_mixology_data",
-                    "source_property_name": "(#stored_text - 'ktmix:barrel/')",
-                    "target_property_name": "#text"
-                  }
-                ]
-              }
             }
           ]
         }

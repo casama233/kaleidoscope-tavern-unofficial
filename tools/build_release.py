@@ -23,6 +23,6 @@ def main():
             z.writestr(info,p.read_bytes())
     sha=hashlib.sha256(target.read_bytes()).hexdigest()
     (out/'SHA256SUMS').write_text(f'{sha}  {name}\n')
-    shutil.copy2(ROOT/'docs/RELEASE-NOTES-0.6.29.md',out/'RELEASE-NOTES.md')
+    shutil.copy2(ROOT/f"docs/RELEASE-NOTES-{config['version']}.md",out/'RELEASE-NOTES.md')
     print(json.dumps({'archive':str(target),'sha256':sha,'bytes':target.stat().st_size}))
 if __name__=='__main__':main()

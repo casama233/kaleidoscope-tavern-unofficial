@@ -26,6 +26,7 @@ import {registerJavaBlockUseHandler,registerJavaBlockUseFallback,registerJavaIte
 import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,playShakerPour} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
+import {signaturePaletteIndex} from '../data/signature-palette.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
@@ -198,6 +199,7 @@ export function syncCupVisual(block){
   if(!state||state.item!==SIGNATURE||block.typeId!==NS+':cup_signature_cocktail'){for(const entity of found)entity.remove();return;}
   const visual=found.shift()??block.dimension.spawnEntity(CUP_HELPER,point,{initialRotation:state.facing*90});
   for(const extra of found)extra.remove();visual.setDynamicProperty(CUP_ANCHOR,key);
+  visual.setProperty('kt_art:palette',signaturePaletteIndex(state.payload.color));
   visual.setProperty('kt_art:red',(state.payload.color>>16)&255);visual.setProperty('kt_art:green',(state.payload.color>>8)&255);visual.setProperty('kt_art:blue',state.payload.color&255);visual.setRotation({x:0,y:state.facing*90});
  });
 }

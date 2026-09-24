@@ -11,12 +11,12 @@ const INTERACTION_SOUNDS=Object.freeze({glass:'place.stone',wool:'place.cloth',m
 function breakMaterial(id){
  if(typeof id!=='string'||!id.startsWith('kaleidoscope_tavern:'))return undefined;
  const short=id.slice('kaleidoscope_tavern:'.length);
- if(/^bottle_|^cup_/.test(short))return 'glass';
+ if(/^bottle_|^cup_/.test(short)||/^.+_bottle$/.test(short)||short==='molotov')return 'glass';
  if(/_sofa$/.test(short))return 'wool';
- if(/_crop$/.test(short))return 'crop';
+ if(/_crop$/.test(short)||/^wild_grapevine(?:_plant)?$/.test(short))return 'crop';
  if(/_pendant_lamp$/.test(short)||/^light_/.test(short))return 'chain';
  if(/^(tap|shaker_station|glassware_holder)$/.test(short))return 'metal';
- if(/^(barrel_core|barrel_part|pressing_tub|trellis|table|bar_counter|bar_cabinet|glass_bar_cabinet|cellar_cabinet|holder|tilted_rack|circular_rack)$/.test(short)||/^stool_/.test(short)||/(^|_)grapevine_trellis$/.test(short)||/_painting$/.test(short))return 'wood';
+ if(/^(barrel_core|barrel_part|pressing_tub|trellis|table|bar_counter|bar_cabinet|glass_bar_cabinet|cellar_cabinet|holder|tilted_rack|circular_rack|stepladder|chalkboard|base_sandwich_board|grass_sandwich_board|allium_sandwich_board|azure_bluet_sandwich_board|cornflower_sandwich_board|orchid_sandwich_board|peony_sandwich_board|pink_petals_sandwich_board|pitcher_plant_sandwich_board|poppy_sandwich_board|sunflower_sandwich_board|torchflower_sandwich_board|tulip_sandwich_board|wither_rose_sandwich_board|sakura_incense|pine_incense|ginkgo_incense|spore_incense|catnip_incense|snow_incense|butterfly_incense|firefly_incense)$/.test(short)||/^stool_/.test(short)||/(^|_)grapevine_trellis$/.test(short)||/_painting$/.test(short))return 'wood';
  return undefined;
 }
 function breakSound(id){return BREAK_SOUNDS[breakMaterial(id)]??'dig.wood';}

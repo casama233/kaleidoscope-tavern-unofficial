@@ -1,12 +1,8 @@
-# Current C1 reports
+# Current documentation
 
-- `C1-STATUS.json`: implemented/pending status, always distinguishes engine acceptance.
-- `COOKERY-AUDIT.zh-TW.md`: actual uploaded BP/RP and API inspection.
-- `EXTENSION-API.zh-TW.md`: independent Tavern extension contract and SDK usage.
-- `ENGINE-TEST-CHECKLIST.zh-TW.md`: NOT-RUN game acceptance tasks.
-- `TEST-RESULTS.json`: actual Node mock/pure tests and TypeScript results.
-- `STATIC-VALIDATION.json`: links, manifests, syntax and namespace checks.
-- `A17-ART-REGRESSION.json`: unchanged original art payload comparison.
-- `REBUILD-REGRESSION.json`: reproducible current runtime build outputs.
+- [Install and migrate](INSTALLATION.md)
+- [0.6.29 release notes](RELEASE-NOTES-0.6.29.md)
+- [Release readiness](RELEASE-READINESS.md)
+- [CurseForge description draft](CURSEFORGE-DESCRIPTION.md)
 
-Historical A17 reports inside `art/` retain their own scope and are not current C1 test results.
+Earlier C1–C6 reports and generation tools are retained under `history/pre-release-0.6.29/`. Historical test counts and acceptance labels do not describe the current candidate.

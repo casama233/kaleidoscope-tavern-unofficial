@@ -1,0 +1,27 @@
+{
+  "format_version": "1.20.30",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:depth_charge",
+      "item": {
+        "kaleidoscope_tavern:depth_charge": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/kt_runtime/animated_items/depth_charge/frame_00",
+        "enchanted": "textures/misc/enchanted_item_glint",
+        "f0": "textures/kt_runtime/animated_items/depth_charge/frame_00",
+        "f1": "textures/kt_runtime/animated_items/depth_charge/frame_01"
+      },
+      "geometry": {
+        "default": "geometry.kt_runtime.animated_item_depth_charge"
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.animated_item_depth_charge"
+      ]
+    }
+  }
+}

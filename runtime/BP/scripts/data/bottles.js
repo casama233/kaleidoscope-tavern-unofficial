@@ -119,5 +119,10 @@ export const BOTTLES = {
     "maxCount": 4,
     "source": "assets/kaleidoscope_tavern/models/block/brew/drink/wine",
     "qualities": 6
+  },
+  "watermelon_juice": {
+    "maxCount": 4,
+    "source": "assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice",
+    "qualities": 1
   }
 };

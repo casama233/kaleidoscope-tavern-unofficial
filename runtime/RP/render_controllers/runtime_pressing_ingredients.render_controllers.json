@@ -1,0 +1,74 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_runtime.pressing_ingredients": {
+      "geometry": "(q.property('kaleidoscope_tavern:grape_kind') == 21 || q.property('kaleidoscope_tavern:grape_kind') == 22 || q.property('kaleidoscope_tavern:grape_kind') == 23 || q.property('kaleidoscope_tavern:grape_kind') == 24 || q.property('kaleidoscope_tavern:grape_kind') == 25) ? Geometry.cube : Geometry.card",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Array.kind[q.property('kaleidoscope_tavern:grape_kind')-1]"
+      ],
+      "arrays": {
+        "textures": {
+          "Array.kind": [
+            "Texture.kind_1",
+            "Texture.kind_2",
+            "Texture.kind_3",
+            "Texture.kind_4",
+            "Texture.kind_5",
+            "Texture.kind_6",
+            "Texture.kind_7",
+            "Texture.kind_8",
+            "Texture.kind_9",
+            "Texture.kind_10",
+            "Texture.kind_11",
+            "Texture.kind_12",
+            "Texture.kind_13",
+            "Texture.kind_14",
+            "Texture.kind_15",
+            "Texture.kind_16",
+            "Texture.kind_17",
+            "Texture.kind_18",
+            "Texture.kind_19",
+            "Texture.kind_20",
+            "Texture.kind_21",
+            "Texture.kind_22",
+            "Texture.kind_23",
+            "Texture.kind_24",
+            "Texture.kind_25",
+            "Texture.kind_26"
+          ]
+        }
+      },
+      "part_visibility": [
+        {
+          "ingredient_0": "q.property('kaleidoscope_tavern:fill_stage') > 0"
+        },
+        {
+          "ingredient_1": "q.property('kaleidoscope_tavern:fill_stage') > 1"
+        },
+        {
+          "ingredient_2": "q.property('kaleidoscope_tavern:fill_stage') > 2"
+        },
+        {
+          "ingredient_3": "q.property('kaleidoscope_tavern:fill_stage') > 3"
+        },
+        {
+          "ingredient_4": "q.property('kaleidoscope_tavern:fill_stage') > 4"
+        },
+        {
+          "ingredient_5": "q.property('kaleidoscope_tavern:fill_stage') > 5"
+        },
+        {
+          "ingredient_6": "q.property('kaleidoscope_tavern:fill_stage') > 6"
+        },
+        {
+          "ingredient_7": "q.property('kaleidoscope_tavern:fill_stage') > 7"
+        }
+      ]
+    }
+  }
+}

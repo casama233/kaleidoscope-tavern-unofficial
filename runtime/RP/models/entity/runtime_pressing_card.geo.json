@@ -1,0 +1,551 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.kt_runtime.pressing_card",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [
+          0,
+          1,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "tilt_yaw",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "tilt",
+          "parent": "tilt_yaw",
+          "pivot": [
+            -8,
+            0,
+            -8
+          ]
+        },
+        {
+          "name": "offset",
+          "parent": "tilt",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ingredient_0",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_0",
+          "parent": "ingredient_0",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_0",
+          "parent": "item_y_0",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_1",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_1",
+          "parent": "ingredient_1",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_1",
+          "parent": "item_y_1",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_2",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_2",
+          "parent": "ingredient_2",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_2",
+          "parent": "item_y_2",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_3",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_3",
+          "parent": "ingredient_3",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_3",
+          "parent": "item_y_3",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_4",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_4",
+          "parent": "ingredient_4",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_4",
+          "parent": "item_y_4",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_5",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_5",
+          "parent": "ingredient_5",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_5",
+          "parent": "item_y_5",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_6",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_6",
+          "parent": "ingredient_6",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_6",
+          "parent": "item_y_6",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ingredient_7",
+          "parent": "offset",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_y_7",
+          "parent": "ingredient_7",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "item_z_7",
+          "parent": "item_y_7",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -2,
+                -0.125
+              ],
+              "size": [
+                4,
+                4,
+                0.25
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

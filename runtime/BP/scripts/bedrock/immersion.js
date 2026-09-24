@@ -1,44 +1,32 @@
-/** Non-authoritative visual feedback. No inventory, world-state or recipe writes here. */
-import {system,world,MolangVariableMap} from '@minecraft/server';
-import {flowPoints,pourPhase} from '../core/immersion.js';
-const NS='kaleidoscope_tavern',TYPE=NS+':shaker_visual',ANCHOR='kt:shaker_visual_anchor';
-const recent=new Map();
-export const immersionDiagnostics={events:0,suppressed:0,errors:[],coordinates:'Source motion curves; Bedrock hand/bone alignment requires in-engine review'};
-function protect(fn){try{return fn();}catch(e){immersionDiagnostics.errors.push(String(e));if(immersionDiagnostics.errors.length>12)immersionDiagnostics.errors.shift();return undefined;}}
-export function cueOnce(key,fn){const now=system.currentTick;if(recent.get(key)===now){immersionDiagnostics.suppressed++;return;}recent.set(key,now);if(recent.size>512)for(const[k,t]of recent)if(now-t>40)recent.delete(k);if(recent.size>512)recent.delete(recent.keys().next().value);immersionDiagnostics.events++;return protect(fn);}
-export function worldSound(d,p,id,volume=.65,pitch=1){return protect(()=>d.playSound(id,p,{volume,pitch}));}
-export function sparkle(d,p,id='minecraft:bubble_pop_particle'){return protect(()=>d.spawnParticle(id,p));}
-export function syncShakerVisual(block,exists=true,shaking=false){return protect(()=>{
- // The block owns the stationary model. Retire older helper entities left by
- // previous versions so a failed spawn cannot turn the shaker into a cube.
- const key=`${block.dimension.id}/${block.location.x}_${block.location.y}_${block.location.z}`,p={x:block.location.x+.5,y:block.location.y,z:block.location.z+.5};
- const found=block.dimension.getEntities({type:TYPE,location:p,maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===key);
- for(const e of found)e.remove();
- });}
-export function shakerPut(block,revision){return cueOnce(`put/${block.dimension.id}/${JSON.stringify(block.location)}/${revision}`,()=>{
- const p={x:block.location.x+.5,y:block.location.y+.78,z:block.location.z+.5};worldSound(block.dimension,p,'bottle.empty');sparkle(block.dimension,p);
- });}
-export function feedback(block,kind,revision=0){return cueOnce(`${kind}/${block.dimension.id}/${JSON.stringify(block.location)}/${revision}`,()=>{
- const p={x:block.location.x+.5,y:block.location.y+.4,z:block.location.z+.5};
- const id={fill:'bottle.fill',empty:'bottle.empty',open:'block.barrel.open',close:'block.barrel.close',press:'bottle.fill',take:'pop'}[kind]??'bottle.fill';
- worldSound(block.dimension,p,id,kind==='press'?.4:.6,kind==='press'?1.25:1);
- if(kind==='press'||kind==='fill')sparkle(block.dimension,p);
- });}
-export function handStart(player,native=false){if(native)return protect(()=>player.addTag('kaleidoscope_tavern:holding_shaker'));return true;}
-export function handStop(player){protect(()=>player.removeTag('kaleidoscope_tavern:holding_shaker'));return true;}
-export function shakeAudio(player,tick){if(tick%10===0)cueOnce(`shake/${player.id}/${tick}`,()=>worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.shaking',.75,.9));}
+/** Mixology rendering and sound; recipe/inventory authority stays in mixology.js. */
+import {system,world} from '@minecraft/server';
+const NS='kaleidoscope_tavern',TYPE=NS+':shaker_visual',ANCHOR='kt:shaker_visual_anchor',PUT=NS+':put_visual',STATION=NS+':shaker_station';
+const puts=new Map();
+export const immersionDiagnostics={implementation:'java_visuals_v22',putAnimated:0,errors:[]};
+function optional(fn){try{return fn();}catch(error){immersionDiagnostics.errors.push(String(error));if(immersionDiagnostics.errors.length>8)immersionDiagnostics.errors.shift();}}
+function key(block){return `${block.dimension.id}/${block.location.x}_${block.location.y}_${block.location.z}`;}
+function point(block){return {x:block.location.x+.5,y:block.location.y,z:block.location.z+.5};}
+function helpers(block){return block.dimension.getEntities({type:TYPE,location:point(block),maxDistance:2}).filter(entity=>entity.getDynamicProperty(ANCHOR)===key(block));}
+export function syncShakerVisual(block){optional(()=>{puts.delete(key(block));for(const entity of helpers(block))entity.remove();if(block.typeId===STATION&&block.permutation.getState(PUT))block.setPermutation(block.permutation.withState(PUT,0));});}
+export function shakerPut(block,revision){optional(()=>{
+ syncShakerVisual(block);const k=key(block);
+ // Both meshes share precisely the same base origin. The previous +0.78 Y
+ // spawn offset lifted the entire cup; Java animates only its lid and yaw.
+ const entity=block.dimension.spawnEntity(TYPE,point(block),{initialRotation:(block.permutation.getState(NS+':facing')??0)*90});
+ entity.setDynamicProperty(ANCHOR,k);entity.addTag(NS+':visual_helper');
+ try{block.setPermutation(block.permutation.withState(PUT,1));}catch(error){entity.remove();throw error;}
+ puts.set(k,{revision,until:system.currentTick+8});immersionDiagnostics.putAnimated++;
+ system.runTimeout(()=>optional(()=>{if(puts.get(k)?.revision===revision)syncShakerVisual(block);}),8);
+ worldSound(block.dimension,{...point(block),y:block.location.y+.5},'bottle.empty');
+});}
+export function repairShakerPutVisual(block){if(block.typeId===STATION&&block.permutation.getState(PUT)===1){const active=puts.get(key(block));if(!active||active.until<=system.currentTick)syncShakerVisual(block);}}
+export function worldSound(dimension,location,id,volume=.65,pitch=1){optional(()=>dimension.playSound(id,location,{volume,pitch}));}
+export function feedback(block,kind){const p={...point(block),y:block.location.y+.4},sound={fill:'bottle.fill',empty:'bottle.empty',open:'block.barrel.open',close:'block.barrel.close',press:'bottle.fill',take:'pop'}[kind]??'bottle.fill';worldSound(block.dimension,p,sound);}
+export function shakeAudio(player,ticks){if(ticks%10===0)worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.shaking',.75,.9);}
 export function finished(player){worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.end',.75,1);}
-export function pourVisual(player,block,elapsed,color=0xffffff){
- const phase=pourPhase(elapsed);if(!phase.flowing||elapsed%2)return;
- cueOnce(`pour/${player.id}/${system.currentTick}`,()=>{
-  // C5 stream origin is the attachable's kt_spout locator. The server only marks the cup target.
-  // It cannot read rendered hand bones; do not invent an eye-offset "precise" mouth position.
-  const end={x:block.location.x+.5,y:block.location.y+.6,z:block.location.z+.5};
-  const vars=new MolangVariableMap();vars.setColorRGBA('variable.kt_tint',{red:((color>>16)&255)/255,green:((color>>8)&255)/255,blue:(color&255)/255,alpha:1});
-  player.dimension.spawnParticle(NS+':pour_stream',end,vars);
- });
-}
-export function installImmersionCleanup(){world.afterEvents.entityLoad.subscribe(({entity})=>{if(entity.typeId!==TYPE)return;system.run(()=>protect(()=>{
- entity.remove();
- }));});}
-export const IMMERSION_TEST={recent,TYPE,ANCHOR};
+// Third-person arm motion is registered on the PLAYER resource definition. An
+// attachable cannot animate nonexistent rightarm/leftarm bones on its owner.
+export function startShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_shake',{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:'q.main_hand_item_use_duration <= 0'}));}
+export function stopShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_idle',{controller:'kt_mixology_hands',blendOutTime:.08}));}
+export function playShakerPour(player){optional(()=>player.playAnimation('animation.kt_mixology.player_pour',{controller:'kt_mixology_pour',blendOutTime:.08}));}
+export function installImmersionCleanup(){world.afterEvents.entityLoad.subscribe(({entity})=>{if(entity.typeId===TYPE)system.run(()=>optional(()=>entity.remove()));});}

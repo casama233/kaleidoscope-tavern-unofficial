@@ -15,4 +15,4 @@ const FULL=new Set([
 ].map(x=>'minecraft:'+x));
 const WOOD=/^minecraft:(?:stripped_)?(?:oak|spruce|birch|jungle|acacia|dark_oak|mangrove|cherry|pale_oak|bamboo|crimson|warped)_(?:planks|log|wood|stem|hyphae|block)$/;
 const COLORED=/^minecraft:(?:white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black)_(?:wool|concrete|terracotta|glazed_terracotta|stained_glass)$/;
-export function isBottleSupport(id,tags=[]){return FULL.has(id)||WOOD.test(id)||COLORED.test(id)||tags.includes(SUPPORT_TAG);}
+export function isBottleSupport(id,tags=[]){return /^kaleidoscope_cookery:table_(?:oak|spruce|birch|jungle|acacia|dark_oak|mangrove|cherry|bamboo|crimson|warped)$/.test(id)||FULL.has(id)||WOOD.test(id)||COLORED.test(id)||tags.includes(SUPPORT_TAG);}

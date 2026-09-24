@@ -1,3 +1,4 @@
+import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,CIRCULAR_RACK,circularRackItem,circularRackSlot,emptyCircularRack,circularRackPut,circularRackTake,circularRackKey,circularRackAnchor,parseCircularRackAnchor,circularRackVisualPose,circularParticlePoint,CircularRackStore} from '../core/circular-rack.js';
 import {FACING,facingForYaw} from '../core/furniture.js';
@@ -33,7 +34,7 @@ export function popCircularRackRedstone(block,{selectionRng=Math.random,motionRn
   if(out.status==='LAUNCHED')circularRackDiagnostics.redstonePops++;else circularRackDiagnostics.redstoneNoops++;return out;
  }catch(e){circularRackDiagnostics.redstoneErrors++;throw e;}
 }
-export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCircularRackRedstone(b),x=>{circularRackDiagnostics.redstoneErrors++;error(x);})});}
+export function registerCircularRackComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':circular_rack',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:e=>{try{const s=store.load(circularRackKey(e.block.dimension.id,e.block.location));if(s)syncCircularRackVisuals(e.block,s);pulseCircularRackParticle(e.block);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCircularRackRedstone(b),x=>{circularRackDiagnostics.redstoneErrors++;error(x);})});}
 export function installCircularRackEvents(){
  installStatefulStorageRoutes({
   routeId:'circular-rack',

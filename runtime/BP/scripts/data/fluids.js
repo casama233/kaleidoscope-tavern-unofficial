@@ -76,5 +76,16 @@ export const FLUIDS = [
       "zh_TW": "水",
       "zh_CN": "水"
     }
+  },
+  {
+    "id": "minecraft:lava",
+    "filled": "minecraft:lava_bucket",
+    "empty": "minecraft:bucket",
+    "rigSuffix": null,
+    "title": {
+      "en_US": "Lava",
+      "zh_TW": "熔岩",
+      "zh_CN": "熔岩"
+    }
   }
 ];

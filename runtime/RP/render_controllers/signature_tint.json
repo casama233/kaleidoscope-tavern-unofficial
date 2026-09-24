@@ -9,28 +9,30 @@
         }
       ],
       "textures": [
-        "Texture.default"
+        "Array.frames[math.mod(math.floor(q.life_time * 10), 6)]"
       ],
-      "uv_anim": {
-        "offset": [
-          0,
-          "math.mod(math.floor(query.life_time * 10), 6) / 6"
-        ],
-        "scale": [
-          1,
-          0.16666666666666666
-        ]
+      "arrays": {
+        "textures": {
+          "Array.frames": [
+            "Texture.frame_0",
+            "Texture.frame_1",
+            "Texture.frame_2",
+            "Texture.frame_3",
+            "Texture.frame_4",
+            "Texture.frame_5"
+          ]
+        }
       }
     },
     "controller.render.kt_assets_a17.signature_tint": {
       "geometry": "Geometry.liquid",
       "materials": [
         {
-          "*": "Material.default"
+          "*": "Material.liquid"
         }
       ],
       "textures": [
-        "Texture.default"
+        "Array.frames[math.mod(math.floor(q.life_time * 10), 6)]"
       ],
       "color": {
         "r": "query.property('kt_art:red') / 255",
@@ -38,15 +40,17 @@
         "b": "query.property('kt_art:blue') / 255",
         "a": 1
       },
-      "uv_anim": {
-        "offset": [
-          0,
-          "math.mod(math.floor(query.life_time * 10), 6) / 6"
-        ],
-        "scale": [
-          1,
-          0.16666666666666666
-        ]
+      "arrays": {
+        "textures": {
+          "Array.frames": [
+            "Texture.frame_0",
+            "Texture.frame_1",
+            "Texture.frame_2",
+            "Texture.frame_3",
+            "Texture.frame_4",
+            "Texture.frame_5"
+          ]
+        }
       }
     }
   }

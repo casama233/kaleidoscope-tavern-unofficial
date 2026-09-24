@@ -60,8 +60,14 @@
         "kind_24": "geometry.kt_assets_a6.vodka_1",
         "kind_25": "geometry.kt_assets_a7.rum_1"
       },
+      "animations": {
+        "rest": "animation.kt_runtime.storage_bottle.tilted"
+      },
       "scripts": {
-        "scale": "0.9"
+        "scale": "0.9",
+        "animate": [
+          "rest"
+        ]
       },
       "render_controllers": [
         "controller.render.kt_runtime.tilted_rack_bottle"

@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:david_painting",
       "menu_category": {
-        "category": "construction"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
       },
       "states": {
         "kaleidoscope_tavern:facing": [
@@ -22,12 +23,12 @@
     },
     "components": {
       "minecraft:geometry": {
-        "identifier": "geometry.kt_assets_a13.painting_base"
+        "identifier": "geometry.kt_runtime.painting_wall"
       },
       "minecraft:material_instances": {
         "*": {
           "texture": "kt_assets_a13_block_deco_painting_david",
-          "render_method": "alpha_test_single_sided",
+          "render_method": "alpha_test",
           "ambient_occlusion": 0.0,
           "face_dimming": true
         }
@@ -69,25 +70,38 @@
       },
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "geometry.kt_assets_a13.painting_base"
+          "identifier": "geometry.kt_runtime.painting_wall"
         },
         "material_instances": {
           "*": {
             "texture": "kt_assets_a13_block_deco_painting_david",
-            "render_method": "alpha_test_single_sided",
+            "render_method": "alpha_test",
             "ambient_occlusion": 0.0,
             "face_dimming": true
           }
         }
+      },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": true
+          }
+        ]
       }
     },
     "permutations": [
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 0 && q.block_state('kaleidoscope_tavern:facing') == 0",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_wall"
+          },
           "minecraft:transformation": {
             "rotation": [
-              90,
+              0,
               0,
               0
             ]
@@ -121,46 +135,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 0 && q.block_state('kaleidoscope_tavern:facing') == 1",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_wall"
+          },
           "minecraft:transformation": {
             "rotation": [
-              90,
-              -90,
-              0
-            ]
-          },
-          "minecraft:collision_box": {
-            "origin": [
-              -8,
-              1,
-              -7
-            ],
-            "size": [
-              1,
-              14,
-              14
-            ]
-          },
-          "minecraft:selection_box": {
-            "origin": [
-              -8,
-              1,
-              -7
-            ],
-            "size": [
-              1,
-              14,
-              14
-            ]
-          }
-        }
-      },
-      {
-        "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 0 && q.block_state('kaleidoscope_tavern:facing') == 2",
-        "components": {
-          "minecraft:transformation": {
-            "rotation": [
-              90,
-              -180,
+              0,
+              270,
               0
             ]
           },
@@ -168,7 +149,7 @@
             "origin": [
               -7,
               1,
-              -8
+              7
             ],
             "size": [
               14,
@@ -180,7 +161,46 @@
             "origin": [
               -7,
               1,
-              -8
+              7
+            ],
+            "size": [
+              14,
+              14,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 0 && q.block_state('kaleidoscope_tavern:facing') == 2",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_wall"
+          },
+          "minecraft:transformation": {
+            "rotation": [
+              0,
+              180,
+              0
+            ]
+          },
+          "minecraft:collision_box": {
+            "origin": [
+              -7,
+              1,
+              7
+            ],
+            "size": [
+              14,
+              14,
+              1
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -7,
+              1,
+              7
             ],
             "size": [
               14,
@@ -193,35 +213,38 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 0 && q.block_state('kaleidoscope_tavern:facing') == 3",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_wall"
+          },
           "minecraft:transformation": {
             "rotation": [
+              0,
               90,
-              -270,
               0
             ]
           },
           "minecraft:collision_box": {
             "origin": [
-              7,
+              -7,
               1,
-              -7
+              7
             ],
             "size": [
-              1,
               14,
-              14
+              14,
+              1
             ]
           },
           "minecraft:selection_box": {
             "origin": [
-              7,
+              -7,
               1,
-              -7
+              7
             ],
             "size": [
-              1,
               14,
-              14
+              14,
+              1
             ]
           }
         }
@@ -229,6 +252,9 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 1 && q.block_state('kaleidoscope_tavern:facing') == 0",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a13.painting_base"
+          },
           "minecraft:transformation": {
             "rotation": [
               0,
@@ -265,10 +291,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 1 && q.block_state('kaleidoscope_tavern:facing') == 1",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a13.painting_base"
+          },
           "minecraft:transformation": {
             "rotation": [
               0,
-              -90,
+              270,
               0
             ]
           },
@@ -301,10 +330,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 1 && q.block_state('kaleidoscope_tavern:facing') == 2",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a13.painting_base"
+          },
           "minecraft:transformation": {
             "rotation": [
               0,
-              -180,
+              180,
               0
             ]
           },
@@ -337,10 +369,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 1 && q.block_state('kaleidoscope_tavern:facing') == 3",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a13.painting_base"
+          },
           "minecraft:transformation": {
             "rotation": [
               0,
-              -270,
+              90,
               0
             ]
           },
@@ -373,10 +408,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 2 && q.block_state('kaleidoscope_tavern:facing') == 0",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_ceiling"
+          },
           "minecraft:transformation": {
             "rotation": [
+              0,
               180,
-              -180,
               0
             ]
           },
@@ -409,10 +447,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 2 && q.block_state('kaleidoscope_tavern:facing') == 1",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_ceiling"
+          },
           "minecraft:transformation": {
             "rotation": [
-              180,
-              -270,
+              0,
+              90,
               0
             ]
           },
@@ -445,9 +486,12 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 2 && q.block_state('kaleidoscope_tavern:facing') == 2",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_ceiling"
+          },
           "minecraft:transformation": {
             "rotation": [
-              180,
+              0,
               0,
               0
             ]
@@ -481,10 +525,13 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:attach_face') == 2 && q.block_state('kaleidoscope_tavern:facing') == 3",
         "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_runtime.painting_ceiling"
+          },
           "minecraft:transformation": {
             "rotation": [
-              180,
-              -90,
+              0,
+              270,
               0
             ]
           },

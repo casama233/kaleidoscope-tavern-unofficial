@@ -258,6 +258,24 @@ export const BUILTIN_RECIPES = [
     "source": "kaleidoscope_tavern"
   },
   {
+    "id": "kaleidoscope_tavern:barrel/molotov",
+    "kind": "barrel",
+    "title": {
+      "zh_TW": "莫洛托夫雞尾酒",
+      "zh_CN": "莫洛托夫鸡尾酒",
+      "en_US": "Molotov Cocktail"
+    },
+    "fluid": "minecraft:lava",
+    "ingredients": [],
+    "carrier": "kaleidoscope_tavern:empty_bottle",
+    "unitTime": 2400,
+    "noIngredientCount": 16,
+    "output": {
+      "item": "kaleidoscope_tavern:molotov"
+    },
+    "source": "kaleidoscope_tavern"
+  },
+  {
     "id": "kaleidoscope_tavern:barrel/mother_snow",
     "kind": "barrel",
     "title": {

@@ -1,0 +1,19 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.kt_runtime.shaker_put": {
+      "initial_state": "put",
+      "states": {
+        "put": {
+          "animations": ["put"],
+          "transitions": [
+            {
+              "done": "q.anim_time >= 0.375"
+            }
+          ]
+        },
+        "done": {}
+      }
+    }
+  }
+}

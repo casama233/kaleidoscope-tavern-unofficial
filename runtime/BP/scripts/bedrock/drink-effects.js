@@ -6,6 +6,7 @@ import {check} from '../core/util.js';
 import {applyCustomEffect} from './custom-effects.js';
 import {inventory,makeStack} from './transactions.js';
 const EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
+export const JUICE_BUCKETS=new Set(['grape','ice_grape','gold_grape','green_grape','sweet_berries','glow_berries'].map(x=>'kaleidoscope_tavern:'+x+'_bucket'));
 const reported=new Set();
 export const effectDiagnostics={applied:0,unsupported:{},errors:[],completed:0,containerDrops:0};
 
@@ -59,6 +60,13 @@ export function finishDrinkContainer(player,itemId,emptyId){
  */
 export function completeDrink(event,rng=Math.random){
  const player=event.source,itemId=event.itemStack?.typeId;
+ if(player&&JUICE_BUCKETS.has(itemId)){
+  finishDrinkContainer(player,itemId,'minecraft:bucket');effectDiagnostics.completed++;
+  // Forge curePotionEffects checks each effect's accepted curative item. The
+  // default curative is milk, and Tavern adds no juice curative registrations;
+  // drinking juice must not indiscriminately erase all native/custom effects.
+  return [];
+ }
  if(!player||!parseBottle(itemId))return [];
  finishDrinkContainer(player,itemId,EMPTY_BOTTLE);
  const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;

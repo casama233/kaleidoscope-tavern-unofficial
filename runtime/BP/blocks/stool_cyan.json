@@ -14,11 +14,11 @@
     },
     "components": {
       "minecraft:geometry": {
-        "identifier": "geometry.kt_runtime.invisible"
+        "identifier": "geometry.kt_block.empty_cell"
       },
       "minecraft:material_instances": {
         "*": {
-          "texture": "kt_c6_stool_cyan",
+          "texture": "kt_runtime_transparent",
           "render_method": "alpha_test"
         }
       },
@@ -33,18 +33,56 @@
       },
       "minecraft:loot": "loot_tables/empty.json",
       "minecraft:light_dampening": 0,
-      "minecraft:collision_box": {
-        "origin": [
-          -5,
-          0,
-          -5
-        ],
-        "size": [
-          10,
-          14,
-          10
-        ]
-      },
+      "minecraft:collision_box": [
+        {
+          "origin": [
+            -3,
+            0,
+            -3
+          ],
+          "size": [
+            6,
+            2,
+            6
+          ]
+        },
+        {
+          "origin": [
+            -1,
+            1,
+            -1
+          ],
+          "size": [
+            2,
+            11,
+            2
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            12,
+            -5
+          ],
+          "size": [
+            12,
+            3,
+            11
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            15,
+            3
+          ],
+          "size": [
+            12,
+            6,
+            3
+          ]
+        }
+      ],
       "minecraft:selection_box": {
         "origin": [
           -6,
@@ -75,7 +113,239 @@
             "render_method": "alpha_test"
           }
         }
+      },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": true
+          }
+        ]
       }
-    }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 0",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -5
+              ],
+              "size": [
+                12,
+                3,
+                11
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                3
+              ],
+              "size": [
+                12,
+                6,
+                3
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 1",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -6
+              ],
+              "size": [
+                11,
+                3,
+                12
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                -6
+              ],
+              "size": [
+                3,
+                6,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 2",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -6
+              ],
+              "size": [
+                12,
+                3,
+                11
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                -6
+              ],
+              "size": [
+                12,
+                6,
+                3
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 3",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -5,
+                12,
+                -6
+              ],
+              "size": [
+                11,
+                3,
+                12
+              ]
+            },
+            {
+              "origin": [
+                3,
+                15,
+                -6
+              ],
+              "size": [
+                3,
+                6,
+                12
+              ]
+            }
+          ]
+        }
+      }
+    ]
   }
 }

@@ -1,3 +1,4 @@
+import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {NS,CELLAR_CABINET,cellarCabinetItem,cellarCabinetSlot,emptyCellarCabinet,cellarCabinetPut,cellarCabinetTake,cellarCabinetPosition,cellarCabinetKey,cellarCabinetAnchor,parseCellarCabinetAnchor,cellarCabinetVisualPose,CellarCabinetStore} from '../core/cellar-cabinet.js';
 import {FACING,POSITION,facingForYaw,facingVector} from '../core/furniture.js';
@@ -35,7 +36,7 @@ export function popCellarCabinetRedstone(block,{selectionRng=Math.random,motionR
   if(out.status==='LAUNCHED')cellarCabinetDiagnostics.redstonePops++;else cellarCabinetDiagnostics.redstoneNoops++;return out;
  }catch(e){cellarCabinetDiagnostics.redstoneErrors++;throw e;}
 }
-export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCellarCabinetRedstone(b),x=>{cellarCabinetDiagnostics.redstoneErrors++;error(x);})});}
+export function registerCellarCabinetComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':cellar_cabinet',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:e=>{try{syncCellarCabinetConnection(e.block);const s=store.load(cellarCabinetKey(e.block.dimension.id,e.block.location));if(s)syncCellarCabinetVisuals(e.block,s);}catch(x){error(x);}},onRedstoneUpdate:e=>routeStatefulStorageRedstone(e,b=>popCellarCabinetRedstone(b),x=>{cellarCabinetDiagnostics.redstoneErrors++;error(x);})});}
 export function installCellarCabinetEvents(){
  installStatefulStorageRoutes({
   routeId:'cellar-cabinet',

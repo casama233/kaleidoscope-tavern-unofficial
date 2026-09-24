@@ -13,7 +13,8 @@
       "kaleidoscope_tavern:portable_shaker": {},
       "minecraft:interact_button": "action.interact.kt_shake",
       "minecraft:allow_off_hand": false,
-      "minecraft:hand_equipped": true
+      "minecraft:hand_equipped": false,
+      "minecraft:use_animation": "drink"
     }
   }
 }

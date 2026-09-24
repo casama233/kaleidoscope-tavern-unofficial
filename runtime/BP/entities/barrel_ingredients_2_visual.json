@@ -1,0 +1,314 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:barrel_ingredients_2_visual",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "properties": {
+        "kaleidoscope_tavern:kind": {
+          "type": "int",
+          "range": [
+            1,
+            21
+          ],
+          "default": 1,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:count": {
+          "type": "int",
+          "range": [
+            0,
+            9
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:phase": {
+          "type": "float",
+          "range": [
+            0.0,
+            360.0
+          ],
+          "default": 0.0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz0": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y0": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot0": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz1": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y1": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot1": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz2": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y2": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot2": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz3": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y3": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot3": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz4": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y4": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot4": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz5": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y5": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot5": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz6": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y6": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot6": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz7": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y7": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot7": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:xz8": {
+          "type": "int",
+          "range": [
+            0,
+            4194303
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:y8": {
+          "type": "float",
+          "range": [
+            32.0,
+            64.0
+          ],
+          "default": 43.2,
+          "client_sync": true
+        },
+        "kaleidoscope_tavern:rot8": {
+          "type": "int",
+          "range": [
+            0,
+            7208200
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "kt_runtime_visual"
+        ]
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0,
+        "height": 0
+      },
+      "minecraft:persistent": {},
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      }
+    }
+  }
+}

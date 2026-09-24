@@ -16,10 +16,15 @@
         "kaleidoscope_tavern:waxed": [
           false,
           true
+        ],
+        "kaleidoscope_tavern:waterlogged": [
+          false,
+          true
         ]
       },
       "menu_category": {
-        "category": "items"
+        "category": "nature",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation"
       },
       "traits": {
         "minecraft:placement_position": {
@@ -96,11 +101,21 @@
         "movement_type": "immovable"
       },
       "minecraft:loot": "loot_tables/empty.json",
-      "minecraft:light_dampening": 0
+      "minecraft:light_dampening": 0,
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": false
+          }
+        ]
+      }
     },
     "permutations": [
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_single"
@@ -129,7 +144,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_east_west"
@@ -158,7 +173,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_north_south"
@@ -187,7 +202,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_cross_east_west"
@@ -216,7 +231,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_cross_north_south"
@@ -245,7 +260,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_cross_up_down"
@@ -274,7 +289,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\"",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction'",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a2.trellis_six_direction"

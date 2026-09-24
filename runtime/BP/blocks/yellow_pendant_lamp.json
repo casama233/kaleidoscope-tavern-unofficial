@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:yellow_pendant_lamp",
       "menu_category": {
-        "category": "construction"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
       },
       "states": {
         "kaleidoscope_tavern:facing": [
@@ -143,14 +144,14 @@
           },
           "minecraft:selection_box": {
             "origin": [
-              -3,
+              -7,
               0,
-              -7
+              -3
             ],
             "size": [
-              6,
+              14,
               16,
-              14
+              6
             ]
           },
           "minecraft:light_emission": 0
@@ -215,14 +216,14 @@
           },
           "minecraft:selection_box": {
             "origin": [
-              -3,
+              -7,
               0,
-              -7
+              -3
             ],
             "size": [
-              6,
+              14,
               16,
-              14
+              6
             ]
           },
           "minecraft:light_emission": 0
@@ -299,14 +300,14 @@
           },
           "minecraft:selection_box": {
             "origin": [
-              -3,
+              -7,
               1,
-              -7
+              -3
             ],
             "size": [
-              6,
+              14,
               15,
-              14
+              6
             ]
           },
           "minecraft:light_emission": 13
@@ -383,14 +384,14 @@
           },
           "minecraft:selection_box": {
             "origin": [
-              -3,
+              -7,
               1,
-              -7
+              -3
             ],
             "size": [
-              6,
+              14,
               15,
-              14
+              6
             ]
           },
           "minecraft:light_emission": 13

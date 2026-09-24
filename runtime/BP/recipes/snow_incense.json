@@ -1,0 +1,39 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:snow_incense"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "III",
+      "ISI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:ink_sac"
+      },
+      "S": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:snow_incense",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:ink_sac"
+      },
+      {
+        "item": "minecraft:snowball"
+      },
+      {
+        "item": "kaleidoscope_tavern:snow_incense"
+      }
+    ]
+  }
+}

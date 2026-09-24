@@ -1,0 +1,39 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:butterfly_incense"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "III",
+      "ISI",
+      "III"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:ink_sac"
+      },
+      "S": {
+        "item": "minecraft:pitcher_plant"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:butterfly_incense",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:ink_sac"
+      },
+      {
+        "item": "minecraft:pitcher_plant"
+      },
+      {
+        "item": "kaleidoscope_tavern:butterfly_incense"
+      }
+    ]
+  }
+}

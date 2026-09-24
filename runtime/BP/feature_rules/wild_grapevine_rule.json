@@ -1,0 +1,23 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:feature_rules": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:wild_grapevine_rule",
+      "places_feature": "kaleidoscope_tavern:wild_grapevine_search"
+    },
+    "conditions": {
+      "placement_pass": "after_surface_pass",
+      "minecraft:biome_filter": [
+        {"test": "has_biome_tag", "operator": "==", "value": "forest"}
+      ]
+    },
+    "distribution": {
+      "iterations": 4,
+      "scatter_chance": {"numerator": 1, "denominator": 32},
+      "coordinate_eval_order": "zxy",
+      "x": {"distribution": "uniform", "extent": [0,15]},
+      "y": "query.heightmap(variable.worldx, variable.worldz) + 8",
+      "z": {"distribution": "uniform", "extent": [0,15]}
+    }
+  }
+}

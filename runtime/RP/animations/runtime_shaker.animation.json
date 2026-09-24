@@ -1,186 +1,95 @@
 {
-  "format_version": "1.8.0",
+  "format_version": "1.10.0",
   "animations": {
-    "animation.kt_runtime.shaker.hold_first": {
+    "animation.kt_mixology.player_idle": {
+      "animation_length": 0.05,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        "leftarm": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.kt_mixology.hold_first": {
       "loop": true,
       "bones": {
-        "render_anchor": {
+        "grip": {
           "position": [
-            8.96,
-            -8.32,
-            -11.52
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            27,
+            -39,
+            -159
+          ],
+          "scale": 0.625
+        }
+      }
+    },
+    "animation.kt_mixology.hold_third": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -20,
+            0,
+            0
+          ],
+          "scale": 0.625
+        }
+      }
+    },
+    "animation.kt_mixology.shake_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            0,
+            "-2.4 * math.sin(q.life_time * 1718.87338539247)",
+            0
           ],
           "rotation": [
             15,
             0,
             0
-          ],
-          "scale": 0.6
-        }
-      }
-    },
-    "animation.kt_runtime.shaker.hold_third": {
-      "loop": true,
-      "bones": {
-        "render_anchor": {
-          "position": [
-            0,
-            4,
-            -2
-          ],
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "scale": 0.6
-        }
-      }
-    },
-    "animation.kt_runtime.shaker.first": {
-      "loop": true,
-      "bones": {
-        "render_anchor": {
-          "position": [
-            0,
-            "-(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 9.6",
-            0
           ]
         }
-      },
-      "animation_length": 0.20943951023931953
+      }
     },
-    "animation.kt_runtime.shaker.arms": {
+    "animation.kt_mixology.player_shake": {
       "loop": true,
-      "animation_length": 6,
+      "override_previous_animation": true,
       "bones": {
         "rightarm": {
           "rotation": [
-            "247.50000580486656 - (math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 180",
+            "-112.5 - 45 * math.sin(q.life_time * 1718.87338539247)",
             0,
             -9
           ]
         },
         "leftarm": {
           "rotation": [
-            "247.50000580486656 + (math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 180",
+            "-112.5 + 45 * math.sin(q.life_time * 1718.87338539247)",
             0,
             9
           ]
-        }
-      }
-    },
-    "animation.kt_runtime.shaker.release": {
-      "loop": false,
-      "animation_length": 0.08,
-      "bones": {}
-    },
-    "animation.kt_runtime.shaker.table": {
-      "loop": true,
-      "bones": {
-        "root": {
-          "rotation": [
-            0,
-            0,
-            "(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 20"
-          ],
-          "position": [
-            0,
-            "(math.sin(q.anim_time * 20.0 * 1.5 * 57.29577951308232) * 0.25) * 1.2",
-            0
-          ]
-        }
-      },
-      "animation_length": 0.20943951023931953
-    },
-    "animation.kt_runtime.shaker.pour": {
-      "loop": false,
-      "animation_length": 0.6,
-      "bones": {
-        "render_anchor": {
-          "rotation": {
-            "0": [
-              0,
-              0,
-              0
-            ],
-            "0.12": [
-              0,
-              0,
-              65
-            ],
-            "0.48": [
-              0,
-              0,
-              65
-            ],
-            "0.6": [
-              0,
-              0,
-              0
-            ]
-          }
-        },
-        "bone2": {
-          "position": {
-            "0": [
-              0,
-              0,
-              0
-            ],
-            "0.12": [
-              0,
-              2,
-              0
-            ],
-            "0.48": [
-              0,
-              2,
-              0
-            ],
-            "0.6": [
-              0,
-              0,
-              0
-            ]
-          }
-        }
-      },
-      "particle_effects": {
-        "0.15": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.2": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.25": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.3": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.35": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.4": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
-        },
-        "0.45": {
-          "effect": "spout_drop",
-          "locator": "kt_spout",
-          "bind_to_actor": false
         }
       }
     }

@@ -1,4 +1,5 @@
 import {check,TavernError} from './util.js';
+import {isManagedQualityBottleLore} from './quality-tooltip.js';
 /**
  * Stack interface: typeId, amount, maxAmount, clone(), isStackableWith(other).
  * Planning never mutates the live inventory. No drops are used to hide a full inventory.
@@ -39,9 +40,10 @@ export function commitInventory(plan,container,save,rollback){
 export function isPlainIngredient(item,makeStack){
  if(!item)return false;
  try{
-  if(item.nameTag||item.getLore?.().length||item.getDynamicPropertyIds?.().length)return false;
+  const managedLore=isManagedQualityBottleLore(item);
+  if(item.nameTag||(item.getLore?.().length&&!managedLore)||item.getDynamicPropertyIds?.().length)return false;
   if(item.getComponent?.('minecraft:durability')||item.getComponent?.('minecraft:enchantable')?.getEnchantments?.().length)return false;
   if(item.getCanDestroy?.().length||item.getCanPlaceOn?.().length)return false;
-  return item.maxAmount===1 || item.isStackableWith(makeStack(item.typeId,1));
+  return managedLore||item.maxAmount===1||item.isStackableWith(makeStack(item.typeId,1));
  }catch{return false;}
 }

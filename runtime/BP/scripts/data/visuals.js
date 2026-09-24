@@ -13,5 +13,17 @@ export const RUNTIME_VISUALS = [
   "kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual",
   "kaleidoscope_tavern:rig_liquid_pressing_tub_sweet_berries_visual",
   "kaleidoscope_tavern:rig_liquid_barrel_glow_berries_visual",
-  "kaleidoscope_tavern:rig_liquid_pressing_tub_glow_berries_visual"
+  "kaleidoscope_tavern:rig_liquid_pressing_tub_glow_berries_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_1_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_2_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_3_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_4_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_5_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_6_visual",
+  "kaleidoscope_tavern:pressing_tub_ingredients_7_visual",
+  "kaleidoscope_tavern:barrel_ingredients_0_visual",
+  "kaleidoscope_tavern:barrel_ingredients_1_visual",
+  "kaleidoscope_tavern:barrel_ingredients_2_visual",
+  "kaleidoscope_tavern:barrel_ingredients_3_visual"
 ];

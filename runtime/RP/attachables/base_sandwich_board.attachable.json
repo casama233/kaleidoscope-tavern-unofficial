@@ -1,0 +1,25 @@
+{
+  "format_version": "1.20.30",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:base_sandwich_board",
+      "item": {
+        "kaleidoscope_tavern:base_sandwich_board": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/kt_derived/a17/item_display_base_sandwich_board",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.kt_runtime.base_sandwich_board_held"
+      },
+      "render_controllers": [
+        "controller.render.item_default"
+      ]
+    }
+  }
+}

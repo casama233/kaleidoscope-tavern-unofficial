@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:green_grape_bucket",
       "menu_category": {
-        "category": "items"
+        "category": "nature",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation"
       }
     },
     "components": {
@@ -12,7 +13,14 @@
         "value": "item.kaleidoscope_tavern:green_grape_bucket.name"
       },
       "minecraft:icon": "kt_c1_green_grape_bucket",
-      "minecraft:max_stack_size": 1
+      "minecraft:max_stack_size": 16,
+      "minecraft:use_animation": "drink",
+      "minecraft:use_modifiers": {
+        "use_duration": 1.6,
+        "movement_modifier": 0.35,
+        "start_using": "if_first"
+      },
+      "kaleidoscope_tavern:drink_effects": {}
     }
   }
 }

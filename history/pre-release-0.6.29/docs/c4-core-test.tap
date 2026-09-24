@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: portable state is a separate schema and JSON round-trips an empty valid tool
+ok 1 - portable state is a separate schema and JSON round-trips an empty valid tool
+  ---
+  duration_ms: 2.937761
+  type: 'test'
+  ...
+# Subtest: portable data rejects malformed/extra/version/identity/oversized payloads
+ok 2 - portable data rejects malformed/extra/version/identity/oversized payloads
+  ---
+  duration_ms: 3.523912
+  type: 'test'
+  ...
+# Subtest: portable serializer copies state instead of retaining mutable references
+ok 3 - portable serializer copies state instead of retaining mutable references
+  ---
+  duration_ms: 0.357737
+  type: 'test'
+  ...
+# Subtest: source wave and opposite arms retain Java radians frequency/amplitude
+ok 4 - source wave and opposite arms retain Java radians frequency/amplitude
+  ---
+  duration_ms: 2.526742
+  type: 'test'
+  ...
+# Subtest: left/right first-person translation is mirrored only on X
+ok 5 - left/right first-person translation is mirrored only on X
+  ---
+  duration_ms: 0.343062
+  type: 'test'
+  ...
+# Subtest: invalid animation time is rejected
+ok 6 - invalid animation time is rejected
+  ---
+  duration_ms: 0.315926
+  type: 'test'
+  ...
+# Subtest: twelve tick pour has settle/flow/return and no premature complete
+ok 7 - twelve tick pour has settle/flow/return and no premature complete
+  ---
+  duration_ms: 0.417186
+  type: 'test'
+  ...
+# Subtest: immersive HUD hides exact recipe windows until opt-in
+ok 8 - immersive HUD hides exact recipe windows until opt-in
+  ---
+  duration_ms: 0.264462
+  type: 'test'
+  ...
+# Subtest: flow samples are bounded, finite and travel toward target
+ok 9 - flow samples are bounded, finite and travel toward target
+  ---
+  duration_ms: 0.953281
+  type: 'test'
+  ...
+# Subtest: shaker variants stay nonstackable and only the native held tool has a zero-nutrition use component
+ok 10 - shaker variants stay nonstackable and only the native held tool has a zero-nutrition use component
+  ---
+  duration_ms: 1.435892
+  type: 'test'
+  ...
+# Subtest: all shaker variants keep the 2D icon and bind a first/third person held mesh
+ok 11 - all shaker variants keep the 2D icon and bind a first/third person held mesh
+  ---
+  duration_ms: 0.88168
+  type: 'test'
+  ...
+# Subtest: official-style held mesh binds the existing source anchor directly and preserves every source cube
+ok 12 - official-style held mesh binds the existing source anchor directly and preserves every source cube
+  ---
+  duration_ms: 0.916121
+  type: 'test'
+  ...
+# Subtest: original PUT animation remains byte-identical rather than an invented lid bounce
+ok 13 - original PUT animation remains byte-identical rather than an invented lid bounce
+  ---
+  duration_ms: 0.813125
+  type: 'test'
+  ...
+# Subtest: animation provenance hashes describe actual files
+ok 14 - animation provenance hashes describe actual files
+  ---
+  duration_ms: 1.111505
+  type: 'test'
+  ...
+# Subtest: procedural wave animates the directly bound official attachable anchor
+ok 15 - procedural wave animates the directly bound official attachable anchor
+  ---
+  duration_ms: 0.6024
+  type: 'test'
+  ...
+# Subtest: no server arm override or custom player renderer is installed
+ok 16 - no server arm override or custom player renderer is installed
+  ---
+  duration_ms: 0.254003
+  type: 'test'
+  ...
+# Subtest: station keeps its native mesh and uses a bounded transparent PUT-only geometry
+ok 17 - station keeps its native mesh and uses a bounded transparent PUT-only geometry
+  ---
+  duration_ms: 0.529859
+  type: 'test'
+  ...
+# Subtest: family overlay ships the same Java dispatcher exercised by the runtime integration test
+ok 18 - family overlay ships the same Java dispatcher exercised by the runtime integration test
+  ---
+  duration_ms: 0.25907
+  type: 'test'
+  ...
+# Subtest: stream sprite is explicitly native and short-lived, not fake source sprite
+ok 19 - stream sprite is explicitly native and short-lived, not fake source sprite
+  ---
+  duration_ms: 0.271982
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 135.420489

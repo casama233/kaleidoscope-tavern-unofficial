@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.30",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:ice_grape",
+      "item": {
+        "kaleidoscope_tavern:ice_grape": "q.is_owner_identifier_any('minecraft:player')"
+      },
+      "materials": {
+        "default": "entity_alphatest",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/kt_runtime/animated_items/ice_grape/frame_00",
+        "enchanted": "textures/misc/enchanted_item_glint",
+        "f0": "textures/kt_runtime/animated_items/ice_grape/frame_00",
+        "f1": "textures/kt_runtime/animated_items/ice_grape/frame_01",
+        "f2": "textures/kt_runtime/animated_items/ice_grape/frame_02",
+        "f3": "textures/kt_runtime/animated_items/ice_grape/frame_03",
+        "f4": "textures/kt_runtime/animated_items/ice_grape/frame_04",
+        "f5": "textures/kt_runtime/animated_items/ice_grape/frame_05",
+        "f6": "textures/kt_runtime/animated_items/ice_grape/frame_06",
+        "f7": "textures/kt_runtime/animated_items/ice_grape/frame_07",
+        "f8": "textures/kt_runtime/animated_items/ice_grape/frame_08",
+        "f9": "textures/kt_runtime/animated_items/ice_grape/frame_09",
+        "f10": "textures/kt_runtime/animated_items/ice_grape/frame_10",
+        "f11": "textures/kt_runtime/animated_items/ice_grape/frame_11"
+      },
+      "geometry": {
+        "default": "geometry.kt_runtime.animated_item_ice_grape"
+      },
+      "render_controllers": [
+        "controller.render.kt_runtime.animated_item_ice_grape"
+      ]
+    }
+  }
+}

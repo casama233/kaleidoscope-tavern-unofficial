@@ -4,11 +4,17 @@
     "description": {
       "identifier": "kaleidoscope_tavern:signature_cocktail",
       "menu_category": {
-        "category": "items"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.cocktails"
       }
     },
     "components": {
-      "minecraft:icon": "kt_c3_signature_cocktail",
+      "minecraft:icon": {
+        "textures": {
+          "default": "kt_c3_signature_cocktail",
+          "dyed": "kt_signature_dyed"
+        }
+      },
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:signature_cocktail.name"
       },
@@ -19,7 +25,10 @@
         "movement_modifier": 0.35,
         "start_using": "if_first"
       },
-      "kaleidoscope_tavern:cocktail_effects": {}
+      "kaleidoscope_tavern:cocktail_effects": {},
+      "minecraft:dyeable": {
+        "default_color": "#5555ff"
+      }
     }
   }
 }

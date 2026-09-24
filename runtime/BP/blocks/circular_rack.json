@@ -4,7 +4,8 @@
     "description": {
       "identifier": "kaleidoscope_tavern:circular_rack",
       "menu_category": {
-        "category": "construction"
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_storage"
       },
       "states": {
         "kaleidoscope_tavern:facing": [
@@ -41,18 +42,32 @@
         "propagates_power": false
       },
       "minecraft:light_emission": 14,
-      "minecraft:collision_box": {
-        "origin": [
-          -8,
-          0,
-          -8
-        ],
-        "size": [
-          16,
-          2,
-          16
-        ]
-      },
+      "minecraft:collision_box": [
+        {
+          "origin": [
+            -8,
+            0,
+            -8
+          ],
+          "size": [
+            16,
+            2,
+            16
+          ]
+        },
+        {
+          "origin": [
+            -1,
+            2,
+            -1
+          ],
+          "size": [
+            2,
+            13,
+            2
+          ]
+        }
+      ],
       "minecraft:selection_box": {
         "origin": [
           -8,
@@ -61,7 +76,7 @@
         ],
         "size": [
           16,
-          2,
+          15,
           16
         ]
       },

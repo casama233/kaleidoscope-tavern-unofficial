@@ -18,6 +18,10 @@
           1,
           2,
           3
+        ],
+        "kaleidoscope_tavern:waterlogged": [
+          false,
+          true
         ]
       },
       "traits": {
@@ -107,11 +111,21 @@
         "movement_type": "immovable"
       },
       "minecraft:loot": "loot_tables/empty.json",
-      "minecraft:light_dampening": 0
+      "minecraft:light_dampening": 0,
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": false
+          }
+        ]
+      }
     },
     "permutations": [
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage0"
@@ -146,7 +160,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage1"
@@ -181,7 +195,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage2"
@@ -216,7 +230,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"single\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'single' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_stage3"
@@ -251,7 +265,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
@@ -286,7 +300,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
@@ -321,7 +335,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
@@ -356,7 +370,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_east_west"
@@ -391,7 +405,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
@@ -426,7 +440,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
@@ -461,7 +475,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
@@ -496,7 +510,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_north_south"
@@ -531,7 +545,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
@@ -566,7 +580,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
@@ -601,7 +615,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
@@ -636,7 +650,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_east_west\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_east_west' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_east_west"
@@ -671,7 +685,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
@@ -706,7 +720,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
@@ -741,7 +755,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
@@ -776,7 +790,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_north_south\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_north_south' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_north_south"
@@ -811,7 +825,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
@@ -846,7 +860,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
@@ -881,7 +895,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
@@ -916,7 +930,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"cross_up_down\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'cross_up_down' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_cross_up_down"
@@ -951,7 +965,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 0",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 0",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
@@ -986,7 +1000,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 1",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 1",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
@@ -1021,7 +1035,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 2",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 2",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"
@@ -1056,7 +1070,7 @@
         }
       },
       {
-        "condition": "q.block_state('kaleidoscope_tavern:shape') == \"six_direction\" && q.block_state('kaleidoscope_tavern:age') == 3",
+        "condition": "q.block_state('kaleidoscope_tavern:shape') == 'six_direction' && q.block_state('kaleidoscope_tavern:age') == 3",
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a3.gold_grapevine_six_direction"

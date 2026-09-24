@@ -1,0 +1,42 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:thrown_molotov",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "spawn_category": "misc"
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "projectile",
+          "tavern_molotov"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.25,
+        "height": 0.25
+      },
+      "minecraft:physics": {},
+      "minecraft:projectile": {
+        "power": 0.8,
+        "gravity": 0.03,
+        "on_hit": {
+          "impact_damage": {
+            "damage": 0,
+            "catch_fire": true
+          },
+          "particle_on_hit": {
+            "particle_type": "flame",
+            "num_particles": 30,
+            "on_other_hit": true,
+            "on_entity_hit": true
+          },
+          "remove_on_hit": {}
+        }
+      }
+    }
+  }
+}

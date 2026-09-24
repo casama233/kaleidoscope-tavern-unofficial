@@ -1,22 +1,14 @@
-# Release readiness
+# Public beta readiness — 0.6.33-beta.1
 
-## Prepared
+- English, Simplified Chinese and Traditional Chinese: matching 1,655-key language maps, no duplicate/empty keys or placeholder mismatches; 140 guide entries in 11 categories have names and instructions in all three languages.
+- Board form labels use client-localized RawMessages. Generated English guide text no longer includes Chinese quality labels. Partial Japanese/Russian legacy files are retained without claiming complete support.
+- Runtime board atlases are generated exclusively from GNU Unifont 15.0.06; the beta contains no Minecraft bitmap-provider font subset. Font input, license, provenance and generator are included.
+- Public Cookery 1.0.6 dependencies and Tavern pack versions are checked. Both BP and RP, credits and notices are included in deterministic packaging.
+- Static resource/script/reference checks and real BDS 1.26.51.1 startup with Cookery 1.0.6 are recorded in `VALIDATION-0.6.33.json`. No interaction simulations were run.
+- Repository history credential-pattern and archive-name scans found no matching tokens/private keys or server-world files; release contents exclude local server backups, credentials, executables and private integration patches. Automated scanning is not a proof that every possible secret pattern is absent.
 
-- Current gameplay/assets promoted from the installed 0.6.28 build into one canonical runtime.
-- Public Cookery 1.0.6 archive identity/hash and guide interface inspected.
-- One-entry product guide; usage and crafting shown together.
-- Public manifests, attribution, installation instructions, English/Chinese README, changelog and CurseForge description draft.
-- Local-only server snapshots, secrets and third-party server patches excluded from release contents.
-- Static checks and deterministic packaging workflow; no interaction simulations.
+## Public-test scope
 
-## Validation completed
+Android rendering and device-specific Vibrant Visuals behavior still require client feedback. BDS startup does not render assets. Realms and all-mobile compatibility are not claimed. Slightly Tipsy, Grass Stealth and Long Reach remain unavailable. See the Java visual audit and installation instructions for platform differences and dependency requirements.
 
-Static validation passed for 1486 JSON files and 929 geometry identifiers. The generated guide contains 140 unique entries in 11 categories. A fresh BDS 1.26.51.1 world loaded only official Cookery 1.0.6 and Tavern 0.6.32 successfully, with zero ERROR lines after creating the load harness allowlist file. No simulated interactions were run. See `VALIDATION-0.6.32.json`.
-
-## Before a public CurseForge upload
-
-- Client acceptance of the 0.6.32 visual fixes and the public pack stack: mixed drink color, held shaker/animation, board text placement, barrel tooltip clearing, and guide pages.
-- Confirm distribution terms for the Minecraft bitmap-provider glyph subset used in the board atlases, or replace that subset with a distributable font while preserving the renderer's layout. The Unifont license notice alone does not cover those bitmap glyphs.
-- Confirm intended support beyond the tested BDS version; no Realms/all-mobile guarantee is made.
-
-The GitHub upload and draft release are preparation. They do not publish a CurseForge listing or change repository visibility. The private FAMILY deployment retains its existing Cookery dependency and other add-ons’ HUD integration; these private overrides are excluded from the public package.
+Publishing this GitHub prerelease does not publish a CurseForge listing. The private FAMILY server integration is separate from this public package.

@@ -17,8 +17,8 @@ Reference checkout: `c4ec1880bd44cf3139d3ba744ab30bb379cf1416`. The port adapts 
 
 ## Text rendering and other notices
 
-The board renderer includes converted glyph atlases. The CJK/Unihex input and its license are documented in `runtime/RP/font/NOTICE-Unifont.txt` (GNU Unifont, GPL font exception / SIL OFL). The earlier font path also retains `NOTICE-Noto-Sans-CJK.txt`; these terms are separate from Tavern's art license.
+The public beta board renderer uses **Tavern Board Font**, a format conversion of GNU Unifont 15.0.06, under the SIL Open Font License 1.1 (alternatively GPL with the font embedding exception). The font retains its own terms, separate from Tavern art. See `runtime/RP/font/NOTICE-Unifont.txt` and `art/fonts/README.md`. The original font source is included for reproducibility; `tools/build_board_font.py` builds the atlases without Minecraft bitmap-provider glyphs. Existing board geometry and placement transforms are preserved. The earlier font path also retains `NOTICE-Noto-Sans-CJK.txt`.
 
-The current atlases additionally include Minecraft Java 1.20.1 bitmap-provider glyphs to preserve its layout. Those original glyphs remain third-party material; they are not relicensed as Tavern art. The public distribution review for that subset is recorded in `docs/RELEASE-READINESS.md`. Minecraft client JARs/classes and server executables are not included.
+Minecraft client JARs/classes and server executables are not included in the release package.
 
 This unofficial port is not endorsed by the original development team, the Cookery Bedrock author, Mojang or Microsoft.

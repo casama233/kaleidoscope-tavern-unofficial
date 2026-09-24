@@ -12,6 +12,7 @@ for(const e of payload.entries){
  for(const lc of ['zh_CN','zh_TW','en_US']){
   assert(payload.names[lc][e.id],`${lc} ${e.id}`);
   assert(e.mechanicsByLocale[lc]?.length,`${lc} ${e.id} instructions`);
+  if(lc==='en_US')for(const line of e.mechanicsByLocale[lc])assert(!/[\u4e00-\u9fff]/u.test(line),`${e.id}: ${line}`);
  }
 }
 assert(!payload.entries.some(e=>e.id.includes(':effects/')));

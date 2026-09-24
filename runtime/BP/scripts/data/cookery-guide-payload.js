@@ -4,7 +4,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.0",
+  "version": "0.6.33",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5798,11 +5798,11 @@ function recipeMechanics(recipe,lc='zh_TW'){
  const alts=x=>(x??[]).map(slot=>{
   const groups=new Map();
   for(const id of new Set(slot)){const m=/^(.*)_q([1-6])$/.exec(id);if(!m){groups.set(id,[id]);continue;}const rec=groups.get(m[1])??[];rec.push(Number(m[2]));groups.set(m[1],rec);}
-  return [...groups].map(([id,qualities])=>qualities.length>1?`${label(id)}（品質 ${Math.min(...qualities)}–${Math.max(...qualities)}）`:label(id)).join(' / ');
+  return [...groups].map(([id,qualities])=>qualities.length>1?`${label(id)} (${en?'Quality':cn?'品质':'品質'} ${Math.min(...qualities)}–${Math.max(...qualities)})`:label(id)).join(' / ');
  }).join(' + ')||'—';
  if(recipe.kind==='pressing')return [`${en?'Fruit':'水果'}：${(recipe.input??[]).map(label).join(' / ')}`,`→ ${label(recipe.fluid)} ${recipe.amount} mB`];
  if(recipe.kind==='shaker')return [`${en?'Three shaker slots':'雪克杯三槽'}：${alts(recipe.ingredients)}`,`→ ${label(recipe.output?.item??recipe.id)}`,`${en?'Serving glass':'接酒杯'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_glassware')}`];
- const output=recipe.output?.item?label(recipe.output.item):recipe.output?.byQuality?.length?`${label(recipe.output.byQuality[0])}（品質 1–6）`:recipe.id;
+ const output=recipe.output?.item?label(recipe.output.item):recipe.output?.byQuality?.length?`${label(recipe.output.byQuality[0])} (${en?'Quality':cn?'品质':'品質'} 1–6)`:recipe.id;
  return [`${label(recipe.fluid)} × 4000 mB`,`${en?'Barrel ingredients':'酒桶原料'}：${alts(recipe.ingredients)}`,`→ ${output}`,`${en?'Serving bottle':'接酒瓶'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_bottle')}`];
 }
 /**
@@ -5841,16 +5841,16 @@ export function buildCookeryGuidePayload(registry){
    let body=String(page.body?.[lc]??page.body?.en_US??'');
    const names=lc==='en_US'?{
     'minecraft:nausea':'Nausea','minecraft:instant_health':'Instant Health','minecraft:resistance':'Resistance','minecraft:fire_resistance':'Fire Resistance','minecraft:regeneration':'Regeneration','minecraft:night_vision':'Night Vision','minecraft:slow_falling':'Slow Falling','minecraft:jump_boost':'Jump Boost','minecraft:strength':'Strength','minecraft:speed':'Speed','minecraft:water_breathing':'Water Breathing','minecraft:weakness':'Weakness','minecraft:poison':'Poison','minecraft:wither':'Wither','minecraft:blindness':'Blindness','minecraft:bad_omen':'Bad Omen','minecraft:mining_fatigue':'Mining Fatigue','minecraft:haste':'Haste','kaleidoscope_tavern:slightly_tipsy':'Slightly Tipsy','kaleidoscope_tavern:grass_stealth':'Grass Stealth','kaleidoscope_tavern:long_reach':'Long Reach','kaleidoscope_tavern:high_heels':'High Heels','kaleidoscope_tavern:vision':'Spirit Vision','kaleidoscope_tavern:bloody_mary':'Bloody Mary'
-   }:{'minecraft:nausea':'噁心','minecraft:instant_health':'瞬間治療','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢復','minecraft:night_vision':'夜視','minecraft:slow_falling':'緩降','minecraft:jump_boost':'跳躍提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虛弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲勞','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草叢隱匿','kaleidoscope_tavern:long_reach':'延伸觸及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'靈視','kaleidoscope_tavern:bloody_mary':'血腥瑪麗'};
+   }:lc==='zh_CN'?{'minecraft:nausea':'恶心','minecraft:instant_health':'瞬间治疗','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢复','minecraft:night_vision':'夜视','minecraft:slow_falling':'缓降','minecraft:jump_boost':'跳跃提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虚弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲劳','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草丛隐匿','kaleidoscope_tavern:long_reach':'延伸触及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'灵视','kaleidoscope_tavern:bloody_mary':'血腥玛丽'}:{'minecraft:nausea':'噁心','minecraft:instant_health':'瞬間治療','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢復','minecraft:night_vision':'夜視','minecraft:slow_falling':'緩降','minecraft:jump_boost':'跳躍提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虛弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲勞','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草叢隱匿','kaleidoscope_tavern:long_reach':'延伸觸及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'靈視','kaleidoscope_tavern:bloody_mary':'血腥瑪麗'};
    body=body.replace(/\b(kaleidoscope_tavern|minecraft):([a-z0-9_]+)/g,(id,ns,key)=>names[id]??key.split('_').map(w=>w[0].toUpperCase()+w.slice(1)).join(' '));
    body=body.replace(/(Slightly Tipsy|Grass Stealth|Long Reach)(?= Lv)/g,'$1 (not available in this version)');
-   body=body.replace(/(微醺|草叢隱匿|延伸觸及)(?= Lv)/g,'$1（本版本目前不提供此效果）');
+   body=body.replace(/(微醺|草叢隱匿|延伸觸及|草丛隐匿|延伸触及)(?= Lv)/g,'$1（本版本目前不提供此效果）');
    body=body.replace(/\s*\[(?:(?:待移植|not implemented)|已實作\s*\/\s*implemented)\]/g,'');
-   body=body.replace(/\bQ([1-6]):/g,lc==='en_US'?'Quality $1:':'品質$1：');
-   body=body.replace(/\sLv([0-9]+)/g,lc==='en_US'?' Level $1':' 等級$1');
-   body=body.replace(/, ([0-9.]+)s, ([0-9.]+)%/g,lc==='en_US'?', $1s, $2% chance':'，$1秒，機率$2%');
+   body=body.replace(/\bQ([1-6]):/g,lc==='en_US'?'Quality $1:':lc==='zh_CN'?'品质$1：':'品質$1：');
+   body=body.replace(/\sLv([0-9]+)/g,lc==='en_US'?' Level $1':lc==='zh_CN'?' 等级$1':' 等級$1');
+   body=body.replace(/, ([0-9.]+)s, ([0-9.]+)%/g,lc==='en_US'?', $1s, $2% chance':lc==='zh_CN'?'，$1秒，概率$2%':'，$1秒，機率$2%');
    const rows=body.split('\n').filter(Boolean);
-   if(rows.length&&/Each entry rolls independently|效果依每次飲用獨立抽選/.test(rows[0]))rows[0]=lc==='en_US'?'The listed effects may apply independently when you drink this beverage.':'飲用時可能會各自附加以下效果。';
+   if(rows.length&&/Each entry rolls independently|效果依每次飲用獨立抽選/.test(rows[0]))rows[0]=lc==='en_US'?'The listed effects may apply independently when you drink this beverage.':lc==='zh_CN'?'饮用时可能会各自附加以下效果。':'飲用時可能會各自附加以下效果。';
    return [lc,rows.slice(0,8)];
   }));
   const linkedRecipe=recipes.find(recipe=>recipe.id===page.recipeIds?.[0]);

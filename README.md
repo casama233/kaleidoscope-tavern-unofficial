@@ -2,9 +2,9 @@
 
 An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion add-on for [Kaleidoscope Cookery (Unofficial)](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) by Loyallay.
 
-[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.32.md) · [Credits](CREDITS.md)
+[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.33.md) · [Credits](CREDITS.md)
 
-**Current candidate: 0.6.32-rc.1.** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
+**Current public beta: 0.6.33-beta.1.** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
 
 ## Features
 
@@ -20,7 +20,7 @@ An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion
 - **Kaleidoscope Cookery (Unofficial) 1.0.6**, installed separately from the linked project.
 - Both Tavern's behavior and resource packs, above Cookery in their respective pack stacks.
 
-The public candidate uses Cookery's original pack UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing that bundle. No Cookery pack, world backup, credentials, server executable, or other server add-on is included.
+The public beta uses Cookery's original pack UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing that bundle. No Cookery pack, world backup, credentials, server executable, or other server add-on is included.
 
 ## Build from this repository
 
@@ -35,9 +35,11 @@ The build packages the committed `runtime/BP` and `runtime/RP` directly and writ
 
 The checks parse resources, validate references and scripts, and inspect guide data. They do not simulate player interactions. Historical generators, tests and reports are archived under `history/pre-release-0.6.29/`; they are not the current build entry point.
 
-## Candidate status
+## Public beta status
 
-The preceding 0.6.28 server build loaded successfully. The public candidate changes dependency binding, guide organization, and removes server-specific HUD/player overrides. Android rendering and the complete public-pack gameplay flow still need client acceptance. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md) for the exact evidence and outstanding checks.
+The public beta has static resource/script/language checks and a successful BDS 1.26.51.1 load with Cookery 1.0.6. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
+
+[Download the public beta](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.33-beta.1). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
 
 ## Licensing
 

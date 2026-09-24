@@ -52,7 +52,7 @@ export function requireBlockReach(player,dimension,location,maxDistance){check(p
 export function tell(p,s){try{p?.onScreenDisplay.setActionBar(s);}catch{}}
 export function handSnapshot(p){const h=hand(p);return {slot:p.selectedSlotIndex,id:h?.typeId??'',amount:h?.amount??0};}
 export function sameHand(p,s){const h=hand(p);check(p.selectedSlotIndex===s.slot&&(h?.typeId??'')===s.id&&(h?.amount??0)===s.amount,'STALE_HAND');}
-export function safe(p,fn){try{return fn();}catch(e){tell(p,'§e[Tavern] '+(e.code??String(e)));console.warn('[Tavern C2] '+e);return undefined;}}
+export function safe(p,fn){try{return fn();}catch(e){tell(p,{rawtext:[{text:'§e[Tavern] '},{translate:'kt.action.error'}]});console.warn('[Tavern C2] '+e);return undefined;}}
 export function withToolWear(plan,slot,creative=false,rng=Math.random) {
  if(creative)return;
  const item=plan.after[slot];check(item,'NO_TOOL');const durability=item.getComponent('minecraft:durability');check(durability,'NO_DURABILITY');

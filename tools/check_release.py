@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Static release validation only: no player mocks or game interactions."""
-import json,re,subprocess
+import json,re,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
@@ -48,5 +48,6 @@ for p in (RT/'BP/scripts').rglob('*.js'):
     subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
     for relative in re.findall(r"(?:from\s+|import\s*)['\"](\.[^'\"]+)['\"]",p.read_text()):
         assert (p.parent/relative).is_file(),(p,relative)
+subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')

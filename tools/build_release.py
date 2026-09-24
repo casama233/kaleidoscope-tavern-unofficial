@@ -12,7 +12,7 @@ def main():
         raise SystemExit('Output must not replace source runtime')
     out.mkdir(parents=True,exist_ok=True)
     config=json.loads((ROOT/'release.json').read_text())
-    name=f"Kaleidoscope_Tavern_Unofficial_{config['version']}_rc1.mcaddon"
+    name=f"Kaleidoscope_Tavern_Unofficial_{config['version']}_{config.get('artifact_suffix','rc1')}.mcaddon"
     target=out/name
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for p in sorted((ROOT/'runtime').rglob('*')):

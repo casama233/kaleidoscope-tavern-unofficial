@@ -1,3 +1,4 @@
+import {externalEffectSource} from '../core/extension-content.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,ItemStack,system,world} from '@minecraft/server';
@@ -13,6 +14,7 @@ function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STA
 export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){write(p,{schema:1,entries:[]});tracks.delete(p.id);heelsSteps.delete(p.id);}
 export function applyCustomEffect(p,row){
+ const source=externalEffectSource(row.effect);if(source){system.sendScriptEvent(source+':apply_effect',JSON.stringify({entity:p.id,effect:row.effect,duration:row.duration,amplifier:row.amplifier}));return true;}
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
  if(p?.typeId!=='minecraft:player')return false;
  if(row.effect==='kaleidoscope_tavern:shriek_attack')return performShriek(p);

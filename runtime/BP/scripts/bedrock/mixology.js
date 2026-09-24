@@ -1,3 +1,4 @@
+import {cupBlock,isCupBlock} from '../core/extension-content.js';
 /** Java shaker lifecycle, rebuilt for 0.6.22.
  * One held-use session; one item identity. Contents live on the item or placed
  * station. UI and animation observe that session and never mutate recipes.
@@ -41,7 +42,7 @@ function log(error){const code=error.code??String(error);mixologyDiagnostics.err
 function safely(player,fn){try{return fn();}catch(error){log(error);if(player)showShakerMessage(player,error.code??'ERROR');}}
 function near(player,block){canWrite(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}
 function facing(player){return Math.floor((((player.getRotation().y+225)%360)+360)%360/90);}
-function perm(short,dir=0){return BlockPermutation.resolve(NS+':'+short,{[FACING]:dir});}
+function perm(short,dir=0){return BlockPermutation.resolve(short.includes(':')?short:NS+':'+short,{[FACING]:dir});}
 function station(block){check(block?.typeId===STATION,'NOT_SHAKER');return shakerStore.load(shakerKey(block.dimension.id,block.location))??emptyShaker();}
 function idle(player){check(!uses.has(player.id),'SHAKE_BUSY');}
 function token(){return `v22_${system.currentTick}_${++sequence}_${Math.random().toString(36).slice(2,9)}`;}
@@ -163,7 +164,7 @@ export function placeCup(player,location){
  check(isCupItem(item?.typeId),'NOT_CUP');check((block.isAir||waterAt(block))&&!cupStore.load(key),'SPACE_NOT_CLEAR');
  const state={schema:1,revision:0,item:item.typeId,facing:facing(player)};
  if(item.typeId===SIGNATURE)state.payload=signaturePayload(item);validateCup(state);
- commitBlock(player,cupStore,key,state,1,[],block,perm('cup_'+item.typeId.split(':')[1],state.facing));syncCupVisual(block);return state;
+ commitBlock(player,cupStore,key,state,1,[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;
 }
 function getCup(block){
  const saved=cupStore.load(cupKey(block.dimension.id,block.location));if(saved)return saved;
@@ -184,7 +185,7 @@ export function pourHeldShakerNow(player,block){
   check(tx.result.carrier===EMPTY_CUP&&isCupItem(tx.result.item),'WRONG_SERVING_CONTAINER');check(ItemTypes.get(tx.result.item),'OUTPUT_PACK_MISSING');
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};
   if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
-  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm('cup_'+next.item.split(':')[1],next.facing));
+  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm(cupBlock(next.item),next.facing));
   syncCupVisual(block);feedback(block,'fill',next.revision);cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;
  });
 }
@@ -270,7 +271,7 @@ export function registerMixologyComponents({blockComponentRegistry:blocks,itemCo
 export function installMixologyEvents(){
  registerJavaBlockUseFallback(candidate);
  registerJavaBlockUseHandler(event=>{
-  const block=event.block;if(event.cancel||!MIX_BLOCKS.has(block.typeId))return;
+  const block=event.block;if(event.cancel||!(block.typeId===STATION||isCupBlock(block.typeId)))return;
   const snapshot=itemSnapshot(event.player),held=snapshot.basic.id;
   if(javaSecondaryBypass(event.player,held))return;
   if(block.typeId===STATION&&held&&!candidate(held))return;
@@ -289,7 +290,7 @@ export function installMixologyEvents(){
  registerJavaItemUseOnRoute({id:'cups-v22',matches:isCupItem,
   plan:({player,block,face,held})=>held.id===EMPTY_CUP||player.isSneaking?{target:plus(block.location,faceOffset(face))}:undefined,
   execute:({player,plan})=>placeCup(player,plan.target)});
- registerProtectedBreakRoute({id:'mixology-v22',isBlock:block=>MIX_BLOCKS.has(block?.typeId),capture:()=>undefined,
+ registerProtectedBreakRoute({id:'mixology-v22',isBlock:block=>(block?.typeId===STATION||isCupBlock(block?.typeId)),capture:()=>undefined,
   recover:({player,block})=>block.typeId===STATION?pickupShaker(player,block,{breaking:true}):takeCup(player,block)});
  world.afterEvents.itemStartUse.subscribe(nativeStart);
  world.afterEvents.itemReleaseUse.subscribe(nativeStop);

@@ -36,10 +36,10 @@ export function updateFrame(shape,x,y,z) {
 // Exact vanilla members used by the Java tags: #minecraft:dirt and #minecraft:ice.
 // Java generated resources separately add snow_block and the two Nether blocks.
 const SOILS = new Set(['dirt','grass_block','grass','podzol','coarse_dirt','mycelium','rooted_dirt','dirt_with_roots','moss_block','mud','muddy_mangrove_roots'].map(x=>'minecraft:'+x));
-const ICE = new Set(['ice','packed_ice','blue_ice','frosted_ice','snow_block'].map(x=>'minecraft:'+x));
+const ICE = new Set(['ice','packed_ice','blue_ice','frosted_ice','snow','snow_block'].map(x=>'minecraft:'+x));
 export function speciesForSoil(id) {
  if(ICE.has(id))return 'ice_grape';
- if(['minecraft:netherrack','minecraft:magma_block'].includes(id))return 'gold_grape';
+ if(['minecraft:netherrack','minecraft:magma','minecraft:magma_block'].includes(id))return 'gold_grape';
  return SOILS.has(id)?'grape':undefined;
 }
 export function growthProbability(kind,javaTemperature) {

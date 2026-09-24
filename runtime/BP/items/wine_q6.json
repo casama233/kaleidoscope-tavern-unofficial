@@ -20,7 +20,12 @@
         "movement_modifier": 0.35,
         "start_using": "if_first"
       },
-      "kaleidoscope_tavern:drink_effects": {}
+      "kaleidoscope_tavern:drink_effects": {},
+      "minecraft:tags": {
+        "tags": [
+          "kaleidoscope_tavern:alcohol"
+        ]
+      }
     }
   }
 }

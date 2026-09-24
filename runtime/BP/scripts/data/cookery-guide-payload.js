@@ -4,7 +4,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.34",
+  "version": "0.6.35",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5858,7 +5858,9 @@ export function buildCookeryGuidePayload(registry){
   payload.entries.push({id:page.id,category:'drink_effects',icon:guideItemIcon(linkedItem,'textures/kaleidoscope_tavern_jar/item/wine'),kinds:[],mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale});
   addLocalizedName(payload,page.id,page.title,page.id);
  }
+ const combinedRecipeIds=new Set(pages.flatMap(p=>p.recipeIds??[]));
  for(const recipe of recipes){
+  if(combinedRecipeIds.has(recipe.id))continue;
   const mechanicsByLocale=Object.fromEntries(GUIDE_LOCALES.map(lc=>[lc,recipeMechanics(recipe,lc)]));
   const category=recipe.source!=='kaleidoscope_tavern'?'extensions':recipe.kind==='shaker'?'cocktail_recipes':recipe.kind==='pressing'?'press_recipes':'barrel_drinks';
   const outputItem=recipe.kind==='shaker'?recipe.output?.item:recipe.kind==='pressing'?`kaleidoscope_tavern:${recipe.id.split('/').pop()}`:recipe.output?.byQuality?.[0]??recipe.output?.item;

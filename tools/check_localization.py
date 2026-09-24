@@ -7,7 +7,8 @@ locales=json.loads((TEXT/'languages.json').read_text());maps={}
 for lc in locales:
     rows={}
     for line in (TEXT/f'{lc}.lang').read_text().splitlines():
-        if not line or line.startswith('#'):continue
+        assert not line.startswith('#') or line.startswith('##'), (lc,'Bedrock comments require ##',line)
+        if not line or line.startswith('##'):continue
         assert '=' in line,(lc,'invalid row')
         key,value=line.split('=',1)
         assert key not in rows,(lc,'duplicate',key)
@@ -21,6 +22,7 @@ for lc,rows in maps.items():
 required=set()
 for p in (RT/'BP').rglob('*.json'):
     data=json.loads(p.read_text())
+    if not isinstance(data,dict):continue
     for kind in ['item','block']:
         entry=data.get('minecraft:'+kind)
         if not entry:continue

@@ -1,5 +1,5 @@
 import {world,BlockPermutation,GameMode,MolangVariableMap} from '@minecraft/server';
-import {DISPLAY_IDS} from './bottles.js';
+import {isBottleBlock,isCupBlock} from '../core/extension-content.js';
 import {BottleStore,bottleKey,parseBottle} from '../core/bottles.js';
 import {rollDrinkEffects} from '../core/drink-effects.js';
 import {applyCustomEffect} from './custom-effects.js';
@@ -34,12 +34,12 @@ function applyCloud(dimension,at,itemId){
 }
 export function handleDisplayProjectileHit(e){
  const block=blockHit(e),projectile=e?.projectile;if(!block||!projectile)return false;
- const id=block.typeId,isCup=id.startsWith(NS+':cup_');if(!DISPLAY_IDS.has(id)&&!GLASS_BLOCKS.has(id)&&!isCup)return false;
+ const id=block.typeId,isCup=isCupBlock(id);if(!isBottleBlock(id)&&!GLASS_BLOCKS.has(id)&&!isCup)return false;
  // Java Projectile.mayInteract is the gate; Bedrock exposes projectile owner but not a
  // per-block griefing query on this event. Require a live, non-spectator owner.
  if(!ownerCanInteract(projectile))return false;
  try{
-  const p={x:block.location.x,y:block.location.y,z:block.location.z},isDrink=DISPLAY_IDS.has(id),isVanillaPotion=id===NS+':potion_bottle',vanillaKey=isVanillaPotion?bottleDisplayKey(block):undefined,k=isDrink?bottleKey(block.dimension.id,p):isCup?cupKey(block.dimension.id,p):undefined,s=isDrink?store.load(k):undefined,raw=k?(isDrink?store.raw(k):cupStore.raw(k)):undefined,vanillaRaw=vanillaKey?world.getDynamicProperty(vanillaKey):undefined,old=waterSnapshot(block);
+  const p={x:block.location.x,y:block.location.y,z:block.location.z},isDrink=isBottleBlock(id),isVanillaPotion=id===NS+':potion_bottle',vanillaKey=isVanillaPotion?bottleDisplayKey(block):undefined,k=isDrink?bottleKey(block.dimension.id,p):isCup?cupKey(block.dimension.id,p):undefined,s=isDrink?store.load(k):undefined,raw=k?(isDrink?store.raw(k):cupStore.raw(k)):undefined,vanillaRaw=vanillaKey?world.getDynamicProperty(vanillaKey):undefined,old=waterSnapshot(block);
   let highest;
   for(const item of s?.items??[]){const parsed=parseBottle(item);if(parsed&&(!highest||parsed.quality>highest.quality))highest=parsed;}
   try{setWithWater(block,BlockPermutation.resolve('minecraft:air'));if(k){if(isDrink)store.restore(k,undefined);else cupStore.restore(k,undefined);}if(vanillaKey)world.setDynamicProperty(vanillaKey,undefined);}catch(err){try{restoreWater(block,old);if(k){if(isDrink)store.restore(k,raw);else cupStore.restore(k,raw);}if(vanillaKey)world.setDynamicProperty(vanillaKey,vanillaRaw);}catch(rollback){error(rollback);}throw err;}

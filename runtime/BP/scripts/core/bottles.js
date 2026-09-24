@@ -1,6 +1,8 @@
+import {externalDrink} from './extension-content.js';
 import {check} from './util.js';
 import {BOTTLES} from '../data/bottles.js';
 export function parseBottle(id){
+ const ext=externalDrink(id);if(ext)return ext;
  if(id==='kaleidoscope_tavern:watermelon_juice')return {base:'watermelon_juice',quality:1,id};
  const m=/^kaleidoscope_tavern:([a-z_]+)_q([1-6])$/.exec(id??'');
  return m&&BOTTLES[m[1]]?.qualities===6?{base:m[1],quality:Number(m[2]),id}:undefined;

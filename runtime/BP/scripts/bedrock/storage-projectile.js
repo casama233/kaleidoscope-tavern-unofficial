@@ -1,3 +1,4 @@
+import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {system,world} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {storageBottleItem} from '../core/holder.js';
@@ -31,7 +32,7 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
   catch(error){try{entity?.remove();}catch{}throw error;}
  }
  try{
-  entity=dimension.spawnEntity(THROWN_DRINK,position);
+  entity=dimension.spawnEntity(externalVisual(THROWN_DRINK,itemId),position);
   entity.setProperty(STORAGE_KIND,bottle.kind);
   entity.setDynamicProperty(THROWN_ITEM,itemId);
   entity.setDynamicProperty(THROWN_EFFECTS,rowsPayload(itemId,rng));
@@ -60,7 +61,7 @@ function customRow(entity,row,factor){
 }
 function impactEntity(event){try{return event.getEntityHit?.()?.entity;}catch{return undefined;}}
 export function resolveThrownDrinkImpact(event){
- const projectile=event?.projectile;if(projectile?.typeId!==THROWN_DRINK)return false;
+ const projectile=event?.projectile;if(!isExternalVisual(projectile?.typeId,THROWN_DRINK))return false;
  try{
   if(projectile.getDynamicProperty(THROWN_RESOLVED)===true)return false;
   projectile.setDynamicProperty(THROWN_RESOLVED,true);

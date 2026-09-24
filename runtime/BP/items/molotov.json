@@ -29,7 +29,12 @@
         "use_duration": 3600,
         "movement_modifier": 1.0
       },
-      "minecraft:interact_button": "action.interact.kt_throw_molotov"
+      "minecraft:interact_button": "action.interact.kt_throw_molotov",
+      "minecraft:tags": {
+        "tags": [
+          "kaleidoscope_tavern:alcohol"
+        ]
+      }
     }
   }
 }

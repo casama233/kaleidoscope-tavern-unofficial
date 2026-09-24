@@ -9,7 +9,11 @@ files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}
 for side in ['BP','RP']:
     m=docs[RT/side/'manifest.json'];assert m['header']['version']==version
     assert all(x['version']==version for x in m['modules'])
-    assert 'Unofficial' in m['header']['name']
+    assert m['header']['name']=='pack.name' and m['header']['description']=='pack.description'
+    assert (RT/side/'pack_icon.png').read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+    for lc in config['supported_locales']:
+        lang=(RT/side/'texts'/f'{lc}.lang').read_text()
+        assert 'pack.name=' in lang and 'pack.description=' in lang
 expected={'BP':'10f37ae2-9ccf-435f-b34b-0eec8191cd94','RP':'c89dc8df-c3fc-4bc8-8bd0-527abba76681'}
 for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']

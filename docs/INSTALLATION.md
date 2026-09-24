@@ -8,8 +8,8 @@ Install [Kaleidoscope Cookery (Unofficial) 1.0.6](https://www.curseforge.com/min
 | --- | --- | --- |
 | Cookery BP | `10f37ae2-9ccf-435f-b34b-0eec8191cd94` | 1.0.6 |
 | Cookery RP | `c89dc8df-c3fc-4bc8-8bd0-527abba76681` | 1.0.6 |
-| Tavern BP | `f54f37f9-485a-55bf-8f89-6558aca988c5` | 0.6.33 |
-| Tavern RP | `c2990d50-2cf7-59f7-886a-0f2d0240d156` | 0.6.33 |
+| Tavern BP | `f54f37f9-485a-55bf-8f89-6558aca988c5` | 0.6.34 |
+| Tavern RP | `c2990d50-2cf7-59f7-886a-0f2d0240d156` | 0.6.34 |
 
 Cookery source archive SHA-256: `c589efb60277bea295ac12ef760d8f2c7e8af3ea62e809b320862bd786033351`. Its code/assets are not bundled here. The existing Guidebook Extension API v1 handles Tavern's chapter through script events.
 

@@ -7,7 +7,7 @@ import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':cellar_cabinet_bottle_visual',ANCHOR=NS+':cellar_cabinet_anchor',store=new CellarCabinetStore(world),visuals=new Map();let cursor=0;
-export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
+export const cellarCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[],redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){cellarCabinetDiagnostics.errors.push(String(e));if(cellarCabinetDiagnostics.errors.length>16)cellarCabinetDiagnostics.errors.shift();}
 function neighborState(block,p){const b=blockAt(block.dimension,p);return b?.typeId===CELLAR_CABINET?{typeId:b.typeId,facing:b.permutation.getState(FACING)}:undefined;}
 function cabinetNeighbors(block){const f=block.permutation.getState(FACING)??0;return {left:neighborState(block,plus(block.location,facingVector((f+1)%4))),right:neighborState(block,plus(block.location,facingVector((f+3)%4)))};}

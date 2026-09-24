@@ -98,6 +98,20 @@
         "components": {
           "minecraft:geometry": {
             "identifier": "geometry.kt_assets_a13.incense_open"
+          },
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "kt_assets_a13_block_deco_incense_pine_incense",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": true
+            },
+            "unshaded": {
+              "texture": "kt_assets_a13_block_deco_incense_pine_incense",
+              "render_method": "alpha_test",
+              "ambient_occlusion": 0.0,
+              "face_dimming": false
+            }
           }
         }
       }

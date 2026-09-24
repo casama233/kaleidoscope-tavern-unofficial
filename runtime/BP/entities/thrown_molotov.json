@@ -33,8 +33,29 @@
             "num_particles": 30,
             "on_other_hit": true,
             "on_entity_hit": true
-          },
-          "remove_on_hit": {}
+          }
+        }
+      },
+      "minecraft:timer": {
+        "time": 10,
+        "looping": false,
+        "time_down_event": {
+          "event": "kt:expire",
+          "target": "self"
+        }
+      }
+    },
+    "component_groups": {
+      "kt:expired": {
+        "minecraft:instant_despawn": {}
+      }
+    },
+    "events": {
+      "kt:expire": {
+        "add": {
+          "component_groups": [
+            "kt:expired"
+          ]
         }
       }
     }

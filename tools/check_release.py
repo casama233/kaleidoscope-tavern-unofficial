@@ -33,7 +33,10 @@ assert len(geometry)==sum(len(j.get('minecraft:geometry',[])) for p,j in docs.it
 for p,j in docs.items():
     if not isinstance(j,dict):continue
     if 'blocks' in p.parts and 'minecraft:block' in j:
-        b=j['minecraft:block'];components=[b.get('components',{}),*[x['components'] for x in b.get('permutations',[])]]
+        b=j['minecraft:block']
+        for values in b['description'].get('states',{}).values():
+            if isinstance(values,list):assert len(values)<=16,(p,'block state exceeds 16 values')
+        components=[b.get('components',{}),*[x['components'] for x in b.get('permutations',[])]]
         for c in components:
             for g in [c.get('minecraft:geometry'),c.get('minecraft:item_visual',{}).get('geometry')]:
                 if isinstance(g,dict):g=g.get('identifier')
@@ -49,5 +52,6 @@ for p in (RT/'BP/scripts').rglob('*.js'):
     for relative in re.findall(r"(?:from\s+|import\s*)['\"](\.[^'\"]+)['\"]",p.read_text()):
         assert (p.parent/relative).is_file(),(p,relative)
 subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')

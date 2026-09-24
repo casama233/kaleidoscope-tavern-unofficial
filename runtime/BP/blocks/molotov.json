@@ -14,6 +14,12 @@
           "render_method": "alpha_test",
           "ambient_occlusion": 0.0,
           "face_dimming": true
+        },
+        "unshaded": {
+          "texture": "kt_assets_a17_molotov",
+          "render_method": "alpha_test",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
         }
       },
       "minecraft:item_visual": {
@@ -26,6 +32,12 @@
             "render_method": "alpha_test",
             "ambient_occlusion": 0.0,
             "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_molotov",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
           }
         }
       },

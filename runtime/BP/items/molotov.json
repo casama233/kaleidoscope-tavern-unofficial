@@ -26,9 +26,10 @@
         "projectile_entity": "kaleidoscope_tavern:thrown_molotov"
       },
       "minecraft:use_modifiers": {
-        "use_duration": 0.25,
+        "use_duration": 3600,
         "movement_modifier": 1.0
-      }
+      },
+      "minecraft:interact_button": "action.interact.kt_throw_molotov"
     }
   }
 }

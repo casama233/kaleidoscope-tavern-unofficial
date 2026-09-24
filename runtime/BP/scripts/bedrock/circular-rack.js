@@ -7,7 +7,7 @@ import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=new CircularRackStore(world),visuals=new Map();let cursor=0;
-export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'ADAPTED_DRINKS_MOLOTOV_PENDING',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
+export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){circularRackDiagnostics.errors.push(String(e));if(circularRackDiagnostics.errors.length>16)circularRackDiagnostics.errors.shift();}
 function slotHelpers(block,slot){const a=circularRackAnchor(circularRackKey(block.dimension.id,block.location),slot);return block.dimension.getEntities({type:HELPER,location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}
 function discard(e,reason){e.remove();visuals.delete(e.id);circularRackDiagnostics[reason]=(circularRackDiagnostics[reason]??0)+1;}

@@ -41,7 +41,7 @@
       "minecraft:material_instances": {
         "*": {
           "texture": "kt_assets_a10_block_deco_holder",
-          "render_method": "alpha_test"
+          "render_method": "alpha_test_single_sided"
         }
       },
       "minecraft:destructible_by_mining": {

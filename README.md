@@ -2,9 +2,9 @@
 
 An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion add-on for [Kaleidoscope Cookery (Unofficial)](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) by Loyallay.
 
-[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.33.md) · [Credits](CREDITS.md)
+[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.34.md) · [Credits](CREDITS.md)
 
-**Current public beta: 0.6.33-beta.1.** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
+**Current public beta: 0.6.34-beta.1.** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
 
 ## Features
 
@@ -39,7 +39,7 @@ The checks parse resources, validate references and scripts, and inspect guide d
 
 The public beta has static resource/script/language checks and a successful BDS 1.26.51.1 load with Cookery 1.0.6. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
 
-[Download the public beta](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.33-beta.1). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
+[Download the public beta](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.34-beta.1). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
 
 ## Licensing
 

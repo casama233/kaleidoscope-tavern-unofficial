@@ -20,21 +20,16 @@
           0,
           0,
           0
+        ],
+        "direction": [
+          "math.random(-0.3, 0.3)",
+          "1",
+          "math.random(-0.3, 0.3)"
         ]
       },
       "minecraft:emitter_local_space": {
         "position": true,
         "rotation": false
-      },
-      "minecraft:particle_initialization": {
-        "per_update_expression": "(variable.kt_init ?? 0) == 0 ? { variable.kt_init=1; variable.kt_tick=0; variable.kt_x=0; variable.kt_y=0; variable.kt_z=0; variable.kt_dx=(variable.input_dx ?? 0); variable.kt_dy=(variable.input_dy ?? 0); variable.kt_dz=(variable.input_dz ?? 0); }; variable.kt_steps=math.max(0,math.floor(variable.particle_age*20)-variable.kt_tick); loop(variable.kt_steps,{ variable.kt_dx=variable.kt_dx+(math.random(0,1)-0.5)*0.002; variable.kt_dz=variable.kt_dz+(math.random(0,1)-0.5)*0.002; variable.kt_dy=variable.kt_dy+(math.random(0,1)-0.5)*0.0005; variable.kt_x=variable.kt_x+variable.kt_dx; variable.kt_y=variable.kt_y+variable.kt_dy; variable.kt_z=variable.kt_z+variable.kt_dz; variable.kt_dx=variable.kt_dx*0.96; variable.kt_dz=variable.kt_dz*0.96;  }); variable.kt_tick=math.floor(variable.particle_age*20);"
-      },
-      "minecraft:particle_motion_parametric": {
-        "relative_position": [
-          "variable.kt_x",
-          "variable.kt_y",
-          "variable.kt_z"
-        ]
       },
       "minecraft:particle_lifetime_expression": {
         "max_lifetime": "(60 + math.floor(variable.particle_random_1 * 40)) / 20"
@@ -65,6 +60,15 @@
           1,
           "0.9 * (0.6 + 0.4 * math.sin(variable.particle_age * 20 * (0.3 + variable.particle_random_3 * 0.4) * 57.295779513)) * math.min(1, math.max(0, (1 - variable.particle_age / variable.particle_lifetime) * 5))"
         ]
+      },
+      "minecraft:particle_initial_speed": "math.random(0.07, 0.13)",
+      "minecraft:particle_motion_dynamic": {
+        "linear_acceleration": [
+          0,
+          0.03,
+          0
+        ],
+        "linear_drag_coefficient": 0.02
       }
     }
   }

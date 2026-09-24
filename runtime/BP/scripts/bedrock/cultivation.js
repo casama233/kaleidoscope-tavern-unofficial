@@ -131,12 +131,12 @@ export function farmUse(player,b,{rng=Math.random}={}){
    const edits=[{block:b,permutation:framePermutation(BARE,shape(b),0,false,waterlogged(b))}];
     const child=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(child,'UNLOADED_CROP');
     if(CROPS[child.typeId])edits.push({block:child,permutation:air()});
-    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng});refreshAround(b);return 'pruned';
+    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng});refreshAround(b);try{b.dimension.playSound('mob.sheep.shear',b.location,{volume:1,pitch:1});}catch{}return 'pruned';
    }
    if(CROPS[b.typeId]){
     check(age(b)===5,'NOT_RIPE');check(cropSupported(b)===true,'MISSING_TRELLIS');
     const outputs=fruitHarvest(CROPS[b.typeId],age(b),true,rng);
-    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});return outputs;
+    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});try{b.dimension.playSound('mob.sheep.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;
    }
   }
   tell(player,`§a[Tavern] ${b.typeId.split(':')[1]} | ${isFrame(b.typeId)?shape(b):'fruit'} | age ${b.typeId===WILD_HEAD?wildVineAge(b):age(b)}${waxed(b)?' | waxed':''}`);

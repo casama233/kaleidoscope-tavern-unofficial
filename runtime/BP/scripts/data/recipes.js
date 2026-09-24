@@ -692,9 +692,9 @@ export const BUILTIN_RECIPES = [
     "fluid": "kaleidoscope_tavern:glow_berries_juice",
     "amount": 125,
     "title": {
-      "zh_TW": "glow_berries",
-      "zh_CN": "glow_berries",
-      "en_US": "glow_berries"
+      "zh_TW": "螢光莓",
+      "zh_CN": "发光浆果",
+      "en_US": "Glow Berries"
     },
     "source": "kaleidoscope_tavern"
   },
@@ -767,9 +767,9 @@ export const BUILTIN_RECIPES = [
     "fluid": "kaleidoscope_tavern:sweet_berries_juice",
     "amount": 125,
     "title": {
-      "zh_TW": "sweet_berries",
-      "zh_CN": "sweet_berries",
-      "en_US": "sweet_berries"
+      "zh_TW": "甜莓",
+      "zh_CN": "甜浆果",
+      "en_US": "Sweet Berries"
     },
     "source": "kaleidoscope_tavern"
   }

@@ -21,7 +21,24 @@ function interactIncense(player,block,{before=false,cancelled=false,first=true}=
 function startIncenseCure(entity){if(entity.hasTag(INCENSE_CURE_TAG))return false;entity.addTag(INCENSE_CURE_TAG);try{entity.triggerEvent('villager_converted');diagnostics.incenseCures++;return true;}catch(error){entity.removeTag(INCENSE_CURE_TAG);throw error;}}
 function damageIncenseTarget(entity){if(!entity?.isValid||entity.hasTag(INCENSE_CURE_TAG))return;const zombieVillager=ZOMBIE_VILLAGER_IDS.has(entity.typeId),health=entity.getComponent?.('minecraft:health'),before=Number(health?.currentValue);if(zombieVillager&&Number.isFinite(before)&&before<=1){startIncenseCure(entity);return;}if(entity.applyDamage(1,{cause:EntityDamageCause.magic})){diagnostics.undeadHits++;const after=Number(health?.currentValue);if(zombieVillager&&Number.isFinite(after)&&after>0&&after<=1)startIncenseCure(entity);}}
 function incensePulseDue(block){const period=Math.floor(system.currentTick/120),key=`${block.dimension.id}|${block.location.x}_${block.location.y}_${block.location.z}`,previous=incensePulsePeriods.get(key);incensePulsePeriods.set(key,period);if(incensePulsePeriods.size>1024){for(const[k,v]of incensePulsePeriods)if(v<period-2)incensePulsePeriods.delete(k);while(incensePulsePeriods.size>1024)incensePulsePeriods.delete(incensePulsePeriods.keys().next().value);}return previous!==undefined&&period>previous;}
-function tickIncense(block){const spec=INCENSE[block.typeId.slice(NS.length+1)];if(!spec)return;const open=block.permutation.getState(OPEN)===1,p={x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5};if(Math.random()<1/3)optional(()=>block.dimension.spawnParticle(spec.small,p));if(open)for(let i=0;i<5;i++){const offset={x:(Math.random()-.5)*32,y:-2+Math.random()*16,z:(Math.random()-.5)*32};optional(()=>block.dimension.spawnParticle(spec.large,{x:p.x+offset.x,y:p.y+offset.y,z:p.z+offset.z}));}const pulseDue=incensePulseDue(block);if(open&&pulseDue){const location={x:block.location.x-32,y:block.location.y-32,z:block.location.z-32},volume={x:65,y:65,z:65};for(const entity of block.dimension.getEntities({families:['undead'],location,volume}))try{damageIncenseTarget(entity);}catch(error){report(error);}diagnostics.incensePulses++;}}
+function tickIncense(block){
+ const spec=INCENSE[block.typeId.slice(NS.length+1)];if(!spec)return;
+ const open=block.permutation.getState(OPEN)===1,p={x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5};
+ if(Math.random()<1/3)optional(()=>block.dimension.spawnParticle(spec.small,p));
+ // Java spawns five large particles per client animate tick. Bedrock sends
+ // script particles over the network, so cap these long-lived effects at two
+ // per block tick. Each particle now has native motion instead of a Molang loop.
+ if(open)for(let i=0;i<2;i++){
+  const offset={x:(Math.random()-.5)*32,y:-2+Math.random()*16,z:(Math.random()-.5)*32};
+  optional(()=>block.dimension.spawnParticle(spec.large,{x:p.x+offset.x,y:p.y+offset.y,z:p.z+offset.z}));
+ }
+ const pulseDue=incensePulseDue(block);
+ if(open&&pulseDue){
+  const location={x:block.location.x-32,y:block.location.y-32,z:block.location.z-32},volume={x:65,y:65,z:65};
+  for(const entity of block.dimension.getEntities({families:['undead'],location,volume}))try{damageIncenseTarget(entity);}catch(error){report(error);}
+  diagnostics.incensePulses++;
+ }
+}
 function powered(ev){const level=Number(ev.powerLevel??0);if(!Number.isFinite(level))return;toggleIncense(ev.block,level>0);}
 function placementPos(ev){const direction=DIRECTIONS[ev.blockFace];check(direction,'UNKNOWN_FACE');return plus(ev.block.location,direction);}
 function replaceable(b){return !!b&&(b.isAir||b.typeId==='minecraft:water');}

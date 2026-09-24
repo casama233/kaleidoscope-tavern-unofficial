@@ -32,12 +32,27 @@ for p in (RT/'RP/entity').glob('*.json'):
         if name.startswith('kt_'):assert name in registered,(p,'unregistered material',name)
 assert 'USE_UV_ANIM' in registered['kt_signature_animated']['+defines']
 assert not (RT/'RP/materials/kt_signature.material').exists()
+item_atlas=docs[RT/'RP/textures/item_texture.json']['texture_data']
+flipbooks=docs[RT/'RP/textures/flipbook_textures.json']
+for drink in ('depth_charge','nether_special'):
+    key=f'kt_c3_{drink}'
+    path=f'textures/kaleidoscope_tavern_jar/item/{drink}'
+    assert item_atlas[key]['textures']==path
+    assert any(row['atlas_tile']==key and row['flipbook_texture']==path for row in flipbooks)
+assert item_atlas['kt_c3_signature_cocktail']['textures']=='textures/kaleidoscope_tavern_jar/item/signature_cocktail'
+from PIL import Image
+mask=Image.open(RT/'RP/textures/kt_runtime/signature/icon_dyed.tga').convert('RGBA')
+assert mask.getbbox()==(5,8,11,12),'Signature tint must cover only the Java liquid layer'
 geometry={g['description']['identifier'] for p,j in docs.items() if 'models' in p.parts for g in j.get('minecraft:geometry',[])}
 assert len(geometry)==sum(len(j.get('minecraft:geometry',[])) for p,j in docs.items() if 'models' in p.parts),'duplicate geometry identifiers'
 for p,j in docs.items():
     if not isinstance(j,dict):continue
     if 'blocks' in p.parts and 'minecraft:block' in j:
         b=j['minecraft:block']
+        if p.name.endswith('_sofa.json'):
+            corners=[row for row in b.get('permutations',[]) if row['condition'].endswith(('== 4','== 5'))]
+            assert len(corners)==2
+            assert all(len(row['components']['minecraft:collision_box'])==2 for row in corners)
         for values in b['description'].get('states',{}).values():
             if isinstance(values,list):assert len(values)<=16,(p,'block state exceeds 16 values')
         components=[b.get('components',{}),*[x['components'] for x in b.get('permutations',[])]]

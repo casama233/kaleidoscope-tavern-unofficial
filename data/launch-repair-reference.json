@@ -1,0 +1,491 @@
+{
+  "baselineCommit": "cedfaedf6140bae61b24afb658869b1d0e6ea1a9",
+  "javaCommit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "javaSources": {
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/MolotovBlockItem.java": "d0d7ebd2e385d9cd4215cf2fa2b602d1ce1c4c81d034d61fe098efbfa5699776",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java": "01fcd8ff66b459bb1fe6251a4cf45255cb4f0e80af6e861f8772e72399c7b772",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/DrinkBlockItem.java": "f75bddffe9be3ecac0c94ed83afd1046585afcf831c447d96429371b722d0f43",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java": "c67328f66cd5fac4676c017c33d7e5b1019d2f562492f03e349b33682a73dbc6",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/HolderBlock.java": "19a01f0c523892dd6ed03046e5ff73a85dd0e0650c74f46603593ad495b8ad07",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/TiltedRackBlock.java": "54d45590b4e29d7ed52bed993ea8e01abf26e29463417ebfc1dd11397b7a22dd",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java": "7740f4222a1b21ba1d7ef99b751214867669bc365e866eed26acedaca137e29d"
+  },
+  "vanillaSource": {
+    "version": "1.20.1",
+    "metadataUrl": "https://piston-meta.mojang.com/v1/packages/2492c9d294776667e63b56a73a611ae327948de2/1.20.1.json",
+    "downloads": {
+      "server": {
+        "sha1": "84194a2f286ef7c14ed7ce0090dba59902951553",
+        "size": 47791053,
+        "url": "https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar"
+      },
+      "server_mappings": {
+        "sha1": "0b4dba049482496c507b2387a73a913230ebbd76",
+        "size": 6154195,
+        "url": "https://piston-data.mojang.com/v1/objects/0b4dba049482496c507b2387a73a913230ebbd76/server.txt"
+      }
+    },
+    "classes": {
+      "net.minecraft.world.effect.MobEffect": "bey",
+      "net.minecraft.world.entity.projectile.Projectile": "bzg",
+      "net.minecraft.world.entity.projectile.ThrowableProjectile": "bzn",
+      "net.minecraft.world.entity.projectile.ThrownPotion": "bzr",
+      "net.minecraft.world.level.block.BaseFireBlock": "cpb"
+    }
+  },
+  "samplesCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "reviewedChanges": {
+    "runtime/BP/blocks/black_sofa.json": {
+      "before": "fd87ab8c74491c6881fa68e26065a4958d93070e10c0f0aef0d2ace4906d4b88",
+      "beforeProjected": "f8523c4285465ae86a38f050ccff11d41cf71893c3741a60a92f11d5b0ea7e61",
+      "after": "106188065af09f5743f9416dabc3daa1ca7be2e39412654ccc002afba8221597",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/blue_sofa.json": {
+      "before": "cbd27049e40027ef8e52e0bf03a32bc97138b8106d8fd25246717eb22611c2bc",
+      "beforeProjected": "e6da063ce6b02f661c8220a25c2e9af3f5f0e850696bcf643391d1069c21f809",
+      "after": "3bf5f805ae97cb1414d689ad3fbd1ef82179a9482b330fec4eba242c561fc506",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/brown_sofa.json": {
+      "before": "b54c5cb52e57c1701c6e836323945d9c160744cd87da57a66e3ad94c795f1e1c",
+      "beforeProjected": "ce9976823843226c313c98282c83c10cdbf04e58dc21c3962a700adf07661c93",
+      "after": "4be2cea11d1f54b41ffae3a898b2d80fba7cf3f613a449ff36a24454fde1b832",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/cyan_sofa.json": {
+      "before": "848719aa3858882335c4beccff15d836c8e3ee3fbf5a03394029f17d62e01f0d",
+      "beforeProjected": "5f65e9ed7fcaaf2959a14a8972ee78c7542d87501f99d373a199834d20f0e101",
+      "after": "880547a20e942152e103d00cb81407efcd897d16980ccf33f2620205d3368ab2",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/gray_sofa.json": {
+      "before": "03764db9ff0ac66df7cca218ee29a2d4a410ff10c480cdea5bad5be700f47c23",
+      "beforeProjected": "2cceec9b12031fe2b3da519e467b61b4032755401195cc1208b3c2fd883463ad",
+      "after": "00ca7cb8bfc1dcca3847ea89659806510b544117d11fdc7d7b1318334f4111d0",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/green_sofa.json": {
+      "before": "2b93072e4aa46706caeb3ee82caedd5812383e7c970a55ee0eae99e54942f0fd",
+      "beforeProjected": "f5a7994ef94f97b91ad98ee44202f46254d1f6525438ed092982f122ec350d6d",
+      "after": "bb81b232776afaf29f20c4d1cb6e61fbd32741c745f6a6b3149b03e96550130c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/light_blue_sofa.json": {
+      "before": "c66a4cd591ef644aafeba66bf9b3925c0713b27f81fbae44a105967abeba4de1",
+      "beforeProjected": "938610a8100f47a5027f5765bec92ee3abfdbb70f07f22e42eac3eab5fe12cad",
+      "after": "a489957b4c165c8a739006a33b681bb7e167835f4bd29d0a2ba5514f009d8b06",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/light_gray_sofa.json": {
+      "before": "11a6b59746d56e6d5562c97067e291067bbe1e653c3a162ab2985ad7a409940c",
+      "beforeProjected": "5aaccdaf6faf2559c3ab8c8da6f45c59bd511719d62d6407ac1e1ceb1ca6c3ae",
+      "after": "a7065a143a4d309896b8d62fb767819b97b408175623c4d1f31bb2966d834335",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/lime_sofa.json": {
+      "before": "003584ebc85364b43a5e92ff33ea3d648d7222a3f0a0af55f4fa022de6c40c49",
+      "beforeProjected": "5e985115d7fa2904aad39c9b211094eadee270e1818679d4473eb69273c25651",
+      "after": "b6687f13ca7d8c465b51d253e2953a36f2764c976c92d1f16997ce1594f954e6",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/magenta_sofa.json": {
+      "before": "546d4f3af8f50d29465d2ddd45f0c1345ebe3dadd1554ddf33ccadd05d9382e0",
+      "beforeProjected": "50ebeb4d0da601b791690693a860a067196ad4ea5c46d92846720aaba824a3a7",
+      "after": "9ef76ac218a73cae3820d43f247dfa6e70fd96cdb7f837dc7eb8a072139f32e6",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/orange_sofa.json": {
+      "before": "729d1dd0e66f9986617735ab4484c3cd525bb578ed49ad98cd73b4e2a3c3555f",
+      "beforeProjected": "32dd86b4edceb53a1021ff7469fd62ccb5582f364bfdf77be2e1d8aa7190804a",
+      "after": "a3f685acd18b33df505a27f7d3a0f6d55f47a04b37af9e268728db98c25169c2",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/pink_sofa.json": {
+      "before": "b1d0b0277bc9a4dbc06b90f243666886f65522398b110c75bc00849ca3b4cfbc",
+      "beforeProjected": "86991d31765f95c0f3f239c734121509c9cfb2d3c3f2354890ea76935aa0b81d",
+      "after": "1265f4ffa965e4166b0903e6255ed36d38a02c94dd7b43bad3025218832658ef",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/purple_sofa.json": {
+      "before": "3d984f91fa02b29f0675bac6c4c70c6337b0f849346e0debde64d89beec9cc6c",
+      "beforeProjected": "180911d3faf2742271203985a91ace7b4e05f5d74079b13cb488d619a491c12d",
+      "after": "67b0a5e8c38d1a20a6b0b55e9deadf1c9ced01d2ecf10aff8c24116f91bf287e",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/red_sofa.json": {
+      "before": "e77ce82cf3f8417725d2d4ea4eed06ab8fc7ec07abf7e4de5f23b386ca1abca5",
+      "beforeProjected": "bfe425c898f56d788c17bb7d6c4cbfa51b3810fb8cf3a416aab1c4c84456399b",
+      "after": "3e7770600b27ae671a62344d9fbfa8418029e569daf31e3abbd32452a445c4ad",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_black.json": {
+      "before": "f37406c15550f3486258e091c47e5f757b0d406f7efc91ae2da4e5a055622832",
+      "beforeProjected": "f37406c15550f3486258e091c47e5f757b0d406f7efc91ae2da4e5a055622832",
+      "after": "34b27bd2298e629cfe1b3c9623d720bd95ca849a472d1c5fe199f608a9c3e321",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_blue.json": {
+      "before": "2fc5d06ec54ce5f558b0fe23e9801707a5a6d841748ade36c84507697e4acaa3",
+      "beforeProjected": "2fc5d06ec54ce5f558b0fe23e9801707a5a6d841748ade36c84507697e4acaa3",
+      "after": "35036541ee811644e43bf8699f0a3456b232a42b40e40e934c43e303cd80ce18",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_brown.json": {
+      "before": "1d7a8a7729d87c2dab18849e24d9f535d41e2c96ac441b204bceb865027c0e78",
+      "beforeProjected": "1d7a8a7729d87c2dab18849e24d9f535d41e2c96ac441b204bceb865027c0e78",
+      "after": "b51df3facdc2fda142c577282174694277cc26fb2d2b379f6a131f0946a2d972",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_cyan.json": {
+      "before": "31a9349d76183eb8443d58fa9f744771f0cff6b3d022063c8443018d2952acc1",
+      "beforeProjected": "31a9349d76183eb8443d58fa9f744771f0cff6b3d022063c8443018d2952acc1",
+      "after": "d9dc4ebd47f055b1abdfcaa946ed20aa3bdfad5ccf74e6049a66ddb13c65a444",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_gray.json": {
+      "before": "6f6f4b062c91b673418a0e1f1d3ae0d041b0ab64c7824de1be0b8592c9963479",
+      "beforeProjected": "6f6f4b062c91b673418a0e1f1d3ae0d041b0ab64c7824de1be0b8592c9963479",
+      "after": "66be40288efb2ac485c0232d794dac345a94f141b63e305ef0c4e02269d865cb",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_green.json": {
+      "before": "8373effd2fe11d0cfe78853aa9fc75fbb0c4a78197b9eb9e32513ac822f577a1",
+      "beforeProjected": "8373effd2fe11d0cfe78853aa9fc75fbb0c4a78197b9eb9e32513ac822f577a1",
+      "after": "1c2110083945d1442a61ad31f3e92e0510d3c350f30cb28ea9b660347fa6033b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_light_blue.json": {
+      "before": "0951bb1b6669b15c50725fadc97a4148ae6a794049fd1c94befd80bf2120073f",
+      "beforeProjected": "0951bb1b6669b15c50725fadc97a4148ae6a794049fd1c94befd80bf2120073f",
+      "after": "c8dbfbf5437b1dbc9379e20a1191a387f91e97669b5f1dcccea06633dc320c3e",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_light_gray.json": {
+      "before": "7cc5cdd943b1314216f2aa7af2dccf57aa13572b4ea56423392eed9f0cc117ff",
+      "beforeProjected": "7cc5cdd943b1314216f2aa7af2dccf57aa13572b4ea56423392eed9f0cc117ff",
+      "after": "5344bfd32c8ab08847cf40710706251704d41cf49e887e8b39d1c1f7da83893b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_lime.json": {
+      "before": "ec7290af4817649e0ecf26ce12318fef9f49574eb16805c33421c8d077ddfd1b",
+      "beforeProjected": "ec7290af4817649e0ecf26ce12318fef9f49574eb16805c33421c8d077ddfd1b",
+      "after": "2abdbf47a4e5cfc34990f2227b7a69fa79278a0e234de9555ab1ae694e43a23a",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_magenta.json": {
+      "before": "731adeb6ebfc908072ed2976e9006c6f8f9e53e01c12efc0bfc32ebd7489113a",
+      "beforeProjected": "731adeb6ebfc908072ed2976e9006c6f8f9e53e01c12efc0bfc32ebd7489113a",
+      "after": "6f1738f34655f801dc72d7a3a348cc5714e4e492a7a4a02b90f6fb68be1baef4",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_orange.json": {
+      "before": "b8397ec3d5378a4d46cc183131716fe779e97a122317a66ac318edc6ccf96de2",
+      "beforeProjected": "b8397ec3d5378a4d46cc183131716fe779e97a122317a66ac318edc6ccf96de2",
+      "after": "b0826a380e3e866b6f6353b5a9c1c9575040c8269464450c712d4add2c321118",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_pink.json": {
+      "before": "8bb739363f02ab3abaa61d063a14e6e79eaf98a383745c49fff6c0be29c1ce02",
+      "beforeProjected": "8bb739363f02ab3abaa61d063a14e6e79eaf98a383745c49fff6c0be29c1ce02",
+      "after": "85607420c9d98d454c3c92b79fd9a306e5597d278b66ec18c3ade0339d3d9e4c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_purple.json": {
+      "before": "b1fa098a018ea645fbb7da67a5d7d78de869c60b9c9d7079f395a7959f94fa9b",
+      "beforeProjected": "b1fa098a018ea645fbb7da67a5d7d78de869c60b9c9d7079f395a7959f94fa9b",
+      "after": "86796835d3cccd6968422ab8240e7d9d4697bad25cfc2c1300c4382ecadb651b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_red.json": {
+      "before": "97b994542f81fec115823c105bab276dbb17e98f157af3cbf1819f9142c066bb",
+      "beforeProjected": "97b994542f81fec115823c105bab276dbb17e98f157af3cbf1819f9142c066bb",
+      "after": "a83752f47c0814e59a867a0f5da66cffacd9cb2aca77415483bfe4443460de3f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_white.json": {
+      "before": "19804dd89ed85bdb104b86062a9a9c3270d9c8e59b6e983d11c66f2f4f8230a7",
+      "beforeProjected": "19804dd89ed85bdb104b86062a9a9c3270d9c8e59b6e983d11c66f2f4f8230a7",
+      "after": "50af9d9a4ac71315004a2688cd99eb19c1a32fdb0f9fe2847684045550bfc28f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/stool_yellow.json": {
+      "before": "03a6c15a15ce9cfb0d6f4acfaa67398fdd0ae00cab6a704a2533d81ee41eadd8",
+      "beforeProjected": "03a6c15a15ce9cfb0d6f4acfaa67398fdd0ae00cab6a704a2533d81ee41eadd8",
+      "after": "78c313361427f0525079e134101a14190651b39e9c7da6ca32e86bb8908cd6c4",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/white_sofa.json": {
+      "before": "3c8d740abcfc9948b31b64bda19ed1282fb6b3654dc37238259e67408b3173dc",
+      "beforeProjected": "660135a39ea4d71995c8a0e5343e6f01ae3ebb3013ff03ffe61d25ac40eb38f2",
+      "after": "f66cbe1903a2ceaced9c8a8f8be83ac4e80cda1acd0558ec6a56b0aae84160a8",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/blocks/yellow_sofa.json": {
+      "before": "8059b7f25d8bbfd3b73df89aa0dc977df749fb1d6909496a200c5311d941a34a",
+      "beforeProjected": "b5d7f377d9f2daf909237e02c08af444c789dfefbe3ebf8e2a62a318a8a80250",
+      "after": "d1eaac34af9ba85aa0768566ee8724c52b355fc480bb27dff76951ceb133f98d",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/entities/thrown_molotov.json": {
+      "before": "b5d3b23feb61b03152d1964d4513923da80b6d6a417c53ab7b4114aaf45bdcc1",
+      "beforeProjected": "b5d3b23feb61b03152d1964d4513923da80b6d6a417c53ab7b4114aaf45bdcc1",
+      "after": "db9c883a8cf7f09c65fa51e199b6fd63affc6c3c54197557d7b127751384318a",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/black_bar_stool.json": {
+      "before": "7e610f83572eefeccd2e21f0a7a080d50d585770ac07feb88603284328fd484c",
+      "beforeProjected": "345fc09c9e3363c582695ee3b0c4ac8307f461430229e91cedb56b812fde9242",
+      "after": "aaeee340c596a9854c72077b866e1c1ebfcfe00892e35113bd23fd32f6c9c6ec",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/blue_bar_stool.json": {
+      "before": "2a85040fec5c561b62aef70b4db7a26ec40f2bf9d3d13e7874c524adea4fcfbe",
+      "beforeProjected": "46f12d93f69cb70bfc8b3cf1bb10057e74d03d4906a262a8e9080ca8b90566ac",
+      "after": "096e0a1c5e5d181561bced3acbd42773eed8d7b7f4eddf1cba9227f15abc1d73",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/brown_bar_stool.json": {
+      "before": "17d3d828831f7e45ee5abd6efd7cd05d97d5043afe7da45d1c6564e9a22d670d",
+      "beforeProjected": "d32576c9a281c250bf1b4d2bbfa0c28b2ce699665637f6d46b3c2790265b3f6d",
+      "after": "a4c4d709381f7442e439069c751e2598d3d9ffe62e738612086c79e0bb39846b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/cyan_bar_stool.json": {
+      "before": "17c514ccbe20dedf1eab2f9f45f6b293c5f3d6fab010faa3b35ba51391e49b99",
+      "beforeProjected": "f891ddef8afef92b4c0f74d444ca3d5a3a0eaeca662838ed59926712031a45d5",
+      "after": "6528881bfa603626ac1b814a983fc826068d2fee6ed7cca534d5634f65423060",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/gray_bar_stool.json": {
+      "before": "79aa4c8dc3f0ae2d37ef34f6ca3a79e22d227ea443cc4817fe657d3fde24ddcb",
+      "beforeProjected": "8c40d6a496bb0fc2ff25daa380d3e464c0c0f0d8a7e796150c2e335ffe9b0f1a",
+      "after": "571f6195e0e7d927885c230ef44ff923c41fdd74a4f17260babcc557c4628417",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/green_bar_stool.json": {
+      "before": "c9fb44c6657d284864d260337398d8b1b87157a92923563a0ed22620ceff6bef",
+      "beforeProjected": "3232ee617c3c34acfa76ccd8375b7bdadfa99bfff434a180b38da661472fbd32",
+      "after": "f47a1ebe0d20d1f89e631ef56426725e8c60d3ac3c3f5a4fd039cc96c7076cc8",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/light_blue_bar_stool.json": {
+      "before": "5ed931303eeb34ead45358d09ba3d17f21c4cc0e0247eb11b18722b6465f0b40",
+      "beforeProjected": "8f2a3c1882234d762bbdb46c223225c19c7e4853d777fd624a342d09ac6a4d57",
+      "after": "043674545ef272e2f30478bfcc67402f9e01b812051e06df307560575726382c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/light_gray_bar_stool.json": {
+      "before": "e14af6ddbfa97076b1c875da3d48ac9070688ba14945dd2ad0edaccbaf3af238",
+      "beforeProjected": "58234877ad1eed5a8b0ef5630b99a07964c7bef73ddb8d4ea7b7e837f9f563ef",
+      "after": "edfca6ab1422d8c38e8c054297085b79aaf6d467c09401e6e9bb0841fdd9cc3e",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/lime_bar_stool.json": {
+      "before": "5c55f89add1d8f8e4171d555208ae7aa47c669949bc18a814e45e40373d777bf",
+      "beforeProjected": "8eaa31bbafa2b358bbddae9dad9bbb9fa211a4da9338b92da3a5723c2af65891",
+      "after": "b63082101f08b364645d565b057f10833b7ecf0c723c2a990cc6ac01ed7b9fd0",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/magenta_bar_stool.json": {
+      "before": "8b8ce1056fbab65d351de19d3ce4ffbf97a1b1b25789edf06cdbec8786117b8d",
+      "beforeProjected": "46821d10c7089a2b6db7b78c3d192ba931f297eb2d146c98d06f978d4b9371b9",
+      "after": "185b4c6923fe068de81944a28bf7c58ea2a6936cb05bb870d9ce6cb93f0b9606",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/molotov.json": {
+      "before": "950efb4f015e65890ac0d664276aa1b0ae2d2455ae74661127ef8c6f996e24ec",
+      "beforeProjected": "9ea433c5ba972ee702b0f70ae0683ce09b0a59f7d67dc9e867f7407c6094c6b5",
+      "after": "f134b34100f359314e78dd7e1caf0174de12f8de4e1a26a8c6b2e7587a82087b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/orange_bar_stool.json": {
+      "before": "b0c97234b75fbcd7a6fdce5ead8aee033dba02072211d686667c44675f0268f3",
+      "beforeProjected": "a29cd82c1cf77297f6ea6222a442455946010c4a69311b9206389d668b44e29c",
+      "after": "b25f52b9b0fb53d559a8bbba2705752124077c115ccae368d2a6c4732e427897",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/pink_bar_stool.json": {
+      "before": "72150b7447304b42dbc2b4d163b84b785495db0f128ac79da77bef05c78265ec",
+      "beforeProjected": "abd5929374051c60be2def6b587cd4d690ca0e6abab6d6679e66d506a89e491a",
+      "after": "d6e260c7ca35dd11e5c5712cbc61354833c2d60344ded35fcae575686f8f3d92",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/purple_bar_stool.json": {
+      "before": "fcb54702d7aaff136eca50711102f2eb17a82d6662eb25b4a7b2b6944dd647cf",
+      "beforeProjected": "42d3cf8bf52c4216eb7b5ca649fed28144a228d3cd9831d676a13aa9fdba14f2",
+      "after": "e26174218e332a82f5acfc7f9240045d1cd58318e3c042e7e7f1ae44216aba7f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/red_bar_stool.json": {
+      "before": "0f5928acdd1242f7f675d60d163d20fa1bf06e77f0ff41a90d9c13d98ee23158",
+      "beforeProjected": "2e4e96c3cc4f2216d32541ef092e80fc3d349a167f22bbcc70775e45133d60d5",
+      "after": "a2953679a45daf1342d7b26b34081937ad9f312c60c9824211a4275395e8d392",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/white_bar_stool.json": {
+      "before": "da1be7b0f7b982bb1b64507d22647267942cda431e90bed4c74316849ae9e502",
+      "beforeProjected": "1d7206c3036fc6f8c10658f46b2621013454b46e78e45f565e1bc0245d6fa00c",
+      "after": "dcccba4da51ece641e7d0ca2fac0e578fd4a918861da20881335e732c6253288",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/items/yellow_bar_stool.json": {
+      "before": "d4351d95d00e4225955ee77996ca71ede1ef86d76b7329f9f36adea3c849348b",
+      "beforeProjected": "6514b64225fbbd8756884f858eec4a99d4fca4500cc42a5b0fa2b3a27e035ad7",
+      "after": "faf901ca363bff8e8938a64948f1a4181edf36c44c00b37b47a27012d09e8352",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/manifest.json": {
+      "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
+      "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
+      "after": "ce9feb7003f2a31833bfc2ca68b32cf5b53b75a779a8f63d071c9767707d714c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
+      "beforeProjected": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
+      "after": "d6c0702f121f06a849ca525a78b57e6d527bf60ee3b0eb1cddffe7a0d160bf9c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/decorations.js": {
+      "before": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
+      "beforeProjected": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
+      "after": "275c1758881ae7c9d0ab2c1ddf4c2a617d806beda15ecc023375b0db5995e0d7",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/furniture.js": {
+      "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
+      "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
+      "after": "5d97c52f46376a963a73f1e690a1f117bb8c9918b3f923e7d1cabcfd8ab735e2",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/holder.js": {
+      "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
+      "beforeProjected": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
+      "after": "eb42dcaa13fb442614f2606855194662c1e238432eba35f9bd2aac08d168ab37",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
+      "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
+      "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
+      "after": "c8c001cdfa3bcb1879370bbee0c5c669a565b5473a41e52418563009f69a91f1",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/storage-projectile.js": {
+      "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
+      "beforeProjected": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
+      "after": "8987456c449ada602a86aaf4be200a0fde8db362144fc96d91d308f2f7946773",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/tap-sources.js": {
+      "before": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
+      "beforeProjected": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
+      "after": "39dd216079c79f8f7a31350e070fe5d39eeeb7aa05f87c5e57c15876bd664b3c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/tilted-rack.js": {
+      "before": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
+      "beforeProjected": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
+      "after": "a831221cf91b1c2ea8c6a1fda40ac8f68c0632e996d4b38dda29a7af5977210d",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/bedrock/tipsy-visual.js": {
+      "before": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
+      "beforeProjected": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
+      "after": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/core/custom-effects.js": {
+      "before": "8056fa6f02f82d918cf8db870ba79bda8472eb63b889075508b4f0cdc75c3c83",
+      "beforeProjected": "8056fa6f02f82d918cf8db870ba79bda8472eb63b889075508b4f0cdc75c3c83",
+      "after": "b96c30e10c53bb49f7eeb854f8744f53dff466cc5cf59c5e17de23f9d7a40339",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/core/decorations.js": {
+      "before": "371e78ab2c214690ace6d742aefdf9ea2af43a2d185450e6d5b79b492d6a0360",
+      "beforeProjected": "371e78ab2c214690ace6d742aefdf9ea2af43a2d185450e6d5b79b492d6a0360",
+      "after": "ee68b9970e1427d81e9e4cde41894c5596b88717ec75ece7ca400786685ef9ab",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/core/furniture.js": {
+      "before": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
+      "beforeProjected": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
+      "after": "b8a74e4c8c44f79fe7a6fa734f0e836d30019d06d7a5db9171e434138cd6463d",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/BP/scripts/main.js": {
+      "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
+      "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
+      "after": "0b48c70bea2f731c5156776d19861c84d3ea1cfcb73d99a1eff53a6731e5e4db",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    },
+    "runtime/RP/manifest.json": {
+      "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
+      "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
+      "after": "5b3bcfaa8d9eab225154675b13be4571e665e087c36054e5327361611847ca1d",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+    }
+  },
+  "rules": {
+    "holder": {
+      "direction": "facing",
+      "mouthHeight": 0.875,
+      "horizontalOffset": 0.5,
+      "yVelocity": 0.375,
+      "factorMin": 0.5,
+      "factorMaxExclusive": 1.5
+    },
+    "tilted_rack": {
+      "direction": "opposite_facing",
+      "mouthHeight": 0.875,
+      "horizontalOffset": 0.5,
+      "yVelocity": 0.75,
+      "factorMin": 0.5,
+      "factorMaxExclusive": 1.5
+    },
+    "molotov": {
+      "minimumDrawTicks": 10,
+      "maximumUseTicks": 72000,
+      "speed": 0.8,
+      "drawScalesPower": false,
+      "javaUseAnimation": "SPEAR",
+      "eyeOffset": -0.1,
+      "airInertia": 0.99,
+      "waterInertia": 0.8,
+      "gravity": 0.03
+    },
+    "potion": {
+      "gravity": 0.05,
+      "airInertia": 0.99,
+      "waterInertia": 0.8,
+      "inflateAABB": [
+        4,
+        2,
+        4
+      ],
+      "radiusExclusive": 4,
+      "minTimedTicksExclusive": 20
+    },
+    "tipsy": {
+      "target": "additive_camera_roll",
+      "wave": "sin(t/19)*0.6+cos(t/13)*0.3+sin(t/9)*0.1",
+      "runtimeAdapter": "yaw_adapter_unverified",
+      "visualFixAccepted": false
+    }
+  },
+  "limits": [
+    "No new BDS, client or simulated player tests",
+    "The projectile fields are source/schema alignment, not measured effective launch speed",
+    "Java triangular projectile spread versus native inaccuracy is not claimed identical",
+    "Fire support/soul-fire/portal rules are not fully mapped",
+    "All-LivingEntity custom-effect and potion-immunity parity remains incomplete",
+    "Tipsy camera-only roll is NOT restored or claimed verified"
+  ],
+  "newRuntimeFiles": {
+    "runtime/BP/functions/kt_molotov_diagnose.mcfunction": "97ca130cd2b40792d47af9f711373273590592795817f844d8531f3f89553d31",
+    "runtime/BP/functions/kt_tipsy_diagnose.mcfunction": "eb4596fffa1a5865dd3cd363085c66048d41b41ca695206427cca325dff924bf",
+    "runtime/BP/scripts/bedrock/molotov.js": "ae3d9d297885c80b0cdf97bacc3809ddb28ff7901bc08d9e2d62d67b79bf7d4a",
+    "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2"
+  },
+  "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c"
+}

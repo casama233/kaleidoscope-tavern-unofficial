@@ -7,6 +7,9 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from reviewed_changes import historical_digest
 
 SPEC = importlib.util.spec_from_file_location('creative_catalog', Path(__file__).with_name('catalog.py'))
 c = importlib.util.module_from_spec(SPEC)
@@ -199,7 +202,7 @@ class HistoricalProjectionTests(unittest.TestCase):
             for prefix, expected in c.load(root/file)[key].items():
                 if not prefix.rstrip('/').endswith(('BP/items', 'BP/blocks')):
                     continue
-                rows = [p.relative_to(root).as_posix()+'\0'+hashlib.sha256(projection.read_bytes(p)).hexdigest()+'\n'
+                rows = [p.relative_to(root).as_posix()+'\0'+(historical_digest(p,projected=True) if root==TAVERN else hashlib.sha256(projection.read_bytes(p)).hexdigest())+'\n'
                         for p in sorted((root/prefix).rglob('*')) if p.is_file()]
                 self.assertEqual({'files':len(rows), 'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}, expected)
 

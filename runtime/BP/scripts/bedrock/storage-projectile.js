@@ -1,5 +1,6 @@
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
-import {system,world} from '@minecraft/server';
+import {EntityDamageCause,world} from '@minecraft/server';
+import {splashFactor,splashTicks,instantHealthDelta} from '../core/projectile-parity.js';
 import {check} from '../core/util.js';
 import {storageBottleItem} from '../core/holder.js';
 import {rollDrinkEffects} from '../core/drink-effects.js';
@@ -12,6 +13,7 @@ export const THROWN_EFFECTS=NS+':thrown_drink_effects';
 export const THROWN_RESOLVED=NS+':thrown_drink_resolved';
 export const STORAGE_KIND=NS+':storage_kind';
 const MAX_EFFECT_PAYLOAD=8192;
+const CUSTOM_INSTANT=new Set(['shriek_attack','upside_down','zenith'].map(x=>NS+':'+x));
 let installed=false;
 export const storageProjectileDiagnostics={spawned:0,impacts:0,targets:0,nativeEffects:0,customEffects:0,errors:[]};
 function error(e){storageProjectileDiagnostics.errors.push(String(e?.code??e));if(storageProjectileDiagnostics.errors.length>16)storageProjectileDiagnostics.errors.shift();}
@@ -28,7 +30,7 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
  let entity;
  // Java storage dispatches MolotovBlockItem to its incendiary projectile.
  if(bottle.base==='molotov'){
-  try{entity=dimension.spawnEntity(NS+':thrown_molotov',position);entity.getComponent('minecraft:projectile').shoot(velocity);storageProjectileDiagnostics.spawned++;system.runTimeout(()=>{try{entity.remove();}catch{}},200);return entity;}
+  try{entity=dimension.spawnEntity(NS+':thrown_molotov',position);entity.getComponent('minecraft:projectile').shoot(velocity,{uncertainty:0});storageProjectileDiagnostics.spawned++;return entity;}
   catch(error){try{entity?.remove();}catch{}throw error;}
  }
  try{
@@ -38,25 +40,30 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
   entity.setDynamicProperty(THROWN_EFFECTS,rowsPayload(itemId,rng));
   entity.setDynamicProperty(THROWN_RESOLVED,false);
   const projectile=entity.getComponent?.('minecraft:projectile');check(projectile?.shoot,'PROJECTILE_COMPONENT_MISSING');
-  projectile.shoot(velocity);
+  projectile.shoot(velocity,{uncertainty:0});
   storageProjectileDiagnostics.spawned++;
-  system.runTimeout(()=>{try{entity.remove();}catch{}},200);
   return entity;
  }catch(e){try{entity?.remove();}catch{}throw e;}
 }
 function nativeRow(entity,row,factor){
- const ticks=row.ticks??row.duration*20;
- if(ticks>1){
-  const scaled=Math.floor(ticks*factor+.5);if(scaled<=20)return false;
-  entity.addEffect(row.bedrockId,scaled,{amplifier:row.amplifier,showParticles:true});
- }else entity.addEffect(row.bedrockId,1,{amplifier:row.amplifier,showParticles:true});
+ if(row.effect==='minecraft:instant_health'||row.effect==='minecraft:instant_damage'){
+  const undead=entity.matches({families:['undead']}),delta=instantHealthDelta(row.effect,row.amplifier,factor,undead);
+  if(!delta)return false;
+  if(delta>0){const h=entity.getComponent('minecraft:health');if(!h)return false;h.setCurrentValue(Math.min(h.effectiveMax,h.currentValue+delta));}
+  else entity.applyDamage(-delta,{cause:EntityDamageCause.magic});
+ }else if(row.effect==='minecraft:saturation'){
+  // Java's other instantaneous effects delegate to applyEffectTick, not a duration.
+  entity.addEffect(row.bedrockId,1,{amplifier:row.amplifier,showParticles:true});
+ }else{
+  const ticks=splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
+  entity.addEffect(row.bedrockId,ticks,{amplifier:row.amplifier,showParticles:true});
+ }
  storageProjectileDiagnostics.nativeEffects++;return true;
 }
 function customRow(entity,row,factor){
  if(entity?.typeId!=='minecraft:player')return false;
- const seconds=Math.max(1,Math.floor((row.duration??0)*factor+.5));
- const adapted={...row,duration:seconds,ticks:seconds*20};
- if(!applyCustomEffect(entity,adapted))return false;
+ const ticks=CUSTOM_INSTANT.has(row.effect)?1:splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
+ if(!applyCustomEffect(entity,{...row,duration:ticks/20,ticks}))return false;
  storageProjectileDiagnostics.customEffects++;return true;
 }
 function impactEntity(event){try{return event.getEntityHit?.()?.entity;}catch{return undefined;}}
@@ -68,12 +75,14 @@ export function resolveThrownDrinkImpact(event){
   const raw=projectile.getDynamicProperty(THROWN_EFFECTS),itemId=projectile.getDynamicProperty(THROWN_ITEM);
   check(typeof itemId==='string'&&storageBottleItem(itemId),'THROWN_ITEM_CORRUPT');check(typeof raw==='string','THROWN_EFFECTS_MISSING');
   const rows=JSON.parse(raw);check(Array.isArray(rows),'THROWN_EFFECTS_CORRUPT');
-  const at={...projectile.location},direct=impactEntity(event),min={x:at.x-4,y:at.y-2,z:at.z-4},volume={x:8,y:4,z:8};
+  // Java expands the projectile AABB (not a zero-size point) by (4,2,4).
+  const at={...projectile.location},direct=impactEntity(event),box=projectile.getAABB();
+  const min={x:box.center.x-box.extent.x-4,y:box.center.y-box.extent.y-2,z:box.center.z-box.extent.z-4},volume={x:2*box.extent.x+8,y:2*box.extent.y+4,z:2*box.extent.z+8};
   const candidates=projectile.dimension.getEntities({location:min,volume});let affected=0;
   for(const entity of candidates)try{
    if(entity.id===projectile.id||!living(entity))continue;
    const dist=centerDistanceSq(entity.location,at);if(dist>=16)continue;
-   const factor=entity.id===direct?.id?1:1-Math.sqrt(dist)/4;if(factor<=0)continue;
+   const factor=splashFactor(dist,entity.id===direct?.id);if(factor<=0)continue;
    let any=false;
    for(const row of rows){
     if(row?.bedrockId)any=nativeRow(entity,row,factor)||any;

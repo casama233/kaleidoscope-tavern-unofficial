@@ -69,7 +69,7 @@ def main():
     assert 'p.setRotation(step.rotation)' in adapter
     assert 'system.runInterval(tickTipsyVisuals,1)' in adapter
     assert 'InputPermissionCategory.Camera' in adapter and 'TIPSY_OPT_OUT_TAG' in adapter
-    assert 'if(track.failed)continue;' in adapter and 'stopIfEmpty()' in adapter
+    assert 'if(now<track.retryAt)' in adapter and 'stopIfEmpty()' in adapter
     for forbidden in ('camerashake','.addShake(','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport('):
         assert forbidden not in adapter,('global/destructive/false camera fallback',forbidden)
     hooks=(RT/'BP/scripts/bedrock/custom-effects.js').read_text()

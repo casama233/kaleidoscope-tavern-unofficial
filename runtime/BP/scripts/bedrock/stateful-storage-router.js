@@ -65,7 +65,7 @@ export function popRandomStoredBottle({
   throw e;
  }
  try{sync?.(block,next);}catch{}
- try{block.dimension.playSound('kt_assets_a17.block.holder.pop',block.location,{volume:.9,pitch:1});}catch{}
+ if(bottle.base!=='molotov')try{block.dimension.playSound('kt_assets_a17.block.holder.pop',block.location,{volume:.9,pitch:1});}catch{}
  return {status:'LAUNCHED',slot:selected.slot,item:selected.item,next,projectile,launch};
 }
 

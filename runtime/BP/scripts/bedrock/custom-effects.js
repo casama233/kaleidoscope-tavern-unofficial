@@ -1,8 +1,8 @@
 import {migrateLegacyEffects} from '../core/extension-foundation.js';
 import {check,digest} from '../core/util.js';
 import {TIPSY_ID} from '../core/tipsy-visual.js';
-import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics} from './tipsy-visual.js';
 import {externalEffectSource,externalEffectDefinition} from '../core/extension-content.js';
+import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,ItemStack,system,world,ScriptEventSource} from '@minecraft/server';
@@ -48,7 +48,8 @@ export function applyCustomEffect(p,row){
   p.clearVelocity();p.addEffect('hunger',600,{amplifier:0,showParticles:true});
   try{d.playSound('mob.shulker.teleport',at);}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
  }
- const state=addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier);write(p,state);customEffectDiagnostics.applied++;return true;
+ const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
+ const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
 }
 const RIPE_CROP_AGE=Object.freeze({
  'minecraft:wheat':7,'minecraft:carrots':7,'minecraft:potatoes':7,'minecraft:beetroot':3,
@@ -245,6 +246,13 @@ export function installCustomEffects(){
    const p=world.getEntity(row.entity);if(p?.typeId==='minecraft:player')applyCustomEffect(p,row);
   }catch(e){error(e);}
  },{namespaces:['kaleidoscope_tavern']});
+ system.afterEvents.scriptEventReceive.subscribe(e=>{
+  if(e.id!=='kaleidoscope_tavern:tipsy_diagnose'||e.sourceEntity?.typeId!=='minecraft:player')return;
+  const p=e.sourceEntity;
+  try{const report=tipsyVisualState(p,activeStatus(statusNow(p),TIPSY_ID));p.sendMessage('[Tavern Tipsy] '+JSON.stringify(report));}
+  catch(err){p.sendMessage('[Tavern Tipsy] diagnostics failed: '+String(err));}
+ },{namespaces:['kaleidoscope_tavern']});
+
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));

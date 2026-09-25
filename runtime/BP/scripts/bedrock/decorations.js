@@ -1,6 +1,6 @@
 import {oppositeFacing} from '../core/java-placement.js';
 import {system,world,BlockPermutation,EntityDamageCause,GameMode} from '@minecraft/server';
-import {NS,INCENSE,STEPLADDER,LADDER_HALF,LADDER_FACING,LADDER_WATERLOGGED,LADDER_COLLISION_PROFILE,ladderBase,ladderPair} from '../core/decorations.js';
+import {NS,INCENSE,incensePowerTransition,STEPLADDER,LADDER_HALF,LADDER_FACING,LADDER_WATERLOGGED,LADDER_COLLISION_PROFILE,ladderBase,ladderPair} from '../core/decorations.js';
 import {check} from '../core/util.js';
 import {canWrite,hand,exchangeBlocks,air,blockAt,plus,placementTake,safe,handSnapshot,sameHand} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
@@ -36,14 +36,15 @@ function tickIncense(block){
   diagnostics.incensePulses++;
  }
 }
-function powered(ev){const level=Number(ev.powerLevel??0);if(!Number.isFinite(level))return;toggleIncense(ev.block,level>0);}
+function powered(ev){const next=incensePowerTransition(ev.powerLevel,ev.previousPowerLevel);if(next!==null)toggleIncense(ev.block,next);}
+function initializeIncense(block){const level=block.getRedstonePower();if(Number.isFinite(level))block.setPermutation(block.permutation.withState(OPEN,level>0?1:0));}
 function placementPos(ev){const direction=DIRECTIONS[ev.blockFace];check(direction,'UNKNOWN_FACE');return plus(ev.block.location,direction);}
 function replaceable(b){return !!b&&(b.isAir||b.typeId==='minecraft:water');}
 function placeStepladder(player,base){canWrite(player);const heldItem=hand(player);check(heldItem?.typeId===STEPLADDER,'STEPLADDER_ITEM_REQUIRED');const d=player.dimension,lower=blockAt(d,base),upper=blockAt(d,{x:base.x,y:base.y+1,z:base.z});check(replaceable(lower)&&replaceable(upper),'SPACE_BLOCKED');const facing=oppositeFacing(player.getRotation?.().y??0),pair=ladderPair(base,facing,lower.typeId==='minecraft:water',upper.typeId==='minecraft:water');const changes=pair.map((entry,i)=>({block:i?upper:lower,permutation:BlockPermutation.resolve(STEPLADDER,entry.states)}));exchangeBlocks(player,placementTake(player),[],changes);diagnostics.placed++;return true;}
 function waterOrAir(block){return block.permutation.getState(LADDER_WATERLOGGED)?BlockPermutation.resolve('minecraft:water'):air();}
 function recoverStepladder(player,block){canWrite(player);const half=block.permutation.getState(LADDER_HALF),base=ladderBase(block.location,half),bottom=blockAt(block.dimension,base),top=blockAt(block.dimension,{x:base.x,y:base.y+1,z:base.z});check(bottom?.typeId===STEPLADDER&&top?.typeId===STEPLADDER,'LADDER_PAIR_DAMAGED');exchangeBlocks(player,0,player.getGameMode()===GameMode.Creative?[]:[{id:STEPLADDER,count:1}],[{block:bottom,permutation:waterOrAir(bottom)},{block:top,permutation:waterOrAir(top)}]);diagnostics.recovered++;return true;}
 export function registerDecorationComponents({blockComponentRegistry:b,itemComponentRegistry:i}){
- b.registerCustomComponent(NS+':incense',{onRedstoneUpdate:powered,onTick:e=>optional(()=>tickIncense(e.block)),onPlayerInteract:nativeEmptyHandBlockUse});
+ b.registerCustomComponent(NS+':incense',{onPlace:e=>optional(()=>initializeIncense(e.block)),onRedstoneUpdate:powered,onTick:e=>optional(()=>tickIncense(e.block)),onPlayerInteract:nativeEmptyHandBlockUse});
  b.registerCustomComponent(NS+':stepladder',{onTick:e=>{const block=e.block,half=block.permutation.getState(LADDER_HALF),facing=block.permutation.getState(LADDER_FACING),profile=facing+4*half,other=blockAt(block.dimension,plus(block.location,{x:0,y:half===0?1:-1,z:0}));if(!other)return;if(other.typeId!==STEPLADDER||other.permutation.getState(LADDER_HALF)===half||other.permutation.getState(LADDER_FACING)!==facing)optional(()=>block.setPermutation(waterOrAir(block)));else if(block.permutation.getState(LADDER_COLLISION_PROFILE)!==profile)optional(()=>block.setPermutation(block.permutation.withState(LADDER_COLLISION_PROFILE,profile)));}});
  i.registerCustomComponent(NS+':place_stepladder',{onUseOn:e=>safe(e.source,()=>placeStepladder(e.source,placementPos(e)))});
 }

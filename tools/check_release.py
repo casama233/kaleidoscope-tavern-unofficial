@@ -85,3 +85,5 @@ print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometrie
 subprocess.run([sys.executable,str(ROOT/'tools/creative/catalog.py')],cwd=ROOT,check=True)
 
 subprocess.run([sys.executable,str(ROOT/'tools/pick_block.py')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/check_vibrant_contract.py')],cwd=ROOT,check=True)

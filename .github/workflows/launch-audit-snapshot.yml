@@ -1,0 +1,40 @@
+name: Launch and tipsy audit sources
+on:
+  push:
+    branches: ['fix/java-launch-tipsy-20260925']
+    paths: ['.github/workflows/launch-audit-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Mojang/bedrock-samples
+          path: bedrock-samples
+          persist-credentials: false
+      - name: Archive exact sources and revisions
+        run: |
+          mkdir snapshots
+          for repo in tavern-src java-src bedrock-samples; do
+            git -C "$repo" rev-parse HEAD > "snapshots/$repo.commit"
+            git -C "$repo" archive --format=zip HEAD > "snapshots/$repo.zip"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: launch-tipsy-audit-sources
+          path: snapshots/*
+          retention-days: 7

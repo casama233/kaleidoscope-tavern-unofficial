@@ -1,0 +1,55 @@
+name: Mojang projectile reference
+on:
+  push:
+    branches: ['fix/java-launch-tipsy-20260925']
+    paths: ['.github/workflows/java-projectile-reference.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify official server and inspect mapped projectile classes
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess,urllib.request,zipfile
+          from pathlib import Path
+          def get(url):
+              with urllib.request.urlopen(url,timeout=90) as response:return response.read()
+          manifest=json.loads(get('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'))
+          version=next(v for v in manifest['versions'] if v['id']=='1.20.1')
+          metadata=json.loads(get(version['url']))
+          out=Path('reference');out.mkdir()
+          for name in ('server','server_mappings'):
+              entry=metadata['downloads'][name];raw=get(entry['url'])
+              assert hashlib.sha1(raw).hexdigest()==entry['sha1']
+              Path(name+'.bin').write_bytes(raw)
+          with zipfile.ZipFile('server.bin') as z:
+              entries=[n for n in z.namelist() if n.startswith('META-INF/versions/') and n.endswith('.jar')]
+              assert len(entries)==1
+              Path('vanilla.jar').write_bytes(z.read(entries[0]))
+          targets=['net.minecraft.world.entity.projectile.Projectile','net.minecraft.world.entity.projectile.ThrowableProjectile','net.minecraft.world.entity.projectile.ThrownPotion','net.minecraft.world.effect.HealOrHarmMobEffect','net.minecraft.world.effect.SaturationMobEffect','net.minecraft.world.level.block.BaseFireBlock']
+          lines=Path('server_mappings.bin').read_text().splitlines();mapping={}
+          for i,line in enumerate(lines):
+              if line.split(' -> ')[0] in targets:
+                  name,obfuscated=line[:-1].split(' -> ');mapping[name]=obfuscated
+                  body=[line];j=i+1
+                  while j<len(lines) and (lines[j].startswith(' ') or lines[j].startswith('#')):body.append(lines[j]);j+=1
+                  (out/(name.rsplit('.',1)[-1]+'.mapping.txt')).write_text('\n'.join(body)+'\n')
+          assert set(mapping)==set(targets),mapping
+          for name,obfuscated in mapping.items():
+              raw=subprocess.check_output(['javap','-classpath','vanilla.jar','-c','-p',obfuscated],text=True)
+              (out/(name.rsplit('.',1)[-1]+'.javap.txt')).write_text(raw)
+          (out/'source.json').write_text(json.dumps({'version':'1.20.1','metadataUrl':version['url'],'downloads':{k:metadata['downloads'][k] for k in ('server','server_mappings')},'classes':mapping},indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mojang-projectile-reference
+          path: reference/
+          retention-days: 7

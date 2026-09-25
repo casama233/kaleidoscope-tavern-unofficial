@@ -1,0 +1,116 @@
+name: Integrate reviewed launch candidate
+on:
+  push:
+    branches: ['fix/java-launch-tipsy-20260925']
+    paths: ['.github/workflows/launch-candidate-integrate.yml']
+permissions:
+  contents: read
+concurrency:
+  group: tavern-launch-candidate-integration
+  cancel-in-progress: false
+jobs:
+  integrate:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148' && github.ref == 'refs/heads/fix/java-launch-tipsy-20260925'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: .source-check/java
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: e4ce3cad4d8f2ac601a19eb7558fb791bcfcd855
+          path: .source-check/launch-baseline
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Apply exact hash-locked reviewed edits
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,lzma,os,subprocess
+          from pathlib import Path,PurePosixPath
+          shas=['644374603be7fe2ab1bbe60c035598865d62e4a8','66a091bbd7ed9a2e42c93658e95a2bd79a2fa368','f5af05c12a348135f4e3e0842a3f57884b969195']
+          parts=[]
+          for sha in shas:
+              obj=json.loads(subprocess.check_output(['gh','api','repos/'+os.environ['GITHUB_REPOSITORY']+'/git/blobs/'+sha]))
+              assert obj['sha']==sha and obj['encoding']=='base64'
+              parts.append(base64.b64decode(''.join(obj['content'].split()),validate=True))
+          raw=lzma.decompress(b''.join(parts))
+          assert hashlib.sha256(raw).hexdigest()=='5f9d72b8fd4af4b56f9c5ee4b143285d911aa63e054f3992c384abefd24073fa'
+          changes=json.loads(raw);assert len(changes)==31
+          paths=set()
+          for change in changes:
+              name=change['path'];posix=PurePosixPath(name);p=Path(name)
+              assert not posix.is_absolute() and '..' not in posix.parts and name not in paths
+              assert name in ['package.json','release.json','.github/workflows/c6-validation.yml'] or posix.parts[0] in ['runtime','tools','data','docs']
+              assert not p.is_symlink();paths.add(name)
+              if change['before'] is None:
+                  assert not p.exists();old=b''
+              else:
+                  old=p.read_bytes();assert hashlib.sha256(old).hexdigest()==change['before'],name
+              text=old.decode('utf-8');previous=0
+              for start,end,replacement in change['edits']:
+                  assert previous<=start<=end<=len(text) and isinstance(replacement,str);previous=end
+              for start,end,replacement in reversed(change['edits']):text=text[:start]+replacement+text[end:]
+              new=text.encode('utf-8');assert hashlib.sha256(new).hexdigest()==change['after'],name
+              p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(new)
+          print('All 31 reviewed source files reconstructed and verified.')
+          PY
+      - name: Validate original sources, baseline and complete candidate package
+        run: |
+          python tools/check_release.py
+          python tools/build_storage_visuals.py
+          python tools/check_launch.py --java-source .source-check/java --baseline .source-check/launch-baseline
+          python tools/build_release.py
+          python - <<'PY'
+          import hashlib,json,subprocess,zipfile
+          from pathlib import Path
+          p=Path('dist/Kaleidoscope_Tavern_Unofficial_0.6.43_candidate1.mcaddon')
+          digest=hashlib.sha256(p.read_bytes()).hexdigest()
+          assert digest=='799d577d370211d35e4f5dd498484e334ad8947b20280919746ecd822c707917',digest
+          files={x.relative_to('runtime').as_posix():x for x in Path('runtime').rglob('*') if x.is_file()}
+          with zipfile.ZipFile(p) as z:
+              assert len(z.namelist())==len(set(z.namelist())) and set(z.namelist())==set(files)
+              assert all(z.read(name)==path.read_bytes() for name,path in files.items())
+          subprocess.run(['python','tools/build_release.py'],check=True)
+          assert hashlib.sha256(p.read_bytes()).hexdigest()==digest
+          Path('dist/ARCHIVE-VERIFICATION.json').write_text(json.dumps({'sha256':digest,'files':len(files),'fullRuntimeMatch':True,'repeatBuildIdentical':True,'bdsTest':False,'clientTest':False,'simulatedPlayerTest':False,'tipsyCameraRollRestored':False},indent=2)+'\n')
+          # Never silently convert this partial repair to a public release.
+          request=json.loads(Path('.github/release-request.json').read_text())
+          assert request['version']=='0.6.42'
+          PY
+      - name: Commit canonical repair only on the audit branch
+        env:
+          EXPECTED_HEAD: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/fix/java-launch-tipsy-20260925 | cut -f1)" = "$EXPECTED_HEAD"
+          git rm .github/workflows/launch-candidate-integrate.yml
+          git add .github/workflows/c6-validation.yml package.json release.json runtime/ tools/ data/launch-repair-reference.json docs/LAUNCH-AUDIT-0.6.43.md docs/LAUNCH-VALIDATION-0.6.43.json docs/RELEASE-NOTES-0.6.43.md
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Add 0.6.43 launch repair candidate; explicitly keep Tipsy visual parity unresolved'
+          git push origin HEAD:refs/heads/fix/java-launch-tipsy-20260925
+          git rev-parse HEAD > dist/SOURCE_COMMIT
+          git archive --format=zip HEAD > dist/integrated-source.zip
+          cp docs/LAUNCH-AUDIT-0.6.43.md docs/LAUNCH-VALIDATION-0.6.43.json dist/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Tavern-launch-candidate-integration
+          path: dist/
+          retention-days: 14

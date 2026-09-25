@@ -22,7 +22,8 @@
         "kind_13": "textures/kaleidoscope_tavern/block/brew/vinegar",
         "kind_14": "textures/kaleidoscope_tavern/block/brew/whiskey",
         "kind_15": "textures/kaleidoscope_tavern/block/brew/wine",
-        "kind_16": "textures/kaleidoscope_tavern_jar/block/brew/molotov"
+        "kind_16": "textures/kaleidoscope_tavern_jar/block/brew/molotov",
+        "kind_17": "textures/kaleidoscope_tavern/block/brew/watermelon_juice"
       },
       "geometry": {
         "kind_1": "geometry.kt_assets_a3.empty_bottle_faces",
@@ -40,7 +41,8 @@
         "kind_13": "geometry.kt_assets_a7.vinegar_1",
         "kind_14": "geometry.kt_assets_a7.whiskey_1",
         "kind_15": "geometry.kt_assets_a1.wine_1",
-        "kind_16": "geometry.kt_assets_a17.molotov"
+        "kind_16": "geometry.kt_runtime.storage_molotov",
+        "kind_17": "geometry.kt_assets_a9.watermelon_juice_1"
       },
       "animations": {
         "rest": "animation.kt_runtime.storage_bottle.holder"

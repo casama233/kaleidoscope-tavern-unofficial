@@ -109,14 +109,7 @@ export function installTapSourceEvents(){
   const id=e.block?.typeId;if(!productIds.has(id))return;const hs=handSnapshot(e.player);if(hs.id)return;
   e.cancel=true;if(e.isFirstEvent===false||!claimProductTake(e.player,e.block))return;scheduleProductTake(e.player,e.block);
  });
- // Block component callbacks handle hand collection. The break adapter models
- // the Java block loot: vanilla honey/dragon bottles and the mod Molotov item.
- world.afterEvents?.projectileHitBlock?.subscribe?.(e=>{
-  if(e.projectile?.typeId!==NS+':thrown_molotov')return;igniteMolotov(e.projectile.dimension,e.location??e.projectile.location);e.projectile.remove();
- });
- world.afterEvents?.projectileHitEntity?.subscribe?.(e=>{
-  if(e.projectile?.typeId!==NS+':thrown_molotov')return;igniteMolotov(e.projectile.dimension,e.location??e.projectile.location);e.projectile.remove();
- });
+ // Projectile impacts are owned by installMolotovEvents, not the Tap adapter.
 }
 function productLocationKey(player,block){const p=block.location;return player.id+'/'+block.dimension.id+'/'+p.x+'_'+p.y+'_'+p.z;}
 function claimProductTake(player,block){
@@ -128,16 +121,4 @@ function claimProductTake(player,block){
 function scheduleProductTake(player,block){
  const id=block.typeId,d=block.dimension,loc=posOf(block),hs=handSnapshot(player);
  system.run(()=>safe(player,()=>{canWrite(player);requireBlockReach(player,d,loc);sameHand(player,hs);check(player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return productLocks.with([id+'/'+d.id+'/'+loc.x+'_'+loc.y+'_'+loc.z,player.id],()=>recoverSimpleProduct(player,b));}));
-}
-function igniteMolotov(dimension,location){
- const cx=Math.floor(location.x),cy=Math.floor(location.y),cz=Math.floor(location.z),radius=3;
- for(let dx=-radius;dx<=radius;dx++)for(let dz=-radius;dz<=radius;dz++){
-  const dist=Math.sqrt(dx*dx+dz*dz),extra=dist-radius;
-  if(extra>2||extra>0&&Math.random()>=(1-extra/2)*.6)continue;
-  for(let dy=-1;dy<=1;dy++){
-   const p={x:cx+dx,y:cy+dy,z:cz+dz},b=at(dimension,p),below=at(dimension,{x:p.x,y:p.y-1,z:p.z});
-   if(b?.isAir&&below&&!below.isAir){try{b.setType('minecraft:fire');break;}catch{}}
-  }
- }
- try{dimension.playSound('firecharge.use',location,{volume:2,pitch:1});dimension.playSound('random.glass',location,{volume:2,pitch:1});dimension.spawnParticle('minecraft:basic_flame_particle',{x:location.x,y:location.y+.5,z:location.z});dimension.spawnParticle('minecraft:basic_smoke_particle',{x:location.x,y:location.y+.5,z:location.z});}catch{}
 }

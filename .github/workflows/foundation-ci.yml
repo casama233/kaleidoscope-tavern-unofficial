@@ -1,7 +1,7 @@
 name: Shared foundation regression
 on:
   push:
-    branches: [refactor/shared-foundation-20260925]
+    branches: [refactor/shared-foundation-20260925, integration/reviewed-0.6.44]
   pull_request:
     paths:
       - 'runtime/**'
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 325a847760640266651b78cd2ff1271cfdfc797e
+          ref: b6d52c65ca314afc24fb3eaa87eebb7755dce71f
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -39,7 +39,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
-          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
           python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
           python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
       - name: Simple effect bar and paired name checks (no client rendering)

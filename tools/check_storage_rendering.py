@@ -6,6 +6,7 @@ transforms are read from the shipped JS poses, geometry pivots, scale and animat
 The adapter convention is Java (x,y,z) -> geometry (8-x,y,z-8), with world yaw
 opposite Java YP. These algebraic checks do NOT prove client rendering.
 """
+from reviewed_changes import historical_digest,changes
 import argparse
 import copy
 import hashlib
@@ -200,17 +201,20 @@ def main():
                 regression=max(regression,math.dist(old,fixed))
     assert abs(regression-math.sqrt(.5))<1e-12,'Negative fixture must detect original half-block pivot displacement'
     for path,digest in contract.get('preservedSha256',{}).items():
-        assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,('Unrelated asset/gameplay changed',path)
+        assert historical_digest(ROOT/path)==digest,('Unrelated asset/gameplay changed',path)
     preserved_count=len(contract.get('preservedSha256',{}))
     for prefix,expected in contract.get('preservedTrees',{}).items():
-        hashes={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/prefix).rglob('*') if p.is_file()}
+        hashes={p.relative_to(ROOT).as_posix():historical_digest(p) for p in (ROOT/prefix).rglob('*') if p.is_file()}
         rows=''.join(k+'\0'+v+'\n' for k,v in sorted(hashes.items()))
         assert len(hashes)==expected['files'] and hashlib.sha256(rows.encode()).hexdigest()==expected['sha256'],('Unrelated asset tree changed',prefix)
         preserved_count+=len(hashes)
+    superseded=set(changes())&set(contract.get('preservedSha256',{}))
+    for prefix in contract.get('preservedTrees',{}):
+        superseded.update(name for name in changes() if name.startswith(prefix+'/'))
     report={'upstreamCommit':contract['upstreamCommit'],'upstreamFilesVerified':len(contract['sources']) if args.java_source else 0,
             'familyVariants':6,'facings':4,'poseCases':len(snap['poses']),'modelPoseCases':len(snap['poses'])*len(points),
             'vertexComparisons':checks,'maxCoordinateErrorBlocks':maximum,'checkedModelBindings':checked_bindings,
-            'oldCellarMolotovPivotErrorBlocks':regression,'preservedFiles':preserved_count,
+            'oldCellarMolotovPivotErrorBlocks':regression,'preservedFiles':preserved_count-len(superseded),'reviewedSupersededFiles':sorted(superseded),
             'watermelonKinds':{'compact':17,'general':27},'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}
     if args.report:
         args.report.parent.mkdir(parents=True,exist_ok=True)

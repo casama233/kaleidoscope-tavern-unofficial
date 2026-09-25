@@ -1,8 +1,9 @@
+import {rackLaunch} from '../core/projectile-parity.js';
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holderKey,holderAnchor,holderVisualPose,HolderStore} from '../core/holder.js';
-import {NS,FACING,facingForYaw,facingVector} from '../core/furniture.js';
+import {NS,FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
@@ -51,10 +52,8 @@ export function maintainHolderVisual(e){
  if(!isExternalVisual(e?.typeId,HELPER))return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
 }
 export function tickHolderVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainHolderVisual);}
-function rngFactor(rng,scale=1,base=.5){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return base+n*scale;}
 export function holderRedstoneLaunch(block,{rng=Math.random}={}){
- const facing=block.permutation.getState(FACING)??0,v=facingVector(facing),factor=rngFactor(rng);
- return {position:{x:block.location.x+.5+v.x*.5,y:block.location.y+.875,z:block.location.z+.5+v.z*.5},velocity:{x:v.x*factor,y:.375*factor,z:v.z*factor}};
+ return rackLaunch(block.location,block.permutation.getState(FACING)??0,'holder',rng());
 }
 export function popHolderRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){
  check(block?.typeId===HOLDER_BLOCK,'NOT_HOLDER');const key=holderKey(block.dimension.id,block.location),state=store.load(key);

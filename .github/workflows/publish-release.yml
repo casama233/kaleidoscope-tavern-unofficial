@@ -28,6 +28,12 @@ jobs:
           ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
           path: .source-check/java
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: .source-check/integration-baseline
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -64,6 +70,10 @@ jobs:
           git diff --exit-code -- runtime/
           version="$(python -c 'import json; print(json.load(open("release.json"))["version"])')"
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
+      - name: Audit all runtime changes against pinned main and Java
+        run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
+      - name: Integrated runtime callbacks (not client tests)
+        run: node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/pr-integration.test.mjs
       - name: Build complete BP and RP package
         run: python tools/build_release.py
       - name: Verify archive and include evidence
@@ -93,7 +103,7 @@ jobs:
               suffix = '-VISUAL' if stem == 'VALIDATION' else ''
               p = Path('docs') / f"{stem}-{r['version']}{suffix}.json"
               shutil.copy2(p, out / p.name)
-          for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC'):
+          for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC', 'LAUNCH-VALIDATION'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')

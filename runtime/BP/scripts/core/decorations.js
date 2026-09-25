@@ -16,3 +16,9 @@ export function isStepladder(id){return id===STEPLADDER;}
 export function ladderBase(pos,half){check(pos&&Number.isInteger(pos.x)&&Number.isInteger(pos.y)&&Number.isInteger(pos.z),'INVALID_LOCATION');check(half===0||half===1,'INVALID_LADDER_HALF');return {x:pos.x,y:pos.y-half,z:pos.z};}
 export function ladderPair(base,facing,waterBottom,waterTop){check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_LADDER_FACING');return [{...base,states:{[LADDER_HALF]:0,[LADDER_FACING]:facing,[LADDER_WATERLOGGED]:!!waterBottom,[LADDER_COLLISION_PROFILE]:facing}},{x:base.x,y:base.y+1,z:base.z,states:{[LADDER_HALF]:1,[LADDER_FACING]:facing,[LADDER_WATERLOGGED]:!!waterTop,[LADDER_COLLISION_PROFILE]:facing+4}}];}
 export function incenseDamageDue(tick){return Number.isInteger(tick)&&tick>0&&tick%120===0;}
+
+/** null means keep a manual override; never coerce a missing/invalid event to power-off. */
+export function incensePowerTransition(current,previous){
+ if(!Number.isFinite(current)||!Number.isFinite(previous)||current<0||previous<0||current>15||previous>15)return null;
+ return (current>0)===(previous>0)?null:current>0;
+}

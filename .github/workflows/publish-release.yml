@@ -81,6 +81,8 @@ jobs:
               suffix = '-VISUAL' if stem == 'VALIDATION' else ''
               p = Path('docs') / f"{stem}-{r['version']}{suffix}.json"
               shutil.copy2(p, out / p.name)
+          for name in (f"MOTION-STATIC-{r['version']}.json", f"REPAIR-STATIC-{r['version']}.json"):
+              shutil.copy2(Path('docs')/name, out/name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
           PY
       - name: Stage assets, verify uploaded bytes, then publish

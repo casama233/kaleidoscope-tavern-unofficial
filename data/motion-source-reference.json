@@ -1,0 +1,95 @@
+{
+  "baselineCommit": "e0330aaa4311519a2a646a2421c686b51cbe6a35",
+  "java": {
+    "repository": "KaleidoscopeMods/KaleidoscopeTavern",
+    "cameraBlob": "4dc098ab27a9c0c939037f122765fc034cb1658e",
+    "barrelBlob": "e38ab5510e9cb59b0eb60399513b54ff7c04b24b",
+    "wave": {
+      "sineDenominators": [
+        19,
+        9
+      ],
+      "sineAmplitudes": [
+        0.6,
+        0.1
+      ],
+      "cosineDenominator": 13,
+      "cosineAmplitude": 0.3
+    },
+    "barrelRendererScale": 0.5,
+    "blockFixedScale": 0.5,
+    "generatedItemFixedScale": 1,
+    "expectedCubeEdgePixels": 4,
+    "expectedCardWidthPixels": 8,
+    "floatAmplitudePixels": 0.32,
+    "floatRadiansPerTick": 0.1
+  },
+  "mojang": {
+    "version": "1.20.1",
+    "url": "https://piston-data.mojang.com/v1/objects/0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838/client.jar",
+    "sha1": "0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838",
+    "extracted": [
+      "assets/minecraft/models/block/block.json",
+      "assets/minecraft/models/block/cube_all.json",
+      "assets/minecraft/models/item/generated.json",
+      "assets/minecraft/models/item/blue_ice.json",
+      "assets/minecraft/models/item/apple.json"
+    ],
+    "extractedSha256": {
+      "assets/minecraft/models/block/block.json": "3ef6c442f1ab55d2a57fa58e28bb831268159052659f12b453b637b31ded1da8",
+      "assets/minecraft/models/block/cube_all.json": "be3205d629ffb9e03834c3d1d083f8a2c62e9f9ae80820755129408634e9144a",
+      "assets/minecraft/models/item/generated.json": "63190611202e75ad7b812bc9a4b31bd53f3e186895d7b53e5e280b0d1e30a67a",
+      "assets/minecraft/models/item/blue_ice.json": "33d672098a335e498f9e5898a3319a84260944ab937fe8cfac261d92007c1031",
+      "assets/minecraft/models/item/apple.json": "e1bdbabd59ead8c6b2c0420c5c0a16adcc3ebeda65e5d4a46c7cde7de9f2ed03"
+    }
+  },
+  "preservedGroups": {
+    "runtime/BP/items": {
+      "files": 236,
+      "sha256": "ff07044f0fc9cfa0a04971cbb53bcfc7aaec7da37b841f4ed40522e3f1475b52"
+    },
+    "runtime/BP/blocks": {
+      "files": 160,
+      "sha256": "88274f48f5d5b5557f06deb29f2573bd00ca4af51d39a0c280402beb50e9cdeb"
+    },
+    "runtime/BP/recipes": {
+      "files": 160,
+      "sha256": "7becdffc4644c702b1c7b836468fa775038f6dd4cbe703baaf4f2269fff8e6d7"
+    },
+    "runtime/RP/particles": {
+      "files": 44,
+      "sha256": "ef3146a120206dbc6e13829af920a9161063c4d1ca5095fe602cb029048c044b"
+    },
+    "runtime/RP/textures": {
+      "files": 2010,
+      "sha256": "a85b798ece7151ec00f6a4d8af2569a4f2cbaf348b2d839fe3a4558d6358c144"
+    }
+  },
+  "preservedFiles": {
+    "runtime/BP/scripts/core/ingredient-layout.js": "007a611bd27928ea2ff79691106d8db67fb98ebd8eec2739675afe88691b7e21",
+    "runtime/BP/scripts/bedrock/barrel-ingredients.js": "0670f8c70caeb2caec4f754fe99fe1dbd575c79475bf0953c75458c6ae72315f",
+    "runtime/BP/scripts/bedrock/mixology.js": "8da0a3cb0becde083315ef3ba2284d1541110ab40b106760dcc707ed5dccdac3",
+    "runtime/RP/animations/runtime_barrel_ingredients.animation.json": "50716fa570560685542008909d3babf14cc55709c875d96ed1ce1c5d51be9bdf",
+    "runtime/RP/models/entity/runtime_barrel_ingredients_card.geo.json": "de3cdb4d5612987494d610312ee1e088e9f66b99ef301af5a5894a22fd3748b6",
+    "runtime/RP/models/entity/runtime_shaker_held.geo.json": "800ead78afb5e6de1950749231b1f841b29222305ba21705f79fee425add6a3f"
+  },
+  "shaker": {
+    "thirdBefore": [
+      0,
+      -0.25,
+      -1
+    ],
+    "thirdAfter": [
+      0,
+      -1.5,
+      -1
+    ],
+    "firstPersonAndShakeUnchanged": true
+  },
+  "limits": {
+    "yawNotRoll": true,
+    "yawGainDegrees": 0.75,
+    "maxDegreesPerUpdate": 0.06,
+    "fadeTicks": 40
+  }
+}

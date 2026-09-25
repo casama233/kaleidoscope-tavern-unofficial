@@ -19,7 +19,7 @@ for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
-hud=docs[RT/'RP/ui/hud_screen.json'];assert set(hud)=={'namespace','kt_mixology_root','root_panel','hud_title_text'}
+hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud and 'hud_actionbar_text' not in hud
 assert 'pbr' in docs[RT/'RP/manifest.json'].get('capabilities',[])
 # Custom entity materials must be in the client-discovered entry point, not
 # simply in any parseable .material file. BDS does not exercise this renderer.
@@ -77,4 +77,6 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,chec
 subprocess.run([sys.executable,str(ROOT/'tools/check_repair.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_storage_rendering.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_pack_compat.py')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')

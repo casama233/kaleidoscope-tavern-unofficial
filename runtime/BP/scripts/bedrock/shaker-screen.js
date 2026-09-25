@@ -1,11 +1,11 @@
-/** Dedicated JSON UI, using persistent, namespaced title packets.
- * Vanilla actionbar/font glyphs are deliberately not part of this renderer:
- * the installed Saturation HUD makes that entire factory transparent.
+/** Actionbar-only HUD adapter. Does not own title/subtitle or another pack's UI.
+ * Our separate factory expires its graphics locally; no idle clear/off loop.
+ * A plain readable actionbar remains usable when another RP replaces our UI.
  */
 import {system} from '@minecraft/server';
-const PREFIX='ktmix:',ROOT='textures/ui/kt_mixology/';
+import {HUD_PREFIX,slotsPacket,progressPacket,hudSendDue} from '../core/shaker-hud.js';
 const last=new Map(),messages=new Map();
-const COLORS=[0xff55ff,0x5555ff,0xffaa00,0x55ff55,0xffff55,0xff5555,0xffffff];
+export const shakerHudDiagnostics={sent:0,failures:0,lastError:''};
 const KEYS={
  NEED_THREE_INGREDIENTS:'kt.mixology.need_three',QUALITY_TOO_LOW:'kt.mixology.quality_low',
  RESULT_PENDING:'kt.mixology.result_pending',SHAKER_FULL:'kt.mixology.full',READY:'kt.mixology.ready',
@@ -13,31 +13,43 @@ const KEYS={
  CUP_STATE_MISMATCH:'kt.mixology.cup_state_mismatch',CUP_SCHEMA:'kt.mixology.cup_state_mismatch',COCKTAIL_SCHEMA:'kt.mixology.cup_state_mismatch',
  SPACE_NOT_CLEAR:'kt.mixology.no_space',INVENTORY_FULL:'kt.mixology.inventory_full',ERROR:'kt.mixology.error'
 };
-function send(player,suffix,raw){
- const now=system.currentTick,key=player.id,previous=last.get(key);
- // Repeat periodically so joining/reloading UI can recover its current state.
- if(previous?.suffix===suffix&&now-previous.tick<(suffix==='off'?2:10))return;
- player.onScreenDisplay.setTitle(raw??PREFIX+suffix,{fadeInDuration:0,stayDuration:2,fadeOutDuration:0});
- last.set(key,{suffix,tick:now});
+function send(player,key,raw){
+ const tick=system.currentTick,previous=last.get(player.id);
+ if(!hudSendDue(previous,key,tick))return;
+ try{
+  player.onScreenDisplay.setActionBar(raw);
+  last.set(player.id,{key,tick});shakerHudDiagnostics.sent++;
+ }catch(error){
+  shakerHudDiagnostics.failures++;shakerHudDiagnostics.lastError=String(error).slice(0,300);
+  if(!previous?.warned)console.warn('[Tavern HUD] '+shakerHudDiagnostics.lastError);
+  last.set(player.id,{key,tick,retryAfter:tick+100,warned:true});
+ }
 }
-function messageActive(player){const row=messages.get(player.id);if(!row)return false;if(row.until<system.currentTick){messages.delete(player.id);return false;}send(player,'message/'+row.key,{rawtext:[{text:PREFIX+'message/'},{translate:row.key}]});return true;}
-function colorIndex(slot){
- if(!slot)return 0;if(slot.potion)return 7;
- const c=slot.color??0xffffff;let best=7,distance=Infinity;
- for(let i=0;i<COLORS.length;i++){const v=COLORS[i],d=[16,8,0].reduce((n,shift)=>n+(((c>>shift)&255)-((v>>shift)&255))**2,0);if(d<distance){distance=d;best=i+1;}}
- return best;
+function messageActive(player){
+ const row=messages.get(player.id);if(!row)return false;
+ if(row.until<=system.currentTick){messages.delete(player.id);return false;}
+ send(player,'message/'+row.key,{rawtext:[{text:HUD_PREFIX},{translate:row.key}]});return true;
 }
 export function showShakerSlots(player,state){
  if(messageActive(player))return;
- send(player,ROOT+'slots/'+Array.from({length:3},(_,i)=>colorIndex(state.slots[i])).join(''));
+ const text=slotsPacket(state.slots);send(player,text,text);
 }
-export function showShakerProgress(player,ticks){messages.delete(player.id);send(player,ROOT+'progress/'+String(Math.max(0,Math.min(111,Math.floor(ticks)))).padStart(3,'0'));}
+export function showShakerProgress(player,ticks){
+ messages.delete(player.id);const text=progressPacket(ticks);send(player,text,text);
+}
 export function showBarrelHud(player,rawtext){
  if(messageActive(player))return;
- send(player,'barrel/'+JSON.stringify(rawtext),{rawtext:[{text:PREFIX+'barrel/'},...rawtext]});
+ send(player,'barrel/'+JSON.stringify(rawtext),{rawtext:[{text:HUD_PREFIX},...rawtext]});
 }
-// Title packets share a channel with other add-ons. Keep the clear state alive
-// while idle, too: a single lost/replaced packet must not latch an old tooltip.
-export function hideShakerHud(player){if(messageActive(player))return;if(last.has(player.id))send(player,'off');}
-export function showShakerMessage(player,code){const key=KEYS[code]??KEYS.ERROR;messages.set(player.id,{key,until:system.currentTick+40});messageActive(player);}
-export function clearShakerPlayer(player){const id=typeof player==='string'?player:player.id;messages.delete(id);last.delete(id);if(typeof player!=='string')send(player,'off');}
+export function hideShakerHud(player){
+ if(messageActive(player))return;
+ last.delete(player.id);
+ // No shared-channel write: our graphics self-destruct after 0.6 seconds.
+}
+export function showShakerMessage(player,code){
+ const key=KEYS[code]??KEYS.ERROR;messages.set(player.id,{key,until:system.currentTick+40});messageActive(player);
+}
+export function clearShakerPlayer(player){
+ const id=typeof player==='string'?player:player.id;
+ messages.delete(id);last.delete(id);
+}

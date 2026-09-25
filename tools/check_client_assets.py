@@ -4,12 +4,13 @@ import json,re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text())
-for name,count in [('holder',16),('cellar_cabinet',16),('tilted_rack',26),('circular_rack',26),('bar_cabinet',26)]:
+for name,count in [('holder',17),('cellar_cabinet',17),('tilted_rack',27),('circular_rack',27),('bar_cabinet',27)]:
  bp=read(RT/f'BP/entities/{name}_bottle_visual.json')['minecraft:entity']['description']
  rp=read(RT/f'RP/entity/runtime_{name}_bottle_visual.entity.json')['minecraft:client_entity']['description']
  for key,value in bp['properties'].items():
   if key.endswith('_kind'):assert value['range'][1]==count,(name,'property limit')
- assert rp['geometry'][f'kind_{count}']=='geometry.kt_assets_a17.molotov'
+ assert rp['geometry'][f'kind_{count-1}']=='geometry.kt_runtime.storage_molotov'
+ assert rp['geometry'][f'kind_{count}']=='geometry.kt_assets_a9.watermelon_juice_1'
  assert (RT/'RP'/(rp['textures'][f'kind_{count}']+'.png')).is_file()
  for rc in read(RT/f'RP/render_controllers/runtime_{name}.render_controllers.json')['render_controllers'].values():
   for kind,prefix in [('geometries','geometry'),('textures','textures')]:

@@ -75,5 +75,6 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROO
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_repair.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_storage_rendering.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')

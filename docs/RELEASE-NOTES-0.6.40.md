@@ -1,48 +1,20 @@
-# 0.6.40-beta.1 — 微醺去震動、雪克杯握持及酒桶原料比例
+# 森羅物語：酒館（非官方）0.6.40-beta.1
 
-完整酒館本體 BP／RP，基於主分支 0.6.39（`e0330aaa4311519a2a646a2421c686b51cbe6a35`），不是額外補丁，也沒有退回 0.6.38。保留酒杯取回、香薰修正、全部 160 份合成解鎖資料、指南、PBR 與特調圖示。
+## 酒架中的莫洛托夫與西瓜汁
 
-## 微醺：撤掉錯誤的震動方案
+依 Java 原版 `StorageBlockEntityRender` 及各酒架／酒櫃 renderer 修正展示轉換，覆蓋單瓶架、傾斜酒架、圓形酒架、普通酒櫃、玻璃酒櫃與窖藏酒櫃。
 
-使用者的實機影片否定了 0.6.38／0.6.39 的鏡頭震動近似。Java 原作使用 `sin(t/19)*0.6 + cos(t/13)*0.3 + sin(t/9)*0.1` 直接加到鏡頭 roll，三組波本身不是錯誤；把有正負方向的角度轉成 `camerashake` 的正值強度，才會變成隨機震動。上一輪提出的「改單一波、降低震動強度」建議沒有採用。
+- 莫洛托夫新增酒架專用瓶底原點模型，保留全部頂點、UV 和材質；不改手持、放置或投擲模型。
+- 窖藏櫃只在模型骨骼套用俯仰，助手只控制世界 yaw；圓形酒架的槽位角度只轉換一次座標慣例。
+- 按 Java 的 BottleBlockItem 接受規則補回西瓜汁收納及顯示，通用紅石投射物索引同步補齊。舊酒瓶索引不重排，莫洛托夫仍是 16／26，西瓜汁追加 17／27。
+- 保留 0.6.39 的杯子回收、香薰、雪克杯、指南、PBR、特調圖示與微醺修正。
 
-本版移除所有微醺 `camerashake`／`addShake` 呼叫，保留原作三波公式與節奏，使用每 tick 的小幅水平轉向差值，增益 0.75、單次最大 0.06 度、淡入淡出各 40 tick。每次從玩家當前朝向增加差值，不回寫喝酒時的舊方向；喝更多酒不建立第二個迴圈或重啟波形。僅有一個共用更新器，沒有微醺玩家時停止。
+來源對照固定 Java 提交 `c4ec1880bd44cf3139d3ba744ab30bb379cf1416`。靜態核對 21 個原作來源檔、142 個模型綁定及 10,400 次頂點變換；既有 2,022 個相關資產／玩法檔案雜湊不變。建置直接使用 canonical runtime，並核對成品與上傳資產。
 
-**這是水平轉向（yaw）適配，會輕微改變瞄準，不是 Java 純鏡頭 roll 的完全復刻。** 沒有使用 free camera 接管視角、強迫第一人稱、傳送玩家、覆寫 player.json 或新增假的反胃／移速效果。純數學連續不等於網路與客戶端顯示已驗收。
+**未執行新 BDS、客戶端或模擬玩家互動測試。** 矩陣吻合不是手機畫面保證，仍以 Beta 發布。詳見 `docs/STORAGE-REPAIR-0.6.40.md` 與 `STORAGE-VALIDATION-0.6.40.json`。
 
-到期、喝奶、死亡、重生、離線及個人停用會停止更新；暫時尊重睡眠、旁觀者與鏡頭輸入鎖。引擎錯誤會停掉當次效果的視角更新，不每 tick 重試刷錯。強制清理不把視角拉回喝酒前方向。
+先備份世界，同時更新本體 BP/RP，保留 Cookery 1.0.6。使用世界名酒時更新至 0.1.5-preview.1。UUID、物品 ID、庫存 key 與 slot 順序不變；不需要清空酒架或重建世界。重新載入世界讓新資源與助手同步生效。正式伺服器的私有 Cookery 重綁不在本次公開包內。
 
-不再依賴「允許鏡頭晃動」。具有指令權限時，可使用 `/function kt_tipsy_motion_off` 停用自己的微醺視角移動，`/function kt_tipsy_motion_on` 恢復；只影響視角適配，不移除酒類效果資料。停用標記為 `kt_no_tipsy_motion`。
+## English
 
-## 雪克杯：只下移第三人稱握持
-
-使用者畫面是第三人稱。以 0.6.39 的握持方向為基準，`hold_third` 局部位置由 `[0,-0.25,-1]` 改為 `[0,-1.5,-1]`，即下移 1.25 模型像素；旋轉 `[90,0,0]`、縮放 0.5 不變。
-
-第一人稱、搖晃、玩家手臂與倒酒動畫、骨骼綁定及雪克杯幾何全部保留。沒有把同一個偏移重複加到待機與疊加動畫，也沒有縮小杯子或重寫原本正常的動畫。具體皮膚握持觀感仍待實機驗收。
-
-## 酒桶：補上漏掉的 FIXED 模型縮放
-
-Java `BarrelBlockEntityRender` 先縮放 0.5，再以 `ItemDisplayContext.FIXED` 渲染物品。官方 Java 1.20.1 方塊模型的 FIXED 縮放是 0.5，普通 generated 物品則是 1。
-
-因此冰、浮冰、藍冰、泥土、石頭等現有方塊原料的正確邊長為 `16 × 0.5 × 0.5 = 4` 模型像素，而不是舊版的 8。九個 cube 全部改成以原點為中心的 4×4×4，保持原 identifier、完整 16×16 UV 及實體引用；普通平面原料仍是 8 像素，不一起縮小。
-
-原作上下浮動為 `sin(time/10 + index) × 0.02` 方塊，即 0.32 模型像素；目前對應頻率與幅度正確，因此沒有另加下沉值或降低浮動。分佈、數量、位置、保存資料和釀造規則不變。
-
-## 檢查與發布
-
-- 全部 JSON、JavaScript 語法／匯入、材質／圖示與指南檢查；三種語言各 1,685 個鍵。
-- 3,601 組波形取樣、角度差分、跨 ±180 度、手動轉向保留、過期與幅度上限的純數學檢查。
-- 核對 236 份物品、160 份方塊、160 份配方、44 份粒子、2,010 份貼圖檔案與 0.6.39 基線完全相同；原版浮動、原料分佈及原有正常動畫另有雜湊／結構檢查。
-- 包 UUID、內容 ID、配方與存檔格式未更換；最低版本及公開 Cookery 1.0.6 前置不變。
-- 正常建置直接使用已提交的 runtime；發布前重新檢查完整包，下載回讀全部上傳附件比對後才公開。不覆蓋舊 Release。
-
-**本次沒有啟動 Minecraft 客戶端或 BDS，沒有模擬玩家互動測試。** 保持公開測試版，不把靜態檢查當成 Android／Windows 畫面、Realms 或多人網路驗收。
-
-先備份世界，離開世界後匯入新版，確認 BP 與 RP 都是 0.6.40；不要同時啟用舊酒館 RP。前置使用公開 Cookery 1.0.6；修改過 UUID／1.0.7 的私服仍按既有遷移文件處理。
-
-## 對照來源
-
-- Java 相機：`KaleidoscopeMods/KaleidoscopeTavern` / `CameraAnglesEvent.java`，blob `4dc098ab27a9c0c939037f122765fc034cb1658e`。
-- Java 酒桶：同倉庫 `BarrelBlockEntityRender.java`，blob `e38ab5510e9cb59b0eb60399513b54ff7c04b24b`。
-- 官方 Java 1.20.1 client SHA1 `0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838`，僅讀取物品／方塊模型的 FIXED transform；來源與摘取檔案雜湊記錄於 `data/motion-source-reference.json`，不散布 client JAR。
-- Microsoft Learn：`Entity.setRotation`（Vector2 水平／垂直朝向）與 `PlayerInputPermissions`；本版不把相機 spline 或 free camera 當作可疊加的普通遊戲鏡頭 roll。
+Ports the original Java storage matrices and bottom-centred default-block rendering. Uses a storage-only Molotov geometry without modifying held, placed or thrown assets, removes competing cellar pitch ownership, and corrects circular-rack slot yaw conversion. Restores watermelon-juice admission and visual mapping with append-only indices. Existing inventories, UUIDs and content IDs remain unchanged. All earlier 0.6.39 repairs are retained. Static source/model/matrix and exact-package checks only; no new BDS/client or simulated-player run. Use World Liquor 0.1.5-preview.1 when installed, alongside Cookery 1.0.6. Back up the world and update both BP/RP.

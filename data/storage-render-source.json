@@ -1,0 +1,375 @@
+{
+  "upstreamRepository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "upstreamCommit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "sources": {
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/StorageBlockEntityRender.java": "03802d1a22ca7e900fc213c2588a03a8ef58a37b88093cc0daf65c58a726d7c5",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/HolderBlockEntityRender.java": "d18eca7633075fd026cef558a6a3d5156526b67a5a2d451505649a88fb57c350",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/TiltedRackBlockEntityRender.java": "cbddce298db0645728e7d8c16f57e8ff110a5cf5ed08a8faa5cb32ae365de032",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/CircularRackBlockEntityRender.java": "96c0746f757c30be813e2dd82a0a4eda6caf83f3edee550d34d59d44e936fcbd",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/CellarCabinetBlockEntityRender.java": "f24b0ecb482461306d825221aea74baa6cf7545c5298e7704fe2176be4261c00",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/BarCabinetBlockEntityRender.java": "4d922d8b265f736f462f94f3015e75a2e8219e8993bb12ff865c024983642b9a",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java": "c67328f66cd5fac4676c017c33d7e5b1019d2f562492f03e349b33682a73dbc6",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BarCabinetBlock.java": "aa526631f8d38be0928759f9aad8b6a85d7aec33d6e571bf214edba62a75a587",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.java": "090de54327f4a20c6ef3a3b8018c8da52b586131fcbe5c57c123ca33dabe00ee",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/DrinkBlockItem.java": "f75bddffe9be3ecac0c94ed83afd1046585afcf831c447d96429371b722d0f43",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/items/holder_blocklist.json": "c743fe23d22549170f9b1f6b8188b66b9468f2225fdfff428adb7de298850fa4",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/items/tilted_rack_blocklist.json": "6d3bac2ebf5b95b01e9a58c9341a0506d8562d538ad710d6acd7b2591d24062b",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/items/circular_rack_blocklist.json": "b83114c23eeec820ce7eca52011f13013fb6c64002254be7aebe1e4b36244d48",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/items/cellar_cabinet_blocklist.json": "c743fe23d22549170f9b1f6b8188b66b9468f2225fdfff428adb7de298850fa4",
+    "src/generated/resources/data/kaleidoscope_tavern/tags/items/bar_cabinet_irregular.json": "6d3bac2ebf5b95b01e9a58c9341a0506d8562d538ad710d6acd7b2591d24062b",
+    "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/molotov.json": "d3f9b6a85ea63a09ae4ef9c5179ecbc375928fed6260f32d4079a3b800af5c3d",
+    "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count1.json": "17bbd8575fc50a193f6d580e276e47392900cda1ad8073ee2596e90df92082e1",
+    "src/generated/resources/assets/kaleidoscope_tavern/blockstates/molotov.json": "c2228286037e8378ae508276180a8e7b2caee55aa79ed03de953aea825a821d2",
+    "src/generated/resources/assets/kaleidoscope_tavern/blockstates/watermelon_juice.json": "92003b83526ba6bda1385b9f9ada40cb88948903a620d3f54b228f486974872d",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BottleBlock.java": "ba2f2f54230cf68bf38296eae145aac264666c694b82de2d561f8fa5b15e5148",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/MolotovBlock.java": "60c76ea187f97956d204ee6222777d45394ae7575df5ca345df16c29915b0083"
+  },
+  "models": {
+    "molotov": {
+      "path": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/molotov.json",
+      "boxes": [
+        [
+          [
+            7,
+            10,
+            7
+          ],
+          [
+            9,
+            16,
+            9
+          ]
+        ],
+        [
+          [
+            6,
+            0,
+            6
+          ],
+          [
+            10,
+            2,
+            10
+          ]
+        ],
+        [
+          [
+            6,
+            2,
+            6
+          ],
+          [
+            7,
+            10,
+            7
+          ]
+        ],
+        [
+          [
+            9,
+            2,
+            6
+          ],
+          [
+            10,
+            10,
+            7
+          ]
+        ],
+        [
+          [
+            7,
+            2,
+            7
+          ],
+          [
+            9,
+            10,
+            9
+          ]
+        ],
+        [
+          [
+            6,
+            2,
+            9
+          ],
+          [
+            7,
+            10,
+            10
+          ]
+        ],
+        [
+          [
+            9,
+            2,
+            9
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        [
+          [
+            7,
+            2,
+            6
+          ],
+          [
+            9,
+            10,
+            7
+          ]
+        ],
+        [
+          [
+            6,
+            2,
+            7
+          ],
+          [
+            7,
+            10,
+            9
+          ]
+        ],
+        [
+          [
+            9,
+            2,
+            7
+          ],
+          [
+            10,
+            10,
+            9
+          ]
+        ],
+        [
+          [
+            7,
+            2,
+            9
+          ],
+          [
+            9,
+            10,
+            10
+          ]
+        ]
+      ]
+    },
+    "watermelon_juice": {
+      "path": "src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/watermelon_juice/count1.json",
+      "boxes": [
+        [
+          [
+            6,
+            0,
+            6
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        [
+          [
+            7,
+            10,
+            7
+          ],
+          [
+            9,
+            16,
+            9
+          ]
+        ]
+      ]
+    }
+  },
+  "semantics": "Default block model. Bottle base at (0.5,0,0.5), not GUI/FIXED item transform. Java matrices are post-multiplied.",
+  "direction2DDataValues": [
+    2,
+    3,
+    0,
+    1
+  ],
+  "holder": {
+    "xyz": [
+      0.5,
+      0.125,
+      0.75
+    ],
+    "scale": 0.95,
+    "yRot": 0,
+    "xRot": -45
+  },
+  "cellar_cabinet": {
+    "xStart": 0.825,
+    "xStep": -0.325,
+    "yStart": 0.78,
+    "yStep": -0.29,
+    "z": 0.875,
+    "scale": 1,
+    "xRot": -90
+  },
+  "tilted_rack": {
+    "scale": 0.9,
+    "translationStart": [
+      0.425,
+      0.3125,
+      0.015
+    ],
+    "translationStep": [
+      -0.375,
+      0,
+      0.005
+    ],
+    "xRot": 22.5,
+    "order": [
+      "facing",
+      "scale",
+      "translate",
+      "rotateX"
+    ]
+  },
+  "circular_rack": {
+    "scale": 0.82,
+    "y": 0.125,
+    "slots": [
+      [
+        0.5,
+        0.125,
+        0
+      ],
+      [
+        0.875,
+        0.3125,
+        22.5
+      ],
+      [
+        0.875,
+        0.6875,
+        -22.5
+      ],
+      [
+        0.5,
+        0.875,
+        180
+      ],
+      [
+        0.125,
+        0.6875,
+        157.5
+      ],
+      [
+        0.125,
+        0.3125,
+        -157.5
+      ]
+    ]
+  },
+  "bar_cabinet": {
+    "scale": 0.9,
+    "y": 0.0625,
+    "sideOffset": 0.25
+  },
+  "oldMolotovRootPivot": [
+    0,
+    8,
+    0
+  ],
+  "storageRootPivot": [
+    0,
+    0,
+    0
+  ],
+  "compatibility": {
+    "oldCompactMolotovKind": 16,
+    "oldGeneralMolotovKind": 26,
+    "newCompactWatermelonKind": 17,
+    "newGeneralWatermelonKind": 27
+  },
+  "preservedSha256": {
+    "runtime/RP/models/entity/molotov.geo.json": "42bafc06111adb4af771ec7876408a36654de9dc8940435abb1ddc889d95fba4",
+    "runtime/RP/models/entity/thrown_molotov.geo.json": "ed0c9e5a4c45e404e75c6d3aad1c254166df047300e4bea9fd761c7f90535b20",
+    "runtime/RP/models/entity/watermelon_juice_1.geo.json": "e8e81ec7a1c3d8ccbfcf7bac901c70cf1270570c5fca22c899200156214bc375",
+    "runtime/RP/animations/runtime_molotov.animation.json": "25fc27abb832fe7f34f5c622ac3c7ef2e018ce61f938bb9e4ea725f75bfc992f",
+    "runtime/BP/scripts/bedrock/storage-projectile.js": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
+    "runtime/BP/scripts/bedrock/tap-sources.js": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
+    "runtime/BP/scripts/core/inventory.js": "243bb0e2669f6b5e4dfc374b8fb0311830c7277831af20fa1ff92b7580ee60dc",
+    "runtime/BP/scripts/core/mixology.js": "ee528deaf752c43e94e49995474c84c835516ce80eae7ed8c974697d5118f58e",
+    "runtime/BP/scripts/bedrock/mixology.js": "8da0a3cb0becde083315ef3ba2284d1541110ab40b106760dcc707ed5dccdac3",
+    "runtime/BP/scripts/data/recipes.js": "e09f27b96634bcd54ebd8b2f7b5f83611c37a62452396308e699651ccac45f97",
+    "runtime/BP/scripts/data/drink-effects.js": "c048fee5a8073964ba9d3c81e115fa1d9d845764388e78893ba33f234f3fba31",
+    "runtime/RP/animations/runtime_shaker.animation.json": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8"
+  },
+  "preservedTrees": {
+    "runtime/RP/textures/": {
+      "files": 2010,
+      "sha256": "a85b798ece7151ec00f6a4d8af2569a4f2cbaf348b2d839fe3a4558d6358c144",
+      "algorithm": "SHA256(sorted(relative_path + NUL + file_sha256 + LF))"
+    }
+  },
+  "previousKinds": {
+    "compact": [
+      "empty_bottle",
+      "champagne",
+      "glowflower_brew",
+      "honey_wine",
+      "ice_wine",
+      "luminous_bride",
+      "plum_wine",
+      "polaris_sweet_white",
+      "red_queen",
+      "sakura_wine",
+      "sauvignon_blanc_dry_white",
+      "sherry",
+      "vinegar",
+      "whiskey",
+      "wine",
+      "molotov"
+    ],
+    "general": [
+      "empty_bottle",
+      "champagne",
+      "glowflower_brew",
+      "honey_wine",
+      "ice_wine",
+      "luminous_bride",
+      "plum_wine",
+      "polaris_sweet_white",
+      "red_queen",
+      "sakura_wine",
+      "sauvignon_blanc_dry_white",
+      "sherry",
+      "vinegar",
+      "whiskey",
+      "wine",
+      "brandy",
+      "carignan",
+      "mother_snow",
+      "miners_star",
+      "madame_shexiang",
+      "sunset_glow",
+      "riesling_dry_white",
+      "sweet_berry_wine",
+      "vodka",
+      "rum",
+      "molotov"
+    ]
+  },
+  "approvedMotionIntegration": {
+    "version": "0.6.41",
+    "baselineCommit": "4076925dc04f1ea32882c03393d0328754513f11",
+    "path": "runtime/RP/animations/runtime_shaker.animation.json",
+    "beforeSha256": "be54f94820f6823720fe35c554a565aa3b05bd90ba01e32ef0819867d30402e1",
+    "afterSha256": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
+    "change": "Only hold_third.grip.position[1]: -0.25 -> -1.5. All other animations verified by check_motion.py."
+  }
+}

@@ -2,7 +2,7 @@ import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -59,6 +59,17 @@ function normalizeContent(raw,source,itemExists){
 function normalizePage(raw,source){
  own(raw.id,source);const page={id:raw.id,source,title:localeMap(raw.title),body:localeMap(raw.body),recipeIds:(raw.recipeIds??[]).map(id)};
  check(page.recipeIds.length<=32,'TOO_MANY_PAGE_RECIPES');
+ if(raw.item!==undefined)page.item=own(raw.item,source);
+ if(raw.category!==undefined){check(['equipment','barrel','cocktail','storage','cultivation','furniture','lighting','incense','art','boards','food'].includes(raw.category),'INVALID_GUIDE_CATEGORY');page.category=raw.category;}
+ if(raw.crafting!==undefined){
+  check(page.item&&Array.isArray(raw.crafting)&&raw.crafting.length<=16,'INVALID_GUIDE_CRAFTING');
+  page.crafting=raw.crafting.map(r=>{
+   check(r&&r.method==='Crafting Table'&&r.result===page.item,'INVALID_GUIDE_CRAFTING');
+   check(Array.isArray(r.ingredients)&&r.ingredients.length>0&&r.ingredients.length<=9,'INVALID_GUIDE_CRAFTING');
+   const ingredients=r.ingredients.map(x=>{check(typeof x==='string','INVALID_GUIDE_CRAFTING');id(x.startsWith('#')?x.slice(1):x);return x;});
+   return {method:'Crafting Table',result:page.item,count:integer(r.count??1,1,64),time:0,ingredients};
+  });
+ }
  if(raw.icon!==undefined){check(typeof raw.icon==='string'&&/^textures\/[a-zA-Z0-9_/-]+$/.test(raw.icon)&&!raw.icon.includes('..'),'INVALID_ICON');page.icon=raw.icon;}
  return page;
 }

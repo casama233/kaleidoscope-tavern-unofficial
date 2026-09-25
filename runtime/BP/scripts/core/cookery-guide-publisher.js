@@ -15,10 +15,28 @@ export const COOKERY_GUIDE_REVISION='c6_guide_1';
 export const COOKERY_GUIDE_CHUNK_SIZE=1600;
 export const cookeryGuideRevision=payload=>'c6_'+digest(canonical(payload));
 
+/** Cookery 1.0.6 filters uppercase region codes from mechanicsByLocale.
+ * Keep the complete localized source catalog, but transport a readable bilingual
+ * fallback in the supported mechanics field. No Cookery script is overwritten.
+ * Do not send three ignored copies of the text: they can exceed the host's
+ * 512-chunk limit when Tavern and World Liquor are installed together.
+ */
+export function cookery106WirePayload(payload){
+ const out={...payload,entries:payload.entries.map(entry=>{
+  const {mechanicsByLocale,...wire}=entry;
+  if(!mechanicsByLocale)return wire;
+  const zh=mechanicsByLocale.zh_TW??entry.mechanics??[];
+  const en=mechanicsByLocale.en_US??[];
+  wire.mechanics=Array.from({length:Math.max(zh.length,en.length)},(_,i)=>[...new Set([zh[i],en[i]].filter(Boolean))].join('\n'));
+  return wire;
+ })};
+ return out;
+}
+
 export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,revision=COOKERY_GUIDE_REVISION}={}){
  if(!payload||payload.api!==1||payload.id!=='kaleidoscope_tavern:tavern')throw new TypeError('Invalid Tavern guide payload.');
  if(typeof source!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(source)||typeof revision!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(revision))throw new TypeError('Invalid Cookery guide envelope.');
- const raw=JSON.stringify(payload).replace(/[^\x20-\x7e]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
+ const raw=JSON.stringify(cookery106WirePayload(payload)).replace(/[^\x20-\x7e]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
  const chunks=[];for(let i=0;i<raw.length;i+=COOKERY_GUIDE_CHUNK_SIZE)chunks.push(raw.slice(i,i+COOKERY_GUIDE_CHUNK_SIZE));
  if(!chunks.length||chunks.length>512)throw new RangeError('Guide exceeds Cookery v1 transfer capacity.');
  const envelope={api:1,source,id:payload.id,revision};

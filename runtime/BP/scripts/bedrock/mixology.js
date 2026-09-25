@@ -1,4 +1,4 @@
-import {cupBlock,isCupBlock} from '../core/extension-content.js';
+import {cupBlock,cupItem,isCupBlock} from '../core/extension-content.js';
 /** Java shaker lifecycle, rebuilt for 0.6.22.
  * One held-use session; one item identity. Contents live on the item or placed
  * station. UI and animation observe that session and never mutate recipes.
@@ -167,15 +167,30 @@ export function placeCup(player,location){
  commitBlock(player,cupStore,key,state,1,[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;
 }
 function getCup(block){
- const saved=cupStore.load(cupKey(block.dimension.id,block.location));if(saved)return saved;
- // Empty native creative cup blocks predate the script store.
- if(block.typeId===NS+':cup_empty_glassware')return {schema:1,revision:0,item:EMPTY_CUP,facing:block.permutation.getState(FACING)??0};
- check(false,'CUP_MISMATCH');
+ const item=cupItem(block?.typeId);check(item,'NOT_CUP');
+ const key=cupKey(block.dimension.id,block.location),saved=cupStore.load(key);
+ if(saved){check(cupBlock(saved.item)===block.typeId,'CUP_STATE_MISMATCH');return saved;}
+ // Native BlockItem/creative placement and legacy worlds can contain a cup
+ // without a script record. The block completely identifies a named drink.
+ // Only absent records may be reconstructed: malformed stored data is never
+ // replaced by a default. A stateless signature uses the same creative default
+ // as the signature item; it cannot recreate effects that were never saved.
+ const state={schema:1,revision:0,item,facing:block.permutation.getState(FACING)??0};
+ if(item===SIGNATURE)state.payload=signaturePayload(makeStack(SIGNATURE,1));
+ return validateCup(state);
+}
+function initializeNativeCup(block){
+ if(!isCupBlock(block?.typeId))return;
+ const key=cupKey(block.dimension.id,block.location);
+ if(cupStore.raw(key)===undefined)cupStore.save(key,getCup(block),-1);
 }
 export function takeCup(player,block){
- near(player,block);const key=cupKey(block.dimension.id,block.location),state=getCup(block);
- commitBlock(player,cupStore,key,undefined,0,[{stack:resultItem(state),count:1}],block,BlockPermutation.resolve('minecraft:air'));
- syncCupVisual(block);return state;
+ near(player,block);const key=cupKey(block.dimension.id,block.location);
+ return locks.with([key,player.id],()=>{
+  const state=getCup(block);
+  commitBlock(player,cupStore,key,undefined,0,[{stack:resultItem(state),count:1}],block,BlockPermutation.resolve('minecraft:air'));
+  syncCupVisual(block);return state;
+ });
 }
 export function pourHeldShakerNow(player,block){
  near(player,block);idle(player);const key=cupKey(block.dimension.id,block.location);
@@ -193,10 +208,10 @@ export function syncCupVisual(block){
  safely(undefined,()=>{
   const key=cupKey(block.dimension.id,block.location),point={x:block.location.x+.5,y:block.location.y,z:block.location.z+.5};
   const found=block.dimension.getEntities({type:CUP_HELPER,location:point,maxDistance:2}).filter(x=>x.getDynamicProperty(CUP_ANCHOR)===key);
-  let state=cupStore.load(key);
-  if(!state&&block.typeId===NS+':cup_signature_cocktail'){
-   state={schema:1,revision:0,item:SIGNATURE,facing:block.permutation.getState(FACING)??0,payload:signaturePayload(makeStack(SIGNATURE,1))};cupStore.save(key,state,-1);
-  }
+  // onTick also repairs stateless cups left by older versions; preserve every
+  // existing record, including signatures with custom colors and effects.
+  initializeNativeCup(block);
+  const state=cupStore.load(key);
   if(!state||state.item!==SIGNATURE||block.typeId!==NS+':cup_signature_cocktail'){for(const entity of found)entity.remove();return;}
   const visual=found.shift()??block.dimension.spawnEntity(CUP_HELPER,point,{initialRotation:state.facing*90});
   for(const extra of found)extra.remove();visual.setDynamicProperty(CUP_ANCHOR,key);
@@ -261,10 +276,21 @@ function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot
 function verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}
 export function registerMixologyComponents({blockComponentRegistry:blocks,itemComponentRegistry:items}){
  blocks.registerCustomComponent(NS+':shaker_station',{onTick:event=>repairShakerPutVisual(event.block),onPlayerInteract:nativeEmptyHandBlockUse});
- blocks.registerCustomComponent(NS+':cocktail_cup',{onTick:({block})=>{
-  syncCupVisual(block);
-  if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);
- }});
+ blocks.registerCustomComponent(NS+':cocktail_cup',{
+  onPlayerInteract:nativeEmptyHandBlockUse,
+  onPlace:({block})=>{
+   const dimension=block.dimension,location={...block.location},type=block.typeId;
+   // Scripted placement commits its payload synchronously before this runs.
+   system.run(()=>safely(undefined,()=>{
+    const current=blockAt(dimension,location);
+    if(current?.typeId===type)initializeNativeCup(current);
+   }));
+  },
+  onTick:({block})=>{
+   syncCupVisual(block);
+   if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);
+  }
+ });
  items.registerCustomComponent(NS+':portable_shaker',{});
  items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:completeCocktail});
 }
@@ -276,10 +302,10 @@ export function installMixologyEvents(){
   if(javaSecondaryBypass(event.player,held))return;
   if(block.typeId===STATION&&held&&!candidate(held))return;
   if(block.typeId!==STATION&&held)return;
-  event.cancel=true;if(!firstBlockGesture(event.player,block,'mixology-v22'))return;
+  event.cancel=true;if(!firstBlockGesture(event.player,block,`mixology-v38/${held||'empty'}/${snapshot.basic.slot}`))return;
   const dimension=block.dimension,location={...block.location},id=block.typeId;
   system.run(()=>safely(event.player,()=>{
-   verifySnapshot(event.player,snapshot);const current=blockAt(dimension,location);check(current?.typeId===id,'BLOCK_CHANGED');
+   check(event.player.dimension.id===dimension.id,'DIMENSION_CHANGED');verifySnapshot(event.player,snapshot);const current=blockAt(dimension,location);check(current?.typeId===id,'BLOCK_CHANGED');
    if(id!==STATION)return takeCup(event.player,current);
    return held?pourIngredient(event.player,current):pickupShaker(event.player,current);
   }));
@@ -290,7 +316,7 @@ export function installMixologyEvents(){
  registerJavaItemUseOnRoute({id:'cups-v22',matches:isCupItem,
   plan:({player,block,face,held})=>held.id===EMPTY_CUP||player.isSneaking?{target:plus(block.location,faceOffset(face))}:undefined,
   execute:({player,plan})=>placeCup(player,plan.target)});
- registerProtectedBreakRoute({id:'mixology-v22',isBlock:block=>(block?.typeId===STATION||isCupBlock(block?.typeId)),capture:()=>undefined,
+ registerProtectedBreakRoute({id:'mixology-v22',guard:safely,isBlock:block=>(block?.typeId===STATION||isCupBlock(block?.typeId)),capture:()=>undefined,
   recover:({player,block})=>block.typeId===STATION?pickupShaker(player,block,{breaking:true}):takeCup(player,block)});
  world.afterEvents.itemStartUse.subscribe(nativeStart);
  world.afterEvents.itemReleaseUse.subscribe(nativeStop);

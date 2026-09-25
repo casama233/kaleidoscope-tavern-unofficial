@@ -15,6 +15,12 @@ jobs:
           ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
           path: .source-check/java
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: e4ce3cad4d8f2ac601a19eb7558fb791bcfcd855
+          path: .source-check/launch-baseline
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -33,7 +39,9 @@ jobs:
           git diff --exit-code -- runtime/
           version="$(python -c 'import json; print(json.load(open("release.json"))["version"])')"
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
-      - name: Build public test package
+      - name: Verify launch changes against pinned Java and released baseline
+        run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/launch-baseline
+      - name: Build repair candidate package
         run: python tools/build_release.py
       - name: Include matching source revision and validation evidence
         env:
@@ -45,11 +53,11 @@ jobs:
           version=json.loads(Path('release.json').read_text())['version']
           if isinstance(version,list):version='.'.join(map(str,version))
           Path('dist/SOURCE_COMMIT').write_text(os.environ['SOURCE_SHA']+'\n')
-          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json',f'STORAGE-VALIDATION-{version}.json',f'MOTION-STATIC-{version}.json'):
+          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json',f'STORAGE-VALIDATION-{version}.json',f'MOTION-STATIC-{version}.json',f'LAUNCH-VALIDATION-{version}.json'):
               path=Path('docs')/name
               if path.exists():shutil.copy2(path,Path('dist')/name)
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: Tavern-public-beta
+          name: Tavern-launch-repair-candidate
           path: dist/

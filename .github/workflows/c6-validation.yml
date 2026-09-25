@@ -31,7 +31,8 @@ jobs:
         run: |
           python tools/build_storage_visuals.py
           git diff --exit-code -- runtime/
-          python tools/check_storage_rendering.py --java-source .source-check/java --report docs/STORAGE-VALIDATION-0.6.40.json
+          version="$(python -c 'import json; print(json.load(open("release.json"))["version"])')"
+          python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Build public test package
         run: python tools/build_release.py
       - name: Include matching source revision and validation evidence
@@ -44,7 +45,7 @@ jobs:
           version=json.loads(Path('release.json').read_text())['version']
           if isinstance(version,list):version='.'.join(map(str,version))
           Path('dist/SOURCE_COMMIT').write_text(os.environ['SOURCE_SHA']+'\n')
-          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json',f'STORAGE-VALIDATION-{version}.json'):
+          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json',f'STORAGE-VALIDATION-{version}.json',f'MOTION-STATIC-{version}.json'):
               path=Path('docs')/name
               if path.exists():shutil.copy2(path,Path('dist')/name)
           PY

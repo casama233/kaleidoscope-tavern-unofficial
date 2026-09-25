@@ -65,8 +65,12 @@ def main():
     assert "['I','II','III','IV','V','VI','VII','VIII','IX','X']" in core
     adapter=(RT/'BP/scripts/bedrock/tipsy-visual.js').read_text()
     assert not re.search(r'import\s*\{[^}]*CameraShakeType',adapter)
-    assert 'camerashake add @s' in adapter and "typeof camera?.addShake==='function'" in adapter
-    for forbidden in ('camerashake stop','.stopShaking(','.setCamera(','.clear(','.setRotation(','addEffect('):
+    assert 'tipsyYawStep(p.getRotation(),track.offset,target)' in adapter
+    assert 'p.setRotation(step.rotation)' in adapter
+    assert 'system.runInterval(tickTipsyVisuals,1)' in adapter
+    assert 'InputPermissionCategory.Camera' in adapter and 'TIPSY_OPT_OUT_TAG' in adapter
+    assert 'if(track.failed)continue;' in adapter and 'stopIfEmpty()' in adapter
+    for forbidden in ('camerashake','.addShake(','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport('):
         assert forbidden not in adapter,('global/destructive/false camera fallback',forbidden)
     hooks=(RT/'BP/scripts/bedrock/custom-effects.js').read_text()
     assert 'pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID))' in hooks
@@ -81,7 +85,9 @@ def main():
     for p in RT.rglob('*.json'):read(p)
     subprocess.run(['node',str(ROOT/'tools/check_visual_rules.mjs')],cwd=ROOT,check=True)
     report={'staticVisualChecks':'passed','materials':result['summary'],'dyedIconAlphaCounts':{'transparent':181,'untintedGlass':57,'tintableLiquid':18},'localeKeys':locale_counts,'minecraftClientTested':False,'bdsTestedForThisRevision':False,'simulatedPlayerTestsRun':False}
-    (ROOT/f"docs/VALIDATION-{read(ROOT/'release.json')['version']}-VISUAL.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    version=read(ROOT/'release.json')['version']
+    (ROOT/f'docs/VISUAL-MATERIAL-AUDIT-{version}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (ROOT/f'docs/VALIDATION-{version}-VISUAL.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False))
 
 if __name__=='__main__':main()

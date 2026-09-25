@@ -62,7 +62,8 @@ jobs:
         run: |
           python tools/build_storage_visuals.py
           git diff --exit-code -- runtime/
-          python tools/check_storage_rendering.py --java-source .source-check/java --report docs/STORAGE-VALIDATION-0.6.40.json
+          version="$(python -c 'import json; print(json.load(open("release.json"))["version"])')"
+          python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Build complete BP and RP package
         run: python tools/build_release.py
       - name: Verify archive and include evidence
@@ -92,7 +93,7 @@ jobs:
               suffix = '-VISUAL' if stem == 'VALIDATION' else ''
               p = Path('docs') / f"{stem}-{r['version']}{suffix}.json"
               shutil.copy2(p, out / p.name)
-          for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC'):
+          for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')

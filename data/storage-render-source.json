@@ -307,7 +307,7 @@
     "runtime/BP/scripts/bedrock/mixology.js": "8da0a3cb0becde083315ef3ba2284d1541110ab40b106760dcc707ed5dccdac3",
     "runtime/BP/scripts/data/recipes.js": "e09f27b96634bcd54ebd8b2f7b5f83611c37a62452396308e699651ccac45f97",
     "runtime/BP/scripts/data/drink-effects.js": "c048fee5a8073964ba9d3c81e115fa1d9d845764388e78893ba33f234f3fba31",
-    "runtime/RP/animations/runtime_shaker.animation.json": "be54f94820f6823720fe35c554a565aa3b05bd90ba01e32ef0819867d30402e1"
+    "runtime/RP/animations/runtime_shaker.animation.json": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8"
   },
   "preservedTrees": {
     "runtime/RP/textures/": {
@@ -363,5 +363,13 @@
       "rum",
       "molotov"
     ]
+  },
+  "approvedMotionIntegration": {
+    "version": "0.6.41",
+    "baselineCommit": "4076925dc04f1ea32882c03393d0328754513f11",
+    "path": "runtime/RP/animations/runtime_shaker.animation.json",
+    "beforeSha256": "be54f94820f6823720fe35c554a565aa3b05bd90ba01e32ef0819867d30402e1",
+    "afterSha256": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
+    "change": "Only hold_third.grip.position[1]: -0.25 -> -1.5. All other animations verified by check_motion.py."
   }
 }

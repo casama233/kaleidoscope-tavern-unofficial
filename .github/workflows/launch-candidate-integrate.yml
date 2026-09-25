@@ -91,18 +91,18 @@ jobs:
           subprocess.run(['python','tools/build_release.py'],check=True)
           assert hashlib.sha256(p.read_bytes()).hexdigest()==digest
           Path('dist/ARCHIVE-VERIFICATION.json').write_text(json.dumps({'sha256':digest,'files':len(files),'fullRuntimeMatch':True,'repeatBuildIdentical':True,'bdsTest':False,'clientTest':False,'simulatedPlayerTest':False,'tipsyCameraRollRestored':False},indent=2)+'\n')
-          # Never silently convert this partial repair to a public release.
           request=json.loads(Path('.github/release-request.json').read_text())
           assert request['version']=='0.6.42'
           PY
-      - name: Commit canonical repair only on the audit branch
+      - name: Commit canonical source only; workflow updates use the authorized connector
         env:
           EXPECTED_HEAD: ${{ github.sha }}
         run: |
           set -euo pipefail
           test "$(git ls-remote origin refs/heads/fix/java-launch-tipsy-20260925 | cut -f1)" = "$EXPECTED_HEAD"
-          git rm .github/workflows/launch-candidate-integrate.yml
-          git add .github/workflows/c6-validation.yml package.json release.json runtime/ tools/ data/launch-repair-reference.json docs/LAUNCH-AUDIT-0.6.43.md docs/LAUNCH-VALIDATION-0.6.43.json docs/RELEASE-NOTES-0.6.43.md
+          git restore --source=HEAD --staged --worktree -- .github/
+          git diff --exit-code -- .github/
+          git add package.json release.json runtime/ tools/ data/launch-repair-reference.json docs/LAUNCH-AUDIT-0.6.43.md docs/LAUNCH-VALIDATION-0.6.43.json docs/RELEASE-NOTES-0.6.43.md
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Add 0.6.43 launch repair candidate; explicitly keep Tipsy visual parity unresolved'
           git push origin HEAD:refs/heads/fix/java-launch-tipsy-20260925
           git rev-parse HEAD > dist/SOURCE_COMMIT

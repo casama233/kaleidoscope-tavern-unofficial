@@ -1,6 +1,8 @@
-# 0.6.38-beta.1 — 酒館視覺修復候選版
+# 0.6.38-beta.1 — 酒館本體視覺修復公開測試版
 
-基於 0.6.37；適用 Minecraft Bedrock 26.50+ / manifest 1.26.50、`@minecraft/server` 2.7.0，前置仍為公開版 Cookery 1.0.6。保留原 BP/RP UUID、物品與方塊 ID、雞尾酒染色資料、配方、微醺時長和持久化狀態格式。這不是已完成客戶端驗收的正式版。
+PBR、特調雞尾酒圖示與微醺修正已合入酒館本體 `main`（PR #82），本次發布完整 BP／RP，不需要另外疊加視覺補丁。
+
+基於 0.6.37；適用 Minecraft Bedrock 26.50+ / manifest 1.26.50、`@minecraft/server` 2.7.0，前置仍為公開版 Cookery 1.0.6。保留原 BP/RP UUID、物品與方塊 ID、雞尾酒染色資料、配方、微醺時長和持久化狀態格式。此 GitHub Release 是公開測試版，不代表已完成客戶端驗收。
 
 ## 實際修正
 
@@ -20,7 +22,7 @@
 
 原版移植只有倒數資料，實作標記甚至仍為 `camera_unavailable`。新增每人最多每 5 tick 一次、每次最長 0.25 秒的輕微旋轉鏡頭晃動。喝更多酒不另起重疊迴圈。到期、喝奶、死亡、重生及離線停止後續脈衝，清理私人追蹤；不執行全域 camera clear / shake stop，不覆寫 player.json，也不增加假的反胃或移速效果。
 
-2.7.0 使用既有 `camerashake` 命令；只有在實際提供 `Camera.addShake` 的執行環境才使用新 API。`addShake` 是 2.10 新增功能，因此本包不直接匯入 2.7 不存在的 `CameraShakeType`。玩家的「允許鏡頭晃動」必須開啟；伺服器拒絕命令時會限速重試並留下診斷警告，不讓整包脚本崩潰。
+2.7.0 使用既有 `camerashake` 命令；只有在實際提供 `Camera.addShake` 的執行環境才使用新 API。`addShake` 是 2.10 新增功能，因此本包不直接匯入 2.7 不存在的 `CameraShakeType`。玩家的「允許鏡頭晃動」必須開啟；伺服器拒絕命令時會限速重試並留下診斷警告，不讓整包腳本崩潰。
 
 這是 Bedrock 的可見近似，不是 Java 原作的三波平滑 roll。清除效果後，已送出的最後一小段晃動可自然結束，最長約 0.25 秒。相機權限與網路延遲仍需實機驗證。
 
@@ -47,6 +49,8 @@ python tools/check_visuals.py
 ```
 
 靜態檢查包括 JSON、JavaScript 語法與引用、圖示 alpha、MER 尺寸與發光上限、透明像素不發光、語言鍵、清理掛鉤，以及 3,601 組相機脈衝純數學取樣。未進行模擬玩家互動測試；未宣稱 Windows、Android、Realms 或本次 BDS 實測。
+
+Release 隨附完整 `.mcaddon`、`SHA256SUMS`、版本說明、`SOURCE_COMMIT`、視覺驗證與材質稽核 JSON。發布工作流程從固定主分支提交重新打包、驗證每個 runtime 檔案，並回讀全部上傳附件比對位元組後才公開；不覆蓋既有 Release 或舊版下載檔案。
 
 ## 匯入與人工驗收
 

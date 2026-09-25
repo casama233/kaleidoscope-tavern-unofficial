@@ -1,0 +1,128 @@
+name: Publish verified Tavern release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/release-request.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: tavern-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate explicit release request
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          c = json.loads(Path('release.json').read_text())
+          r = json.loads(Path('.github/release-request.json').read_text())
+          assert r['version'] == c['version']
+          assert re.fullmatch(r'\d+\.\d+\.\d+', c['version'])
+          assert r['tag'] == f"v{c['version']}-beta.1"
+          assert c['artifact_suffix'] == 'beta1' and r['prerelease'] is True
+          assert re.fullmatch(r'[a-f0-9]{64}', r['expected_archive_sha256'])
+          assert isinstance(r['title'], str) and '\n' not in r['title'] and '\r' not in r['title']
+          values = {'RELEASE_TAG': r['tag'], 'RELEASE_TITLE': r['title'], 'RELEASE_VERSION': c['version'], 'RELEASE_ARCHIVE': f"Kaleidoscope_Tavern_Unofficial_{c['version']}_beta1.mcaddon"}
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as f:
+              for key, value in values.items():
+                  f.write(f'{key}={value}\n')
+          PY
+      - name: Install image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      - name: Validate exact committed runtime
+        run: |
+          python tools/check_release.py
+          git diff --exit-code -- runtime/
+      - name: Build complete BP and RP package
+        run: python tools/build_release.py
+      - name: Verify archive and include evidence
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, shutil, zipfile
+          from pathlib import Path
+          r = json.loads(Path('.github/release-request.json').read_text())
+          out = Path('dist')
+          archive = out / os.environ['RELEASE_ARCHIVE']
+          actual = hashlib.sha256(archive.read_bytes()).hexdigest()
+          assert actual == r['expected_archive_sha256'], (actual, r['expected_archive_sha256'])
+          root = Path('runtime')
+          files = {p.relative_to(root).as_posix(): p for p in root.rglob('*') if p.is_file()}
+          with zipfile.ZipFile(archive) as z:
+              assert len(z.namelist()) == len(set(z.namelist()))
+              assert set(z.namelist()) == set(files)
+              for name, p in files.items():
+                  assert not p.is_symlink() and z.read(name) == p.read_bytes(), name
+              version = [int(n) for n in r['version'].split('.')]
+              for side in ('BP', 'RP'):
+                  assert json.loads(z.read(f'{side}/manifest.json'))['header']['version'] == version
+          (out / 'SOURCE_COMMIT').write_text(os.environ['SOURCE_SHA'] + '\n')
+          for stem in ('VALIDATION', 'VISUAL-MATERIAL-AUDIT'):
+              suffix = '-VISUAL' if stem == 'VALIDATION' else ''
+              p = Path('docs') / f"{stem}-{r['version']}{suffix}.json"
+              shutil.copy2(p, out / p.name)
+          print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
+          PY
+      - name: Stage assets, verify uploaded bytes, then publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'Release already exists. Refusing to replace published or draft assets.' >&2
+            exit 1
+          fi
+          gh release create "$RELEASE_TAG" dist/* \
+            --repo "$GITHUB_REPOSITORY" --target "$SOURCE_SHA" \
+            --title "$RELEASE_TITLE" --notes-file dist/RELEASE-NOTES.md \
+            --draft --prerelease
+          verify_dir="$RUNNER_TEMP/tavern-release-readback"
+          mkdir -p "$verify_dir"
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir "$verify_dir"
+          export VERIFY_DIR="$verify_dir"
+          python - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          local = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('dist').iterdir() if p.is_file()}
+          remote = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(os.environ['VERIFY_DIR']).iterdir() if p.is_file()}
+          assert local == remote, 'Release upload does not exactly match the verified build'
+          print(f'All {len(local)} uploaded assets match the build byte-for-byte.')
+          PY
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft=false --prerelease --latest=false
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')" = "$SOURCE_SHA"
+          gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --json url,tagName,isDraft,isPrerelease,publishedAt,assets > published-release.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r = json.loads(Path('published-release.json').read_text())
+          assert r['isDraft'] is False and r['isPrerelease'] is True and r['publishedAt']
+          print(r['url'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-published-release-evidence
+          path: |
+            dist/
+            published-release.json

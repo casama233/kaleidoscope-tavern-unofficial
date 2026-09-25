@@ -2,7 +2,7 @@
 
 Minecraft 基岩版非官方移植，作為 [森羅物語廚房基岩移植版（Kaleidoscope Cookery (Unofficial)）](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) 的附屬使用。
 
-目前分支為 **0.6.38-beta.1 視覺修復候選版，尚待遊戲客戶端驗收**。玩法、模型及素材以 Java 原作為依據；本專案未代表原作者、廚房移植作者、Mojang 或 Microsoft。
+目前為 **0.6.38-beta.1 公開測試版**。PBR、特調雞尾酒圖示與微醺視覺修正已整合到酒館本體的完整 BP／RP，不需要另外疊加視覺補丁。玩法、模型及素材以 Java 原作為依據；本專案未代表原作者、廚房移植作者、Mojang 或 Microsoft。
 
 ## 內容
 
@@ -14,8 +14,8 @@ Minecraft 基岩版非官方移植，作為 [森羅物語廚房基岩移植版�
 
 1. 使用 Minecraft 基岩版 **26.50 或更新版**。
 2. 另外安裝上述 CurseForge 頁面的 **Kaleidoscope Cookery (Unofficial) 1.0.6**。
-3. 匯入酒館 `.mcaddon`，在世界啟用 BP 與 RP，兩者均置於廚房對應包上方。
-4. 進入世界後，使用廚房指南查看酒館章節。
+3. 備份世界並離開世界後匯入酒館 `.mcaddon`；啟用對應的 0.6.38 BP 與 RP，兩者均置於廚房對應包上方，不要同時啟用舊版酒館。
+4. 進入世界後，使用廚房指南查看酒館章節。微醺需要開啟遊戲設定中的「允許鏡頭晃動」。
 
 目前公開測試版未以 Realms 或所有手機機型完成驗收。舊正式服整合包使用本地修改的廚房 UUID／1.0.7；升級前請看 [安裝與遷移說明](docs/INSTALLATION.md)。
 
@@ -29,14 +29,14 @@ python3 tools/check_release.py
 python3 tools/build_release.py
 ```
 
-結果在 `dist/`。當前 `runtime/` 即實際打包來源；不再從舊提交、伺服器補丁和工作區覆蓋檔拼出成品。舊工具與階段紀錄已歸檔。
+結果在 `dist/`。當前 `runtime/` 即實際打包來源；不再從舊提交、伺服器補丁和工作區覆蓋檔拼出成品。舊工具與階段紀錄已歸檔。GitHub 發布工作流程只在主分支明確更新 `.github/release-request.json` 或手動啟動時執行；發布前檢查固定版本、成品雜湊和上傳後的逐檔內容，不覆蓋既有 Release。
 
 ## 發布狀態與授權
 
-詳見 [版本說明](docs/RELEASE-NOTES-0.6.38.md)、[驗收狀態](docs/RELEASE-READINESS.md)、[原作與素材署名](CREDITS.md)。代碼與美術使用不同授權，字型另依各自的第三方條款。0.6.38 以靜態檢查驗證；既有 BDS 1.26.51.1 載入紀錄屬於 0.6.37，不代表本版已通過 BDS 或客戶端實測。
+詳見 [版本說明](docs/RELEASE-NOTES-0.6.38.md)、[驗收狀態](docs/RELEASE-READINESS.md)、[原作與素材署名](CREDITS.md)。代碼與美術使用不同授權，字型另依各自的第三方條款。0.6.38 以靜態檢查驗證；既有 BDS 1.26.51.1 載入紀錄屬於 0.6.37，不代表本版已通過 BDS 或客戶端實測。微醺採基岩版旋轉晃動近似，並非 Java 原作的平滑 roll 完全復刻。
 
 ## 語言與下載
 
 支援英文、簡體中文、繁體中文，每種語言均有 1,684 個語言鍵。告示牌編輯介面跟隨遊戲語言，圖鑑跟隨廚房本體的語言選項。日文及俄文保留部分舊翻譯，未列為完整支援。
 
-[上一個已發布版本 0.6.37-beta.1（不是本候選版）](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon)。
+[下載 0.6.38-beta.1 完整酒館套件](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/download/v0.6.38-beta.1/Kaleidoscope_Tavern_Unofficial_0.6.38_beta1.mcaddon) · [GitHub Release 與驗證報告](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.38-beta.1)。

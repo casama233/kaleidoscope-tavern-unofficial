@@ -4,7 +4,7 @@ An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion
 
 [繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.38.md) · [Credits](CREDITS.md)
 
-**Visual-fix candidate: 0.6.38-beta.1 (not yet client-accepted).** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
+**Current public beta: 0.6.38-beta.1.** PBR, signature cocktail icons, and Slightly Tipsy visual fixes are integrated into the complete core BP/RP; no separate visual overlay pack is required. Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
 
 ## Features
 
@@ -18,7 +18,8 @@ An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion
 
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load validation targets BDS **1.26.51.1**.
 - **Kaleidoscope Cookery (Unofficial) 1.0.6**, installed separately from the linked project.
-- Both Tavern's behavior and resource packs, above Cookery in their respective pack stacks.
+- Both Tavern's 0.6.38 behavior and resource packs, above Cookery in their respective pack stacks. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
+- Enable **Allow Camera Shake** for the Slightly Tipsy camera feedback.
 
 The public beta uses Cookery's original pack UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing that bundle. No Cookery pack, world backup, credentials, server executable, or other server add-on is included.
 
@@ -36,11 +37,15 @@ The build packages the committed `runtime/BP` and `runtime/RP` directly and writ
 
 The checks parse resources, validate references and scripts, and inspect guide data. They do not simulate player interactions. Historical generators, tests and reports are archived under `history/pre-release-0.6.29/`; they are not the current build entry point.
 
+Publication runs only for an explicit update to `.github/release-request.json` on `main`, or a manual workflow run. It validates the requested version and archive digest, stages all assets, downloads and verifies every uploaded asset, then publishes the release. Existing releases are never overwritten.
+
 ## Public beta status
 
-This candidate is checked statically. BDS 1.26.51.1 load evidence belongs to 0.6.37, not this revision; neither BDS nor real-client validation is claimed for 0.6.38. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
+This version is checked statically. BDS 1.26.51.1 load evidence belongs to 0.6.37, not this revision; neither BDS nor real-client validation is claimed for 0.6.38. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
 
-[Last published beta (0.6.37; not this candidate)](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon). Android rendering, Realms, and all device/pack combinations remain public-test targets. Slightly Tipsy now has bounded rotational camera feedback (not the exact Java roll waveform); the existing gameplay adapters retain their documented cross-edition limitations. See [release readiness](docs/RELEASE-READINESS.md).
+[Download 0.6.38-beta.1](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/download/v0.6.38-beta.1/Kaleidoscope_Tavern_Unofficial_0.6.38_beta1.mcaddon) · [GitHub Release and validation evidence](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.38-beta.1).
+
+Android rendering, Realms, and all device/pack combinations remain public-test targets. Slightly Tipsy now has bounded rotational camera feedback, not the exact Java roll waveform. The existing gameplay adapters retain their documented cross-edition limitations. See [release readiness](docs/RELEASE-READINESS.md).
 
 ## Licensing
 

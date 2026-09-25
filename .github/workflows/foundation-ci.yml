@@ -1,0 +1,58 @@
+name: Shared foundation regression
+on:
+  push:
+    branches: [refactor/shared-foundation-20260925]
+  pull_request:
+    paths:
+      - 'runtime/**'
+      - 'sdk/**'
+      - 'data/**'
+      - 'tools/**'
+      - '.github/workflows/foundation-ci.yml'
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 325a847760640266651b78cd2ff1271cfdfc797e
+          path: liquor
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record exact integration inputs
+        run: |
+          mkdir -p evidence
+          git -C tavern rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C liquor rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Cross-pack script regressions (not Minecraft client or BDS)
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -o pipefail
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+      - name: Simple effect bar and paired name checks (no client rendering)
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -o pipefail
+          python ../liquor/tools/build_effect_names.py --check
+          node --test tools/effect-bar.test.mjs 2>&1 | tee ../evidence/effect-bar-tests.tap
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shared-foundation-regressions
+          path: evidence/
+          retention-days: 14

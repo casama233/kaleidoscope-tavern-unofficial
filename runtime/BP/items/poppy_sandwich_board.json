@@ -5,7 +5,7 @@
       "identifier": "kaleidoscope_tavern:poppy_sandwich_board",
       "menu_category": {
         "category": "equipment",
-        "group": "kaleidoscope_tavern:itemGroup.name.tavern_decor"
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_boards"
       }
     },
     "components": {
@@ -14,7 +14,16 @@
         "value": "item.kaleidoscope_tavern:poppy_sandwich_board.name"
       },
       "minecraft:max_stack_size": 64,
-      "kaleidoscope_tavern:place_writing_board": {}
+      "kaleidoscope_tavern:place_writing_board": {},
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:poppy_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
     }
   }
 }

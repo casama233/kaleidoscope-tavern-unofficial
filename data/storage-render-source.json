@@ -304,7 +304,7 @@
     "runtime/BP/scripts/bedrock/tap-sources.js": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
     "runtime/BP/scripts/core/inventory.js": "243bb0e2669f6b5e4dfc374b8fb0311830c7277831af20fa1ff92b7580ee60dc",
     "runtime/BP/scripts/core/mixology.js": "ee528deaf752c43e94e49995474c84c835516ce80eae7ed8c974697d5118f58e",
-    "runtime/BP/scripts/bedrock/mixology.js": "8da0a3cb0becde083315ef3ba2284d1541110ab40b106760dcc707ed5dccdac3",
+    "runtime/BP/scripts/bedrock/mixology.js": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
     "runtime/BP/scripts/data/recipes.js": "e09f27b96634bcd54ebd8b2f7b5f83611c37a62452396308e699651ccac45f97",
     "runtime/BP/scripts/data/drink-effects.js": "c048fee5a8073964ba9d3c81e115fa1d9d845764388e78893ba33f234f3fba31",
     "runtime/RP/animations/runtime_shaker.animation.json": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8"
@@ -371,5 +371,10 @@
     "beforeSha256": "be54f94820f6823720fe35c554a565aa3b05bd90ba01e32ef0819867d30402e1",
     "afterSha256": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
     "change": "Only hold_third.grip.position[1]: -0.25 -> -1.5. All other animations verified by check_motion.py."
+  },
+  "approvedCreativePickIntegration": {
+    "version": "0.6.43",
+    "baselineCommit": "a2586770bcd5a9970b49b9aed242bb48d3bcc34d",
+    "change": "Append read-only pick accessors; pre-existing gameplay body unchanged. See data/pick-block-prefixes.json."
   }
 }

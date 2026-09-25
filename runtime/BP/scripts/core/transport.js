@@ -1,9 +1,10 @@
 import {check,integer,text,canonical,utf8Bytes,digest,TavernError} from './util.js';
 export const EVENTS=Object.freeze({ping:'kaleidoscope_tavern:api_ping',ready:'kaleidoscope_tavern:api_ready',begin:'kaleidoscope_tavern:extension_begin',chunk:'kaleidoscope_tavern:extension_chunk',commit:'kaleidoscope_tavern:extension_commit',ack:'kaleidoscope_tavern:extension_ack',unregister:'kaleidoscope_tavern:extension_unregister'});
-const MAX_PACKET_BYTES=1900,MAX_DATA_BYTES=192000,TTL=600;
+const MAX_PACKET_BYTES=1900,MAX_DATA_BYTES=262144,TTL=600;
 export function packetsFor(extension,revision='r1'){
  const data=canonical(extension);check(utf8Bytes(data)<=MAX_DATA_BYTES,'PAYLOAD_TOO_LARGE');
  const parts=[];let part='';for(const c of data){if(utf8Bytes(JSON.stringify(part+c))>1100){parts.push(part);part='';}part+=c;}if(part)parts.push(part);
+ check(parts.length<=512,'TOO_MANY_PARTS');
  const info={api:1,source:extension.source,revision,parts:parts.length,bytes:utf8Bytes(data),digest:digest(data)};
  const packets=[{id:EVENTS.begin,message:JSON.stringify(info)},...parts.map((data,index)=>({id:EVENTS.chunk,message:JSON.stringify({source:info.source,revision,index,data})})),{id:EVENTS.commit,message:JSON.stringify({source:info.source,revision})}];
  for(const p of packets)check(utf8Bytes(p.message)<=MAX_PACKET_BYTES,'PACKET_TOO_LARGE');return packets;
@@ -19,7 +20,7 @@ export class ExtensionTransport {
   if(eventId===EVENTS.unregister){check(p.api===1,'API_VERSION_MISMATCH');this.pending.delete(p.source);return {ok:true,source:p.source,removed:this.registry.remove(p.source)};}
   text(p.revision,64);check(/^[a-zA-Z0-9_.-]+$/.test(p.revision),'INVALID_REVISION');
   if(eventId===EVENTS.begin){
-   check(p.api===1,'API_VERSION_MISMATCH');integer(p.parts,1,256);integer(p.bytes,2,MAX_DATA_BYTES);check(/^[0-9a-f]{8}$/.test(p.digest),'INVALID_DIGEST');
+   check(p.api===1,'API_VERSION_MISMATCH');integer(p.parts,1,512);integer(p.bytes,2,MAX_DATA_BYTES);check(/^[0-9a-f]{8}$/.test(p.digest),'INVALID_DIGEST');
    check(this.pending.has(p.source)||this.pending.size<16,'PENDING_LIMIT');
    this.pending.set(p.source,{...p,tick,partsData:new Map(),actualBytes:0});return null;
   }

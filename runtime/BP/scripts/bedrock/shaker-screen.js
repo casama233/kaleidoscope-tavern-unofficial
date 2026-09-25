@@ -53,3 +53,9 @@ export function clearShakerPlayer(player){
  const id=typeof player==='string'?player:player.id;
  messages.delete(id);last.delete(id);
 }
+
+/** Read-only foreground ownership for the simple effect bar, not a second writer. */
+export function isTavernHudBusy(player,tick=system.currentTick){
+ const message=messages.get(player.id),sent=last.get(player.id);
+ return (message?.until??0)>tick||(sent?.tick??-1000)+20>tick;
+}

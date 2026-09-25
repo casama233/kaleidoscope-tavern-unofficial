@@ -1,0 +1,33 @@
+name: Pick Block source snapshot
+on:
+  push:
+    branches: [refactor/shared-foundation-20260925]
+    paths: ['.github/workflows/pick-block-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: e2bab844d9d3fa5521f19612188e04b1acc8cb1e
+          path: liquor
+          persist-credentials: false
+      - name: Archive exact sources
+        run: |
+          mkdir evidence
+          git -C tavern archive --format=tar.gz --output="$PWD/evidence/tavern.tar.gz" HEAD
+          git -C liquor archive --format=tar.gz --output="$PWD/evidence/liquor.tar.gz" HEAD
+          git -C tavern rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C liquor rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pick-block-source-snapshot
+          path: evidence/
+          retention-days: 2

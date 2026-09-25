@@ -73,7 +73,11 @@ def audit(roots):
         item=j.get('minecraft:item',{}).get('components',{})
         if 'minecraft:block_placer' in item:
             placer=item['minecraft:block_placer'];reference(placer.get('block'),f'{p}: block_placer')
-            for target in placer.get('use_on',[]):reference(target,f'{p}: block_placer.use_on')
+            for target in placer.get('use_on',[]):
+                # Official block descriptors may be tag/Molang-only (no name).
+                if isinstance(target,dict) and 'name' not in target and isinstance(target.get('tags'),str) and target['tags'].strip():
+                    continue
+                reference(target,f'{p}: block_placer.use_on')
         def walk(v,path):
             if isinstance(v,dict):
                 for key,value in v.items():

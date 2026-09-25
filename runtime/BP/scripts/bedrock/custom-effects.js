@@ -1,9 +1,11 @@
+import {migrateLegacyEffects} from '../core/extension-foundation.js';
+import {check,digest} from '../core/util.js';
 import {TIPSY_ID} from '../core/tipsy-visual.js';
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics} from './tipsy-visual.js';
-import {externalEffectSource} from '../core/extension-content.js';
+import {externalEffectSource,externalEffectDefinition} from '../core/extension-content.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,ItemStack,system,world} from '@minecraft/server';
+import {EquipmentSlot,ItemStack,system,world,ScriptEventSource} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map();
@@ -11,11 +13,14 @@ export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
 export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
-function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
+function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length||state.migrations||state.legacyClosed?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
 export function statusNow(p){return statusWindow(p).state;}
-export function clearCustomEffects(p){forgetTipsyVisual(p.id);write(p,{schema:1,entries:[]});tracks.delete(p.id);heelsSteps.delete(p.id);}
+export function clearCustomEffects(p){let previous;try{previous=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY));}catch{previous={schema:1,entries:[]};}forgetTipsyVisual(p.id);write(p,{...previous,schema:1,entries:[],legacyClosed:true});tracks.delete(p.id);heelsSteps.delete(p.id);}
 export function applyCustomEffect(p,row){
+ if(p?.typeId!=='minecraft:player')return false;
+ const definition=externalEffectDefinition(row.effect);
+ if(definition?.mode==='timed'){if(row.duration<=0)return false;write(p,addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier));customEffectDiagnostics.applied++;return true;}
  const source=externalEffectSource(row.effect);if(source){system.sendScriptEvent(source+':apply_effect',JSON.stringify({entity:p.id,effect:row.effect,duration:row.duration,amplifier:row.amplifier}));return true;}
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
  if(p?.typeId!=='minecraft:player')return false;
@@ -192,6 +197,19 @@ export function handleKill(event){
   health.setCurrentValue(Math.min(health.effectiveMax,health.currentValue+amount));customEffectDiagnostics.killHeals++;
  }catch(e){error(e);}
 }
+/** Pack-scoped old data is transferred by its owner. A receipt shares the SAME
+ * canonical property as effects, preventing replay even if ACK or cleanup is lost.
+ */
+export function importExternalEffects(p,source,raw,definitions){
+ check(raw===null||typeof raw==='string','LEGACY_EFFECT_SCHEMA');
+ let state=statusNow(p);if(state.migrations?.[source]!==undefined){check(state.legacyClosed||raw===null||state.migrations[source]===digest(raw),'LEGACY_EFFECT_CHANGED');return;}
+ const rows=state.legacyClosed||raw===null?[]:migrateLegacyEffects(raw,source,definitions,world.getAbsoluteTime());
+ for(const row of rows)state=addStatus(state,row.id,row.ticks,row.amplifier);
+ state.migrations={...state.migrations,[source]:digest(raw??'null')};
+ const previous=p.getDynamicProperty(CUSTOM_STATUS_KEY),track=tracks.get(p.id);
+ try{write(p,state);check(p.getDynamicProperty(CUSTOM_STATUS_KEY)===JSON.stringify(state),'EFFECT_WRITE_FAILED');}
+ catch(error){p.setDynamicProperty(CUSTOM_STATUS_KEY,previous);if(track)tracks.set(p.id,track);else tracks.delete(p.id);throw error;}
+}
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));pruneTipsyVisuals(seen);
  for(const p of players)try{
@@ -203,7 +221,7 @@ export function tickCustomEffects(){
   if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}
   if(!activeStatus(nextState,'kaleidoscope_tavern:high_heels'))heelsSteps.delete(p.id);
   pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID));
-  if(!nextState.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
+  if(!nextState.entries.length){write(p,nextState);continue;}
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
   write(p,nextState);
   if(activeStatus(nextState,'kaleidoscope_tavern:xp_drain')){
@@ -220,6 +238,13 @@ export function tickCustomEffects(){
  for(const[id,t]of deaths)if(system.currentTick-t>100)deaths.delete(id);
 }
 export function installCustomEffects(){
+ system.afterEvents.scriptEventReceive.subscribe(event=>{
+  if(event.id!=='kaleidoscope_tavern:effect_apply'||event.sourceType!==ScriptEventSource.Server||event.message.length>1024)return;
+  try{const row=JSON.parse(event.message),definition=externalEffectDefinition(row.effect);if(!definition)return;
+   if(!Number.isFinite(row.duration)||row.duration<0||row.duration>1000000||!Number.isInteger(row.amplifier)||row.amplifier<0||row.amplifier>255)return;
+   const p=world.getEntity(row.entity);if(p?.typeId==='minecraft:player')applyCustomEffect(p,row);
+  }catch(e){error(e);}
+ },{namespaces:['kaleidoscope_tavern']});
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));

@@ -80,3 +80,8 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check
 subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_pack_compat.py')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')
+
+# Native inventory grouping is data-only; prevent a return to the mixed decor bucket.
+subprocess.run([sys.executable,str(ROOT/'tools/creative/catalog.py')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/pick_block.py')],cwd=ROOT,check=True)

@@ -1,0 +1,111 @@
+name: Apply verified creative pick repair
+on:
+  push:
+    branches: [delivery/creative-pick-20260925]
+permissions:
+  contents: read
+jobs:
+  apply:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' || github.repository == 'casama233/kaleidoscope-world-liquor-unofficial'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: delivery/creative-pick-20260925
+          path: delivery
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: a2586770bcd5a9970b49b9aed242bb48d3bcc34d
+          path: tavern
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: e2bab844d9d3fa5521f19612188e04b1acc8cb1e
+          path: liquor
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Verify and apply exact reviewed source trees
+        run: |
+          mkdir evidence
+          ln -s tavern tavern-src
+          python - <<'PY'
+          import hashlib,json,lzma,subprocess
+          from pathlib import Path
+          raw=b''.join((Path('delivery/.github')/f'pick-delivery-part{i}').read_bytes() for i in (1,2))
+          assert hashlib.sha256(raw).hexdigest()=='aee1a3a9dadb96b95c821b50da2708a1935d109ffce73049df35d15a47bf76c3'
+          patches=json.loads(lzma.decompress(raw))
+          trees={'tavern':'3765ec63038770e2716b3e33453c3676348b166a','liquor':'4d557b34d39f64a35868e623389fee2cc2986a89'}
+          for repo,wanted in trees.items():
+              patch=patches[repo].encode()
+              subprocess.run(['git','-C',repo,'apply','--check','--index','--unidiff-zero'],input=patch,check=True)
+              subprocess.run(['git','-C',repo,'apply','--index','--unidiff-zero'],input=patch,check=True)
+              actual=subprocess.check_output(['git','-C',repo,'write-tree'],text=True).strip()
+              assert actual==wanted,(repo,actual,wanted)
+              Path(f'evidence/{repo}-reviewed-tree').write_text(actual+'\n')
+          PY
+      - name: Paired regressions and reproducible packages (no game client)
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -euo pipefail
+          cd tavern
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs 2>&1 | tee ../evidence/paired-tests.tap
+          node --test tools/effect-bar.test.mjs 2>&1 | tee ../evidence/effect-bar.tap
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+          python tools/test_pick_block.py 2>&1 | tee ../evidence/native-tests.log
+          python tools/check_release.py 2>&1 | tee ../evidence/tavern-check.log
+          python tools/build_storage_visuals.py
+          git diff --exit-code -- runtime/
+          python tools/build_release.py
+          cd ../liquor
+          python tools/build_storage_visuals.py
+          python tools/rebuild_guide.py
+          git diff --exit-code -- runtime/
+          python tools/check_release.py 2>&1 | tee ../evidence/liquor-check.log
+          python tools/build_release.py
+          python tools/verify_release.py --development
+          cd ..
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          for repo in ('tavern','liquor'):
+              req=json.loads(Path(repo,'.github/release-request.json').read_text())
+              files=list(Path(repo,'dist').glob('*.mcaddon'))
+              assert len(files)==1
+              assert hashlib.sha256(files[0].read_bytes()).hexdigest()==req['expected_archive_sha256']
+          PY
+      - name: Fast-forward only the authorized paired branch
+        env:
+          OWN_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ "$OWN_REPOSITORY" = casama233/kaleidoscope-tavern-unofficial ]; then
+            repo=tavern; base=a2586770bcd5a9970b49b9aed242bb48d3bcc34d
+          else
+            repo=liquor; base=e2bab844d9d3fa5521f19612188e04b1acc8cb1e
+          fi
+          target=refs/heads/refactor/shared-foundation-20260925
+          current=$(git -C "$repo" ls-remote origin "$target" | cut -f1)
+          test "$current" = "$base"
+          git -C "$repo" config user.name 'github-actions[bot]'
+          git -C "$repo" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$repo" commit -m 'fix: restore canonical creative pick items and prepare paired test release'
+          git -C "$repo" push origin "HEAD:$target"
+          git -C "$repo" rev-parse HEAD > evidence/DELIVERED_COMMIT
+          printf '%s\n' "$OWN_REPOSITORY" > evidence/DELIVERED_REPOSITORY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verified-creative-pick-delivery
+          path: evidence/
+          retention-days: 14

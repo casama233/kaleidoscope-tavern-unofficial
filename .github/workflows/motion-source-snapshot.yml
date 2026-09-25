@@ -1,0 +1,45 @@
+name: Motion source snapshot
+on:
+  push:
+    branches: ['fix/java-motion-20260925']
+    paths: ['.github/workflows/motion-source-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Archive exact tracked source and official item transform references
+        run: |
+          mkdir -p motion-source
+          git archive HEAD -o motion-source/tavern-source.zip
+          python - <<'PY'
+          import hashlib, io, json, urllib.request, zipfile
+          from pathlib import Path
+          out = Path('motion-source')
+          def get(url):
+              with urllib.request.urlopen(url, timeout=60) as r:
+                  return r.read()
+          manifest = json.loads(get('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'))
+          version = next(v for v in manifest['versions'] if v['id']=='1.20.1')
+          data = json.loads(get(version['url']))
+          download = data['downloads']['client']
+          raw = get(download['url'])
+          assert hashlib.sha1(raw).hexdigest()==download['sha1']
+          paths = ['assets/minecraft/models/block/block.json','assets/minecraft/models/block/cube_all.json','assets/minecraft/models/item/generated.json','assets/minecraft/models/item/blue_ice.json','assets/minecraft/models/item/apple.json']
+          with zipfile.ZipFile(io.BytesIO(raw)) as z:
+              for name in paths:
+                  p=out/'mojang'/name
+                  p.parent.mkdir(parents=True,exist_ok=True)
+                  p.write_bytes(z.read(name))
+          (out/'mojang-source.json').write_text(json.dumps({'version':'1.20.1','url':download['url'],'sha1':download['sha1'],'extracted':paths},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-motion-source
+          path: motion-source/
+          retention-days: 3

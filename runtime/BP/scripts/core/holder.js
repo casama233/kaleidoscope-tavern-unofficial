@@ -4,11 +4,12 @@ import {parseBottle} from './bottles.js';
 export const NS='kaleidoscope_tavern',HOLDER_BLOCK=NS+':holder',HOLDER_KIND=NS+':holder_kind';
 export const HOLDER_BASES=Object.freeze(["champagne","glowflower_brew","honey_wine","ice_wine","luminous_bride","plum_wine","polaris_sweet_white","red_queen","sakura_wine","sauvignon_blanc_dry_white","sherry","vinegar","whiskey","wine"]);
 export const HOLDER_BLOCKED_BASES=Object.freeze(["brandy","carignan","mother_snow","miners_star","madame_shexiang","sunset_glow","riesling_dry_white","sweet_berry_wine","vodka","rum"]);
-export const HOLDER_KINDS=Object.freeze(['empty_bottle',...HOLDER_BASES,'molotov']);
+// Append new kinds only: persisted holder kinds and all earlier bottle indices are stable.
+export const HOLDER_KINDS=Object.freeze(['empty_bottle',...HOLDER_BASES,'molotov','watermelon_juice']);
 export const STORAGE_BOTTLE_BASES=Object.freeze([...HOLDER_BASES,...HOLDER_BLOCKED_BASES]);
-export const STORAGE_BOTTLE_KINDS=Object.freeze(['empty_bottle',...STORAGE_BOTTLE_BASES,'molotov']);
-export function storageBottleItem(id){const ext=externalDrink(id);if(ext)return ext;if(id===NS+':molotov')return {item:id,base:'molotov',kind:STORAGE_BOTTLE_KINDS.indexOf('molotov')+1};if(id===NS+':empty_bottle')return {item:id,base:'empty_bottle',kind:1};const b=parseBottle(id);if(!b||!STORAGE_BOTTLE_BASES.includes(b.base))return undefined;return {...b,item:id,kind:STORAGE_BOTTLE_KINDS.indexOf(b.base)+1};}
-export function holderItem(id){const ext=externalDrink(id);if(ext)return ext.compact?ext:undefined;if(id===NS+':molotov')return {item:id,base:'molotov',kind:HOLDER_KINDS.indexOf('molotov')+1};const b=storageBottleItem(id);return b&&(b.base==='empty_bottle'||HOLDER_BASES.includes(b.base))?b:undefined;}
+export const STORAGE_BOTTLE_KINDS=Object.freeze(['empty_bottle',...STORAGE_BOTTLE_BASES,'molotov','watermelon_juice']);
+export function storageBottleItem(id){const ext=externalDrink(id);if(ext)return ext;if(id===NS+':molotov')return {item:id,base:'molotov',kind:STORAGE_BOTTLE_KINDS.indexOf('molotov')+1};if(id===NS+':empty_bottle')return {item:id,base:'empty_bottle',kind:1};const b=parseBottle(id);if(!b||!STORAGE_BOTTLE_KINDS.includes(b.base))return undefined;return {...b,item:id,kind:STORAGE_BOTTLE_KINDS.indexOf(b.base)+1};}
+export function holderItem(id){const ext=externalDrink(id);if(ext)return ext.compact?ext:undefined;if(id===NS+':molotov')return {item:id,base:'molotov',kind:HOLDER_KINDS.indexOf('molotov')+1};const b=storageBottleItem(id);return b&&HOLDER_KINDS.includes(b.base)?{...b,kind:HOLDER_KINDS.indexOf(b.base)+1}:undefined;}
 export function holderBlockedItem(id){const ext=externalDrink(id);if(ext)return !ext.compact;const b=parseBottle(id);return !!b&&HOLDER_BLOCKED_BASES.includes(b.base);}
 export function holderState(item,revision=0){const h=holderItem(item);check(h,'NOT_HOLDER_BOTTLE');check(Number.isInteger(revision)&&revision>=0,'HOLDER_REVISION');return {schema:1,revision,item:h.item,kind:h.kind};}
 export function validateHolderState(s){check(s&&s.schema===1,'HOLDER_SCHEMA');check(Number.isInteger(s.revision)&&s.revision>=0,'HOLDER_REVISION');const h=holderItem(s.item);check(h&&h.kind===s.kind,'HOLDER_ITEM_KIND');return s;}

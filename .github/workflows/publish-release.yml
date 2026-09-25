@@ -22,6 +22,12 @@ jobs:
           ref: ${{ github.sha }}
           fetch-depth: 1
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: .source-check/java
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -52,6 +58,11 @@ jobs:
         run: |
           python tools/check_release.py
           git diff --exit-code -- runtime/
+      - name: Verify original Java source matrices and reproducible storage geometry
+        run: |
+          python tools/build_storage_visuals.py
+          git diff --exit-code -- runtime/
+          python tools/check_storage_rendering.py --java-source .source-check/java --report docs/STORAGE-VALIDATION-0.6.40.json
       - name: Build complete BP and RP package
         run: python tools/build_release.py
       - name: Verify archive and include evidence
@@ -80,6 +91,9 @@ jobs:
           for stem in ('VALIDATION', 'VISUAL-MATERIAL-AUDIT'):
               suffix = '-VISUAL' if stem == 'VALIDATION' else ''
               p = Path('docs') / f"{stem}-{r['version']}{suffix}.json"
+              shutil.copy2(p, out / p.name)
+          for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC'):
+              p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
           PY

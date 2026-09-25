@@ -39,10 +39,10 @@ assert "cocktail_cup',{\n  onPlayerInteract:nativeEmptyHandBlockUse" in source
 assert "locks.with([key,player.id]" in source
 assert "id:'mixology-v22',guard:safely" in source
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
-report={'version':'0.6.39','baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
+report={'version':read(ROOT/'release.json')['version'],'baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
 'preservedAnimations':list(baseline['unchangedShakerAnimations']),'thirdPersonCandidate':third,
 'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecond':2,'ambientParticlesPerSecond':20,
 'cupAbsentRecordRecovery':'structural checks passed; real event execution not tested',
 'newPlayerEntityOverride':False,'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}
-(ROOT/'docs/REPAIR-STATIC-0.6.39.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+(ROOT/f"docs/REPAIR-STATIC-{report['version']}.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False))

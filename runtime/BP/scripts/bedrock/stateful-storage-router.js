@@ -75,7 +75,7 @@ export function popRandomStoredBottle({
  * This adapter owns the repeated interaction ordering/snapshot/defer contract; break/drop/sound is delegated to the shared protected-break router.
  */
 export function installStatefulStorageRoutes({
- routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=true
+ routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=true,failClosed=false
 }){
  check(typeof routeId==='string'&&routeId,'INVALID_STORAGE_ROUTE');
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function'&&typeof shouldInteract==='function','INVALID_STORAGE_ROUTE');
@@ -85,7 +85,7 @@ export function installStatefulStorageRoutes({
   const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
   const face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
   let revision,consume=false;
-  try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch{return;}
+  try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch(error){if(failClosed){e.cancel=true;if(e.isFirstEvent!==false)system.run(()=>safe(e.player,()=>{throw error;}));}return;}
   if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;
   const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
   system.run(()=>safe(player,()=>{

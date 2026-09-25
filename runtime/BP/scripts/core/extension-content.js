@@ -2,7 +2,7 @@
 import {BOTTLES} from '../data/bottles.js';
 import {DRINK_EFFECTS} from '../data/drink-effects.js';
 import {COCKTAILS} from '../data/mixology.js';
-const drinks=new Map(),blocks=new Map(),sources=new Map();
+const drinks=new Map(),blocks=new Map(),sources=new Map(),foundations=new Map(),effectDefinitions=new Map();
 export const externalDrink=item=>drinks.get(item);
 export const bottleBlock=base=>BOTTLES[base]?.block??`kaleidoscope_tavern:bottle_${base}`;
 export const bottleBase=block=>blocks.get(block)??(block?.startsWith('kaleidoscope_tavern:bottle_')?block.slice('kaleidoscope_tavern:bottle_'.length):undefined);
@@ -13,7 +13,9 @@ export const cupItem=block=>block==='kaleidoscope_tavern:cup_empty_glassware'?'k
 export const isCupBlock=block=>cupItem(block)!==undefined;
 export const externalVisual=(helper,item)=>externalDrink(item)?.visuals?.[helper.split(':')[1]]??helper;
 export const isExternalVisual=(type,helper)=>type===helper||[...drinks.values()].some(d=>d.visuals?.[helper.split(':')[1]]===type);
-export function installContent(source,content=[]){
+export function installContent(source,content=[],foundation={}){
+ for(const row of foundations.get(source)?.effects??[])effectDefinitions.delete(row.id);
+ foundations.set(source,foundation);for(const row of foundation.effects??[])effectDefinitions.set(row.id,row);
  for(const old of sources.get(source)??[]){for(const item of old.items??[])drinks.delete(item);blocks.delete(old.block);delete BOTTLES[old.base];delete DRINK_EFFECTS[old.base];if(old.item)delete COCKTAILS[old.item];}
  sources.set(source,content);
  for(const d of content){
@@ -24,3 +26,6 @@ export function installContent(source,content=[]){
  }
 }
 export function externalEffectSource(effect){const source=effect?.split(':')[0];return sources.has(source)?source:undefined;}
+
+export const externalEffectDefinition=id=>effectDefinitions.get(id);
+export const externalEffectMigrations=()=>[...foundations.entries()].filter(([,x])=>x.legacyEffectKey).map(([source,x])=>({source,key:x.legacyEffectKey,effects:x.effects}));

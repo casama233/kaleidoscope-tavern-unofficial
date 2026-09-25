@@ -1,8 +1,9 @@
+import {normalizeFoundation} from './extension-foundation.js';
 import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -85,7 +86,7 @@ export class ExtensionRegistry {
   this.builtins=freeze(recipes.map(x=>({...clone(x),source:CORE})));this.pages=freeze(pages.map(x=>({...clone(x),source:CORE})));
   this.rebuild();
  }
- rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.recipeCache=freeze([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))]);this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
+ rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.recipeCache=freeze([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))]);this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
  install(raw){
   check(raw&&raw.api===API_VERSION,'API_VERSION_MISMATCH');
   const source=raw.source;check(typeof source==='string'&&/^[a-z][a-z0-9_]{1,47}$/.test(source),'INVALID_SOURCE');
@@ -100,13 +101,17 @@ export class ExtensionRegistry {
   check(!pages.some(p=>recipes.some(r=>r.id===p.id)),'PAGE_RECIPE_ID_COLLISION');
   const recipeIds=new Set([...this.builtins,...recipes].map(x=>x.id));
   for(const p of pages)for(const rid of p.recipeIds)check(recipeIds.has(rid),'UNKNOWN_PAGE_RECIPE',rid);
-  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length,recipes.length+pages.length+shakerInputs.length);
+  const foundation=normalizeFoundation(raw,source,this.itemExists);
+  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length);
   check(total<=2048,'GLOBAL_REGISTRY_LIMIT');
-  const extension=freeze({api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},recipes,pages,shakerInputs,content});
-  this.extensions.set(source,extension);installContent(source,content);this.rebuild();return {source,recipes:recipes.length,pages:pages.length,shakerInputs:shakerInputs.length,revision:this.revision};
+  check(foundation.requires.every(x=>CAPABILITIES.includes(x)),'CAPABILITY_MISMATCH');
+  const extension=freeze({...foundation,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},recipes,pages,shakerInputs,content});
+  this.extensions.set(source,extension);installContent(source,content,foundation);this.rebuild();return {source,recipes:recipes.length,pages:pages.length,shakerInputs:shakerInputs.length,revision:this.revision};
  }
  remove(source){check(source!==CORE,'RESERVED_SOURCE');const removed=this.extensions.delete(source);if(removed){installContent(source,[]);this.rebuild();}return removed;}
  subscribe(listener){check(typeof listener==='function','INVALID_LISTENER');this.listeners.add(listener);return()=>this.listeners.delete(listener);}
+ furniture(block){return this.furnitureCache.get(block);}
+ allFurniture(){return [...this.furnitureCache.values()];}
  allRecipes(){return this.recipeCache;}
  allPages(){return this.pageCache;}
  list(){return sorted([...this.extensions.values()],x=>x.source).map(x=>({source:x.source,version:x.version,recipes:x.recipes.length,pages:x.pages.length,shakerInputs:x.shakerInputs.length}));}

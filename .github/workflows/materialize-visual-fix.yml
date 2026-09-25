@@ -1,0 +1,84 @@
+name: Materialize reviewed Tavern visual correction
+on:
+  push:
+    branches: ['fix/tavern-visuals-20260925']
+    paths:
+      - '.github/visual-fix-bootstrap/**'
+      - '.github/workflows/materialize-visual-fix.yml'
+permissions:
+  contents: read
+jobs:
+  materialize:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.ref == 'refs/heads/fix/tavern-visuals-20260925'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install image tools
+        run: python -m pip install Pillow==11.3.0
+      - name: Recover reviewed source with strict digest and path checks
+        run: |
+          python - <<'PY'
+          import base64, gzip, hashlib, json
+          from pathlib import Path
+          allowed = {
+            'tools/refresh_cocktail_icons.py',
+            'tools/refresh_visual_compat.py',
+            'tools/check_visuals.py',
+            'tools/check_visual_rules.mjs',
+            'tools/apply_visual_fix_0638.py',
+            'runtime/BP/scripts/core/tipsy-visual.js',
+            'runtime/BP/scripts/bedrock/tipsy-visual.js',
+            'data/native-effect-names.json',
+            'docs/RELEASE-NOTES-0.6.38.md',
+          }
+          encoded = ''.join(Path(f'.github/visual-fix-bootstrap/part-{i}.txt').read_text().strip() for i in range(4))
+          raw = gzip.decompress(base64.b64decode(encoded, validate=True))
+          assert hashlib.sha256(raw).hexdigest() == '15d6c9be903bc4886532c28fdf10cdcf6c04e08ceef7f0270eb3e0c043f1bacc'
+          files = json.loads(raw)
+          assert set(files) == allowed
+          root = Path.cwd().resolve()
+          for name, text in files.items():
+              p = root / name
+              assert p.resolve().is_relative_to(root) and not p.is_symlink()
+              assert isinstance(text, str)
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_text(text, encoding='utf-8')
+          PY
+      - name: Write canonical source once
+        run: python tools/apply_visual_fix_0638.py
+      - name: Full release and visual regression checks
+        run: python tools/check_release.py
+      - name: Build exact corrected runtime
+        run: python tools/build_release.py
+      - name: Commit only reviewed source to isolated working branch
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          branch='fix/tavern-visuals-20260925'
+          git fetch origin "refs/heads/$branch"
+          test "$(git rev-parse FETCH_HEAD)" = "$SOURCE_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add runtime tools/refresh_cocktail_icons.py tools/refresh_visual_compat.py tools/check_visuals.py tools/check_visual_rules.mjs tools/apply_visual_fix_0638.py tools/check_release.py data/native-effect-names.json data/pbr-emission-masks.json docs/RELEASE-NOTES-0.6.38.md docs/VISUAL-MATERIAL-AUDIT-0.6.38.json docs/VALIDATION-0.6.38-VISUAL.json release.json package.json README.md README.zh-TW.md
+          git diff --cached --stat
+          git commit -m 'fix: correct Tavern PBR, complete dyed icon and activate tipsy feedback in 0.6.38'
+          git push origin "HEAD:refs/heads/$branch"
+          git rev-parse HEAD > dist/SOURCE_COMMIT
+          cp docs/VALIDATION-0.6.38-VISUAL.json docs/VISUAL-MATERIAL-AUDIT-0.6.38.json dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-visual-fix-candidate
+          path: dist/

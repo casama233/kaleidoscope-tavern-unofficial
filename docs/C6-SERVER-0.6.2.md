@@ -9,3 +9,7 @@
 ## 10. 0.6.41-beta.1
 
 `v0.6.41-beta.1`（微醺去震動、握持與酒桶比例修復）。unlock 全齊、僅需相依改接；注意 release 壓縮檔頂層是 `BP`/`RP` 而非 `behavior_pack`/`resource_pack`。
+
+## 11. 0.6.44-beta.1（與世界名酒 0.1.7 配對）
+
+`v0.6.44-beta.1`（PR 整合、家具與投擲修復）。上游 #89 已在建置流程自行維持 VV manifest 聲明，RP 自帶 `capabilities:["pbr"]`；unlock 160 全齊；伺服器側僅剩相依改接。與 World Liquor 0.1.7 配對安裝（WL 依賴酒館 0.6.44），部署後 Content Log 0 錯誤。

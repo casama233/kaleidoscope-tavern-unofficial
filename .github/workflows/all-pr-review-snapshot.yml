@@ -1,0 +1,47 @@
+name: All PR integration source snapshot
+on:
+  push:
+    branches: [integration/all-pr-review-20260925]
+    paths: [.github/workflows/all-pr-review-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          fetch-depth: 0
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 89511c3da4f49463e6ba9e3eb920b18904b51e20
+          path: liquor
+          persist-credentials: false
+      - name: Archive sources without credentials and capture exact PR deltas
+        run: |
+          mkdir snapshot
+          git -C tavern archive --format=tar.gz HEAD > snapshot/tavern-main.tar.gz
+          git -C liquor archive --format=tar.gz HEAD > snapshot/liquor-main.tar.gz
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          heads={'25':'6ab728c926bc832333a0e9973072516c6c55fb46','50':'a427c16f55d3a0d5eff08c3f5041832097dfaa70','69':'15155f57d75ead6b73aedb1d509e0afaed6c1b71','88':'e96184327426d61244fac7c6331a041d38976e2a'}
+          def git(*a):return subprocess.check_output(['git','-C','tavern',*a])
+          info={'tavern':git('rev-parse','HEAD').decode().strip(),'liquor':'89511c3da4f49463e6ba9e3eb920b18904b51e20','pulls':{}}
+          for n,sha in heads.items():
+              subprocess.run(['git','-C','tavern','fetch','--no-tags','origin',sha],check=True)
+              base=git('merge-base','HEAD',sha).decode().strip()
+              Path('snapshot',f'pr-{n}.patch').write_bytes(git('diff','--binary',base,sha))
+              Path('snapshot',f'pr-{n}-head.tar.gz').write_bytes(git('archive','--format=tar.gz',sha))
+              info['pulls'][n]={'head':sha,'base':base,'tree':git('rev-parse',sha+'^{tree}').decode().strip(),'stat':git('diff','--stat',base,sha).decode(),'commits':git('log','--oneline',base+'..'+sha).decode()}
+          Path('snapshot/sources.json').write_text(json.dumps(info,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-pr-integration-sources
+          path: snapshot/
+          retention-days: 7

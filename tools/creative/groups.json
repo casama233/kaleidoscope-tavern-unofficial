@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "retired_groups": [
+    "kaleidoscope_tavern:itemGroup.name.tavern_decor",
+    "kaleidoscope_tavern:itemGroup.name.tavern_storage"
+  ],
+  "groups": {
+    "cabinets": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_cabinets",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bar_cabinet",
+      "labels": {
+        "en_US": "Tavern: Cabinets",
+        "zh_CN": "酒馆：酒柜",
+        "zh_TW": "酒館：酒櫃"
+      }
+    },
+    "racks": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_racks",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:holder",
+      "labels": {
+        "en_US": "Tavern: Bottle & Glass Racks",
+        "zh_CN": "酒馆：酒架与杯架",
+        "zh_TW": "酒館：酒架與杯架"
+      }
+    },
+    "tables": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_tables",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:table",
+      "labels": {
+        "en_US": "Tavern: Tables & Counters",
+        "zh_CN": "酒馆：桌子与吧台",
+        "zh_TW": "酒館：桌子與吧檯"
+      }
+    },
+    "sofas": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_sofas",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_sofa",
+      "labels": {
+        "en_US": "Tavern: Sofas",
+        "zh_CN": "酒馆：沙发",
+        "zh_TW": "酒館：沙發"
+      }
+    },
+    "stools": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_stools",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_bar_stool",
+      "labels": {
+        "en_US": "Tavern: Bar Stools",
+        "zh_CN": "酒馆：吧椅",
+        "zh_TW": "酒館：吧椅"
+      }
+    },
+    "string_lights": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_string_lights",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:string_lights_colorless",
+      "labels": {
+        "en_US": "Tavern: String Lights",
+        "zh_CN": "酒馆：灯串",
+        "zh_TW": "酒館：燈串"
+      }
+    },
+    "pendant_lamps": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_pendant_lamps",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bell_pendant_lamp",
+      "labels": {
+        "en_US": "Tavern: Pendant Lamps",
+        "zh_CN": "酒馆：吊灯",
+        "zh_TW": "酒館：吊燈"
+      }
+    },
+    "boards": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_boards",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:chalkboard",
+      "labels": {
+        "en_US": "Tavern: Signs & Boards",
+        "zh_CN": "酒馆：招牌与黑板",
+        "zh_TW": "酒館：招牌與黑板"
+      }
+    },
+    "paintings": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_paintings",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:ysbb_painting",
+      "labels": {
+        "en_US": "Tavern: Paintings",
+        "zh_CN": "酒馆：挂画",
+        "zh_TW": "酒館：掛畫"
+      }
+    },
+    "incense": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_incense",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:sakura_incense",
+      "labels": {
+        "en_US": "Tavern: Incense",
+        "zh_CN": "酒馆：香薰",
+        "zh_TW": "酒館：香薰"
+      }
+    },
+    "utilities": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_utilities",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:stepladder",
+      "labels": {
+        "en_US": "Tavern: Stepladders",
+        "zh_CN": "酒馆：梯具",
+        "zh_TW": "酒館：梯具"
+      }
+    },
+    "music": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_music",
+      "category": "equipment",
+      "icon": "kaleidoscope_world_liquor:custom_record",
+      "labels": {
+        "en_US": "Tavern: Records",
+        "zh_CN": "酒馆：唱片",
+        "zh_TW": "酒館：唱片"
+      }
+    }
+  },
+  "existing_groups": {
+    "cultivation": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation",
+      "category": "nature"
+    },
+    "brewing": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_brewing",
+      "category": "equipment"
+    }
+  },
+  "order": [
+    "kaleidoscope_tavern:itemGroup.name.tavern_cultivation",
+    "kaleidoscope_tavern:itemGroup.name.tavern_brewing",
+    "kaleidoscope_tavern:itemGroup.name.wines",
+    "kaleidoscope_tavern:itemGroup.name.cocktails",
+    "kaleidoscope_tavern:itemGroup.name.tavern_cabinets",
+    "kaleidoscope_tavern:itemGroup.name.tavern_racks",
+    "kaleidoscope_tavern:itemGroup.name.tavern_tables",
+    "kaleidoscope_tavern:itemGroup.name.tavern_sofas",
+    "kaleidoscope_tavern:itemGroup.name.tavern_stools",
+    "kaleidoscope_tavern:itemGroup.name.tavern_string_lights",
+    "kaleidoscope_tavern:itemGroup.name.tavern_pendant_lamps",
+    "kaleidoscope_tavern:itemGroup.name.tavern_boards",
+    "kaleidoscope_tavern:itemGroup.name.tavern_paintings",
+    "kaleidoscope_tavern:itemGroup.name.tavern_incense",
+    "kaleidoscope_tavern:itemGroup.name.tavern_utilities",
+    "kaleidoscope_tavern:itemGroup.name.tavern_music",
+    "kaleidoscope_cookery:itemGroup.name.foods"
+  ]
+}

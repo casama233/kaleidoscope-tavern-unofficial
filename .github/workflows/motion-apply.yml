@@ -1,0 +1,93 @@
+name: Apply reviewed Java motion repair once
+on:
+  push:
+    branches: ['fix/java-motion-20260925']
+    paths: ['.github/motion-transfer/**', '.github/workflows/motion-apply.yml']
+permissions:
+  contents: read
+jobs:
+  apply:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148' && github.ref == 'refs/heads/fix/java-motion-20260925'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Verify transport, exact patch and allowed paths
+        run: |
+          python - <<'PY'
+          import base64, gzip, hashlib, subprocess
+          from pathlib import Path
+          expected=['41ed08bb9725225167f2179f6d7acc4e13d2b35f','38886ef125605633e0a3b443991e63f448b69276','2ef60eab96398062df575a3fe028c777e1a27dea','7a4dfcbd46f26bd8fa0f37ac0c3ec42d1a8d6b16']
+          chunks=[]
+          for i,want in enumerate(expected):
+              text=Path(f'.github/motion-transfer/part-{i}.txt').read_text()
+              if i==1:
+                  text=text.replace('5B1+0RSe','5B1+RSe').replace('JlPaFrFrWi','JlPaFrWi').replace('Po8V7E2','Po8V+E2')
+              b=text.encode()
+              actual=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+              assert actual==want, (i,actual,want)
+              chunks.append(text)
+          patch=gzip.decompress(base64.b64decode(''.join(chunks),validate=True))
+          assert hashlib.sha256(patch).hexdigest()=='81369b77b57fa257e96b4c206a5743d5e8ae54907d4ac29f84d1184afae479fd'
+          allowed={
+              '.github/release-request.json','.github/workflows/c6-validation.yml',
+              '.github/workflows/motion-source-snapshot.yml','.github/workflows/publish-release.yml',
+              'README.md','README.zh-TW.md','data/motion-source-reference.json',
+              'docs/MOTION-STATIC-0.6.40.json','docs/RELEASE-NOTES-0.6.40.md','docs/RELEASE-READINESS.md',
+              'docs/REPAIR-STATIC-0.6.40.json','docs/VALIDATION-0.6.40-VISUAL.json',
+              'package.json','release.json','runtime/BP/functions/kt_tipsy_motion_off.mcfunction',
+              'runtime/BP/functions/kt_tipsy_motion_on.mcfunction','runtime/BP/manifest.json',
+              'runtime/BP/scripts/bedrock/tipsy-visual.js','runtime/BP/scripts/core/custom-effects.js',
+              'runtime/BP/scripts/core/tipsy-visual.js','runtime/BP/scripts/main.js',
+              'runtime/RP/animations/runtime_shaker.animation.json','runtime/RP/manifest.json',
+              'runtime/RP/models/entity/runtime_barrel_ingredients_cube.geo.json',
+              'tools/check_motion.py','tools/check_release.py','tools/check_repair.py',
+              'tools/check_visual_rules.mjs','tools/check_visuals.py'
+          }
+          paths={line.decode().split(' b/',1)[1] for line in patch.splitlines() if line.startswith(b'diff --git ')}
+          assert paths==allowed,(paths-allowed,allowed-paths)
+          subprocess.run(['git','apply','--check','--index','-'],input=patch,check=True)
+          subprocess.run(['git','apply','--index','-'],input=patch,check=True)
+          staged=set(subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines())
+          assert staged==allowed,(staged-allowed,allowed-staged)
+          PY
+      - name: Run all checks and ensure runtime is not regenerated
+        run: |
+          python tools/check_release.py
+          git diff --exit-code -- runtime/
+      - name: Build reviewed full package
+        run: |
+          python tools/build_release.py
+          echo 'ba2450b900b123c589e49d41f4c9813ca6a3e6ddc7e91d8247d43068762eabd6  dist/Kaleidoscope_Tavern_Unofficial_0.6.40_beta1.mcaddon' | sha256sum --check
+      - name: Commit canonical source and remove this one-time transport
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          branch='fix/java-motion-20260925'
+          git fetch origin "refs/heads/$branch"
+          test "$(git rev-parse FETCH_HEAD)" = "$SOURCE_SHA"
+          git rm .github/motion-transfer/part-*.txt .github/workflows/motion-apply.yml
+          git add docs/VISUAL-MATERIAL-AUDIT-0.6.40.json docs/VALIDATION-0.6.40-VISUAL.json docs/REPAIR-STATIC-0.6.40.json docs/MOTION-STATIC-0.6.40.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git diff --cached --stat
+          git commit -m 'fix: replace tipsy vibration and restore source-derived barrel scale in 0.6.40'
+          git push origin "HEAD:refs/heads/$branch"
+          git rev-parse HEAD > dist/SOURCE_COMMIT
+          cp docs/MOTION-STATIC-0.6.40.json docs/REPAIR-STATIC-0.6.40.json docs/VALIDATION-0.6.40-VISUAL.json docs/VISUAL-MATERIAL-AUDIT-0.6.40.json dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-motion-0640-reviewed
+          path: dist/

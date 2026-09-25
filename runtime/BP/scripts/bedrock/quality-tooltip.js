@@ -1,5 +1,5 @@
 import {world} from '@minecraft/server';
-import {qualityBottleLore,isManagedQualityBottleLore} from '../core/quality-tooltip.js';
+import {qualityBottleLore,isManagedQualityBottleLore,isLegacyManagedQualityBottleLore} from '../core/quality-tooltip.js';
 
 const getContainer=player=>player?.getComponent?.('minecraft:inventory')?.container;
 function stampSlot(player,slot){
@@ -7,7 +7,7 @@ function stampSlot(player,slot){
  if(!container||!Number.isInteger(slot)||slot<0||slot>=container.size)return false;
  try{
   const stack=container.getItem(slot),lore=qualityBottleLore(stack);
-  if(!lore||isManagedQualityBottleLore(stack)||(stack.getLore?.().length??0)>0)return false;
+  if(!lore||isManagedQualityBottleLore(stack)||((stack.getLore?.().length??0)>0&&!isLegacyManagedQualityBottleLore(stack)))return false;
   const next=stack.clone();next.setLore(lore);container.setItem(slot,next);return true;
  }catch{return false;}
 }

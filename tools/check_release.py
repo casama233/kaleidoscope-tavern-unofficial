@@ -39,10 +39,10 @@ for drink in ('depth_charge','nether_special'):
     path=f'textures/kaleidoscope_tavern_jar/item/{drink}'
     assert item_atlas[key]['textures']==path
     assert any(row['atlas_tile']==key and row['flipbook_texture']==path for row in flipbooks)
-assert item_atlas['kt_c3_signature_cocktail']['textures']=='textures/kaleidoscope_tavern_jar/item/signature_cocktail'
+assert item_atlas['kt_c3_signature_cocktail']['textures']=='textures/kt_runtime/signature/icon_default'
 from PIL import Image
 mask=Image.open(RT/'RP/textures/kt_runtime/signature/icon_dyed.tga').convert('RGBA')
-assert mask.getbbox()==(5,8,11,12),'Signature tint must cover only the Java liquid layer'
+assert sum(a>0 for a in mask.getchannel('A').getdata())==75,'Dyed icon must include the full glass AND liquid'
 geometry={g['description']['identifier'] for p,j in docs.items() if 'models' in p.parts for g in j.get('minecraft:geometry',[])}
 assert len(geometry)==sum(len(j.get('minecraft:geometry',[])) for p,j in docs.items() if 'models' in p.parts),'duplicate geometry identifiers'
 for p,j in docs.items():
@@ -73,4 +73,5 @@ for p in (RT/'BP/scripts').rglob('*.js'):
 subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')

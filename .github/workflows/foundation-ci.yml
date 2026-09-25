@@ -1,0 +1,37 @@
+name: Shared foundation regression
+on:
+  push:
+    branches: [refactor/shared-foundation-20260925]
+  pull_request:
+    paths:
+      - 'runtime/BP/scripts/**'
+      - 'tools/**'
+      - '.github/workflows/foundation-ci.yml'
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: e7e808ca7124ad6e1641b373d6f07e9a29be19c3
+          path: liquor
+          persist-credentials: false
+      - name: Snapshot tracked integration inputs
+        run: |
+          mkdir -p evidence
+          git -C tavern archive --format=tar.gz --output="$PWD/evidence/tavern-source.tar.gz" HEAD
+          git -C liquor archive --format=tar.gz --output="$PWD/evidence/liquor-source.tar.gz" HEAD
+          git -C tavern rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C liquor rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shared-foundation-inputs
+          path: evidence/
+          retention-days: 7

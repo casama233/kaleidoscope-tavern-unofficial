@@ -70,7 +70,7 @@ jobs:
         run: |
           python tools/build_release.py
           echo 'ba2450b900b123c589e49d41f4c9813ca6a3e6ddc7e91d8247d43068762eabd6  dist/Kaleidoscope_Tavern_Unofficial_0.6.40_beta1.mcaddon' | sha256sum --check
-      - name: Commit canonical source and remove this one-time transport
+      - name: Commit canonical source without workflow permission escalation
         env:
           SOURCE_SHA: ${{ github.sha }}
         run: |
@@ -78,7 +78,10 @@ jobs:
           branch='fix/java-motion-20260925'
           git fetch origin "refs/heads/$branch"
           test "$(git rev-parse FETCH_HEAD)" = "$SOURCE_SHA"
-          git rm .github/motion-transfer/part-*.txt .github/workflows/motion-apply.yml
+          # The ordinary Actions token cannot write workflows. These reviewed
+          # workflow changes and final cleanup are applied through the connector.
+          git restore --source=HEAD --staged --worktree .github/workflows/
+          git rm .github/motion-transfer/part-*.txt
           git add docs/VISUAL-MATERIAL-AUDIT-0.6.40.json docs/VALIDATION-0.6.40-VISUAL.json docs/REPAIR-STATIC-0.6.40.json docs/MOTION-STATIC-0.6.40.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

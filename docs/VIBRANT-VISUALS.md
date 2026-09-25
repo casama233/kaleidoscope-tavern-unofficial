@@ -15,3 +15,7 @@ disable-client-vibrant-visuals=false
 重新進服下載資源後，在支援的客戶端選擇靈動視效；若客戶端不允許遊戲中切換，需回主選單選擇再進服。BDS 沒有客戶端渲染器，無法以啟動成功證明手機選項已可點選。
 
 依據：[Microsoft 的靈動視效資源包規則](https://learn.microsoft.com/en-us/minecraft/creator/documents/vibrantvisuals/vvresourcepacks?view=minecraft-bedrock-stable)。
+
+## 2026-09-25 復發與修復記錄
+
+0.6.39→0.6.41、煙火 2.7.64→2.7.66 等經 BSM 更新後，新包 manifest 不帶 `capabilities:["pbr"]`，堆疊聲明不全，客戶端再次提示「需要有支援的附加包或裝置」。以 hotfix-0.6.32 的 `enable_vibrant.py` 重跑修復：為缺聲明的煙火 RP（2.7.66→2.7.67）與資深魔法之路 RP（1.0.0→1.0.1）補聲明、遞增版本並同步行為包相依與世界引用；另修復 7 處包升級後未同步的過期相依（含 World Liquor→酒館 0.6.37→0.6.41）。17/17 個 RP 均已聲明 pbr。教訓同前：**每次包更新後必須重查整個堆疊的聲明與相依**。

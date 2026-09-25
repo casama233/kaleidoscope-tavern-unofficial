@@ -12,7 +12,7 @@ export const CUSTOM_IMPLEMENTED=Object.freeze({
  'kaleidoscope_tavern:high_heels':'one_block_auto_step_adapter',
  'kaleidoscope_tavern:grass_stealth':'grass_exhaustion_and_invisibility_adapter',
  'kaleidoscope_tavern:long_reach':'routed_item_use_9m_adapter',
- 'kaleidoscope_tavern:slightly_tipsy':'timed_source_status_camera_unavailable'
+ 'kaleidoscope_tavern:slightly_tipsy':'bounded_rotational_camera_feedback_adapter'
 });
 export const CUSTOM_INSTANT=Object.freeze(['kaleidoscope_tavern:zenith','kaleidoscope_tavern:shriek_attack','kaleidoscope_tavern:upside_down']);
 const instant=id=>CUSTOM_INSTANT.includes(id);

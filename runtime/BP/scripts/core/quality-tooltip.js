@@ -14,7 +14,7 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
  vodka:'white',whiskey:'white',rum:'white'
 });
 
-export function qualityBottleLore(item){
+export function qualityBottleLore(item,legacyLevels=false){
  // The tapped melon drink has no aging or quality level in Java.
  if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
@@ -26,7 +26,8 @@ export function qualityBottleLore(item){
  for(const entry of DRINK_EFFECTS[parsed.base]?.[parsed.quality-1]??[]){
   if(entry.probability<1)continue;
   const effectKey=`effect.${entry.effect.replace(':','.')}`;const minutes=Math.floor(entry.duration/60),seconds=String(entry.duration%60).padStart(2,'0');
-  const level=entry.amplifier>0?` ${['','I','II','III','IV'][entry.amplifier]??entry.amplifier+1}`:'';
+  const levels=legacyLevels?['','I','II','III','IV']:['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+  const level=entry.amplifier>0?` ${levels[entry.amplifier]??entry.amplifier+1}`:'';
   lines.push({rawtext:[{text:entry.effect==='minecraft:nausea'?'§c':'§9'},{translate:effectKey},{text:`${level} (${minutes}:${seconds})`}]});
  }
  lines.push({rawtext:[{text:'§9'},{translate:'item.kaleidoscope_tavern.mod_name'}]});
@@ -42,4 +43,10 @@ export function isManagedQualityBottleLore(item){
   // from native inventory. Compare the structure, not insertion order.
   return Array.isArray(raw)&&canonical(raw)===canonical(expected);
  }catch{return false;}
+}
+
+// Upgrade only lore exactly produced by our former formatter; never erase custom lore.
+export function isLegacyManagedQualityBottleLore(item){
+ const expected=qualityBottleLore(item,true);if(!expected)return false;
+ try{const raw=typeof item.getRawLore==='function'?item.getRawLore():undefined;return Array.isArray(raw)&&canonical(raw)===canonical(expected);}catch{return false;}
 }

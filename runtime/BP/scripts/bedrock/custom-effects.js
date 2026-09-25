@@ -1,3 +1,5 @@
+import {TIPSY_ID} from '../core/tipsy-visual.js';
+import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics} from './tipsy-visual.js';
 import {externalEffectSource} from '../core/extension-content.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
@@ -7,12 +9,12 @@ import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,a
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
 export function statusNow(p){return statusWindow(p).state;}
-export function clearCustomEffects(p){write(p,{schema:1,entries:[]});tracks.delete(p.id);heelsSteps.delete(p.id);}
+export function clearCustomEffects(p){forgetTipsyVisual(p.id);write(p,{schema:1,entries:[]});tracks.delete(p.id);heelsSteps.delete(p.id);}
 export function applyCustomEffect(p,row){
  const source=externalEffectSource(row.effect);if(source){system.sendScriptEvent(source+':apply_effect',JSON.stringify({entity:p.id,effect:row.effect,duration:row.duration,amplifier:row.amplifier}));return true;}
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
@@ -191,7 +193,7 @@ export function handleKill(event){
  }catch(e){error(e);}
 }
 export function tickCustomEffects(){
- const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));
+ const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));pruneTipsyVisuals(seen);
  for(const p of players)try{
   const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision'),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;
   if(previousVision){const afterTicks=currentVision?.amplifier===previousVision.amplifier?currentVision.ticks:0;if(countdownPulseCrossed(previousVision.ticks,afterTicks,50))pulseVision(p,previousVision.amplifier);}
@@ -200,6 +202,7 @@ export function tickCustomEffects(){
   if(previousGrass){const afterTicks=currentGrass?.amplifier===previousGrass.amplifier?currentGrass.ticks:0;if(countdownPulseCrossed(previousGrass.ticks,afterTicks,10))pulseGrassStealth(p);}
   if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}
   if(!activeStatus(nextState,'kaleidoscope_tavern:high_heels'))heelsSteps.delete(p.id);
+  pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID));
   if(!nextState.entries.length){if(p.getDynamicProperty(CUSTOM_STATUS_KEY)!==undefined)clearCustomEffects(p);continue;}
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
   write(p,nextState);
@@ -221,8 +224,8 @@ export function installCustomEffects(){
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
- world.afterEvents.playerSpawn.subscribe(e=>{tracks.delete(e.player.id);heelsSteps.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
- world.afterEvents.playerLeave.subscribe(e=>{const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);});
+ world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
+ world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);});
  system.runInterval(tickCustomEffects,5);
  system.runInterval(tickArdentHeat,1);
  system.runInterval(tickHighHeels,1);

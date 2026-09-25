@@ -2,9 +2,9 @@
 
 An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion add-on for [Kaleidoscope Cookery (Unofficial)](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) by Loyallay.
 
-[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.37.md) · [Credits](CREDITS.md)
+[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.38.md) · [Credits](CREDITS.md)
 
-**Current public beta: 0.6.37-beta.1.** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
+**Visual-fix candidate: 0.6.38-beta.1 (not yet client-accepted).** Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
 
 ## Features
 
@@ -24,9 +24,10 @@ The public beta uses Cookery's original pack UUIDs. The older private server bun
 
 ## Build from this repository
 
-Python 3.12+ and Node.js 22+ are sufficient; no Python or npm packages are required.
+Requires Python 3.12+, Node.js 22+, and Pillow 11.3.0 for image validation.
 
 ```sh
+python3 -m pip install Pillow==11.3.0
 python3 tools/check_release.py
 python3 tools/build_release.py
 ```
@@ -37,9 +38,9 @@ The checks parse resources, validate references and scripts, and inspect guide d
 
 ## Public beta status
 
-The public beta has static resource/script/language checks and a successful BDS 1.26.51.1 load with Cookery 1.0.6. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
+This candidate is checked statically. BDS 1.26.51.1 load evidence belongs to 0.6.37, not this revision; neither BDS nor real-client validation is claimed for 0.6.38. English, Simplified Chinese and Traditional Chinese have complete language-key coverage and guide pages. Board editing follows the game language; guide language follows Cookery's language selection. Legacy Japanese/Russian translations are partial and are not advertised as complete support.
 
-[Download the public beta](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon). Android rendering, Realms, and all device/pack combinations remain public-test targets. Known differences include the unavailable custom effects Slightly Tipsy, Grass Stealth and Long Reach. See [release readiness](docs/RELEASE-READINESS.md).
+[Last published beta (0.6.37; not this candidate)](https://raw.githubusercontent.com/casama233/kaleidoscope-tavern-unofficial/v0.6.37-beta.1/downloads/Kaleidoscope_Tavern_Unofficial_0.6.37_beta1.mcaddon). Android rendering, Realms, and all device/pack combinations remain public-test targets. Slightly Tipsy now has bounded rotational camera feedback (not the exact Java roll waveform); the existing gameplay adapters retain their documented cross-edition limitations. See [release readiness](docs/RELEASE-READINESS.md).
 
 ## Licensing
 

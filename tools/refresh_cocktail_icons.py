@@ -1,39 +1,59 @@
 #!/usr/bin/env python3
-"""Use Java item sprites for the three exceptional cocktails.
+"""Rebuild inventory sprites from the checked-in Java layers, not block UV maps.
 
-Depth Charge and Nether Special keep their original vertical animation strips.
-The Signature Cocktail uses Java's glass and tint layers: only the liquid is
-dyed, so the glass remains unchanged for both creative and mixed stacks.
+The dyed icon is a COMPLETE icon, not an overlay. Like vanilla wolf_armor_dyed,
+TGA alpha is 0=background, 3=visible/untinted, 255=visible/tinted. PNG alpha does
+not have that meaning. No texture generation is run implicitly by packaging.
 """
 import json
 from pathlib import Path
-
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 RP = ROOT / 'runtime/RP'
 TEXTURES = RP / 'textures'
-atlas_path = TEXTURES / 'item_texture.json'
-flipbook_path = TEXTURES / 'flipbook_textures.json'
-atlas = json.loads(atlas_path.read_text())
-flipbooks = json.loads(flipbook_path.read_text())
-for item in ('depth_charge', 'nether_special'):
-    key = f'kt_c3_{item}'
-    path = f'textures/kaleidoscope_tavern_jar/item/{item}'
-    atlas['texture_data'][key]['textures'] = path
-    entry = next(x for x in flipbooks if x['flipbook_texture'] == path)
-    entry['atlas_tile'] = key
-base = 'textures/kaleidoscope_tavern_jar/item/signature_cocktail'
-atlas['texture_data']['kt_c3_signature_cocktail']['textures'] = base
-atlas['texture_data']['kt_signature_dyed']['textures'] = 'textures/kt_runtime/signature/icon_dyed.tga'
-atlas_path.write_text(json.dumps(atlas, ensure_ascii=False, indent=2) + '\n')
-flipbook_path.write_text(json.dumps(flipbooks, ensure_ascii=False, indent=2) + '\n')
-liquid = Image.open(RP / (base + '_tint.png')).convert('RGBA')
-mask = Image.new('RGBA', liquid.size)
-for y in range(liquid.height):
-    for x in range(liquid.width):
-        r, g, b, a = liquid.getpixel((x, y))
-        gray = round((r + g + b) / 3)
-        mask.putpixel((x, y), (gray, gray, gray, a))
-mask.save(TEXTURES / 'kt_runtime/signature/icon_dyed.tga')
-print('Restored two Java animated icons and the Signature Cocktail liquid-only dye mask.')
+
+def signature_icons():
+    base = RP / 'textures/kaleidoscope_tavern_jar/item/signature_cocktail'
+    glass = Image.open(base.with_suffix('.png')).convert('RGBA')
+    liquid = Image.open(base.with_name(base.name + '_tint.png')).convert('RGBA')
+    if glass.size != liquid.size or glass.size != (16, 16):
+        raise ValueError('Unexpected Java signature icon layers')
+    default = glass.copy()
+    dyed = Image.new('RGBA', glass.size, (0, 0, 0, 0))
+    for y in range(glass.height):
+        for x in range(glass.width):
+            r, g, b, a = glass.getpixel((x, y))
+            lr, lg, lb, la = liquid.getpixel((x, y))
+            if a:
+                dyed.putpixel((x, y), (r, g, b, 3))
+            if la:
+                gray = round((lr + lg + lb) / 3)
+                dyed.putpixel((x, y), (gray, gray, gray, 255))
+                default.putpixel((x, y), (round(gray/3), round(gray/3), gray, 255))
+    return default, dyed
+
+def main():
+    atlas_path = TEXTURES / 'item_texture.json'
+    flipbook_path = TEXTURES / 'flipbook_textures.json'
+    atlas = json.loads(atlas_path.read_text(encoding='utf-8'))
+    flipbooks = json.loads(flipbook_path.read_text(encoding='utf-8'))
+    for item in ('depth_charge', 'nether_special'):
+        key = f'kt_c3_{item}'
+        path = f'textures/kaleidoscope_tavern_jar/item/{item}'
+        atlas['texture_data'][key]['textures'] = path
+        entry = next(x for x in flipbooks if x['flipbook_texture'] == path)
+        entry['atlas_tile'] = key
+    path = 'textures/kt_runtime/signature/'
+    atlas['texture_data']['kt_c3_signature_cocktail']['textures'] = path + 'icon_default'
+    atlas['texture_data']['kt_sourceicon_signature_cocktail']['textures'] = path + 'icon_default'
+    atlas['texture_data']['kt_signature_dyed']['textures'] = path + 'icon_dyed.tga'
+    for p, obj in ((atlas_path, atlas), (flipbook_path, flipbooks)):
+        p.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    default, dyed = signature_icons()
+    default.save(TEXTURES / 'kt_runtime/signature/icon_default.png')
+    dyed.save(TEXTURES / 'kt_runtime/signature/icon_dyed.tga')
+    print('Signature: complete 16x16 icon; glass alpha=3; liquid alpha=255; background alpha=0.')
+
+if __name__ == '__main__':
+    main()

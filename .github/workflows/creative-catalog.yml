@@ -2,9 +2,9 @@ name: Creative catalog checks
 on:
   push:
     branches: [refactor/shared-foundation-20260925]
-    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
+    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'data/creative-*.json', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
   pull_request:
-    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
+    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'data/creative-*.json', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
 permissions:
   contents: read
 jobs:
@@ -18,18 +18,33 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 142188f7575c0f88ad97eb94b49d03d634d79757
+          ref: 9812f94022c5cdfd49821a60ade40f6933a62fb6
           path: world-liquor-src
           persist-credentials: false
-      - name: Preserve exact audit inputs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Record exact sources
         run: |
           mkdir -p evidence
-          git -C tavern-src archive --format=tar.gz --output="$PWD/evidence/tavern-source.tar.gz" HEAD
-          git -C world-liquor-src archive --format=tar.gz --output="$PWD/evidence/liquor-source.tar.gz" HEAD
           git -C tavern-src rev-parse HEAD > evidence/TAVERN_COMMIT
           git -C world-liquor-src rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Paired creative catalog checks (not client rendering)
+        working-directory: tavern-src
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/world-liquor-src
+        run: |
+          set -o pipefail
+          python tools/creative/catalog.py --peer ../world-liquor-src | tee ../evidence/catalog.json
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+          python tools/creative/catalog.py --write
+          python tools/creative/catalog.py --root ../world-liquor-src --write
+          python ../world-liquor-src/tools/build_effect_names.py --check
+          git diff --exit-code -- runtime/
+          git -C ../world-liquor-src diff --exit-code -- runtime/
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: creative-catalog-evidence
           path: evidence/
-          retention-days: 7
+          retention-days: 14

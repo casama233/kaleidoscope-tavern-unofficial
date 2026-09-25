@@ -1,0 +1,35 @@
+name: Creative catalog checks
+on:
+  push:
+    branches: [refactor/shared-foundation-20260925]
+    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
+  pull_request:
+    paths: ['.github/workflows/creative-catalog.yml', 'tools/creative/**', 'runtime/BP/item_catalog/**', 'runtime/BP/items/**', 'runtime/BP/blocks/**', 'runtime/RP/texts/**']
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 142188f7575c0f88ad97eb94b49d03d634d79757
+          path: world-liquor-src
+          persist-credentials: false
+      - name: Preserve exact audit inputs
+        run: |
+          mkdir -p evidence
+          git -C tavern-src archive --format=tar.gz --output="$PWD/evidence/tavern-source.tar.gz" HEAD
+          git -C world-liquor-src archive --format=tar.gz --output="$PWD/evidence/liquor-source.tar.gz" HEAD
+          git -C tavern-src rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C world-liquor-src rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: creative-catalog-evidence
+          path: evidence/
+          retention-days: 7

@@ -1,0 +1,33 @@
+name: Storage renderer source snapshot
+on:
+  push:
+    branches: ['fix/java-storage-bottle-transforms']
+    paths: ['.github/workflows/storage-source-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java-src
+          persist-credentials: false
+      - name: Archive immutable comparison sources
+        run: |
+          mkdir snapshots
+          git -C tavern-src archive --format=zip HEAD > snapshots/tavern-source.zip
+          git -C java-src archive --format=zip HEAD > snapshots/java-source.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storage-parity-sources
+          path: snapshots/*.zip
+          retention-days: 7

@@ -23,12 +23,20 @@ jobs:
         run: git diff --exit-code -- runtime/
       - name: Build public test package
         run: python tools/build_release.py
-      - name: Include source revision and validation evidence
+      - name: Include matching source revision and validation evidence
         env:
           SOURCE_SHA: ${{ github.sha }}
         run: |
-          printf '%s\n' "$SOURCE_SHA" > dist/SOURCE_COMMIT
-          cp docs/VALIDATION-0.6.38-VISUAL.json docs/VISUAL-MATERIAL-AUDIT-0.6.38.json dist/
+          python - <<'PY'
+          import json,os,shutil
+          from pathlib import Path
+          version=json.loads(Path('release.json').read_text())['version']
+          if isinstance(version,list):version='.'.join(map(str,version))
+          Path('dist/SOURCE_COMMIT').write_text(os.environ['SOURCE_SHA']+'\n')
+          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json'):
+              path=Path('docs')/name
+              if path.exists():shutil.copy2(path,Path('dist')/name)
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: Tavern-public-beta

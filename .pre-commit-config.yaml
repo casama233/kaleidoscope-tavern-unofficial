@@ -1,0 +1,13 @@
+# Lightweight syntax gate for the installed pre-commit.ci app.
+# Full cross-resource/script/guide checks remain in GitHub Actions.
+ci:
+  autofix_prs: false
+repos:
+  - repo: local
+    hooks:
+      - id: runtime-json-syntax
+        name: Runtime JSON syntax
+        entry: python tools/check_json_syntax.py
+        language: python
+        files: ^runtime/.*\.json$
+        types: [json]

@@ -1,0 +1,25 @@
+name: Motion integration baseline snapshot
+on:
+  push:
+    branches: ['fix/java-motion-20260925']
+    paths: ['.github/workflows/motion-rebase-snapshot.yml']
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 4076925dc04f1ea32882c03393d0328754513f11
+          persist-credentials: false
+      - run: |
+          mkdir source-snapshot
+          git archive HEAD -o source-snapshot/tavern-main-0.6.40.zip
+          git rev-parse HEAD > source-snapshot/SOURCE_COMMIT
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-main-0640-source
+          path: source-snapshot/
+          retention-days: 3

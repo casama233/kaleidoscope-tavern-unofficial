@@ -10,6 +10,8 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1] / 'runtime/RP/particles'
 for path in sorted(root.glob('*incense*.json')):
+    if path.stem.endswith(('_plume', '_ambient')):
+        continue
     data = json.loads(path.read_text())
     components = data['particle_effect']['components']
     components.pop('minecraft:particle_initialization', None)
@@ -35,3 +37,7 @@ for path in sorted(root.glob('*incense*.json')):
             'math.random(8, 12)'
         )
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+
+# Refresh derived finite emitters after their sprite templates.
+import runpy
+runpy.run_path(str(Path(__file__).with_name("build_incense_emitters.py")), run_name="__main__")

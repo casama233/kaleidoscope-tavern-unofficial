@@ -24,14 +24,11 @@ function incensePulseDue(block){const period=Math.floor(system.currentTick/120),
 function tickIncense(block){
  const spec=INCENSE[block.typeId.slice(NS.length+1)];if(!spec)return;
  const open=block.permutation.getState(OPEN)===1,p={x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5};
- if(Math.random()<1/3)optional(()=>block.dimension.spawnParticle(spec.small,p));
- // Java spawns five large particles per client animate tick. Bedrock sends
- // script particles over the network, so cap these long-lived effects at two
- // per block tick. Each particle now has native motion instead of a Molang loop.
- if(open)for(let i=0;i<2;i++){
-  const offset={x:(Math.random()-.5)*32,y:-2+Math.random()*16,z:(Math.random()-.5)*32};
-  optional(()=>block.dimension.spawnParticle(spec.large,{x:p.x+offset.x,y:p.y+offset.y,z:p.z+offset.z}));
- }
+ // One networked emitter for each layer, not one packet per particle.
+ // Each finite emitter emits for one second (the block's 20-tick cadence),
+ // then stops. Turning off/destroying/unloading cannot leave a looping source.
+ optional(()=>block.dimension.spawnParticle(spec.small+'_plume',p));
+ if(open)optional(()=>block.dimension.spawnParticle(spec.small+'_ambient',p));
  const pulseDue=incensePulseDue(block);
  if(open&&pulseDue){
   const location={x:block.location.x-32,y:block.location.y-32,z:block.location.z-32},volume={x:65,y:65,z:65};

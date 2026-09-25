@@ -81,7 +81,7 @@ def main():
     for p in RT.rglob('*.json'):read(p)
     subprocess.run(['node',str(ROOT/'tools/check_visual_rules.mjs')],cwd=ROOT,check=True)
     report={'staticVisualChecks':'passed','materials':result['summary'],'dyedIconAlphaCounts':{'transparent':181,'untintedGlass':57,'tintableLiquid':18},'localeKeys':locale_counts,'minecraftClientTested':False,'bdsTestedForThisRevision':False,'simulatedPlayerTestsRun':False}
-    (ROOT/'docs/VALIDATION-0.6.38-VISUAL.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'docs/VALIDATION-0.6.39-VISUAL.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False))
 
 if __name__=='__main__':main()

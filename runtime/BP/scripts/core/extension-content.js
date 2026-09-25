@@ -8,7 +8,9 @@ export const bottleBlock=base=>BOTTLES[base]?.block??`kaleidoscope_tavern:bottle
 export const bottleBase=block=>blocks.get(block)??(block?.startsWith('kaleidoscope_tavern:bottle_')?block.slice('kaleidoscope_tavern:bottle_'.length):undefined);
 export const cupBlock=item=>COCKTAILS[item]?.block??`kaleidoscope_tavern:cup_${item.split(':')[1]}`;
 export const isBottleBlock=block=>[...Object.keys(BOTTLES)].some(base=>bottleBlock(base)===block);
-export const isCupBlock=block=>block==='kaleidoscope_tavern:cup_empty_glassware'||Object.keys(COCKTAILS).some(item=>cupBlock(item)===block);
+// Reverse lookup must use the exact clicked block, never a nearby station.
+export const cupItem=block=>block==='kaleidoscope_tavern:cup_empty_glassware'?'kaleidoscope_tavern:empty_glassware':Object.keys(COCKTAILS).find(item=>cupBlock(item)===block);
+export const isCupBlock=block=>cupItem(block)!==undefined;
 export const externalVisual=(helper,item)=>externalDrink(item)?.visuals?.[helper.split(':')[1]]??helper;
 export const isExternalVisual=(type,helper)=>type===helper||[...drinks.values()].some(d=>d.visuals?.[helper.split(':')[1]]===type);
 export function installContent(source,content=[]){

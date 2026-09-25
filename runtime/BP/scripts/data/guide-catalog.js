@@ -16,7 +16,7 @@ function append(target,source){
 }
 export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
  const aliases=new Map(),removed=new Set();
- for(const recipe of recipes.filter(r=>r.source==='kaleidoscope_tavern')){
+ for(const recipe of recipes){
   const page=payload.entries.find(e=>e.id===recipe.id);
   if(!page)continue;
   // Preserve distinct pressing outputs; quality variants share their recipe.

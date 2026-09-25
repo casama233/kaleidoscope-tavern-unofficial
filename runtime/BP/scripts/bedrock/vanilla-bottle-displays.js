@@ -51,3 +51,14 @@ export function installVanillaBottleDisplayEvents(){
  });
  registerProtectedBreakRoute({id:'vanilla-bottle-displays',isBlock:b=>VALID.has(b?.typeId),recover:({player,block})=>takeVanillaBottle(player,block)});
 }
+
+/** Preserve native potion identity; never manufacture a blank potion. */
+export function pickVanillaBottleItem(block){
+ const id=block.typeId;
+ if(id===NS+':potion_bottle'){
+  const payload=stored(block);check(payload?.item==='minecraft:potion','PICK_POTION_STATE_MISMATCH');
+  return restorePayload(payload);
+ }
+ const item=Object.keys(TARGETS).find(item=>TARGETS[item]===id);
+ return item?makeStack(item,1):undefined;
+}

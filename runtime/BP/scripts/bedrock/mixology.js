@@ -335,3 +335,12 @@ export function installMixologyEvents(){
  installImmersionCleanup();system.runInterval(tick,1);
  system.run(()=>{for(const player of world.getAllPlayers()){clearShakerPlayer(player);migrateInventory(player);}});
 }
+
+/** Return the actual drink and signature payload without consuming the cup. */
+export function pickCupItem(block){
+ if(!isCupBlock(block.typeId))return undefined;
+ const state=cupStore.load(cupKey(block.dimension.id,block.location));
+ if(!state&&block.typeId===cupBlock(EMPTY_CUP))return makeStack(EMPTY_CUP,1);
+ check(state&&cupBlock(state.item)===block.typeId&&state.facing===block.permutation.getState(FACING),'PICK_CUP_STATE_MISMATCH');
+ return resultItem(state);
+}

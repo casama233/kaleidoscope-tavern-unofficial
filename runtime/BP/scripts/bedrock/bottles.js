@@ -122,3 +122,13 @@ export function installBottleEvents(){
  });
 }
 export const BOTTLE_TEST={store,COUNT,FACING,EMPTY_ITEM,EMPTY_BLOCK,WATER_BLOCK,waterBottleStack};
+
+/** Creative pick is a read-only copy, not the take/transaction path. */
+export function pickBottleItem(block){
+ if(block.typeId===EMPTY_BLOCK)return makeStack(EMPTY_ITEM,1);
+ if(block.typeId===WATER_BLOCK)return waterBottleStack();
+ if(!isBottleBlock(block.typeId))return undefined;
+ const value=store.load(bottleKey(block.dimension.id,block.location));
+ check(value&&intact(block,value),'PICK_BOTTLE_STATE_MISMATCH');
+ return makeStack(value.items[value.items.length-1],1);
+}

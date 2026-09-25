@@ -83,3 +83,5 @@ print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometrie
 
 # Native inventory grouping is data-only; prevent a return to the mixed decor bucket.
 subprocess.run([sys.executable,str(ROOT/'tools/creative/catalog.py')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/pick_block.py')],cwd=ROOT,check=True)

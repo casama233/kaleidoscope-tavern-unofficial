@@ -14,7 +14,16 @@
         "value": "item.kaleidoscope_tavern:stepladder.name"
       },
       "minecraft:max_stack_size": 64,
-      "kaleidoscope_tavern:place_stepladder": {}
+      "kaleidoscope_tavern:place_stepladder": {},
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:stepladder",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
     }
   }
 }

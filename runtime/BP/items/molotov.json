@@ -34,6 +34,15 @@
         "tags": [
           "kaleidoscope_tavern:alcohol"
         ]
+      },
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:molotov",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
       }
     }
   }

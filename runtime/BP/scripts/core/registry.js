@@ -102,7 +102,7 @@ export class ExtensionRegistry {
   const recipeIds=new Set([...this.builtins,...recipes].map(x=>x.id));
   for(const p of pages)for(const rid of p.recipeIds)check(recipeIds.has(rid),'UNKNOWN_PAGE_RECIPE',rid);
   const foundation=normalizeFoundation(raw,source,this.itemExists);
-  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length);
+  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0)+(x.pickBlocks?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length+foundation.pickBlocks.length);
   check(total<=2048,'GLOBAL_REGISTRY_LIMIT');
   check(foundation.requires.every(x=>CAPABILITIES.includes(x)),'CAPABILITY_MISMATCH');
   const extension=freeze({...foundation,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},recipes,pages,shakerInputs,content});

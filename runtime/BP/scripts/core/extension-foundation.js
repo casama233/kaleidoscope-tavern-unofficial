@@ -21,10 +21,29 @@ export function normalizeFoundation(raw,source,itemExists){
   return {id:own(row.id,source),mode:row.mode,source};
  });
  check(new Set(normalizedEffects.map(x=>x.id)).size===normalizedEffects.length,'DUPLICATE_EFFECT');
+ const pickBlocks=raw.pickBlocks??[];
+ check(Array.isArray(pickBlocks)&&pickBlocks.length<=64,'PICK_BLOCK_LIMIT');
+ check(pickBlocks.reduce((sum,row)=>sum+(Array.isArray(row?.variants)?row.variants.length:0),0)<=256,'PICK_VARIANT_TOTAL');
+ const normalizedPicks=pickBlocks.map(row=>{
+  check(row&&typeof row==='object','PICK_BLOCK_SCHEMA');
+  const block=own(row.block,source),variants=row.variants;
+  check(Array.isArray(variants)&&variants.length>0&&variants.length<=64,'PICK_VARIANT_LIMIT');
+  return {block,source,variants:variants.map(v=>{
+   id(v.item);check(v.item.startsWith(source+':')||v.item.startsWith('minecraft:'),'FOREIGN_PICK_ITEM');
+   check(itemExists(v.item),'UNKNOWN_ITEM',v.item);
+   check(v.states&&typeof v.states==='object'&&!Array.isArray(v.states)&&Object.keys(v.states).length<=8,'PICK_STATES');
+   const states={};for(const [key,value] of Object.entries(v.states)){
+    own(key,source);check((typeof value==='string'&&value.length<=128)||typeof value==='boolean'||Number.isSafeInteger(value),'PICK_STATE_VALUE');
+    states[key]=value;
+   }
+   return {item:v.item,states};
+  })};
+ });
+ check(new Set(normalizedPicks.map(x=>x.block)).size===normalizedPicks.length,'DUPLICATE_PICK_BLOCK');
  const legacyEffectKey=raw.legacyEffectKey;
  if(legacyEffectKey!==undefined)check(legacyEffectKey===source+':effects','INVALID_LEGACY_EFFECT_KEY');
  const requires=raw.requires??[];check(Array.isArray(requires)&&requires.length<=16&&requires.every(x=>typeof x==='string'),'INVALID_REQUIRES');
- return {furniture,effects:normalizedEffects,legacyEffectKey,requires:[...new Set(requires)]};
+ return {furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,legacyEffectKey,requires:[...new Set(requires)]};
 }
 export function migrateLegacyEffects(raw,source,definitions,absoluteTick){
  check(typeof raw==='string','LEGACY_EFFECT_SCHEMA');

@@ -29,3 +29,10 @@ export function externalEffectSource(effect){const source=effect?.split(':')[0];
 
 export const externalEffectDefinition=id=>effectDefinitions.get(id);
 export const externalEffectMigrations=()=>[...foundations.entries()].filter(([,x])=>x.legacyEffectKey).map(([source,x])=>({source,key:x.legacyEffectKey,effects:x.effects}));
+
+/** External packs supply only data; the host owns the Creative pick adapter. */
+export function externalPickBlock(blockId){
+ for(const value of foundations.values()){
+  const rule=value.pickBlocks?.find(row=>row.block===blockId);if(rule)return rule;
+ }
+}

@@ -203,7 +203,7 @@ class HistoricalProjectionTests(unittest.TestCase):
                         for p in sorted((root/prefix).rglob('*')) if p.is_file()]
                 self.assertEqual({'files':len(rows), 'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}, expected)
 
-    def test_projection_changes_only_menu(self):
+    def test_projection_changes_only_reviewed_menu_and_native_registration(self):
         for root in (TAVERN, LIQUOR):
             projection = self.module.LegacyMenuProjection(root)
             for path in projection.menus:
@@ -213,6 +213,14 @@ class HistoricalProjectionTests(unittest.TestCase):
                 old = json.loads(projection.read_bytes(p))
                 current[kind]['description'].pop('menu_category')
                 old[kind]['description'].pop('menu_category')
+                pick = projection.native_picks.get(path)
+                if pick:
+                    comp = current['minecraft:item']['components']
+                    self.assertEqual(comp['minecraft:block_placer'], pick['after'])
+                    if pick['before'] is None:
+                        comp.pop('minecraft:block_placer')
+                    else:
+                        comp['minecraft:block_placer'] = pick['before']
                 self.assertEqual(current, old)
 
     def test_unreviewed_menu_change_is_not_masked(self):

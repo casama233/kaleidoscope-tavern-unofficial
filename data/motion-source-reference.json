@@ -68,7 +68,7 @@
   "preservedFiles": {
     "runtime/BP/scripts/core/ingredient-layout.js": "007a611bd27928ea2ff79691106d8db67fb98ebd8eec2739675afe88691b7e21",
     "runtime/BP/scripts/bedrock/barrel-ingredients.js": "0670f8c70caeb2caec4f754fe99fe1dbd575c79475bf0953c75458c6ae72315f",
-    "runtime/BP/scripts/bedrock/mixology.js": "8da0a3cb0becde083315ef3ba2284d1541110ab40b106760dcc707ed5dccdac3",
+    "runtime/BP/scripts/bedrock/mixology.js": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
     "runtime/RP/animations/runtime_barrel_ingredients.animation.json": "50716fa570560685542008909d3babf14cc55709c875d96ed1ce1c5d51be9bdf",
     "runtime/RP/models/entity/runtime_barrel_ingredients_card.geo.json": "de3cdb4d5612987494d610312ee1e088e9f66b99ef301af5a5894a22fd3748b6",
     "runtime/RP/models/entity/runtime_shaker_held.geo.json": "800ead78afb5e6de1950749231b1f841b29222305ba21705f79fee425add6a3f"
@@ -91,5 +91,12 @@
     "yawGainDegrees": 0.75,
     "maxDegreesPerUpdate": 0.06,
     "fadeTicks": 40
+  },
+  "approvedCreativePickIntegration": {
+    "version": "0.6.43",
+    "appendOnlyPaths": [
+      "runtime/BP/scripts/bedrock/mixology.js"
+    ],
+    "originalBodyProof": "data/pick-block-prefixes.json"
   }
 }

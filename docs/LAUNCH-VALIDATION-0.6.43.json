@@ -1,0 +1,48 @@
+{
+  "version": "0.6.43-candidate.1",
+  "baseline": "e4ce3cad4d8f2ac601a19eb7558fb791bcfcd855",
+  "javaSourceFilesVerified": 7,
+  "reviewedChanges": [
+    "runtime/BP/entities/thrown_molotov.json",
+    "runtime/BP/items/molotov.json",
+    "runtime/BP/manifest.json",
+    "runtime/BP/scripts/bedrock/custom-effects.js",
+    "runtime/BP/scripts/bedrock/holder.js",
+    "runtime/BP/scripts/bedrock/stateful-storage-router.js",
+    "runtime/BP/scripts/bedrock/storage-projectile.js",
+    "runtime/BP/scripts/bedrock/tap-sources.js",
+    "runtime/BP/scripts/bedrock/tilted-rack.js",
+    "runtime/BP/scripts/bedrock/tipsy-visual.js",
+    "runtime/BP/scripts/core/custom-effects.js",
+    "runtime/BP/scripts/main.js",
+    "runtime/RP/manifest.json"
+  ],
+  "unchangedExistingRuntimeFiles": 3624,
+  "pureRules": {
+    "pureChecks": "passed",
+    "rackVectorCases": 56,
+    "splashDurationThreshold": "strictly greater than 20 ticks",
+    "instantEffectsAttenuateStrength": true,
+    "javaReferenceAfter10Ticks": {
+      "x": 7.64943399929564,
+      "y": 0.20537749735865296,
+      "z": 0
+    },
+    "referenceIsNotBedrockMeasurement": true,
+    "simulatedPlayerTests": false
+  },
+  "nativeMolotovResources": "source/schema aligned; device acceptance pending",
+  "tipsyCameraOnlyRoll": "NOT_RESTORED",
+  "tipsyChanges": "diagnostics, immediate status hook and bounded transient-error retry only",
+  "bdsTest": "NOT_RUN",
+  "clientTest": "NOT_RUN",
+  "simulatedPlayerTests": false,
+  "limits": [
+    "No new BDS, client or simulated player tests",
+    "The projectile fields are source/schema alignment, not measured effective launch speed",
+    "Java triangular projectile spread versus native inaccuracy is not claimed identical",
+    "Fire support/soul-fire/portal rules are not fully mapped",
+    "All-LivingEntity custom-effect and potion-immunity parity remains incomplete",
+    "Tipsy camera-only roll is NOT restored or claimed verified"
+  ]
+}

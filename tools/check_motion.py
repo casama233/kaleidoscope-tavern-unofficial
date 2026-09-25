@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """Compare motion resources to source-derived dimensions; no game emulation."""
 from pathlib import Path
+from reviewed_changes import historical_digest,changes
 import hashlib,json
 ROOT=Path(__file__).resolve().parents[1]
 def read(name):return json.loads((ROOT/name).read_text(encoding='utf-8-sig'))
 def digest_group(dirname):
     rows=[]
     for p in sorted((ROOT/dirname).rglob('*')):
-        if p.is_file():rows.append(p.relative_to(ROOT).as_posix()+'\0'+hashlib.sha256(p.read_bytes()).hexdigest()+'\n')
+        if p.is_file():rows.append(p.relative_to(ROOT).as_posix()+'\0'+historical_digest(p)+'\n')
     return {'files':len(rows),'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}
 ref=read('data/motion-source-reference.json')
 for name,expected in ref['preservedGroups'].items():assert digest_group(name)==expected,('Preserved asset group changed',name)
-for name,expected in ref['preservedFiles'].items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==expected,('Preserved source changed',name)
+for name,expected in ref['preservedFiles'].items():assert historical_digest(ROOT/name)==expected,('Preserved source changed',name)
 java=ref['java']
 assert java['expectedCubeEdgePixels']==16*java['barrelRendererScale']*java['blockFixedScale']==4
 assert java['expectedCardWidthPixels']==16*java['barrelRendererScale']*java['generatedItemFixedScale']==8
@@ -32,6 +33,6 @@ assert all(anim[k]==v for k,v in old.items()),'First-person or shake animation c
 assert anim['animation.kt_mixology.hold_third']['bones']['grip']=={'position':[0,-1.5,-1],'rotation':[90,0,0],'scale':.5}
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read('release.json')['version']
-report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-1.5,'firstPersonAndShakeUnchanged':True,'preservedGroups':ref['preservedGroups'],'tipsyMode':'java_waveform_yaw_adapter','exactJavaRoll':False,'aimChangesSlightly':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
+report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-1.5,'firstPersonAndShakeUnchanged':True,'historicalGroupsVerified':ref['preservedGroups'],'reviewedSupersededFiles':sorted(name for name in changes() if name in ref['preservedFiles'] or any(name.startswith(prefix+'/') for prefix in ref['preservedGroups'])),'tipsyMode':'yaw_adapter_unverified','exactJavaRoll':False,'aimChangesSlightly':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
 (ROOT/f'docs/MOTION-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False))

@@ -1,0 +1,166 @@
+{
+  "baselineCommit": "e4ce3cad4d8f2ac601a19eb7558fb791bcfcd855",
+  "javaCommit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "javaSources": {
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/MolotovBlockItem.java": "d0d7ebd2e385d9cd4215cf2fa2b602d1ce1c4c81d034d61fe098efbfa5699776",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java": "01fcd8ff66b459bb1fe6251a4cf45255cb4f0e80af6e861f8772e72399c7b772",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/DrinkBlockItem.java": "f75bddffe9be3ecac0c94ed83afd1046585afcf831c447d96429371b722d0f43",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java": "c67328f66cd5fac4676c017c33d7e5b1019d2f562492f03e349b33682a73dbc6",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/HolderBlock.java": "19a01f0c523892dd6ed03046e5ff73a85dd0e0650c74f46603593ad495b8ad07",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/TiltedRackBlock.java": "54d45590b4e29d7ed52bed993ea8e01abf26e29463417ebfc1dd11397b7a22dd",
+    "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java": "7740f4222a1b21ba1d7ef99b751214867669bc365e866eed26acedaca137e29d"
+  },
+  "vanillaSource": {
+    "version": "1.20.1",
+    "metadataUrl": "https://piston-meta.mojang.com/v1/packages/2492c9d294776667e63b56a73a611ae327948de2/1.20.1.json",
+    "downloads": {
+      "server": {
+        "sha1": "84194a2f286ef7c14ed7ce0090dba59902951553",
+        "size": 47791053,
+        "url": "https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar"
+      },
+      "server_mappings": {
+        "sha1": "0b4dba049482496c507b2387a73a913230ebbd76",
+        "size": 6154195,
+        "url": "https://piston-data.mojang.com/v1/objects/0b4dba049482496c507b2387a73a913230ebbd76/server.txt"
+      }
+    },
+    "classes": {
+      "net.minecraft.world.effect.MobEffect": "bey",
+      "net.minecraft.world.entity.projectile.Projectile": "bzg",
+      "net.minecraft.world.entity.projectile.ThrowableProjectile": "bzn",
+      "net.minecraft.world.entity.projectile.ThrownPotion": "bzr",
+      "net.minecraft.world.level.block.BaseFireBlock": "cpb"
+    }
+  },
+  "samplesCommit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+  "reviewedChanges": {
+    "runtime/BP/entities/thrown_molotov.json": {
+      "before": "b5d3b23feb61b03152d1964d4513923da80b6d6a417c53ab7b4114aaf45bdcc1",
+      "after": "db9c883a8cf7f09c65fa51e199b6fd63affc6c3c54197557d7b127751384318a",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/items/molotov.json": {
+      "before": "9ea433c5ba972ee702b0f70ae0683ce09b0a59f7d67dc9e867f7407c6094c6b5",
+      "after": "6464ac8ef87854b9281eada20b1913f1cfb1759de4f7033405426d1714e4ad43",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/manifest.json": {
+      "before": "4f42fb78b057b2af7c7ccb7ed91dff5fb830c7bbb13c967bb9a9d38a38d1b7f2",
+      "after": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
+      "reason": "Candidate pack version; UUIDs/dependency identities unchanged"
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "before": "6d47513d813c46aa51605848e451713abac2b72b707e14854d8aab72b8eca60e",
+      "after": "4b2732661780bf6f527df6710443adba7a8119794bfc9eb26da9fdde7840ba51",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/holder.js": {
+      "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
+      "after": "eb42dcaa13fb442614f2606855194662c1e238432eba35f9bd2aac08d168ab37",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
+      "before": "178ce65aca67ca4e3ed92b6d9d813004045317d10b83c8552addc257cfc2ce1c",
+      "after": "3d345bde9a3aa128f00f3c8857c23930170fbaecb535c7e38f7966afd610bcdf",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/storage-projectile.js": {
+      "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
+      "after": "8987456c449ada602a86aaf4be200a0fde8db362144fc96d91d308f2f7946773",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/tap-sources.js": {
+      "before": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
+      "after": "39dd216079c79f8f7a31350e070fe5d39eeeb7aa05f87c5e57c15876bd664b3c",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/tilted-rack.js": {
+      "before": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
+      "after": "a831221cf91b1c2ea8c6a1fda40ac8f68c0632e996d4b38dda29a7af5977210d",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/bedrock/tipsy-visual.js": {
+      "before": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
+      "after": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/core/custom-effects.js": {
+      "before": "b50de21a7437c6c6fc59f572d2ed0bcd36c752f654045cffd7a5acc6f22c38fb",
+      "after": "c55d45f7edad89043982ace917d2237b4247a9969dddcca1a202bc82c2fb9fd2",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/BP/scripts/main.js": {
+      "before": "1181b9288d3bb6b4a4a74b1b415ebd4b7fb109e3c17f404f38070bc77716e276",
+      "after": "b19689a7d6f325f7bf14cb5606bcf036dfb6874b965b62c1cf3141710b83e2db",
+      "reason": "Reviewed launch/splash or Tipsy diagnostic change; see LAUNCH-AUDIT-0.6.43.md"
+    },
+    "runtime/RP/manifest.json": {
+      "before": "fad149fd5864d43767f7f68b0b428a48dcc99a9ab709014aabf0a87ea76fc6e7",
+      "after": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
+      "reason": "Candidate pack version; UUIDs/dependency identities unchanged"
+    }
+  },
+  "rules": {
+    "holder": {
+      "direction": "facing",
+      "mouthHeight": 0.875,
+      "horizontalOffset": 0.5,
+      "yVelocity": 0.375,
+      "factorMin": 0.5,
+      "factorMaxExclusive": 1.5
+    },
+    "tilted_rack": {
+      "direction": "opposite_facing",
+      "mouthHeight": 0.875,
+      "horizontalOffset": 0.5,
+      "yVelocity": 0.75,
+      "factorMin": 0.5,
+      "factorMaxExclusive": 1.5
+    },
+    "molotov": {
+      "minimumDrawTicks": 10,
+      "maximumUseTicks": 72000,
+      "speed": 0.8,
+      "drawScalesPower": false,
+      "javaUseAnimation": "SPEAR",
+      "eyeOffset": -0.1,
+      "airInertia": 0.99,
+      "waterInertia": 0.8,
+      "gravity": 0.03
+    },
+    "potion": {
+      "gravity": 0.05,
+      "airInertia": 0.99,
+      "waterInertia": 0.8,
+      "inflateAABB": [
+        4,
+        2,
+        4
+      ],
+      "radiusExclusive": 4,
+      "minTimedTicksExclusive": 20
+    },
+    "tipsy": {
+      "target": "additive_camera_roll",
+      "wave": "sin(t/19)*0.6+cos(t/13)*0.3+sin(t/9)*0.1",
+      "runtimeAdapter": "yaw_adapter_unverified",
+      "visualFixAccepted": false
+    }
+  },
+  "limits": [
+    "No new BDS, client or simulated player tests",
+    "The projectile fields are source/schema alignment, not measured effective launch speed",
+    "Java triangular projectile spread versus native inaccuracy is not claimed identical",
+    "Fire support/soul-fire/portal rules are not fully mapped",
+    "All-LivingEntity custom-effect and potion-immunity parity remains incomplete",
+    "Tipsy camera-only roll is NOT restored or claimed verified"
+  ],
+  "newRuntimeFiles": {
+    "runtime/BP/functions/kt_molotov_diagnose.mcfunction": "97ca130cd2b40792d47af9f711373273590592795817f844d8531f3f89553d31",
+    "runtime/BP/functions/kt_tipsy_diagnose.mcfunction": "eb4596fffa1a5865dd3cd363085c66048d41b41ca695206427cca325dff924bf",
+    "runtime/BP/scripts/bedrock/molotov.js": "ae3d9d297885c80b0cdf97bacc3809ddb28ff7901bc08d9e2d62d67b79bf7d4a",
+    "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2"
+  },
+  "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c"
+}

@@ -34,7 +34,7 @@ let state={schema:1,entries:[]};state=addStatus(state,TIPSY_ID,200,0);
 state=addStatus(state,TIPSY_ID,200,0);assert.equal(state.entries.length,1);
 state=readStatus(JSON.stringify(state));assert.equal(activeStatus(state,TIPSY_ID).ticks,200);
 assert.equal(activeStatus(advanceStatus(state,200),TIPSY_ID),undefined);
-assert.equal(CUSTOM_IMPLEMENTED[TIPSY_ID],'java_waveform_yaw_adapter');
+assert.equal(CUSTOM_IMPLEMENTED[TIPSY_ID],'yaw_adapter_unverified');
 let rows=0;
 for(const [base,qualities] of Object.entries(DRINK_EFFECTS))for(let q=0;q<qualities.length;q++){
  const lines=qualityBottleLore({typeId:`kaleidoscope_tavern:${base}_q${q+1}`});

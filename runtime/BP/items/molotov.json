@@ -18,8 +18,8 @@
         "do_swing_animation": true,
         "min_draw_duration": 0.5,
         "max_draw_duration": 3600,
-        "launch_power_scale": 0.8,
-        "max_launch_power": 0.8,
+        "launch_power_scale": 1.0,
+        "max_launch_power": 1.0,
         "scale_power_by_draw_duration": false
       },
       "minecraft:projectile": {
@@ -34,7 +34,8 @@
         "tags": [
           "kaleidoscope_tavern:alcohol"
         ]
-      }
+      },
+      "minecraft:use_animation": "spear"
     }
   }
 }

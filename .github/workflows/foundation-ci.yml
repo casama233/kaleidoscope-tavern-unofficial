@@ -5,7 +5,8 @@ on:
   pull_request:
     paths:
       - 'runtime/BP/scripts/**'
-      - 'tools/**'
+      - 'sdk/**'
+      - 'tools/foundation/**'
       - '.github/workflows/foundation-ci.yml'
 permissions:
   contents: read
@@ -20,18 +21,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: e7e808ca7124ad6e1641b373d6f07e9a29be19c3
+          ref: refactor/shared-foundation-20260925
           path: liquor
           persist-credentials: false
-      - name: Snapshot tracked integration inputs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record exact integration inputs
         run: |
           mkdir -p evidence
-          git -C tavern archive --format=tar.gz --output="$PWD/evidence/tavern-source.tar.gz" HEAD
-          git -C liquor archive --format=tar.gz --output="$PWD/evidence/liquor-source.tar.gz" HEAD
           git -C tavern rev-parse HEAD > evidence/TAVERN_COMMIT
           git -C liquor rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Cross-pack script regressions (not Minecraft client or BDS)
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -o pipefail
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test ./tools/foundation/foundation.test.mjs 2>&1 | tee ../evidence/foundation-tests.tap
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: shared-foundation-inputs
+          name: shared-foundation-regressions
           path: evidence/
-          retention-days: 7
+          retention-days: 14

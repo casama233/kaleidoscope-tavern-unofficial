@@ -1,0 +1,112 @@
+name: Verify and deliver all-PR reconciliation
+on:
+  push:
+    branches: [delivery/all-pr-20260925]
+permissions:
+  contents: read
+jobs:
+  delivery:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' || github.repository == 'casama233/kaleidoscope-world-liquor-unofficial'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: delivery/all-pr-20260925
+          path: delivery
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: tavern
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 89511c3da4f49463e6ba9e3eb920b18904b51e20
+          path: liquor
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: e96184327426d61244fac7c6331a041d38976e2a
+          path: pr88
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Apply exact reviewed trees
+        run: |
+          mkdir baseline evidence
+          git -C tavern archive HEAD | tar -x -C baseline
+          ln -s tavern tavern-src
+          ln -s liquor world-liquor-src
+          python delivery/.github/apply-integration.py
+      - name: Paired regressions and source rebuild (no Minecraft client or BDS)
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -euo pipefail
+          cd tavern
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/runtime-tests.tap
+          node --test tools/effect-bar.test.mjs 2>&1 | tee ../evidence/effect-bar.tap
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+          python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick.log
+          python tools/check_release.py > ../evidence/tavern-static.log
+          python tools/check_launch.py --java-source ../java --baseline ../baseline > ../evidence/launch.log
+          python tools/build_storage_visuals.py
+          git diff --exit-code -- runtime/
+          python tools/build_release.py
+          cd ../liquor
+          python tools/build_effect_names.py --check
+          python tools/build_storage_visuals.py
+          python tools/rebuild_guide.py
+          git diff --exit-code -- runtime/
+          python tools/check_release.py > ../evidence/liquor-static.log
+          python tools/build_release.py
+          cd ..
+          cp tavern/docs/LAUNCH-VALIDATION-0.6.44.json evidence/
+          cp tavern/docs/PR-INTEGRATION-0.6.44.md evidence/
+          cp tavern/dist/*.mcaddon liquor/dist/*.mcaddon evidence/
+      - name: Deliver reviewed source without changing main or publishing
+        env:
+          OWN: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ "$OWN" = casama233/kaleidoscope-tavern-unofficial ]; then
+            repo=tavern; base=cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          else
+            repo=liquor; base=89511c3da4f49463e6ba9e3eb920b18904b51e20
+          fi
+          test "$(git -C "$repo" ls-remote origin refs/heads/main | cut -f1)" = "$base"
+          test -z "$(git -C "$repo" ls-remote origin refs/heads/integration/reviewed-0.6.44)"
+          git -C "$repo" config user.name 'github-actions[bot]'
+          git -C "$repo" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          tree=$(git -C "$repo" write-tree)
+          parents=(-p "$base")
+          if [ "$repo" = tavern ]; then
+            for sha in 6ab728c926bc832333a0e9973072516c6c55fb46 a427c16f55d3a0d5eff08c3f5041832097dfaa70 15155f57d75ead6b73aedb1d509e0afaed6c1b71 e96184327426d61244fac7c6331a041d38976e2a; do
+              git -C "$repo" fetch --no-tags origin "$sha"
+              parents+=(-p "$sha")
+            done
+          fi
+          commit=$(git -C "$repo" commit-tree "$tree" "${parents[@]}" -m 'Integrate reviewed PRs without reverting newer foundation, pick and visual fixes')
+          git -C "$repo" push origin "$commit:refs/heads/integration/reviewed-0.6.44"
+          printf '%s\n' "$commit" > evidence/DELIVERED_COMMIT
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-integration-evidence
+          path: evidence/
+          retention-days: 14

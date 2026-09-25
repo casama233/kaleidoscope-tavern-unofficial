@@ -12,29 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: e4ce3cad4d8f2ac601a19eb7558fb791bcfcd855
           path: tavern-src
           persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: KaleidoscopeMods/KaleidoscopeTavern
-          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
-          path: java-src
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: Mojang/bedrock-samples
-          path: bedrock-samples
-          persist-credentials: false
-      - name: Archive exact sources and revisions
+      - name: Archive exact new main and revision
         run: |
           mkdir snapshots
-          for repo in tavern-src java-src bedrock-samples; do
-            git -C "$repo" rev-parse HEAD > "snapshots/$repo.commit"
-            git -C "$repo" archive --format=zip HEAD > "snapshots/$repo.zip"
-          done
+          git -C tavern-src rev-parse HEAD > snapshots/tavern-main.commit
+          git -C tavern-src archive --format=zip HEAD > snapshots/tavern-main.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: launch-tipsy-audit-sources
+          name: launch-new-main-source
           path: snapshots/*
           retention-days: 7

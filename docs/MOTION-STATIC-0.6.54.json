@@ -1,5 +1,5 @@
 {
-  "version": "0.6.53",
+  "version": "0.6.54",
   "baselineCommit": "e0330aaa4311519a2a646a2421c686b51cbe6a35",
   "checks": "passed",
   "cubeEdgePixels": 4,
@@ -32,7 +32,8 @@
   "creativeMenuProjectionFiles": 184,
   "tipsyMode": "yaw_adapter_unverified",
   "exactJavaRoll": false,
-  "aimChangesSlightly": true,
+  "aimChangesByDefault": false,
+  "aimChangesWhenOptedIn": true,
   "clientTested": false,
   "bdsTested": false,
   "simulatedPlayerTests": false

@@ -1,6 +1,6 @@
-# Java 對齊修復記錄：0.6.53 preview 1
+# Java 對齊修復記錄：0.6.54 preview 1
 
-日期：2026-09-27。基線：Bedrock `7eea296e198b45fcaf3ff63cc74cde61d46682ad`（0.6.52）；Java `c4ec1880bd44cf3139d3ba744ab30bb379cf1416`，Forge 1.20.1 / Tavern 1.2.0。分支 `fix/java-parity`。
+日期：2026-09-27。基線：Bedrock `005e0a080e2eddfedb9f24c6b3a72d657d2be7fe`（0.6.53）；Java `c4ec1880bd44cf3139d3ba744ab30bb379cf1416`，Forge 1.20.1 / Tavern 1.2.0。分支 `fix/java-parity`。
 
 ## 本批修改
 
@@ -13,7 +13,7 @@
 | 微醺 | 偏航替代需明確 opt-in；預設不呼叫 `setRotation`，仍保留酒效時間與提示。已有 opt-out 標記仍有效。 | 預設、啟用、停用與同時有兩標記的純規則檢查；3,601 個波形樣本。未聲稱完成純鏡頭 roll。 |
 | 尖嘯 | 不再排除所有玩家；生存／冒險可受擊，需 `world.gameRules.pvp === true`。創造／旁觀免疫；冒險模式飲用者可發出音波。 | PvP 開關、遊戲模式、傷害倍率和射程規則通過；多人實際傷害／擊退待驗收。 |
 | 玩家指南 | 增加長臂、尖嘯、微醺的實際體驗限制；修正舊調酒頁的「三項未實作」與 PvE 限定文字。 | 實際 Cookery 指南投影三語檢查。 |
-| 主線修復保全 | 已包含 0.6.51 防重複掉落、0.6.52 `Player.inputInfo.lastInputModeUsed` 修正。 | 既有掉落／儲存／資產檢查維持通過。 |
+| 主線修復保全 | 已包含 0.6.51 防重複掉落、0.6.52 `Player.inputInfo.lastInputModeUsed` 及 0.6.53 告示牌手持修正。 | 既有掉落／儲存／資產檢查維持通過。 |
 
 ### 修正原審查的一處來源錯誤
 
@@ -23,10 +23,11 @@
 
 ## 驗證證據
 
-- `python3 tools/check_release.py`：完整靜態檢查通過，含 1,923 份 JSON、926 個 geometry、本次碰撞與酒效政策檢查。
+- `python3 tools/check_release.py`：完整靜態檢查通過，含 1,921 份 JSON、925 個 geometry、本次碰撞與酒效政策檢查。
 - `python3 tools/java_collision.py --java-source /root/tavern-official-current`：來源檔案雜湊、25 款／97 個瓶數形狀與 42 個修改方塊一致。
-- 原生 BDS **1.26.51.1**：獨立新世界、Cookery **1.0.6**、本候選 Tavern；508 個狀態、4,172 個碰撞落點，全數通過。測試以寬／高 0.01 的臨時物理實體落下，直接讀取落地高度，未以模擬碰撞器代替引擎。
-- 準星選取射線另驗 4,172 次，全數符合目前單盒選取定義；瞬間治療 1 tick 在原生牛實體以 amplifier 0–3 施放，結果為 5、9、10、10 HP，符合最大生命上限。完整記錄見 [BDS log](BDS-PARITY-0.6.53.log)、[結果 JSON](PARITY-VALIDATION-0.6.53.json)。隔離環境啟動曾提示缺少 allowlist.json（allow-list=false），不影響測試完成；已補上空白名單檔。
+- 原生 BDS **1.26.51.1**：獨立新世界、Cookery **1.0.6**、本修復 Tavern（測量時版本標示 0.6.53，整合主線告示牌更新後候選版改為 0.6.54；碰撞／酒效實作相同）；508 個狀態、4,172 個碰撞落點，全數通過。測試以寬／高 0.01 的臨時物理實體落下，直接讀取落地高度，未以模擬碰撞器代替引擎。
+- 準星選取射線另驗 4,172 次，全數符合目前單盒選取定義；瞬間治療 1 tick 在原生牛實體以 amplifier 0–3 施放，結果為 5、9、10、10 HP，符合最大生命上限。完整記錄見 [BDS log](BDS-PARITY-0.6.54.log)、[結果 JSON](PARITY-VALIDATION-0.6.54.json)。隔離環境啟動曾提示缺少 allowlist.json（allow-list=false），不影響測試完成；已補上空白名單檔。
+- 整合主線後的 0.6.54 再次通過原生 BDS 啟動，零錯誤；見 [最終啟動 log](BDS-LOAD-0.6.54.log)。
 - 測試方塊與探針僅放在隔離世界；探針實體、測試腳本不包含在交付 BP/RP。
 - 本批未進入 luosen、未變更其世界、玩家資料或掛載包。未取得真人手機／鍵鼠多人驗收證據。
 

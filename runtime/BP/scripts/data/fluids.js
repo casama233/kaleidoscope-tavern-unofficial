@@ -1,4 +1,3 @@
-// Generated from locked data. Do not hand-edit.
 export const FLUIDS = [
   {
     "id": "kaleidoscope_tavern:grape_juice",
@@ -70,7 +69,7 @@ export const FLUIDS = [
     "id": "minecraft:water",
     "filled": "minecraft:water_bucket",
     "empty": "minecraft:bucket",
-    "rigSuffix": null,
+    "rigSuffix": "water",
     "title": {
       "en_US": "Water",
       "zh_TW": "水",
@@ -81,7 +80,7 @@ export const FLUIDS = [
     "id": "minecraft:lava",
     "filled": "minecraft:lava_bucket",
     "empty": "minecraft:bucket",
-    "rigSuffix": null,
+    "rigSuffix": "lava",
     "title": {
       "en_US": "Lava",
       "zh_TW": "熔岩",

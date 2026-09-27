@@ -1,0 +1,11 @@
+{
+  "namespace": "hud",
+  "hud_actionbar_text": {
+    "$kt_actionbar_text": "$actionbar_text",
+    "visible": "((($kt_actionbar_text - '§r[KT] 1:§') = $kt_actionbar_text) and (($kt_actionbar_text - '§r[KT] §b') = $kt_actionbar_text) and (not (('%.4s' * $kt_actionbar_text) = '!js.')))"
+  },
+  "hud_actionbar_text/actionbar_message": {
+    "$kt_actionbar_text": "$actionbar_text",
+    "visible": "((($kt_actionbar_text - '§r[KT] 1:§') = $kt_actionbar_text) and (($kt_actionbar_text - '§r[KT] §b') = $kt_actionbar_text) and (not (('%.4s' * $kt_actionbar_text) = '!js.')))"
+  }
+}

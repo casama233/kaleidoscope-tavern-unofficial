@@ -19,7 +19,12 @@ for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
-hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud and 'hud_actionbar_text' not in hud
+hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud
+# Only protocol-scoped visibility may touch native Actionbar controls. Never hide
+# all messages through alpha, bindings, or replacement controls.
+for key in ['hud_actionbar_text','hud_actionbar_text/actionbar_message']:
+    assert set(hud[key])=={'$kt_actionbar_text','visible'}
+subprocess.run(['node','tools/check_actionbar_filter.mjs'],cwd=ROOT,check=True)
 assert 'pbr' in docs[RT/'RP/manifest.json'].get('capabilities',[])
 # Custom entity materials must be in the client-discovered entry point, not
 # simply in any parseable .material file. BDS does not exercise this renderer.

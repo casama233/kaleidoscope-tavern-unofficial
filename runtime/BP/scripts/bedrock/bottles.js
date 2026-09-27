@@ -7,7 +7,7 @@ import {BOTTLES} from '../data/bottles.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {restorePotion} from './potions.js';
@@ -44,7 +44,7 @@ export function placeBottle(player,target,{expectedRevision}={}){
   // Match Java DrinkBlockItem/BlockItem: successful Creative placement/stacking does not shrink the stack.
   const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
   commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});
-  playMaterialInteraction(d,target,bottleBlock(next.base));tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
+  playMaterialInteraction(d,target,bottleBlock(next.base));return next;
  });
 }
 export function takeBottles(player,b,{all=false,expectedRevision}={}){
@@ -55,7 +55,7 @@ export function takeBottles(player,b,{all=false,expectedRevision}={}){
   const tx=displayTake(old,all),raw=store.raw(k),oldBlock=waterSnapshot(b),c=inventory(player);
   const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);
   commitInventory(plan,c,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});
-  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));tell(player,'§a已取回原品質酒瓶。');return tx;
+  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));return tx;
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{onPlayerInteract:nativeEmptyHandBlockUse,

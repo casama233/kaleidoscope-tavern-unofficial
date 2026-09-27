@@ -5,7 +5,7 @@ import {biomeBaseTemperature} from '../data/biome-temperatures.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
@@ -139,7 +139,6 @@ export function farmUse(player,b,{rng=Math.random}={}){
     exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});try{b.dimension.playSound('mob.sheep.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;
    }
   }
-  tell(player,`§a[Tavern] ${b.typeId.split(':')[1]} | ${isFrame(b.typeId)?shape(b):'fruit'} | age ${b.typeId===WILD_HEAD?wildVineAge(b):age(b)}${waxed(b)?' | waxed':''}`);
   return 'inspect';
  });
 }

@@ -16,7 +16,7 @@ function blockKind(state){return Math.min(state?.kind??0,15);}
 function kind(block){return block.permutation.getState(HOLDER_KIND)??0;}
 function intact(block,state){return block?.typeId===HOLDER_BLOCK&&kind(block)===blockKind(state);}
 function helperAt(block){const k=holderKey(block.dimension.id,block.location);return block.dimension.getEntities({location:blockCenter(block.location),maxDistance:1.5}).filter(e=>e.getDynamicProperty(ANCHOR)===k);}
-function discard(e,reason){e.remove();visuals.delete(e.id);holderDiagnostics[reason]=(holderDiagnostics[reason]??0)+1;}
+function discard(e,reason){const id=e.id;visuals.delete(id);if(e.isValid)e.remove();holderDiagnostics[reason]=(holderDiagnostics[reason]??0)+1;}
 function position(block,facing){const p=holderVisualPose(facing).offset;return {x:block.location.x+p.x,y:block.location.y+p.y,z:block.location.z+p.z};}
 export function syncHolderVisual(block,state=store.load(holderKey(block.dimension.id,block.location))){
  const all=helperAt(block);if(!state){for(const e of all)discard(e,'orphans');return undefined;}
@@ -48,7 +48,7 @@ export function recoverHolder(player,block,{expectedRevision}={}){
  canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');const give=[{id:HOLDER_BLOCK,count:1},...(old?[{id:old.item,count:1}]:[])];
  transact(player,block,old,undefined,0,give,air());holderDiagnostics.recovered++;return give;
 }
-export function maintainHolderVisual(e){
+export function maintainHolderVisual(e){if(!e?.isValid)return;
  if(!isExternalVisual(e?.typeId,HELPER))return;try{const raw=e.getDynamicProperty(ANCHOR);const a=holderAnchor(raw);if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==HOLDER_BLOCK){discard(e,'orphans');return;}const state=store.load(holderKey(e.dimension.id,a.position));if(!state){discard(e,'orphans');return;}visuals.set(e.id,e);syncHolderVisual(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}
 }
 export function tickHolderVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainHolderVisual);}
@@ -86,7 +86,7 @@ export function installHolderEvents(){
   },
   recover:({player,block,revision})=>recoverHolder(player,block,{expectedRevision:revision})
  });
- world.afterEvents.entityLoad.subscribe(e=>{if(isExternalVisual(e.entity.typeId,HELPER)){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
+ world.afterEvents.entityLoad.subscribe(e=>{if(e.entity.isValid&&isExternalVisual(e.entity.typeId,HELPER)){visuals.set(e.entity.id,e.entity);system.run(()=>maintainHolderVisual(e.entity));}});
  system.runInterval(tickHolderVisuals,20);
 }
 export const HOLDER_TEST={store,visuals,HELPER,ANCHOR};

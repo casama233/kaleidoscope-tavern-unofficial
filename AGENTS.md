@@ -4,3 +4,4 @@
 - Use Cookery's existing guide API and Tavern's shared addon projection. Addons provide data, not duplicate guide UIs.
 - Keep original Java mechanics authoritative. For boards, Java alignment is left / center / right.
 - Do not use simulated players. Distinguish static checks, native BDS loading, and actual client acceptance.
+- Do not add successful placement, pickup or machine-operation Actionbar announcements absent from Java. Preserve source-backed rejection messages and brewing status.

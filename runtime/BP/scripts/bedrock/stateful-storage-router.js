@@ -37,10 +37,16 @@ function revisionOf(read,block){
 }
 
 export function tickStorageVisuals(visuals,cursor,maintain,budget=128){
- const list=[...visuals.values()];
+ const list=[...visuals.entries()];
  if(!list.length)return cursor;
  const n=Math.min(budget,list.length);
- for(let i=0;i<n;i++)maintain(list[(cursor+i)%list.length]);
+ for(let i=0;i<n;i++){
+  const [id,entity]=list[(cursor+i)%list.length];
+  // Earlier maintenance may remove another slot in this captured work list.
+  if(visuals.get(id)!==entity)continue;
+  if(!entity.isValid){visuals.delete(id);continue;}
+  maintain(entity);
+ }
  return (cursor+n)%list.length;
 }
 

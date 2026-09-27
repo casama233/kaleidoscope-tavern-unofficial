@@ -117,7 +117,7 @@ export function createBarrel(player,target){
    for(let i=0;i<blocks.length;i++){const p=positions[i],states=p.core?{[CARDINAL]:cardinal}:{[NS+':dx']:p.dx,[NS+':dy']:p.dy,[NS+':dz']:p.dz,[CARDINAL]:cardinal};touched=i+1;blocks[i].setPermutation(BlockPermutation.resolve(p.core?CORE:PART,states));}
    store.save(key,state,-1);
   },rollback);
-  const core=blockAt(dimension,target);safeVisuals(core,state);tell(player,'§a酒桶已建立；潛行空手點擊可開關蓋。');return state;
+  const core=blockAt(dimension,target);safeVisuals(core,state);return state;
  });
 }
 export function operate(player,block,action,expected){
@@ -136,7 +136,7 @@ export function operate(player,block,action,expected){
   // All material transactions consume even in creative to prevent returning extra containers each click.
   // Free creative placement is the only exemption; the policy is explicit in the guide.
   commitInventory(plan,c,()=>store.save(key,tx.state,state.revision),()=>store.restoreRaw(key,original));
-  safeVisuals(core,tx.state);if(action==='remove_ingredient'||action==='use'&&tx.state.slots.some((v,i)=>v?.count!==(state.slots[i]?.count)))ingredientFeedback(core,action==='remove_ingredient');else feedback(core,action==='lid'?(tx.state.open?'open':'close'):action==='remove_ingredient'?'take':action==='extract'?'fill':tx.state.amount>state.amount?'empty':'fill',tx.state.revision);tell(player,'§a'+tx.message);return tx;
+  safeVisuals(core,tx.state);if(action==='remove_ingredient'||action==='use'&&tx.state.slots.some((v,i)=>v?.count!==(state.slots[i]?.count)))ingredientFeedback(core,action==='remove_ingredient');else feedback(core,action==='lid'?(tx.state.open?'open':'close'):action==='remove_ingredient'?'take':action==='extract'?'fill':tx.state.amount>state.amount?'empty':'fill',tx.state.revision);return tx;
  });
 }
 export function tubTilted(block){return ['north','east','south','west'].includes(block?.permutation.getState(TUB_FACE));}
@@ -147,7 +147,7 @@ export function press(block,entity,fallDistance){
   const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);
   const drops=spawnRejectedIngredients(block,tx.eject);
   try{store.save(key,tx.state,state.revision);}catch(error){for(const e of drops)try{e.remove();}catch{}throw error;}
-  pressedFalls.set(entity.id,{tick:system.currentTick,pressed:tx.pressed});if(pressedFalls.size>256)for(const[id,v]of pressedFalls)if(system.currentTick-v.tick>2)pressedFalls.delete(id);safeVisuals(block,tx.state);pressFeedback(block,tx);if(player)tell(entity,tx.message+`｜待壓榨 ${tx.state.slots[0]?.count??0}`);return tx;
+  pressedFalls.set(entity.id,{tick:system.currentTick,pressed:tx.pressed});if(pressedFalls.size>256)for(const[id,v]of pressedFalls)if(system.currentTick-v.tick>2)pressedFalls.delete(id);safeVisuals(block,tx.state);pressFeedback(block,tx);return tx;
  });});
 }
 export function tickBarrel(block,elapsed=97){
@@ -333,7 +333,7 @@ export function dismantle(player,block){
   const give=player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1},...(state.kind==='pressing_tub'?state.slots.filter(Boolean):[])];
   const old=blocks.map(waterSnapshot),raw=store.raw(key);const plan=planInventory(inv(player),player.selectedSlotIndex,0,give,make);
   let touched=0;commitInventory(plan,inv(player),()=>{for(let i=0;i<blocks.length;i++){touched=i+1;setWithWater(blocks[i],BlockPermutation.resolve('minecraft:air'));}store.remove(key,state.revision);},()=>{for(let i=0;i<touched;i++)restoreWater(blocks[i],old[i]);store.restoreRaw(key,raw);});
-  try{removeVisuals(core);}catch(e){warn(e,key);}tell(player,'§a已拆除設備。');
+  try{removeVisuals(core);}catch(e){warn(e,key);}
  });
 }
 export function setRegistry(value){registry=value;}

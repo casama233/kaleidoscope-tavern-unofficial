@@ -338,8 +338,8 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "8071491dbb1efc540c654356d11f9cf87f54acee652264648af84f71cd546e7b",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+      "after": "26bece6429e89bce747f6739b6c16d448df4df08d62a6ee727d1a1ae28e4db81",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
@@ -362,14 +362,14 @@
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
       "beforeProjected": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
-      "after": "eb42dcaa13fb442614f2606855194662c1e238432eba35f9bd2aac08d168ab37",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "e4a566d00325b467ee359b3999761f569b1c013205da3cca079960a85bedf3c9",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "6241738d8fe92996c0356370cc6c5fd3810058af0ee95821360ba8bef0f6d93d",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "after": "bba5ca987aa8c02c7a887182fc1e1f2111c9ac9dac40310c8ab730ade441579c",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
@@ -386,8 +386,8 @@
     "runtime/BP/scripts/bedrock/tilted-rack.js": {
       "before": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
       "beforeProjected": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
-      "after": "a831221cf91b1c2ea8c6a1fda40ac8f68c0632e996d4b38dda29a7af5977210d",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "be0ab2f08ce0d98a967c4ee0aa97533edd53db27a24f264e21bb042868d84498",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/tipsy-visual.js": {
       "before": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
@@ -416,14 +416,14 @@
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "734c2dc8f4a5bbb672f8d8fd51020c19722bd1ce3154c9a53f960d88e8b5fa64",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+      "after": "3f86a85470fd7c5d12692aaa7eef6d4ff425787c815ccaefc667e95845c17cc7",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "6bd41f3dcce59ac175e4a14307966fb11613ce1ac1f00a4482862991fdf4acf1",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+      "after": "799dbee9b3b40c0d15cc384bcb83bb593e8eee89039f49c0e85ca24cbb5a5d3b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
@@ -536,8 +536,8 @@
     "runtime/BP/scripts/data/cookery-guide-payload.js": {
       "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
       "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
-      "after": "0687a6f7b854557e1cede8306345d620315237e3c2c51a2f02eb814bd7970eb7",
-      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+      "after": "430dd71e430d615775d63b5e37f34c47e475aeb3e98bf5502b0e6ce471fcb9e3",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/blocks/pine_incense.json": {
       "before": "0001e93157150d410824e8c95445f52946b9991ee96f33a0a4399cc67b3c85cd",
@@ -1682,8 +1682,8 @@
     "runtime/BP/scripts/bedrock/bottles.js": {
       "before": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a",
       "beforeProjected": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a",
-      "after": "57559205f0cd3d3f3ec1ea6c879d1a43f157013315c5fa0eb4acb7c3e611994c",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "205a320b73ef3e603e0bf7ca729a2ecfcb0cde104b3da6e49149272242861fcb",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/shaker-screen.js": {
       "before": "72cea053ca1e6b41fc3bf1330a0fc61fbf051aada9b5c70662e27a575af65a45",
@@ -1862,8 +1862,8 @@
     "runtime/BP/scripts/bedrock/machines.js": {
       "before": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
       "beforeProjected": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
-      "after": "5f93b8aaa9379b2c87d4b80e6da1507d4448d3ec8e29359f80e22075e06951ba",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state."
+      "after": "e17c852bebd00927e07c98f44373d929afc78fda04a3707758a8f2a71921f7d0",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
     },
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
@@ -1888,6 +1888,42 @@
       "beforeProjected": "28b13afc89f99694304865c6baad58b282ba7c0599cd9c70175c8efd489480c6",
       "after": "7dd899e63e01ddfa71c4ef07759d397ac5e961ffb3f0a36fc44d86218f55ea9a",
       "reason": "0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+    },
+    "runtime/BP/scripts/bedrock/cellar-cabinet.js": {
+      "before": "fa58d24275e5742d2225e0428985d64153826a145159474696c5c795b9c94f84",
+      "beforeProjected": "fa58d24275e5742d2225e0428985d64153826a145159474696c5c795b9c94f84",
+      "after": "d3b45d6181144e58a972f1bd157f6934fdda4e5bfdf9b8bab1a59840cfa59390",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/BP/scripts/bedrock/circular-rack.js": {
+      "before": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
+      "beforeProjected": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
+      "after": "5171891fe156ee87a3738ee74df8977f5c1e7829317dafe026805d8701d72a19",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/BP/scripts/bedrock/bar-cabinet.js": {
+      "before": "ca1c3717c30c54e8ef0e5ba59a15ef12d99198eef103d6b9b7d23ae07c180046",
+      "beforeProjected": "ca1c3717c30c54e8ef0e5ba59a15ef12d99198eef103d6b9b7d23ae07c180046",
+      "after": "f738ab38f51f0d489727e415223a7bcf60e671dd274203a5fd02a413324a51d5",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/BP/scripts/bedrock/extension-furniture.js": {
+      "before": "7544b973d83231580225157ccecd2f3bef0358c4c87170d57cf3ee8aa4cb7d85",
+      "beforeProjected": "7544b973d83231580225157ccecd2f3bef0358c4c87170d57cf3ee8aa4cb7d85",
+      "after": "be24943ffbbe83a32fc4844ec9f3b7e24b5b6f8b943a79dd72bde61aff27c3cb",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/BP/scripts/bedrock/cultivation.js": {
+      "before": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
+      "beforeProjected": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
+      "after": "4efee7a0aebced07cd093c134eb5382177d74f227950c21f9f53c16d554b0c03",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/RP/animations/runtime_shaker.animation.json": {
+      "before": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
+      "beforeProjected": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
+      "after": "6c1b5ab897692c6dca4dea71b0be827765e79487fd6a97c786c625c058981689",
+      "reason": "User reports first-person shaker disappears while third-person shake plays. Keep first-person arm channels unchanged; apply Java third-person target by additive target-minus-this, without unconditional bone reset."
     }
   },
   "rules": {

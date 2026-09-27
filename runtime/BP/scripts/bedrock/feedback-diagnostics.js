@@ -18,3 +18,6 @@ function request(kind,id,fn){
 }
 export function playWorldSound(dimension,id,location,options){return request('sound',id,()=>dimension.playSound(id,location,options));}
 export function spawnWorldParticle(dimension,id,location,variables){return request('particle',id,()=>dimension.spawnParticle(id,location,typeof variables==='function'?variables():variables));}
+
+// A recipient-specific sound allows local 2D feedback without a second world broadcast.
+export function playPlayerSound(player,id,options){return request('sound',id,()=>player.playSound(id,options));}

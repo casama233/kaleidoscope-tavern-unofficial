@@ -1868,8 +1868,8 @@
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
       "beforeProjected": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
-      "after": "aeb7d5b4b22e83ce6e6c1a7c05552ca0e70dbab3ee0144b125b2bd9c5f91e2f1",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state."
+      "after": "96a3b507075c9ffb2bb07b77da4c9faf55c074425df3f64e6925d948cdb902c6",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state.; follow-up real-client shaker clip: use native player perspective variable; local non-positional and observer positional sounds."
     },
     "runtime/BP/scripts/core/boards.js": {
       "before": "7e21c1d99ddf944c11cfe443cf74fe45451ae1d68888eb34e992fd3a82e9fb7d",
@@ -1918,6 +1918,18 @@
       "beforeProjected": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
       "after": "4efee7a0aebced07cd093c134eb5382177d74f227950c21f9f53c16d554b0c03",
       "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+    },
+    "runtime/RP/animations/runtime_shaker.animation.json": {
+      "before": "6c1b5ab897692c6dca4dea71b0be827765e79487fd6a97c786c625c058981689",
+      "beforeProjected": "6c1b5ab897692c6dca4dea71b0be827765e79487fd6a97c786c625c058981689",
+      "after": "359150b1c88e1177d2ff534bce94591c1491ee6ff38b5781fc69a84c462b7c52",
+      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast."
+    },
+    "runtime/RP/sounds/sound_definitions.json": {
+      "before": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
+      "beforeProjected": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
+      "after": "7e73a191298435d9da969759af1c55284111b577d110353168f7a19218368591",
+      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast."
     }
   },
   "rules": {
@@ -1998,7 +2010,7 @@
     "runtime/RP/textures/ui/tavern_entries/emerald.png": "7c96475b8c953edfc2c70a595c7c8aecde9670a93efb3a50f0254de4d8105366",
     "runtime/BP/scripts/bedrock/scripted-block-change.js": "ad067ad2193b8d8c9c79f6288857898d9d4068283b06a72041e888fab725ca6a",
     "runtime/BP/scripts/data/legacy-guide-projection.js": "8d5d7bc9262f4f86dbaf98b880d5af5c98d91ec6bead3475f08d096564fe506d",
-    "runtime/BP/scripts/bedrock/feedback-diagnostics.js": "32f49fd88fc31a7b32323e5e031a30ece332cffcf3b363d5dbbc82101d0362a4",
+    "runtime/BP/scripts/bedrock/feedback-diagnostics.js": "e776da556900ad529d0af14086413f73e8281f08d6b066d5d88d220c7dbc312b",
     "runtime/BP/scripts/data/guide-navigation.js": "0145a51695cd22876492b83fe9edfdc6ff2f893eb536cf4b66b7b680c88913a6",
     "runtime/RP/textures/ui/tavern_entries/green_grape.png": "67285c9bc712cbf1b82fe49fac703e58f38ee036c4b1ef2fedabb32bb6f5ec6c",
     "runtime/RP/textures/ui/tavern_entries/grape.png": "6477f5f3f6753ea75f5854ccc30219167d7a0ea44fce48d11cc13f2c8c852f12",

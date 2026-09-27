@@ -1,0 +1,32 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "酒館：第一人稱搖杯修正",
+    "description": "第一人稱搖杯視角修正與操作者置中音效。",
+    "uuid": "8c1969c9-5b73-4c09-bd20-80e5793fdc30",
+    "version": [
+      1,
+      0,
+      1
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "8aa66eeb-f1cf-4d29-9d27-a6fcbfdf3444",
+      "version": [
+        1,
+        0,
+        1
+      ]
+    }
+  ],
+  "capabilities": [
+    "pbr"
+  ]
+}

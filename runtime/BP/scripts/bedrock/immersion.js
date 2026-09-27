@@ -1,4 +1,4 @@
-import {playWorldSound} from './feedback-diagnostics.js';
+import {playWorldSound,playPlayerSound} from './feedback-diagnostics.js';
 /** Mixology rendering and sound; recipe/inventory authority stays in mixology.js. */
 import {system,world,MolangVariableMap} from '@minecraft/server';
 const NS='kaleidoscope_tavern',TYPE=NS+':shaker_visual',ANCHOR='kt:shaker_visual_anchor',PUT=NS+':put_visual',STATION=NS+':shaker_station';
@@ -23,8 +23,19 @@ export function shakerPut(block,revision){optional(()=>{
 export function repairShakerPutVisual(block){if(block.typeId===STATION&&block.permutation.getState(PUT)===1){const active=puts.get(key(block));if(!active||active.until<=system.currentTick)syncShakerVisual(block);}}
 export function worldSound(dimension,location,id,volume=.65,pitch=1){return playWorldSound(dimension,id,location,{volume,pitch});}
 export function feedback(block,kind){const p={...point(block),y:block.location.y+.4},sound={fill:'bottle.fill',empty:'bottle.empty',open:'block.barrel.open',close:'block.barrel.close',press:'bottle.fill',take:'pop'}[kind]??'bottle.fill';worldSound(block.dimension,p,sound);}
-export function shakeAudio(player,ticks){if(ticks%10===0)worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.shaking',.75+Math.random()*.2,.8+Math.random()*.2);}
-export function finished(player){worldSound(player.dimension,player.location,'kt_assets_a17.item.shaker.end',1,1);}
+// Owner hears a non-positional event. Others receive the original positional event
+// once, in the same dimension and audible radius; never broadcast back to owner.
+function heldShakerSound(player,id,volume,pitch){
+ playPlayerSound(player,id+'.local',{volume,pitch});
+ optional(()=>{
+  const location=player.location;
+  for(const listener of player.dimension.getPlayers({location,maxDistance:16*Math.max(1,volume)})){
+   if(listener.id!==player.id)playPlayerSound(listener,id,{location,volume,pitch});
+  }
+ });
+}
+export function shakeAudio(player,ticks){if(ticks%10===0)heldShakerSound(player,'kt_assets_a17.item.shaker.shaking',.75+Math.random()*.2,.8+Math.random()*.2);}
+export function finished(player){heldShakerSound(player,'kt_assets_a17.item.shaker.end',1,1);}
 // Third-person arm motion is registered on the PLAYER resource definition. An
 // attachable cannot animate nonexistent rightarm/leftarm bones on its owner.
 export function startShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_shake',{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:'q.main_hand_item_use_duration <= 0'}));}

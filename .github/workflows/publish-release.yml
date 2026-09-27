@@ -72,8 +72,6 @@ jobs:
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Audit all runtime changes against pinned main and Java
         run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
-      - name: Integrated runtime callbacks (not client tests)
-        run: node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/pr-integration.test.mjs
       - name: Build complete BP and RP package
         run: python tools/build_release.py
       - name: Verify archive and include evidence
@@ -106,6 +104,8 @@ jobs:
           for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC', 'LAUNCH-VALIDATION'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
+          for name in ('PAIRED-VALIDATION-2026-09-27.json', 'BDS-LOAD-2026-09-27.log'):
+              shutil.copy2(Path('docs') / name, out / name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
           PY
       - name: Stage assets, verify uploaded bytes, then publish

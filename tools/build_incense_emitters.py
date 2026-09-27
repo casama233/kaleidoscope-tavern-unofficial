@@ -2,7 +2,7 @@
 """Finite client emitters; Java shapes/sprite roles without per-particle packets.
 See docs/REPAIR-0.6.39.md for pinned Java and Bedrock references.
 """
-import copy,json
+import copy,json,math
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 RP=ROOT/'runtime/RP/particles'
@@ -14,14 +14,17 @@ def finite(data,name,rate):
  for key in list(c):
   if key.startswith(('minecraft:emitter_rate_','minecraft:emitter_lifetime_','minecraft:emitter_shape_')):del c[key]
  c['minecraft:emitter_lifetime_once']={'active_time':1}
- c['minecraft:emitter_rate_steady']={'spawn_rate':rate,'max_particles':rate+2}
+ c['minecraft:emitter_rate_steady']={'spawn_rate':rate,'max_particles':math.ceil(rate)+2}
  c['minecraft:emitter_local_space']={'position':False,'rotation':False}
+ # Face the viewer like Java TextureSheetParticle. rotate_xyz leaves thin
+ # cards edge-on from most viewing directions, so increased rates alone fail.
+ c['minecraft:particle_appearance_billboard']['facing_camera_mode']='lookat_xyz'
  # Neither long-lived/looping emitters nor frame-by-frame random walk loops.
  c.pop('minecraft:particle_initialization',None);c.pop('minecraft:particle_motion_parametric',None)
  return d,c
 for kind in KINDS:
  stem=kind+'_incense';small=json.loads((RP/(stem+'.json')).read_text())
- plume,c=finite(small,stem+'_plume',2)
+ plume,c=finite(small,stem+'_plume',20/3)
  c['minecraft:emitter_shape_point']={'offset':[0,0,0],'direction':['math.random(-0.35,0.35)',1,'math.random(-0.35,0.35)']}
  c['minecraft:particle_initial_speed']='0.4 + variable.particle_random_1 * 0.2'
  c['minecraft:particle_lifetime_expression']={'max_lifetime':'(40 + math.floor(variable.particle_random_2 * 20)) / 20'}
@@ -30,7 +33,7 @@ for kind in KINDS:
  c['minecraft:particle_appearance_tinting']={'color':[1,1,1,'0.8 * math.clamp((1 - variable.particle_age / variable.particle_lifetime) * 4, 0, 1)']}
  write(stem+'_plume',plume)
  base=RP/(stem+'_large.json');base=json.loads(base.read_text()) if base.exists() else small
- ambient,c=finite(base,stem+'_ambient',20)
+ ambient,c=finite(base,stem+'_ambient',48)
  offset,half=(-0.67,5.33) if kind=='firefly' else (-2,16)
  c['minecraft:emitter_shape_box']={'offset':[0,offset+half/2,0],'half_dimensions':[16,half/2,16],'surface_only':False,'direction':[0,-1,0]}
  c['minecraft:particle_initial_speed']=0.16

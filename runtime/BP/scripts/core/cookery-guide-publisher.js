@@ -2,7 +2,7 @@
  * Publishes Tavern content into the existing Cookery guide without importing
  * or overwriting Cookery scripts. Protocol verified against Cookery v1.0.6.
  */
-import {canonical,digest} from './util.js';
+import {canonical,digest,utf8Bytes} from './util.js';
 export const COOKERY_GUIDE_EVENTS=Object.freeze({
  ready:'kaleidoscope_cookery:guidebook_ready',
  ping:'kaleidoscope_cookery:guidebook_ping',
@@ -12,32 +12,55 @@ export const COOKERY_GUIDE_EVENTS=Object.freeze({
 });
 export const COOKERY_GUIDE_SOURCE='kt_tavern';
 export const COOKERY_GUIDE_REVISION='c6_guide_1';
-export const COOKERY_GUIDE_CHUNK_SIZE=1600;
+export const COOKERY_GUIDE_CHUNK_SIZE=1900;
 export const cookeryGuideRevision=payload=>'c6_'+digest(canonical(payload));
 
-/** Cookery 1.0.6 filters uppercase region codes from mechanicsByLocale.
- * Keep the complete localized source catalog, but transport a readable bilingual
- * fallback in the supported mechanics field. No Cookery script is overwritten.
- * Do not send three ignored copies of the text: they can exceed the host's
- * 512-chunk limit when Tavern and World Liquor are installed together.
+/** The public 1.0.6 host keeps at most eight 512-character steps. Pack
+ * paragraphs before transport, never slice away the recipe or Q4–Q6 effects.
+ * Modern hosts select the complete locale map; legacy hosts use the bilingual
+ * fallback. Only referenced names travel, keeping the combined book under the
+ * host's 512-packet limit without deleting English or mutating source entries.
  */
+export function packGuideParagraphs(rows){
+ const chunks=[];
+ for(const row of rows??[]){
+  let rest=String(row);
+  while(rest.length){
+   const last=chunks.length-1;
+   if(last>=0&&chunks[last].length+1+rest.length<=512){chunks[last]+='\n'+rest;break;}
+   let end=Math.min(rest.length,512);
+   if(end<rest.length){const boundary=rest.lastIndexOf(' ',end);if(boundary>256)end=boundary;}
+   chunks.push(rest.slice(0,end));rest=rest.slice(end).trimStart();
+  }
+ }
+ if(chunks.length>8)throw new RangeError('Guide entry exceeds the host text budget; shorten its source instructions.');
+ return chunks;
+}
 export function cookery106WirePayload(payload){
- const out={...payload,entries:payload.entries.map(entry=>{
-  const {mechanicsByLocale,...wire}=entry;
-  if(!mechanicsByLocale)return wire;
-  const zh=mechanicsByLocale.zh_TW??entry.mechanics??[];
-  const en=mechanicsByLocale.en_US??[];
-  wire.mechanics=Array.from({length:Math.max(zh.length,en.length)},(_,i)=>[...new Set([zh[i],en[i]].filter(Boolean))].join('\n'));
-  return wire;
- })};
- return out;
+ const needed=new Set();
+ const entries=payload.entries.map(entry=>{
+  needed.add(entry.id);
+  for(const id of entry.usedBy??[])needed.add(id);
+  for(const recipe of entry.recipes??[]){for(const id of recipe.ingredients??[])needed.add(id);if(recipe.result)needed.add(recipe.result);}
+  const localized=entry.mechanicsByLocale??{};
+  const zh=localized.zh_TW??entry.mechanics??[],en=localized.en_US??[];
+  const fallback=[...new Set([...zh,...en])];
+  return {...entry,mechanics:packGuideParagraphs(fallback),
+   mechanicsByLocale:Object.fromEntries(Object.entries(localized).map(([lc,rows])=>[lc,packGuideParagraphs(rows)]))};
+ });
+ const names=Object.fromEntries(Object.entries(payload.names??{}).map(([lc,rows])=>[lc,Object.fromEntries(Object.entries(rows).filter(([id])=>needed.has(id)))]));
+ return {...payload,entries,names};
 }
 
 export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,revision=COOKERY_GUIDE_REVISION}={}){
  if(!payload||payload.api!==1||payload.id!=='kaleidoscope_tavern:tavern')throw new TypeError('Invalid Tavern guide payload.');
  if(typeof source!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(source)||typeof revision!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(revision))throw new TypeError('Invalid Cookery guide envelope.');
- const raw=JSON.stringify(cookery106WirePayload(payload)).replace(/[^\x20-\x7e]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'));
- const chunks=[];for(let i=0;i<raw.length;i+=COOKERY_GUIDE_CHUNK_SIZE)chunks.push(raw.slice(i,i+COOKERY_GUIDE_CHUNK_SIZE));
+ const raw=JSON.stringify(cookery106WirePayload(payload));
+ const chunks=[];let part='',bytes=0;
+ // Split on Unicode code points and enforce the stricter UTF-8 byte budget.
+ // Escaping every Chinese character consumed twice as much transfer capacity.
+ for(const char of raw){const size=utf8Bytes(char);if(bytes+size>COOKERY_GUIDE_CHUNK_SIZE){chunks.push(part);part='';bytes=0;}part+=char;bytes+=size;}
+ if(part)chunks.push(part);
  if(!chunks.length||chunks.length>512)throw new RangeError('Guide exceeds Cookery v1 transfer capacity.');
  const envelope={api:1,source,id:payload.id,revision};
  const messages=[
@@ -45,7 +68,7 @@ export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,
   ...chunks.map((data,index)=>({id:COOKERY_GUIDE_EVENTS.chunk,message:[source,payload.id,revision,index,data].join('\n')})),
   {id:COOKERY_GUIDE_EVENTS.end,message:JSON.stringify(envelope)}
  ];
- for(const m of messages)if(m.message.length>2048||/[^\x00-\x7f]/.test(m.message))throw new RangeError('Unsafe Cookery guide Script Event packet.');
+ for(const m of messages)if(utf8Bytes(m.message)>2048)throw new RangeError('Unsafe Cookery guide Script Event packet.');
  return messages;
 }
 

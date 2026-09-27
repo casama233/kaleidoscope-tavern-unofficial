@@ -27,8 +27,11 @@ function tickIncense(block){
  // One networked emitter for each layer, not one packet per particle.
  // Each finite emitter emits for one second (the block's 20-tick cadence),
  // then stops. Turning off/destroying/unloading cannot leave a looping source.
- optional(()=>block.dimension.spawnParticle(spec.small+'_plume',p));
- if(open)optional(()=>block.dimension.spawnParticle(spec.small+'_ambient',p));
+ // Loaded incense outside client viewing range needs no visual packets.
+ if(block.dimension.getPlayers({location:p,maxDistance:40}).length){
+  optional(()=>block.dimension.spawnParticle(spec.small+'_plume',p));
+  if(open)optional(()=>block.dimension.spawnParticle(spec.small+'_ambient',p));
+ }
  const pulseDue=incensePulseDue(block);
  if(open&&pulseDue){
   const location={x:block.location.x-32,y:block.location.y-32,z:block.location.z-32},volume={x:65,y:65,z:65};

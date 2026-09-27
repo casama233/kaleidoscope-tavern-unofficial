@@ -2,13 +2,11 @@
 
 An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, and a companion add-on for [Kaleidoscope Cookery (Unofficial)](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) by Loyallay.
 
-[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.42.md) · [Credits](CREDITS.md)
+[繁體中文](README.zh-TW.md) · [Installation](docs/INSTALLATION.md) · [Release notes](docs/RELEASE-NOTES-0.6.46.md) · [Credits](CREDITS.md)
 
-**Current public beta: 0.6.42-beta.1.** PBR, signature cocktail icons, and Slightly Tipsy fixes are integrated into the complete core BP/RP; no separate visual overlay is required. Original Java gameplay and assets guide the port. This project is not an official release from the original authors, Cookery's Bedrock author, Mojang or Microsoft.
+**Current public beta: 0.6.46-beta.1**, paired with World Liquor **0.1.9-preview.1**. This update repairs incense visibility, shares brewing/mixing instructions with extensions, and prevents guide text truncation while preserving all three locales. Existing cup recovery and third-person shaker fixes are retained after user confirmation.
 
-0.6.42 removes Tavern's title/subtitle transport and idle `ktmix:off` loop. The graphical HUD now uses a finite independent actionbar factory and literal texture paths. This addresses our own interference, not a verified fix for every A Magic Way missing image or the unidentified blank-block registry message.
-
-Placed-cup recovery, finite incense emitters, the third-person shaker candidate and product-based World Liquor guide support are retained. Use the existing World Liquor 0.1.5-preview.1 companion. All 0.6.40 storage repairs, 0.6.41 motion/held/barrel scale repairs and 160 recipe unlocks are preserved.
+Static resource and source checks plus a real BDS 1.26.51.1 load passed with Cookery 1.0.6. Client visuals still require device acceptance. Slightly Tipsy remains a yaw adapter; exact Java camera-only roll is **not implemented or verified**. See the [regression audit](docs/REGRESSION-STATUS-2026-09-27.md).
 
 ## Features
 
@@ -22,7 +20,7 @@ Placed-cup recovery, finite incense emitters, the third-person shaker candidate 
 
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load-validation target BDS **1.26.51.1**.
 - **Kaleidoscope Cookery (Unofficial) 1.0.6**, installed separately.
-- Both Tavern's 0.6.42 behavior and resource packs, above Cookery in their respective pack stacks. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
+- Both Tavern's 0.6.46 behavior and resource packs, above Cookery in their respective pack stacks. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
 - Slightly Tipsy uses the Java three-wave rhythm as small yaw increments, not camera shake. It slightly affects aim and is not camera-only roll. Use `/function kt_tipsy_motion_off` to opt out.
 
 The public beta uses Cookery's original UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing it. No Cookery pack, world backup, credentials, server executable or other server add-on is included.
@@ -45,9 +43,9 @@ Publication requires an explicit `.github/release-request.json` update on `main`
 
 ## Public beta status
 
-This version is checked statically; no BDS or real-client validation is claimed for 0.6.42. Historical BDS 1.26.51.1 evidence belongs to 0.6.37. English, Simplified Chinese and Traditional Chinese retain names/category coverage. Board editing follows the game language; guide names follow Cookery's selection. Operation text uses Traditional Chinese + English fallback for Cookery 1.0.6's locale-field limitation. Legacy Japanese/Russian translations are partial.
+This version is checked statically; no BDS or real-client validation is claimed for 0.6.46. Historical BDS 1.26.51.1 evidence belongs to 0.6.37. English, Simplified Chinese and Traditional Chinese retain names/category coverage. Board editing follows the game language; guide names follow Cookery's selection. Operation text uses Traditional Chinese + English fallback for Cookery 1.0.6's locale-field limitation. Legacy Japanese/Russian translations are partial.
 
-[Download 0.6.42-beta.1](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/download/v0.6.42-beta.1/Kaleidoscope_Tavern_Unofficial_0.6.42_beta1.mcaddon) · [GitHub Release and evidence](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.42-beta.1).
+[Download 0.6.46-beta.1](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/download/v0.6.46-beta.1/Kaleidoscope_Tavern_Unofficial_0.6.46_beta1.mcaddon) · [GitHub Release and evidence](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.46-beta.1).
 
 Android rendering, Realms, HUD factory updates/expiry and actual third-party pack combinations remain in-game test targets. Actionbar is still a shared channel; this is not a cross-pack UI scheduler. See [release readiness](docs/RELEASE-READINESS.md).
 

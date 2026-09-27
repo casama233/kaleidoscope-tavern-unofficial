@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """0.6.39 structural regression audit, without any engine or player emulation."""
-import hashlib,json
+import hashlib,json,math
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
@@ -15,12 +15,13 @@ identifiers=set()
 for p in (ROOT/'runtime/RP/particles').glob('*.json'):
  ident=read(p)['particle_effect']['description']['identifier'];assert ident not in identifiers,(p,'Duplicate particle ID');identifiers.add(ident)
 for kind in ('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly'):
- for layer,rate in [('plume',2),('ambient',20)]:
+ for layer,rate in [('plume',20/3),('ambient',48)]:
   p=ROOT/f'runtime/RP/particles/{kind}_incense_{layer}.json';effect=read(p)['particle_effect'];c=effect['components']
   assert effect['description']['identifier']==f'kt_assets_a17:{kind}_incense_{layer}'
   assert c['minecraft:emitter_lifetime_once']['active_time']==1
+  assert c['minecraft:particle_appearance_billboard']['facing_camera_mode']=='lookat_xyz'
   assert 'minecraft:emitter_lifetime_looping' not in c and 'minecraft:emitter_rate_instant' not in c
-  assert c['minecraft:emitter_rate_steady']=={'spawn_rate':rate,'max_particles':rate+2}
+  assert c['minecraft:emitter_rate_steady']=={'spawn_rate':rate,'max_particles':math.ceil(rate)+2}
   texture=effect['description']['basic_render_parameters']['texture']
   assert texture in ('textures/particle/cherry_petal_atlas','textures/particle/particles') or (ROOT/'runtime/RP'/(texture+'.png')).exists(),texture
   if layer=='ambient':
@@ -42,7 +43,7 @@ assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read(ROOT/'release.json')['version']
 report={'version':version,'baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
 'preservedAnimations':list(baseline['unchangedShakerAnimations']),'thirdPersonCandidate':third,
-'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecond':2,'ambientParticlesPerSecond':20,
+'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecond':20/3,'ambientParticlesPerSecond':48,
 'cupAbsentRecordRecovery':'structural checks passed; real event execution not tested',
 'newPlayerEntityOverride':False,'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}
 (ROOT/f'docs/REPAIR-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

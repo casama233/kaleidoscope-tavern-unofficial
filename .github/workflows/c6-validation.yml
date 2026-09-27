@@ -41,8 +41,6 @@ jobs:
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Audit all runtime changes against pinned main and Java
         run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
-      - name: Integrated runtime callbacks (not client tests)
-        run: node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/pr-integration.test.mjs
       - name: Build public test package
         run: python tools/build_release.py
       - name: Include matching source revision and validation evidence

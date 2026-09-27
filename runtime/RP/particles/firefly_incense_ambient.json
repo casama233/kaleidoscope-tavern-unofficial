@@ -21,7 +21,7 @@
           "0.08 + variable.particle_random_2 * 0.04",
           "0.08 + variable.particle_random_2 * 0.04"
         ],
-        "facing_camera_mode": "rotate_xyz",
+        "facing_camera_mode": "lookat_xyz",
         "uv": {
           "texture_width": 8,
           "texture_height": 8,
@@ -56,8 +56,8 @@
         "active_time": 1
       },
       "minecraft:emitter_rate_steady": {
-        "spawn_rate": 20,
-        "max_particles": 22
+        "spawn_rate": 48,
+        "max_particles": 50
       },
       "minecraft:emitter_shape_box": {
         "offset": [

@@ -338,8 +338,8 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "ce9feb7003f2a31833bfc2ca68b32cf5b53b75a779a8f63d071c9767707d714c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "cfb489f87c0c10c0dc59c9c0fdcad9c50ef4a3381e256b689b439c9a82b8b18f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
@@ -350,8 +350,8 @@
     "runtime/BP/scripts/bedrock/decorations.js": {
       "before": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
       "beforeProjected": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
-      "after": "275c1758881ae7c9d0ab2c1ddf4c2a617d806beda15ecc023375b0db5995e0d7",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "6d53b83880208686fd80e32cacc974afd2e476cd8091751e16e401a8733ce2f7",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
@@ -416,14 +416,128 @@
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "0b48c70bea2f731c5156776d19861c84d3ea1cfcb73d99a1eff53a6731e5e4db",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "07697e00a8e239d4771939d615a5166c45bb0d9c25c54c776ee26f730e5dc379",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "5b3bcfaa8d9eab225154675b13be4571e665e087c36054e5327361611847ca1d",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "9d20259caca5765b5028289fbc7909628f55e4a36ffe5410a8c1f17182c1b552",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
+    },
+    "runtime/RP/particles/butterfly_incense_ambient.json": {
+      "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
+      "beforeProjected": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
+      "after": "ee5da786f5954eb506904b87be3586361fd1f6f2b432813abdcd994662ad4d11",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/butterfly_incense_plume.json": {
+      "before": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
+      "beforeProjected": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
+      "after": "807a527ca86e87ff1cbf6719630fd43f03a073cf7fe214afcb1f8671c7712c5d",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/catnip_incense_ambient.json": {
+      "before": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
+      "beforeProjected": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
+      "after": "9cb06354bc172810157765b3817926445d93d261b2c6b6735d6b7a218d0c443a",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/catnip_incense_plume.json": {
+      "before": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
+      "beforeProjected": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
+      "after": "fc70d3d541a22ef401fdc4e0ccab691276848f18e47ec462019ce920716c96d8",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/firefly_incense_ambient.json": {
+      "before": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
+      "beforeProjected": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
+      "after": "564d321c8d5f12041f5e14040760404610db32496ab5edee92952d86a03f5913",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/firefly_incense_plume.json": {
+      "before": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
+      "beforeProjected": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
+      "after": "a6fcc38ef1c3a5f6d63366b4a9f6cfd3c6d1f2dbebb5939a73bf922ee3700c8d",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/ginkgo_incense_ambient.json": {
+      "before": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
+      "beforeProjected": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
+      "after": "014f390f69af680539991be69ce8de4d739fc61aa1cb3d9b226aceffa19e78fe",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/ginkgo_incense_plume.json": {
+      "before": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
+      "beforeProjected": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
+      "after": "e0e08d4d1794f8b08653f556df318d7b9e1637a505485154101c165d6a528f8d",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/pine_incense_ambient.json": {
+      "before": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
+      "beforeProjected": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
+      "after": "93d857b3f70fb9bb23b6c7d01ebc3bbc75cac1478a5e7fcf6ba1ab0d5199320f",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/pine_incense_plume.json": {
+      "before": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
+      "beforeProjected": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
+      "after": "f9606a7e89a6e11c4bb59aa00ccbeff941dd138e607181c3997e5f7ce2615db3",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/sakura_incense_ambient.json": {
+      "before": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
+      "beforeProjected": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
+      "after": "a5957b8ed31e9c8064080ef1927b0965f0ad2a74f7e7c21981ffcadc16f0822e",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/sakura_incense_plume.json": {
+      "before": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
+      "beforeProjected": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
+      "after": "6d956469ee6cf5188404b29a6387727257242f93274b2918177bc582aa1f7038",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/snow_incense_ambient.json": {
+      "before": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
+      "beforeProjected": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
+      "after": "eaedd0d0da2cf8490f65dcb3c093f1a804e86fa51733ed90a75e0b8ab18c0aef",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/snow_incense_plume.json": {
+      "before": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
+      "beforeProjected": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
+      "after": "1f7acb16ac9fc49ab8aff6112d4d7458b4d0af482b4381917774898b08de7e8d",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/spore_incense_ambient.json": {
+      "before": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
+      "beforeProjected": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
+      "after": "d56006821074cee7699d81bbeb6b7262d81c2ac2137f89e72047d8306cc967ed",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/RP/particles/spore_incense_plume.json": {
+      "before": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
+      "beforeProjected": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
+      "after": "7adec57ee034c4f68abd3d3fe29e6c37a134ff97a1598950f788d00dd3aeeadc",
+      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+    },
+    "runtime/BP/scripts/core/cookery-guide-publisher.js": {
+      "before": "5a2787aba4c3de29014c367af14e2e04771dac82dbfee8f5656f094ba227bc41",
+      "beforeProjected": "5a2787aba4c3de29014c367af14e2e04771dac82dbfee8f5656f094ba227bc41",
+      "after": "8ff059a771d091d8f72e962405fd2db717a410b135a6c3401d4108e0e3d786c0",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair."
+    },
+    "runtime/BP/scripts/core/guide.js": {
+      "before": "d03156670d828f25d62c5932572eabd67579b9c1764e0fe6a7a22ae98c73ea9a",
+      "beforeProjected": "d03156670d828f25d62c5932572eabd67579b9c1764e0fe6a7a22ae98c73ea9a",
+      "after": "2b22bae4d6ece690462cbf56eff81f1ceafae5160f4ae78e1c6b4c431e2d94a2",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair."
+    },
+    "runtime/BP/scripts/data/cookery-guide-payload.js": {
+      "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
+      "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
+      "after": "18fb4fb257c5f14bc33f7502493bd4be53e00f07802335f561e6f3ee7f3e91b6",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair."
     }
   },
   "rules": {

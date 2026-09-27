@@ -127,8 +127,9 @@ def planned(root):
         group = next((g for g in category['groups'] if g.get('group_identifier', {}).get('name') == spec['name']), None)
         if group is None:
             identifier = {'name': spec['name']}
-            # Only the owning pack defines the icon. Addons append to the existing group.
-            if spec.get('icon', '').startswith(ns + ':'):
+            # Every appending pack repeats the same host icon; Bedrock may use
+            # the last group definition in the active pack stack.
+            if spec.get('icon'):
                 identifier['icon'] = spec['icon']
             group = {'group_identifier': identifier, 'items': []}
             category['groups'].append(group)

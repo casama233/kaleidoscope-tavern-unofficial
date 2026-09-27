@@ -31,6 +31,17 @@ class PickDefinitions(unittest.TestCase):
     def test_original_drink_and_storage_gameplay_is_unchanged(self):
         for path, proof in json.loads((ROOT/'data/pick-block-prefixes.json').read_text()).items():
             data = (ROOT/path).read_bytes()
+            # Reconstruct only the two reviewed 0.6.48 edits before checking the
+            # immutable pick baseline. All unrelated byte changes still fail.
+            if path.endswith('/bottles.js') or path.endswith('/mixology.js'):
+                review=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges'][path]
+                self.assertEqual(hashlib.sha256(data).hexdigest(),review['after'])
+                if path.endswith('/bottles.js'):
+                    data=data.replace(b"deliveryId:'Consume'",b"deliveryId:'minecraft:consumable'")
+                else:
+                    suffix=b"\nexport const naturalCupStack=state=>resultItem(state);\nexport const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);\n"
+                    self.assertTrue(data.endswith(suffix))
+                    data=data[:-len(suffix)]
             self.assertEqual(hashlib.sha256(data[:proof['prefixBytes']]).hexdigest(), proof['prefixSha256'])
             self.assertEqual(hashlib.sha256(data).hexdigest(), proof['sha256'])
 

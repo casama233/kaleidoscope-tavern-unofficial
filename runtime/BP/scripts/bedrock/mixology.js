@@ -344,3 +344,6 @@ export function pickCupItem(block){
  check(state&&cupBlock(state.item)===block.typeId&&state.facing===block.permutation.getState(FACING),'PICK_CUP_STATE_MISMATCH');
  return resultItem(state);
 }
+
+export const naturalCupStack=state=>resultItem(state);
+export const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);

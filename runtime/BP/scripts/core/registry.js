@@ -71,6 +71,15 @@ function normalizePage(raw,source){
    return {method:'Crafting Table',result:page.item,count:integer(r.count??1,1,64),time:0,ingredients};
   });
  }
+ if(raw.preparations!==undefined){
+  check(page.item&&Array.isArray(raw.preparations)&&raw.preparations.length<=24,'INVALID_GUIDE_PREPARATIONS');
+  page.preparations=raw.preparations.map(r=>{
+   check(r&&['Crafting Table','Freezer','Barrel','Shaker','Pressing Tub'].includes(r.method)&&r.result===page.item,'INVALID_GUIDE_PREPARATION');
+   check(Array.isArray(r.ingredients)&&r.ingredients.length>0&&r.ingredients.length<=12,'INVALID_GUIDE_PREPARATION');
+   const ingredients=r.ingredients.map(x=>{id(x.startsWith('#')?x.slice(1):x);return x;});
+   return {method:r.method,result:page.item,count:integer(r.count??1,1,64),time:integer(r.time??0,0,72000),ingredients};
+  });
+ }
  if(raw.icon!==undefined){check(typeof raw.icon==='string'&&/^textures\/[a-zA-Z0-9_/-]+$/.test(raw.icon)&&!raw.icon.includes('..'),'INVALID_ICON');page.icon=raw.icon;}
  return page;
 }

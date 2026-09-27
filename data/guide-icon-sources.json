@@ -1,12 +1,193 @@
 {
+  "kaleidoscope_tavern:barrel": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/barrel.png"
+  },
+  "kaleidoscope_tavern:pressing_tub": {
+    "geometry": "geometry.kt_assets_a1.pressing_tub",
+    "texture": "textures/kaleidoscope_tavern/block/brew/pressing_tub"
+  },
+  "kaleidoscope_tavern:shaker": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/shaker.png"
+  },
   "kaleidoscope_tavern:guide_grapes": {
     "sprite": "textures/kaleidoscope_tavern_jar/item/grapevine.png"
   },
-  "kaleidoscope_tavern:guide_bottle_display": {
+  "kaleidoscope_tavern:pressing/glow_berries_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/glow_berries_bucket.png"
+  },
+  "kaleidoscope_tavern:pressing/gold_grape_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png"
+  },
+  "kaleidoscope_tavern:pressing/grape_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/grape_bucket.png"
+  },
+  "kaleidoscope_tavern:pressing/green_grape_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/green_grape_bucket.png"
+  },
+  "kaleidoscope_tavern:pressing/ice_grape_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/ice_grape_bucket.png"
+  },
+  "kaleidoscope_tavern:pressing/sweet_berries_bucket": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sweet_berries_bucket.png"
+  },
+  "kaleidoscope_tavern:watermelon_juice": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/watermelon_juice.png"
+  },
+  "kaleidoscope_tavern:vinegar_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/vinegar.png"
+  },
+  "kaleidoscope_tavern:brandy_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/brandy.png"
+  },
+  "kaleidoscope_tavern:carignan_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/carignan.png"
+  },
+  "kaleidoscope_tavern:champagne_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/champagne.png"
+  },
+  "kaleidoscope_tavern:glowflower_brew_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/glowflower_brew.png"
+  },
+  "kaleidoscope_tavern:honey_wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/honey_wine.png"
+  },
+  "kaleidoscope_tavern:ice_wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/ice_wine.png"
+  },
+  "kaleidoscope_tavern:luminous_bride_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/luminous_bride.png"
+  },
+  "kaleidoscope_tavern:madame_shexiang_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/madame_shexiang.png"
+  },
+  "kaleidoscope_tavern:miners_star_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/miners_star.png"
+  },
+  "kaleidoscope_tavern:molotov": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/molotov.png"
+  },
+  "kaleidoscope_tavern:mother_snow_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/mother_snow.png"
+  },
+  "kaleidoscope_tavern:plum_wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/plum_wine.png"
+  },
+  "kaleidoscope_tavern:polaris_sweet_white_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white.png"
+  },
+  "kaleidoscope_tavern:red_queen_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/red_queen.png"
+  },
+  "kaleidoscope_tavern:riesling_dry_white_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white.png"
+  },
+  "kaleidoscope_tavern:rum_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/rum.png"
+  },
+  "kaleidoscope_tavern:sakura_wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sakura_wine.png"
+  },
+  "kaleidoscope_tavern:sauvignon_blanc_dry_white_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white.png"
+  },
+  "kaleidoscope_tavern:sherry_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sherry.png"
+  },
+  "kaleidoscope_tavern:sunset_glow_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sunset_glow.png"
+  },
+  "kaleidoscope_tavern:sweet_berry_wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine.png"
+  },
+  "kaleidoscope_tavern:vodka_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/vodka.png"
+  },
+  "kaleidoscope_tavern:whiskey_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/whiskey.png"
+  },
+  "kaleidoscope_tavern:wine_q1": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/wine.png"
+  },
+  "kaleidoscope_tavern:allium_garden": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/allium_garden.png"
+  },
+  "kaleidoscope_tavern:bloody_mary": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/bloody_mary.png"
+  },
+  "kaleidoscope_tavern:brass_heart": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/brass_heart.png"
+  },
+  "kaleidoscope_tavern:depth_charge": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/depth_charge.png"
+  },
+  "kaleidoscope_tavern:emerald": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/emerald.png"
+  },
+  "kaleidoscope_tavern:godfather": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/godfather.png"
+  },
+  "kaleidoscope_tavern:grasshopper": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/grasshopper.png"
+  },
+  "kaleidoscope_tavern:mojito": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/mojito.png"
+  },
+  "kaleidoscope_tavern:nether_special": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/nether_special.png"
+  },
+  "kaleidoscope_tavern:screwdriver": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/screwdriver.png"
+  },
+  "kaleidoscope_tavern:sculk_special": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/sculk_special.png"
+  },
+  "kaleidoscope_tavern:white_lady": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/white_lady.png"
+  },
+  "kaleidoscope_tavern:signature_cocktail": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/signature_cocktail.png"
+  },
+  "kaleidoscope_tavern:mystery_cocktail": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/mystery_cocktail.png"
+  },
+  "kaleidoscope_tavern:empty_bottle": {
     "sprite": "textures/kaleidoscope_tavern_jar/item/empty_bottle.png"
   },
-  "kaleidoscope_tavern:guide_quality_effects": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/wine.png"
+  "kaleidoscope_tavern:glassware_holder": {
+    "geometry": "geometry.kt_assets_a17.item_display_glassware_holder",
+    "texture": "textures/kaleidoscope_tavern_jar/block/deco/glassware_holder"
+  },
+  "kaleidoscope_tavern:holder": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/holder.png"
+  },
+  "kaleidoscope_tavern:tilted_rack": {
+    "geometry": "geometry.kt_assets_a17.item_display_tilted_rack",
+    "texture": "textures/kaleidoscope_tavern_jar/block/deco/tilted_rack"
+  },
+  "kaleidoscope_tavern:circular_rack": {
+    "geometry": "geometry.kt_assets_a17.item_display_circular_rack",
+    "texture": "textures/kaleidoscope_tavern_jar/block/deco/circular_rack"
+  },
+  "kaleidoscope_tavern:cellar_cabinet": {
+    "geometry": "geometry.kt_assets_a17.item_display_cellar_cabinet",
+    "texture": "textures/kaleidoscope_tavern_jar/block/brew/bar_cabinet"
+  },
+  "kaleidoscope_tavern:bar_cabinet": {
+    "geometry": "geometry.kt_assets_a17.item_display_bar_cabinet",
+    "texture": "textures/kaleidoscope_tavern_jar/block/brew/bar_cabinet"
+  },
+  "kaleidoscope_tavern:glass_bar_cabinet": {
+    "geometry": "geometry.kt_assets_a17.item_display_glass_bar_cabinet",
+    "texture": "textures/kaleidoscope_tavern_jar/block/brew/glass_bar_cabinet"
+  },
+  "kaleidoscope_tavern:tap": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/tap.png"
+  },
+  "kaleidoscope_tavern:empty_glassware": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/empty_glassware.png"
+  },
+  "kaleidoscope_tavern:stepladder": {
+    "sprite": "textures/kaleidoscope_tavern_jar/item/stepladder.png"
   },
   "kaleidoscope_tavern:white_bar_stool": {
     "geometry": "geometry.kt_assets_a13.bar_stool_blue",
@@ -136,6 +317,14 @@
     "geometry": "geometry.kt_assets_a17.item_display_pink_sofa",
     "texture": "textures/kaleidoscope_tavern_jar/block/deco/sofa/pink"
   },
+  "kaleidoscope_tavern:table": {
+    "geometry": "geometry.kt_assets_a17.item_display_table",
+    "texture": "textures/kaleidoscope_tavern_jar/block/table"
+  },
+  "kaleidoscope_tavern:bar_counter": {
+    "geometry": "geometry.kt_assets_a17.item_display_bar_counter",
+    "texture": "textures/kaleidoscope_tavern_jar/block/deco/bar_counter"
+  },
   "kaleidoscope_tavern:string_lights_colorless": {
     "geometry": "geometry.kt_assets_a16.string_lights_colorless",
     "texture": "textures/kaleidoscope_tavern/block/deco/string_lights/colorless"
@@ -212,41 +401,6 @@
   },
   "kaleidoscope_tavern:yellow_pendant_lamp": {
     "sprite": "textures/kaleidoscope_tavern_jar/item/yellow_pendant_lamp.png"
-  },
-  "kaleidoscope_tavern:table": {
-    "geometry": "geometry.kt_assets_a17.item_display_table",
-    "texture": "textures/kaleidoscope_tavern_jar/block/table"
-  },
-  "kaleidoscope_tavern:bar_counter": {
-    "geometry": "geometry.kt_assets_a17.item_display_bar_counter",
-    "texture": "textures/kaleidoscope_tavern_jar/block/deco/bar_counter"
-  },
-  "kaleidoscope_tavern:glassware_holder": {
-    "geometry": "geometry.kt_assets_a17.item_display_glassware_holder",
-    "texture": "textures/kaleidoscope_tavern_jar/block/deco/glassware_holder"
-  },
-  "kaleidoscope_tavern:holder": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/holder.png"
-  },
-  "kaleidoscope_tavern:tilted_rack": {
-    "geometry": "geometry.kt_assets_a17.item_display_tilted_rack",
-    "texture": "textures/kaleidoscope_tavern_jar/block/deco/tilted_rack"
-  },
-  "kaleidoscope_tavern:circular_rack": {
-    "geometry": "geometry.kt_assets_a17.item_display_circular_rack",
-    "texture": "textures/kaleidoscope_tavern_jar/block/deco/circular_rack"
-  },
-  "kaleidoscope_tavern:cellar_cabinet": {
-    "geometry": "geometry.kt_assets_a17.item_display_cellar_cabinet",
-    "texture": "textures/kaleidoscope_tavern_jar/block/brew/bar_cabinet"
-  },
-  "kaleidoscope_tavern:bar_cabinet": {
-    "geometry": "geometry.kt_assets_a17.item_display_bar_cabinet",
-    "texture": "textures/kaleidoscope_tavern_jar/block/brew/bar_cabinet"
-  },
-  "kaleidoscope_tavern:glass_bar_cabinet": {
-    "geometry": "geometry.kt_assets_a17.item_display_glass_bar_cabinet",
-    "texture": "textures/kaleidoscope_tavern_jar/block/brew/glass_bar_cabinet"
   },
   "kaleidoscope_tavern:ysbb_painting": {
     "geometry": "geometry.kt_runtime.painting_wall",
@@ -328,25 +482,6 @@
   "kaleidoscope_tavern:firefly_incense": {
     "sprite": "textures/kaleidoscope_tavern_jar/item/firefly_incense.png"
   },
-  "kaleidoscope_tavern:barrel": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/barrel.png"
-  },
-  "kaleidoscope_tavern:tap": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/tap.png"
-  },
-  "kaleidoscope_tavern:pressing_tub": {
-    "geometry": "geometry.kt_assets_a1.pressing_tub",
-    "texture": "textures/kaleidoscope_tavern/block/brew/pressing_tub"
-  },
-  "kaleidoscope_tavern:shaker": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/shaker.png"
-  },
-  "kaleidoscope_tavern:empty_glassware": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/empty_glassware.png"
-  },
-  "kaleidoscope_tavern:stepladder": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/stepladder.png"
-  },
   "kaleidoscope_tavern:chalkboard": {
     "sprite": "textures/kaleidoscope_tavern_jar/item/chalkboard.png"
   },
@@ -405,107 +540,5 @@
   "kaleidoscope_tavern:wither_rose_sandwich_board": {
     "geometry": "geometry.kt_java.sandwich_wither_rose_0",
     "texture": "textures/kt_derived/a17/sandwich_board_wither_rose_top"
-  },
-  "kaleidoscope_tavern:vinegar_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/vinegar.png"
-  },
-  "kaleidoscope_tavern:brandy_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/brandy.png"
-  },
-  "kaleidoscope_tavern:carignan_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/carignan.png"
-  },
-  "kaleidoscope_tavern:champagne_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/champagne.png"
-  },
-  "kaleidoscope_tavern:glowflower_brew_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/glowflower_brew.png"
-  },
-  "kaleidoscope_tavern:honey_wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/honey_wine.png"
-  },
-  "kaleidoscope_tavern:ice_wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/ice_wine.png"
-  },
-  "kaleidoscope_tavern:luminous_bride_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/luminous_bride.png"
-  },
-  "kaleidoscope_tavern:madame_shexiang_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/madame_shexiang.png"
-  },
-  "kaleidoscope_tavern:miners_star_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/miners_star.png"
-  },
-  "kaleidoscope_tavern:molotov": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/molotov.png"
-  },
-  "kaleidoscope_tavern:mother_snow_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/mother_snow.png"
-  },
-  "kaleidoscope_tavern:plum_wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/plum_wine.png"
-  },
-  "kaleidoscope_tavern:polaris_sweet_white_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/polaris_sweet_white.png"
-  },
-  "kaleidoscope_tavern:red_queen_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/red_queen.png"
-  },
-  "kaleidoscope_tavern:riesling_dry_white_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/riesling_dry_white.png"
-  },
-  "kaleidoscope_tavern:rum_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/rum.png"
-  },
-  "kaleidoscope_tavern:sakura_wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sakura_wine.png"
-  },
-  "kaleidoscope_tavern:sauvignon_blanc_dry_white_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sauvignon_blanc_dry_white.png"
-  },
-  "kaleidoscope_tavern:sherry_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sherry.png"
-  },
-  "kaleidoscope_tavern:sunset_glow_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sunset_glow.png"
-  },
-  "kaleidoscope_tavern:sweet_berry_wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sweet_berry_wine.png"
-  },
-  "kaleidoscope_tavern:vodka_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/vodka.png"
-  },
-  "kaleidoscope_tavern:whiskey_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/whiskey.png"
-  },
-  "kaleidoscope_tavern:wine_q1": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/wine.png"
-  },
-  "kaleidoscope_tavern:pressing/glow_berries_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/glow_berries_bucket.png"
-  },
-  "kaleidoscope_tavern:pressing/gold_grape_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png"
-  },
-  "kaleidoscope_tavern:pressing/grape_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/grape_bucket.png"
-  },
-  "kaleidoscope_tavern:pressing/green_grape_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/green_grape_bucket.png"
-  },
-  "kaleidoscope_tavern:pressing/ice_grape_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/ice_grape_bucket.png"
-  },
-  "kaleidoscope_tavern:pressing/sweet_berries_bucket": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/sweet_berries_bucket.png"
-  },
-  "kaleidoscope_tavern:signature_cocktail": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/signature_cocktail.png"
-  },
-  "kaleidoscope_tavern:mystery_cocktail": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/mystery_cocktail.png"
-  },
-  "kaleidoscope_tavern:watermelon_juice": {
-    "sprite": "textures/kaleidoscope_tavern_jar/item/watermelon_juice.png"
   }
 }

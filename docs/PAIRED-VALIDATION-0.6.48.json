@@ -1,0 +1,18 @@
+{
+  "tavernVersion": "0.6.48",
+  "worldLiquorVersion": "0.1.11",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "staticChecks": "passed",
+  "realEngineExplosionCases": [
+    "circular rack, quality-preserving contents and helper cleanup",
+    "27-cell barrel cleanup and exactly one barrel drop",
+    "addon oak cellar cabinet, contents and authoritative deleted record",
+    "native water potion drop"
+  ],
+  "simulatedPlayers": false,
+  "clientVisuals": "NOT_TESTED",
+  "privateStackUI": "NOT_TESTED",
+  "logSha256": "b293e260dcb4dd04b770059df5baa186fe1bf7469e9e12fa3ec07ea9f954e0f5",
+  "unresolved": "header.version invalid string: no invalid manifest found in installed server packs; awaiting offending pack/context"
+}

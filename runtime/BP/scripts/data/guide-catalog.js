@@ -11,6 +11,8 @@ function append(target,source){
   (target.mechanicsByLocale??={})[lc]=[...new Set([...current,...extra])];
  }
  target.mechanics=target.mechanicsByLocale.zh_TW;
+ if(source.food)target.food=source.food;
+ if(source.placeable)target.placeable=true;
  const recipes=[...(target.recipes??[]),...(source.recipes??[])];
  if(recipes.length)target.recipes=[...new Map(recipes.map(r=>[JSON.stringify(r),r])).values()];
 }
@@ -68,17 +70,15 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   payload.entries.push({id,category:'cultivation',icon:items.icons?.[id],kinds:[],mechanics:[details.zh_TW],mechanicsByLocale:Object.fromEntries(LOCALES.map(lc=>[lc,[details[lc]]]))});
   for(const lc of LOCALES)payload.names[lc][id]=({zh_CN:'西瓜汁',zh_TW:'西瓜汁',en_US:'Watermelon Juice'})[lc];
  }
- // Cocktail operation instructions are useful on the drink page itself.
+ // Workstation controls live on the shaker page; drinks keep effects and preparation.
  const cocktailGuide=payload.entries.find(e=>e.id==='kaleidoscope_tavern:guide_cocktails');
- if(cocktailGuide){
-  const drinks=payload.entries.filter(e=>e.category==='cocktail_recipes'&&e!==cocktailGuide);
-  if(drinks.length){for(const e of drinks)append(e,cocktailGuide);removed.add(cocktailGuide.id);}
- }
+ const shaker=payload.entries.find(e=>e.id==='kaleidoscope_tavern:shaker');
+ if(cocktailGuide&&shaker){append(shaker,cocktailGuide);removed.add(cocktailGuide.id);}
  payload.entries=payload.entries.filter(e=>!removed.has(e.id));
  for(const e of payload.entries){
   e.category=CATEGORY[e.category]??e.category;
   if(GUIDE_ENTRY_ICONS[e.id])e.icon=GUIDE_ENTRY_ICONS[e.id];
-  if(e.usedBy)e.usedBy=[...new Set(e.usedBy.map(id=>aliases.get(id)??id).filter(id=>!removed.has(id)))];
+  delete e.usedBy;
  }
  payload.categories=payload.categories.filter(c=>!CATEGORY[c.id]);
  const used=new Set(payload.entries.map(e=>e.category));
@@ -92,7 +92,14 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   zh_CN:['这是燃烧弹，不能饮用。对空按住使用至少半秒，松手投掷；击中后会在落点周围点火。','酒桶加入 4000 mB 熔岩，关盖酿制，以空酒瓶取出；也可在装有熔岩的炼药锅上接酒嘴，于嘴下摆空酒瓶取用。','对方块使用可摆放；空手取回。可存入单瓶架、倾斜酒架、圆形酒架及酒柜，红石上升沿会发射燃烧瓶。'],
   en_US:['An incendiary projectile, not a drink. Hold use while aiming into air for at least half a second, then release to throw. It ignites the area around its impact.','Fill a barrel with 4000 mB of lava, close the lid, then collect the brewed result with empty bottles. Alternatively, fit a tap to a lava cauldron and place an empty bottle below the tap.','Use on a block to place it; collect with an empty hand. Holders, tilted/circular racks and cabinets accept it. A rising redstone edge launches it as an incendiary projectile.']
  }});
- return organizeGuideNavigation(payload);
+ const result=organizeGuideNavigation(payload);
+ for(const entry of result.entries){
+  // Workbench recipes already belong to the native crafting book. Guide entries
+  // explain use; preparation recipes belong to the resulting drink/food.
+  if(!entry.food&&entry.recipes)entry.recipes=entry.recipes.filter(r=>r.method!=='Crafting Table');
+ }
+ for(const [key,labels] of Object.entries({method_barrel:['酒桶','酒桶','Barrel'],method_shaker:['雪克杯','雪克杯','Shaker'],method_pressing_tub:['压榨桶','壓榨桶','Pressing Tub'],method_freezer:['冷冻柜','冷凍櫃','Freezer']}))LOCALES.forEach((lc,i)=>result.text[lc][key]=labels[i]);
+ return result;
 }
 
 /** Use Cookery's short, flat chapter navigation and one product page per item. */
@@ -114,7 +121,6 @@ function organizeGuideNavigation(payload){
   else if(source&&targetId==='empty_bottle'){
    source.id='kaleidoscope_tavern:empty_bottle';
    source.icon=GUIDE_ENTRY_ICONS[source.id];
-   source.recipes=[{method:'Crafting Table',ingredients:['minecraft:glass_bottle'],result:source.id,count:1,time:0}];
    LOCALES.forEach((lc,i)=>payload.names[lc][source.id]=['空酒瓶','空酒瓶','Empty Bottle'][i]);
   }
  }

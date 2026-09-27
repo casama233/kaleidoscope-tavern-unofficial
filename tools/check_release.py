@@ -72,6 +72,7 @@ for p in (RT/'BP/scripts').rglob('*.js'):
         assert (p.parent/relative).is_file(),(p,relative)
 subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_destruction.mjs')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_repair.py')],cwd=ROOT,check=True)

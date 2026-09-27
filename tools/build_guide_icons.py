@@ -11,7 +11,7 @@ terrain=json.loads((RP/'textures/terrain_texture.json').read_text())['texture_da
 geos={g['description']['identifier']:g for p in (RP/'models').rglob('*.json') for g in json.loads(p.read_text()).get('minecraft:geometry',[])}
 blocks={j['description']['identifier']:j for p in (BP/'blocks').glob('*.json') for j in [json.loads(p.read_text())['minecraft:block']]}
 items={j['description']['identifier']:j for p in (BP/'items').glob('*.json') for j in [json.loads(p.read_text())['minecraft:item']]}
-code="import {buildCookeryGuidePayload as b} from './runtime/BP/scripts/data/cookery-guide-payload.js';import {BUILTIN_RECIPES as r} from './runtime/BP/scripts/data/recipes.js';console.log(JSON.stringify(b({list:()=>[],allPages:()=>[],allRecipes:()=>r.map(x=>({...x,source:'kaleidoscope_tavern'}))})));"
+code="import {buildCookeryGuidePayload as b} from './runtime/BP/scripts/data/cookery-guide-payload.js';import {BUILTIN_RECIPES as r} from './runtime/BP/scripts/data/recipes.js';import {SHAKER_RECIPES as s} from './runtime/BP/scripts/data/mixology.js';console.log(JSON.stringify(b({list:()=>[],allPages:()=>[],allRecipes:()=>[...r,...s].map(x=>({...x,source:'kaleidoscope_tavern'}))})));"
 payload=json.loads(subprocess.check_output(['node','--input-type=module','-e',code],cwd=ROOT,text=True))
 def texpath(row):
  v=row['textures'];return v[0] if isinstance(v,list) else v

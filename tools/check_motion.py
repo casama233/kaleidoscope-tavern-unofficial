@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare motion resources to source-derived dimensions; no game emulation."""
 from pathlib import Path
-from reviewed_changes import historical_digest,changes
+from reviewed_changes import historical_digest,changes,reviewed_additions
 import hashlib,json
 from creative.historical import LegacyMenuProjection
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,7 +10,7 @@ projection=LegacyMenuProjection(ROOT)
 def digest_group(dirname):
     rows=[]
     for p in sorted((ROOT/dirname).rglob('*')):
-        if p.is_file():rows.append(p.relative_to(ROOT).as_posix()+'\0'+historical_digest(p,projected=True)+'\n')
+        if p.is_file() and p.relative_to(ROOT).as_posix() not in reviewed_additions():rows.append(p.relative_to(ROOT).as_posix()+'\0'+historical_digest(p,projected=True)+'\n')
     return {'files':len(rows),'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}
 ref=read('data/motion-source-reference.json')
 for name,expected in ref['preservedGroups'].items():assert digest_group(name)==expected,('Preserved asset group changed',name)

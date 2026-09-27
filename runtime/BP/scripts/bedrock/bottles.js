@@ -22,7 +22,7 @@ function intact(b,s){return b.typeId===bottleBlock(s.base)&&b.permutation.getSta
 export function bottleFacingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor(((((yaw+45)%360)+360)%360)/90);}
 function facingFor(player){return bottleFacingForYaw(player.getRotation?.().y??0);}
 function emptyKey(block){const p=block.location;return `empty-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
-function waterBottleStack(){return restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'minecraft:consumable'}});}
+function waterBottleStack(){return restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'Consume'}});}
 function simpleKey(block){const p=block.location;return `simple-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
 export function takeEmptyBottle(player,b){
  canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=waterSnapshot(b);

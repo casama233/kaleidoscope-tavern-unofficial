@@ -19,3 +19,9 @@ def historical_digest(path,projected=False):
         assert actual==row['after'],('Reviewed source changed after audit',name)
         return row['beforeProjected'] if projected else row['before']
     return hashlib.sha256(projection().read_bytes(path)).hexdigest() if projected else actual
+
+@lru_cache(maxsize=1)
+def reviewed_additions():
+    rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['newRuntimeFiles']
+    for name,digest in rows.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Reviewed addition changed',name)
+    return rows

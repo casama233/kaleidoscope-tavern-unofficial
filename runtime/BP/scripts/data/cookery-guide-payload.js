@@ -1,11 +1,11 @@
-import {workstationUsage} from '../core/guide.js';
+import {preparationRecipes,preparationFood} from '../core/guide-preparation.js';
 import {consolidateGuide} from './guide-catalog.js';
 // Tavern-owned chapter for the Cookery Guidebook Extension API v1.
 import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.47",
+  "version": "0.6.48",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5655,36 +5655,6 @@ function guideItemIcon(id,fallback){
 function addLocalizedName(payload,id,map,fallback){
  for(const lc of GUIDE_LOCALES)payload.names[lc][id]=map?.[lc]??map?.en_US??map?.zh_TW??map?.zh_CN??fallback;
 }
-function recipeMechanics(recipe,lc='zh_TW',names=GUIDE_ITEM_NAMES){
- const en=lc==='en_US',cn=lc==='zh_CN';
- const label=id=>names[lc]?.[id]??GUIDE_ITEM_NAMES[lc]?.[id]??id;
- const slotLabel=slot=>{
-  const groups=new Map();
-  for(const item of new Set(slot??[])){const m=/^(.*)_q([1-6])$/.exec(item),base=m?m[1]:item;const qs=groups.get(base)??[];if(m)qs.push(Number(m[2]));groups.set(base,qs);}
-  return [...groups].map(([base,qs])=>{
-   if(!qs.length)return label(base);
-   const sorted=[...new Set(qs)].sort((a,b)=>a-b),continuous=sorted.every((q,i)=>q===sorted[0]+i);
-   const values=sorted.length>1&&continuous?`${sorted[0]}–${sorted.at(-1)}`:sorted.join('/');
-   return `${label(base)} (${en?'Quality':cn?'品质':'品質'} ${values})`;
-  }).join(' / ');
- };
- if(recipe.kind==='pressing')return [`${en?'Fruit':'水果'}：${(recipe.input??[]).map(label).join(' / ')}`,`→ ${label(recipe.fluid)} ${recipe.amount} mB`];
- const slots=(recipe.ingredients??[]).map((slot,i)=>`${en?'Slot':cn?'原料槽':'原料槽'} ${i+1}：${slotLabel(slot)}`);
- if(recipe.kind==='shaker')return [
-  en?'Shaker • Choose ONE item from EACH of the three slots below. Slashes mean alternatives, not extra ingredients.':cn?'雪克杯调酒｜以下三槽各选一份；斜线表示可替换材料，不是全部加入。':'雪克杯調酒｜以下三槽各選一份；斜線表示可替換材料，不是全部加入。',
-  ...slots,`${en?'Output':cn?'成品':'成品'}：${label(recipe.output?.item??recipe.id)} × 1`,
-  `${en?'Serving glass (not an ingredient)':'接酒杯（不放入原料槽）'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_glassware')}`
- ];
- const output=recipe.output?.item?label(recipe.output.item):recipe.output?.byQuality?.length?`${label(recipe.output.byQuality[0])} (${en?'Quality':cn?'品质':'品質'} 1–6)`:recipe.id;
- return [
-  `${en?'Barrel fluid':cn?'酒桶液体':'酒桶液體'}：${label(recipe.fluid)} × 4000 mB`,
-  ...(slots.length?slots:[en?'No ingredient items.':cn?'无需固体原料。':'無需固體原料。']),
-  en?'Choose one allowed material per slot. Barrel matching does not depend on insertion order; keep the material stacks equally sized.':cn?'每个原料槽选一种材料；酒桶配方不要求投入顺序。各槽数量相同可避免浪费。':'每個原料槽選一種材料；酒桶配方不要求投入順序。各槽數量相同可避免浪費。',
-  `${en?'Output':'成品'}：${output}`,
-  slots.length?(en?'Batch size = the smallest ingredient stack (1–16 bottles).':cn?'本批瓶数＝各槽最少的原料数量（1–16 瓶）。':'本批瓶數＝各槽最少的原料數量（1–16 瓶）。'):`${en?'Batch size':cn?'本批瓶数':'本批瓶數'}：${recipe.noIngredientCount??16}`,
-  `${en?'Serving bottle (not a brewing ingredient)':'接酒瓶（不放入原料槽）'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_bottle')}`
- ];
-}
 /**
  * Project Tavern extension pages/auto-generated recipe pages into the one Cookery
  * family guide. The registry remains Tavern-owned because barrel/shaker semantics
@@ -5716,6 +5686,7 @@ export function buildCookeryGuidePayload(registry){
    for(const lc of GUIDE_LOCALES)itemNames[lc][key]=payload.names[lc][key];
   }
  }
+ for(const lc of GUIDE_LOCALES)payload.names[lc]={...itemNames[lc],...payload.names[lc]};
  if(pages.some(p=>p.category==='food')){
   payload.categories.push({id:'food',labelKey:'food',fallback:'Frozen Desserts and Snacks',icon:'textures/kaleidoscope_tavern_jar/item/empty_bottle'});
   payload.text.en_US.food='Frozen Desserts and Snacks';payload.text.zh_CN.food='冷冻甜点与零食';payload.text.zh_TW.food='冷凍甜點與零食';
@@ -5733,11 +5704,9 @@ export function buildCookeryGuidePayload(registry){
   const mechanicsByLocale=Object.fromEntries(GUIDE_LOCALES.map(lc=>{
    const body=String(page.body?.[lc]??page.body?.en_US??firstText(page.body,page.id));
    // Actual registered recipe slots are authoritative, never inferred from prose.
-   const recipeRows=linked.flatMap(r=>recipeMechanics(r,lc,itemNames));
-   const usage=[...new Set(linked.map(r=>workstationUsage(r.kind,lc)).filter(Boolean))];
-   return [lc,[...recipeRows,...usage,...body.split(/\n+/).filter(Boolean)]];
+   return [lc,body.split(/\n+/).filter(Boolean)];
   }));
-  payload.entries.push({id:item,category,icon:page.icon??'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[],mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale,...(page.crafting?.length?{recipes:copy(page.crafting)}:{})});
+  payload.entries.push({id:item,category,icon:page.icon??'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[],mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale,...(linked.length?{recipes:linked.flatMap(r=>preparationRecipes(r,payload.names)),food:preparationFood(linked[0]),kinds:['item'],placeable:true}:page.preparations?.length?{recipes:copy(page.preparations),food:copy(page.food??{eatFromInventory:true}),kinds:['item']}:{})});
   addLocalizedName(payload,item,page.title,item);
  }
  for(const page of EFFECT_PAGES){
@@ -5765,11 +5734,11 @@ export function buildCookeryGuidePayload(registry){
  const combinedRecipeIds=new Set(pages.flatMap(p=>p.recipeIds??[]));
  for(const recipe of recipes){
   if(combinedRecipeIds.has(recipe.id))continue;
-  const mechanicsByLocale=Object.fromEntries(GUIDE_LOCALES.map(lc=>[lc,[...recipeMechanics(recipe,lc,itemNames),...([workstationUsage(recipe.kind,lc)].filter(Boolean))]]));
+  const mechanicsByLocale=Object.fromEntries(GUIDE_LOCALES.map(lc=>[lc,[]]));
   const category=recipe.kind==='shaker'?'cocktail_recipes':recipe.kind==='pressing'?'press_recipes':'barrel_drinks';
   const outputItem=recipe.kind==='shaker'?recipe.output?.item:recipe.kind==='pressing'?`kaleidoscope_tavern:${recipe.id.split('/').pop()}`:recipe.output?.byQuality?.[0]??recipe.output?.item;
   const fallback=recipe.kind==='shaker'?'textures/kaleidoscope_tavern_jar/item/shaker':recipe.kind==='pressing'?'textures/kaleidoscope_tavern_jar/item/grape_bucket':'textures/kaleidoscope_tavern_jar/item/barrel';
-  payload.entries.push({id:recipe.id,category,icon:guideItemIcon(outputItem,fallback),kinds:[],mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale});
+  payload.entries.push({id:recipe.id,category,icon:guideItemIcon(outputItem,fallback),kinds:['item'],recipes:preparationRecipes(recipe,payload.names),...(recipe.kind!=='pressing'?{food:preparationFood(recipe),placeable:true}:{}),mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale});
   addLocalizedName(payload,recipe.id,recipe.title,recipe.id);
  }
  for(const entry of payload.entries){

@@ -6,7 +6,7 @@ transforms are read from the shipped JS poses, geometry pivots, scale and animat
 The adapter convention is Java (x,y,z) -> geometry (8-x,y,z-8), with world yaw
 opposite Java YP. These algebraic checks do NOT prove client rendering.
 """
-from reviewed_changes import historical_digest,changes
+from reviewed_changes import historical_digest,changes,reviewed_additions
 import argparse
 import copy
 import hashlib
@@ -204,7 +204,7 @@ def main():
         assert historical_digest(ROOT/path)==digest,('Unrelated asset/gameplay changed',path)
     preserved_count=len(contract.get('preservedSha256',{}))
     for prefix,expected in contract.get('preservedTrees',{}).items():
-        hashes={p.relative_to(ROOT).as_posix():historical_digest(p) for p in (ROOT/prefix).rglob('*') if p.is_file()}
+        hashes={p.relative_to(ROOT).as_posix():historical_digest(p) for p in (ROOT/prefix).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in reviewed_additions()}
         rows=''.join(k+'\0'+v+'\n' for k,v in sorted(hashes.items()))
         assert len(hashes)==expected['files'] and hashlib.sha256(rows.encode()).hexdigest()==expected['sha256'],('Unrelated asset tree changed',prefix)
         preserved_count+=len(hashes)

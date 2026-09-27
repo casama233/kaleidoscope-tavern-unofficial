@@ -75,7 +75,7 @@ export function popRandomStoredBottle({
  * This adapter owns the repeated interaction ordering/snapshot/defer contract; break/drop/sound is delegated to the shared protected-break router.
  */
 export function installStatefulStorageRoutes({
- routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=true,failClosed=false
+ routeId,isBlock,isPlacementItem,readRevision,shouldInteract,place,interact,recover,protectExplosions=false,failClosed=false
 }){
  check(typeof routeId==='string'&&routeId,'INVALID_STORAGE_ROUTE');
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function'&&typeof shouldInteract==='function','INVALID_STORAGE_ROUTE');

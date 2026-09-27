@@ -63,7 +63,7 @@
         "seconds_to_destroy": 0.6
       },
       "minecraft:destructible_by_explosion": {
-        "explosion_resistance": 3600000
+        "explosion_resistance": 0
       },
       "minecraft:movable": {
         "movement_type": "immovable"
@@ -79,6 +79,9 @@
             "use_liquid_clipping": true
           }
         ]
+      },
+      "kaleidoscope_tavern:natural_break": {
+        "drop": "kaleidoscope_tavern:bottle_carignan"
       }
     },
     "permutations": [

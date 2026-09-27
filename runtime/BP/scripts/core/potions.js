@@ -15,7 +15,7 @@ for(const p of ['water','mundane','long_mundane','thick','awkward'])specs['minec
 for(const p of ['turtle_master','long_turtle_master'])specs['minecraft:'+p]=[['slowness',3],['resistance',2]];
 specs['minecraft:strong_turtle_master']=[['slowness',5],['resistance',3]];
 export const POTION_SPECS=Object.freeze(specs);
-export function validatePotionIdentity(p){check(p&&Object.keys(p).every(k=>['effectId','deliveryId'].includes(k)),'BAD_POTION_IDENTITY');id(p.effectId);id(p.deliveryId);check(Object.hasOwn(POTION_SPECS,p.effectId),'POTION_EFFECT_UNSUPPORTED',p.effectId);return p;}
+export function validatePotionIdentity(p){check(p&&Object.keys(p).every(k=>['effectId','deliveryId'].includes(k)),'BAD_POTION_IDENTITY');id(p.effectId);check(['Consume','ThrownSplash','ThrownLingering'].includes(p.deliveryId),'POTION_DELIVERY_UNSUPPORTED',p.deliveryId);check(Object.hasOwn(POTION_SPECS,p.effectId),'POTION_EFFECT_UNSUPPORTED',p.effectId);return p;}
 export function potionEffects(effectId,durationTicks){
  const entries=POTION_SPECS[effectId];check(entries,'POTION_EFFECT_UNSUPPORTED',effectId);
  if(!entries.length)return [];

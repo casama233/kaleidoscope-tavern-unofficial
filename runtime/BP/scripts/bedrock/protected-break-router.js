@@ -65,17 +65,15 @@ function installGlobalRoutes(){
    return finishPlayerBreak(player,dimension,location,typeId,()=>route.recover({player,block,snapshot,dimension,location,typeId}));
   }));
  });
- world.beforeEvents.explosion.subscribe(event=>{
-  event.setImpactedBlocks(event.getImpactedBlocks().filter(block=>!routes.some(route=>route.protectExplosions&&routeMatches(route,block))));
- });
+
 }
 
 /**
  * Register domain-specific recovery while sharing one Bedrock break/explosion shell.
  * Domains own state snapshots and exact recovery; this adapter owns event ordering,
- * explosion protection, Survival drops and material feedback.
+ * Survival drops and material feedback. Natural destruction uses onBreak.
  */
-export function registerProtectedBreakRoute({id,isBlock,capture,verify,recover,guard,protectExplosions=true}){
+export function registerProtectedBreakRoute({id,isBlock,capture,verify,recover,guard,protectExplosions=false}){
  check(typeof isBlock==='function'&&typeof recover==='function','INVALID_BREAK_ROUTE');
  if(capture!==undefined)check(typeof capture==='function','INVALID_BREAK_ROUTE');
  if(verify!==undefined)check(typeof verify==='function','INVALID_BREAK_ROUTE');

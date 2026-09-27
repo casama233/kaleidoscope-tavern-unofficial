@@ -1,8 +1,9 @@
+import {consumeScriptedBreak,replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
 import {restorePotion} from './potions.js';
 /** Non-player destruction: native engine decides whether the block breaks.
  * This component releases stored items and removes state/helpers after destruction.
  */
-import {world,system,ItemStack} from '@minecraft/server';
+import {world,system,ItemStack,BlockPermutation} from '@minecraft/server';
 import {barrelCells} from '../core/machines.js';
 import {furnitureBlock,itemId,GLASSWARE_SLOTS} from '../core/furniture.js';
 import {boardRuntimeKey,chalkCenter} from '../core/boards.js';
@@ -11,7 +12,7 @@ import {naturalCupStack,naturalShakerStack} from './mixology.js';
 const NS='kaleidoscope_tavern',seen=new Map();
 const at=p=>`${p.x}_${p.y}_${p.z}`;
 const state=(permutation,key,fallback=0)=>permutation.getState(NS+':'+key)??fallback;
-function removeBlock(d,p,id){try{const b=d.getBlock(p);if(b?.typeId===id)b.setType('minecraft:air');}catch{}}
+function removeBlock(d,p,id){try{const b=d.getBlock(p);if(b?.typeId===id)replaceBlockWithoutNaturalDrops(b,BlockPermutation.resolve('minecraft:air'));}catch{}}
 function clearHelpers(d,origin,keys){
  for(const entity of d.getEntities({location:origin,maxDistance:5})){
   if(!entity.typeId.startsWith(NS+':')&&!entity.hasTag(NS+':visual_helper'))continue;
@@ -23,6 +24,7 @@ function clearHelpers(d,origin,keys){
 }
 export function naturalBreak(event,params){
  const {block,brokenBlockPermutation:perm}=event,d=block.dimension,id=perm.type.id,p={...block.location},short=id.slice(NS.length+1),dim=d.id.split(':')[1];
+ if(consumeScriptedBreak(block,id))return;
  let root={...p},cells=[],drop=params?.params?.drop??id;
  const drops=[],keys=[];
  const add=(item,count=1)=>{if(item&&count>0)drops.push(new ItemStack(item,count));};
@@ -50,7 +52,8 @@ export function naturalBreak(event,params){
  }else if(cupItem(id)){
   data=record('kt:cup/'+suffix);if(data){drops.push(naturalCupStack(data));drop=undefined;}else drop=cupItem(id);
  }else if(isBottleBlock(id)&&short!=='bottle_empty'&&short!=='bottle_water'){
-  data=record('kt:bottles/'+suffix);if(data){for(const item of data.items)add(item);drop=undefined;}
+  // Java DrinkBlock drops its stored item stacks, never the display block.
+  drop=undefined;data=record('kt:bottles/'+suffix);if(data){for(const item of data.items)add(item);}
  }else if(short==='potion_bottle'||short==='xp_bottle'){
   data=record('kt:vanillaBottleDisplays/'+d.id+'/'+at(root));if(data?.item==='minecraft:potion'){drops.push(restorePotion(data));drop=undefined;}else drop=short==='xp_bottle'?'minecraft:experience_bottle':undefined;
  }else if(params?.params?.storage){

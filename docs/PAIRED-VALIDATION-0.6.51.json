@@ -1,0 +1,23 @@
+{
+  "tavernVersion": "0.6.51",
+  "worldLiquorVersion": "0.1.14",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "staticChecks": "passed",
+  "bdsLoad": "passed with isolated diagnostic script; clean shutdown",
+  "nativeDestructionCases": 8,
+  "cases": [
+    "core bottle quality",
+    "addon bottle quality",
+    "script bottle removal no duplicate",
+    "missing bottle data no display drop",
+    "signature payload retained",
+    "script cup removal no duplicate",
+    "mixed bottle qualities retained",
+    "rollback preserves block and state"
+  ],
+  "simulatedPlayers": false,
+  "clientVisuals": "NOT_TESTED",
+  "actualPlayerMining": "NOT_TESTED; native destroy command and script replacement tested",
+  "logSha256": "68aa6757ca6b86be35283c609581b564e6b7a6751350903a82154cdecf133aee"
+}

@@ -14,6 +14,8 @@ def changes():
 def projection():return LegacyMenuProjection(ROOT)
 def historical_digest(path,projected=False):
     path=Path(path);name=path.relative_to(ROOT).as_posix()
+    removed=reviewed_removals().get(name)
+    if removed:return removed['beforeProjected'] if projected else removed['before']
     actual=hashlib.sha256(path.read_bytes()).hexdigest();row=changes().get(name)
     if row:
         assert actual==row['after'],('Reviewed source changed after audit',name)
@@ -25,3 +27,16 @@ def reviewed_additions():
     rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['newRuntimeFiles']
     for name,digest in rows.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Reviewed addition changed',name)
     return rows
+
+@lru_cache(maxsize=1)
+def reviewed_removals():
+    rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text()).get('removedRuntimeFiles',{})
+    for name,row in rows.items():
+        assert not (ROOT/name).exists(),('Reviewed removed file returned',name)
+        assert row['reason'] and len(row['before'])==64 and len(row['beforeProjected'])==64
+    return rows
+
+def historical_files(prefix):
+    paths={p for p in (ROOT/prefix).rglob('*') if p.is_file() and p.relative_to(ROOT).as_posix() not in reviewed_additions()}
+    paths.update(ROOT/name for name in reviewed_removals() if name.startswith(prefix+'/'))
+    return sorted(paths)

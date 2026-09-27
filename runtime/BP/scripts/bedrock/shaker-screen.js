@@ -39,12 +39,16 @@ export function showShakerProgress(player,ticks){
 }
 export function showBarrelHud(player,rawtext){
  if(messageActive(player))return;
- send(player,'barrel/'+JSON.stringify(rawtext),{rawtext:[{text:HUD_PREFIX},...rawtext]});
+ // Plain native actionbar: no duplicate short-lived factory label.
+ send(player,'barrel/'+JSON.stringify(rawtext),{rawtext});
 }
 export function hideShakerHud(player){
  if(messageActive(player))return;
+ const previous=last.get(player.id);
  last.delete(player.id);
- // No shared-channel write: our graphics self-destruct after 0.6 seconds.
+ // Clear once on leaving our barrel, never from the idle poll loop.
+ if(previous?.key.startsWith('barrel/'))try{player.onScreenDisplay.setActionBar('');}catch{}
+ // Shaker graphics still expire locally.
 }
 export function showShakerMessage(player,code){
  const key=KEYS[code]??KEYS.ERROR;messages.set(player.id,{key,until:system.currentTick+40});messageActive(player);

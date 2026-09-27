@@ -1,21 +1,18 @@
+"""Verify native item rendering and existing native use components, no engine emulation."""
 import json
 from pathlib import Path
 from PIL import Image
-RP=Path(__file__).resolve().parents[1]/'runtime/RP'
-animations=json.loads((RP/'animations/animated_item.animation.json').read_text())['animations']
-count=0
-for p in (RP/'attachables').glob('animated_item_*.attachable.json'):
- d=json.loads(p.read_text());desc=d['minecraft:attachable']['description'];assert d['format_version']=='1.21.30'
- for name in desc['animations'].values():assert name in animations
- assert len(desc['scripts']['animate'])==2
- g=json.loads((RP/'models/entity'/p.name.replace('.attachable.json','.geo.json')).read_text())['minecraft:geometry'][0]
- assert g['description']['identifier']==desc['geometry']['default']
- bone=g['bones'][0];assert bone['binding']=='q.item_slot_to_bone_name(c.item_slot)' and bone['pivot']==[0,24,0]
- cube=bone['cubes'][0];assert all(n>0 for n in cube['size'])
- for face in ('north','south'):assert list(map(abs,cube['uv'][face]['uv_size']))==[16,16]
- for alias,path in desc['textures'].items():
-  if alias=='enchanted':continue
-  with Image.open(RP/(path+'.png')) as image:assert image.size==(16,16) and image.convert('RGBA').getchannel('A').getbbox()
- count+=1
-assert count==4
-print('Four animated item hand bindings, full sprite UVs and frame assets verified; client poses pending.')
+ROOT=Path(__file__).resolve().parents[1];RP=ROOT/'runtime/RP'
+atlas=json.loads((RP/'textures/item_texture.json').read_text())['texture_data']
+for name in ('mystery_cocktail','depth_charge','nether_special','ice_grape'):
+ ident='kaleidoscope_tavern:'+name
+ for p in (RP/'attachables').glob('*.json'):
+  assert json.loads(p.read_text())['minecraft:attachable']['description']['identifier']!=ident,(name,'Custom rig overrides native hand/use animation')
+ item=json.loads((ROOT/f'runtime/BP/items/{name}.json').read_text())['minecraft:item']['components']
+ assert item['minecraft:use_animation']==('eat' if name=='ice_grape' else 'drink')
+ assert item['minecraft:use_modifiers']['use_duration']==1.6
+ assert not item.get('minecraft:hand_equipped',False)
+ key=item['minecraft:icon'];key=key if isinstance(key,str) else key['textures']['default']
+ with Image.open(RP/(atlas[key]['textures']+'.png')) as icon,Image.open(RP/f'textures/kaleidoscope_tavern_jar/item/{name}.png') as java:
+  assert icon.size==(16,16) and icon.convert('RGBA').tobytes()==java.convert('RGBA').crop((0,0,16,16)).tobytes(),name+' native sprite must be complete Java frame zero'
+print('Four native item sprites and native drink/eat components verified; no custom hand rig. Client animation acceptance pending; held sprite uses frame zero.')

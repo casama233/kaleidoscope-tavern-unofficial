@@ -26,15 +26,23 @@ def main():
             assert sha(args.baseline/name)==row['before'],('Incorrect before hash',name)
             assert hashlib.sha256(LegacyMenuProjection(args.baseline).read_bytes(args.baseline/name)).hexdigest()==row['beforeProjected'],('Incorrect projected hash',name)
     for name,digest in ref['newRuntimeFiles'].items():assert sha(ROOT/name)==digest,('New runtime file differs',name)
+    removed=ref.get('removedRuntimeFiles',{})
+    for name,row in removed.items():
+        assert name not in ref['reviewedChanges'] and name not in ref['newRuntimeFiles']
+        assert not (ROOT/name).exists() and row['reason'],('Reviewed removal differs',name)
+        if args.baseline:
+            from creative.historical import LegacyMenuProjection
+            assert sha(args.baseline/name)==row['before'],('Incorrect removal before hash',name)
+            assert hashlib.sha256(LegacyMenuProjection(args.baseline).read_bytes(args.baseline/name)).hexdigest()==row['beforeProjected']
     unchanged=0
     if args.baseline:
         old_names={p.relative_to(args.baseline).as_posix() for p in (args.baseline/'runtime').rglob('*') if p.is_file()}
         new_names={p.relative_to(ROOT).as_posix() for p in (ROOT/'runtime').rglob('*') if p.is_file()}
-        assert new_names==old_names|set(ref['newRuntimeFiles']),'Unlisted runtime addition or removal'
+        assert new_names==(old_names|set(ref['newRuntimeFiles']))-set(removed),'Unlisted runtime addition or removal'
         for old in (args.baseline/'runtime').rglob('*'):
             if not old.is_file():continue
             name=old.relative_to(args.baseline).as_posix()
-            if name not in ref['reviewedChanges']:
+            if name not in ref['reviewedChanges'] and name not in removed:
                 assert (ROOT/name).read_bytes()==old.read_bytes(),('Unreviewed existing-runtime change',name)
                 unchanged+=1
     components=read(ROOT/'runtime/BP/items/molotov.json')['minecraft:item']['components']
@@ -93,7 +101,7 @@ def main():
     pure=json.loads(subprocess.check_output(['node','tools/check_launch_rules.mjs'],cwd=ROOT,text=True))
     version=read(ROOT/'release.json')['version']
     report={'version':version,'baseline':ref['baselineCommit'],'javaSourceFilesVerified':verified,
-        'reviewedChanges':sorted(ref['reviewedChanges']),'unchangedExistingRuntimeFiles':unchanged if args.baseline else None,
+        'reviewedChanges':sorted(ref['reviewedChanges']),'reviewedRemovals':sorted(removed),'unchangedExistingRuntimeFiles':unchanged if args.baseline else None,
         'pureRules':pure,'nativeMolotovResources':'source/schema aligned; device acceptance pending',
         'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'diagnostics, immediate status hook and bounded transient-error retry only',
         'bdsTest':'NOT_RUN','clientTest':'NOT_RUN','simulatedPlayerTests':False,'limits':ref['limits']}

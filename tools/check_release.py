@@ -37,7 +37,9 @@ flipbooks=docs[RT/'RP/textures/flipbook_textures.json']
 for drink in ('depth_charge','nether_special'):
     key=f'kt_c3_{drink}'
     path=f'textures/kaleidoscope_tavern_jar/item/{drink}'
-    assert item_atlas[key]['textures']==path
+    icon=docs[RT/f'BP/items/{drink}.json']['minecraft:item']['components']['minecraft:icon']
+    assert item_atlas[icon]['textures']==f'textures/kt_runtime/animated_items/{drink}/frame_00'
+    # Placed block atlas animation remains independent from the native item icon.
     assert any(row['atlas_tile']==key and row['flipbook_texture']==path for row in flipbooks)
 assert item_atlas['kt_c3_signature_cocktail']['textures']=='textures/kt_runtime/signature/icon_default'
 from PIL import Image

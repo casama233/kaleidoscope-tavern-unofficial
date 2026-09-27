@@ -43,15 +43,17 @@ for(let a=0;a<8;a++)for(let b=0;b<8;b++)for(let c=0;c<8;c++){
 assert(hudSendDue(undefined,'active',0));assert(!hudSendDue({key:'active',tick:0},'active',9));
 assert(hudSendDue({key:'active',tick:0},'active',10));
 for(let tick=0;tick<256;tick++)assert(!hudSendDue({key:'active',tick:0},undefined,tick));
-for(const name of ['hideShakerHud','clearShakerPlayer']){
- const body=adapter.split(`export function ${name}`)[1].split('\n}')[0];
- assert(!/\bsend\(|setActionBar|setTitle/.test(body));
-}
+const hide=adapter.split('export function hideShakerHud')[1].split('\n}')[0];
+assert(hide.includes("previous?.key.startsWith('barrel/')"));
+assert.equal((hide.match(/setActionBar/g)||[]).length,1);
+assert(hide.includes("setActionBar('')"));
+assert(hide.indexOf('last.delete(player.id)')<hide.indexOf('setActionBar'));
+const clear=adapter.split('export function clearShakerPlayer')[1].split('\n}')[0];
+assert(!/\bsend\(|setActionBar|setTitle/.test(clear));
+const barrel=adapter.split('export function showBarrelHud')[1].split('\n}')[0];
+assert(!barrel.includes('HUD_PREFIX'));
+assert(barrel.includes("send(player,'barrel/'+JSON.stringify(rawtext),{rawtext})"));
 assert(read('runtime/BP/scripts/bedrock/mixology.js').includes('clearShakerPlayer(playerId)'));
 console.log(JSON.stringify({hudStaticChecks:'passed',slotCases:cases,progressStates:112,idleSamples:256,literalImageReferences:textures,clientTested:false}));
 
-const status=controls.find(c=>c.status)?.status;assert(status,'Barrel/status text needs its own renderer');
-assert.equal(status.type,'label');assert.equal(status.text,`($kt_text - '${HUD_PREFIX}')`);
-assert.equal(status.anchor_to,'bottom_middle');assert.equal(status.text_alignment,'center');
-assert(status.offset[1]<=-45&&status.offset[1]>=-70,'Keep status above hotbar, not top of screen');
-assert(status.visible.includes('1:§')&&status.visible.includes(' / 111§r'));
+assert(!controls.some(c=>c.status),'Barrel text must use only the native actionbar, not an expiring duplicate label');

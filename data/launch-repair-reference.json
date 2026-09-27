@@ -338,8 +338,8 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "40f9dbf02903c8107e99baccc235964c6065d06e894609bbb179aa324d4bf733",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable."
+      "after": "33b57c4d04def2b9e0d73335e16ca783f7da86af5066407d9813f0cb7e8cc4b6",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
@@ -416,14 +416,14 @@
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "8f9e7e1463437ccc0d9f276cff97115c566aaab4020848d631e3da4ee5814c9e",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable."
+      "after": "2591e4793c4fce5c9aa5389a6ab556159112ad1232dc5f5bff0b2f459bebb9e6",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "bb3bf2d3971d7f729956bd69548e04bbd6ffec2aac422506d3f3925e959f307b",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable."
+      "after": "c35e95c172ff3c528afb77751926fa77d3c3d617c48d1525f47f7ded93ff39c2",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
@@ -536,8 +536,8 @@
     "runtime/BP/scripts/data/cookery-guide-payload.js": {
       "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
       "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
-      "after": "690002bc0ce6a52bc84a464ffc3745090b15f46005a6bd78023c20ae574fbbe8",
-      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable."
+      "after": "588ba4378235f08d8b09c923a21a560d208a1deaff246c0e56bc9c025999b743",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
     },
     "runtime/BP/blocks/pine_incense.json": {
       "before": "0001e93157150d410824e8c95445f52946b9991ee96f33a0a4399cc67b3c85cd",
@@ -1211,60 +1211,6 @@
       "after": "0aecc1497a867e6be6bf9a1791e2a0886de051177828700e86bd80eb39fd0773",
       "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable."
     },
-    "runtime/RP/attachables/animated_item_mystery_cocktail.attachable.json": {
-      "before": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
-      "beforeProjected": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
-      "after": "2a7a69540b2dbabf4071301d9eeb2c57c886c095772bb4ea70d9bf871d9fadfe",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/attachables/animated_item_depth_charge.attachable.json": {
-      "before": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
-      "beforeProjected": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
-      "after": "453bc20cfbf3770aa4e473af1ec683a7f6cc22c5d61f24bc55b946185979f750",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/attachables/animated_item_nether_special.attachable.json": {
-      "before": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
-      "beforeProjected": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
-      "after": "5df102b1d97a3a01bed0cd59ddff00de5d5595e9ceac636b8d97f9a90a315aea",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/attachables/animated_item_ice_grape.attachable.json": {
-      "before": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
-      "beforeProjected": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
-      "after": "12f3d5b46cfcf82c92bcb48d543cc88cb2cb5f69715325ba4c269364cdc64362",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/ui/hud_screen.json": {
-      "before": "5da651746453ffe082090da1a155ba985736ae3381c116269d35ff2ca58e94ca",
-      "beforeProjected": "5da651746453ffe082090da1a155ba985736ae3381c116269d35ff2ca58e94ca",
-      "after": "b4af0f50be843edd0526b3e651a88bd6997e362c9a6f09dcbf8532a6fe6f8612",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/models/entity/animated_item_ice_grape.geo.json": {
-      "before": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
-      "beforeProjected": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
-      "after": "e84671ee6399cf36463dcd196689e6843771f42bd2e67b5d5014ad36a133cfd9",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/models/entity/animated_item_nether_special.geo.json": {
-      "before": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
-      "beforeProjected": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
-      "after": "18c80bf1df26e0f776272fa2bcf394fd96a9a3a9828222832ba11b263f320e8a",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/models/entity/animated_item_depth_charge.geo.json": {
-      "before": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
-      "beforeProjected": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
-      "after": "b9ff8d876b093b438981acc40a5bd08e1c4691c82307e92daafa6b10727c3618",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
-    "runtime/RP/models/entity/animated_item_mystery_cocktail.geo.json": {
-      "before": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
-      "beforeProjected": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
-      "after": "377f195c45b68a17c415cf35640b68f755c589b850581f3387cae8016303a632",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
-    },
     "runtime/BP/blocks/potion_bottle.json": {
       "before": "e22e2dee67d358556f60dae07fb76e59310623c0c0eb348899a9e69646567533",
       "beforeProjected": "e22e2dee67d358556f60dae07fb76e59310623c0c0eb348899a9e69646567533",
@@ -1738,6 +1684,18 @@
       "beforeProjected": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a",
       "after": "57559205f0cd3d3f3ec1ea6c879d1a43f157013315c5fa0eb4acb7c3e611994c",
       "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+    },
+    "runtime/BP/scripts/bedrock/shaker-screen.js": {
+      "before": "72cea053ca1e6b41fc3bf1330a0fc61fbf051aada9b5c70662e27a575af65a45",
+      "beforeProjected": "72cea053ca1e6b41fc3bf1330a0fc61fbf051aada9b5c70662e27a575af65a45",
+      "after": "5e4c93e180f4f1cd5a78470e2503aad5aeccf2c7b3c2ab7afb7586f9964dae74",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/textures/item_texture.json": {
+      "before": "c6ee4c5f0e44d9d9750746963f77b84b81bbc7d2c4e840a93482b2870799b150",
+      "beforeProjected": "c6ee4c5f0e44d9d9750746963f77b84b81bbc7d2c4e840a93482b2870799b150",
+      "after": "10d68607001fe40e6f643ffbeeec93a15990a1a7f7b8aae788862dca4e8f7552",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
     }
   },
   "rules": {
@@ -1801,7 +1759,6 @@
     "runtime/BP/scripts/bedrock/molotov.js": "ae3d9d297885c80b0cdf97bacc3809ddb28ff7901bc08d9e2d62d67b79bf7d4a",
     "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2",
     "runtime/BP/scripts/core/incense-sampling.js": "cb2571534df3cdb3f94deb8c29391b85575d092c8504f7b96909860130d73696",
-    "runtime/RP/animations/animated_item.animation.json": "55155961b33fd75c0fc2711db8642d65e6f0810b8c27aa98b9062ec49cf27453",
     "runtime/BP/scripts/core/guide-preparation.js": "c1a346c4b096f6edce8d96952e960bd79fe904a536fb58d64c40bcf4aa997347",
     "runtime/BP/scripts/bedrock/natural-break.js": "61e3ecaeb401bcfd5a3ba8345f76cfde15f73763dd29a94023073fdb50a9f59c",
     "runtime/RP/textures/ui/tavern_entries/white_lady.png": "60d7a4912ed62b7a15491f559275840d3a2ff691e60faaf59622250533692317",
@@ -1818,5 +1775,67 @@
     "runtime/RP/textures/ui/tavern_entries/empty_bottle.png": "191ddb74c58f7bab461a1786c692402272e3612dfc0fc063e0851564db1bcd89",
     "runtime/RP/textures/ui/tavern_entries/emerald.png": "7c96475b8c953edfc2c70a595c7c8aecde9670a93efb3a50f0254de4d8105366"
   },
-  "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c"
+  "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
+  "removedRuntimeFiles": {
+    "runtime/RP/render_controllers/animated_item_mystery_cocktail.render_controllers.json": {
+      "before": "2de19ec669bb0d594129116b8b88f54c432f857e3a023f3ee20ad1efac2baefe",
+      "beforeProjected": "2de19ec669bb0d594129116b8b88f54c432f857e3a023f3ee20ad1efac2baefe",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/render_controllers/animated_item_ice_grape.render_controllers.json": {
+      "before": "6bea9fc358cd910ada5f043c6c16b7c3b4a2af2d2aa27af11fef63da5289b68d",
+      "beforeProjected": "6bea9fc358cd910ada5f043c6c16b7c3b4a2af2d2aa27af11fef63da5289b68d",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/render_controllers/animated_item_nether_special.render_controllers.json": {
+      "before": "2485955abeb359e8518f97b66458e7f1187dcca4a4ab488e79b306e0691f30e5",
+      "beforeProjected": "2485955abeb359e8518f97b66458e7f1187dcca4a4ab488e79b306e0691f30e5",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/render_controllers/animated_item_depth_charge.render_controllers.json": {
+      "before": "a8c6936fbef6b0cb56a3339bd2e7ab752ba8734e0670febf3fefa5b1d33a05bb",
+      "beforeProjected": "a8c6936fbef6b0cb56a3339bd2e7ab752ba8734e0670febf3fefa5b1d33a05bb",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/attachables/animated_item_mystery_cocktail.attachable.json": {
+      "before": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
+      "beforeProjected": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/attachables/animated_item_depth_charge.attachable.json": {
+      "before": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
+      "beforeProjected": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/attachables/animated_item_nether_special.attachable.json": {
+      "before": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
+      "beforeProjected": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/attachables/animated_item_ice_grape.attachable.json": {
+      "before": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
+      "beforeProjected": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/models/entity/animated_item_ice_grape.geo.json": {
+      "before": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
+      "beforeProjected": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/models/entity/animated_item_nether_special.geo.json": {
+      "before": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
+      "beforeProjected": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/models/entity/animated_item_depth_charge.geo.json": {
+      "before": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
+      "beforeProjected": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    },
+    "runtime/RP/models/entity/animated_item_mystery_cocktail.geo.json": {
+      "before": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
+      "beforeProjected": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
+      "reason": "0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label."
+    }
+  }
 }

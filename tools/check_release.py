@@ -105,3 +105,5 @@ subprocess.run(['node',str(ROOT/'tools/check_surface_repairs.mjs')],cwd=ROOT,che
 
 subprocess.run(['node',str(ROOT/'tools/check_board_layout.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_drink_surfaces.py')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/check_glassware_slots.py')],cwd=ROOT,check=True)

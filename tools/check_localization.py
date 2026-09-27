@@ -37,7 +37,7 @@ for p in (RT/'BP').rglob('*.json'):
 for p in (RT/'BP/scripts').rglob('*.js'):
     required.update(re.findall(r"translate\s*:\s*['\"]([^'\"]+)['\"]",p.read_text()))
 required.discard('kt.board.') # Dynamic suffixes are checked explicitly below.
-required.update('kt.board.'+x for x in ['chalk','sandwich','text','placeholder','align','left','center','right'])
+required.update('kt.board.'+x for x in ['chalk','sandwich','text','placeholder','align','left','center','right','justify','distributed','vertical_align','top','middle','bottom','overflow','text_small','text_lines','newline_hint'])
 for key in required:
     assert key in base or not ('kt.' in key or 'kaleidoscope_tavern' in key),(key,'missing runtime key')
 print(json.dumps({'locales':locales,'keysPerLocale':len(base),'runtimeLabelReferences':len(required),'duplicates':0,'missingKeys':0,'placeholderMismatches':0}))

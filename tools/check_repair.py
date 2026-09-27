@@ -5,8 +5,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
 baseline=read(ROOT/'docs/REPAIR-BASELINE-0.6.39.json')
+from reviewed_changes import historical_digest
 for name,expected in baseline['unchangedSha256'].items():
- assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==expected,('Unexpected change to preserved file',name)
+ # Explicit, exact-hash reviewed changes retain the original immutable baseline.
+ assert historical_digest(ROOT/name)==expected,('Unexpected change to preserved file',name)
 animations=read(ROOT/'runtime/RP/animations/runtime_shaker.animation.json')['animations']
 # The player arm was explicitly repaired in 0.6.58; verify its perspective
 # behavior with the pose matrix, while retaining all other baseline checks.

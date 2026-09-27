@@ -80,13 +80,13 @@ console.log(JSON.stringify({guidePackets:messages.length,legacyPages:GUIDE_PAGES
 
 // Persisted editor choices and rendered edges match Java on all three board sizes.
 const {BOARD_ALIGNMENTS,normalizeBoardData,boardLineStart}=await import('../runtime/BP/scripts/core/boards.js');
-assert.deepEqual(BOARD_ALIGNMENTS,['left','center','right']);
+assert.deepEqual(BOARD_ALIGNMENTS,['left','center','right','justify','distributed']);
 for(const maxWidth of [55,63,232])for(const lineWidth of [0,6,24,maxWidth]){
  assert.equal(boardLineStart('left',maxWidth,lineWidth),-maxWidth/2);
  assert.equal(boardLineStart('right',maxWidth,lineWidth)+lineWidth,maxWidth/2);
  assert.equal(boardLineStart('center',maxWidth,lineWidth)+lineWidth/2,0);
  for(const alignment of BOARD_ALIGNMENTS){
-  const data={text:'中文 ABC\n第二行',color:'white',glowing:false,waxed:false,alignment};
+  const data={text:'中文 ABC\n第二行',color:'white',glowing:false,waxed:false,alignment,verticalAlignment:'top'};
   assert.deepEqual(normalizeBoardData(JSON.parse(JSON.stringify(data))),data);
  }
 }

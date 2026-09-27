@@ -5,7 +5,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.58",
+  "version": "0.6.59",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -4505,26 +4505,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手操作编辑文字。单块黑板最多 350 字，三块合并黑板 1,500 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "放置黑板可直接编辑文字；同方向相邻放置三块单黑板时会合并成宽黑板，文字编辑位置在中央。破坏任一块会拆除整组。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed board with an empty hand to edit its text. A single chalkboard holds 350 characters; a merged board holds 1,500.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "Place a chalkboard and interact to edit its text. Three adjacent single boards with the same facing merge into one wide board, edited at the center. Breaking any panel removes the whole assembly.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4556,26 +4556,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "放置会占两格高度并按 16 个方向之一朝向；互动可编辑牌面。持可种植花朵互动会改为相应花饰款，并保留原文字。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "Placement occupies two vertical blocks and faces one of 16 directions. Interact to edit the sign. Use a supported flower to change its decoration while keeping the text.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4600,26 +4600,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "Use a grass block on a sandwich board to change it to this style. Its crafting recipe appears in the recipe card. Changing style preserves text; placement is two blocks high and interaction edits the sign.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4644,26 +4644,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use allium on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4688,26 +4688,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use azure bluet on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4752,26 +4752,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use cornflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4796,26 +4796,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use blue orchid on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4840,26 +4840,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use peony on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4894,26 +4894,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use pink petals on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4938,26 +4938,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use pitcher plant on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4982,26 +4982,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use poppy on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5036,26 +5036,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use sunflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5090,26 +5090,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use torchflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5134,26 +5134,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use red tulip on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5208,26 +5208,26 @@ export const COOKERY_GUIDE_PAYLOAD={
         "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-        "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手互动可编辑文字，最多 320 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
           "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
-          "编辑窗口的“文字对齐”可选择靠左、居中或靠右；默认居中，对每一行生效，保存后保留设置。换行可分段，超出牌面宽度的文字自动折行。"
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
-          "編輯視窗的「文字對齊」可選靠左、置中或靠右；預設置中，對每一行生效，儲存後保留設定。換行可分段，超出牌面寬度的文字自動折行。"
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed sign with an empty hand to edit up to 320 characters.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
           "The recipe card shows this style’s crafting recipe. Use wither rose on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
-          "In the text editor, choose Left, Center or Right alignment. Center is the default; the setting applies to each line and is saved with the board. Use newlines for paragraphs; long lines wrap to the board width."
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [

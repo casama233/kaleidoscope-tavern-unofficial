@@ -31,13 +31,23 @@ class PickDefinitions(unittest.TestCase):
     def test_original_drink_and_storage_gameplay_is_unchanged(self):
         for path, proof in json.loads((ROOT/'data/pick-block-prefixes.json').read_text()).items():
             data = (ROOT/path).read_bytes()
-            # Reconstruct only the two reviewed 0.6.48 edits before checking the
+            # Reconstruct reviewed API/presentation edits before checking the
             # immutable pick baseline. All unrelated byte changes still fail.
             if path.endswith('/bottles.js') or path.endswith('/mixology.js'):
                 review=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges'][path]
                 self.assertEqual(hashlib.sha256(data).hexdigest(),review['after'])
                 if path.endswith('/bottles.js'):
                     data=data.replace(b"deliveryId:'Consume'",b"deliveryId:'minecraft:consumable'")
+                    # 0.6.56 removes only unsolicited successful-operation text.
+                    # Restore those exact statements for the immutable inventory
+                    # and persistence baseline; never update the golden hashes.
+                    for current, previous in [
+                        (",plus,safe}", ",plus,tell,safe}"),
+                        ("playMaterialInteraction(d,target,bottleBlock(next.base));return next;", "playMaterialInteraction(d,target,bottleBlock(next.base));tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;"),
+                        ("playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));return tx;", "playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));tell(player,'§a已取回原品質酒瓶。');return tx;"),
+                    ]:
+                        self.assertEqual(data.count(current.encode()),1)
+                        data=data.replace(current.encode(),previous.encode())
                 else:
                     suffix=b"\nexport const naturalCupStack=state=>resultItem(state);\nexport const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);\n"
                     self.assertTrue(data.endswith(suffix))

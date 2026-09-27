@@ -208,10 +208,21 @@ class HistoricalProjectionTests(unittest.TestCase):
         for root, file, key in [(TAVERN, 'data/motion-source-reference.json', 'preservedGroups'),
                                 (LIQUOR, 'data/storage-preserved-0.1.4.json', 'trees')]:
             projection = self.module.LegacyMenuProjection(root)
+            def liquor_digest(p):
+                raw=projection.read_bytes(p)
+                review_path=root/'data/guide-destruction-review.json'
+                review=c.load(review_path)['blocks'].get(p.relative_to(root).as_posix()) if review_path.exists() else None
+                if review:
+                    self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),review['afterSha256'])
+                    block=json.loads(raw);components=block['minecraft:block']['components']
+                    components['minecraft:destructible_by_explosion']=review['beforeExplosion']
+                    components.pop('kaleidoscope_tavern:natural_break',None)
+                    raw=(json.dumps(block,ensure_ascii=False,indent=2)+'\n').encode()
+                return hashlib.sha256(raw).hexdigest()
             for prefix, expected in c.load(root/file)[key].items():
                 if not prefix.rstrip('/').endswith(('BP/items', 'BP/blocks')):
                     continue
-                rows = [p.relative_to(root).as_posix()+'\0'+(historical_digest(p,projected=True) if root==TAVERN else hashlib.sha256(projection.read_bytes(p)).hexdigest())+'\n'
+                rows = [p.relative_to(root).as_posix()+'\0'+(historical_digest(p,projected=True) if root==TAVERN else liquor_digest(p))+'\n'
                         for p in sorted((root/prefix).rglob('*')) if p.is_file()]
                 self.assertEqual({'files':len(rows), 'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}, expected)
 

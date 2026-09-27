@@ -8,6 +8,10 @@ export const FLOWER_BOARD_TRANSFORMS=Object.freeze({
 });
 export const BOARD_DYES=Object.freeze(['white','orange','magenta','light_blue','yellow','lime','pink','gray','light_gray','cyan','purple','blue','brown','green','red','black']);
 export const BOARD_ALIGNMENTS=Object.freeze(['left','center','right']);
+// Java TextBlockEntityRender.getPosX, in font pixels.
+export function boardLineStart(alignment,maxWidth,lineWidth){
+ return alignment==='left'?-maxWidth/2:alignment==='right'?maxWidth/2-lineWidth:-lineWidth/2;
+}
 export function boardRotation16(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return rotationSegment(yaw);}
 export function boardBase(pos,half){check(pos&&Number.isInteger(pos.x)&&Number.isInteger(pos.y)&&Number.isInteger(pos.z),'INVALID_LOCATION');check(half===0||half===1,'INVALID_BOARD_HALF');return {x:pos.x,y:pos.y-half,z:pos.z};}
 export function chalkCenter(base,position,facing){check(Number.isInteger(position)&&position>=0&&position<=3,'INVALID_CHALK_POSITION');const cw={north:{x:1,z:0},east:{x:0,z:1},south:{x:-1,z:0},west:{x:0,z:-1}}[facing];check(cw,'INVALID_CHALK_FACING');if(position===1)return {x:base.x+cw.x,y:base.y,z:base.z+cw.z};if(position===3)return {x:base.x-cw.x,y:base.y,z:base.z-cw.z};return base;}

@@ -1,0 +1,6 @@
+# Project requirements
+
+- Guide work MUST follow `docs/GUIDE-STANDARD.md`, the user's fixed seven-entrance, child-group, individual-entry contract. Do not flatten or rename it without a new user request.
+- Use Cookery's existing guide API and Tavern's shared addon projection. Addons provide data, not duplicate guide UIs.
+- Keep original Java mechanics authoritative. For boards, Java alignment is left / center / right.
+- Do not use simulated players. Distinguish static checks, native BDS loading, and actual client acceptance.

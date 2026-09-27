@@ -151,5 +151,9 @@ export const GUIDE_ENTRY_ICONS={
   "kaleidoscope_tavern:sunflower_sandwich_board": "textures/ui/tavern_entries/sunflower_sandwich_board",
   "kaleidoscope_tavern:torchflower_sandwich_board": "textures/ui/tavern_entries/torchflower_sandwich_board",
   "kaleidoscope_tavern:tulip_sandwich_board": "textures/ui/tavern_entries/tulip_sandwich_board",
-  "kaleidoscope_tavern:wither_rose_sandwich_board": "textures/ui/tavern_entries/wither_rose_sandwich_board"
+  "kaleidoscope_tavern:wither_rose_sandwich_board": "textures/ui/tavern_entries/wither_rose_sandwich_board",
+  "kaleidoscope_tavern:grape": "textures/ui/tavern_entries/grape",
+  "kaleidoscope_tavern:ice_grape": "textures/ui/tavern_entries/ice_grape",
+  "kaleidoscope_tavern:gold_grape": "textures/ui/tavern_entries/gold_grape",
+  "kaleidoscope_tavern:green_grape": "textures/ui/tavern_entries/green_grape"
 };

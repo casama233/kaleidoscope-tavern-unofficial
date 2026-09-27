@@ -26,7 +26,8 @@ const shaker=payload.entries.filter(e=>e.id==='kaleidoscope_tavern:shaker');asse
 assert(!shaker[0].recipes?.length&&shaker[0].mechanics.length>1);
 console.log(JSON.stringify({guideEntries:payload.entries.length,categories:payload.categories.length,shakerPages:shaker.length,nativeProductPreparations:true}));
 
-assert(payload.categories.every(c=>!c.parent),'Guide has redundant navigation levels');
+const {checkGuideContract}=await import('./guide_contract.mjs');
+checkGuideContract(payload);
 assert(!payload.entries.some(e=>e.id.endsWith(':guide_quality_effects')),'Quality separated from barrel');
 for(const short of ['barrel','tap','pressing_tub','shaker'])for(const rows of Object.values(payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+short).mechanicsByLocale))assert(!rows.some(x=>/See [“"](?:Barrels|Tap|Pressing)|規則見|规则见/.test(x)),'Dead overview reference');
 
@@ -76,3 +77,17 @@ while(state.batch.quality<6){
 }
 assert.deepEqual(times,[2,4,6,8,10]);
 console.log(JSON.stringify({guidePackets:messages.length,legacyPages:GUIDE_PAGES.length+MIXOLOGY_PAGES.length,agingMinutes:times,totalMinutes:times.reduce((a,b)=>a+b,0)}));
+
+// Persisted editor choices and rendered edges match Java on all three board sizes.
+const {BOARD_ALIGNMENTS,normalizeBoardData,boardLineStart}=await import('../runtime/BP/scripts/core/boards.js');
+assert.deepEqual(BOARD_ALIGNMENTS,['left','center','right']);
+for(const maxWidth of [55,63,232])for(const lineWidth of [0,6,24,maxWidth]){
+ assert.equal(boardLineStart('left',maxWidth,lineWidth),-maxWidth/2);
+ assert.equal(boardLineStart('right',maxWidth,lineWidth)+lineWidth,maxWidth/2);
+ assert.equal(boardLineStart('center',maxWidth,lineWidth)+lineWidth/2,0);
+ for(const alignment of BOARD_ALIGNMENTS){
+  const data={text:'中文 ABC\n第二行',color:'white',glowing:false,waxed:false,alignment};
+  assert.deepEqual(normalizeBoardData(JSON.parse(JSON.stringify(data))),data);
+ }
+}
+assert.equal(normalizeBoardData({text:'old save',color:'white',glowing:false,waxed:false}).alignment,'center');

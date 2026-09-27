@@ -1,6 +1,7 @@
 /** Port of TextBlockEntityRender and its two concrete Java renderers.
  * Layout remains in Java font pixels; geometry scale is applied exactly once.
  */
+import {boardLineStart} from '../core/boards.js';
 import {FONT_ADVANCES,FONT_BOLD_OFFSETS} from '../data/board-font.js';
 import {CARDINALS,entityYaw} from '../core/java-placement.js';
 const NS='kaleidoscope_tavern',TYPE=NS+':board_glyph_visual';
@@ -42,7 +43,7 @@ export function renderBoardText(d,info,data,unused,key){
   ((Math.floor((rgb>>16&255)*.6)<<16)|(Math.floor((rgb>>8&255)*.6)<<8)|Math.floor((rgb&255)*.6));
  for(let row=0;row<lines.length;row++){
   const chars=lines[row],width=chars.reduce((v,ch)=>v+advance(ch,f.bold),0);
-  let cursor=data.alignment==='left'?-f.width/2:data.alignment==='right'?f.width/2-width:-width/2;
+  let cursor=boardLineStart(data.alignment,f.width,width);
   const down=(row*f.height-19)*f.scale,t=f.tilt*Math.PI/180;
   // Java R(axis=(-cos(yaw),0,-sin(yaw)),22.5) * (0,-down,0).
   // The horizontal signs must match the tilted board, not its outward normal.

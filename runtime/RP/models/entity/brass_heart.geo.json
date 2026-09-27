@@ -570,59 +570,15 @@
             {
               "origin": [
                 -3,
-                5,
+                4.99,
                 -3
               ],
               "size": [
                 6,
-                0,
+                0.02,
                 6
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     14.0,
@@ -750,59 +706,15 @@
             {
               "origin": [
                 -2.5,
-                9.6,
+                9.59,
                 -2.5
               ],
               "size": [
                 5.0,
-                0,
+                0.02,
                 5.0
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     20.0,
@@ -830,59 +742,15 @@
             {
               "origin": [
                 -2.5,
-                5.4,
+                5.390000000000001,
                 -2.5
               ],
               "size": [
                 5.0,
-                0,
+                0.02,
                 5.0
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     20.0,
@@ -911,12 +779,12 @@
               "origin": [
                 -8.5,
                 7.75,
-                1.5
+                1.49
               ],
               "size": [
                 10.0,
                 9.0,
-                0
+                0.02
               ],
               "pivot": [
                 -3.5,
@@ -929,18 +797,6 @@
                 22.5
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    21.0,
-                    4.0
-                  ],
-                  "uv_size": [
-                    9.0,
-                    10.0
-                  ],
-                  "uv_rotation": 270,
-                  "material_instance": "unshaded"
-                },
                 "south": {
                   "uv": [
                     30.0,
@@ -951,6 +807,18 @@
                     10.0
                   ],
                   "uv_rotation": 90,
+                  "material_instance": "unshaded"
+                },
+                "north": {
+                  "uv": [
+                    21.0,
+                    4.0
+                  ],
+                  "uv_size": [
+                    9.0,
+                    10.0
+                  ],
+                  "uv_rotation": 270,
                   "material_instance": "unshaded"
                 }
               }

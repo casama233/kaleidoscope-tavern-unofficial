@@ -634,59 +634,15 @@
             {
               "origin": [
                 -3,
-                5,
+                4.99,
                 -3
               ],
               "size": [
                 6,
-                0,
+                0.02,
                 6
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    0.0,
-                    7.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    6.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     14.0,
@@ -814,59 +770,15 @@
             {
               "origin": [
                 -2.5,
-                9.5,
+                9.49,
                 -2.5
               ],
               "size": [
                 5.0,
-                0,
+                0.02,
                 5.0
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     20.0,
@@ -894,59 +806,15 @@
             {
               "origin": [
                 -2.5,
-                5.4,
+                5.390000000000001,
                 -2.5
               ],
               "size": [
                 5.0,
-                0,
+                0.02,
                 5.0
               ],
               "uv": {
-                "north": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "east": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "south": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
-                "west": {
-                  "uv": [
-                    15.0,
-                    8.0
-                  ],
-                  "uv_size": [
-                    5.0,
-                    4.0
-                  ],
-                  "material_instance": "unshaded"
-                },
                 "up": {
                   "uv": [
                     20.0,
@@ -975,12 +843,12 @@
               "origin": [
                 -7.7781746,
                 5.75,
-                0
+                -0.01
               ],
               "size": [
                 15.5563492,
                 10.0,
-                0
+                0.02
               ],
               "pivot": [
                 0,
@@ -993,10 +861,10 @@
                 0
               ],
               "uv": {
-                "north": {
+                "south": {
                   "uv": [
-                    15,
-                    20
+                    15.0,
+                    20.0
                   ],
                   "uv_size": [
                     11.0,
@@ -1004,10 +872,10 @@
                   ],
                   "material_instance": "unshaded"
                 },
-                "south": {
+                "north": {
                   "uv": [
-                    15.0,
-                    20.0
+                    15,
+                    20
                   ],
                   "uv_size": [
                     11.0,
@@ -1019,12 +887,12 @@
             },
             {
               "origin": [
-                0,
+                -0.01,
                 5.75,
                 -7.7781746
               ],
               "size": [
-                0,
+                0.02,
                 10.0,
                 15.5563492
               ],

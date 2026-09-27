@@ -9,6 +9,25 @@ import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
+// Mouse/gamepad actions use the same native gaze hit used for block targeting.
+// Touch may select off-centre on the screen, so retain its event hit location.
+export const storageHitDiagnostics={corrected:0,last:null};
+function storageHit(player,block,face,point){
+ const fallback={face,faceLocation:point?{...point}:undefined};
+ try{
+  if(!['KeyboardAndMouse','Gamepad'].includes(player.inputInfo.lastInputMode))return fallback;
+  const hit=player.getBlockFromViewDirection({maxDistance:8});
+  if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
+   ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return fallback;
+  const location={...hit.faceLocation};
+  if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
+   storageHitDiagnostics.corrected++;
+   storageHitDiagnostics.last={tick:system.currentTick,block:block.typeId,event:{...point},ray:location};
+  }
+  return {face:hit.face,faceLocation:location};
+ }catch{return fallback;}
+}
+
 function revisionOf(read,block){
  if(typeof read!=='function')return -1;
  try{return read(block)??-1;}catch{return -1;}
@@ -83,7 +102,7 @@ export function installStatefulStorageRoutes({
  registerJavaBlockUseHandler(e=>{
   if(e.cancel||!isBlock(e.block))return;
   const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
-  const face=e.blockFace,faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
+  const {face,faceLocation}=storageHit(e.player,e.block,e.blockFace,e.faceLocation);
   let revision,consume=false;
   try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch(error){if(failClosed){e.cancel=true;if(e.isFirstEvent!==false)system.run(()=>safe(e.player,()=>{throw error;}));}return;}
   if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;

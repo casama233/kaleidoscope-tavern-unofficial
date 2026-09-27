@@ -180,7 +180,7 @@
         "condition": "q.block_state('kaleidoscope_tavern:position') == 1 && q.block_state('kaleidoscope_tavern:half') == 0",
         "components": {
           "minecraft:geometry": {
-            "identifier": "geometry.kt_java.chalk_large_0_0"
+            "identifier": "geometry.kt_java.chalk_large_2_0"
           },
           "minecraft:material_instances": {
             "*": {
@@ -218,7 +218,7 @@
         "condition": "q.block_state('kaleidoscope_tavern:position') == 1 && q.block_state('kaleidoscope_tavern:half') == 1",
         "components": {
           "minecraft:geometry": {
-            "identifier": "geometry.kt_java.chalk_large_0_1"
+            "identifier": "geometry.kt_java.chalk_large_2_1"
           },
           "minecraft:material_instances": {
             "*": {
@@ -332,7 +332,7 @@
         "condition": "q.block_state('kaleidoscope_tavern:position') == 3 && q.block_state('kaleidoscope_tavern:half') == 0",
         "components": {
           "minecraft:geometry": {
-            "identifier": "geometry.kt_java.chalk_large_2_0"
+            "identifier": "geometry.kt_java.chalk_large_0_0"
           },
           "minecraft:material_instances": {
             "*": {
@@ -370,7 +370,7 @@
         "condition": "q.block_state('kaleidoscope_tavern:position') == 3 && q.block_state('kaleidoscope_tavern:half') == 1",
         "components": {
           "minecraft:geometry": {
-            "identifier": "geometry.kt_java.chalk_large_2_1"
+            "identifier": "geometry.kt_java.chalk_large_0_1"
           },
           "minecraft:material_instances": {
             "*": {

@@ -104,7 +104,7 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
 
 /** Use Cookery's short, flat chapter navigation and one product page per item. */
 function organizeGuideNavigation(payload){
- const groups={equipment:['工作站','工作站','Workstations'],cultivation:['种植与收获','種植與收穫','Growing & Harvesting'],barrel:['酒饮','酒飲','Drinks'],cocktail:['鸡尾酒','雞尾酒','Cocktails'],storage:['收纳与工具','收納與工具','Storage & Tools'],furniture:['家具','家具','Furniture'],lighting:['灯饰','燈飾','Lighting'],decor:['装饰','裝飾','Decorations'],food:['食物','食物','Food'],extensions:['其他附属内容','其他附屬內容','Other Addon Content']};
+ const groups={equipment:['工作站','工作站','Workstations'],cultivation:['种植与收获','種植與收穫','Growing & Harvesting'],barrel:['酒饮','酒飲','Drinks'],cocktail:['鸡尾酒','雞尾酒','Cocktails'],ingredients:['调酒材料','調酒材料','Mixers & Ingredients'],storage:['收纳与工具','收納與工具','Storage & Tools'],furniture:['家具','家具','Furniture'],lighting:['灯饰','燈飾','Lighting'],decor:['装饰','裝飾','Decorations'],food:['食物','食物','Food'],extensions:['其他附属内容','其他附屬內容','Other Addon Content']};
  const aliases={incense:'decor',art:'decor',boards:'decor'};
  for(const entry of payload.entries)entry.category=aliases[entry.category]??entry.category;
  const used=new Set(payload.entries.map(e=>e.category));

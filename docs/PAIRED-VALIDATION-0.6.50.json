@@ -1,0 +1,34 @@
+{
+  "tavernVersion": "0.6.50",
+  "worldLiquorVersion": "0.1.13",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "staticChecks": "passed",
+  "bdsLoad": "passed; scripts initialized and addon registered; clean shutdown",
+  "simulatedPlayers": false,
+  "clientVisuals": "NOT_TESTED",
+  "cabinetClickRegression": "native ray target validation passed 36 cases; actual client mirrored click cause not confirmed; acceptance pending",
+  "surfacePhysics": {
+    "nativeCabinetRays": 36,
+    "nativeArmorStandCornerRegions": 32,
+    "sofaCorners": 8,
+    "players": 0,
+    "logSha256": "01764dd52003c8237e63db561d08e8625ebf7bdfd705c0d6fe3b1f32cf7b3146"
+  },
+  "planeSourceValidation": {
+    "tavern-src": {
+      "modifiedSheets": 82,
+      "bothOriginalFaceUVsRetained": true,
+      "otherAxesAndTransformsPreserved": true,
+      "idempotent": true
+    },
+    "world-liquor-src": {
+      "modifiedSheets": 73,
+      "bothOriginalFaceUVsRetained": true,
+      "otherAxesAndTransformsPreserved": true,
+      "idempotent": true
+    }
+  },
+  "nativeHeldTextureAnimation": "NOT_RESTORED; complete original frame zero",
+  "logSha256": "405f1ea7bf64d89b21975444a7563d40e4bd1b14541bd7afb5cb324bc63b907a"
+}

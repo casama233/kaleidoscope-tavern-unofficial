@@ -54,7 +54,7 @@ for p,j in docs.items():
         if p.name.endswith('_sofa.json'):
             corners=[row for row in b.get('permutations',[]) if row['condition'].endswith(('== 4','== 5'))]
             assert len(corners)==2
-            assert all(len(row['components']['minecraft:collision_box'])==2 for row in corners)
+            assert all(len(row['components']['minecraft:collision_box'])==3 for row in corners)
         for values in b['description'].get('states',{}).values():
             if isinstance(values,list):assert len(values)<=16,(p,'block state exceeds 16 values')
         components=[b.get('components',{}),*[x['components'] for x in b.get('permutations',[])]]
@@ -94,3 +94,5 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_vibrant_contract.py')],cwd=
 
 subprocess.run(['node',str(ROOT/'tools/check_incense_sampling.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_animated_hands.py')],cwd=ROOT,check=True)
+
+subprocess.run(['node',str(ROOT/'tools/check_surface_repairs.mjs')],cwd=ROOT,check=True)

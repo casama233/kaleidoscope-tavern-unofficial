@@ -1378,7 +1378,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "绒球葱花园",
       "en_US": "Allium Garden"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_light_purple",
+      "kaleidoscope_tavern:cocktail_ingredient_light_purple",
+      "kaleidoscope_tavern:cocktail_ingredient_light_purple"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/bloody_mary",
@@ -1427,7 +1432,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "血腥玛丽",
       "en_US": "Bloody Mary"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_red",
+      "kaleidoscope_tavern:cocktail_ingredient_red",
+      "kaleidoscope_tavern:cocktail_ingredient_red"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/brass_heart",
@@ -1485,7 +1495,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "黄铜心脏",
       "en_US": "Brass Heart"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_gold",
+      "kaleidoscope_tavern:cocktail_ingredient_gold",
+      "kaleidoscope_tavern:cocktail_ingredient_gold"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/depth_charge",
@@ -1544,7 +1559,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "深水炸弹",
       "en_US": "Depth Charge"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_blue",
+      "kaleidoscope_tavern:cocktail_ingredient_light_purple",
+      "kaleidoscope_tavern:cocktail_ingredient_white"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/emerald",
@@ -1584,7 +1604,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "翡翠",
       "en_US": "Emerald"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_green"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/godfather",
@@ -1636,7 +1661,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "教父",
       "en_US": "Godfather"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_red",
+      "kaleidoscope_tavern:cocktail_ingredient_red",
+      "kaleidoscope_tavern:cocktail_ingredient_gold"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/grasshopper",
@@ -1680,7 +1710,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "绿色蚱蜢",
       "en_US": "Grasshopper"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_white"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/mojito",
@@ -1728,7 +1763,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "莫吉托",
       "en_US": "Mojito"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_white",
+      "kaleidoscope_tavern:cocktail_ingredient_white",
+      "kaleidoscope_tavern:cocktail_ingredient_green"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/nether_special",
@@ -1777,7 +1817,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "下界特调",
       "en_US": "Nether Special"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_red",
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_blue"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/screwdriver",
@@ -1823,7 +1868,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "螺丝起子",
       "en_US": "Screwdriver"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_yellow",
+      "kaleidoscope_tavern:cocktail_ingredient_yellow",
+      "kaleidoscope_tavern:cocktail_ingredient_gold"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/sculk_special",
@@ -1884,7 +1934,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "幽匿特调",
       "en_US": "Sculk Special"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_blue",
+      "kaleidoscope_tavern:cocktail_ingredient_blue",
+      "kaleidoscope_tavern:cocktail_ingredient_light_purple"
+    ]
   },
   {
     "id": "kaleidoscope_tavern:shaker/white_lady",
@@ -1928,7 +1983,12 @@ export const SHAKER_RECIPES = [
       "zh_CN": "白色佳人",
       "en_US": "White Lady"
     },
-    "source": "kaleidoscope_tavern"
+    "source": "kaleidoscope_tavern",
+    "ingredientTags": [
+      "kaleidoscope_tavern:cocktail_ingredient_white",
+      "kaleidoscope_tavern:cocktail_ingredient_green",
+      "kaleidoscope_tavern:cocktail_ingredient_yellow"
+    ]
   }
 ];
 export const COCKTAILS = {

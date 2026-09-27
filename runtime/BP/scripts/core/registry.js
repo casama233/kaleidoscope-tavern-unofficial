@@ -15,6 +15,7 @@ function normalizeRecipe(raw,source,fluids,itemExists){
  if(raw.title!==undefined)r.title=localeMap(raw.title);
  if(kind==='shaker'){
   check(Array.isArray(raw.ingredients)&&raw.ingredients.length===3,'INVALID_SHAKER_SLOTS');r.ingredients=raw.ingredients.map(options);
+  if(raw.ingredientTags!==undefined){check(Array.isArray(raw.ingredientTags)&&raw.ingredientTags.length===3,'INVALID_INGREDIENT_TAGS');r.ingredientTags=raw.ingredientTags.map(tag=>tag===null?null:id(tag));}
   for(const item of r.ingredients.flat()){check(itemExists(item),'UNKNOWN_ITEM',item);check(item!=='kaleidoscope_tavern:signature_cocktail','SIGNATURE_INPUT_NOT_ADAPTED');const q=/^kaleidoscope_tavern:.*_q([1-6])$/.exec(item);check(!q||Number(q[1])>=4,'QUALITY_TOO_LOW');check(!q||Object.hasOwn(SHAKER_INPUTS,item),'NOT_MIXABLE_DRINK');}
   check(raw.output&&typeof raw.output.item==='string'&&raw.output.byQuality===undefined,'INVALID_SHAKER_OUTPUT');r.output={item:id(raw.output.item)};check(itemExists(r.output.item),'UNKNOWN_ITEM',r.output.item);
   check(!['kaleidoscope_tavern:signature_cocktail','kaleidoscope_tavern:empty_glassware','kaleidoscope_tavern:shaker','minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(r.output.item),'INVALID_SHAKER_OUTPUT');
@@ -61,7 +62,7 @@ function normalizePage(raw,source){
  own(raw.id,source);const page={id:raw.id,source,title:localeMap(raw.title),body:localeMap(raw.body),recipeIds:(raw.recipeIds??[]).map(id)};
  check(page.recipeIds.length<=32,'TOO_MANY_PAGE_RECIPES');
  if(raw.item!==undefined)page.item=own(raw.item,source);
- if(raw.category!==undefined){check(['equipment','barrel','cocktail','storage','cultivation','furniture','lighting','incense','art','boards','food'].includes(raw.category),'INVALID_GUIDE_CATEGORY');page.category=raw.category;}
+ if(raw.category!==undefined){check(['equipment','barrel','cocktail','ingredients','storage','cultivation','furniture','lighting','incense','art','boards','food'].includes(raw.category),'INVALID_GUIDE_CATEGORY');page.category=raw.category;}
  if(raw.crafting!==undefined){
   check(page.item&&Array.isArray(raw.crafting)&&raw.crafting.length<=16,'INVALID_GUIDE_CRAFTING');
   page.crafting=raw.crafting.map(r=>{

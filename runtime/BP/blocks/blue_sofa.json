@@ -271,6 +271,64 @@
             {
               "origin": [
                 -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                16
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                3
+              ],
+              "size": [
+                16,
+                10,
+                5
+              ]
+            },
+            {
+              "origin": [
+                -8,
+                8,
+                -8
+              ],
+              "size": [
+                5,
+                10,
+                11
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:connection') == 5",
+        "components": {
+          "minecraft:geometry": {
+            "identifier": "geometry.kt_assets_a4.sofa_right_corner"
+          },
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -8,
+                0,
+                -8
+              ],
+              "size": [
+                16,
+                8,
+                16
+              ]
+            },
+            {
+              "origin": [
+                -8,
                 8,
                 3
               ],
@@ -289,41 +347,7 @@
               "size": [
                 5,
                 10,
-                16
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "condition": "q.block_state('kaleidoscope_tavern:connection') == 5",
-        "components": {
-          "minecraft:geometry": {
-            "identifier": "geometry.kt_assets_a4.sofa_right_corner"
-          },
-          "minecraft:collision_box": [
-            {
-              "origin": [
-                -8,
-                8,
-                3
-              ],
-              "size": [
-                16,
-                10,
-                5
-              ]
-            },
-            {
-              "origin": [
-                -8,
-                8,
-                -8
-              ],
-              "size": [
-                5,
-                10,
-                16
+                11
               ]
             }
           ]

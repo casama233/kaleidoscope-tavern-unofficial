@@ -11,21 +11,24 @@ import {spawnThrownDrink} from './storage-projectile.js';
 
 // Mouse/gamepad actions use the same native gaze hit used for block targeting.
 // Touch may select off-centre on the screen, so retain its event hit location.
-export const storageHitDiagnostics={corrected:0,last:null};
+export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,last:null};
 function storageHit(player,block,face,point){
  const fallback={face,faceLocation:point?{...point}:undefined};
  try{
-  if(!['KeyboardAndMouse','Gamepad'].includes(player.inputInfo.lastInputMode))return fallback;
+  const input=player.inputInfo,mode=input.lastInputModeUsed;
+  if(!['KeyboardAndMouse','Gamepad'].includes(mode)&&!(mode==='Touch'&&input.touchOnlyAffectsHotbar)){storageHitDiagnostics.eventHits++;return fallback;}
   const hit=player.getBlockFromViewDirection({maxDistance:8});
   if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
    ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return fallback;
+  storageHitDiagnostics.nativeHits++;
   const location={...hit.faceLocation};
   if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
    storageHitDiagnostics.corrected++;
-   storageHitDiagnostics.last={tick:system.currentTick,block:block.typeId,event:{...point},ray:location};
+   storageHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState('kaleidoscope_tavern:facing'),inputMode:mode,event:{...point},ray:location};
+   if(storageHitDiagnostics.corrected<=8)console.warn('[Tavern storage hit] '+JSON.stringify(storageHitDiagnostics.last));
   }
   return {face:hit.face,faceLocation:location};
- }catch{return fallback;}
+ }catch{storageHitDiagnostics.errors++;return fallback;}
 }
 
 function revisionOf(read,block){

@@ -66,7 +66,7 @@ for p,j in docs.items():
         for c in components:
             for g in [c.get('minecraft:geometry'),c.get('minecraft:item_visual',{}).get('geometry')]:
                 if isinstance(g,dict):g=g.get('identifier')
-                if g:assert g in geometry,(p,g)
+                if g:assert g in geometry or g in {'minecraft:geometry.full_block','minecraft:geometry.full_block_v1','minecraft:geometry.cross'},(p,g)
     for animation in j.get('animations',{}).values():
         if not isinstance(animation,dict):continue
         for bone in animation.get('bones',{}).values():

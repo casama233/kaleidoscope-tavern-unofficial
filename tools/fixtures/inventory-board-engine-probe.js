@@ -24,7 +24,13 @@ system.runTimeout(async()=>{try{
  c.setItem(0,undefined);add(wine,2);check(c.getItem(1).amount===16&&c.getItem(0).amount===1,'last empty slot fallback');
  clear();c.setItem(1,normalizeBottleStack(make(wine,5)));const plan=planInventory(c,0,0,[{id:wine,count:1}],make);try{commitInventory(plan,c,()=>{throw Error('forced save failure');},()=>{});}catch{}check(c.getItem(1).amount===5&&!c.getItem(0),'rollback failed');
  clear();const signature=make('kaleidoscope_tavern:signature_cocktail',1);signature.setDynamicProperty('test:identity','keep');const signaturePlan=planInventory(c,0,0,[{stack:signature,count:1}],make);commitInventory(signaturePlan,c,()=>{},()=>{});check(c.getItem(1).getDynamicProperty('test:identity')==='keep','signature properties lost');
- console.warn('INTERACTION_INVENTORY_PASS 12 scenarios; native ItemStacks and chest container');
+ // Tool pickup uses the selected slot and preserves the portable recipe payload.
+ clear();const shaker=make('kaleidoscope_tavern:shaker',1);shaker.setDynamicProperty('test:recipe','preserve');
+ const takeShaker=()=>{const p=planInventory(c,5,0,[{stack:shaker,count:1,preferHand:true}],make);commitInventory(p,c,()=>{},()=>{});};
+ takeShaker();check(c.getItem(5)?.getDynamicProperty('test:recipe')==='preserve'&&!c.getItem(0),'shaker not returned to hand');
+ clear();c.setItem(5,make('minecraft:stone',64));takeShaker();check(c.getItem(5).typeId==='minecraft:stone'&&c.getItem(0)?.getDynamicProperty('test:recipe')==='preserve','occupied hand overwritten');
+ clear();for(let i=0;i<c.size;i++)c.setItem(i,make('minecraft:stone',64));c.setItem(5,undefined);takeShaker();check(c.getItem(5)?.getDynamicProperty('test:recipe')==='preserve','last free hand rejected');
+ console.warn('INTERACTION_INVENTORY_PASS 15 scenarios; native ItemStacks and chest container');
  const info={kind:'chalk',large:false,facing:'north',root:{x:1030,y:80,z:1030}},key='parity-board';let rendered=0;
  for(const alignment of ['left','center','right','justify','distributed'])for(const verticalAlignment of ['top','middle','bottom']){
   const data={text:'AB CD EF GH\n一二三',color:'white',glowing:false,waxed:false,alignment,verticalAlignment};

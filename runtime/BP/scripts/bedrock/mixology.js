@@ -114,7 +114,7 @@ export function pickupShaker(player,block,{breaking=false}={}){
  near(player,block);idle(player);const key=shakerKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
   if(!breaking)check(!hand(player),'EMPTY_HAND_REQUIRED');const state=station(block),item=portable(state,token());
-  commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1}],block,BlockPermutation.resolve('minecraft:air'));
+  commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1,preferHand:!breaking}],block,BlockPermutation.resolve('minecraft:air'));
   syncShakerVisual(block);hideShakerHud(player);return item;
  });
 }

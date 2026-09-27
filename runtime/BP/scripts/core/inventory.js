@@ -11,6 +11,8 @@ export function planInventory(container,selected,take,outputs,makeStack){
  const forced=new Set();
  for(const o of outputs){
   let count=o.count;check(Number.isInteger(count)&&count>0&&count<=1024,'BAD_GIVE');const template=normalizeBottleStack(o.stack??makeStack(o.id,1));template.amount=1;
+  // Portable tools must return to the hand before considering other stacks.
+  if(o.preferHand&&!after[selected]){const n=Math.min(count,template.maxAmount);after[selected]=template.clone();after[selected].amount=n;count-=n;forced.add(selected);}
   // Prefer compatible stacks, then the newly-freed held slot, then other empty slots.
   for(let i=0;i<after.length&&count;i++){const slot=after[i];if(slot&&normalizeBottleStack(slot).isStackableWith(template)){const n=Math.min(count,slot.maxAmount-slot.amount);slot.amount+=n;count-=n;if(n)forced.add(i);}}
   const others=Array.from({length:after.length},(_,i)=>i).filter(i=>i!==selected);

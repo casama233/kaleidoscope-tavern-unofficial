@@ -6,7 +6,9 @@ const hud=JSON.parse(read('runtime/RP/ui/hud_screen.json'));
 const adapter=read('runtime/BP/scripts/bedrock/shaker-screen.js');
 assert(!/setTitle|updateSubtitle|ktmix:|textures\//.test(adapter),'HUD must not write a title or a resource path');
 assert(adapter.includes('setActionBar(raw)'));
-assert(!('hud_title_text' in hud));assert(!('hud_actionbar_text' in hud));
+assert(!('hud_title_text' in hud));
+for(const key of ['hud_actionbar_text','hud_actionbar_text/actionbar_message'])
+ assert.deepEqual(Object.keys(hud[key]).sort(),['$kt_actionbar_text','visible']);
 assert.deepEqual(Object.keys(hud.root_panel),['modifications']);
 assert.equal(hud.root_panel.modifications[0].operation,'insert_back');
 assert.equal(hud.kt_mixology_factory.factory.name,'hud_actionbar_text_factory');

@@ -1,5 +1,5 @@
 {
-  "version": "0.6.59",
+  "version": "0.6.60",
   "baseline": "cedfaedf6140bae61b24afb658869b1d0e6ea1a9",
   "javaSourceFilesVerified": 7,
   "reviewedChanges": [
@@ -247,6 +247,7 @@
     "runtime/BP/scripts/bedrock/furniture.js",
     "runtime/BP/scripts/bedrock/holder.js",
     "runtime/BP/scripts/bedrock/immersion.js",
+    "runtime/BP/scripts/bedrock/java-placement-router.js",
     "runtime/BP/scripts/bedrock/machines.js",
     "runtime/BP/scripts/bedrock/mixology.js",
     "runtime/BP/scripts/bedrock/pressing-feedback.js",
@@ -265,7 +266,9 @@
     "runtime/BP/scripts/core/decorations.js",
     "runtime/BP/scripts/core/furniture.js",
     "runtime/BP/scripts/core/guide.js",
+    "runtime/BP/scripts/core/inventory.js",
     "runtime/BP/scripts/core/potions.js",
+    "runtime/BP/scripts/core/quality-tooltip.js",
     "runtime/BP/scripts/core/registry.js",
     "runtime/BP/scripts/data/cookery-guide-payload.js",
     "runtime/BP/scripts/data/guide-catalog.js",
@@ -346,7 +349,7 @@
     "runtime/RP/render_controllers/animated_item_mystery_cocktail.render_controllers.json",
     "runtime/RP/render_controllers/animated_item_nether_special.render_controllers.json"
   ],
-  "unchangedExistingRuntimeFiles": 3304,
+  "unchangedExistingRuntimeFiles": 3301,
   "pureRules": {
     "pureChecks": "passed",
     "rackVectorCases": 56,

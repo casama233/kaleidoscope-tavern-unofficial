@@ -84,6 +84,8 @@ def build():
     data = read(path)
     data['minecraft:entity']['description']['properties']['kaleidoscope_tavern:storage_kind']['range'][1] = len(tables['general'])
     write(path, data)
+    from repair_drink_planes import repair
+    repair(ROOT)
     print('Storage-only Molotov origin and append-only watermelon bindings regenerated.')
 
 

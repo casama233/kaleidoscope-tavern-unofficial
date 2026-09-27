@@ -1,0 +1,82 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-27 12:37:46:184 INFO] Starting Server
+[2026-09-27 12:37:46:184 INFO] Version: 1.26.51.1
+[2026-09-27 12:37:46:184 INFO] Session ID: b1a3127b-71ad-458d-bc95-bb1a285a2c94
+[2026-09-27 12:37:46:184 INFO] Build ID: 51061372
+[2026-09-27 12:37:46:184 INFO] Branch: r/26_u5
+[2026-09-27 12:37:46:184 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-27 12:37:46:184 INFO] Configuration: Publish
+[2026-09-27 12:37:46:184 INFO] Contents of server.properties: {}
+[2026-09-27 12:37:46:185 INFO] Level Name: Parity Test
+[2026-09-27 12:37:46:185 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-27 12:37:46:186 ERROR] Error opening allow list file: allowlist.json
+[2026-09-27 12:37:46:186 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-27 12:37:46:186 INFO] Game mode: 0 Survival
+[2026-09-27 12:37:46:186 INFO] Difficulty: 1 EASY
+[2026-09-27 12:37:46:189 INFO] Content logging to console is enabled.
+[2026-09-27 12:37:46:190 INFO]
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-27 12:37:46:779 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-27_12-37-46
+[2026-09-27 12:37:46:779 INFO] Opening level 'worlds/Parity Test/db'
+[2026-09-27 12:37:46:818 INFO] Accepting clients on [::]:19572
+[2026-09-27 12:37:46:883 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Parity Test/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-27 12:37:46:883 INFO] Pack Stack - [01] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.53) @ worlds/Parity Test/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-27 12:37:49:469 INFO] Signed in to signaling service successfully
+[2026-09-27 12:37:49:471 INFO] Server started.
+[2026-09-27 12:37:49:471 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-27 12:37:49:471 INFO] Server Telemetry is currently not enabled.
+[2026-09-27 12:37:49:471 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-27 12:37:49:471 INFO]
+[2026-09-27 12:37:49:471 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-27 12:37:49:471 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-27 12:37:49:471 INFO] ======================================================
+[2026-09-27 12:37:49:700 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.53-beta.1.
+
+[2026-09-27 12:38:03:062 WARN] [Scripting] PARITY_PROGRESS {"offset":0,"checked":376,"failed":0}
+
+[2026-09-27 12:38:06:085 WARN] [Scripting] PARITY_PROGRESS {"offset":32,"checked":584,"failed":0}
+
+[2026-09-27 12:38:10:099 WARN] [Scripting] PARITY_PROGRESS {"offset":64,"checked":892,"failed":0}
+
+[2026-09-27 12:38:13:189 WARN] [Scripting] PARITY_PROGRESS {"offset":96,"checked":1268,"failed":0}
+
+[2026-09-27 12:38:16:276 WARN] [Scripting] PARITY_PROGRESS {"offset":128,"checked":1644,"failed":0}
+
+[2026-09-27 12:38:19:356 WARN] [Scripting] PARITY_PROGRESS {"offset":160,"checked":2020,"failed":0}
+
+[2026-09-27 12:38:22:435 WARN] [Scripting] PARITY_PROGRESS {"offset":192,"checked":2372,"failed":0}
+
+[2026-09-27 12:38:25:446 WARN] [Scripting] PARITY_PROGRESS {"offset":224,"checked":2568,"failed":0}
+
+[2026-09-27 12:38:28:486 WARN] [Scripting] PARITY_PROGRESS {"offset":256,"checked":2800,"failed":0}
+
+[2026-09-27 12:38:31:535 WARN] [Scripting] PARITY_PROGRESS {"offset":288,"checked":3064,"failed":0}
+
+[2026-09-27 12:38:34:622 WARN] [Scripting] PARITY_PROGRESS {"offset":320,"checked":3440,"failed":0}
+
+[2026-09-27 12:38:37:712 WARN] [Scripting] PARITY_PROGRESS {"offset":352,"checked":3816,"failed":0}
+
+[2026-09-27 12:38:40:722 WARN] [Scripting] PARITY_PROGRESS {"offset":384,"checked":4017,"failed":0}
+
+[2026-09-27 12:38:43:697 WARN] [Scripting] PARITY_PROGRESS {"offset":416,"checked":4071,"failed":0}
+
+[2026-09-27 12:38:46:697 WARN] [Scripting] PARITY_PROGRESS {"offset":448,"checked":4124,"failed":0}
+
+[2026-09-27 12:38:49:697 WARN] [Scripting] PARITY_PROGRESS {"offset":480,"checked":4172,"failed":0}
+
+[2026-09-27 12:38:49:697 WARN] [Scripting] PARITY_RESULT {"cases":508,"checked":4172,"failed":0,"rayChecks":4172,"rayFailed":0}
+
+[2026-09-27 12:38:50:290 WARN] [Scripting] PARITY_INSTANT_HEALTH [{"amplifier":0,"actual":5,"expected":5},{"amplifier":1,"actual":9,"expected":9},{"amplifier":2,"actual":10,"expected":10},{"amplifier":3,"actual":10,"expected":10}]
+
+[2026-09-27 12:38:50:290 WARN] [Scripting] PARITY_PVP_API {"pvp":true}
+
+[2026-09-27 12:38:50:290 WARN] [Scripting] PARITY_DONE
+
+[2026-09-27 12:38:51:212 INFO] Server stop requested.
+[2026-09-27 12:38:51:258 INFO] Stopping server...
+Quit correctly

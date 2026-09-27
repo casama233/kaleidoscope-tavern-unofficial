@@ -41,3 +41,5 @@ for(const recipe of recipes){
  if(result){const entry=payload.entries.find(e=>e.id===result);assert(entry?.recipes?.some(r=>r.method===({barrel:'Barrel',shaker:'Shaker'})[recipe.kind]),recipe.id+' missing native product preparation');assert(entry.food,recipe.id+' no preparation button');}
 }
 for(const lc of ['en_US','zh_CN','zh_TW'])for(const [id,label]of Object.entries(payload.names[lc]))if(id.includes('/ingredient_'))assert(!/\b(?:minecraft|kaleidoscope_\w+):/.test(label),id+' unresolved '+lc+': '+label);
+
+for(const [id,words] of [['emerald','Attack, mining'],['sculk_special','world PvP'],['mystery_cocktail','off by default']])assert(payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+id).mechanicsByLocale.en_US.some(s=>s.includes(words)));

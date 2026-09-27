@@ -8,6 +8,9 @@ export const TIPSY_FADE_TICKS=40;
 export const TIPSY_YAW_GAIN=.75;
 export const TIPSY_MAX_STEP_DEGREES=.06;
 export const TIPSY_OPT_OUT_TAG='kt_no_tipsy_motion';
+export const TIPSY_OPT_IN_TAG='kt_tipsy_yaw_motion';
+// Camera-only roll is unavailable. Aim-changing motion requires explicit opt-in.
+export function tipsyMotionEnabled(hasTag){return hasTag(TIPSY_OPT_IN_TAG)&&!hasTag(TIPSY_OPT_OUT_TAG);}
 const clamp=(n,lo,hi)=>Math.max(lo,Math.min(hi,n));
 const smoothstep=n=>{const u=clamp(n,0,1);return u*u*(3-2*u);};
 export function javaTipsyRoll(ticks){

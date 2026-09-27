@@ -96,3 +96,6 @@ subprocess.run(['node',str(ROOT/'tools/check_incense_sampling.mjs')],cwd=ROOT,ch
 subprocess.run([sys.executable,str(ROOT/'tools/check_animated_hands.py')],cwd=ROOT,check=True)
 
 subprocess.run(['node',str(ROOT/'tools/check_surface_repairs.mjs')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/java_collision.py')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_effect_parity.mjs')],cwd=ROOT,check=True)

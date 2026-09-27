@@ -37,8 +37,8 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Signature cups and effect limits"
     },
     "body": {
-      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。C6另已接入聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配；尚餘3項Java專屬效果未實作。原生飲用返杯及玻璃透明排序尚需實機測試。",
-      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. C6 also enables Shriek, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters; three Java-only effects remain inactive. Native empty-glass return and transparent rendering need engine tests."
+      "zh_TW": "特調保留每份品質/藥水身份對應效果，合併同類時長×Java float1.2後截斷，强度與機率取最大；物品不可堆疊，擺放取回不丟資料。C5已實作血腥瑪麗擊殺回血；經驗汲取及Zenith為明示適配。C6另已接入聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配；長臂只增加酒館遠距擺放範圍；微醺晃動預設關閉，草叢隱匿不會清除既有仇恨。原生飲用返杯及玻璃透明排序尚需實機測試。",
+      "en_US": "Signature preserves per-input effect snapshots, integer mean RGB and Java float1.2 duration merge. C5 implements Bloody Mary kill healing; XP Drain and Zenith are explicit adapters. C6 also enables Shriek, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters; Long Reach only extends Tavern placement; Tipsy motion is off by default and Grass Stealth does not clear existing targets. Native empty-glass return and transparent rendering need engine tests."
     },
     "recipeIds": []
   },
@@ -68,9 +68,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Emerald"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作]",
-      "zh_CN": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [未實作]",
-      "en_US": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [not implemented]"
+      "zh_TW": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [酒館遠距擺放 6→9 格；攻擊、挖掘與原版互動距離不變]",
+      "zh_CN": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [酒館遠距擺放 6→9 格；攻擊、挖掘與原版互動距離不變]",
+      "en_US": "kaleidoscope_tavern:long_reach: 2700s / amplifier 0 / 100% [Tavern distant placement 6→9 blocks; attack, mining and vanilla interaction ranges unchanged]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/emerald"
@@ -238,9 +238,9 @@ export const MIXOLOGY_PAGES = [
       "en_US": "Cocktail: Sculk Special"
     },
     "body": {
-      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [聲波 PvE 適配已接入]",
-      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [聲波 PvE 適配已接入]",
-      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [sonic PvE adapter implemented]"
+      "zh_TW": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [音波遵守世界 PvP 開關]",
+      "zh_CN": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [音波遵守世界 PvP 開關]",
+      "en_US": "kaleidoscope_tavern:shriek_attack: 0s / amplifier 0 / 100% [sonic attack follows the world PvP setting]"
     },
     "recipeIds": [
       "kaleidoscope_tavern:shaker/sculk_special"

@@ -103,7 +103,7 @@ def main():
     report={'version':version,'baseline':ref['baselineCommit'],'javaSourceFilesVerified':verified,
         'reviewedChanges':sorted(ref['reviewedChanges']),'reviewedRemovals':sorted(removed),'unchangedExistingRuntimeFiles':unchanged if args.baseline else None,
         'pureRules':pure,'nativeMolotovResources':'source/schema aligned; device acceptance pending',
-        'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'diagnostics, immediate status hook and bounded transient-error retry only',
+        'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'yaw adapter requires explicit opt-in; diagnostics and bounded retry retained',
         'bdsTest':'NOT_RUN','clientTest':'NOT_RUN','simulatedPlayerTests':False,'limits':ref['limits']}
     (ROOT/f'docs/LAUNCH-VALIDATION-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))

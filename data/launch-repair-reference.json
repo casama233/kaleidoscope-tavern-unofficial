@@ -338,8 +338,8 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "7f759ba364fe5714cbfcc0821f0e3f7618c56bc2a72d76d372f9719cd5dfca06",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "after": "6a65a0e71380fea3ac35d65c8ba587c71b900416d3e22f7c90950923d3a5d267",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
@@ -357,7 +357,7 @@
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "after": "5d97c52f46376a963a73f1e690a1f117bb8c9918b3f923e7d1cabcfd8ab735e2",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
@@ -416,14 +416,14 @@
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "c1d323c84094b8aaa7a9bf734dabc13fa12296d5d07c05f804d17a3a86a9b30e",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "after": "0a8013bd4271912cf77100567b38a2d8a311b2ecc99a8fbf76e3ab63417a40e9",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "b8588888be5addf28de17e16db7b812eb52757f4ebc106e033311fd40532612a",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "after": "65354ed26554e57aa2dcc9e69504d381dbba3307eb451055c01e4831d008f88f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
@@ -536,8 +536,8 @@
     "runtime/BP/scripts/data/cookery-guide-payload.js": {
       "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
       "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
-      "after": "6e771204550da110b6e170e6144981342bece2e2541f048f1469417ac2f1dfbe",
-      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "after": "cef95b3e4e3f2861670ebc474a8d7107000e52d2402ff0f30da8dffb57b49e75",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report."
     },
     "runtime/BP/blocks/pine_incense.json": {
       "before": "0001e93157150d410824e8c95445f52946b9991ee96f33a0a4399cc67b3c85cd",
@@ -1925,62 +1925,72 @@
     "runtime/RP/render_controllers/animated_item_mystery_cocktail.render_controllers.json": {
       "before": "2de19ec669bb0d594129116b8b88f54c432f857e3a023f3ee20ad1efac2baefe",
       "beforeProjected": "2de19ec669bb0d594129116b8b88f54c432f857e3a023f3ee20ad1efac2baefe",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/render_controllers/animated_item_ice_grape.render_controllers.json": {
       "before": "6bea9fc358cd910ada5f043c6c16b7c3b4a2af2d2aa27af11fef63da5289b68d",
       "beforeProjected": "6bea9fc358cd910ada5f043c6c16b7c3b4a2af2d2aa27af11fef63da5289b68d",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/render_controllers/animated_item_nether_special.render_controllers.json": {
       "before": "2485955abeb359e8518f97b66458e7f1187dcca4a4ab488e79b306e0691f30e5",
       "beforeProjected": "2485955abeb359e8518f97b66458e7f1187dcca4a4ab488e79b306e0691f30e5",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/render_controllers/animated_item_depth_charge.render_controllers.json": {
       "before": "a8c6936fbef6b0cb56a3339bd2e7ab752ba8734e0670febf3fefa5b1d33a05bb",
       "beforeProjected": "a8c6936fbef6b0cb56a3339bd2e7ab752ba8734e0670febf3fefa5b1d33a05bb",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/attachables/animated_item_mystery_cocktail.attachable.json": {
       "before": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
       "beforeProjected": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/attachables/animated_item_depth_charge.attachable.json": {
       "before": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
       "beforeProjected": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/attachables/animated_item_nether_special.attachable.json": {
       "before": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
       "beforeProjected": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/attachables/animated_item_ice_grape.attachable.json": {
       "before": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
       "beforeProjected": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/models/entity/animated_item_ice_grape.geo.json": {
       "before": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
       "beforeProjected": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/models/entity/animated_item_nether_special.geo.json": {
       "before": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
       "beforeProjected": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/models/entity/animated_item_depth_charge.geo.json": {
       "before": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
       "beforeProjected": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     },
     "runtime/RP/models/entity/animated_item_mystery_cocktail.geo.json": {
       "before": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
       "beforeProjected": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
-      "reason": "0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input."
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
+    },
+    "runtime/RP/attachables/base_sandwich_board.attachable.json": {
+      "before": "db0b3aa5e433ddd013c0a8ef8f99f5a5a8ca0e21a80f6d7c13812016c35929e3",
+      "beforeProjected": "db0b3aa5e433ddd013c0a8ef8f99f5a5a8ca0e21a80f6d7c13812016c35929e3",
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
+    },
+    "runtime/RP/models/entity/base_sandwich_board_held.geo.json": {
+      "before": "0fc4664c22ad53cb0b7972d0c98fa9a8206facc12e82a7885f796ace01e59b01",
+      "beforeProjected": "0fc4664c22ad53cb0b7972d0c98fa9a8206facc12e82a7885f796ace01e59b01",
+      "reason": "0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
     }
   }
 }

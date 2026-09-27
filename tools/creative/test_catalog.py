@@ -217,6 +217,12 @@ class HistoricalProjectionTests(unittest.TestCase):
                     block=json.loads(raw);components=block['minecraft:block']['components']
                     components['minecraft:destructible_by_explosion']=review['beforeExplosion']
                     components.pop('kaleidoscope_tavern:natural_break',None)
+                    # Restore only the separately reviewed 0.1.16 freezer trait.
+                    # The exact current file hash was verified above.
+                    for key,value in review.get('placementReview',{}).get('addedTraits',{}).items():
+                        traits=block['minecraft:block']['description']['traits']
+                        self.assertEqual(traits.pop(key),value)
+                        if not traits:block['minecraft:block']['description'].pop('traits')
                     raw=(json.dumps(block,ensure_ascii=False,indent=2)+'\n').encode()
                 return hashlib.sha256(raw).hexdigest()
             for prefix, expected in c.load(root/file)[key].items():

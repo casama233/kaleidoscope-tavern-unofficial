@@ -1,5 +1,6 @@
+import {incenseRates,incenseCount} from '../core/incense-sampling.js';
 import {oppositeFacing} from '../core/java-placement.js';
-import {system,world,BlockPermutation,EntityDamageCause,GameMode} from '@minecraft/server';
+import {system,world,BlockPermutation,EntityDamageCause,GameMode,MolangVariableMap} from '@minecraft/server';
 import {NS,INCENSE,incensePowerTransition,STEPLADDER,LADDER_HALF,LADDER_FACING,LADDER_WATERLOGGED,LADDER_COLLISION_PROFILE,ladderBase,ladderPair} from '../core/decorations.js';
 import {check} from '../core/util.js';
 import {canWrite,hand,exchangeBlocks,air,blockAt,plus,placementTake,safe,handSnapshot,sameHand} from './transactions.js';
@@ -24,13 +25,15 @@ function incensePulseDue(block){const period=Math.floor(system.currentTick/120),
 function tickIncense(block){
  const spec=INCENSE[block.typeId.slice(NS.length+1)];if(!spec)return;
  const open=block.permutation.getState(OPEN)===1,p={x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5};
- // One networked emitter for each layer, not one packet per particle.
- // Each finite emitter emits for one second (the block's 20-tick cadence),
- // then stops. Turning off/destroying/unloading cannot leave a looping source.
- // Loaded incense outside client viewing range needs no visual packets.
- if(block.dimension.getPlayers({location:p,maxDistance:40}).length){
-  optional(()=>block.dimension.spawnParticle(spec.small+'_plume',p));
-  if(open)optional(()=>block.dimension.spawnParticle(spec.small+'_ambient',p));
+ // Java samples blocks relative to EACH viewer. Do not broadcast another
+ // player's plume: multiplayer must not multiply visible particle density.
+ // One finite emitter per layer/viewer/second, never one packet per particle.
+ for(const player of block.dimension.getPlayers({location:p,maxDistance:56})){
+  const rates=incenseRates(block.location,player.location);
+  for(const layer of (open?['plume','ambient']:['plume'])){
+   const count=incenseCount(rates[layer]);if(!count)continue;
+   optional(()=>{const variables=new MolangVariableMap();variables.setFloat('variable.kt_spawn_rate',count);player.spawnParticle(spec.small+'_'+layer,p,variables);});
+  }
  }
  const pulseDue=incensePulseDue(block);
  if(open&&pulseDue){

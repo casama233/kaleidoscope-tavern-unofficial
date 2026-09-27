@@ -1,5 +1,5 @@
 {
-  "format_version": "1.20.30",
+  "format_version": "1.21.30",
   "minecraft:attachable": {
     "description": {
       "identifier": "kaleidoscope_tavern:nether_special",
@@ -23,7 +23,21 @@
       },
       "render_controllers": [
         "controller.render.kt_runtime.animated_item_nether_special"
-      ]
+      ],
+      "animations": {
+        "hold_first": "animation.kt_runtime.animated_item_first",
+        "hold_third": "animation.kt_runtime.animated_item_third"
+      },
+      "scripts": {
+        "animate": [
+          {
+            "hold_first": "c.is_first_person"
+          },
+          {
+            "hold_third": "!c.is_first_person"
+          }
+        ]
+      }
     }
   }
 }

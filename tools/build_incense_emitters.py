@@ -14,7 +14,7 @@ def finite(data,name,rate):
  for key in list(c):
   if key.startswith(('minecraft:emitter_rate_','minecraft:emitter_lifetime_','minecraft:emitter_shape_')):del c[key]
  c['minecraft:emitter_lifetime_once']={'active_time':1}
- c['minecraft:emitter_rate_steady']={'spawn_rate':rate,'max_particles':math.ceil(rate)+2}
+ c['minecraft:emitter_rate_steady']={'spawn_rate':'variable.kt_spawn_rate','max_particles':math.ceil(rate)+2}
  c['minecraft:emitter_local_space']={'position':False,'rotation':False}
  # Face the viewer like Java TextureSheetParticle. rotate_xyz leaves thin
  # cards edge-on from most viewing directions, so increased rates alone fail.
@@ -24,7 +24,7 @@ def finite(data,name,rate):
  return d,c
 for kind in KINDS:
  stem=kind+'_incense';small=json.loads((RP/(stem+'.json')).read_text())
- plume,c=finite(small,stem+'_plume',20/3)
+ plume,c=finite(small,stem+'_plume',2)
  c['minecraft:emitter_shape_point']={'offset':[0,0,0],'direction':['math.random(-0.35,0.35)',1,'math.random(-0.35,0.35)']}
  c['minecraft:particle_initial_speed']='0.4 + variable.particle_random_1 * 0.2'
  c['minecraft:particle_lifetime_expression']={'max_lifetime':'(40 + math.floor(variable.particle_random_2 * 20)) / 20'}
@@ -33,13 +33,22 @@ for kind in KINDS:
  c['minecraft:particle_appearance_tinting']={'color':[1,1,1,'0.8 * math.clamp((1 - variable.particle_age / variable.particle_lifetime) * 4, 0, 1)']}
  write(stem+'_plume',plume)
  base=RP/(stem+'_large.json');base=json.loads(base.read_text()) if base.exists() else small
- ambient,c=finite(base,stem+'_ambient',48)
+ ambient,c=finite(base,stem+'_ambient',19)
  offset,half=(-0.67,5.33) if kind=='firefly' else (-2,16)
  c['minecraft:emitter_shape_box']={'offset':[0,offset+half/2,0],'half_dimensions':[16,half/2,16],'surface_only':False,'direction':[0,-1,0]}
  c['minecraft:particle_initial_speed']=0.16
  c['minecraft:particle_motion_dynamic']={'linear_acceleration':[0,-0.008,0],'linear_drag_coefficient':0}
  c['minecraft:particle_lifetime_expression']={'max_lifetime':'(500 + math.floor(variable.particle_random_1 * 501)) / 20'}
  c['minecraft:particle_appearance_tinting']={'color':[1,1,1,1]}
+ if kind in ('catnip','butterfly'):
+  # Reuse the particle's fixed random values in each axis; initialization has
+  # no creation_expression field. Split random_4 into two uniform fractions.
+  vx='(variable.particle_random_1 * 0.8 - 0.4)';vy='(variable.particle_random_2 * 0.8 - 1.2)';vz='(variable.particle_random_3 * 0.8 - 0.4)'
+  norm=f'math.sqrt({vx}*{vx} + {vy}*{vy} + {vz}*{vz})'
+  speed='((math.floor(variable.particle_random_4 * 256) / 256 + math.mod(variable.particle_random_4 * 256, 1) + 1) * 1.2)'
+  c['minecraft:particle_initial_speed']=[f'{vx} / {norm} * {speed}',f'{vy} / {norm} * {speed} + 2',f'{vz} / {norm} * {speed}']
+  c['minecraft:particle_motion_dynamic']={'linear_acceleration':[0,-0.16,0],'linear_drag_coefficient':0}
+  c['minecraft:emitter_shape_box']['offset'][1]-=0.125
  if kind=='firefly':
   c.pop('minecraft:particle_appearance_lighting',None)
   c['minecraft:emitter_shape_box']['direction']=['math.random(-1,1)','math.random(-0.2,0.2)','math.random(-1,1)']
@@ -47,10 +56,13 @@ for kind in KINDS:
   c['minecraft:particle_motion_dynamic']={'linear_acceleration':[0,0,0],'linear_drag_coefficient':0.1}
   c['minecraft:particle_lifetime_expression']={'max_lifetime':'(60 + math.floor(variable.particle_random_1 * 40)) / 20'}
   c['minecraft:particle_appearance_tinting']={'color':[1,1,1,'0.9 * (0.6 + 0.4 * math.sin(variable.particle_age * 20 * (0.3 + variable.particle_random_4 * 0.4) * 57.2957795)) * math.clamp((1 - variable.particle_age / variable.particle_lifetime) * 5, 0, 1)']}
- if kind=='sakura':
+ if kind in ('sakura','pine','ginkgo','snow'):
   # Java explicitly uses native CHERRY_LEAVES, NOT its small incense sprite.
-  ambient['particle_effect']['description']['basic_render_parameters']={'material':'particles_alpha','texture':'textures/particle/cherry_petal_atlas'}
+  if kind=='sakura':ambient['particle_effect']['description']['basic_render_parameters']={'material':'particles_alpha','texture':'textures/particle/cherry_petal_atlas'}
+  old_uv=c['minecraft:particle_appearance_billboard']['uv']
   c['minecraft:particle_appearance_billboard']={'size':['variable.particle_random_1 > 0.5 ? 0.05 : 0.075']*2,'facing_camera_mode':'lookat_xyz','uv':{'texture_width':12,'texture_height':9,'uv':['math.floor(variable.particle_random_1 * 4) * 3','math.floor(variable.particle_random_2 * 3) * 3'],'uv_size':[3,3]}}
+  if kind!='sakura':c['minecraft:particle_appearance_billboard']['uv']=old_uv
+  if kind=='ginkgo':c['minecraft:particle_appearance_billboard']['size']=['variable.particle_random_1 > 0.5 ? 0.075 : 0.1125']*2
   c['minecraft:particle_initial_speed']=0
   c['minecraft:particle_initial_spin']={'rotation':'math.random(0,360)','rotation_rate':'math.random(-30,30)'}
   c['minecraft:particle_lifetime_expression']={'max_lifetime':15}

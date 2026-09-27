@@ -57,8 +57,8 @@
         "active_time": 1
       },
       "minecraft:emitter_rate_steady": {
-        "spawn_rate": 6.666666666666667,
-        "max_particles": 9
+        "spawn_rate": "variable.kt_spawn_rate",
+        "max_particles": 4
       },
       "minecraft:emitter_shape_point": {
         "offset": [

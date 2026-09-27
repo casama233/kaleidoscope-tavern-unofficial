@@ -338,7 +338,7 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "cfb489f87c0c10c0dc59c9c0fdcad9c50ef4a3381e256b689b439c9a82b8b18f",
+      "after": "4aca34c91049f0de6231dd662dfb22747f78306d71462d95cac8b7e660237cd7",
       "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
@@ -350,8 +350,8 @@
     "runtime/BP/scripts/bedrock/decorations.js": {
       "before": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
       "beforeProjected": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
-      "after": "6d53b83880208686fd80e32cacc974afd2e476cd8091751e16e401a8733ce2f7",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
+      "after": "ee65da8e1461c1207f84f49f173932c466cca00113bcc0fb43689f88091171b8",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
@@ -416,110 +416,110 @@
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "07697e00a8e239d4771939d615a5166c45bb0d9c25c54c776ee26f730e5dc379",
+      "after": "e457df0a91658d7c67f1385774f38516d361ddb43e3ab6c3fe73daae8744776c",
       "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "9d20259caca5765b5028289fbc7909628f55e4a36ffe5410a8c1f17182c1b552",
+      "after": "2c3a620c4d9a59bba01b6fa15d48e24ae8f698527a4bcbefb3c2fceaedcb13aa",
       "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
       "beforeProjected": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
-      "after": "ee5da786f5954eb506904b87be3586361fd1f6f2b432813abdcd994662ad4d11",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "d9dd4c2429e894390f4f892d875020dddff314cac392b8164c140cd7eade7a82",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/butterfly_incense_plume.json": {
       "before": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
       "beforeProjected": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
-      "after": "807a527ca86e87ff1cbf6719630fd43f03a073cf7fe214afcb1f8671c7712c5d",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "685ddad01037ec77bd0ca758dfa0c4d6a2e10e9b24e899cd88b435b8cee0e50b",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/catnip_incense_ambient.json": {
       "before": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
       "beforeProjected": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
-      "after": "9cb06354bc172810157765b3817926445d93d261b2c6b6735d6b7a218d0c443a",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "62d58a0e4faff998d9074e362140734cdbe5da206f419a26f3d58683fcfb9c66",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/catnip_incense_plume.json": {
       "before": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
       "beforeProjected": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
-      "after": "fc70d3d541a22ef401fdc4e0ccab691276848f18e47ec462019ce920716c96d8",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "7946d73b36c20618c748b5c4d1deebf9dd9765c85cee5c8bb32cbdf278dffc3a",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/firefly_incense_ambient.json": {
       "before": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
       "beforeProjected": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
-      "after": "564d321c8d5f12041f5e14040760404610db32496ab5edee92952d86a03f5913",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "362f1ed6af40f4cc508e1d869c37a2753d966429b993d8ffd4cc761dc89e8e25",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/firefly_incense_plume.json": {
       "before": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
       "beforeProjected": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
-      "after": "a6fcc38ef1c3a5f6d63366b4a9f6cfd3c6d1f2dbebb5939a73bf922ee3700c8d",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "aa771bacea86e988dd3b79da7de888e852d94d86db418b1fedae6c9c0673628d",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/ginkgo_incense_ambient.json": {
       "before": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
       "beforeProjected": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
-      "after": "014f390f69af680539991be69ce8de4d739fc61aa1cb3d9b226aceffa19e78fe",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "4f4d3055759967a4d18f1d66a311df93e04df99060f185cbedbf732bebceaed1",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/ginkgo_incense_plume.json": {
       "before": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
       "beforeProjected": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
-      "after": "e0e08d4d1794f8b08653f556df318d7b9e1637a505485154101c165d6a528f8d",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "42cc5d793f8b8bc0793eb8f83c6f276541e753489d468bc2ca7227aea8b1f9d3",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/pine_incense_ambient.json": {
       "before": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
       "beforeProjected": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
-      "after": "93d857b3f70fb9bb23b6c7d01ebc3bbc75cac1478a5e7fcf6ba1ab0d5199320f",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "d550d2036cf0ab162cf052ba327e5ed8c2ff87c260ab7bc8bb73ccb191beeec8",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/pine_incense_plume.json": {
       "before": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
       "beforeProjected": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
-      "after": "f9606a7e89a6e11c4bb59aa00ccbeff941dd138e607181c3997e5f7ce2615db3",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "ae85ae3f4edf1a2f9411ab68554c641ab5aa37573edd5638a41c7151628f601e",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/sakura_incense_ambient.json": {
       "before": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
       "beforeProjected": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
-      "after": "a5957b8ed31e9c8064080ef1927b0965f0ad2a74f7e7c21981ffcadc16f0822e",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "663f55ec8219a2a14a850864d940bbad4c203fb0de9b6fcce1d46453c4954f01",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/sakura_incense_plume.json": {
       "before": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
       "beforeProjected": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
-      "after": "6d956469ee6cf5188404b29a6387727257242f93274b2918177bc582aa1f7038",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "8984614a88512be697b0b91cb1fe1e89a8456795ea2752ee3f4fdd4bd170fc1a",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/snow_incense_ambient.json": {
       "before": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
       "beforeProjected": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
-      "after": "eaedd0d0da2cf8490f65dcb3c093f1a804e86fa51733ed90a75e0b8ab18c0aef",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "417602e2cd7ef4a90f26ff032b2b6b5ad027b55fdf5323685d62de1a1379d22c",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/snow_incense_plume.json": {
       "before": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
       "beforeProjected": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
-      "after": "1f7acb16ac9fc49ab8aff6112d4d7458b4d0af482b4381917774898b08de7e8d",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "4e22b5037618a2a09b671ff27b13743bd4d6297d5e922a06f561840776124a95",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/spore_incense_ambient.json": {
       "before": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
       "beforeProjected": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
-      "after": "d56006821074cee7699d81bbeb6b7262d81c2ac2137f89e72047d8306cc967ed",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "b13f5dfd9331d2b07b59cf8f77b6ed41956b798e8652fd6db9027fe40880cc89",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/RP/particles/spore_incense_plume.json": {
       "before": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
       "beforeProjected": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
-      "after": "7adec57ee034c4f68abd3d3fe29e6c37a134ff97a1598950f788d00dd3aeeadc",
-      "reason": "0.6.46 regression repair: camera-facing finite particles with bounded density, or validated legacy cup/overflow recovery. No recipe or saved payload rewrite."
+      "after": "23c6cac568e0c2709141fba26797b2cc69e6e46810fdcdbe03c58c0b9bc44767",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     },
     "runtime/BP/scripts/core/cookery-guide-publisher.js": {
       "before": "5a2787aba4c3de29014c367af14e2e04771dac82dbfee8f5656f094ba227bc41",
@@ -536,7 +536,7 @@
     "runtime/BP/scripts/data/cookery-guide-payload.js": {
       "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
       "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
-      "after": "51e0a16e339297ea341bf4e52854c501c7258c8b9453d6a8d8f1486c5bb9762a",
+      "after": "8d2f37ca517851435470a045db4d0146b5b2fdf0592ac18d57856c11b83261ce",
       "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair."
     },
     "runtime/BP/blocks/pine_incense.json": {
@@ -1210,6 +1210,60 @@
       "beforeProjected": "caa268ece57bd2c1ac9b40a0258b0dbec7b56821d95d601f7d45978b382c9c45",
       "after": "df79b6e33da208f2a533e46ef800fbd15df24defba55d0e1152b07e29e461663",
       "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved."
+    },
+    "runtime/RP/attachables/animated_item_mystery_cocktail.attachable.json": {
+      "before": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
+      "beforeProjected": "6b6335d3d525a874c23c0588faf77ea2913f03498a7a33cbbcf411c1c9571698",
+      "after": "2a7a69540b2dbabf4071301d9eeb2c57c886c095772bb4ea70d9bf871d9fadfe",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/attachables/animated_item_depth_charge.attachable.json": {
+      "before": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
+      "beforeProjected": "e94ceb0aff902a8600bf3a93f567ae78d09a817e586fffeea4cec9cd76319d93",
+      "after": "453bc20cfbf3770aa4e473af1ec683a7f6cc22c5d61f24bc55b946185979f750",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/attachables/animated_item_nether_special.attachable.json": {
+      "before": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
+      "beforeProjected": "b7e63be34a5f32f43d819b65ea61a090a3b086b068345cce27b4908c47e331c2",
+      "after": "5df102b1d97a3a01bed0cd59ddff00de5d5595e9ceac636b8d97f9a90a315aea",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/attachables/animated_item_ice_grape.attachable.json": {
+      "before": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
+      "beforeProjected": "f4033e0fb757e87ed87cbc8d8b5332d0ef75b09e13489a8dd4ca1406edb1c8e1",
+      "after": "12f3d5b46cfcf82c92bcb48d543cc88cb2cb5f69715325ba4c269364cdc64362",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/ui/hud_screen.json": {
+      "before": "5da651746453ffe082090da1a155ba985736ae3381c116269d35ff2ca58e94ca",
+      "beforeProjected": "5da651746453ffe082090da1a155ba985736ae3381c116269d35ff2ca58e94ca",
+      "after": "b4af0f50be843edd0526b3e651a88bd6997e362c9a6f09dcbf8532a6fe6f8612",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/models/entity/animated_item_ice_grape.geo.json": {
+      "before": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
+      "beforeProjected": "2ccf19b1d1580497baa0c52788b2c77396ce1e0a8e4852c271abe0960b15ceed",
+      "after": "e84671ee6399cf36463dcd196689e6843771f42bd2e67b5d5014ad36a133cfd9",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/models/entity/animated_item_nether_special.geo.json": {
+      "before": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
+      "beforeProjected": "09f77af484a43478008cfd1c3b6d82171ec4f6b001599061ba81035dedcf267d",
+      "after": "18c80bf1df26e0f776272fa2bcf394fd96a9a3a9828222832ba11b263f320e8a",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/models/entity/animated_item_depth_charge.geo.json": {
+      "before": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
+      "beforeProjected": "82475d094a7af97ebbd75a322a6734200042afe875487bea0a85f681725f1027",
+      "after": "b9ff8d876b093b438981acc40a5bd08e1c4691c82307e92daafa6b10727c3618",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+    },
+    "runtime/RP/models/entity/animated_item_mystery_cocktail.geo.json": {
+      "before": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
+      "beforeProjected": "08acd0baca77d5b5d9c76c03db87ee81519f1e90729980109d3adc91ef298810",
+      "after": "377f195c45b68a17c415cf35640b68f755c589b850581f3387cae8016303a632",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
     }
   },
   "rules": {
@@ -1271,7 +1325,9 @@
     "runtime/BP/functions/kt_molotov_diagnose.mcfunction": "97ca130cd2b40792d47af9f711373273590592795817f844d8531f3f89553d31",
     "runtime/BP/functions/kt_tipsy_diagnose.mcfunction": "eb4596fffa1a5865dd3cd363085c66048d41b41ca695206427cca325dff924bf",
     "runtime/BP/scripts/bedrock/molotov.js": "ae3d9d297885c80b0cdf97bacc3809ddb28ff7901bc08d9e2d62d67b79bf7d4a",
-    "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2"
+    "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2",
+    "runtime/BP/scripts/core/incense-sampling.js": "cb2571534df3cdb3f94deb8c29391b85575d092c8504f7b96909860130d73696",
+    "runtime/RP/animations/animated_item.animation.json": "55155961b33fd75c0fc2711db8642d65e6f0810b8c27aa98b9062ec49cf27453"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c"
 }

@@ -49,3 +49,9 @@ for(const name of ['hideShakerHud','clearShakerPlayer']){
 }
 assert(read('runtime/BP/scripts/bedrock/mixology.js').includes('clearShakerPlayer(playerId)'));
 console.log(JSON.stringify({hudStaticChecks:'passed',slotCases:cases,progressStates:112,idleSamples:256,literalImageReferences:textures,clientTested:false}));
+
+const status=controls.find(c=>c.status)?.status;assert(status,'Barrel/status text needs its own renderer');
+assert.equal(status.type,'label');assert.equal(status.text,`($kt_text - '${HUD_PREFIX}')`);
+assert.equal(status.anchor_to,'bottom_middle');assert.equal(status.text_alignment,'center');
+assert(status.offset[1]<=-45&&status.offset[1]>=-70,'Keep status above hotbar, not top of screen');
+assert(status.visible.includes('1:§')&&status.visible.includes(' / 111§r'));

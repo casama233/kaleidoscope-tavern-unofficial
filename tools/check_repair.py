@@ -15,13 +15,13 @@ identifiers=set()
 for p in (ROOT/'runtime/RP/particles').glob('*.json'):
  ident=read(p)['particle_effect']['description']['identifier'];assert ident not in identifiers,(p,'Duplicate particle ID');identifiers.add(ident)
 for kind in ('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly'):
- for layer,rate in [('plume',20/3),('ambient',48)]:
+ for layer,rate in [('plume',2),('ambient',19)]:
   p=ROOT/f'runtime/RP/particles/{kind}_incense_{layer}.json';effect=read(p)['particle_effect'];c=effect['components']
   assert effect['description']['identifier']==f'kt_assets_a17:{kind}_incense_{layer}'
   assert c['minecraft:emitter_lifetime_once']['active_time']==1
   assert c['minecraft:particle_appearance_billboard']['facing_camera_mode']=='lookat_xyz'
   assert 'minecraft:emitter_lifetime_looping' not in c and 'minecraft:emitter_rate_instant' not in c
-  assert c['minecraft:emitter_rate_steady']=={'spawn_rate':rate,'max_particles':math.ceil(rate)+2}
+  assert c['minecraft:emitter_rate_steady']=={'spawn_rate':'variable.kt_spawn_rate','max_particles':math.ceil(rate)+2}
   texture=effect['description']['basic_render_parameters']['texture']
   assert texture in ('textures/particle/cherry_petal_atlas','textures/particle/particles') or (ROOT/'runtime/RP'/(texture+'.png')).exists(),texture
   if layer=='ambient':
@@ -30,6 +30,9 @@ for kind in ('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firef
     assert 'minecraft:particle_appearance_lighting' not in c
     assert shape['half_dimensions'][1]==5.33/2
    else:assert shape['half_dimensions'][1]==8
+  if layer=='ambient' and kind in ('sakura','pine','ginkgo','snow'):
+   assert c['minecraft:particle_lifetime_expression']['max_lifetime']==15
+   assert c['minecraft:particle_motion_collision']['expire_on_contact']
   block=read(ROOT/f'runtime/BP/blocks/{kind}_incense.json')['minecraft:block']
   assert block['components']['minecraft:tick']['interval_range']==[20,20]
 # The registered component must retain native empty-hand callbacks and absence-only repair.
@@ -43,7 +46,7 @@ assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read(ROOT/'release.json')['version']
 report={'version':version,'baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
 'preservedAnimations':list(baseline['unchangedShakerAnimations']),'thirdPersonCandidate':third,
-'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecond':20/3,'ambientParticlesPerSecond':48,
+'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)/3,'ambientParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)*5,
 'cupAbsentRecordRecovery':'structural checks passed; real event execution not tested',
 'newPlayerEntityOverride':False,'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}
 (ROOT/f'docs/REPAIR-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

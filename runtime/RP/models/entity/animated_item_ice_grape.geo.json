@@ -6,54 +6,57 @@
         "identifier": "geometry.kt_runtime.animated_item_ice_grape",
         "texture_width": 16,
         "texture_height": 16,
-        "visible_bounds_width": 1.5,
-        "visible_bounds_height": 1.5,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 4,
         "visible_bounds_offset": [
           0,
-          0.5,
+          1,
           0
         ]
       },
       "bones": [
         {
-          "name": "root",
+          "name": "grip",
           "pivot": [
             0,
-            0,
+            24,
             0
           ],
+          "binding": "q.item_slot_to_bone_name(c.item_slot)",
           "cubes": [
             {
               "origin": [
-                -2.5,
-                0,
-                0
+                -8,
+                16,
+                -0.125
               ],
               "size": [
-                5,
-                5,
-                0
+                16,
+                16,
+                0.25
               ],
-              "uv": [
-                0,
-                0
-              ]
-            },
-            {
-              "origin": [
-                0,
-                0,
-                -2.5
-              ],
-              "size": [
-                0,
-                5,
-                5
-              ],
-              "uv": [
-                0,
-                0
-              ]
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ]
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ]
+                }
+              }
             }
           ]
         }

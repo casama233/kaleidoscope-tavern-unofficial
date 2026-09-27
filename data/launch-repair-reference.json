@@ -1918,12 +1918,6 @@
       "beforeProjected": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
       "after": "4efee7a0aebced07cd093c134eb5382177d74f227950c21f9f53c16d554b0c03",
       "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
-    },
-    "runtime/RP/animations/runtime_shaker.animation.json": {
-      "before": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
-      "beforeProjected": "21716ab1141756204e2dda2117c738e17dbcf7ee3d1513d82abd722b6ef8ede8",
-      "after": "6c1b5ab897692c6dca4dea71b0be827765e79487fd6a97c786c625c058981689",
-      "reason": "User reports first-person shaker disappears while third-person shake plays. Keep first-person arm channels unchanged; apply Java third-person target by additive target-minus-this, without unconditional bone reset."
     }
   },
   "rules": {

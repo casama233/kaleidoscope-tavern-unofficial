@@ -8,7 +8,13 @@ baseline=read(ROOT/'docs/REPAIR-BASELINE-0.6.39.json')
 for name,expected in baseline['unchangedSha256'].items():
  assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==expected,('Unexpected change to preserved file',name)
 animations=read(ROOT/'runtime/RP/animations/runtime_shaker.animation.json')['animations']
-for name,expected in baseline['unchangedShakerAnimations'].items():assert animations[name]==expected,('First-person/shared animation changed',name)
+# The player arm was explicitly repaired in 0.6.58; verify its perspective
+# behavior with the pose matrix, while retaining all other baseline checks.
+from check_shaker_first_person import check as check_shaker_first_person
+check_shaker_first_person(ROOT)
+for name,expected in baseline['unchangedShakerAnimations'].items():
+    if name != 'animation.kt_mixology.player_shake':
+        assert animations[name]==expected,('First-person/shared animation changed',name)
 third=animations['animation.kt_mixology.hold_third']['bones']['grip']
 assert third=={'position':[0,-1.5,-1],'rotation':[90,0,0],'scale':0.5}
 identifiers=set()

@@ -32,7 +32,7 @@ def check(root):
     assert data['animation.kt_mixology.shake_first']['bones']['grip']['position'][1]=='-2.4 * math.sin(q.life_time * 1718.87338539247)'
     assert not (root/'runtime/RP/entity/player.entity.json').exists()
     patch=root/'integrations/shaker-first-person/RP/animations/runtime_shaker.animation.json'
-    assert json.loads(patch.read_text())['animations']==data
+    assert not patch.exists(), 'Integrated first-person repair must not ship a shadowing overlay'
     return {'poseCases':cases,'firstPersonArmDelta':0,'thirdPersonJavaTargetPreserved':True,'clientTested':False,'simulatedPlayers':False}
 
 if __name__=='__main__':print(json.dumps(check(Path(__file__).resolve().parents[1]),ensure_ascii=False))

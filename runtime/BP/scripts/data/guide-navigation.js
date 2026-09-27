@@ -83,7 +83,7 @@ export function organizeGuideNavigation(payload){
   category(id,'',[cn,tw,en],icon),
   ...LEAVES.filter(([parent,leaf])=>parent===id&&used.has(leaf)).map(([parent,leaf,...labels])=>category(leaf,parent,labels.slice(0,3),labels[3]))
  ]);
- const body=['选择小分类，再查看各个条目的用法与制作方法。酿酒和调酒先列酒馆本体，再列附属配方。','選擇小分類，再查看各個條目的用法與製作方法。釀酒和調酒先列酒館本體，再列附屬配方。','Choose a group, then an entry for its use and preparation. Tavern brewing and cocktail recipes appear before addon recipes.'];
+ const body=['选择项目查看用法与制作方法；多个条目的分类会展开列表。酿酒和调酒先列酒馆本体，再列附属配方。','選擇項目查看用法與製作方法；多個條目的分類會展開列表。釀酒和調酒先列酒館本體，再列附屬配方。','Choose an entry for its use and preparation; groups with several entries open a list. Tavern brewing and cocktail recipes appear before addon recipes.'];
  LOCALES.forEach((lc,i)=>{payload.text[lc].intro=body[i];payload.text[lc].food_groups_body=body[i];});
  const index=new Map(payload.categories.map((c,i)=>[c.id,i]));
  payload.entries.sort((a,b)=>index.get(a.category)-index.get(b.category));

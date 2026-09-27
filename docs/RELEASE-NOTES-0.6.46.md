@@ -15,3 +15,9 @@
 來源：Java `c4ec1880bd44cf3139d3ba744ab30bb379cf1416` 的 IncenseBlock / GlasswareBlock；[Script Event 訊息限制](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/commandsreference/examples/commands/scriptevent?view=minecraft-bedrock-stable)。
 
 本次發佈檢查依要求只執行靜態／資料投影與 BDS 載入；既有模擬互動回呼測試保留在來源中，未納入本次主線發佈流程。
+
+## 創造分類與指南統整
+
+所有酒館／附屬物品集中在裝備頁，統一 10 個酒館分類；附屬食物繼續進廚房食物分類。酒櫃與酒架合併收納、各式座椅與桌檯合併家具、燈串與吊燈合併燈飾。原料、成品、莫洛托夫工具分開；同名分類使用相同圖標。可見物品集合與 ID 不變。
+
+指南主分類直接進入物品列表，移除裝飾的多餘父選單；本體 8 類、配對附屬後 9 類。共用配方格式、移除失效跳轉文字及重複／矛盾家具說明，保留成品的取得、操作、品質和效果內容。

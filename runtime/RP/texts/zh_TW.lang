@@ -1,16 +1,14 @@
 ## BEGIN shared creative decoration groups
-kaleidoscope_tavern:itemGroup.name.tavern_cabinets=酒館：酒櫃
-kaleidoscope_tavern:itemGroup.name.tavern_racks=酒館：酒架與杯架
-kaleidoscope_tavern:itemGroup.name.tavern_tables=酒館：桌子與吧檯
-kaleidoscope_tavern:itemGroup.name.tavern_sofas=酒館：沙發
-kaleidoscope_tavern:itemGroup.name.tavern_stools=酒館：吧椅
-kaleidoscope_tavern:itemGroup.name.tavern_string_lights=酒館：燈串
-kaleidoscope_tavern:itemGroup.name.tavern_pendant_lamps=酒館：吊燈
-kaleidoscope_tavern:itemGroup.name.tavern_boards=酒館：招牌與黑板
-kaleidoscope_tavern:itemGroup.name.tavern_paintings=酒館：掛畫
-kaleidoscope_tavern:itemGroup.name.tavern_incense=酒館：香薰
-kaleidoscope_tavern:itemGroup.name.tavern_utilities=酒館：梯具
-kaleidoscope_tavern:itemGroup.name.tavern_music=酒館：唱片
+kaleidoscope_tavern:itemGroup.name.tavern_cultivation=森羅物語酒館：作物
+kaleidoscope_tavern:itemGroup.name.tavern_brewing=森羅物語酒館：釀造與調酒設備
+kaleidoscope_tavern:itemGroup.name.wines=森羅物語酒館：酒飲
+kaleidoscope_tavern:itemGroup.name.cocktails=森羅物語酒館：雞尾酒
+kaleidoscope_tavern:itemGroup.name.storage=森羅物語酒館：收納
+kaleidoscope_tavern:itemGroup.name.furniture=森羅物語酒館：家具
+kaleidoscope_tavern:itemGroup.name.lighting=森羅物語酒館：燈飾
+kaleidoscope_tavern:itemGroup.name.decoration=森羅物語酒館：裝飾
+kaleidoscope_tavern:itemGroup.name.tools=森羅物語酒館：工具
+kaleidoscope_tavern:itemGroup.name.ingredients=森羅物語酒館：原料與調酒材料
 ## END shared creative decoration groups
 ## Visual inspection labels.
 tile.kt_assets_a1:pressing_tub.name=壓榨桶 [A1]
@@ -1367,11 +1365,7 @@ kt.barrel.maximum=最大品質
 kt.barrel.damaged=酒桶結構不完整
 kt.barrel.mod_name=森羅物語：酒館
 
-kaleidoscope_tavern:itemGroup.name.tavern_cultivation=森羅物語酒館：種植
-kaleidoscope_tavern:itemGroup.name.tavern_brewing=森羅物語酒館：釀造
-kaleidoscope_tavern:itemGroup.name.wines=森羅物語酒館：酒飲
 kaleidoscope_tavern:itemGroup.name.empty_bottles=空瓶與酒杯
-kaleidoscope_tavern:itemGroup.name.cocktails=雞尾酒
 kaleidoscope_tavern:itemGroup.name.tavern_decor=森羅物語酒館：裝飾
 kaleidoscope_tavern:itemGroup.name.tavern_storage=森羅物語酒館：收納
 effect.minecraft.bad_omen=凶兆

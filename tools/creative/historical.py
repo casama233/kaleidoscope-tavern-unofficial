@@ -15,7 +15,8 @@ class LegacyMenuProjection:
         if self.reference.get('schema') != 1:
             raise ValueError('Unsupported creative-menu history')
         plan = read(self.root / 'data/creative-decoration-groups.json')
-        taxonomy = read(Path(__file__).with_name('groups.json'))
+        taxonomy_path = self.root / 'tools/creative/groups.json'
+        taxonomy = read(taxonomy_path if taxonomy_path.exists() else Path(__file__).with_name('groups.json'))
         known = {**taxonomy['existing_groups'], **taxonomy['groups']}
         self.desired = {plan['namespace']+':'+short: (known[alias]['category'], known[alias]['name'])
                         for alias, items in plan['groups'].items() for short in items}

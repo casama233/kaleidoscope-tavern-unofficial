@@ -49,7 +49,7 @@ class FixtureTests(unittest.TestCase):
 
     def test_visible_menu_matches_new_group(self):
         c.apply(self.root, True)
-        self.assertEqual(c.load(self.root/self.item)['minecraft:item']['description']['menu_category']['group'], KEY+'stools')
+        self.assertEqual(c.load(self.root/self.item)['minecraft:item']['description']['menu_category']['group'], 'kaleidoscope_tavern:itemGroup.name.furniture')
 
     def test_hidden_implementation_block_is_byte_preserved(self):
         old = (self.root/self.block).read_bytes()
@@ -143,9 +143,8 @@ class RealPackTests(unittest.TestCase):
 
     def test_expected_shared_groups_and_counts(self):
         got = c.check_pair([TAVERN, LIQUOR])
-        self.assertEqual({k.removeprefix(KEY): v for k, v in got.items()}, {
-            'cabinets':13, 'racks':4, 'tables':2, 'sofas':16, 'stools':32, 'string_lights':17,
-            'pendant_lamps':3, 'boards':15, 'paintings':22, 'incense':8, 'utilities':1, 'music':1})
+        self.assertEqual({k.removeprefix('kaleidoscope_tavern:itemGroup.name.'): v for k, v in got.items()}, {
+            'ingredients':10, 'storage':17, 'furniture':50, 'lighting':20, 'decoration':46, 'tools':2})
 
     def test_all_members_resolve_and_hidden_variants_stay_absent(self):
         for root, count in [(TAVERN, 160), (LIQUOR, 66)]:
@@ -156,6 +155,16 @@ class RealPackTests(unittest.TestCase):
             for item, (category, group) in catalog.items():
                 self.assertTrue(any(v[k]['description'].get('menu_category') == {'category':category, 'group':group} for _, v, k in defs[item]), item)
 
+    def test_all_shared_group_icons_match(self):
+        seen={}
+        for root in [TAVERN,LIQUOR]:
+            for category in c.load(root/c.CATALOG)['minecraft:crafting_items_catalog']['categories']:
+                self.assertEqual(category['category_name'],'equipment')
+                for group in category['groups']:
+                    ident=group['group_identifier'];name=ident['name']
+                    if name in seen:self.assertEqual(ident['icon'],seen[name])
+                    seen[name]=ident['icon']
+
     def test_color_order_matches_java_and_between_packs(self):
         t, w = c.load(TAVERN/c.PLAN)['groups'], c.load(LIQUOR/c.PLAN)['groups']
         self.assertEqual(t['sofas'], [x+'_sofa' for x in COLORS])
@@ -165,7 +174,7 @@ class RealPackTests(unittest.TestCase):
 
     def test_wild_vine_and_freezer_moved_to_correct_group(self):
         t, w = c.entries(c.load(TAVERN/c.CATALOG)), c.entries(c.load(LIQUOR/c.CATALOG))
-        self.assertEqual(t['kaleidoscope_tavern:wild_grapevine'], ('nature',KEY+'cultivation'))
+        self.assertEqual(t['kaleidoscope_tavern:wild_grapevine'], ('equipment',KEY+'cultivation'))
         self.assertEqual(w['kaleidoscope_world_liquor:freezer'], ('equipment',KEY+'brewing'))
 
     def test_shared_titles_match_in_all_languages(self):

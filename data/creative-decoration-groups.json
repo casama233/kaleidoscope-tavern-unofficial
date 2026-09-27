@@ -3,7 +3,13 @@
   "namespace": "kaleidoscope_tavern",
   "groups": {
     "cultivation": [
-      "wild_grapevine"
+      "wild_grapevine",
+      "trellis",
+      "gold_grape",
+      "grape",
+      "grapevine",
+      "green_grape",
+      "ice_grape"
     ],
     "cabinets": [
       "bar_cabinet",
@@ -124,7 +130,69 @@
       "firefly_incense"
     ],
     "utilities": [
-      "stepladder"
+      "stepladder",
+      "molotov"
+    ],
+    "brewing": [
+      "pressing_tub",
+      "tap",
+      "barrel",
+      "empty_bottle",
+      "empty_glassware",
+      "shaker"
+    ],
+    "wines": [
+      "brandy_q6",
+      "carignan_q6",
+      "champagne_q6",
+      "glowflower_brew_q6",
+      "honey_wine_q6",
+      "ice_wine_q6",
+      "luminous_bride_q6",
+      "madame_shexiang_q6",
+      "miners_star_q6",
+      "mother_snow_q6",
+      "plum_wine_q6",
+      "polaris_sweet_white_q6",
+      "red_queen_q6",
+      "riesling_dry_white_q6",
+      "rum_q6",
+      "sakura_wine_q6",
+      "sauvignon_blanc_dry_white_q6",
+      "sherry_q6",
+      "sunset_glow_q6",
+      "sweet_berry_wine_q6",
+      "vinegar_q6",
+      "vodka_q6",
+      "watermelon_juice",
+      "whiskey_q6",
+      "wine_q6"
+    ],
+    "cocktails": [
+      "allium_garden",
+      "bloody_mary",
+      "brass_heart",
+      "depth_charge",
+      "emerald",
+      "godfather",
+      "grasshopper",
+      "mojito",
+      "mystery_cocktail",
+      "nether_special",
+      "screwdriver",
+      "sculk_special",
+      "signature_cocktail",
+      "white_lady"
+    ],
+    "ingredients": [
+      "glow_berries_bucket",
+      "gold_grape_bucket",
+      "grape_bucket",
+      "green_grape_bucket",
+      "ice_grape_bucket",
+      "sweet_berries_bucket",
+      "dragon_breath_bottle",
+      "honey_bottle"
     ]
   }
 }

@@ -24,3 +24,9 @@ assert(!payload.entries.some(e=>e.id.endsWith(':guide_shaker')));
 const shaker=payload.entries.filter(e=>e.id==='kaleidoscope_tavern:shaker');assert.equal(shaker.length,1);
 assert(shaker[0].recipes.length&&shaker[0].mechanics.length>1);
 console.log(JSON.stringify({guideEntries:payload.entries.length,categories:payload.categories.length,shakerPages:shaker.length,craftingAndUsageTogether:true}));
+
+assert(payload.categories.every(c=>!c.parent),'Guide has redundant navigation levels');
+assert(!payload.entries.some(e=>e.id.endsWith(':guide_quality_effects')),'Quality separated from barrel');
+for(const short of ['barrel','tap','pressing_tub','shaker'])for(const rows of Object.values(payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+short).mechanicsByLocale))assert(!rows.some(x=>/See [“"](?:Barrels|Tap|Pressing)|規則見|规则见/.test(x)),'Dead overview reference');
+
+const bottle=payload.entries.find(e=>e.id==='kaleidoscope_tavern:empty_bottle');assert.equal(bottle.recipes[0].ingredients[0],'minecraft:glass_bottle');assert(!payload.entries.some(e=>e.id.endsWith(':guide_bottle_display')));

@@ -2,6 +2,7 @@
 export const GUIDE_ENTRY_ICONS={
   "kaleidoscope_tavern:guide_grapes": "textures/ui/tavern_entries/guide_grapes",
   "kaleidoscope_tavern:guide_bottle_display": "textures/ui/tavern_entries/guide_bottle_display",
+  "kaleidoscope_tavern:empty_bottle": "textures/ui/tavern_entries/guide_bottle_display",
   "kaleidoscope_tavern:guide_quality_effects": "textures/ui/tavern_entries/guide_quality_effects",
   "kaleidoscope_tavern:white_bar_stool": "textures/ui/tavern_entries/white_bar_stool",
   "kaleidoscope_tavern:white_sofa": "textures/ui/tavern_entries/white_sofa",

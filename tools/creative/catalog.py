@@ -137,6 +137,7 @@ def planned(root):
     ranks = {name: index for index, name in enumerate(common['order'])}
     for category in categories:
         category['groups'].sort(key=lambda g: ranks.get(g.get('group_identifier', {}).get('name'), len(ranks)))
+    catalog['minecraft:crafting_items_catalog']['categories'] = [c for c in categories if c['groups']]
     after = entries(catalog)
     if before.keys() != after.keys():
         raise ValueError('Creative visibility changed')
@@ -146,8 +147,11 @@ def planned(root):
     output[root / CATALOG] = encoded(catalog)
     for locale in LOCALES:
         path = root / 'runtime/RP/texts' / (locale + '.lang')
-        labels = {s['name']: s['labels'][locale] for s in common['groups'].values()}
-        output[path] = localize(path.read_text(encoding='utf-8'), labels).encode()
+        labels = {s['name']: s['labels'][locale] for s in known.values() if s.get('labels')}
+        original = path.read_text(encoding='utf-8')
+        legacy_keys = {s['name'] for s in common['existing_groups'].values()}
+        original = '\n'.join(line for line in original.split('\n') if line.split('=',1)[0] not in legacy_keys)
+        output[path] = localize(original, labels).encode()
     return output
 
 

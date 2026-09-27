@@ -142,6 +142,98 @@
         "runtime/BP/blocks/holder.json",
         "runtime/BP/blocks/tilted_rack.json"
       ]
+    },
+    {
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.cocktails"
+      },
+      "paths": [
+        "runtime/BP/items/allium_garden.json",
+        "runtime/BP/items/bloody_mary.json",
+        "runtime/BP/items/brass_heart.json",
+        "runtime/BP/items/depth_charge.json",
+        "runtime/BP/items/emerald.json",
+        "runtime/BP/items/godfather.json",
+        "runtime/BP/items/grasshopper.json",
+        "runtime/BP/items/mojito.json",
+        "runtime/BP/items/molotov.json",
+        "runtime/BP/items/mystery_cocktail.json",
+        "runtime/BP/items/nether_special.json",
+        "runtime/BP/items/screwdriver.json",
+        "runtime/BP/items/sculk_special.json",
+        "runtime/BP/items/signature_cocktail.json",
+        "runtime/BP/items/white_lady.json"
+      ]
+    },
+    {
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
+      },
+      "paths": [
+        "runtime/BP/items/barrel.json",
+        "runtime/BP/items/empty_bottle.json",
+        "runtime/BP/items/empty_glassware.json",
+        "runtime/BP/items/shaker.json",
+        "runtime/BP/blocks/pressing_tub.json",
+        "runtime/BP/blocks/tap.json"
+      ]
+    },
+    {
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.wines"
+      },
+      "paths": [
+        "runtime/BP/items/brandy_q6.json",
+        "runtime/BP/items/carignan_q6.json",
+        "runtime/BP/items/champagne_q6.json",
+        "runtime/BP/items/glowflower_brew_q6.json",
+        "runtime/BP/items/honey_wine_q6.json",
+        "runtime/BP/items/ice_wine_q6.json",
+        "runtime/BP/items/luminous_bride_q6.json",
+        "runtime/BP/items/madame_shexiang_q6.json",
+        "runtime/BP/items/miners_star_q6.json",
+        "runtime/BP/items/mother_snow_q6.json",
+        "runtime/BP/items/plum_wine_q6.json",
+        "runtime/BP/items/polaris_sweet_white_q6.json",
+        "runtime/BP/items/red_queen_q6.json",
+        "runtime/BP/items/riesling_dry_white_q6.json",
+        "runtime/BP/items/rum_q6.json",
+        "runtime/BP/items/sakura_wine_q6.json",
+        "runtime/BP/items/sauvignon_blanc_dry_white_q6.json",
+        "runtime/BP/items/sherry_q6.json",
+        "runtime/BP/items/sunset_glow_q6.json",
+        "runtime/BP/items/sweet_berry_wine_q6.json",
+        "runtime/BP/items/vinegar_q6.json",
+        "runtime/BP/items/vodka_q6.json",
+        "runtime/BP/items/watermelon_juice.json",
+        "runtime/BP/items/whiskey_q6.json",
+        "runtime/BP/items/wine_q6.json",
+        "runtime/BP/blocks/dragon_breath_bottle.json",
+        "runtime/BP/blocks/honey_bottle.json"
+      ]
+    },
+    {
+      "menu_category": {
+        "category": "nature",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation"
+      },
+      "paths": [
+        "runtime/BP/items/glow_berries_bucket.json",
+        "runtime/BP/items/gold_grape.json",
+        "runtime/BP/items/gold_grape_bucket.json",
+        "runtime/BP/items/grape.json",
+        "runtime/BP/items/grape_bucket.json",
+        "runtime/BP/items/grapevine.json",
+        "runtime/BP/items/green_grape.json",
+        "runtime/BP/items/green_grape_bucket.json",
+        "runtime/BP/items/ice_grape.json",
+        "runtime/BP/items/ice_grape_bucket.json",
+        "runtime/BP/items/sweet_berries_bucket.json",
+        "runtime/BP/blocks/trellis.json"
+      ]
     }
   ]
 }

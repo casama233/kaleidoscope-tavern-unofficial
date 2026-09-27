@@ -5,7 +5,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.36",
+  "version": "0.6.46",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -184,7 +184,8 @@ export const COOKERY_GUIDE_PAYLOAD={
         "把葡萄藤種在藤架上；作物種類由藤架正下方那一格方塊決定：泥土類長普通葡萄，冰、雪類長冰葡萄，下界岩、岩漿類長金葡萄。這裡的「下方」指藤架緊貼下方的方塊。",
         "普通葡萄藤可由原版藤蔓與甜莓合成；三株葡萄藤直排可合成八個藤架。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
         "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，並回收藤架和藤蔓。",
-        "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。"
+        "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。",
+        "森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
@@ -288,20 +289,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/white_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -325,21 +322,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -366,20 +359,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/light_gray_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -403,21 +392,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -444,20 +429,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/gray_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -481,21 +462,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -522,20 +499,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/black_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -559,21 +532,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -600,20 +569,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/brown_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -637,21 +602,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -678,20 +639,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/red_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -715,21 +672,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -756,20 +709,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/orange_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -793,21 +742,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -834,20 +779,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/yellow_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -871,21 +812,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -912,20 +849,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/lime_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -949,21 +882,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -990,20 +919,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/green_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1027,21 +952,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1068,20 +989,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/cyan_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1105,21 +1022,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1146,20 +1059,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/light_blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1183,21 +1092,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1224,20 +1129,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1261,21 +1162,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1302,20 +1199,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/purple_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1339,21 +1232,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1380,20 +1269,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/magenta_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1417,21 +1302,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -1458,20 +1339,16 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/pink_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+        "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。配方材料与数量列在“配方”栏。"
+          "此彩色高脚凳可供一名玩家乘坐：空手点击凳子坐下，潜行离座。破坏凳子取回家具；有人乘坐时不能拆除。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。配方材料與數量列在「配方」欄。"
+          "此彩色高腳凳可供一名玩家乘坐：空手點擊凳子坐下，潛行離座。破壞凳子取回家具；被乘坐時不能拆除。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
           "This colored bar stool seats one player. Use it with an empty hand to sit; sneak to stand. Break the stool to recover it; it cannot be removed while occupied. Ingredients and output are shown in Recipes."
         ]
       },
@@ -1495,21 +1372,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_runtime/icons/blue_bar_stool",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+        "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，配方列在“配方”栏。"
+          "此彩色沙发会与相邻沙发连接，提供可坐位置。空手点击坐下，潜行离座；破坏有人乘坐的沙发时会让乘客离座，再回收沙发，"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，配方列在「配方」欄。"
+          "此彩色沙發會與相鄰沙發連接，提供可坐位置。空手點擊坐下，潛行離座；破壞有人乘坐的沙發時會讓乘客離座，再回收沙發，"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa; see Recipes for its ingredients."
+          "This colored sofa connects to adjacent sofas and provides seats. Use it with an empty hand to sit; sneak to stand. Breaking an occupied sofa ejects its riders and recovers the sofa."
         ]
       },
       "recipes": [
@@ -2375,21 +2248,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/block/table",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "桌子可水平延伸並與相鄰桌子自動連接，作為吧台或擺設表面；對方塊表面放置。破壞單一桌面可取回桌子，鄰桌會重新整理連接。配方列於「配方」欄。"
+        "桌子可水平延伸並與相鄰桌子自動連接，作為吧台或擺設表面；對方塊表面放置。破壞單一桌面可取回桌子，鄰桌會重新整理連接。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "桌子可水平延伸并与相邻桌子自动连接，作为吧台或摆设表面；对方块表面放置。破坏单个桌面可取回桌子，邻桌会重新整理连接。配方列于“配方”栏。"
+          "桌子可水平延伸并与相邻桌子自动连接，作为吧台或摆设表面；对方块表面放置。破坏单个桌面可取回桌子，邻桌会重新整理连接。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "桌子可水平延伸並與相鄰桌子自動連接，作為吧台或擺設表面；對方塊表面放置。破壞單一桌面可取回桌子，鄰桌會重新整理連接。配方列於「配方」欄。"
+          "桌子可水平延伸並與相鄰桌子自動連接，作為吧台或擺設表面；對方塊表面放置。破壞單一桌面可取回桌子，鄰桌會重新整理連接。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "Place the table against a block face. Adjacent tables connect into a wider surface for a bar or display. Breaking one table block returns the table item and updates neighboring connections. See Recipes for ingredients."
+          "Place the table against a block face. Adjacent tables connect into a wider surface for a bar or display. Breaking one table block returns the table item and updates neighboring connections."
         ]
       },
       "recipes": [
@@ -2557,21 +2426,17 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/holder",
       "kinds": [],
       "mechanics": [
-        "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-        "吧台可與相鄰吧台自動連接成長櫃檯；放置後作為裝飾與服務檯面。破壞單格可取回吧台，鄰格會更新連接。配方列於「配方」欄。"
+        "吧台可與相鄰吧台自動連接成長櫃檯；放置後作為裝飾與服務檯面。破壞單格可取回吧台，鄰格會更新連接。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "桌子与吧台会和相邻同类方块连接；沙发彼此连接。高脚凳与沙发可坐，空手互动乘坐、潜行离座；有人坐时家具不能拆除。破坏家具会回收物品。",
-          "吧台可与相邻吧台自动连接成长柜台；放置后作为装饰与服务台面。破坏单格可取回吧台，邻格会更新连接。配方列于“配方”栏。"
+          "吧台可与相邻吧台自动连接成长柜台；放置后作为装饰与服务台面。破坏单格可取回吧台，邻格会更新连接。"
         ],
         "zh_TW": [
-          "桌子與吧台會和相鄰同類區塊連接；沙發彼此連接。高腳凳與沙發可坐，空手互動乘坐、潛行離座；有人坐時家具不能拆除。破壞家具會回收物品。",
-          "吧台可與相鄰吧台自動連接成長櫃檯；放置後作為裝飾與服務檯面。破壞單格可取回吧台，鄰格會更新連接。配方列於「配方」欄。"
+          "吧台可與相鄰吧台自動連接成長櫃檯；放置後作為裝飾與服務檯面。破壞單格可取回吧台，鄰格會更新連接。"
         ],
         "en_US": [
-          "Tables and counters connect to adjacent blocks of the same kind; sofas join adjacent sofas. Stools and sofas seat players: use with an empty hand to sit, sneak to stand. Occupied seating cannot be removed; breaking furniture recovers the item.",
-          "Adjacent bar counters connect into a longer counter. Break an individual block to recover its counter item; neighboring counters update their connections. See Recipes for ingredients."
+          "Adjacent bar counters connect into a longer counter. Break an individual block to recover its counter item; neighboring counters update their connections."
         ]
       },
       "recipes": [
@@ -2603,20 +2468,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "此架有四格，正面依左上、右上、左下、右下分區；手持空玻璃器皿點空槽放入，空手點有物品的同一格逐一取回。",
-        "破壞玻璃器皿架會一併掉落架子與其中所有空玻璃器皿；這不是空手點擊回收。配方列在本條目「配方」欄。"
+        "破壞玻璃器皿架會一併掉落架子與其中所有空玻璃器皿；這不是空手點擊回收。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "此架有四格，正面按左上、右上、左下、右下分区；手持空玻璃器皿点击空槽放入，空手点击有物品的同一格逐一取回。",
-          "破坏玻璃器皿架会一并掉落架子与其中所有空玻璃器皿；这不是空手点击回收。配方列在本条目“配方”栏。"
+          "破坏玻璃器皿架会一并掉落架子与其中所有空玻璃器皿；这不是空手点击回收。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "此架有四格，正面依左上、右上、左下、右下分區；手持空玻璃器皿點空槽放入，空手點有物品的同一格逐一取回。",
-          "破壞玻璃器皿架會一併掉落架子與其中所有空玻璃器皿；這不是空手點擊回收。配方列在本條目「配方」欄。"
+          "破壞玻璃器皿架會一併掉落架子與其中所有空玻璃器皿；這不是空手點擊回收。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -2654,20 +2519,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "此瓶架只有一格；手持可收納的瓶子點架子放入，空手點架子取回瓶子。它可放空瓶與香檳、花香釀、蜂蜜酒、冰葡萄酒、光之新娘、梅酒、北極星甜白、紅皇后、櫻花酒、白蘇維濃乾白、雪莉、醋、威士忌、葡萄酒；其他酒款不相容。",
-        "紅石訊號上升沿會把架上成酒隨機彈出；空瓶不會被射出。破壞瓶架會掉落瓶架及存放瓶子。配方列在本條目「配方」欄。"
+        "紅石訊號上升沿會把架上成酒隨機彈出；空瓶不會被射出。破壞瓶架會掉落瓶架及存放瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "此瓶架只有一格；手持可收纳的瓶子点击架子放入，空手点击架子取回瓶子。它可放空瓶与香槟、花香酿、蜂蜜酒、冰葡萄酒、光之新娘、梅酒、北极星甜白、红皇后、樱花酒、白苏维浓干白、雪莉、醋、威士忌、葡萄酒；其他酒款不兼容。",
-          "红石信号上升沿会把架上成酒随机弹出；空瓶不会被射出。破坏瓶架会掉落瓶架及存放瓶子。配方列在本条目“配方”栏。"
+          "红石信号上升沿会把架上成酒随机弹出；空瓶不会被射出。破坏瓶架会掉落瓶架及存放瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "此瓶架只有一格；手持可收納的瓶子點架子放入，空手點架子取回瓶子。它可放空瓶與香檳、花香釀、蜂蜜酒、冰葡萄酒、光之新娘、梅酒、北極星甜白、紅皇后、櫻花酒、白蘇維濃乾白、雪莉、醋、威士忌、葡萄酒；其他酒款不相容。",
-          "紅石訊號上升沿會把架上成酒隨機彈出；空瓶不會被射出。破壞瓶架會掉落瓶架及存放瓶子。配方列在本條目「配方」欄。"
+          "紅石訊號上升沿會把架上成酒隨機彈出；空瓶不會被射出。破壞瓶架會掉落瓶架及存放瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -2700,20 +2565,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "斜酒架有三格。手持可收納酒瓶點正面左、中、右三分區放入；空手點同一分區逐一取回。白瓶、酒瓶皆可，但白蘭地與佳釀紅酒瓶身不相容。",
-        "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。配方列在本條目「配方」欄。"
+        "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "斜酒架有三格。手持可收纳酒瓶点击正面左、中、右三区放入；空手点击同一区逐一取回。空瓶、酒瓶皆可，但白兰地与佳酿红酒瓶身不兼容。",
-          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。破坏酒架会掉落酒架与全部瓶子。配方列在本条目“配方”栏。"
+          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。破坏酒架会掉落酒架与全部瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "斜酒架有三格。手持可收納酒瓶點正面左、中、右三分區放入；空手點同一分區逐一取回。白瓶、酒瓶皆可，但白蘭地與佳釀紅酒瓶身不相容。",
-          "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。配方列在本條目「配方」欄。"
+          "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -2747,20 +2612,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "圓形酒架有六格，沿正面外圈按點擊位置選取最近的扇區；手持任一空瓶或酒瓶放入該格，空手點同一扇區逐一取回。",
-        "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。配方列在本條目「配方」欄。"
+        "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "圆形酒架有六格，沿正面外圈按点击位置选取最近的扇区；手持任一空瓶或酒瓶放入该格，空手点击同一扇区逐一取回。",
-          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。破坏酒架会掉落酒架与全部瓶子。配方列在本条目“配方”栏。"
+          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。破坏酒架会掉落酒架与全部瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "圓形酒架有六格，沿正面外圈按點擊位置選取最近的扇區；手持任一空瓶或酒瓶放入該格，空手點同一扇區逐一取回。",
-          "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。配方列在本條目「配方」欄。"
+          "紅石上升沿會隨機射出一瓶成酒；空瓶不會射出。破壞酒架會掉落酒架與全部瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -2798,20 +2663,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "酒窖柜正面有 3×3 共九格；只能点朝向正面的槽位。手持可收納瓶子放入指定格，空手点同格逐一取回。瓶架可收納的酒款限制也适用于此柜。",
-        "紅石上升沿会随机射出一瓶成酒；空瓶不會射出。相鄰同朝向酒窖櫃可連成一排。破壞酒櫃會掉落櫃體與全部瓶子。配方列在本條目「配方」欄。"
+        "紅石上升沿会随机射出一瓶成酒；空瓶不會射出。相鄰同朝向酒窖櫃可連成一排。破壞酒櫃會掉落櫃體與全部瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "酒窖柜正面有 3×3 共九格；只能点击朝向正面的槽位。手持可收纳瓶子放入指定格，空手点击同格逐一取回。瓶架可收纳的酒款限制也适用于此柜。",
-          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。相邻同朝向酒窖柜可连成一排。破坏酒柜会掉落柜体与全部瓶子。配方列在本条目“配方”栏。"
+          "红石上升沿会随机射出一瓶成酒；空瓶不会射出。相邻同朝向酒窖柜可连成一排。破坏酒柜会掉落柜体与全部瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "酒窖柜正面有 3×3 共九格；只能点朝向正面的槽位。手持可收納瓶子放入指定格，空手点同格逐一取回。瓶架可收納的酒款限制也适用于此柜。",
-          "紅石上升沿会随机射出一瓶成酒；空瓶不會射出。相鄰同朝向酒窖櫃可連成一排。破壞酒櫃會掉落櫃體與全部瓶子。配方列在本條目「配方」欄。"
+          "紅石上升沿会随机射出一瓶成酒；空瓶不會射出。相鄰同朝向酒窖櫃可連成一排。破壞酒櫃會掉落櫃體與全部瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -3172,20 +3037,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "吧台櫃正面左右各一格；手持任一空瓶或酒瓶點空側放入，空手點該側逐一取回。白蘭地與佳釀紅酒是粗瓶，只能置中存一瓶；放入後不能再放第二瓶。",
-        "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。配方列在本條目「配方」欄。"
+        "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "吧台柜正面左右各一格；手持任一空瓶或酒瓶点击空侧放入，空手点击该侧逐一取回。白兰地与佳酿红酒是粗瓶，只能居中存一瓶；放入后不能再放第二瓶。",
-          "此柜没有红石弹射功能。破坏柜体会掉落柜子与全部瓶子。配方列在本条目“配方”栏。"
+          "此柜没有红石弹射功能。破坏柜体会掉落柜子与全部瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "吧台櫃正面左右各一格；手持任一空瓶或酒瓶點空側放入，空手點該側逐一取回。白蘭地與佳釀紅酒是粗瓶，只能置中存一瓶；放入後不能再放第二瓶。",
-          "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。配方列在本條目「配方」欄。"
+          "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -3222,20 +3087,20 @@ export const COOKERY_GUIDE_PAYLOAD={
         "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
         "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
         "玻璃吧台櫃正面左右各一格；手持任一空瓶或酒瓶點空側放入，空手點該側逐一取回。白蘭地與佳釀紅酒是粗瓶，只能置中存一瓶；放入後不能再放第二瓶。",
-        "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。配方列在本條目「配方」欄。"
+        "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "酒架与酒柜可存放酒瓶，取回时每瓶仍保留自己的品质。",
           "普通使用先操作酒架槽位；潜行并手持物品时可尝试在旁边摆放物品。",
           "玻璃吧台柜正面左右各一格；手持任一空瓶或酒瓶点击空侧放入，空手点击该侧逐一取回。白兰地与佳酿红酒是粗瓶，只能居中存一瓶；放入后不能再放第二瓶。",
-          "此柜没有红石弹射功能。破坏柜体会掉落柜子与全部瓶子。配方列在本条目“配方”栏。"
+          "此柜没有红石弹射功能。破坏柜体会掉落柜子与全部瓶子。"
         ],
         "zh_TW": [
           "酒架與酒櫃可存放酒瓶，取回時每瓶仍保留自己的品質。",
           "普通使用先操作酒架槽位；潛行並手持物品時可嘗試在旁邊擺放物品。",
           "玻璃吧台櫃正面左右各一格；手持任一空瓶或酒瓶點空側放入，空手點該側逐一取回。白蘭地與佳釀紅酒是粗瓶，只能置中存一瓶；放入後不能再放第二瓶。",
-          "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。配方列在本條目「配方」欄。"
+          "此櫃沒有紅石彈射功能。破壞櫃體會掉落櫃子與全部瓶子。"
         ],
         "en_US": [
           "Store bottles on racks and in cabinets; each bottle keeps its own quality when retrieved.",
@@ -3556,7 +3421,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3592,7 +3457,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3628,7 +3493,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3664,7 +3529,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3700,7 +3565,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3736,7 +3601,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3772,7 +3637,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3808,7 +3673,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3844,7 +3709,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3880,7 +3745,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3916,7 +3781,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3952,7 +3817,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -3988,7 +3853,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -4024,7 +3889,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "en_US": [
           "Paintings can be placed on walls, floors, or ceilings; orientation follows the clicked face and player direction. Breaking a painting returns that specific painting item. Each painting’s ingredients appear in its own Recipes section.",
-          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item. See Recipes for ingredients."
+          "Use this painting on a wall, floor, or ceiling to place it; orientation follows the clicked face and player direction. Breaking it returns the same painting item."
         ]
       },
       "recipes": [
@@ -4393,21 +4258,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/barrel",
       "kinds": [],
       "mechanics": [
-        "以果汁桶將單一種類果汁注入酒桶，最多四桶（4,000 mB）；加入酒方原料後蓋上桶蓋，以空手開關熟成。不同材料槽建議放相同數量；開啟／熟成會消耗所有原料，多出的材料也不會留下。品質最高為 6。拆除酒桶任何部分都會拆下整組；先取出酒液與成品，否則液體會流失。",
-        "酒桶核心與桶身的完整結構、裝液、熟成及拆除規則見「酒桶與熟成」條目。"
+        "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
+        "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
+        "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+        "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "用果汁桶向酒桶注入单一种类果汁，最多四桶（4,000 mB）；加入配方原料后盖上桶盖，空手开关熟成。不同材料槽建议放相同数量；开始熟成会消耗全部原料，多出的材料也不会留下。最高品质为 6。拆除酒桶任一部分都会拆下整组；先取出酒液与成品，否则液体会流失。",
-          "酒桶核心与桶身的完整结构、装液、熟成及拆除规则见“酒桶与熟成”条目。"
+          "潜行空手操作酒桶开关盖。开盖后先加入配方所需液体，最多四桶（4,000 mB），再放入原料。",
+          "各原料槽尽量保持相同数量；关盖开始酿造，装入的原料会全部消耗。开盖后用空酒瓶取出成品。",
+          "让成品留在已加载的酒桶内继续熟成，最高品质为 6。不同酒款的配方与效果在对应酒品条目内。",
+          "拆除任一桶身部分会拆下整桶；先取走成品和物品，桶内液体不会保留。"
         ],
         "zh_TW": [
-          "以果汁桶將單一種類果汁注入酒桶，最多四桶（4,000 mB）；加入酒方原料後蓋上桶蓋，以空手開關熟成。不同材料槽建議放相同數量；開啟／熟成會消耗所有原料，多出的材料也不會留下。品質最高為 6。拆除酒桶任何部分都會拆下整組；先取出酒液與成品，否則液體會流失。",
-          "酒桶核心與桶身的完整結構、裝液、熟成及拆除規則見「酒桶與熟成」條目。"
+          "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
+          "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
+          "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+          "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
         ],
         "en_US": [
-          "Use a juice bucket to fill the barrel with one kind of juice, up to four buckets (4,000 mB). Add the recipe ingredients and use the lid with an empty hand to start or stop aging. Keep ingredient slot counts equal where possible: starting aging consumes all loaded ingredients, including extras. Quality caps at 6. Breaking any barrel part dismantles the whole barrel; remove the liquid and finished drink first or the liquid is lost.",
-          "See “Barrels & aging” for the complete barrel structure, filling, aging, and dismantling rules."
+          "Sneak-use the barrel with an empty hand to open or close its lid. Add the recipe fluid first, up to four buckets (4,000 mB), then the ingredients.",
+          "Keep ingredient stacks equally sized. Closing the lid starts brewing and consumes all loaded ingredients. Open it and collect the result with empty bottles.",
+          "Leave the batch in a loaded barrel to age, up to quality 6. Each drink entry contains its recipe and effects.",
+          "Breaking any part dismantles the barrel. Remove products and items first; stored fluid is lost."
         ]
       },
       "recipes": [
@@ -4438,27 +4311,23 @@ export const COOKERY_GUIDE_PAYLOAD={
       "mechanics": [
         "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
         "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
-        "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。",
-        "酒嘴取酒流程見「酒嘴與取酒」條目：空酒瓶方塊須放在酒嘴正下方，空手開啟後等待 30 tick。"
+        "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "确认酒桶已完成熟成且酒嘴装在桶身；酒嘴只会在有可装瓶的成品时出酒。",
           "把一个空酒瓶方块放在酒嘴正下方，再空手点酒嘴开启。等待 30 tick（约 1.5 秒），下方空瓶会变成该桶当前品质的成酒；取走酒瓶即可。",
-          "酒嘴开启时可再空手点击关闭；红石上升沿也可开启。拆酒桶前先取走液体、配料和成酒，拆任一桶身部件都会拆掉整桶，桶内液体不会保留。",
-          "酒嘴取酒流程见“酒嘴与取酒”条目：空酒瓶方块须放在酒嘴正下方，空手开启后等待 30 tick。"
+          "酒嘴开启时可再空手点击关闭；红石上升沿也可开启。拆酒桶前先取走液体、配料和成酒，拆任一桶身部件都会拆掉整桶，桶内液体不会保留。"
         ],
         "zh_TW": [
           "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
           "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
-          "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。",
-          "酒嘴取酒流程見「酒嘴與取酒」條目：空酒瓶方塊須放在酒嘴正下方，空手開啟後等待 30 tick。"
+          "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
         ],
         "en_US": [
           "Install the tap on a completed barrel; it dispenses only when a finished drink is available.",
           "Place an empty bottle block directly below the tap, then use the tap with an empty hand. After 30 ticks (about 1.5 seconds), the bottle becomes the drink at the barrel’s current quality; take the filled bottle.",
-          "Use the tap again with an empty hand to close it; a redstone rising edge can open it too. Empty the barrel before dismantling: breaking any barrel part dismantles the whole barrel and its liquid is lost.",
-          "See “Tap & bottling”: place an empty bottle block directly below the tap, use it with an empty hand, and wait 30 ticks."
+          "Use the tap again with an empty hand to close it; a redstone rising edge can open it too. Empty the barrel before dismantling: breaking any barrel part dismantles the whole barrel and its liquid is lost."
         ]
       },
       "recipes": [
@@ -4481,24 +4350,21 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "果盆只有一個原料槽，可投入同種物品堆（配方外物品也能先放入）；只接受六種配方水果榨汁。玩家或其他活物落在盆上，每次成功踩踏壓榨 125 mB，八次取得一桶。",
-        "錯誤物品踩踏時彈出；果汁滿 1,000 mB 後不再消耗水果。破壞果盆會掉落果盆及槽內原料，剩餘果汁不保留。",
-        "果盆有一個原料槽；水果種類、踩踏、錯料彈出、滿液與拆除規則見「壓榨果汁」條目。"
+        "錯誤物品踩踏時彈出；果汁滿 1,000 mB 後不再消耗水果。破壞果盆會掉落果盆及槽內原料，剩餘果汁不保留。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "果盆只有一个原料槽，可投入同种物品堆（配方外物品也能先放入）；只接受六种配方水果榨汁。玩家或其他活物落在盆上，每次成功踩踏压榨 125 mB，八次取得一桶。",
-          "错误物品踩踏时弹出；果汁满 1,000 mB 后不再消耗水果。破坏果盆会掉落果盆及槽内原料，剩余果汁不保留。",
-          "果盆有一个原料槽；水果种类、踩踏、错料弹出、满液与拆除规则见“压榨果汁”条目。"
+          "错误物品踩踏时弹出；果汁满 1,000 mB 后不再消耗水果。破坏果盆会掉落果盆及槽内原料，剩余果汁不保留。"
         ],
         "zh_TW": [
           "果盆只有一個原料槽，可投入同種物品堆（配方外物品也能先放入）；只接受六種配方水果榨汁。玩家或其他活物落在盆上，每次成功踩踏壓榨 125 mB，八次取得一桶。",
-          "錯誤物品踩踏時彈出；果汁滿 1,000 mB 後不再消耗水果。破壞果盆會掉落果盆及槽內原料，剩餘果汁不保留。",
-          "果盆有一個原料槽；水果種類、踩踏、錯料彈出、滿液與拆除規則見「壓榨果汁」條目。"
+          "錯誤物品踩踏時彈出；果汁滿 1,000 mB 後不再消耗水果。破壞果盆會掉落果盆及槽內原料，剩餘果汁不保留。"
         ],
         "en_US": [
           "The fruit basin has one slot and accepts a stack of any one ordinary item; recipe fruits press into juice, while other items are ejected when pressed. A player or any living entity landing on it presses 125 mB per successful step; eight presses fill a bucket.",
           "At 1,000 mB the basin stops consuming fruit. Breaking it drops the basin and stored ingredients, but loses remaining juice.",
-          "The fruit basin has one ingredient slot. See “Pressing juice” for fruit types, pressing, rejected items, full capacity, and dismantling."
+          "Use an empty bucket to collect a full bucket of juice."
         ]
       },
       "recipes": [
@@ -4521,27 +4387,23 @@ export const COOKERY_GUIDE_PAYLOAD={
       "mechanics": [
         "把雪克杯放在方塊表面，依個別雞尾酒條目依序將三種材料放進空槽；作為基酒的酒款須達品質 4。",
         "空手拿起裝料的雪克杯，按住使用開始搖酒，依提示在正確時機放開；其他時機會調出特調或神秘雞尾酒。",
-        "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。",
-        "雪克杯調酒順序與每款雞尾酒配方見「雞尾酒配方」分條。"
+        "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "把雪克杯放在方块表面，按各鸡尾酒条目所列顺序将三种材料放入空槽；作为基酒的酒款须达品质 4。",
           "空手拿起装料的雪克杯，按住使用开始摇酒，依提示在正确时机松开；其他时机会调出特调或神秘鸡尾酒。",
-          "放置空玻璃杯后，手持雪克杯对空杯倒入成品；潜行使用可取消摇酒。",
-          "雪克杯调酒顺序与每款鸡尾酒配方见“鸡尾酒配方”分条。"
+          "放置空玻璃杯后，手持雪克杯对空杯倒入成品；潜行使用可取消摇酒。"
         ],
         "zh_TW": [
           "把雪克杯放在方塊表面，依個別雞尾酒條目依序將三種材料放進空槽；作為基酒的酒款須達品質 4。",
           "空手拿起裝料的雪克杯，按住使用開始搖酒，依提示在正確時機放開；其他時機會調出特調或神秘雞尾酒。",
-          "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。",
-          "雪克杯調酒順序與每款雞尾酒配方見「雞尾酒配方」分條。"
+          "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。"
         ],
         "en_US": [
           "Place the shaker on a block and add the three ingredients in the order shown by each cocktail entry. Tavern drinks used as a base must be quality 4 or higher.",
           "Use an empty hand to pick up the loaded shaker, hold use to shake, and release at the prompt for the named cocktail; other timings produce signature or mystery cocktails.",
-          "Place an empty glass, then use the held shaker on it to pour. Sneak-use cancels a shake.",
-          "See the individual “Cocktail recipes” entries for shaker order and each drink’s ingredients."
+          "Place an empty glass, then use the held shaker on it to pour. Sneak-use cancels a shake."
         ]
       },
       "recipes": [
@@ -4636,23 +4498,23 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/chalkboard",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
-        "工作台配方見本條目。放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
+        "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
+        "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
+          "放置后空手操作编辑文字。单块黑板最多 350 字，三块合并黑板 1,500 字。",
           "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "工作台配方见本条目。放置黑板可直接编辑文字；同方向相邻放置三块单黑板时会合并成宽黑板，文字编辑位置在中央。破坏任一块会拆除整组。"
+          "放置黑板可直接编辑文字；同方向相邻放置三块单黑板时会合并成宽黑板，文字编辑位置在中央。破坏任一块会拆除整组。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
-          "工作台配方見本條目。放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
+          "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
+          "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
+          "Use a placed board with an empty hand to edit its text. A single chalkboard holds 350 characters; a merged board holds 1,500.",
           "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
           "See this entry’s crafting recipe. Place a chalkboard and interact to edit its text. Three adjacent single boards with the same facing merge into one wide board, edited at the center. Breaking any panel removes the whole assembly."
         ]
@@ -4684,7 +4546,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡顯示素面告示牌的工作台配方。放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。"
       ],
       "mechanicsByLocale": {
@@ -4695,7 +4557,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡顯示素面告示牌的工作台配方。放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。"
         ],
         "en_US": [
@@ -4724,7 +4586,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4735,7 +4597,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4764,7 +4626,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4775,7 +4637,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4804,7 +4666,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4815,7 +4677,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4864,7 +4726,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4875,7 +4737,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4904,7 +4766,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4915,7 +4777,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4944,7 +4806,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -4955,7 +4817,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -4994,7 +4856,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5005,7 +4867,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5034,7 +4896,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5045,7 +4907,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5074,7 +4936,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5085,7 +4947,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5124,7 +4986,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5135,7 +4997,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5174,7 +5036,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5185,7 +5047,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5214,7 +5076,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5225,7 +5087,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5284,7 +5146,7 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+        "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
         "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
       ],
       "mechanicsByLocale": {
@@ -5295,7 +5157,7 @@ export const COOKERY_GUIDE_PAYLOAD={
         ],
         "zh_TW": [
           "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。牌面文字由 Noto 字形圖集直接繪出；超出字圖集的字元會顯示方框。",
+          "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
           "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
         ],
         "en_US": [
@@ -5807,12 +5669,6 @@ function recipeMechanics(recipe,lc='zh_TW',names=GUIDE_ITEM_NAMES){
   }).join(' / ');
  };
  if(recipe.kind==='pressing')return [`${en?'Fruit':'水果'}：${(recipe.input??[]).map(label).join(' / ')}`,`→ ${label(recipe.fluid)} ${recipe.amount} mB`];
- if(recipe.source==='kaleidoscope_tavern'){
-  const alts=(recipe.ingredients??[]).map(slotLabel).join(' + ')||'—';
-  if(recipe.kind==='shaker')return [`${en?'Three shaker slots':'雪克杯三槽'}：${alts}`,`→ ${label(recipe.output?.item??recipe.id)}`,`${en?'Serving glass':'接酒杯'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_glassware')}`];
-  const output=recipe.output?.item?label(recipe.output.item):label(recipe.output?.byQuality?.[0]);
-  return [`${label(recipe.fluid)} × 4000 mB`,`${en?'Barrel ingredients':'酒桶原料'}：${alts}`,`→ ${output}${recipe.output?.byQuality ? ` (${en?'Quality':cn?'品质':'品質'} 1–6)` : ''}`,`${en?'Serving bottle':'接酒瓶'}：${label(recipe.carrier??'kaleidoscope_tavern:empty_bottle')}`];
- }
  const slots=(recipe.ingredients??[]).map((slot,i)=>`${en?'Slot':cn?'原料槽':'原料槽'} ${i+1}：${slotLabel(slot)}`);
  if(recipe.kind==='shaker')return [
   en?'Shaker • Choose ONE item from EACH of the three slots below. Slashes mean alternatives, not extra ingredients.':cn?'雪克杯调酒｜以下三槽各选一份；斜线表示可替换材料，不是全部加入。':'雪克杯調酒｜以下三槽各選一份；斜線表示可替換材料，不是全部加入。',
@@ -5891,8 +5747,8 @@ export function buildCookeryGuidePayload(registry){
     'minecraft:nausea':'Nausea','minecraft:instant_health':'Instant Health','minecraft:resistance':'Resistance','minecraft:fire_resistance':'Fire Resistance','minecraft:regeneration':'Regeneration','minecraft:night_vision':'Night Vision','minecraft:slow_falling':'Slow Falling','minecraft:jump_boost':'Jump Boost','minecraft:strength':'Strength','minecraft:speed':'Speed','minecraft:water_breathing':'Water Breathing','minecraft:weakness':'Weakness','minecraft:poison':'Poison','minecraft:wither':'Wither','minecraft:blindness':'Blindness','minecraft:bad_omen':'Bad Omen','minecraft:mining_fatigue':'Mining Fatigue','minecraft:haste':'Haste','kaleidoscope_tavern:slightly_tipsy':'Slightly Tipsy','kaleidoscope_tavern:grass_stealth':'Grass Stealth','kaleidoscope_tavern:long_reach':'Long Reach','kaleidoscope_tavern:high_heels':'High Heels','kaleidoscope_tavern:vision':'Spirit Vision','kaleidoscope_tavern:bloody_mary':'Bloody Mary'
    }:lc==='zh_CN'?{'minecraft:nausea':'恶心','minecraft:instant_health':'瞬间治疗','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢复','minecraft:night_vision':'夜视','minecraft:slow_falling':'缓降','minecraft:jump_boost':'跳跃提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虚弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲劳','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草丛隐匿','kaleidoscope_tavern:long_reach':'延伸触及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'灵视','kaleidoscope_tavern:bloody_mary':'血腥玛丽'}:{'minecraft:nausea':'噁心','minecraft:instant_health':'瞬間治療','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢復','minecraft:night_vision':'夜視','minecraft:slow_falling':'緩降','minecraft:jump_boost':'跳躍提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虛弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲勞','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草叢隱匿','kaleidoscope_tavern:long_reach':'延伸觸及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'靈視','kaleidoscope_tavern:bloody_mary':'血腥瑪麗'};
    body=body.replace(/\b(kaleidoscope_tavern|minecraft):([a-z0-9_]+)/g,(id,ns,key)=>names[id]??key.split('_').map(w=>w[0].toUpperCase()+w.slice(1)).join(' '));
-   body=body.replace(/(Slightly Tipsy|Grass Stealth|Long Reach)(?= Lv)/g,'$1 (not available in this version)');
-   body=body.replace(/(微醺|草叢隱匿|延伸觸及|草丛隐匿|延伸触及)(?= Lv)/g,'$1（本版本目前不提供此效果）');
+   body=body.replace(/Slightly Tipsy(?= Lv)/g,'Slightly Tipsy (camera approximation)');
+   body=body.replace(/微醺(?= Lv)/g,lc==='zh_CN'?'微醺（镜头适配）':'微醺（鏡頭適配）');
    body=body.replace(/\s*\[(?:(?:待移植|not implemented)|已實作\s*\/\s*implemented)\]/g,'');
    body=body.replace(/\bQ([1-6]):/g,lc==='en_US'?'Quality $1:':lc==='zh_CN'?'品质$1：':'品質$1：');
    body=body.replace(/\sLv([0-9]+)/g,lc==='en_US'?' Level $1':lc==='zh_CN'?' 等级$1':' 等級$1');

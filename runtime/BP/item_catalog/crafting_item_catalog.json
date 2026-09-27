@@ -3,7 +3,7 @@
   "minecraft:crafting_items_catalog": {
     "categories": [
       {
-        "category_name": "nature",
+        "category_name": "equipment",
         "groups": [
           {
             "group_identifier": {
@@ -11,26 +11,31 @@
               "icon": "kaleidoscope_tavern:grape"
             },
             "items": [
+              "kaleidoscope_tavern:wild_grapevine",
               "kaleidoscope_tavern:trellis",
-              "kaleidoscope_tavern:glow_berries_bucket",
               "kaleidoscope_tavern:gold_grape",
-              "kaleidoscope_tavern:gold_grape_bucket",
               "kaleidoscope_tavern:grape",
-              "kaleidoscope_tavern:grape_bucket",
               "kaleidoscope_tavern:grapevine",
               "kaleidoscope_tavern:green_grape",
+              "kaleidoscope_tavern:ice_grape"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "kaleidoscope_tavern:itemGroup.name.ingredients",
+              "icon": "kaleidoscope_tavern:grape_bucket"
+            },
+            "items": [
+              "kaleidoscope_tavern:glow_berries_bucket",
+              "kaleidoscope_tavern:gold_grape_bucket",
+              "kaleidoscope_tavern:grape_bucket",
               "kaleidoscope_tavern:green_grape_bucket",
-              "kaleidoscope_tavern:ice_grape",
               "kaleidoscope_tavern:ice_grape_bucket",
               "kaleidoscope_tavern:sweet_berries_bucket",
-              "kaleidoscope_tavern:wild_grapevine"
+              "kaleidoscope_tavern:dragon_breath_bottle",
+              "kaleidoscope_tavern:honey_bottle"
             ]
-          }
-        ]
-      },
-      {
-        "category_name": "equipment",
-        "groups": [
+          },
           {
             "group_identifier": {
               "name": "kaleidoscope_tavern:itemGroup.name.tavern_brewing",
@@ -52,12 +57,10 @@
             },
             "items": [
               "kaleidoscope_tavern:brandy_q6",
-              "kaleidoscope_tavern:dragon_breath_bottle",
               "kaleidoscope_tavern:carignan_q6",
               "kaleidoscope_tavern:champagne_q6",
               "kaleidoscope_tavern:glowflower_brew_q6",
               "kaleidoscope_tavern:honey_wine_q6",
-              "kaleidoscope_tavern:honey_bottle",
               "kaleidoscope_tavern:ice_wine_q6",
               "kaleidoscope_tavern:luminous_bride_q6",
               "kaleidoscope_tavern:madame_shexiang_q6",
@@ -94,7 +97,6 @@
               "kaleidoscope_tavern:godfather",
               "kaleidoscope_tavern:grasshopper",
               "kaleidoscope_tavern:mojito",
-              "kaleidoscope_tavern:molotov",
               "kaleidoscope_tavern:mystery_cocktail",
               "kaleidoscope_tavern:nether_special",
               "kaleidoscope_tavern:screwdriver",
@@ -105,21 +107,13 @@
           },
           {
             "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_cabinets",
+              "name": "kaleidoscope_tavern:itemGroup.name.storage",
               "icon": "kaleidoscope_tavern:bar_cabinet"
             },
             "items": [
               "kaleidoscope_tavern:bar_cabinet",
               "kaleidoscope_tavern:glass_bar_cabinet",
-              "kaleidoscope_tavern:cellar_cabinet"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_racks",
-              "icon": "kaleidoscope_tavern:holder"
-            },
-            "items": [
+              "kaleidoscope_tavern:cellar_cabinet",
               "kaleidoscope_tavern:tilted_rack",
               "kaleidoscope_tavern:circular_rack",
               "kaleidoscope_tavern:holder",
@@ -128,20 +122,12 @@
           },
           {
             "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_tables",
-              "icon": "kaleidoscope_tavern:table"
+              "name": "kaleidoscope_tavern:itemGroup.name.furniture",
+              "icon": "kaleidoscope_tavern:white_bar_stool"
             },
             "items": [
               "kaleidoscope_tavern:bar_counter",
-              "kaleidoscope_tavern:table"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_sofas",
-              "icon": "kaleidoscope_tavern:white_sofa"
-            },
-            "items": [
+              "kaleidoscope_tavern:table",
               "kaleidoscope_tavern:white_sofa",
               "kaleidoscope_tavern:light_gray_sofa",
               "kaleidoscope_tavern:gray_sofa",
@@ -157,15 +143,7 @@
               "kaleidoscope_tavern:blue_sofa",
               "kaleidoscope_tavern:purple_sofa",
               "kaleidoscope_tavern:magenta_sofa",
-              "kaleidoscope_tavern:pink_sofa"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_stools",
-              "icon": "kaleidoscope_tavern:white_bar_stool"
-            },
-            "items": [
+              "kaleidoscope_tavern:pink_sofa",
               "kaleidoscope_tavern:white_bar_stool",
               "kaleidoscope_tavern:light_gray_bar_stool",
               "kaleidoscope_tavern:gray_bar_stool",
@@ -186,8 +164,8 @@
           },
           {
             "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_string_lights",
-              "icon": "kaleidoscope_tavern:string_lights_colorless"
+              "name": "kaleidoscope_tavern:itemGroup.name.lighting",
+              "icon": "kaleidoscope_tavern:bell_pendant_lamp"
             },
             "items": [
               "kaleidoscope_tavern:string_lights_colorless",
@@ -206,15 +184,7 @@
               "kaleidoscope_tavern:string_lights_blue",
               "kaleidoscope_tavern:string_lights_purple",
               "kaleidoscope_tavern:string_lights_magenta",
-              "kaleidoscope_tavern:string_lights_pink"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_pendant_lamps",
-              "icon": "kaleidoscope_tavern:bell_pendant_lamp"
-            },
-            "items": [
+              "kaleidoscope_tavern:string_lights_pink",
               "kaleidoscope_tavern:bell_pendant_lamp",
               "kaleidoscope_tavern:yellow_pendant_lamp",
               "kaleidoscope_tavern:blue_pendant_lamp"
@@ -222,8 +192,8 @@
           },
           {
             "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_boards",
-              "icon": "kaleidoscope_tavern:chalkboard"
+              "name": "kaleidoscope_tavern:itemGroup.name.decoration",
+              "icon": "kaleidoscope_tavern:ysbb_painting"
             },
             "items": [
               "kaleidoscope_tavern:base_sandwich_board",
@@ -240,15 +210,7 @@
               "kaleidoscope_tavern:wither_rose_sandwich_board",
               "kaleidoscope_tavern:peony_sandwich_board",
               "kaleidoscope_tavern:pitcher_plant_sandwich_board",
-              "kaleidoscope_tavern:chalkboard"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_paintings",
-              "icon": "kaleidoscope_tavern:ysbb_painting"
-            },
-            "items": [
+              "kaleidoscope_tavern:chalkboard",
               "kaleidoscope_tavern:ysbb_painting",
               "kaleidoscope_tavern:tartaric_acid_painting",
               "kaleidoscope_tavern:cr019_painting",
@@ -262,15 +224,7 @@
               "kaleidoscope_tavern:father_painting",
               "kaleidoscope_tavern:great_wave_painting",
               "kaleidoscope_tavern:mona_lisa_painting",
-              "kaleidoscope_tavern:mondrian_painting"
-            ]
-          },
-          {
-            "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_incense",
-              "icon": "kaleidoscope_tavern:sakura_incense"
-            },
-            "items": [
+              "kaleidoscope_tavern:mondrian_painting",
               "kaleidoscope_tavern:sakura_incense",
               "kaleidoscope_tavern:pine_incense",
               "kaleidoscope_tavern:ginkgo_incense",
@@ -283,11 +237,12 @@
           },
           {
             "group_identifier": {
-              "name": "kaleidoscope_tavern:itemGroup.name.tavern_utilities",
+              "name": "kaleidoscope_tavern:itemGroup.name.tools",
               "icon": "kaleidoscope_tavern:stepladder"
             },
             "items": [
-              "kaleidoscope_tavern:stepladder"
+              "kaleidoscope_tavern:stepladder",
+              "kaleidoscope_tavern:molotov"
             ]
           }
         ]

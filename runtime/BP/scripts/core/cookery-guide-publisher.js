@@ -100,7 +100,7 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
    try{
     for(let n=0;n<8&&cursor<messages.length;n++,cursor++){const m=messages[cursor];system.sendScriptEvent(m.id,m.message);}
     if(cursor<messages.length)runningHandle=later(step,1);
-    else{active=false;lastSent=system.currentTick;lastRevision=revision;successfulTransfers++;if(dirty)queue();}
+    else{active=false;lastSent=system.currentTick;lastRevision=revision;successfulTransfers++;if(successfulTransfers===1)warn('[Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.');if(dirty)queue();}
    }catch(error){active=false;dirty=true;sendFailures++;warn('[Tavern guide] Publish failed: '+String(error));if(sendFailures<=2)later(()=>queue(),40);}
   };
   runningHandle=later(step,1);return true;
@@ -112,9 +112,10 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
  system.afterEvents.scriptEventReceive.subscribe(receive);
  const ping=()=>{try{system.sendScriptEvent(COOKERY_GUIDE_EVENTS.ping,JSON.stringify({api:1,source:COOKERY_GUIDE_SOURCE}));}catch(error){warn('[Tavern guide] Ping failed: '+String(error));}};
  for(const ticks of [1,40,200])later(ping,ticks);
+ later(()=>{if(!hostReady)warn('[Tavern guide] Cookery host not ready after 30 seconds; chapter has not been sent.');},600);
  return Object.freeze({
   refresh:()=>{if(disposed)return false;dirty=true;return queue();},
-  getStatus:()=>({active,disposed,hostReady,dirty,successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false}),
+  getStatus:()=>({active,disposed,hostReady,dirty,successfulTransfers,transmittedTransfers:successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false,receiptConfirmed:false,deliveryState:disposed?'disposed':!hostReady?'host_not_ready':active?'transmitting':dirty&&sendFailures?'send_failed':lastRevision?'sent_unconfirmed':'waiting_to_send'}),
   dispose:()=>{if(disposed)return;disposed=true;active=false;system.afterEvents.scriptEventReceive.unsubscribe(receive);for(const h of scheduled)system.clearRun(h);scheduled.clear();queuedHandle=undefined;if(runningHandle!=null)system.clearRun(runningHandle);}
  });
 }

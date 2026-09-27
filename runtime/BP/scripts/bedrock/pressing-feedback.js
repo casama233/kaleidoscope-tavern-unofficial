@@ -1,3 +1,4 @@
+import {playWorldSound,spawnWorldParticle} from './feedback-diagnostics.js';
 /** Java pressing-tub feedback and eight-direction rejected-ingredient ejection. */
 import {world,ItemStack,MolangVariableMap} from '@minecraft/server';
 const N='kaleidoscope_tavern';
@@ -5,14 +6,14 @@ const FRUIT=new Set(['grape','ice_grape','gold_grape','green_grape']);
 export function pressFeedback(block,tx){
  const p={x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5};
  const sound={success:'fall.slime',fail:'fall.wood',finished:'hit.honey_block'}[tx.pressEffect];
- try{block.dimension.playSound(sound,p,{volume:.5+Math.random(),pitch:.7+Math.random()*.3});}catch{}
+ playWorldSound(block.dimension,sound,p,{volume:.5+Math.random(),pitch:.7+Math.random()*.3});
  let particle='minecraft:water_splash_particle';
  if(tx.pressEffect!=='finished'&&tx.pressItem){
   const short=tx.pressItem.split(':')[1];
   if(FRUIT.has(short)||['sweet_berries','glow_berries'].includes(short))particle=N+':pressed_'+short;
   else particle=N+':pressed_wood';
  }else if(tx.pressEffect==='fail')particle=N+':pressed_wood';
- try{const variables=new MolangVariableMap();variables.setVector3('variable.direction',{x:0,y:-1,z:0});block.dimension.spawnParticle(particle,p,variables);}catch{}
+ spawnWorldParticle(block.dimension,particle,p,()=>{const variables=new MolangVariableMap();variables.setVector3('variable.direction',{x:0,y:-1,z:0});return variables;});
 }
 export function spawnRejectedIngredients(block,outputs){
  const spawned=[];
@@ -31,5 +32,5 @@ export function spawnRejectedIngredients(block,outputs){
 }
 
 export function ingredientFeedback(block,remove=false){
- try{block.dimension.playSound(remove?'block.itemframe.remove_item':'block.itemframe.add_item',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5},{volume:.5+Math.random(),pitch:.6+Math.random()*.7});}catch{}
+ playWorldSound(block.dimension,remove?'block.itemframe.remove_item':'block.itemframe.add_item',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5},{volume:.5+Math.random(),pitch:.6+Math.random()*.7});
 }

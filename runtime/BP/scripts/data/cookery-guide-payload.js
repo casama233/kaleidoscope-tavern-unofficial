@@ -5,7 +5,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.53",
+  "version": "0.6.54",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -4258,28 +4258,32 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/barrel",
       "kinds": [],
       "mechanics": [
-        "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
-        "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
-        "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+        "酒桶需要 3×3×3 空間。潛行空手開蓋，先加入四桶同種配方液體（4,000 mB），再放原料。各種原料盡量等量；開始釀造會消耗全部原料，產量取數量最少的一種，無配料配方通常產出 16 瓶。",
+        "潛行空手關蓋，等待酒桶顯示成品及品質 1。有成品時不能開蓋，必須先經酒嘴取空。",
+        "在酒桶正面中央的孔口裝酒嘴，將酒館空酒瓶放在酒嘴緊貼的正下方；空手點酒嘴，約 1.5 秒後收回成酒。品質 1 即可取酒，提前取出的酒不再隨桶熟成。",
+        "標準配方從品質 1 升至 2、3、4、5、6，各需約 2、4、6、8、10 分鐘；從品質 1 至 6 合計約 30 分鐘。只在區塊載入時推進，實際時間以桶身倒數為準；附屬配方可設定不同時間。",
         "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
-        "zh_CN": [
-          "潜行空手操作酒桶开关盖。开盖后先加入配方所需液体，最多四桶（4,000 mB），再放入原料。",
-          "各原料槽尽量保持相同数量；关盖开始酿造，装入的原料会全部消耗。开盖后用空酒瓶取出成品。",
-          "让成品留在已加载的酒桶内继续熟成，最高品质为 6。不同酒款的配方与效果在对应酒品条目内。",
-          "拆除任一桶身部分会拆下整桶；先取走成品和物品，桶内液体不会保留。"
-        ],
         "zh_TW": [
-          "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
-          "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
-          "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+          "酒桶需要 3×3×3 空間。潛行空手開蓋，先加入四桶同種配方液體（4,000 mB），再放原料。各種原料盡量等量；開始釀造會消耗全部原料，產量取數量最少的一種，無配料配方通常產出 16 瓶。",
+          "潛行空手關蓋，等待酒桶顯示成品及品質 1。有成品時不能開蓋，必須先經酒嘴取空。",
+          "在酒桶正面中央的孔口裝酒嘴，將酒館空酒瓶放在酒嘴緊貼的正下方；空手點酒嘴，約 1.5 秒後收回成酒。品質 1 即可取酒，提前取出的酒不再隨桶熟成。",
+          "標準配方從品質 1 升至 2、3、4、5、6，各需約 2、4、6、8、10 分鐘；從品質 1 至 6 合計約 30 分鐘。只在區塊載入時推進，實際時間以桶身倒數為準；附屬配方可設定不同時間。",
           "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
         ],
+        "zh_CN": [
+          "酒桶需要 3×3×3 空间。潜行空手开盖，先加入四桶同种配方液体（4,000 mB），再放原料。各种原料尽量等量；开始酿造会消耗全部原料，产量取数量最少的一种，无配料配方通常产出 16 瓶。",
+          "潜行空手关盖，等待酒桶显示成品及品质 1。有成品时不能开盖，必须先经酒嘴取空。",
+          "在酒桶正面中央的孔口装酒嘴，将酒馆空酒瓶放在酒嘴紧贴的正下方；空手点酒嘴，约 1.5 秒后收回成酒。品质 1 即可取酒，提前取出的酒不再随桶熟成。",
+          "标准配方从品质 1 升至 2、3、4、5、6，各需约 2、4、6、8、10 分钟；从品质 1 至 6 合计约 30 分钟。只在区块加载时推进，实际时间以桶身倒数为准；附属配方可设置不同时间。",
+          "拆除任一桶身部分会拆下整桶；先取走成品和物品，桶内液体不会保留。"
+        ],
         "en_US": [
-          "Sneak-use the barrel with an empty hand to open or close its lid. Add the recipe fluid first, up to four buckets (4,000 mB), then the ingredients.",
-          "Keep ingredient stacks equally sized. Closing the lid starts brewing and consumes all loaded ingredients. Open it and collect the result with empty bottles.",
-          "Leave the batch in a loaded barrel to age, up to quality 6. Each drink entry contains its recipe and effects.",
+          "A barrel needs a clear 3 x 3 x 3 space. Sneak-use it with an empty hand to open the lid. Add four buckets of the same recipe fluid (4,000 mB), then the ingredients. Keep stacks equal: brewing consumes all ingredients and yields the smallest stack count. Ingredient-free recipes usually yield 16 bottles.",
+          "Sneak-use with an empty hand to close the lid. Wait until the barrel shows a product at quality 1. The lid stays locked while products remain; empty it through the tap.",
+          "Fit the tap to the central hole on the front. Place a Tavern empty bottle directly below it, then use the tap with an empty hand. Collect the filled bottle after about 1.5 seconds. Quality 1 can already be bottled; a removed bottle stops aging.",
+          "Standard recipes take about 2, 4, 6, 8 and 10 minutes to advance from quality 1 to 2, 3, 4, 5 and 6: about 30 minutes total. Aging advances only in loaded chunks. Read the barrel countdown for the actual time; addon recipes may use other timings.",
           "Breaking any part dismantles the barrel. Remove products and items first; stored fluid is lost."
         ]
       },
@@ -4309,23 +4313,23 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/tap",
       "kinds": [],
       "mechanics": [
-        "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
+        "在酒桶正面中央的孔口裝上酒嘴。桶中出現品質 1 成品後即可取酒，不必等到品質 6；有成品時不能開蓋。",
         "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
         "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "确认酒桶已完成熟成且酒嘴装在桶身；酒嘴只会在有可装瓶的成品时出酒。",
+          "在酒桶正面中央的孔口装上酒嘴。桶中出现品质 1 成品后即可取酒，不必等到品质 6；有成品时不能开盖。",
           "把一个空酒瓶方块放在酒嘴正下方，再空手点酒嘴开启。等待 30 tick（约 1.5 秒），下方空瓶会变成该桶当前品质的成酒；取走酒瓶即可。",
           "酒嘴开启时可再空手点击关闭；红石上升沿也可开启。拆酒桶前先取走液体、配料和成酒，拆任一桶身部件都会拆掉整桶，桶内液体不会保留。"
         ],
         "zh_TW": [
-          "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
+          "在酒桶正面中央的孔口裝上酒嘴。桶中出現品質 1 成品後即可取酒，不必等到品質 6；有成品時不能開蓋。",
           "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
           "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
         ],
         "en_US": [
-          "Install the tap on a completed barrel; it dispenses only when a finished drink is available.",
+          "Fit the tap to the central hole on the barrel front. Bottling is available as soon as a quality 1 product appears; quality 6 is not required. The lid stays locked while products remain.",
           "Place an empty bottle block directly below the tap, then use the tap with an empty hand. After 30 ticks (about 1.5 seconds), the bottle becomes the drink at the barrel’s current quality; take the filled bottle.",
           "Use the tap again with an empty hand to close it; a redstone rising edge can open it too. Empty the barrel before dismantling: breaking any barrel part dismantles the whole barrel and its liquid is lost."
         ]

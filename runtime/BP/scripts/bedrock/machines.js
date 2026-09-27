@@ -1,3 +1,4 @@
+import {playWorldSound,spawnWorldParticle} from './feedback-diagnostics.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {waterSnapshot,setWithWater,restoreWater} from './waterlogging.js';
@@ -204,9 +205,9 @@ function tapCarrier(tap,carrierId){
  if(carrierId===NS+':empty_bottle'&&below?.typeId===PLACED_EMPTY)return {kind:'block',block:below,facing:bottleFacingFromCardinal(below.permutation.getState(CARDINAL))};
  const entity=tapCarrierEntity(tap,carrierId);return entity?{kind:'entity',entity,facing:0}:undefined;
 }
-function tapSound(block,open){try{block.dimension.playSound(open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}catch{}}
+function tapSound(block,open){playWorldSound(block.dimension,open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}
 function tapParticle(block,empty=false,fluid='water'){
- try{block.dimension.spawnParticle(empty?'minecraft:basic_smoke_particle':fluid==='lava'?'kt_assets_a17:lava_tap_drip':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});}catch{}
+ spawnWorldParticle(block.dimension,empty?'minecraft:basic_smoke_particle':fluid==='lava'?'kt_assets_a17:lava_tap_drip':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});
 }
 function cancelTapSession(block,manual=false){
  const key=tapKey(block),s=tapSessions.get(key);if(s?.timer)system.clearRun(s.timer);tapSessions.delete(key);
@@ -266,7 +267,7 @@ export function finishTapExtraction(tap,expectedCoreLocation){
   }catch(e){
    try{undoOutput?.();}catch{}try{undoCarrier?.();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
   }
-  safeVisuals(core,tx.state);try{tap.dimension.playSound('random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});}catch{}diagnostics.tap.extracted++;return tx;
+  safeVisuals(core,tx.state);playWorldSound(tap.dimension,'random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});diagnostics.tap.extracted++;return tx;
  });
 }
 function sameLocation(a,b){return !!a&&!!b&&a.x===b.x&&a.y===b.y&&a.z===b.z;}
@@ -277,7 +278,7 @@ export function finishWaterCauldronTap(tap,expectedSourceLocation){
   if(destination.kind==='bottle')destination.block.setPermutation(BlockPermutation.resolve(WATER_BOTTLE,{[CARDINAL]:'north'}));
   else destination.block.setPermutation(destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
  }catch(e){try{destination.block.setPermutation(old);}catch{}throw e;}
- try{tap.dimension.playSound(destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});}catch{}
+ playWorldSound(tap.dimension,destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});
  diagnostics.tap.waterCauldronExtracted++;return true;
 }
 function finishTapSession(key){

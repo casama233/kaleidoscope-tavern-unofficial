@@ -3,6 +3,23 @@
 import concurrent.futures,hashlib,json,subprocess,tempfile,urllib.request,zipfile
 from pathlib import Path
 
+EXTRA_CLASSES={
+    'net.minecraft.client.multiplayer.ClientLevel',
+    'net.minecraft.client.renderer.LevelRenderer',
+    'net.minecraft.util.ParticleUtils',
+    'net.minecraft.world.item.BoneMealItem',
+    'net.minecraft.world.entity.projectile.ThrownPotion',
+    'net.minecraft.world.item.alchemy.PotionUtils',
+    'net.minecraft.core.particles.ParticleTypes',
+    'net.minecraft.world.effect.MobEffects',
+    'net.minecraft.core.Direction',
+}
+EXTRA_TEXTURES={
+    'assets/minecraft/textures/block/glass.png',
+    'assets/minecraft/textures/item/splash_potion.png',
+    'assets/minecraft/textures/item/potion_overlay.png',
+}
+
 def get(url):
     with urllib.request.urlopen(url,timeout=60) as r:return r.read()
 def verified(entry):
@@ -19,7 +36,7 @@ def collect(out):
     for line in mapping.splitlines():
         if line and not line[0].isspace() and ' -> ' in line:
             name,obf=line[:-1].split(' -> ')
-            current=name if name.startswith('net.minecraft.client.particle.') or name=='net.minecraft.client.multiplayer.ClientLevel' else None
+            current=name if name.startswith('net.minecraft.client.particle.') or name in EXTRA_CLASSES else None
             if current:mappings[current]={'obf':obf,'lines':[line]}
         elif current:mappings[current]['lines'].append(line)
     (out/'mappings.txt').write_text('\n'.join('\n'.join(v['lines']) for v in mappings.values()))
@@ -27,7 +44,7 @@ def collect(out):
         jar=Path(tmp)/'client.jar';jar.write_bytes(verified(meta['downloads']['client']))
         with zipfile.ZipFile(jar) as archive:
             for name in archive.namelist():
-                if (name.startswith('assets/minecraft/textures/particle/') and name.endswith('.png')) or (name.startswith('assets/minecraft/particles/') and name.endswith('.json')):
+                if name in EXTRA_TEXTURES or (name.startswith('assets/minecraft/textures/particle/') and name.endswith('.png')) or (name.startswith('assets/minecraft/particles/') and name.endswith('.json')):
                     dest=out/name;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(archive.read(name))
         (out/'instructions').mkdir(exist_ok=True)
         def listing(item):
@@ -48,7 +65,7 @@ def collect(out):
         for sound in row['sounds']:
             name=sound if isinstance(sound,str) else sound['name']
             if not isinstance(sound,dict) or sound.get('type')!='event':asset('minecraft/sounds/'+name+'.ogg')
-    (out/'PROVENANCE.json').write_text(json.dumps({'version':'1.20.1','metadata_url':meta_url,'client':meta['downloads']['client'],'mappings':meta['downloads']['client_mappings'],'assetIndex':meta['assetIndex'],'selectedSounds':selected},indent=2)+'\n')
+    (out/'PROVENANCE.json').write_text(json.dumps({'version':'1.20.1','metadata_url':meta_url,'client':meta['downloads']['client'],'mappings':meta['downloads']['client_mappings'],'assetIndex':meta['assetIndex'],'selectedSounds':selected,'extraClasses':sorted(EXTRA_CLASSES),'extraTextures':sorted(EXTRA_TEXTURES)},indent=2)+'\n')
 if __name__=='__main__':
     import sys
     collect(Path(sys.argv[1] if len(sys.argv)>1 else 'vanilla-reference'))

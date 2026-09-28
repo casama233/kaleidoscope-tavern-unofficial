@@ -2,7 +2,7 @@ name: Refresh current foundation test fixtures
 on:
   push:
     branches: ['fix/effects-report-followup-20260928']
-    paths: ['tools/foundation/refresh-current-fixtures.py', '.github/workflows/refresh-foundation-fixtures.yml']
+    paths: ['tools/foundation/refresh-current-fixtures.py', 'tools/test_pick_block.py', '.github/workflows/refresh-foundation-fixtures.yml']
 permissions:
   contents: write
 jobs:
@@ -34,8 +34,8 @@ jobs:
           set -euo pipefail
           mkdir -p ../evidence
           node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/foundation-tests.tap
-          python tools/test_pick_block.py | tee ../evidence/native-pick.txt
-          python tools/creative/test_catalog.py | tee ../evidence/creative-catalog.txt
+          python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick.txt
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-catalog.txt
           python ../liquor/tools/build_effect_names.py --check
           node --test tools/effect-bar.test.mjs | tee ../evidence/effect-bar.tap
           git diff --exit-code -- runtime history

@@ -32,14 +32,15 @@ jobs:
               else:source+="system.runTimeout(()=>{console.warn('[SCOPE-B-READ] '+String(world.getDynamicProperty(key)));world.setDynamicProperty(key,'written-by-B');console.warn('[SCOPE-B-WRITE] '+String(world.getDynamicProperty(key)));},60);"
               source+='});';(p/'scripts/main.js').write_text(source)
           (w/'world_behavior_packs.json').write_text(json.dumps(packs));(root/'allowlist.json').write_text('[]')
-          (root/'server.properties').write_text('level-name=Scope\nlevel-type=FLAT\nallow-cheats=true\nonline-mode=false\nallow-list=true\nmax-players=1\nenable-lan-visibility=false\nview-distance=4\ntick-distance=4\nmax-threads=2\npause-when-empty-seconds=0\ncontent-log-console-output-enabled=true\n')
+          (root/'server.properties').write_text('level-name=Scope\nlevel-type=FLAT\nallow-cheats=true\nonline-mode=true\nallow-list=true\nmax-players=1\nenable-lan-visibility=false\nview-distance=4\ntick-distance=4\nmax-threads=2\npause-when-empty-seconds=0\ncontent-log-console-output-enabled=true\n')
           with (out/'property-scope.log').open('w') as log:
               p=subprocess.Popen([str(exe.resolve())],cwd=root,env=dict(os.environ,LD_LIBRARY_PATH=str(root.resolve())),stdin=subprocess.PIPE,stdout=log,stderr=subprocess.STDOUT,text=True)
-              time.sleep(18)
+              time.sleep(22)
               try:p.communicate('stop\n',timeout=15)
               except subprocess.TimeoutExpired:p.kill();p.wait()
           text=(out/'property-scope.log').read_text();result={'bdsUrl':url,'bdsSha256':hashlib.sha256(raw).hexdigest(),'packHeaders':packs,'playersSimulated':False,'existingWorldAccessed':False,'isolatedKeys':('[SCOPE-B-READ] undefined' in text and '[SCOPE-A-FINAL] written-by-A' in text),'sharedKeys':('[SCOPE-B-READ] written-by-A' in text and '[SCOPE-A-FINAL] written-by-B' in text),'exitCode':p.returncode}
           (out/'property-scope.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+          assert result['isolatedKeys'] or result['sharedKeys'],'Native probe did not execute; no scope conclusion'
           PY
       - uses: actions/upload-artifact@v4
         if: always()

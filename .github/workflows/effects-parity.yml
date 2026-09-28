@@ -35,6 +35,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Collect fixed-version constructor reference (no full game archive)
+        run: python bedrock/tools/effects/collect_reference.py vanilla-reference
       - name: Record pinned sources and run available effect tests
         run: |
           printf 'Bedrock: ' > SOURCE_COMMITS.txt
@@ -49,7 +51,7 @@ jobs:
           if test -f bedrock/tools/tap/tap-regression.test.mjs; then
             (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
           fi
-          tar --exclude='.git' --exclude='node_modules' -czf effects-source-snapshot.tar.gz bedrock java native SOURCE_COMMITS.txt
+          tar --exclude='.git' --exclude='node_modules' --exclude='*.fsb' -czf effects-source-snapshot.tar.gz bedrock java native vanilla-reference SOURCE_COMMITS.txt
       - uses: actions/upload-artifact@v4
         with:
           name: effects-source-snapshot

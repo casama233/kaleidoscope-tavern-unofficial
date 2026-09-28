@@ -88,7 +88,10 @@ test('bar special single-bottle layout retains Java shared rule',()=>{
  const row=emptyExtensionStorage(def()),tx=barCabinetPut(row,false,KT+':brandy_q6');assert(tx.state.single);assert.equal(tx.state.left,KT+':brandy_q6');assert.equal(barCabinetPut(tx.state,true,regular.items[0]).changed,false);
 });
 test('shared transaction takes one item and returns exact quality',()=>{
- const p=makePlayer(),b=createBlock();near(p,b);p.inventory.setItem(0,new ItemStack(regular.items[5],2));assert(act(p,b));assert.equal(p.inventory.getItem(0).amount,1);assert.equal(host.load(b).state.left,regular.items[5]);p.inventory.setItem(0,undefined);assert(act(p,b));assert.equal(p.inventory.getItem(0).typeId,regular.items[5]);assert.equal(host.load(b).state.left,null);
+ const p=makePlayer(),b=createBlock();near(p,b);p.inventory.setItem(0,new ItemStack(regular.items[5],2));assert(act(p,b));assert.equal(p.inventory.getItem(0).amount,1);assert.equal(host.load(b).state.left,regular.items[5]);p.inventory.setItem(0,undefined);assert(act(p,b));// Empty-hand collection intentionally preserves the empty hand for repeat use.
+ assert.equal(p.inventory.getItem(0),undefined);
+ assert.deepEqual(p.inventory.items.filter(Boolean).map(item=>[item.typeId,item.amount]),[[regular.items[5],1]]);
+ assert.equal(host.load(b).state.left,null);
 });
 test('full inventory rejects direct recovery transaction without deleting storage',()=>{
  const p=makePlayer(),b=createBlock(def(),regular.items[5]);near(p,b);for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));

@@ -14,6 +14,12 @@ export async function load(url,context,next){
  source=source.replace('const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));',"const root=fileURLToPath(new URL('../../../',import.meta.url));");
  source+=`
 // Explicit test-only fixture additions for World Liquor and current stable API.
+// Keep the archived fake-server immutable. Its old delivery IDs and missing
+// Entity.isValid do not describe the current production API used by the host.
+potionDeliveries.clear();
+for(const [id,item]of [['Consume','minecraft:potion'],['ThrownSplash','minecraft:splash_potion'],['ThrownLingering','minecraft:lingering_potion']])potionDeliveries.set(id,item);
+Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
+Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}});
 export const EffectTypes={getAll:()=>[]};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
 world.getAbsoluteTime=()=>system.currentTick;

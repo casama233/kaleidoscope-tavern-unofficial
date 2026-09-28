@@ -1,0 +1,60 @@
+name: Family authenticated native audit
+on:
+  push:
+    branches: ['audit/family-compat-20260929']
+    paths: ['.github/workflows/family-native-authenticated.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  load:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: b3fdfd016b81060014476c5b8f68f2c744ade7ea
+          persist-credentials: false
+      - name: Prepare corrected audit harness without modifying any addon
+        run: |
+          python -m pip install PyYAML==6.0.2
+          python - <<'PY'
+          import hashlib,yaml
+          from pathlib import Path
+          p=Path('.github/workflows/family-compat-native-load.yml')
+          workflow=yaml.safe_load(p.read_text())
+          steps=workflow['jobs']['load']['steps']
+          # Replay only the two reviewed inline audit steps from this pinned
+          # source; third-party scripts are run only by native BDS.
+          assert len(steps)==3
+          setup=steps[0]['run'];load=steps[1]['run']
+          assert load.count("'online-mode':'false'")==1
+          load=load.replace("'online-mode':'false'","'online-mode':'true'")
+          # Load classes remain raw/dependency-only; never modify a runtime.
+          # Native observer output is required to accept a case as executed.
+          load=load.replace("out=Path('evidence');work=Path('work');packs={}","out=Path('evidence');work=Path('work');packs={}; validity=[]")
+          anchor="              print(name,'exit',p.returncode,'started', 'Server started' in text, 'observer','[FAMILY-PROBE]' in text)"
+          # The YAML block removes indentation; patch the actual Python line.
+          old="    print(name,'exit',p.returncode,'started', 'Server started' in text, 'observer','[FAMILY-PROBE]' in text)"
+          assert old in load
+          new=old+"\n    validity.append({'case':name,'serverStarted':'Server started' in text,'observerRan':'[FAMILY-PROBE]' in text,'harnessConfigurationError':'Using an allowlist without online authentication' in text})"
+          load=load.replace(old,new)
+          end="(out/'matrix-validity.json').write_text(json.dumps(validity,indent=2)+'\\n')\nassert validity and all(not row['harnessConfigurationError'] for row in validity)\nassert validity[0]['serverStarted'] and validity[0]['observerRan'],'Vanilla control did not load: matrix inconclusive'\n"
+          assert load.endswith('PY\n')
+          load=load[:-3]+end+'PY\n'
+          Path('/tmp/family-setup.sh').write_text('set -euo pipefail\n'+setup)
+          Path('/tmp/family-load.sh').write_text('set -euo pipefail\n'+load)
+          PY
+      - name: Download locked public packages and official BDS
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash /tmp/family-setup.sh
+      - name: Native eight-case matrix; zero players
+        run: bash /tmp/family-load.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-native-authenticated-evidence
+          path: evidence/
+          retention-days: 14

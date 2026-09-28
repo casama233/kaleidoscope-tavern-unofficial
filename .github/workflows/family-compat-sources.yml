@@ -1,0 +1,66 @@
+name: Family compatibility audit sources
+on:
+  push:
+    branches: ['audit/family-compat-20260929']
+    paths: ['.github/workflows/family-compat-sources.yml']
+permissions:
+  contents: read
+jobs:
+  collect:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: f793a98a0180e1948f98e69a8ca879a028884e38
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: ce8c41e48c731985221945479650de121e4d477c
+          path: world-liquor-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-grilling-unofficial
+          ref: 7ef78bb360ac6a34664a15deef2c2aff5cc3d719
+          path: grilling-src
+          persist-credentials: false
+      - name: Download public release archives without executing addon scripts
+        run: |
+          python - <<'PY'
+          import concurrent.futures,hashlib,json,subprocess,urllib.request,urllib.parse,zipfile
+          from pathlib import Path
+          out=Path('audit-inputs');out.mkdir()
+          targets=[('cookery-1.0.8',8983314,'Kaleidoscope Cookery v1.0.8.mcaddon'),('cookery-1.0.6',8908596,'Kaleidoscope Cookery v1.0.6.mcaddon'),('chinese-food-1.0.4',8983356,'Kaleidoscope Chinese Food v1.0.4.mcaddon'),('deco-1.0.1',8931626,'Kaleidoscope Deco v1.0.1.mcaddon'),('immersive-eating-1.0',8900604,'Kaleidoscope Immersive Eating v1.0.mcaddon'),('end-1.0.1',8990981,'Kaleidoscope End v1.0.1.mcaddon'),('nether-1.0.1',8990975,'Kaleidoscope Nether v1.0.1.mcaddon')]
+          def download(t):
+              key,file_id,name=t;result={'key':key,'fileId':file_id,'filename':name}
+              for host in ['edge.forgecdn.net','mediafilez.forgecdn.net']:
+                  url=f'https://{host}/files/{file_id//1000}/{file_id%1000}/'+urllib.parse.quote(name)
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Kaleidoscope-Compatibility-Audit/1.0'}),timeout=90) as response:raw=response.read()
+                      p=out/(key+'.mcaddon');p.write_bytes(raw)
+                      assert zipfile.is_zipfile(p),'Not a ZIP archive'
+                      if key=='cookery-1.0.6':assert hashlib.sha256(raw).hexdigest()=='c589efb60277bea295ac12ef760d8f2c7e8af3ea62e809b320862bd786033351'
+                      result.update(url=url,sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw),status='downloaded');return result
+                  except Exception as exc:result.setdefault('errors',[]).append(str(exc))
+              result['status']='failed';return result
+          results=list(concurrent.futures.ThreadPoolExecutor(max_workers=4).map(download,targets))
+          for directory in ['tavern-src','world-liquor-src','grilling-src']:
+              sha=subprocess.check_output(['git','-C',directory,'rev-parse','HEAD'],text=True).strip()
+              target=out/(directory+'.zip')
+              # Archives include committed source only; no installed worlds, tokens or local logs.
+              args=['git','-C',directory,'archive','--format=zip','HEAD']
+              if directory=='grilling-src':args+=['projects/grilling/gameplay_core','development/gameplay_core','tools','docs','AGENTS.md','.repo-target.json','README.md']
+              with target.open('wb') as f:subprocess.run(args,stdout=f,check=True)
+              results.append({'key':directory,'commit':sha,'filename':target.name,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'status':'archived'})
+          (out/'SOURCE-LOCK.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(results,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: family-compat-audit-inputs
+          path: audit-inputs/
+          retention-days: 1

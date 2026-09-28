@@ -1,4 +1,5 @@
 import {playWorldSound,spawnWorldParticle} from './feedback-diagnostics.js';
+import {replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {waterSnapshot,setWithWater,restoreWater} from './waterlogging.js';
@@ -224,15 +225,18 @@ function tapCanExtract(core,tap,player){
   return true;
  }catch(e){if(player)warn(e,player.id);return false;}
 }
-function createTapOutput(tap,itemId,facing=0){
+function createTapOutput(tap,itemId,facing=0,replacePlacedCarrier=false){
  check(ItemTypes.get(itemId),'UNKNOWN_ITEM');const belowPos=tapBelow(tap),below=blockAt(tap.dimension,belowPos);check(below,'CORE_UNAVAILABLE');
  const parsed=parseBottle(itemId);
- if(below.isAir&&parsed){
+ if(replacePlacedCarrier)check(parsed&&below.typeId===PLACED_EMPTY,'TAP_CARRIER_CHANGED');
+ if(parsed&&(below.isAir||replacePlacedCarrier)){
   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
   const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
-  try{below.setPermutation(BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:facing}));bottleStore.save(key,state,-1);}
-  catch(e){try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
-  return ()=>{try{below.setPermutation(old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
+  // Java replaces the placed carrier in situ; script replacement is not a break.
+  // Guard BOTH conversion and rollback against queued native onBreak callbacks.
+  try{replaceBlockWithoutNaturalDrops(below,BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:facing}));bottleStore.save(key,state,-1);}
+  catch(e){try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
+  return ()=>{try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
  }
  const drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});
  return ()=>{try{drop.remove();}catch{}};
@@ -240,8 +244,8 @@ function createTapOutput(tap,itemId,facing=0){
 function consumeTapCarrier(tap,carrier,carrierId){
  if(carrier?.kind==='block'){
   const block=carrier.block;check(carrierId===NS+':empty_bottle'&&block?.typeId===PLACED_EMPTY,'TAP_CARRIER_CHANGED');const old=block.permutation;
-  block.setType('minecraft:air');
-  return ()=>{diagnostics.tap.carrierRollbacks++;try{block.setPermutation(old);}catch(err){warn(err,'tap-carrier-rollback');}};
+  replaceBlockWithoutNaturalDrops(block,BlockPermutation.resolve('minecraft:air'));
+  return ()=>{diagnostics.tap.carrierRollbacks++;try{replaceBlockWithoutNaturalDrops(block,old);}catch(err){warn(err,'tap-carrier-rollback');}};
  }
  const entity=carrier?.entity,comp=entity?.getComponent?.('minecraft:item'),stack=comp?.itemStack;check(stack?.typeId===carrierId&&stack.amount>0,'TAP_CARRIER_CHANGED');
  const original=stack.clone(),at={...entity.location};let remainder;
@@ -259,10 +263,14 @@ export function finishTapExtraction(tap,expectedCoreLocation){
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
   const carrierId=state.batch.carrier,carrier=tapCarrier(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
   const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
+  const outputId=tx.give[0].id;check(ItemTypes.get(outputId),'UNKNOWN_ITEM');
+  const replacePlacedCarrier=carrier.kind==='block'&&!!parseBottle(outputId);
   const raw=store.raw(key);let undoCarrier,undoOutput;
   try{
-   undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
-   undoOutput=createTapOutput(tap,tx.give[0].id,carrier.facing??0);
+   // A placed drink bottle transforms directly, without an intermediate air block.
+   // Item-entity carriers and non-bottle outputs still consume exactly one carrier.
+   if(!replacePlacedCarrier)undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
+   undoOutput=createTapOutput(tap,outputId,carrier.facing??0,replacePlacedCarrier);
    store.save(key,tx.state,state.revision);
   }catch(e){
    try{undoOutput?.();}catch{}try{undoCarrier?.();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
@@ -275,9 +283,9 @@ export function finishWaterCauldronTap(tap,expectedSourceLocation){
  check(tap?.typeId===TAP,'NOT_TAP');const source=waterCauldronSource(tap);if(!source||expectedSourceLocation&&!sameLocation(source.block.location,expectedSourceLocation))return false;
  const destination=waterCauldronDestination(tap);if(!destination)return false;const old=destination.block.permutation;
  try{
-  if(destination.kind==='bottle')destination.block.setPermutation(BlockPermutation.resolve(WATER_BOTTLE,{[CARDINAL]:'north'}));
-  else destination.block.setPermutation(destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
- }catch(e){try{destination.block.setPermutation(old);}catch{}throw e;}
+  if(destination.kind==='bottle')replaceBlockWithoutNaturalDrops(destination.block,BlockPermutation.resolve(WATER_BOTTLE,{[CARDINAL]:'north'}));
+  else replaceBlockWithoutNaturalDrops(destination.block,destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
+ }catch(e){try{replaceBlockWithoutNaturalDrops(destination.block,old);}catch{}throw e;}
  playWorldSound(tap.dimension,destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});
  diagnostics.tap.waterCauldronExtracted++;return true;
 }

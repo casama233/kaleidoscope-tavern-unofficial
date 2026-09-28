@@ -1,59 +1,50 @@
-name: Effects parity audit
+name: Effects parity regression
 on:
   push:
     branches: ['fix/effects-parity-20260928']
-    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'tools/build_incense_emitters.py', 'runtime/**', 'docs/EFFECTS-*']
   pull_request:
-    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'tools/build_incense_emitters.py', 'runtime/**', 'docs/EFFECTS-*']
 permissions:
   contents: read
 jobs:
-  audit:
+  regression:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          path: bedrock
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: KaleidoscopeMods/KaleidoscopeTavern
-          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
-          path: java
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: Mojang/bedrock-samples
-          ref: 46ba6ea985fb5a92d79a9419198f10dda14c199d
-          path: native
-          sparse-checkout: |
-            resource_pack/particles
-            resource_pack/textures/particle
-            resource_pack/sounds
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collect fixed-version constructor reference (no full game archive)
-        run: python bedrock/tools/effects/collect_reference.py vanilla-reference
-      - name: Record pinned sources and run available effect tests
-        run: |
-          printf 'Bedrock: ' > SOURCE_COMMITS.txt
-          git -C bedrock rev-parse HEAD >> SOURCE_COMMITS.txt
-          printf 'Java: ' >> SOURCE_COMMITS.txt
-          git -C java rev-parse HEAD >> SOURCE_COMMITS.txt
-          printf 'Native samples: ' >> SOURCE_COMMITS.txt
-          git -C native rev-parse HEAD >> SOURCE_COMMITS.txt
-          if test -f bedrock/tools/effects/effects-regression.test.mjs; then
-            (cd bedrock && node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs)
-          fi
-          if test -f bedrock/tools/tap/tap-regression.test.mjs; then
-            (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
-          fi
-          tar --exclude='.git' --exclude='node_modules' --exclude='*.fsb' -czf effects-source-snapshot.tar.gz bedrock java native vanilla-reference SOURCE_COMMITS.txt
-      - uses: actions/upload-artifact@v4
+      - uses: actions/setup-python@v5
         with:
-          name: effects-source-snapshot
-          path: effects-source-snapshot.tar.gz
-          retention-days: 7
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Run effects regression (includes the 19 tap tests once)
+        run: |
+          set -o pipefail
+          node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs | tee effects-tests.tap
+      - name: Parse scripts and JSON; check deterministic regeneration
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          scripts=list(Path('runtime/BP/scripts').rglob('*.js'))
+          resources=list(Path('runtime').rglob('*.json'))
+          for p in resources:json.loads(p.read_text())
+          for p in scripts:subprocess.run(['node','--check',str(p)],check=True)
+          Path('effects-static-checks.json').write_text(json.dumps({'scripts':len(scripts),'json':len(resources),'result':'passed','bds':'NOT RUN','native_client':'NOT RUN','native_molang_parser':'NOT RUN'},indent=2)+'\n')
+          PY
+          git diff --exit-code -- runtime/RP/particles tools/effects/tap-drip-reference.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: effects-regression-evidence
+          path: |
+            effects-tests.tap
+            effects-static-checks.json
+            docs/EFFECTS-PARITY-AUDIT-20260928.md
+            docs/effects-source-index-20260928.json
+          retention-days: 14

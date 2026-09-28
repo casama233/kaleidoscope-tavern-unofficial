@@ -1,4 +1,6 @@
 import {playWorldSound,spawnWorldParticle} from './feedback-diagnostics.js';
+import {emitBurst,tapComplete} from './effect-feedback.js';
+import {TAP_EFFECT_TIMING} from '../core/effect-feedback.js';
 import {replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
@@ -208,15 +210,15 @@ function tapCarrier(tap,carrierId){
 }
 function tapSound(block,open){playWorldSound(block.dimension,open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}
 function tapParticle(block,empty=false,fluid='water'){
- spawnWorldParticle(block.dimension,empty?'minecraft:basic_smoke_particle':fluid==='lava'?'kt_assets_a17:lava_tap_drip':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});
+ if(empty)return emitBurst(block.dimension,block.location,'tap_empty');
+ spawnWorldParticle(block.dimension,fluid==='lava'?'kt_assets_a17:lava_tap_drip':'kt_assets_a17:water_tap_drip',{x:block.location.x+.5,y:block.location.y+.25,z:block.location.z+.5});
 }
 function cancelTapSession(block,manual=false){
  const key=tapKey(block),s=tapSessions.get(key);if(s?.timer)system.clearRun(s.timer);tapSessions.delete(key);
  if(tapOpen(block)){setTapOpen(block,false);tapSound(block,false);}if(manual)diagnostics.tap.manualCancels++;return !!s;
 }
-function scheduleTapParticles(block,key,empty,fluid='water'){
- const count=5;
- for(let i=1;i<=count;i++)system.runTimeout(()=>{const s=tapSessions.get(key),b=blockAt(block.dimension,block.location);if(!s||!b||b.typeId!==TAP||!tapOpen(b))return;if(empty&&i%2===1)return;tapParticle(b,empty,fluid);},i);
+function scheduleTapParticles(block,key,session,empty,fluid='water'){
+ for(const i of (empty?TAP_EFFECT_TIMING.emptyTicks:TAP_EFFECT_TIMING.dripTicks))system.runTimeout(()=>{const b=blockAt(block.dimension,block.location);if(tapSessions.get(key)!==session||!b||b.typeId!==TAP||!tapOpen(b))return;tapParticle(b,empty,fluid);},i);
 }
 function tapCanExtract(core,tap,player){
  try{
@@ -275,7 +277,7 @@ export function finishTapExtraction(tap,expectedCoreLocation){
   }catch(e){
    try{undoOutput?.();}catch{}try{undoCarrier?.();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
   }
-  safeVisuals(core,tx.state);playWorldSound(tap.dimension,'random.brewing_stand_brew',tapBelow(tap),{volume:1,pitch:1});diagnostics.tap.extracted++;return tx;
+  safeVisuals(core,tx.state);tapComplete(tap);diagnostics.tap.extracted++;return tx;
  });
 }
 function sameLocation(a,b){return !!a&&!!b&&a.x===b.x&&a.y===b.y&&a.z===b.z;}
@@ -286,7 +288,7 @@ export function finishWaterCauldronTap(tap,expectedSourceLocation){
   if(destination.kind==='bottle')replaceBlockWithoutNaturalDrops(destination.block,BlockPermutation.resolve(WATER_BOTTLE,{[CARDINAL]:'north'}));
   else replaceBlockWithoutNaturalDrops(destination.block,destination.block.permutation.withState(CAULDRON_LIQUID,'water').withState(FILL_LEVEL,6));
  }catch(e){try{replaceBlockWithoutNaturalDrops(destination.block,old);}catch{}throw e;}
- playWorldSound(tap.dimension,destination.kind==='bottle'?'random.brewing_stand_brew':'random.splash',tapBelow(tap),{volume:1,pitch:1});
+ tapComplete(tap,'water_cauldron',destination.kind==='bottle');
  diagnostics.tap.waterCauldronExtracted++;return true;
 }
 function finishTapSession(key){
@@ -310,10 +312,12 @@ export function tryOpenTap(tap,player,{redstone=false}={}){
   if(source&&destination){kind='water_cauldron';sourceLocation={...source.block.location};destinationLocation={...destination.block.location};}
   else{const match=inspectTapSource(tap);if(match){kind=match.kind;sourceLocation={...match.source.location};destinationLocation={...match.destination.location};fluid=match.particle;}}
  }
- const extract=kind!=='empty',ticks=extract?30:5;
+ const extract=kind!=='empty',ticks=extract?TAP_EFFECT_TIMING.extract:TAP_EFFECT_TIMING.empty;
  setTapOpen(tap,true);tapSound(tap,true);diagnostics.tap.opened++;if(redstone)diagnostics.tap.redstoneOpens++;if(!extract)diagnostics.tap.emptyOpens++;
  const session={kind,dimension:tap.dimension,location:{...tap.location},coreLocation,sourceLocation,destinationLocation,start:system.currentTick};
- session.timer=system.runTimeout(()=>finishTapSession(key),ticks);tapSessions.set(key,session);scheduleTapParticles(tap,key,!extract,fluid);return true;
+ tapSessions.set(key,session);scheduleTapParticles(tap,key,session,!extract,fluid);
+ // Register closing after tick6's particle: Java emits before shutting off.
+ session.timer=system.runTimeout(()=>{if(tapSessions.get(key)===session)finishTapSession(key);},ticks);return true;
 }
 export function toggleTap(tap,player){
  if(tapOpen(tap)){cancelTapSession(tap,true);return false;}return tryOpenTap(tap,player);

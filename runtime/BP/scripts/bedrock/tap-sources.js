@@ -1,4 +1,5 @@
 import {BlockPermutation,world,system} from '@minecraft/server';
+import {tapComplete} from './effect-feedback.js';
 import {BottleStore,bottleKey,displayAdd} from '../core/bottles.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {planInventory,commitInventory} from '../core/inventory.js';
@@ -65,7 +66,7 @@ const restore=(b,permutation)=>{try{b.setPermutation(permutation);}catch{}};
 export function finishSourceTap(tap,{kind,sourceLocation,destinationLocation}){
  if(tap?.typeId!==TAP)return false;
  const match=unchanged(tap,sourceLocation,destinationLocation,kind);if(!match)return false;
- const {source,destination}=match,oldSource=waterSnapshot(source),oldDestination=waterSnapshot(destination);
+ const {source,destination}=match,wasBottle=isBottle(destination),oldSource=waterSnapshot(source),oldDestination=waterSnapshot(destination);
  const drinkKey=kind==='melon'?bottleKey(tap.dimension.id,destination.location):undefined,oldDrink=drinkKey?productStore.raw(drinkKey):undefined;
  if(kind==='melon')check(oldDrink===undefined,'STORAGE_CONFLICT');
  try{
@@ -86,7 +87,7 @@ export function finishSourceTap(tap,{kind,sourceLocation,destinationLocation}){
   }
   else return false;
  }catch(e){restoreWater(source,oldSource);restoreWater(destination,oldDestination);if(drinkKey)try{productStore.restore(drinkKey,oldDrink);}catch{}throw e;}
- try{tap.dimension.playSound((kind==='water_cauldron'||kind==='waterlogged')&&!isBottle(destination)?'random.splash':'random.brewing_stand_brew',{x:destination.location.x,y:destination.location.y,z:destination.location.z},{volume:1,pitch:1});}catch{}
+ tapComplete(tap,kind,wasBottle);
  return true;
 }
 

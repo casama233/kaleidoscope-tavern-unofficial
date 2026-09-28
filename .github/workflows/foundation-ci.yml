@@ -22,7 +22,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: b6d52c65ca314afc24fb3eaa87eebb7755dce71f
+          # 0.1.27 pairs with Tavern 0.6.63; the former 0.1.7 pin predates
+          # the shared creative taxonomy and cannot validate current catalogs.
+          ref: ce8c41e48c731985221945479650de121e4d477c
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4

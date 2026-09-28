@@ -31,12 +31,11 @@ jobs:
           assert hook in load
           js="""import {world,system} from '@minecraft/server';
           import {getGuidebookExtensions} from './api/guidebookExtensionRegistry.js';
-          import {getWokRecipes,getStockpotExactRecipes,getExtensionTeapotRecipe,getExtensionBoardNativeModel} from './api/extensionRegistry.js';
+          import {getWokRecipes,getStockpotExactRecipes,getExtensionTeapotRecipe,getExtensionBoardNativeModelSlot} from './api/extensionRegistry.js';
           world.afterEvents.worldLoad.subscribe(()=>{for(const delay of [300,1000])system.runTimeout(()=>{
           try { const guides=getGuidebookExtensions().map(g=>({id:g.id,source:g.source,categories:g.categories.length,entries:g.entries.length,mechanicsEntries:g.entries.filter(e=>e.mechanics.length).length,localeMechanicsEntries:g.entries.filter(e=>Object.keys(e.mechanicsByLocale).length).length}));
-          console.warn('[HOST-REGISTRY] '+JSON.stringify({tick:system.currentTick,players:world.getAllPlayers().length,guides,wok:getWokRecipes().length,stockpot:getStockpotExactRecipes().length,chorusTea:getExtensionTeapotRecipe('kaleidoscope_end:chorus_petal','minecraft:water')?.result??null,hamSlot:getExtensionBoardNativeModel('kaleidoscope_nether:ham')??null,croakerSlot:getExtensionBoardNativeModel('kaleidoscope_chinesefood:yellow_croaker')??null})); }catch(e){console.warn('[HOST-REGISTRY-ERROR] '+e);}
+          console.warn('[HOST-REGISTRY] '+JSON.stringify({tick:system.currentTick,players:world.getAllPlayers().length,guides,wok:getWokRecipes().length,stockpot:getStockpotExactRecipes().length,chorusTea:getExtensionTeapotRecipe('kaleidoscope_end:chorus_petal','minecraft:water')?.result??null,hamSlot:getExtensionBoardNativeModelSlot('kaleidoscope_nether:ham')??null,croakerSlot:getExtensionBoardNativeModelSlot('kaleidoscope_chinesefood:yellow_croaker')??null})); }catch(e){console.warn('[HOST-REGISTRY-ERROR] '+e);}
           },delay);});"""
-          # Confirm export spelling from the locked downloaded source during setup.
           append="    host=w/'behavior_packs'/packs['cookery-1.0.8']['BP'][1]['header']['uuid']\n    entry=host/'scripts/main.js'\n    entry.write_text(entry.read_text()+\"\\nimport './family-audit-readonly.js';\\n\")\n    (host/'scripts/family-audit-readonly.js').write_text("+repr(js)+")\n    (out/'HOST-INSTRUMENTATION.txt').write_text('DIAGNOSTIC ONLY: Cookery entry imports one added read-only native registry logger; Tavern/Grilling dependencies rebound to108. No player or recipe actions. Not a shipping pack.\\n')\n"
           load=load.replace(hook,append+hook)
           Path('/tmp/family-setup.sh').write_text('set -euo pipefail\n'+setup)
@@ -48,7 +47,7 @@ jobs:
         run: bash /tmp/family-setup.sh
       - name: Read actual native normalized registries, no simulated players
         run: |
-          grep -q 'export function getExtensionBoardNativeModel' 'work/cookery-1.0.8/Kaleidoscope Cookery v1.0.8 [BP]/scripts/api/extensionRegistry.js'
+          grep -Fq 'export function getExtensionBoardNativeModelSlot(' 'work/cookery-1.0.8/Kaleidoscope Cookery v1.0.8 [BP]/scripts/api/extensionRegistry.js'
           bash /tmp/family-load.sh
           grep -q '\[HOST-REGISTRY\]' evidence/08-instrumented-host-registry.log
       - uses: actions/upload-artifact@v4

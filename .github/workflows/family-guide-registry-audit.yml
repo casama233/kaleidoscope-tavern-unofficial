@@ -1,0 +1,59 @@
+name: Family guide registry diagnostic
+on:
+  push:
+    branches: ['audit/family-compat-20260929']
+    paths: ['.github/workflows/family-guide-registry-audit.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnostic:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: b3fdfd016b81060014476c5b8f68f2c744ade7ea
+          persist-credentials: false
+      - name: Create instrumented-host diagnostic harness; never ship this host copy
+        run: |
+          python -m pip install PyYAML==6.0.2
+          python - <<'PY'
+          import re,yaml
+          from pathlib import Path
+          steps=yaml.safe_load(Path('.github/workflows/family-compat-native-load.yml').read_text())['jobs']['load']['steps']
+          setup=steps[0]['run'];load=steps[1]['run']
+          assert load.count("'online-mode':'false'")==1
+          load=load.replace("'online-mode':'false'","'online-mode':'true'")
+          load,n=re.subn(r'^cases=.*$',"cases=[('08-instrumented-host-registry',family,True)]",load,flags=re.M);assert n==1
+          hook="    uid=str(uuid.uuid5(uuid.NAMESPACE_URL,'https://github.com/casama233/kaleidoscope-tavern-unofficial/audit/family-observer'))"
+          assert hook in load
+          js="""import {world,system} from '@minecraft/server';
+          import {getGuidebookExtensions} from './api/guidebookExtensionRegistry.js';
+          import {getWokRecipes,getStockpotExactRecipes,getExtensionTeapotRecipe,getExtensionBoardNativeModel} from './api/extensionRegistry.js';
+          world.afterEvents.worldLoad.subscribe(()=>{for(const delay of [300,1000])system.runTimeout(()=>{
+          try { const guides=getGuidebookExtensions().map(g=>({id:g.id,source:g.source,categories:g.categories.length,entries:g.entries.length,mechanicsEntries:g.entries.filter(e=>e.mechanics.length).length,localeMechanicsEntries:g.entries.filter(e=>Object.keys(e.mechanicsByLocale).length).length}));
+          console.warn('[HOST-REGISTRY] '+JSON.stringify({tick:system.currentTick,players:world.getAllPlayers().length,guides,wok:getWokRecipes().length,stockpot:getStockpotExactRecipes().length,chorusTea:getExtensionTeapotRecipe('kaleidoscope_end:chorus_petal','minecraft:water')?.result??null,hamSlot:getExtensionBoardNativeModel('kaleidoscope_nether:ham')??null,croakerSlot:getExtensionBoardNativeModel('kaleidoscope_chinesefood:yellow_croaker')??null})); }catch(e){console.warn('[HOST-REGISTRY-ERROR] '+e);}
+          },delay);});"""
+          # Confirm export spelling from the locked downloaded source during setup.
+          append="    host=w/'behavior_packs'/packs['cookery-1.0.8']['BP'][1]['header']['uuid']\n    entry=host/'scripts/main.js'\n    entry.write_text(entry.read_text()+\"\\nimport './family-audit-readonly.js';\\n\")\n    (host/'scripts/family-audit-readonly.js').write_text("+repr(js)+")\n    (out/'HOST-INSTRUMENTATION.txt').write_text('DIAGNOSTIC ONLY: Cookery entry imports one added read-only native registry logger; Tavern/Grilling dependencies rebound to108. No player or recipe actions. Not a shipping pack.\\n')\n"
+          load=load.replace(hook,append+hook)
+          Path('/tmp/family-setup.sh').write_text('set -euo pipefail\n'+setup)
+          Path('/tmp/family-load.sh').write_text('set -euo pipefail\n'+load)
+          PY
+      - name: Fetch immutable inputs and BDS
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash /tmp/family-setup.sh
+      - name: Read actual native normalized registries, no simulated players
+        run: |
+          grep -q 'export function getExtensionBoardNativeModel' 'work/cookery-1.0.8/Kaleidoscope Cookery v1.0.8 [BP]/scripts/api/extensionRegistry.js'
+          bash /tmp/family-load.sh
+          grep -q '\[HOST-REGISTRY\]' evidence/08-instrumented-host-registry.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-guide-registry-evidence
+          path: evidence/
+          retention-days: 14

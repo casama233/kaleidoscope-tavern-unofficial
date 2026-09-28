@@ -1,0 +1,45 @@
+name: Effects parity audit
+on:
+  push:
+    branches: ['fix/effects-parity-20260928']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+  pull_request:
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bedrock
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record pinned public sources and run available effect tests
+        run: |
+          printf 'Bedrock: ' > SOURCE_COMMITS.txt
+          git -C bedrock rev-parse HEAD >> SOURCE_COMMITS.txt
+          printf 'Java: ' >> SOURCE_COMMITS.txt
+          git -C java rev-parse HEAD >> SOURCE_COMMITS.txt
+          if test -f bedrock/tools/effects/effects-regression.test.mjs; then
+            (cd bedrock && node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs)
+          fi
+          if test -f bedrock/tools/tap/tap-regression.test.mjs; then
+            (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
+          fi
+          tar --exclude='.git' --exclude='node_modules' -czf effects-source-snapshot.tar.gz bedrock java SOURCE_COMMITS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: effects-source-snapshot
+          path: effects-source-snapshot.tar.gz
+          retention-days: 7

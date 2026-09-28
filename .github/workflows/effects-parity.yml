@@ -1,7 +1,7 @@
 name: Effects parity audit
 on:
   push:
-    branches: ['fix/effects-parity-20260928']
+    branches: ['fix/effects-parity-20260928', 'fix/effects-report-followup-20260928']
     paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
   pull_request:
     paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
@@ -48,11 +48,17 @@ jobs:
           if test -f bedrock/tools/effects/effects-regression.test.mjs; then
             (cd bedrock && node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs)
           fi
+          if test -f bedrock/tools/effects/interaction-regression.test.mjs; then
+            (cd bedrock && node --experimental-vm-modules --test tools/effects/interaction-regression.test.mjs)
+          fi
           if test -f bedrock/tools/tap/tap-regression.test.mjs; then
             (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
           fi
-          tar --exclude='.git' --exclude='node_modules' --exclude='*.fsb' -czf effects-source-snapshot.tar.gz bedrock java native vanilla-reference SOURCE_COMMITS.txt
+      - name: Pack inspectable source evidence even when a test fails
+        if: always()
+        run: tar --exclude='.git' --exclude='node_modules' --exclude='*.fsb' -czf effects-source-snapshot.tar.gz bedrock java native vanilla-reference SOURCE_COMMITS.txt
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: effects-source-snapshot
           path: effects-source-snapshot.tar.gz

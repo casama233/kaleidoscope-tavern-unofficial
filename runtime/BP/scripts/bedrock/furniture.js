@@ -1,3 +1,4 @@
+import {plantGrowthFeedback} from './interaction-particles.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {setWithWater,waterAt} from './waterlogging.js';
@@ -105,7 +106,7 @@ export function recoverFurniture(player,block){
 export function recolorLight(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId),h=hand(player),color=dyeColor(h?.typeId);
  check(f?.kind==='light'&&color,'DYE_REQUIRED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');if(color===f.color)return false;
- return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;optional(()=>block.dimension.playSound('sign.dye.use',center(block.location),{volume:1,pitch:1}));return true;});
+ return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;plantGrowthFeedback(block);optional(()=>block.dimension.playSound('sign.dye.use',center(block.location),{volume:1,pitch:1}));return true;});
 }
 export function maintainSeat(e){
  const helper=seatFurniture(e.typeId);if(!helper)return;

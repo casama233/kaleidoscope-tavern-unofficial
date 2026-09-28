@@ -22,22 +22,34 @@ jobs:
           ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
           path: java
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Mojang/bedrock-samples
+          ref: 46ba6ea985fb5a92d79a9419198f10dda14c199d
+          path: native
+          sparse-checkout: |
+            resource_pack/particles
+            resource_pack/textures/particle
+            resource_pack/sounds
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Record pinned public sources and run available effect tests
+      - name: Record pinned sources and run available effect tests
         run: |
           printf 'Bedrock: ' > SOURCE_COMMITS.txt
           git -C bedrock rev-parse HEAD >> SOURCE_COMMITS.txt
           printf 'Java: ' >> SOURCE_COMMITS.txt
           git -C java rev-parse HEAD >> SOURCE_COMMITS.txt
+          printf 'Native samples: ' >> SOURCE_COMMITS.txt
+          git -C native rev-parse HEAD >> SOURCE_COMMITS.txt
           if test -f bedrock/tools/effects/effects-regression.test.mjs; then
             (cd bedrock && node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs)
           fi
           if test -f bedrock/tools/tap/tap-regression.test.mjs; then
             (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
           fi
-          tar --exclude='.git' --exclude='node_modules' -czf effects-source-snapshot.tar.gz bedrock java SOURCE_COMMITS.txt
+          tar --exclude='.git' --exclude='node_modules' -czf effects-source-snapshot.tar.gz bedrock java native SOURCE_COMMITS.txt
       - uses: actions/upload-artifact@v4
         with:
           name: effects-source-snapshot

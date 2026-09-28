@@ -182,32 +182,32 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "把葡萄藤種在藤架上；作物種類由藤架正下方那一格方塊決定：泥土類長普通葡萄，冰、雪類長冰葡萄，下界岩、岩漿類長金葡萄。這裡的「下方」指藤架緊貼下方的方塊。",
-        "普通葡萄藤可由原版藤蔓與甜莓合成；三株葡萄藤直排可合成八個藤架。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
-        "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，並回收藤架和藤蔓。",
+        "葡萄藤沒有合成配方；先破壞野生葡萄藤取得。三個葡萄藤直排可合成八個藤架，記得另留一個種在藤架上。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
+        "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，掉落葡萄藤，裸藤架留在原地。",
         "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。",
-        "森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。"
+        "野生葡萄藤可在森林、平原、草甸的橡樹或白樺樹葉下方生成；舊區塊不會補生成，找不到時可探索新區塊。藤架可在浸水狀態下栽種與生長。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "把葡萄藤种在藤架上；作物种类由藤架正下方那一格方块决定：泥土类长普通葡萄，冰、雪类长冰葡萄，下界岩、岩浆类长金葡萄。这里的“下方”指藤架紧贴下方的方块。",
-          "普通葡萄藤可由原版藤蔓与甜莓合成；三株葡萄藤直排可合成八个藤架。骨粉可催长。成熟藤蔓会先向上、东、西、南、北寻找可用的裸藤架延伸；无处延伸时才在藤架正下方结果。",
-          "果实成熟到第六阶段可采收：用剪刀采下 3 个主果，另有 30% 概率多得 1–2 个青提；不用剪刀破坏成熟果实会得 1–2 个主果，并有 30% 概率得 1 个青提。剪刀修剪葡萄藤会移除藤蔓及下方果实，并回收藤架和葡萄藤。",
+          "葡萄藤没有合成配方；先破坏野生葡萄藤取得。三个葡萄藤直排可合成八个藤架，记得另留一个种在藤架上。骨粉可催长。成熟藤蔓会先向上、东、西、南、北寻找可用的裸藤架延伸；无处延伸时才在藤架正下方结果。",
+          "果实成熟到第六阶段可采收：用剪刀采下 3 个主果，另有 30% 概率多得 1–2 个青提；不用剪刀破坏成熟果实会得 1–2 个主果，并有 30% 概率得 1 个青提。剪刀修剪葡萄藤会移除藤蔓及下方果实，掉落葡萄藤，裸藤架留在原地。",
           "蜂巢可为裸藤架上蜡以阻止藤蔓延伸；用斧头除蜡。",
-          "森林中会自然生成野生葡萄藤；藤架可在浸水状态下种植并生长。"
+          "野生葡萄藤可在森林、平原、草甸的橡树或白桦树叶下方生成；旧区块不会补生成，找不到时可探索新区块。藤架可在浸水状态下种植并生长。"
         ],
         "zh_TW": [
           "把葡萄藤種在藤架上；作物種類由藤架正下方那一格方塊決定：泥土類長普通葡萄，冰、雪類長冰葡萄，下界岩、岩漿類長金葡萄。這裡的「下方」指藤架緊貼下方的方塊。",
-          "普通葡萄藤可由原版藤蔓與甜莓合成；三株葡萄藤直排可合成八個藤架。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
-          "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，並回收藤架和藤蔓。",
+          "葡萄藤沒有合成配方；先破壞野生葡萄藤取得。三個葡萄藤直排可合成八個藤架，記得另留一個種在藤架上。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
+          "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，掉落葡萄藤，裸藤架留在原地。",
           "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。",
-          "森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。"
+          "野生葡萄藤可在森林、平原、草甸的橡樹或白樺樹葉下方生成；舊區塊不會補生成，找不到時可探索新區塊。藤架可在浸水狀態下栽種與生長。"
         ],
         "en_US": [
           "Plant a grapevine on a trellis. The block in the single cell directly beneath that trellis selects the crop: dirt-type blocks grow regular grapes, ice or snow blocks grow ice grapes, and Nether or magma blocks grow gold grapes.",
-          "Craft a grapevine from a vanilla vine and sweet berries; place three vines vertically to craft eight trellises. Bone meal accelerates growth. Mature vines first spread to bare trellises above, east, west, south, then north; they fruit directly below only when no trellis is available.",
-          "Fruit ripens at stage six. Shears harvest three main grapes and have a 30% chance for one or two extra green grapes. Breaking ripe fruit without shears yields one or two main grapes and has a 30% chance for one green grape. Shearing a vine removes its fruit and returns the trellis and vine.",
+          "Grapevines have no crafting recipe: break wild grapevines to obtain them. Place three grapevines vertically to craft eight trellises, and keep another grapevine for planting. Bone meal accelerates growth. Mature vines first spread to bare trellises above, east, west, south, then north; they fruit directly below only when no trellis is available.",
+          "Fruit ripens at stage six. Shears harvest three main grapes and have a 30% chance for one or two extra green grapes. Breaking ripe fruit without shears yields one or two main grapes and has a 30% chance for one green grape. Shearing a planted vine removes its fruit, drops the grapevine and leaves the bare trellis in place.",
           "Honeycomb waxes a bare trellis to prevent vine spread; use an axe to remove the wax.",
-          "Wild grapevines can generate naturally in forests; trellises can be planted and grow while waterlogged."
+          "Wild grapevines can generate beneath oak or birch leaves in forest, plains and meadow biomes. Existing chunks are not retroactively populated; explore new chunks if needed. Trellises can be planted and grow while waterlogged."
         ]
       }
     },

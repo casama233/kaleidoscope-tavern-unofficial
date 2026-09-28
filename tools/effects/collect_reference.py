@@ -22,7 +22,8 @@ def collect(out):
     meta_url = next(v['url'] for v in manifest['versions'] if v['id'] == '1.20.1')
     meta = json.loads(get(meta_url))
     mapping = verified(meta['downloads']['client_mappings']).decode()
-    classes = {'Particle', 'TextureSheetParticle', 'DripParticle', 'BubblePopParticle',
+    classes = {'Particle', 'TextureSheetParticle', 'SingleQuadParticle', 'SimpleAnimatedParticle',
+               'ScrapeParticle', 'DripParticle', 'BubblePopParticle',
                'SpellParticle', 'PlayerCloudParticle', 'SuspendedTownParticle',
                'EndRodParticle', 'FlameParticle', 'SmokeParticle', 'CherryParticle',
                'SuspendedParticle', 'WaterDropParticle', 'BreakingItemParticle'}

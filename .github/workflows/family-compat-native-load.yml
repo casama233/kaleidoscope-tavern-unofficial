@@ -1,0 +1,102 @@
+name: Family native load audit
+on:
+  push:
+    branches: ['audit/family-compat-20260929']
+    paths: ['.github/workflows/family-compat-native-load.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  load:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Download locked audit inputs and official stable BDS
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/casama233/kaleidoscope-tavern-unofficial/actions/artifacts/10983482858/zip > inputs.zip
+          python - <<'PY'
+          import hashlib,json,urllib.request,zipfile
+          from pathlib import Path
+          p=Path('inputs.zip');assert hashlib.sha256(p.read_bytes()).hexdigest()=='43e60ffc649ac2b1b5b11694fe2b0f3b23f9a9883c405819ed1db83c138972f4'
+          with zipfile.ZipFile(p) as z:z.extractall('inputs')
+          out=Path('evidence');out.mkdir()
+          url='https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip'
+          with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=120) as r:raw=r.read()
+          Path('bds.zip').write_bytes(raw);assert zipfile.is_zipfile('bds.zip')
+          (out/'BDS-SOURCE.json').write_text(json.dumps({'url':url,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw),'officialDownloadIndex':'https://net-secondary.web.minecraft-services.net/api/v1.0/download/links','playersSimulated':False,'productionWorldsAccessed':False},indent=2)+'\n')
+          for archive in Path('inputs').iterdir():
+              if archive.suffix in ('.zip','.mcaddon'):
+                  with zipfile.ZipFile(archive) as z:
+                      assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())
+                      z.extractall(Path('work')/archive.stem)
+          PY
+      - name: Run clean worlds, original packs and explicit dependency-only diagnostics
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,shutil,subprocess,time,uuid,zipfile
+          from pathlib import Path
+          out=Path('evidence');work=Path('work');packs={}
+          for d in work.iterdir():
+              scan=d
+              if d.name in ('tavern-src','world-liquor-src'):scan=d/'runtime'
+              if d.name=='grilling-src':scan=d/'projects/grilling/gameplay_core'
+              sides={}
+              for p in scan.rglob('manifest.json'):
+                  m=json.loads(p.read_text(encoding='utf-8-sig'));types=[x['type'] for x in m.get('modules',[])]
+                  side='RP' if 'resources' in types else 'BP' if 'data' in types or 'script' in types else None
+                  if side:sides[side]=(p.parent,m)
+              packs[d.name]=sides
+          family=['cookery-1.0.8','chinese-food-1.0.4','deco-1.0.1','immersive-eating-1.0','end-1.0.1','nether-1.0.1','grilling-src','tavern-src','world-liquor-src']
+          cases=[('00-vanilla',[],False),('01-cookery108',['cookery-1.0.8'],False),('02-tavern-old-host',['cookery-1.0.6','tavern-src','world-liquor-src'],False),('03-tavern-new-host-raw',['cookery-1.0.8','tavern-src','world-liquor-src'],False),('04-end-nether-new-host',['cookery-1.0.8','end-1.0.1','nether-1.0.1'],False),('05-all-nine-raw',family,False),('06-all-nine-deps-only',family,True),('07-all-nine-deps-reversed',list(reversed(family)),True)]
+          observer="""import {world,system,ItemTypes,BlockPermutation} from '@minecraft/server';
+          const seen={};
+          system.afterEvents.scriptEventReceive.subscribe(e=>{if(e.id.startsWith('kaleidoscope_')){seen[e.id]=(seen[e.id]||0)+1; if(/api_ready|registered|ack|error|reject/.test(e.id))console.warn('[FAMILY-EVENT] '+e.id+' '+String(e.message).slice(0,1000));}});
+          world.afterEvents.worldLoad.subscribe(()=>{for(const delay of [200,1000])system.runTimeout(()=>{const ids=['kaleidoscope_cookery:rice','kaleidoscope_tavern:shaker','kaleidoscope_world_liquor:cola','kaleidoscope_grilling:raw_beef_skewer','kaleidoscope_end:dragon_tooth_knife','kaleidoscope_nether:blowgun'];console.warn('[FAMILY-PROBE] '+JSON.stringify({tick:system.currentTick,players:world.getAllPlayers().length,items:Object.fromEntries(ids.map(id=>[id,!!ItemTypes.get(id)])),events:seen}));},delay);});
+          """
+          for idx,(name,selected,rebind) in enumerate(cases):
+              root=Path('native')/name;root.mkdir(parents=True)
+              with zipfile.ZipFile('bds.zip') as z:z.extractall(root)
+              exe=root/'bedrock_server';exe.chmod(0o755)
+              w=root/'worlds'/'Audit';w.mkdir(parents=True,exist_ok=True)
+              lists={'BP':[],'RP':[]};records=[]
+              for key in selected:
+                  for side,(src,original) in packs[key].items():
+                      m=json.loads(json.dumps(original));changes=[]
+                      if rebind and key in ['tavern-src','grilling-src']:
+                          for dep in m.get('dependencies',[]):
+                              if dep.get('uuid') in ['10f37ae2-9ccf-435f-b34b-0eec8191cd94','c89dc8df-c3fc-4bc8-8bd0-527abba76681']:
+                                  target=packs['cookery-1.0.8']['BP' if dep['uuid'].startswith('10f37') else 'RP'][1]['header'];changes.append({'before':dict(dep),'after':{'uuid':target['uuid'],'version':target['version']}});dep.update(uuid=target['uuid'],version=target['version'])
+                      header=m['header'];dst=w/('behavior_packs' if side=='BP' else 'resource_packs')/header['uuid'];shutil.copytree(src,dst)
+                      if changes:(dst/'manifest.json').write_text(json.dumps(m,indent=2)+'\n')
+                      lists[side].append({'pack_id':header['uuid'],'version':header['version']});records.append({'pack':key,'side':side,'header':header,'dependencyChanges':changes})
+              uid=str(uuid.uuid5(uuid.NAMESPACE_URL,'https://github.com/casama233/kaleidoscope-tavern-unofficial/audit/family-observer'))
+              probe=w/'behavior_packs'/uid;probe.mkdir(parents=True);(probe/'scripts').mkdir()
+              (probe/'manifest.json').write_text(json.dumps({'format_version':2,'header':{'name':'Read-only family load observer','description':'No player actions or world edits','uuid':uid,'version':[1,0,0],'min_engine_version':[1,26,50]},'modules':[{'type':'script','language':'javascript','uuid':str(uuid.uuid5(uuid.NAMESPACE_URL,uid)),'version':[1,0,0],'entry':'scripts/main.js'}],'dependencies':[{'module_name':'@minecraft/server','version':'2.7.0'}]}))
+              (probe/'scripts/main.js').write_text(observer);lists['BP'].append({'pack_id':uid,'version':[1,0,0]})
+              (w/'world_behavior_packs.json').write_text(json.dumps(lists['BP']));(w/'world_resource_packs.json').write_text(json.dumps(lists['RP']))
+              props={'server-name':'Isolated Audit','gamemode':'creative','difficulty':'peaceful','allow-cheats':'true','online-mode':'false','allow-list':'true','max-players':'1','server-port':str(22000+idx*2),'server-portv6':str(22001+idx*2),'enable-lan-visibility':'false','level-name':'Audit','level-seed':'1729','level-type':'FLAT','view-distance':'4','tick-distance':'4','max-threads':'2','content-log-file-enabled':'true','content-log-console-output-enabled':'true','emit-server-telemetry':'false','pause-when-empty-seconds':'0'}
+              (root/'server.properties').write_text('\n'.join(k+'='+v for k,v in props.items())+'\n');(root/'allowlist.json').write_text('[]')
+              (out/(name+'-packs.json')).write_text(json.dumps(records,ensure_ascii=False,indent=2)+'\n')
+              env=dict(os.environ,LD_LIBRARY_PATH=str(root.resolve()))
+              start=time.monotonic()
+              with (out/(name+'.log')).open('w') as log:
+                  p=subprocess.Popen([str(exe.resolve())],cwd=root,env=env,stdin=subprocess.PIPE,stdout=log,stderr=subprocess.STDOUT,text=True)
+                  for _ in range(65):
+                      if p.poll() is not None:break
+                      time.sleep(1)
+                  try:
+                      if p.poll() is None:p.communicate('stop\n',timeout=25)
+                  except subprocess.TimeoutExpired:p.kill();p.wait()
+              text=(out/(name+'.log')).read_text(errors='replace')
+              (out/(name+'-summary.json')).write_text(json.dumps({'case':name,'packs':selected,'reboundDependenciesOnly':rebind,'seconds':round(time.monotonic()-start,2),'exitCode':p.returncode,'serverStarted':'Server started' in text,'nativeObserverRan':'[FAMILY-PROBE]' in text,'playersSimulated':False,'clientVisualTest':False},indent=2)+'\n')
+              print(name,'exit',p.returncode,'started', 'Server started' in text, 'observer','[FAMILY-PROBE]' in text)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-native-load-evidence
+          path: evidence/
+          retention-days: 14

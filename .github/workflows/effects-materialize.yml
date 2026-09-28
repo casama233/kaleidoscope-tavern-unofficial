@@ -77,9 +77,14 @@ jobs:
           branch=fix/effects-report-followup-20260928
           actual=$(git ls-remote origin "refs/heads/$branch" | cut -f1)
           test "$actual" = "$EXPECTED_HEAD"
-          git restore -- docs/LAUNCH-VALIDATION-0.6.63.json docs/REPAIR-STATIC-0.6.63.json
-          git rm -r .github/effects-stage .github/workflows/effects-materialize.yml
-          git add runtime tools data docs .github/workflows/effects-parity.yml
+          git restore -- docs/LAUNCH-VALIDATION-0.6.63.json docs/REPAIR-STATIC-0.6.63.json .github/workflows/effects-parity.yml
+          # GITHUB_TOKEN has contents permission, not workflows permission.
+          # The authorized connector removes this one-time workflow afterwards.
+          git rm -r .github/effects-stage
+          git add -u
+          # Never force-add official client reference archives or other ignored files.
+          git ls-files --others --exclude-standard -z -- runtime tools data docs | xargs -0 -r git add --
+          test -z "$(git diff --cached --name-only -- .github/workflows)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'fix: restore audited interaction particles, debris and splash effects with 105 regression tests'

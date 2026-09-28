@@ -1,0 +1,49 @@
+name: Family property scope audit
+on:
+  push:
+    branches: ['audit/family-compat-20260929']
+    paths: ['.github/workflows/family-property-scope.yml']
+permissions:
+  contents: read
+jobs:
+  scope:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Native scope probe; no players or installed worlds
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,subprocess,time,urllib.request,uuid,zipfile
+          from pathlib import Path
+          out=Path('evidence');out.mkdir();root=Path('scope');root.mkdir()
+          url='https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip'
+          with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=120) as r:raw=r.read()
+          Path('bds.zip').write_bytes(raw)
+          with zipfile.ZipFile('bds.zip') as z:z.extractall(root)
+          exe=root/'bedrock_server';exe.chmod(0o755);w=root/'worlds'/'Scope';w.mkdir(parents=True)
+          packs=[]
+          for role in ['A','B']:
+              uid=str(uuid.uuid5(uuid.NAMESPACE_URL,'kaleidoscope-family-audit-scope-'+role));p=w/'behavior_packs'/uid;(p/'scripts').mkdir(parents=True)
+              manifest={'format_version':2,'header':{'name':'Disposable scope '+role,'description':'Native property visibility test only','uuid':uid,'version':[1,0,0],'min_engine_version':[1,26,50]},'modules':[{'type':'script','language':'javascript','uuid':str(uuid.uuid5(uuid.NAMESPACE_URL,uid)),'version':[1,0,0],'entry':'scripts/main.js'}],'dependencies':[{'module_name':'@minecraft/server','version':'2.7.0'}]}
+              (p/'manifest.json').write_text(json.dumps(manifest));packs.append({'pack_id':uid,'version':[1,0,0]})
+              source="import {world,system} from '@minecraft/server'; const key='compat_audit:scope_key'; world.afterEvents.worldLoad.subscribe(()=>{"
+              if role=='A':source+="system.runTimeout(()=>{world.setDynamicProperty(key,'written-by-A');console.warn('[SCOPE-A-WRITE] '+world.getDynamicProperty(key));},20);system.runTimeout(()=>console.warn('[SCOPE-A-FINAL] '+String(world.getDynamicProperty(key))),100);"
+              else:source+="system.runTimeout(()=>{console.warn('[SCOPE-B-READ] '+String(world.getDynamicProperty(key)));world.setDynamicProperty(key,'written-by-B');console.warn('[SCOPE-B-WRITE] '+String(world.getDynamicProperty(key)));},60);"
+              source+='});';(p/'scripts/main.js').write_text(source)
+          (w/'world_behavior_packs.json').write_text(json.dumps(packs));(root/'allowlist.json').write_text('[]')
+          (root/'server.properties').write_text('level-name=Scope\nlevel-type=FLAT\nallow-cheats=true\nonline-mode=false\nallow-list=true\nmax-players=1\nenable-lan-visibility=false\nview-distance=4\ntick-distance=4\nmax-threads=2\npause-when-empty-seconds=0\ncontent-log-console-output-enabled=true\n')
+          with (out/'property-scope.log').open('w') as log:
+              p=subprocess.Popen([str(exe.resolve())],cwd=root,env=dict(os.environ,LD_LIBRARY_PATH=str(root.resolve())),stdin=subprocess.PIPE,stdout=log,stderr=subprocess.STDOUT,text=True)
+              time.sleep(18)
+              try:p.communicate('stop\n',timeout=15)
+              except subprocess.TimeoutExpired:p.kill();p.wait()
+          text=(out/'property-scope.log').read_text();result={'bdsUrl':url,'bdsSha256':hashlib.sha256(raw).hexdigest(),'packHeaders':packs,'playersSimulated':False,'existingWorldAccessed':False,'isolatedKeys':('[SCOPE-B-READ] undefined' in text and '[SCOPE-A-FINAL] written-by-A' in text),'sharedKeys':('[SCOPE-B-READ] written-by-A' in text and '[SCOPE-A-FINAL] written-by-B' in text),'exitCode':p.returncode}
+          (out/'property-scope.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-property-scope-evidence
+          path: evidence/
+          retention-days: 14

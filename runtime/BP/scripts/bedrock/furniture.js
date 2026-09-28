@@ -12,7 +12,7 @@ import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-b
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {nativeBlockHit} from './stateful-storage-router.js';
-import {worldHitFromEventBasis} from '../core/hit-basis.js';
+import {worldFromHit} from '../core/hit-basis.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
@@ -49,32 +49,27 @@ export function useGlasswareHolder(player,block,faceLocation){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
 }
-export const glasswareHitDiagnostics={rayHits:0,eventHits:0,basisCorrections:0,errors:0,last:null};
+export const glasswareHitDiagnostics={corrections:0,errors:0,last:null};
 /** Resolve which of the four glass slots the player aimed at. Java reads the world X/Z
- * quadrant of the true hit; mouse and gamepad get that quadrant from the same gaze hit
- * the other multi-slot blocks here already trust, because the engine can report the
- * event hit in the clicked face's own basis instead (landing in another quadrant).
- * Touch keeps its event hit unless that hit is provably the same one in another basis. */
+ * quadrant of the true hit; the engine reports that hit in the clicked face's own basis,
+ * which on the bottom face slotted the aimed cup's mirror neighbour (diagonal with the
+ * raw event, left-right with the script raycast). Mouse and gamepad aim through the
+ * script raycast, touch keeps its event hit, and both are converted back with the
+ * measured face basis; faces without a measurement keep the raw engine value. */
 export function resolveGlasswareHit(player,block,face,point){
  const fallback={face,faceLocation:point?{...point}:undefined};
  try{
-  const ray=nativeBlockHit(player,block);
-  if(!ray)return fallback;
+  let source='event',hit=point?{...point}:undefined,sourceFace=face;
   const input=player.inputInfo,mode=input?.lastInputModeUsed;
   if(['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar)){
-   glasswareHitDiagnostics.rayHits++;
-   if(point&&['x','z'].some(axis=>Math.abs(point[axis]-ray.faceLocation[axis])>.02)){
-    glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,event:{...point},ray:{...ray.faceLocation},slot:glasswareHolderSlot(ray.faceLocation)};
-    if(glasswareHitDiagnostics.rayHits<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
-   }
-   return ray;
+   const ray=nativeBlockHit(player,block);
+   if(ray){source='ray';hit=ray.faceLocation;sourceFace=ray.face??face;}
   }
-  const corrected=point?worldHitFromEventBasis(point,ray.faceLocation):undefined;
-  glasswareHitDiagnostics.eventHits++;
+  const corrected=worldFromHit(sourceFace,hit,source);
   if(corrected){
-   glasswareHitDiagnostics.basisCorrections++;
-   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,event:{...point},ray:{...ray.faceLocation},corrected,slot:glasswareHolderSlot(corrected)};
-   if(glasswareHitDiagnostics.basisCorrections<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
+   glasswareHitDiagnostics.corrections++;
+   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
+   if(glasswareHitDiagnostics.corrections<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
    return {face,faceLocation:corrected};
   }
   return fallback;

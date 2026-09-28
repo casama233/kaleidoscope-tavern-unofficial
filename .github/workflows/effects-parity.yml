@@ -2,9 +2,9 @@ name: Effects parity audit
 on:
   push:
     branches: ['fix/effects-parity-20260928', 'fix/effects-report-followup-20260928']
-    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'runtime/**']
   pull_request:
-    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'runtime/**']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'runtime/**']
 permissions:
   contents: read
 jobs:
@@ -22,44 +22,44 @@ jobs:
           ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
           path: java
           persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: Mojang/bedrock-samples
-          ref: 46ba6ea985fb5a92d79a9419198f10dda14c199d
-          path: native
-          sparse-checkout: |
-            resource_pack/particles
-            resource_pack/textures/particle
-            resource_pack/sounds
-          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collect fixed-version constructor reference (no full game archive)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      - name: Collect hash-verified constructor references locally
         run: python bedrock/tools/effects/collect_reference.py vanilla-reference
-      - name: Record pinned sources and run available effect tests
+      - name: Record source revisions
         run: |
-          printf 'Bedrock: ' > SOURCE_COMMITS.txt
-          git -C bedrock rev-parse HEAD >> SOURCE_COMMITS.txt
-          printf 'Java: ' >> SOURCE_COMMITS.txt
-          git -C java rev-parse HEAD >> SOURCE_COMMITS.txt
-          printf 'Native samples: ' >> SOURCE_COMMITS.txt
-          git -C native rev-parse HEAD >> SOURCE_COMMITS.txt
-          if test -f bedrock/tools/effects/effects-regression.test.mjs; then
-            (cd bedrock && node --experimental-vm-modules --test tools/effects/effects-regression.test.mjs)
+          mkdir -p evidence
+          printf 'Bedrock: ' > evidence/SOURCE_COMMITS.txt
+          git -C bedrock rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+          printf 'Java: ' >> evidence/SOURCE_COMMITS.txt
+          git -C java rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+      - name: Run all effect regressions without double-counting imported tap tests
+        working-directory: bedrock
+        run: |
+          set -o pipefail
+          tests=(tools/effects/effects-regression.test.mjs)
+          if test -f tools/effects/interaction-regression.test.mjs; then
+            tests+=(tools/effects/interaction-regression.test.mjs)
           fi
-          if test -f bedrock/tools/effects/interaction-regression.test.mjs; then
-            (cd bedrock && node --experimental-vm-modules --test tools/effects/interaction-regression.test.mjs)
-          fi
-          if test -f bedrock/tools/tap/tap-regression.test.mjs; then
-            (cd bedrock && node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs)
-          fi
-      - name: Pack inspectable source evidence even when a test fails
+          node --experimental-vm-modules --test "${tests[@]}" | tee ../evidence/effect-tests.txt
+          git diff --exit-code -- runtime/
+      - name: Preserve only validation evidence, not complete game or font archives
         if: always()
-        run: tar --exclude='.git' --exclude='node_modules' --exclude='*.fsb' -czf effects-source-snapshot.tar.gz bedrock java native vanilla-reference SOURCE_COMMITS.txt
+        run: |
+          mkdir -p evidence
+          test ! -f vanilla-reference/PROVENANCE.json || cp vanilla-reference/PROVENANCE.json evidence/
+          for report in bedrock/docs/EFFECTS-REPORT-FOLLOWUP-20260928.md bedrock/docs/EFFECTS-PARITY-AUDIT-20260928.md; do
+            test ! -f "$report" || cp "$report" evidence/
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: effects-source-snapshot
-          path: effects-source-snapshot.tar.gz
-          retention-days: 7
+          name: Effects-parity-validation
+          path: evidence/
+          retention-days: 14

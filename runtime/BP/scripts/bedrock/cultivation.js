@@ -1,4 +1,4 @@
-import {feedback} from './break-feedback.js';
+import {trellisWaxFeedback,plantGrowthFeedback} from './interaction-particles.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
 import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
@@ -98,11 +98,11 @@ export function maintain(b){
  if(b.typeId===WILD_HEAD||b.typeId===WILD_BODY){
   const above=blockAt(b.dimension,plus(b.location,{x:0,y:1,z:0}));
   if(!above)return; // An unloaded support is unknown, not a missing block.
-  if(!canAnchorWildVine(above)){feedback.transaction(b,()=>b.setType('minecraft:air'));return;}
+  if(!canAnchorWildVine(above)){b.setType('minecraft:air');return;}
   if(b.typeId===WILD_BODY){const below=wildBelow(b);if(!below)return;if(below.typeId!==WILD_BODY&&below.typeId!==WILD_HEAD)b.setPermutation(makeWildHead(BlockPermutation.resolve(WILD_HEAD),0,false));}
  }
  else if(isFrame(b.typeId))refreshAround(b);
- else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)feedback.transaction(b,()=>b.setType('minecraft:air'));
+ else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)b.setType('minecraft:air');
 }
 export function farmUse(player,b,{rng=Math.random}={}){
  canWrite(player);check(FARM_IDS.has(b.typeId),'NOT_A_CROP');
@@ -116,15 +116,15 @@ export function farmUse(player,b,{rng=Math.random}={}){
   }
   if(b.typeId===BARE&&h?.typeId==='minecraft:honeycomb'){
    check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);return 'waxed';
+   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);trellisWaxFeedback(b,true);return 'waxed';
   }
   if(b.typeId===BARE&&h?.typeId?.endsWith('_axe')){
-   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});return 'unwaxed';
+   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});trellisWaxFeedback(b,false);return 'unwaxed';
   }
   if(h?.typeId==='minecraft:bone_meal'){
    check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const edits=growthChanges(b,rng);check(edits.length,'NO_GROWTH_SPACE');
-   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);return 'grown';
+   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);plantGrowthFeedback(b);return 'grown';
   }
   if(h?.typeId==='minecraft:shears'){
   if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}

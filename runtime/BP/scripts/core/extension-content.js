@@ -2,7 +2,7 @@
 import {BOTTLES} from '../data/bottles.js';
 import {DRINK_EFFECTS} from '../data/drink-effects.js';
 import {COCKTAILS} from '../data/mixology.js';
-const drinks=new Map(),blocks=new Map(),sources=new Map(),foundations=new Map(),effectDefinitions=new Map();
+const drinks=new Map(),blocks=new Map(),sources=new Map(),foundations=new Map(),effectDefinitions=new Map(),itemParticles=new Map();
 export const externalDrink=item=>drinks.get(item);
 export const bottleBlock=base=>BOTTLES[base]?.block??`kaleidoscope_tavern:bottle_${base}`;
 export const bottleBase=block=>blocks.get(block)??(block?.startsWith('kaleidoscope_tavern:bottle_')?block.slice('kaleidoscope_tavern:bottle_'.length):undefined);
@@ -15,6 +15,8 @@ export const externalVisual=(helper,item)=>externalDrink(item)?.visuals?.[helper
 export const isExternalVisual=(type,helper)=>type===helper||[...drinks.values()].some(d=>d.visuals?.[helper.split(':')[1]]===type);
 export function installContent(source,content=[],foundation={}){
  for(const row of foundations.get(source)?.effects??[])effectDefinitions.delete(row.id);
+ for(const row of foundations.get(source)?.itemParticles??[])itemParticles.delete(row.item);
+ for(const row of foundation.itemParticles??[])itemParticles.set(row.item,row.particle);
  foundations.set(source,foundation);for(const row of foundation.effects??[])effectDefinitions.set(row.id,row);
  for(const old of sources.get(source)??[]){for(const item of old.items??[])drinks.delete(item);blocks.delete(old.block);delete BOTTLES[old.base];delete DRINK_EFFECTS[old.base];if(old.item)delete COCKTAILS[old.item];}
  sources.set(source,content);
@@ -37,5 +39,5 @@ export function externalPickBlock(blockId){
  }
 }
 
-/** Optional namespaced presentation descriptors; removed with their source. */
-export function externalBreakFeedback(id){for(const value of foundations.values()){const row=value.breakFeedback?.find(row=>row.block===id);if(row)return row;}}
+/** Exact namespaced item-to-one-particle binding supplied by a validated addon. */
+export const externalItemParticle=item=>itemParticles.get(item);

@@ -74,6 +74,219 @@
           "is3D": false
         }
       ]
+    },
+    "kt_pickup.entity.item_frame.remove_item": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kt_pickup/entity/itemframe/remove_item1",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/entity/itemframe/remove_item2",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/entity/itemframe/remove_item3",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/entity/itemframe/remove_item4",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        }
+      ]
+    },
+    "kt_pickup.block.glass.place": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kt_pickup/dig/stone1",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone2",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone3",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone4",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        }
+      ]
+    },
+    "kt_pickup.block.stone.place": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kt_pickup/dig/stone1",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone2",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone3",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/dig/stone4",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        }
+      ]
+    },
+    "kt_pickup.block.amethyst_block.place": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kt_pickup/block/amethyst/place1",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/block/amethyst/place2",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/block/amethyst/place3",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_pickup/block/amethyst/place4",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        }
+      ]
+    },
+    "kt_pickup.entity.item.pickup": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kt_pickup/random/pop",
+          "volume": 1,
+          "pitch": 1,
+          "weight": 1,
+          "stream": false
+        }
+      ]
+    },
+    "kaleidoscope_tavern:glow_ink_use": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "pitch": 1.05,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "pitch": 1.05,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "pitch": 1.05,
+          "stream": false
+        }
+      ]
+    },
+    "kaleidoscope_tavern:incense_click_on": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/random/click",
+          "pitch": 0.6,
+          "volume": 0.3,
+          "stream": false
+        }
+      ]
+    },
+    "kaleidoscope_tavern:incense_click_off": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/random/click",
+          "pitch": 0.5,
+          "volume": 0.3,
+          "stream": false
+        }
+      ]
     }
   }
 }

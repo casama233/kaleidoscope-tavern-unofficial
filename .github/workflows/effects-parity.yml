@@ -1,0 +1,68 @@
+name: Effects parity audit
+on:
+  push:
+    branches: ['fix/effects-parity-20260928', 'fix/effects-report-followup-20260928']
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'runtime/**']
+  pull_request:
+    paths: ['.github/workflows/effects-parity.yml', 'tools/effects/**', 'tools/tap/**', 'runtime/**']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bedrock
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      - name: Collect hash-verified constructor references locally
+        run: python bedrock/tools/effects/collect_reference.py vanilla-reference
+      - name: Record source revisions
+        run: |
+          mkdir -p evidence
+          printf 'Bedrock: ' > evidence/SOURCE_COMMITS.txt
+          git -C bedrock rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+          printf 'Java: ' >> evidence/SOURCE_COMMITS.txt
+          git -C java rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+      - name: Reject unsupported Molang assignment syntax before numerical testing
+        working-directory: bedrock
+        run: python tools/effects/test_molang_syntax.py
+      - name: Run all effect regressions without double-counting imported tap tests
+        working-directory: bedrock
+        run: |
+          set -o pipefail
+          tests=(tools/effects/effects-regression.test.mjs)
+          if test -f tools/effects/interaction-regression.test.mjs; then
+            tests+=(tools/effects/interaction-regression.test.mjs)
+          fi
+          node --experimental-vm-modules --test "${tests[@]}" | tee ../evidence/effect-tests.txt
+          git diff --exit-code -- runtime/
+      - name: Preserve only validation evidence, not complete game or font archives
+        if: always()
+        run: |
+          mkdir -p evidence
+          test ! -f vanilla-reference/PROVENANCE.json || cp vanilla-reference/PROVENANCE.json evidence/
+          for report in bedrock/docs/EFFECTS-REPORT-FOLLOWUP-20260928.md bedrock/docs/EFFECTS-PARITY-AUDIT-20260928.md; do
+            test ! -f "$report" || cp "$report" evidence/
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Effects-parity-validation
+          path: evidence/
+          retention-days: 14

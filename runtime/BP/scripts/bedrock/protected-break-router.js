@@ -1,5 +1,3 @@
-import {BREAK_SOUNDS,INTERACTION_SOUNDS} from '../core/break-feedback-engine.js';
-import {feedback,breakProfile} from './break-feedback.js';
 import {world,system,GameMode} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {withBreakInventory,blockAt,blockCenter,safe} from './transactions.js';
@@ -8,8 +6,9 @@ const routes=[];let installed=false,sequence=0;
 
 function routeMatches(route,block){try{return !!route.isBlock(block);}catch{return false;}}
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
+const BREAK_SOUNDS=Object.freeze({glass:'random.glass',wool:'dig.cloth',crop:'dig.grass',metal:'break.iron',chain:'dig.chain',wood:'dig.wood'});
+const INTERACTION_SOUNDS=Object.freeze({glass:'place.stone',wool:'place.cloth',metal:'place.iron',chain:'place.chain',wood:'place.wood'});
 function breakMaterial(id){
- const profile=breakProfile(id);if(profile)return profile.material;
  if(typeof id!=='string'||!id.startsWith('kaleidoscope_tavern:'))return undefined;
  const short=id.slice('kaleidoscope_tavern:'.length);
  if(/^bottle_|^cup_/.test(short)||/^.+_bottle$/.test(short)||short==='molotov')return 'glass';
@@ -21,7 +20,7 @@ function breakMaterial(id){
  return undefined;
 }
 function breakSound(id){return BREAK_SOUNDS[breakMaterial(id)]??'dig.wood';}
-export function playMaterialInteraction(dimension,location,blockId){if(feedback.isActive())return false;const sound=INTERACTION_SOUNDS[breakMaterial(blockId)];if(!sound)return false;try{dimension.playSound(sound,blockCenter(location),{volume:.65,pitch:1});return true;}catch{return false;}}
+export function playMaterialInteraction(dimension,location,blockId){const sound=INTERACTION_SOUNDS[breakMaterial(blockId)];if(!sound)return false;try{dimension.playSound(sound,blockCenter(location),{volume:.65,pitch:1});return true;}catch{return false;}}
 function pureAddedDrops(before,after){
  const drops=[],restore=[];
  for(let i=0;i<after.length;i++){
@@ -44,7 +43,10 @@ function pureAddedDrops(before,after){
  */
 export function finishPlayerBreak(player,dimension,location,blockId,recover){
  const mode=player.getGameMode()===GameMode.Survival?'drop':'discard';
- return feedback.transaction(blockAt(dimension,location),()=>withBreakInventory(player,dimension,location,mode,recover));
+ const result=withBreakInventory(player,dimension,location,mode,recover),current=blockAt(dimension,location);
+ if(current?.typeId===blockId)return result;
+ try{dimension.playSound(breakSound(blockId),blockCenter(location),{volume:.75,pitch:1});}catch{}
+ return result;
 }
 
 function installGlobalRoutes(){

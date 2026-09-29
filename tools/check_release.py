@@ -6,6 +6,8 @@ ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
 files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}
+# JSON decoding and JavaScript arithmetic tests do not validate Molang tokens.
+subprocess.run([sys.executable,str(ROOT/'tools/effects/check_molang.py')],cwd=ROOT,check=True)
 for side in ['BP','RP']:
     m=docs[RT/side/'manifest.json'];assert m['header']['version']==version
     assert all(x['version']==version for x in m['modules'])

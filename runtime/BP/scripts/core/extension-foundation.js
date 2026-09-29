@@ -40,29 +40,22 @@ export function normalizeFoundation(raw,source,itemExists){
   })};
  });
  check(new Set(normalizedPicks.map(x=>x.block)).size===normalizedPicks.length,'DUPLICATE_PICK_BLOCK');
- const feedbackRows=raw.breakFeedback??[];
- check(Array.isArray(feedbackRows)&&feedbackRows.length<=256,'BREAK_FEEDBACK_LIMIT');
- const uv=value=>{check(Array.isArray(value)&&value.length===2&&value.every(n=>Number.isSafeInteger(n)&&n>=0&&n<=16380),'BREAK_FEEDBACK_UV');return [...value];};
- check(feedbackRows.reduce((n,row)=>n+(Array.isArray(row?.variants)?row.variants.length:0),0)<=512,'BREAK_VARIANT_TOTAL');
- const breakFeedback=feedbackRows.map(row=>{
-  check(row&&['wood','glass','metal','chain','wool','crop','stone'].includes(row.material),'BREAK_FEEDBACK_MATERIAL');
-  const block=own(row.block,source),particle=own(row.particle,source);check(itemExists(block),'UNKNOWN_ITEM',block);
-  check(Array.isArray(row.variants??[])&&(row.variants??[]).length<=128,'BREAK_FEEDBACK_VARIANTS');
-  const variants=(row.variants??[]).map(v=>{
-   check(v.states&&typeof v.states==='object'&&!Array.isArray(v.states)&&Object.keys(v.states).length<=8,'BREAK_FEEDBACK_STATES');
-   const states={};for(const [key,value] of Object.entries(v.states)){
-    id(key);check(key.startsWith(source+':')||key.startsWith('minecraft:')||key.startsWith('kaleidoscope_tavern:'),'FOREIGN_BREAK_STATE');
-    check(typeof value==='boolean'||Number.isSafeInteger(value)||typeof value==='string'&&value.length<=64,'BREAK_FEEDBACK_STATE');states[key]=value;
-   }
-   return {states,uv:uv(v.uv)};
+ const itemParticles=raw.itemParticles;
+ let normalizedParticles;
+ if(itemParticles!==undefined){
+  check(Array.isArray(itemParticles)&&itemParticles.length<=256,'ITEM_PARTICLE_LIMIT');
+  normalizedParticles=itemParticles.map(row=>{
+   check(row&&typeof row==='object','ITEM_PARTICLE_SCHEMA');
+   const item=own(row.item,source),particle=own(row.particle,source);
+   check(itemExists(item),'UNKNOWN_ITEM',item);
+   return {item,particle};
   });
-  return {block,material:row.material,particle,uv:uv(row.uv),...(variants.length?{variants}:{})};
- });
- check(new Set(breakFeedback.map(x=>x.block)).size===breakFeedback.length,'DUPLICATE_BREAK_FEEDBACK');
+  check(new Set(normalizedParticles.map(x=>x.item)).size===normalizedParticles.length,'DUPLICATE_ITEM_PARTICLE');
+ }
  const legacyEffectKey=raw.legacyEffectKey;
  if(legacyEffectKey!==undefined)check(legacyEffectKey===source+':effects','INVALID_LEGACY_EFFECT_KEY');
  const requires=raw.requires??[];check(Array.isArray(requires)&&requires.length<=16&&requires.every(x=>typeof x==='string'),'INVALID_REQUIRES');
- return {breakFeedback,furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,legacyEffectKey,requires:[...new Set(requires)]};
+ return {furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,...(normalizedParticles?{itemParticles:normalizedParticles}:{}),legacyEffectKey,requires:[...new Set(requires)]};
 }
 export function migrateLegacyEffects(raw,source,definitions,absoluteTick){
  check(typeof raw==='string','LEGACY_EFFECT_SCHEMA');

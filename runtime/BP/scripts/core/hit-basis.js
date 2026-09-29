@@ -31,13 +31,18 @@ export function hitQuadrant(location){
  check(location.x>=0&&location.x<=1&&location.z>=0&&location.z<=1,'INVALID_FACE_LOCATION');
  return (location.x>.5?1:0)+(location.z>.5?2:0);
 }
-/** Canonical GlasswareHolder identity: the persisted Bedrock state number is the
- * same world-X/Z quadrant Java GlasswareHolderBlock.getSlotFromHit returns.
- * Facing must never remap state IDs. The resource-pack bone_visibility map is
- * solely responsible for counter-rotating the four model bones so state N is
- * rendered back in world quadrant N. */
+/** GlasswareHolder state addressing, calibrated against the live client
+ * (2026-09-29 reports): the rendered bone_visibility map counter-rotates the four
+ * model bones per facing, but the Bedrock block-geometry handedness ALSO mirrors the
+ * model along the front-parallel axis, so a glass written into world quadrant q is
+ * rendered in the front-parallel-mirrored quadrant. The pick therefore addresses the
+ * state through the same mirror: aim world quadrant q -> state q XOR (facing%2?2:1),
+ * which renders back under the crosshair on every facing, for placement and take.
+ * Mirroring in the pick (server script, instant) rather than in the resource pack
+ * (client re-download) is deliberate; flipping the RP geometry handedness in a future
+ * release must remove this compensation in the same change. */
 export function glasswareHolderStateSlot(facing,quadrant){
  check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');
  check(Number.isInteger(quadrant)&&quadrant>=0&&quadrant<=3,'INVALID_FACE_LOCATION');
- return quadrant;
+ return quadrant^(facing%2?2:1);
 }

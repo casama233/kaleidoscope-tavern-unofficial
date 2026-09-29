@@ -77,15 +77,28 @@ test('non-finite hits are rejected rather than silently mis-slotted',()=>{
  assert.throws(()=>worldFromHit('Down',{x:NaN,y:.5,z:.31},'event'),/INVALID_HIT_LOCATION/);
 });
 
-test('every facing persists the Java world quadrant as the glass state slot',()=>{
+const FRONT_MIRROR=f=>f%2?2:1;
+
+test('the state slot applies the calibrated front-parallel mirror per facing',()=>{
+ // The live client renders the holder model with a front-parallel handedness
+ // mirror (reported 2026-09-29: placement and display land left-right reversed
+ // on every facing with a raw-quadrant pick). The pick applies the same mirror
+ // so the addressed state renders back under the crosshair.
  for(const facing of [0,1,2,3])for(const q of [0,1,2,3])
-  assert.equal(glasswareHolderStateSlot(facing,q),q,'facing '+facing+' quadrant '+q);
+  assert.equal(glasswareHolderStateSlot(facing,q),q^FRONT_MIRROR(facing),'facing '+facing+' quadrant '+q);
+});
+
+test('the front-parallel mirror is an involution, so addressed states round-trip',()=>{
+ for(const facing of [0,1,2,3])for(const q of [0,1,2,3])
+  assert.equal(glasswareHolderStateSlot(facing,glasswareHolderStateSlot(facing,q)),q,'facing '+facing+' quadrant '+q);
 });
 
 test('facing changes never migrate or reinterpret an existing glass state id',()=>{
+ // The facing is fixed at placement, so this is a design invariant, not a
+ // runtime scenario: one front-parallel mirror per facing parity.
  for(const q of [0,1,2,3]){
   const ids=new Set([0,1,2,3].map(f=>glasswareHolderStateSlot(f,q)));
-  assert.deepEqual([...ids],[q]);
+  assert.deepEqual([...ids].sort(),[q^1,q^2].sort());
  }
 });
 

@@ -197,21 +197,26 @@ const holderRawDown=p=>({x:1-p.x,y:p.y,z:1-p.z}); // measured native Down event 
 for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let facing=0;facing<4;facing++)test(
  'glassware holder world slot round trip facing '+facing+' '+mode,()=>{
   const b=block(NS+'glassware_holder',facing);
+  // The live client renders the holder model with a front-parallel handedness
+  // mirror (reported 2026-09-29), so the addressed state is the aim quadrant
+  // XOR the facing's front-parallel bit; the rendered position stays on the
+  // aimed quadrant because the display applies the same mirror.
+  const frontMirror=(f,i)=>i^(f%2?2:1);
   capture(()=>{
    for(let q=0;q<4;q++){
     const point=holderTarget(q),p=playerAt(b,point,'Down',mode);
     p.inventory.setItem(7,new ItemStack(HOLDER_EMPTY_GLASSWARE));
     const e=emit(p,b,'Down',holderRawDown(point));assert.equal(e.cancel,true);
     assert.equal(p.inventory.getItem(7),undefined,'insert consumes exactly one glass');
-    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,i<=q?1:0,
-     'world quadrant '+q+' must write state '+q+', never a facing remap');
+    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,frontMirror(facing,i)<=q?1:0,
+     'world quadrant '+q+' must address the front-mirrored state, rendered back at quadrant '+q);
    }
    for(let q=3;q>=0;q--){
     const point=holderTarget(q),p=playerAt(b,point,'Down',mode);
     const e=emit(p,b,'Down',holderRawDown(point));assert.equal(e.cancel,true);
     assert.equal(p.inventory.getItem(7)?.typeId,HOLDER_EMPTY_GLASSWARE,'take returns aimed glass');
-    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,i<q?1:0,
-     'world quadrant '+q+' must clear state '+q+', never its diagonal');
+    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,frontMirror(facing,i)<q?1:0,
+     'world quadrant '+q+' must clear its front-mirrored state, rendered back at quadrant '+q);
    }
   });
  }

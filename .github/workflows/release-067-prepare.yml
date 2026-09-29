@@ -107,7 +107,7 @@ jobs:
           node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/glassware/storage-routing.test.mjs 2>&1 | tee ../evidence/storage-routing.tap
           node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/pickup/core.test.mjs tools/pickup/adapters.test.mjs 2>&1 | tee ../evidence/pickup.tap
           node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/foundation.tap
-          node --test tools/mechanics/mechanics-regression.test.mjs 2>&1 | tee ../evidence/mechanics.tap
+          node --experimental-vm-modules --test tools/mechanics/mechanics-regression.test.mjs 2>&1 | tee ../evidence/mechanics.tap
 
       - name: Build reproducible package and pin archive hash
         working-directory: tavern

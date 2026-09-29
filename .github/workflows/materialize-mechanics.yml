@@ -1,0 +1,104 @@
+name: Assemble verified mechanics integration
+on:
+  push:
+    branches: [fix/mechanics-completion-20260929]
+    paths: [.github/workflows/materialize-mechanics.yml]
+permissions:
+  contents: read
+jobs:
+  integrate:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: .source-check/java
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: .source-check/integration-baseline
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify and apply pinned readable source edits
+        run: |
+          set -euo pipefail
+          git fetch origin pull/91/head:refs/heads/integration-pr91
+          test "$(git rev-parse integration-pr91)" = b121a48733d1cfa5cbb8f55b519b8a79de5c3194
+          python - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          root=pathlib.Path.cwd();entries=[]
+          for p in sorted((root/'.delivery/parts').glob('*.json')):entries.extend(json.loads(p.read_text()))
+          assert len(entries)==88 and len({e['path'] for e in entries})==88
+          def blob(sha):return subprocess.check_output(['git','cat-file','blob',sha])
+          for e in entries:
+              rel=pathlib.PurePosixPath(e['path']);assert not rel.is_absolute() and '..' not in rel.parts
+              p=root/e['path']
+              if e.get('remove'):p.unlink(missing_ok=True);continue
+              if 'verify' in e:raw=p.read_bytes()
+              elif 'content' in e:raw=e['content'].encode()
+              elif 'edits' in e:
+                  lines=blob(e['source']).decode().splitlines(keepends=True)
+                  for start,count,replacement in reversed(e['edits']):lines[start:start+count]=replacement
+                  raw=''.join(lines).encode()
+              else:raw=blob(e['sha'])
+              actual=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+              assert actual==e.get('verify',e.get('sha')),(e['path'],actual,e)
+              p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
+          subprocess.run(['git','add','-f','--',*[e['path'] for e in entries if not e.get('remove')]],check=True)
+          print('All 88 source objects verified before validation.')
+          PY
+          python .delivery/update_ledger.py
+          python -m pip install Pillow==11.3.0
+      - name: Execute full release and pinned Java gates
+        run: |
+          set -euo pipefail
+          python tools/check_release.py
+          python tools/java_collision.py --java-source .source-check/java
+          python tools/build_storage_visuals.py
+          python tools/check_storage_rendering.py --java-source .source-check/java --report docs/STORAGE-VALIDATION-0.6.64.json
+          python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
+          python tools/build_release.py
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('dist/Kaleidoscope_Tavern_Unofficial_0.6.64_beta1.mcaddon')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='e3c01dd16d0d1fef3a788560c750c847a2493bef84badbd080ced52e10d935ea'
+          assert json.loads(pathlib.Path('.github/release-request.json').read_text())['expected_archive_sha256']==hashlib.sha256(p.read_bytes()).hexdigest()
+          PY
+      - name: Remove transport and preserve all four PR ancestors in validated commit
+        run: |
+          set -euo pipefail
+          rm -rf .delivery
+          rm .github/workflows/materialize-mechanics.yml
+          git add -A -- runtime tools data docs .github package.json release.json .delivery
+          tree="$(git write-tree)"
+          test "$(git rev-parse "$tree:runtime")" = 5c9ec8c1a1ff5fd3eaee1687d81a75abec2fa73d
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          commit="$(printf '%s\n' 'fix: integrate PRs 91 93 94 95 and repair audited mechanisms for 0.6.64 beta1' | git commit-tree "$tree" -p "$GITHUB_SHA" -p b121a48733d1cfa5cbb8f55b519b8a79de5c3194)"
+          for ancestor in b121a48733d1cfa5cbb8f55b519b8a79de5c3194 1d0be5cf24ce3fb2da1e5b1797df017bb9cbd3cb 7f0e8f5631630756aca97f11d6a0f0af6189ed86 60d2856cfca6ad50c26dd3a5b7414a947ffa7391; do git merge-base --is-ancestor "$ancestor" "$commit"; done
+          git push origin "$commit:refs/heads/fix/mechanics-completion-20260929"
+          printf '%s\n' "$commit" > dist/SOURCE_COMMIT
+          git update-ref refs/heads/validated-mechanics "$commit"
+          git bundle create dist/validated-source.bundle validated-mechanics
+          cp docs/*0.6.64*.json dist/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Tavern-verified-mechanics-integration-0.6.64
+          path: dist/
+          retention-days: 14

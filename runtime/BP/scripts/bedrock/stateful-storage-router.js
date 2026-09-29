@@ -9,11 +9,12 @@ import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-b
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
 import {worldFromHit} from '../core/hit-basis.js';
+import {aimPointFor} from '../core/aim-hit.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
 // Mouse/gamepad actions use the same native gaze hit used for block targeting.
 // Touch may select off-centre on the screen, so retain its event hit location.
-export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,last:null};
+export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,picks:0,last:null};
 /** Gaze hit on the same block, or undefined when the ray misses it or leaves the block. */
 export function nativeBlockHit(player,block){
  try{
@@ -31,14 +32,17 @@ function storageHit(player,block,face,point){
   const hit=nativeBlockHit(player,block);
   if(!hit)return fallback;
   storageHitDiagnostics.nativeHits++;
-  // The engine reports raycast hits in the clicked face's own basis (east/west faces
-  // arrive z-mirrored); convert to world axes before any slot math, exactly like the
-  // storage blocks' own gaze selection assumes for north/south faces.
+  // Slot selection must follow the world point the player aimed at. The engine reports
+  // its hit in the clicked face's own basis (measured mirrors per face, which mirrored
+  // cabinet picks east/west), so the player's own eye ray is intersected with the
+  // block's reviewed selection box instead; the measured-basis conversion stays as the
+  // fallback for unreviewed shapes.
+  const aimed=aimPointFor(player,block);
   const corrected=worldFromHit(hit.face,hit.faceLocation,'ray');
-  const location=corrected??hit.faceLocation;
-  if(corrected&&['x','z'].some(axis=>Math.abs(corrected[axis]-hit.faceLocation[axis])>.001)){
-   storageHitDiagnostics.basisCorrections=(storageHitDiagnostics.basisCorrections??0)+1;
-   if(storageHitDiagnostics.basisCorrections<=8)console.warn('[Tavern storage basis] '+JSON.stringify({tick:system.currentTick,block:block.typeId,face:hit.face,raw:hit.faceLocation,corrected}));
+  const location=aimed??corrected??hit.faceLocation;
+  if((storageHitDiagnostics.picks??0)<8){
+   storageHitDiagnostics.picks=(storageHitDiagnostics.picks??0)+1;
+   console.warn('[Tavern storage aim] '+JSON.stringify({tick:system.currentTick,block:block.typeId,face:hit.face,engine:hit.faceLocation,aimed:aimed??null,basis:corrected??null,used:aimed?'aim':corrected?'basis':'engine'}));
   }
   if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
    storageHitDiagnostics.corrected++;

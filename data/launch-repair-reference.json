@@ -356,8 +356,8 @@
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
-      "after": "ea8ac67ebb5d58a24197b1bde48839a4319fc4dcd23c28e8ca30be2a36d96083",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.63b: resolve the hanging glassware hit through the measured per-face basis and address glass slots through the measured facing display map (glasswareHolderStateSlot); keep the audited feedback sounds and particles."
+      "after": "38371c590f508338a97b4a740be8e1ea1955a84e2530fe55a3890c97a12d0372",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.63b: resolve the hanging glassware hit through the measured per-face basis and address glass slots through the measured facing display map (glasswareHolderStateSlot); keep the audited feedback sounds and particles. 0.6.64: pick storage and glassware slots from the player's own aim ray against the reviewed selection box, so no engine face basis (and no unmeasured face) can mirror the pick."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
@@ -368,8 +368,8 @@
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "9a32291e3afbc24ad8c2dbd52f183a2f64d9811538bd1673e352b92c816bb462",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged. 0.6.63b: convert the shared gaze hit through the measured face basis (east/west faces arrive z-mirrored) so cabinet and rack slot selection matches the aimed shelf on every facing."
+      "after": "49d864b2ece051036315361b5e94e6b4b9ba3b697e90cf125c2f505f8ad66f18",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged. 0.6.63b: convert the shared gaze hit through the measured face basis (east/west faces arrive z-mirrored) so cabinet and rack slot selection matches the aimed shelf on every facing. 0.6.64: pick storage and glassware slots from the player's own aim ray against the reviewed selection box, so no engine face basis (and no unmeasured face) can mirror the pick."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
@@ -2493,7 +2493,8 @@
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item2.ogg": "acdf8a4812136ea960753036b764866fe1d8d690bb76ef21a768d424cb6b1e47",
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item3.ogg": "81e88fcb46b1f960d3f2c93cb2a80a684324b4921a518e0a447687dee19836b7",
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item4.ogg": "9bba0de4f6bed39bbb2b9c5ecc134bcd25876a18006a23a68faf66c8e4c27358",
-    "runtime/RP/sounds/kt_pickup/random/pop.ogg": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7"
+    "runtime/RP/sounds/kt_pickup/random/pop.ogg": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7",
+    "runtime/BP/scripts/core/aim-hit.js": "d2e1a00a85c508780acedea80922f8ff2877e0057fc07218b12472c1e0d860b5"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

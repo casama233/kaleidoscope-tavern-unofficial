@@ -2,6 +2,7 @@ import {nativeItems,glasswareStorageKey} from './native-item-storage.js';
 import {storageFeedback} from './pickup-feedback.js';
 import {nativeBlockHit} from './stateful-storage-router.js';
 import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
+import {aimPointFor} from '../core/aim-hit.js';
 import {plantGrowthFeedback} from './interaction-particles.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
@@ -79,10 +80,11 @@ export function resolveGlasswareHit(player,block,face,point){
    const ray=nativeBlockHit(player,block);
    if(ray){source='ray';hit=ray.faceLocation;sourceFace=ray.face??face;}
   }
-  const corrected=worldFromHit(sourceFace,hit,source);
+  const aimed=aimPointFor(player,block);
+  const corrected=aimed??worldFromHit(sourceFace,hit,source);
   if(corrected){
    glasswareHitDiagnostics.corrections++;
-   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
+   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source:aimed?'aim':source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
    if(glasswareHitDiagnostics.corrections<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
    return {face,faceLocation:corrected};
   }

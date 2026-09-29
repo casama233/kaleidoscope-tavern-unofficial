@@ -1,0 +1,75 @@
+name: Reviewed Java parity integration
+on:
+  push:
+    branches: [fix/java-parity-integration-20260929]
+    paths:
+      - .github/workflows/java-parity-integration.yml
+      - tools/mechanics/integrate_java_parity.py
+permissions:
+  contents: write
+concurrency:
+  group: reviewed-java-parity-integration
+  cancel-in-progress: false
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: .source-check/java
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: .source-check/integration-baseline
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      - name: Reconcile only reviewed collision and effect-policy changes
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/parity-evidence
+          git config user.name 'Kaleidoscope Tavern Unofficial'
+          git config user.email '97009482+casama233@users.noreply.github.com'
+          python tools/mechanics/integrate_java_parity.py 2>&1 | tee /tmp/parity-evidence/merge.log
+          git diff --cached --check
+      - name: Run mechanics, shape, release and historical-source gates
+        run: |
+          set -euo pipefail
+          node --experimental-vm-modules --test tools/mechanics/mechanics-regression.test.mjs 2>&1 | tee /tmp/parity-evidence/mechanics.tap
+          python tools/java_collision.py --java-source .source-check/java 2>&1 | tee /tmp/parity-evidence/collision.log
+          node tools/check_effect_parity.mjs 2>&1 | tee /tmp/parity-evidence/effect-policy.log
+          python tools/check_release.py 2>&1 | tee /tmp/parity-evidence/release-check.log
+          git diff --exit-code -- runtime/
+          python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline 2>&1 | tee /tmp/parity-evidence/source-check.log
+          python tools/build_release.py 2>&1 | tee /tmp/parity-evidence/build.log
+      - name: Commit the tested merge without publishing or updating main
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'fix/java-parity-integration-20260929'
+          test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          test -z "$(git diff --name-only --diff-filter=U)"
+          git diff --cached --check
+          git commit -m 'merge: reconcile PR91 Java collision and effect policy with current main and barrel fixes'
+          git merge-base --is-ancestor b121a48733d1cfa5cbb8f55b519b8a79de5c3194 HEAD
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          git log -1 --format='%H%n%P%n%B' > /tmp/parity-evidence/commit.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-java-parity-evidence
+          path: /tmp/parity-evidence/
+          retention-days: 7

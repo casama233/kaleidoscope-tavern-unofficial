@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const [before,after]=process.argv.slice(2).map(p=>JSON.parse(fs.readFileSync(p,'utf8')));
+assert.deepEqual(before.cellars.map(x=>x.queries),[9,90,900,2052]);
+assert.deepEqual(after.cellars.map(x=>x.queries),[1,2,20,115]);
+assert.ok(after.cellars.every(x=>x.mutationCalls===0));
+assert.deepEqual(after.cellars.map(x=>x.helpers),before.cellars.map(x=>x.helpers));
+assert.deepEqual(before.boardEdit,{glyphs:300,spawned:300,removed:300});
+assert.deepEqual(after.boardEdit,{glyphs:300,spawned:1,removed:1});
+assert.equal(before.unrelatedAmbient.randomCallsPerTick,16008);assert.equal(after.unrelatedAmbient.randomCallsPerTick,0);
+assert.deepEqual(before.idleEffects,{ticks:20,reads:44,writes:4,playerLists:44});
+assert.deepEqual(after.idleEffects,{ticks:20,reads:4,writes:0,playerLists:4});
+console.log('Pinned before/after API-count regression: PASS (not native performance)');

@@ -1,3 +1,4 @@
+import {syncStorageVisualPose} from './storage-visual-maintenance.js';
 /** External cabinet adapter. No addon inventory engine, item whitelist or pose table. */
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {check} from '../core/util.js';
@@ -54,9 +55,8 @@ export function createExtensionFurniture(registry){
    const pose=isBar(def)?barCabinetVisualPose(slot===0?'left':'right',state.single,f):cellarCabinetVisualPose(slot,f);
    const at=plus(block.location,pose.offset);
    if(!entity){entity=block.dimension.spawnEntity(helper,at,{initialRotation:pose.rotation.y});entity.setDynamicProperty(ANCHOR,anchor);entity.addTag(NS+':visual_helper');}
-   entity.setProperty(NS+':storage_kind',bottle.kind);
    // Storage RP already owns Java pitch, including the recently fixed Molotov.
-   entity.setRotation({x:0,y:pose.rotation.y});entity.tryTeleport(at,{checkForBlocks:false});visuals.set(entity.id,entity);
+   syncStorageVisualPose(entity,NS+':storage_kind',bottle.kind,at,pose.rotation.y);visuals.set(entity.id,entity);
   }
   // Legacy helper properties belong to the addon UUID; its bridge cleans them after ACK.
  }
@@ -131,7 +131,7 @@ export function createExtensionFurniture(registry){
     return choose(block,load(block).state,held.id,face,faceLocation).changed;
    }});
   world.afterEvents.entityLoad.subscribe(({entity})=>{if(entity.isValid&&entity.getDynamicProperty(ANCHOR)){visuals.set(entity.id,entity);system.run(()=>maintain(entity));}});
-  system.runInterval(()=>{cursor=tickStorageVisuals(visuals,cursor,maintain);for(const [key,t] of probes)if(system.currentTick-t>200)probes.delete(key);for(const [id,pending] of placements)if(system.currentTick-pending.tick>40)placements.delete(id);},20);
+  system.runInterval(()=>{cursor=tickStorageVisuals(visuals,cursor,maintain,128,e=>{const a=JSON.parse(e.getDynamicProperty(ANCHOR));return JSON.stringify([e.dimension.id,a.type,a.dimension,a.position.x,a.position.y,a.position.z]);});for(const [key,t] of probes)if(system.currentTick-t>200)probes.delete(key);for(const [id,pending] of placements)if(system.currentTick-pending.tick>40)placements.delete(id);},20);
   world.afterEvents.playerLeave.subscribe(e=>placements.delete(e.playerId));
  }
  function importSnapshot(row){

@@ -11,6 +11,8 @@ def main():
     parser.add_argument('--baseline',type=Path)
     args=parser.parse_args()
     ref=read(ROOT/'data/launch-repair-reference.json')
+    from efficiency.reference import apply_efficiency_reference
+    ref=apply_efficiency_reference(ref,ROOT)
     assert ref['rules']['tipsy']['visualFixAccepted'] is False
     verified=0
     if args.java_source:

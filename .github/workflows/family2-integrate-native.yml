@@ -75,8 +75,6 @@ jobs:
             checks['localizedInstructionsRestored']=set(fg)==set(declared) and all(
              s['guides'] and all(g['localizedEntries']>0 and g['localeKeys']==declared[g['id']] for g in s['guides'][0]['guides'])
              for s in [fixed,restart])"""
-          # Strip the extra Python source indentation, retaining the target's two spaces.
-          new=new.splitlines()[0]+'\n'+'\n'.join(line[10:] for line in new.splitlines()[1:])
           assert s.count(old)==1;s=s.replace(old,new)
           old2=" checks['allNoPlayers']=all(s['observer'] and all(p['players']==0 for p in s['observer']) for s in summaries)"
           new2=old2+"\n checks['worldLiquorAck']=all(any(x.get('source')=='kaleidoscope_world_liquor' and x.get('ok') is True for x in records((out/(s['case']+'.log')).read_text(),'[FAMILY1-EVENT] kaleidoscope_tavern:extension_ack ')) for s in summaries)\n checks['familyKnifeTags']=all(all(p['knives'].get(k) is True for p in s['observer'] for k in ['kaleidoscope_end:dragon_tooth_knife','kaleidoscope_nether:primitive_machete']) for s in summaries)"

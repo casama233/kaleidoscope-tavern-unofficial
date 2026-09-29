@@ -12,7 +12,7 @@ import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-b
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {nativeBlockHit} from './stateful-storage-router.js';
-import {worldFromHit} from '../core/hit-basis.js';
+import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
@@ -46,7 +46,7 @@ export function repairVerticalDouble(block){
  const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;block.setPermutation(air());furnitureDiagnostics.multiblockRepairs++;return true;
 }
 export function useGlasswareHolder(player,block,faceLocation){
- canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
+ canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderStateSlot(block.permutation.getState(FACING)??0,glasswareHolderSlot(faceLocation)),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
 }
 export const glasswareHitDiagnostics={corrections:0,errors:0,last:null};
@@ -159,7 +159,7 @@ export function installFurnitureEvents(){
   }else if(existing.kind==='light'){
    const color=dyeColor(hs.id);consume=!!color&&color!==existing.color;
   }else if(existing.kind==='glassware_holder'){
-   const hit=resolveGlasswareHit(e.player,e.block,e.blockFace,e.faceLocation),slot=glasswareHolderSlot(hit.faceLocation),occupied=e.block.permutation.getState(GLASSWARE_SLOTS[slot])===1;
+   const hit=resolveGlasswareHit(e.player,e.block,e.blockFace,e.faceLocation),slot=glasswareHolderStateSlot(e.block.permutation.getState(FACING)??0,glasswareHolderSlot(hit.faceLocation)),occupied=e.block.permutation.getState(GLASSWARE_SLOTS[slot])===1;
    faceLocation=hit.faceLocation;
    consume=hs.id===EMPTY_GLASSWARE||(!hs.id&&occupied);
   }

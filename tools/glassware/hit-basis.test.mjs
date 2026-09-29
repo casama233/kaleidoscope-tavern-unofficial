@@ -8,7 +8,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {worldFromHit,hitQuadrant,HIT_FACE_BASIS} from '../../runtime/BP/scripts/core/hit-basis.js';
+import {worldFromHit,hitQuadrant,HIT_FACE_BASIS,glasswareHolderStateSlot} from '../../runtime/BP/scripts/core/hit-basis.js';
 
 test('slot order matches the Java quadrant read',()=>{
  assert.equal(hitQuadrant({x:.24,y:.5,z:.25}),0);
@@ -61,4 +61,32 @@ test('faces without a measured basis keep the raw engine value',()=>{
 
 test('non-finite hits are rejected rather than silently mis-slotted',()=>{
  assert.throws(()=>worldFromHit('Down',{x:NaN,y:.5,z:.31},'event'),/INVALID_HIT_LOCATION/);
+});
+
+test('north/south facings address slots by raw world quadrant',()=>{
+ for(const q of [0,1,2,3]){
+  assert.equal(glasswareHolderStateSlot(0,q),q);
+  assert.equal(glasswareHolderStateSlot(2,q),q);
+ }
+});
+
+test('east/west facings address slots through the diagonal display map',()=>{
+ for(const q of [0,1,2,3]){
+  assert.equal(glasswareHolderStateSlot(1,q),3-q,'facing east');
+  assert.equal(glasswareHolderStateSlot(3,q),3-q,'facing west');
+ }
+});
+
+test('the addressed slot renders back under the aim on every facing',()=>{
+ // Display map measured 2026-09-29: identity on facings 0/2, diagonal on facings 1/3.
+ const display=(facing,state)=>facing%2?3-state:state;
+ for(const facing of [0,1,2,3])for(const aim of [0,1,2,3]){
+  const state=glasswareHolderStateSlot(facing,aim);
+  assert.equal(display(facing,state),aim,`facing ${facing} aim ${aim}`);
+ }
+});
+
+test('invalid facings or quadrants are rejected',()=>{
+ assert.throws(()=>glasswareHolderStateSlot(4,0),/INVALID_FACING/);
+ assert.throws(()=>glasswareHolderStateSlot(0,7),/INVALID_FACE_LOCATION/);
 });

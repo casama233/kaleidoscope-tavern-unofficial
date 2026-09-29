@@ -356,8 +356,8 @@
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
-      "after": "ff1726550923c6661cad88ee0264307506b89192f7331fe06e6d1128f4a6191a",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 0.6.63: read the hanging rack's glass slot from the resolved gaze hit, as the other multi-slot blocks already do; the engine can report the click in the clicked face's own basis, which slotted the aimed cup's diagonal neighbour. 0.6.63b: replace the runtime hit-basis guessing with the measured per-face basis (bottom face: event = 180° horizontal rotation, script raycast = x-mirror; eight logged clicks) so take and insert land on the aimed cup."
+      "after": "df3b7b74bfe90d153e9d502225e7a8afa0ad0b1f5c7d2475dfb9384d22f66aaa",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 0.6.63: read the hanging rack's glass slot from the resolved gaze hit, as the other multi-slot blocks already do; the engine can report the click in the clicked face's own basis, which slotted the aimed cup's diagonal neighbour. 0.6.63b: replace the runtime hit-basis guessing with the measured per-face basis (bottom face: event = 180° horizontal rotation, script raycast = x-mirror; eight logged clicks) so take and insert land on the aimed cup. 0.6.63b: address glass slots through the measured display map (glasswareHolderStateSlot) - east/west facings render each slot diagonally, so take and insert invert the facing."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
@@ -2120,7 +2120,7 @@
     "runtime/RP/models/entity/liquid_pressing_tub_water.geo.json": "c0e8794c34f0fe34630bc38854eac1f8ed13f7fbf7fcf67ddf547af7e5efde45",
     "runtime/RP/models/entity/liquid_pressing_tub_lava.geo.json": "6f27ed94b9afe7a272aad02889a7d6eb94fdf8e68a1373bdb85b0ffe903a7167",
     "runtime/RP/models/entity/liquid_barrel_water.geo.json": "eb0a16c9854581b1497708a3c93b368ec40debd0fc02c6b18b28e66366521ae7",
-    "runtime/BP/scripts/core/hit-basis.js": "fccf8d6ff946f30624e06b4937bbf03cb52e51f2ffc36691ce56c74d361bf646"
+    "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

@@ -1,3 +1,4 @@
+import {feedback} from './break-feedback.js';
 import {incenseRates,incenseCount} from '../core/incense-sampling.js';
 import {oppositeFacing} from '../core/java-placement.js';
 import {system,world,BlockPermutation,EntityDamageCause,GameMode,MolangVariableMap} from '@minecraft/server';
@@ -51,7 +52,7 @@ function waterOrAir(block){return block.permutation.getState(LADDER_WATERLOGGED)
 function recoverStepladder(player,block){canWrite(player);const half=block.permutation.getState(LADDER_HALF),base=ladderBase(block.location,half),bottom=blockAt(block.dimension,base),top=blockAt(block.dimension,{x:base.x,y:base.y+1,z:base.z});check(bottom?.typeId===STEPLADDER&&top?.typeId===STEPLADDER,'LADDER_PAIR_DAMAGED');exchangeBlocks(player,0,player.getGameMode()===GameMode.Creative?[]:[{id:STEPLADDER,count:1}],[{block:bottom,permutation:waterOrAir(bottom)},{block:top,permutation:waterOrAir(top)}]);diagnostics.recovered++;return true;}
 export function registerDecorationComponents({blockComponentRegistry:b,itemComponentRegistry:i}){
  b.registerCustomComponent(NS+':incense',{onPlace:e=>optional(()=>initializeIncense(e.block)),onRedstoneUpdate:powered,onTick:e=>optional(()=>tickIncense(e.block)),onPlayerInteract:nativeEmptyHandBlockUse});
- b.registerCustomComponent(NS+':stepladder',{onTick:e=>{const block=e.block,half=block.permutation.getState(LADDER_HALF),facing=block.permutation.getState(LADDER_FACING),profile=facing+4*half,other=blockAt(block.dimension,plus(block.location,{x:0,y:half===0?1:-1,z:0}));if(!other)return;if(other.typeId!==STEPLADDER||other.permutation.getState(LADDER_HALF)===half||other.permutation.getState(LADDER_FACING)!==facing)optional(()=>block.setPermutation(waterOrAir(block)));else if(block.permutation.getState(LADDER_COLLISION_PROFILE)!==profile)optional(()=>block.setPermutation(block.permutation.withState(LADDER_COLLISION_PROFILE,profile)));}});
+ b.registerCustomComponent(NS+':stepladder',{onTick:e=>{const block=e.block,half=block.permutation.getState(LADDER_HALF),facing=block.permutation.getState(LADDER_FACING),profile=facing+4*half,other=blockAt(block.dimension,plus(block.location,{x:0,y:half===0?1:-1,z:0}));if(!other)return;if(other.typeId!==STEPLADDER||other.permutation.getState(LADDER_HALF)===half||other.permutation.getState(LADDER_FACING)!==facing)optional(()=>feedback.transaction(block,()=>block.setPermutation(waterOrAir(block))));else if(block.permutation.getState(LADDER_COLLISION_PROFILE)!==profile)optional(()=>block.setPermutation(block.permutation.withState(LADDER_COLLISION_PROFILE,profile)));}});
  i.registerCustomComponent(NS+':place_stepladder',{onUseOn:e=>safe(e.source,()=>placeStepladder(e.source,placementPos(e)))});
 }
 export function installDecorationEvents(){

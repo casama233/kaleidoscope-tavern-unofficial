@@ -1,3 +1,4 @@
+import {feedback} from './break-feedback.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
@@ -38,7 +39,7 @@ function takeVanillaBottle(player,block){
  else return false;
  const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:out,count:1}],makeStack),old=waterSnapshot(block),raw=world.getDynamicProperty(bottleDisplayKey(block));
  commitInventory(plan,c,()=>{setWithWater(block,BlockPermutation.resolve('minecraft:air'));save(block,undefined);},()=>{restoreWater(block,old);world.setDynamicProperty(bottleDisplayKey(block),raw);});
- try{player.dimension.playSound('dig.glass',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});}catch{}
+ if(!feedback.isActive())try{player.dimension.playSound('dig.glass',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});}catch{}
  return true;
 }
 export function installVanillaBottleDisplayEvents(){

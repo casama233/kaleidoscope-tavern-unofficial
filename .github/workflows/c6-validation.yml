@@ -61,30 +61,3 @@ jobs:
         with:
           name: Tavern-public-beta
           path: dist/
-
-  deliver-break-feedback:
-    if: github.ref == 'refs/heads/fix/break-feedback-full-20260929'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Apply exact reviewed break-feedback patch
-        run: |
-          set -euo pipefail
-          test "$(sha256sum .github/break-feedback.patch.xz | awk '{print $1}')" = "85510c44969a605e24c83741789da0387a9fc9744aa609042d732dfb5008af11"
-          xz -dc .github/break-feedback.patch.xz > "$RUNNER_TEMP/break-feedback.patch"
-          test "$(sha256sum "$RUNNER_TEMP/break-feedback.patch" | awk '{print $1}')" = "812253639bf8d034f3d78398a7636a7e004dc7730e0d5bbd79d4874407b953f3"
-          git apply --check "$RUNNER_TEMP/break-feedback.patch"
-          git apply "$RUNNER_TEMP/break-feedback.patch"
-          git show f793a98a0180e1948f98e69a8ca879a028884e38:.github/workflows/c6-validation.yml > .github/workflows/c6-validation.yml
-          rm .github/break-feedback.patch.xz
-          git add -A
-          git diff --cached --check
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'fix: complete block destruction particles and material feedback'
-          git push origin HEAD:fix/break-feedback-full-20260929
-

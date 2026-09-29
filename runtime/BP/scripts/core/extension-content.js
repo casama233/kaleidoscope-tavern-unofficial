@@ -36,3 +36,6 @@ export function externalPickBlock(blockId){
   const rule=value.pickBlocks?.find(row=>row.block===blockId);if(rule)return rule;
  }
 }
+
+/** Optional namespaced presentation descriptors; removed with their source. */
+export function externalBreakFeedback(id){for(const value of foundations.values()){const row=value.breakFeedback?.find(row=>row.block===id);if(row)return row;}}

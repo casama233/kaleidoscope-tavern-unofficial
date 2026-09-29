@@ -1,3 +1,4 @@
+import {feedback} from './break-feedback.js';
 import {consumeScriptedBreak,replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
 import {restorePotion} from './potions.js';
 /** Non-player destruction: native engine decides whether the block breaks.
@@ -73,7 +74,14 @@ export function naturalBreak(event,params){
   if(key.startsWith('kt:extension_storage/')&&data)world.setDynamicProperty(key,JSON.stringify({schema:1,type:data.type,layout:data.layout,revision:data.revision+1,deleted:true,...(data.migrationDigest?{migrationDigest:data.migrationDigest}:{})}));
   else world.setDynamicProperty(key,undefined);
  }
- for(const cell of cells)removeBlock(d,cell.pos,cell.id);
+ const feedbackCells=[];
+ for(const cell of cells){
+  // The engine owns the original broken cell's feedback; only compensate siblings.
+  const b=d.getBlock(cell.pos);if(!b||b.typeId!==cell.id)continue;
+  const visual=feedback.snapshot(b);removeBlock(d,cell.pos,cell.id);
+  if(visual&&b.typeId!==cell.id)feedbackCells.push(visual);
+ }
+ feedback.emit(feedbackCells,{sound:false});
  clearHelpers(d,root,[...keys,`kt:seat/${d.id}/${at(root)}`]);
  if(event.entitySource?.typeId==='minecraft:player'&&event.entitySource.getGameMode()==='Creative'||world.gameRules.doTileDrops===false)return;
  for(const stack of drops)d.spawnItem(stack,{x:root.x+.5,y:root.y+.5,z:root.z+.5});

@@ -16,7 +16,7 @@ import {POTION_ITEMS} from '../core/potions.js';
 import {parseBottle} from '../core/bottles.js';
 import {potionInput,potionIdentity} from './potions.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,requireBlockReach} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach} from './transactions.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {applyCustomEffect} from './custom-effects.js';
@@ -81,10 +81,11 @@ function syncSignatureColor(item,color){
 function commitBlock(player,store,key,next,take,outputs,block,newPermutation){
  const container=inventory(player),raw=store.raw(key),old=store.load(key),saved=waterSnapshot(block);
  const plan=planInventory(container,player.selectedSlotIndex,take,outputs,makeStack);
- commitInventory(plan,container,()=>{
+ commitPickupInventory(plan,container,player,()=>{
   if(newPermutation)setWithWater(block,newPermutation);
   store.save(key,next,old?.revision??-1);
  },()=>{restoreWater(block,saved);store.restore(key,raw);});
+ return plan;
 }
 function replaceHeld(player,expected,next){
  const container=inventory(player),index=player.selectedSlotIndex,current=container.getItem(index);
@@ -166,7 +167,7 @@ export function placeCup(player,location){
  check(isCupItem(item?.typeId),'NOT_CUP');check((block.isAir||waterAt(block))&&!cupStore.load(key),'SPACE_NOT_CLEAR');
  const state={schema:1,revision:0,item:item.typeId,facing:facing(player)};
  if(item.typeId===SIGNATURE)state.payload=signaturePayload(item);validateCup(state);
- commitBlock(player,cupStore,key,state,1,[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;
+ commitBlock(player,cupStore,key,state,placementTake(player),[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;
 }
 function getCup(block){
  const item=cupItem(block?.typeId);check(item,'NOT_CUP');
@@ -187,11 +188,11 @@ function initializeNativeCup(block){
  if(cupStore.raw(key)===undefined)cupStore.save(key,getCup(block),-1);
 }
 export function takeCup(player,block){
- near(player,block);const key=cupKey(block.dimension.id,block.location);
+ canInteract(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);const key=cupKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
   const state=getCup(block);
-  commitBlock(player,cupStore,key,undefined,0,[{stack:resultItem(state),count:1}],block,BlockPermutation.resolve('minecraft:air'));
-  syncCupVisual(block);return state;
+  const plan=commitBlock(player,cupStore,key,undefined,0,pickupOutputs(player,[{stack:resultItem(state),count:1}]),block,BlockPermutation.resolve('minecraft:air'));
+  pickupFeedback(player,block,plan);syncCupVisual(block);return state;
  });
 }
 export function pourHeldShakerNow(player,block){

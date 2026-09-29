@@ -23,7 +23,7 @@ def _base(effect,ambient,life,size):
 def _finish(e,c,init,step,rotate=False):
  old=''.join(f'variable.kt_old{a}=variable.kt_{a};' for a in 'xyz')
  if rotate:old+='variable.kt_oldroll=variable.kt_roll;'
- update=old+step+'variable.kt_tick+=1;'
+ update=old+step+'variable.kt_tick=variable.kt_tick+(1);'
  e.setdefault('events',{})['kt_motion_init']={'expression':init}
  c['minecraft:particle_lifetime_events']={'creation_event':'kt_motion_init'}
  c['minecraft:particle_initialization']={'per_render_expression':f'loop(math.max(0,math.min(math.floor(variable.particle_age*20)+1,variable.kt_life)-variable.kt_tick), {{{update}}});'}
@@ -32,8 +32,8 @@ def _finish(e,c,init,step,rotate=False):
 
 def suspended(effect,kind,ambient=False):
  e,c,init=_base(effect,ambient,'500+math.floor(variable.particle_random_1*501)','(0.1+variable.particle_random_2*0.1)*(0.6+variable.particle_random_3*0.6)')
- init+='variable.kt_y-=0.125;variable.kt_oldy=variable.kt_y;'+super_velocity({'x':'0','y':'-0.8','z':'0'})
- step='variable.kt_dy-=0.0004;'+''.join(f'variable.kt_{a}+=variable.kt_d{a};' for a in 'xyz')
+ init+='variable.kt_y=variable.kt_y-(0.125);variable.kt_oldy=variable.kt_y;'+super_velocity({'x':'0','y':'-0.8','z':'0'})
+ step='variable.kt_dy=variable.kt_dy-(0.0004);'+''.join(f'variable.kt_{a}=variable.kt_{a}+(variable.kt_d{a});' for a in 'xyz')
  c['minecraft:particle_appearance_tinting']={'color':[.32,.5,.22,1] if kind=='spore' else [1,1,1,1]}
  if kind=='spore':
   e['description']['basic_render_parameters']={'material':'particles_alpha','texture':ATLAS}
@@ -57,8 +57,8 @@ def cherry(effect,kind,ambient=False):
  init+=f'variable.kt_frame=math.floor(math.floor(math.random(0,12))*{frames-1}/12);'
  c['minecraft:particle_appearance_billboard']['uv']=uv
  c['minecraft:particle_appearance_tinting']={'color':[1,1,1,1]}
- step='variable.kt_wind=0.005*math.pow(math.min((variable.kt_tick+1)/300,1),1.25);variable.kt_dx+=math.cos(variable.kt_angle)*variable.kt_wind;variable.kt_dz+=math.sin(variable.kt_angle)*variable.kt_wind;variable.kt_dy-=0.00075;variable.kt_rs+=variable.kt_ra/20;variable.kt_roll+=variable.kt_rs/20;'
- step+=''.join(f'variable.kt_{a}+=variable.kt_d{a};' for a in 'xyz')
+ step='variable.kt_wind=0.005*math.pow(math.min((variable.kt_tick+1)/300,1),1.25);variable.kt_dx=variable.kt_dx+(math.cos(variable.kt_angle)*variable.kt_wind);variable.kt_dz=variable.kt_dz+(math.sin(variable.kt_angle)*variable.kt_wind);variable.kt_dy=variable.kt_dy-(0.00075);variable.kt_rs=variable.kt_rs+(variable.kt_ra/20);variable.kt_roll=variable.kt_roll+(variable.kt_rs/20);'
+ step+=''.join(f'variable.kt_{a}=variable.kt_{a}+(variable.kt_d{a});' for a in 'xyz')
  _finish(e,c,init,step,True)
  # Terrain contact is an explicit approximation, not Java's exact AABB response.
  c['minecraft:particle_motion_collision']={'enabled':True,'collision_radius':.075*scale,'expire_on_contact':True}

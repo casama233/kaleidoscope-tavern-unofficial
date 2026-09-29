@@ -3,7 +3,7 @@ import {tapComplete} from './effect-feedback.js';
 import {BottleStore,bottleKey,displayAdd} from '../core/bottles.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {planInventory,commitInventory} from '../core/inventory.js';
-import {inventory,makeStack,safe,canWrite,handSnapshot,sameHand,blockAt,requireBlockReach,exchangeBlocks,placementTake} from './transactions.js';
+import {inventory,makeStack,safe,canWrite,canInteract,pickupOutputs,commitPickupInventory,pickupFeedback,handSnapshot,sameHand,blockAt,requireBlockReach,exchangeBlocks,placementTake} from './transactions.js';
 import {check} from '../core/util.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {registerJavaBlockUseHandler,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse} from './java-placement-router.js';
@@ -93,9 +93,9 @@ export function finishSourceTap(tap,{kind,sourceLocation,destinationLocation}){
 
 export const TAP_SOURCE_TEST={inspectTapSource,finishSourceTap,OUTPUT};
 
-function recoverSimpleProduct(player,block){
- canWrite(player);requireBlockReach(player,block.dimension,block.location);const item=productIds.get(block.typeId);check(item,'NOT_TAP_PRODUCT');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:item,count:1}],makeStack),old=waterSnapshot(block),id=block.typeId;
- commitInventory(plan,c,()=>{check(block.typeId===id,'BLOCK_CHANGED');setWithWater(block,BlockPermutation.resolve('minecraft:air'));},()=>restoreWater(block,old));
+export function recoverSimpleProduct(player,block){
+ canInteract(player);requireBlockReach(player,block.dimension,block.location);const item=productIds.get(block.typeId);check(item,'NOT_TAP_PRODUCT');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,pickupOutputs(player,[{id:item,count:1}]),makeStack),old=waterSnapshot(block),id=block.typeId;
+ commitPickupInventory(plan,c,player,()=>{check(block.typeId===id,'BLOCK_CHANGED');setWithWater(block,BlockPermutation.resolve('minecraft:air'));},()=>restoreWater(block,old));pickupFeedback(player,block,plan);
 }
 export function registerTapSourceComponents({blockComponentRegistry:r}){
  r.registerCustomComponent(NS+':tap_product',{onPlayerInteract:ev=>nativeEmptyHandBlockUse(ev)});
@@ -121,5 +121,5 @@ function claimProductTake(player,block){
 }
 function scheduleProductTake(player,block){
  const id=block.typeId,d=block.dimension,loc=posOf(block),hs=handSnapshot(player);
- system.run(()=>safe(player,()=>{canWrite(player);requireBlockReach(player,d,loc);sameHand(player,hs);check(player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return productLocks.with([id+'/'+d.id+'/'+loc.x+'_'+loc.y+'_'+loc.z,player.id],()=>recoverSimpleProduct(player,b));}));
+ system.run(()=>safe(player,()=>{canInteract(player);requireBlockReach(player,d,loc);sameHand(player,hs);check(player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,loc);check(b?.typeId===id,'BLOCK_CHANGED');return productLocks.with([id+'/'+d.id+'/'+loc.x+'_'+loc.y+'_'+loc.z,player.id],()=>recoverSimpleProduct(player,b));}));
 }

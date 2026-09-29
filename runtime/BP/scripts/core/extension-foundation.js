@@ -40,10 +40,22 @@ export function normalizeFoundation(raw,source,itemExists){
   })};
  });
  check(new Set(normalizedPicks.map(x=>x.block)).size===normalizedPicks.length,'DUPLICATE_PICK_BLOCK');
+ const itemParticles=raw.itemParticles;
+ let normalizedParticles;
+ if(itemParticles!==undefined){
+  check(Array.isArray(itemParticles)&&itemParticles.length<=256,'ITEM_PARTICLE_LIMIT');
+  normalizedParticles=itemParticles.map(row=>{
+   check(row&&typeof row==='object','ITEM_PARTICLE_SCHEMA');
+   const item=own(row.item,source),particle=own(row.particle,source);
+   check(itemExists(item),'UNKNOWN_ITEM',item);
+   return {item,particle};
+  });
+  check(new Set(normalizedParticles.map(x=>x.item)).size===normalizedParticles.length,'DUPLICATE_ITEM_PARTICLE');
+ }
  const legacyEffectKey=raw.legacyEffectKey;
  if(legacyEffectKey!==undefined)check(legacyEffectKey===source+':effects','INVALID_LEGACY_EFFECT_KEY');
  const requires=raw.requires??[];check(Array.isArray(requires)&&requires.length<=16&&requires.every(x=>typeof x==='string'),'INVALID_REQUIRES');
- return {furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,legacyEffectKey,requires:[...new Set(requires)]};
+ return {furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,...(normalizedParticles?{itemParticles:normalizedParticles}:{}),legacyEffectKey,requires:[...new Set(requires)]};
 }
 export function migrateLegacyEffects(raw,source,definitions,absoluteTick){
  check(typeof raw==='string','LEGACY_EFFECT_SCHEMA');

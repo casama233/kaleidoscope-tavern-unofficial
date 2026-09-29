@@ -151,6 +151,10 @@ def main():
     clients={family:read(RP/f'entity/runtime_{family}_bottle_visual.entity.json')['minecraft:client_entity']['description'] for family in snap['accepted']}
     clients['glass_bar_cabinet']=clients['bar_cabinet']
     checked_bindings=0
+    shared_pose=(RT/'BP/scripts/bedrock/storage-visual-maintenance.js').read_text()
+    assert shared_pose.count('.setRotation(')==1,'Shared pose must have exactly one rotation writer'
+    assert 'entity.setRotation({x:0,y:yaw})' in shared_pose,'Pitch must remain owned by the RP model'
+    assert 'const rotation=entity.getRotation();' in shared_pose,'Delta maintenance must inspect actual yaw'
     for family,client in clients.items():
         for kind,identifier in client['geometry'].items():
             g=geometry[identifier]
@@ -160,7 +164,12 @@ def main():
             checked_bindings+=1
         adapter=(RT/'BP/scripts/bedrock'/((family if family!='glass_bar_cabinet' else 'bar_cabinet').replace('_','-')+'.js')).read_text()
         assert 'e.setRotation(pose.rotation)' not in adapter, (family,'Pitch must have one owner')
-        assert 'e.setRotation({x:0,y:pose.rotation.y})' in adapter
+        if family in ('cellar_cabinet','circular_rack'):
+            assert "import {storageHelpersByAnchor,syncStorageVisualPose} from './storage-visual-maintenance.js';" in adapter
+            assert "syncStorageVisualPose(e,NS+':storage_kind',bottle.kind,at,pose.rotation.y)" in adapter
+            assert '.setRotation(' not in adapter,(family,'Delegated yaw must have no second writer')
+        else:
+            assert 'e.setRotation({x:0,y:pose.rotation.y})' in adapter
     original=read(RP/'models/entity/molotov.geo.json')['minecraft:geometry'][0]
     actual=geometry['geometry.kt_runtime.storage_molotov']
     expected=copy.deepcopy(original)

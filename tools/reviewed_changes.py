@@ -6,10 +6,17 @@ import hashlib,json
 from functools import lru_cache
 from pathlib import Path
 from creative.historical import LegacyMenuProjection
+from efficiency.reference import apply_efficiency_reference
 ROOT=Path(__file__).resolve().parents[1]
 @lru_cache(maxsize=1)
+def reference():
+    # Use the same validated supersession chain as check_launch.py. Preserve the
+    # original before/beforeProjected hashes; do not bypass historical guards.
+    original=json.loads((ROOT/'data/launch-repair-reference.json').read_text())
+    return apply_efficiency_reference(original,ROOT)
+@lru_cache(maxsize=1)
 def changes():
-    return json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges']
+    return reference()['reviewedChanges']
 @lru_cache(maxsize=1)
 def projection():return LegacyMenuProjection(ROOT)
 def historical_digest(path,projected=False):
@@ -24,13 +31,13 @@ def historical_digest(path,projected=False):
 
 @lru_cache(maxsize=1)
 def reviewed_additions():
-    rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['newRuntimeFiles']
+    rows=reference()['newRuntimeFiles']
     for name,digest in rows.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Reviewed addition changed',name)
     return rows
 
 @lru_cache(maxsize=1)
 def reviewed_removals():
-    rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text()).get('removedRuntimeFiles',{})
+    rows=reference().get('removedRuntimeFiles',{})
     for name,row in rows.items():
         assert not (ROOT/name).exists(),('Reviewed removed file returned',name)
         assert row['reason'] and len(row['before'])==64 and len(row['beforeProjected'])==64

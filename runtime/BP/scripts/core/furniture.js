@@ -1,6 +1,7 @@
 import {paintingPlacement} from './java-placement.js';
 /** Furniture identity and state: the placed block is authoritative; helpers never own/drop items. */
 import {check} from './util.js';
+import {hitQuadrant} from './hit-basis.js';
 export const NS='kaleidoscope_tavern';
 export const COLORS=Object.freeze(['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']);
 export const LIGHT_COLORS=Object.freeze(['colorless',...COLORS]);
@@ -58,4 +59,4 @@ export function tableCheckEastWest(base,{west,east}={}){base=tableState(base);if
 export function tableCheckNorthSouth(base,{north,south}={}){base=tableState(base);if(base.axis===TABLE_AXIS.X&&base.position!==TABLE_POSITION.SINGLE)return base;const s=tableShouldLink(south,TABLE_AXIS.X),n=tableShouldLink(north,TABLE_AXIS.X);if(s&&n)return {axis:TABLE_AXIS.Z,position:TABLE_POSITION.MIDDLE};if(s)return {axis:TABLE_AXIS.Z,position:TABLE_POSITION.LEFT};if(n)return {axis:TABLE_AXIS.Z,position:TABLE_POSITION.RIGHT};return {axis:base.axis,position:TABLE_POSITION.SINGLE};}
 export function tablePlacementState(playerFacing,neighbors={}){check(Number.isInteger(playerFacing)&&playerFacing>=0&&playerFacing<=3,'INVALID_FACING');const base={axis:TABLE_AXIS.Z,position:TABLE_POSITION.SINGLE};return playerFacing%2===1?tableCheckNorthSouth(base,neighbors):tableCheckEastWest(base,neighbors);}
 export function tableRepairState(self,neighbors={}){self=tableState(self);if(self.position!==TABLE_POSITION.SINGLE)return self.axis===TABLE_AXIS.X?tableCheckEastWest(self,neighbors):tableCheckNorthSouth(self,neighbors);const first=self.axis===TABLE_AXIS.X?tableCheckEastWest(self,neighbors):tableCheckNorthSouth(self,neighbors);if(first.position!==TABLE_POSITION.SINGLE)return first;return self.axis===TABLE_AXIS.X?tableCheckNorthSouth(first,neighbors):tableCheckEastWest(first,neighbors);}
-export function glasswareHolderSlot(location){check(location&&Number.isFinite(location.x)&&Number.isFinite(location.z),'INVALID_FACE_LOCATION');check(location.x>=0&&location.x<=1&&location.z>=0&&location.z<=1,'INVALID_FACE_LOCATION');return (location.x>.5?1:0)+(location.z>.5?2:0);}
+export function glasswareHolderSlot(location){return hitQuadrant(location);}

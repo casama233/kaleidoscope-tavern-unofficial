@@ -356,8 +356,8 @@
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
-      "after": "bfad7ef455f76e3a126a9edecf5af90966b59601d17f3c7241a55db88a82bc86",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+      "after": "fa9ad3a5dae2dbae1b915143a8fb8555b0c4d5f2d5c2f38913bbd33d85cdac76",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.63b: resolve the hanging glassware hit through the measured per-face basis and address glass slots through the measured facing display map (glasswareHolderStateSlot); keep the audited feedback sounds and particles."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
@@ -368,8 +368,8 @@
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "bba5ca987aa8c02c7a887182fc1e1f2111c9ac9dac40310c8ab730ade441579c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "8fa4b1f64cf747e2641737f9022713facc58f153dcf10b7d0efbb172c291acca",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
@@ -410,8 +410,8 @@
     "runtime/BP/scripts/core/furniture.js": {
       "before": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
       "beforeProjected": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
-      "after": "b8a74e4c8c44f79fe7a6fa734f0e836d30019d06d7a5db9171e434138cd6463d",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "d91b8d4d9768655cbceb2eb2869cd86aaf6b410b82019f052fce095802619b82",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.63: glasswareHolderSlot delegates to the shared world-quadrant read in core/hit-basis.js."
     },
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
@@ -2441,7 +2441,8 @@
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f45fab8b8a00aa36606dd078.png": "f45fab8b8a00aa36606dd0789ba94f6fed841e44def7648ae84b397e628d09db",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f69c9982f5d9d7b1b6d0ac3a.png": "f69c9982f5d9d7b1b6d0ac3a96e5c0875da7671925b6b18d0e202ceb5c476b84",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f7a5ec2a66c13809b93a9422.png": "f7a5ec2a66c13809b93a94223524680a30534b6abac76e467bfd3a6fac94ced0",
-    "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa"
+    "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa",
+    "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

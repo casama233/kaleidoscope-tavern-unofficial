@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:rig_liquid_barrel_lava_visual",
+      "materials": {
+        "default": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/repair/lava"
+      },
+      "geometry": {
+        "default": "geometry.kt_repair.barrel_lava"
+      },
+      "animations": {
+        "level": "animation.kt_assets_a17.liquid_barrel"
+      },
+      "scripts": {
+        "animate": [
+          "level"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_repair.lava"
+      ]
+    }
+  }
+}

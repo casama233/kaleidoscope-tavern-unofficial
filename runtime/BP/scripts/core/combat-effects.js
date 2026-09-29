@@ -12,6 +12,3 @@ export function shriekHit(origin,direction,box){vector(origin);const d=unit(dire
 }
 export function shriekImpulse(direction){const d=unit(direction),n=Math.hypot(d.x,d.z);return {x:n*n<.001?0:d.x/n*SHRIEK.horizontalImpulse,y:SHRIEK.verticalImpulse,z:n*n<.001?0:d.z/n*SHRIEK.horizontalImpulse};}
 export function shriekParticles(origin,direction){vector(origin);const d=unit(direction);return Array.from({length:16},(_,i)=>{const n=(i+1)*SHRIEK.particleStep;return {x:origin.x+d.x*n,y:origin.y+d.y*n,z:origin.z+d.z*n};});}
-
-/** Player combat follows the world's PvP rule; creative/spectator stay immune. */
-export function shriekPlayerTargetAllowed(pvp,gameMode){return pvp===true&&(gameMode==='Survival'||gameMode==='Adventure');}

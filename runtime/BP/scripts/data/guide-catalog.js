@@ -1,4 +1,5 @@
 import {GUIDE_ENTRY_ICONS} from './guide-icons.js';
+import {organizeGuideNavigation} from './guide-navigation.js';
 /** One encyclopedia page per product, using Cookery's native entry renderer. */
 const LOCALES=['zh_CN','zh_TW','en_US'];
 const CATEGORY={gear:'equipment',mix_tools:'equipment',press:'equipment',barrel_drinks:'barrel',
@@ -92,23 +93,19 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   zh_CN:['这是燃烧弹，不能饮用。对空按住使用至少半秒，松手投掷；击中后会在落点周围点火。','酒桶加入 4000 mB 熔岩，关盖酿制，以空酒瓶取出；也可在装有熔岩的炼药锅上接酒嘴，于嘴下摆空酒瓶取用。','对方块使用可摆放；空手取回。可存入单瓶架、倾斜酒架、圆形酒架及酒柜，红石上升沿会发射燃烧瓶。'],
   en_US:['An incendiary projectile, not a drink. Hold use while aiming into air for at least half a second, then release to throw. It ignites the area around its impact.','Fill a barrel with 4000 mB of lava, close the lid, then collect the brewed result with empty bottles. Alternatively, fit a tap to a lava cauldron and place an empty bottle below the tap.','Use on a block to place it; collect with an empty hand. Holders, tilted/circular racks and cabinets accept it. A rising redstone edge launches it as an incendiary projectile.']
  }});
- // Explain differences that affect the player's choice of drink.
- for(const [short,rows] of [
-  ['emerald',[
-   '延伸触及持续45分钟：酒馆支持远距摆放的物品可从6格延至9格。不会增加攻击、挖掘或原版方块交互距离。',
-   '延伸觸及持續45分鐘：酒館支援遠距擺放的物品可從6格延至9格。不會增加攻擊、挖掘或原版方塊互動距離。',
-   'Long Reach lasts 45 minutes. Tavern items that support distant placement can reach 9 blocks instead of 6. Attack, mining and vanilla block interaction ranges stay unchanged.']],
-  ['sculk_special',[
-   '饮用后沿视线发出32格音波。玩家伤害与击退遵守世界的PvP开关；创造和旁观玩家免疫。',
-   '飲用後沿視線發出32格音波。玩家傷害與擊退遵守世界的PvP開關；創造和旁觀玩家免疫。',
-   'Drinking fires a sonic attack along your view for 32 blocks. Player damage and knockback follow the world PvP setting; creative and spectator players are immune.']],
-  ['mystery_cocktail',[
-   '微醺的镜头晃动默认关闭。可选的左右摆动会影响瞄准，并非Java版的画面侧倾。',
-   '微醺的鏡頭晃動預設關閉。可選的左右擺動會影響瞄準，並非Java版的畫面側傾。',
-   'Tipsy motion is off by default. Optional side-to-side motion affects aim and differs from Java screen roll.']]
- ]){
-  const target=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+short);
-  if(target)append(target,{mechanicsByLocale:Object.fromEntries(LOCALES.map((lc,i)=>[lc,[rows[i]]]))});
+ // General bottle handling belongs on the bottle page, quality on the barrel page.
+ for(const [sourceId,targetId] of [['guide_bottle_display','empty_bottle'],['guide_quality_effects','barrel']]){
+  const source=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+sourceId);
+  const target=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+targetId);
+  if(source&&target){append(target,source);payload.entries=payload.entries.filter(e=>e!==source);}
+  else if(source&&targetId==='empty_bottle'){
+   source.id='kaleidoscope_tavern:empty_bottle';source.icon=GUIDE_ENTRY_ICONS[source.id];
+   LOCALES.forEach((lc,i)=>payload.names[lc][source.id]=['空酒瓶','空酒瓶','Empty Bottle'][i]);
+  }
+ }
+ for(const [fruit,labels] of Object.entries({grape:['葡萄汁','葡萄汁','Grape Juice'],ice_grape:['冰葡萄汁','冰葡萄汁','Ice Grape Juice'],gold_grape:['金葡萄汁','金葡萄汁','Gold Grape Juice'],green_grape:['青提汁','青提汁','Green Grape Juice'],glow_berries:['荧光莓汁','螢光莓汁','Glow Berry Juice'],sweet_berries:['甜莓汁','甜莓汁','Sweet Berry Juice']})){
+  const id='kaleidoscope_tavern:pressing/'+fruit+'_bucket';
+  if(payload.entries.some(e=>e.id===id))LOCALES.forEach((lc,i)=>payload.names[lc][id]=labels[i]);
  }
  const result=organizeGuideNavigation(payload);
  for(const entry of result.entries){
@@ -118,31 +115,4 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
  }
  for(const [key,labels] of Object.entries({method_barrel:['酒桶','酒桶','Barrel'],method_shaker:['雪克杯','雪克杯','Shaker'],method_pressing_tub:['压榨桶','壓榨桶','Pressing Tub'],method_freezer:['冷冻柜','冷凍櫃','Freezer']}))LOCALES.forEach((lc,i)=>result.text[lc][key]=labels[i]);
  return result;
-}
-
-/** Use Cookery's short, flat chapter navigation and one product page per item. */
-function organizeGuideNavigation(payload){
- const groups={equipment:['工作站','工作站','Workstations'],cultivation:['种植与收获','種植與收穫','Growing & Harvesting'],barrel:['酒饮','酒飲','Drinks'],cocktail:['鸡尾酒','雞尾酒','Cocktails'],ingredients:['调酒材料','調酒材料','Mixers & Ingredients'],storage:['收纳与工具','收納與工具','Storage & Tools'],furniture:['家具','家具','Furniture'],lighting:['灯饰','燈飾','Lighting'],decor:['装饰','裝飾','Decorations'],food:['食物','食物','Food'],extensions:['其他附属内容','其他附屬內容','Other Addon Content']};
- const aliases={incense:'decor',art:'decor',boards:'decor'};
- for(const entry of payload.entries)entry.category=aliases[entry.category]??entry.category;
- const used=new Set(payload.entries.map(e=>e.category));
- payload.categories=Object.entries(groups).filter(([id])=>used.has(id)).map(([id,labels])=>{
-  const original=payload.categories.find(c=>c.id===id)??{id,icon:payload.icon};
-  LOCALES.forEach((lc,i)=>payload.text[lc][id]=labels[i]);
-  return {...original,id,labelKey:id,fallback:labels[2],parent:''};
- });
- // General bottle handling belongs on the bottle page, quality on the barrel page.
- for(const [sourceId,targetId] of [['guide_bottle_display','empty_bottle'],['guide_quality_effects','barrel']]){
-  const source=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+sourceId);
-  let target=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+targetId);
-  if(source&&target){append(target,source);payload.entries=payload.entries.filter(e=>e!==source);}
-  else if(source&&targetId==='empty_bottle'){
-   source.id='kaleidoscope_tavern:empty_bottle';
-   source.icon=GUIDE_ENTRY_ICONS[source.id];
-   LOCALES.forEach((lc,i)=>payload.names[lc][source.id]=['空酒瓶','空酒瓶','Empty Bottle'][i]);
-  }
- }
- // Keep recipe/usage/effects in the same native page; no recipe-only menu entries.
- payload.entries.sort((a,b)=>payload.categories.findIndex(c=>c.id===a.category)-payload.categories.findIndex(c=>c.id===b.category));
- return payload;
 }

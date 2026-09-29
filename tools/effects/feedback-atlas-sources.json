@@ -1,0 +1,666 @@
+{
+  "source_version": "1.20.1",
+  "atlas": "textures/kaleidoscope_tavern/particle/java_feedback.png",
+  "assets": [
+    {
+      "source": "assets/minecraft/textures/particle/glow.png",
+      "sha256": "56b6808c91a315236588f46aecb45abf8b47f472361db432b57df3bccdc45c7a",
+      "destination": [
+        0,
+        0,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/bubble_pop_0.png",
+      "sha256": "3b0bf85d792dc17e3b8e5b7cb7eccfd63653d383563af0aa44d591d68138f886",
+      "destination": [
+        0,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/bubble_pop_1.png",
+      "sha256": "a3b345abae270d12a6034750703d1bf5d4aa02156ad1381cc6bfa5cf9f4b596e",
+      "destination": [
+        32,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/bubble_pop_2.png",
+      "sha256": "1fbac21e24eef44e507747e840c9877f78d30679ae93ea834163e814f3e9ac68",
+      "destination": [
+        64,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/bubble_pop_3.png",
+      "sha256": "825c0fe3df9ee4c85662927b74710e8d6e1913914226438e37b0cfbad87dcdc7",
+      "destination": [
+        96,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/bubble_pop_4.png",
+      "sha256": "544b65053fa66e04d4299083245012fbf4e26328e38d77e54cc63fa20dafb052",
+      "destination": [
+        128,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_7.png",
+      "sha256": "8520ec5989b996551c1ba5dfb887307c5530457f7922f9f230332666c2f9bd69",
+      "destination": [
+        0,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_6.png",
+      "sha256": "d2ae53914ad37cb62939a1f1fa26481028f5ff30c8d023e3346829bae037aa02",
+      "destination": [
+        32,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_5.png",
+      "sha256": "3aba220472d6f3285241daf0605b4fae35a1f5f895d1b90a83decd0128273a50",
+      "destination": [
+        64,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_4.png",
+      "sha256": "f2b2f70777a92867e56c5c340cc517fd2b71115d3bd4aa3a885ef2b56ae99e32",
+      "destination": [
+        96,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_3.png",
+      "sha256": "fbb82778517c7129bdeced7cc5a0fc7fc28b466cb11e75a006a0c391bff45589",
+      "destination": [
+        128,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_2.png",
+      "sha256": "b62f4b6973b1448b89c873538811e34f109ba7b9b06b76cbcd3f5566e413bb47",
+      "destination": [
+        160,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_1.png",
+      "sha256": "307c20fdc95a336762179ed780495b952ccd2296885df5e3325e539f4e4369ff",
+      "destination": [
+        192,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/effect_0.png",
+      "sha256": "a9bbd25db737ad4baef6975fca3649fc12303cb0368e9fe899af8d271834be97",
+      "destination": [
+        224,
+        64,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_7.png",
+      "sha256": "13061b4f3ba4585d390ea6b37502e41a445ae6588d742d21f0afcd65e60d16b1",
+      "destination": [
+        0,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_6.png",
+      "sha256": "1d0bce47b910d93d60de34deca732abeeea2dcdf0d2ed16bf8881f1f2ee92442",
+      "destination": [
+        32,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_5.png",
+      "sha256": "ea3bb652d7604349517ceb17061b0007578ff70f86e1adc5e823da767a315fcf",
+      "destination": [
+        64,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_4.png",
+      "sha256": "2cacbc3e1b3297b34997fdb46aa35bbc3597d4f1a608f7412aa843a22bfb4a28",
+      "destination": [
+        96,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_3.png",
+      "sha256": "0988037438acb1dab7e583e6e17dbdc0d47c51721d237ea628311fc7ae3e355a",
+      "destination": [
+        128,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_2.png",
+      "sha256": "b685389739d5add8d9240511f15b60e3365262c9e557b80fc3bf352dc30564a2",
+      "destination": [
+        160,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_1.png",
+      "sha256": "c5f800e6cc398a4ba186db712f452ef6cdc6b9da2c3ea281663459f8834ce455",
+      "destination": [
+        192,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/generic_0.png",
+      "sha256": "24cb83c46e1ecf07afd5e15feb2b74c7b21c3c317cd2f8ab4f101d6dd3d2eb56",
+      "destination": [
+        224,
+        96,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_7.png",
+      "sha256": "4d43f83c26d7351ed0746e063fbb7f4f59e19ad2af953dbb0e0b3936120efeae",
+      "destination": [
+        0,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_6.png",
+      "sha256": "b40a1e4fdc9c252446ee700d579a22371a5a03d7014d356a5c7c3ff0165d42e5",
+      "destination": [
+        32,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_5.png",
+      "sha256": "4d43f83c26d7351ed0746e063fbb7f4f59e19ad2af953dbb0e0b3936120efeae",
+      "destination": [
+        64,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_4.png",
+      "sha256": "b40a1e4fdc9c252446ee700d579a22371a5a03d7014d356a5c7c3ff0165d42e5",
+      "destination": [
+        96,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_3.png",
+      "sha256": "149597debfac58e4f5dc1b2bbd99316fd8499063aa5b0318f81d30a851e4e6df",
+      "destination": [
+        128,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_2.png",
+      "sha256": "30483d093069c5d64d33304967ecc0a0282dfd55b3984d1c3e26d5aec8498d82",
+      "destination": [
+        160,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_1.png",
+      "sha256": "f17bbd1d9228b4bac64d38da7ae61862a905cbf3de4f3cd6817d7abe98a4868b",
+      "destination": [
+        192,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/glitter_0.png",
+      "sha256": "24cb83c46e1ecf07afd5e15feb2b74c7b21c3c317cd2f8ab4f101d6dd3d2eb56",
+      "destination": [
+        224,
+        128,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/splash_0.png",
+      "sha256": "278f06a80bdd6aa86659edc92b8fd256249a54f8d3b97f1d4390d5ea817f4452",
+      "destination": [
+        0,
+        160,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/splash_1.png",
+      "sha256": "b82039bd2eb17bba75497ede3c7ae61a986b0ded37ac2c82e2415a8e1e9a920d",
+      "destination": [
+        32,
+        160,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/splash_2.png",
+      "sha256": "0b31a9c4159692924fd80e66f864d23128775993fef3b483c6558fed5585963a",
+      "destination": [
+        64,
+        160,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/splash_3.png",
+      "sha256": "c40ddeefdbfa890fce87b8a6830a4993212bfb9b00b8b4ed0dcbc60a676cd05c",
+      "destination": [
+        96,
+        160,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/drip_hang.png",
+      "sha256": "682ae941f994a3aeceb86a31eb10fa8c86ff8c34eda0673a7625dfa9ab844449",
+      "destination": [
+        0,
+        192,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/drip_fall.png",
+      "sha256": "62ad0fc080f6b4059e45950173530e0bb6264344da918af9492c297bc1f11422",
+      "destination": [
+        32,
+        192,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/drip_land.png",
+      "sha256": "3b351a3c01efafa7d81b8a190225dc9d7961b5c531c54b63dc9721660195d094",
+      "destination": [
+        64,
+        192,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/flame.png",
+      "sha256": "2f2efacac134ce943d142d3a40e43f87e80e1e32d7137645bb1268618505e4a7",
+      "destination": [
+        96,
+        192,
+        8,
+        8
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_0.png",
+      "sha256": "abc938afbe6d05eaf23aa3bdb388cb1ec0c3bb473638276feab95050884a4d40",
+      "destination": [
+        0,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_1.png",
+      "sha256": "8457eef7f8252edcc3a9681d0609f8e5f09551cd7b47e5bfbaefca701880fbad",
+      "destination": [
+        32,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_2.png",
+      "sha256": "6ac595a42c5ab335de0aec8715b1a2ec3e3272d7ca1aed13dfd2c25a3cb4adf7",
+      "destination": [
+        64,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_3.png",
+      "sha256": "cdbefeb3bb28550ee2d37c2591f1492767f774497b2f9a1abf7a86425ec2d9c5",
+      "destination": [
+        96,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_4.png",
+      "sha256": "0dcf3f4b0fb2f7056f040d34765cac179101923fd46c090b053be527c32227cb",
+      "destination": [
+        128,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_5.png",
+      "sha256": "f633aad55948fd816c567c54d05f91a48c348eb720f6ac4cc1c4f8c86ee6fd42",
+      "destination": [
+        160,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_6.png",
+      "sha256": "c1a0436550e940ce8dcb40dbf850a4b8c4bfbff292e45f8c1fa7dae15c7ece93",
+      "destination": [
+        192,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_7.png",
+      "sha256": "7f7fc96328d031de4e0af2373bbc9f0117a275ada1c4360f76d61bbf86d171d3",
+      "destination": [
+        224,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_8.png",
+      "sha256": "191520268c536bbb8545e6b73ae9684dc46e61e0b53e132c907fbed9767c7ebc",
+      "destination": [
+        256,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_9.png",
+      "sha256": "b27d17201f081b1f62accccd20475c8ce19f4e8914843a9c3279016e3399d6e0",
+      "destination": [
+        288,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_10.png",
+      "sha256": "0b30aaad6fbdaeec1ca0207dbf632d4640a0efbd12abd97689613175978a2d6c",
+      "destination": [
+        320,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_11.png",
+      "sha256": "89f61d06efb917ed23335e88d0b0d8e024291962d89857daddf91f699665f019",
+      "destination": [
+        352,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_12.png",
+      "sha256": "bdac912d24f06618e02c7231deaee012b1ff92cea2a9e790397951d9d1015f9a",
+      "destination": [
+        384,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_13.png",
+      "sha256": "af8e3ea18d9e1f8ca39c22ae67060ee031287eb71be61207a098e997eb5636ce",
+      "destination": [
+        416,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_14.png",
+      "sha256": "ca8297b61f037c1b823991af73ed0859479b897b95b682443eb15aa0a03c1eb6",
+      "destination": [
+        448,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/sonic_boom_15.png",
+      "sha256": "81ceac80356794e77ecbb9a3560ff828bf07313d6fef1433d0ac655b8dbe4ce7",
+      "destination": [
+        480,
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_0.png",
+      "sha256": "b9dba5a1bd1a4e86ac36e4bb687e7bc7dc4582fb87b747256f40b7eae856a9f5",
+      "destination": [
+        0,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_1.png",
+      "sha256": "3210b2573915398ba4aec95934b7491afb62912e5eeb7f270c93ad8baec35b67",
+      "destination": [
+        32,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_2.png",
+      "sha256": "427fa0537c03a79930def495cf92e37a2d47df52d93740b8640c926c6d1cf339",
+      "destination": [
+        64,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_3.png",
+      "sha256": "ec9caa19b5c76ee59cff917dfd6b95a63bcba505823ddc9c07b61e48e14533c0",
+      "destination": [
+        96,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_4.png",
+      "sha256": "f7069e8a780fe2b97774624a3db1c5ca2a1d88bc0e747b2baf1d9b4031205bbb",
+      "destination": [
+        128,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_5.png",
+      "sha256": "c30e437364b20cb27f3d1377c9064ab6744afa809c18d5db44ca03eef698f737",
+      "destination": [
+        160,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_6.png",
+      "sha256": "257ca9093556d9000cc64cadc7ba0ee750adc01fd46e1e635559cdea4ea1e0a9",
+      "destination": [
+        192,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_7.png",
+      "sha256": "19e6c6fece06fc9853498b2de783256217f5d019219cf7fdb2445bb149e28cec",
+      "destination": [
+        224,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_8.png",
+      "sha256": "0c7b00b50bbca92e2c21473c7652411b73c0fc6e9162dfb1f1f48397f3d36506",
+      "destination": [
+        256,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_9.png",
+      "sha256": "f247a9878ce2937dcef8d1b566ac096a53756060bf77fe7a12f1759fb3af670e",
+      "destination": [
+        288,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_10.png",
+      "sha256": "fc7fb42efc1636f4d87f84b4a801890e44a50f2e9f53d5edfbe46e979781c2f8",
+      "destination": [
+        320,
+        256,
+        3,
+        3
+      ]
+    },
+    {
+      "source": "assets/minecraft/textures/particle/cherry_11.png",
+      "sha256": "a33c92555928b7382efa5b0c556fa6b82d2321d0fcc640a77026fea089bb4e6f",
+      "destination": [
+        352,
+        256,
+        3,
+        3
+      ]
+    }
+  ]
+}

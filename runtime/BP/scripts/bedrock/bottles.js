@@ -1,3 +1,4 @@
+import {nativeStoragePlan,nativeItems} from './native-item-storage.js';
 import {bottleBlock,bottleBase,isBottleBlock} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
@@ -7,7 +8,7 @@ import {BOTTLES} from '../data/bottles.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,pickupOutputs,commitPickupInventory,pickupFeedback,requireBlockReach,placementTake,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {restorePotion} from './potions.js';
@@ -25,37 +26,38 @@ function emptyKey(block){const p=block.location;return `empty-bottle/${block.dim
 function waterBottleStack(){return restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'Consume'}});}
 function simpleKey(block){const p=block.location;return `simple-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
 export function takeEmptyBottle(player,b){
- canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=waterSnapshot(b);
- return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,EMPTY_BLOCK);return out;});
+ canInteract(player);requireBlockReach(player,b.dimension,b.location);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,pickupOutputs(player,[{id:EMPTY_ITEM,count:1}]),makeStack),old=waterSnapshot(b);
+ return locks.with([emptyKey(b),player.id],()=>{const out=commitPickupInventory(plan,c,player,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));pickupFeedback(player,b,plan);return out;});
 }
 export function takeWaterBottle(player,b){
- canWrite(player);check(b?.typeId===WATER_BLOCK,'NOT_WATER_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:waterBottleStack(),count:1}],makeStack),old=waterSnapshot(b);
- return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,WATER_BLOCK);return out;});
+ canInteract(player);requireBlockReach(player,b.dimension,b.location);check(b?.typeId===WATER_BLOCK,'NOT_WATER_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,pickupOutputs(player,[{stack:waterBottleStack(),count:1}]),makeStack),old=waterSnapshot(b);
+ return locks.with([simpleKey(b),player.id],()=>{const out=commitPickupInventory(plan,c,player,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));pickupFeedback(player,b,plan);return out;});
 }
 export function placeBottle(player,target,{expectedRevision}={}){
  canWrite(player);const d=player.dimension,k=bottleKey(d.id,target);
  return locks.with([k,player.id],()=>{
   const b=blockAt(d,target);check(b,'UNLOADED_TARGET');const h=hand(player);check(parseBottle(h?.typeId),'NOT_BOTTLE');
-  check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
+
   const old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');
   if(old)check(intact(b,old),'DISPLAY_MISMATCH');else check(b.isAir||waterAt(b),'SPACE_NOT_CLEAR');
-  const next=displayAdd(old,h.typeId,facingFor(player));
+  const next=displayAdd(old,h.typeId,facingFor(player)),native=nativeStoragePlan(b,k,old,next,h);
   const raw=store.raw(k),oldBlock=waterSnapshot(b),c=inventory(player);
   // Match Java DrinkBlockItem/BlockItem: successful Creative placement/stacking does not shrink the stack.
   const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
-  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});
-  playMaterialInteraction(d,target,bottleBlock(next.base));tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;
+  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
+  playMaterialInteraction(d,target,bottleBlock(next.base));return next;
  });
 }
 export function takeBottles(player,b,{all=false,expectedRevision}={}){
- canWrite(player);const k=bottleKey(b.dimension.id,b.location);
+ canInteract(player);requireBlockReach(player,b.dimension,b.location);const k=bottleKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{
   const old=store.load(k);check(old,'MISSING_BOTTLE_STATE');check(intact(b,old),'DISPLAY_MISMATCH');
   if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
   const tx=displayTake(old,all),raw=store.raw(k),oldBlock=waterSnapshot(b),c=inventory(player);
-  const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);
-  commitInventory(plan,c,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});
-  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));tell(player,'§a已取回原品質酒瓶。');return tx;
+  const native=nativeStoragePlan(b,k,old,tx.state,undefined,tx.give);
+  const plan=planInventory(c,player.selectedSlotIndex,0,pickupOutputs(player,native.outputs),makeStack);
+  commitPickupInventory(plan,c,player,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
+  pickupFeedback(player,b,plan,{drink:true});return tx;
  });
 }
 export function registerBottleComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':bottle_display',{onPlayerInteract:nativeEmptyHandBlockUse,

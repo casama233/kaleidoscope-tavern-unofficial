@@ -3,6 +3,7 @@
  * Do not add a second scripted throw/consume or rewrite rack shoot(velocity).
  */
 import {system,world} from '@minecraft/server';
+import {emitBurst} from './effect-feedback.js';
 const NS='kaleidoscope_tavern';
 export const MOLOTOV=NS+':molotov',THROWN_MOLOTOV=NS+':thrown_molotov';
 const RESOLVED=NS+':molotov_resolved';
@@ -64,10 +65,6 @@ export function installMolotovEvents(){
  world.afterEvents.playerLeave.subscribe(e=>{pending.delete(e.playerId);recent.delete(e.playerId);});
  system.runInterval(()=>{const now=system.currentTick;for(const [id,row] of recent)if(now-row.tick>40)recent.delete(id);},40);
 }
-// A normal variate for Java sendParticles' position spread. Built-in Bedrock
-// flame/smoke lifetime and velocity are still their native particle behaviors.
-function gaussian(){const u=Math.max(Number.MIN_VALUE,Math.random());return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*Math.random());}
-
 export function igniteMolotov(dimension,location){
  const cx=Math.floor(location.x),cy=Math.floor(location.y),cz=Math.floor(location.z),radius=3;
  for(let dx=-radius;dx<=radius;dx++)for(let dz=-radius;dz<=radius;dz++){
@@ -81,9 +78,6 @@ export function igniteMolotov(dimension,location){
   }
  }
  for(const sound of ['firecharge.use','random.glass'])try{dimension.playSound(sound,location,{volume:2,pitch:1});}catch(e){recordError(e);}
- const center={x:location.x,y:location.y+.5,z:location.z};
- for(const [particle,count] of [['minecraft:basic_flame_particle',30],['minecraft:basic_smoke_particle',20]])for(let i=0;i<count;i++){
-  const position={x:center.x+gaussian()*3,y:center.y+gaussian(),z:center.z+gaussian()*3};
-  try{dimension.spawnParticle(particle,position);}catch(e){recordError(e);break;}
- }
+ emitBurst(dimension,location,'molotov_flame');
+ emitBurst(dimension,location,'molotov_smoke');
 }

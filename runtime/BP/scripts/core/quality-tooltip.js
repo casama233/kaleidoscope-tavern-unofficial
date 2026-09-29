@@ -50,3 +50,10 @@ export function isLegacyManagedQualityBottleLore(item){
  const expected=qualityBottleLore(item,true);if(!expected)return false;
  try{const raw=typeof item.getRawLore==='function'?item.getRawLore():undefined;return Array.isArray(raw)&&canonical(raw)===canonical(expected);}catch{return false;}
 }
+
+/** Normalize only lore owned by Tavern; all names, properties and custom lore survive. */
+export function normalizeBottleStack(item){
+ const next=item.clone(),lore=qualityBottleLore(next);
+ if(lore&&(!(next.getLore?.().length)||isManagedQualityBottleLore(next)||isLegacyManagedQualityBottleLore(next)))next.setLore(lore);
+ return next;
+}

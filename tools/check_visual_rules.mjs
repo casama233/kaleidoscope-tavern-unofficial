@@ -1,6 +1,6 @@
 // Pure data/math/formatting checks only. No player mocks or interaction tests.
 import assert from 'node:assert/strict';
-import {TIPSY_ID,TIPSY_OPT_IN_TAG,TIPSY_OPT_OUT_TAG,tipsyMotionEnabled,TIPSY_YAW_GAIN,TIPSY_MAX_STEP_DEGREES,javaTipsyRoll,tipsyYawOffset,tipsyYawStep,wrapYaw} from '../runtime/BP/scripts/core/tipsy-visual.js';
+import {TIPSY_ID,TIPSY_YAW_GAIN,TIPSY_MAX_STEP_DEGREES,javaTipsyRoll,tipsyYawOffset,tipsyYawStep,wrapYaw} from '../runtime/BP/scripts/core/tipsy-visual.js';
 import {addStatus,advanceStatus,activeStatus,readStatus,CUSTOM_IMPLEMENTED} from '../runtime/BP/scripts/core/custom-effects.js';
 import {qualityBottleLore} from '../runtime/BP/scripts/core/quality-tooltip.js';
 import {DRINK_EFFECTS} from '../runtime/BP/scripts/data/drink-effects.js';
@@ -48,6 +48,3 @@ for(const [base,qualities] of Object.entries(DRINK_EFFECTS))for(let q=0;q<qualit
 }
 assert(rows>0,'quality level checks must exercise actual source rows');
 console.log(JSON.stringify({pureChecks:'passed',tipsySamples:3601,maximumStepDegrees:maximumStep,qualityLevelRows:rows,interactionTestsRun:false}));
-
-for(const tags of [[],[TIPSY_OPT_OUT_TAG],[TIPSY_OPT_IN_TAG,TIPSY_OPT_OUT_TAG]])assert.equal(tipsyMotionEnabled(t=>tags.includes(t)),false);
-assert.equal(tipsyMotionEnabled(t=>t===TIPSY_OPT_IN_TAG),true);

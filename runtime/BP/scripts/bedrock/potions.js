@@ -32,3 +32,13 @@ export function potionInput(item){
 }
 
 export function potionCapabilities(){try{return {recognizedEffects:Potions.getAllEffectTypes().map(e=>e.id).filter(id=>Object.hasOwn(POTION_SPECS,id)),unrecognizedEffects:Potions.getAllEffectTypes().map(e=>e.id).filter(id=>!Object.hasOwn(POTION_SPECS,id)),deliveryTypes:Potions.getAllDeliveryTypes().map(d=>d.id)};}catch(e){return {error:String(e)};}}
+
+/** Placement stores the native ItemStack; it does not convert it to ingredients. */
+export function potionDisplayInput(item){
+ check(item?.typeId==='minecraft:potion'&&item.amount>=1,'NOT_POTION');
+ const potion=potionIdentity(item),effect=Potions.getEffectType(potion.effectId),delivery=Potions.getDeliveryType(potion.deliveryId);
+ check(effect&&delivery&&potion.deliveryId==='Consume','POTION_TYPE_UNAVAILABLE');
+ const probe=Potions.resolve(effect,delivery);
+ check(probe?.typeId===item.typeId&&canonical(potionIdentity(probe))===canonical(potion),'POTION_ROUNDTRIP_FAILED');
+ return {item:item.typeId,potion,nativeItems:1};
+}

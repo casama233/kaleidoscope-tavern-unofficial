@@ -5,7 +5,7 @@ export const CUSTOM_IMPLEMENTED=Object.freeze({
  'kaleidoscope_tavern:bloody_mary':'kill_heal',
  'kaleidoscope_tavern:xp_drain':'orb_attraction_adapter',
  'kaleidoscope_tavern:zenith':'safe_surface_teleport_adapter',
- 'kaleidoscope_tavern:shriek_attack':'sonic_ray_pvp_rule_adapter',
+ 'kaleidoscope_tavern:shriek_attack':'sonic_ray_pve_adapter',
  'kaleidoscope_tavern:upside_down':'grumm_radius_name_adapter',
  'kaleidoscope_tavern:vision':'glowing_radius_adapter',
  'kaleidoscope_tavern:tomb_raider':'disarm_drop_adapter',

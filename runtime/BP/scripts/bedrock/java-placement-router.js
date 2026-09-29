@@ -1,9 +1,10 @@
+import {sameRecentBlockUse} from '../core/interaction-claim.js';
 import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
 import {handSnapshot,sameHand,blockAt,safe} from './transactions.js';
 import {itemUseRayDistance} from './custom-effects.js';
 
-const routes=[],blockHandlers=[],blockObservers=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map();let installed=false;
+const routes=[],blockHandlers=[],blockObservers=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map(),recentPlacements=new Map(),itemUseClaims=new Map();let installed=false;
 
 export function registerJavaBlockUseHandler(handler){blockHandlers.push(handler);}
 export function registerJavaBlockUseObserver(observer){blockObservers.push(observer);}
@@ -29,9 +30,7 @@ export function blockUseClaimed(player,itemId,block,face){
  const row=blockUses.get(player.id);
  if(!row)return false;
  if(system.currentTick-row.tick>2){blockUses.delete(player.id);return false;}
- return row.itemId===itemId&&row.slot===player.selectedSlotIndex&&row.sneaking===(player.isSneaking===true)&&
-  (!row.block||!blockKey(block)||row.block===blockKey(block))&&
-  (row.face===undefined||face===undefined||row.face===faceKey(face));
+ return sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face)});
 }
 
 function itemUseOn(e,held){
@@ -41,11 +40,18 @@ function itemUseOn(e,held){
  let plan;try{plan=route.plan(ctx);}catch{return;}
  if(!plan)return;
  e.cancel=true;if(e.isFirstEvent===false)return;
+ // Different native callbacks may identify different faces of the same placement.
+ // Reserve the actual target before scheduling, so only one consumes the item.
+ const target=plan.target??e.block.location,gesture={itemId:route.id+'/'+held.id,slot:held.slot,sneaking:e.player.isSneaking===true,tick:system.currentTick,block:e.block.dimension.id+'/'+target.x+'_'+target.y+'_'+target.z};
+ if(sameRecentBlockUse(itemUseClaims.get(e.player.id),gesture))return;
+ itemUseClaims.set(e.player.id,gesture);
  const dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
  system.run(()=>safe(e.player,()=>{
   sameHand(e.player,held);check(e.player.dimension.id===dimension.id,'DIMENSION_CHANGED');
   const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId,'BLOCK_CHANGED');
-  return route.execute({...ctx,block:clicked,plan});
+  const result=route.execute({...ctx,block:clicked,plan});
+  if(plan.target)recentPlacements.set(e.player.id,{dimension:dimension.id,location:{...plan.target},slot:e.player.selectedSlotIndex,tick:system.currentTick});
+  return result;
  }));
 }
 function dispatch(raw){
@@ -53,7 +59,6 @@ function dispatch(raw){
  // router consumes; never spread an engine event object or try to overwrite
  // that property. A standalone false event becomes a first gesture; recent
  // owned duplicates are coalesced below.
- const touchOnly=raw?.isFirstEvent===false;
  const e=raw?{
   player:raw.player,block:raw.block,blockFace:raw.blockFace,face:raw.face,
   faceLocation:raw.faceLocation?{...raw.faceLocation}:undefined,itemStack:raw.itemStack,
@@ -67,10 +72,10 @@ function dispatch(raw){
  // aimed at a different station in the same tick.
  if(e.cancel){claim(e.player,held.id??'',e.block,'foreign',e.blockFace);e._javaUseRejection='FOREIGN_CANCEL';observe();syncCancel();return;}
  const previous=blockUses.get(e.player.id);
- // Synthetic empty-hand events originate only from a successful native
- // after-interaction callback. Coalesce repeated callbacks for the same block.
- if(touchOnly&&!held.id&&previous?.itemId===''&&previous?.source==='owned'&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
- if(touchOnly&&held.id&&previous?.source==='owned'&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ // Both before callbacks can report first=true. Claim by gesture identity,
+ // including empty-hand callbacks, before scheduling any inventory mutation.
+ if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ if(held.id&&previous?.source==='owned'&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // isFirstEvent=false can be the only event emitted for a fresh touch press.
  // A recent matching owned claim above already coalesces a duplicate; absent
  // that claim, treat it as the beginning of a gesture for older adapters that
@@ -89,6 +94,8 @@ export function nativeEmptyHandBlockUse(e){
  const player=e?.player,block=e?.block;if(!player||!block||e.cancel)return false;
  let held;try{held=handSnapshot(player);}catch{return false;}
  if(held.id)return false;
+ const placed=recentPlacements.get(player.id);
+ if(placed&&system.currentTick-placed.tick<=2&&placed.slot===player.selectedSlotIndex&&placed.dimension===block.dimension.id&&['x','y','z'].every(k=>placed.location[k]===block.location[k]))return false;
  const previous=blockUses.get(player.id);
  if(previous?.source==='foreign'&&previous?.itemId===''&&blockUseClaimed(player,'',block,e.face??e.blockFace))return false;
  if(previous?.source==='owned'&&previous?.itemId===''&&blockUseClaimed(player,'',block,e.face??e.blockFace))return false;
@@ -119,6 +126,6 @@ export function installJavaItemUseOnEvents(){
   const event={player:e.source,itemStack:e.itemStack,block:hit.block,blockFace:hit.face,faceLocation:hit.faceLocation,isFirstEvent:true,cancel:false};
   dispatch(event);if(event.cancel)e.cancel=true;
  });
- world.afterEvents.playerLeave.subscribe(e=>{blockUses.delete(e.playerId);nativeEmptyCallbacks.delete(e.playerId);});
+ world.afterEvents.playerLeave.subscribe(e=>{blockUses.delete(e.playerId);nativeEmptyCallbacks.delete(e.playerId);recentPlacements.delete(e.playerId);itemUseClaims.delete(e.playerId);});
 }
 export const JAVA_PLACEMENT_TEST={routes,matching,blockHandlers,blockObservers,blockUses,blockUseClaimed};

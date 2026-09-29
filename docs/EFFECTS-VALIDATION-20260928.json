@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "e3af075667e7826b99a6fb1fff1fd330155611d1",
+  "upstreamJavaCommit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "historicalRuntimeBaseline": "cedfaedf6140bae61b24afb658869b1d0e6ea1a9",
+  "runtimeSha256": "74e690371b0f2dbf09c7111acedf81ea25d113537230b2dcc38874269937a058",
+  "ci": {
+    "runId": 36453195001,
+    "jobId": 109032828733,
+    "conclusion": "success",
+    "runUrl": "https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/36453195001",
+    "effectTests": {"passed": 105, "failed": 0, "kind": "isolated JavaScript unit/regression tests, not SimulatedPlayer"},
+    "fullReleaseStaticChecks": "PASS",
+    "javaSourceStorageMatrices": "PASS",
+    "historicalRuntimeAndJavaAudit": "PASS",
+    "exactRegeneratedRuntimeDigest": "PASS"
+  },
+  "clientVisualTest": "NOT_RUN",
+  "bedrockDedicatedServerTest": "NOT_RUN",
+  "exactVisualParityAccepted": false,
+  "remainingImplementationGaps": [
+    "Java camera roll is not implemented; the pre-existing yaw adapter remains",
+    "Drip landing child effects and sounds and liquid-surface intersection",
+    "Java AABB collision, cloud-player attraction and rain landing branches",
+    "Animated or unregistered third-party item particle sprites",
+    "Native lighting, blending, culling and multiplayer/low-FPS acceptance"
+  ],
+  "notes": "This CI generated and tested the runtime before committing it. The workflow-head commit differs from sourceCommit; the exact runtime digest binds the evidence. Workflow cleanup and this evidence record do not modify runtime. No version bump or Release publication."
+}

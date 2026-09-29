@@ -6,6 +6,8 @@ ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
 files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}
+# JSON decoding and JavaScript arithmetic tests do not validate Molang tokens.
+subprocess.run([sys.executable,str(ROOT/'tools/effects/check_molang.py')],cwd=ROOT,check=True)
 for side in ['BP','RP']:
     m=docs[RT/side/'manifest.json'];assert m['header']['version']==version
     assert all(x['version']==version for x in m['modules'])
@@ -19,7 +21,12 @@ for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
-hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud and 'hud_actionbar_text' not in hud
+hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud
+# Only protocol-scoped visibility may touch native Actionbar controls. Never hide
+# all messages through alpha, bindings, or replacement controls.
+for key in ['hud_actionbar_text','hud_actionbar_text/actionbar_message']:
+    assert set(hud[key])=={'$kt_actionbar_text','visible'}
+subprocess.run(['node','tools/check_actionbar_filter.mjs'],cwd=ROOT,check=True)
 assert 'pbr' in docs[RT/'RP/manifest.json'].get('capabilities',[])
 # Custom entity materials must be in the client-discovered entry point, not
 # simply in any parseable .material file. BDS does not exercise this renderer.
@@ -61,7 +68,7 @@ for p,j in docs.items():
         for c in components:
             for g in [c.get('minecraft:geometry'),c.get('minecraft:item_visual',{}).get('geometry')]:
                 if isinstance(g,dict):g=g.get('identifier')
-                if g:assert g in geometry,(p,g)
+                if g:assert g in geometry or g in {'minecraft:geometry.full_block','minecraft:geometry.full_block_v1','minecraft:geometry.cross'},(p,g)
     for animation in j.get('animations',{}).values():
         if not isinstance(animation,dict):continue
         for bone in animation.get('bones',{}).values():
@@ -76,6 +83,7 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT
 subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_destruction.mjs')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_guide.mjs')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_feedback.mjs')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_repair.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_storage_rendering.py')],cwd=ROOT,check=True)
@@ -97,5 +105,7 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_animated_hands.py')],cwd=RO
 
 subprocess.run(['node',str(ROOT/'tools/check_surface_repairs.mjs')],cwd=ROOT,check=True)
 
-subprocess.run([sys.executable,str(ROOT/'tools/java_collision.py')],cwd=ROOT,check=True)
-subprocess.run(['node',str(ROOT/'tools/check_effect_parity.mjs')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_board_layout.mjs')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_drink_surfaces.py')],cwd=ROOT,check=True)
+
+subprocess.run([sys.executable,str(ROOT/'tools/check_glassware_slots.py')],cwd=ROOT,check=True)

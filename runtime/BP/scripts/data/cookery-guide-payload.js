@@ -5,7 +5,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.54",
+  "version": "0.6.66",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -182,32 +182,32 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kinds": [],
       "mechanics": [
         "把葡萄藤種在藤架上；作物種類由藤架正下方那一格方塊決定：泥土類長普通葡萄，冰、雪類長冰葡萄，下界岩、岩漿類長金葡萄。這裡的「下方」指藤架緊貼下方的方塊。",
-        "普通葡萄藤可由原版藤蔓與甜莓合成；三株葡萄藤直排可合成八個藤架。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
-        "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，並回收藤架和藤蔓。",
+        "葡萄藤沒有合成配方；先破壞野生葡萄藤取得。三個葡萄藤直排可合成八個藤架，記得另留一個種在藤架上。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
+        "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，掉落葡萄藤，裸藤架留在原地。",
         "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。",
-        "森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。"
+        "野生葡萄藤可在森林、平原、草甸的橡樹或白樺樹葉下方生成；舊區塊不會補生成，找不到時可探索新區塊。藤架可在浸水狀態下栽種與生長。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "把葡萄藤种在藤架上；作物种类由藤架正下方那一格方块决定：泥土类长普通葡萄，冰、雪类长冰葡萄，下界岩、岩浆类长金葡萄。这里的“下方”指藤架紧贴下方的方块。",
-          "普通葡萄藤可由原版藤蔓与甜莓合成；三株葡萄藤直排可合成八个藤架。骨粉可催长。成熟藤蔓会先向上、东、西、南、北寻找可用的裸藤架延伸；无处延伸时才在藤架正下方结果。",
-          "果实成熟到第六阶段可采收：用剪刀采下 3 个主果，另有 30% 概率多得 1–2 个青提；不用剪刀破坏成熟果实会得 1–2 个主果，并有 30% 概率得 1 个青提。剪刀修剪葡萄藤会移除藤蔓及下方果实，并回收藤架和葡萄藤。",
+          "葡萄藤没有合成配方；先破坏野生葡萄藤取得。三个葡萄藤直排可合成八个藤架，记得另留一个种在藤架上。骨粉可催长。成熟藤蔓会先向上、东、西、南、北寻找可用的裸藤架延伸；无处延伸时才在藤架正下方结果。",
+          "果实成熟到第六阶段可采收：用剪刀采下 3 个主果，另有 30% 概率多得 1–2 个青提；不用剪刀破坏成熟果实会得 1–2 个主果，并有 30% 概率得 1 个青提。剪刀修剪葡萄藤会移除藤蔓及下方果实，掉落葡萄藤，裸藤架留在原地。",
           "蜂巢可为裸藤架上蜡以阻止藤蔓延伸；用斧头除蜡。",
-          "森林中会自然生成野生葡萄藤；藤架可在浸水状态下种植并生长。"
+          "野生葡萄藤可在森林、平原、草甸的橡树或白桦树叶下方生成；旧区块不会补生成，找不到时可探索新区块。藤架可在浸水状态下种植并生长。"
         ],
         "zh_TW": [
           "把葡萄藤種在藤架上；作物種類由藤架正下方那一格方塊決定：泥土類長普通葡萄，冰、雪類長冰葡萄，下界岩、岩漿類長金葡萄。這裡的「下方」指藤架緊貼下方的方塊。",
-          "普通葡萄藤可由原版藤蔓與甜莓合成；三株葡萄藤直排可合成八個藤架。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
-          "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，並回收藤架和藤蔓。",
+          "葡萄藤沒有合成配方；先破壞野生葡萄藤取得。三個葡萄藤直排可合成八個藤架，記得另留一個種在藤架上。骨粉可催長。成熟藤蔓會先向上、東、西、南、北尋找可用的裸藤架延伸；無處延伸時才在藤架正下方結果。",
+          "果實成熟到第六階段可採收：用剪刀採下 3 個主果，另有 30% 機率多得 1–2 個青提；不用剪刀破壞成熟果實會得 1–2 個主果，並有 30% 機率得 1 個青提。剪刀修剪葡萄藤會移除藤蔓及下方果實，掉落葡萄藤，裸藤架留在原地。",
           "蜂巢可為裸藤架上蠟以阻止藤蔓延伸；用斧頭除蠟。",
-          "森林中會自然生成野生葡萄藤；藤架可在浸水狀態下栽種與生長。"
+          "野生葡萄藤可在森林、平原、草甸的橡樹或白樺樹葉下方生成；舊區塊不會補生成，找不到時可探索新區塊。藤架可在浸水狀態下栽種與生長。"
         ],
         "en_US": [
           "Plant a grapevine on a trellis. The block in the single cell directly beneath that trellis selects the crop: dirt-type blocks grow regular grapes, ice or snow blocks grow ice grapes, and Nether or magma blocks grow gold grapes.",
-          "Craft a grapevine from a vanilla vine and sweet berries; place three vines vertically to craft eight trellises. Bone meal accelerates growth. Mature vines first spread to bare trellises above, east, west, south, then north; they fruit directly below only when no trellis is available.",
-          "Fruit ripens at stage six. Shears harvest three main grapes and have a 30% chance for one or two extra green grapes. Breaking ripe fruit without shears yields one or two main grapes and has a 30% chance for one green grape. Shearing a vine removes its fruit and returns the trellis and vine.",
+          "Grapevines have no crafting recipe: break wild grapevines to obtain them. Place three grapevines vertically to craft eight trellises, and keep another grapevine for planting. Bone meal accelerates growth. Mature vines first spread to bare trellises above, east, west, south, then north; they fruit directly below only when no trellis is available.",
+          "Fruit ripens at stage six. Shears harvest three main grapes and have a 30% chance for one or two extra green grapes. Breaking ripe fruit without shears yields one or two main grapes and has a 30% chance for one green grape. Shearing a planted vine removes its fruit, drops the grapevine and leaves the bare trellis in place.",
           "Honeycomb waxes a bare trellis to prevent vine spread; use an axe to remove the wax.",
-          "Wild grapevines can generate naturally in forests; trellises can be planted and grow while waterlogged."
+          "Wild grapevines can generate beneath oak or birch leaves in forest, plains and meadow biomes. Existing chunks are not retroactively populated; explore new chunks if needed. Trellises can be planted and grow while waterlogged."
         ]
       }
     },
@@ -4258,28 +4258,32 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/barrel",
       "kinds": [],
       "mechanics": [
-        "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
-        "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
-        "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+        "酒桶需要 3×3×3 空間。潛行空手開蓋，先加入四桶同種配方液體（4,000 mB），再放原料。各種原料盡量等量；開始釀造會消耗全部原料，產量取數量最少的一種，無配料配方通常產出 16 瓶。",
+        "潛行空手關蓋，等待酒桶顯示成品及品質 1。有成品時不能開蓋，必須先經酒嘴取空。",
+        "在酒桶正面中央的孔口裝酒嘴，將酒館空酒瓶放在酒嘴緊貼的正下方；空手點酒嘴，約 1.5 秒後收回成酒。品質 1 即可取酒，提前取出的酒不再隨桶熟成。",
+        "標準配方從品質 1 升至 2、3、4、5、6，各需約 2、4、6、8、10 分鐘；從品質 1 至 6 合計約 30 分鐘。只在區塊載入時推進，實際時間以桶身倒數為準；附屬配方可設定不同時間。",
         "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
-        "zh_CN": [
-          "潜行空手操作酒桶开关盖。开盖后先加入配方所需液体，最多四桶（4,000 mB），再放入原料。",
-          "各原料槽尽量保持相同数量；关盖开始酿造，装入的原料会全部消耗。开盖后用空酒瓶取出成品。",
-          "让成品留在已加载的酒桶内继续熟成，最高品质为 6。不同酒款的配方与效果在对应酒品条目内。",
-          "拆除任一桶身部分会拆下整桶；先取走成品和物品，桶内液体不会保留。"
-        ],
         "zh_TW": [
-          "潛行空手操作酒桶開關蓋。開蓋後先加入配方所需液體，最多四桶（4,000 mB），再放入原料。",
-          "各原料槽盡量保持相同數量；關蓋開始釀造，裝入的原料會全部消耗。開蓋後用空酒瓶取出成品。",
-          "讓成品留在已載入的酒桶內繼續熟成，最高品質為 6。不同酒款的配方與效果在對應酒品條目內。",
+          "酒桶需要 3×3×3 空間。潛行空手開蓋，先加入四桶同種配方液體（4,000 mB），再放原料。各種原料盡量等量；開始釀造會消耗全部原料，產量取數量最少的一種，無配料配方通常產出 16 瓶。",
+          "潛行空手關蓋，等待酒桶顯示成品及品質 1。有成品時不能開蓋，必須先經酒嘴取空。",
+          "在酒桶正面中央的孔口裝酒嘴，將酒館空酒瓶放在酒嘴緊貼的正下方；空手點酒嘴，約 1.5 秒後收回成酒。品質 1 即可取酒，提前取出的酒不再隨桶熟成。",
+          "標準配方從品質 1 升至 2、3、4、5、6，各需約 2、4、6、8、10 分鐘；從品質 1 至 6 合計約 30 分鐘。只在區塊載入時推進，實際時間以桶身倒數為準；附屬配方可設定不同時間。",
           "拆除任一桶身部分會拆下整桶；先取走成品和物品，桶內液體不會保留。"
         ],
+        "zh_CN": [
+          "酒桶需要 3×3×3 空间。潜行空手开盖，先加入四桶同种配方液体（4,000 mB），再放原料。各种原料尽量等量；开始酿造会消耗全部原料，产量取数量最少的一种，无配料配方通常产出 16 瓶。",
+          "潜行空手关盖，等待酒桶显示成品及品质 1。有成品时不能开盖，必须先经酒嘴取空。",
+          "在酒桶正面中央的孔口装酒嘴，将酒馆空酒瓶放在酒嘴紧贴的正下方；空手点酒嘴，约 1.5 秒后收回成酒。品质 1 即可取酒，提前取出的酒不再随桶熟成。",
+          "标准配方从品质 1 升至 2、3、4、5、6，各需约 2、4、6、8、10 分钟；从品质 1 至 6 合计约 30 分钟。只在区块加载时推进，实际时间以桶身倒数为准；附属配方可设置不同时间。",
+          "拆除任一桶身部分会拆下整桶；先取走成品和物品，桶内液体不会保留。"
+        ],
         "en_US": [
-          "Sneak-use the barrel with an empty hand to open or close its lid. Add the recipe fluid first, up to four buckets (4,000 mB), then the ingredients.",
-          "Keep ingredient stacks equally sized. Closing the lid starts brewing and consumes all loaded ingredients. Open it and collect the result with empty bottles.",
-          "Leave the batch in a loaded barrel to age, up to quality 6. Each drink entry contains its recipe and effects.",
+          "A barrel needs a clear 3 x 3 x 3 space. Sneak-use it with an empty hand to open the lid. Add four buckets of the same recipe fluid (4,000 mB), then the ingredients. Keep stacks equal: brewing consumes all ingredients and yields the smallest stack count. Ingredient-free recipes usually yield 16 bottles.",
+          "Sneak-use with an empty hand to close the lid. Wait until the barrel shows a product at quality 1. The lid stays locked while products remain; empty it through the tap.",
+          "Fit the tap to the central hole on the front. Place a Tavern empty bottle directly below it, then use the tap with an empty hand. Collect the filled bottle after about 1.5 seconds. Quality 1 can already be bottled; a removed bottle stops aging.",
+          "Standard recipes take about 2, 4, 6, 8 and 10 minutes to advance from quality 1 to 2, 3, 4, 5 and 6: about 30 minutes total. Aging advances only in loaded chunks. Read the barrel countdown for the actual time; addon recipes may use other timings.",
           "Breaking any part dismantles the barrel. Remove products and items first; stored fluid is lost."
         ]
       },
@@ -4309,23 +4313,23 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/tap",
       "kinds": [],
       "mechanics": [
-        "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
+        "在酒桶正面中央的孔口裝上酒嘴。桶中出現品質 1 成品後即可取酒，不必等到品質 6；有成品時不能開蓋。",
         "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
         "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "确认酒桶已完成熟成且酒嘴装在桶身；酒嘴只会在有可装瓶的成品时出酒。",
+          "在酒桶正面中央的孔口装上酒嘴。桶中出现品质 1 成品后即可取酒，不必等到品质 6；有成品时不能开盖。",
           "把一个空酒瓶方块放在酒嘴正下方，再空手点酒嘴开启。等待 30 tick（约 1.5 秒），下方空瓶会变成该桶当前品质的成酒；取走酒瓶即可。",
           "酒嘴开启时可再空手点击关闭；红石上升沿也可开启。拆酒桶前先取走液体、配料和成酒，拆任一桶身部件都会拆掉整桶，桶内液体不会保留。"
         ],
         "zh_TW": [
-          "確認酒桶已完成熟成且酒嘴裝在桶身；酒嘴只會在有可裝瓶的成品時出酒。",
+          "在酒桶正面中央的孔口裝上酒嘴。桶中出現品質 1 成品後即可取酒，不必等到品質 6；有成品時不能開蓋。",
           "把一個空酒瓶方塊放在酒嘴正下方，再空手點酒嘴開啟。等待 30 tick（約 1.5 秒），下方空瓶會變成該桶目前品質的成酒；取走酒瓶即可。",
           "酒嘴開啟時可再空手點擊關閉；紅石上升沿也可開啟。拆酒桶前先取走液體、配料和成酒，拆任一桶身部件都會拆掉整桶，桶內液體不會保留。"
         ],
         "en_US": [
-          "Install the tap on a completed barrel; it dispenses only when a finished drink is available.",
+          "Fit the tap to the central hole on the barrel front. Bottling is available as soon as a quality 1 product appears; quality 6 is not required. The lid stays locked while products remain.",
           "Place an empty bottle block directly below the tap, then use the tap with an empty hand. After 30 ticks (about 1.5 seconds), the bottle becomes the drink at the barrel’s current quality; take the filled bottle.",
           "Use the tap again with an empty hand to close it; a redstone rising edge can open it too. Empty the barrel before dismantling: breaking any barrel part dismantles the whole barrel and its liquid is lost."
         ]
@@ -4500,23 +4504,27 @@ export const COOKERY_GUIDE_PAYLOAD={
       "mechanics": [
         "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
+        "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
           "放置后空手操作编辑文字。单块黑板最多 350 字，三块合并黑板 1,500 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "放置黑板可直接编辑文字；同方向相邻放置三块单黑板时会合并成宽黑板，文字编辑位置在中央。破坏任一块会拆除整组。"
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "放置黑板可直接编辑文字；同方向相邻放置三块单黑板时会合并成宽黑板，文字编辑位置在中央。破坏任一块会拆除整组。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
           "放置後空手操作編輯文字。單塊黑板最多 350 字，三塊合併黑板 1,500 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。"
+          "放置黑板可直接編輯文字；同方向相鄰放置三塊單黑板時會合併成寬黑板，文字編輯位置在中央。破壞任一塊會拆除整組。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
           "Use a placed board with an empty hand to edit its text. A single chalkboard holds 350 characters; a merged board holds 1,500.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "See this entry’s crafting recipe. Place a chalkboard and interact to edit its text. Three adjacent single boards with the same facing merge into one wide board, edited at the center. Breaking any panel removes the whole assembly."
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "Place a chalkboard and interact to edit its text. Three adjacent single boards with the same facing merge into one wide board, edited at the center. Breaking any panel removes the whole assembly.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4545,25 +4553,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_base_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡顯示素面告示牌的工作台配方。放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。"
+        "放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡显示素面告示牌的工作台配方。放置会占两格高度并按 16 个方向之一朝向；互动可编辑牌面。持可种植花朵互动会改为相应花饰款，并保留原文字。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "放置会占两格高度并按 16 个方向之一朝向；互动可编辑牌面。持可种植花朵互动会改为相应花饰款，并保留原文字。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡顯示素面告示牌的工作台配方。放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。"
+          "放置會佔兩格高度並依 16 個方向之一面向；互動可編輯牌面。持可種植花朵互動會改成相應花飾款，並保留原文字。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows the crafting recipe. Placement occupies two vertical blocks and faces one of 16 directions. Interact to edit the sign. Use a supported flower to change its decoration while keeping the text."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "Placement occupies two vertical blocks and faces one of 16 directions. Interact to edit the sign. Use a supported flower to change its decoration while keeping the text.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4585,25 +4597,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_grass_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。"
+        "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。"
+          "用草方塊互動可把其他立式告示牌改成草飾款；配方卡列出本款合成方式。轉換會保留文字；放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "Use a grass block on a sandwich board to change it to this style. Its crafting recipe appears in the recipe card. Changing style preserves text; placement is two blocks high and interaction edits the sign."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "Use a grass block on a sandwich board to change it to this style. Its crafting recipe appears in the recipe card. Changing style preserves text; placement is two blocks high and interaction edits the sign.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4625,25 +4641,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_allium_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use allium on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use allium on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4665,25 +4685,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_azure_bluet_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use azure bluet on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use azure bluet on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4725,25 +4749,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_cornflower_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use cornflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use cornflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4765,25 +4793,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_orchid_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use blue orchid on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use blue orchid on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4805,25 +4837,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_peony_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use peony on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use peony on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4855,25 +4891,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_pink_petals_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use pink petals on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use pink petals on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4895,25 +4935,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_pitcher_plant_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use pitcher plant on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use pitcher plant on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4935,25 +4979,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_poppy_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use poppy on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use poppy on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -4985,25 +5033,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_sunflower_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use sunflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use sunflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5035,25 +5087,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_torchflower_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use torchflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use torchflower on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5075,25 +5131,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_tulip_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use red tulip on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use red tulip on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5145,25 +5205,29 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kt_derived/a17/item_display_wither_rose_sandwich_board",
       "kinds": [],
       "mechanics": [
-        "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+        "放置後空手互動可編輯文字，最多 320 字。",
         "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+        "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+        "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "黑板配方与三块合并方式见“黑板”条目；立式告示牌配方及各花饰款见下方单独条目。放置后互动输入文字，单块黑板最多 350 字、合并黑板 1,500 字、立式告示牌 320 字。",
-          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。牌面文字由 Noto 字形图集直接绘出；字图集不支持的字符会显示方框。",
-          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。"
+          "放置后空手互动可编辑文字，最多 320 字。",
+          "手持染料可改文字颜色；荧光墨囊开启荧光文字、墨囊关闭荧光；手持蜂脾封蜡后不可再改文字或样式。不支持的字符会显示方框。",
+          "配方卡列出本款工作台配方；用对应花朵互动可把其他立式告示牌改成此花饰款，消耗一份花朵并保留原文字。放置占两格高度，互动可编辑牌面。",
+          "文字可选靠左、居中、靠右、两端对齐或分散对齐，垂直位置可选靠上、居中或靠下。设置随文字保存；输入反斜线加 n 可换行，长行会自动折行。超出行数时会提示修改，不会截掉新文字。"
         ],
         "zh_TW": [
-          "黑板配方與三塊合併方式見「黑板」條目；立式告示牌配方及各花飾款見下方個別條目。放置後互動輸入文字，單黑板最多 350 字、合併黑板 1,500 字、立式告示牌 320 字。",
+          "放置後空手互動可編輯文字，最多 320 字。",
           "手持染料可改文字顏色；螢光墨囊開啟螢光文字、墨囊關閉螢光；手持蜂巢蜜蠟封後不可再改文字或樣式。部分字元可能無法顯示。",
-          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。"
+          "配方卡列出本款工作台配方；以對應花朵互動可把其他立式告示牌改成此花飾款，消耗一份花朵並保留原文字。放置佔兩格高度，互動可編輯牌面。",
+          "文字可選靠左、置中、靠右、左右對齊或分散對齊，垂直位置可選靠上、置中或靠下。設定隨文字保存；輸入反斜線加 n 可換行，長行會自動折行。超出行數時會提示修改，不會截掉新文字。"
         ],
         "en_US": [
-          "See the Chalkboard entry for its recipe and three-panel merge. Recipes for sandwich boards and each flower style have separate entries below. Interact with a placed board to enter text: 350 characters on a small chalkboard, 1,500 on a wide board, and 320 on a sandwich board.",
-          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Text is drawn on the board face with the included Noto font; unsupported characters appear as a square.",
-          "The recipe card shows this style’s crafting recipe. Use wither rose on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit."
+          "Use a placed sign with an empty hand to edit up to 320 characters.",
+          "Use a dye to change text color; glow ink enables glowing text, ink disables it, and honeycomb wax locks text and style edits. Unsupported characters appear as a square.",
+          "The recipe card shows this style’s crafting recipe. Use wither rose on a sandwich board to change it to this flower style; one flower is consumed and existing text is kept. Placement is two blocks high; interact to edit.",
+          "Choose Left, Center, Right, Justify or Distributed, plus Top, Middle or Bottom vertically. Settings are saved with the text. Type a backslash followed by n for a new line; long lines wrap. Text exceeding the line limit is rejected rather than cut off."
         ]
       },
       "recipes": [
@@ -5178,6 +5242,110 @@ export const COOKERY_GUIDE_PAYLOAD={
           "result": "kaleidoscope_tavern:wither_rose_sandwich_board"
         }
       ]
+    },
+    {
+      "id": "kaleidoscope_tavern:grape",
+      "category": "cultivation",
+      "icon": "textures/ui/tavern_entries/grape",
+      "kinds": [],
+      "mechanics": [
+        "藤架緊貼下方為泥土類方塊時，種下葡萄藤會長出普通葡萄。森林中也可找到野生葡萄藤。",
+        "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+        "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+      ],
+      "mechanicsByLocale": {
+        "zh_CN": [
+          "藤架紧贴下方为泥土类方块时，种下葡萄藤会长出普通葡萄。森林中也可找到野生葡萄藤。",
+          "在藤架上种植葡萄藤，骨粉可催长。成熟藤蔓先向相邻空藤架延伸，没有可用藤架时才向下结果；为果实留出下方空间。",
+          "果实成熟后用剪刀采收可获得 3 个主果，并有 30% 概率额外获得 1–2 个青提。"
+        ],
+        "zh_TW": [
+          "藤架緊貼下方為泥土類方塊時，種下葡萄藤會長出普通葡萄。森林中也可找到野生葡萄藤。",
+          "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+          "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+        ],
+        "en_US": [
+          "Plant a grapevine with a dirt-type block directly below the trellis to grow regular grapes. Wild vines can also be found in forests.",
+          "Plant a grapevine on a trellis; bone meal accelerates growth. Mature vines spread to adjacent bare trellises before fruiting downward, so leave room below for the fruit.",
+          "Shear ripe fruit to harvest three main grapes, with a 30% chance of one or two additional green grapes."
+        ]
+      }
+    },
+    {
+      "id": "kaleidoscope_tavern:ice_grape",
+      "category": "cultivation",
+      "icon": "textures/ui/tavern_entries/ice_grape",
+      "kinds": [],
+      "mechanics": [
+        "種植時在藤架緊貼下方放冰、浮冰、藍冰或雪塊，再種下葡萄藤，形成冰葡萄藤。",
+        "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+        "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+      ],
+      "mechanicsByLocale": {
+        "zh_CN": [
+          "种植时在藤架紧贴下方放冰、浮冰、蓝冰或雪块，再种下葡萄藤，形成冰葡萄藤。",
+          "在藤架上种植葡萄藤，骨粉可催长。成熟藤蔓先向相邻空藤架延伸，没有可用藤架时才向下结果；为果实留出下方空间。",
+          "果实成熟后用剪刀采收可获得 3 个主果，并有 30% 概率额外获得 1–2 个青提。"
+        ],
+        "zh_TW": [
+          "種植時在藤架緊貼下方放冰、浮冰、藍冰或雪塊，再種下葡萄藤，形成冰葡萄藤。",
+          "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+          "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+        ],
+        "en_US": [
+          "Place ice, packed ice, blue ice or a snow block directly beneath the trellis before planting a grapevine to grow ice grapes.",
+          "Plant a grapevine on a trellis; bone meal accelerates growth. Mature vines spread to adjacent bare trellises before fruiting downward, so leave room below for the fruit.",
+          "Shear ripe fruit to harvest three main grapes, with a 30% chance of one or two additional green grapes."
+        ]
+      }
+    },
+    {
+      "id": "kaleidoscope_tavern:gold_grape",
+      "category": "cultivation",
+      "icon": "textures/ui/tavern_entries/gold_grape",
+      "kinds": [],
+      "mechanics": [
+        "種植時在藤架緊貼下方放下界岩或岩漿塊，再種下葡萄藤，形成金葡萄藤。",
+        "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+        "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+      ],
+      "mechanicsByLocale": {
+        "zh_CN": [
+          "种植时在藤架紧贴下方放下界岩或岩浆块，再种下葡萄藤，形成金葡萄藤。",
+          "在藤架上种植葡萄藤，骨粉可催长。成熟藤蔓先向相邻空藤架延伸，没有可用藤架时才向下结果；为果实留出下方空间。",
+          "果实成熟后用剪刀采收可获得 3 个主果，并有 30% 概率额外获得 1–2 个青提。"
+        ],
+        "zh_TW": [
+          "種植時在藤架緊貼下方放下界岩或岩漿塊，再種下葡萄藤，形成金葡萄藤。",
+          "在藤架上種植葡萄藤，骨粉可催長。成熟藤蔓先向相鄰空藤架延伸，沒有可用藤架時才向下結果；為果實留出下方空間。",
+          "果實成熟後用剪刀採收可獲得 3 個主果，並有 30% 機率額外獲得 1–2 個青提。"
+        ],
+        "en_US": [
+          "Place netherrack or a magma block directly beneath the trellis before planting a grapevine to grow gold grapes.",
+          "Plant a grapevine on a trellis; bone meal accelerates growth. Mature vines spread to adjacent bare trellises before fruiting downward, so leave room below for the fruit.",
+          "Shear ripe fruit to harvest three main grapes, with a 30% chance of one or two additional green grapes."
+        ]
+      }
+    },
+    {
+      "id": "kaleidoscope_tavern:green_grape",
+      "category": "cultivation",
+      "icon": "textures/ui/tavern_entries/green_grape",
+      "kinds": [],
+      "mechanics": [
+        "青提沒有獨立的葡萄藤，是採收普通、冰或金葡萄時的額外產物；不能當作獨立作物種植。剪刀採收成熟果實有 30% 機率得到 1–2 個青提，直接破壞成熟果實有 30% 機率得到 1 個。"
+      ],
+      "mechanicsByLocale": {
+        "zh_CN": [
+          "青提没有独立的葡萄藤，是采收普通、冰或金葡萄时的额外产物；不能按独立作物种植。剪刀采收成熟果实有 30% 概率得到 1–2 个青提，直接破坏成熟果实有 30% 概率得到 1 个。"
+        ],
+        "zh_TW": [
+          "青提沒有獨立的葡萄藤，是採收普通、冰或金葡萄時的額外產物；不能當作獨立作物種植。剪刀採收成熟果實有 30% 機率得到 1–2 個青提，直接破壞成熟果實有 30% 機率得到 1 個。"
+        ],
+        "en_US": [
+          "Green grapes are a bonus from harvesting regular, ice or gold grapes, not a separately plantable crop. Shearing ripe fruit has a 30% chance of yielding one or two; breaking ripe fruit has a 30% chance of yielding one."
+        ]
+      }
     }
   ],
   "names": {
@@ -5298,7 +5466,11 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kaleidoscope_tavern:pressing_tub": "果盆",
       "kaleidoscope_tavern:shaker": "雪克杯",
       "kaleidoscope_tavern:empty_glassware": "空酒杯",
-      "kaleidoscope_tavern:stepladder": "人字梯"
+      "kaleidoscope_tavern:stepladder": "人字梯",
+      "kaleidoscope_tavern:grape": "葡萄",
+      "kaleidoscope_tavern:ice_grape": "冰葡萄",
+      "kaleidoscope_tavern:gold_grape": "金葡萄",
+      "kaleidoscope_tavern:green_grape": "青提"
     },
     "zh_TW": {
       "kaleidoscope_tavern:guide_grapes": "葡萄與藤架",
@@ -5417,7 +5589,11 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kaleidoscope_tavern:pressing_tub": "壓榨桶",
       "kaleidoscope_tavern:shaker": "雪克杯",
       "kaleidoscope_tavern:empty_glassware": "空雞尾酒杯",
-      "kaleidoscope_tavern:stepladder": "人字梯"
+      "kaleidoscope_tavern:stepladder": "人字梯",
+      "kaleidoscope_tavern:grape": "葡萄",
+      "kaleidoscope_tavern:ice_grape": "冰葡萄",
+      "kaleidoscope_tavern:gold_grape": "金葡萄",
+      "kaleidoscope_tavern:green_grape": "青提"
     },
     "en_US": {
       "kaleidoscope_tavern:guide_grapes": "Grapes & trellises",
@@ -5536,7 +5712,11 @@ export const COOKERY_GUIDE_PAYLOAD={
       "kaleidoscope_tavern:pressing_tub": "Pressing Tub",
       "kaleidoscope_tavern:shaker": "Shaker",
       "kaleidoscope_tavern:empty_glassware": "Empty Glassware",
-      "kaleidoscope_tavern:stepladder": "Stepladder"
+      "kaleidoscope_tavern:stepladder": "Stepladder",
+      "kaleidoscope_tavern:grape": "Grapes",
+      "kaleidoscope_tavern:ice_grape": "Ice Grapes",
+      "kaleidoscope_tavern:gold_grape": "Gold Grapes",
+      "kaleidoscope_tavern:green_grape": "Green Grapes"
     }
   },
   "text": {
@@ -5716,8 +5896,8 @@ export function buildCookeryGuidePayload(registry){
     'minecraft:nausea':'Nausea','minecraft:instant_health':'Instant Health','minecraft:resistance':'Resistance','minecraft:fire_resistance':'Fire Resistance','minecraft:regeneration':'Regeneration','minecraft:night_vision':'Night Vision','minecraft:slow_falling':'Slow Falling','minecraft:jump_boost':'Jump Boost','minecraft:strength':'Strength','minecraft:speed':'Speed','minecraft:water_breathing':'Water Breathing','minecraft:weakness':'Weakness','minecraft:poison':'Poison','minecraft:wither':'Wither','minecraft:blindness':'Blindness','minecraft:bad_omen':'Bad Omen','minecraft:mining_fatigue':'Mining Fatigue','minecraft:haste':'Haste','kaleidoscope_tavern:slightly_tipsy':'Slightly Tipsy','kaleidoscope_tavern:grass_stealth':'Grass Stealth','kaleidoscope_tavern:long_reach':'Long Reach','kaleidoscope_tavern:high_heels':'High Heels','kaleidoscope_tavern:vision':'Spirit Vision','kaleidoscope_tavern:bloody_mary':'Bloody Mary'
    }:lc==='zh_CN'?{'minecraft:nausea':'恶心','minecraft:instant_health':'瞬间治疗','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢复','minecraft:night_vision':'夜视','minecraft:slow_falling':'缓降','minecraft:jump_boost':'跳跃提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虚弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲劳','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草丛隐匿','kaleidoscope_tavern:long_reach':'延伸触及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'灵视','kaleidoscope_tavern:bloody_mary':'血腥玛丽'}:{'minecraft:nausea':'噁心','minecraft:instant_health':'瞬間治療','minecraft:resistance':'抗性','minecraft:fire_resistance':'抗火','minecraft:regeneration':'生命恢復','minecraft:night_vision':'夜視','minecraft:slow_falling':'緩降','minecraft:jump_boost':'跳躍提升','minecraft:strength':'力量','minecraft:speed':'速度','minecraft:water_breathing':'水下呼吸','minecraft:weakness':'虛弱','minecraft:poison':'中毒','minecraft:wither':'凋零','minecraft:blindness':'失明','minecraft:bad_omen':'不祥之兆','minecraft:mining_fatigue':'挖掘疲勞','minecraft:haste':'急迫','kaleidoscope_tavern:slightly_tipsy':'微醺','kaleidoscope_tavern:grass_stealth':'草叢隱匿','kaleidoscope_tavern:long_reach':'延伸觸及','kaleidoscope_tavern:high_heels':'高跟鞋','kaleidoscope_tavern:vision':'靈視','kaleidoscope_tavern:bloody_mary':'血腥瑪麗'};
    body=body.replace(/\b(kaleidoscope_tavern|minecraft):([a-z0-9_]+)/g,(id,ns,key)=>names[id]??key.split('_').map(w=>w[0].toUpperCase()+w.slice(1)).join(' '));
-   body=body.replace(/Slightly Tipsy(?= Lv)/g,'Slightly Tipsy (motion off by default)');
-   body=body.replace(/微醺(?= Lv)/g,lc==='zh_CN'?'微醺（晃动默认关闭）':'微醺（晃動預設關閉）');
+   body=body.replace(/Slightly Tipsy(?= Lv)/g,'Slightly Tipsy (camera approximation)');
+   body=body.replace(/微醺(?= Lv)/g,lc==='zh_CN'?'微醺（镜头适配）':'微醺（鏡頭適配）');
    body=body.replace(/\s*\[(?:(?:待移植|not implemented)|已實作\s*\/\s*implemented)\]/g,'');
    body=body.replace(/\bQ([1-6]):/g,lc==='en_US'?'Quality $1:':lc==='zh_CN'?'品质$1：':'品質$1：');
    body=body.replace(/\sLv([0-9]+)/g,lc==='en_US'?' Level $1':lc==='zh_CN'?' 等级$1':' 等級$1');

@@ -1,0 +1,180 @@
+{
+  "tavern": "0.6.55",
+  "worldLiquor": "0.1.18",
+  "guideContract": {
+    "roots": [
+      {
+        "title": "釀造設備",
+        "groups": [
+          {
+            "title": "酒桶釀造",
+            "entries": 1
+          },
+          {
+            "title": "壓榨與接汁",
+            "entries": 2
+          },
+          {
+            "title": "雪克杯調酒",
+            "entries": 1
+          },
+          {
+            "title": "冷凍製作",
+            "entries": 1
+          }
+        ]
+      },
+      {
+        "title": "釀酒百科",
+        "groups": [
+          {
+            "title": "酒館本體",
+            "entries": 25
+          },
+          {
+            "title": "附屬配方",
+            "entries": 18
+          }
+        ]
+      },
+      {
+        "title": "調酒百科",
+        "groups": [
+          {
+            "title": "酒館本體",
+            "entries": 14
+          },
+          {
+            "title": "附屬配方",
+            "entries": 6
+          }
+        ]
+      },
+      {
+        "title": "材料與種植",
+        "groups": [
+          {
+            "title": "葡萄與藤架",
+            "entries": 5
+          },
+          {
+            "title": "果汁",
+            "entries": 7
+          },
+          {
+            "title": "調酒材料",
+            "entries": 2
+          }
+        ]
+      },
+      {
+        "title": "收納與實用",
+        "groups": [
+          {
+            "title": "裝酒容器",
+            "entries": 2
+          },
+          {
+            "title": "實用工具",
+            "entries": 1
+          },
+          {
+            "title": "酒櫃",
+            "entries": 13
+          },
+          {
+            "title": "酒架與杯架",
+            "entries": 4
+          }
+        ]
+      },
+      {
+        "title": "裝飾與家具",
+        "groups": [
+          {
+            "title": "吧檯與桌子",
+            "entries": 2
+          },
+          {
+            "title": "高腳凳",
+            "entries": 32
+          },
+          {
+            "title": "沙發",
+            "entries": 16
+          },
+          {
+            "title": "燈飾",
+            "entries": 20
+          },
+          {
+            "title": "掛畫與唱片",
+            "entries": 23
+          },
+          {
+            "title": "立式告示牌與黑板",
+            "entries": 15
+          },
+          {
+            "title": "香薰",
+            "entries": 8
+          }
+        ]
+      },
+      {
+        "title": "食物",
+        "groups": [
+          {
+            "title": "冰櫃食品",
+            "entries": 3
+          },
+          {
+            "title": "工作台食品",
+            "entries": 1
+          }
+        ]
+      }
+    ],
+    "entries": 222,
+    "totalCategories": 31,
+    "simulatedPlayers": false
+  },
+  "nativeCookery106Receipt": {
+    "version": "0.6.55",
+    "roots": [
+      "equipment",
+      "barrel",
+      "cocktail",
+      "cultivation",
+      "storage",
+      "decor",
+      "food"
+    ],
+    "categories": 31,
+    "entries": 222,
+    "leavesRetained": true,
+    "coreFirst": true,
+    "freezer": "equipment_cooling",
+    "grape": "plants",
+    "simPlayers": false,
+    "clientUI": false,
+    "pass": true
+  },
+  "boardAlignment": {
+    "modes": [
+      "left",
+      "center",
+      "right"
+    ],
+    "javaSource": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+    "fontWidthsChecked": [
+      55,
+      63,
+      232
+    ],
+    "savedChoiceRoundTrip": "PASS"
+  },
+  "staticReleaseCheck": "PASS",
+  "clientUI": "NOT_RUN",
+  "simulatedPlayers": false
+}

@@ -1,12 +1,12 @@
 import {GameMode,InputPermissionCategory,system} from '@minecraft/server';
-import {TIPSY_OPT_OUT_TAG,tipsyMotionEnabled,tipsyYawOffset,tipsyYawStep} from '../core/tipsy-visual.js';
+import {TIPSY_OPT_OUT_TAG,tipsyYawOffset,tipsyYawStep} from '../core/tipsy-visual.js';
 
 // One shared 20-Hz updater, fed by the existing status heartbeat. No random
 // vibration, camera preset takeover, teleport, player.json or fake status buff.
-// The yaw adapter affects aim slightly and is disabled until explicitly enabled.
+// The yaw adapter affects aim slightly; disable per player with the opt-out tag.
 const motions=new Map();
 let updateRun;
-export const tipsyVisualDiagnostics={mode:'yaw_adapter_unverified',exactJavaRoll:false,clientConfirmed:false,requiresOptIn:true,updates:0,skipped:0,failures:0,serverReadbacks:0,readbackMisses:0,lastError:''};
+export const tipsyVisualDiagnostics={mode:'yaw_adapter_unverified',exactJavaRoll:false,clientConfirmed:false,updates:0,skipped:0,failures:0,serverReadbacks:0,readbackMisses:0,lastError:''};
 function stopIfEmpty(){
  if(motions.size===0&&updateRun!==undefined){system.clearRun(updateRun);updateRun=undefined;}
 }
@@ -20,7 +20,7 @@ export function pruneTipsyVisuals(onlineIds){
 }
 // Retain the public/internal call name so the status lifecycle has one owner.
 export function pulseTipsyVisual(player,status){
- if(!status||!Number.isFinite(status.ticks)||status.ticks<=0||!tipsyMotionEnabled(tag=>player.hasTag(tag))){
+ if(!status||!Number.isFinite(status.ticks)||status.ticks<=0||player.hasTag(TIPSY_OPT_OUT_TAG)){
   forgetTipsyVisual(player.id);return;
  }
  const now=system.currentTick;
@@ -41,7 +41,7 @@ export function tickTipsyVisuals(){
   if(now<track.retryAt){track.lastSkip='error_backoff';continue;}
   const p=track.player;
   try{
-   if(!p.isValid||p.dimension.id!==track.dimension||!tipsyMotionEnabled(tag=>p.hasTag(tag))||p.getComponent('minecraft:health')?.currentValue<=0){
+   if(!p.isValid||p.dimension.id!==track.dimension||p.hasTag(TIPSY_OPT_OUT_TAG)||p.getComponent('minecraft:health')?.currentValue<=0){
     motions.delete(id);continue;
    }
    if(now<=track.lastTick)continue;
@@ -78,7 +78,7 @@ export function tickTipsyVisuals(){
 export function tipsyVisualState(player,status){
  const track=motions.get(player.id);
  return {mode:tipsyVisualDiagnostics.mode,exactJavaRoll:false,clientConfirmed:false,
-  statusTicks:status?.ticks??0,motionEnabled:tipsyMotionEnabled(tag=>player.hasTag(tag)),optedOut:player.hasTag(TIPSY_OPT_OUT_TAG),
+  statusTicks:status?.ticks??0,optedOut:player.hasTag(TIPSY_OPT_OUT_TAG),
   adapterTracked:!!track,attempts:track?.attempts??0,lastSkip:track?.lastSkip??null,
   retryAfterTicks:track?Math.max(0,track.retryAt-system.currentTick):0,lastError:track?.lastError??null,
   serverReadbackIsNotCameraProof:true};

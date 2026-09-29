@@ -1,3 +1,4 @@
+import {trellisWaxFeedback,plantGrowthFeedback} from './interaction-particles.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
 import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
@@ -5,7 +6,7 @@ import {biomeBaseTemperature} from '../data/biome-temperatures.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,tell,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
@@ -115,15 +116,15 @@ export function farmUse(player,b,{rng=Math.random}={}){
   }
   if(b.typeId===BARE&&h?.typeId==='minecraft:honeycomb'){
    check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);return 'waxed';
+   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);trellisWaxFeedback(b,true);return 'waxed';
   }
   if(b.typeId===BARE&&h?.typeId?.endsWith('_axe')){
-   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});return 'unwaxed';
+   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});trellisWaxFeedback(b,false);return 'unwaxed';
   }
   if(h?.typeId==='minecraft:bone_meal'){
    check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const edits=growthChanges(b,rng);check(edits.length,'NO_GROWTH_SPACE');
-   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);return 'grown';
+   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);plantGrowthFeedback(b);return 'grown';
   }
   if(h?.typeId==='minecraft:shears'){
   if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}
@@ -139,7 +140,6 @@ export function farmUse(player,b,{rng=Math.random}={}){
     exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});try{b.dimension.playSound('mob.sheep.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;
    }
   }
-  tell(player,`§a[Tavern] ${b.typeId.split(':')[1]} | ${isFrame(b.typeId)?shape(b):'fruit'} | age ${b.typeId===WILD_HEAD?wildVineAge(b):age(b)}${waxed(b)?' | waxed':''}`);
   return 'inspect';
  });
 }

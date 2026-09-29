@@ -1,0 +1,64 @@
+{
+  "tavern": "0.6.56",
+  "worldLiquor": "0.1.19",
+  "nativeBdsStorageLifecycle": {
+    "pass": true,
+    "cases": [
+      {
+        "kind": "bar",
+        "facing": 0,
+        "pass": true
+      },
+      {
+        "kind": "bar",
+        "facing": 1,
+        "pass": true
+      },
+      {
+        "kind": "bar",
+        "facing": 2,
+        "pass": true
+      },
+      {
+        "kind": "bar",
+        "facing": 3,
+        "pass": true
+      },
+      {
+        "kind": "cellar",
+        "facing": 0,
+        "pass": true
+      },
+      {
+        "kind": "cellar",
+        "facing": 1,
+        "pass": true
+      },
+      {
+        "kind": "cellar",
+        "facing": 2,
+        "pass": true
+      },
+      {
+        "kind": "cellar",
+        "facing": 3,
+        "pass": true
+      }
+    ],
+    "queue": {
+      "pass": true,
+      "calls": 1,
+      "remaining": 0
+    },
+    "simulatedPlayers": false,
+    "clientUI": false
+  },
+  "staticReleaseChecks": "PASS",
+  "guideEntries": 222,
+  "guideRootEntrances": 7,
+  "guideSmallEntrances": 24,
+  "removedUnsolicitedSuccessHints": true,
+  "javaErrorAndBrewingStatusPreserved": true,
+  "simulatedPlayers": false,
+  "clientAcceptance": "PENDING"
+}

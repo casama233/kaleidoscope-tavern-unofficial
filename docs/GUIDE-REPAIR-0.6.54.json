@@ -1,0 +1,56 @@
+{
+  "version": "0.6.54",
+  "staticCheck": "PASS",
+  "jsonFiles": 1921,
+  "geometries": 925,
+  "guideRegression": {
+    "coreEntries": 152,
+    "legacyPages": 28,
+    "basePackets": 199,
+    "quality1Extraction": "PASS",
+    "fermentingLidLocked": "PASS",
+    "agingStageMinutes": [
+      2,
+      4,
+      6,
+      8,
+      10
+    ]
+  },
+  "feedbackRegression": {
+    "errorIsolation": "PASS",
+    "warningThrottle": "PASS",
+    "boundedHistory": 16,
+    "particleSetupErrorIsolation": "PASS"
+  },
+  "isolatedCookery107Receipt": {
+    "pass": true,
+    "version": "0.6.54",
+    "entries": 218,
+    "coreEntries": 152,
+    "localizedPages": 456,
+    "receiver": "actual Cookery registry",
+    "clientUI": false,
+    "simulatedPlayers": false
+  },
+  "isolatedStackLimitations": [
+    "Other packs log experimental container errors in the seed test world; not attributed to Tavern.",
+    "Final two feedback-helper edits verified by unit tests and production load; receiver probe used the same guide payload."
+  ],
+  "production": {
+    "version": "0.6.54",
+    "running": true,
+    "startupObserved": true,
+    "chapterSent": true,
+    "receiptAcknowledged": false,
+    "otherPacksUnchanged": 34,
+    "worldDbUnchangedBeforeRestart": true,
+    "backupCreated": true
+  },
+  "archiveSha256": "1a87c75b50593bb728fa83faaf3d59c13cdf6a91cccbf52f1adf418b99ce853d",
+  "clientAudio": "NOT_RUN",
+  "clientUI": "NOT_RUN",
+  "keyboardTouchController": "NOT_RUN",
+  "javaCameraRollParity": "NOT_IMPLEMENTED",
+  "remainingAcceptance": "CLIENT-ACCEPTANCE-0.6.54.md"
+}

@@ -8,13 +8,30 @@ import {performShriek} from './combat-effects.js';
 import {EquipmentSlot,ItemStack,system,world,ScriptEventSource} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
-const tracks=new Map(),deaths=new Map(),heelsSteps=new Map();
+const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
 export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
-function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length||state.migrations||state.legacyClosed?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
-function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
+function indexFastPlayer(p,state){
+ if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels'))fastPlayers.set(p.id,p);
+ else fastPlayers.delete(p.id);
+}
+function write(p,state){
+ const raw=state.entries.length||state.migrations||state.legacyClosed?JSON.stringify(state):undefined;
+ const cached=statusSnapshots.get(p.id),now=system.currentTick;
+ const previous=cached?.tick===now&&cached.player===p?cached.raw:p.getDynamicProperty(CUSTOM_STATUS_KEY);
+ if(previous!==raw)p.setDynamicProperty(CUSTOM_STATUS_KEY,raw);
+ tracks.set(p.id,{player:p,tick:now});
+ statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state});indexFastPlayer(p,state);
+}
+function statusWindow(p){
+ const cached=statusSnapshots.get(p.id),now=system.currentTick;
+ if(cached?.tick===now&&cached.player===p)return cached;
+ const raw=p.getDynamicProperty(CUSTOM_STATUS_KEY),before=readStatus(raw),track=tracks.get(p.id);
+ const state=advanceStatus(before,track?Math.max(0,now-track.tick):0);
+ const snapshot={player:p,tick:now,raw,before,state};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;
+}
 export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){let previous;try{previous=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY));}catch{previous={schema:1,entries:[]};}forgetTipsyVisual(p.id);write(p,{...previous,schema:1,entries:[],legacyClosed:true});tracks.delete(p.id);heelsSteps.delete(p.id);}
 export function applyCustomEffect(p,row){
@@ -46,7 +63,7 @@ export function applyCustomEffect(p,row){
   if(!d.getBlock(at)?.isAir||!d.getBlock({...at,y:at.y+1})?.isAir)return true;
   if(!p.tryTeleport(at,{checkForBlocks:true}))return true;
   p.clearVelocity();p.addEffect('hunger',600,{amplifier:0,showParticles:true});
-  try{d.playSound('mob.shulker.teleport',at);}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
+  for(const location of [here,at])try{d.playSound('entity.player.teleport',location,{volume:1,pitch:1});}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
  }
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
@@ -165,7 +182,7 @@ export function pulseArdentHeat(p,rng=Math.random){
  customEffectDiagnostics.ardentPulses++;customEffectDiagnostics.ardentBlocks+=broke;return broke;
 }
 export function tickArdentHeat(){
- for(const p of world.getAllPlayers())try{if(activeStatus(statusNow(p),'kaleidoscope_tavern:ardent_heat'))pulseArdentHeat(p);}catch(e){error(e);}
+ for(const p of fastPlayers.values())try{if(activeStatus(statusNow(p),'kaleidoscope_tavern:ardent_heat'))pulseArdentHeat(p);}catch(e){error(e);}
 }
 export function pulseHighHeels(p){
  try{
@@ -185,7 +202,7 @@ export function pulseHighHeels(p){
   heelsSteps.set(p.id,{x:target.x,z:target.z});customEffectDiagnostics.highHeelsSteps++;return true;
  }catch(e){error(e);return false;}
 }
-export function tickHighHeels(){for(const p of world.getAllPlayers())try{pulseHighHeels(p);}catch(e){error(e);}}
+export function tickHighHeels(){for(const p of fastPlayers.values())try{pulseHighHeels(p);}catch(e){error(e);}}
 export function handleKill(event){
  const victim=event.deadEntity,p=event.damageSource?.damagingEntity;
  try{
@@ -209,7 +226,7 @@ export function importExternalEffects(p,source,raw,definitions){
  state.migrations={...state.migrations,[source]:digest(raw??'null')};
  const previous=p.getDynamicProperty(CUSTOM_STATUS_KEY),track=tracks.get(p.id);
  try{write(p,state);check(p.getDynamicProperty(CUSTOM_STATUS_KEY)===JSON.stringify(state),'EFFECT_WRITE_FAILED');}
- catch(error){p.setDynamicProperty(CUSTOM_STATUS_KEY,previous);if(track)tracks.set(p.id,track);else tracks.delete(p.id);throw error;}
+ catch(error){p.setDynamicProperty(CUSTOM_STATUS_KEY,previous);if(track)tracks.set(p.id,track);else tracks.delete(p.id);statusSnapshots.delete(p.id);indexFastPlayer(p,readStatus(previous));throw error;}
 }
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));pruneTipsyVisuals(seen);
@@ -236,6 +253,7 @@ export function tickCustomEffects(){
   }
  }catch(e){error(e);}
  for(const [id,t]of tracks)if(!seen.has(id)){try{write(t.player,statusNow(t.player));}catch{/* disconnected player handle may be invalid */}tracks.delete(id);}
+ for(const id of statusSnapshots.keys())if(!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);}
  for(const[id,t]of deaths)if(system.currentTick-t>100)deaths.delete(id);
 }
 export function installCustomEffects(){
@@ -257,10 +275,12 @@ export function installCustomEffects(){
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
- world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);if(!e.initialSpawn)try{clearCustomEffects(e.player);}catch(x){error(x);}});
- world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);});
+ world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else statusNow(e.player);}catch(x){error(x);}});
+ world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});
+ // Initialize players already online when scripts start; spawn handles new joins.
+ system.run(()=>{for(const p of world.getAllPlayers())try{statusNow(p);}catch(e){error(e);}});
  system.runInterval(tickCustomEffects,5);
  system.runInterval(tickArdentHeat,1);
  system.runInterval(tickHighHeels,1);
 }
-export const CUSTOM_TEST={tracks,deaths,heelsSteps};
+export const CUSTOM_TEST={tracks,deaths,heelsSteps,fastPlayers,statusSnapshots};

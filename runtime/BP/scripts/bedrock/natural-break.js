@@ -1,3 +1,5 @@
+import {nativeItems,nativeStoragePlan,glasswareStorageKey} from './native-item-storage.js';
+import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {consumeScriptedBreak,replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
 import {restorePotion} from './potions.js';
 /** Non-player destruction: native engine decides whether the block breaks.
@@ -26,7 +28,7 @@ export function naturalBreak(event,params){
  const {block,brokenBlockPermutation:perm}=event,d=block.dimension,id=perm.type.id,p={...block.location},short=id.slice(NS.length+1),dim=d.id.split(':')[1];
  if(consumeScriptedBreak(block,id))return;
  let root={...p},cells=[],drop=params?.params?.drop??id;
- const drops=[],keys=[];
+ const drops=[],keys=[],nativePlans=[];
  const add=(item,count=1)=>{if(item&&count>0)drops.push(new ItemStack(item,count));};
  if(short==='barrel_part')root={x:p.x-state(perm,'dx'),y:p.y-state(perm,'dy'),z:p.z-state(perm,'dz')};
  if(short==='barrel_core'||short==='barrel_part'){
@@ -44,6 +46,7 @@ export function naturalBreak(event,params){
  }
  if(cells.length){const key=d.id+'/'+at(root)+'/'+drop;if(seen.get(key)===system.currentTick)return;seen.set(key,system.currentTick);for(const [k,t]of seen)if(t<system.currentTick-1)seen.delete(k);}
  const suffix=dim+'/'+at(root),record=(key)=>{keys.push(key);const raw=world.getDynamicProperty(key);return typeof raw==='string'?JSON.parse(raw):undefined;};
+ const storedDrops=(key,data)=>{const plan=nativeStoragePlan(block,key,data,undefined);nativePlans.push(plan);for(const stack of plan.before)if(stack)drops.push(stack);};
  let data;
  if(short==='barrel_core'||short==='barrel_part'||short==='pressing_tub'){
   data=record('kt:machine/'+suffix);if(data?.kind==='pressing_tub')for(const row of data.slots.filter(Boolean))add(row.id,row.count);
@@ -53,26 +56,35 @@ export function naturalBreak(event,params){
   data=record('kt:cup/'+suffix);if(data){drops.push(naturalCupStack(data));drop=undefined;}else drop=cupItem(id);
  }else if(isBottleBlock(id)&&short!=='bottle_empty'&&short!=='bottle_water'){
   // Java DrinkBlock drops its stored item stacks, never the display block.
-  drop=undefined;data=record('kt:bottles/'+suffix);if(data){for(const item of data.items)add(item);}
+  drop=undefined;const key='kt:bottles/'+suffix;data=record(key);if(data)storedDrops(key,data);
  }else if(short==='potion_bottle'||short==='xp_bottle'){
-  data=record('kt:vanillaBottleDisplays/'+d.id+'/'+at(root));if(data?.item==='minecraft:potion'){drops.push(restorePotion(data));drop=undefined;}else drop=short==='xp_bottle'?'minecraft:experience_bottle':undefined;
+  data=record('kt:vanillaBottleDisplays/'+d.id+'/'+at(root));if(data?.item==='minecraft:potion'){const plan=potionDisplayRemoval(block,data);nativePlans.push(plan);drops.push(plan.outputs[0].stack);drop=undefined;}else drop=short==='xp_bottle'?'minecraft:experience_bottle':undefined;
  }else if(params?.params?.storage){
   const key='kt:extension_storage/'+id.replace(':','/')+'/'+suffix;data=record(key);
   if(data&&!data.deleted&&!data.prepared)for(const item of data.slots??[data.left,data.right])add(item);
  }else if(['holder','tilted_rack','circular_rack','cellar_cabinet','bar_cabinet','glass_bar_cabinet'].includes(short)){
   const key=['bar_cabinet','glass_bar_cabinet'].includes(short)?'kt:bar_cabinet/'+dim+'/'+short+'/'+at(root):'kt:'+short+'/'+suffix;
-  data=record(key);if(data){for(const item of data.slots??(short==='holder'?[data.item]:[data.left,data.right]))add(item);}
+  data=record(key);if(data)storedDrops(key,data);
  }
- if(short==='glassware_holder')add(NS+':empty_glassware',GLASSWARE_SLOTS.filter(k=>perm.getState(k)===1).length);
+ if(short==='glassware_holder'){const plan=nativeItems.plan({key:glasswareStorageKey(block),dimension:d,position:root,oldIds:GLASSWARE_SLOTS.map(k=>perm.getState(k)===1?NS+':empty_glassware':null),nextIds:[]});nativePlans.push(plan);for(const stack of plan.before)if(stack)drops.push(stack);}
  const f=furnitureBlock(id);if(f)drop=itemId(f);
  if(short==='bottle_empty')drop=NS+':empty_bottle';if(short==='bottle_water'){drops.push(restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'Consume'}}));drop=undefined;}
  // Consume authoritative state before emitting drops; subsequent multi-part
  // destruction callbacks cannot duplicate inventory. Liquids are lost, as Java.
  if(drop)add(drop);
- for(const key of keys){
-  if(key.startsWith('kt:extension_storage/')&&data)world.setDynamicProperty(key,JSON.stringify({schema:1,type:data.type,layout:data.layout,revision:data.revision+1,deleted:true,...(data.migrationDigest?{migrationDigest:data.migrationDigest}:{})}));
-  else world.setDynamicProperty(key,undefined);
+ const savedKeys=keys.map(key=>[key,world.getDynamicProperty(key)]);
+ try{
+  for(const plan of nativePlans)plan.apply();
+  for(const key of keys){
+   if(key.startsWith('kt:extension_storage/')&&data)world.setDynamicProperty(key,JSON.stringify({schema:1,type:data.type,layout:data.layout,revision:data.revision+1,deleted:true,...(data.migrationDigest?{migrationDigest:data.migrationDigest}:{})}));
+   else world.setDynamicProperty(key,undefined);
+  }
+ }catch(error){
+  let failed=false;for(const plan of nativePlans.slice().reverse())try{plan.rollback();}catch{failed=true;}
+  for(const [key,raw] of savedKeys)try{world.setDynamicProperty(key,raw);}catch{failed=true;}
+  if(failed)throw new Error('NATIVE_DESTRUCTION_ROLLBACK_FAILED');throw error;
  }
+ for(const plan of nativePlans)plan.finish();
  for(const cell of cells)removeBlock(d,cell.pos,cell.id);
  clearHelpers(d,root,[...keys,`kt:seat/${d.id}/${at(root)}`]);
  if(event.entitySource?.typeId==='minecraft:player'&&event.entitySource.getGameMode()==='Creative'||world.gameRules.doTileDrops===false)return;

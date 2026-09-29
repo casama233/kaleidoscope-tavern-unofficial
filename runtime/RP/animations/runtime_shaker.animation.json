@@ -68,13 +68,12 @@
     },
     "animation.kt_mixology.player_shake": {
       "loop": true,
-      "override_previous_animation": true,
       "bones": {
         "rightarm": {
           "rotation": [
-            "-112.5 - 45 * math.sin(q.life_time * 1718.87338539247)",
-            0,
-            -9
+            "v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)",
+            "v.is_first_person ? 0 : -this",
+            "v.is_first_person ? 0 : (-9 - this)"
           ]
         }
       }

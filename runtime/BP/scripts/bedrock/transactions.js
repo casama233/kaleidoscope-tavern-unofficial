@@ -1,3 +1,6 @@
+import {preparePickupOverflow} from './pickup-overflow.js';
+import {nativeStoragePlan} from './native-item-storage.js';
+import {storageFeedback,placedPickupFeedback} from './pickup-feedback.js';
 import {waterSnapshot,setWithWater,restoreWater} from './waterlogging.js';
 /** Shared synchronous inventory/block transaction tools. Not crash-level atomicity. */
 import {BlockPermutation,GameMode,ItemStack} from '@minecraft/server';
@@ -37,6 +40,14 @@ export function withBreakInventory(player,dimension,location,mode,fn){
  const scoped=breakSinkContainer(player,dimension,location,mode);inventoryScopes.set(player.id,scoped);
  try{return fn();}finally{inventoryScopes.delete(player.id);}
 }
+export function isBreakRecovery(player){return inventoryScopes.has(player.id);}
+export function canInteract(player){check(player&&player.getGameMode()!==GameMode.Spectator,'GAME_MODE_LOCKED');if(isBreakRecovery(player))canWrite(player);}
+export function pickupOutputs(player,outputs){return isBreakRecovery(player)?outputs:outputs.map(o=>({...o,delivery:'inventory',overflow:'drop'}));}
+export function pickupFeedback(player,block,plan,options={}){if(!isBreakRecovery(player))placedPickupFeedback(player,block,{...options,received:plan.received>0});}
+export function commitPickupInventory(plan,container,player,save,rollback){
+ const spawned=[];
+ commitInventory(plan,container,()=>{save();for(const stack of plan.overflow??[]){const e=player.dimension.spawnItem(stack,{x:player.location.x,y:player.location.y+.5,z:player.location.z});spawned.push(e);preparePickupOverflow(e);}},()=>{let failed=false;for(const e of spawned)try{e.remove();}catch{failed=true;}try{rollback();}catch{failed=true;}check(!failed,'ROLLBACK_FAILED');});
+}
 export function hand(player){return inventory(player).getItem(player.selectedSlotIndex);}
 export function canWrite(player){check(player&&![GameMode.Spectator,GameMode.Adventure].includes(player.getGameMode()),'GAME_MODE_LOCKED');}
 /** Java/vanilla BlockItem placement does not decrement the held stack in Creative. */
@@ -68,13 +79,13 @@ export function applyBlocks(changes) {
  catch(e){for(let i=touched-1;i>=0;i--)restoreWater(saved[i].block,saved[i]);throw e;}
  return ()=>{for(const x of saved)restoreWater(x.block,x);};
 }
-export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.random}={}) {
- canWrite(player);
- const container=inventory(player),plan=planInventory(container,player.selectedSlotIndex,take,give,makeStack);
+export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.random,interaction=false,native}={}) {
+ (interaction?canInteract:canWrite)(player);
+ const container=inventory(player),plan=planInventory(container,player.selectedSlotIndex,take,native?.outputs??give,makeStack);
  if(wear)withToolWear(plan,player.selectedSlotIndex,player.getGameMode()===GameMode.Creative,rng);
  let rollback=()=>{};
- commitInventory(plan,container,()=>{rollback=applyBlocks(changes);},()=>rollback());
- return plan;
+ commitInventory(plan,container,()=>{rollback=applyBlocks(changes);native?.apply();},()=>{try{native?.rollback();}finally{rollback();}});
+ native?.finish();return plan;
 }
 
 /** Shearing leaves the harvest in the world, even when the player's inventory is full. */
@@ -96,13 +107,16 @@ export function exchangeBlocksToWorld(player,outputs,changes,location,{wear=fals
 }
 
 export function commitStoredStateTransaction(player,{block,key,store,old,next,take,give,permutation,afterCommit}){
- const raw=store.raw(key),oldWater=waterSnapshot(block),container=inventory(player);
- const plan=planInventory(container,player.selectedSlotIndex,take,give,makeStack);
+ const raw=store.raw(key),oldWater=waterSnapshot(block),container=inventory(player),incoming=hand(player);
+ const native=nativeStoragePlan(block,key,old,next,incoming,give);
+ const plan=planInventory(container,player.selectedSlotIndex,take,native?.outputs??give,makeStack);
  commitInventory(plan,container,
-  ()=>{setWithWater(block,permutation);store.save(key,next,old?.revision??-1);},
-  ()=>{restoreWater(block,oldWater);store.restore(key,raw);}
+  ()=>{setWithWater(block,permutation);store.save(key,next,old?.revision??-1);native?.apply();},
+  ()=>{try{native?.rollback();}finally{restoreWater(block,oldWater);store.restore(key,raw);}}
  );
- if(afterCommit)afterCommit(block,next);
+ native?.finish();
+ if(native&&block.typeId!=='minecraft:air'&&(take>0||give.length)&&!isBreakRecovery(player))storageFeedback(block,{kind:key.startsWith('kt:bar_cabinet/')||(next??old)?.layout==='bar_cabinet'?'cabinet':'rack',taking:give.length>0,heldAmount:incoming?.amount??0});
+ if(afterCommit)try{afterCommit(block,next);}catch(error){console.warn('[Tavern storage visual] '+error);}
  return next;
 }
 

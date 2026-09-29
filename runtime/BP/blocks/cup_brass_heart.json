@@ -50,28 +50,17 @@
         }
       },
       "kaleidoscope_tavern:cocktail_cup": {},
-      "minecraft:collision_box": {
-        "origin": [
-          -4,
-          0,
-          -4
-        ],
-        "size": [
-          8,
-          10,
-          8
-        ]
-      },
+      "minecraft:collision_box": false,
       "minecraft:selection_box": {
         "origin": [
-          -4,
+          -6,
           0,
-          -4
+          -6
         ],
         "size": [
-          8,
-          10,
-          8
+          12,
+          16,
+          12
         ]
       },
       "minecraft:tick": {

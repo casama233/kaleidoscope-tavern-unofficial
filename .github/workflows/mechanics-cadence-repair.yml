@@ -1,0 +1,53 @@
+name: Reviewed barrel cadence repair
+on:
+  push:
+    branches: [fix/mechanics-integration-20260929]
+    paths:
+      - .github/workflows/mechanics-cadence-repair.yml
+      - tools/mechanics/complete_barrel_repair.py
+permissions:
+  contents: write
+concurrency:
+  group: reviewed-barrel-cadence-repair
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply the exact reviewed source repair
+        run: python tools/mechanics/complete_barrel_repair.py
+      - name: Exercise the real registered callback and ingredient rules
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/mechanics-evidence
+          node --experimental-vm-modules --test tools/mechanics/mechanics-regression.test.mjs | tee /tmp/mechanics-evidence/mechanics.tap
+          node --check runtime/BP/scripts/bedrock/machines.js
+          node --check runtime/BP/scripts/core/machines.js
+      - name: Commit only the reviewed source and provenance
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'fix/mechanics-integration-20260929'
+          test "$(git ls-remote origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          git add runtime/BP/scripts/core/machines.js runtime/BP/scripts/bedrock/machines.js data/launch-repair-reference.json data/mechanics-repair-20260929.json
+          git diff --cached --check
+          git config user.name 'Kaleidoscope Tavern Unofficial'
+          git config user.email '97009482+casama233@users.noreply.github.com'
+          git commit -m 'fix(mechanics): wire real barrel ticks to 97 and preserve reviewed source provenance'
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          git log -1 --format='%H%n%B' > /tmp/mechanics-evidence/commit.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: barrel-cadence-regression
+          path: /tmp/mechanics-evidence/
+          retention-days: 7

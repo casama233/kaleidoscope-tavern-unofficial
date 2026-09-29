@@ -1,3 +1,4 @@
+import {nativeStoragePlan} from './native-item-storage.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system} from '@minecraft/server';
 import {check} from '../core/util.js';
@@ -12,6 +13,14 @@ import {spawnThrownDrink} from './storage-projectile.js';
 // Mouse/gamepad actions use the same native gaze hit used for block targeting.
 // Touch may select off-centre on the screen, so retain its event hit location.
 export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,last:null};
+export function nativeBlockHit(player,block){
+ try{
+  const hit=player.getBlockFromViewDirection({maxDistance:8});
+  if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
+   ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return undefined;
+  return {face:hit.face,faceLocation:{...hit.faceLocation}};
+ }catch{return undefined;}
+}
 function storageHit(player,block,face,point){
  const fallback={face,faceLocation:point?{...point}:undefined};
  try{
@@ -80,18 +89,22 @@ export function popRandomStoredBottle({
  const launch=pose({block,slot:selected.slot,item:selected.item,rng:motionRng});
  check(launch?.position&&launch?.velocity,'INVALID_STORAGE_LAUNCH');
  const next=remove(state,selected.slot),raw=store.raw(key),oldPermutation=block.permutation;
+ const native=nativeStoragePlan(block,key,state,next);
  let projectile;
  try{
   projectile=spawn(block.dimension,selected.item,launch.position,launch.velocity,{rng:selectionRng});
   if(permutation)block.setPermutation(permutation(block,state,next,selected.slot));
-  store.save(key,next,state.revision);
+  store.save(key,next,state.revision);native?.apply();
  }catch(e){
-  try{projectile?.remove();}catch{}
-  try{block.setPermutation(oldPermutation);}catch{}
-  try{store.restore(key,raw);}catch{}
+  let failed=false;
+  try{projectile?.remove();}catch{failed=true;}
+  try{native?.rollback();}catch{failed=true;}
+  try{block.setPermutation(oldPermutation);}catch{failed=true;}
+  try{store.restore(key,raw);}catch{failed=true;}
   try{sync?.(block,state);}catch{}
-  throw e;
+  check(!failed,'ROLLBACK_FAILED');throw e;
  }
+ native?.finish();
  try{sync?.(block,next);}catch{}
  if(bottle.base!=='molotov')try{block.dimension.playSound('kt_assets_a17.block.holder.pop',block.location,{volume:.9,pitch:1});}catch{}
  return {status:'LAUNCHED',slot:selected.slot,item:selected.item,next,projectile,launch};

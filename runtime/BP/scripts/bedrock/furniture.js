@@ -1,3 +1,7 @@
+import {nativeItems,glasswareStorageKey} from './native-item-storage.js';
+import {storageFeedback} from './pickup-feedback.js';
+import {nativeBlockHit} from './stateful-storage-router.js';
+import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {setWithWater,waterAt} from './waterlogging.js';
@@ -7,7 +11,7 @@ import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,canWrite,placementTake,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air,playerInteractionReach} from './transactions.js';
+import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air,playerInteractionReach} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
@@ -43,9 +47,46 @@ function verticalDoublePair(block){
 export function repairVerticalDouble(block){
  const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;block.setPermutation(air());furnitureDiagnostics.multiblockRepairs++;return true;
 }
+function glasswareIds(block){return GLASSWARE_SLOTS.map(state=>block.permutation.getState(state)===1?EMPTY_GLASSWARE:null);}
 export function useGlasswareHolder(player,block,faceLocation){
- canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
- return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
+ canInteract(player);isNear(player,block.dimension,block.location);check(furnitureBlock(block.typeId)?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');
+ const slot=glasswareHolderStateSlot(block.permutation.getState(FACING)??0,glasswareHolderSlot(faceLocation)),state=GLASSWARE_SLOTS[slot],h=hand(player),key=glasswareStorageKey(block);
+ return locks.with([key,player.id],()=>{
+  const oldIds=glasswareIds(block),occupied=!!oldIds[slot],putting=h?.typeId===EMPTY_GLASSWARE;
+  if(putting&&occupied)return false;
+  if(!putting){check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;}
+  const nextIds=oldIds.slice();nextIds[slot]=putting?EMPTY_GLASSWARE:null;
+  const give=putting?[]:[{id:EMPTY_GLASSWARE,count:1,delivery:'hand'}];
+  const native=nativeItems.plan({key,dimension:block.dimension,position:block.location,oldIds,nextIds,incoming:h,give});
+  exchangeBlocks(player,putting?placementTake(player):0,give,[{block,permutation:block.permutation.withState(state,putting?1:0)}],{interaction:true,native});
+  storageFeedback(block,{kind:'glassware'});return true;
+ });
+}
+export const glasswareHitDiagnostics={corrections:0,errors:0,last:null};
+/** Resolve which of the four glass slots the player aimed at. Java reads the world X/Z
+ * quadrant of the true hit; the engine reports that hit in the clicked face's own basis,
+ * which on the bottom face slotted the aimed cup's mirror neighbour (diagonal with the
+ * raw event, left-right with the script raycast). Mouse and gamepad aim through the
+ * script raycast, touch keeps its event hit, and both are converted back with the
+ * measured face basis; faces without a measurement keep the raw engine value. */
+export function resolveGlasswareHit(player,block,face,point){
+ const fallback={face,faceLocation:point?{...point}:undefined};
+ try{
+  let source='event',hit=point?{...point}:undefined,sourceFace=face;
+  const input=player.inputInfo,mode=input?.lastInputModeUsed;
+  if(['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar)){
+   const ray=nativeBlockHit(player,block);
+   if(ray){source='ray';hit=ray.faceLocation;sourceFace=ray.face??face;}
+  }
+  const corrected=worldFromHit(sourceFace,hit,source);
+  if(corrected){
+   glasswareHitDiagnostics.corrections++;
+   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
+   if(glasswareHitDiagnostics.corrections<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
+   return {face,faceLocation:corrected};
+  }
+  return fallback;
+ }catch(e){glasswareHitDiagnostics.errors++;return fallback;}
 }
 /** Stool helpers also render the stool; sofa helpers are invisible and exist only while occupied. */
 export function ensureSeat(block){
@@ -98,7 +139,8 @@ export function recoverFurniture(player,block){
  }
  const result=locks.with([key,player.id],()=>{
   const seats=seated(f)?atAnchor(d,p):[];const give=[{id:itemId(f),count:1}];if(f.kind==='glassware_holder'){const n=glasswareHolderCount(block);if(n)give.push({id:EMPTY_GLASSWARE,count:n});}
-  exchangeBlocks(player,0,give,[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
+  const native=f.kind==='glassware_holder'?nativeItems.plan({key:glasswareStorageKey(block),dimension:d,position:p,oldIds:glasswareIds(block),nextIds:[],give}):undefined;
+  exchangeBlocks(player,0,give,[{block,permutation:air()}],{native});for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
  });
  if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));return result;
 }
@@ -123,7 +165,7 @@ export function installFurnitureEvents(){
  registerJavaBlockUseHandler(e=>{
   if(e.cancel)return;const existing=furnitureBlock(e.block.typeId);if(!existing)return;
   const hs=handSnapshot(e.player);if(javaSecondaryBypass(e.player,hs.id))return;
-  const faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
+  let faceLocation=e.faceLocation?{...e.faceLocation}:undefined;
   let consume=false;
   if(seated(existing)){
    const seats=atAnchor(e.block.dimension,e.block.location),occupied=seats.some(x=>nativeRide(x).getRiders().length>0);
@@ -131,7 +173,8 @@ export function installFurnitureEvents(){
   }else if(existing.kind==='light'){
    const color=dyeColor(hs.id);consume=!!color&&color!==existing.color;
   }else if(existing.kind==='glassware_holder'){
-   const slot=glasswareHolderSlot(faceLocation),occupied=e.block.permutation.getState(GLASSWARE_SLOTS[slot])===1;
+   const hit=resolveGlasswareHit(e.player,e.block,e.blockFace,e.faceLocation),slot=glasswareHolderStateSlot(e.block.permutation.getState(FACING)??0,glasswareHolderSlot(hit.faceLocation)),occupied=e.block.permutation.getState(GLASSWARE_SLOTS[slot])===1;
+   faceLocation=hit.faceLocation;
    consume=hs.id===EMPTY_GLASSWARE||(!hs.id&&occupied);
   }
   if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;

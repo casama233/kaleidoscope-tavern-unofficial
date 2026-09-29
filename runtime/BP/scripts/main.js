@@ -1,3 +1,4 @@
+import {installPickupOverflowEvents} from './bedrock/pickup-overflow.js';
 import {feedbackDiagnostics} from './bedrock/feedback-diagnostics.js';
 import {storageHitDiagnostics} from './bedrock/stateful-storage-router.js';
 import {registerNaturalBreak} from './bedrock/natural-break.js';
@@ -62,7 +63,7 @@ system.beforeEvents.startup.subscribe(ev=>{
  registerFurnitureComponents(ev);registerDecorationComponents(ev);registerWritingBoardComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerTapSourceComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
  ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});
 });
-installFurnitureEvents();installDecorationEvents();installWritingBoardEvents();installCustomEffects();installMixologyEvents();installEffectBar();installMachineEvents();installCultivation();installStorageProjectileEvents();installMolotovEvents();installTapSourceEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installVanillaBottleDisplayEvents();installDisplayProjectileEvents();installQualityTooltipEvents();installCreativePickEvents();installJavaItemUseOnEvents();
+installPickupOverflowEvents();installFurnitureEvents();installDecorationEvents();installWritingBoardEvents();installCustomEffects();installMixologyEvents();installEffectBar();installMachineEvents();installCultivation();installStorageProjectileEvents();installMolotovEvents();installTapSourceEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installVanillaBottleDisplayEvents();installDisplayProjectileEvents();installQualityTooltipEvents();installCreativePickEvents();installJavaItemUseOnEvents();
 system.afterEvents.scriptEventReceive.subscribe(ev=>{
  if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;registerFamilyDisplays(p);cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}
 },{namespaces:['kaleidoscope_cookery']});

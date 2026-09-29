@@ -1,3 +1,5 @@
+import {nativeStoragePlan} from './native-item-storage.js';
+import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {world,BlockPermutation,GameMode,MolangVariableMap} from '@minecraft/server';
 import {isBottleBlock,isCupBlock} from '../core/extension-content.js';
 import {BottleStore,bottleKey,parseBottle} from '../core/bottles.js';
@@ -40,9 +42,11 @@ export function handleDisplayProjectileHit(e){
  if(!ownerCanInteract(projectile))return false;
  try{
   const p={x:block.location.x,y:block.location.y,z:block.location.z},isDrink=isBottleBlock(id),isVanillaPotion=id===NS+':potion_bottle',vanillaKey=isVanillaPotion?bottleDisplayKey(block):undefined,k=isDrink?bottleKey(block.dimension.id,p):isCup?cupKey(block.dimension.id,p):undefined,s=isDrink?store.load(k):undefined,raw=k?(isDrink?store.raw(k):cupStore.raw(k)):undefined,vanillaRaw=vanillaKey?world.getDynamicProperty(vanillaKey):undefined,old=waterSnapshot(block);
+  const native=isDrink&&s?nativeStoragePlan(block,k,s,undefined):isVanillaPotion?potionDisplayRemoval(block):undefined;
   let highest;
   for(const item of s?.items??[]){const parsed=parseBottle(item);if(parsed&&(!highest||parsed.quality>highest.quality))highest=parsed;}
-  try{setWithWater(block,BlockPermutation.resolve('minecraft:air'));if(k){if(isDrink)store.restore(k,undefined);else cupStore.restore(k,undefined);}if(vanillaKey)world.setDynamicProperty(vanillaKey,undefined);}catch(err){try{restoreWater(block,old);if(k){if(isDrink)store.restore(k,raw);else cupStore.restore(k,raw);}if(vanillaKey)world.setDynamicProperty(vanillaKey,vanillaRaw);}catch(rollback){error(rollback);}throw err;}
+  try{setWithWater(block,BlockPermutation.resolve('minecraft:air'));if(k){if(isDrink)store.restore(k,undefined);else cupStore.restore(k,undefined);}if(vanillaKey)world.setDynamicProperty(vanillaKey,undefined);native?.apply();}catch(err){try{try{native?.rollback();}finally{restoreWater(block,old);if(k){if(isDrink)store.restore(k,raw);else cupStore.restore(k,raw);}if(vanillaKey)world.setDynamicProperty(vanillaKey,vanillaRaw);}}catch(rollback){error(rollback);}throw err;}
+  native?.finish();
   try{block.dimension.spawnParticle('kt_assets_a17:glass_shatter',{x:p.x+.5,y:p.y+.4,z:p.z+.5});block.dimension.playSound('dig.glass',{x:p.x+.5,y:p.y+.4,z:p.z+.5});}catch{}
   if(highest)applyCloud(block.dimension,p,highest.id);
   displayProjectileDiagnostics.broken++;return true;

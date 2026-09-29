@@ -356,20 +356,20 @@
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
-      "after": "5d97c52f46376a963a73f1e690a1f117bb8c9918b3f923e7d1cabcfd8ab735e2",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics."
+      "after": "73caf15315cd88e0ee0b52dd50bb3b9bc988545982aa69b064bab5d33ee8676b",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
       "beforeProjected": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
-      "after": "e4a566d00325b467ee359b3999761f569b1c013205da3cca079960a85bedf3c9",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "d936b2958af914c9f043be539dce7020ac4c5c5a7397f2109c7b335c59531bea",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "bba5ca987aa8c02c7a887182fc1e1f2111c9ac9dac40310c8ab730ade441579c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "e7445073a9885ad6748e6c77a2ae1fc0b6524a469106d58029d04033746ce671",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
@@ -380,14 +380,14 @@
     "runtime/BP/scripts/bedrock/tap-sources.js": {
       "before": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
       "beforeProjected": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
-      "after": "39dd216079c79f8f7a31350e070fe5d39eeeb7aa05f87c5e57c15876bd664b3c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "f6d5c59337f50d03d5e44a2d7b7d67261fb10d9bbf8fbfdd15a4218a6c16bb0a",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/tilted-rack.js": {
       "before": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
       "beforeProjected": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
-      "after": "be0ab2f08ce0d98a967c4ee0aa97533edd53db27a24f264e21bb042868d84498",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "5d23a366f89e4a63d4c0e49fff2be358ed832106cdf4174128ff19f5178b3f15",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/tipsy-visual.js": {
       "before": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
@@ -410,14 +410,14 @@
     "runtime/BP/scripts/core/furniture.js": {
       "before": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
       "beforeProjected": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
-      "after": "b8a74e4c8c44f79fe7a6fa734f0e836d30019d06d7a5db9171e434138cd6463d",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "d91b8d4d9768655cbceb2eb2869cd86aaf6b410b82019f052fce095802619b82",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "12b631cdc1719ef899b0c739e097f07b524dd344b36a2fca82077e9b5750d352",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+      "after": "06a03ccf0f3065c67c5395baa5e2dc0dd84dc34af9c12491e0e4400ce4b1af2e",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
@@ -1670,8 +1670,8 @@
     "runtime/BP/scripts/bedrock/mixology.js": {
       "before": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
       "beforeProjected": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
-      "after": "112a31ee97fb2b8e79a911ce7c8e1a855c0ed8701652adeecef7d1b39a024adb",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance."
+      "after": "bdb3d69302d2a8ae84c10e8eed63a74e518ad2e5bf37c4a158127412a53a7dd0",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/core/potions.js": {
       "before": "e60aafa5b1cc4412f85272e0ee88ccc55955d663a9ae69706a381af5d0259800",
@@ -1682,8 +1682,8 @@
     "runtime/BP/scripts/bedrock/bottles.js": {
       "before": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a",
       "beforeProjected": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a",
-      "after": "205a320b73ef3e603e0bf7ca729a2ecfcb0cde104b3da6e49149272242861fcb",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "b482a1e65843678cb9029b51eb3d3a828f9673f1fca5388449776fef6af5ebe7",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/shaker-screen.js": {
       "before": "72cea053ca1e6b41fc3bf1330a0fc61fbf051aada9b5c70662e27a575af65a45",
@@ -1892,20 +1892,20 @@
     "runtime/BP/scripts/bedrock/cellar-cabinet.js": {
       "before": "fa58d24275e5742d2225e0428985d64153826a145159474696c5c795b9c94f84",
       "beforeProjected": "fa58d24275e5742d2225e0428985d64153826a145159474696c5c795b9c94f84",
-      "after": "d3b45d6181144e58a972f1bd157f6934fdda4e5bfdf9b8bab1a59840cfa59390",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "3af9f7d6640736cb477ffc4d0a7869958d9b9d155aac3f2e020d3f2eb3ea5ab8",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/circular-rack.js": {
       "before": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
       "beforeProjected": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
-      "after": "5171891fe156ee87a3738ee74df8977f5c1e7829317dafe026805d8701d72a19",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "bf48a60775ea4f4f4b23b614007109706266a274497fe1779ababc391c3c26ae",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/bar-cabinet.js": {
       "before": "ca1c3717c30c54e8ef0e5ba59a15ef12d99198eef103d6b9b7d23ae07c180046",
       "beforeProjected": "ca1c3717c30c54e8ef0e5ba59a15ef12d99198eef103d6b9b7d23ae07c180046",
-      "after": "f738ab38f51f0d489727e415223a7bcf60e671dd274203a5fd02a413324a51d5",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "3018ef009fa87f12b6a902a3e4fecf8c9685dbda49b64a61ceb54a23552bf3bb",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/extension-furniture.js": {
       "before": "7544b973d83231580225157ccecd2f3bef0358c4c87170d57cf3ee8aa4cb7d85",
@@ -1934,8 +1934,8 @@
     "runtime/RP/sounds/sound_definitions.json": {
       "before": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
       "beforeProjected": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
-      "after": "7e73a191298435d9da969759af1c55284111b577d110353168f7a19218368591",
-      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast."
+      "after": "d533f9b520efe69497919a944218c20157a54ed2a993aa9d5bcedde002b71d64",
+      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/RP/models/entity/sunset_glow_2.geo.json": {
       "before": "5807499cf14bacd63ff6c24db0e49282a05264219e66ff9ae8cdc28637f969a2",
@@ -2000,8 +2000,8 @@
     "runtime/BP/scripts/core/inventory.js": {
       "before": "243bb0e2669f6b5e4dfc374b8fb0311830c7277831af20fa1ff92b7580ee60dc",
       "beforeProjected": "243bb0e2669f6b5e4dfc374b8fb0311830c7277831af20fa1ff92b7580ee60dc",
-      "after": "faf60ca5fdbbd2d89b5a6c6cc5e051cdadb74bbe3c6f59294b36a5dc4f7c6697",
-      "reason": "0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance."
+      "after": "03cb17ce275eada64aa5f0dacb63d0de75994ca8bfbdb5ee612f6e71b67d4856",
+      "reason": "0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/java-placement-router.js": {
       "before": "a8fea3005a5f987c4c4412d5cd0cb65e0c3f62005ad149d01b13540368b038ff",
@@ -2014,6 +2014,36 @@
       "beforeProjected": "f4ea238ad8a0a4518b9fe666c89ecb0691d6ce871655239a1f182f3a1086d256",
       "after": "6264c07347d00cd3bb9a5abffc6f4255f5c4f01ab2309e68879e4101a87739bf",
       "reason": "0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+    },
+    "runtime/BP/scripts/bedrock/display-projectiles.js": {
+      "before": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
+      "beforeProjected": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
+      "after": "e71371a35cedf83411a3fd5b2ece2f9f8d6e9fc8a641202b31bac24e66879303",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/bedrock/potions.js": {
+      "before": "6ad7d9b34752ac4c6d83ea384353f5079328ea63bbbd89fe1eb5709deaf587cc",
+      "beforeProjected": "6ad7d9b34752ac4c6d83ea384353f5079328ea63bbbd89fe1eb5709deaf587cc",
+      "after": "eb4745dba9c5a1c58fdc5eabfa2d3b88a02565dad69000c5508188b5c4d6018f",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/bedrock/transactions.js": {
+      "before": "96f413aa32f637cd0b7c2ab6c0cc8fd0ef9a41ec5d02728eb05176f0a3b44ab3",
+      "beforeProjected": "96f413aa32f637cd0b7c2ab6c0cc8fd0ef9a41ec5d02728eb05176f0a3b44ab3",
+      "after": "5e6ec7867d362c61147b4408f96aae7e3bd4a93225a3230d08be105f18816ade",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/bedrock/vanilla-bottle-displays.js": {
+      "before": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
+      "beforeProjected": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
+      "after": "521111e6dca7d90fca05b74c1473340a3127fe4e32514a06e496bd57f1525984",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/core/cellar-cabinet.js": {
+      "before": "73252e69e884a628256a3d2f7220db4fb67edeee746df20254f85bb9ff8ebd8e",
+      "beforeProjected": "73252e69e884a628256a3d2f7220db4fb67edeee746df20254f85bb9ff8ebd8e",
+      "after": "8c4b8b38dfb95999bbaf6a8379b45fce78ef17d2c5d4e86ac0e732360eaf4de4",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     }
   },
   "rules": {
@@ -2078,7 +2108,7 @@
     "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2",
     "runtime/BP/scripts/core/incense-sampling.js": "cb2571534df3cdb3f94deb8c29391b85575d092c8504f7b96909860130d73696",
     "runtime/BP/scripts/core/guide-preparation.js": "46036ece1e0a9a8c223bbc11ac379c160894245ca00e982cabf8c5fb7558e57c",
-    "runtime/BP/scripts/bedrock/natural-break.js": "35394c16bd74a89b637caeaa90dc2d39eb8826ce109567e59cb146efc62ef27c",
+    "runtime/BP/scripts/bedrock/natural-break.js": "1e781e254eda6e81f1b4b326492bae6f6c2597ae6e39cf2da7cda34ba43a52f3",
     "runtime/RP/textures/ui/tavern_entries/white_lady.png": "60d7a4912ed62b7a15491f559275840d3a2ff691e60faaf59622250533692317",
     "runtime/RP/textures/ui/tavern_entries/nether_special.png": "f51dbf0e22f6cfe0baf38920e8222ae87534e6f59245b45e820113861f0d7e77",
     "runtime/RP/textures/ui/tavern_entries/godfather.png": "37b08a785cc59dec08c9d91b2d097de71fb6f2711e0f532836c90ef5da2d76bc",
@@ -2119,7 +2149,29 @@
     "runtime/RP/models/entity/liquid_barrel_lava.geo.json": "fae3f35bf2992f49adbc1d21ac67e026bbee6ec98c4ca20b83b6d902c1ee1e50",
     "runtime/RP/models/entity/liquid_pressing_tub_water.geo.json": "c0e8794c34f0fe34630bc38854eac1f8ed13f7fbf7fcf67ddf547af7e5efde45",
     "runtime/RP/models/entity/liquid_pressing_tub_lava.geo.json": "6f27ed94b9afe7a272aad02889a7d6eb94fdf8e68a1373bdb85b0ffe903a7167",
-    "runtime/RP/models/entity/liquid_barrel_water.geo.json": "eb0a16c9854581b1497708a3c93b368ec40debd0fc02c6b18b28e66366521ae7"
+    "runtime/RP/models/entity/liquid_barrel_water.geo.json": "eb0a16c9854581b1497708a3c93b368ec40debd0fc02c6b18b28e66366521ae7",
+    "runtime/BP/entities/stored_items.json": "f6b03ac07252288d8e058c94f811584ad5321f2af48e9e8f0bc096c61bee9f68",
+    "runtime/BP/scripts/bedrock/native-item-storage.js": "547a1ca01f9131d655b49101c050ac880c76f267e4de6c3fba87f2a961bb8189",
+    "runtime/BP/scripts/bedrock/pickup-feedback.js": "cc5fe8b7bb4af7a60f3edf2042baea3457e1bdbd25ceab8d459a1b6a007d43ad",
+    "runtime/BP/scripts/bedrock/pickup-overflow.js": "9728be8fd1e94de439a04f862c460dd978b6ace9e10c9f2fb861c504b64bc8be",
+    "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135",
+    "runtime/BP/scripts/core/native-item-storage.js": "347b0220a9be0d796a73cbd2bf258ce5b51525ede304fadc10ce48ccf4a9573b",
+    "runtime/RP/entity/stored_items.entity.json": "2ff7d6c9afd4f18c060d490954be5c870b584c5b0e41225161144b7ce1309295",
+    "runtime/RP/models/entity/stored_items.geo.json": "1043baec5a1fc07c61875a5d3f45d89f4b5830bddd11297ccedbae8487abcf5c",
+    "runtime/RP/render_controllers/stored_items.render_controllers.json": "1c9e659216c1ffa3c7f02824aa1a18994f19f1137573f57cdc0c49161a5b1b96",
+    "runtime/RP/sounds/kt_pickup/block/amethyst/place1.ogg": "3cbca4f7736b096aeedefa34857206c59e4814441895d799ec8dffe508fc17fc",
+    "runtime/RP/sounds/kt_pickup/block/amethyst/place2.ogg": "f3d48829db5489266424b928b8274b1135de254f666cb3391f94cd2c342a09e7",
+    "runtime/RP/sounds/kt_pickup/block/amethyst/place3.ogg": "3847f95710e476f3877f76a9aa0874e17856e96fac63c52e18d099c55a2d0d99",
+    "runtime/RP/sounds/kt_pickup/block/amethyst/place4.ogg": "668024c8e7986817e6e068bcc211bf3a72a3a1faa04a00850d30c2c1f1ab2b64",
+    "runtime/RP/sounds/kt_pickup/dig/stone1.ogg": "97f2a8a73b6f577b85c1a162c31810c7aff1ad1f34564dfdacebb64b26d1c7c6",
+    "runtime/RP/sounds/kt_pickup/dig/stone2.ogg": "98a5c3197845526e6ca9e8a669ffda843cfae3f5c7ac842ee6aac8896bae03b2",
+    "runtime/RP/sounds/kt_pickup/dig/stone3.ogg": "19273f0e7e25b459ea29511dcbc4f7f209c04cea2fd1c34a16250737469ca51c",
+    "runtime/RP/sounds/kt_pickup/dig/stone4.ogg": "b164e7324510480abac9518090e48439123ea05ebc48970e48fc59406729a197",
+    "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item1.ogg": "8dac5bc8df9d4157b32849f4d79f58daa78b3da52ff3976ad27f89d9595210be",
+    "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item2.ogg": "acdf8a4812136ea960753036b764866fe1d8d690bb76ef21a768d424cb6b1e47",
+    "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item3.ogg": "81e88fcb46b1f960d3f2c93cb2a80a684324b4921a518e0a447687dee19836b7",
+    "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item4.ogg": "9bba0de4f6bed39bbb2b9c5ecc134bcd25876a18006a23a68faf66c8e4c27358",
+    "runtime/RP/sounds/kt_pickup/random/pop.ogg": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

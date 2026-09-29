@@ -6,7 +6,7 @@ import {HOLDER_BLOCK,HOLDER_KIND,holderItem,holderBlockedItem,holderState,holder
 import {NS,FACING,facingForYaw} from '../core/furniture.js';
 import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,inventory,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
+import {makeStack,hand,inventory,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
@@ -36,13 +36,13 @@ export function placeHolder(player,target){
  commitInventory(plan,c,()=>b.setPermutation(BlockPermutation.resolve(HOLDER_BLOCK,{[FACING]:facing,[HOLDER_KIND]:0})),()=>b.setPermutation(old));holderDiagnostics.placed++;return b;
 }
 export function putHolderBottle(player,block,{expectedRevision}={}){
- canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');check(!old&&kind(block)===0,'HOLDER_OCCUPIED');
- const h=hand(player);if(holderBlockedItem(h?.typeId))check(false,'HOLDER_BLOCKLIST');const accepted=holderItem(h?.typeId);check(accepted,'NOT_HOLDER_BOTTLE');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');const next=holderState(h.typeId,0);
+ canInteract(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');check(!old&&kind(block)===0,'HOLDER_OCCUPIED');
+ const h=hand(player);if(holderBlockedItem(h?.typeId))check(false,'HOLDER_BLOCKLIST');const accepted=holderItem(h?.typeId);check(accepted,'NOT_HOLDER_BOTTLE');const next=holderState(h.typeId,0);
  transact(player,block,undefined,next,1,[],block.permutation.withState(HOLDER_KIND,blockKind(next)));holderDiagnostics.inserted++;return next;
 }
 export function takeHolderBottle(player,block,{expectedRevision}={}){
- canWrite(player);requireBlockReach(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(old,'HOLDER_EMPTY');check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
- transact(player,block,old,undefined,0,[{id:old.item,count:1}],block.permutation.withState(HOLDER_KIND,0));holderDiagnostics.taken++;return old.item;
+ canInteract(player);requireBlockReach(player,block.dimension,block.location);check(!hand(player),'EMPTY_HAND_REQUIRED');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(old,'HOLDER_EMPTY');check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
+ transact(player,block,old,undefined,0,[{id:old.item,count:1,delivery:'hand'}],block.permutation.withState(HOLDER_KIND,0));holderDiagnostics.taken++;return old.item;
 }
 export function recoverHolder(player,block,{expectedRevision}={}){
  canWrite(player);requireBlockReach(player,block.dimension,block.location);check(block.typeId===HOLDER_BLOCK,'NOT_HOLDER');const k=holderKey(block.dimension.id,block.location),old=store.load(k);check(intact(block,old),'HOLDER_STATE_MISMATCH');if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');const give=[{id:HOLDER_BLOCK,count:1},...(old?[{id:old.item,count:1}]:[])];

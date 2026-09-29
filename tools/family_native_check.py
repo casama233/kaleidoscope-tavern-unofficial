@@ -88,7 +88,9 @@ def main():
         save(obs/'manifest.json',{'format_version':2,'header':{'uuid':uid,'name':'Read-only family batch1 observer','description':'No player simulation','version':[1,0,0],'min_engine_version':[1,26,50]},'modules':[{'type':'script','language':'javascript','uuid':str(uuid.uuid5(uuid.NAMESPACE_URL,uid)),'entry':'scripts/main.js','version':[1,0,0]}],'dependencies':[{'module_name':'@minecraft/server','version':'2.7.0'}]})
         (obs/'scripts/main.js').write_text(OBSERVER);lists['BP'].append({'pack_id':uid,'version':[1,0,0]})
         save(world/'world_behavior_packs.json',lists['BP']);save(world/'world_resource_packs.json',lists['RP']);save(out/(name+'-packs.json'),records)
-        props={'server-name':'Family compatibility isolated check','gamemode':'creative','difficulty':'peaceful','allow-cheats':'true','online-mode':'false','allow-list':'true','max-players':'1','server-port':str(23100+i*2),'server-portv6':str(23101+i*2),'enable-lan-visibility':'false','level-name':'Compatibility','level-seed':'1729','level-type':'FLAT','view-distance':'4','tick-distance':'4','max-threads':'2','content-log-file-enabled':'true','content-log-console-output-enabled':'true','emit-server-telemetry':'false','pause-when-empty-seconds':'0'}
+        # The pinned server rejects allow-list=true with online-mode=false.
+        # Keep authentication enabled and an empty allowlist; no player may join.
+        props={'server-name':'Family compatibility isolated check','gamemode':'creative','difficulty':'peaceful','allow-cheats':'true','online-mode':'true','allow-list':'true','max-players':'1','server-port':str(23100+i*2),'server-portv6':str(23101+i*2),'enable-lan-visibility':'false','level-name':'Compatibility','level-seed':'1729','level-type':'FLAT','view-distance':'4','tick-distance':'4','max-threads':'2','content-log-file-enabled':'true','content-log-console-output-enabled':'true','emit-server-telemetry':'false','pause-when-empty-seconds':'0'}
         (dest/'server.properties').write_text('\n'.join(k+'='+v for k,v in props.items())+'\n');save(dest/'allowlist.json',[])
         logfile=out/(name+'.log');start=time.monotonic()
         with logfile.open('w') as log:
@@ -113,7 +115,7 @@ def main():
         if probe_actual:
             expected={'kaleidoscope_cookery:iron_kitchen_knife':True,'kaleidoscope_end:dragon_tooth_knife':True,'kaleidoscope_nether:primitive_machete':True,'minecraft:diamond_sword':False}
             checks['actualGrillingClassifier']=len(actual)==1 and actual[0]['players']==0 and actual[0]['results']==expected
-        summary={'case':name,'packOrder':selected,'checks':checks,'passed':all(checks.values()),'contentErrors':content_errors,'ladderDuplicateWarnings':duplicate,'probes':native_probes,'actualClassifier':actual,'instrumentedGrillingCopy':probe_actual,'seconds':round(time.monotonic()-start,2),'playersSimulated':False,'clientTest':False,'wholeFamilyCompatible':False,'transportNotCertified':True}
+        summary={'case':name,'packOrder':selected,'checks':checks,'passed':all(checks.values()),'contentErrors':content_errors,'ladderDuplicateWarnings':duplicate,'probes':native_probes,'actualClassifier':actual,'instrumentedGrillingCopy':probe_actual,'seconds':round(time.monotonic()-start,2),'playersSimulated':False,'clientTest':False,'wholeFamilyCompatible':False,'transportNotCertified':True,'onlineAuthentication':True}
         save(out/(name+'-summary.json'),summary);summaries.append(summary);print(name,checks,flush=True)
     save(out/'SUMMARY.json',{'bds':lock['bds'],'cases':summaries,'passed':all(s['passed'] for s in summaries),'allKnownCompatibilityProblemsFixed':False})
     if not all(s['passed'] for s in summaries):raise SystemExit('A native check failed; inspect evidence, do not claim repaired.')

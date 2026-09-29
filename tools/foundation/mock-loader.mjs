@@ -16,11 +16,13 @@ export async function load(url,context,next){
  source+=`
 // Explicit test-only fixture additions for World Liquor and current stable API.
 // Keep the archived fake-server immutable. Its old delivery IDs and missing
-// Entity.isValid do not describe the current production API used by the host.
+// Entity.isValid/getRotation do not describe the current production API.
 potionDeliveries.clear();
 for(const [id,item]of [['Consume','minecraft:potion'],['ThrownSplash','minecraft:splash_potion'],['ThrownLingering','minecraft:lingering_potion']])potionDeliveries.set(id,item);
 Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
 Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}});
+// spawnEntity and setRotation already store this.rotation in the archived double.
+Entity.prototype.getRotation=function(){return {...(this.rotation??{x:0,y:0})};};
 export const EffectTypes={getAll:()=>[]};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
 world.getAbsoluteTime=()=>system.currentTick;

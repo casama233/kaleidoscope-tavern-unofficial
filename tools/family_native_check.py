@@ -66,7 +66,7 @@ def main():
     core=['cookery-1.0.8','tavern','world-liquor'];new=core+['end-1.0.1','nether-1.0.1']
     family=new+['chinese-food-1.0.4','deco-1.0.1','immersive-eating-1.0','grilling']
     patch=ROOT/'compat/deco-ladder/BP';packs['ladder-patch']={'BP':(patch,read(patch/'manifest.json'))}
-    cases=[('01-core',core,False),('02-end-nether',new,False),('03-family-control',family,False),('04-family-patched',family+['ladder-patch'],True),('05-family-patched-reversed',list(reversed(family+['ladder-patch'])),False)]
+    cases=[('01-core',core,False),('02-end-nether',new,False),('03-family-control',family,False),('04-family-patched',['ladder-patch']+family,True),('05-ladder-priority-negative',family+['ladder-patch'],False)]
     summaries=[]
     for i,(name,selected,probe_actual) in enumerate(cases):
         dest=work/name;dest.mkdir();unpack(bds,dest);exe=dest/'bedrock_server';exe.chmod(0o755)
@@ -110,12 +110,16 @@ def main():
         if 'grilling' in selected:
             checks['onlyKnownContainerErrors']=len(content_errors)==2 and all("experimental creator features are required" in s and ('grill.json' in s or 'advanced_rack_block.json' in s) for s in content_errors)
         else:checks['noContentErrors']=not content_errors
-        checks['ladderConflictControl']=bool(duplicate) if name=='03-family-control' else not duplicate
+        # First listed pack has highest priority. The wrong-priority case is a
+        # deliberate negative control, not an accepted installation order.
+        checks['ladderPriorityContract']=bool(duplicate) if name in ('03-family-control','05-ladder-priority-negative') else not duplicate
+        acks=[json.loads(line.split('kaleidoscope_tavern:extension_ack ',1)[1]) for line in lines if '[FAMILY1-EVENT] kaleidoscope_tavern:extension_ack ' in line]
+        checks['worldLiquorRegistered']=any(ack.get('source')=='kaleidoscope_world_liquor' and ack.get('ok') is True for ack in acks)
         if 'end-1.0.1' in selected:checks['nativeKnifeTags']=bool(native_probes) and all(all(v is True for v in s['knives'].values()) for s in native_probes)
         if probe_actual:
             expected={'kaleidoscope_cookery:iron_kitchen_knife':True,'kaleidoscope_end:dragon_tooth_knife':True,'kaleidoscope_nether:primitive_machete':True,'minecraft:diamond_sword':False}
             checks['actualGrillingClassifier']=len(actual)==1 and actual[0]['players']==0 and actual[0]['results']==expected
-        summary={'case':name,'packOrder':selected,'checks':checks,'passed':all(checks.values()),'contentErrors':content_errors,'ladderDuplicateWarnings':duplicate,'probes':native_probes,'actualClassifier':actual,'instrumentedGrillingCopy':probe_actual,'seconds':round(time.monotonic()-start,2),'playersSimulated':False,'clientTest':False,'wholeFamilyCompatible':False,'transportNotCertified':True,'onlineAuthentication':True}
+        summary={'case':name,'packOrder':selected,'checks':checks,'passed':all(checks.values()),'contentErrors':content_errors,'ladderDuplicateWarnings':duplicate,'extensionAcks':acks,'probes':native_probes,'actualClassifier':actual,'instrumentedGrillingCopy':probe_actual,'seconds':round(time.monotonic()-start,2),'playersSimulated':False,'clientTest':False,'wholeFamilyCompatible':False,'transportNotCertified':True,'onlineAuthentication':True}
         save(out/(name+'-summary.json'),summary);summaries.append(summary);print(name,checks,flush=True)
     save(out/'SUMMARY.json',{'bds':lock['bds'],'cases':summaries,'passed':all(s['passed'] for s in summaries),'allKnownCompatibilityProblemsFixed':False})
     if not all(s['passed'] for s in summaries):raise SystemExit('A native check failed; inspect evidence, do not claim repaired.')

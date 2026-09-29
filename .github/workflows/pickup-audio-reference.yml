@@ -25,7 +25,7 @@ jobs:
               assert hashlib.sha1(raw).hexdigest()==digest
               return raw
           sounds=json.loads(asset('minecraft/sounds.json'))
-          events=['block.item_frame.remove_item','block.glass.place','block.stone.place','block.amethyst_block.place','entity.item.pickup']
+          events=['entity.item_frame.remove_item','block.glass.place','block.stone.place','block.amethyst_block.place','entity.item.pickup']
           refs={};definitions={}
           def resolve(event,volume=1,pitch=1,weight=1,seen=()):
               assert event not in seen
@@ -36,7 +36,7 @@ jobs:
                   source='minecraft/sounds/'+name+'.ogg';raw=asset(source);path='sounds/kt_pickup/'+name+'.ogg';dest=root/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(raw)
                   refs[path]={'source':source,'sha1':idx[source]['hash'],'sha256':hashlib.sha256(raw).hexdigest()}
                   yield {'name':path[:-4],'volume':v,'pitch':p,'weight':w,'stream':False}
-          for event in events:definitions['kt_pickup.'+event]={'category':'player' if event.startswith('entity.') else 'block','sounds':list(resolve(event))}
+          for event in events:definitions['kt_pickup.'+event]={'category':'player' if event=='entity.item.pickup' else 'block','sounds':list(resolve(event))}
           (root/'definitions.json').write_text(json.dumps(definitions,indent=2)+'\n')
           (root/'provenance.json').write_text(json.dumps({'version':'1.20.1','assetIndex':detail['assetIndex'],'events':{e:sounds[e] for e in events},'assets':refs},indent=2)+'\n')
       - uses: actions/upload-artifact@v4

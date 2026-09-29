@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-grilling-unofficial
-          ref: 8438976f9d50bf69ac658ce3b68cba638ba53cba
+          ref: 1ed332a5410e28290c80cc27cb971658864733ef
           path: grilling-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -48,7 +48,7 @@ jobs:
           expected={
             'tavern-src/dist/family/Kaleidoscope_Tavern_Unofficial_0.6.64_compat1.mcaddon':'d46e95299071763bb34bc79eeb5062430671af1400c37cf2268c9168f95f0387',
             'world-liquor-src/dist/family/Kaleidoscope_World_Liquor_Unofficial_0.1.28_compat1.mcaddon':'419c73afa6309df8d8e6307ff240bb05592f6d7f6ec727867aac305c20ad8cac',
-            'grilling-src/dist/family/Kaleidoscope_Grilling_A2.8.8_compat1.mcaddon':'eb34463b6493ae9ef66af8cf3424be0f2b059c006ed69525ecf3ac65946de6f7',
+            'grilling-src/dist/family/Kaleidoscope_Grilling_A2.8.8_compat1.mcaddon':'74eb694fe9168871d042e15ce529f9ce1164801072616a3831563e6077c22232',
             'tavern-src/dist/family/Kaleidoscope_Tavern_Deco_Ladder_Compat_0.1.0.mcpack':'84b4949d6e4af7c071ed1d07f8816eb13ac73064ae15493ced30ae691f0bab15'}
           for name,digest in expected.items():assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==digest,name
           Path('candidate-source-commits.json').write_text(json.dumps({name:subprocess.check_output(['git','-C',name,'rev-parse','HEAD'],text=True).strip() for name in ['tavern-src','world-liquor-src','grilling-src']},indent=2)+'\n')

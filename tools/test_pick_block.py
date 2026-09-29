@@ -52,6 +52,12 @@ class PickDefinitions(unittest.TestCase):
                     suffix=b"\nexport const naturalCupStack=state=>resultItem(state);\nexport const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);\n"
                     self.assertTrue(data.endswith(suffix))
                     data=data[:-len(suffix)]
+                    # 0.6.62 adds only selected-hand delivery to this pickup.
+                    # Reconstruct that reviewed line; keep the old golden hashes.
+                    current=b"[{stack:item,count:1,preferHand:!breaking}],block,BlockPermutation.resolve('minecraft:air')"
+                    previous=b"[{stack:item,count:1}],block,BlockPermutation.resolve('minecraft:air')"
+                    self.assertEqual(data.count(current),1)
+                    data=data.replace(current,previous)
             self.assertEqual(hashlib.sha256(data[:proof['prefixBytes']]).hexdigest(), proof['prefixSha256'])
             self.assertEqual(hashlib.sha256(data).hexdigest(), proof['sha256'])
 

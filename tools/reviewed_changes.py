@@ -8,8 +8,19 @@ from pathlib import Path
 from creative.historical import LegacyMenuProjection
 ROOT=Path(__file__).resolve().parents[1]
 @lru_cache(maxsize=1)
+def break_review():
+    return json.loads((ROOT/'data/break-feedback-review.json').read_text())
+@lru_cache(maxsize=1)
 def changes():
-    return json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges']
+    rows=dict(json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges'])
+    for name,change in break_review()['changes'].items():
+        prior=rows.get(name)
+        if prior:
+            assert prior['after']==change['before'],('Break-feedback change chain mismatch',name)
+            rows[name]={**prior,'after':change['after'],'reason':prior.get('reason','')+' '+change['reason']}
+        else:
+            rows[name]={'before':change['before'],'beforeProjected':change.get('beforeProjected',change['before']),'after':change['after'],'reason':change['reason']}
+    return rows
 @lru_cache(maxsize=1)
 def projection():return LegacyMenuProjection(ROOT)
 def historical_digest(path,projected=False):
@@ -24,7 +35,14 @@ def historical_digest(path,projected=False):
 
 @lru_cache(maxsize=1)
 def reviewed_additions():
-    rows=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['newRuntimeFiles']
+    rows=dict(json.loads((ROOT/'data/launch-repair-reference.json').read_text())['newRuntimeFiles'])
+    review=break_review()
+    for name,change in review['updatedAdditions'].items():
+        assert rows.get(name)==change['before'],('Break-feedback addition chain mismatch',name)
+        rows[name]=change['after']
+    for name,digest in review['additions'].items():
+        assert name not in rows and name not in changes(),('Break-feedback addition already tracked',name)
+        rows[name]=digest
     for name,digest in rows.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Reviewed addition changed',name)
     return rows
 

@@ -1,0 +1,99 @@
+name: Family2 native integration
+on:
+  push:
+    branches: ['fix/family-compat-batch2-20260929']
+    paths: ['.github/workflows/family2-integrate-native.yml']
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-grilling-unofficial
+          ref: d195390b5351e9ac2cb44248247afc058771afab
+          path: grilling-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-grilling-unofficial
+          ref: 1ed332a5410e28290c80cc27cb971658864733ef
+          path: grilling-baseline
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: c7cb20428c8407c5d1ca2e7d9251303616fd4027
+          path: world-liquor-src
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reconstruct five exact owned tools; no vendor script is committed
+        working-directory: tavern-src
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,hashlib,json,lzma,subprocess
+          from pathlib import Path,PurePosixPath
+          blob=json.loads(subprocess.check_output(['gh','api','repos/casama233/kaleidoscope-tavern-unofficial/git/blobs/6443c3e8da1c627ecb46f708b1597ce6dede736f']))
+          raw=lzma.decompress(base64.b64decode(blob['content']))
+          assert hashlib.sha256(raw).hexdigest()=='800f854b7079e1d191f3b7f4694f501e869057d97d0ebb79b9c1250862c049b9'
+          changes=json.loads(raw);assert len(changes)==5
+          for row in changes:
+              name=row['path'];p=Path(name);parts=PurePosixPath(name)
+              assert not parts.is_absolute() and '..' not in parts.parts and name.startswith('tools/') and not p.exists() and row['before'] is None
+              text=''
+              for a,b,value in reversed(row['edits']):assert a==b==0;text=value
+              assert hashlib.sha256(text.encode()).hexdigest()==row['after']
+              p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+          PY
+      - name: Build exact candidates and static source checks
+        run: |
+          python -m py_compile tavern-src/tools/build_family_vendor_patches.py tavern-src/tools/family_batch2_native.py
+          python tavern-src/tools/family_candidate.py --build
+          python world-liquor-src/tools/family_candidate.py --build
+          python grilling-src/tools/check_station_storage.py
+          node grilling-src/tools/check_family_knives.mjs
+          python grilling-src/tools/family_candidate.py --build
+          python tavern-src/tools/build_deco_compat.py
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          files={
+            'tavern-src/dist/family/Kaleidoscope_Tavern_Unofficial_0.6.64_compat1.mcaddon':'d46e95299071763bb34bc79eeb5062430671af1400c37cf2268c9168f95f0387',
+            'world-liquor-src/dist/family/Kaleidoscope_World_Liquor_Unofficial_0.1.28_compat1.mcaddon':'419c73afa6309df8d8e6307ff240bb05592f6d7f6ec727867aac305c20ad8cac',
+            'grilling-src/dist/family/Kaleidoscope_Grilling_A2.8.9_compat2.mcaddon':'15ebdf47397c397fa9c39584f6fcbb57ca5be2ad4c16513d979c737d06c5952a'}
+          for path,expected in files.items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==expected,path
+          Path('SOURCE-COMMITS.json').write_text(json.dumps({p:subprocess.check_output(['git','-C',p,'rev-parse','HEAD'],text=True).strip() for p in ['tavern-src','grilling-src','grilling-baseline','world-liquor-src']},indent=2)+'\n')
+          Path('TOOLS-RECONSTRUCTION-SHA256').write_text('800f854b7079e1d191f3b7f4694f501e869057d97d0ebb79b9c1250862c049b9\n')
+          PY
+      - name: Native control, nonexperimental stable storage, and same-world restart
+        run: python tavern-src/tools/family_batch2_native.py --liquor-root world-liquor-src --grilling-root grilling-src --grilling-baseline grilling-baseline --work "$RUNNER_TEMP/family2-native"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Family2-native-evidence
+          path: |
+            ${{ runner.temp }}/family2-native/evidence/
+            SOURCE-COMMITS.json
+            TOOLS-RECONSTRUCTION-SHA256
+            tavern-src/tools/build_family_vendor_patches.py
+            tavern-src/tools/family_batch2_native.py
+            tavern-src/tools/fixtures/family2/
+            tavern-src/dist/family/
+            world-liquor-src/dist/family/
+            grilling-src/dist/family/
+          retention-days: 14

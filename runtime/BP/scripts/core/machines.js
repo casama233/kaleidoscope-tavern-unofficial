@@ -1,5 +1,7 @@
 import {check,integer,id,clone,TavernError} from './util.js';
 export const NS='kaleidoscope_tavern';
+/** Java BarrelBlockEntity checks and advances fermentation every 97 loaded ticks. */
+export const BARREL_CHECK_INTERVAL=97;
 export function newMachine(kind,token){check(['barrel','pressing_tub'].includes(kind),'BAD_MACHINE_KIND');return {schema:1,kind,token,revision:0,open:true,fluid:'',amount:0,slots:Array(kind==='barrel'?4:1).fill(null),batch:null};}
 export function validateMachine(s){
  check(s&&s.schema===1,'STATE_SCHEMA');check(['barrel','pressing_tub'].includes(s.kind),'STATE_KIND');check(typeof s.token==='string'&&s.token.length<=80,'STATE_TOKEN');
@@ -52,7 +54,10 @@ export function interact(state,command,registry,fluids){
    check(!s.slots.some(Boolean)||s.kind==='pressing_tub','REMOVE_INGREDIENTS_FIRST');check(s.amount>=1000,'NOT_ENOUGH_FLUID');
    const f=fluids.find(f=>f.id===s.fluid);check(f,'FLUID_UNAVAILABLE');tx.take=1;tx.give=[{id:f.filled,count:1}];s.amount-=1000;if(!s.amount)s.fluid='';
   }else{
-   if(s.kind==='barrel'){check(s.amount===4000,'FILL_BARREL_FIRST');check(registry.allowedIngredient(held.id),'UNSUPPORTED_INGREDIENT');}
+   // Java accepts ordinary non-fluid ingredients; unmatched recipes become vinegar.
+   // Do not turn the recipe index into an input whitelist. Metadata checks remain
+   // the adapter's responsibility so ID-only slots never erase native item data.
+   if(s.kind==='barrel')check(s.amount===4000,'FILL_BARREL_FIRST');
    const cap=s.kind==='barrel'?16:Math.min(64,held.maxAmount??64);
    let slot=s.slots.findIndex(x=>x?.id===held.id&&x.count<cap);if(slot<0)slot=s.slots.findIndex(x=>!x);
    check(slot>=0,'INGREDIENT_SLOTS_FULL');const n=Math.min(cap-(s.slots[slot]?.count??0),held.count);integer(n,1,cap);
@@ -63,7 +68,7 @@ export function interact(state,command,registry,fluids){
  tx.state=changed(s);return tx;
 }
 /** Loaded-block cadence only. No real-world/offline catch-up. */
-export function advanceBarrel(state,registry,elapsed=97){
+export function advanceBarrel(state,registry,elapsed=BARREL_CHECK_INTERVAL){
  validateMachine(state);check(state.kind==='barrel','NOT_A_BARREL');integer(elapsed,1,200);
  if(state.open||state.batch?.quality===6)return state;
  const s=clone(state);

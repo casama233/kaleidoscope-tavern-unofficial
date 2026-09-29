@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 9812f94022c5cdfd49821a60ade40f6933a62fb6
+          ref: 14a0a5877a8bb6f6735582de7d8832b379aa7951
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5

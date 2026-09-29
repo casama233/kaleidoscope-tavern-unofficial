@@ -39,6 +39,8 @@ jobs:
           git rev-parse HEAD > ../evidence/TAVERN_COMMIT
           git -C ../liquor rev-parse HEAD > ../evidence/LIQUOR_COMMIT
           node --test tools/glassware/hit-basis.test.mjs tools/glassware/aim-hit.test.mjs 2>&1 | tee ../evidence/glassware-hit-regressions.tap
+          python tools/check_glassware_slots.py --report ../evidence/glassware-world-slots.json
+          LIQUOR_SOURCE=../liquor node --experimental-loader ./tools/pickup/mock-loader.mjs --test --test-name-pattern='glassware holder world slot round trip' tools/glassware/storage-routing.test.mjs 2>&1 | tee ../evidence/glassware-holder-routing.tap
           node tools/check_surface_repairs.mjs | tee ../evidence/surface-mapping.json
       - name: Event-to-inventory counterexamples, partial fix, and complete code fix
         working-directory: tavern

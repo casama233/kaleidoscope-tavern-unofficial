@@ -752,8 +752,8 @@
     "runtime/BP/blocks/glassware_holder.json": {
       "before": "6f8b7ef985141ebfeed7cbb989db60253fd54c39ec24a2598b783a8cc1a48dce",
       "beforeProjected": "936adfae89103dc8c1646beb540f3938075260de16a039402a7c1c939b8d5c66",
-      "after": "ebe9f97fac2d4221ab8af929fe207451ae7e0ea7e9264610004da5f9485ddb52",
-      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions."
+      "after": "b5de08b4dcac9a3aff05d3fa588aa1320a1fd7a64a23d5f1edf9b7f27fb9090c",
+      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.66 follow-up: retire the east/west state-slot compensation; facing-1/3 bone visibility now makes glass_slot_N render in Java world quadrant N."
     },
     "runtime/BP/blocks/grass_sandwich_board.json": {
       "before": "fb1f30983fece2905be3f481acd556836a29e2f0fc2b239a82736ae5f26c3dd9",
@@ -2472,7 +2472,7 @@
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f69c9982f5d9d7b1b6d0ac3a.png": "f69c9982f5d9d7b1b6d0ac3a96e5c0875da7671925b6b18d0e202ceb5c476b84",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f7a5ec2a66c13809b93a9422.png": "f7a5ec2a66c13809b93a94223524680a30534b6abac76e467bfd3a6fac94ced0",
     "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa",
-    "runtime/BP/scripts/core/hit-basis.js": "97a1e723d97ba5b667e089df68e6220a8e1e4c707f040e42e023cfabb8650604",
+    "runtime/BP/scripts/core/hit-basis.js": "558d7e3f642ea334bc8dfd89cbd41d23227b40e4bdf1e3a7a2d68abe5aa39f0a",
     "runtime/BP/entities/stored_items.json": "f6b03ac07252288d8e058c94f811584ad5321f2af48e9e8f0bc096c61bee9f68",
     "runtime/BP/scripts/bedrock/native-item-storage.js": "11fb28849d6f6c798d20546985add6a12dde59cb3bb30b01e8fe6d1bfa4f4b5a",
     "runtime/BP/scripts/bedrock/pickup-feedback.js": "cc5fe8b7bb4af7a60f3edf2042baea3457e1bdbd25ceab8d459a1b6a007d43ad",

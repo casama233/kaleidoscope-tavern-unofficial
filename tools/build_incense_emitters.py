@@ -4,12 +4,14 @@ See docs/REPAIR-0.6.39.md for pinned Java and Bedrock references.
 """
 import copy,json,math
 from effects.incense_motion import walker
+from effects.molang_syntax import validate as validate_molang
 from effects.incense_large_motion import suspended,cherry
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 RP=ROOT/'runtime/RP/particles'
 KINDS=('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly')
 def write(name,data):
+ validate_molang(data,name)
  (RP/(name+'.json')).write_text(json.dumps(data,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
 def finite(data,name,rate):
  d=copy.deepcopy(data);e=d['particle_effect'];e['description']['identifier']='kt_assets_a17:'+name;c=e['components']

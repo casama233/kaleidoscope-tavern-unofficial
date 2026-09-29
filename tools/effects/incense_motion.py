@@ -20,7 +20,7 @@ def walker(effect, *, firefly=False, ambient=False):
         init+=f'variable.kt_{axis}={start};variable.kt_old{axis}=variable.kt_{axis};'
     if firefly:
         init+='variable.kt_dx=0;variable.kt_dy=0;variable.kt_dz=0;'
-        step='variable.kt_dx+=math.random(-0.001,0.001);variable.kt_dz+=math.random(-0.001,0.001);variable.kt_dy+=math.random(-0.00025,0.00025);'
+        step='variable.kt_dx=variable.kt_dx+(math.random(-0.001,0.001));variable.kt_dz=variable.kt_dz+(math.random(-0.001,0.001));variable.kt_dy=variable.kt_dy+(math.random(-0.00025,0.00025));'
         friction=.96
         c.pop('minecraft:particle_appearance_lighting',None)
         c['minecraft:particle_appearance_billboard']['size']=['0.08+variable.particle_random_3*0.04']*2
@@ -29,14 +29,14 @@ def walker(effect, *, firefly=False, ambient=False):
     else:
         gauss='math.sqrt(-2*math.ln(math.max(0.000000000001,math.random(0,1))))*math.cos(math.random(0,360))*0.01'
         init+=f'variable.kt_dx={gauss};variable.kt_dz={gauss};variable.kt_dy=math.random(0.02,0.03);'
-        step='variable.kt_dx+=math.random(-0.0005,0.0005);variable.kt_dz+=math.random(-0.0005,0.0005);'
+        step='variable.kt_dx=variable.kt_dx+(math.random(-0.0005,0.0005));variable.kt_dz=variable.kt_dz+(math.random(-0.0005,0.0005));'
         friction=.95
         c['minecraft:particle_lifetime_expression']={'max_lifetime':'(40+math.floor(variable.particle_random_1*20))/20'}
         c['minecraft:particle_appearance_billboard']['size']=['0.15+variable.particle_random_3*0.05']*2
         alpha='0.8*math.clamp((1-variable.kt_tick/(variable.particle_lifetime*20))*4,0,1)'
     updates=''.join(f'variable.kt_old{a}=variable.kt_{a};' for a in 'xyz')+step
-    updates+=''.join(f'variable.kt_{a}+=variable.kt_d{a};' for a in 'xyz')
-    updates+=f'variable.kt_dx*={friction};variable.kt_dz*={friction};variable.kt_tick+=1;'
+    updates+=''.join(f'variable.kt_{a}=variable.kt_{a}+(variable.kt_d{a});' for a in 'xyz')
+    updates+=f'variable.kt_dx=variable.kt_dx*({friction});variable.kt_dz=variable.kt_dz*({friction});variable.kt_tick=variable.kt_tick+(1);'
     e.setdefault('events',{})['kt_motion_init']={'expression':init}
     c['minecraft:particle_lifetime_events']={'creation_event':'kt_motion_init'}
     c['minecraft:particle_initialization']={'per_render_expression':f'loop(math.max(0,math.min(math.floor(variable.particle_age*20)+1,variable.particle_lifetime*20)-variable.kt_tick), {{{updates}}});'}

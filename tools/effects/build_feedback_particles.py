@@ -9,6 +9,10 @@ hash-verified, development-only 1.20.1 reference produced by collect_reference.p
 import argparse,copy,hashlib,json,math
 from pathlib import Path
 from PIL import Image
+if __package__:
+ from .molang_syntax import validate as validate_molang
+else:
+ from molang_syntax import validate as validate_molang
 ROOT=Path(__file__).resolve().parents[2];RP=ROOT/'runtime/RP';OUT=RP/'particles'
 ATLAS='textures/kaleidoscope_tavern/particle/java_feedback'
 GROUPS={
@@ -25,6 +29,7 @@ BASESIZE='(0.1+math.random(0,0.1))'
 PACK={a:f'(variable.kt_v{a} ?? 0)/20' for a in 'xyz'}
 
 def save(name,data):
+ validate_molang(data,name)
  (OUT/(name+'.json')).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 
 def uv(group,frame=None):
@@ -46,8 +51,8 @@ def super_velocity(inputs=None):
  inputs=inputs or {a:'0' for a in 'xyz'}
  text=''.join(f'variable.kt_d{a}=({inputs[a]})+math.random(-0.4,0.4);' for a in 'xyz')
  text+='variable.kt_scale=(math.random(0,1)+math.random(0,1)+1)*0.06/math.max(0.000000000001,math.sqrt(variable.kt_dx*variable.kt_dx+variable.kt_dy*variable.kt_dy+variable.kt_dz*variable.kt_dz));'
- text+=''.join(f'variable.kt_d{a}*=variable.kt_scale;' for a in 'xyz')
- return text+'variable.kt_dy+=0.1;'
+ text+=''.join(f'variable.kt_d{a}=variable.kt_d{a}*(variable.kt_scale);' for a in 'xyz')
+ return text+'variable.kt_dy=variable.kt_dy+(0.1);'
 
 def motion(p,initial=None,gravity=0,friction=.98,position=None,extra_init='',step_extra='',collision=False):
  e=p['particle_effect'];c=e['components'];c['minecraft:emitter_initialization']={'creation_expression':e.pop('_init','')}
@@ -57,8 +62,8 @@ def motion(p,initial=None,gravity=0,friction=.98,position=None,extra_init='',ste
  init+=initial or ''.join(f'variable.kt_d{a}={PACK[a]};' for a in 'xyz')
  init+=extra_init
  step=''.join(f'variable.kt_old{a}=variable.kt_{a};' for a in 'xyz')
- step+=f'variable.kt_dy-={gravity};'+step_extra
- step+=''.join(f'variable.kt_{a}+=variable.kt_d{a};variable.kt_d{a}*={friction};' for a in 'xyz')+'variable.kt_tick+=1;'
+ step+=f'variable.kt_dy=variable.kt_dy-({gravity});'+step_extra
+ step+=''.join(f'variable.kt_{a}=variable.kt_{a}+(variable.kt_d{a});variable.kt_d{a}=variable.kt_d{a}*({friction});' for a in 'xyz')+'variable.kt_tick=variable.kt_tick+(1);'
  e['events']['kt_init']={'expression':init}
  c['minecraft:particle_lifetime_events']={'creation_event':'kt_init'}
  c['minecraft:particle_initialization']={'per_render_expression':f'variable.kt_age=math.floor(variable.particle_age*20);loop(math.max(0,math.min(variable.kt_age+1,variable.kt_life)-variable.kt_tick), {{{step}}});'}
@@ -86,8 +91,8 @@ def build():
  p=particle('bubble_pop','bubble_pop','4')
  save('fx_bubble_pop',motion(p,gravity=.008,friction=1))
  p=particle('spell','spell','math.floor(8/(math.random(0,1)*0.8+0.2))',BASESIZE+'*0.75')
- init=super_velocity({'x':'0.5-math.random(0,1)','y':PACK['y'],'z':'0.5-math.random(0,1)'})+'variable.kt_dy*=0.2;'
- init+='variable.kt_slow=((variable.kt_vx ?? 0)==0 && (variable.kt_vz ?? 0)==0)?0.1:1;variable.kt_dx*=variable.kt_slow;variable.kt_dz*=variable.kt_slow;'
+ init=super_velocity({'x':'0.5-math.random(0,1)','y':PACK['y'],'z':'0.5-math.random(0,1)'})+'variable.kt_dy=variable.kt_dy*(0.2);'
+ init+='variable.kt_slow=((variable.kt_vx ?? 0)==0 && (variable.kt_vz ?? 0)==0)?0.1:1;variable.kt_dx=variable.kt_dx*(variable.kt_slow);variable.kt_dz=variable.kt_dz*(variable.kt_slow);'
  save('fx_spell',motion(p,init,gravity=-.004,friction=.96))
  p=particle('cloud','cloud','math.max(1,math.floor(math.floor(8/(math.random(0,1)*0.8+0.3))*2.5))',BASESIZE+'*1.875',['variable.kt_gray']*3+[1])
  c=p['particle_effect']['components'];c['minecraft:particle_appearance_billboard']['size']=['variable.kt_size*math.clamp(variable.particle_age*20/variable.kt_life*32,0,1)']*2
@@ -99,7 +104,7 @@ def build():
  p=particle('endrod','endrod','60+math.floor(math.random(0,12))',BASESIZE+'*0.75',colors,lit=False)
  save('fx_endrod',motion(p,gravity=.0005,friction=.91))
  p=particle('rain','rain','math.floor(8/(math.random(0,1)*0.8+0.2))',frame='variable.kt_frame')
- init=super_velocity()+'variable.kt_dx*=0.3;variable.kt_dz*=0.3;variable.kt_dy=math.random(0.1,0.3);'
+ init=super_velocity()+'variable.kt_dx=variable.kt_dx*(0.3);variable.kt_dz=variable.kt_dz*(0.3);variable.kt_dy=math.random(0.1,0.3);'
  save('fx_rain',motion(p,init,gravity=.06,friction=.98,extra_init='variable.kt_frame=math.floor(math.random(0,4));',collision=True))
  p=particle('flame','drip','math.floor(8/(math.random(0,1)*0.8+0.2))+4',frame='3')
  p['particle_effect']['components']['minecraft:particle_appearance_billboard']['size']=['variable.kt_size*(1-0.5*math.pow(variable.particle_age*20/variable.kt_life,2))']*2

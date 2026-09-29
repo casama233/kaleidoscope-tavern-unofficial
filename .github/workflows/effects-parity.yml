@@ -39,6 +39,9 @@ jobs:
           git -C bedrock rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
           printf 'Java: ' >> evidence/SOURCE_COMMITS.txt
           git -C java rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+      - name: Reject unsupported Molang assignment syntax before numerical testing
+        working-directory: bedrock
+        run: python tools/effects/test_molang_syntax.py
       - name: Run all effect regressions without double-counting imported tap tests
         working-directory: bedrock
         run: |

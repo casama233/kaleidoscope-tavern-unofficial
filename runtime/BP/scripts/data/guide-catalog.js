@@ -107,6 +107,19 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   const id='kaleidoscope_tavern:pressing/'+fruit+'_bucket';
   if(payload.entries.some(e=>e.id===id))LOCALES.forEach((lc,i)=>payload.names[lc][id]=labels[i]);
  }
+ // Mechanics repair notes are part of the same canonical product pages.
+ const repairNotes={
+  barrel:['釀造每 97 tick 檢查並扣除 97 tick；普通錯配原料可投入，合蓋後依原版流程產醋。','Brewing checks and subtracts 97 ticks together. Ordinary mismatched ingredients can be loaded and produce vinegar after brewing.'],
+  tap:['龍頭直接替換容器並保留可用朝向；支援已註冊方塊產物及無歧義物品／方塊對應。失敗時回滾，不額外掉空瓶。','The tap replaces carriers directly and preserves compatible facing. Registered block outputs and unambiguous item/block mappings are supported; failures roll back without extra empty bottles.'],
+  emerald:['長臂延長酒館自訂物品使用射線；尚未改變原生攻擊、挖掘與所有實體互動距離。','Long Reach extends Tavern item-use rays. Attack, mining and general native entity interaction reach are not extended.'],
+  sculk_special:['尖嘯可影響生存／冒險玩家，遵守世界 PvP；創造／旁觀玩家免疫。原生傷害判定不被繞過。','Shriek can affect survival/adventure players under world PvP; creative/spectator players are excluded. Native damage protection is not bypassed.'],
+  mystery_cocktail:['微醺偏航適配預設關閉，避免自動改動準星。kt_tipsy_motion_on 明確啟用；它仍不是 Java 純鏡頭側傾。','Tipsy yaw motion is off by default to preserve aim. Explicitly opt in with kt_tipsy_motion_on; it is not Java camera-only roll.'],
+  signature_cocktail:['自訂酒效仍有平台差異：原生步高、長臂、清仇恨、經驗拾取冷卻與感知輪廓尚未等價還原；不要把效果列出視為原生能力已完整實現。','Custom effects retain platform differences in native step height, reach, aggro clearing, XP pickup delay and Vision outlines; listing an effect is not native parity verification.']
+ };
+ for(const [key,lines] of Object.entries(repairNotes)){
+  const e=payload.entries.find(x=>x.id==='kaleidoscope_tavern:'+key);
+  if(e)append(e,{mechanicsByLocale:{zh_TW:[lines[0]],zh_CN:[lines[0]],en_US:[lines[1]]}});
+ }
  const result=organizeGuideNavigation(payload);
  for(const entry of result.entries){
   // Workbench recipes already belong to the native crafting book. Guide entries

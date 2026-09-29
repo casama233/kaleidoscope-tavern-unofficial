@@ -1,0 +1,47 @@
+{
+  "version": "0.6.54",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "baselineCommit": "005e0a080e2eddfedb9f24c6b3a72d657d2be7fe",
+  "collision": {
+    "cases": 508,
+    "checked": 4172,
+    "failed": 0,
+    "rayChecks": 4172,
+    "rayFailed": 0
+  },
+  "instantHealth": [
+    {
+      "amplifier": 0,
+      "actual": 5,
+      "expected": 5
+    },
+    {
+      "amplifier": 1,
+      "actual": 9,
+      "expected": 9
+    },
+    {
+      "amplifier": 2,
+      "actual": 10,
+      "expected": 10
+    },
+    {
+      "amplifier": 3,
+      "actual": 10,
+      "expected": 10
+    }
+  ],
+  "pvpApiReadable": true,
+  "clientTested": false,
+  "multiplayerDamageTested": false,
+  "productionWorldTested": false,
+  "temporaryProbeShipped": false,
+  "environmentDiagnostic": "Missing allowlist.json at isolated startup; allow-list=false, all probes completed. Added empty allowlist for subsequent runs.",
+  "measuredBuildLabel": "0.6.53-beta.1",
+  "integratedBuildLoad": {
+    "version": "0.6.54",
+    "errors": 0,
+    "log": "BDS-LOAD-0.6.54.log"
+  }
+}

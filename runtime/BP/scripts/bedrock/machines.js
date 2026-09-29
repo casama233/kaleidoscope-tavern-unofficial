@@ -11,9 +11,9 @@ import {pressFeedback,spawnRejectedIngredients,ingredientFeedback} from './press
 import {barrelIngredientVisuals,configureBarrelIngredients} from './barrel-ingredients.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {inventory as sharedInventory} from './transactions.js';
-import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
+import {world,system,ItemStack,ItemTypes,BlockTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
-import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,filledItem,NS} from '../core/machines.js';
+import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,filledItem,NS,BARREL_CHECK_INTERVAL} from '../core/machines.js';
 import {parseBottle,displayAdd,bottleKey,BottleStore} from '../core/bottles.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
@@ -153,7 +153,7 @@ export function press(block,entity,fallDistance){
   pressedFalls.set(entity.id,{tick:system.currentTick,pressed:tx.pressed});if(pressedFalls.size>256)for(const[id,v]of pressedFalls)if(system.currentTick-v.tick>2)pressedFalls.delete(id);safeVisuals(block,tx.state);pressFeedback(block,tx);return tx;
  });});
 }
-export function tickBarrel(block,elapsed=97){
+export function tickBarrel(block,elapsed=BARREL_CHECK_INTERVAL){
  return guarded(undefined,()=>{if(!registry)return;const key=keyFor(block);return locks.with([key],()=>{
   const s=store.load(key);check(s,'MISSING_STATE');check(intact(block),'STRUCTURE_DAMAGED');const next=advanceBarrel(s,registry,elapsed);
   if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
@@ -203,9 +203,17 @@ function tapCarrierEntity(tap,carrierId){
  return undefined;
 }
 export function bottleFacingFromCardinal(direction){const facing={north:0,east:1,south:2,west:3}[direction];check(facing!==undefined,'BAD_FACING');return facing;}
+function placedCarrierMatches(block,carrierId){
+ if(!block||block.isAir)return false;
+ if(carrierId===NS+':empty_bottle'&&block.typeId===PLACED_EMPTY)return true;
+ try{return block.permutation.getItemStack(1)?.typeId===carrierId;}catch{return false;}
+}
 function tapCarrier(tap,carrierId){
  const below=blockAt(tap.dimension,tapBelow(tap));
- if(carrierId===NS+':empty_bottle'&&below?.typeId===PLACED_EMPTY)return {kind:'block',block:below,facing:bottleFacingFromCardinal(below.permutation.getState(CARDINAL))};
+ if(placedCarrierMatches(below,carrierId)){
+  const direction=below.permutation.getState(CARDINAL),facing=['north','east','south','west'].includes(direction)?bottleFacingFromCardinal(direction):0;
+  return {kind:'block',block:below,facing};
+ }
  const entity=tapCarrierEntity(tap,carrierId);return entity?{kind:'entity',entity,facing:0}:undefined;
 }
 function tapSound(block,open){playWorldSound(block.dimension,open?'open.iron_trapdoor':'close.iron_trapdoor',block.location,{volume:1,pitch:.8});}
@@ -227,25 +235,62 @@ function tapCanExtract(core,tap,player){
   return true;
  }catch(e){if(player)warn(e,player.id);return false;}
 }
-function createTapOutput(tap,itemId,facing=0,replacePlacedCarrier=false){
+/** Java preserves HORIZONTAL_FACING only when both blocks expose it. */
+function copyHorizontalFacing(output,source){
+ const direction=source?.getState(CARDINAL);
+ return direction!==undefined&&output.getState(CARDINAL)!==undefined?output.withState(CARDINAL,direction):output;
+}
+let blockItemAliases;
+function nativeBlockOutput(itemId,source){
+ // Do not mistake an ordinary item for a block or invent a missing identifier.
+ // Native block items with the same registered identifier (including addons)
+ // are resolved through BlockTypes, never through a finite wine whitelist.
+ if(BlockTypes.get(itemId))return copyHorizontalFacing(BlockPermutation.resolve(itemId),source);
+ // Bedrock has native aliases (for example redstone -> redstone_wire).
+ // Resolve only an unambiguous registered item/block pair; never choose an
+ // arbitrary variant where multiple blocks share an item. Cache after load.
+ if(!blockItemAliases){
+  blockItemAliases=new Map();
+  for(const type of BlockTypes.getAll())try{
+   const item=BlockPermutation.resolve(type.id).getItemStack(1)?.typeId;
+   if(!item)continue;
+   if(!blockItemAliases.has(item))blockItemAliases.set(item,type.id);
+   else if(blockItemAliases.get(item)!==type.id)blockItemAliases.set(item,null);
+  }catch{/* Some engine-internal blocks have no placeable item. */}
+ }
+ const blockId=blockItemAliases.get(itemId);
+ return blockId?copyHorizontalFacing(BlockPermutation.resolve(blockId),source):undefined;
+}
+function createTapOutput(tap,itemId,facing=0,placedCarrier){
  check(ItemTypes.get(itemId),'UNKNOWN_ITEM');const belowPos=tapBelow(tap),below=blockAt(tap.dimension,belowPos);check(below,'CORE_UNAVAILABLE');
- const parsed=parseBottle(itemId);
- if(replacePlacedCarrier)check(parsed&&below.typeId===PLACED_EMPTY,'TAP_CARRIER_CHANGED');
- if(parsed&&(below.isAir||replacePlacedCarrier)){
+ const parsed=parseBottle(itemId),old=below.permutation;
+ if(placedCarrier)check(placedCarrier.block.dimension.id===below.dimension.id&&['x','y','z'].every(k=>placedCarrier.block.location[k]===below.location[k])&&placedCarrierMatches(below,placedCarrier.id),'TAP_CARRIER_CHANGED');
+ if(parsed&&(below.isAir||placedCarrier)){
   const key=bottleKey(tap.dimension.id,belowPos);check(bottleStore.raw(key)===undefined,'STORAGE_CONFLICT');
-  const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
+  const raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
   // Java replaces the placed carrier in situ; script replacement is not a break.
   // Guard BOTH conversion and rollback against queued native onBreak callbacks.
   try{replaceBlockWithoutNaturalDrops(below,BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:facing}));bottleStore.save(key,state,-1);}
   catch(e){try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
   return ()=>{try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
  }
- const drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});
- return ()=>{try{drop.remove();}catch{}};
+ const generic=(below.isAir||placedCarrier)?nativeBlockOutput(itemId,old):undefined;
+ if(generic){
+  try{replaceBlockWithoutNaturalDrops(below,generic);}catch(e){try{replaceBlockWithoutNaturalDrops(below,old);}catch{}throw e;}
+  return ()=>replaceBlockWithoutNaturalDrops(below,old);
+ }
+ // A non-BlockItem consumes a placed carrier and drops exactly one result.
+ // Keep both operations in this rollback scope: spawning may itself fail.
+ let drop;
+ try{
+  if(placedCarrier)replaceBlockWithoutNaturalDrops(below,BlockPermutation.resolve('minecraft:air'));
+  drop=tap.dimension.spawnItem(make(itemId,1),{x:belowPos.x+.5,y:belowPos.y+.5,z:belowPos.z+.5});
+ }catch(e){if(placedCarrier)try{replaceBlockWithoutNaturalDrops(below,old);}catch{}throw e;}
+ return ()=>{try{drop.remove();}finally{if(placedCarrier)replaceBlockWithoutNaturalDrops(below,old);}};
 }
 function consumeTapCarrier(tap,carrier,carrierId){
  if(carrier?.kind==='block'){
-  const block=carrier.block;check(carrierId===NS+':empty_bottle'&&block?.typeId===PLACED_EMPTY,'TAP_CARRIER_CHANGED');const old=block.permutation;
+  const block=carrier.block;check(placedCarrierMatches(block,carrierId),'TAP_CARRIER_CHANGED');const old=block.permutation;
   replaceBlockWithoutNaturalDrops(block,BlockPermutation.resolve('minecraft:air'));
   return ()=>{diagnostics.tap.carrierRollbacks++;try{replaceBlockWithoutNaturalDrops(block,old);}catch(err){warn(err,'tap-carrier-rollback');}};
  }
@@ -266,13 +311,12 @@ export function finishTapExtraction(tap,expectedCoreLocation){
   const carrierId=state.batch.carrier,carrier=tapCarrier(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
   const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
   const outputId=tx.give[0].id;check(ItemTypes.get(outputId),'UNKNOWN_ITEM');
-  const replacePlacedCarrier=carrier.kind==='block'&&!!parseBottle(outputId);
+  const placedCarrier=carrier.kind==='block'?{...carrier,id:carrierId}:undefined;
   const raw=store.raw(key);let undoCarrier,undoOutput;
   try{
-   // A placed drink bottle transforms directly, without an intermediate air block.
-   // Item-entity carriers and non-bottle outputs still consume exactly one carrier.
-   if(!replacePlacedCarrier)undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
-   undoOutput=createTapOutput(tap,outputId,carrier.facing??0,replacePlacedCarrier);
+   // Placed carriers transform directly; dropped stacks lose exactly one item.
+   if(!placedCarrier)undoCarrier=consumeTapCarrier(tap,carrier,carrierId);
+   undoOutput=createTapOutput(tap,outputId,carrier.facing??0,placedCarrier);
    store.save(key,tx.state,state.revision);
   }catch(e){
    try{undoOutput?.();}catch{}try{undoCarrier?.();}catch{}try{store.restoreRaw(key,raw);}catch{}throw e;
@@ -353,7 +397,7 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':pressing_tub',{onPlayerInteract:nativeEmptyHandBlockUse,
   beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
   onPlace:ev=>guarded(undefined,()=>initializeTub(ev.block)),onEntityFallOn:ev=>press(ev.block,ev.entity,ev.fallDistance),onTick:ev=>guarded(undefined,()=>{const s=store.load(keyFor(ev.block));if(s)safeVisuals(ev.block,s);})});
- b.registerCustomComponent(NS+':barrel_core',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:ev=>tickBarrel(ev.block,20)});b.registerCustomComponent(NS+':barrel_part',{onPlayerInteract:nativeEmptyHandBlockUse,});b.registerCustomComponent(NS+':tap',{
+ b.registerCustomComponent(NS+':barrel_core',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:ev=>tickBarrel(ev.block,BARREL_CHECK_INTERVAL)});b.registerCustomComponent(NS+':barrel_part',{onPlayerInteract:nativeEmptyHandBlockUse,});b.registerCustomComponent(NS+':tap',{
   onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate,
   onPlayerInteract:ev=>{
    const player=ev.player,block=ev.block;if(!player||javaSecondaryBypass(player,held(player)?.typeId)||!tapGesture(player,block,true))return;

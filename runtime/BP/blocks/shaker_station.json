@@ -42,17 +42,28 @@
         }
       },
       "kaleidoscope_tavern:shaker_station": {},
-      "minecraft:collision_box": false,
-      "minecraft:selection_box": {
+      "minecraft:collision_box": {
         "origin": [
-          -6,
+          -4,
           0,
-          -6
+          -4
         ],
         "size": [
-          12,
+          8,
           16,
-          12
+          8
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -4,
+          0,
+          -4
+        ],
+        "size": [
+          8,
+          16,
+          8
         ]
       },
       "minecraft:tick": {

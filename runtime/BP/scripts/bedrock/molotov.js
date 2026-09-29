@@ -3,6 +3,7 @@
  * Do not add a second scripted throw/consume or rewrite rack shoot(velocity).
  */
 import {system,world} from '@minecraft/server';
+import {fireTypeForPlacement} from '../core/fire-placement.js';
 import {emitBurst} from './effect-feedback.js';
 const NS='kaleidoscope_tavern';
 export const MOLOTOV=NS+':molotov',THROWN_MOLOTOV=NS+':thrown_molotov';
@@ -65,16 +66,27 @@ export function installMolotovEvents(){
  world.afterEvents.playerLeave.subscribe(e=>{pending.delete(e.playerId);recent.delete(e.playerId);});
  system.runInterval(()=>{const now=system.currentTick;for(const [id,row] of recent)if(now-row.tick>40)recent.delete(id);},40);
 }
+function fireSnapshot(block){
+ if(!block)return undefined;
+ let tags=[],states={};try{tags=block.getTags();states=block.permutation.getAllStates();}catch{}
+ return {id:block.typeId,air:block.isAir,liquid:block.isLiquid,waterlogged:block.isWaterlogged,tags,states};
+}
+export function tryIgniteAt(dimension,p){
+ const b=at(dimension,p);if(!b?.isAir)return false;
+ const below=at(dimension,{x:p.x,y:p.y-1,z:p.z});
+ const neighbours=[{x:1,y:0,z:0},{x:-1,y:0,z:0},{x:0,y:0,z:1},{x:0,y:0,z:-1},{x:0,y:1,z:0}].map(v=>fireSnapshot(at(dimension,{x:p.x+v.x,y:p.y+v.y,z:p.z+v.z})));
+ const type=fireTypeForPlacement(fireSnapshot(b),fireSnapshot(below),neighbours);
+ if(!type)return false;
+ try{b.setType(type);return true;}catch(e){recordError(e);return false;}
+}
 export function igniteMolotov(dimension,location){
  const cx=Math.floor(location.x),cy=Math.floor(location.y),cz=Math.floor(location.z),radius=3;
  for(let dx=-radius;dx<=radius;dx++)for(let dz=-radius;dz<=radius;dz++){
   const dist=Math.sqrt(dx*dx+dz*dz),extra=dist-radius;
   if(extra>2||extra>0&&Math.random()>=(1-extra/2)*.6)continue;
   for(let dy=-1;dy<=1;dy++){
-   const p={x:cx+dx,y:cy+dy,z:cz+dz},b=at(dimension,p),below=at(dimension,{x:p.x,y:p.y-1,z:p.z});
-   // Adapter limit: this is not Java's full BaseFireBlock.canBePlacedAt
-   // predicate (side support, soul fire and portal rules remain separate).
-   if(b?.isAir&&below&&!below.isAir){try{b.setType('minecraft:fire');break;}catch{}}
+   const p={x:cx+dx,y:cy+dy,z:cz+dz};
+   if(tryIgniteAt(dimension,p))break;
   }
  }
  for(const sound of ['firecharge.use','random.glass'])try{dimension.playSound(sound,location,{volume:2,pitch:1});}catch(e){recordError(e);}

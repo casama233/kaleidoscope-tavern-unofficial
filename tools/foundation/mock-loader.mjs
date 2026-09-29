@@ -21,6 +21,7 @@ for(const [id,item]of [['Consume','minecraft:potion'],['ThrownSplash','minecraft
 Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
 Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}});
 export const EffectTypes={getAll:()=>[]};
+export const BlockTypes={get:id=>itemInfo.get(id)?.definition?.description?.states?{id}:undefined};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
 world.getAbsoluteTime=()=>system.currentTick;
 world.getEntity=id=>world.getAllPlayers().find(p=>p.id===id)??[...world.dimensions.values()].flatMap(d=>[...d.entities.values()]).find(e=>e.id===id);

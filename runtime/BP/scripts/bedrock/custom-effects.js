@@ -5,13 +5,13 @@ import {externalEffectSource,externalEffectDefinition} from '../core/extension-c
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,ItemStack,system,world,ScriptEventSource} from '@minecraft/server';
-import {isBottleSupport} from '../core/bottle-support.js';
+import {EquipmentSlot,ItemStack,EffectTypes,system,world,ScriptEventSource} from '@minecraft/server';
+import {findZenithDestination} from './world-mechanics.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,visionUnavailable:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function write(p,state){p.setDynamicProperty(CUSTOM_STATUS_KEY,state.entries.length||state.migrations||state.legacyClosed?JSON.stringify(state):undefined);tracks.set(p.id,{player:p,tick:system.currentTick});}
 function statusWindow(p){const before=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY)),track=tracks.get(p.id),elapsed=track?Math.max(0,system.currentTick-track.tick):0;return {before,state:advanceStatus(before,elapsed)};}
@@ -33,17 +33,18 @@ export function applyCustomEffect(p,row){
    if(entity.typeId==='minecraft:player'||entity.typeId.startsWith('kaleidoscope_tavern:seat_'))continue;
    const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
    if(!inflatedAabbIntersects(sourceBox,entity.getAABB(),16))continue;
-   entity.nameTag='Grumm';renamed++;
+   entity.nameTag='Grumm';
+   // Native nameplate distance is optional in the declared stable API.
+   // Only write when present; never invent a JS property as proof of engine support.
+   if(typeof entity.nameplateRenderDistance==='number')entity.nameplateRenderDistance=0;
+   renamed++;
   }catch(e){error(e);}
   customEffectDiagnostics.upsideDownRenames+=renamed;return true;
  }
  if(row.effect==='kaleidoscope_tavern:zenith'){
-  // Heightmap/safety adapter: no excavation, no unsafe forced teleport, no fake success.
-  const here=p.location,d=p.dimension;
-  const top=d.getTopmostBlock({x:Math.floor(here.x),z:Math.floor(here.z)});
-  if(!top||here.y>=top.location.y+1||!isBottleSupport(top.typeId,top.getTags?.()??[]))return true;
-  const at={x:Math.floor(here.x)+.5,y:top.location.y+1,z:Math.floor(here.z)+.5};
-  if(!d.getBlock(at)?.isAir||!d.getBlock({...at,y:at.y+1})?.isAir)return true;
+  // Native solid/liquid surface query; independent of wine-bottle supports.
+  const here=p.location,d=p.dimension,at=findZenithDestination(d,here);
+  if(!at)return true;
   if(!p.tryTeleport(at,{checkForBlocks:true}))return true;
   p.clearVelocity();p.addEffect('hunger',600,{amplifier:0,showParticles:true});
   for(const location of [here,at])try{d.playSound('entity.player.teleport',location,{volume:1,pitch:1});}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
@@ -70,14 +71,19 @@ export function pulseGrassStealth(p){
   const exhaustion=p.getComponent?.('minecraft:player.exhaustion');
   if(exhaustion)exhaustion.setCurrentValue(Math.min(exhaustion.effectiveMax,exhaustion.currentValue+.1));
   // Native invisibility reduces new mob acquisition while the player is concealed.
-  // Bedrock Script API exposes no mob-target getter/setter to clear existing targets as Java does.
+  // API 2.7 has no supported writable mob-target setter; this is NOT clearing existing aggro.
   p.addEffect('invisibility',12,{amplifier:0,showParticles:false});
   customEffectDiagnostics.grassStealthPulses++;customEffectDiagnostics.grassStealthEligible++;return true;
  }catch(e){error(e);return false;}
 }
 export function hasExtendedReach(p){try{return !!activeStatus(statusNow(p),'kaleidoscope_tavern:long_reach');}catch{return false;}}
 export function itemUseRayDistance(p){return extendedReachDistance(hasExtendedReach(p));}
+let nativeGlow;
 export function pulseVision(p,amplifier){
+ // Discover actual registered effects lazily, after world load. A missing native
+ // effect must not become a silent, repeatedly throwing claim of restored outlines.
+ nativeGlow??=EffectTypes.getAll().some(type=>['minecraft:glowing','glowing'].includes(type.getName()));
+ if(!nativeGlow){customEffectDiagnostics.visionUnavailable++;return 0;}
  const radius=visionRadius(amplifier),source=p.getAABB(),min={x:source.center.x-source.extent.x-radius,y:source.center.y-source.extent.y-radius,z:source.center.z-source.extent.z-radius},volume={x:2*(source.extent.x+radius),y:2*(source.extent.y+radius),z:2*(source.extent.z+radius)};
  let targets=0,newGlow=false;
  for(const entity of p.dimension.getEntities({location:min,volume}))try{
@@ -225,18 +231,25 @@ export function tickCustomEffects(){
   if(!nextState.entries.length){write(p,nextState);continue;}
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
   write(p,nextState);
-  if(activeStatus(nextState,'kaleidoscope_tavern:xp_drain')){
-   const center={...p.location,y:p.location.y+.5};
-   for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location:p.location,maxDistance:14}).slice(0,128)){
-    try{const a=orb.location;if(Math.abs(a.x-p.location.x)>8||Math.abs(a.y-p.location.y)>8||Math.abs(a.z-p.location.z)>8)continue;
-    // Preserve actual orb and native pickup/value. No guessed XP values or bypassed pickup cooldown.
-    if(Math.hypot(a.x-p.location.x,a.y-p.location.y,a.z-p.location.z)<1.5){orb.tryTeleport(p.location);continue;}
-    orb.clearVelocity();orb.applyImpulse(orbVelocity(a,center));customEffectDiagnostics.orbMoves++;}catch(e){error(e);}
-   }
-  }
+  if(activeStatus(nextState,'kaleidoscope_tavern:xp_drain'))pulseXpDrain(p);
  }catch(e){error(e);}
  for(const [id,t]of tracks)if(!seen.has(id)){try{write(t.player,statusNow(t.player));}catch{/* disconnected player handle may be invalid */}tracks.delete(id);}
  for(const[id,t]of deaths)if(system.currentTick-t>100)deaths.delete(id);
+}
+/** Java's full inflated player AABB, with no arbitrary 128-orb truncation. */
+export function pulseXpDrain(p){
+ const source=p.getAABB(),padding=8,center={...p.location,y:p.location.y+.5};
+ const minimum={x:source.center.x-source.extent.x-padding,y:source.center.y-source.extent.y-padding,z:source.center.z-source.extent.z-padding};
+ const volume={x:2*(source.extent.x+padding),y:2*(source.extent.y+padding),z:2*(source.extent.z+padding)};
+ let moved=0;
+ for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location:minimum,volume}))try{
+  if(!orb.isValid||!inflatedAabbIntersects(source,orb.getAABB(),padding))continue;
+  const a=orb.location,distance=Math.hypot(a.x-p.location.x,a.y-p.location.y,a.z-p.location.z);
+  // Preserve native XP/mending ownership. API 2.7 does not expose takeXpDelay.
+  if(distance<1.5){if(orb.tryTeleport(p.location))moved++;continue;}
+  orb.clearVelocity();orb.applyImpulse(orbVelocity(a,center,distance));moved++;
+ }catch(e){error(e);}
+ customEffectDiagnostics.orbMoves+=moved;return moved;
 }
 export function installCustomEffects(){
  system.afterEvents.scriptEventReceive.subscribe(event=>{

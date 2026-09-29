@@ -338,14 +338,14 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "3548abfee2c4182d8366052f7c9a257d5831f45a3d137a18c8a886619b9c08d4",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+      "after": "e84eb9292e13d10959758980c22c62b978f106e6efd5b8ecb69d0e93eedb76ca",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
       "beforeProjected": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
-      "after": "68facc19e370fca2f1052b3d4b2beedbcdd0261ce3279ba9aa5c4c8cbc976d38",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+      "after": "22e4043c4b3c8b71ce7e556def2b8098675cf3ea42162346a828ded0917fdabc",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md.; 0.6.64: M09/M11: real-orb AABB collection and original velocity, native surface destination; actual EffectType.getName capability detection and Grumm nameplate; native cooldown/aggro/step limits explicit."
     },
     "runtime/BP/scripts/bedrock/decorations.js": {
       "before": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
@@ -392,14 +392,14 @@
     "runtime/BP/scripts/bedrock/tipsy-visual.js": {
       "before": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
       "beforeProjected": "d7994fbba6cd911f754ea125fe467a87de3ddf6c3b89b7322194c3896da888a8",
-      "after": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "718496a28248e366020e1471ebd595b3b87cb5b5d9de2045e4b3940c291879b4",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/scripts/core/custom-effects.js": {
       "before": "8056fa6f02f82d918cf8db870ba79bda8472eb63b889075508b4f0cdc75c3c83",
       "beforeProjected": "8056fa6f02f82d918cf8db870ba79bda8472eb63b889075508b4f0cdc75c3c83",
-      "after": "b96c30e10c53bb49f7eeb854f8744f53dff466cc5cf59c5e17de23f9d7a40339",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "d58e4eba0d0521f5c3cb6f6e53af423b948a4efdbcf7484a22b0569f8fa95c17",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.64: M09: XP direction and feet-distance speed match pinned Java; PR91 diagnostics preserve native limitations."
     },
     "runtime/BP/scripts/core/decorations.js": {
       "before": "371e78ab2c214690ace6d742aefdf9ea2af43a2d185450e6d5b79b492d6a0360",
@@ -422,8 +422,8 @@
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "f69951c2a3b7c4d680c0d463561c15560061b003d3d6e843e3658b88efb4d64c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+      "after": "a57dba16703149f06d3da90acfc99c14414dab213a4514f036c05eb85a713c78",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
@@ -1184,8 +1184,8 @@
     "runtime/BP/scripts/data/guide-catalog.js": {
       "before": "5af78df1590619bf82a94f51b97500f832debc7b154758506684a5e6a305b601",
       "beforeProjected": "5af78df1590619bf82a94f51b97500f832debc7b154758506684a5e6a305b601",
-      "after": "67cc4fbbb4137920e89a4bd093c1eded5ec74c2cd6dc11ff4f55a15a949e14f6",
-      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+      "after": "ca8e08e176b24917744ef446c8238b602ada38f8af40453d200f4fde27020a34",
+      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation.; 0.6.64: Canonical product guide records corrected clock, tap/PvP rules and unresolved native effect semantics; retains seven entrances and shared Cookery renderer."
     },
     "runtime/RP/texts/zh_CN.lang": {
       "before": "d2a72f63475460ecc35517feaf0af0fb61bfcb95215db1c08ec5007042e256ca",
@@ -1220,26 +1220,26 @@
     "runtime/BP/blocks/bottle_watermelon_juice.json": {
       "before": "bdd904684b53c8f6627e1393e5a2dad2fc52631590bc1293f8b92276cd5f2d2a",
       "beforeProjected": "bdd904684b53c8f6627e1393e5a2dad2fc52631590bc1293f8b92276cd5f2d2a",
-      "after": "ccb7327732fd163c55191fa80de284e93fbbb7db27aaeeff4994891fe4dbd19a",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "474bc4466550c3bba8bf1ff7c0ae8d5eb7298e3ca9c72adc09b726bc269bcbba",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_honey_wine.json": {
       "before": "99f85391bc35d2a2b8a75040db62c06a3f6bfc1f6bd208f4d2b468293bf6ad26",
       "beforeProjected": "99f85391bc35d2a2b8a75040db62c06a3f6bfc1f6bd208f4d2b468293bf6ad26",
-      "after": "31e2aca0fcd79310abc7fd881833d9917e5ad4636d13d74f017e7a1f321d6818",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "5655bd99e89e215b2884507ad03e845c1d1f001aa9dada17bd4e15ceadb02137",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_luminous_bride.json": {
       "before": "55532433ed2be22bb291b1225281d449c79823540ab6f8c42f5261773232d3c0",
       "beforeProjected": "55532433ed2be22bb291b1225281d449c79823540ab6f8c42f5261773232d3c0",
-      "after": "1b67d6092672f8b4ae5d6b8f8ee4ee536478e612b90657dd5448cd8f3ce27108",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "c0048fec7240a01410730c4cad14ad24db68c48259a2ab28eae347f701d932aa",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_sherry.json": {
       "before": "f9603165ce59f731d0b2c956edf30f64dd3371436951506d1ec1adb3b9e3889b",
       "beforeProjected": "f9603165ce59f731d0b2c956edf30f64dd3371436951506d1ec1adb3b9e3889b",
-      "after": "e39433ba9046474d802752ea471540f536f8ec61652e41a83b6927121ba18789",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "1d764d2fb0f732690e2c37d252e4779ab3208915f930104d558cfc1cdd4217da",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/gold_grape_crop.json": {
       "before": "1ddea70e9a5ac19992e925d678aa787be1fda29a6c8d0424a0621d8fee0fe627",
@@ -1250,14 +1250,14 @@
     "runtime/BP/blocks/bottle_glowflower_brew.json": {
       "before": "ca3f44769008c7e7113f5e9a79329b18ce924c1ffaf7c04887b61dd9131ff2c0",
       "beforeProjected": "ca3f44769008c7e7113f5e9a79329b18ce924c1ffaf7c04887b61dd9131ff2c0",
-      "after": "d91b87a2c9cb9ae9f5e8205ee8aa3c3a41972e4f2690aaa339ef9dfab4f24368",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "f2c0307cb008616bc71a1128454fae31720c84638b60356ec14d71906eb8a859",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_godfather.json": {
       "before": "c9fc7b111a0ae5f364f9558c2dfed586669769e6d7b9f246887d7902c572513f",
       "beforeProjected": "c9fc7b111a0ae5f364f9558c2dfed586669769e6d7b9f246887d7902c572513f",
-      "after": "46f52f9e5e284341000bdad0e3aa278d455e4e8658a58aa7262f0f57256fd8de",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "b7ff4cf5707a461cdb84bc58cd2176403fcf5cda7820a57fc880fb5f25380b8b",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_brown.json": {
       "before": "e583d6a6a8851617de877d6cb5b324d05ac77836fd052ce78859f2dba98eb107",
@@ -1280,8 +1280,8 @@
     "runtime/BP/blocks/cup_mystery_cocktail.json": {
       "before": "c4a2fe8d91e16db0afcdb23411c67fe451888e0ff461f308d098aee617949f12",
       "beforeProjected": "c4a2fe8d91e16db0afcdb23411c67fe451888e0ff461f308d098aee617949f12",
-      "after": "72f7ecad082c330bf578e8289750e6f7c1fd146e53afb05b03f77a63de4c7b8b",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "3a2fe7c7fdbbff58323e10f38e530a2f064f9b82a514b6be5f732ecaba071e94",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/xp_bottle.json": {
       "before": "3e19992564c06e306140d91a1f7e33c088daeefa40981665dde0164a0a42b60b",
@@ -1292,8 +1292,8 @@
     "runtime/BP/blocks/cup_emerald.json": {
       "before": "79bd76bf1a464f8ce750af8564db8b5cf9a23666c7921dfcf9f4b3d7a8ce1b9e",
       "beforeProjected": "79bd76bf1a464f8ce750af8564db8b5cf9a23666c7921dfcf9f4b3d7a8ce1b9e",
-      "after": "4a16de5232eaebc18d3b4374c91d8824048060a46ac2bd46ed10425344eda715",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "3defaade3e1315bec52bfba21d74a18d5a33eb1d8e329f01242e13c8600a1a44",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_lime.json": {
       "before": "39401677d1ff5875e14fb3acb8269fb3c7629cbfc1d359d915ee15631b773f60",
@@ -1304,20 +1304,20 @@
     "runtime/BP/blocks/bottle_whiskey.json": {
       "before": "b0fd4e2f1623387ae81e188284f617266db26ed8e02951a0303c55dd542c24d3",
       "beforeProjected": "b0fd4e2f1623387ae81e188284f617266db26ed8e02951a0303c55dd542c24d3",
-      "after": "0f9d40ba6ae28d574e54434e01d54c336ff45048f8b980ad6e86eef2409296a1",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ab7b9368c41b284f42ebd5e70d2a6511b09755dedbc8cffab2bf5f5c9d344090",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_carignan.json": {
       "before": "7e79c8e696fcf8a7f8d4dcea2a3f1f8c7480283adf0f75e29a1518eb3cd7a7d3",
       "beforeProjected": "7e79c8e696fcf8a7f8d4dcea2a3f1f8c7480283adf0f75e29a1518eb3cd7a7d3",
-      "after": "0ba31d74caca12e15b8d2f0f7858efa2827e43bc37d84b94c11720d54e8782c0",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "b258cc5046abd2b26e8a906244cd027e0387dbce62cd1c75c5672d3230c94421",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_champagne.json": {
       "before": "c64d6e92ca6a0dbada3f1884cc75e05b156b4742ab4bc7bb8035edfbc08497cb",
       "beforeProjected": "c64d6e92ca6a0dbada3f1884cc75e05b156b4742ab4bc7bb8035edfbc08497cb",
-      "after": "c7b5b33b20714ad3f6f87ab6010abed3960477d71625724bbae59c9842950795",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "1fd93fc0e0e5a7607f7f674a2f59c99f8ddaa254237de0cd4e19849a57fc3cf2",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_red.json": {
       "before": "832d1c12faf294e6de81094cd64f71ccd6f24a3bdee7d94ceb6dd69a1aae84a0",
@@ -1328,26 +1328,26 @@
     "runtime/BP/blocks/cup_mojito.json": {
       "before": "2ad550e1d02dd74d248006996bf314a21a7aa6faf11b537225ba6c53a4081e77",
       "beforeProjected": "2ad550e1d02dd74d248006996bf314a21a7aa6faf11b537225ba6c53a4081e77",
-      "after": "1ec168c398861bdfcfbf00d8fc5e8a87d23eca6f7c8f8743a29c1c9995a6ca61",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "85a1be79a5d5756f3d258aa165df3f74bbec9affefdab0979695d8ba1b9fdfde",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_empty_glassware.json": {
       "before": "bfb7cbc71190782622c00456f2f0e9faa9a227e0ca535a98a8a2643c855497fa",
       "beforeProjected": "bfb7cbc71190782622c00456f2f0e9faa9a227e0ca535a98a8a2643c855497fa",
-      "after": "560dbdcf5bcb612828ffad374f80cf6fefe1c6b768ad5a927649d3e4a30938c4",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "49b448a62b663d2084fc35ea9b3c998a5b51abfd4cd9e66c1d74184086a5f007",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_bloody_mary.json": {
       "before": "23049c9edfe77a01fcf8118cf3d1aec8e1c82f6b900aff2e29d84f9e1f65fa76",
       "beforeProjected": "23049c9edfe77a01fcf8118cf3d1aec8e1c82f6b900aff2e29d84f9e1f65fa76",
-      "after": "fa708bd27d9b404bb90453df41b75fb81ba777a03c64a9fa65b2e0b30738e499",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ddb9650fce839e8fdf09de6a3476f190b0bee645b456c54358f5ea9fb5fc1bea",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_allium_garden.json": {
       "before": "10642137b8ab395785a013ee6a1e5c357a96ecdc7e3d82458c621513a585db2d",
       "beforeProjected": "10642137b8ab395785a013ee6a1e5c357a96ecdc7e3d82458c621513a585db2d",
-      "after": "65a527108a33d7d3e01578825dcc1e2cdd752e82b44a32d087a62d233be43f50",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "304273d92e4509ea11edd6fb792bb6c369dc0e79f73c23edebefa3ce0fe87431",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/gold_grapevine_trellis.json": {
       "before": "75a9631463e2a337ba2222a235a3337a0d9ed4d5d4df08628cdce20c6e1a6bb3",
@@ -1358,26 +1358,26 @@
     "runtime/BP/blocks/cup_sculk_special.json": {
       "before": "213f98e4334b2b1f5d85f0e24032d29bae3c671bbe0b8044fe45b6b5c9a4123b",
       "beforeProjected": "213f98e4334b2b1f5d85f0e24032d29bae3c671bbe0b8044fe45b6b5c9a4123b",
-      "after": "4d9a1cac976fc973c0426109a8b50cb01fd009cf145c2cb69bfefad4eed6313e",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "d0af22a12fc14aba327b56c5c059df657adcd46130015b3f78c4c99c5534a86e",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_vinegar.json": {
       "before": "0f237c76ef80854e0b03072e66822fa0058d0a10ba44ceb2667c01dca1ae4de5",
       "beforeProjected": "0f237c76ef80854e0b03072e66822fa0058d0a10ba44ceb2667c01dca1ae4de5",
-      "after": "49c9faf783382214cfc85368742cce2da5fb523875d8900bd529b1f23690fe79",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "fac185181fd7947e2a765fd04fa7680e678214c4254b2aec0d3ea2970354bd86",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_plum_wine.json": {
       "before": "e2e349506d9712872017a8a4b1dd5eda7aff3f6fb67818fb5595b6facb666e59",
       "beforeProjected": "e2e349506d9712872017a8a4b1dd5eda7aff3f6fb67818fb5595b6facb666e59",
-      "after": "7e3d037efcbe028d6d70ae04cdbeb818cb81a24bd4b215a6d2c658e283eaab58",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "4db885fd70a746735ca6c6ab5373a7f94d53addb94fd84be5166a84b8e0ce9eb",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/barrel_part.json": {
       "before": "b4da373af47aa4dbe4c56f33ad210a2104ceb367485eb79643597533571f9a13",
       "beforeProjected": "b4da373af47aa4dbe4c56f33ad210a2104ceb367485eb79643597533571f9a13",
-      "after": "4dc2bb31c402ea6d229144d0d76d10324e7e800790f97abe2119812fae326a7b",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance."
+      "after": "f8c28bc9440e6c0ad059a0ee3d175b403744dddbba36afcebb208c1e674d1edf",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/ice_grapevine_trellis.json": {
       "before": "22f386fd24bb72a4d92b2f7ab533a6722f88f94d5368a11da8723c9b390126c0",
@@ -1388,8 +1388,8 @@
     "runtime/BP/blocks/bottle_brandy.json": {
       "before": "8cfe4cd4d0077a809b7231b2fa51fa3631be31bc4ead0397594591d9b08b7d59",
       "beforeProjected": "8cfe4cd4d0077a809b7231b2fa51fa3631be31bc4ead0397594591d9b08b7d59",
-      "after": "062e2064617bba33aaf69ed3cd832ceeaad8aeb6cd8898c4c5d4ed02e6735f43",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "4b91ce8df4df96800f8b92a9488f185c1c9c7ddb433aa7b71c1eaceeb960ded3",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/ice_grape_crop.json": {
       "before": "216e8f11c01a1c7415438e55d676bcfa7dbc47e43cd7e5b3c21bf0dc40926d5e",
@@ -1400,8 +1400,8 @@
     "runtime/BP/blocks/bottle_madame_shexiang.json": {
       "before": "df9fdab6e834dcc4a1a35bff005cb51174e8a4a953be2e9884f843bfc3f2794b",
       "beforeProjected": "df9fdab6e834dcc4a1a35bff005cb51174e8a4a953be2e9884f843bfc3f2794b",
-      "after": "6fa6ceb1edd1188db3f9a5d12846ab8d75f20f5c3358ab4e389cc11568a5e50d",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "596212be626de68536766a9e1f98ff4d3f839c09e13386c354734a891b99fa19",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_orange.json": {
       "before": "b150fa531bebad7fff6e809335d19b30f6740b791a9946123035821a3dbb36f0",
@@ -1412,32 +1412,32 @@
     "runtime/BP/blocks/cup_screwdriver.json": {
       "before": "adda95b53b48f81183d66534464316bad6d10af91a0a56a02ee0fb8990427c41",
       "beforeProjected": "adda95b53b48f81183d66534464316bad6d10af91a0a56a02ee0fb8990427c41",
-      "after": "0776b577a3b68275bae928f6f8c0c801c82255893bbb7a942140873de1c7e096",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ddc549905a60a7be52ffd24c0d5e15dcdc62b28c2afc7ac5cbc9a7c23d001ae4",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_depth_charge.json": {
       "before": "af3af36ca69f998d6e83bcf6a3fda98bc808aa8e163f62b586a4b97d1419a54f",
       "beforeProjected": "af3af36ca69f998d6e83bcf6a3fda98bc808aa8e163f62b586a4b97d1419a54f",
-      "after": "aed18657aab7ed1c2c483f7df1ea34de82f9c1bd8a08b1da7912c33596544475",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "00e2a3738c2bd46f4282a90c5f182510dec87e4bb2b88c99538e00bdebcbfe32",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_miners_star.json": {
       "before": "57bc3f0179949a35dbcd4a576bc1698a3b6fb5c7d598b021a0fa0150360d54db",
       "beforeProjected": "57bc3f0179949a35dbcd4a576bc1698a3b6fb5c7d598b021a0fa0150360d54db",
-      "after": "26de9e55041b3c97fcc56de92ee4f5d65338d67de24aa6c30bc023fd0f5916dc",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "e6047cbe58de5de18c7aa8c91685050bba964c23d810678a23e052490cfc6e4f",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_grasshopper.json": {
       "before": "3ef866cc09301f49e847003d462a97b819a0a65aea475f41277061f63427202b",
       "beforeProjected": "3ef866cc09301f49e847003d462a97b819a0a65aea475f41277061f63427202b",
-      "after": "ffee4de8285d0903e0584f4b3cc24cfc51df320273f0f630804755ad6d5a880c",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "793097e9d96976500d2aa90789dfc393ee46f5f301aa1b5372637e87b7b7346a",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_mother_snow.json": {
       "before": "7e5239825f72440bdd603bd4dc1e466a0244f66d4cad3a4e3e295c4756677825",
       "beforeProjected": "7e5239825f72440bdd603bd4dc1e466a0244f66d4cad3a4e3e295c4756677825",
-      "after": "bf22f1ce42aa390f7b76d76565f04d5fcb4f28552c205668fe0c8261c02bc4b9",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "d1ed7bc27ed09c65798741e39682d05cf6083eac38eb77bf224a12b080630d20",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_gray.json": {
       "before": "6881f5657d18227cd573530b93725a5a463a189f34cdc76f64e0adc32a991f76",
@@ -1448,8 +1448,8 @@
     "runtime/BP/blocks/cup_white_lady.json": {
       "before": "4ac943ffa7170ee58c829d88c49d6bb961bd078b744773531f22d7547c60a97d",
       "beforeProjected": "4ac943ffa7170ee58c829d88c49d6bb961bd078b744773531f22d7547c60a97d",
-      "after": "d28adeee2172b562d23de517d21b7cc37d281ca26b52bf9ddd62681bc38dcb7f",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "7854ca8f563f576087a3112154364433bfe7e7050de56b90ba6bbf9a91a8fb1b",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/grape_crop.json": {
       "before": "b616d7175555672b2df80fc9902523b43834e3faf95a5c8e3a7fa7122426711e",
@@ -1472,14 +1472,14 @@
     "runtime/BP/blocks/bottle_sunset_glow.json": {
       "before": "06e91bc3df539fea1f587f6a9a0a174d3e8a2c1047107faa058072846d1c714c",
       "beforeProjected": "06e91bc3df539fea1f587f6a9a0a174d3e8a2c1047107faa058072846d1c714c",
-      "after": "1cd7f6fb3c8f059ba2793f1bccca12a76905728d21fd8f7e597a53402e282c98",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ae82fb0262f2491e57ed73efad5704a2296345fc3fed2a93c21e7fcd8eb7e213",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_riesling_dry_white.json": {
       "before": "a46eeefefa8ba18de5807b784a095c061d1f9c7857b2b64ab21dd229e417d09f",
       "beforeProjected": "a46eeefefa8ba18de5807b784a095c061d1f9c7857b2b64ab21dd229e417d09f",
-      "after": "6d3079ddddb5c07c9eccec2ce6ed436d49afbd3246026558855c934bb932d9b7",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "11e8da71c2d46cd3d612d22888b348a59424ecbe59fade40c7e3758f22090d46",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/wild_grapevine_plant.json": {
       "before": "fd3fd5c88c09d4c45a00ea841d3def7307b04c4661d647b52a9eb42df2296542",
@@ -1508,14 +1508,14 @@
     "runtime/BP/blocks/bottle_ice_wine.json": {
       "before": "5d2c065f19e27ad993fef2d6eda89e2ead4e7726aa2c253ce48f5b649f3447f9",
       "beforeProjected": "5d2c065f19e27ad993fef2d6eda89e2ead4e7726aa2c253ce48f5b649f3447f9",
-      "after": "7c2a8449dd86db5f374e1ac0751d47e9bb26bca6ea4f198ff0013190ac33ebeb",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ee2480f5aec8d1b2b6f0cb1b60bd2a1b0b588556c2f2474a3aa48da545f8bf51",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_sauvignon_blanc_dry_white.json": {
       "before": "7e5f37c16733d70c88227de130fb38dfb42f98cfb0af582cc9f714014bab8903",
       "beforeProjected": "7e5f37c16733d70c88227de130fb38dfb42f98cfb0af582cc9f714014bab8903",
-      "after": "598a6ff97871657788f1168bd5cc64a897622d2b6969118e0301d37e2dd16310",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "47de41c984177d129070934d2d1ec00b0d8b6008859f01a39eaad06830609ec7",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_light_gray.json": {
       "before": "c12e3ba15e1e11ae2e6cd3150f4df9f2190927dbcb1ce7b175b2eb714619095e",
@@ -1538,8 +1538,8 @@
     "runtime/BP/blocks/bottle_sakura_wine.json": {
       "before": "e71fb685dd772283ccfd62ff457d546359d4f4c41cbfc5f1c0b409ca7464946f",
       "beforeProjected": "e71fb685dd772283ccfd62ff457d546359d4f4c41cbfc5f1c0b409ca7464946f",
-      "after": "a91682c8f6a0dd97fdf5317d71c009d235cd53fc85909524b20872e782c13e89",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "c43336f04427c44459046f4860b6a835864ea3fd9ef9fcd1accb3ab1e6f503c2",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_purple.json": {
       "before": "882e69a119aceb4e74dfe87b80d8779f3a36c89bf218efa0dd82ac250e7b7462",
@@ -1550,14 +1550,14 @@
     "runtime/BP/blocks/bottle_vodka.json": {
       "before": "1c1767bdc8fd5d5e00b0ba8601979fcaeb481012dd17b647767c748d69c1ac35",
       "beforeProjected": "1c1767bdc8fd5d5e00b0ba8601979fcaeb481012dd17b647767c748d69c1ac35",
-      "after": "dfbe67c8338e5802a9b68900328716e5dd07520c83b228eceaf6a34661c1dbec",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "a68fb360c13980c0447938e624aa47ab44da98c759ef77fb3ecec9d377885dac",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_brass_heart.json": {
       "before": "2ea14897bedc0aec10b504169eac011183925f0134d0cbd14eb51e0bf8c31ffb",
       "beforeProjected": "2ea14897bedc0aec10b504169eac011183925f0134d0cbd14eb51e0bf8c31ffb",
-      "after": "978d8dba69c7d9f615bb2e85cd5567b6b591011586f11d0ddb297669d962feb7",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "4d40332559dffff8ca42aa2eb81c4b47d74da846491d73b93336139c5b6657c9",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_blue.json": {
       "before": "e2344f0a9cfedca25b674ec46f11c829e0be9802a97071460e029f1019bb9a38",
@@ -1568,14 +1568,14 @@
     "runtime/BP/blocks/bottle_red_queen.json": {
       "before": "e084ed660fb0bd163f1afd284d7e2c31929f2069360e6adb3d06cce5c7ca60bc",
       "beforeProjected": "e084ed660fb0bd163f1afd284d7e2c31929f2069360e6adb3d06cce5c7ca60bc",
-      "after": "ef87c8f81496cdf406e77ecbbd5b5fac92a9fbd55533361a81e145cc1b87c245",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "2e30079ca3621f2f313f4852680dfcde1ebb49ca124280b3421033359bdb747a",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_wine.json": {
       "before": "d78e664dc97287d97e861225abe7354eda81e7cb1b5db59b6cd83b5333f2ec14",
       "beforeProjected": "d78e664dc97287d97e861225abe7354eda81e7cb1b5db59b6cd83b5333f2ec14",
-      "after": "08acc470987e3d6ee012a6d8f3e1a6b190ca39335c392c3882dd4fb2bf3ea498",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "744b0569b79a791435dff6045563810c5db1d78bee6d7f2140261a2991dcb63b",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_magenta.json": {
       "before": "7e9b463d8a5e116a69f84d0a3f0db397c94b3a2267be094a7e8a0aee98b2e53d",
@@ -1586,8 +1586,8 @@
     "runtime/BP/blocks/cup_nether_special.json": {
       "before": "353149e55452c71542c8f267d0260a015077cf2a3faf83bee55d735af6821a48",
       "beforeProjected": "353149e55452c71542c8f267d0260a015077cf2a3faf83bee55d735af6821a48",
-      "after": "1b869c0287844dbf96b6ac17c14c65fe10375d56dfb5e239f7705b665d6dd1c2",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "ce0ab3719529b047b47201eb6091e6e16eb86c7bdb7fa1993e1f33b5d7c3dd8b",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_yellow.json": {
       "before": "6fcfaacb0f64856269233a5a8b65c6a26511819ee9310295ce0f821f6a8de8fc",
@@ -1604,26 +1604,26 @@
     "runtime/BP/blocks/bottle_rum.json": {
       "before": "c5b9242bc485269a4785d79786d5e2e4c4848f93dcbcbf20852d5a8ea3d482f3",
       "beforeProjected": "c5b9242bc485269a4785d79786d5e2e4c4848f93dcbcbf20852d5a8ea3d482f3",
-      "after": "44ef5339391712805f19a20e7d31300d1fd6ecd66eeef58f85fa561f1da4fa1d",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "b0a21a202e40de8b27129ba0ad4ffd035b152af5e02c34f97279fefc9394e738",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/cup_signature_cocktail.json": {
       "before": "4f664a54c46110eeb0712ecf8f317320dd56fb3d56b6bf42adb7544bc37c801e",
       "beforeProjected": "4f664a54c46110eeb0712ecf8f317320dd56fb3d56b6bf42adb7544bc37c801e",
-      "after": "dea8cb9933b9ecff6bc8024362b09278fb61d05bea4e86de23ec0674afa6015d",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "94a8e79e0e0e6fd1b4144fc7f0afe356de81fb60a481813d636b4491c577d788",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/bottle_sweet_berry_wine.json": {
       "before": "75797f7d85cb02fda3b8895005ea20dcc8e4bfa57b0a7fda1c0b61b14a7cd5b5",
       "beforeProjected": "75797f7d85cb02fda3b8895005ea20dcc8e4bfa57b0a7fda1c0b61b14a7cd5b5",
-      "after": "1839f0d764858d8a9523254d233324c6765168b99430b3bae5e8f6b0dc3935a9",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "58f33f5a3c70753d74eb7d4cd8674b8e4fdf20adb32a51b4ddd28b5a9b5c8f80",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/shaker_station.json": {
       "before": "0fdd10c15c136edd538a199f0d707dcb7e332271d77bf1366a89113d739ba5ee",
       "beforeProjected": "0fdd10c15c136edd538a199f0d707dcb7e332271d77bf1366a89113d739ba5ee",
-      "after": "e424b537e06f64b965e325fcf6c26414c92520cd5696d20be0ae94329f87df99",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "d98fc8190c23fcf0b2a95fb7fce3a9d0582f80ad0b82f484efeaf93f602f38fe",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/light_green.json": {
       "before": "795fae041241c9baaa8efaa0774a8678c465a028f2de5cbce7c2424d78618937",
@@ -1634,8 +1634,8 @@
     "runtime/BP/blocks/bottle_polaris_sweet_white.json": {
       "before": "2026db1d8365361232267928b5ba78358135a8ab85748f9a82d25e387bd4bf42",
       "beforeProjected": "2026db1d8365361232267928b5ba78358135a8ab85748f9a82d25e387bd4bf42",
-      "after": "c4717ec2912a38fa5d201dfec31c4d406255c2d4d6ef189c24054711a169ea14",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox."
+      "after": "4b007aaa423cc18a7fdd32db7400abc17a100105a4d584877af4fa44dc6cd011",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox.; 0.6.64: PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
     },
     "runtime/BP/blocks/tap.json": {
       "before": "f085d13ea098faa4981f1d1d42114a38477af60cf8b03d204f1b4fed9fa5f774",
@@ -1862,8 +1862,8 @@
     "runtime/BP/scripts/bedrock/machines.js": {
       "before": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
       "beforeProjected": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
-      "after": "bb7ae009b24c23d5481cabab76e3c20cd662772c39553cb49e164aa439b5e58a",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+      "after": "17e982a8672bea9886740a4c6662b4bd833ff22f990767596d8c9604aaef7bdb",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md.; 0.6.64: M01/M03/M04: bind the real barrel callback to 97 ticks; direct generic carrier/block output transactions with position identity and rollback; retain FX."
     },
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
@@ -2024,8 +2024,8 @@
     "runtime/BP/scripts/bedrock/combat-effects.js": {
       "before": "3c51a8246a4ab194d3a91005965cede0874e24eae7e58c020b25a4761f92e9d7",
       "beforeProjected": "3c51a8246a4ab194d3a91005965cede0874e24eae7e58c020b25a4761f92e9d7",
-      "after": "68bd63d90a795875e4fd9e2cfc7176dd62bca72715253a158613823be3911ba5",
-      "reason": "2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+      "after": "1b5fa054aacf581d268f5b05ca7d4602dcf17400627fee8cb513649282a0a8fc",
+      "reason": "2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md.; 0.6.64: M05: source-AABB/ray selection, Adventure caster, PvP/immune mode gate, additive post-hurt knockback and no arbitrary target cap."
     },
     "runtime/BP/scripts/bedrock/display-projectiles.js": {
       "before": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
@@ -2152,6 +2152,36 @@
       "beforeProjected": "ada742502c2ac9d8bf6de00deec22a12cf883f0cd66898553dd1ffdf4177d191",
       "after": "c87bd302f0493cec9bf4b13601cd271ee1366b654f1af5c9ae83a8f8b9cb2344",
       "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
+    "runtime/BP/functions/kt_tipsy_motion_off.mcfunction": {
+      "before": "b103856ae3bd853f0cecdeb3a27af4c2912337f87a0c705dbd149e0882015dc3",
+      "beforeProjected": "b103856ae3bd853f0cecdeb3a27af4c2912337f87a0c705dbd149e0882015dc3",
+      "after": "ab3efdb6eb75385e2ff7fa8a2c43a693fab4db6ae0fd2160005f1ebc3a4f9d36",
+      "reason": "PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
+    },
+    "runtime/BP/functions/kt_tipsy_motion_on.mcfunction": {
+      "before": "6b857963458b64011dd520df269f2ff7ac7ef8dc6636c5ccc1a6944fb00dc1d2",
+      "beforeProjected": "6b857963458b64011dd520df269f2ff7ac7ef8dc6636c5ccc1a6944fb00dc1d2",
+      "after": "09d7efee8e8cb8a8bf2d6b6e943b20f2737213d6e4fa8c9a0a4582b63fd46968",
+      "reason": "PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
+    },
+    "runtime/BP/scripts/core/combat-effects.js": {
+      "before": "179ac869d9c28a8dcbdad1441f6e910ee88babf2f9759001b1c0cc3e90eb2970",
+      "beforeProjected": "179ac869d9c28a8dcbdad1441f6e910ee88babf2f9759001b1c0cc3e90eb2970",
+      "after": "4df7403b38c37fa7f4188965c1c584cdcbc98a42cff804aef6068ee36a7a1154",
+      "reason": "PR91: explicit PvP-on survival/adventure target policy, native damage refusal preserved."
+    },
+    "runtime/BP/scripts/core/tipsy-visual.js": {
+      "before": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+      "beforeProjected": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+      "after": "51f20c5ef2d07d73347628d10656181c0b8e52b5183fcb12a9839e50ae8a42d9",
+      "reason": "PR91 reviewed source-backed multi-collision geometry / explicit Tipsy opt-in policy, or 0.6.64 self-pack version metadata; preserve previous independent repairs."
+    },
+    "runtime/BP/scripts/core/machines.js": {
+      "before": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "beforeProjected": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "after": "d5628f4f52e5cc5e66d6356a3ec93dae529d9bc5f172ec46a3e478384fca4b22",
+      "reason": "M01/M02: shared 97-tick constant and ordinary ingredient acceptance; preserve capacity, liquid, locking and vinegar fallback rules."
     }
   },
   "rules": {
@@ -2212,7 +2242,7 @@
   "newRuntimeFiles": {
     "runtime/BP/functions/kt_molotov_diagnose.mcfunction": "97ca130cd2b40792d47af9f711373273590592795817f844d8531f3f89553d31",
     "runtime/BP/functions/kt_tipsy_diagnose.mcfunction": "eb4596fffa1a5865dd3cd363085c66048d41b41ca695206427cca325dff924bf",
-    "runtime/BP/scripts/bedrock/molotov.js": "2504519777d71c862e21012681c91c4d69a4a6b8e41805958f8ab4c9b49d8301",
+    "runtime/BP/scripts/bedrock/molotov.js": "d91ba0ea7fed212ac4d713de07e91e073422f2812e0b85f250513fb2ebbdfe14",
     "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2",
     "runtime/BP/scripts/core/incense-sampling.js": "cb2571534df3cdb3f94deb8c29391b85575d092c8504f7b96909860130d73696",
     "runtime/BP/scripts/core/guide-preparation.js": "46036ece1e0a9a8c223bbc11ac379c160894245ca00e982cabf8c5fb7558e57c",
@@ -2441,7 +2471,9 @@
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f45fab8b8a00aa36606dd078.png": "f45fab8b8a00aa36606dd0789ba94f6fed841e44def7648ae84b397e628d09db",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f69c9982f5d9d7b1b6d0ac3a.png": "f69c9982f5d9d7b1b6d0ac3a96e5c0875da7671925b6b18d0e202ceb5c476b84",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f7a5ec2a66c13809b93a9422.png": "f7a5ec2a66c13809b93a94223524680a30534b6abac76e467bfd3a6fac94ced0",
-    "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa"
+    "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa",
+    "runtime/BP/scripts/core/fire-placement.js": "32960e14ed1f99cc20cf5d50f05a0724acd445d8e52324549806d77bbc946cf5",
+    "runtime/BP/scripts/bedrock/world-mechanics.js": "bb028ff601d280a02b03835d918364e279207653e213d558f3e047bbb76c8f0e"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

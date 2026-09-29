@@ -107,3 +107,8 @@ subprocess.run(['node',str(ROOT/'tools/check_board_layout.mjs')],cwd=ROOT,check=
 subprocess.run([sys.executable,str(ROOT/'tools/check_drink_surfaces.py')],cwd=ROOT,check=True)
 
 subprocess.run([sys.executable,str(ROOT/'tools/check_glassware_slots.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/java_collision.py')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_effect_parity.mjs')],cwd=ROOT,check=True)
+
+# Deterministic API doubles exercise real adapters; never label them native clients.
+subprocess.run(['node','--experimental-vm-modules','--test','tools/mechanics/mechanics-regression.test.mjs','tools/effects/effects-regression.test.mjs','tools/effects/interaction-regression.test.mjs'],cwd=ROOT,check=True)

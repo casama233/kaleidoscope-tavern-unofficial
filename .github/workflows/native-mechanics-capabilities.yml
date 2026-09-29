@@ -1,0 +1,90 @@
+name: Native mechanics capability probe
+on:
+  push:
+    branches: [test/native-mechanics-capabilities-20260929]
+    paths: [.github/workflows/native-mechanics-capabilities.yml]
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 8
+    steps:
+      - name: Download official pinned BDS
+        run: |
+          mkdir -p server evidence
+          curl --fail --location --retry 2 --max-time 120 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.51.1.zip' -o bds.zip
+          sha256sum bds.zip > evidence/bds-archive.sha256
+          unzip -q bds.zip -d server
+          chmod +x server/bedrock_server
+      - name: Prepare isolated native capability fixture
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('server'); p=root/'behavior_packs/capabilities';(p/'scripts').mkdir(parents=True)
+          uid='d5e335d1-aeaa-4c74-b9ad-253b2582e193'
+          m={'format_version':2,'header':{'name':'Native capability fixture','description':'No client or simulated-player acceptance','uuid':uid,'version':[1,0,0],'min_engine_version':[1,26,50]},'modules':[{'type':'script','language':'javascript','uuid':'e363786d-8601-4ef9-88d0-56fc96332435','version':[1,0,0],'entry':'scripts/main.js'}],'dependencies':[{'module_name':'@minecraft/server','version':'2.7.0'}]}
+          (p/'manifest.json').write_text(json.dumps(m))
+          w=root/'worlds/capabilities';w.mkdir(parents=True)
+          (w/'world_behavior_packs.json').write_text(json.dumps([{'pack_id':uid,'version':[1,0,0]}]))
+          (root/'server.properties').write_text('server-name=isolated-capability-probe\nlevel-name=capabilities\nlevel-type=FLAT\nallow-cheats=true\nonline-mode=true\nallow-list=true\nmax-players=1\nserver-port=29132\nserver-portv6=29133\ncontent-log-file-enabled=true\ncontent-log-console-output-enabled=true\ntick-distance=4\nview-distance=4\nplayer-idle-timeout=1\n')
+          (root/'allowlist.json').write_text('[]')
+          (p/'scripts/main.js').write_text(r'''
+          import {world,system,BlockTypes,BlockPermutation,Entity,Player,EffectTypes,Direction} from '@minecraft/server';
+          const out=(name,value)=>console.warn('[NATIVE-CAPABILITY] '+JSON.stringify({name,value}));
+          function probe(name,fn){try{out(name,fn());}catch(e){out(name,{error:String(e)});}}
+          function descriptor(o,k){for(let p=o;p;p=Object.getPrototypeOf(p)){const d=Object.getOwnPropertyDescriptor(p,k);if(d)return {get:typeof d.get,set:typeof d.set,value:typeof d.value,writable:d.writable};}return null;}
+          world.afterEvents.worldLoad.subscribe(()=>{
+            const d=world.getDimension('overworld');
+            probe('tickingarea',()=>d.runCommand('tickingarea add circle 0 70 0 2 native_probe true'));
+            system.runTimeout(()=>{
+              probe('fixture',()=>d.runCommand('fill -8 60 -8 8 90 8 air'));
+              probe('glowing',()=>EffectTypes.getAll().map(x=>x.id).filter(x=>x.includes('glow')));
+              probe('playerPrototype',()=>Object.getOwnPropertyNames(Player.prototype).sort());
+              probe('entityPrototype',()=>Object.getOwnPropertyNames(Entity.prototype).sort());
+              probe('targetDescriptor',()=>descriptor(Entity.prototype,'target'));
+              probe('nameplateDescriptor',()=>descriptor(Entity.prototype,'nameplateRenderDistance'));
+              const pos={x:0,y:70,z:0},b=d.getBlock(pos),below=d.getBlock({x:0,y:69,z:0});
+              probe('blockWrapperIdentity',()=>d.getBlock(pos)===d.getBlock(pos));
+              probe('blockMethods',()=>({canPlace:typeof b.canPlace,trySetPermutation:typeof b.trySetPermutation,isSolid:typeof b.isSolid,getItemStack:typeof b.getItemStack}));
+              for(const type of ['stone','glass','oak_leaves','water','tallgrass','stone_slab','soul_sand','soul_soil'])probe('surface:'+type,()=>{
+                below.setType('minecraft:'+type);b.setType('minecraft:air');
+                const x={id:below.typeId,tags:below.getTags(),solid:below.isSolid,item:below.permutation.getItemStack()?.typeId};
+                if(typeof b.canPlace==='function'){x.targetCanPlace=b.canPlace('minecraft:fire');x.belowCanPlace=below.canPlace('minecraft:fire',Direction.Up);}
+                if(typeof b.trySetPermutation==='function')x.trySet=b.trySetPermutation(BlockPermutation.resolve(type.startsWith('soul_')?'minecraft:soul_fire':'minecraft:fire'));
+                x.result=b.typeId;return x;
+              });
+              probe('topmost',()=>{below.setType('minecraft:stone');b.setType('minecraft:air');return {top:d.getTopmostBlock({x:0,z:0})?.location,ray:d.getBlockBelow({x:.5,y:80,z:.5},{includeLiquidBlocks:true,includePassableBlocks:false,maxDistance:144})?.location,range:d.heightRange};});
+              probe('aliases',()=>['lit_furnace','furnace','redstone_wire','water','standing_sign','oak_sign','soul_fire'].map(id=>{try{const p=BlockPermutation.resolve('minecraft:'+id);return {id,item:p.getItemStack()?.typeId,registered:!!BlockTypes.get('minecraft:'+id)};}catch(e){return {id,error:String(e)};}}));
+              probe('realCow',()=>{const e=d.spawnEntity('minecraft:cow',{x:2,y:72,z:0});const r={aabb:e.getAABB(),target:descriptor(e,'target'),components:e.getComponents().map(x=>x.typeId)};e.remove();return r;});
+              out('DONE',{native:true,players:world.getAllPlayers().length,api:'2.7.0',clientAcceptance:false});
+            },100);
+          });
+          ''')
+          PY
+      - name: Execute native BDS without clients
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, subprocess, time
+          log=pathlib.Path('evidence/native-capabilities.log')
+          with log.open('w') as out:
+              p=subprocess.Popen(['./bedrock_server'],cwd='server',env={**os.environ,'LD_LIBRARY_PATH':'.'},stdin=subprocess.PIPE,stdout=out,stderr=subprocess.STDOUT,text=True)
+              for _ in range(80):
+                  time.sleep(1)
+                  if p.poll() is not None or '"name":"DONE"' in log.read_text(errors='replace'):break
+              if p.poll() is None:
+                  p.stdin.write('stop\n');p.stdin.flush()
+                  try:p.wait(timeout=15)
+                  except subprocess.TimeoutExpired:p.kill();p.wait()
+          text=log.read_text(errors='replace');print(text)
+          assert 'Version: 1.26.51.1' in text,'Unexpected or missing native BDS version'
+          assert '"name":"DONE"' in text,'Native probe did not execute'
+          assert '"players":0' in text,'Unexpected player connection'
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Tavern-native-capabilities-1.26.51.1
+          path: evidence/
+          retention-days: 14

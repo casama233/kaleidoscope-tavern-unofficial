@@ -13,7 +13,7 @@ import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {inventory as sharedInventory} from './transactions.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
-import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,filledItem,NS} from '../core/machines.js';
+import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,filledItem,NS,BARREL_CHECK_INTERVAL} from '../core/machines.js';
 import {parseBottle,displayAdd,bottleKey,BottleStore} from '../core/bottles.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {check} from '../core/util.js';
@@ -353,7 +353,7 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  b.registerCustomComponent(NS+':pressing_tub',{onPlayerInteract:nativeEmptyHandBlockUse,
   beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
   onPlace:ev=>guarded(undefined,()=>initializeTub(ev.block)),onEntityFallOn:ev=>press(ev.block,ev.entity,ev.fallDistance),onTick:ev=>guarded(undefined,()=>{const s=store.load(keyFor(ev.block));if(s)safeVisuals(ev.block,s);})});
- b.registerCustomComponent(NS+':barrel_core',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:ev=>tickBarrel(ev.block,20)});b.registerCustomComponent(NS+':barrel_part',{onPlayerInteract:nativeEmptyHandBlockUse,});b.registerCustomComponent(NS+':tap',{
+ b.registerCustomComponent(NS+':barrel_core',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:ev=>tickBarrel(ev.block,BARREL_CHECK_INTERVAL)});b.registerCustomComponent(NS+':barrel_part',{onPlayerInteract:nativeEmptyHandBlockUse,});b.registerCustomComponent(NS+':tap',{
   onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate,
   onPlayerInteract:ev=>{
    const player=ev.player,block=ev.block;if(!player||javaSecondaryBypass(player,held(player)?.typeId)||!tapGesture(player,block,true))return;

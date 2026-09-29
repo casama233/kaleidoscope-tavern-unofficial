@@ -9,7 +9,12 @@ import {check} from './util.js';
  * applied instead of comparing the two hits at runtime. Side faces showed no mirror. */
 export const HIT_FACE_BASIS=Object.freeze({
  // Sign pairs [x, z]: world = sign*(hit-.5)+.5 per axis. Measured, not assumed.
- Down:Object.freeze({event:Object.freeze([-1,-1]),ray:Object.freeze([-1,1])})
+ Down:Object.freeze({event:Object.freeze([-1,-1]),ray:Object.freeze([-1,1])}),
+ // Measured 2026-09-29 through the cellar-cabinet placement report: the script raycast
+ // reports east/west-face hits z-mirrored (north/south faces are world-true, and the
+ // event basis on east/west faces reads world-true in the logged event/ray pairs).
+ East:Object.freeze({ray:Object.freeze([1,-1])}),
+ West:Object.freeze({ray:Object.freeze([1,-1])})
 });
 /** Undo the engine's face basis for a reported hit; undefined when no measured basis
  * exists for that face and source, so the raw engine value should stand. */

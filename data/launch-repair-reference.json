@@ -368,8 +368,8 @@
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "8fa4b1f64cf747e2641737f9022713facc58f153dcf10b7d0efbb172c291acca",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged."
+      "after": "e1f31820cd93a04ed9ac0188f78e1f915f373c79a5d47ee6467b0d7ce73d032a",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged. 0.6.63b: convert the shared gaze hit through the measured face basis (east/west faces arrive z-mirrored) so cabinet and rack slot selection matches the aimed shelf on every facing."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
@@ -2442,7 +2442,7 @@
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f69c9982f5d9d7b1b6d0ac3a.png": "f69c9982f5d9d7b1b6d0ac3a96e5c0875da7671925b6b18d0e202ceb5c476b84",
     "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f7a5ec2a66c13809b93a9422.png": "f7a5ec2a66c13809b93a94223524680a30534b6abac76e467bfd3a6fac94ced0",
     "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa",
-    "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135"
+    "runtime/BP/scripts/core/hit-basis.js": "97a1e723d97ba5b667e089df68e6220a8e1e4c707f040e42e023cfabb8650604"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

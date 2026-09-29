@@ -66,7 +66,7 @@ jobs:
           python tavern-src/tools/family_candidate.py --build
           python world-liquor-src/tools/family_candidate.py --build
           python grilling-src/tools/check_station_storage.py
-          node grilling-src/tools/check_family_knives.mjs
+          (cd grilling-src && node tools/check_family_knives.mjs)
           python grilling-src/tools/family_candidate.py --build
           python tavern-src/tools/build_deco_compat.py
           python - <<'PY'

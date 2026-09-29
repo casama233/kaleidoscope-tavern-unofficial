@@ -22,7 +22,9 @@
     "scale": 0.5
   },
   "finiteParticleEmitters": 16,
-  "scriptTickInterval": 20,
+  "nativeRegistrationTickInterval": 20,
+  "ambientSamplingTickInterval": 1,
+  "emissionMode": "recipient-local source-sampled bursts",
   "plumeParticlesPerSecondMaximumMean": 1.2213134765625,
   "ambientParticlesPerSecondMaximumMean": 18.3197021484375,
   "cupAbsentRecordRecovery": "structural checks passed; real event execution not tested",

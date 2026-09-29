@@ -1,3 +1,4 @@
+import {trellisWaxFeedback,plantGrowthFeedback} from './interaction-particles.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
 import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
@@ -115,15 +116,15 @@ export function farmUse(player,b,{rng=Math.random}={}){
   }
   if(b.typeId===BARE&&h?.typeId==='minecraft:honeycomb'){
    check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);return 'waxed';
+   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);trellisWaxFeedback(b,true);return 'waxed';
   }
   if(b.typeId===BARE&&h?.typeId?.endsWith('_axe')){
-   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});return 'unwaxed';
+   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});trellisWaxFeedback(b,false);return 'unwaxed';
   }
   if(h?.typeId==='minecraft:bone_meal'){
    check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const edits=growthChanges(b,rng);check(edits.length,'NO_GROWTH_SPACE');
-   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);return 'grown';
+   exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);plantGrowthFeedback(b);return 'grown';
   }
   if(h?.typeId==='minecraft:shears'){
   if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}

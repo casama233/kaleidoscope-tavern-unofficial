@@ -1,0 +1,41 @@
+name: Efficiency regression
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  efficiency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: 4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7
+          path: .efficiency-baseline
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify source review chain and original baseline
+        run: python tools/efficiency/reference.py .efficiency-baseline
+      - name: Production adapters with deterministic native API doubles
+        env:
+          TAVERN_BASELINE_ROOT: .efficiency-baseline
+        run: node --experimental-loader ./tools/efficiency/mock-loader.mjs --test tools/efficiency/*.test.mjs
+      - name: Compare the same scenes against pinned before and candidate
+        run: |
+          mkdir -p efficiency-evidence
+          node --experimental-loader ./tools/efficiency/mock-loader.mjs tools/efficiency/measure.mjs .efficiency-baseline > efficiency-evidence/before.json
+          node --experimental-loader ./tools/efficiency/mock-loader.mjs tools/efficiency/measure.mjs . > efficiency-evidence/after.json
+          node tools/efficiency/compare-counts.mjs efficiency-evidence/before.json efficiency-evidence/after.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: efficiency-api-counts
+          path: efficiency-evidence/

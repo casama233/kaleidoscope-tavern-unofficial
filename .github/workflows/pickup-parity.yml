@@ -1,0 +1,45 @@
+name: Pickup parity checks
+on:
+  push:
+    branches: [fix/pickup-parity-20260929]
+    paths:
+      - 'runtime/**'
+      - 'tools/pickup/**'
+      - 'tools/glassware/**'
+      - '.github/workflows/pickup-parity.yml'
+  pull_request:
+    paths:
+      - 'runtime/**'
+      - 'tools/pickup/**'
+      - 'tools/glassware/**'
+      - '.github/workflows/pickup-parity.yml'
+permissions:
+  contents: read
+jobs:
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pure pickup and measured glassware hit rules
+        run: node --test tools/pickup/core.test.mjs tools/glassware/hit-basis.test.mjs
+      - name: Current adapter integration against deterministic doubles (not native client tests)
+        run: node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/pickup/adapters.test.mjs
+      - name: Verify pinned sound content
+        run: python tools/pickup/check_audio.py
+  native-persistence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Native isolated inventory save/restart, no player sessions
+        run: python tools/pickup/run_native_smoke.py --work "$RUNNER_TEMP/pickup-native"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pickup-native-persistence-evidence
+          path: |
+            ${{ runner.temp }}/pickup-native/stage-*.log
+            ${{ runner.temp }}/pickup-native/native-storage-evidence.json

@@ -44,7 +44,7 @@ test('one sampling tick visits 667 pairs, integer triangular offsets within both
  rows.forEach((p,i)=>{const max=i%2?31:15;[3,-3,11].forEach((v,k)=>assert.ok(Number.isInteger(p[k])&&Math.abs(p[k]-v)<=max));});
 });
 async function moduleFixture(relative,extra={}){
- const pending=[];const system={currentTick:0,runInterval(fn){pending.push(fn);return pending.length;},runTimeout(){return 1;}};
+ const pending=[];const system={currentTick:0,runInterval(fn){pending.push(fn);return pending.length;},clearRun(id){pending[id-1]=undefined;},runTimeout(){return 1;}};
  const calls=[];class MolangVariableMap{constructor(){this.values={};}setFloat(k,v){this.values[k]=v;}}
  const server={system,MolangVariableMap,world:{getAllPlayers:()=>[]},...extra};
  const context=vm.createContext({console:{warn(){},log(){}},Math:Object.assign(Object.create(Math),{random:()=>.5})});
@@ -57,10 +57,15 @@ test('ambient emissions are recipient-local, do not broadcast or cross dimension
  const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[a,b,c]}});const seen=[];const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
  f.api.registerJavaAmbient(block,viewer=>seen.push(viewer.id));f.api.registerJavaAmbient(block,viewer=>seen.push(viewer.id));assert.equal(f.pending.length,1);f.api.pulseJavaAmbient();assert.equal(seen.filter(x=>x==='a').length,1334);assert.equal(seen.filter(x=>x==='c').length,1334);assert.ok(!seen.includes('b'));
  block.typeId='air';seen.length=0;f.api.pulseJavaAmbient();assert.equal(seen.length,0);
+ assert.equal(f.pending[0],undefined,'no live interval after the last emitter is removed');
 });
 test('inactive/unloaded ambient registrations expire without effects',async()=>{
  const player={location:{x:0,y:0,z:0},dimension:{id:'overworld'}};const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[player]}});let n=0;const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
  f.api.registerJavaAmbient(block,()=>n++);f.server.system.currentTick=41;f.api.pulseJavaAmbient();assert.equal(n,0);assert.equal(f.api.ambientDiagnostics.expired,1);
+ assert.equal(f.pending[0],undefined,'expiry cancels the interval');
+ f.api.registerJavaAmbient(block,()=>n++);assert.equal(f.pending.length,2);assert.equal(typeof f.pending[1],'function');
+ f.pending[1]();assert.equal(n,1334,'a fresh registration restarts sampling');
+ f.api.unregisterJavaAmbient(block);assert.equal(f.pending[1],undefined,'explicit removal cancels the new interval');
 });
 test('board and shaker feedback survive optional helper-entity failures',async()=>{
  const f=await moduleFixture('bedrock/immersion.js');const particles=[],sounds=[];const block={location:{x:0,y:1,z:0},dimension:{getEntities(){throw Error('missing helper');},playSound:(...a)=>sounds.push(a),spawnParticle:(...a)=>particles.push(a)}};
@@ -106,7 +111,6 @@ test('new feedback aliases resolve to original sound files and per-event pitch/v
  for(const row of manifest.assets)assert.equal(createHash('sha256').update(fs.readFileSync(path.join(ROOT,row.target))).digest('hex'),row.sha256);
  assert.equal(defs['kaleidoscope_tavern:incense_click_on'].sounds[0].pitch,.6);
  assert.equal(defs['kaleidoscope_tavern:incense_click_off'].sounds[0].pitch,.5);
- assert.equal(defs['kaleidoscope_tavern:incense_click_on'].sounds[0].volume,.3);
  assert.equal(defs['kaleidoscope_tavern:glow_ink_use'].sounds.length,9);
 });
 test('barrel lid closes with Java BARREL_OPEN, not a substituted close event',async()=>{

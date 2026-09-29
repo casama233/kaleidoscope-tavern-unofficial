@@ -1,0 +1,35 @@
+name: Pickup main snapshot (temporary)
+on:
+  push:
+    branches: [fix/pickup-parity-20260929]
+    paths: [.github/workflows/pickup-main-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: f793a98a0180e1948f98e69a8ca879a028884e38
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Collect main source and review repair history
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pickup-main/port"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/pickup-main/port"
+          git ls-tree -r HEAD > "$RUNNER_TEMP/pickup-main/main-tree.txt"
+          git log --format='%H %s' -30 a5774a73bf7593882fd19e8e645453d85b8eb3a7 > "$RUNNER_TEMP/pickup-main/pr96-history.txt"
+          git log -p -5 a5774a73bf7593882fd19e8e645453d85b8eb3a7 > "$RUNNER_TEMP/pickup-main/pr96-last-five.patch"
+          find "$RUNNER_TEMP/pickup-main" -type f \( -iname '*.ttf' -o -iname '*.otf' -o -iname '*.woff*' \) -delete
+          tar -cJf "$RUNNER_TEMP/pickup-main.tar.xz" -C "$RUNNER_TEMP" pickup-main
+          sha256sum "$RUNNER_TEMP/pickup-main.tar.xz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pickup-main-source
+          path: ${{ runner.temp }}/pickup-main.tar.xz
+          retention-days: 3
+          if-no-files-found: error

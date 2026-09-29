@@ -1,0 +1,36 @@
+name: Family compatibility candidate checks
+on:
+  push:
+    branches: ['fix/family-compat-batch1-20260929']
+  pull_request:
+    paths: ['compat/**', 'tools/family_candidate.py', 'tools/build_deco_compat.py', 'runtime/**', '.github/workflows/family-candidate.yml']
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify exact host profile and all unchanged runtime content
+        run: |
+          python tools/family_candidate.py --build
+          python tools/build_deco_compat.py
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected={'Kaleidoscope_Tavern_Unofficial_0.6.64_compat1.mcaddon':'d46e95299071763bb34bc79eeb5062430671af1400c37cf2268c9168f95f0387','Kaleidoscope_Tavern_Deco_Ladder_Compat_0.1.0.mcpack':'84b4949d6e4af7c071ed1d07f8816eb13ac73064ae15493ced30ae691f0bab15'}
+          for name,digest in expected.items():assert hashlib.sha256((Path('dist/family')/name).read_bytes()).hexdigest()==digest
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-family-compatibility-candidate
+          path: dist/family/
+          retention-days: 14

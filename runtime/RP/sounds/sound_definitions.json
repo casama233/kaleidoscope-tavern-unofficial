@@ -218,6 +218,75 @@
           "stream": false
         }
       ]
+    },
+    "kaleidoscope_tavern:glow_ink_use": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1",
+          "pitch": 1.05,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2",
+          "pitch": 1.05,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "pitch": 0.95,
+          "stream": false
+        },
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3",
+          "pitch": 1.05,
+          "stream": false
+        }
+      ]
+    },
+    "kaleidoscope_tavern:incense_click_on": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/random/click",
+          "pitch": 0.6,
+          "volume": 0.3,
+          "stream": false
+        }
+      ]
+    },
+    "kaleidoscope_tavern:incense_click_off": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/kaleidoscope_tavern/feedback/random/click",
+          "pitch": 0.5,
+          "volume": 0.3,
+          "stream": false
+        }
+      ]
     }
   }
 }

@@ -1934,7 +1934,7 @@
     "runtime/RP/sounds/sound_definitions.json": {
       "before": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
       "beforeProjected": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
-      "after": "d533f9b520efe69497919a944218c20157a54ed2a993aa9d5bcedde002b71d64",
+      "after": "8d153fa6f9dd42ba257f8b7db4f312ea2fa8ec780d486282175089a9650e9d2a",
       "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. 2026-09-28 effects review: Three source-verified sound aliases and four reviewed audio assets. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/RP/models/entity/sunset_glow_2.geo.json": {
@@ -2030,7 +2030,7 @@
     "runtime/BP/scripts/bedrock/display-projectiles.js": {
       "before": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
       "beforeProjected": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
-      "after": "e71371a35cedf83411a3fd5b2ece2f9f8d6e9fc8a641202b31bac24e66879303",
+      "after": "ac563cf09e6aaae8c78ba4f411447016c06bb007f791f661990e75b4b42ab7f9",
       "reason": "2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/core/extension-content.js": {

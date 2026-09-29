@@ -42,7 +42,6 @@ export function registerFixturePack(root){
 }
 const oldItemComponent=ItemStack.prototype.getComponent;
 ItemStack.prototype.getComponent=function(id){if(id==='minecraft:dyeable'&&itemInfo.get(this.typeId)?.definition?.components?.[id])return this.meta[id]??=( {color:undefined} );return oldItemComponent.call(this,id);};
-Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
 Properties.prototype.getDynamicPropertyIds=function(){return [...this.dp.keys()];};
 const oldEntityComponent=Entity.prototype.getComponent;
 Entity.prototype.getComponent=function(id){

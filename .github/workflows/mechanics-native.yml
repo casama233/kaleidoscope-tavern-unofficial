@@ -1,0 +1,33 @@
+name: Native mechanics and collision regression
+on:
+  pull_request:
+    paths: ['runtime/**', 'tools/mechanics/**', 'tools/java_collision*', 'tools/fixtures/java-collision-engine-probe.js', '.github/workflows/mechanics-native.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download pinned official native fixtures
+        run: |
+          set -euo pipefail
+          mkdir -p native-server native-evidence
+          curl --http1.1 --retry-all-errors -A 'Mozilla/5.0' --fail --location --retry 2 --max-time 120 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.51.1.zip' -o bds.zip
+          curl --fail --location --retry 2 --max-time 120 'https://mediafilez.forgecdn.net/files/8908/596/Kaleidoscope%20Cookery%20v1.0.6.mcaddon' -o cookery.mcaddon
+          sha256sum bds.zip cookery.mcaddon > native-evidence/downloads.sha256
+          unzip -q bds.zip -d native-server
+          chmod +x native-server/bedrock_server
+      - name: Load exact runtime in isolated world and execute no-player fixtures
+        run: python3 tools/mechanics/native_validate.py --server native-server --cookery cookery.mcaddon --evidence native-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Tavern-native-mechanics-0.6.64
+          path: native-evidence/
+          retention-days: 14

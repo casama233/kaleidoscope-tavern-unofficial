@@ -1,0 +1,47 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Tavern + Deco · Ladder Compatibility (TEST)",
+    "description": "Optional 1:1 ladder conversions; put above Tavern and Deco. Requires both. No scripts or art.",
+    "uuid": "9154ae3a-9c67-50c8-9e4b-8eb355c17051",
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "5780ecea-5f91-5fc5-b013-138584eb4434",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+      "version": [
+        0,
+        6,
+        64
+      ]
+    },
+    {
+      "uuid": "d6636182-2ca5-4ec4-9814-40dc1191c026",
+      "version": [
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}

@@ -14,9 +14,11 @@ for side in ['BP','RP']:
     for lc in config['supported_locales']:
         lang=(RT/side/'texts'/f'{lc}.lang').read_text()
         assert 'pack.name=' in lang and 'pack.description=' in lang
-expected={'BP':'10f37ae2-9ccf-435f-b34b-0eec8191cd94','RP':'c89dc8df-c3fc-4bc8-8bd0-527abba76681'}
-for side,uid in expected.items():
-    assert {'uuid':uid,'version':[1,0,6]} in docs[RT/side/'manifest.json']['dependencies']
+host=read(ROOT/'compat/family/cookery-host.json')
+assert host['source']['key']=='cookery-1.0.8' and config['cookery_version']=='1.0.8'
+for side,dependency in host['dependencies'].items():
+    assert dependency in docs[RT/side/'manifest.json']['dependencies']
+    assert all(d.get('uuid') not in host['oldHeaderIds'].values() for d in docs[RT/side/'manifest.json']['dependencies'])
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
 hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud

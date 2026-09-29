@@ -1,0 +1,68 @@
+name: Family batch 1 native acceptance
+on:
+  push:
+    branches: ['fix/family-compat-batch1-20260929']
+    paths: ['.github/workflows/family-batch1-native.yml', 'tools/family_native_check.py']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial' && github.repository_id == '1377171148'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: fbae6fb86af2720cbd7e7820d8273c785452047c
+          path: world-liquor-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-grilling-unofficial
+          ref: 8438976f9d50bf69ac658ce3b68cba638ba53cba
+          path: grilling-src
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Rebuild the exact three reviewed candidates and optional recipe patch
+        run: |
+          python tavern-src/tools/family_candidate.py --build
+          python world-liquor-src/tools/family_candidate.py --build
+          python grilling-src/tools/family_candidate.py --build
+          python tavern-src/tools/build_deco_compat.py
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          expected={
+            'tavern-src/dist/family/Kaleidoscope_Tavern_Unofficial_0.6.64_compat1.mcaddon':'d46e95299071763bb34bc79eeb5062430671af1400c37cf2268c9168f95f0387',
+            'world-liquor-src/dist/family/Kaleidoscope_World_Liquor_Unofficial_0.1.28_compat1.mcaddon':'419c73afa6309df8d8e6307ff240bb05592f6d7f6ec727867aac305c20ad8cac',
+            'grilling-src/dist/family/Kaleidoscope_Grilling_A2.8.8_compat1.mcaddon':'eb34463b6493ae9ef66af8cf3424be0f2b059c006ed69525ecf3ac65946de6f7',
+            'tavern-src/dist/family/Kaleidoscope_Tavern_Deco_Ladder_Compat_0.1.0.mcpack':'84b4949d6e4af7c071ed1d07f8816eb13ac73064ae15493ced30ae691f0bab15'}
+          for name,digest in expected.items():assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==digest,name
+          Path('candidate-source-commits.json').write_text(json.dumps({name:subprocess.check_output(['git','-C',name,'rev-parse','HEAD'],text=True).strip() for name in ['tavern-src','world-liquor-src','grilling-src']},indent=2)+'\n')
+          PY
+      - name: Fresh native worlds, original vendor packs, exact dependency graph and real ItemStack tags
+        run: python tavern-src/tools/family_native_check.py --liquor-root world-liquor-src --grilling-root grilling-src --work "$RUNNER_TEMP/family-batch1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: family-batch1-native-evidence
+          path: |
+            ${{ runner.temp }}/family-batch1/evidence/
+            candidate-source-commits.json
+            tavern-src/dist/family/
+            world-liquor-src/dist/family/
+            grilling-src/dist/family/
+          retention-days: 14

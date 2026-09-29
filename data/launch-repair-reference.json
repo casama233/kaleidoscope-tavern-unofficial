@@ -1862,8 +1862,8 @@
     "runtime/BP/scripts/bedrock/machines.js": {
       "before": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
       "beforeProjected": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
-      "after": "e17c852bebd00927e07c98f44373d929afc78fda04a3707758a8f2a71921f7d0",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "63e254f1c5ccef5dddc4ffcb8fcd4237d27bc8e1c28d1d018ce46a4b98443817",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Match the real 97-tick block callback to the shared Java cadence."
     },
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
@@ -2044,6 +2044,12 @@
       "beforeProjected": "73252e69e884a628256a3d2f7220db4fb67edeee746df20254f85bb9ff8ebd8e",
       "after": "8c4b8b38dfb95999bbaf6a8379b45fce78ef17d2c5d4e86ac0e732360eaf4de4",
       "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/core/machines.js": {
+      "before": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "beforeProjected": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "after": "2c4c1a9ce2c50d3444a6363e679db4b00169db5eb80c31cf873e97caa284fd26",
+      "reason": "Reviewed mechanics repair: ordinary barrel inputs and one shared 97-tick cadence. No creative-menu projection applies to this core JS module."
     }
   },
   "rules": {

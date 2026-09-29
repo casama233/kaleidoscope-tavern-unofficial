@@ -6,43 +6,220 @@
       "before": "205a320b73ef3e603e0bf7ca729a2ecfcb0cde104b3da6e49149272242861fcb",
       "after": "b482a1e65843678cb9029b51eb3d3a828f9673f1fca5388449776fef6af5ebe7",
       "reverseOps": [
-        [0,1,""],
-        [10,11,"import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,safe} from './transactions.js';\n"],
-        [28,30," canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=waterSnapshot(b);\n return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,EMPTY_BLOCK);return out;});\n"],
-        [32,34," canWrite(player);check(b?.typeId===WATER_BLOCK,'NOT_WATER_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:waterBottleStack(),count:1}],makeStack),old=waterSnapshot(b);\n return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,WATER_BLOCK);return out;});\n"],
-        [39,40,"  check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');\n"],
-        [42,43,"  const next=displayAdd(old,h.typeId,facingFor(player));\n"],
-        [46,47,"  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});\n"],
-        [51,52," canWrite(player);const k=bottleKey(b.dimension.id,b.location);\n"],
-        [56,60,"  const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);\n  commitInventory(plan,c,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});\n  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));return tx;\n"]
-      ]
+        [
+          0,
+          1,
+          ""
+        ],
+        [
+          10,
+          11,
+          "import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,safe} from './transactions.js';\n"
+        ],
+        [
+          28,
+          30,
+          " canWrite(player);check(b?.typeId===EMPTY_BLOCK,'NOT_EMPTY_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{id:EMPTY_ITEM,count:1}],makeStack),old=waterSnapshot(b);\n return locks.with([emptyKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,EMPTY_BLOCK);return out;});\n"
+        ],
+        [
+          32,
+          34,
+          " canWrite(player);check(b?.typeId===WATER_BLOCK,'NOT_WATER_BOTTLE_BLOCK');const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:waterBottleStack(),count:1}],makeStack),old=waterSnapshot(b);\n return locks.with([simpleKey(b),player.id],()=>{const out=commitInventory(plan,c,()=>setWithWater(b,BlockPermutation.resolve('minecraft:air')),()=>restoreWater(b,old));playMaterialInteraction(b.dimension,b.location,WATER_BLOCK);return out;});\n"
+        ],
+        [
+          39,
+          40,
+          "  check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');\n"
+        ],
+        [
+          42,
+          43,
+          "  const next=displayAdd(old,h.typeId,facingFor(player));\n"
+        ],
+        [
+          46,
+          47,
+          "  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});\n"
+        ],
+        [
+          51,
+          52,
+          " canWrite(player);const k=bottleKey(b.dimension.id,b.location);\n"
+        ],
+        [
+          56,
+          60,
+          "  const plan=planInventory(c,player.selectedSlotIndex,0,tx.give,makeStack);\n  commitInventory(plan,c,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);},()=>{restoreWater(b,oldBlock);store.restore(k,raw);});\n  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));return tx;\n"
+        ]
+      ],
+      "reason": "Reviewed pickup delta over main 06d941f0, effects delta over base f793a98a, and legacy delta to the immutable golden; all three op lists regenerated and the chain replay-verified end to end.",
+      "effectOps": [],
+      "legacyOps": [
+        [
+          9,
+          10,
+          "import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,placementTake,blockAt,plus,tell,safe} from './transactions.js';\n"
+        ],
+        [
+          24,
+          25,
+          "function waterBottleStack(){return restorePotion({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId:'minecraft:consumable'}});}\n"
+        ],
+        [
+          46,
+          47,
+          "  playMaterialInteraction(d,target,bottleBlock(next.base));tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;\n"
+        ],
+        [
+          57,
+          58,
+          "  playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));tell(player,'§a已取回原品質酒瓶。');return tx;\n"
+        ]
+      ],
+      "hashes": {
+        "current": "b482a1e65843678cb9029b51eb3d3a828f9673f1fca5388449776fef6af5ebe7",
+        "main": "205a320b73ef3e603e0bf7ca729a2ecfcb0cde104b3da6e49149272242861fcb",
+        "base": "205a320b73ef3e603e0bf7ca729a2ecfcb0cde104b3da6e49149272242861fcb",
+        "golden": "9a8ef42f05d3dd5697809d29df393afcaee8905fff063bebf4be2daa3f8da42a"
+      }
     },
     "runtime/BP/scripts/bedrock/mixology.js": {
-      "before": "112a31ee97fb2b8e79a911ce7c8e1a855c0ed8701652adeecef7d1b39a024adb",
-      "after": "bdb3d69302d2a8ae84c10e8eed63a74e518ad2e5bf37c4a158127412a53a7dd0",
+      "before": "5f1acc00c0ca38edce4bc411085f075354c3a1b63c42a0f4b3c5e8013c453632",
+      "after": "b4b3ecb29d8fd2e41339043a04365489a38f17a20c5cc90b43dd3d2fb2d9a7b5",
       "reverseOps": [
-        [16,17,"import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,requireBlockReach} from './transactions.js';\n"],
-        [81,82," commitInventory(plan,container,()=>{\n"],
-        [85,86,""],
-        [167,168," commitBlock(player,cupStore,key,state,1,[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;\n"],
-        [188,189," near(player,block);const key=cupKey(block.dimension.id,block.location);\n"],
-        [191,193,"  commitBlock(player,cupStore,key,undefined,0,[{stack:resultItem(state),count:1}],block,BlockPermutation.resolve('minecraft:air'));\n  syncCupVisual(block);return state;\n"]
-      ]
+        [
+          18,
+          19,
+          "import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,blockAt,plus,requireBlockReach} from './transactions.js';\n"
+        ],
+        [
+          83,
+          84,
+          " commitInventory(plan,container,()=>{\n"
+        ],
+        [
+          87,
+          88,
+          ""
+        ],
+        [
+          169,
+          170,
+          " commitBlock(player,cupStore,key,state,1,[],block,perm(cupBlock(item.typeId),state.facing));syncCupVisual(block);return state;\n"
+        ],
+        [
+          190,
+          191,
+          " near(player,block);const key=cupKey(block.dimension.id,block.location);\n"
+        ],
+        [
+          193,
+          195,
+          "  commitBlock(player,cupStore,key,undefined,0,[{stack:resultItem(state),count:1}],block,BlockPermutation.resolve('minecraft:air'));\n  syncCupVisual(block);return state;\n"
+        ]
+      ],
+      "previousAfter": [],
+      "reason": "Reviewed pickup delta over main 06d941f0, effects delta over base f793a98a, and legacy delta to the immutable golden; all three op lists regenerated and the chain replay-verified end to end.",
+      "effectOps": [
+        [
+          0,
+          2,
+          ""
+        ],
+        [
+          111,
+          112,
+          "  shakerPut(block,next.revision);showShakerSlots(player,next);return next;\n"
+        ],
+        [
+          205,
+          206,
+          "  syncCupVisual(block);feedback(block,'fill',next.revision);cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;\n"
+        ],
+        [
+          292,
+          293,
+          "   if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);\n"
+        ]
+      ],
+      "legacyOps": [
+        [
+          116,
+          117,
+          "  commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1}],block,BlockPermutation.resolve('minecraft:air'));\n"
+        ],
+        [
+          346,
+          349,
+          ""
+        ]
+      ],
+      "hashes": {
+        "current": "b4b3ecb29d8fd2e41339043a04365489a38f17a20c5cc90b43dd3d2fb2d9a7b5",
+        "main": "5f1acc00c0ca38edce4bc411085f075354c3a1b63c42a0f4b3c5e8013c453632",
+        "base": "112a31ee97fb2b8e79a911ce7c8e1a855c0ed8701652adeecef7d1b39a024adb",
+        "golden": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2"
+      }
     },
     "runtime/BP/scripts/bedrock/vanilla-bottle-displays.js": {
       "before": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
       "after": "521111e6dca7d90fca05b74c1473340a3127fe4e32514a06e496bd57f1525984",
       "reverseOps": [
-        [0,1,""],
-        [6,7,"import {potionInput,restorePotion} from './potions.js';\n"],
-        [8,9,"import {makeStack,hand,inventory,handSnapshot,sameHand,placementTake,safe,canWrite,requireBlockReach,blockAt} from './transactions.js';\n"],
-        [19,20,"function itemPayload(item){if(item.typeId==='minecraft:potion')return potionInput(item);return {item:item.typeId};}\n"],
-        [27,29,""],
-        [31,32," commitInventory(plan,c,()=>{setWithWater(target,permutation);world.setDynamicProperty(displayKey,payload.item==='minecraft:potion'&&id===NS+':potion_bottle'?JSON.stringify(payload):undefined);},()=>{restoreWater(target,old);world.setDynamicProperty(displayKey,oldRaw);});\n"],
-        [35,48,"function takeVanillaBottle(player,block){\n canWrite(player);requireBlockReach(player,block.dimension,block.location);\n const id=block.typeId,payload=VALID.has(id)?stored(block):undefined;\n let out;if(id===NS+':potion_bottle')out=payload?restorePayload(payload):makeStack('minecraft:potion',1);\n else if(id===NS+':xp_bottle')out=makeStack('minecraft:experience_bottle',1);\n else return false;\n const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:out,count:1}],makeStack),old=waterSnapshot(block),raw=world.getDynamicProperty(bottleDisplayKey(block));\n commitInventory(plan,c,()=>{setWithWater(block,BlockPermutation.resolve('minecraft:air'));save(block,undefined);},()=>{restoreWater(block,old);world.setDynamicProperty(bottleDisplayKey(block),raw);});\n try{player.dimension.playSound('dig.glass',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});}catch{}\n return true;\n"],
-        [53,54,"  try{canWrite(e.player);requireBlockReach(e.player,e.block.dimension,e.block.location);}catch{return;}\n"],
-        [65,66,"  return restorePayload(payload);\n"]
-      ]
+        [
+          0,
+          1,
+          ""
+        ],
+        [
+          6,
+          7,
+          "import {potionInput,restorePotion} from './potions.js';\n"
+        ],
+        [
+          8,
+          9,
+          "import {makeStack,hand,inventory,handSnapshot,sameHand,placementTake,safe,canWrite,requireBlockReach,blockAt} from './transactions.js';\n"
+        ],
+        [
+          19,
+          20,
+          "function itemPayload(item){if(item.typeId==='minecraft:potion')return potionInput(item);return {item:item.typeId};}\n"
+        ],
+        [
+          27,
+          29,
+          ""
+        ],
+        [
+          31,
+          32,
+          " commitInventory(plan,c,()=>{setWithWater(target,permutation);world.setDynamicProperty(displayKey,payload.item==='minecraft:potion'&&id===NS+':potion_bottle'?JSON.stringify(payload):undefined);},()=>{restoreWater(target,old);world.setDynamicProperty(displayKey,oldRaw);});\n"
+        ],
+        [
+          35,
+          48,
+          "function takeVanillaBottle(player,block){\n canWrite(player);requireBlockReach(player,block.dimension,block.location);\n const id=block.typeId,payload=VALID.has(id)?stored(block):undefined;\n let out;if(id===NS+':potion_bottle')out=payload?restorePayload(payload):makeStack('minecraft:potion',1);\n else if(id===NS+':xp_bottle')out=makeStack('minecraft:experience_bottle',1);\n else return false;\n const c=inventory(player),plan=planInventory(c,player.selectedSlotIndex,0,[{stack:out,count:1}],makeStack),old=waterSnapshot(block),raw=world.getDynamicProperty(bottleDisplayKey(block));\n commitInventory(plan,c,()=>{setWithWater(block,BlockPermutation.resolve('minecraft:air'));save(block,undefined);},()=>{restoreWater(block,old);world.setDynamicProperty(bottleDisplayKey(block),raw);});\n try{player.dimension.playSound('dig.glass',{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});}catch{}\n return true;\n"
+        ],
+        [
+          53,
+          54,
+          "  try{canWrite(e.player);requireBlockReach(e.player,e.block.dimension,e.block.location);}catch{return;}\n"
+        ],
+        [
+          65,
+          66,
+          "  return restorePayload(payload);\n"
+        ]
+      ],
+      "reason": "Reviewed pickup delta over main 06d941f0, effects delta over base f793a98a, and legacy delta to the immutable golden; all three op lists regenerated and the chain replay-verified end to end.",
+      "effectOps": [],
+      "legacyOps": [],
+      "hashes": {
+        "current": "521111e6dca7d90fca05b74c1473340a3127fe4e32514a06e496bd57f1525984",
+        "main": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
+        "base": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
+        "golden": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868"
+      }
     }
   }
 }

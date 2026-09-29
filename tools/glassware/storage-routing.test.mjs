@@ -191,7 +191,7 @@ test('switching the held slot still aborts the queued insertion',()=>{
 // Java uses world X/Z quadrants for all facings. Exercise the real furniture
 // event registration and native stored-item transaction, not a copied selector.
 const HOLDER_EMPTY_GLASSWARE=NS+'empty_glassware';
-const HOLDER_SLOT_STATES=[0,1,2,3].map(i=>NS+':glass_slot_'+i);
+const HOLDER_SLOT_STATES=[0,1,2,3].map(i=>NS+'glass_slot_'+i);
 const holderTarget=q=>({x:q%2?.75:.25,y:11/16,z:q>=2?.75:.25});
 const holderRawDown=p=>({x:1-p.x,y:p.y,z:1-p.z}); // measured native Down event basis
 for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let facing=0;facing<4;facing++)test(

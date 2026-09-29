@@ -1862,8 +1862,8 @@
     "runtime/BP/scripts/bedrock/machines.js": {
       "before": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
       "beforeProjected": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
-      "after": "bb7ae009b24c23d5481cabab76e3c20cd662772c39553cb49e164aa439b5e58a",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+      "after": "1cdac1f039ef8fbc3acb954bf490a0c85ebe3e016aa0a956519e0cf4ccd21078",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Match the real 97-tick block callback to the shared Java cadence."
     },
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
@@ -2152,6 +2152,12 @@
       "beforeProjected": "ada742502c2ac9d8bf6de00deec22a12cf883f0cd66898553dd1ffdf4177d191",
       "after": "c87bd302f0493cec9bf4b13601cd271ee1366b654f1af5c9ae83a8f8b9cb2344",
       "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
+    "runtime/BP/scripts/core/machines.js": {
+      "before": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "beforeProjected": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "after": "2c4c1a9ce2c50d3444a6363e679db4b00169db5eb80c31cf873e97caa284fd26",
+      "reason": "Reviewed mechanics repair: ordinary barrel inputs and one shared 97-tick cadence. No creative-menu projection applies to this core JS module."
     }
   },
   "rules": {

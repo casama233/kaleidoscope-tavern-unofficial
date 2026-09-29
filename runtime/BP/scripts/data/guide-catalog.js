@@ -107,6 +107,24 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   const id='kaleidoscope_tavern:pressing/'+fruit+'_bucket';
   if(payload.entries.some(e=>e.id===id))LOCALES.forEach((lc,i)=>payload.names[lc][id]=labels[i]);
  }
+ // Explain differences that affect the player's choice of drink.
+ for(const [short,rows] of [
+  ['emerald',[
+   '延伸触及持续45分钟：酒馆支持远距摆放的物品可从6格延至9格。不会增加攻击、挖掘或原版方块交互距离。',
+   '延伸觸及持續45分鐘：酒館支援遠距擺放的物品可從6格延至9格。不會增加攻擊、挖掘或原版方塊互動距離。',
+   'Long Reach lasts 45 minutes. Tavern items that support distant placement can reach 9 blocks instead of 6. Attack, mining and vanilla block interaction ranges stay unchanged.']],
+  ['sculk_special',[
+   '饮用后沿视线发出32格音波。玩家伤害与击退遵守世界的PvP开关；创造和旁观玩家免疫。',
+   '飲用後沿視線發出32格音波。玩家傷害與擊退遵守世界的PvP開關；創造和旁觀玩家免疫。',
+   'Drinking fires a sonic attack along your view for 32 blocks. Player damage and knockback follow the world PvP setting; creative and spectator players are immune.']],
+  ['mystery_cocktail',[
+   '微醺的镜头晃动默认关闭。可选的左右摆动会影响瞄准，并非Java版的画面侧倾。',
+   '微醺的鏡頭晃動預設關閉。可選的左右擺動會影響瞄準，並非Java版的畫面側傾。',
+   'Tipsy motion is off by default. Optional side-to-side motion affects aim and differs from Java screen roll.']]
+ ]){
+  const target=payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+short);
+  if(target)append(target,{mechanicsByLocale:Object.fromEntries(LOCALES.map((lc,i)=>[lc,[rows[i]]]))});
+ }
  const result=organizeGuideNavigation(payload);
  for(const entry of result.entries){
   // Workbench recipes already belong to the native crafting book. Guide entries

@@ -107,3 +107,5 @@ subprocess.run(['node',str(ROOT/'tools/check_board_layout.mjs')],cwd=ROOT,check=
 subprocess.run([sys.executable,str(ROOT/'tools/check_drink_surfaces.py')],cwd=ROOT,check=True)
 
 subprocess.run([sys.executable,str(ROOT/'tools/check_glassware_slots.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/java_collision.py')],cwd=ROOT,check=True)
+subprocess.run(['node',str(ROOT/'tools/check_effect_parity.mjs')],cwd=ROOT,check=True)

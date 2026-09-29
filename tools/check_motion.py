@@ -37,6 +37,6 @@ check_shaker_first_person(ROOT)
 assert anim['animation.kt_mixology.hold_third']['bones']['grip']=={'position':[0,-1.5,-1],'rotation':[90,0,0],'scale':.5}
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read('release.json')['version']
-report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-1.5,'firstPersonAttachableUnchanged':True,'thirdPersonShakeIsolated':True,'preservedGroups':ref['preservedGroups'],'creativeMenuProjectionFiles':len(projection.menus),'tipsyMode':'yaw_adapter_unverified','exactJavaRoll':False,'aimChangesSlightly':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
+report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-1.5,'firstPersonAttachableUnchanged':True,'thirdPersonShakeIsolated':True,'preservedGroups':ref['preservedGroups'],'creativeMenuProjectionFiles':len(projection.menus),'tipsyMode':'yaw_adapter_unverified','exactJavaRoll':False,'aimChangesByDefault':False,'aimChangesWhenOptedIn':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
 (ROOT/f'docs/MOTION-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False))

@@ -91,3 +91,4 @@ for(const maxWidth of [55,63,232])for(const lineWidth of [0,6,24,maxWidth]){
  }
 }
 assert.equal(normalizeBoardData({text:'old save',color:'white',glowing:false,waxed:false}).alignment,'center');
+for(const [id,words] of [['emerald','Attack, mining'],['sculk_special','world PvP'],['mystery_cocktail','off by default']])assert(payload.entries.find(e=>e.id==='kaleidoscope_tavern:'+id).mechanicsByLocale.en_US.some(s=>s.includes(words)));

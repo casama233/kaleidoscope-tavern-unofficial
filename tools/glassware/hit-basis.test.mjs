@@ -54,9 +54,23 @@ test('faces without a measured basis keep the raw engine value',()=>{
  assert.equal(worldFromHit('Up',point,'event'),undefined);
  assert.equal(worldFromHit('North',point,'ray'),undefined);
  assert.equal(worldFromHit('South',point,'event'),undefined);
- assert.equal(worldFromHit('East',point,'ray'),undefined);
- assert.equal(worldFromHit('West',point,'event'),undefined);
  assert.equal(worldFromHit('Down',undefined,'event'),undefined);
+});
+
+test('east/west face raycasts are measured z-mirrored and convert back',()=>{
+ assert.deepEqual(HIT_FACE_BASIS.East.ray,[1,-1]);
+ assert.deepEqual(HIT_FACE_BASIS.West.ray,[1,-1]);
+ for(const face of ['East','West']){
+  const truePoint={x:face==='East'?1:0,y:.5,z:.83};   // the shelf the player aims at
+  const ray=worldFromHit(face,truePoint,'ray');
+  assert.ok(Math.abs(ray.z-(1-truePoint.z))<1e-9,'the raw raycast hit lands z-mirrored');
+  const recovered=worldFromHit(face,ray,'ray');
+  assert.ok(recovered);
+  assert.ok(Math.abs(recovered.z-truePoint.z)<1e-9&&Math.abs(recovered.x-truePoint.x)<1e-9);
+ }
+ // north/south faces are world-true, so they carry no entry
+ assert.equal(worldFromHit('North',{x:.3,y:.5,z:.02},'ray'),undefined);
+ assert.equal(worldFromHit('South',{x:.3,y:.5,z:.98},'ray'),undefined);
 });
 
 test('non-finite hits are rejected rather than silently mis-slotted',()=>{

@@ -1,4 +1,5 @@
 /** Instant sonic effect. Player damage is deliberately disabled; native damage checks remain authoritative. */
+import {emitSingle} from './effect-feedback.js';
 import {system,EntityDamageCause,GameMode} from '@minecraft/server';
 import {SHRIEK,unit,shriekDamage,shriekHit,shriekImpulse,shriekParticles} from '../core/combat-effects.js';
 const lastCast=new Map();
@@ -15,7 +16,7 @@ export function performShriek(player){
  const candidates=dimension.getEntities({location:origin,maxDistance:58}).map(e=>({e,distance:Math.hypot(e.location.x-origin.x,e.location.y-origin.y,e.location.z-origin.z)})).sort((a,b)=>a.distance-b.distance||a.e.id.localeCompare(b.e.id));
  lastCast.set(player.id,system.currentTick);if(lastCast.size>512)lastCast.delete(lastCast.keys().next().value);combatDiagnostics.casts++;
  cosmetic(()=>dimension.playSound('mob.warden.sonic_boom',player.location,{volume:1,pitch:1}));
- for(const pos of shriekParticles(origin,direction))cosmetic(()=>dimension.spawnParticle('minecraft:sonic_explosion',pos));
+ for(const pos of shriekParticles(origin,direction))emitSingle(dimension,'sonic',pos);
  const eligible=[];
  for(const {e}of candidates)try{
   // Own helpers and all players are excluded. This is explicit PvE-only adaptation, NOT PvP parity.

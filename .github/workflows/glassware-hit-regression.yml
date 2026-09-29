@@ -1,0 +1,29 @@
+name: Glassware hit regression
+on:
+  pull_request:
+    paths:
+      - 'runtime/**'
+      - 'tools/glassware/**'
+      - '.github/workflows/glassware-hit-regression.yml'
+permissions:
+  contents: read
+jobs:
+  glassware-hit-basis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Hit-basis recovery and slot order (not BDS/client acceptance)
+        run: |
+          set -o pipefail
+          node --test tools/glassware/hit-basis.test.mjs 2>&1 | tee glassware-hit-regressions.tap
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: glassware-hit-script-regressions
+          path: glassware-hit-regressions.tap
+          retention-days: 14

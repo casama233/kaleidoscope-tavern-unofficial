@@ -1,3 +1,4 @@
+import {drinkImpactFeedback} from './interaction-particles.js';
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {EntityDamageCause,world} from '@minecraft/server';
 import {splashFactor,splashTicks,instantHealthDelta} from '../core/projectile-parity.js';
@@ -24,7 +25,7 @@ function rowsPayload(itemId,rng){
  const rows=rollDrinkEffects(itemId,()=>validRng(rng));
  const raw=JSON.stringify(rows);check(raw.length<=MAX_EFFECT_PAYLOAD,'THROWN_EFFECT_PAYLOAD_TOO_LARGE');return raw;
 }
-export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.random}={}){
+export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.random,owner}={}){
  const bottle=storageBottleItem(itemId);check(bottle&&bottle.base!=='empty_bottle','NOT_THROWABLE_DRINK');
  check(dimension&&position&&velocity&&['x','y','z'].every(k=>Number.isFinite(position[k])&&Number.isFinite(velocity[k])),'INVALID_PROJECTILE_VECTOR');
  let entity;
@@ -40,6 +41,7 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
   entity.setDynamicProperty(THROWN_EFFECTS,rowsPayload(itemId,rng));
   entity.setDynamicProperty(THROWN_RESOLVED,false);
   const projectile=entity.getComponent?.('minecraft:projectile');check(projectile?.shoot,'PROJECTILE_COMPONENT_MISSING');
+  if(owner)projectile.owner=owner;
   projectile.shoot(velocity,{uncertainty:0});
   storageProjectileDiagnostics.spawned++;
   return entity;
@@ -76,7 +78,11 @@ export function resolveThrownDrinkImpact(event){
   check(typeof itemId==='string'&&storageBottleItem(itemId),'THROWN_ITEM_CORRUPT');check(typeof raw==='string','THROWN_EFFECTS_MISSING');
   const rows=JSON.parse(raw);check(Array.isArray(rows),'THROWN_EFFECTS_CORRUPT');
   // Java expands the projectile AABB (not a zero-size point) by (4,2,4).
-  const at={...projectile.location},direct=impactEntity(event),box=projectile.getAABB();
+  const at={...projectile.location};
+  // Always show a collision, including an empty rolled-effect list. The latch above
+  // prevents block/entity hit callbacks from duplicating the 8+100 particle event.
+  drinkImpactFeedback(projectile.dimension,at);
+  const direct=impactEntity(event),box=projectile.getAABB();
   const min={x:box.center.x-box.extent.x-4,y:box.center.y-box.extent.y-2,z:box.center.z-box.extent.z-4},volume={x:2*box.extent.x+8,y:2*box.extent.y+4,z:2*box.extent.z+8};
   const candidates=projectile.dimension.getEntities({location:min,volume});let affected=0;
   for(const entity of candidates)try{

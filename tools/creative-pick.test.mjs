@@ -67,7 +67,16 @@ test('native potion metadata is restored exactly',()=>{
  world.setDynamicProperty(bottleDisplayKey(b),JSON.stringify({item:'minecraft:potion',potion}));const before=[...world.dp];assert.deepEqual(potionIdentity(resolveCreativePick(b)),potion);assert.deepEqual([...world.dp],before);
 });
 test('missing potion data is not replaced by an arbitrary potion',()=>assert.throws(()=>resolveCreativePick(block(NS+':potion_bottle'))));
-test('water bottle is real water',()=>assert.equal(potionIdentity(resolveCreativePick(block(NS+':bottle_water'))).effectId,'minecraft:water'));
+test('water bottle is real water with a native Consume delivery',()=>{
+ const item=resolveCreativePick(block(NS+':bottle_water'));
+ assert.equal(item.typeId,'minecraft:potion');
+ assert.deepEqual(potionIdentity(item),{effectId:'minecraft:water',deliveryId:'Consume'});
+});
+for(const deliveryId of ['minecraft:consumable','minecraft:splash','minecraft:lingering'])test('obsolete guessed potion delivery is rejected: '+deliveryId,()=>{
+ const b=block(NS+':potion_bottle');
+ world.setDynamicProperty(bottleDisplayKey(b),JSON.stringify({item:'minecraft:potion',potion:{effectId:'minecraft:water',deliveryId}}));
+ const before=[...world.dp];assert.throws(()=>resolveCreativePick(b),/POTION_DELIVERY_UNSUPPORTED/);assert.deepEqual([...world.dp],before);
+});
 for(const [a,b] of Object.entries({bottle_empty:NS+':empty_bottle',honey_bottle:'minecraft:honey_bottle',dragon_breath_bottle:'minecraft:dragon_breath',xp_bottle:'minecraft:experience_bottle',barrel_core:NS+':barrel',barrel_part:NS+':barrel',shaker_station:NS+':shaker',wild_grapevine_plant:NS+':wild_grapevine',grape_crop:NS+':grape',ice_grape_crop:NS+':ice_grape',gold_grape_crop:NS+':gold_grape',grapevine_trellis:NS+':trellis'}))test('canonical output '+a,()=>{
  const item=resolveCreativePick(block(NS+':'+a));assert.equal(item.typeId,b);assert.deepEqual(item.getDynamicPropertyIds(),[]);
 });

@@ -15,6 +15,14 @@ export async function load(url,context,next){
  source=source.replaceAll('minecraft:consumable','Consume').replaceAll("minecraft:splash'","ThrownSplash'").replaceAll("minecraft:lingering'","ThrownLingering'");
  source+=`
 // Explicit test-only fixture additions for World Liquor and current stable API.
+// Keep the archived fake-server immutable. Its old delivery IDs and missing
+// Entity.isValid/getRotation do not describe the current production API.
+potionDeliveries.clear();
+for(const [id,item]of [['Consume','minecraft:potion'],['ThrownSplash','minecraft:splash_potion'],['ThrownLingering','minecraft:lingering_potion']])potionDeliveries.set(id,item);
+Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
+Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}});
+// spawnEntity and setRotation already store this.rotation in the archived double.
+Entity.prototype.getRotation=function(){return {...(this.rotation??{x:0,y:0})};};
 export const EffectTypes={getAll:()=>[]};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
 world.getAbsoluteTime=()=>system.currentTick;
@@ -36,7 +44,6 @@ export function registerFixturePack(root){
 }
 const oldItemComponent=ItemStack.prototype.getComponent;
 ItemStack.prototype.getComponent=function(id){if(id==='minecraft:dyeable'&&itemInfo.get(this.typeId)?.definition?.components?.[id])return this.meta[id]??=( {color:undefined} );return oldItemComponent.call(this,id);};
-Object.defineProperty(Entity.prototype,'isValid',{get(){return !this.removed;}});
 Properties.prototype.getDynamicPropertyIds=function(){return [...this.dp.keys()];};
 const oldEntityComponent=Entity.prototype.getComponent;
 Entity.prototype.getComponent=function(id){

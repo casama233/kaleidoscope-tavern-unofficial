@@ -338,26 +338,26 @@
     "runtime/BP/manifest.json": {
       "before": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
       "beforeProjected": "a4a218098facd9202af67d19ceb7431d028224a49f907f1b035d8c2344b84d63",
-      "after": "3548abfee2c4182d8366052f7c9a257d5831f45a3d137a18c8a886619b9c08d4",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+      "after": "8fa04b513e173e414f16f2e82067d10a1672742b0153a046ae40bbe8e8d3034f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. 0.6.64: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.65: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.66: release version bump (manifests, startup diagnostics and guide payload version strings)."
     },
     "runtime/BP/scripts/bedrock/custom-effects.js": {
       "before": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
       "beforeProjected": "90859a95a8f3f166c96a6256be0cf38e54abfa80acb4aaa7f73dfbbdfc76b9c8",
-      "after": "d6c0702f121f06a849ca525a78b57e6d527bf60ee3b0eb1cddffe7a0d160bf9c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "68facc19e370fca2f1052b3d4b2beedbcdd0261ce3279ba9aa5c4c8cbc976d38",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/bedrock/decorations.js": {
       "before": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
       "beforeProjected": "3bc7be4749f9f6d293dd75f5466aeb7d69e34cbe08b7e0307aaabdfcb46e8434",
-      "after": "ee65da8e1461c1207f84f49f173932c466cca00113bcc0fb43689f88091171b8",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "b0d359222f75d2a1f3e7eb2371143ac4cc607e827a5b07658a74e4cb330fb67f",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/bedrock/furniture.js": {
       "before": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
       "beforeProjected": "08bce8cb9547883c61df2c39e30ae7bf10e819924aeacc821ace2fd84676fe6e",
-      "after": "73caf15315cd88e0ee0b52dd50bb3b9bc988545982aa69b064bab5d33ee8676b",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "38371c590f508338a97b4a740be8e1ea1955a84e2530fe55a3890c97a12d0372",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; retain Java bar-counter placement semantics. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.63b: resolve the hanging glassware hit through the measured per-face basis and address glass slots through the measured facing display map (glasswareHolderStateSlot); keep the audited feedback sounds and particles. 0.6.64: pick storage and glassware slots from the player's own aim ray against the reviewed selection box, so no engine face basis (and no unmeasured face) can mirror the pick."
     },
     "runtime/BP/scripts/bedrock/holder.js": {
       "before": "cc9147f755b6bb82c8ac916fe8f493711be276f3122068c697447a1f14bb3f22",
@@ -368,20 +368,20 @@
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
       "beforeProjected": "5956595116ce5dfa3c781117f76ad82704078819698158f0fa6921b02c20ad00",
-      "after": "e7445073a9885ad6748e6c77a2ae1fc0b6524a469106d58029d04033746ce671",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "0d370c09edcb921af513045bdca1ff20af4dcd0f52e3ad18863b5b4855d433d7",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 0.6.63: export the shared gaze-hit helper for the hanging rack; storage block behaviour unchanged. 0.6.63b: convert the shared gaze hit through the measured face basis (east/west faces arrive z-mirrored) so cabinet and rack slot selection matches the aimed shelf on every facing. 0.6.64: pick storage and glassware slots from the player's own aim ray against the reviewed selection box, so no engine face basis (and no unmeasured face) can mirror the pick. 0.6.64: use the aim point for every input mode (touch taps previously kept the engine event hit, which is the mirrored one); log mode/engine/ray/aimed/used for the first twelve picks per session. 2026-09-29 storage root-cause fix: valid touch aim survives absent native hit and diagnostic errors; schema-2 resolved point reflects actual consumer input. No slot/save/render remapping."
     },
     "runtime/BP/scripts/bedrock/storage-projectile.js": {
       "before": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
       "beforeProjected": "80a8572a1f9977b2a2e4f6c799d2037ab059d2be39998a848eef2edf846f1a08",
-      "after": "8987456c449ada602a86aaf4be200a0fde8db362144fc96d91d308f2f7946773",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata."
+      "after": "3e6c53c33dd07f5d83700fa77d86cd7ee571da132f8411bb8d47ce026aa0c34f",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/bedrock/tap-sources.js": {
       "before": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
       "beforeProjected": "ee5c098f025b65dc82c46e0e9d615962ad9d645756b6b7429ccf0cd3e36432cd",
-      "after": "f6d5c59337f50d03d5e44a2d7b7d67261fb10d9bbf8fbfdd15a4218a6c16bb0a",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "099ac0ac4169260801377ee8997a9ac18fcbb90343d10287bef66a1746f0fe06",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/tilted-rack.js": {
       "before": "11241d384c119ebe3d4263ee6350189c1e32d86a46c7d12f5168735b882c3303",
@@ -411,115 +411,115 @@
       "before": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
       "beforeProjected": "9a440585b8b9c72699c42a017cbb139f8533123c069e32e1ad06213a86e06079",
       "after": "d91b8d4d9768655cbceb2eb2869cd86aaf6b410b82019f052fce095802619b82",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata. 0.6.63: glasswareHolderSlot delegates to the shared world-quadrant read in core/hit-basis.js."
     },
     "runtime/BP/scripts/main.js": {
       "before": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
       "beforeProjected": "ecd89afdf06ebb532a270b69a74521061154b880805fcc703bec86b19e1b741e",
-      "after": "06a03ccf0f3065c67c5395baa5e2dc0dd84dc34af9c12491e0e4400ce4b1af2e",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "86e47256d647dd2c4a3ce919f4e14c4ed3a4bbc333cdd4d0020af7e37b7b1927",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md. 0.6.64: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.65: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.66: release version bump (manifests, startup diagnostics and guide payload version strings)."
     },
     "runtime/RP/manifest.json": {
       "before": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
       "beforeProjected": "da277b14643b196a0c35cc43ca56e4719b28a3e213a031155e365b3c3686b30c",
-      "after": "f69951c2a3b7c4d680c0d463561c15560061b003d3d6e843e3658b88efb4d64c",
-      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
+      "after": "bf51efca382b0df7a81c63124d7f74e6a886980684ea4fe33093cd058ff6b6c2",
+      "reason": "Reviewed reconciliation of PRs #25/#50/#69/#88 and paired version bump; preserves native pick, storage and creative metadata.; 0.6.46: preserve existing behavior while repairing incense, source-owned guide transport or paired manifest version. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. 0.6.64: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.65: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.66: release version bump (manifests, startup diagnostics and guide payload version strings)."
     },
     "runtime/RP/particles/butterfly_incense_ambient.json": {
       "before": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
       "beforeProjected": "5b1600b67e9039ff18ec82e45488a132805ac742c0f3999d49af66f283d3792e",
-      "after": "d9dd4c2429e894390f4f892d875020dddff314cac392b8164c140cd7eade7a82",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "a4a588a1193421c6c820bec1ad1a2df6852e60335b2ba84f6eb3d0b3bd0fdace",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/butterfly_incense_plume.json": {
       "before": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
       "beforeProjected": "c49c954b1063193fb94e6e5ff56b42deb49df18fd9f3997fce017aa2a703a0f8",
-      "after": "685ddad01037ec77bd0ca758dfa0c4d6a2e10e9b24e899cd88b435b8cee0e50b",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "701aea89bd9350fd31e7ce0725f41365ec7b8fda87984570d1ec983e72225924",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/catnip_incense_ambient.json": {
       "before": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
       "beforeProjected": "42e01b6c88b52c1789f945362501b2f29290f85a2c9b0b4ce443a6422e847e1b",
-      "after": "62d58a0e4faff998d9074e362140734cdbe5da206f419a26f3d58683fcfb9c66",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "2b8f85f3044bddc00210b63a6f9c415f95800bba73523c5c3b2a8f572bb76f2d",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/catnip_incense_plume.json": {
       "before": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
       "beforeProjected": "aa5f0fd835c9d916788b1554db7c6136b81d8ad847e075855e218aa7993064f7",
-      "after": "7946d73b36c20618c748b5c4d1deebf9dd9765c85cee5c8bb32cbdf278dffc3a",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "f91ffbabc482492bf6e280ea6b028972b0ebfc1303385014222a989c09a76740",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/firefly_incense_ambient.json": {
       "before": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
       "beforeProjected": "08384dae3293833092bd79a33254acf871b8effeb7565c44b6f1f8d5afeb66b2",
-      "after": "362f1ed6af40f4cc508e1d869c37a2753d966429b993d8ffd4cc761dc89e8e25",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "0aa2cf62c2a54b0241ff675a0f366837511a460c110e1b62c966b48560c0b5b9",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/firefly_incense_plume.json": {
       "before": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
       "beforeProjected": "4d28f330f0b4841aa92d91a4a77613a2973f4e7ff6d6c8a92059c2cba4980265",
-      "after": "aa771bacea86e988dd3b79da7de888e852d94d86db418b1fedae6c9c0673628d",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "e070ed929ad247a651a840f2ae6cd4938a7771fef084fb6d994cf995bab9283e",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/ginkgo_incense_ambient.json": {
       "before": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
       "beforeProjected": "2c504c0f393e9c03ad4f1a82677f05aa05fc9cd938cec086275fe6bb8fefaa12",
-      "after": "4f4d3055759967a4d18f1d66a311df93e04df99060f185cbedbf732bebceaed1",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "cc47e6f06e6f39a2c743b0c6553ee1b1efd231b8598350c1a36f89a595aecd56",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/ginkgo_incense_plume.json": {
       "before": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
       "beforeProjected": "e19a4d2bc29a452ed31d73a8e4127b0c07e187a6a5535f6995708819139895b9",
-      "after": "42cc5d793f8b8bc0793eb8f83c6f276541e753489d468bc2ca7227aea8b1f9d3",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "07c1e3b6928d86d468f2308ca2d31ee1f5133fa59e5206107405d15124b560ee",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/pine_incense_ambient.json": {
       "before": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
       "beforeProjected": "7e7bb036192d73fd0e43d2ab720084ea084ffbb7c36d97eb114a9c480c292077",
-      "after": "d550d2036cf0ab162cf052ba327e5ed8c2ff87c260ab7bc8bb73ccb191beeec8",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "104b336e989d4e9f54bc68a046615549631c28f704d62e41cf08073cda772167",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/pine_incense_plume.json": {
       "before": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
       "beforeProjected": "d26b8253970de43a41a152d89f71670cf26be275fcda72a393a148434cb76b0b",
-      "after": "ae85ae3f4edf1a2f9411ab68554c641ab5aa37573edd5638a41c7151628f601e",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "e7549277d21b9f1f28ebc7d8e5ecaa632c25baa7be067745d3b878742d5c72ab",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/sakura_incense_ambient.json": {
       "before": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
       "beforeProjected": "73d430a56fe96fa152fa9a8b203db8747e998c52cf5e9d9a83544ae869c6c3f2",
-      "after": "663f55ec8219a2a14a850864d940bbad4c203fb0de9b6fcce1d46453c4954f01",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "d4bc07c6fea0311407edbcbc2d32a271e564fd2ae76e9532a359a653e8a2056e",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/sakura_incense_plume.json": {
       "before": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
       "beforeProjected": "60ff8037c72b82cc2ab9476276dfa74a3f31be49901d0b892aa1427d6c30bdf9",
-      "after": "8984614a88512be697b0b91cb1fe1e89a8456795ea2752ee3f4fdd4bd170fc1a",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "7088e4fea8bc488e231941d8c27a9865078911e3be32f8ae99a9da1e3cb5e24a",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/snow_incense_ambient.json": {
       "before": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
       "beforeProjected": "3d3fd8a807612f2552a3aa5f4135b41089541e4e2fa0ab54956903234d0bbe62",
-      "after": "417602e2cd7ef4a90f26ff032b2b6b5ad027b55fdf5323685d62de1a1379d22c",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "516dc72737068f7b99e876f6e11750040d68c3d47925b219fe608650fd8004fd",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/snow_incense_plume.json": {
       "before": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
       "beforeProjected": "9646ccc6a78eada9f29c4408fb6a007cae5abe565f6929406940c592bd021012",
-      "after": "4e22b5037618a2a09b671ff27b13743bd4d6297d5e922a06f561840776124a95",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "b0bf827849b034dcda6e9c8af6a8ef2b1ee10439d651872de34f09f9e694e228",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/spore_incense_ambient.json": {
       "before": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
       "beforeProjected": "c22475d29020575e0723a24a4f26ee7cf8e07a182fe94a9887f44cce15491aa7",
-      "after": "b13f5dfd9331d2b07b59cf8f77b6ed41956b798e8652fd6db9027fe40880cc89",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "37f259319fb7fbc7871b5dfcb29677ad3c68ee17a6a87b2172cc277643700b75",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/RP/particles/spore_incense_plume.json": {
       "before": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
       "beforeProjected": "ba34b7b9125ff473b7ab2884c8be2774de94d88cb8571ec2d1e2148f7d74efdb",
-      "after": "23c6cac568e0c2709141fba26797b2cc69e6e46810fdcdbe03c58c0b9bc44767",
-      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md."
+      "after": "35301a5ca8a11fdd64426e15863cfa70fcfcec86a6b5979e7ffad462c24f4576",
+      "reason": "0.6.47 reviewed repair: Java viewer sampling and particle classes; bound full-UV animated item cards; missing barrel/status HUD label. See docs/REPAIR-0.6.47.md. 2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
     },
     "runtime/BP/scripts/core/cookery-guide-publisher.js": {
       "before": "5a2787aba4c3de29014c367af14e2e04771dac82dbfee8f5656f094ba227bc41",
@@ -536,8 +536,8 @@
     "runtime/BP/scripts/data/cookery-guide-payload.js": {
       "before": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
       "beforeProjected": "a13261efa6e2e85e6566686a1d8e95525be190fc2ce52f32623d7c62d1820bca",
-      "after": "a0740cd40b3c3201f42e6963fcf706e2857a7bf69e827b2e48f67d20cced52d4",
-      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. 0.6.63 guide correction: remove nonexistent grapevine crafting claim; reflect actual trellis recipe, wild generation and pruning."
+      "after": "f62d8318355e45401cda6d3ace3f9f7f97ebe097b590ec642532d326bc9bac37",
+      "reason": "0.6.46 reviewed guide transport/shared usage, deployed icon preservation, and finite incense visibility repair. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.49: remove fixed custom animated-item hand rigs; use native item sprites/use animation and native barrel actionbar without duplicate expiring label. 0.6.50: repair coincident drink faces, sofa corner collision, chalkboard strip ordering, native storage gaze selection and Java tag-based guide ingredients. 0.6.51: consume transaction-owned script removal callbacks and prohibit display-block fallback drops. 0.6.52: use the actual InputInfo.lastInputModeUsed property so shared native storage ray selection executes; preserve off-crosshair touch input. 0.6.53: remove the unbound plain sandwich-board hand override; use native item icon rendering; record real bar placement direction for unresolved client report. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references.; 0.6.57 integrates protocol-scoped HUD filtering and updates release metadata.; 0.6.58 consolidates tested shaker fixes and guide singleton navigation instructions.; 0.6.59 surface repair and version metadata. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance. 0.6.63 guide correction: remove nonexistent grapevine crafting claim; reflect actual trellis recipe, wild generation and pruning. 0.6.64: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.65: release version bump (manifests, startup diagnostics and guide payload version strings). 0.6.66: release version bump (manifests, startup diagnostics and guide payload version strings)."
     },
     "runtime/BP/blocks/pine_incense.json": {
       "before": "0001e93157150d410824e8c95445f52946b9991ee96f33a0a4399cc67b3c85cd",
@@ -752,8 +752,8 @@
     "runtime/BP/blocks/glassware_holder.json": {
       "before": "6f8b7ef985141ebfeed7cbb989db60253fd54c39ec24a2598b783a8cc1a48dce",
       "beforeProjected": "936adfae89103dc8c1646beb540f3938075260de16a039402a7c1c939b8d5c66",
-      "after": "ebe9f97fac2d4221ab8af929fe207451ae7e0ea7e9264610004da5f9485ddb52",
-      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions."
+      "after": "b5de08b4dcac9a3aff05d3fa588aa1320a1fd7a64a23d5f1edf9b7f27fb9090c",
+      "reason": "0.6.46: shared Cookery-style creative taxonomy and product guide cleanup; menu metadata/text only, gameplay IDs and mechanics preserved. 0.6.48: reviewed native product preparations, destruction cleanup, Java resistance/selection and native potion delivery IDs as applicable. 0.6.61: match cup visibility to Java world-space hit quadrants at all four holder rotations; localize native seat exit hints; align diagnostic and guide versions. 0.6.66 follow-up: retire the east/west state-slot compensation; facing-1/3 bone visibility now makes glass_slot_N render in Java world quadrant N."
     },
     "runtime/BP/blocks/grass_sandwich_board.json": {
       "before": "fb1f30983fece2905be3f481acd556836a29e2f0fc2b239a82736ae5f26c3dd9",
@@ -1670,8 +1670,8 @@
     "runtime/BP/scripts/bedrock/mixology.js": {
       "before": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
       "beforeProjected": "a9fb6cb3944dd69fc55d7804f0331a4957fe3252007a832d457ada1c333e1cc2",
-      "after": "bdb3d69302d2a8ae84c10e8eed63a74e518ad2e5bf37c4a158127412a53a7dd0",
-      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "b4b3ecb29d8fd2e41339043a04365489a38f17a20c5cc90b43dd3d2fb2d9a7b5",
+      "reason": "0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.48: Java explosion resistance and native destruction cleanup; native Cookery product preparations and circular-rack base hitbox. 0.6.62: selected-hand shaker pickup; barrel full-block geometry candidate pending client mining acceptance. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/core/potions.js": {
       "before": "e60aafa5b1cc4412f85272e0ee88ccc55955d663a9ae69706a381af5d0259800",
@@ -1856,20 +1856,20 @@
     "runtime/BP/scripts/bedrock/pressing-feedback.js": {
       "before": "e7747b1deb6936d1720ee319838f1fc78f0758cb2b9b8c916c85a5e15125a30c",
       "beforeProjected": "e7747b1deb6936d1720ee319838f1fc78f0758cb2b9b8c916c85a5e15125a30c",
-      "after": "b7d408816e00701ca23baff1d26fc891ac5138227a7cce4ad05e52f6aa079bb1",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state."
+      "after": "acff3cf0ebf1535bc91fdaac4a012b70bfefd48dfe1022515c8da63b26c08881",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/bedrock/machines.js": {
       "before": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
       "beforeProjected": "118c5337678cec4ad77b6626876794a1cc63ce361af1d2545478333a48bb9865",
-      "after": "63e254f1c5ccef5dddc4ffcb8fcd4237d27bc8e1c28d1d018ce46a4b98443817",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Match the real 97-tick block callback to the shared Java cadence."
+      "after": "1cdac1f039ef8fbc3acb954bf490a0c85ebe3e016aa0a956519e0cf4ccd21078",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state. 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Match the real 97-tick block callback to the shared Java cadence."
     },
     "runtime/BP/scripts/bedrock/immersion.js": {
       "before": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
       "beforeProjected": "4ae0226302907d36b661e84bd1a708c8b25fc755d81f6ff25a0b3bd593ada37c",
-      "after": "96a3b507075c9ffb2bb07b77da4c9faf55c074425df3f64e6925d948cdb902c6",
-      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state.; follow-up real-client shaker clip: use native player perspective variable; local non-positional and observer positional sounds."
+      "after": "1e4f18ab2ff491f46e70748adc7559d0708a78d75e8a400840a7b4ed5634106d",
+      "reason": "0.6.54: correct barrel/tap/aging instructions; derive legacy pages from the canonical Cookery chapter; expose feedback failures and truthful guide delivery state.; follow-up real-client shaker clip: use native player perspective variable; local non-positional and observer positional sounds. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/core/boards.js": {
       "before": "7e21c1d99ddf944c11cfe443cf74fe45451ae1d68888eb34e992fd3a82e9fb7d",
@@ -1886,8 +1886,8 @@
     "runtime/BP/scripts/bedrock/writing-boards.js": {
       "before": "28b13afc89f99694304865c6baad58b282ba7c0599cd9c70175c8efd489480c6",
       "beforeProjected": "28b13afc89f99694304865c6baad58b282ba7c0599cd9c70175c8efd489480c6",
-      "after": "fd4766a51a47b7c814e8133cc172973f7a62299833812f79c155f9be7d1e12e6",
-      "reason": "0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing."
+      "after": "d6f3e2f84b0ac85c863b3677d732f528f4727ce159319183d54ebcd3269c6a14",
+      "reason": "0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation. 0.6.60: user-requested Word-style board alignment and capacity checks; metadata-safe drink stack merging and empty-hand pickup; duplicate placement gesture coalescing. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/BP/scripts/bedrock/cellar-cabinet.js": {
       "before": "fa58d24275e5742d2225e0428985d64153826a145159474696c5c795b9c94f84",
@@ -1898,8 +1898,8 @@
     "runtime/BP/scripts/bedrock/circular-rack.js": {
       "before": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
       "beforeProjected": "a486b56ed87b9bd318f5696df8508b36c85d5bffb3bab56fa86256127610a3f6",
-      "after": "bf48a60775ea4f4f4b23b614007109706266a274497fe1779ababc391c3c26ae",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "97f91a5a4b3f81b7ed54ef4d48eb18bbc33122b8b875da46ade3780012405d5a",
+      "reason": "0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md.  0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/BP/scripts/bedrock/bar-cabinet.js": {
       "before": "ca1c3717c30c54e8ef0e5ba59a15ef12d99198eef103d6b9b7d23ae07c180046",
@@ -1916,8 +1916,8 @@
     "runtime/BP/scripts/bedrock/cultivation.js": {
       "before": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
       "beforeProjected": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
-      "after": "4efee7a0aebced07cd093c134eb5382177d74f227950c21f9f53c16d554b0c03",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "1cd502959ef67ed212708db7e3621a4f600771f448f3b9a6c5d99bc7e2d1664d",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. 2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
     },
     "runtime/RP/ui/hud_screen.json": {
       "before": "5da651746453ffe082090da1a155ba985736ae3381c116269d35ff2ca58e94ca",
@@ -1934,8 +1934,8 @@
     "runtime/RP/sounds/sound_definitions.json": {
       "before": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
       "beforeProjected": "1222eda4003cd7ea482b74801b8b7f12dbbf2929b48b8567a3c83a389f95935d",
-      "after": "d533f9b520efe69497919a944218c20157a54ed2a993aa9d5bcedde002b71d64",
-      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "8d153fa6f9dd42ba257f8b7db4f312ea2fa8ec780d486282175089a9650e9d2a",
+      "reason": "Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. 2026-09-28 effects review: Three source-verified sound aliases and four reviewed audio assets. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Real-client shaker follow-up: centered owner audio, positional observer audio; no duplicate broadcast. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
     },
     "runtime/RP/models/entity/sunset_glow_2.geo.json": {
       "before": "5807499cf14bacd63ff6c24db0e49282a05264219e66ff9ae8cdc28637f969a2",
@@ -2015,11 +2015,149 @@
       "after": "6264c07347d00cd3bb9a5abffc6f4255f5c4f01ab2309e68879e4101a87739bf",
       "reason": "0.6.63: add native water/lava liquid display assets and bindings; tested entity capacity properties, pending client visual acceptance."
     },
+    "runtime/BP/entities/thrown_drink.json": {
+      "before": "ee9fb5ebac52b8316a4ebd33ba05ff44f1969ae2207d5b85133ff91e681bfcc2",
+      "beforeProjected": "ee9fb5ebac52b8316a4ebd33ba05ff44f1969ae2207d5b85133ff91e681bfcc2",
+      "after": "1b9dff2f4c335b1cb8e1170c0dbd478a44a21b89ade6302d4037cc89ea83f7cd",
+      "reason": "2026-09-28 effects review: Remove duplicate impact sound; source-shaped potion event owns audio. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
+    "runtime/BP/scripts/bedrock/combat-effects.js": {
+      "before": "3c51a8246a4ab194d3a91005965cede0874e24eae7e58c020b25a4761f92e9d7",
+      "beforeProjected": "3c51a8246a4ab194d3a91005965cede0874e24eae7e58c020b25a4761f92e9d7",
+      "after": "68bd63d90a795875e4fd9e2cfc7176dd62bca72715253a158613823be3911ba5",
+      "reason": "2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
     "runtime/BP/scripts/bedrock/display-projectiles.js": {
       "before": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
       "beforeProjected": "98a332ab0bb0f9028d49bf7ced3c58d02ff7620eeeaaffde07b665bfbe675084",
-      "after": "e71371a35cedf83411a3fd5b2ece2f9f8d6e9fc8a641202b31bac24e66879303",
-      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "ac563cf09e6aaae8c78ba4f411447016c06bb007f791f661990e75b4b42ab7f9",
+      "reason": "2026-09-28 effects review: Source-derived post-commit feedback, isolated cosmetic failures and real splash lifecycle; preserves PR93 carrier repair. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+    },
+    "runtime/BP/scripts/core/extension-content.js": {
+      "before": "a1df939273627d6be09793c14a0da19e4d465807011c9fe1ccb77ba9138340c0",
+      "beforeProjected": "a1df939273627d6be09793c14a0da19e4d465807011c9fe1ccb77ba9138340c0",
+      "after": "eb4cd38edd6fd0694d9fd0e1b36eef35cb22fbcb347473b7331851323e7ef692",
+      "reason": "2026-09-28 effects review: Optional namespace-scoped external item particle registration. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
+    "runtime/BP/scripts/core/extension-foundation.js": {
+      "before": "106025e78428e79a06e0c65c2217c7c22a1152e52af70827b552e3180da0117f",
+      "beforeProjected": "106025e78428e79a06e0c65c2217c7c22a1152e52af70827b552e3180da0117f",
+      "after": "fa5a29e4195b3abc954332c6e20e191b0820238a6ac094b83f36918663d816d8",
+      "reason": "2026-09-28 effects review: Optional namespace-scoped external item particle registration. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md."
+    },
+    "runtime/RP/particles/butterfly_incense.json": {
+      "before": "c95a3889b3115198c9b7bf5fe871d77e1be5cdf4f09ef86f84ed584c559597f2",
+      "beforeProjected": "c95a3889b3115198c9b7bf5fe871d77e1be5cdf4f09ef86f84ed584c559597f2",
+      "after": "ee36343b295d3bd273940c5e4bd071ac99b39f371850d842dc6a973fe745fb9e",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/butterfly_incense_large.json": {
+      "before": "3b49d13c486927dcfb8f1f192f336c4ce3829631a03872151c75def35cd6ad7c",
+      "beforeProjected": "3b49d13c486927dcfb8f1f192f336c4ce3829631a03872151c75def35cd6ad7c",
+      "after": "67db1fb15a369ce711c75b9d8c15673c15ed1866fe910b393d5c1b11500148d0",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/catnip_incense.json": {
+      "before": "67e8ff099fb94f2d05e40b4dc18d63314948a83bbd9a33ceca4ab941d4b52b60",
+      "beforeProjected": "67e8ff099fb94f2d05e40b4dc18d63314948a83bbd9a33ceca4ab941d4b52b60",
+      "after": "18795b8aac3a81fd3204f9221559e8f4cbe15e95e54f2dcccbde37348d4f0e30",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/catnip_incense_large.json": {
+      "before": "7d6c13fdd469c5acd9e22dc4650435d51e53b3d526dd71b09026d75300454627",
+      "beforeProjected": "7d6c13fdd469c5acd9e22dc4650435d51e53b3d526dd71b09026d75300454627",
+      "after": "4f89564d1fdd9b81a9a3efd15e68951372f5dc720de24d452290a88b79191dbd",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/firefly_incense.json": {
+      "before": "2aa24ea4d0d81c68f0d9d9645aaca6df64f47b0daefca99d489990813b85400f",
+      "beforeProjected": "2aa24ea4d0d81c68f0d9d9645aaca6df64f47b0daefca99d489990813b85400f",
+      "after": "92aed72fbe62834c89c76d07558334034b6c60cc34330731204f2280beb8e3e6",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/firefly_incense_large.json": {
+      "before": "5824092715a2ce926191fcce6c6c39d39a823819d645a2816ad8cbdd49df775e",
+      "beforeProjected": "5824092715a2ce926191fcce6c6c39d39a823819d645a2816ad8cbdd49df775e",
+      "after": "16c1da2d3717c0e731b39b6452f308ca6d59c98f8dba141b8510d30dfb0b2f43",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/ginkgo_incense.json": {
+      "before": "c6cd9141701c52fe28743a7dd6e03ed13578237a8e65de07c8892d5eac6fcb6a",
+      "beforeProjected": "c6cd9141701c52fe28743a7dd6e03ed13578237a8e65de07c8892d5eac6fcb6a",
+      "after": "16f0739678a85faf849779e6dbacf4a6aafa67121b38b3401ebbfa0bd37b80ef",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/ginkgo_incense_large.json": {
+      "before": "a729ef2b4e79cd08e765d42f8347e579fba141ad67981abea16df476c2e9131e",
+      "beforeProjected": "a729ef2b4e79cd08e765d42f8347e579fba141ad67981abea16df476c2e9131e",
+      "after": "8e08f0aba2cbe114d387e457166e76c5ac783ad4b7a1e73d75184c064558deac",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/lava_tap_drip.json": {
+      "before": "7f25bdd4a45fa9fa3f1d035b1ad32507a0ec7066ba725a937497f9d35b531f38",
+      "beforeProjected": "7f25bdd4a45fa9fa3f1d035b1ad32507a0ec7066ba725a937497f9d35b531f38",
+      "after": "5ad99d88e29c336f5e8481fe4e76323b1fbfe73843c83375e6f7bf0a18ac59a9",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/lava_tap_drip_child.json": {
+      "before": "b3fb6aab5d664fcec7beea858282ea542c29ddd4cfbff86737aab73eb3874774",
+      "beforeProjected": "b3fb6aab5d664fcec7beea858282ea542c29ddd4cfbff86737aab73eb3874774",
+      "after": "f327a8aa8b54e366d80a7993041922a8da8251dee6b70a5961acbb558d5faebe",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/pine_incense.json": {
+      "before": "72898f6228ec124bba717e88682e52b593badbb5e5baaf70514d9e3c5c498790",
+      "beforeProjected": "72898f6228ec124bba717e88682e52b593badbb5e5baaf70514d9e3c5c498790",
+      "after": "c07d26d1106c7021ae3145c64e9eb84f5cdfbf61a9b833abe87b0b1d7c8cc9fd",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/pine_incense_large.json": {
+      "before": "7742aab72117971ae3cdd6c0f1161f0621b7cf19b21ba820f7154fc31f343652",
+      "beforeProjected": "7742aab72117971ae3cdd6c0f1161f0621b7cf19b21ba820f7154fc31f343652",
+      "after": "d6d2633944c4ccf6b38618d611f62c6cfe4f97569e7a1f37f4f7b452b9fa3d10",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/sakura_incense.json": {
+      "before": "cbd14c0e5201e27d1d3b6847924d96faf80c839eb7cd23e67723e4fcc4957ea3",
+      "beforeProjected": "cbd14c0e5201e27d1d3b6847924d96faf80c839eb7cd23e67723e4fcc4957ea3",
+      "after": "7b0e5ebb5cd04d1907d609324390af253849dc119b78b5fd5129448bf5076914",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/snow_incense.json": {
+      "before": "44dc6193fb5d79296609ab090daeb11a9b4c3d4fa7394738537f656df13270ef",
+      "beforeProjected": "44dc6193fb5d79296609ab090daeb11a9b4c3d4fa7394738537f656df13270ef",
+      "after": "e25d89f0417cfc4b73463a9970d8dc60920e0f24d5060d6e127b0f31f9204910",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/snow_incense_large.json": {
+      "before": "e4a4458854af5d0f2cee919abdd706a092c57c7c37569263f0209f4b519e071a",
+      "beforeProjected": "e4a4458854af5d0f2cee919abdd706a092c57c7c37569263f0209f4b519e071a",
+      "after": "36d31da2b3f28c6ffbe7538c7d15bb7f54b578a2cebd773848700ca04ccd518b",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/spore_incense.json": {
+      "before": "5f69f62ef791da9366854374c9ef78cec44f87a9f28089c2cd4325aa63ff9a0e",
+      "beforeProjected": "5f69f62ef791da9366854374c9ef78cec44f87a9f28089c2cd4325aa63ff9a0e",
+      "after": "a25fb12ff7f03727eab209691bd071bb4731f7ba5c66fceef7cc910fb177eccf",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/water_tap_drip.json": {
+      "before": "2c7c60c341ce2cbd4aa035d353452e91979a8a85e452928386b640782b69973a",
+      "beforeProjected": "2c7c60c341ce2cbd4aa035d353452e91979a8a85e452928386b640782b69973a",
+      "after": "a3346fe61caa92a5f69d6c5abab2eff12caef5a541d037acbecd267a49f9246f",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/RP/particles/water_tap_drip_child.json": {
+      "before": "ada742502c2ac9d8bf6de00deec22a12cf883f0cd66898553dd1ffdf4177d191",
+      "beforeProjected": "ada742502c2ac9d8bf6de00deec22a12cf883f0cd66898553dd1ffdf4177d191",
+      "after": "75843f9c942d29bd878b241878a955f6b5fb88de1d2ff3bc5a3e96eb6a6d51a1",
+      "reason": "2026-09-28 effects review: Pinned Java constructors, finite per-sample emission and source 20Hz dynamics. See docs/EFFECTS-REPORT-FOLLOWUP-20260928.md. 0.6.64 Molang hotfix: expand compound assignments to explicit assignments; arithmetic order and all other JSON values retained."
+    },
+    "runtime/BP/scripts/core/machines.js": {
+      "before": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "beforeProjected": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
+      "after": "2c4c1a9ce2c50d3444a6363e679db4b00169db5eb80c31cf873e97caa284fd26",
+      "reason": "Reviewed mechanics repair: ordinary barrel inputs and one shared 97-tick cadence. No creative-menu projection applies to this core JS module."
     },
     "runtime/BP/scripts/bedrock/potions.js": {
       "before": "6ad7d9b34752ac4c6d83ea384353f5079328ea63bbbd89fe1eb5709deaf587cc",
@@ -2044,12 +2182,6 @@
       "beforeProjected": "73252e69e884a628256a3d2f7220db4fb67edeee746df20254f85bb9ff8ebd8e",
       "after": "8c4b8b38dfb95999bbaf6a8379b45fce78ef17d2c5d4e86ac0e732360eaf4de4",
       "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
-    },
-    "runtime/BP/scripts/core/machines.js": {
-      "before": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
-      "beforeProjected": "abf40c10e549114b7f3abb7ef9659d2a69cd799efa0d90a45aa831ed4814075c",
-      "after": "2c4c1a9ce2c50d3444a6363e679db4b00169db5eb80c31cf873e97caa284fd26",
-      "reason": "Reviewed mechanics repair: ordinary barrel inputs and one shared 97-tick cadence. No creative-menu projection applies to this core JS module."
     }
   },
   "rules": {
@@ -2110,7 +2242,7 @@
   "newRuntimeFiles": {
     "runtime/BP/functions/kt_molotov_diagnose.mcfunction": "97ca130cd2b40792d47af9f711373273590592795817f844d8531f3f89553d31",
     "runtime/BP/functions/kt_tipsy_diagnose.mcfunction": "eb4596fffa1a5865dd3cd363085c66048d41b41ca695206427cca325dff924bf",
-    "runtime/BP/scripts/bedrock/molotov.js": "ae3d9d297885c80b0cdf97bacc3809ddb28ff7901bc08d9e2d62d67b79bf7d4a",
+    "runtime/BP/scripts/bedrock/molotov.js": "2504519777d71c862e21012681c91c4d69a4a6b8e41805958f8ab4c9b49d8301",
     "runtime/BP/scripts/core/projectile-parity.js": "88cbe00e64c54a1a039172ae2683b6558869616fb5420302e6d93d53cc93f4d2",
     "runtime/BP/scripts/core/incense-sampling.js": "cb2571534df3cdb3f94deb8c29391b85575d092c8504f7b96909860130d73696",
     "runtime/BP/scripts/core/guide-preparation.js": "46036ece1e0a9a8c223bbc11ac379c160894245ca00e982cabf8c5fb7558e57c",
@@ -2156,11 +2288,195 @@
     "runtime/RP/models/entity/liquid_pressing_tub_water.geo.json": "c0e8794c34f0fe34630bc38854eac1f8ed13f7fbf7fcf67ddf547af7e5efde45",
     "runtime/RP/models/entity/liquid_pressing_tub_lava.geo.json": "6f27ed94b9afe7a272aad02889a7d6eb94fdf8e68a1373bdb85b0ffe903a7167",
     "runtime/RP/models/entity/liquid_barrel_water.geo.json": "eb0a16c9854581b1497708a3c93b368ec40debd0fc02c6b18b28e66366521ae7",
+    "runtime/BP/scripts/bedrock/effect-feedback.js": "da270ff1430589bcf324b0acee033d557aa4750911d733be49b6b518f5fd49da",
+    "runtime/BP/scripts/bedrock/interaction-particles.js": "28bca29f15001539ff88118d301e3bd0a1da92f53321054349ed59eeae1ac64b",
+    "runtime/BP/scripts/bedrock/java-ambient.js": "788b4c328d58d5d2dd6581a54d2bfa9452846fe207b42f7543708672efc86421",
+    "runtime/BP/scripts/core/effect-feedback.js": "32468dfbda917724a99f219014fbe38e96bf73e53c13f4d6fdb682605a5ae1de",
+    "runtime/BP/scripts/core/interaction-particles.js": "b7b67cd3f4df3df4f8fd0eb98607541797f7591ebbf4fd5bd39c912609b57bcd",
+    "runtime/BP/scripts/core/java-ambient-sampling.js": "c511635e865cce8e7f51a0868e83949d92b073d2c32ff663f1915ade51f81190",
+    "runtime/BP/scripts/data/item-particle-sprites.js": "0de3d2fc8633894daafe0ff5b66e1afa4fa5ce991f02229e15c6debeddfc0bbc",
+    "runtime/BP/scripts/data/item-particles.js": "4b8889d9a0a5911b839402a0fffe272b2d7a2cfba23397f06bcc9c1c3dd7de32",
+    "runtime/RP/particles/fx_bubble_pop.json": "e6649d50785f10b560ceab2f3632dca90e0c3d04bff9a6e4acf716ea89f576c9",
+    "runtime/RP/particles/fx_cloud.json": "ed360d18470428b9ceadac4ad22a95f33d1b4b95a545c2cf073099355f2a35a7",
+    "runtime/RP/particles/fx_endrod.json": "753aa8bf564fd438b21d76057b80d7dd113bc79b82507a5b839873f2a59627f6",
+    "runtime/RP/particles/fx_flame.json": "78ff1441251a027098d87b20acb7a7f6e77e0d9e27558200a055b4416ebe974f",
+    "runtime/RP/particles/fx_glass_block.json": "f2c7575b0b3362e53adb3252c0539c03521c26885674a877490c8eb22adf39a9",
+    "runtime/RP/particles/fx_happy_villager.json": "bf0c7c10a67126d52d2393db3f023d6969729bd0176148c189a4025be6be6df3",
+    "runtime/RP/particles/fx_item_apple.json": "7105746ff632247270e3b980e20bb6658d507a3202e76ddd94f1686c8cbbf847",
+    "runtime/RP/particles/fx_item_atlas.json": "94c862c9bf1c13412896bf685c156292fc6bc420102d27174f07bd34240ece0b",
+    "runtime/RP/particles/fx_item_blaze_powder.json": "7cba7a48089ba612713f8288857086256d8a9adfa98b462c9c8d195b4285041a",
+    "runtime/RP/particles/fx_item_bone.json": "46f6aa3b9d2df7edf0a3dc675d4f6af37bbcefdb7777acff0549405a126819b1",
+    "runtime/RP/particles/fx_item_bone_meal.json": "ca052191c96e732635a683e36f5c2ec8518724cb0a59bc91243c774eddbc9a82",
+    "runtime/RP/particles/fx_item_carrot.json": "7808c64b154f357b93d30054349e8ab8d190a0bef2420e1cc5bdbd467062393f",
+    "runtime/RP/particles/fx_item_coal.json": "8b63e6bcc91c42c355e1e34fda0c8991868b34c7f85daced112e82bdb612ca4c",
+    "runtime/RP/particles/fx_item_diamond.json": "349ef4b7737ec8cca4e382929d3460251c00f4f44c3b536b617666415cf03c8c",
+    "runtime/RP/particles/fx_item_emerald.json": "fdc576c53c3eca8c7c2d79059dc9bcc1a7021a982ae91192b3eb264a962c1f36",
+    "runtime/RP/particles/fx_item_ender_pearl.json": "2abc6750c7e314bdfcdd0d4ca32f8d0d6bfc4deb8a6dc6a3bd03c41717b4f58e",
+    "runtime/RP/particles/fx_item_glowstone_dust.json": "e571ad7d62c155d5806291bae564dfdecf4bbbf61f3ca7f036e7b03151f2e5a6",
+    "runtime/RP/particles/fx_item_gold_ingot.json": "289536c1d05eed440c5d2cc16d29ca0832194f397a5cde18910b4040a767deff",
+    "runtime/RP/particles/fx_item_gunpowder.json": "108421148b742435179dbcb4a59e1c6e0f8f6b148e3600b7fd9b5e2e648a1441",
+    "runtime/RP/particles/fx_item_honeycomb.json": "cb9ec1fed7ff3b5adfaa65bedc8da69f78d57fe3c8787e27d8b274bdefe089b1",
+    "runtime/RP/particles/fx_item_iron_ingot.json": "15ee89c74a09b890589dc26e80d2533692dc82de561d0d9020a3f9e8224f7791",
+    "runtime/RP/particles/fx_item_nether_wart.json": "afab8ab2daf87c2db2d4d17cb437f9048bd27f1ae93ba0ed932e2f36831d8441",
+    "runtime/RP/particles/fx_item_poisonous_potato.json": "7348397bfd8bf265d40096c3fd66cb892445d199864fb9cd523b200ec0a6a7b5",
+    "runtime/RP/particles/fx_item_potato.json": "ba3546419ff1e2035291379fef7b99d1088d3afae97e89ec4f9f37dfaf66d207",
+    "runtime/RP/particles/fx_item_redstone.json": "d80bbbf0a5f1144a438e310fa1d73749fb05c248d20e7ee1e840ac843b755809",
+    "runtime/RP/particles/fx_item_rotten_flesh.json": "9295624799af556c42933eecd1be36ffca8efee5c12056c12937e7ae5f80ce74",
+    "runtime/RP/particles/fx_item_slime_ball.json": "7fa3edaee84a9bf1f00932049d2b4f67636ce740c3238f41c78cab8352b79ca9",
+    "runtime/RP/particles/fx_item_snowball.json": "c93c303b2b7936c271e4f16a911e5d1cfd7b9bbc78b4375aa036443b71f804db",
+    "runtime/RP/particles/fx_item_stick.json": "4767ce407a2ef41eaa0190cd7bb1fc0ac1596eb84a6db5afe4c1af80254a459a",
+    "runtime/RP/particles/fx_item_sugar.json": "45172a48c235d6007077fd9ba2f7438f6b316e3052a5d8ac3ef05a2026ce6803",
+    "runtime/RP/particles/fx_item_wheat.json": "74050756c296e832047f7725578ca3e43da3f848ea9db62b730bb1cd12964001",
+    "runtime/RP/particles/fx_model_black_bar_stool.json": "2b1ac5f84495e4ccf379f3d304b0b502cb3b2c36c3e6b16dd5e29edd17deb8b2",
+    "runtime/RP/particles/fx_model_blue_bar_stool.json": "906f366e72d777cc851a1b2ea06c1eca02aa14c7251816328640a4de2b0c32f8",
+    "runtime/RP/particles/fx_model_brown_bar_stool.json": "875939a4a2519d1e0acc93c954f3dafaecd45b92603fc157d496306316f2a08c",
+    "runtime/RP/particles/fx_model_cyan_bar_stool.json": "20395be9970b1f0aa189a11792b9ce37982c1ced5062431d21f575e6e15bed87",
+    "runtime/RP/particles/fx_model_gray_bar_stool.json": "3752f49764a459cf0216f3516673f94d4f4029e763465312847468fc8efd972b",
+    "runtime/RP/particles/fx_model_green_bar_stool.json": "e6b96cb2f23bfa7e0717484765256c052a83c3d1c1c767b9a45be7f292935817",
+    "runtime/RP/particles/fx_model_light_blue_bar_stool.json": "fbfaf69d43c83d4dbcc7e46342739bcf112ad0c6edac92a11d190b3ed915aee1",
+    "runtime/RP/particles/fx_model_light_gray_bar_stool.json": "b33b78c4f71c8293486a71bf18dea3a14f4be3db6a367d4ca6f5fa8da45e8cc6",
+    "runtime/RP/particles/fx_model_lime_bar_stool.json": "4a04c68c4ff0c08dbb46b41f27263f093d3a7dd7455dab5711bf12fdd13e1ecb",
+    "runtime/RP/particles/fx_model_magenta_bar_stool.json": "2ba8ed478a447cd9cc2dffb76aa5cca5a77c2c843707956880dcce333d90dafd",
+    "runtime/RP/particles/fx_model_orange_bar_stool.json": "94d40431273e638c6ff5016bc44b77fe94a9052f3b3534194aa7ade9a9f95ab6",
+    "runtime/RP/particles/fx_model_pink_bar_stool.json": "65787936724b2eb3bc3954d210c0fe4e13076c75e567af6ccd1cd189b8ef1eaf",
+    "runtime/RP/particles/fx_model_purple_bar_stool.json": "0c4d70a75bb7af4c5c79a50ae072921a6c39835247494c2a794090537cbac47c",
+    "runtime/RP/particles/fx_model_red_bar_stool.json": "00a7e5bde1d6efb5f31863f55664a6a84ad570ebe20af6e97e517339c6bc5f20",
+    "runtime/RP/particles/fx_model_white_bar_stool.json": "3337cb14ca2dd3e99a7a7f7c7b7eb15900ba2067f6aa10459733b983b17c2855",
+    "runtime/RP/particles/fx_model_yellow_bar_stool.json": "573eb429571428b013632c9ea3b8f4094baa02a549cb676c917c00eb2db0404d",
+    "runtime/RP/particles/fx_potion_shard.json": "5729e98fba2faed8cb1300a651095d4c152c2fa581291a35aac048931cf61d67",
+    "runtime/RP/particles/fx_potion_spell.json": "1d906d984ac681b19fd3557c1d31f8403a838e9f89b7358142019cc419008f23",
+    "runtime/RP/particles/fx_pressed_glow_berries.json": "5164a3de19529f426e8a26aca0b8a6e813ed00724ce7a384ae380f384ced7517",
+    "runtime/RP/particles/fx_pressed_gold_grape.json": "c0fe0c59e615a6c0ba01aac0840aae8891fdd5cb573f1a625221ca927b9a4c20",
+    "runtime/RP/particles/fx_pressed_grape.json": "ca3e54e67d39de9e463461f122870cb6b2976284f810b2f00cd86574b3892f42",
+    "runtime/RP/particles/fx_pressed_green_grape.json": "fda0f2a0602f25a87f013720b4db19568bbd4b9bd2cea0f1904e00fc1f2e0902",
+    "runtime/RP/particles/fx_pressed_ice_grape.json": "f07ecfd3bc3460e5a323b0b0976d3103d2bbcefa76e4c2ef7134005da10f036b",
+    "runtime/RP/particles/fx_pressed_sweet_berries.json": "27de8de473d2c0638bc741c6b14a0808cfa128f745925fcc747a4a793d6fcc42",
+    "runtime/RP/particles/fx_pressed_tub.json": "7b072ad2f7dd3fa96dbd0aee508e2d0dddf4cf25da15880146047860d3e78387",
+    "runtime/RP/particles/fx_pressed_wood.json": "3b0429e133d3756027a3a8ea518a9f479ce8cd7449dfc7dcb2f328121c3bbd1a",
+    "runtime/RP/particles/fx_rain.json": "79a69e5b8b1a75ca8dd3dc3b6aa69df84d7d4336a3c381160150b10fc1f08fc2",
+    "runtime/RP/particles/fx_smoke.json": "214bb17a7bf50e51a0d45ea739c98b0447bc9308c0d79c807de499e267dbec7a",
+    "runtime/RP/particles/fx_sonic.json": "3db32ee12f0276be43648a697bd793d90f1625ec9b2f3a8e734e7de3b4ebb1ef",
+    "runtime/RP/particles/fx_spell.json": "d25e8df5e7aa55021191a2646c5436e570f88dc5dacfc0250aafaa9b82c7a135",
+    "runtime/RP/particles/fx_wax_off.json": "3c86c5bc28cbed78186bacafac53eac7d59baf01c3065f594f66311d0b07bb83",
+    "runtime/RP/particles/fx_wax_on.json": "dfdbadfdd01d021232c59f8c4caa01d87435859587dcd58da7151778357375bb",
+    "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1.ogg": "80746fec1f7d05853b6c03470d5ff4d45c911adbcfed50b88fd1e739d6b11a2e",
+    "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2.ogg": "96f82e1105f81d5138c962f3943c77da928379b3754d36c5f87b33af0f2cfeef",
+    "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3.ogg": "34eedece8a3999150f24ad730568e60e372e8a2a6d46ea877324754c863a9990",
+    "runtime/RP/sounds/kaleidoscope_tavern/feedback/random/click.ogg": "c8e78aea3a020d743189fd4d5b0636b791b557b608c62f6474d0f16abcfcc0d8",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/interaction/glass.png": "cb89c706dce86eac3123cef087d359b5f23098b658a468fb91662b4a9922bcd0",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/interaction/glint.png": "20fb7225d8009a20f1ac9504beb8558f0a4500184bb763618f2ccf63ba839ce6",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/interaction/potion_overlay.png": "a734ecf66d6a09767592c6b38c453854290d47c987ea122712bad37dca9683e9",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_debris_atlas.png": "d41bda66f3d7c4afd98a9828b0b0d8e2ee77e575e7f86fe4f2841bb0fd6a8759",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/0032260236177947a45e5af8.png": "0032260236177947a45e5af855914fc3e0f9b27dabfe49d3afc3aac564ed2757",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/0132977e2c5f55a1c3bc4356.png": "0132977e2c5f55a1c3bc43560768ef938298e6ab71806f741b4e3e21b56a0c5d",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/03ff9277c60456a312f45363.png": "03ff9277c60456a312f4536389742fff62e5b3f7bb45299451bc5f263dc9dfd2",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/07915760dd55665d42cac7bf.png": "07915760dd55665d42cac7bf281cf08c390c3684243a06bd3c76c85f4fd0c136",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/07eab82c3bb4828c08c681ea.png": "07eab82c3bb4828c08c681ea0feda1cffae4233b12c57b4c7708dce7a2bd0af7",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/0a50cb2c10dd438c19f17f91.png": "0a50cb2c10dd438c19f17f9134a5db0cdbd5eda0bbfc2730606b2962050fb21d",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/100840758177b2dbf7860526.png": "100840758177b2dbf78605265386f71eba82e7345a62e5993b554b3011845db8",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/12fdb49534214e4897f484ab.png": "12fdb49534214e4897f484abaac65335aae3687c97fec8b1585392005844b9fd",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/1771513252294b508cc13bdd.png": "1771513252294b508cc13bdd43d729c733db7ccf2eb22665d577bce23a88ce8e",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/190c0a926c72aea9036d006c.png": "190c0a926c72aea9036d006c7b91ea285d42cfca488b4f5d7d3cc00b1fb24ca1",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/19bde446c77e6c81ef92691e.png": "19bde446c77e6c81ef92691e89f7ae2d4f79e933c0a722121002a21f6fc26d44",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/1b264c702f2f88875da6c6f0.png": "1b264c702f2f88875da6c6f026d4e39002d79b8570e03e970989234bc2a8201a",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/1c0112b34e82af1b24d417b1.png": "1c0112b34e82af1b24d417b1f9c2f597fe367218d292f8eb6e748866df4ac6cf",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/1e59af45cecfdef90661b2b7.png": "1e59af45cecfdef90661b2b75cfa06ada81d2404ee6594748756f36808575c10",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/1f1a07bcc8da590c8587241c.png": "1f1a07bcc8da590c8587241c008811f95b6ea7491fa24697c1bddf8449c61d08",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/21b4755ff83674acfe016c59.png": "21b4755ff83674acfe016c59ce7c03ef56e3dba4cc39e2043a243be2528c4f77",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/23e5a674001185956602656f.png": "23e5a674001185956602656f458fc569a0ea531e965e42c1735a98c117e01d41",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2454545c4a684f60874689db.png": "2454545c4a684f60874689db5d74e636ae224b7f6dcd0aeb03c4680a8760cf6c",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2690d4938359e7712b90eade.png": "2690d4938359e7712b90eadeaf3b07e2c23994a31d5d82f8aa455c87927ba13f",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/27ee7f5d8542e5189138921d.png": "27ee7f5d8542e5189138921d0f8acc3425587187e0537eb1c41e343d21ac99e8",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2a6c03049d472b7e05862c83.png": "2a6c03049d472b7e05862c83f585301f8d4f5b1c3261d19ad8c354b0a9e868d3",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2bb60064a29ef16f2d20c120.png": "2bb60064a29ef16f2d20c1204e46d4688526ddf231523aeaeec131095db3a766",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2d432a9a2ed21344b33d214b.png": "2d432a9a2ed21344b33d214bb4a1bf3c7dad2ec81f75dc9401d61ff0a38666c9",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/2ef7a57bed65b162dc2e825b.png": "2ef7a57bed65b162dc2e825bac3da0e973bfa10c4177d4ea0a43112a5c9456ed",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/30228bab1a295bd680229d06.png": "30228bab1a295bd680229d06d712ea2967988f1afeeb5d91b8e87b26130a095a",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/30910256c09dc78e2a0c9183.png": "30910256c09dc78e2a0c9183aca7210f40736d7a7c2ce40f4aefa3ce786c8a7e",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/34f733e6da356c9652ded342.png": "34f733e6da356c9652ded34288bd10da4843c3c6a4ffd0a09862449df9446f33",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/34fc646950bcd69ff7c37d49.png": "34fc646950bcd69ff7c37d4949360e0fdf3976db0cbc05af6335e076d206fc06",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/35320ab2d4ace735eea97605.png": "35320ab2d4ace735eea976057c9bd25fcb0b25ca8e283ce3d33c9a8d17e08d61",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/38006c233500fedab78fad22.png": "38006c233500fedab78fad22c43a81ddaa880bd1b84a095898a5da220ef3d3d5",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/3ca07f6dbf6128d9732cc673.png": "3ca07f6dbf6128d9732cc673985a571746090cb28b2d2868c3ff81daffa35ccb",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/3d854d923a356c1548a1bbc1.png": "3d854d923a356c1548a1bbc19f70ced13ac8c55733a6413883cc628a8c326e92",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/41318a7105da2b797aaea4d6.png": "41318a7105da2b797aaea4d6eccaaef5c90b3e9bf1da21cfe6e96bbdc4acf890",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/41cda7ed2a17c3461de2146e.png": "41cda7ed2a17c3461de2146ef14c7151de56c4c7a8fec648578208e11db04eb6",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/43f25e4553a78c812dbf5ee1.png": "43f25e4553a78c812dbf5ee1906d29e677272210b405336731507f25d30ea1ad",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/443f3ab55d72bda5bd49bf76.png": "443f3ab55d72bda5bd49bf7696974053c58975cd2bfb14c9c608e7b4322d1c29",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/50148f7c1160725eb621fbc0.png": "50148f7c1160725eb621fbc03dfd34ade81c1077ee761288ce2a5f801f338d7f",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5259db3d549d7268950d41d6.png": "5259db3d549d7268950d41d6b4fa3deeb9dc77253d674971dd67f034330fe4fb",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5552b697ea6cb26c910e1ba7.png": "5552b697ea6cb26c910e1ba7c9891708c3a6f5218d18980468e989ded5140ae4",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5a12720ec415ae824a5b620a.png": "5a12720ec415ae824a5b620a3a13f63281033809e2fbef4caf7044fe1072e7e6",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5a568dbf29282c21eb3ead4b.png": "5a568dbf29282c21eb3ead4b73796862e3442f4c4fa6f1d9953995cfb6882a27",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5c946ea859f96ac4f1f39b08.png": "5c946ea859f96ac4f1f39b08817b77e004c9f1bbcb812f2fbf39e9ebf66821eb",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5d78e879e1a4cb27fae3059f.png": "5d78e879e1a4cb27fae3059f774cc59a71c80f09f237e33d9a2003a2ab39a871",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/5f0c09d1afdfabe69a9969c7.png": "5f0c09d1afdfabe69a9969c72252a57b9d48c1bd7f05033e12ef11f584fd957e",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/6091319ff069fe12d2e2ff52.png": "6091319ff069fe12d2e2ff52c2e3fde268fb69f722cd17bf17d9ffba550585ce",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/622605fe99ba03ad040863a0.png": "622605fe99ba03ad040863a0ea16e7806ac119ebb4b63bac9f3740cbd85ba4b3",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/64ae2f8825b3e24e8c687ef8.png": "64ae2f8825b3e24e8c687ef8955f08e10dc05c4e80c61662a4fc7d2b72a0dc4a",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/680ce12f8829000b0ee582d7.png": "680ce12f8829000b0ee582d7e6c6ec53eda6f685e5334c08ab234910f5fca949",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/6ae4b0e974f8cc52e9cafb27.png": "6ae4b0e974f8cc52e9cafb27d28a0fa203f312ea0c0677ada15ecb880aa3a9ae",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/6c0e04bdc3d9c9ac660203fa.png": "6c0e04bdc3d9c9ac660203fa469d88d0daafd2ed59a1493566d77efdbbf4f4c7",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/6eb76b0b37b66763884cb649.png": "6eb76b0b37b66763884cb6495d719b5196df8e91a495ce6ba9b1d9162bef10dd",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/6ec076428ce642258e892d9f.png": "6ec076428ce642258e892d9f6f8aaa26d73f6817989de4580326d885edc5f1a3",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/74cadcef4da6952bb39a99c1.png": "74cadcef4da6952bb39a99c17289a8bacee06a2afe0d8349035d8790eae8a36e",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/77e8a603b532e820aedcd451.png": "77e8a603b532e820aedcd4513a4df58265632ad2f863e465ffa3fd4fffc2956e",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/7b601578e11d83960154cae8.png": "7b601578e11d83960154cae8ab704ef574b8a4493bd3d177292719aa84833871",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/7d8bd1480f90be405ba8f4fb.png": "7d8bd1480f90be405ba8f4fb6ba38af147dfcb53c6bd2dd43d45d2d306268764",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/7f79bf1431df3e847bdcbda9.png": "7f79bf1431df3e847bdcbda9aca777ce47a7a3ba609a2c1a3f24379b911cdb57",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/817a8d4d50488d557b0d0468.png": "817a8d4d50488d557b0d0468eba4555a91208b539dbe999e4f045a40a895f4cc",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/83e8e7a6da79480fd60d57dc.png": "83e8e7a6da79480fd60d57dc2da0a7eb80f2e33c0bd9a752bb1747d14b5099ff",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/849ecaa8fbd21a8b90c68cf9.png": "849ecaa8fbd21a8b90c68cf9411d2120a2a7bd316525bcbd8325fe9d2e422ed5",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/854cfd07dc5322c787ded881.png": "854cfd07dc5322c787ded88144d6cd76bf21b05f275a6b402ee4465ca0babc19",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/8f1f3d3eeccbc32cb67bd994.png": "8f1f3d3eeccbc32cb67bd99443353eed975a16f824d89059cf37d70162e94550",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/94c4ff34e785bfd92b51534e.png": "94c4ff34e785bfd92b51534ed7a7ebbbd70c421e772c2a31c98a31a6a92b2e5b",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/952a29f111c0cbdc5ab3fe0a.png": "952a29f111c0cbdc5ab3fe0a536292e06c1d8cf4911c6ff6f1e87121a4074233",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/9740ad44487b85676cb814b2.png": "9740ad44487b85676cb814b2c665e81a2ad04339458ae93112d4cac48a17c1ab",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/9cc7efe502af03649335ac0d.png": "9cc7efe502af03649335ac0d7c762aa3e72a28fdbb052cabb28ed9f6cc10f17d",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/9e48e5bc0b1a66ac95f164bc.png": "9e48e5bc0b1a66ac95f164bc46cd2e0212fc3ab88ccfcac72400033de95514cb",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/a07fbb7c28a5fc52065d873d.png": "a07fbb7c28a5fc52065d873d4cb3baaf7ce815b28cc844036fecd5e4be9b6371",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/a0a690779aff7e0510c83589.png": "a0a690779aff7e0510c83589ea52f5616c567bacf92a4d19f3e744b80ed3cab0",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/a12419c5fb9e4d00a660f2c7.png": "a12419c5fb9e4d00a660f2c705f5ed0bd66166fa10190fdbf03dddff8b46f3ec",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/a38a3239d5477fbd24fa3965.png": "a38a3239d5477fbd24fa396574a8b5830e322dbd2b9925ee34c6db711ffbbd71",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/ae8dd1d9802fa02568c3eb45.png": "ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/aff874e8d3bf0042f63ceb4a.png": "aff874e8d3bf0042f63ceb4ad64a4347318368d3e0be5d39ab4adbeae3b9c820",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/b00ec400780dcec7ca07fb7d.png": "b00ec400780dcec7ca07fb7d70de7aacf2ff5daad0d7808a8d879d18dee2adec",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/b55fd9c8c7f9d63dd72f1625.png": "b55fd9c8c7f9d63dd72f1625812c78784be94176dd3918f0b8185bf7fc029ba8",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/b967647188105bb9f6860336.png": "b967647188105bb9f6860336ec8bb42e1489ffdec57b6e8e1fc83e953a2f347b",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/bb25b183f1a6594de267734e.png": "bb25b183f1a6594de267734e6de8c62adecdf54869009562cb4d4af3d0f465c8",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/be636ffd924802e56e4d8c54.png": "be636ffd924802e56e4d8c548e0e80489f12a578330f663fb93d7c460249032c",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/bfc7e7cf21fde7b44c660c13.png": "bfc7e7cf21fde7b44c660c13654bd6040574d6f95b44220b1c829bd33ac0d571",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/c4ce5f944fe05dafdc3d9451.png": "c4ce5f944fe05dafdc3d945187f7fcb393fa5c3a5c625a2091030714e62b4a84",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/c5382ea648f55249a2269bb1.png": "c5382ea648f55249a2269bb1690f72b328e08d2295679c100fab52a582229370",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/c63f3cdf3f4e398ba4cd730e.png": "c63f3cdf3f4e398ba4cd730eb8cec0060a7ca394b2044efbaf7ccc2a3d8c0cb1",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/c9139b1396ca21736e8cf029.png": "c9139b1396ca21736e8cf029cef2cca1d1b2b1f1859bb59ebc717af7bddadd95",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/cda5255d099c9431c751958f.png": "cda5255d099c9431c751958f3a81d9216dd5bf94655843fef4d38633d17af2c1",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/ce68623899ba5d9d88c9c2f7.png": "ce68623899ba5d9d88c9c2f723f0e473871c0a27712817252cb2fbd9d9a7c053",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/d461eb165f4e59fc28e3f597.png": "d461eb165f4e59fc28e3f5972ee47a58bd8be8ef073a5701456e0b7a07e3b5db",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/d5890467f86b608218e9ac2c.png": "d5890467f86b608218e9ac2c641a510473304a3268c3cb83c45d21c3eabe985c",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/d6fbcad070041ef630abc9dd.png": "d6fbcad070041ef630abc9dd109bdf56a7871d0cf3fb87b44523acac82b6f128",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/d7f481c3cd1b7e55ceedd387.png": "d7f481c3cd1b7e55ceedd38737ff42ecca99b5e6140d13ee6f60a63293d30966",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/d854b74566a5dc0bd0449a2a.png": "d854b74566a5dc0bd0449a2a8cd11d7c1dfbfb7a6468de6f6a41ed1da008037b",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/ddb14ea383b05c778dbe3968.png": "ddb14ea383b05c778dbe3968ecefd4c3d9dca0875214f0eeb9b76628c30d86e6",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/e0fad07882c07201647be1ac.png": "e0fad07882c07201647be1acac3faaa8e32b457f6443abbbe5d29fb20e74b9eb",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/e49ca3796bed38b0e48624ba.png": "e49ca3796bed38b0e48624ba0c830635c7630ed37012466e869aa498c172bacd",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/e67f5aa6995e6c6e843829bf.png": "e67f5aa6995e6c6e843829bfa246db25aef50862d06ab147d16784d84cd9e6b0",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/ea010cfa4bad140111397663.png": "ea010cfa4bad140111397663cc2fcb59b398e9b369f0ce2b192bc4e5d92e883f",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/ea2a65710d4cf8e3f0211934.png": "ea2a65710d4cf8e3f0211934290ab43e2477fc90020b75547b8b4d8661ef917c",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/eda8f4a0548207dd26d73619.png": "eda8f4a0548207dd26d736196d72bf05e632c63bd9b8995752ac92674f386d88",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/eed32609d14bfb56e269a61a.png": "eed32609d14bfb56e269a61ad347351ec7383dfe165f3d56bc67f4d280216c75",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/effd79adf4f89b5fe6655fa4.png": "effd79adf4f89b5fe6655fa482d486dfc166664fcb1f468ff5343ee888698d5f",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f16e0542c510d8e4317d87e5.png": "f16e0542c510d8e4317d87e58ac08074779cbc6b970ad334e50d184afebfbe90",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f2765637938b8d9a8c513460.png": "f2765637938b8d9a8c5134609647aae21d312d6084b981b9f819df2782b697d4",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f45fab8b8a00aa36606dd078.png": "f45fab8b8a00aa36606dd0789ba94f6fed841e44def7648ae84b397e628d09db",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f69c9982f5d9d7b1b6d0ac3a.png": "f69c9982f5d9d7b1b6d0ac3a96e5c0875da7671925b6b18d0e202ceb5c476b84",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/item_sources/f7a5ec2a66c13809b93a9422.png": "f7a5ec2a66c13809b93a94223524680a30534b6abac76e467bfd3a6fac94ced0",
+    "runtime/RP/textures/kaleidoscope_tavern/particle/java_feedback.png": "acf176485d2ff2e1a817e77e6a00754bb7adace30c2557730b1b46a1057178aa",
+    "runtime/BP/scripts/core/hit-basis.js": "558d7e3f642ea334bc8dfd89cbd41d23227b40e4bdf1e3a7a2d68abe5aa39f0a",
     "runtime/BP/entities/stored_items.json": "f6b03ac07252288d8e058c94f811584ad5321f2af48e9e8f0bc096c61bee9f68",
     "runtime/BP/scripts/bedrock/native-item-storage.js": "11fb28849d6f6c798d20546985add6a12dde59cb3bb30b01e8fe6d1bfa4f4b5a",
     "runtime/BP/scripts/bedrock/pickup-feedback.js": "cc5fe8b7bb4af7a60f3edf2042baea3457e1bdbd25ceab8d459a1b6a007d43ad",
     "runtime/BP/scripts/bedrock/pickup-overflow.js": "9728be8fd1e94de439a04f862c460dd978b6ace9e10c9f2fb861c504b64bc8be",
-    "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135",
     "runtime/BP/scripts/core/native-item-storage.js": "347b0220a9be0d796a73cbd2bf258ce5b51525ede304fadc10ce48ccf4a9573b",
     "runtime/RP/entity/stored_items.entity.json": "2ff7d6c9afd4f18c060d490954be5c870b584c5b0e41225161144b7ce1309295",
     "runtime/RP/models/entity/stored_items.geo.json": "1043baec5a1fc07c61875a5d3f45d89f4b5830bddd11297ccedbae8487abcf5c",
@@ -2177,7 +2493,8 @@
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item2.ogg": "acdf8a4812136ea960753036b764866fe1d8d690bb76ef21a768d424cb6b1e47",
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item3.ogg": "81e88fcb46b1f960d3f2c93cb2a80a684324b4921a518e0a447687dee19836b7",
     "runtime/RP/sounds/kt_pickup/entity/itemframe/remove_item4.ogg": "9bba0de4f6bed39bbb2b9c5ecc134bcd25876a18006a23a68faf66c8e4c27358",
-    "runtime/RP/sounds/kt_pickup/random/pop.ogg": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7"
+    "runtime/RP/sounds/kt_pickup/random/pop.ogg": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7",
+    "runtime/BP/scripts/core/aim-hit.js": "a68e34096d2d5428f0562616e612e117a415df9437bf316caa91a53c0684b47f"
   },
   "initialAuditCommit": "f533cc0119f68e3250c6216d04cfa555fd4b682c",
   "removedRuntimeFiles": {

@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+from functools import lru_cache
 import os
 from pathlib import Path
 import unittest
@@ -9,6 +10,10 @@ from pick_block import native_items
 
 ROOT = Path(__file__).resolve().parents[1]
 PEER = Path(os.environ.get('LIQUOR_SOURCE', ROOT.parent / 'liquor'))
+
+@lru_cache(maxsize=1)
+def review_baseline():
+    return json.loads((ROOT/'data/pickup-pick-baseline.json').read_text())['files']
 
 def restore_reviewed_pickup(path, data):
     review = json.loads((ROOT/'data/pickup-pick-baseline.json').read_text())
@@ -52,33 +57,20 @@ class PickDefinitions(unittest.TestCase):
             data = (ROOT/path).read_bytes()
             # This PR intentionally changes pickup gameplay. Verify the exact
             # reviewed current bytes and reverse only that explicit delta first.
-            data = restore_reviewed_pickup(path, data)
-            # Reconstruct reviewed API/presentation edits before checking the
-            # immutable pick baseline. All unrelated byte changes still fail.
-            if path.endswith('/bottles.js') or path.endswith('/mixology.js'):
-                review=json.loads((ROOT/'data/launch-repair-reference.json').read_text())['reviewedChanges'][path]
-                self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),review['after'])
-                if path.endswith('/bottles.js'):
-                    data=data.replace(b"deliveryId:'Consume'",b"deliveryId:'minecraft:consumable'")
-                    # 0.6.56 removes only unsolicited successful-operation text.
-                    # Restore those exact statements for the immutable inventory
-                    # and persistence baseline; never update the golden hashes.
-                    for current, previous in [
-                        (",plus,safe}", ",plus,tell,safe}"),
-                        ("playMaterialInteraction(d,target,bottleBlock(next.base));return next;", "playMaterialInteraction(d,target,bottleBlock(next.base));tell(player,`§a${next.base} ${next.items.length}/${BOTTLES[next.base].maxCount}`);return next;"),
-                        ("playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));return tx;", "playMaterialInteraction(b.dimension,b.location,bottleBlock(old.base));tell(player,'§a已取回原品質酒瓶。');return tx;"),
-                    ]:
-                        self.assertEqual(data.count(current.encode()),1)
-                        data=data.replace(current.encode(),previous.encode())
-                else:
-                    suffix=b"\nexport const naturalCupStack=state=>resultItem(state);\nexport const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);\n"
-                    self.assertTrue(data.endswith(suffix))
-                    data=data[:-len(suffix)]
-                    # The pre-existing 0.6.62 shaker hand correction is also
-                    # explicitly reversible; keep the older pick golden intact.
-                    current=b'[{stack:item,count:1,preferHand:!breaking}]'
-                    self.assertEqual(data.count(current),1)
-                    data=data.replace(current,b'[{stack:item,count:1}]')
+            assert hashlib.sha256(data).hexdigest() == review_baseline()[path]['hashes']['current'], ('Reviewed current bytes changed', path)
+            # Reconstruct the reviewed deltas from data before checking the
+            # immutable pick baseline: the pickup delta over merged main, the
+            # effects delta over the 0.6.63 base, then the legacy reviewed delta.
+            # Every op list is replay-verified; any unrelated byte change fails
+            # the reviewed-hash assertions above and below.
+            for step, expected in [('reverseOps', 'main'), ('effectOps', 'base'), ('legacyOps', 'golden')]:
+                ops = review_baseline()[path][step]
+                lines = data.decode('utf-8').splitlines(keepends=True)
+                for start, end, previous in reversed(ops):
+                    assert 0 <= start <= end <= len(lines), ('Bad op range', path, step)
+                    lines[start:end] = [previous]
+                data = ''.join(lines).encode('utf-8')
+                assert hashlib.sha256(data).hexdigest() == review_baseline()[path]['hashes'][expected], ('Reconstruction step drifted', path, step)
             self.assertEqual(hashlib.sha256(data[:proof['prefixBytes']]).hexdigest(), proof['prefixSha256'])
             self.assertEqual(hashlib.sha256(data).hexdigest(), proof['sha256'])
 

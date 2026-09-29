@@ -2,6 +2,8 @@ import {nativeItems,glasswareStorageKey} from './native-item-storage.js';
 import {storageFeedback} from './pickup-feedback.js';
 import {nativeBlockHit} from './stateful-storage-router.js';
 import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
+import {aimPointFor} from '../core/aim-hit.js';
+import {plantGrowthFeedback} from './interaction-particles.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {setWithWater,waterAt} from './waterlogging.js';
@@ -78,10 +80,11 @@ export function resolveGlasswareHit(player,block,face,point){
    const ray=nativeBlockHit(player,block);
    if(ray){source='ray';hit=ray.faceLocation;sourceFace=ray.face??face;}
   }
-  const corrected=worldFromHit(sourceFace,hit,source);
+  const aimed=aimPointFor(player,block);
+  const corrected=aimed??worldFromHit(sourceFace,hit,source);
   if(corrected){
    glasswareHitDiagnostics.corrections++;
-   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
+   glasswareHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState(FACING),inputMode:mode,face:sourceFace,source:aimed?'aim':source,raw:hit?{...hit}:undefined,corrected,slot:glasswareHolderSlot(corrected)};
    if(glasswareHitDiagnostics.corrections<=8)console.warn('[Tavern glassware hit] '+JSON.stringify(glasswareHitDiagnostics.last));
    return {face,faceLocation:corrected};
   }
@@ -147,7 +150,7 @@ export function recoverFurniture(player,block){
 export function recolorLight(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId),h=hand(player),color=dyeColor(h?.typeId);
  check(f?.kind==='light'&&color,'DYE_REQUIRED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');if(color===f.color)return false;
- return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;optional(()=>block.dimension.playSound('dye.use',center(block.location),{volume:.7,pitch:1}));return true;});
+ return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;plantGrowthFeedback(block);optional(()=>block.dimension.playSound('sign.dye.use',center(block.location),{volume:1,pitch:1}));return true;});
 }
 export function maintainSeat(e){
  const helper=seatFurniture(e.typeId);if(!helper)return;

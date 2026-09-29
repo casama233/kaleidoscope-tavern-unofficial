@@ -1,25 +1,29 @@
 #!/usr/bin/env python3
-"""Finite client emitters; Java shapes/sprite roles without per-particle packets.
+"""Sampled client emitters; one Java animateTick emits 0/1 plume and 5 ambient particles.
 See docs/REPAIR-0.6.39.md for pinned Java and Bedrock references.
 """
 import copy,json,math
+from effects.incense_motion import walker
+from effects.molang_syntax import validate as validate_molang
+from effects.incense_large_motion import suspended,cherry
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 RP=ROOT/'runtime/RP/particles'
 KINDS=('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly')
 def write(name,data):
- (RP/(name+'.json')).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+ validate_molang(data,name)
+ (RP/(name+'.json')).write_text(json.dumps(data,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
 def finite(data,name,rate):
  d=copy.deepcopy(data);e=d['particle_effect'];e['description']['identifier']='kt_assets_a17:'+name;c=e['components']
  for key in list(c):
   if key.startswith(('minecraft:emitter_rate_','minecraft:emitter_lifetime_','minecraft:emitter_shape_')):del c[key]
- c['minecraft:emitter_lifetime_once']={'active_time':1}
- c['minecraft:emitter_rate_steady']={'spawn_rate':'variable.kt_spawn_rate','max_particles':math.ceil(rate)+2}
+ c['minecraft:emitter_lifetime_once']={'active_time':0.01}
+ c['minecraft:emitter_rate_instant']={'num_particles':'variable.kt_spawn_count'}
  c['minecraft:emitter_local_space']={'position':False,'rotation':False}
  # Face the viewer like Java TextureSheetParticle. rotate_xyz leaves thin
  # cards edge-on from most viewing directions, so increased rates alone fail.
  c['minecraft:particle_appearance_billboard']['facing_camera_mode']='lookat_xyz'
- # Neither long-lived/looping emitters nor frame-by-frame random walk loops.
+ # Replace obsolete motion before applying the bounded 20 Hz source recurrence.
  c.pop('minecraft:particle_initialization',None);c.pop('minecraft:particle_motion_parametric',None)
  return d,c
 for kind in KINDS:
@@ -31,7 +35,10 @@ for kind in KINDS:
  c['minecraft:particle_motion_dynamic']={'linear_acceleration':[0,0,0],'linear_drag_coefficient':0}
  c['minecraft:particle_appearance_billboard']['size']=['0.15 + variable.particle_random_3 * 0.05']*2
  c['minecraft:particle_appearance_tinting']={'color':[1,1,1,'0.8 * math.clamp((1 - variable.particle_age / variable.particle_lifetime) * 4, 0, 1)']}
+ walker(plume)
  write(stem+'_plume',plume)
+ # Keep the registered base particle consistent as well as the active emitter.
+ walker(small);write(stem,small)
  base=RP/(stem+'_large.json');base=json.loads(base.read_text()) if base.exists() else small
  ambient,c=finite(base,stem+'_ambient',19)
  offset,half=(-0.67,5.33) if kind=='firefly' else (-2,16)
@@ -73,5 +80,14 @@ for kind in KINDS:
   ambient['particle_effect']['description']['basic_render_parameters']={'material':'particles_alpha','texture':'textures/particle/particles'}
   c['minecraft:particle_appearance_billboard']={'size':[0.15,0.15],'facing_camera_mode':'lookat_xyz','uv':{'texture_width':128,'texture_height':128,'uv':[8,56],'uv_size':[8,8]}}
   c['minecraft:particle_appearance_tinting']={'color':[0.32,0.5,0.22,1]}
+ if kind=='firefly':
+  walker(ambient,firefly=True,ambient=True)
+  walker(base,firefly=True);write(stem+'_large',base)
+ if kind in ('catnip','butterfly','spore'):
+  suspended(ambient,kind,ambient=True)
+  if kind!='spore':suspended(base,kind);write(stem+'_large',base)
+ if kind in ('sakura','pine','ginkgo','snow'):
+  cherry(ambient,kind,ambient=True)
+  if kind!='sakura':cherry(base,kind);write(stem+'_large',base)
  write(stem+'_ambient',ambient)
-print('Built 8 finite plumes + 8 finite ambient incense emitters.')
+print('Built 8 source-sampled plumes + 8 source-sampled ambient incense emitters.')

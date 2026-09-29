@@ -7,21 +7,38 @@ import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
+import {worldFromHit} from '../core/hit-basis.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
 // Mouse/gamepad actions use the same native gaze hit used for block targeting.
 // Touch may select off-centre on the screen, so retain its event hit location.
 export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,last:null};
+/** Gaze hit on the same block, or undefined when the ray misses it or leaves the block. */
+export function nativeBlockHit(player,block){
+ try{
+  const hit=player.getBlockFromViewDirection({maxDistance:8});
+  if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
+   ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return undefined;
+  return {face:hit.face,faceLocation:{...hit.faceLocation}};
+ }catch{return undefined;}
+}
 function storageHit(player,block,face,point){
  const fallback={face,faceLocation:point?{...point}:undefined};
  try{
   const input=player.inputInfo,mode=input.lastInputModeUsed;
   if(!['KeyboardAndMouse','Gamepad'].includes(mode)&&!(mode==='Touch'&&input.touchOnlyAffectsHotbar)){storageHitDiagnostics.eventHits++;return fallback;}
-  const hit=player.getBlockFromViewDirection({maxDistance:8});
-  if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
-   ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return fallback;
+  const hit=nativeBlockHit(player,block);
+  if(!hit)return fallback;
   storageHitDiagnostics.nativeHits++;
-  const location={...hit.faceLocation};
+  // The engine reports raycast hits in the clicked face's own basis (east/west faces
+  // arrive z-mirrored); convert to world axes before any slot math, exactly like the
+  // storage blocks' own gaze selection assumes for north/south faces.
+  const corrected=worldFromHit(hit.face,hit.faceLocation,'ray');
+  const location=corrected??hit.faceLocation;
+  if(corrected&&['x','z'].some(axis=>Math.abs(corrected[axis]-hit.faceLocation[axis])>.001)){
+   storageHitDiagnostics.basisCorrections=(storageHitDiagnostics.basisCorrections??0)+1;
+   if(storageHitDiagnostics.basisCorrections<=8)console.warn('[Tavern storage basis] '+JSON.stringify({tick:system.currentTick,block:block.typeId,face:hit.face,raw:hit.faceLocation,corrected}));
+  }
   if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
    storageHitDiagnostics.corrected++;
    storageHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState('kaleidoscope_tavern:facing'),inputMode:mode,event:{...point},ray:location};

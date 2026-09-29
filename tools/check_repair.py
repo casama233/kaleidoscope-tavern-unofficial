@@ -37,24 +37,24 @@ for kind in ('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firef
   assert c['minecraft:particle_lifetime_events']['creation_event']=='kt_motion_init'
   motion=c['minecraft:particle_initialization']['per_render_expression']
   init=effect['events']['kt_motion_init']['expression']
-  assert 'variable.particle_age*20' in motion and 'variable.kt_tick+=1' in motion
+  assert 'variable.particle_age*20' in motion and 'variable.kt_tick=variable.kt_tick+(1)' in motion
   assert 'math.min(' in motion and 'variable.kt_tick=0;' in init
   assert 'minecraft:particle_motion_parametric' in c
   texture=effect['description']['basic_render_parameters']['texture']
   assert (ROOT/'runtime/RP'/(texture+'.png')).exists(),texture
   if layer=='plume':
-   assert 'variable.kt_dx*=0.95' in motion and 'variable.kt_dz*=0.95' in motion
+   assert 'variable.kt_dx=variable.kt_dx*(0.95)' in motion and 'variable.kt_dz=variable.kt_dz*(0.95)' in motion
    assert c['minecraft:particle_lifetime_expression']['max_lifetime']=='(40+math.floor(variable.particle_random_1*20))/20'
   else:
    assert 'math.random(-16,16)' in init
    if kind=='firefly':
     assert 'minecraft:particle_appearance_lighting' not in c
     assert 'math.random(-0.67,4.66)' in init
-    assert 'variable.kt_dx*=0.96' in motion and 'variable.kt_dz*=0.96' in motion
+    assert 'variable.kt_dx=variable.kt_dx*(0.96)' in motion and 'variable.kt_dz=variable.kt_dz*(0.96)' in motion
    elif kind in ('sakura','pine','ginkgo','snow'):
     assert 'math.random(-2,14)' in init
     assert c['minecraft:particle_lifetime_expression']['max_lifetime']=='(300)/20'
-    assert 'variable.kt_dy-=0.00075' in motion
+    assert 'variable.kt_dy=variable.kt_dy-(0.00075)' in motion
     assert c['minecraft:particle_motion_collision']['expire_on_contact']
   block=read(ROOT/f'runtime/BP/blocks/{kind}_incense.json')['minecraft:block']
   assert block['components']['minecraft:tick']['interval_range']==[20,20]

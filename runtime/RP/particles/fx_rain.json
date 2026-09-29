@@ -65,7 +65,7 @@
         "creation_event": "kt_init"
       },
       "minecraft:particle_initialization": {
-        "per_render_expression": "variable.kt_age=math.floor(variable.particle_age*20);loop(math.max(0,math.min(variable.kt_age+1,variable.kt_life)-variable.kt_tick), {variable.kt_oldx=variable.kt_x;variable.kt_oldy=variable.kt_y;variable.kt_oldz=variable.kt_z;variable.kt_dy-=0.06;variable.kt_x+=variable.kt_dx;variable.kt_dx*=0.98;variable.kt_y+=variable.kt_dy;variable.kt_dy*=0.98;variable.kt_z+=variable.kt_dz;variable.kt_dz*=0.98;variable.kt_tick+=1;});"
+        "per_render_expression": "variable.kt_age=math.floor(variable.particle_age*20);loop(math.max(0,math.min(variable.kt_age+1,variable.kt_life)-variable.kt_tick), {variable.kt_oldx=variable.kt_x;variable.kt_oldy=variable.kt_y;variable.kt_oldz=variable.kt_z;variable.kt_dy=variable.kt_dy-(0.06);variable.kt_x=variable.kt_x+(variable.kt_dx);variable.kt_dx=variable.kt_dx*(0.98);variable.kt_y=variable.kt_y+(variable.kt_dy);variable.kt_dy=variable.kt_dy*(0.98);variable.kt_z=variable.kt_z+(variable.kt_dz);variable.kt_dz=variable.kt_dz*(0.98);variable.kt_tick=variable.kt_tick+(1);});"
       },
       "minecraft:particle_motion_parametric": {
         "relative_position": [
@@ -83,7 +83,7 @@
     },
     "events": {
       "kt_init": {
-        "expression": "variable.kt_tick=0;variable.kt_age=0;variable.kt_x=0;variable.kt_oldx=variable.kt_x;variable.kt_y=0;variable.kt_oldy=variable.kt_y;variable.kt_z=0;variable.kt_oldz=variable.kt_z;variable.kt_dx=(0)+math.random(-0.4,0.4);variable.kt_dy=(0)+math.random(-0.4,0.4);variable.kt_dz=(0)+math.random(-0.4,0.4);variable.kt_scale=(math.random(0,1)+math.random(0,1)+1)*0.06/math.max(0.000000000001,math.sqrt(variable.kt_dx*variable.kt_dx+variable.kt_dy*variable.kt_dy+variable.kt_dz*variable.kt_dz));variable.kt_dx*=variable.kt_scale;variable.kt_dy*=variable.kt_scale;variable.kt_dz*=variable.kt_scale;variable.kt_dy+=0.1;variable.kt_dx*=0.3;variable.kt_dz*=0.3;variable.kt_dy=math.random(0.1,0.3);variable.kt_frame=math.floor(math.random(0,4));"
+        "expression": "variable.kt_tick=0;variable.kt_age=0;variable.kt_x=0;variable.kt_oldx=variable.kt_x;variable.kt_y=0;variable.kt_oldy=variable.kt_y;variable.kt_z=0;variable.kt_oldz=variable.kt_z;variable.kt_dx=(0)+math.random(-0.4,0.4);variable.kt_dy=(0)+math.random(-0.4,0.4);variable.kt_dz=(0)+math.random(-0.4,0.4);variable.kt_scale=(math.random(0,1)+math.random(0,1)+1)*0.06/math.max(0.000000000001,math.sqrt(variable.kt_dx*variable.kt_dx+variable.kt_dy*variable.kt_dy+variable.kt_dz*variable.kt_dz));variable.kt_dx=variable.kt_dx*(variable.kt_scale);variable.kt_dy=variable.kt_dy*(variable.kt_scale);variable.kt_dz=variable.kt_dz*(variable.kt_scale);variable.kt_dy=variable.kt_dy+(0.1);variable.kt_dx=variable.kt_dx*(0.3);variable.kt_dz=variable.kt_dz*(0.3);variable.kt_dy=math.random(0.1,0.3);variable.kt_frame=math.floor(math.random(0,4));"
       }
     }
   }

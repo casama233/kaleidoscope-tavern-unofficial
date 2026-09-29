@@ -72,6 +72,11 @@ test('wax, dye, glow and ink feedback sound keys and wax count are distinct',asy
  assert.deepEqual(sounds.map(x=>x[0]),['sign.dye.use','kaleidoscope_tavern:glow_ink_use','sign.ink_sac.use','copper.wax.on']);assert.equal(particles.length,10);
 });
 
+test('Molang compound-assignment guard runs separately from JavaScript arithmetic',()=>{
+ const result=spawnSync('python',['tools/effects/check_molang.py'],{cwd:ROOT,encoding:'utf8'});
+ assert.equal(result.status,0,result.stdout+'\n'+result.stderr);
+});
+
 // Numerical harness for our explicitly emitted Molang subset. It does NOT
 // replace the Bedrock parser; its purpose is recurrence and FPS independence.
 function simulator(effect,seed=11,initial={}){

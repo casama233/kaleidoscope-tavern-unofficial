@@ -46,7 +46,7 @@ def debris(name,path,terrain=False):
 def build(native=None):
  p=particle('happy_villager','wax','math.floor(20/(math.random(0,1)*0.8+0.2))',BASESIZE+'*(math.random(0,0.6)+0.5)')
  texture(p,TEX+'glint',8,8,False)
- initial=super_velocity(PACK)+''.join(f'variable.kt_d{a}*=0.02;' for a in 'xyz')
+ initial=super_velocity(PACK)+''.join(f'variable.kt_d{a}=variable.kt_d{a}*(0.02);' for a in 'xyz')
  save('fx_happy_villager',motion(p,initial,gravity=0,friction=.99))
  save('fx_glass_block',debris('glass_block',TEX+'glass',terrain=True))
  # Generated splash_potion model's particle texture is its first layer, the
@@ -54,7 +54,7 @@ def build(native=None):
  save('fx_potion_shard',debris('potion_shard',TEX+'potion_overlay'))
  p=json.loads((OUT/'fx_spell.json').read_text());e=p['particle_effect'];e['description']['identifier']='kaleidoscope_tavern:fx_potion_spell'
  e['components']['minecraft:particle_appearance_tinting']['color']=[f'variable.kt_{k} ?? 1' for k in ('red','green','blue')]+[1]
- e['events']['kt_init']['expression']+='variable.kt_dx*=(variable.kt_power ?? 1);variable.kt_dy=(variable.kt_dy-0.1)*(variable.kt_power ?? 1)+0.1;variable.kt_dz*=(variable.kt_power ?? 1);'
+ e['events']['kt_init']['expression']+='variable.kt_dx=variable.kt_dx*((variable.kt_power ?? 1));variable.kt_dy=(variable.kt_dy-0.1)*(variable.kt_power ?? 1)+0.1;variable.kt_dz=variable.kt_dz*((variable.kt_power ?? 1));'
  save('fx_potion_spell',p)
  old=json.loads((OUT/'pressed_wood.json').read_text())
  wood=old['particle_effect']['description']['basic_render_parameters']['texture']

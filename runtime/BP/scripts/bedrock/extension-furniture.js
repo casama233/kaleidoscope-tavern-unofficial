@@ -7,7 +7,7 @@ import {cellarCabinetItem,cellarCabinetSlot,cellarCabinetPut,cellarCabinetTake,c
 import {externalVisual} from '../core/extension-content.js';
 import {ExtensionCabinetStore,emptyExtensionStorage} from '../core/extension-storage.js';
 import {facingForYaw,facingVector} from '../core/furniture.js';
-import {makeStack,hand,sameHand,canWrite,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,air} from './transactions.js';
+import {makeStack,hand,sameHand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,air} from './transactions.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
 const NS='kaleidoscope_tavern',ANCHOR=NS+':extension_storage_anchor';
@@ -76,11 +76,11 @@ export function createExtensionFurniture(registry){
   if(!state.slots[slot])return {changed:false};return {changed:true,...cellarCabinetTake(state,slot)};
  }
  function interact({player,block,held,face,faceLocation,revision}){
-  canWrite(player);requireBlockReach(player,block.dimension,block.location);const ctx=load(block);
+  canInteract(player);requireBlockReach(player,block.dimension,block.location);const ctx=load(block);
   check((ctx.old?.revision??-1)===revision,'STATE_CONFLICT');const item=hand(player);
-  if(item){check(classifier(ctx.store.def)(item.typeId),'NOT_STORAGE_BOTTLE');check(isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');}
+  if(item)check(classifier(ctx.store.def)(item.typeId),'NOT_STORAGE_BOTTLE');
   const tx=choose(block,ctx.state,item?.typeId,face,faceLocation);if(!tx.changed)return false;
-  commit(player,block,ctx,tx.state,item?1:0,tx.item?[{id:tx.item,count:1}]:[]);return true;
+  commit(player,block,ctx,tx.state,item?1:0,tx.item?[{id:tx.item,count:1,delivery:'hand'}]:[]);return true;
  }
  function recover({player,block,revision}){
   canWrite(player);requireBlockReach(player,block.dimension,block.location);const ctx=load(block);

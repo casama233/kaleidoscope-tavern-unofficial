@@ -6,6 +6,7 @@ export const nativeItems=new NativeItemStorage({backend:world,findEntity:id=>wor
 /** Only the audited ID-based storage layouts opt into native item persistence. */
 export function storageItemIds(key,value){
  if(/^kt:(holder|tilted_rack|circular_rack|cellar_cabinet|bar_cabinet)\//.test(key))return !value?[]:value.slots??(key.startsWith('kt:holder/')?[value.item]:[value.left,value.right]);
+ if(key.startsWith('kt:extension_storage/'))return !value?[]:value.layout==='bar_cabinet'?[value.left,value.right]:value.layout==='cellar_cabinet'?value.slots:undefined;
  if(key.startsWith('kt:bottles/'))return value?.items??[];
  return undefined;
 }

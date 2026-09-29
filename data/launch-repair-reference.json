@@ -1910,8 +1910,8 @@
     "runtime/BP/scripts/bedrock/extension-furniture.js": {
       "before": "7544b973d83231580225157ccecd2f3bef0358c4c87170d57cf3ee8aa4cb7d85",
       "beforeProjected": "7544b973d83231580225157ccecd2f3bef0358c4c87170d57cf3ee8aa4cb7d85",
-      "after": "be24943ffbbe83a32fc4844ec9f3b7e24b5b6f8b943a79dd72bde61aff27c3cb",
-      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references."
+      "after": "e3ed4b0869cb0a60928d4ce4c3228cb26ce8ac2d9bf48b64022b3c5a482c9177",
+      "reason": " 0.6.56: remove unsolicited success hints; index live cabinet helper anchors before removal and prune invalid storage maintenance references. Pickup follow-up: registered external cabinets share native slot persistence, main-hand delivery, Adventure interaction and Java cabinet feedback."
     },
     "runtime/BP/scripts/bedrock/cultivation.js": {
       "before": "76d14952d0946f6218c21d808bed4da27d80e37356c8f3297630e4141cd48ba0",
@@ -2030,8 +2030,8 @@
     "runtime/BP/scripts/bedrock/transactions.js": {
       "before": "96f413aa32f637cd0b7c2ab6c0cc8fd0ef9a41ec5d02728eb05176f0a3b44ab3",
       "beforeProjected": "96f413aa32f637cd0b7c2ab6c0cc8fd0ef9a41ec5d02728eb05176f0a3b44ab3",
-      "after": "5e6ec7867d362c61147b4408f96aae7e3bd4a93225a3230d08be105f18816ade",
-      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md."
+      "after": "e5c53bc595eb77975e1b484f040aebb2032260a326c27cf9644c60b235e43185",
+      "reason": "Pickup parity audit 2026-09-29: native ItemStack persistence, Java storage/main-hand versus Forge inventory delivery, per-block creative handling, exact Java slot boundaries and feedback; details in docs/PICKUP-PARITY-20260929.md. Pickup follow-up: registered external cabinets share native slot persistence, main-hand delivery, Adventure interaction and Java cabinet feedback."
     },
     "runtime/BP/scripts/bedrock/vanilla-bottle-displays.js": {
       "before": "94197cad01cd6040084901547b8ab8fac669dc8fd68ad09c01084c63bb49d868",
@@ -2151,7 +2151,7 @@
     "runtime/RP/models/entity/liquid_pressing_tub_lava.geo.json": "6f27ed94b9afe7a272aad02889a7d6eb94fdf8e68a1373bdb85b0ffe903a7167",
     "runtime/RP/models/entity/liquid_barrel_water.geo.json": "eb0a16c9854581b1497708a3c93b368ec40debd0fc02c6b18b28e66366521ae7",
     "runtime/BP/entities/stored_items.json": "f6b03ac07252288d8e058c94f811584ad5321f2af48e9e8f0bc096c61bee9f68",
-    "runtime/BP/scripts/bedrock/native-item-storage.js": "547a1ca01f9131d655b49101c050ac880c76f267e4de6c3fba87f2a961bb8189",
+    "runtime/BP/scripts/bedrock/native-item-storage.js": "11fb28849d6f6c798d20546985add6a12dde59cb3bb30b01e8fe6d1bfa4f4b5a",
     "runtime/BP/scripts/bedrock/pickup-feedback.js": "cc5fe8b7bb4af7a60f3edf2042baea3457e1bdbd25ceab8d459a1b6a007d43ad",
     "runtime/BP/scripts/bedrock/pickup-overflow.js": "9728be8fd1e94de439a04f862c460dd978b6ace9e10c9f2fb861c504b64bc8be",
     "runtime/BP/scripts/core/hit-basis.js": "3a01f7d1b74be8a96cb1249e86d299c1e388dcb4aa2130d7fd0f810a19f59135",

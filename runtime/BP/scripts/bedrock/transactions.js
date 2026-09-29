@@ -115,7 +115,7 @@ export function commitStoredStateTransaction(player,{block,key,store,old,next,ta
   ()=>{try{native?.rollback();}finally{restoreWater(block,oldWater);store.restore(key,raw);}}
  );
  native?.finish();
- if(native&&block.typeId!=='minecraft:air'&&(take>0||give.length)&&!isBreakRecovery(player))storageFeedback(block,{kind:key.startsWith('kt:bar_cabinet/')?'cabinet':'rack',taking:give.length>0,heldAmount:incoming?.amount??0});
+ if(native&&block.typeId!=='minecraft:air'&&(take>0||give.length)&&!isBreakRecovery(player))storageFeedback(block,{kind:key.startsWith('kt:bar_cabinet/')||(next??old)?.layout==='bar_cabinet'?'cabinet':'rack',taking:give.length>0,heldAmount:incoming?.amount??0});
  if(afterCommit)try{afterCommit(block,next);}catch(error){console.warn('[Tavern storage visual] '+error);}
  return next;
 }

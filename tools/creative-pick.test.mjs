@@ -63,7 +63,7 @@ test('addon cup uses the same host store',()=>{
 });
 test('empty cup can be copied before initialization',()=>assert.equal(resolveCreativePick(block(NS+':cup_empty_glassware')).typeId,EMPTY_CUP));
 test('native potion metadata is restored exactly',()=>{
- const b=block(NS+':potion_bottle'),potion={effectId:'minecraft:strong_swiftness',deliveryId:'minecraft:consumable'};
+ const b=block(NS+':potion_bottle'),potion={effectId:'minecraft:strong_swiftness',deliveryId:'Consume'};
  world.setDynamicProperty(bottleDisplayKey(b),JSON.stringify({item:'minecraft:potion',potion}));const before=[...world.dp];assert.deepEqual(potionIdentity(resolveCreativePick(b)),potion);assert.deepEqual([...world.dp],before);
 });
 test('missing potion data is not replaced by an arbitrary potion',()=>assert.throws(()=>resolveCreativePick(block(NS+':potion_bottle'))));

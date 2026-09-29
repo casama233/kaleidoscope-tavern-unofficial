@@ -31,15 +31,13 @@ export function hitQuadrant(location){
  check(location.x>=0&&location.x<=1&&location.z>=0&&location.z<=1,'INVALID_FACE_LOCATION');
  return (location.x>.5?1:0)+(location.z>.5?2:0);
 }
-/** Measured 2026-09-29: the client rotates the 90° and 270° facings opposite to the
- * rotation the glassware holder's bone_visibility map assumes, so east/west-facing
- * holders render each stored glass in the diagonal world quadrant while north/south
- * facings render world-fixed (reported: placements crossed, north/south correct).
- * Address glass slots through this display map, not raw world quadrants. Flipping the
- * bone_visibility map in a future release must remove this compensation in the same
- * change, or the two corrections will cancel into the old bug. */
+/** Canonical GlasswareHolder identity: the persisted Bedrock state number is the
+ * same world-X/Z quadrant Java GlasswareHolderBlock.getSlotFromHit returns.
+ * Facing must never remap state IDs. The resource-pack bone_visibility map is
+ * solely responsible for counter-rotating the four model bones so state N is
+ * rendered back in world quadrant N. */
 export function glasswareHolderStateSlot(facing,quadrant){
  check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');
  check(Number.isInteger(quadrant)&&quadrant>=0&&quadrant<=3,'INVALID_FACE_LOCATION');
- return facing%2?3-quadrant:quadrant;
+ return quadrant;
 }

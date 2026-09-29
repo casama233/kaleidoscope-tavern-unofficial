@@ -111,6 +111,7 @@ test('new feedback aliases resolve to original sound files and per-event pitch/v
  for(const row of manifest.assets)assert.equal(createHash('sha256').update(fs.readFileSync(path.join(ROOT,row.target))).digest('hex'),row.sha256);
  assert.equal(defs['kaleidoscope_tavern:incense_click_on'].sounds[0].pitch,.6);
  assert.equal(defs['kaleidoscope_tavern:incense_click_off'].sounds[0].pitch,.5);
+ assert.equal(defs['kaleidoscope_tavern:incense_click_on'].sounds[0].volume,.3);
  assert.equal(defs['kaleidoscope_tavern:glow_ink_use'].sounds.length,9);
 });
 test('barrel lid closes with Java BARREL_OPEN, not a substituted close event',async()=>{

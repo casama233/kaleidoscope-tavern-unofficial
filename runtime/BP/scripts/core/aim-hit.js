@@ -13,12 +13,21 @@ export const SLOT_BOXES=Object.freeze({
  circular_rack:Object.freeze({origin:Object.freeze([-8,0,-8]),size:Object.freeze([16,2,16])}),
  glassware_holder:Object.freeze({origin:Object.freeze([-8,11,-7]),size:Object.freeze([16,5,14])})
 });
-/** Selection box for a block id; the unit cube when the type has no reviewed box. */
-export function slotBoxFor(blockId){
+/** Effective selection box after the block's reviewed facing permutation.
+ * This is a block-transform operation, NOT an engine clicked-face basis table.
+ * Facing 1 applies the shipped Y=-90 degree transform: (x,z) -> (-z,x).
+ * Integer quarter turns avoid trigonometric noise at a selection-box boundary. */
+export function slotBoxFor(blockId,facing=0){
  check(typeof blockId==='string'&&blockId.length>0,'INVALID_BLOCK_ID');
+ check(Number.isInteger(facing)&&facing>=0&&facing<=3,'INVALID_FACING');
  const short=blockId.slice(blockId.indexOf(':')+1);
- for(const [kind,box] of Object.entries(SLOT_BOXES))if(short===kind||short.endsWith('_'+kind))return box;
- return {origin:[-8,0,-8],size:[16,16,16]};
+ let box;
+ for(const [kind,reviewed] of Object.entries(SLOT_BOXES))if(short===kind||short.endsWith('_'+kind)){box=reviewed;break;}
+ box??={origin:[-8,0,-8],size:[16,16,16]};
+ if(facing===0)return box;
+ let minX=box.origin[0],maxX=minX+box.size[0],minZ=box.origin[2],maxZ=minZ+box.size[2];
+ for(let turn=0;turn<facing;turn++)[minX,maxX,minZ,maxZ]=[-maxZ,-minZ,minX,maxX];
+ return {origin:[minX,box.origin[1],minZ],size:[maxX-minX,box.size[1],maxZ-minZ]};
 }
 /** Slab-method entry point of an aim ray into one block's selection box.
  * Returns block-local coordinates in 0..1, or undefined when the ray misses the box. */
@@ -61,6 +70,9 @@ export function aimPointFor(player,block){
   const origin=player?.getHeadLocation?.(),direction=player?.getViewDirection?.();
   if(!origin||!direction)return undefined;
   const location=block?.location;if(!location)return undefined;
-  return aimHitInBlock(origin,direction,location,slotBoxFor(block.typeId));
+  // Non-square/inset boxes rotate with the block. Full-cube addon cabinets
+  // are rotation-invariant even when their own facing state has another name.
+  const facing=block.permutation?.getState?.('kaleidoscope_tavern:facing')??0;
+  return aimHitInBlock(origin,direction,location,slotBoxFor(block.typeId,facing));
  }catch{return undefined;}
 }

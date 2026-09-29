@@ -30,7 +30,7 @@ const close=(a,b,message='points differ')=>{for(const k of ['x','y','z'])assert.
 const absolute=(block,p)=>Object.fromEntries(['x','y','z'].map(k=>[k,block.location[k]+p[k]]));
 function playerAt(block,point,face,mode='Touch',hotbar=false){
  const p=new Player('storage-routing-'+(++serial),d);p.selectedSlotIndex=7;
- const n=face==='Up'?{x:0,y:1,z:0}:normal[faces.indexOf(face)];
+ const n=face==='Up'?{x:0,y:1,z:0}:face==='Down'?{x:0,y:-1,z:0}:normal[faces.indexOf(face)];
  const at=absolute(block,point),eye={x:at.x+2*n.x,y:at.y+2*n.y,z:at.z+2*n.z};
  p.location={...eye,y:eye.y-1.5};p.getHeadLocation=()=>({...eye});p.getViewDirection=()=>({x:-n.x,y:-n.y,z:-n.z});
  p.inputInfo={lastInputModeUsed:mode,touchOnlyAffectsHotbar:hotbar};
@@ -185,3 +185,34 @@ test('switching the held slot still aborts the queued insertion',()=>{
  capture(()=>emit(p,b,'East',rawEvent(point,1),{afterEmit:()=>{p.selectedSlotIndex=6;}}));
  assert.equal(desc.read(b).revision,0);assert.equal(p.inventory.getItem(7)?.typeId,WINE);
 });
+
+
+// GLASSWARE_WORLD_SLOT_REGRESSION_V4
+// Java uses world X/Z quadrants for all facings. Exercise the real furniture
+// event registration and native stored-item transaction, not a copied selector.
+const HOLDER_EMPTY_GLASSWARE=NS+'empty_glassware';
+const HOLDER_SLOT_STATES=[0,1,2,3].map(i=>NS+'glass_slot_'+i);
+const holderTarget=q=>({x:q%2?.75:.25,y:11/16,z:q>=2?.75:.25});
+const holderRawDown=p=>({x:1-p.x,y:p.y,z:1-p.z}); // measured native Down event basis
+for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let facing=0;facing<4;facing++)test(
+ 'glassware holder world slot round trip facing '+facing+' '+mode,()=>{
+  const b=block(NS+'glassware_holder',facing);
+  capture(()=>{
+   for(let q=0;q<4;q++){
+    const point=holderTarget(q),p=playerAt(b,point,'Down',mode);
+    p.inventory.setItem(7,new ItemStack(HOLDER_EMPTY_GLASSWARE));
+    const e=emit(p,b,'Down',holderRawDown(point));assert.equal(e.cancel,true);
+    assert.equal(p.inventory.getItem(7),undefined,'insert consumes exactly one glass');
+    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,i<=q?1:0,
+     'world quadrant '+q+' must write state '+q+', never a facing remap');
+   }
+   for(let q=3;q>=0;q--){
+    const point=holderTarget(q),p=playerAt(b,point,'Down',mode);
+    const e=emit(p,b,'Down',holderRawDown(point));assert.equal(e.cancel,true);
+    assert.equal(p.inventory.getItem(7)?.typeId,HOLDER_EMPTY_GLASSWARE,'take returns aimed glass');
+    for(let i=0;i<4;i++)assert.equal(b.permutation.getState(HOLDER_SLOT_STATES[i])??0,i<q?1:0,
+     'world quadrant '+q+' must clear state '+q+', never its diagonal');
+   }
+  });
+ }
+);

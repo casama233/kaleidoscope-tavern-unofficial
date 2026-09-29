@@ -77,26 +77,15 @@ test('non-finite hits are rejected rather than silently mis-slotted',()=>{
  assert.throws(()=>worldFromHit('Down',{x:NaN,y:.5,z:.31},'event'),/INVALID_HIT_LOCATION/);
 });
 
-test('north/south facings address slots by raw world quadrant',()=>{
- for(const q of [0,1,2,3]){
-  assert.equal(glasswareHolderStateSlot(0,q),q);
-  assert.equal(glasswareHolderStateSlot(2,q),q);
- }
+test('every facing persists the Java world quadrant as the glass state slot',()=>{
+ for(const facing of [0,1,2,3])for(const q of [0,1,2,3])
+  assert.equal(glasswareHolderStateSlot(facing,q),q,'facing '+facing+' quadrant '+q);
 });
 
-test('east/west facings address slots through the diagonal display map',()=>{
+test('facing changes never migrate or reinterpret an existing glass state id',()=>{
  for(const q of [0,1,2,3]){
-  assert.equal(glasswareHolderStateSlot(1,q),3-q,'facing east');
-  assert.equal(glasswareHolderStateSlot(3,q),3-q,'facing west');
- }
-});
-
-test('the addressed slot renders back under the aim on every facing',()=>{
- // Display map measured 2026-09-29: identity on facings 0/2, diagonal on facings 1/3.
- const display=(facing,state)=>facing%2?3-state:state;
- for(const facing of [0,1,2,3])for(const aim of [0,1,2,3]){
-  const state=glasswareHolderStateSlot(facing,aim);
-  assert.equal(display(facing,state),aim,`facing ${facing} aim ${aim}`);
+  const ids=new Set([0,1,2,3].map(f=>glasswareHolderStateSlot(f,q)));
+  assert.deepEqual([...ids],[q]);
  }
 });
 

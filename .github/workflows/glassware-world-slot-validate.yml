@@ -1,4 +1,5 @@
 name: Validate hanging glassware world-slot repair (temporary)
+# retry after correcting the state-key test fixture
 on:
   push:
     branches: [fix/glassware-world-slot-baseline-20260929]

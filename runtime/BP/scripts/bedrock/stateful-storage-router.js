@@ -27,22 +27,23 @@ export function nativeBlockHit(player,block){
 function storageHit(player,block,face,point){
  const fallback={face,faceLocation:point?{...point}:undefined};
  try{
-  const input=player.inputInfo,mode=input.lastInputModeUsed;
-  if(!['KeyboardAndMouse','Gamepad'].includes(mode)&&!(mode==='Touch'&&input.touchOnlyAffectsHotbar)){storageHitDiagnostics.eventHits++;return fallback;}
-  const hit=nativeBlockHit(player,block);
-  if(!hit)return fallback;
-  storageHitDiagnostics.nativeHits++;
+  const input=player.inputInfo,mode=input?.lastInputModeUsed;
   // Slot selection must follow the world point the player aimed at. The engine reports
-  // its hit in the clicked face's own basis (measured mirrors per face, which mirrored
-  // cabinet picks east/west), so the player's own eye ray is intersected with the
-  // block's reviewed selection box instead; the measured-basis conversion stays as the
-  // fallback for unreviewed shapes.
+  // its hit in the clicked face's own basis (measured mirrors per face), and touch taps
+  // report an off-centre event hit, so the player's own eye ray is intersected with the
+  // block's reviewed selection box first for every input mode; the per-mode engine
+  // values stay as the fallback (measured-basis conversion for raycasts, the raw event
+  // hit for touch).
   const aimed=aimPointFor(player,block);
-  const corrected=worldFromHit(hit.face,hit.faceLocation,'ray');
-  const location=aimed??corrected??hit.faceLocation;
-  if((storageHitDiagnostics.picks??0)<8){
+  const rayMouse=['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar);
+  const hit=rayMouse?nativeBlockHit(player,block):undefined;
+  if(hit)storageHitDiagnostics.nativeHits++;
+  if(!aimed&&!hit){storageHitDiagnostics.eventHits++;return fallback;}
+  const corrected=hit?worldFromHit(hit.face,hit.faceLocation,'ray'):undefined;
+  const location=aimed??corrected??fallback.faceLocation;
+  if((storageHitDiagnostics.picks??0)<12){
    storageHitDiagnostics.picks=(storageHitDiagnostics.picks??0)+1;
-   console.warn('[Tavern storage aim] '+JSON.stringify({tick:system.currentTick,block:block.typeId,face:hit.face,engine:hit.faceLocation,aimed:aimed??null,basis:corrected??null,used:aimed?'aim':corrected?'basis':'engine'}));
+   console.warn('[Tavern storage aim] '+JSON.stringify({tick:system.currentTick,block:block.typeId,mode,face:hit?.face??fallback.face,engine:fallback.faceLocation??null,ray:hit?.faceLocation??null,aimed:aimed??null,corrected:corrected??null,used:aimed?'aim':corrected?'basis':'event'}));
   }
   if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
    storageHitDiagnostics.corrected++;

@@ -1,0 +1,172 @@
+name: Prepare Tavern 0.6.67 beta (temporary)
+on:
+  push:
+    branches: [release/0.6.67-beta.1]
+    paths: [.github/workflows/release-067-prepare.yml]
+permissions:
+  contents: write
+concurrency:
+  group: tavern-067-prepare
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'casama233/kaleidoscope-tavern-unofficial'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: tavern
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: baseline
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 14a0a5877a8bb6f6735582de7d8832b379aa7951
+          path: liquor
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install Pillow==11.3.0
+
+      - name: Refresh reviewed runtime hashes without changing immutable baselines
+        working-directory: tavern
+        shell: python
+        run: |
+          import hashlib,json
+          from pathlib import Path
+          root=Path.cwd(); path=root/'data/launch-repair-reference.json'
+          data=json.loads(path.read_text())
+          changed=[
+            'runtime/BP/manifest.json',
+            'runtime/RP/manifest.json',
+            'runtime/BP/scripts/main.js',
+            'runtime/BP/scripts/data/cookery-guide-payload.js',
+          ]
+          note=' 0.6.67: paired version bump and public Cookery 1.0.8 dependency; preserves current gameplay/runtime fixes.'
+          for name in changed:
+              row=data['reviewedChanges'][name]
+              immutable=(row.get('before'),row.get('beforeProjected'))
+              row['after']=hashlib.sha256((root/name).read_bytes()).hexdigest()
+              if note not in row['reason']: row['reason']+=note
+              assert immutable==(row.get('before'),row.get('beforeProjected')),(name,'immutable baseline changed')
+          path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({n:data['reviewedChanges'][n]['after'] for n in changed},indent=2))
+
+      - name: Verify current World Liquor creative catalog pairing
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../evidence
+          python tools/creative/catalog.py --peer ../liquor | tee ../evidence/creative-pair.json
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+          python tools/creative/catalog.py --write
+          python tools/creative/catalog.py --root ../liquor --write
+          python ../liquor/tools/build_effect_names.py --check
+          git diff --exit-code -- runtime/
+          git -C ../liquor diff --exit-code -- runtime/
+
+      - name: Full static, Java-source and immutable-baseline validation
+        working-directory: tavern
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/check_release.py 2>&1 | tee ../evidence/check-release.log
+          python tools/build_storage_visuals.py
+          git diff --exit-code -- runtime/
+          python tools/check_storage_rendering.py --java-source ../java --report docs/STORAGE-VALIDATION-0.6.67.json 2>&1 | tee ../evidence/storage-validation.log
+          python tools/check_launch.py --java-source ../java --baseline ../baseline 2>&1 | tee ../evidence/launch-validation.log
+
+      - name: Run key integrated regressions
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test tools/glassware/hit-basis.test.mjs tools/glassware/aim-hit.test.mjs 2>&1 | tee ../evidence/glassware-pure.tap
+          node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/glassware/storage-routing.test.mjs 2>&1 | tee ../evidence/storage-routing.tap
+          node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/pickup/core.test.mjs tools/pickup/adapters.test.mjs 2>&1 | tee ../evidence/pickup.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/foundation.tap
+          node --test tools/mechanics/mechanics-regression.test.mjs 2>&1 | tee ../evidence/mechanics.tap
+
+      - name: Build reproducible package and pin archive hash
+        working-directory: tavern
+        shell: python
+        run: |
+          import hashlib,json,subprocess
+          from pathlib import Path
+          subprocess.run(['python','tools/build_release.py'],check=True)
+          cfg=json.loads(Path('release.json').read_text())
+          archive=Path('dist')/f"Kaleidoscope_Tavern_Unofficial_{cfg['version']}_{cfg['artifact_suffix']}.mcaddon"
+          digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+          request=Path('.github/release-request.json')
+          data=json.loads(request.read_text())
+          assert data['version']=='0.6.67' and data['tag']=='v0.6.67-beta.1'
+          data['expected_archive_sha256']=digest
+          request.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          Path('../evidence/ARCHIVE_SHA256').write_text(digest+'\n')
+          print(digest)
+
+      - name: Commit generated 0.6.67 evidence and exact release request
+        working-directory: tavern
+        shell: python
+        run: |
+          import os,subprocess,pathlib
+          def out(*args): return subprocess.check_output(['git',*args],text=True).strip()
+          branch='refs/heads/release/0.6.67-beta.1'
+          assert out('ls-remote','origin',branch).split()[0]==os.environ['GITHUB_SHA'],'release branch advanced'
+          expected=[
+            'data/launch-repair-reference.json',
+            '.github/release-request.json',
+            'docs/VALIDATION-0.6.67-VISUAL.json',
+            'docs/VISUAL-MATERIAL-AUDIT-0.6.67.json',
+            'docs/REPAIR-STATIC-0.6.67.json',
+            'docs/MOTION-STATIC-0.6.67.json',
+            'docs/LAUNCH-VALIDATION-0.6.67.json',
+            'docs/STORAGE-VALIDATION-0.6.67.json',
+          ]
+          missing=[p for p in expected if not pathlib.Path(p).is_file()]
+          assert not missing,('missing generated evidence',missing)
+          subprocess.run(['git','add','--',*expected],check=True)
+          subprocess.run(['git','rm','--','.github/workflows/release-067-prepare.yml'],check=True)
+          staged=set(out('diff','--cached','--name-only').splitlines())
+          assert staged==set(expected)|{'.github/workflows/release-067-prepare.yml'},staged
+          # Nothing else generated may be silently left behind except build/evidence outputs outside source.
+          unstaged=set(out('diff','--name-only').splitlines())
+          assert not unstaged,('unexpected unstaged source changes',unstaged)
+          out('config','user.name','github-actions[bot]')
+          out('config','user.email','41898282+github-actions[bot]@users.noreply.github.com')
+          subprocess.run(['git','commit','-m','release: pin verified 0.6.67 beta evidence and archive hash'],check=True)
+          subprocess.run(['git','push','origin','HEAD:'+branch],check=True)
+          pathlib.Path('../evidence/PREPARED_COMMIT').write_text(out('rev-parse','HEAD')+'\n')
+          print('PREPARED_COMMIT='+out('rev-parse','HEAD'))
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Tavern-0.6.67-preparation-evidence
+          path: |
+            evidence/
+            tavern/dist/
+          retention-days: 14
+          if-no-files-found: warn

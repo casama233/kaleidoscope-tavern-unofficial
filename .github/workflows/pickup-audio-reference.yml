@@ -1,0 +1,47 @@
+name: Pickup audio reference (temporary)
+on:
+  push:
+    branches: [fix/pickup-parity-20260929]
+    paths: [.github/workflows/pickup-audio-reference.yml]
+permissions:
+  contents: read
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resolve and verify Mojang 1.20.1 assets
+        shell: python
+        run: |
+          import urllib.request,json,pathlib,hashlib,os
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'pickup-audio';root.mkdir()
+          def get(url):
+              with urllib.request.urlopen(url,timeout=45) as r:return r.read()
+          manifest=json.loads(get('https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'))
+          version=next(v for v in manifest['versions'] if v['id']=='1.20.1')
+          detail=json.loads(get(version['url']));idx=json.loads(get(detail['assetIndex']['url']))['objects']
+          def asset(name):
+              digest=idx[name]['hash'];raw=get('https://resources.download.minecraft.net/'+digest[:2]+'/'+digest)
+              assert hashlib.sha1(raw).hexdigest()==digest
+              return raw
+          sounds=json.loads(asset('minecraft/sounds.json'))
+          events=['block.item_frame.remove_item','block.glass.place','block.stone.place','block.amethyst_block.place','entity.item.pickup']
+          refs={};definitions={}
+          def resolve(event,volume=1,pitch=1,weight=1,seen=()):
+              assert event not in seen
+              for row in sounds[event]['sounds']:
+                  row={'name':row} if isinstance(row,str) else row
+                  name=row['name'].removeprefix('minecraft:');v=volume*row.get('volume',1);p=pitch*row.get('pitch',1);w=weight*row.get('weight',1)
+                  if row.get('type')=='event':yield from resolve(name,v,p,w,seen+(event,));continue
+                  source='minecraft/sounds/'+name+'.ogg';raw=asset(source);path='sounds/kt_pickup/'+name+'.ogg';dest=root/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(raw)
+                  refs[path]={'source':source,'sha1':idx[source]['hash'],'sha256':hashlib.sha256(raw).hexdigest()}
+                  yield {'name':path[:-4],'volume':v,'pitch':p,'weight':w,'stream':False}
+          for event in events:definitions['kt_pickup.'+event]={'category':'player' if event.startswith('entity.') else 'block','sounds':list(resolve(event))}
+          (root/'definitions.json').write_text(json.dumps(definitions,indent=2)+'\n')
+          (root/'provenance.json').write_text(json.dumps({'version':'1.20.1','assetIndex':detail['assetIndex'],'events':{e:sounds[e] for e in events},'assets':refs},indent=2)+'\n')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pickup-java-audio
+          path: ${{ runner.temp }}/pickup-audio
+          retention-days: 3
+          if-no-files-found: error

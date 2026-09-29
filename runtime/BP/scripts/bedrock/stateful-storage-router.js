@@ -12,46 +12,61 @@ import {worldFromHit} from '../core/hit-basis.js';
 import {aimPointFor} from '../core/aim-hit.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
-// Mouse/gamepad actions use the same native gaze hit used for block targeting.
-// Touch may select off-centre on the screen, so retain its event hit location.
-export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,errors:0,picks:0,last:null};
+// The own-eye aim point is primary for EVERY input mode. Engine hits are only
+// fallbacks. Diagnostics must describe the value returned to the slot selector.
+export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,aimHits:0,basisHits:0,errors:0,diagnosticErrors:0,picks:0,last:null,lastError:null};
 /** Gaze hit on the same block, or undefined when the ray misses it or leaves the block. */
 export function nativeBlockHit(player,block){
  try{
   const hit=player.getBlockFromViewDirection({maxDistance:8});
-  if(!hit?.faceLocation||hit.block.dimension.id!==block.dimension.id||
+  if(!hit?.faceLocation||hit.block?.dimension?.id!==block.dimension.id||
    ['x','y','z'].some(axis=>hit.block.location[axis]!==block.location[axis]))return undefined;
   return {face:hit.face,faceLocation:{...hit.faceLocation}};
  }catch{return undefined;}
 }
-function storageHit(player,block,face,point){
- const fallback={face,faceLocation:point?{...point}:undefined};
+function hitError(stage,error){
+ storageHitDiagnostics.errors++;
+ storageHitDiagnostics.lastError={stage,message:String(error)};
+}
+function recordStorageHit(player,block,route,mode,engine,hit,aimed,corrected,used,result,reason){
+ // Observation is deliberately outside resolution. Neither unavailable diagnostic
+ // properties nor a logging failure may discard an already selected aim point.
  try{
-  const input=player.inputInfo,mode=input?.lastInputModeUsed;
-  // Slot selection must follow the world point the player aimed at. The engine reports
-  // its hit in the clicked face's own basis (measured mirrors per face), and touch taps
-  // report an off-centre event hit, so the player's own eye ray is intersected with the
-  // block's reviewed selection box first for every input mode; the per-mode engine
-  // values stay as the fallback (measured-basis conversion for raycasts, the raw event
-  // hit for touch).
-  const aimed=aimPointFor(player,block);
-  const rayMouse=['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar);
-  const hit=rayMouse?nativeBlockHit(player,block):undefined;
+  storageHitDiagnostics.picks++;
   if(hit)storageHitDiagnostics.nativeHits++;
-  if(!aimed&&!hit){storageHitDiagnostics.eventHits++;return fallback;}
-  const corrected=hit?worldFromHit(hit.face,hit.faceLocation,'ray'):undefined;
-  const location=aimed??corrected??fallback.faceLocation;
-  if((storageHitDiagnostics.picks??0)<12){
-   storageHitDiagnostics.picks=(storageHitDiagnostics.picks??0)+1;
-   console.warn('[Tavern storage aim] '+JSON.stringify({tick:system.currentTick,block:block.typeId,mode,face:hit?.face??fallback.face,engine:fallback.faceLocation??null,ray:hit?.faceLocation??null,aimed:aimed??null,corrected:corrected??null,used:aimed?'aim':corrected?'basis':'event'}));
-  }
-  if(point&&['x','y','z'].some(axis=>Math.abs(point[axis]-location[axis])>.02)){
-   storageHitDiagnostics.corrected++;
-   storageHitDiagnostics.last={tick:system.currentTick,block:block.typeId,facing:block.permutation.getState('kaleidoscope_tavern:facing'),inputMode:mode,event:{...point},ray:location};
-   if(storageHitDiagnostics.corrected<=8)console.warn('[Tavern storage hit] '+JSON.stringify(storageHitDiagnostics.last));
-  }
-  return {face:hit.face,faceLocation:location};
- }catch{storageHitDiagnostics.errors++;return fallback;}
+  if(used==='aim')storageHitDiagnostics.aimHits++;
+  else if(used==='basis')storageHitDiagnostics.basisHits++;
+  else storageHitDiagnostics.eventHits++;
+  if(engine&&result.faceLocation&&['x','y','z'].some(axis=>Math.abs(engine[axis]-result.faceLocation[axis])>.02))storageHitDiagnostics.corrected++;
+  const row={schema:2,tick:system.currentTick,route,block:block.typeId,mode:mode??null,
+   face:result.face,engine:engine??null,ray:hit?.faceLocation??null,aimed:aimed??null,
+   corrected:corrected??null,used,resolved:result.faceLocation??null,reason};
+  // Diagnostic fields are optional; custom addon state names must not affect aim.
+  try{row.facing=block.permutation.getState('kaleidoscope_tavern:facing')??null;}catch{}
+  storageHitDiagnostics.last=row;
+  let verbose=false;try{verbose=player.hasTag?.('kaleidoscope_tavern:debug_storage_aim')===true;}catch{}
+  if(storageHitDiagnostics.picks<=12||verbose)console.warn('[Tavern storage aim] '+JSON.stringify(row));
+ }catch{storageHitDiagnostics.diagnosticErrors++;}
+}
+function storageHit(player,block,face,point,route){
+ const fallback={face,faceLocation:point?{...point}:undefined};
+ // Resolve aim independently of inputInfo and the optional native raycast. On touch
+ // that raycast is intentionally absent; the former hit.face dereference threw AFTER
+ // printing used=aim, and a broad catch silently returned the mirrored event point.
+ const aimed=aimPointFor(player,block);
+ let mode,rayMouse=false,hit,corrected;
+ try{
+  const input=player.inputInfo;mode=input?.lastInputModeUsed;
+  rayMouse=['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar);
+ }catch(error){hitError('inputInfo',error);}
+ if(rayMouse)hit=nativeBlockHit(player,block);
+ // A valid aim does not depend on decoding a secondary engine hit at all.
+ if(!aimed&&hit)try{corrected=worldFromHit(hit.face,hit.faceLocation,'ray');}catch(error){hitError('rayBasis',error);}
+ const used=aimed?'aim':corrected?'basis':'event';
+ const result={face:hit?.face??fallback.face,faceLocation:aimed??corrected??fallback.faceLocation};
+ const reason=aimed?null:corrected?'AIM_UNAVAILABLE_ENGINE_BASIS':hit?'AIM_UNAVAILABLE_NO_REVIEWED_BASIS':'AIM_UNAVAILABLE_EVENT_FALLBACK';
+ recordStorageHit(player,block,route,mode,fallback.faceLocation,hit,aimed,corrected,used,result,reason);
+ return result;
 }
 
 function revisionOf(read,block){
@@ -138,7 +153,7 @@ export function installStatefulStorageRoutes({
  registerJavaBlockUseHandler(e=>{
   if(e.cancel||!isBlock(e.block))return;
   const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
-  const {face,faceLocation}=storageHit(e.player,e.block,e.blockFace,e.faceLocation);
+  const {face,faceLocation}=storageHit(e.player,e.block,e.blockFace,e.faceLocation,routeId);
   let revision,consume=false;
   try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch(error){if(failClosed){e.cancel=true;if(e.isFirstEvent!==false)system.run(()=>safe(e.player,()=>{throw error;}));}return;}
   if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;

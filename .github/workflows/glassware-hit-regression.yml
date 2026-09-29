@@ -4,26 +4,53 @@ on:
     paths:
       - 'runtime/**'
       - 'tools/glassware/**'
+      - 'tools/foundation/**'
+      - 'tools/pickup/**'
       - '.github/workflows/glassware-hit-regression.yml'
 permissions:
   contents: read
 jobs:
   glassware-hit-basis:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
+          path: tavern
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: ce8c41e48c731985221945479650de121e4d477c
+          path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Hit-basis recovery and slot order (not BDS/client acceptance)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hit geometry and display mapping (not BDS/client acceptance)
+        working-directory: tavern
         run: |
-          set -o pipefail
-          node --test tools/glassware/hit-basis.test.mjs 2>&1 | tee glassware-hit-regressions.tap
+          set -euo pipefail
+          mkdir -p ../evidence
+          git rev-parse HEAD > ../evidence/TAVERN_COMMIT
+          git -C ../liquor rev-parse HEAD > ../evidence/LIQUOR_COMMIT
+          node --test tools/glassware/hit-basis.test.mjs tools/glassware/aim-hit.test.mjs 2>&1 | tee ../evidence/glassware-hit-regressions.tap
+          node tools/check_surface_repairs.mjs | tee ../evidence/surface-mapping.json
+      - name: Event-to-inventory counterexamples, partial fix, and complete code fix
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -euo pipefail
+          python tools/glassware/check-storage-counterfactual.py --evidence ../evidence/counterfactual
+          git diff --exit-code -- runtime/
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: glassware-hit-script-regressions
-          path: glassware-hit-regressions.tap
+          path: evidence/
           retention-days: 14

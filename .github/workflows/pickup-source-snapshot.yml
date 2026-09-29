@@ -1,0 +1,36 @@
+name: Pickup source snapshot (temporary)
+on:
+  push:
+    branches: [fix/java-pickup-parity-20260929]
+    paths: [.github/workflows/pickup-source-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: a5774a73bf7593882fd19e8e645453d85b8eb3a7
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Collect pinned repository and upstream source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pickup-source/port" "$RUNNER_TEMP/pickup-source/java"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/pickup-source/port"
+          git clone --quiet https://github.com/KaleidoscopeMods/KaleidoscopeTavern.git "$RUNNER_TEMP/java-ref"
+          git -C "$RUNNER_TEMP/java-ref" checkout --quiet c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          git -C "$RUNNER_TEMP/java-ref" archive HEAD src/main/java gradle.properties | tar -x -C "$RUNNER_TEMP/pickup-source/java"
+          curl --fail --silent --show-error --location https://raw.githubusercontent.com/MinecraftForge/MinecraftForge/1.20.x/src/main/java/net/minecraftforge/items/ItemHandlerHelper.java -o "$RUNNER_TEMP/pickup-source/ItemHandlerHelper.java"
+          find "$RUNNER_TEMP/pickup-source" -type f \( -iname '*.ttf' -o -iname '*.otf' -o -iname '*.woff*' \) -delete
+          tar -cJf "$RUNNER_TEMP/pickup-source.tar.xz" -C "$RUNNER_TEMP" pickup-source
+          sha256sum "$RUNNER_TEMP/pickup-source.tar.xz"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pickup-pinned-source
+          path: ${{ runner.temp }}/pickup-source.tar.xz
+          retention-days: 3
+          if-no-files-found: error

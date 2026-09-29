@@ -88,16 +88,17 @@ test('bar special single-bottle layout retains Java shared rule',()=>{
  const row=emptyExtensionStorage(def()),tx=barCabinetPut(row,false,KT+':brandy_q6');assert(tx.state.single);assert.equal(tx.state.left,KT+':brandy_q6');assert.equal(barCabinetPut(tx.state,true,regular.items[0]).changed,false);
 });
 test('shared transaction takes one item and returns exact quality',()=>{
- const p=makePlayer(),b=createBlock();near(p,b);p.inventory.setItem(0,new ItemStack(regular.items[5],2));assert(act(p,b));assert.equal(p.inventory.getItem(0).amount,1);assert.equal(host.load(b).state.left,regular.items[5]);p.inventory.setItem(0,undefined);assert(act(p,b));// Empty-hand collection intentionally preserves the empty hand for repeat use.
- assert.equal(p.inventory.getItem(0),undefined);
- assert.deepEqual(p.inventory.items.filter(Boolean).map(item=>[item.typeId,item.amount]),[[regular.items[5],1]]);
- assert.equal(host.load(b).state.left,null);
+ const p=makePlayer(),b=createBlock();near(p,b);p.inventory.setItem(0,new ItemStack(regular.items[5],2));assert(act(p,b));assert.equal(p.inventory.getItem(0).amount,1);assert.equal(host.load(b).state.left,regular.items[5]);p.inventory.setItem(0,undefined);assert(act(p,b));assert.equal(p.inventory.getItem(0).typeId,regular.items[5]);assert.equal(host.load(b).state.left,null);
 });
 test('full inventory rejects direct recovery transaction without deleting storage',()=>{
  const p=makePlayer(),b=createBlock(def(),regular.items[5]);near(p,b);for(let i=0;i<36;i++)p.inventory.setItem(i,new ItemStack('minecraft:stone',64));
  const ctx=host.load(b),before=ctx.store.raw(ctx.store.key);assert.throws(()=>host.recover({player:p,block:b,revision:ctx.old.revision}));assert.equal(ctx.store.raw(ctx.store.key),before);assert.equal(b.typeId,def().block);
 });
-test('metadata-bearing input is rejected, not flattened',()=>{const p=makePlayer(),b=createBlock();near(p,b);const item=new ItemStack(regular.items[0]);item.nameTag='keep';p.inventory.setItem(0,item);assert.throws(()=>act(p,b),/METADATA/);assert.equal(p.inventory.getItem(0).nameTag,'keep');assert.equal(host.load(b).state.left,null);});
+test('metadata-bearing cabinet input round-trips natively, not flattened',()=>{
+ const p=makePlayer(),b=createBlock();near(p,b);const item=new ItemStack(regular.items[0]);item.nameTag='keep';item.setLore(['saved lore']);p.inventory.setItem(0,item);
+ assert(act(p,b));assert.equal(p.inventory.getItem(0),undefined);assert(act(p,b));const received=p.inventory.getItem(0);
+ assert.equal(received.typeId,item.typeId);assert.equal(received.nameTag,item.nameTag);assert.deepEqual(received.meta,item.meta);assert.equal(received.amount,1);assert.equal(host.load(b).state.left,null);
+});
 test('injected inventory write failure restores both slots and storage',()=>{
  const p=makePlayer(),b=createBlock();near(p,b);p.inventory.setItem(0,new ItemStack(regular.items[0],2));const ctx=host.load(b),before=ctx.store.raw(ctx.store.key);p.inventory.failAt=p.inventory.writes;assert.throws(()=>act(p,b));assert.equal(p.inventory.getItem(0).amount,2);assert.equal(ctx.store.raw(ctx.store.key),before);
 });
@@ -175,4 +176,24 @@ test('actual addon effect behaviour consumes its vendored SDK snapshots',async()
 });
 test('vendored SDK bytes match the host repository source of truth',()=>{
  for(const name of ['protocol.js','tavern-extension-client.js','tavern-foundation-client.js','tavern-effects.js'])assert.equal(fs.readFileSync(liquor+'runtime/BP/scripts/sdk/'+name,'utf8'),fs.readFileSync(new URL('../../sdk/'+name,import.meta.url),'utf8'),name);
+});
+
+// Host-native pickup policy applies to every registered cabinet, not a fixed addon ID list.
+for(const definition of bundle.furniture)for(const mode of [GameMode.Survival,GameMode.Creative,GameMode.Adventure])test('external native slot identity '+definition.block+' '+mode,()=>{
+ const p=makePlayer(),b=createBlock(definition);near(p,b);p.selectedSlotIndex=7;p.mode=mode;
+ const points=definition.kind==='bar_cabinet'?[{x:.8,y:.8,z:0},{x:.2,y:.8,z:0}]:Array.from({length:9},(_,i)=>({x:1-(i%3+.5)/3,y:1-(Math.floor(i/3)+.5)/3,z:0}));
+ const originals=points.map((point,i)=>{const item=new ItemStack(compact.items[0]);item.nameTag='slot '+i;item.setLore(['native slot '+i]);p.inventory.setItem(7,item);assert(act(p,b,point));assert.equal(p.inventory.getItem(7),undefined,'Java cabinets split(1), including Creative');return item;});
+ const ctx=host.load(b),receipt=JSON.parse(ctx.store.raw(ctx.store.key)).migrationDigest;
+ for(let i=points.length-1;i>=0;i--){
+  p.inventory.setItem(7,undefined);p.inventory.setItem(1,originals[i]);const soundStart=d.sounds?.length??0;assert(act(p,b,points[i]));
+  const received=p.inventory.getItem(7);assert.equal(received.typeId,originals[i].typeId);assert.equal(received.nameTag,originals[i].nameTag);assert.deepEqual(received.meta,originals[i].meta);assert.equal(received.amount,1);assert.equal(p.inventory.getItem(1).amount,1,'do not merge away from main hand');
+  const expected=definition.kind==='bar_cabinet'?'kt_pickup.block.glass.place':'kt_pickup.entity.item_frame.remove_item';assert(d.sounds.slice(soundStart).some(x=>x.id===expected));
+ }
+ assert.equal(JSON.parse(ctx.store.raw(ctx.store.key)).migrationDigest,receipt,'preserve cross-pack migration receipt');assert.equal(d.getEntities({type:KT+':stored_items',location:b.location,maxDistance:2}).length,0);
+});
+for(const kind of ['bar_cabinet','cellar_cabinet'])test('external '+kind+' preserves native data after failed write and rejects spectator',()=>{
+ const p=makePlayer(),b=createBlock(def('oak',kind));near(p,b);const point={x:.8,y:.8,z:0},item=new ItemStack(compact.items[0]);item.nameTag='retry native';p.inventory.setItem(0,item);
+ p.mode=GameMode.Spectator;assert.throws(()=>act(p,b,point),/GAME_MODE_LOCKED/);assert.equal(p.inventory.getItem(0).nameTag,item.nameTag);p.mode=GameMode.Survival;
+ d.failSpawn=true;try{assert.throws(()=>act(p,b,point));}finally{d.failSpawn=false;}assert.equal(p.inventory.getItem(0).nameTag,item.nameTag);assert(act(p,b,point));
+ p.inventory.failAt=p.inventory.writes;assert.throws(()=>act(p,b,point));assert.equal(p.inventory.getItem(0),undefined);assert(act(p,b,point));assert.equal(p.inventory.getItem(0).nameTag,item.nameTag);
 });

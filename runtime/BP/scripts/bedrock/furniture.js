@@ -1,3 +1,7 @@
+import {nativeItems,glasswareStorageKey} from './native-item-storage.js';
+import {storageFeedback} from './pickup-feedback.js';
+import {nativeBlockHit} from './stateful-storage-router.js';
+import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
 import {plantGrowthFeedback} from './interaction-particles.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
@@ -8,12 +12,10 @@ import {NS,COLORS,LIGHT_COLORS,FACING,CONNECTION,AXIS,POSITION,HALF,ATTACH_FACE,
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,canWrite,placementTake,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air,playerInteractionReach} from './transactions.js';
+import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,plus,tell,safe,handSnapshot,sameHand,exchangeBlocks,air,playerInteractionReach} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
-import {nativeBlockHit} from './stateful-storage-router.js';
-import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
 const locks=new Locks(),helpers=new Map();let cursor=0;const EMPTY_GLASSWARE=NS+':empty_glassware';
 export const furnitureDiagnostics={placed:0,recovered:0,seated:0,dismounted:0,dyed:0,spawned:0,orphans:0,duplicates:0,expired:0,multiblockRepairs:0,errors:[],seatHeight:.8125,sofaSeatHeight:.45};
 function error(e){furnitureDiagnostics.errors.push(String(e));if(furnitureDiagnostics.errors.length>16)furnitureDiagnostics.errors.shift();}
@@ -46,9 +48,20 @@ function verticalDoublePair(block){
 export function repairVerticalDouble(block){
  const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;block.setPermutation(air());furnitureDiagnostics.multiblockRepairs++;return true;
 }
+function glasswareIds(block){return GLASSWARE_SLOTS.map(state=>block.permutation.getState(state)===1?EMPTY_GLASSWARE:null);}
 export function useGlasswareHolder(player,block,faceLocation){
- canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderStateSlot(block.permutation.getState(FACING)??0,glasswareHolderSlot(faceLocation)),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
- return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('place.amethyst_block',center(block.location),{volume:1,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('place.amethyst_block',center(block.location),{volume:1,pitch:1}));return true;});
+ canInteract(player);isNear(player,block.dimension,block.location);check(furnitureBlock(block.typeId)?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');
+ const slot=glasswareHolderStateSlot(block.permutation.getState(FACING)??0,glasswareHolderSlot(faceLocation)),state=GLASSWARE_SLOTS[slot],h=hand(player),key=glasswareStorageKey(block);
+ return locks.with([key,player.id],()=>{
+  const oldIds=glasswareIds(block),occupied=!!oldIds[slot],putting=h?.typeId===EMPTY_GLASSWARE;
+  if(putting&&occupied)return false;
+  if(!putting){check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;}
+  const nextIds=oldIds.slice();nextIds[slot]=putting?EMPTY_GLASSWARE:null;
+  const give=putting?[]:[{id:EMPTY_GLASSWARE,count:1,delivery:'hand'}];
+  const native=nativeItems.plan({key,dimension:block.dimension,position:block.location,oldIds,nextIds,incoming:h,give});
+  exchangeBlocks(player,putting?placementTake(player):0,give,[{block,permutation:block.permutation.withState(state,putting?1:0)}],{interaction:true,native});
+  storageFeedback(block,{kind:'glassware'});return true;
+ });
 }
 export const glasswareHitDiagnostics={corrections:0,errors:0,last:null};
 /** Resolve which of the four glass slots the player aimed at. Java reads the world X/Z
@@ -127,7 +140,8 @@ export function recoverFurniture(player,block){
  }
  const result=locks.with([key,player.id],()=>{
   const seats=seated(f)?atAnchor(d,p):[];const give=[{id:itemId(f),count:1}];if(f.kind==='glassware_holder'){const n=glasswareHolderCount(block);if(n)give.push({id:EMPTY_GLASSWARE,count:n});}
-  exchangeBlocks(player,0,give,[{block,permutation:air()}]);for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
+  const native=f.kind==='glassware_holder'?nativeItems.plan({key:glasswareStorageKey(block),dimension:d,position:p,oldIds:glasswareIds(block),nextIds:[],give}):undefined;
+  exchangeBlocks(player,0,give,[{block,permutation:air()}],{native});for(const e of seats)optional(()=>discard(e,'orphans'));furnitureDiagnostics.recovered++;return itemId(f);
  });
  if(f.kind==='sofa')optional(()=>syncSofaNeighborhood(d,p));if(f.kind==='table')optional(()=>syncTableNeighborhood(d,p));if(f.kind==='bar_counter')optional(()=>syncBarCounterNeighborhood(d,p));return result;
 }

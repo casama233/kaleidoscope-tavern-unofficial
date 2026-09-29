@@ -27,8 +27,11 @@ export async function fixture({synchronous=false}={}){
   static resolve(id,states={}){return new Permutation(id,states);}
  }
  class ItemStack{
-  constructor(id,amount=1){this.typeId=id;this.amount=amount;this.maxAmount=64;}
-  clone(){return Object.assign(new ItemStack(this.typeId,this.amount),this);}
+  constructor(id,amount=1){this.typeId=id;this.amount=amount;this.maxAmount=64;this.lore=[];}
+  clone(){const copy=Object.assign(new ItemStack(this.typeId,this.amount),this);copy.lore=[...this.lore];return copy;}
+  getLore(){return [...this.lore];}
+  getRawLore(){return [...this.lore];}
+  setLore(lore){this.lore=[...lore];return this;}
  }
  const coordinate=p=>`${p.x},${p.y},${p.z}`;
  const dimension={id:'minecraft:overworld',getBlock(p){return blocks.get(coordinate(p));},getEntities(query={}){return entities.filter(e=>!e.removed&&(!query.type||e.typeId===query.type)&&(!query.families||e.typeId!=='minecraft:item')&&(!query.volume||['x','y','z'].every(k=>e.location[k]>=query.location[k]&&e.location[k]<query.location[k]+query.volume[k])));},spawnItem(stack,location){const e={id:`item-${++serial}`,typeId:'minecraft:item',location:{...location},stack:stack.clone(),removed:false,hasTag:()=>false,getDynamicPropertyIds:empty,getComponent(id){return id==='minecraft:item'?{itemStack:this.stack.clone()}:undefined;},remove(){this.removed=true;}};entities.push(e);return e;},spawnEntity(typeId,location){const data=new Map(),e={id:`visual-${++serial}`,typeId,location,removed:false,hasTag:()=>false,getDynamicProperty:k=>data.get(k),setDynamicProperty:(k,v)=>data.set(k,v),getDynamicPropertyIds:()=>[...data.keys()],setProperty:no,setRotation:no,remove(){this.removed=true;}};entities.push(e);return e;},playSound(id,p,o){sounds.push({id,p,o,tick:system.currentTick});},spawnParticle(id,p,m){particles.push({id,p,m,tick:system.currentTick});}};
@@ -36,15 +39,15 @@ export async function fixture({synchronous=false}={}){
   const b={dimension,location:{...p},permutation:Permutation.resolve(id,states),isWaterlogged:false,get typeId(){return this.permutation.type.id;},get isAir(){return this.typeId==='minecraft:air';},setWaterlogged(v){this.isWaterlogged=v;},setType(id){this.setPermutation(Permutation.resolve(id));},setPermutation(next){if(failBlock?.(this,next)){failBlock=undefined;throw Error('injected block failure');}const old=this.permutation;this.permutation=next;changes.push({p:{...this.location},from:old.type.id,to:next.type.id});if(old.type.id!==next.type.id&&old.type.id.startsWith(NS+':')&&naturalBreak){const event={block:this,brokenBlockPermutation:old};if(synchronous)naturalBreak(event,{});else system.run(()=>naturalBreak(event,{}));}}};blocks.set(coordinate(p),b);return b;
  }
  const stubs={
-  'java-placement-router.js':{nativeEmptyHandBlockUse:no,registerJavaBlockUseHandler:no},
+  'java-placement-router.js':{nativeEmptyHandBlockUse:no,registerJavaBlockUseHandler:no,registerJavaItemUseOnRoute:no},
   'pressing-ingredients.js':{pressingIngredientVisuals:empty,configurePressingIngredients:no},
   'immersion.js':{feedback:no},
   'pressing-feedback.js':{pressFeedback:no,spawnRejectedIngredients:no,ingredientFeedback:no},
   'barrel-ingredients.js':{barrelIngredientVisuals:empty,configureBarrelIngredients:no},
   'protected-break-router.js':{registerProtectedBreakRoute:no},
-  'transactions.js':{inventory:no},
+  'transactions.js':{inventory:no,makeStack:(id,count=1)=>new ItemStack(id,count),hand:no,canWrite:no,canInteract:no,handSnapshot:()=>({slot:0,id:'',amount:0}),sameHand:no,placementTake:()=>1,safe:(p,fn)=>fn(),blockAt:no,requireBlockReach:no,pickupOutputs:no,commitPickupInventory:no,pickupFeedback:no},
   'tap-sources.js':{inspectTapSource:no,finishSourceTap:no},
-  'potions.js':{restorePotion:()=>new ItemStack('minecraft:potion')},
+  'potions.js':{restorePotion:()=>new ItemStack('minecraft:potion'),potionDisplayInput:no,potionDisplayRemoval:no},
   'mixology.js':{naturalCupStack:no,naturalShakerStack:no}
  };
  const context=vm.createContext({console:{warn:no,log:no},structuredClone,TextEncoder,TextDecoder});

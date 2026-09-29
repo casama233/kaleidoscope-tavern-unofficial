@@ -12,6 +12,7 @@ export async function load(url,context,next){
  if(url!==fixture.href)return next(url,context);
  let source=await fs.readFile(fixture,'utf8');
  source=source.replace('const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));',"const root=fileURLToPath(new URL('../../../',import.meta.url));");
+ source=source.replaceAll('minecraft:consumable','Consume').replaceAll("minecraft:splash'","ThrownSplash'").replaceAll("minecraft:lingering'","ThrownLingering'");
  source+=`
 // Explicit test-only fixture additions for World Liquor and current stable API.
 // Keep the archived fake-server immutable. Its old delivery IDs and missing
@@ -39,6 +40,15 @@ export function registerFixturePack(root){
   if(def?.description?.identifier)entityFamilies.set(def.description.identifier,[...(def.components?.['minecraft:type_family']?.family??[])]);
  }
 }
+const oldItemComponent=ItemStack.prototype.getComponent;
+ItemStack.prototype.getComponent=function(id){if(id==='minecraft:dyeable'&&itemInfo.get(this.typeId)?.definition?.components?.[id])return this.meta[id]??=( {color:undefined} );return oldItemComponent.call(this,id);};
+Properties.prototype.getDynamicPropertyIds=function(){return [...this.dp.keys()];};
+const oldEntityComponent=Entity.prototype.getComponent;
+Entity.prototype.getComponent=function(id){
+ if(this.typeId==='kaleidoscope_tavern:stored_items'&&id==='minecraft:inventory'){this.storageInventory??=new Container(9);return {container:this.storageInventory};}
+ return oldEntityComponent.call(this,id);
+};
+
 `;
  return {format:'module',source,shortCircuit:true};
 }

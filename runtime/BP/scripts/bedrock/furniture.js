@@ -1,3 +1,4 @@
+import {plantGrowthFeedback} from './interaction-particles.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {setWithWater,waterAt} from './waterlogging.js';
@@ -45,7 +46,7 @@ export function repairVerticalDouble(block){
 }
 export function useGlasswareHolder(player,block,faceLocation){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId);check(f?.kind==='glassware_holder','NOT_GLASSWARE_HOLDER');const slot=glasswareHolderSlot(faceLocation),state=GLASSWARE_SLOTS[slot],occupied=block.permutation.getState(state)===1,h=hand(player),key=anchorKey(block.dimension.id,block.location);
- return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('block.amethyst_block.place',center(block.location),{volume:.65,pitch:1}));return true;});
+ return locks.with([key,player.id],()=>{if(h?.typeId===EMPTY_GLASSWARE){if(occupied)return false;check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');exchangeBlocks(player,1,[],[{block,permutation:block.permutation.withState(state,1)}]);optional(()=>block.dimension.playSound('place.amethyst_block',center(block.location),{volume:1,pitch:1}));return true;}check(!h,'EMPTY_GLASSWARE_OR_HAND_REQUIRED');if(!occupied)return false;exchangeBlocks(player,0,[{id:EMPTY_GLASSWARE,count:1}],[{block,permutation:block.permutation.withState(state,0)}]);optional(()=>block.dimension.playSound('place.amethyst_block',center(block.location),{volume:1,pitch:1}));return true;});
 }
 /** Stool helpers also render the stool; sofa helpers are invisible and exist only while occupied. */
 export function ensureSeat(block){
@@ -105,7 +106,7 @@ export function recoverFurniture(player,block){
 export function recolorLight(player,block){
  canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId),h=hand(player),color=dyeColor(h?.typeId);
  check(f?.kind==='light'&&color,'DYE_REQUIRED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');if(color===f.color)return false;
- return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;optional(()=>block.dimension.playSound('dye.use',center(block.location),{volume:.7,pitch:1}));return true;});
+ return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;plantGrowthFeedback(block);optional(()=>block.dimension.playSound('sign.dye.use',center(block.location),{volume:1,pitch:1}));return true;});
 }
 export function maintainSeat(e){
  const helper=seatFurniture(e.typeId);if(!helper)return;

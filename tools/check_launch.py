@@ -84,7 +84,12 @@ def main():
     assert impact.count('.subscribe(resolveMolotovImpact)')==2
     assert 'entity.setDynamicProperty(RESOLVED,true)' in impact
     assert 'igniteMolotov(entity.dimension,{...entity.location})' in impact
-    assert "['minecraft:basic_flame_particle',30]" in impact and "['minecraft:basic_smoke_particle',20]" in impact
+    # The exact-count private emitters replace vanilla Bedrock approximations.
+    assert "emitBurst(dimension,location,'molotov_flame')" in impact
+    assert "emitBurst(dimension,location,'molotov_smoke')" in impact
+    contracts=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {EFFECT_BURSTS} from './runtime/BP/scripts/core/effect-feedback.js'; console.log(JSON.stringify(EFFECT_BURSTS));"],cwd=ROOT,text=True))
+    for key,particle,count in [('molotov_flame','flame',30),('molotov_smoke','smoke',20)]:
+        assert contracts[key]=={'particle':particle,'count':count,'offset':[0,.5,0],'spread':[3,1,3],'speed':.1}
     assert 'spawnEntity(' not in impact and 'setItem(' not in impact and 'applyImpulse(' not in impact
     assert 'installMolotovEvents();' in main
     tipsy=(ROOT/'runtime/BP/scripts/bedrock/tipsy-visual.js').read_text()

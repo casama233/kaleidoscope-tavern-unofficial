@@ -22,27 +22,46 @@ assert third=={'position':[0,-1.5,-1],'rotation':[90,0,0],'scale':0.5}
 identifiers=set()
 for p in (ROOT/'runtime/RP/particles').glob('*.json'):
  ident=read(p)['particle_effect']['description']['identifier'];assert ident not in identifiers,(p,'Duplicate particle ID');identifiers.add(ident)
+# The 2026-09-28 source repair replaces one-second steady emitters with exact
+# per-sample bursts. Keep the prior immutable fingerprints above; validate the
+# new bounded source contract rather than disabling this historical gate.
 for kind in ('sakura','pine','ginkgo','spore','catnip','snow','butterfly','firefly'):
- for layer,rate in [('plume',2),('ambient',19)]:
+ for layer in ('plume','ambient'):
   p=ROOT/f'runtime/RP/particles/{kind}_incense_{layer}.json';effect=read(p)['particle_effect'];c=effect['components']
   assert effect['description']['identifier']==f'kt_assets_a17:{kind}_incense_{layer}'
-  assert c['minecraft:emitter_lifetime_once']['active_time']==1
+  assert c['minecraft:emitter_lifetime_once']['active_time']==0.01
   assert c['minecraft:particle_appearance_billboard']['facing_camera_mode']=='lookat_xyz'
-  assert 'minecraft:emitter_lifetime_looping' not in c and 'minecraft:emitter_rate_instant' not in c
-  assert c['minecraft:emitter_rate_steady']=={'spawn_rate':'variable.kt_spawn_rate','max_particles':math.ceil(rate)+2}
+  assert 'minecraft:emitter_lifetime_looping' not in c and 'minecraft:emitter_rate_steady' not in c
+  assert c['minecraft:emitter_rate_instant']=={'num_particles':'variable.kt_spawn_count'}
+  assert c['minecraft:emitter_shape_point']['offset']==[0,0,0]
+  assert c['minecraft:particle_lifetime_events']['creation_event']=='kt_motion_init'
+  motion=c['minecraft:particle_initialization']['per_render_expression']
+  init=effect['events']['kt_motion_init']['expression']
+  assert 'variable.particle_age*20' in motion and 'variable.kt_tick+=1' in motion
+  assert 'math.min(' in motion and 'variable.kt_tick=0;' in init
+  assert 'minecraft:particle_motion_parametric' in c
   texture=effect['description']['basic_render_parameters']['texture']
-  assert texture in ('textures/particle/cherry_petal_atlas','textures/particle/particles') or (ROOT/'runtime/RP'/(texture+'.png')).exists(),texture
-  if layer=='ambient':
-   shape=c['minecraft:emitter_shape_box'];assert shape['half_dimensions'][0]==shape['half_dimensions'][2]==16
+  assert (ROOT/'runtime/RP'/(texture+'.png')).exists(),texture
+  if layer=='plume':
+   assert 'variable.kt_dx*=0.95' in motion and 'variable.kt_dz*=0.95' in motion
+   assert c['minecraft:particle_lifetime_expression']['max_lifetime']=='(40+math.floor(variable.particle_random_1*20))/20'
+  else:
+   assert 'math.random(-16,16)' in init
    if kind=='firefly':
     assert 'minecraft:particle_appearance_lighting' not in c
-    assert shape['half_dimensions'][1]==5.33/2
-   else:assert shape['half_dimensions'][1]==8
-  if layer=='ambient' and kind in ('sakura','pine','ginkgo','snow'):
-   assert c['minecraft:particle_lifetime_expression']['max_lifetime']==15
-   assert c['minecraft:particle_motion_collision']['expire_on_contact']
+    assert 'math.random(-0.67,4.66)' in init
+    assert 'variable.kt_dx*=0.96' in motion and 'variable.kt_dz*=0.96' in motion
+   elif kind in ('sakura','pine','ginkgo','snow'):
+    assert 'math.random(-2,14)' in init
+    assert c['minecraft:particle_lifetime_expression']['max_lifetime']=='(300)/20'
+    assert 'variable.kt_dy-=0.00075' in motion
+    assert c['minecraft:particle_motion_collision']['expire_on_contact']
   block=read(ROOT/f'runtime/BP/blocks/{kind}_incense.json')['minecraft:block']
   assert block['components']['minecraft:tick']['interval_range']==[20,20]
+source=(ROOT/'runtime/BP/scripts/bedrock/decorations.js').read_text()
+assert "emit('plume',1)" in source and "emit('ambient',5)" in source
+assert 'Math.floor(Math.random()*3)===0' in source
+assert 'registerJavaAmbient(block,emitIncenseSample)' in source
 # The registered component must retain native empty-hand callbacks and absence-only repair.
 source=(ROOT/'runtime/BP/scripts/bedrock/mixology.js').read_text()
 assert "cupStore.raw(key)===undefined" in source
@@ -54,7 +73,7 @@ assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read(ROOT/'release.json')['version']
 report={'version':version,'baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
 'preservedAnimations':list(baseline['unchangedShakerAnimations']),'thirdPersonCandidate':third,
-'finiteParticleEmitters':16,'scriptTickInterval':20,'plumeParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)/3,'ambientParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)*5,
+'finiteParticleEmitters':16,'nativeRegistrationTickInterval':20,'ambientSamplingTickInterval':1,'emissionMode':'recipient-local source-sampled bursts','plumeParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)/3,'ambientParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)*5,
 'cupAbsentRecordRecovery':'structural checks passed; real event execution not tested',
 'newPlayerEntityOverride':False,'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}
 (ROOT/f'docs/REPAIR-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

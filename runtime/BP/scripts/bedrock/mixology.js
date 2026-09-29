@@ -1,3 +1,5 @@
+import {registerJavaAmbient} from './java-ambient.js';
+import {playWorldSound} from './feedback-diagnostics.js';
 import {cupBlock,cupItem,isCupBlock} from '../core/extension-content.js';
 /** Java shaker lifecycle, rebuilt for 0.6.22.
  * One held-use session; one item identity. Contents live on the item or placed
@@ -107,7 +109,7 @@ export function pourIngredient(player,block){
   else{check(isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}
   const container=next.slots.at(-1).container;
   commitBlock(player,shakerStore,key,next,1,container?[{id:container,count:1}]:[],block);
-  shakerPut(block,next.revision);showShakerSlots(player,next);return next;
+  shakerPut(block,next.revision,!!container);showShakerSlots(player,next);return next;
  });
 }
 export function pickupShaker(player,block,{breaking=false}={}){
@@ -201,7 +203,7 @@ export function pourHeldShakerNow(player,block){
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};
   if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
   commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm(cupBlock(next.item),next.facing));
-  syncCupVisual(block);feedback(block,'fill',next.revision);cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;
+  syncCupVisual(block);playWorldSound(block.dimension,'bottle.fill',block.location,{volume:1,pitch:1});cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;
  });
 }
 export function syncCupVisual(block){
@@ -288,7 +290,7 @@ export function registerMixologyComponents({blockComponentRegistry:blocks,itemCo
   },
   onTick:({block})=>{
    syncCupVisual(block);
-   if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);
+   if(block.typeId===NS+':cup_mystery_cocktail')registerJavaAmbient(block,(viewer,b)=>cocktailEffect(b,1,.2,viewer));
   }
  });
  items.registerCustomComponent(NS+':portable_shaker',{});

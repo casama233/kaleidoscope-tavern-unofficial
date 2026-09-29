@@ -46,7 +46,7 @@ export function applyCustomEffect(p,row){
   if(!d.getBlock(at)?.isAir||!d.getBlock({...at,y:at.y+1})?.isAir)return true;
   if(!p.tryTeleport(at,{checkForBlocks:true}))return true;
   p.clearVelocity();p.addEffect('hunger',600,{amplifier:0,showParticles:true});
-  try{d.playSound('mob.shulker.teleport',at);}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
+  for(const location of [here,at])try{d.playSound('entity.player.teleport',location,{volume:1,pitch:1});}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
  }
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;

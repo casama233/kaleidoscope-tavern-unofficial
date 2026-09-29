@@ -49,6 +49,21 @@ class PickDefinitions(unittest.TestCase):
                         self.assertEqual(data.count(current.encode()),1)
                         data=data.replace(current.encode(),previous.encode())
                 else:
+                    # Reconstruct the four reviewed particle/audio changes and
+                    # the separately reviewed 0.6.62 pickup-slot fix before the ORIGINAL hash.
+                    # Inventory, recipe, state and pick bytes remain protected.
+                    for current, previous in [
+                        ("import {registerJavaAmbient} from './java-ambient.js';\nimport {playWorldSound} from './feedback-diagnostics.js';\n", ""),
+                        ("shakerPut(block,next.revision,!!container);showShakerSlots(player,next);return next;", "shakerPut(block,next.revision);showShakerSlots(player,next);return next;"),
+                        ("syncCupVisual(block);playWorldSound(block.dimension,'bottle.fill',block.location,{volume:1,pitch:1});cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;", "syncCupVisual(block);feedback(block,'fill',next.revision);cocktailEffect(block,20);playShakerPour(player);hideShakerHud(player);return next;"),
+                        ("if(block.typeId===NS+':cup_mystery_cocktail')registerJavaAmbient(block,(viewer,b)=>cocktailEffect(b,1,.2,viewer));", "if(block.typeId===NS+':cup_mystery_cocktail')cocktailEffect(block,1,.2);"),
+                    ]:
+                        self.assertEqual(data.count(current.encode()),1)
+                        data=data.replace(current.encode(),previous.encode())
+                    current=b"commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1,preferHand:!breaking}],block,BlockPermutation.resolve('minecraft:air'));"
+                    previous=b"commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1}],block,BlockPermutation.resolve('minecraft:air'));"
+                    self.assertEqual(data.count(current),1)
+                    data=data.replace(current,previous)
                     suffix=b"\nexport const naturalCupStack=state=>resultItem(state);\nexport const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);\n"
                     self.assertTrue(data.endswith(suffix))
                     data=data[:-len(suffix)]

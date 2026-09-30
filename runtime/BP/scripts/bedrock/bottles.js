@@ -1,4 +1,5 @@
 import {nativeStoragePlan,nativeItems} from './native-item-storage.js';
+import {bottlePermutationStates,bottleDisplayMatches,legacyBottleDisplay} from '../core/bottle-display-schema.js';
 import {bottleBlock,bottleBase,isBottleBlock} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
@@ -18,8 +19,9 @@ export const DISPLAY_IDS=new Set(Object.keys(BOTTLES).map(b=>`${NS}:bottle_${b}`
 const FACE_OFFSET=Object.freeze({Up:{x:0,y:1,z:0},Down:{x:0,y:-1,z:0},North:{x:0,y:0,z:-1},South:{x:0,y:0,z:1},West:{x:-1,y:0,z:0},East:{x:1,y:0,z:0}});
 const store=new BottleStore(world),locks=new Locks();
 function placementTarget(clicked,face){const offset=FACE_OFFSET[face];check(offset,'BAD_BLOCK_FACE');return plus(clicked,offset);}
-function permutation(s){return BlockPermutation.resolve(bottleBlock(s.base),{[COUNT]:s.items.length,[FACING]:s.facing});}
-function intact(b,s){return b.typeId===bottleBlock(s.base)&&b.permutation.getState(COUNT)===s.items.length&&b.permutation.getState(FACING)===s.facing;}
+function permutation(s){return BlockPermutation.resolve(bottleBlock(s.base),bottlePermutationStates(s));}
+const intact=bottleDisplayMatches;
+export function readBottleDisplay(block){return store.load(bottleKey(block.dimension.id,block.location))??legacyBottleDisplay(block);}
 export function bottleFacingForYaw(yaw){check(Number.isFinite(yaw),'INVALID_ROTATION');return Math.floor(((((yaw+45)%360)+360)%360)/90);}
 function facingFor(player){return bottleFacingForYaw(player.getRotation?.().y??0);}
 function emptyKey(block){const p=block.location;return `empty-bottle/${block.dimension.id}/${p.x}_${p.y}_${p.z}`;}
@@ -38,25 +40,25 @@ export function placeBottle(player,target,{expectedRevision}={}){
  return locks.with([k,player.id],()=>{
   const b=blockAt(d,target);check(b,'UNLOADED_TARGET');const h=hand(player);check(parseBottle(h?.typeId),'NOT_BOTTLE');
 
-  const old=store.load(k);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');
+  const old=readBottleDisplay(b);if(expectedRevision!==undefined)check((old?.revision??-1)===expectedRevision,'STATE_CONFLICT');
   if(old)check(intact(b,old),'DISPLAY_MISMATCH');else check(b.isAir||waterAt(b),'SPACE_NOT_CLEAR');
   const next=displayAdd(old,h.typeId,facingFor(player)),native=nativeStoragePlan(b,k,old,next,h);
   const raw=store.raw(k),oldBlock=waterSnapshot(b),c=inventory(player);
   // Match Java DrinkBlockItem/BlockItem: successful Creative placement/stacking does not shrink the stack.
   const plan=planInventory(c,player.selectedSlotIndex,placementTake(player),[],makeStack);
-  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,old?.revision??-1);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
+  commitInventory(plan,c,()=>{setWithWater(b,permutation(next));store.save(k,next,raw===undefined?-1:old.revision);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
   playMaterialInteraction(d,target,bottleBlock(next.base));return next;
  });
 }
 export function takeBottles(player,b,{all=false,expectedRevision}={}){
  canInteract(player);requireBlockReach(player,b.dimension,b.location);const k=bottleKey(b.dimension.id,b.location);
  return locks.with([k,player.id],()=>{
-  const old=store.load(k);check(old,'MISSING_BOTTLE_STATE');check(intact(b,old),'DISPLAY_MISMATCH');
+  const old=readBottleDisplay(b);check(old,'MISSING_BOTTLE_STATE');check(intact(b,old),'DISPLAY_MISMATCH');
   if(expectedRevision!==undefined)check(old.revision===expectedRevision,'STATE_CONFLICT');
   const tx=displayTake(old,all),raw=store.raw(k),oldBlock=waterSnapshot(b),c=inventory(player);
   const native=nativeStoragePlan(b,k,old,tx.state,undefined,tx.give);
   const plan=planInventory(c,player.selectedSlotIndex,0,pickupOutputs(player,native.outputs),makeStack);
-  commitPickupInventory(plan,c,player,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,old.revision);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
+  commitPickupInventory(plan,c,player,()=>{setWithWater(b,tx.state?permutation(tx.state):BlockPermutation.resolve('minecraft:air'));store.save(k,tx.state,raw===undefined?-1:old.revision);native.apply();},()=>{try{native.rollback();}finally{restoreWater(b,oldBlock);store.restore(k,raw);}});native.finish();
   pickupFeedback(player,b,plan,{drink:true});return tx;
  });
 }
@@ -71,7 +73,8 @@ export function registerBottleComponents({blockComponentRegistry:r}){r.registerC
   system.run(()=>safe(undefined,()=>{
    const b=blockAt(d,p);if(b?.typeId!==id)return;
    const k=bottleKey(d.id,p);if(store.raw(k)!==undefined)return;
-   store.save(k,displayAdd(undefined,BOTTLES[base].items?.[5]??`${NS}:${base}${BOTTLES[base].qualities===1?'':'_q6'}`,0),-1);
+   const value=legacyBottleDisplay(b)??displayAdd(undefined,BOTTLES[base].items?.[5]??`${NS}:${base}${BOTTLES[base].qualities===1?'':'_q6'}`,b.permutation.getState(FACING)??0);
+   store.save(k,value,-1);
   }));
  }
 });}
@@ -88,7 +91,7 @@ export function installBottleEvents(){
   const hs=handSnapshot(e.player);if(hs.id)return;
   e.cancel=true;if(e.isFirstEvent===false)return;
   const d=e.block.dimension,p={...e.block.location},id=e.block.typeId;
-  let revision;try{revision=store.load(bottleKey(d.id,p))?.revision;}catch{return;}
+  let revision;try{revision=readBottleDisplay(e.block)?.revision;}catch{return;}
   system.run(()=>safe(e.player,()=>{
    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');sameHand(e.player,hs);
    const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');
@@ -104,7 +107,7 @@ export function installBottleEvents(){
    const held=parseBottle(hand(player)?.typeId);if(!held)return undefined;
    if(isBottleBlock(block.typeId)){
     try{
-     const current=store.load(bottleKey(block.dimension.id,block.location));
+     const current=readBottleDisplay(block);
      if(current&&current.base===held.base&&current.items.length<BOTTLES[current.base].maxCount)
       return {target:{...block.location},revision:current.revision,stack:true};
     }catch{return undefined;}
@@ -119,7 +122,7 @@ export function installBottleEvents(){
  registerProtectedBreakRoute({
   id:'bottles',
   isBlock:block=>isBottleBlock(block?.typeId)||[EMPTY_BLOCK,WATER_BLOCK].includes(block?.typeId),
-  capture:({block})=>[EMPTY_BLOCK,WATER_BLOCK].includes(block.typeId)?undefined:store.load(bottleKey(block.dimension.id,block.location))?.revision,
+  capture:({block})=>[EMPTY_BLOCK,WATER_BLOCK].includes(block.typeId)?undefined:readBottleDisplay(block)?.revision,
   recover:({player,block,snapshot})=>block.typeId===EMPTY_BLOCK?takeEmptyBottle(player,block):block.typeId===WATER_BLOCK?takeWaterBottle(player,block):takeBottles(player,block,{all:true,expectedRevision:snapshot})
  });
 }
@@ -130,7 +133,7 @@ export function pickBottleItem(block){
  if(block.typeId===EMPTY_BLOCK)return makeStack(EMPTY_ITEM,1);
  if(block.typeId===WATER_BLOCK)return waterBottleStack();
  if(!isBottleBlock(block.typeId))return undefined;
- const value=store.load(bottleKey(block.dimension.id,block.location));
+ const value=readBottleDisplay(block);
  check(value&&intact(block,value),'PICK_BOTTLE_STATE_MISMATCH');
  return makeStack(value.items[value.items.length-1],1);
 }

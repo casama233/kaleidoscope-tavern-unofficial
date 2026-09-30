@@ -2,6 +2,7 @@ import {nativeStoragePlan} from './native-item-storage.js';
 import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {glassBreakFeedback} from './interaction-particles.js';
 import {spawnThrownDrink} from './storage-projectile.js';
+import {readBottleDisplay} from './bottles.js';
 import {world,BlockPermutation,GameMode,MolangVariableMap} from '@minecraft/server';
 import {isBottleBlock,isCupBlock} from '../core/extension-content.js';
 import {BottleStore,bottleKey,parseBottle} from '../core/bottles.js';
@@ -43,7 +44,7 @@ export function handleDisplayProjectileHit(e){
  // per-block griefing query on this event. Require a live, non-spectator owner.
  if(!ownerCanInteract(projectile))return false;
  try{
-  const p={x:block.location.x,y:block.location.y,z:block.location.z},isDrink=isBottleBlock(id),isVanillaPotion=id===NS+':potion_bottle',vanillaKey=isVanillaPotion?bottleDisplayKey(block):undefined,k=isDrink?bottleKey(block.dimension.id,p):isCup?cupKey(block.dimension.id,p):undefined,s=isDrink?store.load(k):undefined,raw=k?(isDrink?store.raw(k):cupStore.raw(k)):undefined,vanillaRaw=vanillaKey?world.getDynamicProperty(vanillaKey):undefined,old=waterSnapshot(block);
+  const p={x:block.location.x,y:block.location.y,z:block.location.z},isDrink=isBottleBlock(id),isVanillaPotion=id===NS+':potion_bottle',vanillaKey=isVanillaPotion?bottleDisplayKey(block):undefined,k=isDrink?bottleKey(block.dimension.id,p):isCup?cupKey(block.dimension.id,p):undefined,s=isDrink?readBottleDisplay(block):undefined,raw=k?(isDrink?store.raw(k):cupStore.raw(k)):undefined,vanillaRaw=vanillaKey?world.getDynamicProperty(vanillaKey):undefined,old=waterSnapshot(block);
   const native=isDrink&&s?nativeStoragePlan(block,k,s,undefined):isVanillaPotion?potionDisplayRemoval(block):undefined;
   let highest,thrown;
   for(const item of s?.items??[]){const parsed=parseBottle(item);if(parsed&&(!highest||parsed.quality>highest.quality))highest=parsed;}

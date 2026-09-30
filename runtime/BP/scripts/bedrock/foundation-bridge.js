@@ -30,8 +30,13 @@ export function installFoundationBridge(registry,furniture){
  // Authoritative, read-only snapshots; no addon reaches into another pack's DP.
  const publish=()=>{
   const seen=new Set();
-  for(const p of world.getAllPlayers())for(const def of externalEffectMigrations())try{
-   const key=def.source+'/'+p.id;seen.add(key);const state=statusNow(p),rows=state.entries.filter(x=>x.id.startsWith(def.source+':'));
+  const definitions=externalEffectMigrations();
+  for(const p of world.getAllPlayers()){
+   let state;
+   if(!definitions.length)continue;
+   try{state=statusNow(p);}catch(e){console.warn('[Tavern effect snapshot] '+e);continue;}
+   for(const def of definitions)try{
+   const key=def.source+'/'+p.id;seen.add(key);const rows=state.entries.filter(x=>x.id.startsWith(def.source+':'));
    const data=canonical(rows),old=snapshotCache.get(key);
    if(old?.data===data&&system.currentTick-old.tick<10)continue;
    snapshotCache.set(key,{data,tick:system.currentTick});
@@ -40,6 +45,7 @@ export function installFoundationBridge(registry,furniture){
    groups.push(group);
    groups.forEach((rows,part)=>system.sendScriptEvent(PREFIX+'effect_snapshot',JSON.stringify({source:def.source,entity:p.id,sequence:system.currentTick,part,parts:groups.length,rows})));
   }catch(e){console.warn('[Tavern effect snapshot] '+e);}
+  }
   for(const key of snapshotCache.keys())if(!seen.has(key))snapshotCache.delete(key);
  };
  system.runInterval(publish,5);system.runInterval(()=>transport.cleanup(system.currentTick),200);

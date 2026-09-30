@@ -2,6 +2,7 @@
 """Package the committed runtime, without private server paths or old patches."""
 import argparse, hashlib, json, shutil, tempfile, zipfile
 from pathlib import Path
+from baseline_gate import check as baseline_check, read as baseline_read
 from vibrant_audit import audit, source_records, verify_export
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -9,6 +10,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'dist')
     args=parser.parse_args();out=args.output.resolve()
+    baseline_check(baseline_read(ROOT/'baseline.json'),release=True)
     if out==ROOT or ROOT/'runtime'==out or (ROOT/'runtime') in out.parents:
         raise SystemExit('Output must not replace source runtime')
     # Gate the standalone build, not just CI. A declaration cannot disappear
@@ -33,6 +35,7 @@ def main():
         staged.replace(target)
     finally:
         staged.unlink(missing_ok=True)
+    baseline_check(baseline_read(ROOT/'baseline.json'),archive=target)
     sha=hashlib.sha256(target.read_bytes()).hexdigest()
     (out/'SHA256SUMS').write_text(f'{sha}  {name}\n')
     shutil.copy2(ROOT/f"docs/RELEASE-NOTES-{config['version']}.md",out/'RELEASE-NOTES.md')

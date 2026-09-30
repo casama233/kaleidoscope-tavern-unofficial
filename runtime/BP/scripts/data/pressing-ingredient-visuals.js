@@ -1,4 +1,5 @@
 export const PRESSING_INGREDIENT_KINDS={
+  "amw:sour_cherry": 5,
   "kaleidoscope_tavern:grape": 1,
   "kaleidoscope_tavern:ice_grape": 2,
   "kaleidoscope_tavern:gold_grape": 3,

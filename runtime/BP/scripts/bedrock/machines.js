@@ -1,3 +1,5 @@
+import {bottleBlock} from '../core/extension-content.js';
+import {bottlePermutationStates} from '../core/bottle-display-schema.js';
 import {playWorldSound,spawnWorldParticle} from './feedback-diagnostics.js';
 import {emitBurst,tapComplete} from './effect-feedback.js';
 import {TAP_EFFECT_TIMING} from '../core/effect-feedback.js';
@@ -87,7 +89,7 @@ export function syncVisuals(core,state){
  if(state.kind==='barrel')wanted.push(NS+':barrel_'+(state.open?'open':'closed')+'_visual');
  wanted.push(...barrelIngredientVisuals(state));
  wanted.push(...pressingIngredientVisuals(state));
- const fluid=FLUIDS.find(f=>f.id===state.fluid);
+ const fluid=registry.allFluids().find(f=>f.id===state.fluid);
  if(state.amount>0&&fluid?.rigSuffix&&(state.kind!=='barrel'||state.open))wanted.push(NS+':rig_liquid_'+state.kind+'_'+fluid.rigSuffix+'_visual');
  const existing=nearbyVisuals(core).filter(e=>e.getDynamicProperty('kt:anchor')===key);
  const chosen=new Map();
@@ -132,7 +134,7 @@ export function operate(player,block,action,expected){
   if(['use','extract'].includes(action)&&h)check(isPlainIngredient(h,make),'METADATA_ITEM_REJECTED');
   const command={action,held:h?{id:h.typeId,count:h.amount,maxAmount:h.maxAmount}:undefined};
   if(action==='remove_ingredient'&&state.kind==='pressing_tub')command.removeCount=player.isSneaking?64:1;
-  const tx=interact(state,command,registry,FLUIDS);
+  const tx=interact(state,command,registry,registry.allFluids());
   if(action==='inspect'){tell(player,tx.message);return tx;}
   for(const out of tx.give)check(ItemTypes.get(out.id),'UNKNOWN_ITEM',out.id);
   const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,tx.take,tx.give,make),original=store.raw(key);
@@ -147,7 +149,7 @@ export function press(block,entity,fallDistance){
  const player=entity?.typeId==='minecraft:player';
  if(!entity||!player&&!entity.getComponent?.('minecraft:health')||fallDistance<.5||tubTilted(block)||pendingFalls.has(entity.id))return;
  return guarded(player?entity:undefined,()=>{if(player)writable(entity);const key=keyFor(block);return locks.with([key],()=>{
-  const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,FLUIDS);
+  const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,registry.allFluids());
   const drops=spawnRejectedIngredients(block,tx.eject);
   try{store.save(key,tx.state,state.revision);}catch(error){for(const e of drops)try{e.remove();}catch{}throw error;}
   pressedFalls.set(entity.id,{tick:system.currentTick,pressed:tx.pressed});if(pressedFalls.size>256)for(const[id,v]of pressedFalls)if(system.currentTick-v.tick>2)pressedFalls.delete(id);safeVisuals(block,tx.state);pressFeedback(block,tx);return tx;
@@ -236,7 +238,7 @@ function createTapOutput(tap,itemId,facing=0,replacePlacedCarrier=false){
   const old=below.permutation,raw=bottleStore.raw(key),state=displayAdd(undefined,itemId,facing);
   // Java replaces the placed carrier in situ; script replacement is not a break.
   // Guard BOTH conversion and rollback against queued native onBreak callbacks.
-  try{replaceBlockWithoutNaturalDrops(below,BlockPermutation.resolve(NS+':bottle_'+parsed.base,{[NS+':count']:1,[NS+':facing']:facing}));bottleStore.save(key,state,-1);}
+  try{replaceBlockWithoutNaturalDrops(below,BlockPermutation.resolve(bottleBlock(parsed.base),bottlePermutationStates(state)));bottleStore.save(key,state,-1);}
   catch(e){try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}throw e;}
   return ()=>{try{replaceBlockWithoutNaturalDrops(below,old);}catch{}try{bottleStore.restore(key,raw);}catch{}};
  }
@@ -264,7 +266,7 @@ export function finishTapExtraction(tap,expectedCoreLocation){
  return locks.with([key,tapKey(tap)],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const state=store.load(key);check(state?.batch,'NO_PRODUCT');
   const carrierId=state.batch.carrier,carrier=tapCarrier(tap,carrierId);check(carrier,'TAP_CARRIER_CHANGED');
-  const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,FLUIDS);check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
+  const tx=interact(state,{action:'extract',held:{id:carrierId,count:1}},registry,registry.allFluids());check(tx.take===1&&tx.give.length===1,'TAP_EXTRACT_SHAPE');
   const outputId=tx.give[0].id;check(ItemTypes.get(outputId),'UNKNOWN_ITEM');
   const replacePlacedCarrier=carrier.kind==='block'&&!!parseBottle(outputId);
   const raw=store.raw(key);let undoCarrier,undoOutput;
@@ -368,7 +370,7 @@ function machineUsePlan(block,item){
  if(type===TUB){
   const state=store.load(keyFor(block));if(!state)return undefined;
   const action=!heldItem?(state.slots.some(Boolean)?'remove_ingredient':undefined):'use';if(!action)return undefined;
-  try{interact(state,{action,held:heldItem},registry,FLUIDS);return {kind:'machine',action};}catch{return undefined;}
+  try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
  }
  if(type!==PART)return undefined;
  const dy=block.permutation.getState(NS+':dy'),dx=block.permutation.getState(NS+':dx'),dz=block.permutation.getState(NS+':dz');
@@ -379,7 +381,7 @@ function machineUsePlan(block,item){
  else if(dx===0&&dz===0)action=heldItem?'use':state.slots.some(Boolean)?'remove_ingredient':undefined;
  else if(!heldItem)action='lid';
  if(!action)return undefined;
- try{interact(state,{action,held:heldItem},registry,FLUIDS);return {kind:'machine',action};}catch{return undefined;}
+ try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
 }
 /** Native hurt cancellation is scoped to a successful Java-style press only. */
 function protectPressFall(event){

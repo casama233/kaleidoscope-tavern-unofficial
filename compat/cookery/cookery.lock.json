@@ -1,15 +1,17 @@
 {
-  "source": "user_upload",
-  "archive": "Kaleidoscope Cookery v1.0.6.mcaddon",
-  "archive_sha256": "c589efb60277bea295ac12ef760d8f2c7e8af3ea62e809b320862bd786033351",
+  "source": "CurseForge official API",
+  "project_id": 1673664,
+  "file_id": 8983314,
+  "archive": "Kaleidoscope Cookery v1.0.8.mcaddon",
+  "archive_sha256": "9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5",
   "bp": {
     "name": "pack.name",
     "description": "pack.description",
-    "uuid": "10f37ae2-9ccf-435f-b34b-0eec8191cd94",
+    "uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
     "version": [
       1,
       0,
-      6
+      8
     ],
     "min_engine_version": [
       1,
@@ -20,12 +22,12 @@
   "rp": {
     "name": "pack.name",
     "description": "pack.description",
-    "uuid": "c89dc8df-c3fc-4bc8-8bd0-527abba76681",
+    "uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
     "pack_scope": "world",
     "version": [
       1,
       0,
-      6
+      8
     ],
     "min_engine_version": [
       1,
@@ -41,36 +43,6 @@
     {
       "module_name": "@minecraft/server-ui",
       "version": "2.0.0"
-    }
-  ],
-  "evidence": [
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/manifest.json",
-      "sha256": "644b4b4c37e6a7ba11d16b8ac6d5e3ce51aaa0aeb3d8d56e3253387d4dc06551"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [RP]/manifest.json",
-      "sha256": "b78591e8ff6cd99f3dca7c4fef00fd8168f2c46a250218a82b3304c5d059d465"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/scripts/api/extensionRegistry.js",
-      "sha256": "0cf75df138af92ae1129e862baf8d55cd76914b4f09787bce5a241052b75df92"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/scripts/api/guidebookExtensionRegistry.js",
-      "sha256": "b0ee101e8ef2b208dfe646463aff4a05c23387e6d1af9df3b5df766684e575d3"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/scripts/events/guidebook.js",
-      "sha256": "acff33eec87add1c149aff3789b1b9ec62dd1ef642a5bc7d2b2f1b70dd6332ff"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/documentation/KC_EXTENSION_API.md",
-      "sha256": "e176b281e739c181fd0efd0fc6d75ba8ac17097f3457a0a464acb262e92eacd2"
-    },
-    {
-      "path": "Kaleidoscope Cookery v1.0.6 [BP]/documentation/KC_GUIDEBOOK_EXTENSION_API.md",
-      "sha256": "224a552be43fed2fe5d9f01f5612da6aa2b642c8430b30e8b25dc12d871684e6"
     }
   ],
   "bound": true,

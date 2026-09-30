@@ -1,4 +1,5 @@
 import {parseBottle} from './bottles.js';
+import {BOTTLES} from '../data/bottles.js';
 import {canonical} from './util.js';
 import {DRINK_EFFECTS} from '../data/drink-effects.js';
 
@@ -20,7 +21,7 @@ export function qualityBottleLore(item,legacyLevels=false){
  const parsed=parseBottle(item?.typeId);
  if(!parsed)return undefined;
  const lines=[];
- const color=BOTTLE_COLOR_KEYS[parsed.base];
+ const color=BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
  if(color)lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${({light_purple:'d',blue:'9',gold:'6',green:'a',red:'c',yellow:'e',white:'f'})[color]}`},{translate:`color.kaleidoscope_tavern.${color}`}]});
  lines.push({rawtext:[{text:'§7'},{translate:'tooltip.kaleidoscope_tavern.bottle_block.brew_level',with:{rawtext:[{translate:`message.kaleidoscope_tavern.barrel.brew_level.${parsed.quality}`}]}}]});
  for(const entry of DRINK_EFFECTS[parsed.base]?.[parsed.quality-1]??[]){

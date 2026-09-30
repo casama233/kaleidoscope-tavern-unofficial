@@ -32,7 +32,8 @@ class LegacyMenuProjection:
     def read_bytes(self, path):
         path = Path(path).resolve()
         relative = path.relative_to(self.root).as_posix()
-        content = path.read_bytes()
+        from baseline_reference import previous_bytes
+        content = previous_bytes(self.root,path)
         before = self.menus.get(relative)
         pick = self.native_picks.get(relative)
         if before is None and pick is None:

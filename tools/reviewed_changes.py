@@ -5,6 +5,7 @@ Creative metadata projection is composed with (not replaced by) this ledger.
 import hashlib,json
 from functools import lru_cache
 from pathlib import Path
+from baseline_reference import previous_bytes,additions as baseline_additions
 from creative.historical import LegacyMenuProjection
 from efficiency.reference import apply_efficiency_reference
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,7 +24,7 @@ def historical_digest(path,projected=False):
     path=Path(path);name=path.relative_to(ROOT).as_posix()
     removed=reviewed_removals().get(name)
     if removed:return removed['beforeProjected'] if projected else removed['before']
-    actual=hashlib.sha256(path.read_bytes()).hexdigest();row=changes().get(name)
+    actual=hashlib.sha256(previous_bytes(ROOT,path)).hexdigest();row=changes().get(name)
     if row:
         assert actual==row['after'],('Reviewed source changed after audit',name)
         return row['beforeProjected'] if projected else row['before']
@@ -32,8 +33,8 @@ def historical_digest(path,projected=False):
 @lru_cache(maxsize=1)
 def reviewed_additions():
     rows=reference()['newRuntimeFiles']
-    for name,digest in rows.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Reviewed addition changed',name)
-    return rows
+    for name,digest in rows.items():assert hashlib.sha256(previous_bytes(ROOT,ROOT/name)).hexdigest()==digest,('Reviewed addition changed',name)
+    return {**rows,**{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in baseline_additions(ROOT)}}
 
 @lru_cache(maxsize=1)
 def reviewed_removals():

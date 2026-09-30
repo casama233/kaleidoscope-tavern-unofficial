@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "repository": "casama233/kaleidoscope-tavern-unofficial",
+  "repository_id": 1377171148,
+  "version": [
+    0,
+    6,
+    68
+  ],
+  "runtime": {
+    "BP": "runtime/BP",
+    "RP": "runtime/RP"
+  },
+  "packs": {
+    "BP": {
+      "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+      "dependencies": [
+        {
+          "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+          "version": [
+            0,
+            6,
+            68
+          ]
+        },
+        {
+          "uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
+          "version": [
+            1,
+            0,
+            8
+          ]
+        },
+        {
+          "module_name": "@minecraft/server",
+          "version": "2.7.0"
+        },
+        {
+          "module_name": "@minecraft/server-ui",
+          "version": "2.0.0"
+        }
+      ]
+    },
+    "RP": {
+      "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+      "dependencies": [
+        {
+          "uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
+          "version": [
+            1,
+            0,
+            8
+          ]
+        }
+      ]
+    }
+  },
+  "source_trees": {
+    "BP": {
+      "sha256": "7f44e1e53a6f5e039df1305093b672405920d50ad07052d32fdce537fee61d10",
+      "files": 763
+    },
+    "RP": {
+      "sha256": "d47b6ffe865f2b1ca508a72590452723c99f48f144d37143252de16fa8445c7d",
+      "files": 3124
+    }
+  },
+  "policy": {
+    "runtime_patches_at_install": false,
+    "canonical_source_required": true,
+    "same_version_different_content": false,
+    "client_acceptance_required_before_production": true
+  }
+}

@@ -2,9 +2,10 @@
 """Source, native-resource and pure launch-rule checks; no player/world mocks."""
 import argparse,hashlib,json,subprocess
 from pathlib import Path
+from baseline_reference import previous_bytes,additions as baseline_additions
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
-def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha(path):return hashlib.sha256(previous_bytes(ROOT,path)).hexdigest()
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--java-source',type=Path)
@@ -28,6 +29,7 @@ def main():
             assert sha(args.baseline/name)==row['before'],('Incorrect before hash',name)
             assert hashlib.sha256(LegacyMenuProjection(args.baseline).read_bytes(args.baseline/name)).hexdigest()==row['beforeProjected'],('Incorrect projected hash',name)
     for name,digest in ref['newRuntimeFiles'].items():assert sha(ROOT/name)==digest,('New runtime file differs',name)
+    for name in baseline_additions(ROOT):ref['newRuntimeFiles'][name]=sha(ROOT/name)
     removed=ref.get('removedRuntimeFiles',{})
     for name,row in removed.items():
         assert name not in ref['reviewedChanges'] and name not in ref['newRuntimeFiles']

@@ -26,6 +26,9 @@ class BaselineGateTests(unittest.TestCase):
  def test_metadata_version_rejected(self):
   (self.root/'package.json').write_text('{"version":"0.0.1"}')
   self.reject('package.json version',lambda:gate.validate(self.config))
+ def test_readme_version_rejected(self):
+  (self.root/'README.md').write_text('## Current maintained baseline: 0.0.1\n')
+  self.reject('maintained version',lambda:gate.validate(self.config))
  def test_runtime_edit_rejected(self):
   (self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
   self.reject('runtime changed',lambda:gate.check(self.config))

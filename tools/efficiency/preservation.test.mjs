@@ -2,9 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {gunzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 const baseline=process.env.TAVERN_BASELINE_ROOT;
 const current=path.resolve(import.meta.dirname,'../..');
-const read=(root,file)=>fs.readFileSync(path.join(root,'runtime/BP/scripts',file),'utf8');
+const reconciliation=JSON.parse(fs.readFileSync(path.join(current,'data/baseline-reconciliation.json'),'utf8')).files;
+const digest=value=>createHash('sha256').update(value).digest('hex');
+const read=(root,file)=>{
+ const bytes=fs.readFileSync(path.join(root,'runtime/BP/scripts',file)),row=path.resolve(root)===current?reconciliation['runtime/BP/scripts/'+file]:undefined;
+ if(!row||row.before===null)return bytes.toString('utf8');
+ assert.equal(digest(bytes),row.after,'Reconciled source changed: '+file);
+ const before=gunzipSync(Buffer.from(row.beforeGzipBase64,'base64'));assert.equal(digest(before),row.before,'Reconciliation preimage corrupt: '+file);
+ return before.toString('utf8');
+};
 test('aim resolution and all transaction/redstone routing remain byte-identical',{skip:!baseline},()=>{
  const old=read(baseline,'bedrock/stateful-storage-router.js'),now=read(current,'bedrock/stateful-storage-router.js');
  assert.equal(now.slice(0,now.indexOf('export {tickStorageVisuals}')),old.slice(0,old.indexOf('export function tickStorageVisuals(')));

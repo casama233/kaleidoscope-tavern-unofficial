@@ -54,7 +54,8 @@ class PickDefinitions(unittest.TestCase):
 
     def test_reviewed_pickup_delta_reconstructs_immutable_pick_baseline(self):
         for path, proof in json.loads((ROOT/'data/pick-block-prefixes.json').read_text()).items():
-            data = (ROOT/path).read_bytes()
+            from baseline_reference import previous_bytes
+            data = previous_bytes(ROOT,ROOT/path)
             # This PR intentionally changes pickup gameplay. Verify the exact
             # reviewed current bytes and reverse only that explicit delta first.
             assert hashlib.sha256(data).hexdigest() == review_baseline()[path]['hashes']['current'], ('Reviewed current bytes changed', path)

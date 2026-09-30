@@ -68,7 +68,8 @@ export async function fixture({synchronous=false}={}){
  const bottle=block(EMPTY,{x:0,y:0,z:-2},{'minecraft:cardinal_direction':'east'});
  const state=newMachine('barrel','test-batch');state.open=false;state.batch={recipeId:NS+':wine',carrier:ITEM,remaining:4,quality:3,unitTime:2400,ticksRemaining:100,output:{byQuality:Array.from({length:6},(_,i)=>NS+':wine_q'+(i+1))}};
  const key=machineKey(dimension.id,origin),drinkKey=bottleKey(dimension.id,bottle.location);
- machines.TEST_ACCESS.store.save(key,state,-1);machines.setRegistry({});
+ const {FLUIDS}=await importFile('data/fluids.js');
+ machines.TEST_ACCESS.store.save(key,state,-1);machines.setRegistry({allFluids:()=>FLUIDS});
  return {machines,block,dimension,bottle,tap,key,drinkKey,records,changes,sounds,particles,system,advance,ItemStack,Permutation,naturalBreak,
   state:()=>JSON.parse(records.get(key)),display:()=>records.has(drinkKey)?JSON.parse(records.get(drinkKey)):undefined,
   items:()=>entities.filter(e=>e.typeId==='minecraft:item'&&!e.removed).map(e=>e.stack),

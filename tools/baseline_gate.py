@@ -23,6 +23,12 @@ def validate(config):
  for name in ['package.json','release.json']:
   path=ROOT/name
   if path.exists() and read(path).get('version')!='.'.join(map(str,config['version'])):fail(name+' version differs from release version')
+ for name in ['README.md','README.zh-TW.md']:
+  path=ROOT/name
+  if path.exists():
+   for line in path.read_text(encoding='utf-8').splitlines():
+    for prefix in ['## Current maintained baseline: ','## 當前維護基線：']:
+     if line.startswith(prefix) and line[len(prefix):]!='.'.join(map(str,config['version'])):fail(name+' maintained version differs from release version')
  manifests={};trees={};files={}
  for side,relative in config['runtime'].items():
   root=ROOT/relative;manifests[side]=m=read(root/'manifest.json')

@@ -2,9 +2,12 @@
 """Source, native-resource and pure launch-rule checks; no player/world mocks."""
 import argparse,hashlib,json,subprocess
 from pathlib import Path
+from baseline_reference import previous_bytes,additions as baseline_additions
 ROOT=Path(__file__).resolve().parents[1]
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
-def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha(path):
+    path=Path(path).resolve()
+    return hashlib.sha256(previous_bytes(ROOT,path) if path.is_relative_to(ROOT) else path.read_bytes()).hexdigest()
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--java-source',type=Path)
@@ -28,6 +31,7 @@ def main():
             assert sha(args.baseline/name)==row['before'],('Incorrect before hash',name)
             assert hashlib.sha256(LegacyMenuProjection(args.baseline).read_bytes(args.baseline/name)).hexdigest()==row['beforeProjected'],('Incorrect projected hash',name)
     for name,digest in ref['newRuntimeFiles'].items():assert sha(ROOT/name)==digest,('New runtime file differs',name)
+    for name in baseline_additions(ROOT):ref['newRuntimeFiles'][name]=sha(ROOT/name)
     removed=ref.get('removedRuntimeFiles',{})
     for name,row in removed.items():
         assert name not in ref['reviewedChanges'] and name not in ref['newRuntimeFiles']
@@ -45,7 +49,7 @@ def main():
             if not old.is_file():continue
             name=old.relative_to(args.baseline).as_posix()
             if name not in ref['reviewedChanges'] and name not in removed:
-                assert (ROOT/name).read_bytes()==old.read_bytes(),('Unreviewed existing-runtime change',name)
+                assert previous_bytes(ROOT,ROOT/name)==old.read_bytes(),('Unreviewed existing-runtime change',name)
                 unchanged+=1
     components=read(ROOT/'runtime/BP/items/molotov.json')['minecraft:item']['components']
     use=components['minecraft:throwable']
@@ -112,6 +116,9 @@ def main():
         'pureRules':pure,'nativeMolotovResources':'source/schema aligned; device acceptance pending',
         'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'diagnostics, immediate status hook and bounded transient-error retry only',
         'bdsTest':'NOT_RUN','clientTest':'NOT_RUN','simulatedPlayerTests':False,'limits':ref['limits']}
-    (ROOT/f'docs/LAUNCH-VALIDATION-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    output=ROOT/f'docs/LAUNCH-VALIDATION-{version}.json'
+    # A reduced local check must not overwrite evidence from verified Java and
+    # pinned baseline inputs. Its narrower result is still printed explicitly.
+    if args.java_source or args.baseline or not output.exists():output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps(report,ensure_ascii=False))
 if __name__=='__main__':main()

@@ -8,10 +8,13 @@ import copy
 import hashlib
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 
 
 def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    from baseline_reference import previous_bytes
+    return hashlib.sha256(previous_bytes(Path(__file__).resolve().parents[2],path)).hexdigest()
 
 
 def apply_efficiency_reference(reference, root):

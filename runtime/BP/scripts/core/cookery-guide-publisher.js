@@ -72,7 +72,7 @@ export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,
  return messages;
 }
 
-export function installCookeryGuidePublisher(system,payloadOrProvider,warn=console.warn){
+export function installCookeryGuidePublisher(system,payloadOrProvider,warn=console.warn,info=console.log){
  if(!system?.afterEvents?.scriptEventReceive||typeof system.sendScriptEvent!=='function')throw new TypeError('Stable Script Events are required.');
  const provider=typeof payloadOrProvider==='function'?payloadOrProvider:()=>payloadOrProvider;
  const dynamic=typeof payloadOrProvider==='function';
@@ -100,7 +100,7 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
    try{
     for(let n=0;n<8&&cursor<messages.length;n++,cursor++){const m=messages[cursor];system.sendScriptEvent(m.id,m.message);}
     if(cursor<messages.length)runningHandle=later(step,1);
-    else{active=false;lastSent=system.currentTick;lastRevision=revision;successfulTransfers++;if(successfulTransfers===1)warn('[Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.');if(dirty)queue();}
+    else{active=false;lastSent=system.currentTick;lastRevision=revision;successfulTransfers++;if(successfulTransfers===1)info('[Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.');if(dirty)queue();}
    }catch(error){active=false;dirty=true;sendFailures++;warn('[Tavern guide] Publish failed: '+String(error));if(sendFailures<=2)later(()=>queue(),40);}
   };
   runningHandle=later(step,1);return true;

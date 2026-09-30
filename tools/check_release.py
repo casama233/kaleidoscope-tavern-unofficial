@@ -16,7 +16,7 @@ for side in ['BP','RP']:
     for lc in config['supported_locales']:
         lang=(RT/side/'texts'/f'{lc}.lang').read_text()
         assert 'pack.name=' in lang and 'pack.description=' in lang
-expected={'BP':'10f37ae2-9ccf-435f-b34b-0eec8191cd94','RP':'c89dc8df-c3fc-4bc8-8bd0-527abba76681'}
+expected={'BP':'d322809c-a51e-4742-bfc4-16d3c1491c9d','RP':'8e2c6318-2f5f-4907-aad0-31d10610e405'}
 for side,uid in expected.items():
     assert {'uuid':uid,'version':[1,0,8]} in docs[RT/side/'manifest.json']['dependencies']
 assert not (RT/'RP/entity/player.entity.json').exists()

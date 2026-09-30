@@ -22,7 +22,7 @@ export function installContent(source,content=[],foundation={}){
  sources.set(source,content);
  for(const d of content){
   if(d.kind==='bottle'){
-   BOTTLES[d.base]={maxCount:d.maxCount,qualities:6,block:d.block,items:d.items};DRINK_EFFECTS[d.base]=d.effects;blocks.set(d.block,d.base);
+   BOTTLES[d.base]={maxCount:d.maxCount,qualities:6,block:d.block,items:d.items,displayStates:d.displayStates,color:d.color};DRINK_EFFECTS[d.base]=d.effects;blocks.set(d.block,d.base);
    d.items.forEach((item,i)=>drinks.set(item,{...d,item,quality:i+1,id:item,kind:d.visualKind}));
   }else COCKTAILS[d.item]={name:d.item.split(':')[1],block:d.block,effects:d.effects};
  }

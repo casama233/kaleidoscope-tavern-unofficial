@@ -3,7 +3,7 @@ import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -54,6 +54,13 @@ function normalizeContent(raw,source,itemExists){
   d.base=own(raw.base,source);d.maxCount=integer(raw.maxCount,1,4);d.compact=raw.compact===true;d.visualKind=integer(raw.visualKind,1000,65535);
   check(Array.isArray(raw.items)&&raw.items.length===6,'INVALID_QUALITY_OUTPUT');d.items=raw.items.map(x=>{own(x,source);check(itemExists(x),'UNKNOWN_ITEM',x);return x;});
   check(Array.isArray(raw.effects)&&raw.effects.length===6,'INVALID_QUALITY_EFFECTS');d.effects=raw.effects.map(effectRows);
+  d.groundOnly=raw.groundOnly===true;
+  if(raw.displayStates){
+   check(raw.displayStates&&typeof raw.displayStates==='object','INVALID_DISPLAY_STATES');
+   d.displayStates={};for(const key of ['count','facing','quality'])d.displayStates[key]=own(raw.displayStates[key],source);
+   check(new Set(Object.values(d.displayStates)).size===3,'INVALID_DISPLAY_STATES');
+  }
+  if(raw.color!==undefined){check(['light_purple','blue','gold','green','red','yellow','white'].includes(raw.color),'INVALID_BOTTLE_COLOR');d.color=raw.color;}
   d.visuals={};for(const [key,value] of Object.entries(raw.visuals??{})){check(['holder_bottle_visual','tilted_rack_bottle_visual','circular_rack_bottle_visual','cellar_cabinet_bottle_visual','bar_cabinet_bottle_visual','thrown_drink'].includes(key),'INVALID_VISUAL');d.visuals[key]=own(value,source);}
  }else{d.item=own(raw.item,source);check(itemExists(d.item),'UNKNOWN_ITEM',d.item);d.effects=effectRows(raw.effects);}
  return d;
@@ -92,11 +99,11 @@ export function matchIngredients(required,stacks){
 }
 export class ExtensionRegistry {
  constructor({recipes=[],pages=[],fluids=[],itemExists=()=>true}={}){
-  this.itemExists=itemExists;this.fluids=new Set(fluids.map(x=>typeof x==='string'?x:x.id));this.extensions=new Map();this.listeners=new Set();this.revision=0;
+  this.baseFluids=fluids.map(x=>typeof x==='string'?{id:x}:clone(x));this.itemExists=itemExists;this.fluids=new Set(fluids.map(x=>typeof x==='string'?x:x.id));this.extensions=new Map();this.listeners=new Set();this.revision=0;
   this.builtins=freeze(recipes.map(x=>({...clone(x),source:CORE})));this.pages=freeze(pages.map(x=>({...clone(x),source:CORE})));
   this.rebuild();
  }
- rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.recipeCache=freeze([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))]);this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
+ rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))]);this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
  install(raw){
   check(raw&&raw.api===API_VERSION,'API_VERSION_MISMATCH');
   const source=raw.source;check(typeof source==='string'&&/^[a-z][a-z0-9_]{1,47}$/.test(source),'INVALID_SOURCE');
@@ -106,7 +113,17 @@ export class ExtensionRegistry {
   const rawRecipes=raw.recipes??[],rawPages=raw.pages??[],rawShakerInputs=raw.shakerInputs??[],rawContent=raw.content??[];check(Array.isArray(rawContent)&&rawContent.length<=128,'CONTENT_LIMIT');const content=rawContent.map(x=>normalizeContent(x,source,this.itemExists));check(new Set(content.map(x=>x.block)).size===content.length,'DUPLICATE_CONTENT');
   check(Array.isArray(rawRecipes)&&rawRecipes.length<=128,'RECIPE_LIMIT');check(Array.isArray(rawPages)&&rawPages.length<=256,'PAGE_LIMIT');check(Array.isArray(rawShakerInputs)&&rawShakerInputs.length<=128,'SHAKER_INPUT_LIMIT');
   // Normalize everything before changing any registry. Reject an entire bad bundle.
-  const recipes=rawRecipes.map(x=>normalizeRecipe(x,source,this.fluids,this.itemExists)),pages=rawPages.map(x=>normalizePage(x,source)),shakerInputs=rawShakerInputs.map(x=>normalizeShakerInput(x,source,this.itemExists));
+  const fluidRows=raw.fluids??[];check(Array.isArray(fluidRows)&&fluidRows.length<=16,'FLUID_LIMIT');
+  const customFluids=fluidRows.map(f=>{
+   const fluid={id:own(f.id,source),filled:own(f.filled,source),empty:id(f.empty??'minecraft:bucket'),title:localeMap(f.title)};
+   check(this.itemExists(fluid.filled)&&this.itemExists(fluid.empty),'UNKNOWN_FLUID_CONTAINER');
+   check(fluid.empty==='minecraft:bucket','INVALID_EMPTY_BUCKET');
+   // Reuse a verified native liquid rig; external arbitrary entity names are not accepted.
+   check(this.baseFluids.some(x=>x.rigSuffix===f.rigSuffix),'INVALID_FLUID_VISUAL');fluid.rigSuffix=f.rigSuffix;return fluid;
+  });
+  check(new Set(customFluids.map(f=>f.id)).size===customFluids.length&&new Set(customFluids.map(f=>f.filled)).size===customFluids.length,'DUPLICATE_FLUID');
+  const availableFluids=new Set([...this.fluids,...customFluids.map(f=>f.id)]);
+  const recipes=rawRecipes.map(x=>{const r=normalizeRecipe(x,source,availableFluids,this.itemExists);const f=customFluids.find(f=>f.id===r.fluid);if(f)r.fluidItem=f.filled;return r;}),pages=rawPages.map(x=>normalizePage(x,source)),shakerInputs=rawShakerInputs.map(x=>normalizeShakerInput(x,source,this.itemExists));
   check(new Set(recipes.map(x=>x.id)).size===recipes.length,'DUPLICATE_RECIPE');check(new Set(pages.map(x=>x.id)).size===pages.length,'DUPLICATE_PAGE');check(new Set(shakerInputs.map(x=>x.item)).size===shakerInputs.length,'DUPLICATE_SHAKER_INPUT');
   check(!pages.some(p=>recipes.some(r=>r.id===p.id)),'PAGE_RECIPE_ID_COLLISION');
   const recipeIds=new Set([...this.builtins,...recipes].map(x=>x.id));
@@ -115,13 +132,14 @@ export class ExtensionRegistry {
   const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0)+(x.pickBlocks?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length+foundation.pickBlocks.length);
   check(total<=2048,'GLOBAL_REGISTRY_LIMIT');
   check(foundation.requires.every(x=>CAPABILITIES.includes(x)),'CAPABILITY_MISMATCH');
-  const extension=freeze({...foundation,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},recipes,pages,shakerInputs,content});
+  const extension=freeze({...foundation,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},fluids:customFluids,recipes,pages,shakerInputs,content});
   this.extensions.set(source,extension);installContent(source,content,foundation);this.rebuild();return {source,recipes:recipes.length,pages:pages.length,shakerInputs:shakerInputs.length,revision:this.revision};
  }
  remove(source){check(source!==CORE,'RESERVED_SOURCE');const removed=this.extensions.delete(source);if(removed){installContent(source,[]);this.rebuild();}return removed;}
  subscribe(listener){check(typeof listener==='function','INVALID_LISTENER');this.listeners.add(listener);return()=>this.listeners.delete(listener);}
  furniture(block){return this.furnitureCache.get(block);}
  allFurniture(){return [...this.furnitureCache.values()];}
+ allFluids(){return this.fluidCache;}
  allRecipes(){return this.recipeCache;}
  allPages(){return this.pageCache;}
  list(){return sorted([...this.extensions.values()],x=>x.source).map(x=>({source:x.source,version:x.version,recipes:x.recipes.length,pages:x.pages.length,shakerInputs:x.shakerInputs.length}));}

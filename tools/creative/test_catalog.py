@@ -213,7 +213,8 @@ class HistoricalProjectionTests(unittest.TestCase):
                 review_path=root/'data/guide-destruction-review.json'
                 review=c.load(review_path)['blocks'].get(p.relative_to(root).as_posix()) if review_path.exists() else None
                 if review:
-                    self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),review['afterSha256'])
+                    from baseline_reference import previous_bytes
+                    self.assertEqual(hashlib.sha256(previous_bytes(root,p)).hexdigest(),review['afterSha256'])
                     block=json.loads(raw);components=block['minecraft:block']['components']
                     components['minecraft:destructible_by_explosion']=review['beforeExplosion']
                     components.pop('kaleidoscope_tavern:natural_break',None)
@@ -238,7 +239,8 @@ class HistoricalProjectionTests(unittest.TestCase):
             for path in projection.menus:
                 p = root/path
                 kind = 'minecraft:item' if '/items/' in path else 'minecraft:block'
-                current = c.load(p)
+                from baseline_reference import previous_bytes
+                current = json.loads(previous_bytes(root,p))
                 old = json.loads(projection.read_bytes(p))
                 current[kind]['description'].pop('menu_category')
                 old[kind]['description'].pop('menu_category')

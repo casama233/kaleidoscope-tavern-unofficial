@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "owned": [
+    {
+      "key": "tavern",
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "version": [
+        0,
+        6,
+        68
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "7f44e1e53a6f5e039df1305093b672405920d50ad07052d32fdce537fee61d10",
+          "files": 763
+        },
+        "RP": {
+          "sha256": "d47b6ffe865f2b1ca508a72590452723c99f48f144d37143252de16fa8445c7d",
+          "files": 3124
+        }
+      }
+    },
+    {
+      "key": "grilling",
+      "repository": "casama233/kaleidoscope-grilling-unofficial",
+      "version": [
+        2,
+        8,
+        11
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "729b7a4a4515e7ffcf5ce6f9a43593e8b6fdb29b90867af60acbe6c6115b513a",
+          "files": 437
+        },
+        "RP": {
+          "sha256": "b3d10409d07ba75709fecc9fcd5e2c7bf158d12fdcc98f0d67eb8044c4c34a36",
+          "files": 1472
+        }
+      }
+    },
+    {
+      "key": "world-liquor",
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "version": [
+        0,
+        1,
+        29
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "97fa3cb0dd72d8c6975f3bde26db5b7b1fd99b9e8901d31a45f089052ac07aba",
+          "files": 300
+        },
+        "RP": {
+          "sha256": "7aacd8cd083cc7cc5ec37b5f37bbf63ab2d6d468fc2204e9a644b0c6ef39c23b",
+          "files": 490
+        }
+      }
+    }
+  ],
+  "upstream": [
+    {
+      "name": "Cookery",
+      "project_id": 1673664,
+      "file_id": 8983314,
+      "sha256": "9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5",
+      "packs": [
+        {
+          "uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
+          "version": [
+            1,
+            0,
+            8
+          ]
+        },
+        {
+          "uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
+          "version": [
+            1,
+            0,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ChineseFood",
+      "project_id": 1683300,
+      "file_id": 8983356,
+      "sha256": "63bd2eb2ee2819c985d7c484df633c913cbb995abf3162aa68c997c24ef607f2",
+      "packs": [
+        {
+          "uuid": "b20a91d2-f099-4293-8a7f-46bf7fbc6017",
+          "version": [
+            1,
+            0,
+            4
+          ]
+        },
+        {
+          "uuid": "b3c9db76-4ae6-4986-a380-90a4025d95a9",
+          "version": [
+            1,
+            0,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ImmersiveEating",
+      "project_id": 1697816,
+      "file_id": 8900604,
+      "sha256": "a3a8c7f9e6229808a620b3d261bb6d63319abdf1e578c163586cbc906c4956d9",
+      "packs": [
+        {
+          "uuid": "b08ef928-275a-4130-9ba6-bc0406a25860",
+          "version": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "uuid": "6d777614-877f-4d43-b6fc-a1eb3b190cc5",
+          "version": [
+            1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nether",
+      "project_id": 1710501,
+      "file_id": 8990975,
+      "sha256": "b22c1f51f4941d73198d038e72f7e0e51093e32397c9086f991ae4a68cce781d",
+      "packs": [
+        {
+          "uuid": "5a59f9ad-d78c-4706-838c-1dc52a364d3d",
+          "version": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "uuid": "7325f2c3-7c44-4b94-ae6d-5df64d82e8e4",
+          "version": [
+            1,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "project_id": 1710505,
+      "file_id": 8990981,
+      "sha256": "3966a6f37ad26d71931dde5c719ad166fce0f8459f7f1b450a3f731c08751398",
+      "packs": [
+        {
+          "uuid": "f47ef2bf-48f1-47cb-9934-fa08946d48d4",
+          "version": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "uuid": "0da8920e-18c4-45c0-a5c8-8da21c4caefd",
+          "version": [
+            1,
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "order": {
+    "behavior": [
+      "355ffdfc-50e6-5a33-a126-4d78ab955b2b",
+      "f54f37f9-485a-55bf-8f89-6558aca988c5",
+      "c68005c5-23ff-54e8-a3ff-da6349ad43c2",
+      "b08ef928-275a-4130-9ba6-bc0406a25860",
+      "b3c9db76-4ae6-4986-a380-90a4025d95a9",
+      "f47ef2bf-48f1-47cb-9934-fa08946d48d4",
+      "5a59f9ad-d78c-4706-838c-1dc52a364d3d",
+      "d322809c-a51e-4742-bfc4-16d3c1491c9d"
+    ],
+    "resource": [
+      "a610b357-ba70-5a2f-bca5-5a7a8a0fb2a8",
+      "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+      "bbbd2d60-52e5-53a6-8b9a-c09b0f516389",
+      "6d777614-877f-4d43-b6fc-a1eb3b190cc5",
+      "b20a91d2-f099-4293-8a7f-46bf7fbc6017",
+      "0da8920e-18c4-45c0-a5c8-8da21c4caefd",
+      "7325f2c3-7c44-4b94-ae6d-5df64d82e8e4",
+      "8e2c6318-2f5f-4907-aad0-31d10610e405"
+    ]
+  },
+  "upstream_runtime_changes": false,
+  "client_acceptance_required": true,
+  "saved_world_migration_required": true
+}

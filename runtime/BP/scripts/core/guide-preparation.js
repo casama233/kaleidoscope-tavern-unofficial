@@ -29,8 +29,8 @@ export function preparationRecipes(recipe,names={}){
  let sets=[(recipe.ingredients??[recipe.input??[]]).filter(x=>x.length).map(ingredient)];
  const method={barrel:'Barrel',shaker:'Shaker',pressing:'Pressing Tub'}[recipe.kind];
  if(!method)return [];
- const result=recipe.output?.item??recipe.output?.byQuality?.[0]??buckets.get(recipe.fluid);
- if(recipe.kind==='barrel')sets=sets.map(row=>[...Array(4).fill(buckets.get(recipe.fluid)??recipe.fluid),...row]);
+ const result=recipe.output?.item??recipe.output?.byQuality?.[0]??(recipe.fluidItem??(recipe.fluidItem??buckets.get(recipe.fluid)));
+ if(recipe.kind==='barrel')sets=sets.map(row=>[...Array(4).fill((recipe.fluidItem??(recipe.fluidItem??buckets.get(recipe.fluid)))??recipe.fluid),...row]);
  if(recipe.kind==='pressing')sets=sets.map(row=>Array(Math.ceil(1000/recipe.amount)).fill(row[0]));
  if(sets.length>24||sets.some(row=>row.length>12))throw Error('Cookery recipe limits: '+recipe.id);
  return sets.map(ingredients=>({method,ingredients,result,count:recipe.kind==='barrel'&&!recipe.ingredients.length?(recipe.noIngredientCount??16):1,time:0}));

@@ -8,14 +8,14 @@ import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
-import {worldFromHit} from '../core/hit-basis.js';
+import {blockLocalHit} from '../core/block-hit.js';
 import {aimPointFor} from '../core/aim-hit.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 
-// The own-eye aim point is primary for EVERY input mode. Engine hits are only
-// fallbacks. Diagnostics must describe the value returned to the slot selector.
-export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,aimHits:0,basisHits:0,errors:0,diagnosticErrors:0,picks:0,last:null,lastError:null};
-/** Gaze hit on the same block, or undefined when the ray misses it or leaves the block. */
+// Direct touch retains its event position. MCPE-223452 is a world-coordinate
+// fraction defect, not a per-face or per-facing slot map. Crosshair input may use
+// the independently computed eye ray; neither path changes persisted slot IDs.
+export const storageHitDiagnostics={corrected:0,nativeHits:0,eventHits:0,aimHits:0,errors:0,diagnosticErrors:0,picks:0,last:null,lastError:null};
 export function nativeBlockHit(player,block){
  try{
   const hit=player.getBlockFromViewDirection({maxDistance:8});
@@ -24,48 +24,34 @@ export function nativeBlockHit(player,block){
   return {face:hit.face,faceLocation:{...hit.faceLocation}};
  }catch{return undefined;}
 }
-function hitError(stage,error){
- storageHitDiagnostics.errors++;
- storageHitDiagnostics.lastError={stage,message:String(error)};
-}
-function recordStorageHit(player,block,route,mode,engine,hit,aimed,corrected,used,result,reason){
- // Observation is deliberately outside resolution. Neither unavailable diagnostic
- // properties nor a logging failure may discard an already selected aim point.
+function storageHit(player,block,face,point,route){
+ let mode,crosshair=false,hit,corrected,aimed,reason=null;
+ try{
+  const input=player.inputInfo;mode=input?.lastInputModeUsed;
+  crosshair=['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar===true);
+ }catch{} // Missing inputInfo must not discard the native event position.
+ if(crosshair)hit=nativeBlockHit(player,block);
+ const source=hit?'ray':'event',sourceFace=hit?.face??face,raw=hit?.faceLocation??point;
+ try{corrected=blockLocalHit(block,sourceFace,raw,source);}catch(error){
+  storageHitDiagnostics.errors++;storageHitDiagnostics.lastError={stage:'blockLocalHit',message:String(error)};
+  reason='INVALID_NATIVE_HIT';
+ }
+ if(crosshair||!corrected)aimed=aimPointFor(player,block);
+ const used=aimed?'aim':corrected?source+'-world':'unavailable';
+ const result={face:sourceFace,faceLocation:aimed??corrected};
  try{
   storageHitDiagnostics.picks++;
-  if(hit)storageHitDiagnostics.nativeHits++;
-  if(used==='aim')storageHitDiagnostics.aimHits++;
-  else if(used==='basis')storageHitDiagnostics.basisHits++;
-  else storageHitDiagnostics.eventHits++;
-  if(engine&&result.faceLocation&&['x','y','z'].some(axis=>Math.abs(engine[axis]-result.faceLocation[axis])>.02))storageHitDiagnostics.corrected++;
-  const row={schema:2,tick:system.currentTick,route,block:block.typeId,mode:mode??null,
-   face:result.face,engine:engine??null,ray:hit?.faceLocation??null,aimed:aimed??null,
-   corrected:corrected??null,used,resolved:result.faceLocation??null,reason};
-  // Diagnostic fields are optional; custom addon state names must not affect aim.
+  if(hit)storageHitDiagnostics.nativeHits++;else storageHitDiagnostics.eventHits++;
+  if(aimed)storageHitDiagnostics.aimHits++;
+  if(raw&&result.faceLocation&&['x','y','z'].some(axis=>Math.abs(raw[axis]-result.faceLocation[axis])>.02))storageHitDiagnostics.corrected++;
+  const row={schema:3,tick:system.currentTick,route,block:block.typeId,position:{...block.location},mode:mode??null,
+   face:result.face,event:point??null,ray:hit?.faceLocation??null,corrected:corrected??null,aimed:aimed??null,
+   used,resolved:result.faceLocation??null,reason};
   try{row.facing=block.permutation.getState('kaleidoscope_tavern:facing')??null;}catch{}
   storageHitDiagnostics.last=row;
   let verbose=false;try{verbose=player.hasTag?.('kaleidoscope_tavern:debug_storage_aim')===true;}catch{}
-  if(storageHitDiagnostics.picks<=12||verbose)console.warn('[Tavern storage aim] '+JSON.stringify(row));
+  if(storageHitDiagnostics.picks<=24||verbose)console.warn('[Tavern storage aim] '+JSON.stringify(row));
  }catch{storageHitDiagnostics.diagnosticErrors++;}
-}
-function storageHit(player,block,face,point,route){
- const fallback={face,faceLocation:point?{...point}:undefined};
- // Resolve aim independently of inputInfo and the optional native raycast. On touch
- // that raycast is intentionally absent; the former hit.face dereference threw AFTER
- // printing used=aim, and a broad catch silently returned the mirrored event point.
- const aimed=aimPointFor(player,block);
- let mode,rayMouse=false,hit,corrected;
- try{
-  const input=player.inputInfo;mode=input?.lastInputModeUsed;
-  rayMouse=['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar);
- }catch(error){hitError('inputInfo',error);}
- if(rayMouse)hit=nativeBlockHit(player,block);
- // A valid aim does not depend on decoding a secondary engine hit at all.
- if(!aimed&&hit)try{corrected=worldFromHit(hit.face,hit.faceLocation,'ray');}catch(error){hitError('rayBasis',error);}
- const used=aimed?'aim':corrected?'basis':'event';
- const result={face:hit?.face??fallback.face,faceLocation:aimed??corrected??fallback.faceLocation};
- const reason=aimed?null:corrected?'AIM_UNAVAILABLE_ENGINE_BASIS':hit?'AIM_UNAVAILABLE_NO_REVIEWED_BASIS':'AIM_UNAVAILABLE_EVENT_FALLBACK';
- recordStorageHit(player,block,route,mode,fallback.faceLocation,hit,aimed,corrected,used,result,reason);
  return result;
 }
 

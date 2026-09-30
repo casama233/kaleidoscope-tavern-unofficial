@@ -10,6 +10,24 @@ class FamilyAdmissionTests(unittest.TestCase):
  def tearDown(self):self.tmp.cleanup()
  def test_exact_accepted(self):guard.validate_incoming([self.row],self.policy)
  def test_unrelated_accepted(self):guard.validate_incoming([{'uuid':'other'}],self.policy)
+ def test_renamed_family_uuid_rejected(self):
+  self.write_policy(None);directory=self.pack/'blocks';directory.mkdir()
+  (directory/'alias.json').write_text(json.dumps({'minecraft:block':{'description':{'identifier':'kaleidoscope_tavern:bar_cabinet'}}}))
+  with self.assertRaises(ValueError):guard.validate_incoming([{'uuid':'disguised-family','path':str(self.pack)}],self.policy)
+ def test_unregistered_family_dependency_rejected(self):
+  self.write_policy(None);(self.pack/'manifest.json').write_text(json.dumps({'dependencies':[{'uuid':'own'}]}))
+  with self.assertRaises(ValueError):guard.validate_incoming([{'uuid':'new-overlay','path':str(self.pack)}],self.policy)
+ def test_unrelated_jsonc_and_comments_accepted(self):
+  self.write_policy(None);directory=self.pack/'blocks';directory.mkdir()
+  (directory/'other.json').write_text('// "identifier":"kaleidoscope_tavern:example"\n{"minecraft:block":{"description":{"identifier":"unrelated:thing",},},}')
+  guard.validate_incoming([{'uuid':'unrelated','path':str(self.pack)}],self.policy)
+ def test_audit_detects_new_family_uuid(self):
+  world=self.root/'world';pack=world/'behavior_packs/disguised';(pack/'blocks').mkdir(parents=True);(world/'resource_packs').mkdir()
+  (pack/'manifest.json').write_text(json.dumps({'header':{'uuid':'disguised'}}))
+  (pack/'blocks/alias.json').write_text('{"minecraft:block":{"description":{"identifier":"kaleidoscope_tavern:bar_cabinet"}}}')
+  (world/'world_behavior_packs.json').write_text('[{"pack_id":"disguised","version":[1,0,0]}]');(world/'world_resource_packs.json').write_text('[]')
+  policy={'managed_uuids':['own'],'installed':{'packs':[],'refs':{'behavior':[],'resource':[]},'status':'quarantined'}}
+  result=guard.audit(world,policy);self.assertFalse(result['ok']);self.assertIn('unregistered family',result['errors'][0]['error'])
  def test_hold_blocks_owned_and_old_upstream(self):
   self.write_policy(None)
   for uid in ['own','old-upstream']:

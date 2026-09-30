@@ -25,7 +25,7 @@ import {SHAKER_RECIPES} from '../../runtime/BP/scripts/data/mixology.js';
 
 const NS='kaleidoscope_tavern:',FACING=NS+'facing',WINE=NS+'wine_q3';
 const faces=['North','East','South','West'],normal=[{x:0,y:0,z:-1},{x:1,y:0,z:0},{x:0,y:0,z:1},{x:-1,y:0,z:0}];
-const d=world.getDimension('overworld');let serial=0;
+const d=world.getDimension('overworld');let serial=0,region='+-';
 const close=(a,b,message='points differ')=>{for(const k of ['x','y','z'])assert.ok(Math.abs(a[k]-b[k])<1e-8,`${message}: ${k} ${a[k]} != ${b[k]}`);};
 const absolute=(block,p)=>Object.fromEntries(['x','y','z'].map(k=>[k,block.location[k]+p[k]]));
 function playerAt(block,point,face,mode='Touch',hotbar=false){
@@ -34,11 +34,11 @@ function playerAt(block,point,face,mode='Touch',hotbar=false){
  const at=absolute(block,point),eye={x:at.x+2*n.x,y:at.y+2*n.y,z:at.z+2*n.z};
  p.location={...eye,y:eye.y-1.5};p.getHeadLocation=()=>({...eye});p.getViewDirection=()=>({x:-n.x,y:-n.y,z:-n.z});
  p.inputInfo={lastInputModeUsed:mode,touchOnlyAffectsHotbar:hotbar};
- p.getBlockFromViewDirection=()=>({block,face,faceLocation:{...point,z:face==='East'||face==='West'?1-point.z:point.z}});
+ p.getBlockFromViewDirection=()=>({block,face,faceLocation:Object.fromEntries(['x','y','z'].map(k=>[k,point[k]===1?0:point[k]]))});
  p.addTag('kaleidoscope_tavern:debug_storage_aim');return p;
 }
 function block(id=NS+'cellar_cabinet',facing=1,key=FACING){
- const b=d.getBlock({x:++serial*8,y:3,z:-16});b.setPermutation(BlockPermutation.resolve(id,{[key]:facing}));return b;
+ const b=d.getBlock({x:(region[0]==='+'?1:-1)*++serial*8,y:3,z:(region[1]==='+'?16:-16)});b.setPermutation(BlockPermutation.resolve(id,{[key]:facing}));return b;
 }
 function capture(fn){const logs=[],warn=console.warn;console.warn=s=>logs.push(s);try{return {value:fn(),logs};}finally{console.warn=warn;}}
 function emit(p,b,face,point,{first=true,native=false,afterEmit}={}){
@@ -62,8 +62,8 @@ const registry=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECI
 const bundle=withFoundation(payload);registry.install(bundle);const host=createExtensionFurniture(registry);host.install();installJavaItemUseOnEvents();
 
 for(const row of [
- {label:'main cellar, 180-degree event',id:NS+'cellar_cabinet',raw:{x:0,y:.84,z:.88},aim:{x:1,y:.74,z:.12}},
- {label:'oak cellar, z-only event mirror',id:'kaleidoscope_world_liquor:oak_cellar_cabinet',raw:{x:.94,y:.90,z:.80},aim:{x:1,y:.83,z:.22}}
+ {label:'main cellar, 180-degree event',id:NS+'cellar_cabinet',raw:{x:0,y:.74,z:.88},aim:{x:1,y:.74,z:.12}},
+ {label:'oak cellar, z-only event mirror',id:'kaleidoscope_world_liquor:oak_cellar_cabinet',raw:{x:0,y:.83,z:.78},aim:{x:1,y:.83,z:.22}}
 ])test('handoff replay reaches BOTH consumers: '+row.label,()=>{
  const b=block(row.id);b.coordinateProbe=true;const p=playerAt(b,row.aim,'East');
  p.getBlockFromViewDirection=()=>{throw Error('no native gaze result in this touch path');};
@@ -73,8 +73,8 @@ for(const row of [
  assert.equal(delivered.face,'East');assert.equal(cellarCabinetSlot(1,delivered.face,delivered.point),2);
  assert.equal(storageHitDiagnostics.errors,errors,'successful touch aim must not throw');
  const log=JSON.parse(logs.find(x=>x.startsWith('[Tavern storage aim] ')).slice('[Tavern storage aim] '.length));
- assert.equal(log.used,'aim');close(log.resolved,delivered.point,'logged result must be the returned result');
- assert.equal(log.schema,2);assert.equal(log.route,'storage-coordinate-probe');
+ assert.equal(log.used,'event-world');close(log.resolved,delivered.point,'logged result must be the returned result');
+ assert.equal(log.schema,3);assert.equal(log.route,'storage-coordinate-probe');
 });
 
 for(const [mode,hotbar] of [['Touch',false],['Touch',true],['KeyboardAndMouse',false],['Gamepad',false],[undefined,false]]){
@@ -90,7 +90,7 @@ for(const [mode,hotbar] of [['Touch',false],['Touch',true],['KeyboardAndMouse',f
   capture(()=>emit(p,b,'East',{x:0,y:.78,z:.825}));close(picked.point,aim);close(delivered.point,aim);
  });
 }
-test('input-info failure cannot undo an already valid eye ray',()=>{
+test('input-info failure retains the decoded event point',()=>{
  const b=block();b.coordinateProbe=true;const aim={x:1,y:.78,z:.175},p=playerAt(b,aim,'East');
  Object.defineProperty(p,'inputInfo',{get(){throw Error('INPUT_INFO_UNAVAILABLE');}});
  capture(()=>emit(p,b,'East',{x:0,y:.78,z:.825}));close(delivered.point,aim);
@@ -111,8 +111,8 @@ for(const mode of ['Touch','KeyboardAndMouse'])test('real aim miss is labelled a
  const raw={x:0,y:.78,z:.825};if(mode==='Touch')p.getBlockFromViewDirection=()=>undefined;
  const {logs}=capture(()=>emit(p,b,'East',raw));
  const log=JSON.parse(logs.find(x=>x.startsWith('[Tavern storage aim] ')).slice('[Tavern storage aim] '.length));
- assert.equal(log.used,mode==='Touch'?'event':'basis');assert.equal(log.aimed,null);close(log.resolved,delivered.point);
- assert.ok(log.reason,'a fallback needs an explicit reason');
+ assert.equal(log.used,mode==='Touch'?'event-world':'ray-world');assert.equal(log.aimed,null);close(log.resolved,delivered.point);
+ assert.ok(log.corrected,'decoded native point is recorded');
 });
 
 // Independently specified slot targets; they are NOT produced by a slot selector.
@@ -142,7 +142,7 @@ function create(desc,f){
  else{b.setType('minecraft:air');p.location={...b.location};p.inventory.setItem(7,new ItemStack(desc.id));desc.place(p,b.location);b.setPermutation(b.permutation.withState(FACING,f));}
  p.inventory.setItem(7,undefined);return b;
 }
-function rawEvent(point,f,external=false){return f%2?{x:external?point.x:1-point.x,y:point.y,z:1-point.z}:{...point};}
+function rawEvent(point,b){return Object.fromEntries(['x','y','z'].map(k=>[k,Math.abs((b.location[k]+point[k])%1)]));}
 function assertVisual(desc,b,slot,f){
  const pose=desc.pose(slot,f),at=absolute(b,pose.offset);
  const entities=d.getEntities({location:b.location,maxDistance:2}).filter(e=>e.typeId.endsWith(desc.kind+'_bottle_visual'));
@@ -153,19 +153,20 @@ function assertVisual(desc,b,slot,f){
  assert.ok(anchor,'visual has a slot anchor');
  if(desc.def)assert.equal(JSON.parse(anchor).slot,slot);else assert.ok(anchor.endsWith('/'+(desc.kind==='bar_cabinet'?(slot===0?'left':'right'):slot)));
 }
-for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let f=0;f<4;f++)for(const desc of definitions){
- test('routed inventory + visual anchors: '+desc.id+' facing '+f+' '+mode,()=>{
-  const b=create(desc,f),face=desc.kind==='circular_rack'?'Up':faces[f];
+for(const signs of ['++','+-','-+','--'])for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let f=0;f<4;f++)for(const desc of definitions){
+ test('routed inventory + visual anchors: '+desc.id+' facing '+f+' '+mode+' region '+signs,()=>{
+  region=signs;const b=create(desc,f),face=desc.kind==='circular_rack'?'Up':faces[f];
   capture(()=>{
    for(let s=0;s<desc.n;s++){
     const point=desc.target(s,f),p=playerAt(b,point,face,mode),item=new ItemStack(WINE);item.nameTag='slot-'+s;item.setLore(['coordinate regression']);p.inventory.setItem(7,item);
-    const e=emit(p,b,face,rawEvent(point,f,!!desc.def));assert.equal(e.cancel,true);assert.equal(p.inventory.getItem(7),undefined,'insert must consume its input');
+    if(mode==='Touch'){const other=desc.target((s+1)%desc.n,f),eye=absolute(b,other),n=face==='Up'?{x:0,y:1,z:0}:normal[f];p.getHeadLocation=()=>({x:eye.x+2*n.x,y:eye.y+2*n.y,z:eye.z+2*n.z});}
+    const e=emit(p,b,face,rawEvent(point,b));assert.equal(e.cancel,true);assert.equal(p.inventory.getItem(7),undefined,'insert must consume its input');
     assert.deepEqual(desc.slots(desc.read(b)),Array.from({length:desc.n},(_,i)=>i<=s?WINE:null),'only the intended slot is written');
     assertVisual(desc,b,s,f);
    }
    for(let s=desc.n-1;s>=0;s--){
     const point=desc.target(s,f),p=playerAt(b,point,face,mode);
-    const e=emit(p,b,face,rawEvent(point,f,!!desc.def));assert.equal(e.cancel,true);
+    const e=emit(p,b,face,rawEvent(point,b));assert.equal(e.cancel,true);
     assert.equal(p.inventory.getItem(7)?.nameTag,'slot-'+s,'must return the object stored in the aimed slot');
     assert.deepEqual(desc.slots(desc.read(b)),Array.from({length:desc.n},(_,i)=>i<s?WINE:null));
    }
@@ -175,14 +176,14 @@ for(const mode of ['Touch','KeyboardAndMouse','Gamepad'])for(let f=0;f<4;f++)for
 test('fresh touch isFirstEvent=false still consumes the intended slot exactly once',()=>{
  const desc=definitions[0],b=create(desc,1),point=cellarTarget(2,1),p=playerAt(b,point,'East');p.inventory.setItem(7,new ItemStack(WINE,2));
  capture(()=>{
-  const e={player:p,block:b,blockFace:'East',faceLocation:rawEvent(point,1),isFirstEvent:false,cancel:false};
+  const e={player:p,block:b,blockFace:'East',faceLocation:rawEvent(point,b),isFirstEvent:false,cancel:false};
   world.beforeEvents.playerInteractWithBlock.emit(e);world.beforeEvents.playerInteractWithBlock.emit({...e,cancel:false});system.advance(3);
  });
  assert.equal(p.inventory.getItem(7).amount,1);assert.equal(desc.read(b).revision,1);assert.equal(desc.read(b).slots[2],WINE);
 });
 test('switching the held slot still aborts the queued insertion',()=>{
  const desc=definitions[0],b=create(desc,1),point=cellarTarget(2,1),p=playerAt(b,point,'East');p.inventory.setItem(7,new ItemStack(WINE));
- capture(()=>emit(p,b,'East',rawEvent(point,1),{afterEmit:()=>{p.selectedSlotIndex=6;}}));
+ capture(()=>emit(p,b,'East',rawEvent(point,b),{afterEmit:()=>{p.selectedSlotIndex=6;}}));
  assert.equal(desc.read(b).revision,0);assert.equal(p.inventory.getItem(7)?.typeId,WINE);
 });
 

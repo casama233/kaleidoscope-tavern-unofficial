@@ -23,6 +23,9 @@ class BaselineGateTests(unittest.TestCase):
   with self.assertRaises(SystemExit) as caught:fn()
   self.assertIn(part,str(caught.exception))
  def test_valid_clean_release(self):gate.check(self.config,release=True,history_base=self.base)
+ def test_metadata_version_rejected(self):
+  (self.root/'package.json').write_text('{"version":"0.0.1"}')
+  self.reject('package.json version',lambda:gate.validate(self.config))
  def test_runtime_edit_rejected(self):
   (self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
   self.reject('runtime changed',lambda:gate.check(self.config))

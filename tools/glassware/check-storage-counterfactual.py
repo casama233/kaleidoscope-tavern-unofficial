@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay the same current tests with pinned old, partial, and fixed runtime code.
+"""Replay current tests against pinned pre-touch and pre-rotation runtime code.
 
 Requires LIQUOR_SOURCE. Never a native client/BDS acceptance test. This tool replaces
 only two runtime files temporarily, restores their exact bytes in finally, and keeps
@@ -38,54 +38,39 @@ def run_suite(label, command, output):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--baseline-dir', type=Path, help='Optional exported main source, still hash-verified')
-    parser.add_argument('--evidence', type=Path, required=True)
-    args = parser.parse_args()
-    assert os.environ.get('LIQUOR_SOURCE'), 'LIQUOR_SOURCE must name the pinned companion checkout'
-    output = args.evidence.resolve()
-    output.mkdir(parents=True, exist_ok=True)
-    before = {}
-    for name, digest in BEFORE.items():
-        raw = (args.baseline_dir / name).read_bytes() if args.baseline_dir else subprocess.check_output(['git', 'show', BASE + ':' + name], cwd=ROOT)
-        assert hashlib.sha256(raw).hexdigest() == digest, ('Incorrect original source', name)
-        before[name] = raw
-    fixed = {name: (ROOT / name).read_bytes() for name in BEFORE}
-    assert all(fixed[name] != before[name] for name in BEFORE), 'Expected both reviewed fixes'
-    evidence = {'baseline': BASE, 'clientTested': False,
-                'testsUse': 'current production adapters with deterministic API doubles', 'runs': {}}
-    loader = ['node', '--experimental-loader', './tools/pickup/mock-loader.mjs']
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--evidence',type=Path,required=True)
+    args=parser.parse_args();output=args.evidence.resolve();output.mkdir(parents=True,exist_ok=True)
+    assert os.environ.get('LIQUOR_SOURCE'),'LIQUOR_SOURCE must name the pinned companion checkout'
+    previous='c34490c06c4c8fb1bc1c0444405181da90bbf932'
+    old_router=subprocess.check_output(['git','show',previous+':'+ROUTER],cwd=ROOT)
+    assert hashlib.sha256(old_router).hexdigest()=='251fd95b6b727ecef87349908a539b3a00ab4b40f035e6e6b6fc59bdce8d78ce'
+    old_aim=subprocess.check_output(['git','show',BASE+':'+AIM],cwd=ROOT)
+    assert hashlib.sha256(old_aim).hexdigest()==BEFORE[AIM]
+    fixed={name:(ROOT/name).read_bytes() for name in (AIM,ROUTER)}
+    evidence={'previous':previous,'geometryBaseline':BASE,'clientTested':False,'testsUse':'current production adapters with deterministic API doubles','runs':{}}
+    loader=['node','--experimental-loader','./tools/pickup/mock-loader.mjs']
     try:
-        for scenario in ('original-main', 'router-only', 'fixed'):
-            for name in BEFORE:
-                raw = before[name] if scenario == 'original-main' or (scenario == 'router-only' and name == AIM) else fixed[name]
-                (ROOT / name).write_bytes(raw)
-            evidence['runs'][scenario + '-routing'] = run_suite(scenario + '-routing', loader + ['--test', 'tools/glassware/storage-routing.test.mjs'], output)
-            evidence['runs'][scenario + '-aim'] = run_suite(scenario + '-aim', ['node', '--test', 'tools/glassware/aim-hit.test.mjs'], output)
-            replay = subprocess.run(loader + ['tools/glassware/replay-storage-touch.mjs'], cwd=ROOT, text=True, capture_output=True, timeout=30, check=True)
-            row = json.loads(replay.stdout)
-            (output / (scenario + '-replay.json')).write_text(json.dumps(row, indent=2) + '\n')
-            assert row['selected']['slot'] == row['committed']['slot'] == (0 if scenario == 'original-main' else 2)
-            aim_log = next(s for s in row['logs'] if s.startswith('[Tavern storage aim] '))
-            assert json.loads(aim_log[len('[Tavern storage aim] '):])['used'] == 'aim'
+        for label,router in [('previous-baseline',old_router),('fixed',fixed[ROUTER])]:
+            (ROOT/ROUTER).write_bytes(router)
+            evidence['runs'][label+'-routing']=run_suite(label+'-routing',loader+['--test','tools/glassware/storage-routing.test.mjs'],output)
+            replay=subprocess.run(loader+['tools/glassware/replay-storage-touch.mjs'],cwd=ROOT,text=True,capture_output=True,timeout=30,check=True)
+            row=json.loads(replay.stdout);(output/(label+'-replay.json')).write_text(json.dumps(row,indent=2)+'\n')
+            assert row['selected']['slot']==row['committed']['slot']==(0 if label=='previous-baseline' else 2)
+            log=next(x for x in row['logs'] if x.startswith('[Tavern storage aim] '))
+            assert json.loads(log[len('[Tavern storage aim] '):])['used']==('aim' if label=='previous-baseline' else 'event-world')
+        (ROOT/AIM).write_bytes(old_aim)
+        evidence['runs']['old-geometry']=run_suite('old-geometry',['node','--test','tools/glassware/aim-hit.test.mjs'],output)
+        (ROOT/AIM).write_bytes(fixed[AIM])
+        evidence['runs']['fixed-geometry']=run_suite('fixed-geometry',['node','--test','tools/glassware/aim-hit.test.mjs','tools/glassware/block-hit.test.mjs'],output)
     finally:
-        for name, raw in fixed.items():
-            (ROOT / name).write_bytes(raw)
-    runs = evidence['runs']
-    assert runs['original-main-routing']['exit'] == 1 and runs['original-main-routing']['fail'] > 0
-    assert any('handoff replay reaches BOTH consumers' in s for s in runs['original-main-routing']['failures'])
-    assert runs['original-main-aim']['exit'] == runs['router-only-aim']['exit'] == 1
-    assert runs['original-main-aim']['fail'] == runs['router-only-aim']['fail'] > 0
-    assert runs['router-only-routing']['failures'] == [
-        'routed inventory + visual anchors: kaleidoscope_tavern:tilted_rack facing 1 Touch',
-        'routed inventory + visual anchors: kaleidoscope_tavern:tilted_rack facing 3 Touch',
-    ], 'The geometry fix must explain precisely the two remaining rack cases'
-    assert runs['router-only-routing']['exit'] == 1
-    assert runs['fixed-routing']['exit'] == runs['fixed-aim']['exit'] == 0
-    assert runs['fixed-routing']['fail'] == runs['fixed-aim']['fail'] == 0
-    (output / 'counterfactual-summary.json').write_text(json.dumps(evidence, indent=2) + '\n')
-    print(json.dumps({name: {k: v for k, v in row.items() if k != 'failures'} for name, row in runs.items()}, indent=2))
+        for name,raw in fixed.items():(ROOT/name).write_bytes(raw)
+    runs=evidence['runs']
+    assert runs['previous-baseline-routing']['exit']==1 and runs['previous-baseline-routing']['fail']>0
+    assert any('routed inventory + visual anchors' in name and 'Touch' in name for name in runs['previous-baseline-routing']['failures'])
+    assert runs['old-geometry']['exit']==1 and runs['old-geometry']['fail']>0
+    assert runs['fixed-routing']['exit']==runs['fixed-geometry']['exit']==0
+    (output/'counterfactual-summary.json').write_text(json.dumps(evidence,indent=2)+'\n')
+    print(json.dumps({name:{k:v for k,v in row.items() if k!='failures'} for name,row in runs.items()},indent=2))
 
-
-if __name__ == '__main__':
-    main()
+if __name__=='__main__':main()

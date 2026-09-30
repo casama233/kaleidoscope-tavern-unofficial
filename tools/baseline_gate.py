@@ -20,6 +20,9 @@ def fingerprint(root):
 
 def validate(config):
  if not isinstance(config.get('version'),list) or len(config['version'])!=3 or any(type(x) is not int or x<0 for x in config['version']):fail('invalid release version')
+ for name in ['package.json','release.json']:
+  path=ROOT/name
+  if path.exists() and read(path).get('version')!='.'.join(map(str,config['version'])):fail(name+' version differs from release version')
  manifests={};trees={};files={}
  for side,relative in config['runtime'].items():
   root=ROOT/relative;manifests[side]=m=read(root/'manifest.json')

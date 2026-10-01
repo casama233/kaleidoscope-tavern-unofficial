@@ -37,7 +37,7 @@ export function grassStealthEligible({sneaking,feetEligible,headEligible}){retur
 export function extendedReachDistance(active){return active?9:6;}
 export const TOMB_RAIDER_TYPES=Object.freeze([
  'minecraft:skeleton','minecraft:stray','minecraft:wither_skeleton','minecraft:bogged','minecraft:skeleton_horse',
- 'minecraft:zombie','minecraft:zombie_villager','minecraft:drowned','minecraft:husk',
+ 'minecraft:zombie','minecraft:zombie_villager','minecraft:zombie_villager_v2','minecraft:drowned','minecraft:husk',
  'minecraft:piglin','minecraft:piglin_brute','minecraft:zombie_pigman',
  'minecraft:vindicator','minecraft:pillager','minecraft:witch'
 ]);

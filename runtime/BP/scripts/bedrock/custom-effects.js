@@ -5,8 +5,10 @@ import {externalEffectSource,externalEffectDefinition} from '../core/extension-c
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,ItemStack,system,world,ScriptEventSource} from '@minecraft/server';
+import {EquipmentSlot,ItemStack,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
 import {isBottleSupport} from '../core/bottle-support.js';
+import {grassStealthPlant} from '../core/grass-stealth-plants.js';
+import {armorShouldWear} from '../core/armor-wear.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
@@ -68,16 +70,12 @@ export function applyCustomEffect(p,row){
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
 }
-const RIPE_CROP_AGE=Object.freeze({
- 'minecraft:wheat':7,'minecraft:carrots':7,'minecraft:potatoes':7,'minecraft:beetroot':3,
- 'minecraft:nether_wart':3,'minecraft:sweet_berry_bush':3,
- ["kaleidoscope_tavern:grape_crop"]:5,["kaleidoscope_tavern:ice_grape_crop"]:5,["kaleidoscope_tavern:gold_grape_crop"]:5
-});
 function stealthPlant(block){
  if(!block)return false;
- try{if(block.hasTag?.('kaleidoscope_tavern:grass_stealth_plants'))return true;}catch{}
- const max=RIPE_CROP_AGE[block.typeId];if(max===undefined)return false;
- try{return Number(block.permutation.getState('kaleidoscope_tavern:age')??block.permutation.getState('growth')??block.permutation.getState('age'))>=max;}catch{return false;}
+ let growth,tagged=false;
+ try{growth=block.permutation.getState('growth');}catch{}
+ try{tagged=block.hasTag?.('kaleidoscope_tavern:grass_stealth_plants')===true;}catch{}
+ return grassStealthPlant(block.typeId,growth,tagged);
 }
 export function pulseGrassStealth(p){
  try{
@@ -163,8 +161,12 @@ function ardentArmorOrBare(p,rng){
   const roll=rng();if(!Number.isFinite(roll)||roll<0||roll>=1)throw Error('INVALID_RNG');
   const selected=worn[Math.min(worn.length-1,Math.floor(roll*worn.length))],durability=selected.item.getComponent?.('minecraft:durability');
   if(durability&&!durability.unbreakable){
-   if(durability.damage+1>=durability.maxDurability)equipment.setEquipment(selected.slot,undefined);
-   else{durability.damage+=1;equipment.setEquipment(selected.slot,selected.item);}
+   const level=selected.item.getComponent?.('minecraft:enchantable')?.getEnchantments?.().find(e=>e.type?.id==='unbreaking'||e.type?.id==='minecraft:unbreaking')?.level??0;
+   if(!armorShouldWear(level,p.getGameMode?.()===GameMode.Creative,rng))return;
+   let applied;
+   if(durability.damage+1>=durability.maxDurability)applied=equipment.setEquipment(selected.slot,undefined);
+   else{durability.damage+=1;applied=equipment.setEquipment(selected.slot,selected.item);}
+   if(applied===false)throw Error('ARMOR_WRITE_REJECTED');
    customEffectDiagnostics.ardentArmorDamage++;
   }
   return;
@@ -283,4 +285,4 @@ export function installCustomEffects(){
  system.runInterval(tickArdentHeat,1);
  system.runInterval(tickHighHeels,1);
 }
-export const CUSTOM_TEST={tracks,deaths,heelsSteps,fastPlayers,statusSnapshots};
+export const CUSTOM_TEST={tracks,deaths,heelsSteps,fastPlayers,statusSnapshots,ardentArmorOrBare};

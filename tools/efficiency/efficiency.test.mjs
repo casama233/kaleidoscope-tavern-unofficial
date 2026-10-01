@@ -13,7 +13,7 @@ import {sampleAmbientPositions} from '../../runtime/BP/scripts/core/java-ambient
 import {statusNow,applyCustomEffect,clearCustomEffects,tickCustomEffects,tickArdentHeat,tickHighHeels,importExternalEffects,installCustomEffects,CUSTOM_TEST} from '../../runtime/BP/scripts/bedrock/custom-effects.js';
 import {installContent} from '../../runtime/BP/scripts/core/extension-content.js';
 const NS='kaleidoscope_tavern',STATUS=NS+':custom_effects';
-beforeEach(()=>{system.currentTick+=100;world.dp.clear();world.players=[];pulseJavaAmbient();CELLAR_CABINET_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();for(const map of Object.values(CUSTOM_TEST))map.clear();resetCounters();});
+beforeEach(()=>{system.currentTick+=100;world.dp.clear();world.players=[];pulseJavaAmbient();CELLAR_CABINET_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();for(const map of Object.values(CUSTOM_TEST))if(map instanceof Map)map.clear();resetCounters();});
 function cabinet(count=1,slots=9){
  const d=new Dimension(),blocks=[],state={schema:1,revision:0,slots:Array(slots).fill(NS+':empty_bottle')};
  const circular=slots===6,sync=circular?syncCircularRackVisuals:syncCellarCabinetVisuals,key=circular?circularRackKey:cellarCabinetKey;

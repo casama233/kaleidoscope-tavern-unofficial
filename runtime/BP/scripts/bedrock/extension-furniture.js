@@ -1,3 +1,4 @@
+import {cellarCabinetRedstoneLaunch} from './cellar-cabinet.js';
 import {syncStorageVisualPose} from './storage-visual-maintenance.js';
 /** External cabinet adapter. No addon inventory engine, item whitelist or pose table. */
 import {world,system,BlockPermutation} from '@minecraft/server';
@@ -10,7 +11,7 @@ import {ExtensionCabinetStore,emptyExtensionStorage} from '../core/extension-sto
 import {facingForYaw,facingVector} from '../core/furniture.js';
 import {makeStack,hand,sameHand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,air} from './transactions.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
-import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
+import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
 const NS='kaleidoscope_tavern',ANCHOR=NS+':extension_storage_anchor';
 export const extensionFurnitureDiagnostics={commits:0,migrations:0,errors:[]};
 function error(e){extensionFurnitureDiagnostics.errors.push(String(e));if(extensionFurnitureDiagnostics.errors.length>16)extensionFurnitureDiagnostics.errors.shift();console.warn('[Tavern external storage] '+e);}
@@ -111,6 +112,13 @@ export function createExtensionFurniture(registry){
   try{connection(block);const f=block.permutation.getState(def.facing);for(const side of[1,3])connection(blockAt(block.dimension,plus(target,facingVector((f+side)%4))));}catch(e){error(e);}
   return block;
  }
+ function popRedstone(block,options={}){
+  const def=definition(block);check(def?.kind==='cellar_cabinet','NOT_EXTERNAL_CELLAR_CABINET');
+  const ctx=load(block),state=ctx.state,candidates=state.slots.flatMap((item,slot)=>item?[{slot,item}]:[]);
+  return popRandomStoredBottle({block,store:ctx.store,key:ctx.store.key,state,candidates,
+   remove:(s,slot)=>cellarCabinetTake(s,slot).state,
+   pose:({block,rng})=>cellarCabinetRedstoneLaunch(block,{rng,facingState:def.facing}),sync:visualSafe,...options});
+ }
  function tickBlock(block){
   if(!definition(block))return;const ctx=load(block);connection(block);sync(block,ctx.state);
  }
@@ -149,6 +157,12 @@ export function createExtensionFurniture(registry){
   return {kind:'cabinet',type:row.type,dimension:row.dimension,position:row.position,visualReady};
  }
  function nativeUse(row){const def=registry.furniture(row.type);check(def&&def.source===row.source,'UNKNOWN_FURNITURE');const player=world.getEntity(row.entity),block=blockAt(world.getDimension(row.dimension),row.position);check(player?.typeId==='minecraft:player'&&block?.typeId===row.type,'BLOCK_CHANGED');check(Number.isInteger(row.tick)&&system.currentTick-row.tick>=0&&system.currentTick-row.tick<=2&&row.slot===player.selectedSlotIndex,'STALE_HAND');if(hand(player))return;nativeEmptyHandBlockUse({player,block,face:row.face,faceLocation:row.faceLocation});}
- return {load,choose,interact,recover,place,sync,tickBlock,install,visuals,importSnapshot,nativeUse};
+ return {load,choose,interact,recover,place,sync,tickBlock,install,visuals,importSnapshot,nativeUse,popRedstone};
 }
-export function installExtensionFurniture(registry){const host=createExtensionFurniture(registry);host.install();return host;}
+let installedHost;
+export function registerExtensionFurnitureComponents({blockComponentRegistry}){
+ blockComponentRegistry.registerCustomComponent(NS+':external_cellar_redstone',{
+  onRedstoneUpdate:event=>routeStatefulStorageRedstone(event,block=>{check(installedHost,'EXTENSION_NOT_READY');return installedHost.popRedstone(block);},error)
+ });
+}
+export function installExtensionFurniture(registry){const host=createExtensionFurniture(registry);host.install();installedHost=host;return host;}

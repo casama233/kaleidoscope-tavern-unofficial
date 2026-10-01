@@ -50,16 +50,20 @@ jobs:
           assert r['version'] == c['version']
           assert re.fullmatch(r'\d+\.\d+\.\d+', c['version'])
           assert r['tag'] == f"v{c['version']}-beta.1"
-          assert c['artifact_suffix'] == 'beta1' and r['prerelease'] is True
+          assert c['artifact_suffix'] in ('beta1','baseline1') and r['prerelease'] is True
           assert re.fullmatch(r'[a-f0-9]{64}', r['expected_archive_sha256'])
           assert isinstance(r['title'], str) and '\n' not in r['title'] and '\r' not in r['title']
-          values = {'RELEASE_TAG': r['tag'], 'RELEASE_TITLE': r['title'], 'RELEASE_VERSION': c['version'], 'RELEASE_ARCHIVE': f"Kaleidoscope_Tavern_Unofficial_{c['version']}_beta1.mcaddon"}
+          values = {'RELEASE_TAG': r['tag'], 'RELEASE_TITLE': r['title'], 'RELEASE_VERSION': c['version'], 'RELEASE_ARCHIVE': f"Kaleidoscope_Tavern_Unofficial_{c['version']}_{c['artifact_suffix']}.mcaddon"}
           with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as f:
               for key, value in values.items():
                   f.write(f'{key}={value}\n')
           PY
       - name: Install image validation dependency
         run: python -m pip install Pillow==11.3.0
+      # Package only from a clean committed tree. Following audits may update
+      # tracked JSON evidence but must not alter runtime or the built archive.
+      - name: Build complete BP and RP package
+        run: python tools/build_release.py
       - name: Validate exact committed runtime
         run: |
           python tools/check_release.py
@@ -72,8 +76,6 @@ jobs:
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Audit all runtime changes against pinned main and Java
         run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
-      - name: Build complete BP and RP package
-        run: python tools/build_release.py
       - name: Verify archive and include evidence
         env:
           SOURCE_SHA: ${{ github.sha }}
@@ -104,7 +106,7 @@ jobs:
           for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC', 'LAUNCH-VALIDATION'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
-          for name in ('DRINK-SURFACES-0.6.59.json',):
+          for name in ('DRINK-SURFACES-0.6.59.json', 'BDS-FAMILY-20261001.json'):
               shutil.copy2(Path('docs') / name, out / name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
           PY

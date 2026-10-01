@@ -1,4 +1,5 @@
 import {nativeItems} from './native-item-storage.js';
+import {feedback} from './break-feedback.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';

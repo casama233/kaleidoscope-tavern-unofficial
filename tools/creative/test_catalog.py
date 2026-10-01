@@ -1,3 +1,4 @@
+import ast
 """Native catalog data tests, not a Minecraft inventory renderer simulation."""
 import copy
 import importlib.util
@@ -195,7 +196,19 @@ class RealPackTests(unittest.TestCase):
     def test_build_and_validation_hooks_exist(self):
         self.assertIn('creative/catalog.py', (TAVERN/'tools/check_release.py').read_text())
         self.assertIn('creative/catalog.py', (LIQUOR/'tools/check_release.py').read_text())
-        self.assertIn('creative/catalog.py', (LIQUOR/'tools/build_port.py').read_text())
+        builder=(LIQUOR/'tools/build_port.py').read_text()
+        if 'creative/catalog.py' not in builder:
+            # The reviewed wall-record normalizer wraps the byte-preserved
+            # converter. Verify an executable delegation, not a comment match.
+            tree=ast.parse(builder)
+            calls=[node for node in ast.walk(tree) if isinstance(node,ast.Call)]
+            self.assertTrue(any(
+                ast.unparse(call.func)=='runpy.run_path'
+                and call.args and ast.unparse(call.args[0])=="str(tools / '_build_port_source.py')"
+                and any(k.arg=='run_name' and isinstance(k.value,ast.Constant) and k.value.value=='__main__' for k in call.keywords)
+                for call in calls), 'Converter wrapper must execute its pinned source')
+            builder=(LIQUOR/'tools/_build_port_source.py').read_text()
+        self.assertIn('creative/catalog.py',builder)
 
 class HistoricalProjectionTests(unittest.TestCase):
     @classmethod

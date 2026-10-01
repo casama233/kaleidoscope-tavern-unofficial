@@ -1,6 +1,6 @@
-## Current maintained baseline: 0.6.69
+## Current maintained baseline: 0.6.72
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). The reviewed family candidate pairs Tavern **0.6.69**, Grilling **2.8.11**, World Liquor **0.1.31** and unmodified official Cookery **1.0.8**. Static and isolated BDS checks passed; client and saved-world UUID migration gates remain pending. These are source baselines, not proof of production installation. Build from this source; no private gameplay patch layer is required. Read [baseline maintenance](docs/BASELINE-MAINTENANCE.md) before importing historical artifacts or deploying.
+Canonical runtime and dependencies: [baseline.json](baseline.json). The reviewed family candidate pairs Tavern **0.6.72**, Grilling **2.8.14**, World Liquor **0.1.37** and unmodified official Cookery **1.0.8**. Static checks passed; this revision’s BDS evidence, client acceptance and saved-world UUID migration are recorded separately. These are source baselines, not proof of production installation. Build from this source; no private gameplay patch layer is required. Read [baseline maintenance](docs/BASELINE-MAINTENANCE.md) before importing historical artifacts or deploying.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -24,7 +24,7 @@ Static resource and source checks plus a real BDS 1.26.51.1 load passed with Coo
 
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load-validation target BDS **1.26.51.1**.
 - **Kaleidoscope Cookery (Unofficial) 1.0.8**, installed separately.
-- Both Tavern's 0.6.69 behavior and resource packs, above Cookery in their respective pack stacks. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
+- Both Tavern's 0.6.72 behavior and resource packs, above Cookery in their respective pack stacks. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
 - Slightly Tipsy uses the Java three-wave rhythm as small yaw increments, not camera shake. It slightly affects aim and is not camera-only roll. Use `/function kt_tipsy_motion_off` to opt out.
 
 The public beta uses Cookery's original UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing it. No Cookery pack, world backup, credentials, server executable or other server add-on is included.

@@ -1,4 +1,5 @@
 import {trellisWaxFeedback,plantGrowthFeedback} from './interaction-particles.js';
+import {feedback} from './break-feedback.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
 import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
@@ -98,11 +99,11 @@ export function maintain(b){
  if(b.typeId===WILD_HEAD||b.typeId===WILD_BODY){
   const above=blockAt(b.dimension,plus(b.location,{x:0,y:1,z:0}));
   if(!above)return; // An unloaded support is unknown, not a missing block.
-  if(!canAnchorWildVine(above)){b.setType('minecraft:air');return;}
+  if(!canAnchorWildVine(above)){feedback.transaction(b,()=>b.setType('minecraft:air'));return;}
   if(b.typeId===WILD_BODY){const below=wildBelow(b);if(!below)return;if(below.typeId!==WILD_BODY&&below.typeId!==WILD_HEAD)b.setPermutation(makeWildHead(BlockPermutation.resolve(WILD_HEAD),0,false));}
  }
  else if(isFrame(b.typeId))refreshAround(b);
- else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)b.setType('minecraft:air');
+ else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)feedback.transaction(b,()=>b.setType('minecraft:air'));
 }
 export function farmUse(player,b,{rng=Math.random}={}){
  canWrite(player);check(FARM_IDS.has(b.typeId),'NOT_A_CROP');

@@ -55,6 +55,7 @@ export function handleDisplayProjectileHit(e){
    setWithWater(block,BlockPermutation.resolve('minecraft:air'));if(k){if(isDrink)store.restore(k,undefined);else cupStore.restore(k,undefined);}if(vanillaKey)world.setDynamicProperty(vanillaKey,undefined);native?.apply();
   }catch(err){try{thrown?.remove();}catch{}try{try{native?.rollback();}finally{restoreWater(block,old);if(k){if(isDrink)store.restore(k,raw);else cupStore.restore(k,raw);}if(vanillaKey)world.setDynamicProperty(vanillaKey,vanillaRaw);}}catch(rollback){error(rollback);}throw err;}
   native?.finish();
+  // Bottle impacts retain the Java 4x4x4 glass fragments, not generic furniture debris.
   glassBreakFeedback(block.dimension,p);
   if(thrown)displayProjectileDiagnostics.clouds++;
   displayProjectileDiagnostics.broken++;return true;

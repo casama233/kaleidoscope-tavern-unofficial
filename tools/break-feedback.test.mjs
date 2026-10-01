@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createBreakFeedback} from '../runtime/BP/scripts/core/break-feedback-engine.js';
+import {ExtensionRegistry,CAPABILITIES} from '../runtime/BP/scripts/core/registry.js';
+import {externalBreakFeedback} from '../runtime/BP/scripts/core/extension-content.js';
+const profile={block:'probe:block',material:'glass',particle:'probe:fragments',uv:[0,0]};
+function fixture(){const sounds=[],particles=[];let loaded=true;const b={typeId:'probe:block',location:{x:1,y:2,z:3},permutation:{getState(){}}};const dimension={id:'minecraft:overworld',getBlock:()=>loaded?b:undefined,playSound:(...a)=>sounds.push(a),spawnParticle:(...a)=>particles.push(a)};b.dimension=dimension;return {b,sounds,particles,unload:()=>loaded=false,feedback:createBreakFeedback(id=>id===profile.block?profile:undefined)};}
+test('committed scripted removal emits a single material feedback',()=>{const f=fixture();f.feedback.transaction(f.b,()=>{f.b.typeId='minecraft:air';});assert.equal(f.sounds.length,1);assert.equal(f.sounds[0][0],'random.glass');assert.equal(f.particles.length,1);});
+for(const result of ['unchanged','failed','throw','unloaded'])test('no destruction feedback for '+result,()=>{const f=fixture();try{f.feedback.transaction(f.b,()=>{if(result==='throw')throw Error('rollback');if(result==='failed'){f.b.typeId='minecraft:air';return false;}if(result==='unloaded')f.unload();});}catch{}assert.equal(f.sounds.length,0);assert.equal(f.particles.length,0);});
+test('the advertised host capability stores actual replaceable addon profiles',()=>{assert(CAPABILITIES.includes('destruction_feedback'));const r=new ExtensionRegistry({recipes:[],fluids:[],itemExists:()=>true});r.install({api:1,source:'probe',version:'1.0.0',requires:['destruction_feedback'],breakFeedback:[profile]});assert.equal(externalBreakFeedback('probe:block').material,'glass');r.install({api:1,source:'probe',version:'1.0.1',breakFeedback:[]});assert.equal(externalBreakFeedback('probe:block'),undefined);});
+test('foreign addon material registration is rejected',()=>{const r=new ExtensionRegistry({recipes:[],fluids:[],itemExists:()=>true});assert.throws(()=>r.install({api:1,source:'probe',version:'1.0.0',breakFeedback:[{...profile,block:'other:block'}]}),/FOREIGN/);});

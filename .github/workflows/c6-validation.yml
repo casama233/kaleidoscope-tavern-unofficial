@@ -29,6 +29,10 @@ jobs:
           node-version: '22'
       - name: Install image validation dependency
         run: python -m pip install Pillow==11.3.0
+      # Package only from a clean committed tree. Following audits may update
+      # tracked JSON evidence but must not alter runtime or the built archive.
+      - name: Build public test package
+        run: python tools/build_release.py
       - name: Static resources, scripts, guide and visual regression checks
         run: python tools/check_release.py
       - name: Ensure validation did not rewrite packaged source
@@ -41,8 +45,6 @@ jobs:
           python tools/check_storage_rendering.py --java-source .source-check/java --report "docs/STORAGE-VALIDATION-${version}.json"
       - name: Audit all runtime changes against pinned main and Java
         run: python tools/check_launch.py --java-source .source-check/java --baseline .source-check/integration-baseline
-      - name: Build public test package
-        run: python tools/build_release.py
       - name: Include matching source revision and validation evidence
         env:
           SOURCE_SHA: ${{ github.sha }}

@@ -106,7 +106,7 @@ jobs:
           for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC', 'LAUNCH-VALIDATION'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
-          for name in ('DRINK-SURFACES-0.6.59.json', 'BDS-FAMILY-20261001.json'):
+          for name in ('DRINK-SURFACES-0.6.59.json', 'BDS-FAMILY-20261001.json', 'BDS-LUMINOUS-20261001.json'):
               shutil.copy2(Path('docs') / name, out / name)
           print(f'Verified complete archive: {len(files)} files; SHA256 {actual}')
           PY

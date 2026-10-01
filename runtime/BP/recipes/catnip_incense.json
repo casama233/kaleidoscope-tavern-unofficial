@@ -8,16 +8,19 @@
       "crafting_table"
     ],
     "pattern": [
-      "III",
-      "ISI",
-      "III"
+      "F",
+      "C",
+      "B"
     ],
     "key": {
-      "I": {
-        "item": "minecraft:ink_sac"
+      "B": {
+        "item": "minecraft:glass_bottle"
       },
-      "S": {
+      "C": {
         "item": "minecraft:allium"
+      },
+      "F": {
+        "item": "minecraft:feather"
       }
     },
     "result": {
@@ -26,13 +29,13 @@
     },
     "unlock": [
       {
-        "item": "minecraft:ink_sac"
+        "item": "minecraft:glass_bottle"
       },
       {
         "item": "minecraft:allium"
       },
       {
-        "item": "kaleidoscope_tavern:catnip_incense"
+        "item": "minecraft:feather"
       }
     ]
   }

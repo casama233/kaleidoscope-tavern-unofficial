@@ -55,12 +55,13 @@ def faces(geo):
     result.append({'bone':bi,'cube':ci,'face':f,'points':points,'normal':n,'axis':axis,'sign':sign,'thin':min(c['size'])<=.125001})
  return result
 
-def conflicts(geo,tolerance=.025):
+def conflicts(geo,tolerance=.025,two_sided=False):
  rows=faces(geo);result=[]
  for i,a in enumerate(rows):
   for b in rows[i+1:]:
    if (a['bone'],a['cube'])==(b['bone'],b['cube']):continue
-   if dot(a['normal'],b['normal'])<.999999:continue
+   alignment=dot(a['normal'],b['normal'])
+   if (abs(alignment) if two_sided else alignment)<.999999:continue
    distance=dot(a['normal'],sub(b['points'][0],a['points'][0]))
    if abs(distance)>tolerance:continue
    skip=max(range(3),key=lambda n:abs(a['normal'][n]));axes=[n for n in range(3) if n!=skip]

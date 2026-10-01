@@ -38,6 +38,7 @@ def check(root):
  if all(p.exists() for p in pair):
   combined={'bones':[b for p in pair for b in json.loads(p.read_text())['minecraft:geometry'][0]['bones']]}
   assert not conflicts(combined), 'Signature glass/liquid render passes overlap'
- result={'geometriesChecked':count,'renderedFacesChecked':face_count,'remainingSameFacingDepthConflicts':0,'originalFaceUvsPreserved':True,'idempotent':True,'clientTest':False}
+ crops=[name for name,row in review['files'].items() if row.get('uvCropReview')]
+ result={'geometriesChecked':count,'renderedFacesChecked':face_count,'remainingSameFacingDepthConflicts':0,'originalFaceUvsPreserved':not crops,'reviewedOccludedUvCrops':crops,'idempotent':True,'clientTest':False}
  print(json.dumps(result));return result
 if __name__=='__main__':check(Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(__file__).resolve().parents[1])

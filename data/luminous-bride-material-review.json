@@ -2,13 +2,15 @@
   "source": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/6b0d619145316492f055e03d70427107cd73efa8/src/main/resources/assets/kaleidoscope_tavern/models/block/brew/drink/luminous_bride/count1.json",
   "reason": "Match existing placed alpha_test_single_sided with native entity_alphatest_one_sided only for luminous_bride kind 6. Preserve Java inverted-X shells.",
   "unchangedAssets": {
-    "runtime/RP/models/entity/luminous_bride_3.geo.json": "5de3a7837988117c2b576a8c33bf0d41e188918568b9868ab52a92c32be24662",
-    "runtime/RP/models/entity/luminous_bride_4.geo.json": "69251ef9a8b73cdb29cf51f4e2281a36602d248c687065c00152af9ea27188cf",
-    "runtime/RP/models/entity/luminous_bride_1.geo.json": "f9a374d87d14b746e02bdd6cc4c333d8cf2a68d4bc62d0318a9ec87d3b879be0",
-    "runtime/RP/models/entity/luminous_bride_2.geo.json": "c101c1938fdeff20d1510a9f84c0c44968d4ba09aaa55af9ebe5c99c93b09f1d",
     "runtime/RP/textures/kaleidoscope_tavern/block/brew/luminous_bride.png": "6fa826ae5e18f525f10ba523b13ab4b9494728be89b3af84eccd2ac57ae58370",
     "runtime/RP/textures/kaleidoscope_tavern_jar/item/luminous_bride.png": "622605fe99ba03ad040863a0ea16e7806ac119ebb4b63bac9f3740cbd85ba4b3",
     "runtime/RP/textures/kaleidoscope_tavern_jar/block/brew/luminous_bride.png": "922d169fc32462a1462fb6fbc6a887674a9c61dfe9bae008ef12153916fd4882"
   },
-  "clientAcceptance": false
+  "clientAcceptance": false,
+  "sourceGeometryBeforeNormalization": {
+    "runtime/RP/models/entity/luminous_bride_1.geo.json": "f9a374d87d14b746e02bdd6cc4c333d8cf2a68d4bc62d0318a9ec87d3b879be0",
+    "runtime/RP/models/entity/luminous_bride_2.geo.json": "c101c1938fdeff20d1510a9f84c0c44968d4ba09aaa55af9ebe5c99c93b09f1d",
+    "runtime/RP/models/entity/luminous_bride_3.geo.json": "5de3a7837988117c2b576a8c33bf0d41e188918568b9868ab52a92c32be24662",
+    "runtime/RP/models/entity/luminous_bride_4.geo.json": "69251ef9a8b73cdb29cf51f4e2281a36602d248c687065c00152af9ea27188cf"
+  }
 }

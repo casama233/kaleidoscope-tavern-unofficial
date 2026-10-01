@@ -29,6 +29,6 @@ def main():
     block = read(ROOT / 'runtime/BP/blocks/bottle_luminous_bride.json')['minecraft:block']['components']
     assert block['minecraft:material_instances']['*']['render_method'] == 'alpha_test_single_sided'
     assert block['minecraft:item_visual']['material_instances']['*']['render_method'] == 'alpha_test_single_sided'
-    print(json.dumps({'luminousBrideMaterialBindings': bindings, 'geometryAndTexturesUnchanged': True, 'otherDrinksKeepDefaultMaterial': True, 'clientAcceptance': False}))
+    print(json.dumps({'luminousBrideMaterialBindings': bindings, 'texturesUnchanged': True, 'geometryNormalizationCheck': 'check_luminous_base.py', 'otherDrinksKeepDefaultMaterial': True, 'clientAcceptance': False}))
 
 if __name__ == '__main__': main()

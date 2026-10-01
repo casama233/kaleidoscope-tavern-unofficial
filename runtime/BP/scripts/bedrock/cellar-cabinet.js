@@ -25,8 +25,8 @@ export function recoverCellarCabinet(player,block,{expectedRevision}={}){canWrit
 export function maintainCellarCabinetVisual(e){if(!e?.isValid)return;if(e?.getDynamicProperty('kaleidoscope_tavern:extension_storage_anchor')){visuals.delete(e.id);return;}if(!isExternalVisual(e?.typeId,HELPER))return;try{const a=parseCellarCabinetAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==CELLAR_CABINET){discard(e,'orphans');return;}const state=store.load(cellarCabinetKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');syncCellarCabinetVisuals(block,state);return;}visuals.set(e.id,e);syncCellarCabinetVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}
 export function tickCellarCabinets(){cursor=tickStorageVisuals(visuals,cursor,maintainCellarCabinetVisual,128,e=>{const a=parseCellarCabinetAnchor(e.getDynamicProperty(ANCHOR));return e.dimension.id+'/'+cellarCabinetKey(a.dimension,a.position);});}
 function rngFactor(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return .5+n*2;}
-export function cellarCabinetRedstoneLaunch(block,{rng=Math.random}={}){
- const facing=block.permutation.getState(FACING)??0,v=facingVector(facing),factor=rngFactor(rng);
+export function cellarCabinetRedstoneLaunch(block,{rng=Math.random,facingState=FACING}={}){
+ const facing=block.permutation.getState(facingState)??0,v=facingVector(facing),factor=rngFactor(rng);
  return {position:{x:block.location.x+.5+v.x*.5,y:block.location.y+.5,z:block.location.z+.5+v.z*.5},velocity:{x:v.x*factor,y:.1*factor,z:v.z*factor}};
 }
 export function popCellarCabinetRedstone(block,{selectionRng=Math.random,motionRng=Math.random,spawn}={}){

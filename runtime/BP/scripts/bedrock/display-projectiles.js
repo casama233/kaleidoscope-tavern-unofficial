@@ -3,6 +3,7 @@ import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {glassBreakFeedback} from './interaction-particles.js';
 import {spawnThrownDrink} from './storage-projectile.js';
 import {readBottleDisplay} from './bottles.js';
+import {feedback} from './break-feedback.js';
 import {world,BlockPermutation,GameMode,MolangVariableMap} from '@minecraft/server';
 import {isBottleBlock,isCupBlock} from '../core/extension-content.js';
 import {BottleStore,bottleKey,parseBottle} from '../core/bottles.js';
@@ -39,7 +40,7 @@ function applyCloud(dimension,at,itemId){
 }
 export function handleDisplayProjectileHit(e){
  const block=blockHit(e),projectile=e?.projectile;if(!block||!projectile)return false;
- const id=block.typeId,isCup=isCupBlock(id);if(!isBottleBlock(id)&&!GLASS_BLOCKS.has(id)&&!isCup)return false;
+ const visual=feedback.snapshot(block),id=block.typeId,isCup=isCupBlock(id);if(!isBottleBlock(id)&&!GLASS_BLOCKS.has(id)&&!isCup)return false;
  // Java Projectile.mayInteract is the gate; Bedrock exposes projectile owner but not a
  // per-block griefing query on this event. Require a live, non-spectator owner.
  if(!ownerCanInteract(projectile))return false;
@@ -55,7 +56,7 @@ export function handleDisplayProjectileHit(e){
    setWithWater(block,BlockPermutation.resolve('minecraft:air'));if(k){if(isDrink)store.restore(k,undefined);else cupStore.restore(k,undefined);}if(vanillaKey)world.setDynamicProperty(vanillaKey,undefined);native?.apply();
   }catch(err){try{thrown?.remove();}catch{}try{try{native?.rollback();}finally{restoreWater(block,old);if(k){if(isDrink)store.restore(k,raw);else cupStore.restore(k,raw);}if(vanillaKey)world.setDynamicProperty(vanillaKey,vanillaRaw);}}catch(rollback){error(rollback);}throw err;}
   native?.finish();
-  glassBreakFeedback(block.dimension,p);
+  feedback.emit([visual]);
   if(thrown)displayProjectileDiagnostics.clouds++;
   displayProjectileDiagnostics.broken++;return true;
  }catch(e){error(e);return false;}

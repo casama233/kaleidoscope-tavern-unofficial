@@ -4,6 +4,7 @@ import {nativeBlockHit} from './stateful-storage-router.js';
 import {worldFromHit,glasswareHolderStateSlot} from '../core/hit-basis.js';
 import {aimPointFor} from '../core/aim-hit.js';
 import {plantGrowthFeedback} from './interaction-particles.js';
+import {feedback} from './break-feedback.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {registerJavaBlockUseHandler} from './java-placement-router.js';
 import {setWithWater,waterAt} from './waterlogging.js';
@@ -47,7 +48,7 @@ function verticalDoublePair(block){
  return {half,spec,other,valid,loaded:true};
 }
 export function repairVerticalDouble(block){
- const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;block.setPermutation(air());furnitureDiagnostics.multiblockRepairs++;return true;
+ const f=furnitureBlock(block?.typeId);if(f?.kind!=='pendant_lamp')return false;const pair=verticalDoublePair(block);if(!pair.loaded||pair.valid)return false;feedback.transaction(block,()=>block.setPermutation(air()));furnitureDiagnostics.multiblockRepairs++;return true;
 }
 function glasswareIds(block){return GLASSWARE_SLOTS.map(state=>block.permutation.getState(state)===1?EMPTY_GLASSWARE:null);}
 export function useGlasswareHolder(player,block,faceLocation){

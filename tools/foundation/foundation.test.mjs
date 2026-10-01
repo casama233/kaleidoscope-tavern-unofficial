@@ -197,3 +197,13 @@ for(const kind of ['bar_cabinet','cellar_cabinet'])test('external '+kind+' prese
  d.failSpawn=true;try{assert.throws(()=>act(p,b,point));}finally{d.failSpawn=false;}assert.equal(p.inventory.getItem(0).nameTag,item.nameTag);assert(act(p,b,point));
  p.inventory.failAt=p.inventory.writes;assert.throws(()=>act(p,b,point));assert.equal(p.inventory.getItem(0),undefined);assert(act(p,b,point));assert.equal(p.inventory.getItem(0).nameTag,item.nameTag);
 });
+
+// Native redstone uses the same host storage transaction and Java launch pose.
+for(const wood of ['oak','birch','spruce','dark_oak','cherry'])test('external '+wood+' cellar redstone pops exactly one stored drink',()=>{
+ const b=createBlock(def(wood,'cellar_cabinet'),compact.items[0]);let calls=0;
+ const result=host.popRedstone(b,{selectionRng:()=>0,motionRng:()=>0,spawn:(dimension,item,position,velocity)=>{calls++;assert.equal(item,compact.items[0]);assert.deepEqual(position,{x:b.location.x+.5,y:b.location.y+.5,z:b.location.z});assert.deepEqual(velocity,{x:0,y:.05,z:-.5});return {remove(){}};}});
+ assert.equal(result.status,'LAUNCHED');assert.equal(calls,1);assert.equal(host.load(b).state.slots.filter(Boolean).length,0);
+ assert.equal(host.popRedstone(b,{spawn:()=>{throw Error('must not spawn empty');}}).status,'EMPTY');
+});
+test('external cellar failed projectile creation preserves the exact saved contents',()=>{const b=createBlock(def('oak','cellar_cabinet'),compact.items[0]),before=host.load(b).store.raw(host.load(b).store.key);assert.throws(()=>host.popRedstone(b,{spawn:()=>{throw Error('injected projectile failure');}}),/injected projectile failure/);assert.equal(host.load(b).store.raw(host.load(b).store.key),before);});
+test('external bar cabinets cannot use cellar redstone transaction',()=>{const b=createBlock(def(),compact.items[0]);assert.throws(()=>host.popRedstone(b),/NOT_EXTERNAL_CELLAR_CABINET/);assert.equal(host.load(b).state.left,compact.items[0]);});

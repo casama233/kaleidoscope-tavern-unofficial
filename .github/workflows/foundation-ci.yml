@@ -41,7 +41,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
-          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
           python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
           python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
       - name: Simple effect bar and paired name checks (no client rendering)

@@ -41,3 +41,5 @@ export function externalPickBlock(blockId){
 
 /** Exact namespaced item-to-one-particle binding supplied by a validated addon. */
 export const externalItemParticle=item=>itemParticles.get(item);
+/** Optional namespaced presentation descriptors; removed with their source. */
+export function externalBreakFeedback(id){for(const value of foundations.values()){const row=value.breakFeedback?.find(row=>row.block===id);if(row)return row;}}

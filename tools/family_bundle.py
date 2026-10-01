@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 """Assemble exact owned runtimes plus hash-pinned, unmodified upstream archives."""
 from pathlib import Path,PurePosixPath
-import argparse,hashlib,io,json,shutil,subprocess,zipfile
+import argparse,hashlib,io,json,re,shutil,subprocess,zipfile
 ROOT=Path(__file__).resolve().parents[1]
 def fail(message):raise SystemExit('FAMILY: '+message)
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def read_definition(path,jsonc=False):
+ raw=path.read_text(encoding='utf-8-sig')
+ try:return json.loads(raw)
+ except json.JSONDecodeError:
+  if not jsonc:raise
+ # Bedrock JSONC is allowed in preserved third-party definitions. Only the
+ # scanner parses it; copied bytes and their per-file receipts stay untouched.
+ raw=re.sub(r'"(?:\\.|[^"\\])*"|//[^\n]*|/\*.*?\*/',lambda m:m[0] if m[0].startswith('"') else '',raw,flags=re.S)
+ raw=re.sub(r'"(?:\\.|[^"\\])*"|,\s*([}\]])',lambda m:m[0] if m[0].startswith('"') else m[1],raw)
+ return json.loads(raw)
 def files_hash(root):return {p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(root.rglob('*')) if p.is_file()}
 def packs(z):
  names=z.namelist()
@@ -84,7 +94,7 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
   for uid in order:
    root=out/(side+'_packs')/uid
    for path in root.rglob('*.json'):
-    try:obj=read(path)
+    try:obj=read_definition(path,by_uuid[uid]['source']['owner']=='preserved')
     except Exception as e:fail('invalid JSON '+str(path)+': '+str(e))
     for key in ['minecraft:item','minecraft:block','minecraft:entity','minecraft:client_entity']:
      identifier=obj.get(key,{}).get('description',{}).get('identifier') if isinstance(obj,dict) else None

@@ -3,6 +3,7 @@ import {BOTTLES} from '../data/bottles.js';
 import {canonical} from './util.js';
 import {DRINK_EFFECTS} from '../data/drink-effects.js';
 import {COCKTAIL_COLOR_CODES} from './cocktail-colors.js';
+import {externalDrink} from './extension-content.js';
 
 // These colors are read from Java ColorUtils' item ingredient tags. Keep the map
 // limited to bottle items carrying an actual tag in the upstream source.
@@ -16,7 +17,7 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
  vodka:'white',whiskey:'white',rum:'white'
 });
 
-export function qualityBottleLore(item,legacyLevels=false,showColor=true){
+export function qualityBottleLore(item,legacyLevels=false,showColor=true,legacySource=false){
  // The tapped melon drink has no aging or quality level in Java.
  if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
@@ -32,7 +33,7 @@ export function qualityBottleLore(item,legacyLevels=false,showColor=true){
   const level=entry.amplifier>0?` ${levels[entry.amplifier]??entry.amplifier+1}`:'';
   lines.push({rawtext:[{text:entry.effect==='minecraft:nausea'?'§c':'§9'},{translate:effectKey},{text:`${level} (${minutes}:${seconds})`}]});
  }
- lines.push({rawtext:[{text:'§9'},{translate:'item.kaleidoscope_tavern.mod_name'}]});
+ lines.push({rawtext:[{text:'§9'},{translate:legacySource?'item.kaleidoscope_tavern.mod_name':(externalDrink(item?.typeId)?.modNameKey??'item.kaleidoscope_tavern.mod_name')}]});
  return lines;
 }
 
@@ -49,8 +50,13 @@ export function isManagedQualityBottleLore(item){
 
 // Upgrade only lore exactly produced by our former formatter; never erase custom lore.
 export function isLegacyManagedQualityBottleLore(item){
- const expected=qualityBottleLore(item,true);if(!expected)return false;
- try{const raw=typeof item.getRawLore==='function'?item.getRawLore():undefined;return Array.isArray(raw)&&[expected,qualityBottleLore(item,false,false),qualityBottleLore(item,true,false)].some(value=>canonical(raw)===canonical(value));}catch{return false;}
+ if(!qualityBottleLore(item))return false;
+ try{
+  const raw=item.getRawLore?.();if(!Array.isArray(raw))return false;const value=canonical(raw);
+  // Both independently shipped migrations: amplifier numbering, missing color,
+  // and former host-source footer. Match whole owned lore, never just its suffix.
+  return [false,true].some(levels=>[true,false].some(color=>[false,true].some(source=>value===canonical(qualityBottleLore(item,levels,color,source)))));
+ }catch{return false;}
 }
 
 /** Normalize only lore owned by Tavern; all names, properties and custom lore survive. */

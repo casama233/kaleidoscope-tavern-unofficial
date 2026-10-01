@@ -73,8 +73,10 @@ export function normalizeFoundation(raw,source,itemExists){
  }
  const legacyEffectKey=raw.legacyEffectKey;
  if(legacyEffectKey!==undefined)check(legacyEffectKey===source+':effects','INVALID_LEGACY_EFFECT_KEY');
+ const modNameKey=raw.modNameKey;
+ if(modNameKey!==undefined)check(modNameKey===`item.${source}.mod_name`,'INVALID_MOD_NAME_KEY');
  const requires=raw.requires??[];check(Array.isArray(requires)&&requires.length<=16&&requires.every(x=>typeof x==='string'),'INVALID_REQUIRES');
- return {breakFeedback,furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,...(normalizedParticles?{itemParticles:normalizedParticles}:{}),legacyEffectKey,requires:[...new Set(requires)]};
+ return {breakFeedback,furniture,effects:normalizedEffects,pickBlocks:normalizedPicks,...(normalizedParticles?{itemParticles:normalizedParticles}:{}),legacyEffectKey,modNameKey,requires:[...new Set(requires)]};
 }
 export function migrateLegacyEffects(raw,source,definitions,absoluteTick){
  check(typeof raw==='string','LEGACY_EFFECT_SCHEMA');

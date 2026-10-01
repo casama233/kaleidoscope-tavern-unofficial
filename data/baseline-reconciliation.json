@@ -923,7 +923,7 @@
     },
     "runtime/BP/manifest.json": {
       "before": "199e51b09fbae8a226effe4cdd21fd77b5d5c074dd05e402d8f902915a1a0d3a",
-      "after": "24e7c0a15acd8d4b8db67d7ef3a98c9d6f765be6f15c26c5bfda580ef32f6aab",
+      "after": "91e40710e4cdf54c88a2d817421cb9c5ff9c57e0af0a34dd9adc8df5bdb3b3b6",
       "reason": "Canonical baseline reconciliation; stable API/connection/public dependencies and reviewed live fixes. See BASELINE-MAINTENANCE.md. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.73 Luminous Bride conditional single-sided material or paired release metadata. 0.6.74 reviewed shell-base crop, obsolete wall bias removal, or paired metadata; see luminous-base-review and native Blockbench roundtrip. Current Java parity repair; source-specific tests in tools/java-parity*.test.mjs, tools/grass-stealth*.test.mjs or tests/freezer-state.test.mjs.",
       "beforeGzipBase64": "H4sIAAAAAAACA7VT247bIBB9z1dYfs5kAYMNfep/VFU0wJB6uyaRLyutov33Et8Sdd19qNoXNBfOzDnDcN1lWR7ObYP98ZXarj7H/Esm9rfwD0JPbXKvyUt+xIaSl1/Q/TyMzn5KeOpcW1/6CTzlH2PztWGo/S0flAxFFQxIrRCUsgF00AZKpTQ6NFo7tWDunL6NgSxj+9koV6Maje8zpKnjkeKpjnT8iOYLSKxwxSZ4Ot9H3c3ZDy/UrajrfDHv3y7jADz2mC/wVVZFgXm0EoT1BpRzJaCWDpDZMqDjFVp+R32k9iDtQdwqb2I4c9wgNY373uAF42nA05h7xlf8PU+xb9/uwO6pwToenrsNYUVhKyUZGFFKUDwkyykLpAtZVNrZAulfCNvNb5j26ULRU3T11isstJwwhnnFQLhQgTLp0LpEYEF4JiTzXJX/Yd5Le87SEiOJNAsXQBYqgC2kBUbkNDfceSM/b8/3W0z0p92n3TwuX/FrWnZyLYb+qaM2NdnqmItDdWD5X9WDof5DSbaWvL3b7n33CwN3g1FLBAAA"
     },
@@ -1012,7 +1012,7 @@
     },
     "runtime/RP/manifest.json": {
       "before": "5da18118d08dc5281980947d6df694ff33a9012ce45dcaa7f30e5b5eab04ea99",
-      "after": "98d1a923ad0c9b205f3b5ed82ce5583aa4b69e5cd9ac36d9c706525deda0b0fb",
+      "after": "669f5a32ec60bfe250d7c227c1aaa97d4e9905caccebad779870361e16c88881",
       "reason": "Canonical baseline reconciliation; stable API/connection/public dependencies and reviewed live fixes. See BASELINE-MAINTENANCE.md. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.70 external cellar redstone integration; see foundation tests. 0.6.73 Luminous Bride conditional single-sided material or paired release metadata. 0.6.74 reviewed shell-base crop, obsolete wall bias removal, or paired metadata; see luminous-base-review and native Blockbench roundtrip. Current Java parity repair; source-specific tests in tools/java-parity*.test.mjs, tools/grass-stealth*.test.mjs or tests/freezer-state.test.mjs.",
       "beforeGzipBase64": "H4sIAAAAAAACA32Q3W6EIBCF730K47U0iILYV2kaA8PYkq5oUJs0Zt+9+LOuyW57Q+bMzCHfmTmK46TpfKvG+hv9YDuXvMYsXdqfqAz6IOeggnaqxaCSXsHXyyrSbWBwAG/7cTNv83NvX5sma5Y5sKqihlPCoCkJr8IjpVCENsxQVlCTcXHz3Jne1kYc03QvxFGUa/G+W1rranQf1mH96M5uJnbYOd3s4b2uudvOTBccDte8LybjT78ewOPQTR7Cyu2PIxsvUKuSVQQYVITnEoguQRHIuFKiEahzuLse+U75TgmPjBtmAI32vOH2PTqDDuwz4uPksjIgTUMgb4AUGiSR2lDCWal0ABZCZv9jZekzQvkHFaheaXux45kq6bVPlpXoGv0CmhooQHgCAAA="
     },
@@ -1318,6 +1318,66 @@
       "before": null,
       "after": "f6f5f2dc5da254569847c1f32bb050712595a4440c1f61cf952c67693419d5ea",
       "reason": "Current Java parity repair, tested against independent source inputs; historical preimage remains immutable."
+    },
+    "runtime/BP/entities/barrel_ingredients_0_visual.json": {
+      "before": "deae83f267c00fc9bec2ba472f1159c4de1c4bd0cd9911b01963f57db03f9d15",
+      "after": "3ad5b885722e08c1a8a4ff1dd23065c4b45206776fbba434fdccac158c20dab7",
+      "beforeGzipBase64": "H4sIAAAAAAACA92Z227jIBCG7/0UFtdR5FMOzausKkRsbKNisACncaO8+4KdpODtRpEaVTU3icwMM/Mz39XMKQhDUHLRIAUPWEjCGdiFIF4m8XIbgYUxN4ThXKBS7TBTRPXa4aTPtaXAMhekVeOt8VAfk8I4lgQLE+sNUUwKLnPeYqiQzsJ2eyQEppCwSuCCaG8JI3ggskN0yDmGkVC26J2hPcU6UImoxI6xaxp+tSrRfRpboXMJRbC0ygq/LuWNsMLx0n6qb01MQJi6lTMYBGKVsfyxDsMwXjifSWx9vjr3C1yijiodwbkDcmoeAcqe5RctN+t5cb/+nHdMfVNA5Ap4eaD+6Fn1tzWS+H/1l5SjxxQsJxrStT56RMfyaUqOH9Fz+5DFL1kapT/ZjT76divSZNqLdfZQK7J0mTxLh+Dqyc3YJNE2iaKfbMbxI54/ULE3QMUeAJXMH6jEG6ASD4BK5w9U6g1QqQdAZfMHKvMGqMwDoFbzB2rlDVArD4Bazx+otTdArT0AajN/oDbeALXxAKjt/IHaegPU9vcDFdj/F0kg503LmZnN27P9z2WAkQFL1BDau1P225mtA7wpKDqmSIOvg/6b9TWYPKaVpa17SfLJHL9GElYCHcZlhLMYuFhzTim5bDMG+50UN1+450c30TspVO0+Jagxqerhfe+VbXYpUuFxNP+lRyfry+7CSkgktAxTZZYV7nvY6gwPKawxooMOK9MB0Q67iwjQIKM/vhOpQA2qMJSYSS7cgEqQqtKyJ40/OfSCHHXDuB8gSoFLtkZX64BjCuPCOLAczv/yElx/z8E5+Av8h00JyxoAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/BP/entities/barrel_ingredients_1_visual.json": {
+      "before": "b344c53cdc5e8cabd3be44679604730699db8a373b35cd3a83024a5217df4ce8",
+      "after": "c6dbf91d37057c6c48be197aadc812f5b067e67ed386e4f1e0e58e40237503f6",
+      "beforeGzipBase64": "H4sIAAAAAAACA92Z227jIBCG7/0UFtdR5FMOzausKkRsbKNisACncaO8+4KdpODtRpEaVTU3icwMM/Mz39XMKQhDUHLRIAUPWEjCGdiFIF4m8XIbgYUxN4ThXKBS7TBTRPXa4aTPtaXAMhekVeOt8VAfk8I4lgQLE+sNUUwKLnPeYqiQzsJ2eyQEppCwSuCCaG8JY3ggskN0yDmGkVC26J2hPcU6UImoxI6xaxp+tSrRfRpboXMJRbC0ygq/LuWNsMLx0n6qb01MQJi6lTMYBGKVsfyxDsMwXjifSWx9vjr3C1yijiodwbkDcmoeAcqe5RctN+t5cb/+nHdMfVNA5Ap4eaD+6Fn1tzWS+H/1l5SjxxQsJxrStT56RMfyaUqOH9Fz+5DFL1kapT/ZjT76divSZNqLdfZQK7J0mTxLh+Dqyc3YJNE2iaKfbMbxI54/ULE3QMUeAJXMH6jEG6ASD4BK5w9U6g1QqQdAZfMHKvMGqMwDoFbzB2rlDVArD4Bazx+otTdArT0AajN/oDbeALXxAKjt/IHaegPU9vcDFdj/F0kg503LmZnN27P9z2WAkQFL1BDau1P225mtA7wpKDqmSIOvg/6b9TWYPKaVpa17SfLJHL9GElYCHcZlhLMYuFhzTim5bDMG+50UN1+450c30TspVO0+Jagxqerhfe+VbXYpUuFxNP+lRyfry+7CSkgktAxTZZYV7nvY6gwPKawxooMOK9MB0Q67iwjQIKM/vhOpQA2qMJSYSS7cgEqQqtKyJ40/OfSCHHXDuB8gSoFLtkZX64BjCuPCOLAczv/yElx/z8E5+AuPIMfFyxoAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/BP/entities/barrel_ingredients_2_visual.json": {
+      "before": "c84d37362eaa102134f2a4db6c68366981b63bdee28f4c7eaa1932ec46346c6e",
+      "after": "59eaf430b35de13d8c817019af215337e03614ff601e6c9c240c9734e7485067",
+      "beforeGzipBase64": "H4sIAAAAAAACA92Z227jIBCG7/0UFtdR5FMOzausKkRsbKNisACncaO8+4KdpODtRpEaVTU3icwMM/Mz39XMKQhDUHLRIAUPWEjCGdiFIF4m8XIbgYUxN4ThXKBS7TBTRPXa4aTPtaXAMhekVeOt8VAfk8I4lgQLE+sNUUwKLnPeYqiQzsJ2eyQEppCwSuCCaG8JE3ggskN0yDmGkVC26J2hPcU6UImoxI6xaxp+tSrRfRpboXMJRbC0ygq/LuWNsMLx0n6qb01MQJi6lTMYBGKVsfyxDsMwXjifSWx9vjr3C1yijiodwbkDcmoeAcqe5RctN+t5cb/+nHdMfVNA5Ap4eaD+6Fn1tzWS+H/1l5SjxxQsJxrStT56RMfyaUqOH9Fz+5DFL1kapT/ZjT76divSZNqLdfZQK7J0mTxLh+Dqyc3YJNE2iaKfbMbxI54/ULE3QMUeAJXMH6jEG6ASD4BK5w9U6g1QqQdAZfMHKvMGqMwDoFbzB2rlDVArD4Bazx+otTdArT0AajN/oDbeALXxAKjt/IHaegPU9vcDFdj/F0kg503LmZnN27P9z2WAkQFL1BDau1P225mtA7wpKDqmSIOvg/6b9TWYPKaVpa17SfLJHL9GElYCHcZlhLMYuFhzTim5bDMG+50UN1+450c30TspVO0+Jagxqerhfe+VbXYpUuFxNP+lRyfry+7CSkgktAxTZZYV7nvY6gwPKawxooMOK9MB0Q67iwjQIKM/vhOpQA2qMJSYSS7cgEqQqtKyJ40/OfSCHHXDuB8gSoFLtkZX64BjCuPCOLAczv/yElx/z8E5+AtbzylLyxoAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/BP/entities/barrel_ingredients_3_visual.json": {
+      "before": "37be9d13c1f7bb511160671ecbea9033f8c1f0f9dca36e2a64e92daacae14076",
+      "after": "eb8679c4f9648743165d5f65c9408523d5f4ecf5fe9435c0219f46c4d3e1e442",
+      "beforeGzipBase64": "H4sIAAAAAAACA92Z227jIBCG7/0UFtdR5FMOzausKkRsbKNisACncaO8+4KdpODtRpEaVTU3icwMM/Mz39XMKQhDUHLRIAUPWEjCGdiFIF4m8XIbgYUxN4ThXKBS7TBTRPXa4aTPtaXAMhekVeOt8VAfk8I4lgQLE+sNUUwKLnPeYqiQzsJ2eyQEppCwSuCCaG8JU3ggskN0yDmGkVC26J2hPcU6UImoxI6xaxp+tSrRfRpboXMJRbC0ygq/LuWNsMLx0n6qb01MQJi6lTMYBGKVsfyxDsMwXjifSWx9vjr3C1yijiodwbkDcmoeAcqe5RctN+t5cb/+nHdMfVNA5Ap4eaD+6Fn1tzWS+H/1l5SjxxQsJxrStT56RMfyaUqOH9Fz+5DFL1kapT/ZjT76divSZNqLdfZQK7J0mTxLh+Dqyc3YJNE2iaKfbMbxI54/ULE3QMUeAJXMH6jEG6ASD4BK5w9U6g1QqQdAZfMHKvMGqMwDoFbzB2rlDVArD4Bazx+otTdArT0AajN/oDbeALXxAKjt/IHaegPU9vcDFdj/F0kg503LmZnN27P9z2WAkQFL1BDau1P225mtA7wpKDqmSIOvg/6b9TWYPKaVpa17SfLJHL9GElYCHcZlhLMYuFhzTim5bDMG+50UN1+450c30TspVO0+Jagxqerhfe+VbXYpUuFxNP+lRyfry+7CSkgktAxTZZYV7nvY6gwPKawxooMOK9MB0Q67iwjQIKM/vhOpQA2qMJSYSS7cgEqQqtKyJ40/OfSCHHXDuB8gSoFLtkZX64BjCuPCOLAczv/yElx/z8E5+AsoaKOHyxoAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/BP/scripts/data/barrel-ingredient-visuals.js": {
+      "before": "806ed6e1887944969779436e28867e22a7d3178c45805e2ec48849342c7486ed",
+      "after": "095435125c36e6e455ded886988b79c6ac6dd7a0efac95494bce84a0afeec9b3",
+      "beforeGzipBase64": "H4sIAAAAAAACA22STU8DIRCG7/srSM/GutX6UeNB08Y0mh5q74SF6UJKgcBstmr870K1Gsde55mBl2cYDtkKdthFYMYpIyGxpEUExXqDmqEG1oKDKDCXGhEjWJasR6bBBojptIJd8BGZ9C4he7hfLmfPfL54XM6m89lixZ/mi+nL3XvF2GBrHMgo1jgRIVgYTFh98rfeWPEGPPheQcx4RHBrfc+N2/AkZMbnR3BC74CrLmFuuKAN3iruuraFQseUdu7n5kvCdD71Vfptk9kVYSZ693vqNaHBo0CfwQ0B2fE+bNFwRljqWlFi1PUxwKX4GqN+Ug+AvIEYDaTSQA31GkQJWVMz0SOC42sLSRc+/reYDnj+HYVRN99lqiUIuQF1GKJalIn7INTKQcmIKgll7wFQ2PKyUV193Fafv8fvo70CAAA=",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/RP/entity/runtime_barrel_ingredients_0.entity.json": {
+      "before": "b647d96d3834e0a5037b52dac35a71b0aff80330d7b86c906583acf887ea850c",
+      "after": "614627a8e8e5972dad50b0fe79f3b0284f4991d501c6738ccf3d03bba47dbc45",
+      "beforeGzipBase64": "H4sIAAAAAAACA5WV3Y6jMAyF7/sUFdcrBro/M9NXGa2ikBgaEZIoMdPtjvrum8DCTolbaS8QUvydYxuD+djt90Vr/cCRvYMPypriuC/qsq7KqviSooMyIDxv8Si0AoMsXgovEfuI4QhICMIrh7N2PozHSiawVeCTY881KGmDsA4Y8pjLHBvuPWimTOdBJuvAKvauwsj1lHqyiZWBV1yHT95T0paPGpP1XA/j2p0iG7D4S11XD4RfOHrYWPTKSFYnhyX+pBCG8MSd07BWsJAHgmw0/w3M2bOMXW4FXwmBvCw467Q9Z5pvhCaBAa0BJsfY3VbynZJYLZkZuw5y/gfFj+ZOE88EfYq1XIQdmox+IWjlrblXyyvBO4scbYbWFcHG9+bBk6mp4Yax43mb9YF0j/Y5Ss01nAGQNeC9AkJCjfV8Ak7UTI3TW0QwrNUQTrnidqCNtqJPtxGYEvlrXD9TOEm+3CGZ46IHmQteKYFUPm/zUFHoNMucpcbolOmZA0yLIfveO7ADoL/cfu+Ce5mclmjZI/NjXB4DlMQqmvBPtYixgf+RJzyrjBsVF1rclJtd1GrLp2W2Ao/ty1mQ+c+beGM+e6bi39bDNed68jMz82DSohLWoLdax9/DjUXxL1DO6OOal1RzousuXdfdHzhWoTSCBgAA",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/RP/entity/runtime_barrel_ingredients_1.entity.json": {
+      "before": "0a33b4b4d7e8807a9ee38a56c2b3e8149cafe9ad27f3f8bb1685f54c99ab9fe0",
+      "after": "34f14c8a8fcbb621cfce5d9daa83fed3aeb13b50e402788081e60c1c3dfe47cf",
+      "beforeGzipBase64": "H4sIAAAAAAACA5WV3Y6jMAyF7/sUFdcrpnR/ZqavMlpFITE0IiRR4ky3O+q7bwILO23cSnuBkOLvHNsYzMdmu60660eO7B18UNZUh23V1M2u3lVfcnRUBoTnHR6EVmCQpUvhOWEfKZwACUF45XDWzofpWMkMdgp8dhy4BiVtENYBQ55ymUPLvQfNlOk9yGwdWMPeVYhcT6knm1QZeMV1+OQ9Je141Jit53oY1+6Y2IDVX+qyeiD8wujhxmJQRrImOyzxJ4UwhifunIa1goXcE2Sr+W9gzp5k6vJW8JUQyPOCs17bU6H5RmgyGNAaYDKm7m4l3ymJ1ZKZ2PdQ8j8oPpo7TTwT9DHVchZ2bAv6haCVt+ZeLa8E7yxytAXa7Ag2vTcPnkxDDTfEnpdtNnvSPdmXKDXXcAJA1oL3CggJNdbTEThRMzVObxHBsE5DOJaK64G22ooh3yIwJcrXuHmmcJJ8uUMyx8UAshS8UgKpfNnmfkeh0yxLlhqjU2ZgDjAvhuJ778GOgP58/b0L7mV2WqL1gMzHtDxGqIlVNOGfahGxhf+RZ7yojBuVFlralDe7qNOWT8tsBR7b17Og8J838Y357JmLf1sP15zryc/CzIPJi0pYg95qnX4PVxbVv0A9o49rXlLNiS6bfF02fwDqfspFggYAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/RP/entity/runtime_barrel_ingredients_2.entity.json": {
+      "before": "30241a002d6509ccce6532da5fd5442a174ed28be44d13c8d0a6e428d77a2460",
+      "after": "b57a7603c071f1cd73a0ae03b114ab2d6f578019d9ac4afce073f59be1f689f7",
+      "beforeGzipBase64": "H4sIAAAAAAACA5WV3Y6jMAyF7/sUFdcrpnR/ZqavMlpFITE0IiRR4ky3O+q7bwILO23cSnuBkOLvHNsYzMdmu60660eO7B18UNZUh23V1M2u3lVfcnRUBoTnHR6EVmCQpUvhOWEfKZwACUF45XDWzofpWMkMdgp8dhy4BiVtENYBQ55ymUPLvQfNlOk9yGwd2J69qxC5nlJPNqky8Irr8Ml7StrxqDFbz/Uwrt0xsQGrv9Rl9UD4hdHDjcWgjGRNdljiTwphDE/cOQ1rBQu5J8hW89/AnD3J1OWt4CshkOcFZ722p0LzjdBkMKA1wGRM3d1KvlMSqyUzse+h5H9QfDR3mngm6GOq5Szs2Bb0C0Erb829Wl4J3lnkaAu02RFsem8ePJmGGm6IPS/bbPake7IvUWqu4QSArAXvFRASaqynI3CiZmqc3iKCYZ2GcCwV1wNttRVDvkVgSpSvcfNM4ST5codkjosBZCl4pQRS+bLN/Y5Cp1mWLDVGp8zAHGBeDMX33oMdAf35+nsX3MvstETrAZmPaXmMUBOraMI/1SJiC/8jz3hRGTcqLbS0KW92Uactn5bZCjy2r2dB4T9v4hvz2TMX/7YerjnXk5+FmQeTF5WwBr3VOv0eriyqf4F6Rh/XvKSaE102+bps/gCcB3fWggYAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/RP/entity/runtime_barrel_ingredients_3.entity.json": {
+      "before": "0494d770da1bdd2b61fa1a26a0ff1a7cd6ac37072a8ce962a9975d1824875cf9",
+      "after": "05da006e6b1c7d45da1896d293593a68ede4e2e2be7061409b3b884401d016c7",
+      "beforeGzipBase64": "H4sIAAAAAAACA5WV0Y6bMBBF3/MVEc8VG7Jtdze/UlWWsQdiYWzLHm+arvLvtaHQTTyJ1AeE5Dn3zgwDw8dmu60660eO7B18UNZUh23V1M2u3lVfcnRUBoTnHR6EVmCQpUvhOWEfKZwACUF45XDWzofpWMkMdgp8dhy4BiVtENYBQ55ymUPLvQfNlOk9yGwd2DN7VyFyPaWebFJl4BXX4ZP3lLTjUWO2nuthXLtjYgNWf6nL6oHwC6OHG4tBGcma7LDEnxTCGJ64cxrWChZyT5Ct5r+BOXuSqctbwTMhkOcFZ722p0LzldBkMKA1wGRM3d1KvlESqyUzse+h5L9TfDR3mngh6GOq5Szs2Bb0K0Erb829Wt4I3lnkaAu02RFsem8ePJmGGm6IPS/bbPake7IvUWqu4QSArAXvFRASaqynI3CiZmqc3iKCYZ2GcCwV1wNttRVDvkVgSpSvcfNC4ST5eodkjosBZCl4owRS+bLN/Y5Cp1mWLDVGp8zAHGBeDMX33oMdAf35+nsX3MvstETrAZmPaXmMUBOraMI/1SJiC/8jz3hRGTcqLbS0KW92Uactn5bZCjy2r2dB4T9v4hvz2TMX/2M9XHOuJz8LMw8mLyphDXqrdfo9XFlU/wL1jD6ueUk1J7ps8nXZ/AFOLxynggYAAA==",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
+    },
+    "runtime/RP/render_controllers/runtime_barrel_ingredients.render_controllers.json": {
+      "before": "42480537c4dd32798f099f0e8bb714d4a086d9b3bb839907d39738742724d4b1",
+      "after": "8309d601a846acf61b2c02f78d2b5fe312049f4725bf8a3a1d1f68ec0dac6c56",
+      "beforeGzipBase64": "H4sIAAAAAAACA5WVX2+CMBTF3/kUDS/q4hqK/9DELXva0972ZgypcjWNCO5alxHlu68whxjdHX2jPae/3h645egw5q5S3EodfgLuVZq4E+YKHnDP7RYiQhIBhss00ZjGsfEYw9EoRrtM8h8b3+gQD4lWW+ALiQhxqJI1QqQg0ZeFZuka0i1ozIrd2h98h+kOUGft1kbGoKJ0vzQToZamqGSyUUnU6rDplIkhO52YhX9k6Q8s/WM7v+912DN7PR+eLw8LYJPaWGJUxl5mZF4KoJJxEdzsPMmqCEvLQ5Hf29nHI1jJQ6zdypGfn+YVU8OXPiBcI90XRJnxosxZs7M8irl7w5YFpf6Wr/e7Kvyy41Ulpfb+s6ZUQ1HlcU/1SbVHqn1SHZDqkFRHpBqQ6phUhUfLdFqCjkvQeQk6MEEnJujIBJ2ZoEMTdGo+nZov3Jo6v+mevPrCdxLNPan2aqFipbO/+1Jp2IZe0Zz/9dMyNfeluRyemFfr2y6BFXZY0RDr22H9htieHbbXENu3w/YbYgd22EFD7NAOO2yIHdlhRw2xgR02uPO/cX5HuZM73/LTbhhlCAAA",
+      "reason": "Reviewed barrel ingredient material coverage; see docs/BARREL-MATERIALS-20261001.md and tools/barrel-materials.test.mjs."
     }
   }
 }

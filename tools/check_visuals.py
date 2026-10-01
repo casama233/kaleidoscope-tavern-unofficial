@@ -20,8 +20,10 @@ def main():
     result=audit()
     assert not result['errors'],result['errors']
     allowed_external={'blue_ice','dirt','ice','ice_packed','stone','apple','blaze_powder','book_normal','book_writable','dye_powder_glow','glow_berries','glowstone_dust','gold_nugget','gunpowder','honeycomb','iron_nugget','pink_petals','potato','redstone_dust','reeds','rotten_flesh','sugar','sweet_berries','wheat'}
+    # Exact reviewed external paths, independently evidenced by the source catalogue.
+    barrel_external={r['texture'] for r in read(ROOT/'data/barrel-materials.json')['materials'] if r['source'] in {'mojang-bedrock-samples','cookery-1.0.8-file8983314'}}
     for row in result['external']:
-        name=row['texture'];assert name.startswith(('textures/items/','textures/blocks/')) and name.rsplit('/',1)[-1] in allowed_external,('missing custom texture',name)
+        name=row['texture'];assert name in barrel_external or (name.startswith(('textures/items/','textures/blocks/')) and name.rsplit('/',1)[-1] in allowed_external),('missing custom texture',name)
     for p in RP.rglob('*.texture_set.json'):
         d=read(p)['minecraft:texture_set'];assert 'color' in d
         assert not ('normal' in d and 'heightmap' in d)

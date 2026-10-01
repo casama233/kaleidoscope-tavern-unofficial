@@ -24,7 +24,7 @@ jobs:
           repository: casama233/kaleidoscope-world-liquor-unofficial
           # Reviewed 0.1.44 preserves color groups and adds friend source labels for Tavern 0.6.79.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 43c3125fa4d6e3f3476459bacff8078376694c4e
+          ref: 9b2cb76701ce1e6a6a720e89eb66dea3bb3db6f3
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -50,6 +50,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
+          python ../liquor/tools/test_effect_names.py
           python ../liquor/tools/build_effect_names.py --check
           node --test tools/effect-bar.test.mjs tools/grass-stealth.test.mjs tools/java-parity.test.mjs 2>&1 | tee ../evidence/effect-bar-tests.tap
       - uses: actions/upload-artifact@v4

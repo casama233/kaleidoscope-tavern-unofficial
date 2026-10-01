@@ -2,7 +2,7 @@
   "native": {
     "bsm": "3.10.6",
     "bds": "1.26.52.3",
-    "candidate_receipt_sha256": "48dc70f066e802b2e0c97981525c2561632c34abb4776a7c93e276cb4fbed7f5",
+    "candidate_receipt_sha256": "80afa1a96dff156b92f804faf85da1bfb771565417d7bfb4df2aaf1e3d2bd66b",
     "client": false,
     "saved_world_migration": false,
     "production_ready": false,
@@ -21,7 +21,7 @@
   "restart": {
     "bsm": "3.10.6",
     "bds": "1.26.52.3",
-    "candidate_receipt_sha256": "48dc70f066e802b2e0c97981525c2561632c34abb4776a7c93e276cb4fbed7f5",
+    "candidate_receipt_sha256": "80afa1a96dff156b92f804faf85da1bfb771565417d7bfb4df2aaf1e3d2bd66b",
     "client": false,
     "saved_world_migration": false,
     "production_ready": false,
@@ -42,9 +42,9 @@
     ]
   },
   "versions": {
-    "tavern": "0.6.71",
-    "world_liquor": "0.1.36",
+    "tavern": "0.6.72",
+    "world_liquor": "0.1.37",
     "grilling": "2.8.14"
   },
-  "boundaries": "Native probes are a test-only overlay. Restart uses exact unmodified candidate; scoreboard persistence is not live-world migration or client validation."
+  "boundaries": "Native probes use a test-only overlay. Restart uses the exact unmodified candidate. Scoreboard persistence is not live-world migration or client validation."
 }

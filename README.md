@@ -1,6 +1,6 @@
 ## Current maintained baseline: 0.6.72
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). The reviewed family candidate pairs Tavern **0.6.72**, Grilling **2.8.13**, World Liquor **0.1.36** and unmodified official Cookery **1.0.8**. Static checks passed; this revision’s BDS evidence, client acceptance and saved-world UUID migration are recorded separately. These are source baselines, not proof of production installation. Build from this source; no private gameplay patch layer is required. Read [baseline maintenance](docs/BASELINE-MAINTENANCE.md) before importing historical artifacts or deploying.
+Canonical runtime and dependencies: [baseline.json](baseline.json). The reviewed family candidate pairs Tavern **0.6.72**, Grilling **2.8.14**, World Liquor **0.1.37** and unmodified official Cookery **1.0.8**. Static checks passed; this revision’s BDS evidence, client acceptance and saved-world UUID migration are recorded separately. These are source baselines, not proof of production installation. Build from this source; no private gameplay patch layer is required. Read [baseline maintenance](docs/BASELINE-MAINTENANCE.md) before importing historical artifacts or deploying.
 
 # Kaleidoscope Tavern (Unofficial)
 

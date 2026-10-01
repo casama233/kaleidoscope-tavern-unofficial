@@ -60,3 +60,7 @@ Original code: BSD-3-Clause (`LICENSE-CODE`). Original art: CC BY-NC-SA 4.0 (`LI
 ## Retained storage rendering repair (0.6.40)
 
 Pinned Java default-block storage matrices, a storage-only Molotov bottom pivot and one pitch owner are retained, together with append-only watermelon-juice storage indices. See [source comparison and validation boundaries](docs/STORAGE-REPAIR-0.6.40.md).
+
+## bridge. canonical authoring
+
+Open the repository-root `config.json`, which points to the current locked BP and RP. See [the bridge. workflow](docs/BRIDGE-WORKFLOW.md) for editor settings, portable `.brproject` export, schema limitations and exact runtime comparison.

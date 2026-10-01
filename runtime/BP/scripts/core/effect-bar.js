@@ -2,6 +2,10 @@
 export const EFFECT_BAR_INTERVAL=20;
 export const EFFECT_BAR_PAGE_TICKS=60;
 export const EFFECT_BAR_PAGE_SIZE=2;
+export const EFFECT_BAR_PACKET_PREFIX='§r[KT:FX] ';
+/** Namespaced transport; the persistent RP view ignores unrelated packets. */
+export function effectBarPacket(message){return {rawtext:[{text:EFFECT_BAR_PACKET_PREFIX},...(message?.rawtext??[])]};}
+export function retainEffectBarText(previous,incoming){return typeof incoming==='string'&&incoming.startsWith(EFFECT_BAR_PACKET_PREFIX)?incoming.slice(EFFECT_BAR_PACKET_PREFIX.length):previous;}
 export const EFFECT_BAR_HIDE_TAG='kaleidoscope_tavern:hide_effect_bar';
 const ID=/^[a-z][a-z0-9_]{1,47}:[a-z0-9_./-]+$/;
 
@@ -36,11 +40,13 @@ export function effectBarMessage(rows,page=0){
 }
 
 /** Display timing only: always obtain remaining effect ticks from the host. */
-export function createEffectBar({status,show,busy=()=>false,hidden=p=>p.hasTag?.(EFFECT_BAR_HIDE_TAG)===true,onError=()=>{}}){
+export function createEffectBar({status,show,clear,busy=()=>false,hidden=p=>p.hasTag?.(EFFECT_BAR_HIDE_TAG)===true,onError=()=>{}}){
  const views=new Map(),holds=new Map();
+ const clearView=(player,id)=>{if(views.has(id)&&clear)clear(player);views.delete(id);};
  const forget=id=>{views.delete(id);holds.delete(id);};
  return {
   forget,
+  reset(player){clear?.(player);forget(player.id);},
   pause(id,tick){if(id)holds.set(id,Math.max(holds.get(id)??0,tick+60));},
   tick(players,tick){
    const seen=new Set();
@@ -48,13 +54,14 @@ export function createEffectBar({status,show,busy=()=>false,hidden=p=>p.hasTag?.
     let id;
     try{
      id=player.id;seen.add(id);
-     if(player.isValid===false||hidden(player)){views.delete(id);continue;}
+     if(player.isValid===false){views.delete(id);continue;}
+     if(hidden(player)){clearView(player,id);continue;}
+     const rows=visibleEffects(status(player));
+     if(!rows.length){clearView(player,id);continue;}
      if((holds.get(id)??0)>tick||busy(player,tick))continue;
      holds.delete(id);
-     const rows=visibleEffects(status(player));
-     // Never clear this shared channel: another add-on may have written meanwhile.
-     // On expiry/milk/death stop refreshing and let the last native actionbar fade.
-     if(!rows.length){views.delete(id);continue;}
+     // Clear only the namespaced retained view, never send an empty actionbar.
+     // The display state remains independent from authoritative effect storage.
      const key=rows.map(r=>r.id+'/'+r.amplifier).join('|');let view=views.get(id);
      if(!view||view.key!==key){view={key,start:tick,last:tick-EFFECT_BAR_INTERVAL};views.set(id,view);}
      if(tick-view.last<EFFECT_BAR_INTERVAL)continue;

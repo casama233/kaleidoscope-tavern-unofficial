@@ -18,3 +18,4 @@ jobs:
       - run: python tools/test_family_upstream_watch.py
       - run: python tools/bridge_project.py
       - run: python tools/test_bridge_project.py
+      - run: node --test tools/effect-bar.test.mjs tools/effect-bar-retention.test.mjs

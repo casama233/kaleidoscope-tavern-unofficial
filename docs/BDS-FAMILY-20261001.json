@@ -1,0 +1,50 @@
+{
+  "native": {
+    "bsm": "3.10.6",
+    "bds": "1.26.52.3",
+    "candidate_receipt_sha256": "48dc70f066e802b2e0c97981525c2561632c34abb4776a7c93e276cb4fbed7f5",
+    "client": false,
+    "saved_world_migration": false,
+    "production_ready": false,
+    "test_kind": "test-only integrated native probes; no simulated players",
+    "experimental_creator_features": false,
+    "native_probe_passed": true,
+    "bds_loading_passed": false,
+    "cycles": [
+      {
+        "ready": true,
+        "error_count": 0,
+        "persistence_marker_seen": false
+      }
+    ]
+  },
+  "restart": {
+    "bsm": "3.10.6",
+    "bds": "1.26.52.3",
+    "candidate_receipt_sha256": "48dc70f066e802b2e0c97981525c2561632c34abb4776a7c93e276cb4fbed7f5",
+    "client": false,
+    "saved_world_migration": false,
+    "production_ready": false,
+    "test_kind": "exact unmodified family loading; no native probes",
+    "experimental_creator_features": false,
+    "bds_loading_passed": true,
+    "cycles": [
+      {
+        "ready": true,
+        "error_count": 0,
+        "persistence_marker_seen": false
+      },
+      {
+        "ready": true,
+        "error_count": 0,
+        "persistence_marker_seen": true
+      }
+    ]
+  },
+  "versions": {
+    "tavern": "0.6.71",
+    "world_liquor": "0.1.36",
+    "grilling": "2.8.14"
+  },
+  "boundaries": "Native probes are a test-only overlay. Restart uses exact unmodified candidate; scoreboard persistence is not live-world migration or client validation."
+}

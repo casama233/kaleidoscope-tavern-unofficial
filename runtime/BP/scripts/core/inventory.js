@@ -1,5 +1,5 @@
 import {check,TavernError} from './util.js';
-import {isManagedQualityBottleLore,normalizeBottleStack} from './quality-tooltip.js';
+import {isManagedQualityBottleLore,isLegacyManagedQualityBottleLore,normalizeBottleStack} from './quality-tooltip.js';
 /**
  * Stack interface: typeId, amount, maxAmount, clone(), isStackableWith(other).
  * Planning never mutates the live inventory. Only an explicit Forge pickup may request overflow drops.
@@ -49,7 +49,7 @@ export function commitInventory(plan,container,save,rollback){
 export function isPlainIngredient(item,makeStack){
  if(!item)return false;
  try{
-  const managedLore=isManagedQualityBottleLore(item);
+  const managedLore=isManagedQualityBottleLore(item)||isLegacyManagedQualityBottleLore(item);
   if(item.nameTag||(item.getLore?.().length&&!managedLore)||item.getDynamicPropertyIds?.().length)return false;
   if(item.getComponent?.('minecraft:durability')||item.getComponent?.('minecraft:enchantable')?.getEnchantments?.().length)return false;
   if(item.getCanDestroy?.().length||item.getCanPlaceOn?.().length)return false;

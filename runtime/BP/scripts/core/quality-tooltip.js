@@ -2,6 +2,7 @@ import {parseBottle} from './bottles.js';
 import {BOTTLES} from '../data/bottles.js';
 import {canonical} from './util.js';
 import {DRINK_EFFECTS} from '../data/drink-effects.js';
+import {COCKTAIL_COLOR_CODES} from './cocktail-colors.js';
 
 // These colors are read from Java ColorUtils' item ingredient tags. Keep the map
 // limited to bottle items carrying an actual tag in the upstream source.
@@ -15,14 +16,14 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
  vodka:'white',whiskey:'white',rum:'white'
 });
 
-export function qualityBottleLore(item,legacyLevels=false){
+export function qualityBottleLore(item,legacyLevels=false,showColor=true){
  // The tapped melon drink has no aging or quality level in Java.
  if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
  if(!parsed)return undefined;
  const lines=[];
  const color=BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
- if(color)lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${({light_purple:'d',blue:'9',gold:'6',green:'a',red:'c',yellow:'e',white:'f'})[color]}`},{translate:`color.kaleidoscope_tavern.${color}`}]});
+ if(showColor&&Object.hasOwn(COCKTAIL_COLOR_CODES,color))lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${COCKTAIL_COLOR_CODES[color]}`},{translate:`color.kaleidoscope_tavern.${color}`}]});
  lines.push({rawtext:[{text:'§7'},{translate:'tooltip.kaleidoscope_tavern.bottle_block.brew_level',with:{rawtext:[{translate:`message.kaleidoscope_tavern.barrel.brew_level.${parsed.quality}`}]}}]});
  for(const entry of DRINK_EFFECTS[parsed.base]?.[parsed.quality-1]??[]){
   if(entry.probability<1)continue;
@@ -49,7 +50,7 @@ export function isManagedQualityBottleLore(item){
 // Upgrade only lore exactly produced by our former formatter; never erase custom lore.
 export function isLegacyManagedQualityBottleLore(item){
  const expected=qualityBottleLore(item,true);if(!expected)return false;
- try{const raw=typeof item.getRawLore==='function'?item.getRawLore():undefined;return Array.isArray(raw)&&canonical(raw)===canonical(expected);}catch{return false;}
+ try{const raw=typeof item.getRawLore==='function'?item.getRawLore():undefined;return Array.isArray(raw)&&[expected,qualityBottleLore(item,false,false),qualityBottleLore(item,true,false)].some(value=>canonical(raw)===canonical(value));}catch{return false;}
 }
 
 /** Normalize only lore owned by Tavern; all names, properties and custom lore survive. */

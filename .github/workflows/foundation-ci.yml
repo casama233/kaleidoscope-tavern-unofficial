@@ -22,9 +22,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed 0.1.37 integrates all open PRs and requires Tavern 0.6.72.
+          # Reviewed 0.1.43 declares source-backed color groups and requires Tavern 0.6.78.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: ac634be755db6bd2c89986ab9c4a4fd862a38fc5
+          ref: 1b478a0f5a9d6f085223a28a8418f225702ddcf7
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -41,7 +41,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
-          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/barrel-materials.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
           python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
           python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
       - name: Simple effect bar and paired name checks (no client rendering)

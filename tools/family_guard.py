@@ -35,7 +35,16 @@ def validate_incoming(incoming,policy_path):
  approved=policy.get('approved_receipt')
  if not approved:raise ValueError('森羅家族更新已攔截：需整套 Git 基線、官方來源鎖及存檔遷移驗收；不能個別覆蓋本地包。')
  receipt=read(approved);gates=receipt.get('acceptance',{})
- if not receipt.get('production_ready') or not all(gates.get(k) is True for k in ['static','bds','client','saved_world_migration']):raise ValueError('森羅部署缺少 BDS／用戶端／存檔遷移驗收')
+ complete=receipt.get('production_ready') is True and all(gates.get(k) is True for k in ['static','bds','client','saved_world_migration'])
+ # A user may explicitly defer client acceptance for one exact candidate.
+ # Keep client=false and production_ready=false; never manufacture evidence.
+ deferred=policy.get('deferred_client_acceptance',{})
+ pending=(receipt.get('production_ready') is False and gates.get('client') is False
+  and all(gates.get(k) is True for k in ['static','bds','saved_world_migration'])
+  and deferred.get('source')=='explicit_user_instruction'
+  and bool(deferred.get('instruction')) and bool(deferred.get('recorded_at'))
+  and deferred.get('receipt_sha256')==hashlib.sha256(Path(approved).read_bytes()).hexdigest())
+ if not complete and not pending:raise ValueError('森羅部署缺少 BDS／用戶端／存檔遷移驗收')
  expected={p['uuid']:p for p in receipt['packs']}
  if ids!=set(expected):raise ValueError('森羅更新必須提交完整的已驗收家族包')
  for p in incoming:

@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 """Assemble exact owned runtimes plus hash-pinned, unmodified upstream archives."""
 from pathlib import Path,PurePosixPath
-import argparse,hashlib,io,json,shutil,subprocess,zipfile
+import argparse,hashlib,io,json,re,shutil,subprocess,zipfile
 ROOT=Path(__file__).resolve().parents[1]
 def fail(message):raise SystemExit('FAMILY: '+message)
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def read_definition(path,jsonc=False):
+ raw=path.read_text(encoding='utf-8-sig')
+ try:return json.loads(raw)
+ except json.JSONDecodeError:
+  if not jsonc:raise
+ # Bedrock JSONC is allowed in preserved third-party definitions. Only the
+ # scanner parses it; copied bytes and their per-file receipts stay untouched.
+ raw=re.sub(r'"(?:\\.|[^"\\])*"|//[^\n]*|/\*.*?\*/',lambda m:m[0] if m[0].startswith('"') else '',raw,flags=re.S)
+ raw=re.sub(r'"(?:\\.|[^"\\])*"|,\s*([}\]])',lambda m:m[0] if m[0].startswith('"') else m[1],raw)
+ return json.loads(raw)
 def files_hash(root):return {p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(root.rglob('*')) if p.is_file()}
 def packs(z):
  names=z.namelist()
@@ -23,14 +33,28 @@ def packs(z):
   data={x[len(pre):]:z.read(x) for x in names if x.startswith(pre) and not x.endswith('/') and not x.endswith('.mcpack')}
   yield m,data
 
-def assemble(lock,sources,archives,out,working=False):
+def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=()):
+ lock=json.loads(json.dumps(lock))
+ # Optional local integrations have their own committed runtime and release
+ # history. They never rewrite an owned port or an upstream author archive.
+ for repo in extensions:
+  config=read(repo/'baseline.json');key=config['repository']
+  if key in sources:fail('duplicate extension source')
+  sources={**sources,key:repo}
+  lock['owned'].append({'key':key,'repository':key,'version':config['version'],'source_trees':config['source_trees']})
+  for side,label in [('BP','behavior'),('RP','resource')]:
+   uid=config['packs'][side]['uuid']
+   if uid in lock['order'][label]:fail('extension collides with locked pack')
+   lock['order'][label].insert(0,uid)
  if out.exists():fail('output exists; never replace another candidate')
  out.mkdir(parents=True);records=[];by_uuid={}
  def add(source,manifest,data=None,root=None):
   uid=manifest['header']['uuid'];side='resource' if any(x['type']=='resources' for x in manifest['modules']) else 'behavior'
   if uid in by_uuid:fail('duplicate pack UUID '+uid)
   dest=out/(side+'_packs')/uid
-  if root:shutil.copytree(root,dest)
+  if root:
+   before=files_hash(root);shutil.copytree(root,dest)
+   if files_hash(root)!=before or files_hash(dest)!=before:fail('source changed during candidate copy')
   else:
    for name,b in data.items():
     target=dest/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(b)
@@ -51,6 +75,10 @@ def assemble(lock,sources,archives,out,working=False):
    for manifest,data in packs(z):
     header=manifest['header'];found.append({'uuid':header['uuid'],'version':header['version']});add({'owner':'upstream','project_id':upstream['project_id'],'file_id':upstream['file_id'],'archive_sha256':upstream['sha256']},manifest,data=data)
    if sorted(found,key=lambda p:p['uuid'])!=sorted(upstream['packs'],key=lambda p:p['uuid']):fail('official pack identity differs from lock')
+ for root in preserved:
+  manifest=read(root/'manifest.json');uid=manifest['header']['uuid']
+  add({'owner':'preserved','role':'unchanged_external_dependency'},manifest,root=root)
+  label=by_uuid[uid]['side'];lock['order'][label].append(uid)
  for row in records:
   for dep in row['dependencies']:
    if 'uuid' in dep and (dep['uuid'] not in by_uuid or by_uuid[dep['uuid']]['version']!=dep['version']):fail('unresolved exact dependency '+row['uuid']+' -> '+dep['uuid'])
@@ -66,7 +94,7 @@ def assemble(lock,sources,archives,out,working=False):
   for uid in order:
    root=out/(side+'_packs')/uid
    for path in root.rglob('*.json'):
-    try:obj=read(path)
+    try:obj=read_definition(path,by_uuid[uid]['source']['owner']=='preserved')
     except Exception as e:fail('invalid JSON '+str(path)+': '+str(e))
     for key in ['minecraft:item','minecraft:block','minecraft:entity','minecraft:client_entity']:
      identifier=obj.get(key,{}).get('description',{}).get('identifier') if isinstance(obj,dict) else None
@@ -92,11 +120,12 @@ def audit(world,receipt):
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='command',required=True)
- b=sub.add_parser('build');b.add_argument('--tavern',type=Path,default=ROOT);b.add_argument('--grilling',type=Path,required=True);b.add_argument('--world-liquor',type=Path,required=True);b.add_argument('--archives',type=Path,action='append',required=True);b.add_argument('--output',type=Path,required=True);b.add_argument('--working-candidate',action='store_true',help='isolated BDS development only; receipt never authorizes production')
+ b=sub.add_parser('build');b.add_argument('--tavern',type=Path,default=ROOT);b.add_argument('--grilling',type=Path,required=True);b.add_argument('--world-liquor',type=Path,required=True);b.add_argument('--archives',type=Path,action='append',required=True);b.add_argument('--output',type=Path,required=True);b.add_argument('--extension',type=Path,action='append',default=[],help='Committed local integration with the same canonical baseline gate and release history');b.add_argument('--working-candidate',action='store_true',help='isolated BDS development only; receipt never authorizes production')
+ b.add_argument('--preserved-pack',type=Path,action='append',default=[],help='Unchanged external dependency copied with an exact per-file receipt')
  a=sub.add_parser('audit');a.add_argument('--world',type=Path,required=True);a.add_argument('--receipt',type=Path,required=True)
  args=p.parse_args()
  if args.command=='audit':audit(args.world,read(args.receipt));return
  paths=[]
  for root in args.archives:paths.extend(root.rglob('*.mcaddon') if root.is_dir() else [root])
- assemble(read(ROOT/'family/upstream.lock.json'),{'tavern':args.tavern,'grilling':args.grilling,'world-liquor':args.world_liquor},paths,args.output,args.working_candidate)
+ assemble(read(ROOT/'family/upstream.lock.json'),{'tavern':args.tavern,'grilling':args.grilling,'world-liquor':args.world_liquor},paths,args.output,args.working_candidate,args.extension,args.preserved_pack)
 if __name__=='__main__':main()

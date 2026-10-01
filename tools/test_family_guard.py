@@ -35,6 +35,26 @@ class FamilyAdmissionTests(unittest.TestCase):
  def test_missing_client_acceptance(self):
   data=guard.read(self.receipt);data['acceptance']['client']=False;self.receipt.write_text(json.dumps(data))
   with self.assertRaises(ValueError):guard.validate_incoming([self.row],self.policy)
+ def defer_client(self):
+  import hashlib
+  data=guard.read(self.receipt);data['acceptance']['client']=False;data['production_ready']=False;self.receipt.write_text(json.dumps(data))
+  policy=guard.read(self.policy);policy['deferred_client_acceptance']={'source':'explicit_user_instruction','instruction':'Deploy now; I will test the client later.','recorded_at':'2026-10-02T00:00:00Z','receipt_sha256':hashlib.sha256(self.receipt.read_bytes()).hexdigest()};self.policy.write_text(json.dumps(policy))
+ def test_explicit_exact_client_deferral(self):
+  self.defer_client();guard.validate_incoming([self.row],self.policy)
+ def test_deferral_cannot_skip_migration(self):
+  self.defer_client();data=guard.read(self.receipt);data['acceptance']['saved_world_migration']=False;self.receipt.write_text(json.dumps(data))
+  import hashlib
+  policy=guard.read(self.policy);policy['deferred_client_acceptance']['receipt_sha256']=hashlib.sha256(self.receipt.read_bytes()).hexdigest();self.policy.write_text(json.dumps(policy))
+  with self.assertRaises(ValueError):guard.validate_incoming([self.row],self.policy)
+ def test_deferral_rejects_another_receipt(self):
+  self.defer_client();data=guard.read(self.receipt);data['new_candidate']=True;self.receipt.write_text(json.dumps(data))
+  with self.assertRaises(ValueError):guard.validate_incoming([self.row],self.policy)
+ def test_deferral_still_rejects_patch(self):
+  self.defer_client();(self.pack/'hidden-patch.js').write_text('changed')
+  with self.assertRaises(ValueError):guard.validate_incoming([self.row],self.policy)
+ def test_deferral_does_not_claim_client_passed(self):
+  self.defer_client();guard.validate_incoming([self.row],self.policy)
+  self.assertFalse(guard.read(self.receipt)['acceptance']['client']);self.assertFalse(guard.read(self.receipt)['production_ready'])
  def test_install_patch_rejected(self):
   (self.pack/'install-only.js').write_text('hidden fix')
   with self.assertRaises(ValueError):guard.validate_incoming([self.row],self.policy)

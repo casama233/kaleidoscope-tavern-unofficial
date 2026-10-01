@@ -106,7 +106,7 @@ jobs:
           for stem in ('STORAGE-VALIDATION', 'REPAIR-STATIC', 'MOTION-STATIC', 'LAUNCH-VALIDATION'):
               p = Path('docs') / f"{stem}-{r['version']}.json"
               shutil.copy2(p, out / p.name)
-          for name in ('BDS-BARREL-MATERIALS-20261001.json', 'BDS-JAVA-PARITY-20261001.json', 'DRINK-SURFACES-0.6.59.json', 'BDS-FAMILY-20261001.json', 'BDS-LUMINOUS-20261001.json', 'BDS-LUMINOUS-NORMALIZED-20261001.json'):
+          for name in ('BDS-MIXOLOGY-20261001.json', 'BDS-BARREL-MATERIALS-20261001.json', 'BDS-JAVA-PARITY-20261001.json', 'DRINK-SURFACES-0.6.59.json', 'BDS-FAMILY-20261001.json', 'BDS-LUMINOUS-20261001.json', 'BDS-LUMINOUS-NORMALIZED-20261001.json'):
               shutil.copy2(Path('docs') / name, out / name)
           for name in ('luminous_bride_1.bbmodel', 'blockbench_5.2.1_export.geo.json'):
               shutil.copy2(Path('art/blockbench/luminous-bride') / name, out / name)

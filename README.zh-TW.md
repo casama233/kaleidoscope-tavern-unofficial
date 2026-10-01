@@ -1,6 +1,6 @@
-## 當前維護基線：0.6.77
+## 當前維護基線：0.6.78
 
-正式來源以 [baseline.json](baseline.json) 及 [家族維護制度](family/MAINTENANCE.md) 為準：酒館 0.6.77、煙火 2.8.20、世界名酒 0.1.42、作者原版廚房 1.0.8。[酒桶材料修復與限制](docs/BARREL-MATERIALS-20261001.md) 記錄本次範圍；靜態、隔離 BDS、客戶端與舊 UUID 存檔遷移分開驗收，不代表已套用 luosen。以下 0.6.52 內容保留為歷史說明。
+正式來源以 [baseline.json](baseline.json) 及 [家族維護制度](family/MAINTENANCE.md) 為準：酒館 0.6.78、煙火 2.8.20、世界名酒 0.1.43、作者原版廚房 1.0.8。[酒桶材料修復與限制](docs/BARREL-MATERIALS-20261001.md) 記錄本次範圍；靜態、隔離 BDS、客戶端與舊 UUID 存檔遷移分開驗收，不代表已套用 luosen。以下 0.6.52 內容保留為歷史說明。
 
 # 森羅物語：酒館（非官方）
 

@@ -1,9 +1,11 @@
 import {normalizeFoundation} from './extension-foundation.js';
 import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
+import {COCKTAIL_COLOR_CODES} from './cocktail-colors.js';
+import {expandShakerTags} from './shaker-tags.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback','shaker_ingredient_tags']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -44,7 +46,8 @@ function normalizeShakerInput(raw,source,itemExists){
  let container=raw.container??null;if(container!==null){container=id(container);check(itemExists(container),'UNKNOWN_ITEM',container);}
  const color=integer(raw.color??0xffffff,0,0xffffff,'shakerInput.color'),effects=raw.effects??[];check(Array.isArray(effects)&&effects.length<=32,'BAD_INPUT_EFFECTS');
  const normalized=effects.map(e=>{check(e&&typeof e==='object','BAD_EFFECT');const effect=id(e.effect),duration=integer(e.duration,0,1000000,'duration seconds'),amplifier=integer(e.amplifier,0,255,'amplifier');check(Number.isFinite(e.probability)&&e.probability>=0&&e.probability<=1,'BAD_PROBABILITY');return {effect,duration,amplifier,probability:e.probability};});
- return {item,container,color,effects:normalized};
+ const ingredientTags=raw.ingredientTags??[];check(Array.isArray(ingredientTags)&&ingredientTags.length<=16,'INVALID_INPUT_TAGS');
+ return {item,container,color,effects:normalized,...(ingredientTags.length?{ingredientTags:[...new Set(ingredientTags.map(id))].sort()}:{} )};
 }
 function normalizeContent(raw,source,itemExists){
  check(raw&&['bottle','cocktail'].includes(raw.kind),'INVALID_DRINK_CONTENT');
@@ -60,7 +63,7 @@ function normalizeContent(raw,source,itemExists){
    d.displayStates={};for(const key of ['count','facing','quality'])d.displayStates[key]=own(raw.displayStates[key],source);
    check(new Set(Object.values(d.displayStates)).size===3,'INVALID_DISPLAY_STATES');
   }
-  if(raw.color!==undefined){check(['light_purple','blue','gold','green','red','yellow','white'].includes(raw.color),'INVALID_BOTTLE_COLOR');d.color=raw.color;}
+  if(raw.color!==undefined){check(Object.hasOwn(COCKTAIL_COLOR_CODES,raw.color),'INVALID_BOTTLE_COLOR');d.color=raw.color;}
   d.visuals={};for(const [key,value] of Object.entries(raw.visuals??{})){check(['holder_bottle_visual','tilted_rack_bottle_visual','circular_rack_bottle_visual','cellar_cabinet_bottle_visual','bar_cabinet_bottle_visual','thrown_drink'].includes(key),'INVALID_VISUAL');d.visuals[key]=own(value,source);}
  }else{d.item=own(raw.item,source);check(itemExists(d.item),'UNKNOWN_ITEM',d.item);d.effects=effectRows(raw.effects);}
  return d;
@@ -103,7 +106,7 @@ export class ExtensionRegistry {
   this.builtins=freeze(recipes.map(x=>({...clone(x),source:CORE})));this.pages=freeze(pages.map(x=>({...clone(x),source:CORE})));
   this.rebuild();
  }
- rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))]);this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
+ rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze(expandShakerTags([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))],ext.flatMap(x=>x.shakerInputs)));this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
  install(raw){
   check(raw&&raw.api===API_VERSION,'API_VERSION_MISMATCH');
   const source=raw.source;check(typeof source==='string'&&/^[a-z][a-z0-9_]{1,47}$/.test(source),'INVALID_SOURCE');

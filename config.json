@@ -1,14 +1,32 @@
 {
   "type": "minecraftBedrock",
-  "name": "Kaleidoscope Tavern C6",
-  "namespace": "kaleidoscope_tavern",
+  "name": "Kaleidoscope Tavern",
+  "description": "Unofficial Bedrock port; canonical release runtime. See README.md for attribution and dependency requirements.",
+  "authors": [
+    "Unofficial port contributors"
+  ],
   "targetVersion": "1.26.50",
+  "experimentalGameplay": {},
+  "namespace": "kaleidoscope_tavern",
   "packs": {
     "behaviorPack": "./runtime/BP",
     "resourcePack": "./runtime/RP"
   },
-  "experimentalGameplay": {},
-  "authors": [
-    "Unofficial Tavern port contributors"
-  ]
+  "worlds": [],
+  "packDefinitions": {},
+  "bdsProject": false,
+  "bridge": {
+    "formatVersion": 1,
+    "v1CompatMode": false
+  },
+  "compiler": {
+    "plugins": [
+      [
+        "simpleRewrite",
+        {
+          "packName": "tavern"
+        }
+      ]
+    ]
+  }
 }

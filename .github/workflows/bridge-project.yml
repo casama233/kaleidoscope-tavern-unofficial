@@ -1,0 +1,37 @@
+name: Canonical bridge project
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  bridge:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Preserve canonical line endings
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Check canonical project and regression guards
+        run: |
+          python tools/bridge_project.py
+          python tools/test_bridge_project.py
+      - name: Download checksum-pinned official Dash v1.2.0
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = Join-Path $env:RUNNER_TEMP 'dash.exe'
+          Invoke-WebRequest 'https://github.com/bridge-core/deno-dash-compiler/releases/download/v1.2.0/dash.exe' -OutFile $path
+          $expected = '00bb6d984f0ffb819e2fb26c1eda5768db2d6e07a979712e34e1c76c2b7594de'
+          if ((Get-FileHash $path -Algorithm SHA256).Hash.ToLower() -ne $expected) { throw 'Dash executable checksum mismatch' }
+      - name: Compile current canonical BP and RP with bridge Dash
+        shell: pwsh
+        run: |
+          & "$env:RUNNER_TEMP/dash.exe" build
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Reject omitted files, runtime rewrites, version or UUID drift
+        run: |
+          python tools/bridge_project.py --verify-export builds/dist
+          python tools/baseline_gate.py check --release
+          git diff --exit-code

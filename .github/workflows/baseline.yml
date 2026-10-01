@@ -16,3 +16,5 @@ jobs:
       - run: python tools/test_baseline_gate.py
       - run: python tools/test_family_guard.py
       - run: python tools/test_family_upstream_watch.py
+      - run: python tools/bridge_project.py
+      - run: python tools/test_bridge_project.py

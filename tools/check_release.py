@@ -87,6 +87,7 @@ subprocess.run(['node',str(ROOT/'tools/check_feedback.mjs')],cwd=ROOT,check=True
 subprocess.run([sys.executable,str(ROOT/'tools/check_visuals.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_repair.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_storage_rendering.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/check_luminous_bride.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_launch.py')],cwd=ROOT,check=True)
 subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)

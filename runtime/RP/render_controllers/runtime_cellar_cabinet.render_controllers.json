@@ -49,7 +49,7 @@
       "geometry": "Array.kind[q.property('kaleidoscope_tavern:storage_kind') - 1]",
       "materials": [
         {
-          "*": "Material.default"
+          "*": "q.property('kaleidoscope_tavern:storage_kind') == 6 ? Material.luminous_bride : Material.default"
         }
       ],
       "textures": [

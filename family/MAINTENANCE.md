@@ -37,3 +37,5 @@ flowchart LR
 - 使用者明確要求擴充作者 API 時，canonical owned runtime 可宣告 `host-extensions/*.json`。組裝器只在原作者 archive／逐檔 hash 完全吻合時插入已審查的小型呼叫點，複製該 runtime 的版本化 API 模組；逐檔收據標記 `upstream_extended`，保留作者 UUID／版本、原檔與改後 hash、模組來源 commit、獨立 API 版本、到期日及移除條件。原作者私有完整腳本不提交；新作者版必須重新審查。這些登記不得放入翻譯 hook。
 
 - 經使用者本輪油壺修復授權，已登記 API 可對 hash 釘選的作者 item JSON **僅新增** `minecraft:allow_off_hand: true`；不改原有能力、配方、identity 或 manifest。收據同樣列出原檔與改後 hash。組裝器拒絕其他 JSON 屬性、既有欄位或未列入清單的修改。
+
+- 原生 health／同步 property 擴充的 BP `minecraft:player` 必須保留版本釘選原版內容；Grilling 自身生成器檢查其增量。家族組裝器拒絕兩份 BP 玩家定義，收據記錄唯一 effective UUID／路徑／hash；RP 玩家相容與 Windows 心形／效果仍須獨立真人驗收。

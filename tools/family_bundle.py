@@ -100,7 +100,7 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
   expected={p['uuid'] for p in records if p['side']==side}
   if len(order)!=len(set(order)) or set(order)!=expected:fail('pack order missing or duplicate identity')
   (out/('world_'+side+'_packs.json')).write_text(json.dumps([{'pack_id':uid,'version':by_uuid[uid]['version']} for uid in order],indent=2)+'\n')
- definitions={};overlaps=[]
+ definitions={};overlaps=[];behavior_player=None
  for side in ['behavior','resource']:
   # First world ref has priority. Report effective owner; do not silently merge definitions.
   order=lock['order'][side]
@@ -112,10 +112,13 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
     for key in ['minecraft:item','minecraft:block','minecraft:entity','minecraft:client_entity']:
      identifier=obj.get(key,{}).get('description',{}).get('identifier') if isinstance(obj,dict) else None
      if not identifier:continue
+     if side=='behavior' and key=='minecraft:entity' and identifier=='minecraft:player':
+      if behavior_player is not None:fail('competing behavior minecraft:player definitions: '+behavior_player['uuid']+' and '+uid)
+      behavior_player={'uuid':uid,'path':path.relative_to(root).as_posix(),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
      identity=(side,key,identifier)
      if identity in definitions:overlaps.append({'kind':key,'identifier':identifier,'effective_uuid':definitions[identity],'shadowed_uuid':uid})
      else:definitions[identity]=uid
- receipt={'schema':1,'lock_sha256':hashlib.sha256(json.dumps(lock,sort_keys=True).encode()).hexdigest(),'packs':records,'order':lock['order'],'definition_overlaps':overlaps,'acceptance':{'static':True,'bds':False,'client':False,'saved_world_migration':False},'production_ready':False}
+ receipt={'schema':1,'lock_sha256':hashlib.sha256(json.dumps(lock,sort_keys=True).encode()).hexdigest(),'packs':records,'order':lock['order'],'definition_overlaps':overlaps,'behavior_player_definition':behavior_player,'acceptance':{'static':True,'bds':False,'client':False,'saved_world_migration':False},'production_ready':False}
  (out/'family-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps({'candidate':str(out),'packs':len(records),'overlaps':len(overlaps),'production_ready':False}))
  return receipt
 

@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "release": "A2.8.36-test.194.1",
+  "release_url": "https://github.com/casama233/kaleidoscope-grilling-unofficial/releases/tag/A2.8.36-test.194.1",
+  "merge_commit": "5f0b3bd363a19d0388afd31456f1bf20578dd707",
+  "workflow_run": 36993227228,
+  "artifact_id": 11220716335,
+  "artifact_zip_sha256": "aef79e8fa4ab6588ba59beccfef01b94e3ac11caecd842a0358799eb6c061fae",
+  "published_mcaddon_sha256": "0a583d7fd75ee0426293c62522406740ff0521f1566342a9e12d0b44cf442844",
+  "bds_candidate_mcaddon_sha256": "77fa30cad85f317bb12db2264d5a4bde1438577347b4ce84ae7eb5dbe76cc7aa",
+  "published_bytes": 2687925,
+  "unpacked_files": 2090,
+  "all_unpacked_bytes_equal": true,
+  "archive_order_equal": true,
+  "difference": "ZIP creator OS metadata: CI Windows create_system=0; local Linux create_system=3. Runtime member bytes are identical.",
+  "source_tree_sha256": "a034b4f93a8e6d8ee4a1d40cd37a89f3923b4dbd86b99151072f92afac5e35cd",
+  "acceptance": {
+    "canonical_ci": true,
+    "bridge_ci": true,
+    "baseline_ci": true,
+    "isolated_exact_bds": true,
+    "isolated_native_plate_probe": true,
+    "client": false,
+    "saved_world_migration": false,
+    "live_deployed": false
+  }
+}

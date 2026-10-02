@@ -11,15 +11,17 @@ flowchart LR
   B --> D
   D --> E[固定 BP/RP 順序與相依檢查]
   E --> F[隔離 BDS 原生驗證]
-  F --> G[用戶端與舊存檔遷移驗收]
-  G --> H[完整家族套用與部署收據]
-  H --> I[BSM 准入檢查與定時漂移巡檢]
+  F --> G[停服備份與舊存檔遷移演練]
+  G --> H[逐候選延期登記與 BSM 准入]
+  H --> L[完整家族更新至 live 測試]
+  L --> M[真人用戶端驗收]
+  L --> I[逐檔部署收據與定時漂移巡檢]
   J[第三方缺陷] --> K[最新版原包重現與作者回饋]
 ```
 
 - `baseline_gate.py` 阻止未提交打包、未追蹤來源、同版本換內容、歷史鎖改寫、打包後補丁。CI 和實際打包器共同執行。
 - `family_bundle.py` 只複製已提交的自移植 runtime 與雜湊相符的原包；不替換第三方 UUID。重複 identifier 必須列出有效來源。
-- `family_guard.py` 用於 BSM `addon_quality/policy.py` 的 `validate_incoming`，必須在世界寫入前執行。批准收據要有 static、bds、client、saved_world_migration 四項實際證據，且只接收完整家族。
+- `family_guard.py` 用於 BSM `addon_quality/policy.py` 的 `validate_incoming`，必須在世界寫入前執行。完整驗收收據要有 static、bds、client、saved_world_migration 四項實際證據，且只接收完整家族。2026-10-03 起每次開發修復按以下持續授權逐候選登記延期真人驗收，通過其餘三項後先更新 live。
 - 准入與巡檢同時識別新 UUID 的森羅定義或家族相依，避免重新命名私服包繞過家族清單；單獨語言包不應攜帶方塊／物品／實體定義。
 - 已部署的逐檔收據由 `family_guard.py --world ... --policy ... --report ...` 每 5 分鐘巡檢；報告 `ok` 只表示沒有漂移。舊混合版本被標為 `quarantined`，不能因此宣稱已驗收。
 - 燒烤的原生爐／進階串架容器需要 `upcoming_creator_features`（實驗性創作者功能）；存檔驗收必須確認，不應由打包器擅自開啟。
@@ -27,7 +29,8 @@ flowchart LR
 - 自移植包的 `addon_localizations` 全檔替換必須退出啟用索引。第三方 `.lang` 可逐鍵漢化；程式修補只能作為有作者回饋、原檔／改後雜湊、有效期限與移除條件的臨時覆蓋。
 - 家族相容包的 1.2.x 本地混合版是待拆分資料。未完成上述驗收，不得作為官方原包或新基線發佈。
 - `family_upstream_watch.py` 每六小時唯讀核對五個 Bedrock 作者專案的最新檔案，分列正式版／預覽版；新版、作者身份改變及查詢失敗都要求審查。API 憑證只由本機設定／環境提供，不存 Git。巡檢不下载、安裝或自動改版本鎖。
-- 使用者明確要求先部署、之後真人驗收時，可在伺服器政策登記 `deferred_client_acceptance`：明確指示、記錄時間及單一完整收據 SHA256。`client` 和 `production_ready` 仍為 false；static、bds、saved_world_migration 及完整逐檔准入都不能省略。這是單一候選的延期安排，不是所有後續版本的自動批准。
+- 使用者 2026-10-03 指示「改 AGENTS.md 每次都應該更新live以測試開發效果」是持續授權：每次功能修復／開發候選完成 canonical PR、檢查與合併，並通過整套 static、bds、saved_world_migration 後，必須更新 luosen live 供真人測試，包括目前候選；備份、正常停服／重啟與政策登記已包含在此授權，不再重複索取許可。純文件變更不改 runtime 時不必換包或重啟。
+- 每次仍須停服一致備份、回退版本，以及政策 `deferred_client_acceptance` 中本持續授權的明確指示、記錄時間與**該候選**完整收據 SHA256。持續授權不代表可省略逐候選檢查、沿用另一收據 hash 或繞過 family_guard；檢查失敗時停止部署並報告具體失敗。真人尚未測試，`client` 和 `production_ready` 仍為 false，安裝狀態為 `pending_client_acceptance`；部署成功不是真人驗收。
 - 私有的整合附加包可用 `family_bundle.py --extension <canonical Git>` 納入整套收據。其版本、依賴、逐檔鎖與歷史仍須經相同 baseline gate；不得將歷史混合補丁包當作整合來源，不得公開第三方私有資產。
 - 整合包相依的其他非家族包可用 `--preserved-pack` 原樣納入逐檔收據與完整依賴檢查；組裝時來源與副本雜湊必須相同。這些包標記為 preserved，不能據此更改其內容或批准其來源漂移。
 - `family_saved_world.py` 只在停服的一致存檔副本上遷移世界、實體、玩家及物品內的動態資料 UUID 所有權。目標欄位衝突、NBT 尾碼、非空舊容器會拒絕。逐筆保留證据不能代替原生載入演練；正式使用前保留完整備份並驗證原生載入與資料可讀。

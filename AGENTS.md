@@ -6,7 +6,7 @@
 - Do not use simulated players. Distinguish static checks, native BDS loading, and actual client acceptance.
 - Do not add successful placement, pickup or machine-operation Actionbar announcements absent from Java. Preserve source-backed rejection messages and brewing status.
 - The owner's 2026-10-02 immersion request makes automatic effect text and Jade-style barrel text opt-in. Preserve shaker graphics, optional brewing status and one-shot rejection feedback; do not refresh ordinary messages from polling.
-- The owner's subsequent effect visibility request permits original drink-effect icons after addon compatibility review. Use the existing UI Queue router with formatting-only, prefix-scoped packets and literal sprites; do not add a direct title/Actionbar writer or replace native/foreign effect controls. Effect details open only on explicit guide sneak-use. Keep static routing checks, BDS loading and rendered client acceptance distinct.
+- The owner's subsequent effect visibility request permits original drink-effect icons after addon compatibility review. The owner additionally requires Tavern-only operation independent of luosen configuration. Include a bounded, event-only, zero-duration formatting transport in Tavern; prefer the optional existing UI Queue or observed single embedded router. Do not join third-party router elections, write Actionbars, or replace native/foreign effect controls. Optional addon sprites belong to that addon RP, and absent addon effects remain inert. Effect details open only on explicit guide sneak-use. Keep static routing checks, BDS loading and rendered client acceptance distinct.
 
 # Canonical baseline
 

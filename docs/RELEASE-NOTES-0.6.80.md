@@ -17,3 +17,6 @@ Storage formats and recovery, recipe/color matching, extension capabilities/sour
 Pure guide data and UI SDK adapter regressions are not Minecraft simulated-player tests or client UI acceptance. Static checks, standalone BDS and optional-family BDS evidence are recorded separately when completed. Real client use, touch, forms and crafting need client acceptance. No live deployment or world migration is included.
 
 Reference comparison: Loyallay's public Tavern v1.0.0, CurseForge project1718691/file9024364, archive SHA25649b89d1d09ea91ca7d0c6bf1805b2b2b318ac023f132b1a758cfdb8607f2a9e4. Existing project licenses/credits are preserved.
+
+## Final BDS matrix
+BDS1.26.52.3/BSM3.10.6: exact unmodified Tavern-only loading/restart, plus test-only read-only observers for Tavern alone (156 entries), Tavern+World Liquor without Cookery (222 entries,78 preparations), and the16-pack family (222 entries,80 preparations). All cases completed two real process lifecycles without script errors; no experimental features or players. The public Cookery registry itself received222 entries/31 categories in both full-family cycles. These results do not certify form clicks/client rendering. See BDS-STANDALONE-GUIDE-20261002.json.

@@ -100,6 +100,8 @@ subprocess.run([sys.executable,str(ROOT/'tools/check_launch.py')],cwd=ROOT,check
 subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)
 subprocess.run(['node','--test','tools/immersion-feedback.test.mjs','tools/effect-bar.test.mjs','tools/effect-icons.test.mjs','tools/effect-icon-startup.test.mjs'],cwd=ROOT,check=True)
 subprocess.run(['node','tools/build_effect_icon_hud.mjs','--check'],cwd=ROOT,check=True)
+subprocess.run([sys.executable,'tools/test_effect_ui_contract.py'],cwd=ROOT,check=True)
+subprocess.run([sys.executable,'tools/check_effect_ui_contract.py'],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/check_pack_compat.py')],cwd=ROOT,check=True)
 print(f'Static checks passed: {len(files)} JSON files, {len(geometry)} geometries; no interaction tests run.')
 

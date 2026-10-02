@@ -39,8 +39,10 @@ test('Standalone sprites and additive root controls have no optional asset depen
  const root=new URL('../',import.meta.url),hud=JSON.parse(readFileSync(new URL('runtime/RP/ui/hud_screen.json',root),'utf8'));
  assert(!('hud_title_text' in hud));assert(!('hud_subtitle_text' in hud));assert(!('mob_effects_renderer' in hud));
  assert.equal(hud.root_panel.modifications.length,2);assert(hud.root_panel.modifications.every(m=>m.operation==='insert_back'));
- const panel=hud.kt_effect_icons;assert.equal(panel.controls.length,1+EFFECT_ICON_SLOTS*9);
- for(const c of panel.controls.slice(1)){
+ const panel=hud.kt_effect_icons;assert.equal(panel.controls.length,2+EFFECT_ICON_SLOTS*9);
+ assert.equal(panel['$kt_world_liquor_effect_panel|default'],'hud.kt_effect_empty');
+ assert.equal(hud.kt_effect_empty.type,'panel');
+ for(const c of panel.controls.slice(1,-1)){
   const image=Object.values(c)[0];assert(EFFECT_ICONS.some(row=>row.texture===image.texture));
   assert(!image.texture.includes('world_liquor'));assert(existsSync(new URL('runtime/RP/'+image.texture+'.png',root)));
  }

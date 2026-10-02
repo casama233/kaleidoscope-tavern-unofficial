@@ -6,7 +6,7 @@ import {EFFECT_ICON_PREFIX,EFFECT_ICON_SLOTS,effectIconToken} from '../runtime/B
 const addonIndex=process.argv.indexOf('--world-liquor');
 const extension=addonIndex>=0;
 const path=extension?resolve(process.argv[addonIndex+1],'runtime/RP/ui/kt_world_liquor_effects.json'):new URL('../runtime/RP/ui/hud_screen.json',import.meta.url);
-const hud=extension?{namespace:'hud'}:JSON.parse(readFileSync(path,'utf8'));
+const hud=extension?{namespace:'kaleidoscope_world_liquor_effects'}:JSON.parse(readFileSync(path,'utf8'));
 const prefix=`(('%.${EFFECT_ICON_PREFIX.length}s' * #hud_title_text_string) = '${EFFECT_ICON_PREFIX}')`;
 const panel={type:'panel',size:[160,80],anchor_from:'top_left',anchor_to:'top_left',offset:[4,52],controls:[
  {kt_effect_data:{type:'panel',size:[0,0],property_bag:{'#kt_effect_packet':''},bindings:[
@@ -23,16 +23,20 @@ for(let slot=0;slot<EFFECT_ICON_SLOTS;slot++)for(const row of rows)panel.control
   {binding_type:'view',source_property_name:`(not ((#kt_effect_packet - '${effectIconToken(slot,row.code)}') = #kt_effect_packet))`,target_property_name:'#visible'}
  ]
 }});
-// The addon gets a unique definition file and its own prefix-scoped cache. It
-// never replaces hud_screen.json or requires cross-panel control lookup.
-const panelName=extension?'kwl_effect_icons':'kt_effect_icons';
-hud[panelName]=extension?JSON.parse(JSON.stringify(panel).replaceAll('kt_effect_data','kwl_effect_data').replaceAll('kt_effect_packet','kwl_effect_packet').replaceAll('"kt_effect_','"kwl_effect_')):panel;
-// Keep all existing root modifications and every foreign/base control intact.
-if(extension)hud.root_panel={modifications:[]};
-const modifications=hud.root_panel.modifications;
-const reference=panelName+'@hud.'+panelName;
-if(!modifications.some(m=>m.value?.some(v=>reference in v)))
- modifications.push({array_name:'controls',operation:'insert_back',value:[{[reference]:{}}]});
+// A registered definition file creates definitions; it is not a second patch
+// to vanilla hud.root_panel. Only the host's original hud_screen patch mounts UI.
+if(extension){
+ panel.offset=[0,0];
+ hud.effect_panel=JSON.parse(JSON.stringify(panel).replaceAll('kt_effect_data','kwl_effect_data').replaceAll('kt_effect_packet','kwl_effect_packet').replaceAll('"kt_effect_','"kwl_effect_'));
+}else{
+ panel['$kt_world_liquor_effect_panel|default']='hud.kt_effect_empty';
+ panel.controls.push({'kt_optional_world_icons@$kt_world_liquor_effect_panel':{}});
+ hud.kt_effect_empty={type:'panel',size:[0,0]};
+ hud.kt_effect_icons=panel;
+ const modifications=hud.root_panel.modifications;
+ if(!modifications.some(m=>m.value?.some(v=>'kt_effect_icons@hud.kt_effect_icons' in v)))
+  modifications.push({array_name:'controls',operation:'insert_back',value:[{'kt_effect_icons@hud.kt_effect_icons':{}}]});
+}
 const expected=JSON.stringify(hud)+'\n';
 if(process.argv.includes('--check')){
  if(readFileSync(path,'utf8')!==expected)throw Error('Effect icon HUD differs from its authored generator');

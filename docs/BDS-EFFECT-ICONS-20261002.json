@@ -1,0 +1,40 @@
+{
+  "version": "0.6.86",
+  "paired_world_liquor": "0.1.50",
+  "full_stack_packs": 41,
+  "bds": true,
+  "engine_sha256": "e93e739f373a84edfff7c9cd76fcb090c2176744b412e1143f1b38e91a49bed4",
+  "candidate_receipt_sha256": "d42edf575362470c7db5752f2d44fd0bc137084cb1d3228304218de1e799d5bc",
+  "exact_files_checked": true,
+  "cycles": [
+    {
+      "phase": "first",
+      "started": true,
+      "tavern_version": true,
+      "effect_queue_available": true,
+      "world_liquor_registered": true,
+      "amw_initialized": true,
+      "errors": [],
+      "exit_code": 0,
+      "log_sha256": "248b03ad2e470ff4b48f82e02110b705782bebdbc325515674d72682187c66ca",
+      "ok": true
+    },
+    {
+      "phase": "restart",
+      "started": true,
+      "tavern_version": true,
+      "effect_queue_available": true,
+      "world_liquor_registered": true,
+      "amw_initialized": true,
+      "errors": [],
+      "exit_code": 0,
+      "log_sha256": "047c649db3ff27dd3a476c3072de7e36ac910ce67e37309110a6367fbe1542fd",
+      "ok": true
+    }
+  ],
+  "client": false,
+  "production_ready": false,
+  "simulated_players": false,
+  "real_players": 0,
+  "scope": "Exact canonical full-stack native loading/restart. JSON UI rendering requires human client acceptance."
+}

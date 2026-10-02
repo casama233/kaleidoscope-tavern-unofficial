@@ -11,19 +11,19 @@ export function effectIconToken(slot,code){
  return [...slot.toString(16).padStart(2,'0'),...code.toString(16).padStart(2,'0')].map(n=>'§'+n).join('')+'§r';
 }
 /** All bytes are valid formatting pairs: native title text remains empty without UI filters. */
-export function effectIconPacket(state,hidden=false){
- const rows=hidden?[]:visibleEffects(state).filter(row=>icons.has(row.id));
+export function effectIconPacket(state,hidden=false,enabled=()=>true){
+ const rows=hidden?[]:visibleEffects(state).filter(row=>icons.has(row.id)&&enabled(row.id));
  return EFFECT_ICON_PREFIX+rows.slice(0,EFFECT_ICON_SLOTS).map((row,slot)=>effectIconToken(slot,icons.get(row.id).code)).join('');
 }
-export function effectDetails(state){
- const rows=visibleEffects(state),rawtext=[{translate:'kt.effects.snapshot'}];
+export function effectDetails(state,enabled=()=>true){
+ const rows=visibleEffects(state).filter(row=>enabled(row.id)),rawtext=[{translate:'kt.effects.snapshot'}];
  if(!rows.length)rawtext.push({text:'\n\n'},{translate:'kt.effects.empty'});
  for(const row of rows)rawtext.push({text:'\n\n§f'},{translate:'effect.'+row.id.replace(':','.')},{text:effectLevel(row.amplifier)+' §7'+effectTime(row.ticks)+'§r'});
  rawtext.push({text:'\n\n'},{translate:'kt.effects.native'});
  return {rawtext};
 }
-/** Read-only view. No saves, no countdown, no Actionbar or direct title writer. */
-export function createEffectIcons({status,available,send,hidden=p=>p.hasTag?.(EFFECT_ICON_HIDE_TAG)===true,onError=()=>{}}){
+/** Read-only view. No saves, no countdown traffic and no Actionbar writes. */
+export function createEffectIcons({status,available,send,enabled=()=>true,hidden=p=>p.hasTag?.(EFFECT_ICON_HIDE_TAG)===true,onError=()=>{}}){
  const views=new Map();
  return {
   forget:id=>views.delete(id),
@@ -33,7 +33,7 @@ export function createEffectIcons({status,available,send,hidden=p=>p.hasTag?.(EF
    const seen=new Set();
    for(const player of players)try{
     if(player.isValid===false)continue;
-    seen.add(player.id);const old=views.get(player.id),packet=effectIconPacket(status(player),hidden(player));
+    seen.add(player.id);const old=views.get(player.id),packet=effectIconPacket(status(player),hidden(player),enabled);
     const dimension=player.dimension?.id;
     // Inactive joins need no packet. Clearing contains only our scoped formatting header.
     if(packet===EFFECT_ICON_PREFIX&&!old)continue;

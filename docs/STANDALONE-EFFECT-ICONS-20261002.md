@@ -1,0 +1,15 @@
+# Standalone drink effect icons
+
+Tavern 0.6.87 includes its original nine timed drink-effect sprites and a self-contained transport. Only its paired BP/RP and the declared stable Minecraft scripting APIs are required. It does not depend on luosen, BSM, Cookery, World Liquor, AMW, UI Queue, world experiments or server configuration. The optional text bars remain disabled by default. Sneak-use the guide to inspect names, levels and remaining time, refresh the snapshot, or toggle icons for yourself.
+
+An installed UI Queue is preferred. Without that addon, Tavern observes the standard `ui_queue_module:setup` startup election without participating: a single observed embedded router is reused through `ui_load`; otherwise the built-in transport sends one formatting-only, zero-duration title packet when the icon set changes. There is no periodic countdown traffic, Actionbar writing, native control replacement, scoreboard display or HUD hiding. Reconnect, respawn and dimension changes refresh the cached icon view. Missing optional effect registrations remain inert without deleting saved effect data.
+
+World Liquor 0.1.51 owns its unchanged original sprites and a unique `ui/kt_world_liquor_effects.json` registered through `_ui_defs.json`. Tavern contains no references to these optional textures. Both panels decode the same stable slot tokens with their own prefix-scoped caches, so packed slots do not overlap. Literal sprite paths cannot be injected through packets.
+
+## Compatibility and limits
+
+Test the exact exported files in Tavern alone, Tavern plus World Liquor, the complete luosen stack, and that stack without UI Queue. Script checks execute standalone routing, the real installed UI Queue and AMW embedded module, including independent display recipients, foreign cache filters and addon removal. Native BDS cold loading/restart separately verifies dependencies, startup selection and script errors without actors or simulated players. BDS does not render JSON UI; actual client scales, touch controls, pack-definition merging and title concurrency remain pending human acceptance.
+
+Minecraft exposes shared display channels and no getter for the current title or external title ownership. The built-in fallback can interrupt a concurrently displayed ordinary title on an icon-set change; it has no ongoing refresh loop. An optional shared router serializes participating HUD packets, but arbitrary addons replacing `hud_screen`, native effect controls or the same title channel cannot be certified universally. UI overrides must keep the additive namespaced panel definitions. The personal toggle and manually requested details remain available in either transport mode. A rendered-client failure must be reproduced and fixed, not represented as a passed script check.
+
+API source: [Microsoft ScreenDisplay](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/screendisplay?view=minecraft-bedrock-stable). The subtitle-only API requires a previously displayed title and is not a reliable standalone initialization mechanism.

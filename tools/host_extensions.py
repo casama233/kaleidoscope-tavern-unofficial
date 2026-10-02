@@ -18,11 +18,23 @@ def apply_host_extension(spec,owned_root,host_root,source):
  if source['owner']!='upstream' or source['archive_sha256']!=spec['archive_sha256']:raise ValueError('extension requires pinned original author archive')
  if set(spec['original_files'])!=set(spec['patched_files']) or set(spec['imports'])-set(spec['original_files']):raise ValueError('extension file inventory differs')
  for name,expected in spec['original_files'].items():
-  if not name.startswith('scripts/') or not name.endswith('.js'):raise ValueError('only script hooks permitted; author identity is immutable')
+  script=name.startswith('scripts/') and name.endswith('.js')
+  item=name.startswith('items/') and name.endswith('.json')
+  if not script and not item:raise ValueError('only script hooks and reviewed item capabilities permitted; author identity is immutable')
   if digest(safe(host_root,name))!=expected:raise ValueError('original host file hash differs '+name)
  changes={}
  for name,expected in spec['patched_files'].items():
   path=safe(host_root,name);text=spec.get('imports',{}).get(name,'')+path.read_text(encoding='utf-8')
+  if name.endswith('.json'):
+   if name in spec.get('imports',{}):raise ValueError('JSON cannot receive imports')
+   data=json.loads(text);updates=[o for o in spec.get('json_updates',[]) if o['path']==name]
+   if not updates:raise ValueError('item capability update missing')
+   for op in updates:
+    if op.get('pointer')!=['minecraft:item','components','minecraft:allow_off_hand'] or op.get('value') is not True:raise ValueError('only additive offhand capability is allowed')
+    components=data['minecraft:item']['components']
+    if 'minecraft:allow_off_hand' in components:raise ValueError('original capability already exists')
+    components['minecraft:allow_off_hand']=True
+   text=json.dumps(data,ensure_ascii=False,indent=2)+'\n'
   for op in spec['insertions']:
    if op['path']!=name:continue
    anchor=op['anchor']
@@ -36,6 +48,8 @@ def apply_host_extension(spec,owned_root,host_root,source):
   if not safe(owned_root,name).is_file():raise ValueError('extension module missing')
  for op in spec['insertions']:
   if op['path'] not in changes:raise ValueError('unlisted extension insertion')
+ for op in spec.get('json_updates',[]):
+  if op['path'] not in changes:raise ValueError('unlisted item capability change')
  for name,data in changes.items():safe(host_root,name).write_bytes(data)
  copies={}
  for name,target in spec['copies'].items():

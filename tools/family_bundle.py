@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Assemble exact owned runtimes plus hash-pinned, unmodified upstream archives."""
+"""Assemble exact owned runtimes plus hash-pinned upstream archives and declared canonical host extensions."""
 from pathlib import Path,PurePosixPath
 import argparse,hashlib,io,json,re,shutil,subprocess,zipfile
+from host_extensions import apply_host_extension
 ROOT=Path(__file__).resolve().parents[1]
 def fail(message):raise SystemExit('FAMILY: '+message)
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
@@ -75,6 +76,18 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
    for manifest,data in packs(z):
     header=manifest['header'];found.append({'uuid':header['uuid'],'version':header['version']});add({'owner':'upstream','project_id':upstream['project_id'],'file_id':upstream['file_id'],'archive_sha256':upstream['sha256']},manifest,data=data)
    if sorted(found,key=lambda p:p['uuid'])!=sorted(upstream['packs'],key=lambda p:p['uuid']):fail('official pack identity differs from lock')
+ # Only committed owned runtimes may declare a reviewed extension of a pinned host.
+ # Spec and module bytes are in that runtime's versioned baseline, never a BSM hook.
+ for own in lock['owned']:
+  repo=sources[own['key']];config=read(repo/'baseline.json');owned_root=repo/config['runtime']['BP']
+  for path in sorted((owned_root/'host-extensions').glob('*.json')):
+   spec=read(path);host=by_uuid.get(spec['host_uuid'])
+   if host is None:fail('host extension target missing')
+   host_root=out/(host['side']+'_packs')/host['uuid']
+   try:proof=apply_host_extension(spec,owned_root,host_root,host['source'])
+   except (ValueError,KeyError) as e:fail('host extension rejected: '+str(e))
+   proof.update({'repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'owner_version':config['version'],'spec_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'working_candidate':working})
+   host['source']={**host['source'],'owner':'upstream_extended','reviewed_extensions':[proof]};host['files']=files_hash(host_root)
  for root in preserved:
   manifest=read(root/'manifest.json');uid=manifest['header']['uuid']
   add({'owner':'preserved','role':'unchanged_external_dependency'},manifest,root=root)

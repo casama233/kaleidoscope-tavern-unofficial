@@ -1,6 +1,6 @@
-## Current maintained baseline: 0.6.80
+## Current maintained baseline: 0.6.82
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.80** runs independently; Cookery **1.0.8** integration is optional. The companion source pairing is World Liquor **0.1.45** and Grilling **2.8.25** (Grilling retains its own Cookery dependency). Static checks, isolated BDS, client rendering and saved-world migration are separate acceptance stages. Build from canonical sources without private gameplay patch layers.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.82** runs independently; Cookery **1.0.8** integration is optional. The companion source pairing is World Liquor **0.1.46** and Grilling **2.8.30** (Grilling retains its own Cookery dependency). Static checks, isolated BDS, client rendering and saved-world migration are separate acceptance stages. Build from canonical sources without private gameplay patch layers.
 
 # Kaleidoscope Tavern (Unofficial)
 

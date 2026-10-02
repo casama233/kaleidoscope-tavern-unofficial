@@ -29,7 +29,28 @@ def check(root):
     attach=json.loads((root/'runtime/RP/attachables/shaker.attachable.json').read_text())['minecraft:attachable']['description']
     assert attach['animations']['shake_first']=='animation.kt_mixology.shake_first'
     assert any('c.is_first_person' in a.get('shake_first','') for a in attach['scripts']['animate'])
-    assert data['animation.kt_mixology.shake_first']['bones']['grip']['position'][1]=='-2.4 * math.sin(q.life_time * 1718.87338539247)'
+    from shaker_held_frames import expected,selectors
+    for name,body in expected().items():assert data[name]==body,name
+    geometry=json.loads((root/'runtime/RP/models/entity/runtime_shaker_held.geo.json').read_text())['minecraft:geometry'][0]
+    bones={b['name']:b for b in geometry['bones']}
+    assert bones['grip']['binding']=='q.item_slot_to_bone_name(c.item_slot)'
+    assert bones['grip']['pivot']==[0,24,0]
+    expected_selectors=selectors()
+    variants=list((root/'runtime/RP/attachables').glob('shaker*.attachable.json'))
+    assert len(variants)==3
+    for path in variants:
+        description=json.loads(path.read_text())['minecraft:attachable']['description']
+        assert description['scripts']['animate']==expected_selectors,path
+        assert description['geometry']['default']==geometry['description']['identifier'],path
+        assert description['animations']=={alias:'animation.kt_mixology.'+alias for alias in ('hold_first','hold_third','shake_first')},path
+        for animation in description['animations'].values():
+            assert animation in data,path
+            assert set(data[animation]['bones'])<=set(bones),path
+    immersion=(root/'runtime/BP/scripts/bedrock/immersion.js').read_text()
+    mixology=(root/'runtime/BP/scripts/bedrock/mixology.js').read_text()
+    assert 'playShakerPour' not in mixology and 'player_pour' not in immersion
+    assert not (root/'runtime/RP/animations/runtime_shaker_pour.animation.json').exists()
+    assert "cocktailEffect(block,20)" in mixology and "'bottle.fill'" in mixology
     assert not (root/'runtime/RP/entity/player.entity.json').exists()
     patch=root/'integrations/shaker-first-person/RP/animations/runtime_shaker.animation.json'
     assert not patch.exists(), 'Integrated first-person repair must not ship a shadowing overlay'

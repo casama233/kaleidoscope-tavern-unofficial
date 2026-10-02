@@ -15,10 +15,11 @@ animations=read(ROOT/'runtime/RP/animations/runtime_shaker.animation.json')['ani
 from check_shaker_first_person import check as check_shaker_first_person
 check_shaker_first_person(ROOT)
 for name,expected in baseline['unchangedShakerAnimations'].items():
-    if name != 'animation.kt_mixology.player_shake':
+    if name not in {'animation.kt_mixology.player_shake','animation.kt_mixology.hold_first','animation.kt_mixology.hold_third','animation.kt_mixology.shake_first'}:
         assert animations[name]==expected,('First-person/shared animation changed',name)
 third=animations['animation.kt_mixology.hold_third']['bones']['grip']
-assert third=={'position':[0,-1.5,-1],'rotation':[90,0,0],'scale':0.5}
+from shaker_held_frames import expected
+assert third==expected()['animation.kt_mixology.hold_third']['bones']['grip']
 identifiers=set()
 for p in (ROOT/'runtime/RP/particles').glob('*.json'):
  ident=read(p)['particle_effect']['description']['identifier'];assert ident not in identifiers,(p,'Duplicate particle ID');identifiers.add(ident)

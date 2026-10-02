@@ -25,7 +25,7 @@
       "scripts": {
         "animate": [
           {
-            "hold_first": "c.is_first_person"
+            "hold_first": "c.is_first_person && !(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)"
           },
           {
             "hold_third": "!c.is_first_person"

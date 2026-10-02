@@ -1,0 +1,441 @@
+name: Canonical validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  impact:
+    runs-on: ubuntu-latest
+    outputs:
+      runtime: ${{ steps.changes.outputs.runtime }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: changes
+        name: Plan validation from the complete change set
+        run: python3 tools/ci_impact.py
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python tools/baseline_gate.py check --release --history-base "${{ github.event.pull_request.base.sha || github.event.before }}"
+      - run: python tools/test_baseline_gate.py
+      - run: python tools/test_release_claim.py
+      - run: python tools/test_ci_impact.py
+      - run: python tools/test_check_release_cli.py
+      - name: Family update orchestration regressions
+        run: python -m unittest discover -s tools/family_update -p 'test_*.py'
+      - run: python tools/test_family_guard.py
+      - run: python tools/test_family_bundle.py
+      - run: python tools/test_family_archive_index.py
+      - run: python -m pip install nbtlib==2.0.4
+      - run: python tools/test_family_saved_world.py
+      - run: python tools/test_family_upstream_watch.py
+      - run: python tools/test_bridge_project.py
+  bridge:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Preserve canonical line endings
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Download checksum-pinned official Dash v1.2.0
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = Join-Path $env:RUNNER_TEMP 'dash.exe'
+          Invoke-WebRequest 'https://github.com/bridge-core/deno-dash-compiler/releases/download/v1.2.0/dash.exe' -OutFile $path
+          $expected = '00bb6d984f0ffb819e2fb26c1eda5768db2d6e07a979712e34e1c76c2b7594de'
+          if ((Get-FileHash $path -Algorithm SHA256).Hash.ToLower() -ne $expected) { throw 'Dash executable checksum mismatch' }
+      - name: Compile current canonical BP and RP with bridge Dash
+        shell: pwsh
+        run: |
+          & "$env:RUNNER_TEMP/dash.exe" build
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Reject omitted files, runtime rewrites, version or UUID drift
+        run: |
+          python tools/bridge_project.py --verify-export builds/dist
+          python tools/baseline_gate.py check --release
+          git diff --exit-code
+  package:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: .source-check/java
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: cedfaedf6140bae61b24afb658869b1d0e6ea1a9
+          path: .source-check/integration-baseline
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      # Package only from a clean committed tree. Following audits may update
+      # tracked JSON evidence but must not alter runtime or the built archive.
+      - name: Build public test package
+        run: python tools/build_release.py
+      - name: Reproduce storage geometry without changing packaged source
+        run: |
+          python tools/build_storage_visuals.py
+          git diff --exit-code -- runtime/
+      - name: Validate resources, scripts, guide and original Java source once
+        run: python tools/check_release.py --java-source .source-check/java --baseline .source-check/integration-baseline
+      - name: Ensure validation did not rewrite packaged source
+        run: git diff --exit-code -- runtime/
+      - name: Include matching source revision and validation evidence
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json,os,shutil
+          from pathlib import Path
+          version=json.loads(Path('release.json').read_text())['version']
+          if isinstance(version,list):version='.'.join(map(str,version))
+          Path('dist/SOURCE_COMMIT').write_text(os.environ['SOURCE_SHA']+'\n')
+          for name in (f'VALIDATION-{version}-VISUAL.json',f'VISUAL-MATERIAL-AUDIT-{version}.json',f'REPAIR-STATIC-{version}.json',f'STORAGE-VALIDATION-{version}.json',f'MOTION-STATIC-{version}.json',f'LAUNCH-VALIDATION-{version}.json'):
+              path=Path('docs')/name
+              if path.exists():shutil.copy2(path,Path('dist')/name)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tavern-public-beta
+          path: dist/
+  catalog:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern-src
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: d0866bbdb4bfdb89b87f81acbc0d7b20b8c88e17
+          path: world-liquor-src
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Record exact sources
+        run: |
+          mkdir -p evidence
+          git -C tavern-src rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C world-liquor-src rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Paired creative catalog checks (not client rendering)
+        working-directory: tavern-src
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/world-liquor-src
+        run: |
+          set -o pipefail
+          python tools/creative/catalog.py --peer ../world-liquor-src | tee ../evidence/catalog.json
+          python tools/creative/test_catalog.py 2>&1 | tee ../evidence/creative-tests.log
+          python tools/creative/catalog.py --write
+          python tools/creative/catalog.py --root ../world-liquor-src --write
+          python ../world-liquor-src/tools/build_effect_names.py --check
+          git diff --exit-code -- runtime/
+          git -C ../world-liquor-src diff --exit-code -- runtime/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: creative-catalog-evidence
+          path: evidence/
+          retention-days: 14
+  audit:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: bedrock
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: KaleidoscopeMods/KaleidoscopeTavern
+          ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
+          path: java
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned image validation dependency
+        run: python -m pip install Pillow==11.3.0
+      - name: Collect hash-verified constructor references locally
+        run: python bedrock/tools/effects/collect_reference.py vanilla-reference
+      - name: Record source revisions
+        run: |
+          mkdir -p evidence
+          printf 'Bedrock: ' > evidence/SOURCE_COMMITS.txt
+          git -C bedrock rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+          printf 'Java: ' >> evidence/SOURCE_COMMITS.txt
+          git -C java rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+      - name: Reject unsupported Molang assignment syntax before numerical testing
+        working-directory: bedrock
+        run: python tools/effects/test_molang_syntax.py
+      - name: Run all effect regressions without double-counting imported tap tests
+        working-directory: bedrock
+        run: |
+          set -o pipefail
+          tests=(tools/effects/effects-regression.test.mjs)
+          if test -f tools/effects/interaction-regression.test.mjs; then
+            tests+=(tools/effects/interaction-regression.test.mjs)
+          fi
+          node --experimental-vm-modules --test "${tests[@]}" | tee ../evidence/effect-tests.txt
+          git diff --exit-code -- runtime/
+      - name: Preserve only validation evidence, not complete game or font archives
+        if: always()
+        run: |
+          mkdir -p evidence
+          test ! -f vanilla-reference/PROVENANCE.json || cp vanilla-reference/PROVENANCE.json evidence/
+          for report in bedrock/docs/EFFECTS-REPORT-FOLLOWUP-20260928.md bedrock/docs/EFFECTS-PARITY-AUDIT-20260928.md; do
+            test ! -f "$report" || cp "$report" evidence/
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Effects-parity-validation
+          path: evidence/
+          retention-days: 14
+  efficiency:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-tavern-unofficial
+          ref: 4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7
+          path: .efficiency-baseline
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify source review chain and original baseline
+        run: python tools/efficiency/reference.py .efficiency-baseline
+      - name: Production adapters with deterministic native API doubles
+        env:
+          TAVERN_BASELINE_ROOT: .efficiency-baseline
+        run: node --experimental-loader ./tools/efficiency/mock-loader.mjs --test tools/efficiency/*.test.mjs
+      - name: Compare the same scenes against pinned before and candidate
+        run: |
+          mkdir -p efficiency-evidence
+          node --experimental-loader ./tools/efficiency/mock-loader.mjs tools/efficiency/measure.mjs .efficiency-baseline > efficiency-evidence/before.json
+          node --experimental-loader ./tools/efficiency/mock-loader.mjs tools/efficiency/measure.mjs . > efficiency-evidence/after.json
+          node tools/efficiency/compare-counts.mjs efficiency-evidence/before.json efficiency-evidence/after.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: efficiency-api-counts
+          path: efficiency-evidence/
+  foundation:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          # Reviewed 0.1.45 preserves color/source contracts and supports optional Cookery for Tavern 0.6.80.
+          # Pin exact peer bytes, not an obsolete release or a moving branch.
+          ref: d0866bbdb4bfdb89b87f81acbc0d7b20b8c88e17
+          path: liquor
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record exact integration inputs
+        run: |
+          mkdir -p evidence
+          git -C tavern rev-parse HEAD > evidence/TAVERN_COMMIT
+          git -C liquor rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Cross-pack script regressions (not Minecraft client or BDS)
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -o pipefail
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs tools/drink-source-labels.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
+      - name: Simple effect bar and paired name checks (no client rendering)
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -o pipefail
+          python ../liquor/tools/test_effect_names.py
+          python ../liquor/tools/build_effect_names.py --check
+          node --test tools/effect-bar.test.mjs tools/grass-stealth.test.mjs tools/java-parity.test.mjs 2>&1 | tee ../evidence/effect-bar-tests.tap
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shared-foundation-regressions
+          path: evidence/
+          retention-days: 14
+  glassware-hit-basis:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: tavern
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: 8a70ecdf2ece9d5f9d9717ad8919ec25f0a2c04c
+          path: liquor
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Hit geometry and display mapping (not BDS/client acceptance)
+        working-directory: tavern
+        run: |
+          set -euo pipefail
+          mkdir -p ../evidence
+          git rev-parse HEAD > ../evidence/TAVERN_COMMIT
+          git -C ../liquor rev-parse HEAD > ../evidence/LIQUOR_COMMIT
+          node --test tools/glassware/hit-basis.test.mjs tools/glassware/aim-hit.test.mjs tools/glassware/block-hit.test.mjs 2>&1 | tee ../evidence/glassware-hit-regressions.tap
+          python tools/check_glassware_slots.py --report ../evidence/glassware-world-slots.json
+          LIQUOR_SOURCE=../liquor node --experimental-loader ./tools/pickup/mock-loader.mjs --test --test-name-pattern='glassware holder world slot round trip' tools/glassware/storage-routing.test.mjs 2>&1 | tee ../evidence/glassware-holder-routing.tap
+          node tools/check_surface_repairs.mjs | tee ../evidence/surface-mapping.json
+      - name: Event-to-inventory counterexamples and complete canonical fix
+        working-directory: tavern
+        env:
+          LIQUOR_SOURCE: ${{ github.workspace }}/liquor
+        run: |
+          set -euo pipefail
+          python tools/glassware/check-storage-counterfactual.py --evidence ../evidence/counterfactual
+          git diff --exit-code -- runtime/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: glassware-hit-script-regressions
+          path: evidence/
+          retention-days: 14
+  mechanics:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test the actual registered callback and ingredient rules
+        run: |
+          set -euo pipefail
+          mkdir -p test-results
+          node --experimental-vm-modules --test tools/mechanics/mechanics-regression.test.mjs | tee test-results/mechanics.tap
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: barrel-mechanics-test-results
+          path: test-results/
+          retention-days: 14
+  scripts:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pure pickup rules
+        run: node --test tools/pickup/core.test.mjs
+      - name: Current adapter integration against deterministic doubles (not native client tests)
+        run: node --experimental-loader ./tools/pickup/mock-loader.mjs --test tools/pickup/adapters.test.mjs
+      - name: Verify pinned sound content
+        run: python tools/pickup/check_audio.py
+  native-persistence:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Native isolated inventory save/restart, no player sessions
+        run: python tools/pickup/run_native_smoke.py --work "$RUNNER_TEMP/pickup-native"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pickup-native-persistence-evidence
+          path: |
+            ${{ runner.temp }}/pickup-native/stage-*.log
+            ${{ runner.temp }}/pickup-native/native-storage-evidence.json
+  tap-carriers:
+    needs: impact
+    if: needs.impact.outputs.runtime == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Script transactions and destruction callbacks (not BDS/client acceptance)
+        run: |
+          set -o pipefail
+          node --experimental-vm-modules --test tools/tap/tap-regression.test.mjs 2>&1 | tee tap-regressions.tap
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tap-carrier-script-regressions
+          path: tap-regressions.tap
+          retention-days: 14

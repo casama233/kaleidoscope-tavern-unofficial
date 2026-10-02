@@ -49,17 +49,24 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
    lock['order'][label].insert(0,uid)
  if out.exists():fail('output exists; never replace another candidate')
  out.mkdir(parents=True);records=[];by_uuid={}
+ # Index every candidate archive once. Read and recheck the selected bytes at
+ # use time so a concurrent file replacement cannot exploit the index.
+ archive_index={}
+ for archive in dict.fromkeys(archives):
+  digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+  archive_index.setdefault(digest,[]).append(archive)
  def add(source,manifest,data=None,root=None):
   uid=manifest['header']['uuid'];side='resource' if any(x['type']=='resources' for x in manifest['modules']) else 'behavior'
   if uid in by_uuid:fail('duplicate pack UUID '+uid)
   dest=out/(side+'_packs')/uid
   if root:
    before=files_hash(root);shutil.copytree(root,dest)
-   if files_hash(root)!=before or files_hash(dest)!=before:fail('source changed during candidate copy')
+   copied=files_hash(dest)
+   if files_hash(root)!=before or copied!=before:fail('source changed during candidate copy')
   else:
    for name,b in data.items():
     target=dest/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(b)
-  row={'uuid':uid,'side':side,'version':manifest['header']['version'],'source':source,'dependencies':manifest.get('dependencies',[]),'files':files_hash(dest)};records.append(row);by_uuid[uid]=row
+  row={'uuid':uid,'side':side,'version':manifest['header']['version'],'source':source,'dependencies':manifest.get('dependencies',[]),'files':copied if root else files_hash(dest)};records.append(row);by_uuid[uid]=row
  for own in lock['owned']:
   repo=sources[own['key']]
   config=read(repo/'baseline.json')
@@ -69,9 +76,11 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
   for side,relative in config['runtime'].items():
    root=repo/relative;m=read(root/'manifest.json');add({'owner':'owned','repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'working_candidate':working},m,root=root)
  for upstream in lock['upstream']:
-  matches=[p for p in archives if hashlib.sha256(p.read_bytes()).hexdigest()==upstream['sha256']]
+  matches=archive_index.get(upstream['sha256'],[])
   if not matches:fail('missing hash-pinned upstream archive: '+upstream['name'])
-  with zipfile.ZipFile(matches[0]) as z:
+  archive_bytes=matches[0].read_bytes()
+  if hashlib.sha256(archive_bytes).hexdigest()!=upstream['sha256']:fail('upstream archive changed after indexing: '+upstream['name'])
+  with zipfile.ZipFile(io.BytesIO(archive_bytes)) as z:
    found=[]
    for manifest,data in packs(z):
     header=manifest['header'];found.append({'uuid':header['uuid'],'version':header['version']});add({'owner':'upstream','project_id':upstream['project_id'],'file_id':upstream['file_id'],'archive_sha256':upstream['sha256']},manifest,data=data)

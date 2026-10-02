@@ -1,6 +1,9 @@
 /** Readable, finite actionbar packets. Never transport resource paths in HUD text. */
 export const HUD_PREFIX='§r[KT] ';
 export const HUD_REFRESH_TICKS=10;
+// Java exposes barrel status through optional Jade, not the base shaker overlay.
+export const BARREL_HUD_SHOW_TAG='kaleidoscope_tavern:show_barrel_hud';
+export const barrelHudEnabled=player=>player.hasTag?.(BARREL_HUD_SHOW_TAG)===true;
 const COLORS=[0xff55ff,0x5555ff,0xffaa00,0x55ff55,0xffff55,0xff5555,0xffffff];
 const CODES=['7','d','9','6','a','e','c','f'];
 export function slotColorIndex(slot){

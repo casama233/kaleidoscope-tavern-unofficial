@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import path from 'node:path';
-import {visibleEffects,effectTime,effectLevel,effectBarMessage,createEffectBar,EFFECT_BAR_HIDE_TAG} from '../runtime/BP/scripts/core/effect-bar.js';
+import {visibleEffects,effectTime,effectLevel,effectBarMessage,createEffectBar,EFFECT_BAR_HIDE_TAG,EFFECT_BAR_SHOW_TAG} from '../runtime/BP/scripts/core/effect-bar.js';
 import {addStatus,advanceStatus,activeStatus,CUSTOM_IMPLEMENTED,CUSTOM_INSTANT} from '../runtime/BP/scripts/core/custom-effects.js';
 import {installContent} from '../runtime/BP/scripts/core/extension-content.js';
 import {normalizeFoundation} from '../runtime/BP/scripts/core/extension-foundation.js';
@@ -12,11 +12,18 @@ const row=(id=A,ticks=1200,amplifier=0)=>({id,ticks,amplifier});
 const state=(...entries)=>({schema:1,entries});
 const text=message=>message.rawtext.map(r=>r.text??`<${r.translate}>`).join('').replace(/§./g,'');
 function fixture(options={}){
- const a={id:'a',hasTag:()=>false},b={id:'b',hasTag:()=>false},states=new Map([[a.id,state(row())],[b.id,state(row(B,800,1))]]),writes=[],errors=[];
+ const a={id:'a',hasTag:t=>t===EFFECT_BAR_SHOW_TAG},b={id:'b',hasTag:t=>t===EFFECT_BAR_SHOW_TAG},states=new Map([[a.id,state(row())],[b.id,state(row(B,800,1))]]),writes=[],errors=[];
  const bar=createEffectBar({status:p=>states.get(p.id),show:(p,m)=>writes.push({id:p.id,m}),onError:e=>errors.push(e),...options});
  return {a,b,states,writes,errors,bar};
 }
 test('empty status has no packet',()=>assert.equal(effectBarMessage(visibleEffects(state())),undefined));
+test('active effects remain silent by default, without reading or changing host state',()=>{
+ let reads=0;const f=fixture({status:()=>{reads++;return state(row());}});f.a.hasTag=()=>false;
+ for(let tick=0;tick<1200;tick+=20)f.bar.tick([f.a],tick);
+ assert.equal(f.writes.length,0);assert.equal(reads,0);assert.deepEqual(f.states.get('a'),state(row()));
+ f.a.hasTag=t=>t===EFFECT_BAR_SHOW_TAG;f.bar.tick([f.a],1200);assert.equal(f.writes.length,1);
+ f.a.hasTag=()=>false;f.bar.tick([f.a],1220);assert.equal(f.writes.length,1);
+});
 test('native effects stay in native HUD',()=>assert.deepEqual(visibleEffects(state(row('minecraft:speed'))),[]));
 test('host and external effects share one bar',()=>assert.equal(visibleEffects(state(row(A),row(B))).length,2));
 test('only active amplifier shown; no duplicate icon for weaker queued layer',()=>{

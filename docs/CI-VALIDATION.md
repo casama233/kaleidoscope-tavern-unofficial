@@ -24,7 +24,7 @@ are covered by the unconditional family-update regression discovery. New family
 tools that are not registered select all suites until their coverage is reviewed.
 
 `baseline` always checks the canonical release/history lock and runs baseline,
-family guard/bundle/saved-world/upstream-watch, CI-impact and bridge-project
+family guard/bundle/saved-world/upstream-watch, CI-impact, release-CLI and bridge-project
 regressions. It discovers `tools/family_update/test_*.py` when the orchestrator is
 present. This small suite is retained even for prose changes.
 
@@ -32,10 +32,24 @@ The existing check job IDs are preserved: `baseline`, `bridge`, `package`,
 `catalog`, `audit`, `efficiency`, `foundation`, `glassware-hit-basis`, `mechanics`,
 `scripts`, `native-persistence` and `tap-carriers`. Runtime jobs use explicit
 job conditions, so an inexpensive change completes with skipped jobs instead of
-leaving required checks pending behind workflow path filters. The original
-commands, pinned Java/peer/baseline revisions and evidence uploads remain in
-their corresponding jobs. Linux project guards and Windows Dash compilation
-remain separate checks of different environments.
+leaving required checks pending behind workflow path filters. Pinned
+Java/peer/baseline revisions and evidence uploads remain in their corresponding
+jobs. Identical checks have one owner:
+
+- `baseline` owns the bridge guard regressions, whose current-project test runs
+  the project checks. Windows still downloads checksum-pinned Dash, compiles,
+  checks the complete export (including the project checks), and rejects drift.
+- `catalog` owns the paired creative catalog test; `foundation` retains the
+  distinct cross-pack adapter and effect tests.
+- `glassware-hit-basis` owns the pure hit-basis tests; `scripts` retains pickup
+  core and adapter tests.
+- `package` reproduces storage geometry and rejects drift, then runs
+  `check_release.py --java-source ... --baseline ...` once. That aggregate
+  command passes the pins to both source checks and writes the same storage and
+  launch evidence. Its no-argument local entrypoint still runs every check.
+
+The effect-bar test in `foundation` remains because its `LIQUOR_SOURCE` enables
+a cross-pack case that the standalone package check does not exercise.
 
 To inspect a prospective change locally:
 

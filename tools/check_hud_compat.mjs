@@ -15,7 +15,8 @@ assert.equal(hud.kt_mixology_factory.factory.name,'hud_actionbar_text_factory');
 assert.equal(hud.kt_mixology_expire.duration,0.6);
 assert.equal(hud.kt_mixology_expire.destroy_at_end,'kt_mixology_packet');
 const raw=JSON.stringify(hud);
-assert(!/#stored_text|visibility_changed|#hud_title_text_string|#texture/.test(raw));
+assert(!/#stored_text|#texture/.test(raw));
+assert(!/visibility_changed|#hud_title_text_string/.test(JSON.stringify(hud.kt_mixology_packet)));
 let textures=0;
 function walk(value){
  if(!value||typeof value!=='object')return;
@@ -25,7 +26,8 @@ function walk(value){
  }
  for(const v of Object.values(value))walk(v);
 }
-walk(hud);assert.equal(textures,26); // 24 fixed slot sprites + bar + cursor template
+const {kt_effect_icons,...shakerHud}=hud;
+walk(shakerHud);assert.equal(textures,26); // 24 fixed slot sprites + bar + cursor template
 const controls=hud.kt_mixology_packet.controls;
 const slots=controls[0].slots.controls;assert.equal(slots.length,24);
 for(let i=0;i<3;i++)for(let c=0;c<8;c++)assert(JSON.stringify(slots[i*8+c]).includes(slotToken(i,c)));

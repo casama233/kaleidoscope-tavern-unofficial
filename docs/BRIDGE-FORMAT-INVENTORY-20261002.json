@@ -1,0 +1,1269 @@
+{
+  "schema": 1,
+  "audit_date_utc": "2026-10-02",
+  "purpose": "Read-only canonical runtime inventory and editor-data coverage diagnostic",
+  "scope": {
+    "all_runtime_paths_and_git_blobs_rechecked": true,
+    "repository_source_executed": false,
+    "runtime_modified": false,
+    "all_files_opened_in_gui": false,
+    "json_schema_validation_performed": false,
+    "minecraft_engine_compatibility_validated": false
+  },
+  "method": [
+    "Enumerate only BP/RP roots named by exact-head baseline.json and config.json",
+    "Top-level type means first directory relative to pack root; root files use <root>",
+    "Parse .json files as UTF-8 JSON and inventory top-level format_version only",
+    "Compare only three-component numeric version strings with bundled format catalog maximum",
+    "Manifest integer format_version 2 belongs to a separate schema and is not compared with game format versions",
+    "Above-catalog counts identify editor-data coverage exposure, not invalid content or a schema pass"
+  ],
+  "editor_reference": {
+    "version": "2.7.54",
+    "source_commit": "d60e0227c65a15678e186193fb68bba38181ffa7",
+    "bundle_source": "https://github.com/bridge-core/editor/blob/v2.7.54/public/packages.zip",
+    "bundle_git_blob_sha1": "e7fced74f498f67b06cc57d817e57a29e3055231",
+    "bundle_sha256": "b91a49ed9632c3bfca128278503fcf7c50ff0f3d7ed6146fe58cab3ccad5541c",
+    "catalog_path_in_bundle": "packages/minecraftBedrock/formatVersions.json",
+    "catalog_current_stable": "1.21.130",
+    "catalog_maximum": "1.26.0",
+    "contains_target_1_26_50": false
+  },
+  "projects": [
+    {
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "source_commit": "942ecc10e436fd915ebd9c6313ed83a2b8425df1",
+      "version": "0.6.87",
+      "target_version": "1.26.50",
+      "canonical_release_mcaddon_sha256": "dd36a73e43164ed3891104d67e7e9bab4719fa14ad910cb48d4933c317e50492",
+      "packs": {
+        "BP": {
+          "source_root": "runtime/BP",
+          "counts": {
+            "engine_format_above_catalog_max_files": 416,
+            "format_version_1_26_50_files": 416,
+            "json_files": 642,
+            "json_parse_errors": 0,
+            "json_parsed": 642,
+            "json_with_format_version": 639,
+            "json_without_format_version": 3,
+            "runtime_files": 798
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 5,
+              "extensions": {
+                ".json": 1,
+                ".md": 1,
+                ".png": 1,
+                ".txt": 1,
+                "<no_extension>": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "blocks": {
+              "files": 160,
+              "extensions": {
+                ".json": 160
+              },
+              "json_files": 160,
+              "format_versions": {
+                "1.26.50": 160
+              },
+              "format_version_1_26_50_files": 160,
+              "engine_format_above_catalog_max_files": 160
+            },
+            "entities": {
+              "files": 58,
+              "extensions": {
+                ".json": 58
+              },
+              "json_files": 58,
+              "format_versions": {
+                "1.21.0": 20,
+                "1.21.80": 36,
+                "1.26.0": 1,
+                "1.26.50": 1
+              },
+              "format_version_1_26_50_files": 1,
+              "engine_format_above_catalog_max_files": 1
+            },
+            "feature_rules": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.40": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "features": {
+              "files": 2,
+              "extensions": {
+                ".json": 2
+              },
+              "json_files": 2,
+              "format_versions": {
+                "1.21.60": 2
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "functions": {
+              "files": 13,
+              "extensions": {
+                ".mcfunction": 13
+              },
+              "json_files": 0,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "item_catalog": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.90": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "items": {
+              "files": 255,
+              "extensions": {
+                ".json": 255
+              },
+              "json_files": 255,
+              "format_versions": {
+                "1.26.50": 255
+              },
+              "format_version_1_26_50_files": 255,
+              "engine_format_above_catalog_max_files": 255
+            },
+            "loot_tables": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "recipes": {
+              "files": 161,
+              "extensions": {
+                ".json": 161
+              },
+              "json_files": 161,
+              "format_versions": {
+                "1.20.10": 161
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "scripts": {
+              "files": 136,
+              "extensions": {
+                ".js": 136
+              },
+              "json_files": 0,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "tags": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "texts": {
+              "files": 4,
+              "extensions": {
+                ".json": 1,
+                ".lang": 3
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.20.10": 161,
+            "1.21.0": 20,
+            "1.21.40": 1,
+            "1.21.60": 2,
+            "1.21.80": 36,
+            "1.21.90": 1,
+            "1.26.0": 1,
+            "1.26.50": 416,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+            "version": [
+              0,
+              6,
+              87
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [
+              {
+                "module_name": "@minecraft/server",
+                "version": "2.7.0"
+              },
+              {
+                "module_name": "@minecraft/server-ui",
+                "version": "2.0.0"
+              }
+            ],
+            "pack_dependencies": [
+              {
+                "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+                "version": [
+                  0,
+                  6,
+                  87
+                ]
+              }
+            ]
+          }
+        },
+        "RP": {
+          "source_root": "runtime/RP",
+          "counts": {
+            "engine_format_above_catalog_max_files": 0,
+            "format_version_1_26_50_files": 0,
+            "json_files": 1383,
+            "json_parse_errors": 0,
+            "json_parsed": 1383,
+            "json_with_format_version": 1378,
+            "json_without_format_version": 5,
+            "runtime_files": 3126
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 9,
+              "extensions": {
+                ".json": 2,
+                ".md": 2,
+                ".png": 1,
+                ".txt": 1,
+                "<no_extension>": 3
+              },
+              "json_files": 2,
+              "format_versions": {
+                "1.19.30": 1,
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "animation_controllers": {
+              "files": 2,
+              "extensions": {
+                ".json": 2
+              },
+              "json_files": 2,
+              "format_versions": {
+                "1.10.0": 2
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "animations": {
+              "files": 11,
+              "extensions": {
+                ".json": 11
+              },
+              "json_files": 11,
+              "format_versions": {
+                "1.10.0": 1,
+                "1.8.0": 10
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "attachables": {
+              "files": 3,
+              "extensions": {
+                ".json": 3
+              },
+              "json_files": 3,
+              "format_versions": {
+                "1.21.30": 3
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "entity": {
+              "files": 125,
+              "extensions": {
+                ".json": 125
+              },
+              "json_files": 125,
+              "format_versions": {
+                "1.10.0": 125
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "font": {
+              "files": 4,
+              "extensions": {
+                ".png": 2,
+                ".txt": 2
+              },
+              "json_files": 0,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "materials": {
+              "files": 1,
+              "extensions": {
+                ".material": 1
+              },
+              "json_files": 0,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "models": {
+              "files": 675,
+              "extensions": {
+                ".json": 675
+              },
+              "json_files": 675,
+              "format_versions": {
+                "1.12.0": 7,
+                "1.21.0": 668
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "particles": {
+              "files": 108,
+              "extensions": {
+                ".json": 108
+              },
+              "json_files": 108,
+              "format_versions": {
+                "1.10.0": 108
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "render_controllers": {
+              "files": 16,
+              "extensions": {
+                ".json": 16
+              },
+              "json_files": 16,
+              "format_versions": {
+                "1.8.0": 16
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "sounds": {
+              "files": 24,
+              "extensions": {
+                ".json": 1,
+                ".ogg": 23
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.14.0": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "texts": {
+              "files": 6,
+              "extensions": {
+                ".json": 1,
+                ".lang": 5
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "textures": {
+              "files": 2141,
+              "extensions": {
+                ".json": 438,
+                ".mcmeta": 1,
+                ".png": 1701,
+                ".tga": 1
+              },
+              "json_files": 438,
+              "format_versions": {
+                "1.16.100": 435
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "ui": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.10.0": 236,
+            "1.12.0": 7,
+            "1.14.0": 1,
+            "1.16.100": 435,
+            "1.19.30": 1,
+            "1.21.0": 668,
+            "1.21.30": 3,
+            "1.8.0": 26,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+            "version": [
+              0,
+              6,
+              87
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [],
+            "pack_dependencies": []
+          }
+        }
+      },
+      "counts": {
+        "engine_format_above_catalog_max_files": 416,
+        "format_version_1_26_50_files": 416,
+        "json_files": 2025,
+        "json_parse_errors": 0,
+        "json_parsed": 2025,
+        "json_with_format_version": 2017,
+        "json_without_format_version": 8,
+        "runtime_files": 3924
+      }
+    },
+    {
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "source_commit": "5aaf5a2482ec92a68a83e94fd7f1ef9b5776ffc8",
+      "version": "0.1.51",
+      "target_version": "1.26.50",
+      "canonical_release_mcaddon_sha256": "fe27a55c5d7447b0734dcb2d7b913bc83fd73eae3748203cc4518c7d2c06a9a7",
+      "packs": {
+        "BP": {
+          "source_root": "runtime/BP",
+          "counts": {
+            "engine_format_above_catalog_max_files": 217,
+            "format_version_1_26_50_files": 217,
+            "json_files": 279,
+            "json_parse_errors": 0,
+            "json_parsed": 279,
+            "json_with_format_version": 277,
+            "json_without_format_version": 2,
+            "runtime_files": 305
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 2,
+              "extensions": {
+                ".json": 1,
+                ".png": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "blocks": {
+              "files": 60,
+              "extensions": {
+                ".json": 60
+              },
+              "json_files": 60,
+              "format_versions": {
+                "1.26.50": 60
+              },
+              "format_version_1_26_50_files": 60,
+              "engine_format_above_catalog_max_files": 60
+            },
+            "entities": {
+              "files": 20,
+              "extensions": {
+                ".json": 20
+              },
+              "json_files": 20,
+              "format_versions": {
+                "1.21.0": 11,
+                "1.21.80": 8,
+                "1.26.50": 1
+              },
+              "format_version_1_26_50_files": 1,
+              "engine_format_above_catalog_max_files": 1
+            },
+            "item_catalog": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.90": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "items": {
+              "files": 156,
+              "extensions": {
+                ".json": 156
+              },
+              "json_files": 156,
+              "format_versions": {
+                "1.26.50": 156
+              },
+              "format_version_1_26_50_files": 156,
+              "engine_format_above_catalog_max_files": 156
+            },
+            "loot_tables": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "recipes": {
+              "files": 39,
+              "extensions": {
+                ".json": 39
+              },
+              "json_files": 39,
+              "format_versions": {
+                "1.20.10": 39
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "scripts": {
+              "files": 22,
+              "extensions": {
+                ".js": 22
+              },
+              "json_files": 0,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "texts": {
+              "files": 4,
+              "extensions": {
+                ".json": 1,
+                ".lang": 3
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.20.10": 39,
+            "1.21.0": 11,
+            "1.21.80": 8,
+            "1.21.90": 1,
+            "1.26.50": 217,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "355ffdfc-50e6-5a33-a126-4d78ab955b2b",
+            "version": [
+              0,
+              1,
+              51
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [
+              {
+                "module_name": "@minecraft/server",
+                "version": "2.7.0"
+              }
+            ],
+            "pack_dependencies": [
+              {
+                "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+                "version": [
+                  0,
+                  6,
+                  87
+                ]
+              },
+              {
+                "uuid": "a610b357-ba70-5a2f-bca5-5a7a8a0fb2a8",
+                "version": [
+                  0,
+                  1,
+                  51
+                ]
+              }
+            ]
+          }
+        },
+        "RP": {
+          "source_root": "runtime/RP",
+          "counts": {
+            "engine_format_above_catalog_max_files": 0,
+            "format_version_1_26_50_files": 0,
+            "json_files": 148,
+            "json_parse_errors": 0,
+            "json_parsed": 148,
+            "json_with_format_version": 143,
+            "json_without_format_version": 5,
+            "runtime_files": 510
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 3,
+              "extensions": {
+                ".json": 2,
+                ".png": 1
+              },
+              "json_files": 2,
+              "format_versions": {
+                "1.19.30": 1,
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "entity": {
+              "files": 20,
+              "extensions": {
+                ".json": 20
+              },
+              "json_files": 20,
+              "format_versions": {
+                "1.10.0": 20
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "models": {
+              "files": 90,
+              "extensions": {
+                ".json": 90
+              },
+              "json_files": 90,
+              "format_versions": {
+                "1.16.0": 59,
+                "1.21.0": 31
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "particles": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.10.0": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "render_controllers": {
+              "files": 18,
+              "extensions": {
+                ".json": 18
+              },
+              "json_files": 18,
+              "format_versions": {
+                "1.8.0": 18
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "sounds": {
+              "files": 7,
+              "extensions": {
+                ".json": 1,
+                ".ogg": 6
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.14.0": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "texts": {
+              "files": 4,
+              "extensions": {
+                ".json": 1,
+                ".lang": 3
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "textures": {
+              "files": 365,
+              "extensions": {
+                ".json": 13,
+                ".png": 352
+              },
+              "json_files": 13,
+              "format_versions": {
+                "1.16.100": 11
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "ui": {
+              "files": 2,
+              "extensions": {
+                ".json": 2
+              },
+              "json_files": 2,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.10.0": 21,
+            "1.14.0": 1,
+            "1.16.0": 59,
+            "1.16.100": 11,
+            "1.19.30": 1,
+            "1.21.0": 31,
+            "1.8.0": 18,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "a610b357-ba70-5a2f-bca5-5a7a8a0fb2a8",
+            "version": [
+              0,
+              1,
+              51
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [],
+            "pack_dependencies": [
+              {
+                "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+                "version": [
+                  0,
+                  6,
+                  87
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "counts": {
+        "engine_format_above_catalog_max_files": 217,
+        "format_version_1_26_50_files": 217,
+        "json_files": 427,
+        "json_parse_errors": 0,
+        "json_parsed": 427,
+        "json_with_format_version": 420,
+        "json_without_format_version": 7,
+        "runtime_files": 815
+      }
+    },
+    {
+      "repository": "casama233/kaleidoscope-grilling-unofficial",
+      "source_commit": "c29861969b786437de02c151c3856579126b775d",
+      "version": "2.8.40",
+      "target_version": "1.26.50",
+      "canonical_release_mcaddon_sha256": "82f01b2dec8478336a8538fe43c5d30447f396f6743f2ed39135eff0ad4c01f5",
+      "packs": {
+        "BP": {
+          "source_root": "projects/grilling/gameplay_core/behavior_pack",
+          "counts": {
+            "engine_format_above_catalog_max_files": 179,
+            "format_version_1_26_50_files": 21,
+            "json_files": 330,
+            "json_parse_errors": 0,
+            "json_parsed": 330,
+            "json_with_format_version": 283,
+            "json_without_format_version": 47,
+            "runtime_files": 504
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "blocks": {
+              "files": 23,
+              "extensions": {
+                ".json": 23
+              },
+              "json_files": 23,
+              "format_versions": {
+                "1.26.30": 4,
+                "1.26.50": 19
+              },
+              "format_version_1_26_50_files": 19,
+              "engine_format_above_catalog_max_files": 23
+            },
+            "entities": {
+              "files": 7,
+              "extensions": {
+                ".json": 7
+              },
+              "json_files": 7,
+              "format_versions": {
+                "1.21.0": 3,
+                "1.26.0": 4
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "feature_rules": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.40": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "features": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.20": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "host-extensions": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "item_catalog": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.21.60": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "items": {
+              "files": 156,
+              "extensions": {
+                ".json": 156
+              },
+              "json_files": 156,
+              "format_versions": {
+                "1.26.30": 154,
+                "1.26.50": 2
+              },
+              "format_version_1_26_50_files": 2,
+              "engine_format_above_catalog_max_files": 156
+            },
+            "loot_tables": {
+              "files": 45,
+              "extensions": {
+                ".json": 45
+              },
+              "json_files": 45,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "recipes": {
+              "files": 93,
+              "extensions": {
+                ".json": 93
+              },
+              "json_files": 93,
+              "format_versions": {
+                "1.20.10": 93
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "scripts": {
+              "files": 175,
+              "extensions": {
+                ".js": 174,
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.20.10": 93,
+            "1.21.0": 3,
+            "1.21.20": 1,
+            "1.21.40": 1,
+            "1.21.60": 1,
+            "1.26.0": 4,
+            "1.26.30": 158,
+            "1.26.50": 21,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "c68005c5-23ff-54e8-a3ff-da6349ad43c2",
+            "version": [
+              2,
+              8,
+              40
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [
+              {
+                "module_name": "@minecraft/server",
+                "version": "2.9.0"
+              },
+              {
+                "module_name": "@minecraft/server-ui",
+                "version": "2.2.0"
+              }
+            ],
+            "pack_dependencies": [
+              {
+                "uuid": "bbbd2d60-52e5-53a6-8b9a-c09b0f516389",
+                "version": [
+                  2,
+                  8,
+                  40
+                ]
+              },
+              {
+                "uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
+                "version": [
+                  1,
+                  0,
+                  8
+                ]
+              }
+            ]
+          }
+        },
+        "RP": {
+          "source_root": "projects/grilling/gameplay_core/resource_pack",
+          "counts": {
+            "engine_format_above_catalog_max_files": 1,
+            "format_version_1_26_50_files": 0,
+            "json_files": 1007,
+            "json_parse_errors": 0,
+            "json_parsed": 1007,
+            "json_with_format_version": 1003,
+            "json_without_format_version": 4,
+            "runtime_files": 1659
+          },
+          "top_level_types": {
+            "<root>": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "int:2": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "animations": {
+              "files": 17,
+              "extensions": {
+                ".json": 17
+              },
+              "json_files": 17,
+              "format_versions": {
+                "1.8.0": 17
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "attachables": {
+              "files": 106,
+              "extensions": {
+                ".json": 106
+              },
+              "json_files": 106,
+              "format_versions": {
+                "1.26.0": 106
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "entity": {
+              "files": 7,
+              "extensions": {
+                ".json": 7
+              },
+              "json_files": 7,
+              "format_versions": {
+                "1.10.0": 7
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "models": {
+              "files": 861,
+              "extensions": {
+                ".json": 861
+              },
+              "json_files": 861,
+              "format_versions": {
+                "1.12.0": 2,
+                "1.16.0": 819,
+                "1.21.0": 38,
+                "1.21.10": 2
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "particles": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.26.10": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 1
+            },
+            "render_controllers": {
+              "files": 9,
+              "extensions": {
+                ".json": 9
+              },
+              "json_files": 9,
+              "format_versions": {
+                "1.8.0": 9
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "sounds": {
+              "files": 18,
+              "extensions": {
+                ".json": 1,
+                ".ogg": 17
+              },
+              "json_files": 1,
+              "format_versions": {
+                "1.14.0": 1
+              },
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "texts": {
+              "files": 4,
+              "extensions": {
+                ".json": 1,
+                ".lang": 3
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "textures": {
+              "files": 634,
+              "extensions": {
+                ".json": 2,
+                ".png": 632
+              },
+              "json_files": 2,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            },
+            "ui": {
+              "files": 1,
+              "extensions": {
+                ".json": 1
+              },
+              "json_files": 1,
+              "format_versions": {},
+              "format_version_1_26_50_files": 0,
+              "engine_format_above_catalog_max_files": 0
+            }
+          },
+          "format_versions": {
+            "1.10.0": 7,
+            "1.12.0": 2,
+            "1.14.0": 1,
+            "1.16.0": 819,
+            "1.21.0": 38,
+            "1.21.10": 2,
+            "1.26.0": 106,
+            "1.26.10": 1,
+            "1.8.0": 26,
+            "int:2": 1
+          },
+          "json_parse_errors": [],
+          "manifest": {
+            "format_version": 2,
+            "uuid": "bbbd2d60-52e5-53a6-8b9a-c09b0f516389",
+            "version": [
+              2,
+              8,
+              40
+            ],
+            "min_engine_version": [
+              1,
+              26,
+              50
+            ],
+            "script_api_dependencies": [],
+            "pack_dependencies": [
+              {
+                "uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
+                "version": [
+                  1,
+                  0,
+                  8
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "counts": {
+        "engine_format_above_catalog_max_files": 180,
+        "format_version_1_26_50_files": 21,
+        "json_files": 1337,
+        "json_parse_errors": 0,
+        "json_parsed": 1337,
+        "json_with_format_version": 1286,
+        "json_without_format_version": 51,
+        "runtime_files": 2163
+      }
+    }
+  ],
+  "counts": {
+    "engine_format_above_catalog_max_files": 813,
+    "format_version_1_26_50_files": 654,
+    "json_files": 3789,
+    "json_parse_errors": 0,
+    "json_parsed": 3789,
+    "json_with_format_version": 3723,
+    "json_without_format_version": 66,
+    "runtime_files": 6902
+  },
+  "all_format_versions": {
+    "1.10.0": 264,
+    "1.12.0": 9,
+    "1.14.0": 3,
+    "1.16.0": 878,
+    "1.16.100": 446,
+    "1.19.30": 2,
+    "1.20.10": 293,
+    "1.21.0": 771,
+    "1.21.10": 2,
+    "1.21.20": 1,
+    "1.21.30": 3,
+    "1.21.40": 2,
+    "1.21.60": 3,
+    "1.21.80": 44,
+    "1.21.90": 2,
+    "1.26.0": 111,
+    "1.26.10": 1,
+    "1.26.30": 158,
+    "1.26.50": 654,
+    "1.8.0": 70,
+    "int:2": 6
+  },
+  "publication_note": "Per-file runtime bytes separately verified against exact Git blobs and final GUI exports; this compact document contains inventory aggregates, not individual GUI diagnostics."
+}

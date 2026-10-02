@@ -3,6 +3,7 @@ export const EFFECT_BAR_INTERVAL=20;
 export const EFFECT_BAR_PAGE_TICKS=60;
 export const EFFECT_BAR_PAGE_SIZE=2;
 export const EFFECT_BAR_HIDE_TAG='kaleidoscope_tavern:hide_effect_bar';
+export const EFFECT_BAR_SHOW_TAG='kaleidoscope_tavern:show_effect_bar';
 const ID=/^[a-z][a-z0-9_]{1,47}:[a-z0-9_./-]+$/;
 
 /** Match activeStatus: show only the strongest currently active layer of each ID. */
@@ -36,7 +37,7 @@ export function effectBarMessage(rows,page=0){
 }
 
 /** Display timing only: always obtain remaining effect ticks from the host. */
-export function createEffectBar({status,show,busy=()=>false,hidden=p=>p.hasTag?.(EFFECT_BAR_HIDE_TAG)===true,onError=()=>{}}){
+export function createEffectBar({status,show,busy=()=>false,hidden=p=>p.hasTag?.(EFFECT_BAR_SHOW_TAG)!==true||p.hasTag?.(EFFECT_BAR_HIDE_TAG)===true,onError=()=>{}}){
  const views=new Map(),holds=new Map();
  const forget=id=>{views.delete(id);holds.delete(id);};
  return {

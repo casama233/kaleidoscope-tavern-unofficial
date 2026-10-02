@@ -1,5 +1,7 @@
 # Simple shared effect bar
 
+As of 0.6.85, this optional display is disabled by default for immersive play. Explicitly add `kaleidoscope_tavern:show_effect_bar` to enable it for a player; removing the tag stops refreshes without changing effects. The legacy hide tag takes precedence. See [immersive feedback](IMMERSIVE-FEEDBACK-20261002.md).
+
 Scope: only a compact ActionBar. No new guide page, popup/refresh/expiry notification system, JSON UI, effect icons, or fake native potion effects.
 
 The Tavern host reads `statusNow(player)` every 20 ticks and displays the strongest active layer per custom-effect ID. Remaining time is always the host's time, never a second counter. Level I is omitted; II–X use Roman numerals, larger levels use numbers. Times round up to seconds; long durations use H:MM:SS. Each page shows at most two effects and rotates every 60 ticks. Names use existing `effect.<namespace>.<id>` resource-language keys, including the newly exported World Liquor names.

@@ -5,6 +5,7 @@
 - Keep original Java mechanics authoritative. For boards, preserve Java left / center / right and legacy top positioning. The user additionally requested Word-style justified/distributed and vertical alignment on 2026-09-27; these are intentional extensions.
 - Do not use simulated players. Distinguish static checks, native BDS loading, and actual client acceptance.
 - Do not add successful placement, pickup or machine-operation Actionbar announcements absent from Java. Preserve source-backed rejection messages and brewing status.
+- The owner's 2026-10-02 immersion request makes automatic effect text and Jade-style barrel text opt-in. Preserve shaker graphics, optional brewing status and one-shot rejection feedback; do not refresh ordinary messages from polling.
 
 # Canonical baseline
 

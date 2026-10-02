@@ -29,6 +29,7 @@ import {registerJavaBlockUseHandler,registerJavaBlockUseFallback,registerJavaIte
 import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,cocktailEffect} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
+import {barrelHudEnabled} from '../core/shaker-hud.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
@@ -151,7 +152,7 @@ function finishUse(player,elapsed,automatic=false){
  try{replaceHeld(player,current,portable(next,use.carried.token));}
  catch(error){stopShakerHands(player);hideShakerHud(player);throw error;}
  stopShakerHands(player);hideShakerHud(player);
- if(next.result){mixologyDiagnostics.completed++;finished(player);showShakerMessage(player,'READY');}
+ if(next.result){mixologyDiagnostics.completed++;finished(player);}
  return next;
 }
 export function nativeStop(event){
@@ -264,7 +265,7 @@ function tick(){
   // show cycle. Dedicated HUD state persists across other add-ons' title data.
   const hit=player.getBlockFromViewDirection({maxDistance:6});
   if(hit?.block?.typeId===STATION){showShakerSlots(player,station(hit.block));hudUpdated=true;}
-  else {
+  else if(barrelHudEnabled(player)){
    const barrel=lookedAtBarrelStatus(player,hit?.block);
    if(barrel){showBarrelHud(player,barrel);hudUpdated=true;}
   }

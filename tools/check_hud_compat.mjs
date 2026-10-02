@@ -46,15 +46,14 @@ assert(hudSendDue(undefined,'active',0));assert(!hudSendDue({key:'active',tick:0
 assert(hudSendDue({key:'active',tick:0},'active',10));
 for(let tick=0;tick<256;tick++)assert(!hudSendDue({key:'active',tick:0},undefined,tick));
 const hide=adapter.split('export function hideShakerHud')[1].split('\n}')[0];
-assert(hide.includes("previous?.key.startsWith('barrel/')"));
-assert.equal((hide.match(/setActionBar/g)||[]).length,1);
-assert(hide.includes("setActionBar('')"));
-assert(hide.indexOf('last.delete(player.id)')<hide.indexOf('setActionBar'));
+assert(hide.includes('last.delete(player.id)'));
+assert(!/setActionBar|setTitle/.test(hide),'Leaving a target must not clear a foreign Actionbar');
 const clear=adapter.split('export function clearShakerPlayer')[1].split('\n}')[0];
 assert(!/\bsend\(|setActionBar|setTitle/.test(clear));
 const barrel=adapter.split('export function showBarrelHud')[1].split('\n}')[0];
 assert(!barrel.includes('HUD_PREFIX'));
 assert(barrel.includes("send(player,'barrel/'+JSON.stringify(rawtext),{rawtext})"));
+assert(barrel.includes('if(!barrelHudEnabled(player))return;'));
 assert(read('runtime/BP/scripts/bedrock/mixology.js').includes('clearShakerPlayer(playerId)'));
 console.log(JSON.stringify({hudStaticChecks:'passed',slotCases:cases,progressStates:112,idleSamples:256,literalImageReferences:textures,clientTested:false}));
 

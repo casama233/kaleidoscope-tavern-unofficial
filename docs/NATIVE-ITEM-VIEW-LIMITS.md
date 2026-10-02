@@ -33,7 +33,7 @@ query.is_in_ui出現在一般Molang查詢清單，不等於它已支援方塊物
 - item_visual在1.21.60轉為穩定功能
 - 1.21.130開始，即使fit_to_frame:false也受GUI框尺寸限制
 - 26.50修正GUI強制置中／忽略translation的問題；明確填入來源參數仍不等於客戶端像素驗收
-- 1.26.20起ambient_occlusion必須是數值；item_visual不支援texture variations
+- 方塊定義的format_version 1.26.20起，ambient_occlusion必須是0.0至10.0的數值；這是內容格式版本，並非公開發行版號。item_visual不支援texture variations
 
 ## 官方來源
 

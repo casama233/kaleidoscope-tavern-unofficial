@@ -39,7 +39,7 @@
 | 香薰、圓架、神秘雞尾酒 display tick | `fixed_this_release` | 0.6.89保留Minecraft 1.20.1 ClientLevel.animateTick的667×(r16,r32)聯合抽樣分布；稀疏場景精確跳過未命中，33+emitter回原抽樣。 | 真人比較密度/聲音/視覺；Node抽樣成本降低不能當live watchdog原因已排除。 |
 | 八種香薰、大/小粒子与發光 | `source_with_client_gap` | 既有sprite、自由飛行、採樣強度有source及數學契約；JavaAABB碰撞、光照漸變與混合仍有明確差异。 | P2：受牆角/天花板/水/不同幀率及Windows材質模式驗收。 |
 | 同類堆疊、瓶架杯架櫃、原生物品保存 | `source_and_regressions` | 未知metadata、品質、名字/自訂物品以原生inventory保存；損壞/未載入fail closed不退回ID重建。 | 真人：同ID不同名字、滿背包、多人、重啟、實體暫未載入；舊無metadata資料不能憑空復原。 |
-| 瓶架紅石投射、投擲藥水、燃燒瓶 | `source_and_regressions` | 既有原品質effect payload、發射/投射物時序和交易回滾；Molotov火/煙精確數量。 | 真人：紅石上升沿/重載、方塊/實體命中、距離衰减、火與方塊破壞規則。 |
+| 瓶架紅石投射、投擲藥水、燃燒瓶 | `source_with_client_gap` | 既有原品質effect payload、發射/投射物時序和交易回滾；Molotov火/煙精確數量。 確認現存差異：customRow僅接受minecraft:player，Java ThrownPotion可向LivingEntity套用適用的custom effects；原生效果仍有非玩家路徑。 | 真人：紅石上升沿/重載、方塊/實體命中、距離衰减、火與方塊破壞規則。 P1：非玩家custom splash效果尚未還原，不將native splash通過套用至自訂效果。 |
 | 坐椅、16色沙發/高凳、吧檯/桌 | `source_with_client_gap` | 模型/座位與相鄰連接已實作，helper姿態與去重有回歸；伺服器取樣非Java partialTick render。 | 真人：座位切換、多人、四方向/轉角、水浸與下線移除。 |
 | 黑板/立牌文字、上蠟、染色、對齊 | `intentional_extension` | 原left/center/right保留；Word-style左右/分散及垂直對齊為使用者已授權擴充；超長輸入不靜默截斷。 | 真人：7全形/10半形小板、混排、繁簡英文、顏色與發光；字型不宣稱逐像素相同。 |
 | GUI、一/三人稱、框、掉地與animated icons | `source_with_client_gap` | 既有19 sprite / 74 geometric routes與八種Java transform契約；不是以方塊model猜手持。 | P2：GUI front lighting、部分animated item/frame0、所有视角还需client；详见ITEM-VIEW-PARITY-20261002。 |

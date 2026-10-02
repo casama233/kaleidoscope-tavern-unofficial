@@ -270,11 +270,11 @@
       "id": "projectile-redstone",
       "area": "互動",
       "feature": "瓶架紅石投射、投擲藥水、燃燒瓶",
-      "status": "source_and_regressions",
+      "status": "source_with_client_gap",
       "java": "item/DrinkBlockItem.java",
       "runtime": "runtime/BP/scripts/bedrock/storage-projectile.js",
-      "finding": "既有原品質effect payload、發射/投射物時序和交易回滾；Molotov火/煙精確數量。",
-      "next_evidence": "真人：紅石上升沿/重載、方塊/實體命中、距離衰减、火與方塊破壞規則。"
+      "finding": "既有原品質effect payload、發射/投射物時序和交易回滾；Molotov火/煙精確數量。 確認現存差異：customRow僅接受minecraft:player，Java ThrownPotion可向LivingEntity套用適用的custom effects；原生效果仍有非玩家路徑。",
+      "next_evidence": "真人：紅石上升沿/重載、方塊/實體命中、距離衰减、火與方塊破壞規則。 P1：非玩家custom splash效果尚未還原，不將native splash通過套用至自訂效果。"
     },
     {
       "id": "furniture",

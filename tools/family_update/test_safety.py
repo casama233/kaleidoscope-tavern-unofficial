@@ -84,6 +84,15 @@ class ConfigurationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'startup markers'):
             self.configure()
 
+    def test_startup_markers_require_a_list_of_nonempty_strings(self):
+        required = self.config['startup_markers']
+        invalid = [' '.join(required), dict.fromkeys(required), None, [], *[required + [value] for value in [None, 42, '', ' \t ']]]
+        for markers in invalid:
+            with self.subTest(markers=markers):
+                self.config['startup_markers'] = markers
+                with self.assertRaisesRegex(ValueError, 'nonempty list of nonempty strings'):
+                    self.configure()
+
 
 class BindingTests(unittest.TestCase):
     def setUp(self):

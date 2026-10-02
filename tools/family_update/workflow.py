@@ -199,6 +199,7 @@ def prepare(include_ci=True):
 def verify_deployed():
     result = read(R / 'deployment-result.json')
     assert result['state'] == 'deployed_running', 'Previous deployment needs recovery; do not automatically retry it'
+    verify_candidate_sources()
     receipt = read(R / 'reviewed-family-receipt.json')
     assert sha(R / 'reviewed-family-receipt.json') == result['receipt_sha256']
     current = live_inventory()

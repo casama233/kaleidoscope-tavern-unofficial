@@ -2567,6 +2567,11 @@
       "before": "0fc4664c22ad53cb0b7972d0c98fa9a8206facc12e82a7885f796ace01e59b01",
       "beforeProjected": "0fc4664c22ad53cb0b7972d0c98fa9a8206facc12e82a7885f796ace01e59b01",
       "reason": "0.6.55: enforce seven guide roots with native child categories, split grape entries, clarify Java board alignment and use a shared alignment calculation."
+    },
+    "runtime/RP/animations/runtime_shaker_pour.animation.json": {
+      "before": "963a3cef2ffdb34bc3dc0710a6c53f6ee772cfc2d1db2104121712f3eeecb4ee",
+      "beforeProjected": "963a3cef2ffdb34bc3dc0710a6c53f6ee772cfc2d1db2104121712f3eeecb4ee",
+      "reason": "0.6.81: remove the bespoke pouring-arm gesture absent from pinned Java ShakerItem.pourResult; preserve cup replacement, particles and bottle-fill sound."
     }
   }
 }

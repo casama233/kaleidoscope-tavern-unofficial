@@ -43,7 +43,7 @@ export function finished(player){heldShakerSound(player,'kt_assets_a17.item.shak
 // attachable cannot animate nonexistent rightarm/leftarm bones on its owner.
 export function startShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_shake',{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:'q.main_hand_item_use_duration <= 0'}));}
 export function stopShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_idle',{controller:'kt_mixology_hands',blendOutTime:.08}));}
-export function playShakerPour(player){optional(()=>player.playAnimation('animation.kt_mixology.player_pour',{controller:'kt_mixology_pour',blendOutTime:.08}));}
+// Java pourResult changes the cup and emits particles/sound without an extra arm gesture.
 // Java ShakerItem.pourResult emits 20 EFFECT particles. Each private emitter
 // is one particle; constructor motion and original sprite frames are explicit.
 export function cocktailEffect(block,count=1,spread=.1,recipient=block.dimension){

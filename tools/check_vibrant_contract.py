@@ -29,8 +29,12 @@ def main():
         if check(a,b)['ok']: raise SystemExit('missed regression: '+change)
         cases += 1
     if audit([])['ok']: raise SystemExit('empty scan must fail')
-    if not result['unverified_external_dependencies']: raise SystemExit('external Cookery must remain explicitly unverified')
-    if audit(rows, complete=True)['ok']: raise SystemExit('incomplete stack must fail in complete mode')
+    if result['unverified_external_dependencies']: raise SystemExit('standalone Tavern has an unexpected external pack dependency')
+    if not audit(rows, complete=True)['ok']: raise SystemExit('owned standalone pair must have complete manifest dependencies')
+    external=copy.deepcopy(bp);external['dependencies'].append({'uuid':'d322809c-a51e-4742-bfc4-16d3c1491c9d','version':[1,0,8]})
+    external_rows=[record('BP',json.dumps(external).encode()),record('RP',json.dumps(rp).encode())]
+    if not audit(external_rows)['unverified_external_dependencies']: raise SystemExit('external dependency not reported')
+    if audit(external_rows,complete=True)['ok']: raise SystemExit('missing external pack must fail complete mode')
     if result['scope_complete']: raise SystemExit('source-only audit is not a full server scan')
     if audit(rows, engine=(1,21,120))['ok']: raise SystemExit('target engine incompatibility not caught')
     cases += 5

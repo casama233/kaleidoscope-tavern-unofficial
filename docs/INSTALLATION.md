@@ -1,19 +1,22 @@
 # Installation and migration
 
-## Public dependency
+## Standalone Tavern 0.6.80
 
-Install [Kaleidoscope Cookery (Unofficial) 1.0.6](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial) separately. The public beta binds the original downloaded archive:
+Enable Tavern BP and RP together. Cookery is not required. Minimum engine remains Bedrock 1.26.50; Script APIs remain `@minecraft/server` 2.7.0 and `@minecraft/server-ui` 2.0.0. No experimental API is required.
 
-| Pack | UUID | Version |
-| --- | --- | --- |
-| Cookery BP | `10f37ae2-9ccf-435f-b34b-0eec8191cd94` | 1.0.6 |
-| Cookery RP | `c89dc8df-c3fc-4bc8-8bd0-527abba76681` | 1.0.6 |
-| Tavern BP | `f54f37f9-485a-55bf-8f89-6558aca988c5` | 0.6.34 |
-| Tavern RP | `c2990d50-2cf7-59f7-886a-0f2d0240d156` | 0.6.34 |
+- BP UUID: `f54f37f9-485a-55bf-8f89-6558aca988c5`
+- RP UUID: `c2990d50-2cf7-59f7-886a-0f2d0240d156`
+- Craft one vanilla book and one Tavern grape into the Tavern Guide, or obtain it from the brewing creative group.
+- Use the Tavern Guide to open the independent book. Existing Tavern recipe books also open it without replacement. Language can be selected in its main menu.
+- The seven sections and all registered addon content use the same data as the optional Cookery chapter.
 
-Cookery source archive SHA-256: `c589efb60277bea295ac12ef760d8f2c7e8af3ea62e809b320862bd786033351`. Its code/assets are not bundled here. The existing Guidebook Extension API v1 handles Tavern's chapter through script events.
+## Optional Cookery integration
 
-Import the `.mcaddon`, enable both packs and put Tavern above Cookery. Use Bedrock 26.50+; Script API dependencies are `@minecraft/server` 2.7.0 and `@minecraft/server-ui` 2.0.0. No experimental API is declared by Tavern.
+With [Cookery 1.0.8](https://www.curseforge.com/minecraft-bedrock/addons/kaleidoscope-cookery-unofficial), place Tavern above Cookery in both pack stacks. Cookery's normal guide receives the same Tavern chapter through its public guide API. No Cookery scripts or assets are bundled or overwritten.
+
+The verified public Cookery identities are BP `d322809c-a51e-4742-bfc4-16d3c1491c9d`, RP `8e2c6318-2f5f-4907-aad0-31d10610e405`, version 1.0.8. Public archive SHA256: `9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5`.
+
+Other family addons may still require Cookery. Optional Tavern integration does not remove another pack's own dependencies. Install matching public versions of Tavern and World Liquor; do not install the independent author's Tavern simultaneously because both use the same content namespace with different pack UUIDs.
 
 ## Existing private server installation
 

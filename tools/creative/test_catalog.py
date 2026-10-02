@@ -148,13 +148,18 @@ class RealPackTests(unittest.TestCase):
             'ingredients':10, 'storage':17, 'furniture':50, 'lighting':20, 'decoration':46, 'tools':2})
 
     def test_all_members_resolve_and_hidden_variants_stay_absent(self):
-        for root, count in [(TAVERN, 160), (LIQUOR, 66)]:
+        for root, count in [(TAVERN, 161), (LIQUOR, 66)]:
             catalog, defs = c.entries(c.load(root/c.CATALOG)), c.definitions(root)
             self.assertEqual(len(catalog), count)
             self.assertTrue(set(catalog).issubset(defs))
             self.assertFalse(any(item.endswith(tuple('_q'+str(i) for i in range(1,6))) for item in catalog))
             for item, (category, group) in catalog.items():
                 self.assertTrue(any(v[k]['description'].get('menu_category') == {'category':category, 'group':group} for _, v, k in defs[item]), item)
+
+    def test_standalone_guide_is_visible_without_promoting_legacy_alias(self):
+        catalog=c.entries(c.load(TAVERN/c.CATALOG))
+        self.assertEqual(catalog['kaleidoscope_tavern:guidebook'],('equipment','kaleidoscope_tavern:itemGroup.name.tavern_brewing'))
+        self.assertNotIn('kaleidoscope_tavern:recipe_book',catalog)
 
     def test_all_shared_group_icons_match(self):
         seen={}

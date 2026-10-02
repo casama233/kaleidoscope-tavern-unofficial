@@ -112,7 +112,7 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
  system.afterEvents.scriptEventReceive.subscribe(receive);
  const ping=()=>{try{system.sendScriptEvent(COOKERY_GUIDE_EVENTS.ping,JSON.stringify({api:1,source:COOKERY_GUIDE_SOURCE}));}catch(error){warn('[Tavern guide] Ping failed: '+String(error));}};
  for(const ticks of [1,40,200])later(ping,ticks);
- later(()=>{if(!hostReady)warn('[Tavern guide] Cookery host not ready after 30 seconds; chapter has not been sent.');},600);
+ later(()=>{if(!hostReady)info('[Tavern guide] Optional Cookery host not detected; chapter publication remains inactive.');},600);
  return Object.freeze({
   refresh:()=>{if(disposed)return false;dirty=true;return queue();},
   getStatus:()=>({active,disposed,hostReady,dirty,successfulTransfers,transmittedTransfers:successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false,receiptConfirmed:false,deliveryState:disposed?'disposed':!hostReady?'host_not_ready':active?'transmitting':dirty&&sendFailures?'send_failed':lastRevision?'sent_unconfirmed':'waiting_to_send'}),

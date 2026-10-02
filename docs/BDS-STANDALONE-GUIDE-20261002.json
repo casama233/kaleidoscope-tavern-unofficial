@@ -1,0 +1,232 @@
+{
+  "tavern": "0.6.80",
+  "world_liquor": "0.1.45",
+  "grilling": "2.8.25",
+  "bsm": "3.10.6",
+  "bds": "1.26.52.3",
+  "client_acceptance": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "cases": {
+    "solo-exact": {
+      "scenario": "solo",
+      "pack_count": 2,
+      "test_kind": "exact unmodified load/restart",
+      "experimental_creator_features": false,
+      "bds_loading_passed": true,
+      "native_guide_passed": false,
+      "candidate_receipt_sha256": "37d42addf317744191e6bbdbc3589e2bc859273cfd10006d7dc5834c1b93184e",
+      "evidence_sha256": "51bd4d10d5a423c2908a1f450183d74e478331d2f325b905d9122ae3f011d85e",
+      "cycles": [
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": false,
+          "guide_probe": [],
+          "cookery_probe": []
+        },
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": true,
+          "guide_probe": [],
+          "cookery_probe": []
+        }
+      ]
+    },
+    "solo-probe": {
+      "scenario": "solo",
+      "pack_count": 2,
+      "test_kind": "test-only native guide observer overlay",
+      "experimental_creator_features": false,
+      "bds_loading_passed": true,
+      "native_guide_passed": true,
+      "candidate_receipt_sha256": "37d42addf317744191e6bbdbc3589e2bc859273cfd10006d7dc5834c1b93184e",
+      "evidence_sha256": "209ba7fd22e45c8a56d735900fdb90b38c1ffb823460b07644c5d7c7200cb99b",
+      "cycles": [
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": false,
+          "guide_probe": [
+            {
+              "stage": "saved",
+              "scenario": "solo",
+              "entries": 156,
+              "categories": 25,
+              "preparations": 42,
+              "standaloneGuide": true,
+              "cookery": false,
+              "liquor": false,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": []
+        },
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": true,
+          "guide_probe": [
+            {
+              "stage": "restored",
+              "scenario": "solo",
+              "entries": 156,
+              "categories": 25,
+              "preparations": 42,
+              "standaloneGuide": true,
+              "cookery": false,
+              "liquor": false,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": []
+        }
+      ]
+    },
+    "pair-probe": {
+      "scenario": "pair",
+      "pack_count": 4,
+      "test_kind": "test-only native guide observer overlay",
+      "experimental_creator_features": false,
+      "bds_loading_passed": true,
+      "native_guide_passed": true,
+      "candidate_receipt_sha256": "cd47a59a607409e3b0d05c4ebcf439e77e11a409aa4978f2e94adbdffea8573d",
+      "evidence_sha256": "755415acae7244b29b6bfd9de3208cbf4642f37a485b148da9f00df84b18c38e",
+      "cycles": [
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": false,
+          "guide_probe": [
+            {
+              "stage": "saved",
+              "scenario": "pair",
+              "entries": 222,
+              "categories": 31,
+              "preparations": 78,
+              "standaloneGuide": true,
+              "cookery": false,
+              "liquor": true,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": []
+        },
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 7,
+          "persistence_marker_seen": true,
+          "guide_probe": [
+            {
+              "stage": "restored",
+              "scenario": "pair",
+              "entries": 222,
+              "categories": 31,
+              "preparations": 78,
+              "standaloneGuide": true,
+              "cookery": false,
+              "liquor": true,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": []
+        }
+      ]
+    },
+    "family-probe": {
+      "scenario": "family",
+      "pack_count": 16,
+      "test_kind": "test-only native guide observer overlay",
+      "experimental_creator_features": false,
+      "bds_loading_passed": true,
+      "native_guide_passed": true,
+      "candidate_receipt_sha256": "869daddc5cb1afec7e18ce1553aca9dc2f05d13432e653ffb2338b213722deb0",
+      "evidence_sha256": "6dff459b5d2f38ec0ca6892953d7e420e31db7980433cb73f19ca1a59cddd076",
+      "cycles": [
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 26,
+          "persistence_marker_seen": false,
+          "guide_probe": [
+            {
+              "stage": "saved",
+              "scenario": "family",
+              "entries": 222,
+              "categories": 31,
+              "preparations": 80,
+              "standaloneGuide": true,
+              "cookery": true,
+              "liquor": true,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": [
+            {
+              "entries": 222,
+              "categories": 31,
+              "roots": [
+                "equipment",
+                "barrel",
+                "cocktail",
+                "cultivation",
+                "storage",
+                "decor",
+                "food"
+              ],
+              "clientUI": false
+            }
+          ]
+        },
+        {
+          "ready": true,
+          "errors": [],
+          "warning_count": 26,
+          "persistence_marker_seen": true,
+          "guide_probe": [
+            {
+              "stage": "restored",
+              "scenario": "family",
+              "entries": 222,
+              "categories": 31,
+              "preparations": 80,
+              "standaloneGuide": true,
+              "cookery": true,
+              "liquor": true,
+              "simulatedPlayers": false,
+              "clientUI": false
+            }
+          ],
+          "cookery_probe": [
+            {
+              "entries": 222,
+              "categories": 31,
+              "roots": [
+                "equipment",
+                "barrel",
+                "cocktail",
+                "cultivation",
+                "storage",
+                "decor",
+                "food"
+              ],
+              "clientUI": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

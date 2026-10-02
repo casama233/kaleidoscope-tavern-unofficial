@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
+subprocess.run(['node','--test','tools/ambient-sparse.test.mjs'],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/test_item_render_contract.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_held_frames.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)

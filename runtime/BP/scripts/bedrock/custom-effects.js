@@ -245,12 +245,15 @@ export function tickCustomEffects(){
   // Saving every 5 ticks bounds normal abrupt disconnect loss without ticking while offline.
   write(p,nextState);
   if(activeStatus(nextState,'kaleidoscope_tavern:xp_drain')){
-   const center={...p.location,y:p.location.y+.5};
-   for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location:p.location,maxDistance:14}).slice(0,128)){
-    try{const a=orb.location;if(Math.abs(a.x-p.location.x)>8||Math.abs(a.y-p.location.y)>8||Math.abs(a.z-p.location.z)>8)continue;
+   const feet=p.location,center={...feet,y:feet.y+.5},box=p.getAABB(),location={},volume={};
+   for(const axis of ['x','y','z']){location[axis]=box.center[axis]-box.extent[axis]-8;volume[axis]=2*(box.extent[axis]+8);}
+   // Native spatial query and exact AABB intersection retain the Java corners
+   // and player-height band; no arbitrary first-128 truncation starves later orbs.
+   for(const orb of p.dimension.getEntities({type:'minecraft:xp_orb',location,volume})){
+    try{const a=orb.location;if(!inflatedAabbIntersects(box,orb.getAABB(),8))continue;
     // Preserve actual orb and native pickup/value. No guessed XP values or bypassed pickup cooldown.
     if(Math.hypot(a.x-p.location.x,a.y-p.location.y,a.z-p.location.z)<1.5){orb.tryTeleport(p.location);continue;}
-    orb.clearVelocity();orb.applyImpulse(orbVelocity(a,center));customEffectDiagnostics.orbMoves++;}catch(e){error(e);}
+    orb.clearVelocity();orb.applyImpulse(orbVelocity(a,center,feet));customEffectDiagnostics.orbMoves++;}catch(e){error(e);}
    }
   }
  }catch(e){error(e);}

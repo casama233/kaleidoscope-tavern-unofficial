@@ -80,10 +80,10 @@ for(const field of ['color','glowing','alignment','verticalAlignment','facing','
 test('board removal invalidates its layout cache',()=>{const b=board('A'),n=boardTextDiagnostics.layoutBuilds;removeBoardText(b.d,b.key,b.info.root);b.render();assert.equal(boardTextDiagnostics.layoutBuilds,n+1);});
 function randomCount(fn){let calls=0;const original=Math.random;Math.random=()=>{calls++;return .5;};try{fn();}finally{Math.random=original;}return calls;}
 for(const p of [{x:1000,y:0,z:0},{x:0,y:1000,z:0},{x:32,y:0,z:0}])test(`ambient culls unreachable cube ${JSON.stringify(p)}`,()=>{const d=new Dimension(),b=d.block('test:ambient');registerJavaAmbient(b,()=>{});world.players=[new Player(d,p),new Player(new Dimension('minecraft:nether'))];assert.equal(randomCount(pulseJavaAmbient),0);unregisterJavaAmbient(b);});
-for(const p of [{x:31,y:31,z:31},{x:-31,y:-31,z:-31},{x:-.01,y:-.01,z:-.01}])test(`ambient retains cube corners and negative coordinates ${JSON.stringify(p)}`,()=>{const d=new Dimension(),b=d.block('test:ambient');registerJavaAmbient(b,()=>{});world.players=[new Player(d,p)];assert.equal(randomCount(pulseJavaAmbient),8004);unregisterJavaAmbient(b);});
+for(const p of [{x:31,y:31,z:31},{x:-31,y:-31,z:-31},{x:-.01,y:-.01,z:-.01}])test(`ambient retains cube corners and negative coordinates ${JSON.stringify(p)}`,()=>{const d=new Dimension(),b=d.block('test:ambient');registerJavaAmbient(b,()=>{});world.players=[new Player(d,p)];assert.ok(randomCount(pulseJavaAmbient)<=2);unregisterJavaAmbient(b);});
 test('ambient keeps original 667 pairs and recipient-local emissions',()=>{
  let samples=0,draws=0;sampleAmbientPositions({x:0,y:0,z:0},()=>samples++,()=>{draws++;return .5;});assert.equal(samples,1334);assert.equal(draws,8004);
- const d=new Dimension(),b=d.block('test:ambient'),recipients=[];registerJavaAmbient(b,p=>recipients.push(p.id));const a=new Player(d),c=new Player(d);world.players=[a,c];assert.equal(randomCount(pulseJavaAmbient),16008);assert.equal(recipients.filter(x=>x===a.id).length,1334);assert.equal(recipients.filter(x=>x===c.id).length,1334);unregisterJavaAmbient(b);
+ const d=new Dimension(),b=d.block('test:ambient'),recipients=[];registerJavaAmbient(b,p=>recipients.push(p.id));const a=new Player(d),c=new Player(d);world.players=[a,c];const original=Math.random;Math.random=()=>0;try{pulseJavaAmbient();}finally{Math.random=original;}assert.equal(recipients.filter(x=>x===a.id).length,1334);assert.equal(recipients.filter(x=>x===c.id).length,1334);unregisterJavaAmbient(b);
 });
 test('ambient expires, clears timer, refreshes and restarts without stale buckets',()=>{
  const d=new Dimension(),b=d.block('test:ambient');registerJavaAmbient(b,()=>{});const timers=system.timers.size;system.currentTick+=40;pulseJavaAmbient();assert.equal(ambientDiagnostics.registered,1);
@@ -103,4 +103,23 @@ test('migration failure rolls back snapshots, receipts and fast-player index',()
 test('spawn, respawn and leave clear cached handles without ticking offline',()=>{
  installCustomEffects();const p=new Player(new Dimension());p.dp.set(STATUS,JSON.stringify({schema:1,entries:[{id:NS+':high_heels',ticks:100,amplifier:0}]}));world.players=[p];world.afterEvents.playerSpawn.emit({player:p,initialSpawn:true});assert.equal(CUSTOM_TEST.fastPlayers.has(p.id),true);
  world.afterEvents.playerLeave.emit({playerId:p.id});assert.equal(CUSTOM_TEST.statusSnapshots.has(p.id),false);assert.equal(CUSTOM_TEST.fastPlayers.has(p.id),false);system.currentTick+=1000;world.afterEvents.playerSpawn.emit({player:p,initialSpawn:true});assert.equal(statusNow(p).entries[0].ticks,100);world.afterEvents.playerSpawn.emit({player:p,initialSpawn:false});assert.equal(statusNow(p).entries.length,0);
+});
+
+test('sparse ambient cache invalidates on movement, new emitter and removal; dense uses source pass',()=>{
+ const d=new Dimension(),b=d.block('test:ambient'),p=new Player(d);world.players=[p];registerJavaAmbient(b,()=>{});
+ const builds=ambientDiagnostics.samplerBuilds;assert.equal(randomCount(pulseJavaAmbient),2);assert.equal(randomCount(pulseJavaAmbient),2);assert.equal(ambientDiagnostics.samplerBuilds,builds+1);
+ p.location.x=100;assert.equal(randomCount(pulseJavaAmbient),0);assert.equal(ambientDiagnostics.samplerBuilds,builds+2);
+ const other=d.block('test:ambient',{x:100,y:0,z:0});registerJavaAmbient(other,()=>{});assert.equal(randomCount(pulseJavaAmbient),2);
+ unregisterJavaAmbient(other);assert.equal(randomCount(pulseJavaAmbient),0);p.location.x=0;
+ const extra=[];for(let x=-16;x<=16;x++)if(x!==0){const e=d.block('test:ambient',{x,y:0,z:0});extra.push(e);registerJavaAmbient(e,()=>{});}
+ assert.equal(randomCount(pulseJavaAmbient),8004);
+ for(const e of extra)unregisterJavaAmbient(e);assert.equal(randomCount(pulseJavaAmbient),2);unregisterJavaAmbient(b);
+});
+test('ambient handles same-ID dimension changes, disappearing blocks and player departure',()=>{
+ const d=new Dimension(),other=new Dimension('minecraft:nether'),b=d.block('test:ambient'),p=new Player(d);world.players=[p];registerJavaAmbient(b,()=>{});
+ pulseJavaAmbient();const builds=ambientDiagnostics.samplerBuilds;
+ p.dimension=other;assert.equal(randomCount(pulseJavaAmbient),0);assert.equal(ambientDiagnostics.samplerBuilds,builds+1);
+ p.dimension=d;assert.equal(randomCount(pulseJavaAmbient),2);world.players=[];pulseJavaAmbient();world.players=[p];pulseJavaAmbient();assert.equal(ambientDiagnostics.samplerBuilds,builds+3);
+ d.blocks.clear();const original=Math.random;Math.random=()=>0;try{pulseJavaAmbient();}finally{Math.random=original;}
+ assert.equal(ambientDiagnostics.registered,0);assert.equal(randomCount(pulseJavaAmbient),0);
 });

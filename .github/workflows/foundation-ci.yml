@@ -22,9 +22,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed 0.1.44 preserves color groups and adds friend source labels for Tavern 0.6.79.
+          # Reviewed 0.1.45 preserves color/source contracts and supports optional Cookery for Tavern 0.6.80.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 9b2cb76701ce1e6a6a720e89eb66dea3bb3db6f3
+          ref: d0866bbdb4bfdb89b87f81acbc0d7b20b8c88e17
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4

@@ -1,3 +1,5 @@
+> The paired 0.6.87 / 0.1.51 UI definition was rejected by an actual client. Use the [0.6.88 / 0.1.52 root recovery](HUD-ROOT-RECOVERY-20261002.md); the transport details below are retained for provenance.
+
 # Standalone drink effect icons
 
 Tavern 0.6.87 includes its original nine timed drink-effect sprites and a self-contained transport. Only its paired BP/RP and the declared stable Minecraft scripting APIs are required. It does not depend on luosen, BSM, Cookery, World Liquor, AMW, UI Queue, world experiments or server configuration. The optional text bars remain disabled by default. Sneak-use the guide to inspect names, levels and remaining time, refresh the snapshot, or toggle icons for yourself.

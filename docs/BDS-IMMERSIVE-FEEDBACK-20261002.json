@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "sources": {
+    "tavern": "499ec14f5b7cf4535111be1e10183907c045d2c9",
+    "grilling": "c7d20d680ee162c27657ac2c8ffc5ca467da1e14",
+    "world_liquor": "364604ac2a904778af4ba879887603821031f833"
+  },
+  "versions": {
+    "tavern": "0.6.85",
+    "world_liquor": "0.1.49",
+    "grilling": "2.8.37"
+  },
+  "bds_version": "1.26.51.1",
+  "candidate_receipt_sha256": "ea81ec545b35d5a08b33910906ba5baefbaee77ee3077064e87d09570ef9d5ea",
+  "engine_sha256": "e93e739f373a84edfff7c9cd76fcb090c2176744b412e1143f1b38e91a49bed4",
+  "packs": 41,
+  "exact_files_checked": true,
+  "cycles": [
+    {
+      "phase": "first",
+      "started": true,
+      "tavern_version": true,
+      "world_liquor_registered": true,
+      "amw_initialized": true,
+      "errors": [],
+      "exit_code": 0,
+      "log_sha256": "549fc22e5abf05eb3a13d48d9de2ac4f36c9b0823ffe06e4f8cb170c13168419",
+      "ok": true
+    },
+    {
+      "phase": "restart",
+      "started": true,
+      "tavern_version": true,
+      "world_liquor_registered": true,
+      "amw_initialized": true,
+      "errors": [],
+      "exit_code": 0,
+      "log_sha256": "fe493d75e45eb5b703da095162d52ac262aacef644bbac7a24e14a5894adfa24",
+      "ok": true
+    }
+  ],
+  "bds": true,
+  "test_only_overlays": [],
+  "experiments": [],
+  "client": false,
+  "simulated_players": false,
+  "saved_world_migration": false,
+  "production_ready": false
+}

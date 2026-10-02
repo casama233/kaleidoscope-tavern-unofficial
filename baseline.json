@@ -5,7 +5,7 @@
   "version": [
     0,
     6,
-    79
+    80
   ],
   "runtime": {
     "BP": "runtime/BP",
@@ -20,15 +20,7 @@
           "version": [
             0,
             6,
-            79
-          ]
-        },
-        {
-          "uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
-          "version": [
-            1,
-            0,
-            8
+            80
           ]
         },
         {
@@ -43,25 +35,16 @@
     },
     "RP": {
       "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
-      "dependencies": [
-        {
-          "uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
-          "version": [
-            1,
-            0,
-            8
-          ]
-        }
-      ]
+      "dependencies": []
     }
   },
   "source_trees": {
     "BP": {
-      "sha256": "48a1af5b267ce5bb2c2bf3e94010d37be0d09d9b46c843628ef656311c361590",
-      "files": 772
+      "sha256": "7e71e4b99db3dd8729806b116ae802028e713444af54cb2ccae630f0007c03a7",
+      "files": 775
     },
     "RP": {
-      "sha256": "c7d65003a749c9cc0cbab86f90e5dbad7b85585cd855a0b4fcf7b5953ad52e57",
+      "sha256": "0ccacf009953a992c56ea7e74ca9fb32caa914007adb6944946363246a5b914b",
       "files": 3127
     }
   },

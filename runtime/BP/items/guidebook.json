@@ -2,7 +2,11 @@
   "format_version": "1.26.50",
   "minecraft:item": {
     "description": {
-      "identifier": "kaleidoscope_tavern:guidebook"
+      "identifier": "kaleidoscope_tavern:guidebook",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
+      }
     },
     "components": {
       "minecraft:display_name": {

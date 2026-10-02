@@ -1,3 +1,4 @@
+import {showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics} from './bedrock/standalone-guide.js';
 import {BUILD_VERSION} from './data/build-version.js';
 import {installPickupOverflowEvents} from './bedrock/pickup-overflow.js';
 import {feedbackDiagnostics} from './bedrock/feedback-diagnostics.js';
@@ -17,7 +18,7 @@ import {installCustomEffects,customEffectDiagnostics} from './bedrock/custom-eff
 import {potionDiagnostics,potionCapabilities} from './bedrock/potions.js';
 import {nativeUseDiagnostics} from './bedrock/mixology.js';
 import {immersionDiagnostics} from './bedrock/immersion.js';
-import {system,world,ItemTypes,ItemStack,ScriptEventSource} from '@minecraft/server';
+import {system,world,ItemTypes,ScriptEventSource} from '@minecraft/server';
 import {ExtensionRegistry} from './core/registry.js';
 import {BUILTIN_RECIPES} from './data/recipes.js';
 import {FLUIDS} from './data/fluids.js';
@@ -46,19 +47,18 @@ import {installDisplayProjectileEvents,displayProjectileDiagnostics} from './bed
 import {installQualityTooltipEvents,qualityTooltipDiagnostics} from './bedrock/quality-tooltip.js';
 let registry;let cookeryReady=false,cookeryCapabilities=[];
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
-const COOKERY_GUIDE='kaleidoscope_cookery:guidebook';
 const cookeryGuidePublisher=installCookeryGuidePublisher(system,()=>buildCookeryGuidePayload(registry));
-export function diagnosticSnapshot(){return {build:BUILD_VERSION,furniture:furnitureDiagnostics,extensionFurniture:extensionFurnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,effectBar:effectBarDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,feedback:feedbackDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,molotov:molotovDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,creativePick:creativePickDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,storageHit:storageHitDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:true,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_cookery:guidebook',legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
+export function diagnosticSnapshot(){return {build:BUILD_VERSION,furniture:furnitureDiagnostics,extensionFurniture:extensionFurnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,effectBar:effectBarDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,feedback:feedbackDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,molotov:molotovDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,creativePick:creativePickDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,storageHit:storageHitDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:false,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_tavern:guidebook',cookeryGuideIntegration:true,standaloneGuide:standaloneGuideDiagnostics,legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}
 export function migrateLegacyGuide(player,{slot=player?.selectedSlotIndex,expectedId}={}){
+ // Preserve existing item/component IDs, but opening never consumes or replaces a book.
  const container=player?.getComponent?.('minecraft:inventory')?.container;
- if(!container||!Number.isInteger(slot))return false;
- const held=container.getItem(slot),legacyId=expectedId??held?.typeId;
- if(!LEGACY_GUIDES.has(legacyId)||held?.typeId!==legacyId)return false;
- try{container.setItem(slot,new ItemStack(COOKERY_GUIDE,1));}
- catch(error){try{player.sendMessage('§c[Tavern] 舊版指南轉換失敗；物品已保留。');}catch{}console.warn('[Tavern legacy guide] '+error);return false;}
- try{player.sendMessage('§7[Tavern] 舊版指南已轉換為森羅物語本體指南；請再次使用以開啟。');}catch{}
+ if(!container||!Number.isInteger(slot)||player.selectedSlotIndex!==slot)return false;
+ const held=container.getItem(slot),id=expectedId??held?.typeId;
+ if(!LEGACY_GUIDES.has(id)||held?.typeId!==id)return false;
+ void showStandaloneGuide(player,()=>registry?buildCookeryGuidePayload(registry):null);
  return true;
 }
+world.afterEvents.playerLeave.subscribe(e=>clearStandaloneGuideSession(e.playerId));
 system.beforeEvents.startup.subscribe(ev=>{
  registerNaturalBreak(ev);
  registerExtensionFurnitureComponents(ev);registerFurnitureComponents(ev);registerDecorationComponents(ev);registerWritingBoardComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerTapSourceComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);
@@ -78,7 +78,7 @@ system.run(()=>{
   registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);const extensionFurniture=installExtensionFurniture(registry);
 installFoundationBridge(registry,extensionFurniture);installExtensionHost(registry);cookeryGuidePublisher.refresh();
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
-  console.warn(`[Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta ${BUILD_VERSION}.`);
+  console.warn(`[Tavern C6] Standalone Tavern guide and optional Cookery chapter initialized. Public beta ${BUILD_VERSION}.`);
  }catch(e){console.error('[Tavern C6] Startup halted: '+e);}
 });
 export function runtimeRegistry(){return registry;}

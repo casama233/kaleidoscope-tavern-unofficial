@@ -18,9 +18,11 @@ for side in ['BP','RP']:
     for lc in config['supported_locales']:
         lang=(RT/side/'texts'/f'{lc}.lang').read_text()
         assert 'pack.name=' in lang and 'pack.description=' in lang
-expected={'BP':'d322809c-a51e-4742-bfc4-16d3c1491c9d','RP':'8e2c6318-2f5f-4907-aad0-31d10610e405'}
-for side,uid in expected.items():
-    assert {'uuid':uid,'version':[1,0,8]} in docs[RT/side/'manifest.json']['dependencies']
+# Standalone mode: only the owned RP and stable scripting modules are mandatory.
+assert config.get('cookery_optional') is True
+for side in ['BP','RP']:
+    assert not any(d.get('uuid') in {'d322809c-a51e-4742-bfc4-16d3c1491c9d','8e2c6318-2f5f-4907-aad0-31d10610e405'} for d in docs[RT/side/'manifest.json'].get('dependencies',[]))
+subprocess.run(['node','--test','tools/standalone-guide.test.mjs'],cwd=ROOT,check=True)
 assert not (RT/'RP/entity/player.entity.json').exists()
 assert not (RT/'RP/ui/fast_swap_scroll.json').exists()
 hud=docs[RT/'RP/ui/hud_screen.json'];assert 'hud_title_text' not in hud

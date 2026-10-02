@@ -3,6 +3,19 @@ from pathlib import Path
 from family_bundle import assemble,files_hash,read_definition
 
 class PreservedDependencyTests(unittest.TestCase):
+ def test_competing_behavior_players_fail_and_single_definition_is_receipted(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);packs=[]
+   for uid in ['a','b']:
+    p=root/uid;p.mkdir();packs.append(p)
+    (p/'manifest.json').write_text(json.dumps({'header':{'uuid':uid,'version':[1,0,0]},'modules':[{'type':'data'}]}))
+    (p/'player.json').write_text(json.dumps({'minecraft:entity':{'description':{'identifier':'minecraft:player'}}}))
+   lock={'owned':[],'upstream':[],'order':{'behavior':[],'resource':[]}}
+   with self.assertRaisesRegex(SystemExit,'competing behavior minecraft:player'):
+    assemble(lock,{},[],root/'conflict',preserved=packs)
+   with contextlib.redirect_stdout(io.StringIO()):r=assemble(lock,{},[],root/'single',preserved=packs[:1])
+   self.assertEqual(r['behavior_player_definition']['uuid'],'a')
+   self.assertEqual(r['behavior_player_definition']['sha256'],files_hash(packs[0])['player.json'])
  def test_preserved_jsonc_bytes_and_complete_dependency_closure(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);a=root/'a';b=root/'b';a.mkdir();b.mkdir()

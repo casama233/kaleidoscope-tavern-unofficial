@@ -293,6 +293,7 @@ class ResumeTests(unittest.TestCase):
         self.write(self.q / 'senluo-policy.json', {'approved_receipt': str(reviewed)})
         with patch.object(workflow, 'live_inventory', return_value=inventory_for(self.receipt)) as live, patch.object(workflow, 'check_live_against_policy') as policy, patch.object(workflow, 'summary', return_value={'status': 'RUNNING'}) as status:
             self.assertEqual(workflow.deploy()['state'], 'already_deployed')
+            self.source_state.assert_called_once_with()
             live.assert_called_once_with()
             policy.assert_called_once()
             status.assert_called_once_with()
@@ -300,6 +301,18 @@ class ResumeTests(unittest.TestCase):
         reviewed.write_text(reviewed.read_text() + '\n')
         with self.assertRaises(AssertionError):
             workflow.deploy()
+        self.stages.assert_not_called()
+
+    def test_successful_deployment_resume_rejects_changed_canonical_source(self):
+        reviewed = self.r / 'reviewed-family-receipt.json'
+        self.write(reviewed, self.receipt)
+        self.write(self.r / 'deployment-result.json', {'state': 'deployed_running', 'receipt_sha256': common.sha(reviewed)})
+        self.write(self.q / 'senluo-policy.json', {'approved_receipt': str(reviewed)})
+        self.source_state.return_value['tavern']['commit'] = 'newer-canonical-main'
+        with patch.object(workflow, 'live_inventory', return_value=inventory_for(self.receipt)) as live, patch.object(workflow, 'check_live_against_policy'), patch.object(workflow, 'summary', return_value={'status': 'RUNNING'}):
+            with self.assertRaisesRegex(AssertionError, 'Canonical source changed since candidate build'):
+                workflow.deploy()
+            live.assert_not_called()
         self.stages.assert_not_called()
 
 

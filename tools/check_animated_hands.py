@@ -17,12 +17,16 @@ for name in ('mystery_cocktail','depth_charge','nether_special','ice_grape'):
   assert icon.size==(16,16) and icon.convert('RGBA').tobytes()==java.convert('RGBA').crop((0,0,16,16)).tobytes(),name+' native sprite must be complete Java frame zero'
 print('Four native item sprites and native drink/eat components verified; no custom hand rig. Client animation acceptance pending; held sprite uses frame zero.')
 
-# Decorative boards use normal native item icons, never an unbound hand model.
+# Decorative boards use the Java geometric native block-item route, never an unbound hand rig.
 assert not (RP/'attachables/base_sandwich_board.attachable.json').exists()
 assert not (RP/'models/entity/base_sandwich_board_held.geo.json').exists()
 boards=list((ROOT/'runtime/BP/items').glob('*sandwich_board.json'))
 for p in boards:
- c=json.loads(p.read_text())['minecraft:item']['components'];key=c['minecraft:icon']
- texture=atlas[key]['textures']
+ item=json.loads(p.read_text())['minecraft:item'];c=item['components']
+ assert 'minecraft:icon' not in c and c['minecraft:block_placer']['block']==item['description']['identifier']
+ block=json.loads((ROOT/'runtime/BP/blocks'/p.name).read_text())['minecraft:block']
+ visual=block['components']['minecraft:item_visual'];assert visual['geometry']['identifier']=='geometry.kt_assets_a17.item_display_'+p.stem
+ terrain=json.loads((RP/'textures/terrain_texture.json').read_text())['texture_data']
+ texture=terrain[visual['material_instances']['*']['texture']]['textures']
  with Image.open(RP/(texture+'.png')) as im:assert im.convert('RGBA').getchannel('A').getbbox(),p.name
-print(f'{len(boards)} sandwich-board native icons contain visible pixels; plain board hand override absent.')
+print(f'{len(boards)} sandwich-board native geometry routes verified; unbound hand override absent.')

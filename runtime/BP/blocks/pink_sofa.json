@@ -106,7 +106,15 @@
         "material_instances": {
           "*": {
             "texture": "kt_assets_a17_item_display_pink_sofa",
-            "render_method": "alpha_test"
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_pink_sofa",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
           }
         }
       },

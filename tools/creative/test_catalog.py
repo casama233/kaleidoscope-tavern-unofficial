@@ -247,8 +247,15 @@ class HistoricalProjectionTests(unittest.TestCase):
             for prefix, expected in c.load(root/file)[key].items():
                 if not prefix.rstrip('/').endswith(('BP/items', 'BP/blocks')):
                     continue
+                from baseline_reference import additions, previous_bytes
+                added = additions(root)
+                # New reviewed same-ID sprite registrations did not exist in the
+                # historical tree. Validate their current bytes before exclusion;
+                # never rewrite old golden counts or hashes to accept them.
+                for name in added:
+                    previous_bytes(root, root/name)
                 rows = [p.relative_to(root).as_posix()+'\0'+(historical_digest(p,projected=True) if root==TAVERN else liquor_digest(p))+'\n'
-                        for p in sorted((root/prefix).rglob('*')) if p.is_file()]
+                        for p in sorted((root/prefix).rglob('*')) if p.is_file() and p.relative_to(root).as_posix() not in added]
                 self.assertEqual({'files':len(rows), 'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}, expected)
 
     def test_projection_changes_only_reviewed_menu_and_native_registration(self):

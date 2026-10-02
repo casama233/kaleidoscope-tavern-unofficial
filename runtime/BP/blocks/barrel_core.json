@@ -71,6 +71,25 @@
         "texture": "kt_assets_a17_item_display_barrel",
         "particle_count": 32,
         "tint_method": "none"
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a17.item_display_barrel"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a17_item_display_barrel",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_barrel",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
       }
     }
   }

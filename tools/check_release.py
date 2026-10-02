@@ -7,6 +7,7 @@ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
 subprocess.run([sys.executable,str(ROOT/'tools/test_item_render_contract.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_held_frames.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_native_frame.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)
 assert f"export const BUILD_VERSION='{config['version']}-baseline.1';" in (RT/'BP/scripts/data/build-version.js').read_text(),'Stale diagnostic build identity'
 files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}

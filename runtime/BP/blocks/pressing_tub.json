@@ -35,14 +35,20 @@
       },
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "geometry.kt_assets_a1.pressing_tub"
+          "identifier": "geometry.kt_assets_a17.item_display_pressing_tub"
         },
         "material_instances": {
           "*": {
-            "texture": "kt_assets_a1_pressing_tub",
+            "texture": "kt_assets_a17_item_display_pressing_tub",
             "render_method": "alpha_test",
             "ambient_occlusion": 0.0,
             "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_pressing_tub",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
           }
         }
       },

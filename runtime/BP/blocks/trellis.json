@@ -48,14 +48,20 @@
       },
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "geometry.kt_assets_a2.trellis_single"
+          "identifier": "geometry.kt_assets_a17.item_display_trellis"
         },
         "material_instances": {
           "*": {
-            "texture": "kt_assets_a2_trellis_single",
+            "texture": "kt_assets_a17_item_display_trellis",
             "render_method": "alpha_test",
             "ambient_occlusion": 0.0,
             "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_trellis",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
           }
         }
       },

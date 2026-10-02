@@ -12,9 +12,16 @@
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:barrel.name"
       },
-      "minecraft:icon": "kt_c1_barrel",
       "minecraft:max_stack_size": 64,
-      "kaleidoscope_tavern:place_barrel": {}
+      "kaleidoscope_tavern:place_barrel": {},
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:barrel_core",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ]
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 # Shaker native first-person frame correction
 
-Base: `98fe4d7351c719c3705daeeae09788845e5c78c9` (Tavern 0.6.88). Candidate: 0.6.89.
+Base: `98fe4d7351c719c3705daeeae09788845e5c78c9` (Tavern 0.6.88). Candidate: 0.6.90, rebased onto `7c26aa21361d0e164746b6d5cac6e333b77fc718` after the independent 0.6.89 ambient/XP repair merged. That incoming runtime and release identity are preserved; the inspected shaker poses are unchanged.
 
 ## Cause and scope
 

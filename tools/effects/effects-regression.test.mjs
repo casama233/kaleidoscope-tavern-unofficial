@@ -43,24 +43,26 @@ test('one sampling tick visits 667 pairs, integer triangular offsets within both
  const rows=[];sampleAmbientPositions({x:3.8,y:-2.1,z:11.4},(...x)=>rows.push(x),rng());assert.equal(rows.length,1334);
  rows.forEach((p,i)=>{const max=i%2?31:15;[3,-3,11].forEach((v,k)=>assert.ok(Number.isInteger(p[k])&&Math.abs(p[k]-v)<=max));});
 });
-async function moduleFixture(relative,extra={}){
+async function moduleFixture(relative,extra={},random=()=>.5){
  const pending=[];const system={currentTick:0,runInterval(fn){pending.push(fn);return pending.length;},clearRun(id){pending[id-1]=undefined;},runTimeout(){return 1;}};
  const calls=[];class MolangVariableMap{constructor(){this.values={};}setFloat(k,v){this.values[k]=v;}}
  const server={system,MolangVariableMap,world:{getAllPlayers:()=>[]},...extra};
- const context=vm.createContext({console:{warn(){},log(){}},Math:Object.assign(Object.create(Math),{random:()=>.5})});
+ const context=vm.createContext({console:{warn(){},log(){}},Math:Object.assign(Object.create(Math),{random})});
  const modules=new Map();const root=path.join(ROOT,'runtime/BP/scripts');
  const load=id=>{if(modules.has(id))return modules.get(id);let m;if(id==='@minecraft/server')m=new vm.SyntheticModule(Object.keys(server),function(){for(const[k,v]of Object.entries(server))this.setExport(k,v);},{context});else m=new vm.SourceTextModule(fs.readFileSync(id,'utf8'),{context,identifier:id});modules.set(id,m);return m;};
  const m=load(path.join(root,relative));await m.link((id,from)=>load(id==='@minecraft/server'?id:path.resolve(path.dirname(from.identifier),id)));await m.evaluate();return {api:m.namespace,server,pending,calls};
 }
 test('ambient emissions are recipient-local, do not broadcast or cross dimensions',async()=>{
  const a={id:'a',location:{x:0,y:0,z:0},dimension:{id:'overworld'}},b={id:'b',location:{x:0,y:0,z:0},dimension:{id:'nether'}},c={...a,id:'c'};
- const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[a,b,c]}});const seen=[];const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
+ // Force hits in both the dense sampler and the exact sparse sampler so this
+ // test isolates recipient routing; distribution is covered by sampling tests.
+ const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[a,b,c]}},()=>0);const seen=[];const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
  f.api.registerJavaAmbient(block,viewer=>seen.push(viewer.id));f.api.registerJavaAmbient(block,viewer=>seen.push(viewer.id));assert.equal(f.pending.length,1);f.api.pulseJavaAmbient();assert.equal(seen.filter(x=>x==='a').length,1334);assert.equal(seen.filter(x=>x==='c').length,1334);assert.ok(!seen.includes('b'));
  block.typeId='air';seen.length=0;f.api.pulseJavaAmbient();assert.equal(seen.length,0);
  assert.equal(f.pending[0],undefined,'no live interval after the last emitter is removed');
 });
 test('inactive/unloaded ambient registrations expire without effects',async()=>{
- const player={location:{x:0,y:0,z:0},dimension:{id:'overworld'}};const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[player]}});let n=0;const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
+ const player={id:'expiry-viewer',location:{x:0,y:0,z:0},dimension:{id:'overworld'}};const f=await moduleFixture('bedrock/java-ambient.js',{world:{getAllPlayers:()=>[player]}},()=>0);let n=0;const block={typeId:'test',location:{x:0,y:0,z:0},dimension:{id:'overworld',getBlock:()=>block}};
  f.api.registerJavaAmbient(block,()=>n++);f.server.system.currentTick=41;f.api.pulseJavaAmbient();assert.equal(n,0);assert.equal(f.api.ambientDiagnostics.expired,1);
  assert.equal(f.pending[0],undefined,'expiry cancels the interval');
  f.api.registerJavaAmbient(block,()=>n++);assert.equal(f.pending.length,2);assert.equal(typeof f.pending[1],'function');

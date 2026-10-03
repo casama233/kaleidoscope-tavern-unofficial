@@ -1,5 +1,7 @@
 import {GUIDE_ENTRY_ICONS} from './guide-icons.js';
 import {organizeGuideNavigation} from './guide-navigation.js';
+import {preparationNotes} from '../core/guide-preparation-text.js';
+import {guideItemName} from './guide-native-names.js';
 /** One encyclopedia page per product, using Cookery's native entry renderer. */
 const LOCALES=['zh_CN','zh_TW','en_US'];
 const CATEGORY={gear:'equipment',mix_tools:'equipment',press:'equipment',barrel_drinks:'barrel',
@@ -112,6 +114,12 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   // Workbench recipes already belong to the native crafting book. Guide entries
   // explain use; preparation recipes belong to the resulting drink/food.
   if(!entry.food&&entry.recipes)entry.recipes=entry.recipes.filter(r=>r.method!=='Crafting Table');
+  for(const lc of LOCALES){
+   const name=id=>guideItemName(result,lc,id);
+   const notes=(entry.recipes??[]).flatMap(recipe=>preparationNotes(recipe,lc,name));
+   entry.mechanicsByLocale[lc]=[...new Set([...entry.mechanicsByLocale[lc],...notes])];
+  }
+  entry.mechanics=entry.mechanicsByLocale.zh_TW;
  }
  for(const [key,labels] of Object.entries({method_barrel:['酒桶','酒桶','Barrel'],method_shaker:['雪克杯','雪克杯','Shaker'],method_pressing_tub:['压榨桶','壓榨桶','Pressing Tub'],method_freezer:['冷冻柜','冷凍櫃','Freezer']}))LOCALES.forEach((lc,i)=>result.text[lc][key]=labels[i]);
  return result;

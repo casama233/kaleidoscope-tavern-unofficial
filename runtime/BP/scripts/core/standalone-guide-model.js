@@ -1,5 +1,8 @@
 /** View data only. Both guide entrances use buildCookeryGuidePayload(registry). */
 import {GUIDE_ROOTS} from '../data/guide-navigation.js';
+import {preparationText} from './guide-preparation-text.js';
+import {guideItemName} from '../data/guide-native-names.js';
+export {guideItemName};
 export const GUIDE_LANGUAGES=Object.freeze(['zh_TW','zh_CN','en_US']);
 export const GUIDE_PAGE_SIZE=18;
 const TEXT={
@@ -10,7 +13,6 @@ const TEXT={
 export const guideLocale=value=>GUIDE_LANGUAGES.includes(value)?value:'zh_TW';
 export const guideText=(locale,key)=>TEXT[guideLocale(locale)][key];
 const word=(payload,locale,key,fallback='')=>payload.text?.[locale]?.[key]??payload.text?.en_US?.[key]??fallback;
-export const guideItemName=(payload,locale,id)=>payload.names?.[locale]?.[id]??payload.names?.en_US?.[id]??String(id??'');
 const catName=(p,l,c)=>word(p,l,c.labelKey??c.id,c.fallback??c.id);
 const entriesIn=(p,id)=>p.entries.filter(e=>e.category===id||e.categories?.includes(id));
 function pageButtons(rows,node,text){
@@ -42,10 +44,11 @@ export function standaloneGuideView(payload,locale,node={type:'root'}){
  const entry=payload.entries.find(e=>e.id===node.id);if(!entry)return standaloneGuideView(payload,locale);
  if(node.type==='recipe'){
   const recipe=entry.recipes?.[node.index];if(!recipe)return standaloneGuideView(payload,locale,{type:'entry',id:entry.id});
-  const method=text.methods[recipe.method]??recipe.method,lines=[text.ingredients+':',...(recipe.ingredients??[]).map((id,i)=>(i+1)+'. '+guideItemName(payload,locale,id)),'',text.result+': '+guideItemName(payload,locale,recipe.result??entry.id)+' ×'+(recipe.count??1)];
-  if(recipe.time>0)lines.push(text.time+': '+recipe.time+' '+text.ticks+' ('+(recipe.time/20)+' s)');
-  if(recipe.method==='Crafting Table')lines.push('',text.craftNote);
-  return {node,title:guideItemName(payload,locale,entry.id)+' · '+method,body:lines.join('\n'),buttons:[back]};
+  const method=text.methods[recipe.method]??recipe.method,{sections,heading}=preparationText(recipe,locale,id=>guideItemName(payload,locale,id));
+  sections.push(heading(text.result,[guideItemName(payload,locale,recipe.result??entry.id)+' ×'+(recipe.count??1)]));
+  if(recipe.time>0)sections.push(heading(text.time,[(recipe.time/20)+' s']));
+  if(recipe.method==='Crafting Table')sections.push(text.craftNote);
+  return {node,title:'§l'+guideItemName(payload,locale,entry.id)+' · '+method,body:sections.join('\n\n'),buttons:[back]};
  }
  const lines=[...(entry.mechanicsByLocale?.[locale]??entry.mechanicsByLocale?.en_US??entry.mechanics??[])];
  if(Number.isFinite(entry.stack))lines.push(text.stack+': '+entry.stack);
@@ -55,5 +58,5 @@ export function standaloneGuideView(payload,locale,node={type:'root'}){
  const rows=(entry.recipes??[]).map((r,index)=>({label:text.recipe+' '+(index+1)+' · '+(text.methods[r.method]??r.method),action:{type:'recipe',id:entry.id,index}}));
  for(const id of entry.usedBy??[]){const target=payload.entries.find(e=>e.id===id);if(target)rows.push({...entryButton(target),label:text.usedBy+': '+guideItemName(payload,locale,id)});}
  const result=pageButtons(rows,node,text);result.buttons.push(back);
- return {node:{...node,page:result.page},title:guideItemName(payload,locale,entry.id),body:lines.join('\n\n'),buttons:result.buttons};
+ return {node:{...node,page:result.page},title:'§l'+guideItemName(payload,locale,entry.id),body:lines.join('\n\n'),buttons:result.buttons};
 }

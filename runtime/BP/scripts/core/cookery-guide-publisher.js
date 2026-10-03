@@ -41,7 +41,7 @@ export function cookery106WirePayload(payload){
  const entries=payload.entries.map(entry=>{
   needed.add(entry.id);
   for(const id of entry.usedBy??[])needed.add(id);
-  for(const recipe of entry.recipes??[]){for(const id of recipe.ingredients??[])needed.add(id);if(recipe.result)needed.add(recipe.result);}
+  for(const recipe of entry.recipes??[]){for(const id of recipe.ingredients??[])needed.add(id);if(recipe.result)needed.add(recipe.result);for(const id of [recipe.preparation?.fluid,recipe.preparation?.fluidItem,recipe.preparation?.carrier])if(id)needed.add(id);}
   const localized=entry.mechanicsByLocale??{};
   const zh=localized.zh_TW??entry.mechanics??[],en=localized.en_US??[];
   const fallback=[...new Set([...zh,...en])];

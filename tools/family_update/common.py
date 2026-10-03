@@ -353,7 +353,36 @@ def archive_paths():
 def engine_inputs():
     """Pin everything used by the isolated engine, including builtin packs."""
     roots = ['definitions', 'behavior_packs', 'resource_packs', 'config', 'minecraftpe', 'treatments']
-    return {'binary': sha(B / 'bedrock_server'), 'trees': {name: hashes(B / name) for name in roots}}
+    trees={name:hashes(B/name) for name in roots}
+    # Normal BDS shutdown deletes client delivery ZIPs. They are excluded only
+    # after verifying every byte against the active resource pack, and are not
+    # copied into isolated engines. Unknown files remain pinned inputs.
+    for name in client_pack_cache():trees['minecraftpe'].pop(name)
+    return {'binary': sha(B / 'bedrock_server'), 'trees': trees}
+
+
+def client_pack_cache():
+    import re,zipfile
+    refs={r['pack_id']:r['version'] for r in read(W/'world_resource_packs.json')}
+    roots={}
+    for path in (W/'resource_packs').glob('*/manifest.json'):
+        uid=read(path)['header']['uuid']
+        if uid in refs:
+            assert uid not in roots, 'Ambiguous resource UUID in cache validation'
+            roots[uid]=path.parent
+    verified={}
+    for path in (B/'minecraftpe').glob('*.zip'):
+        match=re.fullmatch(r'([0-9a-f-]{36})_(\d+)\.(\d+)\.(\d+)\.zip',path.name)
+        if not match:continue
+        uid=match[1];version=list(map(int,match.groups()[1:]))
+        if uid not in refs or version!=refs[uid]:continue
+        expected=hashes(roots[uid])
+        with zipfile.ZipFile(path) as archive:
+            names=archive.namelist();assert len(names)==len(set(names)), 'Duplicate client cache entries'
+            actual={n:hashlib.sha256(archive.read(n)).hexdigest() for n in names if not n.endswith('/')}
+        assert actual==expected, 'Client resource cache differs from active pack: '+path.name
+        verified[path.name]={'uuid':uid,'version':version,'sha256':sha(path),'files':len(actual),'exact_active_resource_bytes':True}
+    return verified
 
 
 def verify_server_binding():

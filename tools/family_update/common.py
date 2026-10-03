@@ -363,6 +363,8 @@ def engine_inputs():
 
 def client_pack_cache():
     import re,zipfile
+    paths=list((B/'minecraftpe').glob('*.zip'))
+    if not paths:return {}
     refs={r['pack_id']:r['version'] for r in read(W/'world_resource_packs.json')}
     roots={}
     for path in (W/'resource_packs').glob('*/manifest.json'):
@@ -371,7 +373,7 @@ def client_pack_cache():
             assert uid not in roots, 'Ambiguous resource UUID in cache validation'
             roots[uid]=path.parent
     verified={}
-    for path in (B/'minecraftpe').glob('*.zip'):
+    for path in paths:
         match=re.fullmatch(r'([0-9a-f-]{36})_(\d+)\.(\d+)\.(\d+)\.zip',path.name)
         if not match:continue
         uid=match[1];version=list(map(int,match.groups()[1:]))

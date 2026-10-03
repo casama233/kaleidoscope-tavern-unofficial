@@ -19,11 +19,16 @@ def verify_extension(receipt,prior):
     def verified(ref):
         assert sha(ref['path'])==ref['sha256'], 'Private functional evidence changed'
         reports.append(ref);return read(Path(ref['path']))
+    tested=verified(proof['tested_family_receipt'])
+    assert {p['uuid']:p['files'] for p in tested['packs'] if p['source'].get('repository')==config['repository']}==proof['packs'], 'Native tested private bytes differ'
+    for item in owned:
+        assert item['version']==config['version']
     checks=proof['checks'];assert checks, 'Private canonical checks missing'
     for check in checks:
         assert check['exit_code']==0 and sha(check['log'])==check['sha256']
     assert any(check['command'][-3:]==['check','--release','--history-base='+proof['history_base']] for check in checks), 'Private append-only baseline check missing'
     preservation=verified(proof['preservation']['report'])
+    assert Path(preservation['candidate'])==Path(proof['tested_family_receipt']['path']).parent, 'Native report describes another candidate'
     assert preservation['test_world_only'] and preservation['client'] is False and preservation['simulated_players'] is False
     assert [r['phase'] for r in preservation['runs']]==['first','restart']
     assert preservation['before'] and preservation['after']==preservation['before'], 'Private native inventory metadata was lost'
@@ -43,6 +48,12 @@ def verify_extension(receipt,prior):
     # The test module and exposed hook are overlays in an isolated world, never
     # included in the release candidate or presented as human client acceptance.
     assert len(functional['overlays'])==2
+    hook=functional['overlays'][0]
+    assert hook['original_sha256'] in [digest for p in tested['packs'] for name,digest in p['files'].items() if name=='scripts/custom_components/blocks/freezer.js'], 'Functional probe hooked another host version'
+    for item in owned:
+        side=item['side']+'_packs';root=Path(hook['path']).parents[5]/side/item['uuid']
+        actual={p.relative_to(root).as_posix():sha(p) for p in root.rglob('*') if p.is_file()}
+        assert actual==item['files'], 'Functional probe private source changed'
     for overlay in functional['overlays']:
         if 'sha256' in overlay:assert sha(overlay['path'])==overlay['sha256']
     atomic(R/'extension-validation-check.json',{'source':report_ref(Path(path)),'coverage':coverage,'exact_owned_packs':len(owned),'client':False,'production_ready':False})

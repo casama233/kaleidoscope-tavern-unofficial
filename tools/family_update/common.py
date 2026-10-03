@@ -92,6 +92,8 @@ def configure(path):
     if {NATIVE_PORT, NATIVE_PORT + 1} & {SAVED_PORT, SAVED_PORT + 1}:
         raise ValueError('The isolated engine ports overlap')
     STARTUP_MARKERS = CONFIG.get('startup_markers', [])
+    if type(CONFIG.get('preserve_captured_experiments',False)) is not bool:
+        raise ValueError('preserve_captured_experiments must be a boolean; flags cannot be supplied or invented')
     if not isinstance(STARTUP_MARKERS, list) or not STARTUP_MARKERS or any(not isinstance(marker, str) or not marker.strip() for marker in STARTUP_MARKERS):
         raise ValueError('startup_markers must be a nonempty list of nonempty strings')
     required_markers = ['Server started.', 'Registered kaleidoscope_world_liquor', '[Cookery board API 0.1.0] registered kaleidoscope_grilling:chopping_board/chicken_skin']

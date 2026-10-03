@@ -27,7 +27,8 @@ def blank_level(target, name):
     data['LevelName'] = nbtlib.String(name)
     data['SpawnX'], data['SpawnY'], data['SpawnZ'] = nbtlib.Int(0), nbtlib.Int(80), nbtlib.Int(64)
     data['GameType'] = nbtlib.Int(1)
-    data['experiments'] = nbtlib.Compound()
+    if not CONFIG.get('preserve_captured_experiments',False):
+        data['experiments'] = nbtlib.Compound()
     output = io.BytesIO(); data.write(output, byteorder='little'); body = output.getvalue()
     (target / 'level.dat').write_bytes(struct.pack('<II', 10, len(body)) + body)
 

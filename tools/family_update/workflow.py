@@ -33,6 +33,10 @@ def verify_native(verified_candidate=None):
     assert evidence['engine_inputs'] == engine_inputs(), 'Native engine builtin packs or configuration changed'
     assert evidence['scenario_metadata'] == report_ref(R / 'production-before/level-metadata.dat'), 'Native scenario metadata changed'
     assert evidence['bds'] is True and evidence['client'] is False
+    assert evidence.get('preserve_captured_experiments',False)==CONFIG.get('preserve_captured_experiments',False), 'Native feature profile changed'
+    if CONFIG.get('preserve_captured_experiments',False):
+        from family_update.native_common import level_metadata
+        assert evidence['experiments']==level_metadata(R/'production-before/level-metadata.dat')['experiments'].unpack(), 'Native flags differ from the captured world'
     assert evidence['test_only_overlays'] == [] and evidence['simulated_players'] is False
     assert evidence['packs'] == len(receipt['packs'])
     assert [run['phase'] for run in evidence['runs']] == ['first', 'restart'], 'Native first/start and restart are distinct required scenes'

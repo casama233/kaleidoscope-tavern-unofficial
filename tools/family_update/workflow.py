@@ -84,11 +84,23 @@ def validate_ci_rows(rows, sources):
         assert all(status['state'] == 'success' for status in row['statuses']), f'{key} commit status failed'
 
 
+def ci_revision(source,pr):
+    """An advanced PR base requires checks on the exact resulting merge tree."""
+    head=pr['head']['sha']
+    if git(SOURCES[pr['_source']], 'rev-parse', head+'^{tree}')==source['tree']:
+        return head,'reviewed_head_tree'
+    merged=pr['merge_commit_sha']
+    assert merged==source['commit'], 'Advanced source needs its own current merged PR'
+    assert git(SOURCES[pr['_source']], 'rev-parse', merged+'^{tree}')==source['tree'], 'PR merged tree differs from canonical source'
+    return merged,'exact_postmerge_tree'
+
+
 def verify_ci():
     """Record actual merged PR checks for the exact canonical source trees.
 
     A merge commit may differ from its PR head commit, but the complete Git
-    tree must be identical. An unrelated green PR cannot certify this release.
+    tree must be identical. When the PR base advanced, require actual checks on
+    its exact resulting current merge commit; head checks cannot certify it.
     """
     build = read(R / 'build-evidence.json')
     configured = CONFIG.get('pull_requests', {})
@@ -112,8 +124,8 @@ def verify_ci():
         assert pr['merged'] is True, f'{key} PR #{number} has not merged'
         assert pr['base']['repo']['full_name'] == repository and pr['base']['ref'] == 'main'
         assert pr['head']['repo']['full_name'] == repository, 'Unexpected PR source repository'
-        head = pr['head']['sha']
-        assert git(SOURCES[key], 'rev-parse', head + '^{tree}') == source['tree'], f'{key} PR does not match the complete current source tree'
+        reviewed_head=pr['head']['sha']
+        head,revision_kind=ci_revision(source,{**pr,'_source':key})
         ancestor = subprocess.run(['git', '-C', str(SOURCES[key]), 'merge-base', '--is-ancestor', pr['merge_commit_sha'], source['commit']], capture_output=True)
         assert ancestor.returncode == 0, f'{key} PR merge is not on canonical main'
         response = gh_json(f'repos/{repository}/commits/{head}/check-runs?per_page=100')
@@ -129,7 +141,7 @@ def verify_ci():
         assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), f'{key} checks are incomplete or failed'
         statuses = gh_json(f'repos/{repository}/commits/{head}/status')
         assert not statuses['statuses'] or statuses['state'] == 'success', f'{key} commit status failed'
-        rows.append({'source': key, 'repository': repository, 'number': number, 'url': pr['html_url'], 'head': head, 'merge_commit': pr['merge_commit_sha'], 'source_tree': source['tree'], 'checks': [
+        rows.append({'source': key, 'repository': repository, 'number': number, 'url': pr['html_url'], 'head': head, 'reviewed_pull_request_head':reviewed_head,'ci_revision_kind':revision_kind, 'merge_commit': pr['merge_commit_sha'], 'source_tree': source['tree'], 'checks': [
             {**{field: check.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at']}, 'app_slug': check['app']['slug']}
             for check in checks
         ], 'statuses': [{field: status.get(field) for field in ['context', 'state', 'target_url']} for status in statuses['statuses']]})

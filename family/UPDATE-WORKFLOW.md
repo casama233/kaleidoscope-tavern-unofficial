@@ -92,3 +92,11 @@ cache 重用只適用於同一份不可變候選。不是只看版號、mtime、
 組裝器在單次 build 中只索引每份 upstream archive 一次，使用時重新核對選中 bytes，
 不永久相信檔名快取。复制後已驗證的檔案清單可在同一階段重用；停服、安裝、啟動等
 狀態邊界的檔案檢查仍保留。
+
+### 合併期間來源前進
+
+當另一個已審查 PR 在合併前進入 base，PR head 的完整 tree 可能不等於最後的
+canonical merge tree。此時僅接受「該 PR 的實際 merge commit 就是目前 canonical
+commit」且完整 tree 相同的情況；檢查改查該 merge commit 的實際 GitHub CI。
+必要 runtime jobs 必須對此完整來源成功，不能沿用舊 head 的綠燈。收據分別記錄
+reviewed PR head、checked commit 與 tree。其他後續來源仍要求自己的目前 merged PR。

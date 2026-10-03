@@ -1,3 +1,4 @@
+import {nativeStorageView} from './native-item-storage.js';
 import {storageHelpersByAnchor,syncStorageVisualPose} from './storage-visual-maintenance.js';
 import {registerJavaAmbient,unregisterJavaAmbient} from './java-ambient.js';
 import {emitSingle} from './effect-feedback.js';
@@ -10,7 +11,7 @@ import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
-const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=new CircularRackStore(world),visuals=new Map();let cursor=0;
+const HELPER=NS+':circular_rack_bottle_visual',ANCHOR=NS+':circular_rack_anchor',store=nativeStorageView(new CircularRackStore(world)),visuals=new Map();let cursor=0;
 export const circularRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,particles:0,errors:[],redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){circularRackDiagnostics.errors.push(String(e));if(circularRackDiagnostics.errors.length>16)circularRackDiagnostics.errors.shift();}
 function discard(e,reason){const id=e.id;visuals.delete(id);if(e.isValid)e.remove();circularRackDiagnostics[reason]=(circularRackDiagnostics[reason]??0)+1;}

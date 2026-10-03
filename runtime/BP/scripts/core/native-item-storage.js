@@ -33,6 +33,15 @@ export class NativeItemStorage {
   for(let i=0;i<SIZE;i++)check(ids[i]?items[i]?.typeId===ids[i]&&items[i].amount===1:!items[i],'NATIVE_STORAGE_CONTENT_MISMATCH');
   return {raw,required,record,entity,container,ids,items};
  }
+ /** Read an adopted native container without trusting a stale display index. */
+ readAdopted({key,dimension,position}){
+  const raw=this.backend.getDynamicProperty(nativeItemKey(key));
+  if(raw===undefined){check(this.backend.getDynamicProperty(requiredKey(key))===undefined,'NATIVE_STORAGE_MISSING');return undefined;}
+  check(typeof raw==='string','NATIVE_STORAGE_CORRUPT');let record;
+  try{record=JSON.parse(raw);}catch{check(false,'NATIVE_STORAGE_CORRUPT');}
+  // read still validates key, location, owner, token and every native slot.
+  return this.read({key,dimension,position,ids:record?.ids,requireNative:true});
+ }
  plan({key,dimension,position,oldIds,nextIds,incoming,give=[],legacyStacks,requireNative=false}){
   position={x:position.x,y:position.y,z:position.z};
   check(typeof key==='string'&&key.length>0&&Object.values(position).every(Number.isInteger),'NATIVE_STORAGE_LOCATION');

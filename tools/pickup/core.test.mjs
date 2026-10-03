@@ -3,6 +3,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planInventory,commitInventory} from '../../runtime/BP/scripts/core/inventory.js';
 import {NativeItemStorage,NATIVE_ITEM_ENTITY,nativeItemKey} from '../../runtime/BP/scripts/core/native-item-storage.js';
+import {projectStoredItemState,projectStorageReads} from '../../runtime/BP/scripts/core/storage-item-projection.js';
+import {CellarCabinetStore,emptyCellarCabinet,cellarCabinetTake} from '../../runtime/BP/scripts/core/cellar-cabinet.js';
 import {cellarCabinetSlot} from '../../runtime/BP/scripts/core/cellar-cabinet.js';
 import {storageFeedback,placedPickupFeedback} from '../../runtime/BP/scripts/bedrock/pickup-feedback.js';
 class Stack {
@@ -140,4 +142,35 @@ test('fully overflowed pickup has no inventory-insertion sound; drink still play
 });
 test('cosmetic sound errors never throw into transaction callers',()=>{
  const block={location:{x:0,y:0,z:0},dimension:{playSound(){throw Error('sound');}}};assert.doesNotThrow(()=>storageFeedback(block,{taking:true}));
+});
+
+
+test('adopted native inventory supplies the stale furniture index without writing or reconstructing stacks',()=>{
+ const f=fixture(),id='kaleidoscope_tavern:wine_q6',ids=Array(9).fill(null);
+ for(let i=0;i<2;i++){const next=ids.slice();next[i]=id;const p=f.plan({oldIds:ids,nextIds:next,incoming:new Stack(id,1,{name:'Original '+i,lore:['Foreign '+i]})});p.apply();p.finish();ids[i]=id;}
+ const stale={...emptyCellarCabinet(),revision:17};f.backend.setDynamicProperty(f.key,JSON.stringify(stale));
+ const before=new Map(f.map),entity=[...f.entities.values()][0],nativeBefore=entity.container.items.map(x=>x?.clone());
+ const store=projectStorageReads(new CellarCabinetStore(f.backend),(key,state)=>projectStoredItemState(key,state,f.storage.readAdopted({key,dimension:f.dimension,position:f.position}).ids));
+ const actual=store.load(f.key);assert.deepEqual(actual.slots,ids);assert.equal(actual.revision,17);assert.deepEqual(f.map,before);assert.deepEqual(entity.container.items,nativeBefore);
+ const tx=cellarCabinetTake(actual,1),native=f.plan({oldIds:actual.slots,nextIds:tx.state.slots,give:[{id,count:1,delivery:'hand'}]});
+ assert.deepEqual(native.outputs[0].stack.meta,{name:'Original 1',lore:['Foreign 1']});
+ store.save(f.key,tx.state,actual.revision);native.apply();native.finish();assert.equal(store.load(f.key).slots[1],null);assert.equal(entity.container.getItem(0).meta.name,'Original 0');assert.equal(entity.container.getItem(1),undefined);
+});
+
+test('native display projection preserves layout fields, migration receipt and exact physical slot order',()=>{
+ const wine='kaleidoscope_tavern:wine_q6',ids=[null,wine,...Array(7).fill(null)],state={schema:1,revision:9,left:wine,right:null,single:false,type:'test:bar',layout:'bar_cabinet',migrationDigest:'receipt'};
+ const projected=projectStoredItemState('kt:extension_storage/test/bar/overworld/2_3_4',state,ids);
+ assert.equal(projected.left,null);assert.equal(projected.right,wine);assert.equal(projected.migrationDigest,'receipt');assert.equal(projected.type,'test:bar');assert.equal(projected.revision,9);assert.equal(state.left,wine);
+ const regular=projectStoredItemState('kt:tilted_rack/overworld/2_3_4',{schema:1,revision:2,slots:[null,null,null]},[wine,null,wine,...Array(6).fill(null)]);assert.deepEqual(regular.slots,[wine,null,wine]);
+ assert.throws(()=>projectStoredItemState('kt:tilted_rack/overworld/2_3_4',regular,[wine,null,wine,wine,...Array(5).fill(null)]),/NATIVE_STORAGE_LAYOUT_MISMATCH/);
+ const single=projectStoredItemState('kt:bar_cabinet/overworld/bar_cabinet/2_3_4',{schema:1,revision:1,left:null,right:null,single:false},['kaleidoscope_tavern:carignan_q6',...Array(8).fill(null)]);assert.equal(single.single,true);
+ const deleted={schema:1,revision:3,deleted:true};assert.equal(projectStoredItemState('kt:extension_storage/test/bar/overworld/2_3_4',deleted,ids),deleted);
+});
+
+test('adopted reads retain missing, wrong-owner and native-content corruption barriers',()=>{
+ const f=fixture(),ids=fill(f,2);assert.deepEqual(f.storage.readAdopted({key:f.key,dimension:f.dimension,position:f.position}).ids,ids);
+ [...f.entities.values()][0].setDynamicProperty('kaleidoscope_tavern:storage_owner','foreign');assert.throws(()=>f.storage.readAdopted({key:f.key,dimension:f.dimension,position:f.position}),/NATIVE_STORAGE_WRONG_OWNER/);
+ [...f.entities.values()][0].setDynamicProperty('kaleidoscope_tavern:storage_owner',f.key);[...f.entities.values()][0].container.setItem(0,undefined);assert.throws(()=>f.storage.readAdopted({key:f.key,dimension:f.dimension,position:f.position}),/NATIVE_STORAGE_CONTENT_MISMATCH/);
+ f.map.delete(nativeItemKey(f.key));assert.throws(()=>f.storage.readAdopted({key:f.key,dimension:f.dimension,position:f.position}),/NATIVE_STORAGE_MISSING/);
+ const legacy=fixture();assert.equal(legacy.storage.readAdopted({key:legacy.key,dimension:legacy.dimension,position:legacy.position}),undefined);
 });

@@ -1,4 +1,4 @@
-import {nativeItems,nativeStoragePlan,glasswareStorageKey} from './native-item-storage.js';
+import {nativeItems,nativeStoragePlan,glasswareStorageKey,projectNativeStoredState} from './native-item-storage.js';
 import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {feedback} from './break-feedback.js';
 import {consumeScriptedBreak,replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
@@ -47,7 +47,7 @@ export function naturalBreak(event,params){
  }
  if(cells.length){const key=d.id+'/'+at(root)+'/'+drop;if(seen.get(key)===system.currentTick)return;seen.set(key,system.currentTick);for(const [k,t]of seen)if(t<system.currentTick-1)seen.delete(k);}
  const suffix=dim+'/'+at(root),record=(key)=>{keys.push(key);const raw=world.getDynamicProperty(key);return typeof raw==='string'?JSON.parse(raw):undefined;};
- const storedDrops=(key,data)=>{const plan=nativeStoragePlan(block,key,data,undefined);nativePlans.push(plan);for(const stack of plan.before)if(stack)drops.push(stack);};
+ const storedDrops=(key,data)=>{const plan=nativeStoragePlan(block,key,projectNativeStoredState(key,data),undefined);nativePlans.push(plan);for(const stack of plan.before)if(stack)drops.push(stack);};
  let data;
  if(short==='barrel_core'||short==='barrel_part'||short==='pressing_tub'){
   data=record('kt:machine/'+suffix);if(data?.kind==='pressing_tub')for(const row of data.slots.filter(Boolean))add(row.id,row.count);
@@ -62,7 +62,7 @@ export function naturalBreak(event,params){
   data=record('kt:vanillaBottleDisplays/'+d.id+'/'+at(root));if(data?.item==='minecraft:potion'){const plan=potionDisplayRemoval(block,data);nativePlans.push(plan);drops.push(plan.outputs[0].stack);drop=undefined;}else drop=short==='xp_bottle'?'minecraft:experience_bottle':undefined;
  }else if(params?.params?.storage){
   const key='kt:extension_storage/'+id.replace(':','/')+'/'+suffix;data=record(key);
-  if(data&&!data.deleted&&!data.prepared)for(const item of data.slots??[data.left,data.right])add(item);
+  if(data&&!data.deleted&&!data.prepared)storedDrops(key,data);
  }else if(['holder','tilted_rack','circular_rack','cellar_cabinet','bar_cabinet','glass_bar_cabinet'].includes(short)){
   const key=['bar_cabinet','glass_bar_cabinet'].includes(short)?'kt:bar_cabinet/'+dim+'/'+short+'/'+at(root):'kt:'+short+'/'+suffix;
   data=record(key);if(data)storedDrops(key,data);

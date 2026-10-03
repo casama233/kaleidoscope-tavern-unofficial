@@ -1,3 +1,4 @@
+import {nativeStorageView} from './native-item-storage.js';
 import {cellarCabinetRedstoneLaunch} from './cellar-cabinet.js';
 import {syncStorageVisualPose} from './storage-visual-maintenance.js';
 /** External cabinet adapter. No addon inventory engine, item whitelist or pose table. */
@@ -18,7 +19,7 @@ function error(e){extensionFurnitureDiagnostics.errors.push(String(e));if(extens
 export function createExtensionFurniture(registry){
  const visuals=new Map(),probes=new Map(),placements=new Map();let cursor=0;
  const definition=block=>registry.furniture(block?.typeId);
- const storeFor=(block,def=definition(block))=>{check(def,'UNKNOWN_FURNITURE');return new ExtensionCabinetStore(world,def,block.dimension.id,block.location);};
+ const storeFor=(block,def=definition(block))=>{check(def,'UNKNOWN_FURNITURE');return nativeStorageView(new ExtensionCabinetStore(world,def,block.dimension.id,block.location));};
  function probe(def,dimension,position){
   const key=def.block+'/'+dimension+'/'+JSON.stringify(position),last=probes.get(key)??-100;
   if(system.currentTick-last<10)return;probes.set(key,system.currentTick);

@@ -1,3 +1,4 @@
+import {nativeStorageView} from './native-item-storage.js';
 import {rackLaunch} from '../core/projectile-parity.js';
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
@@ -8,7 +9,7 @@ import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
-const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=new TiltedRackStore(world),visuals=new Map();let cursor=0;
+const HELPER=NS+':tilted_rack_bottle_visual',ANCHOR=NS+':tilted_rack_anchor',store=nativeStorageView(new TiltedRackStore(world)),visuals=new Map();let cursor=0;
 export const tiltedRackDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,errors:[],redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0};
 function error(e){tiltedRackDiagnostics.errors.push(String(e));if(tiltedRackDiagnostics.errors.length>16)tiltedRackDiagnostics.errors.shift();}
 function slotHelpers(block,slot){const a=tiltedRackAnchor(tiltedRackKey(block.dimension.id,block.location),slot);return block.dimension.getEntities({location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}

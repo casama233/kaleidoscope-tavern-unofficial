@@ -1,3 +1,4 @@
+import {nativeStorageView} from './native-item-storage.js';
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation} from '@minecraft/server';
@@ -7,7 +8,7 @@ import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals} from './stateful-storage-router.js';
-const HELPER=NS+':bar_cabinet_bottle_visual',ANCHOR=NS+':bar_cabinet_anchor',store=new BarCabinetStore(world),visuals=new Map();let cursor=0;
+const HELPER=NS+':bar_cabinet_bottle_visual',ANCHOR=NS+':bar_cabinet_anchor',store=nativeStorageView(new BarCabinetStore(world)),visuals=new Map();let cursor=0;
 export const barCabinetDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,errors:[]};
 function error(e){barCabinetDiagnostics.errors.push(String(e));if(barCabinetDiagnostics.errors.length>16)barCabinetDiagnostics.errors.shift();}
 function cabinet(block){return block&&CABINET_TYPES.includes(block.typeId);}

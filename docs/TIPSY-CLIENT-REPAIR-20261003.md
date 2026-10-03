@@ -110,7 +110,9 @@ historical evidence. The follow-up does not change shaker checks or geometry.
 Both command and API cancellation tests cover Milk, death, respawn, leave,
 explicit clear and opt-out: no subsequent pulses or foreign shake stop/clear;
 the last submitted event has at most 0.25 seconds remaining on the script clock.
-Natural native expiry and delivery latency still require root's client test.
+Root-reported native status/tracker expiry observations are recorded in the
+[limited native checkpoint](TIPSY-NATIVE-CHECKPOINT-20261003.md). Delivered visual
+residual and latency still require separate client measurement.
 
 Release/immutable-hash gates remain enabled. The inherited base was already
 unfrozen: its committed BP tree is
@@ -156,4 +158,5 @@ bridge, native BDS and client tests are not certified here.
    not a reason to add nausea or force a camera preset.
 
 Record pass/fail/untested for each native case. Native client and sound acceptance
-have not been performed by this worker.
+have not been performed by this worker. Root's limited reported observations are
+documented separately; they do not certify the complete acceptance matrix.

@@ -47,3 +47,12 @@ the exact inherited flags and cache validation checks their captured values.
 Default QA continues to clear all experimental flags. Native custom containers
 require the target world's existing Upcoming Creator Features setting in the
 measured engine; a blank world with that setting cleared is a different scenario.
+
+Normal BDS shutdown removes generated `minecraftpe/UUID_version.zip` client
+resource delivery caches. Each excluded ZIP must match an active resource UUID,
+version and the full per-file hash inventory exactly. Invalid or changed cache
+bytes reject the check; unknown files remain pinned engine inputs. Verified
+delivery caches are omitted from isolated engine copies and reported separately.
+Binary, builtin packs, definitions, permissions, treatments and actual resource
+packs remain strict inputs. This is based on a measured normal-stop deletion,
+not an unchecked hash refresh.

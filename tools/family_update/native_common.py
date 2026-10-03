@@ -10,7 +10,10 @@ def setup_engine(engine, world_name, port):
     for name in ['bedrock_server', 'definitions', 'behavior_packs', 'resource_packs']:
         (engine / name).symlink_to((B / name).resolve(), target_is_directory=(B / name).is_dir())
     for name in ['config', 'minecraftpe', 'treatments']:
-        shutil.copytree(B / name, engine / name)
+        if name=='minecraftpe':
+            cache=client_pack_cache()
+            shutil.copytree(B/name,engine/name,ignore=lambda directory,names:[n for n in names if Path(directory)==B/name and n in cache])
+        else:shutil.copytree(B / name, engine / name)
     (engine / 'allowlist.json').write_text('[]\n')
     (engine / 'server.properties').write_text(f'server-name=Parity isolated native QA\nlevel-name={world_name}\nserver-port={port}\nserver-portv6={port+1}\nonline-mode=true\nallow-list=true\nview-distance=5\ntick-distance=4\nmax-threads=2\nenable-lan-visibility=false\ncontent-log-file-enabled=true\ncontent-log-console-output-enabled=true\ntransport=nethernet\n')
 

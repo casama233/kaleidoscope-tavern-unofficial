@@ -20,7 +20,8 @@ def apply_host_extension(spec,owned_root,host_root,source):
  for name,expected in spec['original_files'].items():
   script=name.startswith('scripts/') and name.endswith('.js')
   item=name.startswith('items/') and name.endswith('.json')
-  if not script and not item:raise ValueError('only script hooks and reviewed item capabilities permitted; author identity is immutable')
+  block=name.startswith('blocks/kitchen/freezer') and name.endswith('.json')
+  if not script and not item and not block:raise ValueError('only script hooks and reviewed additive capabilities permitted; author identity is immutable')
   if digest(safe(host_root,name))!=expected:raise ValueError('original host file hash differs '+name)
  changes={}
  for name,expected in spec['patched_files'].items():
@@ -30,10 +31,18 @@ def apply_host_extension(spec,owned_root,host_root,source):
    data=json.loads(text);updates=[o for o in spec.get('json_updates',[]) if o['path']==name]
    if not updates:raise ValueError('item capability update missing')
    for op in updates:
-    if op.get('pointer')!=['minecraft:item','components','minecraft:allow_off_hand'] or op.get('value') is not True:raise ValueError('only additive offhand capability is allowed')
-    components=data['minecraft:item']['components']
-    if 'minecraft:allow_off_hand' in components:raise ValueError('original capability already exists')
-    components['minecraft:allow_off_hand']=True
+    pointer=op.get('pointer');value=op.get('value')
+    if name.startswith('items/'):
+     if pointer!=['minecraft:item','components','minecraft:allow_off_hand'] or value is not True:raise ValueError('only additive offhand capability is allowed')
+    else:
+     identifier=data['minecraft:block']['description']['identifier']
+     allowed={'kaleidoscope_chinesefood:freezer'+suffix for suffix in ['', '_green', '_light_blue', '_orange', '_pink', '_yellow']}
+     if identifier not in allowed:raise ValueError('native storage repair is restricted to the six author freezers')
+     native={'container':{'slot_count':54},'dynamic_properties':True}
+     if not ((pointer==['minecraft:block','components','minecraft:block_entity'] and value==native) or (pointer==['minecraft:block','components','minecraft:loot'] and value=='loot_tables/senluo_native/freezer_empty.json')):raise ValueError('only reviewed additive freezer storage and empty loot are allowed')
+    components=data[pointer[0]]['components'];capability=pointer[-1]
+    if capability in components:raise ValueError('original capability already exists')
+    components[capability]=value
    text=json.dumps(data,ensure_ascii=False,indent=2)+'\n'
   for op in spec['insertions']:
    if op['path']!=name:continue
@@ -43,9 +52,12 @@ def apply_host_extension(spec,owned_root,host_root,source):
   if hashlib.sha256(text.encode()).hexdigest()!=expected:raise ValueError('patched host hash differs '+name)
   changes[name]=text.encode()
  for name in spec['copies'].values():
-  if not name.startswith('scripts/') or not name.endswith('.js') or safe(host_root,name).exists() or name in changes:raise ValueError('extension copy would replace host bytes')
+  script=name.startswith('scripts/') and name.endswith('.js')
+  empty_loot=name=='loot_tables/senluo_native/freezer_empty.json'
+  if not (script or empty_loot) or safe(host_root,name).exists() or name in changes:raise ValueError('extension copy would replace host bytes')
  for name in spec['copies']:
   if not safe(owned_root,name).is_file():raise ValueError('extension module missing')
+  if spec['copies'][name]=='loot_tables/senluo_native/freezer_empty.json' and json.loads(safe(owned_root,name).read_text())!={'pools':[]}:raise ValueError('freezer loot must be empty')
  for op in spec['insertions']:
   if op['path'] not in changes:raise ValueError('unlisted extension insertion')
  for op in spec.get('json_updates',[]):

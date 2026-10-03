@@ -56,6 +56,22 @@ class ReviewedHostExtensionTests(unittest.TestCase):
    with self.assertRaises(ValueError):apply_host_extension(spec,own,host,source)
 
 class AdditiveHostItemCapabilityTests(unittest.TestCase):
+ def test_freezer_storage_is_additive_and_other_blocks_or_capabilities_fail(self):
+  import hashlib,copy
+  from host_extensions import apply_host_extension
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);own=root/'own';host=root/'host';own.mkdir();(host/'blocks/kitchen').mkdir(parents=True)
+   name='blocks/kitchen/freezer.json';p=host/name
+   original={'minecraft:block':{'description':{'identifier':'kaleidoscope_chinesefood:freezer'},'components':{}}}
+   before=json.dumps(original,indent=2)+'\n';p.write_text(before)
+   native={'container':{'slot_count':54},'dynamic_properties':True};changed=copy.deepcopy(original);changed['minecraft:block']['components']['minecraft:block_entity']=native
+   h=lambda x:hashlib.sha256(x.encode()).hexdigest();op={'path':name,'pointer':['minecraft:block','components','minecraft:block_entity'],'value':native}
+   spec={'schema':1,'id':'own:freezer','version':[1,0,0],'expires':'2099-01-01','feedback':'report','authorization':'repair','removal_condition':'author restores storage','archive_sha256':'pinned','original_files':{name:h(before)},'patched_files':{name:h(json.dumps(changed,ensure_ascii=False,indent=2)+'\n')},'insertions':[],'imports':{},'copies':{},'json_updates':[op]}
+   for value in [{'container':{'slot_count':999}},True]:
+    with self.assertRaises(ValueError):apply_host_extension({**spec,'json_updates':[{**op,'value':value}]},own,host,{'owner':'upstream','archive_sha256':'pinned'})
+    self.assertEqual(p.read_text(),before)
+   apply_host_extension(spec,own,host,{'owner':'upstream','archive_sha256':'pinned'})
+   self.assertEqual(json.loads(p.read_text()),changed)
  def test_only_pinned_additive_offhand_capability_is_accepted(self):
   import hashlib,copy
   from host_extensions import apply_host_extension

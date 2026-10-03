@@ -211,14 +211,72 @@ def live_inventory():
 
 def check_live_against_policy(inventory):
     policy = read(Q / 'senluo-policy.json')
-    assert G['audit'](W, policy)['ok'], 'Investigate managed drift before preparing a release'
     receipt = read(policy['approved_receipt'])
     expected = {pack['uuid']: pack for pack in receipt['packs']}
     assert {pack['uuid'] for pack in inventory['packs']} == set(expected), 'Complete stack changed; reconcile sources'
+    if not G['audit'](W, policy)['ok']:
+        validate_translation_reconciliation(inventory,expected,receipt['order'])
+        return policy
     for pack in inventory['packs']:
         row = expected[pack['uuid']]
         assert pack['files'] == row['files'] and pack['version'] == row['version'], 'Investigate full-stack drift: ' + pack['uuid']
     return policy
+
+
+def external_input_hashes():
+    return {key: sha(Path(CONFIG[key])) for key in ['translation_reconciliation', 'container_recovery_plan','extension_validation'] if CONFIG.get(key)}
+
+
+def validate_translation_reconciliation(inventory,expected,order):
+    """Review one preserved local translation delta; never approve its old receipt."""
+    import base64,copy,re
+    path=CONFIG.get('translation_reconciliation')
+    assert path and EXTENSION, 'Investigate managed drift before preparing a release'
+    proof=read(Path(path));assert proof.get('schema')==1 and proof.get('source_provenance') and proof.get('review_reason'), 'Reconciliation provenance is required'
+    assert proof['observed_inventory']==inventory, 'Reconciled live bytes/order changed'
+    config=read(EXTENSION/'baseline.json')
+    allowed={p['uuid']:side for side,p in config['packs'].items()}
+    assert set(proof['packs'])==set(allowed), 'Only the canonical local integration may be reconciled'
+    for side,uids in order.items():
+        refs=inventory['refs'][side]
+        assert [ref['pack_id'] for ref in refs]==uids, 'Translation reconciliation cannot change pack order'
+        assert all(ref['version']==expected[ref['pack_id']]['version'] for ref in refs if ref['pack_id'] not in allowed), 'Unreviewed pack reference version'
+    def clean_manifest(data):
+        value=copy.deepcopy(data)
+        value['header']['version']=[0,0,0]
+        for field in ('name','description'):
+            if field in value['header']:value['header'][field]=re.sub(r'\b\d+\.\d+\.\d+\b','<version>',value['header'][field])
+        for module in value['modules']:module['version']=[0,0,0]
+        for dep in value.get('dependencies',[]):
+            if dep.get('uuid') in allowed:dep['version']=[0,0,0]
+        return value
+    changed=[]
+    for live in inventory['packs']:
+        prior=expected[live['uuid']]
+        if live['uuid'] not in allowed:
+            assert live['files']==prior['files'] and live['version']==prior['version'], 'Unreviewed non-extension drift'
+            continue
+        row=proof['packs'][live['uuid']]
+        assert set(live['files'])==set(prior['files']), 'Translation reconciliation cannot add/remove exported files'
+        assert live['side']==prior['side'] and live['version']==row['observed_version'], 'Observed integration identity differs'
+        delta={name for name in live['files'] if live['files'][name]!=prior['files'][name]}
+        assert delta==set(row['changed']), 'Reconciliation delta differs'
+        assert delta<={'manifest.json','texts/en_US.lang','texts/zh_CN.lang','texts/zh_TW.lang'}, 'Gameplay drift cannot use translation reconciliation'
+        old=base64.b64decode(row['approved_manifest_base64'],validate=True)
+        assert hashlib.sha256(old).hexdigest()==prior['files']['manifest.json'], 'Original manifest evidence differs'
+        current=read(Path(live['path'])/'manifest.json')
+        assert clean_manifest(json.loads(old))==clean_manifest(current), 'Integration manifest changed beyond its version'
+        root=EXTENSION/config['runtime'][allowed[live['uuid']]]
+        for name,digest in live['files'].items():
+            if name=='manifest.json':continue
+            if name in {'texts/en_US.lang','texts/zh_CN.lang','texts/zh_TW.lang'}:
+                observed=(Path(live['path'])/name).read_bytes()
+                assert hashlib.sha256(observed).hexdigest()==digest, 'Observed language changed during reconciliation'
+                assert (root/name).read_bytes().startswith(observed), 'Canonical language must preserve all observed translations before appending restorations'
+            else:assert sha(root/name)==digest, 'Preserved live content is absent from canonical source'
+        changed.append({'uuid':live['uuid'],'changed':sorted(delta),'observed_version':live['version'],'canonical_version':config['version']})
+    atomic(R/'translation-reconciliation-check.json',{'source':report_ref(Path(path)),'reviewed_changes':changed,
+           'old_drift_receipt_approved':False,'policy_changed':False,'new_full_family_acceptance_still_required':True})
 
 
 def verify_predeploy():
@@ -252,6 +310,7 @@ def verify_candidate_sources():
     evidence = read(R / 'build-evidence.json')
     assert sha(CONFIG_PATH) == evidence['config_sha256'], 'Update configuration changed; use a new output directory'
     assert orchestration_hashes() == evidence['orchestration_sha256'], 'Update runner changed; rebuild with reviewed tools'
+    assert external_input_hashes()==evidence.get('external_input_sha256',{}), 'Recovery/reconciliation input changed after build'
     current = source_state()
     assert set(current) == set(evidence['sources']), 'Canonical source set changed'
     for name, row in evidence['sources'].items():

@@ -1,6 +1,7 @@
 """Rehearse only this deployment's fresh stopped backup; never copies an online DB."""
 import argparse
 from family_update.native_common import *
+from container_recovery import recover_world, inventory_world
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
@@ -25,9 +26,14 @@ def main(argv=None):
     assert {p['uuid'] for p in original['packs']} == {p['uuid'] for p in receipt['packs']}, 'UUID migration must be explicitly rehearsed by family_saved_world.py'
     setup_engine(engine, 'Saved World QA', args.port)
     world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(snapshot, world)
+    recovery=None
+    if CONFIG.get('container_recovery_plan'):
+        recovery=recover_world(world,read(Path(CONFIG['container_recovery_plan'])))
+        atomic(R/'saved-world-container-recovery.json',recovery)
     # LevelDB opening can create metadata even for read operations. Inspect only
     # the rehearsal copy so the immutable stopped backup remains byte-exact.
     before = player_hashes(world)
+    containers_before=inventory_world(world)
     for side in ['behavior', 'resource']:
         shutil.rmtree(world / (side + '_packs'))
         shutil.copytree(C / (side + '_packs'), world / (side + '_packs'))
@@ -36,10 +42,15 @@ def main(argv=None):
     runs=[]; after=before
     engine_hash=sha(B/'bedrock_server')
     for phase in ['first', 'restart']:
-        record=native_run(engine,phase)
+        points={tuple(row['position']) for row in (recovery or {}).get('restored',[])}
+        commands=[f'tickingarea add circle {x} {y} {z} 1 freezer_recovery_{i}' for i,(x,y,z) in enumerate(sorted(points))]
+        record=native_run(engine,phase,commands=commands)
         after=player_hashes(world); audit_candidate(world, receipt)
+        containers_after=inventory_world(world)
+        retained=all(containers_after.get(key)==value for key,value in containers_before.items())
+        record.update(custom_container_inventories_retained=retained,custom_container_count=len(containers_before))
         record.update(player_records_unchanged=before==after, player_records=len(before))
-        record['ok']=record['ok'] and before==after
+        record['ok']=record['ok'] and before==after and retained
         runs.append(record); print(json.dumps(record),flush=True)
         if not record['ok']: break
     assert sha(B/'bedrock_server')==engine_hash
@@ -48,5 +59,6 @@ def main(argv=None):
     success=len(runs)==2 and all(row['ok'] for row in runs)
     report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':[],'same_author_and_owned_uuids':True,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
     atomic(R/'saved-world-report.json',report)
+    atomic(R/'saved-world-container-inventories.json',{'before':containers_before,'after':containers_after,'recovery':recovery,'retained':retained,'native_loaded_recovery_positions':bool(points)})
     return 0 if success else 1
 if __name__=='__main__': raise SystemExit(main())

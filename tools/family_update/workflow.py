@@ -141,9 +141,11 @@ def record_static(verified_candidate=None):
     candidate = read(C / 'family-receipt.json')
     prior = {pack['uuid']: pack for pack in read(R / 'production-before/inventory.json')['packs']}
     known = {row['repository'] for key, row in read(R / 'build-evidence.json')['sources'].items() if key in SOURCES}
+    from family_update.extension_validation import verify_extension
+    extension_reports=verify_extension(candidate,prior)
     for pack in candidate['packs']:
         if pack['source']['owner'] == 'owned' and pack['source']['repository'] not in known:
-            assert pack['uuid'] in prior and all(pack[key] == prior[pack['uuid']][key] for key in ['files', 'version']), 'A changed private extension needs its own reviewed functional evidence; public PR checks cannot certify it'
+            assert (pack['source']['repository']=='local/senluo-amw-cuisine' and extension_reports) or (pack['uuid'] in prior and all(pack[key] == prior[pack['uuid']][key] for key in ['files', 'version'])), 'A changed private extension needs its own reviewed functional evidence; public PR checks cannot certify it'
     proof = verify_ci()
     build = read(R / 'build-evidence.json')
     target = R / 'static-evidence.json'
@@ -159,6 +161,7 @@ def record_static(verified_candidate=None):
     # label API doubles as native/client tests or invent a local test log.
     ci_path = R / 'ci-evidence.json'
     evidence = {'schema': 1, 'recorded_at': now(), 'ok': proof['ok'], 'candidate_receipt_sha256': build['candidate_receipt_sha256'], 'pr_checks_verified': True, 'sources': build['sources'], 'checks': [{'name': 'Merged PR checks for exact canonical trees', 'kind': 'actual_github_ci', 'exit_code': 0, 'log': str(ci_path), 'sha256': sha(ci_path)}], 'reports': [report_ref(ci_path), report_ref(R / 'build-evidence.json'), report_ref(R / 'compatibility-report.json')], 'local_functional_suites_rerun': False, 'client': False}
+    evidence['reports'].extend(extension_reports)
     atomic(target, evidence)
     return evidence
 

@@ -16,6 +16,7 @@ import {createExtensionFurniture} from '../../runtime/BP/scripts/bedrock/extensi
 import {installFoundationBridge} from '../../runtime/BP/scripts/bedrock/foundation-bridge.js';
 import {installJavaItemUseOnEvents} from '../../runtime/BP/scripts/bedrock/java-placement-router.js';
 import {handSnapshot} from '../../runtime/BP/scripts/bedrock/transactions.js';
+import {naturalBreak} from '../../runtime/BP/scripts/bedrock/natural-break.js';
 import {CUSTOM_STATUS_KEY,readStatus,activeStatus,addStatus,advanceStatus} from '../../runtime/BP/scripts/core/custom-effects.js';
 import {applyCustomEffect,installCustomEffects,importExternalEffects,statusNow,clearCustomEffects,CUSTOM_TEST,tickCustomEffects} from '../../runtime/BP/scripts/bedrock/custom-effects.js';
 import {packetsFor} from '../../sdk/protocol.js';
@@ -69,6 +70,19 @@ for(const definition of bundle.furniture)test('legacy storage exact quality, typ
  store.importLegacy(raw);const row=store.load(store.key);assert.equal(definition.kind==='bar_cabinet'?row.left:row.slots[0],item);assert.equal(row.type,definition.block);
  const saved=store.raw(store.key);store.importLegacy(raw);assert.equal(store.raw(store.key),saved);
  assert.throws(()=>store.importLegacy(legacy(definition,compact.items[0])),/LEGACY_STORAGE_CHANGED/);
+});
+for(const definition of bundle.furniture)for(const destroy of [false,true])test('native items override stale external index '+definition.block+' destroy='+destroy,()=>{
+ const p=makePlayer(),b=createBlock(definition),at={...b.location};near(p,b);
+ const id=(definition.kind==='bar_cabinet'?regular:compact).items[3],original=new ItemStack(id);original.nameTag='retained original';original.setLore(['foreign metadata']);p.inventory.setItem(0,original);act(p,b);
+ const ctx=host.load(b),state=JSON.parse(ctx.store.raw(ctx.store.key)),receipt=state.migrationDigest;
+ if(state.slots)state.slots=state.slots.map(()=>null);else{state.left=null;state.right=null;state.single=false;}
+ world.setDynamicProperty(ctx.store.key,JSON.stringify(state));const raw=world.getDynamicProperty(ctx.store.key);
+ assert.equal(definition.kind==='bar_cabinet'?host.load(b).state.left:host.load(b).state.slots[0],id);assert.equal(world.getDynamicProperty(ctx.store.key),raw,'projection must not write');
+ if(destroy){const permutation=b.permutation;b.setType('minecraft:air');naturalBreak({block:b,brokenBlockPermutation:permutation},{params:{storage:true}});}
+ else act(p,b);
+ const transferred=destroy?d.getEntities({type:'minecraft:item',location:at,maxDistance:2}).find(e=>e.itemStack.typeId===id)?.itemStack:p.inventory.getItem(0);
+ assert.equal(transferred?.typeId,id);assert.equal(transferred.nameTag,original.nameTag);assert.deepEqual(transferred.getLore(),original.getLore());assert.equal(transferred.amount,1);
+ assert.equal(world.getDynamicProperty('kt:native_items/'+ctx.store.key),undefined);assert.equal(JSON.parse(world.getDynamicProperty(ctx.store.key)).migrationDigest,receipt);
 });
 for(const raw of ['{broken',JSON.stringify({type:'alien:chest',slots:[null,null]}),JSON.stringify({type:def().block,slots:['unknown:item',null]}),JSON.stringify({type:def().block,slots:[null,null],input:['minecraft:apple']})])test('reject and preserve corrupt legacy: '+raw.slice(0,45),()=>{
  const backend=new Properties(),store=new ExtensionCabinetStore(backend,def(),d.id,{x:2,y:2,z:2});assert.throws(()=>store.importLegacy(raw));assert.equal(store.raw(store.key),undefined);

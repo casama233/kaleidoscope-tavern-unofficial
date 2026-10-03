@@ -1,0 +1,9 @@
+# Tavern 0.6.92 — native wine storage and furniture index consistency
+
+When a legacy furniture index differs from an adopted native inventory, cabinet interaction used to fail with NATIVE_STORAGE_MISMATCH even though the original stacks still exist. Cabinet, holder and rack readers now project only the verified native inventory into the display index, retaining the original revision and migration receipt. No native contents are recreated or modified during reading. Missing, moved, foreign-owned or corrupt inventories still fail closed. Taking a bottle transfers its original native stack and commits both records together. External cabinet natural destruction also consumes native storage and preserves item metadata.
+
+Retains all prior merged source repairs and pairs the latest full family through its reviewed lock. Node regressions cover stale indexes, original per-slot metadata, layout validation and corruption barriers. Native BDS and saved-world tests are separate from human client acceptance, which remains pending.
+
+Includes the canonical bar/glass-bar key layout in native location lookup; 0.6.91 was frozen but not deployed. Adapter regressions cover all six host furniture layouts plus ten addon wood/layout variants, including external natural destruction.
+
+An isolated copy of the incident save on the installed 1.26.51.1 engine passed native first-load and restart checks: 14 active stale indexes plus one consistent host bar cabinet transferred 15 original stacks to a native destination container, preserving metadata and saved revisions. One deleted addon cabinet remained a tombstone. QA hooks were recorded as isolated overlays, excluded from the release. No player sessions or simulated players; actual client acceptance is pending.

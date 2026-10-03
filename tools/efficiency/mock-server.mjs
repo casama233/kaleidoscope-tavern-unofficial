@@ -2,6 +2,7 @@
 export class Signal{listeners=[];subscribe(f){this.listeners.push(f);return f;}emit(e){for(const f of this.listeners)f(e);}}
 const signals=()=>new Proxy({}, {get(o,k){return o[k]??=new Signal();}});
 let sequence=0;
+const dimensions=new Map();
 export const counters={};
 export function resetCounters(){for(const k of ['queries','propertyWrites','rotations','teleports','spawns','removes','playerReads','playerWrites','playerLists'])counters[k]=0;}
 resetCounters();
@@ -31,14 +32,14 @@ export class BlockPermutation{
  getState(k){return this.states[k];}withState(k,v){return new BlockPermutation(this.type.id,{...this.states,[k]:v});}
 }
 export class Dimension{
- constructor(id='minecraft:overworld'){this.id=id;this.entities=new Map();this.blocks=new Map();}
+ constructor(id='minecraft:overworld'){this.id=id;this.entities=new Map();this.blocks=new Map();dimensions.set(id,this);}
  block(type,p={x:0,y:0,z:0},states={}){const block={typeId:type,dimension:this,location:{...p},permutation:BlockPermutation.resolve(type,states),setPermutation(v){this.permutation=v;this.typeId=v.type.id;}};this.blocks.set(JSON.stringify(p),block);return block;}
  getBlock(p){return this.blocks.get(JSON.stringify(p));}
  spawnEntity(type,at,options={}){const e=new Entity(type,this,at,options.initialRotation);this.entities.set(e.id,e);counters.spawns++;return e;}
  getEntities(options={}){counters.queries++;return [...this.entities.values()].filter(e=>e.isValid&&(!options.type||e.typeId===options.type)&&(!options.location||Math.hypot(...['x','y','z'].map(k=>e.location[k]-options.location[k]))<=(options.maxDistance??Infinity)));}
  spawnParticle(){}playSound(){}
 }
-export const world=Object.assign(new Properties(),{players:[],beforeEvents:signals(),afterEvents:signals(),getAllPlayers(){counters.playerLists++;return this.players;},getEntity(id){return this.players.find(p=>p.id===id);},getAbsoluteTime(){return system.currentTick;}});
+export const world=Object.assign(new Properties(),{players:[],beforeEvents:signals(),afterEvents:signals(),getAllPlayers(){counters.playerLists++;return this.players;},getDimension(id){const full=id.startsWith('minecraft:')?id:'minecraft:'+id;return dimensions.get(full)??new Dimension(full);},getEntity(id){return this.players.find(p=>p.id===id)??[...dimensions.values()].map(d=>d.entities.get(id)).find(Boolean);},getAbsoluteTime(){return system.currentTick;}});
 let runId=0;
 export const system={currentTick:0,timers:new Map(),afterEvents:signals(),runInterval(fn,period){const id=runId++;this.timers.set(id,{fn,period});return id;},run(fn){const id=runId++;this.timers.set(id,{fn,once:true});return id;},runTimeout(fn){return this.run(fn);},clearRun(id){this.timers.delete(id);},sendScriptEvent(){}};
 export const GameMode={Survival:'Survival',Creative:'Creative',Spectator:'Spectator',Adventure:'Adventure'};

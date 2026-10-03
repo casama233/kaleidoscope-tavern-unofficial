@@ -1,3 +1,4 @@
+import {nativeStorageView} from './native-item-storage.js';
 import {rackLaunch} from '../core/projectile-parity.js';
 import {externalVisual,isExternalVisual} from '../core/extension-content.js';
 import {nativeEmptyHandBlockUse} from './java-placement-router.js';
@@ -8,7 +9,7 @@ import {check} from '../core/util.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {makeStack,hand,inventory,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';
 import {installStatefulStorageRoutes,tickStorageVisuals,routeStatefulStorageRedstone,popRandomStoredBottle} from './stateful-storage-router.js';
-const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=new HolderStore(world),visuals=new Map();let cursor=0;
+const HELPER=NS+':holder_bottle_visual',ANCHOR=NS+':holder_anchor',store=nativeStorageView(new HolderStore(world)),visuals=new Map();let cursor=0;
 export const holderDiagnostics={placed:0,inserted:0,taken:0,recovered:0,spawned:0,orphans:0,duplicates:0,repairs:0,redstone:'DRINKS_AND_MOLOTOV',redstonePops:0,redstoneNoops:0,redstoneErrors:0,errors:[]};
 function error(e){holderDiagnostics.errors.push(String(e));if(holderDiagnostics.errors.length>16)holderDiagnostics.errors.shift();}
 // Block state has a 16-value engine limit. DP and entity kind retain exact bottle identity.

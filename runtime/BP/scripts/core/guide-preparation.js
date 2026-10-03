@@ -1,4 +1,5 @@
 import {FLUIDS} from '../data/fluids.js';
+import {guideItemName} from '../data/guide-native-names.js';
 const buckets=new Map(FLUIDS.map(f=>[f.id,f.filled]));
 buckets.set('minecraft:water','minecraft:water_bucket');buckets.set('minecraft:lava','minecraft:lava_bucket');
 // Native Cookery recipe records: all valid sets, one recipe attached to its product.
@@ -19,7 +20,7 @@ export function preparationRecipes(recipe,names={}){
    const labels=names[locale]??={};const groups=new Map();
    for(const item of options){const m=/^(.*)_q([1-6])$/.exec(item),base=m?.[1]??item;const q=groups.get(base)??[];if(m)q.push(+m[2]);groups.set(base,q);}
    labels[id]=[...groups].map(([base,quality])=>{
-    const q=[...new Set(quality)].sort();const name=labels[base]??labels[base+'_q1']??base;
+    const q=[...new Set(quality)].sort();const name=labels[base]??labels[base+'_q1']??guideItemName({names},locale,base);
     const values=q.length>1&&q.every((n,i)=>n===q[0]+i)?q[0]+'–'+q.at(-1):q.join('/');
     return name+(q.length?' ('+({en_US:'Quality ',zh_CN:'品质 ',zh_TW:'品質 '})[locale]+values+')':'');
    }).join(locale==='en_US'?' OR ':' 或 ');
@@ -33,6 +34,11 @@ export function preparationRecipes(recipe,names={}){
  if(recipe.kind==='barrel')sets=sets.map(row=>[...Array(4).fill((recipe.fluidItem??(recipe.fluidItem??buckets.get(recipe.fluid)))??recipe.fluid),...row]);
  if(recipe.kind==='pressing')sets=sets.map(row=>Array(Math.ceil(1000/recipe.amount)).fill(row[0]));
  if(sets.length>24||sets.some(row=>row.length>12))throw Error('Cookery recipe limits: '+recipe.id);
- return sets.map(ingredients=>({method,ingredients,result,count:recipe.kind==='barrel'&&!recipe.ingredients.length?(recipe.noIngredientCount??16):1,time:0}));
+ // Preserve machine semantics alongside the existing Cookery ingredient array.
+ // The standalone renderer must not guess fluid volume or slots from that array.
+ const preparation=recipe.kind==='barrel'?{kind:'barrel',fluid:recipe.fluid,fluidItem:recipe.fluidItem??buckets.get(recipe.fluid)??recipe.fluid,amount:4000,carrier:recipe.carrier??'kaleidoscope_tavern:empty_bottle',unitTime:recipe.unitTime,qualities:recipe.output?.byQuality?.length??0}:
+  recipe.kind==='shaker'?{kind:'shaker',carrier:recipe.carrier??'kaleidoscope_tavern:empty_glassware'}:
+  {kind:'pressing',fluid:recipe.fluid,amount:1000};
+ return sets.map(ingredients=>({method,ingredients,result,count:recipe.kind==='barrel'&&!recipe.ingredients.length?(recipe.noIngredientCount??16):1,time:0,preparation}));
 }
 export function preparationFood(recipe){return {eatFromInventory:true,alwaysEat:true,returns:recipe.carrier??(recipe.kind==='shaker'?'kaleidoscope_tavern:empty_glassware':'kaleidoscope_tavern:empty_bottle')};}

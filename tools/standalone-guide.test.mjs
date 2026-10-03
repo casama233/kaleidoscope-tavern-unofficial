@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
-import {standaloneGuideView,guideLocale,guideText,GUIDE_LANGUAGES} from '../runtime/BP/scripts/core/standalone-guide-model.js';
+import {standaloneGuideView,guideLocale,guideText,guideItemName,GUIDE_LANGUAGES} from '../runtime/BP/scripts/core/standalone-guide-model.js';
 import {buildCookeryGuidePayload} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 import {BUILTIN_RECIPES} from '../runtime/BP/scripts/data/recipes.js';import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {GUIDE_ROOTS} from '../runtime/BP/scripts/data/guide-navigation.js';
@@ -13,6 +13,46 @@ test('native crafting records never invent a shaped grid',()=>{const p=structure
 test('all synthetic shaker labels are resolved and all alternatives are shown',()=>{const p=structuredClone(payload),e=p.entries.find(x=>x.id===N+'allium_garden');e.recipes.push(structuredClone(e.recipes[0]),structuredClone(e.recipes[0]));const v=standaloneGuideView(p,'en_US',{type:'entry',id:e.id});assert.equal(v.buttons.filter(x=>x.action.type==='recipe').length,3);for(let i=0;i<3;i++){const r=standaloneGuideView(p,'en_US',{type:'recipe',id:e.id,index:i});assert.ok(!r.body.includes('/ingredient_'));}});
 test('removed extension pages fall back to root',()=>{assert.equal(standaloneGuideView(payload,'en_US',{type:'entry',id:'gone:item'}).node.type,'root');});
 test('invalid locale and page values are bounded',()=>{assert.equal(guideLocale('invalid'),'zh_TW');const v=standaloneGuideView(payload,'en_US',{type:'category',id:'barrel_core',page:999});assert.ok(v.node.page>=0&&v.node.page<10);assert.ok(v.buttons.length<=21);});
+
+// The reported World Liquor page, expressed as registration data, not a second
+// imported addon implementation. Actual companion payload is checked separately.
+const sourceId='guide_regression',iceId=sourceId+':ice_tea_q1',iceRecipe={id:sourceId+':barrel/ice_tea',kind:'barrel',title:{zh_TW:'勁涼冰紅茶',zh_CN:'劲凉冰红茶',en_US:'Iced Tea'},fluid:'minecraft:water',ingredients:[['minecraft:crimson_roots'],['minecraft:sugar'],['minecraft:ice']],carrier:N+'empty_bottle',unitTime:2400,output:{byQuality:Array.from({length:6},(_,i)=>sourceId+':ice_tea_q'+(i+1))},source:sourceId};
+const withIce=buildCookeryGuidePayload({list:()=>[{source:sourceId}],allPages:()=>[],allRecipes:()=>[...registry.allRecipes(),iceRecipe]});
+for(const locale of GUIDE_LANGUAGES){
+ test(locale+' reported ice tea shows one fluid section, full names, bottling and aging',()=>{
+  const view=standaloneGuideView(withIce,locale,{type:'recipe',id:iceId,index:0}),text=view.body.replace(/§./g,'');
+  assert.ok(text.includes('4000 mB (4 '));
+  assert.equal(text.split(guideItemName(withIce,locale,'minecraft:water_bucket')).length-1,1);
+  assert.ok(text.includes(guideItemName(withIce,locale,N+'empty_bottle')));
+  assert.ok(text.includes('120 '));assert.ok(text.includes('6'));
+  for(const id of ['minecraft:crimson_roots','minecraft:sugar','minecraft:ice'])assert.ok(text.includes(guideItemName(withIce,locale,id)+' ×1'));
+  assert.ok(!/minecraft:|kaleidoscope_tavern:/.test(text));
+  const entry=standaloneGuideView(withIce,locale,{type:'entry',id:iceId});assert.ok(entry.body.includes('4000 mB'));
+  for(const id of ['minecraft:water_bucket','minecraft:lava_bucket','minecraft:milk_bucket','minecraft:ink_sac','minecraft:blue_dye','minecraft:slime_ball','minecraft:cookie'])assert.ok(withIce.names[locale][id]&&!withIce.names[locale][id].includes(':'));
+ });
+}
+test('shaker keeps repeated slots distinct; generic recipes aggregate counts without inventing fluid volume',()=>{
+ const p=structuredClone(payload),e=p.entries[0];
+ e.recipes=[{method:'Shaker',ingredients:['minecraft:sugar','minecraft:sugar','minecraft:cookie'],result:e.id,count:1,time:0}];
+ let v=standaloneGuideView(p,'en_US',{type:'recipe',id:e.id,index:0});assert.ok(v.body.includes('Slot 1: Sugar')&&v.body.includes('Slot 2: Sugar'));
+ e.recipes[0].method='Freezer';v=standaloneGuideView(p,'en_US',{type:'recipe',id:e.id,index:0});assert.ok(v.body.includes('Sugar ×2'));assert.ok(!v.body.includes('4000 mB'));
+ e.recipes[0].method='Barrel';e.recipes[0].ingredients=Array(4).fill('minecraft:water_bucket');v=standaloneGuideView(p,'en_US',{type:'recipe',id:e.id,index:0});assert.ok(v.body.includes('Water Bucket ×4'));assert.ok(!v.body.includes('4000 mB'));
+});
+test('shared Cookery wire preserves machine semantics and names without mutating the registry',async()=>{
+ const {cookery106WirePayload,encodeCookeryGuideMessages}=await import('../runtime/BP/scripts/core/cookery-guide-publisher.js');
+ const before=JSON.stringify(withIce),wire=cookery106WirePayload(withIce),entry=wire.entries.find(e=>e.id===iceId);
+ assert.deepEqual(entry.recipes,withIce.entries.find(e=>e.id===iceId).recipes);
+ for(const locale of GUIDE_LANGUAGES){assert.ok(wire.names[locale]['minecraft:water_bucket']);assert.ok(wire.names[locale]['minecraft:water']);assert.ok(entry.mechanicsByLocale[locale].join('\n').includes('4000 mB'));}
+ assert.ok(encodeCookeryGuideMessages(withIce).length<=514);assert.equal(JSON.stringify(withIce),before);
+});
+test('a different world can register its own fluid and still get localized volume and container names',async()=>{
+ const {ExtensionRegistry}=await import('../runtime/BP/scripts/core/registry.js');
+ const {FLUIDS}=await import('../runtime/BP/scripts/data/fluids.js');
+ const r=new ExtensionRegistry({recipes:BUILTIN_RECIPES,fluids:FLUIDS});
+ r.install({api:1,source:sourceId,version:'1.0.0',fluids:[{id:sourceId+':tea',filled:sourceId+':tea_bucket',empty:'minecraft:bucket',rigSuffix:'grape',title:{zh_TW:'茶',zh_CN:'茶',en_US:'Tea'}}],recipes:[{...iceRecipe,fluid:sourceId+':tea'}]});
+ const p=buildCookeryGuidePayload(r);
+ for(const locale of GUIDE_LANGUAGES){const v=standaloneGuideView(p,locale,{type:'recipe',id:iceId,index:0});assert.ok(v.body.includes(locale==='en_US'?'Tea Bucket ×4':'茶桶 ×4'));assert.ok(v.body.includes('4000 mB'));assert.ok(!v.body.includes(sourceId+':'));}
+});
 // UI SDK call doubles exercise controller flow; no game/player simulation.
 const source=fs.readFileSync(new URL('../runtime/BP/scripts/bedrock/standalone-guide.js',import.meta.url),'utf8').replace(/^import .*;\s*$/gm,'').replace(/export /g,'');
 function ui(responses,provider=()=>payload){const shown=[],properties=new Map(),messages=[];let writes=0,fail=false;class Form{title(v){this.t=v;return this}body(v){this.b=v;return this}button(v){(this.buttons??=[]).push(v);return this}dropdown(...v){this.fields=v;return this}async show(){shown.push(this);const next=responses.shift();if(next instanceof Error)throw next;return typeof next==='function'?next():next??{canceled:true};}}

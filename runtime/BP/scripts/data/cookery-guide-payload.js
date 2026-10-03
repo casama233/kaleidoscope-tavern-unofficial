@@ -1,11 +1,13 @@
 import {preparationRecipes,preparationFood} from '../core/guide-preparation.js';
 import {consolidateGuide} from './guide-catalog.js';
+import {GUIDE_NATIVE_NAMES} from './guide-native-names.js';
+import {FLUIDS} from './fluids.js';
 // Tavern-owned chapter for the Cookery Guidebook Extension API v1.
 import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.92",
+  "version": "0.6.94",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5842,6 +5844,15 @@ function addLocalizedName(payload,id,map,fallback){
  */
 export function buildCookeryGuidePayload(registry){
  const payload=copy(COOKERY_GUIDE_PAYLOAD);
+ for(const lc of GUIDE_LOCALES){
+  payload.names[lc]={...GUIDE_NATIVE_NAMES[lc],...payload.names[lc]};
+  for(const fluid of registry?.allFluids?.()??FLUIDS){
+   const title=fluid.title?.[lc]??fluid.title?.en_US;
+   if(!title)continue;
+   payload.names[lc][fluid.id]??=title;
+   if(fluid.filled)payload.names[lc][fluid.filled]??=lc==='en_US'?title+' Bucket':title+'桶';
+  }
+ }
  for(const entry of payload.entries){
   if(typeof entry.mechanics==='string')entry.mechanics=[entry.mechanics];
   if(!Array.isArray(entry.mechanics))entry.mechanics=[];

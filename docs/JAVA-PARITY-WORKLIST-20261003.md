@@ -1,8 +1,10 @@
 # Java parity worklist — 2026-10-03
 
-This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.56. Five additional family projects are pinned upstream dependencies, not silently modified here.
+This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.57. Five additional family projects are pinned upstream dependencies, not silently modified here.
 
 ## Newly repaired and regression-tested
+
+- Grilling 2.8.57: real-client persistent eating HUD fixed with a private alpha/wait/fade chain. Native packet silence, ordinary actionbar preservation, restart/stop, 500 ms single-skewer early release and full single-skewer consumption were observed. Four focused HUD checks, full canonical suite, frozen baseline, deterministic package and all four exact-head GitHub checks pass at cdb2fdd74cb6ba3a98d124d4ca832b8647803607. This certifies those visible-lifetime flows, not all animation profiles or internal UI object disposal. See Grilling docs/STATUS-A2.8.57.md.
 
 - Grilling 2.8.56: secret ingredients are snapshotted at the fourth successful flip with transactional slot/state rollback, immutable caches and shared identity validation. Third-flip display no longer re-resolves smoking before a cache exists. Twenty-three focused tests and the full 417-import suite pass. A real isolated BDS normal-stop/restart test preserved all three stored snapshots and ignored a changed smoking registry during native output preparation; this is not player extraction or rendered acceptance. See Grilling docs/NATIVE-FOURTH-FLIP-2.8.56.json and its reusable test helper.
 
@@ -11,7 +13,7 @@ This is an open worklist, not a percentage-complete or full-equivalence certific
 - Grilling 2.8.54: Java one-tick release grace (23 refuses, 24/25 eligible), captured stop time and once-only completion/release ordering. Eight additional production-callback tests and full canonical checks pass; all four exact-head GitHub checks pass at 51ea99d2edf0f2b9e822b31d6d1edde1cfc2e6c4. Actual 24-tick native timing remains open.
 - Grilling 2.8.53: ordinary crouch eating; crouch threading; full-hunger plate gate; configured nested hot saturation; threading/insertion success audio. Nine new production-function/callback regressions, full canonical verifier (417 imports), independent review and exact-head CI pass.
 - World Liquor: Respawn perimeter/height ordering and endpoint feedback, liquid support, facing/cross-dimension velocity options; Ground Crit climbing/blindness/riding boundaries; Crazy beacon pitch; Elbow feedback volume. Twelve new boundary tests, full paired checks, independent review and exact-head CI pass.
-- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-56-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
+- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-57-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
 
 ## Confirmed remaining source gaps
 
@@ -40,7 +42,7 @@ Older claims that freezer/external-cellar redstone or corrected freezer recipe d
 
 ## Actual client path now available
 
-The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. On the .54 stack, an actual advanced_rack item was viewed as a sprite in first/third person and placed by right-click as the full 3D rack. This confirms that particular display route, not complete hand pose or populated-rack acceptance. The original audio device was unavailable. The SDL disk backend produced a 570,380,288-byte diagnostic file containing non-zero data; exact format and per-event sound acceptance remain unverified.
+The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. On the .54 stack, an actual advanced_rack item was viewed as a sprite in first/third person and placed by right-click as the full 3D rack. This confirms that particular display route, not complete hand pose or populated-rack acceptance. The original audio device was unavailable. The SDL disk backend produced a 570,380,288-byte diagnostic file containing non-zero data; SDL binary defaults and the launcher audio source support S16LE stereo at 44.1 kHz; the headerless recording itself does not encode its sample rate. Per-event addon sound acceptance remains unverified.
 
 Owned packs are linked from canonical runtime into development_behavior_packs and development_resource_packs in the isolated client. Normal imported duplicates are archived outside the game. Third-party dependencies remain exact copies. Frozen release exports retain their own receipts; editing a development pack does not certify or replace release acceptance.
 

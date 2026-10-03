@@ -14,6 +14,9 @@ observer logs, world files and player identifiers are not included here.
 | Complete actual Milk consumption while Tipsy is active | The completion observation has zero remaining Tipsy and tracking disabled. At +2 and +7 ticks it remains zero/untracked, with no reported error. | The +2 observation was read on its exact scheduled tick with zero scheduling lag. |
 | Allow the second drink to expire naturally | The first zero-remaining observation still sees tracking enabled within that tick; the +2 and +7 observations see zero remaining and tracking disabled, with no reported error. | Both follow-ups were read on their exact scheduled ticks with zero scheduling lag. This establishes the observed status/tracker transition, not exact rendered-shake disappearance. |
 | Die during the third drink and respawn | Real-player death clears the remaining status and tracker; the respawn observation remains clear, with no reported error. | Death/respawn lifecycle observations, without a claim about the last delivered camera frame. |
+| Save/Quit and re-enter the same saved world during a long `mystery_cocktail` effect | Remaining Tipsy is active after re-entry, with tracking and `camera_api` resumed and no reported error; later observations decrease by 20 ticks per 20 online ticks. | Resume and online countdown observations. The reported samples do not establish an exact before/after offline-duration accounting measurement. |
+| Add and remove the motion opt-out tag | Adding the tag stops tracking while remaining duration continues to count down; removing it restores `camera_api` motion. | Limited motion opt-out lifecycle observation. |
+| Cross from Overworld to Nether while Tipsy remains active | In Nether, status and `camera_api` tracking continue without a reported error. Natural expiry reaches zero, with exact +2/+7 follow-ups also zero/untracked. | Camera/status lifecycle observation. The custom HUD icon disappeared despite active Tipsy; the separate HUD repair still requires native revalidation. |
 
 Root also reported visible small camera movement on this candidate compared
 with the preceding adapter in a matched scene. That establishes client-visible
@@ -27,11 +30,11 @@ doubles; those tests are not native client evidence.
 
 ## Still pending or outside this checkpoint
 
-Saved-world re-entry and relog acceptance were still in progress when root
-reported this checkpoint. Dimension changes, all three perspectives, amplifier
-and duration stacking, other drink effects and foreign camera/shake coexistence,
-opt-out, sleeping/spectator/locked input, and Allow Camera Shake disabled are
-not certified by these observations. The complete
+The saved-world and dimension observations above were reported in a follow-up.
+Cross-dimension HUD recovery, all three perspectives, amplifier and duration
+stacking, other drink effects and foreign camera/shake coexistence,
+sleeping/spectator/locked input, and Allow Camera Shake disabled are not certified
+by these observations. The complete
 [acceptance matrix](TIPSY-CLIENT-REPAIR-20261003.md#roots-native-client-acceptance)
 remains open.
 

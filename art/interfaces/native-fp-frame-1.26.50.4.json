@@ -1,0 +1,581 @@
+{
+  "sources": {
+    "animations/player_firstperson.animation.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/animations/player_firstperson.animation.json",
+      "sha256": "be55737455e163a4983d2315b46df3d6815d9365363c295776251287a70b664e",
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "git_path": "resource_pack/animations/player_firstperson.animation.json",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "models/entity/player_armor.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/models/entity/player_armor.json",
+      "sha256": "f05bb7de47c09eab411e8f9778768c3110d176ca6c224a8c76c9488da353b78b",
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "git_path": "resource_pack/models/entity/player_armor.json",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "models/entity/humanoid.custom.geo.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/models/entity/humanoid.custom.geo.json",
+      "sha256": "d3688f959a95f6b39c9bd8b15312a19361256ae161d2d055ba63d810e17a8ca8",
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "git_path": "resource_pack/models/entity/humanoid.custom.geo.json",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "entity/player.entity.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/entity/player.entity.json",
+      "sha256": "7e520d872fc72be266223b3db2883c2818742a9a450330753a6de4d2ad813608",
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "git_path": "resource_pack/entity/player.entity.json",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "animation_controllers/player.animation_controllers.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/animation_controllers/player.animation_controllers.json",
+      "sha256": "86d139f2fdb1a18b67bceac8cc691dfa9a3738056e8b44c2e232647bddf784e2",
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "git_path": "resource_pack/animation_controllers/player.animation_controllers.json",
+      "hash_basis": "original_git_blob_bytes"
+    }
+  },
+  "player_bones": {
+    "body": {
+      "parent": "waist",
+      "pivot": [
+        0.0,
+        24.0,
+        0.0
+      ]
+    },
+    "head": {
+      "parent": "body",
+      "pivot": [
+        0.0,
+        24.0,
+        0.0
+      ]
+    },
+    "rightarm": {
+      "parent": "body",
+      "pivot": [
+        -5.0,
+        22.0,
+        0.0
+      ]
+    },
+    "rightitem": {
+      "parent": "rightArm",
+      "pivot": [
+        -6,
+        15,
+        1
+      ]
+    },
+    "leftarm": {
+      "parent": "body",
+      "pivot": [
+        5.0,
+        22.0,
+        0.0
+      ]
+    }
+  },
+  "empty_hand": {
+    "rightarm": {
+      "position": [
+        13.5,
+        -10.0,
+        12.0
+      ],
+      "rotation": [
+        "95.0 + variable.is_using_vr * 7.5",
+        "-45.0 + variable.is_using_vr * 7.5",
+        "115.0 + variable.is_using_vr * -2.5"
+      ]
+    },
+    "rightitem": {
+      "position": [
+        0.0,
+        "q.get_default_bone_pivot('rightarm',1) - q.get_default_bone_pivot('rightitem',1) - 7.0",
+        "-q.get_default_bone_pivot('rightitem',2)"
+      ]
+    },
+    "leftitem": {
+      "position": [
+        0.0,
+        "q.get_default_bone_pivot('leftarm',1) - q.get_default_bone_pivot('leftitem',1) - 7.0",
+        "-q.get_default_bone_pivot('leftitem',2)"
+      ]
+    }
+  },
+  "native_camera_model": {
+    "pivot": [
+      0,
+      24,
+      0
+    ],
+    "rotation": [
+      0,
+      180,
+      0
+    ],
+    "note": "Head-centered mathematical view; actual client FOV, engine eye offset, skin and rendering remain separate acceptance."
+  },
+  "previous_shaker_animations": {
+    "animation.kt_mixology.player_idle": {
+      "animation_length": 0.05,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.kt_mixology.hold_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            -11.72773087,
+            5.51584842,
+            -3.81765858
+          ],
+          "rotation": [
+            86.92524805,
+            61.26036072,
+            -51.57420591
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.hold_third": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            -0.0,
+            -3.0,
+            -2.75
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.shake_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            "-12.24425722 + 1.40682495 * math.sin(q.life_time * 1718.87338539247)",
+            "6.12859977 + 1.56619803 * math.sin(q.life_time * 1718.87338539247)",
+            "-3.82055554 + 1.15233126 * math.sin(q.life_time * 1718.87338539247)"
+          ],
+          "rotation": [
+            71.92524805,
+            61.26036072,
+            -51.57420591
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.player_shake": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)",
+            "v.is_first_person ? 0 : -this",
+            "v.is_first_person ? 0 : (-9 - this)"
+          ]
+        }
+      }
+    }
+  },
+  "native_geometry_reference": {
+    "source": "models/entity/humanoid.custom.geo.json",
+    "description": {
+      "identifier": "geometry.humanoid.custom",
+      "visible_bounds_width": 1,
+      "visible_bounds_height": 2,
+      "visible_bounds_offset": [
+        0,
+        1,
+        0
+      ]
+    },
+    "bones": {
+      "root": {
+        "name": "root",
+        "pivot": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "waist": {
+        "name": "waist",
+        "parent": "root",
+        "pivot": [
+          0.0,
+          12.0,
+          0.0
+        ]
+      },
+      "body": {
+        "name": "body",
+        "parent": "waist",
+        "pivot": [
+          0.0,
+          24.0,
+          0.0
+        ],
+        "cubes": [
+          {
+            "origin": [
+              -4.0,
+              12.0,
+              -2.0
+            ],
+            "size": [
+              8,
+              12,
+              4
+            ],
+            "uv": [
+              16,
+              16
+            ]
+          }
+        ]
+      },
+      "head": {
+        "name": "head",
+        "parent": "body",
+        "pivot": [
+          0.0,
+          24.0,
+          0.0
+        ],
+        "cubes": [
+          {
+            "origin": [
+              -4.0,
+              24.0,
+              -4.0
+            ],
+            "size": [
+              8,
+              8,
+              8
+            ],
+            "uv": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "rightArm": {
+        "name": "rightArm",
+        "parent": "body",
+        "pivot": [
+          -5.0,
+          22.0,
+          0.0
+        ],
+        "cubes": [
+          {
+            "origin": [
+              -8.0,
+              12.0,
+              -2.0
+            ],
+            "size": [
+              4,
+              12,
+              4
+            ],
+            "uv": [
+              40,
+              16
+            ]
+          }
+        ]
+      },
+      "rightItem": {
+        "name": "rightItem",
+        "pivot": [
+          -6,
+          15,
+          1
+        ],
+        "locators": {
+          "lead_hold": [
+            -6,
+            15,
+            1
+          ]
+        },
+        "parent": "rightArm"
+      },
+      "leftArm": {
+        "name": "leftArm",
+        "parent": "body",
+        "pivot": [
+          5.0,
+          22.0,
+          0.0
+        ],
+        "cubes": [
+          {
+            "origin": [
+              4.0,
+              12.0,
+              -2.0
+            ],
+            "size": [
+              4,
+              12,
+              4
+            ],
+            "uv": [
+              32,
+              48
+            ]
+          }
+        ]
+      },
+      "leftItem": {
+        "name": "leftItem",
+        "pivot": [
+          6.0,
+          15.0,
+          1.0
+        ],
+        "parent": "leftArm"
+      }
+    },
+    "name_casing": "Exact original model bone names and parent names; animation channels use their source lowercase spelling."
+  },
+  "native_animation_reference": {
+    "source": "animations/player_firstperson.animation.json",
+    "animations": {
+      "animation.player.first_person.base_pose": {
+        "loop": true,
+        "bones": {
+          "body": {
+            "rotation": [
+              "query.target_x_rotation",
+              "query.target_y_rotation",
+              0.0
+            ]
+          },
+          "head": {
+            "rotation": [
+              "query.target_x_rotation",
+              "query.target_y_rotation + 180",
+              0.0
+            ]
+          }
+        }
+      },
+      "animation.player.first_person.empty_hand": {
+        "loop": true,
+        "bones": {
+          "rightarm": {
+            "position": [
+              13.5,
+              -10.0,
+              12.0
+            ],
+            "rotation": [
+              "95.0 + variable.is_using_vr * 7.5",
+              "-45.0 + variable.is_using_vr * 7.5",
+              "115.0 + variable.is_using_vr * -2.5"
+            ]
+          },
+          "rightitem": {
+            "position": [
+              0.0,
+              "q.get_default_bone_pivot('rightarm',1) - q.get_default_bone_pivot('rightitem',1) - 7.0",
+              "-q.get_default_bone_pivot('rightitem',2)"
+            ]
+          },
+          "leftitem": {
+            "position": [
+              0.0,
+              "q.get_default_bone_pivot('leftarm',1) - q.get_default_bone_pivot('leftitem',1) - 7.0",
+              "-q.get_default_bone_pivot('leftitem',2)"
+            ]
+          }
+        }
+      },
+      "animation.player.first_person.breathing_bob": {
+        "loop": true,
+        "override_previous_animation": false,
+        "bones": {
+          "rightitem": {
+            "position": [
+              0.0,
+              "variable.bob_animation * math.sin(q.life_time * 45.0) * 0.5",
+              0.0
+            ]
+          }
+        }
+      },
+      "animation.player.first_person.walk": {
+        "loop": true,
+        "bones": {
+          "leftarm": {
+            "position": [
+              "math.sin(-query.walk_distance * 180.0) * variable.hand_bob * 9.75",
+              "-math.abs(math.cos(-query.walk_distance * 180.0)) * variable.hand_bob * 15.0 + variable.short_arm_offset_left",
+              0.0
+            ]
+          },
+          "rightarm": {
+            "position": [
+              "math.sin(-query.walk_distance * 180.0) * variable.hand_bob * 9.75",
+              "-math.abs(math.cos(-query.walk_distance * 180.0)) * variable.hand_bob * 15.0 + variable.short_arm_offset_right",
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "native_controller_reference": {
+    "source": "animation_controllers/player.animation_controllers.json",
+    "controller": "controller.animation.player.root",
+    "first_person_state": {
+      "animations": [
+        "first_person_base_pose",
+        "first_person_breathing_bob",
+        {
+          "first_person_swap_item": "!query.blocking"
+        },
+        {
+          "first_person_shield_block": "query.blocking"
+        },
+        {
+          "first_person_attack_controller": "variable.attack_time > 0.0 && query.get_equipped_item_name != 'filled_map' && !variable.melee_spear_equipped"
+        },
+        {
+          "first_person_empty_hand": "query.get_equipped_item_name(0, 1) != 'filled_map'"
+        },
+        {
+          "first_person_walk": "variable.bob_animation"
+        },
+        {
+          "first_person_map_controller": "query.get_equipped_item_name(0, 1) == 'filled_map' || query.get_equipped_item_name('off_hand') == 'filled_map'"
+        },
+        {
+          "first_person_crossbow_equipped": "query.get_equipped_item_name == 'crossbow' && variable.item_use_normalized > 0.0 && variable.item_use_normalized < 1.0"
+        },
+        {
+          "first_person_melee_spear_controller": "variable.melee_spear_equipped"
+        }
+      ],
+      "transitions": [
+        {
+          "paperdoll": "variable.is_paperdoll"
+        },
+        {
+          "map_player": "variable.map_face_icon"
+        },
+        {
+          "third_person": "!variable.is_first_person"
+        }
+      ]
+    }
+  },
+  "native_player_reference": {
+    "source": "entity/player.entity.json",
+    "geometry": {
+      "default": "geometry.humanoid.custom",
+      "cape": "geometry.cape"
+    },
+    "script_scale": "0.9375",
+    "hand_bob_initialize_expression": "variable.hand_bob = 0.0;",
+    "hand_bob_update_expression": "variable.hand_bob = query.life_time < 0.01 ? 0.0 : variable.hand_bob + ((query.is_on_ground && query.is_alive ? math.clamp(math.sqrt(math.pow(query.position_delta(0), 2.0) + math.pow(query.position_delta(2), 2.0)), 0.0, 0.1) : 0.0) - variable.hand_bob) * 0.02;"
+  },
+  "projection_source_bounds": {
+    "units": "model_pixels_before_parent_or_renderer_scaling",
+    "breathing_bob": {
+      "bone": "rightitem",
+      "position_source_expression": [
+        0.0,
+        "variable.bob_animation * math.sin(q.life_time * 45.0) * 0.5",
+        0.0
+      ],
+      "absolute_y_bound_expression": "0.5 * abs(variable.bob_animation)",
+      "conditional_boolean_bob_y_bounds": [
+        -0.5,
+        0.5
+      ],
+      "condition": "Numeric bounds assume variable.bob_animation is 0 or 1; this source does not assign its engine-provided value."
+    },
+    "walk": {
+      "bone": "rightarm",
+      "position_source_expression": [
+        "math.sin(-query.walk_distance * 180.0) * variable.hand_bob * 9.75",
+        "-math.abs(math.cos(-query.walk_distance * 180.0)) * variable.hand_bob * 15.0 + variable.short_arm_offset_right",
+        0.0
+      ],
+      "x_bounds_expression": [
+        "-9.75 * abs(variable.hand_bob)",
+        "9.75 * abs(variable.hand_bob)"
+      ],
+      "y_bounds_expression": [
+        "variable.short_arm_offset_right - 15.0 * variable.hand_bob",
+        "variable.short_arm_offset_right"
+      ],
+      "y_bounds_condition": "variable.hand_bob >= 0",
+      "hand_bob_bounds": [
+        0.0,
+        0.1
+      ],
+      "hand_bob_bounds_evidence": "The source initializes hand_bob to 0 and updates it by 0.02 toward a target clamped to [0,0.1], preserving that interval when this recurrence is used.",
+      "conditional_x_bounds": [
+        -0.975,
+        0.975
+      ],
+      "conditional_y_delta_bounds": [
+        -1.5,
+        0.0
+      ],
+      "unresolved_short_arm_offset": "variable.short_arm_offset_right is referenced but not assigned by these pinned files."
+    },
+    "socket_pivot_algebra": {
+      "right_item_y": "(rightItem.pivot.y - rightArm.pivot.y) + (rightArm.pivot.y - rightItem.pivot.y - 7.0) == -7.0",
+      "right_item_z": "rightItem.pivot.z + (-rightItem.pivot.z) == 0.0",
+      "right_item_x_in_reflected_basis": "rightArm.pivot.x - rightItem.pivot.x",
+      "verified_wide_right_item_offset": [
+        1,
+        -7,
+        0
+      ]
+    },
+    "pitch_camera_invariant": "Applying the same rigid world transform W to cup M and view C preserves inverse(W*C)*(W*M) == inverse(C)*M. A test that rotates only the cup against a fixed camera is not a source-backed pitch acceptance test.",
+    "pitch_source": "The source base_pose rotates body by query.target_x_rotation/query.target_y_rotation; rightItem inherits rightArm then body. Head also has its own base_pose rotation and must not be used as an unverified duplicate camera transform.",
+    "framing_adapter_authority": "The port camera offsets and head-centered projection are explicit mathematical adapters, not Java-authored offsets or native client FOV/eye-offset evidence."
+  },
+  "skin_verification": {
+    "verified_geometry": "Pinned geometry.humanoid.custom sample with 4-pixel-wide arm boxes and the exact hierarchy extracted above.",
+    "sample_hierarchy_matches_armor_reference": true,
+    "slim_skin_verified": false,
+    "custom_skins_verified": false,
+    "persona_geometry_verified": false,
+    "vr_verified": false,
+    "native_rendered_client_verified": false,
+    "scope": "Source-backed wide-arm sample hierarchy and local matrix evidence only. Actual engine skin substitutions, short_arm_offset values, eye/FOV conventions and renderer scaling remain unverified."
+  }
+}

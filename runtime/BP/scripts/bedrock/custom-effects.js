@@ -32,6 +32,9 @@ function statusWindow(p){
  if(cached?.tick===now&&cached.player===p)return cached;
  const raw=p.getDynamicProperty(CUSTOM_STATUS_KEY),before=readStatus(raw),track=tracks.get(p.id);
  const state=advanceStatus(before,track?Math.max(0,now-track.tick):0);
+ // Anchor the first read on join/script start. Otherwise the first heartbeat
+ // silently adds up to five online ticks to persisted statuses after every join.
+ if(!track)tracks.set(p.id,{player:p,tick:now});
  const snapshot={player:p,tick:now,raw,before,state};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;
 }
 export function statusNow(p){return statusWindow(p).state;}

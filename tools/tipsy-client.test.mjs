@@ -9,7 +9,7 @@ import {Dimension,Player,world,system,GameMode} from './efficiency/mock-server.m
 import {TIPSY_ID,TIPSY_MAX_INTENSITY,TIPSY_PULSE_TICKS,javaTipsyRoll,tipsyShakePulse} from '../runtime/BP/scripts/core/tipsy-visual.js';
 import {CUSTOM_STATUS_KEY,activeStatus} from '../runtime/BP/scripts/core/custom-effects.js';
 import {pulseTipsyVisual,tickTipsyVisuals,pruneTipsyVisuals,tipsyVisualState} from '../runtime/BP/scripts/bedrock/tipsy-visual.js';
-import {applyCustomEffect,statusNow,tickCustomEffects,installCustomEffects,CUSTOM_TEST} from '../runtime/BP/scripts/bedrock/custom-effects.js';
+import {applyCustomEffect,clearCustomEffects,statusNow,tickCustomEffects,installCustomEffects,CUSTOM_TEST} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 import {consumeDrink} from '../runtime/BP/scripts/bedrock/drink-effects.js';
 
 installCustomEffects();
@@ -97,14 +97,20 @@ test('strong short / weak long status falls back without multiplying or duplicat
  assert(f.calls.every(c=>c.intensity<=.04));
  for(let i=1;i<f.calls.length;i++)assert(f.calls[i].tick-f.calls[i-1].tick>=5);
 });
-for(const event of ['milk','death','respawn','leave'])test(event+' stops future pulses, preserves foreign shake',()=>{
- const f=fixture();give(f.p);applyCustomEffect(f.p,{effect:'kaleidoscope_tavern:bloody_mary',ticks:400,amplifier:0});advance(50);
+for(const api of [false,true])for(const event of ['milk','death','respawn','leave','clear','opt_out'])test((api?'API ':'command ')+event+' stops future pulses within the residual bound, preserves foreign shake',()=>{
+ const f=fixture({api});give(f.p);applyCustomEffect(f.p,{effect:'kaleidoscope_tavern:bloody_mary',ticks:400,amplifier:0});advance(50);
+ const cancelledAt=system.currentTick,last=f.calls.at(-1),duration=api?last.duration:Number(last.command.split(' ')[4]);
+ assert(duration>0&&duration<=.25);
+ assert(Math.max(0,(last.tick-cancelledAt)/20+duration)<=.25);
  if(event==='milk')world.afterEvents.itemCompleteUse.emit({source:f.p,itemStack:{typeId:'minecraft:milk_bucket'}});
  if(event==='death')world.afterEvents.entityDie.emit({deadEntity:f.p,damageSource:{}});
  if(event==='respawn')world.afterEvents.playerSpawn.emit({player:f.p,initialSpawn:false});
  if(event==='leave'){world.afterEvents.playerLeave.emit({playerId:f.p.id});world.players=[];f.p.isValid=false;}
+ if(event==='clear')clearCustomEffects(f.p);
+ if(event==='opt_out')f.p.addTag('kt_no_tipsy_motion');
  const count=f.calls.length;advance(60);assert.equal(f.calls.length,count);assert(f.foreign.active);
- if(event!=='leave')assert.equal(statusNow(f.p).entries.length,0);
+ if(event==='opt_out')assert(report(f.p).statusTicks>0);
+ else if(event!=='leave')assert.equal(statusNow(f.p).entries.length,0);
 });
 test('leave/rejoin preserves online remaining time; creates a new handle and visual without offline ticking',()=>{
  const f=fixture();give(f.p,200);advance(50);

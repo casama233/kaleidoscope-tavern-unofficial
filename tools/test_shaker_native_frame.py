@@ -19,8 +19,8 @@ def actual(animations,name,wave=0):
 def target(active=False,wave=0):
  camera=chain(translate(F['player_bones']['head']['pivot']),rotate('y',180))
  display=chain(translate([0,2.75,0]),scale([.5]*3),translate([0,-24,0]))
- if active:return chain(camera,translate([-1.5,6.5,-4]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),display)
- return chain(camera,translate([-1.5,5,-4]),translate([9.039,-8.318,-11.6]),display)
+ if active:return chain(camera,translate([-1.5,6.5,-14.5]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),display)
+ return chain(camera,translate([-3,6.5,-6.5]),translate([9.039,-8.318,-11.6]),display)
 
 def corners():
  for b in G['bones']:

@@ -9,12 +9,16 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=json.loads((ROOT/'art/interfaces/shaker-held-java-reference.json').read_text())
 WAVE='math.sin(q.life_time * 1718.87338539247)'
 USING='(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)'
-# The former head-centred projection clips the actual .90 client cup at FOV60,
-# on both wide and slim skins. Preserve Java mesh, scale and shake waveform;
-# adapt only camera-space framing. Native engine eye/skin offsets remain a
-# rendered-client check, not a claim of identical Java camera pixels.
-FP_IDLE_CAMERA_OFFSET=(-1.5,5.0,-4.0)
-FP_USE_CAMERA_OFFSET=(-1.5,6.5,-4.0)
+# Fit every corner of all five Java cubes, the continuous shake and the
+# source-bounded native walking/breathing envelope at both horizontal and
+# vertical FOV60, including 16:9. These are camera translations, not a mesh
+# resize: Java display scale, geometry, rotation and 2.4-pixel wave are fixed.
+# The independent projection gate reads the shipped animation, not this
+# generator. Its +/-0.5 socket-X sensitivity budget is not skin acceptance.
+# Native eye/FOV, skin substitution and the idle/use transition need the
+# rendered client; this source candidate does not claim Java camera pixels.
+FP_IDLE_CAMERA_OFFSET=(-3.0,6.5,-6.5)
+FP_USE_CAMERA_OFFSET=(-1.5,6.5,-14.5)
 
 def java_target(view,active=False,wave=0,hand='right'):
  sign=1 if hand=='right' else -1
@@ -53,7 +57,7 @@ def selectors():
  return [{'hold_first':'c.is_first_person && !'+USING},{'hold_third':'!c.is_first_person'},{'shake_first':'c.is_first_person && '+USING}]
 
 def write():
- p=ROOT/'runtime/RP/animations/runtime_shaker.animation.json';d=json.loads(p.read_text());d['animations'].update(expected());p.write_text(json.dumps(d,indent=2)+'\n')
+ p=ROOT/'runtime/RP/animations/runtime_shaker.animation.json';d=json.loads(p.read_text());d['animations'].update(expected());p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8',newline='\n')
  for p in (ROOT/'runtime/RP/attachables').glob('shaker*.attachable.json'):
-  d=json.loads(p.read_text());d['minecraft:attachable']['description']['scripts']['animate']=selectors();p.write_text(json.dumps(d,indent=2)+'\n')
+  d=json.loads(p.read_text());d['minecraft:attachable']['description']['scripts']['animate']=selectors();p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8',newline='\n')
 if __name__=='__main__':write()

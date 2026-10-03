@@ -23,14 +23,14 @@ class ShakerJavaFrames(unittest.TestCase):
   self.assertCorners(self.actual('hold_third'),target)
  def test_first_person_native_framing_preserves_java_display(self):
   _,camera=calibration('right')
-  target=chain(camera,translate([-1.5,5,-4]),translate([0,-24,-32.4]),translate([9.039,15.682,20.8]),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
+  target=chain(camera,translate([-3,6.5,-6.5]),translate([0,-24,-32.4]),translate([9.039,15.682,20.8]),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
   self.assertCorners(self.actual('hold_first'),target)
  def test_active_camera_space_motion_replaces_idle(self):
   _,camera=calibration('right')
   for tick in range(112):
    for fraction in (0,.25,.75):
     wave=math.sin((tick+fraction)*1.5)
-    target=chain(camera,translate([-1.5,6.5,-4]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
+    target=chain(camera,translate([-1.5,6.5,-14.5]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
     self.assertCorners(self.actual('shake_first',wave),target)
  def test_idle_and_use_are_mutually_exclusive(self):
   from shaker_held_frames import selectors

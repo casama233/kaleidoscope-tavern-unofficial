@@ -28,6 +28,9 @@ export function createEffectIcons({status,available,send,enabled=()=>true,hidden
  return {
   forget:id=>views.delete(id),
   reset:id=>views.set(id,{packet:undefined,dimension:undefined}),
+  // A lifecycle replay dirties only a previously active snapshot. Inactive
+  // players must not send a title clear merely because their HUD was rebuilt.
+  refresh(id){const view=views.get(id);if(view&&view.packet!==EFFECT_ICON_PREFIX)view.dirty=true;},
   tick(players){
    if(!available()){views.clear();return;}
    const seen=new Set();
@@ -35,9 +38,12 @@ export function createEffectIcons({status,available,send,enabled=()=>true,hidden
     if(player.isValid===false)continue;
     seen.add(player.id);const old=views.get(player.id),packet=effectIconPacket(status(player),hidden(player),enabled);
     const dimension=player.dimension?.id;
-    // Inactive joins need no packet. Clearing contains only our scoped formatting header.
-    if(packet===EFFECT_ICON_PREFIX&&!old)continue;
-    if(old?.packet===packet&&old.dimension===dimension)continue;
+    // Inactive joins/moves need no packet. Clear only a previous active snapshot
+    // (or an explicit spawn reset), never a known empty view in another dimension.
+    if(packet===EFFECT_ICON_PREFIX&&(!old||old.packet===EFFECT_ICON_PREFIX)){
+     if(old)views.set(player.id,{packet,dimension});continue;
+    }
+    if(old?.packet===packet&&old.dimension===dimension&&!old.dirty)continue;
     send(player,packet);views.set(player.id,{packet,dimension});
    }catch(error){onError(error);}
    for(const id of views.keys())if(!seen.has(id))views.delete(id);

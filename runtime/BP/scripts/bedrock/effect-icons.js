@@ -15,6 +15,26 @@ const transport=createEffectIconTransport({queueAvailable:()=>effectIconDiagnost
 const icons=createEffectIcons({status:statusNow,available:()=>effectIconDiagnostics.ready,enabled,
  send(player,packet){transport.send(player,packet);effectIconDiagnostics.sent++;},onError:report});
 let installed=false;
+const dimensionRefreshes=new Map();
+function cancelDimensionRefresh(id){
+ const pending=dimensionRefreshes.get(id);if(!pending)return;
+ dimensionRefreshes.delete(id);for(const run of pending.runs)system.clearRun(run);
+}
+function refreshDimensionIcons(event){
+ const player=event.player,id=player.id;cancelDimensionRefresh(id);
+ const pending={dimension:event.toDimension.id,runs:[]};dimensionRefreshes.set(id,pending);
+ // A transition packet can precede the client HUD rebuild. Replay at most
+ // twice after this event, through the existing scoped transport and cadence.
+ // Never clear titles, reset native HUD controls or poll-refresh steady state.
+ for(const delay of [20,40])pending.runs.push(system.runTimeout(()=>{
+  if(dimensionRefreshes.get(id)!==pending)return;
+  try{
+   if(player.isValid===false||player.dimension.id!==pending.dimension){cancelDimensionRefresh(id);return;}
+   icons.refresh(id);
+   if(delay===40)dimensionRefreshes.delete(id);
+  }catch(error){cancelDimensionRefresh(id);report(error);}
+ },delay));
+}
 export function installEffectIcons(){
  if(installed)return;installed=true;
  // Observe the standard embedded router's election; never join it or create a second router.
@@ -27,8 +47,9 @@ export function installEffectIcons(){
   effectIconDiagnostics.transport=transport.mode();effectIconDiagnostics.ready=true;
   console.info('[Tavern effect icons] transport '+effectIconDiagnostics.transport+'; standalone support built in');
  },5);
- world.afterEvents.playerSpawn.subscribe(e=>icons.reset(e.player.id));
- world.afterEvents.playerLeave.subscribe(e=>{icons.forget(e.playerId);detailsSessions.delete(e.playerId);});
+ world.afterEvents.playerDimensionChange.subscribe(refreshDimensionIcons);
+ world.afterEvents.playerSpawn.subscribe(e=>{cancelDimensionRefresh(e.player.id);icons.reset(e.player.id);});
+ world.afterEvents.playerLeave.subscribe(e=>{cancelDimensionRefresh(e.playerId);icons.forget(e.playerId);detailsSessions.delete(e.playerId);});
  system.runInterval(()=>icons.tick(world.getAllPlayers()),EFFECT_ICON_INTERVAL);
 }
 const detailsSessions=new Map();

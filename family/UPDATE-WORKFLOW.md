@@ -100,3 +100,19 @@ canonical merge tree。此時僅接受「該 PR 的實際 merge commit 就是目
 commit」且完整 tree 相同的情況；檢查改查該 merge commit 的實際 GitHub CI。
 必要 runtime jobs 必須對此完整來源成功，不能沿用舊 head 的綠燈。收據分別記錄
 reviewed PR head、checked commit 與 tree。其他後續來源仍要求自己的目前 merged PR。
+
+### 保留並審查另一項正在進行的修復
+
+既有 preserved pack 與旧收據不同時，仍拒絕漂移。`preserved_reconciliation` 可引用
+Git 外的獨立審查證據，目前僅支援既有 AMW 2.4.18→2.4.19 的果汁桶、小麥配方／
+指引及配對 manifest。必須保留完整原始與目前 bytes 於乾淨 private Git；原始 tree
+逐檔等於不可變舊收據，目前 tree 逐檔等於 observed inventory，每條差異記錄原因。
+還需該完整候選在原生 BDS 首次與重啟的果汁堆疊、配方、六級成品測試，且不得
+以 probe 修改被審查的 AMW bytes。未找到原始編輯者時，來源記錄必須明說。
+
+此審查只讓新候選保留已核對的變更；不改舊政策、收據或驗收結果，也不能用來
+引入自有包 gameplay、別的 preserved pack、額外檔案或身份遷移。完整家族准入、
+新停服備份和存檔演練仍必須完成。整合包僅允許與此已審查 pair 精確同步相依。
+翻譯審查的 `canonical_preserved_commit` 只引用 separately validated integration
+的精確 history preimage，保留已觀察內容；後續 canonical 功能變更另外通過
+`extension_validation` 的全檔與原生功能驗證，不能偽裝成翻譯修補。

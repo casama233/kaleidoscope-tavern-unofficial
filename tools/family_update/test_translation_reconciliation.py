@@ -57,6 +57,11 @@ class TranslationReconciliationTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError,'preserve'):self.validate()
         self.inventory['refs']['behavior'].reverse();self.proof['observed_inventory']=copy.deepcopy(self.inventory);self.path.write_text(json.dumps(self.proof))
         with self.assertRaisesRegex(AssertionError,'order'):self.validate()
+    def test_canonical_preimage_requires_matching_separate_functional_source(self):
+        self.proof['canonical_preserved_commit']='prior';self.path.write_text(json.dumps(self.proof))
+        validation=self.root/'validation.json';validation.write_text(json.dumps({'history_base':'unrelated','source_commit':'current'}))
+        with patch.multiple(m,EXTENSION=self.ext,CONFIG={'translation_reconciliation':str(self.path),'extension_validation':str(validation)},R=self.root),patch.object(m,'git',return_value='current'):
+            with self.assertRaisesRegex(AssertionError,'preimage'):m.validate_translation_reconciliation(self.inventory,self.expected,self.order)
     def test_manifest_identity_cannot_be_reconciled(self):
         p=self.live/'bp/manifest.json';x=json.loads(p.read_text());x['header']['uuid']='stolen';p.write_text(json.dumps(x))
         self.inventory['packs'][0]['files']['manifest.json']=m.sha(p);self.proof['observed_inventory']=copy.deepcopy(self.inventory);self.path.write_text(json.dumps(self.proof))

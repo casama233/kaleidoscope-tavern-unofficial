@@ -45,6 +45,7 @@ def finalize_receipt():
     reports.append('saved-world-container-inventories.json')
     if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
+    if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}

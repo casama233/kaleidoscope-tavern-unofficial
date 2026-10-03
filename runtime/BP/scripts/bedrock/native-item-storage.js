@@ -7,7 +7,7 @@ let serial=0;
 export const nativeItems=new NativeItemStorage({backend:world,findEntity:id=>world.getEntity(id),createEntity:(dimension,position)=>dimension.spawnEntity(NATIVE_ITEM_ENTITY,position),makeStack:(id,count)=>normalizeBottleStack(new ItemStack(id,count)),token:()=>`${Date.now()}_${++serial}_${Math.random().toString(36).slice(2)}`});
 export function projectNativeStoredState(key,state){
  if(!state||state.deleted||state.prepared||!/^kt:(holder|tilted_rack|circular_rack|cellar_cabinet|bar_cabinet|extension_storage)\//.test(key))return state;
- const match=/\/(overworld|nether|the_end)\/(-?\d+)_(-?\d+)_(-?\d+)$/.exec(key);
+ const match=/\/(overworld|nether|the_end)\/(?:(?:bar_cabinet|glass_bar_cabinet)\/)?(-?\d+)_(-?\d+)_(-?\d+)$/.exec(key);
  check(match,'NATIVE_STORAGE_LOCATION');
  const dimension=world.getDimension(match[1]),position={x:Number(match[2]),y:Number(match[3]),z:Number(match[4])};
  const adopted=nativeItems.readAdopted({key,dimension,position});

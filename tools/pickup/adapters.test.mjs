@@ -42,6 +42,18 @@ for(const [label,id,place,put,take,recover]of cases){
  test(label+' failed native write restores inventory and can be retried',()=>{
   const {p,d,at,b}=setup();p.inventory.setItem(7,new ItemStack(id));place(p,at);const original=held(p,WINE);d.failSpawn=true;assert.throws(()=>put(p,b));d.failSpawn=false;stackEqual(p.inventory.getItem(7),original);put(p,b);take(p,b);stackEqual(p.inventory.getItem(7),original);
  });
+ test(label+' stale display index reads the original native slot and commits it once',()=>{
+  const {p,at,b}=setup();p.inventory.setItem(7,new ItemStack(id));place(p,at);const original=held(p,WINE,'original native '+label);put(p,b);
+  const key=world.getDynamicPropertyIds().find(k=>k.startsWith('kt:native_items/')&&JSON.parse(world.getDynamicProperty(k)).position.x===at.x).slice('kt:native_items/'.length);
+  const state=JSON.parse(world.getDynamicProperty(key));
+  if(state.slots)state.slots=state.slots.map(()=>null);
+  else if('left' in state){state.left=null;state.right=null;state.single=false;}
+  else state.item=NS+'wine_q2';
+  world.setDynamicProperty(key,JSON.stringify(state));const before=world.getDynamicProperty(key);
+  assert.equal(p.inventory.getItem(7),undefined);take(p,b);stackEqual(p.inventory.getItem(7),original);
+  assert.notEqual(world.getDynamicProperty(key),before);assert.equal(world.getDynamicProperty('kt:native_items/'+key),undefined);
+  assert.equal(p.messages.length,0);
+ });
 }
 for(const mode of [GameMode.Survival,GameMode.Creative,GameMode.Adventure])test('glassware holder preserves native cup and creative count '+mode,()=>{
  const {p,b}=setup();b.setPermutation(BlockPermutation.resolve(NS+'glassware_holder'));p.mode=mode;const original=held(p,NS+'empty_glassware');F.useGlasswareHolder(p,b,point);

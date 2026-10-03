@@ -1,4 +1,23 @@
-# Native title coexistence: subtitle-only candidate
+# EXPERIMENT FAILED: subtitle-only effect icons
+
+**PR171 / source `73d66fcb` failed native cold initialization. Do not merge or
+deploy this experiment.** Root will revert the integrated experiment to the
+camera/lifecycle implementation plus the verified `c643225f` dimension repair.
+The experimental source branch remains for evidence, not as the accepted path.
+
+Root fully closed and relaunched licensed Android Bedrock 1.26.52.3, then
+completed an actual `mystery_cocktail` before issuing any title command. Two
+later observations showed no custom icon despite active canonical Tipsy,
+`camera_api` tracking and no reported script error. World Liquor's private
+candidate had the paired subtitle cache overlay, so this is not a stale addon
+title binding result. A deliberate diagnostic title then made the icon appear
+for the first time, along with an empty dark subtitle-background rectangle.
+
+This supports subtitle data being retained until title activation in the tested
+client; it does not expose the engine's internal binding-update mechanism.
+The source/packet tests below passed but did not model this native dependency
+or background artifact. Those passes cannot override the native failure.
+Title priming, a title fallback and perpetual keepalive are explicitly rejected.
 
 Root's licensed Android Bedrock 1.26.52.3 test confirms the `c643225f` dimension
 repair: active Tipsy icons persist after Nether travel and return to Overworld.
@@ -8,7 +27,7 @@ Tipsy and its icon, but the foreign title also disappears early. A no-Tipsy,
 no-Milk control retains its title after twenty seconds. Private raw logs,
 recordings, screenshots and world data are not attached.
 
-## Source cause and limits
+## Source cause and limits of the preceding title implementation
 
 The standalone adapter sends every owned icon change/clear through
 `setTitle(packet, {fadeInDuration:0, fadeOutDuration:0, stayDuration:0})`.
@@ -42,18 +61,18 @@ and subtitle renderers, root controls, shaker controls, animations and sprites
 remain unchanged. Snapshot cadence, lifecycle cancellation and `c643` bounded
 dimension replay are unchanged.
 
-**Candidate, not native acceptance:** a successful subtitle command does not
-prove a fresh client's custom HUD binding updates before any title has appeared.
+**Rejected experiment:** a successful subtitle command did not update the
+fresh client's custom HUD before a title appeared in root's native test.
 There is no title priming or persistent keepalive if it does not. Native title
 text/lifetime preservation must be remeasured. Subtitle data is itself shared:
 this candidate can replace a foreign subtitle when an icon snapshot changes.
 It cannot claim general foreign-subtitle coexistence or full display ownership.
 Native blank-subtitle/background behavior must also be checked.
 
-## Exact World Liquor integration scope
+## Experimental World Liquor overlay scope — not an accepted migration
 
 This branch does not edit World Liquor or root's unpushed `.58` integration.
-For the paired addon panel to follow this candidate, root needs only a targeted
+The private paired addon panel followed this experiment through a targeted
 canonical edit of `runtime/RP/ui/kt_world_liquor_effects.json`:
 
 1. Inside `effect_panel.controls[0].kwl_effect_data.bindings`, change the two
@@ -69,7 +88,7 @@ but do not run it over an unreviewed addon integration: root should apply only
 the named cache edit or review the exact generator diff first. Without that edit,
 the addon panel listens to the obsolete title channel; its icons are not certified.
 
-## Verification and root's native steps
+## Source verification and historical candidate test steps
 
 Source regressions assert the emitted subtitle opcode/JSON, zero title/Actionbar
 writes or queue routes, current-status Milk clearing, rejection/exception without
@@ -89,7 +108,9 @@ this worker because no authorized local stack inventory was supplied. Full
 release/hash admission remains blocked on root's integrated freeze/preimages;
 this candidate changes exported BP/RP content and has no release identity bump.
 
-Root should test the integrated BP/RP candidate privately:
+The candidate originally proposed these private acceptance steps. Cold
+initialization already failed; the sequence is retained as provenance, not as
+an instruction to deploy or repeat the rejected design:
 
 1. Fresh entry before any `/title`: complete a real long drink and verify the
    icon appears without an activation title or visible subtitle glyph/background.
@@ -106,3 +127,35 @@ Root should test the integrated BP/RP candidate privately:
 If cold initialization or title preservation fails, reject this candidate and
 retain the honest engine limitation; do not fall back to overwriting titles.
 Signed Java roll remains NOT_RESTORED.
+
+## Conclusion and feasible next work
+
+The currently investigated stable Script API and pinned JSON UI do not provide
+an established, independent, script-fed icon channel that satisfies cold
+initialization while preserving arbitrary native title/subtitle writers. This
+is a limit of the verified paths, not a proof about every possible engine or
+future API. The pinned native title control is factory-created and reads the
+global title/subtitle strings; its authored JSON does not specify an alternate
+server-to-client custom-packet admission mechanism. The ScreenDisplay API has
+no getter to recover an unknown native title's text, remaining time or owner.
+
+* Retain Tipsy camera/lifecycle and `c643` dimension recovery. Its existing
+  automatic standalone icons still have the reproduced title coexistence limit;
+  this is not a complete Java-parity or universal UI coexistence pass.
+* For a future configuration that requires strict native-title preservation,
+  disable automatic icon transport from session initialization and keep the
+  existing explicitly opened effect-details form. The current personal hide
+  toggle can send a final scoped clear when an active view is hidden, so it must
+  not be described as an instantaneous safe switch during a foreign title.
+* A cooperative UI arbiter can coordinate known addon title intents and declared
+  lifetimes, with finite suspension/re-admission of icons. It requires all
+  participating writers to use the protocol; arbitrary `/title` or external
+  writers remain unsupported. Existing title-writing queues alone do not solve
+  the failure, and another shared channel must not be called a complete fix.
+* A future independent client channel requires a concrete supported interface
+  and cold/native acceptance before implementation is presented as usable.
+  No such interface has been established in this task.
+
+No runtime, native UI control, hash gate, release identity or World Liquor
+canonical source is changed by this rejection checkpoint. Raw private evidence
+remains outside Git.

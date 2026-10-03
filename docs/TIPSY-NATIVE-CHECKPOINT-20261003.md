@@ -17,7 +17,9 @@ observer logs, world files and player identifiers are not included here.
 | Save/Quit and re-enter the same saved world during a long `mystery_cocktail` effect | Remaining Tipsy is active after re-entry, with tracking and `camera_api` resumed and no reported error; later observations decrease by 20 ticks per 20 online ticks. | Resume and online countdown observations. The reported samples do not establish an exact before/after offline-duration accounting measurement. |
 | Add and remove the motion opt-out tag | Adding the tag stops tracking while remaining duration continues to count down; removing it restores `camera_api` motion. | Limited motion opt-out lifecycle observation. |
 | Cross from Overworld to Nether while Tipsy remains active | In Nether, status and `camera_api` tracking continue without a reported error. Natural expiry reaches zero, with exact +2/+7 follow-ups also zero/untracked. | The initial HUD disappeared. Root subsequently tested `c643225f`: the icon remained visible more than ten seconds after Nether travel and again after returning to Overworld. This limited dimension HUD repair result is reported as effective. |
-| Show a 60-second native foreign title, then actually drink Milk during active Tipsy | Milk clears Tipsy as expected, but both the icon and foreign title disappear well before the title's requested lifetime. The no-Tipsy/no-Milk title control remains visible after twenty seconds. | **Foreign-title coexistence FAIL** on the `standalone` title transport. The independent subtitle candidate has not yet undergone this native test. |
+| Show a 60-second native foreign title, then actually drink Milk during active Tipsy | Milk clears Tipsy as expected, but both the icon and foreign title disappear well before the title's requested lifetime. The no-Tipsy/no-Milk title control remains visible after twenty seconds. | **Foreign-title coexistence FAIL** on the `standalone` title transport. The independent subtitle experiment subsequently fails cold initialization below. |
+| Fully close/relaunch with subtitle experiment `73d66fcb`, then actually drink before any title command | No icon appears at either later observation, despite active Tipsy and working `camera_api` without a reported script error. | **Subtitle-only cold initialization FAIL.** The paired private addon overlay was applied. PR171 is an unsuccessful experiment, not an accepted replacement for `c643`. |
+| Deliberately issue a diagnostic title after the subtitle-only cold failure | The icon appears for the first time and an empty dark native subtitle-background rectangle also appears. | Supports title-triggered subtitle admission on the tested client and establishes a background artifact. This is diagnosis, not permission to add title priming. |
 
 Root also reported visible small camera movement on this candidate compared
 with the preceding adapter in a matched scene. That establishes client-visible
@@ -32,7 +34,8 @@ doubles; those tests are not native client evidence.
 ## Still pending or outside this checkpoint
 
 The saved-world and dimension observations above were reported in a follow-up.
-The subtitle candidate's HUD initialization and foreign-title lifetime, all three perspectives, amplifier and duration
+The subtitle experiment's HUD initialization failed; its native foreign-title
+lifetime test did not establish an accepted replacement. All three perspectives, amplifier and duration
 stacking, other drink effects and foreign camera/shake coexistence,
 sleeping/spectator/locked input, and Allow Camera Shake disabled are not certified
 by these observations. The complete

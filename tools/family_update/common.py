@@ -216,8 +216,10 @@ def check_live_against_policy(inventory):
     receipt = read(policy['approved_receipt'])
     expected = {pack['uuid']: pack for pack in receipt['packs']}
     assert {pack['uuid'] for pack in inventory['packs']} == set(expected), 'Complete stack changed; reconcile sources'
-    if not G['audit'](W, policy)['ok']:
-        validate_translation_reconciliation(inventory,expected,receipt['order'])
+    if not G['audit'](W, policy)['ok'] or any(pack['files']!=expected[pack['uuid']]['files'] or pack['version']!=expected[pack['uuid']]['version'] for pack in inventory['packs']):
+        from family_update.preserved_reconciliation import reconcile
+        reviewed,dependency_pins=reconcile(inventory,expected)
+        validate_translation_reconciliation(inventory,reviewed,receipt['order'],dependency_pins)
         return policy
     for pack in inventory['packs']:
         row = expected[pack['uuid']]
@@ -226,17 +228,23 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    return {key: sha(Path(CONFIG[key])) for key in ['translation_reconciliation', 'container_recovery_plan','extension_validation'] if CONFIG.get(key)}
+    return {key: sha(Path(CONFIG[key])) for key in ['translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
 
 
-def validate_translation_reconciliation(inventory,expected,order):
+def validate_translation_reconciliation(inventory,expected,order,dependency_pins=None):
     """Review one preserved local translation delta; never approve its old receipt."""
     import base64,copy,re
+    dependency_pins=dependency_pins or {}
     path=CONFIG.get('translation_reconciliation')
     assert path and EXTENSION, 'Investigate managed drift before preparing a release'
     proof=read(Path(path));assert proof.get('schema')==1 and proof.get('source_provenance') and proof.get('review_reason'), 'Reconciliation provenance is required'
     assert proof['observed_inventory']==inventory, 'Reconciled live bytes/order changed'
     config=read(EXTENSION/'baseline.json')
+    preserved_commit=proof.get('canonical_preserved_commit')
+    if preserved_commit:
+        validation=read(Path(CONFIG['extension_validation']))
+        assert validation['history_base']==preserved_commit and validation['source_commit']==git(EXTENSION,'rev-parse','HEAD'), 'Canonical preimage needs exact separately validated integration changes'
+        subprocess.run(['git','-C',str(EXTENSION),'merge-base','--is-ancestor',preserved_commit,validation['source_commit']],check=True,capture_output=True)
     allowed={p['uuid']:side for side,p in config['packs'].items()}
     assert set(proof['packs'])==set(allowed), 'Only the canonical local integration may be reconciled'
     for side,uids in order.items():
@@ -251,6 +259,10 @@ def validate_translation_reconciliation(inventory,expected,order):
         for module in value['modules']:module['version']=[0,0,0]
         for dep in value.get('dependencies',[]):
             if dep.get('uuid') in allowed:dep['version']=[0,0,0]
+            elif dep.get('uuid') in dependency_pins:
+                # Only the separately reviewed preserved pair may advance.
+                assert dep['version'] in ([2,4,18],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
+                dep['version']=[0,0,0]
         return value
     changed=[]
     for live in inventory['packs']:
@@ -267,6 +279,10 @@ def validate_translation_reconciliation(inventory,expected,order):
         old=base64.b64decode(row['approved_manifest_base64'],validate=True)
         assert hashlib.sha256(old).hexdigest()==prior['files']['manifest.json'], 'Original manifest evidence differs'
         current=read(Path(live['path'])/'manifest.json')
+        for dep in current.get('dependencies',[]):
+            if dep.get('uuid') in dependency_pins:
+                assert dep['version']==dependency_pins[dep['uuid']]
+                assert any(d.get('uuid')==dep['uuid'] and d['version']==dep['version'] for d in config['packs'][allowed[live['uuid']]]['dependencies']), 'Canonical integration does not pair reviewed preserved release'
         assert clean_manifest(json.loads(old))==clean_manifest(current), 'Integration manifest changed beyond its version'
         root=EXTENSION/config['runtime'][allowed[live['uuid']]]
         for name,digest in live['files'].items():
@@ -275,7 +291,9 @@ def validate_translation_reconciliation(inventory,expected,order):
                 observed=(Path(live['path'])/name).read_bytes()
                 assert hashlib.sha256(observed).hexdigest()==digest, 'Observed language changed during reconciliation'
                 assert (root/name).read_bytes().startswith(observed), 'Canonical language must preserve all observed translations before appending restorations'
-            else:assert sha(root/name)==digest, 'Preserved live content is absent from canonical source'
+            else:
+                original=subprocess.check_output(['git','-C',str(EXTENSION),'show',preserved_commit+':'+config['runtime'][allowed[live['uuid']]]+'/'+name]) if preserved_commit else (root/name).read_bytes()
+                assert hashlib.sha256(original).hexdigest()==digest, 'Preserved live content is absent from canonical preimage'
         changed.append({'uuid':live['uuid'],'changed':sorted(delta),'observed_version':live['version'],'canonical_version':config['version']})
     atomic(R/'translation-reconciliation-check.json',{'source':report_ref(Path(path)),'reviewed_changes':changed,
            'old_drift_receipt_approved':False,'policy_changed':False,'new_full_family_acceptance_still_required':True})

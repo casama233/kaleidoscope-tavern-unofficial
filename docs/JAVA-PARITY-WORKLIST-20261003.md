@@ -1,18 +1,19 @@
 # Java parity worklist — 2026-10-03
 
-This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.53. Five additional family projects are pinned upstream dependencies, not silently modified here.
+This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.54. Five additional family projects are pinned upstream dependencies, not silently modified here.
 
 ## Newly repaired and regression-tested
 
-- Grilling: ordinary crouch eating; crouch threading; full-hunger plate gate; configured nested hot saturation; threading/insertion success audio. Nine new production-function/callback regressions, full canonical verifier (417 imports), independent review and exact-head CI pass.
+- Grilling 2.8.54: Java one-tick release grace (23 refuses, 24/25 eligible), captured stop time and once-only completion/release ordering. Eight additional production-callback tests and full canonical checks pass; all four exact-head GitHub checks pass at 51ea99d2edf0f2b9e822b31d6d1edde1cfc2e6c4. Actual 24-tick native timing remains open.
+- Grilling 2.8.53: ordinary crouch eating; crouch threading; full-hunger plate gate; configured nested hot saturation; threading/insertion success audio. Nine new production-function/callback regressions, full canonical verifier (417 imports), independent review and exact-head CI pass.
 - World Liquor: Respawn perimeter/height ordering and endpoint feedback, liquid support, facing/cross-dimension velocity options; Ground Crit climbing/blindness/riding boundaries; Crazy beacon pitch; Elbow feedback volume. Twelve new boundary tests, full paired checks, independent review and exact-head CI pass.
-- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-53-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
+- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-54-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
 
 ## Confirmed remaining source gaps
 
 ### Grilling
 
-1. MultiBiteSkewerItem's one-tick release grace and logout settlement are not source-equivalent. Native lifecycle ordering must be verified before granting rewards.
+1. Logout settlement remains incomplete. The one-tick release predicate is repaired in 2.8.54; actual native elapsed-time alignment remains to be observed.
 2. Secret cooked ingredient snapshots happen at extraction, not the fourth flip. Compatibility recipe changes can alter result/display after cooking.
 3. Failed skewers do not retain original-skewer model routing. Fix requires metadata and held/placed render routes, not an isolated property.
 4. Random THREE/THREE_ALT duration versus fixed item use duration needs real client/lifecycle validation.
@@ -34,10 +35,10 @@ Older claims that freezer/external-cellar redstone or corrected freezer recipe d
 
 ## Actual client path now available
 
-The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. This establishes client execution, not addon acceptance. The original audio device was unavailable; a real PCM capture backend is being tested separately.
+The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. This establishes client execution, not addon acceptance. The original audio device was unavailable. The SDL disk backend produced a 570,380,288-byte diagnostic file containing non-zero data; exact format and per-event sound acceptance remain unverified.
 
-Owned packs are being linked from canonical runtime into development_behavior_packs and development_resource_packs in the isolated client. Normal imported duplicates are archived outside the game. Third-party dependencies remain exact copies. Frozen release exports retain their own receipts; editing a development pack does not certify or replace release acceptance.
+Owned packs are linked from canonical runtime into development_behavior_packs and development_resource_packs in the isolated client. Normal imported duplicates are archived outside the game. Third-party dependencies remain exact copies. Frozen release exports retain their own receipts; editing a development pack does not certify or replace release acceptance.
 
-Official [development workflow](https://learn.microsoft.com/en-us/minecraft/creator/documents/addondevelopmentworkflow?view=minecraft-bedrock-stable) documents script reload and development-directory symlinks. Textures/models/sounds require world exit/reentry according to that workflow; actual reload behavior must still be checked on this client. Client visuals, interaction, sound, save/restart and multiplayer evidence must be recorded separately.
+Official [development workflow](https://learn.microsoft.com/en-us/minecraft/creator/documents/addondevelopmentworkflow?view=minecraft-bedrock-stable) documents script reload and development-directory symlinks. Textures/models/sounds require world exit/reentry according to that workflow; same-world script reload was verified on this client with an isolated A→B script marker and native /reload at 14:10:16 UTC+08. The temporary probe was retired after normal save/quit. This does not establish resource-pack hot reload. Client visuals, interaction, sound, save/restart and multiplayer evidence must be recorded separately.
 
 No merge, release or live deployment is claimed here.

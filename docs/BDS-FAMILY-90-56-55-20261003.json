@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "test_only_overlays": true,
+  "simulated_players": false,
+  "native_probes": {
+    "tavern": {
+      "checks": 24,
+      "fluids": 9,
+      "extensions": [
+        {
+          "source": "kaleidoscope_world_liquor",
+          "version": "0.1.56",
+          "recipes": 32,
+          "pages": 66,
+          "shakerInputs": 56
+        }
+      ],
+      "guide": {
+        "active": false,
+        "disposed": false,
+        "hostReady": true,
+        "dirty": true,
+        "successfulTransfers": 2,
+        "transmittedTransfers": 2,
+        "sendFailures": 0,
+        "messageCount": 286,
+        "revision": "c6_511e6086",
+        "acknowledgementAvailable": false,
+        "receiptConfirmed": false,
+        "deliveryState": "sent_unconfirmed"
+      },
+      "cookeryCapabilities": [
+        "chopping_board_v2",
+        "chopping_board_recipe_selection",
+        "chopping_board_multi_output",
+        "chopping_board_commit_receipt",
+        "oil_pot_portable_v1",
+        "oil_pot_snapshot_v1",
+        "oil_pot_placed_v1",
+        "cuisine_output_receipt_v2",
+        "secret_ingredient_consume_v1",
+        "guidebook_localized_labels_v1",
+        "secret_ingredient_behaviors_v1",
+        "wok",
+        "stockpot_exact",
+        "stockpot_flex",
+        "chopping_board",
+        "chopping_board_tool",
+        "steamer",
+        "teapot",
+        "millstone",
+        "guidebook_extensions",
+        "guidebook_entry_icons",
+        "display_rules",
+        "chopping_board_displays",
+        "chopping_board_native_models",
+        "chopping_board_auto_recovery",
+        "kitchen_knife_tag",
+        "shawarma"
+      ],
+      "client": false
+    },
+    "grilling": {
+      "nativeContainer": true,
+      "stackableMetadata": true,
+      "immutable": true,
+      "lore": true,
+      "unstackable": true,
+      "client": false
+    }
+  },
+  "errors": [],
+  "bds": true,
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "family_versions": {
+    "tavern": "0.6.90",
+    "world_liquor": "0.1.56",
+    "grilling": "2.8.55"
+  },
+  "candidate_receipt_sha256": "187a4168653c719d6bfa528bc14f3829344bc14b78aa8b22857bf050c2831287"
+}

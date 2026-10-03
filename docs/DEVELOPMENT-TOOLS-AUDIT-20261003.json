@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "date_utc": "2026-10-03",
+  "scope": "draft owned trio editor export, static tooling and isolated native probes",
+  "runtime": {
+    "Tavern-0.6.90": {
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "version": [
+        0,
+        6,
+        90
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "a759f2db8668d3abcb85ab349886f444effec8a9e482794658d16d456c877550",
+          "files": 798
+        },
+        "RP": {
+          "sha256": "64ba27584e47b9336a9217fb326294b5d4b88940ffebc5e6ff20eb21ec640f54",
+          "files": 3126
+        }
+      }
+    },
+    "Grilling-2.8.52": {
+      "repository": "casama233/kaleidoscope-grilling-unofficial",
+      "version": [
+        2,
+        8,
+        52
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "bf464d08d0d1df53692e9f6f2a2f85c47e55af3a9fe38872ae568af026aacc4e",
+          "files": 528
+        },
+        "RP": {
+          "sha256": "4311dd3177b7a7cf1ef8462328ba57e3eb07e0c1d6bf3c451ab585e6b9756b2d",
+          "files": 1670
+        }
+      }
+    },
+    "Liquor-0.1.55": {
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "version": [
+        0,
+        1,
+        55
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "2e3e3d6985f13fa17bf38de97c6e9630f72ea12aa1f02f904826173154d9735f",
+          "files": 305
+        },
+        "RP": {
+          "sha256": "459e81fe262a560a6d49863908cfe718ccc8221c9c45acd2499d46eafcfc9a08",
+          "files": 511
+        }
+      }
+    }
+  },
+  "bridge": {
+    "version": "2.7.54",
+    "increment_version": false,
+    "add_generated_with": false,
+    "projects": {
+      "Tavern-0.6.90": {
+        "archive_sha256": "24cbd3080a7f573eee7cb4b3287da8972a6443fb02121f3b6a2b1d6d01f32a7c",
+        "packs": {
+          "BP": {
+            "files": 798,
+            "all_bytes_equal": true
+          },
+          "RP": {
+            "files": 3126,
+            "all_bytes_equal": true
+          }
+        }
+      },
+      "Grilling-2.8.52": {
+        "archive_sha256": "6b3ec2a56d50d84a080d910a1662e4207cca46d0fac87925ba5c0079cb30dcf8",
+        "packs": {
+          "BP": {
+            "files": 528,
+            "all_bytes_equal": true
+          },
+          "RP": {
+            "files": 1670,
+            "all_bytes_equal": true
+          }
+        }
+      },
+      "Liquor-0.1.55": {
+        "archive_sha256": "929fa6012ba34c11f4ec89ab9031cbc3aa0a28d163fd4a487962e16b7e4485eb",
+        "packs": {
+          "BP": {
+            "files": 305,
+            "all_bytes_equal": true
+          },
+          "RP": {
+            "files": 511,
+            "all_bytes_equal": true
+          }
+        }
+      }
+    }
+  },
+  "mct": {
+    "package": "@minecraft/creator-tools",
+    "version": "0.19.0",
+    "cli_flags": [
+      "--isolated",
+      "--single",
+      "validate",
+      "all"
+    ],
+    "reports": {
+      "liquor54": {
+        "csv_sha256": "86586479d381b7fa3cc1ec5532e35c130e193a3adb567bee1be7f64e731b772f",
+        "rows": 1293,
+        "types": {
+          "Unknown": 12,
+          "Test success": 40,
+          "Info": 600,
+          "Warning": 548,
+          "Recommendation": 78,
+          "Test fail": 2,
+          "Error": 13
+        },
+        "path_length": {
+          "Test fail": 1,
+          "Error": 12
+        }
+      },
+      "liquor55": {
+        "csv_sha256": "744ba2b156cc11a1553a60c4f1c04a14093b85a858e3b3639f28fcc0196665ef",
+        "rows": 1281,
+        "types": {
+          "Unknown": 12,
+          "Test success": 41,
+          "Info": 600,
+          "Warning": 548,
+          "Recommendation": 78,
+          "Test fail": 1,
+          "Error": 1
+        },
+        "path_length": {
+          "Test success": 1
+        }
+      },
+      "family90-55-52": {
+        "csv_sha256": "1098eedead971355ce955c191bdffead931dd5735483d4082187c6648d9a91b0",
+        "rows": 20647,
+        "types": {
+          "Unknown": 11,
+          "Test success": 36,
+          "Info": 7135,
+          "Warning": 7162,
+          "Test fail": 7,
+          "Error": 2832,
+          "Recommendation": 3464
+        },
+        "path_length": {
+          "Test fail": 1,
+          "Error": 2770,
+          "Recommendation": 166
+        }
+      }
+    },
+    "mcp": {
+      "transport": "ephemeral local stdio",
+      "persistent_registration": false,
+      "network_listener": false,
+      "tools_list_count": 19,
+      "tool_called": "validateContent",
+      "input_archive_sha256": "92e1ae221f4e12ff84ff9cc2f5969be241d353f03b2a4f15e4fa7b4c6b634d26",
+      "result_sha256": "d22290953bf72cbf8cfd2f132dd43c1782184056071eafade529c571c4e6da43",
+      "is_error": false,
+      "counts": {
+        "behaviorPackManifestCount": 1,
+        "resourcePackManifestCount": 1,
+        "fileCounts": 816,
+        "errorCount": 1,
+        "warningCount": 548,
+        "testSuccessCount": 41,
+        "testFailCount": 1
+      }
+    }
+  },
+  "acceptance": {
+    "human_client": false,
+    "saved_world_migration": false,
+    "exact_no_overlay_restart": false,
+    "live_deployment": false,
+    "full_java_parity": false
+  },
+  "native": {
+    "schema": 1,
+    "test_only_overlays": true,
+    "simulated_players": false,
+    "native_probes": {
+      "tavern": {
+        "checks": 24,
+        "fluids": 9,
+        "extensions": [
+          {
+            "source": "kaleidoscope_world_liquor",
+            "version": "0.1.55",
+            "recipes": 32,
+            "pages": 66,
+            "shakerInputs": 56
+          }
+        ],
+        "guide": {
+          "active": false,
+          "disposed": false,
+          "hostReady": true,
+          "dirty": true,
+          "successfulTransfers": 2,
+          "transmittedTransfers": 2,
+          "sendFailures": 0,
+          "messageCount": 286,
+          "revision": "c6_511e6086",
+          "acknowledgementAvailable": false,
+          "receiptConfirmed": false,
+          "deliveryState": "sent_unconfirmed"
+        },
+        "cookeryCapabilities": [
+          "chopping_board_v2",
+          "chopping_board_recipe_selection",
+          "chopping_board_multi_output",
+          "chopping_board_commit_receipt",
+          "oil_pot_portable_v1",
+          "oil_pot_snapshot_v1",
+          "oil_pot_placed_v1",
+          "cuisine_output_receipt_v2",
+          "secret_ingredient_consume_v1",
+          "guidebook_localized_labels_v1",
+          "secret_ingredient_behaviors_v1",
+          "wok",
+          "stockpot_exact",
+          "stockpot_flex",
+          "chopping_board",
+          "chopping_board_tool",
+          "steamer",
+          "teapot",
+          "millstone",
+          "guidebook_extensions",
+          "guidebook_entry_icons",
+          "display_rules",
+          "chopping_board_displays",
+          "chopping_board_native_models",
+          "chopping_board_auto_recovery",
+          "kitchen_knife_tag",
+          "shawarma"
+        ],
+        "client": false
+      },
+      "grilling": {
+        "nativeContainer": true,
+        "stackableMetadata": true,
+        "immutable": true,
+        "lore": true,
+        "unstackable": true,
+        "client": false
+      }
+    },
+    "errors": [],
+    "bds": true,
+    "client": false,
+    "saved_world_migration": false,
+    "production_ready": false,
+    "engine_version": "1.26.52.3",
+    "log_sha256": "6bb6cb7d7f263aabffb903380f66856b1d1e2d00be92d35ae29f445935d1c506",
+    "receipt_sha256": "7ccb41878c386bbef0f7619fdeeae5c156ebe6e00ccfa1ced6341af38b317a9f"
+  }
+}

@@ -73,7 +73,9 @@ assert "id:'mixology-v22',guard:safely" in source
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read(ROOT/'release.json')['version']
 report={'version':version,'baselineCommit':baseline['upstreamCommit'],'preservedFileHashes':len(baseline['unchangedSha256']),
-'preservedAnimations':list(baseline['unchangedShakerAnimations']),'thirdPersonCandidate':third,
+'preservedAnimations':[name for name,value in baseline['unchangedShakerAnimations'].items() if animations.get(name)==value],
+'revalidatedAnimationOverrides':[name for name,value in baseline['unchangedShakerAnimations'].items() if animations.get(name)!=value],
+'animationValidationScope':'Current generator/native-socket checks replace historical equality for explicitly repaired tracks; not client acceptance','thirdPersonCandidate':third,
 'finiteParticleEmitters':16,'nativeRegistrationTickInterval':20,'ambientSamplingTickInterval':1,'emissionMode':'recipient-local source-sampled bursts','plumeParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)/3,'ambientParticlesPerSecondMaximumMean':20*667*(1/4096+1/32768)*5,
 'cupAbsentRecordRecovery':'structural checks passed; real event execution not tested',
 'newPlayerEntityOverride':False,'playerSimulation':False,'bdsTest':'NOT_RUN','clientVisualTest':'NOT_RUN'}

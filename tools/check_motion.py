@@ -38,6 +38,6 @@ from shaker_held_frames import expected
 for name,body in expected().items():assert anim[name]==body,name
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
 version=read('release.json')['version']
-report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-3,'firstPersonAttachableUnchanged':False,'shakerJavaFrameConversion':True,'thirdPersonShakeIsolated':True,'preservedGroups':ref['preservedGroups'],'creativeMenuProjectionFiles':len(projection.menus),'tipsyMode':'yaw_adapter_unverified','exactJavaRoll':False,'aimChangesSlightly':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
+report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-3,'firstPersonAttachableUnchanged':False,'shakerJavaFrameConversion':True,'thirdPersonShakeIsolated':True,'preservedGroups':ref['preservedGroups'],'creativeMenuProjectionFiles':len(projection.menus),'tipsyMode':'native_rotational_shake_unverified','exactJavaRoll':False,'aimChangesSlightly':False,'requiresAllowCameraShake':True,'maxResidualSeconds':.25,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
 (ROOT/f'docs/MOTION-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False))

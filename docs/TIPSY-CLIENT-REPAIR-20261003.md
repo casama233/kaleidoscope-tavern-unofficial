@@ -95,10 +95,22 @@ git diff --check
 ```
 
 The native APIs are dependency doubles driving the actual production modules.
-They are not SimulatedPlayers or BDS/client evidence. The focused suite has 24
-cases; the five Java fingerprints and 3,601 waveform samples also pass. Existing
+They are not SimulatedPlayers or BDS/client evidence. The focused suite has 32
+cases after the command/API cancellation matrix follow-up; the five Java
+fingerprints and 3,601 waveform samples also pass. Existing
 efficiency/state and Java equipment adapter suites pass. Visual static checks
 pass for the scripts, references, current resources and localization.
+
+The current `check_motion.py` report now says
+`tipsyMode: native_rotational_shake_unverified`, `aimChangesSlightly: false`,
+`exactJavaRoll: false`, `clientTested: false`, `requiresAllowCameraShake: true`
+and `maxResidualSeconds: 0.25`. Runtime diagnostics already use this native mode.
+Versioned historical motion reports and immutable source references remain
+historical evidence. The follow-up does not change shaker checks or geometry.
+Both command and API cancellation tests cover Milk, death, respawn, leave,
+explicit clear and opt-out: no subsequent pulses or foreign shake stop/clear;
+the last submitted event has at most 0.25 seconds remaining on the script clock.
+Natural native expiry and delivery latency still require root's client test.
 
 Release/immutable-hash gates remain enabled. The inherited base was already
 unfrozen: its committed BP tree is

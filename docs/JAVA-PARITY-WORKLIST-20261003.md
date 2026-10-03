@@ -1,13 +1,15 @@
 # Java parity worklist — 2026-10-03
 
-This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.54. Five additional family projects are pinned upstream dependencies, not silently modified here.
+This is an open worklist, not a percentage-complete or full-equivalence certificate. Current owned candidates are Tavern 0.6.90, World Liquor 0.1.56 and Grilling 2.8.55. Five additional family projects are pinned upstream dependencies, not silently modified here.
 
 ## Newly repaired and regression-tested
+
+- Grilling 2.8.55: upper rack helper duplication removed; first three non-empty lower slots compress onto source hook X positions; all nine storage slots retained. Six production-callback/selection tests cover all 16 lower occupancy masks. Full local canonical suite passes with 418 imports; native FIXED-context orientation/scale remains open.
 
 - Grilling 2.8.54: Java one-tick release grace (23 refuses, 24/25 eligible), captured stop time and once-only completion/release ordering. Eight additional production-callback tests and full canonical checks pass; all four exact-head GitHub checks pass at 51ea99d2edf0f2b9e822b31d6d1edde1cfc2e6c4. Actual 24-tick native timing remains open.
 - Grilling 2.8.53: ordinary crouch eating; crouch threading; full-hunger plate gate; configured nested hot saturation; threading/insertion success audio. Nine new production-function/callback regressions, full canonical verifier (417 imports), independent review and exact-head CI pass.
 - World Liquor: Respawn perimeter/height ordering and endpoint feedback, liquid support, facing/cross-dimension velocity options; Ground Crit climbing/blindness/riding boundaries; Crazy beacon pitch; Elbow feedback volume. Twelve new boundary tests, full paired checks, independent review and exact-head CI pass.
-- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-54-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
+- Combined16-pack BDS1.26.52.3 development probe passes with test-only overlays and no logged errors. See BDS-FAMILY-90-56-55-20261003.json. Guide transport remains sent_unconfirmed; this is not UI delivery acceptance.
 
 ## Confirmed remaining source gaps
 
@@ -18,7 +20,9 @@ This is an open worklist, not a percentage-complete or full-equivalence certific
 3. Failed skewers do not retain original-skewer model routing. Fix requires metadata and held/placed render routes, not an isolated property.
 4. Random THREE/THREE_ALT duration versus fixed item use duration needs real client/lifecycle validation.
 5. Existing single-tick hot deadlines differ from Java's100-tick bucket. Preserve the shipped behavior until an explicit migration decision; do not silently revert it.
-6. Dynamic arbitrary-ingredient inventory images, Java native GUI/keybindings, complete optional mod integrations and client numbness/camera details remain incomplete or engine-specific.
+6. Rack equipped-item helpers still lack exact Java FIXED-context transforms and arbitrary stack-dependent appearance.
+7. Unfinished/failed skewers and plate held compositions remain incomplete; secret ingredients still use flat icon planes rather than all Java 3D variants.
+8. Dynamic arbitrary-ingredient inventory images, Java native GUI/keybindings, complete optional mod integrations and client numbness/camera details remain incomplete or engine-specific.
 
 ### World Liquor and Tavern
 
@@ -35,7 +39,7 @@ Older claims that freezer/external-cellar redstone or corrected freezer recipe d
 
 ## Actual client path now available
 
-The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. This establishes client execution, not addon acceptance. The original audio device was unavailable. The SDL disk backend produced a 570,380,288-byte diagnostic file containing non-zero data; exact format and per-event sound acceptance remain unverified.
+The cloud Linux computer now runs the real Android Bedrock1.26.52.3 binary through the maintained third-party Linux launcher. A new local creative world was entered and saved normally. On the .54 stack, an actual advanced_rack item was viewed as a sprite in first/third person and placed by right-click as the full 3D rack. This confirms that particular display route, not complete hand pose or populated-rack acceptance. The original audio device was unavailable. The SDL disk backend produced a 570,380,288-byte diagnostic file containing non-zero data; exact format and per-event sound acceptance remain unverified.
 
 Owned packs are linked from canonical runtime into development_behavior_packs and development_resource_packs in the isolated client. Normal imported duplicates are archived outside the game. Third-party dependencies remain exact copies. Frozen release exports retain their own receipts; editing a development pack does not certify or replace release acceptance.
 

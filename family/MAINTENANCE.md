@@ -46,3 +46,14 @@ flowchart LR
 ## 統一更新入口
 
 整套更新與可核查的階段重用使用 `tools/family_update.py`；設定、命令、保留的fresh存檔門檻及失敗恢復見 [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md)。不要再複製一套硬編碼私人部署腳本。CI 去重與變更覆蓋見 [CI-VALIDATION.md](../docs/CI-VALIDATION.md)。
+
+### 國味人偶的暫時渲染相容修補
+
+乾淨作者 1.0.4 的六種人偶同時使用 BP geometry/material 與 RP blocks.json legacy
+textures。登記的 `chinesefood-doll-renderer-cleanup` 僅移除六個重複 textures 欄位，
+保持 cloth sound 與作者 geometry、材質／資產／UUID。原包 archive、逐檔 preimage、
+patched hash、有效期限與回饋狀態均須由已凍結的 canonical integration 聲明。
+相容包 1.0.N 的本機國味變體明確標示作者 1.0.4，版本 1.0.(10400+N)；BP／RP
+與 modules／相依一起同步，讓客戶端重新取得修正的資源 bytes。此變體不是作者發布，
+不改原始 upstream lock，也不能移除其他欄位或借此加入玩法。真人警告／渲染驗收
+仍保留 pending；完整家族部署與存檔演練要求照常適用。

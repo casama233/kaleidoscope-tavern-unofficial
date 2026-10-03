@@ -89,8 +89,21 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
  # Spec and module bytes are in that runtime's versioned baseline, never a BSM hook.
  for own in lock['owned']:
   repo=sources[own['key']];config=read(repo/'baseline.json');owned_root=repo/config['runtime']['BP']
-  for path in sorted((owned_root/'host-extensions').glob('*.json')):
-   spec=read(path);host=by_uuid.get(spec['host_uuid'])
+  for path in sorted((owned_root/'host-extensions').glob('*.json'),key=lambda p:(read(p).get('kind')=='chinesefood-doll-renderer-cleanup',p.name)):
+   spec=read(path)
+   if spec.get('kind')=='chinesefood-doll-renderer-cleanup':
+    from doll_renderer_extension import apply_renderer_extension
+    bp=by_uuid.get(spec['behavior_uuid']);rp=by_uuid.get(spec['host_uuid'])
+    if not bp or not rp:fail('renderer extension requires complete author pair')
+    try:proof=apply_renderer_extension(spec,out/'behavior_packs'/bp['uuid'],out/'resource_packs'/rp['uuid'],bp['source'],rp['source'],config['version'])
+    except (ValueError,KeyError) as e:fail('renderer extension rejected: '+str(e))
+    proof.update({'repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'owner_version':config['version'],'spec_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'working_candidate':working,'official_author_release':False})
+    for row in [bp,rp]:
+     root=out/(row['side']+'_packs')/row['uuid'];manifest=read(root/'manifest.json')
+     row.update(version=manifest['header']['version'],dependencies=manifest.get('dependencies',[]),files=files_hash(root))
+     row['source']={**row['source'],'owner':'upstream_extended','reviewed_extensions':[*row['source'].get('reviewed_extensions',[]),proof]}
+    continue
+   host=by_uuid.get(spec['host_uuid'])
    if host is None:fail('host extension target missing')
    host_root=out/(host['side']+'_packs')/host['uuid']
    try:proof=apply_host_extension(spec,owned_root,host_root,host['source'])

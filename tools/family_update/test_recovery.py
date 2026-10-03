@@ -72,5 +72,13 @@ class RecoveryTests(unittest.TestCase):
         self.status='RUNNING'
         self.assertTrue(module.recover_after_failure(self.original,True,[],[]))
         self.assertEqual(self.actions,['stop','start'])
+    def test_recovered_items_never_restart_incompatible_original(self):
+        self.status='RUNNING'
+        with patch.object(Path,'exists',return_value=True):
+            self.assertFalse(module.recover_after_failure(self.original,True,[],[]))
+        self.assertEqual(self.actions,['stop'])
+        self.restore.assert_not_called()
+        self.assertEqual(self.status,'STOPPED')
+        self.assertEqual(self.lease['state'],'active')
 
 if __name__=='__main__':unittest.main(verbosity=2)

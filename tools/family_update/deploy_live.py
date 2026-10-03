@@ -37,11 +37,14 @@ def finalize_receipt():
     assert saved['engine_sha256']==native['engine_sha256']==sha(B/'bedrock_server')
     assert saved['engine_inputs']==native['engine_inputs']==engine_inputs()
     assert [run['phase'] for run in saved['runs']]==['first','restart']
-    assert all(run['ok'] and run['started'] and run['family_initialized'] and not run['errors'] and run['player_records_unchanged'] for run in saved['runs'])
+    assert all(run['ok'] and run['started'] and run['family_initialized'] and not run['errors'] and run['player_records_unchanged'] and run['custom_container_inventories_retained'] for run in saved['runs'])
     for run in saved['runs']:
         assert sha(R/'saved-world-engine'/(run['phase']+'.log'))==run['log_sha256']
     assert saved['player_records_before']==saved['player_records_after']
     reports=['build-evidence.json','static-evidence.json','compatibility-report.json','exact-engine/native-report.json','saved-world-report.json','production-before/backup-receipt.json','handoff-authorization.json']
+    reports.append('saved-world-container-inventories.json')
+    if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
+    if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}
@@ -73,7 +76,7 @@ def restore_packs(original,retired,installed):
         if src.exists(): os.replace(src,dest)
     for side,refs in original['refs'].items(): atomic(W/('world_'+side+'_packs.json'),refs)
     shutil.copy2(R/'production-before/senluo-policy.json',Q/'senluo-policy.json')
-    assert G['audit'](W,read(Q/'senluo-policy.json'))['ok'], 'Rollback must match original managed receipt'
+    check_live_against_policy(original)
 
 def verify_original_before_restart(original):
     assert live_inventory()==original, 'Original complete pack inventory/order not restored; do not start'
@@ -84,6 +87,10 @@ def recover_after_failure(original,changed,retired,installed,rollback_failed=Fal
     phase='inspect_failure'
     try:
         assert_lease()
+        if (R/'production-container-recovery.json').exists():
+            if summary()['status']!='STOPPED':action('stop')
+            assert summary()['status']=='STOPPED', 'Recovered containers must remain stopped after a failed deployment'
+            raise RecoveryRequired('Recovered inventories require the repaired runtime; retain stopped state instead of restarting an incompatible rollback')
         if rollback_failed:
             raise RecoveryRequired('The installation rollback failed; operator recovery is required before any restart')
         if changed:
@@ -131,15 +138,26 @@ def install(receipt,original):
             source=staged/(p['side']+'_packs')/p['uuid']; target=W/(p['side']+'_packs')/p['uuid']; assert not target.exists(); os.replace(source,target); installed.append(target)
         for side in ['behavior','resource']: shutil.copy2(C/('world_'+side+'_packs.json'),W/('world_'+side+'_packs.json'))
         assert hashes(W/'db')==db_before and sha(W/'level.dat')==level_before, 'Pack installation must not mutate live save'
+        if CONFIG.get('container_recovery_plan'):
+            from container_recovery import recover_world
+            fresh=R/'production-snapshot'
+            assert hashes(W/'db')==hashes(fresh/'db'), 'Recovery must use the latest stopped database'
+            stage=R/'container-recovery-stage';stage.mkdir();shutil.copytree(W/'db',stage/'db')
+            restored=recover_world(stage,read(Path(CONFIG['container_recovery_plan'])))
+            assert restored==read(R/'saved-world-container-recovery.json'), 'Live restoration differs from rehearsed records'
+            atomic(R/'production-container-recovery.json',restored)
+            os.replace(W/'db',R/'production-original-db');os.replace(stage/'db',W/'db')
         policy['installed']={'status':'pending_client_acceptance','receipt':str(R/'reviewed-family-receipt.json'),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'installed_at':now(),'packs':[{**p,'directory':p['uuid']} for p in family],'refs':{side:[p for p in read(W/('world_'+side+'_packs.json')) if p['pack_id'] in policy['managed_uuids']] for side in ['behavior','resource']}}
         policy['hold_reason']='依使用者持續授權更新 live 供開發效果真人測試；完整家族 static、BDS、停服一致存檔驗證已通過。client=false，production_ready=false，仍需真人聲畫與玩法驗收。'
         atomic(Q/'senluo-policy.json',policy)
         drift=G['audit'](W,policy); assert drift['ok']; atomic(R/'production-drift.json',drift)
         valid=runpy.run_path(str(Q/'policy.py'))['validate_world'](W); assert valid['ok']; atomic(R/'production-quality.json',valid)
         atomic(R/'rollback-map.json',{'retired':[[str(a),str(b)] for a,b in retired],'installed':[str(p) for p in installed],'original_inventory':str(R/'production-before/inventory.json'),'backup':str(R/'production-snapshot')})
-        atomic(R/'deployment-result.json',{'schema':1,'state':'installed_stopped','versions':versions(receipt),'family_packs':len(family),'preserved_packs':len(foreign),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'assembled_receipt_sha256':sha(C/'family-receipt.json'),'guard_admission_passed':True,'original_database_untouched_during_install':True,'original_level_dat_untouched_during_install':True,'rollback':str(rollback),'client':False,'production_ready':False})
+        atomic(R/'deployment-result.json',{'schema':1,'state':'installed_stopped','versions':versions(receipt),'family_packs':len(family),'preserved_packs':len(foreign),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'assembled_receipt_sha256':sha(C/'family-receipt.json'),'guard_admission_passed':True,'original_database_untouched_during_install':not bool(CONFIG.get('container_recovery_plan')),'reviewed_container_recovery':bool(CONFIG.get('container_recovery_plan')),'original_level_dat_untouched_during_install':True,'rollback':str(rollback),'client':False,'production_ready':False})
         return retired,installed
     except BaseException as install_error:
+        if (R/'production-container-recovery.json').exists():
+            raise RecoveryRequired('Container recovery has begun; keep the compatible candidate stopped for recovery') from install_error
         try:
             restore_packs(original,retired,installed)
         except BaseException as rollback_error:

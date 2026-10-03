@@ -31,18 +31,23 @@ def blank_level(target, name):
     output = io.BytesIO(); data.write(output, byteorder='little'); body = output.getvalue()
     (target / 'level.dat').write_bytes(struct.pack('<II', 10, len(body)) + body)
 
-def native_run(engine, phase, minimum_seconds=30):
+def native_run(engine, phase, minimum_seconds=30, commands=()):
     log = engine / (phase + '.log')
     markers = STARTUP_MARKERS
     with log.open('w') as output:
         process = subprocess.Popen(['./bedrock_server'], cwd=engine, env={**os.environ, 'LD_LIBRARY_PATH': str(engine)}, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True)
         try:
+            sent=False
             for tick in range(90):
                 time.sleep(1)
                 text = log.read_text(errors='replace')
+                if not sent and 'Server started.' in text:
+                    for command in commands:
+                        process.stdin.write(command+'\n')
+                    process.stdin.flush();sent=True
                 if process.poll() is not None or ' ERROR]' in text or '[error]' in text.lower(): break
                 if all(marker in text for marker in markers) and tick >= minimum_seconds: break
-            if process.poll() is None: process.communicate('stop\n', timeout=30)
+            if process.poll() is None: process.communicate(('tickingarea remove_all\n' if commands else '')+'stop\n', timeout=30)
         finally:
             if process.poll() is None: process.kill(); process.wait()
     text = log.read_text(errors='replace')

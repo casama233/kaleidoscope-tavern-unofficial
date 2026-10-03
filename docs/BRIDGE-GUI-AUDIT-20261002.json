@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "audit_date_utc": "2026-10-02",
+  "status": "GUI_ROUNDTRIP_VERIFIED_SCHEMA_AUDIT_INCOMPLETE",
+  "gui_editor": {
+    "version": "2.7.54",
+    "distribution": "official Linux amd64 AppImage",
+    "sha256": "94ef1e945637b9210a2e9c7d6b736b4733932db4a25eda3895f762f42dc448c5",
+    "increment_version_on_export": false,
+    "add_generated_with_before_import": false
+  },
+  "runtime_file_count": 6902,
+  "runtime_content_changes": false,
+  "all_runtime_files_export_byte_verified": true,
+  "all_files_individually_opened_in_gui": false,
+  "complete_current_engine_schema_validation": false,
+  "minecraft_client_visual_validation": false,
+  "live_deployment": false,
+  "projects": [
+    {
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "source_commit": "942ecc10e436fd915ebd9c6313ed83a2b8425df1",
+      "version": "0.6.87",
+      "target_version": "1.26.50",
+      "published_archive_sha256": "dd36a73e43164ed3891104d67e7e9bab4719fa14ad910cb48d4933c317e50492",
+      "gui_export_sha256": "3b108533366b21be7b542a192d76d3b3db07cf845487604b33efa3968150c924",
+      "gui_export_bytes": 5422993,
+      "archive_crc_verified": true,
+      "duplicate_paths": false,
+      "unexpected_exported_files": false,
+      "packs": {
+        "behaviorPack": {
+          "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+          "files": 798,
+          "all_paths_and_bytes_identical": true
+        },
+        "resourcePack": {
+          "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+          "files": 3126,
+          "all_paths_and_bytes_identical": true
+        }
+      },
+      "gui_load_method": "clean extracted project folder copied via desktop file manager; native editor startup scan; selected and verified by project directory title"
+    },
+    {
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "source_commit": "5aaf5a2482ec92a68a83e94fd7f1ef9b5776ffc8",
+      "version": "0.1.51",
+      "target_version": "1.26.50",
+      "published_archive_sha256": "fe27a55c5d7447b0734dcb2d7b913bc83fd73eae3748203cc4518c7d2c06a9a7",
+      "gui_export_sha256": "958995d69a4ae1c098f682dfbbf2f71ad5bbe065971195403b15795a3de8452c",
+      "gui_export_bytes": 6775824,
+      "archive_crc_verified": true,
+      "duplicate_paths": false,
+      "unexpected_exported_files": false,
+      "packs": {
+        "behaviorPack": {
+          "uuid": "355ffdfc-50e6-5a33-a126-4d78ab955b2b",
+          "files": 305,
+          "all_paths_and_bytes_identical": true
+        },
+        "resourcePack": {
+          "uuid": "a610b357-ba70-5a2f-bca5-5a7a8a0fb2a8",
+          "files": 510,
+          "all_paths_and_bytes_identical": true
+        }
+      },
+      "gui_load_method": "clean extracted project folder copied via desktop file manager; native editor startup scan; selected and verified by project directory title"
+    },
+    {
+      "repository": "casama233/kaleidoscope-grilling-unofficial",
+      "source_commit": "c29861969b786437de02c151c3856579126b775d",
+      "version": "2.8.40",
+      "target_version": "1.26.50",
+      "published_archive_sha256": "82f01b2dec8478336a8538fe43c5d30447f396f6743f2ed39135eff0ad4c01f5",
+      "gui_export_sha256": "7992f2ebd64ee24e4e687702c5459e754dfd462b1b67dade0ce1965f2e2fe101",
+      "gui_export_bytes": 2862327,
+      "archive_crc_verified": true,
+      "duplicate_paths": false,
+      "unexpected_exported_files": false,
+      "packs": {
+        "behaviorPack": {
+          "uuid": "c68005c5-23ff-54e8-a3ff-da6349ad43c2",
+          "files": 504,
+          "all_paths_and_bytes_identical": true
+        },
+        "resourcePack": {
+          "uuid": "bbbd2d60-52e5-53a6-8b9a-c09b0f516389",
+          "files": 1659,
+          "all_paths_and_bytes_identical": true
+        }
+      }
+    }
+  ],
+  "limits": [
+    "bridge 2.7.54 Problems panel is a placeholder, not zero diagnostics",
+    "bridge 2.7.54 bundled format catalog reaches 1.26.0; checked current v3 remote data reaches 1.26.30, not 1.26.50",
+    "checked v3 remote typings lack stable @minecraft/server 2.9.0 and @minecraft/server-ui 2.2.0",
+    "native editor WatchNotFound unwatch panic encountered on project switching; recovered by restarting editor before opening next project",
+    "initial metadata-mutated and incomplete attempts were rejected; only final verified exports count",
+    "Latest Tavern ZIP import left one zero-byte file and was rejected; clean folder loading plus native editor restart recovered. Initial latest Tavern export stayed Loading; restarted independent session and final GUI export passed all 3924 files. Root cause not established."
+  ],
+  "source_notes": "File-count/export checks do not certify gameplay, rendering, animation parity, current-engine schema completeness, or saved-world migration.",
+  "historical_verified_roundtrips": [
+    {
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "source_commit": "745bf8075cc4ee07a2e195f3b7599093b024d116",
+      "version": "0.6.86",
+      "target_version": "1.26.50",
+      "published_archive_sha256": "bb47a612b41b50611e9f666adb88b4d6411cd1b2759a3585c8756f21655ad0ed",
+      "gui_export_sha256": "c347b8effa4ec985b76c9ec6200fe219a8c4e2e140cacd26960553d15bd27328",
+      "gui_export_bytes": 5426735,
+      "archive_crc_verified": true,
+      "duplicate_paths": false,
+      "unexpected_exported_files": false,
+      "packs": {
+        "behaviorPack": {
+          "uuid": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+          "files": 797,
+          "all_paths_and_bytes_identical": true
+        },
+        "resourcePack": {
+          "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+          "files": 3126,
+          "all_paths_and_bytes_identical": true
+        }
+      }
+    },
+    {
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "source_commit": "879cde1f8993312ef59f8bfa50e918a0f7140e7a",
+      "version": "0.1.50",
+      "target_version": "1.26.50",
+      "published_archive_sha256": "8b573196898332fb980805ec4be4343667c809b85d9a498de8ead27dcb13b575",
+      "gui_export_sha256": "823d7f8da2a784e9e5eaf6ae236b9f79f03a95b0c08f3ef2713870bc492f10bf",
+      "gui_export_bytes": 6770236,
+      "archive_crc_verified": true,
+      "duplicate_paths": false,
+      "unexpected_exported_files": false,
+      "packs": {
+        "behaviorPack": {
+          "uuid": "355ffdfc-50e6-5a33-a126-4d78ab955b2b",
+          "files": 305,
+          "all_paths_and_bytes_identical": true
+        },
+        "resourcePack": {
+          "uuid": "a610b357-ba70-5a2f-bca5-5a7a8a0fb2a8",
+          "files": 508,
+          "all_paths_and_bytes_identical": true
+        }
+      }
+    }
+  ],
+  "observed_gui_documents": [
+    "Tavern 0.6.87 BP manifest.json",
+    "World Liquor 0.1.51 BP manifest.json including dependencies",
+    "World Liquor 0.1.51 BP blocks/bar_stool_black.json: actual format version diagnostic"
+  ]
+}

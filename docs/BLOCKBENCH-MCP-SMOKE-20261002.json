@@ -1,0 +1,41 @@
+{
+  "upstream_source_commit": "d0271716c6434add875fd024e9ea6b474bc0ca09",
+  "published_commit": "edd2e1f7b9a55069b3caa676509cb85c2d41efce",
+  "version": "1.10.0",
+  "upstream_sha256": "1d164d43ba6c938aa1b4f3a5d00a5aeb1a4739477fca4b76102bcb2958e2ee65",
+  "hardened_sha256": "d9220d3d5b2377f8c91de1a0574f15a3f5fc18a0406d32255a6f6b5ea588e406",
+  "hardening": [
+    "immutable risky_eval condition false",
+    "settings imported and effective values checked before listener",
+    "host hardcoded127.0.0.1",
+    "prompt CDN disabled"
+  ],
+  "status": "installed_and_actual_mcp_model_smoke_passed",
+  "blockbench_version": "5.2.1",
+  "appimage_sha256": "abc3980ad1f1308a2352f7f920c57de8ff61fc2433ea8a64b81aa504c97987bf",
+  "protocol": "2025-11-25",
+  "listener": "127.0.0.1:3000",
+  "risky_eval_enabled": false,
+  "parent_tool_registry_registered": false,
+  "invocation_route": "MCP HTTP client executed on the same cloud desktop as Blockbench; GUI launcher starts the client script; workspace stores responses",
+  "source_commit": "942ecc10e436fd915ebd9c6313ed83a2b8425df1",
+  "source_runtime_modified": false,
+  "model_smoke": {
+    "geometry": "runtime/RP/models/entity/runtime_shaker_held.geo.json",
+    "texture": "runtime/RP/textures/kaleidoscope_tavern/block/mixology/shaker.png",
+    "cubes": 5,
+    "groups": 1,
+    "textures": 1,
+    "animations_imported": 0,
+    "get_project_info_success": true,
+    "camera_control_success": true,
+    "capture_screenshot_success": true
+  },
+  "not_verified": [
+    "All addon models",
+    "Animation and attachable runtime semantics",
+    "Java first/third person parity",
+    "Native parent tool-registry registration",
+    "Persistence across cloud environment replacement"
+  ]
+}

@@ -331,6 +331,10 @@ def verify_candidate_sources():
     assert sha(CONFIG_PATH) == evidence['config_sha256'], 'Update configuration changed; use a new output directory'
     assert orchestration_hashes() == evidence['orchestration_sha256'], 'Update runner changed; rebuild with reviewed tools'
     assert external_input_hashes()==evidence.get('external_input_sha256',{}), 'Recovery/reconciliation input changed after build'
+    if CONFIG.get('preserved_reconciliation'):
+        proof=read(Path(CONFIG['preserved_reconciliation']));source=Path(proof['source_path'])
+        assert git(source,'branch','--show-current')=='main' and not git(source,'status','--porcelain'), 'Reviewed preserved source changed after build'
+        assert git(source,'rev-parse','HEAD')==proof['source_commit'], 'Reviewed preserved source commit changed after build'
     current = source_state()
     assert set(current) == set(evidence['sources']), 'Canonical source set changed'
     for name, row in evidence['sources'].items():

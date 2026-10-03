@@ -34,10 +34,10 @@ def texture_references():
     paths = [RP/'textures'/x for x in ('terrain_texture.json', 'item_texture.json', 'flipbook_textures.json')]
     for folder in ('entity', 'attachables'):
         paths += sorted((RP/folder).rglob('*.json'))
-    for p in paths: walk(read(p), str(p.relative_to(RP)))
+    for p in paths: walk(read(p), p.relative_to(RP).as_posix())
     for p in RP.rglob('*.texture_set.json'):
-        name=str(p.relative_to(RP)).removesuffix('.texture_set.json')
-        if name not in refs: refs[name].add(str(p.relative_to(RP)))
+        name=p.relative_to(RP).as_posix().removesuffix('.texture_set.json')
+        if name not in refs: refs[name].add(p.relative_to(RP).as_posix())
     return refs
 
 
@@ -91,7 +91,7 @@ def audit(write=False):
             report['external'].append({'texture':name, 'references':sorted(origins)})
             continue
         stem = path.with_suffix('')
-        rel = str(stem.relative_to(RP))
+        rel = stem.relative_to(RP).as_posix()
         if rel in handled: continue
         handled.add(rel)
         if path.suffix == '.tga' and stem.name == 'icon_dyed':

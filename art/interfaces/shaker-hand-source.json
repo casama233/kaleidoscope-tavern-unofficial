@@ -1,9 +1,5 @@
 {
   "time_unit": "ticks_plus_partial",
-  "source_files": [
-    "docs/source-bytecode/ShakerAnimation.txt",
-    "docs/source-bytecode/ShakerAnimation$ShakerExtensions.txt"
-  ],
   "wave": "sin(timeTicks * 1.5) * 0.25",
   "first_person": {
     "translation_blocks": [
@@ -22,5 +18,54 @@
   "condition": "source getUseItemRemainingTicks() != 0",
   "animation_file": "RP/animations/shaker_hand_source.animation.json",
   "binding": "Template bone names are deliberately not bound to vanilla player.json. Attachable/player-arm adapter must validate coordinate basis and only activate while using shaker.",
-  "engine_accepted": false
+  "engine_accepted": false,
+  "sources": {
+    "java_forge": {
+      "repository": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern",
+      "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "url": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/c4ec1880bd44cf3139d3ba744ab30bb379cf1416/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "sha256": "2e8ab801255e7983aaa9a558f2f41b4169e3edeb0ca8da2137e3d6980baa7e3c",
+      "hash_basis": "downloaded_raw_source_bytes",
+      "status": "verified_public_source",
+      "verified_scope": [
+        "wave",
+        "first_person_translation",
+        "first_person_axis_rotation",
+        "third_person_x_z_arm_rotation",
+        "use_remaining_ticks_condition"
+      ],
+      "third_person_y_rotation_written": false
+    },
+    "java_neoforge": {
+      "repository": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern",
+      "commit": "a1afba34981a00e89d57130d3dc8f1e64f1820a2",
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "url": "https://raw.githubusercontent.com/KaleidoscopeMods/KaleidoscopeTavern/a1afba34981a00e89d57130d3dc8f1e64f1820a2/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "sha256": "12fff5267d185f64331661d91a4425b249f0f6a9e297b8ed4f5e6ffa0e5e711e",
+      "hash_basis": "downloaded_raw_source_bytes",
+      "status": "verified_public_source",
+      "verified_scope": [
+        "wave",
+        "first_person_translation",
+        "first_person_axis_rotation",
+        "third_person_x_z_arm_rotation",
+        "use_remaining_ticks_condition"
+      ],
+      "third_person_y_rotation_written": false
+    }
+  },
+  "historical_missing": [
+    {
+      "path": "docs/source-bytecode/ShakerAnimation.txt",
+      "status": "missing_in_reference_and_candidate_checkout",
+      "authoritative": false
+    },
+    {
+      "path": "docs/source-bytecode/ShakerAnimation$ShakerExtensions.txt",
+      "status": "missing_in_reference_and_candidate_checkout",
+      "authoritative": false
+    }
+  ],
+  "source_authority": "Pinned public Java and NeoForge source records above; historical bytecode paths are missing and are not authoritative evidence."
 }

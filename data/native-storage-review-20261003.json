@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "against_commit": "301cbc0e9cf34b8502365e12e9455dd3b20ffde2",
+  "version": "0.6.92",
+  "test_only_projection": true,
+  "reason": "Verified original native item containers are authoritative; stale display records must not block metadata-preserving cabinet transactions.",
+  "checks": [
+    "tools/pickup/core.test.mjs",
+    "tools/pickup/adapters.test.mjs",
+    "tools/foundation/foundation.test.mjs"
+  ],
+  "changes": {
+    "runtime/BP/manifest.json": {
+      "before": "2028d910e4b492732eb44e92e5cda58329220f5bb8f75a3f884a298b71c9b2fe",
+      "after": "82d452595c0ee60afb2c86577b30698d22e1649afa8181c4ef267b55ec93791e",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/bar-cabinet.js": {
+      "before": "3018ef009fa87f12b6a902a3e4fecf8c9685dbda49b64a61ceb54a23552bf3bb",
+      "after": "fc900528bd4aea92f3861b9860d7cd7fab13336dd12b4680bff41459dff14805",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/cellar-cabinet.js": {
+      "before": "8da9624a3dc6becf119d8e6fbaec341fb8a2e29c10d18658e779071065494916",
+      "after": "b568a2576ff66f2b0ca1ab13323fde8d9bf9188c147a1d3d3db0d755ed889498",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/circular-rack.js": {
+      "before": "d06b616619a3294d1b4ad170ac0d3a7b88c7f3370fb2d138988de7edf07efdd5",
+      "after": "d37f204ec525142a38d3e3cac0c87c76788886bdab5bfadc78b1f6341ff62253",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/extension-furniture.js": {
+      "before": "7f3f6a9c056292fb3808a92a309c22f8e9d3d5cc472bc9dd5d0a4ff8c5eba092",
+      "after": "4bb129d14d6cb1a3ca83ff957899d7015460fdda2e73be679fd0de0118896e95",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/holder.js": {
+      "before": "d936b2958af914c9f043be539dce7020ac4c5c5a7397f2109c7b335c59531bea",
+      "after": "d05d4ade88d7470dbbd3ee173902ea1a2d7f161f61ad4b3438970cb865fead18",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/native-item-storage.js": {
+      "before": "11fb28849d6f6c798d20546985add6a12dde59cb3bb30b01e8fe6d1bfa4f4b5a",
+      "after": "0c50d0529b521eca9b4ba81213207ad82902a6cf6cfd1a9f779a28696500ee4b",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/natural-break.js": {
+      "before": "167b14aa4a099a4d750b9a2638458f1062fc59bc527c51cbf1981129acf3c5b1",
+      "after": "731dbe2f75dc29b1d4323596a58436b27a0102ecb2d219ea905154c7d0fad7bc",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/bedrock/tilted-rack.js": {
+      "before": "5d23a366f89e4a63d4c0e49fff2be358ed832106cdf4174128ff19f5178b3f15",
+      "after": "c38bed2b0a9c105af35963e8e9542f12a8b2a68f06bdee4a8a38a43d7fa4ff1f",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/core/native-item-storage.js": {
+      "before": "347b0220a9be0d796a73cbd2bf258ce5b51525ede304fadc10ce48ccf4a9573b",
+      "after": "8f193cadf11c4aa82b9c23a4515fc49fe4b169823867c2b95fec0784216f1cca",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/core/storage-item-projection.js": {
+      "before": null,
+      "after": "8a550071b6a9761e3e7ecbcaf6f6c717115a8e88e864a295dacb9d27530ea0ee",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/data/build-version.js": {
+      "before": "5de384eafbdf2e201774211590d06fa761760a3c5269a2539402e3ff5bb763b7",
+      "after": "88ad0570822f661004cd00e174c7e36f889b05e03ea74b1f7429c7a342f81d14",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/BP/scripts/data/cookery-guide-payload.js": {
+      "before": "f265ad3e289f4a59ad60c74c6d82a62fc31aaef00c5f020454efc8ee6e85c52b",
+      "after": "df424fc985ebd6417a6e8e0311c1f7669ea23c161e0cfde611ff6bb1f22bf343",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    },
+    "runtime/RP/manifest.json": {
+      "before": "95789485d8d1fe3c8f501ecd7b5da8c05e958b4dd373ad3175027a69d34cb520",
+      "after": "9dcb4d754309ccab973f7866efda823055a5070cff224c28eb3a3fed10aeb36e",
+      "reason": "Exact canonical change covered by storage regressions; release metadata is synchronized."
+    }
+  }
+}

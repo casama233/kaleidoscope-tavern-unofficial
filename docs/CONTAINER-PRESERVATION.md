@@ -39,3 +39,11 @@ still requires full-family static, exact native loading, fresh stopped-world
 rehearsal, family guard admission and the standing live-development authorization.
 `client=false`, `production_ready=false`, and `pending_client_acceptance` remain
 until the owner performs actual client testing.
+
+`preserve_captured_experiments=true` selects the already enabled feature flags
+from the hash-pinned captured level metadata for the empty QA world. It cannot
+supply or enable new flags and never writes the live level. Native reports record
+the exact inherited flags and cache validation checks their captured values.
+Default QA continues to clear all experimental flags. Native custom containers
+require the target world's existing Upcoming Creator Features setting in the
+measured engine; a blank world with that setting cleared is a different scenario.

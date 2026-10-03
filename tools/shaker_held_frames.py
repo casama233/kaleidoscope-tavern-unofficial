@@ -9,16 +9,15 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=json.loads((ROOT/'art/interfaces/shaker-held-java-reference.json').read_text())
 WAVE='math.sin(q.life_time * 1718.87338539247)'
 USING='(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)'
-# Fit every corner of all five Java cubes, the continuous shake and the
-# source-bounded native walking/breathing envelope at both horizontal and
-# vertical FOV60, including 16:9. These are camera translations, not a mesh
-# resize: Java display scale, geometry, rotation and 2.4-pixel wave are fixed.
-# The independent projection gate reads the shipped animation, not this
-# generator. Its +/-0.5 socket-X sensitivity budget is not skin acceptance.
-# Native eye/FOV, skin substitution and the idle/use transition need the
-# rendered client; this source candidate does not claim Java camera pixels.
+# The integrating owner's native run found the prior state-only 8-pixel
+# camera retreat visibly shrank the cup on use. Preserve the accepted idle
+# framing in both states; Java uses the same base hand translation/depth.
+# Only Java's Y wave and Rx15 distinguish using from fully equipped idle.
+# The armor/head-centered reference frustum is not calibrated to those
+# native pixels: retain its failures as diagnostics, never fit them by
+# introducing an unsupported state-only retreat or shrinking the mesh.
 FP_IDLE_CAMERA_OFFSET=(-3.0,6.5,-6.5)
-FP_USE_CAMERA_OFFSET=(-1.5,6.5,-14.5)
+FP_USE_CAMERA_OFFSET=FP_IDLE_CAMERA_OFFSET
 
 def java_target(view,active=False,wave=0,hand='right'):
  sign=1 if hand=='right' else -1
@@ -37,7 +36,8 @@ def java_target(view,active=False,wave=0,hand='right'):
    # then ItemRenderer applies the model display. Units here are model pixels.
    target=chain(camera,translate([sign*.56*16,(-.52-.15*wave)*16,-.72*16]),rotate('x',15),display)
   else:
-   target=chain(camera,translate([0,-24,-32.4]),translate([9.039*sign,15.682,20.8]),display)
+   # Official 1.20.1 applyItemArmTransform, equip/swing both zero.
+   target=chain(camera,translate([sign*.56*16,-.52*16,-.72*16]),display)
  return base,target
 
 def pose(view,active=False,wave=0,hand='right'):

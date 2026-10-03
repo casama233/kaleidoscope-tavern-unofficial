@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {EFFECT_ICON_PREFIX,effectIconPacket} from '../runtime/BP/scripts/core/effect-icons.js';
 import {EFFECT_ICONS} from '../runtime/BP/scripts/data/effect-icons.js';
 import {createEffectIconTransport} from '../runtime/BP/scripts/core/effect-icon-transport.js';
+import {effectIconPrefixExpression} from './effect-icon-ui-prefix.mjs';
 const [inventoryPath,outputPath]=process.argv.slice(2);
 if(!inventoryPath)throw Error('Usage: node tools/check_effect_hud_stack.mjs inventory.json [report.json]');
 const inventory=JSON.parse(readFileSync(inventoryPath)),packs=inventory.packs;
@@ -17,6 +18,8 @@ assert(source.includes('world.getEntity(data[0])')&&source.includes('s.message.s
 const output=[],routes=new Map(['route-a','route-b'].map(id=>[id,{id,onScreenDisplay:{setTitle:(packet,options)=>output.push({id,packet,options})}}]));
 const context=vm.createContext({world:{getEntity:id=>routes.get(id)},system:{runInterval:fn=>context.interval=fn}});
 vm.runInContext(source.replace(/^import[^\n]*\n/gm,'').replace(/export /g,'')+'\nthis.route=handleUILoad;',context);
+// Reference execution of third-party routes only. Current Tavern icons MUST NOT
+// use their title-writing transport; raw native titles are outside that queue.
 const iconA=effectIconPacket({entries:[{id:'kaleidoscope_tavern:vision',ticks:400,amplifier:0}]}),iconB=effectIconPacket({entries:[{id:'kaleidoscope_world_liquor:multi_jump',ticks:200,amplifier:0}]});
 const foreign='textures/ui/magic_menu/examplemagic_main';
 context.route({id:'ui_load_script:magic_main',message:'route-a|'+foreign});
@@ -48,6 +51,12 @@ const missingWorldSprites=EFFECT_ICONS.filter(x=>x.id.startsWith('kaleidoscope_w
 const worldUI=JSON.parse(read(liquor,'ui/kt_world_liquor_effects.json'));
 assert.equal(worldUI.namespace,'kaleidoscope_world_liquor_effects');assert(!('root_panel' in worldUI));
 assert.equal(worldUI.effect_panel.controls.length,481);assert(!existsSync(liquor.directory+'/ui/hud_screen.json'));
+for(const panel of [hud.kt_effect_icons,worldUI.effect_panel]){
+ const data=Object.values(panel.controls[0])[0];
+ assert.equal(data.bindings[0].binding_name,'#hud_subtitle_text_string','Paired addon needs scoped subtitle binding migration');
+ assert.equal(data.bindings[1].source_property_name,effectIconPrefixExpression());
+ assert.equal(data.bindings[2].binding_name,'#hud_subtitle_text_string');
+}
 assert.deepEqual(JSON.parse(read(liquor,'ui/_global_variables.json')),{'$kt_world_liquor_effect_panel':'kaleidoscope_world_liquor_effects.effect_panel'});
 assert.equal(hud.kt_effect_icons['$kt_world_liquor_effect_panel|default'],'hud.kt_effect_empty');assert.equal(hud.kt_effect_empty.type,'panel');
 assert(hud.kt_effect_icons.controls.slice(1,-1).every(c=>!Object.values(c)[0].texture.includes('world_liquor')));
@@ -60,11 +69,12 @@ const legacyContext=vm.createContext({console:{info(){},error(){}},EntityTypes:{
   afterEvents:{scriptEventReceive:{subscribe:(fn,filter)=>legacyEvents.push({fn,filter})}}}});
 vm.runInContext(read(amwBP,'scripts/module/ui_queue_module.js').replace(/^import[^\n]*\n/gm,''),legacyContext);legacyContext.deferred();
 handle.runCommand=command=>{const [,id,...parts]=command.split(' ');for(const s of legacyEvents)if(s.filter.namespaces.includes(id.split(':')[0]))s.fn({id,message:parts.join(' '),sourceEntity:handle});};
-const legacyTransport=createEffectIconTransport({queueAvailable:()=>false,embeddedAvailable:()=>true,queueSend(){throw Error('External router absent');},legacySend:(h,p)=>h.runCommand('scriptevent ui_load:kt_effect_icons '+p)});
-handle.runCommand('scriptevent ui_load:magic_main '+foreign);legacyTransport.send(handle,iconA);
+handle.runCommand('scriptevent ui_load:magic_main '+foreign);handle.runCommand('scriptevent ui_load:kt_reference_probe '+iconA);
 for(let n=0;n<12;n++){legacyContext.system.currentTick++;legacyContext.render();}
 assert(legacyOutput.some(x=>x.packet===foreign));assert(legacyOutput.some(x=>x.packet===iconA));
-const standalone=[];createEffectIconTransport({queueAvailable:()=>false,embeddedAvailable:()=>false,queueSend(){throw Error('Unexpected router');},legacySend(){throw Error('Unexpected router');}}).send({onScreenDisplay:{setTitle:(packet,options)=>standalone.push({packet,options})}},iconA);
-assert.equal(standalone.length,1);assert.equal(standalone[0].options.stayDuration,0);
-const report={schema:1,ok:missingWorldSprites.length===0,active_packs:packs.length,routing_targets:2,queue_replays:12,foreign_queue_work_preserved:true,standalone_adapter_verified:true,embedded_amw_adapter_verified:true,optional_rp_definitions_separate:true,optional_panel_mount_verified:true,registered_native_root_redefinitions:0,visible_transport_glyphs:0,amw_cache_filters_checked:updates.length,actionbar_writes:0,native_effect_control_replacements:0,queue_adapter_verified:true,missing_world_sprites:missingWorldSprites,client:false,simulated_players:false,scope:'Static active-stack audit, self-contained transport and installed external/embedded router execution with display handles; no rendered client claim.'};
+const standalone=[];createEffectIconTransport().send({onScreenDisplay:{setTitle(){throw Error('Title writes forbidden');}},runCommand:command=>{
+ assert(command.startsWith('titleraw @s subtitle '));standalone.push(JSON.parse(command.slice('titleraw @s subtitle '.length)));return {successCount:1};
+}},iconA);
+assert.deepEqual(standalone,[{rawtext:[{text:iconA}]}]);
+const report={schema:2,ok:missingWorldSprites.length===0,active_packs:packs.length,routing_targets:2,reference_queue_replays:12,foreign_queue_work_preserved:true,subtitle_packet_adapter_verified:true,embedded_amw_reference_route_verified:true,optional_rp_definitions_separate:true,optional_panel_mount_verified:true,registered_native_root_redefinitions:0,visible_transport_glyphs:0,amw_cache_filters_checked:updates.length,actionbar_writes:0,native_effect_control_replacements:0,title_writes_from_current_adapter:0,native_title_preservation_tested:false,foreign_subtitle_coexistence_tested:false,missing_world_sprites:missingWorldSprites,client:false,simulated_players:false,scope:'Static active-stack audit and subtitle packet adapter. Third-party title routes executed as references only, not the current icon transport; no rendered client claim.'};
 if(outputPath)writeFileSync(outputPath,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

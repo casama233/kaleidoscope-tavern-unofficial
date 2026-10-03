@@ -17,11 +17,14 @@ test('Strict reconstruction admits snapshots and rejects ordinary or repeated ma
  for(const remove of [(s,p)=>s.replace(p,''),(s,p)=>s.split(p).join('')])
   for(const [value,expected] of cases)assert.equal(matchesEffectIconPrefix(value,remove),expected,value);
 });
-test('Authored host cache uses strict prefix and retains snapshots across foreign titles',()=>{
+test('Authored host cache owns only strict subtitle packets and never binds the title channel',()=>{
  const hud=JSON.parse(readFileSync(new URL('../runtime/RP/ui/hud_screen.json',import.meta.url),'utf8'));
  const data=hud.kt_effect_icons.controls[0].kt_effect_data;
  assert.equal(data.bindings[1].source_property_name,effectIconPrefixExpression());
  assert.equal(data.bindings[1].target_property_name,'#visible');
  assert.equal(data.bindings[2].binding_condition,'always_when_visible');
  assert.equal(data.bindings[2].binding_name_override,'#kt_effect_packet');
+ assert.equal(data.bindings[0].binding_name,'#hud_subtitle_text_string');
+ assert.equal(data.bindings[2].binding_name,'#hud_subtitle_text_string');
+ assert(!JSON.stringify(data).includes('#hud_title_text_string'));
 });

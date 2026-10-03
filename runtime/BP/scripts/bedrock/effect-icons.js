@@ -8,10 +8,9 @@ export const effectIconDiagnostics={ready:false,queueAvailable:false,embeddedQue
 function report(error){effectIconDiagnostics.errors++;effectIconDiagnostics.lastError=String(error).slice(0,300);}
 export function effectIconQueueAvailable(){try{return !!EntityTypes.get('uq:ui_queue_checker');}catch{return false;}}
 const enabled=id=>id.startsWith('kaleidoscope_tavern:')||externalEffectDefinition(id)?.mode==='timed';
-const transport=createEffectIconTransport({queueAvailable:()=>effectIconDiagnostics.queueAvailable,
- embeddedAvailable:()=>effectIconDiagnostics.embeddedQueueAvailable,
- queueSend:(player,packet)=>system.sendScriptEvent('ui_load_script:kt_effect_icons',player.id+'|'+packet),
- legacySend:(player,packet)=>player.runCommand('scriptevent ui_load:kt_effect_icons '+packet)});
+// Keep observing other routers for diagnostics, but do not hand icons to their
+// title-writing route: it cannot preserve an unknown native title's lifetime.
+const transport=createEffectIconTransport();
 const icons=createEffectIcons({status:statusNow,available:()=>effectIconDiagnostics.ready,enabled,
  send(player,packet){transport.send(player,packet);effectIconDiagnostics.sent++;},onError:report});
 let installed=false;
@@ -45,7 +44,7 @@ export function installEffectIcons(){
   effectIconDiagnostics.queueAvailable=effectIconQueueAvailable();
   effectIconDiagnostics.embeddedQueueAvailable=!effectIconDiagnostics.queueAvailable&&peers.size===1;
   effectIconDiagnostics.transport=transport.mode();effectIconDiagnostics.ready=true;
-  console.info('[Tavern effect icons] transport '+effectIconDiagnostics.transport+'; standalone support built in');
+  console.info('[Tavern effect icons] transport '+effectIconDiagnostics.transport+'; native HUD/title acceptance pending');
  },5);
  world.afterEvents.playerDimensionChange.subscribe(refreshDimensionIcons);
  world.afterEvents.playerSpawn.subscribe(e=>{cancelDimensionRefresh(e.player.id);icons.reset(e.player.id);});

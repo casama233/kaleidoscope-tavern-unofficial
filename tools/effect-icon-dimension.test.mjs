@@ -14,7 +14,10 @@ function fixture(mode='standalone',initial=active()){
  const system={currentTick:0,afterEvents:{scriptEventReceive:event('script')},runTimeout(fn,delay){const id=next++;timers.set(id,{fn,due:this.currentTick+delay});return id;},clearRun:id=>timers.delete(id),runInterval:fn=>intervals.push(fn),sendScriptEvent:(id,message)=>{const split=message.indexOf('|');deliver(players.find(p=>p.id===message.slice(0,split)),message.slice(split+1));}};
  const states=new Map();
  const deliver=(p,packet)=>{writes.push({id:p.id,tick:system.currentTick,packet});p.iconCache=packet;};
- const player=id=>({id,isValid:true,dimension:{id:'overworld'},hasTag:()=>false,iconCache:'',onScreenDisplay:{setTitle:(packet,options)=>{assert.equal(options.stayDuration,0);deliver(players.find(p=>p.id===id),packet);}},runCommand:command=>deliver(players.find(p=>p.id===id),command.slice('scriptevent ui_load:kt_effect_icons '.length))});
+ const player=id=>({id,isValid:true,dimension:{id:'overworld'},hasTag:()=>false,iconCache:'',onScreenDisplay:{setTitle:()=>{throw Error('Title writes forbidden');}},runCommand:command=>{
+  assert(command.startsWith('titleraw @s subtitle '));
+  const message=JSON.parse(command.slice('titleraw @s subtitle '.length));deliver(players.find(p=>p.id===id),message.rawtext[0].text);return {successCount:1};
+ }});
  const a=player('a'),b=player('b'),players=[a,b];states.set('a',initial);states.set('b',{entries:[]});
  const context=vm.createContext({EntityTypes:{get:()=>mode==='ui_queue'?{}:undefined},system,world:{afterEvents:{playerSpawn:event('spawn'),playerLeave:event('leave'),playerDimensionChange:event('dimension')},getAllPlayers:()=>players},ActionFormData:class{},console:{info(){}},createEffectIcons,effectDetails,EFFECT_ICON_HIDE_TAG,EFFECT_ICON_INTERVAL,createEffectIconTransport,externalEffectDefinition:()=>undefined,statusNow:p=>states.get(p.id)});
  vm.runInContext(source+'\nthis.install=installEffectIcons;this.diagnostics=effectIconDiagnostics;',context);context.install();
@@ -25,7 +28,7 @@ function fixture(mode='standalone',initial=active()){
  return {a,b,players,states,writes,timers,signals,system,context,step,cross,poll:()=>intervals[0]()};
 }
 
-for(const mode of ['standalone','ui_queue','embedded_queue'])test(`${mode}: delayed HUD rebuild recovers with bounded lifecycle replay`,()=>{
+for(const mode of ['standalone','ui_queue','embedded_queue'])test(`${mode} observed: subtitle snapshots retain bounded dimension replay`,()=>{
  const f=fixture(mode),packet=effectIconPacket(active());assert.equal(f.a.iconCache,packet);
  f.cross('nether');f.poll();assert.equal(f.writes.length,2);
  f.step(10);f.a.iconCache=''; // Client rebuild AFTER the immediate dimension packet.

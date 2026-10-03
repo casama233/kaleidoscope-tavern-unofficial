@@ -67,18 +67,21 @@ def main():
     assert "['I','II','III','IV','V','VI','VII','VIII','IX','X']" in core
     adapter=(RT/'BP/scripts/bedrock/tipsy-visual.js').read_text()
     assert not re.search(r'import\s*\{[^}]*CameraShakeType',adapter)
-    assert 'tipsyYawStep(p.getRotation(),track.offset,target)' in adapter
-    assert 'p.setRotation(step.rotation)' in adapter
+    assert 'tipsyShakePulse(track.until-now,now-track.start)' in adapter
+    assert 'camerashake add @s ' in adapter and ' rotational`' in adapter
+    assert "typeof p.camera?.addShake==='function'" in adapter
+    assert "type:'Rotational'" in adapter
     assert 'system.runInterval(tickTipsyVisuals,1)' in adapter
     assert 'InputPermissionCategory.Camera' in adapter and 'TIPSY_OPT_OUT_TAG' in adapter
     assert 'if(now<track.retryAt)' in adapter and 'stopIfEmpty()' in adapter
-    for forbidden in ('camerashake','.addShake(','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport('):
+    for forbidden in ('camerashake stop','camerashake add @a','.setRotation(','.getRotation(','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport('):
         assert forbidden not in adapter,('global/destructive/false camera fallback',forbidden)
     hooks=(RT/'BP/scripts/bedrock/custom-effects.js').read_text()
     assert 'pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID))' in hooks
     assert 'forgetTipsyVisual(p.id);write(' in hooks
     assert 'forgetTipsyVisual(e.playerId)' in hooks and 'forgetTipsyVisual(e.player.id)' in hooks
     assert 'pruneTipsyVisuals(seen)' in hooks
+    subprocess.run(['node','--loader','./tools/efficiency/mock-loader.mjs','--test','tools/tipsy-client.test.mjs'],cwd=ROOT,check=True)
     assert not (RP/'entity/player.entity.json').exists()
     for p in (RT/'BP/scripts').rglob('*.js'):
         subprocess.run(['node','--check',str(p)],check=True,capture_output=True)

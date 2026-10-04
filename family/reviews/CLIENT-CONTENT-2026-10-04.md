@@ -2,8 +2,12 @@
 
 The owner reported an undefined Grilling seasoning material and cascaded
 missing held/placed material aliases after the 2.8.59 live update. Grilling
-2.8.60 moves the unchanged UV-enabled definition to the standard
-`materials/entity.material` resource and updates its canonical generator.
+2.8.61 removes the custom material dependency entirely. Its existing atlas
+is sampled by per-color geometry with fixed UV coordinates and native
+`entity_alphatest_one_sided` materials. All 177 colors in all 16 held/placed
+layers are checked to stay within their assigned palette tile. No additional
+texture handles, shader UV flags or material registration are required. The
+canonical generators preserve the original shapes, fill ordering and motion.
 The family lock pairs the exact new source trees. Client logs are private
 evidence and are not committed here.
 

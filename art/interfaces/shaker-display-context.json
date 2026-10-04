@@ -1,0 +1,237 @@
+{
+  "schema": 1,
+  "sources": {
+    "resource_pack/models/entity/humanoid.custom.geo.json": {
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "path": "resource_pack/models/entity/humanoid.custom.geo.json",
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/models/entity/humanoid.custom.geo.json",
+      "sha256": "d3688f959a95f6b39c9bd8b15312a19361256ae161d2d055ba63d810e17a8ca8",
+      "git_blob_sha1": "20be2c062b76d76782273d484c73d1c3a5d30858",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "resource_pack/models/mobs.json": {
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "path": "resource_pack/models/mobs.json",
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/models/mobs.json",
+      "sha256": "0279492e5f6a7b5bbafb4fbaa80290146acb79332d06ac39619376a4831ff464",
+      "git_blob_sha1": "02d00eb952023ec67eb214af184a6f703e74f478",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "resource_pack/animations/player_firstperson.animation.json": {
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "path": "resource_pack/animations/player_firstperson.animation.json",
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/animations/player_firstperson.animation.json",
+      "sha256": "be55737455e163a4983d2315b46df3d6815d9365363c295776251287a70b664e",
+      "git_blob_sha1": "1b664aa21eae5f2bd994a2fad53a7f42f235af50",
+      "hash_basis": "original_git_blob_bytes"
+    },
+    "resource_pack/entity/player.entity.json": {
+      "commit": "46ba6ea985fb5a92d79a9419198f10dda14c199d",
+      "path": "resource_pack/entity/player.entity.json",
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/entity/player.entity.json",
+      "sha256": "7e520d872fc72be266223b3db2883c2818742a9a450330753a6de4d2ad813608",
+      "git_blob_sha1": "c5d368d1f32cce943ef4473fb1e75594c8bee222",
+      "hash_basis": "original_git_blob_bytes"
+    }
+  },
+  "source_skin_profiles": {
+    "classic": {
+      "source": "resource_pack/models/entity/humanoid.custom.geo.json",
+      "identifier": "geometry.humanoid.custom",
+      "bones": {
+        "root": {
+          "pivot": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "waist": {
+          "parent": "root",
+          "pivot": [
+            0.0,
+            12.0,
+            0.0
+          ]
+        },
+        "body": {
+          "parent": "waist",
+          "pivot": [
+            0.0,
+            24.0,
+            0.0
+          ]
+        },
+        "head": {
+          "parent": "body",
+          "pivot": [
+            0.0,
+            24.0,
+            0.0
+          ]
+        },
+        "rightarm": {
+          "parent": "body",
+          "pivot": [
+            -5.0,
+            22.0,
+            0.0
+          ]
+        },
+        "rightitem": {
+          "pivot": [
+            -6,
+            15,
+            1
+          ],
+          "parent": "rightArm"
+        },
+        "leftarm": {
+          "parent": "body",
+          "pivot": [
+            5.0,
+            22.0,
+            0.0
+          ]
+        },
+        "leftitem": {
+          "pivot": [
+            6.0,
+            15.0,
+            1.0
+          ],
+          "parent": "leftArm"
+        }
+      },
+      "short_arm_offset_right": null,
+      "actual_skin_render_matrix_measured": false
+    },
+    "slim": {
+      "source": "resource_pack/models/mobs.json",
+      "identifier": "geometry.humanoid.customSlim",
+      "bones": {
+        "root": {
+          "pivot": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "waist": {
+          "parent": "root",
+          "pivot": [
+            0.0,
+            12.0,
+            0.0
+          ]
+        },
+        "body": {
+          "parent": "waist",
+          "pivot": [
+            0.0,
+            24.0,
+            0.0
+          ]
+        },
+        "head": {
+          "parent": "body",
+          "pivot": [
+            0.0,
+            24.0,
+            0.0
+          ]
+        },
+        "rightarm": {
+          "parent": "body",
+          "pivot": [
+            -5.0,
+            21.5,
+            0.0
+          ]
+        },
+        "rightitem": {
+          "pivot": [
+            -6,
+            14.5,
+            1
+          ],
+          "parent": "rightArm"
+        },
+        "leftarm": {
+          "parent": "body",
+          "pivot": [
+            5.0,
+            21.5,
+            0.0
+          ]
+        },
+        "leftitem": {
+          "pivot": [
+            6,
+            14.5,
+            1
+          ],
+          "parent": "leftArm"
+        }
+      },
+      "short_arm_offset_right": null,
+      "actual_skin_render_matrix_measured": false
+    }
+  },
+  "java_hand_projection": {
+    "minecraft": "1.20.1",
+    "metadata_url": "https://piston-meta.mojang.com/v1/packages/c0a00f47b3dae01d83e21be9a646c9232379d9ab/1.20.1.json",
+    "client_sha1": "0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838",
+    "client_mappings_sha1": "6c48521eed01fe2e8ecdadbd5ae348415f3c47da",
+    "method": "GameRenderer.renderItemInHand -> getFov(camera,partialTick,false)",
+    "base_fov_degrees": 70,
+    "world_options_fov_used": false,
+    "qualifiers": "Ordinary alive, non-fluid, non-panorama path; getFov can apply death/fluid effects.",
+    "port_to_bedrock_projection_authorized": false
+  },
+  "bedrock_native_context": {
+    "status": "unknown",
+    "eye_model_pixels": null,
+    "held_fov_degrees": null,
+    "held_fov_convention": null,
+    "near_plane_model_pixels": null,
+    "pitch_transform": null,
+    "short_arm_offset_right": null,
+    "player_script_scale": "0.9375",
+    "player_scale_applies_to_first_person_attachment": null,
+    "scope": "Bone pivots and attachable binding are source verified. Camera, first-person scale inheritance, native skin substitution and projection are not measured."
+  },
+  "hand_scope": {
+    "native_left_main_hand_supported": null,
+    "status": "unknown_no_official_settings_contract_verified",
+    "current_port_allow_off_hand": false,
+    "right_main_hand_runtime_implemented": true,
+    "left_main_hand_runtime_implemented": false,
+    "off_hand_runtime_implemented": false
+  },
+  "fov_samples": {
+    "degrees": [
+      35,
+      60,
+      70,
+      90,
+      110
+    ],
+    "status": "hypothetical_sensitivity_samples_not_verified_Bedrock_slider_range"
+  },
+  "native_report_scope": {
+    "commit": "b41341e9484c55147f3deb4788830c1e461e2fb5",
+    "skin": "Alex",
+    "view": "first_person",
+    "world_fov_setting": 60,
+    "viewport": [
+      1180,
+      663
+    ],
+    "reported_full_visibility": true,
+    "reported_by_integrating_owner": true,
+    "independently_replayed": false,
+    "complete_skin_or_camera_calibration": false,
+    "current_revision_native_accepted": false
+  }
+}

@@ -17,6 +17,8 @@ def patch_manifests(bp,rp,version,owner_version):
         value=copy.deepcopy(original)
         if value['header']['uuid']!=uid or value['header']['version']!=[1,0,4]:raise ValueError('renderer cleanup requires original author identities')
         value['header']['version']=version
+        if owner_version>=[1,0,18] and value['header']['name']=='pack.name':
+            value['header']['name']='森羅廚房：國味'+(' 行為包' if uid==BP else ' 資源包')
         value['header']['name']+=' [相容修補 '+'.'.join(map(str,owner_version))+'；作者原版 1.0.4]'
         for module in value['modules']:
             if module['version']!=[1,0,4]:raise ValueError('original author module version differs')

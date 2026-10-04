@@ -40,8 +40,8 @@ class NativeShakerFrameTests(unittest.TestCase):
  def test_previous_editor_frame_is_rejected(self):
   old=actual(F['previous_shaker_animations'],'hold_first');expected=target()
   self.assertGreater(max(math.dist(point(old,v),point(expected,v)) for v in corners()),5)
- def test_third_person_and_player_arm_are_unchanged(self):
-  for name in ('hold_third','player_idle','player_shake'):
+ def test_third_person_display_and_idle_arm_are_unchanged(self):
+  for name in ('hold_third','player_idle'):
    key='animation.kt_mixology.'+name;self.assertEqual(A[key],F['previous_shaker_animations'][key])
  def test_geometry_binding_is_preserved(self):
   self.assertEqual(G['bones'][0]['pivot'],[0,24,0]);self.assertEqual(G['bones'][0]['binding'],'q.item_slot_to_bone_name(c.item_slot)')

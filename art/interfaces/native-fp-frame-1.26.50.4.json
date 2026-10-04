@@ -117,7 +117,8 @@
       180,
       0
     ],
-    "note": "Head-centered mathematical view; actual client FOV, engine eye offset, skin and rendering remain separate acceptance."
+    "note": "Head-centered mathematical view; actual client FOV, engine eye offset, skin and rendering remain separate acceptance.",
+    "status": "hypothetical_head_centered_frame_not_native_camera"
   },
   "previous_shaker_animations": {
     "animation.kt_mixology.player_idle": {
@@ -577,5 +578,6 @@
     "vr_verified": false,
     "native_rendered_client_verified": false,
     "scope": "Source-backed wide-arm sample hierarchy and local matrix evidence only. Actual engine skin substitutions, short_arm_offset values, eye/FOV conventions and renderer scaling remain unverified."
-  }
+  },
+  "projection_context_reference": "shaker-display-context.json"
 }

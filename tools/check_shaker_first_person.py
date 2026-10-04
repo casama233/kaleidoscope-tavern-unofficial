@@ -9,10 +9,11 @@ def check(root):
     rotations=shake['bones']['rightarm']['rotation']
     assert rotations==[
         'v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)',
-        'v.is_first_person ? 0 : -this',
-        'v.is_first_person ? 0 : (-9 - this)'], 'Perspective guard and target-minus-current are required for each axis'
+        0,
+        'v.is_first_person ? 0 : (-9 - this)'], 'Guard/replace Java X/Z; preserve incoming Y with additive zero'
     # Evaluate the exact shipped restricted expressions, not an independent target implementation.
     def evaluate(expr,first,seconds,current):
+        if isinstance(expr,(int,float)):return expr
         guard,branches=expr.split(' ? ');yes,no=branches.split(' : ')
         assert guard=='v.is_first_person'
         expression=(yes if first else no).replace('q.life_time','seconds').replace('math.sin','sin_degrees').replace('this','current')
@@ -20,8 +21,8 @@ def check(root):
     cases=0
     for tick in range(112):
         seconds=tick/20
-        target=[-112.5-45*math.sin(tick*1.5),0,-9]
         for pose in ([0,0,0],[27,-39,-159],[-90,40,10]):
+            target=[-112.5-45*math.sin(tick*1.5),pose[1],-9]
             for axis,expr in enumerate(rotations):
                 assert evaluate(expr,True,seconds,pose[axis])==0
                 assert math.isclose(pose[axis]+evaluate(expr,False,seconds,pose[axis]),target[axis],abs_tol=1e-9)
@@ -54,6 +55,6 @@ def check(root):
     assert not (root/'runtime/RP/entity/player.entity.json').exists()
     patch=root/'integrations/shaker-first-person/RP/animations/runtime_shaker.animation.json'
     assert not patch.exists(), 'Integrated first-person repair must not ship a shadowing overlay'
-    return {'poseCases':cases,'firstPersonArmDelta':0,'thirdPersonJavaTargetPreserved':True,'clientTested':False,'simulatedPlayers':False}
+    return {'poseCases':cases,'firstPersonArmDelta':0,'thirdPersonIncomingYPreserved':True,'thirdPersonJavaTargetPreserved':True,'clientTested':False,'simulatedPlayers':False}
 
 if __name__=='__main__':print(json.dumps(check(Path(__file__).resolve().parents[1]),ensure_ascii=False))

@@ -73,7 +73,7 @@
         "rightarm": {
           "rotation": [
             "v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)",
-            "v.is_first_person ? 0 : -this",
+            0,
             "v.is_first_person ? 0 : (-9 - this)"
           ]
         }

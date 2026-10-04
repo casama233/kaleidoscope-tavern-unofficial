@@ -1,9 +1,9 @@
 """Full-mesh reference-frustum regressions, not native client acceptance.
 
-Projection ambiguity is intentionally bounded by both h/v FOV60 models. Body
-pitch covariance is a mathematical frame test. Actual eye/FOV, rendered custom
-or slim skin, equip/attack blending, and the true near plane remain unmeasured.
-The +/-0.5 local socket X budget is sensitivity coverage, not a measured skin.
+The head-centered h/v FOV60 models are hypotheses, not engine display contexts.
+Tests prove their full-mesh arithmetic; check_shaker_projection.py retains their
+overflow and fails closed when native projection is required but uncalibrated.
+Body pitch covariance and +/-0.5 socket X are mathematical sensitivity checks.
 """
 import ast,copy,json,math,unittest
 from pathlib import Path
@@ -67,9 +67,9 @@ class FullShakerProjectionTests(unittest.TestCase):
   for name in ('hold_first','shake_first','hold_third'):
    self.assertEqual(ANIM['animation.kt_mixology.'+name]['bones']['grip']['scale'],.5)
 
- def test_third_person_and_player_arm_remain_pinned(self):
+ def test_third_person_display_and_idle_arm_remain_pinned(self):
   previous=FRAME['previous_shaker_animations']
-  for name in ('hold_third','player_idle','player_shake'):
+  for name in ('hold_third','player_idle'):
    key='animation.kt_mixology.'+name;self.assertEqual(ANIM[key],previous[key])
 
  def test_continuous_wave_has_exact_java_amplitude_and_fixed_orientation(self):
@@ -106,18 +106,33 @@ class FullShakerProjectionTests(unittest.TestCase):
     for r in state_records(ANIM['animation.kt_mixology.'+name],name,pitch):
      self.assertLess(r['camera'][2]+support,-NEAR_DEPTH,(name,pitch,r))
 
- def test_all_four_edges_keep_eight_percent_ndc_margin(self):
+ def test_all_four_frustum_edges_match_full_projected_extrema(self):
+  # An uncalibrated camera cannot establish containment. Verify the exact
+  # equivalence of all four plane inequalities and all-corner NDC bounds.
   for name in ('hold_first','shake_first'):
-   failed=violations(ANIM['animation.kt_mixology.'+name],name,NOMINAL_LIMIT)
-   self.assertEqual(len(failed),0,f'{name}: {len(failed)} violations; first {failed[:3]}')
+   rr=state_records(ANIM['animation.kt_mixology.'+name],name)
+   for width,height in VIEWS:
+    for convention in ('horizontal','vertical'):
+     bb=bounds(rr,width/height,convention)
+     projected=[bb[0][1]>=NOMINAL_LIMIT,bb[0][0]<=-NOMINAL_LIMIT,
+                bb[1][1]>=NOMINAL_LIMIT,bb[1][0]<=-NOMINAL_LIMIT]
+     planes=[max(dot(n,r['camera']) for r in rr)>=0
+             for _,n in frustum(60,width/height,convention,NOMINAL_LIMIT)]
+     self.assertEqual(planes,projected)
 
- def test_source_walking_breathing_and_socket_sensitivity_stay_inside(self):
-  # Continuous support includes b in [0,.1], every walking angle, breathing
-  # local Y in [-.5,.5], and assumed socket local X in [-.5,.5]. Variations
-  # need strict viewport inclusion; they do not claim a native skin measurement.
-  for name in ('hold_first','shake_first'):
-   failed=violations(ANIM['animation.kt_mixology.'+name],name,1,True)
-   self.assertEqual(len(failed),0,f'{name}: {len(failed)} violations; first {failed[:3]}')
+ def test_continuous_variation_support_encloses_sampled_source_phases(self):
+  for pitch in (-85,0,85):
+   _,_,arm_camera=reference_socket(FRAME,pitch)
+   for _,n in frustum(60,16/9,'horizontal'):
+    support=variation_support(FRAME,n,pitch)
+    for degree in range(0,360,9):
+     theta=math.radians(degree)
+     walk=[.975*math.sin(theta),-1.5*abs(math.cos(theta)),0]
+     for x,y in ((-.5,-.5),(-.5,.5),(.5,-.5),(.5,.5)):
+      # Difference of transformed points removes translation.
+      delta=[a-b for a,b in zip(transform(arm_camera,[x,y,0]),transform(arm_camera,[0,0,0]))]
+      value=dot(n,[walk[i]+delta[i] for i in range(3)])
+      self.assertLessEqual(value,support+1e-12)
 
  def test_variation_coefficients_and_pitch_are_pinned_official_source(self):
   source=FRAME['native_animation_reference']['animations']

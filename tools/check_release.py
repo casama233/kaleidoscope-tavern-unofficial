@@ -38,6 +38,11 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_java_transition.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_full_projection.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_native_frame.py')],cwd=ROOT,check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_display_context.py')],cwd=ROOT,check=True)
+    # A hypothetical head-centered frustum is not the held renderer context.
+    # Retain its overflow, and keep release validation blocked on calibration.
+    subprocess.run([sys.executable,str(ROOT/'tools/check_shaker_projection.py'),
+                    '--require-native-context'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)
     assert f"export const BUILD_VERSION='{config['version']}-baseline.1';" in (RT/'BP/scripts/data/build-version.js').read_text(),'Stale diagnostic build identity'
     files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}

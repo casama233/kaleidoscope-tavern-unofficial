@@ -57,7 +57,9 @@ The earlier use adapter `[-1.5,6.5,-14.5]` added `[1.5,0,-8]`, unsupported by
 Java; its relative-pose error was approximately 8.04647 model pixels at every
 corner. The old Blockbench idle approximation is replaced by the exact vanilla
 fully equipped translation. Java mesh, half scale, UVs, wave, fixed rotations
-and existing third-person/player-arm channels remain unchanged.
+and existing third-person X/Z channels remain unchanged. The subsequent source
+audit corrects only the unsupported third-person Y reset to additive zero;
+Java's SHAKING hook does not write Y, so incoming body/arm yaw is preserved.
 
 The new independent regression reads serialized local matrices. With authored
 display D, every corner must satisfy
@@ -69,12 +71,16 @@ claiming the hypothetical projection reproduces native pixels.
 ## Validation limits
 
 The armor/head-centered reference-frustum fixture is uncalibrated: its predicted
-absolute idle size disagrees with native review. Its all-corner horizontal-FOV60
-fit tests remain strict and visible; the shared adapter can fail those checks.
-No thresholds, mesh scale or test expectations are relaxed to manufacture a
-viewport pass. The aggregate check_release gate consequently remains blocked
-until the reference camera/FOV is resolved. Source-relative transition tests
-and existing held/native-frame tests are separate from that diagnostic result.
+absolute idle size disagrees with native review. The original .92 margin and
+1.0 variation thresholds and all their corner/plane failures are retained in
+`check_shaker_projection.py` diagnostics. Source tests check the mathematical
+equivalence of plane inequalities and full projected bounds, not containment
+under an unproved engine context. The native projection gate fails closed with
+exit 2 until the Bedrock camera/FOV is calibrated; `check_release.py` invokes
+this strict gate. No mesh scale or threshold is lowered for a viewport pass.
+
+See [display-context audit](SHAKER-DISPLAY-CONTEXT.md) for the separately reset
+Java hand FOV, source Classic/Slim pivots and the remaining engine unknowns.
 
 Native full-wave visibility, actual FOV/eye/near plane, skin/socket, walking,
 pitch, apparent size and equip/use transitions still require integrating-owner

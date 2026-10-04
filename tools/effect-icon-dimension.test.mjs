@@ -4,20 +4,21 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createEffectIcons,effectDetails,EFFECT_ICON_HIDE_TAG,EFFECT_ICON_INTERVAL,EFFECT_ICON_PREFIX,effectIconPacket} from '../runtime/BP/scripts/core/effect-icons.js';
 import {createEffectIconTransport} from '../runtime/BP/scripts/core/effect-icon-transport.js';
+import {createEffectIconTitleReservations} from '../runtime/BP/scripts/core/effect-icon-title-reservation.js';
 const source=readFileSync(new URL('../runtime/BP/scripts/bedrock/effect-icons.js',import.meta.url),'utf8').replace(/\r\n/g,'\n').replace(/^import .*\n/gm,'').replace(/export /g,'');
 const active=()=>({entries:[{id:'kaleidoscope_tavern:slightly_tipsy',ticks:600,amplifier:0}]});
 
 // Actual adapter and core, deterministic event/display doubles. No native client.
-function fixture(mode='standalone',initial=active()){
+export function fixture(mode='standalone',initial=active()){
  const timers=new Map(),signals={},writes=[],intervals=[];let next=0;
  const event=name=>signals[name]??={listeners:new Set(),subscribe(fn){this.listeners.add(fn);},unsubscribe(fn){this.listeners.delete(fn);},emit(e){for(const fn of this.listeners)fn(e);}};
  const system={currentTick:0,afterEvents:{scriptEventReceive:event('script')},runTimeout(fn,delay){const id=next++;timers.set(id,{fn,due:this.currentTick+delay});return id;},clearRun:id=>timers.delete(id),runInterval:fn=>intervals.push(fn),sendScriptEvent:(id,message)=>{const split=message.indexOf('|');deliver(players.find(p=>p.id===message.slice(0,split)),message.slice(split+1));}};
  const states=new Map();
  const deliver=(p,packet)=>{writes.push({id:p.id,tick:system.currentTick,packet});p.iconCache=packet;};
- const player=id=>({id,isValid:true,dimension:{id:'overworld'},hasTag:()=>false,iconCache:'',onScreenDisplay:{setTitle:(packet,options)=>{assert.equal(options.stayDuration,0);deliver(players.find(p=>p.id===id),packet);}},runCommand:command=>deliver(players.find(p=>p.id===id),command.slice('scriptevent ui_load:kt_effect_icons '.length))});
+ const player=id=>({id,typeId:'minecraft:player',isValid:true,dimension:{id:'overworld'},hasTag:()=>false,iconCache:'',onScreenDisplay:{setTitle:(packet,options)=>{assert.equal(options.stayDuration,0);deliver(players.find(p=>p.id===id),packet);}},runCommand:command=>deliver(players.find(p=>p.id===id),command.slice('scriptevent ui_load:kt_effect_icons '.length))});
  const a=player('a'),b=player('b'),players=[a,b];states.set('a',initial);states.set('b',{entries:[]});
- const context=vm.createContext({EntityTypes:{get:()=>mode==='ui_queue'?{}:undefined},system,world:{afterEvents:{playerSpawn:event('spawn'),playerLeave:event('leave'),playerDimensionChange:event('dimension')},getAllPlayers:()=>players},ActionFormData:class{},console:{info(){}},createEffectIcons,effectDetails,EFFECT_ICON_HIDE_TAG,EFFECT_ICON_INTERVAL,createEffectIconTransport,externalEffectDefinition:()=>undefined,statusNow:p=>states.get(p.id)});
- vm.runInContext(source+'\nthis.install=installEffectIcons;this.diagnostics=effectIconDiagnostics;',context);context.install();
+ const context=vm.createContext({EntityTypes:{get:()=>mode==='ui_queue'?{}:undefined},system,world:{afterEvents:{playerSpawn:event('spawn'),playerLeave:event('leave'),playerDimensionChange:event('dimension')},getAllPlayers:()=>players},ActionFormData:class{},console:{info(){}},createEffectIcons,effectDetails,EFFECT_ICON_HIDE_TAG,EFFECT_ICON_INTERVAL,createEffectIconTransport,createEffectIconTitleReservations,externalEffectDefinition:()=>undefined,statusNow:p=>states.get(p.id)});
+ vm.runInContext(source+'\nthis.install=installEffectIcons;this.diagnostics=effectIconDiagnostics;this.reserve=reserveEffectIconTitle;this.release=releaseEffectIconTitle;',context);context.install();
  if(mode==='embedded_queue')signals.script.emit({id:'ui_queue_module:setup',message:'one-peer'});
  const step=until=>{while(system.currentTick<until){system.currentTick++;for(const [id,timer]of [...timers])if(timer.due<=system.currentTick&&timers.has(id)){timers.delete(id);timer.fn();}if(system.currentTick%20===0)intervals[0]();}};
  step(5);intervals[0]();

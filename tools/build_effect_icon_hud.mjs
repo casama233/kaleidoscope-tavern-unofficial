@@ -32,6 +32,10 @@ if(extension){
  panel.offset=[0,0];
  hud.effect_panel=JSON.parse(JSON.stringify(panel).replaceAll('kt_effect_data','kwl_effect_data').replaceAll('kt_effect_packet','kwl_effect_packet').replaceAll('"kt_effect_','"kwl_effect_'));
 }else{
+ // Hide only our panel while the shared title carries another producer's text.
+ // Optional addon panels inherit this visibility without changing their cache.
+ panel.bindings=[{binding_name:'#hud_title_text_string'},
+  {binding_type:'view',source_property_name:`(#hud_title_text_string = '' or ${prefix})`,target_property_name:'#visible'}];
  panel['$kt_world_liquor_effect_panel|default']='hud.kt_effect_empty';
  panel.controls.push({'kt_optional_world_icons@$kt_world_liquor_effect_panel':{}});
  hud.kt_effect_empty={type:'panel',size:[0,0]};

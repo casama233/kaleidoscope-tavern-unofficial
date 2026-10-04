@@ -3,6 +3,7 @@ import {ActionFormData} from '@minecraft/server-ui';
 import {statusNow} from './custom-effects.js';
 import {createEffectIcons,effectDetails,EFFECT_ICON_HIDE_TAG,EFFECT_ICON_INTERVAL} from '../core/effect-icons.js';
 import {createEffectIconTransport} from '../core/effect-icon-transport.js';
+import {createEffectIconTitleReservations} from '../core/effect-icon-title-reservation.js';
 import {externalEffectDefinition} from '../core/extension-content.js';
 export const effectIconDiagnostics={ready:false,queueAvailable:false,embeddedQueueAvailable:false,transport:'starting',sent:0,detailsOpened:0,errors:0,lastError:''};
 function report(error){effectIconDiagnostics.errors++;effectIconDiagnostics.lastError=String(error).slice(0,300);}
@@ -12,7 +13,31 @@ const transport=createEffectIconTransport({queueAvailable:()=>effectIconDiagnost
  embeddedAvailable:()=>effectIconDiagnostics.embeddedQueueAvailable,
  queueSend:(player,packet)=>system.sendScriptEvent('ui_load_script:kt_effect_icons',player.id+'|'+packet),
  legacySend:(player,packet)=>player.runCommand('scriptevent ui_load:kt_effect_icons '+packet)});
+const titleReservations=createEffectIconTitleReservations({now:()=>system.currentTick});
+/** Call BEFORE writing a foreign title, and reserve its full remaining lifetime.
+ * Queue modes need their own drain/ownership protocol; reject uncoordinated holds.
+ */
+export function reserveEffectIconTitle(player,owner,ticks){
+ if(!effectIconDiagnostics.ready||transport.mode()!=='standalone')throw new Error('Title reservation requires ready standalone transport');
+ if(player?.isValid===false||player?.typeId!=='minecraft:player')throw new Error('Title reservation requires a real player');
+ const end=titleReservations.reserve(player.id,owner,ticks);
+ icons.refresh(player.id); // Also restore a title whose complete hold falls between HUD polls.
+ return end;
+}
+export function releaseEffectIconTitle(player,owner){return titleReservations.release(player.id,owner);}
+function receiveTitleReservation(event){
+ if(event.id!=='kaleidoscope_tavern:effect_icon_title_reserve'&&event.id!=='kaleidoscope_tavern:effect_icon_title_release')return;
+ try{
+  // Player-scoped commands cannot reserve another player's display.
+  const player=event.sourceEntity;if(player?.typeId!=='minecraft:player')throw new Error('Title reservation event requires player source');
+  if(event.message.length>256)throw new RangeError('Title reservation message too long');
+  const request=JSON.parse(event.message);
+  if(event.id.endsWith('_reserve'))reserveEffectIconTitle(player,request.owner,request.ticks);
+  else releaseEffectIconTitle(player,request.owner);
+ }catch(error){report(error);}
+}
 const icons=createEffectIcons({status:statusNow,available:()=>effectIconDiagnostics.ready,enabled,
+ held:player=>titleReservations.held(player.id),
  send(player,packet){transport.send(player,packet);effectIconDiagnostics.sent++;},onError:report});
 let installed=false;
 const dimensionRefreshes=new Map();
@@ -40,6 +65,7 @@ export function installEffectIcons(){
  // Observe the standard embedded router's election; never join it or create a second router.
  const peers=new Set(),observe=event=>{if(event.id==='ui_queue_module:setup')peers.add(event.message);};
  system.afterEvents.scriptEventReceive.subscribe(observe,{namespaces:['ui_queue_module']});
+ system.afterEvents.scriptEventReceive.subscribe(receiveTitleReservation,{namespaces:['kaleidoscope_tavern']});
  system.runTimeout(()=>{
   system.afterEvents.scriptEventReceive.unsubscribe(observe);
   effectIconDiagnostics.queueAvailable=effectIconQueueAvailable();
@@ -49,8 +75,8 @@ export function installEffectIcons(){
  },5);
  world.afterEvents.playerDimensionChange.subscribe(refreshDimensionIcons);
  world.afterEvents.playerSpawn.subscribe(e=>{cancelDimensionRefresh(e.player.id);icons.reset(e.player.id);});
- world.afterEvents.playerLeave.subscribe(e=>{cancelDimensionRefresh(e.playerId);icons.forget(e.playerId);detailsSessions.delete(e.playerId);});
- system.runInterval(()=>icons.tick(world.getAllPlayers()),EFFECT_ICON_INTERVAL);
+ world.afterEvents.playerLeave.subscribe(e=>{cancelDimensionRefresh(e.playerId);icons.forget(e.playerId);titleReservations.forget(e.playerId);detailsSessions.delete(e.playerId);});
+ system.runInterval(()=>{const players=world.getAllPlayers();titleReservations.prune(players.map(p=>p.id));icons.tick(players);},EFFECT_ICON_INTERVAL);
 }
 const detailsSessions=new Map();
 /** Explicitly requested form; never opens on drinking, spawn or HUD polling. */

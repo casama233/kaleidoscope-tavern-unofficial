@@ -9,6 +9,9 @@ def parse_args(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java-source',type=Path,help='Pinned Java checkout for storage and launch source checks')
     parser.add_argument('--baseline',type=Path,help='Pinned integration baseline for launch preservation checks')
+    parser.add_argument('--require-shaker-camera-calibration',action='store_true',help='Optional research gate; unavailable camera calibration stays unknown')
+    parser.add_argument('--native-visual-config',type=Path,help='Private scoped native evidence inputs; no private media is copied')
+    parser.add_argument('--require-native-visual',action='store_true',help='Require complete hash-bound native visual acceptance for promotion')
     return parser.parse_args(argv)
 
 
@@ -39,10 +42,11 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_full_projection.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_native_frame.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_display_context.py')],cwd=ROOT,check=True)
-    # A hypothetical head-centered frustum is not the held renderer context.
-    # Retain its overflow, and keep release validation blocked on calibration.
-    subprocess.run([sys.executable,str(ROOT/'tools/check_shaker_projection.py'),
-                    '--require-native-context'],cwd=ROOT,check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_visual_acceptance.py')],cwd=ROOT,check=True)
+    # Hypothetical .92/1.0 overflow remains diagnostic, never a calibrated pass.
+    projection=[sys.executable,str(ROOT/'tools/check_shaker_projection.py')]
+    if args.require_shaker_camera_calibration:projection.append('--require-native-context')
+    subprocess.run(projection,cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)
     assert f"export const BUILD_VERSION='{config['version']}-baseline.1';" in (RT/'BP/scripts/data/build-version.js').read_text(),'Stale diagnostic build identity'
     files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}
@@ -157,6 +161,16 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/check_drink_surfaces.py')],cwd=ROOT,check=True)
 
     subprocess.run([sys.executable,str(ROOT/'tools/check_glassware_slots.py')],cwd=ROOT,check=True)
+
+    # This command is source/static by default. Client promotion explicitly
+    # requires private native observations, independently of camera research.
+    if args.require_native_visual and args.native_visual_config is None:
+        raise SystemExit('NATIVE VISUAL: private evidence config required; acceptance remains pending')
+    if args.native_visual_config is not None:
+        subprocess.run([sys.executable,str(ROOT/'tools/check_shaker_visual_acceptance.py'),
+                        'check','--config',str(args.native_visual_config.resolve())],cwd=ROOT,check=True)
+    else:
+        print('Shaker native visual acceptance: NOT_RUN; static checks do not approve client promotion')
 
 
 if __name__=='__main__':

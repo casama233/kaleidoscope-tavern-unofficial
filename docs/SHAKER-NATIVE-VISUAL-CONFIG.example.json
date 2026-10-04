@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "kind": "native_visual_check_config",
+  "receipt": "candidate-native-private.json",
+  "evidence_root": "media",
+  "review_registry": "../independent-review/registry.json",
+  "family_receipt": "current-family.json",
+  "tested_family_receipt": "tested-family.json",
+  "family_root": "candidate-family",
+  "installed_family_root": "installed-family",
+  "exports": {"export1": "candidate-export.mcaddon"},
+  "ffprobe": "/replace-with-trusted-local-path/ffprobe",
+  "ffmpeg": "/replace-with-trusted-local-path/ffmpeg"
+}

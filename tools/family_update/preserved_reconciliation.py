@@ -21,6 +21,9 @@ def reconcile(inventory,expected):
     path=c.CONFIG.get('preserved_reconciliation')
     if not path:return expected,{}
     proof=c.read(Path(path))
+    if proof.get('profile')=='amw-casting-2420':
+        from family_update.casting_reconciliation import reconcile_casting
+        return reconcile_casting(inventory,expected,proof,path)
     assert proof.get('schema')==1 and proof.get('profile')=='amw-juice-wheat-2419', 'Unknown preserved review profile'
     assert proof.get('source_provenance') and proof.get('review_reason'), 'Preserved review provenance is required'
     assert proof['observed_inventory']==inventory, 'Reviewed full inventory changed'

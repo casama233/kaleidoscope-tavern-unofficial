@@ -250,7 +250,7 @@ def validate_translation_reconciliation(inventory,expected,order,dependency_pins
     for side,uids in order.items():
         refs=inventory['refs'][side]
         assert [ref['pack_id'] for ref in refs]==uids, 'Translation reconciliation cannot change pack order'
-        assert all(ref['version']==expected[ref['pack_id']]['version'] for ref in refs if ref['pack_id'] not in allowed), 'Unreviewed pack reference version'
+        assert all((ref['version']==expected[ref['pack_id']]['version'] or (dependency_pins.get(ref['pack_id'])==[2,4,20] and ref['version']==[2,4,19])) for ref in refs if ref['pack_id'] not in allowed), 'Unreviewed pack reference version'
     def clean_manifest(data):
         value=copy.deepcopy(data)
         value['header']['version']=[0,0,0]
@@ -261,7 +261,7 @@ def validate_translation_reconciliation(inventory,expected,order,dependency_pins
             if dep.get('uuid') in allowed:dep['version']=[0,0,0]
             elif dep.get('uuid') in dependency_pins:
                 # Only the separately reviewed preserved pair may advance.
-                assert dep['version'] in ([2,4,18],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
+                assert dep['version'] in ([2,4,18],[2,4,19],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
                 dep['version']=[0,0,0]
         return value
     changed=[]

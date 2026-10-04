@@ -1,0 +1,7 @@
+# Casting drift reconciliation
+
+An independent AMW repair directly installed paired 2.4.20 manifests, a current-hand durability helper and a guarded call in releaseCasting. The integration manifests also advanced without a canonical release; concurrent work left world references at their previous versions. Preserve the exact observed source and the immutable previous receipt rather than overwrite the other repair or approve its drift.
+
+The new casting review profile requires clean Git main, an exact approved 2.4.19 preimage, the exact three BP paths and one RP path, the reviewed helper hash and the precise normalized main-script transformation. It permits no unrelated gameplay or identity changes. Existing paired manifest normalization accounts for this independently verified dependency and the recorded 2.4.19 world reference while the fresh bundle emits 2.4.20. The private integration advances to 1.0.16 and keeps the bowl/rack and croaker repairs; its native validation is repeated for its exact bytes.
+
+Native load/restart and the existing 40-case AMW recipe, bucket and guide checks bind the preserved source to an isolated candidate. These do not certify human casting or hotbar timing. Old policy/receipts stay unchanged until a fresh complete family passes static, BDS, stopped-save rehearsal and family_guard admission. Client acceptance remains pending. Private scripts, worlds and logs are excluded from this repository.

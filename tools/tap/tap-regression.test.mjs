@@ -32,6 +32,7 @@ export async function fixture({synchronous=false}={}){
   getLore(){return [...this.lore];}
   getRawLore(){return [...this.lore];}
   setLore(lore){this.lore=[...lore];return this;}
+  isStackableWith(other){return other?.typeId===this.typeId&&other.nameTag===this.nameTag&&JSON.stringify(other.lore)===JSON.stringify(this.lore);}
  }
  const coordinate=p=>`${p.x},${p.y},${p.z}`;
  const dimension={id:'minecraft:overworld',getBlock(p){return blocks.get(coordinate(p));},getEntities(query={}){return entities.filter(e=>!e.removed&&(!query.type||e.typeId===query.type)&&(!query.families||e.typeId!=='minecraft:item')&&(!query.volume||['x','y','z'].every(k=>e.location[k]>=query.location[k]&&e.location[k]<query.location[k]+query.volume[k])));},spawnItem(stack,location){const e={id:`item-${++serial}`,typeId:'minecraft:item',location:{...location},stack:stack.clone(),removed:false,hasTag:()=>false,getDynamicPropertyIds:empty,getComponent(id){return id==='minecraft:item'?{itemStack:this.stack.clone()}:undefined;},remove(){this.removed=true;}};entities.push(e);return e;},spawnEntity(typeId,location){const data=new Map(),e={id:`visual-${++serial}`,typeId,location,removed:false,hasTag:()=>false,getDynamicProperty:k=>data.get(k),setDynamicProperty:(k,v)=>data.set(k,v),getDynamicPropertyIds:()=>[...data.keys()],setProperty:no,setRotation:no,remove(){this.removed=true;}};entities.push(e);return e;},playSound(id,p,o){sounds.push({id,p,o,tick:system.currentTick});},spawnParticle(id,p,m){particles.push({id,p,m,tick:system.currentTick});}};
@@ -45,7 +46,7 @@ export async function fixture({synchronous=false}={}){
   'pressing-feedback.js':{pressFeedback:no,spawnRejectedIngredients:no,ingredientFeedback:no},
   'barrel-ingredients.js':{barrelIngredientVisuals:empty,configureBarrelIngredients:no},
   'protected-break-router.js':{registerProtectedBreakRoute:no},
-  'transactions.js':{inventory:no,makeStack:(id,count=1)=>new ItemStack(id,count),hand:no,canWrite:no,canInteract:no,handSnapshot:()=>({slot:0,id:'',amount:0}),sameHand:no,placementTake:()=>1,safe:(p,fn)=>fn(),blockAt:no,requireBlockReach:no,pickupOutputs:no,commitPickupInventory:no,pickupFeedback:no},
+  'transactions.js':{inventory:p=>p.getComponent('minecraft:inventory').container,makeStack:(id,count=1)=>new ItemStack(id,count),hand:no,canWrite:no,canInteract:no,handSnapshot:()=>({slot:0,id:'',amount:0}),sameHand:no,placementTake:()=>1,safe:(p,fn)=>fn(),blockAt:no,requireBlockReach:no,pickupOutputs:no,commitPickupInventory:no,pickupFeedback:no},
   'tap-sources.js':{inspectTapSource:no,finishSourceTap:no},
   'potions.js':{restorePotion:()=>new ItemStack('minecraft:potion'),potionDisplayInput:no,potionDisplayRemoval:no},
   'mixology.js':{naturalCupStack:no,naturalShakerStack:no}
@@ -96,3 +97,27 @@ test('genuine destruction of filled bottle still releases its stored quality onc
 test('missing carrier at completion preserves the barrel output',async()=>{const f=await fixture();f.bottle.permutation=f.Permutation.resolve('minecraft:air');const old=f.records.get(f.key);assert.throws(()=>f.machines.finishTapExtraction(f.tap),/TAP_CARRIER_CHANGED/);assert.equal(f.records.get(f.key),old);assert.equal(f.items().length,0);});
 test('successful session remains 30 ticks and emits drip parents only during ticks 1..5',async()=>{const f=await fixture();f.machines.tryOpenTap(f.tap);f.advance(29);assert.equal(f.bottle.typeId,EMPTY);assert.equal(f.state().batch.remaining,4);assert.deepEqual(f.particles.map(p=>p.tick),[1,2,3,4,5]);f.advance(1);assert.equal(f.bottle.typeId,NS+':bottle_wine');f.advance(5);assert.equal(f.items().length,0);assert.equal(f.state().batch.remaining,3);});
 test('manually cancelling before completion does not consume a carrier or output',async()=>{const f=await fixture();f.machines.tryOpenTap(f.tap);f.advance(10);f.machines.toggleTap(f.tap);f.advance(30);assert.equal(f.bottle.typeId,EMPTY);assert.equal(f.state().batch.remaining,4);assert.equal(f.items().length,0);});
+
+// These are synchronous script adapters, not Minecraft players or client tests.
+function recoveryAdapter(f,mode='Survival'){
+ const slots=Array(9),container={size:slots.length,getItem:i=>slots[i]?.clone(),setItem(i,v){slots[i]=v?.clone();}};
+ return {selectedSlotIndex:0,getGameMode:()=>mode,getComponent:()=>({container}),slots};
+}
+for(const synchronous of [false,true])test(`tap dismantle recovers one tap with no second natural drop (${synchronous?'synchronous':'queued'} callback)`,async()=>{
+ const f=await fixture({synchronous}),p=recoveryAdapter(f);
+ f.machines.dismantle(p,f.tap);f.advance(5);
+ assert.equal(f.tap.typeId,'minecraft:air');assert.deepEqual(p.slots.filter(Boolean).map(s=>[s.typeId,s.amount]),[[NS+':tap',1]]);assert.equal(f.items().length,0);
+});
+test('creative tap dismantle emits no recovery or natural drop',async()=>{
+ const f=await fixture(),p=recoveryAdapter(f,'Creative');f.machines.dismantle(p,f.tap);f.advance(5);
+ assert.ok(p.slots.every(x=>!x));assert.equal(f.items().length,0);
+});
+test('failed tap removal restores the block and inventory; genuine later destruction still drops once',async()=>{
+ const f=await fixture(),p=recoveryAdapter(f);f.failPermutation((b,next)=>b===f.tap&&next.type.id==='minecraft:air');
+ assert.throws(()=>f.machines.dismantle(p,f.tap),/injected block failure/);f.advance(5);
+ assert.equal(f.tap.typeId,NS+':tap');assert.ok(p.slots.every(x=>!x));assert.equal(f.items().length,0);
+ f.tap.setType('minecraft:air');f.advance(5);assert.deepEqual(f.items().map(s=>[s.typeId,s.amount]),[[NS+':tap',1]]);
+});
+test('genuine natural tap destruction still drops exactly one',async()=>{
+ const f=await fixture();f.tap.setType('minecraft:air');f.advance(5);assert.deepEqual(f.items().map(s=>[s.typeId,s.amount]),[[NS+':tap',1]]);
+});

@@ -22,3 +22,32 @@ This is unfrozen development source for Tavern **0.6.95**. It does not certify a
 - Provide canonical unfrozen runtime for root's isolated measured-projection checks. Keep baseline/release packaging gates closed until functional checks, a reviewed freeze and a clean commit succeed.
 - Root coordinates Grilling / WorldLiquor and fresh native acceptance. T.93/G.61/Lmain.56 are not a verified usable family. L.59 `b30a5b04c85631a5a30dbf91b68dde22ee7c666f` targets T.94; a new matching addon identity is required for T.95.
 - No merge, release, live deployment, private world, client log, or native screenshots are included here.
+
+## Completed source checks and remaining evidence
+
+The independent checkout completed its full command run on source commit
+`be273b3224a423df198591f0e71e05e9b38521cb`. All 35 source validation commands
+returned 0. The four boundary commands produced their expected refusal, with
+the exact refusal reason checked separately. Runtime remained byte-identical
+to the committed candidate during testing. The source result matrix, command
+list and SHA256 inventory of local command logs are in
+`docs/SOURCE-INTEGRATION-CHECKS-20261004.json`. These logs contain source-test
+output only and remain outside Git; no private client evidence is included.
+
+| Acceptance stage | Result |
+|---|---|
+| Main guide retention / immutable source provenance | Passed; original ledger preimages and source SHA checks preserved |
+| Efficiency historical preservation | 4/4 passed against exact `4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7` source archive, with no skips |
+| Tipsy / observer / efficiency / XP / adapter source cases | 99/99 passed using native API dependency doubles; no engine/client claim |
+| Guide / effect HUD / title / transport source cases | 99/99 passed |
+| Shaker source cases | 36/36 passed |
+| Baseline / release-claim / release-CLI regressions | 11/11, 14/14 and 5/5 passed |
+| Native root preservation | All 29 original controls preserved; 4/4 adversarial UI tests passed |
+| Other source audits | JSON/Molang, visuals, motion, storage, localization, materials, pack compatibility, recipes, boards, creative catalog, pickups and feedback passed |
+| Native shaker projection | Blocked: `unknown_native_display_context`, direct gate exit 2; all 40 corners and 360 sensitivity rows retained, including 330 original FOV60 diagnostic violations |
+| Full release validator | Expected refusal at native context; no earlier source failure |
+| Baseline freeze / release packager | Not frozen; expected rejection of changed runtime hash |
+| Family pairing / BDS / saved-world / native client | Pending root coordination and fresh evidence; no acceptance or production claim |
+
+No source fix was needed after the broad run. Further commits containing only
+these reports leave the tested runtime and the unfrozen T.95 identity intact.

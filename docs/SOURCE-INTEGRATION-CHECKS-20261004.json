@@ -1,0 +1,473 @@
+{
+  "schema": 1,
+  "scope": "Canonical source/API doubles only; no SimulatedPlayer, native BDS, client rendering or saved-world acceptance.",
+  "candidateVersion": "0.6.95",
+  "sourceCommit": "be273b3224a423df198591f0e71e05e9b38521cb",
+  "frozen": false,
+  "client": false,
+  "bds": false,
+  "savedWorld": false,
+  "checks": [
+    {
+      "command": "node --test tools/efficiency/preservation.test.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        4
+      ]
+    },
+    {
+      "command": "node --loader ./tools/efficiency/mock-loader.mjs --test tools/tipsy-client.test.mjs tools/tipsy-observer.test.mjs tools/efficiency/efficiency.test.mjs tools/efficiency/xp-parity.test.mjs tools/java-parity-adapter.test.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        99
+      ]
+    },
+    {
+      "command": "node --test tools/standalone-guide.test.mjs tools/effect-icon-dimension.test.mjs tools/effect-icon-title-reservation.test.mjs tools/effect-icon-startup.test.mjs tools/effect-icon-ui-prefix.test.mjs tools/immersion-feedback.test.mjs tools/effect-bar.test.mjs tools/effect-icons.test.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        99
+      ]
+    },
+    {
+      "command": "python -m unittest discover -s tools -p test_shaker_*.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        36
+      ]
+    },
+    {
+      "command": "python tools/test_baseline_gate.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        11
+      ]
+    },
+    {
+      "command": "python tools/test_release_claim.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        14
+      ]
+    },
+    {
+      "command": "python tools/test_check_release_cli.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        5
+      ]
+    },
+    {
+      "command": "python tools/check_json_syntax.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_visuals.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        32
+      ]
+    },
+    {
+      "command": "python tools/check_motion.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_storage_rendering.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_luminous_bride.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_luminous_base.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_localization.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_client_assets.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_pack_compat.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_effect_ui_contract.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/test_effect_ui_contract.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true,
+      "testCounts": [
+        4
+      ]
+    },
+    {
+      "command": "python tools/check_vibrant_contract.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_animated_hands.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_drink_surfaces.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_glassware_slots.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/creative/catalog.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/pick_block.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/build_barrel_materials.py --check",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/effects/check_molang.py",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_destruction.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_guide.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_feedback.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_hud_compat.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/build_effect_icon_hud.mjs --check",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_actionbar_filter.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_incense_sampling.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_surface_repairs.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "node tools/check_board_layout.mjs",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "passed": true
+    },
+    {
+      "command": "python tools/check_shaker_projection.py --require-native-context",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "passed": true,
+      "boundary": "Expected fail-closed refusal; not a release pass",
+      "refusalReason": "no calibrated Bedrock held camera/projection"
+    },
+    {
+      "command": "python tools/baseline_gate.py check --release",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "passed": true,
+      "boundary": "Expected fail-closed refusal; not a release pass",
+      "refusalReason": "runtime changed without a reviewed version/hash update"
+    },
+    {
+      "command": "python tools/build_release.py",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "passed": true,
+      "boundary": "Expected fail-closed refusal; not a release pass",
+      "refusalReason": "runtime changed without a reviewed version/hash update"
+    },
+    {
+      "command": "python tools/check_release.py",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "passed": true,
+      "testCounts": [
+        4,
+        7,
+        4,
+        3,
+        12,
+        7,
+        10
+      ],
+      "boundary": "Expected fail-closed refusal; not a release pass",
+      "refusalReason": "no calibrated Bedrock held camera/projection"
+    }
+  ],
+  "allExpectedResults": true,
+  "logs": {
+    "0.txt": {
+      "sha256": "c6e797099f2e4612ed19fbe8c7b77377e1980034c809b7ee97b918051b4efd50",
+      "bytes": 458
+    },
+    "1.txt": {
+      "sha256": "dceba6b0d4b80090b2f9cc7f77de2586b831e5fe604f1d20e4329e1bb06a1c95",
+      "bytes": 10149
+    },
+    "2.txt": {
+      "sha256": "c3c368904871f9d8f6954d44eab4d009eeadae7ebe39186b25187b5cfe330973",
+      "bytes": 8138
+    },
+    "3.txt": {
+      "sha256": "a76503919b6083e4757f58978f6a3b85182bcf7f9a29d99c2c9fd3875c4fc972",
+      "bytes": 140
+    },
+    "4.txt": {
+      "sha256": "537b3c3bee6511bb08e5bdb77fbd3b507806b57a74e43082ed9c7c54b47bd02d",
+      "bytes": 1181
+    },
+    "5.txt": {
+      "sha256": "cb4309f7b53760268361a9a499e0fbbc275624ca15fbaf905159f04ef49aa4fe",
+      "bytes": 6565
+    },
+    "6.txt": {
+      "sha256": "cbbce618e63fae7763ea0ff665e05ccaf77a8222c24f0d8809a2940b833f799e",
+      "bytes": 108
+    },
+    "7.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "8.txt": {
+      "sha256": "8977e702a815bc5c8cbc7bb1d86a3216647379efb9e3bae218a8e9ed388abf14",
+      "bytes": 3966
+    },
+    "9.txt": {
+      "sha256": "0b058066fa9824ade604a8eb938acbc9b20ef9e649283751bda407ed2d0bd09d",
+      "bytes": 1190
+    },
+    "10.txt": {
+      "sha256": "91a84b211e9a85474a8287bbdaa9d268222d65a73f61a0718b05c82d57ee4605",
+      "bytes": 750
+    },
+    "11.txt": {
+      "sha256": "8c6f8f36143332709a65bf005c1b3eb99e30fee88f05112ee4f0bedf6907a8d0",
+      "bytes": 188
+    },
+    "12.txt": {
+      "sha256": "4830494d866220cc7460c445768c6cb315b6da6e0c91e6f0a8a786a2fbe4756e",
+      "bytes": 162
+    },
+    "13.txt": {
+      "sha256": "8b2fb27b4aa2154ba927894c6573fc28d4d63d3680e7327f8f2778719cb4d520",
+      "bytes": 159
+    },
+    "14.txt": {
+      "sha256": "c1cec30986fc105e845aa97d6b86e505aa1bf63ca080caeed721d4ae5ef73169",
+      "bytes": 158
+    },
+    "15.txt": {
+      "sha256": "c297c6943cad1c5b4e805be7c8439e05c356c661eee98878ad635905eb7e6b3e",
+      "bytes": 3767
+    },
+    "16.txt": {
+      "sha256": "7958be995dd2a9b2d8ab8c337b78a96ddd9da7a751014cbfd89ff1734147ab86",
+      "bytes": 343
+    },
+    "17.txt": {
+      "sha256": "19fb1277e806965433f37d1e1695fa8140a3bd96ce5bfc7ce965ba51f3e4e98d",
+      "bytes": 107
+    },
+    "18.txt": {
+      "sha256": "728a373da99a90ab9c1562f13a4c13f051609f8ed1682af870dae7392b6c7ad0",
+      "bytes": 125
+    },
+    "19.txt": {
+      "sha256": "ab333c34933c34f29733840c4e31fd3e5f0bbb6882b9eae54078812e680c7b78",
+      "bytes": 236
+    },
+    "20.txt": {
+      "sha256": "70725eba4839f354f7147ae31bca51291a9cc96618526a3be43b4253ebe462ec",
+      "bytes": 419
+    },
+    "21.txt": {
+      "sha256": "8ec0eced1cbb6f2fa6d7615143de91e52adcb4db9f57cd9d0a7eb9d35e87abcf",
+      "bytes": 170
+    },
+    "22.txt": {
+      "sha256": "86b7ae2899762f83340b045a42807ed289a25ee40052abcb598753dcdaf683a4",
+      "bytes": 117
+    },
+    "23.txt": {
+      "sha256": "94fa9cba0ef6aeaa7dac9f590b3b05c535ffed3358f8fe8236530dbf57358ae4",
+      "bytes": 29
+    },
+    "24.txt": {
+      "sha256": "680e2b83d97c36ac710377a8104592a8acec64927ba773eb32c4f885e6d0bf54",
+      "bytes": 36
+    },
+    "25.txt": {
+      "sha256": "13c6ba4b8fb48831f44cbb4ac9bd3649b45ef9f40ff4e03fa0470f798b8377cf",
+      "bytes": 131
+    },
+    "26.txt": {
+      "sha256": "f647fd20c05892b4bc7e11e210bd2739a435971d35e1508f7b9a871c801e55b9",
+      "bytes": 94
+    },
+    "27.txt": {
+      "sha256": "e059183b998017b3234b7d9c29076962de6ae6c33d20215d959459b0d29fc45e",
+      "bytes": 172
+    },
+    "28.txt": {
+      "sha256": "bb54a6599373bf1117a09e770abb17e58dd921b9e9701416832863be86e6814e",
+      "bytes": 104
+    },
+    "29.txt": {
+      "sha256": "2deb9ab2a1fe032b78177c45f24c0051e1cd1ec27d6743d238a9dd18454ba560",
+      "bytes": 134
+    },
+    "30.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "31.txt": {
+      "sha256": "60b1e4c0054e28f2ade0e1be6b3965edde098463be40f27bd6a9610f33575859",
+      "bytes": 96
+    },
+    "32.txt": {
+      "sha256": "f25d24e26b53743a75e29470602023d36b7cc40c658926039d1c9cec7a65fddc",
+      "bytes": 89
+    },
+    "33.txt": {
+      "sha256": "34800639f927ea3b865db0243608a5e497e38ebb0a3586f4536186a352fa26f1",
+      "bytes": 109
+    },
+    "34.txt": {
+      "sha256": "ad65f552bd604155312f08f38a0712b45a77148728ff8608d5d36fa5b7c64b4d",
+      "bytes": 108
+    },
+    "35.txt": {
+      "sha256": "4f37e8702e734d244f7eccf7ae3d414952787aa0e20e77c619b6a270107ee8b1",
+      "bytes": 330
+    },
+    "36.txt": {
+      "sha256": "cf557786e7fcfea220b609b98062a1fa7f8b155fb4f5bb24c00e911f12f25b05",
+      "bytes": 66
+    },
+    "37.txt": {
+      "sha256": "cf557786e7fcfea220b609b98062a1fa7f8b155fb4f5bb24c00e911f12f25b05",
+      "bytes": 66
+    },
+    "38.txt": {
+      "sha256": "55d06d51f60e6fca1c57cf203c4a2f1946ff55f0991241b7b61291a751ad3e15",
+      "bytes": 6473
+    }
+  },
+  "acceptanceMatrix": {
+    "sourceRegression": "passed",
+    "preservationAndGuideMainRetention": "passed",
+    "runtimeMutationDuringTests": false,
+    "nativeProjection": "blocked_unknown_native_display_context",
+    "baselineFreeze": "not_performed",
+    "releasePackaging": "blocked_unfrozen_runtime_hash",
+    "familyMatchingIdentities": "pending_root_coordination",
+    "bds": "not_run",
+    "nativeClient": "pending_root",
+    "savedWorld": "not_run",
+    "productionReady": false
+  },
+  "unfrozenRuntimeTrees": {
+    "BP": {
+      "sha256": "0ad786b89be8213968af49a07ea65fd3f182ab6722a8d750df3d4dc8f19f5f7a",
+      "files": 802
+    },
+    "RP": {
+      "sha256": "2a22edf9ab18ddf876067e86d9489bd1d969489b82ecb2ed26e5f9a04faa0602",
+      "files": 3126
+    }
+  },
+  "runtimeTreesRole": "Exact development source fingerprints only; not written into baseline lock/history and not a release receipt."
+}

@@ -89,4 +89,31 @@ class AdditiveHostItemCapabilityTests(unittest.TestCase):
     self.assertEqual(p.read_text(),before)
    proof=apply_host_extension(spec,own,host,source);self.assertEqual(proof['version'],[0,2,0]);self.assertEqual(json.loads(p.read_text()),changed)
 
+
+class RecoveryCapabilityTests(unittest.TestCase):
+ def test_recovery_is_pinned_and_cannot_replace_identity_or_freezers(self):
+  import copy,hashlib
+  from host_extensions import apply_host_extension
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);host=root/'host';own=root/'own';own.mkdir();(host/'blocks').mkdir(parents=True)
+   name='blocks/jar.json';path=host/name;value={'minecraft:block':{'description':{'identifier':'kaleidoscope_chinesefood:pickle_jar'},'components':{'minecraft:tick':{'interval_range':[20,20]}}}}
+   raw=json.dumps(value,ensure_ascii=False,indent=2)+'\n';path.write_text(raw)
+   changed=copy.deepcopy(value);changed['minecraft:block']['components']['minecraft:tick']={'interval_range':[8,8]}
+   h=lambda text:hashlib.sha256(text.encode()).hexdigest();pin='63bd2eb2ee2819c985d7c484df633c913cbb995abf3162aa68c997c24ef607f2'
+   op={'path':name,'pointer':['minecraft:block','components','minecraft:tick'],'value':{'interval_range':[8,8]},'mode':'reviewed_set'}
+   spec={'schema':1,'kind':'chinesefood-reviewed-repairs','id':'own:recovery','version':[1,0,0],'host_uuid':'b3c9db76-4ae6-4986-a380-90a4025d95a9','expires':'2099-01-01','feedback':'review','authorization':'user restoration','removal_condition':'author implements equivalent','archive_sha256':pin,'original_files':{name:h(raw)},'patched_files':{name:h(json.dumps(changed,ensure_ascii=False,indent=2)+'\n')},'imports':{},'insertions':[],'copies':{},'json_updates':[op]}
+   source={'owner':'upstream_extended','archive_sha256':pin}
+   for pointer in [None,[],['minecraft:block','description','identifier'],['minecraft:block','components','minecraft:block_entity']]:
+    bad={**spec,'json_updates':[{**op,'pointer':pointer}]}
+    with self.assertRaises(ValueError):apply_host_extension(bad,own,host,source)
+    self.assertEqual(path.read_text(),raw)
+   with self.assertRaises(ValueError):apply_host_extension({**spec,'host_uuid':'wrong'},own,host,source)
+   apply_host_extension(spec,own,host,source);self.assertEqual(json.loads(path.read_text()),changed)
+ def test_dough_profile_rejects_unrelated_files_and_capabilities(self):
+  from host_extensions import apply_host_extension
+  pin='9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5'
+  spec={'schema':1,'kind':'cookery-mooncake-dough-repair','id':'own:dough','version':[1,0,0],'host_uuid':'d322809c-a51e-4742-bfc4-16d3c1491c9d','expires':'2099-01-01','feedback':'review','authorization':'restore','removal_condition':'author fixes','archive_sha256':pin,'original_files':{'scripts/unrelated.js':'x'},'patched_files':{},'imports':{},'insertions':[],'copies':{}}
+  with tempfile.TemporaryDirectory() as tmp:
+   with self.assertRaisesRegex(ValueError,'unexpected file inventory'):apply_host_extension(spec,Path(tmp),Path(tmp),{'owner':'upstream_extended','archive_sha256':pin})
+
 if __name__=='__main__':unittest.main()

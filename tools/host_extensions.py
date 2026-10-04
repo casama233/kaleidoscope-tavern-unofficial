@@ -15,12 +15,17 @@ def apply_host_extension(spec,owned_root,host_root,source):
  if date.fromisoformat(spec['expires'])<date.today():raise ValueError('extension expired')
  for key in ['removal_condition','feedback','authorization']:
   if not spec.get(key):raise ValueError('extension review metadata missing '+key)
- if source['owner']!='upstream' or source['archive_sha256']!=spec['archive_sha256']:raise ValueError('extension requires pinned original author archive')
+ recovery=spec.get('kind')=='chinesefood-reviewed-repairs'
+ dough=spec.get('kind')=='cookery-mooncake-dough-repair'
+ if dough and (spec.get('host_uuid')!='d322809c-a51e-4742-bfc4-16d3c1491c9d' or spec['archive_sha256']!='9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5'):raise ValueError('dough repair requires the pinned Cookery host')
+ if recovery and (spec.get('host_uuid')!='b3c9db76-4ae6-4986-a380-90a4025d95a9' or spec['archive_sha256']!='63bd2eb2ee2819c985d7c484df633c913cbb995abf3162aa68c997c24ef607f2'):raise ValueError('repair recovery requires the pinned ChineseFood host')
+ if source['owner'] not in (['upstream','upstream_extended'] if recovery or dough else ['upstream']) or source['archive_sha256']!=spec['archive_sha256']:raise ValueError('extension requires pinned original author archive')
+ if dough and set(spec['original_files'])!={'items/stuffed_dough_food.json'}:raise ValueError('dough repair has an unexpected file inventory')
  if set(spec['original_files'])!=set(spec['patched_files']) or set(spec['imports'])-set(spec['original_files']):raise ValueError('extension file inventory differs')
  for name,expected in spec['original_files'].items():
   script=name.startswith('scripts/') and name.endswith('.js')
   item=name.startswith('items/') and name.endswith('.json')
-  block=name.startswith('blocks/kitchen/freezer') and name.endswith('.json')
+  block=(name.startswith('blocks/') if recovery else name.startswith('blocks/kitchen/freezer')) and name.endswith('.json')
   if not script and not item and not block:raise ValueError('only script hooks and reviewed additive capabilities permitted; author identity is immutable')
   if digest(safe(host_root,name))!=expected:raise ValueError('original host file hash differs '+name)
  changes={}
@@ -32,6 +37,25 @@ def apply_host_extension(spec,owned_root,host_root,source):
    if not updates:raise ValueError('item capability update missing')
    for op in updates:
     pointer=op.get('pointer');value=op.get('value')
+    if not isinstance(pointer,list) or not pointer or not all(isinstance(key,str) for key in pointer):raise ValueError('invalid field pointer')
+    if dough:
+     allowed={'minecraft:allow_off_hand':True,'minecraft:use_modifiers':{'use_duration':1,'movement_modifier':0.2},'minecraft:use_animation':'bow','senluo:mooncake_dough':{}}
+     if name!='items/stuffed_dough_food.json' or data['minecraft:item']['description']['identifier']!='kaleidoscope_cookery:stuffed_dough_food' or len(pointer)!=3 or pointer[:2]!=['minecraft:item','components'] or pointer[2] not in allowed or value!=allowed[pointer[2]] or op.get('mode')!='reviewed_set':raise ValueError('dough repair capability is outside reviewed scope')
+     data['minecraft:item']['components'][pointer[2]]=value
+     continue
+    if recovery:
+     kind='minecraft:item' if name.startswith('items/') else 'minecraft:block'
+     identifier=data[kind]['description']['identifier']
+     if not identifier.startswith('kaleidoscope_chinesefood:') or identifier.split(':')[-1].startswith('freezer'):raise ValueError('recovery cannot replace identities or existing freezer repair')
+     block_fields={'minecraft:geometry','minecraft:material_instances','minecraft:collision_box','minecraft:selection_box','minecraft:loot','minecraft:tick'}
+     item_fields={'minecraft:food','minecraft:use_modifiers','minecraft:use_animation','minecraft:allow_off_hand'}
+     component=(len(pointer)==3 and pointer[:2]==[kind,'components'] and (pointer[2] in (item_fields if kind=='minecraft:item' else block_fields) or pointer[2].startswith('senluo:') or (kind=='minecraft:block' and pointer[2].startswith('kaleidoscope_chinesefood:'))))
+     block_layout=(kind=='minecraft:block' and pointer in [[kind,'description','states'],[kind,'permutations']])
+     if op.get('mode')!='reviewed_set' or not (component or block_layout):raise ValueError('recovery field is outside the reviewed capability profile')
+     target=data
+     for key in pointer[:-1]:target=target.setdefault(key,{})
+     target[pointer[-1]]=value
+     continue
     if name.startswith('items/'):
      if pointer!=['minecraft:item','components','minecraft:allow_off_hand'] or value is not True:raise ValueError('only additive offhand capability is allowed')
     else:

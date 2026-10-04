@@ -2,7 +2,7 @@
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.95** runs independently; Cookery **1.0.8** integration is optional. The companion source pairing is World Liquor **0.1.56** and Grilling **2.8.55** (Grilling retains its own Cookery dependency). Static checks, isolated BDS, client rendering and saved-world migration are separate acceptance stages. Build from canonical sources without private gameplay patch layers.
+Tavern **0.6.95** is an **unfrozen development integration candidate**. Canonical runtime and dependencies: [baseline.json](baseline.json). Cookery **1.0.8** integration is optional. Grilling/World Liquor matching identities and fresh family evidence are pending; the previous T.93/G.61/Lmain.56 combination is not a verified usable family, and World Liquor 0.1.59 targets Tavern 0.6.94. Native shaker projection is uncalibrated, so release validation and packaging remain blocked. See the [source matrix and acceptance boundaries](docs/BASELINE-INTEGRATION-20261004.md).
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -12,7 +12,7 @@ An unofficial Minecraft Bedrock port of **Kaleidoscope Tavern**, with optional i
 
 **Historical 0.6.53-beta.1 release snapshot**, paired with World Liquor **0.1.16-preview.1**. This patch restores native item rendering for the plain sandwich board and pairs with the corrected Java freezer placement in World Liquor. Bar-counter direction matches Java and remains unchanged. Actual client rendering and placement acceptance remains pending.
 
-Static resource and source checks plus a real BDS 1.26.51.1 load passed with Cookery 1.0.6. Client visuals still require device acceptance. Slightly Tipsy remains a yaw adapter; exact Java camera-only roll is **not implemented or verified**. See the [regression audit](docs/REGRESSION-STATUS-2026-09-27.md).
+That historical snapshot passed static checks and a BDS 1.26.51.1 load with Cookery 1.0.6; it does not certify this development candidate. Slightly Tipsy now uses bounded player-local native camera shake. Exact Java camera-only roll remains **not implemented or verified**. See the [tipsy source repair](docs/TIPSY-CLIENT-REPAIR-20261003.md).
 
 ## Features
 
@@ -27,7 +27,7 @@ Static resource and source checks plus a real BDS 1.26.51.1 load passed with Coo
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load-validation target BDS **1.26.51.1**.
 - Cookery is optional. Integration is tested against **Kaleidoscope Cookery (Unofficial) 1.0.8**.
 - Both Tavern's 0.6.95 behavior and resource packs. If Cookery is installed, keep Tavern above it in each pack stack. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
-- Slightly Tipsy uses the Java three-wave rhythm as small yaw increments, not camera shake. It slightly affects aim and is not camera-only roll. Use `/function kt_tipsy_motion_off` to opt out.
+- Slightly Tipsy follows the Java three-wave rhythm through bounded native rotational camera shake. It does not change player yaw or camera mode; exact Java camera-only roll and this candidate's native client behaviour remain unverified. Use `/function kt_tipsy_motion_off` to opt out.
 
 The public beta uses Cookery's original UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing it. No Cookery pack, world backup, credentials, server executable or other server add-on is included.
 

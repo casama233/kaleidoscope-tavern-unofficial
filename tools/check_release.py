@@ -30,6 +30,7 @@ def main(argv=None):
     args=parse_args(argv)
     config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
     source_checks=source_check_commands(args,config['version'])
+    subprocess.run([sys.executable,str(ROOT/'tools/check_integration_preservation.py')],cwd=ROOT,check=True)
     subprocess.run(['node','--test','tools/ambient-sparse.test.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/shaker-metadata.test.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/shaker-serving-metadata.test.mjs'],cwd=ROOT,check=True)

@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "mainCommit": "8d00a9c0399ab3812fa161a39c9254aed21876f2",
+  "integratedSourceCommit": "e8a148a6a73dfd1f392addc2bf18b85a0a67abb6",
+  "candidateVersion": "0.6.95",
+  "frozen": false,
+  "files": {
+    "runtime/BP/manifest.json": {
+      "mainSha256": "14f99ae815ba1bc05b24f29e7969c704051c24044b15c98152550c28c12d860c",
+      "currentSha256": "a0dafe59ee4c3d590521664384f46343b23047d7979a3b145ebe349c13945928",
+      "historicalBeforeSha256": "199e51b09fbae8a226effe4cdd21fd77b5d5c074dd05e402d8f902915a1a0d3a",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "82d452595c0ee60afb2c86577b30698d22e1649afa8181c4ef267b55ec93791e",
+          "afterSha256": "aa852fbee4014f9850f961917823b8380e387a448ffe99ca0dd33cbf353dc668"
+        }
+      ]
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "mainSha256": "360de483acd44723daa5aa31cf2fa2677f1c906382bcc266edb3740b575196de",
+      "currentSha256": "56f6f64c5a22ee6e89f4b82ad83da50b24600e8ef6af0ea2526ef6e0ef9eba12",
+      "historicalBeforeSha256": "0d143e4c0e4f344e47e838232deb56b30ed83a925e61ce55ab85f9ba8dc69057",
+      "sourceChanges": [
+        {
+          "commit": "bb875d9a74cbce383cb9aeb1eca21007991c3571",
+          "parent": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "beforeSha256": "360de483acd44723daa5aa31cf2fa2677f1c906382bcc266edb3740b575196de",
+          "afterSha256": "56f6f64c5a22ee6e89f4b82ad83da50b24600e8ef6af0ea2526ef6e0ef9eba12"
+        }
+      ]
+    },
+    "runtime/BP/scripts/bedrock/effect-icons.js": {
+      "mainSha256": "f958f50bf702cfbfb3fd99c2a0137d6a3b439be1dba1f3b452a338a288012bd8",
+      "currentSha256": "41f9550277736caf952a35a2509d48f2c17332b90ae084b1fb85bd771cbe8158",
+      "historicalBeforeSha256": null,
+      "sourceChanges": [
+        {
+          "commit": "c643225fb99f4a4aec1b50fac2a819ecb659b288",
+          "parent": "5cc53dc13a1bed55338ee3010cbd5c16d95e23f2",
+          "beforeSha256": "f958f50bf702cfbfb3fd99c2a0137d6a3b439be1dba1f3b452a338a288012bd8",
+          "afterSha256": "2b1df6e8d718bbbc4339d04ab980c39ad990ac21526c92ece40442407cc39c23"
+        },
+        {
+          "commit": "cea80addf7b1ca647f77a400a15547615e77528c",
+          "parent": "28ff1e41926a5b0a487474fc39bc285988d2cb40",
+          "beforeSha256": "2b1df6e8d718bbbc4339d04ab980c39ad990ac21526c92ece40442407cc39c23",
+          "afterSha256": "41f9550277736caf952a35a2509d48f2c17332b90ae084b1fb85bd771cbe8158"
+        }
+      ]
+    },
+    "runtime/BP/scripts/bedrock/mixology.js": {
+      "mainSha256": "749590d7411ac56fb15bdd851357a325af890b46e8207e19b5d504e859f8dd46",
+      "currentSha256": "fce60833829c75e7b7006bc5369487e5bb478b62fb8266bddb442b424f88915f",
+      "historicalBeforeSha256": "b4b3ecb29d8fd2e41339043a04365489a38f17a20c5cc90b43dd3d2fb2d9a7b5",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "749590d7411ac56fb15bdd851357a325af890b46e8207e19b5d504e859f8dd46",
+          "afterSha256": "fce60833829c75e7b7006bc5369487e5bb478b62fb8266bddb442b424f88915f"
+        }
+      ]
+    },
+    "runtime/BP/scripts/bedrock/tipsy-visual.js": {
+      "mainSha256": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+      "currentSha256": "189043a2dbeadd2bccf2cbfaac4c2923b4487f89b05f4bba29b8f498851b8170",
+      "historicalBeforeSha256": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+      "sourceChanges": [
+        {
+          "commit": "bb875d9a74cbce383cb9aeb1eca21007991c3571",
+          "parent": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "beforeSha256": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+          "afterSha256": "189043a2dbeadd2bccf2cbfaac4c2923b4487f89b05f4bba29b8f498851b8170"
+        }
+      ]
+    },
+    "runtime/BP/scripts/core/custom-effects.js": {
+      "mainSha256": "64fc45165341663c4f7deeef184fe362eae7f7c20b2ca9f87c73b0f3c7ee7810",
+      "currentSha256": "07533f50ffdaf2a41a9501aa8c86e11fae01687ad518595269ae630f8e79a121",
+      "historicalBeforeSha256": "b96c30e10c53bb49f7eeb854f8744f53dff466cc5cf59c5e17de23f9d7a40339",
+      "sourceChanges": [
+        {
+          "commit": "bb875d9a74cbce383cb9aeb1eca21007991c3571",
+          "parent": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "beforeSha256": "64fc45165341663c4f7deeef184fe362eae7f7c20b2ca9f87c73b0f3c7ee7810",
+          "afterSha256": "07533f50ffdaf2a41a9501aa8c86e11fae01687ad518595269ae630f8e79a121"
+        }
+      ]
+    },
+    "runtime/BP/scripts/core/effect-icon-title-reservation.js": {
+      "mainSha256": null,
+      "currentSha256": "f391d008c86ad9afec80c6d2657fa5906dcf840e1c04b2cbaf68e3058dcd24bc",
+      "historicalBeforeSha256": null,
+      "sourceChanges": [
+        {
+          "commit": "cea80addf7b1ca647f77a400a15547615e77528c",
+          "parent": "28ff1e41926a5b0a487474fc39bc285988d2cb40",
+          "beforeSha256": null,
+          "afterSha256": "f391d008c86ad9afec80c6d2657fa5906dcf840e1c04b2cbaf68e3058dcd24bc"
+        }
+      ]
+    },
+    "runtime/BP/scripts/core/effect-icons.js": {
+      "mainSha256": "a015537e11d6f9c3d6049ff12045a61b265f5e91dce104c599fa7ab4119ea61c",
+      "currentSha256": "4362e515b2cbf2846079ad4331db3d77028ad4f18d78e51b564b51b4f23d0768",
+      "historicalBeforeSha256": null,
+      "sourceChanges": [
+        {
+          "commit": "c643225fb99f4a4aec1b50fac2a819ecb659b288",
+          "parent": "5cc53dc13a1bed55338ee3010cbd5c16d95e23f2",
+          "beforeSha256": "a015537e11d6f9c3d6049ff12045a61b265f5e91dce104c599fa7ab4119ea61c",
+          "afterSha256": "500b55e843780ab37f23c12540384059d90c6691a94185242eccebff033e12ea"
+        },
+        {
+          "commit": "cea80addf7b1ca647f77a400a15547615e77528c",
+          "parent": "28ff1e41926a5b0a487474fc39bc285988d2cb40",
+          "beforeSha256": "500b55e843780ab37f23c12540384059d90c6691a94185242eccebff033e12ea",
+          "afterSha256": "4362e515b2cbf2846079ad4331db3d77028ad4f18d78e51b564b51b4f23d0768"
+        }
+      ]
+    },
+    "runtime/BP/scripts/core/tipsy-visual.js": {
+      "mainSha256": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+      "currentSha256": "5e5df3fed22eff36fc82006c9e3afc42a15dd93a77c77cf3bf0cce2648b8961c",
+      "historicalBeforeSha256": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+      "sourceChanges": [
+        {
+          "commit": "bb875d9a74cbce383cb9aeb1eca21007991c3571",
+          "parent": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "beforeSha256": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+          "afterSha256": "5e5df3fed22eff36fc82006c9e3afc42a15dd93a77c77cf3bf0cce2648b8961c"
+        }
+      ]
+    },
+    "runtime/BP/scripts/data/build-version.js": {
+      "mainSha256": "a73e4b9e75c19b9e7eb58d7511f1a0af3ff208fafb8595d80f495315942020a4",
+      "currentSha256": "74d4425aa79734523b4b1218cd4884975e7b1a61d1a8db5b91b94b9979dbaed7",
+      "historicalBeforeSha256": null,
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "88ad0570822f661004cd00e174c7e36f889b05e03ea74b1f7429c7a342f81d14",
+          "afterSha256": "922305910687e7bf4245078f626ce6f387ce6ebf3442fccb78ddcdbf31f21627"
+        }
+      ]
+    },
+    "runtime/BP/scripts/data/cookery-guide-payload.js": {
+      "mainSha256": "96647965c9743909e4261c6ce621fc762901e4ee2cb10d6379d1aa949fdda8f6",
+      "currentSha256": "691445c198dda1dc8699a8f38230ffd0045cbbe06d0cbabdfc7493def10e9377",
+      "historicalBeforeSha256": "2e09d8683cd796185061ea874840af34d52a643f6814e91d6a01b5db51bc9c78",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "df424fc985ebd6417a6e8e0311c1f7669ea23c161e0cfde611ff6bb1f22bf343",
+          "afterSha256": "7bf54759640e7e59bd34a115f793bb39e537d06d1fdd09990721299208171fc1"
+        }
+      ]
+    },
+    "runtime/RP/animations/runtime_shaker.animation.json": {
+      "mainSha256": "d7c40819631d17bf9c61f6d16b06b5ba3797a72e98055ef4b5a2c43effa3ea69",
+      "currentSha256": "d40f089efa332b7eed271db74b3e3edf8f00761d720ee967aa87f99fecc3132d",
+      "historicalBeforeSha256": "359150b1c88e1177d2ff534bce94591c1491ee6ff38b5781fc69a84c462b7c52",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "d7c40819631d17bf9c61f6d16b06b5ba3797a72e98055ef4b5a2c43effa3ea69",
+          "afterSha256": "99af5648106c050e2d1d3dc92a6dfe21190c0f5a45ba56ae5880b978dc363694"
+        },
+        {
+          "commit": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "parent": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "beforeSha256": "99af5648106c050e2d1d3dc92a6dfe21190c0f5a45ba56ae5880b978dc363694",
+          "afterSha256": "2ffd07afa495e9419d36f5f1d194c1fb3acf022a1a2411765e0d0619f802057d"
+        },
+        {
+          "commit": "b41341e9484c55147f3deb4788830c1e461e2fb5",
+          "parent": "89167ad39a7c73b1e8574464a751d3f852c80fc4",
+          "beforeSha256": "2ffd07afa495e9419d36f5f1d194c1fb3acf022a1a2411765e0d0619f802057d",
+          "afterSha256": "b980d751caaeaa85e7caa2cd7ce3ac49911b03e98928f0055b30c98d36756acd"
+        },
+        {
+          "commit": "c04d4e0035e3d3faf42a019e0107756c71a3de79",
+          "parent": "b41341e9484c55147f3deb4788830c1e461e2fb5",
+          "beforeSha256": "b980d751caaeaa85e7caa2cd7ce3ac49911b03e98928f0055b30c98d36756acd",
+          "afterSha256": "d40f089efa332b7eed271db74b3e3edf8f00761d720ee967aa87f99fecc3132d"
+        }
+      ]
+    },
+    "runtime/RP/manifest.json": {
+      "mainSha256": "95d3296ebc3a8f56ad5603368a4cc5a4da35b2a06d72e2d499f7f45215f1632f",
+      "currentSha256": "573c204178a865a570bf6e7568ae45941442480a2637e3c9ddf9866906612cc3",
+      "historicalBeforeSha256": "5da18118d08dc5281980947d6df694ff33a9012ce45dcaa7f30e5b5eab04ea99",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "9dcb4d754309ccab973f7866efda823055a5070cff224c28eb3a3fed10aeb36e",
+          "afterSha256": "7c685e70a5bae6b37c09ab012b4a7a2159dbaca3d01edfdde41a31df17bcdec8"
+        }
+      ]
+    },
+    "runtime/RP/ui/hud_screen.json": {
+      "mainSha256": "07893a088f31e6e3aa19b855cb1d71e15b50a9f08c1a555777eeb78ba055b26f",
+      "currentSha256": "437b3db81c1914fcea630f8cfea4d1ca2cb68a23240ab0297a9e202ca610ac95",
+      "historicalBeforeSha256": "f6e4b744171c353d0d79a591ea6e0222e5c35751e902e40f7a73cee980fd6db8",
+      "sourceChanges": [
+        {
+          "commit": "33c73cd98f6e1b477d7fb53223fdcf1b65afc729",
+          "parent": "892436df95b7e299221e6e7aa699ab9944febcbb",
+          "beforeSha256": "07893a088f31e6e3aa19b855cb1d71e15b50a9f08c1a555777eeb78ba055b26f",
+          "afterSha256": "10886c5ae87dea21ce28f390292a175f59c7ee2a9e06cb4f2aaca7c66596e901"
+        },
+        {
+          "commit": "cea80addf7b1ca647f77a400a15547615e77528c",
+          "parent": "28ff1e41926a5b0a487474fc39bc285988d2cb40",
+          "beforeSha256": "10886c5ae87dea21ce28f390292a175f59c7ee2a9e06cb4f2aaca7c66596e901",
+          "afterSha256": "437b3db81c1914fcea630f8cfea4d1ca2cb68a23240ab0297a9e202ca610ac95"
+        }
+      ]
+    }
+  },
+  "preservationAnchors": {
+    "runtime/BP/scripts/bedrock/board-text.js": {
+      "mainSha256": "69c20a7204c33e3908e79997e8133272643d79f7c3ddae84e6fee244362e6300",
+      "currentSha256": "69c20a7204c33e3908e79997e8133272643d79f7c3ddae84e6fee244362e6300",
+      "efficiencyBeforeCommit": "4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7",
+      "efficiencyBeforeSha256": "4632975e0fa8b5f56f01dad452c25f69fb7c0068d44a4587fbbc687c54f45314",
+      "efficiencyAfterSha256": "69c20a7204c33e3908e79997e8133272643d79f7c3ddae84e6fee244362e6300"
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "mainSha256": "360de483acd44723daa5aa31cf2fa2677f1c906382bcc266edb3740b575196de",
+      "currentSha256": "56f6f64c5a22ee6e89f4b82ad83da50b24600e8ef6af0ea2526ef6e0ef9eba12",
+      "historicalCommit": "35b744a803a49d115a4fdc83eb238460254c900b",
+      "historicalBeforeSha256": "0d143e4c0e4f344e47e838232deb56b30ed83a925e61ce55ab85f9ba8dc69057",
+      "efficiencyBeforeCommit": "4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7",
+      "efficiencyBeforeSha256": "68facc19e370fca2f1052b3d4b2beedbcdd0261ce3279ba9aa5c4c8cbc976d38",
+      "efficiencyAfterSha256": "0d143e4c0e4f344e47e838232deb56b30ed83a925e61ce55ab85f9ba8dc69057"
+    },
+    "runtime/BP/scripts/core/custom-effects.js": {
+      "mainSha256": "64fc45165341663c4f7deeef184fe362eae7f7c20b2ca9f87c73b0f3c7ee7810",
+      "currentSha256": "07533f50ffdaf2a41a9501aa8c86e11fae01687ad518595269ae630f8e79a121",
+      "historicalCommit": "35b744a803a49d115a4fdc83eb238460254c900b",
+      "historicalBeforeSha256": "b96c30e10c53bb49f7eeb854f8744f53dff466cc5cf59c5e17de23f9d7a40339"
+    }
+  }
+}

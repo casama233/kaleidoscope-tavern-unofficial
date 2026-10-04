@@ -109,7 +109,7 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
    try:proof=apply_host_extension(spec,owned_root,host_root,host['source'])
    except (ValueError,KeyError) as e:fail('host extension rejected: '+str(e))
    proof.update({'repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'owner_version':config['version'],'spec_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'working_candidate':working})
-   host['source']={**host['source'],'owner':'upstream_extended','reviewed_extensions':[proof]};host['files']=files_hash(host_root)
+   host['source']={**host['source'],'owner':'upstream_extended','reviewed_extensions':[*host['source'].get('reviewed_extensions',[]),proof]};host['files']=files_hash(host_root)
  for root in preserved:
   manifest=read(root/'manifest.json');uid=manifest['header']['uuid']
   add({'owner':'preserved','role':'unchanged_external_dependency'},manifest,root=root)

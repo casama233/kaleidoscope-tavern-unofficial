@@ -243,7 +243,20 @@ def validate_translation_reconciliation(inventory,expected,order,dependency_pins
     preserved_commit=proof.get('canonical_preserved_commit')
     if preserved_commit:
         validation=read(Path(CONFIG['extension_validation']))
-        assert validation['history_base']==preserved_commit and validation['source_commit']==git(EXTENSION,'rev-parse','HEAD'), 'Canonical preimage needs exact separately validated integration changes'
+        assert validation['source_commit']==git(EXTENSION,'rev-parse','HEAD'), 'Canonical preimage needs exact separately validated integration changes'
+        if proof.get('canonical_receipt_preimage'):
+            matched=[]
+            for prior in expected.values():
+                if prior.get('source',{}).get('repository')=='local/senluo-amw-cuisine':
+                    side=next(k for k,v in read(EXTENSION/'baseline.json')['packs'].items() if v['uuid']==prior['uuid'])
+                    from family_update.preserved_reconciliation import tree_files
+                    files=tree_files(EXTENSION,preserved_commit,'runtime/'+side)
+                    assert {name:hashlib.sha256(raw).hexdigest() for name,raw in files.items()}==prior['files'], 'Canonical preimage differs from approved receipt'
+                    matched.append(prior['uuid'])
+            assert set(matched)=={p['uuid'] for p in read(EXTENSION/'baseline.json')['packs'].values()}, 'Canonical preimage pair is missing'
+            subprocess.run(['git','-C',str(EXTENSION),'merge-base','--is-ancestor',preserved_commit,validation['history_base']],check=True,capture_output=True)
+        else:
+            assert validation['history_base']==preserved_commit, 'Canonical preimage needs exact separately validated integration changes'
         subprocess.run(['git','-C',str(EXTENSION),'merge-base','--is-ancestor',preserved_commit,validation['source_commit']],check=True,capture_output=True)
     allowed={p['uuid']:side for side,p in config['packs'].items()}
     assert set(proof['packs'])==set(allowed), 'Only the canonical local integration may be reconciled'
@@ -261,7 +274,7 @@ def validate_translation_reconciliation(inventory,expected,order,dependency_pins
             if dep.get('uuid') in allowed:dep['version']=[0,0,0]
             elif dep.get('uuid') in dependency_pins:
                 # Only the separately reviewed preserved pair may advance.
-                assert dep['version'] in ([2,4,18],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
+                assert dep['version'] in ([*dependency_pins[dep['uuid']][:2],dependency_pins[dep['uuid']][2]-1],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
                 dep['version']=[0,0,0]
         return value
     changed=[]

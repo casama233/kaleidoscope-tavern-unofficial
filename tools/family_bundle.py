@@ -6,6 +6,10 @@ from host_extensions import apply_host_extension
 ROOT=Path(__file__).resolve().parents[1]
 def fail(message):raise SystemExit('FAMILY: '+message)
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def validate_client_scripts(obj,path):
+ if not isinstance(obj,dict) or obj.get('format_version')!='1.8.0':return
+ scripts=obj.get('minecraft:client_entity',{}).get('description',{}).get('scripts',{})
+ if 'initialize' in scripts:fail('client_entity format 1.8.0 does not support scripts.initialize: '+str(path))
 def read_definition(path,jsonc=False):
  raw=path.read_text(encoding='utf-8-sig')
  try:return json.loads(raw)
@@ -134,6 +138,7 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
     for key in ['minecraft:item','minecraft:block','minecraft:entity','minecraft:client_entity']:
      identifier=obj.get(key,{}).get('description',{}).get('identifier') if isinstance(obj,dict) else None
      if not identifier:continue
+     if key=='minecraft:client_entity' and (side,key,identifier) not in definitions:validate_client_scripts(obj,path)
      if side=='behavior' and key=='minecraft:entity' and identifier=='minecraft:player':
       if behavior_player is not None:fail('competing behavior minecraft:player definitions: '+behavior_player['uuid']+' and '+uid)
       behavior_player={'uuid':uid,'path':path.relative_to(root).as_posix(),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}

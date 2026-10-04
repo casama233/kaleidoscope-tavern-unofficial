@@ -23,20 +23,24 @@ export function effectDetails(state,enabled=()=>true){
  return {rawtext};
 }
 /** Read-only view. No saves, no countdown traffic and no Actionbar writes. */
-export function createEffectIcons({status,available,send,enabled=()=>true,hidden=p=>p.hasTag?.(EFFECT_ICON_HIDE_TAG)===true,onError=()=>{}}){
- const views=new Map();
+export function createEffectIcons({status,available,send,enabled=()=>true,hidden=p=>p.hasTag?.(EFFECT_ICON_HIDE_TAG)===true,held=()=>false,onError=()=>{}}){
+ const views=new Map(),suspended=new Set();
  return {
-  forget:id=>views.delete(id),
+  forget(id){suspended.delete(id);views.delete(id);},
   reset:id=>views.set(id,{packet:undefined,dimension:undefined}),
   // A lifecycle replay dirties only a previously active snapshot. Inactive
   // players must not send a title clear merely because their HUD was rebuilt.
   refresh(id){const view=views.get(id);if(view&&view.packet!==EFFECT_ICON_PREFIX)view.dirty=true;},
   tick(players){
-   if(!available()){views.clear();return;}
+   if(!available()){views.clear();suspended.clear();return;}
    const seen=new Set();
    for(const player of players)try{
     if(player.isValid===false)continue;
-    seen.add(player.id);const old=views.get(player.id),packet=effectIconPacket(status(player),hidden(player),enabled);
+    seen.add(player.id);
+    if(held(player)){suspended.add(player.id);continue;}
+    const old=views.get(player.id);
+    if(suspended.delete(player.id)&&old)old.dirty=true;
+    const packet=effectIconPacket(status(player),hidden(player),enabled);
     const dimension=player.dimension?.id;
     // Inactive joins/moves need no packet. Clear only a previous active snapshot
     // (or an explicit spawn reset), never a known empty view in another dimension.
@@ -47,6 +51,7 @@ export function createEffectIcons({status,available,send,enabled=()=>true,hidden
     send(player,packet);views.set(player.id,{packet,dimension});
    }catch(error){onError(error);}
    for(const id of views.keys())if(!seen.has(id))views.delete(id);
+   for(const id of suspended)if(!seen.has(id))suspended.delete(id);
   }
  };
 }

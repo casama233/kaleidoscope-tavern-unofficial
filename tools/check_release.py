@@ -134,7 +134,7 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check=True)
     subprocess.run(source_checks['launch'],cwd=ROOT,check=True)
     subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)
-    subprocess.run(['node','--test','tools/immersion-feedback.test.mjs','tools/effect-bar.test.mjs','tools/effect-icons.test.mjs','tools/effect-icon-startup.test.mjs','tools/effect-icon-dimension.test.mjs','tools/effect-icon-ui-prefix.test.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','--test','tools/immersion-feedback.test.mjs','tools/effect-bar.test.mjs','tools/effect-icons.test.mjs','tools/effect-icon-startup.test.mjs','tools/effect-icon-dimension.test.mjs','tools/effect-icon-ui-prefix.test.mjs','tools/effect-icon-title-reservation.test.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/build_effect_icon_hud.mjs','--check'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,'tools/test_effect_ui_contract.py'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,'tools/check_effect_ui_contract.py'],cwd=ROOT,check=True)

@@ -31,8 +31,11 @@ def main(argv=None):
     config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
     source_checks=source_check_commands(args,config['version'])
     subprocess.run(['node','--test','tools/ambient-sparse.test.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/shaker-metadata.test.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','tools/shaker-serving-metadata.test.mjs'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_item_render_contract.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_held_frames.py')],cwd=ROOT,check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_native_frame.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)
     assert f"export const BUILD_VERSION='{config['version']}-baseline.1';" in (RT/'BP/scripts/data/build-version.js').read_text(),'Stale diagnostic build identity'
     files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}
@@ -124,7 +127,7 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/check_motion.py')],cwd=ROOT,check=True)
     subprocess.run(source_checks['launch'],cwd=ROOT,check=True)
     subprocess.run(['node',str(ROOT/'tools/check_hud_compat.mjs')],cwd=ROOT,check=True)
-    subprocess.run(['node','--test','tools/immersion-feedback.test.mjs','tools/effect-bar.test.mjs','tools/effect-icons.test.mjs','tools/effect-icon-startup.test.mjs'],cwd=ROOT,check=True)
+    subprocess.run(['node','--test','tools/immersion-feedback.test.mjs','tools/effect-bar.test.mjs','tools/effect-icons.test.mjs','tools/effect-icon-startup.test.mjs','tools/effect-icon-ui-prefix.test.mjs'],cwd=ROOT,check=True)
     subprocess.run(['node','tools/build_effect_icon_hud.mjs','--check'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,'tools/test_effect_ui_contract.py'],cwd=ROOT,check=True)
     subprocess.run([sys.executable,'tools/check_effect_ui_contract.py'],cwd=ROOT,check=True)

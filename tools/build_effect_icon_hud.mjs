@@ -1,18 +1,21 @@
 /** Generate literal image controls. Never accept resource paths from a packet. */
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {resolve,dirname} from 'node:path';
+import {effectIconPrefixExpression} from './effect-icon-ui-prefix.mjs';
 import {EFFECT_ICONS} from '../runtime/BP/scripts/data/effect-icons.js';
-import {EFFECT_ICON_PREFIX,EFFECT_ICON_SLOTS,effectIconToken} from '../runtime/BP/scripts/core/effect-icons.js';
+import {EFFECT_ICON_SLOTS,effectIconToken} from '../runtime/BP/scripts/core/effect-icons.js';
 const addonIndex=process.argv.indexOf('--world-liquor');
 const extension=addonIndex>=0;
 const path=extension?resolve(process.argv[addonIndex+1],'runtime/RP/ui/kt_world_liquor_effects.json'):new URL('../runtime/RP/ui/hud_screen.json',import.meta.url);
 const hud=extension?{namespace:'kaleidoscope_world_liquor_effects'}:JSON.parse(readFileSync(path,'utf8'));
-const prefix=`(('%.${EFFECT_ICON_PREFIX.length}s' * #hud_title_text_string) = '${EFFECT_ICON_PREFIX}')`;
+const prefix=effectIconPrefixExpression();
 const panel={type:'panel',size:[160,80],anchor_from:'top_left',anchor_to:'top_left',offset:[4,52],controls:[
  {kt_effect_data:{type:'panel',size:[0,0],property_bag:{'#kt_effect_packet':''},bindings:[
   {binding_name:'#hud_title_text_string'},
-  {binding_name:'#hud_title_text_string',binding_name_override:'#kt_effect_packet',binding_condition:'visibility_changed'},
-  {binding_type:'view',source_property_name:`(not (#hud_title_text_string = #kt_effect_packet) and ${prefix})`,target_property_name:'#visible'}
+  // Only reserved snapshots open the cache. A foreign title closes it without
+  // overwriting the last accepted packet; consecutive owned updates remain live.
+  {binding_type:'view',source_property_name:prefix,target_property_name:'#visible'},
+  {binding_name:'#hud_title_text_string',binding_name_override:'#kt_effect_packet',binding_condition:'always_when_visible'}
  ]}}
 ]};
 const rows=EFFECT_ICONS.filter(row=>row.id.startsWith(extension?'kaleidoscope_world_liquor:':'kaleidoscope_tavern:'));

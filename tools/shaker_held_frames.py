@@ -9,6 +9,12 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=json.loads((ROOT/'art/interfaces/shaker-held-java-reference.json').read_text())
 WAVE='math.sin(q.life_time * 1718.87338539247)'
 USING='(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)'
+# The former head-centred projection clips the actual .90 client cup at FOV60,
+# on both wide and slim skins. Preserve Java mesh, scale and shake waveform;
+# adapt only camera-space framing. Native engine eye/skin offsets remain a
+# rendered-client check, not a claim of identical Java camera pixels.
+FP_IDLE_CAMERA_OFFSET=(-1.5,5.0,-4.0)
+FP_USE_CAMERA_OFFSET=(-1.5,6.5,-4.0)
 
 def java_target(view,active=False,wave=0,hand='right'):
  sign=1 if hand=='right' else -1
@@ -20,6 +26,8 @@ def java_target(view,active=False,wave=0,hand='right'):
   target=chain(translate([6*sign,22,0]),arm,translate([0,-10,-2]),rotate('x',-90),display)
  else:
   base,camera=calibration(hand)
+  offset=FP_USE_CAMERA_OFFSET if active else FP_IDLE_CAMERA_OFFSET
+  camera=chain(camera,translate([offset[0]*sign,offset[1],offset[2]]))
   if active:
    # applyForgeHandTransform returns true: replace vanilla equip/swing/use,
    # then ItemRenderer applies the model display. Units here are model pixels.

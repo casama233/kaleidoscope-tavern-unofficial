@@ -336,7 +336,7 @@ export function tapRedstoneUpdate(ev){
 export function dismantle(player,block){
  writable(player);
  if(block?.typeId===TAP){const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,0,player.getGameMode()===GameMode.Creative?[]:[{id:TAP,count:1}],make),old=block.permutation;
-  cancelTapSession(block,false);commitInventory(plan,c,()=>block.setType('minecraft:air'),()=>block.setPermutation(old));return;
+  cancelTapSession(block,false);commitInventory(plan,c,()=>replaceBlockWithoutNaturalDrops(block,BlockPermutation.resolve('minecraft:air')),()=>block.setPermutation(old));return;
  }
  const core=requireCore(block),key=keyFor(core);
  return locks.with([key,player.id],()=>{

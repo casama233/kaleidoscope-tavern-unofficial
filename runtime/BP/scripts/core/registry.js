@@ -1,6 +1,7 @@
 import {normalizeFoundation} from './extension-foundation.js';
 import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
+import {coreShakerIngredientTags} from '../data/shaker-ingredient-tags.js';
 import {COCKTAIL_COLOR_CODES} from './cocktail-colors.js';
 import {expandShakerTags} from './shaker-tags.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
@@ -106,7 +107,7 @@ export class ExtensionRegistry {
   this.builtins=freeze(recipes.map(x=>({...clone(x),source:CORE})));this.pages=freeze(pages.map(x=>({...clone(x),source:CORE})));
   this.rebuild();
  }
- rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze(expandShakerTags([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))],ext.flatMap(x=>x.shakerInputs)));this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
+ rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze(expandShakerTags([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))],[...Object.values(SHAKER_INPUTS).map(input=>({...input,ingredientTags:coreShakerIngredientTags(input.item)})),{item:'minecraft:potion',ingredientTags:coreShakerIngredientTags('minecraft:potion')},...ext.flatMap(x=>x.shakerInputs)]));this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
  install(raw){
   check(raw&&raw.api===API_VERSION,'API_VERSION_MISMATCH');
   const source=raw.source;check(typeof source==='string'&&/^[a-z][a-z0-9_]{1,47}$/.test(source),'INVALID_SOURCE');

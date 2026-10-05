@@ -193,6 +193,12 @@ jobs:
           ref: c4ec1880bd44cf3139d3ba744ab30bb379cf1416
           path: java
           persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: c2b7fe5646a9136dc4c53c0f2b7f3fd9f5bfdbcf
+          path: world-liquor
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -210,6 +216,23 @@ jobs:
           git -C bedrock rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
           printf 'Java: ' >> evidence/SOURCE_COMMITS.txt
           git -C java rev-parse HEAD >> evidence/SOURCE_COMMITS.txt
+      - name: Verify addon ingredient categories against primary Java and paired source
+        working-directory: bedrock
+        env:
+          JAVA_SOURCE: ${{ github.workspace }}/java
+          LIQUOR_SOURCE: ${{ github.workspace }}/world-liquor
+        run: |
+          node --test tools/cocktail-recognition-source.test.mjs tools/addon-mixology-tags.test.mjs
+          git diff --exit-code -- runtime/
+      - name: Verify all four rebuilt Tavern repairs together
+        working-directory: bedrock
+        run: |
+          node --test tools/shaker-hud-expiry.test.mjs tools/signature-rgb.test.mjs
+          node tools/check_hud_compat.mjs
+          node tools/check_actionbar_filter.mjs
+          python tools/check_shaker_signature_colors.py
+          python tools/build_shaker_hud_colors.py
+          git diff --exit-code -- runtime/
       - name: Reject unsupported Molang assignment syntax before numerical testing
         working-directory: bedrock
         run: python tools/effects/test_molang_syntax.py

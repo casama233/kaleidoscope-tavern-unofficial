@@ -50,6 +50,7 @@ atlas.save(RP / 'textures/kt_runtime/signature/mixtures.png')
 material_file = RP / 'materials/entity.material'
 materials = read(material_file) if material_file.exists() else {'materials': {'version': '1.0.0'}}
 materials['materials']['kt_signature_animated:entity_alphatest_one_sided'] = {'+defines': ['USE_UV_ANIM']}
+materials['materials'].pop('kt_signature_rgb:entity_alphatest_one_sided', None)
 write(material_file, materials)
 
 (BP / 'scripts/data/signature-palette.js').write_text(
@@ -64,6 +65,9 @@ for name in ('runtime_signature_cup', 'rig_signature_color'):
     d = j['minecraft:client_entity']['description']
     # One-sided alpha test keeps alpha=0 glass holes and culls opposite faces.
     d['materials']['liquid'] = 'kt_signature_animated'
+    # Direct built-in tint material: custom USE_COLOR_MASK defines were ignored
+    # by the actual 1.26.52.3 native client during the public 0.6.102 check.
+    d['materials']['liquid_rgb'] = 'entity_alphatest_change_color'
     d['textures'] = {f'frame_{i}': f'textures/kt_runtime/signature/frame_{i}' for i in range(6)}
     d['textures']['mixtures'] = 'textures/kt_runtime/signature/mixtures'
     write(p, j)
@@ -72,23 +76,32 @@ p = RP / 'render_controllers/signature_tint.json'
 j = read(p)
 c = j['render_controllers']['controller.render.kt_assets_a17.signature_tint']
 c.pop('color', None)
-c.pop('arrays', None)
-c['textures'] = ['Texture.mixtures']
+c['arrays'] = {'materials': {'Array.liquid_materials': ['Material.liquid', 'Material.liquid_rgb']},
+               'textures': {'Array.source_frames': [f'Texture.frame_{i}' for i in range(6)]}}
+c['materials'] = [{'*': "Array.liquid_materials[query.property('kt_art:palette') < 0]"}]
+fallback = "query.property('kt_art:palette') < 0"
+c['textures'] = [f'{fallback} ? Array.source_frames[math.mod(math.floor(q.life_time * 10), 6)] : Texture.mixtures']
 index = "(math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
-c['uv_anim'] = {'scale': [32 / atlas.width, 32 / atlas.height], 'offset': [
-    f'(math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
-    f'(math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
-# Third-party inputs may use arbitrary RGB values outside Java's tag palette.
-# Preserve their actual RGB rather than silently choosing the nearest color.
-# Native overlay is only the fallback; all Java mixtures retain texture shading.
-c['overlay_color'] = {channel: f"query.property('kt_art:{name}') / 255"
+# The built-in tint route uses full source-frame textures and identity UVs. It
+# does not depend on adding USE_UV_ANIM to a custom masked material. Exact Java
+# mixtures keep the same atlas material and sampling coordinates as before.
+c['uv_anim'] = {'scale': [f'{fallback} ? 1 : {32 / atlas.width}', f'{fallback} ? 1 : {32 / atlas.height}'], 'offset': [
+    f'{fallback} ? 0 : (math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
+    f'{fallback} ? 0 : (math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
+# The tested client binds query overlay, but not controller color. Keep it off
+# for the exact baked domain; external arbitrary RGB is explicitly flat-shaded.
+c['overlay_color'] = {channel: f"query.property('kt_art:palette') < 0 ? query.property('kt_art:{name}') / 255 : 1"
                       for channel, name in [('r', 'red'), ('g', 'green'), ('b', 'blue')]}
-c['overlay_color']['a'] = "query.property('kt_art:palette') < 0 ? 1 : 0"
+c['overlay_color']['a'] = f'{fallback} ? 1 : 0'
 write(p, j)
 p = BP / 'entities/signature_cup_visual.json'
 j = read(p)
 j['minecraft:entity']['description']['properties']['kt_art:palette'] = {
     'type': 'int', 'range': [-1, len(palette) - 1], 'default': palette.index(0x5555ff), 'client_sync': True}
+# Source-grounded native witness: ChatFormatting.RED, not pure external RGB.
+j['minecraft:entity']['events']['kt_art:color_java_red'] = {'set_property': {
+    'kt_art:red': 255, 'kt_art:green': 85, 'kt_art:blue': 85,
+    'kt_art:palette': palette.index(0xff5555)}}
 for event in j['minecraft:entity']['events'].values():
     props = event['set_property']
     rgb = sum(props[f'kt_art:{channel}'] << shift for channel, shift in [('red', 16), ('green', 8), ('blue', 0)])

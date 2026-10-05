@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
-import {HUD_PREFIX,slotToken,slotsPacket,progressPacket,hudSendDue} from '../runtime/BP/scripts/core/shaker-hud.js';
+import {HUD_PREFIX,SHAKER_HUD_COLORS,slotToken,slotsPacket,progressPacket,hudSendDue} from '../runtime/BP/scripts/core/shaker-hud.js';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const hud=JSON.parse(read('runtime/RP/ui/hud_screen.json'));
 const adapter=read('runtime/BP/scripts/bedrock/shaker-screen.js');
@@ -27,19 +27,19 @@ function walk(value){
  for(const v of Object.values(value))walk(v);
 }
 const {kt_effect_icons,...shakerHud}=hud;
-walk(shakerHud);assert.equal(textures,26); // 24 fixed slot sprites + bar + cursor template
+walk(shakerHud);assert.equal(textures,53); // 51 fixed slot sprites + bar + cursor template
 const controls=hud.kt_mixology_packet.controls;
-const slots=controls[0].slots.controls;assert.equal(slots.length,24);
-for(let i=0;i<3;i++)for(let c=0;c<8;c++)assert(JSON.stringify(slots[i*8+c]).includes(slotToken(i,c)));
+const slots=controls[0].slots.controls;assert.equal(slots.length,51);
+for(let i=0;i<3;i++)for(let c=0;c<17;c++)assert(JSON.stringify(slots[i*17+c]).includes(slotToken(i,c)));
 const cursors=controls[1].progress.controls.slice(1);assert.equal(cursors.length,112);
 for(let n=0;n<112;n++){
  const cursor=Object.values(cursors[n])[0];assert.equal(cursor.visible,`($kt_text = '${progressPacket(n)}')`);
 }
 assert.equal(progressPacket(-10),progressPacket(0));assert.equal(progressPacket(Infinity),progressPacket(0));
 assert.equal(progressPacket(200),progressPacket(111));
-const colors=[0xff55ff,0x5555ff,0xffaa00,0x55ff55,0xffff55,0xff5555,0xffffff];
+const colors=SHAKER_HUD_COLORS;
 let cases=0;
-for(let a=0;a<8;a++)for(let b=0;b<8;b++)for(let c=0;c<8;c++){
+for(let a=0;a<17;a++)for(let b=0;b<17;b++)for(let c=0;c<17;c++){
  const indices=[a,b,c],packet=slotsPacket(indices.map(n=>n?{color:colors[n-1]}:null));
  assert.equal(packet,HUD_PREFIX+indices.map((n,i)=>slotToken(i,n)).join('  '));
  assert(!/textures\/|ktmix:/.test(packet));cases++;

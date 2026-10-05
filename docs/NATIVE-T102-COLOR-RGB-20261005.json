@@ -1,0 +1,44 @@
+{
+  "utc": "2026-10-05T17:03:00Z",
+  "source_commit": "6b966cd668ecd2f01742787bb91192f14366aefa",
+  "version": [
+    0,
+    6,
+    102
+  ],
+  "archive_sha256": "2170ec307d759ddc768cd0ff5e2447266de3122cd2cc4c11bfd89cb6ada03f5d",
+  "client": "Minecraft 1.26.52.3 x86_64 via Linux launcher",
+  "observations": {
+    "hud_protocol_colors": {
+      "status": "bounded_pass",
+      "batches": [
+        "012",
+        "345",
+        "678",
+        "9ab",
+        "cde",
+        "fff"
+      ],
+      "description": "Each batch displayed corresponding rhombus sprites; internal [KT] text not visible. Native screenshots inspected in tool results, no saved screenshot files."
+    },
+    "foreign_actionbar": {
+      "status": "pass",
+      "description": "FOREIGN HUD CONTROL displayed as ordinary text and removed prior rhombi."
+    },
+    "signature_rgb": {
+      "status": "failed",
+      "description": "Explicit color_red event succeeded, but liquid remained white/gray like color_white control. Glass remained unchanged. Fill gate absent per source inspection."
+    }
+  },
+  "limits": [
+    "Not full gameplay or ingredient acceptance",
+    "Pending expiry fix absent from102",
+    "Content log file stayed zero bytes even after normal exit; no clean-log claim",
+    "Audio unavailable: ALSA no device",
+    "No final105 acceptance"
+  ],
+  "scope": "Bounded native protocol/material observation of public0.6.102, not final aggregate acceptance",
+  "private_world_included": false,
+  "simulated_players": false,
+  "final_aggregate_client_acceptance": false
+}

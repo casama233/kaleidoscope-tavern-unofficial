@@ -3226,6 +3226,30 @@
       "before": null,
       "after": "f64b9c3fcada450dad2613210f2b208da95ad2636f6f64bc02999c28a4345546",
       "reason": "Reviewed 0.6.102 addition: missing Java ChatFormatting shaker rhombus RGB; exact source alpha mask retained and checked by check_shaker_signature_colors.py. See REBUILD-HUD-SIGNATURE-0.6.102.md."
+    },
+    "runtime/RP/entity/rig_signature_color.entity.json": {
+      "before": "1c1425ecebef48a2bfb5321b6299a45504b5cadfd1ae85928e27602abca0afd3",
+      "after": "b960cfb17ee1b1d189415656e0c81544bee43d654dc8cd2454ccbd592aee4504",
+      "reason": "Reviewed 0.6.102 multiplicative arbitrary-RGB signature material/controller selection; exact unchanged preimage from pinned launch baseline cedfaedf and public0.6.95 retained. See REBUILD-HUD-SIGNATURE-0.6.102.md.",
+      "beforeGzipBase64": "H4sIAAAAAAACA42TzWrDMBCE73mK4HNw4vxQyKuUIoS1dpfKUrpal4aQd+/Kju0kLq0OxqCdb2aw1pfFcplVnhrN6gsooHfZcZkVebHJN9kqTht0UJKu+FhaBMdKHuSzyC4yFoGBUBKeuGf7QzlGE4UVAkXHD1Y6BOCgdPFyJKxVwNppbglU6a2nLqwDpQsQahvu3LqYSreWo1nfQGl7ehdtYOUdiJ8BM7oIYPGzRXMLn9K0w5hgspvyOgYzfEfFU25FugG1iT6DYC2G1EqJBtaj8XoQrp7ZIpUt5uw2ld3O2V0qu5uz+1R2P2cPqezhnm1w/Pr/wKNydoM1+AaYzo83WFtZvWg7jPOHbcwft7FX/7pHSfxNPutG4AyQLLtj8tbKzyaWr1PMNMh76VPKHw3TUUbHQ7W37n1dxOe6+AFFWjxqCgQAAA=="
+    },
+    "runtime/RP/entity/runtime_signature_cup.entity.json": {
+      "before": "543c6cc680e04c72ea692fac97541992f38a64979a4fa61af4cb830f9aab0f0c",
+      "after": "40051f8f799ab90b23400f27b3432e0eddec67a3b7a39c928668af2f58986c39",
+      "reason": "Reviewed 0.6.102 multiplicative arbitrary-RGB signature material/controller selection; exact unchanged preimage from pinned launch baseline cedfaedf and public0.6.95 retained. See REBUILD-HUD-SIGNATURE-0.6.102.md.",
+      "beforeGzipBase64": "H4sIAAAAAAACA42TzWrDMBCE73mK4HNw4vxQyKuUIoS1dpfKkrtah4aQd+/Kjp00Lq0OwqCdb2aQ5MtiucwqT41mdQIK6F12XGZFXmzyTbaK0wYdlKQrPpYWwbGShXwW2UXGIjAQSsKWB3bYlG00UVghUHT80BbQ+FD6FhRryXLHgLXT3BGosmvVCUOnbZ/Z81IJCLUND6Z9WqU7y9FzKKK0bd9FG1h5BypIrplcBLD42aHpO7C6R2qHMcFkN+V1Cmb4ioqn3Ip0A2oTfUbBWgypkxINrCfj9ShcPbNFKlvM2W0qu52zu1R2N2f3qex+zh5S2cMj2+B0+v/Ak3J2gzX4BpjOP2+wtjr0tuM4F1vZAg5KFy85Yf3wPgb1r+8oib/JZ90InAFSpXdM3lr558Ty9R5zH+SD9Cnlj4bpKKPjsdpb/70u4rouvgGl+rRwEQQAAA=="
+    },
+    "runtime/RP/materials/entity.material": {
+      "before": "65ef2e05ef21ca58029df7fce76a7e4519ea2dec57e9b44a13fd6cfb4adc9ad5",
+      "after": "ec69958789bc3f227a228265bf57c9f8302db23469ef7018ad366eadcb54eb51",
+      "reason": "Reviewed 0.6.102 multiplicative arbitrary-RGB signature material/controller selection; exact unchanged preimage from pinned launch baseline cedfaedf and public0.6.95 retained. See REBUILD-HUD-SIGNATURE-0.6.102.md.",
+      "beforeGzipBase64": "H4sIAAAAAAACA6vmUlBQyk0sSS3KTMwpVrJSqAYKAIXKUouKM/PzgAJKhnoGegZKOhDx7JL44sz0vMSS0qLU+MS8TJDWFKvUvJLMksr4xJyCDCC/uCQ+Py8VqC4lNQVuIlCvdkpqWmZeKsiWaKgYUDQ02DU+NCze0c/TVwkqGguma7lAuJYLAJUam7OjAAAA"
+    },
+    "runtime/RP/render_controllers/signature_tint.json": {
+      "before": "8d5f3f488954490a6b4b01a6e3c2558acefe30d4fec8b4ebd9d0dca47eac4fe2",
+      "after": "387b050c2129cd878dd8e66f1ef27ce734d53e066dcbd7b530ca635a499bb552",
+      "reason": "Reviewed 0.6.102 multiplicative arbitrary-RGB signature material/controller selection; exact unchanged preimage from pinned launch baseline cedfaedf and public0.6.95 retained. See REBUILD-HUD-SIGNATURE-0.6.102.md.",
+      "beforeGzipBase64": "H4sIAAAAAAACA7VUTY+bMBC951dYvgS2yLX5CokqVT311Ftvqwh5l4GiGpwYs9polf9eOxACm5R2tdoDYPzemxlmnnlZIIRzqSqu0ydQTSlrvEGYkYRQ7FlQQZ2BSh9lrZUUwnAM4cUgBrtsko5GfuuUNw3oJuVsRZqyqLluFaSFMNuD0EgLkBVodbDZvvdr0rG8M8cUBarkwgrv+000hDhR7qz+R88jGeS8FRoPjGO/2g4xNTzbgqYh8Tel+IHkilfQ3Ju0v0glM+e0yIWUytkTUeaQ6rICdIcYdT0Uu1t8FZ7bQOMPnaac1D5OOinnhP7sVB2e0qErN2E2D/vzcDAPh/NwhEfo9qr13fPovdUxuqz1Pw0jyn1bZu9wTB/gzYY5t6Aqe/RK1z6lvC6rqRWaRy7g1awpoWwd01USBixY+VG49qao74c0WcdBlERhELJVOMDbCxPLPDddfBUbO4OZ+xV/dqiH9i2Y7u2U3IHSB2dph6D0Zmeq0xqWrmtMHqNP6L+PgrmFiVUFoZExF31GLA6mvsPjKB9cjsl/VU/oJ5dBn416HAYmzf9P8IP50wmppmOzr/gvRSrIlja8H0Wjr8XFjKRQAPUt0cOM6EG0cEvDZzRDA9EXRNFXxNAGUTw9mAt7HRd/ALTs3uUJBgAA"
     }
   }
 }

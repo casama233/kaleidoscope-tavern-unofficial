@@ -36,3 +36,14 @@ family acceptance are not claimed here.
 Initial published commit ebaf00febd43c3e1e39794eb110681670d43ea7a has tree
 270cdf316b56ba05b04a3433918f2b830e02ff1b, identical to local checkpoint
 5b52cf6062621ebace7189fb6a0ac91551e9d6c5. Every changed blob SHA was checked.
+
+The full runtime diff has 37 intentionally changed or added paths. Their reviewed
+postimages are recorded in the test-only historical reconciliation, preserving
+all previous preimages. The four signature visual files also retain exact
+preimages verified identical in public 0.6.95 and pinned launch baseline cedfaedf.
+The 27 new sprites are explicit additions, preserving the original asset guards.
+
+After those metadata corrections, the complete source-pinned check_release.py
+passed locally against Java c4ec188 and the pinned integration baseline. It parsed
+2025 JSON files and 930 geometries and passed all source/static preservation
+checks. This does not certify native renderer or interaction acceptance.

@@ -1,0 +1,71 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "kt_sig_rgb_diag:baseline",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "kt_sig_rgb_diag:red": {
+          "type": "int",
+          "range": [
+            0,
+            255
+          ],
+          "default": 255,
+          "client_sync": true
+        },
+        "kt_sig_rgb_diag:green": {
+          "type": "int",
+          "range": [
+            0,
+            255
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "kt_sig_rgb_diag:blue": {
+          "type": "int",
+          "range": [
+            0,
+            255
+          ],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0,
+        "height": 0
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:persistent": {}
+    },
+    "events": {
+      "kt_sig_rgb_diag:red": {
+        "set_property": {
+          "kt_sig_rgb_diag:red": 255,
+          "kt_sig_rgb_diag:green": 0,
+          "kt_sig_rgb_diag:blue": 0
+        }
+      },
+      "kt_sig_rgb_diag:blue": {
+        "set_property": {
+          "kt_sig_rgb_diag:red": 0,
+          "kt_sig_rgb_diag:green": 0,
+          "kt_sig_rgb_diag:blue": 255
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Signature RGB Binding Diagnostic 0.0.1 RP",
+    "description": "Isolated native shader binding diagnosis; no gameplay or release acceptance",
+    "uuid": "67f568e9-b505-5f39-8018-fa32fb1fda93",
+    "version": [
+      0,
+      0,
+      1
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "6ad188c1-2bee-5c3e-8d56-83f4ac25ceec",
+      "version": [
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}

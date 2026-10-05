@@ -1,0 +1,123 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_sig_rgb_diag.glass": {
+      "geometry": "Geometry.glass",
+      "materials": [
+        {
+          "*": "Material.glass"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ]
+    },
+    "controller.render.kt_sig_rgb_diag.baseline": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ]
+    },
+    "controller.render.kt_sig_rgb_diag.mask_color": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ],
+      "color": {
+        "r": 1,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    },
+    "controller.render.kt_sig_rgb_diag.overlay": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ],
+      "overlay_color": {
+        "r": 1,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    },
+    "controller.render.kt_sig_rgb_diag.query_overlay": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ],
+      "overlay_color": {
+        "r": "query.property('kt_sig_rgb_diag:red') / 255",
+        "g": "query.property('kt_sig_rgb_diag:green') / 255",
+        "b": "query.property('kt_sig_rgb_diag:blue') / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_sig_rgb_diag.vertex_color": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ],
+      "color": {
+        "r": 1,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    },
+    "controller.render.kt_sig_rgb_diag.query_vertex": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.source"
+      ],
+      "color": {
+        "r": "query.property('kt_sig_rgb_diag:red') / 255",
+        "g": "query.property('kt_sig_rgb_diag:green') / 255",
+        "b": "query.property('kt_sig_rgb_diag:blue') / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_sig_rgb_diag.baked_red": {
+      "geometry": "Geometry.liquid",
+      "materials": [
+        {
+          "*": "Material.liquid"
+        }
+      ],
+      "textures": [
+        "Texture.baked_red"
+      ]
+    }
+  }
+}

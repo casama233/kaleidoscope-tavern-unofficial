@@ -1,0 +1,7 @@
+kill @e[type=kt_sig_rgb_diag:baseline]
+kill @e[type=kt_sig_rgb_diag:mask_color]
+kill @e[type=kt_sig_rgb_diag:overlay]
+kill @e[type=kt_sig_rgb_diag:query_overlay]
+kill @e[type=kt_sig_rgb_diag:vertex_color]
+kill @e[type=kt_sig_rgb_diag:query_vertex]
+kill @e[type=kt_sig_rgb_diag:baked_red]

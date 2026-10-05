@@ -50,7 +50,7 @@ atlas.save(RP / 'textures/kt_runtime/signature/mixtures.png')
 material_file = RP / 'materials/entity.material'
 materials = read(material_file) if material_file.exists() else {'materials': {'version': '1.0.0'}}
 materials['materials']['kt_signature_animated:entity_alphatest_one_sided'] = {'+defines': ['USE_UV_ANIM']}
-materials['materials']['kt_signature_rgb:entity_alphatest_one_sided'] = {'+defines': ['USE_UV_ANIM', 'USE_COLOR_MASK']}
+materials['materials'].pop('kt_signature_rgb:entity_alphatest_one_sided', None)
 write(material_file, materials)
 
 (BP / 'scripts/data/signature-palette.js').write_text(
@@ -65,7 +65,9 @@ for name in ('runtime_signature_cup', 'rig_signature_color'):
     d = j['minecraft:client_entity']['description']
     # One-sided alpha test keeps alpha=0 glass holes and culls opposite faces.
     d['materials']['liquid'] = 'kt_signature_animated'
-    d['materials']['liquid_rgb'] = 'kt_signature_rgb'
+    # Direct built-in tint material: custom USE_COLOR_MASK defines were ignored
+    # by the actual 1.26.52.3 native client during the public 0.6.102 check.
+    d['materials']['liquid_rgb'] = 'entity_alphatest_change_color'
     d['textures'] = {f'frame_{i}': f'textures/kt_runtime/signature/frame_{i}' for i in range(6)}
     d['textures']['mixtures'] = 'textures/kt_runtime/signature/mixtures'
     write(p, j)
@@ -74,18 +76,18 @@ p = RP / 'render_controllers/signature_tint.json'
 j = read(p)
 c = j['render_controllers']['controller.render.kt_assets_a17.signature_tint']
 c.pop('overlay_color', None)
-c['arrays'] = {'materials': {'Array.liquid_materials': ['Material.liquid', 'Material.liquid_rgb']}}
+c['arrays'] = {'materials': {'Array.liquid_materials': ['Material.liquid', 'Material.liquid_rgb']},
+               'textures': {'Array.source_frames': [f'Texture.frame_{i}' for i in range(6)]}}
 c['materials'] = [{'*': "Array.liquid_materials[query.property('kt_art:palette') < 0]"}]
-c['textures'] = ['Texture.mixtures']
-index = f"((query.property('kt_art:palette') < 0 ? {palette.index(0xffffff)} : query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
-c['uv_anim'] = {'scale': [32 / atlas.width, 32 / atlas.height], 'offset': [
-    f'(math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
-    f'(math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
-# Third-party inputs may use arbitrary RGB values outside Java's tag palette.
-# Preserve their actual RGB rather than silently choosing the nearest color.
-# Use the WHITE atlas entry and multiplicative mask for arbitrary RGB. A full
-# alpha overlay flattened the shaded liquid; palette zero was also black.
-# Java's baked mixtures keep their existing material and unchanged atlas bytes.
+fallback = "query.property('kt_art:palette') < 0"
+c['textures'] = [f'{fallback} ? Array.source_frames[math.mod(math.floor(q.life_time * 10), 6)] : Texture.mixtures']
+index = "(math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
+# The built-in tint route uses full source-frame textures and identity UVs. It
+# does not depend on adding USE_UV_ANIM to a custom masked material. Exact Java
+# mixtures keep the same atlas material and sampling coordinates as before.
+c['uv_anim'] = {'scale': [f'{fallback} ? 1 : {32 / atlas.width}', f'{fallback} ? 1 : {32 / atlas.height}'], 'offset': [
+    f'{fallback} ? 0 : (math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
+    f'{fallback} ? 0 : (math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
 c['color'] = {channel: f"query.property('kt_art:palette') < 0 ? query.property('kt_art:{name}') / 255 : 1"
                       for channel, name in [('r', 'red'), ('g', 'green'), ('b', 'blue')]}
 c['color']['a'] = 1

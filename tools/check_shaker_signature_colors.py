@@ -29,9 +29,14 @@ controller = json.loads((RP / 'render_controllers/signature_tint.json').read_tex
 assert 'overlay_color' not in controller
 assert controller['color']['a'] == 1
 assert controller['arrays']['materials']['Array.liquid_materials'] == ['Material.liquid', 'Material.liquid_rgb']
-assert '? 335 :' in controller['uv_anim']['offset'][0], 'Arbitrary RGB must sample the shaded WHITE entry, never black'
+assert 'Array.source_frames' in controller['textures'][0], 'Arbitrary RGB must sample shaded source frames, never black'
+assert all('? 1 :' in scale for scale in controller['uv_anim']['scale'])
+assert all('? 0 :' in offset for offset in controller['uv_anim']['offset'])
 materials = json.loads((RP / 'materials/entity.material').read_text())['materials']
-assert materials['kt_signature_rgb:entity_alphatest_one_sided']['+defines'] == ['USE_UV_ANIM', 'USE_COLOR_MASK']
+assert 'kt_signature_rgb:entity_alphatest_one_sided' not in materials
+for name in ('runtime_signature_cup', 'rig_signature_color'):
+    entity = json.loads((RP / f'entity/{name}.entity.json').read_text())['minecraft:client_entity']['description']
+    assert entity['materials']['liquid_rgb'] == 'entity_alphatest_change_color'
 assert materials['kt_signature_animated:entity_alphatest_one_sided']['+defines'] == ['USE_UV_ANIM']
 source = Image.open(RP / 'textures/kaleidoscope_tavern_jar/block/mixology/signature_cocktail.png').convert('RGBA')
 atlas = Image.open(RP / 'textures/kt_runtime/signature/mixtures.png').convert('RGBA')
@@ -39,5 +44,7 @@ for frame in range(6):
     tile_index = 335 * 6 + frame
     x, y = (tile_index % 48) * 34 + 1, (tile_index // 48) * 34 + 1
     assert atlas.crop((x, y, x + 32, y + 32)).tobytes() == source.crop((0, frame * 32, 32, (frame + 1) * 32)).tobytes()
+    texture = Image.open(RP / f'textures/kt_runtime/signature/frame_{frame}.png').convert('RGBA')
+    assert texture.tobytes() == source.crop((0, frame * 32, 32, (frame + 1) * 32)).tobytes()
 print(json.dumps({'java_colors': 16, 'slot_controls': 51, 'slot_sprite_pixels': 'passed', 'signature_white_fallback_frames': 6,
                   'multiplicative_rgb_contract': 'passed', 'client_rendered': False}))

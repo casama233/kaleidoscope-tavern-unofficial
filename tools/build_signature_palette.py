@@ -50,6 +50,7 @@ atlas.save(RP / 'textures/kt_runtime/signature/mixtures.png')
 material_file = RP / 'materials/entity.material'
 materials = read(material_file) if material_file.exists() else {'materials': {'version': '1.0.0'}}
 materials['materials']['kt_signature_animated:entity_alphatest_one_sided'] = {'+defines': ['USE_UV_ANIM']}
+materials['materials']['kt_signature_rgb:entity_alphatest_one_sided'] = {'+defines': ['USE_UV_ANIM', 'USE_COLOR_MASK']}
 write(material_file, materials)
 
 (BP / 'scripts/data/signature-palette.js').write_text(
@@ -64,6 +65,7 @@ for name in ('runtime_signature_cup', 'rig_signature_color'):
     d = j['minecraft:client_entity']['description']
     # One-sided alpha test keeps alpha=0 glass holes and culls opposite faces.
     d['materials']['liquid'] = 'kt_signature_animated'
+    d['materials']['liquid_rgb'] = 'kt_signature_rgb'
     d['textures'] = {f'frame_{i}': f'textures/kt_runtime/signature/frame_{i}' for i in range(6)}
     d['textures']['mixtures'] = 'textures/kt_runtime/signature/mixtures'
     write(p, j)
@@ -71,19 +73,22 @@ for name in ('runtime_signature_cup', 'rig_signature_color'):
 p = RP / 'render_controllers/signature_tint.json'
 j = read(p)
 c = j['render_controllers']['controller.render.kt_assets_a17.signature_tint']
-c.pop('color', None)
-c.pop('arrays', None)
+c.pop('overlay_color', None)
+c['arrays'] = {'materials': {'Array.liquid_materials': ['Material.liquid', 'Material.liquid_rgb']}}
+c['materials'] = [{'*': "Array.liquid_materials[query.property('kt_art:palette') < 0]"}]
 c['textures'] = ['Texture.mixtures']
-index = "(math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
+index = f"((query.property('kt_art:palette') < 0 ? {palette.index(0xffffff)} : query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
 c['uv_anim'] = {'scale': [32 / atlas.width, 32 / atlas.height], 'offset': [
     f'(math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
     f'(math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
 # Third-party inputs may use arbitrary RGB values outside Java's tag palette.
 # Preserve their actual RGB rather than silently choosing the nearest color.
-# Native overlay is only the fallback; all Java mixtures retain texture shading.
-c['overlay_color'] = {channel: f"query.property('kt_art:{name}') / 255"
+# Use the WHITE atlas entry and multiplicative mask for arbitrary RGB. A full
+# alpha overlay flattened the shaded liquid; palette zero was also black.
+# Java's baked mixtures keep their existing material and unchanged atlas bytes.
+c['color'] = {channel: f"query.property('kt_art:palette') < 0 ? query.property('kt_art:{name}') / 255 : 1"
                       for channel, name in [('r', 'red'), ('g', 'green'), ('b', 'blue')]}
-c['overlay_color']['a'] = "query.property('kt_art:palette') < 0 ? 1 : 0"
+c['color']['a'] = 1
 write(p, j)
 p = BP / 'entities/signature_cup_visual.json'
 j = read(p)

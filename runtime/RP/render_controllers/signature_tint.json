@@ -28,7 +28,7 @@
       "geometry": "Geometry.liquid",
       "materials": [
         {
-          "*": "Material.liquid"
+          "*": "Array.liquid_materials[query.property('kt_art:palette') < 0]"
         }
       ],
       "textures": [
@@ -40,15 +40,23 @@
           0.022408963585434174
         ],
         "offset": [
-          "(math.mod((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)), 48) * 34 + 1) / 1632",
-          "(math.floor((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)) / 48) * 34 + 1) / 1428"
+          "(math.mod(((query.property('kt_art:palette') < 0 ? 335 : query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)), 48) * 34 + 1) / 1632",
+          "(math.floor(((query.property('kt_art:palette') < 0 ? 335 : query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)) / 48) * 34 + 1) / 1428"
         ]
       },
-      "overlay_color": {
-        "r": "query.property('kt_art:red') / 255",
-        "g": "query.property('kt_art:green') / 255",
-        "b": "query.property('kt_art:blue') / 255",
-        "a": "query.property('kt_art:palette') < 0 ? 1 : 0"
+      "arrays": {
+        "materials": {
+          "Array.liquid_materials": [
+            "Material.liquid",
+            "Material.liquid_rgb"
+          ]
+        }
+      },
+      "color": {
+        "r": "query.property('kt_art:palette') < 0 ? query.property('kt_art:red') / 255 : 1",
+        "g": "query.property('kt_art:palette') < 0 ? query.property('kt_art:green') / 255 : 1",
+        "b": "query.property('kt_art:palette') < 0 ? query.property('kt_art:blue') / 255 : 1",
+        "a": 1
       }
     }
   }

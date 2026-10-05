@@ -22,3 +22,17 @@ The existing item dye normalization is correct and remains unchanged.
 Focused checks are recorded after the initial Git checkpoint. They verify source,
 protocol and generated texels. Native renderer, Java pixel comparison and complete
 family acceptance are not claimed here.
+
+## Focused validation after the remote Git checkpoint
+
+- 4913 complete HUD color/empty combinations, 112 progress states and foreign
+  actionbar preservation passed
+- All 48 nonempty color sprites match source-mask RGB and alpha texels
+- All 4096 three-input Java RGB combinations retain exact integer means and
+  an existing atlas entry; RESET exclusion and arbitrary RGB also passed
+- All six white fallback atlas frames match the source texture exactly
+- Canonical baseline 0.6.102 release check passed from a clean commit
+
+Initial published commit ebaf00febd43c3e1e39794eb110681670d43ea7a has tree
+270cdf316b56ba05b04a3433918f2b830e02ff1b, identical to local checkpoint
+5b52cf6062621ebace7189fb6a0ac91551e9d6c5. Every changed blob SHA was checked.

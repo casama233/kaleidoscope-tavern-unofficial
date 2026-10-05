@@ -1,9 +1,12 @@
 {
-  "version": "0.6.95",
-  "tag": "v0.6.95-beta.1",
-  "title": "森羅物語：酒館 0.6.95 測試版 — 龍頭單次回收與已保存修復",
+  "version": "0.6.105",
+  "tag": "v0.6.105-beta.1",
+  "title": "森羅物語：酒館 0.6.105 測試版 — 四項修復與已知限制",
   "prerelease": true,
-  "expected_archive_sha256": "0e58b85c5bc25611811e9cfe43ae636fbd17e5a5232884d39ea5dcf992f4e62a",
-  "validation_evidence": "docs/LAUNCH-VALIDATION-0.6.95.json",
-  "client_acceptance": "pending"
+  "expected_archive_sha256": "196c04453fd35a85ea0c6b05ec1981694d677ab59a898fc0356449e313369471",
+  "validation_evidence": "docs/PUBLIC-TEST-VALIDATION-0.6.105.json",
+  "client_acceptance": "bounded_pass_with_known_issues",
+  "full_client_acceptance": "pending",
+  "production_ready": false,
+  "live_deployment": false
 }

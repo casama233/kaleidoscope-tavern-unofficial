@@ -48,6 +48,7 @@ def finalize_receipt():
     if CONFIG.get('identity_migration'):reports.append('saved-world-identity-migration.json')
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
+    if CONFIG.get('preserved_additions'):reports.append('preserved-additions-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}

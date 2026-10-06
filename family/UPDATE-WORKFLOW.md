@@ -116,3 +116,15 @@ Git 外的獨立審查證據，目前僅支援既有 AMW 2.4.18→2.4.19 的果�
 翻譯審查的 `canonical_preserved_commit` 只引用 separately validated integration
 的精確 history preimage，保留已觀察內容；後續 canonical 功能變更另外通過
 `extension_validation` 的全檔與原生功能驗證，不能偽裝成翻譯修補。
+# Reviewing an unrelated pack already added to live
+
+`preserved_additions` may name a schema-1 JSON review with `source_provenance`,
+`review_reason`, the exact `observed_inventory` and a `packs` map keyed by each
+new UUID. Every entry records a review `reason` and the original single-pack
+`artifact` (`path`, `sha256`). This is an explicit source review for assembly,
+not approval of the old stack. The tool requires the observed pack to match
+every original archive file, retains all previous identities and their relative
+order, and still rejects existing gameplay drift. Managed UUIDs cannot use it.
+Archives and review inputs are frozen at the build boundary. The new complete
+candidate must pass normal static, native, fresh stopped-world and guard gates;
+the original policy and live files remain unchanged until authorized deployment.

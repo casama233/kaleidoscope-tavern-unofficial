@@ -223,11 +223,13 @@ def check_live_against_policy(inventory):
     policy = read(Q / 'senluo-policy.json')
     receipt = read(policy['approved_receipt'])
     expected = {pack['uuid']: pack for pack in receipt['packs']}
-    assert {pack['uuid'] for pack in inventory['packs']} == set(expected), 'Complete stack changed; reconcile sources'
+    from family_update.preserved_additions import review
+    expected,order=review(inventory,expected,receipt['order'],policy['managed_uuids'])
+    assert all([ref['pack_id'] for ref in inventory['refs'][side]]==uids for side,uids in order.items()), 'Unreviewed pack order change'
     if not G['audit'](W, policy)['ok'] or any(pack['files']!=expected[pack['uuid']]['files'] or pack['version']!=expected[pack['uuid']]['version'] for pack in inventory['packs']):
         from family_update.preserved_reconciliation import reconcile
         reviewed,dependency_pins=reconcile(inventory,expected)
-        validate_translation_reconciliation(inventory,reviewed,receipt['order'],dependency_pins)
+        validate_translation_reconciliation(inventory,reviewed,order,dependency_pins)
         return policy
     for pack in inventory['packs']:
         row = expected[pack['uuid']]
@@ -236,7 +238,11 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    return {key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions'] if CONFIG.get(key)}
+    if CONFIG.get('preserved_additions'):
+        for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
+            result['preserved_archive:'+uid]=sha(row['artifact']['path'])
+    return result
 
 
 def validate_translation_reconciliation(inventory,expected,order,dependency_pins=None):

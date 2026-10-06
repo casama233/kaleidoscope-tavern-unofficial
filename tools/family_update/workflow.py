@@ -178,6 +178,8 @@ def record_static(verified_candidate=None):
     ci_path = R / 'ci-evidence.json'
     evidence = {'schema': 1, 'recorded_at': now(), 'ok': proof['ok'], 'candidate_receipt_sha256': build['candidate_receipt_sha256'], 'pr_checks_verified': True, 'sources': build['sources'], 'checks': [{'name': 'Merged PR checks for exact canonical trees', 'kind': 'actual_github_ci', 'exit_code': 0, 'log': str(ci_path), 'sha256': sha(ci_path)}], 'reports': [report_ref(ci_path), report_ref(R / 'build-evidence.json'), report_ref(R / 'compatibility-report.json')], 'local_functional_suites_rerun': False, 'client': False}
     evidence['reports'].extend(extension_reports)
+    if CONFIG.get('preserved_additions'):
+        evidence['reports'].extend([report_ref(Path(CONFIG['preserved_additions'])),report_ref(R/'preserved-additions-check.json')])
     if CONFIG.get('preserved_reconciliation'):
         review=read(Path(CONFIG['preserved_reconciliation']))
         evidence['reports'].extend([report_ref(Path(CONFIG['preserved_reconciliation'])),report_ref(R/'preserved-reconciliation-check.json'),review['tested_family_receipt'],review['native_report'],*review['native_logs']])

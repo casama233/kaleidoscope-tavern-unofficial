@@ -23,9 +23,10 @@ def main(argv=None):
     inputs = engine_inputs()
     assert inputs == read(R / 'exact-engine/native-report.json')['engine_inputs'], 'Engine inputs differ from the exact candidate test'
     original = read(R / 'production-before/inventory.json')
-    assert {p['uuid'] for p in original['packs']} == {p['uuid'] for p in receipt['packs']}, 'UUID migration must be explicitly rehearsed by family_saved_world.py'
+    from family_update.identity_migration import prepare_world
+    rehearsal_source,migration=prepare_world(snapshot,receipt,original)
     setup_engine(engine, 'Saved World QA', args.port)
-    world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(snapshot, world)
+    world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(rehearsal_source, world)
     recovery=None
     if CONFIG.get('container_recovery_plan'):
         recovery=recover_world(world,read(Path(CONFIG['container_recovery_plan'])))
@@ -57,7 +58,7 @@ def main(argv=None):
     assert inputs == engine_inputs(), 'Engine inputs changed during saved-world rehearsal'
     assert hashes(snapshot)==backup['files'], 'Original backup mutated during rehearsal'
     success=len(runs)==2 and all(row['ok'] for row in runs)
-    report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':[],'same_author_and_owned_uuids':True,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
+    report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':migration['uuid_mapping'] if migration else {},'same_author_and_owned_uuids':migration is None,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
     atomic(R/'saved-world-report.json',report)
     atomic(R/'saved-world-container-inventories.json',{'before':containers_before,'after':containers_after,'recovery':recovery,'retained':retained,'native_loaded_recovery_positions':bool(points)})
     return 0 if success else 1

@@ -228,7 +228,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    return {key: sha(Path(CONFIG[key])) for key in ['translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
+    return {key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
 
 
 def validate_translation_reconciliation(inventory,expected,order,dependency_pins=None):

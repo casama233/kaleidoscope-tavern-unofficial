@@ -16,7 +16,8 @@ def preflight():
     record_static(verified_candidate=receipt)
     verify_native(verified_candidate=receipt)
     quality(C, receipt)
-    assert {p['uuid'] for p in receipt['packs']} == {p['uuid'] for p in original['packs']}, 'UUID migration requires additional reviewed design'
+    from family_update.identity_migration import candidate_plan
+    candidate_plan(receipt, original)
     source_state(verify_remote=True)
     agents = Path(str(AUTHORIZATION)).read_text()
     assert '使用者已持續授權' in agents and '供使用者直接測試開發效果' in agents and '`deferred_client_acceptance`' in agents, 'Re-read current deployment authorization'
@@ -44,6 +45,7 @@ def finalize_receipt():
     reports=['build-evidence.json','static-evidence.json','compatibility-report.json','exact-engine/native-report.json','saved-world-report.json','production-before/backup-receipt.json','handoff-authorization.json']
     reports.append('saved-world-container-inventories.json')
     if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
+    if CONFIG.get('identity_migration'):reports.append('saved-world-identity-migration.json')
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
@@ -88,10 +90,10 @@ def recover_after_failure(original,changed,retired,installed,rollback_failed=Fal
     phase='inspect_failure'
     try:
         assert_lease()
-        if (R/'production-container-recovery.json').exists():
+        if (R/'production-container-recovery.json').exists() or (R/'production-identity-migration.json').exists():
             if summary()['status']!='STOPPED':action('stop')
             assert summary()['status']=='STOPPED', 'Recovered containers must remain stopped after a failed deployment'
-            raise RecoveryRequired('Recovered inventories require the repaired runtime; retain stopped state instead of restarting an incompatible rollback')
+            raise RecoveryRequired('Migrated owners or recovered inventories require the compatible runtime; retain stopped state instead of restarting an incompatible rollback')
         if rollback_failed:
             raise RecoveryRequired('The installation rollback failed; operator recovery is required before any restart')
         if changed:
@@ -122,6 +124,9 @@ def install(receipt,original):
     verify_server_binding()
     verify_candidate_sources()
     policy,incoming,family=prepare_admission(receipt,original)
+    from family_update.identity_migration import candidate_plan
+    migration=candidate_plan(receipt,original)
+    reverse={row['new_uuid']:row['old_uuid'] for row in (migration or {}).get('packs',[])}
     prior={p['uuid']:p for p in original['packs']}; foreign={p['uuid']:p for p in receipt['packs'] if p['source']['owner']=='preserved'}
     for uid,row in foreign.items(): assert hashes(prior[uid]['path'])==row['files'], 'Preserved pack changed'
     index=read(Q.parent/'addon_localizations/index.json')
@@ -133,7 +138,7 @@ def install(receipt,original):
         atomic(Q/'senluo-policy.json',policy)
         runpy.run_path(str(Q/'policy.py'))['validate_incoming'](incoming,set(prior),True)
         for p in family:
-            old=prior[p['uuid']]; source=Path(old['path']); target=rollback/(old['side']+'_packs')/source.name; target.parent.mkdir(parents=True,exist_ok=True)
+            old=prior[reverse.get(p['uuid'],p['uuid'])]; source=Path(old['path']); target=rollback/(old['side']+'_packs')/source.name; target.parent.mkdir(parents=True,exist_ok=True)
             os.replace(source,target); retired.append((target,source))
         for p in family:
             source=staged/(p['side']+'_packs')/p['uuid']; target=W/(p['side']+'_packs')/p['uuid']; assert not target.exists(); os.replace(source,target); installed.append(target)
@@ -148,16 +153,18 @@ def install(receipt,original):
             assert restored==read(R/'saved-world-container-recovery.json'), 'Live restoration differs from rehearsed records'
             atomic(R/'production-container-recovery.json',restored)
             os.replace(W/'db',R/'production-original-db');os.replace(stage/'db',W/'db')
+        from family_update.identity_migration import adopt_world
+        adopt_world(receipt,original)
         policy['installed']={'status':'pending_client_acceptance','receipt':str(R/'reviewed-family-receipt.json'),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'installed_at':now(),'packs':[{**p,'directory':p['uuid']} for p in family],'refs':{side:[p for p in read(W/('world_'+side+'_packs.json')) if p['pack_id'] in policy['managed_uuids']] for side in ['behavior','resource']}}
         policy['hold_reason']='依使用者持續授權更新 live 供開發效果真人測試；完整家族 static、BDS、停服一致存檔驗證已通過。client=false，production_ready=false，仍需真人聲畫與玩法驗收。'
         atomic(Q/'senluo-policy.json',policy)
         drift=G['audit'](W,policy); assert drift['ok']; atomic(R/'production-drift.json',drift)
         valid=runpy.run_path(str(Q/'policy.py'))['validate_world'](W); assert valid['ok']; atomic(R/'production-quality.json',valid)
         atomic(R/'rollback-map.json',{'retired':[[str(a),str(b)] for a,b in retired],'installed':[str(p) for p in installed],'original_inventory':str(R/'production-before/inventory.json'),'backup':str(R/'production-snapshot')})
-        atomic(R/'deployment-result.json',{'schema':1,'state':'installed_stopped','versions':versions(receipt),'family_packs':len(family),'preserved_packs':len(foreign),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'assembled_receipt_sha256':sha(C/'family-receipt.json'),'guard_admission_passed':True,'original_database_untouched_during_install':not bool(CONFIG.get('container_recovery_plan')),'reviewed_container_recovery':bool(CONFIG.get('container_recovery_plan')),'original_level_dat_untouched_during_install':True,'rollback':str(rollback),'client':False,'production_ready':False})
+        atomic(R/'deployment-result.json',{'schema':1,'state':'installed_stopped','versions':versions(receipt),'family_packs':len(family),'preserved_packs':len(foreign),'receipt_sha256':sha(R/'reviewed-family-receipt.json'),'assembled_receipt_sha256':sha(C/'family-receipt.json'),'guard_admission_passed':True,'original_database_untouched_during_install':not bool(CONFIG.get('container_recovery_plan') or CONFIG.get('identity_migration')),'reviewed_identity_migration':bool(CONFIG.get('identity_migration')),'reviewed_container_recovery':bool(CONFIG.get('container_recovery_plan')),'original_level_dat_untouched_during_install':True,'rollback':str(rollback),'client':False,'production_ready':False})
         return retired,installed
     except BaseException as install_error:
-        if (R/'production-container-recovery.json').exists():
+        if (R/'production-container-recovery.json').exists() or (R/'production-identity-migration.json').exists():
             raise RecoveryRequired('Container recovery has begun; keep the compatible candidate stopped for recovery') from install_error
         try:
             restore_packs(original,retired,installed)

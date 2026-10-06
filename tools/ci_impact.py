@@ -13,11 +13,11 @@ FAMILY_TOOLS = {
     f"tools/{name}.py"
     for name in (
         "family_bundle", "family_guard", "family_native_check", "family_saved_world",
-        "family_upstream_watch", "family_update", "test_family_bundle", "test_family_guard",
+        "family_upstream_watch", "family_java_upstream_watch", "test_family_java_upstream_watch", "family_update", "test_family_bundle", "test_family_guard",
         "test_family_saved_world", "test_family_upstream_watch",
     )
 }
-FAMILY_DATA = {"family/upstream.lock.json", "family/upstream-feedback.json"}
+FAMILY_DATA = {"family/upstream.lock.json", "family/upstream-feedback.json", "family/java-upstream.json"}
 ROOT_DOCS = {"AGENTS.md", "README.md", "README.zh-TW.md", "CONTRIBUTING.md"}
 
 

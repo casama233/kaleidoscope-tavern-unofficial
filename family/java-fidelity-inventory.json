@@ -2911,8 +2911,10 @@
         {
           "minecraft": "1.21.1",
           "loader": "NeoForge",
-          "source_reference_file_ids": [],
-          "source_scope": "Distinct NeoForge branch; no full current branch adaptation claimed"
+          "source_reference_file_ids": [
+            8350856
+          ],
+          "source_scope": "Current 1.2.0 NeoForge source mixology and Java 24-bit effect probability adaptation; full effects/interaction/render/audio parity still pending"
         }
       ]
     },
@@ -2937,7 +2939,7 @@
             8947041,
             9066406
           ],
-          "source_scope": "1.1.8 base, selected 1.1.9 art/behavior and current 1.1.11 mixology/tag/Highball adaptation; flight and other gameplay gaps remain"
+          "source_scope": "1.1.8 base, selected 1.1.9 art/behavior, 1.1.11 mixology/tag/Highball and source use-audio/crit/float repairs; flight, knockback, outlines, full entity effects and other gaps remain"
         },
         {
           "minecraft": "26.1.2",

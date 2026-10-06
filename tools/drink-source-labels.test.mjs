@@ -32,7 +32,10 @@ test('friend capability is additive and cannot erase current color/destruction c
 });
 test('source label uses owning addon key while ordinary Tavern bottles retain Tavern',()=>{
  install();const tea=qualityBottleLore(new Item('kaleidoscope_world_liquor:ice_tea_q6'));
- assert.equal(tea.at(-1).rawtext.at(-1).translate,sourceKey);assert.ok(JSON.stringify(tea[0]).includes('dark_red'));
+ assert.equal(tea.at(-1).rawtext.at(-1).translate,sourceKey);
+ // Current NeoForge 1.1.11 changes SMC/fallback ice tea from dark_red to
+ // the author's brown category. Keep the owner label while using that rule.
+ assert.equal(tea[0].rawtext.at(-1).translate,'color.kaleidoscope_tavern.brown');
  assert.equal(qualityBottleLore(new Item('kaleidoscope_tavern:vodka_q6')).at(-1).rawtext.at(-1).translate,'item.kaleidoscope_tavern.mod_name');
 });
 for(const levels of [false,true])for(const color of [false,true])for(const source of [false,true])test(`legacy merge levels=${levels}, color=${color}, hostSource=${source}`,()=>{

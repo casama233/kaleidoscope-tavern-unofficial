@@ -223,7 +223,8 @@ jobs:
           JAVA_SOURCE: ${{ github.workspace }}/java
           LIQUOR_SOURCE: ${{ github.workspace }}/world-liquor
         run: |
-          node --test tools/cocktail-recognition-source.test.mjs tools/addon-mixology-tags.test.mjs
+          node --test tools/cocktail-recognition-source.test.mjs tools/addon-mixology-tags.test.mjs tools/universal-mixology.test.mjs
+          python3 tools/check_mixology_java_oracle.py
           git diff --exit-code -- runtime/
       - name: Verify all four rebuilt Tavern repairs together
         working-directory: bedrock

@@ -1,4 +1,4 @@
-/** Pure C3 mixing rules. Input effects are snapshotted when poured, not re-read at serving. */
+/** Pure C3 mixing rules. Stored input identities survive movement; Java colour/effect data is read at serving. */
 import {check,id,integer,clone,utf8Bytes} from './util.js';
 import {parseBottle} from './bottles.js';
 import {validatePotionIdentity,POTION_ITEMS} from './potions.js';
@@ -16,11 +16,11 @@ export function mergeEffects(entries){
 export function inputSnapshot(itemId,registry){
  id(itemId);check(itemId!==SIGNATURE,'SIGNATURE_INPUT_NOT_ADAPTED');check(!['minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(itemId),'POTION_DATA_NOT_ADAPTED');
  const bottle=parseBottle(itemId);if(bottle)check(bottle.quality>=4,'QUALITY_TOO_LOW');
- if(SHAKER_INPUTS[itemId])return clone(SHAKER_INPUTS[itemId]);
- const external=registry?.shakerInput?.(itemId);if(external)return clone(external);
+ if(SHAKER_INPUTS[itemId])return {...clone(SHAKER_INPUTS[itemId]),...registry?.ingredientColor?.(itemId)};
+ const external=registry?.shakerInput?.(itemId);if(external)return {...clone(external),...registry?.ingredientColor?.(itemId)};
  check(!bottle,'NOT_MIXABLE_DRINK');check(registry?.acceptsShakerInput(itemId),'NOT_SHAKER_INGREDIENT');
  // Backward-compatible recipe-only ingredients remain neutral. Add-ons that model drinks should register shakerInputs.
- return {item:itemId,container:null,color:0xffffff,colorIgnored:true,effects:[]};
+ return {item:itemId,container:null,color:0xffffff,colorIgnored:true,effects:[],...registry?.ingredientColor?.(itemId)};
 }
 export function emptyShaker(){return {schema:1,revision:0,slots:[],result:null};}
 export function validateResult(r){check(r&&typeof r==='object','BAD_COCKTAIL_RESULT');id(r.item);id(r.carrier);if(r.recipeId)id(r.recipeId);if(r.item===SIGNATURE)validatePayload(r.payload);else check(r.payload===undefined,'UNEXPECTED_PAYLOAD');return r;}
@@ -40,15 +40,16 @@ export function signaturePayload(slots){
  const color=colored.length?[16,8,0].reduce((out,shift)=>out|(Math.trunc(colored.reduce((n,s)=>n+((s.color>>shift)&255),0)/colored.length)<<shift),0):0xffffff;
  return validatePayload({schema:1,color,effects:mergeEffects(slots.flatMap(s=>s.effects)),ingredients:slots.map(s=>s.item)});
 }
-export function finishShake(s,ticks,recipe){
+export function currentMixInputs(slots,registry){return registry?slots.map(slot=>slot.potion?clone(slot):{...clone(slot),...inputSnapshot(slot.item,registry)}):slots;}
+export function finishShake(s,ticks,recipe,registry){
  validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length===3,'NEED_THREE_INGREDIENTS');const band=timingBand(ticks);if(band==='abort')return clone(s);
  let result;
  if(band==='recipe'&&recipe){check(recipe.kind==='shaker','BAD_SHAKER_RECIPE');result={item:recipe.output.item,carrier:recipe.carrier,recipeId:recipe.id};}
  else if(band==='mystery')result={item:MYSTERY,carrier:EMPTY_CUP};
- else result={item:SIGNATURE,carrier:EMPTY_CUP,payload:signaturePayload(s.slots)};
+ else result={item:SIGNATURE,carrier:EMPTY_CUP,payload:signaturePayload(currentMixInputs(s.slots,registry))};
  return validateShaker({...clone(s),revision:s.revision+1,result});
 }
-export function serveShaker(s){validateShaker(s);check(s.result,'NOT_READY');return {result:clone(s.result),state:{schema:1,revision:s.revision+1,slots:[],result:null}};}
+export function serveShaker(s,registry){validateShaker(s);check(s.result,'NOT_READY');const result=clone(s.result);if(result.item===SIGNATURE&&registry)result.payload=signaturePayload(currentMixInputs(s.slots,registry));return {result,state:{schema:1,revision:s.revision+1,slots:[],result:null}};}
 export function isCupItem(item){return item===EMPTY_CUP||Object.hasOwn(COCKTAILS,item??'');}
 export function validateCup(s){check(s&&s.schema===1,'CUP_SCHEMA');integer(s.revision,0,2147483647);integer(s.facing,0,3);check(isCupItem(s.item),'NOT_CUP');if(s.item===SIGNATURE)validatePayload(s.payload);else check(s.payload===undefined,'UNEXPECTED_PAYLOAD');return s;}
 export function cupKey(d,p){check(/^minecraft:[a-z_]+$/.test(d),'INVALID_DIMENSION');check([p.x,p.y,p.z].every(Number.isInteger),'INVALID_LOCATION');return `kt:cup/${d.split(':')[1]}/${p.x}_${p.y}_${p.z}`;}

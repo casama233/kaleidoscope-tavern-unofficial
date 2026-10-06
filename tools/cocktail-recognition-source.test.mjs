@@ -15,7 +15,8 @@ const {payload}=await import(pathToFileURL(path.join(liquor,'runtime/BP/scripts/
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const coreTags=path.join(java,'src/generated/resources/data/kaleidoscope_tavern/tags/items');
 const coreRecipes=path.join(java,'src/generated/resources/data/kaleidoscope_tavern/recipes/shaker');
-const addonTags=path.join(liquor,'data/java-parity/neoforge-1.1.9/cocktail-tags');
+const current=!!payload.shakerColors?.length;
+const addonTags=path.join(liquor,current?'data/java-parity/neoforge-1.1.11/cocktail-tags':'data/java-parity/neoforge-1.1.9/cocktail-tags');
 const addonRecipes=path.join(liquor,'upstream/data/kaleidoscope_world_liquor/recipe/shaker');
 const sourceTags={};
 function loadTags(root){
@@ -25,6 +26,7 @@ function loadTags(root){
    const item=(typeof raw==='string'?raw:raw.id).replace(/^smc:/,'kaleidoscope_world_liquor:');
    sourceTags[item]=[...new Set([...(sourceTags[item]??[]),tag])].sort();
   }
+  for(const raw of read(path.join(root,file)).remove??[]){const item=typeof raw==='string'?raw:raw.id;sourceTags[item]=(sourceTags[item]??[]).filter(value=>value!==tag);}
  }
 }
 loadTags(coreTags);
@@ -33,7 +35,7 @@ loadTags(addonTags);
 const sourceInputTags=item=>sourceTags[item.replace(/_q[4-6]$/,'')]??[];
 const inputs=[...Object.values(SHAKER_INPUTS),{item:'minecraft:potion'},...payload.shakerInputs];
 const allRecipes=[...SHAKER_RECIPES,...payload.recipes.filter(x=>x.kind==='shaker')];
-const addonInputPayload={api:1,source:payload.source,version:payload.version,shakerInputs:payload.shakerInputs};
+const addonInputPayload={api:1,source:payload.source,version:payload.version,shakerInputs:payload.shakerInputs,shakerColors:payload.shakerColors,itemTagChanges:payload.itemTagChanges};
 const permutations=([a,b,c])=>[[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]];
 test('core categories equal all 16 primary Java tag files',()=>{
  assert.equal(fs.readdirSync(coreTags).filter(x=>/^cocktail_ingredient_.+\.json$/.test(x)).length,16);
@@ -44,10 +46,10 @@ test('all 56 addon descriptors retain independently sourced categories',()=>{
  assert.equal(payload.shakerInputs.length,56);
  for(const input of payload.shakerInputs)assert.deepEqual(input.ingredientTags,sourceInputTags(input.item),input.item);
 });
-test('coverage remains exactly 12 core and 14 addon declared recipes',()=>{
- assert.equal(SHAKER_RECIPES.length,12);assert.equal(allRecipes.length,26);
+test('coverage equals pinned core and selected current addon source recipes',()=>{
+ assert.equal(SHAKER_RECIPES.length,12);assert.equal(allRecipes.length,12+(current?18:14));
  assert.equal(fs.readdirSync(coreRecipes).filter(x=>x.endsWith('.json')).length,12);
- assert.equal(fs.readdirSync(addonRecipes).filter(x=>x.endsWith('.json')).length,14);
+ assert.equal(fs.readdirSync(addonRecipes).filter(x=>x.endsWith('.json')).length,current?18:14);
 });
 for(const recipe of allRecipes)test(recipe.id+' matches source categories and every accepted candidate in six orders',()=>{
  const root=recipe.id.startsWith(payload.source+':')?addonRecipes:coreRecipes;

@@ -17,14 +17,18 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
  vodka:'white',whiskey:'white',rum:'white'
 });
 
-export function qualityBottleLore(item,legacyLevels=false,showColor=true,legacySource=false){
+let categoryResolver,previousCategoryResolver;
+export function configureBottleCategories(resolve,previous){const old=categoryResolver,oldPrevious=previousCategoryResolver;categoryResolver=resolve;previousCategoryResolver=previous;return()=>{categoryResolver=old;previousCategoryResolver=oldPrevious;};}
+
+export function qualityBottleLore(item,legacyLevels=false,showColor=true,legacySource=false,resolve=categoryResolver){
  // The tapped melon drink has no aging or quality level in Java.
  if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
  if(!parsed)return undefined;
  const lines=[];
- const color=BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
- if(showColor&&Object.hasOwn(COCKTAIL_COLOR_CODES,color))lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${COCKTAIL_COLOR_CODES[color]}`},{translate:`color.kaleidoscope_tavern.${color}`}]});
+ const category=resolve?.(item.typeId);
+ const color=category?.ingredientColor?.split('cocktail_ingredient_').at(-1)??BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
+ if(showColor&&(Object.hasOwn(COCKTAIL_COLOR_CODES,color)||category&&!category.colorIgnored))lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${COCKTAIL_COLOR_CODES[color]??'f'}`},{translate:category?.translationKey??`color.kaleidoscope_tavern.${color}`}]});
  lines.push({rawtext:[{text:'§7'},{translate:'tooltip.kaleidoscope_tavern.bottle_block.brew_level',with:{rawtext:[{translate:`message.kaleidoscope_tavern.barrel.brew_level.${parsed.quality}`}]}}]});
  for(const entry of DRINK_EFFECTS[parsed.base]?.[parsed.quality-1]??[]){
   if(entry.probability<1)continue;
@@ -55,7 +59,8 @@ export function isLegacyManagedQualityBottleLore(item){
   const raw=item.getRawLore?.();if(!Array.isArray(raw))return false;const value=canonical(raw);
   // Both independently shipped migrations: amplifier numbering, missing color,
   // and former host-source footer. Match whole owned lore, never just its suffix.
-  return [false,true].some(levels=>[true,false].some(color=>[false,true].some(source=>value===canonical(qualityBottleLore(item,levels,color,source)))));
+  const categories=[undefined,...(previousCategoryResolver?.(item.typeId)??[]).map(category=>()=>category)];
+  return categories.some(resolve=>[false,true].some(levels=>[true,false].some(color=>[false,true].some(source=>value===canonical(qualityBottleLore(item,levels,color,source,resolve))))));
  }catch{return false;}
 }
 

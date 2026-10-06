@@ -7,7 +7,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.106",
+  "version": "0.6.109",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5868,6 +5868,10 @@ export function buildCookeryGuidePayload(registry){
  const recipes=(registry.allRecipes?.()??[]).filter(x=>x.source==='kaleidoscope_tavern'||sources.has(x.source));
  // Names are local to this projection. An extension cannot overwrite core labels.
  const itemNames=copy(GUIDE_ITEM_NAMES);
+ for(const color of registry.allIngredientColors?.()??[])for(const lc of GUIDE_LOCALES){
+  const label=color.labels?.[lc]??color.labels?.en_US;
+  if(label)itemNames[lc]['#'+color.tag]=label;
+ }
  for(const page of pages){
   const linked=recipes.find(r=>page.recipeIds?.includes(r.id)),item=page.item??linked?.output?.item??linked?.output?.byQuality?.[0];
   if(!item?.startsWith(page.source+':'))continue;

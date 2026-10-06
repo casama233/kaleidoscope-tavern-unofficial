@@ -2,11 +2,11 @@ import {normalizeFoundation} from './extension-foundation.js';
 import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
 import {coreShakerIngredientTags} from '../data/shaker-ingredient-tags.js';
-import {COCKTAIL_COLOR_CODES} from './cocktail-colors.js';
 import {expandShakerTags} from './shaker-tags.js';
+import {normalizeCategoryData,ingredientPredicate,buildCategoryCatalog,matchShakerRecipe,deriveBottleInputs,colorTag,COLOR_TAG_PREFIX} from './mixology-categories.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback','shaker_ingredient_tags','drink_source_labels']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback','shaker_ingredient_tags','drink_source_labels','shaker_color_catalog','java_ingredient_predicates','native_ingredient_tags','automatic_bottle_inputs']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -17,8 +17,10 @@ function normalizeRecipe(raw,source,fluids,itemExists){
  if(kind!=='shaker'){id(raw.fluid);check(fluids.has(raw.fluid),'UNKNOWN_FLUID');r.fluid=raw.fluid;}
  if(raw.title!==undefined)r.title=localeMap(raw.title);
  if(kind==='shaker'){
-  check(Array.isArray(raw.ingredients)&&raw.ingredients.length===3,'INVALID_SHAKER_SLOTS');r.ingredients=raw.ingredients.map(options);
-  if(raw.ingredientTags!==undefined){check(Array.isArray(raw.ingredientTags)&&raw.ingredientTags.length===3,'INVALID_INGREDIENT_TAGS');r.ingredientTags=raw.ingredientTags.map(tag=>tag===null?null:id(tag));}
+  const slots=raw.ingredients??raw.ingredientColors?.map(color=>({tag:colorTag(color)}));
+  check(Array.isArray(slots)&&slots.length===3,'INVALID_SHAKER_SLOTS');r.ingredientPredicates=slots.map(ingredientPredicate);r.ingredients=r.ingredientPredicates.map(slot=>slot.filter(rule=>rule.item).map(rule=>rule.item));
+  const tags=r.ingredientPredicates.map(slot=>slot.length===1?slot[0].tag??null:null);if(tags.some(Boolean))r.ingredientTags=tags;
+  if(raw.ingredientTags!==undefined){check(Array.isArray(raw.ingredientTags)&&raw.ingredientTags.length===3,'INVALID_INGREDIENT_TAGS');r.ingredientTags=raw.ingredientTags.map(tag=>tag===null?null:id(tag));r.ingredientPredicates=r.ingredientPredicates.map((slot,index)=>r.ingredientTags[index]?[{tag:r.ingredientTags[index]}]:slot);}
   for(const item of r.ingredients.flat()){check(itemExists(item),'UNKNOWN_ITEM',item);check(item!=='kaleidoscope_tavern:signature_cocktail','SIGNATURE_INPUT_NOT_ADAPTED');const q=/^kaleidoscope_tavern:.*_q([1-6])$/.exec(item);check(!q||Number(q[1])>=4,'QUALITY_TOO_LOW');check(!q||Object.hasOwn(SHAKER_INPUTS,item),'NOT_MIXABLE_DRINK');}
   check(raw.output&&typeof raw.output.item==='string'&&raw.output.byQuality===undefined,'INVALID_SHAKER_OUTPUT');r.output={item:id(raw.output.item)};check(itemExists(r.output.item),'UNKNOWN_ITEM',r.output.item);
   check(!['kaleidoscope_tavern:signature_cocktail','kaleidoscope_tavern:empty_glassware','kaleidoscope_tavern:shaker','minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(r.output.item),'INVALID_SHAKER_OUTPUT');
@@ -45,10 +47,11 @@ function normalizeRecipe(raw,source,fluids,itemExists){
 function normalizeShakerInput(raw,source,itemExists){
  check(raw&&typeof raw==='object','INVALID_SHAKER_INPUT');const item=own(raw.item,source);check(itemExists(item),'UNKNOWN_ITEM',item);
  let container=raw.container??null;if(container!==null){container=id(container);check(itemExists(container),'UNKNOWN_ITEM',container);}
- const color=integer(raw.color??0xffffff,0,0xffffff,'shakerInput.color'),effects=raw.effects??[];check(Array.isArray(effects)&&effects.length<=32,'BAD_INPUT_EFFECTS');
+ let color=raw.color;if(color!==undefined){if(typeof color==='string')colorTag(color);else integer(color,0,0xffffff,'shakerInput.color');}const effects=raw.effects??[];check(Array.isArray(effects)&&effects.length<=32,'BAD_INPUT_EFFECTS');
  const normalized=effects.map(e=>{check(e&&typeof e==='object','BAD_EFFECT');const effect=id(e.effect),duration=integer(e.duration,0,1000000,'duration seconds'),amplifier=integer(e.amplifier,0,255,'amplifier');check(Number.isFinite(e.probability)&&e.probability>=0&&e.probability<=1,'BAD_PROBABILITY');return {effect,duration,amplifier,probability:e.probability};});
  const ingredientTags=raw.ingredientTags??[];check(Array.isArray(ingredientTags)&&ingredientTags.length<=16,'INVALID_INPUT_TAGS');
- return {item,container,color,effects:normalized,...(ingredientTags.length?{ingredientTags:[...new Set(ingredientTags.map(id))].sort()}:{} )};
+ if(raw.ingredientColor!==undefined)colorTag(raw.ingredientColor);
+ return {item,container,...(color!==undefined?{color}:{}),effects:normalized,...(raw.ingredientColor!==undefined?{ingredientColor:raw.ingredientColor}:{}),...(raw.ingredientTags!==undefined?{ingredientTags:[...new Set(ingredientTags.map(id))].sort()}:{} )};
 }
 function normalizeContent(raw,source,itemExists){
  check(raw&&['bottle','cocktail'].includes(raw.kind),'INVALID_DRINK_CONTENT');
@@ -64,7 +67,8 @@ function normalizeContent(raw,source,itemExists){
    d.displayStates={};for(const key of ['count','facing','quality'])d.displayStates[key]=own(raw.displayStates[key],source);
    check(new Set(Object.values(d.displayStates)).size===3,'INVALID_DISPLAY_STATES');
   }
-  if(raw.color!==undefined){check(Object.hasOwn(COCKTAIL_COLOR_CODES,raw.color),'INVALID_BOTTLE_COLOR');d.color=raw.color;}
+  if(raw.color!==undefined){if(typeof raw.color==='string')colorTag(raw.color);else integer(raw.color,0,0xffffff,'bottle RGB');d.color=raw.color;}
+  if(raw.container!==undefined){d.container=id(raw.container);check(itemExists(d.container),'UNKNOWN_ITEM',d.container);}
   d.visuals={};for(const [key,value] of Object.entries(raw.visuals??{})){check(['holder_bottle_visual','tilted_rack_bottle_visual','circular_rack_bottle_visual','cellar_cabinet_bottle_visual','bar_cabinet_bottle_visual','thrown_drink'].includes(key),'INVALID_VISUAL');d.visuals[key]=own(value,source);}
  }else{d.item=own(raw.item,source);check(itemExists(d.item),'UNKNOWN_ITEM',d.item);d.effects=effectRows(raw.effects);}
  return d;
@@ -102,12 +106,23 @@ export function matchIngredients(required,stacks){
  return visit(0,0);
 }
 export class ExtensionRegistry {
- constructor({recipes=[],pages=[],fluids=[],itemExists=()=>true}={}){
-  this.baseFluids=fluids.map(x=>typeof x==='string'?{id:x}:clone(x));this.itemExists=itemExists;this.fluids=new Set(fluids.map(x=>typeof x==='string'?x:x.id));this.extensions=new Map();this.listeners=new Set();this.revision=0;
+ constructor({recipes=[],pages=[],fluids=[],itemExists=()=>true,itemTags=()=>[]}={}){
+  this.itemTags=itemTags;this.baseFluids=fluids.map(x=>typeof x==='string'?{id:x}:clone(x));this.itemExists=itemExists;this.fluids=new Set(fluids.map(x=>typeof x==='string'?x:x.id));this.extensions=new Map();this.listeners=new Set();this.revision=0;
   this.builtins=freeze(recipes.map(x=>({...clone(x),source:CORE})));this.pages=freeze(pages.map(x=>({...clone(x),source:CORE})));
   this.rebuild();
  }
- rebuild(){const ext=sorted([...this.extensions.values()],x=>x.source);this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);this.recipeCache=freeze(expandShakerTags([...this.builtins,...ext.flatMap(x=>sorted(x.recipes))],[...Object.values(SHAKER_INPUTS).map(input=>({...input,ingredientTags:coreShakerIngredientTags(input.item)})),{item:'minecraft:potion',ingredientTags:coreShakerIngredientTags('minecraft:potion')},...ext.flatMap(x=>x.shakerInputs)]));this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;for(const listener of [...this.listeners]){try{listener(this);}catch{}}}
+ rebuild(){
+  const ext=sorted([...this.extensions.values()],x=>x.source);
+  const recipes=[...this.builtins,...ext.flatMap(x=>sorted(x.recipes))];
+  const inputs=[...Object.values(SHAKER_INPUTS).map(input=>({...input,ingredientTags:coreShakerIngredientTags(input.item)})),{item:'minecraft:potion',ingredientTags:coreShakerIngredientTags('minecraft:potion')},...ext.flatMap(x=>x.shakerInputs)];
+  const legacyTags=new Map();for(const recipe of recipes)if(recipe.kind==='shaker')recipe.ingredients.forEach((items,index)=>{const tag=recipe.ingredientTags?.[index];if(tag&&!tag.startsWith(COLOR_TAG_PREFIX))for(const item of items){let tags=legacyTags.get(item);if(!tags)legacyTags.set(item,tags=[]);tags.push(tag);}});
+  this.categoryCatalog=buildCategoryCatalog(inputs,ext,this.itemTags,legacyTags);
+  const expandedInputs=inputs.map(row=>({...row,ingredientTags:this.categoryCatalog.tags(row.item)}));
+  this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);
+  this.recipeCache=freeze(expandShakerTags(recipes,expandedInputs));
+  this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;
+  for(const listener of [...this.listeners]){try{listener(this);}catch{}}
+ }
  install(raw){
   check(raw&&raw.api===API_VERSION,'API_VERSION_MISMATCH');
   const source=raw.source;check(typeof source==='string'&&/^[a-z][a-z0-9_]{1,47}$/.test(source),'INVALID_SOURCE');
@@ -127,16 +142,18 @@ export class ExtensionRegistry {
   });
   check(new Set(customFluids.map(f=>f.id)).size===customFluids.length&&new Set(customFluids.map(f=>f.filled)).size===customFluids.length,'DUPLICATE_FLUID');
   const availableFluids=new Set([...this.fluids,...customFluids.map(f=>f.id)]);
-  const recipes=rawRecipes.map(x=>{const r=normalizeRecipe(x,source,availableFluids,this.itemExists);const f=customFluids.find(f=>f.id===r.fluid);if(f)r.fluidItem=f.filled;return r;}),pages=rawPages.map(x=>normalizePage(x,source)),shakerInputs=rawShakerInputs.map(x=>normalizeShakerInput(x,source,this.itemExists));
+  const recipes=rawRecipes.map(x=>{const r=normalizeRecipe(x,source,availableFluids,this.itemExists);const f=customFluids.find(f=>f.id===r.fluid);if(f)r.fluidItem=f.filled;return r;}),pages=rawPages.map(x=>normalizePage(x,source)),explicitInputs=rawShakerInputs.map(x=>normalizeShakerInput(x,source,this.itemExists)),shakerInputs=deriveBottleInputs(content,explicitInputs);
+  const categories=normalizeCategoryData(raw);
   check(new Set(recipes.map(x=>x.id)).size===recipes.length,'DUPLICATE_RECIPE');check(new Set(pages.map(x=>x.id)).size===pages.length,'DUPLICATE_PAGE');check(new Set(shakerInputs.map(x=>x.item)).size===shakerInputs.length,'DUPLICATE_SHAKER_INPUT');
   check(!pages.some(p=>recipes.some(r=>r.id===p.id)),'PAGE_RECIPE_ID_COLLISION');
   const recipeIds=new Set([...this.builtins,...recipes].map(x=>x.id));
   for(const p of pages)for(const rid of p.recipeIds)check(recipeIds.has(rid),'UNKNOWN_PAGE_RECIPE',rid);
   const foundation=normalizeFoundation(raw,source,this.itemExists);
-  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0)+(x.pickBlocks?.length??0)+(x.breakFeedback?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length+foundation.pickBlocks.length+foundation.breakFeedback.length);
+  const total=[...this.extensions.values()].filter(x=>x.source!==source).reduce((n,x)=>n+x.recipes.length+x.pages.length+x.shakerInputs.length+(x.furniture?.length??0)+(x.effects?.length??0)+(x.pickBlocks?.length??0)+(x.breakFeedback?.length??0)+(x.shakerColors?.length??0)+(x.itemTagChanges?.length??0),recipes.length+pages.length+shakerInputs.length+foundation.furniture.length+foundation.effects.length+foundation.pickBlocks.length+foundation.breakFeedback.length+categories.shakerColors.length+categories.itemTagChanges.length);
   check(total<=2048,'GLOBAL_REGISTRY_LIMIT');
   check(foundation.requires.every(x=>CAPABILITIES.includes(x)),'CAPABILITY_MISMATCH');
-  const extension=freeze({...foundation,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},fluids:customFluids,recipes,pages,shakerInputs,content});
+  const extension=freeze({...foundation,...categories,api:1,source,version:raw.version,title:raw.title?localeMap(raw.title):{en_US:source},fluids:customFluids,recipes,pages,shakerInputs,content});
+  buildCategoryCatalog([],sorted([...this.extensions.values()].filter(row=>row.source!==source).concat(extension),row=>row.source),this.itemTags);
   this.extensions.set(source,extension);installContent(source,content,foundation);this.rebuild();return {source,recipes:recipes.length,pages:pages.length,shakerInputs:shakerInputs.length,revision:this.revision};
  }
  remove(source){check(source!==CORE,'RESERVED_SOURCE');const removed=this.extensions.delete(source);if(removed){installContent(source,[]);this.rebuild();}return removed;}
@@ -149,8 +166,12 @@ export class ExtensionRegistry {
  list(){return sorted([...this.extensions.values()],x=>x.source).map(x=>({source:x.source,version:x.version,recipes:x.recipes.length,pages:x.pages.length,shakerInputs:x.shakerInputs.length}));}
  recipe(recipeId){return this.recipeCache.find(x=>x.id===recipeId);}
  shakerInput(item){return this.shakerInputCache.get(item);}
- acceptsShakerInput(item){return this.shakerInputCache.has(item)||this.recipeCache.some(r=>r.kind==='shaker'&&r.ingredients.some(s=>s.includes(item)));}
- findShaker(slots){return this.recipeCache.find(r=>r.kind==='shaker'&&matchIngredients(r.ingredients,slots.map(x=>({id:x.item??x.id}))));}
+ allIngredientColors(){return [...this.categoryCatalog.palette.values()];}
+ ingredientCategories(item){return this.categoryCatalog.tags(item);}
+ ingredientColor(item){return this.categoryCatalog.color(item);}
+ previousIngredientColors(item){return this.categoryCatalog.previousColors(item);}
+ acceptsShakerInput(item){return this.itemExists(item);}
+ findShaker(slots){return this.recipeCache.find(r=>r.kind==='shaker'&&matchShakerRecipe(r,slots,this.categoryCatalog));}
  findPress(item){return this.recipeCache.find(r=>r.kind==='pressing'&&r.input.includes(item));}
  findBarrel(fluid,slots){return this.recipeCache.find(r=>r.kind==='barrel'&&r.fluid===fluid&&matchIngredients(r.ingredients,slots));}
  allowedIngredient(item){return ['minecraft:rotten_flesh','minecraft:dirt','minecraft:stone'].includes(item)||this.recipeCache.some(r=>r.kind==='barrel'&&r.ingredients.some(s=>s.includes(item)));}

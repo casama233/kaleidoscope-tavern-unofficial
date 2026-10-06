@@ -5,12 +5,12 @@ buckets.set('minecraft:water','minecraft:water_bucket');buckets.set('minecraft:l
 // Native Cookery recipe records: all valid sets, one recipe attached to its product.
 export function preparationRecipes(recipe,names={}){
  const ingredient=(options,index)=>{
-  const color=/^kaleidoscope_tavern:cocktail_ingredient_(white|yellow|red|green|blue|purple|light_purple|gold|dark_red|dark_blue|dark_purple|aqua|dark_aqua)$/.exec(recipe.ingredientTags?.[index]??'')?.[1];
+  const color=/^kaleidoscope_tavern:cocktail_ingredient_([a-z0-9_.-]+)$/.exec(recipe.ingredientTags?.[index]??'')?.[1];
   if(color){
    const id=recipe.id+'/ingredient_'+index;
-   const colors={dark_blue:['深蓝色','深藍色','Dark Blue'],dark_purple:['深紫色','深紫色','Dark Purple'],aqua:['水蓝色','水藍色','Aqua'],dark_aqua:['深青色','深青色','Dark Aqua'],gold:['金色','金色','Gold'],light_purple:['淡紫色','淺紫色','Light Purple'],white:['白色','白色','White'],yellow:['黄色','黃色','Yellow'],red:['红色','紅色','Red'],green:['绿色','綠色','Green'],blue:['蓝色','藍色','Blue'],purple:['紫色','紫色','Purple'],dark_red:['深红色','深紅色','Dark Red']};
+   const colors={black:['黑色','黑色','Black'],dark_green:['深绿色','深綠色','Dark Green'],gray:['浅灰色','淺灰色','Gray'],dark_gray:['深灰色','深灰色','Dark Gray'],brown:['棕色','棕色','Brown'],orange:['橙色','橙色','Orange'],light_blue:['浅蓝色','淺藍色','Light Blue'],pink:['粉色','粉色','Pink'],dark_blue:['深蓝色','深藍色','Dark Blue'],dark_purple:['深紫色','深紫色','Dark Purple'],aqua:['水蓝色','水藍色','Aqua'],dark_aqua:['深青色','深青色','Dark Aqua'],gold:['金色','金色','Gold'],light_purple:['淡紫色','淺紫色','Light Purple'],white:['白色','白色','White'],yellow:['黄色','黃色','Yellow'],red:['红色','紅色','Red'],green:['绿色','綠色','Green'],blue:['蓝色','藍色','Blue'],purple:['紫色','紫色','Purple'],dark_red:['深红色','深紅色','Dark Red']};
    for(const [i,locale] of ['zh_CN','zh_TW','en_US'].entries()){
-    (names[locale]??={})[id]=colors[color][i]+['调酒材料（酒品品质 ≥4）','調酒材料（酒品品質 ≥4）',' shaker ingredient (bottled drinks: quality ≥4)'][i];
+    (names[locale]??={})[id]=(names[locale]?.['#'+recipe.ingredientTags[index]]??colors[color]?.[i]??['自定颜色','自訂顏色','Custom colour'][i])+['调酒材料（酒品品质 ≥4）','調酒材料（酒品品質 ≥4）',' shaker ingredient (bottled drinks: quality ≥4)'][i];
    }
    return id;
   }
@@ -27,7 +27,7 @@ export function preparationRecipes(recipe,names={}){
   }
   return id;
  };
- let sets=[(recipe.ingredients??[recipe.input??[]]).filter(x=>x.length).map(ingredient)];
+ let sets=[(recipe.ingredients??[recipe.input??[]]).filter((x,index)=>x.length||recipe.ingredientTags?.[index]).map(ingredient)];
  const method={barrel:'Barrel',shaker:'Shaker',pressing:'Pressing Tub'}[recipe.kind];
  if(!method)return [];
  const result=recipe.output?.item??recipe.output?.byQuality?.[0]??(recipe.fluidItem??(recipe.fluidItem??buckets.get(recipe.fluid)));

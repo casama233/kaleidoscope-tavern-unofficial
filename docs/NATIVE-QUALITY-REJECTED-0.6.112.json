@@ -1,0 +1,66 @@
+{
+  "runtime_source": "38bf6f31d9d37c7f9908d5c336eb3cb370f0b44b",
+  "archive_sha256": "a33671a98d85705c902ffeeec71ed21cc6a7006b7ab27795c69365dc16f5bc29",
+  "liquor_source": "5ae1a6f90c0d4bceabe6292a9a97bd04e8234628",
+  "client": "1.26.52.3 x86_64 Linux",
+  "skin": "Ari",
+  "visual_quality": "FAILED_USER_REJECTED",
+  "production_accepted": false,
+  "release_allowed": false,
+  "feedback": {
+    "utc": "2026-10-06T07:33:03Z",
+    "summary": "The user rejected the visible effect as excessive rapid trembling rather than the original smooth intoxication motion."
+  },
+  "observations": [
+    "Real brandy_q2 consumption at observer tick51, milk_bucket at142; first run complete300samples all aim/position/ray deltas0",
+    "Real brandy_q6 at second observer tick53; native chat reports300samples all deltas0",
+    "Native empty-hand arm,heldbrandy/milk,crosshair retained while worldshakes",
+    "Tipsy icon removed at natural expiry while separate highheels icon remained",
+    "Read-only tipsy diagnosis after milk and after natural expiry statusTicks0/adapterTrackedfalse/ownEventRemainingMs0",
+    "Visible motion is rapid jitter and rejected; aim preservation alone is not acceptance"
+  ],
+  "actual_pose": {
+    "x": 170.5,
+    "y": -60,
+    "z": 170.5,
+    "pitch": 29.098587036132812,
+    "yaw": -0.0055084228515625
+  },
+  "telemetry": {
+    "file": "aim-observer-native-rows-20261006T073510.046612Z.json",
+    "sha256": "90958d4f7ef31ac47ffd10ad4c5a43af8d0c2958ed245c55140e6cad1653efa1",
+    "samples_extracted": 595,
+    "chat_samples_each": 300,
+    "first_run_consumption_events": 2,
+    "second_run_consumption_events": 1,
+    "limitation": "Last log fragment incomplete; second end and5samples not parsed. Both complete300sample summaries captured independently in nativechat"
+  },
+  "limitations": [
+    "Milk maximum250ms visual expiry not timed independently",
+    "No allskins/mobile/offhand/otherdrinks/audio coverage",
+    "No Java signed Zroll reproduction",
+    "Do not publish this jitter as restored tipsy"
+  ],
+  "screenshots": {
+    "t112_drink_milk_frames_5.jpg": "d4d258163f23aa1c19a48efce4e7bcd7c38b383ba85784e0eb035b5bdf6282ff",
+    "t112_drink_milk_result_0.jpg": "a38e8bf27982ca1a3828f93e7dec82c7640a80de4a5166f59acd95d6b675ee22",
+    "t112_drink_milk_frames_3.jpg": "b123d6c3ca945e0d86b5424d2b02d5508ea8d7545e667321e28794aaa8b0036f",
+    "t112_drink_milk_frames_9.jpg": "c4b0f7d32fca8f33dcdedde65335a2ae87bda2e266ebbb1aa938037c7f25c035",
+    "t112_expiry_active_0.jpg": "96325a1a5e7df88f16d8dd6490f75c17bbde9660bed00e7728f7f4b673ac2c71",
+    "t112_expiry_active_3.jpg": "ece75e40a9bb43d03610e3b6cc9adea3b3ee5a2204ae8f2324349ea29c2fe361",
+    "t112_expiry_diagnose_0.jpg": "571cba213fe19b7d9c996d3f424e5b719a63ed42ac65134b113e209c7c5bbeb2",
+    "t112_cleanup_1.jpg": "11a3aefd6360e50a8a67ad6e26a2db73f3ace9116a9146ab00ff0396d14c4d4c",
+    "t112_drink_milk_frames_1.jpg": "4514ba67e25040c7a3b43f90e552a3365d2a56ceec08e2d9e474a1423c93ec05",
+    "t112_expiry_active_1.jpg": "ea31dc652084555b7bc7c2cad804032c55436d7debd2d7f4546b6e84a1c97b1a",
+    "t112_drink_milk_frames_0.jpg": "5e51697e284415dc8142c660132af151efc0c4234dd4c1f32c34c336c2903310",
+    "t112_cleanup_0.jpg": "43c5f89b036f18247e443099cf65f99e709b1e279d2161a13c7ce950389df5be",
+    "t112_expiry_active_6.jpg": "a876cd302dd43b55434fdf25da608579ab8598cad7ca63b47adfe889e6da3c56",
+    "t112_drink_milk_frames_6.jpg": "16968032e05886730b8af9e566241f838552b7e8ca5e35f7d5ea35dc21de7748",
+    "t112_expiry_result_0.jpg": "b44de63c89c2d46f1e46f6ed7c87cb98a76fc97272adde007ed00b954c030592",
+    "t112_milk_diagnose_0.jpg": "70c104f9467d144bb5122e8e588b201606725def03151e165e7bf66f081420a8",
+    "t112_expiry_active_5.jpg": "e400d92ef8b8ca467d9fdb8468dcebf59ed473eb68ecb3e0ff8f35c1fa23a61f",
+    "t112_expiry_result_1.jpg": "3719d0cc51bde4dfa93b3b6858ffdd88cae0339fcb81def0bf57572e4107734d"
+  },
+  "status": "RELEASE_BLOCKED_NATIVE_VISUAL_QUALITY_FAILED",
+  "verification_scope": "Bounded real-drink observation; aim and lifecycle findings do not override rejected visual quality"
+}

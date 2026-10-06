@@ -1,8 +1,10 @@
 ## Current maintained baseline: 0.6.112
 
+**Release blocked: 0.6.112 native visual quality FAILED.** The user rejected the rapid jitter as unlike the original motion. Unchanged aim and passing CI do not constitute production acceptance. [Evidence and supported-API limits](docs/RELEASE-NOTES-0.6.112.md).
+
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.112** runs independently; Cookery **1.0.8** is optional. Slightly Tipsy now uses bounded native visual-only rotational shake instead of moving player aim. This is an approximation, not Java's exact Z-roll. Stable Script API **2.10.0** is required (Minecraft **1.26.50+**); World Liquor **0.1.72** is the matching companion being prepared. The bounded110/71 placement fix and109/70 HUD repair are preserved. Actual112 drink/milk/expiry, sustained comfort, hand rendering and aim checks remain pending. See [112 evidence and limits](docs/RELEASE-NOTES-0.6.112.md). No release or live deployment.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.112** runs independently; Cookery **1.0.8** is optional. Slightly Tipsy now uses bounded native visual-only rotational shake instead of moving player aim. This is an approximation, not Java's exact Z-roll. Stable Script API **2.10.0** is required (Minecraft **1.26.50+**); World Liquor **0.1.72** is the matching companion being prepared. The bounded110/71 placement fix and109/70 HUD repair are preserved. Actual112 drink observations preserved native hands and reported stable aim, but the user rejected the visual quality; bounded cleanup findings do not change that result. See [112 evidence and limits](docs/RELEASE-NOTES-0.6.112.md). No release or live deployment.
 
 # Kaleidoscope Tavern (Unofficial)
 

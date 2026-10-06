@@ -1,5 +1,15 @@
 # Tavern 0.6.112: bounded native visual-only Tipsy approximation
 
+## RELEASE BLOCKED: native visual quality FAILED
+
+The user rejected the actual drink effect on 2026-10-06 as rapid, excessive
+jitter rather than the original smooth intoxication motion.112 is not accepted
+for production and must not be released as a restored Tipsy effect. Source/CI
+success and unchanged aim do not override this visual-quality failure. The
+[bounded native rejection record](NATIVE-QUALITY-REJECTED-0.6.112.json) preserves
+exact runtime/archive identities and verified evidence hashes. No strength-only
+retuning is claimed as Java parity; the tested112 source/archive remain frozen.
+
 ## Change and preserved behavior
 
 The old yaw adapter changed player aim and has been removed. Slightly Tipsy now
@@ -35,7 +45,7 @@ Java waveform, exact roll parity, or production visual/comfort acceptance.
 
 ## Stable API and minimum engine
 
-The BP dependency rises from `@minecraft/server`2.7.0 to stable2.10.0. Mojang's
+The BP dependency rises from `@minecraft/server`2.7.0 to stable 2.10.0. Mojang's
 [26.50 changelog](https://www.minecraft.net/en-us/article/minecraft--bedrock-edition-26-50-changelog)
 releases Camera.addShake, CameraShakeOptions and CameraShakeType in2.10.0.
 The existing minimum engine1.26.50 therefore remains; no beta experiment is
@@ -55,7 +65,7 @@ The [source-backed diagnostic record](NATIVE-SHAKE-DIAGNOSTIC-EVIDENCE-0.6.112.j
 identifies isolated diagnostic source f6f15f032472026c9bd484d822e2b97a180ff6ce and
 archive67cbd7c3a24ccbc5c59cc905331c7bade03a5e3f8157d89aff301f77e4c5bb86.
 It issued one3-second0.05 rotational shake per run in normal first person on
-client1.26.52.3 x86_64 Linux, Ari skin, FOV60, existing Camera Shake ON and
+client 1.26.52.3 x86_64 Linux, Ari skin, FOV60, existing Camera Shake ON and
 Hide Hand OFF. Empty-hand and held-milk runs each had100 samples
 (20before/60during/20after), with zero yaw/pitch/view-direction/ray-target change.
 Native arm/held-item/crosshair remained visible while the world visibly shook.
@@ -90,3 +100,50 @@ calls. The added regression covers slow validation, slow API completion and a
 partial-acceptance exception.111's source/history/claim remain immutable rather
 than reusing its identity. The eight focused source tests pass;112 native
 short-pulse quality and real drink/milk/end acceptance remain pending.
+
+
+## Production 112 observation and limits
+
+Exact runtime 38bf6f31d9d37c7f9908d5c336eb3cb370f0b44b and paired Liquor 72
+5ae1a6f90c0d4bceabe6292a9a97bd04e8234628 were observed on client 1.26.52.3,
+Ari skin. Real brandy_q2 consumption occurred at observer tick 51 and completed
+milk consumption at 142; the second run consumed brandy_q6 at 53. Both native
+chat summaries completed 300 samples with zero reported aim, view, ray and
+position deltas.595 of 600 samples were independently parsed; an incomplete
+trailing log fragment omitted five samples and the second end row. This gap is
+retained explicitly rather than treating the log as complete.
+
+The native empty-hand arm, held brandy/milk and crosshair remained present.
+Read-only diagnosis after milk and after natural expiry reported statusTicks0,
+adapterTrackedfalse and ownEventRemainingMs0. The Tipsy icon disappeared at
+natural expiry while a separate High Heels icon remained. These observations
+support only the recorded cleanup states, not an independently timed 250 ms
+maximum milk-stop latency. Eighteen screenshot hashes and the telemetry hash
+were rechecked before this evidence checkpoint. Moving-player, all-skin,
+mobile/offhand/other-drink and audio coverage are not established.
+
+The decisive result remains visual quality FAILED: visible rapid jitter was
+rejected despite the bounded aim/lifecycle findings.
+
+## Supported API boundary after rejection
+
+- [CameraShakeOptions](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/camerashakeoptions?view=minecraft-bedrock-stable)
+  exposes duration, intensity and type. It provides no signed angle, phase,
+  frequency or Z-only waveform control; lowering intensity cannot establish
+  the original Java motion.
+- [CameraSetRotOptions](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/camerasetrotoptions?view=minecraft-bedrock-stable)
+  uses Vector2. The documented
+  [spline animation route](https://learn.microsoft.com/en-us/minecraft/creator/documents/camerasystem/freecamerascriptapitutorial?view=minecraft-bedrock-stable)
+  targets free-camera playback; the prior native test demonstrated Z rotation
+  there but lost native first-person presentation. That route remains excluded.
+- [Camera attachment](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/cameraattachoptions?view=minecraft-bedrock-stable)
+  is documented for non-player entities. No supported own-player-eyes shortcut
+  or native-hand restoration option was established.
+- Resource animations affect model bones, and
+  [material vertex/geometry shader overrides are deprecated and ignored](https://learn.microsoft.com/en-us/minecraft/creator/documents/material-files?view=minecraft-bedrock-stable#material-file-deprecations).
+  No exposed, verified stable 2.10 resource/API hook was found for smooth native
+  first-person Z-roll with real arms/items and unchanged aim. This is a scoped
+  present-capability finding, not a claim about every future or experimental API.
+
+No new runtime candidate, intensity tweak, merge, release or live deployment is
+part of this evidence-only checkpoint.

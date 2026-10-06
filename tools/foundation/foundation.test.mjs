@@ -52,7 +52,7 @@ function packWorld(){
 }
 
 test('foundation contract: existing payload, 10 furniture definitions and 18 declared effects',()=>{
- assert.equal(bundle.furniture.length,10);assert.equal(bundle.effects.length,18);assert.equal(bundle.effects.filter(x=>x.mode==='timed').length,14);
+ const highball=bundle.content.some(row=>row.item==='kaleidoscope_world_liquor:highball');assert.equal(bundle.furniture.length,10);assert.equal(bundle.effects.length,highball?19:18);assert.equal(bundle.effects.filter(x=>x.mode==='timed').length,highball?15:14);
  assert(CAPABILITIES.includes('furniture_storage'));assert.deepEqual(bundle.recipes,payload.recipes);assert.deepEqual(bundle.pages,payload.pages);
 });
 for(const mutate of [b=>b.furniture.push(b.furniture[0]),b=>b.furniture[0].block='alien:chest',b=>b.effects[0].mode='unknown',b=>b.requires.push('unknown_capability')])test('invalid foundation replacement is atomic: '+mutate.toString(),()=>{

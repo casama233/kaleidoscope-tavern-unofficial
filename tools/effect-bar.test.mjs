@@ -116,6 +116,6 @@ test('paired World Liquor timed effects use host state and existing localized na
  const definition=normalizeFoundation(withFoundation(payload),'kaleidoscope_world_liquor',()=>true),timed=definition.effects.filter(r=>r.mode==='timed');
  installContent('kaleidoscope_world_liquor',[],definition);
  let s=state();for(const e of timed)s=addStatus(s,e.id,1200,0);
- assert.equal(visibleEffects(s).length,14);
+ const highball=payload.content.some(row=>row.item==='kaleidoscope_world_liquor:highball');assert.equal(visibleEffects(s).length,highball?15:14);
  for(const file of readdirSync(path.join(root,'runtime/RP/texts')).filter(n=>n.endsWith('.lang'))){const lang=readFileSync(path.join(root,'runtime/RP/texts',file),'utf8');for(const e of timed)assert(lang.includes('effect.'+e.id.replace(':','.')+'='),file+' '+e.id);}
 });

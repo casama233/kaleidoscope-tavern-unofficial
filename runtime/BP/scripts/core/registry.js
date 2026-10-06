@@ -169,6 +169,7 @@ export class ExtensionRegistry {
  allIngredientColors(){return [...this.categoryCatalog.palette.values()];}
  ingredientCategories(item){return this.categoryCatalog.tags(item);}
  ingredientColor(item){return this.categoryCatalog.color(item);}
+ previousIngredientColors(item){return this.categoryCatalog.previousColors(item);}
  acceptsShakerInput(item){return this.itemExists(item);}
  findShaker(slots){return this.recipeCache.find(r=>r.kind==='shaker'&&matchShakerRecipe(r,slots,this.categoryCatalog));}
  findPress(item){return this.recipeCache.find(r=>r.kind==='pressing'&&r.input.includes(item));}

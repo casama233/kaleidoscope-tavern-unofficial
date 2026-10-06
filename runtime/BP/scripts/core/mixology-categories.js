@@ -56,7 +56,11 @@ export function buildCategoryCatalog(inputs,extensions=[],nativeTags=()=>[],lega
   const member=tags(item),entry=colorRows.find(row=>member.includes(row.tag));
   return entry?{color:entry.color,colorIgnored:false,ingredientColor:entry.tag,translationKey:entry.translationKey??('color.kaleidoscope_tavern.'+entry.tag.slice(COLOR_TAG_PREFIX.length))}:{color:0xffffff,colorIgnored:true};
  }
- return {tags,color,palette,definitions};
+ function previousColors(item){
+  const removed=[...new Set((mutations.get(item)??[]).flatMap(row=>row.remove))];
+  return removed.filter(tag=>tag.startsWith(COLOR_TAG_PREFIX)).map(tag=>({ingredientColor:tag,color:palette.get(tag)?.color??0xffffff,colorIgnored:false,translationKey:palette.get(tag)?.translationKey??('color.kaleidoscope_tavern.'+tag.slice(COLOR_TAG_PREFIX.length))}));
+ }
+ return {tags,color,previousColors,palette,definitions};
 }
 export function matchShakerRecipe(recipe,slots,catalog){
  if(slots.length!==3)return false;

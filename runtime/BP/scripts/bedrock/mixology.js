@@ -41,7 +41,7 @@ let registry,sequence=0;
 export const MIX_BLOCKS=new Set([STATION,...['empty_glassware',...Object.values(COCKTAILS).map(x=>x.name)].map(x=>NS+':cup_'+x)]);
 export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],unsupportedEffects:{}};
 export const nativeUseDiagnostics={starts:0,releases:0,cancelled:0,errors:[]};
-export function setMixologyRegistry(value){registry=value;configureBottleCategories(item=>registry.ingredientColor(item));}
+export function setMixologyRegistry(value){registry=value;configureBottleCategories(item=>registry.ingredientColor(item),item=>registry.previousIngredientColors(item));}
 function log(error){const code=error.code??String(error);mixologyDiagnostics.errors.push(code);if(mixologyDiagnostics.errors.length>12)mixologyDiagnostics.errors.shift();console.warn('[Tavern Mixology] '+code);}
 function safely(player,fn){try{return fn();}catch(error){log(error);if(player)showShakerMessage(player,error.code??'ERROR');}}
 function near(player,block){canWrite(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}

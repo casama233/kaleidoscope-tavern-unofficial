@@ -14,7 +14,7 @@ import {expandShakerTags} from '../runtime/BP/scripts/core/shaker-tags.js';
 assert.ok(process.env.LIQUOR_SOURCE,'LIQUOR_SOURCE required; no skipped peer coverage');
 const {payload}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/payload.js')).href);
 const current=!!payload.shakerColors?.length;
-const make=()=>{const r=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});configureBottleCategories(item=>r.ingredientColor(item));return r;};
+const make=()=>{const r=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});configureBottleCategories(item=>r.ingredientColor(item),item=>r.previousIngredientColors(item));return r;};
 const pairs=payload.shakerInputs.flatMap(input=>SHAKER_RECIPES.flatMap(recipe=>recipe.ingredientTags.map((tag,i)=>input.ingredientTags.includes(tag)?{input,recipe,i}:null).filter(Boolean)));
 for(const {input,recipe,i} of pairs)test(recipe.id+' accepts '+input.item+' in tagged slot '+i,()=>{
  const r=make();r.install(payload);const slots=r.recipe(recipe.id).ingredients.map(s=>({item:s[0]}));slots[i]={item:input.item};
@@ -80,4 +80,11 @@ for(const modification of ['custom-line','reordered','name','property'])test('cu
  assert.equal(normalized.nameTag,item.nameTag);assert.deepEqual(normalized.properties,item.properties);
  if(['custom-line','reordered'].includes(modification))assert.deepEqual(normalized.lore,item.lore);
  assert.deepEqual({...item},before);
+});
+
+if(current)test('reclassified old authored colour lore migrates without erasing custom data',()=>{
+ const r=make();r.install(payload);const item=new Item('kaleidoscope_world_liquor:ice_tea_q6');
+ item.lore=qualityBottleLore(item,false,true,false,()=>({ingredientColor:'kaleidoscope_tavern:cocktail_ingredient_dark_red',color:0xaa0000,colorIgnored:false,translationKey:'color.kaleidoscope_tavern.dark_red'}));
+ assert(isLegacyManagedQualityBottleLore(item));assert(isPlainIngredient(item,id=>new Item(id)));assert.deepEqual(normalizeBottleStack(item).lore,qualityBottleLore(item));
+ item.lore.push('Player custom line');const before=structuredClone(item.lore);assert.equal(isPlainIngredient(item,id=>new Item(id)),false);assert.deepEqual(normalizeBottleStack(item).lore,before);
 });

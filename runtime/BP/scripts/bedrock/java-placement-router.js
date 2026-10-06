@@ -35,7 +35,11 @@ export function settleJavaBlockUse(event,succeeded){
 }
 function ownedItemUseEcho(player,itemId){
  const row=blockUses.get(player.id);
- return row?.source==='owned'&&sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick});
+ // Native use can arrive before the simultaneous Sneak press is reflected by
+ // player.isSneaking. Once owned, its fallback/false continuation is still the
+ // same gesture across that modifier transition. Fresh true block callbacks
+ // retain their own modifier-sensitive handling; failure still clears the claim.
+ return row?.source==='owned'&&sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick});
 }
 export function blockUseClaimed(player,itemId,block,face){
  const row=blockUses.get(player.id);

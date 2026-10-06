@@ -46,6 +46,41 @@ test('native seq2-24 tick40274: true far use then false near continuation queues
  assert.equal(d.getBlock({...at,z:2}).typeId,NS+'cup_empty_glassware');assert.equal(d.getBlock({...at,z:1}).typeId,'minecraft:air');
  assert.equal(p.inventory.getItem(3).amount,4);assert.deepEqual(failures(warnings),[]);assert.deepEqual(p.messages,[]);
 });
+test('native seq32-67 tick18224: Sneak transition cannot requeue a completed cup',()=>{
+ const {p,at}=setup(),far=ground({...at,z:2}),near=ground({...at,z:1});p.isSneaking=false;
+ system.currentTick=18224;
+ const warnings=capture(()=>{
+  interact(p,far);aim(p,far);itemUse(p); // seq32-38: native press saw false
+  for(let n=0;n<5;n++)interact(p,far,'Up',{first:false});
+  p.isSneaking=true;system.advance(1); // seq49-53: press becomes visible at execution
+  for(const b of [far,far,far,near])interact(p,b,'Up',{first:false});
+  system.advance(1);
+ });
+ assert.equal(d.getBlock({...at,z:2}).typeId,NS+'cup_empty_glassware');
+ assert.equal(d.getBlock({...at,z:1}).typeId,'minecraft:air');
+ assert.equal(p.inventory.getItem(3).amount,4);assert.deepEqual(failures(warnings),[]);assert.deepEqual(p.messages,[]);
+});
+test('owned fallback and false continuation survive both Sneak edges while pending',()=>{
+ for(const initial of [false,true]){
+  const {p,at}=setup(),far=ground({...at,z:2}),near=ground({...at,z:1});p.isSneaking=initial;
+  const warnings=capture(()=>{
+   interact(p,far);p.isSneaking=!initial;aim(p,near);assert.equal(itemUse(p).cancel,true);
+   assert.equal(interact(p,near,'Up',{first:false}).cancel,true);system.advance(1);
+  });
+  assert.equal(d.getBlock({...at,z:2}).typeId,NS+'cup_empty_glassware');
+  assert.equal(d.getBlock({...at,z:1}).typeId,'minecraft:air');assert.deepEqual(failures(warnings),[]);
+ }
+});
+test('Sneak changes preserve fresh true actions and failed false retries',()=>{
+ const {p,at}=setup(),A=ground(at),B=ground({...at,z:2});
+ const warnings=capture(()=>{p.isSneaking=false;interact(p,A);system.advance(1);p.isSneaking=true;interact(p,B);system.advance(1);});
+ assert.equal(d.getBlock(at).typeId,NS+'cup_empty_glassware');assert.equal(d.getBlock({...at,z:2}).typeId,NS+'cup_empty_glassware');assert.deepEqual(failures(warnings),[]);
+ const {p:q,at:other}=setup(),C=ground(other);block(other);q.isSneaking=false;
+ const failed=capture(()=>{interact(q,C);system.advance(1);});assert.ok(failed.some(x=>x.includes('SPACE_NOT_CLEAR')));
+ d.getBlock(other).setPermutation(BlockPermutation.resolve('minecraft:air'));q.isSneaking=true;
+ const retry=capture(()=>{interact(q,C,'Up',{first:false});system.advance(1);});
+ assert.equal(d.getBlock(other).typeId,NS+'cup_empty_glassware');assert.deepEqual(failures(retry),[]);
+});
 test('completed owned false continuation is suppressed but a fresh true near use succeeds',()=>{
  const {p,at}=setup(),far=ground({...at,z:2}),near=ground({...at,z:1});p.isSneaking=true;
  const warnings=capture(()=>{

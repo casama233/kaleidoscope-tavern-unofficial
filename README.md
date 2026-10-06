@@ -1,8 +1,8 @@
-## Current maintained baseline: 0.6.109
+## Current maintained baseline: 0.6.110
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.109** runs independently; Cookery **1.0.8** integration is optional. This candidate preserves the four rebuilt repairs and native-visible first-person shaker, coalesces traced held-click continuations despite changing block targets, and corrects the native-proven 18-byte effect-icon header predicate. Its matching World Liquor **0.1.70** companion is being prepared. Failed 0.6.107 / 0.1.68 artifacts remain immutable. Exact production-panel and interaction client acceptance is pending; this is not a release or deployment. Build from canonical sources without private gameplay patch layers.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.110** runs independently; Cookery **1.0.8** is optional. This candidate repairs the native-traced false cancellation when Sneak changes during an already-owned placement gesture. Matching World Liquor **0.1.71** is being prepared. Exact109/70 production Mystery icons, FOREIGN-title coexistence and actual-milk clearing passed the bounded native check; interaction110 and camera-roll acceptance remain pending. Frozen109/70 and earlier artifacts remain immutable. See [110 evidence and limits](docs/RELEASE-NOTES-0.6.110.md). This is a Git-first candidate, not a release or deployment.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -26,7 +26,7 @@ Static resource and source checks plus a real BDS 1.26.51.1 load passed with Coo
 
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load-validation target BDS **1.26.51.1**.
 - Cookery is optional. Integration is tested against **Kaleidoscope Cookery (Unofficial) 1.0.8**.
-- Both Tavern's 0.6.109 behavior and resource packs. If Cookery is installed, keep Tavern above it in each pack stack. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
+- Both Tavern's 0.6.110 behavior and resource packs. If Cookery is installed, keep Tavern above it in each pack stack. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
 - Slightly Tipsy uses the Java three-wave rhythm as small yaw increments, not camera shake. It slightly affects aim and is not camera-only roll. Use `/function kt_tipsy_motion_off` to opt out.
 
 The public beta uses Cookery's original UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing it. No Cookery pack, world backup, credentials, server executable or other server add-on is included.

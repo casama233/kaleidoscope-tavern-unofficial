@@ -1,0 +1,623 @@
+{
+  "scope": "native diagnostic reproduction of frozen109; not110 acceptance",
+  "source_log_sha256": "f5d559624b0f13cea95b5bfc320191cb5f9f47cd788c05a117b447fd73c2164b",
+  "probe_archive_sha256": "29a6222437e8fabe596ef4d14815ffdbda07b4a33b51dd5f316b69aa057effbb",
+  "rows": [
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 32,
+      "tick": 18224,
+      "stage": "dispatch.enter",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": false,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "raw": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.500152587890625,
+          "y": 0,
+          "z": 0.1201629638671875
+        },
+        "isFirstEvent": true,
+        "cancel": false,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "normalized": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.500152587890625,
+          "y": 0,
+          "z": 0.1201629638671875
+        },
+        "isFirstEvent": true,
+        "cancel": false,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "held": {
+        "slot": 3,
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "previous": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": true,
+        "tick": 13068,
+        "block": "minecraft:overworld/120_-61_122",
+        "face": "Up",
+        "source": "owned",
+        "pending": false
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 35,
+      "tick": 18224,
+      "stage": "dispatch.exit",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": false,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "event": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.500152587890625,
+          "y": 0,
+          "z": 0.1201629638671875
+        },
+        "isFirstEvent": true,
+        "cancel": true,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "claim": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": false,
+        "tick": 18224,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": true
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 49,
+      "tick": 18224,
+      "stage": "execute.begin",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "event": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.500152587890625,
+          "y": 0,
+          "z": 0.1201629638671875
+        },
+        "isFirstEvent": true,
+        "cancel": true,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "route": "cups-v22",
+      "target": {
+        "x": 130,
+        "y": -60,
+        "z": 132
+      },
+      "held": {
+        "slot": 3,
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "claim": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": false,
+        "tick": 18224,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": true
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 50,
+      "tick": 18224,
+      "stage": "execute.success",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "route": "cups-v22",
+      "target": {
+        "x": 130,
+        "y": -60,
+        "z": 132
+      },
+      "resultItem": "kaleidoscope_tavern:empty_glassware"
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 52,
+      "tick": 18224,
+      "stage": "claim.settle.exit",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "succeeded": true,
+      "claim": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": false,
+        "tick": 18224,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": false
+      },
+      "current": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": false,
+        "tick": 18224,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": false
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 53,
+      "tick": 18224,
+      "stage": "native.after.playerButtonInput",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "event": {
+        "block": null,
+        "faceLocation": null,
+        "item": null
+      },
+      "button": "Sneak",
+      "newButtonState": "Pressed"
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 54,
+      "tick": 18225,
+      "stage": "dispatch.enter",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "raw": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.5001373291015625,
+          "y": 0,
+          "z": 0.9649505615234375
+        },
+        "isFirstEvent": false,
+        "cancel": false,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "normalized": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.5001373291015625,
+          "y": 0,
+          "z": 0.9649505615234375
+        },
+        "isFirstEvent": true,
+        "cancel": false,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "held": {
+        "slot": 3,
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "previous": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": false,
+        "tick": 18224,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": false
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 55,
+      "tick": 18225,
+      "stage": "plan.target",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "event": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.5001373291015625,
+          "y": 0,
+          "z": 0.9649505615234375
+        },
+        "isFirstEvent": true,
+        "cancel": true,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "route": "cups-v22",
+      "target": {
+        "x": 130,
+        "y": -60,
+        "z": 132
+      },
+      "held": {
+        "slot": 3,
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "plan": {
+        "target": {
+          "x": 130,
+          "y": -60,
+          "z": 132
+        }
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 56,
+      "tick": 18225,
+      "stage": "plan.queued",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "event": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.5001373291015625,
+          "y": 0,
+          "z": 0.9649505615234375
+        },
+        "isFirstEvent": true,
+        "cancel": true,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "route": "cups-v22",
+      "target": {
+        "x": 130,
+        "y": -60,
+        "z": 132
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 64,
+      "tick": 18225,
+      "stage": "execute.begin",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "source": "playerInteractWithBlock",
+      "event": {
+        "block": {
+          "id": "minecraft:grass_block",
+          "dimension": "minecraft:overworld",
+          "position": {
+            "x": 130,
+            "y": -61,
+            "z": 132
+          }
+        },
+        "face": "Up",
+        "faceLocation": {
+          "x": 0.5001373291015625,
+          "y": 0,
+          "z": 0.9649505615234375
+        },
+        "isFirstEvent": true,
+        "cancel": true,
+        "item": {
+          "id": "kaleidoscope_tavern:empty_glassware",
+          "amount": 16
+        }
+      },
+      "route": "cups-v22",
+      "target": {
+        "x": 130,
+        "y": -60,
+        "z": 132
+      },
+      "held": {
+        "slot": 3,
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "claim": {
+        "itemId": "kaleidoscope_tavern:empty_glassware",
+        "slot": 3,
+        "sneaking": true,
+        "tick": 18225,
+        "block": "minecraft:overworld/130_-61_132",
+        "face": "Up",
+        "source": "owned",
+        "pending": true
+      }
+    },
+    {
+      "probe": "T109_INTERACTION_TRACE_V2",
+      "seq": 67,
+      "tick": 18225,
+      "stage": "transaction.error",
+      "slot": 3,
+      "hand": {
+        "id": "kaleidoscope_tavern:empty_glassware",
+        "amount": 16
+      },
+      "sneaking": true,
+      "mode": "Creative",
+      "inputMode": "KeyboardAndMouse",
+      "position": {
+        "x": 130.5,
+        "y": -60,
+        "z": 130.5
+      },
+      "rotation": {
+        "y": -1.52587890625e-05,
+        "x": 44.99998474121094
+      },
+      "error": {
+        "name": "TavernError",
+        "code": "SPACE_NOT_CLEAR",
+        "message": "SPACE_NOT_CLEAR",
+        "stack": "    at TavernError (core/util.js:3)\n    at check (core/util.js:5)\n    at placeCup (bedrock/mixology.js:168)\n    at execute (bedrock/mixology.js)\n    at <anonymous> (bedrock/java-placement-router.js:72)\n    at safe (bedrock/transactions.js)\n    at <anonymous> (bedrock/java-placement-router.js:77)\n"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 使用者已選擇自行實測。程式、BDS 與存檔證據不代替此表；未回報的項目保持
 未驗收。先用世界副本測試，Java 使用酒館1.2.0與世界名酒NeoForge1.1.11，
-基岩版使用當次部署收據的酒館0.6.114／世界名酒0.1.80。確認兩邊音量與
+基岩版使用當次部署收據的酒館0.6.115／世界名酒0.1.81。確認兩邊音量與
 視角一致；先做兩包單装，再測正式附加包組合，避免把其他包的聲音當作酒館。
 
 ## 先測這批改動
@@ -78,3 +78,5 @@ JavaQ4：`/give @s kaleidoscope_world_liquor:bombay_sapphire_gin[kaleidoscope_ta
 本輪世界名酒0.1.79冰凍水面實測見[使用者對照場景](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/main/docs/CLIENT-COMPARISON-0.1.79.md)。每tick、半徑及来源水修補與未完成的融化／水面行走分開記錄，未測維持pending；酒品質不能直接當效果amplifier。前述歷史測試用目前實際部署版重做即可。
 
 本輪世界名酒0.1.80[寶藏引路實測](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/main/docs/CLIENT-COMPARISON-0.1.80.md)使用尊尼獲加Q4/Q5/Q6，效果amp0/1/2與機率15/20/25%。原工具、方塊狀態、多人附近其他物品及未完成邊界分列；未測仍pending。
+
+世界名酒0.1.81的真人效果／停止對照見[場景清單](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/main/docs/CLIENT-COMPARISON-0.1.81.md)。生物派送的原生觀察器只證明指定效果列的處理，不能代替實際配酒／杯瓶／投擲入口。聲音與畫面由使用者實測，未回報維持未驗收。

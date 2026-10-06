@@ -9,6 +9,7 @@ import {EquipmentSlot,ItemStack,system,world,ScriptEventSource,GameMode} from '@
 import {isBottleSupport} from '../core/bottle-support.js';
 import {grassStealthPlant} from '../core/grass-stealth-plants.js';
 import {armorShouldWear} from '../core/armor-wear.js';
+import {livingEffectEntity} from '../core/living-effect-entity.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
@@ -24,20 +25,20 @@ function write(p,state){
  const cached=statusSnapshots.get(p.id),now=system.currentTick;
  const previous=cached?.tick===now&&cached.player===p?cached.raw:p.getDynamicProperty(CUSTOM_STATUS_KEY);
  if(previous!==raw)p.setDynamicProperty(CUSTOM_STATUS_KEY,raw);
- tracks.set(p.id,{player:p,tick:now});
- statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state});indexFastPlayer(p,state);
+ const isPlayer=p.typeId==='minecraft:player';tracks.set(p.id,{player:p,tick:now,isPlayer});
+ statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state,isPlayer});indexFastPlayer(p,state);
 }
 function statusWindow(p){
  const cached=statusSnapshots.get(p.id),now=system.currentTick;
  if(cached?.tick===now&&cached.player===p)return cached;
  const raw=p.getDynamicProperty(CUSTOM_STATUS_KEY),before=readStatus(raw),track=tracks.get(p.id);
  const state=advanceStatus(before,track?Math.max(0,now-track.tick):0);
- const snapshot={player:p,tick:now,raw,before,state};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;
+ const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;
 }
 export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){let previous;try{previous=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY));}catch{previous={schema:1,entries:[]};}forgetTipsyVisual(p.id);write(p,{...previous,schema:1,entries:[],legacyClosed:true});tracks.delete(p.id);heelsSteps.delete(p.id);}
 export function applyCustomEffect(p,row){
- if(p?.typeId!=='minecraft:player')return false;
+ if(!livingEffectEntity(p))return false;
  const definition=externalEffectDefinition(row.effect);
  if(definition?.mode==='timed'){if(row.duration<=0)return false;write(p,addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier));customEffectDiagnostics.applied++;return true;}
  const source=externalEffectSource(row.effect);if(source){system.sendScriptEvent(source+':apply_effect',JSON.stringify({entity:p.id,effect:row.effect,duration:row.duration,amplifier:row.amplifier}));return true;}
@@ -69,6 +70,38 @@ export function applyCustomEffect(p,row){
  }
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
+}
+/** Only loaded recipients with host-owned rows, plus native players.
+ * The bridge never reads another pack's properties or scans every entity per tick.
+ */
+export function effectSnapshotEntities(){
+ const players=world.getAllPlayers(),seen=new Set(players.map(p=>p.id)),result=[...players];
+ for(const [id,track] of tracks){
+  const entity=track.player;
+  if(seen.has(id))continue;
+  if(!livingEffectEntity(entity)){tracks.delete(id);statusSnapshots.delete(id);continue;}
+  result.push(entity);
+ }
+ return result;
+}
+export function tickExternalLivingEffects(){
+ for(const [id,track] of tracks){
+  const entity=track.player;if(track.isPlayer)continue;
+  try{
+   if(!livingEffectEntity(entity)){tracks.delete(id);statusSnapshots.delete(id);continue;}
+   const state=statusWindow(entity).state;write(entity,state);
+   if(!state.entries.length){tracks.delete(id);statusSnapshots.delete(id);}
+  }catch(e){tracks.delete(id);statusSnapshots.delete(id);error(e);}
+ }
+}
+function restoreLivingEffectTrack(entity){
+ if(entity?.typeId==='minecraft:player'||!livingEffectEntity(entity))return;
+ try{
+  const raw=entity.getDynamicProperty(CUSTOM_STATUS_KEY);if(raw===undefined)return;
+  const state=readStatus(raw);if(!state.entries.length)return;
+  // A new loaded handle starts a new online clock. Do not subtract unloaded time.
+  tracks.delete(entity.id);statusSnapshots.delete(entity.id);write(entity,state);
+ }catch(e){error(e);}
 }
 function stealthPlant(block){
  if(!block)return false;
@@ -257,8 +290,8 @@ export function tickCustomEffects(){
    }
   }
  }catch(e){error(e);}
- for(const [id,t]of tracks)if(!seen.has(id)){try{write(t.player,statusNow(t.player));}catch{/* disconnected player handle may be invalid */}tracks.delete(id);}
- for(const id of statusSnapshots.keys())if(!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);}
+ for(const [id,t]of tracks)if(t.isPlayer&&!seen.has(id)){try{write(t.player,statusNow(t.player));}catch{/* disconnected player handle may be invalid */}tracks.delete(id);}
+ for(const [id,snapshot] of statusSnapshots)if(snapshot.isPlayer&&!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);}
  for(const[id,t]of deaths)if(system.currentTick-t>100)deaths.delete(id);
 }
 export function installCustomEffects(){
@@ -266,7 +299,7 @@ export function installCustomEffects(){
   if(event.id!=='kaleidoscope_tavern:effect_apply'||event.sourceType!==ScriptEventSource.Server||event.message.length>1024)return;
   try{const row=JSON.parse(event.message),definition=externalEffectDefinition(row.effect);if(!definition)return;
    if(!Number.isFinite(row.duration)||row.duration<0||row.duration>1000000||!Number.isInteger(row.amplifier)||row.amplifier<0||row.amplifier>255)return;
-   const p=world.getEntity(row.entity);if(p?.typeId==='minecraft:player')applyCustomEffect(p,row);
+   const p=world.getEntity(row.entity);if(livingEffectEntity(p))applyCustomEffect(p,row);
   }catch(e){error(e);}
  },{namespaces:['kaleidoscope_tavern']});
  system.afterEvents.scriptEventReceive.subscribe(e=>{
@@ -276,14 +309,24 @@ export function installCustomEffects(){
   catch(err){p.sendMessage('[Tavern Tipsy] diagnostics failed: '+String(err));}
  },{namespaces:['kaleidoscope_tavern']});
 
- world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
+ world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
+ world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));
+ world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
  world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else statusNow(e.player);}catch(x){error(x);}});
  world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});
  // Initialize players already online when scripts start; spawn handles new joins.
- system.run(()=>{for(const p of world.getAllPlayers())try{statusNow(p);}catch(e){error(e);}});
+ system.run(()=>{
+  for(const p of world.getAllPlayers())try{statusNow(p);}catch(e){error(e);}
+  for(const id of ['overworld','nether','the_end'])try{
+   const dimension=world.getDimension(id);
+   for(const entity of dimension.getEntities({families:['mob']}))restoreLivingEffectTrack(entity);
+   for(const entity of dimension.getEntities({type:'minecraft:armor_stand'}))restoreLivingEffectTrack(entity);
+  }catch(e){error(e);}
+ });
+ system.runInterval(tickExternalLivingEffects,1);
  system.runInterval(tickCustomEffects,5);
  system.runInterval(tickArdentHeat,1);
  system.runInterval(tickHighHeels,1);

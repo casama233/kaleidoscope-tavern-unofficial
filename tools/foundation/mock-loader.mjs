@@ -25,11 +25,13 @@ Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}})
 Entity.prototype.getRotation=function(){return {...(this.rotation??{x:0,y:0})};};
 export const EffectTypes={getAll:()=>[]};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
+export class BlockVolume{constructor(from,to){this.from={...from};this.to={...to};}}
 world.getAbsoluteTime=()=>system.currentTick;
 world.getEntity=id=>world.getAllPlayers().find(p=>p.id===id)??[...world.dimensions.values()].flatMap(d=>[...d.entities.values()]).find(e=>e.id===id);
 world.afterEvents.playerButtonInput=new Signal();
 world.afterEvents.playerBreakBlock=new Signal();
 world.afterEvents.worldLoad=new Signal();
+world.afterEvents.entityRemove=new Signal();
 export function registerFixtureItem(id,max=64){itemInfo.set(id,{max});}
 export function registerFixturePack(root){
  for(const type of ['items','blocks'])for(const f of fs.readdirSync(root+'/runtime/BP/'+type)){
@@ -47,6 +49,7 @@ ItemStack.prototype.getComponent=function(id){if(id==='minecraft:dyeable'&&itemI
 Properties.prototype.getDynamicPropertyIds=function(){return [...this.dp.keys()];};
 const oldEntityComponent=Entity.prototype.getComponent;
 Entity.prototype.getComponent=function(id){
+ if(id==='minecraft:type_family')return {hasTypeFamily:family=>this.families?.includes(family)===true};
  if(this.typeId==='kaleidoscope_tavern:stored_items'&&id==='minecraft:inventory'){this.storageInventory??=new Container(9);return {container:this.storageInventory};}
  return oldEntityComponent.call(this,id);
 };

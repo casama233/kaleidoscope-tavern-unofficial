@@ -49,3 +49,5 @@ Minecraft／loader 的版本號合併，也不能以單一舊 fixture 代表所�
 0.1.79恢復冰凍水面每tick／半徑3+amplifier、不封頂及來源水／空氣判斷。Native實際方塊與grounded/airborne mob已確認圈界及排除條件；不是玩家或畫面驗收。27塊霜冰在randomTickSpeed0下400次tick觀察不老化，與Java排程不同。JavaonPlace先60–120排程，後續同種類／同位置60請求去重；不能改成60固定融化。完整霜冰老化／融化、水面行走流體shape／move／onGround／fallDistance、chunk載入和玩家碰撞時序仍未完成，未獲平台豁免。使用者自行客戶端實測，場景在世界名酒docs/CLIENT-COMPARISON-0.1.79.md。原完整目標除微醺外保持不變。
 
 0.1.80修寶藏引路方塊額外掉落：作物／礦石同15%基礎、最新來源crops/c:ores、原方塊與破壞前工具另算loot、中心生成，不再掃附近物品。Native8場景含兩個自訂標籤方塊、絲綢之觸，原有7綠寶石不複製；不是實際player-break／client驗收。錯誤／空手工具Nativeharvest gate、player/luck/blockEntity/globalLootModifier、事件／RNG階段及兩版loot內容仍待修。Mob掉落原有heuristic、斬首Incoming取消／來源替換／recursion／fallback／持久marker／頭顱metadata與缺頭補入仍未完成。Native改damageSource不改實際來源、readonly不能applyDamage、kill()可取消且selfDestruct、health0為override無攻擊者，不能冒充Java die(killSource)。保留本輪另一維護已合併／部署的G78，不將Grilling平台豁免套入本目標。
+
+0.1.81／宿主0.6.115修外部 LivingEntity 效果派送：timed儲存／mob快照、零時長instant投擲、float逐tick治療、boat排除、玩家專用效果no-op、卸載／重啟復原。118跨包程式回歸與實際BDS生物兩次啟動通過；原生用指定列的test-only observer，不是實際玩家入口或聲畫验收。宿主自身mob效果、mob移動／冰面、完整原生效果集合、NeoForge治療hook／生命週期精確階段及任意未知addon類別仍未完成。完整目標不縮小，client=false。

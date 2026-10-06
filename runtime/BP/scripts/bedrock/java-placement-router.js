@@ -24,7 +24,22 @@ function blockKey(block){
 }
 function faceKey(face){return typeof face==='string'?face:face?.toString?.();}
 function claim(player,itemId,block,source='owned',face){
- blockUses.set(player.id,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source});
+ const row={itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source,pending:source==='owned'};
+ blockUses.set(player.id,row);return row;
+}
+// Completed work still owns its itemUse echo, but a new authoritative block
+// event may immediately retry. Failed work owns no echo and must be retryable.
+export function settleJavaBlockUse(event,succeeded){
+ const row=event._javaUseClaim;if(!row)return;row.pending=false;
+ if(!succeeded&&blockUses.get(event.player.id)===row)blockUses.delete(event.player.id);
+}
+function ownedItemUseEcho(player,itemId){
+ const row=blockUses.get(player.id);
+ // Native use can arrive before the simultaneous Sneak press is reflected by
+ // player.isSneaking. Once owned, its fallback/false continuation is still the
+ // same gesture across that modifier transition. Fresh true block callbacks
+ // retain their own modifier-sensitive handling; failure still clears the claim.
+ return row?.source==='owned'&&sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick});
 }
 export function blockUseClaimed(player,itemId,block,face){
  const row=blockUses.get(player.id);
@@ -43,22 +58,27 @@ function itemUseOn(e,held){
  // Different native callbacks may identify different faces of the same placement.
  // Reserve the actual target before scheduling, so only one consumes the item.
  const target=plan.target??e.block.location,gesture={itemId:route.id+'/'+held.id,slot:held.slot,sneaking:e.player.isSneaking===true,tick:system.currentTick,block:e.block.dimension.id+'/'+target.x+'_'+target.y+'_'+target.z};
- if(sameRecentBlockUse(itemUseClaims.get(e.player.id),gesture))return;
+ const previous=itemUseClaims.get(e.player.id);
+ if(sameRecentBlockUse(previous,gesture)){e._javaUseClaim=previous.event?._javaUseClaim;return;}
+ gesture.event=e;
  itemUseClaims.set(e.player.id,gesture);
  const dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
- system.run(()=>safe(e.player,()=>{
-  sameHand(e.player,held);check(e.player.dimension.id===dimension.id,'DIMENSION_CHANGED');
-  const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId,'BLOCK_CHANGED');
-  const result=route.execute({...ctx,block:clicked,plan});
-  if(plan.target)recentPlacements.set(e.player.id,{dimension:dimension.id,location:{...plan.target},slot:e.player.selectedSlotIndex,tick:system.currentTick});
-  return result;
- }));
+  system.run(()=>safe(e.player,()=>{
+  let succeeded=false;
+  try{
+   sameHand(e.player,held);check(e.player.dimension.id===dimension.id,'DIMENSION_CHANGED');
+   const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId,'BLOCK_CHANGED');
+   const result=route.execute({...ctx,block:clicked,plan});
+   if(plan.target)recentPlacements.set(e.player.id,{dimension:dimension.id,location:{...plan.target},slot:e.player.selectedSlotIndex,tick:system.currentTick});
+   succeeded=true;return result;
+  }finally{if(itemUseClaims.get(e.player.id)===gesture)itemUseClaims.delete(e.player.id);settleJavaBlockUse(e,succeeded);}
+  }));
 }
 function dispatch(raw){
  // Bedrock's before-event isFirstEvent is readonly. Copy only the fields this
  // router consumes; never spread an engine event object or try to overwrite
- // that property. A standalone false event becomes a first gesture; recent
- // owned duplicates are coalesced below.
+ // that property. A standalone false event becomes a first gesture only when
+ // no recent owned gesture already owns that native continuation.
  const e=raw?{
   player:raw.player,block:raw.block,blockFace:raw.blockFace,face:raw.face,
   faceLocation:raw.faceLocation?{...raw.faceLocation}:undefined,itemStack:raw.itemStack,
@@ -72,17 +92,22 @@ function dispatch(raw){
  // aimed at a different station in the same tick.
  if(e.cancel){claim(e.player,held.id??'',e.block,'foreign',e.blockFace);e._javaUseRejection='FOREIGN_CANCEL';observe();syncCancel();return;}
  const previous=blockUses.get(e.player.id);
+ // Native trace: one true event, then false events in the same tick can move
+ // from the far ground block to a near block before either queued write runs.
+ // A continuation belongs to its owned gesture, not its changing target/face.
+ // Success retains only the bounded echo; failure clears it for immediate retry.
+ if(raw.isFirstEvent===false&&ownedItemUseEcho(e.player,held.id??'')){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // Both before callbacks can report first=true. Claim by gesture identity,
  // including empty-hand callbacks, before scheduling any inventory mutation.
- if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
- if(held.id&&previous?.source==='owned'&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // isFirstEvent=false can be the only event emitted for a fresh touch press.
  // A recent matching owned claim above already coalesces a duplicate; absent
  // that claim, treat it as the beginning of a gesture for older adapters that
  // still gate on this flag.
  for(const handler of blockHandlers){handler(e);if(e.cancel)break;}
  if(!e.cancel&&held.id)itemUseOn(e,held);
- if(e.cancel)claim(e.player,held.id??'',e.block,'owned',e.blockFace);
+ if(e.cancel&&!e._javaUseClaim)e._javaUseClaim=claim(e.player,held.id??'',e.block,'owned',e.blockFace);
  observe();
  syncCancel();
 }
@@ -122,7 +147,9 @@ export function installJavaItemUseOnEvents(){
   // Native block breaking/placing and arbitrary vanilla item use remain engine-owned.
   let hit;try{hit=e.source.getBlockFromViewDirection({maxDistance:itemUseRayDistance(e.source)});}catch{return;}
   if(!hit?.block)return;
-  if(blockUseClaimed(e.source,id,hit.block,hit.face)){e.cancel=true;return;}
+  // itemUse has no authoritative clicked block. Its ray may move or now hit
+  // the just-placed object; never turn an owned block gesture into new targets.
+  if(ownedItemUseEcho(e.source,id)||blockUseClaimed(e.source,id,hit.block,hit.face)){e.cancel=true;return;}
   const event={player:e.source,itemStack:e.itemStack,block:hit.block,blockFace:hit.face,faceLocation:hit.faceLocation,isFirstEvent:true,cancel:false};
   dispatch(event);if(event.cancel)e.cancel=true;
  });

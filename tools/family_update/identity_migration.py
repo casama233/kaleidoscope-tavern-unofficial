@@ -37,6 +37,29 @@ def candidate_plan(receipt, original):
     return validate_plan(read(path), receipt, original)
 
 
+def assembly_order(original):
+    """Keep the reviewed complete stack; declared UUID swaps stay in place.
+
+    Full archive/manifest/ownership validation still runs through candidate_plan
+    immediately after assembly. This function never changes the world or policy.
+    """
+    order = {side: [ref['pack_id'] for ref in original['refs'][side]] for side in ['behavior', 'resource']}
+    location = CONFIG.get('identity_migration')
+    if not location:
+        return order
+    path = Path(location).resolve()
+    assert path.parent == (T / 'family/identity-migrations').resolve(), 'Migration declaration must belong to canonical Git'
+    spec = read(path)
+    assert spec['schema'] == 1 and spec['kind'] == 'author_uuid_owner_migration'
+    swaps = spec['packs']
+    assert len(swaps) == 2 and {row['side'] for row in swaps} == {'behavior', 'resource'}
+    for row in swaps:
+        uids = order[row['side']]
+        assert uids.count(row['old_uuid']) == 1 and row['new_uuid'] not in uids, 'Migration must replace one reviewed identity in place'
+        uids[uids.index(row['old_uuid'])] = row['new_uuid']
+    return order
+
+
 def prepare_world(snapshot, receipt, original):
     spec = candidate_plan(receipt, original)
     if not spec:

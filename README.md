@@ -1,8 +1,8 @@
-## Current maintained baseline: 0.6.109
+## Current maintained baseline: 0.6.113
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.109** runs independently; Cookery **1.6.0** integration is optional. This source candidate preserves the four rebuilt repairs and restores the native-socket first-person shaker frame; pair with World Liquor **0.1.67**. This maintenance change adapts the complete family to the reviewed optional Cookery **1.6.0** source; deployment and client acceptance are recorded separately. Static checks, isolated BDS, client rendering and saved-world migration are separate acceptance stages. Build from canonical sources without private gameplay patch layers.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.113** is a blocked development draft preserving current universal mixology and Java RESET behavior. It selectively restores bounded native callback coalescing and effect-icon capture, and preserves reviewed interleaved family pack order. Pair with the World Liquor **0.1.73** development draft. Current BSM Java-upstream status must be read and refreshed before merge, release or deployment; no current full Java parity, native loading or rendered-client acceptance is claimed. See [draft scope and blockers](docs/RELEASE-NOTES-0.6.113.md).
 
 # Kaleidoscope Tavern (Unofficial)
 

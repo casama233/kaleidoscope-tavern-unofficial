@@ -34,6 +34,7 @@ def main(argv=None):
     subprocess.run([sys.executable,str(ROOT/'tools/test_item_render_contract.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_held_frames.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/test_shaker_native_frame.py')],cwd=ROOT,check=True)
+    subprocess.run(['node','--experimental-loader',str(ROOT/'tools/pickup/mock-loader.mjs'),'--test',str(ROOT/'tools/shared-interaction-echo.test.mjs')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build_barrel_materials.py'),'--check'],cwd=ROOT,check=True)
     assert f"export const BUILD_VERSION='{config['version']}-baseline.1';" in (RT/'BP/scripts/data/build-version.js').read_text(),'Stale diagnostic build identity'
     files=list(RT.rglob('*.json'));docs={p:read(p) for p in files}

@@ -2,7 +2,7 @@
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.110** runs independently; Cookery **1.0.8** is optional. This candidate repairs the native-traced false cancellation when Sneak changes during an already-owned placement gesture. Matching World Liquor **0.1.71** is being prepared. Exact109/70 production Mystery icons, FOREIGN-title coexistence and actual-milk clearing passed the bounded native check; interaction110 and camera-roll acceptance remain pending. Frozen109/70 and earlier artifacts remain immutable. See [110 evidence and limits](docs/RELEASE-NOTES-0.6.110.md). This is a Git-first candidate, not a release or deployment.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.110** runs independently; Cookery **1.0.8** is optional. This candidate repairs the native-traced false cancellation when Sneak changes during an already-owned placement gesture. The matching companion is World Liquor **0.1.71**. Exact 109/70 production Mystery icons, FOREIGN-title coexistence and actual-milk clearing passed the bounded native check. The bounded 110/71 placement retest now passes two Creative and one Survival trials without the false warning; camera-roll and broader interaction acceptance remain pending. Frozen 109/70 and earlier artifacts remain immutable. See [110 evidence and limits](docs/RELEASE-NOTES-0.6.110.md). This is a Git-first candidate, not a release or deployment.
 
 # Kaleidoscope Tavern (Unofficial)
 

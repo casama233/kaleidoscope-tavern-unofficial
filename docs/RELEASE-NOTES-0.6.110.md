@@ -32,8 +32,9 @@ The current20 shared-interaction API-double tests pass, including the native
 sequence replay, pending press/release edges, fresh true actions, and changed-
 modifier retry after failure. Replacing only the new matcher with109's old
 matcher makes exactly the two new duplicate-regression tests fail (18pass/2fail).
-These are source regressions, not native110 acceptance. The109 trace proves the
-failure mechanism; a fresh110/71 actual-client retest remains necessary.
+These are source regressions. The109 trace proves the failure mechanism. The
+subsequent bounded110/71 native retest is recorded below; it does not broaden
+these results into exhaustive interaction acceptance.
 
 ## Bounded production109/70 findings retained
 
@@ -64,3 +65,25 @@ historical rejected candidates remain unchanged. The separate diagnostic tools
 remain pinned to their original109 source and are run from that frozen commit;
 they are not repackaged into110. Git publication alone is not native acceptance,
 a release, or authorization to deploy live.
+
+## Subsequent bounded 110/71 native placement acceptance
+
+On 2026-10-06 at 05:15–05:16 UTC, the exact published 110/71 pair passed three
+actual-client reproductions with no diagnostic packs active. Each trial used
+one simultaneous 100 ms Shift/right-click, yaw 0/pitch 45, on virgin flat ground:
+
+- Creative at 150.5,-60,150.5: one cup, no yellow cancellation observed
+- Creative at 160.5,-60,160.5: one cup, no yellow cancellation observed
+- Survival at 170.5,-60,170.5: one cup, held count 16→15, no yellow cancellation
+  observed; Creative mode was restored afterward
+
+Client: 1.26.52.3 x86_64 Linux through the unofficial launcher. The
+[acceptance record](NATIVE-PLACEMENT-ACCEPTANCE-0.6.110.json) identifies both
+source commits/archive hashes, the verified install receipt, and hashes of all
+four operator screenshots. Screenshot bytes were rechecked against those hashes.
+
+This accepts only this bounded placement reproduction. Other interactions,
+touch/controller input, audio (no audio device), camera roll, all effects/models,
+saved-world migration and live deployment remain unaccepted. The production
+content log was empty, so no global error-free-log conclusion is made. Runtime,
+release identities and archive bytes are unchanged by this evidence checkpoint.

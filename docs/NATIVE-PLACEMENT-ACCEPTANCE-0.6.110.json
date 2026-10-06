@@ -1,0 +1,79 @@
+{
+  "observed_utc": "2026-10-06T05:15:00Z/05:16:20Z",
+  "tavern_commit": "a4581c006896d26e6bdd89cd93150bc851603790",
+  "liquor_commit": "723d15900f469695bf8686a91187552bff5e695e",
+  "client": "1.26.52.3 x86_64 Linux unofficial launcher",
+  "world": "T110 L71 acceptance",
+  "input": "Keyboard and mouse; one simultaneous Shift + right-click lasting 100 ms per trial",
+  "diagnostic_packs_active": false,
+  "results": [
+    {
+      "mode": "Creative",
+      "pose": [
+        150.5,
+        -60,
+        150.5,
+        0,
+        45
+      ],
+      "placed_cups": 1,
+      "yellow_cancel_observed": false
+    },
+    {
+      "mode": "Creative",
+      "pose": [
+        160.5,
+        -60,
+        160.5,
+        0,
+        45
+      ],
+      "placed_cups": 1,
+      "yellow_cancel_observed": false
+    },
+    {
+      "mode": "Survival",
+      "pose": [
+        170.5,
+        -60,
+        170.5,
+        0,
+        45
+      ],
+      "placed_cups": 1,
+      "before_count": 16,
+      "after_count": 15,
+      "yellow_cancel_observed": false
+    }
+  ],
+  "limits": [
+    "Bounded reproduction regression only; not exhaustive interactions or touch/controller",
+    "No audio device",
+    "Current production content log empty; no claim of global error-free log"
+  ],
+  "screenshots": {
+    "t110_survival_after.jpg": "b26b9d7d83bbe1d611cd3d9ec2e4f8fe8396c62163c648a3b654047056e4abab",
+    "t110_creative_second.jpg": "42e4f474054e9ceac911df54791b455a65bb48a9943ddb1c492dc9d35bb83c78",
+    "t110_creative_first.jpg": "0f2397cbe8e47e50c7f9a3780dbb83f400e09d9384483472d93144c6818ae218",
+    "t110_survival_before.jpg": "05bb1015feea9795c197961ce5cc6b27f3862713c3e3da1e3d368a0cc66509de"
+  },
+  "install_receipt": {
+    "name": "t110_l71_install_receipt_20261006T051223Z_077a629286b9.json",
+    "sha256": "94dfe93273a744025df73e604a358109d2ea2dddbb27cba67b42d9f6e64b6065",
+    "status": "t110_l71_installed_and_clone_verified"
+  },
+  "archives": [
+    {
+      "source_commit": "a4581c006896d26e6bdd89cd93150bc851603790",
+      "sha256": "9f8d4b7aad03294dcbece6faf7f8fe09393394ad1956173eeebba49dbd02027e",
+      "bytes": 5406603
+    },
+    {
+      "source_commit": "723d15900f469695bf8686a91187552bff5e695e",
+      "sha256": "32891698fd643b5e94c1e8fe8de077e28af87356cffe2b71df702069bf4cbadf",
+      "bytes": 6774794
+    }
+  ],
+  "scope": "Bounded native placement regression passed; no full-pack acceptance, release, merge, or live deployment",
+  "post_test_mode": "Creative restored by native operator"
+}

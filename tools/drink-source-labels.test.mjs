@@ -7,13 +7,17 @@ import {ExtensionRegistry,CAPABILITIES} from '../runtime/BP/scripts/core/registr
 import {BUILTIN_RECIPES} from '../runtime/BP/scripts/data/recipes.js';
 import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {FLUIDS} from '../runtime/BP/scripts/data/fluids.js';
-import {qualityBottleLore,normalizeBottleStack,isLegacyManagedQualityBottleLore} from '../runtime/BP/scripts/core/quality-tooltip.js';
+import {qualityBottleLore,normalizeBottleStack,isLegacyManagedQualityBottleLore,configureBottleCategories} from '../runtime/BP/scripts/core/quality-tooltip.js';
 import {isPlainIngredient} from '../runtime/BP/scripts/core/inventory.js';
 assert.ok(process.env.LIQUOR_SOURCE,'LIQUOR_SOURCE is required');
 const {payload}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/payload.js')).href);
 const {withFoundation}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/foundation.js')).href);
 const sourceKey='item.kaleidoscope_world_liquor.mod_name';
-const make=()=>new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});
+const make=()=>{
+ const registry=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});
+ configureBottleCategories(item=>registry.ingredientColor(item),item=>registry.previousIngredientColors(item));
+ return registry;
+};
 function install(){const r=make();r.install({...payload,modNameKey:sourceKey,requires:[...(payload.requires??[]),'drink_source_labels']});return r;}
 class Item{
  constructor(typeId){Object.assign(this,{typeId,amount:1,maxAmount:16,lore:[],props:{}});}

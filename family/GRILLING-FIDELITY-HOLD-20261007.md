@@ -1,6 +1,6 @@
 # 煙火目前範圍與 live 部署要求
 
-來源鎖同步 Grilling 2.8.77 BP/RP，保留酒館 0.6.114、世界名酒 0.1.79 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
+來源鎖同步 Grilling 2.8.78 BP/RP，保留酒館 0.6.114、世界名酒 0.1.79 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
 
 已保留 PR205 的世界名酒修復及通用 source-hold 准入工具；只撤銷其依据本輪較早指示登記的 Grilling 2.8.72→2.8.73 部署保留，原因為下述使用者明確調整。其他來源的完成門檻不因本輪自動解除。
 
@@ -14,8 +14,10 @@
 
 相同不可變候選已通過的 CI／原生證據重用，不為了相同 hash 反覆重測。純文件／來源鎖變更不為酒館另換 runtime 或重啟。
 
-## Coherent G77 candidate
+## Coherent G78 candidate
 
-Grilling PR141 starts from canonical G74, combines reviewed Git differences from corrected peer G76 (`ce7b75171537877ba92d1ec7c3ed92e33d10a4d6`) and seasoning/output PR140 (`9c33d3f5fa65db1b0701ee25cb1d0f6a0b1b7766`), and fixes the additional real native RawMessage key-order expiry rollback. Both conflicting unpublished G75 identities and their original branch histories remain intact; canonical output takes a fresh G77 identity. G73 health/audio feedback and G74 bottle/icon/heat repairs survive. World Liquor 0.1.79 and private integration 1.0.20 remain paired.
+Grilling PR141 starts from canonical G74, combines reviewed Git differences from corrected peer G76 (`ce7b75171537877ba92d1ec7c3ed92e33d10a4d6`) and seasoning/output PR140 (`9c33d3f5fa65db1b0701ee25cb1d0f6a0b1b7766`), and fixes the additional real native RawMessage key-order expiry rollback. Both conflicting unpublished G75 and G77 identities and their original branch histories remain intact; canonical output takes a fresh G78 identity. G73 health/audio feedback and G74 bottle/icon/heat repairs survive. World Liquor 0.1.79 and private integration 1.0.20 remain paired.
 
 Bounded Grilling evidence records twelve real item/storage cases, all 128 legal native rack state/facing combinations, two expiry cases and thirty-one persisted item records after normal restart. These checks do not certify input, audio, rendering or multiplayer acceptance. Owner-accepted platform differences remain explicit; client=false, production_ready=false, pending_client_acceptance. Complete family CI/static/BDS/fresh stopped-world rehearsal and exact live readback are still required.
+
+Additional peer source `028dd532`/`4dbd904` provides original-texture/FIXED six-tool projections and opt-in rack hit/admission diagnostics. Fresh G78 native checks bind all owned bytes, three bottle-stack intent/admission cases, eight non-owning tool projections and six model properties after engine ticks. This does not generate client clicks; peer upper bottle insertion refusal remains unresolved and is not marked fixed. The current Grilling status is `docs/STATUS-A2.8.78.md`; earlier G77 evidence retains its original source identity.

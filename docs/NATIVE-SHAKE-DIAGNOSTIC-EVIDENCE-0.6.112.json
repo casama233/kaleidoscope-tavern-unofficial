@@ -1,0 +1,78 @@
+{
+  "source": "f6f15f032472026c9bd484d822e2b97a180ff6ce",
+  "archive_sha256": "67cbd7c3a24ccbc5c59cc905331c7bade03a5e3f8157d89aff301f77e4c5bb86",
+  "client": "1.26.52.3 x86_64 Linux",
+  "skin": "Ari",
+  "FOV": 60,
+  "normal_firstperson": true,
+  "settings_observed_unchanged": {
+    "Camera Shake": true,
+    "Hide Hand": false
+  },
+  "request": {
+    "duration": 3,
+    "intensity": 0.05,
+    "type": "Rotational",
+    "calls_per_run": 1
+  },
+  "runs": [
+    {
+      "held": "empty",
+      "samples": 100,
+      "before": 20,
+      "during": 60,
+      "after": 20,
+      "maxYaw": 0,
+      "maxPitch": 0,
+      "maxViewDelta": 0,
+      "rayChanges": 0,
+      "native_arm_visible": true
+    },
+    {
+      "held": "minecraft:milk_bucket",
+      "samples": 100,
+      "before": 20,
+      "during": 60,
+      "after": 20,
+      "maxYaw": 0,
+      "maxPitch": 0,
+      "maxViewDelta": 0,
+      "rayChanges": 0,
+      "native_held_item_visible": true
+    }
+  ],
+  "observed": [
+    "Visible rendered terrain and target outline shake",
+    "Crosshair retained",
+    "Native firstperson presentation retained",
+    "Both runs COMPLETE accepted true in native chat;200samples independently extracted"
+  ],
+  "limitations": [
+    "Not Java sinusoidal Zroll parity",
+    "Two stationary runs onepose only",
+    "No movingplayer or allskins/mobile coverage",
+    "Productiondrink/milk lifecycle not yet integrated"
+  ],
+  "screenshots": {
+    "shake_empty_frames_0.jpg": "effb959a0c89489021352cffff1292edadc8c2532d9d4ae4d982b45570a146c5",
+    "shake_held_frames_5.jpg": "89507b532966f1edf83cb71fafe6b12fe3c8a181aca59b840f5b63e6ed1eae81",
+    "shake_held_frames_0.jpg": "47e8283e528ed6ba40d36abff0362902c35e6b612601f28d799bd309409cc194",
+    "shake_held_frames_9.jpg": "f4204741ec7a283711c3fe5199becc106180f93573005742e339fef9ffef06ad",
+    "shake_held_frames_6.jpg": "4dc7dfbdebede417b50fa1e190de2f23ded229222cd1b1242434613ab88c21ec",
+    "shake_empty_result_0.jpg": "da12c45a84ce355bf2dd9b99d419bbe71ed95a93d9bd1e4a47d72b0879b56f81",
+    "shake_empty_frames_6.jpg": "38fe9973d800f5c8e01dd390d14f68c5c9fa4f73c7fb048757cbc220702958da",
+    "shake_empty_frames_9.jpg": "caf31deba232eb137cc5ca4568f7466dacc251dc7c8d2e609304e0d74aa0f024",
+    "shake_empty_frames_5.jpg": "ab743f51621fb64860e33b3f2349381da7c3e890ec6b714eb5f7f4f9b13c92a2",
+    "shake_held_result_0.jpg": "6eafdec0473dd2f6ce58a8452c89ad4c132f404fe82c7b8e587cfc5ed4357dff"
+  },
+  "telemetry": {
+    "file": "shake-native-rows-20261006T065434.499422Z.json",
+    "sha256": "126fa60c235c6b935d60f3ade0ee1184bc2037193871bdce09993563a0f7dfe2",
+    "samples": 200,
+    "both_runs_complete_chat": true,
+    "parsed_end_rows": 1,
+    "invalid_matching_lines": 1,
+    "limitation": "Second end row unavailable in filtered log; complete metrics independently shown in captured native chat"
+  },
+  "scope": "Isolated diagnostic only; production112 drink/milk/lifecycle and short-pulse visual quality remain unaccepted"
+}

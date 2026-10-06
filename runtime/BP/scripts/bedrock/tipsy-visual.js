@@ -61,8 +61,15 @@ export function tickTipsyVisuals(){
    const pulse=tipsyShakeWindow(track.until-now);if(!pulse)continue;
    // Reserve BEFORE the call: even a partially accepted throwing API call must
    // not be followed by an overlapping retry or immediate clear/reapply.
-   leases.set(id,{tick:now+pulse.leaseTicks,wall:wall+pulse.leaseMs});
-   camera.addShake({duration:pulse.duration,intensity:pulse.intensity,type:CameraShakeType.Rotational});
+   const issuedWall=clock();if(issuedWall===undefined){track.lastSkip='clock_unavailable_or_regressed';continue;}
+   const lease={tick:system.currentTick+pulse.leaseTicks,wall:issuedWall+pulse.leaseMs};leases.set(id,lease);
+   try{camera.addShake({duration:pulse.duration,intensity:pulse.intensity,type:CameraShakeType.Rotational});}
+   finally{
+    // Validation/API getters can consume real time. Anchor conservatively after
+    // completion too, even if the engine accepted an event and then threw.
+    const completedWall=clock();lease.tick=Math.max(lease.tick,system.currentTick+pulse.leaseTicks);
+    if(completedWall!==undefined)lease.wall=Math.max(lease.wall,completedWall+pulse.leaseMs);
+   }
    track.lastSkip=null;track.attempts++;tipsyVisualDiagnostics.updates++;
   }catch(e){
    track.failures++;track.retryAt=now+(track.failures<=3?20:200);tipsyVisualDiagnostics.failures++;

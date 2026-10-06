@@ -68,7 +68,7 @@ def main():
     adapter=(RT/'BP/scripts/bedrock/tipsy-visual.js').read_text()
     assert 'CameraShakeType' in adapter and 'camera.addShake({' in adapter
     assert 'tipsyShakeWindow(track.until-now)' in adapter
-    assert 'leases.set(id,{tick:now+pulse.leaseTicks,wall:wall+pulse.leaseMs})' in adapter
+    assert 'leases.set(id,lease)' in adapter and 'completedWall+pulse.leaseMs' in adapter
     assert 'system.runInterval(tickTipsyVisuals,1)' in adapter
     assert 'InputPermissionCategory.Camera' in adapter and 'TIPSY_OPT_OUT_TAG' in adapter
     assert 'if(now<track.retryAt)' in adapter and 'stopIfEmpty()' in adapter

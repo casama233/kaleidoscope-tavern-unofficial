@@ -55,3 +55,15 @@ test('read-only diagnostics and refresh do not create extra native events or glo
  for(const token of ['.setRotation(','.getRotation(','.teleport(','.setCamera(','.clear(','.stopShaking(','.playAnimation(','runCommand('])assert(!source.includes(token),token);
  const hooks=fs.readFileSync(new URL('bedrock/custom-effects.js',root),'utf8');assert(hooks.includes("e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source)"));assert(hooks.includes('forgetTipsyVisual(p.id);write('));
 });
+
+test('slow validation or API completion cannot shorten actual pulse separation',async()=>{
+ for(const delayAt of ['validation','api','throw']){
+  const f=await fixture();let first=true;
+  if(delayAt==='validation')f.p.getComponent=()=>{if(first){first=false;f.wall+=100;}return {currentValue:20};};
+  else{const original=f.p.camera.addShake;f.p.camera.addShake=options=>{original(options);if(first){first=false;f.wall+=100;if(delayAt==='throw')throw Error('partial native acceptance');}};}
+  f.pulse();f.step();assert.equal(f.events.length,1);
+  f.step(delayAt==='throw'?20:6,150);assert.equal(f.events.length,1);
+  f.step(1,100);assert.equal(f.events.length,2);
+  assert(f.events[1].wall-f.events[0].wall>=250);
+ }
+});

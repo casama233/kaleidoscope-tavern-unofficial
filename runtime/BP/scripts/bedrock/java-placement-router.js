@@ -73,8 +73,8 @@ function itemUseOn(e,held){
 function dispatch(raw){
  // Bedrock's before-event isFirstEvent is readonly. Copy only the fields this
  // router consumes; never spread an engine event object or try to overwrite
- // that property. A standalone false event becomes a first gesture; recent
- // owned duplicates are coalesced below.
+ // that property. A standalone false event becomes a first gesture only when
+ // no recent owned gesture already owns that native continuation.
  const e=raw?{
   player:raw.player,block:raw.block,blockFace:raw.blockFace,face:raw.face,
   faceLocation:raw.faceLocation?{...raw.faceLocation}:undefined,itemStack:raw.itemStack,
@@ -88,6 +88,11 @@ function dispatch(raw){
  // aimed at a different station in the same tick.
  if(e.cancel){claim(e.player,held.id??'',e.block,'foreign',e.blockFace);e._javaUseRejection='FOREIGN_CANCEL';observe();syncCancel();return;}
  const previous=blockUses.get(e.player.id);
+ // Native trace: one true event, then false events in the same tick can move
+ // from the far ground block to a near block before either queued write runs.
+ // A continuation belongs to its owned gesture, not its changing target/face.
+ // Success retains only the bounded echo; failure clears it for immediate retry.
+ if(raw.isFirstEvent===false&&ownedItemUseEcho(e.player,held.id??'')){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // Both before callbacks can report first=true. Claim by gesture identity,
  // including empty-hand callbacks, before scheduling any inventory mutation.
  if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}

@@ -35,6 +35,14 @@ test('All slot tokens are unique and cannot produce phantom icons across boundar
  const matches=all.filter(token=>packet.includes(token));assert.equal(matches.length,EFFECT_ICONS.length);
  assert.throws(()=>effectIconToken(32,1));assert.throws(()=>effectIconToken(0,0));
 });
+test('Native formatting prefix capture uses its UTF-8 byte precision, not JavaScript length',()=>{
+ const hud=JSON.parse(readFileSync(new URL('../runtime/RP/ui/hud_screen.json',import.meta.url),'utf8'));
+ const cache=hud.kt_effect_icons.controls[0].kt_effect_data;
+ const capture=cache.bindings.find(binding=>binding.target_property_name==='#visible');
+ assert.equal(EFFECT_ICON_PREFIX.length,12);assert.equal(Buffer.byteLength(EFFECT_ICON_PREFIX,'utf8'),18);
+ assert.equal(capture.source_property_name,`(not (#hud_title_text_string = #kt_effect_packet) and (('%.18s' * #hud_title_text_string) = '${EFFECT_ICON_PREFIX}'))`);
+ assert(!capture.source_property_name.includes('%.12s'),'Native probe rejects the truncated header');
+});
 test('Standalone sprites and additive root controls have no optional asset dependency',()=>{
  const root=new URL('../',import.meta.url),hud=JSON.parse(readFileSync(new URL('runtime/RP/ui/hud_screen.json',root),'utf8'));
  assert(!('hud_title_text' in hud));assert(!('hud_subtitle_text' in hud));assert(!('mob_effects_renderer' in hud));

@@ -33,6 +33,29 @@ test('native count-pattern replay: one cup and no false warnings from fallback B
  assert.equal(d.getBlock(at).typeId,NS+'cup_empty_glassware');assert.equal(d.getBlock({...at,z:2}).typeId,'minecraft:air');
  assert.equal(p.inventory.getItem(3).amount,4);assert.deepEqual(failures(warnings),[]);assert.deepEqual(p.messages,[]);
 });
+test('native seq2-24 tick40274: true far use then false near continuation queues one cup',()=>{
+ const {p,at}=setup(),far=ground({...at,z:2}),near=ground({...at,z:1});p.isSneaking=true;
+ system.currentTick=40274;
+ const warnings=capture(()=>{
+  interact(p,far,'Up',{first:true,point:{x:.5001526,y:0,z:.0746613}}); // seq2
+  aim(p,near);assert.equal(itemUse(p).cancel,true); // seq6-8: fallback already owned
+  for(let n=0;n<3;n++)assert.equal(interact(p,far,'Up',{first:false,point:{x:.5001373,y:0,z:.9521484}}).cancel,true); // seq9/11/13
+  assert.equal(interact(p,near,'Up',{first:false,point:{x:.5001373,y:0,z:.9521484}}).cancel,true); // seq15 changes raw target
+  system.advance(1);
+ });
+ assert.equal(d.getBlock({...at,z:2}).typeId,NS+'cup_empty_glassware');assert.equal(d.getBlock({...at,z:1}).typeId,'minecraft:air');
+ assert.equal(p.inventory.getItem(3).amount,4);assert.deepEqual(failures(warnings),[]);assert.deepEqual(p.messages,[]);
+});
+test('completed owned false continuation is suppressed but a fresh true near use succeeds',()=>{
+ const {p,at}=setup(),far=ground({...at,z:2}),near=ground({...at,z:1});p.isSneaking=true;
+ const warnings=capture(()=>{
+  interact(p,far);system.advance(1);
+  assert.equal(interact(p,near,'North',{first:false}).cancel,true);system.advance(1);
+  assert.equal(d.getBlock({...at,z:1}).typeId,'minecraft:air');
+  interact(p,near,'Up',{first:true});system.advance(1);
+ });
+ assert.equal(d.getBlock({...at,z:1}).typeId,NS+'cup_empty_glassware');assert.deepEqual(failures(warnings),[]);
+});
 test('shared storage fallback echoes do not schedule three stale insertions',()=>{
  const {p,at}=setup(NS+'wine_q3',2),A=holder(at),B=holder({...at,z:2});
  const warnings=capture(()=>{aim(p,A,'North',{x:.5,y:.5,z:0});interact(p,A,'North');for(const b of [B,A,B]){aim(p,b,'North',{x:.5,y:.5,z:0});itemUse(p);}system.advance(1);});

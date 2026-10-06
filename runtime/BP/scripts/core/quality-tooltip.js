@@ -17,14 +17,18 @@ export const BOTTLE_COLOR_KEYS=Object.freeze({
  vodka:'white',whiskey:'white',rum:'white'
 });
 
+let categoryResolver;
+export function configureBottleCategories(resolve){categoryResolver=resolve;}
+
 export function qualityBottleLore(item,legacyLevels=false,showColor=true,legacySource=false){
  // The tapped melon drink has no aging or quality level in Java.
  if(item?.typeId==='kaleidoscope_tavern:watermelon_juice')return undefined;
  const parsed=parseBottle(item?.typeId);
  if(!parsed)return undefined;
  const lines=[];
- const color=BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
- if(showColor&&Object.hasOwn(COCKTAIL_COLOR_CODES,color))lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${COCKTAIL_COLOR_CODES[color]}`},{translate:`color.kaleidoscope_tavern.${color}`}]});
+ const category=categoryResolver?.(item.typeId);
+ const color=category?.ingredientColor?.split('cocktail_ingredient_').at(-1)??BOTTLE_COLOR_KEYS[parsed.base]??BOTTLES[parsed.base]?.color;
+ if(showColor&&(Object.hasOwn(COCKTAIL_COLOR_CODES,color)||category&&!category.colorIgnored))lines.push({rawtext:[{text:'§7'},{translate:'color.kaleidoscope_tavern.prefix'},{text:`§${COCKTAIL_COLOR_CODES[color]??'f'}`},{translate:category?.translationKey??`color.kaleidoscope_tavern.${color}`}]});
  lines.push({rawtext:[{text:'§7'},{translate:'tooltip.kaleidoscope_tavern.bottle_block.brew_level',with:{rawtext:[{translate:`message.kaleidoscope_tavern.barrel.brew_level.${parsed.quality}`}]}}]});
  for(const entry of DRINK_EFFECTS[parsed.base]?.[parsed.quality-1]??[]){
   if(entry.probability<1)continue;

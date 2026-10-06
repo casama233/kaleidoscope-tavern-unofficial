@@ -14,6 +14,7 @@ import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validat
 import {COCKTAILS,SHAKER_INPUTS} from '../data/mixology.js';
 import {POTION_ITEMS} from '../core/potions.js';
 import {parseBottle} from '../core/bottles.js';
+import {configureBottleCategories} from '../core/quality-tooltip.js';
 import {potionInput,potionIdentity} from './potions.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach} from './transactions.js';
@@ -40,7 +41,7 @@ let registry,sequence=0;
 export const MIX_BLOCKS=new Set([STATION,...['empty_glassware',...Object.values(COCKTAILS).map(x=>x.name)].map(x=>NS+':cup_'+x)]);
 export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],unsupportedEffects:{}};
 export const nativeUseDiagnostics={starts:0,releases:0,cancelled:0,errors:[]};
-export function setMixologyRegistry(value){registry=value;}
+export function setMixologyRegistry(value){registry=value;configureBottleCategories(item=>registry.ingredientColor(item));}
 function log(error){const code=error.code??String(error);mixologyDiagnostics.errors.push(code);if(mixologyDiagnostics.errors.length>12)mixologyDiagnostics.errors.shift();console.warn('[Tavern Mixology] '+code);}
 function safely(player,fn){try{return fn();}catch(error){log(error);if(player)showShakerMessage(player,error.code??'ERROR');}}
 function near(player,block){canWrite(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}
@@ -146,7 +147,7 @@ function cancelUse(id){
 function finishUse(player,elapsed,automatic=false){
  const use=uses.get(player.id);if(!use)return;
  check(sameUse(player,use),'STALE_HAND');const current=hand(player);
- const next=finishShake(use.carried.state,elapsed,use.recipe);
+ const next=finishShake(use.carried.state,elapsed,registry.findShaker(use.carried.state.slots),registry);
  // Remove session before replacing the item: native stop/release may both fire.
  uses.delete(player.id);if(automatic)releaseGuards.set(player.id,{slot:use.slot,tick:system.currentTick});
  try{replaceHeld(player,current,portable(next,use.carried.token));}
@@ -199,7 +200,7 @@ export function takeCup(player,block){
 export function pourHeldShakerNow(player,block){
  near(player,block);idle(player);const key=cupKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
-  const item=hand(player),carried=readPortableItem(item),tx=serveShaker(carried.state),cup=getCup(block);
+  const item=hand(player),carried=readPortableItem(item),tx=serveShaker(carried.state,registry),cup=getCup(block);
   check(cup.item===EMPTY_CUP&&block.typeId===NS+':cup_empty_glassware','NEED_PLACED_EMPTY_GLASS');
   check(tx.result.carrier===EMPTY_CUP&&isCupItem(tx.result.item),'WRONG_SERVING_CONTAINER');check(ItemTypes.get(tx.result.item),'OUTPUT_PACK_MISSING');
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};

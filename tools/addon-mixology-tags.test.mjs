@@ -8,29 +8,30 @@ import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {BUILTIN_RECIPES} from '../runtime/BP/scripts/data/recipes.js';
 import {FLUIDS} from '../runtime/BP/scripts/data/fluids.js';
 import {inputSnapshot} from '../runtime/BP/scripts/core/mixology.js';
-import {qualityBottleLore,normalizeBottleStack,isLegacyManagedQualityBottleLore} from '../runtime/BP/scripts/core/quality-tooltip.js';
+import {qualityBottleLore,configureBottleCategories,normalizeBottleStack,isLegacyManagedQualityBottleLore} from '../runtime/BP/scripts/core/quality-tooltip.js';
 import {isPlainIngredient} from '../runtime/BP/scripts/core/inventory.js';
 import {expandShakerTags} from '../runtime/BP/scripts/core/shaker-tags.js';
 assert.ok(process.env.LIQUOR_SOURCE,'LIQUOR_SOURCE required; no skipped peer coverage');
 const {payload}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/payload.js')).href);
-const make=()=>new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});
+const current=!!payload.shakerColors?.length;
+const make=()=>{const r=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});configureBottleCategories(item=>r.ingredientColor(item));return r;};
 const pairs=payload.shakerInputs.flatMap(input=>SHAKER_RECIPES.flatMap(recipe=>recipe.ingredientTags.map((tag,i)=>input.ingredientTags.includes(tag)?{input,recipe,i}:null).filter(Boolean)));
 for(const {input,recipe,i} of pairs)test(recipe.id+' accepts '+input.item+' in tagged slot '+i,()=>{
- const r=make();r.install(payload);const slots=recipe.ingredients.map(s=>({item:s[0]}));slots[i]={item:input.item};
+ const r=make();r.install(payload);const slots=r.recipe(recipe.id).ingredients.map(s=>({item:s[0]}));slots[i]={item:input.item};
  assert.equal(r.findShaker(slots)?.output.item,recipe.output.item);
 });
 test('iced tea dark-red category remains distinct and q1–q3 remain too low',()=>{
  const r=make();r.install(payload);
  for(let q=1;q<=3;q++)assert.throws(()=>inputSnapshot('kaleidoscope_world_liquor:ice_tea_q'+q,r),/QUALITY_TOO_LOW/);
  for(let q=4;q<=6;q++){
-  const s=inputSnapshot('kaleidoscope_world_liquor:ice_tea_q'+q,r);assert.equal(s.color,0xaa0000);assert.deepEqual(s.ingredientTags,['kaleidoscope_tavern:cocktail_ingredient_dark_red']);
-  const found=r.findShaker([s,{item:'kaleidoscope_tavern:plum_wine_q4'},{item:'kaleidoscope_tavern:vodka_q4'}]);assert.equal(found.output.item,'kaleidoscope_tavern:bloody_mary');
+  const s=inputSnapshot('kaleidoscope_world_liquor:ice_tea_q'+q,r);assert.equal(s.color,current?8606770:0xaa0000);assert.deepEqual(s.ingredientTags,['kaleidoscope_tavern:cocktail_ingredient_'+(current?'brown':'dark_red')]);
+  const found=r.findShaker([s,{item:'kaleidoscope_tavern:plum_wine_q4'},{item:'kaleidoscope_tavern:vodka_q4'}]);if(current)assert.equal(found,undefined);else assert.equal(found.output.item,'kaleidoscope_tavern:bloody_mary');
  }
  const red=r.recipe('kaleidoscope_tavern:shaker/bloody_mary');assert.ok(red.ingredients.every(s=>!s.includes('kaleidoscope_world_liquor:ice_tea_q6')));
 });
 test('all current addon cocktail first-options remain recognized',()=>{
- const r=make();r.install(payload);const recipes=payload.recipes.filter(x=>x.kind==='shaker');assert.equal(recipes.length,14);
- for(const recipe of recipes)assert.equal(r.findShaker(recipe.ingredients.map(s=>({item:s[0]})))?.output.item,recipe.output.item,recipe.id);
+ const r=make();r.install(payload);const recipes=payload.recipes.filter(x=>x.kind==='shaker');assert.equal(recipes.length,current?18:14);
+ for(const recipe of recipes)assert.equal(r.findShaker(r.recipe(recipe.id).ingredients.map(s=>({item:s[0]})))?.output.item,recipe.output.item,recipe.id);
 });
 const tag='custom:tag';
 const recipe=(source,item)=>({id:source+':mix',kind:'shaker',ingredients:[[item],['minecraft:sugar'],['minecraft:apple']],ingredientTags:[tag,null,null],output:{item:source+':output'},carrier:'kaleidoscope_tavern:empty_glassware'});
@@ -62,7 +63,7 @@ class Item{
 }
 for(const content of payload.content.filter(x=>x.kind==='bottle'))test(content.base+' declares exact color and formats all quality tooltips',()=>{
  const r=make();r.install(payload);assert.ok(content.color);
- for(const id of content.items){const lore=qualityBottleLore(new Item(id));assert.ok(lore[0].rawtext.some(x=>x.translate==='color.kaleidoscope_tavern.'+content.color));assert.ok(!JSON.stringify(lore).includes('undefined'));}
+ for(const id of content.items){const lore=qualityBottleLore(new Item(id));const color=content.color.split('cocktail_ingredient_').at(-1);assert.ok(lore[0].rawtext.some(x=>x.translate==='color.kaleidoscope_tavern.'+color));assert.ok(!JSON.stringify(lore).includes('undefined'));}
 });
 for(const legacy of [false,true])for(const q of [4,5,6])test('exact prior no-color lore migrates without metadata rejection '+legacy+'/'+q,()=>{
  const r=make();r.install(payload);const item=new Item('kaleidoscope_world_liquor:ice_tea_q'+q);item.lore=qualityBottleLore(item,legacy,false);

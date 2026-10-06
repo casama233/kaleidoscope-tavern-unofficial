@@ -19,7 +19,7 @@ import {installCustomEffects,customEffectDiagnostics} from './bedrock/custom-eff
 import {potionDiagnostics,potionCapabilities} from './bedrock/potions.js';
 import {nativeUseDiagnostics} from './bedrock/mixology.js';
 import {immersionDiagnostics} from './bedrock/immersion.js';
-import {system,world,ItemTypes,ScriptEventSource} from '@minecraft/server';
+import {system,world,ItemTypes,ItemStack,ScriptEventSource} from '@minecraft/server';
 import {ExtensionRegistry} from './core/registry.js';
 import {BUILTIN_RECIPES} from './data/recipes.js';
 import {FLUIDS} from './data/fluids.js';
@@ -77,7 +77,7 @@ system.run(()=>{
   const recipes=[...BUILTIN_RECIPES,...SHAKER_RECIPES].map(r=>r.kind==='barrel'?{...r,ingredients:r.ingredients.map(s=>s.map(native))}:r);
   const missing=[];for(const r of recipes){const ids=r.kind!=='pressing'?[...r.ingredients.flat(),r.carrier,...(r.output.byQuality??[r.output.item])]:r.input;for(const id of ids)if(!ItemTypes.get(id))missing.push(id);}
   if(missing.length)throw new Error('Missing required runtime items: '+[...new Set(missing)].join(', '));
-  registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id)});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);const extensionFurniture=installExtensionFurniture(registry);
+  registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id),itemTags:id=>{try{return new ItemStack(id,1).getTags();}catch{return [];}}});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);const extensionFurniture=installExtensionFurniture(registry);
 installFoundationBridge(registry,extensionFurniture);installExtensionHost(registry);cookeryGuidePublisher.refresh();
   system.sendScriptEvent('kaleidoscope_cookery:api_ping','{}');
   console.warn(`[Tavern C6] Standalone Tavern guide and optional Cookery chapter initialized. Public beta ${BUILD_VERSION}.`);

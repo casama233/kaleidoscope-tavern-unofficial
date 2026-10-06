@@ -1,4 +1,4 @@
-const JAVA_COLOR_TAG=/^kaleidoscope_tavern:cocktail_ingredient_(?:black|dark_blue|dark_green|dark_aqua|dark_red|dark_purple|gold|gray|dark_gray|blue|green|aqua|red|light_purple|yellow|white)$/;
+const JAVA_COLOR_TAG=/^kaleidoscope_tavern:cocktail_ingredient_[a-z0-9_.-]+$/;
 /** Merge declared tag membership, never infer membership from visual RGB.
  * Rebuild from immutable source recipes/inputs so replacing/removing an addon
  * cannot leave stale memberships in the shared recipe cache.

@@ -14,6 +14,21 @@ class TraceProbeTests(unittest.TestCase):
     def test_logger_is_opt_in_bounded_console_only(self):
         text=probe.TRACE.read_text();self.assertIn('hasTag?.(TRACE_TAG)',text);self.assertIn('count>=240',text);self.assertIn('console.warn',text)
         for forbidden in ['setActionBar','setTitle','setItem(','setDynamicProperty(','runCommand(','spawnEntity(']:self.assertNotIn(forbidden,text)
+    def test_capture_getter_failures_cannot_interrupt_caller(self):
+        text=probe.TRACE.read_text().replace("import {world,system} from '@minecraft/server';","const world={afterEvents:{}},system={afterEvents:{},currentTick:1};")
+        text+='''\nimport assert from 'node:assert/strict';
+const invalid={get typeId(){throw Error('invalid block');}};
+assert.deepEqual(traceEvent({block:invalid}),{captureError:true});
+assert.deepEqual(traceEvent({get itemStack(){throw Error('invalid item');}}),{captureError:true});
+assert.deepEqual(traceClaim({get pending(){throw Error('invalid claim');}}),{captureError:true});
+for(const tagged of [false,true]){
+ const player={id:'probe-'+tagged,hasTag(){return tagged;},getComponent(){return null;}};
+ let settled=false;
+ assert.doesNotThrow(()=>{trace('claim.settle',player,{event:traceEvent({block:invalid})});settled=true;});
+ assert.equal(settled,true);
+}
+'''
+        r=subprocess.run(['node','--input-type=module'],input=text.encode(),capture_output=True);self.assertEqual(r.returncode,0,r.stderr)
     def test_uuid_and_archive_are_deterministic_and_separate(self):
         with tempfile.TemporaryDirectory() as a,tempfile.TemporaryDirectory() as b:
             first=probe.build(a);second=probe.build(b);self.assertEqual(first['sha256'],second['sha256']);self.assertTrue(first['source_unchanged'])
@@ -22,4 +37,11 @@ class TraceProbeTests(unittest.TestCase):
                 m=json.loads(z.read('TavernTrace_BP/manifest.json'));self.assertNotEqual(m['header']['uuid'],original['header']['uuid']);self.assertEqual(m['header']['version'],[0,0,1])
     def test_anchor_drift_fails_closed(self):
         with self.assertRaises(AssertionError):probe.replace_once('a','missing','b')
+    def test_early_callbacks_rejections_and_final_settlement_are_captured(self):
+        base,_=probe.frozen(probe.ROOT,[0,6,107]);text=probe.instrument(base)['scripts/bedrock/java-placement-router.js'].decode()
+        self.assertEqual(text.count("trace('dispatch.reject'"),3)
+        self.assertIn("nativeEmptyHandBlockUse(e){\n trace('native.empty.enter'",text)
+        self.assertLess(text.index("trace('native.empty.enter'"),text.index("const player=e?.player,block=e?.block"))
+        self.assertLess(text.index('row.pending=false'),text.index("trace('claim.settle.exit'"))
+        self.assertIn("current:traceClaim(blockUses.get(event.player.id))",text)
 if __name__=='__main__':unittest.main()

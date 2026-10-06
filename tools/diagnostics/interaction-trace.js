@@ -5,8 +5,8 @@ const counts=new Map(),rows=new Map();let sequence=0;
 function point(p){return p?{x:p.x,y:p.y,z:p.z}:null;}
 function item(s){return s?{id:s.typeId,amount:s.amount}:null;}
 function block(b){return b?{id:b.typeId,dimension:b.dimension?.id,position:point(b.location)}:null;}
-export function traceClaim(row){return row?{itemId:row.itemId,slot:row.slot,sneaking:row.sneaking,tick:row.tick,block:row.block,face:row.face,source:row.source,pending:row.pending}:null;}
-export function traceEvent(e){return e?{block:block(e.block),face:e.blockFace??e.face,faceLocation:point(e.faceLocation),isFirstEvent:e.isFirstEvent,cancel:e.cancel,item:item(e.itemStack)}:null;}
+export function traceClaim(row){try{return row?{itemId:row.itemId,slot:row.slot,sneaking:row.sneaking,tick:row.tick,block:row.block,face:row.face,source:row.source,pending:row.pending}:null;}catch{return {captureError:true};}}
+export function traceEvent(e){try{return e?{block:block(e.block),face:e.blockFace??e.face,faceLocation:point(e.faceLocation),isFirstEvent:e.isFirstEvent,cancel:e.cancel,item:item(e.itemStack)}:null;}catch{return {captureError:true};}}
 export function trace(stage,player,data={}){
  try{
   if(!player?.hasTag?.(TRACE_TAG))return;

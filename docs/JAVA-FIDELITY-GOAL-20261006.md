@@ -45,3 +45,5 @@ Minecraft／loader 的版本號合併，也不能以單一舊 fixture 代表所�
 2026-10-07：使用者強調無任何邏輯BUG，客戶端驗收可交給dot。0.1.77補破勢／先前玩家重斬的來源暴擊追蹤與粒子資料，受傷取消／拒絕不發新粒子；排除有生命值的船等非LivingEntity。原生事件證據不是真人畫面證據，dot清單在世界名酒docs/DOT-CLIENT-ACCEPTANCE-0.1.77.md。原有完整差距、未知addon類別映射及所有尚未核對邏輯仍未完成，不能宣稱全面無BUG。
 
 0.1.78修掉受傷被後續addon取消仍播聲音，以及異維度先前玩家錯發暴擊；共享原生接受判斷保持原作位置／選項和同次多回饋。Native40項相關回歸／真實傷害回饋已有證據。同維度攻擊者tracking／visibility範圍仍是邏輯差距，dot只負責實際聲畫驗收，不能替代邏輯修補。微醺以外完整100%範圍保持原要求。
+
+0.1.79恢復冰凍水面每tick／半徑3+amplifier、不封頂及來源水／空氣判斷。Native實際方塊與grounded/airborne mob已確認圈界及排除條件；不是玩家或畫面驗收。27塊霜冰在randomTickSpeed0下400次tick觀察不老化，與Java排程不同。JavaonPlace先60–120排程，後續同種類／同位置60請求去重；不能改成60固定融化。完整霜冰老化／融化、水面行走流體shape／move／onGround／fallDistance、chunk載入和玩家碰撞時序仍未完成，未獲平台豁免。使用者自行客戶端實測，場景在世界名酒docs/CLIENT-COMPARISON-0.1.79.md。原完整目標除微醺外保持不變。

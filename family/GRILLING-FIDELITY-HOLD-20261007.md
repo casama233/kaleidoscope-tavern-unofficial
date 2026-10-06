@@ -1,6 +1,6 @@
 # 煙火目前範圍與 live 部署要求
 
-來源鎖同步 Grilling 2.8.81 BP/RP，保留酒館 0.6.114、世界名酒 0.1.80 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
+來源鎖同步 Grilling 2.8.81 BP/RP，保留酒館 0.6.115、世界名酒 0.1.82 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
 
 已保留 PR205 的世界名酒修復及通用 source-hold 准入工具；只撤銷其依据本輪較早指示登記的 Grilling 2.8.72→2.8.73 部署保留，原因為下述使用者明確調整。其他來源的完成門檻不因本輪自動解除。
 
@@ -30,4 +30,4 @@ This G79 pairing also retains the latest canonical World Liquor 0.1.80 / PR53 Tr
 
 ## Coherent G81 release-stop and jar projection repair
 
-Grilling PR143 retains canonical G79 and integrates the proven nonterminal stop-before-leave race correction with PR142 jar-projection source. Both conflicting unpublished G80 commits/claims/history stay intact, and new output uses G81. The meal transaction detaches before rewards; complete/unknown clocks keep native priority. Existing jar groups translate in reflected model X to their saved hit cells, preserving all storage/UV/mask/interaction and lower tool data. Full logout event order and G81 client/audio/render acceptance remain pending with dot. T114/L80/private1020/Cookery160 remain paired; no Tavern runtime changes.
+Grilling PR143 retains canonical G79 and integrates the proven nonterminal stop-before-leave race correction with PR142 jar-projection source. Both conflicting unpublished G80 commits/claims/history stay intact, and new output uses G81. The meal transaction detaches before rewards; complete/unknown clocks keep native priority. Existing jar groups translate in reflected model X to their saved hit cells, preserving all storage/UV/mask/interaction and lower tool data. Full logout event order and G81 client/audio/render acceptance remain pending with dot. T115/L82/private1020/Cookery160 remain paired, including the concurrent canonical living-effect repairs; this lock change adds no Tavern runtime changes.

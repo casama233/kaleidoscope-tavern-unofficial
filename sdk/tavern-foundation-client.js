@@ -9,6 +9,16 @@ export function readTavernEffects(entity,source){
  for(const row of snapshot.rows){if(row.ticks<=elapsed)continue;const name=row.id.slice(source.length+1),old=result[name];if(!old||row.amplifier>old.amplifier||row.amplifier===old.amplifier&&row.ticks>old.ticks)result[name]=row;}
  return result;
 }
+/** Resolve only this addon's fresh snapshot recipients, never scan the world. */
+export function getTavernEffectEntities(world,source){
+ const result=[];
+ for(const [key,snapshot] of effects){
+  if(!key.startsWith(source+'/'))continue;
+  if(clock()-snapshot.sequence>20){effects.delete(key);continue;}
+  try{const entity=world.getEntity(key.slice(source.length+1));if(entity&&entity.isValid!==false)result.push(entity);}catch{}
+ }
+ return result;
+}
 export function createFoundationClient(system,world,payload,ready,{log=console.warn}={}){
  const source=payload.source,definitions=new Map(payload.furniture.map(x=>[x.block,x])),queue=[],staged=new Map();let active,seq=0;clock=()=>system.currentTick;
  const legacyKey=(def,dimension,p)=>def.legacyPrefix+dimension.split(':')[1]+'/'+p.x+'_'+p.y+'_'+p.z;
@@ -71,7 +81,8 @@ export function createFoundationClient(system,world,payload,ready,{log=console.w
  system.runInterval(migrateEffects,20);
  const clear=p=>{effects.delete(source+'/'+p.id);staged.delete(source+'/'+p.id);p.setDynamicProperty(payload.legacyEffectKey,undefined);};
  world.afterEvents.itemCompleteUse.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')clear(e.source);});
- world.afterEvents.entityDie.subscribe(e=>{if(e.deadEntity?.typeId==='minecraft:player')clear(e.deadEntity);});
+ world.afterEvents.entityDie.subscribe(e=>{const entity=e.deadEntity;if(!entity?.id)return;effects.delete(source+'/'+entity.id);staged.delete(source+'/'+entity.id);if(entity.typeId==='minecraft:player')clear(entity);});
+ world.afterEvents.entityRemove?.subscribe(e=>{effects.delete(source+'/'+e.removedEntityId);staged.delete(source+'/'+e.removedEntityId);});
  world.afterEvents.playerLeave.subscribe(e=>{const key=source+'/'+e.playerId;effects.delete(key);staged.delete(key);effectAcks.delete(key);});
  system.runInterval(()=>{for(const [key,state] of staged)if(system.currentTick-state.sequence>20)staged.delete(key);},20);
  return {cabinet,enqueue,migrateEffects,read:entity=>readTavernEffects(entity,source),nativeUse(e){if(e.player&&ready())system.sendScriptEvent(NS+'foundation_native_use',JSON.stringify({source,kind:'native_use',tick:system.currentTick,slot:e.player.selectedSlotIndex,type:e.block.typeId,dimension:e.block.dimension.id,position:e.block.location,entity:e.player.id,face:String(e.face??e.blockFace),faceLocation:e.faceLocation}));}};

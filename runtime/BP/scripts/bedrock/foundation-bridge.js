@@ -6,7 +6,7 @@ import {world,system,ScriptEventSource} from '@minecraft/server';
 import {ExtensionTransport,EVENTS} from '../core/transport.js';
 import {check,utf8Bytes,canonical} from '../core/util.js';
 import {externalEffectMigrations} from '../core/extension-content.js';
-import {importExternalEffects,statusNow} from './custom-effects.js';
+import {importExternalEffects,statusNow,effectSnapshotEntities} from './custom-effects.js';
 const PREFIX='kaleidoscope_tavern:',ACK=PREFIX+'foundation_ack';
 const incoming=new Map(['begin','chunk','commit'].map(k=>[PREFIX+'foundation_'+k,EVENTS[k]]));
 export function installFoundationBridge(registry,furniture){
@@ -31,7 +31,7 @@ export function installFoundationBridge(registry,furniture){
  const publish=()=>{
   const seen=new Set();
   const definitions=externalEffectMigrations();
-  for(const p of world.getAllPlayers()){
+  for(const p of effectSnapshotEntities()){
    let state;
    if(!definitions.length)continue;
    try{state=statusNow(p);}catch(e){console.warn('[Tavern effect snapshot] '+e);continue;}
@@ -46,7 +46,13 @@ export function installFoundationBridge(registry,furniture){
    groups.forEach((rows,part)=>system.sendScriptEvent(PREFIX+'effect_snapshot',JSON.stringify({source:def.source,entity:p.id,sequence:system.currentTick,part,parts:groups.length,rows})));
   }catch(e){console.warn('[Tavern effect snapshot] '+e);}
   }
-  for(const key of snapshotCache.keys())if(!seen.has(key))snapshotCache.delete(key);
+  for(const key of snapshotCache.keys())if(!seen.has(key)){
+   // A cleared/unloaded nonplayer no longer occurs in the active track index.
+   // Revoke its prior rows explicitly rather than leaving a 20-tick cached buff.
+   const split=key.indexOf('/');
+   system.sendScriptEvent(PREFIX+'effect_snapshot',JSON.stringify({source:key.slice(0,split),entity:key.slice(split+1),sequence:system.currentTick,part:0,parts:1,rows:[]}));
+   snapshotCache.delete(key);
+  }
  };
  system.runInterval(publish,5);system.runInterval(()=>transport.cleanup(system.currentTick),200);
  return {transport,publish};

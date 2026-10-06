@@ -180,7 +180,9 @@ def action(name):
 def source_state(verify_remote=False):
     result = {}
     from family_update.source_holds import selected,verify_source
-    holds=selected(read(T/'family/upstream.lock.json'),CONFIG.get('held_sources',[]))
+    lock=read(T/'family/upstream.lock.json');requested=CONFIG.get('held_sources',[])
+    assert set(lock.get('deployment_holds',{}))==set(requested),'Active completion holds must be retained explicitly before any live update'
+    holds=selected(lock,requested)
     paths = {**SOURCES, **({'extension': EXTENSION} if EXTENSION else {})}
     for name, path in paths.items():
         config = read(path / 'baseline.json')

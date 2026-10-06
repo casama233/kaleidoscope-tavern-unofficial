@@ -66,14 +66,14 @@ def main():
     core=(RT/'BP/scripts/core/quality-tooltip.js').read_text()
     assert "['I','II','III','IV','V','VI','VII','VIII','IX','X']" in core
     adapter=(RT/'BP/scripts/bedrock/tipsy-visual.js').read_text()
-    assert not re.search(r'import\s*\{[^}]*CameraShakeType',adapter)
-    assert 'tipsyYawStep(p.getRotation(),track.offset,target)' in adapter
-    assert 'p.setRotation(step.rotation)' in adapter
+    assert 'CameraShakeType' in adapter and 'camera.addShake({' in adapter
+    assert 'tipsyShakeWindow(track.until-now)' in adapter
+    assert 'leases.set(id,{tick:now+pulse.leaseTicks,wall:wall+pulse.leaseMs})' in adapter
     assert 'system.runInterval(tickTipsyVisuals,1)' in adapter
     assert 'InputPermissionCategory.Camera' in adapter and 'TIPSY_OPT_OUT_TAG' in adapter
     assert 'if(now<track.retryAt)' in adapter and 'stopIfEmpty()' in adapter
-    for forbidden in ('camerashake','.addShake(','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport('):
-        assert forbidden not in adapter,('global/destructive/false camera fallback',forbidden)
+    for forbidden in ('camerashake','.stopShaking(','.setCamera(','.clear(','addEffect(','Math.random(','.teleport(','.setRotation(','.getRotation(','.playAnimation('):
+        assert forbidden not in adapter,('global/destructive/aim-changing camera fallback',forbidden)
     hooks=(RT/'BP/scripts/bedrock/custom-effects.js').read_text()
     assert 'pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID))' in hooks
     assert 'forgetTipsyVisual(p.id);write(' in hooks

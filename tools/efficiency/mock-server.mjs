@@ -44,6 +44,7 @@ let runId=0;
 export const system={currentTick:0,timers:new Map(),afterEvents:signals(),runInterval(fn,period){const id=runId++;this.timers.set(id,{fn,period});return id;},run(fn){const id=runId++;this.timers.set(id,{fn,once:true});return id;},runTimeout(fn){return this.run(fn);},clearRun(id){this.timers.delete(id);},sendScriptEvent(){}};
 export const GameMode={Survival:'Survival',Creative:'Creative',Spectator:'Spectator',Adventure:'Adventure'};
 export const EquipmentSlot={Head:'Head',Chest:'Chest',Legs:'Legs',Feet:'Feet',Mainhand:'Mainhand',Offhand:'Offhand'};
+export const CameraShakeType={Rotational:'Rotational',Positional:'Positional'};
 export const ScriptEventSource={Server:'Server'},EntityDamageCause={sonicBoom:'sonicBoom'},InputPermissionCategory={Camera:'Camera'};
 export const ItemTypes={get:id=>({id}),getAll:()=>[]},Potions={},EffectTypes={getAll:()=>[]};
 export class ItemStack{constructor(typeId,amount=1){this.typeId=typeId;this.amount=amount;}getComponent(){}clone(){return new ItemStack(this.typeId,this.amount);}}

@@ -1,8 +1,8 @@
-## Current maintained baseline: 0.6.110
+## Current maintained baseline: 0.6.111
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 
-Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.110** runs independently; Cookery **1.0.8** is optional. This candidate repairs the native-traced false cancellation when Sneak changes during an already-owned placement gesture. The matching companion is World Liquor **0.1.71**. Exact 109/70 production Mystery icons, FOREIGN-title coexistence and actual-milk clearing passed the bounded native check. The bounded 110/71 placement retest now passes two Creative and one Survival trials without the false warning; camera-roll and broader interaction acceptance remain pending. Frozen 109/70 and earlier artifacts remain immutable. See [110 evidence and limits](docs/RELEASE-NOTES-0.6.110.md). This is a Git-first candidate, not a release or deployment.
+Canonical runtime and dependencies: [baseline.json](baseline.json). Tavern **0.6.111** runs independently; Cookery **1.0.8** is optional. Slightly Tipsy now uses bounded native visual-only rotational shake instead of moving player aim. This is an approximation, not Java's exact Z-roll. Stable Script API **2.10.0** is required (Minecraft **1.26.50+**); World Liquor **0.1.72** is the matching companion being prepared. The bounded110/71 placement fix and109/70 HUD repair are preserved. Actual111 drink/milk/expiry, sustained comfort, hand rendering and aim checks remain pending. See [111 evidence and limits](docs/RELEASE-NOTES-0.6.111.md). No release or live deployment.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -26,8 +26,8 @@ Static resource and source checks plus a real BDS 1.26.51.1 load passed with Coo
 
 - Minecraft Bedrock **26.50 or newer** (manifest `1.26.50`); load-validation target BDS **1.26.51.1**.
 - Cookery is optional. Integration is tested against **Kaleidoscope Cookery (Unofficial) 1.0.8**.
-- Both Tavern's 0.6.110 behavior and resource packs. If Cookery is installed, keep Tavern above it in each pack stack. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
-- Slightly Tipsy uses the Java three-wave rhythm as small yaw increments, not camera shake. It slightly affects aim and is not camera-only roll. Use `/function kt_tipsy_motion_off` to opt out.
+- Both Tavern's 0.6.111 behavior and resource packs. If Cookery is installed, keep Tavern above it in each pack stack. Back up and leave the world before upgrading; do not enable duplicate older Tavern packs.
+- Slightly Tipsy uses finite native rotational shake (maximum0.25 seconds per event). It never writes player rotation or selects a free camera. The user’s Camera Shake setting remains unchanged; `/function kt_tipsy_motion_off` cancels future pulses. This is not exact Java Z-roll.
 
 The public beta uses Cookery's original UUIDs. The older private server bundle used different UUIDs and Cookery 1.0.7; see the migration notes before replacing it. No Cookery pack, world backup, credentials, server executable or other server add-on is included.
 

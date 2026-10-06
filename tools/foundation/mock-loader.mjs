@@ -24,6 +24,7 @@ Object.defineProperty(Player.prototype,'isValid',{get(){return !this.removed;}})
 // spawnEntity and setRotation already store this.rotation in the archived double.
 Entity.prototype.getRotation=function(){return {...(this.rotation??{x:0,y:0})};};
 export const EffectTypes={getAll:()=>[]};
+export const CameraShakeType={Rotational:'Rotational',Positional:'Positional'};
 export const InputPermissionCategory={Camera:'Camera',Movement:'Movement'};
 world.getAbsoluteTime=()=>system.currentTick;
 world.getEntity=id=>world.getAllPlayers().find(p=>p.id===id)??[...world.dimensions.values()].flatMap(d=>[...d.entities.values()]).find(e=>e.id===id);

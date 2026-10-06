@@ -101,9 +101,9 @@ def main():
     tipsy=(ROOT/'runtime/BP/scripts/bedrock/tipsy-visual.js').read_text()
     assert 'track.failed' not in tipsy and 'track.retryAt=now+' in tipsy
     assert 'exactJavaRoll:false' in tipsy and 'clientConfirmed:false' in tipsy
-    assert 'serverReadbackIsNotCameraProof:true' in tipsy
-    assert 'setRotation(step.rotation)' in tipsy # existing yaw adapter only; NOT acceptance
-    for forbidden in ('.teleport(','.setCamera(','.addShake(','.stopShaking(','Math.random(','.addEffect('):
+    assert 'apiAttemptIsNotCameraProof:true' in tipsy
+    assert 'camera.addShake({' in tipsy and 'CameraShakeType.Rotational' in tipsy # reviewed approximation; NOT native acceptance
+    for forbidden in ('.teleport(','.setCamera(','.setRotation(','.getRotation(','.clear(','.stopShaking(','Math.random(','.addEffect('):
         assert forbidden not in tipsy,('Unreviewed Tipsy substitute',forbidden)
     assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
     for file in ['kt_tipsy_diagnose','kt_molotov_diagnose']:
@@ -114,7 +114,7 @@ def main():
     report={'version':version,'baseline':ref['baselineCommit'],'javaSourceFilesVerified':verified,
         'reviewedChanges':sorted(ref['reviewedChanges']),'reviewedRemovals':sorted(removed),'unchangedExistingRuntimeFiles':unchanged if args.baseline else None,
         'pureRules':pure,'nativeMolotovResources':'source/schema aligned; device acceptance pending',
-        'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'diagnostics, immediate status hook and bounded transient-error retry only',
+        'tipsyCameraOnlyRoll':'NOT_RESTORED','tipsyChanges':'finite native rotational shake approximation; no aim writes or camera takeover',
         'bdsTest':'NOT_RUN','clientTest':'NOT_RUN','simulatedPlayerTests':False,'limits':ref['limits']}
     output=ROOT/f'docs/LAUNCH-VALIDATION-{version}.json'
     # A reduced local check must not overwrite evidence from verified Java and

@@ -43,3 +43,5 @@ Minecraft／loader 的版本號合併，也不能以單一舊 fixture 代表所�
 移動批次來源與原生證據：世界名酒 `docs/JAVA-MOTION-20261007.md`／`NATIVE-MOTION-CAPABILITIES-20261007.json`。Camera.playAnimation／Vector3是可測能力，尚未實作逆轉鏡頭；不以旋轉欄位存在推定畫面已一致。
 
 2026-10-07：使用者強調無任何邏輯BUG，客戶端驗收可交給dot。0.1.77補破勢／先前玩家重斬的來源暴擊追蹤與粒子資料，受傷取消／拒絕不發新粒子；排除有生命值的船等非LivingEntity。原生事件證據不是真人畫面證據，dot清單在世界名酒docs/DOT-CLIENT-ACCEPTANCE-0.1.77.md。原有完整差距、未知addon類別映射及所有尚未核對邏輯仍未完成，不能宣稱全面無BUG。
+
+0.1.78修掉受傷被後續addon取消仍播聲音，以及異維度先前玩家錯發暴擊；共享原生接受判斷保持原作位置／選項和同次多回饋。Native40項相關回歸／真實傷害回饋已有證據。同維度攻擊者tracking／visibility範圍仍是邏輯差距，dot只負責實際聲畫驗收，不能替代邏輯修補。微醺以外完整100%範圍保持原要求。

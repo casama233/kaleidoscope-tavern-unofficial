@@ -1,10 +1,10 @@
 /** Isolated native BDS fixture only. Never add this import to live runtime. */
 import {world,system,ItemStack,ItemTypes,BlockPermutation} from '@minecraft/server';
-import {ExtensionRegistry} from '../core/registry.js';
-import {SHAKER_RECIPES} from '../data/mixology.js';
-import {FLUIDS} from '../data/fluids.js';
-import {emptyShaker,addInput,inputSnapshot,finishShake} from '../core/mixology.js';
-import {PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
+import {ExtensionRegistry} from './core/registry.js';
+import {SHAKER_RECIPES} from './data/mixology.js';
+import {FLUIDS} from './data/fluids.js';
+import {emptyShaker,addInput,inputSnapshot,finishShake} from './core/mixology.js';
+import {PORTABLE_DATA,encodePortable,decodePortable} from './core/immersion.js';
 const N='future_mixology_probe:',TAG='kaleidoscope_tavern:cocktail_ingredient_';
 const check=(value,message)=>{if(!value)throw Error(message);};
 system.runTimeout(()=>{try{

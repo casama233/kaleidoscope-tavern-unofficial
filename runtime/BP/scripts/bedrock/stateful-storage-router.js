@@ -1,10 +1,10 @@
 import {nativeStoragePlan} from './native-item-storage.js';
-import {registerJavaBlockUseHandler} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,settleJavaBlockUse} from './java-placement-router.js';
 import {world,system} from '@minecraft/server';
-import {check} from '../core/util.js';
+import {check,canonical} from '../core/util.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {faceOffset} from '../core/furniture.js';
-import {handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
+import {hand,handSnapshot,sameHand,blockAt,plus,safe} from './transactions.js';
 import {registerProtectedBreakRoute,playMaterialInteraction} from './protected-break-router.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
 import {storageBottleItem} from '../core/holder.js';
@@ -124,6 +124,7 @@ export function installStatefulStorageRoutes({
  check(typeof routeId==='string'&&routeId,'INVALID_STORAGE_ROUTE');
  check(typeof isBlock==='function'&&typeof isPlacementItem==='function'&&typeof shouldInteract==='function','INVALID_STORAGE_ROUTE');
  check(typeof place==='function'&&typeof interact==='function'&&typeof recover==='function','INVALID_STORAGE_ROUTE');
+ const pending=new Map();
  registerJavaBlockUseHandler(e=>{
   if(e.cancel||!isBlock(e.block))return;
   const held=handSnapshot(e.player);if(javaSecondaryBypass(e.player,held.id))return;
@@ -132,10 +133,21 @@ export function installStatefulStorageRoutes({
   try{revision=revisionOf(readRevision,e.block);consume=!!shouldInteract({player:e.player,block:e.block,held,face,faceLocation,revision});}catch(error){if(failClosed){e.cancel=true;if(e.isFirstEvent!==false)system.run(()=>safe(e.player,()=>{throw error;}));}return;}
   if(!consume)return;e.cancel=true;if(e.isFirstEvent===false)return;
   const player=e.player,dimension=e.block.dimension,location={...e.block.location},typeId=e.block.typeId;
+  // Raw callback faces may disagree while resolving to the same semantic hit.
+  // Coalesce only equal queued state/actions; native stack comparison includes
+  // metadata. Nonstackable/unknown comparisons fail open, never lose an action.
+  const key=canonical({player:player.id,dimension:dimension.id,location,typeId,held,sneaking:player.isSneaking===true,revision,face,faceLocation}),item=hand(player),previous=pending.get(key);
+  let duplicate=false;
+  if(previous){try{duplicate=(!item&&!previous.item)||!!(item&&previous.item&&item.isStackableWith(previous.item));}catch{}}
+  if(duplicate){e._javaUseClaim=previous.event._javaUseClaim;return;}
+  const claim={item,event:e};pending.set(key,claim);
   system.run(()=>safe(player,()=>{
-   sameHand(player,held);check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
-   const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId&&isBlock(clicked),'BLOCK_CHANGED');
-   return interact({player,block:clicked,held,face,faceLocation,revision});
+   let succeeded=false;
+   try{
+    sameHand(player,held);check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
+    const clicked=blockAt(dimension,location);check(clicked?.typeId===typeId&&isBlock(clicked),'BLOCK_CHANGED');
+    const result=interact({player,block:clicked,held,face,faceLocation,revision});succeeded=true;return result;
+   }finally{if(pending.get(key)===claim)pending.delete(key);settleJavaBlockUse(e,succeeded);}
   }));
  });
  registerJavaItemUseOnRoute({

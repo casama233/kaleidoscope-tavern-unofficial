@@ -37,6 +37,20 @@ class IdentityTests(unittest.TestCase):
   with self.assertRaises(AssertionError):self.check()
  def test_no_configuration_still_rejects_uuid_drift(self):
   with patch.object(m,'CONFIG',{}),self.assertRaises(AssertionError):m.candidate_plan(self.new,self.old)
+ def test_reviewed_order_stays_interleaved_with_author_identity_swap_in_place(self):
+  root=Path(__file__).resolve().parents[2];path=root/'family/identity-migrations/cookery-108-to-160.json'
+  original={'refs':{row['side']:[{'pack_id':'first-'+row['side']},{'pack_id':row['old_uuid']},{'pack_id':'last-'+row['side']}] for row in self.spec['packs']}}
+  before=copy.deepcopy(original)
+  with patch.multiple(m,T=root,CONFIG={'identity_migration':str(path)}):order=m.assembly_order(original)
+  for row in self.spec['packs']:
+   self.assertEqual(order[row['side']],['first-'+row['side'],row['new_uuid'],'last-'+row['side']])
+  self.assertEqual(original,before)
+  with patch.object(m,'CONFIG',{}):self.assertEqual(m.assembly_order(original),{side:[ref['pack_id'] for ref in refs] for side,refs in original['refs'].items()})
+ def test_order_mapping_rejects_unreviewed_or_duplicate_migration_identity(self):
+  root=Path(__file__).resolve().parents[2];path=root/'family/identity-migrations/cookery-108-to-160.json'
+  original={'refs':{row['side']:[{'pack_id':row['old_uuid']},{'pack_id':row['old_uuid']}] for row in self.spec['packs']}}
+  with patch.multiple(m,T=root,CONFIG={'identity_migration':str(path)}),self.assertRaises(AssertionError):m.assembly_order(original)
+  with patch.multiple(m,T=root,CONFIG={'identity_migration':'/tmp/unreviewed.json'}),self.assertRaises(AssertionError):m.assembly_order(original)
  def test_external_migration_declaration_rejected(self):
   with patch.object(m,'CONFIG',{'identity_migration':'/tmp/unreviewed.json'}),self.assertRaises(AssertionError):m.candidate_plan(self.new,self.old)
  def test_only_identity_adoption_marker_prevents_old_restart(self):

@@ -247,6 +247,7 @@ jobs:
             tests+=(tools/effects/interaction-regression.test.mjs)
           fi
           node --experimental-vm-modules --test "${tests[@]}" | tee ../evidence/effect-tests.txt
+          node --test tools/java-random-float.test.mjs | tee ../evidence/java-random-float-tests.tap
           git diff --exit-code -- runtime/
       - name: Preserve only validation evidence, not complete game or font archives
         if: always()

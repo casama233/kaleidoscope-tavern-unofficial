@@ -35,6 +35,14 @@ test('All slot tokens are unique and cannot produce phantom icons across boundar
  const matches=all.filter(token=>packet.includes(token));assert.equal(matches.length,EFFECT_ICONS.length);
  assert.throws(()=>effectIconToken(32,1));assert.throws(()=>effectIconToken(0,0));
 });
+test('Native formatting prefix capture uses its UTF-8 byte precision, not JavaScript length',()=>{
+ const hud=JSON.parse(readFileSync(new URL('../runtime/RP/ui/hud_screen.json',import.meta.url),'utf8'));
+ const cache=hud.kt_effect_icons.controls[0].kt_effect_data;
+ const capture=cache.bindings.find(binding=>binding.target_property_name==='#visible');
+ assert.equal(EFFECT_ICON_PREFIX.length,12);assert.equal(Buffer.byteLength(EFFECT_ICON_PREFIX,'utf8'),18);
+ assert.equal(capture.source_property_name,`(not (#hud_title_text_string = #kt_effect_packet) and (('%.18s' * #hud_title_text_string) = '${EFFECT_ICON_PREFIX}'))`);
+ assert(!capture.source_property_name.includes('%.12s'),'Native probe rejects the truncated header');
+});
 test('Standalone sprites and additive root controls have no optional asset dependency',()=>{
  const root=new URL('../',import.meta.url),hud=JSON.parse(readFileSync(new URL('runtime/RP/ui/hud_screen.json',root),'utf8'));
  assert(!('hud_title_text' in hud));assert(!('hud_subtitle_text' in hud));assert(!('mob_effects_renderer' in hud));
@@ -44,6 +52,8 @@ test('Standalone sprites and additive root controls have no optional asset depen
  assert.equal(hud.kt_effect_empty.type,'panel');
  for(const c of panel.controls.slice(1,-1)){
   const image=Object.values(c)[0];assert(EFFECT_ICONS.some(row=>row.texture===image.texture));
+  const cache=image.bindings.find(binding=>binding.source_control_name==='kt_effect_data');
+  assert.equal(cache?.resolve_sibling_scope,true,'Icon must resolve the sibling packet cache');
   assert(!image.texture.includes('world_liquor'));assert(existsSync(new URL('runtime/RP/'+image.texture+'.png',root)));
  }
  const adapter=readFileSync(new URL('runtime/BP/scripts/bedrock/effect-icons.js',root),'utf8');

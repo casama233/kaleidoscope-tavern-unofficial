@@ -179,12 +179,21 @@ def action(name):
 
 def source_state(verify_remote=False):
     result = {}
+    from family_update.source_holds import selected,verify_source
+    lock=read(T/'family/upstream.lock.json');requested=CONFIG.get('held_sources',[])
+    assert set(lock.get('deployment_holds',{}))==set(requested),'Active completion holds must be retained explicitly before any live update'
+    holds=selected(lock,requested)
     paths = {**SOURCES, **({'extension': EXTENSION} if EXTENSION else {})}
     for name, path in paths.items():
         config = read(path / 'baseline.json')
         branch = git(path, 'branch', '--show-current')
         commit = git(path, 'rev-parse', 'HEAD')
-        assert branch == 'main' and not git(path, 'status', '--porcelain'), f'Canonical {name} must be clean main'
+        assert not git(path, 'status', '--porcelain'), f'Canonical {name} must be clean'
+        if name in holds:
+            hold=holds[name];reason=T/hold['reason_file']
+            assert git(T,'show','HEAD:'+hold['reason_file'])==reason.read_text().strip(),'Hold reason must be committed and unchanged'
+            assert commit==hold['commit'] and config['version']==hold['version'] and config['source_trees']==hold['source_trees'],'Held revision differs from canonical declaration'
+        else:assert branch=='main',f'Canonical {name} must be clean main'
         row = {'path': str(path), 'commit': commit, 'tree': git(path, 'rev-parse', 'HEAD^{tree}'), 'repository': config['repository'], 'version': config['version'], 'baseline_sha256': sha(path / 'baseline.json'), 'source_trees': config['source_trees']}
         if verify_remote:
             if name == 'extension':
@@ -196,7 +205,10 @@ def source_state(verify_remote=False):
                 assert profile['private'] is True and profile['id']==target['repository_id'] and profile['full_name']==target['repository'], 'Private remote must retain its identity and visibility'
                 row['remote_repository']=target['repository']
             remote_head = git(path, 'ls-remote', 'origin', 'refs/heads/main').split()[0]
-            assert remote_head == commit, f'{name} canonical main differs from remote'
+            if name in holds:
+                assert verify_source(path,config,holds[name],git)==remote_head
+                row['held_revision']=holds[name]
+            else:assert remote_head == commit, f'{name} canonical main differs from remote'
             row['remote_main'] = remote_head
         result[name] = row
     return result

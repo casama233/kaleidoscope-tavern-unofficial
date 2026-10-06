@@ -29,6 +29,8 @@ def main(argv=None):
     assert original_policy == sha(Q / 'senluo-policy.json'), 'Concurrent deployment during capture'
     assert inventory == live_inventory(), 'Concurrent pack change during capture'
     preserved = {p['uuid'] for p in read(policy['approved_receipt'])['packs'] if p['source']['owner'] == 'preserved'}
+    if CONFIG.get('preserved_additions'):
+        preserved.update(read(Path(CONFIG['preserved_additions']))['packs'])
     atomic(out / 'preserved-packs.json', [p for p in inventory['packs'] if p['uuid'] in preserved])
     capture = {'recorded_at': now(), 'read_only_live': True, 'previous_lease': previous, 'policy_sha256': original_policy, 'engine_sha256': sha(B / 'bedrock_server'), 'level_metadata': report_ref(out / 'level-metadata.dat'), 'agent_instructions': report_ref(out / 'ROOT-AGENTS.md'), 'inventory': report_ref(out / 'inventory.json'), 'note': 'No live LevelDB copy. Fresh stopped snapshot is created only during authorized deployment.'}
     atomic(out / 'capture.json', capture)

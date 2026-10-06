@@ -1,5 +1,6 @@
 import {externalEffectDefinition} from './extension-content.js';
 import {check,integer,clone} from './util.js';
+import {javaRandomFloat} from './java-random.js';
 export const CUSTOM_STATUS_KEY='kaleidoscope_tavern:custom_effects';
 export const CUSTOM_IMPLEMENTED=Object.freeze({
  'kaleidoscope_tavern:bloody_mary':'kill_heal',
@@ -45,7 +46,7 @@ export const TOMB_RAIDER_TYPES=Object.freeze([
 const TOMB_RAIDER_SET=new Set(TOMB_RAIDER_TYPES);
 export const TOMB_RAIDER_CHANCE=Math.fround(.3);
 export function tombRaiderTarget(typeId){return typeof typeId==='string'&&TOMB_RAIDER_SET.has(typeId);}
-export function tombRaiderProc(roll){check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');return Math.fround(roll)<TOMB_RAIDER_CHANCE;}
+export function tombRaiderProc(roll){return javaRandomFloat(roll)<TOMB_RAIDER_CHANCE;}
 export const ARDENT_HEAT_BLOCKS=Object.freeze([
  'minecraft:stone','minecraft:granite','minecraft:diorite','minecraft:andesite','minecraft:tuff','minecraft:deepslate',
  'minecraft:netherrack','minecraft:basalt','minecraft:blackstone','minecraft:end_stone'

@@ -116,8 +116,13 @@ SHA25655e284307a5c903f7c4a5ed67185d0a513ec7f121b41e9c83d9ec838d339c876.
 On native1.26.52.3 alongside109/70, normal_plus, free_zero and free_plus returned
 without visible grid tilt after more than eight seconds. Free mode hid the
 hand/crosshair and showed a dither overlay; timeout restored normal view and the
-77 scene blocks were cleared. Native content logs remained empty. That trial
-used two points and constant alpha0, with no positive animation-delivery control;
+77 scene blocks were cleared. Content logging was subsequently recovered after
+world close:659 lines,307 parsed camera rows. The parsed samples were100 normal,
+100 free_zero and97 free_plus, all with entity deltaYaw/deltaPitch0 and fixed lime
+ray target within each session; parsed events showed no API error. Normal and
+free_zero timeout cleanup succeeded. These entity snapshots do not read rendered
+camera rotation. Captured native head height was used, not an assumed1.62 offset.
+That trial used two points and constant alpha0, with no positive animation-delivery control;
 it is not proof that rendered Z rotation is unsupported.
 
 Official2.7.0 npm declarations match the option nesting and Vector3 rotation.

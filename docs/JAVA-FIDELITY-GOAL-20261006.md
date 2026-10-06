@@ -47,3 +47,5 @@ Minecraft／loader 的版本號合併，也不能以單一舊 fixture 代表所�
 0.1.78修掉受傷被後續addon取消仍播聲音，以及異維度先前玩家錯發暴擊；共享原生接受判斷保持原作位置／選項和同次多回饋。Native40項相關回歸／真實傷害回饋已有證據。同維度攻擊者tracking／visibility範圍仍是邏輯差距，dot只負責實際聲畫驗收，不能替代邏輯修補。微醺以外完整100%範圍保持原要求。
 
 0.1.79恢復冰凍水面每tick／半徑3+amplifier、不封頂及來源水／空氣判斷。Native實際方塊與grounded/airborne mob已確認圈界及排除條件；不是玩家或畫面驗收。27塊霜冰在randomTickSpeed0下400次tick觀察不老化，與Java排程不同。JavaonPlace先60–120排程，後續同種類／同位置60請求去重；不能改成60固定融化。完整霜冰老化／融化、水面行走流體shape／move／onGround／fallDistance、chunk載入和玩家碰撞時序仍未完成，未獲平台豁免。使用者自行客戶端實測，場景在世界名酒docs/CLIENT-COMPARISON-0.1.79.md。原完整目標除微醺外保持不變。
+
+0.1.80修寶藏引路方塊額外掉落：作物／礦石同15%基礎、最新來源crops/c:ores、原方塊與破壞前工具另算loot、中心生成，不再掃附近物品。Native8場景含兩個自訂標籤方塊、絲綢之觸，原有7綠寶石不複製；不是實際player-break／client驗收。錯誤／空手工具Nativeharvest gate、player/luck/blockEntity/globalLootModifier、事件／RNG階段及兩版loot內容仍待修。Mob掉落原有heuristic、斬首Incoming取消／來源替換／recursion／fallback／持久marker／頭顱metadata與缺頭補入仍未完成。Native改damageSource不改實際來源、readonly不能applyDamage、kill()可取消且selfDestruct、health0為override無攻擊者，不能冒充Java die(killSource)。保留本輪另一維護已合併／部署的G78，不將Grilling平台豁免套入本目標。

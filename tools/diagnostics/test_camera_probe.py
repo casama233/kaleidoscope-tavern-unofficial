@@ -37,7 +37,15 @@ function fixture(){
  const f=fixture();f.request('run','free_plus clean_no_other_camera');assert.equal(f.sets.length,1);assert.equal(f.plays.length,0);f.request('abort');f.advance(4);assert.equal(f.plays.length,0);assert.equal(f.clears,1);assert.equal(f.active,0);
 }
 {
- const f=fixture();f.request('run','free_minus clean_no_other_camera');f.advance(2);assert.equal(f.plays.length,1);const options=f.plays[0][1];assert.equal(options.animation.rotationKeyFrames.at(-1).rotation.z,-8);assert(options.animation.progressKeyFrames.every(k=>k.alpha===0));assert.equal(f.plays[0][0].controlPoints.length,2);f.advance(405);assert.equal(f.clears,1);assert.equal(f.active,0);
+ const f=fixture();f.request('run','free_minus clean_no_other_camera');f.advance(2);assert.equal(f.plays.length,1);const options=f.plays[0][1];assert.equal(options.animation.rotationKeyFrames.at(-1).rotation.z,-8);assert.deepEqual(Array.from(options.animation.progressKeyFrames,k=>k.alpha),[0,1,1]);assert.equal(f.plays[0][0].controlPoints.length,3);assert(Math.abs(f.plays[0][0].controlPoints[2].x-f.plays[0][0].controlPoints[0].x-.02)<1e-9);f.advance(405);assert.equal(f.clears,1);assert.equal(f.active,0);
+}
+{
+ const f=fixture();f.request('run','free_delivery clean_no_other_camera');f.advance(2);const [s,o]=f.plays[0];assert.equal(s.controlPoints.length,3);assert.equal(s.controlPoints[2].x-s.controlPoints[0].x,2);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.y,20);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.z,0);assert(f.chat.some(s=>s.includes('API=returned')));const n=f.chat.length;f.request('status');assert.equal(f.chat.length,n+1);f.advance(405);assert(f.chat.some(s=>s.includes('end=TIMEOUT')));assert(f.chat.some(s=>s.includes('clear returned')));const m=f.chat.length;f.request('status');assert.equal(f.chat.length,m+1);
+}
+{
+ const modes=['free_zero','free_plus','free_minus'],runs=modes.map(mode=>{const f=fixture();f.request('run',mode+' clean_no_other_camera');f.advance(2);return f.plays[0];});
+ assert.equal(JSON.stringify(runs[0][0]),JSON.stringify(runs[1][0]));assert.equal(JSON.stringify(runs[1][0]),JSON.stringify(runs[2][0]));
+ const withoutZ=run=>JSON.stringify(run[1],(key,value)=>key==='z'?0:value);assert.equal(withoutZ(runs[0]),withoutZ(runs[1]));assert.equal(withoutZ(runs[1]),withoutZ(runs[2]));
 }
 for(const kind of ['milk','dimension','move','dead','spawn','leave','multiplayer','mode','effects']){
  const f=fixture();f.request('run','free_zero clean_no_other_camera');f.advance(2);

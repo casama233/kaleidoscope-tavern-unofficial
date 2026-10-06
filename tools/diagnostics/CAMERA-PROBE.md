@@ -60,23 +60,27 @@ cannot select a player. Native effects, multiplayer and non-Creative state are r
 effect cleanliness is a required manual host-guide check, acknowledged by the
 clean_no_other_camera token; it is not inferred from the probe's own UUID scope.
 
-## Normal camera FIRST
+## Delivery control FIRST, then matched roll controls
 
-    /scriptevent kt_camera_probe:run normal_plus clean_no_other_camera
+Deactivate the old probe before activating this unique revision. Do not enable
+experiments. Keep canonical109/70 unchanged. Run each command separately, close
+chat, observe, then abort or wait for automatic cleanup before the next test.
 
-This calls playAnimation on the current ordinary camera without first calling
-setCamera. It asks for constant captured pitch/yaw and Z 0 to +8, then holds the
-endpoint for 20 seconds. Close chat and capture a screenshot after one second.
-Record the content-log API result even if it rejects or produces no visible
-change. Explicitly abort before the next phase:
+    /scriptevent kt_camera_probe:run free_delivery clean_no_other_camera
 
+This explicitly sets minecraft:free at captured head position, waits two ticks,
+then animates three distinct points across X+2 blocks while camera yaw increases
+by20 degrees. Progress goes from alpha0 at0s to alpha1 at2s, then holds through20s.
+The grid should visibly change position/perspective during the first two seconds.
+The player's entity yaw/pitch and position are never set. Compare the initial
+and held view, not merely disappearance of the arm/crosshair: setCamera working
+does not establish that playAnimation was delivered. If translation/yaw is not
+visible, stop; the roll result remains inconclusive.
+
+    /scriptevent kt_camera_probe:status
     /scriptevent kt_camera_probe:abort
 
-If accepted, repeat normal_minus for the negative endpoint. This calibration is
-exaggerated and synthetic, not the Java amplitude or a successful drink effect.
-If normal-camera animation is unsupported, keep that negative evidence.
-
-## Separate free-camera calibration
+Only after visible animation delivery, run the three matched controls:
 
     /scriptevent kt_camera_probe:run free_zero clean_no_other_camera
     /scriptevent kt_camera_probe:abort
@@ -85,19 +89,49 @@ If normal-camera animation is unsupported, keep that negative evidence.
     /scriptevent kt_camera_probe:run free_minus clean_no_other_camera
     /scriptevent kt_camera_probe:abort
 
-Run each individually, not as a pasted batch. Close chat and screenshot the
-held endpoint before aborting. free_zero is the viewpoint/hand/HUD control;
-free_plus and free_minus vary only Z. These phases explicitly set minecraft:free
-at the captured head position, wait two ticks, then play the animation.
+All three use identical three-point geometry spanning X+0.02 blocks, identical
+alpha0->1 progress by2s, captured constant pitch/yaw, and identical20s duration.
+They differ only in requested Z endpoint:0,+8,-8 degrees, reached at0.25s. This is
+near-stationary, not exactly stationary. Capture held endpoints after3s. Avoid
+moving or changing the player's aim between the matched tests; if changed,
+manually restore baseline and repeat. Record hand/HUD/dither changes separately.
+The exaggerated roll is a diagnostic axis control, not Java-amplitude parity.
 
-A LinearSpline has two points 0.01 block apart, while progress alpha stays 0 at both
-ends to request a stationary camera. If that valid-range stationary construction
-is rejected, record the API error; do not silently substitute a moving spline.
+Each submitted animation prints source prefix, mode, point count, requested path,
+yaw/Z, duration and API-return status to self-chat. Each end prints reason,
+sample count, cleanup result and bounded error if present. The explicit status
+command emits one line for the active/latest test, retained in memory only
+(maximum eight players). inspect prints the bounded entity snapshot to self-chat.
+There is no automatic per-tick chat, and no dependence on a working content log.
+These are request/API/lifecycle evidence, never a rendered-camera getter.
+
+The optional normal_plus/normal_minus commands remain available as negative
+controls and never call setCamera. Official spline documentation targets only
+minecraft:free; ordinary-camera non-motion does not establish absence of Z roll.
+
+## Earlier native trial: inconclusive
+
+Preserve source b46464e78552d00c153401ded1faf381782b07dd and original archive
+SHA25655e284307a5c903f7c4a5ed67185d0a513ec7f121b41e9c83d9ec838d339c876.
+On native1.26.52.3 alongside109/70, normal_plus, free_zero and free_plus returned
+without visible grid tilt after more than eight seconds. Free mode hid the
+hand/crosshair and showed a dither overlay; timeout restored normal view and the
+77 scene blocks were cleared. Native content logs remained empty. That trial
+used two points and constant alpha0, with no positive animation-delivery control;
+it is not proof that rendered Z rotation is unsupported.
+
+Official2.7.0 npm declarations match the option nesting and Vector3 rotation.
+The Editor Camera Tool documents at least three Linear points; the script API
+reference does not specify a minimum. This revision removes that uncertainty and
+the constant-progress confounder without claiming either caused the old result.
+The tutorial still mentions experiments, but26.10 release notes explicitly moved
+camera splines out of experimental; no toggle change is part of this procedure.
 
 The log samples player position, head, pitch/yaw, view direction and ray target
 at most five times per second, with a maximum 110 samples per test. Server readback
 alone is not rendered-camera proof. A roll endpoint should tilt grid lines around
-the crosshair while the central target and player aim stay fixed. Yaw shifts the
+the screen center while the player aim stays fixed; the matched0.02-block path
+may create a small common target shift, and free mode may hide the crosshair. Yaw shifts the
 target sideways. Free-camera hand/body visibility, F5 and mouse-follow differences
 must be recorded as tradeoffs, not hidden.
 
@@ -147,5 +181,11 @@ repair or release is authorized by a diagnostic result alone.
   https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/progresskeyframe?view=minecraft-bedrock-stable
 - Official free-camera example with two-tick setup delay:
   https://learn.microsoft.com/en-us/minecraft/creator/documents/camerasystem/freecamerascriptapitutorial?view=minecraft-bedrock-stable
+- Editor's documented Linear minimum (three points; runtime API minimum unspecified):
+  https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockeditor/editorcameratool?view=minecraft-bedrock-stable
+- Official npm2.7.0 declarations, tarball SHA1 f3b92eb373b63e83a5018d40c76596cdb3abde70:
+  https://registry.npmjs.org/@minecraft/server/-/server-2.7.0.tgz
+- Version-specific removal of spline experimental requirement:
+  https://feedback.minecraft.net/hc/en-us/articles/44418129038733-Minecraft-Bedrock-Edition-26-10-Tiny-Takeover
 - Exact original Java roll handler:
   https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/c4ec1880bd44cf3139d3ba744ab30bb379cf1416/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java

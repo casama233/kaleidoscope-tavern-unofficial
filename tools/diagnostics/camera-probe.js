@@ -11,6 +11,7 @@ const MAX_ROWS = 110;
 const TOKEN = 'clean_no_other_camera';
 const sessions = new Map();
 const scenes = new Map();
+const reports = new Map();
 let ticker;
 
 const vec = value => ({ x: +value.x.toFixed(6), y: +value.y.toFixed(6), z: +value.z.toFixed(6) });
@@ -21,6 +22,25 @@ function log(row) {
 }
 function say(player, message) {
   try { player.sendMessage('[Camera probe] ' + message); } catch { /* offline handle */ }
+}
+function status(player) {
+  requirePrivate(player);
+  const session = sessions.get(player.id);
+  const report = reports.get(player.id);
+  say(player, 'source=' + SOURCE_COMMIT.slice(0, 8) + '; ' + (report ?? 'no test submitted') +
+    (session ? '; elapsedTicks=' + (system.currentTick - session.start) + '; samples=' + session.rows : '; idle') +
+    '; camera rendering is not readable by this API');
+}
+function remember(player, value) {
+  reports.delete(player.id);
+  reports.set(player.id, value);
+  if (reports.size > 8) reports.delete(reports.keys().next().value);
+}
+function parameters(session) {
+  return 'mode=' + session.mode + '; 3 points; alpha=0->1; pathX=' + (session.mode === 'free_delivery' ? 2 : .02) +
+    '; yawDelta=' + (session.mode === 'free_delivery' ? 20 : 0) + '; z=' +
+    (session.mode === 'free_wave' ? 'Java-wave' : session.mode.endsWith('minus') ? -8 : session.mode.endsWith('plus') ? 8 : 0) +
+    '; duration=' + session.duration / 20 + 's';
 }
 function requirePrivate(player) {
   if (!player || player.typeId !== 'minecraft:player') throw new Error('PLAYER_SOURCE_REQUIRED');
@@ -57,7 +77,10 @@ function finish(session, reason, error) {
   let end = null;
   try { end = snapshot(session.player); } catch { /* offline handle */ }
   log({ event: 'end', mode: session.mode, reason, error: error ?? null, clearAttempted: session.ownsCamera, clearError, samples: session.rows, end });
-  say(session.player, reason + '; camera cleanup ' + (clearError ? 'failed: ' + clearError : 'attempted'));
+  remember(session.player, parameters(session) + '; end=' + reason + '; samples=' + session.rows +
+    '; cleanup=' + (clearError ? 'failed' : session.ownsCamera ? 'clear returned' : 'not owned') +
+    (error ? '; error=' + String(error).slice(0, 180) : ''));
+  try { status(session.player); } catch { /* ended/offline precondition */ }
   stopTickerWhenEmpty();
 }
 function optionsFor(session) {
@@ -65,7 +88,9 @@ function optionsFor(session) {
   const base = session.base.rotation;
   const make = (timeSeconds, z) => ({ timeSeconds, rotation: { x: base.x, y: base.y, z }, easingFunc: EasingType.Linear });
   let keys;
-  if (session.mode === 'free_wave') {
+  if (session.mode === 'free_delivery') {
+    keys = [make(0, 0), { ...make(2, 0), rotation: { x: base.x, y: base.y + 20, z: 0 } }, { ...make(duration, 0), rotation: { x: base.x, y: base.y + 20, z: 0 } }];
+  } else if (session.mode === 'free_wave') {
     keys = Array.from({ length: WAVE_TICKS + 1 }, (_, i) => make(i / 20, javaRoll(session.start + i)));
   } else {
     const z = session.mode.endsWith('minus') ? -8 : session.mode.endsWith('zero') ? 0 : 8;
@@ -73,9 +98,9 @@ function optionsFor(session) {
   }
   return {
     animation: {
-      // Two distinct points avoid a degenerate curve; alpha stays at zero,
-      // so the requested camera position does not travel along it.
-      progressKeyFrames: [{ timeSeconds: 0, alpha: 0, easingFunc: EasingType.Linear }, { timeSeconds: duration, alpha: 0, easingFunc: EasingType.Linear }],
+      // Three distinct points and actual progress remove the old trial's
+      // unvalidated two-point/constant-alpha construction. Hold after 2s.
+      progressKeyFrames: [{ timeSeconds: 0, alpha: 0, easingFunc: EasingType.Linear }, { timeSeconds: 2, alpha: 1, easingFunc: EasingType.Linear }, { timeSeconds: duration, alpha: 1, easingFunc: EasingType.Linear }],
       rotationKeyFrames: keys
     },
     totalTimeSeconds: duration
@@ -90,7 +115,8 @@ function play(session) {
     if (Math.hypot(session.player.location.x - session.base.location.x, session.player.location.y - session.base.location.y, session.player.location.z - session.base.location.z) > .25) throw new Error('MOVED_BEFORE_PLAY');
     const spline = new LinearSpline();
     const head = session.base.head;
-    spline.controlPoints = [head, { ...head, x: head.x + .01 }];
+    const distance = session.mode === 'free_delivery' ? 2 : .02;
+    spline.controlPoints = [head, { ...head, x: head.x + distance / 2 }, { ...head, x: head.x + distance }];
     // Own only this acknowledged private test, including a normal-camera
     // attempt that might succeed. clear() has no foreign-state restore API.
     session.ownsCamera = true;
@@ -100,11 +126,12 @@ function play(session) {
     log({ event: 'animation_started', mode: session.mode, sourceDoesNotCallPlayerRotationOrTeleport: true,
       phaseBasis: session.mode === 'free_wave' ? 'server_currentTick_calibration_not_java_player_age_or_partialTick' : 'held_axis_endpoint',
       totalTimeSeconds: session.duration / 20, snapshot: snapshot(session.player) });
-    say(session.player, session.mode + ' active; endpoint held for screenshots, then automatic clear. This is not a parity pass.');
+    remember(session.player, parameters(session) + '; API=returned (rendering unverified)');
+    status(session.player);
   } catch (e) { finish(session, 'API_ERROR', String(e)); }
 }
 function start(player, mode, acknowledgement) {
-  const modes = ['normal_plus', 'normal_minus', 'free_zero', 'free_plus', 'free_minus', 'free_wave'];
+  const modes = ['normal_plus', 'normal_minus', 'free_delivery', 'free_zero', 'free_plus', 'free_minus', 'free_wave'];
   if (!modes.includes(mode) || acknowledgement !== TOKEN) throw new Error('USE_RUN_MODE_CLEAN_NO_OTHER_CAMERA_ACK');
   requireClean(player);
   if (sessions.has(player.id)) throw new Error('ABORT_CURRENT_TEST_FIRST');
@@ -206,7 +233,8 @@ function handle(event) {
     else if (command === 'abort') {
       const session = sessions.get(player.id);
       if (session) finish(session, 'EXPLICIT_ABORT'); else say(player, 'No owned camera test; no clear issued');
-    } else if (command === 'inspect') { requirePrivate(player); log({ event: 'inspect', snapshot: snapshot(player), active: sessions.get(player.id)?.mode ?? null, playAnimationAvailable: typeof player.camera?.playAnimation === 'function' }); say(player, 'Read-only snapshot written to content log'); }
+    } else if (command === 'status') status(player);
+    else if (command === 'inspect') { requirePrivate(player); log({ event: 'inspect', snapshot: snapshot(player), active: sessions.get(player.id)?.mode ?? null, playAnimationAvailable: typeof player.camera?.playAnimation === 'function' }); say(player, 'snapshot=' + JSON.stringify(snapshot(player)) + '; playAnimation=' + (typeof player.camera?.playAnimation === 'function')); status(player); }
   } catch (e) { log({ event: 'request_rejected', command: event.id, error: String(e) }); say(player, String(e)); }
 }
 system.afterEvents.scriptEventReceive.subscribe(handle, { namespaces: [NAMESPACE] });

@@ -10,6 +10,8 @@ SOURCES=[
  'https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/camera?view=minecraft-bedrock-stable',
  'https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/rotationkeyframe?view=minecraft-bedrock-stable',
  'https://learn.microsoft.com/en-us/minecraft/creator/documents/camerasystem/freecamerascriptapitutorial?view=minecraft-bedrock-stable',
+ 'https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockeditor/editorcameratool?view=minecraft-bedrock-stable',
+ 'https://registry.npmjs.org/@minecraft/server/-/server-2.7.0.tgz',
  'https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/c4ec1880bd44cf3139d3ba744ab30bb379cf1416/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java'
 ]
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -26,21 +28,23 @@ def committed_inputs(root,commit,builder=None):
  return inputs
 
 def schema():
- return {'schema':1,'source_entity':'self minecraft:player only','preconditions':['single-player copied private world','Creative mode','no custom/native effects; canonical custom state verified manually in host guide','ordinary first-person perspective chosen manually','no other camera owners; caller acknowledges clean_no_other_camera'],
+ return {'schema':2,'source_entity':'self minecraft:player only','preconditions':['single-player copied private world','Creative mode','no custom/native effects; canonical custom state verified manually in host guide','ordinary first-person perspective chosen manually','no other camera owners; caller acknowledges clean_no_other_camera'],
  'namespace':'kt_camera_probe','commands':{
-  'inspect':'read-only snapshot and capability report',
+  'inspect':'read-only snapshot and capability report in self-chat and content log',
+  'status':'one bounded self-chat line: source, requested parameters, API/end state and sample count; not rendered readback',
+  'run free_delivery clean_no_other_camera':'3-point progressing free-camera delivery control; X+2 blocks and yaw+20 degrees by2s, hold20s',
   'scene build':'preflight77 loaded air blocks; build marked11x7 wall; no player rotation/teleport',
   'scene clear':'clear only tracked unchanged marker blocks; no camera state change',
   'run normal_plus clean_no_other_camera':'playAnimation on current camera; no setCamera; Z0 to+8, hold20s',
   'run normal_minus clean_no_other_camera':'playAnimation on current camera; no setCamera; Z0 to-8, hold20s',
-  'run free_zero clean_no_other_camera':'explicit stationary free-camera control; Z0, hold20s',
-  'run free_plus clean_no_other_camera':'explicit stationary free camera; Z0 to+8, hold20s',
-  'run free_minus clean_no_other_camera':'explicit stationary free camera; Z0 to-8, hold20s',
+  'run free_zero clean_no_other_camera':'explicit near-stationary free-camera control; Z0, hold20s',
+  'run free_plus clean_no_other_camera':'explicit near-stationary free camera; Z0 to+8, hold20s',
+  'run free_minus clean_no_other_camera':'explicit near-stationary free camera; Z0 to-8, hold20s',
   'run free_wave clean_no_other_camera':'8s Java-formula samples using server-currentTick calibration; not exact Java client age/partialTick',
   'abort':'clear only an active owned diagnostic; cancel deferred playback'},
- 'animation_schema':{'spline':'LinearSpline, two eye-origin points separated by0.01 block','progressKeyFrames':'alpha0 at start/end; requested stationary path','rotationKeyFrames':{'rotation':'Vector3 {x:captured player pitch,y:captured player yaw,z:diagnostic axis}','easingFunc':'EasingType.Linear'},'totalTimeSeconds':'20 endpoint calibration or8 waveform'},
+ 'animation_schema':{'spline':'LinearSpline, three distinct eye-origin points; total X span2 blocks for delivery or0.02 for axis controls','progressKeyFrames':'alpha0 at0s to1 at2s; hold1 until end','rotationKeyFrames':{'rotation':'Vector3 {x:captured player pitch,y:captured player yaw,z:diagnostic axis}','easingFunc':'EasingType.Linear'},'totalTimeSeconds':'20 endpoint calibration or8 waveform'},
  'log_prefix':'[TavernCameraProbe]','log_rate':'sample every4ticks, max110 samples per test','cleanup':['timeout','explicit abort','milk completion','death/respawn','dimension change','leave','movement>0.25 block','API/sampler error','single-player/Creative/native-effect precondition change'],
- 'parity_claim':False,'native_tested':False,'limitations':['No active-camera getter/foreign-camera restore API','A fixed free-camera roll does not establish ordinary first-person behavior','Still screenshots prove endpoints, not continuous waveform fidelity','Scene tracking is in memory; clear scene before unloading probe or discard private world']}
+ 'parity_claim':False,'native_tested':False,'limitations':['Old b46464e two-point constant-progress trial is inconclusive for Z support','Establish visible free_delivery translation/yaw before evaluating roll','No active-camera getter/foreign-camera restore API','A fixed free-camera roll does not establish ordinary first-person behavior','Still screenshots prove endpoints, not continuous waveform fidelity','Scene tracking is in memory; clear scene before unloading probe or discard private world']}
 
 def make_files(inputs,commit):
  identity=sha((commit+''.join(sha(inputs[p]) for p in PATHS)).encode())

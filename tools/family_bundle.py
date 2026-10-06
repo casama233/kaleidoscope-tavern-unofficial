@@ -38,7 +38,9 @@ def packs(z):
   data={x[len(pre):]:z.read(x) for x in names if x.startswith(pre) and not x.endswith('/') and not x.endswith('.mcpack')}
   yield m,data
 
-def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),reviewed_order=None):
+def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),reviewed_order=None,held_sources=()):
+ from family_update.source_holds import selected,effective
+ holds=selected(lock,list(held_sources));lock=effective(lock,list(held_sources))
  lock=json.loads(json.dumps(lock))
  if reviewed_order is not None:
   if not isinstance(reviewed_order,dict) or set(reviewed_order)!={'behavior','resource'}:fail('reviewed order requires both pack sides')
@@ -84,7 +86,11 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),
   if not working:subprocess.run(['python3',str(repo/'tools/baseline_gate.py'),'check','--release'],check=True)
   if config['repository']!=own['repository']:fail('wrong owned repository')
   for side,relative in config['runtime'].items():
-   root=repo/relative;m=read(root/'manifest.json');add({'owner':'owned','repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'working_candidate':working},m,root=root)
+   root=repo/relative;m=read(root/'manifest.json');source={'owner':'owned','repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'working_candidate':working}
+   if own['key'] in holds:
+    if source['commit']!=holds[own['key']]['commit']:fail('held source revision differs')
+    source['held_revision']=holds[own['key']]
+   add(source,m,root=root)
  for upstream in lock['upstream']:
   matches=archive_index.get(upstream['sha256'],[])
   if not matches:fail('missing hash-pinned upstream archive: '+upstream['name'])

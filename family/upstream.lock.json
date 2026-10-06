@@ -45,16 +45,16 @@
       "version": [
         0,
         1,
-        76
+        77
       ],
       "source_trees": {
         "BP": {
-          "sha256": "cb2159a5361f61bde1509a53b370b61073e72e6347db283f8d19d1320bd2c71f",
-          "files": 312
+          "sha256": "ca2b9d9279bacb7a49a3816bbdc02e4f5ad4bbac45d6600b235d05965e817632",
+          "files": 314
         },
         "RP": {
-          "sha256": "a4037920c4b87bfcd619d74ef844ebf9b827d2c540c5d400f38fe1bc540238c7",
-          "files": 520
+          "sha256": "a1649fe55cf697889a460be7bb4c815a6b31bbeff74c4bfa518808779e16a6a0",
+          "files": 522
         }
       }
     }
@@ -205,5 +205,33 @@
   },
   "upstream_runtime_changes": false,
   "client_acceptance_required": true,
-  "saved_world_migration_required": true
+  "saved_world_migration_required": true,
+  "deployment_holds": {
+    "grilling": {
+      "repository": "casama233/kaleidoscope-grilling-unofficial",
+      "commit": "3e83eb492ad99a725296d5cd4027643eba84c845",
+      "version": [
+        2,
+        8,
+        72
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "ccafe302b694d596bc0d5c2119ef8826c4dc113c486deccb84515564012a6f07",
+          "files": 606
+        },
+        "RP": {
+          "sha256": "99887c93db1c047d6870c2d771bd83bd4770efa7dfe2faf4a6c68e095773ffff",
+          "files": 3378
+        }
+      },
+      "candidate_version": [
+        2,
+        8,
+        73
+      ],
+      "reason_file": "family/GRILLING-FIDELITY-HOLD-20261007.md",
+      "rule": "Retain exact currently installed owned release until the separate complete-fidelity gate is met; never install the held candidate or downgrade live."
+    }
+  }
 }

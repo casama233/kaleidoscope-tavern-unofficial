@@ -11,6 +11,7 @@ SOURCES=[
  'https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/rotationkeyframe?view=minecraft-bedrock-stable',
  'https://learn.microsoft.com/en-us/minecraft/creator/documents/camerasystem/freecamerascriptapitutorial?view=minecraft-bedrock-stable',
  'https://learn.microsoft.com/en-us/minecraft/creator/documents/bedrockeditor/editorcameratool?view=minecraft-bedrock-stable',
+ 'https://mcblend.readthedocs.io/en/stable/camera_animations/exporting_camera_animations/#playing-camera-animations-in-minecraft',
  'https://registry.npmjs.org/@minecraft/server/-/server-2.7.0.tgz',
  'https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/c4ec1880bd44cf3139d3ba744ab30bb379cf1416/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java'
 ]
@@ -19,7 +20,7 @@ def encode(value):return (json.dumps(value,ensure_ascii=False,indent=2)+'\n').en
 def committed_inputs(root,commit,builder=None):
  builder=(builder or Path(__file__)).resolve()
  if builder!=(root/PATHS[0]).resolve():raise ValueError('Run the committed tools/diagnostics builder')
- if subprocess.check_output(['git','rev-parse',commit+':runtime'],cwd=root,text=True).strip()!=FROZEN_RUNTIME_TREE:raise ValueError('Frozen109 runtime tree changed')
+ if subprocess.check_output(['git','rev-parse',BASELINE_COMMIT+':runtime'],cwd=root,text=True).strip()!=FROZEN_RUNTIME_TREE:raise ValueError('Frozen109 runtime tree changed')
  inputs={}
  for path in PATHS:
   data=(root/path).read_bytes()
@@ -42,9 +43,9 @@ def schema():
   'run free_minus clean_no_other_camera':'explicit near-stationary free camera; Z0 to-8, hold20s',
   'run free_wave clean_no_other_camera':'8s Java-formula samples using server-currentTick calibration; not exact Java client age/partialTick',
   'abort':'clear only an active owned diagnostic; cancel deferred playback'},
- 'animation_schema':{'spline':'LinearSpline, three distinct eye-origin points; total X span2 blocks for delivery or0.02 for axis controls','progressKeyFrames':'alpha0 at0s to1 at2s; hold1 until end','rotationKeyFrames':{'rotation':'Vector3 {x:captured player pitch,y:captured player yaw,z:diagnostic axis}','easingFunc':'EasingType.Linear'},'totalTimeSeconds':'20 endpoint calibration or8 waveform'},
+ 'animation_schema':{'spline':'LinearSpline, three distinct eye-origin points; total X span2 blocks for delivery or0.02 for axis controls','progressKeyFrames':'alpha0 at0s to1 at2s; hold1 until end','rotationKeyFrames':{'rotation':'Vector3 {x:-captured player pitch,y:180-captured player yaw,z:diagnostic axis}; candidate inverse calibration, not official convention guarantee','easingFunc':'EasingType.Linear'},'totalTimeSeconds':'20 endpoint calibration or8 waveform'},
  'log_prefix':'[TavernCameraProbe]','log_rate':'sample every4ticks, max110 samples per test','cleanup':['timeout','explicit abort','milk completion','death/respawn','dimension change','leave','movement>0.25 block','API/sampler error','single-player/Creative/native-effect precondition change'],
- 'parity_claim':False,'native_tested':False,'limitations':['Old b46464e two-point constant-progress trial is inconclusive for Z support','Establish visible free_delivery translation/yaw before evaluating roll','No active-camera getter/foreign-camera restore API','A fixed free-camera roll does not establish ordinary first-person behavior','Still screenshots prove endpoints, not continuous waveform fidelity','Scene tracking is in memory; clear scene before unloading probe or discard private world']}
+ 'parity_claim':False,'native_tested':False,'limitations':['Inverse Euler mapping hypothesis and native Z sign remain unverified for aligned view','Old b46464e two-point constant-progress trial is inconclusive for Z support','Establish visible free_delivery translation/yaw before evaluating roll','No active-camera getter/foreign-camera restore API','A fixed free-camera roll does not establish ordinary first-person behavior','Still screenshots prove endpoints, not continuous waveform fidelity','Scene tracking is in memory; clear scene before unloading probe or discard private world']}
 
 def make_files(inputs,commit):
  identity=sha((commit+''.join(sha(inputs[p]) for p in PATHS)).encode())

@@ -19,8 +19,11 @@ After the four diagnostic tools files are committed on the existing PR:
     python3 tools/diagnostics/build_camera_probe.py --out-dir /absolute/new/output
 
 The builder verifies committed bytes for itself, the script, this README and
-LICENSE-CODE. It verifies the frozen109 runtime tree
-72dbf54189a5e16eac7645a212b944ae1b4e19b9. Unique BP/data/script UUIDs include
+LICENSE-CODE. It independently verifies immutable baseline commit
+3080c5a5618fb65485cb8f082d8096f75a709826 has the frozen109 runtime tree
+72dbf54189a5e16eac7645a212b944ae1b4e19b9. The diagnostic source commit may
+follow later canonical releases; none of their runtime is copied into the probe.
+The root-owned native replay remains on the isolated109/70 world. Unique BP/data/script UUIDs include
 source commit and every input hash. Different source gets a different probe
 identity. Output is deterministic; an existing archive cannot be replaced.
 Output inside the canonical repository (including runtime and symlinked
@@ -69,8 +72,8 @@ chat, observe, then abort or wait for automatic cleanup before the next test.
     /scriptevent kt_camera_probe:run free_delivery clean_no_other_camera
 
 This explicitly sets minecraft:free at captured head position, waits two ticks,
-then animates three distinct points across X+2 blocks while camera yaw increases
-by20 degrees. Progress goes from alpha0 at0s to alpha1 at2s, then holds through20s.
+then animates three distinct points across X+2 blocks while spline yaw increases
+by20 degrees (candidate convention predicts camera yaw decreases20 degrees). Progress goes from alpha0 at0s to alpha1 at2s, then holds through20s.
 The grid should visibly change position/perspective during the first two seconds.
 The player's entity yaw/pitch and position are never set. Compare the initial
 and held view, not merely disappearance of the arm/crosshair: setCamera working
@@ -91,6 +94,7 @@ Only after visible animation delivery, run the three matched controls:
 
 All three use identical three-point geometry spanning X+0.02 blocks, identical
 alpha0->1 progress by2s, captured constant pitch/yaw, and identical20s duration.
+Animation pitch/yaw use the candidate inverse mapping described below.
 They differ only in requested Z endpoint:0,+8,-8 degrees, reached at0.25s. This is
 near-stationary, not exactly stationary. Capture held endpoints after3s. Avoid
 moving or changing the player's aim between the matched tests; if changed,
@@ -108,6 +112,58 @@ These are request/API/lifecycle evidence, never a rendered-camera getter.
 The optional normal_plus/normal_minus commands remain available as negative
 controls and never call setCamera. Official spline documentation targets only
 minecraft:free; ordinary-camera non-motion does not establish absence of Z roll.
+
+## Candidate inverse rotation mapping: aligned-view calibration
+
+This is a NEW immutable diagnostic identity. Keep the f716f460 archive unchanged;
+deactivate it before activating this version. No production runtime is modified.
+
+The original f716 controlled delivery worked natively. Its free_zero view had a
+level horizon, and +8/-8 produced opposite visible tilts, establishing a rendered
+Z response in that free-camera trial. However all free cases faced away from the
+marker and downward, with dithered body/no hand or crosshair. This is not ordinary
+first-person or Java parity, nor proof of correct local roll at the intended aim.
+
+Native evidence was captured on2026-10-06 at04:54-04:56UTC, Bedrock1.26.52.3
+x86_64 Linux launcher, private109/70 world, Efe skin. The collected content log
+yielded358 parsed camera rows. Ordinary arm/crosshair returned after cleanup;
+77 matching scene blocks were cleared and0 retained. Audio was unavailable.
+The compact native result record has SHA256
+07be4891b2b4042d5089bf803752e12fb6493b85febaa1f705124098d42dfda1.
+
+Endpoint screenshot SHA256 evidence (retained in the private acceptance capture):
+- controlled_zero_endpoint.jpg: bccdfcdd86f9868ecd5e928ad29b93f5c2502ad6d4b43af965cf3cbed0a8b4ec
+- controlled_plus_endpoint.jpg: 1f4ed39521bf85eb0815a33e7a10a3e8ee9402b2a82c19687f4bcedebb3b3e84
+- controlled_minus_endpoint.jpg: 112ea39c74040c8899e5990ee09202539511b5ef6b55c0bc955bac227ea4bc16
+- controlled_delivery_endpoint.jpg: 235c0d7a9dcbd52ef28dc5ee78ec906208dbd45a7d9f99b7498143a29c988eee
+- controlled_baseline.jpg: 15164bc5955d22be2c19d995bc36b9ab1409d7d3e5b8c994ba90b2b0b55133d4
+
+
+The MCBlend author's own animation runner explicitly converts a spline keyframe
+to setCamera with x=-spline.x and y=180-spline.y. Accordingly this candidate uses
+animation x=-capturedPlayerPitch, y=180-capturedPlayerYaw, z=requestedRoll, while
+setCamera retains captured player pitch/yaw. This is a source-backed calibration
+hypothesis, not a documented Mojang Euler-order or quaternion guarantee. The API
+takes Vector3, not a four-component quaternion. Aligned Z sign remains native
+unverified; do not silently negate it to resemble the Java effect.
+
+The root-owned native sequence is minimal:
+
+1. Run free_zero. The lime marker should retain the ordinary view direction,
+   apart from the common0.02-block translation. If it does not, stop.
+2. Run free_plus then free_minus, aborting between. Capture marker/horizon and
+   center stability at the held endpoints, plus entity telemetry.
+3. Run normal_plus after abort/ordinary recovery, now using the same three-point
+   progressing spline and converted animation rotation without setCamera. Record
+   ordinary-camera behavior separately; the official intended preset is free.
+4. Before generalizing the conversion, root manually checks one non-cardinal
+   player yaw against a fixed landmark. Yaw0 alone cannot distinguish180-yaw
+   from180+yaw. No player rotation setter or teleport is used.
+
+No additional matrix, waveform acceptance, mouse-follow, hand/HUD repair, F5
+composition or production free-camera implementation is included here.
+
+Source: https://mcblend.readthedocs.io/en/stable/camera_animations/exporting_camera_animations/#playing-camera-animations-in-minecraft
 
 ## Earlier native trial: inconclusive
 

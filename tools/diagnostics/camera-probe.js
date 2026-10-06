@@ -40,7 +40,7 @@ function parameters(session) {
   return 'mode=' + session.mode + '; 3 points; alpha=0->1; pathX=' + (session.mode === 'free_delivery' ? 2 : .02) +
     '; yawDelta=' + (session.mode === 'free_delivery' ? 20 : 0) + '; z=' +
     (session.mode === 'free_wave' ? 'Java-wave' : session.mode.endsWith('minus') ? -8 : session.mode.endsWith('plus') ? 8 : 0) +
-    '; duration=' + session.duration / 20 + 's';
+    '; duration=' + session.duration / 20 + 's; mapping=candidate_inverse; splineXY=' + (-session.base.rotation.x) + ',' + (180 - session.base.rotation.y);
 }
 function requirePrivate(player) {
   if (!player || player.typeId !== 'minecraft:player') throw new Error('PLAYER_SOURCE_REQUIRED');
@@ -85,7 +85,10 @@ function finish(session, reason, error) {
 }
 function optionsFor(session) {
   const duration = session.duration / 20;
-  const base = session.base.rotation;
+  // Candidate conversion from the MCBlend author's camera runner. Official
+  // Vector3 docs omit the convention; aligned native/non-cardinal checks pending.
+  // setCamera continues to use captured entity pitch/yaw unchanged.
+  const base = { x: -session.base.rotation.x, y: 180 - session.base.rotation.y };
   const make = (timeSeconds, z) => ({ timeSeconds, rotation: { x: base.x, y: base.y, z }, easingFunc: EasingType.Linear });
   let keys;
   if (session.mode === 'free_delivery') {

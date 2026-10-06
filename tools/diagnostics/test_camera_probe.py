@@ -2,7 +2,7 @@
 import hashlib, json, os, re, subprocess, tempfile, unittest, zipfile
 from pathlib import Path
 from unittest.mock import patch
-from build_camera_probe import PATHS,FROZEN_RUNTIME_TREE,committed_inputs,make_files,write_pack,output_guard
+from build_camera_probe import PATHS,FROZEN_RUNTIME_TREE,BASELINE_COMMIT,committed_inputs,make_files,write_pack,output_guard
 HERE=Path(__file__).resolve().parent
 ROOT=Path(os.environ.get('TAVERN_PROBE_ROOT',HERE.parents[1]))
 COMMIT='3080c5a5618fb65485cb8f082d8096f75a709826'
@@ -40,12 +40,23 @@ function fixture(){
  const f=fixture();f.request('run','free_minus clean_no_other_camera');f.advance(2);assert.equal(f.plays.length,1);const options=f.plays[0][1];assert.equal(options.animation.rotationKeyFrames.at(-1).rotation.z,-8);assert.deepEqual(Array.from(options.animation.progressKeyFrames,k=>k.alpha),[0,1,1]);assert.equal(f.plays[0][0].controlPoints.length,3);assert(Math.abs(f.plays[0][0].controlPoints[2].x-f.plays[0][0].controlPoints[0].x-.02)<1e-9);f.advance(405);assert.equal(f.clears,1);assert.equal(f.active,0);
 }
 {
- const f=fixture();f.request('run','free_delivery clean_no_other_camera');f.advance(2);const [s,o]=f.plays[0];assert.equal(s.controlPoints.length,3);assert.equal(s.controlPoints[2].x-s.controlPoints[0].x,2);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.y,20);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.z,0);assert(f.chat.some(s=>s.includes('API=returned')));const n=f.chat.length;f.request('status');assert.equal(f.chat.length,n+1);f.advance(405);assert(f.chat.some(s=>s.includes('end=TIMEOUT')));assert(f.chat.some(s=>s.includes('clear returned')));const m=f.chat.length;f.request('status');assert.equal(f.chat.length,m+1);
+ const f=fixture();f.request('run','free_delivery clean_no_other_camera');f.advance(2);const [s,o]=f.plays[0];assert.equal(s.controlPoints.length,3);assert.equal(s.controlPoints[2].x-s.controlPoints[0].x,2);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.y,200);assert.equal(o.animation.rotationKeyFrames.at(-1).rotation.z,0);assert(f.chat.some(s=>s.includes('API=returned')));const n=f.chat.length;f.request('status');assert.equal(f.chat.length,n+1);f.advance(405);assert(f.chat.some(s=>s.includes('end=TIMEOUT')));assert(f.chat.some(s=>s.includes('clear returned')));const m=f.chat.length;f.request('status');assert.equal(f.chat.length,m+1);
 }
 {
  const modes=['free_zero','free_plus','free_minus'],runs=modes.map(mode=>{const f=fixture();f.request('run',mode+' clean_no_other_camera');f.advance(2);return f.plays[0];});
  assert.equal(JSON.stringify(runs[0][0]),JSON.stringify(runs[1][0]));assert.equal(JSON.stringify(runs[1][0]),JSON.stringify(runs[2][0]));
  const withoutZ=run=>JSON.stringify(run[1],(key,value)=>key==='z'?0:value);assert.equal(withoutZ(runs[0]),withoutZ(runs[1]));assert.equal(withoutZ(runs[1]),withoutZ(runs[2]));
+}
+{
+ for(const mode of ['free_zero','free_plus','free_minus','normal_plus']){
+  const f=fixture();f.player.rot={x:-22.36,y:30};f.request('run',mode+' clean_no_other_camera');f.advance(2);
+  const keys=f.plays[0][1].animation.rotationKeyFrames;
+  assert(keys.every(k=>k.rotation.x===22.36&&k.rotation.y===150));
+  assert.equal(keys.at(-1).rotation.z,mode==='free_zero'?0:mode==='free_minus'?-8:8);
+  assert.deepEqual(f.player.rot,{x:-22.36,y:30});
+  if(mode.startsWith('free'))assert.deepEqual({...f.sets[0][1].rotation},{x:-22.36,y:30});else assert.equal(f.sets.length,0);
+  assert(f.chat.some(s=>s.includes('mapping=candidate_inverse')));
+ }
 }
 for(const kind of ['milk','dimension','move','dead','spawn','leave','multiplayer','mode','effects']){
  const f=fixture();f.request('run','free_zero clean_no_other_camera');f.advance(2);
@@ -105,7 +116,10 @@ class CameraProbe(unittest.TestCase):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);inputs=self.inputs()
    for path,data in inputs.items():(root/path).parent.mkdir(parents=True,exist_ok=True);(root/path).write_bytes(data)
-   def git(args,**kwargs):return FROZEN_RUNTIME_TREE+'\n' if args[1]=='rev-parse' else inputs[args[2].split(':',1)[1]]
+   def git(args,**kwargs):
+    if args[1]=='rev-parse':
+     self.assertEqual(args[2],BASELINE_COMMIT+':runtime');return FROZEN_RUNTIME_TREE+'\n'
+    return inputs[args[2].split(':',1)[1]]
    with patch('build_camera_probe.subprocess.check_output',side_effect=git):
     self.assertEqual(committed_inputs(root,COMMIT,root/PATHS[0]),inputs)
     with self.assertRaisesRegex(ValueError,'committed tools'):committed_inputs(root,COMMIT,root/'outside.py')

@@ -1,10 +1,10 @@
 import {BREAK_SOUNDS,INTERACTION_SOUNDS} from '../core/break-feedback-engine.js';
 import {feedback,breakProfile} from './break-feedback.js';
 import {world,system,GameMode} from '@minecraft/server';
-import {check} from '../core/util.js';
-import {withBreakInventory,blockAt,blockCenter,safe} from './transactions.js';
+import {check,canonical} from '../core/util.js';
+import {withBreakInventory,handSnapshot,blockAt,blockCenter,safe} from './transactions.js';
 
-const routes=[];let installed=false,sequence=0;
+const routes=[],pending=new Set();let installed=false,sequence=0;
 
 function routeMatches(route,block){try{return !!route.isBlock(block);}catch{return false;}}
 function matchingRoutes(block){return routes.filter(route=>routeMatches(route,block));}
@@ -56,12 +56,16 @@ function installGlobalRoutes(){
   if(found.length!==1){system.run(()=>safe(event.player,()=>check(false,'BREAK_ROUTE_CONFLICT')));return;}
   const route=found[0],player=event.player,dimension=event.block.dimension,location={...event.block.location},typeId=event.block.typeId;
   let snapshot;try{snapshot=route.capture?.({player,block:event.block});}catch{return;}
-  system.run(()=>(route.guard??safe)(player,()=>{
-   check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
-   const block=blockAt(dimension,location);check(block?.typeId===typeId&&routeMatches(route,block),'BLOCK_CHANGED');
-   route.verify?.({player,block,snapshot,dimension,location,typeId});
-   return finishPlayerBreak(player,dimension,location,typeId,()=>route.recover({player,block,snapshot,dimension,location,typeId}));
-  }));
+  const key=canonical({player:player.id,route:route.id,dimension:dimension.id,location,typeId,snapshot,hand:handSnapshot(player),mode:player.getGameMode()});
+  if(pending.has(key))return;pending.add(key);
+  system.run(()=>{
+   try{return (route.guard??safe)(player,()=>{
+    check(player.dimension.id===dimension.id,'DIMENSION_CHANGED');
+    const block=blockAt(dimension,location);check(block?.typeId===typeId&&routeMatches(route,block),'BLOCK_CHANGED');
+    route.verify?.({player,block,snapshot,dimension,location,typeId});
+    return finishPlayerBreak(player,dimension,location,typeId,()=>route.recover({player,block,snapshot,dimension,location,typeId}));
+   });}finally{pending.delete(key);}
+  });
  });
 
 }

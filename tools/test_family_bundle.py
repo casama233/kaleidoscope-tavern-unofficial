@@ -3,6 +3,42 @@ from pathlib import Path
 from family_bundle import assemble,files_hash,read_definition
 
 class PreservedDependencyTests(unittest.TestCase):
+ def test_reviewed_interleaving_controls_world_refs_receipt_and_effective_priority(self):
+  import zipfile,hashlib
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);preserved=[];official=[];archive=root/'author.mcaddon'
+   with zipfile.ZipFile(archive,'w') as z:
+    for uid,side in [('host-b','data'),('host-r','resources')]:
+     manifest={'header':{'uuid':uid,'version':[1,0,0]},'modules':[{'type':side}]}
+     official.append({'uuid':uid,'version':[1,0,0]})
+     z.writestr(uid+'/manifest.json',json.dumps(manifest))
+     kind='minecraft:entity' if side=='data' else 'minecraft:client_entity'
+     z.writestr(uid+'/overlap.json',json.dumps({kind:{'description':{'identifier':'external:overlap'}}}))
+   for uid,side in [('late-b','data'),('first-r','resources'),('first-b','data'),('late-r','resources')]:
+    path=root/uid;path.mkdir();preserved.append(path)
+    (path/'manifest.json').write_text(json.dumps({'header':{'uuid':uid,'version':[1,0,0]},'modules':[{'type':side}]}))
+    kind='minecraft:entity' if side=='data' else 'minecraft:client_entity'
+    (path/'overlap.json').write_text(json.dumps({kind:{'description':{'identifier':'external:overlap'}}}))
+   order={'behavior':['first-b','host-b','late-b'],'resource':['first-r','host-r','late-r']}
+   lock={'owned':[],'upstream':[{'name':'host','sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'project_id':1,'file_id':2,'packs':official}],'order':{'behavior':['host-b'],'resource':['host-r']}}
+   original=json.loads(json.dumps(lock));reviewed=json.loads(json.dumps(order))
+   with contextlib.redirect_stdout(io.StringIO()):receipt=assemble(lock,{},[archive],root/'out',preserved=preserved,reviewed_order=order)
+   self.assertEqual(lock,original);self.assertEqual(order,reviewed);self.assertEqual(receipt['order'],reviewed)
+   for side in order:
+    refs=json.loads((root/'out'/('world_'+side+'_packs.json')).read_text())
+    self.assertEqual([ref['pack_id'] for ref in refs],order[side])
+   overlaps=receipt['definition_overlaps'];self.assertEqual(len(overlaps),4)
+   self.assertEqual({row['effective_uuid'] for row in overlaps},{'first-b','first-r'})
+   self.assertFalse(receipt['production_ready'])
+ def test_reviewed_order_rejects_unknown_missing_duplicate_and_wrong_side(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);pack=root/'pack';pack.mkdir()
+   (pack/'manifest.json').write_text(json.dumps({'header':{'uuid':'a','version':[1,0,0]},'modules':[{'type':'data'}]}))
+   lock={'owned':[],'upstream':[],'order':{'behavior':[],'resource':[]}}
+   cases=[{'behavior':['unknown'],'resource':[]},{'behavior':[],'resource':[]},{'behavior':['a','a'],'resource':[]},{'behavior':[],'resource':['a']},{'behavior':['a']}]
+   for index,order in enumerate(cases):
+    with self.subTest(order=order),self.assertRaises(SystemExit):
+     assemble(lock,{},[],root/('out'+str(index)),preserved=[pack],reviewed_order=order)
  def test_competing_behavior_players_fail_and_single_definition_is_receipted(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);packs=[]

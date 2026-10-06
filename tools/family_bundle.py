@@ -38,8 +38,13 @@ def packs(z):
   data={x[len(pre):]:z.read(x) for x in names if x.startswith(pre) and not x.endswith('/') and not x.endswith('.mcpack')}
   yield m,data
 
-def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=()):
+def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),reviewed_order=None):
  lock=json.loads(json.dumps(lock))
+ if reviewed_order is not None:
+  if not isinstance(reviewed_order,dict) or set(reviewed_order)!={'behavior','resource'}:fail('reviewed order requires both pack sides')
+  for side,uids in reviewed_order.items():
+   if not isinstance(uids,list) or any(not isinstance(uid,str) or not uid for uid in uids) or len(uids)!=len(set(uids)):fail('invalid reviewed pack order')
+  lock['order']=json.loads(json.dumps(reviewed_order))
  # Optional local integrations have their own committed runtime and release
  # history. They never rewrite an owned port or an upstream author archive.
  for repo in extensions:
@@ -49,8 +54,9 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
   lock['owned'].append({'key':key,'repository':key,'version':config['version'],'source_trees':config['source_trees']})
   for side,label in [('BP','behavior'),('RP','resource')]:
    uid=config['packs'][side]['uuid']
-   if uid in lock['order'][label]:fail('extension collides with locked pack')
-   lock['order'][label].insert(0,uid)
+   if reviewed_order is None:
+    if uid in lock['order'][label]:fail('extension collides with locked pack')
+    lock['order'][label].insert(0,uid)
  if out.exists():fail('output exists; never replace another candidate')
  out.mkdir(parents=True);records=[];by_uuid={}
  # Index every candidate archive once. Read and recheck the selected bytes at
@@ -117,11 +123,13 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=())
  for root in preserved:
   manifest=read(root/'manifest.json');uid=manifest['header']['uuid']
   add({'owner':'preserved','role':'unchanged_external_dependency'},manifest,root=root)
-  label=by_uuid[uid]['side'];lock['order'][label].append(uid)
+  label=by_uuid[uid]['side']
+  if reviewed_order is None:lock['order'][label].append(uid)
  for row in records:
   for dep in row['dependencies']:
    if 'uuid' in dep and (dep['uuid'] not in by_uuid or by_uuid[dep['uuid']]['version']!=dep['version']):fail('unresolved exact dependency '+row['uuid']+' -> '+dep['uuid'])
  for side in ['behavior','resource']:
+  if reviewed_order is not None and any(uid not in by_uuid or by_uuid[uid]['side']!=side for uid in lock['order'][side]):fail('reviewed order contains unknown or wrong-side identity')
   order=[uid for uid in lock['order'][side] if uid in by_uuid and by_uuid[uid]['side']==side]
   expected={p['uuid'] for p in records if p['side']==side}
   if len(order)!=len(set(order)) or set(order)!=expected:fail('pack order missing or duplicate identity')

@@ -16,8 +16,8 @@ def main(argv=None):
     sources = source_state(verify_remote=True)
     archives = archive_paths()
     preserved = read(R / 'production-before/preserved-packs.json')
-    receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved])
-    from family_update.identity_migration import candidate_plan
+    from family_update.identity_migration import assembly_order, candidate_plan
+    receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved], reviewed_order=assembly_order(original))
     candidate_plan(receipt, original)
     audit_candidate(C, receipt)
     compatibility = quality(C, receipt)

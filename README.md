@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.110
+## Current maintained baseline: 0.6.114
 
 Automatic effect and barrel text is now opt-in; normal play preserves the Java shaker graphics and one-shot rejection messages. See [immersive feedback](docs/IMMERSIVE-FEEDBACK-20261002.md).
 

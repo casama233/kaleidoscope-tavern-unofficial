@@ -52,6 +52,8 @@ def instrument(rows):
        " if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';trace('dispatch.reject',e.player,{source:traceSource,rejection:e._javaUseRejection,event:traceEvent(e),claim:traceClaim(previous)});observe();syncCancel();return;}"),
       (" if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}",
        " if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';trace('dispatch.reject',e.player,{source:traceSource,rejection:e._javaUseRejection,event:traceEvent(e),claim:traceClaim(previous)});observe();syncCancel();return;}"),
+      (" if(raw.isFirstEvent===false&&ownedItemUseEcho(e.player,held.id??'')){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}",
+       " if(raw.isFirstEvent===false&&ownedItemUseEcho(e.player,held.id??'')){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';trace('dispatch.reject',e.player,{source:traceSource,rejection:e._javaUseRejection,raw:traceEvent(raw),event:traceEvent(e),claim:traceClaim(previous)});observe();syncCancel();return;}"),
       ("export function nativeEmptyHandBlockUse(e){",
        "export function nativeEmptyHandBlockUse(e){\n trace('native.empty.enter',e?.player,{source:'nativeEmptyHandBlockUse',raw:traceEvent(e)});"),
       (" dispatch(synthetic);return !!synthetic.cancel;"," dispatch(synthetic,'nativeEmptyHandBlockUse');return !!synthetic.cancel;"),
@@ -75,6 +77,9 @@ def instrument(rows):
     s=replace_once(s,"  if(event.cancel)return;","  trace('break.enter',event.player,{source:'before.playerBreakBlock',event:traceEvent(event)});\n  if(event.cancel)return;")
     s=replace_once(s,"  if(pending.has(key))return;pending.add(key);","  trace('break.claim',player,{source:'before.playerBreakBlock',event:traceEvent(event),route:route.id,key,duplicate:pending.has(key)});\n  if(pending.has(key))return;pending.add(key);")
     s=replace_once(s,"});}finally{pending.delete(key);}","});}finally{trace('break.settle',player,{source:'before.playerBreakBlock',route:route.id,key});pending.delete(key);}")
+    out[path]=s.encode()
+    path='scripts/bedrock/transactions.js';s=rows[path].decode();s="import {trace,traceError} from './interaction-trace.js';\n"+s
+    s=replace_once(s,"catch(e){tell(p,{rawtext:","catch(e){trace('transaction.error',p,{error:traceError(e)});tell(p,{rawtext:")
     out[path]=s.encode();return out
 
 def diagnostic_manifest(data,seed,kind,bp_map):
@@ -86,21 +91,21 @@ def diagnostic_manifest(data,seed,kind,bp_map):
     return json.dumps(m,indent=2).encode()+b'\n',original,identifier
 
 def build(out_dir,liquor_source=None):
-    host,lock=frozen(ROOT,[0,6,107]);traced=instrument(host);peer=None;peer_lock=None
-    if liquor_source:peer,peer_lock=frozen(Path(liquor_source).resolve(),[0,1,68])
-    seed='tavern107-native-interaction-trace/'+fingerprint(traced)+(('/'+fingerprint(peer)) if peer else '')
-    host_manifest,host_old,host_id=diagnostic_manifest(host['manifest.json'],seed,'Tavern107',{})
+    host,lock=frozen(ROOT,[0,6,109]);traced=instrument(host);peer=None;peer_lock=None
+    if liquor_source:peer,peer_lock=frozen(Path(liquor_source).resolve(),[0,1,70])
+    seed='tavern109-native-interaction-trace/'+fingerprint(traced)+(('/'+fingerprint(peer)) if peer else '')
+    host_manifest,host_old,host_id=diagnostic_manifest(host['manifest.json'],seed,'Tavern109',{})
     traced['manifest.json']=host_manifest;packs={'TavernTrace_BP':traced}
     if peer:
-        other=dict(peer);other['manifest.json'],peer_old,peer_id=diagnostic_manifest(peer['manifest.json'],seed,'Liquor68',{host_old:host_id});packs['LiquorTrace_BP']=other
+        other=dict(peer);other['manifest.json'],peer_old,peer_id=diagnostic_manifest(peer['manifest.json'],seed,'Liquor70',{host_old:host_id});packs['LiquorTrace_BP']=other
     out=Path(out_dir).resolve();assert out!=ROOT and (ROOT/'runtime') not in [out,*out.parents], 'Never write canonical runtime'
-    out.mkdir(parents=True,exist_ok=True);target=out/'Tavern107_Interaction_Trace_Probe.mcaddon'
+    out.mkdir(parents=True,exist_ok=True);target=out/'Tavern109_Interaction_Trace_Probe.mcaddon'
     with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for name,rows in packs.items():
             for path,data in sorted(rows.items()):
                 info=zipfile.ZipInfo(name+'/'+path,(2026,10,6,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,data)
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    report={'scope':'TOOLS_ONLY_DIAGNOSTIC_NOT_RELEASE','source_commit':commit,'canonical_version':[0,6,107],'canonical_BP':lock['source_trees']['BP'],'canonical_RP':lock['source_trees']['RP'],'source_unchanged':fingerprint(files(ROOT/'runtime/BP'))==lock['source_trees']['BP']['sha256'],'trace_tag':'kaleidoscope_tavern:trace_interactions','archive':str(target),'sha256':sha(target.read_bytes()),'bytes':target.stat().st_size,'probe_uuid':host_id,'peer':({'version':[0,1,68],'BP':peer_lock['source_trees']['BP'],'source':str(Path(liquor_source).resolve())} if peer else None),'modified_host_paths':[p for p,v in traced.items() if host.get(p)!=v],'modified_peer_paths':['manifest.json'] if peer else [],'rendered_client':False,'limits':['Console instrumentation can perturb callback timing','Original canonical BPs must be disabled to avoid duplicate script owners','Canonical107/68 RPs remain enabled','No production or release verdict']}
+    report={'scope':'TOOLS_ONLY_DIAGNOSTIC_NOT_RELEASE','source_commit':commit,'canonical_version':[0,6,109],'canonical_BP':lock['source_trees']['BP'],'canonical_RP':lock['source_trees']['RP'],'source_unchanged':fingerprint(files(ROOT/'runtime/BP'))==lock['source_trees']['BP']['sha256'],'trace_tag':'kaleidoscope_tavern:trace_interactions','archive':str(target),'sha256':sha(target.read_bytes()),'bytes':target.stat().st_size,'probe_uuid':host_id,'peer':({'version':[0,1,70],'BP':peer_lock['source_trees']['BP'],'source':str(Path(liquor_source).resolve())} if peer else None),'modified_host_paths':[p for p,v in traced.items() if host.get(p)!=v],'modified_peer_paths':['manifest.json'] if peer else [],'rendered_client':False,'limits':['Console instrumentation can perturb callback timing','Original canonical BPs must be disabled to avoid duplicate script owners','Canonical109/70 RPs remain enabled','No production or release verdict']}
     (out/'PROVENANCE.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
 if __name__=='__main__':

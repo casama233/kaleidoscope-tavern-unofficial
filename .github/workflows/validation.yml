@@ -313,7 +313,7 @@ jobs:
           repository: casama233/kaleidoscope-world-liquor-unofficial
           # Reviewed World Liquor 0.1.81 uses the additive living-recipient SDK in host 0.6.115.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 4e3e8be55218b057955749e1d04c39b03dfe7f3a
+          ref: e919d50c0e89c584595b91bfe88f67056754de54
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4

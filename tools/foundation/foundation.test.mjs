@@ -18,7 +18,7 @@ import {installJavaItemUseOnEvents} from '../../runtime/BP/scripts/bedrock/java-
 import {handSnapshot} from '../../runtime/BP/scripts/bedrock/transactions.js';
 import {naturalBreak} from '../../runtime/BP/scripts/bedrock/natural-break.js';
 import {CUSTOM_STATUS_KEY,readStatus,activeStatus,addStatus,advanceStatus} from '../../runtime/BP/scripts/core/custom-effects.js';
-import {applyCustomEffect,installCustomEffects,importExternalEffects,statusNow,clearCustomEffects,CUSTOM_TEST,tickCustomEffects} from '../../runtime/BP/scripts/bedrock/custom-effects.js';
+import {applyCustomEffect,installCustomEffects,importExternalEffects,statusNow,clearCustomEffects,CUSTOM_TEST,tickCustomEffects,tickExternalLivingEffects,effectSnapshotEntities} from '../../runtime/BP/scripts/bedrock/custom-effects.js';
 import {packetsFor} from '../../sdk/protocol.js';
 import {ExtensionTransport} from '../../runtime/BP/scripts/core/transport.js';
 import {registerTavernExtension} from '../../sdk/tavern-extension-client.js';
@@ -187,6 +187,32 @@ test('actual addon effect behaviour consumes its vendored SDK snapshots',async()
  players=[];const p=makePlayer();p.health={currentValue:5,effectiveMax:20,setCurrentValue(n){this.currentValue=n;}};
  const {pack}=packWorld(),{createFoundationClient:create}=await import(new URL('runtime/BP/scripts/sdk/tavern-foundation-client.js','file://'+liquor));create(system,pack,bundle,()=>true);
  const {tick}=await import(new URL('runtime/BP/scripts/effects.js','file://'+liquor));applyCustomEffect(p,{effect:NS+':continuous_heal',duration:10,amplifier:1});bus.publish();system.advance(1);tick();assert.equal(p.health.currentValue,7);
+});
+test('loaded LivingEntity external rows survive player housekeeping and route through the actual addon snapshot',async()=>{
+ players=[];const mob=d.spawnEntity('minecraft:zombie',{x:0,y:2,z:0});mob.health={currentValue:5,effectiveMax:20,setCurrentValue(n){this.currentValue=n;}};
+ assert.equal(applyCustomEffect(mob,{effect:NS+':continuous_heal',duration:10,amplifier:1}),true);
+ tickCustomEffects();assert(CUSTOM_TEST.tracks.has(mob.id));assert(effectSnapshotEntities().includes(mob));bus.publish();system.advance(1);
+ const {tick}=await import(new URL('runtime/BP/scripts/effects.js','file://'+liquor));const start=mob.health.currentValue;tick();assert.equal(mob.health.currentValue,start+2);
+ tickExternalLivingEffects();assert(activeStatus(statusNow(mob),NS+':continuous_heal'));
+ clearCustomEffects(mob);bus.publish();system.advance(1);const before=mob.health.currentValue;tick();assert.equal(mob.health.currentValue,before);mob.remove();
+});
+test('health-bearing vehicles are not external LivingEntity recipients',()=>{
+ const boat=d.spawnEntity('minecraft:boat',{x:0,y:2,z:0});boat.health={currentValue:20,effectiveMax:20};
+ assert.equal(applyCustomEffect(boat,{effect:NS+':continuous_heal',duration:10,amplifier:1}),false);boat.remove();
+});
+test('source heal uses float health and never revives a zero-health recipient',async()=>{
+ players=[];const p=makePlayer(),{tick}=await import(new URL('runtime/BP/scripts/effects.js','file://'+liquor));
+ p.health={currentValue:Math.fround(5.1),effectiveMax:20,setCurrentValue(n){this.currentValue=n;}};
+ applyCustomEffect(p,{effect:NS+':continuous_heal',duration:10,amplifier:0});bus.publish();system.advance(1);tick();
+ assert.equal(p.health.currentValue,Math.fround(Math.fround(5.1)+1));
+ p.health.currentValue=0;tick();assert.equal(p.health.currentValue,0);clearCustomEffects(p);bus.publish();
+});
+test('removal/load restores saved external rows without charging unloaded wall time',()=>{
+ const mob=d.spawnEntity('minecraft:zombie',{x:0,y:2,z:0});mob.health={currentValue:10,effectiveMax:20};
+ applyCustomEffect(mob,{effect:NS+':continuous_heal',duration:10,amplifier:0});tickExternalLivingEffects();const before=readStatus(mob.getDynamicProperty(CUSTOM_STATUS_KEY)).entries[0].ticks;
+ world.afterEvents.entityRemove.emit({removedEntityId:mob.id});assert(!CUSTOM_TEST.tracks.has(mob.id));system.currentTick+=1000;
+ world.afterEvents.entityLoad.emit({entity:mob});assert.equal(readStatus(mob.getDynamicProperty(CUSTOM_STATUS_KEY)).entries[0].ticks,before);
+ system.currentTick++;tickExternalLivingEffects();assert.equal(readStatus(mob.getDynamicProperty(CUSTOM_STATUS_KEY)).entries[0].ticks,before-1);mob.remove();
 });
 test('vendored SDK bytes match the host repository source of truth',()=>{
  for(const name of ['protocol.js','tavern-extension-client.js','tavern-foundation-client.js','tavern-effects.js'])assert.equal(fs.readFileSync(liquor+'runtime/BP/scripts/sdk/'+name,'utf8'),fs.readFileSync(new URL('../../sdk/'+name,import.meta.url),'utf8'),name);

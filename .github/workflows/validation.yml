@@ -311,9 +311,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed 0.1.45 preserves color/source contracts and supports optional Cookery for Tavern 0.6.80.
+          # Reviewed World Liquor 0.1.82 uses the additive living-recipient SDK in host 0.6.115.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: d0866bbdb4bfdb89b87f81acbc0d7b20b8c88e17
+          ref: 0763c7d7db5b8361204e56e8eb24abaa09e31625
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4

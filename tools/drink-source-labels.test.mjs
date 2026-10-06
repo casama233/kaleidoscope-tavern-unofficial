@@ -7,13 +7,17 @@ import {ExtensionRegistry,CAPABILITIES} from '../runtime/BP/scripts/core/registr
 import {BUILTIN_RECIPES} from '../runtime/BP/scripts/data/recipes.js';
 import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {FLUIDS} from '../runtime/BP/scripts/data/fluids.js';
-import {qualityBottleLore,normalizeBottleStack,isLegacyManagedQualityBottleLore} from '../runtime/BP/scripts/core/quality-tooltip.js';
+import {qualityBottleLore,normalizeBottleStack,isLegacyManagedQualityBottleLore,configureBottleCategories} from '../runtime/BP/scripts/core/quality-tooltip.js';
 import {isPlainIngredient} from '../runtime/BP/scripts/core/inventory.js';
 assert.ok(process.env.LIQUOR_SOURCE,'LIQUOR_SOURCE is required');
 const {payload}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/payload.js')).href);
 const {withFoundation}=await import(pathToFileURL(path.resolve(process.env.LIQUOR_SOURCE,'runtime/BP/scripts/foundation.js')).href);
 const sourceKey='item.kaleidoscope_world_liquor.mod_name';
-const make=()=>new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});
+const make=()=>{
+ const registry=new ExtensionRegistry({recipes:[...BUILTIN_RECIPES,...SHAKER_RECIPES],fluids:FLUIDS,itemExists:()=>true});
+ configureBottleCategories(item=>registry.ingredientColor(item),item=>registry.previousIngredientColors(item));
+ return registry;
+};
 function install(){const r=make();r.install({...payload,modNameKey:sourceKey,requires:[...(payload.requires??[]),'drink_source_labels']});return r;}
 class Item{
  constructor(typeId){Object.assign(this,{typeId,amount:1,maxAmount:16,lore:[],props:{}});}
@@ -32,7 +36,10 @@ test('friend capability is additive and cannot erase current color/destruction c
 });
 test('source label uses owning addon key while ordinary Tavern bottles retain Tavern',()=>{
  install();const tea=qualityBottleLore(new Item('kaleidoscope_world_liquor:ice_tea_q6'));
- assert.equal(tea.at(-1).rawtext.at(-1).translate,sourceKey);assert.ok(JSON.stringify(tea[0]).includes('dark_red'));
+ assert.equal(tea.at(-1).rawtext.at(-1).translate,sourceKey);
+ // Current NeoForge 1.1.11 changes SMC/fallback ice tea from dark_red to
+ // the author's brown category. Keep the owner label while using that rule.
+ assert.equal(tea[0].rawtext.at(-1).translate,'color.kaleidoscope_tavern.brown');
  assert.equal(qualityBottleLore(new Item('kaleidoscope_tavern:vodka_q6')).at(-1).rawtext.at(-1).translate,'item.kaleidoscope_tavern.mod_name');
 });
 for(const levels of [false,true])for(const color of [false,true])for(const source of [false,true])test(`legacy merge levels=${levels}, color=${color}, hostSource=${source}`,()=>{

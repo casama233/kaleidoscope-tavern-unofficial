@@ -1,5 +1,6 @@
 import {drinkImpactFeedback} from './interaction-particles.js';
-import {externalVisual,isExternalVisual} from '../core/extension-content.js';
+import {externalVisual,isExternalVisual,externalEffectDefinition} from '../core/extension-content.js';
+import {livingEffectEntity} from '../core/living-effect-entity.js';
 import {EntityDamageCause,world} from '@minecraft/server';
 import {splashFactor,splashTicks,instantHealthDelta} from '../core/projectile-parity.js';
 import {check} from '../core/util.js';
@@ -19,7 +20,7 @@ let installed=false;
 export const storageProjectileDiagnostics={spawned:0,impacts:0,targets:0,nativeEffects:0,customEffects:0,errors:[]};
 function error(e){storageProjectileDiagnostics.errors.push(String(e?.code??e));if(storageProjectileDiagnostics.errors.length>16)storageProjectileDiagnostics.errors.shift();}
 function validRng(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return n;}
-function living(entity){try{const h=entity?.getComponent?.('minecraft:health');return h&&h.currentValue>0;}catch{return false;}}
+function living(entity){return livingEffectEntity(entity);}
 function centerDistanceSq(a,b){const dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z;return dx*dx+dy*dy+dz*dz;}
 function rowsPayload(itemId,rng){
  const rows=rollDrinkEffects(itemId,()=>validRng(rng));
@@ -63,8 +64,8 @@ function nativeRow(entity,row,factor){
  storageProjectileDiagnostics.nativeEffects++;return true;
 }
 function customRow(entity,row,factor){
- if(entity?.typeId!=='minecraft:player')return false;
- const ticks=CUSTOM_INSTANT.has(row.effect)?1:splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
+ const instantaneous=CUSTOM_INSTANT.has(row.effect)||externalEffectDefinition(row.effect)?.mode==='instant';
+ const ticks=instantaneous?1:splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
  if(!applyCustomEffect(entity,{...row,duration:ticks/20,ticks}))return false;
  storageProjectileDiagnostics.customEffects++;return true;
 }

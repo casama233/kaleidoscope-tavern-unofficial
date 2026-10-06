@@ -20,7 +20,8 @@ def review(inventory, expected, order, managed):
     added = set(actual) - set(expected)
     assert set(expected) <= set(actual), 'Preserved review cannot remove packs'
     if not added:
-        assert not path, 'An additions review cannot be reused for another stack'
+        # After deployment the new approved receipt already contains these
+        # packs. Readback/resume must still use that complete immutable receipt.
         return expected, order
     assert path, 'Complete stack changed; review original addition archives'
     proof = c.read(Path(path))

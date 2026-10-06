@@ -84,5 +84,10 @@ class AdditionReviewTests(unittest.TestCase):
         with patch.object(c, 'CONFIG', {}):
             with self.assertRaisesRegex(AssertionError, 'review original'): m.review(self.inventory, self.expected, self.order, ['old'])
 
+    def test_postdeployment_readback_uses_the_new_complete_receipt(self):
+        adjusted, order = self.review()
+        with patch.object(c, 'CONFIG', {'preserved_additions': str(self.path)}):
+            self.assertEqual(m.review(self.inventory, adjusted, order, ['old']), (adjusted, order))
+
 
 if __name__ == '__main__': unittest.main()

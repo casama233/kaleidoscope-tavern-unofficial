@@ -1,4 +1,4 @@
-"""Official Blockbench 5.2.1 reference-frame math; not Minecraft client proof."""
+"""Pinned native attachment-frame math; not Minecraft client acceptance."""
 import math
 def mul(a, b):
     return [[sum(a[i][k]*b[k][j] for k in range(4)) for j in range(4)] for i in range(4)]
@@ -40,7 +40,10 @@ def bone_matrix(b):
     return chain(translate([-p[0],p[1],p[2]]),zyx([-r[0],-r[1],r[2]]),scale(s))
 def calibration(hand):
     sign=1 if hand=='right' else -1
-    base=chain(translate([-20*sign,21,0]),zyx([-95,45*sign,115*sign]))
-    camera=chain(translate([0,19,-40]),xyz([-175.71084667,0,180]))
+    # Mojang 1.26.50.4 empty_hand: arm pivot/offset, then item socket.
+    # Remove the attachable pivot, which the caller composes separately.
+    arm=chain(translate([-8.5*sign,12,12]),zyx([-95,45*sign,115*sign]))
+    base=chain(arm,translate([sign,-7,0]),translate([0,-24,0]))
+    camera=chain(translate([0,24,0]),rotate('y',180))
     return base,camera
 

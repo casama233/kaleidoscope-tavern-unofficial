@@ -57,3 +57,9 @@ patched hash、有效期限與回饋狀態均須由已凍結的 canonical integr
 與 modules／相依一起同步，讓客戶端重新取得修正的資源 bytes。此變體不是作者發布，
 不改原始 upstream lock，也不能移除其他欄位或借此加入玩法。真人警告／渲染驗收
 仍保留 pending；完整家族部署與存檔演練要求照常適用。
+
+## Java 最新版與遠端交付（2026-10-06）
+
+所有修補與適配進入各自 canonical 遠端 Git，私有整合使用核驗的私有遠端。Java 每六小時使用 `tools/family_java_upstream_watch.py --sources family/java-upstream.json` 查核各維護分支，結果寫入 BSM `addon_quality/senluo-java-upstream-status.json`。只查 metadata，無 JAR 全檔重掃／自動安裝；新版要求 recipe/effect/timing/model/input/storage/API 適配工作。相同版本／hash 不能證明一比一，未完成與平台替代保持明示。
+
+Cookery 1.0.8→1.6.0 的作者 UUID 變更使用已提交的 `family/identity-migrations/cookery-108-to-160.json` 與 canonical 更新工具。只允許宣告的作者 BP/RP、原／新版本及原包；先從本次停服備份搬移 world/entity/player/item 所有權，在獨立 BDS 演練，再採用未被測試引擎修改的資料庫。原始 DB／完整回退保留。遷移採用開始後遇失敗保持停服與 recovery lease，不自動重啟不相容的舊所有權 runtime。

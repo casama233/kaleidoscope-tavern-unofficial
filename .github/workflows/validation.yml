@@ -48,6 +48,7 @@ jobs:
       - run: python tools/test_family_saved_world.py
       - run: python tools/test_container_recovery.py
       - run: python tools/test_family_upstream_watch.py
+      - run: python tools/test_family_java_upstream_watch.py
       - run: python tools/test_bridge_project.py
   bridge:
     needs: impact

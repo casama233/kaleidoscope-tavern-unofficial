@@ -50,7 +50,7 @@ def main(argv=None):
     # Standalone mode: only the owned RP and stable scripting modules are mandatory.
     assert config.get('cookery_optional') is True
     for side in ['BP','RP']:
-        assert not any(d.get('uuid') in {'d322809c-a51e-4742-bfc4-16d3c1491c9d','8e2c6318-2f5f-4907-aad0-31d10610e405'} for d in docs[RT/side/'manifest.json'].get('dependencies',[]))
+        assert not any(d.get('uuid') in {'d322809c-a51e-4742-bfc4-16d3c1491c9d','8e2c6318-2f5f-4907-aad0-31d10610e405','5df753c9-3436-4fba-87f1-a2da3651cfcf','f1d333ca-2d6b-4566-8005-e6c309816324'} for d in docs[RT/side/'manifest.json'].get('dependencies',[]))
     subprocess.run(['node','--test','tools/standalone-guide.test.mjs'],cwd=ROOT,check=True)
     assert not (RT/'RP/entity/player.entity.json').exists()
     assert not (RT/'RP/ui/fast_swap_scroll.json').exists()

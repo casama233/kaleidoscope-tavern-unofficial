@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "poll_hours": 6,
+  "rule": "Latest available author release per Minecraft/loader branch; parity never inferred from version/hash. Update gaps and canonical adapters before claiming latest gameplay.",
+  "projects": [
+    {
+      "name": "Tavern",
+      "project_id": 1475175,
+      "author_id": 23495783,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8350841
+          ],
+          "source_scope": "Pinned Forge source c4ec1880; partial gameplay/client parity"
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [],
+          "source_scope": "Distinct NeoForge branch; no full current branch adaptation claimed"
+        }
+      ]
+    },
+    {
+      "name": "Grilling",
+      "project_id": 1666863,
+      "author_id": 136871129,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8726006
+          ],
+          "source_scope": "Shared selected original audio/assets; Forge-specific gameplay not fully rechecked"
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [
+            8726014
+          ],
+          "source_scope": "NeoForge original 1.1.1 source and partial parity repairs"
+        }
+      ]
+    },
+    {
+      "name": "World Liquor",
+      "project_id": 1502365,
+      "author_id": 138592347,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8947050
+          ],
+          "source_scope": "Selected model/assets comparison from 1.1.11; full newer 1.1.12 adaptation pending"
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [
+            8704187,
+            8947041
+          ],
+          "source_scope": "1.1.8 base with selected 1.1.9 behavior/art repairs; 1.1.11 gaps pending"
+        },
+        {
+          "minecraft": "26.1.2",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [],
+          "source_scope": "Separate newest Minecraft branch; unported"
+        }
+      ]
+    }
+  ]
+}

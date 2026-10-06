@@ -186,7 +186,15 @@ def source_state(verify_remote=False):
         commit = git(path, 'rev-parse', 'HEAD')
         assert branch == 'main' and not git(path, 'status', '--porcelain'), f'Canonical {name} must be clean main'
         row = {'path': str(path), 'commit': commit, 'tree': git(path, 'rev-parse', 'HEAD^{tree}'), 'repository': config['repository'], 'version': config['version'], 'baseline_sha256': sha(path / 'baseline.json'), 'source_trees': config['source_trees']}
-        if verify_remote and name != 'extension':
+        if verify_remote:
+            if name == 'extension':
+                target=read(path/'.repo-target.json')
+                assert target.get('private') is True and target.get('logical_runtime_repository')==config['repository'], 'Private extension remote identity must be reviewed'
+                expected='https://github.com/'+target['repository']
+                assert git(path,'remote','get-url','origin').removesuffix('.git')==expected, 'Private extension remote differs'
+                profile=json.loads(subprocess.check_output(['gh','api','repos/'+target['repository']],text=True))
+                assert profile['private'] is True and profile['id']==target['repository_id'] and profile['full_name']==target['repository'], 'Private remote must retain its identity and visibility'
+                row['remote_repository']=target['repository']
             remote_head = git(path, 'ls-remote', 'origin', 'refs/heads/main').split()[0]
             assert remote_head == commit, f'{name} canonical main differs from remote'
             row['remote_main'] = remote_head
@@ -228,7 +236,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    return {key: sha(Path(CONFIG[key])) for key in ['translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
+    return {key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation'] if CONFIG.get(key)}
 
 
 def validate_translation_reconciliation(inventory,expected,order,dependency_pins=None):

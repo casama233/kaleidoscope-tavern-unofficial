@@ -17,7 +17,8 @@ def main(argv=None):
     archives = archive_paths()
     preserved = read(R / 'production-before/preserved-packs.json')
     receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved])
-    assert {p['uuid'] for p in receipt['packs']} == {p['uuid'] for p in original['packs']}, 'UUID changes require explicit data-migration design'
+    from family_update.identity_migration import candidate_plan
+    candidate_plan(receipt, original)
     audit_candidate(C, receipt)
     compatibility = quality(C, receipt)
     atomic(R / 'compatibility-report.json', compatibility)

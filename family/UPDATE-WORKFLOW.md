@@ -74,7 +74,7 @@ cache 重用只適用於同一份不可變候選。不是只看版號、mtime、
 回退失敗或原始包／政策不完整時保持停服及 active `needs_operator_recovery`；
 只有核對完成的原始整套包才可重啟。新資料庫不會被舊快照自動覆蓋。
 
-這個入口只處理 UUID 不變的更新。身份遷移仍須另行設計、實際演練及逐筆資料證據。
+一般更新要求 UUID 不變。已提交的 Cookery 1.0.8→1.6.0 作者身份遷移可用 `identity_migration` 指向 canonical `family/identity-migrations/cookery-108-to-160.json`；工具限制原／新作者 UUID、版本、archive 與原 manifest，先在本次停服副本逐筆搬移所有權並演練，再採用未受 QA 引擎修改的資料庫。其他身份遷移仍須另行設計與審查。
 私人 extension 如果有 runtime 變動，也須補它自己的功能證據，不能用三個公開 PR 代替。
 
 ## 保持驗收誠實

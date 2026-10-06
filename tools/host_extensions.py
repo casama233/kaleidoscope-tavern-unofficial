@@ -17,7 +17,7 @@ def apply_host_extension(spec,owned_root,host_root,source):
   if not spec.get(key):raise ValueError('extension review metadata missing '+key)
  recovery=spec.get('kind')=='chinesefood-reviewed-repairs'
  dough=spec.get('kind')=='cookery-mooncake-dough-repair'
- if dough and (spec.get('host_uuid')!='d322809c-a51e-4742-bfc4-16d3c1491c9d' or spec['archive_sha256']!='9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5'):raise ValueError('dough repair requires the pinned Cookery host')
+ if dough and (spec.get('host_uuid'),spec['archive_sha256']) not in {('d322809c-a51e-4742-bfc4-16d3c1491c9d','9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5'),('5df753c9-3436-4fba-87f1-a2da3651cfcf','da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458')}:raise ValueError('dough repair requires the pinned Cookery host')
  if recovery and (spec.get('host_uuid')!='b3c9db76-4ae6-4986-a380-90a4025d95a9' or spec['archive_sha256']!='63bd2eb2ee2819c985d7c484df633c913cbb995abf3162aa68c997c24ef607f2'):raise ValueError('repair recovery requires the pinned ChineseFood host')
  if source['owner'] not in (['upstream','upstream_extended'] if recovery or dough else ['upstream']) or source['archive_sha256']!=spec['archive_sha256']:raise ValueError('extension requires pinned original author archive')
  if dough and set(spec['original_files'])!={'items/stuffed_dough_food.json'}:raise ValueError('dough repair has an unexpected file inventory')

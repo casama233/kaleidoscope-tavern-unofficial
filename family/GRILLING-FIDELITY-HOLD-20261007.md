@@ -1,6 +1,6 @@
 # 煙火目前範圍與 live 部署要求
 
-來源鎖同步 Grilling 2.8.78 BP/RP，保留酒館 0.6.114、世界名酒 0.1.79 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
+來源鎖同步 Grilling 2.8.79 BP/RP，保留酒館 0.6.114、世界名酒 0.1.79 及現行 Cookery 1.6.0／私有整合。來源鎖更新本身不代表已安裝。
 
 已保留 PR205 的世界名酒修復及通用 source-hold 准入工具；只撤銷其依据本輪較早指示登記的 Grilling 2.8.72→2.8.73 部署保留，原因為下述使用者明確調整。其他來源的完成門檻不因本輪自動解除。
 
@@ -21,3 +21,7 @@ Grilling PR141 starts from canonical G74, combines reviewed Git differences from
 Bounded Grilling evidence records twelve real item/storage cases, all 128 legal native rack state/facing combinations, two expiry cases and thirty-one persisted item records after normal restart. These checks do not certify input, audio, rendering or multiplayer acceptance. Owner-accepted platform differences remain explicit; client=false, production_ready=false, pending_client_acceptance. Complete family CI/static/BDS/fresh stopped-world rehearsal and exact live readback are still required.
 
 Additional peer source `028dd532`/`4dbd904` provides original-texture/FIXED six-tool projections and opt-in rack hit/admission diagnostics. Fresh G78 native checks bind all owned bytes, three bottle-stack intent/admission cases, eight non-owning tool projections and six model properties after engine ticks. This does not generate client clicks; peer upper bottle insertion refusal remains unresolved and is not marked fixed. The current Grilling status is `docs/STATUS-A2.8.78.md`; earlier G77 evidence retains its original source identity.
+
+## G79 physical rack hit correction
+
+[Grilling PR139](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/139) now bases on canonical G78 and fixes the newly diagnosed negative-axis native hit mirroring: the observed upper shelf `.6744117737` was reported as `.3255882263` and selected lower tool slot 7. The category guard correctly prevented the wrong insertion. Same-event head/view rays intersect only the clicked rack selection box; known direct touch retains its off-crosshair tap through sign-aware native decoding. Existing hand, range, sneak, facing, category and transactional ownership checks remain. This candidate retains G78 source repairs and all earlier published history; client/input/sound/render acceptance remains pending.

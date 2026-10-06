@@ -19,7 +19,7 @@ const rows=EFFECT_ICONS.filter(row=>row.id.startsWith(extension?'kaleidoscope_wo
 for(let slot=0;slot<EFFECT_ICON_SLOTS;slot++)for(const row of rows)panel.controls.push({['kt_effect_'+slot+'_'+row.code]:{
  type:'image',texture:row.texture,size:[18,18],offset:[(slot%8)*20,Math.floor(slot/8)*20],anchor_from:'top_left',anchor_to:'top_left',bilinear:false,layer:1,visible:false,
  property_bag:{'#kt_effect_packet':''},bindings:[
-  {binding_type:'view',source_control_name:'kt_effect_data',source_property_name:'#kt_effect_packet',target_property_name:'#kt_effect_packet'},
+  {binding_type:'view',source_control_name:'kt_effect_data',resolve_sibling_scope:true,source_property_name:'#kt_effect_packet',target_property_name:'#kt_effect_packet'},
   {binding_type:'view',source_property_name:`(not ((#kt_effect_packet - '${effectIconToken(slot,row.code)}') = #kt_effect_packet))`,target_property_name:'#visible'}
  ]
 }});

@@ -44,6 +44,8 @@ test('Standalone sprites and additive root controls have no optional asset depen
  assert.equal(hud.kt_effect_empty.type,'panel');
  for(const c of panel.controls.slice(1,-1)){
   const image=Object.values(c)[0];assert(EFFECT_ICONS.some(row=>row.texture===image.texture));
+  const cache=image.bindings.find(binding=>binding.source_control_name==='kt_effect_data');
+  assert.equal(cache?.resolve_sibling_scope,true,'Icon must resolve the sibling packet cache');
   assert(!image.texture.includes('world_liquor'));assert(existsSync(new URL('runtime/RP/'+image.texture+'.png',root)));
  }
  const adapter=readFileSync(new URL('runtime/BP/scripts/bedrock/effect-icons.js',root),'utf8');

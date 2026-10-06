@@ -38,6 +38,14 @@ for(const tagged of [false,true]){
             original=json.loads((probe.ROOT/'runtime/BP/manifest.json').read_text())
             with zipfile.ZipFile(first['archive']) as z:
                 m=json.loads(z.read('TavernTrace_BP/manifest.json'));self.assertNotEqual(m['header']['uuid'],original['header']['uuid']);self.assertEqual(m['header']['version'],[0,0,1])
+    def test_chat_fallback_is_explicit_self_only_and_bounded(self):
+        text=probe.TRACE.read_text()
+        self.assertIn("player?.typeId!=='minecraft:player'||!player.hasTag(TRACE_TAG)",text)
+        self.assertIn("e.id==='kaleidoscope_tavern:trace_status'",text)
+        self.assertIn("e.id==='kaleidoscope_tavern:trace_chat'",text)
+        self.assertIn('parts>16',text)
+        self.assertIn('text.slice(part*600,(part+1)*600)',text)
+        self.assertNotIn('world.sendMessage',text)
     def test_exception_probe_preserves_warning_and_return(self):
         base,_=probe.frozen(probe.ROOT,[0,6,109]);text=probe.instrument(base)['scripts/bedrock/transactions.js'].decode()
         self.assertIn("trace('transaction.error',p,{error:traceError(e)});tell(p,",text)

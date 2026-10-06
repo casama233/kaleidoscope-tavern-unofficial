@@ -65,3 +65,25 @@ whether another transaction failed or a post-commit step threw. The trace is
 bounded at 240 rows per explicitly tagged player and resets only on explicit
 reset, respawn, or leave. Error strings are bounded (80/160/512/1800 characters);
 no inventory payload, lore, chat, or remote transmission is added.
+
+### Empty content-log fallback
+
+The probe writes `console.warn`, including replay; an empty native content-log
+file is inconclusive. Before reproducing, with the trace tag enabled run:
+
+    /scriptevent kaleidoscope_tavern:trace_status
+
+This explicit self-only command prints the row count and most recent
+`transaction.error` index to both Warn console and the player's chat. If chat
+shows status but the file is still empty, reproduce once, run status again, then
+retrieve the exact error row (replace N with its zero-based index):
+
+    /scriptevent kaleidoscope_tavern:trace_chat N
+
+Retrieve nearby rows by their index when necessary. Each request returns only
+one existing row, split into numbered 600-character chunks, at most 16 chunks.
+Oversize rows are explicitly rejected rather than silently truncated. This
+fallback never sends chat automatically, writes no Actionbar/title, and permits
+only a tagged source player to retrieve their own session. Screenshot the chat
+including every numbered chunk. `trace_reset` clears the buffer, so do not reset
+until the evidence is retained. These commands are tools-only diagnostic UI.

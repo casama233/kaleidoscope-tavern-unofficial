@@ -29,4 +29,22 @@ try{system.afterEvents.scriptEventReceive?.subscribe(e=>{
  const player=e.sourceEntity;if(player?.typeId!=='minecraft:player'||!player.hasTag(TRACE_TAG))return;
  if(e.id==='kaleidoscope_tavern:trace_reset'){counts.delete(player.id);rows.delete(player.id);}
  if(e.id==='kaleidoscope_tavern:trace_dump')for(const row of rows.get(player.id)??[])console.warn('[Tavern interaction trace dump] '+JSON.stringify(row));
+ // Explicit self-only retrieval fallback when native content-log files stay empty.
+ // Never emits automatically and never uses the Actionbar/title effect transport.
+ const buffer=rows.get(player.id)??[];
+ if(e.id==='kaleidoscope_tavern:trace_status'){
+  const lastError=buffer.findLastIndex(row=>row.stage==='transaction.error');
+  const status='[Tavern trace status] rows='+buffer.length+' lastErrorIndex='+lastError+' maxRows=240';
+  console.warn(status);player.sendMessage(status);
+ }
+ if(e.id==='kaleidoscope_tavern:trace_chat'){
+  const requested=String(e.message??'').trim();
+  if(!/^(0|[1-9][0-9]{0,2})$/.test(requested)){player.sendMessage('[Tavern trace] Use trace_chat with one row index from trace_status');return;}
+  const index=Number(requested),row=buffer[index];
+  if(!row){player.sendMessage('[Tavern trace] No row at index '+index);return;}
+  const text=JSON.stringify(row),parts=Math.ceil(text.length/600);
+  if(parts>16){player.sendMessage('[Tavern trace] Row exceeds chat bound; use console trace_dump');return;}
+  for(let part=0;part<parts;part++)player.sendMessage('[Tavern trace '+index+' '+(part+1)+'/'+parts+'] '+text.slice(part*600,(part+1)*600));
+ }
+
 });}catch{}

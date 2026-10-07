@@ -264,7 +264,20 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan','extension_hold_source'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan'] if CONFIG.get(key)}
+    if CONFIG.get('extension_hold_source'):
+        path=Path(CONFIG['extension_hold_source'])
+        if path.exists():result['extension_hold_source']=sha(path)
+        else:
+            from family_update.source_holds import selected_extension,private_extension_hold
+            lock=read(T/'family/upstream.lock.json')
+            assert EXTENSION, 'Missing hold needs its configured canonical private source'
+            assert path==EXTENSION/'maintenance/deployment-hold.json', 'Missing hold path must belong to configured canonical private source'
+            commit=git(EXTENSION,'rev-parse','HEAD')
+            assert private_extension_hold(path) is None
+            assert selected_extension(lock,CONFIG.get('extension_hold',False)) is None
+            assert not path.exists() and git(EXTENSION,'rev-parse','HEAD')==commit and not git(EXTENSION,'status','--porcelain'), 'Private hold authority changed during capture'
+            result['extension_hold_source']={'state':'canonical_absent','path':str(path),'source_commit':commit,'source_tree_oid':git(EXTENSION,'rev-parse',commit+'^{tree}')}
     if CONFIG.get('preserved_additions'):
         for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
             result['preserved_archive:'+uid]=sha(row['artifact']['path'])

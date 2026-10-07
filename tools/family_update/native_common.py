@@ -47,6 +47,7 @@ def blank_level(target, name):
     (target / 'level.dat').write_bytes(struct.pack('<II', 10, len(body)) + body)
 
 def native_run(engine, phase, minimum_seconds=30, commands=()):
+    assert not (engine.parent / 'retired-copies.json').exists(), 'Retired QA output cannot restart; prepare a new isolated world'
     assert not (engine / "packs-pruned.json").exists(), "Completed QA engines with removed redundant packs cannot restart; prepare a new isolated world"
     log = engine / (phase + '.log')
     markers = STARTUP_MARKERS

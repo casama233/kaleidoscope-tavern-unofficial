@@ -69,6 +69,13 @@ def configure(path):
     # An output or temporary engine may never be a parent/child of a live world
     # or a source checkout. Resolve symlinks before checking this boundary.
     protected_directories = [B, W, Q, *SOURCES.values(), *([EXTENSION] if EXTENSION else [])]
+    if CONFIG.get('retention_root') is not None:
+        retention_root = Path(CONFIG['retention_root'])
+        if not retention_root.is_absolute() or retention_root == Path('/'):
+            raise ValueError('retention_root must name an explicit absolute evidence directory')
+        for protected in protected_directories:
+            if retention_root.resolve() == protected or protected in retention_root.resolve().parents:
+                raise ValueError('retention_root is inside protected data: ' + str(protected))
     for protected in protected_directories:
         if R == protected or R in protected.parents or protected in R.parents:
             raise ValueError(f'Output overlaps a protected path: {protected}')
@@ -360,6 +367,7 @@ def verify_canonical_runner():
 
 
 def verify_candidate_sources():
+    assert not (R / 'retired-copies.json').exists(), 'Retired output cannot resume or redeploy; use a new candidate'
     evidence = read(R / 'build-evidence.json')
     assert sha(CONFIG_PATH) == evidence['config_sha256'], 'Update configuration changed; use a new output directory'
     assert orchestration_hashes() == evidence['orchestration_sha256'], 'Update runner changed; rebuild with reviewed tools'

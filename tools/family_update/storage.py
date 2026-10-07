@@ -29,7 +29,7 @@ def require_space(output, stage, additional=0):
     required = RESERVE + additional
     if free < required:
         raise RuntimeError(f'{stage} needs {required / GIB:.1f} GiB free including a 15 GiB reserve; '
-                           f'only {free / GIB:.1f} GiB remains. Seal closed evidence before retrying; '
+                           f'only {free / GIB:.1f} GiB remains. Delete retired copies with cleanup-copies before retrying; '
                            'live is not stopped by this preflight.')
     return {'stage': stage, 'available_bytes': free, 'required_bytes': required}
 

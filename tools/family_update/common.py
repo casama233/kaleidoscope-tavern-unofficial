@@ -264,7 +264,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention'] if CONFIG.get(key)}
     if CONFIG.get('preserved_additions'):
         for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
             result['preserved_archive:'+uid]=sha(row['artifact']['path'])
@@ -366,6 +366,13 @@ def verify_canonical_runner():
     verify_server_binding()
 
 
+def select_approved_runtime_retention(original, states):
+    from family_update.approved_runtime_retention import select
+    from family_update.workflow import validate_ci_rows
+    return select(CONFIG.get('approved_runtime_retention'), read(T/'family/upstream.lock.json'), SOURCES.copy(), states,
+                  original, R/'production-before/senluo-policy.json', validate_ci_rows, output_root=R)
+
+
 def verify_candidate_sources():
     assert not (R / 'retired-copies.json').exists(), 'Retired output cannot resume or redeploy; use a new candidate'
     evidence = read(R / 'build-evidence.json')
@@ -376,7 +383,7 @@ def verify_candidate_sources():
         proof=read(Path(CONFIG['preserved_reconciliation']));source=Path(proof['source_path'])
         assert git(source,'branch','--show-current')=='main' and not git(source,'status','--porcelain'), 'Reviewed preserved source changed after build'
         assert git(source,'rev-parse','HEAD')==proof['source_commit'], 'Reviewed preserved source commit changed after build'
-    current = source_state()
+    current = source_state(verify_remote=True) if CONFIG.get('approved_runtime_retention') else source_state()
     assert set(current) == set(evidence['sources']), 'Canonical source set changed'
     for name, row in evidence['sources'].items():
         assert all(current[name][key] == row[key] for key in current[name]), 'Canonical source changed since candidate build: ' + name
@@ -385,6 +392,14 @@ def verify_candidate_sources():
         assert sha(T / 'tools' / name) == digest, 'Canonical tool changed: ' + name
     assert sha(C / 'family-receipt.json') == evidence['candidate_receipt_sha256'], 'Assembled receipt changed'
     receipt = read(C / 'family-receipt.json')
+    if CONFIG.get('approved_runtime_retention'):
+        original = read(R/'production-before/inventory.json')
+        _, _, retention = select_approved_runtime_retention(original, current)
+        assert retention == evidence.get('approved_runtime_retention'), 'Approved runtime selection changed after build'
+        from family_update.approved_runtime_retention import verify_candidate
+        verify_candidate(receipt, original, retention)
+    else:
+        assert not evidence.get('approved_runtime_retention'), 'Retained build needs its explicit configuration'
     audit_candidate(C, receipt)
     return receipt
 

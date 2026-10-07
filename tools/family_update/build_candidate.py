@@ -20,19 +20,26 @@ def main(argv=None):
     preserved = read(R / 'production-before/preserved-packs.json')
     from family_update.identity_migration import assembly_order, candidate_plan
     requested=CONFIG.get('held_sources',[])
-    receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved], reviewed_order=assembly_order(original),held_sources=requested)
+    assembly_lock, assembly_sources, retention = read(T / 'family/upstream.lock.json'), SOURCES.copy(), None
+    if CONFIG.get('approved_runtime_retention'):
+        assembly_lock, assembly_sources, retention = select_approved_runtime_retention(original, sources)
+    receipt = assemble(assembly_lock, assembly_sources, archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved], reviewed_order=assembly_order(original),held_sources=requested)
     from family_update.source_holds import verify_retained,verify_retained_extension
     verify_retained(receipt,original,read(T/'family/upstream.lock.json'),requested)
     verify_retained_extension(receipt,original,read(T/'family/upstream.lock.json'),CONFIG.get('extension_hold',False))
     candidate_plan(receipt, original)
+    from family_update.approved_runtime_retention import verify_candidate
+    verify_candidate(receipt, original, retention)
     audit_candidate(C, receipt)
     compatibility = quality(C, receipt)
     atomic(R / 'compatibility-report.json', compatibility)
     tools = ['family_bundle.py', 'family_guard.py', 'family_saved_world.py', 'baseline_gate.py', 'host_extensions.py', 'container_recovery.py']
     tools = [name for name in tools if (T / 'tools' / name).exists()]
     evidence = {'recorded_at': now(), 'config_sha256': sha(CONFIG_PATH), 'orchestration_sha256': orchestration_hashes(), 'sources': sources, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'upstream_lock_sha256': sha(T / 'family/upstream.lock.json'), 'tool_sha256': {name: sha(T / 'tools' / name) for name in tools}, 'packs': len(receipt['packs']), 'versions': versions(receipt), 'static_family_assembly': True, 'functional_tests_recorded_separately': True, 'client': False, 'production_ready': False}
+    if retention is not None:evidence['approved_runtime_retention'] = retention
     atomic(R / 'build-evidence.json', evidence)
     evidence['external_input_sha256']=external_input_hashes();atomic(R/'build-evidence.json',evidence)
     verify_predeploy()
+    if retention is not None:assert source_state(verify_remote=True) == sources, 'Canonical states changed during retained assembly'
     print(json.dumps({'packs': len(receipt['packs']), 'versions': versions(receipt), 'candidate_receipt_sha256': evidence['candidate_receipt_sha256']}, ensure_ascii=False))
 if __name__ == '__main__': main()

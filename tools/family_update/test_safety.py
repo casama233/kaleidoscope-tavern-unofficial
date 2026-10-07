@@ -79,6 +79,13 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(common.PY, interpreter)
         self.assertNotEqual(common.PY, interpreter.resolve())
 
+    def test_cleanup_requires_explicit_evidence_root_outside_live_and_source(self):
+        for root in ['.', '/', self.config['world_dir'], str(Path(self.config['sources']['tavern']) / 'runtime')]:
+            with self.subTest(root=root):
+                self.config['retention_root'] = root
+                with self.assertRaisesRegex(ValueError, 'retention_root'):
+                    self.configure()
+
     def test_family_initialization_cannot_be_replaced_by_server_only_marker(self):
         self.config['startup_markers'] = ['Server started.']
         with self.assertRaisesRegex(ValueError, 'startup markers'):

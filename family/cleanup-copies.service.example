@@ -1,0 +1,11 @@
+[Unit]
+Description=Remove retired Senluo deployment copies
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/src/tavern
+ExecStart=/srv/family-tools-venv/bin/python /srv/src/tavern/tools/family_update.py --config /etc/bsm/family-cleanup.json cleanup-copies --execute
+Nice=10
+IOSchedulingClass=idle
+UMask=0077
+TimeoutStartSec=30min

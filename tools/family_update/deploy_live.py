@@ -225,4 +225,8 @@ def main(argv=None):
         raise
     finally:
         fcntl.flock(lock,fcntl.LOCK_UN); lock.close()
+    # The live transaction has completed. Cleanup has its own lock and cannot
+    # enter this function's recovery path, including on interruption or ENOSPC.
+    from family_update.cleanup_copies import after_deployment
+    after_deployment()
 if __name__=='__main__': main()

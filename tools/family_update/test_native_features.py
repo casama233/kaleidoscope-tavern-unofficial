@@ -7,6 +7,15 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from family_update import native_common as m
 
 class NativeFeatureTests(unittest.TestCase):
+    def test_retired_output_cannot_restart_or_overwrite_native_log(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r=Path(tmp);engine=r/'exact-engine';engine.mkdir()
+            (r/'retired-copies.json').write_text('{"state":"partial"}')
+            log=engine/'first.log';log.write_text('retained evidence')
+            with patch.object(m.subprocess,'Popen') as launch,self.assertRaisesRegex(AssertionError,'Retired QA'):
+                m.native_run(engine,'first')
+            launch.assert_not_called();self.assertEqual(log.read_text(),'retained evidence')
+
     def test_exact_existing_flags_are_preserved_only_when_explicitly_selected(self):
         with tempfile.TemporaryDirectory() as tmp:
             r=Path(tmp);before=r/'production-before';before.mkdir()

@@ -116,7 +116,7 @@ dimension-changing/faulting adapters are not an observed native mutation phase.
 Unchanged helper/native evidence is retained without another run.
 
 This source-lock pairing does not change Tavern output. Current canonical
-T119/L85 remain, and ground/author-floor preparation is excluded. Required
+T120/L86 are paired, and ground/author-floor preparation is excluded. Required
 canonical checks/merge and full-family/fresh-stopped-saved-world admission
 precede the standing development update; client=false,production_ready=false.
 The fresh100 identity preserves concurrent diagnostic94 sources separately,

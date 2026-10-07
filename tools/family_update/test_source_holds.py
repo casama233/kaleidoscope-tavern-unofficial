@@ -74,4 +74,36 @@ class PrivateMetadataTests(unittest.TestCase):
   link=self.root/'alias.json';link.symlink_to(self.file)
   with self.assertRaises(AssertionError):private_extension_hold(link)
 
+ def missing(self,path=None,extension=None,requested=False):
+  from unittest.mock import patch
+  from family_update import common
+  path=path or self.root/'maintenance/deployment-hold.json'
+  config={'extension_hold_source':str(path)}
+  with patch.multiple(common,EXTENSION=extension or self.root,CONFIG=config):
+   return selected_extension({'extension_deployment_hold_ref':'canonical_private_source'},requested)
+ def test_cleared_committed_private_hold_can_be_absent_even_without_parent_directory(self):
+  self.assertFalse((self.root/'maintenance').exists())
+  self.assertIsNone(self.missing())
+  with self.assertRaises(AssertionError):self.missing(requested=True)
+ def test_missing_hold_cannot_substitute_another_path_or_source(self):
+  for path,source in [(self.root/'metadata/missing.json',self.root),(self.root/'maintenance/deployment-hold.json',self.root/'other')]:
+   with self.subTest(path=path,source=source),self.assertRaises(AssertionError):self.missing(path,source)
+ def test_local_deletion_of_committed_canonical_hold_is_rejected(self):
+  p=self.root/'maintenance/deployment-hold.json';p.parent.mkdir();p.write_text('{}')
+  self.git('add','.');self.git('commit','-m','canonical hold');p.unlink()
+  with self.assertRaises(AssertionError):self.missing()
+ def test_missing_hold_still_requires_private_clean_main_and_exact_origin(self):
+  for mode in ['public','dirty','branch','remote']:
+   with self.subTest(mode=mode):
+    if mode=='public':
+     p=self.root/'.repo-target.json';target=json.loads(p.read_text());target['private']=False;p.write_text(json.dumps(target));self.git('add','.');self.git('commit','-m','public target')
+    elif mode=='dirty':(self.root/'extra').write_text('untracked')
+    elif mode=='branch':self.git('checkout','-b','other')
+    else:self.git('remote','set-url','origin','https://github.com/fixture/other')
+    with self.assertRaises(AssertionError):self.missing()
+    if mode=='public':self.git('reset','--hard','HEAD~1')
+    elif mode=='dirty':(self.root/'extra').unlink()
+    elif mode=='branch':self.git('checkout','main')
+    else:self.git('remote','set-url','origin','https://github.com/fixture/private-source')
+
 if __name__=='__main__':unittest.main()

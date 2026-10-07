@@ -7,8 +7,9 @@ import copy,json,re,subprocess
 
 def private_extension_hold(path):
  """Keep private release records in their authenticated canonical private Git."""
- path=Path(path);assert path.is_absolute() and path.is_file() and path.resolve()==path
- root=Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],cwd=path.parent,text=True).strip())
+ path=Path(path);assert path.is_absolute() and path.resolve()==path
+ parent=next(p for p in path.parents if p.is_dir())
+ root=Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],cwd=parent,text=True).strip())
  assert root in path.parents and not root.is_symlink()
  def git(*args):return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()
  target=json.loads((root/'.repo-target.json').read_text())
@@ -16,6 +17,12 @@ def private_extension_hold(path):
  assert git('branch','--show-current')=='main' and not git('status','--porcelain'),'Private hold source must be clean canonical main'
  assert git('remote','get-url','origin').removesuffix('.git')=='https://github.com/'+target['repository']
  relative=path.relative_to(root).as_posix()
+ if not path.exists():
+  from family_update.common import EXTENSION
+  assert relative=='maintenance/deployment-hold.json' and EXTENSION and root==EXTENSION.resolve(),'Missing private hold must belong to configured canonical source'
+  assert subprocess.run(['git','-C',str(root),'cat-file','-e','HEAD:'+relative],capture_output=True).returncode!=0,'Canonical hold was removed only from the working tree'
+  return None
+ assert path.is_file()
  assert git('show','HEAD:'+relative)==path.read_text().strip(),'Private hold must be committed'
  row=json.loads(path.read_text());config=json.loads((root/'baseline.json').read_text())
  assert config['repository']==row['repository'] and config['version']==row['candidate_version']

@@ -8,11 +8,13 @@ export const NATIVE_EFFECTS=Object.freeze(Object.fromEntries([
  'instant_health','instant_damage','slowness','poison','weakness','invisibility','slow_falling','wither','night_vision','water_breathing','blindness','mining_fatigue','speed','jump_boost'
 ].map(x=>['minecraft:'+x,x]).concat([['minecraft:hero_of_the_village','village_hero']])));
 export function drinkRows(itemId){const parsed=parseBottle(itemId);if(!parsed)return [];const rows=DRINK_EFFECTS[parsed.base];return rows?.[Math.min(parsed.quality,rows.length)-1]??[];}
-export function rollDrinkEffects(itemId,rng=Math.random){
- const selected=[];
+/** Completion pulls one selected row at a time so earlier effect callbacks
+ * run before the next source random draw. Pure potion builders keep the array API.
+ */
+export function* iterateDrinkEffects(itemId,rng=Math.random){
  for(const e of drinkRows(itemId)){
   const roll=rng();check(Number.isFinite(roll)&&roll>=0&&roll<1,'INVALID_RNG');
-  if(javaRandomFloat(roll)<Math.fround(e.probability))selected.push({...e,bedrockId:NATIVE_EFFECTS[e.effect]??null,ticks:['minecraft:instant_health','minecraft:instant_damage'].includes(e.effect)?1:e.duration*20});
+  if(javaRandomFloat(roll)<Math.fround(e.probability))yield {...e,bedrockId:NATIVE_EFFECTS[e.effect]??null,ticks:['minecraft:instant_health','minecraft:instant_damage'].includes(e.effect)?1:e.duration*20};
  }
- return selected;
 }
+export function rollDrinkEffects(itemId,rng=Math.random){return [...iterateDrinkEffects(itemId,rng)];}

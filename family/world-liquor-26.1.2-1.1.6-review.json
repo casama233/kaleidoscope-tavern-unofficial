@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "project": {
+    "id": 1502365,
+    "name": "Kaleidoscope World Liquor",
+    "authors": [
+      {
+        "id": 138592347,
+        "name": "ChenjdyUltra"
+      },
+      {
+        "id": 115933823,
+        "name": "bf_meow"
+      }
+    ],
+    "author_identity_changed": false,
+    "url": "https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-world-liquor"
+  },
+  "checked_at": "2026-10-07T10:28:04Z",
+  "source_metadata": "CurseForge official API; downloaded public author archives checked once against published file length and SHA1 at the download boundary. Archives and decompiled code are excluded from this repository.",
+  "branch": {
+    "minecraft": "26.1.2",
+    "loader": "NeoForge",
+    "status": "new_release_requires_adaptation",
+    "previous": {
+      "file_id": 8820767,
+      "version": "1.1.3",
+      "file_date": "2026-09-06T09:24:17.493Z",
+      "file_length": 6696550,
+      "url": "https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-world-liquor/files/8820767"
+    },
+    "latest": {
+      "file_id": 9087098,
+      "version": "1.1.6",
+      "file_date": "2026-10-07T06:54:58.387Z",
+      "file_length": 6738017,
+      "url": "https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-world-liquor/files/9087098"
+    },
+    "changelog_available": false,
+    "dependencies": {
+      "minecraft": "[26.1.2]",
+      "neoforge": "[26.1.2.71,)",
+      "kaleidoscope_tavern": "[1.1.2,)"
+    }
+  },
+  "license_metadata": {
+    "previous": "MIT + CC BY-NC-SA 4.0",
+    "latest": "CC BY-NC-ND 4.0",
+    "changed": true,
+    "permission_inferred": false
+  },
+  "current_baseline": {
+    "minecraft": "1.21.1",
+    "loader": "NeoForge",
+    "world_liquor_author_file_id": 9066406,
+    "world_liquor_author_version": "1.1.11",
+    "tavern_author_file_id": 8350856,
+    "tavern_author_version": "1.2.0",
+    "changed_by_this_review": false,
+    "full_java_parity_verified": false
+  },
+  "comparison": {
+    "old_members": 807,
+    "new_members": 831,
+    "added": 55,
+    "removed": 31,
+    "changed": 73,
+    "content_equal": 703,
+    "recipe_files_old": 67,
+    "recipe_files_new": 68,
+    "drink_effect_files_old": 19,
+    "drink_effect_files_new": 19,
+    "changed_drink_effect_data": [
+      "dassai"
+    ],
+    "unchanged_ogg_samples": 6,
+    "existing_runtime_texture_paths_compared": 13,
+    "equal_decoded_pixels": 8,
+    "different_decoded_pixels": 5
+  },
+  "limits": [
+    "Source metadata, archive contents, JSON semantics, decompiled functional paths and targeted texture pixels were reviewed.",
+    "No Java26 engine, Bedrock runtime, BDS, world migration or human client acceptance was performed for this branch.",
+    "No runtime, release identity, baseline lock or installation change is made by these review documents.",
+    "The two 26.1.2 releases do not register crazy, respawn, double_damage, explosion, level_boost, continuous_heal or creative_flight; removed unused classes are not a removal from the maintained 1.21.1 gameplay baseline."
+  ],
+  "adaptation_items": [
+    {
+      "id": "WL2612-116-SOURCE",
+      "category": "provenance",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "META-INF/neoforge.mods.toml"
+      ],
+      "delta": "Metadata changes from 1.1.3 to 1.1.6 and changes the declared license; the required Minecraft, NeoForge and Tavern ranges remain unchanged.",
+      "current_1_21_1_impact": "Separate Minecraft branch; source identities are unchanged. License metadata is recorded without inferring permission to redistribute modified source or assets.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-LUCK",
+      "category": "effect/loot",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/init/ModEffects.class",
+        "com/bmt/kaleidoscope_world_liquor/loot/LuckLootModifier.class",
+        "data/kaleidoscope_world_liquor/kaleidoscope_tavern/drink_effect/dassai.json"
+      ],
+      "delta": "Registers custom luck and removes the registered bonemeal_spreader effect. Dassai Q3–Q6 uses custom luck amplifiers 1–4 for 80/240/720/2160 seconds. Each level gets a 25% float roll to reroll raw loot, up to five attempts; only previously absent item types are appended.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 uses vanilla Luck. This custom algorithm must not be substituted into that baseline.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-LOOT",
+      "category": "event/loot",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/event/EffectEventHandlers.class"
+      ],
+      "delta": "BlockDropsEvent copies the actual drop entities for crops and ores at min(0.15 + amplifier * 0.05, 1). Extra entities use the source default pickup delay; its Java26 engine value was not executed.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 instead runs Block.getDrops independently from its block-break event. Preserve that reroll adapter; causal mob-drop collection remains a separate unfinished task.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-RECIPE",
+      "category": "recipe",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "data/kaleidoscope_world_liquor/recipe/tonic_water.json",
+        "data/kaleidoscope_world_liquor/recipe/cola.json",
+        "data/kaleidoscope_world_liquor/recipe/freezer/obsidian.json",
+        "data/kaleidoscope_world_liquor/recipe/freezer/liangshan_ice_cone.json"
+      ],
+      "delta": "Adds tonic water: water-potion component, sugar and vine produce one item. Cola also requires the water-potion component. Lava 1000 fluid units over 1800 ticks produces one obsidian instead of three magma blocks. The milk recipe uses minecraft:milk. Cabinet category edits leave the swapped spruce/dark-oak outputs unchanged.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 already has tonic water and highball, and the current port uses its magma-block recipe. The 26.1.2 recipe and fluid changes require separate adaptation.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-DRINK",
+      "category": "use/timing/audio",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/item/CustomDrinkItem.class",
+        "com/bmt/kaleidoscope_world_liquor/item/BottledDrinkItem.class",
+        "com/bmt/kaleidoscope_world_liquor/init/ModItems.class"
+      ],
+      "delta": "Adds custom Consumable sound initializers and a reusable bottled-mixer finish method. Use duration is 32 ticks. Cola applies speed and haste for 300 ticks; tonic applies regeneration for 300 ticks. All six original OGG samples are unchanged.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 already has corresponding item/sound classes. Current float and single-item container repairs retain their 1.21.1 sources. Java26 Consumable timing and rendered cadence remain unverified.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-MOTION",
+      "category": "movement/timing",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/mixins/BoatMixin.class",
+        "com/bmt/kaleidoscope_world_liquor/mixins/LivingEntityMixin.class",
+        "com/bmt/kaleidoscope_world_liquor/hooks/ClientPlayerEntityMixinHooks.class"
+      ],
+      "delta": "Boating uses multiplier 1.3 + min(amplifier * 0.2, 1), speed cap 1.2 and braking factor 0.85. Reverse gravity uses tick HEAD, travel TAIL, jump HEAD and ceiling TAIL phases. Multi-jump uses positive Y velocity as falling under reverse gravity.",
+      "current_1_21_1_impact": "These paths largely converge with the existing 1.21.1 source already targeted by current repairs. Native player collision, phase and client equivalence remain pending.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-BEHEADING",
+      "category": "combat/drop",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/event/EffectEventHandlers.class",
+        "data/kaleidoscope_world_liquor/tags/entity_type/bosses.json"
+      ],
+      "delta": "Adds a recursion marker, cancels the original damage, performs an owner-attributed 10000-damage attempt and uses the source blocked-damage fallback. Missing heads use exact class or registry candidates. Bosses are dragon, wither and warden.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 already contains this author lifecycle. The port still has separate recursion, fallback and causal head/drop collection gaps.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-STORAGE",
+      "category": "interaction/automation",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/block/entity/BarCabinetBlockEntity.class",
+        "com/bmt/kaleidoscope_world_liquor/block/BarCabinetBlock.class"
+      ],
+      "delta": "Adds a two-slot cabinet transfer handler with one item per slot and whole-cabinet occupancy for irregular items. Comparator output is 3 for a single irregular item, otherwise 0–2 occupied slots.",
+      "current_1_21_1_impact": "Preserve current native-storage and migration repairs. Full transfer, comparator and multiplayer parity require their own checks.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-FREEZER",
+      "category": "interaction/render/save",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/block/entity/FreezerBlockEntity.class",
+        "com/bmt/kaleidoscope_world_liquor/client/renderer/FreezerRenderer.class",
+        "com/bmt/kaleidoscope_world_liquor/mixins/TapBlockMixin.class"
+      ],
+      "delta": "Uses the NeoForge native milk fluid, persists MaxOutputCount and renders output height from count/max. Directional shape helpers replace explicit shapes. Extraction wrappers compose original tap behavior, and a Jade fluid tooltip is added.",
+      "current_1_21_1_impact": "Fluid identifiers, saved output ratios, shapes and interaction need separate 26.1.2 adaptation. No current world ownership or identity changes are authorized by this review.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-SEAT",
+      "category": "interaction/collision",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/block/ChairBlock.class",
+        "data/kaleidoscope_tavern/tags/block/sittable.json"
+      ],
+      "delta": "Sixteen stools gain the host sittable tag, shared SitEntity at height 0.9, yaw and occupied-seat checks, destruction cleanup and source waterlogging.",
+      "current_1_21_1_impact": "Compare against the existing 1.21.1 seat adapter and native waterlogging. Java entity identity is not directly imported into Bedrock.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-BREW",
+      "category": "interaction/timing",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "com/bmt/kaleidoscope_world_liquor/event/BrewAcceleratorEventHandler.class",
+        "com/bmt/kaleidoscope_world_liquor/command/BrewCommands.class"
+      ],
+      "delta": "Adds the one-level accelerator, maximum quality 6, a 2400-tick book cooldown, main-hand and non-FakePlayer checks, source one-shot feedback and operator brew commands.",
+      "current_1_21_1_impact": "Minecraft 1.21.1 already has the accelerator source. Bedrock enchantment and operator-command parity remain unfinished; this review adds no experimental world flags.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-ART",
+      "category": "model/texture/UI",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "assets/kaleidoscope_world_liquor/models/block/mixology/around_the_world.json",
+        "assets/kaleidoscope_world_liquor/textures/mob_effect/luck.png",
+        "com/bmt/kaleidoscope_world_liquor/client/renderer/TreasureSenseRenderer.class",
+        "com/bmt/kaleidoscope_world_liquor/client/creativetab/CreativeTabFilter.class"
+      ],
+      "delta": "Changes five cocktail models and adds gin-tonic, highball and tonic resources. Of 13 textures matched to current resource-pack paths, eight have equal decoded pixels and five differ. The new luck icon is unported. Creative filters and treasure-sense server/client rendering also change.",
+      "current_1_21_1_impact": "Pixel comparisons do not establish model or rendered parity. Differences from the 26.1.2 branch do not by themselves make current 1.21.1 source art obsolete.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    },
+    {
+      "id": "WL2612-116-RECORD",
+      "category": "redstone",
+      "status": "requires_branch_specific_adaptation",
+      "source_members": [
+        "data/kaleidoscope_world_liquor/jukebox_song/random_disc.json"
+      ],
+      "delta": "The random disc comparator output changes from 5 to 6. Its nine-alcohol crafting recipe is unchanged.",
+      "current_1_21_1_impact": "Check the Minecraft 1.21.1 source before changing the port; keep this redstone change specific to 26.1.2.",
+      "implemented_by_this_review": false,
+      "client_verified": false
+    }
+  ]
+}

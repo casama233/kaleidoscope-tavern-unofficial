@@ -16,6 +16,8 @@ def preflight():
     record_static(verified_candidate=receipt)
     verify_native(verified_candidate=receipt)
     quality(C, receipt)
+    from family_update.preserved_upgrades import verify_candidate
+    verify_candidate(receipt, original)
     from family_update.identity_migration import candidate_plan
     candidate_plan(receipt, original)
     source_state(verify_remote=True)
@@ -49,6 +51,8 @@ def finalize_receipt():
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
     if CONFIG.get('preserved_additions'):reports.append('preserved-additions-check.json')
+    if CONFIG.get('preserved_upgrades'):
+        reports.append('preserved-upgrades-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}
@@ -129,19 +133,23 @@ def install(receipt,original):
     migration=candidate_plan(receipt,original)
     reverse={row['new_uuid']:row['old_uuid'] for row in (migration or {}).get('packs',[])}
     prior={p['uuid']:p for p in original['packs']}; foreign={p['uuid']:p for p in receipt['packs'] if p['source']['owner']=='preserved'}
-    for uid,row in foreign.items(): assert hashes(prior[uid]['path'])==row['files'], 'Preserved pack changed'
+    from family_update.preserved_upgrades import verify_candidate
+    upgrades=verify_candidate(receipt,original)
+    for uid,row in foreign.items():
+        if uid not in upgrades:assert hashes(prior[uid]['path'])==row['files'], 'Preserved pack changed'
+    install_packs=family+[p for p in receipt['packs'] if p['uuid'] in upgrades]
     index=read(Q.parent/'addon_localizations/index.json')
     assert not any(p.get('uuid') in policy['owned_uuids'] for p in index.get(SERVER,[])), 'Unexpected owned localization replacement'
     staged,rollback=R/'production-staged',R/'production-rollback'; staged.mkdir(); rollback.mkdir()
-    for p in family: shutil.copytree(C/(p['side']+'_packs')/p['uuid'],staged/(p['side']+'_packs')/p['uuid'])
+    for p in install_packs: shutil.copytree(C/(p['side']+'_packs')/p['uuid'],staged/(p['side']+'_packs')/p['uuid'])
     db_before=hashes(W/'db'); level_before=sha(W/'level.dat'); retired=[]; installed=[]
     try:
         atomic(Q/'senluo-policy.json',policy)
         runpy.run_path(str(Q/'policy.py'))['validate_incoming'](incoming,set(prior),True)
-        for p in family:
+        for p in install_packs:
             old=prior[reverse.get(p['uuid'],p['uuid'])]; source=Path(old['path']); target=rollback/(old['side']+'_packs')/source.name; target.parent.mkdir(parents=True,exist_ok=True)
             os.replace(source,target); retired.append((target,source))
-        for p in family:
+        for p in install_packs:
             source=staged/(p['side']+'_packs')/p['uuid']; target=W/(p['side']+'_packs')/p['uuid']; assert not target.exists(); os.replace(source,target); installed.append(target)
         for side in ['behavior','resource']: shutil.copy2(C/('world_'+side+'_packs.json'),W/('world_'+side+'_packs.json'))
         assert hashes(W/'db')==db_before and sha(W/'level.dat')==level_before, 'Pack installation must not mutate live save'

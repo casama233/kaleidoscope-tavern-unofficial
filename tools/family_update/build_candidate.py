@@ -16,9 +16,13 @@ def main(argv=None):
     sources = source_state(verify_remote=True)
     archives = archive_paths()
     preserved = read(R / 'production-before/preserved-packs.json')
+    from family_update.preserved_upgrades import select_inputs
+    preserved_paths = select_inputs(preserved, original)
     from family_update.identity_migration import assembly_order, candidate_plan
     requested=CONFIG.get('held_sources',[])
-    receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=[Path(p['path']) for p in preserved], reviewed_order=assembly_order(original),held_sources=requested)
+    receipt = assemble(read(T / 'family/upstream.lock.json'), SOURCES.copy(), archives, C, extensions=[EXTENSION] if EXTENSION else [], preserved=preserved_paths, reviewed_order=assembly_order(original),held_sources=requested)
+    from family_update.preserved_upgrades import verify_candidate
+    verify_candidate(receipt, original)
     from family_update.source_holds import verify_retained
     verify_retained(receipt,original,read(T/'family/upstream.lock.json'),requested)
     candidate_plan(receipt, original)

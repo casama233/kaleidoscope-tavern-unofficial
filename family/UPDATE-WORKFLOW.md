@@ -134,3 +134,20 @@ the original policy and live files remain unchanged until authorized deployment.
 來源更新與部署可分開：`upstream.lock.json`的owned保留最新已審查來源，例如Grilling2.8.73；`deployment_holds`明列使用者完成門檻文件、已合併canonical commit、舊版／tree及candidate版。需要保留時，設定`held_sources: ["grilling"]`，該sources路徑使用指定commit的乾淨隔離Git checkout，不回退canonical main。此功能不能用來安裝歷史artifact、改玩法或自動降級。
 
 source_state核對宣告／committed門檻文件、held版本／trees／commit、正確canonical remote及main ancestry。完整家族仍由family_bundle組裝，已保留BP/RP的版本及每個檔案必須等於本次live capture，任一側缺失、內容漂移、新UUID或版本不同都拒絕。CI驗證使用該已合併held來源的真實PR；static/BDS/fresh saved-world／准入／備份／回退／readback全部保留。候選收據明列held_revision，latest來源鎖不改成較舊來源。別包完成門檻不因本輪酒館／世界名酒修復而自動撤銷。
+# Reviewed AMW/Novelty dependency upgrade
+
+`preserved_upgrades` optionally names an explicit local review for the supplied
+AMW 2.6.22 / Novelty 1.5.13 archive. It must bind the complete unchanged old
+inventory and policy, four stable foreign UUIDs, the original archive, every
+new source file and the standing authorization. It cannot update managed owned
+packages, approve live drift, add identities, infer a release from filenames or
+alter archive contents while assembling.
+
+The builder selects the reviewed whole packages. The unchanged foreign packages
+remain exact copies of live. Complete-family guard/static/native and fresh stopped
+backup/saved-world gates still apply. Installation stages the owned family and
+four reviewed replacements together, retains all previous directories for rollback,
+and uses the existing complete inventory/policy restoration before any restart.
+The source database and level.dat are not changed during package installation.
+Client acceptance remains separately pending; supplied upgrades are never installed
+automatically from a version check.

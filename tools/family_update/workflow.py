@@ -156,6 +156,11 @@ def record_static(verified_candidate=None):
         verify_candidate_sources()
     candidate = read(C / 'family-receipt.json')
     prior = {pack['uuid']: pack for pack in read(R / 'production-before/inventory.json')['packs']}
+    if CONFIG.get('preserved_upgrades'):
+        from family_update.preserved_upgrades import verify_candidate
+        inventory=read(R / 'production-before/inventory.json')
+        upgrades=verify_candidate(candidate,inventory)
+        atomic(R/'preserved-upgrades-check.json',{'source':report_ref(Path(CONFIG['preserved_upgrades'])),'archive':read(Path(CONFIG['preserved_upgrades']))['archive'],'packs':{uid:{'version':row['version'],'files':row['files']} for uid,row in upgrades.items()},'original_inventory_unchanged':True,'old_drift_approved':False,'client':False})
     known = {row['repository'] for key, row in read(R / 'build-evidence.json')['sources'].items() if key in SOURCES}
     from family_update.extension_validation import verify_extension
     extension_reports=verify_extension(candidate,prior)
@@ -178,6 +183,8 @@ def record_static(verified_candidate=None):
     ci_path = R / 'ci-evidence.json'
     evidence = {'schema': 1, 'recorded_at': now(), 'ok': proof['ok'], 'candidate_receipt_sha256': build['candidate_receipt_sha256'], 'pr_checks_verified': True, 'sources': build['sources'], 'checks': [{'name': 'Merged PR checks for exact canonical trees', 'kind': 'actual_github_ci', 'exit_code': 0, 'log': str(ci_path), 'sha256': sha(ci_path)}], 'reports': [report_ref(ci_path), report_ref(R / 'build-evidence.json'), report_ref(R / 'compatibility-report.json')], 'local_functional_suites_rerun': False, 'client': False}
     evidence['reports'].extend(extension_reports)
+    if CONFIG.get('preserved_upgrades'):
+        evidence['reports'].extend([report_ref(Path(CONFIG['preserved_upgrades'])),report_ref(R/'preserved-upgrades-check.json'),read(Path(CONFIG['preserved_upgrades']))['archive']])
     if CONFIG.get('preserved_additions'):
         evidence['reports'].extend([report_ref(Path(CONFIG['preserved_additions'])),report_ref(R/'preserved-additions-check.json')])
     if CONFIG.get('preserved_reconciliation'):

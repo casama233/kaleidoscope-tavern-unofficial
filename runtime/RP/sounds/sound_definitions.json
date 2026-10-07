@@ -287,6 +287,42 @@
           "stream": false
         }
       ]
+    },
+    "kt_java.effect.shriek": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kt_java/java21/mob/warden/sonic_boom1",
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_java/java21/mob/warden/sonic_boom2",
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_java/java21/mob/warden/sonic_boom3",
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_java/java21/mob/warden/sonic_boom4",
+          "stream": false
+        }
+      ],
+      "max_distance": 16
+    },
+    "kt_java.effect.zenith": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/kt_java/java21/mob/endermen/portal",
+          "stream": false
+        },
+        {
+          "name": "sounds/kt_java/java21/mob/endermen/portal2",
+          "stream": false
+        }
+      ],
+      "max_distance": 16
     }
   }
 }

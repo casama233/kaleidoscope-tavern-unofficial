@@ -6,10 +6,10 @@ import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnost
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,ItemStack,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
-import {isBottleSupport} from '../core/bottle-support.js';
 import {grassStealthPlant} from '../core/grass-stealth-plants.js';
 import {armorShouldWear} from '../core/armor-wear.js';
 import {livingEffectEntity} from '../core/living-effect-entity.js';
+import {motionBlockingHeight} from '../core/motion-blocking-height.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
@@ -43,14 +43,13 @@ export function applyCustomEffect(p,row){
  if(definition?.mode==='timed'){if(row.duration<=0)return false;write(p,addStatus(statusNow(p),row.effect,row.duration*20,row.amplifier));customEffectDiagnostics.applied++;return true;}
  const source=externalEffectSource(row.effect);if(source){system.sendScriptEvent(source+':apply_effect',JSON.stringify({entity:p.id,effect:row.effect,duration:row.duration,amplifier:row.amplifier}));return true;}
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
- if(p?.typeId!=='minecraft:player')return false;
  if(row.effect==='kaleidoscope_tavern:shriek_attack')return performShriek(p);
  if(row.effect==='kaleidoscope_tavern:upside_down'){
   // Java uses user.getBoundingBox().inflate(16) and only living Mob entities.
   // Bedrock family=mob is the closest class filter; exact AABB overlap is rechecked below.
   const sourceBox=p.getAABB();let renamed=0;
   for(const entity of p.dimension.getEntities({families:['mob']}))try{
-   if(entity.typeId==='minecraft:player'||entity.typeId.startsWith('kaleidoscope_tavern:seat_'))continue;
+   if(entity.typeId==='minecraft:player')continue;
    const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
    if(!inflatedAabbIntersects(sourceBox,entity.getAABB(),16))continue;
    entity.nameTag='Grumm';renamed++;
@@ -58,16 +57,19 @@ export function applyCustomEffect(p,row){
   customEffectDiagnostics.upsideDownRenames+=renamed;return true;
  }
  if(row.effect==='kaleidoscope_tavern:zenith'){
-  // Heightmap/safety adapter: no excavation, no unsafe forced teleport, no fake success.
   const here=p.location,d=p.dimension;
-  const top=d.getTopmostBlock({x:Math.floor(here.x),z:Math.floor(here.z)});
-  if(!top||here.y>=top.location.y+1||!isBottleSupport(top.typeId,top.getTags?.()??[]))return true;
-  const at={x:Math.floor(here.x)+.5,y:top.location.y+1,z:Math.floor(here.z)+.5};
-  if(!d.getBlock(at)?.isAir||!d.getBlock({...at,y:at.y+1})?.isAir)return true;
-  if(!p.tryTeleport(at,{checkForBlocks:true}))return true;
-  p.clearVelocity();p.addEffect('hunger',600,{amplifier:0,showParticles:true});
-  for(const location of [here,at])try{d.playSound('entity.player.teleport',location,{volume:1,pitch:1});}catch(e){error(e);}customEffectDiagnostics.teleports++;return true;
+  const x=Math.floor(here.x),z=Math.floor(here.z),surface=motionBlockingHeight(d,x,z);
+  if(Math.floor(here.y)>=surface)return true;
+  const at={x:x+.5,y:surface,z:z+.5};
+  // The source plays at the original position, teleports, then plays at the
+  // destination; it preserves velocity and does not impose extra headroom rules.
+  try{d.playSound('kt_java.effect.zenith',here,{volume:1,pitch:1});}catch(e){error(e);}
+  p.teleport(at,{keepVelocity:true});
+  try{d.playSound('kt_java.effect.zenith',at,{volume:1,pitch:1});}catch(e){error(e);}
+  p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.teleports++;return true;
  }
+ // The remaining own timed behavior still has player-specific adapters.
+ if(p?.typeId!=='minecraft:player')return false;
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
 }

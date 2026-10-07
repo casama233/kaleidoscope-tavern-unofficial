@@ -52,7 +52,7 @@ class PrivateMetadataTests(unittest.TestCase):
  def setUp(self):
   self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.root=Path(self.temp.name)
   def git(*args):return subprocess.check_output(['git','-C',str(self.root),*args],text=True,stderr=subprocess.DEVNULL).strip()
-  self.git=git;git('init','-b','main');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');git('remote','add','origin','https://github.com/fixture/private-source')
+  self.git=git;git('init','-b','main');git('config','gc.auto','0');git('config','maintenance.auto','false');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');git('remote','add','origin','https://github.com/fixture/private-source')
   (self.root/'.repo-target.json').write_text(json.dumps({'repository':'fixture/private-source','repository_id':1,'private':True,'logical_runtime_repository':'local/senluo-amw-cuisine'}))
   (self.root/'baseline.json').write_text(json.dumps({'repository':'local/senluo-amw-cuisine','version':[0,0,2]}));(self.root/'metadata').mkdir()
   (self.root/'metadata/reason.md').write_text('Synthetic committed reason.\n')

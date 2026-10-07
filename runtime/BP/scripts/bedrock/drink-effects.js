@@ -1,5 +1,5 @@
 import {GameMode} from '@minecraft/server';
-import {rollDrinkEffects} from '../core/drink-effects.js';
+import {iterateDrinkEffects} from '../core/drink-effects.js';
 import {parseBottle} from '../core/bottles.js';
 import {planInventory,commitInventory} from '../core/inventory.js';
 import {check} from '../core/util.js';
@@ -12,7 +12,7 @@ export const effectDiagnostics={applied:0,unsupported:{},errors:[],completed:0,c
 
 /** Effect half of DrinkBlockItem.finishUsingItem; inventory/container exchange is owned by completeDrink. */
 export function consumeDrink(event,rng=Math.random){
- const rows=rollDrinkEffects(event.itemStack?.typeId,rng),entity=event.source;
+ const rows=iterateDrinkEffects(event.itemStack?.typeId,rng),entity=event.source;
  if(!entity)return [];
  const outcomes=[];
  for(const row of rows){

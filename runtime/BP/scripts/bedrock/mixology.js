@@ -20,6 +20,7 @@ import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encode
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach} from './transactions.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
+import {javaRandomFloat} from '../core/java-random.js';
 import {applyCustomEffect} from './custom-effects.js';
 import {finishDrinkContainer} from './drink-effects.js';
 import {faceOffset} from '../core/furniture.js';
@@ -224,13 +225,13 @@ export function syncCupVisual(block){
   visual.setProperty('kt_art:red',(state.payload.color>>16)&255);visual.setProperty('kt_art:green',(state.payload.color>>8)&255);visual.setProperty('kt_art:blue',state.payload.color&255);visual.setRotation({x:0,y:state.facing*90});
  });
 }
-export function completeCocktail(event){
+export function completeCocktail(event,rng=Math.random){
  const player=event.source,item=event.itemStack;if(!player||!COCKTAILS[item?.typeId])return;
  safely(player,()=>{
   const effects=item.typeId===SIGNATURE?signaturePayload(item).effects:COCKTAILS[item.typeId].effects;
   finishDrinkContainer(player,item.typeId,EMPTY_CUP);
   for(const effect of effects){
-   if(Math.random()>=effect.probability)continue;
+   if(javaRandomFloat(rng())>=Math.fround(effect.probability))continue;
    const native=NATIVE_EFFECTS[effect.effect];
    if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
    else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;

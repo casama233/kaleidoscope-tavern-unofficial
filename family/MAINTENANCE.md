@@ -63,3 +63,13 @@ patched hash、有效期限與回饋狀態均須由已凍結的 canonical integr
 所有修補與適配進入各自 canonical 遠端 Git，私有整合使用核驗的私有遠端。Java 每六小時使用 `tools/family_java_upstream_watch.py --sources family/java-upstream.json` 查核各維護分支，結果寫入 BSM `addon_quality/senluo-java-upstream-status.json`。只查 metadata，無 JAR 全檔重掃／自動安裝；新版要求 recipe/effect/timing/model/input/storage/API 適配工作。相同版本／hash 不能證明一比一，未完成與平台替代保持明示。
 
 Cookery 1.0.8→1.6.0 的作者 UUID 變更使用已提交的 `family/identity-migrations/cookery-108-to-160.json` 與 canonical 更新工具。只允許宣告的作者 BP/RP、原／新版本及原包；先從本次停服備份搬移 world/entity/player/item 所有權，在獨立 BDS 演練，再採用未被測試引擎修改的資料庫。原始 DB／完整回退保留。遷移採用開始後遇失敗保持停服與 recovery lease，不自動重啟不相容的舊所有權 runtime。
+
+## 驗證資料與磁碟容量
+
+2026-10-07 使用者要求刪除舊副本，不再為清理建立封存。已結束的舊測試世界、候選包和多餘回退副本可清理；保留正式存檔、最新兩套完整一致回退、未完成工作、canonical Git、作者原包、現行准入及其實際引用的證據。清理前確認沒有程序仍在使用目錄；既有掛載不應由一般目錄清理器遍歷。
+
+canonical 家族更新器在新建候選、原生驗證與停服前要求至少 15 GiB 可用保留量；原生驗證另預留候選副本，停服前依實際世界／候選磁碟佔用預留四套世界與兩套候選的成長量。這是配置副本的容量預檢，不做新一輪內容 hash，不取代停服備份、迁移與逐檔准入。
+
+完整原生載入與重啟均成功、最後逐檔 audit 通過且引擎無活動程序後，更新器刪除該次 QA 世界多餘的 BP／RP；實際使用的候選、世界 DB、兩次日誌與報告保留。`packs-pruned.json` 記錄候選來源與收據。已清理引擎禁止再次啟動，重跑須新建隔離世界；成功且不可變的證據仍按原條件重用。任何差異、overlay、未完成或失敗驗證都保留現場。
+
+存檔演練直接複製 DB／世界資料並安裝候選包，不先複製隨即刪掉的舊包。正式世界、回退備份與 QA DB 之間不共用可寫檔案。空間不足時在停服前拒絕新配置，清掉已結束的舊副本後再重試；不得靠刪除現行回退或改寫收據通過檢查。

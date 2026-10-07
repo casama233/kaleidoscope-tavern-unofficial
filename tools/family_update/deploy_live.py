@@ -21,7 +21,9 @@ def preflight():
     source_state(verify_remote=True)
     agents = Path(str(AUTHORIZATION)).read_text()
     assert '使用者已持續授權' in agents and '供使用者直接測試開發效果' in agents and '`deferred_client_acceptance`' in agents, 'Re-read current deployment authorization'
-    assert shutil.disk_usage(R).free > 3 * 1024**3, 'At least 3 GiB free is required for this measured 410 MiB world and rollback'
+    from family_update.storage import allocated, require_space
+    # Snapshot, writable DB rehearsal/migration, rollback and recovery staging.
+    require_space(R, "Stopped backup, rehearsal and rollback", 4 * allocated(W) + 2 * allocated(C))
     return original,receipt
 
 def acquire_lease(receipt):

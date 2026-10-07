@@ -23,6 +23,7 @@ import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {javaRandomFloat} from '../core/java-random.js';
 import {applyCustomEffect} from './custom-effects.js';
 import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
+import {dispatchInstantHealth} from './instant-effects.js';
 import {faceOffset} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {firstBlockGesture} from './block-gesture.js';
@@ -233,6 +234,11 @@ export function completeCocktail(event,rng=Math.random){
   for(const effect of effects){
    if(javaRandomFloat(rng())>=Math.fround(effect.probability))continue;
    try{
+    const instant=dispatchInstantHealth(player,effect);
+    if(instant){
+     if(instant.status==='ENGINE_REJECTED'){mixologyDiagnostics.effectErrors.push({effect:effect.effect,error:instant.detail});if(mixologyDiagnostics.effectErrors.length>16)mixologyDiagnostics.effectErrors.shift();}
+     continue;
+    }
     const native=NATIVE_EFFECTS[effect.effect];
     if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
     else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;

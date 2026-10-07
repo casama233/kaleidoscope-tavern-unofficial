@@ -3450,6 +3450,21 @@
       "before": null,
       "after": "1c453c7b34f55d413e241e8d3306f568bf371e9f16dd54dd78b49131eeb48b67",
       "reason": "Owned storage helper anchoring adapter; introduced in0.6.121 with focused and Native proof. No historical runtime imported."
+    },
+    "runtime/BP/scripts/bedrock/instant-effects.js": {
+      "before": null,
+      "after": "bba018f063314c5fcbe583b1074a1b98a1db5ea2ee49934d6d06692643550f2a",
+      "reason": "Reviewed T0.6.122 original self instant heal/harm dispatch, source arithmetic and class/tag mapping. Exact source/callback regressions and scoped Native observations are in INSTANT-HEALTH-DISPATCH-PROTOTYPE.md; unknown hooks, damage Holder/knockback/event/client boundaries remain pending. Test-only preservation view, never a packaging patch."
+    },
+    "runtime/BP/scripts/core/java-instant-effect.js": {
+      "before": null,
+      "after": "9ca5fb62dcefbe36ef8e94e2ac10b591e05eead2ae650086af788180b7e2f11b",
+      "reason": "Reviewed T0.6.122 original self instant heal/harm dispatch, source arithmetic and class/tag mapping. Exact source/callback regressions and scoped Native observations are in INSTANT-HEALTH-DISPATCH-PROTOTYPE.md; unknown hooks, damage Holder/knockback/event/client boundaries remain pending. Test-only preservation view, never a packaging patch."
+    },
+    "runtime/BP/scripts/data/vanilla-instant-entities.js": {
+      "before": null,
+      "after": "b2de4e0275cce73374ca6186377fdabe21de409559c225f883689de32e53120e",
+      "reason": "Reviewed T0.6.122 original self instant heal/harm dispatch, source arithmetic and class/tag mapping. Exact source/callback regressions and scoped Native observations are in INSTANT-HEALTH-DISPATCH-PROTOTYPE.md; unknown hooks, damage Holder/knockback/event/client boundaries remain pending. Test-only preservation view, never a packaging patch."
     }
   },
   "reviewedFunctionalDeltas": {
@@ -3727,6 +3742,71 @@
               53,
               54,
               "export function diagnosticSnapshot(){return {build:BUILD_VERSION,furniture:furnitureDiagnostics,extensionFurniture:extensionFurnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,effectBar:effectBarDiagnostics,effectIcons:effectIconDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,feedback:feedbackDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,molotov:molotovDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,creativePick:creativePickDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,storageHit:storageHitDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:false,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_tavern:guidebook',cookeryGuideIntegration:true,standaloneGuide:standaloneGuideDiagnostics,legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}\n"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "release": "0.6.122",
+      "reviewDocument": "docs/INSTANT-HEALTH-DISPATCH-PROTOTYPE.md",
+      "files": {
+        "runtime/BP/scripts/main.js": {
+          "before": "69c68b80091867f10588cac652a22f19ec9d11ddb6c347012df27a826c4c0321",
+          "after": "ff7b2d82389497b880c3240475dfb642113bdde512c438541bdbb3e659c7e2da",
+          "reason": "Current Java self instantaneous health/harm before subsequent effects and captured container return; source operation/32-bit shift/float semantics, Native self attribution and scoped modifiers. Full Native indirect_magic/event/client parity remains explicit pending. No one-tick instant fallback.",
+          "regressionTest": "tools/instant-drink-completion.test.mjs",
+          "reverseOps": [
+            [
+              37,
+              38,
+              ""
+            ],
+            [
+              54,
+              55,
+              "export function diagnosticSnapshot(){return {build:BUILD_VERSION,furniture:furnitureDiagnostics,extensionFurniture:extensionFurnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,effectBar:effectBarDiagnostics,effectIcons:effectIconDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,feedback:feedbackDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,storageProjectiles:storageProjectileDiagnostics,molotov:molotovDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,creativePick:creativePickDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,storageHit:storageHitDiagnostics,nativeStoragePinning:nativeStoragePinningDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:false,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_tavern:guidebook',cookeryGuideIntegration:true,standaloneGuide:standaloneGuideDiagnostics,legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}\n"
+            ],
+            [
+              71,
+              72,
+              "installPickupOverflowEvents();installFurnitureEvents();installDecorationEvents();installWritingBoardEvents();installCustomEffects();installMixologyEvents();installEffectBar();installEffectIcons();installMachineEvents();installCultivation();installStorageProjectileEvents();installMolotovEvents();installTapSourceEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installVanillaBottleDisplayEvents();installDisplayProjectileEvents();installQualityTooltipEvents();installCreativePickEvents();installJavaItemUseOnEvents();\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/drink-effects.js": {
+          "before": "51cd035157c269263ae559e0dd68ef78319ead8c293afb8b2a1c2def308e6ef1",
+          "after": "21bf2568db98e0484219ebd1bc00bc4d60f3f94a4a02695a44e8933439695458",
+          "reason": "Current Java self instantaneous health/harm before subsequent effects and captured container return; source operation/32-bit shift/float semantics, Native self attribution and scoped modifiers. Full Native indirect_magic/event/client parity remains explicit pending. No one-tick instant fallback.",
+          "regressionTest": "tools/instant-drink-completion.test.mjs",
+          "reverseOps": [
+            [
+              4,
+              5,
+              ""
+            ],
+            [
+              16,
+              21,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "4991654e5250fdc467523cdf29c35d64818da257a3686fe42dd41181b0f3a7ad",
+          "after": "960b8025e8a4ed10ad00dab7f83959e441e375dd3f81de364617cb2efa199e09",
+          "reason": "Current Java self instantaneous health/harm before subsequent effects and captured container return; source operation/32-bit shift/float semantics, Native self attribution and scoped modifiers. Full Native indirect_magic/event/client parity remains explicit pending. No one-tick instant fallback.",
+          "regressionTest": "tools/instant-drink-completion.test.mjs",
+          "reverseOps": [
+            [
+              25,
+              26,
+              ""
+            ],
+            [
+              236,
+              241,
+              ""
             ]
           ]
         }

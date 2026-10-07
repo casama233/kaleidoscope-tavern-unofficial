@@ -1,6 +1,7 @@
 """Idempotent stage orchestration. Cache hits verify bytes, never just flags."""
 import importlib
 from family_update.common import *
+from ci_impact import classify_path
 
 
 def run_stage(name, argv=None):
@@ -71,7 +72,57 @@ def required_ci_checks(key):
     return required
 
 
-def validate_ci_rows(rows, sources):
+def runtime_ci_conservation(key, source, merge):
+    """Reuse gameplay only across classified family/prose inputs, never exports."""
+    assert key == 'tavern', 'Runtime CI reuse is currently limited to Tavern'
+    root = SOURCES[key]
+    assert git(root, 'merge-base', merge, source['commit']) == merge, 'Runtime CI PR is not an ancestor'
+    for path in ['baseline.json', 'tools/ci_impact.py']:
+        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime baseline or impact classifier changed'
+    baseline = json.loads(git(root, 'show', source['commit']+':baseline.json'))
+    for path in baseline['runtime'].values():
+        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime exports changed after successful CI'
+    paths = git(root, 'diff', '--no-renames', '--name-only', merge, source['commit'], '--').splitlines()
+    assert all(classify_path(path) in ['family', 'docs'] for path in paths), 'Runtime CI inputs changed after successful CI'
+    return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_impact_classifier': True}
+
+
+def actual_ci_records(repository, head):
+    response = gh_json(f'repos/{repository}/commits/{head}/check-runs?per_page=100')
+    assert response['total_count'] <= 100, 'More than 100 check runs require explicit pagination review'
+    latest = {}
+    for check in response['check_runs']:
+        identity = (check['name'], check['app']['id'])
+        if identity not in latest or latest[identity]['id'] < check['id']:
+            latest[identity] = check
+    checks = list(latest.values())
+    assert checks and any(check['conclusion'] == 'success' for check in checks), 'No successful CI checks found'
+    assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), 'CI checks are incomplete or failed'
+    statuses = gh_json(f'repos/{repository}/commits/{head}/status')
+    assert not statuses['statuses'] or statuses['state'] == 'success', 'Commit status failed'
+    return ([{**{field: c.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at']}, 'app_slug': c['app']['slug']} for c in checks],
+            [{field: status.get(field) for field in ['context', 'state', 'target_url']} for status in statuses['statuses']])
+
+
+def runtime_ci_result(key, number, source):
+    assert key == 'tavern' and type(number) is int and number > 0
+    repository = source['repository']
+    pr = gh_json(f'repos/{repository}/pulls/{number}')
+    assert pr['merged'] is True and pr['base']['repo']['full_name'] == repository and pr['base']['ref'] == 'main', 'Runtime CI PR must be merged on canonical main'
+    assert pr['head']['repo']['full_name'] == repository, 'Unexpected runtime CI repository'
+    merge = pr['merge_commit_sha']
+    conservation = runtime_ci_conservation(key, source, merge)
+    tree = git(SOURCES[key], 'rev-parse', merge+'^{tree}')
+    revision, kind = ci_revision({'commit':merge, 'tree':tree}, {**pr, '_source':key})
+    checks, statuses = actual_ci_records(repository, revision)
+    successful = {c['name'] for c in checks if c['conclusion'] == 'success' and c['app_slug'] == 'github-actions'}
+    assert not (required_ci_checks(key) - successful), 'Reused runtime CI omits successful required checks'
+    return {'source':key, 'repository':repository, 'number':number, 'url':pr['html_url'], 'head':revision, 'ci_revision_kind':kind, 'merge_commit':merge, 'source_tree':tree, 'checks':checks, 'statuses':statuses, 'conservation':conservation, 'scope':'Unchanged own runtime only; current full source metadata CI is separate'}
+
+
+def validate_ci_rows(rows, sources, runtime_ci_references=None):
+    if runtime_ci_references is None:
+        runtime_ci_references = CONFIG.get('runtime_ci_pull_requests', {})
     assert len(rows) == len(SOURCES) and {row['source'] for row in rows} == set(SOURCES), 'CI evidence omits or duplicates a source'
     for row in rows:
         key = row['source']
@@ -79,9 +130,28 @@ def validate_ci_rows(rows, sources):
         checks = row['checks']
         assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), f'{key} checks failed or are incomplete'
         successful = {check['name'] for check in checks if check['conclusion'] == 'success' and check['app_slug'] == 'github-actions'}
+        reused = row.get('runtime_ci')
+        if reused is not None:
+            assert key == 'tavern' and reused['number'] == runtime_ci_references.get(key), 'Unconfigured runtime CI proof'
+            assert reused['source'] == key and reused['repository'] == sources[key]['repository'], 'Wrong runtime CI source'
+            assert reused['conservation'] == runtime_ci_conservation(key, sources[key], reused['merge_commit']), 'Runtime conservation evidence changed'
+            assert git(SOURCES[key], 'rev-parse', reused['merge_commit']+'^{tree}') == reused['source_tree'] == git(SOURCES[key], 'rev-parse', reused['head']+'^{tree}'), 'Reused CI tree differs from the runtime merge'
+            assert {'impact', 'baseline'} <= successful, 'Current metadata checks must succeed independently'
+            prior = reused['checks']
+            assert all(c['status'] == 'completed' and c['conclusion'] in ['success', 'skipped', 'neutral'] for c in prior), 'Reused runtime checks failed or incomplete'
+            prior_success = {c['name'] for c in prior if c['conclusion'] == 'success' and c['app_slug'] == 'github-actions'}
+            assert not (required_ci_checks(key) - prior_success), 'Reused runtime checks missing required success'
+            assert all(status['state'] == 'success' for status in reused['statuses']), 'Reused runtime commit status failed'
+            successful |= prior_success
         missing = required_ci_checks(key) - successful
         assert not missing, f'{key} required checks did not succeed: {sorted(missing)}'
         assert all(status['state'] == 'success' for status in row['statuses']), f'{key} commit status failed'
+
+
+def validate_admitted_ci_rows(rows, sources):
+    """Only for immutable CI already bound by an approved receipt's checked refs."""
+    references = {row['source']: row['runtime_ci']['number'] for row in rows if row.get('runtime_ci') is not None}
+    validate_ci_rows(rows, sources, runtime_ci_references=references)
 
 
 def ci_revision(source,pr):
@@ -105,11 +175,13 @@ def verify_ci():
     build = read(R / 'build-evidence.json')
     configured = CONFIG.get('pull_requests', {})
     assert set(configured) == set(SOURCES), 'Configure one current merged PR for each canonical public source'
+    assert set(CONFIG.get('runtime_ci_pull_requests', {})) <= {'tavern'}, 'Unsupported runtime CI reuse source'
     path = R / 'ci-evidence.json'
     if path.exists():
         proof = read(path)
         assert proof['candidate_receipt_sha256'] == sha(C / 'family-receipt.json')
         assert proof['sources'] == build['sources'] and proof['pull_requests'] == configured
+        assert proof.get('runtime_ci_pull_requests', {}) == CONFIG.get('runtime_ci_pull_requests', {}), 'Current runtime CI references changed'
         assert proof['ok'] is True
         validate_ci_rows(proof['results'], build['sources'])
         # The source tree and runner/config are verified by the caller. The
@@ -128,25 +200,14 @@ def verify_ci():
         head,revision_kind=ci_revision(source,{**pr,'_source':key})
         ancestor = subprocess.run(['git', '-C', str(SOURCES[key]), 'merge-base', '--is-ancestor', pr['merge_commit_sha'], source['commit']], capture_output=True)
         assert ancestor.returncode == 0, f'{key} PR merge is not on canonical main'
-        response = gh_json(f'repos/{repository}/commits/{head}/check-runs?per_page=100')
-        assert response['total_count'] <= 100, 'More than 100 check runs require explicit pagination review'
-        # A job rerun supersedes its previous attempt, not another check name.
-        latest = {}
-        for check in response['check_runs']:
-            identity = (check['name'], check['app']['id'])
-            if identity not in latest or latest[identity]['id'] < check['id']:
-                latest[identity] = check
-        checks = list(latest.values())
-        assert checks and any(check['conclusion'] == 'success' for check in checks), 'No successful CI checks found'
-        assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), f'{key} checks are incomplete or failed'
-        statuses = gh_json(f'repos/{repository}/commits/{head}/status')
-        assert not statuses['statuses'] or statuses['state'] == 'success', f'{key} commit status failed'
-        rows.append({'source': key, 'repository': repository, 'number': number, 'url': pr['html_url'], 'head': head, 'reviewed_pull_request_head':reviewed_head,'ci_revision_kind':revision_kind, 'merge_commit': pr['merge_commit_sha'], 'source_tree': source['tree'], 'checks': [
-            {**{field: check.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at']}, 'app_slug': check['app']['slug']}
-            for check in checks
-        ], 'statuses': [{field: status.get(field) for field in ['context', 'state', 'target_url']} for status in statuses['statuses']]})
+        checks, statuses = actual_ci_records(repository, head)
+        row = {'source':key, 'repository':repository, 'number':number, 'url':pr['html_url'], 'head':head, 'reviewed_pull_request_head':reviewed_head, 'ci_revision_kind':revision_kind, 'merge_commit':pr['merge_commit_sha'], 'source_tree':source['tree'], 'checks':checks, 'statuses':statuses}
+        runtime_number = CONFIG.get('runtime_ci_pull_requests', {}).get(key)
+        if runtime_number is not None:
+            row['runtime_ci'] = runtime_ci_result(key, runtime_number, source)
+        rows.append(row)
     validate_ci_rows(rows, build['sources'])
-    proof = {'schema': 1, 'recorded_at': now(), 'ok': True, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'sources': build['sources'], 'pull_requests': configured, 'results': rows, 'reused_actual_github_checks': True, 'local_functional_suites_rerun': False}
+    proof = {'schema': 1, 'recorded_at': now(), 'ok': True, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'sources': build['sources'], 'pull_requests': configured, 'runtime_ci_pull_requests': CONFIG.get('runtime_ci_pull_requests', {}), 'results': rows, 'reused_actual_github_checks': True, 'local_functional_suites_rerun': False}
     atomic(path, proof)
     return proof
 

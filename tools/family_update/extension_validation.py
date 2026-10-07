@@ -1,7 +1,23 @@
 """Bind private integration validation to its exact canonical source and bytes."""
-import json
+import json,subprocess
 from pathlib import Path
 from family_update.common import CONFIG,R,EXTENSION,read,sha,git,report_ref,atomic
+
+def source_binding(proof,config):
+    """Reuse another ancestor commit only when its entire source tree is identical."""
+    assert proof['schema']==1 and proof['repository']==config['repository'], 'Native source repository differs'
+    assert proof['version']==config['version'] and proof['source_trees']==config['source_trees'], 'Native source baseline differs'
+    current=git(EXTENSION,'rev-parse','HEAD');native=proof['source_commit']
+    if native!=current:
+        try:git(EXTENSION,'merge-base','--is-ancestor',native,current)
+        except subprocess.CalledProcessError as error:
+            raise AssertionError('Native source commit is not an ancestor of current source') from error
+    native_tree=git(EXTENSION,'rev-parse',native+'^{tree}')
+    current_tree=git(EXTENSION,'rev-parse','HEAD^{tree}')
+    assert native_tree==current_tree, 'Native source full Git tree differs'
+    return {'actual_current_source_commit':current,'native_source_commit':native,
+            'current_source_tree_oid':current_tree,'native_source_tree_oid':native_tree,
+            'identical_full_tree_reuse':native!=current}
 
 def verify_extension(receipt,prior):
     changed=[p for p in receipt['packs'] if p['source']['owner']=='owned' and p['source'].get('repository')=='local/senluo-amw-cuisine' and
@@ -10,9 +26,7 @@ def verify_extension(receipt,prior):
     path=CONFIG.get('extension_validation')
     assert path and EXTENSION, 'A changed private extension needs exact functional evidence'
     proof=read(Path(path));config=read(EXTENSION/'baseline.json')
-    assert proof['schema']==1 and proof['repository']==config['repository']
-    assert proof['source_commit']==git(EXTENSION,'rev-parse','HEAD')
-    assert proof['version']==config['version'] and proof['source_trees']==config['source_trees']
+    binding=source_binding(proof,config)
     owned=[p for p in receipt['packs'] if p['source'].get('repository')==config['repository']]
     assert proof['packs']=={p['uuid']:p['files'] for p in owned}, 'Private validation bytes differ from candidate'
     reports=[report_ref(Path(path))]
@@ -56,5 +70,5 @@ def verify_extension(receipt,prior):
         assert actual==item['files'], 'Functional probe private source changed'
     for overlay in functional['overlays']:
         if 'sha256' in overlay:assert sha(overlay['path'])==overlay['sha256']
-    atomic(R/'extension-validation-check.json',{'source':report_ref(Path(path)),'coverage':coverage,'exact_owned_packs':len(owned),'client':False,'production_ready':False})
+    atomic(R/'extension-validation-check.json',{'source':report_ref(Path(path)),**binding,'coverage':coverage,'exact_owned_packs':len(owned),'client':False,'production_ready':False})
     return reports

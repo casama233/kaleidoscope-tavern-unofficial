@@ -89,6 +89,29 @@ cache 重用只適用於同一份不可變候選。不是只看版號、mtime、
 沒有模擬玩家；沒有把原生載入、API accepted 次數或腳本 double 當成 Windows 渲染驗收。
 完成的人工作業、版本及結果應另行記錄，不修改本次未經真人測試的原始報告。
 
+## 已審查的下一版保留包
+
+`prospective_preserved_inputs` 可引用 Git 外的審查 JSON，將四個已安裝的保留包
+換成 canonical extension recipe 的下一版輸出。它不是 live 漂移核准：目前所有
+identity、逐檔內容及順序仍須先與現行准入一致，禁止新增或替换 UUID。
+四個輸出須是兩組版本與相依同步的 BP/RP，保留 module UUID/type；來源目錄
+不能與 live、來源 Git 或候選重疊，不能使用 symlink／hardlink。
+
+審查記錄包含 `schema: 1`、`source_commit`、`recipe` 的相對路徑與摘要、
+`native_validation` 的絕對路徑與摘要，以及按 recipe output name 對應的
+`packs: {name: {path, uuid}}`。來源須為乾淨 canonical extension，recipe 必須
+已提交。`extension_validation` 必須指向同一份實際原生保存／功能證據；
+四個完整輸出都要與該次原生測試收據相同，缺少或不同證據時拒絕組裝。
+
+此模式不與保留舊 source、部署 hold、preserved reconciliation 或 additions
+併用。家族組裝器記錄原樣的 preserved ownership，另記 recipe／Native 來源；
+cache 重驗全部輸入及證據。整套 static、BDS、fresh saved-world、備份與
+family_guard 仍須完成，真人驗收狀態仍保留 pending。
+
+原生證據的實測提交保持原樣。現行 source HEAD 不同時，僅允許它是實測提交的
+後代，且**完整 Git tree 完全相同**；只看 runtime 版本或輸出 hash 相同仍拒絕。
+准入記錄分別保存現行提交、實測提交及兩個 tree OID，不重寫原證據冒充新測試。
+
 ## 驗證與維護
 
 `python -m unittest discover -s tools/family_update -p 'test_*.py'` 使用隔離暫存目錄

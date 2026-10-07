@@ -268,6 +268,8 @@ def external_input_hashes():
     if CONFIG.get('preserved_additions'):
         for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
             result['preserved_archive:'+uid]=sha(row['artifact']['path'])
+    from family_update.prospective_preserved_inputs import input_refs
+    result.update(input_refs())
     return result
 
 
@@ -392,6 +394,12 @@ def verify_candidate_sources():
         assert sha(T / 'tools' / name) == digest, 'Canonical tool changed: ' + name
     assert sha(C / 'family-receipt.json') == evidence['candidate_receipt_sha256'], 'Assembled receipt changed'
     receipt = read(C / 'family-receipt.json')
+    prospective=None
+    if CONFIG.get('prospective_preserved_inputs'):
+        from family_update.prospective_preserved_inputs import select as select_prospective,verify_candidate as verify_prospective
+        _,prospective=select_prospective(read(R/'production-before/preserved-packs.json'),read(R/'production-before/inventory.json'))
+        verify_prospective(receipt,prospective)
+    assert prospective==evidence.get('prospective_preserved_inputs'), 'Prospective input review changed after assembly'
     if CONFIG.get('approved_runtime_retention'):
         original = read(R/'production-before/inventory.json')
         _, _, retention = select_approved_runtime_retention(original, current)

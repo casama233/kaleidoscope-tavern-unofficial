@@ -270,6 +270,38 @@ class RetentionTests(unittest.TestCase):
         self.assertEqual(result['state'], 'partial')
         self.assertIn('changed after content verification', result['errors'][0]['error'])
         self.assertTrue((older / 'production-snapshot/db/data').exists())
+    def test_unrelated_parent_report_written_during_cleanup_does_not_change_horizon(self):
+        p = self.plan()
+        calls = 0
+        def context():
+            nonlocal calls
+            calls += 1
+            if calls == 3:
+                self.write(self.root / 'unrelated-native-report.json', {'native_job': 'independent'})
+            return {'lease': self.lease}
+        result = self.execute(p, context=context)
+        self.assertEqual(result['state'], 'completed')
+        self.assertTrue((self.root / 'unrelated-native-report.json').exists())
+        self.assertFalse((self.a / 'production-snapshot').exists())
+        self.assertTrue((self.b / 'production-snapshot/db/data').exists())
+        self.assertTrue((self.c / 'production-snapshot/db/data').exists())
+    def test_new_protected_deployment_header_refuses_next_backup_group(self):
+        older = self.deployment('older', 4)
+        self.modify(older, 'deployment-result.json', lambda d: d.update(completed_at='2026-09-30T01:00:00+00:00'))
+        p = self.plan()
+        newest = self.root / 'new-protected-deployment'
+        def context():
+            if (self.a / m.MARKER).exists() and json.loads((self.a / m.MARKER).read_text()).get('state') == 'pruned':
+                if not (newest / 'deployment-result.json').exists():
+                    self.write(newest / 'deployment-result.json', {
+                        'state': 'deployed_running', 'completed_at': '2026-10-07T01:00:00+00:00'})
+            return {'lease': self.lease, 'protected': [self.b, self.c, newest]}
+        result = self.execute(p, context=context)
+        self.assertEqual(result['state'], 'partial')
+        self.assertIn('header set differs', result['errors'][0]['error'])
+        self.assertTrue((older / 'production-snapshot/db/data').exists())
+        self.assertTrue((newest / 'deployment-result.json').exists())
+        self.assertEqual(result['retained_backup_integrity']['hash_boundary_passes'], 1)
     def test_cmdline_reference_without_cwd_or_fd_preserves_output(self):
         proc = self.root / 'fake-proc'
         job = proc / '123456'

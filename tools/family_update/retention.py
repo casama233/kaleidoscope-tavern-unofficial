@@ -402,15 +402,16 @@ def plan(root, *, protected=(), lease=None, references=(), retain=2, proc_root=P
 
 
 def _verify_horizon(planned):
-    horizon = planned['horizon_metadata']
-    for value, expected in horizon['directories'].items():
-        p = Path(value)
-        _require(not p.is_symlink(), 'Retained horizon directory became a symlink')
-        info = p.stat()
-        _require([info.st_dev, info.st_ino, info.st_mtime_ns] == expected,
-                 'Deployment horizon changed during cleanup: ' + value)
-    for value, expected in horizon['deployment_headers'].items():
-        _require(_stat(Path(value)) == expected, 'Deployment horizon metadata changed: ' + value)
+    # Reports/native work may change a deployment's parent directory without
+    # changing the deployment horizon. Check the actual headers instead, while
+    # keeping protected outputs in discovery so a new current deployment counts.
+    root, mounts = _absolute(planned['root']), _mount_paths()
+    actual = {str(output / 'deployment-result.json'): _stat(output / 'deployment-result.json')
+              for output in _discover(root, (), mounts)}
+    expected = planned['horizon_metadata']['deployment_headers']
+    _require(actual.keys() == expected.keys(), 'Deployment horizon changed during cleanup: header set differs')
+    for value, identity in expected.items():
+        _require(actual[value] == identity, 'Deployment horizon metadata changed: ' + value)
 
 
 def _retained_integrity(planned, root, mounts):

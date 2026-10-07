@@ -3642,6 +3642,29 @@
               " finishDrinkContainer(player,itemId,EMPTY_BOTTLE);\n const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;\n"
             ]
           ]
+        },
+        "runtime/BP/scripts/bedrock/pickup-feedback.js": {
+          "before": "cc5fe8b7bb4af7a60f3edf2042baea3457e1bdbd25ceab8d459a1b6a007d43ad",
+          "after": "32e06d1fe165119d31a735ba39f25bacc71dad2b4c4de87621054de613c5162f",
+          "reason": "Reviewed Java inventory insertion audio extraction, 24-bit draws and float precision. Historical reviewed-addition pin remains unchanged; current source audio cases use the actual helper independently.",
+          "regressionTest": "tools/pickup/inventory-feedback.test.mjs",
+          "reverseOps": [
+            [
+              1,
+              2,
+              ""
+            ],
+            [
+              4,
+              13,
+              ""
+            ],
+            [
+              23,
+              24,
+              " if(received)sound(player.dimension,'entity.item.pickup',{x:player.location.x,y:player.location.y+.5,z:player.location.z},.2,((rng()-rng())*.7+1)*2);\n"
+            ]
+          ]
         }
       }
     }

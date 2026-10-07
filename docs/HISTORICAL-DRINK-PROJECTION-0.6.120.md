@@ -3,7 +3,7 @@
 The new test-only functional layer binds the exact reviewed current mixology
 and bottle adapters back to the exact 0.6.119 predecessors. The original 0.6.119
 review then restores its earlier predecessor and all existing historical
-preimage/golden guards stay intact. Six mixology and eight bottle line deltas
+preimage/golden guards stay intact. Six mixology, eight bottle and 3 pickup-feedback line deltas
 are explicitly reviewed; no earlier review, historical hash or preimage is
 rewritten. The new drink-completion module is a separately bound addition.
 

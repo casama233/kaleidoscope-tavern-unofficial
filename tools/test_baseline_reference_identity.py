@@ -10,8 +10,8 @@ class IdentityTests(unittest.TestCase):
   self.p=self.r/name;self.p.parent.mkdir(parents=True,exist_ok=True);self.p.write_bytes(current)
   row={'before':None,'after':hashlib.sha256(reviewed).hexdigest(),'versionProjection':spec}
   (self.r/'data/baseline-reconciliation.json').write_text(json.dumps({'files':{name:row}}));rows.cache_clear();functional_rows.cache_clear();functional_layers.cache_clear()
- def functional_fixture(self,with_baseline=True):
-  name='runtime/BP/scripts/bedrock/drink-effects.js';self.p=self.r/name;self.p.parent.mkdir(parents=True,exist_ok=True)
+ def functional_fixture(self,with_baseline=True,name='runtime/BP/scripts/bedrock/drink-effects.js'):
+  self.p=self.r/name;self.p.parent.mkdir(parents=True,exist_ok=True)
   self.current=b'applyReviewedSourceFix();\n';self.predecessor=b'previousReviewedSource();\n';self.original=b'immutableHistoricalSource();\n'
   self.p.write_bytes(self.current)
   row={'before':hashlib.sha256(self.predecessor).hexdigest(),'after':hashlib.sha256(self.current).hexdigest(),'reason':'Reviewed source behavior and completion regression','reverseOps':[[0,1,self.predecessor.decode()]]}
@@ -50,6 +50,28 @@ class IdentityTests(unittest.TestCase):
   for content in [self.current+b'runUnreviewed();\n',self.current.replace(b'SourceFix',b'Unreviewed')]:
    self.p.write_bytes(content)
    with self.assertRaisesRegex(AssertionError,'Reviewed functional source mutated'):previous_bytes(self.r,self.p)
+ def test_exact_shaker_review_restores_baseline_and_rejects_extra_changes(self):
+  self.functional_fixture(name='runtime/RP/animations/runtime_shaker.animation.json')
+  earlier=json.loads(json.dumps(self.ledger))
+  latest=b'calibratedPositionOnly();\n'
+  name=self.p.relative_to(self.r).as_posix()
+  self.ledger['reviewedFunctionalDeltaLayers']=[{'release':'0.6.124','files':{name:{
+   'before':hashlib.sha256(self.current).hexdigest(),'after':hashlib.sha256(latest).hexdigest(),
+   'reason':'Exact reviewed main-hand shaker position constants',
+   'reverseOps':[[0,1,self.current.decode()]]}}}]
+  self.p.write_bytes(latest);self.write_functional_ledger()
+  self.assertEqual(previous_bytes(self.r,self.p),self.original)
+  self.assertEqual(self.ledger['files'],earlier['files'])
+  self.assertEqual(self.ledger['reviewedFunctionalDeltas'],earlier['reviewedFunctionalDeltas'])
+  self.p.write_bytes(latest+b'unreviewedRotation();\n')
+  with self.assertRaisesRegex(AssertionError,'Reviewed functional source mutated'):previous_bytes(self.r,self.p)
+  self.p.write_bytes(latest)
+  self.ledger['reviewedFunctionalDeltaLayers'][0]['files'][name]['reverseOps'][0][2]='wrong predecessor\n'
+  self.write_functional_ledger()
+  with self.assertRaisesRegex(AssertionError,'Functional predecessor mismatch'):previous_bytes(self.r,self.p)
+ def test_other_rp_animation_paths_are_not_authorized_for_projection(self):
+  self.functional_fixture(name='runtime/RP/animations/unrelated.animation.json')
+  with self.assertRaises(AssertionError):previous_bytes(self.r,self.p)
  def test_functional_review_rejects_corrupt_reverse_delta(self):
   self.functional_fixture()
   row=next(iter(self.ledger['reviewedFunctionalDeltas'].values()))

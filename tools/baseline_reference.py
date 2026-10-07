@@ -35,7 +35,7 @@ def reverse_functional_delta(name,data,row):
 
  This view is test-only. It never writes historical gameplay into runtime.
  """
- assert name.startswith('runtime/BP/scripts/') and isinstance(row['reason'],str) and row['reason'].strip()
+ assert (name.startswith('runtime/BP/scripts/') or name=='runtime/RP/animations/runtime_shaker.animation.json') and isinstance(row['reason'],str) and row['reason'].strip()
  assert row['before']!=row['after']
  assert hashlib.sha256(data).hexdigest()==row['after'],('Reviewed functional source mutated',name)
  lines=data.decode('utf-8').splitlines(keepends=True);ops=row['reverseOps']

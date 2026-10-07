@@ -3811,6 +3811,28 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.124",
+      "files": {
+        "runtime/RP/animations/runtime_shaker.animation.json": {
+          "before": "b980d751caaeaa85e7caa2cd7ce3ac49911b03e98928f0055b30c98d36756acd",
+          "after": "fe905374f4e7548af8f24a550c881aa6b599b5b3279a87aeed0ec524332e7d9d",
+          "reason": "Bounded T124 main-hand shaker camera placement from T122, reviewed at f72fb8f4950125462026b488863fe265e7434655 in PR247. Only idle/use position constants change; scale, rotations, waveform, mesh and binding remain intact. Native subset framing observations retain the default-skin and full-trajectory acceptance limits.",
+          "reverseOps": [
+            [
+              20,
+              23,
+              "            -2.27044615,\n            -4.0622771,\n            -8.76396642\n"
+            ],
+            [
+              56,
+              59,
+              "            \"-2.71368029 + 1.53805532 * math.sin(q.life_time * 1718.87338539247)\",\n            \"-3.50453649 + 1.44380189 * math.sin(q.life_time * 1718.87338539247)\",\n            \"-8.67541816 + 1.14447453 * math.sin(q.life_time * 1718.87338539247)\"\n"
+            ]
+          ]
+        }
+      }
     }
   ]
 }

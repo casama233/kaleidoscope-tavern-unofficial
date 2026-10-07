@@ -22,7 +22,7 @@ import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {javaRandomFloat} from '../core/java-random.js';
 import {applyCustomEffect} from './custom-effects.js';
-import {finishDrinkContainer} from './drink-effects.js';
+import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
 import {faceOffset} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {firstBlockGesture} from './block-gesture.js';
@@ -40,7 +40,7 @@ const shakerStore=new MixStore(world,validateShaker),cupStore=new MixStore(world
 const locks=new Locks(),uses=new Map(),releaseGuards=new Map();
 let registry,sequence=0;
 export const MIX_BLOCKS=new Set([STATION,...['empty_glassware',...Object.values(COCKTAILS).map(x=>x.name)].map(x=>NS+':cup_'+x)]);
-export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],unsupportedEffects:{}};
+export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],effectErrors:[],unsupportedEffects:{}};
 export const nativeUseDiagnostics={starts:0,releases:0,cancelled:0,errors:[]};
 export function setMixologyRegistry(value){registry=value;configureBottleCategories(item=>registry.ingredientColor(item),item=>registry.previousIngredientColors(item));}
 function log(error){const code=error.code??String(error);mixologyDiagnostics.errors.push(code);if(mixologyDiagnostics.errors.length>12)mixologyDiagnostics.errors.shift();console.warn('[Tavern Mixology] '+code);}
@@ -228,14 +228,23 @@ export function syncCupVisual(block){
 export function completeCocktail(event,rng=Math.random){
  const player=event.source,item=event.itemStack;if(!player||!COCKTAILS[item?.typeId])return;
  safely(player,()=>{
+  const use=captureDrinkUse(event);if(!use.bound)return;
   const effects=item.typeId===SIGNATURE?signaturePayload(item).effects:COCKTAILS[item.typeId].effects;
-  finishDrinkContainer(player,item.typeId,EMPTY_CUP);
   for(const effect of effects){
    if(javaRandomFloat(rng())>=Math.fround(effect.probability))continue;
-   const native=NATIVE_EFFECTS[effect.effect];
-   if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
-   else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;
+   try{
+    const native=NATIVE_EFFECTS[effect.effect];
+    if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
+    else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;
+   }catch(error){
+    // A Bedrock API rejection must not leave earlier granted effects on an
+    // unconsumed drink. Keep source RNG interleaving, record it quietly, and
+    // continue to later entries and the one captured container settlement.
+    mixologyDiagnostics.effectErrors.push({effect:effect.effect,error:String(error)});
+    if(mixologyDiagnostics.effectErrors.length>16)mixologyDiagnostics.effectErrors.shift();
+   }
   }
+  settleDrinkUse(use,EMPTY_CUP,rng);
  });
 }
 function migrateInventory(player){

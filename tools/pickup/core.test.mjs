@@ -135,7 +135,7 @@ for(const [taking,heldAmount,expected] of [[true,0,.9],[false,1,.9],[false,2,.3]
 });
 test('Forge pickup sound precedes direct block sound and uses player y+0.5',()=>{
  const {sounds,player,block}=soundFixture();placedPickupFeedback(player,block,{rng:()=>.5});
- assert.equal(sounds[0].id,'kt_pickup.entity.item.pickup');assert.deepEqual(sounds[0].position,{x:5,y:6.5,z:7});assert.deepEqual(sounds[0].options,{volume:.2,pitch:2});assert.equal(sounds[1].id,'kt_pickup.block.stone.place');
+ assert.equal(sounds[0].id,'kt_pickup.entity.item.pickup');assert.deepEqual(sounds[0].position,{x:5,y:6.5,z:7});assert.deepEqual(sounds[0].options,{volume:Math.fround(.2),pitch:2});assert.equal(sounds[1].id,'kt_pickup.block.stone.place');
 });
 test('fully overflowed pickup has no inventory-insertion sound; drink still plays glass',()=>{
  const {sounds,player,block}=soundFixture();placedPickupFeedback(player,block,{received:false,drink:true});assert.deepEqual(sounds.map(x=>x.id),['kt_pickup.block.glass.place']);

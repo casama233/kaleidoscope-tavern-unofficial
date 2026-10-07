@@ -19,13 +19,22 @@ def functional_rows(root):
  ledger=json.loads(p.read_text());reviews=ledger.get('reviewedFunctionalDeltas',{})
  if reviews:assert ledger.get('schema')==1 and ledger.get('testOnly') is True,'Unsupported functional review ledger'
  return reviews
-def functional_projection(root,name,data):
+@lru_cache(maxsize=4)
+def functional_layers(root):
+ p=Path(root)/'data/baseline-reconciliation.json'
+ if not p.exists():return []
+ ledger=json.loads(p.read_text());layers=ledger.get('reviewedFunctionalDeltaLayers',[])
+ if layers:assert ledger.get('schema')==1 and ledger.get('testOnly') is True,'Unsupported functional review ledger'
+ assert isinstance(layers,list),'Unsupported functional review layers'
+ for layer in layers:
+  assert isinstance(layer.get('release'),str) and layer['release'].strip()
+  assert isinstance(layer.get('files'),dict) and layer['files']
+ return layers
+def reverse_functional_delta(name,data,row):
  """Reverse only an exact reviewed delta before the unchanged old guards.
 
  This view is test-only. It never writes historical gameplay into runtime.
  """
- row=functional_rows(root).get(name)
- if not row:return data
  assert name.startswith('runtime/BP/scripts/') and isinstance(row['reason'],str) and row['reason'].strip()
  assert row['before']!=row['after']
  assert hashlib.sha256(data).hexdigest()==row['after'],('Reviewed functional source mutated',name)
@@ -40,6 +49,14 @@ def functional_projection(root,name,data):
  restored=''.join(lines).encode('utf-8')
  assert hashlib.sha256(restored).hexdigest()==row['before'],('Functional predecessor mismatch',name)
  return restored
+def functional_projection(root,name,data):
+ # New reviews append to the ledger. Resolve newest-to-oldest without rewriting
+ # any earlier review, then apply the original functional and baseline guards.
+ for layer in reversed(functional_layers(root)):
+  row=layer['files'].get(name)
+  if row:data=reverse_functional_delta(name,data,row)
+ row=functional_rows(root).get(name)
+ return reverse_functional_delta(name,data,row) if row else data
 def version_projection(root,name,data,spec):
  current=json.loads((root/'package.json').read_text())['version']
  assert current==json.loads((root/'release.json').read_text())['version']

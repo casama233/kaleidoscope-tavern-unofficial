@@ -3433,6 +3433,13 @@
       "before": null,
       "after": "0e0a886e1e78de79375d0e515af6e965f158c8bd9a7bfc2603a1a4a59b0fcc50",
       "reason": "Current author instant-effect LivingEntity/shriek/height/audio and fall class repair; synced T116/L83 identity. Original preimage retained; see host docs/JAVA-INSTANT-EFFECTS-0.6.116.md."
+    },
+    "runtime/BP/scripts/bedrock/drink-completion.js": {
+      "before": null,
+      "after": "995e6b5e1dcb189976063a4ca24a73e2056efc6adda34abfed01de0eebc3b90c",
+      "reason": "New canonical source-backed effect-first captured-use settlement module; historical launch/pick/storage guards enumerate it as an explicit addition. Actual callbacks are covered by tools/drink-completion-lifecycle.test.mjs.",
+      "reviewDocument": "docs/DRINK-COMPLETION-LIFECYCLE.md",
+      "release": "0.6.120"
     }
   },
   "reviewedFunctionalDeltas": {
@@ -3543,5 +3550,100 @@
         ]
       ]
     }
-  }
+  },
+  "reviewedFunctionalDeltaLayers": [
+    {
+      "release": "0.6.120",
+      "reviewedSourceCommit": "9e31bfeed64c3d1be2220db4729df580ae8ae839",
+      "reviewDocument": "docs/DRINK-COMPLETION-LIFECYCLE.md",
+      "files": {
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "b02a95b59d28429d0d0d16c6ef50f2945f58cc1e0f2404ca2eed12ec59ca102d",
+          "after": "4991654e5250fdc467523cdf29c35d64818da257a3686fe42dd41181b0f3a7ad",
+          "reason": "Reviewed Java effect-first and captured-original container lifecycle; Native per-entry API rejection prevents partial-effect drink replay. New regressions and native phase evidence are separate from this historical test-only view.",
+          "regressionTest": "tools/drink-completion-lifecycle.test.mjs",
+          "reverseOps": [
+            [
+              24,
+              25,
+              "import {finishDrinkContainer} from './drink-effects.js';\n"
+            ],
+            [
+              42,
+              43,
+              "export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],unsupportedEffects:{}};\n"
+            ],
+            [
+              230,
+              231,
+              ""
+            ],
+            [
+              232,
+              232,
+              "  finishDrinkContainer(player,item.typeId,EMPTY_CUP);\n"
+            ],
+            [
+              234,
+              245,
+              "   const native=NATIVE_EFFECTS[effect.effect];\n   if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});\n   else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;\n"
+            ],
+            [
+              246,
+              247,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/drink-effects.js": {
+          "before": "a57346df22de313d7a52b01d8eff48f6aa790262efc524ddd079ac2394393371",
+          "after": "51cd035157c269263ae559e0dd68ef78319ead8c293afb8b2a1c2def308e6ef1",
+          "reason": "Reviewed Java effect-first and captured-original container lifecycle; Native per-entry API rejection prevents partial-effect drink replay. New regressions and native phase evidence are separate from this historical test-only view.",
+          "regressionTest": "tools/drink-completion-lifecycle.test.mjs",
+          "reverseOps": [
+            [
+              0,
+              0,
+              "import {GameMode} from '@minecraft/server';\n"
+            ],
+            [
+              2,
+              2,
+              "import {planInventory,commitInventory} from '../core/inventory.js';\nimport {check} from '../core/util.js';\n"
+            ],
+            [
+              3,
+              4,
+              "import {inventory,makeStack} from './transactions.js';\n"
+            ],
+            [
+              28,
+              28,
+              "export function finishDrinkContainer(player,itemId,emptyId){\n const c=inventory(player),slot=player.selectedSlotIndex,current=c.getItem(slot);\n check(current?.typeId===itemId,'STALE_DRINK_HAND');\n const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:emptyId,count:1};\n // Java returns a fresh container to the logical hand for the last Survival\n // drink. Existing containers elsewhere must not redirect this return.\n if(!creative&&current.amount===1){c.setItem(slot,makeStack(emptyId,1));return;}\n try{\n  const plan=planInventory(c,slot,take,[output],makeStack);\n  commitInventory(plan,c,()=>{},()=>{});\n }catch(error){\n  // Java giveItemToPlayer falls back to a world item when the inventory is full.\n  // This case only occurs for a stacked Survival drink or a full Creative inventory:\n  // a single Survival bottle frees its selected slot for the empty container.\n  if(error?.code!=='INVENTORY_FULL')throw error;\n  const old=current.clone(),next=current.clone();\n  if(!creative){\n   check(next.amount>1,'DRINK_CONTAINER_SPACE');\n   next.amount--;\n   c.setItem(slot,next);\n  }\n  try{player.dimension.spawnItem(makeStack(emptyId,1),{...player.location});effectDiagnostics.containerDrops++;}\n  catch(spawnError){if(!creative)c.setItem(slot,old);throw spawnError;}\n }\n}\n\n"
+            ],
+            [
+              31,
+              34,
+              " * once on completion, consumes exactly one bottle in Survival, returns the container,\n * then applies the quality-specific drink effects. Creative keeps the drink, matching Java.\n"
+            ],
+            [
+              38,
+              40,
+              ""
+            ],
+            [
+              43,
+              45,
+              "  finishDrinkContainer(player,itemId,'minecraft:bucket');effectDiagnostics.completed++;\n"
+            ],
+            [
+              48,
+              52,
+              " finishDrinkContainer(player,itemId,EMPTY_BOTTLE);\n const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;\n"
+            ]
+          ]
+        }
+      }
+    }
+  ]
 }

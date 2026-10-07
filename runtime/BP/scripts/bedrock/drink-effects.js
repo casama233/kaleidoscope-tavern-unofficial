@@ -1,10 +1,7 @@
-import {GameMode} from '@minecraft/server';
 import {iterateDrinkEffects} from '../core/drink-effects.js';
 import {parseBottle} from '../core/bottles.js';
-import {planInventory,commitInventory} from '../core/inventory.js';
-import {check} from '../core/util.js';
 import {applyCustomEffect} from './custom-effects.js';
-import {inventory,makeStack} from './transactions.js';
+import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
 const EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
 export const JUICE_BUCKETS=new Set(['grape','ice_grape','gold_grape','green_grape','sweet_berries','glow_berries'].map(x=>'kaleidoscope_tavern:'+x+'_bucket'));
 const reported=new Set();
@@ -29,50 +26,30 @@ export function consumeDrink(event,rng=Math.random){
  return outcomes;
 }
 
-export function finishDrinkContainer(player,itemId,emptyId){
- const c=inventory(player),slot=player.selectedSlotIndex,current=c.getItem(slot);
- check(current?.typeId===itemId,'STALE_DRINK_HAND');
- const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:emptyId,count:1};
- // Java returns a fresh container to the logical hand for the last Survival
- // drink. Existing containers elsewhere must not redirect this return.
- if(!creative&&current.amount===1){c.setItem(slot,makeStack(emptyId,1));return;}
- try{
-  const plan=planInventory(c,slot,take,[output],makeStack);
-  commitInventory(plan,c,()=>{},()=>{});
- }catch(error){
-  // Java giveItemToPlayer falls back to a world item when the inventory is full.
-  // This case only occurs for a stacked Survival drink or a full Creative inventory:
-  // a single Survival bottle frees its selected slot for the empty container.
-  if(error?.code!=='INVENTORY_FULL')throw error;
-  const old=current.clone(),next=current.clone();
-  if(!creative){
-   check(next.amount>1,'DRINK_CONTAINER_SPACE');
-   next.amount--;
-   c.setItem(slot,next);
-  }
-  try{player.dimension.spawnItem(makeStack(emptyId,1),{...player.location});effectDiagnostics.containerDrops++;}
-  catch(spawnError){if(!creative)c.setItem(slot,old);throw spawnError;}
- }
-}
-
 /**
  * Bedrock equivalent of Java DrinkBlockItem.finishUsingItem.
  * minecraft:use_modifiers drives the native 1.6 s use lifecycle; this callback fires
- * once on completion, consumes exactly one bottle in Survival, returns the container,
- * then applies the quality-specific drink effects. Creative keeps the drink, matching Java.
+ * once on completion, dispatches each effect, then settles the captured use stack
+ * against the fresh inventory and game mode. Native effect execution can be delayed;
+ * the API dispatch order does not claim Java's synchronous instant-effect timing.
  */
 export function completeDrink(event,rng=Math.random){
  const player=event.source,itemId=event.itemStack?.typeId;
  if(player&&JUICE_BUCKETS.has(itemId)){
+  const use=captureDrinkUse(event);
+  if(!use.bound)return [];
   // Current NeoForge JuiceBucketItem cures HONEY before consuming the bucket.
   // The reviewed default cure applies only to the vanilla Poison identity.
   player.removeEffect('poison');
-  finishDrinkContainer(player,itemId,'minecraft:bucket');effectDiagnostics.completed++;
+  const settled=settleDrinkUse(use,'minecraft:bucket',rng);if(settled.status==='SETTLED_DROP')effectDiagnostics.containerDrops++;
+  effectDiagnostics.completed++;
   return [];
  }
  if(!player||!parseBottle(itemId))return [];
- finishDrinkContainer(player,itemId,EMPTY_BOTTLE);
- const outcomes=consumeDrink(event,rng);effectDiagnostics.completed++;return outcomes;
+ const use=captureDrinkUse(event);if(!use.bound)return [];
+ const outcomes=consumeDrink(event,rng);
+ const settled=settleDrinkUse(use,EMPTY_BOTTLE,rng);if(settled.status==='SETTLED_DROP')effectDiagnostics.containerDrops++;
+ effectDiagnostics.completed++;return outcomes;
 }
 
 export function registerDrinkEffects({itemComponentRegistry:r}){

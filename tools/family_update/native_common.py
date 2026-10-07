@@ -14,6 +14,12 @@ def setup_engine(engine, world_name, port):
             cache=client_pack_cache()
             shutil.copytree(B/name,engine/name,ignore=lambda directory,names:[n for n in names if Path(directory)==B/name and n in cache])
         else:shutil.copytree(B / name, engine / name)
+    if (B / 'data').exists():
+        assert (B / 'data').is_dir(), 'BDS data input must be a directory'
+        expected_data = hashes(B / 'data')
+        shutil.copytree(B / 'data', engine / 'data')
+        assert hashes(engine / 'data') == expected_data, 'Isolated BDS data copy differs from captured input'
+        assert hashes(B / 'data') == expected_data, 'BDS data input changed during isolated copy'
     (engine / 'allowlist.json').write_text('[]\n')
     (engine / 'server.properties').write_text(f'server-name=Parity isolated native QA\nlevel-name={world_name}\nserver-port={port}\nserver-portv6={port+1}\nonline-mode=true\nallow-list=true\nview-distance=5\ntick-distance=4\nmax-threads=2\nenable-lan-visibility=false\ncontent-log-file-enabled=true\ncontent-log-console-output-enabled=true\ntransport=nethernet\n')
 

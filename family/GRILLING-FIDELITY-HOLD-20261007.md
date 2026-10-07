@@ -78,3 +78,23 @@ own boundaries. Java downward support search, collision geometry, phase order
 and actual client rendering/audio remain unfinished; no100% claim follows.
 Tavern output stays at0.6.117; its lock/source notes pair the new Grilling runtime
 and preserve other maintenance changes.
+
+
+## G87 original flatulence sound origin and pitch
+
+G87 restores the cue to the center of the player's floored BlockPos and rounds
+pitch at the original random float cast, multiply and add. The actual producer
+keeps impulse, ten Cloud particles at continuous coordinates, held-sneak edge
+and independent sound failure handling. PLAYERS/range16/original host samples
+and all G86 fee/movement/Hinder fixes are retained. No ground-table runtime
+changes are included in this sound release.
+
+Five new helper and five affected producer source-adapter cases passed. An
+isolated native observation confirms actual cow location/float calculations and
+existing sound-alias API acceptance with a normal stop and no players. It does
+not exercise the new main consumer or certify packet delivery, physical sneak
+input, heard audio or client rendering. Cloud attraction/Gaussian stages and
+other portable movement gaps remain open. Full candidate Git/family/saved-world
+admission is required before the standing live development update; client and
+production_ready remain false. This pairing preserves canonical Tavern0.6.119
+and World Liquor0.1.85, including concurrent drink-source fixes.

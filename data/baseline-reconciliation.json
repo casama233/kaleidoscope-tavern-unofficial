@@ -942,7 +942,19 @@
           "after": "43177a94766976bb7ca355343f10ba5bc89bbb530176db753a84d9c594ad38a4",
           "reason": "Reviewed 0.6.104 direct built-in native RGB material/source-frame correction and paired identity. Original preimage retained. See RELEASE-NOTES-0.6.104.md. Reviewed 0.6.102 source-backed all16 Java shaker HUD colors, multiplicative signature RGB fallback and paired release identity; historical preimage retained. See REBUILD-HUD-SIGNATURE-0.6.102.md. Reviewed 0.6.95 tap dismantling duplicate-drop repair and paired release identity; original historical preimage retained. See RELEASE-NOTES-0.6.95.md and tools/tap/tap-regression.test.mjs."
         }
-      ]
+      ],
+      "versionProjection": {
+        "kind": "owned_manifest",
+        "reviewedVersion": [
+          0,
+          6,
+          116
+        ],
+        "ownedUuids": [
+          "f54f37f9-485a-55bf-8f89-6558aca988c5",
+          "c2990d50-2cf7-59f7-886a-0f2d0240d156"
+        ]
+      }
     },
     "runtime/BP/scripts/bedrock/bottles.js": {
       "before": "b482a1e65843678cb9029b51eb3d3a828f9673f1fca5388449776fef6af5ebe7",
@@ -1058,7 +1070,11 @@
           "after": "1ce6125201a514da223df87b283b0a076815ed3104c7058e3cb048311fa8622a",
           "reason": "Reviewed 0.6.104 direct built-in native RGB material/source-frame correction and paired identity. Original preimage retained. See RELEASE-NOTES-0.6.104.md. Reviewed 0.6.102 source-backed all16 Java shaker HUD colors, multiplicative signature RGB fallback and paired release identity; historical preimage retained. See REBUILD-HUD-SIGNATURE-0.6.102.md. Reviewed 0.6.95 tap dismantling duplicate-drop repair and paired release identity; original historical preimage retained. See RELEASE-NOTES-0.6.95.md and tools/tap/tap-regression.test.mjs."
         }
-      ]
+      ],
+      "versionProjection": {
+        "kind": "payload_version",
+        "reviewedVersion": "0.6.116"
+      }
     },
     "runtime/BP/scripts/data/pressing-ingredient-visuals.js": {
       "before": "058db82305cb9ed82a2af6cce6d937c1604cbfeba43bcd7e8a1a025dbee9ab24",
@@ -1093,7 +1109,19 @@
           "after": "f47f6cb29556d169584ea3df63582a5cf57bc0f8cb52f965e34f541c17cba6fc",
           "reason": "Reviewed 0.6.104 direct built-in native RGB material/source-frame correction and paired identity. Original preimage retained. See RELEASE-NOTES-0.6.104.md. Reviewed 0.6.102 source-backed all16 Java shaker HUD colors, multiplicative signature RGB fallback and paired release identity; historical preimage retained. See REBUILD-HUD-SIGNATURE-0.6.102.md. Reviewed 0.6.95 tap dismantling duplicate-drop repair and paired release identity; original historical preimage retained. See RELEASE-NOTES-0.6.95.md and tools/tap/tap-regression.test.mjs."
         }
-      ]
+      ],
+      "versionProjection": {
+        "kind": "owned_manifest",
+        "reviewedVersion": [
+          0,
+          6,
+          116
+        ],
+        "ownedUuids": [
+          "f54f37f9-485a-55bf-8f89-6558aca988c5",
+          "c2990d50-2cf7-59f7-886a-0f2d0240d156"
+        ]
+      }
     },
     "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
       "before": "251fd95b6b727ecef87349908a539b3a00ab4b40f035e6e6b6fc59bdce8d78ce",
@@ -1501,7 +1529,11 @@
           "after": "d492439c76312ebbb5936914fa8de34420176514ce683c420a0fb7aabf5307cd",
           "reason": "Reviewed 0.6.104 direct built-in native RGB material/source-frame correction and paired identity. Original preimage retained. See RELEASE-NOTES-0.6.104.md. Reviewed 0.6.102 source-backed all16 Java shaker HUD colors, multiplicative signature RGB fallback and paired release identity; historical preimage retained. See REBUILD-HUD-SIGNATURE-0.6.102.md. Reviewed 0.6.95 tap dismantling duplicate-drop repair and paired release identity; original historical preimage retained. See RELEASE-NOTES-0.6.95.md and tools/tap/tap-regression.test.mjs."
         }
-      ]
+      ],
+      "versionProjection": {
+        "kind": "build_identity",
+        "reviewedVersion": "0.6.116"
+      }
     },
     "runtime/BP/texts/en_US.lang": {
       "before": "ecf039883c31412638d2855dd08478c79dc358b703f1b194d6a0be528896948e",
@@ -3352,8 +3384,8 @@
     "runtime/BP/scripts/bedrock/combat-effects.js": {
       "before": "68bd63d90a795875e4fd9e2cfc7176dd62bca72715253a158613823be3911ba5",
       "beforeGzipBase64": "H4sIAAAAAAACA41WbW/bNhD+nl/BfrLUKnQzoMNgT+nyhiXY0maz0X0oioCSThYbidRIyrFr+7/vSEqyUrvAAMeOqOPd8bnnnuP49WtyJ7RhwhAtBU8J5DmkhpKHkq1BkYxVbAGEa5JByRNQzEC5JhnXLCkhmxLBDF9CZ5cWkD5poqBiXBDWmEIqbpwJJa/HJ7yqpTJkAxU3My4WJexIrmRFRnTsI5/mAFnC0if6VY+m/Qa91gaq6EYYbtbXLtgVazREv7MK7mXW+/mt4gJSxXIz1qCWoAZOZrd/3938ETWCm0gXisOT99Q+3PbLd1XdlLpbf2DK8LQE3edKx6lUgF9VwsypT1z7hFOJcJKSaXOFf7GAZ3LP6iCcnsDKZeEN/NZrzhZCavSu402K9nryNiq4+1HwFb1C5lPEhYprjZBdsCTBp5TVNWR/NYAZWnNQSio9+fwlql3l2m05w3Pspid5I1LDpSDOLoBwc5AB9S5o3egimBmFsdAunPI8+KFtCWJhivOzn8MfmuiC5wbPv9vnkEpdAdoEuQg3Rq03ubAGKTNpYVPrcpzudh1q/d4aVC5VNXOVCfxZw80JwSz9w3tq1jXcZa/ieNRzYeLfjbbbzx1h6KxGfJmRqucQvciWIEyj4AvlIi2bDHTrlS7AdGZBGIYK0EwQB+/0pC1qAaw0RbzfcSWReQJdBoNUvNXIAfvKP2y3/pemjVJo/omVDfwavz0eBltqwcUgzC2w7E+J8CFAQRhlXIEDK7ZMHxzgE4fn6+4lnqL36Ls3HvZEcCSjMOK+MeIXbRL0AW3sCoS2sduw/cLU1ahrDJtOlxnPwjiOfYd38eY8fepOb1RjDz8eE4tnCQZIoiTLyL/I/jVJAAkBqDnYkxmSlpgChcjGIB8kkTVDMwJOOE55RrgwoGp07eCiHQQpExnPUN103Kdsk3SKgy0WbMoW4YnHP6rY6ppb6Uxh8u6XXUgr7HOIz4MNIAzti3uGGBbrWpoAaOeBrk69D7qKBqvrbnU9XP3WrX4Ld2FINXZDELAoCeNzRrs4p0n/73bLKCCmzkMJFjKmIEjcoqt5XwM9rEF0pADTYcU0/wbn785+CvsVHAlYjL3FE6x1EFIBK2x4unSUmR4KgxO6N28c+1ohCPA0e9htTjPZiAzbRib0makMBHXz6TGRshq1GteDFG2WsmwqmJxFNUcRmZzt3EmRGIEvby01kTn5TtCDtpR7Aof7yRT0CUUjFxvDSr1vGpyHC45DMP785UWoDeww0p5PoVW4E2L5+/FZoEiUqGGa4HvCypL4o+AzchhWTnQySuYFjlz8oPyVPOWGPCxvTqXA0csyVnvuRuTDxzm+eCBYYWQ3ctm2mK0z9lNf2O0WWkmMj0ti95oigZTR/3BTBKMn5A7PpE5lDY+G4SAVk1FojQum52zxnh63WXLdsPLRn3IU4lzABhKugTuVjOF/aiPK4oEiDv2hkc0c0XYeLy4uL63qd7NidGzIDaYoUrD3tvPu+ovAATOiPoSV/672fliCJcWx8eUkr7dth6W/haBarOZMoU8dHmuRwXR3rbLnl3G7LJt7zxo5AsHb6NB1Rz6Lp99I0XXZXqECL/wR3j3wLjU5uF35nrvEloucJQLnbVryYJcdgfjlzeV7lA/t7YXHndG2yEWWESNJW3ayBOxxy23yAZBfBLuWqX4VR6EFJgVy+4B3TyYWoFH+lWwWBamVNL52Yy6WTSnw8prwsm0Ui8sQkG6WtRPu+HXkR1V+Mah2L296Vx/vLy/mj/Ob2TzedFKJN7L/AON91eJ7CwAA",
-      "after": "34df5d80b228227c8e956c36474888b591c90b05a459de0d8a6325d043d4e726",
-      "reason": "Current author instant-effect LivingEntity/shriek/height/audio and fall class repair; synced T116/L83 identity. Original preimage retained; see host docs/JAVA-INSTANT-EFFECTS-0.6.116.md."
+      "after": "29b0d4e75e0f1ed770e01d6e4eba9370045c95455655e2dae05114d3a63a4602",
+      "reason": "Current author instant-effect LivingEntity/shriek/height/audio and fall class repair; synced T116/L83 identity. Original preimage retained; see host docs/JAVA-INSTANT-EFFECTS-0.6.116.md. 0.6.117 current Java1.2.0 query-time living snapshot, sound-before-query AABB and per-target live geometry; four callback-stage regressions reproduce and repair the old bug. See SHRIEK-TARGET-ORDER-20261007.md. Original historical preimage stays unchanged."
     },
     "runtime/BP/scripts/core/combat-effects.js": {
       "before": "179ac869d9c28a8dcbdad1441f6e910ee88babf2f9759001b1c0cc3e90eb2970",

@@ -206,5 +206,31 @@
   "upstream_runtime_changes": false,
   "client_acceptance_required": true,
   "saved_world_migration_required": true,
-  "deployment_holds": {}
+  "deployment_holds": {},
+  "extension_deployment_hold": {
+    "repository": "local/senluo-amw-cuisine",
+    "commit": "e1efff8c3a02c99dd664f42d390aa983d89c61a3",
+    "version": [
+      1,
+      0,
+      20
+    ],
+    "source_trees": {
+      "BP": {
+        "sha256": "7ce3727767234e6164c3b050517a89836288cd0d04ca2ef7c2956577ea5b5443",
+        "files": 180
+      },
+      "RP": {
+        "sha256": "3f2c87c087c26d0f71c307aab0bfc09f76c5e1e6af0f64722859bf39d73083c0",
+        "files": 149
+      }
+    },
+    "candidate_commit": "336478df25e4c994ea7ac7c4a3690074c46e6d87",
+    "candidate_version": [
+      1,
+      0,
+      21
+    ],
+    "reason_file": "family/PRIVATE-AMW-RETENTION-20261007.md"
+  }
 }

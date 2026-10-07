@@ -2,7 +2,7 @@
 import copy,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from family_update.source_holds import selected,effective,verify_retained
+from family_update.source_holds import selected,effective,verify_retained,selected_extension,verify_retained_extension
 
 class HoldTests(unittest.TestCase):
  def setUp(self):
@@ -26,5 +26,26 @@ class HoldTests(unittest.TestCase):
    if mutation=='missing':rows.pop()
    if mutation=='identity':rows[0]['uuid']='new'
    with self.assertRaises(AssertionError):verify_retained({'packs':rows},{'packs':prior},self.lock,['grilling'])
+
+ def test_private_hold_is_explicit_and_requires_committed_reason_and_candidate(self):
+  hold=copy.deepcopy(self.hold);hold.update(repository='local/senluo-amw-cuisine',candidate_commit='b'*40,version=[1,0,20],candidate_version=[1,0,21]);lock={'extension_deployment_hold':hold}
+  self.assertEqual(selected_extension(lock,True),hold)
+  for request in [False,'true',1]:
+   with self.assertRaises(AssertionError):selected_extension(lock,request)
+  with self.assertRaises(AssertionError):selected_extension({},True)
+  hold['reason_file']='../local.md'
+  with self.assertRaises(AssertionError):selected_extension(lock,True)
+
+ def test_private_hold_cannot_adopt_upgrade_replace_bytes_or_drop_a_side(self):
+  hold=copy.deepcopy(self.hold);hold.update(repository='local/senluo-amw-cuisine',candidate_commit='b'*40,version=[1,0,20],candidate_version=[1,0,21]);lock={'extension_deployment_hold':hold}
+  rows=copy.deepcopy(self.rows)
+  for row in rows:row['version']=[1,0,20];row['source']['repository']=hold['repository']
+  verify_retained_extension({'packs':rows},{'packs':copy.deepcopy(rows)},lock,True)
+  for mutation in ['version','files','missing']:
+   changed=copy.deepcopy(rows)
+   if mutation=='version':changed[0]['version']=[1,0,21]
+   elif mutation=='files':changed[0]['files']['manifest.json']='candidate'
+   else:changed.pop()
+   with self.assertRaises(AssertionError):verify_retained_extension({'packs':changed},{'packs':rows},lock,True)
 
 if __name__=='__main__':unittest.main()

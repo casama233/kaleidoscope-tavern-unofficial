@@ -179,10 +179,14 @@ def action(name):
 
 def source_state(verify_remote=False):
     result = {}
-    from family_update.source_holds import selected,verify_source
+    from family_update.source_holds import selected,verify_source,selected_extension,verify_extension_source
     lock=read(T/'family/upstream.lock.json');requested=CONFIG.get('held_sources',[])
     assert set(lock.get('deployment_holds',{}))==set(requested),'Active completion holds must be retained explicitly before any live update'
     holds=selected(lock,requested)
+    extension_hold=selected_extension(lock,CONFIG.get('extension_hold',False))
+    if extension_hold:
+        assert EXTENSION,'Private hold needs its canonical retained source'
+        holds['extension']=extension_hold
     paths = {**SOURCES, **({'extension': EXTENSION} if EXTENSION else {})}
     for name, path in paths.items():
         config = read(path / 'baseline.json')
@@ -205,7 +209,10 @@ def source_state(verify_remote=False):
                 assert profile['private'] is True and profile['id']==target['repository_id'] and profile['full_name']==target['repository'], 'Private remote must retain its identity and visibility'
                 row['remote_repository']=target['repository']
             remote_head = git(path, 'ls-remote', 'origin', 'refs/heads/main').split()[0]
-            if name in holds:
+            if name=='extension' and extension_hold:
+                verify_extension_source(path,extension_hold,remote_head,git)
+                row['held_revision']=extension_hold
+            elif name in holds:
                 assert verify_source(path,config,holds[name],git)==remote_head
                 row['held_revision']=holds[name]
             else:assert remote_head == commit, f'{name} canonical main differs from remote'

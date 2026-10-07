@@ -37,6 +37,12 @@ LevelDB Python adapter；`gh` 需已有正常的唯讀 GitHub 認證。缺少依
 `deploy` 仍必須通過來源、static、BDS、fresh saved-world、canonical／BSM admission。
 來源必須是乾淨、與遠端相符的 main，執行中的工具 bytes 也必須與 canonical 相符。
 
+私有整合正在更新外部AMW相依而尚未完成完整驗證時，可以canonical家族鎖的
+`extension_deployment_hold`和設定`extension_hold: true`明列保留目前已安裝的兩側。
+`extension`路徑須使用固定私有Git提交的乾淨隔離checkout；最新main／候選保持原狀。
+必須保留提交的reason_file、私有遠端身份與main祖先、version／source_trees、當前live
+逐檔相等及全部准入／fresh保存門檻。不得沿用保留來安裝新private bytes或改寫收據。
+
 ## 哪些工作只做一次
 
 | 階段 | 重用條件 | 不可省略的核對 |

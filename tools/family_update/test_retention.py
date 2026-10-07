@@ -276,6 +276,24 @@ class RetentionTests(unittest.TestCase):
         job.mkdir(parents=True)
         (job / 'cmdline').write_bytes(b'python\0--config=' + str(self.a / 'config.json').encode() + b'\0')
         self.assertEqual(self.row(self.plan(proc_root=proc), self.a)['delete'], [])
+
+    def test_newly_idle_output_is_deferred_without_blocking_original_safe_selection(self):
+        older = self.deployment('older-active', 4)
+        self.modify(older, 'deployment-result.json', lambda d: d.update(completed_at='2026-09-30T01:00:00+00:00'))
+        real_idle = m._assert_idle
+        def still_active(output, proc_root):
+            if output == older:
+                raise RuntimeError('active process')
+            return real_idle(output, proc_root)
+        with patch.object(m, '_assert_idle', side_effect=still_active):
+            planned = self.plan()
+        self.assertEqual(self.row(planned, older)['state'], 'preserved')
+        result = self.execute(planned)
+        self.assertEqual(result['state'], 'completed')
+        self.assertEqual(result['newly_eligible_deferred'], [str(older)])
+        self.assertFalse((self.a / m.COPIES[0]).exists())
+        self.assertTrue((older / m.COPIES[0]).is_dir())
+        self.assertFalse((older / m.MARKER).exists())
     def test_no_backup_targets_never_hash_retained_contents(self):
         (self.c / 'production-snapshot/db/data').unlink()
         p = self.plan()

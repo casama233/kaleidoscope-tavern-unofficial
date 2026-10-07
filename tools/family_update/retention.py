@@ -505,9 +505,14 @@ def execute(planned, *, protected=(), lease=None, references=(), context=None, p
     fresh = plan(root, retain=planned['retain'], proc_root=proc_root, **values)
     _require(not fresh['active_lease'], 'Maintenance lease became active before cleanup')
     selected, now_selected = _selection(planned), _selection(fresh)
-    _require(selected == now_selected, 'Retention plan changed; inspect a fresh read-only plan')
+    # A job becoming idle may make another output eligible. It was not in the
+    # reviewed plan, so defer it. Every originally selected output must still
+    # have exactly the same binding and target scope before any deletion.
+    _require(all(value == now_selected.get(output) for output, value in selected.items()),
+             'Retention plan changed; inspect a fresh read-only plan')
     result = {'schema': 1, 'execute': True, 'root': str(root), 'state': 'completed',
-              'disk_before': _disk(root), 'deleted': [], 'retained': fresh['outputs'], 'errors': []}
+              'disk_before': _disk(root), 'deleted': [], 'retained': fresh['outputs'], 'errors': [],
+              'newly_eligible_deferred': sorted(set(now_selected) - set(selected))}
     integrity = None
     for output, row in selected.items():
         r, mounts = Path(output), _mount_paths()

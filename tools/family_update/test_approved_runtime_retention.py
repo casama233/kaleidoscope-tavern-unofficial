@@ -175,7 +175,34 @@ class ApprovedRuntimeRetentionTests(unittest.TestCase):
     def test_output_uuid_overlap_or_missing_pack_rejected(self):
         _,_,proof=self.select();receipt={'packs':copy.deepcopy(self.rows),'order':copy.deepcopy(self.order)}
         receipt['packs'][1]['uuid']=receipt['packs'][0]['uuid']
-        with self.assertRaisesRegex(AssertionError,'cohort identities'):retention.verify_candidate(receipt,self.original,proof)
+        with self.assertRaisesRegex(AssertionError,'unique packs'):retention.verify_candidate(receipt,self.original,proof)
+    def test_appended_duplicate_original_pack_rejected(self):
+        self.original['packs'].append(copy.deepcopy(self.original['packs'][0]))
+        with self.assertRaisesRegex(AssertionError,'exactly42 unique packs'):self.select()
+    def test_appended_duplicate_approved_pack_rejected(self):
+        approved=json.loads(self.approved.read_text());approved['packs'].append(copy.deepcopy(approved['packs'][0]));put(self.approved,approved);self.rebind()
+        with self.assertRaisesRegex(AssertionError,'exactly42 unique packs'):self.select()
+    def test_appended_duplicate_candidate_pack_rejected(self):
+        _,_,proof=self.select();receipt={'packs':copy.deepcopy(self.rows),'order':copy.deepcopy(self.order)}
+        receipt['packs'].append(copy.deepcopy(receipt['packs'][0]))
+        with self.assertRaisesRegex(AssertionError,'exactly42 unique packs'):retention.verify_candidate(receipt,self.original,proof)
+    def test_appended_duplicate_current_reference_rejected(self):
+        self.original['refs']['behavior'].append(copy.deepcopy(self.original['refs']['behavior'][0]))
+        with self.assertRaisesRegex(AssertionError,'each pack once'):self.select()
+    def test_appended_duplicate_approved_reference_rejected(self):
+        approved=json.loads(self.approved.read_text());approved['order']['behavior'].append(approved['order']['behavior'][0]);put(self.approved,approved);self.rebind()
+        with self.assertRaisesRegex(AssertionError,'each pack once'):self.select()
+    def test_candidate_and_proof_duplicate_reference_rejected(self):
+        _,_,proof=self.select();receipt={'packs':copy.deepcopy(self.rows),'order':copy.deepcopy(self.order)}
+        proof['current_order']['behavior'].append(proof['current_order']['behavior'][0]);receipt['order']=copy.deepcopy(proof['current_order'])
+        with self.assertRaisesRegex(AssertionError,'each pack once'):retention.verify_candidate(receipt,self.original,proof)
+    def test_missing_or_wrong_side_reference_rejected(self):
+        _,_,proof=self.select()
+        for mode in ['missing','wrong_side']:
+            order=copy.deepcopy(self.order);uid=order['behavior'].pop()
+            if mode=='wrong_side':order['resource'].append(uid)
+            receipt={'packs':copy.deepcopy(self.rows),'order':order}
+            with self.assertRaisesRegex(AssertionError,'each pack once'):retention.verify_candidate(receipt,self.original,proof)
     def test_optimized_import_refuses_before_any_selection(self):
         result=subprocess.run([sys.executable,'-O','-c','import family_update.approved_runtime_retention'],env={**os.environ,'PYTHONPATH':str(Path(retention.__file__).resolve().parents[1])},capture_output=True,text=True)
         self.assertNotEqual(result.returncode,0);self.assertIn('requires integrity checks',result.stderr)

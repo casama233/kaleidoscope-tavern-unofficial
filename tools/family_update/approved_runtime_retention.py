@@ -30,6 +30,17 @@ def evidence_ref(reports,name):
     rows=[r for r in reports if Path(r['path']).name==name]
     assert len(rows)==1,'Approved receipt needs one '+name
     checked_ref(rows[0]);return rows[0]
+def cohort(packs):
+    assert isinstance(packs,list) and len(packs)==42,'Cohort must contain exactly42 unique packs'
+    rows={r['uuid']:r for r in packs}
+    assert len(rows)==42 and AMW_COMPANION_UUIDS<=set(rows),'Cohort must contain exactly42 unique packs including AMW companions'
+    assert all(r['side'] in ['behavior','resource'] for r in packs),'Invalid cohort side'
+    return rows
+def checked_order(order,rows):
+    assert set(order)=={'behavior','resource'},'Reference order must contain both pack sides'
+    for side,ids in order.items():
+        expected={uid for uid,row in rows.items() if row['side']==side}
+        assert isinstance(ids,list) and len(ids)==len(set(ids)) and set(ids)==expected,'Reference order must contain each pack once on its own side'
 def canonical_states(sources,states):
     assert set(sources)<=set(states)
     for key,path in sources.items():
@@ -53,10 +64,12 @@ def select(control_path,lock,sources,states,original,policy_path,validate_ci,out
     assert control['approved_receipt']==ref(approved_path),'Retention must use the currently approved receipt'
     approved=checked_ref(control['approved_receipt'])
     assert approved['acceptance']['static'] and approved['acceptance']['bds'] and approved['acceptance']['saved_world_migration'],'Runtime was not admitted with required gates'
-    prior={r['uuid']:r for r in original['packs']};rows={r['uuid']:r for r in approved['packs']}
-    assert len(prior)==len(rows)==42 and set(prior)==set(rows),'Current approved cohort must have42 unique packs'
+    prior=cohort(original['packs']);rows=cohort(approved['packs'])
+    assert set(prior)==set(rows),'Current approved cohort must have42 unique packs'
     for uid,row in prior.items():assert all(row[k]==rows[uid][k] for k in ['side','version','files']),'Current runtime differs from approval: '+uid
     order={side:[r['pack_id'] for r in original['refs'][side]] for side in ['behavior','resource']}
+    assert set(original['refs'])=={'behavior','resource'},'Current references have an unexpected side'
+    checked_order(order,prior);checked_order(approved['order'],rows)
     assert order==approved['order'],'Current reference order differs from approval'
     assert all(r['version']==rows[r['pack_id']]['version'] for side in original['refs'].values() for r in side)
     reports=approved['evidence']['reports'];build_ref=evidence_ref(reports,'build-evidence.json');build=checked_ref(build_ref)
@@ -112,8 +125,9 @@ def select(control_path,lock,sources,states,original,policy_path,validate_ci,out
 
 def verify_candidate(receipt,original,proof):
     if proof is None:return
-    prior={r['uuid']:r for r in original['packs']};rows={r['uuid']:r for r in receipt['packs']}
-    assert len(prior)==len(rows)==42 and set(prior)==set(rows),'Retention candidate changes cohort identities'
+    prior=cohort(original['packs']);rows=cohort(receipt['packs'])
+    assert set(prior)==set(rows),'Retention candidate changes cohort identities'
+    checked_order(proof['current_order'],prior);checked_order(receipt['order'],rows)
     for uid,row in prior.items():
         if uid not in AMW_COMPANION_UUIDS:assert all(rows[uid][k]==row[k] for k in ['side','version','files']),'Non-target runtime changed: '+uid
     assert receipt['order']==proof['current_order'],'Retention candidate changes reference order'

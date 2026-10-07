@@ -63,6 +63,7 @@ def finalize_receipt():
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
     if CONFIG.get('preserved_additions'):reports.append('preserved-additions-check.json')
+    if CONFIG.get('prospective_preserved_inputs'):reports.append('prospective-preserved-inputs-check.json')
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}
@@ -72,9 +73,34 @@ def finalize_receipt():
     atomic(reviewed,raw); audit_candidate(C,raw)
     return raw
 
+def installation_selection(receipt,original):
+    """Reviewed future preserved inputs join the same install/rollback transaction."""
+    prospective={}
+    if CONFIG.get('prospective_preserved_inputs'):
+        from family_update.prospective_preserved_inputs import verify_candidate
+        proof=read(R/'prospective-preserved-inputs-check.json')
+        assert proof['review']==report_ref(Path(CONFIG['prospective_preserved_inputs'])), 'Prospective review changed before installation'
+        verify_candidate(receipt,proof)
+        prospective={p['uuid']:p for p in proof['packs'].values()}
+        assert len(prospective)==4, 'Complete prospective pairs required'
+    prior={p['uuid']:p for p in original['packs']}
+    assert len(prior)==len(original['packs']), 'Original inventory duplicates an identity'
+    family=[];unchanged=[]
+    for p in receipt['packs']:
+        if p['source']['owner']!='preserved':family.append(p);continue
+        old=prior.get(p['uuid']);assert old and old['side']==p['side'], 'Preserved identity or side changed'
+        assert hashes(old['path'])==old['files'], 'Installed preserved pack drifted from its captured original'
+        if p['uuid'] in prospective:
+            family.append(p)
+        else:
+            assert p['files']==old['files'] and p['version']==old['version'], 'Unreviewed preserved pack changed'
+            unchanged.append(p)
+    assert set(prospective)<={p['uuid'] for p in family}, 'Prospective pair omitted from installation'
+    return family,unchanged
+
 def prepare_admission(receipt,original):
     policy=read(Q/'senluo-policy.json')
-    approved=R/'reviewed-family-receipt.json'; family=[p for p in receipt['packs'] if p['source']['owner']!='preserved']
+    approved=R/'reviewed-family-receipt.json'; family,_=installation_selection(receipt,original)
     policy['approved_receipt']=str(approved)
     policy['deferred_client_acceptance']={'source':'explicit_user_instruction','instruction':read(R/'handoff-authorization.json')['instruction'],'recorded_at':now(),'receipt_sha256':sha(approved),'authorization_source':str(AUTHORIZATION),'authorization_sha256':sha(str(AUTHORIZATION))}
     policy['managed_uuids']=sorted(set(policy['managed_uuids'])|{p['uuid'] for p in family})
@@ -142,8 +168,8 @@ def install(receipt,original):
     from family_update.identity_migration import candidate_plan
     migration=candidate_plan(receipt,original)
     reverse={row['new_uuid']:row['old_uuid'] for row in (migration or {}).get('packs',[])}
-    prior={p['uuid']:p for p in original['packs']}; foreign={p['uuid']:p for p in receipt['packs'] if p['source']['owner']=='preserved'}
-    for uid,row in foreign.items(): assert hashes(prior[uid]['path'])==row['files'], 'Preserved pack changed'
+    prior={p['uuid']:p for p in original['packs']}
+    foreign={p['uuid']:p for p in receipt['packs'] if p['source']['owner']=='preserved' and p['uuid'] not in {row['uuid'] for row in family}}
     index=read(Q.parent/'addon_localizations/index.json')
     assert not any(p.get('uuid') in policy['owned_uuids'] for p in index.get(SERVER,[])), 'Unexpected owned localization replacement'
     staged,rollback=R/'production-staged',R/'production-rollback'; staged.mkdir(); rollback.mkdir()

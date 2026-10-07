@@ -140,12 +140,12 @@ test('fresh post-effect inventory space receives the container and insertion RNG
  assert.equal(f.player.inventory.getItem(12).typeId,f.empty);
  assert.deepEqual(events,[['roll',1],['effect','nausea'],['roll',2],['roll',3],['sound','kt_pickup.entity.item.pickup']]);
 });
-test('all instant rows dispatch before settlement; cleared death inventory remains unresolved without guessing dropped-item aliases',()=>{
+test('instant harm dispatches synchronously before settlement; cleared death inventory remains unresolved without guessing dropped-item aliases',()=>{
  const f=fixture(),instant={effect:'minecraft:instant_damage',duration:1,amplifier:0,probability:1};
  f.item.setDynamicProperty(SIGNATURE_DATA,JSON.stringify({schema:1,color:0,effects:[instant,effects[1]],ingredients:[EMPTY_CUP,EMPTY_CUP,EMPTY_CUP]}));f.player.inventory.setItem(0,f.item);
- onEffect(f.player,id=>{if(id==='instant_damage'){f.player.inventory.setItem(0,undefined);f.player.health={currentValue:0};}});
- f.complete();assert.deepEqual(f.player.effects.map(row=>row.id),['instant_damage','strength']);
- assert.equal(f.player.effects[0].ticks,1);assert.equal(count(f.player,f.empty),0);assert.equal(completionDiagnostics.last.status,'UNRESOLVED_ORIGINAL_STACK');
+ let hits=0;f.player.applyDamage=(amount,options)=>{hits++;assert.equal(amount,6);assert.equal(options.damagingEntity,f.player);f.player.inventory.setItem(0,undefined);f.player.health={currentValue:0};return true;};
+ f.complete();assert.equal(hits,1);assert.deepEqual(f.player.effects.map(row=>row.id),['strength']);
+ assert.equal(count(f.player,f.empty),0);assert.equal(completionDiagnostics.last.status,'UNRESOLVED_ORIGINAL_STACK');
 });
 test('zero health with an intact retained use stack is not a blanket settlement exclusion',()=>{
  const f=fixture();onEffect(f.player,()=>{f.player.health={currentValue:0};});f.complete();assert.equal(f.player.inventory.getItem(0).typeId,f.empty);

@@ -2,6 +2,7 @@ import {iterateDrinkEffects} from '../core/drink-effects.js';
 import {parseBottle} from '../core/bottles.js';
 import {applyCustomEffect} from './custom-effects.js';
 import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
+import {dispatchInstantHealth} from './instant-effects.js';
 const EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
 export const JUICE_BUCKETS=new Set(['grape','ice_grape','gold_grape','green_grape','sweet_berries','glow_berries'].map(x=>'kaleidoscope_tavern:'+x+'_bucket'));
 const reported=new Set();
@@ -13,6 +14,11 @@ export function consumeDrink(event,rng=Math.random){
  if(!entity)return [];
  const outcomes=[];
  for(const row of rows){
+  const instant=dispatchInstantHealth(entity,row);if(instant){
+   if(instant.status==='APPLIED_NATIVE_INSTANT')effectDiagnostics.applied++;
+   if(instant.status==='ENGINE_REJECTED'){effectDiagnostics.errors.push({effect:row.effect,error:instant.detail});if(effectDiagnostics.errors.length>16)effectDiagnostics.errors.shift();}
+   outcomes.push(instant);continue;
+  }
   if(!row.bedrockId){
    try{if(applyCustomEffect(entity,row)){outcomes.push({effect:row.effect,status:'APPLIED_CUSTOM'});continue;}}catch(error){outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});continue;}
    effectDiagnostics.unsupported[row.effect]=(effectDiagnostics.unsupported[row.effect]??0)+1;

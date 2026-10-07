@@ -36,3 +36,25 @@ Grilling PR143 retains canonical G79 and integrates the proven nonterminal stop-
 ## G82 current Java Cookery default-particle correction
 
 Grilling PR144 corrects only suspicious stir fry seven stage palette textures, from directly reviewed official Forge/NeoForge Cookery1.6.0 generated-particle sources.99 qualifying palettes reviewed;98 already match. Original G81 gameplay/rack/stop fixes and T115/L82/private1020/BedrockCookery160 remain.14 Cookery catalog entries,3 Grilling particle providers, dynamic tint and native renderer acceptance remain explicitly incomplete. Unchanged source/functional evidence is reused; canonical full-family gates still precede live development deployment with dot/client pending.
+
+
+## G85 finite projectile-dodge repair
+
+G85 reserves finite200-tick charges before cancelling impacts and acknowledges
+each native debit once. Admitted dodge precedes Grilling Invincible; depleted
+protection retains its damage fallback. Original two-site portal audio, an owned
+PLAYERS flatulence range16 alias,16 attempts, source vanilla logical-height
+bounds and single-rider exit are paired without changing Tavern runtime.
+
+Affected native cow/arrow evidence confirms1/200/401 capacities, fee/health,
+lethal and combined-effect paths. Two sound API calls were accepted. A focused
+actual-helper case confirms target-only exit and next-tick passenger-list
+acknowledgement; a prior failed immediate-list measurement is retained and
+explained by a separate native timing diagnostic. No source or core rerun was
+needed for that measurement correction.
+
+Impact-stage SKIP_ENTITY, ground/no-liquid/navigation/game-event equivalence,
+custom dimensions, infinite durations, generic silence/category queries and
+real client behavior remain separate limitations. The full goal remains active.
+Canonical PR/check/merge and full-family admission are required before update;
+client=false and production_ready=false remain until actual client acceptance.

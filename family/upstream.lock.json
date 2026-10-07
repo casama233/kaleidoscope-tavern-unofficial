@@ -206,5 +206,6 @@
   "upstream_runtime_changes": false,
   "client_acceptance_required": true,
   "saved_world_migration_required": true,
-  "deployment_holds": {}
+  "deployment_holds": {},
+  "extension_deployment_hold_ref": "canonical_private_source"
 }

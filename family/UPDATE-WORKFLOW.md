@@ -140,3 +140,22 @@ the original policy and live files remain unchanged until authorized deployment.
 來源更新與部署可分開：`upstream.lock.json`的owned保留最新已審查來源，例如Grilling2.8.73；`deployment_holds`明列使用者完成門檻文件、已合併canonical commit、舊版／tree及candidate版。需要保留時，設定`held_sources: ["grilling"]`，該sources路徑使用指定commit的乾淨隔離Git checkout，不回退canonical main。此功能不能用來安裝歷史artifact、改玩法或自動降級。
 
 source_state核對宣告／committed門檻文件、held版本／trees／commit、正確canonical remote及main ancestry。完整家族仍由family_bundle組裝，已保留BP/RP的版本及每個檔案必須等於本次live capture，任一側缺失、內容漂移、新UUID或版本不同都拒絕。CI驗證使用該已合併held來源的真實PR；static/BDS/fresh saved-world／准入／備份／回退／readback全部保留。候選收據明列held_revision，latest來源鎖不改成較舊來源。別包完成門檻不因本輪酒館／世界名酒修復而自動撤銷。
+
+### Reuse unchanged Tavern gameplay CI after a family-only PR
+
+When a new Tavern runtime has already passed its complete CI, a later family
+lock/maintenance PR legitimately skips gameplay jobs. The current full source
+still needs its own merged PR and successful `impact`/`baseline`; skipped jobs
+are never relabelled as success. Local config may additionally declare
+`runtime_ci_pull_requests: {"tavern": <merged runtime PR>}`.
+
+The update entry records both actual GitHub check revisions separately. The
+runtime merge must be an ancestor of current canonical source. Own runtime
+Git trees, baseline and the impact classifier must be identical. Every later
+path must be classified as family tooling/data or prose by the unchanged
+classifier; runtime, fixture, general build or unknown inputs reject reuse.
+All required gameplay checks must actually succeed on the retained runtime
+revision. Current metadata checks cannot be satisfied by those older results.
+The conservation proof is rechecked when cached evidence is used. Other public
+sources retain the existing exact-tree CI rule. Full family static/native,
+fresh stopped backup/saved-world and admission/readback gates remain required.

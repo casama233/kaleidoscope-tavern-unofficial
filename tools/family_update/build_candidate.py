@@ -12,6 +12,8 @@ def main(argv=None):
     lease_available()
     for path in [C, R / 'build-evidence.json', R / 'compatibility-report.json']:
         assert not path.exists(), 'Never overwrite existing candidate/report: ' + str(path)
+    from family_update.storage import require_space
+    require_space(R, "Family candidate assembly")
     original = verify_predeploy()
     sources = source_state(verify_remote=True)
     archives = archive_paths()

@@ -26,7 +26,7 @@ def main(argv=None):
     from family_update.identity_migration import prepare_world
     rehearsal_source,migration=prepare_world(snapshot,receipt,original)
     setup_engine(engine, 'Saved World QA', args.port)
-    world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(rehearsal_source, world)
+    world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(rehearsal_source, world, ignore=lambda directory, names: [n for n in names if Path(directory) == rehearsal_source and n in {"behavior_packs", "resource_packs"}])
     recovery=None
     if CONFIG.get('container_recovery_plan'):
         recovery=recover_world(world,read(Path(CONFIG['container_recovery_plan'])))
@@ -36,7 +36,6 @@ def main(argv=None):
     before = player_hashes(world)
     containers_before=inventory_world(world)
     for side in ['behavior', 'resource']:
-        shutil.rmtree(world / (side + '_packs'))
         shutil.copytree(C / (side + '_packs'), world / (side + '_packs'))
         shutil.copy2(C / ('world_' + side + '_packs.json'), world / ('world_' + side + '_packs.json'))
     audit_candidate(world, receipt)
@@ -61,5 +60,8 @@ def main(argv=None):
     report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':migration['uuid_mapping'] if migration else {},'same_author_and_owned_uuids':migration is None,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
     atomic(R/'saved-world-report.json',report)
     atomic(R/'saved-world-container-inventories.json',{'before':containers_before,'after':containers_after,'recovery':recovery,'retained':retained,'native_loaded_recovery_positions':bool(points)})
+    if success:
+        from family_update.storage import prune_closed_packs
+        prune_closed_packs(C, world, report, report['candidate_receipt_sha256'])
     return 0 if success else 1
 if __name__=='__main__': raise SystemExit(main())

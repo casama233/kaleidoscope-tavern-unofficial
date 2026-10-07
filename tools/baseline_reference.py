@@ -12,6 +12,34 @@ from functools import lru_cache
 def rows(root):
  p=Path(root)/'data/baseline-reconciliation.json'
  return json.loads(p.read_text())['files'] if p.exists() else {}
+@lru_cache(maxsize=4)
+def functional_rows(root):
+ p=Path(root)/'data/baseline-reconciliation.json'
+ if not p.exists():return {}
+ ledger=json.loads(p.read_text());reviews=ledger.get('reviewedFunctionalDeltas',{})
+ if reviews:assert ledger.get('schema')==1 and ledger.get('testOnly') is True,'Unsupported functional review ledger'
+ return reviews
+def functional_projection(root,name,data):
+ """Reverse only an exact reviewed delta before the unchanged old guards.
+
+ This view is test-only. It never writes historical gameplay into runtime.
+ """
+ row=functional_rows(root).get(name)
+ if not row:return data
+ assert name.startswith('runtime/BP/scripts/') and isinstance(row['reason'],str) and row['reason'].strip()
+ assert row['before']!=row['after']
+ assert hashlib.sha256(data).hexdigest()==row['after'],('Reviewed functional source mutated',name)
+ lines=data.decode('utf-8').splitlines(keepends=True);ops=row['reverseOps']
+ assert ops,('Missing functional reverse delta',name)
+ previous_end=-1
+ for start,end,replacement in ops:
+  assert type(start) is int and type(end) is int and isinstance(replacement,str)
+  assert 0<=start<=end<=len(lines) and start>=previous_end,('Invalid functional reverse delta',name)
+  previous_end=end
+ for start,end,replacement in reversed(ops):lines[start:end]=[replacement]
+ restored=''.join(lines).encode('utf-8')
+ assert hashlib.sha256(restored).hexdigest()==row['before'],('Functional predecessor mismatch',name)
+ return restored
 def version_projection(root,name,data,spec):
  current=json.loads((root/'package.json').read_text())['version']
  assert current==json.loads((root/'release.json').read_text())['version']
@@ -39,6 +67,7 @@ def version_projection(root,name,data,spec):
 
 def previous_bytes(root,path):
  root=Path(root).resolve();path=Path(path).resolve();name=path.relative_to(root).as_posix();data=path.read_bytes();row=rows(root).get(name)
+ data=functional_projection(root,name,data)
  if not row:return data
  if 'versionProjection' in row:data=version_projection(root,name,data,row['versionProjection'])
  assert hashlib.sha256(data).hexdigest()==row['after'],('Reconciled source mutated',name)

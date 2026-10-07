@@ -3434,5 +3434,114 @@
       "after": "0e0a886e1e78de79375d0e515af6e965f158c8bd9a7bfc2603a1a4a59b0fcc50",
       "reason": "Current author instant-effect LivingEntity/shriek/height/audio and fall class repair; synced T116/L83 identity. Original preimage retained; see host docs/JAVA-INSTANT-EFFECTS-0.6.116.md."
     }
+  },
+  "reviewedFunctionalDeltas": {
+    "runtime/BP/scripts/bedrock/mixology.js": {
+      "before": "55c8a4d02932e08425eb803e63cb26ba02daf5f9f0e4322bef3a2760bb236639",
+      "after": "b02a95b59d28429d0d0d16c6ef50f2945f58cc1e0f2404ca2eed12ec59ca102d",
+      "reviewedSourceCommit": "bdb06176dd52f63cc23ee8a67942187327591a9b",
+      "implementationCommits": [
+        "79b1dc9eeea90e70bf788f7f99d087f95c075e08",
+        "3d59c3f61ced69789ae79238c7871c9b82f87905"
+      ],
+      "reason": "Current Java CocktailBlockItem/SignatureCocktailBlockItem: 24-bit float draws, float probability narrowing, per-entry dispatch; native SDK callback parameters remain separate from injected RNG.",
+      "reviewDocument": "docs/COCKTAIL-EFFECT-ROLL-20261007.md",
+      "regressionTest": "tools/cocktail-effect-roll.test.mjs",
+      "reverseOps": [
+        [
+          22,
+          23,
+          ""
+        ],
+        [
+          227,
+          228,
+          "export function completeCocktail(event){\n"
+        ],
+        [
+          233,
+          234,
+          "   if(Math.random()>=effect.probability)continue;\n"
+        ],
+        [
+          300,
+          301,
+          " items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:completeCocktail});\n"
+        ]
+      ]
+    },
+    "runtime/BP/scripts/bedrock/drink-effects.js": {
+      "before": "bd2a6c9d23f49f2f959ee9ad356e81af18036bbe7afbb59a92ed8ce5b0ab46fd",
+      "after": "a57346df22de313d7a52b01d8eff48f6aa790262efc524ddd079ac2394393371",
+      "reviewedSourceCommit": "bdb06176dd52f63cc23ee8a67942187327591a9b",
+      "implementationCommits": [
+        "79b1dc9eeea90e70bf788f7f99d087f95c075e08",
+        "3d59c3f61ced69789ae79238c7871c9b82f87905"
+      ],
+      "reason": "Current Java DrinkBlockItem: lazy draw/dispatch; IHasContainer and vanilla LivingEntity: last Survival container stays in the hand; NeoForge JuiceBucketItem: default HONEY cures only vanilla Poison before container return.",
+      "reviewDocument": "docs/COCKTAIL-EFFECT-ROLL-20261007.md",
+      "regressionTest": "tools/cocktail-effect-roll.test.mjs",
+      "reverseOps": [
+        [
+          1,
+          2,
+          "import {rollDrinkEffects} from '../core/drink-effects.js';\n"
+        ],
+        [
+          14,
+          15,
+          " const rows=rollDrinkEffects(event.itemStack?.typeId,rng),entity=event.source;\n"
+        ],
+        [
+          35,
+          38,
+          ""
+        ],
+        [
+          66,
+          69,
+          ""
+        ],
+        [
+          70,
+          70,
+          "  // Forge curePotionEffects checks each effect's accepted curative item. The\n  // default curative is milk, and Tavern adds no juice curative registrations;\n  // drinking juice must not indiscriminately erase all native/custom effects.\n"
+        ]
+      ]
+    },
+    "runtime/BP/scripts/core/drink-effects.js": {
+      "before": "7527d6cc7c4957b55f7b1ce2779a7380f23cb4da5ce30ec1238d49a3f66cfbb2",
+      "after": "8ebb3d9944b571b477e7fd4f170d58a1f69ed741cbe6bf405d0ec9e224a25d26",
+      "reviewedSourceCommit": "bdb06176dd52f63cc23ee8a67942187327591a9b",
+      "implementationCommits": [
+        "79b1dc9eeea90e70bf788f7f99d087f95c075e08",
+        "3d59c3f61ced69789ae79238c7871c9b82f87905"
+      ],
+      "reason": "Current Java DrinkBlockItem: per-entry nextFloat before immediate dispatch; yield selected entries lazily while retaining the public eager array API for potion builders.",
+      "reviewDocument": "docs/COCKTAIL-EFFECT-ROLL-20261007.md",
+      "regressionTest": "tools/cocktail-effect-roll.test.mjs",
+      "reverseOps": [
+        [
+          10,
+          14,
+          "export function rollDrinkEffects(itemId,rng=Math.random){\n const selected=[];\n"
+        ],
+        [
+          16,
+          17,
+          "  if(javaRandomFloat(roll)<Math.fround(e.probability))selected.push({...e,bedrockId:NATIVE_EFFECTS[e.effect]??null,ticks:['minecraft:instant_health','minecraft:instant_damage'].includes(e.effect)?1:e.duration*20});\n"
+        ],
+        [
+          18,
+          18,
+          " return selected;\n"
+        ],
+        [
+          19,
+          20,
+          ""
+        ]
+      ]
+    }
   }
 }

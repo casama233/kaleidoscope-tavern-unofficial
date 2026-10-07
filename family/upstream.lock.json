@@ -45,15 +45,15 @@
       "version": [
         0,
         1,
-        89
+        90
       ],
       "source_trees": {
         "BP": {
-          "sha256": "3b77f2a9f84f321c3643c4dfca660e83cdf55cc688c798f245fd7d348f16dc8a",
-          "files": 321
+          "sha256": "ba71b6660eb286d138d99891f4dc3fd86773d0b11fbbec634bcfb91ee76b76ab",
+          "files": 322
         },
         "RP": {
-          "sha256": "c88216746304a20afa2cc0dab2960bb903cdc8fcb97e8152fdb25f12b546535e",
+          "sha256": "7f735bd659c86389e1cf825194b6b73a5a5e41282176472d9fa8f6a8fa01d74f",
           "files": 522
         }
       }
@@ -206,5 +206,6 @@
   "upstream_runtime_changes": false,
   "client_acceptance_required": true,
   "saved_world_migration_required": true,
-  "deployment_holds": {}
+  "deployment_holds": {},
+  "extension_deployment_hold_ref": "canonical_private_source"
 }

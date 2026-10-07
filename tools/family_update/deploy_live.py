@@ -46,6 +46,7 @@ def finalize_receipt():
     assert saved['player_records_before']==saved['player_records_after']
     reports=['build-evidence.json','static-evidence.json','compatibility-report.json','exact-engine/native-report.json','saved-world-report.json','production-before/backup-receipt.json','handoff-authorization.json']
     reports.append('saved-world-container-inventories.json')
+    if CONFIG.get('extension_validation'):reports.append(str(Path(CONFIG['extension_validation']).resolve()))
     if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
     if CONFIG.get('identity_migration'):reports.append('saved-world-identity-migration.json')
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
@@ -54,7 +55,7 @@ def finalize_receipt():
     raw['acceptance']={'static':True,'bds':True,'client':False,'saved_world_migration':True}
     raw['production_ready']=False
     raw['assembled_receipt']={'path':str(C/'family-receipt.json'),'sha256':digest}
-    raw['evidence']={'reports':[report_ref(R/p) for p in reports],'client_acceptance':f'Deferred for this exact candidate under the continuing user instruction in {AUTHORIZATION}; no human client pass claimed.'}
+    raw['evidence']={'reports':[report_ref(p) for p in dict.fromkeys((R/p).resolve() for p in reports)],'client_acceptance':f'Deferred for this exact candidate under the continuing user instruction in {AUTHORIZATION}; no human client pass claimed.'}
     reviewed=R/'reviewed-family-receipt.json'
     assert not reviewed.exists(), 'Do not overwrite a previous reviewed candidate'
     atomic(reviewed,raw); audit_candidate(C,raw)

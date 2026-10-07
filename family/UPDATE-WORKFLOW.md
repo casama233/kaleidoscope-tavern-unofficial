@@ -159,3 +159,9 @@ revision. Current metadata checks cannot be satisfied by those older results.
 The conservation proof is rechecked when cached evidence is used. Other public
 sources retain the existing exact-tree CI rule. Full family static/native,
 fresh stopped backup/saved-world and admission/readback gates remain required.
+
+Historical approved-runtime retention validates reused CI against the immutable
+admitted rows already bound by checked receipt references, rather than the
+next deployment's configuration. Conservation reads that retained source's
+Git baseline. Current evidence separately records its configured runtime CI
+references and refuses cached references from a different configuration.

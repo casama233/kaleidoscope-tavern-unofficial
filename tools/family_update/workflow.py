@@ -148,6 +148,12 @@ def validate_ci_rows(rows, sources, runtime_ci_references=None):
         assert all(status['state'] == 'success' for status in row['statuses']), f'{key} commit status failed'
 
 
+def validate_admitted_ci_rows(rows, sources):
+    """Only for immutable CI already bound by an approved receipt's checked refs."""
+    references = {row['source']: row['runtime_ci']['number'] for row in rows if row.get('runtime_ci') is not None}
+    validate_ci_rows(rows, sources, runtime_ci_references=references)
+
+
 def ci_revision(source,pr):
     """An advanced PR base requires checks on the exact resulting merge tree."""
     head=pr['head']['sha']

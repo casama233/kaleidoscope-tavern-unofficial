@@ -46,6 +46,12 @@ class RuntimeConservationTests(unittest.TestCase):
     elif mode=='unconfigured':row['runtime_ci']['number']=12
     else:check['conclusion']='failure' if mode=='failed' else 'skipped'
     with self.assertRaises(AssertionError):self.validate(row)
+ def test_historical_retained_reuse_is_bound_to_admitted_context_after_runtime_advance(self):
+  row=self.reuse();self.write('runtime/BP/main.js','new canonical runtime');advanced=self.commit('new runtime')
+  with patch.object(m,'CONFIG',{'runtime_ci_pull_requests':{'tavern':99}}),patch.object(m,'required_ci_checks',return_value=self.required):
+   with self.assertRaisesRegex(AssertionError,'Unconfigured'):m.validate_ci_rows([row],self.sources)
+   m.validate_admitted_ci_rows([row],self.sources)
+  with self.assertRaises(AssertionError):m.runtime_ci_conservation('tavern',{**self.source,'commit':advanced},self.merge)
  def test_wrong_runtime_tree_and_unrelated_revision_are_rejected(self):
   row=self.reuse();row['runtime_ci']['source_tree']='foreign'
   with self.assertRaisesRegex(AssertionError,'tree'):self.validate(row)

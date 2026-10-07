@@ -368,9 +368,9 @@ def verify_canonical_runner():
 
 def select_approved_runtime_retention(original, states):
     from family_update.approved_runtime_retention import select
-    from family_update.workflow import validate_ci_rows
+    from family_update.workflow import validate_admitted_ci_rows
     return select(CONFIG.get('approved_runtime_retention'), read(T/'family/upstream.lock.json'), SOURCES.copy(), states,
-                  original, R/'production-before/senluo-policy.json', validate_ci_rows, output_root=R)
+                  original, R/'production-before/senluo-policy.json', validate_admitted_ci_rows, output_root=R)
 
 
 def verify_candidate_sources():

@@ -33,6 +33,9 @@ export function finishDrinkContainer(player,itemId,emptyId){
  const c=inventory(player),slot=player.selectedSlotIndex,current=c.getItem(slot);
  check(current?.typeId===itemId,'STALE_DRINK_HAND');
  const creative=player.getGameMode?.()===GameMode.Creative,take=creative?0:1,output={id:emptyId,count:1};
+ // Java returns a fresh container to the logical hand for the last Survival
+ // drink. Existing containers elsewhere must not redirect this return.
+ if(!creative&&current.amount===1){c.setItem(slot,makeStack(emptyId,1));return;}
  try{
   const plan=planInventory(c,slot,take,[output],makeStack);
   commitInventory(plan,c,()=>{},()=>{});
@@ -61,10 +64,10 @@ export function finishDrinkContainer(player,itemId,emptyId){
 export function completeDrink(event,rng=Math.random){
  const player=event.source,itemId=event.itemStack?.typeId;
  if(player&&JUICE_BUCKETS.has(itemId)){
+  // Current NeoForge JuiceBucketItem cures HONEY before consuming the bucket.
+  // The reviewed default cure applies only to the vanilla Poison identity.
+  player.removeEffect('poison');
   finishDrinkContainer(player,itemId,'minecraft:bucket');effectDiagnostics.completed++;
-  // Forge curePotionEffects checks each effect's accepted curative item. The
-  // default curative is milk, and Tavern adds no juice curative registrations;
-  // drinking juice must not indiscriminately erase all native/custom effects.
   return [];
  }
  if(!player||!parseBottle(itemId))return [];

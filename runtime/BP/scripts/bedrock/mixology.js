@@ -298,7 +298,7 @@ export function registerMixologyComponents({blockComponentRegistry:blocks,itemCo
   }
  });
  items.registerCustomComponent(NS+':portable_shaker',{});
- items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:completeCocktail});
+ items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:e=>completeCocktail(e)});
 }
 export function installMixologyEvents(){
  registerJavaBlockUseFallback(candidate);

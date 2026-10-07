@@ -1,6 +1,8 @@
-import copy,io,json,unittest
+import copy,io,json,unittest,sys
+from pathlib import Path
 from unittest.mock import patch
 import nbtlib
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from family_update.freezer_storage_preservation import inspect,NS,ENTITY,PREFIX
 UUID='355ffdfc-50e6-5a33-a126-4d78ab955b2b'
 KEY=NS+':storage/overworld/0_64_0'

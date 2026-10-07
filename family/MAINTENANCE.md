@@ -79,3 +79,5 @@ canonical 家族更新器在新建候選、原生驗證與停服前要求至少 
 清理只刪固定的候選 BP／RP、Exact／Saved QA DB／packs、舊 `production-snapshot`／`production-rollback`／staged 副本；保留原 JSON、日誌、收據與實作／來源資料。不新增封存，不重掃所有歷史世界的內容；只有本次確實要刪舊備份時，才在刪除邊界用既有逐檔收據核對保留的最新兩套快照／回退內容一次，後續刪除沿用該證據並核對其檔案 metadata 未變。`retired-copies.json` 另記錄計畫與結果，原准入收據不改；退役輸出禁止 resume／再部署，中斷後只能繼續同一份清理計畫。設定了 `retention_root` 的新部署成功後自動执行此保留策略；清理另用同一把 maintenance lock，清理失敗不會回退或停止已成功更新的 live。舊設定可用單獨的 cleanup 設定執行，不得改寫其既有發版 config／收據。
 
 `family/cleanup-copies.service.example`／`.timer.example` 示範每小時一次 host 清理；本機設定保留在服務器，不提交憑證或私有驗證內容。定時清理沿用同一 canonical 入口、lock、namespace、policy 引用及保留策略；不能用另一份腳本绕過防護。
+
+唯讀計畫後，另一個原本活動中的輸出若變成閒置，只列入 `newly_eligible_deferred` 留待下一輪，不能擴大本次刪除範圍，也不必阻擋原計畫內仍符合原 binding／targets 的項目。原計畫的任何項目變成 active、被引用、metadata／scope 改變或回退保護不足時，仍拒絕刪除。

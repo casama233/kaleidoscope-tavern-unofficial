@@ -17,7 +17,7 @@ def actual(animations,name,wave=0):
     return chain(socket(),bone_matrix(b),translate([0,-24,0]))
 
 def target(active=False,wave=0):
-    camera=chain(translate(F['player_bones']['head']['pivot']),rotate('y',180),translate([-3,6.5,-6.5]))
+    camera=chain(translate(F['player_bones']['head']['pivot']),rotate('y',180),translate([-1,4.5,-3]))
     display=chain(translate([0,2.75,0]),scale([.5]*3),translate([0,-24,0]))
     hand=translate([8.96,-8.32-2.4*wave if active else -8.32,-11.52])
     return chain(camera,hand,rotate('x',15) if active else rotate('x',0),display)

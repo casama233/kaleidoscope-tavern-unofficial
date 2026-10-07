@@ -9,14 +9,13 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=json.loads((ROOT/'art/interfaces/shaker-held-java-reference.json').read_text())
 WAVE='math.sin(q.life_time * 1718.87338539247)'
 USING='(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)'
-# The integrating owner's native run found the prior state-only 8-pixel
-# camera retreat visibly shrank the cup on use. Preserve the accepted idle
-# framing in both states; Java uses the same base hand translation/depth.
-# Only Java's Y wave and Rx15 distinguish using from fully equipped idle.
-# The armor/head-centered reference frustum is not calibrated to those
-# native pixels: retain its failures as diagnostics, never fit them by
-# introducing an unsupported state-only retreat or shrinking the mesh.
-FP_IDLE_CAMERA_OFFSET=(-3.0,6.5,-6.5)
+# The exact T122 native baseline places the upright cup near the crosshair.
+# This bounded camera translation moves it outward/downward and closer while
+# retaining vertical compensation for the observed Bedrock hand-camera frame.
+# It is an item-specific candidate, not a copied plate pose or client acceptance.
+# Java uses the same base translation/depth in both states. Only its Y wave
+# and Rx15 distinguish using from fully equipped idle; preserve scale/rotation.
+FP_IDLE_CAMERA_OFFSET=(-1.0,4.5,-3.0)
 FP_USE_CAMERA_OFFSET=FP_IDLE_CAMERA_OFFSET
 
 def java_target(view,active=False,wave=0,hand='right'):
@@ -48,8 +47,13 @@ def pose(view,active=False,wave=0,hand='right'):
  return {'position':[round(v,8) for v in p],'rotation':[round(v,8) for v in r],'scale':.5}
 
 def expected():
- idle=pose('fp');third=pose('tp');active=pose('fp',True);peak=pose('fp',True,1)
- active['position']=[f'{value:.8f} + {peak["position"][i]-value:.8f} * {WAVE}' for i,value in enumerate(active['position'])]
+ idle=pose('fp');third=pose('tp');active=pose('fp',True)
+ # Transform the exact Java Y wave independently of the rounded placement.
+ # Camera offsets must not alter its last exported decimal through subtraction.
+ base,camera=calibration('right');frame=mul(rigid_inverse(base),camera)
+ origin=point(frame,[0,0,0]);peak=point(frame,[0,-2.4,0])
+ delta=[-(peak[0]-origin[0]),peak[1]-origin[1],peak[2]-origin[2]]
+ active['position']=[f'{value:.8f} + {delta[i]:.8f} * {WAVE}' for i,value in enumerate(active['position'])]
  return {name:{'loop':True,'bones':{'grip':value}} for name,value in [
   ('animation.kt_mixology.hold_first',idle),('animation.kt_mixology.hold_third',third),('animation.kt_mixology.shake_first',active)]}
 

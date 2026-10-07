@@ -80,4 +80,6 @@ canonical 家族更新器在新建候選、原生驗證與停服前要求至少 
 
 `family/cleanup-copies.service.example`／`.timer.example` 示範每小時一次 host 清理；本機設定保留在服務器，不提交憑證或私有驗證內容。定時清理沿用同一 canonical 入口、lock、namespace、policy 引用及保留策略；不能用另一份腳本绕過防護。
 
+服務明列 `User=root`，讓 systemd 提供該帳號正常的 HOME／登入設定，以使用既有 Git／GitHub CLI 登入；不能依賴互動 shell 的環境，也不把 token 寫入公開服務範例。
+
 唯讀計畫後，另一個原本活動中的輸出若變成閒置，只列入 `newly_eligible_deferred` 留待下一輪，不能擴大本次刪除範圍，也不必阻擋原計畫內仍符合原 binding／targets 的項目。原計畫的任何項目變成 active、被引用、metadata／scope 改變或回退保護不足時，仍拒絕刪除。

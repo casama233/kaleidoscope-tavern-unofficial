@@ -3,6 +3,7 @@ import argparse
 from family_update.native_common import *
 from container_recovery import recover_world, inventory_world
 from family_update.native_storage_reanchor import inspect_world as inspect_native_storage,verify as verify_native_storage,commands as native_storage_commands
+from family_update.freezer_storage_preservation import inspect_world as inspect_freezer_storage
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
@@ -36,6 +37,9 @@ def main(argv=None):
     # the rehearsal copy so the immutable stopped backup remains byte-exact.
     before = player_hashes(world)
     containers_before=inventory_world(world)
+    freezer_uuid=read(SOURCES['world-liquor']/'baseline.json')['packs']['BP']['uuid']
+    freezer_before=inspect_freezer_storage(world,freezer_uuid)
+    freezer_runs=[]
     storage_plan=read(Path(CONFIG['native_storage_reanchor_plan'])) if CONFIG.get('native_storage_reanchor_plan') else None
     storage_uuid=read(SOURCES['tavern']/'baseline.json')['packs']['BP']['uuid']
     storage_before=inspect_native_storage(world,storage_plan,storage_uuid) if storage_plan else []
@@ -53,15 +57,19 @@ def main(argv=None):
         record=native_run(engine,phase,commands=commands)
         after=player_hashes(world); audit_candidate(world, receipt)
         containers_after=inventory_world(world)
+        freezer_after=inspect_freezer_storage(world,freezer_uuid)
+        freezer_retained=freezer_before==freezer_after
+        freezer_runs.append({'phase':phase,'complete_native_items_and_identity_retained':freezer_retained,'rows':freezer_after})
         retained=all(containers_after.get(key)==value for key,value in containers_before.items())
         record.update(custom_container_inventories_retained=retained,custom_container_count=len(containers_before))
+        record.update(native_freezer_inputs_retained=freezer_retained,native_freezer_input_containers=len(freezer_before))
         record.update(player_records_unchanged=before==after, player_records=len(before))
         if storage_plan:
             storage_after=inspect_native_storage(world,storage_plan,storage_uuid)
             restored=verify_native_storage(storage_before,storage_after)
             storage_runs.append({'phase':phase,'original_identity_and_full_item_nbt_retained':restored,'rows':storage_after})
             record['native_storage_reanchor_verified']=restored
-        record['ok']=record['ok'] and before==after and retained
+        record['ok']=record['ok'] and before==after and retained and freezer_retained
         runs.append(record); print(json.dumps(record),flush=True)
         if not record['ok']: break
     assert sha(B/'bedrock_server')==engine_hash
@@ -71,6 +79,7 @@ def main(argv=None):
     report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':migration['uuid_mapping'] if migration else {},'same_author_and_owned_uuids':migration is None,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
     atomic(R/'saved-world-report.json',report)
     atomic(R/'saved-world-container-inventories.json',{'before':containers_before,'after':containers_after,'recovery':recovery,'retained':retained,'native_loaded_recovery_positions':bool(points)})
+    atomic(R/'saved-world-freezer-inputs.json',{'uuid':freezer_uuid,'before':freezer_before,'runs':freezer_runs,'ok':success and all(row['complete_native_items_and_identity_retained']for row in freezer_runs),'scope':'Original actor identity/owner binding and complete typed item NBT in stopped rehearsal copies; no player/client equivalence'})
     if storage_plan:
         atomic(R/'saved-world-native-storage.json',{'schema':1,'plan':report_ref(Path(CONFIG['native_storage_reanchor_plan'])),'uuid':storage_uuid,'before':storage_before,'runs':storage_runs,'ok':success and len(storage_runs)==2,'only_qa_world_loaded':True,'client':False})
     if success:

@@ -56,3 +56,7 @@ Minecraft／loader 的版本號合併，也不能以單一舊 fixture 代表所�
 0.1.82／宿主0.6.115修外部 LivingEntity 效果派送：timed儲存／mob快照、零時長instant投擲、float逐tick治療、boat排除、玩家專用效果no-op、卸載／重啟復原。118跨包程式回歸與實際BDS生物兩次啟動通過；原生用指定列的test-only observer，不是實際玩家入口或聲畫验收。宿主自身mob效果、mob移動／冰面、完整原生效果集合、NeoForge治療hook／生命週期精確階段及任意未知addon類別仍未完成。完整目標不縮小，client=false。
 
 Host0.6.116/L83修當前作者音波的LivingEntity使用者、Player目標、原生AABB、無256 cap／同tick gate、拒絕hurt後獨立擊退，以及登頂fluid／leaf高度與保速／聲音順序、原作音波／chorus samples、mob倒置。Native270目標與五種登頂、同tick／取消hurt、mob落傷來源分別有證據；不是正常入口或真人PvP／聲畫。完整任意高度圖state／class、nativefallDistance、look/movement/event/tracking、Grumm名字可見性仍待修／核對。World反重力fall hook只作用Player、multi-jump則LivingEntity；冰凍與移動Player gate有當前源碼根據，不應盲目擴至mob。Native穩定API無Block.isSolid，当前World respawn檢查因此無法找到落點；完整床／anchor／世界spawn／chunk／旋轉還原仍是未完成邏輯，不以平台差異豁免。
+
+Host0.6.117恢復尖嘯的查詢資格快照與逐目標即時幾何：前一傷害hook移動後一目標時不再使用預篩結果；查詢後死亡不另加存活gate，音效後才讀搜尋AABB，sourcehealth在音效前只計傷害一次。實際adapter新增四項來源回歸通過；原生callback／entity query排序與dot客戶端仍待驗證。Respawn原有Block.isSolid失效與完整床／錨／defaultspawn移植仍未完成，不能因本批修復尖嘯而宣稱完整還原。
+
+World0.1.84按原作Minecraft1.21.1 registry順序和預設enableModdedEffects=false投遞Crazy；Native38實際names中35對應、排除致命中毒／empty／鸚鵡螺呼吸，Native Mob全部200tick已確認。原作glowing/luck/unluck/dolphins_grace缺失與Native效果完整生命周期／圖示／聽感仍待完成。新增Respawn source core和26684原生Mojang方塊states碰撞資料尚未掛入production；不能冒充回返已修。

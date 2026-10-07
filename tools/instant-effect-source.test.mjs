@@ -36,6 +36,39 @@ test('the source AABB and forward corridor are both required; walls are not a ne
  const f=fixture(),caster=f.actor(),front=f.actor('minecraft:zombie',{z:32}),far=f.actor('minecraft:zombie',{z:32.01}),behind=f.actor('minecraft:zombie',{z:-1}),side=f.actor('minecraft:zombie',{x:1.31,z:8});
  assert(performShriek(caster));assert.equal(front.damage.length,1);for(const e of [far,behind,side])assert.equal(e.damage.length,0);
 });
+test('earlier hurt callbacks move later query members into and out of the corridor before their turns',()=>{
+ for(const moveInto of [false,true]){
+  const f=fixture(),caster=f.actor(),first=f.actor('minecraft:zombie',{z:4}),later=f.actor('minecraft:zombie',{x:moveInto?10:0,z:8});
+  const hurt=first.applyDamage;first.applyDamage=(...args)=>{later.location.x=moveInto?0:10;return hurt(...args);};
+  assert(performShriek(caster));assert.equal(first.damage.length,1);
+  assert.equal(later.damage.length,moveInto?1:0);assert.equal(later.impulses.length,moveInto?1:0);
+ }
+});
+test('alive and search-area membership are snapshotted at query time, independently of later hurt callbacks',()=>{
+ const f=fixture(),caster=f.actor(),first=f.actor('minecraft:zombie',{z:4}),diesLater=f.actor('minecraft:zombie',{z:8,reject:true}),revivesLater=f.actor('minecraft:zombie',{z:10,health:0}),movesFromOutside=f.actor('minecraft:zombie',{x:40,z:12});
+ const hurt=first.applyDamage;first.applyDamage=(...args)=>{diesLater.health.currentValue=0;revivesLater.health.currentValue=100;movesFromOutside.location.x=0;return hurt(...args);};
+ assert(performShriek(caster));assert.equal(diesLater.damage.length,1);assert.equal(diesLater.health.currentValue,0);assert.equal(diesLater.impulses.length,1);
+ assert.equal(revivesLater.damage.length,0);assert.equal(revivesLater.impulses.length,0);assert.equal(movesFromOutside.damage.length,0);assert.equal(movesFromOutside.impulses.length,0);
+});
+test('a sound callback moving the caster changes the subsequent search AABB, while eye/view remain the original snapshot',()=>{
+ const f=fixture(),caster=f.actor(),target=f.actor('minecraft:zombie',{z:8});let query;
+ f.dimension.playSound=()=>{caster.location.x=40;};f.dimension.getEntities=options=>{query=options;return f.actors;};
+ assert(performShriek(caster));assert.equal(query.location.x,40-.3-32);assert.equal(target.damage.length,0);
+});
+test('source health is sampled once before sound and query, while sound, per-target hurt/velocity and particles keep source order',()=>{
+ const f=fixture(),caster=f.actor('minecraft:zombie',{health:20}),first=f.actor('minecraft:zombie',{z:4}),later=f.actor('minecraft:zombie',{z:8}),events=[];
+ f.dimension.playSound=()=>{events.push('sound');caster.health.currentValue=40;};
+ const sourceBox=caster.getAABB;caster.getAABB=()=>{events.push('source-box');return sourceBox();};
+ const query=f.dimension.getEntities;f.dimension.getEntities=(...args)=>{events.push('query');return query(...args);};
+ for(const target of [first,later]){
+  const hurt=target.applyDamage,impulse=target.applyImpulse;
+  target.applyDamage=(...args)=>{events.push('hurt:'+target.id);caster.health.currentValue=60;return hurt(...args);};
+  target.applyImpulse=(...args)=>{events.push('velocity:'+target.id);return impulse(...args);};
+ }
+ f.dimension.spawnParticle=()=>events.push('particle');assert(performShriek(caster));
+ const expected=Math.fround(Math.fround(20)*Math.fround(1.2));assert.equal(first.damage[0].n,expected);assert.equal(later.damage[0].n,expected);
+ assert.deepEqual(events.slice(0,7),['sound','source-box','query','hurt:'+first.id,'velocity:'+first.id,'hurt:'+later.id,'velocity:'+later.id]);assert.deepEqual(events.slice(7),Array(16).fill('particle'));
+});
 function column(extra={}){
  const blocks=new Map();for(let y=0;y<32;y++)blocks.set(y,{typeId:'minecraft:air',location:{x:0,y,z:0},isLiquid:false,isWaterlogged:false});
  blocks.set(8,{typeId:'minecraft:stone',location:{x:0,y:8,z:0}});for(const [y,b]of Object.entries(extra))blocks.set(+y,{location:{x:0,y:+y,z:0},...b});

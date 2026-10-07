@@ -80,3 +80,5 @@ JavaQ4：`/give @s kaleidoscope_world_liquor:bombay_sapphire_gin[kaleidoscope_ta
 本輪世界名酒0.1.80[寶藏引路實測](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/main/docs/CLIENT-COMPARISON-0.1.80.md)使用尊尼獲加Q4/Q5/Q6，效果amp0/1/2與機率15/20/25%。原工具、方塊狀態、多人附近其他物品及未完成邊界分列；未測仍pending。
 
 世界名酒0.1.82的真人效果／停止對照見[場景清單](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/main/docs/CLIENT-COMPARISON-0.1.82.md)。生物派送的原生觀察器只證明指定效果列的處理，不能代替實際配酒／杯瓶／投擲入口。聲音與畫面由使用者實測，未回報維持未驗收。
+
+本輪[酒館0.6.116／世界名酒0.1.83對照](CLIENT-COMPARISON-0.6.116.md)測音波、真人目標、登頂、倒置及落傷。只記錄具體配對結果；完整Java目標除微醺外保持。

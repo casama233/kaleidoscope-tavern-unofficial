@@ -15,6 +15,8 @@ def main():
     parser.add_argument('--liquor', type=pathlib.Path, required=True)
     parser.add_argument('--work', type=pathlib.Path, required=True)
     parser.add_argument('--port', type=int, default=27200)
+    parser.add_argument('--probe', type=pathlib.Path, default=ROOT/'tools/native/living-effects-probe.js')
+    parser.add_argument('--phases', nargs='+', choices=['first', 'restart'], default=['first', 'restart'])
     args = parser.parse_args()
     engine, liquor, work = args.engine.resolve(), args.liquor.resolve(), args.work.resolve()
     assert not work.exists(), 'Use a new isolated directory; retain failed evidence'
@@ -38,14 +40,14 @@ def main():
             header = json.loads((target/'manifest.json').read_text())['header']
             manifests[kind].append({'pack_id': header['uuid'], 'version': header['version']})
     host = world/'behavior_packs/tavern'
-    shutil.copy2(ROOT/'tools/native/living-effects-probe.js', host/'scripts/living-effects-probe.js')
+    shutil.copy2(args.probe, host/'scripts/living-effects-probe.js')
     shutil.copy2(ROOT/'tools/native/living-probe-entity.json', host/'entities/living-probe.json')
     with (host/'scripts/main.js').open('a') as output:
         output.write("\n// Disposable native observer; not release content.\nimport './living-effects-probe.js';\n")
     for kind, filename in [('BP', 'world_behavior_packs.json'), ('RP', 'world_resource_packs.json')]:
         (world/filename).write_text(json.dumps(manifests[kind], indent=2)+'\n')
     reports = []
-    for phase in ['first', 'restart']:
+    for phase in args.phases:
         log = work/f'{phase}.log'
         with log.open('w') as output:
             process = subprocess.Popen(['./bedrock_server'], cwd=work, env={**os.environ, 'LD_LIBRARY_PATH': str(work)}, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True)
@@ -70,7 +72,7 @@ def main():
         connections = sum('Player connected:' in line for line in text.splitlines())
         ok = normal_stop and not errors and not connections and any(row.get('kind') == 'done' and row.get('phase') == phase and row.get('players') == 0 for row in rows) and not any(row.get('kind') == 'failure' for row in rows)
         reports.append({'phase': phase, 'ok': ok, 'normal_stop': normal_stop, 'player_connections': connections, 'errors': errors, 'observations': rows})
-        (work/'native-living-report.json').write_text(json.dumps({'native_script_behavior': all(row['ok'] for row in reports), 'client': False, 'test_only_host_overlay': True, 'reports': reports}, indent=2)+'\n')
+        (work/'native-living-report.json').write_text(json.dumps({'native_script_behavior': len(reports)==len(args.phases) and all(row['ok'] for row in reports), 'client': False, 'test_only_host_overlay': True, 'reports': reports}, indent=2)+'\n')
         print(json.dumps(reports[-1]), flush=True)
         assert ok, f'{phase} failed: see {log}'
 

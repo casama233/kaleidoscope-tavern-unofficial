@@ -1,6 +1,6 @@
 /** Source-derived Shriek Attack geometry. No world/inventory mutations. */
 import {check} from './util.js';
-export const SHRIEK=Object.freeze({range:32,radius:1,damageMultiplier:Math.fround(1.2),horizontalImpulse:.63,verticalImpulse:.28,particleStep:2,maxTargets:256});
+export const SHRIEK=Object.freeze({range:32,radius:1,damageMultiplier:Math.fround(1.2),horizontalImpulse:.63,verticalImpulse:.28,particleStep:2});
 function vector(v){check(v&&['x','y','z'].every(k=>Number.isFinite(v[k])),'INVALID_VECTOR');return v;}
 export function unit(v){vector(v);const n=Math.hypot(v.x,v.y,v.z);check(n>1e-8,'ZERO_DIRECTION');return {x:v.x/n,y:v.y/n,z:v.z/n};}
 export function shriekDamage(currentHealth){check(Number.isFinite(currentHealth)&&currentHealth>0&&currentHealth<=1e6,'INVALID_SOURCE_HEALTH');return Math.fround(Math.fround(currentHealth)*SHRIEK.damageMultiplier);}

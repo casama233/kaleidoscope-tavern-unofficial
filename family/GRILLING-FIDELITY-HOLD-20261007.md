@@ -80,9 +80,9 @@ Tavern output stays at0.6.117; its lock/source notes pair the new Grilling runti
 and preserve other maintenance changes.
 
 
-## G87 original flatulence sound origin and pitch
+## G94 original flatulence sound origin and pitch
 
-G87 restores the cue to the center of the player's floored BlockPos and rounds
+G94 restores the cue to the center of the player's floored BlockPos and rounds
 pitch at the original random float cast, multiply and add. The actual producer
 keeps impulse, ten Cloud particles at continuous coordinates, held-sneak edge
 and independent sound failure handling. PLAYERS/range16/original host samples
@@ -98,3 +98,8 @@ other portable movement gaps remain open. Full candidate Git/family/saved-world
 admission is required before the standing live development update; client and
 production_ready remain false. This pairing preserves canonical Tavern0.6.119
 and World Liquor0.1.85, including concurrent drink-source fixes.
+
+The initial87 sound proposal was superseded before merge/deployment after
+concurrent diagnostic histories87–93 were discovered. Both sources and claims
+remain preserved. This pairing uses the fresh94 canonical-source release and
+does not import the diagnostic rendering or its conflicting historical locks.

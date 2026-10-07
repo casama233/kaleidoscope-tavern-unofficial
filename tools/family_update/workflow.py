@@ -79,7 +79,7 @@ def runtime_ci_conservation(key, source, merge):
     assert git(root, 'merge-base', merge, source['commit']) == merge, 'Runtime CI PR is not an ancestor'
     for path in ['baseline.json', 'tools/ci_impact.py']:
         assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime baseline or impact classifier changed'
-    baseline = read(root / 'baseline.json')
+    baseline = json.loads(git(root, 'show', source['commit']+':baseline.json'))
     for path in baseline['runtime'].values():
         assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime exports changed after successful CI'
     paths = git(root, 'diff', '--no-renames', '--name-only', merge, source['commit'], '--').splitlines()
@@ -120,7 +120,9 @@ def runtime_ci_result(key, number, source):
     return {'source':key, 'repository':repository, 'number':number, 'url':pr['html_url'], 'head':revision, 'ci_revision_kind':kind, 'merge_commit':merge, 'source_tree':tree, 'checks':checks, 'statuses':statuses, 'conservation':conservation, 'scope':'Unchanged own runtime only; current full source metadata CI is separate'}
 
 
-def validate_ci_rows(rows, sources):
+def validate_ci_rows(rows, sources, runtime_ci_references=None):
+    if runtime_ci_references is None:
+        runtime_ci_references = CONFIG.get('runtime_ci_pull_requests', {})
     assert len(rows) == len(SOURCES) and {row['source'] for row in rows} == set(SOURCES), 'CI evidence omits or duplicates a source'
     for row in rows:
         key = row['source']
@@ -130,7 +132,7 @@ def validate_ci_rows(rows, sources):
         successful = {check['name'] for check in checks if check['conclusion'] == 'success' and check['app_slug'] == 'github-actions'}
         reused = row.get('runtime_ci')
         if reused is not None:
-            assert key == 'tavern' and reused['number'] == CONFIG.get('runtime_ci_pull_requests', {}).get(key), 'Unconfigured runtime CI proof'
+            assert key == 'tavern' and reused['number'] == runtime_ci_references.get(key), 'Unconfigured runtime CI proof'
             assert reused['source'] == key and reused['repository'] == sources[key]['repository'], 'Wrong runtime CI source'
             assert reused['conservation'] == runtime_ci_conservation(key, sources[key], reused['merge_commit']), 'Runtime conservation evidence changed'
             assert git(SOURCES[key], 'rev-parse', reused['merge_commit']+'^{tree}') == reused['source_tree'] == git(SOURCES[key], 'rev-parse', reused['head']+'^{tree}'), 'Reused CI tree differs from the runtime merge'
@@ -173,6 +175,7 @@ def verify_ci():
         proof = read(path)
         assert proof['candidate_receipt_sha256'] == sha(C / 'family-receipt.json')
         assert proof['sources'] == build['sources'] and proof['pull_requests'] == configured
+        assert proof.get('runtime_ci_pull_requests', {}) == CONFIG.get('runtime_ci_pull_requests', {}), 'Current runtime CI references changed'
         assert proof['ok'] is True
         validate_ci_rows(proof['results'], build['sources'])
         # The source tree and runner/config are verified by the caller. The
@@ -198,7 +201,7 @@ def verify_ci():
             row['runtime_ci'] = runtime_ci_result(key, runtime_number, source)
         rows.append(row)
     validate_ci_rows(rows, build['sources'])
-    proof = {'schema': 1, 'recorded_at': now(), 'ok': True, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'sources': build['sources'], 'pull_requests': configured, 'results': rows, 'reused_actual_github_checks': True, 'local_functional_suites_rerun': False}
+    proof = {'schema': 1, 'recorded_at': now(), 'ok': True, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'sources': build['sources'], 'pull_requests': configured, 'runtime_ci_pull_requests': CONFIG.get('runtime_ci_pull_requests', {}), 'results': rows, 'reused_actual_github_checks': True, 'local_functional_suites_rerun': False}
     atomic(path, proof)
     return proof
 

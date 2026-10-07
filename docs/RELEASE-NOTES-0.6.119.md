@@ -24,7 +24,7 @@ arbitrary custom cure registries remain unimplemented platform adapters.
 
 This repair applies to Tavern's shared host, including registered World Liquor
 and other addon cocktails, and keeps standalone operation. It adds no HUD text
-or interaction announcement. World Liquor 0.1.84, Grilling 2.8.86 and the
+or interaction announcement. World Liquor 0.1.85, Grilling 2.8.86 and the
 retained private integration remain the family pair for this candidate.
 
 The native random generator's shared state, container/effect ordering, instant

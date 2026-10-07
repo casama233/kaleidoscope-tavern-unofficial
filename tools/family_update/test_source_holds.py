@@ -1,8 +1,8 @@
 """An owned completion hold may retain only the currently installed exact release."""
-import copy,sys,unittest
+import copy,json,subprocess,sys,tempfile,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from family_update.source_holds import selected,effective,verify_retained,selected_extension,verify_retained_extension
+from family_update.source_holds import selected,effective,verify_retained,selected_extension,verify_retained_extension,private_extension_hold
 
 class HoldTests(unittest.TestCase):
  def setUp(self):
@@ -47,5 +47,31 @@ class HoldTests(unittest.TestCase):
    elif mutation=='files':changed[0]['files']['manifest.json']='candidate'
    else:changed.pop()
    with self.assertRaises(AssertionError):verify_retained_extension({'packs':changed},{'packs':rows},lock,True)
+
+class PrivateMetadataTests(unittest.TestCase):
+ def setUp(self):
+  self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.root=Path(self.temp.name)
+  def git(*args):return subprocess.check_output(['git','-C',str(self.root),*args],text=True,stderr=subprocess.DEVNULL).strip()
+  self.git=git;git('init','-b','main');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');git('remote','add','origin','https://github.com/fixture/private-source')
+  (self.root/'.repo-target.json').write_text(json.dumps({'repository':'fixture/private-source','repository_id':1,'private':True,'logical_runtime_repository':'local/senluo-amw-cuisine'}))
+  (self.root/'baseline.json').write_text(json.dumps({'repository':'local/senluo-amw-cuisine','version':[0,0,2]}));(self.root/'metadata').mkdir()
+  (self.root/'metadata/reason.md').write_text('Synthetic committed reason.\n')
+  self.file=self.root/'metadata/hold.json';self.row={'repository':'local/senluo-amw-cuisine','version':[0,0,1],'candidate_version':[0,0,2],'reason_file':'metadata/reason.md'};self.file.write_text(json.dumps(self.row));git('add','.');git('commit','-m','fixture')
+ def test_private_metadata_is_committed_and_bound_without_public_release_fields(self):
+  row=private_extension_hold(self.file);self.assertEqual(row['_private_metadata_root'],str(self.root));self.assertEqual(row['_private_metadata_commit'],self.git('rev-parse','HEAD'));self.assertEqual(row['version'],[0,0,1])
+ def test_dirty_public_wrong_remote_and_wrong_candidate_sources_are_rejected(self):
+  for mode in ['dirty','public','remote','version']:
+   with self.subTest(mode=mode):
+    if mode=='dirty':(self.root/'extra').write_text('uncommitted')
+    elif mode=='public':target=json.loads((self.root/'.repo-target.json').read_text());target['private']=False;(self.root/'.repo-target.json').write_text(json.dumps(target));self.git('add','.');self.git('commit','-m','invalid target')
+    elif mode=='remote':self.git('remote','set-url','origin','https://github.com/fixture/other')
+    else:self.row['candidate_version']=[0,0,3];self.file.write_text(json.dumps(self.row));self.git('add','.');self.git('commit','-m','invalid candidate')
+    with self.assertRaises(AssertionError):private_extension_hold(self.file)
+    if mode=='dirty':(self.root/'extra').unlink()
+    elif mode=='public':self.git('reset','--hard','HEAD~1')
+    elif mode=='remote':self.git('remote','set-url','origin','https://github.com/fixture/private-source')
+ def test_symlinked_input_cannot_substitute_private_metadata(self):
+  link=self.root/'alias.json';link.symlink_to(self.file)
+  with self.assertRaises(AssertionError):private_extension_hold(link)
 
 if __name__=='__main__':unittest.main()

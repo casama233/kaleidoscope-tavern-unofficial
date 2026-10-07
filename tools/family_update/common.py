@@ -201,8 +201,8 @@ def source_state(verify_remote=False):
         commit = git(path, 'rev-parse', 'HEAD')
         assert not git(path, 'status', '--porcelain'), f'Canonical {name} must be clean'
         if name in holds:
-            hold=holds[name];reason=T/hold['reason_file']
-            assert git(T,'show','HEAD:'+hold['reason_file'])==reason.read_text().strip(),'Hold reason must be committed and unchanged'
+            hold=holds[name];reason_root=Path(hold.get('_private_metadata_root',T));reason=reason_root/hold['reason_file']
+            assert git(reason_root,'show','HEAD:'+hold['reason_file'])==reason.read_text().strip(),'Hold reason must be committed and unchanged'
             assert commit==hold['commit'] and config['version']==hold['version'] and config['source_trees']==hold['source_trees'],'Held revision differs from canonical declaration'
         else:assert branch=='main',f'Canonical {name} must be clean main'
         row = {'path': str(path), 'commit': commit, 'tree': git(path, 'rev-parse', 'HEAD^{tree}'), 'repository': config['repository'], 'version': config['version'], 'baseline_sha256': sha(path / 'baseline.json'), 'source_trees': config['source_trees']}
@@ -264,7 +264,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan','extension_hold_source'] if CONFIG.get(key)}
     if CONFIG.get('preserved_additions'):
         for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
             result['preserved_archive:'+uid]=sha(row['artifact']['path'])

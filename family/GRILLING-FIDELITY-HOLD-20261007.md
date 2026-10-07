@@ -103,3 +103,21 @@ The initial87 sound proposal was superseded before merge/deployment after
 concurrent diagnostic histories87–93 were discovered. Both sources and claims
 remain preserved. This pairing uses the fresh94 canonical-source release and
 does not import the diagnostic rendering or its conflicting historical locks.
+
+
+## G100 pre-Cloud world reference
+
+Both Cookery1.6.0 handlers capture ServerLevel before Cloud and use that local
+for sound. G100 keeps the native dimension before its particle delivery and
+reuses it for the cue, with fresh post-Cloud location and unchanged G94 float
+pitch/alias/range, impulse, continuous ten-Cloud origin and held-sneak behavior.
+Two new source-operation counterexamples compare exact G94 with the repair;
+dimension-changing/faulting adapters are not an observed native mutation phase.
+Unchanged helper/native evidence is retained without another run.
+
+This source-lock pairing does not change Tavern output. Current canonical
+T119/L85 remain, and ground/author-floor preparation is excluded. Required
+canonical checks/merge and full-family/fresh-stopped-saved-world admission
+precede the standing development update; client=false,production_ready=false.
+The fresh100 identity preserves concurrent diagnostic94 sources separately,
+without importing their output or conflicting frozen histories.

@@ -20,8 +20,8 @@ class EngineDataTests(unittest.TestCase):
         self.files=files
         cm=patch.multiple(common,B=self.b,G={'hashes':files});cm.start();self.addCleanup(cm.stop)
         nm=patch.object(native,'B',self.b);nm.start();self.addCleanup(nm.stop)
-    def setup(self):
-        engine=self.root/'engine';native.setup_engine(engine,'Fixture QA',29124);return engine
+    def setup(self,expected=None):
+        engine=self.root/'engine';native.setup_engine(engine,'Fixture QA',29124,expected_inputs=expected);return engine
     def test_inventory_pins_the_whole_genuine_data_tree(self):
         result=common.engine_inputs();self.assertEqual(result['trees']['data'],self.files(self.data))
         self.assertEqual(set(result['trees']['data']),{'bootstrap.json','nested/profile.bin'})
@@ -32,7 +32,7 @@ class EngineDataTests(unittest.TestCase):
         p.unlink();self.assertNotEqual(common.engine_inputs(),baseline)
         shutil.rmtree(self.data);self.assertNotEqual(common.engine_inputs(),baseline)
     def test_setup_copies_all_data_bytes_without_aliasing_the_source(self):
-        before=self.files(self.data);engine=self.setup();copy=engine/'data'
+        before=self.files(self.data);engine=self.setup(common.engine_inputs());copy=engine/'data'
         self.assertEqual(self.files(copy),before);self.assertFalse(copy.is_symlink())
         for p in copy.rglob('*'):
             if p.is_file():self.assertFalse(p.samefile(self.data/p.relative_to(copy)))
@@ -40,7 +40,7 @@ class EngineDataTests(unittest.TestCase):
         self.assertEqual(self.files(self.data),before)
     def test_legacy_distribution_without_data_does_not_get_synthesized_data(self):
         shutil.rmtree(self.data);result=common.engine_inputs();self.assertNotIn('data',result['trees'])
-        engine=self.setup();self.assertFalse((engine/'data').exists())
+        engine=self.setup(result);self.assertFalse((engine/'data').exists())
         self.assertEqual(set(result['trees']),{'definitions','behavior_packs','resource_packs','config','minecraftpe','treatments'})
     def copied_data_case(self,change):
         original=shutil.copytree
@@ -66,5 +66,18 @@ class EngineDataTests(unittest.TestCase):
         shutil.rmtree(self.data);self.data.write_bytes(b'invalid data path')
         with self.assertRaisesRegex(AssertionError,'must be a directory'):common.engine_inputs()
         with self.assertRaisesRegex(AssertionError,'must be a directory'):self.setup()
+    def test_changed_data_between_capture_and_setup_rejected_before_clone(self):
+        inputs=common.engine_inputs();(self.data/'bootstrap.json').write_bytes(b'change before copying')
+        with self.assertRaisesRegex(AssertionError,'differs from captured'):self.setup(inputs)
+        self.assertFalse((self.root/'engine').exists())
+    def test_missing_data_after_capture_rejected_before_clone(self):
+        inputs=common.engine_inputs();shutil.rmtree(self.data)
+        with self.assertRaisesRegex(AssertionError,'differs from captured'):self.setup(inputs)
+        self.assertFalse((self.root/'engine').exists())
+    def test_new_data_after_legacy_capture_rejected_before_clone(self):
+        shutil.rmtree(self.data);inputs=common.engine_inputs();self.data.mkdir()
+        (self.data/'bootstrap.json').write_bytes(b'new data after capture')
+        with self.assertRaisesRegex(AssertionError,'differs from captured'):self.setup(inputs)
+        self.assertFalse((self.root/'engine').exists())
 
 if __name__=='__main__':unittest.main()

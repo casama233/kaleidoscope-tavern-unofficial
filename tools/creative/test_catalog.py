@@ -253,7 +253,11 @@ class HistoricalProjectionTests(unittest.TestCase):
                 # historical tree. Validate their current bytes before exclusion;
                 # never rewrite old golden counts or hashes to accept them.
                 for name in added:
-                    previous_bytes(root, root/name)
+                    # This assertion preserves items/blocks. Versioned build
+                    # diagnostics and scripts are checked by the release gate,
+                    # not by an unrelated historical asset projection.
+                    if Path(name).is_relative_to(Path(prefix)):
+                        previous_bytes(root, root/name)
                 rows = [p.relative_to(root).as_posix()+'\0'+(historical_digest(p,projected=True) if root==TAVERN else liquor_digest(p))+'\n'
                         for p in sorted((root/prefix).rglob('*')) if p.is_file() and p.relative_to(root).as_posix() not in added]
                 self.assertEqual({'files':len(rows), 'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}, expected)

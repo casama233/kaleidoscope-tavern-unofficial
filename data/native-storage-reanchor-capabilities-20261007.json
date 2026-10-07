@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "engine": "1.26.51.1",
+  "scope": "Synthetic Native helper restoration and saved displaced-actor restart; not client/full-family acceptance",
+  "cases": [
+    {
+      "kind": "case",
+      "name": "445.5 displacement and original nine metadata stacks",
+      "ok": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "kind": "case",
+      "name": "foreign token refuses movement and preserves data",
+      "ok": true
+    },
+    {
+      "kind": "case",
+      "name": "one missing original slot refuses movement and preserves data",
+      "ok": true
+    },
+    {
+      "kind": "case",
+      "name": "missing owner block refuses movement and preserves data",
+      "ok": true
+    },
+    {
+      "kind": "case",
+      "name": "saved displaced actor queues after work and keeps metadata",
+      "ok": true
+    }
+  ],
+  "original_observable_metadata_and_record_bytes_preserved": true,
+  "same_native_entity_preserved": true,
+  "nonzero_velocity_clearing_verified": false,
+  "real_player_connections": 0,
+  "simulated_players": false,
+  "client": false,
+  "full_family_acceptance": false
+}

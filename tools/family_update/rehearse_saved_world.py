@@ -2,6 +2,7 @@
 import argparse
 from family_update.native_common import *
 from container_recovery import recover_world, inventory_world
+from family_update.native_storage_reanchor import inspect_world as inspect_native_storage,verify as verify_native_storage,commands as native_storage_commands
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
@@ -35,6 +36,10 @@ def main(argv=None):
     # the rehearsal copy so the immutable stopped backup remains byte-exact.
     before = player_hashes(world)
     containers_before=inventory_world(world)
+    storage_plan=read(Path(CONFIG['native_storage_reanchor_plan'])) if CONFIG.get('native_storage_reanchor_plan') else None
+    storage_uuid=read(SOURCES['tavern']/'baseline.json')['packs']['BP']['uuid']
+    storage_before=inspect_native_storage(world,storage_plan,storage_uuid) if storage_plan else []
+    storage_runs=[]
     for side in ['behavior', 'resource']:
         shutil.copytree(C / (side + '_packs'), world / (side + '_packs'))
         shutil.copy2(C / ('world_' + side + '_packs.json'), world / ('world_' + side + '_packs.json'))
@@ -44,12 +49,18 @@ def main(argv=None):
     for phase in ['first', 'restart']:
         points={tuple(row['position']) for row in (recovery or {}).get('restored',[])}
         commands=[f'tickingarea add circle {x} {y} {z} 1 freezer_recovery_{i}' for i,(x,y,z) in enumerate(sorted(points))]
+        if storage_plan:commands+=native_storage_commands(storage_plan)
         record=native_run(engine,phase,commands=commands)
         after=player_hashes(world); audit_candidate(world, receipt)
         containers_after=inventory_world(world)
         retained=all(containers_after.get(key)==value for key,value in containers_before.items())
         record.update(custom_container_inventories_retained=retained,custom_container_count=len(containers_before))
         record.update(player_records_unchanged=before==after, player_records=len(before))
+        if storage_plan:
+            storage_after=inspect_native_storage(world,storage_plan,storage_uuid)
+            restored=verify_native_storage(storage_before,storage_after)
+            storage_runs.append({'phase':phase,'original_identity_and_full_item_nbt_retained':restored,'rows':storage_after})
+            record['native_storage_reanchor_verified']=restored
         record['ok']=record['ok'] and before==after and retained
         runs.append(record); print(json.dumps(record),flush=True)
         if not record['ok']: break
@@ -60,6 +71,8 @@ def main(argv=None):
     report={'schema':1,'recorded_at':now(),'candidate_receipt_sha256':sha(C/'family-receipt.json'),'engine_sha256':engine_hash,'engine_inputs':inputs,'packs':len(receipt['packs']),'identity_mapping':migration['uuid_mapping'] if migration else {},'same_author_and_owned_uuids':migration is None,'snapshot_source':str(snapshot),'backup_receipt':report_ref(R/'production-before/backup-receipt.json'),'fresh_stopped_backup':True,'snapshot_cutoff':backup['recorded_at'],'existing_world_loaded':success,'database_replaced_in_live':False,'saved_world_migration':success,'bds':success,'test_only_overlays':[],'client':False,'simulated_players':False,'players':0,'player_records_before':before,'player_records_after':after,'runs':runs}
     atomic(R/'saved-world-report.json',report)
     atomic(R/'saved-world-container-inventories.json',{'before':containers_before,'after':containers_after,'recovery':recovery,'retained':retained,'native_loaded_recovery_positions':bool(points)})
+    if storage_plan:
+        atomic(R/'saved-world-native-storage.json',{'schema':1,'plan':report_ref(Path(CONFIG['native_storage_reanchor_plan'])),'uuid':storage_uuid,'before':storage_before,'runs':storage_runs,'ok':success and len(storage_runs)==2,'only_qa_world_loaded':True,'client':False})
     if success:
         from family_update.storage import prune_closed_packs
         prune_closed_packs(C, world, report, report['candidate_receipt_sha256'])

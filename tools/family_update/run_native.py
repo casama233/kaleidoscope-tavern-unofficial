@@ -15,7 +15,7 @@ def main(argv=None):
     inputs = engine_inputs()
     from family_update.storage import require_space, allocated, prune_closed_packs
     require_space(R, "Fresh native QA", allocated(C))
-    setup_engine(engine, 'Family QA', args.port)
+    setup_engine(engine, 'Family QA', args.port, expected_inputs=inputs)
     world = engine / 'worlds/Family QA'; world.parent.mkdir(); shutil.copytree(C, world)
     blank_level(world, 'Family QA')
     audit_candidate(world, receipt)

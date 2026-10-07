@@ -2,10 +2,17 @@
 import io, shutil, struct
 from family_update.common import *
 
-def setup_engine(engine, world_name, port):
+def setup_engine(engine, world_name, port, expected_inputs=None):
     properties = dict(line.split('=', 1) for line in (B / 'server.properties').read_text().splitlines() if '=' in line and not line.lstrip().startswith('#'))
     live_ports = {int(properties.get('server-port', 19132)), int(properties.get('server-portv6', 19133))}
     assert not {port, port + 1} & live_ports, 'Isolated BDS port overlaps live'
+    data_present = (B / 'data').exists()
+    if data_present:
+        assert (B / 'data').is_dir(), 'BDS data input must be a directory'
+    expected_data = hashes(B / 'data') if data_present else None
+    if expected_inputs is not None:
+        captured_data = expected_inputs['trees'].get('data')
+        assert data_present == ('data' in expected_inputs['trees']) and expected_data == captured_data, 'BDS data input differs from captured engine inventory'
     engine.mkdir()
     for name in ['bedrock_server', 'definitions', 'behavior_packs', 'resource_packs']:
         (engine / name).symlink_to((B / name).resolve(), target_is_directory=(B / name).is_dir())
@@ -14,6 +21,10 @@ def setup_engine(engine, world_name, port):
             cache=client_pack_cache()
             shutil.copytree(B/name,engine/name,ignore=lambda directory,names:[n for n in names if Path(directory)==B/name and n in cache])
         else:shutil.copytree(B / name, engine / name)
+    if data_present:
+        shutil.copytree(B / 'data', engine / 'data')
+        assert hashes(engine / 'data') == expected_data, 'Isolated BDS data copy differs from captured input'
+        assert hashes(B / 'data') == expected_data, 'BDS data input changed during isolated copy'
     (engine / 'allowlist.json').write_text('[]\n')
     (engine / 'server.properties').write_text(f'server-name=Parity isolated native QA\nlevel-name={world_name}\nserver-port={port}\nserver-portv6={port+1}\nonline-mode=true\nallow-list=true\nview-distance=5\ntick-distance=4\nmax-threads=2\nenable-lan-visibility=false\ncontent-log-file-enabled=true\ncontent-log-console-output-enabled=true\ntransport=nethernet\n')
 

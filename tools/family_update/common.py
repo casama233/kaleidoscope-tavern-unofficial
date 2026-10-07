@@ -408,6 +408,11 @@ def archive_paths():
 def engine_inputs():
     """Pin everything used by the isolated engine, including builtin packs."""
     roots = ['definitions', 'behavior_packs', 'resource_packs', 'config', 'minecraftpe', 'treatments']
+    # Newer BDS builds load profiler/bootstrap inputs from the genuine data tree.
+    # Older distributions without data retain their actual input inventory.
+    if (B / 'data').exists():
+        assert (B / 'data').is_dir(), 'BDS data input must be a directory'
+        roots.append('data')
     trees={name:hashes(B/name) for name in roots}
     # Normal BDS shutdown deletes client delivery ZIPs. They are excluded only
     # after verifying every byte against the active resource pack, and are not

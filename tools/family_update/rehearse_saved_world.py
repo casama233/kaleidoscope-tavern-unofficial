@@ -25,7 +25,7 @@ def main(argv=None):
     original = read(R / 'production-before/inventory.json')
     from family_update.identity_migration import prepare_world
     rehearsal_source,migration=prepare_world(snapshot,receipt,original)
-    setup_engine(engine, 'Saved World QA', args.port)
+    setup_engine(engine, 'Saved World QA', args.port, expected_inputs=inputs)
     world = engine / 'worlds/Saved World QA'; world.parent.mkdir(); shutil.copytree(rehearsal_source, world, ignore=lambda directory, names: [n for n in names if Path(directory) == rehearsal_source and n in {"behavior_packs", "resource_packs"}])
     recovery=None
     if CONFIG.get('container_recovery_plan'):

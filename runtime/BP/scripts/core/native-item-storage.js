@@ -4,7 +4,8 @@ import {check} from './util.js';
 // remain readable for pre-upgrade worlds; they are never a fallback for a lost
 // or corrupt native inventory. No ItemStack metadata is serialized into JSON.
 export const NATIVE_ITEM_ENTITY='kaleidoscope_tavern:stored_items';
-const OWNER='kaleidoscope_tavern:storage_owner',TOKEN='kaleidoscope_tavern:storage_token';
+export const NATIVE_STORAGE_OWNER='kaleidoscope_tavern:storage_owner';
+const OWNER=NATIVE_STORAGE_OWNER,TOKEN='kaleidoscope_tavern:storage_token';
 const SIZE=9;
 const padded=ids=>{check(Array.isArray(ids)&&ids.length<=SIZE&&ids.every(id=>id===null||typeof id==='string'&&id.length>0),'NATIVE_STORAGE_IDS');return Array.from({length:SIZE},(_,i)=>ids[i]??null);};
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -13,7 +14,8 @@ export const nativeItemKey=key=>'kt:native_items/'+key;
 const requiredKey=key=>'kt:native_required/'+key;
 export class NativeItemStorage {
  constructor({backend,findEntity,createEntity,makeStack,token=()=>Math.random().toString(36).slice(2)}){Object.assign(this,{backend,findEntity,createEntity,makeStack,token});}
- read({key,dimension,position,ids,legacyStacks,requireNative=false}){
+ read(input){return this.#read(input,true);}
+ #read({key,dimension,position,ids,legacyStacks,requireNative=false},requirePosition){
   ids=padded(ids);const raw=this.backend.getDynamicProperty(nativeItemKey(key)),required=this.backend.getDynamicProperty(requiredKey(key));
   if(raw===undefined){
    check(required===undefined&&!requireNative,'NATIVE_STORAGE_MISSING');
@@ -27,11 +29,24 @@ export class NativeItemStorage {
   check(entity?.isValid&&entity.typeId===NATIVE_ITEM_ENTITY&&entity.dimension.id===dimension.id,'NATIVE_STORAGE_UNAVAILABLE');
   check(entity.getDynamicProperty(OWNER)===key&&entity.getDynamicProperty(TOKEN)===record.token,'NATIVE_STORAGE_WRONG_OWNER');
   const p=entity.location;
-  check(p&&Math.abs(p.x-position.x-.5)<.1&&Math.abs(p.y-position.y-.5)<.1&&Math.abs(p.z-position.z-.5)<.1,'NATIVE_STORAGE_MOVED');
+  const centered=p&&Math.abs(p.x-position.x-.5)<.1&&Math.abs(p.y-position.y-.5)<.1&&Math.abs(p.z-position.z-.5)<.1;
+  if(requirePosition&&!centered){try{this.requestReanchor?.(key);}catch{/* Recovery scheduling must not mask the strict read failure. */}check(false,'NATIVE_STORAGE_MOVED');}
   const container=entity.getComponent('minecraft:inventory')?.container;check(container?.size===SIZE,'NATIVE_STORAGE_CONTAINER');
   const items=Array.from({length:SIZE},(_,i)=>container.getItem(i)?.clone());
   for(let i=0;i<SIZE;i++)check(ids[i]?items[i]?.typeId===ids[i]&&items[i].amount===1:!items[i],'NATIVE_STORAGE_CONTENT_MISMATCH');
   return {raw,required,record,entity,container,ids,items};
+ }
+ /** Read-only recovery proof: every normal native check except current position.
+  * Only the separate after-event adapter may move this exact owned entity. */
+ inspectForReanchor({key,dimension,position,entity}){
+  const raw=this.backend.getDynamicProperty(nativeItemKey(key));
+  check(typeof raw==='string','NATIVE_STORAGE_MISSING');let record;
+  try{record=JSON.parse(raw);}catch{check(false,'NATIVE_STORAGE_CORRUPT');}
+  check(Array.isArray(record?.ids)&&record.ids.length===SIZE&&record.ids.some(Boolean),'NATIVE_STORAGE_IDS');
+  const proof=this.#read({key,dimension,position,ids:record.ids,requireNative:true},false);
+  check(entity?.isValid&&entity.id===proof.record.entity&&entity.id===proof.entity.id,'NATIVE_STORAGE_WRONG_ENTITY');
+  check(['x','y','z'].every(axis=>Number.isFinite(proof.entity.location?.[axis])),'NATIVE_STORAGE_MOVED');
+  return proof;
  }
  /** Read an adopted native container without trusting a stale display index. */
  readAdopted({key,dimension,position}){

@@ -331,7 +331,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
-          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs tools/drink-source-labels.test.mjs tools/instant-effect-source.test.mjs tools/cocktail-effect-roll.test.mjs tools/drink-completion-lifecycle.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs tools/drink-source-labels.test.mjs tools/instant-effect-source.test.mjs tools/cocktail-effect-roll.test.mjs tools/drink-completion-lifecycle.test.mjs tools/native-storage-pinning.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
           python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
       - name: Simple effect bar and paired name checks (no client rendering)
         working-directory: tavern

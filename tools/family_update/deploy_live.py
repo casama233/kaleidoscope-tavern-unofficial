@@ -46,6 +46,17 @@ def finalize_receipt():
     assert saved['player_records_before']==saved['player_records_after']
     reports=['build-evidence.json','static-evidence.json','compatibility-report.json','exact-engine/native-report.json','saved-world-report.json','production-before/backup-receipt.json','handoff-authorization.json']
     reports.append('saved-world-container-inventories.json')
+    if CONFIG.get('native_storage_reanchor_plan'):
+        from family_update.native_storage_reanchor import verify as verify_native_storage
+        storage=read(R/'saved-world-native-storage.json')
+        assert storage['ok'] and storage['only_qa_world_loaded'] and storage['client'] is False
+        assert storage['plan']==report_ref(Path(CONFIG['native_storage_reanchor_plan']))
+        assert storage['uuid']==read(SOURCES['tavern']/'baseline.json')['packs']['BP']['uuid']
+        assert [row['phase'] for row in storage['runs']]==['first','restart']
+        for row,run in zip(storage['runs'],saved['runs']):
+            assert row['original_identity_and_full_item_nbt_retained'] and run['native_storage_reanchor_verified']
+            verify_native_storage(storage['before'],row['rows'])
+        reports.append('saved-world-native-storage.json')
     if CONFIG.get('extension_validation'):reports.append(str(Path(CONFIG['extension_validation']).resolve()))
     if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
     if CONFIG.get('identity_migration'):reports.append('saved-world-identity-migration.json')

@@ -264,7 +264,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan'] if CONFIG.get(key)}
     if CONFIG.get('preserved_additions'):
         for uid,row in read(Path(CONFIG['preserved_additions']))['packs'].items():
             result['preserved_archive:'+uid]=sha(row['artifact']['path'])

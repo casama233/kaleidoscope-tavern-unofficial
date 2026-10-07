@@ -58,3 +58,23 @@ custom dimensions, infinite durations, generic silence/category queries and
 real client behavior remain separate limitations. The full goal remains active.
 Canonical PR/check/merge and full-family admission are required before update;
 client=false and production_ready=false remain until actual client acceptance.
+
+
+## G86 sampled-body liquid and Hinder class repair
+
+G86 adds a read-only whole-native-body liquid admission check after targeted
+rider exit and before teleport. Liquid/waterlogged/source-carrier cells and
+unknown reads reject the sampled attempt; remaining dry attempts retain the
+original16-sample budget and independent fee/audio behavior. Post-exit dimension
+and re-riding context changes close the attempted movement. Hinder now requires
+the reviewed native LivingEntity mapping for both responsible actor and victim,
+excluding health-bearing vehicles without adding positive-health/damage gates.
+
+Original Forge and NeoForge whole-cell predicates are reviewed separately.
+Actual AABB/current readback and selected fluid cases, including naturally
+constructed upward/downward bubble columns, have scoped isolated evidence.
+Full native movement/Hinder outcomes and family admission are recorded at their
+own boundaries. Java downward support search, collision geometry, phase order
+and actual client rendering/audio remain unfinished; no100% claim follows.
+Tavern output stays at0.6.117; its lock/source notes pair the new Grilling runtime
+and preserve other maintenance changes.

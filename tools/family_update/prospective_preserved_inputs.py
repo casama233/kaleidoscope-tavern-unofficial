@@ -91,10 +91,11 @@ def select(preserved,original):
     assert proof_path.is_absolute() and c.sha(proof_path)==native['sha256'], 'Native validation reference changed'
     assert Path(c.CONFIG['extension_validation']).resolve()==proof_path.resolve(), 'Prospective and extension validation must agree'
     proof=c.read(proof_path)
-    assert proof['source_commit']==head and proof['version']==baseline['version'] and proof['source_trees']==baseline['source_trees'], 'Native validation describes another source'
+    from family_update.extension_validation import source_binding,verify_extension
+    binding=source_binding(proof,baseline)
+    assert binding['actual_current_source_commit']==head, 'Prospective source changed during Native binding'
     tested_ref=proof['tested_family_receipt'];assert c.sha(tested_ref['path'])==tested_ref['sha256'], 'Native tested receipt changed'
     tested=c.read(Path(tested_ref['path']))
-    from family_update.extension_validation import verify_extension
     reports=verify_extension(tested,old)
     assert reports, 'Actual changed-extension functional evidence is required'
     tested_rows={p['uuid']:p for p in tested['packs']}
@@ -102,7 +103,7 @@ def select(preserved,original):
     for name,row in outputs.items():
         native_row=tested_rows.get(row['uuid'])
         assert native_row and native_row['files']==data['output_hashes'][name] and all(native_row[k]==row[k] for k in ['side','version']), 'Prospective output differs from Native tested bytes/version'
-    evidence={'schema':1,'review':c.report_ref(path),'source_commit':head,'version':baseline['version'],
+    evidence={'schema':1,'review':c.report_ref(path),'source_commit':head,**binding,'version':baseline['version'],
               'source_trees':baseline['source_trees'],'recipe':c.report_ref(recipe),
               'native_validation':c.report_ref(proof_path),'tested_family_receipt':tested_ref,
               'extension_reports':reports,'packs':outputs,'current_live_reconciled':False,

@@ -46,7 +46,7 @@ class ProspectiveInputTests(unittest.TestCase):
         self.recipe=self.ext/'docs/recipe.json';self.save(self.recipe,{'schema':1,'uuids':uuids,'output_hashes':hashes})
         self.committed['docs/recipe.json']=self.recipe.read_bytes()
         self.tested=self.root/'tested/family-receipt.json';self.save(self.tested,{'packs':tested})
-        self.proof=self.root/'native.json';self.save(self.proof,{'schema':1,'source_commit':self.head,
+        self.proof=self.root/'native.json';self.save(self.proof,{'schema':1,'repository':self.baseline['repository'],'source_commit':self.head,
             'version':self.baseline['version'],'source_trees':self.baseline['source_trees'],
             'tested_family_receipt':{'path':str(self.tested),'sha256':m.c.sha(self.tested)}})
         self.path=self.root/'review.json';self.review={'schema':1,'source_commit':self.head,
@@ -60,10 +60,13 @@ class ProspectiveInputTests(unittest.TestCase):
         def git(root,*args):
             if args==('rev-parse','HEAD'):return self.head
             if args==('status','--porcelain'):return ' M changed' if self.dirty else ''
+            if args in [('rev-parse',self.head+'^{tree}'),('rev-parse','HEAD^{tree}')]:return 'synthetic-full-tree'
             raise AssertionError('Unexpected source operation')
         with patch.multiple(m.c,CONFIG=self.config,EXTENSION=self.ext,R=self.output,C=self.output/'candidate',
                             B=self.live,W=self.live/'world',Q=self.live/'quality',SOURCES={'tool':self.protected}),\
              patch.object(m.c,'git',side_effect=git),\
+             patch.object(extension_validation,'EXTENSION',self.ext),\
+             patch.object(extension_validation,'git',side_effect=git),\
              patch.object(m.subprocess,'check_output',side_effect=lambda args,cwd:self.committed[args[-1].removeprefix('HEAD:')]),\
              patch.object(extension_validation,'verify_extension',return_value=[{'path':'actual-validator-called','sha256':'synthetic'}]) as validator:
             roots,evidence=m.select(self.preserved,self.original)

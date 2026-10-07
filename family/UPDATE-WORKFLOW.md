@@ -108,6 +108,10 @@ identity、逐檔內容及順序仍須先與現行准入一致，禁止新增或
 cache 重驗全部輸入及證據。整套 static、BDS、fresh saved-world、備份與
 family_guard 仍須完成，真人驗收狀態仍保留 pending。
 
+原生證據的實測提交保持原樣。現行 source HEAD 不同時，僅允許它是實測提交的
+後代，且**完整 Git tree 完全相同**；只看 runtime 版本或輸出 hash 相同仍拒絕。
+准入記錄分別保存現行提交、實測提交及兩個 tree OID，不重寫原證據冒充新測試。
+
 ## 驗證與維護
 
 `python -m unittest discover -s tools/family_update -p 'test_*.py'` 使用隔離暫存目錄

@@ -1,5 +1,5 @@
 """Changed private runtimes cannot borrow unrelated public or native evidence."""
-import copy,hashlib,json,sys,tempfile,unittest
+import copy,hashlib,json,subprocess,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -33,7 +33,10 @@ class ExtensionValidationTests(unittest.TestCase):
         self.proof['functional']={'report':save('functional.json',functional),'log':ref}
         self.path=self.root/'proof.json';self.path.write_text(json.dumps(self.proof))
     def verify(self,configured=True):
-        with patch.multiple(m,CONFIG={'extension_validation':str(self.path)} if configured else {},EXTENSION=self.root,R=self.root),patch.object(m,'git',return_value='reviewed-head'),patch.object(m,'atomic'):
+        def source_git(root,*args):
+            if args[0]=='merge-base':raise subprocess.CalledProcessError(1,args)
+            return 'reviewed-head' if args[-1]=='HEAD' else 'reviewed-full-tree'
+        with patch.multiple(m,CONFIG={'extension_validation':str(self.path)} if configured else {},EXTENSION=self.root,R=self.root),patch.object(m,'git',side_effect=source_git),patch.object(m,'atomic'):
             return m.verify_extension(self.receipt,{})
     def test_changed_private_pack_requires_its_own_bound_evidence(self):
         with self.assertRaisesRegex(AssertionError,'functional evidence'):self.verify(False)

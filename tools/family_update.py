@@ -35,7 +35,7 @@ def main(argv=None):
     if not args.execute or args.command in ['plan', 'status']:
         print(json.dumps(workflow.plan(), ensure_ascii=False, indent=2))
         return 0
-    common.verify_canonical_runner()
+    common.verify_canonical_runner(lease_bound=args.command in ['saved-world', 'verify-live'])
     if args.command == 'prepare':
         result = workflow.prepare()
     elif args.command == 'record-ci':

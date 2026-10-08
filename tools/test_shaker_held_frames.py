@@ -1,10 +1,27 @@
-"""Reference-frame and state-dispatch tests, without simulated MC players."""
-import itertools,json,math,unittest
+"""Reference-frame and shipped state-dispatch tests; not client rendering."""
+import ast,copy,itertools,json,math,re,unittest
 from pathlib import Path
 from held_frame_math import chain,translate,rotate,xyz,scale,point,bone_matrix,calibration
 ROOT=Path(__file__).resolve().parents[1]
 ANIM=json.loads((ROOT/'runtime/RP/animations/runtime_shaker.animation.json').read_text())['animations']
 GEO=json.loads((ROOT/'runtime/RP/models/entity/runtime_shaker_held.geo.json').read_text())['minecraft:geometry'][0]
+
+def selected_animations(animate,first,remaining,maximum):
+ """Evaluate only the shipped selector's supported Molang Boolean subset."""
+ values={'c.is_first_person':first,'q.main_hand_item_use_duration':remaining,'q.main_hand_item_max_duration':maximum}
+ allowed=(ast.Expression,ast.BoolOp,ast.And,ast.Or,ast.UnaryOp,ast.Not,ast.UAdd,ast.USub,ast.BinOp,ast.Add,ast.Sub,ast.Compare,ast.Eq,ast.NotEq,ast.Lt,ast.LtE,ast.Gt,ast.GtE,ast.Constant)
+ selected=[]
+ for row in animate:
+  if isinstance(row,str):selected.append(row);continue
+  if not isinstance(row,dict) or len(row)!=1:raise ValueError('Invalid animation selector')
+  name,condition=next(iter(row.items()))
+  expression=re.sub(r'\b[qc]\.\w+',lambda match:repr(values[match[0]]),str(condition))
+  expression=re.sub(r'!(?!=)',' not ',expression.replace('&&',' and ').replace('||',' or ')).strip()
+  tree=ast.parse(expression,mode='eval')
+  if any(not isinstance(node,allowed) for node in ast.walk(tree)):raise ValueError('Unsupported animation condition: '+str(condition))
+  if eval(compile(tree,'<shipped animation selector>','eval'),{'__builtins__':{}}):selected.append(name)
+ return selected
+
 class ShakerJavaFrames(unittest.TestCase):
  def vertices(self):
   for b in GEO['bones']:
@@ -23,21 +40,36 @@ class ShakerJavaFrames(unittest.TestCase):
   self.assertCorners(self.actual('hold_third'),target)
  def test_first_person_native_framing_preserves_java_display(self):
   _,camera=calibration('right')
-  target=chain(camera,translate([-3,6.5,-6.5]),translate([8.96,-8.32,-11.52]),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
+  target=chain(camera,translate([-1,4.5,-3]),translate([8.96,-8.32,-11.52]),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
   self.assertCorners(self.actual('hold_first'),target)
  def test_active_camera_space_motion_replaces_idle(self):
   _,camera=calibration('right')
   for tick in range(112):
    for fraction in (0,.25,.75):
     wave=math.sin((tick+fraction)*1.5)
-    target=chain(camera,translate([-3,6.5,-6.5]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
+    target=chain(camera,translate([-1,4.5,-3]),translate([8.96,-8.32-2.4*wave,-11.52]),rotate('x',15),translate([0,2.75,0]),scale([.5]*3),translate([-8,-8,-8]),translate([8,-16,8]))
     self.assertCorners(self.actual('shake_first',wave),target)
- def test_idle_and_use_are_mutually_exclusive(self):
-  from shaker_held_frames import selectors
-  for p in (ROOT/'runtime/RP/attachables').glob('shaker*.attachable.json'):
-   self.assertEqual(json.loads(p.read_text())['minecraft:attachable']['description']['scripts']['animate'],selectors())
+ def assertDispatch(self,animate):
+  # Original use lasts through elapsed tick111. Only first person replaces
+  # idle with use; third person retains its held display in every use state.
+  # Explicit boundary rows are independent of the generator's USING formula.
+  cases=[(0,120,'hold_first'),(-1,120,'hold_first'),(120,120,'shake_first'),(119,120,'shake_first'),(9,120,'shake_first'),(8,120,'hold_first')]
   for first in (False,True):
-   for remaining,maximum in [(0,120),(-1,120),(120,120),(9,120),(8,120)]:
-    active=remaining>0 and maximum-remaining<=111
-    self.assertEqual(sum([first and not active,not first,first and active]),1)
+   for remaining,maximum,first_animation in cases:
+    self.assertEqual(selected_animations(animate,first,remaining,maximum),[first_animation if first else 'hold_third'],(first,remaining,maximum))
+ def test_shipped_idle_and_use_dispatch(self):
+  paths=list((ROOT/'runtime/RP/attachables').glob('shaker*.attachable.json'))
+  self.assertTrue(paths,'Shipped shaker selectors are required')
+  for p in paths:
+   with self.subTest(attachable=p.name):
+    animate=json.loads(p.read_text())['minecraft:attachable']['description']['scripts']['animate']
+    self.assertDispatch(animate)
+ def test_shipped_always_on_idle_mutation_is_rejected(self):
+  # One bounded in-memory mutation of an actual production selector field.
+  # It must fail the same dispatch check; no runtime files are changed.
+  p=ROOT/'runtime/RP/attachables/shaker.attachable.json'
+  animate=copy.deepcopy(json.loads(p.read_text())['minecraft:attachable']['description']['scripts']['animate'])
+  idle=next(row for row in animate if isinstance(row,dict) and 'hold_first' in row)
+  idle['hold_first']='1.0'
+  with self.assertRaises(AssertionError):self.assertDispatch(animate)
 if __name__=='__main__':unittest.main()

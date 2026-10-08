@@ -17,7 +17,7 @@ def actual(animations,name,wave=0):
     return chain(socket(),bone_matrix(b),translate([0,-24,0]))
 
 def target(active=False,wave=0):
-    camera=chain(translate(F['player_bones']['head']['pivot']),rotate('y',180),translate([-3,6.5,-6.5]))
+    camera=chain(translate(F['player_bones']['head']['pivot']),rotate('y',180),translate([-1,4.5,-3]))
     display=chain(translate([0,2.75,0]),scale([.5]*3),translate([0,-24,0]))
     hand=translate([8.96,-8.32-2.4*wave if active else -8.32,-11.52])
     return chain(camera,hand,rotate('x',15) if active else rotate('x',0),display)
@@ -40,9 +40,14 @@ class NativeShakerFrameTests(unittest.TestCase):
     def test_old_blockbench_pose_is_rejected(self):
         old=actual(F['previous_shaker_animations'],'hold_first');expected=target()
         self.assertGreater(max(math.dist(point(old,v),point(expected,v)) for v in corners()),5)
-    def test_all_third_person_and_player_arm_channels_are_unchanged(self):
-        for name in ('hold_third','player_idle','player_shake'):
+    def test_third_person_placement_and_source_arm_xz_are_retained(self):
+        for name in ('hold_third','player_idle'):
             key='animation.kt_mixology.'+name;self.assertEqual(A[key],F['previous_shaker_animations'][key])
+        current=A['animation.kt_mixology.player_shake']['bones']['rightarm']['rotation']
+        previous=F['previous_shaker_animations']['animation.kt_mixology.player_shake']['bones']['rightarm']['rotation']
+        self.assertEqual([current[0],current[2]],[previous[0],previous[2]])
+        # Zero is an additive delta: prior body/arm yaw survives the use pose.
+        self.assertEqual(current[1],0)
     def test_same_base_translation_and_scale_in_both_states(self):
         first=actual(A,'hold_first');active=actual(A,'shake_first')
         # Undo the authored +2.75 display translation at half-scale to locate

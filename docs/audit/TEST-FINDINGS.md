@@ -1,5 +1,7 @@
 # Verification classification findings
 
+The following findings snapshot T126. T127 replaces the actual tautological/shaker generator-self-comparison case with shipped-selector boundary evaluation and one rejecting in-memory mutation; the other findings retain their original scope.
+
 This audit did not run new suites, BDS, clients or implementation mutations. No tests were deleted. TEST-AUDIT.md is a file-level inventory; discovered case names are the declared behavior, not proof that every assertion has been exhaustively reviewed.
 
 A: original Java/JDK oracle; A-source-expression: independently extracted JVM math; A-development: vectors on a development copy. B: executed production conservation/rollback with an independent invariant. C: a stated actual-engine scenario; a historical trace replay is not a new C run. D: paired actual-client evidence. Build/schema/reference/package checks are preconditions, not A–D completion.

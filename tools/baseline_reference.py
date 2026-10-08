@@ -8,7 +8,7 @@ from pathlib import Path
 import base64,gzip,hashlib,json
 from functools import lru_cache
 
-# Only the exact non-script assets reviewed for the cocktail and locale repairs.
+# Only the exact non-script assets reviewed for cocktail, locale and item visuals.
 # New arbitrary blocks/UI/locales are not admitted by a directory wildcard.
 COCKTAIL_ASSET_PATHS=frozenset({
  'runtime/BP/blocks/'+name+'.json' for name in (
@@ -19,7 +19,16 @@ COCKTAIL_ASSET_PATHS=frozenset({
 }|{'runtime/RP/texts/en_US.lang','runtime/RP/texts/zh_CN.lang',
    'runtime/RP/texts/zh_TW.lang','runtime/RP/texts/ja_JP.lang',
    'runtime/RP/texts/ru_RU.lang','runtime/RP/texts/languages.json',
-   'runtime/RP/ui/hud_screen.json'})
+   'runtime/RP/ui/hud_screen.json',
+   'runtime/BP/items/depth_charge.json',
+   'runtime/BP/items/mystery_cocktail.json',
+   'runtime/BP/items/nether_special.json',
+   'runtime/BP/items/ice_grape.json',
+   'runtime/BP/items/shaker.json',
+   'runtime/RP/attachables/shaker.attachable.json',
+   'runtime/RP/attachables/shaker_active.attachable.json',
+   'runtime/RP/attachables/shaker_pouring.attachable.json',
+   'runtime/RP/textures/terrain_texture.json'})
 
 @lru_cache(maxsize=4)
 def rows(root):

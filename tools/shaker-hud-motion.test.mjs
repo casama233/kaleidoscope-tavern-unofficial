@@ -38,5 +38,5 @@ test('missing or delayed packets cannot continue the cursor across the timing wi
  assert.equal(step.duration,1/20);
  const last=Object.values(cursors.at(-1))[0];
  assert.deepEqual(last.$kt_cursor_from,last.$kt_cursor_to);
- assert(hud.kt_mixology_progress_wait.duration+hud.kt_mixology_progress_fade.duration<=0.1);
+ assert.equal(hud.kt_mixology_progress_wait.duration+hud.kt_mixology_progress_fade.duration,1/20);
 });

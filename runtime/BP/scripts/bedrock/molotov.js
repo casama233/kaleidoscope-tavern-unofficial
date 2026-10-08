@@ -4,12 +4,13 @@
  */
 import {system,world} from '@minecraft/server';
 import {emitBurst} from './effect-feedback.js';
+import {FIRE_NEIGHBORS,molotovFirePlacement} from '../core/molotov-fire.js';
 const NS='kaleidoscope_tavern';
 export const MOLOTOV=NS+':molotov',THROWN_MOLOTOV=NS+':thrown_molotov';
 const RESOLVED=NS+':molotov_resolved';
 const pending=new Map(),recent=new Map();
 let installed=false;
-export const molotovDiagnostics={starts:0,releases:0,earlyReleases:0,nativeProjectiles:0,impacts:0,duplicateImpacts:0,samples:[],errors:[]};
+export const molotovDiagnostics={starts:0,releases:0,earlyReleases:0,nativeProjectiles:0,impacts:0,duplicateImpacts:0,normalFires:0,soulFires:0,sideSupportedFires:0,unclassifiedSupports:0,samples:[],errors:[]};
 const at=(d,p)=>{try{return d.getBlock(p);}catch{return undefined;}};
 function recordError(e){const rows=molotovDiagnostics.errors;rows.push(String(e).slice(0,300));if(rows.length>8)rows.shift();}
 function sampleNative(entity,delayTicks=0){
@@ -45,7 +46,7 @@ export function installMolotovEvents(){
   if(e.id!=='kaleidoscope_tavern:molotov_diagnose'||e.sourceEntity?.typeId!=='minecraft:player')return;
   const p=e.sourceEntity;
   const own=molotovDiagnostics.samples.filter(x=>x.ownerId===p.id).map(x=>({tick:x.tick,delayTicks:x.delayTicks,speed:x.speed,spawnAboveFeet:x.spawnY-x.feetY,spawnBelowEye:x.headY-x.spawnY,heldTicks:x.release?.heldTicks??null}));
-  p.sendMessage('[Tavern Molotov] '+JSON.stringify({observedNativeProjectiles:own,clientAnimationConfirmed:false,delayedSampleIsNotInitialVelocity:true}));
+  p.sendMessage('[Tavern Molotov] '+JSON.stringify({observedNativeProjectiles:own,clientAnimationConfirmed:false,delayedSampleIsNotInitialVelocity:true,firePlacement:{normal:molotovDiagnostics.normalFires,soul:molotovDiagnostics.soulFires,adjacentFlammable:molotovDiagnostics.sideSupportedFires,unclassifiedLegacy:molotovDiagnostics.unclassifiedSupports,fullJavaPredicate:false}}));
  },{namespaces:['kaleidoscope_tavern']});
  world.afterEvents.projectileHitBlock.subscribe(resolveMolotovImpact);
  world.afterEvents.projectileHitEntity.subscribe(resolveMolotovImpact);
@@ -67,14 +68,22 @@ export function installMolotovEvents(){
 }
 export function igniteMolotov(dimension,location){
  const cx=Math.floor(location.x),cy=Math.floor(location.y),cz=Math.floor(location.z),radius=3;
+ // Only this impact's small neighborhood is read; no recurring world scan.
+ const blocks=new Map(),read=p=>{const key=p.x+','+p.y+','+p.z;if(!blocks.has(key))blocks.set(key,at(dimension,p));return blocks.get(key);};
  for(let dx=-radius;dx<=radius;dx++)for(let dz=-radius;dz<=radius;dz++){
   const dist=Math.sqrt(dx*dx+dz*dz),extra=dist-radius;
   if(extra>2||extra>0&&Math.random()>=(1-extra/2)*.6)continue;
   for(let dy=-1;dy<=1;dy++){
-   const p={x:cx+dx,y:cy+dy,z:cz+dz},b=at(dimension,p),below=at(dimension,{x:p.x,y:p.y-1,z:p.z});
-   // Adapter limit: this is not Java's full BaseFireBlock.canBePlacedAt
-   // predicate (side support, soul fire and portal rules remain separate).
-   if(b?.isAir&&below&&!below.isAir){try{b.setType('minecraft:fire');break;}catch{}}
+   const p={x:cx+dx,y:cy+dy,z:cz+dz},b=read(p);if(!b?.isAir)continue;
+   const neighbors=FIRE_NEIGHBORS.map(o=>read({x:p.x+o.x,y:p.y+o.y,z:p.z+o.z}));
+   const placement=molotovFirePlacement(b,neighbors[0],neighbors);if(!placement)continue;
+   try{
+    b.setType(placement.typeId);
+    molotovDiagnostics[placement.typeId==='minecraft:soul_fire'?'soulFires':'normalFires']++;
+    if(placement.support==='flammable_neighbor')molotovDiagnostics.sideSupportedFires++;
+    if(placement.support==='legacy_unclassified')molotovDiagnostics.unclassifiedSupports++;
+    break;
+   }catch(e){recordError(e);}
   }
  }
  for(const sound of ['firecharge.use','random.glass'])try{dimension.playSound(sound,location,{volume:2,pitch:1});}catch(e){recordError(e);}

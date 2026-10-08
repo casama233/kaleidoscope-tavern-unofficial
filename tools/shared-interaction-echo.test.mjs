@@ -1,9 +1,10 @@
 /** Current production callbacks against explicit API doubles, not native/player simulation. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {world,system,Player,GameMode,ItemStack,BlockPermutation} from '@minecraft/server';
 import {installJavaItemUseOnEvents} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
-import {installMixologyEvents} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {installMixologyEvents,completeCocktail,pickCupItem} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {installHolderEvents,holderDiagnostics} from '../runtime/BP/scripts/bedrock/holder.js';
 import {installStatefulStorageRoutes} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
 import {registerProtectedBreakRoute} from '../runtime/BP/scripts/bedrock/protected-break-router.js';
@@ -26,6 +27,31 @@ function breakBlock(p,b){const e={player:p,block:b,cancel:false};world.beforeEve
 function capture(fn){const warnings=[],old=console.warn;console.warn=x=>warnings.push(String(x));try{fn();}finally{console.warn=old;}return warnings;}
 function failures(warnings){return warnings.filter(x=>x.startsWith('[Tavern C2]'));}
 function holder(at){return block(at,NS+'holder',{[NS+'facing']:0,[NS+'holder_kind']:0});}
+
+test('animated native item entry preserves ordinary drink, Sneak placement, and creative pickup identities',()=>{
+ for(const name of ['depth_charge','mystery_cocktail','nether_special']){
+  const c=JSON.parse(readFileSync(new URL(`../runtime/BP/items/${name}.json`,import.meta.url),'utf8'))['minecraft:item'].components;
+  assert(!('minecraft:icon' in c),'An icon silently bypasses the animated item visual');
+  assert.deepEqual(c['minecraft:block_placer'],{block:NS+'cup_'+name,use_on:[{tags:'0'}]},'Native placement must not compete with normal drink');
+  assert.equal(c['minecraft:use_animation'],'drink');assert.equal(c['minecraft:use_modifiers'].use_duration,1.6);
+  assert.equal(c['minecraft:max_stack_size'],16);assert.deepEqual(c[NS+'cocktail_effects'],{});
+  for(const mode of [GameMode.Survival,GameMode.Creative]){
+   const ordinary=setup(NS+name,1,mode),floor=ground(ordinary.at);ordinary.p.isSneaking=false;aim(ordinary.p,floor);
+   // This entry test does not exercise the separate camera adapter.
+   ordinary.p.inputPermissions={isPermissionCategoryEnabled:()=>false};
+   assert.equal(interact(ordinary.p,floor).cancel,false,'Normal block use still falls through to native drinking');
+   assert.equal(itemUse(ordinary.p).cancel,false);system.advance(1);
+   assert.equal(d.getBlock(ordinary.at).typeId,'minecraft:air');
+   completeCocktail({source:ordinary.p,itemStack:ordinary.p.inventory.getItem(3)},()=>0.999999);
+   assert.equal(ordinary.p.inventory.getItem(3).typeId,mode===GameMode.Creative?NS+name:NS+'empty_glassware');
+   const placed=setup(NS+name,2,mode),target=ground(placed.at);placed.p.isSneaking=true;aim(placed.p,target);
+   assert.equal(interact(placed.p,target).cancel,true);system.advance(1);
+   assert.equal(d.getBlock(placed.at).typeId,NS+'cup_'+name);
+   assert.equal(placed.p.inventory.getItem(3).amount,mode===GameMode.Creative?2:1);
+   assert.equal(pickCupItem(d.getBlock(placed.at)).typeId,NS+name,'Creative pick must return the drink, not the cup render block');
+  }
+ }
+});
 
 test('native count-pattern replay: one cup and no false warnings from fallback B-A-B',()=>{
  const {p,at}=setup(),A=ground(at),B=ground({...at,z:2});p.isSneaking=true;

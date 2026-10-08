@@ -20,18 +20,30 @@
       "animations": {
         "hold_first": "animation.kt_mixology.hold_first",
         "hold_third": "animation.kt_mixology.hold_third",
-        "shake_first": "animation.kt_mixology.shake_first"
+        "shake_first": "animation.kt_mixology.shake_first",
+        "hold_first_left": "animation.kt_mixology.hold_first_left",
+        "hold_third_left": "animation.kt_mixology.hold_third_left",
+        "shake_first_left": "animation.kt_mixology.shake_first_left"
       },
       "scripts": {
         "animate": [
           {
-            "hold_first": "c.is_first_person && !(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)"
+            "hold_first": "c.item_slot != 'off_hand' && c.is_first_person && !(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)"
           },
           {
-            "hold_third": "!c.is_first_person"
+            "hold_third": "c.item_slot != 'off_hand' && !c.is_first_person"
           },
           {
-            "shake_first": "c.is_first_person && (q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)"
+            "shake_first": "c.item_slot != 'off_hand' && c.is_first_person && (q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)"
+          },
+          {
+            "hold_first_left": "c.item_slot == 'off_hand' && c.is_first_person && !(q.item_remaining_use_duration('off_hand') > 0 && q.item_remaining_use_duration('off_hand') >= 3594.45)"
+          },
+          {
+            "hold_third_left": "c.item_slot == 'off_hand' && !c.is_first_person"
+          },
+          {
+            "shake_first_left": "c.item_slot == 'off_hand' && c.is_first_person && (q.item_remaining_use_duration('off_hand') > 0 && q.item_remaining_use_duration('off_hand') >= 3594.45)"
           }
         ]
       },

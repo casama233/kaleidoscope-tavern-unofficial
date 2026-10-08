@@ -1,5 +1,7 @@
 /** Java CameraAnglesEvent uses signed angular displacement, not shake intensity.
- * Bedrock's ordinary gameplay camera has no additive roll setter in API 2.7.
+ * Camera.playAnimation has 3D rotation keyframes, but its documented free-camera
+ * path does not establish additive roll preserving native aim and held items.
+ * Do not switch the gameplay camera until that client behavior is verified.
  * This adapter keeps the source waveform but applies a small yaw delta instead.
  * It therefore also changes aim slightly; it is NOT exact Java camera-only roll.
  */

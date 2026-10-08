@@ -7,7 +7,7 @@ import {HUD_PREFIX,slotsPacket,progressPacket,hudSendDue,barrelHudEnabled} from 
 const last=new Map(),messages=new Map();
 export const shakerHudDiagnostics={sent:0,failures:0,lastError:''};
 const KEYS={
- NEED_THREE_INGREDIENTS:'kt.mixology.need_three',QUALITY_TOO_LOW:'kt.mixology.quality_low',
+ NEED_THREE_INGREDIENTS:'message.kaleidoscope_tavern.shaker.amount_too_low',
  RESULT_PENDING:'kt.mixology.result_pending',SHAKER_FULL:'kt.mixology.full',
  METADATA_ITEM_REJECTED:'kt.mixology.invalid_ingredient',NOT_SHAKER_INGREDIENT:'kt.mixology.invalid_ingredient',
  CUP_STATE_MISMATCH:'kt.mixology.cup_state_mismatch',CUP_SCHEMA:'kt.mixology.cup_state_mismatch',COCKTAIL_SCHEMA:'kt.mixology.cup_state_mismatch',
@@ -50,6 +50,13 @@ export function hideShakerHud(player){
 }
 export function showShakerMessage(player,code){
  if(code==='READY')return;
+ // Java's ingredient-quality rejection is a translated system-chat message.
+ // It does not claim the shared Actionbar or hide the shaker graphics.
+ if(code==='QUALITY_TOO_LOW'){
+  try{player.sendMessage({translate:'message.kaleidoscope_tavern.shaker.brew_level_too_low'});}
+  catch(error){shakerHudDiagnostics.failures++;shakerHudDiagnostics.lastError=String(error).slice(0,300);}
+  return;
+ }
  const key=KEYS[code]??KEYS.ERROR,previous=messages.get(player.id);
  if(previous?.key===key&&previous.until>system.currentTick)return;
  messages.set(player.id,{key,until:system.currentTick+40});

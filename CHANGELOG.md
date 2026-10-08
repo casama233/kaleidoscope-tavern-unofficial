@@ -1,5 +1,15 @@
 # Maintained changes
 
+## 0.6.131
+
+- Preserve direct-touch glassware hits, restore empty-seat orientation and transactional seat switching, and allow Java ordinary use in Adventure mode.
+- Complete source-routed offhand shaker storage, completion, pouring and left-hand poses; guard stale stops, cross-hand echoes, foreign cancellation and immediate retries.
+- Restore quiet shaker no-ops, original insufficient-ingredient text and chat delivery for low recipe quality.
+- Bind four animated item sprites to native item visuals and retain source frame timing and generated edge geometry.
+- Decouple Vision's new-target audio from unavailable Glowing and improve known Molotov fire-placement predicates.
+- Transact board material/data writes together and restore source trellis wax/axe consumption rules.
+- Pair with World Liquor 0.1.108 and Grilling 2.8.118; see [release notes](docs/RELEASE-NOTES-0.6.131.md) for scoped tests and unresolved native/client differences.
+
 ## 0.6.130
 
 - Reduce redundant rack/cabinet queries and visual setters; retain bounded repair and unloaded-owner safety.

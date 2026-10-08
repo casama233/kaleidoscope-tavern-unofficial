@@ -44,8 +44,8 @@ export function shakeAudio(player,ticks){if(ticks%10===0)heldShakerSound(player,
 export function finished(player){heldShakerSound(player,'kt_assets_a17.item.shaker.end',1,1);}
 // Third-person arm motion is registered on the PLAYER resource definition. An
 // attachable cannot animate nonexistent rightarm/leftarm bones on its owner.
-export function startShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_shake',{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:'q.main_hand_item_use_duration <= 0'}));}
-export function stopShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_idle',{controller:'kt_mixology_hands',blendOutTime:.08}));}
+export function startShakerHands(player,side='main'){optional(()=>player.playAnimation('animation.kt_mixology.player_shake'+(side==='off'?'_left':''),{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:side==='off'?"q.item_remaining_use_duration('off_hand') <= 0":'q.main_hand_item_use_duration <= 0'}));}
+export function stopShakerHands(player,side='main'){optional(()=>player.playAnimation('animation.kt_mixology.player_idle'+(side==='off'?'_left':''),{controller:'kt_mixology_hands',blendOutTime:.08}));}
 // Java pourResult changes the cup and emits particles/sound without an extra arm gesture.
 // Java ShakerItem.pourResult emits 20 EFFECT particles. Each private emitter
 // is one particle; constructor motion and original sprite frames are explicit.

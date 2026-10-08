@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.130
+## Current maintained baseline: 0.6.131
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -6,8 +6,8 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T130 repairs](docs/RELEASE-NOTES-0.6.130.md) reduce redundant bottle-display maintenance and idle shaker callbacks, complete scoped native effect behavior, register partial locales, and retain readable legacy shaker metadata. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/live acceptance remains separate.
-- The current reviewed public-family pair is Tavern **0.6.130**, World Liquor **0.1.107** and Grilling **2.8.117**. The [family lock](family/upstream.lock.json) and exact CI peers agree; the index links the six remaining workstreams and preserved reports.
+- [T131 repairs](docs/RELEASE-NOTES-0.6.131.md) restore direct touch, furniture and Adventure-mode use, route offhand shaker transactions and left-hand poses, bind animated items, and repair quiet feedback, Vision audio and board/farm transactions. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
+- The current public-family candidate is Tavern **0.6.131**, World Liquor **0.1.108** and Grilling **2.8.118**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -31,7 +31,7 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Exact player-camera roll is unimplemented; the current optional yaw adapter changes aim. Arbitrary signature colors have shading limits, and all view/hand/material combinations need paired client review. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. See the matrix for original-source and engine boundaries.
+Exact player-camera roll is unimplemented; the current optional yaw adapter changes aim. Arbitrary signature colors, full internal ingredient ItemStacks, wall outlines, the native board editor and dropped-shaker geometry retain explicit differences. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
 
 ## Licensing and history
 

@@ -78,9 +78,14 @@ def main(argv=None):
     for drink in ('depth_charge','nether_special'):
         key=f'kt_c3_{drink}'
         path=f'textures/kaleidoscope_tavern_jar/item/{drink}'
-        icon=docs[RT/f'BP/items/{drink}.json']['minecraft:item']['components']['minecraft:icon']
-        assert item_atlas[icon]['textures']==f'textures/kt_runtime/animated_items/{drink}/frame_00'
-        # Placed block atlas animation remains independent from the native item icon.
+        item=docs[RT/f'BP/items/{drink}.json']['minecraft:item']['components']
+        assert 'minecraft:icon' not in item,'Static icons bypass the terrain flipbook'
+        assert item['minecraft:block_placer']=={'block':f'kaleidoscope_tavern:cup_{drink}','use_on':[{'tags':'0'}]}
+        visual=docs[RT/f'BP/blocks/cup_{drink}.json']['minecraft:block']['components']['minecraft:item_visual']
+        assert visual['geometry']['identifier']==f'geometry.kt_runtime.item_sprite_{drink}'
+        assert visual['material_instances']['*']['texture']==key
+        # The native item visual uses this exact terrain tile, not just an
+        # otherwise unbound flipbook declaration.
         assert any(row['atlas_tile']==key and row['flipbook_texture']==path for row in flipbooks)
     assert item_atlas['kt_c3_signature_cocktail']['textures']=='textures/kt_runtime/signature/icon_default'
     from PIL import Image

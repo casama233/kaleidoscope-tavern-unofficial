@@ -5,16 +5,18 @@ import {externalEffectSource,externalEffectDefinition} from '../core/extension-c
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
+import {EquipmentSlot,EffectTypes,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
+import {createVisionFeedback} from '../core/vision-feedback.js';
 import {grassStealthPlant} from '../core/grass-stealth-plants.js';
 import {armorShouldWear} from '../core/armor-wear.js';
 import {livingEffectEntity} from '../core/living-effect-entity.js';
 import {motionBlockingHeight} from '../core/motion-blocking-height.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
+const visionFeedback=createVisionFeedback();let visionNativeChecked=false,visionNativeType;
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,visionOutline:'unchecked',grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function indexFastPlayer(p,state,before=state){
  // Keep an expired Ardent row pending until its per-tick finalization runs.
@@ -123,25 +125,41 @@ export function pulseGrassStealth(p){
   const exhaustion=p.getComponent?.('minecraft:player.exhaustion');
   if(exhaustion)exhaustion.setCurrentValue(Math.min(exhaustion.effectiveMax,exhaustion.currentValue+.1));
   // Native invisibility reduces new mob acquisition while the player is concealed.
-  // Bedrock Script API exposes no mob-target getter/setter to clear existing targets as Java does.
+  // Current Entity.target is documented read-only and pre-release, not a stable
+  // setter for clearing existing targets. This remains an invisibility adapter.
   p.addEffect('invisibility',12,{amplifier:0,showParticles:false});
   customEffectDiagnostics.grassStealthPulses++;customEffectDiagnostics.grassStealthEligible++;return true;
  }catch(e){error(e);return false;}
 }
 export function hasExtendedReach(p){try{return !!activeStatus(statusNow(p),'kaleidoscope_tavern:long_reach');}catch{return false;}}
 export function itemUseRayDistance(p){return extendedReachDistance(hasExtendedReach(p));}
+function nativeVisionType(){
+ if(!visionNativeChecked){
+  // Query the actual registry lazily, outside early execution. API acceptance
+  // would still need a rendered outline test; ordinary Bedrock has no Glowing.
+  visionNativeChecked=true;
+  try{visionNativeType=EffectTypes.getAll().find(type=>type.id==='minecraft:glowing'||type.id==='glowing');}catch(e){error(e);}
+  customEffectDiagnostics.visionOutline=visionNativeType?'native_available_unverified':'unavailable';
+ }
+ return visionNativeType;
+}
 export function pulseVision(p,amplifier){
  const radius=visionRadius(amplifier),source=p.getAABB(),min={x:source.center.x-source.extent.x-radius,y:source.center.y-source.extent.y-radius,z:source.center.z-source.extent.z-radius},volume={x:2*(source.extent.x+radius),y:2*(source.extent.y+radius),z:2*(source.extent.z+radius)};
- let targets=0,newGlow=false;
+ const nativeType=nativeVisionType(),now=system.currentTick;let targets=0,newTarget=false;
  for(const entity of p.dimension.getEntities({location:min,volume}))try{
   if(entity.id===p.id||entity.typeId.startsWith('kaleidoscope_tavern:seat_')||entity.hasTag?.('kaleidoscope_tavern:visual_helper'))continue;
   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
   if(!inflatedAabbIntersects(source,entity.getAABB(),radius))continue;
-  const wasGlowing=!!entity.getEffect?.('glowing');
-  entity.addEffect('glowing',60,{amplifier:0,showParticles:true});if(!wasGlowing)newGlow=true;targets++;
+  let wasGlowing=false;
+  if(nativeType)try{
+   wasGlowing=!!entity.getEffect(nativeType);
+   entity.addEffect(nativeType,60,{amplifier:0,showParticles:true});
+  }catch(e){error(e);}
+  if(visionFeedback.observe(entity.id,now,wasGlowing))newTarget=true;
+  targets++;
  }catch(e){error(e);}
  customEffectDiagnostics.visionPulses++;customEffectDiagnostics.visionTargets+=targets;
- if(newGlow)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}
+ if(newTarget)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}
  return targets;
 }
 export function handleTombRaider(event,rng=Math.random){
@@ -359,7 +377,7 @@ export function installCustomEffects(){
 
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
  world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));
- world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);});
+ world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);visionFeedback.forget(e.removedEntityId);});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});

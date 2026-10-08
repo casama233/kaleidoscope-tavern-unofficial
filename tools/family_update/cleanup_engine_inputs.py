@@ -89,9 +89,10 @@ def plan(root, context):
             assert_idle(engine)
             # A managed candidate is never reclassified as an ordinary probe.
             managed = next((p for p in [engine, *list(engine.parents)[:2]]
-                            if (p / 'deployment-result.json').exists() or
-                            (p / 'build-evidence.json').exists() or
-                            (p / 'release-candidate/family-receipt.json').exists()), None)
+                            if p != root and root in p.parents and
+                            ((p / 'deployment-result.json').exists() or
+                             (p / 'build-evidence.json').exists() or
+                             (p / 'release-candidate/family-receipt.json').exists())), None)
             binding = None
             if managed:
                 row = retired.get(str(managed))

@@ -250,6 +250,26 @@ def check_live_against_policy(inventory):
     receipt = read(policy['approved_receipt'])
     expected = {pack['uuid']: pack for pack in receipt['packs']}
     if CONFIG.get('startup_reconciliation'):
+        # The reconciliation describes the pre-deployment drift. Once the new
+        # receipt is approved, readback must compare against that receipt, not
+        # demand the retired private29 inventory again. Keep every pack, side,
+        # reference version and ordering check before accepting this path.
+        actual = {pack['uuid']: pack for pack in inventory['packs']}
+        matches_approved = (
+            len(actual) == len(inventory['packs']) == len(expected)
+            and set(actual) == set(expected)
+            and all(all(pack[key] == expected[uid][key]
+                        for key in ['side', 'version', 'files'])
+                    for uid, pack in actual.items())
+            and set(inventory['refs']) == set(receipt['order'])
+            and all(inventory['refs'][side] == [
+                {'pack_id': uid, 'version': expected[uid]['version']}
+                for uid in uids
+            ] for side, uids in receipt['order'].items())
+        )
+        if matches_approved:
+            assert G['audit'](W, policy)['ok'], 'Approved startup inventory failed family audit'
+            return policy
         from family_update.startup26_reconciliation import review as review_startup
         review_startup(inventory,expected,receipt['order'])
         return policy

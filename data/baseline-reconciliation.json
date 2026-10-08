@@ -3465,6 +3465,11 @@
       "before": null,
       "after": "b2de4e0275cce73374ca6186377fdabe21de409559c225f883689de32e53120e",
       "reason": "Reviewed T0.6.122 original self instant heal/harm dispatch, source arithmetic and class/tag mapping. Exact source/callback regressions and scoped Native observations are in INSTANT-HEALTH-DISPATCH-PROTOTYPE.md; unknown hooks, damage Holder/knockback/event/client boundaries remain pending. Test-only preservation view, never a packaging patch."
+    },
+    "runtime/BP/scripts/core/machine-visuals.js": {
+      "before": null,
+      "after": "53950f1b371e5bf596d04746fb587d1c190e699938af3a751a9598db14f6e434",
+      "reason": "Independent canonical implementation of reviewed author 1.0.1 external-fluid visual ownership and selection. No author private script copied."
     }
   },
   "reviewedFunctionalDeltas": {
@@ -3864,6 +3869,75 @@
               148,
               150,
               "  refresh:()=>{if(disposed)return false;dirty=true;return queue();},\n  getStatus:()=>({active,disposed,hostReady,dirty,successfulTransfers,transmittedTransfers:successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false,receiptConfirmed:false,deliveryState:disposed?'disposed':!hostReady?'host_not_ready':active?'transmitting':dirty&&sendFailures?'send_failed':lastRevision?'sent_unconfirmed':'waiting_to_send'}),\n"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "release": "0.6.125",
+      "files": {
+        "runtime/BP/scripts/core/registry.js": {
+          "before": "d7110718b1bb97439fd4162dc0c59d6c66657a7d2d22d5839270409b2e86c1d0",
+          "after": "0ff2da399335ea073fe918856ef4003a9ac86cc38e18e5429b49f875e9d8c5d9",
+          "reason": "Reviewed author Bedrock 1.0.1 external-fluid visual contract and scoped helper immunity; retains canonical gameplay and saved ownership. See RELEASE-NOTES-0.6.125.md.",
+          "reverseOps": [
+            [
+              0,
+              1,
+              ""
+            ],
+            [
+              9,
+              10,
+              "export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback','shaker_ingredient_tags','drink_source_labels','shaker_color_catalog','java_ingredient_predicates','native_ingredient_tags','automatic_bottle_inputs']);\n"
+            ],
+            [
+              140,
+              144,
+              "   // Reuse a verified native liquid rig; external arbitrary entity names are not accepted.\n   check(this.baseFluids.some(x=>x.rigSuffix===f.rigSuffix),'INVALID_FLUID_VISUAL');fluid.rigSuffix=f.rigSuffix;return fluid;\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/machines.js": {
+          "before": "bac8f020aa99f2ea04564340df3b2344d2f29c517d31dad3483a702f5a4bc650",
+          "after": "4036587005b4914255f6e466a69d1074ddbf0573e642ace3aa639d47ae50f9c4",
+          "reason": "Reviewed author Bedrock 1.0.1 external-fluid visual contract and scoped helper immunity; retains canonical gameplay and saved ownership. See RELEASE-NOTES-0.6.125.md.",
+          "reverseOps": [
+            [
+              25,
+              26,
+              "import {RUNTIME_VISUALS} from '../data/visuals.js';\n"
+            ],
+            [
+              85,
+              86,
+              "function nearbyVisuals(core){return core.dimension.getEntities({families:['kt_runtime_visual'],location:{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},maxDistance:1});}\n"
+            ],
+            [
+              92,
+              93,
+              " if(state.amount>0&&fluid?.rigSuffix&&(state.kind!=='barrel'||state.open))wanted.push(NS+':rig_liquid_'+state.kind+'_'+fluid.rigSuffix+'_visual');\n"
+            ],
+            [
+              99,
+              100,
+              "  if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},{initialRotation:yaw});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}\n"
+            ],
+            [
+              101,
+              102,
+              "  if(type.includes('rig_liquid_'))entity.setProperty('kt_art:amount',state.amount);\n"
+            ],
+            [
+              406,
+              408,
+              ""
+            ],
+            [
+              430,
+              431,
+              "  if(!RUNTIME_VISUALS.includes(entity.typeId))return;\n"
             ]
           ]
         }

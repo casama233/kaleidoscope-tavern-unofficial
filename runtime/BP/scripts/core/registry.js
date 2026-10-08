@@ -1,3 +1,4 @@
+import {normalizeFluidVisuals} from './machine-visuals.js';
 import {normalizeFoundation} from './extension-foundation.js';
 import {installContent} from './extension-content.js';
 import {SHAKER_INPUTS} from '../data/mixology.js';
@@ -6,7 +7,7 @@ import {expandShakerTags} from './shaker-tags.js';
 import {normalizeCategoryData,ingredientPredicate,buildCategoryCatalog,matchShakerRecipe,deriveBottleInputs,colorTag,COLOR_TAG_PREFIX} from './mixology-categories.js';
 import {check,id,integer,clone,freeze,localeMap,sorted,TavernError} from './util.js';
 export const API_VERSION=1;
-export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','bottle_display_states','destruction_feedback','shaker_ingredient_tags','drink_source_labels','shaker_color_catalog','java_ingredient_predicates','native_ingredient_tags','automatic_bottle_inputs']);
+export const CAPABILITIES=Object.freeze(['barrel_recipes','pressing_recipes','guide_pages','guide_product_pages','recipe_auto_pages','atomic_extension_replace','chunk_transport','acknowledgements','shaker_recipes','shaker_batch_snapshot','native_potion_inputs','external_shaker_inputs','drink_content','furniture_storage','external_effect_lifecycle','custom_fluids','external_fluid_visuals','bottle_display_states','destruction_feedback','shaker_ingredient_tags','drink_source_labels','shaker_color_catalog','java_ingredient_predicates','native_ingredient_tags','automatic_bottle_inputs']);
 const CORE='kaleidoscope_tavern';
 function own(value,source){id(value);check(value.startsWith(source+':'),'FOREIGN_NAMESPACE',value);return value;}
 function options(value){check(Array.isArray(value)&&value.length>0&&value.length<=64,'INVALID_INGREDIENT');return [...new Set(value.map(id))].sort();}
@@ -137,8 +138,10 @@ export class ExtensionRegistry {
    const fluid={id:own(f.id,source),filled:own(f.filled,source),empty:id(f.empty??'minecraft:bucket'),title:localeMap(f.title)};
    check(this.itemExists(fluid.filled)&&this.itemExists(fluid.empty),'UNKNOWN_FLUID_CONTAINER');
    check(fluid.empty==='minecraft:bucket','INVALID_EMPTY_BUCKET');
-   // Reuse a verified native liquid rig; external arbitrary entity names are not accepted.
-   check(this.baseFluids.some(x=>x.rigSuffix===f.rigSuffix),'INVALID_FLUID_VISUAL');fluid.rigSuffix=f.rigSuffix;return fluid;
+   const visuals=normalizeFluidVisuals(f.visuals,source);
+   if(f.rigSuffix!==undefined){check(this.baseFluids.some(x=>x.rigSuffix===f.rigSuffix),'INVALID_FLUID_VISUAL');fluid.rigSuffix=f.rigSuffix;}
+   check(visuals||fluid.rigSuffix,'INVALID_FLUID_VISUAL');
+   if(visuals)fluid.visuals=visuals;return fluid;
   });
   check(new Set(customFluids.map(f=>f.id)).size===customFluids.length&&new Set(customFluids.map(f=>f.filled)).size===customFluids.length,'DUPLICATE_FLUID');
   const availableFluids=new Set([...this.fluids,...customFluids.map(f=>f.id)]);

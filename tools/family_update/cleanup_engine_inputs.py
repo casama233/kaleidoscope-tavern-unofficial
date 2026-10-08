@@ -111,6 +111,14 @@ def asset_targets(engine, root, mounts, comparison_cache):
                         continue
                     metadata = target_metadata(target, root, mounts)
                     prefix = target.relative_to(pack).as_posix()
+                    source_root = candidate / 'resource_packs' / uid / prefix
+                    if not source_root.is_dir():
+                        pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
+                        continue
+                    # Validate the source subtree once, rather than rescan all
+                    # mount ancestors for every image. Individual identities
+                    # still bind every compared file and deletion boundary.
+                    retention._walk(source_root, root, mounts)
                     checks = {}
                     for rel in metadata['files']:
                         copy = target / rel
@@ -118,7 +126,6 @@ def asset_targets(engine, root, mounts, comparison_cache):
                         digest = packs[uid]['files'].get(prefix + '/' + rel)
                         if not digest or not source.is_file() or source.is_symlink():
                             break
-                        retention._safe_path(source, root, mounts)
                         identities = [retention._stat(copy), retention._stat(source)]
                         key = (str(copy), str(source), digest, tuple(identities[0]), tuple(identities[1]))
                         if key not in comparison_cache:

@@ -7,6 +7,7 @@ import {visibleEffects,effectTime,effectLevel,effectBarMessage,createEffectBar,E
 import {addStatus,advanceStatus,activeStatus,CUSTOM_IMPLEMENTED,CUSTOM_INSTANT} from '../runtime/BP/scripts/core/custom-effects.js';
 import {installContent} from '../runtime/BP/scripts/core/extension-content.js';
 import {normalizeFoundation} from '../runtime/BP/scripts/core/extension-foundation.js';
+import {checkRuntimeEntrypoint,runtimeEntrypointSource} from './runtime-entrypoint.mjs';
 const A='kaleidoscope_tavern:slightly_tipsy',B='kaleidoscope_world_liquor:reverse_gravity';
 const row=(id=A,ticks=1200,amplifier=0)=>({id,ticks,amplifier});
 const state=(...entries)=>({schema:1,entries});
@@ -101,9 +102,19 @@ test('leaving and reconnecting resets only display timing',()=>{
  const f=fixture();f.bar.pause('a',0);f.bar.tick([],20);f.bar.tick([f.a],40);assert.equal(f.writes.length,1);f.bar.forget('a');f.bar.tick([f.a],41);assert.equal(f.writes.length,2);
 });
 test('entrypoint installs once; no new UI/native-effect writes in bar',()=>{
- const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');const entry=read('runtime/BP/scripts/main.js'),adapter=read('runtime/BP/scripts/bedrock/effect-bar.js');
- assert(entry.includes('installEffectBar();'));assert(adapter.includes('if(installed)return;installed=true;'));assert(adapter.includes('status:statusNow'));assert(adapter.includes('busy:isTavernHudBusy'));
+ const adapter=readFileSync(new URL('../runtime/BP/scripts/bedrock/effect-bar.js',import.meta.url),'utf8');
+ const entry=checkRuntimeEntrypoint();assert.equal(entry.installers.filter(name=>name==='installEffectBar').length,1);
+ assert(adapter.includes('if(installed)return;installed=true;'));assert(adapter.includes('status:statusNow'));assert(adapter.includes('busy:isTavernHudBusy'));
  assert(!/setDynamicProperty|addEffect\(|setTitle\(|setHudVisibility|sendMessage/.test(adapter));
+});
+test('entrypoint observation rejects extra immediate or deferred installation',()=>{
+ const source=runtimeEntrypointSource();
+ for(const broken of [
+  source+'\ninstallEffectBar();\n',
+  source+'\nsystem.run(()=>installMolotovEvents());\n',
+ ]){
+  assert.throws(()=>checkRuntimeEntrypoint(broken),/Entrypoint load order or installation count changed/);
+ }
 });
 test('all host timed effects have English and Chinese name translations',()=>{
  const dir=new URL('../runtime/RP/texts/',import.meta.url);

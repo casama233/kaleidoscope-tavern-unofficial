@@ -23,7 +23,7 @@ class BaselineGateTests(unittest.TestCase):
   with self.assertRaises(SystemExit) as caught:fn()
   self.assertIn(part,str(caught.exception))
  def edit_runtime(self):(self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
- def test_valid_clean_release(self):gate.check(self.config,release=True,history_base=self.base,identity=True)
+ def test_valid_clean_release(self):gate.check(self.config,release=True,history_base=self.base)
  def test_metadata_version_rejected(self):
   (self.root/'package.json').write_text('{"version":"0.0.1"}')
   self.reject('package.json version',lambda:gate.validate(self.config))
@@ -42,11 +42,23 @@ class BaselineGateTests(unittest.TestCase):
  # Release tier: identity must match the frozen baseline and history.
  def test_runtime_edit_rejected_for_release(self):
   self.edit_runtime()
-  self.reject('runtime changed',lambda:gate.check(self.config,identity=True))
+  self.git('commit','-qam','Commit unfrozen runtime change')
+  self.reject('runtime changed',lambda:gate.check(self.config,release=True,identity=False))
  def test_reused_version_rejected_for_release(self):
   self.edit_runtime()
+  self.git('commit','-qam','Commit reused release content')
   config=copy.deepcopy(self.config);config['source_trees'],_=gate.validate(config)
-  self.reject('release identity',lambda:gate.check(config,identity=True))
+  self.reject('release identity',lambda:gate.check(config,release=True))
+ def test_explicit_identity_check_rejects_unfrozen_development(self):
+  self.edit_runtime()
+  self.reject('runtime changed',lambda:gate.check(self.config,identity=True))
+ def test_matching_archive_cannot_certify_unfrozen_runtime(self):
+  self.edit_runtime();self.git('commit','-qam','Commit unfrozen runtime for archive')
+  archive=self.root/'unfrozen.mcaddon'
+  with zipfile.ZipFile(archive,'w') as z:
+   for side,rows in self.files.items():
+    for path in rows:z.writestr(side+'/'+path,(self.root/self.config['runtime'][side]/path).read_bytes())
+  self.reject('runtime changed',lambda:gate.check(self.config,archive=archive,identity=False))
  def test_receipt_requires_identity(self):
   self.reject('--receipt requires --identity',lambda:gate.require_identity_for_receipt(Path('r.json'),False))
   gate.require_identity_for_receipt(Path('r.json'),True);gate.require_identity_for_receipt(None,False)

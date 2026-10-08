@@ -11,6 +11,8 @@
 
 Historical artifacts and branches are evidence, not release input. A PR being closed or merged does not prove its content survives in the resulting tree. Reconcile by behaviour and verify the resulting source/export.
 
+Development `check` permits unfrozen runtime edits while retaining structural and append-only history checks. `check --release` always adds frozen identity and clean-commit checks; `--archive` also requires frozen identity. Installable CI archives and family assembly use these strict boundaries. `--identity` can check an unfinished worktree without requiring a clean commit; it is never needed as a second opt-in at a release boundary.
+
 Family operations and integration tooling: `casama233/kaleidoscope-tavern-unofficial/family/MAINTENANCE.md`.
 
 Release freeze now claims the version and exact runtime trees in Git’s shared common directory before changing locks. All local worktrees and known remote-tracking histories are checked for collisions. A conflicting or incomplete claim must be preserved for review; choose a new release version instead of deleting or rewriting it. This coordination guard does not replace PR checks or fresh family deployment evidence.

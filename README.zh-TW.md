@@ -1,6 +1,8 @@
-## Current maintained baseline: 0.6.127
+## Current maintained baseline: 0.6.128
 
 # 森羅物語：酒館（非官方）
+
+T128 已修復可安裝輸出的凍結身分檢查，以及手持雪克杯的名稱／資料保存與取消操作；[變更及驗收範圍](docs/RELEASE-NOTES-0.6.128.md)。[PR 處置索引](docs/audit/PR-DISPOSITIONS.md) 保留尚未完成的獨有工作。
 
 Java酒館的基岩版移植，包含釀造、調酒、酒架／酒櫃、家具與獨立酒館指南。指南保留共用七入口；Cookery整合使用同一份內容。[English](README.md)。
 

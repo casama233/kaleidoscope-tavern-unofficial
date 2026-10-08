@@ -60,10 +60,23 @@ export function readPortableItem(item){
  const raw=item.getDynamicProperty(PORTABLE_DATA);
  return raw===undefined?{schema:1,token:token(),state:emptyShaker()}:decodePortable(raw);
 }
-function portable(state,id){
- const item=makeStack(SHAKER,1);item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,id));
+function portableLore(state){
  const ids=state.result?[state.result.item]:state.slots.map(x=>x.item);
- item.setLore(ids.map(x=>({rawtext:[{text:'§7▶ '},{translate:`item.${x}.name`}]})));
+ return ids.map(x=>({rawtext:[{text:'§7▶ '},{translate:`item.${x}.name`}]}));
+}
+function ownsPortableLore(item,previous){
+ try{
+  const raw=typeof item.getRawLore==='function'?item.getRawLore():item.getLore?.();
+  return Array.isArray(raw)&&(raw.length===0||canonical(raw)===canonical(portableLore(previous)));
+ }catch{return false;}
+}
+function portable(state,id,current,previous){
+ // Same-ID held transitions retain native metadata. A fresh block pickup has
+ // no carried ItemStack and still creates its own portable representation.
+ if(current)check(current.typeId===SHAKER&&current.amount===1,'NOT_PORTABLE_SHAKER');
+ const item=current?current.clone():makeStack(SHAKER,1);
+ item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,id));
+ if(!current||ownsPortableLore(current,previous))item.setLore(portableLore(state));
  return item;
 }
 function resultItem(result){
@@ -152,7 +165,11 @@ function finishUse(player,elapsed,automatic=false){
  const next=finishShake(use.carried.state,elapsed,registry.findShaker(use.carried.state.slots),registry);
  // Remove session before replacing the item: native stop/release may both fire.
  uses.delete(player.id);if(automatic)releaseGuards.set(player.id,{slot:use.slot,tick:system.currentTick});
- try{replaceHeld(player,current,portable(next,use.carried.token));}
+ try{
+  // An aborted shake has no item transition. Retain even the original raw
+  // property bytes and avoid publishing an unnecessary inventory change.
+  if(canonical(next)!==canonical(use.carried.state))replaceHeld(player,current,portable(next,use.carried.token,current,use.carried.state));
+ }
  catch(error){stopShakerHands(player);hideShakerHud(player);throw error;}
  stopShakerHands(player);hideShakerHud(player);
  if(next.result){mixologyDiagnostics.completed++;finished(player);}
@@ -207,7 +224,7 @@ export function pourHeldShakerNow(player,block){
   check(tx.result.carrier===EMPTY_CUP&&isCupItem(tx.result.item),'WRONG_SERVING_CONTAINER');check(ItemTypes.get(tx.result.item),'OUTPUT_PACK_MISSING');
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};
   if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
-  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm(cupBlock(next.item),next.facing));
+  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token,item,carried.state),count:1}],block,perm(cupBlock(next.item),next.facing));
   syncCupVisual(block);playWorldSound(block.dimension,'bottle.fill',block.location,{volume:1,pitch:1});cocktailEffect(block,20);hideShakerHud(player);return next;
  });
 }

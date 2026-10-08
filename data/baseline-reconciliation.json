@@ -3991,6 +3991,108 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.128",
+      "reviewedPredecessorCommit": "1afc72e7e8a25ba32f538cc74244925f5c432175",
+      "reviewedSourceCommit": "2a0ef3b3f9a3f6d3dacad019bdb0f8f069fd0280",
+      "files": {
+        "runtime/BP/scripts/main.js": {
+          "before": "ff7b2d82389497b880c3240475dfb642113bdde512c438541bdbb3e659c7e2da",
+          "after": "67e893d3a2891387df6de6c51deb3429819463ad56b4b5d08fe25a811861a66d",
+          "reason": "PR284 entrypoint phase tables preserve the T127 import order, all 16 component registrations, all 25 event installers, original event forwarding and deferred bootstrap. Production-body traces against isolated imported interfaces match both revisions and reject removed, repeated or reordered installers. This test-only historical view does not certify imported module evaluation, native loading or client behavior.",
+          "regressionTest": "tools/effect-bar.test.mjs",
+          "reverseOps": [
+            [
+              50,
+              56,
+              ""
+            ],
+            [
+              60,
+              162,
+              "export function diagnosticSnapshot(){return {build:BUILD_VERSION,furniture:furnitureDiagnostics,extensionFurniture:extensionFurnitureDiagnostics,decorations:decorationDiagnostics,writingBoards:WRITING_BOARD_DIAGNOSTICS,sonic:combatDiagnostics,customEffects:customEffectDiagnostics,effectBar:effectBarDiagnostics,effectIcons:effectIconDiagnostics,potions:{...potionDiagnostics,capabilities:potionCapabilities()},nativeInput:nativeUseDiagnostics,immersion:immersionDiagnostics,feedback:feedbackDiagnostics,mixology:mixologyDiagnostics,drinkEffects:effectDiagnostics,instantEffects:instantEffectDiagnostics,storageProjectiles:storageProjectileDiagnostics,molotov:molotovDiagnostics,displayProjectiles:displayProjectileDiagnostics,qualityTooltip:qualityTooltipDiagnostics,creativePick:creativePickDiagnostics,cultivation:true,bottlePlacement:true,holderStorage:holderDiagnostics,tiltedRackStorage:tiltedRackDiagnostics,circularRackStorage:circularRackDiagnostics,barCabinetStorage:barCabinetDiagnostics,cellarCabinetStorage:cellarCabinetDiagnostics,storageHit:storageHitDiagnostics,nativeStoragePinning:nativeStoragePinningDiagnostics,artBaseline:'A17 (engine review pending)',cookeryManifestBound:false,cookeryHandshakeObserved:cookeryReady,cookeryCapabilities,cookeryGuideChapter:cookeryGuidePublisher.getStatus(),guideAuthority:'kaleidoscope_tavern:guidebook',cookeryGuideIntegration:true,standaloneGuide:standaloneGuideDiagnostics,legacyGuideAliases:true,extensions:registry?.list()??[],recipes:registry?.allRecipes().length??0,recentMachineErrors:machineDiagnostics.errors,engineAcceptance:'NOT_RUN_BY_AUTHOR'};}\n"
+            ],
+            [
+              172,
+              173,
+              ""
+            ],
+            [
+              174,
+              175,
+              ""
+            ],
+            [
+              176,
+              181,
+              " registerNaturalBreak(ev);\n registerExtensionFurnitureComponents(ev);registerFurnitureComponents(ev);registerDecorationComponents(ev);registerWritingBoardComponents(ev);registerMachineComponents(ev);registerMixologyComponents(ev);registerCultivation(ev);registerBottleComponents(ev);registerTapSourceComponents(ev);registerHolderComponents(ev);registerTiltedRackComponents(ev);registerCircularRackComponents(ev);registerBarCabinetComponents(ev);registerCellarCabinetComponents(ev);registerDrinkEffects(ev);\n ev.itemComponentRegistry.registerCustomComponent('kaleidoscope_tavern:legacy_guide',{onUse:e=>{const slot=e.source?.selectedSlotIndex,expectedId=e.itemStack?.typeId;system.run(()=>migrateLegacyGuide(e.source,{slot,expectedId}));}});\n"
+            ],
+            [
+              182,
+              185,
+              "installInstantEffects();installPickupOverflowEvents();installFurnitureEvents();installDecorationEvents();installWritingBoardEvents();installCustomEffects();installMixologyEvents();installEffectBar();installEffectIcons();installMachineEvents();installCultivation();installStorageProjectileEvents();installMolotovEvents();installTapSourceEvents();installHolderEvents();installTiltedRackEvents();installCircularRackEvents();installBarCabinetEvents();installCellarCabinetEvents();installBottleEvents();installVanillaBottleDisplayEvents();installDisplayProjectileEvents();installQualityTooltipEvents();installCreativePickEvents();installJavaItemUseOnEvents();\n"
+            ],
+            [
+              186,
+              194,
+              " if(ev.id==='kaleidoscope_cookery:api_ready'&&ev.sourceType===ScriptEventSource.Server){try{const p=JSON.parse(ev.message);cookeryReady=p.api===1;registerFamilyDisplays(p);cookeryCapabilities=Array.isArray(p.capabilities)?p.capabilities.filter(x=>typeof x==='string').slice(0,32):[];}catch{}}\n"
+            ],
+            [
+              195,
+              196,
+              ""
+            ],
+            [
+              201,
+              206,
+              "  const missing=[];for(const r of recipes){const ids=r.kind!=='pressing'?[...r.ingredients.flat(),r.carrier,...(r.output.byQuality??[r.output.item])]:r.input;for(const id of ids)if(!ItemTypes.get(id))missing.push(id);}\n"
+            ],
+            [
+              207,
+              218,
+              "  registry=new ExtensionRegistry({recipes,pages:[...GUIDE_PAGES,...EFFECT_PAGES,...MIXOLOGY_PAGES],fluids:FLUIDS,itemExists:id=>!!ItemTypes.get(id),itemTags:id=>{try{return new ItemStack(id,1).getTags();}catch{return [];}}});registry.subscribe(()=>cookeryGuidePublisher.refresh());setRegistry(registry);setMixologyRegistry(registry);const extensionFurniture=installExtensionFurniture(registry);\ninstallFoundationBridge(registry,extensionFurniture);installExtensionHost(registry);cookeryGuidePublisher.refresh();\n"
+            ],
+            [
+              222,
+              223,
+              ""
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "release": "0.6.128",
+      "files": {
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "960b8025e8a4ed10ad00dab7f83959e441e375dd3f81de364617cb2efa199e09",
+          "after": "0b080bb88e474e64ae022dbd35d633610852abe5a9ced18a5ce42b2a94e905d8",
+          "reason": "Preserve native carried shaker metadata on completed shake and serving, leave aborted shake bytes untouched; production callbacks retain current registry resolution and transaction rollback. See tools/shaker-item-retention.test.mjs.",
+          "reverseOps": [
+            [
+              62,
+              63,
+              "function portable(state,id){\n const item=makeStack(SHAKER,1);item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,id));\n"
+            ],
+            [
+              64,
+              79,
+              " item.setLore(ids.map(x=>({rawtext:[{text:'§7▶ '},{translate:`item.${x}.name`}]})));\n"
+            ],
+            [
+              167,
+              172,
+              " try{replaceHeld(player,current,portable(next,use.carried.token));}\n"
+            ],
+            [
+              226,
+              227,
+              "  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token),count:1}],block,perm(cupBlock(next.item),next.facing));\n"
+            ]
+          ]
+        }
+      }
     }
   ]
 }

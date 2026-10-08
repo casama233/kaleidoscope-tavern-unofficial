@@ -52,15 +52,19 @@ export function cookery106WirePayload(payload){
  return {...payload,entries,names};
 }
 
-export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,revision=COOKERY_GUIDE_REVISION}={}){
+export function* prepareCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,revision=COOKERY_GUIDE_REVISION}={}){
  if(!payload||payload.api!==1||payload.id!=='kaleidoscope_tavern:tavern')throw new TypeError('Invalid Tavern guide payload.');
  if(typeof source!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(source)||typeof revision!=='string'||!/^[a-zA-Z0-9_.-]+$/.test(revision))throw new TypeError('Invalid Cookery guide envelope.');
- const raw=JSON.stringify(cookery106WirePayload(payload));
- const chunks=[];let part='',bytes=0;
- // Split on Unicode code points and enforce the stricter UTF-8 byte budget.
- // Escaping every Chinese character consumed twice as much transfer capacity.
- for(const char of raw){const size=utf8Bytes(char);if(bytes+size>COOKERY_GUIDE_CHUNK_SIZE){chunks.push(part);part='';bytes=0;}part+=char;bytes+=size;}
- if(part)chunks.push(part);
+ // Keep expensive stages apart and slice once per packet, not once per character.
+ const wire=cookery106WirePayload(payload);yield;
+ const raw=JSON.stringify(wire);yield;
+ const chunks=[];let start=0,bytes=0;
+ for(let i=0;i<raw.length;){
+  const code=raw.codePointAt(i),size=code<128?1:code<2048?2:code<65536?3:4;
+  if(bytes+size>COOKERY_GUIDE_CHUNK_SIZE){chunks.push(raw.slice(start,i));start=i;bytes=0;yield;}
+  bytes+=size;i+=code>65535?2:1;
+ }
+ if(start<raw.length)chunks.push(raw.slice(start));
  if(!chunks.length||chunks.length>512)throw new RangeError('Guide exceeds Cookery v1 transfer capacity.');
  const envelope={api:1,source,id:payload.id,revision};
  const messages=[
@@ -68,16 +72,22 @@ export function encodeCookeryGuideMessages(payload,{source=COOKERY_GUIDE_SOURCE,
   ...chunks.map((data,index)=>({id:COOKERY_GUIDE_EVENTS.chunk,message:[source,payload.id,revision,index,data].join('\n')})),
   {id:COOKERY_GUIDE_EVENTS.end,message:JSON.stringify(envelope)}
  ];
- for(const m of messages)if(utf8Bytes(m.message)>2048)throw new RangeError('Unsafe Cookery guide Script Event packet.');
+ for(const m of messages){if(utf8Bytes(m.message)>2048)throw new RangeError('Unsafe Cookery guide Script Event packet.');yield;}
  return messages;
+}
+
+/** Synchronous tooling API; runtime drains the same preparation over several ticks. */
+export function encodeCookeryGuideMessages(payload,options){
+ const job=prepareCookeryGuideMessages(payload,options);let step;
+ do{step=job.next();}while(!step.done);return step.value;
 }
 
 export function installCookeryGuidePublisher(system,payloadOrProvider,warn=console.warn,info=console.log){
  if(!system?.afterEvents?.scriptEventReceive||typeof system.sendScriptEvent!=='function')throw new TypeError('Stable Script Events are required.');
  const provider=typeof payloadOrProvider==='function'?payloadOrProvider:()=>payloadOrProvider;
  const dynamic=typeof payloadOrProvider==='function';
+ let generation=0,prepared=null,preparationBuilds=0,preparationSlices=0,maxPreparationSliceMs=0;
  let active=false,disposed=false,hostReady=false,dirty=true,lastSent=-Infinity,successfulTransfers=0,sendFailures=0,runningHandle,queuedHandle,lastRevision=null,lastMessageCount=0;
- try{const initial=provider(),revision=dynamic?cookeryGuideRevision(initial):COOKERY_GUIDE_REVISION;lastMessageCount=encodeCookeryGuideMessages(initial,{revision}).length;}catch{/* surfaced on first host-ready publish */}
  const scheduled=new Set();
  const later=(fn,ticks)=>{const handle=system.runTimeout(()=>{scheduled.delete(handle);if(!disposed)fn();},ticks);scheduled.add(handle);return handle;};
  const queue=()=>{
@@ -89,12 +99,34 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
  function transmit(){
   if(disposed||active||!hostReady)return false;
   if(system.currentTick-lastSent<120)return queue();
-  let payload,messages,revision;
-  try{
-   payload=provider();revision=dynamic?cookeryGuideRevision(payload):COOKERY_GUIDE_REVISION;
-   messages=encodeCookeryGuideMessages(payload,{revision});lastMessageCount=messages.length;
-  }catch(error){sendFailures++;dirty=true;warn('[Tavern guide] Build failed: '+String(error));return false;}
-  active=true;dirty=false;let cursor=0;
+  active=true;dirty=false;
+  const buildGeneration=generation;
+  let messages,revision,cursor=0;
+  function* prepare(){
+   if(prepared?.generation===buildGeneration)return prepared;
+   preparationBuilds++;
+   const payload=provider();yield;
+   const revision=dynamic?cookeryGuideRevision(payload):COOKERY_GUIDE_REVISION;yield;
+   const messages=yield* prepareCookeryGuideMessages(payload,{revision});
+   return {generation:buildGeneration,revision,messages};
+  }
+  const job=prepare();
+  const prepareStep=()=>{
+   const started=Date.now();
+   try{
+    // Wall-time budget plus a hard bound keeps fake/frozen clocks safe too.
+    for(let n=0;n<16;n++){
+     const result=job.next();
+     if(result.done){
+      prepared=result.value;messages=prepared.messages;revision=prepared.revision;
+      lastMessageCount=messages.length;runningHandle=later(step,1);return;
+     }
+     if(Date.now()-started>=2)break;
+    }
+    runningHandle=later(prepareStep,1);
+   }catch(error){active=false;dirty=true;sendFailures++;warn('[Tavern guide] Build failed: '+String(error));}
+   finally{preparationSlices++;maxPreparationSliceMs=Math.max(maxPreparationSliceMs,Date.now()-started);}
+  };
   const step=()=>{
    if(disposed){active=false;return;}
    try{
@@ -103,7 +135,7 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
     else{active=false;lastSent=system.currentTick;lastRevision=revision;successfulTransfers++;if(successfulTransfers===1)info('[Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.');if(dirty)queue();}
    }catch(error){active=false;dirty=true;sendFailures++;warn('[Tavern guide] Publish failed: '+String(error));if(sendFailures<=2)later(()=>queue(),40);}
   };
-  runningHandle=later(step,1);return true;
+  runningHandle=later(prepareStep,1);return true;
  }
  const receive=ev=>{
   if(disposed||ev.id!==COOKERY_GUIDE_EVENTS.ready)return;
@@ -114,8 +146,8 @@ export function installCookeryGuidePublisher(system,payloadOrProvider,warn=conso
  for(const ticks of [1,40,200])later(ping,ticks);
  later(()=>{if(!hostReady)info('[Tavern guide] Optional Cookery host not detected; chapter publication remains inactive.');},600);
  return Object.freeze({
-  refresh:()=>{if(disposed)return false;dirty=true;return queue();},
-  getStatus:()=>({active,disposed,hostReady,dirty,successfulTransfers,transmittedTransfers:successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false,receiptConfirmed:false,deliveryState:disposed?'disposed':!hostReady?'host_not_ready':active?'transmitting':dirty&&sendFailures?'send_failed':lastRevision?'sent_unconfirmed':'waiting_to_send'}),
+  refresh:()=>{if(disposed)return false;generation++;prepared=null;dirty=true;return queue();},
+  getStatus:()=>({active,disposed,hostReady,dirty,preparationBuilds,preparationSlices,maxPreparationSliceMs,successfulTransfers,transmittedTransfers:successfulTransfers,sendFailures,messageCount:lastMessageCount,revision:lastRevision,acknowledgementAvailable:false,receiptConfirmed:false,deliveryState:disposed?'disposed':!hostReady?'host_not_ready':active?'transmitting':dirty&&sendFailures?'send_failed':lastRevision?'sent_unconfirmed':'waiting_to_send'}),
   dispose:()=>{if(disposed)return;disposed=true;active=false;system.afterEvents.scriptEventReceive.unsubscribe(receive);for(const h of scheduled)system.clearRun(h);scheduled.clear();queuedHandle=undefined;if(runningHandle!=null)system.clearRun(runningHandle);}
  });
 }

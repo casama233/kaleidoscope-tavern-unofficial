@@ -161,3 +161,14 @@ BDS 或真玩家驗收。T130/L107 既有原生證據保留原版號，不改寫
 
 來源修補、原生場景及真人驗收的當前入口為 [PARITY-MATRIX.md](PARITY-MATRIX.md)、
 [BUGS.md](BUGS.md) 及 [PR-DISPOSITIONS.md](audit/PR-DISPOSITIONS.md)。
+
+## 不可變的配套來源
+
+最初修補 source 為 `f08714307ea331be52a9240d8aa6473752325d1c`，
+`b277d565a1bb67e55091d82f9cfde5542ccedf9d` 追加精確歷史見證；兩者
+的凍結 runtime 完全相同。World Liquor [PR88](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/88)
+固定後者，Tavern 四個 CI peer 固定其 L108 提交
+`145e9c4612bc293ffa5371f5e312c3f35a524289`。實際完整 archive 的 digest
+由 `.github/release-request.json` 和發佈流程核對。測試包保留
+`client_acceptance=pending`、`production_ready=false` 及 `live_deployment=false`；
+原生保存 CI 是獨立的零玩家場景，不能替代本說明的兩端真人驗收。

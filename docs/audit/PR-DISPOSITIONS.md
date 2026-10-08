@@ -10,10 +10,13 @@
 W108 精確依賴 T131，並補上 G118 兩個無碰撞展示 helper；G118 不需更改
 runtime。歷史來源對照只追加新 witness，不改寫舊版證據或打包 runtime。
 
-本輪 source/API 定向回歸已執行。正式 PR、不可變的兩庫 CI 互相引用、
-實際 archive 與本輪原生證據以最終整合紀錄為準；尚未完成的原生、client、
-完整家族及 LIVE 場景不可從 T130/W107 的既有成功推定。所有保留差距與
-具體下一步見新版 release notes 及 [當前還原度表](../PARITY-MATRIX.md)。
+本輪 source/API 定向回歸及凍結 archive 核對已執行。World Liquor
+[PR88](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/88)
+固定 Tavern `b277d565a1bb67e55091d82f9cfde5542ccedf9d`，Tavern 四個 CI peer
+統一固定 World Liquor `145e9c4612bc293ffa5371f5e312c3f35a524289`。實際
+原生結果以確切 PR 的 native-persistence 證據為準；完整家族、client 及
+LIVE 不從 T130/W107 的既有成功推定。保留差距與下一步見新版 release
+notes 及 [當前還原度表](../PARITY-MATRIX.md)。
 
 相機 roll、完整內部 ItemStack、任意 RGB 陰影、穿牆輪廓、掉落3D／GUI2D
 及原版多行板面編輯器仍有平台或未驗證方案；沒有為了一比一標籤而移除

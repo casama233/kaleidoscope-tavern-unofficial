@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: d0866bbdb4bfdb89b87f81acbc0d7b20b8c88e17
+          ref: 6408e2de67e7bca6dc46fa704a86038617b64e82
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -198,7 +198,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: c2b7fe5646a9136dc4c53c0f2b7f3fd9f5bfdbcf
+          ref: 6408e2de67e7bca6dc46fa704a86038617b64e82
           path: world-liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -312,9 +312,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed World Liquor 0.1.105 pairs this Tavern 0.6.128 runtime.
+          # Reviewed World Liquor 0.1.106 pairs this Tavern 0.6.129 runtime.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 7597643241e2632ce20e9d4d1755b8dc33b1ff49
+          ref: 6408e2de67e7bca6dc46fa704a86038617b64e82
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -362,7 +362,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 8a70ecdf2ece9d5f9d9717ad8919ec25f0a2c04c
+          ref: 6408e2de67e7bca6dc46fa704a86038617b64e82
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4

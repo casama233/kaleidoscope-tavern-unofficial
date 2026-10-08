@@ -11,7 +11,12 @@ Liquor0.1.106 合併調酒操作、完整外層雪克杯保存、提示／HUD／
 場景的單一入口；[第三方包審查](../THIRD-PARTY-TAVERN-REVIEW.md) 記錄
 Loyallay 公開版可吸收設計及未解決的原生限制。
 
-兩庫 CI 會固定本批真正配對提交；PR／release 的實際結果在交付後更新。
+兩庫 CI 固定本批真正配對提交：World Liquor 的 [PR86](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/86)
+使用 Tavern 修復提交 `60ba1794168a42405330d777de94011eae371f63`；Tavern 的四個 peer checkout
+統一使用 World Liquor `6408e2de67e7bca6dc46fa704a86038617b64e82`。本批發布目標為
+[T129 測試版](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.129-beta.1)
+與 [W106 測試版](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/releases/tag/v0.1.106-preview.1)，
+實際發布以各庫 workflow 的上傳／讀回結果為準。
 本工作區的獨立零玩家 BDS 只證明指定保存／掉落場景，沒有完整家族或
 LIVE 存檔連線。下方歷史 PR 和六個尚待玩家驗收的工作入口保持原始證據。
 

@@ -4,11 +4,11 @@ const signals=()=>new Proxy({}, {get(o,k){return o[k]??=new Signal();}});
 let sequence=0;
 const dimensions=new Map();
 export const counters={};
-export function resetCounters(){for(const k of ['queries','propertyWrites','rotations','teleports','spawns','removes','playerReads','playerWrites','playerLists'])counters[k]=0;}
+export function resetCounters(){for(const k of ['queries','propertyWrites','rotations','teleports','spawns','removes','playerReads','playerWrites','playerLists','worldReads'])counters[k]=0;}
 resetCounters();
 class Properties{
  dp=new Map();props=new Map();
- getDynamicProperty(k){if(this.typeId==='minecraft:player')counters.playerReads++;return this.dp.get(k);}
+ getDynamicProperty(k){if(this.typeId==='minecraft:player')counters.playerReads++;else if(this===world)counters.worldReads++;return this.dp.get(k);}
  setDynamicProperty(k,v){if(this.typeId==='minecraft:player')counters.playerWrites++;if(this.failWrite){this.failWrite=false;throw Error('injected write failure');}if(v===undefined)this.dp.delete(k);else this.dp.set(k,v);}
  getProperty(k){return this.props.get(k);}
  setProperty(k,v){if(this.dimension?.failProperty){this.dimension.failProperty=false;throw Error('injected property failure');}counters.propertyWrites++;this.props.set(k,v);}

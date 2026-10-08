@@ -66,13 +66,6 @@
           8
         ]
       },
-      "minecraft:tick": {
-        "interval_range": [
-          8,
-          8
-        ],
-        "looping": true
-      },
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 0
       },
@@ -143,6 +136,14 @@
       {
         "condition": "q.block_state('kaleidoscope_tavern:put_visual') == 1",
         "components": {
+          "minecraft:tick": {
+            "interval_range": [
+              8,
+              8
+            ],
+            "looping": true
+          },
+          "kaleidoscope_tavern:shaker_put_recovery": {},
           "minecraft:geometry": {
             "identifier": "geometry.kt_runtime.shaker_put_hidden"
           },

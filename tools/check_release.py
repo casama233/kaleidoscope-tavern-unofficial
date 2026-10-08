@@ -113,6 +113,7 @@ def main(argv=None):
         subprocess.run(['node','--check',str(p)],check=True,capture_output=True)
         for relative in re.findall(r"(?:from\s+|import\s*)['\"](\.[^'\"]+)['\"]",p.read_text()):
             assert (p.parent/relative).is_file(),(p,relative)
+    subprocess.run([sys.executable,str(ROOT/'tools/test_localization.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/check_localization.py')],cwd=ROOT,check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/check_client_assets.py')],cwd=ROOT,check=True)
     subprocess.run(['node',str(ROOT/'tools/check_destruction.mjs')],cwd=ROOT,check=True)

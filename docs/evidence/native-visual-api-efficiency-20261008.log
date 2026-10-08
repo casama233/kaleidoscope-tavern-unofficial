@@ -1,0 +1,25 @@
+[2026-10-08 17:27:38:160 INFO] Version: 1.26.52.3
+[2026-10-08 17:27:38:160 INFO] Build ID: 51798919
+[2026-10-08 17:27:38:160 INFO] Commit ID: 54116bb5ee0b7aee0b5591efbcc8bc3cf64f168a
+[2026-10-08 17:27:38:602 INFO] Pack Stack - [00] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.130) @ worlds/living-effect-qa/behavior_packs/tavern
+[2026-10-08 17:27:38:602 INFO] Pack Stack - [01] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.107) @ worlds/living-effect-qa/behavior_packs/liquor
+[2026-10-08 17:28:03:080 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"native-cross-id","source":"kaleidoscope_tavern:shaker_active","target":"kaleidoscope_tavern:shaker","lock":"inventory","adventureLists":10,"rawLore":true,"hostScopeDynamicTypes":4}
+[2026-10-08 17:28:03:082 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"native-cross-id","source":"kaleidoscope_tavern:shaker_pouring","target":"kaleidoscope_tavern:shaker","lock":"slot","adventureLists":10,"rawLore":true,"hostScopeDynamicTypes":4}
+[2026-10-08 17:28:04:876 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"native-put-recovery","phase":"first","activations":2,"idleCallbacksMeasured":false}
+[2026-10-08 17:28:04:876 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"done","phase":"first","players":0,"playerSessions":0,"client":false,"crossPackPrivateData":false}
+[2026-10-08 17:28:05:185 INFO] Server stop requested.
+[2026-10-08 17:28:05:232 INFO] Stopping server...
+Quit correctly
+
+[2026-10-08 17:28:05:593 INFO] Version: 1.26.52.3
+[2026-10-08 17:28:05:593 INFO] Build ID: 51798919
+[2026-10-08 17:28:05:593 INFO] Commit ID: 54116bb5ee0b7aee0b5591efbcc8bc3cf64f168a
+[2026-10-08 17:28:06:087 INFO] Pack Stack - [00] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.130) @ worlds/living-effect-qa/behavior_packs/tavern
+[2026-10-08 17:28:06:087 INFO] Pack Stack - [01] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.107) @ worlds/living-effect-qa/behavior_packs/liquor
+[2026-10-08 17:28:27:252 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"saved-metadata","slot":0,"lock":"inventory"}
+[2026-10-08 17:28:27:252 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"saved-metadata","slot":1,"lock":"slot"}
+[2026-10-08 17:28:29:050 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"case","mode":"native-put-recovery","phase":"restart","activations":2,"idleCallbacksMeasured":false}
+[2026-10-08 17:28:29:050 INFO] [Scripting] [LIVING_EFFECT_QA] {"kind":"done","phase":"restart","players":0,"playerSessions":0,"client":false,"crossPackPrivateData":false}
+[2026-10-08 17:28:29:614 INFO] Server stop requested.
+[2026-10-08 17:28:29:660 INFO] Stopping server...
+Quit correctly

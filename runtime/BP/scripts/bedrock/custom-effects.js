@@ -16,8 +16,10 @@ export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
 export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
-function indexFastPlayer(p,state){
- if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels'))fastPlayers.set(p.id,p);
+function indexFastPlayer(p,state,before=state){
+ // Keep an expired Ardent row pending until its per-tick finalization runs.
+ // A same-tick status read by another consumer must not discard that work.
+ if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels')||before.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'))fastPlayers.set(p.id,p);
  else fastPlayers.delete(p.id);
 }
 function write(p,state){
@@ -33,7 +35,7 @@ function statusWindow(p){
  if(cached?.tick===now&&cached.player===p)return cached;
  const raw=p.getDynamicProperty(CUSTOM_STATUS_KEY),before=readStatus(raw),track=tracks.get(p.id);
  const state=advanceStatus(before,track?Math.max(0,now-track.tick):0);
- const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;
+ const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state,before);return snapshot;
 }
 export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){let previous;try{previous=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY));}catch{previous={schema:1,entries:[]};}forgetTipsyVisual(p.id);write(p,{...previous,schema:1,entries:[],legacyClosed:true});tracks.delete(p.id);heelsSteps.delete(p.id);}
@@ -68,8 +70,9 @@ export function applyCustomEffect(p,row){
   try{d.playSound('kt_java.effect.zenith',at,{volume:1,pitch:1});}catch(e){error(e);}
   p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.teleports++;return true;
  }
- // The remaining own timed behavior still has player-specific adapters.
- if(p?.typeId!=='minecraft:player')return false;
+ // Bloody Mary is a LivingEntity kill effect in Java. Its timer uses the
+ // existing loaded-living tracks; the other own adapters remain player-only.
+ if(p?.typeId!=='minecraft:player'&&row.effect!=='kaleidoscope_tavern:bloody_mary')return false;
  const ticks=Number.isInteger(row.ticks)&&row.ticks>0?row.ticks:row.duration*20;
  const state=addStatus(statusNow(p),row.effect,ticks,row.amplifier);write(p,state);if(row.effect===TIPSY_ID)pulseTipsyVisual(p,activeStatus(state,TIPSY_ID));customEffectDiagnostics.applied++;return true;
 }
@@ -224,7 +227,44 @@ export function pulseArdentHeat(p,rng=Math.random){
  customEffectDiagnostics.ardentPulses++;customEffectDiagnostics.ardentBlocks+=broke;return broke;
 }
 export function tickArdentHeat(){
- for(const p of fastPlayers.values())try{if(activeStatus(statusNow(p),'kaleidoscope_tavern:ardent_heat'))pulseArdentHeat(p);}catch(e){error(e);}
+ for(const p of fastPlayers.values())try{
+  const {before,state}=statusWindow(p),current=activeStatus(state,'kaleidoscope_tavern:ardent_heat');
+  if(!current){
+   if(activeStatus(before,'kaleidoscope_tavern:ardent_heat')){writeArdentState(p,before,state);finishArdentHunger(p);}
+   continue;
+  }
+  // Java adds Hunger on the last valid effect tick, then still processes
+  // that tick's collision. Do not wait for the five-tick persistence pass.
+  const ending=current.ticks<=1;
+  if(ending)finishArdentHunger(p);
+  pulseArdentHeat(p);
+  const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');
+  // PlayerTick.Post runs after the collision and ends the entire effect when
+  // both food reserves are exhausted, including any weaker hidden duration.
+  if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){
+   writeArdentState(p,before,removeStatus(state,'kaleidoscope_tavern:ardent_heat'));
+   if(!ending)finishArdentHunger(p);
+  }else if(ending){
+   // Hidden rows count down too: retire every Ardent row ending this tick,
+   // while retaining a genuinely longer weaker row.
+   writeArdentState(p,before,{...state,entries:state.entries.filter(row=>row.id!==current.id||row.ticks>1)});
+  }
+ }catch(e){error(e);}
+}
+function finishArdentHunger(p){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
+function pulseCountdown(p,before,state,id,interval,apply){
+ const previous=activeStatus(before,id),current=activeStatus(state,id);
+ if(!previous)return;
+ const afterTicks=current?.amplifier===previous.amplifier?current.ticks:0;
+ if(countdownPulseCrossed(previous.ticks,afterTicks,interval))apply(p,previous.amplifier);
+}
+function writeArdentState(p,before,state){
+ // An early save advances every timer's persistence origin. Settle already-due
+ // Vision/Grass pulses first, or the next five-tick pass loses their boundary.
+ // Keep the existing Vision -> Grass order; the saved origin prevents replay.
+ pulseCountdown(p,before,state,'kaleidoscope_tavern:vision',50,pulseVision);
+ pulseCountdown(p,before,state,'kaleidoscope_tavern:grass_stealth',10,pulseGrassStealth);
+ write(p,state);
 }
 export function pulseHighHeels(p){
  try{
@@ -251,7 +291,7 @@ export function tickHighHeels(){for(const p of fastPlayers.values())try{pulseHig
 export function handleKill(event){
  const victim=event.deadEntity,p=event.damageSource?.damagingEntity;
  try{
-  if(!p||p.typeId!=='minecraft:player'||p.id===victim?.id||deaths.has(victim.id))return;
+  if(!livingEffectEntity(p)||!livingEffectEntity(victim,true)||p.id===victim.id||deaths.has(victim.id))return;
   if(!activeStatus(statusNow(p),'kaleidoscope_tavern:bloody_mary'))return;
   const sourceHp=victim.getComponent('minecraft:health'),health=p.getComponent('minecraft:health');
   if(!sourceHp||!health||health.currentValue<=0)return;
@@ -276,12 +316,10 @@ export function importExternalEffects(p,source,raw,definitions){
 export function tickCustomEffects(){
  const players=world.getAllPlayers();const seen=new Set(players.map(p=>p.id));pruneTipsyVisuals(seen);
  for(const p of players)try{
-  const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision'),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;
-  if(previousVision){const afterTicks=currentVision?.amplifier===previousVision.amplifier?currentVision.ticks:0;if(countdownPulseCrossed(previousVision.ticks,afterTicks,50))pulseVision(p,previousVision.amplifier);}
-  if(previousArdent&&!currentArdent){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
-  const previousGrass=activeStatus(before,'kaleidoscope_tavern:grass_stealth'),currentGrass=activeStatus(state,'kaleidoscope_tavern:grass_stealth');
-  if(previousGrass){const afterTicks=currentGrass?.amplifier===previousGrass.amplifier?currentGrass.ticks:0;if(countdownPulseCrossed(previousGrass.ticks,afterTicks,10))pulseGrassStealth(p);}
-  if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}
+  const {before,state}=statusWindow(p),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;
+  pulseCountdown(p,before,state,'kaleidoscope_tavern:vision',50,pulseVision);
+  if(previousArdent&&!currentArdent)finishArdentHunger(p);
+  pulseCountdown(p,before,state,'kaleidoscope_tavern:grass_stealth',10,pulseGrassStealth);
   if(!activeStatus(nextState,'kaleidoscope_tavern:high_heels'))heelsSteps.delete(p.id);
   pulseTipsyVisual(p,activeStatus(nextState,TIPSY_ID));
   if(!nextState.entries.length){write(p,nextState);continue;}

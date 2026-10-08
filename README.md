@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.129
+## Current maintained baseline: 0.6.130
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -6,10 +6,10 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T129 repairs](docs/RELEASE-NOTES-0.6.129.md) restore shaker input and clearing behavior, preserve placed shaker metadata, and improve cocktail details, progress motion and personal sound settings. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/live acceptance remains separate.
-- The current reviewed public-family pair is Tavern **0.6.129**, World Liquor **0.1.106** and Grilling **2.8.117**. The [family lock](family/upstream.lock.json) and exact CI peers agree; the index links the six remaining workstreams and preserved reports.
+- [T130 repairs](docs/RELEASE-NOTES-0.6.130.md) reduce redundant bottle-display maintenance and idle shaker callbacks, complete scoped native effect behavior, register partial locales, and retain readable legacy shaker metadata. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/live acceptance remains separate.
+- The current reviewed public-family pair is Tavern **0.6.130**, World Liquor **0.1.107** and Grilling **2.8.117**. The [family lock](family/upstream.lock.json) and exact CI peers agree; the index links the six remaining workstreams and preserved reports.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
-- Bedrock 1.26.50 or newer; current load target BDS 1.26.51.1.
+- Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
 - Use canonical source/releases, keep a world backup and remove duplicate older Tavern packs before an upgrade. Private integration is a separately identified addon; it is not a different Tavern runtime.
 

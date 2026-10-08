@@ -4,16 +4,20 @@ import {Dimension,Player,world,system,counters,resetCounters} from './mock-serve
 import {tickStorageVisuals,syncStorageVisualPose} from '../../runtime/BP/scripts/bedrock/storage-visual-maintenance.js';
 import {syncCellarCabinetVisuals,tickCellarCabinets,maintainCellarCabinetVisual,CELLAR_CABINET_TEST} from '../../runtime/BP/scripts/bedrock/cellar-cabinet.js';
 import {syncCircularRackVisuals,tickCircularRackVisuals,registerCircularRackComponents,CIRCULAR_RACK_TEST} from '../../runtime/BP/scripts/bedrock/circular-rack.js';
+import {syncTiltedRackVisuals,tickTiltedRackVisuals,TILTED_RACK_TEST} from '../../runtime/BP/scripts/bedrock/tilted-rack.js';
+import {syncBarCabinetVisuals,tickBarCabinets,BAR_CABINET_TEST} from '../../runtime/BP/scripts/bedrock/bar-cabinet.js';
 import {createExtensionFurniture} from '../../runtime/BP/scripts/bedrock/extension-furniture.js';
 import {cellarCabinetKey,cellarCabinetVisualPose} from '../../runtime/BP/scripts/core/cellar-cabinet.js';
 import {circularRackKey,circularRackVisualPose} from '../../runtime/BP/scripts/core/circular-rack.js';
+import {tiltedRackKey,parseTiltedRackAnchor,tiltedRackVisualPose} from '../../runtime/BP/scripts/core/tilted-rack.js';
+import {barCabinetKey,parseBarCabinetAnchor,barCabinetVisualPose} from '../../runtime/BP/scripts/core/bar-cabinet.js';
 import {renderBoardText,removeBoardText,boardTextDiagnostics} from '../../runtime/BP/scripts/bedrock/board-text.js';
 import {registerJavaAmbient,unregisterJavaAmbient,pulseJavaAmbient,ambientDiagnostics} from '../../runtime/BP/scripts/bedrock/java-ambient.js';
 import {sampleAmbientPositions} from '../../runtime/BP/scripts/core/java-ambient-sampling.js';
 import {statusNow,applyCustomEffect,clearCustomEffects,tickCustomEffects,tickArdentHeat,tickHighHeels,importExternalEffects,installCustomEffects,CUSTOM_TEST} from '../../runtime/BP/scripts/bedrock/custom-effects.js';
 import {installContent} from '../../runtime/BP/scripts/core/extension-content.js';
 const NS='kaleidoscope_tavern',STATUS=NS+':custom_effects';
-beforeEach(()=>{system.currentTick+=100;world.dp.clear();world.players=[];pulseJavaAmbient();CELLAR_CABINET_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();for(const map of Object.values(CUSTOM_TEST))if(map instanceof Map)map.clear();resetCounters();});
+beforeEach(()=>{system.currentTick+=100;world.dp.clear();world.players=[];pulseJavaAmbient();CELLAR_CABINET_TEST.visuals.clear();CIRCULAR_RACK_TEST.visuals.clear();TILTED_RACK_TEST.visuals.clear();BAR_CABINET_TEST.visuals.clear();for(const map of Object.values(CUSTOM_TEST))if(map instanceof Map)map.clear();resetCounters();});
 function cabinet(count=1,slots=9){
  const d=new Dimension(),blocks=[],state={schema:1,revision:0,slots:Array(slots).fill(NS+':empty_bottle')};
  const circular=slots===6,sync=circular?syncCircularRackVisuals:syncCellarCabinetVisuals,key=circular?circularRackKey:cellarCabinetKey;
@@ -26,6 +30,35 @@ for(const count of [1,10,100])test(`cellar ${count} full cabinets: one query per
  assert.equal(counters.propertyWrites+counters.rotations+counters.teleports,0);assert.equal(x.d.entities.size,count*9);
 });
 test('empty cellar queries once, not once per slot',()=>{const d=new Dimension(),b=d.block(NS+':cellar_cabinet'),s={schema:1,revision:0,slots:Array(9).fill(null)};syncCellarCabinetVisuals(b,s);assert.equal(counters.queries,1);});
+function rackDisplay(kind,count=1,dimension='minecraft:overworld'){
+ const rack=kind==='tilted_rack',d=new Dimension(dimension),blocks=[],state=rack?{schema:1,revision:0,slots:Array(3).fill(NS+':empty_bottle')}:{schema:1,revision:0,left:NS+':empty_bottle',right:NS+':empty_bottle',single:false};
+ const sync=rack?syncTiltedRackVisuals:syncBarCabinetVisuals,tick=rack?tickTiltedRackVisuals:tickBarCabinets,key=rack?tiltedRackKey:barCabinetKey,inspect=rack?TILTED_RACK_TEST:BAR_CABINET_TEST;
+ for(let i=0;i<count;i++){const b=d.block(NS+':'+kind,{x:i*4,y:0,z:0},{[NS+':facing']:i%4});blocks.push(b);world.setDynamicProperty(key(d.id,b.location,b.typeId),JSON.stringify(state));sync(b,state);}
+ return {rack,d,blocks,state,sync,tick,key,inspect,save(){world.setDynamicProperty(key(d.id,blocks[0].location,blocks[0].typeId),JSON.stringify(state));}};
+}
+for(const kind of ['tilted_rack','bar_cabinet']){
+ test(`${kind} steady maintenance reads each owner once and keeps all four poses without writes`,()=>{
+  const x=rackDisplay(kind,10),saved=new Map(world.dp);resetCounters();for(const b of x.blocks)x.sync(b,x.state);x.tick();
+  assert.equal(counters.queries,20);assert.equal(counters.propertyWrites+counters.rotations+counters.teleports,0);assert.equal(counters.spawns+counters.removes,0);assert.equal(x.d.entities.size,10*(x.rack?3:2));assert.deepEqual(world.dp,saved);
+  for(const e of x.d.entities.values()){
+   const a=(x.rack?parseTiltedRackAnchor:parseBarCabinetAnchor)(e.getDynamicProperty(x.inspect.ANCHOR)),b=x.d.getBlock(a.position),facing=b.permutation.getState(NS+':facing'),pose=x.rack?tiltedRackVisualPose(a.slot,facing):barCabinetVisualPose(a.side,x.state.single,facing);
+   assert.deepEqual(e.location,{x:b.location.x+pose.offset.x,y:b.location.y+pose.offset.y,z:b.location.z+pose.offset.z});assert.deepEqual(e.rotation,{x:0,y:pose.rotation.y});
+  }
+ });
+ test(`${kind} repairs the whole owner after a stale first slot and retries actual pose drift`,()=>{
+  const x=rackDisplay(kind),last=[...x.d.entities.values()].at(-1);last.remove();
+  if(x.rack)x.state.slots[0]=null;else x.state.left=null;x.state.revision++;x.save();const saved=new Map(world.dp);x.tick();
+  assert.equal(x.d.entities.size,x.rack?2:1);const e=[...x.d.entities.values()][0],at={...e.location};e.location.x+=.2;e.rotation.x=10;e.props.clear();e.failTeleport=true;
+  resetCounters();x.tick();assert.equal(counters.teleports,1);assert.notDeepEqual(e.location,at);e.failTeleport=false;resetCounters();x.tick();assert.equal(counters.teleports,1);assert.deepEqual(e.location,at);
+  const duplicate=x.d.spawnEntity(e.typeId,e.location);duplicate.setDynamicProperty(x.inspect.ANCHOR,e.getDynamicProperty(x.inspect.ANCHOR));x.inspect.visuals.set(duplicate.id,duplicate);e.typeId='other:wrong_visual';x.tick();
+  assert.equal(x.d.entities.size,x.rack?2:1);assert.ok([...x.d.entities.values()].every(e=>e.typeId===x.inspect.HELPER));assert.deepEqual(world.dp,saved);
+ });
+ test(`${kind} leaves unloaded owners intact and repairs another dimension independently`,()=>{
+  const x=rackDisplay(kind),other=rackDisplay(kind,1,'minecraft:nether'),first=[...x.d.entities.values()][0],second=[...other.d.entities.values()][0],saved=new Map(world.dp);x.d.blocks.clear();second.props.clear();resetCounters();x.tick();
+  assert.equal(first.isValid,true);assert.equal(counters.removes,0);assert.equal(counters.propertyWrites,1);assert.equal(counters.queries,1);assert.deepEqual(world.dp,saved);
+  x.d.blocks.set(JSON.stringify(x.blocks[0].location),x.blocks[0]);first.props.clear();resetCounters();x.tick();assert.equal(counters.propertyWrites,1);assert.equal(counters.queries,2);
+ });
+}
 for(const facing of [0,1,2,3])for(const slots of [9,6])test(`poses stay exact: slots=${slots}, facing=${facing}`,()=>{
  const x=cabinet(1,slots),b=x.blocks[0];b.permutation=b.permutation.withState(NS+':facing',facing);x.sync(b,x.state);
  for(const e of x.d.entities.values()){

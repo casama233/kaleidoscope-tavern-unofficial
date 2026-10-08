@@ -1,8 +1,10 @@
 /** Production held-shaker callbacks with copy-based API fixtures, not a client test. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {world,system,Player,ItemStack,BlockPermutation,GameMode,EntitySwingSource,Potions} from '@minecraft/server';
-import {nativeStart,nativeStop,pourHeldShakerNow,pourIngredient,placeShaker,pickupShaker,clearHeldShaker,clearShakerOnSwing,readPortableItem,setMixologyRegistry} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {nativeStart,nativeStop,pourHeldShakerNow,pourIngredient,placeShaker,pickupShaker,clearHeldShaker,clearShakerOnSwing,readPortableItem,setMixologyRegistry,migrateShakerSlot,migrateShakerInventory,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {shakerPut} from '../runtime/BP/scripts/bedrock/immersion.js';
 import {naturalBreak} from '../runtime/BP/scripts/bedrock/natural-break.js';
 import {potionInput} from '../runtime/BP/scripts/bedrock/potions.js';
 import {nativeItemKey} from '../runtime/BP/scripts/core/native-item-storage.js';
@@ -10,7 +12,38 @@ import {nativeStorageAnchor,checkNativeStorageOwner} from '../runtime/BP/scripts
 import {ExtensionRegistry} from '../runtime/BP/scripts/core/registry.js';
 import {emptyShaker,addInput,shakerKey} from '../runtime/BP/scripts/core/mixology.js';
 import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
-import {SHAKER_ID,PORTABLE_DATA,encodePortable,decodePortable} from '../runtime/BP/scripts/core/immersion.js';
+import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable} from '../runtime/BP/scripts/core/immersion.js';
+import {rawItemLore} from '../runtime/BP/scripts/core/cocktail-tooltip.js';
+
+function shakerComponents(){
+ const blocks=new Map();registerMixologyComponents({blockComponentRegistry:{registerCustomComponent:(id,callbacks)=>blocks.set(id,callbacks)},itemComponentRegistry:{registerCustomComponent(){}}});return blocks;
+}
+test('shaker put recovery is scheduled only with the active visual and keeps interaction always available',()=>{
+ const definition=JSON.parse(readFileSync(new URL('../runtime/BP/blocks/shaker_station.json',import.meta.url),'utf8'))['minecraft:block'],callbacks=shakerComponents(),base=definition.components;
+ const active=definition.permutations.find(row=>row.condition==="q.block_state('kaleidoscope_tavern:put_visual') == 1").components;
+ assert.equal(base['minecraft:tick'],undefined);assert.equal(base['kaleidoscope_tavern:shaker_put_recovery'],undefined);
+ assert.deepEqual(base['kaleidoscope_tavern:shaker_station'],{});assert.equal(typeof callbacks.get('kaleidoscope_tavern:shaker_station').onPlayerInteract,'function');
+ // Bedrock rejects an onTick custom component without an accompanying tick.
+ assert.equal(callbacks.get('kaleidoscope_tavern:shaker_station').onTick,undefined);
+ assert.deepEqual(active['minecraft:tick'],{interval_range:[8,8],looping:true});assert.deepEqual(active['kaleidoscope_tavern:shaker_put_recovery'],{});
+ assert.equal(typeof callbacks.get('kaleidoscope_tavern:shaker_put_recovery').onTick,'function');
+});
+test('shaker put recovery clears stale visuals repeatedly without cancelling a newer eight-tick animation',()=>{
+ const block=world.getDimension('overworld').getBlock({x:10000,y:64,z:0}),put='kaleidoscope_tavern:put_visual';
+ block.setPermutation(BlockPermutation.resolve('kaleidoscope_tavern:shaker_station',{[put]:1,'kaleidoscope_tavern:facing':0}));
+ const tick=shakerComponents().get('kaleidoscope_tavern:shaker_put_recovery').onTick;
+ const visuals=()=>block.dimension.getEntities({type:'kaleidoscope_tavern:shaker_visual',location:block.location,maxDistance:2});
+ const orphan=block.dimension.spawnEntity('kaleidoscope_tavern:shaker_visual',block.location);
+ orphan.setDynamicProperty('kt:shaker_visual_anchor',`${block.dimension.id}/10000_64_0`);
+ tick({block});assert.equal(block.permutation.getState(put),0);assert.equal(visuals().length,0);
+ block.setPermutation(block.permutation.withState(put,1));tick({block});assert.equal(block.permutation.getState(put),0);
+ shakerPut(block,1);assert.equal(block.permutation.getState(put),1);assert.equal(visuals().length,1);
+ system.advance(4);tick({block});assert.equal(block.permutation.getState(put),1);
+ shakerPut(block,2);assert.equal(visuals().length,1);
+ system.advance(4);tick({block});assert.equal(block.permutation.getState(put),1);assert.equal(visuals().length,1);
+ system.advance(3);tick({block});assert.equal(block.permutation.getState(put),1);
+ system.advance(1);assert.equal(block.permutation.getState(put),0);assert.equal(visuals().length,0);
+});
 
 let serial=0;
 function fixture({customLore=true}={}){
@@ -31,6 +64,56 @@ function fixture({customLore=true}={}){
  return {player,item,state,current,stop,writes:()=>player.inventory.writes-initialWrites};
 }
 function metadata(item){return {name:item.nameTag,owner:item.getDynamicProperty('other_pack:owner'),canPlaceOn:item.getCanPlaceOn(),lore:item.getRawLore(),keepOnDeath:item.keepOnDeath,lockMode:item.lockMode};}
+function legacyFixture(type=ACTIVE_SHAKER){
+ setMixologyRegistry(new ExtensionRegistry({recipes:SHAKER_RECIPES,itemExists:()=>true}));
+ const player=new Player('legacy-shaker-'+(++serial),world.getDimension('overworld')),item=new ItemStack(type);
+ item.nameTag='Cary’s old shaker';item.keepOnDeath=true;item.lockMode='inventory';
+ item.setLore([{text:'A personal note'},{rawtext:[{text:'§b'},{translate:'item.kaleidoscope_tavern:shaker.name'}]}]);
+ item.setDynamicProperty(PORTABLE_DATA,encodePortable(emptyShaker(),'legacy_'+serial));
+ for(const [key,value]of Object.entries({owner:'Cary',flag:true,count:7.5,position:{x:1,y:2,z:3}}))item.setDynamicProperty('other_pack:'+key,value);
+ item.setCanDestroy(['minecraft:stone','minecraft:dirt']);item.setCanPlaceOn(['minecraft:glass']);
+ player.inventory.setItem(0,item);
+ return {player,item,current:()=>player.inventory.getItem(0)};
+}
+function migrationMetadata(item){return {...metadata(item),lore:rawItemLore(item),canDestroy:item.getCanDestroy(),dynamic:Object.fromEntries(item.getDynamicPropertyIds().sort().map(id=>[id,item.getDynamicProperty(id)]))};}
+
+for(const type of [ACTIVE_SHAKER,POURING_SHAKER])test(`legacy ${type} migrates once with all supported outer metadata`,()=>{
+ const f=legacyFixture(type),expected=migrationMetadata(f.item),writes=f.player.inventory.writes;
+ f.player.setDynamicProperty('kaleidoscope_tavern:shaker_input_mode','toggle');f.player.addTag('kaleidoscope_tavern:holding_shaker');
+ migrateShakerInventory(f.player);
+ assert.equal(f.current().typeId,SHAKER_ID);assert.deepEqual(migrationMetadata(f.current()),expected);
+ assert.equal(f.player.inventory.writes,writes+1);assert.equal(f.player.getDynamicProperty('kaleidoscope_tavern:shaker_input_mode'),undefined);assert.equal(f.player.hasTag('kaleidoscope_tavern:holding_shaker'),false);
+ migrateShakerInventory(f.player);assert.equal(f.player.inventory.writes,writes+1);
+});
+test('legacy generated lore refreshes while existing current items and foreign stacks are untouched',()=>{
+ const f=legacyFixture();f.item.setLore([]);f.player.inventory.setItem(0,f.item);
+ const current=new ItemStack(SHAKER_ID),foreign=new ItemStack('minecraft:stone',2);f.player.inventory.setItem(1,current);f.player.inventory.setItem(2,foreign);
+ migrateShakerInventory(f.player);assert.deepEqual(f.current().getRawLore(),[]);assert.deepEqual(f.player.inventory.getItem(1),current);assert.deepEqual(f.player.inventory.getItem(2),foreign);
+});
+test('unreadable or unsupported legacy data retains its slot while later legacy slots still migrate',()=>{
+ for(const kind of ['payload','stateful']){
+  const f=legacyFixture();if(kind==='payload')f.item.setDynamicProperty(PORTABLE_DATA,'{bad json');else f.item.meta['minecraft:durability']={damage:1};
+  f.player.inventory.setItem(0,f.item);const other=legacyFixture(POURING_SHAKER);f.player.inventory.setItem(1,other.item);
+  migrateShakerInventory(f.player);assert.deepEqual(f.current(),f.item);assert.equal(f.player.inventory.getItem(1).typeId,SHAKER_ID);assert.deepEqual(migrationMetadata(f.player.inventory.getItem(1)),migrationMetadata(other.item));
+ }
+});
+test('legacy copy failures and silent metadata loss never write the original slot',()=>{
+ for(const fail of ['throw','silent']){
+  const f=legacyFixture(),writes=f.player.inventory.writes,set=ItemStack.prototype.setCanDestroy;
+  ItemStack.prototype.setCanDestroy=function(values){if(this.typeId===SHAKER_ID){if(fail==='throw')throw Error('INJECTED_METADATA_FAILURE');return;}return set.call(this,values);};
+  try{assert.throws(()=>migrateShakerSlot(f.player.inventory,0),/INJECTED_METADATA_FAILURE|SHAKER_MIGRATION_METADATA_MISMATCH/);}finally{ItemStack.prototype.setCanDestroy=set;}
+  assert.deepEqual(f.current(),f.item);assert.equal(f.player.inventory.writes,writes);
+ }
+});
+test('legacy inventory write throws or silent readback loss restore the whole original stack',()=>{
+ for(const fail of ['throw','silent']){
+  const f=legacyFixture(),container=f.player.inventory,set=container.setItem;
+  if(fail==='throw')container.failAt=container.writes;
+  else container.setItem=function(index,item){const next=item?.clone();if(next?.typeId===SHAKER_ID)next.nameTag=undefined;return set.call(this,index,next);};
+  try{assert.throws(()=>migrateShakerSlot(container,0),/INJECTED_WRITE_FAILURE|SHAKER_MIGRATION_WRITE_MISMATCH/);}finally{container.setItem=set;}
+  assert.deepEqual(f.current(),f.item);
+ }
+});
 function cup(f){
  const block=f.player.dimension.getBlock({...f.player.location});
  block.setPermutation(BlockPermutation.resolve('kaleidoscope_tavern:cup_empty_glassware',{'kaleidoscope_tavern:facing':0}));

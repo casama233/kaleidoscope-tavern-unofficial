@@ -2,6 +2,10 @@
 import argparse
 from family_update.common import *
 
+def startup_output(old):
+    data=(B/'server_output.txt').read_bytes()
+    return (data[len(old):] if data.startswith(old) else data).decode('utf-8','replace')
+
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true',help='Write poststart verification in this task directory')
@@ -11,11 +15,11 @@ def main(argv=None):
     assert_lease()
     receipt=read(R/'reviewed-family-receipt.json')
     old=(R/'production-before/server-output-before-start.txt').read_bytes()
-    deadline=time.monotonic()+55
+    # Valid native restarts can need over 55 seconds for deferred initialization.
+    deadline=time.monotonic()+90
     markers=STARTUP_MARKERS
     while True:
-        data=(B/'server_output.txt').read_bytes(); suffix=data[len(old):] if data.startswith(old) else data
-        text=suffix.decode('utf-8','replace')
+        text=startup_output(old)
         if all(marker in text for marker in markers) or time.monotonic()>=deadline: break
         time.sleep(1)
     rows=live_inventory(); by_uuid={p['uuid']:p for p in rows['packs']}
@@ -26,6 +30,8 @@ def main(argv=None):
         assert rows['refs'][side]==read(C/('world_'+side+'_packs.json')), 'Pack order changed'
     drift=G['audit'](W,read(Q/'senluo-policy.json')); assert drift['ok']
     valid=runpy.run_path(str(Q/'policy.py'))['validate_world'](W); assert valid['ok']
+    # Inventory and admission checks take time; record the latest same-boot log.
+    text=startup_output(old)
     errors=[line for line in text.splitlines() if ' ERROR]' in line or '[error]' in line.lower()]
     warnings=[line for line in text.splitlines() if ' WARN]' in line or '[warning]' in line.lower()]
     live=summary()

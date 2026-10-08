@@ -60,6 +60,7 @@ def finalize_receipt():
     if CONFIG.get('extension_validation'):reports.append(str(Path(CONFIG['extension_validation']).resolve()))
     if CONFIG.get('container_recovery_plan'):reports.append('saved-world-container-recovery.json')
     if CONFIG.get('identity_migration'):reports.append('saved-world-identity-migration.json')
+    if CONFIG.get('startup_reconciliation'):reports.append('startup-reconciliation-check.json')
     if CONFIG.get('translation_reconciliation'):reports.append('translation-reconciliation-check.json')
     if CONFIG.get('preserved_reconciliation'):reports.append('preserved-reconciliation-check.json')
     if CONFIG.get('preserved_additions'):reports.append('preserved-additions-check.json')

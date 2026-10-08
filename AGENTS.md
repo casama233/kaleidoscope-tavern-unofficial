@@ -1,5 +1,7 @@
 # Project requirements
 
+- Follow the focused maintenance rules in `family/UPDATE-WORKFLOW.md` (owner 2026-10-08). Work from one current checkpoint, fix a concrete player-visible Java gap, use targeted local diagnostics and existing remote CI, and avoid duplicate full-suite runs, report copies and same-stage pack scans. Batch coupled fixes before freezing a candidate; deploy each completed candidate under the existing standing authorization. Required deployment boundaries and honest pending client acceptance still apply.
+
 - Guide work MUST follow `docs/GUIDE-STANDARD.md`, the user's fixed seven-entrance, child-group, individual-entry contract. Do not flatten or rename it without a new user request.
 - Owner requested an independent Tavern guide and optional Cookery integration on 2026-10-02. Both entrances MUST use Tavern's shared addon projection and the same seven-section navigation; addons provide data, not separate content implementations.
 - Keep original Java mechanics authoritative. For boards, preserve Java left / center / right and legacy top positioning. The user additionally requested Word-style justified/distributed and vertical alignment on 2026-09-27; these are intentional extensions.

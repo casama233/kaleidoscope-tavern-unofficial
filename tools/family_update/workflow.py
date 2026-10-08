@@ -275,9 +275,11 @@ def prepare(include_ci=True):
         print('NO_RUNTIME_CHANGES: full live bytes and order already match; no restart', flush=True)
         return result
     if include_ci:
-        record_static()
+        record_static(verified_candidate=receipt)
     if (R / 'exact-engine/native-report.json').exists():
-        verify_native()
+        # Same read-only prepare phase: source and candidate were just audited.
+        # Recheck the cached native evidence without rescanning every pack.
+        verify_native(verified_candidate=receipt)
         print('REUSED exact native loading and restart evidence', flush=True)
     else:
         run_stage('run_native')

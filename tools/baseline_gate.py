@@ -3,6 +3,12 @@
 
 freeze is an explicit maintainer operation; packaging and CI only run check.
 The receipt inventories every exported file and never certifies client behaviour.
+
+Refactor mode (temporary, owner-approved): on branches named refactor/* (or with
+BASELINE_REFACTOR_MODE=1) the two release-identity comparisons below only warn.
+Everything structural stays enforced: UUIDs, versions, dependencies, untracked
+runtime files, append-only history, repository identity and archive equality.
+Refactor mode can never produce a release receipt.
 """
 from pathlib import Path
 import argparse,hashlib,json,subprocess,sys,zipfile,os
@@ -10,6 +16,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def fail(message):raise SystemExit('BASELINE: '+message)
 def read(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def refactor_mode():
+ return os.getenv('BASELINE_REFACTOR_MODE')=='1' or (os.getenv('GITHUB_HEAD_REF') or os.getenv('GITHUB_REF_NAME') or '').startswith('refactor/')
+def warn(message):print('BASELINE WARNING (refactor mode): '+message,file=sys.stderr)
 def fingerprint(root):
  rows={}
  for p in sorted(root.rglob('*')):
@@ -58,8 +67,11 @@ def verify_export(config,archive,files):
 def check(config,release=False,archive=None,history_base=None):
  if os.getenv('GITHUB_REPOSITORY') and os.environ['GITHUB_REPOSITORY']!=config['repository']:fail('wrong repository')
  if os.getenv('GITHUB_REPOSITORY_ID') and int(os.environ['GITHUB_REPOSITORY_ID'])!=config['repository_id']:fail('wrong repository ID')
+ refactor=refactor_mode()
  trees,files=validate(config)
- if trees!=config['source_trees']:fail('runtime changed without a reviewed version/hash update')
+ if trees!=config['source_trees']:
+  if refactor:warn('runtime differs from the frozen baseline; release identity is not being enforced')
+  else:fail('runtime changed without a reviewed version/hash update')
  history=read(ROOT/'release-history.json')
  if history_base and set(history_base)!={'0'}:
   valid=subprocess.run(['git','rev-parse','--verify',history_base+'^{commit}'],cwd=ROOT,capture_output=True)
@@ -69,7 +81,9 @@ def check(config,release=False,archive=None,history_base=None):
    for key,value in json.loads(previous.stdout).items():
     if history.get(key)!=value:fail('historical release changed or removed: '+key)
  version='.'.join(map(str,config['version']))
- if history.get(version)!=trees:fail('release identity differs from append-only release history')
+ if history.get(version)!=trees:
+  if refactor:warn('release identity differs from release history; a new version must be frozen before any release')
+  else:fail('release identity differs from append-only release history')
  tracked=set(subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0'))
  for side,rows in files.items():
   for p in rows:
@@ -83,6 +97,7 @@ def check(config,release=False,archive=None,history_base=None):
 def main():
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('operation',choices=['check','freeze']);parser.add_argument('--release',action='store_true');parser.add_argument('--history-base');parser.add_argument('--archive',type=Path);parser.add_argument('--receipt',type=Path);args=parser.parse_args()
  config=read(ROOT/'baseline.json')
+ if args.receipt and refactor_mode():fail('refactor mode cannot produce a release receipt')
  if args.operation=='freeze':
   trees,_=validate(config);history_path=ROOT/'release-history.json';history=read(history_path) if history_path.exists() else {};version='.'.join(map(str,config['version']))
   if version in history and history[version]!=trees:fail('version already used; bump the release version')

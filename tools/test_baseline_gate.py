@@ -4,6 +4,7 @@ import copy,importlib.util,json,os,subprocess,tempfile,unittest,zipfile
 from pathlib import Path
 spec=importlib.util.spec_from_file_location('gate',Path(__file__).with_name('baseline_gate.py'))
 gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
+MODE_VARS=['GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID','GITHUB_HEAD_REF','GITHUB_REF_NAME','BASELINE_REFACTOR_MODE']
 class BaselineGateTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.previous=gate.ROOT;gate.ROOT=self.root
@@ -15,8 +16,10 @@ class BaselineGateTests(unittest.TestCase):
   (self.root/'release-history.json').write_text(json.dumps({'1.0.0':self.config['source_trees']}))
   self.git('init','-q');self.git('config','user.email','fixture@example.invalid');self.git('config','user.name','Fixture');self.git('add','.');self.git('commit','-qm','Fixture')
   self.base=self.git('rev-parse','HEAD').strip()
-  self.env={k:os.environ.pop(k) for k in ['GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID'] if k in os.environ}
+  # CI itself may run on a refactor/* branch; the fixture must start in strict mode.
+  self.env={k:os.environ.pop(k) for k in MODE_VARS if k in os.environ}
  def tearDown(self):
+  for k in MODE_VARS:os.environ.pop(k,None)
   gate.ROOT=self.previous;os.environ.update(self.env);self.tmp.cleanup()
  def git(self,*args):return subprocess.check_output(['git',*args],cwd=self.root,text=True)
  def reject(self,part,fn):
@@ -56,6 +59,35 @@ class BaselineGateTests(unittest.TestCase):
   self.reject('archive differs',lambda:gate.verify_export(self.config,archive,self.files))
  def test_wrong_repository_rejected(self):
   os.environ['GITHUB_REPOSITORY']='wrong/repo'
-  try:self.reject('wrong repository',lambda:gate.check(self.config))
-  finally:os.environ.pop('GITHUB_REPOSITORY')
+  self.reject('wrong repository',lambda:gate.check(self.config))
+ # Refactor mode: identity checks pause, structural checks stay.
+ def edit_runtime(self):(self.root/'runtime/BP/content.json').write_text('{"refactor":"edit"}')
+ def test_refactor_env_allows_runtime_edit(self):
+  self.edit_runtime();os.environ['BASELINE_REFACTOR_MODE']='1'
+  gate.check(self.config)
+ def test_refactor_branch_name_allows_runtime_edit(self):
+  self.edit_runtime();os.environ['GITHUB_HEAD_REF']='refactor/anything'
+  gate.check(self.config)
+ def test_refactor_push_ref_allows_runtime_edit(self):
+  self.edit_runtime();os.environ['GITHUB_REF_NAME']='refactor/anything'
+  gate.check(self.config)
+ def test_other_branch_names_stay_strict(self):
+  self.edit_runtime();os.environ['GITHUB_HEAD_REF']='feature/refactor-like'
+  self.reject('runtime changed',lambda:gate.check(self.config))
+ def test_refactor_mode_still_rejects_untracked_runtime(self):
+  (self.root/'runtime/BP/hidden.json').write_text('{}');os.environ['BASELINE_REFACTOR_MODE']='1'
+  self.reject('untracked runtime',lambda:gate.check(self.config))
+ def test_refactor_mode_still_rejects_history_tampering(self):
+  (self.root/'release-history.json').write_text('{}');os.environ['BASELINE_REFACTOR_MODE']='1'
+  self.reject('historical release changed',lambda:gate.check(self.config,history_base=self.base))
+ def test_refactor_mode_still_rejects_uuid_change(self):
+  manifest=self.root/'runtime/BP/manifest.json';data=json.loads(manifest.read_text());data['header']['uuid']='changed';manifest.write_text(json.dumps(data));os.environ['BASELINE_REFACTOR_MODE']='1'
+  self.reject('UUID changed',lambda:gate.check(self.config))
+ def test_refactor_mode_still_rejects_patched_export(self):
+  os.environ['BASELINE_REFACTOR_MODE']='1';archive=self.root/'bad.mcaddon'
+  with zipfile.ZipFile(archive,'w') as z:
+   for side,rows in self.files.items():
+    for path in rows:z.writestr(side+'/'+path,(self.root/self.config['runtime'][side]/path).read_bytes())
+   z.writestr('BP/install-only.js','hidden patch')
+  self.reject('archive differs',lambda:gate.verify_export(self.config,archive,self.files))
 if __name__=='__main__':unittest.main()

@@ -12,8 +12,8 @@ Liquor0.1.106 合併調酒操作、完整外層雪克杯保存、提示／HUD／
 Loyallay 公開版可吸收設計及未解決的原生限制。
 
 兩庫 CI 固定本批真正配對提交：World Liquor 的 [PR86](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/86)
-使用 Tavern 修復提交 `60ba1794168a42405330d777de94011eae371f63`；Tavern 的四個 peer checkout
-統一使用 World Liquor `6408e2de67e7bca6dc46fa704a86038617b64e82`。本批發布目標為
+使用 Tavern [PR290](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/290) 的修復與審查工具提交 `64f5d25d3e7f6156630a9c3a90020cd87efba051`；Tavern 的四個 peer checkout
+統一使用 World Liquor `cbf86880e103dfa9cb6ac80eac1528734b41a73b`。本批發布目標為
 [T129 測試版](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.129-beta.1)
 與 [W106 測試版](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/releases/tag/v0.1.106-preview.1)，
 實際發布以各庫 workflow 的上傳／讀回結果為準。

@@ -120,6 +120,39 @@ console.log(JSON.stringify({poses,accepted,compact:HOLDER_KINDS,general:STORAGE_
 """
 
 
+def check_pose_writer(family, adapter, shared_pose):
+    # Follow the adapter's slot/facing pose through its actual native yaw writer.
+    # Pose values below remain independently checked against Java matrices.
+    assert 'e.setRotation(pose.rotation)' not in adapter, (family, 'Pitch must have one owner')
+    pose_call = {
+        'holder': 'holderVisualPose(facing)',
+        'cellar_cabinet': 'cellarCabinetVisualPose(slot,facing)',
+        'tilted_rack': 'tiltedRackVisualPose(slot,facing)',
+        'circular_rack': 'circularRackVisualPose(slot,facing)',
+        'bar_cabinet': 'barCabinetVisualPose(side,state.single,facing)',
+        'glass_bar_cabinet': 'barCabinetVisualPose(side,state.single,facing)',
+    }[family]
+    assert 'pose='+pose_call in adapter, (family, 'Adapter must use its slot/facing pose')
+    facing_source = 'block.permutation' if family == 'holder' else 'block?.permutation'
+    assert 'const facing='+facing_source+'.getState(FACING)??0' in adapter, (family, 'Pose facing must come from block state')
+    assert 'initialRotation:pose.rotation.y' in adapter, (family, 'Spawn yaw must use the same pose')
+    if family == 'holder':
+        assert 'e.setRotation({x:0,y:pose.rotation.y})' in adapter
+        return
+    if family in ('tilted_rack', 'circular_rack'):
+        assert 'const at=position(block,slot,facing),pose='+pose_call in adapter
+        assert 'function position(block,slot,facing){const p='+pose_call+'.offset;return {x:block.location.x+p.x,y:block.location.y+p.y,z:block.location.z+p.z};}' in adapter
+    else:
+        assert 'pose='+pose_call+',at={x:block.location.x+pose.offset.x,y:block.location.y+pose.offset.y,z:block.location.z+pose.offset.z}' in adapter
+    assert "import {storageHelpersByAnchor,syncStorageVisualPose} from './storage-visual-maintenance.js';" in adapter
+    assert adapter.count("syncStorageVisualPose(e,NS+':storage_kind',bottle.kind,at,pose.rotation.y)") == 1, (family, 'Delegate the computed yaw and slot position exactly once')
+    assert '.setRotation(' not in adapter, (family, 'Delegated yaw must have no second writer')
+    assert 'export function syncStorageVisualPose(entity,kindProperty,kind,at,yaw)' in shared_pose
+    assert shared_pose.count('.setRotation(') == 1, 'Shared pose must have exactly one rotation writer'
+    assert 'entity.setRotation({x:0,y:yaw})' in shared_pose, 'Pitch must remain owned by the RP model'
+    assert 'const rotation=entity.getRotation();' in shared_pose, 'Delta maintenance must inspect actual yaw'
+
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--java-source',type=Path)
@@ -152,9 +185,6 @@ def main():
     clients['glass_bar_cabinet']=clients['bar_cabinet']
     checked_bindings=0
     shared_pose=(RT/'BP/scripts/bedrock/storage-visual-maintenance.js').read_text()
-    assert shared_pose.count('.setRotation(')==1,'Shared pose must have exactly one rotation writer'
-    assert 'entity.setRotation({x:0,y:yaw})' in shared_pose,'Pitch must remain owned by the RP model'
-    assert 'const rotation=entity.getRotation();' in shared_pose,'Delta maintenance must inspect actual yaw'
     for family,client in clients.items():
         for kind,identifier in client['geometry'].items():
             g=geometry[identifier]
@@ -163,13 +193,7 @@ def main():
             assert (RP/(client['textures'][kind]+'.png')).exists()
             checked_bindings+=1
         adapter=(RT/'BP/scripts/bedrock'/((family if family!='glass_bar_cabinet' else 'bar_cabinet').replace('_','-')+'.js')).read_text()
-        assert 'e.setRotation(pose.rotation)' not in adapter, (family,'Pitch must have one owner')
-        if family in ('cellar_cabinet','circular_rack'):
-            assert "import {storageHelpersByAnchor,syncStorageVisualPose} from './storage-visual-maintenance.js';" in adapter
-            assert "syncStorageVisualPose(e,NS+':storage_kind',bottle.kind,at,pose.rotation.y)" in adapter
-            assert '.setRotation(' not in adapter,(family,'Delegated yaw must have no second writer')
-        else:
-            assert 'e.setRotation({x:0,y:pose.rotation.y})' in adapter
+        check_pose_writer(family,adapter,shared_pose)
     original=read(RP/'models/entity/molotov.geo.json')['minecraft:geometry'][0]
     actual=geometry['geometry.kt_runtime.storage_molotov']
     expected=copy.deepcopy(original)

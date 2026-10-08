@@ -4,7 +4,7 @@
 
 [T131 release scope](RELEASE-NOTES-0.6.131.md) records the source repairs below.
 The original comparison target remains Forge main `c4ec1880`; the inspected
-NeoForge branches are separate art/behavior references. G118 is the current
+NeoForge branches are separate art/behavior references. G119 is the current
 optional family peer. L1 means executed production callbacks with API fixtures
 or original-source/asset checks. It does not certify a native Player or render.
 
@@ -17,7 +17,7 @@ or original-source/asset checks. It does not certify a native Player or render.
 | Vision | Registry-aware calls and new-target audio independent of missing Glowing, using 50/60 tick source clock. | `tools/vision-feedback-adapter.test.mjs`: 4 L1 cases. True wall outlines remain unimplemented. |
 | Molotov | Known support, neighbor fuel, soul-fire and non-full-block cases improved; unknown fallback remains explicit. | `tools/molotov-fire-adapter.test.mjs`: 7 L1 cases. Full Java fire predicates and actual affected blocks remain pending. |
 | Boards and trellises | Adventure ordinary use, root-based text reach, material/data rollback, glyph recovery, source wax/axe consumption and PASS behavior. | `tools/board-farm-interaction.test.mjs` plus existing trellis cases. Native multi-line editor, DP restart, glyph layout and input remain pending. |
-| World Liquor / G118 | Two reviewed zero-collision display IDs added to shared Respawn exclusions; unknown IDs rejected. | L108 `tests/respawn-family.test.mjs`: 6 L1 cases. Current native Player spawn/bed/anchor lifecycle remains pending. |
+| World Liquor / G119 | Two reviewed zero-collision display IDs added to shared Respawn exclusions; unknown IDs rejected. | L108 `tests/respawn-family.test.mjs`: 6 L1 cases. Current native Player spawn/bed/anchor lifecycle remains pending. |
 | Internal ingredient ItemStacks | Existing decorated-material guard retained; full portable three-slot native preservation still unsupported. | Previous potion capacity evidence retains its original version. Preview storage is not stable support. |
 | Arbitrary RGB / dropped shaker / camera | 336-color atlas and flat external RGB retained; risky multi-mask experiment removed. Dropped 3D with separate GUI 2D and additive free-look roll remain unresolved. | See T131 capability review and previous exact-scope native records; no new full client certification. |
 

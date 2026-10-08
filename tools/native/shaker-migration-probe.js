@@ -2,6 +2,7 @@
  * Imported only by the disposable run_living_effects.py host overlay.
  */
 import {world,system,ItemStack,ItemLockMode,BlockPermutation} from '@minecraft/server';
+import {runtimeRegistry} from './main.js';
 import {migrateShakerSlot} from './bedrock/mixology.js';
 import {emptyShaker} from './core/mixology.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable} from './core/immersion.js';
@@ -10,6 +11,14 @@ import {canonical} from './core/util.js';
 const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const out=(kind,data)=>console.log('[LIVING_EFFECT_QA] '+JSON.stringify({kind,...data}));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
+// This paired probe is deliberately pinned to the W108 checkout used by CI.
+const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.108';
+function addonRegistration(){
+ const row=runtimeRegistry()?.list().find(entry=>entry.source===ADDON_SOURCE);
+ check(row,'real World Liquor addon registration absent');
+ check(row.version===ADDON_VERSION,'World Liquor descriptor version mismatch: '+row.version);
+ return row;
+}
 let playerSessions=0;world.afterEvents.playerSpawn.subscribe(()=>{playerSessions++;out('failure',{error:'player session is forbidden'});});
 function observed(item){
  return canonical({name:item.nameTag,lore:item.getRawLore(),destroy:item.getCanDestroy(),place:item.getCanPlaceOn(),
@@ -20,6 +29,10 @@ world.afterEvents.worldLoad.subscribe(()=>system.runTimeout(async()=>{try{
  let loaded=false;for(let i=0;i<60&&!loaded;i++){await pause(5);try{loaded=!!d.getBlock({x:0,y:300,z:0});}catch{}}
  check(loaded,'chunks did not load');
  const phase=world.getDynamicProperty('qa:migration_phase')==='saved'?'restart':'first',block=d.getBlock({x:0,y:300,z:0});
+ // Like the living-effects observer, wait for the real host/addon handshake;
+ // merely listing both packs in the world does not prove script registration.
+ for(let i=0;i<60&&!runtimeRegistry()?.list().some(row=>row.source===ADDON_SOURCE);i++)await pause(5);
+ out('case',{mode:'addon_registration',phase,...addonRegistration()});
  if(phase==='first')block.setType('minecraft:chest');
  const container=block.getComponent('minecraft:inventory').container;
  if(phase==='first'){
@@ -56,5 +69,5 @@ world.afterEvents.worldLoad.subscribe(()=>system.runTimeout(async()=>{try{
  out('case',{mode:'native-put-recovery',phase,activations:2,idleCallbacksMeasured:false});
  if(phase==='first')world.setDynamicProperty('qa:migration_phase','saved');
  check(playerSessions===0&&world.getAllPlayers().length===0,'player sessions occurred');
- out('done',{phase,players:0,playerSessions:0,client:false,crossPackPrivateData:false});
+ out('done',{phase,players:0,playerSessions:0,client:false,crossPackPrivateData:false,addon_registration:addonRegistration()});
 }catch(error){out('failure',{error:String(error),stack:error.stack});}},100));

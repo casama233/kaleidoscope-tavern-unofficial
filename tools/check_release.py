@@ -1,14 +1,53 @@
 #!/usr/bin/env python3
 """Static release validation only: no player mocks or game interactions."""
-import argparse,json,re,subprocess,sys
+import argparse,hashlib,json,re,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];RT=ROOT/'runtime'
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+
+# Exact T131 source additions. World Liquor's <1024 compaction budget was
+# introduced in ce475bc35a305feb2408b93b6ad7c49d5e38ebe8; it is a project
+# budget, not a documented engine-wide geometry-ID limit. Preserve its base
+# allowance and account separately for these source-reviewed thin item meshes.
+# Model complexity guidance: https://learn.microsoft.com/minecraft/creator/documents/practices/improvingperformanceandresourceusage
+REVIEWED_ITEM_GEOMETRIES={
+    'geometry.kt_runtime.item_sprite_'+name:'runtime/RP/models/entity/item_sprite_'+name+'.geo.json'
+    for name in ('depth_charge','mystery_cocktail','nether_special','ice_grape')
+}
+
+def geometry_inventory(roots):
+    result={}
+    for root in roots:
+        for path in (Path(root)/'runtime/RP/models').rglob('*.json'):
+            for geometry in read(path).get('minecraft:geometry',[]):
+                result.setdefault(geometry['description']['identifier'],[]).append(path.resolve())
+    return result
+
+def check_combined_geometry_budget(inventory,tavern_root=ROOT):
+    """Retain the base budget; only exact, uniquely owned T131 additions count."""
+    tavern_root=Path(tavern_root).resolve()
+    witnesses=read(tavern_root/'data/baseline-reconciliation.json')['files']
+    sources=read(tavern_root/'art/interfaces/animated-item-java-reference.json')['sources']
+    for identifier,name in REVIEWED_ITEM_GEOMETRIES.items():
+        path=tavern_root/name;row=witnesses[name]
+        assert row['before'] is None and row['release']=='0.6.131',('Unreviewed geometry allocation',name)
+        assert row['reviewedSourceCommit']=='f08714307ea331be52a9240d8aa6473752325d1c',('Geometry allocation source changed',name)
+        assert [Path(p).resolve() for p in inventory.get(identifier,[])]==[path],('Reviewed geometry must have one exact Tavern owner/path',identifier)
+        assert hashlib.sha256(path.read_bytes()).hexdigest()==row['after'],('Reviewed item geometry changed',name)
+        geometries=read(path)['minecraft:geometry'];assert len(geometries)==1
+        geometry=geometries[0];assert geometry['description']['identifier']==identifier
+        bones=geometry['bones'];assert len(bones)==1 and bones[0]['name']=='root'
+        source=sources[identifier.removeprefix('geometry.kt_runtime.item_sprite_')]
+        assert len(bones[0]['cubes'])==source['java_element_count']<=50,('Unreviewed item mesh complexity',name)
+    base=set(inventory)-set(REVIEWED_ITEM_GEOMETRIES)
+    assert len(base)<1024,('combined Tavern + World Liquor base geometry budget exceeded',len(base))
+    return {'geometries':len(inventory),'base_geometries':len(base),'reviewed_item_geometries':len(REVIEWED_ITEM_GEOMETRIES),'base_limit_exclusive':1024,'client_verified':False}
 
 def parse_args(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--java-source',type=Path,help='Pinned Java checkout for storage and launch source checks')
     parser.add_argument('--baseline',type=Path,help='Pinned integration baseline for launch preservation checks')
+    parser.add_argument('--geometry-budget-peer',type=Path,help='Check only the paired geometry allocation; does not run release validation')
     return parser.parse_args(argv)
 
 
@@ -28,6 +67,9 @@ def source_check_commands(args,version):
 
 def main(argv=None):
     args=parse_args(argv)
+    if args.geometry_budget_peer is not None:
+        print(json.dumps(check_combined_geometry_budget(geometry_inventory([ROOT,args.geometry_budget_peer]))))
+        return
     config=read(ROOT/'release.json');version=list(map(int,config['version'].split('.')))
     source_checks=source_check_commands(args,config['version'])
     subprocess.run(['node','--test','tools/ambient-sparse.test.mjs'],cwd=ROOT,check=True)

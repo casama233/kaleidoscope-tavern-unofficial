@@ -2,7 +2,7 @@
 
 本批從 T130 的已合併來源 `c4453491e2f52d4b4515dda0385db204aa892c97`
 接續一比一體驗查核，配對 World Liquor **0.1.108** 及可選 Grilling
-**2.8.118**。可直接修正的操作、資料交易與資源綁定已落到正式 runtime。
+**2.8.119**。可直接修正的操作、資料交易與資源綁定已落到正式 runtime。
 這是待真人驗收的測試候選；來源回歸、原生伺服器場景及兩端客戶端觀察
 分開記錄，沒有宣稱整體畫面、沉浸感和操作已完全相同。
 
@@ -122,6 +122,9 @@ helper：`plate_food_visual` 及 `recipe_icon_visual`。共享出生點的
 Respawn 不再因這兩個正式家族展示實體誤判為未知障礙；未知外部 ID
 依然拒絕。已知 helper 總數由 85 增至 87，沒有把可選 Grilling 變成
 硬性依賴。對應來源及六個 source/API 案例記在 L108 release notes。
+最終配套採用最新已合併 G119 `b010ec2a6709ada74ed96ead19c60da4e0bc2789`；
+其完整 entity 清單與 G118 對照後，10 個非玩家 helper 及 family storage
+腳本 bytes 相同。這些來源證據可以沿用，並不構成 G119 整包原生驗收。
 
 ## 驗證分層
 
@@ -142,6 +145,12 @@ Respawn 不再因這兩個正式家族展示實體誤判為未知障礙；未知
 所有 Node 案例明確使用 API fixtures，沒有 SimulatedPlayer，也不當作
 BDS 或真玩家驗收。T130/L107 既有原生證據保留原版號，不改寫成 T131/L108。
 本輪候選原生載入／保存／重啟與發布結果需記錄新的確切來源。
+正式 `native-persistence` lane 在原有選取元件的保存測試後，另載入完整
+T131／L108 BP 和 RP，在一次首次啟動及正常重啟中驗證原生雪克杯 migration。
+複製完成先與各自凍結來源核對，再明列 observer 的測試 overlay；原生引擎
+及兩庫 commit 一併記錄。這個完整 T/W 場景仍不包含私人家族、真玩家或渲染。
+結果以 [PR296](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/296)
+確切來源的 Actions 證據為準，沒有先行宣告後續 CI 通過。
 
 ## 尚未達到一比一的項目與下一個驗收
 
@@ -167,8 +176,9 @@ BDS 或真玩家驗收。T130/L107 既有原生證據保留原版號，不改寫
 最初修補 source 為 `f08714307ea331be52a9240d8aa6473752325d1c`，
 `b277d565a1bb67e55091d82f9cfde5542ccedf9d` 追加精確歷史見證；兩者
 的凍結 runtime 完全相同。World Liquor [PR88](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/88)
-固定後者，Tavern 四個 CI peer 固定其 L108 提交
-`145e9c4612bc293ffa5371f5e312c3f35a524289`。實際完整 archive 的 digest
+固定含本輪工具修正的 Tavern 來源，精確 commit 記在該庫的
+`.github/baseline-integration.json`；Tavern 的五個 CI peer 統一採用
+`.github/workflows/validation.yml` 所列的不可變 L108 提交。完整 archive 的 digest
 由 `.github/release-request.json` 和發佈流程核對。測試包保留
 `client_acceptance=pending`、`production_ready=false` 及 `live_deployment=false`；
 原生保存 CI 是獨立的零玩家場景，不能替代本說明的兩端真人驗收。

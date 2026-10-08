@@ -7,7 +7,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 ## Current source and requirements
 
 - [T131 repairs](docs/RELEASE-NOTES-0.6.131.md) restore direct touch, furniture and Adventure-mode use, route offhand shaker transactions and left-hand poses, bind animated items, and repair quiet feedback, Vision audio and board/farm transactions. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.131**, World Liquor **0.1.108** and Grilling **2.8.118**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.131**, World Liquor **0.1.108** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.

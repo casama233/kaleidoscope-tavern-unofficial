@@ -7,13 +7,14 @@
 從已合併 T130 main `c4453491e2f52d4b4515dda0385db204aa892c97` 接續。
 [T131 說明](../RELEASE-NOTES-0.6.131.md) 集中記錄直接觸控、家具、Adventure、
 兩手雪克杯、靜默提示、四種動畫物品、感知音效、莫洛托夫及板面／農架交易。
-W108 精確依賴 T131，並補上 G118 兩個無碰撞展示 helper；G118 不需更改
+W108 精確依賴 T131，並補上 G118 新增、G119 保持相同 bytes 的兩個無碰撞展示 helper；最新 G119 不需更改
 runtime。歷史來源對照只追加新 witness，不改寫舊版證據或打包 runtime。
 
 本輪 source/API 定向回歸及凍結 archive 核對已執行。World Liquor
 [PR88](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/88)
-固定 Tavern `b277d565a1bb67e55091d82f9cfde5542ccedf9d`，Tavern 四個 CI peer
-統一固定 World Liquor `145e9c4612bc293ffa5371f5e312c3f35a524289`。實際
+在 `.github/baseline-integration.json` 固定含工具修正的 Tavern 來源；
+[Tavern PR296](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/296)
+的五個 CI peer 則採同一個不可變 L108 提交。實際
 原生結果以確切 PR 的 native-persistence 證據為準；完整家族、client 及
 LIVE 不從 T130/W107 的既有成功推定。保留差距與下一步見新版 release
 notes 及 [當前還原度表](../PARITY-MATRIX.md)。

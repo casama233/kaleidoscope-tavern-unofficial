@@ -152,18 +152,26 @@ test('another status consumer cannot drop pending Ardent expiration from the fas
 });
 
 test('early Ardent save preserves a crossed Vision pulse and the five-tick pass does not replay it',()=>{
- const f=fixture([],{sprinting:false}),previousPlayers=world.getAllPlayers,glows=[];
+ const f=fixture([],{sprinting:false}),previousPlayers=world.getAllPlayers,queries=[];
  f.actor.getAABB=()=>({center:{x:0,y:1,z:0},extent:{x:.3,y:1,z:.3}});
- f.actor.dimension.getEntities=()=>[{id:'vision-target',typeId:'minecraft:cow',getComponent:()=>({currentValue:10}),
-  getAABB:f.actor.getAABB,getEffect:()=>undefined,addEffect:(...args)=>glows.push(args)}];
+ // Observe every real pulse scan: absent native Glowing and the first-target
+ // sound cache must not hide a missing pulse or a replay of the same target.
+ f.actor.dimension.getEntities=()=>{
+  queries.push(system.currentTick);
+  return [{id:f.actor.id+'-vision-target',typeId:'minecraft:cow',getComponent:()=>({currentValue:10}),getAABB:f.actor.getAABB}];
+ };
  f.actor.dimension.playSound=()=>{};world.getAllPlayers=()=>[f.actor];
  try{
   system.currentTick=600;applyCustomEffect(f.actor,{effect:'kaleidoscope_tavern:vision',ticks:52,amplifier:0});
   applyCustomEffect(f.actor,{effect:ARDENT,ticks:4,amplifier:0});
-  for(let tick=601;tick<=603;tick++){system.currentTick=tick;tickArdentHeat();}
-  assert.equal(glows.length,1,'the 52 -> 49 boundary must be consumed before the early save');
+  for(let tick=601;tick<=602;tick++){system.currentTick=tick;tickArdentHeat();}
+  assert.deepEqual(queries,[],'Vision must not pulse before crossing the boundary');
+  system.currentTick=603;tickArdentHeat();
+  assert.equal(statusNow(f.actor).entries.find(e=>e.id==='kaleidoscope_tavern:vision').ticks,49);
+  assert.deepEqual(queries,[603],'the 52 -> 49 boundary must be consumed before the early save');
   system.currentTick=605;tickCustomEffects();tickArdentHeat();tickCustomEffects();
-  assert.equal(glows.length,1);assert.equal(f.effects.filter(e=>e.id==='hunger').length,1);
+  assert.deepEqual(queries,[603],'later passes must not replay the consumed Vision pulse');
+  assert.equal(f.effects.filter(e=>e.id==='hunger').length,1);
  }finally{clearCustomEffects(f.actor);world.getAllPlayers=previousPlayers;}
 });
 

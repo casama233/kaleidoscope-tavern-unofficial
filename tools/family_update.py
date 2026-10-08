@@ -20,15 +20,16 @@ def main(argv=None):
         raise RuntimeError('Release safeguards require Python assertions; do not use -O/PYTHONOPTIMIZE')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, required=True)
-    parser.add_argument('command', nargs='?', default='plan', choices=['plan', 'status', 'prepare', 'record-ci', 'deploy', 'update', 'saved-world', 'verify-live', 'cleanup-copies'])
+    parser.add_argument('command', nargs='?', default='plan', choices=['plan', 'status', 'prepare', 'record-ci', 'deploy', 'update', 'saved-world', 'verify-live', 'cleanup-copies', 'cleanup-engine-inputs'])
     parser.add_argument('--execute', action='store_true')
     args = parser.parse_args(argv)
     common.configure(args.config)
-    if args.command == 'cleanup-copies':
+    if args.command in ['cleanup-copies', 'cleanup-engine-inputs']:
         if args.execute:
             common.verify_canonical_runner()
-        from family_update import cleanup_copies
-        result = cleanup_copies.main(['--execute'] if args.execute else [])
+        from family_update import cleanup_copies, cleanup_engine_inputs
+        module = cleanup_copies if args.command == 'cleanup-copies' else cleanup_engine_inputs
+        result = module.main(['--execute'] if args.execute else [])
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     from family_update import workflow

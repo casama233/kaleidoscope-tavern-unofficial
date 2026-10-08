@@ -163,3 +163,19 @@ test('author 1.0.1 external fluids: atomic owner validation, liquid amount, repl
  assert.equal(f.dimension.getEntities({type:'visual_addon:new_surface'}).length,0);
  assert.equal(foreign.removed,false);
 });
+
+for(const fluid of ['water','lava'])test(`old saved ${fluid} surface without the new marker is reused and removed`,async()=>{
+ const f=await fixture(),core=f.dimension.getBlock({x:0,y:0,z:0}),state=f.state();
+ state.open=true;state.fluid='minecraft:'+fluid;state.amount=1000;
+ const type=NS+`:rig_liquid_barrel_${fluid}_visual`;
+ const old=f.dimension.spawnEntity(type,{x:.5,y:0,z:.5});
+ old.setDynamicProperty('kt:anchor',f.key);old.setDynamicProperty('kt:token',state.token);
+ const amounts=[];old.setProperty=(key,value)=>amounts.push([key,value]);
+ f.machines.syncVisuals(core,state);
+ assert.equal(f.dimension.getEntities({type}).length,1);
+ assert.equal(f.dimension.getEntities({type})[0],old);
+ assert.deepEqual(amounts,[['kt_art:amount',1000]]);
+ f.machines.installMachineEvents();const effect={entity:old,cancel:false};
+ for(const fn of f.eventCallbacks.effect)fn(effect);assert.equal(effect.cancel,true);
+ state.amount=0;f.machines.syncVisuals(core,state);assert.equal(old.removed,true);
+});

@@ -5,6 +5,7 @@ Uses the same lock, host namespace and transitive evidence guards as copy cleanu
 """
 import argparse
 import fcntl
+import filecmp
 import json
 import os
 from pathlib import Path
@@ -62,7 +63,91 @@ def target_metadata(p, root, mounts):
             'allocated_bytes': details['allocated_bytes'], 'files': sorted(details['files'])}
 
 
-def plan(root, context):
+
+def asset_reference(comparison_cache):
+    policy = c.Q / 'senluo-policy.json'
+    if not policy.exists():
+        return None
+    value = c.read(policy)
+    receipt = Path(value['approved_receipt'])
+    digest = value['installed']['receipt_sha256']
+    if value['installed']['receipt'] != str(receipt):
+        raise ValueError('Retained asset receipt differs from installed policy')
+    key = ('receipt', str(receipt), digest, tuple(retention._stat(receipt)))
+    if key not in comparison_cache:
+        if c.sha(receipt) != digest:
+            raise ValueError('Retained asset receipt identity changed')
+        reviewed = c.read(receipt)
+        candidate = Path(reviewed['assembled_receipt']['path']).parent
+        comparison_cache[key] = (receipt, candidate, {p['uuid']: p for p in reviewed['packs'] if p['side'] == 'resource'})
+    return comparison_cache[key]
+
+
+def asset_targets(engine, root, mounts, comparison_cache):
+    reference = asset_reference(comparison_cache)
+    if not reference:
+        return []
+    receipt, candidate, packs = reference
+    targets = []
+    worlds = engine / 'worlds'
+    if not worlds.is_dir() or worlds.is_symlink():
+        return []
+    for world in worlds.iterdir():
+        pack_root = world / 'resource_packs'
+        if not pack_root.is_dir() or pack_root.is_symlink():
+            continue
+        for pack in pack_root.iterdir():
+            if not pack.is_dir() or pack.is_symlink() or not (pack / 'manifest.json').is_file():
+                continue
+            retention._safe_path(pack, root, mounts)
+            uid = c.read(pack / 'manifest.json')['header']['uuid']
+            if uid not in packs:
+                continue
+            for name in ('textures', 'sounds'):
+                pending = [pack / name]
+                while pending:
+                    target = pending.pop()
+                    if not target.is_dir() or target.is_symlink():
+                        continue
+                    metadata = target_metadata(target, root, mounts)
+                    prefix = target.relative_to(pack).as_posix()
+                    source_root = candidate / 'resource_packs' / uid / prefix
+                    if not source_root.is_dir():
+                        pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
+                        continue
+                    # Validate the source subtree once, rather than rescan all
+                    # mount ancestors for every image. Individual identities
+                    # still bind every compared file and deletion boundary.
+                    retention._walk(source_root, root, mounts)
+                    checks = {}
+                    for rel in metadata['files']:
+                        copy = target / rel
+                        source = candidate / 'resource_packs' / uid / prefix / rel
+                        digest = packs[uid]['files'].get(prefix + '/' + rel)
+                        if not digest or not source.is_file() or source.is_symlink():
+                            break
+                        identities = [retention._stat(copy), retention._stat(source)]
+                        key = (str(copy), str(source), digest, tuple(identities[0]), tuple(identities[1]))
+                        if key not in comparison_cache:
+                            source_key = ('source', str(source), digest, tuple(identities[1]))
+                            if source_key not in comparison_cache:
+                                comparison_cache[source_key] = c.sha(source) == digest
+                            comparison_cache[key] = comparison_cache[source_key] and filecmp.cmp(copy, source, shallow=False)
+                        if not comparison_cache[key]:
+                            break
+                        checks[rel] = identities
+                    else:
+                        if checks:
+                            metadata['asset_reference'] = {'receipt': str(receipt), 'source': str(candidate / 'resource_packs' / uid / prefix), 'files': checks}
+                            targets.append(metadata)
+                        continue
+                    # Preserve the differing directory's direct files; independently
+                    # compare its copied child directories (e.g. old atlas/new images).
+                    pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
+    return targets
+
+def plan(root, context, comparison_cache=None):
+    comparison_cache = {} if comparison_cache is None else comparison_cache
     root = retention._absolute(root)
     mounts = retention._mount_paths()
     retention._safe_path(root, root, mounts)
@@ -86,12 +171,12 @@ def plan(root, context):
             if any(overlap(engine, p) for p in guards):
                 raise ValueError('Current source, evidence, policy or configuration reference')
             retention._safe_path(engine, root, mounts)
-            assert_idle(engine)
             # A managed candidate is never reclassified as an ordinary probe.
             managed = next((p for p in [engine, *list(engine.parents)[:2]]
-                            if (p / 'deployment-result.json').exists() or
-                            (p / 'build-evidence.json').exists() or
-                            (p / 'release-candidate/family-receipt.json').exists()), None)
+                            if p != root and root in p.parents and
+                            ((p / 'deployment-result.json').exists() or
+                             (p / 'build-evidence.json').exists() or
+                             (p / 'release-candidate/family-receipt.json').exists())), None)
             binding = None
             if managed:
                 row = retired.get(str(managed))
@@ -101,8 +186,13 @@ def plan(root, context):
             proof = closed_report(engine, root, mounts)
             if not proof:
                 raise ValueError('No successful normally closed QA report')
+            assert_idle(engine)
             targets = [v for name in PAYLOAD
-                       if (v := target_metadata(engine / name, root, mounts)) is not None]
+                       if not (engine / name).is_symlink() and
+                       (v := target_metadata(engine / name, root, mounts)) is not None]
+            targets += asset_targets(engine, root, mounts, comparison_cache)
+            if not targets:
+                raise ValueError('No real copied inputs or byte-identical asset directories')
             selected.append({'engine': str(engine), 'report': proof,
                              'managed_output': str(managed) if managed else None,
                              'deployment_binding': binding, 'targets': targets})
@@ -114,13 +204,14 @@ def plan(root, context):
             'disk_before': retention._disk(root), 'worlds_sources_logs_reports_removed': False}
 
 
-def execute(planned, context_provider):
+def execute(planned, context_provider, comparison_cache=None):
+    comparison_cache = {} if comparison_cache is None else comparison_cache
     root = Path(planned['root'])
     mounts = retention._mount_paths()
     result = {'schema': 1, 'state': 'running', 'deleted': [], 'preserved': [],
               'disk_before': retention._disk(root), 'worlds_sources_logs_reports_removed': False}
     # Only original selected rows can be removed; newly eligible engines wait.
-    latest = plan(root, context_provider())
+    latest = plan(root, context_provider(), comparison_cache)
     eligible = {r['engine']: r for r in latest['selected']}
     for row in planned['selected']:
         engine = Path(row['engine'])
@@ -146,8 +237,15 @@ def execute(planned, context_provider):
                 raise RuntimeError('Maintenance or evidence context changed before deleting QA input')
             assert_idle(engine)
             # Recheck the complete deletion boundary; no content hash/suite rerun.
-            if target_metadata(p, root, mounts) != target:
+            actual = target_metadata(p, root, mounts)
+            expected = {key: value for key, value in target.items() if key != 'asset_reference'}
+            if actual != expected:
                 raise RuntimeError('QA input changed before deletion: ' + str(p))
+            asset = target.get('asset_reference')
+            if asset:
+                for rel, identities in asset['files'].items():
+                    if [retention._stat(p / rel), retention._stat(Path(asset['source']) / rel)] != identities:
+                        raise RuntimeError('Compared asset changed before deletion: ' + str(p / rel))
             if p.is_dir():
                 shutil.rmtree(p)
             else:
@@ -170,8 +268,9 @@ def main(argv=None):
     with c.LOCK.open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         c.lease_available()
-        proposed = plan(root, cleanup_copies.execution_context())
-        result = execute(proposed, cleanup_copies.execution_context)
+        comparisons = {}
+        proposed = plan(root, cleanup_copies.execution_context(), comparisons)
+        result = execute(proposed, cleanup_copies.execution_context, comparisons)
         c.R.mkdir(parents=True, exist_ok=True)
         c.atomic(c.R / 'engine-input-cleanup.json', result)
         return result

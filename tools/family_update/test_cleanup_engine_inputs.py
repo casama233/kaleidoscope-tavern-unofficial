@@ -1,5 +1,6 @@
 """Deletion guards for completed QA inputs; no Minecraft execution."""
 import json
+import hashlib
 from pathlib import Path
 import tempfile
 import unittest
@@ -15,8 +16,8 @@ class EngineInputCleanup(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.engine = self.root / 'closed-probe'
-        self.engine.mkdir()
+        self.engine = self.root / 'task/closed-probe'
+        self.engine.mkdir(parents=True)
         (self.engine / 'bedrock_server').write_bytes(b'reproducible test engine')
         (self.engine / 'definitions').mkdir()
         (self.engine / 'definitions/original.json').write_text('{}')
@@ -30,9 +31,15 @@ class EngineInputCleanup(unittest.TestCase):
         writer = patch.object(cleanup.c, 'atomic', lambda p, v: Path(p).write_text(json.dumps(v)))
         writer.start()
         self.addCleanup(writer.stop)
+        reference = patch.object(cleanup, 'asset_reference', return_value=None)
+        self.reference = reference.start()
+        self.addCleanup(reference.stop)
 
     def test_closed_inputs_retire_but_world_source_and_evidence_remain(self):
+        (self.root / 'release-candidate').mkdir()
+        (self.root / 'release-candidate/family-receipt.json').write_text('{}')
         plan = cleanup.plan(self.root, self.context)
+        self.assertEqual(len(plan['selected']), 1)
         result = cleanup.execute(plan, lambda: self.context)
         self.assertEqual(result['state'], 'completed')
         self.assertFalse((self.engine / 'bedrock_server').exists())
@@ -54,8 +61,36 @@ class EngineInputCleanup(unittest.TestCase):
             self.report.write_text(json.dumps(value))
             self.assertEqual(cleanup.plan(self.root, self.context)['selected'], [])
         self.report.write_text(json.dumps({'ok': True, 'normal_stop': True, 'exit_code': 0, 'errors': []}))
-        (self.root / 'build-evidence.json').write_text('{}')
+        (self.engine.parent / 'build-evidence.json').write_text('{}')
         self.assertEqual(cleanup.plan(self.root, self.context)['selected'], [])
+
+    def test_identical_assets_retire_but_different_assets_and_source_remain(self):
+        source = self.root / 'retained/resource_packs/uuid'
+        copied = self.engine / 'worlds/QA/resource_packs/uuid'
+        for pack in [source, copied]:
+            (pack / 'textures/items').mkdir(parents=True)
+            (pack / 'sounds').mkdir()
+            (pack / 'textures/items/icon.png').write_bytes(b'original image')
+        (source / 'textures/item_texture.json').write_bytes(b'new atlas')
+        (copied / 'textures/item_texture.json').write_bytes(b'old atlas retained')
+        (copied / 'manifest.json').write_text(json.dumps({'header': {'uuid': 'uuid'}}))
+        (source / 'sounds/unique.ogg').write_bytes(b'original sound')
+        (copied / 'sounds/unique.ogg').write_bytes(b'unique diagnostic sound')
+        files = {'textures/item_texture.json': hashlib.sha256(b'new atlas').hexdigest(),
+                 'textures/items/icon.png': hashlib.sha256(b'original image').hexdigest(),
+                 'sounds/unique.ogg': hashlib.sha256(b'original sound').hexdigest()}
+        self.reference.return_value = (self.root / 'receipt.json', self.root / 'retained',
+                                       {'uuid': {'files': files}})
+        cache = {}
+        plan = cleanup.plan(self.root, self.context, cache)
+        result = cleanup.execute(plan, lambda: self.context, cache)
+        self.assertEqual(result['state'], 'completed')
+        self.assertFalse((copied / 'textures/items').exists())
+        self.assertEqual((copied / 'textures/item_texture.json').read_bytes(), b'old atlas retained')
+        self.assertEqual((copied / 'sounds/unique.ogg').read_bytes(), b'unique diagnostic sound')
+        self.assertEqual((source / 'textures/items/icon.png').read_bytes(), b'original image')
+        self.assertTrue((copied / 'manifest.json').exists())
+        self.assertTrue((self.engine / 'worlds/probe-source.js').exists())
 
     def test_symlink_payload_rejected_and_active_lease_preserved(self):
         (self.engine / 'definitions/link').symlink_to(self.root / 'outside')

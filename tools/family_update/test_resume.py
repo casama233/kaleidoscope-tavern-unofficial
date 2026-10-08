@@ -315,6 +315,25 @@ class ResumeTests(unittest.TestCase):
             live.assert_not_called()
         self.stages.assert_not_called()
 
+    def test_fresh_deployment_reports_its_readback_when_source_advances_during_cleanup(self):
+        report = self.r / 'poststart-verification.json'
+        def completed_stage(name, *args):
+            self.assertEqual(name, 'deploy_live')
+            self.write(self.r / 'deployment-result.json', {
+                'state': 'deployed_running', 'receipt_sha256': 'reviewed',
+                'poststart_report': str(report)})
+            self.write(report, {'ok': True, 'summary': {'status': 'RUNNING'},
+                'errors': [], 'receipt_sha256': 'reviewed', 'recorded_at': 'completed-before-cleanup'})
+            self.source_state.return_value['grilling']['commit'] = 'next-reviewed-release'
+        self.stages.side_effect = completed_stage
+        with patch.object(workflow, 'verify_deployed', side_effect=AssertionError('duplicate post-cleanup audit')):
+            result = workflow.deploy()
+        self.assertEqual(result['state'], 'deployed_running')
+        self.assertEqual(result['verified_at'], 'completed-before-cleanup')
+        self.assertFalse(result['client'])
+        self.assertFalse(result['production_ready'])
+        self.source_state.assert_called_once_with()
+
 
 if __name__ == '__main__':
     unittest.main()

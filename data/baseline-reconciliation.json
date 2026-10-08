@@ -3490,6 +3490,11 @@
       "before": null,
       "after": "4b3a48001a96391f1d6b0c3c020851dc76a34f686860a6024b3a2193ba3abe2a",
       "reason": "T129 appended reviewed runtime addition. Source-based three-language per-cocktail effect and operation notes with explicit reach/step-height/vision/aggro/XP platform boundaries, reused by both guide projections."
+    },
+    "runtime/BP/scripts/core/legacy-shaker-migration.js": {
+      "before": null,
+      "after": "46189493cd41f02ca66d6f27e2fbc68a5e81227161c36f8ef6d139d642f8142b",
+      "reason": "T130 appended runtime addition: verified stable-API outer metadata transfer and rollback for two owned legacy shaker IDs; current BP scope only, never arbitrary NBT or cross-BP private data."
     }
   },
   "reviewedFunctionalDeltas": {
@@ -4662,6 +4667,174 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.130",
+      "reviewedPredecessorCommit": "9752aaee5cb6f0d0460cb9f9c8ab3424f975c1e4",
+      "reviewedSourceCommit": "5c94e2c6627b260e0800a3026baec8afe26d6604",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.130.md",
+      "files": {
+        "runtime/BP/scripts/bedrock/bar-cabinet.js": {
+          "before": "fc900528bd4aea92f3861b9860d7cd7fab13336dd12b4680bff41459dff14805",
+          "after": "379917c66f734e087714e953d121b7edec6a487e9ced37f4b572b6097a1ce69e",
+          "reason": "One helper query per owner, native pose difference checks, grouped bounded maintenance and preservation of unloaded owners.",
+          "reverseOps": [
+            [
+              8,
+              9,
+              "import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,plus,tell,air} from './transactions.js';\n"
+            ],
+            [
+              10,
+              11,
+              ""
+            ],
+            [
+              18,
+              18,
+              "function helpers(block,side){const a=barCabinetAnchor(barCabinetKey(block.dimension.id,block.location,block.typeId),side);return block.dimension.getEntities({location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}\n"
+            ],
+            [
+              19,
+              20,
+              "export function syncBarCabinetVisuals(block,state=store.load(barCabinetKey(block.dimension.id,block.location,block.typeId))){if(state)check(cabinet(block),'NOT_BAR_CABINET');const facing=block?.permutation.getState(FACING)??0;for(const side of['left','right']){const item=state?.[side]??null,all=helpers(block,side);if(!item){for(const e of all)discard(e,'orphans');continue;}const bottle=barCabinetItem(item);check(bottle,'BAR_CABINET_ITEM');all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];if(e&&e.typeId!==externalVisual(HELPER,item)){discard(e,'repairs');e=undefined;}for(const x of all.slice(1))discard(x,'duplicates');const pose=barCabinetVisualPose(side,state.single,facing),at={x:block.location.x+pose.offset.x,y:block.location.y+pose.offset.y,z:block.location.z+pose.offset.z};if(!e){e=block.dimension.spawnEntity(externalVisual(HELPER,item),at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,barCabinetAnchor(barCabinetKey(block.dimension.id,block.location,block.typeId),side));e.addTag('kaleidoscope_tavern:visual_helper');barCabinetDiagnostics.spawned++;}e.setProperty(NS+':storage_kind',bottle.kind);e.setRotation({x:0,y:pose.rotation.y});e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);}}\n"
+            ],
+            [
+              25,
+              27,
+              "export function maintainBarCabinetVisual(e){if(!e?.isValid)return;if(e?.getDynamicProperty('kaleidoscope_tavern:extension_storage_anchor')){visuals.delete(e.id);return;}if(!isExternalVisual(e?.typeId,HELPER))return;try{const a=parseBarCabinetAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(block?.typeId!==a.typeId){discard(e,'orphans');return;}const state=store.load(barCabinetKey(e.dimension.id,a.position,a.typeId));if(!state?.[a.side]){discard(e,'orphans');return;}visuals.set(e.id,e);syncBarCabinetVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}\nexport function tickBarCabinets(){cursor=tickStorageVisuals(visuals,cursor,maintainBarCabinetVisual);}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/tilted-rack.js": {
+          "before": "c38bed2b0a9c105af35963e8e9542f12a8b2a68f06bdee4a8a38a43d7fa4ff1f",
+          "after": "56a56075f9206d0c6cf3a29fc4668adb56cdab596f51b2606a6ada8bf59061db",
+          "reason": "One helper query per owner and grouped bounded maintenance while retaining four-facing poses and sibling repair after an empty first slot.",
+          "reverseOps": [
+            [
+              9,
+              10,
+              "import {makeStack,hand,canWrite,canInteract,placementTake,blockAt,blockCenter,requireBlockReach,commitStoredStateTransaction,tell,air} from './transactions.js';\n"
+            ],
+            [
+              11,
+              12,
+              ""
+            ],
+            [
+              15,
+              15,
+              "function slotHelpers(block,slot){const a=tiltedRackAnchor(tiltedRackKey(block.dimension.id,block.location),slot);return block.dimension.getEntities({location:blockCenter(block.location),maxDistance:2}).filter(e=>e.getDynamicProperty(ANCHOR)===a);}\n"
+            ],
+            [
+              17,
+              18,
+              "export function syncTiltedRackVisuals(block,state=store.load(tiltedRackKey(block.dimension.id,block.location))){if(state)check(block?.typeId===TILTED_RACK,'NOT_TILTED_RACK');const facing=block?.permutation.getState(FACING)??0;for(let slot=0;slot<3;slot++){const item=state?.slots[slot]??null,all=slotHelpers(block,slot);if(!item){for(const e of all)discard(e,'orphans');continue;}const bottle=tiltedRackItem(item);check(bottle,'TILTED_RACK_ITEM');all.sort((a,b)=>a.id.localeCompare(b.id));let e=all[0];if(e&&e.typeId!==externalVisual(HELPER,item)){discard(e,'repairs');e=undefined;}for(const x of all.slice(1))discard(x,'duplicates');const at=position(block,slot,facing),pose=tiltedRackVisualPose(slot,facing);if(!e){e=block.dimension.spawnEntity(externalVisual(HELPER,item),at,{initialRotation:pose.rotation.y});e.setDynamicProperty(ANCHOR,tiltedRackAnchor(tiltedRackKey(block.dimension.id,block.location),slot));e.addTag('kaleidoscope_tavern:visual_helper');tiltedRackDiagnostics.spawned++;}e.setProperty(NS+':storage_kind',bottle.kind);e.setRotation({x:0,y:pose.rotation.y});e.tryTeleport(at,{checkForBlocks:false});visuals.set(e.id,e);}}\n"
+            ],
+            [
+              24,
+              26,
+              "export function maintainTiltedRackVisual(e){if(!e?.isValid)return;if(!isExternalVisual(e?.typeId,HELPER))return;try{const a=parseTiltedRackAnchor(e.getDynamicProperty(ANCHOR));if(e.dimension.id!==a.dimension){discard(e,'orphans');return;}const block=blockAt(e.dimension,a.position);if(!block)return;if(block.typeId!==TILTED_RACK){discard(e,'orphans');return;}const state=store.load(tiltedRackKey(e.dimension.id,a.position));if(!state?.slots[a.slot]){discard(e,'orphans');return;}visuals.set(e.id,e);syncTiltedRackVisuals(block,state);}catch(x){error(x);try{discard(e,'orphans');}catch{}}}\nexport function tickTiltedRackVisuals(){cursor=tickStorageVisuals(visuals,cursor,maintainTiltedRackVisual);}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "a42702abd25ac1c87851e14ebd258f7691755d7731d6eabf30ddec72a25a95f1",
+          "after": "8ac6eceadf72c117cd18b546377a1bd488fe44339ba86d43cf5f8fc920664ccd",
+          "reason": "Per-tick Ardent termination with once-only Hunger, preserved longer weaker durations and settled adjacent countdown pulses; native living Bloody Mary kill healing.",
+          "reverseOps": [
+            [
+              18,
+              22,
+              "function indexFastPlayer(p,state){\n if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels'))fastPlayers.set(p.id,p);\n"
+            ],
+            [
+              37,
+              38,
+              " const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state);return snapshot;\n"
+            ],
+            [
+              72,
+              75,
+              " // The remaining own timed behavior still has player-specific adapters.\n if(p?.typeId!=='minecraft:player')return false;\n"
+            ],
+            [
+              229,
+              267,
+              " for(const p of fastPlayers.values())try{if(activeStatus(statusNow(p),'kaleidoscope_tavern:ardent_heat'))pulseArdentHeat(p);}catch(e){error(e);}\n"
+            ],
+            [
+              293,
+              294,
+              "  if(!p||p.typeId!=='minecraft:player'||p.id===victim?.id||deaths.has(victim.id))return;\n"
+            ],
+            [
+              318,
+              322,
+              "  const {before,state}=statusWindow(p),previousVision=activeStatus(before,'kaleidoscope_tavern:vision'),currentVision=activeStatus(state,'kaleidoscope_tavern:vision'),previousArdent=activeStatus(before,'kaleidoscope_tavern:ardent_heat'),currentArdent=activeStatus(state,'kaleidoscope_tavern:ardent_heat');let nextState=state;\n  if(previousVision){const afterTicks=currentVision?.amplifier===previousVision.amplifier?currentVision.ticks:0;if(countdownPulseCrossed(previousVision.ticks,afterTicks,50))pulseVision(p,previousVision.amplifier);}\n  if(previousArdent&&!currentArdent){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}\n  const previousGrass=activeStatus(before,'kaleidoscope_tavern:grass_stealth'),currentGrass=activeStatus(state,'kaleidoscope_tavern:grass_stealth');\n  if(previousGrass){const afterTicks=currentGrass?.amplifier===previousGrass.amplifier?currentGrass.ticks:0;if(countdownPulseCrossed(previousGrass.ticks,afterTicks,10))pulseGrassStealth(p);}\n  if(currentArdent){const hunger=p.getComponent?.('minecraft:player.hunger'),saturation=p.getComponent?.('minecraft:player.saturation');if(hunger&&saturation&&hunger.currentValue<=0&&saturation.currentValue<=.01){nextState=removeStatus(nextState,'kaleidoscope_tavern:ardent_heat');try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "f4c8c2455711ee98874ad88f33a0b8ebb2554a02c2e4ab42677dcc670ffe5501",
+          "after": "055a274e35c9f24e0630a0a971389d116c41e4c82375ad5c777deb4460254ce6",
+          "reason": "Verified single-slot readable-metadata migration for the two owned legacy IDs; independent active-only PUT recovery component.",
+          "reverseOps": [
+            [
+              19,
+              20,
+              "import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';\n"
+            ],
+            [
+              38,
+              39,
+              ""
+            ],
+            [
+              331,
+              338,
+              "function migrateInventory(player){\n"
+            ],
+            [
+              341,
+              343,
+              "   const item=container.getItem(index);if(![ACTIVE_SHAKER,POURING_SHAKER].includes(item?.typeId))continue;\n   const carried=readPortableItem(item);container.setItem(index,portable(carried.state,carried.token));\n"
+            ],
+            [
+              380,
+              382,
+              " blocks.registerCustomComponent(NS+':shaker_station',{onTick:event=>repairShakerPutVisual(event.block),onPlayerInteract:nativeEmptyHandBlockUse});\n"
+            ],
+            [
+              428,
+              429,
+              " world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateInventory(player);}));\n"
+            ],
+            [
+              440,
+              441,
+              " system.run(()=>{for(const player of world.getAllPlayers()){clearShakerPlayer(player);migrateInventory(player);}});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/living-effect-entity.js": {
+          "before": "d8868f83e0fc4b29dcd5fe5de8b6d94b961055352aee27774600f24288433e11",
+          "after": "3f090f3233d2d3706724ad3e1399d293fd964d19e704ddb64fb9811b809e7b9c",
+          "reason": "Explicit allowDead victim class predicate retains health-bearing vehicle exclusions for native kill events.",
+          "reverseOps": [
+            [
+              3,
+              4,
+              "export function livingEffectEntity(entity){\n"
+            ],
+            [
+              8,
+              11,
+              "  return !!health&&health.currentValue>0&&(entity.typeId==='minecraft:armor_stand'||entity.getComponent('minecraft:type_family')?.hasTypeFamily('mob')===true);\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -4790,6 +4963,38 @@
           "after": "cf8cbf7d239df984bd55235d11aee932528fdeb23abda5d3e5529a1e158723c2",
           "reason": "Reviewed Tavern-only progress cursor interpolation and shorter local progress expiry; ingredient-row expiry, native root/foreign HUD routing and optional effect mounts are preserved. Keep the exact frozen JSON bytes including numeric lexemes; client rendering remains pending.",
           "beforeGzipBase64": "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"
+        }
+      }
+    },
+    {
+      "release": "0.6.130",
+      "reviewedPredecessorCommit": "9752aaee5cb6f0d0460cb9f9c8ab3424f975c1e4",
+      "reviewedSourceCommit": "5c94e2c6627b260e0800a3026baec8afe26d6604",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.130.md",
+      "files": {
+        "runtime/BP/blocks/shaker_station.json": {
+          "before": "65c1551b050bc889c3716ceb65147852398ddccea7f5501b7a0d23aa6ff8ca0f",
+          "after": "04dafa9afd4c65f90dd5be078d35e5fe94f384ef002f80fc8d72661bc0206431",
+          "reason": "Move the existing eight-tick recovery and its callback component together into the active PUT permutation; idle interaction remains.",
+          "beforeGzipBase64": "H4sIAAAAAAACA9VW227bMAx9z1cYfuk2uF6Sdl1WoF9SFIIiM4kW6zJJLpIV+fdRtpPIjupeNiDdky2JIqlzeHsaJUm6UEZQRx7BWK5kepukk3x6k38bp5k/FlwCM3ThbuelYms8f8JtPCjAMsO1ay41m7jNC5COLzgYr2pNS+CFskxpII6iEXlrV3QNhlhH67vZ/qbfABvoSuL3F5RxuUS5+4NckoyzYDEJF9NwcXX4f8iGregKMeG2ouWgpaO+9m9Xf3eNUMqU0EoiIuG7AkyXoAQ4s+2+uovhXiZfO0KtBWcJneUNiuneanaqG1kFw2lJuERoJetj+6WzxA0HG1cZqHkLTJGaeCL4RpVquSWt5RCG1IAskFP0c6UKr4CWekUJ8um6glTMOT6OKMbKqg24cd7BNEWCgRRciIZmZyo4HO8GHswdiCNnwUujKL8L58CwNz2McATjv0L5DTi/DukXsD6iHcP9FamNb4/xxFRZcu8RmatNlyll+JLLXsZdXmfP5d/ldTShLf8NPSWzTtrehKvZaRJHvLZQAnP/m9eOBzW7CXqJQfuIQWuoXA7am0W9LJXSJ8ESM40NAiUQsnkJZL7F0JbNvcAZC0zJwhKnSC2ufI6O36AUNrpUttuD8MJhmxiwvEnOFzQL9UhRaVcPboLwWeS2uk5ZrbSGYqjsIj7OS/ov5gWqtF9BaLfNf9qw3QU3+HLlSEGFhhah8WCWSYoFBAmcG6A9cguj9HDfHXIduZBtjJuqDwVlDDSWqqOQJQujhDcnscel0QaowYiqKQc2iLVArw8A3paL9FfelMF6Fvh08Xz7v/ic3N0l46DoxXttPx0w6G0z8fRjpqmv6lC67jsnvQyOb3TWD6+ro/8Iick5kbj88aGwmJ4Vi8nsQ4FxdVYwpt/PDsZxkH9npjwzPQ7Oj6bCAwHt9Ei8DyteoHgavjeLG3xxrIwOliejZesDqQnVFEfH/owYGyixX8ki7Yjthjka7XncjXajP+WnPJtTDgAA"
+        },
+        "runtime/RP/texts/ja_JP.lang": {
+          "before": "2af27546906bf8213fa22a093b2b54ccb147f1086e5fd722431910392a661869",
+          "after": "cdab0257b2f1be86a3706e956e9672bb79a569d9c2fe95d2639200c3912be3b6",
+          "reason": "Preserve existing Japanese translations and add only native aliases derived from their exact original keys.",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/texts/ru_RU.lang": {
+          "before": "6157e3580eac3b51a295fb4451735ae0f6fe8c3fa461172e149054cb3ded3fa3",
+          "after": "0b4885276873ad4aa1cf72a19ba9bf9c035a10f4ff05ccd3b1bb946c7f7e5d55",
+          "reason": "Preserve existing Russian translations and add only native aliases derived from their exact original keys.",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/texts/languages.json": {
+          "before": "652114f7f9cb1f3cc581ab65720ca87694f3cdb43e1381f0e0d2e492112adad0",
+          "after": "092fc9516d34b774e4bf8bc42d5a3b1c41611c67cc0bec4a38cf9cbc2614b79b",
+          "reason": "Register the two already-packaged partial languages; retain all three complete locale entries.",
+          "beforeGzipBase64": "H4sIAAAAAAACA4vmUlBQSs2LDw1W0gExqzLinf3gzJBwJa5YLgDy/L0dJAAAAA=="
         }
       }
     }

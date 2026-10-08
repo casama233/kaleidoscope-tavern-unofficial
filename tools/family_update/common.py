@@ -316,7 +316,8 @@ def validate_translation_reconciliation(inventory,expected,order,dependency_pins
             if dep.get('uuid') in allowed:dep['version']=[0,0,0]
             elif dep.get('uuid') in dependency_pins:
                 # Only the separately reviewed preserved pair may advance.
-                assert dep['version'] in ([2,4,18],[2,4,19],dependency_pins[dep['uuid']]), 'Unreviewed preserved dependency version'
+                from family_update.amw25_reconciliation import dependency_versions
+                assert dep['version'] in dependency_versions(dep['uuid'],dependency_pins), 'Unreviewed preserved dependency version'
                 dep['version']=[0,0,0]
         return value
     changed=[]

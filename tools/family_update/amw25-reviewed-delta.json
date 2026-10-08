@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "profile": "amw-server-2625",
+  "source_repository": "casama233/senluo-family-integration-private",
+  "source_repository_id": 1406868911,
+  "snapshot_commit": "b6848a89cf25570a469fe56eedc66ca88b7942c5",
+  "prefix": "companion-sources/amw2625-reconciliation",
+  "before_version": [
+    2,
+    6,
+    24
+  ],
+  "after_version": [
+    2,
+    6,
+    25
+  ],
+  "changed": {
+    "BP": {
+      "item_catalog/crafting_item_catalog.json": {
+        "before": "d9a285f78451e4516eec0f0854ec22d1bc4a6284b8dc2fd94a873456feacf952",
+        "after": "bd2a6480e1fd66e339c92f9925b35a551e2cae62d791cd4546fc3eab3ff0f760"
+      },
+      "items/research_note.json": {
+        "before": "cbccef1ce606ed61dab061654844e0819c390aec6c6417f128c4dff718f6ac06",
+        "after": null
+      },
+      "items/scrolls/cumulonimbus_scroll.json": {
+        "before": "381061bb85f15a27cfa8eb4ead514cc218408283bcf54929a8dccd0dff7052ec",
+        "after": "514428107b072589a93e166506a69679689a6144316a27c4aa596ab1cea38c00"
+      },
+      "items/scrolls/purify_scroll.json": {
+        "before": "8eb285eb92a20659ae5ee0cf3ab0230cf5543f6bc0fea7084dfc6b09c2a38402",
+        "after": "8163ded53730ab52b64806820a1ee3537a4aa292d3f43e1eca5f93f44e4479d1"
+      },
+      "items/scrolls/recall_scroll.json": {
+        "before": "1cfa0eeaf0c6b627e7cc418697e99245fdbda7329ba6d09c85df467545dcaa67",
+        "after": "a898c389d9ed44621790bbf1d55d995ec82cd32b23a5baf1a0a6929925420780"
+      },
+      "items/scrolls/self_healing_scroll.json": {
+        "before": "88e5fc65e9bac11c187df0dcad7145b7d3a31f12b4ab43568958d9813a001d1c",
+        "after": "500cc8e0437798bcde44ba0014be1116e3fe3082039f4777e189c741a698e71e"
+      },
+      "manifest.json": {
+        "before": "8727d2dfd09461ac3bcb0bf0624f57f0a59ec572b0ef63072c99d3cbfb2aaf4e",
+        "after": "eba92657052d0588c2dfc457138d827f23e13be02574c6702b0e96d2cfb25265"
+      },
+      "scripts/lib/MagicLibrary.js": {
+        "before": "513c2156c6a872c1ed0590c6edec02a612da2c1633aafbb74566912e62ac622f",
+        "after": "f9774decbf1bdc906254a8c0ba4610f3216be137240edf0f3dd0cd5626d22534"
+      },
+      "scripts/lib/attribute-publisher.js": {
+        "before": null,
+        "after": "38550072810f7e508aaabbc40a53006ac83042bd8a3eb298289bd41b26ddfbb0"
+      },
+      "scripts/lib/tracked_entities.js": {
+        "before": "71b25718e8dbd283618d45d9339b9fc27253ed2e63357ac20befd87bb326c87f",
+        "after": "d1dc9b12af2545ff81e4d89366be4a238e2a3fb5e48f3e71921edc801e2c1fda"
+      },
+      "scripts/magic_attributes_database.js": {
+        "before": "111aeaeb54b73da87d696827f8f98b640dc02a66d219a4300ab9a076f1cf833d",
+        "after": "70470e1e94cb25f05b620a0d0b03fcb1edc8729bf3e5606dc6afee252b129f22"
+      },
+      "scripts/magic_function.js": {
+        "before": "e9abed17371701375718eeb86a63a058b6454d09c917e0958b9592db488f5733",
+        "after": "33cb182bd6b3ed5af5762e370952d46810e21508eac267395bfd03db158a9927"
+      },
+      "scripts/magic_list.js": {
+        "before": "54904dd6146fd008b04818141a9f609132f62a50e53ad596f6415ec7c0bb8d32",
+        "after": "0a55836074e0c1d632aa90755a8ce2a9473990f69b2ee28d825bc7cfa89781b4"
+      },
+      "scripts/main_a_magic_way.js": {
+        "before": "a8acaac08f120255d514bbaf67153fec9a00cc436f38aa41d6ea0cf26cc81626",
+        "after": "79c6beed1258955deeed7ae37e2f77bc378fe0a19719a8254abf3afa5727e972"
+      },
+      "scripts/thunder_catalog.js": {
+        "before": "49fda5dcf7acc5bf738eb94c396e4235d46927bb76a504bbf21b06fedb38f0b5",
+        "after": "25dd25e4646b63d8233efdf6feb794b5165d735b27cc395244a8ca92f7652af7"
+      }
+    },
+    "RP": {
+      "manifest.json": {
+        "before": "6f418071d4844cbaba6fffecae170b49684619d81219b678c20c3166a97ebf02",
+        "after": "7b9cfcf33ecb6aabedc6e51745cbef5253f7a82c3227bc53b2f440f4f873cba9"
+      },
+      "texts/en_US.lang": {
+        "before": "ccb83c2caf460026732988e0f04efa25cd631f3e60f264475c5e24fd6305d420",
+        "after": "f571d362db6cc13c6e3daaf359cf562ac70a6ccf7477b9a1a8c7873904629896"
+      },
+      "texts/zh_CN.lang": {
+        "before": "af9a31e9d9af7625db4914624665796943038ad1279e365a485b8146abc6f4e1",
+        "after": "630518db551e46b120a91ef892370b864bf3e63436a680403cd5f05809cc7832"
+      },
+      "texts/zh_TW.lang": {
+        "before": "900110ed19bb01eb1fbb435dcc3a37c0ea1891bf88ccc10a1efb3458dcfda7bd",
+        "after": "5b71cd8b729a3a75a8d1c484db234f481e4399dcaf3ee9616836b230c3327822"
+      },
+      "textures/item_texture.json": {
+        "before": "6dcbf6b9ff10dda1fd88213eafc4af5a28abc1528d7e27bed6092612ccd39f69",
+        "after": "23a936287c460dc40324ca4d574fb8e3d2ef2bf03337d359f613b7fcb0dcbcb1"
+      },
+      "textures/items/amwc_research_note.png": {
+        "before": "b420c8c97826019a4a3824d4ddfc41d354b6db0e56227fd98303de5e1ce4646c",
+        "after": null
+      }
+    }
+  },
+  "scope": "Exact conserved concurrent SERVER delta; not an official author update or Java/client parity certificate",
+  "client": false
+}

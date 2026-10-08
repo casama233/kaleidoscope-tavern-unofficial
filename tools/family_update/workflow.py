@@ -309,7 +309,20 @@ def deploy():
     if same_runtime(receipt, verify_predeploy()):
         return {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}
     run_stage('deploy_live')
-    return verify_deployed()
+    # deploy_live already verified installed files/order, guard, startup and
+    # live status under its lease. After it releases that lease, cleanup may
+    # take minutes and another reviewed source may advance. Report this
+    # completed transaction; do not re-audit it against a newer source tree.
+    # A separate resume call still enters verify_deployed above.
+    result = read(R / 'deployment-result.json')
+    verified = read(R / 'poststart-verification.json')
+    assert result['state'] == 'deployed_running', 'Deployment did not complete'
+    assert result['poststart_report'] == str(R / 'poststart-verification.json')
+    assert verified['receipt_sha256'] == result['receipt_sha256'], 'Deployment readback receipt differs'
+    assert verified['ok'] and verified['summary']['status'] == 'RUNNING' and not verified['errors'], 'Deployment readback failed'
+    return {'state': 'deployed_running', 'live_mutated': True,
+            'verified_at': verified['recorded_at'], 'poststart_report': result['poststart_report'],
+            'client': False, 'production_ready': False}
 
 
 def plan():

@@ -395,10 +395,23 @@ def orchestration_hashes():
     return {str(path.relative_to(ENTRY.parent)): sha(path) for path in paths if not path.name.startswith('test_')}
 
 
-def verify_canonical_runner():
+def verify_canonical_runner(*, lease_bound=False):
     # A reviewable worktree can plan, but only committed canonical tool bytes
     # may execute a release. Copying the CLI elsewhere does not bypass this.
-    source_state(verify_remote=True)
+    if lease_bound:
+        # The transaction already admitted these merged sources before stopping
+        # live. A later remote merge must not roll back a healthy installation.
+        # Only our active lease may use the exact captured source/tool/config.
+        assert_lease()
+        evidence = read(R / 'build-evidence.json')
+        assert sha(CONFIG_PATH) == evidence['config_sha256'], 'Transaction configuration changed'
+        assert orchestration_hashes() == evidence['orchestration_sha256'], 'Transaction runner changed'
+        current = source_state()
+        assert set(current) == set(evidence['sources']), 'Transaction source set changed'
+        for name, row in current.items():
+            assert all(evidence['sources'][name].get(key) == value for key, value in row.items()), 'Transaction source changed: ' + name
+    else:
+        source_state(verify_remote=True)
     for relative, digest in orchestration_hashes().items():
         assert sha(T / 'tools' / relative) == digest, 'Running update tool differs from canonical: ' + relative
     assert Path(sys.executable).absolute() == PY, f'Run the command with the configured interpreter: {PY}'

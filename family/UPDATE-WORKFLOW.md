@@ -204,3 +204,10 @@ admitted rows already bound by checked receipt references, rather than the
 next deployment's configuration. Conservation reads that retained source's
 Git baseline. Current evidence separately records its configured runtime CI
 references and refuses cached references from a different configuration.
+
+### 部署中的遠端合併
+
+新部署開始與停服前仍要求 canonical main 等於遠端。取得本候選 maintenance lease
+後，內部 saved-world／verify-live 入口核對已捕獲的精確 source、runner 與 config；
+另一個遠端 PR 的合併不再使已安裝的健康候選回退。沒有本候選的 active lease、
+本機來源／工具／設定變動仍拒絕；完整候選、保存、准入與實際啟動檢查保持不變。

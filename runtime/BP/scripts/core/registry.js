@@ -121,6 +121,11 @@ export class ExtensionRegistry {
   const expandedInputs=inputs.map(row=>({...row,ingredientTags:this.categoryCatalog.tags(row.item)}));
   this.fluidCache=freeze([...this.baseFluids,...ext.flatMap(x=>x.fluids??[])]);
   this.recipeCache=freeze(expandShakerTags(recipes,expandedInputs));
+  this.shakerRecipeItems=new Set();this.shakerRecipeTags=new Set();
+  for(const recipe of recipes)if(recipe.kind==='shaker'){
+   const predicates=recipe.ingredientPredicates??recipe.ingredients.map((items,index)=>recipe.ingredientTags?.[index]?[{tag:recipe.ingredientTags[index]}]:items.map(item=>({item})));
+   for(const rule of predicates.flat())if(rule.item)this.shakerRecipeItems.add(rule.item);else this.shakerRecipeTags.add(rule.tag);
+  }
   this.pageCache=freeze([...this.pages,...ext.flatMap(x=>sorted(x.pages))]);this.shakerInputCache=new Map(ext.flatMap(x=>x.shakerInputs).map(x=>[x.item,x]));this.furnitureCache=new Map(ext.flatMap(x=>x.furniture??[]).map(x=>[x.block,x]));this.revision++;
   for(const listener of [...this.listeners]){try{listener(this);}catch{}}
  }
@@ -173,7 +178,15 @@ export class ExtensionRegistry {
  ingredientCategories(item){return this.categoryCatalog.tags(item);}
  ingredientColor(item){return this.categoryCatalog.color(item);}
  previousIngredientColors(item){return this.categoryCatalog.previousColors(item);}
- acceptsShakerInput(item){return this.itemExists(item);}
+ acceptsShakerInput(item){
+  if(!this.itemExists(item))return false;
+  // Java gates insertion on cocktail_ingredient, not on item existence. Keep
+  // explicit addon inputs/recipe predicates and native tags as open extension
+  // points; merely installing an unrelated item never makes it an ingredient.
+  const qualityItem=item.replace(/_q[1-3]$/,'_q4');
+  const tags=this.categoryCatalog.tags(Object.hasOwn(SHAKER_INPUTS,qualityItem)?qualityItem:item);
+  return this.shakerInputCache.has(item)||this.shakerRecipeItems.has(item)||tags.some(tag=>tag===CORE+':cocktail_ingredient'||this.categoryCatalog.palette.has(tag)||this.shakerRecipeTags.has(tag));
+ }
  findShaker(slots){return this.recipeCache.find(r=>r.kind==='shaker'&&matchShakerRecipe(r,slots,this.categoryCatalog));}
  findPress(item){return this.recipeCache.find(r=>r.kind==='pressing'&&r.input.includes(item));}
  findBarrel(fluid,slots){return this.recipeCache.find(r=>r.kind==='barrel'&&r.fluid===fluid&&matchIngredients(r.ingredients,slots));}

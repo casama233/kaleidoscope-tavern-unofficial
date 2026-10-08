@@ -1,5 +1,6 @@
 import {playWorldSound,playPlayerSound} from './feedback-diagnostics.js';
 import {emitBurst,emitSingle} from './effect-feedback.js';
+import {getShakerSoundMultiplier} from '../core/presentation-settings.js';
 /** Mixology rendering and sound; recipe/inventory authority stays in mixology.js. */
 import {system,world} from '@minecraft/server';
 const NS='kaleidoscope_tavern',TYPE=NS+':shaker_visual',ANCHOR='kt:shaker_visual_anchor',PUT=NS+':put_visual',STATION=NS+':shaker_station';
@@ -29,7 +30,9 @@ export function feedback(block,kind){const p={...point(block),y:block.location.y
 // Owner hears a non-positional event. Others receive the original positional event
 // once, in the same dimension and audible radius; never broadcast back to owner.
 function heldShakerSound(player,id,volume,pitch){
- playPlayerSound(player,id+'.local',{volume,pitch});
+ // A personal setting changes only the owner's local feedback. Observers keep
+ // the source volume, spatial radius and pitch regardless of anyone's setting.
+ playPlayerSound(player,id+'.local',{volume:volume*getShakerSoundMultiplier(player),pitch});
  optional(()=>{
   const location=player.location;
   for(const listener of player.dimension.getPlayers({location,maxDistance:16*Math.max(1,volume)})){

@@ -5,12 +5,12 @@ import {externalEffectSource,externalEffectDefinition} from '../core/extension-c
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
-import {EquipmentSlot,ItemStack,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
+import {EquipmentSlot,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
 import {grassStealthPlant} from '../core/grass-stealth-plants.js';
 import {armorShouldWear} from '../core/armor-wear.js';
 import {livingEffectEntity} from '../core/living-effect-entity.js';
 import {motionBlockingHeight} from '../core/motion-blocking-height.js';
-import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentHeatDrop,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
+import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
@@ -172,16 +172,21 @@ export function blockTombPickup(event){
  }catch(e){error(e);}
  return false;
 }
-function breakArdentBlock(p,block){
+function breakArdentBlock(block){
  if(!block||!ardentHeatBreakable(block.typeId))return false;
- const old=block.permutation,dropId=ardentHeatDrop(block.typeId);let item;
+ // Stable Script API has no Level.destroyBlock equivalent. Use the native
+ // destruction command for this source whitelist so the engine owns block
+ // drops, doTileDrops, neighbour updates and break feedback. Generating one
+ // guessed item after setType(air) bypassed that native destruction path.
+ // This is still a command adapter, not Java's player-attributed block event.
+ const {x,y,z}=block.location;
+ if(![x,y,z].every(Number.isInteger))return false;
  try{
-  block.setType('minecraft:air');
-  item=p.dimension.spawnItem(new ItemStack(dropId,1),{x:block.location.x+.5,y:block.location.y+.5,z:block.location.z+.5});
-  return true;
+  const result=block.dimension.runCommand(`setblock ${x} ${y} ${z} minecraft:air destroy`);
+  return result.successCount>0;
  }catch(e){
-  try{item?.remove();}catch{}
-  if(block.isAir)try{block.setPermutation(old);}catch{customEffectDiagnostics.ardentRollbackFailures++;}
+  // Never synthesize drops or restore a block after a native command error:
+  // the engine may already have committed part of its destruction callbacks.
   error(e);return false;
  }
 }
@@ -213,7 +218,7 @@ function ardentArmorOrBare(p,rng){
 export function pulseArdentHeat(p,rng=Math.random){
  if(p?.typeId!=='minecraft:player'||!p.isSprinting)return 0;
  const base={x:Math.floor(p.location.x),y:Math.floor(p.location.y),z:Math.floor(p.location.z)},yaw=p.getRotation?.().y??0;let broke=0;
- for(const pos of ardentFrontBlocks(base,yaw))try{if(breakArdentBlock(p,p.dimension.getBlock(pos)))broke++;}catch(e){error(e);}
+ for(const pos of ardentFrontBlocks(base,yaw))try{if(breakArdentBlock(p.dimension.getBlock(pos)))broke++;}catch(e){error(e);}
  if(!broke)return 0;
  addArdentExhaustion(p);try{ardentArmorOrBare(p,rng);}catch(e){error(e);}
  customEffectDiagnostics.ardentPulses++;customEffectDiagnostics.ardentBlocks+=broke;return broke;
@@ -231,11 +236,14 @@ export function pulseHighHeels(p){
   const direction=highHeelsDirection(p.getRotation?.().y??0,input);
   if(!direction||!highHeelsNearBoundary(p.location,direction))return false;
   const base={x:Math.floor(p.location.x),y:Math.floor(p.location.y),z:Math.floor(p.location.z)},ahead={x:base.x+direction.x,y:base.y,z:base.z+direction.z},d=p.dimension;
-  const obstacle=d.getBlock(ahead),body=d.getBlock({...ahead,y:ahead.y+1}),head=d.getBlock({...ahead,y:ahead.y+2});
-  if(!obstacle||obstacle.isAir||!body?.isAir||!head?.isAir)return false;
+  const obstacle=d.getBlock(ahead);
+  if(!obstacle||obstacle.isAir)return false;
   const last=heelsSteps.get(p.id);if(last&&Math.hypot(p.location.x-last.x,p.location.z-last.z)<.35)return false;
   const target=highHeelsTarget(p.location,direction);
-  if(!p.tryTeleport(target,{checkForBlocks:true})){customEffectDiagnostics.highHeelsRejected++;return false;}
+  // Air-only body/head tests rejected a safe step whenever a torch or plant
+  // occupied either cell. Let the native collision check decide whether the
+  // player's actual destination is clear, and retain the incoming velocity.
+  if(!p.tryTeleport(target,{checkForBlocks:true,keepVelocity:true})){customEffectDiagnostics.highHeelsRejected++;return false;}
   heelsSteps.set(p.id,{x:target.x,z:target.z});customEffectDiagnostics.highHeelsSteps++;return true;
  }catch(e){error(e);return false;}
 }

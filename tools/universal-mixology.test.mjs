@@ -58,11 +58,33 @@ test('invalid palette replacement is atomic; stale categories vanish on replace/
  r.install(bundle({shakerInputs:[{item:N+'drink',color:JAVA_COLOR_RGB.green}]}));assert.equal(r.ingredientColor(N+'drink').color,JAVA_COLOR_RGB.green);
  r.remove('future_pack');assert.equal(r.shakerInput(N+'drink'),undefined);assert.equal(r.ingredientColor(N+'drink').colorIgnored,true);
 });
-test('untagged ordinary items remain RESET and exact item recipes stay exact',()=>{
- const r=new ExtensionRegistry();assert.equal(inputSnapshot('minecraft:dirt',r).colorIgnored,true);
+test('unregistered items are refused while explicit recipe ingredients remain neutral and exact',()=>{
+ const r=new ExtensionRegistry();
+ for(const item of ['minecraft:dirt','minecraft:stone','minecraft:diamond','kaleidoscope_tavern:shaker'])assert.throws(()=>inputSnapshot(item,r),/NOT_SHAKER_INGREDIENT/);
+ assert.equal(r.acceptsShakerInput('minecraft:potion'),true);
+ assert.equal(r.acceptsShakerInput('minecraft:splash_potion'),false);assert.equal(r.acceptsShakerInput('minecraft:lingering_potion'),false);
  r.install(bundle({recipes:[recipe([{item:'minecraft:dirt'},{item:'minecraft:apple'},{item:'minecraft:sugar'}])]}));
+ assert.equal(inputSnapshot('minecraft:dirt',r).colorIgnored,true);
  assert.ok(r.findShaker(['minecraft:dirt','minecraft:apple','minecraft:sugar'].map(item=>({item}))));
  assert.equal(r.findShaker(['minecraft:stone','minecraft:apple','minecraft:sugar'].map(item=>({item}))),undefined);
+ r.remove('future_pack');assert.throws(()=>inputSnapshot('minecraft:dirt',r),/NOT_SHAKER_INGREDIENT/);
+});
+
+test('ingredient tags control entry without closing explicit neutral addon inputs',()=>{
+ const r=new ExtensionRegistry(),item='kaleidoscope_tavern:plum_wine_q4';
+ assert.equal(r.acceptsShakerInput('kaleidoscope_tavern:plum_wine_q3'),true);
+ assert.throws(()=>inputSnapshot('kaleidoscope_tavern:plum_wine_q3',r),/QUALITY_TOO_LOW/);
+ r.install(bundle({itemTagChanges:[{item,remove:[tag('red')]},{item:'minecraft:stone',add:['kaleidoscope_tavern:cocktail_ingredient']}],shakerInputs:[{item:N+'neutral'}]}));
+ assert.throws(()=>inputSnapshot(item,r),/NOT_SHAKER_INGREDIENT/);
+ assert.equal(inputSnapshot('minecraft:stone',r).colorIgnored,true);assert.equal(inputSnapshot(N+'neutral',r).colorIgnored,true);
+});
+
+test('legacy stored neutral ingredients can finish and serve after the stricter entry gate',()=>{
+ const r=new ExtensionRegistry();let state=emptyShaker();
+ for(let i=0;i<3;i++)state.slots.push({item:'minecraft:stone',container:null,color:0xffffff,colorIgnored:true,effects:[]});
+ const mixed=finishShake(state,69,undefined,r);assert.equal(mixed.result.payload.color,0xffffff);
+ assert.equal(serveShaker(mixed,r).state.slots.length,0);
+ assert.throws(()=>addInput(emptyShaker(),'minecraft:stone',r),/NOT_SHAKER_INGREDIENT/);
 });
 
 test('release/serving use the current Java catalogue rather than stale input effects',()=>{

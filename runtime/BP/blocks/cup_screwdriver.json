@@ -50,17 +50,28 @@
         }
       },
       "kaleidoscope_tavern:cocktail_cup": {},
-      "minecraft:collision_box": false,
-      "minecraft:selection_box": {
+      "minecraft:collision_box": {
         "origin": [
-          -6,
+          -4,
           0,
-          -6
+          -4
         ],
         "size": [
-          12,
-          16,
-          12
+          8,
+          10,
+          8
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -4,
+          0,
+          -4
+        ],
+        "size": [
+          8,
+          10,
+          8
         ]
       },
       "minecraft:tick": {
@@ -71,13 +82,13 @@
         "looping": true
       },
       "minecraft:destructible_by_mining": {
-        "seconds_to_destroy": 0.4
+        "seconds_to_destroy": 0
       },
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 0
       },
       "minecraft:movable": {
-        "movement_type": "immovable"
+        "movement_type": "popped"
       },
       "minecraft:loot": "loot_tables/empty.json",
       "minecraft:light_dampening": 0,

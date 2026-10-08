@@ -7,7 +7,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.128",
+  "version": "0.6.129",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -4391,25 +4391,25 @@ export const COOKERY_GUIDE_PAYLOAD={
       "icon": "textures/kaleidoscope_tavern_jar/item/shaker",
       "kinds": [],
       "mechanics": [
-        "把雪克杯放在方塊表面，依個別雞尾酒條目依序將三種材料放進空槽；作為基酒的酒款須達品質 4。",
+        "把雪克杯放在方塊表面，依雞尾酒條目的三槽條件投入三份材料，投入順序不限；作為基酒的酒款須達品質 4。",
         "空手拿起裝料的雪克杯，按住使用開始搖酒，依提示在正確時機放開；其他時機會調出特調或神秘雞尾酒。",
-        "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。"
+        "放置空玻璃杯後，手持雪克杯對空杯倒入成品。提早鬆手可取消搖酒；蹲下對空揮手會丟棄杯內全部材料與結果。"
       ],
       "mechanicsByLocale": {
         "zh_CN": [
-          "把雪克杯放在方块表面，按各鸡尾酒条目所列顺序将三种材料放入空槽；作为基酒的酒款须达品质 4。",
+          "把雪克杯放在方块表面，按鸡尾酒条目的三槽条件投入三份材料，投入顺序不限；作为基酒的酒款须达品质 4。",
           "空手拿起装料的雪克杯，按住使用开始摇酒，依提示在正确时机松开；其他时机会调出特调或神秘鸡尾酒。",
-          "放置空玻璃杯后，手持雪克杯对空杯倒入成品；潜行使用可取消摇酒。"
+          "放置空玻璃杯后，手持雪克杯对空杯倒入成品。提前松手可取消摇酒；蹲下对空挥手会丢弃杯内全部材料与结果。"
         ],
         "zh_TW": [
-          "把雪克杯放在方塊表面，依個別雞尾酒條目依序將三種材料放進空槽；作為基酒的酒款須達品質 4。",
+          "把雪克杯放在方塊表面，依雞尾酒條目的三槽條件投入三份材料，投入順序不限；作為基酒的酒款須達品質 4。",
           "空手拿起裝料的雪克杯，按住使用開始搖酒，依提示在正確時機放開；其他時機會調出特調或神秘雞尾酒。",
-          "放置空玻璃杯後，手持雪克杯對空杯倒入成品；潛行使用可取消搖酒。"
+          "放置空玻璃杯後，手持雪克杯對空杯倒入成品。提早鬆手可取消搖酒；蹲下對空揮手會丟棄杯內全部材料與結果。"
         ],
         "en_US": [
-          "Place the shaker on a block and add the three ingredients in the order shown by each cocktail entry. Tavern drinks used as a base must be quality 4 or higher.",
+          "Place the shaker on a block and add three ingredients that satisfy the cocktail entry. Ingredient order does not matter. Tavern drinks used as a base must be quality 4 or higher.",
           "Use an empty hand to pick up the loaded shaker, hold use to shake, and release at the prompt for the named cocktail; other timings produce signature or mystery cocktails.",
-          "Place an empty glass, then use the held shaker on it to pour. Sneak-use cancels a shake."
+          "Place an empty glass, then use the held shaker on it to pour. Releasing very early cancels shaking; sneak and swing into air to discard all ingredients and any result."
         ]
       },
       "recipes": [

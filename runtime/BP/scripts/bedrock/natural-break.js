@@ -8,10 +8,11 @@ import {restorePotion} from './potions.js';
  */
 import {world,system,ItemStack,BlockPermutation} from '@minecraft/server';
 import {barrelCells} from '../core/machines.js';
+import {validateShaker} from '../core/mixology.js';
 import {furnitureBlock,itemId,GLASSWARE_SLOTS} from '../core/furniture.js';
 import {boardRuntimeKey,chalkCenter} from '../core/boards.js';
 import {cupItem,isBottleBlock} from '../core/extension-content.js';
-import {naturalCupStack,naturalShakerStack} from './mixology.js';
+import {naturalCupStack,naturalShakerRemoval} from './mixology.js';
 const NS='kaleidoscope_tavern',seen=new Map();
 const at=p=>`${p.x}_${p.y}_${p.z}`;
 const state=(permutation,key,fallback=0)=>permutation.getState(NS+':'+key)??fallback;
@@ -24,6 +25,40 @@ function clearHelpers(d,origin,keys){
    if(match)entity.remove();
   }catch{}
  }
+}
+/** The engine has already broken this one cell. Keep the complete native
+ * carrier until its drop exists; on failure restore only a still-air cell. */
+function naturalShakerBreak(event,key){
+ const {block,brokenBlockPermutation:permutation}=event,dimension=block.dimension,position={...block.location},raw=world.getDynamicProperty(key),spawned=[];let native;
+ try{
+  if(raw===undefined){
+   // No public index does not prove an empty cup. Even a missing native pointer
+   // with its required flag still present must fail closed inside this recovery.
+   const adopted=nativeItems.readAdopted({key,dimension,position});
+   if(adopted)throw new Error('NATIVE_SHAKER_STATE_MISSING');
+   return false; // A genuinely stateless, unadopted block may use its plain drop.
+  }
+  if(typeof raw!=='string')throw new Error('CORRUPT_MIX_STATE');
+  const data=validateShaker(JSON.parse(raw));
+  const removal=naturalShakerRemoval(block,data);native=removal.native;native.apply();world.setDynamicProperty(key,undefined);
+  const discard=event.entitySource?.typeId==='minecraft:player'&&event.entitySource.getGameMode()==='Creative'||world.gameRules.doTileDrops===false;
+  if(!discard)spawned.push(dimension.spawnItem(removal.stack,{x:position.x+.5,y:position.y+.5,z:position.z+.5}));
+ }catch(error){
+  let failed=false;
+  for(const entity of spawned.reverse())try{entity.remove();}catch{failed=true;}
+  try{native?.rollback();}catch{failed=true;}
+  try{world.setDynamicProperty(key,raw);}catch{failed=true;}
+  let restored=false;
+  try{
+   const current=dimension.getBlock(position);
+   if(current?.typeId==='minecraft:air')replaceBlockWithoutNaturalDrops(current,permutation);
+   restored=current?.typeId===permutation.type.id;
+  }catch{failed=true;}
+  if(failed)throw new Error('NATIVE_SHAKER_DESTRUCTION_ROLLBACK_FAILED: '+error);
+  if(!restored)throw new Error('NATIVE_SHAKER_DESTRUCTION_RECOVERY_REQUIRED: original native data retained; owner cell changed. '+error);
+  throw error;
+ }
+ native.finish();clearHelpers(dimension,position,[key]);return true;
 }
 export function naturalBreak(event,params){
  const {block,brokenBlockPermutation:perm}=event,d=block.dimension,id=perm.type.id,p={...block.location},short=id.slice(NS.length+1),dim=d.id.split(':')[1];
@@ -52,7 +87,7 @@ export function naturalBreak(event,params){
  if(short==='barrel_core'||short==='barrel_part'||short==='pressing_tub'){
   data=record('kt:machine/'+suffix);if(data?.kind==='pressing_tub')for(const row of data.slots.filter(Boolean))add(row.id,row.count);
  }else if(short==='shaker_station'){
-  data=record('kt:shaker/'+suffix);if(data){drops.push(naturalShakerStack(data));drop=undefined;}
+  const key='kt:shaker/'+suffix;keys.push(key);if(naturalShakerBreak(event,key))return;
  }else if(cupItem(id)){
   data=record('kt:cup/'+suffix);if(data){drops.push(naturalCupStack(data));drop=undefined;}else drop=cupItem(id);
  }else if(isBottleBlock(id)&&short!=='bottle_empty'&&short!=='bottle_water'){

@@ -57,15 +57,21 @@ export class NativeItemStorage {
   // read still validates key, location, owner, token and every native slot.
   return this.read({key,dimension,position,ids:record?.ids,requireNative:true});
  }
- plan({key,dimension,position,oldIds,nextIds,incoming,give=[],legacyStacks,requireNative=false}){
+ plan({key,dimension,position,oldIds,nextIds,incoming,give=[],legacyStacks,requireNative=false,nextItems}){
   position={x:position.x,y:position.y,z:position.z};
   check(typeof key==='string'&&key.length>0&&Object.values(position).every(Number.isInteger),'NATIVE_STORAGE_LOCATION');
   const before=this.read({key,dimension,position,ids:oldIds,legacyStacks,requireNative}),ids=padded(nextIds);
   const removed=before.ids.flatMap((id,i)=>id&&id!==ids[i]?[{slot:i,stack:before.items[i]}]:[]);
   const additions=ids.flatMap((id,i)=>id&&id!==before.ids[i]?[i]:[]);
   check(additions.length<=1,'NATIVE_STORAGE_MULTIPLE_INPUTS');
-  for(const i of additions)check(incoming?.typeId===ids[i]&&incoming.amount>=1,'NATIVE_STORAGE_INPUT_MISMATCH');
-  const after=ids.map((id,i)=>!id?undefined:id===before.ids[i]?before.items[i]?.clone():one(incoming));
+  if(nextItems!==undefined){
+   check(Array.isArray(nextItems)&&nextItems.length<=SIZE,'NATIVE_STORAGE_ITEMS');
+   for(let i=0;i<SIZE;i++)check(ids[i]?nextItems[i]?.typeId===ids[i]&&nextItems[i].amount===1:!nextItems[i],'NATIVE_STORAGE_INPUT_MISMATCH');
+  }
+  for(const i of additions){const item=nextItems?.[i]??incoming;check(item?.typeId===ids[i]&&item.amount>=1,'NATIVE_STORAGE_INPUT_MISMATCH');}
+  // Explicit native replacements update a stored item's payload without
+  // changing its identifier. Each side retains its own complete native copy.
+  const after=ids.map((id,i)=>!id?undefined:nextItems?nextItems[i].clone():id===before.ids[i]?before.items[i]?.clone():one(incoming));
   // Match only removed slots, never another identically named/type-ID slot.
   const available=removed.slice(),outputs=[];
   for(const output of give){

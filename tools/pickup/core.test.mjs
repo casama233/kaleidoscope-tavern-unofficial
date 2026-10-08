@@ -43,6 +43,24 @@ test('legacy machine exchange order remains unchanged',()=>{
  const c=new Container();assert.equal(planInventory(c,0,0,[{id:wine,count:1}],make).after[1].typeId,wine);
  c.setItem(5,make('test:input'));assert.equal(planInventory(c,5,1,[{id:wine,count:1}],make).after[5].typeId,wine);
 });
+for(const amount of [1,2])test(`shaker returns before debiting ${amount} held ingredient(s), so a full bag spills the bottle`,()=>{
+ const c=new Container(2);c.setItem(0,make(wine,amount));c.setItem(1,make('test:stone',64));
+ const plan=planInventory(c,0,1,[{id:'test:empty_bottle',count:1,delivery:'inventory',overflow:'drop'}],make,{takeAfterOutputs:true});
+ assert.equal(plan.after[0]?.amount,amount===1?undefined:amount-1);assert.equal(plan.overflow[0].typeId,'test:empty_bottle');assert.equal(plan.received,0);
+ assert.equal(c.getItem(0).amount,amount);
+});
+test('return-before-debit fills compatible bottles first and rolls back both inventory changes',()=>{
+ const c=new Container(3);c.setItem(2,make(wine));c.setItem(1,make('test:empty_bottle',63));const before=c.items.map(x=>x?.clone());
+ const plan=planInventory(c,2,1,[{id:'test:empty_bottle',count:1,delivery:'inventory',overflow:'drop'}],make,{takeAfterOutputs:true});
+ assert.equal(plan.after[1].amount,64);assert.equal(plan.after[0],undefined);assert.equal(plan.after[2],undefined);assert.equal(plan.overflow.length,0);
+ assert.throws(()=>commitInventory(plan,c,()=>{throw Error('SAVE_FAILURE');},()=>{}),/SAVE_FAILURE/);assert.deepEqual(c.items,before);
+});
+test('return-before-debit uses the original inventory order and cannot fund a missing input from outputs',()=>{
+ const c=new Container(3);c.setItem(0,make(wine));
+ const plan=planInventory(c,0,1,[{id:'test:empty_bottle',count:1,delivery:'inventory',overflow:'drop'}],make,{takeAfterOutputs:true});
+ assert.equal(plan.after[0],undefined);assert.equal(plan.after[1].typeId,'test:empty_bottle');
+ assert.throws(()=>planInventory(new Container(),0,1,[{id:wine,count:1}],make,{takeAfterOutputs:true}),/INSUFFICIENT_HELD/);
+});
 test('only explicit Forge output may overflow; exact remainder and metadata retained',()=>{
  const c=new Container(2);c.setItem(0,make('test:tool',64));c.setItem(1,make(wine,63));
  assert.throws(()=>planInventory(c,0,0,[{id:wine,count:4,delivery:'inventory'}],make),/INVENTORY_FULL/);
@@ -116,6 +134,17 @@ test('failed existing-container save restores exact previous stacks',()=>{
 test('native planner rejects changed durable pointer before touching slots',()=>{
  const f=fixture(),ids=fill(f,1),plan=f.plan({oldIds:ids,nextIds:[]});f.map.set(nativeItemKey(f.key),'changed');
  assert.throws(()=>plan.apply(),/NATIVE_STORAGE_CONFLICT/);plan.rollback();assert.equal([...f.entities.values()][0].container.getItem(0).meta.name,'酒瓶 0');
+});
+test('explicit same-ID native replacement is cloned and restores the previous opaque stack on failure',()=>{
+ const f=fixture();const first=new Stack('test:shaker',1,{contents:[{name:'first',opaque:{n:1}}]},1);
+ const add=f.plan({oldIds:[],nextIds:[first.typeId],nextItems:[first]});add.apply();add.finish();
+ const changed=first.clone();changed.meta.contents.push({name:'second',opaque:{n:2}});
+ const update=f.plan({oldIds:[first.typeId],nextIds:[first.typeId],nextItems:[changed]});changed.meta.contents[0].name='caller changed after planning';
+ f.failSave(nativeItemKey(f.key));assert.throws(()=>update.apply(),/BACKEND_FAILURE/);update.rollback();
+ assert.deepEqual(f.storage.read({key:f.key,dimension:f.dimension,position:f.position,ids:[first.typeId]}).items[0].meta,first.meta);
+ const success=f.plan({oldIds:[first.typeId],nextIds:[first.typeId],nextItems:[changed]});success.apply();success.finish();changed.meta.contents.length=0;
+ assert.equal(f.storage.read({key:f.key,dimension:f.dimension,position:f.position,ids:[first.typeId]}).items[0].meta.contents.length,2);
+ assert.throws(()=>f.plan({oldIds:[first.typeId],nextIds:[first.typeId],nextItems:[new Stack(first.typeId,2)]}),/NATIVE_STORAGE_INPUT_MISMATCH/);
 });
 for(let facing=0;facing<4;facing++)test(`cellar Java modulo boundaries, facing ${facing}`,()=>{
  const face=['north','east','south','west'][facing];for(const x of [0,1/3,.5,2/3,1])for(const y of [0,.5,1]){

@@ -1,23 +1,24 @@
 import {registerJavaAmbient} from './java-ambient.js';
 import {playWorldSound} from './feedback-diagnostics.js';
+import {inventoryPickupFeedback} from './pickup-feedback.js';
 import {cupBlock,cupItem,isCupBlock} from '../core/extension-content.js';
 /** Java shaker lifecycle, rebuilt for 0.6.22.
  * One held-use session; one item identity. Contents live on the item or placed
  * station. UI and animation observe that session and never mutate recipes.
  * Existing world/item storage schemas are retained for lossless migration.
  */
-import {world,system,BlockPermutation,ItemTypes} from '@minecraft/server';
+import {world,system,BlockPermutation,ItemTypes,EntitySwingSource} from '@minecraft/server';
 import {check,clone,canonical} from '../core/util.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
 import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,addResolvedInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore} from '../core/mixology.js';
-import {COCKTAILS,SHAKER_INPUTS} from '../data/mixology.js';
+import {COCKTAILS} from '../data/mixology.js';
 import {POTION_ITEMS} from '../core/potions.js';
-import {parseBottle} from '../core/bottles.js';
 import {configureBottleCategories} from '../core/quality-tooltip.js';
-import {potionInput,potionIdentity} from './potions.js';
+import {normalizeCocktailStack,rawItemLore,shakerContentsLore} from '../core/cocktail-tooltip.js';
+import {potionInput,potionIdentity,restorePotion} from './potions.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach} from './transactions.js';
+import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach,playerInteractionReach} from './transactions.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {javaRandomFloat} from '../core/java-random.js';
@@ -34,6 +35,7 @@ import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clear
 import {lookedAtBarrelStatus} from './machines.js';
 import {barrelHudEnabled} from '../core/shaker-hud.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
+import {nativeShakerState,portableShakerState,readPlacedShaker,planPlacedShaker} from './shaker-storage.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
@@ -57,32 +59,56 @@ function token(){return `v22_${system.currentTick}_${++sequence}_${Math.random()
 // authority; localized tooltip serialization must never reject a valid shaker.
 export function readPortableItem(item){
  check(SHAKER_ITEMS.has(item?.typeId)&&item.amount===1,'NOT_PORTABLE_SHAKER');
+ check(item.getDynamicProperty('kaleidoscope_tavern:shaker_native_items')===undefined,'NATIVE_SHAKER_NESTED_UNSUPPORTED');
  const raw=item.getDynamicProperty(PORTABLE_DATA);
- return raw===undefined?{schema:1,token:token(),state:emptyShaker()}:decodePortable(raw);
+ const carried=raw===undefined?{schema:1,token:token(),state:emptyShaker()}:decodePortable(raw);
+ check(carried.state.nativeCarrier===undefined,'PLACED_SHAKER_STATE');
+ return carried;
 }
-function portableLore(state){
+function legacyPortableLore(state){
  const ids=state.result?[state.result.item]:state.slots.map(x=>x.item);
  return ids.map(x=>({rawtext:[{text:'§7▶ '},{translate:`item.${x}.name`}]}));
 }
+function itemDisplayName(item,id){
+ if(item?.nameTag)return {text:item.nameTag};
+ let key;try{key=item?.localizationKey;}catch{}
+ if(typeof key==='string')key=key.replace(/^%/,'');
+ return {translate:typeof key==='string'&&key?key:`item.${id}.name`};
+}
+function portableLore(state,item,resolveColor=id=>registry?.ingredientColor?.(id)){
+ // Accepted ingredients use the self-contained plain identity schema.
+ // Reconstruct only the display identity; outer carrier metadata stays native.
+ const rows=state.result?[state.result]:state.slots;
+ const contents=rows.map(slot=>slot.potion?restorePotion(slot):makeStack(slot.item,1));
+ return shakerContentsLore(state,(slot,index)=>itemDisplayName(contents[index],slot.item),resolveColor);
+}
 function ownsPortableLore(item,previous){
  try{
-  const raw=typeof item.getRawLore==='function'?item.getRawLore():item.getLore?.();
-  return Array.isArray(raw)&&(raw.length===0||canonical(raw)===canonical(portableLore(previous)));
+  const raw=rawItemLore(item);if(!Array.isArray(raw))return false;
+  if(!raw.length)return true;
+  const value=canonical(raw);
+  // Match whole previous formats, including T128's grey ID-based rows. Never
+  // infer ownership from a prefix or discard a player's additional lore.
+  return [legacyPortableLore(previous),portableLore(previous,item),portableLore(previous,item,()=>undefined)]
+   .some(rows=>value===canonical(rows));
  }catch{return false;}
 }
 function portable(state,id,current,previous){
- // Same-ID held transitions retain native metadata. A fresh block pickup has
- // no carried ItemStack and still creates its own portable representation.
+ // Same-ID transitions clone all outer data. Ingredient descriptors contain
+ // only accepted plain items and native potion identities, not item metadata.
  if(current)check(current.typeId===SHAKER&&current.amount===1,'NOT_PORTABLE_SHAKER');
  const item=current?current.clone():makeStack(SHAKER,1);
- item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,id));
- if(!current||ownsPortableLore(current,previous))item.setLore(portableLore(state));
+ item.setDynamicProperty(PORTABLE_DATA,encodePortable(portableShakerState(state),id));
+ if(!current||ownsPortableLore(current,previous)){
+  try{item.setLore(portableLore(state,item));}catch(error){log(error);}
+ }
  return item;
 }
+function placedShaker(block,state){return readPlacedShaker(block,state,state.nativeCarrier===1?undefined:portable(state,token()));}
 function resultItem(result){
  check(ItemTypes.get(result.item),'OUTPUT_PACK_MISSING');const item=makeStack(result.item,1);
  if(result.item===SIGNATURE){item.setDynamicProperty(SIGNATURE_DATA,JSON.stringify(validatePayload(result.payload)));syncSignatureColor(item,result.payload.color);}
- return item;
+ try{return normalizeCocktailStack(item);}catch(error){log(error);return item;}
 }
 function signaturePayload(item){
  const raw=item.getDynamicProperty(SIGNATURE_DATA);
@@ -95,13 +121,15 @@ function syncSignatureColor(item,color){
  if(old&&['red','green','blue'].every(k=>Math.abs(old[k]-rgb[k])<1/510))return false;
  dye.color=rgb;return true;
 }
-function commitBlock(player,store,key,next,take,outputs,block,newPermutation){
+function commitBlock(player,store,key,next,take,outputs,block,newPermutation,inventoryOptions,native){
  const container=inventory(player),raw=store.raw(key),old=store.load(key),saved=waterSnapshot(block);
- const plan=planInventory(container,player.selectedSlotIndex,take,outputs,makeStack);
+ const plan=planInventory(container,player.selectedSlotIndex,take,outputs,makeStack,inventoryOptions);
  commitPickupInventory(plan,container,player,()=>{
   if(newPermutation)setWithWater(block,newPermutation);
   store.save(key,next,old?.revision??-1);
- },()=>{restoreWater(block,saved);store.restore(key,raw);});
+  native?.apply();
+ },()=>{try{native?.rollback();}finally{restoreWater(block,saved);store.restore(key,raw);}});
+ native?.finish();
  return plan;
 }
 function replaceHeld(player,expected,next){
@@ -114,27 +142,33 @@ export function placeShaker(player,location){
  const key=shakerKey(block.dimension.id,location);
  return locks.with([key,player.id],()=>{
   check(block.isAir&&!shakerStore.load(key),'SPACE_NOT_CLEAR');const item=hand(player),carried=readPortableItem(item);
-  commitBlock(player,shakerStore,key,carried.state,1,[],block,perm('shaker_station',facing(player)));
-  syncShakerVisual(block);showShakerSlots(player,carried.state);return carried.state;
+  const next=nativeShakerState(carried.state),stack=portable(next,carried.token,item,carried.state),native=planPlacedShaker(block,undefined,next,{stack});
+  commitBlock(player,shakerStore,key,next,placementTake(player),[],block,perm('shaker_station',facing(player)),undefined,native);
+  syncShakerVisual(block);showShakerSlots(player,next);return next;
  });
 }
-function candidate(id){return POTION_ITEMS.has(id)||!!parseBottle(id)||!!SHAKER_INPUTS[id]||!!registry?.shakerInput?.(id)||!!registry?.acceptsShakerInput?.(id);}
+function candidate(id){return !!registry?.acceptsShakerInput?.(id);}
 export function pourIngredient(player,block){
  near(player,block);check(registry,'INITIALIZING');const key=shakerKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
   const old=station(block),item=hand(player);check(item,'NO_INGREDIENT');let next;
+  check(candidate(item.typeId),'NOT_SHAKER_INGREDIENT');
   if(POTION_ITEMS.has(item.typeId))next=addResolvedInput(old,potionInput(item));
-  else{check(isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}
+  else{check(!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}
+  next=nativeShakerState(next);
+  const current=placedShaker(block,old),carried=readPortableItem(current),stack=portable(next,carried.token,current,carried.state);
+  const native=planPlacedShaker(block,old,next,{stack,legacyStack:current});
   const container=next.slots.at(-1).container;
-  commitBlock(player,shakerStore,key,next,1,container?[{id:container,count:1}]:[],block);
+  const plan=commitBlock(player,shakerStore,key,next,1,container?[{id:container,count:1,delivery:'inventory',overflow:'drop'}]:[],block,undefined,{takeAfterOutputs:true},native);
+  if(plan.received)inventoryPickupFeedback(player);
   shakerPut(block,next.revision,!!container);showShakerSlots(player,next);return next;
  });
 }
 export function pickupShaker(player,block,{breaking=false}={}){
  near(player,block);idle(player);const key=shakerKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
-  if(!breaking)check(!hand(player),'EMPTY_HAND_REQUIRED');const state=station(block),item=portable(state,token());
-  commitBlock(player,shakerStore,key,undefined,0,[{stack:item,count:1,preferHand:!breaking}],block,BlockPermutation.resolve('minecraft:air'));
+  if(!breaking)check(!hand(player),'EMPTY_HAND_REQUIRED');const state=station(block),item=placedShaker(block,state),native=planPlacedShaker(block,state,undefined,{legacyStack:item,give:[{stack:item,count:1,preferHand:!breaking}]});
+  commitBlock(player,shakerStore,key,undefined,0,native.outputs,block,BlockPermutation.resolve('minecraft:air'),undefined,native);
   syncShakerVisual(block);hideShakerHud(player);return item;
  });
 }
@@ -181,6 +215,30 @@ export function nativeStop(event){
  if(!sameUse(player,use)){cancelUse(player.id);return;}
  // A second stop signal has no session and therefore cannot remix or duplicate.
  safely(player,()=>{finishUse(player,Math.max(0,system.currentTick-use.start));nativeUseDiagnostics.releases++;});
+}
+
+/** Java ClearShakerC2SMessage discards both Storage and Result, without refunds. */
+export function clearHeldShaker(player,expected=hand(player)){
+ canInteract(player);
+ return locks.with([player.id],()=>{
+  const current=hand(player);check(current?.typeId===SHAKER&&expected?.typeId===SHAKER&&current.getDynamicProperty(PORTABLE_DATA)===expected.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');
+  const carried=readPortableItem(current);if(!carried.state.slots.length&&!carried.state.result)return false;
+  const next={...emptyShaker(),revision:carried.state.revision+1};
+  replaceHeld(player,current,portable(next,carried.token,current,carried.state));
+  cancelUse(player.id);releaseGuards.delete(player.id);hideShakerHud(player);
+  playWorldSound(player.dimension,'bottle.fill',player.location,{volume:1,pitch:1});return true;
+ });
+}
+export function clearShakerOnSwing(event){
+ const player=event.player;
+ if(event.swingSource!==EntitySwingSource.Attack||!player?.isSneaking||event.heldItemStack?.typeId!==SHAKER)return;
+ return safely(player,()=>{
+  // Stable Script API exposes the swing source, not Java's LeftClickEmpty hit
+  // result. Conservatively exclude visible block/entity targets before discard.
+  const maxDistance=playerInteractionReach(player);
+  if(player.getBlockFromViewDirection({maxDistance})?.block||player.getEntitiesFromViewDirection({maxDistance}).length)return;
+  return clearHeldShaker(player,event.heldItemStack);
+ });
 }
 
 export function placeCup(player,location){
@@ -359,6 +417,7 @@ export function installMixologyEvents(){
  world.afterEvents.itemStartUse.subscribe(nativeStart);
  world.afterEvents.itemReleaseUse.subscribe(nativeStop);
  world.afterEvents.itemStopUse.subscribe(nativeStop);
+ world.afterEvents.playerSwingStart.subscribe(clearShakerOnSwing,{swingSource:EntitySwingSource.Attack});
  world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateInventory(player);}));
  world.afterEvents.playerLeave.subscribe(({playerId})=>{uses.delete(playerId);releaseGuards.delete(playerId);clearShakerPlayer(playerId);});
  world.afterEvents.entityDie.subscribe(({deadEntity})=>cancelUse(deadEntity.id));
@@ -384,4 +443,7 @@ export function pickCupItem(block){
 }
 
 export const naturalCupStack=state=>resultItem(state);
-export const naturalShakerStack=state=>portable(state,'natural_'+system.currentTick);
+export function naturalShakerRemoval(block,state){
+ const stack=placedShaker(block,state),native=planPlacedShaker(block,state,undefined,{legacyStack:stack});
+ return {stack,native};
+}

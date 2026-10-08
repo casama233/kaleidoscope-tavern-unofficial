@@ -8,6 +8,17 @@ from pathlib import Path
 import base64,gzip,hashlib,json
 from functools import lru_cache
 
+# Only the exact non-script assets reviewed for the T129 cocktail repair.
+# New arbitrary blocks/UI/locales are not admitted by a directory wildcard.
+COCKTAIL_ASSET_PATHS=frozenset({
+ 'runtime/BP/blocks/'+name+'.json' for name in (
+  'cup_allium_garden','cup_bloody_mary','cup_brass_heart','cup_depth_charge',
+  'cup_emerald','cup_empty_glassware','cup_godfather','cup_grasshopper',
+  'cup_mojito','cup_mystery_cocktail','cup_nether_special','cup_screwdriver',
+  'cup_sculk_special','cup_signature_cocktail','cup_white_lady','shaker_station')
+}|{'runtime/RP/texts/en_US.lang','runtime/RP/texts/zh_CN.lang',
+   'runtime/RP/texts/zh_TW.lang','runtime/RP/ui/hud_screen.json'})
+
 @lru_cache(maxsize=4)
 def rows(root):
  p=Path(root)/'data/baseline-reconciliation.json'
@@ -30,6 +41,31 @@ def functional_layers(root):
   assert isinstance(layer.get('release'),str) and layer['release'].strip()
   assert isinstance(layer.get('files'),dict) and layer['files']
  return layers
+@lru_cache(maxsize=4)
+def asset_layers(root):
+ p=Path(root)/'data/baseline-reconciliation.json'
+ if not p.exists():return []
+ ledger=json.loads(p.read_text());layers=ledger.get('reviewedAssetDeltaLayers',[])
+ if layers:assert ledger.get('schema')==1 and ledger.get('testOnly') is True,'Unsupported asset review ledger'
+ assert isinstance(layers,list),'Unsupported asset review layers'
+ for layer in layers:
+  assert isinstance(layer.get('release'),str) and layer['release'].strip()
+  assert isinstance(layer.get('files'),dict) and layer['files']
+  assert set(layer['files'])<=COCKTAIL_ASSET_PATHS,'Unsupported reviewed asset path'
+ return layers
+def asset_projection(root,name,data):
+ # Minified HUD JSON is one large line. Preserve its exact compressed prior
+ # bytes instead of broad JSON transforms or changing the historical witness.
+ for layer in reversed(asset_layers(root)):
+  row=layer['files'].get(name)
+  if not row:continue
+  assert isinstance(row['reason'],str) and row['reason'].strip()
+  assert row['before'] is not None and row['before']!=row['after']
+  assert hashlib.sha256(data).hexdigest()==row['after'],('Reviewed asset source mutated',name)
+  restored=gzip.decompress(base64.b64decode(row['beforeGzipBase64'],validate=True))
+  assert hashlib.sha256(restored).hexdigest()==row['before'],('Asset predecessor mismatch',name)
+  data=restored
+ return data
 def reverse_functional_delta(name,data,row):
  """Reverse only an exact reviewed delta before the unchanged old guards.
 
@@ -84,9 +120,13 @@ def version_projection(root,name,data,spec):
 
 def previous_bytes(root,path):
  root=Path(root).resolve();path=Path(path).resolve();name=path.relative_to(root).as_posix();data=path.read_bytes();row=rows(root).get(name)
+ # Bind and normalize the current release identity before any body delta.
+ # This keeps a reviewed guide-body change separate from later pure version
+ # bumps while retaining all existing version/dependency assertions.
+ if row and 'versionProjection' in row:data=version_projection(root,name,data,row['versionProjection'])
+ data=asset_projection(root,name,data)
  data=functional_projection(root,name,data)
  if not row:return data
- if 'versionProjection' in row:data=version_projection(root,name,data,row['versionProjection'])
  assert hashlib.sha256(data).hexdigest()==row['after'],('Reconciled source mutated',name)
  if row['before'] is None:return data
  original=gzip.decompress(base64.b64decode(row['beforeGzipBase64'])) if 'beforeGzipBase64' in row else row['beforeContent'].encode()

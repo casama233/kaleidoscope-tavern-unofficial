@@ -4,6 +4,7 @@ import {Buffer} from 'node:buffer';
 import {resolve,dirname} from 'node:path';
 import {EFFECT_ICONS} from '../runtime/BP/scripts/data/effect-icons.js';
 import {EFFECT_ICON_PREFIX,EFFECT_ICON_SLOTS,effectIconToken} from '../runtime/BP/scripts/core/effect-icons.js';
+import {canonical} from '../runtime/BP/scripts/core/util.js';
 const addonIndex=process.argv.indexOf('--world-liquor');
 const extension=addonIndex>=0;
 const path=extension?resolve(process.argv[addonIndex+1],'runtime/RP/ui/kt_world_liquor_effects.json'):new URL('../runtime/RP/ui/hud_screen.json',import.meta.url);
@@ -42,5 +43,7 @@ if(extension){
 }
 const expected=JSON.stringify(hud)+'\n';
 if(process.argv.includes('--check')){
- if(readFileSync(path,'utf8')!==expected)throw Error('Effect icon HUD differs from its authored generator');
+ // Compare every parsed field and array entry. JSON number spelling, object
+ // key order and whitespace do not change the authored controls' semantics.
+ if(canonical(JSON.parse(readFileSync(path,'utf8')))!==canonical(JSON.parse(expected)))throw Error('Effect icon HUD differs from its authored generator');
 }else {if(extension)mkdirSync(dirname(path),{recursive:true});writeFileSync(path,expected);}

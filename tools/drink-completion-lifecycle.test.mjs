@@ -10,8 +10,6 @@ import {PICKUP_AFTER} from '../runtime/BP/scripts/bedrock/pickup-overflow.js';
 let serial=0;
 const BOTTLE='kaleidoscope_tavern:brandy_q1',EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
 const effects=[{effect:'minecraft:speed',duration:30,amplifier:0,probability:1},{effect:'minecraft:strength',duration:30,amplifier:0,probability:1}];
-// Complete Native property-copy semantics locally without changing archived doubles.
-for(const key of ['lockMode','keepOnDeath'])Object.defineProperty(ItemStack.prototype,key,{get(){return this.meta[key];},set(value){this.meta[key]=value;},configurable:true});
 function fixture(kind='cocktail',amount=1,mode=GameMode.Survival){
  const player=new Player('completion-'+(++serial),world.getDimension('overworld'),mode);
  const item=new ItemStack(kind==='cocktail'?SIGNATURE:BOTTLE,amount);

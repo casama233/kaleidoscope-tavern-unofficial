@@ -72,3 +72,33 @@ test('payload is refreshed on navigation',async()=>{let calls=0;const f=ui([{sel
 test('standalone manifest, creative and crafting contracts',()=>{const read=p=>JSON.parse(fs.readFileSync(new URL('../runtime/'+p,import.meta.url),'utf8'));for(const side of ['BP','RP'])assert.ok(!(read(side+'/manifest.json').dependencies??[]).some(d=>['d322809c-a51e-4742-bfc4-16d3c1491c9d','8e2c6318-2f5f-4907-aad0-31d10610e405'].includes(d.uuid)));assert.equal(read('BP/items/guidebook.json')['minecraft:item'].description.menu_category.category,'equipment');assert.ok(JSON.stringify(read('BP/item_catalog/crafting_item_catalog.json')).includes(N+'guidebook'));assert.deepEqual(read('BP/recipes/guidebook.json')['minecraft:recipe_shapeless'].ingredients,[{item:'minecraft:book'},{item:N+'grape'}]);});
 
 test('removed recipe fallback does not repeat the entry on Back',async()=>{const p=structuredClone(payload);let calls=0;const f=ui([{selection:2},{selection:0},{selection:0},{selection:0},{selection:0},{canceled:true}],()=>{calls++;if(calls>=6)p.entries.find(e=>e.id===N+'allium_garden').recipes=[];return p;});await f.run();assert.equal(f.shown.length,6);assert.equal(f.shown[2].t,f.shown[5].t);assert.notEqual(f.shown[4].t,f.shown[5].t);});
+
+// Scheduler-only publisher regression: no entity/player or simulated Minecraft world.
+test('guide preparation waits for the host, yields, and reuses packets until content changes',async()=>{
+ const {installCookeryGuidePublisher,COOKERY_GUIDE_EVENTS:E,cookery106WirePayload}=await import('../runtime/BP/scripts/core/cookery-guide-publisher.js');
+ let receive,next=0,builds=0,latest=payload;const pending=new Map(),sent=[];
+ const bus={currentTick:0,afterEvents:{scriptEventReceive:{subscribe(fn){receive=fn},unsubscribe(){receive=null}}},runTimeout(fn,ticks){const id=++next;pending.set(id,{fn,at:this.currentTick+ticks});return id},clearRun(id){pending.delete(id)},sendScriptEvent(id,message){sent.push({id,message,tick:this.currentTick})}};
+ const advance=n=>{for(let i=0;i<n;i++){bus.currentTick++;for(const [id,row] of [...pending])if(row.at<=bus.currentTick){pending.delete(id);row.fn();}}};
+ const publisher=installCookeryGuidePublisher(bus,()=>{builds++;return latest},()=>{},()=>{});
+ advance(220);assert.equal(builds,0,'standalone worlds must not build optional transport');
+ const ready=()=>receive({id:E.ready,message:'{"api":1}'});
+ ready();advance(500);assert.equal(builds,1);
+ const first=sent.filter(x=>[E.begin,E.chunk,E.end].includes(x.id));
+ assert.equal(first.filter(x=>x.id===E.end).length,1);
+ assert.ok(publisher.getStatus().preparationSlices>2);
+ const raw=first.filter(x=>x.id===E.chunk).map(x=>x.message.split('\n').slice(4).join('\n')).join('');
+ assert.deepEqual(JSON.parse(raw),cookery106WirePayload(payload));
+ ready();advance(500);assert.equal(builds,1,'repeat ready must reuse the unchanged packet set');
+ assert.equal(publisher.getStatus().successfulTransfers,2);
+ latest=structuredClone(payload);latest.entries[0].mechanics.push('Updated 🧪\n新內容');
+ publisher.refresh();advance(3);
+ latest=structuredClone(latest);latest.entries[1].mechanics.push('Refresh during preparation');
+ publisher.refresh();advance(1000);
+ assert.equal(builds,3,'refresh during preparation must eventually publish the newest snapshot');
+ const end=sent.findLastIndex(x=>x.id===E.end),begin=sent.findLastIndex((x,i)=>i<end&&x.id===E.begin);
+ const final=sent.slice(begin+1,end).filter(x=>x.id===E.chunk).map(x=>x.message.split('\n').slice(4).join('\n')).join('');
+ assert.deepEqual(JSON.parse(final),cookery106WirePayload(latest));
+ assert.ok(sent.every(x=>Buffer.byteLength(x.message)<=2048));
+ publisher.refresh();advance(2);publisher.dispose();const count=sent.length;advance(500);
+ assert.equal(sent.length,count,'dispose must cancel unfinished work');assert.equal(pending.size,0);
+});

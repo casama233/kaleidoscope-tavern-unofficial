@@ -43,6 +43,25 @@ class ContextTests(unittest.TestCase):
         self.assertIn(self.root / 'private-source', context['protected'])
         self.assertNotIn(self.root / 'evidence', context['references'])
 
+    def test_nested_update_configuration_omits_only_scan_boundary(self):
+        nested = self.root / 'echoed-update-config.json'
+        scan_root = Path(m.c.CONFIG['retention_root'])
+        self.write(nested, {'retention_root': str(scan_root), 'extension_validation': str(self.proof)})
+        self.write(self.report, {'world_source': str(self.snapshot), 'update_config': str(nested)})
+        refs = m.cleanup_context()['references']
+        self.assertNotIn(scan_root, refs)
+        for actual in [nested, self.proof, self.snapshot]:
+            self.assertIn(actual, refs)
+
+    def test_actual_archive_root_remains_a_dependency(self):
+        nested = self.root / 'echoed-update-config.json'
+        scan_root = Path(m.c.CONFIG['retention_root'])
+        self.write(nested, {'retention_root': str(scan_root), 'archives': [str(scan_root)]})
+        self.write(self.report, {'world_source': str(self.snapshot), 'update_config': str(nested)})
+        refs = m.cleanup_context()['references']
+        self.assertIn(scan_root, refs)
+        self.assertIn(self.snapshot, refs)
+
     def test_policy_is_reread_before_each_boundary(self):
         first = m.cleanup_context()
         newer = self.root / 'new-live/reviewed-family-receipt.json'

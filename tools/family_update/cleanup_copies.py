@@ -10,8 +10,11 @@ from family_update import retention
 
 def absolute_paths(value):
     if isinstance(value, dict):
-        for child in value.values():
-            yield from absolute_paths(child)
+        for key, child in value.items():
+            # The configured scan boundary is metadata even in an echoed config.
+            # Actual archive/source/evidence paths remain cleanup dependencies.
+            if key != 'retention_root':
+                yield from absolute_paths(child)
     elif isinstance(value, list):
         for child in value:
             yield from absolute_paths(child)

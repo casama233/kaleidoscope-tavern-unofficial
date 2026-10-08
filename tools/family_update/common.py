@@ -249,6 +249,10 @@ def check_live_against_policy(inventory):
     policy = read(Q / 'senluo-policy.json')
     receipt = read(policy['approved_receipt'])
     expected = {pack['uuid']: pack for pack in receipt['packs']}
+    if CONFIG.get('startup_reconciliation'):
+        from family_update.startup26_reconciliation import review as review_startup
+        review_startup(inventory,expected,receipt['order'])
+        return policy
     from family_update.preserved_additions import review
     expected,order=review(inventory,expected,receipt['order'],policy['managed_uuids'])
     assert all([ref['pack_id'] for ref in inventory['refs'][side]]==uids for side,uids in order.items()), 'Unreviewed pack order change'
@@ -264,7 +268,7 @@ def check_live_against_policy(inventory):
 
 
 def external_input_hashes():
-    result={key: sha(Path(CONFIG[key])) for key in ['identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan'] if CONFIG.get(key)}
+    result={key: sha(Path(CONFIG[key])) for key in ['startup_reconciliation','identity_migration','translation_reconciliation', 'container_recovery_plan','extension_validation','preserved_reconciliation','preserved_additions','approved_runtime_retention','native_storage_reanchor_plan'] if CONFIG.get(key)}
     if CONFIG.get('extension_hold_source'):
         path=Path(CONFIG['extension_hold_source'])
         if path.exists():result['extension_hold_source']=sha(path)

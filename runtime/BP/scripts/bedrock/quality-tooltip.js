@@ -1,5 +1,6 @@
 import {world} from '@minecraft/server';
 import {qualityBottleLore,isManagedQualityBottleLore,isLegacyManagedQualityBottleLore} from '../core/quality-tooltip.js';
+import {normalizeCocktailStack} from '../core/cocktail-tooltip.js';
 
 const getContainer=player=>player?.getComponent?.('minecraft:inventory')?.container;
 function stampSlot(player,slot){
@@ -7,7 +8,13 @@ function stampSlot(player,slot){
  if(!container||!Number.isInteger(slot)||slot<0||slot>=container.size)return false;
  try{
   const stack=container.getItem(slot),lore=qualityBottleLore(stack);
-  if(!lore||isManagedQualityBottleLore(stack)||((stack.getLore?.().length??0)>0&&!isLegacyManagedQualityBottleLore(stack)))return false;
+  if(!lore){
+   if(!stack)return false;
+   const next=normalizeCocktailStack(stack);
+   if(next===stack)return false;
+   container.setItem(slot,next);return true;
+  }
+  if(isManagedQualityBottleLore(stack)||((stack.getLore?.().length??0)>0&&!isLegacyManagedQualityBottleLore(stack)))return false;
   const next=stack.clone();next.setLore(lore);container.setItem(slot,next);return true;
  }catch{return false;}
 }
@@ -21,5 +28,5 @@ export function installQualityTooltipEvents(){
  });
 }
 
-export const qualityTooltipDiagnostics={managedLore:'RawMessage color / quality / blue mod label',
+export const qualityTooltipDiagnostics={managedLore:'RawMessage bottle quality and cocktail effects; custom lore retained',
  inventoryChange:!!world.afterEvents?.playerInventoryItemChange,spawnScan:!!world.afterEvents?.playerSpawn};

@@ -2,12 +2,16 @@ import {check,TavernError} from './util.js';
 import {isManagedQualityBottleLore,isLegacyManagedQualityBottleLore,normalizeBottleStack} from './quality-tooltip.js';
 /**
  * Stack interface: typeId, amount, maxAmount, clone(), isStackableWith(other).
- * Planning never mutates the live inventory. Only an explicit Forge pickup may request overflow drops.
+ * Planning never mutates the live inventory. Only an explicit Java delivery may request overflow drops.
  */
-export function planInventory(container,selected,take,outputs,makeStack){
+export function planInventory(container,selected,take,outputs,makeStack,{takeAfterOutputs=false}={}){
  check(Number.isInteger(selected)&&selected>=0&&selected<container.size,'BAD_SLOT');check(Number.isInteger(take)&&take>=0,'BAD_TAKE');
  const before=Array.from({length:container.size},(_,i)=>container.getItem(i)?.clone()),after=before.map(x=>x?.clone());
- if(take){const item=after[selected];check(item&&item.amount>=take,'INSUFFICIENT_HELD');if(item.amount===take)after[selected]=undefined;else item.amount-=take;}
+ if(take)check(before[selected]&&before[selected].amount>=take,'INSUFFICIENT_HELD');
+ const debit=()=>{if(take){const item=after[selected];check(item&&item.amount>=take,'INSUFFICIENT_HELD');if(item.amount===take)after[selected]=undefined;else item.amount-=take;}};
+ // ShakerBlockEntity returns its container while the original held item still
+ // occupies its slot. Other machines keep their existing debit-first order.
+ if(!takeAfterOutputs)debit();
  const forced=new Set(),overflow=[];let received=0;
  for(const o of outputs){
   let count=o.count;check(Number.isInteger(count)&&count>0&&count<=1024,'BAD_GIVE');const template=o.exact?(o.stack??makeStack(o.id,1)).clone():normalizeBottleStack(o.stack??makeStack(o.id,1));template.amount=1;
@@ -26,6 +30,7 @@ export function planInventory(container,selected,take,outputs,makeStack){
   if(count&&o.overflow==='drop'){while(count){const stack=template.clone();stack.amount=Math.min(count,template.maxAmount);overflow.push(stack);count-=stack.amount;}}
   check(count===0,'INVENTORY_FULL');
  }
+ if(takeAfterOutputs)debit();
  const changes=[];
  for(let i=0;i<after.length;i++){
   const a=after[i],b=before[i];

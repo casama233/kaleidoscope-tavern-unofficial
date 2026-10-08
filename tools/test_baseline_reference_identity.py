@@ -1,7 +1,7 @@
 """Historical views may normalize only bound, explicitly reviewed identities."""
-import hashlib,json,tempfile,unittest
+import base64,gzip,hashlib,json,tempfile,unittest
 from pathlib import Path
-from baseline_reference import previous_bytes,rows,functional_rows,functional_layers
+from baseline_reference import previous_bytes,rows,functional_rows,functional_layers,asset_layers
 class IdentityTests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.r=Path(self.tmp.name);(self.r/'data').mkdir()
@@ -9,7 +9,7 @@ class IdentityTests(unittest.TestCase):
  def fixture(self,name,current,reviewed,spec):
   self.p=self.r/name;self.p.parent.mkdir(parents=True,exist_ok=True);self.p.write_bytes(current)
   row={'before':None,'after':hashlib.sha256(reviewed).hexdigest(),'versionProjection':spec}
-  (self.r/'data/baseline-reconciliation.json').write_text(json.dumps({'files':{name:row}}));rows.cache_clear();functional_rows.cache_clear();functional_layers.cache_clear()
+  (self.r/'data/baseline-reconciliation.json').write_text(json.dumps({'files':{name:row}}));rows.cache_clear();functional_rows.cache_clear();functional_layers.cache_clear();asset_layers.cache_clear()
  def functional_fixture(self,with_baseline=True,name='runtime/BP/scripts/bedrock/drink-effects.js'):
   self.p=self.r/name;self.p.parent.mkdir(parents=True,exist_ok=True)
   self.current=b'applyReviewedSourceFix();\n';self.predecessor=b'previousReviewedSource();\n';self.original=b'immutableHistoricalSource();\n'
@@ -19,7 +19,7 @@ class IdentityTests(unittest.TestCase):
   self.ledger={'schema':1,'testOnly':True,'files':{name:historical} if with_baseline else {},'reviewedFunctionalDeltas':{name:row}}
   self.write_functional_ledger()
  def write_functional_ledger(self):
-  (self.r/'data/baseline-reconciliation.json').write_text(json.dumps(self.ledger));rows.cache_clear();functional_rows.cache_clear();functional_layers.cache_clear()
+  (self.r/'data/baseline-reconciliation.json').write_text(json.dumps(self.ledger));rows.cache_clear();functional_rows.cache_clear();functional_layers.cache_clear();asset_layers.cache_clear()
  def test_bound_script_version_preserves_all_remaining_bytes(self):
   old=b"export const BUILD_VERSION='1.2.2-baseline.1';\n";new=old.replace(b'1.2.2',b'1.2.3')
   self.fixture('runtime/build.js',new,old,{'kind':'build_identity','reviewedVersion':'1.2.2'})
@@ -72,6 +72,40 @@ class IdentityTests(unittest.TestCase):
  def test_other_rp_animation_paths_are_not_authorized_for_projection(self):
   self.functional_fixture(name='runtime/RP/animations/unrelated.animation.json')
   with self.assertRaises(AssertionError):previous_bytes(self.r,self.p)
+ def asset_fixture(self,name):
+  self.functional_fixture(name=name)
+  row=self.ledger.pop('reviewedFunctionalDeltas')[name];row.pop('reverseOps')
+  row['beforeGzipBase64']=base64.b64encode(gzip.compress(self.predecessor,mtime=0)).decode()
+  self.ledger['reviewedAssetDeltaLayers']=[{'release':'0.6.129','files':{name:row}}]
+  self.write_functional_ledger()
+ def test_exact_cocktail_assets_preserve_historical_witness_and_reject_drift(self):
+  for name in ['runtime/BP/blocks/cup_white_lady.json','runtime/RP/texts/zh_TW.lang','runtime/RP/ui/hud_screen.json']:
+   self.asset_fixture(name)
+   self.assertEqual(previous_bytes(self.r,self.p),self.original)
+   self.p.write_bytes(self.current+b'unreviewed bytes')
+   with self.assertRaisesRegex(AssertionError,'Reviewed asset source mutated'):previous_bytes(self.r,self.p)
+   self.p.write_bytes(self.current)
+   self.ledger['reviewedAssetDeltaLayers'][0]['files'][name]['beforeGzipBase64']=base64.b64encode(gzip.compress(b'wrong predecessor',mtime=0)).decode()
+   self.write_functional_ledger()
+   with self.assertRaisesRegex(AssertionError,'Asset predecessor mismatch'):previous_bytes(self.r,self.p)
+ def test_asset_review_does_not_admit_other_blocks_ui_or_locales(self):
+  for name in ['runtime/BP/blocks/barrel.json','runtime/RP/ui/unrelated.json','runtime/RP/texts/fr_FR.lang']:
+   self.asset_fixture(name)
+   with self.assertRaisesRegex(AssertionError,'Unsupported reviewed asset path'):previous_bytes(self.r,self.p)
+ def test_versioned_body_delta_keeps_release_binding_and_future_identity_only_bumps(self):
+  name='runtime/BP/scripts/data/cookery-guide-payload.js'
+  old=b'const payload={"version": "1.2.2","body":"old"};\n'
+  reviewed=old.replace(b'"old"',b'"fixed"');current=reviewed.replace(b'1.2.2',b'1.2.3')
+  self.fixture(name,current,old,{'kind':'payload_version','reviewedVersion':'1.2.2'})
+  self.ledger=json.loads((self.r/'data/baseline-reconciliation.json').read_text());self.ledger.update(schema=1,testOnly=True)
+  self.ledger['reviewedFunctionalDeltaLayers']=[{'release':'1.2.3','files':{name:{'before':hashlib.sha256(old).hexdigest(),'after':hashlib.sha256(reviewed).hexdigest(),'reason':'Reviewed body only after bound version normalization','reverseOps':[[0,1,old.decode()]]}}}]
+  self.write_functional_ledger();self.assertEqual(previous_bytes(self.r,self.p),old)
+  self.p.write_bytes(current.replace(b'1.2.3',b'1.2.4'))
+  with self.assertRaises(AssertionError):previous_bytes(self.r,self.p)
+  for filename,value in [('package.json',{'version':'1.2.4'}),('release.json',{'version':'1.2.4'}),('baseline.json',{'version':[1,2,4]})]:(self.r/filename).write_text(json.dumps(value))
+  self.assertEqual(previous_bytes(self.r,self.p),old)
+  self.p.write_bytes(self.p.read_bytes().replace(b'"fixed"',b'"unreviewed"'))
+  with self.assertRaisesRegex(AssertionError,'Reviewed functional source mutated'):previous_bytes(self.r,self.p)
  def test_functional_review_rejects_corrupt_reverse_delta(self):
   self.functional_fixture()
   row=next(iter(self.ledger['reviewedFunctionalDeltas'].values()))

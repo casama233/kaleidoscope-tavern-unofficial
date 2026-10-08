@@ -1,5 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 import {standaloneGuideView,guideLocale,guideText,guideItemName,GUIDE_LANGUAGES} from '../runtime/BP/scripts/core/standalone-guide-model.js';
+import {GUIDE_LANGUAGE_KEY,SHAKER_SOUND_KEY,SHAKER_SOUND_LEVELS,getGuideLocale,getShakerSoundLevel,savePresentationSettings} from '../runtime/BP/scripts/core/presentation-settings.js';
 import {buildCookeryGuidePayload} from '../runtime/BP/scripts/data/cookery-guide-payload.js';
 import {BUILTIN_RECIPES} from '../runtime/BP/scripts/data/recipes.js';import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {GUIDE_ROOTS} from '../runtime/BP/scripts/data/guide-navigation.js';
@@ -55,17 +56,36 @@ test('a different world can register its own fluid and still get localized volum
 });
 // UI SDK call doubles exercise controller flow; no game/player simulation.
 const source=fs.readFileSync(new URL('../runtime/BP/scripts/bedrock/standalone-guide.js',import.meta.url),'utf8').replace(/^import .*;\s*$/gm,'').replace(/export /g,'');
-function ui(responses,provider=()=>payload){const shown=[],properties=new Map(),messages=[];let writes=0,fail=false;class Form{title(v){this.t=v;return this}body(v){this.b=v;return this}button(v){(this.buttons??=[]).push(v);return this}dropdown(...v){this.fields=v;return this}async show(){shown.push(this);const next=responses.shift();if(next instanceof Error)throw next;return typeof next==='function'?next():next??{canceled:true};}}
- const ctx=vm.createContext({ActionFormData:Form,ModalFormData:Form,GUIDE_LANGUAGES,guideLocale,guideText,standaloneGuideView,console:{warn(){}}});vm.runInContext(source+'\nthis.api={showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics};',ctx);
- const holder={id:'ui-adapter',isValid:true,getDynamicProperty:k=>properties.get(k),setDynamicProperty(k,v){writes++;if(fail)throw Error('storage');properties.set(k,v)},sendMessage:m=>messages.push(m)};
+function ui(responses,provider=()=>payload){const shown=[],properties=new Map(),messages=[];let writes=0,fail=false;class Form{title(v){this.t=v;return this}body(v){this.b=v;return this}button(v){(this.buttons??=[]).push(v);return this}dropdown(...v){(this.fields??=[]).push(v);return this}async show(){shown.push(this);const next=responses.shift();if(next instanceof Error)throw next;return typeof next==='function'?next():next??{canceled:true};}}
+ const ctx=vm.createContext({ActionFormData:Form,ModalFormData:Form,GUIDE_LANGUAGES,guideLocale,guideText,standaloneGuideView,getGuideLocale,getShakerSoundLevel,SHAKER_SOUND_LEVELS,savePresentationSettings,console:{warn(){}}});vm.runInContext(source+'\nthis.api={showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics};',ctx);
+ const holder={id:'ui-adapter',isValid:true,getDynamicProperty:k=>properties.get(k),setDynamicProperty(k,v){writes++;if(fail)throw Error('storage');if(v===undefined)properties.delete(k);else properties.set(k,v)},sendMessage:m=>messages.push(m)};
  return {shown,properties,messages,api:ctx.api,holder,run:()=>ctx.api.showStandaloneGuide(holder,provider),get writes(){return writes},set fail(v){fail=v}};
 }
 test('Close and cancel terminate without consuming a book or changing preferences',async()=>{for(const response of [{selection:8},{canceled:true}]){const f=ui([response]);assert.equal(await f.run(),true);assert.equal(f.shown.length,1);assert.equal(f.writes,0);}});
 test('Back returns from a single-entry item to its parent root category',async()=>{const f=ui([{selection:0},{selection:0},{selection:0},{canceled:true}]);await f.run();assert.equal(f.shown.length,4);assert.equal(f.shown[1].t,f.shown[3].t);});
 test('undefined registry is not presented as a complete 111-entry fallback',async()=>{const f=ui([],()=>null);assert.equal(await f.run(),false);assert.equal(f.shown.length,0);assert.equal(f.api.standaloneGuideDiagnostics.notReady,1);});
-test('language selection persists only a validated value',async()=>{const f=ui([{selection:7},{formValues:[2]},{canceled:true}]);await f.run();assert.equal(f.properties.get('kt:standalone_guide_locale'),'en_US');assert.equal(f.shown[2].t,payload.text.en_US.title);});
-test('cancelled or invalid language does not write state',async()=>{for(const response of [{canceled:true},{formValues:[999]}]){const f=ui([{selection:7},response,{canceled:true}]);await f.run();assert.equal(f.writes,0);}});
-test('failed language write is reported, not silently successful',async()=>{const f=ui([{selection:7},{formValues:[2]},{canceled:true}]);f.fail=true;await f.run();assert.equal(f.properties.size,0);assert.equal(f.messages.length,1);});
+test('language and sound selections persist together and refresh the existing guide',async()=>{const f=ui([{selection:7},{formValues:[2,0]},{canceled:true}]);await f.run();assert.equal(f.properties.get(GUIDE_LANGUAGE_KEY),'en_US');assert.equal(f.properties.get(SHAKER_SOUND_KEY),'less');assert.equal(f.shown[2].t,payload.text.en_US.title);});
+test('cancelled, incomplete or invalid settings do not write either preference',async()=>{for(const response of [{canceled:true},{formValues:[999,1]},{formValues:[2]},{formValues:[2,999]},{formValues:[true,1]}]){const f=ui([{selection:7},response,{canceled:true}]);await f.run();assert.equal(f.writes,0);}});
+test('failed settings writes are reported, not silently successful',async()=>{const f=ui([{selection:7},{formValues:[2,2]},{canceled:true}]);f.fail=true;await f.run();assert.equal(f.properties.size,0);assert.equal(f.messages.length,1);});
+for(const locale of GUIDE_LANGUAGES)test(locale+' keeps seven content roots and localizes both settings fields',async()=>{
+ const f=ui([{selection:7},{canceled:true}]);f.properties.set(GUIDE_LANGUAGE_KEY,locale);f.properties.set(SHAKER_SOUND_KEY,'legacy');
+ const view=standaloneGuideView(payload,locale);assert.deepEqual(view.buttons.filter(row=>row.action.type==='category').map(row=>row.action.id),GUIDE_ROOTS);
+ assert.equal(view.buttons.length,9);assert.equal(view.buttons[7].label,guideText(locale,'settings'));assert.equal(view.buttons[7].action.type,'language');
+ await f.run();const modal=f.shown[1];assert.equal(modal.t,guideText(locale,'settings'));assert.equal(modal.fields.length,2);
+ assert.deepEqual(Array.from(modal.fields[0][1]),['繁體中文','简体中文','English']);assert.equal(modal.fields[0][2].defaultValueIndex,GUIDE_LANGUAGES.indexOf(locale));
+ assert.equal(modal.fields[1][0],guideText(locale,'shakerSound'));assert.deepEqual(Array.from(modal.fields[1][1]),guideText(locale,'shakerSoundLevels'));assert.equal(modal.fields[1][2].defaultValueIndex,1);
+ assert.equal(f.writes,0);assert.equal(f.properties.get(SHAKER_SOUND_KEY),'legacy');
+});
+test('an unconfirmed rollback is shown in the restored guide language',async()=>{
+ const f=ui([{selection:7},{formValues:[2,2]},{canceled:true}]);f.properties.set(GUIDE_LANGUAGE_KEY,'zh_CN');f.properties.set(SHAKER_SOUND_KEY,'legacy');
+ f.holder.setDynamicProperty=(key,value)=>{if(key===SHAKER_SOUND_KEY&&value==='legacy')throw Error('rollback blocked');f.properties.set(key,value);if(key===SHAKER_SOUND_KEY&&value==='more')throw Error('save failure');};
+ await f.run();assert.equal(f.properties.get(GUIDE_LANGUAGE_KEY),'zh_CN');assert.equal(f.messages.length,1);assert.ok(f.messages[0].includes(guideText('zh_CN','rollbackError')));
+});
+test('a settings answer arriving after session cleanup cannot write preferences',async()=>{
+ let release,shown;const showing=new Promise(resolve=>shown=resolve);
+ const f=ui([{selection:7},()=>new Promise(resolve=>{release=resolve;shown();})]),opening=f.run();
+ await showing;f.api.clearStandaloneGuideSession(f.holder.id);release({formValues:[2,2]});await opening;assert.equal(f.writes,0);
+});
 test('show errors release the session for a later use',async()=>{const f=ui([new Error('UI unavailable'),{canceled:true}]);assert.equal(await f.run(),false);assert.equal(await f.run(),true);assert.equal(f.api.standaloneGuideDiagnostics.errors,1);});
 test('duplicate open is blocked and leave cleanup permits a new session',async()=>{let release;const f=ui([()=>new Promise(r=>release=r),{canceled:true}]);const first=f.run();assert.equal(await f.run(),false);f.api.clearStandaloneGuideSession(f.holder.id);assert.equal(await f.run(),true);release({canceled:true});await first;});
 test('payload is refreshed on navigation',async()=>{let calls=0;const f=ui([{selection:0},{canceled:true}],()=>{calls++;return payload});await f.run();assert.ok(calls>=3);});

@@ -1,15 +1,15 @@
-## Current maintained baseline: 0.6.128
+## Current maintained baseline: 0.6.129
 
 # 森羅物語：酒館（非官方）
 
-T128 已修復可安裝輸出的凍結身分檢查，以及手持雪克杯的名稱／資料保存與取消操作；[變更及驗收範圍](docs/RELEASE-NOTES-0.6.128.md)。[PR 處置索引](docs/audit/PR-DISPOSITIONS.md) 保留尚未完成的獨有工作。
+T129 修復原料投入與清空、放置雪克杯資料保存、雞尾酒資訊、進度動畫及個人音量設定；[變更及驗收範圍](docs/RELEASE-NOTES-0.6.129.md)。[PR 處置索引](docs/audit/PR-DISPOSITIONS.md) 保留尚未完成的獨有工作。
 
 Java酒館的基岩版移植，包含釀造、調酒、酒架／酒櫃、家具與獨立酒館指南。指南保留共用七入口；Cookery整合使用同一份內容。[English](README.md)。
 
 ## 現行來源與需求
 
 - 版本及精確相依以 [baseline.json](baseline.json) 為準；更新見 [CHANGELOG.md](CHANGELOG.md)。
-- 本輪公開家族配套為酒館 **0.6.128**、世界名酒 **0.1.105**、煙火 **2.8.117**；[家族鎖](family/upstream.lock.json)與固定 CI 來源一致，[當前索引](docs/audit/PR-DISPOSITIONS.md)集中六條未完成工作及既有問題報告。
+- 本輪公開家族配套為酒館 **0.6.129**、世界名酒 **0.1.106**、煙火 **2.8.117**；[家族鎖](family/upstream.lock.json)與固定 CI 來源一致，[當前索引](docs/audit/PR-DISPOSITIONS.md)集中六條未完成工作及既有問題報告。
 - 基岩版1.26.50以上；目前引擎目標為BDS1.26.51.1。BP與RP兩側一起啟用。
 - Cookery可選，家族目前核驗作者1.6.0；世界名酒須搭配其宣告的酒館版本。
 - 升級前備份世界並移除重複舊包。私有料理整合是另一個識別明確的addon，不是私有酒館分支。

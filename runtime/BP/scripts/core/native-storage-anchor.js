@@ -4,7 +4,7 @@ import {validateDisplay} from './bottles.js';
 import {bottleBlock} from './extension-content.js';
 import {BOTTLES} from '../data/bottles.js';
 const NS='kaleidoscope_tavern',D='(overworld|nether|the_end)',P='(-?\\d+)_(-?\\d+)_(-?\\d+)';
-const regular=new RegExp(`^kt:(holder|tilted_rack|circular_rack|cellar_cabinet)/${D}/${P}$`);
+const regular=new RegExp(`^kt:(holder|tilted_rack|circular_rack|cellar_cabinet|shaker)/${D}/${P}$`);
 const bar=new RegExp(`^kt:bar_cabinet/${D}/(bar_cabinet|glass_bar_cabinet)/${P}$`);
 const extension=new RegExp(`^kt:extension_storage/([a-z0-9_.-]+)/([a-z0-9_./-]+)/${D}/${P}$`);
 const other=new RegExp(`^kt:(glassware_holder|vanillaBottleDisplays)/minecraft:${D}/${P}$`);
@@ -12,7 +12,7 @@ const bottles=new RegExp(`^kt:bottles/${D}/${P}$`);
 const position=values=>{const p={x:Number(values[0]),y:Number(values[1]),z:Number(values[2])};check(Object.values(p).every(Number.isSafeInteger),'NATIVE_STORAGE_LOCATION');return p;};
 export function nativeStorageAnchor(key,registry,readState){
  check(typeof key==='string','NATIVE_STORAGE_UNKNOWN_ANCHOR');let m=regular.exec(key),type,dimension,p,capacity;
- if(m){type=NS+':'+m[1];dimension=m[2];p=position(m.slice(3));capacity={holder:1,tilted_rack:3,circular_rack:6,cellar_cabinet:9}[m[1]];}
+ if(m){type=NS+':'+(m[1]==='shaker'?'shaker_station':m[1]);dimension=m[2];p=position(m.slice(3));capacity={holder:1,tilted_rack:3,circular_rack:6,cellar_cabinet:9,shaker:1}[m[1]];}
  else if((m=bar.exec(key))){type=NS+':'+m[2];dimension=m[1];p=position(m.slice(3));capacity=2;}
  else if((m=other.exec(key))){type=NS+':'+(m[1]==='vanillaBottleDisplays'?'potion_bottle':m[1]);dimension=m[2];p=position(m.slice(3));capacity=m[1]==='vanillaBottleDisplays'?1:9;}
  else if((m=extension.exec(key))){
@@ -32,5 +32,6 @@ export function checkNativeStorageOwner(anchor,block,ids){
  if(anchor.displayIds)check(ids.every((value,slot)=>value===(anchor.displayIds[slot]??null)),'NATIVE_STORAGE_LAYOUT_MISMATCH');
  if(anchor.type===NS+':glassware_holder')check(ids.every(x=>x===null||x===NS+':empty_glassware'),'NATIVE_STORAGE_LAYOUT_MISMATCH');
  if(anchor.type===NS+':potion_bottle')check(ids[0]==='minecraft:potion','NATIVE_STORAGE_LAYOUT_MISMATCH');
+ if(anchor.type===NS+':shaker_station')check(ids[0]===NS+':shaker','NATIVE_STORAGE_LAYOUT_MISMATCH');
  return true;
 }

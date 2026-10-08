@@ -1,11 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,existsSync} from 'node:fs';
+import {readFileSync,existsSync,mkdtempSync,writeFileSync,rmSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {EFFECT_ICONS} from '../runtime/BP/scripts/data/effect-icons.js';
 import {createEffectIcons,effectIconPacket,effectIconToken,effectDetails,EFFECT_ICON_PREFIX,EFFECT_ICON_SLOTS,EFFECT_ICON_HIDE_TAG} from '../runtime/BP/scripts/core/effect-icons.js';
 import {createEffectIconTransport} from '../runtime/BP/scripts/core/effect-icon-transport.js';
 const state=(...rows)=>({entries:rows}),row=(id,ticks=200,amplifier=0)=>({id,ticks,amplifier});
 const t='kaleidoscope_tavern:vision',w='kaleidoscope_world_liquor:multi_jump';
+test('HUD generator check accepts equivalent JSON spelling but rejects changed controls and invalid JSON',()=>{
+ const root=mkdtempSync(join(tmpdir(),'kt-effect-hud-check-')),generator=fileURLToPath(new URL('./build_effect_icon_hud.mjs',import.meta.url));
+ const target=join(root,'runtime/RP/ui/kt_world_liquor_effects.json');
+ const run=(...args)=>{const result=spawnSync(process.execPath,[generator,'--world-liquor',root,...args],{encoding:'utf8',timeout:30000});assert.ifError(result.error);return result;};
+ // An isolated generated addon document exercises the real CLI without ever
+ // rewriting the frozen host HUD. Keep arrays ordered and change only spelling.
+ const spelling=value=>Array.isArray(value)?'['+value.map(spelling).join(', ')+']':value&&typeof value==='object'?'{'+Object.entries(value).reverse().map(([key,item])=>JSON.stringify(key)+': '+spelling(item)).join(',\n')+'}':typeof value==='number'&&Number.isInteger(value)?value+'.0':JSON.stringify(value);
+ try{
+  const generated=run();assert.equal(generated.status,0,generated.stderr);
+  const original=JSON.parse(readFileSync(target,'utf8')),equivalent=spelling(original)+'\n';assert.deepEqual(JSON.parse(equivalent),original);
+  writeFileSync(target,equivalent);const accepted=run('--check');assert.equal(accepted.status,0,accepted.stderr);assert.equal(readFileSync(target,'utf8'),equivalent,'check mode must not rewrite its input');
+  for(const mutate of [hud=>{hud.effect_panel.offset[0]+=1;},hud=>{hud.effect_panel.unexpected=true;},hud=>{delete hud.effect_panel.anchor_from;}]){
+   const altered=structuredClone(original);mutate(altered);const raw=JSON.stringify(altered);writeFileSync(target,raw);
+   const rejected=run('--check');assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/Effect icon HUD differs/);assert.equal(readFileSync(target,'utf8'),raw);
+  }
+  writeFileSync(target,'{"namespace":');const malformed=run('--check');assert.notEqual(malformed.status,0);assert.match(malformed.stderr,/SyntaxError/);
+ }finally{rmSync(root,{recursive:true,force:true});}
+});
 test('Only active strongest layers; native, expired and unmapped effects never impersonate icons',()=>{
  const s=state(row(t),row(t,400,1),row(w),row('minecraft:speed'),row('other:unknown'),row('kaleidoscope_tavern:bloody_mary',0));
  const packet=effectIconPacket(s);assert.equal(packet.replace(/§[0-9a-fkr]/g,''),'');

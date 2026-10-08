@@ -1,12 +1,16 @@
 # Java / Bedrock parity matrix
 
-Current repair candidate: Tavern0.6.128. Carried shaker abort is a true inventory
-no-op; completion and serving preserve native ItemStack metadata while refreshing
-only exact owned lore. Production callback fixtures cover single settlement and
-rollback. Installable CI/family output again requires frozen release identity;
-the startup table is checked by executing its body against isolated interfaces.
-Native saved-world and current client acceptance remain pending. T127 framing
-and arm-Y source repairs below are retained unchanged.
+Current repair candidate: Tavern0.6.129 with World Liquor0.1.106. The current
+[cocktail repair scope](RELEASE-NOTES-0.6.129.md) adds Java ingredient admission,
+container-before-debit order, Creative placement, sneak-air clearing, physical
+bounds, complete placed shaker carrier transactions, actual cocktail lore and
+guide details, owned HUD interpolation/expiry, personal sound, native Ardent
+block drops and the bounded High Heels improvements. The existing T128 carried
+clone/abort behavior and T127 framing remain. Full ingredient metadata is still
+unsupported; the failed three-potion nested-container route is excluded based on
+[actual engine observations](../data/native-shaker-storage-capabilities-20261008.json).
+Native fixture scope and current client acceptance remain separate; no full
+Java or LIVE success is inferred from the current repair.
 
 Retained T127 source scope: Tavern0.6.127. Main-hand framing now retains the bounded PR247 adapter and third-person arm Y is additive zero, preserving incoming yaw from PR167. Original mesh/half-scale/use-wave/XZ pose and all other current gameplay remain. Source/socket/selector checks pass; full current client view, hand, FOV and shake-trajectory acceptance remains pending. This supersedes the old source gap only, not the historical T106 observations.
 

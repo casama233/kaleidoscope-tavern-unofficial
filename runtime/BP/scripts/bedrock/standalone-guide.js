@@ -1,9 +1,10 @@
 /** Tavern-owned UI; no item replacement and no Cookery renderer dependency. */
 import {ActionFormData,ModalFormData} from '@minecraft/server-ui';
-import {GUIDE_LANGUAGES,guideLocale,guideText,standaloneGuideView} from '../core/standalone-guide-model.js';
-const LANGUAGE_KEY='kt:standalone_guide_locale',sessions=new Map();
+import {GUIDE_LANGUAGES,guideText,standaloneGuideView} from '../core/standalone-guide-model.js';
+import {getGuideLocale,getShakerSoundLevel,SHAKER_SOUND_LEVELS,savePresentationSettings} from '../core/presentation-settings.js';
+const sessions=new Map();
 export const standaloneGuideDiagnostics={opened:0,closed:0,errors:0,notReady:0};
-function localeOf(player){try{return guideLocale(player.getDynamicProperty(LANGUAGE_KEY))}catch{return guideLocale()}}
+const localeOf=getGuideLocale;
 function notify(player,text){try{player.sendMessage('§7[Tavern] '+text)}catch{}}
 export async function showStandaloneGuide(player,payloadProvider){
  if(!player?.id||sessions.has(player.id))return false;
@@ -23,12 +24,14 @@ export async function showStandaloneGuide(player,payloadProvider){
    if(action.type==='back'){node=history.pop()??{type:'root'};continue;}
    if(action.type==='page'){node=action.node;continue;}
    if(action.type==='language'){
-    const answer=await new ModalFormData().title(guideText(locale,'language')).dropdown(guideText(locale,'language'),['繁體中文','简体中文','English'],{defaultValueIndex:GUIDE_LANGUAGES.indexOf(locale)}).show(player);
+    const answer=await new ModalFormData().title(guideText(locale,'settings'))
+     .dropdown(guideText(locale,'language'),['繁體中文','简体中文','English'],{defaultValueIndex:GUIDE_LANGUAGES.indexOf(locale)})
+     .dropdown(guideText(locale,'shakerSound'),guideText(locale,'shakerSoundLevels'),{defaultValueIndex:SHAKER_SOUND_LEVELS.indexOf(getShakerSoundLevel(player))}).show(player);
     if(sessions.get(player.id)!==token||answer.canceled)break;
-    const choice=answer.formValues?.[0];if(!Number.isInteger(choice)||!GUIDE_LANGUAGES[choice])continue;
-    const before=player.getDynamicProperty(LANGUAGE_KEY),next=GUIDE_LANGUAGES[choice];
-    try{player.setDynamicProperty(LANGUAGE_KEY,next);if(player.getDynamicProperty(LANGUAGE_KEY)!==next)throw Error('Language write not acknowledged');locale=next;}
-    catch(error){try{player.setDynamicProperty(LANGUAGE_KEY,before)}catch{}locale=localeOf(player);notify(player,guideText(locale,'saveError'));console.warn('[Tavern guide language] '+error);}
+    const [languageIndex,soundIndex]=answer.formValues??[];
+    if(!Number.isInteger(languageIndex)||!GUIDE_LANGUAGES[languageIndex]||!Number.isInteger(soundIndex)||!SHAKER_SOUND_LEVELS[soundIndex])continue;
+    try{locale=savePresentationSettings(player,{locale:GUIDE_LANGUAGES[languageIndex],shakerSound:SHAKER_SOUND_LEVELS[soundIndex]}).locale;}
+    catch(error){locale=localeOf(player);notify(player,guideText(locale,error.rollbackFailed?'rollbackError':'saveError'));console.warn('[Tavern guide settings] '+error);}
     continue;
    }
    history.push(node);node=action;

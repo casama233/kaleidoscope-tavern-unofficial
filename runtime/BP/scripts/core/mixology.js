@@ -13,12 +13,13 @@ export function mergeEffects(entries){
  // Java casts (sum * 1.2f) to int, including groups containing only one entry.
  return [...grouped.values()].map(e=>({...e,duration:Math.trunc(Math.fround(Math.fround(e.duration)*Math.fround(1.2)))}));
 }
-export function inputSnapshot(itemId,registry){
+export function inputSnapshot(itemId,registry,{stored=false}={}){
  id(itemId);check(itemId!==SIGNATURE,'SIGNATURE_INPUT_NOT_ADAPTED');check(!['minecraft:potion','minecraft:splash_potion','minecraft:lingering_potion'].includes(itemId),'POTION_DATA_NOT_ADAPTED');
  const bottle=parseBottle(itemId);if(bottle)check(bottle.quality>=4,'QUALITY_TOO_LOW');
+ check(stored||(registry?registry.acceptsShakerInput(itemId):Object.hasOwn(SHAKER_INPUTS,itemId)),'NOT_SHAKER_INGREDIENT');
  if(SHAKER_INPUTS[itemId])return {...clone(SHAKER_INPUTS[itemId]),...registry?.ingredientColor?.(itemId)};
  const external=registry?.shakerInput?.(itemId);if(external)return {...clone(external),...registry?.ingredientColor?.(itemId)};
- check(!bottle,'NOT_MIXABLE_DRINK');check(registry?.acceptsShakerInput(itemId),'NOT_SHAKER_INGREDIENT');
+ check(!bottle,'NOT_MIXABLE_DRINK');
  // Backward-compatible recipe-only ingredients remain neutral. Add-ons that model drinks should register shakerInputs.
  return {item:itemId,container:null,color:0xffffff,colorIgnored:true,effects:[],...registry?.ingredientColor?.(itemId)};
 }
@@ -26,6 +27,9 @@ export function emptyShaker(){return {schema:1,revision:0,slots:[],result:null};
 export function validateResult(r){check(r&&typeof r==='object','BAD_COCKTAIL_RESULT');id(r.item);id(r.carrier);if(r.recipeId)id(r.recipeId);if(r.item===SIGNATURE)validatePayload(r.payload);else check(r.payload===undefined,'UNEXPECTED_PAYLOAD');return r;}
 export function validateShaker(s){
  check(s&&s.schema===1,'SHAKER_SCHEMA');integer(s.revision,0,2147483647,'revision');check(Array.isArray(s.slots)&&s.slots.length<=3,'SHAKER_CAPACITY');
+ // The rejected nested-item experiment must not be reinterpreted as plain IDs.
+ check(s.nativeItems===undefined,'NATIVE_SHAKER_NESTED_UNSUPPORTED');
+ if(s.nativeCarrier!==undefined)check(s.nativeCarrier===1,'NATIVE_SHAKER_SCHEMA');
  for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);if(slot.potion){check(POTION_ITEMS.has(slot.item)&&slot.container==='minecraft:glass_bottle','BAD_POTION_SLOT');validatePotionIdentity(slot.potion);}}
  if(s.result){check(s.slots.length===3,'CORRUPT_SHAKER');validateResult(s.result);}else check(s.result===null,'CORRUPT_SHAKER');
  check(utf8Bytes(JSON.stringify(s))<=20000,'STATE_TOO_LARGE');return s;
@@ -40,7 +44,7 @@ export function signaturePayload(slots){
  const color=colored.length?[16,8,0].reduce((out,shift)=>out|(Math.trunc(colored.reduce((n,s)=>n+((s.color>>shift)&255),0)/colored.length)<<shift),0):0xffffff;
  return validatePayload({schema:1,color,effects:mergeEffects(slots.flatMap(s=>s.effects)),ingredients:slots.map(s=>s.item)});
 }
-export function currentMixInputs(slots,registry){return registry?slots.map(slot=>slot.potion?clone(slot):{...clone(slot),...inputSnapshot(slot.item,registry)}):slots;}
+export function currentMixInputs(slots,registry){return registry?slots.map(slot=>slot.potion?clone(slot):{...clone(slot),...inputSnapshot(slot.item,registry,{stored:true})}):slots;}
 export function finishShake(s,ticks,recipe,registry){
  validateShaker(s);check(!s.result,'RESULT_PENDING');check(s.slots.length===3,'NEED_THREE_INGREDIENTS');const band=timingBand(ticks);if(band==='abort')return clone(s);
  let result;

@@ -29,9 +29,13 @@ export class BlockVolume{constructor(from,to){this.from={...from};this.to={...to
 world.getAbsoluteTime=()=>system.currentTick;
 world.getEntity=id=>world.getAllPlayers().find(p=>p.id===id)??[...world.dimensions.values()].flatMap(d=>[...d.entities.values()]).find(e=>e.id===id);
 world.afterEvents.playerButtonInput=new Signal();
+export const EntitySwingSource={Attack:'Attack',Build:'Build',DropItem:'DropItem',Event:'Event',Interact:'Interact',Mine:'Mine',None:'None',ThrowItem:'ThrowItem',UseItem:'UseItem'};
+world.afterEvents.playerSwingStart=new Signal();
 world.afterEvents.playerBreakBlock=new Signal();
 world.afterEvents.worldLoad=new Signal();
 world.afterEvents.entityRemove=new Signal();
+Object.defineProperty(ItemStack.prototype,'keepOnDeath',{get(){return this.meta.keepOnDeath??false;},set(value){this.meta.keepOnDeath=value;}});
+Object.defineProperty(ItemStack.prototype,'lockMode',{get(){return this.meta.lockMode??'none';},set(value){this.meta.lockMode=value;}});
 export function registerFixtureItem(id,max=64){itemInfo.set(id,{max});}
 export function registerFixturePack(root){
  for(const type of ['items','blocks'])for(const f of fs.readdirSync(root+'/runtime/BP/'+type)){
@@ -45,7 +49,10 @@ export function registerFixturePack(root){
  }
 }
 const oldItemComponent=ItemStack.prototype.getComponent;
-ItemStack.prototype.getComponent=function(id){if(id==='minecraft:dyeable'&&itemInfo.get(this.typeId)?.definition?.components?.[id])return this.meta[id]??=( {color:undefined} );return oldItemComponent.call(this,id);};
+ItemStack.prototype.getComponent=function(id){
+ if(id==='minecraft:dyeable'&&itemInfo.get(this.typeId)?.definition?.components?.[id])return this.meta[id]??=( {color:undefined} );
+ return oldItemComponent.call(this,id);
+};
 Properties.prototype.getDynamicPropertyIds=function(){return [...this.dp.keys()];};
 const oldEntityComponent=Entity.prototype.getComponent;
 Entity.prototype.getComponent=function(id){

@@ -2,6 +2,7 @@ import {GUIDE_ENTRY_ICONS} from './guide-icons.js';
 import {organizeGuideNavigation} from './guide-navigation.js';
 import {preparationNotes} from '../core/guide-preparation-text.js';
 import {guideItemName} from './guide-native-names.js';
+import {cocktailGuideNotes} from './cocktail-guide.js';
 /** One encyclopedia page per product, using Cookery's native entry renderer. */
 const LOCALES=['zh_CN','zh_TW','en_US'];
 const CATEGORY={gear:'equipment',mix_tools:'equipment',press:'equipment',barrel_drinks:'barrel',
@@ -53,12 +54,12 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
  }
  if(recipes.length)for(const [short,names,usage] of [
   ['signature_cocktail',['特调鸡尾酒','特調雞尾酒','Signature Cocktail'],[
-   '加入三种有效材料，在特调时机松开雪克杯，再倒入放好的空玻璃杯。颜色按有效材料颜色混合，酒效随材料而变。',
-   '加入三種有效材料，在特調時機鬆開雪克杯，再倒入放好的空玻璃杯。顏色按有效材料顏色混合，酒效隨材料而變。',
-   'Add three valid ingredients, release the shaker in the signature timing range, then pour into a placed empty glass. Valid ingredient colors are mixed and effects depend on the ingredients.']],
+    '加入三份有效材料，在特调时机松开雪克杯，再倒入放好的空玻璃杯。颜色按有效材料颜色平均混合。同种酒效的时间相加后乘以1.2，等级和概率各取最高值；悬停查看这杯特调的必定触发效果。',
+    '加入三份有效材料，在特調時機鬆開雪克杯，再倒入放好的空玻璃杯。顏色按有效材料顏色平均混合。同種酒效的時間相加後乘以1.2，等級和機率各取最高值；懸停查看這杯特調的必定觸發效果。',
+    'Add three valid ingredients, release in the signature timing range, then pour into a placed empty glass. Valid ingredient colors are averaged. Durations of matching effects are added and multiplied by 1.2; the highest level and probability are retained. Hover over the finished cup to see its guaranteed effects.']],
   ['mystery_cocktail',['神秘鸡尾酒','神秘雞尾酒','Mystery Cocktail'],[
-   '加入三种有效材料后，在特调或配方时机以外完成摇酒会得到神秘鸡尾酒；摇晃过短则取消。倒入空玻璃杯后取用。',
-   '加入三種有效材料後，在特調或配方時機以外完成搖酒會得到神秘雞尾酒；搖晃過短則取消。倒入空玻璃杯後取用。',
+   '加入三份有效材料后，在特调或配方时机以外完成摇酒会得到神秘鸡尾酒；摇晃过短则取消。倒入空玻璃杯后取用。',
+   '加入三份有效材料後，在特調或配方時機以外完成搖酒會得到神秘雞尾酒；搖晃過短則取消。倒入空玻璃杯後取用。',
    'With three valid ingredients, finishing outside the signature/recipe timing range makes a mystery cocktail; releasing too early cancels. Pour into an empty glass to serve.']]
  ]){
   const id='kaleidoscope_tavern:'+short;
@@ -117,7 +118,7 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   for(const lc of LOCALES){
    const name=id=>guideItemName(result,lc,id);
    const notes=(entry.recipes??[]).flatMap(recipe=>preparationNotes(recipe,lc,name));
-   entry.mechanicsByLocale[lc]=[...new Set([...entry.mechanicsByLocale[lc],...notes])];
+    entry.mechanicsByLocale[lc]=[...new Set([...entry.mechanicsByLocale[lc],...cocktailGuideNotes(entry.id,lc),...notes])];
   }
   entry.mechanics=entry.mechanicsByLocale.zh_TW;
  }

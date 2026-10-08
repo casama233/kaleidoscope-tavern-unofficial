@@ -2,7 +2,25 @@
 
 更新：2026-10-08。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 本輪來源交付
+## T129／W106 雞尾酒修復
+
+本輪從下列已交付 T128／W105 基線接續；新的 Tavern0.6.129 與 World
+Liquor0.1.106 合併調酒操作、完整外層雪克杯保存、提示／HUD／音量及效果
+適配。原料內部三格容器因原生失敗排除，避免把腳本 fixture 成功當成引擎
+成功。[版本說明](../RELEASE-NOTES-0.6.129.md) 是本批來源、分段修復和驗收
+場景的單一入口；[第三方包審查](../THIRD-PARTY-TAVERN-REVIEW.md) 記錄
+Loyallay 公開版可吸收設計及未解決的原生限制。
+
+兩庫 CI 固定本批真正配對提交：World Liquor 的 [PR86](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/86)
+使用 Tavern [PR290](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/290) 的修復與審查工具提交 `64f5d25d3e7f6156630a9c3a90020cd87efba051`；Tavern 的四個 peer checkout
+統一使用 World Liquor `cbf86880e103dfa9cb6ac80eac1528734b41a73b`。本批發布目標為
+[T129 測試版](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.129-beta.1)
+與 [W106 測試版](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/releases/tag/v0.1.106-preview.1)，
+實際發布以各庫 workflow 的上傳／讀回結果為準。
+本工作區的獨立零玩家 BDS 只證明指定保存／掉落場景，沒有完整家族或
+LIVE 存檔連線。下方歷史 PR 和六個尚待玩家驗收的工作入口保持原始證據。
+
+## 已交付起點（T128／W105）
 
 | 套件 | 凍結版本與交付 | 已修的行為 |
 | --- | --- | --- |
@@ -49,10 +67,10 @@ Tavern 原 13 個見下表：#284 完成修補並合併，另外 12 個舊草稿
 | [#142](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/142) `0713fd871b97` | 已關閉，承接 [#288](https://github.com/casama233/kaleidoscope-tavern-unofficial/issues/288) | Retain the historical T87/W51/G40 editor/schema observations as evidence. Current bridge export, warnings and client GUI need current-source acceptance. |
 | [#119](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/119) `0bfd0b8bdc45` | 已關閉，承接 [#285](https://github.com/casama233/kaleidoscope-tavern-unofficial/issues/285) | Preserve coexistence with foreign Actionbar writers under current icon transport and opt-in text; do not revive the old polling/retained text design. |
 
-## 配套下載與 LIVE 邊界
+## 起點的配套下載與 LIVE 邊界
 
 T128 與 W105 的 `.github/release-request.json` 分別請求公開 **test prerelease**，且固定完整 archive digest；T 使用已成功 package CI 的同一 runtime digest，W 使用現行 frozen runtime 的確定性建置。G117 由既有合併後 canonical workflow 提供 Integrated Test。發布結果以各庫 Releases 與 upload/readback workflow 為準；所有新測試包保持 client pending、production_ready=false，沒有新 LIVE 宣告。
 
 [family_update](../../family/UPDATE-WORKFLOW.md) 是唯一完整家族更新入口。實際 BSM／world／引擎與 quality checkpoint 在本工作區不可用，因此完整家族新世界 BDS、fresh stopped-world 演練、備份、准入、部署與讀回仍待在真實連線完成。使用者既有 LIVE 持續授權保留，無需再次要求同一部署許可；沒有憑空補入 native／client／LIVE 成功。作者分支的最新上游檢查亦須由實際 BSM current checkpoint 接续，不能以舊網頁快取推定已全部刷新。
 
-當前來源驗證和玩家場景：[T128 release notes](../RELEASE-NOTES-0.6.128.md)、[parity matrix](../PARITY-MATRIX.md)、[BUGS](../BUGS.md)。私人整合維持其獨立 canonical 來源，不將私人包內容或世界資料放入公開庫。
+當前來源驗證和玩家場景：[T129 release notes](../RELEASE-NOTES-0.6.129.md)、[parity matrix](../PARITY-MATRIX.md)、[BUGS](../BUGS.md)。私人整合維持其獨立 canonical 來源，不將私人包內容或世界資料放入公開庫。

@@ -1,6 +1,19 @@
 # 玩家可見問題與待驗收項
 
-## T-SHAKER-METADATA — T128 已修來源，原生保存待驗收
+## 本批 T129 雞尾酒修復
+
+[完整變更與驗證範圍](RELEASE-NOTES-0.6.129.md) 集中記錄原料 gate、空瓶交付
+順序、創造放置、空中清空、碰撞／破壞設定、放置杯外層資料、HUD／提示／
+指南、個人音量及兩個效果適配。先前「任意物品可投入」及「背包滿即拒絕
+退空瓶」的來源差距已修；真人互動與全視角畫面仍待同一候選驗收。
+
+放置杯現在保存完整外層 ItemStack，但無法保存附加資料的原料仍在投入前
+拒絕。三瓶原生藥水的 nested item 容器方案因實際容量限制未採用，見
+[能力記錄](../data/native-shaker-storage-capabilities-20261008.json)。歷史
+active/pouring 改 ID 遷移也不能宣稱外層 metadata 無損。這些限制與下面
+T128 手持轉換已修的範圍需分開。
+
+## T-SHAKER-METADATA — T128 手持修補保留，T129 延伸至放置杯
 
 具名手持雪克杯提早停止、完成搖酒或倒酒時，舊 `portable()` 會重建
 ItemStack，丟失名稱、外部 dynamic property 及自訂 lore。T128 從現行

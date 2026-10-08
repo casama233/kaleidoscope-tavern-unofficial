@@ -184,9 +184,9 @@ class ResumeTests(unittest.TestCase):
         result = workflow.prepare()
         self.assertEqual(result['state'], 'ready_for_fresh_saved_world_and_deploy')
         self.stages.assert_not_called()
-        self.static.assert_called_once_with()
-        self.assertGreaterEqual(self.source_state.call_count, 2)
-        self.assertGreaterEqual(self.audit.call_count, 2)
+        self.static.assert_called_once_with(verified_candidate=self.receipt)
+        self.assertEqual(self.source_state.call_count, 1)
+        self.assertEqual(self.audit.call_count, 1)
         self.assertGreaterEqual(self.live.call_count, 2)
 
     def test_cached_build_rejects_changed_receipt_configuration_lock_or_tool(self):

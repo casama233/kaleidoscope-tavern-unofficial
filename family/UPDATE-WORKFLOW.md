@@ -20,6 +20,8 @@
 
 剛完成的部署直接回傳本次lease內已通過的部署後讀回報告與驗證時間；清理結束後不再對最新Git重做同一次部署核對，避免並行來源前進被誤報為已完成部署失敗。這不是永久快取：之後另一次resume／update仍按目前來源、live和政策檢查，來源已變須建立新候選。部署後報告只證明其記錄時間的狀態，持續漂移由既有巡檢負責。
 
+工作區布局、退役條件與部署後清理順序見 [WORKSPACE-MAINTENANCE.md](WORKSPACE-MAINTENANCE.md)。
+
 ## 一次設定，一個入口
 
 將 `family/update-config.example.json` 複製到 **Git 外**的本機設定檔，

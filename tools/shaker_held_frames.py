@@ -9,14 +9,10 @@ ROOT=Path(__file__).resolve().parents[1]
 REF=json.loads((ROOT/'art/interfaces/shaker-held-java-reference.json').read_text())
 WAVE='math.sin(q.life_time * 1718.87338539247)'
 USING='(q.main_hand_item_use_duration > 0 && (q.main_hand_item_max_duration - q.main_hand_item_use_duration) <= 111)'
-# The integrating owner's native run found the prior state-only 8-pixel
-# camera retreat visibly shrank the cup on use. Preserve the accepted idle
-# framing in both states; Java uses the same base hand translation/depth.
-# Only Java's Y wave and Rx15 distinguish using from fully equipped idle.
-# The armor/head-centered reference frustum is not calibrated to those
-# native pixels: retain its failures as diagnostics, never fit them by
-# introducing an unsupported state-only retreat or shrinking the mesh.
-FP_IDLE_CAMERA_OFFSET=(-3.0,6.5,-6.5)
+# Retain the bounded native-observed PR247 camera placement in both idle/use.
+# Java's half-scale, display rotation and use wave remain separate from this
+# item-specific Bedrock camera adapter. Full client parity is still pending.
+FP_IDLE_CAMERA_OFFSET=(-1.0,4.5,-3.0)
 FP_USE_CAMERA_OFFSET=FP_IDLE_CAMERA_OFFSET
 
 def java_target(view,active=False,wave=0,hand='right'):
@@ -48,8 +44,12 @@ def pose(view,active=False,wave=0,hand='right'):
  return {'position':[round(v,8) for v in p],'rotation':[round(v,8) for v in r],'scale':.5}
 
 def expected():
- idle=pose('fp');third=pose('tp');active=pose('fp',True);peak=pose('fp',True,1)
- active['position']=[f'{value:.8f} + {peak["position"][i]-value:.8f} * {WAVE}' for i,value in enumerate(active['position'])]
+ idle=pose('fp');third=pose('tp');active=pose('fp',True)
+ # Derive the source wave independently of rounded camera placement.
+ base,camera=calibration('right');frame=mul(rigid_inverse(base),camera)
+ origin=point(frame,[0,0,0]);peak=point(frame,[0,-2.4,0])
+ delta=[-(peak[0]-origin[0]),peak[1]-origin[1],peak[2]-origin[2]]
+ active['position']=[f'{value:.8f} + {delta[i]:.8f} * {WAVE}' for i,value in enumerate(active['position'])]
  return {name:{'loop':True,'bones':{'grip':value}} for name,value in [
   ('animation.kt_mixology.hold_first',idle),('animation.kt_mixology.hold_third',third),('animation.kt_mixology.shake_first',active)]}
 
@@ -57,7 +57,11 @@ def selectors():
  return [{'hold_first':'c.is_first_person && !'+USING},{'hold_third':'!c.is_first_person'},{'shake_first':'c.is_first_person && '+USING}]
 
 def write():
- p=ROOT/'runtime/RP/animations/runtime_shaker.animation.json';d=json.loads(p.read_text());d['animations'].update(expected());p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8',newline='\n')
+ p=ROOT/'runtime/RP/animations/runtime_shaker.animation.json';d=json.loads(p.read_text());d['animations'].update(expected())
+ # Java changes the use-arm X/Z pose, preserving the incoming Y rotation.
+ # A zero additive channel keeps it; subtracting `this` cancels it.
+ d['animations']['animation.kt_mixology.player_shake']['bones']['rightarm']['rotation'][1]=0
+ p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8',newline='\n')
  for p in (ROOT/'runtime/RP/attachables').glob('shaker*.attachable.json'):
   d=json.loads(p.read_text());d['minecraft:attachable']['description']['scripts']['animate']=selectors();p.write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8',newline='\n')
 if __name__=='__main__':write()

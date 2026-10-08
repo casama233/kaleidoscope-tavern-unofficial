@@ -9,10 +9,11 @@ def check(root):
     rotations=shake['bones']['rightarm']['rotation']
     assert rotations==[
         'v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)',
-        'v.is_first_person ? 0 : -this',
-        'v.is_first_person ? 0 : (-9 - this)'], 'Perspective guard and target-minus-current are required for each axis'
+        0,
+        'v.is_first_person ? 0 : (-9 - this)'], 'Guard X/Z pose changes and preserve the source arm Y rotation'
     # Evaluate the exact shipped restricted expressions, not an independent target implementation.
     def evaluate(expr,first,seconds,current):
+        if isinstance(expr,(int,float)):return expr
         guard,branches=expr.split(' ? ');yes,no=branches.split(' : ')
         assert guard=='v.is_first_person'
         expression=(yes if first else no).replace('q.life_time','seconds').replace('math.sin','sin_degrees').replace('this','current')
@@ -20,8 +21,9 @@ def check(root):
     cases=0
     for tick in range(112):
         seconds=tick/20
-        target=[-112.5-45*math.sin(tick*1.5),0,-9]
         for pose in ([0,0,0],[27,-39,-159],[-90,40,10]):
+            # Java modifies X/Z, leaving the existing arm Y rotation intact.
+            target=[-112.5-45*math.sin(tick*1.5),pose[1],-9]
             for axis,expr in enumerate(rotations):
                 assert evaluate(expr,True,seconds,pose[axis])==0
                 assert math.isclose(pose[axis]+evaluate(expr,False,seconds,pose[axis]),target[axis],abs_tol=1e-9)

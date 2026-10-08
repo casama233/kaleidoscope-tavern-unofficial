@@ -1,5 +1,7 @@
 # Java / Bedrock parity matrix
 
+Current development candidate: Tavern0.6.127. Main-hand framing now retains the bounded PR247 adapter and third-person arm Y is additive zero, preserving incoming yaw from PR167. Original mesh/half-scale/use-wave/XZ pose and all other current gameplay remain. Source/socket/selector checks pass; full current client view, hand, FOV and shake-trajectory acceptance remains pending. This supersedes the old source gap only, not the historical T106 observations.
+
 Audited Bedrock sources: T0.6.126 ac4932b4 / W0.1.103 56314bac. This initial Phase0 matrix covers the inspected player-facing priorities; complete T1/T2/W1 recipe, timing, storage and effect coverage will be added in subsequent phases, not presumed complete. A single future slice reference awaits the owner decision. L0=source inspection, L1=executed source/oracle, L2=scoped native-engine scene, L3=paired actual-client observation. Historical partial L3 cannot certify later releases or all contexts. T/ and W/ identify the repository.
 
 | Item | Java reference | Current implementation / gap | Source result | Affected engine scene | Client evidence |

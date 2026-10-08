@@ -68,13 +68,16 @@ class EngineInputCleanup(unittest.TestCase):
         source = self.root / 'retained/resource_packs/uuid'
         copied = self.engine / 'worlds/QA/resource_packs/uuid'
         for pack in [source, copied]:
-            (pack / 'textures').mkdir(parents=True)
+            (pack / 'textures/items').mkdir(parents=True)
             (pack / 'sounds').mkdir()
-            (pack / 'textures/icon.png').write_bytes(b'original image')
+            (pack / 'textures/items/icon.png').write_bytes(b'original image')
+        (source / 'textures/item_texture.json').write_bytes(b'new atlas')
+        (copied / 'textures/item_texture.json').write_bytes(b'old atlas retained')
         (copied / 'manifest.json').write_text(json.dumps({'header': {'uuid': 'uuid'}}))
         (source / 'sounds/unique.ogg').write_bytes(b'original sound')
         (copied / 'sounds/unique.ogg').write_bytes(b'unique diagnostic sound')
-        files = {'textures/icon.png': hashlib.sha256(b'original image').hexdigest(),
+        files = {'textures/item_texture.json': hashlib.sha256(b'new atlas').hexdigest(),
+                 'textures/items/icon.png': hashlib.sha256(b'original image').hexdigest(),
                  'sounds/unique.ogg': hashlib.sha256(b'original sound').hexdigest()}
         self.reference.return_value = (self.root / 'receipt.json', self.root / 'retained',
                                        {'uuid': {'files': files}})
@@ -82,9 +85,10 @@ class EngineInputCleanup(unittest.TestCase):
         plan = cleanup.plan(self.root, self.context, cache)
         result = cleanup.execute(plan, lambda: self.context, cache)
         self.assertEqual(result['state'], 'completed')
-        self.assertFalse((copied / 'textures').exists())
+        self.assertFalse((copied / 'textures/items').exists())
+        self.assertEqual((copied / 'textures/item_texture.json').read_bytes(), b'old atlas retained')
         self.assertEqual((copied / 'sounds/unique.ogg').read_bytes(), b'unique diagnostic sound')
-        self.assertEqual((source / 'textures/icon.png').read_bytes(), b'original image')
+        self.assertEqual((source / 'textures/items/icon.png').read_bytes(), b'original image')
         self.assertTrue((copied / 'manifest.json').exists())
         self.assertTrue((self.engine / 'worlds/probe-source.js').exists())
 

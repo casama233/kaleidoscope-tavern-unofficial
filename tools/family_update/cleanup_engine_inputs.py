@@ -104,32 +104,39 @@ def asset_targets(engine, root, mounts, comparison_cache):
             if uid not in packs:
                 continue
             for name in ('textures', 'sounds'):
-                target = pack / name
-                if not target.is_dir() or target.is_symlink():
-                    continue
-                metadata = target_metadata(target, root, mounts)
-                checks = {}
-                for rel in metadata['files']:
-                    copy = target / rel
-                    source = candidate / 'resource_packs' / uid / name / rel
-                    digest = packs[uid]['files'].get(name + '/' + rel)
-                    if not digest or not source.is_file() or source.is_symlink():
-                        break
-                    retention._safe_path(source, root, mounts)
-                    identities = [retention._stat(copy), retention._stat(source)]
-                    key = (str(copy), str(source), digest, tuple(identities[0]), tuple(identities[1]))
-                    if key not in comparison_cache:
-                        source_key = ('source', str(source), digest, tuple(identities[1]))
-                        if source_key not in comparison_cache:
-                            comparison_cache[source_key] = c.sha(source) == digest
-                        comparison_cache[key] = comparison_cache[source_key] and filecmp.cmp(copy, source, shallow=False)
-                    if not comparison_cache[key]:
-                        break
-                    checks[rel] = identities
-                else:
-                    if checks:
-                        metadata['asset_reference'] = {'receipt': str(receipt), 'source': str(candidate / 'resource_packs' / uid / name), 'files': checks}
-                        targets.append(metadata)
+                pending = [pack / name]
+                while pending:
+                    target = pending.pop()
+                    if not target.is_dir() or target.is_symlink():
+                        continue
+                    metadata = target_metadata(target, root, mounts)
+                    prefix = target.relative_to(pack).as_posix()
+                    checks = {}
+                    for rel in metadata['files']:
+                        copy = target / rel
+                        source = candidate / 'resource_packs' / uid / prefix / rel
+                        digest = packs[uid]['files'].get(prefix + '/' + rel)
+                        if not digest or not source.is_file() or source.is_symlink():
+                            break
+                        retention._safe_path(source, root, mounts)
+                        identities = [retention._stat(copy), retention._stat(source)]
+                        key = (str(copy), str(source), digest, tuple(identities[0]), tuple(identities[1]))
+                        if key not in comparison_cache:
+                            source_key = ('source', str(source), digest, tuple(identities[1]))
+                            if source_key not in comparison_cache:
+                                comparison_cache[source_key] = c.sha(source) == digest
+                            comparison_cache[key] = comparison_cache[source_key] and filecmp.cmp(copy, source, shallow=False)
+                        if not comparison_cache[key]:
+                            break
+                        checks[rel] = identities
+                    else:
+                        if checks:
+                            metadata['asset_reference'] = {'receipt': str(receipt), 'source': str(candidate / 'resource_packs' / uid / prefix), 'files': checks}
+                            targets.append(metadata)
+                        continue
+                    # Preserve the differing directory's direct files; independently
+                    # compare its copied child directories (e.g. old atlas/new images).
+                    pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
     return targets
 
 def plan(root, context, comparison_cache=None):

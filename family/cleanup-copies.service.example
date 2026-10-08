@@ -6,6 +6,7 @@ Type=oneshot
 User=root
 WorkingDirectory=/srv/src/tavern
 ExecStart=/srv/family-tools-venv/bin/python /srv/src/tavern/tools/family_update.py --config /etc/bsm/family-cleanup.json cleanup-copies --execute
+ExecStart=/srv/family-tools-venv/bin/python /srv/src/tavern/tools/family_update.py --config /etc/bsm/family-cleanup.json cleanup-engine-inputs --execute
 Nice=10
 IOSchedulingClass=idle
 UMask=0077

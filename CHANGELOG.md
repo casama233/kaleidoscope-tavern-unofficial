@@ -1,5 +1,12 @@
 # Maintained changes
 
+## 0.6.128
+
+- Enforce frozen identity for release, archive and complete-family assembly, including CI packs.
+- Validate the ordered startup body through actual registration/installer calls.
+- Preserve carried shaker metadata on completion/serving; an aborted shake does not write inventory.
+- Keep source tests, native saved-world gates and pending client acceptance distinct.
+
 ## 0.6.127
 
 - Current-source main-hand shaker framing and preservation of third-person arm yaw; full current client matrix remains pending.

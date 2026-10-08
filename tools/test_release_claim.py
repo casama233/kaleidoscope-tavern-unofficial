@@ -126,9 +126,30 @@ class ReleaseClaimTests(unittest.TestCase):
         self.assertTrue(path.is_file())
         clean_check = self.gate(self.other, 'check', '--release')
         self.assertEqual(clean_check.returncode, 0, clean_check.stderr)
-        dirty_check = self.gate(self.root, 'check')
+        development_check = self.gate(self.root, 'check')
+        self.assertEqual(development_check.returncode, 0, development_check.stderr)
+        dirty_check = self.gate(self.root, 'check', '--identity')
         self.assertNotEqual(dirty_check.returncode, 0)
         self.assertIn('runtime changed without a reviewed version/hash update', dirty_check.stderr)
+
+    def test_release_receipt_uses_implied_identity_without_redundant_flag(self):
+        receipt = self.base / 'release-receipt.json'
+        result = self.gate(self.root, 'check', '--release', '--receipt', str(receipt))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(receipt.read_text())['source_trees'], self.config['source_trees'])
+
+    def test_packager_rejects_committed_unfrozen_runtime_in_ordinary_ci(self):
+        for name in ['build_release.py', 'vibrant_audit.py']:
+            shutil.copy2(Path(__file__).with_name(name), self.root / 'tools' / name)
+        (self.root / 'runtime/BP/content.json').write_text('{"committed":"unfrozen"}')
+        self.git(self.root, 'add', '.')
+        self.git(self.root, 'commit', '-qm', 'Unfrozen development source with packager')
+        output = self.base / 'dist'
+        result = subprocess.run([sys.executable, str(self.root / 'tools/build_release.py'), '--output', str(output)],
+                                text=True, capture_output=True, env={**self.environment, 'GITHUB_WORKFLOW': 'Validation'})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('runtime changed without a reviewed version/hash update', result.stderr)
+        self.assertFalse(output.exists(), 'A rejected source must not produce an installable artifact')
 
     def test_normal_check_never_creates_claims(self):
         result = self.gate(self.root, 'check', '--release')

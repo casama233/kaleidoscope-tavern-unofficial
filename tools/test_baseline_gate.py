@@ -22,6 +22,7 @@ class BaselineGateTests(unittest.TestCase):
  def reject(self,part,fn):
   with self.assertRaises(SystemExit) as caught:fn()
   self.assertIn(part,str(caught.exception))
+ def edit_runtime(self):(self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
  def test_valid_clean_release(self):gate.check(self.config,release=True,history_base=self.base)
  def test_metadata_version_rejected(self):
   (self.root/'package.json').write_text('{"version":"0.0.1"}')
@@ -29,21 +30,45 @@ class BaselineGateTests(unittest.TestCase):
  def test_readme_version_rejected(self):
   (self.root/'README.md').write_text('## Current maintained baseline: 0.0.1\n')
   self.reject('maintained version',lambda:gate.validate(self.config))
- def test_runtime_edit_rejected(self):
-  (self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
-  self.reject('runtime changed',lambda:gate.check(self.config))
- def test_reused_version_rejected(self):
-  (self.root/'runtime/BP/content.json').write_text('{"silent":"patch"}')
+ # Per-commit tier: runtime edits are allowed, structure is not negotiable.
+ def test_runtime_edit_allowed_per_commit(self):
+  self.edit_runtime();gate.check(self.config)
+ def test_uuid_change_rejected_per_commit(self):
+  manifest=self.root/'runtime/BP/manifest.json';data=json.loads(manifest.read_text());data['header']['uuid']='changed';manifest.write_text(json.dumps(data))
+  self.reject('UUID changed',lambda:gate.check(self.config))
+ def test_version_drift_rejected_per_commit(self):
+  manifest=self.root/'runtime/BP/manifest.json';data=json.loads(manifest.read_text());data['header']['version']=[1,0,1];data['modules'][0]['version']=[1,0,1];manifest.write_text(json.dumps(data))
+  self.reject('version differs',lambda:gate.check(self.config))
+ # Release tier: identity must match the frozen baseline and history.
+ def test_runtime_edit_rejected_for_release(self):
+  self.edit_runtime()
+  self.git('commit','-qam','Commit unfrozen runtime change')
+  self.reject('runtime changed',lambda:gate.check(self.config,release=True,identity=False))
+ def test_reused_version_rejected_for_release(self):
+  self.edit_runtime()
+  self.git('commit','-qam','Commit reused release content')
   config=copy.deepcopy(self.config);config['source_trees'],_=gate.validate(config)
-  self.reject('release identity',lambda:gate.check(config))
+  self.reject('release identity',lambda:gate.check(config,release=True))
+ def test_explicit_identity_check_rejects_unfrozen_development(self):
+  self.edit_runtime()
+  self.reject('runtime changed',lambda:gate.check(self.config,identity=True))
+ def test_matching_archive_cannot_certify_unfrozen_runtime(self):
+  self.edit_runtime();self.git('commit','-qam','Commit unfrozen runtime for archive')
+  archive=self.root/'unfrozen.mcaddon'
+  with zipfile.ZipFile(archive,'w') as z:
+   for side,rows in self.files.items():
+    for path in rows:z.writestr(side+'/'+path,(self.root/self.config['runtime'][side]/path).read_bytes())
+  self.reject('runtime changed',lambda:gate.check(self.config,archive=archive,identity=False))
+ def test_receipt_requires_identity(self):
+  self.reject('--receipt requires --identity',lambda:gate.require_identity_for_receipt(Path('r.json'),False))
+  gate.require_identity_for_receipt(Path('r.json'),True);gate.require_identity_for_receipt(None,False)
  def test_history_tampering_rejected(self):
   (self.root/'release-history.json').write_text('{}')
   self.reject('historical release changed',lambda:gate.check(self.config,history_base=self.base))
  def test_bad_history_reference_rejected(self):self.reject('not a commit',lambda:gate.check(self.config,history_base='unknown-base'))
  def test_untracked_runtime_rejected(self):
-  (self.root/'runtime/BP/hidden.json').write_text('{}');config=copy.deepcopy(self.config);config['source_trees'],_=gate.validate(config)
-  (self.root/'release-history.json').write_text(json.dumps({'1.0.0':config['source_trees']}))
-  self.reject('untracked runtime',lambda:gate.check(config))
+  (self.root/'runtime/BP/hidden.json').write_text('{}')
+  self.reject('untracked runtime',lambda:gate.check(self.config))
  def test_dirty_release_rejected(self):
   (self.root/'release-history.json').write_text(json.dumps({'1.0.0':self.config['source_trees']},indent=2))
   self.reject('commit reviewed',lambda:gate.check(self.config,release=True))

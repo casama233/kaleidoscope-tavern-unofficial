@@ -85,7 +85,6 @@ def main():
     assert 'projectile?.remove()' in router and 'store.restore(key,raw)' in router
     impact=(ROOT/'runtime/BP/scripts/bedrock/molotov.js').read_text()
     taps=(ROOT/'runtime/BP/scripts/bedrock/tap-sources.js').read_text()
-    main=(ROOT/'runtime/BP/scripts/main.js').read_text()
     assert 'projectileHitBlock' not in taps and 'projectileHitEntity' not in taps
     assert impact.count('.subscribe(resolveMolotovImpact)')==2
     assert 'entity.setDynamicProperty(RESOLVED,true)' in impact
@@ -97,7 +96,8 @@ def main():
     for key,particle,count in [('molotov_flame','flame',30),('molotov_smoke','smoke',20)]:
         assert contracts[key]=={'particle':particle,'count':count,'offset':[0,.5,0],'spread':[3,1,3],'speed':.1}
     assert 'spawnEntity(' not in impact and 'setItem(' not in impact and 'applyImpulse(' not in impact
-    assert 'installMolotovEvents();' in main
+    entrypoint=json.loads(subprocess.check_output(['node','tools/runtime-entrypoint.mjs'],cwd=ROOT,text=True))
+    assert entrypoint['installers'].count('installMolotovEvents')==1
     tipsy=(ROOT/'runtime/BP/scripts/bedrock/tipsy-visual.js').read_text()
     assert 'track.failed' not in tipsy and 'track.retryAt=now+' in tipsy
     assert 'exactJavaRoll:false' in tipsy and 'clientConfirmed:false' in tipsy

@@ -1,6 +1,13 @@
 # Java / Bedrock parity matrix
 
-Current repair candidate: Tavern0.6.129 with World Liquor0.1.106. The current
+Current repair candidate: Tavern0.6.130 with World Liquor0.1.107. The
+[T130 update](RELEASE-NOTES-0.6.130.md) adds active-only shaker PUT recovery,
+grouped and differential rack/cabinet maintenance, per-tick Ardent completion,
+native living-entity Bloody Mary, registered partial locale aliases and scoped
+legacy-shaker metadata migration. The native mob equippable gap remains confirmed;
+Chinese attachment tooltips, full client visuals and actual FPS remain pending.
+
+Retained T129 scope: The current
 [cocktail repair scope](RELEASE-NOTES-0.6.129.md) adds Java ingredient admission,
 container-before-debit order, Creative placement, sneak-air clearing, physical
 bounds, complete placed shaker carrier transactions, actual cocktail lore and

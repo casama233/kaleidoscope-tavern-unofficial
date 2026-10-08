@@ -36,6 +36,8 @@ world.afterEvents.worldLoad=new Signal();
 world.afterEvents.entityRemove=new Signal();
 Object.defineProperty(ItemStack.prototype,'keepOnDeath',{get(){return this.meta.keepOnDeath??false;},set(value){this.meta.keepOnDeath=value;}});
 Object.defineProperty(ItemStack.prototype,'lockMode',{get(){return this.meta.lockMode??'none';},set(value){this.meta.lockMode=value;}});
+ItemStack.prototype.setCanDestroy=function(value){this.meta.canDestroy=structuredClone(value);};
+ItemStack.prototype.setCanPlaceOn=function(value){this.meta.canPlaceOn=structuredClone(value);};
 export function registerFixtureItem(id,max=64){itemInfo.set(id,{max});}
 export function registerFixturePack(root){
  for(const type of ['items','blocks'])for(const f of fs.readdirSync(root+'/runtime/BP/'+type)){

@@ -79,7 +79,8 @@ class IdentityTests(unittest.TestCase):
   self.ledger['reviewedAssetDeltaLayers']=[{'release':'0.6.129','files':{name:row}}]
   self.write_functional_ledger()
  def test_exact_cocktail_assets_preserve_historical_witness_and_reject_drift(self):
-  for name in ['runtime/BP/blocks/cup_white_lady.json','runtime/RP/texts/zh_TW.lang','runtime/RP/ui/hud_screen.json']:
+  for name in ['runtime/BP/blocks/cup_white_lady.json','runtime/RP/texts/zh_TW.lang','runtime/RP/ui/hud_screen.json',
+               'runtime/RP/texts/ja_JP.lang','runtime/RP/texts/ru_RU.lang','runtime/RP/texts/languages.json']:
    self.asset_fixture(name)
    self.assertEqual(previous_bytes(self.r,self.p),self.original)
    self.p.write_bytes(self.current+b'unreviewed bytes')

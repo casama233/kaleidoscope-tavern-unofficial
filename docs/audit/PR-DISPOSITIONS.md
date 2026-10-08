@@ -2,6 +2,21 @@
 
 更新：2026-10-08。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
+## T130／W107：視覺效率與可用 API
+
+本輪從已交付 T129／W106 繼續；[T130說明](../RELEASE-NOTES-0.6.130.md)
+記錄展示維護、作用中 PUT 回調、醇熱／Bloody Mary、語言路由和舊杯可讀
+資料修補。三張中文圖片仍需本候選真人 tooltip 驗收，未用日俄文修正取代。
+最終 T130/W107 完整來源已通過隔離零玩家 BDS 的載入／重啟及指定原生
+場景；它不等於私人整套家族或 LIVE 世界驗收。
+
+World Liquor 的 integration 與發布 request 同時固定 Tavern
+`d5655de6b6bdd50bd19b0ae7b4844d30406d3808`；Tavern 四個 peer checkout
+固定 World Liquor `c91a1c0f46c23ae391ff2cdf5e92b0d1d7d77f3b`。
+本輪發布目標為 [T130](https://github.com/casama233/kaleidoscope-tavern-unofficial/releases/tag/v0.6.130-beta.1)
+與 [W107](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/releases/tag/v0.1.107-preview.1)。
+下列已交付版本、歷史 source heads 及未完成玩家場景繼續保留。
+
 ## T129／W106 雞尾酒修復
 
 本輪從下列已交付 T128／W105 基線接續；新的 Tavern0.6.129 與 World

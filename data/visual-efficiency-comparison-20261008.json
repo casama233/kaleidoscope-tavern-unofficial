@@ -1,0 +1,280 @@
+{
+  "schema": 1,
+  "kind": "mock_api_counts_not_native_performance",
+  "runtimeBaseCommit": "9752aaee5cb6f0d0460cb9f9c8ab3424f975c1e4",
+  "reviewedImplementationCommit": "3995d6a0a301b4b84caa85c9e242bc6837afef79",
+  "sourceSHA256": {
+    "runtime/BP/scripts/bedrock/tilted-rack.js": {
+      "before": "c38bed2b0a9c105af35963e8e9542f12a8b2a68f06bdee4a8a38a43d7fa4ff1f",
+      "after": "56a56075f9206d0c6cf3a29fc4668adb56cdab596f51b2606a6ada8bf59061db"
+    },
+    "runtime/BP/scripts/bedrock/bar-cabinet.js": {
+      "before": "fc900528bd4aea92f3861b9860d7cd7fab13336dd12b4680bff41459dff14805",
+      "after": "379917c66f734e087714e953d121b7edec6a487e9ced37f4b572b6097a1ce69e"
+    }
+  },
+  "harnessSHA256": {
+    "tools/efficiency/measure.mjs": "298ade1ed49c8e9c586fa99b5ae2f3ff9bf1458641bc553608a0e9f7d963b935",
+    "tools/efficiency/mock-server.mjs": "d9fd418565ac46aee171f8192c9243d27fac50e6e0a25bc24fb6caa85e147a24",
+    "tools/efficiency/mock-loader.mjs": "264a3fdeb5170c3e31a5892daf3376dfef8f25fbde1d7554769fe4240d9cd08f"
+  },
+  "originalReportSHA256": {
+    "before": "57708fc37c087e349a1f29eafbcbd61aee79adb6510a0fdaf76f57cd5427ed58",
+    "after": "5cdaf105993435f34af48d6e9eef72ac3ee6b3bda8e179541e970d4df20f5b68"
+  },
+  "scenario": "After seeding each scene, reset counters; synchronize each owner once; run one original bounded maintenance batch. 128 is a helper-handle budget.",
+  "command": "node --experimental-loader ./tools/efficiency/mock-loader.mjs tools/efficiency/measure.mjs <source-root>",
+  "reports": {
+    "before": {
+      "kind": "mock_api_counts_not_native_performance",
+      "cellars": [
+        {
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 1,
+          "mutationCalls": 0
+        },
+        {
+          "count": 1,
+          "full": true,
+          "helpers": 9,
+          "queries": 2,
+          "mutationCalls": 0
+        },
+        {
+          "count": 10,
+          "full": true,
+          "helpers": 90,
+          "queries": 20,
+          "mutationCalls": 0
+        },
+        {
+          "count": 100,
+          "full": true,
+          "helpers": 900,
+          "queries": 115,
+          "mutationCalls": 0
+        }
+      ],
+      "rackDisplays": [
+        {
+          "kind": "tilted_rack",
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 3,
+          "worldReads": 0,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 1,
+          "full": true,
+          "helpers": 3,
+          "queries": 12,
+          "worldReads": 9,
+          "mutationCalls": 36
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 10,
+          "full": true,
+          "helpers": 30,
+          "queries": 120,
+          "worldReads": 90,
+          "mutationCalls": 360
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 100,
+          "full": true,
+          "helpers": 300,
+          "queries": 684,
+          "worldReads": 384,
+          "mutationCalls": 2052
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 2,
+          "worldReads": 0,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 1,
+          "full": true,
+          "helpers": 2,
+          "queries": 6,
+          "worldReads": 6,
+          "mutationCalls": 18
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 10,
+          "full": true,
+          "helpers": 20,
+          "queries": 60,
+          "worldReads": 60,
+          "mutationCalls": 180
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 100,
+          "full": true,
+          "helpers": 200,
+          "queries": 456,
+          "worldReads": 384,
+          "mutationCalls": 1368
+        }
+      ],
+      "boardEdit": {
+        "glyphs": 300,
+        "spawned": 1,
+        "removed": 1
+      },
+      "unrelatedAmbient": {
+        "players": 2,
+        "randomCallsPerTick": 0
+      },
+      "idleEffects": {
+        "ticks": 20,
+        "reads": 4,
+        "writes": 0,
+        "playerLists": 4
+      }
+    },
+    "after": {
+      "kind": "mock_api_counts_not_native_performance",
+      "cellars": [
+        {
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 1,
+          "mutationCalls": 0
+        },
+        {
+          "count": 1,
+          "full": true,
+          "helpers": 9,
+          "queries": 2,
+          "mutationCalls": 0
+        },
+        {
+          "count": 10,
+          "full": true,
+          "helpers": 90,
+          "queries": 20,
+          "mutationCalls": 0
+        },
+        {
+          "count": 100,
+          "full": true,
+          "helpers": 900,
+          "queries": 115,
+          "mutationCalls": 0
+        }
+      ],
+      "rackDisplays": [
+        {
+          "kind": "tilted_rack",
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 1,
+          "worldReads": 0,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 1,
+          "full": true,
+          "helpers": 3,
+          "queries": 2,
+          "worldReads": 3,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 10,
+          "full": true,
+          "helpers": 30,
+          "queries": 20,
+          "worldReads": 30,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "tilted_rack",
+          "count": 100,
+          "full": true,
+          "helpers": 300,
+          "queries": 143,
+          "worldReads": 129,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 1,
+          "full": false,
+          "helpers": 0,
+          "queries": 1,
+          "worldReads": 0,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 1,
+          "full": true,
+          "helpers": 2,
+          "queries": 2,
+          "worldReads": 3,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 10,
+          "full": true,
+          "helpers": 20,
+          "queries": 20,
+          "worldReads": 30,
+          "mutationCalls": 0
+        },
+        {
+          "kind": "bar_cabinet",
+          "count": 100,
+          "full": true,
+          "helpers": 200,
+          "queries": 164,
+          "worldReads": 192,
+          "mutationCalls": 0
+        }
+      ],
+      "boardEdit": {
+        "glyphs": 300,
+        "spawned": 1,
+        "removed": 1
+      },
+      "unrelatedAmbient": {
+        "players": 2,
+        "randomCallsPerTick": 0
+      },
+      "idleEffects": {
+        "ticks": 20,
+        "reads": 4,
+        "writes": 0,
+        "playerLists": 4
+      }
+    }
+  },
+  "helperCountsPreserved": true,
+  "otherOriginalScenariosEqual": true,
+  "fps": false,
+  "cpu": false,
+  "watts": false,
+  "minecraftClient": false,
+  "reviewedImplementationCommitRole": "Local audit checkpoint; sourceSHA256 binds the code in the published candidate."
+}

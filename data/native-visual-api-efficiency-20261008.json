@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "bdsVersion": "1.26.52.3",
+  "scriptAPI": "2.7.0",
+  "versions": {
+    "tavern": "0.6.130",
+    "liquor": "0.1.107"
+  },
+  "sourceTrees": {
+    "tavern": {
+      "BP": {
+        "sha256": "72fd32976a328f498df3c8c13d8ff8c612a7125a39b2d94cbeb39654e041d5b1",
+        "files": 818
+      },
+      "RP": {
+        "sha256": "0a9f9e410d56467ecf2012238bdfeabeee3145ec6b067870740e8ac5b34a22b1",
+        "files": 3159
+      }
+    },
+    "liquor": {
+      "BP": {
+        "sha256": "1f45169b4386a307115bc49fadff23750f955f00e389e3321429d77ae0fdb95e",
+        "files": 339
+      },
+      "RP": {
+        "sha256": "e271ee27e5d3201ceb0bb825b6dc6640714b132434568ed367bea5f6cbcff9ee",
+        "files": 549
+      }
+    }
+  },
+  "observerInputsSHA256": {
+    "tools/native/shaker-migration-probe.js": "bf691181b91ea03fa1e6986e9ba9d1b9f24403d05693b1745de3fb36c5cc5f0a",
+    "tools/native/living-probe-entity.json": "bdc56e29b59f80c3fd017f2e75581562ac1ca1ba4a272c101294fc48f533d789"
+  },
+  "sourcePacksEqualNativeInputsExceptExplicitObserver": true,
+  "nativeServerSaveRestart": true,
+  "nativeCrossIdReadableMetadata": true,
+  "nativePutRecoveryAndRearm": true,
+  "playerSessions": 0,
+  "client": false,
+  "live": false,
+  "fpsMeasured": false,
+  "idleCallbacksMeasured": false,
+  "crossPackPrivateDataPreservation": false,
+  "scope": "Real chest ItemStacks and script-set PUT permutations. Host-scope dynamic properties only. Not player spawn/use, chunk re-entry or a private existing-world migration.",
+  "reports": [
+    {
+      "phase": "first",
+      "ok": true,
+      "normal_stop": true,
+      "player_connections": 0,
+      "errors": [],
+      "observations": [
+        {
+          "kind": "case",
+          "mode": "native-cross-id",
+          "source": "kaleidoscope_tavern:shaker_active",
+          "target": "kaleidoscope_tavern:shaker",
+          "lock": "inventory",
+          "adventureLists": 10,
+          "rawLore": true,
+          "hostScopeDynamicTypes": 4
+        },
+        {
+          "kind": "case",
+          "mode": "native-cross-id",
+          "source": "kaleidoscope_tavern:shaker_pouring",
+          "target": "kaleidoscope_tavern:shaker",
+          "lock": "slot",
+          "adventureLists": 10,
+          "rawLore": true,
+          "hostScopeDynamicTypes": 4
+        },
+        {
+          "kind": "case",
+          "mode": "native-put-recovery",
+          "phase": "first",
+          "activations": 2,
+          "idleCallbacksMeasured": false
+        },
+        {
+          "kind": "done",
+          "phase": "first",
+          "players": 0,
+          "playerSessions": 0,
+          "client": false,
+          "crossPackPrivateData": false
+        }
+      ],
+      "completeLogSHA256": "511c1d7e74e5dd3d9cf0606c97a55885020410d0b8ddfce56a63933b44545cf4",
+      "completeLogBytes": 4847,
+      "returnCode": 0,
+      "completeLogAdditionalChecks": true
+    },
+    {
+      "phase": "restart",
+      "ok": true,
+      "normal_stop": true,
+      "player_connections": 0,
+      "errors": [],
+      "observations": [
+        {
+          "kind": "case",
+          "mode": "saved-metadata",
+          "slot": 0,
+          "lock": "inventory"
+        },
+        {
+          "kind": "case",
+          "mode": "saved-metadata",
+          "slot": 1,
+          "lock": "slot"
+        },
+        {
+          "kind": "case",
+          "mode": "native-put-recovery",
+          "phase": "restart",
+          "activations": 2,
+          "idleCallbacksMeasured": false
+        },
+        {
+          "kind": "done",
+          "phase": "restart",
+          "players": 0,
+          "playerSessions": 0,
+          "client": false,
+          "crossPackPrivateData": false
+        }
+      ],
+      "completeLogSHA256": "ddba69cf7d3d13cba7e184afc3525bdd7181b7a4d282e6424990e1f73a6c328a",
+      "completeLogBytes": 4578,
+      "returnCode": 0,
+      "completeLogAdditionalChecks": true
+    }
+  ],
+  "command": "python tools/native/run_living_effects.py --engine <isolated BDS 1.26.52.3> --liquor <paired World Liquor source> --work <new disposable directory> --port 27330 --probe tools/native/shaker-migration-probe.js"
+}

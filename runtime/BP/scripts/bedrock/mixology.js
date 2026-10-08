@@ -17,7 +17,7 @@ import {POTION_ITEMS} from '../core/potions.js';
 import {configureBottleCategories} from '../core/quality-tooltip.js';
 import {normalizeCocktailStack,rawItemLore,shakerContentsLore} from '../core/cocktail-tooltip.js';
 import {potionInput,potionIdentity,restorePotion} from './potions.js';
-import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
+import {SHAKER_ID,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
 import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach,playerInteractionReach} from './transactions.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
@@ -36,6 +36,7 @@ import {lookedAtBarrelStatus} from './machines.js';
 import {barrelHudEnabled} from '../core/shaker-hud.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
 import {nativeShakerState,portableShakerState,readPlacedShaker,planPlacedShaker} from './shaker-storage.js';
+import {migrateLegacyShakerSlot} from '../core/legacy-shaker-migration.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
@@ -328,12 +329,18 @@ export function completeCocktail(event,rng=Math.random){
   settleDrinkUse(use,EMPTY_CUP,rng);
  });
 }
-function migrateInventory(player){
+export function migrateShakerSlot(container,index){
+ return migrateLegacyShakerSlot(container,index,makeStack,(copy,previous)=>{
+  const carried=readPortableItem(previous);
+  return portable(carried.state,carried.token,copy,carried.state);
+ });
+}
+export function migrateShakerInventory(player){
  safely(undefined,()=>{
   const container=inventory(player);
   for(let index=0;index<container.size;index++){
-   const item=container.getItem(index);if(![ACTIVE_SHAKER,POURING_SHAKER].includes(item?.typeId))continue;
-   const carried=readPortableItem(item);container.setItem(index,portable(carried.state,carried.token));
+   // A corrupt legacy slot must not prevent safe migration of later slots.
+   safely(undefined,()=>migrateShakerSlot(container,index));
   }
   // Retire the old toggle preference; long press/release is the one gesture.
   player.setDynamicProperty(NS+':shaker_input_mode',undefined);player.removeTag(NS+':holding_shaker');
@@ -371,7 +378,8 @@ function tick(){
 function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot(player),data:item?.getDynamicProperty(PORTABLE_DATA),potion:POTION_ITEMS.has(item?.typeId)?canonical(potionIdentity(item)):undefined};}
 function verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}
 export function registerMixologyComponents({blockComponentRegistry:blocks,itemComponentRegistry:items}){
- blocks.registerCustomComponent(NS+':shaker_station',{onTick:event=>repairShakerPutVisual(event.block),onPlayerInteract:nativeEmptyHandBlockUse});
+ blocks.registerCustomComponent(NS+':shaker_station',{onPlayerInteract:nativeEmptyHandBlockUse});
+ blocks.registerCustomComponent(NS+':shaker_put_recovery',{onTick:event=>repairShakerPutVisual(event.block)});
  blocks.registerCustomComponent(NS+':cocktail_cup',{
   onPlayerInteract:nativeEmptyHandBlockUse,
   onPlace:({block})=>{
@@ -418,7 +426,7 @@ export function installMixologyEvents(){
  world.afterEvents.itemReleaseUse.subscribe(nativeStop);
  world.afterEvents.itemStopUse.subscribe(nativeStop);
  world.afterEvents.playerSwingStart.subscribe(clearShakerOnSwing,{swingSource:EntitySwingSource.Attack});
- world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateInventory(player);}));
+ world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateShakerInventory(player);}));
  world.afterEvents.playerLeave.subscribe(({playerId})=>{uses.delete(playerId);releaseGuards.delete(playerId);clearShakerPlayer(playerId);});
  world.afterEvents.entityDie.subscribe(({deadEntity})=>cancelUse(deadEntity.id));
  world.beforeEvents.itemUse.subscribe(event=>{
@@ -430,7 +438,7 @@ export function installMixologyEvents(){
   }catch{event.cancel=true;}
  });
  installImmersionCleanup();system.runInterval(tick,1);
- system.run(()=>{for(const player of world.getAllPlayers()){clearShakerPlayer(player);migrateInventory(player);}});
+ system.run(()=>{for(const player of world.getAllPlayers()){clearShakerPlayer(player);migrateShakerInventory(player);}});
 }
 
 /** Return the actual drink and signature payload without consuming the cup. */

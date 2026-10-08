@@ -1,5 +1,15 @@
 # Maintained changes
 
+## 0.6.130
+
+- Reduce redundant rack/cabinet queries and visual setters; retain bounded repair and unloaded-owner safety.
+- Schedule shaker PUT recovery only during its active visual permutation.
+- Complete per-tick Ardent finalization and native living Bloody Mary kill healing.
+- Register existing Japanese/Russian partial locales with exact native aliases and English fallback checks.
+- Preserve and verify supported host-scope outer metadata during legacy shaker ID migration, with rollback.
+- Pair with World Liquor 0.1.107; see [release notes](docs/RELEASE-NOTES-0.6.130.md) for native evidence and remaining client/API limits.
+
+
 ## 0.6.129
 
 - Gate shaker ingredients by Java categories and explicit addon inputs, return containers before debiting ingredients, and restore Creative placement and sneak air-swing clearing.

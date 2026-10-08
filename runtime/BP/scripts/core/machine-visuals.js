@@ -1,10 +1,14 @@
 import {check} from './util.js';
 import {RUNTIME_VISUALS} from '../data/visuals.js';
+import {FLUIDS} from '../data/fluids.js';
 
 // Author Bedrock 1.0.1's external-fluid contract, adapted to this host's
 // existing registry and saved machine ownership. No companion IDs are needed.
 export const MACHINE_VISUAL_MARKER='kt:machine_visual';
-const nativeVisuals=new Set(RUNTIME_VISUALS);
+// Later built-in water/lava rigs are absent from the original generated list.
+// Recognize every shipped fluid rig before the new persisted marker exists.
+const nativeVisuals=new Set([...RUNTIME_VISUALS,...FLUIDS.flatMap(fluid=>
+ ['barrel','pressing_tub'].map(kind=>`kaleidoscope_tavern:rig_liquid_${kind}_${fluid.rigSuffix}_visual`))]);
 export function normalizeFluidVisuals(raw,source){
  if(raw===undefined)return undefined;
  check(raw&&typeof raw==='object'&&!Array.isArray(raw),'INVALID_FLUID_VISUAL');

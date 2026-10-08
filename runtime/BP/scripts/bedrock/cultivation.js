@@ -1,13 +1,13 @@
 import {trellisWaxFeedback,plantGrowthFeedback} from './interaction-particles.js';
 import {feedback} from './break-feedback.js';
-import {registerJavaBlockUseHandler} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,settleJavaBlockUse} from './java-placement-router.js';
 import {world,system,BlockPermutation,GameMode} from '@minecraft/server';
 import {NS,BARE,VINES,CROPS,SPREAD,NEIGHBORS,WATERLOGGED,isFrame,frameType,updateFrame,speciesForSoil,growthProbability,nextFruitAge,fruitHarvest} from '../core/cultivation.js';
 import {biomeBaseTemperature} from '../data/biome-temperatures.js';
 import {Locks} from '../core/storage.js';
 import {check} from '../core/util.js';
 import {isPlainIngredient} from '../core/inventory.js';
-import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
+import {makeStack,hand,handSnapshot,sameHand,canWrite,canInteract,blockAt,plus,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerJavaItemUseOnRoute} from './java-placement-router.js';
@@ -106,39 +106,41 @@ export function maintain(b){
  else if(Object.hasOwn(CROPS,b.typeId)&&cropSupported(b)===false)feedback.transaction(b,()=>b.setType('minecraft:air'));
 }
 export function farmUse(player,b,{rng=Math.random}={}){
- canWrite(player);check(FARM_IDS.has(b.typeId),'NOT_A_CROP');
+ canInteract(player);check(FARM_IDS.has(b.typeId),'NOT_A_CROP');
  return locks.with([key(b),player.id],()=>{
   const h=hand(player),creative=player.getGameMode()===GameMode.Creative;
   if(b.typeId===BARE&&h?.typeId===NS+':grapevine'){
    check(!waxed(b),'WAXED_TRELLIS');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const soil=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(soil,'UNLOADED_SOIL');
    const kind=speciesForSoil(soil.typeId);check(kind,'UNSUITABLE_SOIL');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:framePermutation(`${NS}:${kind}vine_trellis`,shape(b),0,false,waterlogged(b))}]);refreshAround(b);return 'planted';
+   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:framePermutation(`${NS}:${kind}vine_trellis`,shape(b),0,false,waterlogged(b))}],{interaction:true});refreshAround(b);return 'planted';
   }
   if(b.typeId===BARE&&h?.typeId==='minecraft:honeycomb'){
-   check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
-   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);trellisWaxFeedback(b,true);return 'waxed';
+   check(!waxed(b),'ALREADY_WAXED');
+   // Java TrellisBlock changes wax without shrinking honeycomb or wearing axes.
+   exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,true)}],{interaction:true});trellisWaxFeedback(b,true);return 'waxed';
   }
   if(b.typeId===BARE&&h?.typeId?.endsWith('_axe')){
-   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});trellisWaxFeedback(b,false);return 'unwaxed';
+   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{interaction:true});trellisWaxFeedback(b,false);return 'unwaxed';
   }
   if(h?.typeId==='minecraft:bone_meal'){
-   check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
+   // Bone meal belongs to item use, not Java's ordinary block interaction.
+   canWrite(player);check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');
    const edits=growthChanges(b,rng);check(edits.length,'NO_GROWTH_SPACE');
    exchangeBlocks(player,creative?0:1,[],edits);for(const e of edits)refreshAround(e.block);plantGrowthFeedback(b);return 'grown';
   }
   if(h?.typeId==='minecraft:shears'){
-  if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}
+  if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng,interaction:true});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}
    if(VINES[b.typeId]){
    const edits=[{block:b,permutation:framePermutation(BARE,shape(b),0,false,waterlogged(b))}];
     const child=blockAt(b.dimension,plus(b.location,{x:0,y:-1,z:0}));check(child,'UNLOADED_CROP');
     if(CROPS[child.typeId])edits.push({block:child,permutation:air()});
-    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng});refreshAround(b);try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return 'pruned';
+    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng,interaction:true});refreshAround(b);try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return 'pruned';
    }
    if(CROPS[b.typeId]){
     check(age(b)===5,'NOT_RIPE');check(cropSupported(b)===true,'MISSING_TRELLIS');
     const outputs=fruitHarvest(CROPS[b.typeId],age(b),true,rng);
-    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;
+    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng,interaction:true});try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;
    }
   }
   return 'inspect';
@@ -182,8 +184,11 @@ export function installCultivation(openBook){
   e.cancel=true;if(e.isFirstEvent===false)return;
   const d=e.block.dimension,p={...e.block.location},sig=current(e.block);
   system.run(()=>safe(e.player,()=>{
-   check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);
-   return farmUse(e.player,b);
+   let succeeded=false;
+   try{
+    check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);
+    const result=farmUse(e.player,b);succeeded=true;return result;
+   }finally{settleJavaBlockUse(e,succeeded);}
   }));
  });
  registerJavaItemUseOnRoute({

@@ -89,8 +89,8 @@ export function exchangeBlocks(player,take,give,changes,{wear=false,rng=Math.ran
 }
 
 /** Shearing leaves the harvest in the world, even when the player's inventory is full. */
-export function exchangeBlocksToWorld(player,outputs,changes,location,{wear=false,rng=Math.random}={}) {
- canWrite(player);
+export function exchangeBlocksToWorld(player,outputs,changes,location,{wear=false,rng=Math.random,interaction=false}={}) {
+ (interaction?canInteract:canWrite)(player);
  const container=inventory(player),plan=planInventory(container,player.selectedSlotIndex,0,[],makeStack);
  if(wear)withToolWear(plan,player.selectedSlotIndex,player.getGameMode()===GameMode.Creative,rng);
  const dimension=changes[0]?.block?.dimension;check(dimension&&location,'MISSING_DROP_LOCATION');

@@ -933,10 +933,10 @@
       "textures": "textures/kt_derived/a17/animated_item_depth_charge"
     },
     "kt_assets_a17_animation_item_ice_grape": {
-      "textures": "textures/kt_derived/a17/animated_item_ice_grape"
+      "textures": "textures/kt_runtime/animated_items/ice_grape/frame_00"
     },
     "kt_assets_a17_animation_item_mystery_cocktail": {
-      "textures": "textures/kt_derived/a17/animated_item_mystery_cocktail"
+      "textures": "textures/kt_runtime/animated_items/mystery_cocktail/frame_00"
     },
     "kt_assets_a17_animation_item_nether_special": {
       "textures": "textures/kt_derived/a17/animated_item_nether_special"
@@ -994,6 +994,12 @@
     },
     "kt_runtime_board_blank": {
       "textures": "textures/kaleidoscope_tavern/runtime/board_blank"
+    },
+    "kt_c3_depth_charge": {
+      "textures": "textures/kt_runtime/animated_items/depth_charge/frame_00"
+    },
+    "kt_c3_nether_special": {
+      "textures": "textures/kt_runtime/animated_items/nether_special/frame_00"
     }
   }
 }

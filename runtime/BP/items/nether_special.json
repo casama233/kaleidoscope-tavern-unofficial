@@ -9,7 +9,6 @@
       }
     },
     "components": {
-      "minecraft:icon": "kt_c3_nether_special",
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:nether_special.name"
       },
@@ -20,7 +19,15 @@
         "movement_modifier": 0.35,
         "start_using": "if_first"
       },
-      "kaleidoscope_tavern:cocktail_effects": {}
+      "kaleidoscope_tavern:cocktail_effects": {},
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:cup_nether_special",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ]
+      }
     }
   }
 }

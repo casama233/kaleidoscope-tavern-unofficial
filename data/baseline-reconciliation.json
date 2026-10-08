@@ -3495,6 +3495,78 @@
       "before": null,
       "after": "46189493cd41f02ca66d6f27e2fbc68a5e81227161c36f8ef6d139d642f8142b",
       "reason": "T130 appended runtime addition: verified stable-API outer metadata transfer and rollback for two owned legacy shaker IDs; current BP scope only, never arbitrary NBT or cross-BP private data."
+    },
+    "runtime/BP/blocks/item_display_ice_grape.json": {
+      "before": null,
+      "after": "935802000fb3780cbeb22587c51763c859fa351793dde974e4228e417b1b73dc",
+      "reason": "T131 appended reviewed runtime addition. Private native item-render target for the original ice-grape sprite, with no creative category, tick, collision or selection; existing crop and trellis definitions remain unchanged.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/BP/scripts/bedrock/shaker-hands.js": {
+      "before": null,
+      "after": "5e5e5384aefc4479ed29a7c74c508394684cf7026cbaa9276dd8c70a6a5b4627",
+      "reason": "T131 appended reviewed runtime addition. Captured main/offhand native shaker slot adapter with exact metadata comparison and checked inventory transaction behavior; no alternate active item identity or portable escrow.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/BP/scripts/core/molotov-fire.js": {
+      "before": null,
+      "after": "bc0f9b7e86c74ccb0687a8684ea60235578d5ba4d9f2423eb87bd4113f2dead6",
+      "reason": "T131 appended reviewed runtime addition. Bounded source-backed fire placement classifier for soul support, known normal support and adjacent flammable blocks, with explicit unknown-shape fallback.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/BP/scripts/core/vision-feedback.js": {
+      "before": null,
+      "after": "6ddeaea67651cab9c02e47057352ef309eb2524f3894c026b6e9041d3ff02003",
+      "reason": "T131 appended reviewed runtime addition. Bounded expiring per-target Vision feedback state used when the native registry lacks Glowing; does not claim or synthesize through-wall outlines.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/RP/models/entity/item_sprite_depth_charge.geo.json": {
+      "before": null,
+      "after": "395be8cf99c0e034a7921f61d52f96bb21505cf1f93c28210e82eb136b42f05d",
+      "reason": "T131 appended reviewed runtime addition. Exact thin item mesh and display transforms derived from the SHA-1-verified Mojang 1.20.1 ItemModelGenerator and pinned Forge source animation; independent source-class geometry/UV output is recorded in art/interfaces/animated-item-java-reference.json.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/RP/models/entity/item_sprite_mystery_cocktail.geo.json": {
+      "before": null,
+      "after": "8c46f1935160e57e37c2a7afebf2fb19c43b7838a39a04996a524780b8d09426",
+      "reason": "T131 appended reviewed runtime addition. Exact thin item mesh and display transforms derived from the SHA-1-verified Mojang 1.20.1 ItemModelGenerator and pinned Forge source animation; independent source-class geometry/UV output is recorded in art/interfaces/animated-item-java-reference.json.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/RP/models/entity/item_sprite_nether_special.geo.json": {
+      "before": null,
+      "after": "ff21fc6d6f3dc0915a11f2acc1c45a1d5bffc0e2c192904e219b00fb4f81843a",
+      "reason": "T131 appended reviewed runtime addition. Exact thin item mesh and display transforms derived from the SHA-1-verified Mojang 1.20.1 ItemModelGenerator and pinned Forge source animation; independent source-class geometry/UV output is recorded in art/interfaces/animated-item-java-reference.json.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+    },
+    "runtime/RP/models/entity/item_sprite_ice_grape.geo.json": {
+      "before": null,
+      "after": "81099cb91d7a139dc632c71669af01c9174f047c84c0058f96e17cfeca4bf914",
+      "reason": "T131 appended reviewed runtime addition. Exact thin item mesh and display transforms derived from the SHA-1-verified Mojang 1.20.1 ItemModelGenerator and pinned Forge source animation; independent source-class geometry/UV output is recorded in art/interfaces/animated-item-java-reference.json.",
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
     }
   },
   "reviewedFunctionalDeltas": {
@@ -4835,6 +4907,617 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md",
+      "files": {
+        "runtime/BP/scripts/bedrock/cultivation.js": {
+          "before": "3887e4546f4302721ff4cf15b51456640a5d02dd7f8c43cfc315256796aa6847",
+          "after": "602d69a313ce375c9718a1e324e5b8defcbf18de52c88d79566e592fd102270c",
+          "reason": "Java block interaction permissions and free trellis wax/unwax; preserve item-use placement and bone-meal write gates, transaction rollback, and native duplicate settlement.",
+          "reverseOps": [
+            [
+              2,
+              3,
+              "import {registerJavaBlockUseHandler} from './java-placement-router.js';\n"
+            ],
+            [
+              9,
+              10,
+              "import {makeStack,hand,handSnapshot,sameHand,canWrite,blockAt,plus,safe,exchangeBlocks,exchangeBlocksToWorld,applyBlocks,air} from './transactions.js';\n"
+            ],
+            [
+              108,
+              109,
+              " canWrite(player);check(FARM_IDS.has(b.typeId),'NOT_A_CROP');\n"
+            ],
+            [
+              115,
+              116,
+              "   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:framePermutation(`${NS}:${kind}vine_trellis`,shape(b),0,false,waterlogged(b))}]);refreshAround(b);return 'planted';\n"
+            ],
+            [
+              118,
+              121,
+              "   check(!waxed(b),'ALREADY_WAXED');check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');\n   exchangeBlocks(player,creative?0:1,[],[{block:b,permutation:b.permutation.withState(WAX,true)}]);trellisWaxFeedback(b,true);return 'waxed';\n"
+            ],
+            [
+              123,
+              124,
+              "   check(waxed(b),'NOT_WAXED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WAX,false)}],{wear:true,rng});trellisWaxFeedback(b,false);return 'unwaxed';\n"
+            ],
+            [
+              126,
+              128,
+              "   check(isPlainIngredient(h,makeStack),'METADATA_ITEM_REJECTED');\n"
+            ],
+            [
+              132,
+              133,
+              "  if(b.typeId===WILD_HEAD){check(b.permutation.getState(WILD_SHEARED)!==true,'ALREADY_SHEARED');exchangeBlocks(player,0,[],[{block:b,permutation:b.permutation.withState(WILD_SHEARED,true)}],{wear:true,rng});try{player.playSound('mob.sheep.shear');}catch{}return 'sheared';}\n"
+            ],
+            [
+              137,
+              138,
+              "    exchangeBlocksToWorld(player,[{id:NS+':grapevine',count:1}],edits,b.location,{wear:true,rng});refreshAround(b);try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return 'pruned';\n"
+            ],
+            [
+              142,
+              143,
+              "    exchangeBlocksToWorld(player,outputs,[{block:b,permutation:air()}],b.location,{wear:true,rng});try{b.dimension.playSound('block.beehive.shear',b.location,{volume:1,pitch:1});}catch{}return outputs;\n"
+            ],
+            [
+              186,
+              191,
+              "   check(e.player.dimension.id===d.id,'DIMENSION_CHANGED');const b=blockAt(d,p);check(b&&current(b)===sig,'BLOCK_CHANGED');sameHand(e.player,hs);\n   return farmUse(e.player,b);\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "8ac6eceadf72c117cd18b546377a1bd488fe44339ba86d43cf5f8fc920664ccd",
+          "after": "9a457431ac90412baddb39c407d9c3171347b01b9f0fd7656a758e130d326e2b",
+          "reason": "Check the actual native effect registry before requesting Glowing, retain bounded per-target Vision sound feedback when unavailable, and state the stable targeting API boundary; rendered outline parity remains pending.",
+          "reverseOps": [
+            [
+              7,
+              9,
+              "import {EquipmentSlot,system,world,ScriptEventSource,GameMode} from '@minecraft/server';\n"
+            ],
+            [
+              15,
+              16,
+              ""
+            ],
+            [
+              18,
+              19,
+              "export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};\n"
+            ],
+            [
+              127,
+              129,
+              "  // Bedrock Script API exposes no mob-target getter/setter to clear existing targets as Java does.\n"
+            ],
+            [
+              135,
+              145,
+              ""
+            ],
+            [
+              147,
+              148,
+              " let targets=0,newGlow=false;\n"
+            ],
+            [
+              152,
+              159,
+              "  const wasGlowing=!!entity.getEffect?.('glowing');\n  entity.addEffect('glowing',60,{amplifier:0,showParticles:true});if(!wasGlowing)newGlow=true;targets++;\n"
+            ],
+            [
+              161,
+              162,
+              " if(newGlow)try{p.dimension.playSound('kt_assets_a17.effect.vision',p.location);customEffectDiagnostics.visionSounds++;}catch(e){error(e);}\n"
+            ],
+            [
+              379,
+              380,
+              " world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/decorations.js": {
+          "before": "32915eddb325447b60bd6cc81e5e71051fea83ccd326a8ec20ebf651a76351b1",
+          "after": "57a9c249aae381aecc029e46d79247bb3df947111b0257ea2fbf82995e4a530a",
+          "reason": "Route held-item incense interaction before placement, preserve Java secondary-use bypass, and settle duplicate native callbacks only after the guarded block transaction.",
+          "reverseOps": [
+            [
+              6,
+              7,
+              "import {canWrite,hand,exchangeBlocks,air,blockAt,plus,placementTake,safe,handSnapshot,sameHand} from './transactions.js';\n"
+            ],
+            [
+              8,
+              10,
+              "import {nativeEmptyHandBlockUse,registerJavaBlockUseHandler} from './java-placement-router.js';\n"
+            ],
+            [
+              21,
+              41,
+              "function claimIncenseInteraction(player,block){const key=interactionKey(player,block),tick=system.currentTick;if(recentIncenseInteractions.get(key)===tick)return false;recentIncenseInteractions.set(key,tick);if(recentIncenseInteractions.size>128)for(const [k,t]of recentIncenseInteractions)if(t<tick-2)recentIncenseInteractions.delete(k);return true;}\nfunction interactIncense(player,block,{before=false,cancelled=false,first=true}={}){if(cancelled||!first||!player||!block||!INCENSE[block.typeId.slice(NS.length+1)]||isPlacementCallback(player,block))return false;const hs=handSnapshot(player);if(hs.id)return false;try{canWrite(player);}catch{return false;}if(!claimIncenseInteraction(player,block))return false;const d=block.dimension,p={...block.location},id=block.typeId,work=()=>safe(player,()=>{sameHand(player,hs);canWrite(player);const b=blockAt(d,p);check(b?.typeId===id,'BLOCK_CHANGED');toggleIncense(b,b.permutation.getState(OPEN)!==1);});if(before)system.run(work);else work();return true;}\n"
+            ],
+            [
+              71,
+              72,
+              " b.registerCustomComponent(NS+':incense',{onPlace:e=>optional(()=>initializeIncense(e.block)),onRedstoneUpdate:powered,onTick:e=>optional(()=>tickIncense(e.block)),onPlayerInteract:nativeEmptyHandBlockUse});\n"
+            ],
+            [
+              77,
+              78,
+              " registerJavaBlockUseHandler(e=>{if(e.cancel||!e.block)return;if(noteIncensePlacement(e.player,e))return;if(!INCENSE[e.block.typeId.slice(NS.length+1)])return;if(interactIncense(e.player,e.block,{before:true,first:e.isFirstEvent!==false}))e.cancel=true;});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/furniture.js": {
+          "before": "80d62b3406053ec5615655de695ed9f2fffa28cfd152169a4269ef7c0a343bce",
+          "after": "546857f32f9cc60eac52c81e72e16c2becbc8c94e4a55aeaf054c0e64d885f50",
+          "reason": "Java held-item seating and block interaction order, direct seat transfer with rollback, empty-stool yaw restoration, and touch event hit preservation; native seat/input acceptance remains separate.",
+          "reverseOps": [
+            [
+              7,
+              8,
+              "import {nativeEmptyHandBlockUse} from './java-placement-router.js';\nimport {registerJavaBlockUseHandler} from './java-placement-router.js';\n"
+            ],
+            [
+              75,
+              77,
+              ""
+            ],
+            [
+              79,
+              80,
+              "  const input=player.inputInfo,mode=input?.lastInputModeUsed;\n  if(['KeyboardAndMouse','Gamepad'].includes(mode)||(mode==='Touch'&&input?.touchOnlyAffectsHotbar)){\n"
+            ],
+            [
+              83,
+              88,
+              "  const aimed=aimPointFor(player,block);\n  const corrected=aimed??worldFromHit(sourceFace,hit,source);\n"
+            ],
+            [
+              134,
+              135,
+              " canWrite(player);isNear(player,block.dimension,block.location);\n"
+            ],
+            [
+              136,
+              136,
+              " check(!player.getComponent('minecraft:riding')?.entityRidingOn,'ALREADY_RIDING');\n"
+            ],
+            [
+              137,
+              157,
+              " return locks.with([key,player.id],()=>{const ride=nativeRide(e);check(ride.getRiders().length===0,'SEAT_OCCUPIED');check(ride.addRider(player),'SEAT_REJECTED');furnitureDiagnostics.seated++;return e;});\n"
+            ],
+            [
+              172,
+              173,
+              " canWrite(player);isNear(player,block.dimension,block.location);const f=furnitureBlock(block.typeId),h=hand(player),color=dyeColor(h?.typeId);\n"
+            ],
+            [
+              174,
+              175,
+              " return locks.with([anchorKey(block.dimension.id,block.location),player.id],()=>{const facing=block.permutation.getState(FACING);exchangeBlocks(player,1,[],[{block,permutation:BlockPermutation.resolve(blockId({kind:'light',color}),{[FACING]:facing})}]);furnitureDiagnostics.dyed++;plantGrowthFeedback(block);optional(()=>block.dimension.playSound('sign.dye.use',center(block.location),{volume:1,pitch:1}));return true;});\n"
+            ],
+            [
+              183,
+              185,
+              "  const rider=ride.getRiders()[0];if(f.kind==='sofa'&&!rider){discard(e,'expired');return;}if(rider&&f.kind==='stool')e.setProperty(NS+':seat_yaw',relativeSeatYaw(rider.getRotation().y,facingYaw(block.permutation.getState(FACING)??0)));\n"
+            ],
+            [
+              188,
+              189,
+              "export function registerFurnitureComponents({blockComponentRegistry:r}){r.registerCustomComponent(NS+':stool',{onPlace:e=>optional(()=>{syncNativeFurnitureFacing(e.block,'stool');ensureSeat(e.block);}),onPlayerInteract:nativeEmptyHandBlockUse,onTick:e=>optional(()=>ensureSeat(e.block))});r.registerCustomComponent(NS+':sofa',{onPlace:e=>optional(()=>{syncNativeFurnitureFacing(e.block,'sofa');syncSofaNeighborhood(e.block.dimension,e.block.location);}),onPlayerInteract:nativeEmptyHandBlockUse,onTick:e=>optional(()=>syncSofa(e.block))});r.registerCustomComponent(NS+':table',{onPlace:e=>optional(()=>syncTableNeighborhood(e.block.dimension,e.block.location)),onTick:e=>optional(()=>syncTable(e.block))});r.registerCustomComponent(NS+':glassware_holder',{onPlayerInteract:nativeEmptyHandBlockUse,onPlace:e=>optional(()=>syncNativeFurnitureFacing(e.block,'glassware_holder'))});r.registerCustomComponent(NS+':bar_counter',{onPlace:e=>optional(()=>{syncNativeFurnitureFacing(e.block,'bar_counter');syncBarCounterNeighborhood(e.block.dimension,e.block.location);}),onTick:e=>optional(()=>syncBarCounter(e.block))});r.registerCustomComponent(NS+':pendant_lamp',{onTick:e=>optional(()=>repairVerticalDouble(e.block))});r.registerCustomComponent(NS+':string_light',{});}\n"
+            ],
+            [
+              208,
+              215,
+              "   isNear(e.player,d,p);sameHand(e.player,hs);const b=blockAt(d,p);\n   check(b?.typeId===id&&b.permutation.getState(FACING)===facing,'BLOCK_CHANGED');\n   if(seated(existing))return sitOnFurniture(e.player,b);\n   if(existing.kind==='light')return recolorLight(e.player,b);\n   return useGlasswareHolder(e.player,b,faceLocation);\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/immersion.js": {
+          "before": "8c985a357c146d0274a0531689505f2f498ffeb22efae4d20a036975fd395eb3",
+          "after": "264a1be4549e4cc4a0572f8ec28404e3357b9e945306e4203a0a17eaee0ec1ad",
+          "reason": "Select and restore only the captured shaker use arm while preserving source sound preference and cleanup; custom-item offhand native input remains pending client acceptance.",
+          "reverseOps": [
+            [
+              46,
+              48,
+              "export function startShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_shake',{controller:'kt_mixology_hands',blendOutTime:.08,stopExpression:'q.main_hand_item_use_duration <= 0'}));}\nexport function stopShakerHands(player){optional(()=>player.playAnimation('animation.kt_mixology.player_idle',{controller:'kt_mixology_hands',blendOutTime:.08}));}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/java-placement-router.js": {
+          "before": "a4f3b7a314ec4446de44f812583f7a1ca66947194934b079a8d9edc9f0ed7f78",
+          "after": "cb4e67d297af18d941bf36c202519e20a4c33cc93c7bbe53207c407a75bc709c",
+          "reason": "Preserve clicked-block then main-item then reported offhand use ordering, foreign cancellation, and settlement-aware native callback deduplication; unknown vanilla item priority remains bounded.",
+          "reverseOps": [
+            [
+              6,
+              7,
+              "const routes=[],blockHandlers=[],blockObservers=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map(),recentPlacements=new Map(),itemUseClaims=new Map();let installed=false;\n"
+            ],
+            [
+              9,
+              10,
+              ""
+            ],
+            [
+              26,
+              28,
+              "function claim(player,itemId,block,source='owned',face){\n const row={itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source,pending:source==='owned'};\n"
+            ],
+            [
+              34,
+              35,
+              " if(!succeeded&&blockUses.get(event.player.id)===row)blockUses.delete(event.player.id);\n"
+            ],
+            [
+              42,
+              52,
+              " return row?.source==='owned'&&sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick});\n"
+            ],
+            [
+              86,
+              87,
+              "function dispatch(raw){\n"
+            ],
+            [
+              94,
+              95,
+              "  isFirstEvent:true,cancel:raw.cancel===true\n"
+            ],
+            [
+              102,
+              103,
+              " if(e.cancel){claim(e.player,held.id??'',e.block,'foreign',e.blockFace);e._javaUseRejection='FOREIGN_CANCEL';observe();syncCancel();return;}\n"
+            ],
+            [
+              118,
+              123,
+              " if(!e.cancel&&held.id)itemUseOn(e,held);\n if(e.cancel&&!e._javaUseClaim)e._javaUseClaim=claim(e.player,held.id??'',e.block,'owned',e.blockFace);\n"
+            ],
+            [
+              127,
+              130,
+              "/** Dispatch empty-hand native after-interactions through the same protected\n * Java block-use handlers. The engine calls this only when no before-event was\n * cancelled, so external protection denials remain authoritative. */\nexport function nativeEmptyHandBlockUse(e){\n"
+            ],
+            [
+              132,
+              134,
+              " if(held.id)return false;\n"
+            ],
+            [
+              137,
+              142,
+              " if(previous?.source==='foreign'&&previous?.itemId===''&&blockUseClaimed(player,'',block,e.face??e.blockFace))return false;\n if(previous?.source==='owned'&&previous?.itemId===''&&blockUseClaimed(player,'',block,e.face??e.blockFace))return false;\n const gesture=`${blockKey(block)??''}/${faceKey(e.face??e.blockFace)??''}`,now=system.currentTick,last=nativeEmptyCallbacks.get(player.id);\n"
+            ],
+            [
+              146,
+              147,
+              " dispatch(synthetic);return !!synthetic.cancel;\n"
+            ],
+            [
+              148,
+              152,
+              ""
+            ],
+            [
+              170,
+              171,
+              "  if(ownedItemUseEcho(e.source,id)||blockUseClaimed(e.source,id,hit.block,hit.face)){e.cancel=true;return;}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "055a274e35c9f24e0630a0a971389d116c41e4c82375ad5c777deb4460254ce6",
+          "after": "8e084c1237964d50999b869b2c2920679c0dd33ae14c98626eddce1c775c66b0",
+          "reason": "Capture and settle the actual main/offhand shaker without changing its native item identity or metadata; verify stale/duplicate events, preserve transactional place/pour and quiet empty/full/result behavior, and distinguish block interaction from placement permissions.",
+          "reverseOps": [
+            [
+              29,
+              29,
+              "import {firstBlockGesture} from './block-gesture.js';\n"
+            ],
+            [
+              30,
+              31,
+              "import {registerJavaBlockUseHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse} from './java-placement-router.js';\n"
+            ],
+            [
+              38,
+              39,
+              ""
+            ],
+            [
+              43,
+              44,
+              "const locks=new Locks(),uses=new Map(),releaseGuards=new Map();\n"
+            ],
+            [
+              51,
+              52,
+              "function near(player,block){canWrite(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}\n"
+            ],
+            [
+              124,
+              128,
+              "function commitBlock(player,store,key,next,take,outputs,block,newPermutation,inventoryOptions,native){\n const container=inventory(player),raw=store.raw(key),old=store.load(key),saved=waterSnapshot(block);\n const plan=planInventory(container,player.selectedSlotIndex,take,outputs,makeStack,inventoryOptions);\n"
+            ],
+            [
+              136,
+              143,
+              "function replaceHeld(player,expected,next){\n const container=inventory(player),index=player.selectedSlotIndex,current=container.getItem(index);\n check(current?.typeId===expected.typeId&&current.getDynamicProperty(PORTABLE_DATA)===expected.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');\n container.setItem(index,next);\n"
+            ],
+            [
+              144,
+              146,
+              "export function placeShaker(player,location){\n idle(player);const block=blockAt(player.dimension,location);near(player,block);\n"
+            ],
+            [
+              148,
+              149,
+              "  check(block.isAir&&!shakerStore.load(key),'SPACE_NOT_CLEAR');const item=hand(player),carried=readPortableItem(item);\n"
+            ],
+            [
+              150,
+              151,
+              "  commitBlock(player,shakerStore,key,next,placementTake(player),[],block,perm('shaker_station',facing(player)),undefined,native);\n"
+            ],
+            [
+              158,
+              163,
+              "  const old=station(block),item=hand(player);check(item,'NO_INGREDIENT');let next;\n"
+            ],
+            [
+              176,
+              177,
+              ""
+            ],
+            [
+              190,
+              196,
+              "  canWrite(player);check(registry,'INITIALIZING');const item=hand(player);\n  check(item?.typeId===SHAKER&&item.getDynamicProperty(PORTABLE_DATA)===event.itemStack.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');\n  const carried=readPortableItem(item);check(!carried.state.result,'RESULT_PENDING');check(carried.state.slots.length===3,'NEED_THREE_INGREDIENTS');\n  uses.set(player.id,{player,slot:player.selectedSlotIndex,dimension:player.dimension.id,raw:item.getDynamicProperty(PORTABLE_DATA),start:system.currentTick,carried,recipe:registry.findShaker(carried.state.slots)});\n  nativeUseDiagnostics.starts++;startShakerHands(player);showShakerProgress(player,0);\n"
+            ],
+            [
+              199,
+              203,
+              " const item=hand(player);\n return player.dimension.id===use.dimension&&player.selectedSlotIndex===use.slot&&item?.typeId===SHAKER&&item.getDynamicProperty(PORTABLE_DATA)===use.raw;\n"
+            ],
+            [
+              206,
+              207,
+              " stopShakerHands(use.player);hideShakerHud(use.player);\n"
+            ],
+            [
+              210,
+              211,
+              " check(sameUse(player,use),'STALE_HAND');const current=hand(player);\n"
+            ],
+            [
+              213,
+              215,
+              " uses.delete(player.id);if(automatic)releaseGuards.set(player.id,{slot:use.slot,tick:system.currentTick});\n"
+            ],
+            [
+              218,
+              223,
+              "  if(canonical(next)!==canonical(use.carried.state))replaceHeld(player,current,portable(next,use.carried.token,current,use.carried.state));\n"
+            ],
+            [
+              224,
+              226,
+              " catch(error){stopShakerHands(player);hideShakerHud(player);throw error;}\n stopShakerHands(player);hideShakerHud(player);\n"
+            ],
+            [
+              231,
+              247,
+              " releaseGuards.delete(player.id);const use=uses.get(player.id);if(!use)return;\n if(!sameUse(player,use)){cancelUse(player.id);return;}\n"
+            ],
+            [
+              276,
+              277,
+              " const block=blockAt(player.dimension,location);near(player,block);const key=cupKey(block.dimension.id,location),item=hand(player);\n"
+            ],
+            [
+              308,
+              309,
+              "export function pourHeldShakerNow(player,block){\n"
+            ],
+            [
+              311,
+              312,
+              "  const item=hand(player),carried=readPortableItem(item),tx=serveShaker(carried.state,registry),cup=getCup(block);\n"
+            ],
+            [
+              316,
+              317,
+              "  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token,item,carried.state),count:1}],block,perm(cupBlock(next.item),next.facing));\n"
+            ],
+            [
+              385,
+              387,
+              "  const guard=releaseGuards.get(player.id);if(guard&&(guard.slot!==player.selectedSlotIndex||system.currentTick-guard.tick>120))releaseGuards.delete(player.id);\n"
+            ],
+            [
+              432,
+              474,
+              ""
+            ],
+            [
+              482,
+              482,
+              "  event.cancel=true;if(!firstBlockGesture(event.player,block,`mixology-v38/${held||'empty'}/${snapshot.basic.slot}`))return;\n"
+            ],
+            [
+              483,
+              484,
+              "  system.run(()=>safely(event.player,()=>{\n"
+            ],
+            [
+              487,
+              488,
+              "  }));\n"
+            ],
+            [
+              489,
+              490,
+              ""
+            ],
+            [
+              505,
+              506,
+              " world.beforeEvents.itemUse.subscribe(event=>{\n  if(event.cancel||event.itemStack?.typeId!==SHAKER)return;\n  // Allow the Java use-on router to place/pour first. Air use alone starts shaking.\n  const hit=event.source.getBlockFromViewDirection({maxDistance:6});if(hit?.block)return;\n  try{const state=readPortableItem(event.itemStack).state;\n   if(state.result||state.slots.length!==3){event.cancel=true;system.run(()=>showShakerMessage(event.source,state.result?'RESULT_PENDING':'NEED_THREE_INGREDIENTS'));}\n  }catch{event.cancel=true;}\n });\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/molotov.js": {
+          "before": "2504519777d71c862e21012681c91c4d69a4a6b8e41805958f8ab4c9b49d8301",
+          "after": "8ae86b95134b2d2515644bbb96c2ae16bc80a0b43660ccf1b719350df90171aa",
+          "reason": "Use source-backed normal/soul fire and adjacent flammability decisions with a bounded impact-local neighborhood; unknown support shapes and portal rules remain explicit adaptation limits.",
+          "reverseOps": [
+            [
+              6,
+              7,
+              ""
+            ],
+            [
+              12,
+              13,
+              "export const molotovDiagnostics={starts:0,releases:0,earlyReleases:0,nativeProjectiles:0,impacts:0,duplicateImpacts:0,samples:[],errors:[]};\n"
+            ],
+            [
+              48,
+              49,
+              "  p.sendMessage('[Tavern Molotov] '+JSON.stringify({observedNativeProjectiles:own,clientAnimationConfirmed:false,delayedSampleIsNotInitialVelocity:true}));\n"
+            ],
+            [
+              70,
+              72,
+              ""
+            ],
+            [
+              76,
+              86,
+              "   const p={x:cx+dx,y:cy+dy,z:cz+dz},b=at(dimension,p),below=at(dimension,{x:p.x,y:p.y-1,z:p.z});\n   // Adapter limit: this is not Java's full BaseFireBlock.canBePlacedAt\n   // predicate (side support, soul fire and portal rules remain separate).\n   if(b?.isAir&&below&&!below.isAir){try{b.setType('minecraft:fire');break;}catch{}}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/shaker-screen.js": {
+          "before": "56ced825a69bf1ee82397e21e347f940fdcbd084d6fbbe3c2aed6ce5fa397f2e",
+          "after": "b6c71c71e69e6a935bdd6f0edf078bf19100e07c9478883185c04b92d4dea092",
+          "reason": "Send the original low-quality ingredient rejection as translated system chat, preserving shared Actionbar ownership and quiet successful operations.",
+          "reverseOps": [
+            [
+              9,
+              10,
+              " NEED_THREE_INGREDIENTS:'kt.mixology.need_three',QUALITY_TOO_LOW:'kt.mixology.quality_low',\n"
+            ],
+            [
+              52,
+              59,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/transactions.js": {
+          "before": "e5c53bc595eb77975e1b484f040aebb2032260a326c27cf9644c60b235e43185",
+          "after": "bacdac12f246c9141b779231a8653cf6b0e0c50b8e674e8f555f226e6b20d37e",
+          "reason": "Allow explicitly requested Java block interactions in the existing world-output transaction while retaining default placement/write restrictions and rollback.",
+          "reverseOps": [
+            [
+              91,
+              93,
+              "export function exchangeBlocksToWorld(player,outputs,changes,location,{wear=false,rng=Math.random}={}) {\n canWrite(player);\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/writing-boards.js": {
+          "before": "d6f3e2f84b0ac85c863b3677d732f528f4727ce159319183d54ebcd3269c6a14",
+          "after": "4183f6a133160d37d1967aed383189a80c54f1874f3caf9a633c97930d518985",
+          "reason": "Preserve Java held-item/secondary-use interaction, root-origin reach, source flower-transform priority and waxed/out-of-range PASS behavior; settle native duplicates, commit board material consumption and saved data atomically, and keep the existing bounded form editor.",
+          "reverseOps": [
+            [
+              8,
+              9,
+              "import {canWrite,hand,handSnapshot,sameHand,exchangeBlocks,placementTake,blockAt,plus,safe,requireBlockReach,applyBlocks} from './transactions.js';\n"
+            ],
+            [
+              10,
+              12,
+              "import {nativeEmptyHandBlockUse,registerJavaBlockUseHandler} from './java-placement-router.js';\n"
+            ],
+            [
+              14,
+              15,
+              "const diagnostics={placed:0,recovered:0,transformed:0,edited:0,glyphHelpers:0,glyphRefreshes:0,errors:[]};let installed=false;const recentBoardInteractions=new Map();\n"
+            ],
+            [
+              26,
+              113,
+              "function consumeOne(player){exchangeBlocks(player,placementTake(player),[],[]);}\nfunction setBoardStyle(player,block,target){canWrite(player);const base=boardBase(block.location,block.permutation.getState(BOARD_HALF)),lower=blockAt(block.dimension,base),upper=blockAt(block.dimension,{x:base.x,y:base.y+1,z:base.z});check(lower&&upper&&isSandwich(lower.typeId)&&upper.typeId===lower.typeId,'BOARD_PAIR_MISSING');const item=hand(player);check(item&&eligibleFlower(item.typeId),'BOARD_FLOWER_REQUIRED');check(target!==lower.typeId,'BOARD_STYLE_UNCHANGED');const state=lower.permutation,top=upper.permutation;exchangeBlocks(player,placementTake(player),[],[{block:lower,permutation:BlockPermutation.resolve(target,{[BOARD_HALF]:0,[BOARD_ROTATION]:state.getState(BOARD_ROTATION),'kaleidoscope_tavern:waterlogged':state.getState('kaleidoscope_tavern:waterlogged')})},{block:upper,permutation:BlockPermutation.resolve(target,{[BOARD_HALF]:1,[BOARD_ROTATION]:top.getState(BOARD_ROTATION),'kaleidoscope_tavern:waterlogged':top.getState('kaleidoscope_tavern:waterlogged')})}]);diagnostics.transformed++;boardFeedback(block.dimension,base,'transform');return true;}\nfunction saveAndRender(block,key,data,kind,large){const clean=saveData(key,data,kind,large),info=boardKey(block);syncGlyphs(block.dimension,info,clean,block.location,key);diagnostics.edited++;return clean;}\nfunction editBoard(player,block,key,data,kind,large){const limit=maxText(kind,large),d=block.dimension,pos={...block.location},id=block.typeId,expected=JSON.stringify(data),form=new ModalFormData().title(boardText(kind)).textField(boardText(kind==='chalk'&&!large?'text_small':'text_lines',kind==='sandwich'?8:11),boardText('newline_hint'),{defaultValue:encodeBoardInput(data.text)}).dropdown(boardText('align'),BOARD_ALIGNMENTS.map(key=>boardText(key)),{defaultValueIndex:BOARD_ALIGNMENTS.indexOf(data.alignment)}).dropdown(boardText('vertical_align'),BOARD_VERTICAL_ALIGNMENTS.map(key=>boardText(key)),{defaultValueIndex:BOARD_VERTICAL_ALIGNMENTS.indexOf(data.verticalAlignment??'top')});form.show(player).then(answer=>safe(player,()=>{if(answer.canceled||!Array.isArray(answer.formValues))return;canWrite(player);requireBlockReach(player,d,pos,8);const current=blockAt(d,pos);check(current?.typeId===id,'BLOCK_CHANGED');const currentInfoNow=currentInfo(current);check(currentInfoNow.key===key,'BOARD_CHANGED');check(JSON.stringify(currentInfoNow.data)===expected,'BOARD_CHANGED');check(!currentInfoNow.data.waxed,'BOARD_WAXED');const [inputText,alignmentIndex,verticalIndex]=answer.formValues;const text=typeof inputText==='string'?decodeBoardInput(inputText):inputText;check(typeof text==='string','BOARD_TEXT_REQUIRED');check(Number.isInteger(alignmentIndex)&&BOARD_ALIGNMENTS[alignmentIndex],'BOARD_ALIGNMENT_REQUIRED');check(Number.isInteger(verticalIndex)&&BOARD_VERTICAL_ALIGNMENTS[verticalIndex],'BOARD_ALIGNMENT_REQUIRED');const layout=splitBoardLines(text,boardLayoutOptions(kind,large));if(text.length>limit||layout.overflow){player.sendMessage(boardText('overflow',kind==='sandwich'?8:11));return;}const next={...data,text,alignment:BOARD_ALIGNMENTS[alignmentIndex],verticalAlignment:BOARD_VERTICAL_ALIGNMENTS[verticalIndex]};saveAndRender(current,key,next,kind,large);})).catch(record);}\nfunction claimBoardInteraction(player,block){const k=`${player.id}|${block.dimension.id}|${block.location.x}_${block.location.y}_${block.location.z}`,tick=system.currentTick;if(recentBoardInteractions.get(k)===tick)return false;recentBoardInteractions.set(k,tick);if(recentBoardInteractions.size>128)for(const [key,value]of recentBoardInteractions)if(value<tick-2)recentBoardInteractions.delete(key);return true;}\nfunction handleBoardInteraction(player,block,{before=false,cancelled=false,first=true}={}){if(cancelled||!first||!block||(block.typeId!==CHALKBOARD&&!isSandwich(block.typeId))||!player)return false;if(!claimBoardInteraction(player,block))return false;let info;try{info=currentInfo(block);}catch(err){record(err);return false;}const item=hand(player),target=item&&eligibleFlower(item.typeId);let action;if(target&&block.typeId!==CHALKBOARD&&target!==block.typeId)action='transform';else if(item?.typeId==='minecraft:honeycomb')action='wax';else if(item?.typeId==='minecraft:glow_ink_sac'&&!info.data.glowing)action='glow';else if(item?.typeId==='minecraft:ink_sac'&&info.data.glowing)action='un_glow';else if(DYE_FROM_ITEM[item?.typeId]&&DYE_FROM_ITEM[item.typeId]!==info.data.color)action='dye';else action='edit';const hs=handSnapshot(player),d=block.dimension,pos={...block.location},id=block.typeId,key=info.key,large=info.root.large;\n const work=()=>safe(player,()=>{sameHand(player,hs);requireBlockReach(player,d,pos,8);const b=blockAt(d,pos);check(b?.typeId===id,'BLOCK_CHANGED');if(action==='transform')return setBoardStyle(player,b,target);canWrite(player);const infoNow=currentInfo(b),now=infoNow.data;if(now.waxed){boardFeedback(d,infoNow.root.root,'locked');return;}if(action==='edit')return editBoard(player,b,key,now,infoNow.root.kind,large);const next={...now};if(action==='wax')next.waxed=true;else if(action==='glow')next.glowing=true;else if(action==='un_glow')next.glowing=false;else if(action==='dye')next.color=DYE_FROM_ITEM[item.typeId];consumeOne(player);saveAndRender(b,key,next,infoNow.root.kind,large);boardFeedback(d,infoNow.root.root,action);});if(before)system.run(work);else work();return true;}\nfunction boardUseHandler(e){if(e.cancel||e.isFirstEvent===false)return;if(handleBoardInteraction(e.player,e.block,{before:true,first:true}))e.cancel=true;}\n"
+            ],
+            [
+              124,
+              125,
+              "export function registerWritingBoardComponents({blockComponentRegistry:b,itemComponentRegistry:i}){b.registerCustomComponent(NS+':writing_board',{onTick:e=>maintainBlock(e.block),onPlayerInteract:nativeEmptyHandBlockUse});i.registerCustomComponent(NS+':place_writing_board',{onUseOn:e=>safe(e.source,()=>placeBoard(e.source,e.block,e.blockFace))});}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/java-use-order.js": {
+          "before": "571ce3ed831b261102a967560047610614d40a69b9f39d9cb153650eb4d3dc5f",
+          "after": "5755a50fa11d865700e74ab00bb828e8d7871615a7b54f5226ab1f154cbb87a8",
+          "reason": "Expose source-based secondary-use bypass and shared block/main/offhand route decisions without overriding foreign cancellation.",
+          "reverseOps": [
+            [
+              3,
+              6,
+              " * secondary-use is active AND an item is held. Empty-hand sneaking still runs block use.\n"
+            ],
+            [
+              7,
+              13,
+              "export function javaSecondaryBypass(player,heldId){return !!heldId&&player?.isSneaking===true;}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/tipsy-visual.js": {
+          "before": "4e371996f9a55a3977b7c7f6033cd3786214078d52ffa5cbc22260621258e98f",
+          "after": "2545a1729c78a38f45882c613e0384372cc8866f8bd22fc50830bca818ee20cb",
+          "reason": "Documentation-only runtime comment clarifies the current free-camera animation versus additive gameplay-roll boundary; camera behavior is unchanged.",
+          "reverseOps": [
+            [
+              1,
+              4,
+              " * Bedrock's ordinary gameplay camera has no additive roll setter in API 2.7.\n"
+            ]
+          ]
+        },
+        "runtime/RP/animations/runtime_shaker.animation.json": {
+          "before": "31a682fc6974d45ffb6544a4e7095d6fe42784dfe2853faf43f634a6816880d0",
+          "after": "01e9ebc9e822f4d6c3826dd2a04e3abff963956f176f9dea5a35862e8a3844fa",
+          "reason": "Add exact source-derived left-hand held/use transforms and left-arm pose/restore while retaining reviewed main-hand constants and incoming arm yaw; client acceptance remains pending.",
+          "reverseOps": [
+            [
+              80,
+              158,
+              ""
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -4995,6 +5678,92 @@
           "after": "092fc9516d34b774e4bf8bc42d5a3b1c41611c67cc0bec4a38cf9cbc2614b79b",
           "reason": "Register the two already-packaged partial languages; retain all three complete locale entries.",
           "beforeGzipBase64": "H4sIAAAAAAACA4vmUlBQSs2LDw1W0gExqzLinf3gzJBwJa5YLgDy/L0dJAAAAA=="
+        }
+      }
+    },
+    {
+      "release": "0.6.131",
+      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
+      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md",
+      "files": {
+        "runtime/BP/blocks/cup_depth_charge.json": {
+          "before": "3079e16ce8908401f4998906a8ad963880c7cd8a8691717f4fec52f8d1165600",
+          "after": "a87f7aa3c38840b404e15ab3e92993358d76814eeb901d978276f1c94d66a322",
+          "reason": "Replace only the native item_visual with the original animated thin item model; retain world cup geometry, materials, states and callbacks.",
+          "beforeGzipBase64": "H4sIAAAAAAACA9VW204bMRB9z1es9oW2CmkSaJsi8SUIWY53krj4hu1Nk6L8e8e7udgbE2hBAp52bY/ncub42A+9oihn2krqyRKs41qVV0U5Goy/D74Ny35YllwBs3Tmr6ZCsztcf8BpXKjAMcuNbze1kzjNK1CezzjY4OqOCuCVdkwbIJ5iEHXFakMqMH5B2ILaOTRxmr3OUw8u8lbkPcwo42qOdjd7u6IY9qPBKB6M48HF/v92+7dpvpvWqGRaGq2whjiPCIU5aAnertMs06p3NoM7T6hz4B2hk0FS8y52/zgCdgMsp4JwhYAo1kXkSzLECQ8rX1to8I4CkqZhRPKVFnq+zmPeOLCgKrAEc17oKrihwiwowV544hBpAfipoEp3UTnlWDXRjIl6y53hIGlDiZ0CUnEp2355W8N+eXOwLGvlFjRE+LClzahwUW0n+ss9SLLkrqYibWyWWi8gVwrxE7TKEOsV8P/fDjyvB08QLKn/cZJ9wDJTsh3oliNeVoKxLE+5IKjFAY0cTZkWgoeEyFSvUqJqy+dcdfT3/LL/mBqfXx5EN2Kk43+g42SSiHjiZHIs3JmsHQhg/qNl7Xl0s7ZnXuFpXeJptVTNu/HGSYjxMJun0NocHYpccLzI0QJBmyJHp2uku2r3Rek4YFpVjnhNGnMdRGr4D05hZYR26VsBN+yniQXHW116wrPUS4pOUz84CTIcI782zTE22hg8bCf8ID4+WIYvngt06b6CNH49+OUwzdwOPl94UlFpYIvQMGt1X/MKYfItEdNE99PE1qKR4LixHVnautrV9DsoeFc/GFUEe4OnWZHWftvxjp3eLWMPa7ZoQpeNvoVSOsa1g501E9yYvLieoHZOdBRFjUVGTy3QDtsrq82zn4sneopAqAjeNAhlDN04cjByZGa1DIEVPvnK7HvQgJU1vkuDedStyG84GXzb6fJ+0N4ZzVP209njr9ezz8X1dTGMkM8/PbtKgXrg2id7l1vtNaT9buUmWemIW34iGd8+74J5JSRGb4nE+c93hcX4TbEYTd4VGBdvCsb4x8vA6O1sNr1N7y/ndJVicA8AAA=="
+        },
+        "runtime/BP/blocks/cup_mystery_cocktail.json": {
+          "before": "a455aa1bf46f7000397d8a07f73748f47a64b1fec38a7285294c8e5674f6d540",
+          "after": "719033303ba23ed9896df75062d7735de33daae4f3c20016e45029c07b9bfc2d",
+          "reason": "Replace only the native item_visual with the original animated thin item model; retain world cup geometry, materials, states and callbacks.",
+          "beforeGzipBase64": "H4sIAAAAAAACA9VW224aMRB95ytW+5K2IhRo2tJI+ZIosox3ADe+xfZSaMS/d7wLxF4MSZpISZ52bY/ncub42Pe9oihn2krqyRKs41qVl0U5Gox/DL4Py35YllwBs3TmL6dCs1tcv8dpXKjAMcuNbze1kzjNK1CezzjY4OqWCuCVdkwbIJ5iEHXJakPk2nmwa8LQpadcNLGa/c5TDy7yWOS9zCjjao5213u7ohj2o8EoHozjwbf9/832b9N8N61RybQ0WmEdcR4REnPQErxdp1mmle9sBreeUOfAO0Ing4O6d/H7h1GwK2A5FYQrBEWxLipfkiFOeFj52kKDexSUNI0jkq+00PP1cewbJxZUBZZg7gtdBVdUmAUl2BNPHCIuAD8VVOkuKqccqyeaMVFveTQcJO0osWNAKi5l2zdva9gvbx4sy1q5BQ0RPnR5MypcVN+JPnMPkiy5q6lIG5yl2QuJlkL9CMUyJHulPvxvJ57Wi0fIlmBwnHAftNSUeA/Uy5EwK8/bIgjqdEAkR1mmheAhITLVq5S02vI5Vx1dPr/oH1Pp84sHMY6Y6fhf6DiZJOKeOJkcCnomawcCmP9oWXse3brt+VfItiWeWkvVvBvv4kiEKEuhtTk4FrnQeMWjBUI2RYZOkedctfuiZBwwrSpHvCaNuQ5yNXyGU1gZoV36isAN+2liwfFWnR7xLPWSotPUD06CDIfIr01zkI02Bo/aCT+Ijw+W4YunAl26ryCNXw9+O0wzt4PPF55UVBrYIjTMWt3VvEKYfEvDNNH9NLG1aIQ4bmtHmLaudjX9CTreVQ9GFSqSwrOsSGu/7XjHTu+WsYc1WzShy0bhQikd49rBzpoJbkxeXk8QOyc5iqLKIp+nFmiH65XV5lkPyRN9RTBUBHEaiDIGBtX9wciRmdUyBFf4GCyzL0UDVtb4Yg3mUcciv+F08G23y7tBe3M0j9xPZ8fftWefi6urYhihn3+UdrUCFcG1D/ouv9qLSPvdynWy0pG3/EQyvnnaFfNKSIzeEonzX+8Ki/GbYjGavCswvr0pGOOfLwOjt7PZ9Da9f2bHpCmODwAA"
+        },
+        "runtime/BP/blocks/cup_nether_special.json": {
+          "before": "39f63897c5d485b66743d1a17c5707d6950d423217a21401d3eee51edcce7411",
+          "after": "f1fbae036cd97e3beb143df60a8cf2e877f90794cb6f1e5b0fea320813134442",
+          "reason": "Replace only the native item_visual with the original animated thin item model; retain world cup geometry, materials, states and callbacks.",
+          "beforeGzipBase64": "H4sIAAAAAAACA9VW204bMRB9z1es9oW2CukmpS1F4ksQshzvJHHxDdubJkX59453k2AvToCCBDzt2h7P5czxse8GRVHOtJXUkyVYx7UqL4pyPJr8GH2vymFYllwBs3TmL6ZCsxtcv8NpXKjBMcuN7zZ1kzjNa1CezzjY4OqGCuC1dkwbIJ5iEHXBGkMU+AVY4gwwTkUbqd3tPPXgIn9F3seMMq7maHe1tyuKahgNxvFgEg++7f+vt3+b9rvpjEqmpdEKq4jziHCYg5bg7TrNMq17ZzO68YQ6B94ROq5GvbJ34YcPg2BLwKIN4QoxUawPypdkiBMeVr6x0IIexyRt24jkKy30fH0I+daHBVXjGma+0HXwRIVZUIId8cQh3gLwU0Od7qJyyrF2ohkTzZZD1ShpRon9AlJzKbuuedvAfnlzb1k2yi1oiPCRq5tR4aLyjnSZe5BkyV2DuSbtzXLsZSxLgX6EXxmGvU4X/rcPT+vEI0xLIDjMto9Zacq6e97lGJiVZSzMUy4I6nMAJMdXpoXgISEy1auUsdryOVc9RT49Gx7S59OzexmOeOn4X+g5OU9kPXFy/lDKM1k7EMD8R8va8+i27Q6/wjO7xDNrqZr3402SEJMqm6fQ2jw4F7ngeLmjBYI2RY5O10h41e2L0nHAtKod8Zq05jqoVfUMp7AyQrv0/YAb9tPEguOdOj3iWeolRaepH5wEGY6RX5v2JBttDB62I34QHx8swxfPBbp0X0Eavx79dphmbgefLzypqTSwRajKWt02vEaYfEfENNH9NLGNaIU4bmxPmbaudjX9CTre1w9GFcHe4GlWpLPfdrxnp3fL2MOGLdrQZatwoZSeceNgZ80ENyavr0eonRMdRVFmkdFTC7TH9tpq84wn5JGuIhQqAjgNQxkDg+J+b+TIzGoZQit8BpbZN6IBKxt8qwbzqF+R33A2+LbX5e2ouzfa5+2nk8Mv2pPPxeVlUUXY55+jfa1ARXDdQ77Pru4i0n63cpWs9OQtP5GMr592xbwSEuO3ROL017vCYvKmWIzP3xUY394UjMnPl4Ex2NlsBpvBP4IedgGGDwAA"
+        },
+        "runtime/BP/items/depth_charge.json": {
+          "before": "e2091de1c3ed3980a8ecc3caf66b14322148609b3d065d44c07bd19399839c06",
+          "after": "cf7bc91ba6b850e0703bace989626094c731dfe2f06fb4e498896c8e0db84dac",
+          "reason": "Connect the original animated native block-item renderer with native placement disabled; retain original drink/eat components, callback placement and creative identity. Geometry/UV and source-frame evidence is in art/interfaces/animated-item-java-reference.json; actual native use and rendering remain pending.",
+          "beforeGzipBase64": "H4sIAAAAAAACA4VRy27CMBC88xXI58qCVnDgB/oZlmWvwyrxo+s1KkX8e+0EoqCCerAszc7MPuayWq+Fi+Q1qxNQxhjEYS228n0vdxvx1soeAxjSjg/I4Gv5UtGKW8iGMPGkmcAKo4XA6BCoOfV6ALQxm5hAsa49wsFC4qMyR00djC1GnYdQlNEMXaTzwrCWFqiAr4KpcnlWVkJHsaRX7drUn40gg/YgTTQ9axyyuOmv43+d7ISJPsVQ/fNyqcUNzHSinlWOhQw0QL1YaVZZzGnQZ9UmeNztpIfSINHGlP+da1xhHvxJI6+/VWZtepXxp/lu909YJYPSAWvqt8AtYejFC6aPdswzP07eSrbQ3WMr94tEfDxBS2kWV8ZGfuwWlDomsSoZQzfu75RDyvx3u2dHuaeowDkwU1i3IFftXVe/aZsrrdsCAAA="
+        },
+        "runtime/BP/items/mystery_cocktail.json": {
+          "before": "95a2dc58a4965977d03053b0da5d4216f4155e53cd847d420a8364746ae1e998",
+          "after": "6df5ec2316eca43f99d5279e9ee8bc02df126a4808e1a2f2cf51d2925d855fe1",
+          "reason": "Connect the original animated native block-item renderer with native placement disabled; retain original drink/eat components, callback placement and creative identity. Geometry/UV and source-frame evidence is in art/interfaces/animated-item-java-reference.json; actual native use and rendering remain pending.",
+          "beforeGzipBase64": "H4sIAAAAAAACA41Sy2rDMBC85yuCzkUkLckhP9DPEEJamcWW5GpXIW7Iv1eyHePQpPRgBLOzj5nxdbPdCheT16zOkAhjEKet2Mv3ozzsxFstewxgknZ8QgZfyteCFtwCmYQ9Tz0TWGC0EBgdQqqTWt0B2kgm9qBYlx3h5AdiSIMy0bSssRvXjL0eQlZGMzQxDauhpbRCBXxl7AuXl85CaFLM/auV9fLPSpBBe5D3zSTm/tv43qZxwkTfx1Dm01rYygcz2dSyopiTgQqoP2QtnRap7/Sg6hWP+s66yxUS9VT5H9tGKYuAJ8u8vihibVpF+F1n749PWJlA6YDlD5jDtwlDK14wfbRjtvR4fS3ZnO4z9vK4SsbHM9S0lubC2MmPw4pSzkysMmFoRg+ccpiIf6t7ZszdEAXOgZlCmwPd1O+2+QHxwh9e5wIAAA=="
+        },
+        "runtime/BP/items/nether_special.json": {
+          "before": "882a47aec029d9ee64e18cd742840d2d897dc0de6dd25f7918e2fd1d63243905",
+          "after": "f2c3f897b021a19ef371673a807e6ddbdc9e980c54a440f46e3f57253598b6f8",
+          "reason": "Connect the original animated native block-item renderer with native placement disabled; retain original drink/eat components, callback placement and creative identity. Geometry/UV and source-frame evidence is in art/interfaces/animated-item-java-reference.json; actual native use and rendering remain pending.",
+          "beforeGzipBase64": "H4sIAAAAAAACA4VRy24CMQy88xUo5yqCIjjwA/2MyEocau3m0cRZlSL+vckurBYV1EMUaTwejz2X1XotbEgOWA2YMgUvjmuxle8Hud+It1Z25FEnsHwkRlfLl4pW3GDWiSJPPRNYYTLomSxhakod9EgmZB0iKoY6wx898icmlSNqgn4cMnY69EVpYDyFdF5I1tICFfhVKFYuz52VcEqhxFcDm++PRpAeHEoddMdAfRa3/uv4Xyc5oYOLwVf9vFxrcQU9HaljpXfq5TIz31COPZxVm/241QB9aZBoBuX/pxrtz6afjHLwrTKD7lSmn6a8PTxhlYwKPNXMb3GbRL4TL5gumDHN/Oi9lUxJd42tPCzScGHAltDcXBkbudsvKNVmYlUy+dN4Aasspcx/t3t2lnuCCq1FPQV1C3HV3nX1C4K9jhvZAgAA"
+        },
+        "runtime/BP/items/ice_grape.json": {
+          "before": "41ca8103d372aae2814fe536ac9f34356d289f75b35ddc0f4a477041351d8d81",
+          "after": "754f4fe91146d74bf8e4fe3efea0a8a1b70f73fa7a86617f30e3e927beaf90f7",
+          "reason": "Connect the original animated native block-item renderer with native placement disabled; retain original drink/eat components, callback placement and creative identity. Geometry/UV and source-frame evidence is in art/interfaces/animated-item-java-reference.json; actual native use and rendering remain pending.",
+          "beforeGzipBase64": "H4sIAAAAAAACA31S0W7CMAx85ytQnlEFbPDAD+wzLC91O4sm6RKnG0P8+5K2sHZjPFSV7s6+s53zYrlUlfMGBTrygZ1Vh6XaFNt9sVurVaYNW9IeKzmwkEn0OaEJLyloz60MNQOYYC7JCldMPnc6YkNcuqBdSyCYPOyBNUHtsaW+f19kyEbQKFQ7f5p0S9QEVfQeuU1auVUmQe1dbP/1SpFfsqCwaKgYUNCxEe6wjz42uvT/y9BXaWdaZ5NRmI72s4mSQ9vgCXLTedwOm5ghlZ2Lh+P3kW7+q78urIdzHAX0Bu6t7SY1+AlBUB8h8Ff23z/fUVXOlfO4Norn8YTbyVIDSvT9gsC48nrOdbFbTS9jAZsPPAUglESLj/RgnBgI0LLB0U/lqn90V9Mwj5upcgyWmE2xn+QxrqP8OOaJn3YPIvV3Tnt7bX6dcSTY1qDf0OpM79bzt7LI32XxDRQ0E0ZEAwAA"
+        },
+        "runtime/BP/items/shaker.json": {
+          "before": "8b5e52add2b8a8744354b77f18f9985eea94230881a1f863a7fb65429e962d6b",
+          "after": "5a4ec6daa6e32a663036c684cda357739771be20b527358cfbf05d4ad964586a",
+          "reason": "Enable the source shaker offhand equipment path while retaining the same native item identity and use contract; input/event/animation behavior remains pending client acceptance.",
+          "beforeGzipBase64": "H4sIAAAAAAACA4VS227CMAx95ytQnlHFhrYHfmCfYZnEhYhcusSBsYl/n0NpVbRue6rqc3zOseOvxXKp2pg8MpwoZRuD2i7VU/P82rys1arC3gbSCVveWiYv8JdUpW4o62Q77nv6opStocC2tZSq0hEdWROzjh0Bo3iEbT7gUdDV0OEpFNDItI/pMpESaFJV9F5sJ1weO4WwT7F0vxnVvG+V0AT01PRV2CU627BXd5Hr7XvtNZWOvotBTPJ0pskKdL+hI4PewI9JRp6xuXN4gWr8ONIJXaklVdM1v+/nlnkMOWPh8QMyoz5Ctp9V8Wkkzal2MTHuHA2hJdScqg1MCTXDrjD3s8qfvHEzII3MfojO/DE9OhfPENsWDhiMaLToMs0QKwy3h+2o8jiVOVobo3ncYiic7P301pN7yMglYQXARzOc4bqZcjQGQHfGSwZCvrv+seiSaRTLjzEqZO6Ggmxe11MjH09UD/YxyuZlmpcxMZRcD7Ku+hZL/RMGg/WDpQpyrn1DveTr4rr4Blw82YDVAwAA"
+        },
+        "runtime/RP/attachables/shaker.attachable.json": {
+          "before": "fc7114c8302d87c8e1ca40874832b4f54dff9cfafac14d9c7a88638c2579c98c",
+          "after": "24f6036ff424ae59ddb9fc98c5a175a57a186c24bfa9230058e42ed6f584042d",
+          "reason": "Select source-derived main/left held and use animations by bound item slot; preserve main-hand geometry/material and keep custom offhand native use as pending client acceptance.",
+          "beforeGzipBase64": "H4sIAAAAAAACA8VTy07DMBC89ytMDkClkhA4IFXAjyBkmXjTWHXs1N5CI9R/x46pm0cL3Lgl3tmZ2fH6c0ZIUmpTM6TvYKzQKlmSJE/v8vT+Nln4ci0UFIaVuGSIrKjYmwQH+nQ1V+VgCyMaDJ3h0B0LDgpFKcB4vjWTILi2hW6AInNKamkrtnbVRexAqHsM5Mcux7lJhaX6Q4GhRzHKVHt9dXTcSNaCuZon36z7KOcmBiOYtENNDiXbSvQCnhNbymRTOazFaJX4mstBIfBTQLqSQuFUEmGHWwPnFQ+A7MTk2ZvUxTqrxU5LvWqzUXxjT5GqFrbIYon6lM/5W4GuAU171t8BkK6RHoykwQh1/Jy+3z1MaZkSLmy3H6PBKy05LYWxHXdEDch7mMWoEyth+C+dAdPr7Mz+JtoHTaYJ2z4aJfD4V/ESD0kPcGLewq9v90cb9/C0IpeX5OJ6k9ZMqJBmd1dbC5RvTeeSPJNbD5uiarY7om7Ijyxz8vhE8jyPj2Iw4DnjMe6LifO/8ozCP5nA/wUQv18nd25AcbfihVZotJTO7OCmk2MhDdDhJoLkB6XA7bX2s/3sC8MOpGh+BQAA"
+        },
+        "runtime/RP/attachables/shaker_active.attachable.json": {
+          "before": "e887f166a6dd116a1166647d56c79e37e2581564ee62e663649d1b41ff99d00d",
+          "after": "58de2d1c9c8535062b82db34c96805074b33e4dce79a98e70c1da207778d7cc6",
+          "reason": "Select source-derived main/left held and use animations by bound item slot; preserve main-hand geometry/material and keep custom offhand native use as pending client acceptance.",
+          "beforeGzipBase64": "H4sIAAAAAAACA8VTXW/jIBB8z6+gfuiH1Np17+GkqO0fOZ0QhXWMgsGBTS5Wlf9+YBpix/E1b/dms7Mzs8PyuSAkq4xtGNIdWCeNzpYkK/OXMv/xnD2GciM1cMsqXDJExmv2ocCDPn3NVwU4bmWLsTMe+mMpQKOsJNjAt2YKpDCOmxYoMq+kl65ma7CUcZQ76JViI0IzICLXNHuFTS4dNX+0PzxJU6a7+7uT/1axDuzdQ/ZFfkiqfn6wkik3lhZQsa3CIBA4saNMtbXHOkyOSaj5VDSCuASkKyU1TiUR9ri1MK94BBQXAig+lOHropF7o8yqK2Ies54SVSMdL1KJhrDn/K3ANIC2m/V3BORrpEcj+dfFeH5Bdy8/p7RMSx+235azwWujBK2kdT13Qo3IB5jHs06spRXfdEbMoLM3+53oEDSZJu7+2SiRJ6zlr3RIBoAL8/Kwvv0fbf0zNJrc3pKb+03eMKljmv1dbR1QsbW9S/JOngNsimrY/oR6Iv9keSCvb6Qsy/QoRgPOGU9x30ycX8tzFv7FBP5fAOn79+TOLWjhV5wbjdYo5c2Objo7FfIIHW8iKHFUitxB67A4LP4CCYpXoIwFAAA="
+        },
+        "runtime/RP/attachables/shaker_pouring.attachable.json": {
+          "before": "b84e842af81e6bb2725ae38d7f0a9e550b3ea3581e6125301db076b46e13c8d2",
+          "after": "54a171fbc51817acd5396e20ecd74d823a28cf2679d90b6682f3e264d968ed3a",
+          "reason": "Select source-derived main/left held and use animations by bound item slot; preserve main-hand geometry/material and keep custom offhand native use as pending client acceptance.",
+          "beforeGzipBase64": "H4sIAAAAAAACA8VTQU7DMBC89xUmB6ASJAQOSBXwEYQsE28aq44d7A00Qv07dkzdpGmAG7fEOzszO15/LghJSm1qhvQdjBVaJSuS5Oltnt7dJFe+XAsFhWElrhgiKyr2KsGBPl3NVTnYwogGQ2c4dMeCg0JRCjCeb8MkCK5toRugyJySWtmKbcDQRrdGqHUvFToR6gET+VO303hLhaX6Q7nTgzhlqru8OEzQSNaBuVgm3+y7KOsSACOYtGNtDiVrJXoBz4kdZbKpHNZitEx8zeWiEPgpIF1LoXAqibDF1sC84h6QnUgge5W62GS12Gqp110WApn1FKlqYYsslqhPe87fGnQNaLpZf3tAukG6N5J+34zj5/T99n5Ky5RwYbt9ORq80pLTUhjbc0fUiHyAuTrqxEoY/ktnwAw6e7O/iQ5Bk2nC9h+NEnj8K3mOh2QAODFv4de3/6ONe4hakfNzcnb5ltZMqJBmf1etBcpb07skT+TGw6aomm0PqGvyI8uSPDySPM/joxgNOGc8xn02cf5XnqPwTybwfwHE75fJnRtQ3K14oRUaLaUzO7rp5FBIA3S8iSD5Xilwe63dYrf4AnKNkJuOBQAA"
+        },
+        "runtime/RP/textures/terrain_texture.json": {
+          "before": "36420467de7c66f961b4fe6c7f2ba8e85abfbe2b73626f52394245d0f8731815",
+          "after": "46797fb0157dfb71c29ae78d385cdcebc3edfaec673e1292bd4eb826183e01c9",
+          "reason": "Bind four existing original animation strips through their exact terrain atlas tiles; no invented texture or unrelated atlas entry changes.",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/ui/hud_screen.json": {
+          "before": "cf8cbf7d239df984bd55235d11aee932528fdeb23abda5d3e5529a1e158723c2",
+          "after": "a0480cfd196eef8ec66ec0d570eeaf28ce5f24c3b1de23098a69dce5e2516eb9",
+          "reason": "Remove the extra progress fade interval while preserving the one-tick cursor interpolation, slot expiry, shared Actionbar isolation and all other HUD controls; stop delivery still has a native packet/tick boundary.",
+          "beforeGzipBase64": "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"
         }
       }
     }

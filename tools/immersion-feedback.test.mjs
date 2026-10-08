@@ -22,7 +22,7 @@ test('looking at a barrel is silent until its optional status is explicitly enab
 });
 test('a rejection writes once and is never refreshed by crosshair/idle polling',()=>{
  const p=handle();clock.currentTick=0;display.showShakerMessage(p,'NEED_THREE_INGREDIENTS');
- assert.equal(p.writes[0].rawtext[1].translate,'kt.mixology.need_three');
+ assert.equal(p.writes[0].rawtext[1].translate,'message.kaleidoscope_tavern.shaker.amount_too_low');
  for(clock.currentTick=1;clock.currentTick<40;clock.currentTick++){
   display.showShakerMessage(p,'NEED_THREE_INGREDIENTS');display.showShakerSlots(p,{slots:[]});display.hideShakerHud(p);
  }
@@ -32,6 +32,13 @@ test('successful mixing has no text announcement and retains graphical progress/
  const p=handle();clock.currentTick=0;display.showShakerProgress(p,37);display.showShakerMessage(p,'READY');
  assert.equal(p.writes.length,1);assert.match(p.writes[0],/037 \/ 111/);
  clock.currentTick=10;display.showShakerSlots(p,{slots:[{color:0xff5555}]});assert.match(p.writes[1],/1:§c■/);
+});
+test('low-quality ingredients use the original translated chat without taking the Actionbar',()=>{
+ const p=handle(),chat=[];p.sendMessage=value=>chat.push(value);clock.currentTick=0;
+ display.showShakerMessage(p,'QUALITY_TOO_LOW');
+ assert.deepEqual(chat,[{translate:'message.kaleidoscope_tavern.shaker.brew_level_too_low'}]);
+ assert.deepEqual(p.writes,[]);
+ display.showShakerSlots(p,{slots:[]});assert.equal(p.writes.length,1);
 });
 test('leaving a target or clearing a session never erases a foreign Actionbar',()=>{
  const p=handle();clock.currentTick=0;p.tags.add(BARREL_HUD_SHOW_TAG);display.showBarrelHud(p,[{text:'barrel'}]);

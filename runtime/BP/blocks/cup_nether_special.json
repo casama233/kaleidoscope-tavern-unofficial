@@ -32,17 +32,11 @@
       },
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "geometry.kt_assets_a10.nether_special"
+          "identifier": "geometry.kt_runtime.item_sprite_nether_special"
         },
         "material_instances": {
           "*": {
-            "texture": "kt_assets_a10_block_mixology_nether_special",
-            "render_method": "alpha_test_single_sided",
-            "ambient_occlusion": 0.0,
-            "face_dimming": true
-          },
-          "unshaded": {
-            "texture": "kt_assets_a10_block_mixology_nether_special",
+            "texture": "kt_c3_nether_special",
             "render_method": "alpha_test_single_sided",
             "ambient_occlusion": 0.0,
             "face_dimming": false

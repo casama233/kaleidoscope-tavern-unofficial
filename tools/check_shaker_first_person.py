@@ -11,6 +11,14 @@ def check(root):
         'v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)',
         0,
         'v.is_first_person ? 0 : (-9 - this)'], 'Guard X/Z pose changes and preserve the source arm Y rotation'
+    left=data['animation.kt_mixology.player_shake_left']
+    assert not left.get('override_previous_animation',False)
+    assert set(left['bones'])=={'leftarm'}, 'An offhand use must not pose the other arm'
+    left_rotations=left['bones']['leftarm']['rotation']
+    assert left_rotations==[
+        'v.is_first_person ? 0 : (-112.5 + 45 * math.sin(q.life_time * 1718.87338539247) - this)',
+        0,'v.is_first_person ? 0 : (9 - this)']
+    assert data['animation.kt_mixology.player_idle_left']=={'animation_length':.05,'bones':{'leftarm':{'rotation':[0,0,0]}}}
     # Evaluate the exact shipped restricted expressions, not an independent target implementation.
     def evaluate(expr,first,seconds,current):
         if isinstance(expr,(int,float)):return expr
@@ -23,11 +31,12 @@ def check(root):
         seconds=tick/20
         for pose in ([0,0,0],[27,-39,-159],[-90,40,10]):
             # Java modifies X/Z, leaving the existing arm Y rotation intact.
-            target=[-112.5-45*math.sin(tick*1.5),pose[1],-9]
-            for axis,expr in enumerate(rotations):
-                assert evaluate(expr,True,seconds,pose[axis])==0
-                assert math.isclose(pose[axis]+evaluate(expr,False,seconds,pose[axis]),target[axis],abs_tol=1e-9)
-                cases+=1
+            for channels,sign in [(rotations,1),(left_rotations,-1)]:
+                target=[-112.5-sign*45*math.sin(tick*1.5),pose[1],-9*sign]
+                for axis,expr in enumerate(channels):
+                    assert evaluate(expr,True,seconds,pose[axis])==0
+                    assert math.isclose(pose[axis]+evaluate(expr,False,seconds,pose[axis]),target[axis],abs_tol=1e-9)
+                    cases+=1
     attach=json.loads((root/'runtime/RP/attachables/shaker.attachable.json').read_text())['minecraft:attachable']['description']
     assert attach['animations']['shake_first']=='animation.kt_mixology.shake_first'
     assert any('c.is_first_person' in a.get('shake_first','') for a in attach['scripts']['animate'])
@@ -44,7 +53,7 @@ def check(root):
         description=json.loads(path.read_text())['minecraft:attachable']['description']
         assert description['scripts']['animate']==expected_selectors,path
         assert description['geometry']['default']==geometry['description']['identifier'],path
-        assert description['animations']=={alias:'animation.kt_mixology.'+alias for alias in ('hold_first','hold_third','shake_first')},path
+        assert description['animations']=={alias+suffix:'animation.kt_mixology.'+alias+suffix for suffix in ('','_left') for alias in ('hold_first','hold_third','shake_first')},path
         for animation in description['animations'].values():
             assert animation in data,path
             assert set(data[animation]['bones'])<=set(bones),path

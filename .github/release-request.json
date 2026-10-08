@@ -1,14 +1,16 @@
 {
-  "version": "0.6.130",
-  "tag": "v0.6.130-beta.1",
-  "title": "森羅物語：酒館 0.6.130 測試版｜展示效率、原生效果與名稱路由",
+  "version": "0.6.131",
+  "tag": "v0.6.131-beta.1",
+  "title": "森羅物語：酒館 0.6.131 測試版｜操作還原、副手與動畫物品",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.130.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.131.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": true,
+  "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "5255ca1fb56c2a491de1204b964dcd46ff9e7446b1e6a0d360576c31087bfd82"
+  "expected_archive_sha256": "44c9301cc19bf21b99994fd0de060cafb9757cb140d1e8c6a63036ab0f230bbf",
+  "reviewed_runtime_source": "f08714307ea331be52a9240d8aa6473752325d1c",
+  "native_evidence_scope": "No native result is asserted in this pre-CI request. The exact PR native-persistence job records the selected inventory probe and the complete Tavern/World Liquor zero-player load, shaker migration and normal restart with explicit test-only observer overlays. Full private family, actual Player, client and LIVE acceptance remain pending."
 }

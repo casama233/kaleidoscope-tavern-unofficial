@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {world,system,Player,ItemStack,BlockPermutation,GameMode,EntitySwingSource,Potions} from '@minecraft/server';
-import {nativeStart,nativeStop,pourHeldShakerNow,pourIngredient,placeShaker,pickupShaker,clearHeldShaker,clearShakerOnSwing,readPortableItem,setMixologyRegistry,migrateShakerSlot,migrateShakerInventory,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {nativeStart,nativeStop,beforeShakerUse,pourHeldShakerNow,pourIngredient,placeShaker,placeCup,pickupShaker,clearHeldShaker,clearShakerOnSwing,readPortableItem,setMixologyRegistry,migrateShakerSlot,migrateShakerInventory,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {shakerPut} from '../runtime/BP/scripts/bedrock/immersion.js';
 import {naturalBreak} from '../runtime/BP/scripts/bedrock/natural-break.js';
 import {potionInput} from '../runtime/BP/scripts/bedrock/potions.js';
@@ -189,7 +189,7 @@ test('failed bottle spawn and failed station save both roll back ingredient and 
 test('unrelated items and a fourth input never debit inventory or advance station state',()=>{
  const f=stationFixture(4);for(let i=0;i<3;i++)pourIngredient(f.player,f.block);
  const before=world.getDynamicProperty(f.key),amount=f.player.inventory.getItem(0).amount;
- assert.throws(()=>pourIngredient(f.player,f.block),/SHAKER_FULL/);assert.equal(f.player.inventory.getItem(0).amount,amount);assert.equal(world.getDynamicProperty(f.key),before);
+ assert.equal(pourIngredient(f.player,f.block),false);assert.equal(f.player.inventory.getItem(0).amount,amount);assert.equal(world.getDynamicProperty(f.key),before);
  const g=stationFixture();g.player.inventory.setItem(0,new ItemStack('minecraft:stone',64));
  assert.throws(()=>pourIngredient(g.player,g.block),/NOT_SHAKER_INGREDIENT/);assert.equal(g.player.inventory.getItem(0).amount,64);assert.equal(world.getDynamicProperty(g.key),undefined);
 });
@@ -199,6 +199,34 @@ test('creative shaker placement keeps the exact carried stack; survival consumes
   placeShaker(f.player,target);assert.equal(f.player.dimension.getBlock(target).typeId,'kaleidoscope_tavern:shaker_station');
   if(mode===GameMode.Creative)assert.deepEqual(f.current(),before);else assert.equal(f.current(),undefined);
  }
+});
+test('Adventure can fill, pick up, shake and serve an existing station without gaining building permission',()=>{
+ const f=stationFixture(3);f.player.mode=GameMode.Adventure;
+ for(let i=0;i<3;i++)pourIngredient(f.player,f.block);
+ pickupShaker(f.player,f.block);const held=()=>f.player.inventory.getItem(0),start=system.currentTick;
+ assert.equal(readPortableItem(held()).state.slots.length,3);
+ nativeStart({source:f.player,itemStack:held()});system.currentTick=start+69;nativeStop({source:f.player,itemStack:held()});
+ assert.equal(readPortableItem(held()).state.result.item,'kaleidoscope_tavern:signature_cocktail');
+ const target=cup(f);pourHeldShakerNow(f.player,target);
+ assert.equal(target.typeId,'kaleidoscope_tavern:cup_signature_cocktail');assert.equal(readPortableItem(held()).state.slots.length,0);
+ const before=held(),position={...f.player.location,z:f.player.location.z+1};
+ assert.throws(()=>placeShaker(f.player,position),/GAME_MODE_LOCKED/);assert.deepEqual(held(),before);
+ assert.throws(()=>pickupShaker(f.player,f.block,{breaking:true}),/GAME_MODE_LOCKED/);
+ f.player.inventory.setItem(0,new ItemStack('kaleidoscope_tavern:empty_glassware'));
+ assert.throws(()=>placeCup(f.player,position),/GAME_MODE_LOCKED/);
+ assert.equal(f.player.dimension.getBlock(position).typeId,'minecraft:air');
+});
+test('actual air-use guards keep empty and completed shakers silent but retain the original partial-batch rejection',()=>{
+ const f=fixture();f.stop(18);const writes=[];f.player.onScreenDisplay.setActionBar=value=>writes.push(value);f.player.getBlockFromViewDirection=()=>undefined;
+ const original=f.current(),complete={...f.state,result:{item:'kaleidoscope_tavern:mystery_cocktail',carrier:'kaleidoscope_tavern:empty_glassware'}};
+ for(const state of [emptyShaker(),complete]){
+  const item=original.clone();item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,'quiet_'+serial));f.player.inventory.setItem(0,item);
+  const event={source:f.player,itemStack:item,cancel:false};beforeShakerUse(event);nativeStart(event);system.advance(1);
+  assert.equal(event.cancel,true);assert.deepEqual(writes,[]);assert.deepEqual(f.current(),item);
+ }
+ const item=original.clone();item.setDynamicProperty(PORTABLE_DATA,encodePortable({...emptyShaker(),slots:f.state.slots.slice(0,1)},'partial_'+serial));f.player.inventory.setItem(0,item);
+ const event={source:f.player,itemStack:item,cancel:false};beforeShakerUse(event);system.advance(1);
+ assert.equal(event.cancel,true);assert.equal(writes.length,1);assert.equal(writes[0].rawtext[1].translate,'message.kaleidoscope_tavern.shaker.amount_too_low');
 });
 
 function swing(f,{source=EntitySwingSource.Attack,sneaking=true,block,entities=[]}={}){

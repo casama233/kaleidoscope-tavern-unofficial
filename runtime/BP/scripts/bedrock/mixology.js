@@ -27,9 +27,8 @@ import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
 import {dispatchInstantHealth} from './instant-effects.js';
 import {faceOffset} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
-import {firstBlockGesture} from './block-gesture.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
-import {registerJavaBlockUseHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse,settleJavaBlockUse} from './java-placement-router.js';
 import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,cocktailEffect} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
@@ -37,11 +36,12 @@ import {barrelHudEnabled} from '../core/shaker-hud.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
 import {nativeShakerState,portableShakerState,readPlacedShaker,planPlacedShaker} from './shaker-storage.js';
 import {migrateLegacyShakerSlot} from '../core/legacy-shaker-migration.js';
+import {mainShakerHand,shakerHandItem,captureShakerHand,verifyShakerHand,shakerHandContainer} from './shaker-hands.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
 const shakerStore=new MixStore(world,validateShaker),cupStore=new MixStore(world,validateCup);
-const locks=new Locks(),uses=new Map(),releaseGuards=new Map();
+const locks=new Locks(),uses=new Map(),releaseGuards=new Map(),pendingBlockUses=new Map();
 let registry,sequence=0;
 export const MIX_BLOCKS=new Set([STATION,...['empty_glassware',...Object.values(COCKTAILS).map(x=>x.name)].map(x=>NS+':cup_'+x)]);
 export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],effectErrors:[],unsupportedEffects:{}};
@@ -49,7 +49,7 @@ export const nativeUseDiagnostics={starts:0,releases:0,cancelled:0,errors:[]};
 export function setMixologyRegistry(value){registry=value;configureBottleCategories(item=>registry.ingredientColor(item),item=>registry.previousIngredientColors(item));}
 function log(error){const code=error.code??String(error);mixologyDiagnostics.errors.push(code);if(mixologyDiagnostics.errors.length>12)mixologyDiagnostics.errors.shift();console.warn('[Tavern Mixology] '+code);}
 function safely(player,fn){try{return fn();}catch(error){log(error);if(player)showShakerMessage(player,error.code??'ERROR');}}
-function near(player,block){canWrite(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}
+function near(player,block){canInteract(player);check(block,'UNLOADED_TARGET');requireBlockReach(player,block.dimension,block.location);}
 function facing(player){return Math.floor((((player.getRotation().y+225)%360)+360)%360/90);}
 function perm(short,dir=0){return BlockPermutation.resolve(short.includes(':')?short:NS+':'+short,{[FACING]:dir});}
 function station(block){check(block?.typeId===STATION,'NOT_SHAKER');return shakerStore.load(shakerKey(block.dimension.id,block.location))??emptyShaker();}
@@ -122,9 +122,10 @@ function syncSignatureColor(item,color){
  if(old&&['red','green','blue'].every(k=>Math.abs(old[k]-rgb[k])<1/510))return false;
  dye.color=rgb;return true;
 }
-function commitBlock(player,store,key,next,take,outputs,block,newPermutation,inventoryOptions,native){
- const container=inventory(player),raw=store.raw(key),old=store.load(key),saved=waterSnapshot(block);
- const plan=planInventory(container,player.selectedSlotIndex,take,outputs,makeStack,inventoryOptions);
+function commitBlock(player,store,key,next,take,outputs,block,newPermutation,inventoryOptions,native,sourceHand){
+ const {container,index}=sourceHand?shakerHandContainer(player,sourceHand):{container:inventory(player),index:player.selectedSlotIndex};
+ const raw=store.raw(key),old=store.load(key),saved=waterSnapshot(block);
+ const plan=planInventory(container,index,take,outputs,makeStack,inventoryOptions);
  commitPickupInventory(plan,container,player,()=>{
   if(newPermutation)setWithWater(block,newPermutation);
   store.save(key,next,old?.revision??-1);
@@ -133,18 +134,21 @@ function commitBlock(player,store,key,next,take,outputs,block,newPermutation,inv
  native?.finish();
  return plan;
 }
-function replaceHeld(player,expected,next){
- const container=inventory(player),index=player.selectedSlotIndex,current=container.getItem(index);
- check(current?.typeId===expected.typeId&&current.getDynamicProperty(PORTABLE_DATA)===expected.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');
- container.setItem(index,next);
+function replaceHeld(player,expected,next,reference=mainShakerHand(player)){
+ verifyShakerHand(player,reference,expected);
+ const {container,index}=shakerHandContainer(player,reference);
+ const before=[],after=[];before[index]=expected;after[index]=next;
+ commitInventory({before,after,changes:[index]},container,()=>{
+  check(container.getItem(index)?.getDynamicProperty(PORTABLE_DATA)===next.getDynamicProperty(PORTABLE_DATA),'SHAKER_WRITE_MISMATCH');
+ },()=>{});
 }
-export function placeShaker(player,location){
- idle(player);const block=blockAt(player.dimension,location);near(player,block);
+export function placeShaker(player,location,reference=mainShakerHand(player)){
+ canWrite(player);idle(player);const block=blockAt(player.dimension,location);near(player,block);
  const key=shakerKey(block.dimension.id,location);
  return locks.with([key,player.id],()=>{
-  check(block.isAir&&!shakerStore.load(key),'SPACE_NOT_CLEAR');const item=hand(player),carried=readPortableItem(item);
+  check(block.isAir&&!shakerStore.load(key),'SPACE_NOT_CLEAR');const item=shakerHandItem(player,reference),carried=readPortableItem(item);
   const next=nativeShakerState(carried.state),stack=portable(next,carried.token,item,carried.state),native=planPlacedShaker(block,undefined,next,{stack});
-  commitBlock(player,shakerStore,key,next,placementTake(player),[],block,perm('shaker_station',facing(player)),undefined,native);
+  commitBlock(player,shakerStore,key,next,placementTake(player),[],block,perm('shaker_station',facing(player)),undefined,native,reference);
   syncShakerVisual(block);showShakerSlots(player,next);return next;
  });
 }
@@ -152,7 +156,11 @@ function candidate(id){return !!registry?.acceptsShakerInput?.(id);}
 export function pourIngredient(player,block){
  near(player,block);check(registry,'INITIALIZING');const key=shakerKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
-  const old=station(block),item=hand(player);check(item,'NO_INGREDIENT');let next;
+  const old=station(block);
+  // ShakerBlockEntity checks capacity first and quietly returns when full.
+  // Keep this ordinary no-op out of the rejection/error HUD path.
+  if(old.slots.length===3)return false;
+  const item=hand(player);check(item,'NO_INGREDIENT');let next;
   check(candidate(item.typeId),'NOT_SHAKER_INGREDIENT');
   if(POTION_ITEMS.has(item.typeId))next=addResolvedInput(old,potionInput(item));
   else{check(!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}
@@ -166,6 +174,7 @@ export function pourIngredient(player,block){
  });
 }
 export function pickupShaker(player,block,{breaking=false}={}){
+ if(breaking)canWrite(player);
  near(player,block);idle(player);const key=shakerKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
   if(!breaking)check(!hand(player),'EMPTY_HAND_REQUIRED');const state=station(block),item=placedShaker(block,state),native=planPlacedShaker(block,state,undefined,{legacyStack:item,give:[{stack:item,count:1,preferHand:!breaking}]});
@@ -179,41 +188,63 @@ export function pickupShaker(player,block,{breaking=false}={}){
 export function nativeStart(event){
  const player=event.source;if(event.itemStack?.typeId!==SHAKER||uses.has(player.id)||releaseGuards.has(player.id))return;
  safely(player,()=>{
-  canWrite(player);check(registry,'INITIALIZING');const item=hand(player);
-  check(item?.typeId===SHAKER&&item.getDynamicProperty(PORTABLE_DATA)===event.itemStack.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');
-  const carried=readPortableItem(item);check(!carried.state.result,'RESULT_PENDING');check(carried.state.slots.length===3,'NEED_THREE_INGREDIENTS');
-  uses.set(player.id,{player,slot:player.selectedSlotIndex,dimension:player.dimension.id,raw:item.getDynamicProperty(PORTABLE_DATA),start:system.currentTick,carried,recipe:registry.findShaker(carried.state.slots)});
-  nativeUseDiagnostics.starts++;startShakerHands(player);showShakerProgress(player,0);
+  canInteract(player);check(registry,'INITIALIZING');const reference=captureShakerHand(player,event.itemStack),item=shakerHandItem(player,reference);
+  const carried=readPortableItem(item);
+  if(carried.state.result||carried.state.slots.length===0)return;
+  check(carried.state.slots.length===3,'NEED_THREE_INGREDIENTS');
+  uses.set(player.id,{player,reference,dimension:player.dimension.id,raw:item.getDynamicProperty(PORTABLE_DATA),start:system.currentTick,remaining:event.useDuration,carried,recipe:registry.findShaker(carried.state.slots)});
+  nativeUseDiagnostics.starts++;startShakerHands(player,reference.side);showShakerProgress(player,0);
  });
 }
 function sameUse(player,use){
- const item=hand(player);
- return player.dimension.id===use.dimension&&player.selectedSlotIndex===use.slot&&item?.typeId===SHAKER&&item.getDynamicProperty(PORTABLE_DATA)===use.raw;
+ try{
+  const item=shakerHandItem(player,use.reference);
+  return player.dimension.id===use.dimension&&(use.reference.side==='off'||player.selectedSlotIndex===use.reference.slot)&&item?.typeId===SHAKER&&item.getDynamicProperty(PORTABLE_DATA)===use.raw;
+ }catch{return false;}
 }
 function cancelUse(id){
  const use=uses.get(id);if(!use)return;uses.delete(id);mixologyDiagnostics.cancelled++;
- stopShakerHands(use.player);hideShakerHud(use.player);
+ stopShakerHands(use.player,use.reference.side);hideShakerHud(use.player);
 }
 function finishUse(player,elapsed,automatic=false){
  const use=uses.get(player.id);if(!use)return;
- check(sameUse(player,use),'STALE_HAND');const current=hand(player);
+ check(sameUse(player,use),'STALE_HAND');const current=shakerHandItem(player,use.reference);
  const next=finishShake(use.carried.state,elapsed,registry.findShaker(use.carried.state.slots),registry);
  // Remove session before replacing the item: native stop/release may both fire.
- uses.delete(player.id);if(automatic)releaseGuards.set(player.id,{slot:use.slot,tick:system.currentTick});
+ uses.delete(player.id);const guard=automatic?{reference:use.reference,tick:system.currentTick,raw:use.raw}:undefined;
+ if(guard)releaseGuards.set(player.id,guard);
  try{
   // An aborted shake has no item transition. Retain even the original raw
   // property bytes and avoid publishing an unnecessary inventory change.
-  if(canonical(next)!==canonical(use.carried.state))replaceHeld(player,current,portable(next,use.carried.token,current,use.carried.state));
+  if(canonical(next)!==canonical(use.carried.state)){
+   const replacement=portable(next,use.carried.token,current,use.carried.state);
+   replaceHeld(player,current,replacement,use.reference);
+   if(guard)guard.afterRaw=replacement.getDynamicProperty(PORTABLE_DATA);
+  }
  }
- catch(error){stopShakerHands(player);hideShakerHud(player);throw error;}
- stopShakerHands(player);hideShakerHud(player);
+ catch(error){stopShakerHands(player,use.reference.side);hideShakerHud(player);throw error;}
+ stopShakerHands(player,use.reference.side);hideShakerHud(player);
  if(next.result){mixologyDiagnostics.completed++;finished(player);}
  return next;
 }
 export function nativeStop(event){
  const player=event.source;if(!player)return;
- releaseGuards.delete(player.id);const use=uses.get(player.id);if(!use)return;
- if(!sameUse(player,use)){cancelUse(player.id);return;}
+ const use=uses.get(player.id),guard=releaseGuards.get(player.id),item=event.itemStack;
+ if(use&&!sameUse(player,use)){cancelUse(player.id);releaseGuards.delete(player.id);return;}
+ let raw;try{raw=item?.getDynamicProperty(PORTABLE_DATA);}catch{return;}
+ if(guard&&(!item||(item.typeId===SHAKER&&(raw===guard.raw||raw===guard.afterRaw))))releaseGuards.delete(player.id);
+ if(!use)return;
+ // Native Stop can omit its item during a dimension change. An unidentified
+ // stop cannot complete a recipe; a stop for another stack cannot end this use.
+ if(!item){cancelUse(player.id);return;}
+ if(item.typeId!==SHAKER||raw!==use.raw)return;
+ // Start/Stop both report remaining native ticks. This catches a delayed
+ // duplicate for the same unchanged item after a quick restart. Permit the
+ // one-tick boundary between event delivery and the item-use countdown.
+ if(Number.isFinite(use.remaining)&&Number.isFinite(event.useDuration)){
+  const elapsed=use.remaining-event.useDuration;
+  if(elapsed<0||Math.abs(elapsed-(system.currentTick-use.start))>1)return;
+ }
  // A second stop signal has no session and therefore cannot remix or duplicate.
  safely(player,()=>{finishUse(player,Math.max(0,system.currentTick-use.start));nativeUseDiagnostics.releases++;});
 }
@@ -243,7 +274,7 @@ export function clearShakerOnSwing(event){
 }
 
 export function placeCup(player,location){
- const block=blockAt(player.dimension,location);near(player,block);const key=cupKey(block.dimension.id,location),item=hand(player);
+ canWrite(player);const block=blockAt(player.dimension,location);near(player,block);const key=cupKey(block.dimension.id,location),item=hand(player);
  check(isCupItem(item?.typeId),'NOT_CUP');check((block.isAir||waterAt(block))&&!cupStore.load(key),'SPACE_NOT_CLEAR');
  const state={schema:1,revision:0,item:item.typeId,facing:facing(player)};
  if(item.typeId===SIGNATURE)state.payload=signaturePayload(item);validateCup(state);
@@ -275,15 +306,15 @@ export function takeCup(player,block){
   pickupFeedback(player,block,plan);syncCupVisual(block);return state;
  });
 }
-export function pourHeldShakerNow(player,block){
+export function pourHeldShakerNow(player,block,reference=mainShakerHand(player)){
  near(player,block);idle(player);const key=cupKey(block.dimension.id,block.location);
  return locks.with([key,player.id],()=>{
-  const item=hand(player),carried=readPortableItem(item),tx=serveShaker(carried.state,registry),cup=getCup(block);
+  const item=shakerHandItem(player,reference),carried=readPortableItem(item),tx=serveShaker(carried.state,registry),cup=getCup(block);
   check(cup.item===EMPTY_CUP&&block.typeId===NS+':cup_empty_glassware','NEED_PLACED_EMPTY_GLASS');
   check(tx.result.carrier===EMPTY_CUP&&isCupItem(tx.result.item),'WRONG_SERVING_CONTAINER');check(ItemTypes.get(tx.result.item),'OUTPUT_PACK_MISSING');
   const next={schema:1,revision:cup.revision+1,item:tx.result.item,facing:cup.facing};
   if(tx.result.payload)next.payload=clone(tx.result.payload);validateCup(next);
-  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token,item,carried.state),count:1}],block,perm(cupBlock(next.item),next.facing));
+  commitBlock(player,cupStore,key,next,1,[{stack:portable(tx.state,carried.token,item,carried.state),count:1,exact:true,preferHand:true}],block,perm(cupBlock(next.item),next.facing),undefined,undefined,reference);
   syncCupVisual(block);playWorldSound(block.dimension,'bottle.fill',block.location,{volume:1,pitch:1});cocktailEffect(block,20);hideShakerHud(player);return next;
  });
 }
@@ -352,7 +383,8 @@ function tick(){
   try{
   const held=hand(player);
   if(held?.typeId===SIGNATURE&&syncSignatureColor(held,signaturePayload(held).color))inventory(player).setItem(player.selectedSlotIndex,held);
-  const guard=releaseGuards.get(player.id);if(guard&&(guard.slot!==player.selectedSlotIndex||system.currentTick-guard.tick>120))releaseGuards.delete(player.id);
+   const guard=releaseGuards.get(player.id);
+   if(guard){const guarded=shakerHandItem(player,guard.reference);if((guard.reference.side==='main'&&guard.reference.slot!==player.selectedSlotIndex)||system.currentTick-guard.tick>120||guarded?.typeId!==SHAKER||guarded.getDynamicProperty(PORTABLE_DATA)!==(guard.afterRaw??guard.raw))releaseGuards.delete(player.id);}
   const use=uses.get(player.id);
   if(use){
    if(!sameUse(player,use)){cancelUse(player.id);return;}
@@ -398,6 +430,48 @@ export function registerMixologyComponents({blockComponentRegistry:blocks,itemCo
  items.registerCustomComponent(NS+':portable_shaker',{});
  items.registerCustomComponent(NS+':cocktail_effects',{onCompleteUse:e=>completeCocktail(e)});
 }
+/** The actual native air-use guard; source empty/result cases are silent. */
+export function beforeShakerUse(event){
+ if(event.cancel||event.itemStack?.typeId!==SHAKER)return;
+ // Allow the Java use-on router to place/pour first. Air use alone starts shaking.
+ const hit=event.source.getBlockFromViewDirection({maxDistance:6});if(hit?.block)return;
+ try{const state=readPortableItem(event.itemStack).state;
+  if(state.result||state.slots.length!==3){
+   event.cancel=true;
+   if(!state.result&&state.slots.length>0)system.run(()=>showShakerMessage(event.source,'NEED_THREE_INGREDIENTS'));
+  }
+ }catch{event.cancel=true;}
+}
+function queueMixologyBlockUse(event,signature,work){
+ event.cancel=true;
+ const key=event.player.id+'/'+shakerKey(event.block.dimension.id,event.block.location),previous=pendingBlockUses.get(key);
+ if(previous?.signature===signature){event._javaUseClaim=previous.event._javaUseClaim;return;}
+ const pending={event,signature};pendingBlockUses.set(key,pending);
+ system.run(()=>safely(event.player,()=>{
+  let succeeded=false;
+  try{const result=work();succeeded=true;return result;}
+  finally{if(pendingBlockUses.get(key)===pending)pendingBlockUses.delete(key);settleJavaBlockUse(event,succeeded);}
+ }));
+}
+/** Off-hand use enters after the clicked block and routed main-hand item.
+ * Only the item actually reported by the native event may select this path.
+ * The shared router preserves the clicked position and foreign cancellation;
+ * its itemUse fallback reaches this same handler instead of inventing a key.
+ */
+export function offhandShakerUseOn(event){
+ if(event.cancel||event.itemStack?.typeId!==SHAKER||!event.block)return;
+ let reference;
+ try{reference=captureShakerHand(event.player,event.itemStack);}catch{return;}
+ if(reference.side!=='off')return;
+ const expected=event.itemStack.clone(),dimension=event.block.dimension,location={...event.block.location},typeId=event.block.typeId,face=event.blockFace??event.face;
+ queueMixologyBlockUse(event,'off/'+expected.getDynamicProperty(PORTABLE_DATA),()=>{
+  check(event.player.dimension.id===dimension.id,'DIMENSION_CHANGED');verifyShakerHand(event.player,reference,expected);
+  const block=blockAt(dimension,location);check(block?.typeId===typeId,'BLOCK_CHANGED');
+  const carried=readPortableItem(expected);
+  return block.typeId===NS+':cup_empty_glassware'&&carried.state.result?
+   pourHeldShakerNow(event.player,block,reference):placeShaker(event.player,plus(location,faceOffset(face)),reference);
+ });
+}
 export function installMixologyEvents(){
  registerJavaBlockUseFallback(candidate);
  registerJavaBlockUseHandler(event=>{
@@ -406,14 +480,14 @@ export function installMixologyEvents(){
   if(javaSecondaryBypass(event.player,held))return;
   if(block.typeId===STATION&&held&&!candidate(held))return;
   if(block.typeId!==STATION&&held)return;
-  event.cancel=true;if(!firstBlockGesture(event.player,block,`mixology-v38/${held||'empty'}/${snapshot.basic.slot}`))return;
   const dimension=block.dimension,location={...block.location},id=block.typeId;
-  system.run(()=>safely(event.player,()=>{
+  queueMixologyBlockUse(event,'main/'+canonical(snapshot),()=>{
    check(event.player.dimension.id===dimension.id,'DIMENSION_CHANGED');verifySnapshot(event.player,snapshot);const current=blockAt(dimension,location);check(current?.typeId===id,'BLOCK_CHANGED');
    if(id!==STATION)return takeCup(event.player,current);
    return held?pourIngredient(event.player,current):pickupShaker(event.player,current);
-  }));
+  });
  });
+ registerJavaOffhandUseOnHandler(offhandShakerUseOn);
  registerJavaItemUseOnRoute({id:'shaker-v22',matches:id=>id===SHAKER,
   plan:({block,face})=>({target:plus(block.location,faceOffset(face)),cup:block.typeId===NS+':cup_empty_glassware'}),
   execute:({player,block,plan})=>plan.cup&&readPortableItem(hand(player)).state.result?pourHeldShakerNow(player,block):placeShaker(player,plan.target)});
@@ -429,14 +503,7 @@ export function installMixologyEvents(){
  world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateShakerInventory(player);}));
  world.afterEvents.playerLeave.subscribe(({playerId})=>{uses.delete(playerId);releaseGuards.delete(playerId);clearShakerPlayer(playerId);});
  world.afterEvents.entityDie.subscribe(({deadEntity})=>cancelUse(deadEntity.id));
- world.beforeEvents.itemUse.subscribe(event=>{
-  if(event.cancel||event.itemStack?.typeId!==SHAKER)return;
-  // Allow the Java use-on router to place/pour first. Air use alone starts shaking.
-  const hit=event.source.getBlockFromViewDirection({maxDistance:6});if(hit?.block)return;
-  try{const state=readPortableItem(event.itemStack).state;
-   if(state.result||state.slots.length!==3){event.cancel=true;system.run(()=>showShakerMessage(event.source,state.result?'RESULT_PENDING':'NEED_THREE_INGREDIENTS'));}
-  }catch{event.cancel=true;}
- });
+ world.beforeEvents.itemUse.subscribe(beforeShakerUse);
  installImmersionCleanup();system.runInterval(tick,1);
  system.run(()=>{for(const player of world.getAllPlayers()){clearShakerPlayer(player);migrateShakerInventory(player);}});
 }

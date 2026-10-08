@@ -1,6 +1,27 @@
 # 森羅家族：當前修補與 PR 處置
 
-更新：2026-10-08。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
+更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
+
+## T131／W108：原版體驗查核後的逐步修補
+
+從已合併 T130 main `c4453491e2f52d4b4515dda0385db204aa892c97` 接續。
+[T131 說明](../RELEASE-NOTES-0.6.131.md) 集中記錄直接觸控、家具、Adventure、
+兩手雪克杯、靜默提示、四種動畫物品、感知音效、莫洛托夫及板面／農架交易。
+W108 精確依賴 T131，並補上 G118 新增、G119 保持相同 bytes 的兩個無碰撞展示 helper；最新 G119 不需更改
+runtime。歷史來源對照只追加新 witness，不改寫舊版證據或打包 runtime。
+
+本輪 source/API 定向回歸及凍結 archive 核對已執行。World Liquor
+[PR88](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/88)
+在 `.github/baseline-integration.json` 固定含工具修正的 Tavern 來源；
+[Tavern PR296](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/296)
+的五個 CI peer 則採同一個不可變 L108 提交。實際
+原生結果以確切 PR 的 native-persistence 證據為準；完整家族、client 及
+LIVE 不從 T130/W107 的既有成功推定。保留差距與下一步見新版 release
+notes 及 [當前還原度表](../PARITY-MATRIX.md)。
+
+相機 roll、完整內部 ItemStack、任意 RGB 陰影、穿牆輪廓、掉落3D／GUI2D
+及原版多行板面編輯器仍有平台或未驗證方案；沒有為了一比一標籤而移除
+資料保護、改掉自由瞄準或發出已知有 mip 破洞風險的資源包。
 
 ## T130／W107：視覺效率與可用 API
 

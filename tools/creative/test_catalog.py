@@ -309,7 +309,10 @@ class HistoricalProjectionTests(unittest.TestCase):
 
     def test_unaffected_asset_keeps_exact_bytes(self):
         projection = self.module.LegacyMenuProjection(TAVERN)
-        path = TAVERN/'runtime/BP/items/shaker.json'
+        # The T131 shaker item now has a reviewed offhand delta. Its original
+        # PNG remains an unaffected binary asset and must never be rewritten by
+        # the menu/native-pick or functional-history projections.
+        path = TAVERN/'runtime/RP/textures/kaleidoscope_tavern_jar/item/shaker.png'
         self.assertEqual(projection.read_bytes(path), path.read_bytes())
 
 if __name__ == '__main__':

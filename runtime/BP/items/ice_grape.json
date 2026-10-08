@@ -12,7 +12,6 @@
       "minecraft:display_name": {
         "value": "item.kaleidoscope_tavern:ice_grape.name"
       },
-      "minecraft:icon": "kt_c1_ice_grape",
       "minecraft:max_stack_size": 64,
       "minecraft:food": {
         "nutrition": 2,
@@ -26,6 +25,14 @@
       },
       "minecraft:compostable": {
         "composting_chance": 50
+      },
+      "minecraft:block_placer": {
+        "block": "kaleidoscope_tavern:item_display_ice_grape",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ]
       }
     }
   }

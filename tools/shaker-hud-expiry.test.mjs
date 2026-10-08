@@ -19,7 +19,7 @@ test('slot and progress sprites own finite expiry matched to their refresh caden
  assert.equal(slotSprites.length,51);assert.equal(progressSprites.length,113);
  const groups=[
   {sprites:slotSprites,waitName:'kt_mixology_sprite_wait',fadeName:'kt_mixology_sprite_fade',refresh:HUD_REFRESH_TICKS/20,fadeSeconds:0.1},
-  {sprites:progressSprites,waitName:'kt_mixology_progress_wait',fadeName:'kt_mixology_progress_fade',refresh:1/20,fadeSeconds:0.05}
+  {sprites:progressSprites,waitName:'kt_mixology_progress_wait',fadeName:'kt_mixology_progress_fade',refresh:1/20,fadeSeconds:0}
  ];
  for(const {sprites,waitName,fadeName,refresh,fadeSeconds} of groups){
   for(const sprite of sprites){
@@ -40,14 +40,13 @@ test('slot and progress sprites own finite expiry matched to their refresh caden
  assert.equal(hud.kt_mixology_expire.destroy_at_end,'kt_mixology_packet');
 });
 
-test('stopped progress becomes transparent within two ticks, independently of slot lifetime',()=>{
+test('stopped progress becomes transparent after its one-tick interpolation, independently of slot lifetime',()=>{
  const wait=hud.kt_mixology_progress_wait,fade=hud.kt_mixology_progress_fade;
- const alphaAt=seconds=>seconds<=wait.duration?1:
+ const alphaAt=seconds=>seconds<wait.duration?1:fade.duration===0?fade.to:
   fade.from+(fade.to-fade.from)*Math.min(1,(seconds-wait.duration)/fade.duration);
- assert(wait.duration+fade.duration<=2/20);
- for(const seconds of [0,0.025,0.049,0.05])assert.equal(alphaAt(seconds),1);
- assert(alphaAt(0.075)>0&&alphaAt(0.075)<1);
- for(const seconds of [0.1,0.15,0.6,1,30,600])assert.equal(alphaAt(seconds),0);
+ assert.equal(wait.duration+fade.duration,1/20);
+ for(const seconds of [0,0.025,0.049])assert.equal(alphaAt(seconds),1);
+ for(const seconds of [0.05,0.075,0.1,0.15,0.6,1,30,600])assert.equal(alphaAt(seconds),0);
  assert.equal(hud.kt_mixology_sprite_wait.duration,HUD_REFRESH_TICKS/20);
 });
 

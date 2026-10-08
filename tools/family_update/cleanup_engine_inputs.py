@@ -164,7 +164,6 @@ def plan(root, context, comparison_cache=None):
             if any(overlap(engine, p) for p in guards):
                 raise ValueError('Current source, evidence, policy or configuration reference')
             retention._safe_path(engine, root, mounts)
-            assert_idle(engine)
             # A managed candidate is never reclassified as an ordinary probe.
             managed = next((p for p in [engine, *list(engine.parents)[:2]]
                             if p != root and root in p.parents and
@@ -180,6 +179,7 @@ def plan(root, context, comparison_cache=None):
             proof = closed_report(engine, root, mounts)
             if not proof:
                 raise ValueError('No successful normally closed QA report')
+            assert_idle(engine)
             targets = [v for name in PAYLOAD
                        if not (engine / name).is_symlink() and
                        (v := target_metadata(engine / name, root, mounts)) is not None]

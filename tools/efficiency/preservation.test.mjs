@@ -2,18 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {gunzipSync} from 'node:zlib';
-import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 const baseline=process.env.TAVERN_BASELINE_ROOT;
 const current=path.resolve(import.meta.dirname,'../..');
-const reconciliation=JSON.parse(fs.readFileSync(path.join(current,'data/baseline-reconciliation.json'),'utf8')).files;
-const digest=value=>createHash('sha256').update(value).digest('hex');
+// The canonical projection validates the complete append-only functional chain
+// before the original preservation assertions. Do not silently ignore newer
+// reviewed deltas, or rewrite the original hashes to make a new feature pass.
+const projectionFiles=['bedrock/stateful-storage-router.js','core/cellar-cabinet.js','core/circular-rack.js','core/aim-hit.js','core/java-ambient-sampling.js','bedrock/decorations.js','bedrock/machines.js','bedrock/tipsy-visual.js','bedrock/board-text.js','bedrock/cellar-cabinet.js','bedrock/circular-rack.js'];
+let projected;
 const read=(root,file)=>{
- const bytes=fs.readFileSync(path.join(root,'runtime/BP/scripts',file)),row=path.resolve(root)===current?reconciliation['runtime/BP/scripts/'+file]:undefined;
- if(!row||row.before===null)return bytes.toString('utf8');
- assert.equal(digest(bytes),row.after,'Reconciled source changed: '+file);
- const before=gunzipSync(Buffer.from(row.beforeGzipBase64,'base64'));assert.equal(digest(before),row.before,'Reconciliation preimage corrupt: '+file);
- return before.toString('utf8');
+ if(path.resolve(root)!==current)return fs.readFileSync(path.join(root,'runtime/BP/scripts',file),'utf8');
+ projected??=JSON.parse(execFileSync(process.env.PYTHON??'python3',['-c',
+  "import json,sys;from pathlib import Path;sys.path.insert(0,'tools');from baseline_reference import previous_bytes;r=Path.cwd();print(json.dumps({p:previous_bytes(r,r/'runtime/BP/scripts'/p).decode() for p in json.loads(sys.argv[1])}))",
+  JSON.stringify(projectionFiles)],{cwd:current,encoding:'utf8',maxBuffer:4*1024*1024}));
+ assert.ok(Object.hasOwn(projected,file),'Missing projected preservation input: '+file);
+ return projected[file];
 };
 test('aim resolution and all transaction/redstone routing remain byte-identical',{skip:!baseline},()=>{
  const old=read(baseline,'bedrock/stateful-storage-router.js'),now=read(current,'bedrock/stateful-storage-router.js');

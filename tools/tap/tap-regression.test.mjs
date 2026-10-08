@@ -18,7 +18,9 @@ export async function fixture({synchronous=false}={}){
  let nextJob=1,naturalBreak,failWrite,failBlock,serial=0;
  const system={currentTick:0,runTimeout(fn,delay=1){const id=nextJob++;jobs.set(id,{fn,tick:this.currentTick+Math.max(1,delay)});return id;},run(fn){return this.runTimeout(fn,1);},clearRun(id){jobs.delete(id);}};
  function advance(ticks=1){for(let n=0;n<ticks;n++){system.currentTick++;for(const[id,job]of [...jobs])if(job.tick<=system.currentTick){jobs.delete(id);job.fn();}}}
- const world={gameRules:{doTileDrops:true},getDynamicProperty:k=>records.get(k),setDynamicProperty(k,value){if(failWrite?.(k,value)){failWrite=undefined;throw Error('injected storage failure');}if(value===undefined)records.delete(k);else records.set(k,value);}};
+ const eventCallbacks={hurt:[],effect:[],load:[]};
+ const signal=key=>({subscribe:fn=>eventCallbacks[key].push(fn)});
+ const world={beforeEvents:{entityHurt:signal('hurt'),effectAdd:signal('effect')},afterEvents:{entityLoad:signal('load')},gameRules:{doTileDrops:true},getDynamicProperty:k=>records.get(k),setDynamicProperty(k,value){if(failWrite?.(k,value)){failWrite=undefined;throw Error('injected storage failure');}if(value===undefined)records.delete(k);else records.set(k,value);}};
  class Permutation{
   constructor(id,states={}){this.type={id};this.states={...states};}
   getState(k){return this.states[k];}
@@ -71,7 +73,7 @@ export async function fixture({synchronous=false}={}){
  const key=machineKey(dimension.id,origin),drinkKey=bottleKey(dimension.id,bottle.location);
  const {FLUIDS}=await importFile('data/fluids.js');
  machines.TEST_ACCESS.store.save(key,state,-1);machines.setRegistry({allFluids:()=>FLUIDS});
- return {machines,block,dimension,bottle,tap,key,drinkKey,records,changes,sounds,particles,system,advance,ItemStack,Permutation,naturalBreak,
+ return {machines,block,dimension,bottle,tap,key,drinkKey,records,changes,sounds,particles,system,advance,ItemStack,Permutation,naturalBreak,eventCallbacks,
   state:()=>JSON.parse(records.get(key)),display:()=>records.has(drinkKey)?JSON.parse(records.get(drinkKey)):undefined,
   items:()=>entities.filter(e=>e.typeId==='minecraft:item'&&!e.removed).map(e=>e.stack),
   failStorage(fn){failWrite=fn;},failPermutation(fn){failBlock=fn;},writeState(s){records.set(key,JSON.stringify(s));}};
@@ -120,4 +122,44 @@ test('failed tap removal restores the block and inventory; genuine later destruc
 });
 test('genuine natural tap destruction still drops exactly one',async()=>{
  const f=await fixture();f.tap.setType('minecraft:air');f.advance(5);assert.deepEqual(f.items().map(s=>[s.typeId,s.amount]),[[NS+':tap',1]]);
+});
+
+// Exercise the production registry, synchronization and registered callbacks.
+// Script dependency doubles only; no simulated Minecraft players.
+test('author 1.0.1 external fluids: atomic owner validation, liquid amount, replacement and helper isolation',async()=>{
+ const {ExtensionRegistry}=await import('../../runtime/BP/scripts/core/registry.js');
+ const {FLUIDS}=await import('../../runtime/BP/scripts/data/fluids.js');
+ const registry=new ExtensionRegistry({fluids:FLUIDS});
+ const bundle={api:1,source:'visual_addon',version:'1.0.0',fluids:[{id:'visual_addon:tea',filled:'visual_addon:tea_bucket',title:{en_US:'Tea'},visuals:{barrel:'visual_addon:tea_surface',pressing_tub:'visual_addon:press_surface'}}]};
+ registry.install(bundle);
+ const revision=registry.revision;
+ const invalid=structuredClone(bundle);invalid.fluids[0].visuals.barrel='other_addon:mob';
+ assert.throws(()=>registry.install(invalid),/INVALID_FLUID_VISUAL_OWNER/);
+ assert.equal(registry.revision,revision);
+ const f=await fixture();f.machines.setRegistry(registry);
+ const core=f.dimension.getBlock({x:0,y:0,z:0});
+ const state=f.state();state.open=true;state.fluid='visual_addon:tea';state.amount=4000;
+ const foreign=f.dimension.spawnEntity('other_addon:pet',core.location);
+ foreign.setDynamicProperty('kt:anchor',f.key);
+ f.machines.syncVisuals(core,state);
+ const visible=()=>f.dimension.getEntities().filter(e=>e.typeId==='visual_addon:tea_surface');
+ const surface=visible()[0];assert.ok(surface);assert.equal(visible().length,1);
+ const amounts=[];surface.setProperty=(key,value)=>amounts.push([key,value]);
+ state.amount=1000;f.machines.syncVisuals(core,state);
+ assert.equal(visible()[0],surface);assert.deepEqual(amounts,[['kt_art:amount',1000]]);
+ f.machines.installMachineEvents();
+ for(const [signal,key] of [['hurt','hurtEntity'],['effect','entity']]){
+  for(const [target,expected] of [[surface,true],[foreign,false]]){
+   const event={[key]:target,cancel:false};for(const fn of f.eventCallbacks[signal])fn(event);
+   assert.equal(event.cancel,expected);
+  }
+ }
+ state.open=false;f.machines.syncVisuals(core,state);assert.equal(visible().length,0);assert.equal(foreign.removed,false);
+ state.open=true;f.machines.syncVisuals(core,state);assert.equal(visible().length,1);
+ registry.install({...bundle,version:'1.0.1',fluids:[{...bundle.fluids[0],visuals:{barrel:'visual_addon:new_surface'}}]});
+ f.machines.syncVisuals(core,state);assert.equal(visible().length,0);
+ assert.equal(f.dimension.getEntities({type:'visual_addon:new_surface'}).length,1);
+ state.amount=0;f.machines.syncVisuals(core,state);
+ assert.equal(f.dimension.getEntities({type:'visual_addon:new_surface'}).length,0);
+ assert.equal(foreign.removed,false);
 });

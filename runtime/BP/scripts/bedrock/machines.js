@@ -23,7 +23,7 @@ import {facingForYaw,facingYaw} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {inspectTapSource,finishSourceTap} from './tap-sources.js';
 import {FLUIDS} from '../data/fluids.js';
-import {RUNTIME_VISUALS} from '../data/visuals.js';
+import {MACHINE_VISUAL_MARKER,liquidVisual,isMachineVisual,protectMachineVisual} from '../core/machine-visuals.js';
 const CORE=NS+':barrel_core',PART=NS+':barrel_part',TUB=NS+':pressing_tub',TAP=NS+':tap',TAP_OPEN=NS+':open',TUB_FACE='minecraft:block_face',PLACED_EMPTY=NS+':bottle_empty',WATER_BOTTLE=NS+':bottle_water',BOTTLE_FACING=NS+':facing',CARDINAL='minecraft:cardinal_direction',CAULDRON='minecraft:cauldron',CAULDRON_LIQUID='cauldron_liquid',FILL_LEVEL='fill_level';
 const OWN_BLOCKS=new Set([CORE,PART,TUB,TAP]);
 const TUB_GRAPES=Object.freeze({
@@ -83,23 +83,23 @@ function intact(core){
  if(core.typeId===TUB)return true;const cardinal=barrelCardinal(core);if(!cardinal)return false;
  return barrelCells(core.location).every(p=>{const b=blockAt(core.dimension,p);if(!b||b.typeId!==(p.core?CORE:PART)||barrelCardinal(b)!==cardinal)return false;return p.core||['x','y','z'].every(k=>b.permutation.getState(NS+':d'+k)===p['d'+k]);});
 }
-function nearbyVisuals(core){return core.dimension.getEntities({families:['kt_runtime_visual'],location:{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},maxDistance:1});}
+function nearbyVisuals(core){return core.dimension.getEntities({location:{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},maxDistance:1}).filter(isMachineVisual);}
 export function syncVisuals(core,state){
  const key=keyFor(core),wanted=[];
  if(state.kind==='barrel')wanted.push(NS+':barrel_'+(state.open?'open':'closed')+'_visual');
  wanted.push(...barrelIngredientVisuals(state));
  wanted.push(...pressingIngredientVisuals(state));
  const fluid=registry.allFluids().find(f=>f.id===state.fluid);
- if(state.amount>0&&fluid?.rigSuffix&&(state.kind!=='barrel'||state.open))wanted.push(NS+':rig_liquid_'+state.kind+'_'+fluid.rigSuffix+'_visual');
+ const liquid=liquidVisual(fluid,state);if(liquid)wanted.push(liquid);
  const existing=nearbyVisuals(core).filter(e=>e.getDynamicProperty('kt:anchor')===key);
  const chosen=new Map();
  for(const e of existing){if(!wanted.includes(e.typeId)||chosen.has(e.typeId)||e.getDynamicProperty('kt:token')!==state.token)e.remove();else chosen.set(e.typeId,e);}
  for(const type of wanted){let entity=chosen.get(type);
   const shell=type===NS+':barrel_open_visual'||type===NS+':barrel_closed_visual';
   const yaw=shell?facingYaw(bottleFacingFromCardinal(barrelCardinal(core))):0;
-  if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},{initialRotation:yaw});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}
+  if(!entity){entity=core.dimension.spawnEntity(type,{x:core.location.x+.5,y:core.location.y,z:core.location.z+.5},{initialRotation:yaw});entity.setDynamicProperty('kt:anchor',key);entity.setDynamicProperty(MACHINE_VISUAL_MARKER,true);entity.setDynamicProperty('kt:token',state.token);entity.setDynamicProperty('kt:core',JSON.stringify(core.location));}
   else if(shell)entity.setRotation({x:0,y:yaw});
-  if(type.includes('rig_liquid_'))entity.setProperty('kt_art:amount',state.amount);
+  if(type===liquid)entity.setProperty('kt_art:amount',state.amount);
   configureBarrelIngredients(entity,core,state);
   configurePressingIngredients(entity,core,state);
  }
@@ -404,6 +404,8 @@ function protectPressFall(event){
  });
 }
 export function installMachineEvents(){
+ world.beforeEvents.entityHurt?.subscribe(protectMachineVisual);
+ world.beforeEvents.effectAdd?.subscribe(protectMachineVisual);
  diagnostics.fallDamageCancellation=!!world.beforeEvents.entityHurt;
  world.beforeEvents.entityHurt?.subscribe(protectPressFall);
 
@@ -426,7 +428,7 @@ export function installMachineEvents(){
  });
  registerProtectedBreakRoute({id:'machines',isBlock:block=>OWN_BLOCKS.has(block?.typeId),guard:guarded,recover:({player,block})=>dismantle(player,block)});
  if(world.afterEvents.entityLoad)world.afterEvents.entityLoad.subscribe(({entity})=>{
-  if(!RUNTIME_VISUALS.includes(entity.typeId))return;
+  if(!isMachineVisual(entity))return;
   system.run(()=>{try{const raw=entity.getDynamicProperty('kt:core'),key=entity.getDynamicProperty('kt:anchor');if(!raw||!key)return;const p=JSON.parse(raw),block=blockAt(entity.dimension,p);if(!block)return;
    const s=store.load(key);if(!s||![TUB,CORE].includes(block.typeId)||s.token!==entity.getDynamicProperty('kt:token')){entity.remove();if(s&&[TUB,CORE].includes(block.typeId))safeVisuals(block,s);}
   }catch(e){warn(e,'entityLoad');}});

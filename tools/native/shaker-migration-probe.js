@@ -48,6 +48,17 @@ async function effectRecipients(d,phase){
   check(resolveThrownDrinkImpact({projectile,getEntityHit:()=>({entity:target})}),'native impact adapter rejected');
   return {count:storageProjectileDiagnostics.nativeEffects-count,result:instantEffectDiagnostics.last};
  }
+ function recipientComponents(entity){
+  const row={type:entity.typeId,valid:entity.isValid,componentIds:null,healthAvailable:null,health:null,families:null,inanimate:null,mob:null,errors:{}};
+  try{row.componentIds=entity.getComponents().map(component=>component.typeId).sort();}catch(error){row.errors.components=String(error);}
+  try{const component=health(entity);row.healthAvailable=!!component;
+   if(component)row.health={currentValue:component.currentValue,effectiveMin:component.effectiveMin,effectiveMax:component.effectiveMax};
+  }catch(error){row.errors.health=String(error);}
+  try{const component=entity.getComponent('minecraft:type_family');
+   if(component){row.families=component.getTypeFamilies();row.inanimate=component.hasTypeFamily('inanimate');row.mob=component.hasTypeFamily('mob');}
+  }catch(error){row.errors.families=String(error);}
+  return row;
+ }
  try{
   // Keep the short-lived vanilla actors above a real floor during the one-tick
   // native damage-event observation. No entity prototype or API is replaced.
@@ -90,16 +101,24 @@ async function effectRecipients(d,phase){
 
   owner.remove();
   // Mojang/bedrock-samples@46ba6ea985fb5a92d79a9419198f10dda14c199d
-  // defines xp_orb as summonable, health=5 and family=inanimate. Verify the
-  // actual engine still supplies the health-bearing nonliving counterexample.
-  const viewer=spawn(sourceType),orb=spawn('minecraft:xp_orb',{x:26,y:300,z:24}),cow=spawn('minecraft:cow',{x:28,y:300,z:24}),stand=spawn('minecraft:armor_stand',{x:30,y:300,z:24}),cod=spawn('minecraft:cod',{x:26,y:300,z:25});
-  check(health(orb)?.currentValue>0&&orb.getComponent('minecraft:type_family')?.hasTypeFamily('inanimate')===true&&
-   !orb.getComponent('minecraft:type_family')?.hasTypeFamily('mob'),'xp orb is not the required native health-bearing nonliving witness');
-  check(health(cod)?.currentValue>0&&!cod.getComponent('minecraft:type_family')?.hasTypeFamily('mob'),'cod is not the required living witness without the Native mob family');
+  // defines xp_orb with health=5/family=inanimate, but a JSON component does
+  // not prove Script API exposure. Record actual values before/after one tick.
+  // The explicit observer helper is the mandatory health-positive, non-mob
+  // class-policy witness; this does not claim Java class reflection.
+  const viewer=spawn(sourceType),orb=spawn('minecraft:xp_orb',{x:26,y:300,z:24}),helper=spawn('living_effect_qa:health_helper',{x:26,y:300,z:23}),cow=spawn('minecraft:cow',{x:28,y:300,z:24}),stand=spawn('minecraft:armor_stand',{x:30,y:300,z:24}),cod=spawn('minecraft:cod',{x:26,y:300,z:25});
+  const immediateXp=recipientComponents(orb);
+  await pause(1);
+  const settledXp=recipientComponents(orb),helperState=recipientComponents(helper),codState=recipientComponents(cod);
+  out('case',{mode:'native-vision-recipient-components',phase,immediateXp,settledXp,testOnlyHealthHelper:helperState,cod:codState});
+  check(helperState.valid&&helperState.health?.currentValue>0&&helperState.inanimate===true&&helperState.mob===false,
+   'test-only helper is not the required native health-bearing non-mob witness');
+  check(codState.valid&&codState.health?.currentValue>0&&codState.mob===false,'cod is not the required living witness without the Native mob family');
+  check(settledXp.valid,'native XP exclusion witness disappeared');
   const sounds=customEffectDiagnostics.visionSounds;
   check(pulseVision(viewer,0)===3,'Vision did not select exactly the native cow, armor stand and familyless cod');
   check(pulseVision(viewer,0)===3&&customEffectDiagnostics.visionSounds===sounds+1,'Vision shared-target feedback repeated');
-  out('case',{mode:'native-vision-living-class',phase,excluded:orb.typeId,excludedHasHealth:true,excludedHealth:health(orb).currentValue,excludedHasMobFamily:false,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
+  out('case',{mode:'native-vision-living-class',phase,excluded:helper.typeId,excludedHasHealth:true,excludedHealth:helperState.health.currentValue,excludedHasMobFamily:false,testOnlyHealthWitness:true,
+   additionalExcluded:orb.typeId,xpHealthApiAvailable:settledXp.healthAvailable,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
    outline:customEffectDiagnostics.visionOutline,recipientFunctionOnly:true,playerEffectEntrance:false,client:false});
  }finally{
   world.afterEvents.entityHurt.unsubscribe(capture);world.beforeEvents.entityHurt.unsubscribe(cancel);

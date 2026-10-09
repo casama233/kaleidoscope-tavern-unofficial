@@ -24,7 +24,8 @@ def main():
    tree,rows=fingerprint(original);source_trees[label][kind]=tree
    extras={}
    if label=='tavern' and kind=='BP':
-    extras={'scripts/living-effects-probe.js':ROOT/'tools/native/shaker-migration-probe.js','entities/living-probe.json':ROOT/'tools/native/living-probe-entity.json'}
+    extras={'scripts/living-effects-probe.js':ROOT/'tools/native/shaker-migration-probe.js','entities/living-probe.json':ROOT/'tools/native/living-probe-entity.json',
+            'entities/health-helper-probe.json':ROOT/'tools/native/health-helper-entity.json'}
    actual={f.relative_to(staged).as_posix() for f in staged.rglob('*') if f.is_file()}
    assert actual==set(rows)|set(extras),(label,kind,'staged file set differs')
    for name in rows:

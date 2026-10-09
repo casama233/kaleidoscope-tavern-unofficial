@@ -68,12 +68,19 @@ BP/RP，核對實際附屬註冊、原生雪克杯 metadata migration、PUT 恢�
 
 首輪 [CI 37865527379](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37865527379)
 保留原始失敗：封裝 guard 仍指向舊 callback 名稱；原生 observer 誤把船當作
-帶生命值的排除見證。修正只涉及檢查與 observer，凍結 runtime 不變。
-感知改用[官方固定來源的原版經驗球](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/behavior_pack/entities/xp_orb.json)，
-在實際引擎要求真正 Native health、`inanimate` family 且沒有 `mob`；
-原版鱈魚仍驗證無 `mob` family 的生物會入選。Java 1.21.1 的官方 bytecode
-亦確認 `ExperienceOrb` 直接繼承 `Entity`；測試沿用原生實體與既有 observer。
-修正後的完整首次／重啟結果以 PR 最新提交的 CI 為準。
+帶生命值的排除見證。[第二輪 CI](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37866278725)
+的封裝已通過，但經驗球的複合前置判斷仍失敗。
+[官方固定樣本](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/behavior_pack/entities/xp_orb.json)
+有 health／inanimate，Java 1.21.1 bytecode 亦確認 `ExperienceOrb` 直接繼承
+`Entity`；這些不等於目標 Script API 已暴露同樣元件。
+
+新版 observer 逐項記錄經驗球在生成即時及一 tick 後的實際元件、生命值、
+family 與讀取錯誤，未知值保留 null。另加入明列的測試專用 health helper，
+硬性要求真正 Native health > 0、`inanimate` 且非 `mob`，保留 health-only
+錯誤判定必須失敗的反例；這是 adapter policy 測試，不是 Java class 反射。
+原版鱈魚仍須明確無 `mob` 且入選，helper 與原版經驗球均排除，精確三目標
+及一次回饋保持不變。新增測試實體列入 overlay 清單與摘要，凍結 runtime
+不變。完整首次／重啟結果以 PR 最新提交的 CI 為準，兩次原始失敗不改寫。
 
 W109 只同步 BP/RP、module、payload 和 T132 相依身分，保留其既有玩法與
 G119 helper 修復。兩庫互用不可變提交；版本、全包 digest 與發布讀回由

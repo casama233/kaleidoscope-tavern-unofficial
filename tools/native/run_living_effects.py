@@ -69,10 +69,12 @@ def main():
     host = world/'behavior_packs/tavern'
     shutil.copy2(args.probe, host/'scripts/living-effects-probe.js')
     shutil.copy2(ROOT/'tools/native/living-probe-entity.json', host/'entities/living-probe.json')
+    shutil.copy2(ROOT/'tools/native/health-helper-entity.json', host/'entities/health-helper-probe.json')
     with (host/'scripts/main.js').open('a') as output:
         output.write("\n// Disposable native observer; not release content.\nimport './living-effects-probe.js';\n")
     overlays = {'scripts/living-effects-probe.js': hashlib.sha256(args.probe.read_bytes()).hexdigest(),
                 'entities/living-probe.json': hashlib.sha256((ROOT/'tools/native/living-probe-entity.json').read_bytes()).hexdigest(),
+                'entities/health-helper-probe.json': hashlib.sha256((ROOT/'tools/native/health-helper-entity.json').read_bytes()).hexdigest(),
                 'scripts/main.js': 'Append only the declared disposable observer import after verifying the complete copied runtime.'}
     for kind, filename in [('BP', 'world_behavior_packs.json'), ('RP', 'world_resource_packs.json')]:
         (world/filename).write_text(json.dumps(manifests[kind], indent=2)+'\n')

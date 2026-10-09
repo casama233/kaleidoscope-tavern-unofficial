@@ -1,5 +1,6 @@
 """Reviewed author identity changes, confined to a fresh stopped-world copy."""
 from pathlib import Path
+import re
 from family_update.common import CONFIG, T, R, W, read, sha, hashes, atomic, report_ref
 
 
@@ -14,6 +15,9 @@ def validate_plan(spec, receipt, original):
     old = {p['uuid']: p for p in original['packs']}
     new = {p['uuid']: p for p in receipt['packs']}
     swaps = spec['packs']
+    assert all(re.fullmatch(r'[0-9a-f]{64}', value or '') for value in
+               [spec['old_archive_sha256'], spec['new_archive_sha256'],
+                *(p['old_manifest_sha256'] for p in swaps)]), 'Migration requires complete SHA256 values'
     assert len(swaps) == 2 and {p['side'] for p in swaps} == {'behavior', 'resource'}
     before = {p['old_uuid'] for p in swaps}; after = {p['new_uuid'] for p in swaps}
     assert len(before) == len(after) == 2 and not before & after

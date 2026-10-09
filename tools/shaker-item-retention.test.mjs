@@ -14,6 +14,8 @@ import {emptyShaker,addInput,shakerKey} from '../runtime/BP/scripts/core/mixolog
 import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable,decodePortable} from '../runtime/BP/scripts/core/immersion.js';
 import {rawItemLore} from '../runtime/BP/scripts/core/cocktail-tooltip.js';
+import {restoreStackableIngredient} from '../runtime/BP/scripts/core/ingredient-metadata.js';
+import {makeStack} from '../runtime/BP/scripts/bedrock/transactions.js';
 
 function shakerComponents(){
  const blocks=new Map();registerMixologyComponents({blockComponentRegistry:{registerCustomComponent:(id,callbacks)=>blocks.set(id,callbacks)},itemComponentRegistry:{registerCustomComponent(){}}});return blocks;
@@ -259,12 +261,44 @@ test('non-player destruction keeps the whole prepared shaker state in its one dr
  assert.equal(world.getDynamicProperty(shakerKey(block.dimension.id,target)),undefined);
 });
 
-test('decorated ingredient inputs remain unchanged because plain descriptors cannot preserve their metadata',()=>{
+test('decorated non-stackable inputs remain unchanged when native equality cannot prove their portable metadata',()=>{
  for(const decorate of [item=>{item.nameTag='Named batch';},item=>item.setLore(['Foreign note']),item=>item.setDynamicProperty('other:opaque','exact'),item=>{item.meta.canPlaceOn=['minecraft:stone'];},item=>{item.keepOnDeath=true;},item=>{item.lockMode='slot';}]){
   const f=stationFixture(),registry=new ExtensionRegistry({recipes:SHAKER_RECIPES,itemExists:()=>true});registry.install({api:1,source:'carrier_guard',version:'1.0.0',itemTagChanges:[{item:'minecraft:milk_bucket',add:['kaleidoscope_tavern:cocktail_ingredient']}]});setMixologyRegistry(registry);
   const item=new ItemStack('minecraft:milk_bucket',1);decorate(item);f.player.inventory.setItem(0,item);const before=f.player.inventory.getItem(0);
   assert.throws(()=>pourIngredient(f.player,f.block),/METADATA_ITEM_REJECTED/);
   assert.deepEqual(f.player.inventory.getItem(0),before);assert.equal(world.getDynamicProperty(f.key),undefined);assert.equal(world.getDynamicProperty(nativeItemKey(f.key)),undefined);assert.equal(f.drops().length,0);
+ }
+});
+test('named and decorated stackable ingredients survive placement, pickup, independent copies and shake completion',()=>{
+ const f=stationFixture(1),original=makeStack('kaleidoscope_tavern:plum_wine_q4',2);
+ original.nameTag='本週梅酒';original.setLore([{text:'保留這份原料的備註'}]);original.setCanPlaceOn(['minecraft:stone']);
+ f.player.inventory.setItem(0,original);
+ let next=pourIngredient(f.player,f.block);
+ assert.equal(f.player.inventory.getItem(0).amount,1);assert.equal(f.player.inventory.getItem(0).nameTag,original.nameTag);
+ assert.equal(next.slots[0].metadata.name,original.nameTag);
+ const restored=restoreStackableIngredient(next.slots[0].item,next.slots[0].metadata,makeStack);
+ assert.equal(restored.isStackableWith(original),true);
+ next=pourIngredient(f.player,f.block);
+ f.player.inventory.setItem(0,makeStack('kaleidoscope_tavern:plum_wine_q4',1));next=pourIngredient(f.player,f.block);
+ pickupShaker(f.player,f.block);const carried=f.player.inventory.getItem(0),copy=carried.clone();
+ assert.equal(readPortableItem(carried).state.slots[0].metadata.name,original.nameTag);
+ assert(rawItemLore(carried).some(row=>JSON.stringify(row).includes(original.nameTag)));
+ const placed={...f.player.location,z:f.player.location.z+1};placeShaker(f.player,placed);pickupShaker(f.player,f.player.dimension.getBlock(placed));
+ nativeStart({source:f.player,itemStack:f.player.inventory.getItem(0)});system.currentTick+=69;nativeStop({source:f.player,itemStack:f.player.inventory.getItem(0)});
+ assert(readPortableItem(f.player.inventory.getItem(0)).state.result);
+ assert.equal(readPortableItem(copy).state.result,null);
+ assert.deepEqual(readPortableItem(copy).state.slots[0].metadata,next.slots[0].metadata);
+});
+test('a failed metadata reconstruction or native mismatch rejects before debiting the ingredient',()=>{
+ for(const failure of ['setter','hidden-data','managed-lore-hidden-data']){
+  const f=stationFixture(),original=makeStack('kaleidoscope_tavern:plum_wine_q4',1);
+  if(failure!=='managed-lore-hidden-data'){original.nameTag='保留原物';original.setLore([{text:'Unreadable or hidden native data'}]);}
+  if(failure.includes('hidden-data'))original.meta.unknown_native_data={opaque:'must survive'};
+  f.player.inventory.setItem(0,original);const before=f.player.inventory.getItem(0),writes=f.player.inventory.writes,set=ItemStack.prototype.setLore;
+  if(failure==='setter')ItemStack.prototype.setLore=function(){throw Error('INJECTED_LORE_RESTORE_FAILURE');};
+  try{assert.throws(()=>pourIngredient(f.player,f.block),/METADATA_ITEM_REJECTED|INJECTED_LORE_RESTORE_FAILURE/);}finally{ItemStack.prototype.setLore=set;}
+  assert.deepEqual(f.player.inventory.getItem(0),before);assert.equal(f.player.inventory.writes,writes);
+  assert.equal(world.getDynamicProperty(f.key),undefined);assert.equal(world.getDynamicProperty(nativeItemKey(f.key)),undefined);assert.equal(f.drops().length,0);
  }
 });
 test('decorated potions are rejected intact while plain potions retain their native identity',()=>{

@@ -8,7 +8,9 @@ from pathlib import Path
 import base64,gzip,hashlib,json
 from functools import lru_cache
 
-# Only the exact non-script assets reviewed for cocktail, locale and item visuals.
+# Only exact reviewed non-script assets and opt-in command entry points.
+# T133 visual semantics are checked by the board, source-texel and animation
+# generators; no directory wildcard admits unrelated resources or functions.
 # New arbitrary blocks/UI/locales are not admitted by a directory wildcard.
 COCKTAIL_ASSET_PATHS=frozenset({
  'runtime/BP/blocks/'+name+'.json' for name in (
@@ -28,7 +30,30 @@ COCKTAIL_ASSET_PATHS=frozenset({
    'runtime/RP/attachables/shaker.attachable.json',
    'runtime/RP/attachables/shaker_active.attachable.json',
    'runtime/RP/attachables/shaker_pouring.attachable.json',
-   'runtime/RP/textures/terrain_texture.json'})
+   'runtime/RP/textures/terrain_texture.json',
+   'runtime/RP/animations/board_glyph_line.animation.json',
+   'runtime/RP/entity/board_glyph_visual.entity.json',
+   'runtime/RP/entity/rig_signature_color.entity.json',
+   'runtime/RP/entity/runtime_barrel_ingredients_0.entity.json',
+   'runtime/RP/entity/runtime_barrel_ingredients_1.entity.json',
+   'runtime/RP/entity/runtime_barrel_ingredients_2.entity.json',
+   'runtime/RP/entity/runtime_barrel_ingredients_3.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_1.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_2.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_3.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_4.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_5.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_6.entity.json',
+   'runtime/RP/entity/runtime_pressing_tub_ingredients_7.entity.json',
+   'runtime/RP/entity/runtime_signature_cup.entity.json',
+   'runtime/RP/models/entity/board_glyph_line.geo.json',
+   'runtime/RP/render_controllers/board_glyph_visual.render_controllers.json',
+   'runtime/RP/render_controllers/runtime_barrel_ingredients.render_controllers.json',
+   'runtime/RP/render_controllers/runtime_pressing_ingredients.render_controllers.json',
+   'runtime/RP/render_controllers/signature_tint.json',
+   'runtime/BP/functions/kt_tipsy_motion_off.mcfunction',
+   'runtime/BP/functions/kt_tipsy_motion_on.mcfunction'})
 
 @lru_cache(maxsize=4)
 def rows(root):

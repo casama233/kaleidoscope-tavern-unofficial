@@ -4,6 +4,7 @@ import {TIPSY_ID} from '../core/tipsy-visual.js';
 import {externalEffectSource,externalEffectDefinition} from '../core/extension-content.js';
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
+import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,EffectTypes,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
 import {createVisionFeedback} from '../core/vision-feedback.js';
@@ -16,12 +17,12 @@ const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map
 const visionFeedback=createVisionFeedback();let visionNativeChecked=false,visionNativeType;
 export const TOMB_PICKUP_UNLOCK='kaleidoscope_tavern:tomb_pickup_unlock';
 export const ARDENT_COLLISION_COUNT='kaleidoscope_tavern:ardent_heat_collision_count';
-export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,visionOutline:'unchecked',grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
+export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,visionOutline:'unchecked',grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,statusAura:statusAuraDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};
 function error(e){customEffectDiagnostics.errors.push(String(e));if(customEffectDiagnostics.errors.length>16)customEffectDiagnostics.errors.shift();}
 function indexFastPlayer(p,state,before=state){
  // Keep an expired Ardent row pending until its per-tick finalization runs.
  // A same-tick status read by another consumer must not discard that work.
- if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels')||before.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'))fastPlayers.set(p.id,p);
+ if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels'||row.id==='kaleidoscope_tavern:grass_stealth')||before.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'))fastPlayers.set(p.id,p);
  else fastPlayers.delete(p.id);
 }
 function write(p,state){
@@ -30,14 +31,14 @@ function write(p,state){
  const previous=cached?.tick===now&&cached.player===p?cached.raw:p.getDynamicProperty(CUSTOM_STATUS_KEY);
  if(previous!==raw)p.setDynamicProperty(CUSTOM_STATUS_KEY,raw);
  const isPlayer=p.typeId==='minecraft:player';tracks.set(p.id,{player:p,tick:now,isPlayer});
- statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state,isPlayer});indexFastPlayer(p,state);
+ statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state,isPlayer});indexFastPlayer(p,state);indexStatusAura(p,state.entries);
 }
 function statusWindow(p){
  const cached=statusSnapshots.get(p.id),now=system.currentTick;
  if(cached?.tick===now&&cached.player===p)return cached;
  const raw=p.getDynamicProperty(CUSTOM_STATUS_KEY),before=readStatus(raw),track=tracks.get(p.id);
  const state=advanceStatus(before,track?Math.max(0,now-track.tick):0);
- const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state,before);return snapshot;
+ const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state,before);indexStatusAura(p,state.entries);return snapshot;
 }
 export function statusNow(p){return statusWindow(p).state;}
 export function clearCustomEffects(p){let previous;try{previous=readStatus(p.getDynamicProperty(CUSTOM_STATUS_KEY));}catch{previous={schema:1,entries:[]};}forgetTipsyVisual(p.id);write(p,{...previous,schema:1,entries:[],legacyClosed:true});tracks.delete(p.id);heelsSteps.delete(p.id);}
@@ -70,7 +71,7 @@ export function applyCustomEffect(p,row){
   try{d.playSound('kt_java.effect.zenith',here,{volume:1,pitch:1});}catch(e){error(e);}
   p.teleport(at,{keepVelocity:true});
   try{d.playSound('kt_java.effect.zenith',at,{volume:1,pitch:1});}catch(e){error(e);}
-  p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.teleports++;return true;
+  applyNativeStatusWithAura(p,'hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.teleports++;return true;
  }
  // Bloody Mary is a LivingEntity kill effect in Java. Its timer uses the
  // existing loaded-living tracks; the other own adapters remain player-only.
@@ -104,6 +105,7 @@ export function tickExternalLivingEffects(){
 function restoreLivingEffectTrack(entity){
  if(entity?.typeId==='minecraft:player'||!livingEffectEntity(entity))return;
  try{
+  restoreStatusAura(entity);
   const raw=entity.getDynamicProperty(CUSTOM_STATUS_KEY);if(raw===undefined)return;
   const state=readStatus(raw);if(!state.entries.length)return;
   // A new loaded handle starts a new online clock. Do not subtract unloaded time.
@@ -117,17 +119,30 @@ function stealthPlant(block){
  try{tagged=block.hasTag?.('kaleidoscope_tavern:grass_stealth_plants')===true;}catch{}
  return grassStealthPlant(block.typeId,growth,tagged);
 }
-export function pulseGrassStealth(p){
+/** Eligibility is observed every tick; exhaustion retains Java's ten-tick clock.
+ * Never remove or overwrite a pre-existing Invisibility effect. A one-tick
+ * native lease expires on its own when crouching, grass or the custom status
+ * ends, including milk, death and script reload. This does not claim the Java
+ * renderer cancellation (equipment included) or Mob.setTarget(null) is present.
+ */
+export function updateGrassStealthVisibility(p){
  try{
-  if(p?.typeId!=='minecraft:player'||p.isSneaking!==true||!activeStatus(statusNow(p),'kaleidoscope_tavern:grass_stealth'))return false;
+  if(p?.typeId!=='minecraft:player'||p.isValid===false||p.isSneaking!==true||!activeStatus(statusNow(p),'kaleidoscope_tavern:grass_stealth'))return false;
   const pos={x:Math.floor(p.location.x),y:Math.floor(p.location.y),z:Math.floor(p.location.z)},feet=p.dimension.getBlock(pos),head=p.dimension.getBlock({...pos,y:pos.y+1});
   if(!grassStealthEligible({sneaking:p.isSneaking,feetEligible:stealthPlant(feet),headEligible:stealthPlant(head)}))return false;
+  if(!p.getEffect('invisibility')){
+   p.addEffect('invisibility',1,{amplifier:0,showParticles:false});
+   noteSyntheticAuraInvisibility(p);
+  }
+  return true;
+ }catch(e){error(e);return false;}
+}
+export function tickGrassStealth(){for(const p of fastPlayers.values())updateGrassStealthVisibility(p);}
+export function pulseGrassStealth(p){
+ try{
+  if(!updateGrassStealthVisibility(p))return false;
   const exhaustion=p.getComponent?.('minecraft:player.exhaustion');
   if(exhaustion)exhaustion.setCurrentValue(Math.min(exhaustion.effectiveMax,exhaustion.currentValue+.1));
-  // Native invisibility reduces new mob acquisition while the player is concealed.
-  // Current Entity.target is documented read-only and pre-release, not a stable
-  // setter for clearing existing targets. This remains an invisibility adapter.
-  p.addEffect('invisibility',12,{amplifier:0,showParticles:false});
   customEffectDiagnostics.grassStealthPulses++;customEffectDiagnostics.grassStealthEligible++;return true;
  }catch(e){error(e);return false;}
 }
@@ -280,7 +295,7 @@ export function tickArdentHeat(){
   }
  }catch(e){error(e);}
 }
-function finishArdentHunger(p){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
+function finishArdentHunger(p){try{applyNativeStatusWithAura(p,'hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}
 function pulseCountdown(p,before,state,id,interval,apply){
  const previous=activeStatus(before,id),current=activeStatus(state,id);
  if(!previous)return;
@@ -368,10 +383,11 @@ export function tickCustomEffects(){
   }
  }catch(e){error(e);}
  for(const [id,t]of tracks)if(t.isPlayer&&!seen.has(id)){try{write(t.player,statusNow(t.player));}catch{/* disconnected player handle may be invalid */}tracks.delete(id);}
- for(const [id,snapshot] of statusSnapshots)if(snapshot.isPlayer&&!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);}
+ for(const [id,snapshot] of statusSnapshots)if(snapshot.isPlayer&&!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);forgetStatusAura(id);}
  for(const[id,t]of deaths)if(system.currentTick-t>100)deaths.delete(id);
 }
 export function installCustomEffects(){
+ installStatusAura();
  system.afterEvents.scriptEventReceive.subscribe(event=>{
   if(event.id!=='kaleidoscope_tavern:effect_apply'||event.sourceType!==ScriptEventSource.Server||event.message.length>1024)return;
   try{const row=JSON.parse(event.message),definition=externalEffectDefinition(row.effect);if(!definition)return;
@@ -388,15 +404,15 @@ export function installCustomEffects(){
 
  world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
  world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));
- world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);visionFeedback.forget(e.removedEntityId);});
+ world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);forgetStatusAura(e.removedEntityId);visionFeedback.forget(e.removedEntityId);});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
- world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else statusNow(e.player);}catch(x){error(x);}});
- world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});
+ world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);forgetStatusAura(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else{restoreStatusAura(e.player);statusNow(e.player);}}catch(x){error(x);}});
+ world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}forgetStatusAura(e.playerId);tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});
  // Initialize players already online when scripts start; spawn handles new joins.
  system.run(()=>{
-  for(const p of world.getAllPlayers())try{statusNow(p);}catch(e){error(e);}
+  for(const p of world.getAllPlayers())try{restoreStatusAura(p);statusNow(p);}catch(e){error(e);}
   for(const id of ['overworld','nether','the_end'])try{
    const dimension=world.getDimension(id);
    for(const entity of dimension.getEntities({families:['mob']}))restoreLivingEffectTrack(entity);
@@ -407,5 +423,6 @@ export function installCustomEffects(){
  system.runInterval(tickCustomEffects,5);
  system.runInterval(tickArdentHeat,1);
  system.runInterval(tickHighHeels,1);
+ system.runInterval(tickGrassStealth,1);
 }
 export const CUSTOM_TEST={tracks,deaths,heelsSteps,fastPlayers,statusSnapshots,ardentArmorOrBare};

@@ -2,6 +2,22 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
+## T133／W110：多代理原料、沉浸與視覺修復
+
+本批完整整合 [T132 PR297](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/297)
+與 [W109 PR89](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/89)
+的原有來源，再以新版本完成原生機器原料、可攜可堆疊 metadata、容器／
+取料交易、粒子外觀所有權、草叢退出與微醺 opt-in，以及板面描邊、機器
+原料動畫和任意 RGB 源圖明暗。具體範圍和原生／真人界線集中在
+[T133 說明](../RELEASE-NOTES-0.6.133.md) 和 [還原度表](../PARITY-MATRIX.md)。
+
+三位代理分工後交叉審查，原始作者之外的審查補上 doTileDrops、資料
+保護繞過、逐步回滾、粒子保存／外部刷新及跨 helper 動畫時鐘問題。
+舊 T131／T132 witness 不改寫；W110 精確配對 T133，G119 內容不變。
+最終 PR、CI 與 archive 使用同一候選身分。純 roll、穿牆輪廓、全身
+隱藏／清除仇恨、任意三份非堆疊原料、原生編輯器和掉落顯示上下文仍
+分開追蹤；實際私人家族／LIVE 連線未取得，沒有把零玩家載入當作部署。
+
 ## T132／W109：多代理同步修復
 
 從已交付 T131 `e02c19da3a8e29d7574c5922e142ef99775dd643` 和 W108

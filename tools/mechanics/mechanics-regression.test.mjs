@@ -24,7 +24,7 @@ async function fixture(){
  const context=vm.createContext({console:{warn:x=>errors.push(x)},Math,JSON,Map,Set,Uint8Array});
  const scripts=path.join(RT,'BP/scripts'),real=new Set(['core/util.js','core/storage.js','core/machines.js','bedrock/machines.js']);
  const modules=new Map();
- const explicit={world,system,GameMode:{Survival:'Survival',Creative:'Creative',Adventure:'Adventure',Spectator:'Spectator'},FLUIDS:[],RUNTIME_VISUALS:{},BottleStore:class{},barrelIngredientVisuals:()=>[],pressingIngredientVisuals:()=>[],configureBarrelIngredients(){},configurePressingIngredients(){}};
+ const explicit={world,system,GameMode:{Survival:'Survival',Creative:'Creative',Adventure:'Adventure',Spectator:'Spectator'},FLUIDS:[],RUNTIME_VISUALS:{},BottleStore:class{},barrelIngredientVisuals:()=>[],pressingIngredientVisuals:()=>[],configureBarrelIngredients(){},configurePressingIngredients(){},machineIngredientPlan:()=>({apply(){},rollback(){},finish(){}})};
  function synthetic(id,names){const vals=Object.fromEntries(names.map(k=>[k,k in explicit?explicit[k]:()=>undefined]));return new vm.SyntheticModule(names,function(){for(const[k,v]of Object.entries(vals))this.setExport(k,v);},{context,identifier:id});}
  const imports=new Map();
  for(const relative of real){const s=fs.readFileSync(path.join(scripts,relative),'utf8');for(const m of s.matchAll(/import\s*\{([^}]+)\}\s*from\s*['"]([^'"]+)['"]/g)){const id=m[2].startsWith('.')?path.resolve(scripts,path.dirname(relative),m[2]):m[2];const names=imports.get(id)??new Set();for(const n of m[1].split(','))names.add(n.trim().split(/\s+as\s+/)[0]);imports.set(id,names);}}

@@ -1,6 +1,32 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.132 / World Liquor 0.1.109
+## Current repair candidate: Tavern 0.6.133 / World Liquor 0.1.110
+
+[T133 scope](RELEASE-NOTES-0.6.133.md) includes all T132 repairs below and the
+following source changes. Forge main remains `c4ec1880`; maintained NeoForge
+branches remain separate references. Grilling G119 is unchanged. Source/API
+fixtures, native zero-player observations and actual client acceptance are
+different evidence levels.
+
+| Area | Current implementation | Remaining scope |
+| --- | --- | --- |
+| Machine ingredients | Complete counted native clones, metadata-sensitive merging, legacy adoption, original extraction, pressing/fermentation consumption and checked destruction rollback. | Native first/restart results belong to the exact paired CI run; arbitrary crash/chunk/foreign mutation and actual Player flows remain separate. |
+| Portable shaker ingredients | Bounded self-contained stackable metadata with reconstruction and bidirectional native equality before debit; T132 source-hand/echo/retry fixes retained. | Three arbitrary decorated nonstackable items/potions remain unsupported and rejected intact. |
+| Machine operation | Original Creative fluid source retention, direct-hand output, overflow delivery, Adventure ordinary use and doTileDrops protection. | Complete third-party FluidUtil capabilities and native input emission remain unproven. |
+| Board glow | Black foreground/cream outline, dark colored outline, source 0.5-pixel offsets, separate distant foreground submission and board-root 48-block cull. | Colored outline camera-vs-feet 16-block boundary, first-person spyglass and native multiline editor remain different. |
+| Machine animated ingredients | All four barrel and eight pressing display paths use original ice-grape frames, timing and interpolation. | Current native render, global atlas phase and client resource-stack review pending. |
+| Arbitrary signature RGB | Retained 336-color atlas plus source-texel shaded RGB fallback in the existing helper; exact geometry allocations and source coverage checks. | New material/render path, transparent order, PBR/Vibrant Visuals and complete display-context acceptance pending. |
+| Status body particles | Original custom colors, Java float32 weighting, source emission probability and spell particle resources; durable ownership for provably host-created native effects. | Unknown external ambient/particle visibility is not inferred; full mixed-source and rendered-client equivalence remains unverified. |
+| Grass / Tipsy | One-tick non-overwriting invisibility lease; explicit yaw opt-in and no default aim movement. | Whole player renderer cancellation, target clearing and pure camera roll remain unimplemented. |
+
+Private BSM/current quality checkpoint/LIVE world access is unavailable in this
+workspace. Complete-family BDS, stopped-world rehearsal, guard, backup and
+deployment/readback remain pending under the existing standing authorization.
+No source-only result certifies the user-facing experience as fully identical.
+
+## Retained T132 repair scope
+
+### Tavern 0.6.132 / World Liquor 0.1.109
 
 [T132 release scope](RELEASE-NOTES-0.6.132.md) is the current source-repair entry.
 Forge main `c4ec1880` remains the original comparison target. The shared instant

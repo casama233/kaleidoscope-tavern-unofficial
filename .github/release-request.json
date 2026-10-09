@@ -1,16 +1,15 @@
 {
-  "version": "0.6.132",
-  "tag": "v0.6.132-beta.1",
-  "title": "森羅物語：酒館 0.6.132 測試版｜濺射、交易保存與指南動畫",
+  "version": "0.6.133",
+  "tag": "v0.6.133-beta.1",
+  "title": "森羅物語：酒館 0.6.133 測試版｜原料保存、狀態粒子與原版視覺",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.132.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.133.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "8893b5e0b227b5383274a9901c7c28d823d646d5e49745390ea434822bcf3670",
-  "reviewed_runtime_source": "054897478be3c358f8b39317627aace943681a10",
-  "native_evidence_scope": "No native result is asserted in this pre-CI request. The exact PR native-persistence job records selected inventory persistence and complete Tavern/World Liquor zero-player registration, shaker migration, splash and Vision recipient observations with normal restart and explicit test-only observer overlays. Impact event envelopes are test inputs, not physical collisions. API acknowledgement is separate from delivered damage. Full private family, actual Player, client and LIVE acceptance remain pending."
+  "expected_archive_sha256": "8b93d95ab9467df829b05e49ccfacf16ab58d35a0f8c1df13e3c64484cb3d376",
+  "native_evidence_scope": "No pre-CI native result is asserted. The exact PR native-persistence lane loads full Tavern/World Liquor with declared disposable observer overlays, verifies real addon registration, native shaker/ingredient/machine metadata, owned status leases, splash and Vision, then normally stops and restarts with zero players. Client rendering, actual Player input, complete private family, saved LIVE world and deployment/readback remain pending."
 }

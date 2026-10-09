@@ -1,5 +1,13 @@
 # Maintained changes
 
+## 0.6.133
+
+- Retain the complete T132 repair set and preserve counted native machine ingredients, checked portable stackable metadata, source container exchanges, direct-hand extraction and Adventure use.
+- Roll back failed native saves, input debits and destruction drops; honor doTileDrops and keep missing adopted storage fail-closed.
+- Add source status-body particles with bounded native appearance ownership; shorten grass invisibility to a one-tick lease and make the aim-changing tipsy adapter explicitly opt-in.
+- Restore board glow outlines, animated ice-grape machine contents and source-shaded arbitrary RGB liquid without additional entities.
+- Pair with World Liquor 0.1.110 and optional Grilling 2.8.119. [Release scope](docs/RELEASE-NOTES-0.6.133.md) separates source repairs, native observations, remaining platform gaps and pending client/LIVE acceptance.
+
 ## 0.6.132
 
 - Share Java instant-health/harm dispatch with splash delivery, including source potion immunity, per-recipient policy snapshots, owner attribution and compatible addon declarations.

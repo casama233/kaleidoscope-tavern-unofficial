@@ -9,6 +9,7 @@ export function validateMachine(s){
  integer(s.amount,0,s.kind==='barrel'?4000:1000);check(typeof s.fluid==='string'&&((s.amount===0&&s.fluid==='')||(s.amount>0&&id(s.fluid))),'STATE_FLUID');
  check(Array.isArray(s.slots)&&s.slots.length===(s.kind==='barrel'?4:1),'STATE_SLOTS');
  for(const x of s.slots)if(x){id(x.id);integer(x.count,1,s.kind==='barrel'?16:64);}
+ if(s.nativeItems!==undefined)check(s.nativeItems===1&&s.slots.some(Boolean),'STATE_NATIVE_ITEMS');
  if(s.batch){
   check(s.kind==='barrel'&&s.amount===0&&!s.fluid&&s.slots.every(x=>!x),'STATE_BATCH');const b=s.batch;
   id(b.recipeId);id(b.carrier);integer(b.remaining,1,16);integer(b.quality,1,6);integer(b.unitTime,20,72000);integer(b.ticksRemaining,-97,432000);
@@ -42,29 +43,31 @@ export function interact(state,command,registry,fluids){
  }else if(command.action==='remove_ingredient'){
   check(!s.batch&&s.open,'LID_CLOSED');let index=-1;for(let i=s.slots.length-1;i>=0;i--)if(s.slots[i]){index=i;break;}check(index>=0,'NO_INGREDIENT');
   const item=s.slots[index],limit=s.kind==='pressing_tub'?(command.removeCount??1):item.count;integer(limit,1,64);const count=Math.min(item.count,limit);
-  tx.give=[{id:item.id,count}];item.count-=count;if(item.count===0)s.slots[index]=null;
+  tx.give=[{id:item.id,count,preferHand:true,overflow:'drop'}];tx.ingredientSlot=index;item.count-=count;if(item.count===0)s.slots[index]=null;
  }else if(command.action==='use'){
   check(held,'EMPTY_HAND');check(s.open&&!s.batch,'LID_CLOSED');
   const inbound=fluids.find(f=>f.filled===held.id);
   if(inbound&&s.kind==='barrel'){
    check(!s.slots.some(Boolean),'REMOVE_INGREDIENTS_FIRST');check(!s.fluid||s.fluid===inbound.id,'MIXED_FLUID');
    check(s.amount+1000<=4000,'FLUID_FULL');
-   s.fluid=inbound.id;s.amount+=1000;tx.take=1;tx.give=[{id:inbound.empty,count:1}];
+   s.fluid=inbound.id;s.amount+=1000;tx.take=command.creative?0:1;tx.give=[{id:inbound.empty,count:1,preferHand:true,overflow:'drop'}];tx.fluidTransfer=true;
   }else if(held.id==='minecraft:bucket'&&(s.kind==='barrel'||s.amount>=1000)){
    check(!s.slots.some(Boolean)||s.kind==='pressing_tub','REMOVE_INGREDIENTS_FIRST');check(s.amount>=1000,'NOT_ENOUGH_FLUID');
-   const f=fluids.find(f=>f.id===s.fluid);check(f,'FLUID_UNAVAILABLE');tx.take=1;tx.give=[{id:f.filled,count:1}];s.amount-=1000;if(!s.amount)s.fluid='';
+   const f=fluids.find(f=>f.id===s.fluid);check(f,'FLUID_UNAVAILABLE');tx.take=command.creative?0:1;tx.give=[{id:f.filled,count:1,preferHand:true,overflow:'drop'}];tx.fluidTransfer=true;s.amount-=1000;if(!s.amount)s.fluid='';
   }else{
    // Java accepts ordinary non-fluid ingredients; unmatched recipes become vinegar.
-   // Do not turn the recipe index into an input whitelist. Metadata checks remain
-   // the adapter's responsibility so ID-only slots never erase native item data.
+   // The adapter supplies native stack compatibility and retains the complete
+   // original ItemStack in counted storage. Recipe IDs remain only a projection.
    if(s.kind==='barrel')check(s.amount===4000,'FILL_BARREL_FIRST');
-   const cap=s.kind==='barrel'?16:Math.min(64,held.maxAmount??64);
-   let slot=s.slots.findIndex(x=>x?.id===held.id&&x.count<cap);if(slot<0)slot=s.slots.findIndex(x=>!x);
+   const cap=Math.min(s.kind==='barrel'?16:64,held.maxAmount??64),compatible=command.compatibleSlots;
+   if(compatible!==undefined)check(Array.isArray(compatible)&&compatible.length===s.slots.length&&compatible.every(x=>typeof x==='boolean'),'BAD_INGREDIENT_COMPATIBILITY');
+   let slot=s.slots.findIndex((x,i)=>x?.id===held.id&&x.count<cap&&(compatible===undefined||compatible[i]));if(slot<0)slot=s.slots.findIndex(x=>!x);
    check(slot>=0,'INGREDIENT_SLOTS_FULL');const n=Math.min(cap-(s.slots[slot]?.count??0),held.count);integer(n,1,cap);
-   s.slots[slot]={id:held.id,count:(s.slots[slot]?.count??0)+n};tx.take=n;
+   s.slots[slot]={id:held.id,count:(s.slots[slot]?.count??0)+n};tx.take=n;tx.ingredientSlot=slot;
   }
   tx.message=statusText(s);
  }else throw new TavernError('UNKNOWN_ACTION');
+ if(!s.slots.some(Boolean))delete s.nativeItems;
  tx.state=changed(s);return tx;
 }
 /** Loaded-block cadence only. No real-world/offline catch-up. */
@@ -76,7 +79,7 @@ export function advanceBarrel(state,registry,elapsed=BARREL_CHECK_INTERVAL){
   if(s.amount!==4000)return state;
   const r=registry.findBarrel(s.fluid,s.slots);const count=r?(s.slots.some(Boolean)?Math.min(...s.slots.filter(Boolean).map(x=>x.count)):r.noIngredientCount):16;
   s.batch={recipeId:r?.id??`${NS}:vinegar_fallback`,carrier:r?.carrier??`${NS}:empty_bottle`,output:clone(r?.output??{byQuality:Array.from({length:6},(_,i)=>`${NS}:vinegar_q${i+1}`)}),remaining:count,quality:1,unitTime:r?.unitTime??2400,ticksRemaining:r?.unitTime??2400};
-  s.fluid='';s.amount=0;s.slots.fill(null);
+  s.fluid='';s.amount=0;s.slots.fill(null);delete s.nativeItems;
  }else if(s.batch.ticksRemaining>0)s.batch.ticksRemaining-=elapsed;
  else {s.batch.quality++;s.batch.ticksRemaining=s.batch.quality===6?0:s.batch.unitTime*s.batch.quality;}
  return changed(s);

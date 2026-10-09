@@ -2,14 +2,16 @@
  * Camera.playAnimation has 3D rotation keyframes, but its documented free-camera
  * path does not establish additive roll preserving native aim and held items.
  * Do not switch the gameplay camera until that client behavior is verified.
- * This adapter keeps the source waveform but applies a small yaw delta instead.
- * It therefore also changes aim slightly; it is NOT exact Java camera-only roll.
+ * The optional legacy adapter keeps the waveform but changes yaw and therefore
+ * aim. It is explicitly enabled per player, never the default drinking effect.
  */
 export const TIPSY_ID='kaleidoscope_tavern:slightly_tipsy';
 export const TIPSY_FADE_TICKS=40;
 export const TIPSY_YAW_GAIN=.75;
 export const TIPSY_MAX_STEP_DEGREES=.06;
 export const TIPSY_OPT_OUT_TAG='kt_no_tipsy_motion';
+export const TIPSY_YAW_OPT_IN_TAG='kt_tipsy_yaw_adapter';
+export function tipsyYawEnabled(player){return player.hasTag(TIPSY_YAW_OPT_IN_TAG)&&!player.hasTag(TIPSY_OPT_OUT_TAG);}
 const clamp=(n,lo,hi)=>Math.max(lo,Math.min(hi,n));
 const smoothstep=n=>{const u=clamp(n,0,1);return u*u*(3-2*u);};
 export function javaTipsyRoll(ticks){

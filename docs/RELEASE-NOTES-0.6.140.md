@@ -34,7 +34,8 @@ W `0c311dab5b1488add7f8118bb0dca7d8302acd62`，既有 witness／history
 
 兩個 phase 的原生 cod 都經引擎 API 施加 1 點 `fall` 傷害：無效果
 control 為 3→2 並發生一次 afterHurt；透過正常 timed effect 與公開
-snapshot 套用 MultiJump 後為 3→3，零 afterHurt。這證明正式橋接與
+snapshot 套用 MultiJump 後為 3→3，零 afterHurt。兩階段各重新建立
+鱈魚並施效，此案例不證明 MultiJump 跨重啟保存。這證明正式橋接與
 原生傷害處理，沒有測量自然落下高度、真人飲用／點擊或實際畫面。
 既有機器數量／物品資料、光效保存／倒數／重啟確認／外部交接亦通過。
 彩字 per-viewer feet-versus-camera 16 格及第一人稱 spyglass、純 roll、

@@ -1,5 +1,12 @@
 # Maintained changes
 
+## 0.6.138
+
+- Integrate observed native effect countdowns and fresh save readbacks with the exact T137 entityLoad acknowledgement repair.
+- Preserve all Mob, anchor, ingredient, source visual and quiet immersion fixes; pair W115 and retain G120.
+- Keep parallel T136/W113 identity histories separate and retain scoped historical native evidence.
+- Add only isolated pending-client multiline tools; require current-candidate native and canonical CI.
+
 ## 0.6.137
 
 - 修正已保存原生光效被重啟 EffectAdd 誤判為外部刷新；保留本輪倒轉 Mob 與 W114 重生錨修復。

@@ -19,7 +19,16 @@ function view(effect){
  return {id:nativeAuraId(effect.typeId),ticks:effect.duration,amplifier:effect.amplifier};
 }
 function current(entity,id){return view(entity.getEffect(id));}
-function matches(row,e,now){return !!e&&e.amplifier===row.amplifier&&Math.abs(e.ticks-(row.until-now))<=1;}
+// Own writes still need a narrowly matching immediate readback/event ticket.
+function matchesWrite(row,e,now){return !!e&&e.amplifier===row.amplifier&&Math.abs(e.ticks-(row.until-now))<=1;}
+function nativeLease(id,amplifier,ticks,now){return {id,amplifier,until:now+ticks,lastObservedTicks:ticks};}
+function observeOwned(row,e,now){
+ // Native duration can pause while system ticks advance (including a newly
+ // ticking mob). Only its observed countdown is authoritative for an existing
+ // lease. An unobserved extension/amplifier change cannot acquire ownership.
+ if(!e||e.amplifier!==row.amplifier||e.ticks>row.lastObservedTicks)return false;
+ row.lastObservedTicks=e.ticks;row.until=now+e.ticks;return true;
+}
 function exactEffect(a,b){return !!a&&!!b&&a.id===b.id&&a.ticks===b.ticks&&a.amplifier===b.amplifier;}
 function retireReloadWitness(track,id){track?.reloadWitnesses?.delete(id);track?.loadedNative?.delete(id);}
 /** A failed revocation/rollback cannot leave duration matching as proof of
@@ -71,18 +80,45 @@ function writeLease(track,raw){
  }
  track.raw=raw;
 }
-function save(track){
- const now=system.currentTick,rows=[...track.native.values()].filter(row=>row.until>now).map(row=>({id:row.id,ticks:row.until-now,amplifier:row.amplifier}));
- const raw=rows.length?JSON.stringify({schema:1,rows}):undefined;
- writeLease(track,raw);
- track.savedAt=now;
+function save(track,prospective){
+ const now=system.currentTick,rows=[],reload=[];let revoked=false;
+ try{
+  for(const [id,row]of track.native){
+   // Persist a current native readback even if another effect's handoff saves
+   // before this row's interval callback. Reserve only the prospective own
+   // write before its native particles are hidden.
+   const observed=row===prospective?undefined:current(track.entity,id);
+   if(row!==prospective&&!observeOwned(row,observed,now)){
+    retireReloadWitness(track,id);track.native.delete(id);statusAuraDiagnostics.nativeHandoffs++;revoked=true;continue;
+   }
+   const witness=track.reloadWitnesses.get(id);
+   if(witness){
+    if(row!==prospective&&witness.at===now&&witness.raw===track.raw&&exactEffect(witness,observed))reload.push(witness);
+    else retireReloadWitness(track,id);
+   }
+   if(row.lastObservedTicks>0)rows.push({id:row.id,ticks:row.lastObservedTicks,amplifier:row.amplifier});
+  }
+  const raw=rows.length?JSON.stringify({schema:1,rows}):undefined;
+  writeLease(track,raw);
+  // A verified internal save may add/remove another row without changing this
+  // exact loaded effect. Rebind only an existing same-tick witness after the
+  // scalar write/readback succeeds; never mint or extend an acknowledgement.
+  // External scalar changes still fail writeLease's precondition and fence it.
+  for(const witness of reload)if(track.reloadWitnesses.get(witness.id)===witness)witness.raw=raw;
+  track.savedAt=now;
+ }catch(e){
+  // A later read/write failure must not leave a now-rejected row resumable in
+  // the previous scalar, even if rollback successfully restored those bytes.
+  if(revoked&&!track.blocked)blockOwnership(track,e);
+  throw e;
+ }
 }
 function load(entity,excludeNativeId){
  let track=tracks.get(entity.id);if(track){track.entity=entity;return track;}
  const now=system.currentTick,raw=entity.getDynamicProperty(STATUS_AURA_KEY);
  const blocked=blockedNative.has(entity.id)||entity.getDynamicProperty(STATUS_AURA_BLOCKED_KEY)===true;
  if(blocked)blockedNative.add(entity.id);
- track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked,loadedAt:now,loadedNative:new Map(),reloadWitnesses:new Map(),reloadWitnessIssued:false};let rejected=false;
+ track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked,loadedAt:now,loadedNative:new Map(),reloadWitnesses:new Map(),reloadWitnessIssued:false};let rejected=false,refreshed=false;
  if(raw!==undefined&&!blocked){
   try{
    const data=JSON.parse(raw);
@@ -91,10 +127,11 @@ function load(entity,excludeNativeId){
     if(NATIVE_AURA_COLORS[row?.id]===undefined||!Number.isInteger(row.ticks)||row.ticks<1||row.ticks>20000000||!Number.isInteger(row.amplifier)||row.amplifier<0||row.amplifier>255)throw Error('STATUS_AURA_SCHEMA');
     if(row.id===excludeNativeId){rejected=true;statusAuraDiagnostics.nativeHandoffs++;continue;}
     const observed=current(entity,row.id);
-    // Native durations pause while unloaded. The saved lease is at most five
-    // online ticks old; do not adopt an unrelated stronger/extended effect.
+    // Native durations can pause while unloaded or newly ticking. Keep the
+    // saved lease's five-native-tick limit; reject stronger/extended effects.
     if(observed&&observed.amplifier===row.amplifier&&observed.ticks<=row.ticks&&row.ticks-observed.ticks<=5){
-     track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});track.loadedNative.set(row.id,observed);
+     track.native.set(row.id,nativeLease(row.id,row.amplifier,observed.ticks,now));track.loadedNative.set(row.id,observed);
+     if(observed.ticks!==row.ticks)refreshed=true;
     }
     else{rejected=true;statusAuraDiagnostics.nativeHandoffs++;}
    }
@@ -103,7 +140,9 @@ function load(entity,excludeNativeId){
  tracks.set(entity.id,track);
  // A rejected saved row must not become resumable later merely because a
  // different producer's duration eventually reaches the old recorded value.
- if(rejected)try{save(track);}catch(e){blockOwnership(track,e);}
+ // Refresh accepted readbacks before an entityLoad witness binds the saved
+ // bytes, so repeated restorations cannot accumulate the old snapshot's age.
+ if(rejected||refreshed)try{save(track);}catch(e){blockOwnership(track,e);}
  return track;
 }
 function forgetNative(track,id){retireReloadWitness(track,id);if(track.native.delete(id)){statusAuraDiagnostics.nativeHandoffs++;try{save(track);}catch(e){blockOwnership(track,e);}}}
@@ -126,8 +165,8 @@ export function applyNativeStatusWithAura(entity,id,ticks,options={}){
  if(!installed||NATIVE_AURA_COLORS[key]===undefined||options.showParticles===false||!Number.isInteger(ticks)||ticks<2)return entity.addEffect(id,ticks,options);
  let track,before,owned;
  try{
-  track=load(entity);before=current(entity,key);owned=track.native.get(key);
-  if(owned&&!matches(owned,before,system.currentTick)){forgetNative(track,key);owned=undefined;}
+  track=load(entity);retireReloadWitness(track,key);before=current(entity,key);owned=track.native.get(key);
+  if(owned&&!observeOwned(owned,before,system.currentTick)){forgetNative(track,key);owned=undefined;}
  }catch(e){error(e);return entity.addEffect(id,ticks,options);}
  if(track.blocked)return entity.addEffect(id,ticks,options);
  if(before&&(!owned||before.amplifier!==amplifier)){
@@ -139,21 +178,21 @@ export function applyNativeStatusWithAura(entity,id,ticks,options={}){
   }
   return entity.addEffect(id,ticks,options);
  }
- const previous=owned&&{...owned},row={id:key,amplifier,until:system.currentTick+Math.max(ticks,before?.ticks??0)};
+ const previous=owned&&{...owned},row=nativeLease(key,amplifier,Math.max(ticks,before?.ticks??0),system.currentTick);
  track.native.set(key,row);
- try{save(track);}catch(e){if(previous&&!track.blocked)track.native.set(key,previous);else track.native.delete(key);error(e);return entity.addEffect(id,ticks,options);}
+ try{save(track,row);}catch(e){if(previous&&!track.blocked)track.native.set(key,previous);else track.native.delete(key);error(e);return entity.addEffect(id,ticks,options);}
  const ticket=addTicket(entity,row);let result;
  try{result=entity.addEffect(id,ticks,{...options,showParticles:false});}
  catch(e){removeTicket(entity,key,ticket);if(previous&&!track.blocked)track.native.set(key,previous);else track.native.delete(key);try{save(track);}catch(x){blockOwnership(track,x);}throw e;}
  let observed;try{observed=current(entity,key);}catch(e){error(e);}
- if(!matches(row,observed,system.currentTick)){
+ if(!matchesWrite(row,observed,system.currentTick)){
   // Do not leave an untracked invisible aura after a missing/deferred native
   // readback. Repeat the requested effect with its original visible options.
   removeTicket(entity,key,ticket);track.native.delete(key);try{save(track);}catch(e){blockOwnership(track,e);}
   statusAuraDiagnostics.nativeReadbackFallbacks++;
   return entity.addEffect(id,ticks,options);
  }
- row.until=system.currentTick+observed.ticks;statusAuraDiagnostics.nativeAcquired++;return result;
+ row.lastObservedTicks=observed.ticks;row.until=system.currentTick+observed.ticks;statusAuraDiagnostics.nativeAcquired++;return result;
 }
 /** Every effectAdd without a matching own write or exact entityLoad witness hands appearance
  * back to that effect's actual producer, even if type/amplifier are unchanged.
@@ -164,7 +203,7 @@ export function observeStatusAuraEffect(event){
   const entity=event.entity,observed=view(event.effect),id=observed?.id;if(!id||NATIVE_AURA_COLORS[id]===undefined)return;
   const key=ticketKey(entity,id),list=pending.get(key),now=system.currentTick;
   const track=tracks.get(entity.id);
-  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;
+  const at=list?.findIndex(row=>now-row.at<=2&&matchesWrite(row,observed,now))??-1;
   if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);retireReloadWitness(track,id);return;}
   const witness=track?.reloadWitnesses.get(id),owned=track?.native.get(id);
   if(entity.isValid!==false&&witness?.at===now&&reloadLeaseCurrent(track,witness.raw)&&owned?.until-now===witness.ticks&&
@@ -216,7 +255,7 @@ export function tickStatusAura(random=Math.random){
   const rows=track.custom.filter(row=>row.ticks>now-track.at),customCount=rows.length;
   for(const [nativeId,row]of track.native){
    const observed=current(entity,nativeId);
-   if(!matches(row,observed,now)){forgetNative(track,nativeId);continue;}
+   if(!observeOwned(row,observed,now)){forgetNative(track,nativeId);continue;}
    rows.push({id:nativeId,amplifier:row.amplifier,color:NATIVE_AURA_COLORS[nativeId],visible:true,ambient:false});
   }
   if(track.blocked)rows.length=customCount;

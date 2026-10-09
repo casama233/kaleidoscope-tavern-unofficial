@@ -1,6 +1,10 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.137 / World Liquor 0.1.114
+## Current repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
+
+[T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The new candidate requires its own paired native and canonical CI; isolated multiline tooling has no human-client acceptance.
+
+## Retained T137 / W114 (scoped native restart passed)
 
 [T137](RELEASE-NOTES-0.6.137.md) retains the Mob and confirmed-anchor repairs and corrects the native reload EffectAdd notification that revoked a valid saved aura lease. Only a genuine entityLoad, exact same-tick snapshot can consume one notification witness; foreign refresh and existing saved-duration checks remain. The frozen T137/W114 pair passed a new zero-player native first/normal-save/restart run and the complete source-bound recorder, including one reload acknowledgement followed by one foreign handoff. Final canonical CI and actual Player/client/private LIVE acceptance remain separate.
 

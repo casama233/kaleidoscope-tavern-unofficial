@@ -1,3 +1,7 @@
+## 當前 T138／W115／G120
+
+整合 native countdown 與已驗證的 reload acknowledgement；來源以新 release notes 與 data/parallel-source-review-20261009.json 為準。舊候選歷史及 scoped native 結果保留；G120 不回退。新候選完整 CI、native 與 client／私人 LIVE 各自驗證。
+
 # 家族現行來源基線
 
 查核日期：2026-10-09。當前修復入口為 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)，

@@ -1,16 +1,14 @@
 {
-  "version": "0.6.137",
-  "tag": "v0.6.137-beta.1",
-  "title": "森羅物語：酒館 0.6.137 測試版｜原生重啟光效、倒轉與保存",
+  "version": "0.6.138",
+  "tag": "v0.6.138-beta.1",
+  "title": "森羅物語：酒館 0.6.138 測試版｜原生效果時計、重啟與倒轉",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.137.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.138.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": true,
+  "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "T137/W114 completed fresh zero-player BDS 1.26.52.3 first launch, normal save/stop and restart with the full source-bound observer recorder. It confirms saved native aura reload and exactly one later foreign handoff, native machine counts/metadata, stackable ingredient metadata and Mob recipient selection. Actual Player lifecycle, rendered client, full private family, stopped production-world rehearsal and LIVE remain pending. Final canonical CI is separate.",
-  "expected_archive_sha256": "089e5136d84008aff19593c7cee623b7365e81bc2fd41cb76556a406eb82675d",
-  "reviewed_runtime_source": "e7dc05f621f97758b2fe46886cfc7dd9186cd606"
+  "native_evidence_scope": "T138/W115 integrates observed native effect countdown tracking with the reviewed exact entityLoad acknowledgement repair, preserving Mob and confirmed anchor behavior. This candidate requires its own complete source-bound native first/restart and canonical CI. T137/W114 evidence remains historical; actual Player, rendered client, private saved-world/family and LIVE remain pending."
 }

@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "reviewed_date": "2026-10-09",
+  "candidate": {
+    "tavern": "0.6.138",
+    "world_liquor": "0.1.115",
+    "grilling": "2.8.120"
+  },
+  "source_predecessors": {
+    "tavern": "af25ecf9cb3b8e74706ba0167e6a1ef7f08994b5",
+    "world_liquor": "787e0774cc70ead74f15b15269bb8b31fe014aa1"
+  },
+  "parallel_sources": {
+    "tavern": "71e5c372cce282d8130290d01812929c9e7db1f8",
+    "world_liquor": "f73f6e7184c545cf69559305c2cd1e7b22f10a98"
+  },
+  "historical_identity_overlap": [
+    {
+      "repository": "tavern",
+      "version": "0.6.136",
+      "immutable_variants": [
+        {
+          "commit": "edc9e464f8ea987fa07927182a2b741720c82430",
+          "source_trees": {
+            "BP": {
+              "sha256": "24b9794f39e5be5e088d1bfce7dc1c246bd819fac7eeb35bae2a7d240edb549b",
+              "files": 827
+            },
+            "RP": {
+              "sha256": "ac311d2498d79229bb068739c2e5fcc6e81d0e0df507b6eff1b57a6cbf2ea2cd",
+              "files": 3222
+            }
+          }
+        },
+        {
+          "commit": "71e5c372cce282d8130290d01812929c9e7db1f8",
+          "source_trees": {
+            "BP": {
+              "sha256": "017fd032474b5de71929e756d95bfcc8cc034704cbc8cf651babf672c1a6d51e",
+              "files": 827
+            },
+            "RP": {
+              "sha256": "ac311d2498d79229bb068739c2e5fcc6e81d0e0df507b6eff1b57a6cbf2ea2cd",
+              "files": 3222
+            }
+          }
+        }
+      ]
+    },
+    {
+      "repository": "world_liquor",
+      "version": "0.1.113",
+      "immutable_variants": [
+        {
+          "commit": "0031f5939c32b707f5081a6e4b1ad47c108a587c",
+          "source_trees": {
+            "BP": {
+              "sha256": "451552c0146712701d4a1820dba810b1ea7e8396f02d0117fd573235dd3d97a1",
+              "files": 339
+            },
+            "RP": {
+              "sha256": "4ace28dcc210a8c4cd879234f5f3d7fce4a0a19c6b29b2320ff4e4e272c56baa",
+              "files": 549
+            }
+          }
+        },
+        {
+          "commit": "f73f6e7184c545cf69559305c2cd1e7b22f10a98",
+          "source_trees": {
+            "BP": {
+              "sha256": "82b3d7417443f40ddfefd4e34c921611624773fff3e4522cb6a8bbd2e9e6f5a6",
+              "files": 339
+            },
+            "RP": {
+              "sha256": "4ace28dcc210a8c4cd879234f5f3d7fce4a0a19c6b29b2320ff4e4e272c56baa",
+              "files": 549
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "adaptation_scope": [
+    "Integrate observed nonincreasing native countdowns, current readback persistence and repeated-restore age handling into the existing exact entityLoad acknowledgement implementation.",
+    "Retain all T137 reload acknowledgement, raw/fence, write/handoff and immediate death cleanup boundaries; retain the Mob selection and W113 confirmed-anchor implementation.",
+    "Preserve the native-clock sentinel observer and strict recorder bounds together with the existing complete case set and source/overlay/log binding.",
+    "Adopt only the five isolated client-parity tools with independent diagnostic identities and pending human-client outcomes; production UI is unchanged."
+  ],
+  "preservation_decision": "Keep both immutable parallel source histories at their recorded commits. Do not transplant conflicting T136/W113 identity keys or replace the reviewed G120 pairing with G119. Append a fresh T138 functional delta from the actual T137 predecessor and freeze new T138/W115 identities after coupled review. No old claim, history, failed report or successful T137 native record is rewritten.",
+  "native_evidence_boundary": {
+    "canonical_failure_run": 37873046866,
+    "canonical_failure_job": 113635259674,
+    "read_from_actual_job_log": "Six prerequisite cases completed; first phase failed at own effectAdd was mistaken for foreign handoff, with normal stop, zero players and zero content errors.",
+    "parallel_source_diagnostic_table": "The fixed source release notes report native duration 600 at system ticks 145/146/147, with an already-consumed own ticket. Its separate raw diagnostic log was not available in this workspace and was not independently re-read.",
+    "current_candidate": "Requires new complete paired native first/save/restart; T137/W114 success is retained with its original runtime scope."
+  }
+}

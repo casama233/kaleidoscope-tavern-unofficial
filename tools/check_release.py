@@ -21,7 +21,7 @@ REVIEWED_ITEM_GEOMETRIES={
 # allocations do not enlarge the <1024 budget for unrelated/base geometry.
 # Update this revision together with the two ledger witnesses only after the
 # final integrated functional source has been reviewed, before freezing it.
-REVIEWED_VISUAL_SOURCE='b26f71b297b9bbbcb798a942734ce01e85e883c0'
+REVIEWED_VISUAL_SOURCE='f9b84c41338aaaccf3dafee728d498d49ab1425c'
 REVIEWED_VISUAL_RELEASE='0.6.133'
 REVIEWED_VISUAL_GEOMETRIES={
     **{f'geometry.kt_runtime.board_outline_cell_{cell}':'runtime/RP/models/entity/board_glyph_outline.geo.json' for cell in range(256)},

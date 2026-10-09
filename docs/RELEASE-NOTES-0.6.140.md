@@ -83,6 +83,12 @@ helper 0.2.9 的 descriptor、作者 patch 與 copied helpers 須整組驗證。
 後續來源與 CI peer metadata 不改已凍結的輸出內容；發布時仍由正式
 工作流核對本次 archive 全部 bytes，不能用名稱或版號代替。
 
+完整 reviewed Tavern peer 為 `c1fdc5f8f80eaa4ab96e425aee3f3f97274ceadb`；
+W117 的 CI／發布反向引用該提交。Tavern 的五個 World Liquor checkout
+全部固定最終 W117 `81fc54c458f90e42a210ffdac019610dc474bfb9`，
+該來源已通過 archive 全檔與實際 Tavern peer 身份核對；此處是打包
+與配套完整性，不是 CI、原生 Player 或真人驗收的替代結果。
+
 ## 一比一還原的實際界線
 
 回呼反例證明程式處理方式，零玩家 BDS 證明限定原生場景；兩者均未

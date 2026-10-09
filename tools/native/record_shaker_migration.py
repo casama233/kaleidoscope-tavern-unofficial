@@ -95,7 +95,9 @@ def validate_observations(observations,phase,version):
  else:
   row=case('native-aura-foreign-handoff','duration ownLease nativeParticleFlagsReadable')
   number(row['duration'],796,800,True);values(row,ownLease=False,nativeParticleFlagsReadable=False)
- row=case('native-one-tick-invisibility-expiry','playerConcealmentVerified');same(row['playerConcealmentVerified'],False)
+ row=case('native-one-tick-invisibility-expiry','nativeTicksObserved scriptTicksWaited playerConcealmentVerified')
+ number(row['nativeTicksObserved'],2,18,True);number(row['scriptTicksWaited'],1,60,True)
+ same(row['playerConcealmentVerified'],False)
  outline=case('native-outline-registry','glowing client');assert type(outline['glowing']) is bool;same(outline['client'],False)
  row=case('native-put-recovery','activations idleCallbacksMeasured');values(row,activations=2,idleCallbacksMeasured=False)
  row=case('native-splash-rolled-heal','health effects eventEnvelope physicalImpact');values(row,health=6,effects=1,eventEnvelope='observer',physicalImpact=False)

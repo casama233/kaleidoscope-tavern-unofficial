@@ -1,16 +1,14 @@
 {
-  "version": "0.6.135",
-  "tag": "v0.6.135-beta.1",
-  "title": "森羅物語：酒館 0.6.135 測試版｜完整原料、沉浸與視覺修復",
+  "version": "0.6.136",
+  "tag": "v0.6.136-beta.1",
+  "title": "森羅物語：酒館 0.6.136 測試版｜完整原料、原版視覺與原生效果時計修復",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.135.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.136.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "9a0508bed0104ba4c97dcfd4a0c72c4128b83754f863e920722cac4194f61cd8",
-  "reviewed_runtime_source": "4d4b1e390eb6aad23587b28bf3d9aa8bb7192287",
-  "native_evidence_scope": "T134 CI exposed native bare-vanilla adventure block identifiers and missing PBR companions; its failed result is retained and does not certify later machine/aura/restart scenes. T135/W112 includes those corrections and must pass its own exact paired native-persistence run. No native success is asserted in this pre-CI request. Original overlays and engine first/restart checks remain; actual Player, full private family, rendered client, saved-world and LIVE acceptance remain pending."
+  "native_evidence_scope": "T135 canonical BDS exposed native effect duration pausing while system.currentTick advanced. Its failure and diagnostic evidence are retained. T136 tracks owned native remaining duration and must pass its own exact W113 paired first/restart and source-bound evidence checks. No current client, private saved-world, full-family or LIVE success is asserted by this pre-CI request."
 }

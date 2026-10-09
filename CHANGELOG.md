@@ -1,5 +1,13 @@
 # Maintained changes
 
+## 0.6.136
+
+- Retain all T134/T135 source repairs and their unchanged historical release notes. Pair with World Liquor 0.1.113; Grilling remains 2.8.119.
+- Correct aura appearance-lease tracking to use observed native remaining duration instead of assuming that every system tick decrements every entity effect. The full T135 scene observed speed at 600 ticks at system ticks 145, 146 and 147; the old projected 598 caused a false ownership revocation despite a consumed own effectAdd ticket, no external event and a valid health-8 entity.
+- Preserve ownership handoff, native readback and persistence protections; do not widen the write tolerance, delay the assertion or reapply effects to hide the failed scene.
+- Add an isolated, explicitly unaccepted multiline client diagnostic under `tools/client-parity/`, with new diagnostic identities and unchanged production UI. Three-axis camera animation exists, but native first-person additive roll is still unproven.
+- Preserve T135's completed CI jobs and bounded first-phase native cases without crediting its unfinished paired restart. New T136/W113 CI, full native first/restart, publication and client/LIVE acceptance are pending. [T136 scope](docs/RELEASE-NOTES-0.6.136.md) records the failure and correction boundaries.
+
 ## 0.6.135
 
 - Retain T134's complete ingredient, transaction, visual and immersion scope, including the reviewed PR297/PR298 repairs and W110 author updates.

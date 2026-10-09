@@ -2,7 +2,24 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 當前 T135／W112：承接真實 CI 修復
+## 當前 T136／W113：修正原生 aura 時計
+
+[T136 說明](../RELEASE-NOTES-0.6.136.md) 是當前差異與驗收入口。承接全部
+T134／T135 修復，以新身份修復 native duration 暫停時，被 system tick
+倒算誤判為外部效果刷新的問題。旧 notes、freeze、witness、history 和
+失敗證據不覆寫；G119 不變。
+
+| 候選／證據 | 當前處置 |
+| --- | --- |
+| [T135 canonical CI 37873046866](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37873046866) | aura 失敗保留。完整診斷為 system ticks 145／146／147 的 native speed 均 600，舊預期 598 導致誤 revoke；own effectAdd 已同 tick 消耗、無外部 event、實體 valid／health 8。修正 native 剩餘時計，不放寬 tolerance 或延後場景。 |
+| 既有 T135／W112 成功範圍 | 12 個 CI jobs 成功保留原 run；三份原料 portable equality／independent-clone 與機器 first phase 六 case 已完成。W112 四 jobs／1,343 geometry gate 成功仍屬其原配對。完整 paired restart 未完成，不宣稱整輪成功。 |
+| T136／W113 | 新兩庫 exact source／peer／PR references 待補；新 canonical CI、完整 native first／restart、archive／發布均 pending，尚不宣稱已合併或部署。 |
+| 板面 multiline／camera | [隔離 UI 診斷入口](../../tools/client-parity/README.md) 已可生成獨立候選，未真人驗證或啟用 production。三軸 free-camera API 存在，但純 additive first-person roll 仍未證明。兩者繼續追蹤，不當成已修完或永久不可能。 |
+
+真人畫面／操作、私人完整家族及 LIVE 仍有各自門檻；既有持續部署授權
+保持有效。下方各版入口是歷史範圍，當前狀態以本節及 T136 notes 為準。
+
+## 保留 T135／W112：承接真實 CI 修復
 
 [T135 說明](../RELEASE-NOTES-0.6.135.md) 是當前差異與驗收入口，完整承接
 下方 T134 的原料、交易、視覺、沉浸修復及原作來源，不複製或改寫舊歷史。

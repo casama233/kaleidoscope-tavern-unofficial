@@ -6,24 +6,37 @@
 
 | 自有來源 | 本輪版本 | 修復來源 | 目前主要差距 |
 | --- | --- | --- | --- |
-| 酒館 | 0.6.135 | [T135 修復範圍](../docs/RELEASE-NOTES-0.6.135.md)；承接 PR297 與 PR298 座標修復，加入完整機器原料、可攜 metadata、交易、狀態粒子與原作文字／酒液視覺 | 任意三份非堆疊原料、穿牆輪廓、相機 roll、部分原生效果與實際聲畫／輸入 |
+| 酒館 | 0.6.136 | [T136 修復範圍](../docs/RELEASE-NOTES-0.6.136.md)；保留 T134/T135 原料、交易、視覺修復，改以 native 實際剩餘時間追蹤 aura 所有權 | 新 CI／完整原生首次重啟 pending；任意三份非堆疊原料、穿牆輪廓、additive 相機 roll、多行編輯與實際聲畫／輸入 |
 | 煙火／燒烤 | 2.8.119 | [PR184](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/184)；餐盤內容、植物及重金屬結算 | 任意秘製串背包圖示、正常 Cookery producer、調料 registry、實際操作／聲畫 |
-| 世界名酒 | 0.1.112 | 保留 [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；精確配對 T135、保留 87 個無碰撞家族 helper | 各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
+| 世界名酒 | 0.1.113 | 保留 [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；候選精確配對 T136、保留 87 個無碰撞家族 helper | 新配對 CI pending；各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
 | 私有料理整合 | 1.0.30 | 保持已核驗 private canonical；不在公開倉庫保存作者私有完整腳本 | 原生與真人證據按功能 scope，不能用公開包 CI 代替 |
+
+當前 T136／W113 的 exact source／peer references、新 CI、完整 native
+first／restart、archive／發布、真人與 LIVE 均 pending。T135 canonical
+[run 37873046866](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37873046866)
+的 aura 失敗保留：system ticks 145／146／147 的 speed 均剩 600，舊倒算
+598 誤撤外觀所有權；own effectAdd 正確消耗、無外部 event、health 8／valid。
+新修正使用 native 剩餘時計，不放寬 tolerance、不延後斷言。T135 既有
+12 jobs、portable 三份原料 equality／clone、machine first 六 case 的成功
+各保留原範圍，未完成的 paired restart 不繼承。
+
+[隔離 multiline 診斷](../tools/client-parity/README.md) 未改 production，
+仍待真人驗證；三軸 free-camera 入口已存在，但 native-first-person
+additive roll 尚未證明，不能把未完成寫成永久 API 不可能。
 
 T134／W111 的初輪 CI 保留原結果：W111 配對／封裝通過，T134 查出
 25 張新增圖缺少 PBR 伴隨檔及原生 adventure 清單裸 ID 被拒絕；另補
 測試替身缺少的 getEffect。T135／W112 承接整套修復並補齊這些缺口，
-不改寫 T134／W111 的來源、包內容或既有結果。最終新 CI 仍依實際記錄。
+不改寫 T134／W111 的來源、包內容或既有結果；T135 原 notes 也保留。
 
 版本號不同不能直接比較還原度。各包完整差距以自己的
 `docs/PARITY-MATRIX.md`、`docs/BUGS.md` 和當前 release notes 為準。
 未完成調料原型及其他唯一差異保留，不能混入已凍結來源。
-本輪保留 [draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)
+此前 T134 整合保留 [draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)
 reviewed head `625ff769` 的 T133 原生座標修復，再追加 T134／W111。
 PR301 的上一套 T132／W110 家族尚未納入該草稿；本次承接不代表原 PR
 已合併。舊失敗和更新後來源的 CI 各自保留，原 PR 現態依其 exact head
-證據；本輪交付依 T134／W111 的精確 PR／CI。此前各候選、版本 claim
+證據；本輪 T136／W113 交付仍待新精確 PR／CI。此前各候選、版本 claim
 與失敗證據不改寫，不以舊版號發布另一套內容。
 衝突的兩份 W109 提交／claim 已分別保留，新作者適配使用獨立 W110 身份。
 

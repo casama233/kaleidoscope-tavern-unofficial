@@ -1,6 +1,6 @@
-## Current maintained baseline: 0.6.135
+## Current maintained baseline: 0.6.136
 
-[T135 repair scope](docs/RELEASE-NOTES-0.6.135.md) retains all [T134 ingredient, transaction, visual and immersion changes](docs/RELEASE-NOTES-0.6.134.md), and fixes missing PBR companions, native Adventure-list IDs and the Ardent test fixture exposed by T134 CI. The candidate now pairs with W112; the failed T134 run and successful W111 CI remain historical evidence. Final T135/W112 CI, native-client and LIVE acceptance remain separate and pending.
+[T136 repair scope](docs/RELEASE-NOTES-0.6.136.md) retains the T134/T135 ingredient, transaction, visual and immersion repairs and corrects native aura ownership tracking when an entity's effect countdown pauses while system ticks advance. T135's failed canonical run and completed earlier scenes remain recorded; they do not certify the new T136/W113 candidate. New CI, paired native first/restart, publication, human-client and LIVE acceptance are pending.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -9,7 +9,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 ## Current source and requirements
 
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.135**, World Liquor **0.1.112** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.136**, World Liquor **0.1.113** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -33,11 +33,11 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Exact player-camera roll remains unimplemented; the optional yaw adapter now requires explicit opt-in and does not move aim by default. Machine ingredient clones and supported portable stackable metadata are implemented, while three arbitrary decorated nonstackable shaker inputs remain rejected intact. Source-shaded RGB, board outlines and status particles require actual client comparison. Through-wall outlines, native multiline editing, dropped-shaker display contexts, native reach/step-height/XP pickup, target clearing and some effect/event semantics remain incomplete. The T135 notes retain the precise source, engine and client boundaries documented for T134 and in the matrix.
+Exact player-camera roll remains unimplemented; the optional yaw adapter requires explicit opt-in and does not move aim by default. The stable camera API has three-axis animation through the free-camera route, but additive roll preserving native first-person view, aim, hands and other packs' camera ownership is unproven. Machine ingredient clones and supported portable stackable metadata are implemented, while three arbitrary decorated nonstackable shaker inputs remain rejected intact. Source-shaded RGB, board outlines and status particles require actual client comparison. Through-wall outlines, native multiline editing, dropped-shaker display contexts, native reach/step-height/XP pickup, target clearing and some effect/event semantics remain incomplete. The [isolated multiline diagnostic](tools/client-parity/README.md) is a test candidate with new diagnostic pack identities, not an enabled production editor or client acceptance. The T136 notes retain the precise source, engine and client boundaries.
 
 ## Retained T133 baseline statement
 
-The following statement records the earlier T133 candidate and its pairing. Current integration and PR status are recorded in the T135 scope above.
+The following statement records the earlier T133 candidate and its pairing. Current integration and PR status are recorded in the T136 scope above.
 
 - [T133 storage correction](docs/RELEASE-NOTES-0.6.133.md) compares finite XYZ coordinates independently of native object key order. It depends on PR297, retains its rollback repairs and awaits client acceptance; the reviewed family pairing below remains unchanged.
 

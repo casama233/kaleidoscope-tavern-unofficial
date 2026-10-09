@@ -1,6 +1,30 @@
 # 玩家可見問題與待驗收項
 
-## 當前 T135／W112：真實 CI 缺口修復
+## 當前 T136／W113：原生效果剩餘時計
+
+[T136 說明](RELEASE-NOTES-0.6.136.md) 集中目前修正及證據。
+T135 canonical CI [37873046866](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37873046866)
+的完整 aura 場景失敗；診斷觀察 speed 在 system tick 145／146／147
+均剩 600 ticks，舊倒算卻在 147 預期 598，因而誤撤 aura 外觀所有權。
+own effectAdd 已在同 tick 正確消耗，沒有外部 event，實體 valid、health 8。
+這是原生效果倒數與 system tick 不同步的 runtime 缺口，不是已證明的
+外部刷新。修正改按 native 剩餘時間追蹤／保存；不擴大 tolerance、不延後
+斷言，也不重套效果製造通過。
+
+新增核對場景：自有原生效果在倒數暫停、正常遞減、同強度外部刷新、
+不同強度效果、清除及正常保存重啟時，各自核對 lease、原生 duration
+與可見粒子。既有 T135 12 jobs 成功、三份原料 portable equality／clone
+及 machine first 六個 case 完成保留原範圍；完整 paired restart 未完成。
+T136／W113 新 CI、完整原生 first／restart、發布、真人及 LIVE 均 pending。
+
+[隔離 multiline 診斷](../tools/client-parity/README.md) 可產生独立身份的
+候選，對照 raw newline／literal `\n`、320／350／1500 容量、foreign 表單、
+焦點與隱藏 sibling 回寫；尚未真人驗證，未啟用正式板面編輯器。Camera
+穩定 API 已有三軸 free-camera 動畫入口，但保留原生第一人稱、自由瞄準、
+手持與外包所有權的 additive roll 尚未證明；不把未證明寫成永久不可能。
+其餘原作差距與 client／完整家族限制維持下方範圍。
+
+## 保留 T135／W112：真實 CI 缺口修復
 
 [T135 說明](RELEASE-NOTES-0.6.135.md) 承接下方 T134 的實作與真人場景。
 T134 CI run `37869770416` 失敗保留：本版補齊冰葡萄 24 幀與 RGB 白色

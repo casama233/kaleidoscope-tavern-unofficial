@@ -8,13 +8,13 @@ import {customAuraRows,statusAuraColor,sampleStatusAura,TAVERN_AURA_COLORS} from
 import {STATUS_AURA_KEY,STATUS_AURA_BLOCKED_KEY,STATUS_AURA_TEST,statusAuraDiagnostics,applyNativeStatusWithAura,indexStatusAura,tickStatusAura,forgetStatusAura,restoreStatusAura,installStatusAura} from '../runtime/BP/scripts/bedrock/status-aura.js';
 world.afterEvents.effectAdd=new Signal();installStatusAura();
 let serial=0;
-function fixture(){
+function fixture({nativeClock=()=>system.currentTick}={}){
  const native=new Map(),dp=new Map(),calls=[],particles=[];
  const p={id:'aura-fixture-'+(++serial),isValid:true,typeId:'minecraft:player',getDynamicProperty:k=>dp.get(k),setDynamicProperty(k,v){if(this.failSave)throw Error('lease save failed');if(v===undefined)dp.delete(k);else dp.set(k,v);},
   getComponent:()=>({currentValue:20}),getAABB:()=>({center:{x:4,y:3,z:-2},extent:{x:.3,y:.9,z:.3}}),
-  getEffect(id){id=id.replace(/^minecraft:/,'');const row=native.get(id);return row&&row.until>system.currentTick?{typeId:'minecraft:'+id,duration:row.until-system.currentTick,amplifier:row.amplifier}:undefined;},
+  getEffect(id){id=id.replace(/^minecraft:/,'');const row=native.get(id);return row&&row.until>nativeClock()?{typeId:'minecraft:'+id,duration:row.until-nativeClock(),amplifier:row.amplifier}:undefined;},
   getEffects(){return [...native.keys()].map(id=>this.getEffect(id)).filter(Boolean);},
-  addEffect(id,ticks,options={}){id=id.replace(/^minecraft:/,'');calls.push({id,ticks,options});if(this.failEffect)throw Error('effect failed');const old=this.getEffect(id),amplifier=options.amplifier??0;native.set(id,{until:system.currentTick+Math.max(ticks,old?.amplifier===amplifier?old.duration:0),amplifier,showParticles:options.showParticles});world.afterEvents.effectAdd.emit({entity:this,effect:this.getEffect(id)});},
+  addEffect(id,ticks,options={}){id=id.replace(/^minecraft:/,'');calls.push({id,ticks,options});if(this.failEffect)throw Error('effect failed');const old=this.getEffect(id),amplifier=options.amplifier??0;native.set(id,{until:nativeClock()+Math.max(ticks,old?.amplifier===amplifier?old.duration:0),amplifier,showParticles:options.showParticles});world.afterEvents.effectAdd.emit({entity:this,effect:this.getEffect(id)});},
   dimension:{spawnParticle:(...args)=>particles.push(args)}
  };
  return {p,native,dp,calls,particles,close(){forgetStatusAura(p.id);STATUS_AURA_TEST.blockedNative.delete(p.id);}};
@@ -156,4 +156,104 @@ test('a rejected saved lease is retired before an unobserved foreign duration ca
  system.currentTick+=100;forgetStatusAura(f.p.id);restoreStatusAura(f.p);tickStatusAura(()=>0);
  assert.equal(f.p.getEffect('speed').duration,100);assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
  assert.equal(f.particles.length,0);assert.equal(f.native.get('speed').showParticles,true);f.close();
+});
+test('a native countdown can pause beyond its script deadline, resume and expire without losing its own aura',()=>{
+ let nativeTick=0;const f=fixture({nativeClock:()=>nativeTick});
+ applyNativeStatusWithAura(f.p,'speed',6,{amplifier:0,showParticles:true});
+ for(let i=0;i<8;i++){system.currentTick++;tickStatusAura(()=>0);}
+ assert.equal(f.p.getEffect('speed').duration,6);
+ assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).native.get('speed').lastObservedTicks,6);
+ assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)),{schema:1,rows:[{id:'speed',ticks:6,amplifier:0}]});
+ assert.equal(f.particles.length,8);
+ for(let i=1;i<=6;i++){
+  nativeTick++;system.currentTick++;tickStatusAura(()=>0);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,i<6);
+ }
+ assert.equal(f.p.getEffect('speed'),undefined);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+ assert.equal(f.particles.length,13);assert.equal(f.calls.length,1);f.close();
+});
+test('refreshing an owned paused native effect keeps ownership before the next interval read',()=>{
+ let nativeTick=0;const f=fixture({nativeClock:()=>nativeTick});
+ applyNativeStatusWithAura(f.p,'speed',6,{amplifier:0,showParticles:true});
+ system.currentTick+=8;
+ applyNativeStatusWithAura(f.p,'speed',4,{amplifier:0,showParticles:true});
+ assert.equal(f.p.getEffect('speed').duration,6);assert.equal(f.calls.at(-1).options.showParticles,false);
+ assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).native.get('speed').lastObservedTicks,6);
+ assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)).rows,[{id:'speed',ticks:6,amplifier:0}]);
+ tickStatusAura(()=>0);assert.equal(f.particles.length,1);f.close();
+});
+test('a foreign refresh during a paused native countdown immediately revokes ownership without altering the effect',()=>{
+ for(const showParticles of [true,false]){
+  const f=fixture({nativeClock:()=>0});applyNativeStatusWithAura(f.p,'speed',100,{amplifier:0,showParticles:true});
+  for(let i=0;i<4;i++){system.currentTick++;tickStatusAura(()=>0);}
+  const emitted=f.particles.length;
+  f.p.addEffect('speed',100,{amplifier:0,showParticles});
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,false);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);tickStatusAura(()=>0);
+  assert.equal(f.particles.length,emitted);assert.equal(f.p.getEffect('speed').duration,100);
+  assert.equal(f.native.get('speed').showParticles,showParticles);assert.equal(f.calls.length,2);f.close();
+ }
+});
+test('an unobserved native extension or amplifier change still revokes a paused lease',()=>{
+ for(const mutate of [row=>row.until++,row=>row.amplifier++]){
+  const f=fixture({nativeClock:()=>0});applyNativeStatusWithAura(f.p,'speed',100,{amplifier:0,showParticles:true});
+  system.currentTick+=4;tickStatusAura(()=>0);const emitted=f.particles.length;
+  mutate(f.native.get('speed'));system.currentTick++;tickStatusAura(()=>0);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,false);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(f.particles.length,emitted);
+  assert.equal(f.calls.length,1);f.close();
+ }
+});
+test('schema 1 native leases survive a paused clock and retain the five-native-tick restoration limit',()=>{
+ for(const consumed of [5,6]){
+  let nativeTick=0;const f=fixture({nativeClock:()=>nativeTick});
+  // Authored exactly as the previous schema, without new in-memory fields.
+  f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:10,amplifier:0}]}));
+  f.native.set('speed',{until:10,amplifier:0,showParticles:false});restoreStatusAura(f.p);
+  for(let i=0;i<12;i++){system.currentTick++;tickStatusAura(()=>0);}
+  assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)),{schema:1,rows:[{id:'speed',ticks:10,amplifier:0}]});
+  forgetStatusAura(f.p.id);system.currentTick+=100;nativeTick=consumed;restoreStatusAura(f.p);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,consumed===5);
+  if(consumed===5)assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).native.get('speed').lastObservedTicks,5);
+  else assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  assert.equal(f.calls.length,0);f.close();
+ }
+});
+test('a handoff saves every other native countdown at its current readback before that row has ticked',()=>{
+ let nativeTick=0;const f=fixture({nativeClock:()=>nativeTick});
+ for(const id of ['speed','strength'])applyNativeStatusWithAura(f.p,id,20,{amplifier:0,showParticles:true});
+ nativeTick++;system.currentTick++;
+ // No tickStatusAura call: strength's cache still contains its previous 20.
+ f.p.addEffect('speed',20,{amplifier:0,showParticles:true});
+ assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)).rows,[{id:'strength',ticks:19,amplifier:0}]);
+ forgetStatusAura(f.p.id);nativeTick+=5;system.currentTick+=5;restoreStatusAura(f.p);
+ assert.deepEqual([...STATUS_AURA_TEST.tracks.get(f.p.id).native.keys()],['strength']);
+ assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).native.get('strength').lastObservedTicks,14);f.close();
+});
+test('two schema 1 restorations refresh the saved countdown instead of accumulating accepted snapshot age',()=>{
+ let nativeTick=0;const f=fixture({nativeClock:()=>nativeTick});
+ applyNativeStatusWithAura(f.p,'speed',10,{amplifier:0,showParticles:true});
+ for(const elapsed of [5,4]){
+  forgetStatusAura(f.p.id);nativeTick+=elapsed;system.currentTick+=elapsed;restoreStatusAura(f.p);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).native.get('speed').lastObservedTicks,10-nativeTick);
+  assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)),{schema:1,rows:[{id:'speed',ticks:10-nativeTick,amplifier:0}]});
+ }
+ assert.equal(f.calls.length,1);f.close();
+});
+test('a newly rejected row cannot survive a later read failure or rollback to its stale saved scalar',()=>{
+ for(const failure of ['later-read','lease-write']){
+  const f=fixture({nativeClock:()=>0});
+  for(const id of ['speed','strength'])applyNativeStatusWithAura(f.p,id,20,{amplifier:0,showParticles:true});
+  const before=f.dp.get(STATUS_AURA_KEY),read=f.p.getEffect,write=f.p.setDynamicProperty;
+  f.native.get('speed').until++;
+  if(failure==='later-read')f.p.getEffect=function(id){if(id==='strength')throw Error('later effect read failed');return read.call(this,id);};
+  else f.p.setDynamicProperty=function(k,v){if(k===STATUS_AURA_KEY&&v!==before)throw Error('revocation write failed');write.call(this,k,v);};
+  applyNativeStatusWithAura(f.p,'haste',20,{amplifier:0,showParticles:true});
+  assert.equal(f.dp.get(STATUS_AURA_BLOCKED_KEY),true);
+  if(failure==='lease-write')assert.equal(f.dp.get(STATUS_AURA_KEY),before,'rollback retained the now-rejected scalar');
+  assert.equal(f.native.get('haste').showParticles,true);
+  f.p.getEffect=read;f.p.setDynamicProperty=write;
+  forgetStatusAura(f.p.id);STATUS_AURA_TEST.blockedNative.delete(f.p.id);restoreStatusAura(f.p);tickStatusAura(()=>0);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.equal(f.particles.length,0);f.close();
+ }
 });

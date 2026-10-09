@@ -7,7 +7,7 @@ import unittest
 
 from record_shaker_migration import EVIDENCE_NAME, LOG_NAME, PREFIX, validate_phase, write_evidence
 
-VERSION = '0.1.112'
+VERSION = '0.1.113'
 
 
 def transcript(phase):
@@ -33,7 +33,7 @@ def transcript(phase):
     else:
         case('native-aura-saved-restore', duration=450, ownLease=True)
         case('native-aura-foreign-handoff', duration=797, ownLease=False, nativeParticleFlagsReadable=False)
-    case('native-one-tick-invisibility-expiry', playerConcealmentVerified=False)
+    case('native-one-tick-invisibility-expiry', nativeTicksObserved=2, scriptTicksWaited=3, playerConcealmentVerified=False)
     case('native-outline-registry', glowing=False, client=False)
     case('native-put-recovery', activations=2, idleCallbacksMeasured=False)
     case('native-splash-rolled-heal', health=6, effects=1, eventEnvelope='observer', physicalImpact=False)
@@ -143,6 +143,22 @@ class RecorderTests(unittest.TestCase):
         self.reject(row, raw+PREFIX.encode()+b'{"kind":"failure","error":"late failure"}\n')
         self.reject(row, raw+b'Player connected: unexpected\n')
         self.reject(row, raw.replace(b'"nativeEquality": true', b'"nativeEquality": false'))
+
+    def test_invisibility_expiry_requires_bounded_native_clock_evidence(self):
+        for key in ('nativeTicksObserved', 'scriptTicksWaited'):
+            row = transcript('first')
+            del mode(row, 'native-one-tick-invisibility-expiry')[key]
+            self.reject(row)
+        for key, values in [('nativeTicksObserved', [0, 1, 19, True, 2.5]),
+                            ('scriptTicksWaited', [0, 61, True, 3.5])]:
+            for value in values:
+                with self.subTest(key=key, value=value):
+                    row = transcript('restart')
+                    mode(row, 'native-one-tick-invisibility-expiry')[key] = value
+                    self.reject(row)
+        row = transcript('first')
+        mode(row, 'native-one-tick-invisibility-expiry')['playerConcealmentVerified'] = True
+        self.reject(row)
 
     def test_new_outputs_never_replace_either_existing_evidence_file(self):
         for existing in (EVIDENCE_NAME, LOG_NAME):

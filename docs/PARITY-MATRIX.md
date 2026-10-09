@@ -1,6 +1,26 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.135 / World Liquor 0.1.112
+## Current repair candidate: Tavern 0.6.136 / World Liquor 0.1.113
+
+[T136 scope](RELEASE-NOTES-0.6.136.md) retains the T134/T135 implementation and
+corrects a runtime defect exposed by T135 canonical run `37873046866`. W113
+pairs the new T136 dependency; G119 is unchanged. New exact-source CI, complete
+paired native first/restart, publication, human-client and LIVE results are pending.
+
+| Area | Current change or investigation | Evidence boundary |
+| --- | --- | --- |
+| Native aura ownership clock | Track and persist observed native remaining duration; a paused entity-effect countdown must not be treated as an external refresh merely because system ticks advanced. | Full-scene diagnosis observed speed 600 at ticks 145, 146 and 147, versus the old projected 598; own effectAdd was consumed in the same tick, no external event, valid entity with health 8. The tolerance and assertion timing are not relaxed. Corrected full native/restart evidence is pending. |
+| Previously completed T135 checks | Preserve its 12 successful CI jobs and completed three-ingredient portable equality/clone plus six machine first-phase cases. | The aura failure left the complete paired restart unfinished. Earlier inventory persistence and W112 package/geometry success retain their own scopes and do not certify T136/W113. |
+| Board multiline candidate | [Isolated diagnostic generator](../tools/client-parity/README.md) uses the native factory hook, exact board markers, mutually exclusive input guards, 320/350/1500 limits, two dropdown indices and original guide animation. | Generator/syntax checks pass; native hidden-sibling writeback, raw-newline input, focus, foreign forms and keyboard/touch/gamepad behavior are unverified. Production remains the escaped single-line editor. |
+| Camera roll | Stable API has three-axis `playAnimation` through the documented free-camera route. | Native-first-person additive roll preserving aim, hands and arbitrary foreign camera ownership is unproven and unimplemented; this is not a claim that three-axis camera animation is impossible. |
+
+Implemented RGB/outline/animation/PBR/particle paths still need human rendering
+and operation comparison. Arbitrary nonstackable inputs, through-wall outlines,
+whole-player hiding/target clearing, dropped-item contexts, native movement/XP
+and other effect/event gaps remain as documented. Historical sections retain their
+original scope; they do not upgrade unfinished scenes to current acceptance.
+
+## Retained T135 / W112 repair scope
 
 [T135 repair scope](RELEASE-NOTES-0.6.135.md) retains the T134 implementation
 and limitations below. Actual T134 CI run `37869770416` exposed two runtime

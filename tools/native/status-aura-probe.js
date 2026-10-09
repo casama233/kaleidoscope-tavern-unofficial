@@ -39,9 +39,29 @@ export async function runStatusAuraProbe({phase,dimension:d,out}){
   wolf.remove();
  }
  const invisible=d.spawnEntity('minecraft:wolf',{x:-14.5,y:300,z:-14.5});
- invisible.addEffect('invisibility',1,{amplifier:0,showParticles:false});await pause(2);
+ // A newly ticking mob's native countdown can pause while script ticks advance.
+ // Observe this recipient's native clock instead of treating pause(2) as proof
+ // that a one-tick gameplay effect has had time to expire. Never refresh either
+ // effect, and fail explicitly if its native clock does not advance in budget.
+ const started=system.currentTick;
+ invisible.addEffect('speed',20,{amplifier:0,showParticles:false});
+ const sentinel=()=>{
+  const effect=invisible.getEffect('speed');
+  check(effect&&effect.amplifier===0&&Number.isInteger(effect.duration)&&effect.duration>0&&effect.duration<=20,'native countdown sentinel missing or invalid');
+  return effect.duration;
+ };
+ const initialTicks=sentinel();let remaining=initialTicks;
+ while(remaining===initialTicks&&system.currentTick-started<60){await pause(1);remaining=sentinel();}
+ check(remaining<initialTicks,'native countdown did not start within 60 script ticks');
+ const appliedAtRemaining=remaining;
+ invisible.addEffect('invisibility',1,{amplifier:0,showParticles:false});
+ while(appliedAtRemaining-remaining<2&&system.currentTick-started<60){
+  await pause(1);const next=sentinel();check(next<=remaining,'native countdown sentinel was extended');remaining=next;
+ }
+ const nativeTicksObserved=appliedAtRemaining-remaining,scriptTicksWaited=system.currentTick-started;
+ check(nativeTicksObserved>=2&&scriptTicksWaited<=60,'native countdown did not advance two ticks within 60 script ticks');
  check(!invisible.getEffect('invisibility'),'one-tick native invisibility did not expire');invisible.remove();
- out('case',{mode:'native-one-tick-invisibility-expiry',phase,playerConcealmentVerified:false});
+ out('case',{mode:'native-one-tick-invisibility-expiry',phase,nativeTicksObserved,scriptTicksWaited,playerConcealmentVerified:false});
  out('case',{mode:'native-outline-registry',phase,glowing:EffectTypes.getAll().some(type=>type.id==='minecraft:glowing'||type.id==='glowing'),client:false});
  check(statusAuraDiagnostics.nativeReadbackFallbacks===0,'native aura fell back after invalid readback');
 }

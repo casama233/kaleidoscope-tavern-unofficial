@@ -34,6 +34,35 @@ class IdentityTests(unittest.TestCase):
   self.assertEqual(previous_bytes(self.r,self.p),encode(old))
   value['dependencies'][1]['version']='2.9.0';self.p.write_bytes(encode(value))
   with self.assertRaises(AssertionError):previous_bytes(self.r,self.p)
+ def test_exact_rp_empty_dependencies_layer_keeps_version_and_historical_guards(self):
+  name='runtime/RP/manifest.json';encode=lambda value:(json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode()
+  old={'header':{'uuid':'rp','version':[1,2,2]},'modules':[{'uuid':'rp-module','version':[1,2,2]}],'capabilities':['pbr']}
+  normalized={**old,'dependencies':[]}
+  current=json.loads(json.dumps(normalized));current['header']['version']=[1,2,3];current['modules'][0]['version']=[1,2,3]
+  self.fixture(name,encode(current),encode(old),{'kind':'owned_manifest','reviewedVersion':[1,2,2],'ownedUuids':['bp','rp']})
+  self.ledger=json.loads((self.r/'data/baseline-reconciliation.json').read_text());self.ledger.update(schema=1,testOnly=True)
+  original=encode({**old,'capabilities':[]});historical=self.ledger['files'][name]
+  historical.update(before=hashlib.sha256(original).hexdigest(),beforeContent=original.decode())
+  unchanged=json.loads(json.dumps(historical))
+  self.ledger['reviewedAssetDeltaLayers']=[{'release':'1.2.3','files':{name:{
+   'before':hashlib.sha256(encode(old)).hexdigest(),'after':hashlib.sha256(encode(normalized)).hexdigest(),
+   'reason':'Exact reviewed explicit empty RP dependency field after bound identity normalization',
+   'beforeGzipBase64':base64.b64encode(gzip.compress(encode(old),mtime=0)).decode()}}}]
+  self.write_functional_ledger();self.assertEqual(previous_bytes(self.r,self.p),original)
+  self.assertEqual(self.ledger['files'][name],unchanged)
+  for field,value in [('dependencies',[{'uuid':'foreign','version':[1,0,0]}]),('capabilities',['pbr','unreviewed']),('unreviewed',True)]:
+   changed={**current,field:value};self.p.write_bytes(encode(changed))
+   with self.assertRaisesRegex(AssertionError,'Reviewed asset source mutated'):previous_bytes(self.r,self.p)
+  self.p.write_bytes(encode({k:v for k,v in current.items() if k!='dependencies'}))
+  with self.assertRaisesRegex(AssertionError,'Reviewed asset source mutated'):previous_bytes(self.r,self.p)
+  bad=json.loads(json.dumps(current));bad['modules'][0]['version']=[1,2,4];self.p.write_bytes(encode(bad))
+  with self.assertRaises(AssertionError):previous_bytes(self.r,self.p)
+  # A later fully bound pure identity bump still resolves this exact body delta.
+  current['header']['version']=[1,2,4];current['modules'][0]['version']=[1,2,4];self.p.write_bytes(encode(current))
+  for filename,value in [('package.json',{'version':'1.2.4'}),('release.json',{'version':'1.2.4'}),('baseline.json',{'version':[1,2,4]})]:(self.r/filename).write_text(json.dumps(value))
+  self.assertEqual(previous_bytes(self.r,self.p),original)
+  self.ledger['files'][name]['beforeContent']='changed historical preimage';self.write_functional_ledger()
+  with self.assertRaisesRegex(AssertionError,'Baseline preimage corrupt'):previous_bytes(self.r,self.p)
  def test_inconsistent_current_release_or_unknown_projection_is_rejected(self):
   old=b"BUILD_VERSION='1.2.2-baseline.1'";self.fixture('runtime/build.js',old.replace(b'1.2.2',b'1.2.3'),old,{'kind':'build_identity','reviewedVersion':'1.2.2'})
   (self.r/'baseline.json').write_text(json.dumps({'version':[1,2,4]}))

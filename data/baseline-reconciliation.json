@@ -8386,6 +8386,20 @@
           "beforeGzipBase64": "H4sIAAAAAAACA+1ZTY+bMBC951cg9pAgRU26rarVSpV67a2XnqqVZYxJrBgb2YaWrvLfaxMg5isJqEqiCC6JxjOeN+OZxwDvM8dxGYywjCHC7qvjSixSLEDIReQuzWqQ6XWCgJ8oxdkqhgxTYExWJIIbY/Ou1bSiT1hA2EZqya9c4hQr9mpuafw8GQ/FpkDhPyoROHfYoQ+4hiRIcDA8oayyONdBnFKMFOGsS+u4WqGxwEi3sNgvx0UBQkIxkJlUOBoU0TnDq0VXOkoJ/m27kDwRCINY8BgLlVX7LxaMK2exKANxvjrzuedw4dRElEOz/dzzPAeywGlY2eEb9e/spy7GHxDtdJnNC5PahsVfuUrISkGdUQYwU4JoSYBjtQVoC0Vu24RywjIyAESm84h2ChI6zJphtdXtI2OMCBxoS3RuNwLG2GTI8+zMKxOHamf+KSWS+BRXp5r/vs2K83V3CmwSXWbAzgeATLduXj9V8xpRde4hJTHwOd8VEFzCiNLhgCS1mntd4lsfnBa6oTD1jXjClFb+uK6JdWpjI/1SSmNDF8/rNuDmMVwV9MtI0PXTvybkl7F5rorummifPw9D23sPOkKNeEBCgvIAem5BUAh4bB3EddtxKu02M91VpkCHp+lHAV8TkK2TQppgy0HdSa7S2XUVVEuxTO3hTrpsLkvyt+npcH16XnbIGqK31n4UZliYzLZWynvqa/U3J6gqkENt4KDGq23ASQp6MZenW5edxZwXl/vNGks+nCO11h4+oYRhaEIPIZW4Q6E1uvQd7rhxpseyPgZUcV1kf3Ia6NC/cC44Xvvl/0tFz2gzLC0X73F3qekZqOxW7x2tOuPvnY9aRTRoTvK6wV06fVgJavb1rG+1lso+Hm0OA4/Bpa2obs2nJ2auiVMnTp04dewT5L3yav155TFYtRHTrTm195FwYtSJUSdGHfdW7V75tHqZ8hhUegzn1iza9ZZqItCJQCcCHf5p4QbcOWvqWN8pZvvZP6ZSTqSGHAAA"
         }
       }
+    },
+    {
+      "release": "0.6.143",
+      "files": {
+        "runtime/RP/manifest.json": {
+          "before": "d119f90e2cd8c1d454c378208ca2823264e981a791fcb7a59d47309e55dfe99c",
+          "after": "2bffa71c87421767337269f194024c5d40d874541f98a56ccef115ecd7be0325",
+          "reason": "T143 frozen RP manifest synchronizes identity and explicitly records an empty dependencies array, previously absent. Exact reviewed normalized 116 preimage/postimage only; preserve all historical hashes, runtime bytes and claims. Nonempty dependencies, other fields or invalid release identity remain rejected.",
+          "reviewedPredecessorCommit": "82beed2658530d6c34e16fd4c7a99efa81a21b6c",
+          "reviewedSourceCommit": "956727d8ed71f4a766f8668b680d3e9720db53be",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.143.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA2WQ3WqEMBCF730KybUpMbuJ2lcpRcbJ2IauUaIWiuy7N/4LezPMmZkvnJMpimNWt76Bofwl39vWsfdYJvP4m8CQD3IKKmgHDQXFOsCft0Uk68JQj952wwqv++tsOxtHa+Y9yqIQRgkusc64KkLJcw1c1NIIeRcmVXpnTk8fyyCORbI1em/SVC/d58Y01pXkvqyj8hVPd0oevBIrHupzCd60ZnxQf1DTdsiGv275AU99O3oMJ/sbRzh1pwoyWXCUWHB1y5FXGQLHVAHoWlN1w5N69XcJeIl4hlx9BqfRFpghdFDZhx3sxTLrKs/mk+gZ/QOYakyl5AEAAA=="
+        }
+      }
     }
   ]
 }

@@ -23,6 +23,7 @@ COCKTAIL_ASSET_PATHS=frozenset({
    'runtime/RP/texts/ru_RU.lang','runtime/RP/texts/languages.json',
    'runtime/RP/ui/hud_screen.json',
    'runtime/RP/ui/server_form.json',
+   'runtime/RP/manifest.json',
    'runtime/BP/items/depth_charge.json',
    'runtime/BP/items/mystery_cocktail.json',
    'runtime/BP/items/nether_special.json',

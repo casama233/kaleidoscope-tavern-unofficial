@@ -4,7 +4,7 @@ T136 retains the complete [T134 implementation](RELEASE-NOTES-0.6.134.md) and
 [T135 corrections](RELEASE-NOTES-0.6.135.md). It addresses a runtime aura-clock
 defect exposed by the complete native scene, rather than changing the observer's
 expected outcome. W113 will pair with the exact T136 dependency; Grilling remains
-G119. The frozen functional source is recorded below; final peer, new CI and publication references are pending.
+G119. The frozen functional source and exact reviewed pair are recorded below; new CI and publication references are pending.
 T134/T135 release notes, failures, frozen identities, witnesses and history remain
 unchanged.
 
@@ -60,6 +60,24 @@ new full native first/restart result remains pending.
   counterexamples. Independent code review found no blocker. The closed native
   recorder regression passed 7/7. These are script/tool tests, not BDS or client
   acceptance.
+
+## Exact reviewed pair
+
+Tavern CI pins World Liquor W113 source
+[`f73f6e7184c545cf69559305c2cd1e7b22f10a98`](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/commit/f73f6e7184c545cf69559305c2cd1e7b22f10a98)
+in all five paired lanes. W113 pins Tavern's reviewed source
+[`7ad4f5849edce3eda23b7aaad7fa171b9c0604de`](https://github.com/casama233/kaleidoscope-tavern-unofficial/commit/7ad4f5849edce3eda23b7aaad7fa171b9c0604de),
+which adds the exact reconciliation witness to the frozen functional source
+`c169a2072373b1feda12b08fdd741ed4ecdbc1ec`. These two Tavern anchors have identical
+runtime; the later CI-pin commit changes only workflow/prose. The witness keeps
+its functional anchor and does not point recursively to a commit containing itself.
+
+W113's clean archive is `Kaleidoscope_World_Liquor_Unofficial_0.1.113_preview1.mcaddon`,
+7,164,859 bytes; SHA256
+`874a039ccc3b50dc029138c8005563f6b8ba7613753664ca4f1e9ec21b90a047`.
+Both current PRs ([Tavern302](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/302),
+[WorldLiquor91](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/91))
+require their new exact-source checks. The older W112 success is not substituted.
 
 ## Evidence that remains bounded
 

@@ -11,8 +11,7 @@
 | 世界名酒 | 0.1.113 | 保留 [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；候選精確配對 T136、保留 87 個無碰撞家族 helper | 新配對 CI pending；各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
 | 私有料理整合 | 1.0.30 | 保持已核驗 private canonical；不在公開倉庫保存作者私有完整腳本 | 原生與真人證據按功能 scope，不能用公開包 CI 代替 |
 
-當前 T136／W113 的 exact source／peer references、新 CI、完整 native
-first／restart、archive／發布、真人與 LIVE 均 pending。T135 canonical
+當前 T136／W113 的 source／peer 與本機 archive 已固定於 [T136 notes](../docs/RELEASE-NOTES-0.6.136.md#exact-reviewed-pair)。新 CI、完整 native first／restart、canonical 發布、真人與 LIVE 在此次配對提交時仍 pending。T135 canonical
 [run 37873046866](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37873046866)
 的 aura 失敗保留：system ticks 145／146／147 的 speed 均剩 600，舊倒算
 598 誤撤外觀所有權；own effectAdd 正確消耗、無外部 event、health 8／valid。

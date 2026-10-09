@@ -1,8 +1,35 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.132 / World Liquor 0.1.109
+## Current repair candidate: Tavern 0.6.137 / World Liquor 0.1.115 / Grilling 2.8.121
 
-[T132 release scope](RELEASE-NOTES-0.6.132.md) is the current source-repair entry.
+[T137 complete scope](RELEASE-NOTES-0.6.137.md) integrates the repairs onto the
+public T136 three-language guide. The old PR302 alternate T136 is an unmerged
+source with a failed native restart, not the public guide release. The exact
+new paired CI/native run is pending; 41 targeted aura cases pass. No new human
+client or LIVE acceptance is claimed. Earlier sections retain their own version
+and evidence; superseded implementation gaps below are historical, not T137 status.
+
+| Area | T137 implementation | Still open / evidence boundary |
+| --- | --- | --- |
+| Machine ingredients and operations | Complete native ItemStack clones, metadata-aware merging, checked legacy adoption, extraction, consumption, destruction and rollback; Creative container exchange and Adventure ordinary use. | New exact native first/restart and player flow pending. Two complete machine-slot restart cases passed in the old alternate run before its aura failure. Arbitrary third-party fluid capabilities remain outside the implemented scope. |
+| Portable shaker ingredients | Bounded self-contained stackable metadata, bidirectional native reconstruction before debit, native bare Adventure-list IDs preserved, and finite XYZ comparison independent of key order. | Three arbitrary decorated nonstackable inputs remain unsupported; native nested-container capacity evidence does not establish that every future approach is impossible. |
+| Board foreground and outline | Source black/cream and colored dark outlines, glyph-specific shadow offsets including Unihex 0.5, eight offsets, separate distance-culled outline pass; all user alignment extensions retained. | Camera-position 16-block check differs from Java camera-entity feet and spyglass exemption. Actual weight, clipping and sorting pending. Native multiline editor is not in production. |
+| Ingredient animation / signature RGB / PBR | Shared-clock 24-tick ice-grape frames; existing 336-color atlas plus arbitrary RGB with source texel shading/coverage, ten color groups and six frames in the same helper; 25 required PBR companions. | Source/geometry checks are not rendered shader, global-phase, mip, resource-pack or Vibrant Visuals acceptance. Immutable T134 allocations remain source-scoped. |
+| Native/custom status appearance | Source particle colors, float32 blending and emission; native remaining-time ownership, verified before/load/after replay ticket, foreign vetoes and initial-spawn order handling. | 41 targeted production-callback cases pass; new native first/restart pending. Effect API lacks complete foreign visibility/source flags; identical after-only events cannot be distinguished. |
+| Grass stealth / Tipsy | Non-overwriting one-native-tick invisibility lease and prompt exit; default Tipsy leaves aim unchanged, yaw adapter requires explicit opt-in. | Whole-player renderer/equipment hiding, target clearing and additive first-person roll unimplemented. Stable three-axis free-camera animation is not proof of additive native camera behavior. |
+| Shared guide and retained hand/items | Public T136 trilingual seven-entrance guide, complete preparation and G121 Cookery view retained; T131 four animated item meshes and offhand shaker route remain. | Current keyboard/touch/controller, navigation, hands/FOV, animation and sound acceptance pending. World Liquor retains its current guide, Dassai and four author cup models. |
+| Isolated multiline candidate | Separate [client probe](../tools/client-parity/README.md), original native factory and exact board markers, foreign fallback, length limits and two dropdowns. | No production entry, board write or client PASS; focus, submit indices, raw newlines, scrolling and platform keyboards require real client evidence. |
+| Other source gaps | Existing bounded reach, step, XP and effect adapters retained. | Native global reach/step-height/XP pickup, through-wall outlines, dropped 3D/GUI 2D, native Luck and full event/foreign-writer semantics remain incomplete. |
+
+The retained [alternate source](https://github.com/casama233/kaleidoscope-tavern-unofficial/tree/71e5c372cce282d8130290d01812929c9e7db1f8)
+and [run 37875325541](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37875325541)
+completed 12 jobs, all 18 native first-phase cases and six restart cases (two
+machine cases), then failed aura restoration. This bounded evidence is preserved;
+it does not certify the new integration, the remaining restart cases or a client.
+
+## Retained T132 repair scope: Tavern 0.6.132 / World Liquor 0.1.109
+
+[T132 release scope](RELEASE-NOTES-0.6.132.md) retains that earlier source-repair scope; current status is the T137 table above.
 Forge main `c4ec1880` remains the original comparison target. The shared instant
 adapter uses its established NeoForge 1.21.1 policy; the actual Forge/Neo potion
 eligibility difference is explicit below. Optional family peer G119 is unchanged.

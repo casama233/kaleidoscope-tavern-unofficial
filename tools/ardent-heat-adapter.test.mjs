@@ -34,6 +34,11 @@ function fixture(rows,{command=()=>1,sprinting=true}={}){
   getRotation:()=>({x:0,y:0}),
   getComponent:id=>({'minecraft:player.exhaustion':exhaustion,'minecraft:player.hunger':hunger,'minecraft:player.saturation':saturation}[id]),
   getDynamicProperty:k=>dp.get(k),setDynamicProperty:(k,v)=>dp.set(k,v),
+  getEffect(id){
+   const effect=effects.findLast(row=>row.id===id);if(!effect)return undefined;
+   const duration=effect.ticks-(system.currentTick-effect.at);
+   return duration>0?{typeId:id,amplifier:effect.options?.amplifier??0,duration}:undefined;
+  },
   addEffect(id,ticks,options){effects.push({id,ticks,options,at:system.currentTick});events.push(id);},
   applyDamage(){assert.fail('one collision must not apply the fifth naked collision damage');}
  };

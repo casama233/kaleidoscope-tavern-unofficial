@@ -1,16 +1,14 @@
 {
-  "version": "0.6.136",
-  "tag": "v0.6.136-beta.1",
-  "title": "森羅物語：酒館 0.6.136 測試版｜三語指南全面重修",
+  "version": "0.6.137",
+  "tag": "v0.6.137-beta.1",
+  "title": "森羅物語：酒館 0.6.137 測試版｜原版視覺、原料保存與效果重啟修復",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.136.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.137.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "2a1561f4aa0345e535c6d25e8199e7332f50411c1deb4f5118f625a7e568a292",
-  "reviewed_runtime_source": "496ce702161fb48ab6f67ea6645ad1e4d41b2a12",
-  "native_evidence_scope": "Guide-only revision on the deployed T132 gameplay source, paired with W113 and registered G121 Cookery bridge. Focused projection/SDK controller checks pass; exact CI and full-family native/saved-world/deployment evidence remain required. No Player simulation, rendered client acceptance or failed PR302 lease-work acceptance is asserted."
+  "native_evidence_scope": "T137 preserves the canonical T136 three-language guide and shared Cookery entrance, integrates reviewed machine/portable metadata and source visuals, and fixes native aura clock/load replay ownership. Paired W115 keeps the current 67-page guide and G121. New exact-source CI and complete paired native first/restart evidence remain required; client, private family saved-world and LIVE are not verified."
 }

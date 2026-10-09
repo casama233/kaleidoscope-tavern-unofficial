@@ -1,4 +1,5 @@
 import {nativeItems,nativeStoragePlan,glasswareStorageKey,projectNativeStoredState} from './native-item-storage.js';
+import {machineItems,machineIngredientPlan} from './machine-item-storage.js';
 import {potionDisplayRemoval} from './vanilla-bottle-displays.js';
 import {feedback} from './break-feedback.js';
 import {consumeScriptedBreak,replaceBlockWithoutNaturalDrops} from './scripted-block-change.js';
@@ -7,7 +8,7 @@ import {restorePotion} from './potions.js';
  * This component releases stored items and removes state/helpers after destruction.
  */
 import {world,system,ItemStack,BlockPermutation} from '@minecraft/server';
-import {barrelCells} from '../core/machines.js';
+import {barrelCells,validateMachine} from '../core/machines.js';
 import {validateShaker} from '../core/mixology.js';
 import {furnitureBlock,itemId,GLASSWARE_SLOTS} from '../core/furniture.js';
 import {boardRuntimeKey,chalkCenter} from '../core/boards.js';
@@ -60,6 +61,38 @@ function naturalShakerBreak(event,key){
  }
  native.finish();clearHelpers(dimension,position,[key]);return true;
 }
+/** A broken machine may contain arbitrary native ingredient metadata. Keep the
+ * original carrier and owner record recoverable until all drops actually exist. */
+function naturalMachineBreak(event,{root,cells,key,drop}){
+ const {block,brokenBlockPermutation:permutation}=event,dimension=block.dimension,position={...block.location};
+ const raw=world.getDynamicProperty(key),spawned=[];let native;
+ try{
+  let data;
+  if(raw===undefined){
+   if(machineItems.readAdopted({key,dimension,position:root}))throw new Error('NATIVE_MACHINE_STATE_MISSING');
+  }else{
+   if(typeof raw!=='string')throw new Error('CORRUPT_STATE');data=validateMachine(JSON.parse(raw));
+   native=machineIngredientPlan({dimension,location:root},data,undefined);
+  }
+  native?.apply();world.setDynamicProperty(key,undefined);
+  const discard=event.entitySource?.typeId==='minecraft:player'&&event.entitySource.getGameMode()==='Creative'||world.gameRules.doTileDrops===false;
+  if(!discard){
+   const stacks=[new ItemStack(drop,1),...(data?.kind==='pressing_tub'?native.before.filter(Boolean):[])];
+   for(const stack of stacks)spawned.push(dimension.spawnItem(stack,{x:root.x+.5,y:root.y+.5,z:root.z+.5}));
+  }
+ }catch(error){
+  let failed=false;for(const entity of spawned.reverse())try{entity.remove();}catch{failed=true;}
+  try{native?.rollback();}catch{failed=true;}try{world.setDynamicProperty(key,raw);}catch{failed=true;}
+  let restored=false;
+  try{const current=dimension.getBlock(position);if(current?.typeId==='minecraft:air')replaceBlockWithoutNaturalDrops(current,permutation);restored=current?.typeId===permutation.type.id;}catch{failed=true;}
+  if(failed)throw new Error('NATIVE_MACHINE_DESTRUCTION_ROLLBACK_FAILED: '+error);
+  if(!restored)throw new Error('NATIVE_MACHINE_DESTRUCTION_RECOVERY_REQUIRED: original native data retained; owner cell changed. '+error);
+  throw error;
+ }
+ native?.finish();const feedbackCells=[];
+ for(const cell of cells){const b=dimension.getBlock(cell.pos);if(!b||b.typeId!==cell.id)continue;const visual=feedback.snapshot(b);removeBlock(dimension,cell.pos,cell.id);if(visual&&b.typeId!==cell.id)feedbackCells.push(visual);}
+ feedback.emit(feedbackCells,{sound:false});clearHelpers(dimension,root,[key]);return true;
+}
 export function naturalBreak(event,params){
  const {block,brokenBlockPermutation:perm}=event,d=block.dimension,id=perm.type.id,p={...block.location},short=id.slice(NS.length+1),dim=d.id.split(':')[1];
  if(consumeScriptedBreak(block,id))return;
@@ -80,12 +113,13 @@ export function naturalBreak(event,params){
   if(wide){add(id,2);} // Three single boards form a wide board.
   if(short!=='stepladder')keys.push(boardRuntimeKey(d.id,root));
  }
- if(cells.length){const key=d.id+'/'+at(root)+'/'+drop;if(seen.get(key)===system.currentTick)return;seen.set(key,system.currentTick);for(const [k,t]of seen)if(t<system.currentTick-1)seen.delete(k);}
+ let seenKey;
+ if(cells.length||short==='pressing_tub'){seenKey=d.id+'/'+at(root)+'/'+drop;if(seen.get(seenKey)===system.currentTick)return;seen.set(seenKey,system.currentTick);for(const [k,t]of seen)if(t<system.currentTick-1)seen.delete(k);}
  const suffix=dim+'/'+at(root),record=(key)=>{keys.push(key);const raw=world.getDynamicProperty(key);return typeof raw==='string'?JSON.parse(raw):undefined;};
  const storedDrops=(key,data)=>{const plan=nativeStoragePlan(block,key,projectNativeStoredState(key,data),undefined);nativePlans.push(plan);for(const stack of plan.before)if(stack)drops.push(stack);};
  let data;
  if(short==='barrel_core'||short==='barrel_part'||short==='pressing_tub'){
-  data=record('kt:machine/'+suffix);if(data?.kind==='pressing_tub')for(const row of data.slots.filter(Boolean))add(row.id,row.count);
+  try{return naturalMachineBreak(event,{root,cells,key:'kt:machine/'+suffix,drop});}catch(error){seen.delete(seenKey);throw error;}
  }else if(short==='shaker_station'){
   const key='kt:shaker/'+suffix;keys.push(key);if(naturalShakerBreak(event,key))return;
  }else if(cupItem(id)){

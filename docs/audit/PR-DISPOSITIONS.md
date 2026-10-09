@@ -2,7 +2,33 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 當前指南候選與保留來源
+## 當前修復候選：T137／W115／G121
+
+以公開 main `c461a8e643a08304587ef468ff7f8051369a2dd5` 的三語指南為基底，
+重新整合 PR302 的原料／交易／視覺／沉浸修復與新的 aura 重播守衛。
+[本輪完整範圍](../RELEASE-NOTES-0.6.137.md) 自包含修復、失敗診斷及剩餘差距；
+41 個 aura 定向案例已通過，最終 source／archive／配套 PR 和 exact CI
+證據仍待本輪補齊，未預先宣稱 native、client 或 LIVE 成功。
+
+| 來源 | 當前處置 |
+| --- | --- |
+| 公開 [T136 三語指南](../RELEASE-NOTES-0.6.136.md)／main `c461a8e6` | 完整保留七入口、製作明細與同一個可選 Cookery view；公共 notes／歷史原樣保留。 |
+| [PR302 unmerged alternate T136](https://github.com/casama233/kaleidoscope-tavern-unofficial/tree/71e5c372cce282d8130290d01812929c9e7db1f8) | 固定 `71e5c372cce282d8130290d01812929c9e7db1f8` 和 [CI 37875325541](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37875325541) 的失敗。12 jobs、首次 18 cases 與重啟前六 case 成功不等於 paired native 成功；不將其 alternate T136 notes 蓋到公共指南。修復內容以新 T137 身份整合。 |
+| [T133 draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298) `625ff769f4c656ff224314bba38d26a1ef5dacc0` | 保留 reviewed finite-XYZ 鍵序修復與來源；承接修復不表示原 PR 已合併。 |
+| T134／T131 geometry witnesses | 保留原 release、reviewed source、hash 及 reviewDocument；T134 notes 是未合併 PR302 的 immutable 來源證據，不改寫公共版本歷史。 |
+| W115／G121 | 保留公共世界名酒指南、W110 Dassai／四杯模型作者適配；保留 G121 與已合併 G120，不退回 G119。W115 精確相依本輪 T137。 |
+
+原生剩餘時計與 invalid-before → verified entityLoad → single-use after
+已實作，valid foreign-before 會 veto；同 tick 的 Player initial-spawn 只
+保留已驗證 proof，不開一般豁免窗口。完全相同 after-only 來源仍無欄位可辨。
+微醺 additive roll 與正式 multiline 仍未完成；隔離 UI 工具不計作修復驗收。
+既有 LIVE 持續授權不变，本候選仍須 canonical PR／CI、完整家族與存檔演練、
+准入部署及讀回；最後記錄的 T132／G119／W110 不當成本次新讀回。
+
+## 保留的公開 T136 指南候選與來源
+
+以下是公開指南候選的原始範圍；其中「未納入本候選」專指當時 T136，
+當前 T137 的整合狀態以上節為準。
 
 本輪候選為 **T136／W113／G121**。T136 凍結來源 `496ce702` 以已部署的
 T132 玩法重修指南；W113 `92168bec` 保留 W110 玩法並重寫 67 個三語條目；

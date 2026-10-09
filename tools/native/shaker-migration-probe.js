@@ -7,9 +7,16 @@ import {migrateShakerSlot} from './bedrock/mixology.js';
 import {emptyShaker} from './core/mixology.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable} from './core/immersion.js';
 import {canonical} from './core/util.js';
+import {addInput} from './core/mixology.js';
+import {decodePortable} from './core/immersion.js';
+import {captureStackableIngredient,restoreStackableIngredient} from './core/ingredient-metadata.js';
+import {makeStack} from './bedrock/transactions.js';
+import {runMachineIngredientsProbe} from './machine-ingredients-probe.js';
+import {runStatusAuraProbe} from './status-aura-probe.js';
 import {pulseVision,customEffectDiagnostics} from './bedrock/custom-effects.js';
 import {declareInstantEntityProfile,instantEffectDiagnostics} from './bedrock/instant-effects.js';
 import {spawnThrownDrink,resolveThrownDrinkImpact,THROWN_EFFECTS,storageProjectileDiagnostics} from './bedrock/storage-projectile.js';
+
 import {WORLD_LIQUOR_PROBE_INPUTS} from './native-probe-inputs.js';
 
 const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
@@ -27,6 +34,32 @@ let playerSessions=0;world.afterEvents.playerSpawn.subscribe(()=>{playerSessions
 function observed(item){
  return canonical({name:item.nameTag,lore:item.getRawLore(),destroy:item.getCanDestroy(),place:item.getCanPlaceOn(),
   keep:item.keepOnDeath,lock:item.lockMode,properties:Object.fromEntries(item.getDynamicPropertyIds().map(id=>[id,item.getDynamicProperty(id)]))});
+}
+function portableIngredients(container,phase){
+ if(phase==='first'){
+  let state=emptyShaker();
+  // Repeated legal inputs retain distinct names/lore; sugar is not a Java shaker ingredient.
+  for(const [index,type]of Array(3).fill('kaleidoscope_tavern:plum_wine_q4').entries()){
+   const input=makeStack(type,1);input.nameTag='Native ingredient '+index;
+   input.setLore([{text:'Keep the original note '+index}]);
+   input.setCanPlaceOn(['minecraft:stone']);
+   state=addInput(state,type,runtimeRegistry());state.slots.at(-1).metadata=captureStackableIngredient(input,makeStack);
+   container.setItem(index+3,input);
+  }
+  const item=makeStack(SHAKER_ID,1);item.setDynamicProperty(PORTABLE_DATA,encodePortable(state,'native-portable-ingredients'));
+  container.setItem(2,item);
+  world.setDynamicProperty('qa:portable_ingredients',item.getDynamicProperty(PORTABLE_DATA));
+ }
+ const item=container.getItem(2),raw=item.getDynamicProperty(PORTABLE_DATA),state=decodePortable(raw).state;
+ check(raw===world.getDynamicProperty('qa:portable_ingredients'),'portable ingredient bytes changed on save');
+ check(state.slots.length===3,'portable ingredient count changed');
+ for(const [index,input]of state.slots.entries()){
+  const restored=restoreStackableIngredient(input.item,input.metadata,makeStack),original=container.getItem(index+3);
+  check(restored.isStackableWith(original)&&original.isStackableWith(restored),'native ingredient round-trip mismatch '+index);
+ }
+ const independent=item.clone();independent.setDynamicProperty(PORTABLE_DATA,encodePortable(emptyShaker(),'independent-cleared'));
+ check(item.getDynamicProperty(PORTABLE_DATA)===raw&&container.getItem(2).getDynamicProperty(PORTABLE_DATA)===raw,'portable clone aliases original metadata');
+ out('case',{mode:'portable-stackable-ingredient-metadata',phase,ingredients:3,nativeEquality:true,independentClone:true,fullArbitraryNBT:false});
 }
 async function effectRecipients(d,phase){
  // Production functions operate on real native entities, components, queries
@@ -163,6 +196,9 @@ world.afterEvents.worldLoad.subscribe(()=>system.runTimeout(async()=>{try{
    out('case',{mode:'saved-metadata',slot:index,lock:item.lockMode});
   }
  }
+ portableIngredients(container,phase);
+ await runMachineIngredientsProbe({phase,dimension:d,container,out});
+ await runStatusAuraProbe({phase,dimension:d,out});
  const station=d.getBlock({x:4,y:300,z:0}),put='kaleidoscope_tavern:put_visual';
  for(let attempt=0;attempt<2;attempt++){
   station.setPermutation(BlockPermutation.resolve('kaleidoscope_tavern:shaker_station',{'kaleidoscope_tavern:facing':0,[put]:1}));

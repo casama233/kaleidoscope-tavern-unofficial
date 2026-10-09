@@ -1,5 +1,14 @@
 # Maintained changes
 
+## 0.6.137 — repair candidate
+
+- Integrate native machine ItemStack preservation, checked extraction/consumption/destruction and rollback, Creative container exchange and ordinary Adventure use. Preserve the reviewed finite-XYZ storage repair without claiming its original draft PR was merged.
+- Carry bounded portable shaker metadata through native reconstruction checks; accept native bare Adventure-list IDs without changing their original strings or order. Unsupported inputs remain intact on rejection.
+- Restore source glyph outlines, shared-clock ice-grape animation and arbitrary RGB with original texel shading/alpha coverage; retain all 25 PBR companions and immutable T134/T131 geometry allocations.
+- Add source-backed status particles, prompt grass-stealth expiry and default aim-preserving Tipsy behavior. Use native effect remaining time and a verified, same-tick before/load/after witness for saved appearance replay, including initial-spawn orderings and foreign-event vetoes. All 41 targeted aura cases pass; the new exact native run is pending.
+- Preserve the public T136 three-language guide and optional G121 Cookery view. Pair Tavern 0.6.137 with World Liquor 0.1.115 and Grilling 2.8.121; retain their current guide and author adaptations.
+- Keep the failed PR302 alternate T136 source and CI as historical evidence. The isolated multiline UI probe is not a production fix or client acceptance. [Complete repair scope and remaining gaps](docs/RELEASE-NOTES-0.6.137.md).
+
 ## 0.6.132
 
 - Share Java instant-health/harm dispatch with splash delivery, including source potion immunity, per-recipient policy snapshots, owner attribution and compatible addon declarations.

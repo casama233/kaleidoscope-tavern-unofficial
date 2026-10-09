@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.136
+## Current maintained baseline: 0.6.137
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -6,9 +6,10 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) rewrites all three languages, keeps complete preparation details on demand and shares the same view through the optional Cookery entrance. Pending PR302 gameplay is preserved separately and is not included.
+- [T137 repair candidate](docs/RELEASE-NOTES-0.6.137.md) integrates native machine ingredients, supported portable shaker metadata, board outlines, shaded RGB, animated ingredients and effect appearance repairs onto the public T136 guide source. Its 41 targeted aura cases pass; exact paired CI, native first/restart, client and LIVE acceptance remain pending.
+- The [public T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) is preserved: three languages, seven entrances, complete preparation details and the same view through optional Cookery. It is distinct from the failed, unmerged alternate T136 in PR302; the new notes identify that historical source and its limits.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.136**, World Liquor **0.1.113** and Grilling **2.8.121**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.137**, World Liquor **0.1.115** and Grilling **2.8.121**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -32,7 +33,7 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Exact player-camera roll is unimplemented; the current optional yaw adapter changes aim. Arbitrary signature colors, full internal ingredient ItemStacks, wall outlines, the native board editor and dropped-shaker geometry retain explicit differences. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
+Source-shaded arbitrary RGB and complete native machine ingredient clones are implemented; their rendered appearance and full player flow still need acceptance. Portable shaker metadata is limited to inputs whose reconstruction passes native equality checks; three arbitrary decorated nonstackable ingredients remain unsupported. Default Tipsy no longer moves aim, but additive first-person roll is unimplemented; the optional yaw adapter still changes aim. Native multiline editing has an isolated [client probe](tools/client-parity/README.md), not a production repair. Through-wall outlines, whole-player hiding and target clearing, dropped-shaker display contexts, native reach, step-height, XP pickup and some effect/event semantics remain incomplete. All new hand, item-render, material, sound and input paths need paired client review. See the release notes and matrix for evidence and platform boundaries.
 
 ## Licensing and history
 

@@ -85,6 +85,36 @@ function fixture(){
 }
 const named=i=>new Stack(wine,4,{name:'酒瓶 '+i,lore:[{rawtext:[{text:'Custom '+i}]}],foreign:{'other:opaque':{serial:i}},enchantments:[{id:'unbreaking',level:3}],canPlaceOn:['minecraft:stone'],keepOnDeath:true});
 function fill(f,count=9){const ids=Array(9).fill(null);for(let i=0;i<count;i++){const next=ids.slice();next[i]=wine;const plan=f.plan({oldIds:ids,nextIds:next,incoming:named(i)});plan.apply();plan.finish();ids[i]=wine;}return ids;}
+test('native position key order does not change storage identity or metadata',()=>{
+ const f=fixture(),ids=fill(f,1),position={z:4,y:3,x:2},before=new Map(f.map),entity=[...f.entities.values()][0];
+ assert.deepEqual(Object.keys(JSON.parse(f.map.get(nativeItemKey(f.key))).position),['x','y','z']);
+ assert.deepEqual(Object.keys(position),['z','y','x']);
+ for(const proof of [f.storage.read({key:f.key,dimension:f.dimension,position,ids}),
+  f.storage.readAdopted({key:f.key,dimension:f.dimension,position}),
+  f.storage.inspectForReanchor({key:f.key,dimension:f.dimension,position,entity})])assert.deepEqual(proof.items[0].meta,named(0).meta);
+ assert.deepEqual(f.map,before);
+});
+test('native coordinate comparison refuses wrong axes and non-finite or non-number coordinates',()=>{
+ const invalid=[{x:3,y:3,z:4},{x:2,y:4,z:4},{x:2,y:3,z:5},{x:'2',y:3,z:4},{y:3,z:4},{x:NaN,y:3,z:4},{x:Infinity,y:3,z:4},{x:-Infinity,y:3,z:4},null];
+ for(const position of invalid){
+  const f=fixture(),ids=fill(f,1),before=new Map(f.map);
+  assert.throws(()=>f.storage.read({key:f.key,dimension:f.dimension,position,ids}),/NATIVE_STORAGE_MISMATCH/);assert.deepEqual(f.map,before);
+ }
+ // Matching serialized strings/nulls are still not valid numeric coordinates.
+ for(const coordinate of ['2',NaN,Infinity,undefined]){
+  const f=fixture(),ids=fill(f,1),position={x:coordinate,y:3,z:4},record=JSON.parse(f.map.get(nativeItemKey(f.key)));
+  record.position=position;f.map.set(nativeItemKey(f.key),JSON.stringify(record));const before=new Map(f.map);
+  assert.throws(()=>f.storage.read({key:f.key,dimension:f.dimension,position,ids}),/NATIVE_STORAGE_MISMATCH/);assert.deepEqual(f.map,before);
+ }
+});
+test('coordinate equality does not relax the native slot order or other header guards',()=>{
+ for(const change of [r=>r.schema='1',r=>r.key+='x',r=>r.dimension='minecraft:nether',r=>r.ids=[null,wine,...Array(7).fill(null)]]){
+  const f=fixture(),ids=fill(f,1),record=JSON.parse(f.map.get(nativeItemKey(f.key)));change(record);f.map.set(nativeItemKey(f.key),JSON.stringify(record));const before=new Map(f.map);
+  assert.throws(()=>f.storage.read({key:f.key,dimension:f.dimension,position:{z:4,y:3,x:2},ids}),/NATIVE_STORAGE_MISMATCH/);assert.deepEqual(f.map,before);
+ }
+ const f=fixture(),ids=fill(f,1);f.map.set('kt:native_required/'+f.key,'1');
+ assert.throws(()=>f.storage.read({key:f.key,dimension:f.dimension,position:f.position,ids}),/NATIVE_STORAGE_MISMATCH/);
+});
 for(let slot=0;slot<9;slot++)test(`native storage removes named slot ${slot}, not another same-ID bottle`,()=>{
  const f=fixture(),ids=fill(f),next=ids.slice();next[slot]=null;
  const plan=f.plan({oldIds:ids,nextIds:next,give:[{id:wine,count:1,delivery:'hand'}]});

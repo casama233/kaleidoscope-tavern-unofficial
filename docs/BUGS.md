@@ -1,6 +1,34 @@
 # 玩家可見問題與待驗收項
 
-## 本批 T132：濺射、回呼、保存及顯示
+## 當前 T137／W115／G121：已修來源與未驗收場景
+
+[T137 說明](RELEASE-NOTES-0.6.137.md) 是當前完整修復範圍。公開 T136 三語
+指南保留；下方 T132 及更早段落是原版本的問題／證據，不能將其旧 RGB、
+機器原料或預設 yaw 描述當成 T137 現況，也不能將先前 client 成功移給新版本。
+
+| 場景 | 當前修復與應觀察的邊界 |
+| --- | --- |
+| 同 ID 不同名稱／lore／損耗／附魔原料入桶、取出、加工、拆除及重啟 | 機器保存完整原生 clone，交易失敗回滾，Creative 容器和 Adventure 普通使用按來源處理。舊 alternate T136 的兩台機器完整槽重啟通過；新的精確候選仍須自己的 native／真人結果。 |
+| 三份具名、可堆疊合法酒液置入雪克杯後取回／放置／複製／重啟 | 有界可攜 metadata 與雙向原生等價核對已實作；原生裸 Adventure IDs 保留原字串。任意裝飾非堆疊輸入完整拒絕，未宣稱任意 NBT 可攜保存。 |
+| 保存的原生效果在重啟後恢復外觀，外部同值／延長效果插入 | 原生剩餘時間、invalid-before → verified entityLoad → exact single-use after 已實作；valid foreign-before 會否決重播豁免。41 個定向案例通過，當前 native 首次／重啟尚待驗證。完全相同的 after-only 事件無來源欄位可辨，不能當作任意外部生產者的完整所有權證明。 |
+| 黑／彩色發光板與遠近視角、各種對齊 | 黑前景／奶油色描邊、源字型 offset 及八方向描邊已修；保留使用者橫／直對齊擴充。16 格相機位置與 Java feet／望遠鏡差異未完成；字重、48 格裁切及透明排序待真人。 |
+| 各桶內冰葡萄、atlas 內外 RGB 特調 | 24 tick 原料圖、共享 clock、源 texel 明暗及透明覆蓋、25 PBR companions 已接回。實際幀相位、遠距 mip、標準／Vibrant Visuals、資源包堆疊仍待 client。 |
+| 效果混色、草叢退出、微醺和雙手雪克杯 | 原作粒子分布／顏色及 1 native tick 隱形 lease 已實作；預設微醺不移動瞄準。原生／自訂粒子、皮膚、FOV、聲音和輸入須同候選比較；整體 renderer 隱藏、清仇恨和 pure roll 未完成。 |
+| 原生多行編輯 | [隔離診斷](../tools/client-parity/README.md) 只產生新身份 overlay，三種長度 320／350／1500、真換行／字面 `\n`、兩 dropdown、foreign 分支與 guide 動畫均待真人驗證；正式編輯器仍是 escape 欄位。 |
+
+[PR302 alternate T136 的固定來源](https://github.com/casama233/kaleidoscope-tavern-unofficial/tree/71e5c372cce282d8130290d01812929c9e7db1f8)
+與 [失敗 CI 37875325541](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37875325541)
+保留：12 jobs 成功、首次 18 cases 完成；重啟先完成六個 case（其中兩個是機器），
+之後 aura restore 失敗，整個 paired native 不算通過。這不是
+[公開 T136 指南](RELEASE-NOTES-0.6.136.md) 的結果，也不是新 T137 的成功證據。
+
+純相機 roll、真正穿牆輪廓、原生 reach／步高／XP pickup、草叢 target
+清除、掉落 3D／GUI 2D 分離、World Liquor Luck 及部分跨模組事件仍未
+完成。API 已有三軸 free-camera 動畫，不等於已證明保留瞄準／手持／外部
+camera 所有權的 additive roll；沒有把尚未驗證寫成平台永久不可能。
+完整家族存檔演練、部署讀回和真人驗收仍 pending。
+
+## 保留的 T132：濺射、回呼、保存及顯示
 
 [T132 修復說明](RELEASE-NOTES-0.6.132.md) 是本批單一範圍。
 真人驗收先使用相同候選重現以下可辨識場景：

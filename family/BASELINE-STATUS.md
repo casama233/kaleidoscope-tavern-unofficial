@@ -1,10 +1,30 @@
 # 家族現行來源基線
 
-查核日期：2026-10-09。這份入口說明已合併的開發來源與作者參考，
+查核日期：2026-10-09。這份入口分列當前開發候選、已合併來源與作者參考，
 不代替 BSM 當前政策、逐候選部署收據或真人驗收。
 完整更新走 [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md)。
 
-## 本輪指南候選：T136／W113／G121
+## 當前修復候選：T137／W115／G121
+
+| 候選 | 整合來源與範圍 | 本輪證據狀態 |
+| --- | --- | --- |
+| 酒館 0.6.137 | 公開 T136 main `c461a8e643a08304587ef468ff7f8051369a2dd5` 三語指南，整合機器／可攜原料、交易、板面／RGB／粒子與 aura 原生剩餘時計、事件重播守衛；[完整範圍](../docs/RELEASE-NOTES-0.6.137.md) | 41 個 aura 定向案例通過；精確來源／archive／新 canonical CI 和 native 首次／重啟待本候選完成。 |
+| 世界名酒 0.1.115 | 保留公共指南及 W110 的作者 Dassai／四款杯模型適配，精確配對 T137 | 本輪 exact peer／archive／CI 待補；舊配套成功不移給新組合。 |
+| 煙火／燒烤 2.8.121 | 保留公開 G121 與已合併 G120，繼續使用同一 Tavern guide projection／Cookery handoff | 未退回 G119；完整家族與實際 client 驗收仍各自待完成。 |
+
+未合併 [PR302 alternate T136 `71e5c372`](https://github.com/casama233/kaleidoscope-tavern-unofficial/tree/71e5c372cce282d8130290d01812929c9e7db1f8)
+的 [CI 37875325541](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37875325541)
+在重啟 aura restore 失敗；12 jobs、首次 18 cases 及重啟前六 case 的範圍
+保留，不繼承未完成場景。它不是下方公共 T136 指南的來源或驗收。
+T134 geometry notes／witness 保留原身份供來源審查，不把舊 alternate
+版本寫入公共指南歷史。PR298 reviewed 座標修復由 T137 承接，不宣稱原 PR merged。
+
+最後記錄的 LIVE 為 T132／G119／W110；本次沒有新部署讀回或真人成功。
+完整家族 static、BDS、停服存檔演練、准入部署及讀回仍須完成，沿用既有
+授權；`client=false`、`production_ready=false`、`pending_client_acceptance`
+保持。下方公開指南與已交付起點保留歷史範圍，其「本輪／本次」不取代本節。
+
+## 保留的公開指南基線：T136／W113／G121
 
 | 候選 | 凍結來源 | 本輪範圍 |
 | --- | --- | --- |

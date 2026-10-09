@@ -14,6 +14,20 @@ REVIEWED_ITEM_GEOMETRIES={
     'geometry.kt_runtime.item_sprite_'+name:'runtime/RP/models/entity/item_sprite_'+name+'.geo.json'
     for name in ('depth_charge','mystery_cocktail','nether_special','ice_grape')
 }
+# T134 retains fixed glyph UVs because the combined emissive/overlay/UV-anim
+# material has no client witness. Separate outline meshes let distant text
+# submit only its two foreground quads. The arbitrary-RGB meshes partition
+# original texels; every one remains in the existing cup helper. These exact
+# allocations do not enlarge the <1024 budget for unrelated/base geometry.
+# Update this revision together with the two ledger witnesses only after the
+# final integrated functional source has been reviewed, before freezing it.
+REVIEWED_VISUAL_SOURCE='37ff9f12e74c6a4f3bb3a5fc40502d7e70e68c83'
+REVIEWED_VISUAL_RELEASE='0.6.134'
+REVIEWED_VISUAL_GEOMETRIES={
+    **{f'geometry.kt_runtime.board_outline_cell_{cell}':'runtime/RP/models/entity/board_glyph_outline.geo.json' for cell in range(256)},
+    **{f'geometry.kt_runtime.signature_rgb_{color}_{frame}':'runtime/RP/models/entity/signature_rgb_texels.geo.json'
+       for color in ('5d6062','82c5d9','88c9dc','999999','a1a4a6','a8dae4','d1d8dd','d8efef','fafeff','ffffff') for frame in range(6)}
+}
 
 def geometry_inventory(roots):
     result={}
@@ -24,7 +38,7 @@ def geometry_inventory(roots):
     return result
 
 def check_combined_geometry_budget(inventory,tavern_root=ROOT):
-    """Retain the base budget; only exact, uniquely owned T131 additions count."""
+    """Retain the base budget; only exact, uniquely owned source additions count."""
     tavern_root=Path(tavern_root).resolve()
     witnesses=read(tavern_root/'data/baseline-reconciliation.json')['files']
     sources=read(tavern_root/'art/interfaces/animated-item-java-reference.json')['sources']
@@ -39,9 +53,31 @@ def check_combined_geometry_budget(inventory,tavern_root=ROOT):
         bones=geometry['bones'];assert len(bones)==1 and bones[0]['name']=='root'
         source=sources[identifier.removeprefix('geometry.kt_runtime.item_sprite_')]
         assert len(bones[0]['cubes'])==source['java_element_count']<=50,('Unreviewed item mesh complexity',name)
-    base=set(inventory)-set(REVIEWED_ITEM_GEOMETRIES)
+    allocations={}
+    for name in sorted(set(REVIEWED_VISUAL_GEOMETRIES.values())):
+        path=tavern_root/name;row=witnesses.get(name)
+        assert row and row['before'] is None and row['release']==REVIEWED_VISUAL_RELEASE,('Unreviewed visual geometry allocation',name)
+        assert row['reviewedSourceCommit']==REVIEWED_VISUAL_SOURCE,('Visual geometry allocation source changed',name)
+        assert hashlib.sha256(path.read_bytes()).hexdigest()==row['after'],('Reviewed visual geometry changed',name)
+        models=read(path)['minecraft:geometry'];expected={k for k,v in REVIEWED_VISUAL_GEOMETRIES.items() if v==name}
+        assert len(models)==len(expected) and {g['description']['identifier'] for g in models}==expected,('Visual allocation IDs changed',name)
+        outline=name.endswith('board_glyph_outline.geo.json')
+        maximum=0
+        for geometry in models:
+            identifier=geometry['description']['identifier']
+            assert [Path(p).resolve() for p in inventory.get(identifier,[])]==[path],('Reviewed visual geometry must have one exact Tavern owner/path',identifier)
+            bones=geometry['bones'];cubes=[c for b in bones for c in b.get('cubes',[])]
+            assert len(bones)==(19 if outline else 1),('Visual allocation bone budget exceeded',identifier)
+            assert (len(cubes)==16 if outline else len(cubes)<=28),('Visual allocation cube budget exceeded',identifier)
+            assert all(isinstance(c['uv'],dict) and len(c['uv'])==1 and sum(n==0 for n in c['size'])==1 for c in cubes),('Visual allocation must retain single-face rectangles',identifier)
+            # Native cube allocation reserves all six quad faces even when
+            # only one UV face is emitted. Never count merely four vertices.
+            maximum=max(maximum,len(cubes)*24)
+        allocations[name]={'ids':len(models),'max_allocated_vertices':maximum,'max_bones':19 if outline else 1}
+    base=set(inventory)-set(REVIEWED_ITEM_GEOMETRIES)-set(REVIEWED_VISUAL_GEOMETRIES)
     assert len(base)<1024,('combined Tavern + World Liquor base geometry budget exceeded',len(base))
-    return {'geometries':len(inventory),'base_geometries':len(base),'reviewed_item_geometries':len(REVIEWED_ITEM_GEOMETRIES),'base_limit_exclusive':1024,'client_verified':False}
+    return {'geometries':len(inventory),'base_geometries':len(base),'reviewed_item_geometries':len(REVIEWED_ITEM_GEOMETRIES),
+            'reviewed_visual_geometries':len(REVIEWED_VISUAL_GEOMETRIES),'visual_allocations':allocations,'base_limit_exclusive':1024,'client_verified':False}
 
 def parse_args(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)

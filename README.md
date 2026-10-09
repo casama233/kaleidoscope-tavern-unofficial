@@ -1,6 +1,6 @@
-## Current maintained baseline: 0.6.140
+## Current maintained baseline: 0.6.141
 
-T140/W117 completes the original-author-style three-language guide revision, including four reviewed cooking-addon entries. Seven sections and both guide entrances share the same view. The T139 native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.140.md) for source and verification boundaries.
+T141/W118 retains the published T140 guide, including all four reviewed AMW pages, seven sections and both shared entrances. It repairs board separator wrapping, native metadata and fresh-quantity shaker gestures, and World Liquor's familyless living-entity classification. Earlier native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.141.md); the fresh integrated native first/save/restart and strict recorder passed. Full CI runs with this repair PR; client, private full-family and LIVE verification remain pending.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -8,9 +8,9 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) rewrites all three languages, keeps complete preparation details on demand and shares the same view through the optional Cookery entrance. T139 also integrates the reviewed T138 native clock/reload, machine ingredient, Mob selection and immersion repairs; its source composition is recorded separately.
+- [T140 guide revision](docs/RELEASE-NOTES-0.6.140.md) retains all three languages and preparation details on demand, adds four reviewed AMW pages and shares the view through the optional Cookery entrance. T141 preserves this published guide and T139's native clock/reload, machine ingredient, Mob selection and immersion repairs.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.140**, World Liquor **0.1.117** and Grilling **2.8.122**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.141**, World Liquor **0.1.118** and Grilling **2.8.122**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -34,7 +34,7 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Pure additive first-person camera roll remains unimplemented; the yaw adapter is explicit opt-in. Native machine counts and supported stackable ingredient metadata, source RGB texels, board outlines and effect appearance ownership have reviewed repairs. Arbitrary three decorated nonstackable shaker inputs, wall outlines, the multiline board editor and dropped-shaker display contexts remain incomplete. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
+Pure additive first-person camera roll remains unimplemented; the yaw adapter is explicit opt-in. Native machine counts and supported stackable ingredient metadata, source RGB texels, board outlines and effect appearance ownership have reviewed repairs. Colored board outlines still differ at the per-viewer feet-versus-camera 16-block boundary and first-person spyglass condition. Arbitrary NBT and three decorated nonstackable shaker inputs, wall outlines, the multiline board editor and dropped-shaker display contexts remain incomplete. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
 
 ## Licensing and history
 

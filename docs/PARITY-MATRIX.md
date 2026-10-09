@@ -1,10 +1,18 @@
-## 當前 T139／W116
+## 當前 T141／W118
 
-已保留發布主線的三語指南與七入口，並合入固定原料／光效／Mob／確認重生錨修補。新配套完整 native first 20／restart 21 案例及嚴格來源 recorder 已通過；G122 完整家族、原生 Player、畫面音效與私人 LIVE 仍未驗收。詳見 [本版說明](RELEASE-NOTES-0.6.139.md)。以下保留各功能的原始來源與範圍。
+精確 predecessor 為已發布主線 `79e2ad0fb9f5a59f93be41aee002ddf2a809d71b`。完整承接四頁 AMW 指南、三語七入口、共用 Cookery 入口及全部既有修補，配套 W118／G122。[T141 說明](RELEASE-NOTES-0.6.141.md)記錄相同功能檔案的來源回歸；新 paired native 首次 21／重啟 22 項與嚴格 recorder 已通過，完整 CI 由修補 PR 執行；舊分支 T140 試驗保持原身份。
+
+| 範圍 | 本輪修補／保留 | 證據及未完成範圍 |
+| --- | --- | --- |
+| 板面分隔符 | 溢出的當前空格先記錄再消耗；index 0 也是有效換行點。小板容量、明確換行、Word 對齊及既有描邊／cull 不變。 | 原作 Font.split 入口與 Mojang StringSplitter bytecode、5 項 rendering 回歸及 layout 檢查。per-viewer feet／camera 16 格、第一人稱 spyglass 及 client 未完成。 |
+| 雪克杯來源與新點擊 | 原生 metadata 三態比較；扣料須證明相同，只有不同可解除 owned 防重。pending authoritative true 比較 amount，native／false／itemUse 延續不重複扣料。 | 最後 10 項 station witness 與交叉審查，含 2→3 fresh click、clone／read failure、空手 echo／foreign cancel。任意 NBT、任意裝飾非堆疊原料與真正 Player pending。 |
+| W118 LivingEntity | 84 個原版對應與 addon mob-family fallback，魚類進入既有效果／credit，非生物 health helper 排除；class 與 alive credit 分開。 | W 正式註冊回呼、paired projection 26 項與獨立 8 項回歸；新原生 cod API fall 對照首啟／重啟通過：control 3→2／一次 afterHurt、公開 snapshot 的 MultiJump 3→3／零 afterHurt；完整傷害階段／致命流程及 native Luck 未完成。 |
+
+已發布 T140 guide-copy／catalog／standalone-guide／family receiver 保留主線內容；client、私人完整家族、fresh stopped-world 與 LIVE 仍 pending。純 roll、穿牆輪廓、多行 editor 及其他既有差距不因本輪而完成。以下保留各版本原始範圍。
 
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
+## Retained Tavern 0.6.138 / World Liquor 0.1.115
 
 [T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The frozen T138/W115 pair passed its own complete zero-player native first/save/restart and source-bound recorder. Final canonical CI is separate; isolated multiline tooling has no human-client acceptance.
 

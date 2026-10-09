@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 053ae0d2ea9a370c93ef0a06ee12319221309115
+          ref: 4ec11c79c516dc1fde48c7291ce5e50b6cd12442
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -198,7 +198,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 053ae0d2ea9a370c93ef0a06ee12319221309115
+          ref: 4ec11c79c516dc1fde48c7291ce5e50b6cd12442
           path: world-liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -312,9 +312,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed World Liquor 0.1.117 pairs this Tavern 0.6.140 runtime.
+          # Reviewed World Liquor 0.1.118 pairs this Tavern 0.6.141 runtime.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 053ae0d2ea9a370c93ef0a06ee12319221309115
+          ref: 4ec11c79c516dc1fde48c7291ce5e50b6cd12442
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -362,7 +362,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 053ae0d2ea9a370c93ef0a06ee12319221309115
+          ref: 4ec11c79c516dc1fde48c7291ce5e50b6cd12442
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -445,7 +445,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 053ae0d2ea9a370c93ef0a06ee12319221309115
+          ref: 4ec11c79c516dc1fde48c7291ce5e50b6cd12442
           path: .source-check/world-liquor-native
           persist-credentials: false
       - name: Reject incomplete or relabeled native evidence

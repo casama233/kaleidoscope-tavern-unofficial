@@ -63,7 +63,7 @@ def validate_observations(observations,phase,version):
  expected={name:1 for name in ('addon_registration','portable-stackable-ingredient-metadata',aura,'native-aura-chunk-readiness',
   'native-one-tick-invisibility-expiry','native-outline-registry','native-put-recovery','native-splash-rolled-heal',
   'native-splash-persisted-hook','native-splash-armor-stand-immunity','native-splash-cancelled-hurt',
-  'native-vision-recipient-components','native-vision-living-class','native-upside-down-mob-class')}
+  'native-vision-recipient-components','native-vision-living-class','native-upside-down-mob-class','native-liquor-familyless-fall')}
  expected.update({migration:2,machine:2,'native-splash-hurt-source':2})
  if phase=='restart':expected['native-aura-foreign-handoff']=1
  same({mode:len(rows) for mode,rows in groups.items()},expected)
@@ -139,6 +139,11 @@ def validate_observations(observations,phase,version):
  values(row,renamed=['living_effect_qa:mob','minecraft:cow','minecraft:cod'],
   excluded=['minecraft:armor_stand','living_effect_qa:health_helper','minecraft:xp_orb'],codHasMobFamily=False,
   renames=3,recipientFunctionOnly=True,playerEffectEntrance=False,nameVisibilityParity=False,client=False)
+ row=case('native-liquor-familyless-fall','target nativeMobFamily sourceEffect controlHealth controlHurtEvents protectedHealth protectedHurtEvents snapshotObserved snapshotWaitedTicks nativeAcknowledgement playerEffectEntrance client')
+ values(row,target='minecraft:cod',nativeMobFamily=False,sourceEffect='kaleidoscope_world_liquor:multi_jump',
+  controlHealth=[3,2],controlHurtEvents=1,protectedHealth=[3,3],protectedHurtEvents=0,snapshotObserved=True,
+  playerEffectEntrance=False,client=False)
+ number(row['snapshotWaitedTicks'],0,20,True);assert type(row['nativeAcknowledgement']) is bool
  return done[0]['addon_registration']
 
 def validate_phase(row,raw,version):
@@ -203,8 +208,8 @@ def main():
  evidence={'schema':1,'bdsVersion':'1.26.52.3','scriptAPI':'2.7.0','versions':versions,'sourceTrees':source_trees,'observerInputsSHA256':inputs,
   'sourcePacksEqualNativeInputsExceptExplicitObserver':True,'nativeServerSaveRestart':True,'nativeCrossIdReadableMetadata':True,'nativePutRecoveryAndRearm':True,
   'playerSessions':0,'client':False,'live':False,'fpsMeasured':False,'idleCallbacksMeasured':False,'crossPackPrivateDataPreservation':False,
-  'scope':'Real chest and machine ItemStacks, script-set PUT permutations, native aura chunk readiness and lease restart, Vision and Upside Down recipient APIs. Projectile impact envelopes are observer inputs. Host-scope dynamic properties only. Not physical projectile collision, particle pixels, player spawn/use, chunk re-entry or a private existing-world migration.',
-  'reports':summaries,'command':'python tools/native/run_living_effects.py --engine <isolated BDS 1.26.52.3> --liquor <paired World Liquor source> --work <new disposable directory> --port 27330 --probe tools/native/shaker-migration-probe.js'}
+  'scope':'Real chest and machine ItemStacks, script-set PUT permutations, native aura chunk readiness and lease restart, Vision and Upside Down recipient APIs, and public effect-snapshot delivery to familyless cod with native fall-damage control/protection outcomes. Projectile impact envelopes are observer inputs. Host-scope dynamic properties only. Not physical projectile collision, particle pixels, player spawn/use, chunk re-entry or a private existing-world migration.',
+  'reports':summaries,'command':'python tools/native/run_living_effects.py --engine <isolated BDS 1.26.52.3> --liquor <paired World Liquor source> --work <new disposable directory> --port <isolated-port> --probe tools/native/shaker-migration-probe.js'}
  target=write_evidence(work,evidence,logs)
  print(json.dumps({'evidence':str(target),'versions':versions,'sourceTrees':source_trees,'nativeSaveRestart':True,'players':0,'client':False}))
 if __name__=='__main__':main()

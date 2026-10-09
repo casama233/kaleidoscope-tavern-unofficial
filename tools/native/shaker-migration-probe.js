@@ -162,6 +162,38 @@ async function effectRecipients(d,phase){
   check(customEffectDiagnostics.upsideDownRenames===renames+3,'native Upside Down recipient count differs');
   out('case',{mode:'native-upside-down-mob-class',phase,renamed:[viewer.typeId,cow.typeId,cod.typeId],excluded:ignored.map(entity=>entity.typeId),
    codHasMobFamily:false,renames:3,recipientFunctionOnly:true,playerEffectEntrance:false,nameVisibilityParity:false,client:false});
+
+  // Exercise the real World Liquor hurt subscriber on the same familyless
+  // LivingEntity. Use the public host snapshot transport, never addon-private
+  // properties or a substituted Player/event handler. A fresh unprotected cod
+  // first proves that this native damage source can actually hurt the species.
+  const control=spawn('minecraft:cod',{x:23,y:300,z:24}),controlBefore=health(control).currentValue;
+  control.applyDamage(1,{cause:'fall'});await pause(1);
+  const controlAfter=health(control).currentValue,controlEvents=hurtEvents.filter(event=>event.target===control.id);
+  check(controlBefore===3&&controlAfter===2&&controlEvents.length===1&&controlEvents[0].cause==='fall'&&controlEvents[0].damage===1,
+   'native familyless fall control did not deliver one point of damage');control.remove();
+  const sourceEffect=ADDON_SOURCE+':multi_jump';let snapshotObserved=false,snapshotWaitedTicks=0;
+  const snapshot=system.afterEvents.scriptEventReceive.subscribe(event=>{
+   if(event.sourceType!=='Server'||event.id!=='kaleidoscope_tavern:effect_snapshot')return;
+   try{const packet=JSON.parse(event.message);
+    if(packet.source===ADDON_SOURCE&&packet.entity===cod.id&&packet.rows?.some(row=>row.id===sourceEffect&&row.ticks>0))snapshotObserved=true;
+   }catch{}
+  },{namespaces:['kaleidoscope_tavern']});
+  try{
+   check(applyCustomEffect(cod,{effect:sourceEffect,duration:30,amplifier:0}),'native familyless timed effect application failed');
+   for(;snapshotWaitedTicks<20&&!snapshotObserved;snapshotWaitedTicks++)await pause(1);
+   check(snapshotObserved,'public familyless effect snapshot was not published');
+   // Let all subscribers consume the observed transport event before damage.
+   await pause(1);
+   const protectedBefore=health(cod).currentValue,priorHurtEvents=hurtEvents.filter(event=>event.target===cod.id).length;
+   const nativeAcknowledgement=cod.applyDamage(1,{cause:'fall'});await pause(1);
+   const protectedAfter=health(cod).currentValue,protectedHurtEvents=hurtEvents.filter(event=>event.target===cod.id).length-priorHurtEvents;
+   check(protectedBefore===3&&protectedAfter===3&&protectedHurtEvents===0,
+    'World Liquor omitted the familyless LivingEntity fall-immunity subscriber');
+   out('case',{mode:'native-liquor-familyless-fall',phase,target:cod.typeId,nativeMobFamily:false,sourceEffect,
+    controlHealth:[controlBefore,controlAfter],controlHurtEvents:controlEvents.length,protectedHealth:[protectedBefore,protectedAfter],
+    protectedHurtEvents,snapshotObserved,snapshotWaitedTicks,nativeAcknowledgement,playerEffectEntrance:false,client:false});
+  }finally{system.afterEvents.scriptEventReceive.unsubscribe(snapshot);}
  }finally{
   world.afterEvents.entityHurt.unsubscribe(capture);world.beforeEvents.entityHurt.unsubscribe(cancel);
   for(const entity of owned)try{if(entity.isValid)entity.remove();}catch{}

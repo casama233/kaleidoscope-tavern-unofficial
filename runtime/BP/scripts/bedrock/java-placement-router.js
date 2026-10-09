@@ -4,12 +4,28 @@ import {check} from '../core/util.js';
 import {handSnapshot,sameHand,blockAt,safe} from './transactions.js';
 import {itemUseRayDistance} from './custom-effects.js';
 
-const routes=[],blockHandlers=[],offhandHandlers=[],blockObservers=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map(),recentPlacements=new Map(),itemUseClaims=new Map();let installed=false;
+const routes=[],blockHandlers=[],offhandHandlers=[],blockObservers=[],blockUseWitnesses=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map(),recentPlacements=new Map(),itemUseClaims=new Map();let installed=false;
 
 export function registerJavaBlockUseHandler(handler){blockHandlers.push(handler);}
 export function registerJavaOffhandUseOnHandler(handler){check(typeof handler==='function','INVALID_OFFHAND_USE_HANDLER');offhandHandlers.push(handler);}
 export function registerJavaBlockUseObserver(observer){blockObservers.push(observer);}
 export function registerJavaBlockUseFallback(matches){check(typeof matches==='function','INVALID_BLOCK_USE_FALLBACK');raycastBlockUseFallbacks.push(matches);}
+/** An opt-in adapter may prove that a held source changed. Unknown comparisons
+ * retain the existing duplicate protection; foreign cancellation always wins. */
+export function registerJavaBlockUseWitness(adapter){
+ check(adapter&&['matches','capture','compare'].every(key=>typeof adapter[key]==='function'),'INVALID_BLOCK_USE_WITNESS');blockUseWitnesses.push(adapter);
+}
+function captureBlockUseWitness(player,itemId,block){
+ for(const adapter of blockUseWitnesses){
+  let matches;try{matches=adapter.matches(block,itemId);}catch{continue;}
+  if(matches){let value;try{value=adapter.capture(player);}catch{}return {adapter,value};}
+ }
+}
+function matchesRecordedWitness(row,player,context){
+ if(!row?.witness)return true;
+ const {adapter,value}=row.witness;
+ try{return adapter.compare(value,adapter.capture(player),context)!==false;}catch{return true;}
+}
 
 export function registerJavaItemUseOnRoute({id,matches,plan,execute}){
  check(typeof id==='string'&&id&&!routes.some(r=>r.id===id),'DUPLICATE_JAVA_ITEM_ROUTE');
@@ -25,7 +41,7 @@ function blockKey(block){
 }
 function faceKey(face){return typeof face==='string'?face:face?.toString?.();}
 function claim(player,itemId,block,source='owned',face,reportedItemId){
- const row={itemId,reportedItemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source,pending:source==='owned'};
+ const row={itemId,reportedItemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source,pending:source==='owned',witness:source==='owned'?captureBlockUseWitness(player,itemId,block):undefined};
  blockUses.set(player.id,row);return row;
 }
 // Completed work still owns its itemUse echo, but a new authoritative block
@@ -47,7 +63,7 @@ function ownedItemUseEcho(player,itemId){
  // player.isSneaking. Once owned, its fallback/false continuation is still the
  // same gesture across that modifier transition. Fresh true block callbacks
  // retain their own modifier-sensitive handling; failure still clears the claim.
- return row?.source==='owned'&&sameRecentBlockUse(row,{itemId:itemId===row.reportedItemId?row.itemId:itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick});
+ return row?.source==='owned'&&sameRecentBlockUse(row,{itemId:itemId===row.reportedItemId?row.itemId:itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick})&&matchesRecordedWitness(row,player);
 }
 function itemUseEcho(player,itemId,block){
  const primary=handSnapshot(player).id??'',row=blockUses.get(player.id);
@@ -58,11 +74,11 @@ function itemUseEcho(player,itemId,block){
  if(row?.source!=='foreign'||![primary,itemId].some(id=>id===row.itemId||id===row.reportedItemId))return false;
  return sameRecentBlockUse(row,{itemId:row.itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick,block:blockKey(block)});
 }
-export function blockUseClaimed(player,itemId,block,face){
+export function blockUseClaimed(player,itemId,block,face,witnessContext){
  const row=blockUses.get(player.id);
  if(!row)return false;
  if(system.currentTick-row.tick>2){blockUses.delete(player.id);return false;}
- return sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face)});
+ return sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face)})&&(row.source!=='owned'||matchesRecordedWitness(row,player,witnessContext));
 }
 
 function itemUseOn(e,held){
@@ -116,8 +132,11 @@ function dispatch(raw,{blockOnly=false}={}){
  if(raw.isFirstEvent===false&&ownedItemUseEcho(e.player,held.id??'')){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // Both before callbacks can report first=true. Claim by gesture identity,
  // including empty-hand callbacks, before scheduling any inventory mutation.
- if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
- if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ // Only a fresh authoritative before gesture can replace a pending quantity.
+ // Native/false/itemUse continuations still match the completed debit's source.
+ const witnessContext={exactAmount:raw.isFirstEvent===true&&!blockOnly};
+ if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace,witnessContext)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
+ if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace,witnessContext)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}
  // isFirstEvent=false can be the only event emitted for a fresh touch press.
  // A recent matching owned claim above already coalesces a duplicate; absent
  // that claim, treat it as the beginning of a gesture for older adapters that
@@ -147,8 +166,8 @@ function nativeAfterBlockUse(e,allowHeld){
  if(previous?.source==='foreign'&&blockUseClaimed(player,itemId,block))return false;
  if(previous?.source==='owned'&&blockUseClaimed(player,itemId,block))return false;
  const gesture=`${itemId}/${held.slot}/${player.isSneaking===true}/${blockKey(block)??''}/${faceKey(e.face??e.blockFace)??''}`,now=system.currentTick,last=nativeEmptyCallbacks.get(player.id);
- if(last?.gesture===gesture&&now-last.tick<=2)return false;
- nativeEmptyCallbacks.set(player.id,{gesture,tick:now,itemId,slot:held.slot,block:blockKey(block)});
+ if(last?.gesture===gesture&&now-last.tick<=2&&matchesRecordedWitness(last,player))return false;
+ nativeEmptyCallbacks.set(player.id,{gesture,tick:now,itemId,slot:held.slot,block:blockKey(block),witness:captureBlockUseWitness(player,itemId,block)});
  const synthetic={player,block,blockFace:e.face??e.blockFace,face:e.face??e.blockFace,
   faceLocation:e.faceLocation?{...e.faceLocation}:undefined,isFirstEvent:true,cancel:false};
  dispatch(synthetic,{blockOnly:true});return !!synthetic.cancel;

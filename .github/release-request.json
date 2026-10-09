@@ -1,16 +1,16 @@
 {
-  "version": "0.6.139",
-  "tag": "v0.6.139-beta.1",
-  "title": "森羅物語：酒館 0.6.139 測試版｜指南與原生修復整合",
+  "version": "0.6.140",
+  "tag": "v0.6.140-beta.1",
+  "title": "森羅物語：酒館 0.6.140 測試版｜板面換行、雪克杯原料與魚類效果",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.139.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.140.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "new_bds_test": true,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "The frozen T139/W116 pair passed a fresh complete zero-player native first/save/restart with strict exact-source and generated peer-input binding. First 20 and restart 21 required cases passed, including saved aura acknowledgement, native-clock expiry, foreign handoff, machine counts/metadata, stackable ingredients and Mob selection. Canonical CI is separate. Actual Player, rendered client, G122 full private-family migration and LIVE remain pending.",
-  "expected_archive_sha256": "232173376267e2ddfa044094e9bb00dcaf5597bc7de79f943d726b60e558e3d1",
-  "reviewed_runtime_source": "3df197150c00ef0818d2f393e365ef8a4b93d72c"
+  "native_evidence_scope": "The frozen T140/W117 pair passed a fresh complete zero-player native first/save/restart and strict source/input recorder: first 21 and restart 22 required cases. Both phases delivered a public timed-effect snapshot to familyless cod: API fall damage changed control health 3 to 2 with one afterHurt, while MultiJump preserved 3 with no afterHurt. Existing aura clock/reload/foreign handoff and machine/ingredient metadata cases also passed. Natural fall height, actual Player use, client rendering, G122 full private-family migration and LIVE remain pending.",
+  "expected_archive_sha256": "aad316bbeffd119df5ac126d8f6bd0bc3d106a928f7624ba725e71d377987fb3",
+  "reviewed_runtime_source": "67822848d85240640867f10d3bd6fc613262a8d1"
 }

@@ -1,6 +1,6 @@
 ## Current maintained baseline: 0.6.140
 
-T140/W117 repairs board wrapping at overflowing and leading spaces, protects deferred shaker input against native metadata changes while retaining fresh quantity-changing clicks, and includes World Liquor's familyless living-entity classification repair. The three-language guide, seven sections, shared Cookery entrance and earlier repairs remain. See the [release notes](docs/RELEASE-NOTES-0.6.140.md) for source and targeted evidence; new paired native, client, private full-family and LIVE verification remain pending.
+T140/W117 repairs board wrapping at overflowing and leading spaces, protects deferred shaker input against native metadata changes while retaining fresh quantity-changing clicks, and includes World Liquor's familyless living-entity classification repair. The three-language guide, seven sections, shared Cookery entrance and earlier repairs remain. See the [release notes](docs/RELEASE-NOTES-0.6.140.md) for source and targeted evidence; the fresh paired native first/save/restart and strict source recorder passed. Client, private full-family and LIVE verification remain pending.
 
 # Kaleidoscope Tavern (Unofficial)
 

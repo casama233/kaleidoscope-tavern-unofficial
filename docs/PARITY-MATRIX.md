@@ -1,12 +1,12 @@
 ## 當前 T140／W117
 
-以已發布 T139 `ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7` 為 predecessor，保留三語七入口指南、共用 Cookery 入口及全部既有修補。本輪來源、反例和交叉審查見 [T140 說明](RELEASE-NOTES-0.6.140.md)。新增配套 native 尚未執行；T139 的原生成功保留其版本，不升格成本輪、真人、私人完整家族或 LIVE 通過。
+以已發布 T139 `ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7` 為 predecessor，保留三語七入口指南、共用 Cookery 入口及全部既有修補。本輪來源、反例和交叉審查見 [T140 說明](RELEASE-NOTES-0.6.140.md)。新增配套 native 首次 21／重啟 22 項及嚴格來源 recorder 已通過，見[本輪原生證據](native/T140-W117-20261009.json)；真人、私人完整家族或 LIVE 仍待驗收。
 
 | 範圍 | 本輪已修與可分辨結果 | 證據及仍待完成 |
 | --- | --- | --- |
 | 板面換行分隔符 | 先記錄當前 U+0020 再判斷溢出；消耗該空格，不回退較早分隔符。index 0 亦可換行，保留空白行並將完整長詞移到下一行。 | Mojang 1.21.1 StringSplitter bytecode、正式 layout／render 定向回歸；小板 70 units、明確換行與 Word 對齊保留。新 client 對照 pending；彩字逐觀看者 feet-versus-camera 16 格判定與第一人稱 spyglass 未修。 |
-| 雪克杯扣料與回呼 | 短交易使用原生 clone／雙向相容和可讀欄位；只有證明不同才解除 owned 防重，真正扣料必須證明相同。pending authoritative true 比較 amount，native／false／itemUse echo 保留扣料前後防重。 | metadata 替換、2→3 新點擊、讀取／clone 失敗、最後空手 echo、foreign cancel 反例及獨立交叉審查通過。paired native／真正 Player pending；任意 NBT、三份任意裝飾非堆疊輸入未完成。 |
-| W117 LivingEntity 類別 | 84 個已審查原版對應類別與 addon mob-family fallback；無 mob family 的魚類進入既有 MultiJump／Tequila／instant／credit 路徑，非生物 health helper 排除。class membership 不附加 alive 條件，後續 mob credit 仍要求存活。 | W 正式註冊回呼、完整 paired class projection 與獨立交叉回歸通過；NeoForge 1.21.1 權威與 Forge 分支分列。新增 T/W 原生墜落案例 pending，未宣稱完整傷害階段、致命流程或 native Luck。 |
+| 雪克杯扣料與回呼 | 短交易使用原生 clone／雙向相容和可讀欄位；只有證明不同才解除 owned 防重，真正扣料必須證明相同。pending authoritative true 比較 amount，native／false／itemUse echo 保留扣料前後防重。 | metadata 替換、2→3 新點擊、讀取／clone 失敗、最後空手 echo、foreign cancel 反例及獨立交叉審查通過。配套原生保存通過，但新手勢仍只有正式回呼／API 回歸，真正 Player pending；任意 NBT、三份任意裝飾非堆疊輸入未完成。 |
+| W117 LivingEntity 類別 | 84 個已審查原版對應類別與 addon mob-family fallback；無 mob family 的魚類進入既有 MultiJump／Tequila／instant／credit 路徑，非生物 health helper 排除。class membership 不附加 alive 條件，後續 mob credit 仍要求存活。 | W 正式註冊回呼、完整 paired class projection 與獨立交叉回歸通過；NeoForge 1.21.1 權威與 Forge 分支分列。新增 T/W 原生 API fall 對照首次／重啟通過：control 3→2，一次 afterHurt；公開 snapshot 下 MultiJump 3→3，零 afterHurt。自然墜落、完整傷害階段、致命流程或 native Luck 未驗。 |
 
 黑字 cream outline、八向描邊、遠距 foreground、板心 48 格 cull、原料保存、光效／重啟和已確認重生錨行為均保留。純 roll、穿牆輪廓、原生多行 editor 與其他既有差距不因本輪改善而完成。以下保留各版本的原始證據範圍。
 

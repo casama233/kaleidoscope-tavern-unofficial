@@ -25,9 +25,18 @@ Forge／Neo 事件階段不合併宣稱。
 `tests/kill-credit.test.mjs`／`tests/combat-source.test.mjs` 共 26 項、
 獨立交叉回歸 8 項通過。這些是來源／API 回歸，不代替真正 Player 或渲染驗收。
 
-新增 T140／W117 paired native **尚未執行**，包括無效果 cod fall
-control／公開 effect bridge 下的 MultiJump 取消場景；最終 CI、
-首次／保存／重啟和嚴格 recorder 以新實際證據為準，不改名沿用 T139。
+新增 T140／W117 paired BDS 1.26.52.3 的首次 21 項、正常保存／重啟
+22 項均通過，0 玩家連線、0 錯誤、兩次正常停止；嚴格 recorder 核對
+完整來源與宣告 observer，見[本輪原生證據](native/T140-W117-20261009.json)。
+實測 runtime 來源為 T `67822848d85240640867f10d3bd6fc613262a8d1`、
+W `0c311dab5b1488add7f8118bb0dca7d8302acd62`，既有 witness／history
+保持原樣，本輪只追加精確功能差異。正式完整 CI 由本 PR 執行。
+
+兩個 phase 的原生 cod 都經引擎 API 施加 1 點 `fall` 傷害：無效果
+control 為 3→2 並發生一次 afterHurt；透過正常 timed effect 與公開
+snapshot 套用 MultiJump 後為 3→3，零 afterHurt。這證明正式橋接與
+原生傷害處理，沒有測量自然落下高度、真人飲用／點擊或實際畫面。
+既有機器數量／物品資料、光效保存／倒數／重啟確認／外部交接亦通過。
 彩字 per-viewer feet-versus-camera 16 格及第一人稱 spyglass、純 roll、
 多行 editor、任意 NBT／三份任意裝飾非堆疊原料與其他既有差距未完成。
 真人畫面／操作／音效、私人完整家族、fresh stopped-world 演練與 LIVE

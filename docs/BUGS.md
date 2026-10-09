@@ -1,12 +1,12 @@
 ## 當前 T140／W117
 
-本輪修正板面空格換行、雪克杯原生 metadata／新數量點擊，以及配套 W 的 LivingEntity 類別判定。三語指南、七入口、Cookery 共用入口、原料保存、光效、Mob 與已確認重生錨修補皆保留。來源及定向回歸見 [T140 說明](RELEASE-NOTES-0.6.140.md)。新增 T140／W117 paired native 尚未執行；T139／W116 的成功保留原身份，不能代替本輪結果。真人畫面／操作／音效、私人完整家族與 LIVE 均 pending。
+本輪修正板面空格換行、雪克杯原生 metadata／新數量點擊，以及配套 W 的 LivingEntity 類別判定。三語指南、七入口、Cookery 共用入口、原料保存、光效、Mob 與已確認重生錨修補皆保留。來源及定向回歸見 [T140 說明](RELEASE-NOTES-0.6.140.md)。新增 T140／W117 paired native 首次 21／重啟 22 項及嚴格來源 recorder 已通過；[原生證據](native/T140-W117-20261009.json)保留本轮身份。真人畫面／操作／音效、私人完整家族與 LIVE 均 pending。
 
 本輪可分辨場景：
 
 1. 大黑板輸入 29 個 `가` 後接 ` B`：溢出的分隔空格應消耗，下一行從 `B` 開始，不回退更早的空格。行首空格後接可獨立放進整行的長詞時，保留空白首行、完整詞移到下一行；小板 70 units 規則、明確換行縮排與 Word 對齊不變。
 2. 雪克杯點擊後、延後扣料前，換成同 ID／數量但不同名稱、lore 或原生資料的原料：舊手勢不得扣新物品。2 瓶點擊排隊後換成 3 瓶再正式點擊，舊手勢拒絕、新手勢只加入 1 瓶；後續 native／false echo 不再加入，最後一瓶的空手 echo 不取回站台。讀取不確定或外部取消不能解除防重；不支援的 metadata 留在手中。
-3. 配套 W 的無 `mob` family 鱈魚仍屬 Java LivingEntity：MultiJump 墜落取消、Tequila 傷害上限、瞬時效果路由與魚類攻擊者的既有擊殺歸屬均應適用；船、XP orb、僅有 health 的 helper 不得混入。死亡後的類別與「可提供後續 credit 的存活攻擊者」分開判斷。新 paired 原生墜落 control／效果場景仍待執行。
+3. 配套 W 的無 `mob` family 鱈魚仍屬 Java LivingEntity：MultiJump 墜落取消、Tequila 傷害上限、瞬時效果路由與魚類攻擊者的既有擊殺歸屬均應適用；船、XP orb、僅有 health 的 helper 不得混入。死亡後的類別與「可提供後續 credit 的存活攻擊者」分開判斷。新 paired 原生 API `fall` 傷害 control 為 3→2／一次 afterHurt，經公開效果 snapshot 的 MultiJump 為 3→3／零 afterHurt，首次與重啟皆通過；自然墜落高度與 Player 操作未測。
 
 上述為 source／API 回歸已修，尚非真人驗收。彩字逐觀看者的 16 格腳位／相機距離和第一人稱望遠鏡、純 roll、任意 NBT／三份任意裝飾非堆疊原料、多行板面編輯器及其他既有缺口仍保留。下方段落保留原版本證據範圍。
 

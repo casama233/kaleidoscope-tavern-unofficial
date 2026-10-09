@@ -7579,6 +7579,156 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.140",
+      "files": {
+        "runtime/BP/scripts/core/board-layout.js": {
+          "before": "b85b361d730d3bb804232aa98ba1e26da96918e2c4454ea1cf01f64fff831c0b",
+          "after": "916d76aca7436a663b1f6d5ff732cacc53ae5a0c3dca2f53e3e0feb7e445b6fe",
+          "reason": "Match Java StringSplitter separator handling by recording a space before the width or small-board capacity check, consuming the actual overflowing separator instead of an earlier word break, and accepting a separator at index zero. Preserve the following complete word, explicit paragraph indentation, existing width and capacity limits, and the paragraph-end flag when the consumed separator is the final character. This reviews layout and emitted glyph positions; it does not claim client-rendered acceptance. Focused regressions: tools/efficiency/board-rendering.test.mjs [a first overflowing separator is consumed without moving an earlier word or indenting the next row; a separator at index zero remains a break point under pixel width and the small-board capacity rule]; tools/shaker-offhand.test.mjs [station input witnesses reject same-ID same-count metadata replacements before the deferred debit; station input witnesses retain a fresh same-tick gesture after a different metadata source replaces the first; station input witnesses distinguish a fresh authoritative amount change from a debit echo; station completed echoes compare native metadata while an unchanged echo still settles only once; station completed echoes do not hide unsupported dynamic data behind the old same-ID witness; station potion witnesses preserve plain intake and refuse a decorated-to-plain replacement; station witness read failures neither escape before callbacks nor release an earlier owned echo; station witness indeterminate native equality retains duplicate protection and refuses a fresh debit; station witness clone failures stay inside the callback and leave the replacement intact; station witness metadata changes never bypass a foreign cancellation].",
+          "reviewedPredecessorCommit": "ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7",
+          "reviewedSourceCommit": "67822848d85240640867f10d3bd6fc613262a8d1",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.140.md",
+          "reverseOps": [
+            [
+              17,
+              21,
+              ""
+            ],
+            [
+              22,
+              23,
+              "    if(ch===' ')lastSpace=end;used=next;units=capacity;end++;\n"
+            ],
+            [
+              25,
+              28,
+              "   if(end<pending.length&&lastSpace>0){all.push({chars:pending.slice(0,lastSpace),paragraphEnd:false});pending=pending.slice(lastSpace+1);}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "45219ed49a89cc15cc93fa8f6dfa048f90ae88591360e76ddf560ff0949c5aa0",
+          "after": "7bba75780daa2ef456bea7417b9fb59ed1b4890e73162eb3d6918e6fa04250d3",
+          "reason": "Bind station intake to the actual native ingredient source across the deferred debit. Capture a short-lived native clone and existing readable plain-item or exact potion identity, require an exact source match before consumption, and compare successful callback echoes against the actual native metadata and quantities immediately before and after the debit. Preserve fresh distinct-metadata gestures and intact rejection of unsupported data. Failed clone, metadata read, or indeterminate native equality prevents debit. Native clones are witnesses only: no new persistent codec, arbitrary nonstackable support, weakened native equality, or plain-ID reconstruction fallback is introduced. Focused regressions: tools/efficiency/board-rendering.test.mjs [a first overflowing separator is consumed without moving an earlier word or indenting the next row; a separator at index zero remains a break point under pixel width and the small-board capacity rule]; tools/shaker-offhand.test.mjs [station input witnesses reject same-ID same-count metadata replacements before the deferred debit; station input witnesses retain a fresh same-tick gesture after a different metadata source replaces the first; station input witnesses distinguish a fresh authoritative amount change from a debit echo; station completed echoes compare native metadata while an unchanged echo still settles only once; station completed echoes do not hide unsupported dynamic data behind the old same-ID witness; station potion witnesses preserve plain intake and refuse a decorated-to-plain replacement; station witness read failures neither escape before callbacks nor release an earlier owned echo; station witness indeterminate native equality retains duplicate protection and refuses a fresh debit; station witness clone failures stay inside the callback and leave the replacement intact; station witness metadata changes never bypass a foreign cancellation].",
+          "reviewedPredecessorCommit": "ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7",
+          "reviewedSourceCommit": "67822848d85240640867f10d3bd6fc613262a8d1",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.140.md",
+          "reverseOps": [
+            [
+              21,
+              22,
+              "import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach,playerInteractionReach} from './transactions.js';\n"
+            ],
+            [
+              32,
+              33,
+              "import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeBlockUse,settleJavaBlockUse} from './java-placement-router.js';\n"
+            ],
+            [
+              418,
+              463,
+              "function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot(player),data:item?.getDynamicProperty(PORTABLE_DATA),potion:POTION_ITEMS.has(item?.typeId)?canonical(potionIdentity(item)):undefined};}\nfunction verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}\n"
+            ],
+            [
+              464,
+              465,
+              "function nativeEchoHand(player){try{return canonical(itemSnapshot(player));}catch{return undefined;}}\n"
+            ],
+            [
+              474,
+              475,
+              " return previous&&current!==undefined&&(current===previous.beforeHand||current===previous.afterHand)?previous:undefined;\n"
+            ],
+            [
+              520,
+              521,
+              "function queueMixologyBlockUse(event,signature,work,{echoTarget}={}){\n"
+            ],
+            [
+              523,
+              524,
+              " if(previous?.signature===signature){event._javaUseClaim=previous.event._javaUseClaim;return;}\n"
+            ],
+            [
+              525,
+              526,
+              " const pending={event,signature},beforeHand=nativeEchoHand(event.player);pendingBlockUses.set(key,pending);\n"
+            ],
+            [
+              529,
+              530,
+              ""
+            ],
+            [
+              560,
+              562,
+              ""
+            ],
+            [
+              573,
+              574,
+              "  queueMixologyBlockUse(event,'main/'+canonical(snapshot),()=>{\n"
+            ],
+            [
+              577,
+              578,
+              "  });\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/java-placement-router.js": {
+          "before": "533ac81c668ed7ec432770be3925e18ca0e61a6ec1495f6511f35bcec33d49c9",
+          "after": "982c3715ee37222690957ddaafabc6da54e7203ad1531a4603807faa1de894a7",
+          "reason": "Add an opt-in source witness only for accepted ingredient interactions with a shaker station. Release an owned duplicate claim only when the adapter proves that the current source differs; a missing witness, failed read, thrown comparison, or indeterminate result retains the existing protection. Pending authoritative first-event gestures compare quantities exactly so a fresh amount change is not swallowed, while native after-events, continuation events, and item-use echo guards retain quantity-independent comparison for the same debit chain. Foreign cancellation remains unconditional, and the final empty-hand echo cannot become station pickup. Other block and placement routes retain their existing behavior. Focused regressions: tools/efficiency/board-rendering.test.mjs [a first overflowing separator is consumed without moving an earlier word or indenting the next row; a separator at index zero remains a break point under pixel width and the small-board capacity rule]; tools/shaker-offhand.test.mjs [station input witnesses reject same-ID same-count metadata replacements before the deferred debit; station input witnesses retain a fresh same-tick gesture after a different metadata source replaces the first; station input witnesses distinguish a fresh authoritative amount change from a debit echo; station completed echoes compare native metadata while an unchanged echo still settles only once; station completed echoes do not hide unsupported dynamic data behind the old same-ID witness; station potion witnesses preserve plain intake and refuse a decorated-to-plain replacement; station witness read failures neither escape before callbacks nor release an earlier owned echo; station witness indeterminate native equality retains duplicate protection and refuses a fresh debit; station witness clone failures stay inside the callback and leave the replacement intact; station witness metadata changes never bypass a foreign cancellation].",
+          "reviewedPredecessorCommit": "ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7",
+          "reviewedSourceCommit": "67822848d85240640867f10d3bd6fc613262a8d1",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.140.md",
+          "reverseOps": [
+            [
+              6,
+              7,
+              "const routes=[],blockHandlers=[],offhandHandlers=[],blockObservers=[],raycastBlockUseFallbacks=[],blockUses=new Map(),nativeEmptyCallbacks=new Map(),recentPlacements=new Map(),itemUseClaims=new Map();let installed=false;\n"
+            ],
+            [
+              12,
+              28,
+              ""
+            ],
+            [
+              43,
+              44,
+              " const row={itemId,reportedItemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face),source,pending:source==='owned'};\n"
+            ],
+            [
+              65,
+              66,
+              " return row?.source==='owned'&&sameRecentBlockUse(row,{itemId:itemId===row.reportedItemId?row.itemId:itemId,slot:player.selectedSlotIndex,sneaking:row.sneaking,tick:system.currentTick});\n"
+            ],
+            [
+              76,
+              77,
+              "export function blockUseClaimed(player,itemId,block,face){\n"
+            ],
+            [
+              80,
+              81,
+              " return sameRecentBlockUse(row,{itemId,slot:player.selectedSlotIndex,sneaking:player.isSneaking===true,tick:system.currentTick,block:blockKey(block),face:faceKey(face)});\n"
+            ],
+            [
+              134,
+              139,
+              " if(!held.id&&previous?.itemId===''&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,'',e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}\n if(held.id&&previous?.source==='owned'&&previous.pending!==false&&blockUseClaimed(e.player,held.id,e.block,e.blockFace)){e.cancel=true;e._javaUseRejection='OWNED_DUPLICATE';observe();syncCancel();return;}\n"
+            ],
+            [
+              168,
+              170,
+              " if(last?.gesture===gesture&&now-last.tick<=2)return false;\n nativeEmptyCallbacks.set(player.id,{gesture,tick:now,itemId,slot:held.slot,block:blockKey(block)});\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

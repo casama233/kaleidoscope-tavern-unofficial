@@ -1,10 +1,28 @@
-## 當前 T139／W116
+## 當前 T141／W118／G122
+
+保留新 canonical T140／W117 的原作者風格三語指南、四頁料理聯動條目、
+七入口與兩入口共用呈現，再整合 aura 載入／登入順序及原生 recorder 修復。
+指南來源為 Tavern `79e2ad0fb9f5a59f93be41aee002ddf2a809d71b`、World Liquor
+`0ebf77ed7d302f453e75d9c56cc603e709ed226d`，不以舊候選覆蓋新指南。
+
+本輪要防止載入確認前的等值外部刷新被錯當自有效果，以及 entityLoad／
+initialSpawn／after 交錯造成合法光效丟失或重發票券；recorder 綁定當時
+完整 source／overlay／generated inputs 與原始日誌。同一修復 bytes 的
+**58／58 aura、14／14 recorder 定向案例**保留舊身份結果並可重用，
+不是 T141／W118 的完整 CI 或原生首次／重啟成功。本候選兩項仍待完成，
+詳見 [T141 說明](RELEASE-NOTES-0.6.141.md)。
+
+真人登入與外部效果交接、指南操作、RGB／板面／粒子／聲音、鍵鼠／觸控／
+手柄、G122 完整家族和私人 LIVE 仍待各自驗收。既有未實作項目保持追蹤；
+下方各版成功或失敗只保留原範圍，不繼承為本候選結果。
+
+## 保留的 T139／W116
 
 已保留發布主線的三語指南與七入口，並合入固定原料／光效／Mob／確認重生錨修補。新配套完整 native first 20／restart 21 案例及嚴格來源 recorder 已通過；G122 完整家族、原生 Player、畫面音效與私人 LIVE 仍未驗收。詳見 [本版說明](RELEASE-NOTES-0.6.139.md)。以下保留各功能的原始來源與範圍。
 
 # 玩家可見問題與待驗收項
 
-## 當前 0.6.138
+## 保留 0.6.138 當時範圍
 
 整合原生倒數暫停與重啟光效恢復，保留外部刷新交接、raw／fence 與死亡清理；新的完整原生時計／保存／重啟場景及真人畫面分開驗證。[本版範圍](RELEASE-NOTES-0.6.138.md)保留全部既有玩法、視覺修復與未完成限制。
 
@@ -15,11 +33,11 @@
 新的零玩家原生首次／正常停止／重啟已通過，並確認來源光效恢復後，外部同 amplifier 刷新恰好交還一次控制。完整 recorder 綁定實際凍結輸入；真正 Player 與真人畫面仍需分別驗證，見 [本版說明](RELEASE-NOTES-0.6.137.md)。
 
 
-## 保留 0.6.136
+## 保留 alternate 0.6.136
 
 倒轉效果：同場放鱈魚、鮭魚、熱帶魚、牛與盔甲架，核對有效 Mob 名單及 Grumm；玩家與盔甲架不得更名。名稱可見性與實際魚類倒轉仍需真人比較。配套 W113 原生錨場景見其 release notes。
 
-來源與可分辨回歸見 [本版說明](RELEASE-NOTES-0.6.136.md)；下方舊版段落保留歷史範圍。
+來源與可分辨回歸見 [固定 trial 的 alternate T136 說明](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md)，與本地公共 T136 指南文件分開；下方舊版段落保留歷史範圍。
 
 ## 保留 T135／W112：真實 CI 缺口修復
 

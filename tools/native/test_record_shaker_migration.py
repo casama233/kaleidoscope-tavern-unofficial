@@ -5,7 +5,7 @@ import pathlib
 import tempfile
 import unittest
 
-from record_shaker_migration import EVIDENCE_NAME, LOG_NAME, PREFIX, validate_phase, write_evidence
+from record_shaker_migration import EVIDENCE_NAME, LOG_NAME, MAIN_OVERLAY_NOTE, PREFIX, validate_phase, validate_recorded_inputs, write_evidence
 
 VERSION = '0.1.112'
 
@@ -90,6 +90,54 @@ class RecorderTests(unittest.TestCase):
         row = transcript('restart')
         mode(row, 'native-splash-cancelled-hurt').update(status='NATIVE_HURT_REJECTED', apiAcknowledgements=0)
         validate_phase(row, raw_log(row), VERSION)
+
+    def recorded_inputs(self):
+        current = {}
+        for label, version in [('tavern', [0, 6, 139]), ('liquor', [0, 1, 116])]:
+            trees = {kind: dict(sha256=('a' if label=='tavern' else 'b')*64, files=count) for kind, count in [('BP', 3), ('RP', 2)]}
+            baseline = dict(repository='test/'+label, version=version, source_trees=copy.deepcopy(trees))
+            current[label] = dict(baseline=baseline, source_trees=trees, commit='a'*40)
+        overlays = {name: 'b'*64 for name in (
+            'scripts/living-effects-probe.js', 'scripts/native-probe-inputs.js',
+            'entities/living-probe.json', 'entities/health-helper-probe.json',
+            'scripts/machine-ingredients-probe.js', 'scripts/status-aura-probe.js')}
+        overlays['scripts/main.js'] = MAIN_OVERLAY_NOTE
+        report = dict(sources={label: dict(commit=source['commit'], repository=source['baseline']['repository'],
+                                          version=source['baseline']['version'], source_trees=source['source_trees'])
+                              for label, source in current.items()}, test_only_overlays=overlays)
+        return copy.deepcopy(report), current, overlays
+
+    def test_recorded_sources_reject_matching_source_stage_drift_and_stale_identity(self):
+        report, current, overlays = self.recorded_inputs()
+        validate_recorded_inputs(report, current, overlays)
+        # These trees are what the existing byte-for-byte source/stage check
+        # accepts. Changing both copies must still fail the frozen/run binding.
+        current['tavern']['source_trees']['BP']['sha256'] = 'c'*64
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
+        current['tavern']['baseline']['source_trees'] = copy.deepcopy(current['tavern']['source_trees'])
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
+        report, current, overlays = self.recorded_inputs()
+        current['liquor']['commit'] = 'd'*40
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
+
+    def test_recorded_overlays_reject_stale_observer_hash_and_changed_key_set(self):
+        report, current, overlays = self.recorded_inputs()
+        # Current source and staged observer agree; the original runner hash
+        # remains authoritative for which helper actually produced the log.
+        overlays['scripts/status-aura-probe.js'] = 'c'*64
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
+        report, current, overlays = self.recorded_inputs()
+        report['test_only_overlays']['scripts/main.js'] = 'undeclared append'
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
+        report, current, overlays = self.recorded_inputs()
+        del report['test_only_overlays']['scripts/native-probe-inputs.js']
+        with self.assertRaises(AssertionError):
+            validate_recorded_inputs(report, current, overlays)
 
     def test_missing_duplicate_and_unexpected_modes_are_rejected(self):
         for mutation in ('missing', 'duplicate', 'unexpected', 'legacy-only'):

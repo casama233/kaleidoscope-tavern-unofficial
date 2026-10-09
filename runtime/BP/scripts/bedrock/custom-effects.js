@@ -4,7 +4,7 @@ import {TIPSY_ID} from '../core/tipsy-visual.js';
 import {externalEffectSource,externalEffectDefinition} from '../core/extension-content.js';
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
-import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,restoreLoadedStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';
+import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,restoreLoadedStatusAura,resetStatusAuraOnSpawn,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,EffectTypes,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
 import {createVisionFeedback} from '../core/vision-feedback.js';
@@ -417,7 +417,7 @@ export function installCustomEffects(){
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));
  world.afterEvents.itemCompleteUse?.subscribe(e=>{if(e.itemStack?.typeId==='minecraft:milk_bucket')try{clearCustomEffects(e.source);}catch(x){error(x);}});
- world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);forgetStatusAura(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else{restoreStatusAura(e.player);statusNow(e.player);}}catch(x){error(x);}});
+ world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);resetStatusAuraOnSpawn(e.player,e.initialSpawn);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else statusNow(e.player);}catch(x){error(x);}});
  world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}forgetStatusAura(e.playerId);tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});
  // Initialize players already online when scripts start; spawn handles new joins.
  system.run(()=>{

@@ -1,16 +1,13 @@
 {
-  "version": "0.6.140",
-  "tag": "v0.6.140-beta.1",
-  "title": "森羅物語：酒館 0.6.140 測試版｜指南全面重修",
+  "version": "0.6.141",
+  "tag": "v0.6.141-beta.1",
+  "title": "森羅物語：酒館 0.6.141 測試版｜保留最新指南並修復載入光效",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.140.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.141.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "T140/W117 retains the T139/W116 native parity implementation and G122 host 0.2.9. Guide-only editorial changes include the four exact registered AMW entry IDs. Prior native evidence retains its original revision; fresh full-family guide receiver, BDS and saved-world checks remain pending until the actual update run. No human client or rendered reading acceptance.",
-  "expected_archive_sha256": "33569e2f6ca8bbb60454706d0f0d01362d5d5b6909b334bc52b6eb1ca0d4f1e5",
-  "reviewed_runtime_source": "e45d1fd1e466de5a8e41e55210894f35fd506c19"
+  "native_evidence_scope": "The final T141/W118 candidate requires its own complete canonical native-persistence CI, with all 20 first/21 restart cases and exact recorded source/overlay binding. Preserved T139/W116 and guide T140/W117 evidence retain their original identities. Actual Player, rendered client, G122/private full family, saved-world and LIVE acceptance remain separate."
 }

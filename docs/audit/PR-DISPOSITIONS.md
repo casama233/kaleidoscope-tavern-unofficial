@@ -1,4 +1,22 @@
-## 當前整合：T139／W116
+## 當前整合：T141／W118／G122
+
+保留新 canonical T140／W117 指南，整合相同已測 bytes 的 aura 載入／
+登入順序與 native recorder 修復；58／58 aura、14／14 recorder 是舊
+身份的定向結果，可沿用其相同來源範圍，不能當成本候選完整 CI 或原生
+首次／重啟成功。T141／W118 的 exact CI／native 仍待執行；真人、完整
+家族及 LIVE 仍待驗收。當前範圍見 [T141 說明](../RELEASE-NOTES-0.6.141.md)。
+
+| 來源 | 本輪處置 |
+| --- | --- |
+| canonical T140 `79e2ad0fb9f5a59f93be41aee002ddf2a809d71b`／W117 `0ebf77ed7d302f453e75d9c56cc603e709ed226d` | 保留新主線原作者風格三語指南、四頁料理聯動條目、七入口與兩入口共用呈現，並保留既有 T139 玩法／視覺與 W116 錨點修復。 |
+| 先前修復候選 T140 `c78272afd0eb011aa3b25e2d48678dd9ee4aa6c2`／W117 `81fc54c458f90e42a210ffdac019610dc474bfb9` | 兩份 source 已保留，未開 PR；與新 canonical guide 的同版號身份分開，不覆寫其 source／freeze／history，也不以該舊身份發布。修復由新 T141／W118 承接。 |
+| 較舊 [W115 PR94](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/94) `ed8ab654d8669c76082d81d7e99e2893150528ef` | 保留來源與原版號聲明，不得合回新主線而回退指南、錨點或身份。本輪 T141／W118 送出新的完整 PR 後，才按實際承接結果收束舊 PR；本頁未宣稱已關閉或合併。 |
+| G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982` | 身份與來源維持，Cookery helper 0.2.9 descriptor／作者 patch／copied helpers 整組仍待完整家族驗證。 |
+
+以下是先前來源當時的處置記錄，舊段落的「本輪／當前」不取代本節，
+亦不代表目前 LIVE 或真人驗收。
+
+## 保留的 T139／W116 整合
 
 整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
 
@@ -8,14 +26,14 @@
 
 # 森羅家族：當前修補與 PR 處置
 
-## 當前 T137／W114：修復原生重啟光效
+## 保留的 T137／W114：修復原生重啟光效
 
 [本版說明](../RELEASE-NOTES-0.6.137.md) 保留 T136/W113 exact source 與首次通過／重啟失敗證據。新增同 entityLoad tick 的一次原生 EffectAdd 載入見證；PR302 後續完整 observer recorder 一起承接。最終 CI／發布依實際結果，不改寫舊失敗。
 
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 當前指南候選與保留來源
+## 保留的公開 T136 指南候選與來源
 
 本輪候選為 **T136／W113／G121**。T136 凍結來源 `496ce702` 以已部署的
 T132 玩法重修指南；W113 `92168bec` 保留 W110 玩法並重寫 67 個三語條目；
@@ -33,9 +51,9 @@ LIVE 仍為 **T132／G119／W110**。新候選須完成確切來源 PR／CI 與�
 static、BDS、停服存檔演練、准入及部署讀回，才更新 LIVE。
 `client=false`、`production_ready=false`、`pending_client_acceptance` 繼續保持；
 兩入口共用顯示與文字檢查不能當作真人排版／操作驗收。
-## 當前 T136／W113：接續 Mob／重生錨修復
+## 保留的 alternate T136／W113：接續 Mob／重生錨修復
 
-[本版範圍](../RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
+[固定 trial 的 alternate T136 範圍](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
 `6dc43f3bd589a370782f7005c9d672e141de0be3` 與 PR91 的 W112 reviewed
 `ed78beed3204a8a9e3c3a83d48350fb0e84ba516` 接續，保留原提交與 freeze。
 新增倒轉 Mob snapshot、確認的錨點 metadata；原生 observer 改合法原料、

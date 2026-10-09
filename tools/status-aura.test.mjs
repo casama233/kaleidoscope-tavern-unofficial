@@ -7,15 +7,16 @@ import {world,system,Signal} from '@minecraft/server';
 import {customAuraRows,statusAuraColor,sampleStatusAura,TAVERN_AURA_COLORS} from '../runtime/BP/scripts/core/status-aura.js';
 import {STATUS_AURA_KEY,STATUS_AURA_BLOCKED_KEY,STATUS_AURA_TEST,statusAuraDiagnostics,applyNativeStatusWithAura,indexStatusAura,tickStatusAura,forgetStatusAura,restoreStatusAura,installStatusAura} from '../runtime/BP/scripts/bedrock/status-aura.js';
 import {installCustomEffects} from '../runtime/BP/scripts/bedrock/custom-effects.js';
-world.afterEvents.effectAdd=new Signal();installStatusAura();installCustomEffects();
+world.beforeEvents.effectAdd=new Signal();world.afterEvents.effectAdd=new Signal();installStatusAura();installCustomEffects();
 let serial=0;
+const effectNames={speed:'Speed',strength:'Strength',haste:'Haste',hunger:'Hunger',fire_resistance:'Fire Resistance',night_vision:'Night Vision',water_breathing:'Water Breathing'};
 function fixture({nativeClock=()=>system.currentTick}={}){
  const native=new Map(),dp=new Map(),calls=[],particles=[];
  const p={id:'aura-fixture-'+(++serial),isValid:true,typeId:'minecraft:player',getDynamicProperty:k=>dp.get(k),setDynamicProperty(k,v){if(this.failSave)throw Error('lease save failed');if(v===undefined)dp.delete(k);else dp.set(k,v);},
   getComponent:()=>({currentValue:20}),getAABB:()=>({center:{x:4,y:3,z:-2},extent:{x:.3,y:.9,z:.3}}),
-  getEffect(id){id=id.replace(/^minecraft:/,'');const row=native.get(id);return row&&row.until>nativeClock()?{typeId:'minecraft:'+id,duration:row.until-nativeClock(),amplifier:row.amplifier}:undefined;},
+  getEffect(id){id=id.replace(/^minecraft:/,'');const row=native.get(id);return row&&row.until>nativeClock()?{typeId:'minecraft:'+id,displayName:effectNames[id],duration:row.until-nativeClock(),amplifier:row.amplifier}:undefined;},
   getEffects(){return [...native.keys()].map(id=>this.getEffect(id)).filter(Boolean);},
-  addEffect(id,ticks,options={}){id=id.replace(/^minecraft:/,'');calls.push({id,ticks,options});if(this.failEffect)throw Error('effect failed');const old=this.getEffect(id),amplifier=options.amplifier??0;native.set(id,{until:nativeClock()+Math.max(ticks,old?.amplifier===amplifier?old.duration:0),amplifier,showParticles:options.showParticles});world.afterEvents.effectAdd.emit({entity:this,effect:this.getEffect(id)});},
+  addEffect(id,ticks,options={}){id=id.replace(/^minecraft:/,'');calls.push({id,ticks,options});if(this.failEffect)throw Error('effect failed');const event={entity:this,effectType:effectNames[id],duration:ticks,cancel:false};world.beforeEvents.effectAdd?.emit(event);if(event.cancel)return;const old=this.getEffect(id),amplifier=options.amplifier??0;native.set(id,{until:nativeClock()+Math.max(event.duration,old?.amplifier===amplifier?old.duration:0),amplifier,showParticles:options.showParticles});world.afterEvents.effectAdd.emit({entity:this,effect:this.getEffect(id)});},
   dimension:{spawnParticle:(...args)=>particles.push(args)}
  };
  return {p,native,dp,calls,particles,close(){forgetStatusAura(p.id);STATUS_AURA_TEST.blockedNative.delete(p.id);}};
@@ -166,8 +167,40 @@ function savedAuraFixture({typeId='minecraft:wolf',savedTicks=550,nativeTicks=54
  f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:savedTicks,amplifier:0}]}));
  f.native.set('speed',{until:nativeClock()+nativeTicks,amplifier,showParticles:false});return f;
 }
-const loaded=f=>world.afterEvents.entityLoad.emit({entity:f.p});
+function invalidBefore(f,id='speed',type=effectNames[id]){
+ const duration=f.p.getEffect(id).duration;f.p.isValid=false;
+ try{world.beforeEvents.effectAdd.emit({entity:f.p,effectType:type,duration,cancel:false});}finally{f.p.isValid=true;}
+}
+const emitLoad=f=>world.afterEvents.entityLoad.emit({entity:f.p});
+const loaded=f=>{if(!f.loadBeforeEmitted){invalidBefore(f);f.loadBeforeEmitted=true;}emitLoad(f);};
 const hydration=f=>world.afterEvents.effectAdd.emit({entity:f.p,effect:f.p.getEffect('speed')});
+const spawn=(f,initialSpawn=true)=>world.afterEvents.playerSpawn.emit({player:f.p,initialSpawn});
+test('regression: an equal foreign write reentrant in entityLoad cannot consume native rehydration permission',()=>{
+ const f=savedAuraFixture({nativeClock:()=>0}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;
+ const foreign=event=>{if(event.entity===f.p)f.p.addEffect('speed',549,{amplifier:0,showParticles:true});};
+ world.afterEvents.entityLoad.subscribe(foreign);
+ try{
+  loaded(f);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(f.native.get('speed').showParticles,true);
+  assert.equal(f.calls.length,1);hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);
+ }finally{world.afterEvents.entityLoad.unsubscribe(foreign);f.close();}
+});
+test('regression: initialSpawn between entityLoad and its native acknowledgement preserves the exact proof',()=>{
+ const f=savedAuraFixture({typeId:'minecraft:player'});try{
+  loaded(f);spawn(f);hydration(f);
+  assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed'));
+  assert.equal(f.calls.length,0);
+ }finally{f.close();}
+});
+test('regression: initialSpawn cannot remint a consumed same-tick native load permission',()=>{
+ const f=savedAuraFixture({typeId:'minecraft:player'});try{
+  loaded(f);hydration(f);const acks=statusAuraDiagnostics.nativeReloadAcknowledgements;
+  spawn(f);emitLoad(f);f.p.addEffect('speed',549,{amplifier:0,showParticles:true});
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(f.calls.length,1);
+ }finally{f.close();}
+});
 test('native entityLoad preserves one exact same-tick saved-effect acknowledgement without reapplying gameplay',()=>{
  for(const typeId of ['minecraft:wolf','minecraft:player']){
   const f=savedAuraFixture({typeId}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;
@@ -411,4 +444,174 @@ test('a newly rejected row cannot survive a later read failure or rollback to it
   forgetStatusAura(f.p.id);STATUS_AURA_TEST.blockedNative.delete(f.p.id);restoreStatusAura(f.p);tickStatusAura(()=>0);
   assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.equal(f.particles.length,0);f.close();
  }
+});
+
+test('native reload requires an invalid-before witness with an exact real name and one actual load callback',()=>{
+ for(const variant of ['missing','valid','late','duplicate','wrong-name','prior-tick','direct-restore']){
+  const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;try{
+   if(variant==='valid')world.beforeEvents.effectAdd.emit({entity:f.p,effectType:'Speed',duration:549,cancel:false});
+   else if(!['missing','late'].includes(variant))invalidBefore(f,'speed',variant==='wrong-name'?'speed':'Speed');
+   if(variant==='duplicate')invalidBefore(f);
+   if(variant==='prior-tick')system.currentTick++;
+   if(variant==='direct-restore')restoreStatusAura(f.p);else emitLoad(f);
+   if(variant==='late'){invalidBefore(f);emitLoad(f);}
+   hydration(f);
+   assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks,variant);
+   assert.equal(f.dp.get(STATUS_AURA_KEY),undefined,variant);assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('native names match the API displayName or typeId without transformation',()=>{
+ for(const name of ['Fire Resistance','minecraft:fire_resistance']){
+  const f=fixture({nativeClock:()=>0});f.p.typeId='minecraft:wolf';try{
+   f.native.set('fire_resistance',{until:20,amplifier:0,showParticles:false});
+   f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'fire_resistance',ticks:20,amplifier:0}]}));
+   invalidBefore(f,'fire_resistance',name);emitLoad(f);
+   world.afterEvents.effectAdd.emit({entity:f.p,effect:f.p.getEffect('fire_resistance')});
+   assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id).native.has('fire_resistance'));assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('foreign before-add vetoes only its exact effect while the independent proof survives save and spawn',()=>{
+ for(const when of ['before-load','after-load','after-hydration']){
+  const f=savedAuraFixture({typeId:'minecraft:player',nativeClock:()=>0});try{
+   f.native.set('hunger',{until:549,amplifier:0,showParticles:false});
+   f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:['speed','hunger'].map(id=>({id,ticks:550,amplifier:0}))}));
+   invalidBefore(f,'speed');invalidBefore(f,'hunger');
+   if(when!=='before-load')emitLoad(f);
+   const hunger=()=>world.afterEvents.effectAdd.emit({entity:f.p,effect:f.p.getEffect('hunger')});
+   if(when==='after-hydration'){hydration(f);hunger();}
+   world.beforeEvents.effectAdd.emit({entity:f.p,effectType:'Speed',duration:549,cancel:false});
+   spawn(f);if(when==='before-load')emitLoad(f);
+   hydration(f);if(when!=='after-hydration')hunger();
+   assert.deepEqual([...STATUS_AURA_TEST.tracks.get(f.p.id).native.keys()],['hunger'],when);
+   assert.deepEqual(JSON.parse(f.dp.get(STATUS_AURA_KEY)).rows,[{id:'hunger',ticks:549,amplifier:0}]);
+   forgetStatusAura(f.p.id);restoreStatusAura(f.p);
+   assert.deepEqual([...STATUS_AURA_TEST.tracks.get(f.p.id).native.keys()],['hunger'],'excluded row must stay retired');
+   assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('unknown or throwing before-add names fail closed without restricted-phase property writes',()=>{
+ for(const name of ['Unknown',null]){
+  const f=savedAuraFixture();try{
+   loaded(f);const raw=f.dp.get(STATUS_AURA_KEY),event={entity:f.p,duration:549,cancel:false};
+   Object.defineProperty(event,'effectType',{get(){if(name===null)throw Error('before name unreadable');return name;}});
+   world.beforeEvents.effectAdd.emit(event);assert.equal(f.dp.get(STATUS_AURA_KEY),raw);
+   hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('cancelled valid before-add retires permission without modifying the unchanged native effect',()=>{
+ const f=savedAuraFixture();try{
+  loaded(f);const raw=f.dp.get(STATUS_AURA_KEY);
+  world.beforeEvents.effectAdd.emit({entity:f.p,effectType:'Speed',duration:549,cancel:true});
+  assert.equal(f.dp.get(STATUS_AURA_KEY),raw);assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id).native.has('speed'));
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id).reloadWitnesses.size,0);
+  hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(f.p.getEffect('speed').duration,549);
+ }finally{f.close();}
+});
+test('initialSpawn preserves verified proof in every ordering without replaying consumed acknowledgements',()=>{
+ for(const when of ['before-before','before-load','after-load','after-hydration']){
+  const f=savedAuraFixture({typeId:'minecraft:player'});try{
+   if(when==='before-before')spawn(f);
+   invalidBefore(f);if(when==='before-load')spawn(f);
+   emitLoad(f);if(when==='after-load')spawn(f);
+   hydration(f);if(when==='after-hydration')spawn(f);
+   assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed'),when);
+   hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined,when);assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('initialSpawn durably retires rejected proof and fences failed cleanup instead of re-adopting saved rows',()=>{
+ for(const fault of ['duration','generation','dp-conflict','read-failure','retirement-failure']){
+  const f=savedAuraFixture({typeId:'minecraft:player'});try{
+   loaded(f);const read=f.p.getEffect;
+   if(fault==='duration')f.native.get('speed').until--;
+   if(fault==='generation'){const t=STATUS_AURA_TEST.tracks.get(f.p.id);t.native.set('speed',{...t.native.get('speed')});}
+   if(fault==='dp-conflict')f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:548,amplifier:0}]}));
+   if(fault==='read-failure')f.p.getEffect=()=>{throw Error('spawn native read failed');};
+   if(fault==='retirement-failure'){world.beforeEvents.effectAdd.emit({entity:f.p,effectType:'Speed',duration:549,cancel:false});f.p.failSave=true;}
+   spawn(f);f.p.getEffect=read;f.p.failSave=false;
+   assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0,fault);
+   if(fault==='retirement-failure')assert.equal(STATUS_AURA_TEST.blockedNative.has(f.p.id),true);
+   else assert.equal(f.dp.get(STATUS_AURA_KEY),undefined,fault);
+   forgetStatusAura(f.p.id);restoreStatusAura(f.p);
+   assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('cross-tick initialSpawn and ordinary respawn cannot retain the native load permission',()=>{
+ for(const initialSpawn of [false,true]){
+  const f=savedAuraFixture({typeId:'minecraft:player'}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;try{
+   loaded(f);if(initialSpawn)system.currentTick++;
+   spawn(f,initialSpawn);hydration(f);
+   assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+   assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.equal(f.calls.length,0);
+  }finally{f.close();}
+ }
+});
+test('a shorter own refresh retires load permission while preserving the strict own-write path',()=>{
+ const f=savedAuraFixture({nativeClock:()=>0});try{
+  loaded(f);applyNativeStatusWithAura(f.p,'speed',4,{amplifier:0,showParticles:true});
+  assert.equal(f.p.getEffect('speed').duration,549);assert.equal(f.calls[0].options.showParticles,false);
+  assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id).native.has('speed'));
+  hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+ }finally{f.close();}
+});
+test('deferred before-name resolution cannot be supplied by a foreign, mismatched or ambiguous after',()=>{
+ for(const variant of ['foreign-after','mismatched-before','duplicate-before']){
+  const f=savedAuraFixture({nativeClock:()=>0}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;try{
+   loaded(f);
+   world.beforeEvents.effectAdd.emit({entity:f.p,effectType:variant==='mismatched-before'?'Unknown':'Strength',duration:20,cancel:false});
+   assert.ok(STATUS_AURA_TEST.loadContexts.get(f.p.id).unresolved.length);
+   if(variant==='foreign-after'){
+    f.native.set('strength',{until:20,amplifier:0,showParticles:true});
+    world.afterEvents.effectAdd.emit({entity:f.p,effect:f.p.getEffect('strength')});
+   }else applyNativeStatusWithAura(f.p,'strength',20,{amplifier:0,showParticles:true});
+   assert.ok(STATUS_AURA_TEST.loadContexts.get(f.p.id).unresolved.length,variant);
+   hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks,variant);
+   assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,false);
+  }finally{f.close();}
+ }
+});
+test('deferred own-name resolution uses actual remaining duration rather than the shorter request',()=>{
+ const f=savedAuraFixture({nativeClock:()=>0}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;try{
+  f.native.set('strength',{until:100,amplifier:0,showParticles:false});
+  f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:550,amplifier:0},{id:'strength',ticks:100,amplifier:0}]}));
+  loaded(f);applyNativeStatusWithAura(f.p,'strength',4,{amplifier:0,showParticles:true});
+  assert.equal(f.p.getEffect('strength').duration,100);assert.equal(f.calls[0].ticks,4);
+  assert.equal(f.calls[0].options.showParticles,false);assert.equal(STATUS_AURA_TEST.loadContexts.get(f.p.id).unresolved.length,0);
+  hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks+1);
+  assert.deepEqual([...STATUS_AURA_TEST.tracks.get(f.p.id).native.keys()],['speed','strength']);
+ }finally{f.close();}
+});
+test('unresolved before-add blocks initialSpawn retention and is never revived by a later after',()=>{
+ const f=savedAuraFixture({typeId:'minecraft:player'}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;try{
+  loaded(f);world.beforeEvents.effectAdd.emit({entity:f.p,effectType:'Unknown',duration:20,cancel:false});
+  spawn(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
+ }finally{f.close();}
+});
+test('an unrelated own after cannot revive load proof vetoed by a reentrant identical foreign write',()=>{
+ const f=savedAuraFixture({nativeClock:()=>0}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements;
+ const foreign=event=>{if(event.entity===f.p&&event.effectType==='Strength')f.p.addEffect('speed',549,{amplifier:0,showParticles:true});};
+ try{
+  loaded(f);world.beforeEvents.effectAdd.subscribe(foreign);
+  applyNativeStatusWithAura(f.p,'strength',20,{amplifier:0,showParticles:true});
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.reloadWitnesses.has('speed')??false,false);
+  assert.equal(STATUS_AURA_TEST.loadContexts.get(f.p.id)?.verified?.has('speed')??false,false);
+  hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed')??false,false);
+  assert.equal(f.native.get('speed').showParticles,true);
+ }finally{world.beforeEvents.effectAdd.unsubscribe(foreign);f.close();}
+});
+test('missing native before-add API keeps a fresh adapter on the original visible-particle path',async()=>{
+ const before=world.beforeEvents.effectAdd;world.beforeEvents.effectAdd=undefined;const f=fixture();try{
+  const adapter=await import('../runtime/BP/scripts/bedrock/status-aura.js?without-before');adapter.installStatusAura();
+  adapter.applyNativeStatusWithAura(f.p,'speed',100,{amplifier:0,showParticles:true});
+  assert.equal(f.calls[0].options.showParticles,true);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  assert.equal(adapter.STATUS_AURA_TEST.tracks.size,0);
+ }finally{world.beforeEvents.effectAdd=before;f.close();}
 });

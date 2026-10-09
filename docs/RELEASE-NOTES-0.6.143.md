@@ -71,7 +71,7 @@ RP manifest 的本次同步身份包含顯式空 `dependencies`，原本沒有�
 ## 精確公開配對
 
 五個 World Liquor CI checkout 固定 W120 最終來源
-`262e831bf6ead918b4f3615bf25795eaa9ef719f`；W120 相依及 integration
+`5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a`；W120 相依及 integration
 固定 T143 凍結來源 `956727d8ed71f4a766f8668b680d3e9720db53be`。
 家族鎖使用 G124 凍結 runtime `469441bc6556b5e91adedfd44876ac072572012a`
 及 W120 實際 baseline 的 BP／RP trees；工具或發布 metadata 後續

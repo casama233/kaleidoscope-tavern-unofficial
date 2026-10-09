@@ -27,6 +27,10 @@ class IdentityTests(unittest.TestCase):
  def test_original_author_archive_is_bound(self):
   self.old['packs'][0]['source']['archive_sha256']='unreviewed'
   with self.assertRaises(AssertionError):self.check()
+ def test_incomplete_manifest_digest_cannot_pass_even_if_inventory_repeats_it(self):
+  self.spec['packs'][1]['old_manifest_sha256']='f'*60
+  self.old['packs'][1]['files']['manifest.json']='f'*60
+  with self.assertRaisesRegex(AssertionError,'complete SHA256'):self.check()
  def test_captured_inventory_provenance_requires_the_exact_admitted_contents(self):
   admitted=copy.deepcopy(self.old);admitted['packs']=admitted['packs'][:-1]
   inventory=copy.deepcopy(admitted)

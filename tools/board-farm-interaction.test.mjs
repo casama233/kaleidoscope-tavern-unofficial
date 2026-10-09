@@ -72,12 +72,14 @@ test('all three board editors keep complete escaped seeds beyond the old native 
   const board=kind==='sandwich'?lower:at({...pos,x:pos.x-(kind==='large'?1:0)},NS+'chalkboard',{[BOARD_HALF]:0,[CHALK_POSITION]:kind==='large'?1:0,'minecraft:cardinal_direction':'north'});
   const text=Array(lines).fill('i'.repeat(width)).join('\n');
   assert.ok(text.length>100);save(key,{text,alignment:'left'});
+  const committed=WRITING_BOARD_DIAGNOSTICS.edited;
   ui.responses.push({canceled:false,formValues:[encodeBoardInput(text),0,0]});
   interact(p,board);system.advance(1);await flush();
   const form=ui.forms.at(-1);
   assert.deepEqual(form.heading,{rawtext:[{text:'§r§0§r'},{translate:'kt.board.'+(kind==='sandwich'?'sandwich':'chalk')}]});
   assert.equal(form.fields[0].args[2].defaultValue,encodeBoardInput(text));
   assert.equal(form.fields.length,3);assert.equal(read(key).text,text);
+  assert.equal(WRITING_BOARD_DIAGNOSTICS.edited,committed+1);assert.deepEqual(p.messages,[]);
  }
 });
 

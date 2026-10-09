@@ -12,7 +12,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 - [T140 guide revision](docs/RELEASE-NOTES-0.6.140.md) retains all three languages and preparation details on demand, adds four reviewed AMW pages and shares the view through the optional Cookery entrance. T141 preserves this published guide and T139's native clock/reload, machine ingredient, Mob selection and immersion repairs.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The deployed development baseline is Tavern **0.6.142**, World Liquor **0.1.119** and Grilling **0.1.123**. The [family lock](family/upstream.lock.json) and [current baseline index](family/BASELINE-STATUS.md) own exact source, dependency and bounded verification records.
+- The deployed development baseline is Tavern **0.6.142**, World Liquor **0.1.119** and Grilling **2.8.123**. The [family lock](family/upstream.lock.json) and [current baseline index](family/BASELINE-STATUS.md) own exact source, dependency and bounded verification records.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.

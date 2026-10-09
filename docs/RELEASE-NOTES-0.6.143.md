@@ -53,3 +53,22 @@ witness 減少檔案數。UI 的三個 capacity 分支只有容量及 selector �
 遷移須連同乾淨原包、作者 provenance 與已准入舊收據核對，不能
 沿用 1.0.0 的 UUID／檔案或把完整作者脚本納入公開酒館來源。
 實際整合與保存驗證仍以本輪最終家族候選為準。
+
+## 凍結與封裝來源
+
+T143 凍結來源 `956727d8ed71f4a766f8668b680d3e9720db53be`，
+正式 archive 為 5,887,508 bytes，SHA256
+`0931c09c25d25aca7a5c73e2769637566722a8414b12c8dd38c7d5a81a7b8e81`。
+實際 packager 已核對完整 BP／RP 輸出與 manifest；配對／發布 metadata
+後續調整不改 runtime bytes。完整 CI、原生首次／保存／重啟、完整家族、
+存檔遷移及 LIVE 必須按這次最終配對取得自己的證據；封裝不是驗收。
+
+## 精確公開配對
+
+五個 World Liquor CI checkout 固定 W120 最終來源
+`262e831bf6ead918b4f3615bf25795eaa9ef719f`；W120 相依及 integration
+固定 T143 凍結來源 `956727d8ed71f4a766f8668b680d3e9720db53be`。
+家族鎖使用 G124 凍結 runtime `469441bc6556b5e91adedfd44876ac072572012a`
+及 W120 實際 baseline 的 BP／RP trees；工具或發布 metadata 後續
+修正不能自行授權不同 runtime。兩庫完整 CI 與完整家族結果仍待實際
+執行，不沿用 T142／G123／W119 的收據或真人驗收。

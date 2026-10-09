@@ -15,7 +15,7 @@ Java酒館的基岩版移植，包含釀造、調酒、酒架／酒櫃、家具�
 ## 現行來源與需求
 
 - 版本及精確相依以 [baseline.json](baseline.json) 為準；更新見 [CHANGELOG.md](CHANGELOG.md)。
-- 目前已部署開發基線為酒館 **0.6.142**、世界名酒 **0.1.119**、燒烤 **0.1.123**；精確來源、相依及有界驗證見 [家族鎖](family/upstream.lock.json) 與 [當前 baseline](family/BASELINE-STATUS.md)。
+- 目前已部署開發基線為酒館 **0.6.142**、世界名酒 **0.1.119**、燒烤 **2.8.123**；精確來源、相依及有界驗證見 [家族鎖](family/upstream.lock.json) 與 [當前 baseline](family/BASELINE-STATUS.md)。
 - 基岩版1.26.50以上；目前引擎目標為BDS1.26.52.3。BP與RP兩側一起啟用。
 - Cookery可選，家族目前核驗作者1.6.0；世界名酒須搭配其宣告的酒館版本。
 - 升級前備份世界並移除重複舊包。私有料理整合是另一個識別明確的addon，不是私有酒館分支。

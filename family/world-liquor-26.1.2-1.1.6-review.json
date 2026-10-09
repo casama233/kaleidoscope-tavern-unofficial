@@ -259,5 +259,37 @@
       "implemented_by_this_review": false,
       "client_verified": false
     }
-  ]
+  ],
+  "current_reassessment": {
+    "checked_at": "2026-10-09",
+    "scope": "Current maintained Minecraft 1.21.1 / NeoForge author 1.1.11, file 9066406; public W119 source and the inherited W120 candidate. This reassessment supersedes historical current_1_21_1_impact statements for shared freezer recipe/height/fluid behavior only. The original review date, archive comparison and 26.1.2 deltas remain unchanged.",
+    "public_predecessor_source": "f60174df93bb8544ea0836b3d7bb9bb06a281255",
+    "shared_behavior_already_implemented": [
+      {
+        "adaptation_item": "WL2612-116-RECIPE",
+        "current": "Current FREEZER_RECIPES uses lava 1000 fluid units / 1800 ticks -> one obsidian. Three magma blocks exist only in LEGACY_FREEZER_RECIPES to retain previous saved outputs; they are not a newly selectable active recipe. Tonic/highball and source water-potion predicates already follow the maintained 1.21.1 baseline.",
+        "source_paths": [
+          "runtime/BP/scripts/freezer-recipes.js",
+          "runtime/BP/scripts/legacy-freezer-recipes.js",
+          "data/java-parity/neoforge-1.1.11/freezer/obsidian.json"
+        ]
+      },
+      {
+        "adaptation_item": "WL2612-116-FREEZER",
+        "current": "Current freezer result height uses source float count/maxCount ratio, capped at one, with .3125 + .3125 * ratio. Maintained minecraft:milk is explicitly mapped to the owned milk_still identity. These shared mechanics already exist; they are not an unimplemented Java26-only gap.",
+        "source_paths": [
+          "runtime/BP/scripts/freezer-visuals.js",
+          "runtime/BP/scripts/freezer-recipes.js",
+          "data/current-author-review-20261009.json"
+        ]
+      }
+    ],
+    "branch_specific_differences_remaining": [
+      "26.1.2 custom Luck amplifier/loot-attempt algorithm and removed bonemeal_spreader registration differ from maintained 1.21.1 vanilla Luck; no replacement or complete adaptation is claimed.",
+      "26.1.2 BlockDropsEvent copies actual drop entities; maintained 1.21.1 rerolls Block.getDrops. Mob-loot causality and native/client equivalence remain separate unfinished work.",
+      "The 26.1.2 effect registration set, platform fluids/interaction/rendering APIs and remaining source deltas still require branch-specific review; shared freezer parity does not close that branch."
+    ],
+    "full_26_1_2_adaptation_verified": false,
+    "client_verified": false
+  }
 }

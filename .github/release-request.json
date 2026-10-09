@@ -1,15 +1,15 @@
 {
-  "version": "0.6.142",
-  "tag": "v0.6.142-beta.1",
-  "title": "森羅物語：酒館 0.6.142 測試版｜整合板面、雪克杯與載入光效修復",
+  "version": "0.6.143",
+  "tag": "v0.6.143-beta.1",
+  "title": "森羅物語：酒館 0.6.143 測試版｜板面容量與家族最新版適配",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.142.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.143.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "This complete T142/W119 integration requires its own actual canonical CI and strict source/overlay-bound native first 21/restart 22 cases, retaining the familyless-fall observer. Prior T141/W118 board/shaker evidence and the separate PR310 aura candidate 20/21 evidence retain their original source identities. Player/client, G123/Cookery private family, saved-world and LIVE acceptance remain separate.",
-  "expected_archive_sha256": "6905419012c4344e29e7a63cd25751c8b93d575c885a3ff0c774dfed1c5afad4",
-  "reviewed_runtime_source": "717b129cd0a7bd614d0b4bf697c6f309af1a6a02"
+  "native_evidence_scope": "T143/W120 retains the merged T142 aura, recorder, board wrapping, shaker and fish support and the complete three-language shared guide. This candidate needs its own actual canonical CI and strict source-bound native first/save/restart results. The scoped single-line board-capacity sibling controller, foreign forms, focus and actual keyboard/touch/gamepad input remain pending human-client verification; formal multiline editing is not implemented. G124 and clean author Immersive Eating 1.1.0 UUID migration require the new complete-family/saved-world candidate. Previous T142/G123/W119 CI/native/full-family/LIVE evidence keeps its original identity. Player/client, saved-world and LIVE acceptance remain separate.",
+  "expected_archive_sha256": "0931c09c25d25aca7a5c73e2769637566722a8414b12c8dd38c7d5a81a7b8e81",
+  "reviewed_runtime_source": "956727d8ed71f4a766f8668b680d3e9720db53be"
 }

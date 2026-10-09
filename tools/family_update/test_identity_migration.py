@@ -27,6 +27,15 @@ class IdentityTests(unittest.TestCase):
  def test_original_author_archive_is_bound(self):
   self.old['packs'][0]['source']['archive_sha256']='unreviewed'
   with self.assertRaises(AssertionError):self.check()
+ def test_captured_inventory_provenance_requires_the_exact_admitted_contents(self):
+  admitted=copy.deepcopy(self.old);admitted['packs']=admitted['packs'][:-1]
+  inventory=copy.deepcopy(admitted)
+  for p in inventory['packs']:p.pop('source')
+  policy={'approved_receipt':'/receipt.json','installed':{'receipt':'/receipt.json','receipt_sha256':'exact'}}
+  with patch.object(m,'read',side_effect=lambda p:admitted if str(p)=='/receipt.json' else policy),patch.object(m,'sha',return_value='exact'):
+   self.assertEqual(m.admitted_original(inventory),admitted)
+   inventory['packs'][0]['files']['manifest.json']='drift'
+   with self.assertRaises(AssertionError):m.admitted_original(inventory)
  def test_unlisted_addition(self):
   self.new['packs'].append({'uuid':'unreviewed'})
   with self.assertRaises(AssertionError):self.check()

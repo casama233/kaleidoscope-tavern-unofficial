@@ -44,7 +44,23 @@ def candidate_plan(receipt, original):
         return None
     path = Path(location).resolve()
     assert path.parent == (T / 'family/identity-migrations').resolve(), 'Migration declaration must belong to canonical Git'
-    return validate_plan(read(path), receipt, original)
+    return validate_plan(read(path), receipt, admitted_original(original))
+
+
+def admitted_original(original):
+    """Inventory has no provenance; bind it to the captured installed receipt."""
+    policy = read(R / 'production-before/senluo-policy.json')
+    path = Path(policy['approved_receipt'])
+    assert str(path) == policy['installed']['receipt'] and sha(path) == policy['installed']['receipt_sha256'], 'Original admitted receipt identity changed'
+    approved = read(path)
+    rows = {p['uuid']: p for p in approved['packs']}
+    assert len(rows) == len(approved['packs']) and set(rows) == {p['uuid'] for p in original['packs']}, 'Original inventory differs from admitted identities'
+    packs = []
+    for pack in original['packs']:
+        prior = rows[pack['uuid']]
+        assert all(pack[k] == prior[k] for k in ['side', 'version', 'files']), 'Original inventory differs from admitted contents'
+        packs.append({**pack, 'source': prior['source']})
+    return {**original, 'packs': packs}
 
 
 def assembly_order(original):

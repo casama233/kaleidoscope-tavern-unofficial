@@ -44,7 +44,7 @@ export async function runMachineIngredientsProbe({phase,dimension,container,out}
    }
    const saved=readMachineIngredients(block,store.load(key)),expected=inputs.map(shape);check(canonical(saved.items.slice(0,inputs.length).map(shape))===canonical(expected),'native machine input was changed before save');
    world.setDynamicProperty(expectedKey,canonical(expected));world.setDynamicProperty(identityKey,saved.record.entity);
-   out('case',{mode:'native-machine-write',phase,kind:row.kind,slots:inputs.length,counts:inputs.map(x=>x.amount),schema:saved.record.schema,hostScopeMetadata:true});
+   out('case',{mode:'native-machine-write',phase,machineKind:row.kind,slots:inputs.length,counts:inputs.map(x=>x.amount),schema:saved.record.schema,hostScopeMetadata:true});
   }else{
    let state=store.load(key);check(state?.nativeItems===1,'saved machine lost native-required state');const saved=readMachineIngredients(block,state),expected=JSON.parse(world.getDynamicProperty(expectedKey));
    check(saved.record.entity===world.getDynamicProperty(identityKey),'saved machine carrier was replaced');check(canonical(saved.items.slice(0,expected.length).map(shape))===canonical(expected),'machine native metadata/count changed across normal restart');
@@ -56,7 +56,7 @@ export async function runMachineIngredientsProbe({phase,dimension,container,out}
     catch(error){try{container.setItem(target,previous);plan.rollback();}finally{store.restoreRaw(key,raw);}throw error;}plan.finish();
    }
    check(world.getDynamicProperty(nativeItemKey(key))===undefined&&machineItems.readAdopted({key,dimension,position:row.position})===undefined,'machine carrier was not retired after exact recovery');
-   out('case',{mode:'native-machine-restart-recovery',phase,kind:row.kind,slots:expected.length,counts:expected.map(x=>x.count),schema:2,completeNativeSlots:true});
+   out('case',{mode:'native-machine-restart-recovery',phase,machineKind:row.kind,slots:expected.length,counts:expected.map(x=>x.count),schema:2,completeNativeSlots:true});
   }
  }
 }

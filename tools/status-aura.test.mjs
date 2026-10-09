@@ -6,7 +6,8 @@ import assert from 'node:assert/strict';
 import {world,system,Signal} from '@minecraft/server';
 import {customAuraRows,statusAuraColor,sampleStatusAura,TAVERN_AURA_COLORS} from '../runtime/BP/scripts/core/status-aura.js';
 import {STATUS_AURA_KEY,STATUS_AURA_BLOCKED_KEY,STATUS_AURA_TEST,statusAuraDiagnostics,applyNativeStatusWithAura,indexStatusAura,tickStatusAura,forgetStatusAura,restoreStatusAura,installStatusAura} from '../runtime/BP/scripts/bedrock/status-aura.js';
-world.afterEvents.effectAdd=new Signal();installStatusAura();
+import {installCustomEffects} from '../runtime/BP/scripts/bedrock/custom-effects.js';
+world.afterEvents.effectAdd=new Signal();installStatusAura();installCustomEffects();
 let serial=0;
 function fixture(){
  const native=new Map(),dp=new Map(),calls=[],particles=[];
@@ -156,4 +157,93 @@ test('a rejected saved lease is retired before an unobserved foreign duration ca
  system.currentTick+=100;forgetStatusAura(f.p.id);restoreStatusAura(f.p);tickStatusAura(()=>0);
  assert.equal(f.p.getEffect('speed').duration,100);assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
  assert.equal(f.particles.length,0);assert.equal(f.native.get('speed').showParticles,true);f.close();
+});
+
+// Native T136 trace: entityLoad accepted saved550/native549, then the engine's
+// same-tick effectAdd(native549) retired that lease without another addEffect.
+function savedAuraFixture({typeId='minecraft:wolf',savedTicks=550,nativeTicks=549,amplifier=0}={}){
+ const f=fixture();f.p.typeId=typeId;
+ f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:savedTicks,amplifier:0}]}));
+ f.native.set('speed',{until:system.currentTick+nativeTicks,amplifier,showParticles:false});return f;
+}
+const loaded=f=>world.afterEvents.entityLoad.emit({entity:f.p});
+const hydration=f=>world.afterEvents.effectAdd.emit({entity:f.p,effect:f.p.getEffect('speed')});
+test('native entityLoad preserves one exact same-tick saved-effect acknowledgement without reapplying gameplay',()=>{
+ for(const typeId of ['minecraft:wolf','minecraft:player']){
+  const f=savedAuraFixture({typeId}),raw=f.dp.get(STATUS_AURA_KEY),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;
+  loaded(f);assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed'));
+  hydration(f);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),raw);assert.ok(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.has('speed'));
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks+1);assert.equal(f.p.getEffect('speed').duration,549);assert.deepEqual(f.calls,[]);
+  assert.equal(statusAuraDiagnostics.lastNativeReloadAcknowledgement.entity,f.p.id);f.close();
+ }
+});
+test('repeat restore cannot mint a second reload acknowledgement or hide a same-amplifier foreign refresh',()=>{
+ const f=savedAuraFixture();loaded(f);hydration(f);const acks=statusAuraDiagnostics.nativeReloadAcknowledgements;
+ restoreStatusAura(f.p);loaded(f);restoreStatusAura(f.p);
+ f.p.addEffect('speed',549,{amplifier:0,showParticles:true});
+ assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
+ assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements,acks);assert.equal(f.calls.length,1);assert.equal(f.native.get('speed').showParticles,true);f.close();
+});
+test('generic restore and playerSpawn do not grant an entityLoad acknowledgement',()=>{
+ for(const playerSpawn of [false,true]){
+  const f=savedAuraFixture({typeId:'minecraft:player'}),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;
+  if(playerSpawn)world.afterEvents.playerSpawn.emit({player:f.p,initialSpawn:true});else restoreStatusAura(f.p);
+  hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);assert.deepEqual(f.calls,[]);f.close();
+ }
+});
+test('reload acknowledgement rejects another tick, duration or amplifier and keeps the native effect unchanged',()=>{
+ for(const change of ['tick','shorter','longer','amplifier']){
+  const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;loaded(f);
+  if(change==='tick')system.currentTick++;
+  else if(change==='amplifier')f.native.get('speed').amplifier=1;
+  else f.native.get('speed').until+=change==='shorter'?-1:1;
+  const before=f.p.getEffect('speed');hydration(f);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.deepEqual(f.p.getEffect('speed'),before);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);assert.deepEqual(f.calls,[]);f.close();
+ }
+});
+test('reload still rejects saved rows beyond five ticks or with a different native amplifier',()=>{
+ for(const options of [{nativeTicks:544},{nativeTicks:551},{amplifier:1}]){
+  const f=savedAuraFixture(options),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;loaded(f);hydration(f);
+  assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);assert.deepEqual(f.calls,[]);f.close();
+ }
+});
+test('a host write before hydration retires the old reload witness before its own ticket is consumed',()=>{
+ for(const showParticles of [true,false]){
+  const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;loaded(f);
+  applyNativeStatusWithAura(f.p,'speed',549,{amplifier:0,showParticles});
+  hydration(f);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);assert.equal(f.calls.length,1);f.close();
+ }
+});
+test('unload and durable ownership blocking cannot retain a reload witness',()=>{
+ for(const blocked of [false,true]){
+  const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;
+  if(blocked)f.dp.set(STATUS_AURA_BLOCKED_KEY,true);
+  loaded(f);
+  if(!blocked)world.afterEvents.entityRemove.emit({removedEntityId:f.p.id});
+  hydration(f);assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);
+  assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);assert.deepEqual(f.calls,[]);f.close();
+ }
+});
+test('reload acknowledgement requires unchanged saved bytes and the current durable ownership fence',()=>{
+ for(const blocked of [false,true]){
+  const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;loaded(f);
+  if(blocked)f.dp.set(STATUS_AURA_BLOCKED_KEY,true);
+  else f.dp.set(STATUS_AURA_KEY,JSON.stringify({schema:1,rows:[{id:'speed',ticks:549,amplifier:0}]}));
+  hydration(f);
+  assert.equal(f.dp.get(STATUS_AURA_BLOCKED_KEY),true);assert.equal(f.dp.get(STATUS_AURA_KEY),undefined);
+  assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);
+  assert.equal(f.p.getEffect('speed').duration,549);assert.deepEqual(f.calls,[]);f.close();
+ }
+});
+test('native-only death retires the loaded aura before a later same-tick effect acknowledgement',()=>{
+ const f=savedAuraFixture(),acks=statusAuraDiagnostics.nativeReloadAcknowledgements??0;loaded(f);
+ f.p.getComponent=()=>({currentValue:0});world.afterEvents.entityDie.emit({deadEntity:f.p,damageSource:{}});
+ assert.equal(STATUS_AURA_TEST.tracks.has(f.p.id),false);
+ hydration(f);assert.equal(statusAuraDiagnostics.nativeReloadAcknowledgements??0,acks);
+ assert.equal(STATUS_AURA_TEST.tracks.get(f.p.id)?.native.size??0,0);assert.deepEqual(f.calls,[]);f.close();
 });

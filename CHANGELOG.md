@@ -1,5 +1,11 @@
 # Maintained changes
 
+## 0.6.137
+
+- 修正已保存原生光效被重啟 EffectAdd 誤判為外部刷新；保留本輪倒轉 Mob 與 W114 重生錨修復。
+- [本版驗證與限制](docs/RELEASE-NOTES-0.6.137.md)。
+
+
 ## 0.6.136
 
 - 修正 Upside Down 的完整 Mob 名單與魚類分類；配對 W113 重生錨觀察；保留 T135 全部功能，修正原生 observer 原料及地形隔離。

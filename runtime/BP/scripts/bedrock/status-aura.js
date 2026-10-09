@@ -12,7 +12,7 @@ export const STATUS_AURA_KEY='kaleidoscope_tavern:status_aura';
 export const STATUS_AURA_BLOCKED_KEY='kaleidoscope_tavern:status_aura_blocked';
 const tracks=new Map(),pending=new Map(),syntheticInvisibility=new Map(),blockedNative=new Set();
 let installed=false,updateRun;
-export const statusAuraDiagnostics={mode:'source_owned_aura',clientConfirmed:false,emissions:0,nativeAcquired:0,nativeHandoffs:0,nativeReadbackFallbacks:0,unknownNativeSnapshots:0,nativeOwnershipBlocks:0,durableBlockFailures:0,foreignVisibilityKnown:false,errors:[]};
+export const statusAuraDiagnostics={mode:'source_owned_aura',clientConfirmed:false,emissions:0,nativeAcquired:0,nativeHandoffs:0,nativeReloadWitnesses:0,nativeReloadAcknowledgements:0,lastNativeReloadAcknowledgement:null,nativeReadbackFallbacks:0,unknownNativeSnapshots:0,nativeOwnershipBlocks:0,durableBlockFailures:0,foreignVisibilityKnown:false,errors:[]};
 function error(e){statusAuraDiagnostics.errors.push(String(e));if(statusAuraDiagnostics.errors.length>12)statusAuraDiagnostics.errors.shift();}
 function view(effect){
  if(!effect||!Number.isInteger(effect.duration)||effect.duration<=0||!Number.isInteger(effect.amplifier)||effect.amplifier<0||effect.amplifier>255)return undefined;
@@ -20,6 +20,8 @@ function view(effect){
 }
 function current(entity,id){return view(entity.getEffect(id));}
 function matches(row,e,now){return !!e&&e.amplifier===row.amplifier&&Math.abs(e.ticks-(row.until-now))<=1;}
+function exactEffect(a,b){return !!a&&!!b&&a.id===b.id&&a.ticks===b.ticks&&a.amplifier===b.amplifier;}
+function retireReloadWitness(track,id){track?.reloadWitnesses?.delete(id);track?.loadedNative?.delete(id);}
 /** A failed revocation/rollback cannot leave duration matching as proof of
  * ownership. Keep a separate durable fence, and retain the in-memory fence even
  * across unload/reload callbacks if the entity rejects every property write.
@@ -28,6 +30,7 @@ function blockOwnership(track,cause){
  const entity=track.entity;
  if(!blockedNative.has(entity.id))statusAuraDiagnostics.nativeOwnershipBlocks++;
  blockedNative.add(entity.id);track.blocked=true;track.native.clear();
+ track.reloadWitnesses?.clear();track.loadedNative?.clear();
  for(const key of pending.keys())if(key.startsWith(entity.id+'\0'))pending.delete(key);
  error(cause);
  let durable=false;
@@ -38,6 +41,17 @@ function blockOwnership(track,cause){
  try{entity.setDynamicProperty(STATUS_AURA_KEY,undefined);}catch(e){error(e);}
  try{if(entity.getDynamicProperty(STATUS_AURA_KEY)!==undefined)throw Error('STATUS_AURA_RETIRE_READBACK');track.raw=undefined;}catch(e){error(e);}
  if(!durable){statusAuraDiagnostics.durableBlockFailures++;error('STATUS_AURA_PERSISTENT_FENCE_UNAVAILABLE: native ownership remains disabled for this loaded script session');}
+}
+function reloadLeaseCurrent(track,raw=track.raw){
+ try{
+  if(track.blocked||blockedNative.has(track.entity.id)||track.entity.getDynamicProperty(STATUS_AURA_BLOCKED_KEY)===true){
+   blockOwnership(track,'STATUS_AURA_RELOAD_BLOCKED');return false;
+  }
+  if(track.raw!==raw||track.entity.getDynamicProperty(STATUS_AURA_KEY)!==raw){
+   blockOwnership(track,'STATUS_AURA_RELOAD_LEASE_CONFLICT');return false;
+  }
+  return true;
+ }catch(e){blockOwnership(track,e);return false;}
 }
 function writeLease(track,raw){
  if(track.blocked)return;
@@ -68,7 +82,7 @@ function load(entity,excludeNativeId){
  const now=system.currentTick,raw=entity.getDynamicProperty(STATUS_AURA_KEY);
  const blocked=blockedNative.has(entity.id)||entity.getDynamicProperty(STATUS_AURA_BLOCKED_KEY)===true;
  if(blocked)blockedNative.add(entity.id);
- track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked};let rejected=false;
+ track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked,loadedAt:now,loadedNative:new Map(),reloadWitnesses:new Map(),reloadWitnessIssued:false};let rejected=false;
  if(raw!==undefined&&!blocked){
   try{
    const data=JSON.parse(raw);
@@ -79,10 +93,12 @@ function load(entity,excludeNativeId){
     const observed=current(entity,row.id);
     // Native durations pause while unloaded. The saved lease is at most five
     // online ticks old; do not adopt an unrelated stronger/extended effect.
-    if(observed&&observed.amplifier===row.amplifier&&observed.ticks<=row.ticks&&row.ticks-observed.ticks<=5)track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});
+    if(observed&&observed.amplifier===row.amplifier&&observed.ticks<=row.ticks&&row.ticks-observed.ticks<=5){
+     track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});track.loadedNative.set(row.id,observed);
+    }
     else{rejected=true;statusAuraDiagnostics.nativeHandoffs++;}
    }
-  }catch(e){track.native.clear();rejected=true;error(e);}
+  }catch(e){track.native.clear();track.loadedNative.clear();rejected=true;error(e);}
  }
  tracks.set(entity.id,track);
  // A rejected saved row must not become resumable later merely because a
@@ -90,7 +106,7 @@ function load(entity,excludeNativeId){
  if(rejected)try{save(track);}catch(e){blockOwnership(track,e);}
  return track;
 }
-function forgetNative(track,id){if(track.native.delete(id)){statusAuraDiagnostics.nativeHandoffs++;try{save(track);}catch(e){blockOwnership(track,e);}}}
+function forgetNative(track,id){retireReloadWitness(track,id);if(track.native.delete(id)){statusAuraDiagnostics.nativeHandoffs++;try{save(track);}catch(e){blockOwnership(track,e);}}}
 function ticketKey(entity,id){return entity.id+'\0'+id;}
 function addTicket(entity,row){
  const key=ticketKey(entity,row.id),list=pending.get(key)??[];
@@ -104,6 +120,9 @@ function removeTicket(entity,id,ticket){const key=ticketKey(entity,id),list=pend
  */
 export function applyNativeStatusWithAura(entity,id,ticks,options={}){
  const key=nativeAuraId(id),amplifier=options.amplifier??0;
+ // A new host write must not leave a saved-effect acknowledgement available
+ // after its own write ticket has consumed the resulting effectAdd.
+ retireReloadWitness(tracks.get(entity.id),key);
  if(!installed||NATIVE_AURA_COLORS[key]===undefined||options.showParticles===false||!Number.isInteger(ticks)||ticks<2)return entity.addEffect(id,ticks,options);
  let track,before,owned;
  try{
@@ -136,7 +155,7 @@ export function applyNativeStatusWithAura(entity,id,ticks,options={}){
  }
  row.until=system.currentTick+observed.ticks;statusAuraDiagnostics.nativeAcquired++;return result;
 }
-/** Every effectAdd without a matching in-flight own write hands appearance
+/** Every effectAdd without a matching own write or exact entityLoad witness hands appearance
  * back to that effect's actual producer, even if type/amplifier are unchanged.
  * Never reapply or remove a foreign effect to enforce a visual preference.
  */
@@ -144,9 +163,15 @@ export function observeStatusAuraEffect(event){
  try{
   const entity=event.entity,observed=view(event.effect),id=observed?.id;if(!id||NATIVE_AURA_COLORS[id]===undefined)return;
   const key=ticketKey(entity,id),list=pending.get(key),now=system.currentTick;
-  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;
-  if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);return;}
   const track=tracks.get(entity.id);
+  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;
+  if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);retireReloadWitness(track,id);return;}
+  const witness=track?.reloadWitnesses.get(id),owned=track?.native.get(id);
+  if(entity.isValid!==false&&witness?.at===now&&reloadLeaseCurrent(track,witness.raw)&&owned?.until-now===witness.ticks&&
+   exactEffect(witness,observed)&&exactEffect(witness,current(entity,id))){
+   retireReloadWitness(track,id);statusAuraDiagnostics.nativeReloadAcknowledgements++;
+   statusAuraDiagnostics.lastNativeReloadAcknowledgement={entity:entity.id,id,ticks:observed.ticks,amplifier:observed.amplifier,tick:now};return;
+  }
   if(track)forgetNative(track,id);
   else if(entity.getDynamicProperty(STATUS_AURA_KEY)!==undefined)load(entity,id);
  }catch(e){
@@ -163,6 +188,23 @@ export function indexStatusAura(entity,entries){
  }catch(e){error(e);}
 }
 export function restoreStatusAura(entity){try{const track=load(entity);if(!track.custom.length&&!track.native.size)tracks.delete(entity.id);}catch(e){error(e);}}
+/** Only the actual entityLoad callback may acknowledge native rehydration.
+ * BDS 1.26.52.3 emits entityLoad then effectAdd in the same tick for a saved
+ * native effect. Generic restoration and startup/player scans never mint this
+ * one-use witness, and repeated restoration cannot mint it again.
+ */
+export function restoreLoadedStatusAura(entity){
+ try{
+  const track=load(entity),now=system.currentTick;
+  if(!track.blocked&&track.loadedAt===now&&!track.reloadWitnessIssued){
+   track.reloadWitnessIssued=true;
+   if(track.loadedNative.size&&reloadLeaseCurrent(track))for(const [id,snapshot]of track.loadedNative)if(track.native.has(id)&&exactEffect(snapshot,current(entity,id))){
+    track.reloadWitnesses.set(id,{...snapshot,at:now,raw:track.raw});statusAuraDiagnostics.nativeReloadWitnesses++;
+   }
+  }
+  if(!track.custom.length&&!track.native.size)tracks.delete(entity.id);
+ }catch(e){error(e);}
+}
 export function forgetStatusAura(entityId){tracks.delete(entityId);syntheticInvisibility.delete(entityId);for(const key of pending.keys())if(key.startsWith(entityId+'\0'))pending.delete(key);}
 export function noteSyntheticAuraInvisibility(entity){syntheticInvisibility.set(entity.id,system.currentTick+1);}
 export function tickStatusAura(random=Math.random){
@@ -170,6 +212,7 @@ export function tickStatusAura(random=Math.random){
  for(const [id,track]of tracks)try{
   const entity=track.entity;
   if(entity.isValid===false||entity.getComponent?.('minecraft:health')?.currentValue<=0){forgetStatusAura(id);continue;}
+  if(track.loadedAt!==now){track.loadedNative.clear();track.reloadWitnesses.clear();}
   const rows=track.custom.filter(row=>row.ticks>now-track.at),customCount=rows.length;
   for(const [nativeId,row]of track.native){
    const observed=current(entity,nativeId);

@@ -47,11 +47,19 @@ export async function runStatusAuraProbe({phase,dimension:d,out}){
   for(let i=0;i<20&&!STATUS_AURA_TEST.tracks.get(wolf.id)?.native.has('speed');i++)await pause(1);
   check(STATUS_AURA_TEST.tracks.get(wolf.id)?.native.has('speed'),'saved appearance lease not restored');
   check(wolf.getEffect('speed')?.duration>0,'saved native gameplay effect missing');
-  out('case',{mode:'native-aura-saved-restore',phase,duration:wolf.getEffect('speed').duration,ownLease:true});
+  const acknowledgement=statusAuraDiagnostics.lastNativeReloadAcknowledgement;
+  check(acknowledgement?.entity===wolf.id&&acknowledgement.id==='speed'&&acknowledgement.amplifier===0&&
+   statusAuraDiagnostics.nativeReloadAcknowledgements>0,'saved native aura reload acknowledgement missing');
+  out('case',{mode:'native-aura-saved-restore',phase,duration:wolf.getEffect('speed').duration,ownLease:true,
+   reloadWitnesses:statusAuraDiagnostics.nativeReloadWitnesses,reloadAcknowledgements:statusAuraDiagnostics.nativeReloadAcknowledgements,reloadAcknowledgement:acknowledgement});
+  const handoffs=statusAuraDiagnostics.nativeHandoffs,acknowledgements=statusAuraDiagnostics.nativeReloadAcknowledgements;
   wolf.addEffect('speed',800,{amplifier:0,showParticles:false});await pause(3);
   check(!STATUS_AURA_TEST.tracks.get(wolf.id)?.native.has('speed'),'foreign same-amplifier refresh retained host appearance ownership');
   check(wolf.getEffect('speed')?.duration>=796,'foreign refreshed effect was shortened or removed');
-  out('case',{mode:'native-aura-foreign-handoff',phase,duration:wolf.getEffect('speed').duration,ownLease:false,nativeParticleFlagsReadable:false});
+  check(statusAuraDiagnostics.nativeHandoffs===handoffs+1&&statusAuraDiagnostics.nativeReloadAcknowledgements===acknowledgements,
+   'foreign refresh consumed a reload witness or missed its ownership handoff');
+  out('case',{mode:'native-aura-foreign-handoff',phase,duration:wolf.getEffect('speed').duration,ownLease:false,nativeParticleFlagsReadable:false,
+   foreignHandoffs:statusAuraDiagnostics.nativeHandoffs-handoffs,reloadAcknowledgementsUnchanged:true});
   wolf.remove();
  }
  const invisible=d.spawnEntity('minecraft:wolf',{x:-18.5,y:300,z:-18.5});

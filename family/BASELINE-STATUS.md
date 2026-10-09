@@ -1,13 +1,13 @@
 # 家族現行來源基線
 
-查核日期：2026-10-09。當前修復入口為 [T136／W113](../docs/RELEASE-NOTES-0.6.136.md)，
+查核日期：2026-10-09。當前修復入口為 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)，
 版本／內容以各 canonical baseline 及 family lock 為準；PR、CI、原生與 LIVE
 各自依實際結果，不由版號或資源存在推定完成。
 
 | 自有來源 | 當前候選 | 這批內容 | 尚待完成 |
 | --- | --- | --- | --- |
-| 酒館 | 0.6.136 | 保留 T135 全部原料／視覺／沉浸修正；追加 Upside Down 完整 Mob 名單、魚類分類與原生 observer 修正 | 名稱可見性、真人倒轉、roll／outline／多行編輯器等既有差距 |
-| 世界名酒 | 0.1.113 | 保留 W110 作者更新與 W112 全部內容；確認新原生錨 metadata 及 repeat／取消／lifecycle | 原生 Player、舊／未知錨、部分效果與聲畫 |
+| 酒館 | 0.6.137 | 保留 T135 全部原料／視覺／沉浸修正；追加 Upside Down 完整 Mob 名單、魚類分類、原生保存與重啟光效修復 | 名稱可見性、真人倒轉、roll／outline／多行編輯器等既有差距 |
+| 世界名酒 | 0.1.114 | 保留 W110 作者更新與 W112 全部內容；確認新原生錨 metadata 及 repeat／取消／lifecycle | 原生 Player、舊／未知錨、部分效果與聲畫 |
 | 煙火／燒烤 | 2.8.120 | 已合併 PR185 `8dc3e9d4`；helper／guide transport 與 T/W 相容；料理保存、植物與重金屬修復 | 完整 Cookery 0.2.7 descriptor／作者 patch／copied helper 須成組驗證 |
 | 私有料理整合 | 沿用既有鎖 | 本輪沒有私人連線及重新驗證；不在公開倉庫保存完整私人作者腳本 | 完整家族、當前保存演練及 LIVE |
 

@@ -4,7 +4,7 @@ import {TIPSY_ID} from '../core/tipsy-visual.js';
 import {externalEffectSource,externalEffectDefinition} from '../core/extension-content.js';
 import {pulseTipsyVisual,forgetTipsyVisual,pruneTipsyVisuals,tipsyVisualDiagnostics,tipsyVisualState} from './tipsy-visual.js';
 import {performShriek} from './combat-effects.js';
-import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';
+import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,restoreLoadedStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';
 /** C5 own timed effects; no player.json, fake native replacement buffs, XP fabrication or global UI writes. */
 import {EquipmentSlot,EffectTypes,system,world,ScriptEventSource,GameMode} from '@minecraft/server';
 import {createVisionFeedback} from '../core/vision-feedback.js';
@@ -405,8 +405,14 @@ export function installCustomEffects(){
   catch(err){p.sendMessage('[Tavern Tipsy] diagnostics failed: '+String(err));}
  },{namespaces:['kaleidoscope_tavern']});
 
- world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});
- world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));
+ world.afterEvents.entityDie.subscribe(e=>{
+  handleKill(e);
+  if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}
+  // Native-only aura recipients do not belong to the custom-status index.
+  // Retire their load witness before any later effectAdd in this death tick.
+  if(e.deadEntity?.id)forgetStatusAura(e.deadEntity.id);
+ });
+ world.afterEvents.entityLoad?.subscribe(e=>{restoreLoadedStatusAura(e.entity);restoreLivingEffectTrack(e.entity);});
  world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);forgetStatusAura(e.removedEntityId);visionFeedback.forget(e.removedEntityId);});
  world.afterEvents.entityHurt?.subscribe(e=>handleTombRaider(e));
  world.beforeEvents.entityItemPickup?.subscribe(e=>blockTombPickup(e));

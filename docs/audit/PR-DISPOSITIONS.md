@@ -1,5 +1,10 @@
 # 森羅家族：當前修補與 PR 處置
 
+## 當前 T137／W114：修復原生重啟光效
+
+[本版說明](../RELEASE-NOTES-0.6.137.md) 保留 T136/W113 exact source 與首次通過／重啟失敗證據。新增同 entityLoad tick 的一次原生 EffectAdd 載入見證；PR302 後續完整 observer recorder 一起承接。最終 CI／發布依實際結果，不改寫舊失敗。
+
+
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
 ## 當前 T136／W113：接續 Mob／重生錨修復

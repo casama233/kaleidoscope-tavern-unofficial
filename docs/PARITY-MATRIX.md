@@ -1,6 +1,11 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.136 / World Liquor 0.1.113
+## Current repair candidate: Tavern 0.6.137 / World Liquor 0.1.114
+
+[T137](RELEASE-NOTES-0.6.137.md) retains the Mob and confirmed-anchor repairs and corrects the native reload EffectAdd notification that revoked a valid saved aura lease. Only a genuine entityLoad, exact same-tick snapshot can consume one notification witness; foreign refresh and existing saved-duration checks remain. Exact candidate native/CI and Player/client/private LIVE acceptance remain separate.
+
+
+## Retained T136 / W113 scope (native restart failed)
 
 [T136 scope](RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
 query-first alive Mob selection for Upside Down, including fish without the

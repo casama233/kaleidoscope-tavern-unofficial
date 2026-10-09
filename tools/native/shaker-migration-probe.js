@@ -21,7 +21,7 @@ const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const out=(kind,data)=>console.log('[LIVING_EFFECT_QA] '+JSON.stringify({kind,...data}));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
 // This paired probe is deliberately pinned to the W112 checkout used by CI.
-const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.113';
+const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.114';
 function addonRegistration(){
  const row=runtimeRegistry()?.list().find(entry=>entry.source===ADDON_SOURCE);
  check(row,'real World Liquor addon registration absent');

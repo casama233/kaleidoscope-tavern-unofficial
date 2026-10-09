@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.142
+## Current maintained baseline: 0.6.143
 
 T142 / G123 / W119 is the current deployed development baseline. Its exact merged CI, native first/save/restart, full-family and saved-world evidence is indexed in [family/BASELINE-STATUS.md](family/BASELINE-STATUS.md); human client acceptance remains pending. Historical notes keep their original scope.
 

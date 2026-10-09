@@ -1,8 +1,8 @@
-## 當前維護基線：0.6.142
+## 當前維護基線：0.6.143
 
-T142／W119 承接 canonical T141 的板面換行、雪克杯原生 clone／手勢修復、W 的 LivingEntity 魚類入口與完整指南，再整合光效所有權和 recorder 修補。[PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…` 的完整 CI、原生首次 20／重啟 21 項成功保留原身份；本次融合另需包含魚類傷害案例的首次 21／重啟 22 項與完整 CI，目前待結果。見 [T142 說明](docs/RELEASE-NOTES-0.6.142.md)；真人、私人完整家族與 LIVE 驗收仍 pending。
+T142／G123／W119 是目前已部署的開發基線。精確主線來源、完整 CI、原生首次／保存／重啟、完整家族與存檔驗證見 [當前 baseline](family/BASELINE-STATUS.md)；真人 client／production acceptance 仍待驗。歷史證據保留原版本身份。
 
-保留的 canonical T141／W118 範圍：T141／W118 完整保留已發布 T140 的四頁 AMW 指南、三語七入口及兩個共用入口，修正板面空格換行、雪克杯原生 metadata／數量改變後的新點擊，以及 W 無 mob family 生物的類別判定。T139 原生修補、重生錨資料及 G122 整合保留。[本版說明](docs/RELEASE-NOTES-0.6.141.md)分列範圍；新配套原生首次／保存／重啟及嚴格 recorder 已通過，完整 CI 由修補 PR 執行；真人、私人完整家族與 LIVE 驗證仍 pending。
+下一輪修補原生板面输入框容量，維持單行編輯、三語七入口與两入口共用投影；見 [T143 範圍](docs/RELEASE-NOTES-0.6.143.md)。最終來源、CI、client 與部署結果分別登記。
 
 # 森羅物語：酒館（非官方）
 
@@ -15,7 +15,7 @@ Java酒館的基岩版移植，包含釀造、調酒、酒架／酒櫃、家具�
 ## 現行來源與需求
 
 - 版本及精確相依以 [baseline.json](baseline.json) 為準；更新見 [CHANGELOG.md](CHANGELOG.md)。
-- 本輪候選為酒館 **0.6.142**、世界名酒 **0.1.119**；[家族鎖](family/upstream.lock.json)保留 G123 候選，W 的 CI 仍固定 G122 的相同 entity definitions。這不表示 G123 已合併、發布或通過私人完整家族驗收。[當前索引](docs/audit/PR-DISPOSITIONS.md)集中未完成工作及原版本證據。
+- 目前已部署開發基線為酒館 **0.6.142**、世界名酒 **0.1.119**、燒烤 **0.1.123**；精確來源、相依及有界驗證見 [家族鎖](family/upstream.lock.json) 與 [當前 baseline](family/BASELINE-STATUS.md)。
 - 基岩版1.26.50以上；目前引擎目標為BDS1.26.52.3。BP與RP兩側一起啟用。
 - Cookery可選，家族目前核驗作者1.6.0；世界名酒須搭配其宣告的酒館版本。
 - 升級前備份世界並移除重複舊包。私有料理整合是另一個識別明確的addon，不是私有酒館分支。

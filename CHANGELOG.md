@@ -1,5 +1,9 @@
 # Maintained changes
 
+## 0.6.143
+
+修正酒館板面原生单行输入容量与保存上限失配，保留三语精确scope、foreign表单及原玩法；同步原作者Immersive Eating1.1.0身份迁移与当前差距索引。正式多行与真人client仍待验，详见 [本版说明](docs/RELEASE-NOTES-0.6.143.md)。
+
 ## 0.6.142
 
 保留 canonical T141 板面换行、雪克杯來源辨識與最新指南，加入已測載入／initialSpawn 光效修復及嚴格原生來源綁定；配對 W119。 見[本版說明](docs/RELEASE-NOTES-0.6.142.md)。

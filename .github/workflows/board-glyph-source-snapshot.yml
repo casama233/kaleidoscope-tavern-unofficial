@@ -1,0 +1,42 @@
+name: Board glyph source checkpoint
+on:
+  push:
+    branches: [work/board-glyph-source-20261009]
+permissions:
+  contents: read
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7
+          fetch-depth: 0
+          path: tavern
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: casama233/kaleidoscope-world-liquor-unofficial
+          ref: dd56def61d5b66d9bbc9e697e5e272e5f9e3ed4b
+          fetch-depth: 0
+          path: liquor
+          persist-credentials: false
+      - name: Export immutable Git source, not release packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C tavern rev-parse HEAD)" = ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7
+          test "$(git -C liquor rev-parse HEAD)" = dd56def61d5b66d9bbc9e697e5e272e5f9e3ed4b
+          mkdir checkpoint
+          git -C tavern bundle create "$GITHUB_WORKSPACE/checkpoint/tavern.bundle" HEAD
+          git -C liquor bundle create "$GITHUB_WORKSPACE/checkpoint/liquor.bundle" HEAD
+          git -C tavern rev-parse HEAD > checkpoint/TAVERN_COMMIT
+          git -C liquor rev-parse HEAD > checkpoint/LIQUOR_COMMIT
+          (cd checkpoint && sha256sum *.bundle > SHA256SUMS)
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: board-glyph-source-checkpoint
+          path: checkpoint/
+          retention-days: 1
+          if-no-files-found: error

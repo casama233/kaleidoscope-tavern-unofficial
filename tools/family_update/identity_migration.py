@@ -5,19 +5,29 @@ from family_update.common import CONFIG, T, R, W, read, sha, hashes, atomic, rep
 
 def validate_plan(spec, receipt, original):
     assert spec['schema'] == 1 and spec['kind'] == 'author_uuid_owner_migration'
-    assert spec['authorization'] and spec['project_id'] == 1673664
+    assert spec['authorization']
+    pins = [p for p in read(T / 'family/upstream.lock.json')['upstream']
+            if p['project_id'] == spec['project_id']]
+    assert len(pins) == 1, 'Author migration must use one canonical upstream project'
+    pin = pins[0]
+    assert pin['file_id'] == spec['new_file_id'] and pin['sha256'] == spec['new_archive_sha256'], 'Author migration differs from the canonical release pin'
     old = {p['uuid']: p for p in original['packs']}
     new = {p['uuid']: p for p in receipt['packs']}
     swaps = spec['packs']
     assert len(swaps) == 2 and {p['side'] for p in swaps} == {'behavior', 'resource'}
     before = {p['old_uuid'] for p in swaps}; after = {p['new_uuid'] for p in swaps}
     assert len(before) == len(after) == 2 and not before & after
+    assert {p['uuid'] for p in pin['packs']} == after, 'Migration must replace the complete pinned author pair'
     assert set(old) - before == set(new) - after, 'Unreviewed identity additions/removals'
     for swap in swaps:
         a, b = old[swap['old_uuid']], new[swap['new_uuid']]
         assert a['side'] == b['side'] == swap['side']
         assert a['version'] == swap['old_version'] and b['version'] == swap['new_version']
         assert a['files']['manifest.json'] == swap['old_manifest_sha256']
+        prior_source = a['source']
+        assert prior_source['owner'] in ['upstream', 'upstream_extended']
+        assert prior_source['project_id'] == spec['project_id'] and prior_source['file_id'] == spec['old_file_id']
+        assert prior_source['archive_sha256'] == spec['old_archive_sha256'], 'Original author archive differs from the reviewed migration'
         source = b['source']
         assert source['owner'] in ['upstream', 'upstream_extended']
         assert source['project_id'] == spec['project_id'] and source['file_id'] == spec['new_file_id']

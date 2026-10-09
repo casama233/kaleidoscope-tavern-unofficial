@@ -2,7 +2,22 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## T134／W111：保留並行修復後的整合候選
+## 當前 T135／W112：承接真實 CI 修復
+
+[T135 說明](../RELEASE-NOTES-0.6.135.md) 是當前差異與驗收入口，完整承接
+下方 T134 的原料、交易、視覺、沉浸修復及原作來源，不複製或改寫舊歷史。
+
+| 候選／證據 | 當前處置 |
+| --- | --- |
+| [T134 PR302](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/302)／[CI run 37869770416](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37869770416) | 失敗保留。25 份缺失 PBR companions 與原生 bare Adventure ID 是 runtime 缺口，使用新 T135 身分修復；Ardent fixture 缺少 `getEffect` 則只修替身，不放寬既有斷言。T134 notes、witness、freeze 與 history 不覆寫。 |
+| W111 CI | 已成功，保留其原配對及來源範圍；不視為 T135 的驗收結果。 |
+| T135／W112／G119 | T135 承接全部修復，W112 精確依賴 T135，G119 不變。新兩庫 PR、確切提交及最終 CI 結果待補；尚不宣稱已合併、發布或部署。 |
+
+本版 `check_visuals.py` 窄檢查通過，真人畫面、原生配對保存重啟與私人
+完整家族／LIVE 仍需各自證據。下方未完成能力保持追蹤，既有持續部署
+授權不變。
+
+## 保留 T134／W111：並行修復整合範圍
 
 本批來源及驗收範圍集中在 [T134 說明](../RELEASE-NOTES-0.6.134.md)。原料
 保存、機器交易、狀態粒子、草叢退出、微醺 opt-in、板面描邊、機器動畫

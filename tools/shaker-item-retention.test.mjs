@@ -289,6 +289,25 @@ test('named and decorated stackable ingredients survive placement, pickup, indep
  assert.equal(readPortableItem(copy).state.result,null);
  assert.deepEqual(readPortableItem(copy).state.slots[0].metadata,next.slots[0].metadata);
 });
+test('native adventure getters returning bare IDs retain their strings and order through portable ingredient storage',()=>{
+ const setters={setCanDestroy:ItemStack.prototype.setCanDestroy,setCanPlaceOn:ItemStack.prototype.setCanPlaceOn};
+ // BDS 1.26.52.3 accepts namespaced vanilla IDs, then returns bare IDs.
+ for(const [name,set]of Object.entries(setters))ItemStack.prototype[name]=function(values){return set.call(this,values.map(value=>value.replace(/^minecraft:/,'')));};
+ try{
+  const f=stationFixture(1),original=makeStack('kaleidoscope_tavern:plum_wine_q4',1);
+  original.nameTag='Native adventure ingredient';
+  original.setCanDestroy(['minecraft:stone','minecraft:dirt']);original.setCanPlaceOn(['minecraft:dirt','minecraft:stone']);
+  assert.deepEqual(original.getCanDestroy(),['stone','dirt']);assert.deepEqual(original.getCanPlaceOn(),['dirt','stone']);
+  f.player.inventory.setItem(0,original);const next=pourIngredient(f.player,f.block),metadata=next.slots[0].metadata;
+  assert.equal(f.player.inventory.getItem(0),undefined);
+  assert.deepEqual(metadata.canDestroy,['stone','dirt']);assert.deepEqual(metadata.canPlaceOn,['dirt','stone']);
+  pickupShaker(f.player,f.block);const saved=readPortableItem(f.player.inventory.getItem(0)).state.slots[0];
+  assert.deepEqual(saved.metadata,metadata);
+  const restored=restoreStackableIngredient(saved.item,saved.metadata,makeStack);
+  assert.deepEqual(restored.getCanDestroy(),['stone','dirt']);assert.deepEqual(restored.getCanPlaceOn(),['dirt','stone']);
+  assert.equal(restored.isStackableWith(original),true);assert.equal(original.isStackableWith(restored),true);
+ }finally{for(const [name,set]of Object.entries(setters))ItemStack.prototype[name]=set;}
+});
 test('a failed metadata reconstruction or native mismatch rejects before debiting the ingredient',()=>{
  for(const failure of ['setter','hidden-data','managed-lore-hidden-data']){
   const f=stationFixture(),original=makeStack('kaleidoscope_tavern:plum_wine_q4',1);

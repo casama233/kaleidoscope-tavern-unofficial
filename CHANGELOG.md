@@ -1,5 +1,12 @@
 # Maintained changes
 
+## 0.6.135
+
+- Retain T134's complete ingredient, transaction, visual and immersion scope, including the reviewed PR297/PR298 repairs and W110 author updates.
+- Repair both runtime gaps exposed by T134 CI run `37869770416`: add 24 ice-grape and one RGB PBR companion with reproducible canonical profiles, and accept native bare vanilla Adventure-list IDs while preserving their original strings, order and reconstruction checks.
+- Give the Ardent test fixture a duration-aware `getEffect` implementation; preserve production behavior and the existing assertions.
+- Pair with World Liquor 0.1.112 and retain G119. Preserve the failed T134 run, its frozen identity/history and successful W111 CI; final T135/W112 CI and native/client/LIVE acceptance remain pending. [T135 scope](docs/RELEASE-NOTES-0.6.135.md) records the focused repair and verification boundaries.
+
 ## 0.6.134
 
 - Preserve final PR297 source `727fd885` including the explicit XP-orb/health-helper observer distinction, and carry PR298 head `625ff769`'s finite-XYZ native storage comparison without rewriting T133 history or claiming that PR298 has merged.

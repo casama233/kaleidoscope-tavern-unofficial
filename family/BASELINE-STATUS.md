@@ -6,10 +6,15 @@
 
 | 自有來源 | 本輪版本 | 修復來源 | 目前主要差距 |
 | --- | --- | --- | --- |
-| 酒館 | 0.6.134 | [T134 整合範圍](../docs/RELEASE-NOTES-0.6.134.md)；承接 PR297 與 PR298 座標修復，加入完整機器原料、可攜 metadata、交易、狀態粒子與原作文字／酒液視覺 | 任意三份非堆疊原料、穿牆輪廓、相機 roll、部分原生效果與實際聲畫／輸入 |
+| 酒館 | 0.6.135 | [T135 修復範圍](../docs/RELEASE-NOTES-0.6.135.md)；承接 PR297 與 PR298 座標修復，加入完整機器原料、可攜 metadata、交易、狀態粒子與原作文字／酒液視覺 | 任意三份非堆疊原料、穿牆輪廓、相機 roll、部分原生效果與實際聲畫／輸入 |
 | 煙火／燒烤 | 2.8.119 | [PR184](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/184)；餐盤內容、植物及重金屬結算 | 任意秘製串背包圖示、正常 Cookery producer、調料 registry、實際操作／聲畫 |
-| 世界名酒 | 0.1.111 | 保留 [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；精確配對 T134、保留 87 個無碰撞家族 helper | 各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
+| 世界名酒 | 0.1.112 | 保留 [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；精確配對 T135、保留 87 個無碰撞家族 helper | 各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
 | 私有料理整合 | 1.0.30 | 保持已核驗 private canonical；不在公開倉庫保存作者私有完整腳本 | 原生與真人證據按功能 scope，不能用公開包 CI 代替 |
+
+T134／W111 的初輪 CI 保留原結果：W111 配對／封裝通過，T134 查出
+25 張新增圖缺少 PBR 伴隨檔及原生 adventure 清單裸 ID 被拒絕；另補
+測試替身缺少的 getEffect。T135／W112 承接整套修復並補齊這些缺口，
+不改寫 T134／W111 的來源、包內容或既有結果。最終新 CI 仍依實際記錄。
 
 版本號不同不能直接比較還原度。各包完整差距以自己的
 `docs/PARITY-MATRIX.md`、`docs/BUGS.md` 和當前 release notes 為準。

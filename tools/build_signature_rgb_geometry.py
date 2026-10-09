@@ -21,6 +21,7 @@ import math
 from collections import defaultdict
 from pathlib import Path
 from PIL import Image
+from refresh_visual_compat import profile
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = 'runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/signature_cocktail.png'
@@ -146,7 +147,13 @@ def outputs(root=ROOT):
         result[path] = entity
     buffer = io.BytesIO()
     Image.new('RGBA', (2, 2), (255, 255, 255, 255)).save(buffer, format='PNG')
-    result['runtime/RP/textures/kt_runtime/signature/rgb_opaque.png'] = buffer.getvalue()
+    texture = 'textures/kt_runtime/signature/rgb_opaque'
+    result[f'runtime/RP/{texture}.png'] = buffer.getvalue()
+    # Match the existing signature frames/atlas PBR compatibility profile.
+    result[f'runtime/RP/{texture}.texture_set.json'] = {
+        'format_version': '1.16.100', 'minecraft:texture_set': {
+            'color': Path(texture).name,
+            'metalness_emissive_roughness': [0, 0, profile(texture)[1]]}}
     return result
 
 

@@ -23,6 +23,12 @@ function metadata(item){
  if(item.nameTag!==undefined)value.name=item.nameTag;
  return validateIngredientMetadata(value);
 }
+function adventureBlockId(value){
+ // Native adventure-list getters omit the vanilla namespace. Validate its
+ // qualified interpretation without changing the original string or order.
+ id(typeof value==='string'&&!value.includes(':')?'minecraft:'+value:value);
+ return value;
+}
 export function validateIngredientMetadata(value){
  check(value&&value.schema===1&&Object.keys(value).every(key=>KEYS.has(key)),'INGREDIENT_METADATA_SCHEMA');
  check(value.name===undefined||typeof value.name==='string'&&value.name.length<=255,'INGREDIENT_METADATA_NAME');
@@ -35,7 +41,7 @@ export function validateIngredientMetadata(value){
   check(Array.isArray(entry)&&entry.length===2&&typeof entry[0]==='string'&&entry[0].length>0&&entry[0].length<=32767&&!seen.has(entry[0]),'INGREDIENT_METADATA_PROPERTIES');
   seen.add(entry[0]);propertyValue(entry[1]);
  }
- for(const key of ['canDestroy','canPlaceOn']){check(Array.isArray(value[key])&&value[key].length<=256,'INGREDIENT_METADATA_BLOCKS');value[key].forEach(id);}
+ for(const key of ['canDestroy','canPlaceOn']){check(Array.isArray(value[key])&&value[key].length<=256,'INGREDIENT_METADATA_BLOCKS');value[key].forEach(adventureBlockId);}
  check(utf8Bytes(JSON.stringify(value))<=12000,'INGREDIENT_METADATA_TOO_LARGE');return value;
 }
 export function restoreStackableIngredient(itemId,value,makeStack){

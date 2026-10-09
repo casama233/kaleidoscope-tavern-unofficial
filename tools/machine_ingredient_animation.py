@@ -14,6 +14,7 @@ import io
 import json
 from pathlib import Path
 from PIL import Image
+from refresh_visual_compat import profile
 
 NS = 'kaleidoscope_tavern'
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,7 +65,14 @@ def outputs(root=ROOT):
     for i, image in enumerate(ice_grape_frames(root)):
         buffer = io.BytesIO()
         image.save(buffer, format='PNG', optimize=True)
-        result[f'runtime/RP/{bindings()[f"ice_tick_{i}"]}.png'] = buffer.getvalue()
+        texture = bindings()[f'ice_tick_{i}']
+        result[f'runtime/RP/{texture}.png'] = buffer.getvalue()
+        # Retain the same conservative PBR profile as the original ice-grape
+        # frames; frame generation must also reproduce their surface metadata.
+        surface = {'format_version': '1.16.100', 'minecraft:texture_set': {
+            'color': Path(texture).name,
+            'metalness_emissive_roughness': [0, 0, profile(texture)[1]]}}
+        result[f'runtime/RP/{texture}.texture_set.json'] = json.dumps(surface, indent=2) + '\n'
     for slot in range(8):
         suffix = '' if slot == 0 else f'_{slot}'
         name = f'runtime/RP/entity/runtime_pressing_tub_ingredients{suffix}.entity.json'

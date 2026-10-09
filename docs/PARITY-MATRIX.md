@@ -1,6 +1,26 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.134 / World Liquor 0.1.111
+## Current repair candidate: Tavern 0.6.135 / World Liquor 0.1.112
+
+[T135 repair scope](RELEASE-NOTES-0.6.135.md) retains the T134 implementation
+and limitations below. Actual T134 CI run `37869770416` exposed two runtime
+gaps and one test-fixture gap; its failure and frozen history remain intact.
+
+| Area | T135 correction | Evidence boundary |
+| --- | --- | --- |
+| Generated visual surfaces | Add the 24 ice-grape frame texture sets and one RGB opaque texture set using the existing canonical 215/170 roughness profiles; both generators reproduce them. | The full `check_visuals.py` file passes with 460 surfaces and zero audit errors. Native PBR output and rendered-client comparison remain pending. |
+| Portable Adventure metadata | Validate native bare vanilla block IDs as vanilla IDs, preserving original strings, order and bidirectional reconstruction checks. | Native setter/getter format portable regression passes; the final paired native first/restart run and actual Player acceptance remain separate. |
+| Ardent test fixture | Supply duration-aware `getEffect` to the test double without changing production code or weakening assertions. | All 13 existing targeted cases pass; this is test-fixture evidence. |
+
+W111 CI succeeded for its own candidate. W112 now declares the exact T135
+dependency; final T135/W112 CI is pending and does not inherit that result.
+G119 is unchanged. Pure camera roll, through-wall outlines, native multiline
+editing, arbitrary decorated nonstackable shaker inputs, dropped-item display
+contexts, native reach/step-height/XP pickup, target clearing and remaining
+effect semantics retain their documented limits. Client, private complete-family
+and LIVE acceptance remain pending under the existing standing authorization.
+
+## Retained T134 / W111 integration scope
 
 [T134 integration scope](RELEASE-NOTES-0.6.134.md) preserves final PR297 source,
 reviewed PR298 head and W110 author updates. PR298 remains open/draft at

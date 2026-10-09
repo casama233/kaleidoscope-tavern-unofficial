@@ -1,16 +1,16 @@
 {
-  "version": "0.6.134",
-  "tag": "v0.6.134-beta.1",
-  "title": "森羅物語：酒館 0.6.134 測試版｜原料保存、沉浸與原版視覺",
+  "version": "0.6.135",
+  "tag": "v0.6.135-beta.1",
+  "title": "森羅物語：酒館 0.6.135 測試版｜完整原料、沉浸與視覺修復",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.134.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.135.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
   "new_bds_test": false,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "91a8b74079896911f46c3411ddc65bf2c14fe886f60a6ed1845595c975dc8b31",
-  "reviewed_runtime_source": "37ff9f12e74c6a4f3bb3a5fc40502d7e70e68c83",
-  "native_evidence_scope": "No native result is asserted in this pre-CI request. The exact paired T134/W111 native-persistence job retains canonical T132 splash, actual XP components and health-helper observations plus T133 coordinate-key-order repair, then adds bounded portable ingredients, counted native machine items and durable status appearance leases across normal restart. Test-only overlays are explicitly copied and hashed. Actual Player inputs, rendered client, full private family and LIVE deployment remain pending."
+  "expected_archive_sha256": "9a0508bed0104ba4c97dcfd4a0c72c4128b83754f863e920722cac4194f61cd8",
+  "reviewed_runtime_source": "pending-canonical-T135-source",
+  "native_evidence_scope": "T134 CI exposed native bare-vanilla adventure block identifiers and missing PBR companions; its failed result is retained and does not certify later machine/aura/restart scenes. T135/W112 includes those corrections and must pass its own exact paired native-persistence run. No native success is asserted in this pre-CI request. Original overlays and engine first/restart checks remain; actual Player, full private family, rendered client, saved-world and LIVE acceptance remain pending."
 }

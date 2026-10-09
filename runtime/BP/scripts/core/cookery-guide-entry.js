@@ -11,12 +11,15 @@ export function installCookeryGuideEntry({system,world,available,show,warn=()=>{
   const player=event.sourceEntity;if(player?.typeId!=='minecraft:player'||player.isValid===false)return;
   let row;try{const message=String(event.message??'');if(message.length>1024)return;row=JSON.parse(message);}catch{return;}
   if(!row||typeof row!=='object'||Array.isArray(row))return;
-  if(row.api!==1||row.chapter!==CHAPTER||row.playerId!==player.id||!LOCALES.has(row.locale)||typeof row.nonce!=='string'||row.nonce.length<1||row.nonce.length>128||!Number.isInteger(row.expiresTick)||row.expiresTick<=system.currentTick||row.expiresTick>system.currentTick+40)return;
+  // Acknowledged commands can cross the last eligible tick before dispatch.
+  // Only the matching start receives two dispatch ticks; opens keep the deadline.
+  const deadline=row.expiresTick+(event.id===EVENTS.start?2:0);
+  if(row.api!==1||row.chapter!==CHAPTER||row.playerId!==player.id||!LOCALES.has(row.locale)||typeof row.nonce!=='string'||row.nonce.length<1||row.nonce.length>128||!Number.isInteger(row.expiresTick)||deadline<=system.currentTick||row.expiresTick>system.currentTick+40)return;
   if(event.id===EVENTS.open){
    const ok=available(player)&&!pending.has(player.id);
    if(ok){
     const token={...row};pending.set(player.id,token);
-    system.runTimeout(()=>{if(pending.get(player.id)===token)pending.delete(player.id);},Math.max(1,row.expiresTick-system.currentTick));
+    system.runTimeout(()=>{if(pending.get(player.id)===token)pending.delete(player.id);},Math.max(1,row.expiresTick-system.currentTick+3));
    }
    try{send(player,EVENTS.ack,{...row,ok});}catch(error){pending.delete(player.id);warn(error);}
    return;

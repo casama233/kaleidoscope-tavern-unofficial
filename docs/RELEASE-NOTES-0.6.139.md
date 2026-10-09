@@ -52,6 +52,11 @@ trial，沒有未審查的混合檔案。主線 14 個功能 layers 與 trial �
 asset layers 保留為 5 個，59 個 trial additions 只追加、不覆寫舊列。
 683 個既有反向投影、身份與來源雜湊限制全部通過。
 
+新候選功能來源固定為 `3df197150c00ef0818d2f393e365ef8a4b93d72c`。五個 World Liquor
+CI checkout 全部固定 `84ceeb22562f80f88e0598a5394db4b711170d9d`；W116 的功能來源為
+`e48aa85bb28a53e984e54794150818b6f2ec2a5c`，反向 Tavern checkout
+指向上述完整 T139 功能來源。後續發布 metadata 不改 runtime bytes。
+
 ## 本候選驗證
 
 指南定向 Node 測試 44 項通過；W 的 storage guide projection 6 項、

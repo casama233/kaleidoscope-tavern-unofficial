@@ -14,8 +14,9 @@
 版本號不同不能直接比較還原度。各包完整差距以自己的
 `docs/PARITY-MATRIX.md`、`docs/BUGS.md` 和當前 release notes 為準。
 未完成調料原型及其他唯一差異保留，不能混入已凍結來源。
-T133 原生儲存 XYZ 修補仍為 draft／未通過其 exact native CI，保留開放
-PR298 和既有證據；本次不把它宣稱已交付。
+T133 原生儲存 XYZ 修補仍為 [draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)，
+尚未合併或納入本次家族候選。舊失敗和更新後來源的 CI 各自保留，
+現態以 PR 的 exact head 證據為準；不把草稿宣稱已交付。
 衝突的兩份 W109 提交／claim 已分別保留，新作者適配使用獨立 W110 身份。
 
 ## 作者版本與分支

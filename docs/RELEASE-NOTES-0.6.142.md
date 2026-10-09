@@ -76,3 +76,12 @@ reach／step-height／XP pickup、彩字距離／望遠鏡、任意三份裝飾
 實際建包已驗證 BP／RP 每個輸出與材質宣告。後續 witness、archive
 審查和 peer pin 只改 metadata，凍結 runtime 不變；最終 CI 仍檢查
 新 PR 自身完整來源，不把封裝成功當作發布或 client 驗收。
+
+## 最終公開配對
+
+五個 CI peer checkout 固定 W119 最終來源
+`e85ad815f90e9ddf30f09d4f0a3b2f168ec7fa2a`，完整 Git tree
+`c9d259f4bb63ab051b8ca05f2b794f8cdc795b7e`。W119 的 integration 與 release
+request 固定 Tavern 審查來源 `2c378031110d6ff6e348613d4bc3c34092770ddf`。
+兩側 exported runtime 與各自凍結封裝來源相同；本配套仍須完成
+其實際 PR CI／原生 first 21／restart 22，不預先宣稱發布或客戶端成功。

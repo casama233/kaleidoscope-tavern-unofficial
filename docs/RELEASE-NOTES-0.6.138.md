@@ -68,6 +68,11 @@ Mob 選擇也通過；不包含 Player 操作或粒子畫面驗收。
 `4b61b22072aeeeff54621289edabb0ff433a52fb`；本版功能見證只追加
 `status-aura.js` 的合併差異，原有 18 層見證與所有歷史原生結果保留。
 
+配套 CI 的五個 World Liquor checkout 固定為 W115
+`41c71180aa86be28297c767f7759298f02de1621`；其 publisher 功能來源為
+`387c901febc539e20f74655d8be235f2c6e8364a`，反向整合測試使用含完整
+T138 功能見證與原生證據的 `5214e24a3d4c8c99b80c869f566d006b2deb3290`。
+
 可重現 archive SHA256：
 `f9e74445be0c25a2e964751f67847cbbf0ec6c0908efa77ae7334adf228090a6`。
 最終來源的完整必要 CI 由本候選 PR 執行；上述原生成功不代表

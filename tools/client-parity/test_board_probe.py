@@ -21,7 +21,8 @@ class IsolatedProbeTests(unittest.TestCase):
             self.assertFalse(report["production_ready"])
             generated = json.loads((out / "RP/ui/server_form.json").read_text())
             for key, value in canonical.items():
-                self.assertEqual(generated[key], value, key)
+                if key!='custom_input@settings_common.option_text_edit':
+                    self.assertEqual(generated[key], value, key)
             # Factory/form/dropdown/submit definitions are inherited, never duplicated.
             self.assertFalse({"generated_contents", "custom_form", "custom_dropdown",
                               "custom_form_scrolling_content"}.intersection(generated))

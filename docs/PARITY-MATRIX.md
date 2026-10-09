@@ -1,8 +1,10 @@
-## 當前 T142／W119
+## 當前 T142／W119；下一輪 T143 板面修補
 
-完整保留 canonical T141 的板面分隔符換行、雪克杯原生 clone／新手勢修復、最新指南正文與 W 的 LivingEntity 魚類入口，再整合已測的光效所有權和 recorder 修補。[PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…` 的完整 CI、原生首次 20／重啟 21 項成功保留原身份，不改名沿用。本輪 T142／W119 另需包含魚類傷害案例的首次 21／重啟 22 項及完整 CI，目前 pending；真人、私人完整家族與 LIVE 仍未驗收。 精確來源見 [T142 說明](RELEASE-NOTES-0.6.142.md)。G123 family-lock 候選保留；W CI 的 G122 pin 僅核對未變的 entity definitions，不等於 G123 合併、發布或完整家族成功。
+已合併 T142／G123／W119 的完整 CI、原生首次／保存／重啟、完整家族與 LIVE 開發部署結果見 [當前 baseline](../family/BASELINE-STATUS.md)。真人 client／production acceptance 仍待驗；以下歷史段落保留原證據身份。新板面容量修補尚未凍結，見 [T143 說明](RELEASE-NOTES-0.6.143.md)。
 
-任意 RGB 已實作原作 texel 明暗與透明覆蓋；實際材質、PBR／透明排序及遠距濾波仍待真人。下方 T105／T126 等 flat RGB 紀錄保留歷史畫面範圍，不代表目前 source 仍未實作；舊 T137／W114 與 alternate T136 的原生結果也不作本候選驗收。
+| 範圍 | 本輪 source 修補 | 未完成／待驗 |
+| --- | --- | --- |
+| 板面输入容量 | 精確三語 title＋field 路由至 640／700／3000 encoded 字；RAW 320／350／1500、像素／行數、stale／reach／wax 保存檢查不變。原 native single-line widget，foreign 保留 100。 | 原生 sibling controller／焦點及三种输入设备待真人；正式多行、彩字距離與望遠鏡仍未完成。 |
 
 ## 保留 canonical T141／W118 的修補與證據
 

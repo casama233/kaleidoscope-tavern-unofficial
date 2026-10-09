@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "kind": "author_uuid_owner_migration",
+  "project_id": 1697816,
+  "old_file_id": 8900604,
+  "new_file_id": 9104552,
+  "old_archive_sha256": "a3a8c7f9e6229808a620b3d261bb6d63319abdf1e578c163586cbc906c4956d9",
+  "new_archive_sha256": "81575e63b40e2db4f58f0ab37b2aaa1854ff6ad564ba15e0acefa1f63c2f2fbf",
+  "packs": [
+    {
+      "side": "behavior",
+      "old_uuid": "b08ef928-275a-4130-9ba6-bc0406a25860",
+      "new_uuid": "4fd46237-7fb4-4340-abe1-cec07ad033db",
+      "old_version": [
+        1,
+        0,
+        0
+      ],
+      "new_version": [
+        1,
+        1,
+        0
+      ],
+      "old_manifest_sha256": "e4a9bccd483791842d40de6cb6090d4054647d1179ee58c48898a86eef60c6f7"
+    },
+    {
+      "side": "resource",
+      "old_uuid": "6d777614-877f-4d43-b6fc-a1eb3b190cc5",
+      "new_uuid": "1cdbdcab-b063-4455-90e3-829de2dc91f5",
+      "old_version": [
+        1,
+        0,
+        0
+      ],
+      "new_version": [
+        1,
+        1,
+        0
+      ],
+      "old_manifest_sha256": "79cfa0c72f8c0fcd4f375e6132ca3901dfa27b6ca887dae5e3bce398b5c0a"
+    }
+  ],
+  "dynamic_property_owners": {
+    "b08ef928-275a-4130-9ba6-bc0406a25860": "4fd46237-7fb4-4340-abe1-cec07ad033db"
+  },
+  "authorization": "Owner 2026-10-09 requests updating available latest ports and fixing remaining family gaps; standing /root/AGENTS.md requires reviewed author UUID/data migration before full-family live deployment."
+}

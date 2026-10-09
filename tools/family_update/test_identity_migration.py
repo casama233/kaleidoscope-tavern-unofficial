@@ -7,13 +7,35 @@ from family_update import identity_migration as m
 from family_update import deploy_live
 class IdentityTests(unittest.TestCase):
  def setUp(self):
+  target=patch.object(m,'T',Path(__file__).resolve().parents[2]);target.start();self.addCleanup(target.stop)
   self.spec=json.loads((Path(__file__).resolve().parents[2]/'family/identity-migrations/cookery-108-to-160.json').read_text());self.old={'packs':[]};self.new={'packs':[]}
   for row in self.spec['packs']:
-   self.old['packs'].append({'uuid':row['old_uuid'],'side':row['side'],'version':row['old_version'],'files':{'manifest.json':row['old_manifest_sha256']}})
+   self.old['packs'].append({'uuid':row['old_uuid'],'side':row['side'],'version':row['old_version'],'files':{'manifest.json':row['old_manifest_sha256']},'source':{'owner':'upstream_extended','project_id':self.spec['project_id'],'file_id':self.spec['old_file_id'],'archive_sha256':self.spec['old_archive_sha256']}})
    self.new['packs'].append({'uuid':row['new_uuid'],'side':row['side'],'version':row['new_version'],'source':{'owner':'upstream_extended','project_id':1673664,'file_id':9054164,'archive_sha256':self.spec['new_archive_sha256']}})
   self.old['packs'].append({'uuid':'preserved'});self.new['packs'].append({'uuid':'preserved'})
  def check(self):return m.validate_plan(self.spec,self.new,self.old)
  def test_exact_author_change(self):self.assertEqual(self.check(),self.spec)
+ def test_immersive_eating_change_uses_its_own_archive_and_pair(self):
+  self.spec=json.loads((m.T/'family/identity-migrations/immersive-eating-100-to-110.json').read_text())
+  self.old={'packs':[]};self.new={'packs':[]}
+  for row in self.spec['packs']:
+   self.old['packs'].append({'uuid':row['old_uuid'],'side':row['side'],'version':row['old_version'],'files':{'manifest.json':row['old_manifest_sha256']},'source':{'owner':'upstream','project_id':self.spec['project_id'],'file_id':self.spec['old_file_id'],'archive_sha256':self.spec['old_archive_sha256']}})
+   self.new['packs'].append({'uuid':row['new_uuid'],'side':row['side'],'version':row['new_version'],'source':{'owner':'upstream','project_id':self.spec['project_id'],'file_id':self.spec['new_file_id'],'archive_sha256':self.spec['new_archive_sha256']}})
+  self.assertEqual(self.check(),self.spec)
+  self.spec['project_id']=1673664
+  with self.assertRaises(AssertionError):self.check()
+ def test_original_author_archive_is_bound(self):
+  self.old['packs'][0]['source']['archive_sha256']='unreviewed'
+  with self.assertRaises(AssertionError):self.check()
+ def test_captured_inventory_provenance_requires_the_exact_admitted_contents(self):
+  admitted=copy.deepcopy(self.old);admitted['packs']=admitted['packs'][:-1]
+  inventory=copy.deepcopy(admitted)
+  for p in inventory['packs']:p.pop('source')
+  policy={'approved_receipt':'/receipt.json','installed':{'receipt':'/receipt.json','receipt_sha256':'exact'}}
+  with patch.object(m,'read',side_effect=lambda p:admitted if str(p)=='/receipt.json' else policy),patch.object(m,'sha',return_value='exact'):
+   self.assertEqual(m.admitted_original(inventory),admitted)
+   inventory['packs'][0]['files']['manifest.json']='drift'
+   with self.assertRaises(AssertionError):m.admitted_original(inventory)
  def test_unlisted_addition(self):
   self.new['packs'].append({'uuid':'unreviewed'})
   with self.assertRaises(AssertionError):self.check()

@@ -3,6 +3,7 @@ import {system} from '@minecraft/server';
 import {getGuidebookExtension} from './api/guidebookExtensionRegistry.js';
 
 const ID='kaleidoscope_tavern:tavern';
+const IMMERSIVE_ID='kaleidoscope_immersive_eating:guidebook';
 const ROOTS=['equipment','barrel','cocktail','cultivation','storage','decor','food'];
 const LOCALES=['zh_CN','zh_TW','en_US'];
 // Four reviewed AMW pages are mounted in the complete 42-pack family.
@@ -12,11 +13,12 @@ const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const text=value=>typeof value==='string'&&value.trim().length>0;
 
 system.runTimeout(async()=>{
- let chapter;
+ let chapter,immersive;
  try{
   for(let attempt=0;attempt<120;attempt++){
    chapter=getGuidebookExtension(ID);
-   if(chapter?.entries?.length===227&&chapter?.categories?.length===31)break;
+   immersive=getGuidebookExtension(IMMERSIVE_ID);
+   if(chapter?.entries?.length===227&&chapter?.categories?.length===31&&immersive?.entries?.length===23)break;
    await wait(10);
   }
   assert(chapter?.entries?.length===227,'Actual Cookery registry must receive 227 reviewed family entries');
@@ -48,6 +50,18 @@ system.runTimeout(async()=>{
    }
   }
   assert(sources.kaleidoscope_tavern===156&&sources.kaleidoscope_world_liquor===67&&sources.amw===4,'Actual registered family entry sources');
+  assert(immersive?.version==='1.1.0'&&immersive.entries.length===23,'Current author Immersive Eating chapter');
+  assert(immersive.categories.length===1&&immersive.categories[0].id==='animated_foods','Separate author chapter must retain its category');
+  const immersiveIds=new Set(immersive.entries.map(entry=>entry.id));
+  assert(immersiveIds.size===23,'Unique author animated-food entries');
+  for(const id of ['buddha_jumps_over_the_wall','flower_tea','sakura_fubuki','spicy_blood_stew']){
+   assert(immersiveIds.has('kaleidoscope_cookery:'+id),'New author food entry: '+id);
+  }
+  for(const locale of LOCALES){
+   for(const key of [immersive.titleKey,immersive.introKey,immersive.selectKey,immersive.backKey,'animated_foods','settings','sound_title','sound_body']){
+    assert(text(immersive.text?.[locale]?.[key]),'Received author navigation/settings '+locale+': '+key);
+   }
+  }
   const amwCategories={kirsch:'barrel_addons',kriek:'barrel_addons',sour_cherry:'plants',sour_cherry_bucket:'juices'};
   for(const [short,category] of Object.entries(amwCategories))assert(chapter.entries.find(entry=>entry.id==='amw:'+short)?.category===category,'Reviewed AMW navigation: '+short);
   for(const locale of LOCALES){
@@ -58,7 +72,7 @@ system.runTimeout(async()=>{
     assert(text(chapter.text?.[locale]?.[key]),'Received navigation text '+locale+': '+key);
    }
   }
-  console.log('BASELINE_COOKERY_GUIDE_PASS '+JSON.stringify({accepted:true,receiver:'actual Cookery registry',id:chapter.id,version:chapter.version,entries:227,categories:31,roots,children:24,sources,reviewedAmwIds:AMW_IDS,locales:LOCALES,localizedEntries:681,entryIds:entryIds.sort(),client:false,simulatedPlayers:false,testOnly:true}));
+  console.log('BASELINE_COOKERY_GUIDE_PASS '+JSON.stringify({accepted:true,receiver:'actual Cookery registry',id:chapter.id,version:chapter.version,entries:227,categories:31,roots,children:24,sources,reviewedAmwIds:AMW_IDS,locales:LOCALES,localizedEntries:681,entryIds:entryIds.sort(),immersiveEating:{id:immersive.id,version:immersive.version,entries:23,separateChapter:true,navigationAndSettingsLocales:LOCALES},client:false,simulatedPlayers:false,testOnly:true}));
  }catch(error){
   console.error('BASELINE_COOKERY_GUIDE_FAIL '+JSON.stringify({accepted:false,receiver:'actual Cookery registry',error:String(error),entries:chapter?.entries?.length??0,categories:chapter?.categories?.length??0,client:false,simulatedPlayers:false,testOnly:true}));
  }

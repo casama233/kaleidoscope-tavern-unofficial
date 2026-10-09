@@ -7855,6 +7855,31 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.143",
+      "files": {
+        "runtime/BP/scripts/bedrock/writing-boards.js": {
+          "before": "4183f6a133160d37d1967aed383189a80c54f1874f3caf9a633c97930d518985",
+          "after": "ee8b3ea4372730a5ab1a320726e5702c5e2b644c7afb890aae0ef5025dfc65a3",
+          "reason": "T143 exact board form title marker only; retain raw text, native field order, original single-line escape handling, range/wax/stale guards and every gameplay byte. Native capacity route source review and existing interaction regressions; actual client controller remains pending.",
+          "reviewedPredecessorCommit": "82beed2658530d6c34e16fd4c7a99efa81a21b6c",
+          "reviewedSourceCommit": "73f3422e1eecaa44b42b570e55fc09e5764c3cf9",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.143.md",
+          "reverseOps": [
+            [
+              23,
+              26,
+              ""
+            ],
+            [
+              48,
+              49,
+              "function editBoard(player,block,key,data,kind,large){const limit=maxText(kind,large),d=block.dimension,pos={...block.location},id=block.typeId,expected=JSON.stringify(data),form=new ModalFormData().title(boardText(kind)).textField(boardText(kind==='chalk'&&!large?'text_small':'text_lines',kind==='sandwich'?8:11),boardText('newline_hint'),{defaultValue:encodeBoardInput(data.text)}).dropdown(boardText('align'),BOARD_ALIGNMENTS.map(key=>boardText(key)),{defaultValueIndex:BOARD_ALIGNMENTS.indexOf(data.alignment)}).dropdown(boardText('vertical_align'),BOARD_VERTICAL_ALIGNMENTS.map(key=>boardText(key)),{defaultValueIndex:BOARD_VERTICAL_ALIGNMENTS.indexOf(data.verticalAlignment??'top')});form.show(player).then(answer=>safe(player,()=>{if(answer.canceled||!Array.isArray(answer.formValues))return;canInteract(player);const current=blockAt(d,pos);check(current?.typeId===id,'BLOCK_CHANGED');const currentInfoNow=currentInfo(current);check(currentInfoNow.key===key,'BOARD_CHANGED');requireBoardReach(player,d,currentInfoNow.root.root);check(JSON.stringify(currentInfoNow.data)===expected,'BOARD_CHANGED');check(!currentInfoNow.data.waxed,'BOARD_WAXED');const [inputText,alignmentIndex,verticalIndex]=answer.formValues;const text=typeof inputText==='string'?decodeBoardInput(inputText):inputText;check(typeof text==='string','BOARD_TEXT_REQUIRED');check(Number.isInteger(alignmentIndex)&&BOARD_ALIGNMENTS[alignmentIndex],'BOARD_ALIGNMENT_REQUIRED');check(Number.isInteger(verticalIndex)&&BOARD_VERTICAL_ALIGNMENTS[verticalIndex],'BOARD_ALIGNMENT_REQUIRED');const layout=splitBoardLines(text,boardLayoutOptions(kind,large));if(text.length>limit||layout.overflow){player.sendMessage(boardText('overflow',kind==='sandwich'?8:11));return;}const next={...data,text,alignment:BOARD_ALIGNMENTS[alignmentIndex],verticalAlignment:BOARD_VERTICAL_ALIGNMENTS[verticalIndex]};saveAndRender(current,key,next,kind,large);})).catch(record);}\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -8345,6 +8370,34 @@
           "reviewedSourceCommit": "37ff9f12e74c6a4f3bb3a5fc40502d7e70e68c83",
           "reviewDocument": "docs/RELEASE-NOTES-0.6.134.md",
           "beforeGzipBase64": "H4sIAAAAAAACA91VTY/aMBC98yssX4DdyM03AVWqeuqpt94QsgxM0qhODI6zWrTiv9cmISR8LdlVLz0ATt7Mm8f4efw2QAjHQmZM0ReQRSpyPEPYIRGxsWVACfkaJF2JXEnBuY7RAW8a0djpJanCyB9FWVGAKihzJqRIk5ypUgJNuH7dJOrUBEQGSu5MtR/1mlRR1jFGiwKZMm4S5/VL1FAcQp5M/s86jqwhZiVXuInY16tFw6ng1QjqUuLvUrIdiSXLoJjrsr9JJtajwyLmQsjRlvA0BqrSDNATcuyxhcLxAl/QM0PU/qPdkh3t7aIdOQf0V5VV4dRuunIVdu7D7n3Yuw/79+EAt9DFReur373V1zEqzdW7huHptkzX/R1Ttb7Kpk3SfFuCJt1IsQGpdqOh0SbVbMM4KAXDMfqK7EV/dz1Ci76hSlQhSrkC2tuLaIaO+5KltYoLfeULZXmadf1ZrLSQMwM+qtnRZW1iO9PQnkS+53gTN/CnHcP0pHJd346moRdEge/5zsQ/9XtxosUijrVpPqja1qVGTWvrFXsd2RZ6j2GsWx6iZ/TwxugvPzJZnq/TnDH6gpzQcz/UopPuquA/Vq6lXkj33ai1Icczfnf+tQ/llQF4fgovR2Ez38+O+3WYymR5YyRZjw7lziH8j2dzs29CX/6c7fQ1z4Xsbp95fNSgN8IkrIfGPW4QaAe3G4KTz7MnEiC/xb/8PP+Sl3CLnvWgPww43L0WB+azH/wFov5UrocJAAA="
+        }
+      }
+    },
+    {
+      "release": "0.6.143",
+      "files": {
+        "runtime/RP/ui/server_form.json": {
+          "before": "069f304ba36442ff328111fd6c56a9a9eba52749e305c763acd135e12221ba3d",
+          "after": "881430befc8dba36a91c20399fc43c9c243ae51ddcc97f5317cc89e2317c9de2",
+          "reason": "T143 exact scoped native single-line input limits; full owned title plus first field in three locales, encoded 640/700/3000 with original raw limits. Original native controller/bindings and foreign 100 retained, disabled/focus gate preserved; no factory/dropdown/submit/guide modifications. Sibling rendered client results remain pending.",
+          "reviewedPredecessorCommit": "82beed2658530d6c34e16fd4c7a99efa81a21b6c",
+          "reviewedSourceCommit": "73f3422e1eecaa44b42b570e55fc09e5764c3cf9",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.143.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1ZTY+bMBC951cg9pAgRU26rarVSpV67a2XnqqVZYxJrBgb2YaWrvLfaxMg5isJqEqiCC6JxjOeN+OZxwDvM8dxGYywjCHC7qvjSixSLEDIReQuzWqQ6XWCgJ8oxdkqhgxTYExWJIIbY/Ou1bSiT1hA2EZqya9c4hQr9mpuafw8GQ/FpkDhPyoROHfYoQ+4hiRIcDA8oayyONdBnFKMFOGsS+u4WqGxwEi3sNgvx0UBQkIxkJlUOBoU0TnDq0VXOkoJ/m27kDwRCINY8BgLlVX7LxaMK2exKANxvjrzuedw4dRElEOz/dzzPAeywGlY2eEb9e/spy7GHxDtdJnNC5PahsVfuUrISkGdUQYwU4JoSYBjtQVoC0Vu24RywjIyAESm84h2ChI6zJphtdXtI2OMCBxoS3RuNwLG2GTI8+zMKxOHamf+KSWS+BRXp5r/vs2K83V3CmwSXWbAzgeATLduXj9V8xpRde4hJTHwOd8VEFzCiNLhgCS1mntd4lsfnBa6oTD1jXjClFb+uK6JdWpjI/1SSmNDF8/rNuDmMVwV9MtI0PXTvybkl7F5rorummifPw9D23sPOkKNeEBCgvIAem5BUAh4bB3EddtxKu02M91VpkCHp+lHAV8TkK2TQppgy0HdSa7S2XUVVEuxTO3hTrpsLkvyt+npcH16XnbIGqK31n4UZliYzLZWynvqa/U3J6gqkENt4KDGq23ASQp6MZenW5edxZwXl/vNGks+nCO11h4+oYRhaEIPIZW4Q6E1uvQd7rhxpseyPgZUcV1kf3Ia6NC/cC44Xvvl/0tFz2gzLC0X73F3qekZqOxW7x2tOuPvnY9aRTRoTvK6wV06fVgJavb1rG+1lso+Hm0OA4/Bpa2obs2nJ2auiVMnTp04dewT5L3yav155TFYtRHTrTm195FwYtSJUSdGHfdW7V75tHqZ8hhUegzn1iza9ZZqItCJQCcCHf5p4QbcOWvqWN8pZvvZP6ZSTqSGHAAA"
+        }
+      }
+    },
+    {
+      "release": "0.6.143",
+      "files": {
+        "runtime/RP/manifest.json": {
+          "before": "d119f90e2cd8c1d454c378208ca2823264e981a791fcb7a59d47309e55dfe99c",
+          "after": "2bffa71c87421767337269f194024c5d40d874541f98a56ccef115ecd7be0325",
+          "reason": "T143 frozen RP manifest synchronizes identity and explicitly records an empty dependencies array, previously absent. Exact reviewed normalized 116 preimage/postimage only; preserve all historical hashes, runtime bytes and claims. Nonempty dependencies, other fields or invalid release identity remain rejected.",
+          "reviewedPredecessorCommit": "82beed2658530d6c34e16fd4c7a99efa81a21b6c",
+          "reviewedSourceCommit": "956727d8ed71f4a766f8668b680d3e9720db53be",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.143.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA2WQ3WqEMBCF730KybUpMbuJ2lcpRcbJ2IauUaIWiuy7N/4LezPMmZkvnJMpimNWt76Bofwl39vWsfdYJvP4m8CQD3IKKmgHDQXFOsCft0Uk68JQj952wwqv++tsOxtHa+Y9yqIQRgkusc64KkLJcw1c1NIIeRcmVXpnTk8fyyCORbI1em/SVC/d58Y01pXkvqyj8hVPd0oevBIrHupzCd60ZnxQf1DTdsiGv275AU99O3oMJ/sbRzh1pwoyWXCUWHB1y5FXGQLHVAHoWlN1w5N69XcJeIl4hlx9BqfRFpghdFDZhx3sxTLrKs/mk+gZ/QOYakyl5AEAAA=="
         }
       }
     }

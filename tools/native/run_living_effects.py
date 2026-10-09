@@ -85,6 +85,9 @@ def main():
         (world/filename).write_text(json.dumps(manifests[kind], indent=2)+'\n')
     reports = []
     for phase in args.phases:
+        # Keep the same extracted engine executable for each launch. Its bytes
+        # remain bound to engine_identity; no source pack or world is rewritten.
+        (engine/'bedrock_server').chmod(0o755)
         log = work/f'{phase}.log'
         with log.open('w') as output:
             process = subprocess.Popen(['./bedrock_server'], cwd=work, env={**os.environ, 'LD_LIBRARY_PATH': os.pathsep.join((str(work), str(engine)))}, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True)

@@ -36,6 +36,8 @@ def main():
  (work/'server.properties').write_text('server-name=Pickup Native Probe\nlevel-name=pickup-smoke\nallow-cheats=true\nonline-mode=false\ntransport=nethernet\nenable-lan-visibility=false\nserver-port=19192\nserver-portv6=19193\ntick-distance=4\nmax-players=1\ncontent-log-file-enabled=true\n')
  stage_results={}
  for stage in [1,2]:
+  # Keep the same extracted archive executable launchable for each phase.
+  executable.chmod(0o755)
   env={**os.environ,'LD_LIBRARY_PATH':str(work)};proc=subprocess.Popen([str(executable)],cwd=work,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1);lines=[];q=queue.Queue()
   def reader():
    for line in proc.stdout:lines.append(line);q.put(line)

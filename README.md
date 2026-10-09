@@ -1,6 +1,6 @@
-## Current maintained baseline: 0.6.135
+## Current maintained baseline: 0.6.136
 
-[T135 repair scope](docs/RELEASE-NOTES-0.6.135.md) retains all [T134 ingredient, transaction, visual and immersion changes](docs/RELEASE-NOTES-0.6.134.md), and fixes missing PBR companions, native Adventure-list IDs and the Ardent test fixture exposed by T134 CI. The candidate now pairs with W112; the failed T134 run and successful W111 CI remain historical evidence. Final T135/W112 CI, native-client and LIVE acceptance remain separate and pending.
+T136 repairs Upside Down Mob selection and snapshot order; paired W113 records confirmed native respawn-anchor interactions. It retains the complete T135 ingredient, transaction, material, board and immersion repairs. See the [current repair and acceptance scope](docs/RELEASE-NOTES-0.6.136.md).
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -9,7 +9,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 ## Current source and requirements
 
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.135**, World Liquor **0.1.112** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.136**, World Liquor **0.1.113** and Grilling **2.8.120**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -37,7 +37,7 @@ Exact player-camera roll remains unimplemented; the optional yaw adapter now req
 
 ## Retained T133 baseline statement
 
-The following statement records the earlier T133 candidate and its pairing. Current integration and PR status are recorded in the T135 scope above.
+The following statement records the earlier T133 candidate and its pairing. Current integration and PR status are recorded in the current scope above.
 
 - [T133 storage correction](docs/RELEASE-NOTES-0.6.133.md) compares finite XYZ coordinates independently of native object key order. It depends on PR297, retains its rollback repairs and awaits client acceptance; the reviewed family pairing below remains unchanged.
 

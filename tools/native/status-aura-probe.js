@@ -6,8 +6,26 @@ import {system,EffectTypes} from '@minecraft/server';
 import {applyNativeStatusWithAura,STATUS_AURA_KEY,STATUS_AURA_TEST,statusAuraDiagnostics} from './bedrock/status-aura.js';
 const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
+async function loadAuraScene(d,phase,out){
+ // The negative-coordinate pen spans four chunks; the parent's origin check
+ // does not establish their readiness. Retain this named area across restart.
+ const area='status_aura_qa',command=phase==='first'?
+  'tickingarea add -20 299 -20 -14 301 -14 status_aura_qa true':'tickingarea preload status_aura_qa true';
+ const setup=d.runCommand(command);
+ check(setup.successCount>0,'native aura ticking area command rejected: '+command);
+ const corners=[-20,-14].flatMap(x=>[-20,-14].map(z=>({x,y:300,z})));
+ let pending=corners,lastError=null,waitedTicks=0;
+ while(pending.length&&waitedTicks<300){
+  await pause(5);waitedTicks+=5;pending=[];
+  for(const position of corners)try{if(!d.getBlock(position)?.typeId)pending.push(position);}
+  catch(error){pending.push(position);lastError=String(error);}
+ }
+ check(!pending.length,'native aura scene chunks did not become readable: '+JSON.stringify({phase,area,waitedTicks,pending,lastError}));
+ out('case',{mode:'native-aura-chunk-readiness',phase,area,readableChunks:4,waitedTicks,preload:true});
+}
 export async function runStatusAuraProbe({phase,dimension:d,out}){
  check(phase==='first'||phase==='restart','unknown status aura probe phase');
+ await loadAuraScene(d,phase,out);
  d.runCommand('fill -20 299 -20 -14 299 -14 minecraft:stone');
  // Keep the native wolf's AI inside the elevated persistence scene while the
  // parent observer finishes and waits after restart. Do not refresh its effect.

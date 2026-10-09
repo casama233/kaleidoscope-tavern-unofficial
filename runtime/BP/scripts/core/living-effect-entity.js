@@ -15,3 +15,11 @@ export function livingEffectEntity(entity,allowDead=false){
   return !!health&&(allowDead||health.currentValue>0)&&(VANILLA_INSTANT_ENTITIES[entity.typeId]?.living===true||entity.getComponent('minecraft:type_family')?.hasTypeFamily('mob')===true);
  }catch{return false;}
 }
+
+/** Java Mob is narrower than LivingEntity: Player and ArmorStand are not Mob.
+ * All other reviewed vanilla living counterparts inherit Mob. Unknown addons
+ * retain the existing native health + "mob" family adapter.
+ */
+export function mobEffectEntity(entity,allowDead=false){
+ return entity?.typeId!=='minecraft:player'&&entity?.typeId!=='minecraft:armor_stand'&&livingEffectEntity(entity,allowDead);
+}

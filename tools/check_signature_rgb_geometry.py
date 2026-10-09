@@ -23,6 +23,9 @@ def check(root=ROOT):
     assert len(controllers) == 10 and len(models) == 60
     fill = Image.open(rp / 'textures/kt_runtime/signature/rgb_opaque.png').convert('RGBA')
     assert set(fill.getdata()) == {(255, 255, 255, 255)}, 'Sparse colour masks must never replace opaque geometry fill'
+    assert read(rp / 'textures/kt_runtime/signature/rgb_opaque.texture_set.json') == {
+        'format_version': '1.16.100', 'minecraft:texture_set': {
+            'color': 'rgb_opaque', 'metalness_emissive_roughness': [0, 0, 170]}}, 'Opaque carrier must retain the non-emissive signature-liquid profile'
     actual = [[] for _ in range(6)]
     for name, controller in controllers.items():
         rgb = tuple(bytes.fromhex(name.rsplit('_', 1)[1]))

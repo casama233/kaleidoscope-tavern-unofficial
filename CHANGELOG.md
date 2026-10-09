@@ -1,5 +1,10 @@
 # Maintained changes
 
+## 0.6.136
+
+- 修正 Upside Down 的完整 Mob 名單與魚類分類；配對 W113 重生錨觀察；保留 T135 全部功能，修正原生 observer 原料及地形隔離。
+- 詳細範圍及驗收限制見 [本版說明](docs/RELEASE-NOTES-0.6.136.md)。
+
 ## 0.6.135
 
 - Retain T134's complete ingredient, transaction, visual and immersion scope, including the reviewed PR297/PR298 repairs and W110 author updates.

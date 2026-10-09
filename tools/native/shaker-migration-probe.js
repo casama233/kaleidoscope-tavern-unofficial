@@ -13,7 +13,7 @@ import {captureStackableIngredient,restoreStackableIngredient} from './core/ingr
 import {makeStack} from './bedrock/transactions.js';
 import {runMachineIngredientsProbe} from './machine-ingredients-probe.js';
 import {runStatusAuraProbe} from './status-aura-probe.js';
-import {pulseVision,customEffectDiagnostics} from './bedrock/custom-effects.js';
+import {applyCustomEffect,pulseVision,customEffectDiagnostics} from './bedrock/custom-effects.js';
 import {declareInstantEntityProfile,instantEffectDiagnostics} from './bedrock/instant-effects.js';
 import {spawnThrownDrink,resolveThrownDrinkImpact,THROWN_EFFECTS,storageProjectileDiagnostics} from './bedrock/storage-projectile.js';
 
@@ -21,7 +21,7 @@ const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const out=(kind,data)=>console.log('[LIVING_EFFECT_QA] '+JSON.stringify({kind,...data}));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
 // This paired probe is deliberately pinned to the W112 checkout used by CI.
-const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.112';
+const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.113';
 function addonRegistration(){
  const row=runtimeRegistry()?.list().find(entry=>entry.source===ADDON_SOURCE);
  check(row,'real World Liquor addon registration absent');
@@ -34,10 +34,11 @@ function observed(item){
   keep:item.keepOnDeath,lock:item.lockMode,properties:Object.fromEntries(item.getDynamicPropertyIds().map(id=>[id,item.getDynamicProperty(id)]))});
 }
 function portableIngredients(container,phase){
+ // Java red/white/gold cocktail ingredients; q4 satisfies the bottle quality gate.
+ const types=['kaleidoscope_tavern:plum_wine_q4','kaleidoscope_tavern:whiskey_q4','kaleidoscope_tavern:honey_wine_q4'];
  if(phase==='first'){
   let state=emptyShaker();
-  // Repeated legal inputs retain distinct names/lore; sugar is not a Java shaker ingredient.
-  for(const [index,type]of Array(3).fill('kaleidoscope_tavern:plum_wine_q4').entries()){
+  for(const [index,type]of types.entries()){
    const input=makeStack(type,1);input.nameTag='Native ingredient '+index;
    input.setLore([{text:'Keep the original note '+index}]);
    input.setCanPlaceOn(['minecraft:stone']);
@@ -53,11 +54,12 @@ function portableIngredients(container,phase){
  check(state.slots.length===3,'portable ingredient count changed');
  for(const [index,input]of state.slots.entries()){
   const restored=restoreStackableIngredient(input.item,input.metadata,makeStack),original=container.getItem(index+3);
+  check(input.item===types[index]&&original?.typeId===types[index]&&restored.typeId===types[index],'portable ingredient type changed '+index);
   check(restored.isStackableWith(original)&&original.isStackableWith(restored),'native ingredient round-trip mismatch '+index);
  }
  const independent=item.clone();independent.setDynamicProperty(PORTABLE_DATA,encodePortable(emptyShaker(),'independent-cleared'));
  check(item.getDynamicProperty(PORTABLE_DATA)===raw&&container.getItem(2).getDynamicProperty(PORTABLE_DATA)===raw,'portable clone aliases original metadata');
- out('case',{mode:'portable-stackable-ingredient-metadata',phase,ingredients:3,nativeEquality:true,independentClone:true,fullArbitraryNBT:false});
+ out('case',{mode:'portable-stackable-ingredient-metadata',phase,ingredients:3,rowTypes:state.slots.map(input=>input.item),nativeEquality:true,independentClone:true,fullArbitraryNBT:false});
 }
 async function effectRecipients(d,phase){
  // Production functions operate on real native entities, components, queries
@@ -152,6 +154,13 @@ async function effectRecipients(d,phase){
   out('case',{mode:'native-vision-living-class',phase,excluded:helper.typeId,excludedHasHealth:true,excludedHealth:helperState.health.currentValue,excludedHasMobFamily:false,testOnlyHealthWitness:true,
    additionalExcluded:orb.typeId,xpHealthApiAvailable:settledXp.healthAvailable,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
    outline:customEffectDiagnostics.visionOutline,recipientFunctionOnly:true,playerEffectEntrance:false,client:false});
+  const ignored=[stand,helper,orb],originalNames=ignored.map(entity=>entity.nameTag),renames=customEffectDiagnostics.upsideDownRenames;
+  check(applyCustomEffect(viewer,{effect:'kaleidoscope_tavern:upside_down',duration:1,amplifier:0}),'native Upside Down adapter rejected');
+  check([viewer,cow,cod].every(entity=>entity.nameTag==='Grumm'),'native Upside Down omitted the Mob source, cow or familyless cod');
+  check(ignored.every((entity,index)=>entity.nameTag===originalNames[index]),'native Upside Down renamed a non-Mob recipient');
+  check(customEffectDiagnostics.upsideDownRenames===renames+3,'native Upside Down recipient count differs');
+  out('case',{mode:'native-upside-down-mob-class',phase,renamed:[viewer.typeId,cow.typeId,cod.typeId],excluded:ignored.map(entity=>entity.typeId),
+   codHasMobFamily:false,renames:3,recipientFunctionOnly:true,playerEffectEntrance:false,nameVisibilityParity:false,client:false});
  }finally{
   world.afterEvents.entityHurt.unsubscribe(capture);world.beforeEvents.entityHurt.unsubscribe(cancel);
   for(const entity of owned)try{if(entity.isValid)entity.remove();}catch{}

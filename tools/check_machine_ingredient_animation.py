@@ -13,6 +13,10 @@ def check(root=ROOT):
     assert source.size == (16, 192)
     frame_aliases = [f'ice_tick_{i}' for i in range(24)]
     paths = [f'textures/kt_runtime/machine_ingredients/ice_grape/tick_{i:02d}' for i in range(24)]
+    for i, path in enumerate(paths):
+        assert read(rp / (path + '.texture_set.json')) == {
+            'format_version': '1.16.100', 'minecraft:texture_set': {
+                'color': f'tick_{i:02d}', 'metalness_emissive_roughness': [0, 0, 215]}}, 'Missing or changed ingredient material profile'
     alpha_edges = 0
     for frame in range(12):
         current = source.crop((0, frame*16, 16, (frame+1)*16))

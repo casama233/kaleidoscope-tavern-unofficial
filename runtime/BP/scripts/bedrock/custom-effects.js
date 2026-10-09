@@ -10,7 +10,7 @@ import {EquipmentSlot,EffectTypes,system,world,ScriptEventSource,GameMode} from 
 import {createVisionFeedback} from '../core/vision-feedback.js';
 import {grassStealthPlant} from '../core/grass-stealth-plants.js';
 import {armorShouldWear} from '../core/armor-wear.js';
-import {livingEffectEntity} from '../core/living-effect-entity.js';
+import {livingEffectEntity,mobEffectEntity} from '../core/living-effect-entity.js';
 import {motionBlockingHeight} from '../core/motion-blocking-height.js';
 import {CUSTOM_STATUS_KEY,CUSTOM_IMPLEMENTED,readStatus,addStatus,removeStatus,advanceStatus,activeStatus,killHeal,orbVelocity,inflatedAabbIntersects,countdownPulseCrossed,visionRadius,grassStealthEligible,extendedReachDistance,tombRaiderTarget,tombRaiderProc,ardentHeatBreakable,ardentFrontBlocks,highHeelsDirection,highHeelsBlocked,highHeelsNearBoundary,highHeelsTarget} from '../core/custom-effects.js';
 const tracks=new Map(),deaths=new Map(),heelsSteps=new Map(),fastPlayers=new Map(),statusSnapshots=new Map();
@@ -50,15 +50,18 @@ export function applyCustomEffect(p,row){
  if(!CUSTOM_IMPLEMENTED[row.effect])return false;
  if(row.effect==='kaleidoscope_tavern:shriek_attack')return performShriek(p);
  if(row.effect==='kaleidoscope_tavern:upside_down'){
-  // Java uses user.getBoundingBox().inflate(16) and only living Mob entities.
-  // Bedrock family=mob is the closest class filter; exact AABB overlap is rechecked below.
-  const sourceBox=p.getAABB();let renamed=0;
-  for(const entity of p.dimension.getEntities({families:['mob']}))try{
-   if(entity.typeId==='minecraft:player')continue;
-   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
+  // Java selects the complete alive Mob list in user.getBoundingBox().inflate(16)
+  // before naming any entity. Native fish can omit the "mob" family, while a
+  // living ArmorStand is not a Mob. Keep the spatial query bounded and recheck
+  // exact AABB overlap without changing membership during naming callbacks.
+  const sourceBox=p.getAABB(),location={},volume={},selected=[];let renamed=0;
+  for(const axis of ['x','y','z']){location[axis]=sourceBox.center[axis]-sourceBox.extent[axis]-16;volume[axis]=2*(sourceBox.extent[axis]+16);}
+  for(const entity of p.dimension.getEntities({location,volume}))try{
+   if(!mobEffectEntity(entity))continue;
    if(!inflatedAabbIntersects(sourceBox,entity.getAABB(),16))continue;
-   entity.nameTag='Grumm';renamed++;
+   selected.push(entity);
   }catch(e){error(e);}
+  for(const entity of selected)try{entity.nameTag='Grumm';renamed++;}catch(e){error(e);}
   customEffectDiagnostics.upsideDownRenames+=renamed;return true;
  }
  if(row.effect==='kaleidoscope_tavern:zenith'){

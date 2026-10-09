@@ -1,6 +1,23 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.135 / World Liquor 0.1.112
+## Current repair candidate: Tavern 0.6.136 / World Liquor 0.1.113
+
+[T136 scope](RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
+query-first alive Mob selection for Upside Down, including fish without the
+Native mob family while excluding Player/ArmorStand. Target membership is
+fixed before nameTag callbacks. Java name visibility and rendered inversion
+remain unverified. W113 records only confirmed changed Nether anchor points,
+with source yaw=0/forced=false, repeat/cancel guards and pending lifecycle cleanup.
+Original resolver settlement, author assets and helper exclusions remain intact.
+
+Source/API counterexamples and cross-review passed. Exact T136/W113 native
+first/restart and CI must supply their own results; actual Player, rendering,
+full private family and LIVE remain pending. G120 source/helper compatibility
+is reviewed, with its complete Cookery 0.2.7 host adaptation still required.
+The historical sections below retain their original evidence scope.
+
+
+## Retained T135 / W112 repair scope
 
 [T135 repair scope](RELEASE-NOTES-0.6.135.md) retains the T134 implementation
 and limitations below. Actual T134 CI run `37869770416` exposed two runtime

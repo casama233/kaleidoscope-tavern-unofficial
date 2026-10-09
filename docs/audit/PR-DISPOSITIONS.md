@@ -2,7 +2,17 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 當前 T135／W112：承接真實 CI 修復
+## 當前 T136／W113：接續 Mob／重生錨修復
+
+[本版範圍](../RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
+`6dc43f3bd589a370782f7005c9d672e141de0be3` 與 PR91 的 W112 reviewed
+`ed78beed3204a8a9e3c3a83d48350fb0e84ba516` 接續，保留原提交與 freeze。
+新增倒轉 Mob snapshot、確認的錨點 metadata；原生 observer 改合法原料、
+封閉掉落場景及嚴格重啟證據。T135 的 NOT_SHAKER_INGREDIENT 失敗保留。
+新 PR、CI、發布與 LIVE 分開依確切來源回報；不把既有草稿視為已交付。
+
+
+## 保留 T135／W112：承接真實 CI 修復
 
 [T135 說明](../RELEASE-NOTES-0.6.135.md) 是當前差異與驗收入口，完整承接
 下方 T134 的原料、交易、視覺、沉浸修復及原作來源，不複製或改寫舊歷史。

@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.132
+## Current maintained baseline: 0.6.133
 
 # 森羅物語：酒館（非官方）
 

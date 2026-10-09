@@ -1,4 +1,6 @@
-## Current maintained baseline: 0.6.132
+## Current maintained baseline: 0.6.133
+
+- [T133 storage correction](docs/RELEASE-NOTES-0.6.133.md) compares finite XYZ coordinates independently of native object key order. It depends on PR297, retains its rollback repairs and awaits client acceptance; the reviewed family pairing below remains unchanged.
 
 # Kaleidoscope Tavern (Unofficial)
 

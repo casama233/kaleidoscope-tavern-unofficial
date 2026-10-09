@@ -6,9 +6,11 @@
   "validation_evidence": "docs/RELEASE-NOTES-0.6.138.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": false,
+  "new_bds_test": true,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "T138/W115 integrates observed native effect countdown tracking with the reviewed exact entityLoad acknowledgement repair, preserving Mob and confirmed anchor behavior. This candidate requires its own complete source-bound native first/restart and canonical CI. T137/W114 evidence remains historical; actual Player, rendered client, private saved-world/family and LIVE remain pending."
+  "native_evidence_scope": "The frozen T138/W115 pair passed fresh zero-player native first launch, normal save/stop and restart with the complete source-bound recorder. It covers saved aura acknowledgement, foreign handoff, native-clock invisibility expiry, machine counts/metadata, stackable ingredients and Mob recipient selection. Actual Player, rendered client, full private-family migration and LIVE remain pending; final canonical CI is separate.",
+  "expected_archive_sha256": "f9e74445be0c25a2e964751f67847cbbf0ec6c0908efa77ae7334adf228090a6",
+  "reviewed_runtime_source": "4b61b22072aeeeff54621289edabb0ff433a52fb"
 }

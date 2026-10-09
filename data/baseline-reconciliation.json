@@ -7174,6 +7174,86 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.138",
+      "files": {
+        "runtime/BP/scripts/bedrock/status-aura.js": {
+          "before": "8a08571a86b2abddf031f13e2fb3c82579f80c9d1aff25a26e00dbc1402150db",
+          "after": "b37611ca6ab49f56e144a77d77e0d6cb6064685dc4fe3efc6574fc35c3219756",
+          "reason": "T138 exact source review integrates the parallel native-clock repair reviewed at 71e5c372cce282d8130290d01812929c9e7db1f8 with T137 reload ownership. Existing native leases follow observed nonincreasing native duration; own writes retain narrow immediate readback and ticket matching. Saves read every retained native duration and fence failed stale-claim revocations. Accepted schema-1 restores refresh saved age before issuing the exact entityLoad acknowledgement. Only a verified internal scalar save may rebind an already-issued, same-tick, unchanged effect witness; external scalar/fence changes still block it. Removed rows, new writes and handoffs retire their witnesses. The five-native-tick saved bound, one-use acknowledgement, original death/Player entry routing and T136 Mob/World Liquor anchor repairs remain intact. The parallel conflicting T136 identity stays in its immutable source history; this layer extends the actual T137 predecessor. No rendered client or full Player acceptance is inferred. Focused regressions: tools/status-aura.test.mjs [native entityLoad preserves one exact same-tick saved-effect acknowledgement without reapplying gameplay; reload acknowledgement requires unchanged saved bytes and the current durable ownership fence; an acknowledged saved lease survives a paused native clock, then hands off an exact foreign refresh; save retires a rejected loaded witness before its later event can invalidate another own effect; failed readback refresh on entityLoad fences the stale saved row without granting an acknowledgement; saving another own row rebinds only the existing exact same-tick reload witness; an internal save cannot rebind a reload witness over an external scalar change; a host refresh that first loads a saved lease cannot mint a reload witness later in that tick; a native countdown can pause beyond its script deadline, resume and expire without losing its own aura; a handoff saves every other native countdown at its current readback before that row has ticked; two schema 1 restorations refresh the saved countdown instead of accumulating accepted snapshot age; a newly rejected row cannot survive a later read failure or rollback to its stale saved scalar].",
+          "reviewedPredecessorCommit": "af25ecf9cb3b8e74706ba0167e6a1ef7f08994b5",
+          "reviewedSourceCommit": "4b61b22072aeeeff54621289edabb0ff433a52fb",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.138.md",
+          "reverseOps": [
+            [
+              21,
+              31,
+              "function matches(row,e,now){return !!e&&e.amplifier===row.amplifier&&Math.abs(e.ticks-(row.until-now))<=1;}\n"
+            ],
+            [
+              82,
+              114,
+              "function save(track){\n const now=system.currentTick,rows=[...track.native.values()].filter(row=>row.until>now).map(row=>({id:row.id,ticks:row.until-now,amplifier:row.amplifier}));\n const raw=rows.length?JSON.stringify({schema:1,rows}):undefined;\n writeLease(track,raw);\n track.savedAt=now;\n"
+            ],
+            [
+              120,
+              121,
+              " track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked,loadedAt:now,loadedNative:new Map(),reloadWitnesses:new Map(),reloadWitnessIssued:false};let rejected=false;\n"
+            ],
+            [
+              129,
+              131,
+              "    // Native durations pause while unloaded. The saved lease is at most five\n    // online ticks old; do not adopt an unrelated stronger/extended effect.\n"
+            ],
+            [
+              132,
+              134,
+              "     track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});track.loadedNative.set(row.id,observed);\n"
+            ],
+            [
+              142,
+              145,
+              " if(rejected)try{save(track);}catch(e){blockOwnership(track,e);}\n"
+            ],
+            [
+              167,
+              169,
+              "  track=load(entity);before=current(entity,key);owned=track.native.get(key);\n  if(owned&&!matches(owned,before,system.currentTick)){forgetNative(track,key);owned=undefined;}\n"
+            ],
+            [
+              180,
+              181,
+              " const previous=owned&&{...owned},row={id:key,amplifier,until:system.currentTick+Math.max(ticks,before?.ticks??0)};\n"
+            ],
+            [
+              182,
+              183,
+              " try{save(track);}catch(e){if(previous&&!track.blocked)track.native.set(key,previous);else track.native.delete(key);error(e);return entity.addEffect(id,ticks,options);}\n"
+            ],
+            [
+              187,
+              188,
+              " if(!matches(row,observed,system.currentTick)){\n"
+            ],
+            [
+              194,
+              195,
+              " row.until=system.currentTick+observed.ticks;statusAuraDiagnostics.nativeAcquired++;return result;\n"
+            ],
+            [
+              205,
+              206,
+              "  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;\n"
+            ],
+            [
+              257,
+              258,
+              "   if(!matches(row,observed,now)){forgetNative(track,nativeId);continue;}\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

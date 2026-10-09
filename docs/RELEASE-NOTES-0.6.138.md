@@ -50,6 +50,29 @@ startup 與 playerSpawn 不會建立豁免。兩種處理共同維持來源光�
 兩套原始提交和歷史保持不變；本版使用新的 T138／W115 身份，功能
 delta 追加在真正的 T137 前身之後，沒有搬入衝突的舊歷史 key。
 
+## 已完成的本候選驗證
+
+T138／W115 在 BDS 1.26.52.3 完成新的首次啟動、正常停止保存、重啟，
+首次 20 個完整案例、重啟 21 個完整案例皆通過，兩階段都零玩家連線、
+零內容錯誤並正常退出。[本版原生證據](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/v0.6.138-beta.1/docs/native/T138-W115-20261009.json)
+綁定完整凍結 pack、observer bytes、全部案例與原始日誌 SHA256。
+
+重啟恰有一次載入確認，原生 speed 與已保存 aura 紀錄持續；其後外部
+800-tick 同強度刷新恰好交還一次控制，三 ticks 後剩餘 797，沒有被
+移除、縮短或重施。兩階段的一 tick 隱形均在實際原生倒數 2 ticks、
+script 等待 3 ticks 後確認消失。原料數量／metadata、三種 q4 酒款與
+Mob 選擇也通過；不包含 Player 操作或粒子畫面驗收。
+
+正式 aura 41 項與獨立交錯反例 12 項通過；完整 recorder 12 項、
+隔離多行診斷 generator 3 項通過。功能來源固定為
+`4b61b22072aeeeff54621289edabb0ff433a52fb`；本版功能見證只追加
+`status-aura.js` 的合併差異，原有 18 層見證與所有歷史原生結果保留。
+
+可重現 archive SHA256：
+`f9e74445be0c25a2e964751f67847cbbf0ec6c0908efa77ae7334adf228090a6`。
+最終來源的完整必要 CI 由本候選 PR 執行；上述原生成功不代表
+真人、完整私人家族或 LIVE 已經驗收。
+
 ## 客戶端診斷與驗收範圍
 
 新增的[多行輸入診斷工具](../tools/client-parity/README.md)保留來源
@@ -64,8 +87,8 @@ delta 追加在真正的 T137 前身之後，沒有搬入衝突的舊歷史 key�
 效果仍有實作或平台差距。Grumm 畫面、透明、粒子、音效與同場景操作
 尚未取得真人一比一驗收。
 
-本候選須完成自己的定向回歸、完整配套原生首次／正常保存／重啟、
-source-bound recorder、canonical CI 與 archive 核對。私人 BSM、
+本候選已完成上述定向回歸、完整配套原生與 archive 核對；canonical
+CI 另以最終 source 執行。私人 BSM、
 quality 與 LIVE 世界連線不可用，完整私人家族、fresh stopped-world
 演練、備份與部署讀回未執行；既有持續授權保留。client=false、
 production_ready=false、live_deployment=false。

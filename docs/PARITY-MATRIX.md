@@ -2,7 +2,7 @@
 
 ## Current repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
 
-[T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The new candidate requires its own paired native and canonical CI; isolated multiline tooling has no human-client acceptance.
+[T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The frozen T138/W115 pair passed its own complete zero-player native first/save/restart and source-bound recorder. Final canonical CI is separate; isolated multiline tooling has no human-client acceptance.
 
 ## Retained T137 / W114 (scoped native restart passed)
 

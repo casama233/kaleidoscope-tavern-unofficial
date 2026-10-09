@@ -91,3 +91,13 @@ reach／step-height／XP pickup、彩字距離／望遠鏡、任意三份裝飾
 實際封裝已核對完整 BP／RP 與資源材質宣告；這不等於發布或客戶端驗收。
 來源見證、release request 及後續固定 peer 的提交只增加審查／配對
 metadata，不修改凍結 runtime；最終 PR／CI 仍按其自身完整 tree 驗證。
+
+## 最終公開配對
+
+五個 CI peer checkout 固定 W118 最終來源
+`c8d9506a6475522dee984f67ce5ceedac3938e6b`，完整 Git tree
+`a4b5e4bd0bce89426c32a63d93adf68001d0801d`。
+W118 的 integration 與發布 request 同時固定 Tavern 審查來源
+`3f91abbdb9cda2e2b51965c4858229e2c1feab1a`，兩側 exported runtime 與各自凍結建包來源相同。
+本次配套必須完成實際 GitHub CI 與原生 first／restart；此來源記錄
+不預先宣稱測試、發布、真人或 LIVE 已通過。

@@ -14,10 +14,13 @@
 版本號不同不能直接比較還原度。各包完整差距以自己的
 `docs/PARITY-MATRIX.md`、`docs/BUGS.md` 和當前 release notes 為準。
 未完成調料原型及其他唯一差異保留，不能混入已凍結來源。
-本輪保留 PR298 reviewed head `625ff769` 的 T133 原生座標修復，再追加
-T134／W111；PR298 的獨立 draft 狀態不等於已合併。本輪正式驗證以
-T134／W111 精確 PR／CI 為準。此前各候選、版本 claim 與失敗證據不改寫，
-不以舊版號發布另一套內容。
+本輪保留 [draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)
+reviewed head `625ff769` 的 T133 原生座標修復，再追加 T134／W111。
+PR301 的上一套 T132／W110 家族尚未納入該草稿；本次承接不代表原 PR
+已合併。舊失敗和更新後來源的 CI 各自保留，原 PR 現態依其 exact head
+證據；本輪交付依 T134／W111 的精確 PR／CI。此前各候選、版本 claim
+與失敗證據不改寫，不以舊版號發布另一套內容。
+衝突的兩份 W109 提交／claim 已分別保留，新作者適配使用獨立 W110 身份。
 
 ## 作者版本與分支
 

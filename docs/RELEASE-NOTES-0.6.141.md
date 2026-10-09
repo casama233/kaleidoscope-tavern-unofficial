@@ -77,3 +77,17 @@ reach／step-height／XP pickup、彩字距離／望遠鏡、任意三份裝飾
 本環境沒有私人 BSM／quality／LIVE 連線；完整家族、fresh stopped-world
 保存演練、備份及部署讀回未執行。既有持續部署授權保留，
 `client=false`、`production_ready=false`、`live_deployment=false`。
+
+## 凍結來源與封裝
+
+原生修補及指南的完整審查來源為
+`ab419bd89ce996ff2ec781eca0927840e4fc6da1`，完整 Git tree
+`0e70817d8cc8e624accfc023f66c46fc85598a13`；本地乾淨封裝提交
+`c9e2d5725443b66c180967d3494446e1c87a7735` 與該來源全 tree 相同。
+
+正式 `Kaleidoscope_Tavern_Unofficial_0.6.141_baseline1.mcaddon`
+共 5884949 bytes，SHA256
+`3c0acd9bd7292dfa52b2018c057a3ffa5ca68e3bd4d62f2666fefc427889d0b0`。
+實際封裝已核對完整 BP／RP 與資源材質宣告；這不等於發布或客戶端驗收。
+來源見證、release request 及後續固定 peer 的提交只增加審查／配對
+metadata，不修改凍結 runtime；最終 PR／CI 仍按其自身完整 tree 驗證。

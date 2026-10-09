@@ -7615,6 +7615,96 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.141",
+      "files": {
+        "runtime/BP/scripts/bedrock/status-aura.js": {
+          "before": "b37611ca6ab49f56e144a77d77e0d6cb6064685dc4fe3efc6574fc35c3219756",
+          "after": "ec262d3bfdc4a1342ea29ab3c067eadb8b4fc18821a7f5ed241b53a1ab00cc96",
+          "reason": "Require the observed invalid-entity before-add, actual same-tick entityLoad, and one exact saved/current after-add before acknowledging native rehydration. A valid foreign before-add vetoes the corresponding proof. Resolve only actual unambiguous native effect names; no guessed identifier/display-name mapping. An unknown valid-before suspends only existing proof, and only a same-tick consumed own-write ticket with exact after/current readback can lift its unrelated suspension; foreign after events cannot revive it. InitialSpawn can preserve verified or consumed proof without reminting; rejected rows retire durably. Keep T139 observed-native-clock tracking, fresh per-row persistence, five-native-tick schema-1 bound, raw/fence protection, legitimate other-row saves, own-write retirement and native-only death cleanup. Missing observation APIs and unknown/ambiguous sources fail closed. Production callback counterexamples cover foreign refresh, load/spawn order, duplicate permission and independent effects. Preserve the canonical T140 guide and all prior review layers. Reuse 58/58 focused callback results only for identical source and test bytes; this is not a new native, Player-login or rendered-client validation. No human client or universal native source identity is claimed.",
+          "reviewedPredecessorCommit": "79e2ad0fb9f5a59f93be41aee002ddf2a809d71b",
+          "reviewedSourceCommit": "ab419bd89ce996ff2ec781eca0927840e4fc6da1",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.141.md",
+          "reverseOps": [
+            [
+              13,
+              15,
+              "let installed=false,updateRun;\n"
+            ],
+            [
+              33,
+              100,
+              "function retireReloadWitness(track,id){track?.reloadWitnesses?.delete(id);track?.loadedNative?.delete(id);}\n"
+            ],
+            [
+              109,
+              110,
+              ""
+            ],
+            [
+              274,
+              281,
+              "  if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);retireReloadWitness(track,id);return;}\n  const witness=track?.reloadWitnesses.get(id),owned=track?.native.get(id);\n  if(entity.isValid!==false&&witness?.at===now&&reloadLeaseCurrent(track,witness.raw)&&owned?.until-now===witness.ticks&&\n   exactEffect(witness,observed)&&exactEffect(witness,current(entity,id))){\n   retireReloadWitness(track,id);statusAuraDiagnostics.nativeReloadAcknowledgements++;\n"
+            ],
+            [
+              299,
+              302,
+              "/** Only the actual entityLoad callback may acknowledge native rehydration.\n * BDS 1.26.52.3 emits entityLoad then effectAdd in the same tick for a saved\n * native effect. Generic restoration and startup/player scans never mint this\n * one-use witness, and repeated restoration cannot mint it again.\n"
+            ],
+            [
+              305,
+              306,
+              "  const track=load(entity),now=system.currentTick;\n"
+            ],
+            [
+              308,
+              324,
+              "   if(track.loadedNative.size&&reloadLeaseCurrent(track))for(const [id,snapshot]of track.loadedNative)if(track.native.has(id)&&exactEffect(snapshot,current(entity,id))){\n    track.reloadWitnesses.set(id,{...snapshot,at:now,raw:track.raw});statusAuraDiagnostics.nativeReloadWitnesses++;\n"
+            ],
+            [
+              329,
+              358,
+              "export function forgetStatusAura(entityId){tracks.delete(entityId);syntheticInvisibility.delete(entityId);for(const key of pending.keys())if(key.startsWith(entityId+'\\0'))pending.delete(key);}\n"
+            ],
+            [
+              389,
+              390,
+              ""
+            ],
+            [
+              394,
+              398,
+              " // No native particle takeover without the refresh/handoff observation signal.\n if(world.afterEvents.effectAdd?.subscribe){world.afterEvents.effectAdd.subscribe(observeStatusAuraEffect);installed=true;}\n"
+            ],
+            [
+              400,
+              401,
+              "export const STATUS_AURA_TEST={tracks,pending,syntheticInvisibility,blockedNative};\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "68cc2f9106f535f460d2f4790dd8e3e275a777e583e1f1d529e4858c10e78eca",
+          "after": "cee2f07d802e76681a560b2a439468caaa4b49026c8776aca54b347821b94662",
+          "reason": "Route playerSpawn through the bounded status-aura lifecycle reset so a same-tick actual load proof survives initialSpawn without issuing a new permission. InitialSpawn itself and generic restoration cannot authorize rehydration; normal respawn clears ownership. Preserve all T139 effect, death, player leave, native-clock, Mob selection and silent-immersion behavior. Formal registered callback regressions exercise interleavings rather than invoking only an isolated helper. Preserve the canonical T140 guide bytes and existing reconciliation history. The reused 58/58 results cover identical callback-test bytes, not a new native run; actual Player login and rendering remain separate.",
+          "reviewedPredecessorCommit": "79e2ad0fb9f5a59f93be41aee002ddf2a809d71b",
+          "reviewedSourceCommit": "ab419bd89ce996ff2ec781eca0927840e4fc6da1",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.141.md",
+          "reverseOps": [
+            [
+              6,
+              7,
+              "import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,restoreLoadedStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';\n"
+            ],
+            [
+              419,
+              420,
+              " world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);forgetStatusAura(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else{restoreStatusAura(e.player);statusNow(e.player);}}catch(x){error(x);}});\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

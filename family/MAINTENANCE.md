@@ -1,5 +1,7 @@
 # 森羅家族基線
 
+現行開發來源與作者分支判定見 [BASELINE-STATUS.md](BASELINE-STATUS.md)；LIVE 以 BSM 政策和本次部署收據為準。
+
 自移植的酒館、燒烤、世界名酒以各自 Git 為唯一功能來源；官方第三方包以 `upstream.lock.json` 的作者檔案為來源。私服 UUID、AMW 名稱及較大的本地版本號不代表官方更新。
 
 ## 發佈與套用

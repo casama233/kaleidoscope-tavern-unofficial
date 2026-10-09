@@ -5,6 +5,41 @@ import {SANDWICH_BOARDS,FLOWER_BOARD_TRANSFORMS} from '../core/boards.js';
 import {GUIDE_NATIVE_NAMES,guideItemName} from './guide-native-names.js';
 
 const NS='kaleidoscope_tavern:',LOCALES=['zh_CN','zh_TW','en_US'];
+// Reviewed guide-only adaptation of four registered AMW items. See
+// docs/GUIDE-EDITORIAL.md for source hashes; producer recipes/effects stay intact.
+const AMW_COPY={
+ 'amw:kirsch':{category:'barrel',names:['樱桃白兰地','櫻桃白蘭地','Kirsch'],rows:[
+  ['缓降放慢坠落，抗性减少受到的伤害，适合登高探索；熟成可延长这两种酒效。','緩速下降放慢墜落，抗性減少受到的傷害，適合登高探索；熟成可延長這兩種酒效。','Slow Falling slows your descent and Resistance reduces incoming damage, useful when exploring high places. Aging extends both effects.'],
+  ['品质 1 即可装瓶，取走后不再熟成。品质 4 起可作白色调酒材料；饮用或倒入雪克杯都会归还空瓶。','品質 1 即可裝瓶，取走後不再熟成。品質 4 起可作白色調酒材料；飲用或倒入雪克杯都會歸還空瓶。','Bottle it from Quality 1; bottled drinks stop aging. From Quality 4, it works as a white shaker ingredient. Drinking or pouring it into a shaker returns the empty bottle.']
+ ]},
+ 'amw:kriek':{category:'barrel',names:['比利时酸啤酒','比利時酸啤酒','Kriek'],rows:[
+  ['再生逐渐恢复生命，速度方便赶路；品质 5 起获得速度 II，品质 6 获得再生 II。','再生逐漸恢復生命，速度方便趕路；品質 5 起獲得速度 II，品質 6 獲得再生 II。','Regeneration restores health over time, while Speed helps you travel. Speed reaches level II at Quality 5; Regeneration reaches level II at Quality 6.'],
+  ['品质 1 即可装瓶，取走后不再熟成。品质 4 起可作红色调酒材料；饮用或倒入雪克杯都会归还空瓶。','品質 1 即可裝瓶，取走後不再熟成。品質 4 起可作紅色調酒材料；飲用或倒入雪克杯都會歸還空瓶。','Bottle it from Quality 1; bottled drinks stop aging. From Quality 4, it works as a red shaker ingredient. Drinking or pouring it into a shaker returns the empty bottle.']
+ ]},
+ 'amw:sour_cherry':{category:'plants',names:['酸樱桃','酸櫻桃','Sour Cherry'],rows:[
+  ['在寒冷地区寻找酸樱桃树，采收叶片下方深红色的成熟果簇。未成熟的果实不能采摘。','在寒冷地區尋找酸櫻桃樹，採收葉片下方深紅色的成熟果簇。未成熟的果實不能採摘。','Find sour cherry trees in cold regions and harvest the ripe red clusters beneath their leaves. Unripe fruit cannot be harvested.'],
+  ['采收会移除果簇；保留上方叶片及下方空位，便能再次长果并逐渐成熟。采下的酸樱桃可压成果汁酿酒。','採收會移除果簇；保留上方葉片及下方空位，便能再次長果並逐漸成熟。採下的酸櫻桃可壓成果汁釀酒。','Harvesting removes the fruit cluster. Keep the leaves above and the space beneath clear so new fruit can grow and ripen. Press the harvested cherries into juice for brewing.']
+ ]},
+ 'amw:sour_cherry_bucket':{category:'juices',names:['酸樱桃汁桶','酸櫻桃汁桶','Sour Cherry Juice Bucket'],rows:[
+  ['酸樱桃汁用于酿造樱桃白兰地和比利时酸啤酒。按制作方法压榨酸樱桃，满桶后用空桶收集。','酸櫻桃汁用於釀造櫻桃白蘭地和比利時酸啤酒。按製作方法壓榨酸櫻桃，滿桶後用空桶收集。','Sour cherry juice is the brewing fluid for Kirsch and Kriek. Press the cherries as shown in the preparation, then collect a full bucket with an empty bucket.'],
+  ['把汁桶带到开盖的酒桶投料；液体量、原料和熟成时间见各酒款的制作方法。','把汁桶帶到開蓋的酒桶投料；液體量、原料和熟成時間見各酒款的製作方法。','Add the juice to an open barrel. Each drink’s preparation lists its fluid amount, ingredients and aging time.']
+ ]}
+};
+
+export function applyReviewedAddonGuideCopy(payload){
+ for(const entry of payload.entries){
+  const reviewed=AMW_COPY[entry.id];if(!reviewed)continue;
+  entry.category=reviewed.category;
+  copyRows(entry,reviewed.rows);
+  const short=entry.id.slice(4),aliases=[entry.id,'amw:guide_'+short];
+  if(short==='kirsch'||short==='kriek')aliases.push('amw:brew_'+short,...Array.from({length:5},(_,i)=>entry.id+'_q'+(i+2)));
+  LOCALES.forEach((locale,index)=>{
+   for(const alias of aliases)if(alias===entry.id||Object.prototype.hasOwnProperty.call(payload.names[locale],alias))payload.names[locale][alias]=reviewed.names[index];
+  });
+ }
+ return payload;
+}
+
 // Each row is one paragraph, in Simplified Chinese, Traditional Chinese, English.
 const COPY={
  barrel:[

@@ -15,6 +15,36 @@ test('all synthetic shaker labels are resolved and all alternatives are shown',(
 test('removed extension pages fall back to root',()=>{assert.equal(standaloneGuideView(payload,'en_US',{type:'entry',id:'gone:item'}).node.type,'root');});
 test('invalid locale and page values are bounded',()=>{assert.equal(guideLocale('invalid'),'zh_TW');const v=standaloneGuideView(payload,'en_US',{type:'category',id:'barrel_core',page:999});assert.ok(v.node.page>=0&&v.node.page<10);assert.ok(v.buttons.length<=21);});
 
+// Minimal incoming registration metadata for the four mounted AMW guide pages.
+// No author producer implementation, effects or recipes are copied into this test.
+test('reviewed AMW pages retain their icons and producer data, with distinct three-language instructions',()=>{
+ const pages=[['kirsch','barrel'],['kriek','barrel'],['sour_cherry','ingredients'],['sour_cherry_bucket','ingredients']].map(([short,category])=>({
+  source:'amw',id:'amw:guide_'+short,item:'amw:'+short,category,icon:'textures/items/guide_regression_'+short,
+  title:{zh_CN:'旧名称',zh_TW:'舊名稱',en_US:'舊名稱'},body:{zh_CN:'旧说明',zh_TW:'舊說明',en_US:'Earlier summary'},recipeIds:[]
+ }));
+ const before=JSON.stringify(pages),reviewed=buildCookeryGuidePayload({list:()=>[{source:'amw'}],allPages:()=>pages,allRecipes:()=>registry.allRecipes()});
+ const categories={kirsch:'barrel_addons',kriek:'barrel_addons',sour_cherry:'plants',sour_cherry_bucket:'juices'};
+ for(const page of pages){
+  const entry=reviewed.entries.find(row=>row.id===page.item);
+  assert.equal(entry.category,categories[page.item.slice(4)]);assert.equal(entry.icon,page.icon);
+  for(const locale of GUIDE_LANGUAGES){
+   const view=standaloneGuideView(reviewed,locale,{type:'entry',id:entry.id});
+   assert.equal(view.title.replace(/§./g,''),reviewed.names[locale][entry.id]);
+   assert.ok(entry.mechanicsByLocale[locale].every(line=>line.length>0&&line.length<=512));
+   assert.ok(!view.body.includes(page.body[locale]));
+   if(locale==='en_US')assert.ok(!/[\u4e00-\u9fff]/u.test(view.title+' '+view.body));
+  }
+ }
+ assert.equal(reviewed.names.en_US['amw:kirsch'],'Kirsch');assert.equal(reviewed.names.en_US['amw:kriek'],'Kriek');
+ for(const locale of GUIDE_LANGUAGES){
+  const fruit=reviewed.entries.find(entry=>entry.id==='amw:sour_cherry').mechanicsByLocale[locale].join('\n');
+  const juice=reviewed.entries.find(entry=>entry.id==='amw:sour_cherry_bucket').mechanicsByLocale[locale].join('\n');
+  assert.notEqual(fruit,juice);
+  assert.ok(fruit.includes(locale==='en_US'?'Harvesting removes':locale==='zh_CN'?'采收会移除':'採收會移除'));
+ }
+ assert.equal(JSON.stringify(pages),before,'Shared guide adaptation must leave the registered producer pages intact');
+});
+
 // The reported World Liquor page, expressed as registration data, not a second
 // imported addon implementation. Actual companion payload is checked separately.
 const sourceId='guide_regression',iceId=sourceId+':ice_tea_q1',iceRecipe={id:sourceId+':barrel/ice_tea',kind:'barrel',title:{zh_TW:'勁涼冰紅茶',zh_CN:'劲凉冰红茶',en_US:'Iced Tea'},fluid:'minecraft:water',ingredients:[['minecraft:crimson_roots'],['minecraft:sugar'],['minecraft:ice']],carrier:N+'empty_bottle',unitTime:2400,output:{byQuality:Array.from({length:6},(_,i)=>sourceId+':ice_tea_q'+(i+1))},source:sourceId};

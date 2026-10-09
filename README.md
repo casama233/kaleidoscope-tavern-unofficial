@@ -1,4 +1,4 @@
-## Current maintained baseline: 0.6.136
+## Current maintained baseline: 0.6.137
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -6,9 +6,9 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) rewrites all three languages, keeps complete preparation details on demand and shares the same view through the optional Cookery entrance. Pending PR302 gameplay is preserved separately and is not included.
+- [T137 complete-family guide](docs/RELEASE-NOTES-0.6.137.md) retains the three-language revision and completes four reviewed AMW entries found in the installed family. Complete preparations remain available on demand through the shared independent/Cookery view. Pending PR302 gameplay is preserved separately and is not included.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.136**, World Liquor **0.1.113** and Grilling **2.8.121**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.137**, World Liquor **0.1.114** and Grilling **2.8.121**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.

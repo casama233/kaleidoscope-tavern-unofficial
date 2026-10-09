@@ -6134,6 +6134,42 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.137",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+      "files": {
+        "runtime/BP/scripts/data/guide-copy.js": {
+          "before": "413497e76579b9f183eb82f66bd84d0e8a2b2731f932e90b6550d35db8f7ac8e",
+          "after": "d84a31ecc049932988782ab457e09d2b79114702259b4c84aaeb3e6e45feb2e9",
+          "reason": "T137 owned concise three-language copy and names for exactly four AMW guide entries found in the complete-family projection; private author source, gameplay recipes and effects remain unchanged. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.137.md.",
+          "reverseOps": [
+            [
+              7,
+              42,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/guide-catalog.js": {
+          "before": "672a6a9d959e7adc467fb308f4e35d87054c3a0a8b6016b9823849fc3a1226ba",
+          "after": "ec5ad2b06727b19c87c1cc970072f15383ba248c3cbf12f5e3114a1ddaf0b7f2",
+          "reason": "T137 applies the four explicitly reviewed addon entry copies through Tavern shared projection before existing navigation, without changing recipe, icon, food or preparation records. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.137.md.",
+          "reverseOps": [
+            [
+              2,
+              3,
+              "import {applyTavernGuideCopy} from './guide-copy.js';\n"
+            ],
+            [
+              143,
+              144,
+              " const result=applyTavernGuideCopy(organizeGuideNavigation(payload));\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

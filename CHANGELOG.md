@@ -59,3 +59,8 @@ The immutable runtime identities are in release-history.json. Detailed existing 
 - Rewrite the three-language Tavern guide following the original Bedrock author’s short paragraphs and preparation links. Preserve the seven entrances and complete source recipes; correct operation instructions and formatting.
 - Use the same Tavern projection and UI for the optional Cookery chapter through registered G121 hooks, with a bounded handoff and original-flow fallback.
 - Retain the T132 runtime baseline. The failed unmerged T135 persistence work remains separate; client reading and rendering acceptance are pending.
+
+## 0.6.137
+
+- Complete the installed-family guide with four reviewed AMW editorial corrections: English wine names, distinct cherry/juice instructions and source-correct regrowth. Preserve producer gameplay and all preparation records.
+- Keep T136 guide/bridge behavior; pair W114 and verify the exact 227-entry Native Cookery chapter.

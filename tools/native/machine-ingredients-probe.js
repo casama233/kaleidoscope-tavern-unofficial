@@ -11,9 +11,9 @@ const definitions=[{kind:'pressing_tub',position:{x:8,y:300,z:8}},{kind:'barrel'
 function shape(item){
  if(!item)return null;const potion=item.getComponent('minecraft:potion');
  return {id:item.typeId,count:item.amount,name:item.nameTag,lore:item.getRawLore(),destroy:item.getCanDestroy(),place:item.getCanPlaceOn(),keep:item.keepOnDeath,lock:item.lockMode,
-  properties:item.getDynamicPropertyIds().sort().map(id=>[id,item.getDynamicProperty(id)]),damage:item.getComponent('minecraft:durability')?.damage,
-  enchantments:item.getComponent('minecraft:enchantable')?.getEnchantments().map(e=>[e.type.id,e.level]).sort((a,b)=>a[0].localeCompare(b[0])),
-  potion:potion?{effect:potion.potionEffectType.id,delivery:potion.potionDeliveryType.id}:undefined};
+  properties:item.getDynamicPropertyIds().sort().map(id=>[id,item.getDynamicProperty(id)]),damage:item.getComponent('minecraft:durability')?.damage??null,
+  enchantments:item.getComponent('minecraft:enchantable')?.getEnchantments().map(e=>[e.type.id,e.level]).sort((a,b)=>a[0].localeCompare(b[0]))??null,
+  potion:potion?{effect:potion.potionEffectType.id,delivery:potion.potionDeliveryType.id}:null};
 }
 function decorate(item,name){item.nameTag=name;item.setLore([{rawtext:[{text:'Native machine '},{text:name}]}]);item.setCanDestroy(['minecraft:stone']);item.setCanPlaceOn(['minecraft:glass']);item.keepOnDeath=true;item.lockMode=ItemLockMode.inventory;return item;}
 function originals(kind){

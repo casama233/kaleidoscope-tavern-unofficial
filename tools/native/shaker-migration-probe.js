@@ -36,7 +36,8 @@ function observed(item){
 function portableIngredients(container,phase){
  if(phase==='first'){
   let state=emptyShaker();
-  for(const [index,type]of ['kaleidoscope_tavern:plum_wine_q4','minecraft:sugar','minecraft:sugar'].entries()){
+  // Repeated legal inputs retain distinct names/lore; sugar is not a Java shaker ingredient.
+  for(const [index,type]of Array(3).fill('kaleidoscope_tavern:plum_wine_q4').entries()){
    const input=makeStack(type,1);input.nameTag='Native ingredient '+index;
    input.setLore([{text:'Keep the original note '+index}]);
    input.setCanPlaceOn(['minecraft:stone']);

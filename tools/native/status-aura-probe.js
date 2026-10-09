@@ -9,6 +9,12 @@ const check=(ok,message)=>{if(!ok)throw Error(message);};
 export async function runStatusAuraProbe({phase,dimension:d,out}){
  check(phase==='first'||phase==='restart','unknown status aura probe phase');
  d.runCommand('fill -20 299 -20 -14 299 -14 minecraft:stone');
+ // Keep the native wolf's AI inside the elevated persistence scene while the
+ // parent observer finishes and waits after restart. Do not refresh its effect.
+ d.runCommand('fill -20 300 -20 -14 301 -20 minecraft:stone');
+ d.runCommand('fill -20 300 -14 -14 301 -14 minecraft:stone');
+ d.runCommand('fill -20 300 -19 -20 301 -15 minecraft:stone');
+ d.runCommand('fill -14 300 -19 -14 301 -15 minecraft:stone');
  let wolf=d.getEntities({type:'minecraft:wolf',tags:['qa:aura_native']})[0];
  if(phase==='first'){
   check(!wolf,'stale first-world observer');wolf=d.spawnEntity('minecraft:wolf',{x:-16.5,y:300,z:-16.5});wolf.addTag('qa:aura_native');

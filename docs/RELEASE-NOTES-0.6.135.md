@@ -44,6 +44,34 @@ format portable regression and all 13 existing Ardent fixture cases pass separat
 Final T135/W112 canonical CI, paired native first/restart evidence and archive
 verification are pending for the exact final source commits.
 
+The first T135 [canonical run 37871245685](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37871245685)
+passed 12 jobs, including package, audit, foundation and both visual source
+checks. Its isolated native inventory save/restart also passed. The complete
+paired observer then rejected its second ingredient, `minecraft:sugar`, with
+`NOT_SHAKER_INGREDIENT`: sugar is not an accepted original cocktail ingredient.
+The observer now uses three accepted stackable plum-wine inputs, retaining
+distinct names and lore, Adventure lists, bidirectional native equality,
+independent-clone and normal-restart assertions. No production recipe, runtime
+bytes, frozen version, archive hash or acceptance check is changed. This corrects
+the observer's input; it does not count the unfinished portable, machine or aura
+scenes as passed. Those scenes still require the corrected canonical run.
+
+Review of the still-unreached observer scenes also found two fixture issues.
+Absent durability, enchantment and potion components now use explicit `null`
+in the machine snapshot, so its persisted canonical text is valid JSON for the
+restart reader; every metadata/count comparison remains intact. A two-block-high
+perimeter keeps the saved aura wolf on its existing elevated platform while its
+native AI and effects continue normally. The observer does not teleport it,
+reapply its effect or manufacture an appearance lease after restart. These are
+observer-only corrections; they do not alter packaged gameplay or certify the
+scenes before the corrected native run completes.
+
+The paired W112 [run 37871248554](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/actions/runs/37871248554)
+passed all four jobs against T135 peer `10453aea0fedc4d054562239d9c31daf138c24a9`.
+It verified the exact W112 archive and the combined 1,343-model allocation with
+zero errors. This is package/source evidence and does not replace the pending
+native paired scenes or human client acceptance.
+
 All T134 limits remain: pure camera roll, true through-wall outlines, whole-player
 renderer hiding/target clearing, native multiline editing, three arbitrary
 decorated nonstackable shaker inputs, dropped-shaker display contexts, native

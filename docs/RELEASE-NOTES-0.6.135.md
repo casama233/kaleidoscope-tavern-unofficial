@@ -66,6 +66,22 @@ reapply its effect or manufacture an appearance lease after restart. These are
 observer-only corrections; they do not alter packaged gameplay or certify the
 scenes before the corrected native run completes.
 
+The next [run 37872094738](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37872094738)
+completed the three-input portable native-equality/independent-clone case and
+both native machine writes (tub `[11]`, barrel `[3,5,1,1]`, schema 2). It then
+stopped before applying the aura effect because the wolf's corner chunk was not
+loaded and ticking. The entire enclosed aura scene is now translated into the
+loaded `(-1,-1)` chunk, still outside Vision's range; all lifecycle assertions
+remain unchanged. No paired restart is credited to that failed run.
+
+Machine observations now retain event `kind: case` and identify the device with
+`machineKind`. The evidence recorder validates the complete closed set of
+phase-specific cases and their asserted fields, binds report observations to
+the original log JSON, and keeps exact source/overlay file-set and byte checks.
+CI runs its focused rejection cases before BDS and records new evidence only
+after both native phases succeed. New files live in the disposable run directory
+and refuse overwrites; the original dated native evidence remains unchanged.
+
 The paired W112 [run 37871248554](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/actions/runs/37871248554)
 passed all four jobs against T135 peer `10453aea0fedc4d054562239d9c31daf138c24a9`.
 It verified the exact W112 archive and the combined 1,343-model allocation with

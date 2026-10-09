@@ -448,6 +448,8 @@ jobs:
           ref: ed78beed3204a8a9e3c3a83d48350fb0e84ba516
           path: .source-check/world-liquor-native
           persist-credentials: false
+      - name: Reject incomplete or relabeled native evidence
+        run: python tools/native/test_record_shaker_migration.py
       - name: Native isolated inventory save/restart, no player sessions
         run: python tools/pickup/run_native_smoke.py --work "$RUNNER_TEMP/pickup-native"
       - name: Complete Tavern and World Liquor load, migration, effects and restart, zero players
@@ -460,6 +462,11 @@ jobs:
             --probe tools/native/shaker-migration-probe.js \
             --port 27200
           git diff --exit-code -- runtime/
+      - name: Bind complete native observations to exact source and overlay bytes
+        run: |
+          python tools/native/record_shaker_migration.py \
+            --work "$RUNNER_TEMP/t133-paired-native" \
+            --liquor .source-check/world-liquor-native
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -471,6 +478,8 @@ jobs:
             ${{ runner.temp }}/t133-paired-native/first.log
             ${{ runner.temp }}/t133-paired-native/restart.log
             ${{ runner.temp }}/t133-paired-native/native-living-report.json
+            ${{ runner.temp }}/t133-paired-native/native-shaker-migration-evidence.json
+            ${{ runner.temp }}/t133-paired-native/native-shaker-migration-evidence.log
   tap-carriers:
     needs: impact
     if: needs.impact.outputs.runtime == 'true'

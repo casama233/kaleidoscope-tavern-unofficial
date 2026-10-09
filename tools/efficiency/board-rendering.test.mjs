@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {Dimension,counters,resetCounters} from './mock-server.mjs';
 import {renderBoardText} from '../../runtime/BP/scripts/bedrock/board-text.js';
+import {boardAdvance,boardLayoutOptions,splitBoardLines} from '../../runtime/BP/scripts/core/board-layout.js';
 const N='kaleidoscope_tavern';
 const read=path=>JSON.parse(fs.readFileSync(new URL('../../'+path,import.meta.url)));
 const definition=read('runtime/BP/entities/board_glyph_visual.json')['minecraft:entity'].description.properties;
@@ -18,6 +19,34 @@ function glyphPoint(e){
  const theta=-e.rotation.y*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
  return [e.location.x+c*-x+s*z,e.location.y+y,e.location.z-s*-x+c*z];
 }
+test('a first overflowing separator is consumed without moving an earlier word or indenting the next row',()=>{
+ const options=boardLayoutOptions('chalk',true);
+ // Mojang 1.21.1 StringSplitter.LineBreakFinder.accept records U+0020 before
+ // testing maxWidth; splitLines then consumes that separator, not an older one.
+ const prefixes=['가'.repeat(29),'中 '.repeat(4)+'中'.repeat(20)];
+ for(const prefix of prefixes){
+  assert.equal([...prefix].reduce((width,ch)=>width+boardAdvance(ch),0),232);
+  const wrapped=splitBoardLines(prefix+' B',options).lines;
+  assert.deepEqual(wrapped.map(line=>line.chars.join('')),[prefix,'B']);
+  assert.deepEqual(wrapped.map(line=>line.paragraphEnd),[false,true]);
+  assert.deepEqual(splitBoardLines(prefix+'\n B',options).lines.map(line=>line.chars.join('')),[prefix,' B'],'explicit paragraph indentation is retained');
+  const final=splitBoardLines(prefix+' ',options).lines;
+  assert.equal(final.length,1);assert.equal(final[0].paragraphEnd,true,'a consumed final separator does not justify the last paragraph line');
+  const d=new Dimension();renderBoardText(d,{...base,large:true},{...data,text:prefix+' B'},null,'separator');
+  const b=[...d.entities.values()].find(e=>e.getProperty(N+':char_0')===66);
+  assert.equal(b.getDynamicProperty('kt:writingBoard/anchor'),'separator|1|0');
+  close(glyphPoint(b),[21.892,-.381,40.92]);
+ }
+});
+test('a separator at index zero remains a break point under pixel width and the small-board capacity rule',()=>{
+ for(const [large,word]of [[true,'가'.repeat(29)],[false,'ABCDEFGHIJ']]){
+  const options=boardLayoutOptions('chalk',large),wrapped=splitBoardLines(' '+word,options);
+  assert.deepEqual(wrapped.lines.map(line=>line.chars.join('')),['',word]);
+  assert.deepEqual(wrapped.lines.map(line=>line.paragraphEnd),[false,true]);
+  assert.equal(wrapped.lineCount,2);assert.equal(wrapped.overflow,false);
+  assert.deepEqual(splitBoardLines(word,options).lines.map(line=>line.chars.join('')),[word],'the complete word still fits the unchanged capacity');
+ }
+});
 test('black glowing board keeps black foreground and original north-wall pen origin',()=>{
  const d=new Dimension();renderBoardText(d,base,data,null,'black');
  const [e]=d.entities.values();assert.equal(d.entities.size,1);

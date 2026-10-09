@@ -1,5 +1,9 @@
 # Maintained changes
 
+## 0.6.141
+
+完整承接已發布 T140 的四頁 AMW 指南、三語七入口及共用 Cookery 投影；修正板面溢出／index 0 空格換行、雪克杯原生 metadata 與 fresh amount 手勢，配套 W118 LivingEntity 類別修補及 G122。既有試驗來源回歸保留，新候選原生、完整 CI、真人、私人家族與 LIVE 分別驗證；不覆寫主線 T140 note／history。見 [本版說明](docs/RELEASE-NOTES-0.6.141.md)。
+
 ## 0.6.139
 
 整合已發布的三語指南／共享 Cookery 入口與固定 T138 的光效時計、重啟、原料保存、倒轉及視覺沉浸修補；配套 W116／G122。歷史相同版號的不同 trial 原值保留，使用新身份。 見 [本版說明](docs/RELEASE-NOTES-0.6.139.md)。

@@ -11,14 +11,56 @@ const definition=read('runtime/BP/entities/board_glyph_visual.json')['minecraft:
 const base={kind:'chalk',large:false,facing:'north',root:{x:20,y:-2,z:40}};
 const data={text:'A',color:'black',glowing:true,alignment:'left',verticalAlignment:'top'};
 const close=(got,wanted)=>got.forEach((v,i)=>assert.ok(Math.abs(v-wanted[i])<1e-10,`${got} != ${wanted}`));
-// This transform is the established native X-reflection/entity-yaw frame,
-// independently applied to properties emitted by the production adapter.
-function glyphPoint(e){
+// Apply model X reflection and positive native entity yaw to the emitted pose.
+// Literal Java face/pen expectations below keep this separate from a round trip.
+// Algebraic resource checks still do not prove rendered-client acceptance.
+function glyphPoint(e,vertex=[0,0,0]){
  const scale=e.getProperty(N+':font_scale')/16;
- const [x,y,z]=[0,1,2].map(i=>e.getProperty(N+':x_'+i)*scale);
- const theta=-e.rotation.y*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
+ const [x,y,z]=[0,1,2].map(i=>(e.getProperty(N+':x_'+i)+vertex[i])*scale);
+ const theta=e.rotation.y*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
  return [e.location.x+c*-x+s*z,e.location.y+y,e.location.z-s*-x+c*z];
 }
+test('four chalk faces keep ordered 酸梅湯 inside their original board rectangles',()=>{
+ // Java ChalkboardBlockEntityRender has E x=.08, W x=.92, S z=.08,
+ // N z=.92. The retained two-half small-board model spans [0,1] across
+ // its face and [.125,1.875] vertically; the surface is 1/16 block thick.
+ // Original CJK advances are 9 pixels. Three centred characters start at
+ // -13.5/-4.5/4.5; middle positioning gives local pen Y=1.043.
+ const cases=[
+  {facing:'north',axis:2,surface:40.9375,normal:-1,points:[[20.662,-.957,40.92],[20.554,-.957,40.92],[20.446,-.957,40.92]]},
+  {facing:'east',axis:0,surface:20.0625,normal:1,points:[[20.08,-.957,40.662],[20.08,-.957,40.554],[20.08,-.957,40.446]]},
+  {facing:'south',axis:2,surface:40.0625,normal:1,points:[[20.338,-.957,40.08],[20.446,-.957,40.08],[20.554,-.957,40.08]]},
+  {facing:'west',axis:0,surface:20.9375,normal:-1,points:[[20.92,-.957,40.338],[20.92,-.957,40.446],[20.92,-.957,40.554]]},
+ ];
+ const geometry=read('runtime/RP/models/entity/board_glyph_line.geo.json')['minecraft:geometry'][0];
+ const quad=geometry.bones.find(b=>b.name==='glyph').cubes[0];
+ const corners=[quad.origin,[quad.origin[0]+quad.size[0],quad.origin[1],quad.origin[2]],
+  [quad.origin[0],quad.origin[1]+quad.size[1],quad.origin[2]],quad.origin.map((v,i)=>v+quad.size[i])];
+ for(const scene of cases){
+  const d=new Dimension();renderBoardText(d,{...base,facing:scene.facing},{...data,text:'酸梅湯',color:'white',glowing:false,alignment:'center',verticalAlignment:'middle'},null,'rectangle');
+  const glyphs=[...d.entities.values()].sort((a,b)=>a.getDynamicProperty('kt:writingBoard/anchor').localeCompare(b.getDynamicProperty('kt:writingBoard/anchor')));
+  assert.equal(glyphs.map(e=>String.fromCodePoint(e.getProperty(N+':char_0'))).join(''),'酸梅湯');
+  glyphs.forEach((e,i)=>{
+   close(glyphPoint(e),scene.points[i]);
+   for(const vertex of corners){
+    const p=glyphPoint(e,vertex),tangent=scene.axis===0?2:0;
+    assert.ok(Math.abs((p[scene.axis]-scene.surface)*scene.normal-.0175)<1e-10,'ink stays just in front of the original face');
+    assert.ok(p[tangent]>=base.root[tangent===0?'x':'z']&&p[tangent]<=base.root[tangent===0?'x':'z']+1,'glyph remains inside the board width');
+    assert.ok(p[1]>=base.root.y+.125&&p[1]<=base.root.y+1.875,'glyph remains inside the board height');
+   }
+  });
+ }
+});
+test('the next board maintenance rebuilds saved version60 glyphs with the corrected pose',()=>{
+ const d=new Dimension(),info={...base,facing:'east'},text={...data,text:'酸梅湯',color:'white',glowing:false,alignment:'center',verticalAlignment:'middle'};
+ const old=d.spawnEntity(N+':board_glyph_visual',{x:20.5,y:-1.5,z:40.5},{initialRotation:-90});
+ old.setDynamicProperty('kt:writingBoard/anchor','upgrade|0|0');
+ old.setDynamicProperty('kt:writingBoard/signature',JSON.stringify({version:60,cp:37240,location:{x:20.08,y:-.957,z:40.662},yaw:-90,scale:.012,color:10066329,glowing:false}));
+ assert.equal(renderBoardText(d,info,text,null,'upgrade'),true);
+ assert.equal(old.isValid,false);assert.equal(d.entities.size,3);
+ for(const e of d.entities.values())assert.equal(JSON.parse(e.getDynamicProperty('kt:writingBoard/signature')).version,61);
+ assert.equal(renderBoardText(d,info,text,null,'upgrade'),false,'the corrected glyphs settle without repeated replacement');
+});
 test('a first overflowing separator is consumed without moving an earlier word or indenting the next row',()=>{
  const options=boardLayoutOptions('chalk',true);
  // Mojang 1.21.1 StringSplitter.LineBreakFinder.accept records U+0020 before

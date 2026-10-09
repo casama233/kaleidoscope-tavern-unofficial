@@ -9,10 +9,13 @@ import copy
 import json
 from pathlib import Path
 import shutil
+import sys
 import uuid
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+sys.path.insert(0, str(HERE.parent))
+from native_input_bindings import scoped_input
 PIN = "46ba6ea985fb5a92d79a9419198f10dda14c199d"
 KINDS = {"sandwich": 320, "small": 350, "large": 1500}
 TITLE_PREFIX = "KT client probe / "
@@ -28,21 +31,6 @@ def dump(path, value):
 def predicate(kind):
     return (f"((#kt_probe_title = '{TITLE_PREFIX}{kind}') and "
             f"(#kt_probe_field = '{FIELD}'))")
-
-
-def guards(expression):
-    # The native common edit box already binds content only while visible.
-    # Add guards after its original bindings instead of replacing that array.
-    result = [
-        {"binding_name": "#title_text", "binding_name_override": "#kt_probe_title"},
-        {"binding_type": "collection", "binding_collection_name": "custom_form",
-         "binding_name": "#custom_text", "binding_name_override": "#kt_probe_field"},
-    ]
-    for target in ("#visible", "#enabled", "#focus_enabled"):
-        selected = expression if target == "#visible" else f"({expression} and $enabled)"
-        result.append({"binding_type": "view", "source_property_name": selected,
-                       "target_property_name": target})
-    return result
 
 
 def candidate_ui(root=ROOT):
@@ -67,12 +55,7 @@ def candidate_ui(root=ROOT):
     for kind in ("foreign", *KINDS):
         key = "kt_probe_" + kind
         base = "settings_common.option_text_edit_control" if kind == "foreign" else "common.scrollable_multiline_text_edit_box"
-        node = {
-            "visible": "#visible", "enabled": "#enabled", "focus_enabled": "#focus_enabled",
-            "$text_edit_box_binding_condition": "visible",
-            "modifications": [{"array_name": "bindings", "operation": "insert_back",
-                               "value": guards(f"(not {owned})" if kind == "foreign" else predicate(kind))}],
-        }
+        node = scoped_input(reference,base,f"(not {owned})" if kind == "foreign" else predicate(kind),'#kt_probe')
         if kind != "foreign":
             node.update({
                 "size": ["100%", 120], "max_length": KINDS[kind],

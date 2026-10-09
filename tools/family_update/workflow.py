@@ -74,17 +74,31 @@ def required_ci_checks(key):
 
 def runtime_ci_conservation(key, source, merge):
     """Reuse gameplay only across classified family/prose inputs, never exports."""
-    assert key == 'tavern', 'Runtime CI reuse is currently limited to Tavern'
+    assert key in {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
     root = SOURCES[key]
     assert git(root, 'merge-base', merge, source['commit']) == merge, 'Runtime CI PR is not an ancestor'
-    for path in ['baseline.json', 'tools/ci_impact.py']:
-        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime baseline or impact classifier changed'
+    protected = ['baseline.json', 'tools/ci_impact.py'] if key == 'tavern' else ['baseline.json', 'tools', '.github/workflows']
+    for path in protected:
+        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), f'Runtime CI protected input changed: {path}'
     baseline = json.loads(git(root, 'show', source['commit']+':baseline.json'))
     for path in baseline['runtime'].values():
         assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime exports changed after successful CI'
     paths = git(root, 'diff', '--no-renames', '--name-only', merge, source['commit'], '--').splitlines()
-    assert all(classify_path(path) in ['family', 'docs'] for path in paths), 'Runtime CI inputs changed after successful CI'
-    return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_impact_classifier': True}
+    if key == 'tavern':
+        assert all(classify_path(path) in ['family', 'docs'] for path in paths), 'Runtime CI inputs changed after successful CI'
+        return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_impact_classifier': True}
+    allowed = {'README.md', 'README.zh-TW.md', 'docs/PARITY-MATRIX.md', 'docs/BUGS.md'}
+    assert set(paths) <= allowed, 'Only current status prose may reuse Grilling or World Liquor runtime CI'
+    return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_tools': True, 'unchanged_workflows': True}
+
+
+def runtime_ci_current_checks(key):
+    """The current documentation PR must pass its own existing required jobs."""
+    return {
+        'tavern': {'impact', 'baseline'},
+        'grilling': {'baseline', 'bridge'},
+        'world-liquor': {'baseline', 'bridge', 'package', 'wall-record'},
+    }[key]
 
 
 def actual_ci_records(repository, head):
@@ -100,12 +114,12 @@ def actual_ci_records(repository, head):
     assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), 'CI checks are incomplete or failed'
     statuses = gh_json(f'repos/{repository}/commits/{head}/status')
     assert not statuses['statuses'] or statuses['state'] == 'success', 'Commit status failed'
-    return ([{**{field: c.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at']}, 'app_slug': c['app']['slug']} for c in checks],
+    return ([{**{field: c.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at', 'head_sha']}, 'app_slug': c['app']['slug']} for c in checks],
             [{field: status.get(field) for field in ['context', 'state', 'target_url']} for status in statuses['statuses']])
 
 
 def runtime_ci_result(key, number, source):
-    assert key == 'tavern' and type(number) is int and number > 0
+    assert key in {'tavern', 'grilling', 'world-liquor'} and type(number) is int and number > 0
     repository = source['repository']
     pr = gh_json(f'repos/{repository}/pulls/{number}')
     assert pr['merged'] is True and pr['base']['repo']['full_name'] == repository and pr['base']['ref'] == 'main', 'Runtime CI PR must be merged on canonical main'
@@ -123,6 +137,7 @@ def runtime_ci_result(key, number, source):
 def validate_ci_rows(rows, sources, runtime_ci_references=None):
     if runtime_ci_references is None:
         runtime_ci_references = CONFIG.get('runtime_ci_pull_requests', {})
+    assert set(runtime_ci_references) <= {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
     assert len(rows) == len(SOURCES) and {row['source'] for row in rows} == set(SOURCES), 'CI evidence omits or duplicates a source'
     for row in rows:
         key = row['source']
@@ -132,12 +147,16 @@ def validate_ci_rows(rows, sources, runtime_ci_references=None):
         successful = {check['name'] for check in checks if check['conclusion'] == 'success' and check['app_slug'] == 'github-actions'}
         reused = row.get('runtime_ci')
         if reused is not None:
-            assert key == 'tavern' and reused['number'] == runtime_ci_references.get(key), 'Unconfigured runtime CI proof'
+            assert key in {'tavern', 'grilling', 'world-liquor'} and type(reused['number']) is int and reused['number'] > 0 and reused['number'] == runtime_ci_references.get(key), 'Unconfigured runtime CI proof'
             assert reused['source'] == key and reused['repository'] == sources[key]['repository'], 'Wrong runtime CI source'
             assert reused['conservation'] == runtime_ci_conservation(key, sources[key], reused['merge_commit']), 'Runtime conservation evidence changed'
             assert git(SOURCES[key], 'rev-parse', reused['merge_commit']+'^{tree}') == reused['source_tree'] == git(SOURCES[key], 'rev-parse', reused['head']+'^{tree}'), 'Reused CI tree differs from the runtime merge'
-            assert {'impact', 'baseline'} <= successful, 'Current metadata checks must succeed independently'
+            assert runtime_ci_current_checks(key) <= successful, 'Current metadata checks must succeed independently'
             prior = reused['checks']
+            if key != 'tavern':
+                assert git(SOURCES[key], 'rev-parse', row['head']+'^{tree}') == sources[key]['tree'], 'Current documentation CI tree differs from the source'
+                assert all(c.get('head_sha') == row['head'] for c in checks), 'Current documentation CI head changed'
+                assert all(c.get('head_sha') == reused['head'] for c in prior), 'Reused runtime CI head changed'
             assert all(c['status'] == 'completed' and c['conclusion'] in ['success', 'skipped', 'neutral'] for c in prior), 'Reused runtime checks failed or incomplete'
             prior_success = {c['name'] for c in prior if c['conclusion'] == 'success' and c['app_slug'] == 'github-actions'}
             assert not (required_ci_checks(key) - prior_success), 'Reused runtime checks missing required success'
@@ -175,7 +194,7 @@ def verify_ci():
     build = read(R / 'build-evidence.json')
     configured = CONFIG.get('pull_requests', {})
     assert set(configured) == set(SOURCES), 'Configure one current merged PR for each canonical public source'
-    assert set(CONFIG.get('runtime_ci_pull_requests', {})) <= {'tavern'}, 'Unsupported runtime CI reuse source'
+    assert set(CONFIG.get('runtime_ci_pull_requests', {})) <= {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
     path = R / 'ci-evidence.json'
     if path.exists():
         proof = read(path)

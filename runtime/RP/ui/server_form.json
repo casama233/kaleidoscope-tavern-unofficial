@@ -26,184 +26,352 @@
     "$control_name": "server_form.kt_board_input_branches"
   },
   "kt_board_input_foreign@settings_common.option_text_edit_control": {
-    "visible": "#visible",
-    "enabled": "#enabled",
-    "focus_enabled": "#focus_enabled",
+    "visible": false,
+    "enabled": "$enabled",
+    "focus_enabled": true,
+    "property_bag": {
+      "#kt_board_native_enabled": "$enabled",
+      "#kt_board_native_focus": true,
+      "#kt_board_native_visible": true
+    },
     "$text_edit_box_binding_condition": "visible",
-    "modifications": [
+    "bindings": [
       {
-        "array_name": "bindings",
-        "operation": "insert_back",
-        "value": [
-          {
-            "binding_name": "#title_text",
-            "binding_name_override": "#kt_board_title"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_text",
-            "binding_name_override": "#kt_board_field"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_input_enabled",
-            "binding_name_override": "#kt_board_native_enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "(not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）')))))",
-            "target_property_name": "#visible"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#focus_enabled"
-          }
-        ]
+        "binding_type": "$text_edit_box_collection_details_binding_type",
+        "binding_collection_name": "$text_edit_box_collection_details_binding_name",
+        "binding_collection_prefix": "$text_edit_box_collection_details_binding_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      },
+      {
+        "binding_type": "$deselectable_binding_type",
+        "binding_name": "$deselectable_binding_name",
+        "binding_name_override": "#can_be_deselected"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#focus_enabled"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_type": "$store_factory_collection_details",
+        "binding_collection_name": "$store_factory_collection_name",
+        "binding_collection_prefix": "$store_factory_collection_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#kt_board_native_enabled"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#kt_board_native_focus"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#kt_board_native_visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_name": "#title_text",
+        "binding_name_override": "#kt_board_title"
+      },
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "custom_form",
+        "binding_name": "#custom_text",
+        "binding_name_override": "#kt_board_field"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))))) and #kt_board_native_visible)",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled)",
+        "target_property_name": "#enabled"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((not ((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) or (((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled) and #kt_board_native_focus)",
+        "target_property_name": "#focus_enabled"
       }
     ]
   },
   "kt_board_input_sandwich@settings_common.option_text_edit_control": {
-    "visible": "#visible",
-    "enabled": "#enabled",
-    "focus_enabled": "#focus_enabled",
+    "visible": false,
+    "enabled": "$enabled",
+    "focus_enabled": true,
+    "property_bag": {
+      "#kt_board_native_enabled": "$enabled",
+      "#kt_board_native_focus": true,
+      "#kt_board_native_visible": true
+    },
     "$text_edit_box_binding_condition": "visible",
-    "modifications": [
+    "bindings": [
       {
-        "array_name": "bindings",
-        "operation": "insert_back",
-        "value": [
-          {
-            "binding_name": "#title_text",
-            "binding_name_override": "#kt_board_title"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_text",
-            "binding_name_override": "#kt_board_field"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_input_enabled",
-            "binding_name_override": "#kt_board_native_enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "(((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）')))",
-            "target_property_name": "#visible"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#focus_enabled"
-          }
-        ]
+        "binding_type": "$text_edit_box_collection_details_binding_type",
+        "binding_collection_name": "$text_edit_box_collection_details_binding_name",
+        "binding_collection_prefix": "$text_edit_box_collection_details_binding_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      },
+      {
+        "binding_type": "$deselectable_binding_type",
+        "binding_name": "$deselectable_binding_name",
+        "binding_name_override": "#can_be_deselected"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#focus_enabled"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_type": "$store_factory_collection_details",
+        "binding_collection_name": "$store_factory_collection_name",
+        "binding_collection_prefix": "$store_factory_collection_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#kt_board_native_enabled"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#kt_board_native_focus"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#kt_board_native_visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_name": "#title_text",
+        "binding_name_override": "#kt_board_title"
+      },
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "custom_form",
+        "binding_name": "#custom_text",
+        "binding_name_override": "#kt_board_field"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) and #kt_board_native_visible)",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled)",
+        "target_property_name": "#enabled"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((((#kt_board_title = '§r§0§rStanding Board') and (#kt_board_field = 'Board text (up to 8 lines)')) or ((#kt_board_title = '§r§0§r立式告示牌') and (#kt_board_field = '黑板文字（最多 8 行）'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled) and #kt_board_native_focus)",
+        "target_property_name": "#focus_enabled"
       }
     ],
     "max_length": 640
   },
   "kt_board_input_small@settings_common.option_text_edit_control": {
-    "visible": "#visible",
-    "enabled": "#enabled",
-    "focus_enabled": "#focus_enabled",
+    "visible": false,
+    "enabled": "$enabled",
+    "focus_enabled": true,
+    "property_bag": {
+      "#kt_board_native_enabled": "$enabled",
+      "#kt_board_native_focus": true,
+      "#kt_board_native_visible": true
+    },
     "$text_edit_box_binding_condition": "visible",
-    "modifications": [
+    "bindings": [
       {
-        "array_name": "bindings",
-        "operation": "insert_back",
-        "value": [
-          {
-            "binding_name": "#title_text",
-            "binding_name_override": "#kt_board_title"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_text",
-            "binding_name_override": "#kt_board_field"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_input_enabled",
-            "binding_name_override": "#kt_board_native_enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "(((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字')))",
-            "target_property_name": "#visible"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#focus_enabled"
-          }
-        ]
+        "binding_type": "$text_edit_box_collection_details_binding_type",
+        "binding_collection_name": "$text_edit_box_collection_details_binding_name",
+        "binding_collection_prefix": "$text_edit_box_collection_details_binding_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      },
+      {
+        "binding_type": "$deselectable_binding_type",
+        "binding_name": "$deselectable_binding_name",
+        "binding_name_override": "#can_be_deselected"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#focus_enabled"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_type": "$store_factory_collection_details",
+        "binding_collection_name": "$store_factory_collection_name",
+        "binding_collection_prefix": "$store_factory_collection_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#kt_board_native_enabled"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#kt_board_native_focus"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#kt_board_native_visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_name": "#title_text",
+        "binding_name_override": "#kt_board_title"
+      },
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "custom_form",
+        "binding_name": "#custom_text",
+        "binding_name_override": "#kt_board_field"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) and #kt_board_native_visible)",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled)",
+        "target_property_name": "#enabled"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Up to 11 lines; 10 halfwidth or 7 fullwidth characters per line')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '最多 11 行；每行 10 个半角或 7 个全角字')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '最多 11 行；每行 10 個半角或 7 個全角字'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled) and #kt_board_native_focus)",
+        "target_property_name": "#focus_enabled"
       }
     ],
     "max_length": 700
   },
   "kt_board_input_large@settings_common.option_text_edit_control": {
-    "visible": "#visible",
-    "enabled": "#enabled",
-    "focus_enabled": "#focus_enabled",
+    "visible": false,
+    "enabled": "$enabled",
+    "focus_enabled": true,
+    "property_bag": {
+      "#kt_board_native_enabled": "$enabled",
+      "#kt_board_native_focus": true,
+      "#kt_board_native_visible": true
+    },
     "$text_edit_box_binding_condition": "visible",
-    "modifications": [
+    "bindings": [
       {
-        "array_name": "bindings",
-        "operation": "insert_back",
-        "value": [
-          {
-            "binding_name": "#title_text",
-            "binding_name_override": "#kt_board_title"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_text",
-            "binding_name_override": "#kt_board_field"
-          },
-          {
-            "binding_type": "collection",
-            "binding_collection_name": "custom_form",
-            "binding_name": "#custom_input_enabled",
-            "binding_name_override": "#kt_board_native_enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "(((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）')))",
-            "target_property_name": "#visible"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#enabled"
-          },
-          {
-            "binding_type": "view",
-            "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))) and $enabled and #kt_board_native_enabled)",
-            "target_property_name": "#focus_enabled"
-          }
-        ]
+        "binding_type": "$text_edit_box_collection_details_binding_type",
+        "binding_collection_name": "$text_edit_box_collection_details_binding_name",
+        "binding_collection_prefix": "$text_edit_box_collection_details_binding_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#enabled"
+      },
+      {
+        "binding_type": "$deselectable_binding_type",
+        "binding_name": "$deselectable_binding_name",
+        "binding_name_override": "#can_be_deselected"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#focus_enabled"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_type": "$store_factory_collection_details",
+        "binding_collection_name": "$store_factory_collection_name",
+        "binding_collection_prefix": "$store_factory_collection_prefix"
+      },
+      {
+        "binding_type": "$text_edit_box_enabled_binding_type",
+        "binding_collection_name": "$text_edit_box_grid_collection_name",
+        "binding_name": "$text_box_enabled_binding_name",
+        "binding_name_override": "#kt_board_native_enabled"
+      },
+      {
+        "binding_type": "none",
+        "binding_name": "$text_edit_box_focusable_binding_name",
+        "binding_name_override": "#kt_board_native_focus"
+      },
+      {
+        "binding_name": "$text_edit_visible_binding_name",
+        "binding_name_override": "#kt_board_native_visible",
+        "binding_type": "$text_edit_visible_binding_type",
+        "binding_collection_name": "$text_edit_visible_binding_collection_name"
+      },
+      {
+        "binding_name": "#title_text",
+        "binding_name_override": "#kt_board_title"
+      },
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "custom_form",
+        "binding_name": "#custom_text",
+        "binding_name_override": "#kt_board_field"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))) and #kt_board_native_visible)",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled)",
+        "target_property_name": "#enabled"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(((((#kt_board_title = '§r§0§rChalkboard') and (#kt_board_field = 'Board text (up to 11 lines)')) or ((#kt_board_title = '§r§0§r黑板内容') and (#kt_board_field = '黑板文字（最多 11 行）')) or ((#kt_board_title = '§r§0§r黑板內容') and (#kt_board_field = '黑板文字（最多 11 行）'))) and #kt_board_native_visible and $enabled and #kt_board_native_enabled) and #kt_board_native_focus)",
+        "target_property_name": "#focus_enabled"
       }
     ],
     "max_length": 3000

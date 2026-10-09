@@ -42,10 +42,10 @@ function buildLayout(info,data,key){
    const origin={x:info.root.x+.5,y:info.root.y+.5,z:info.root.z+.5};
    const dx=glyphLocation.x-origin.x,dy=glyphLocation.y-origin.y,dz=glyphLocation.z-origin.z;
    // Keep every glyph's native root at the block centre for client-local
-   // distance culling. Inverse of Bedrock's X reflection / entity-yaw transform;
+   // distance culling. Inverse of the model X reflection and positive entity yaw;
    // the existing x_0..x_2 properties carry the local model-pixel translation.
-   const localOffset=[-(Math.cos(f.r)*dx+Math.sin(f.r)*dz)/f.scale,dy/f.scale,(-Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];
-   const signature=JSON.stringify({version:60,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
+   const localOffset=[-(Math.cos(f.r)*dx-Math.sin(f.r)*dz)/f.scale,dy/f.scale,(Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];
+   const signature=JSON.stringify({version:61,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
    expected.push({anchor,signature,cp,location:origin,offset:localOffset});
   }
  }

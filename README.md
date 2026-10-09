@@ -1,8 +1,8 @@
-## Current maintained baseline: 0.6.143
+## Current maintained baseline: 0.6.144
 
-T142 / G123 / W119 is the current deployed development baseline. Its exact merged CI, native first/save/restart, full-family and saved-world evidence is indexed in [family/BASELINE-STATUS.md](family/BASELINE-STATUS.md); human client acceptance remains pending. Historical notes keep their original scope.
+The actual deployed family and its source, CI, native and saved-world evidence are indexed in [family/BASELINE-STATUS.md](family/BASELINE-STATUS.md). Human client acceptance remains pending; historical notes keep their original scope.
 
-The next repair addresses the native board input cap while retaining the single-line editor, all three guide languages and both shared entrances. See [T143 repair scope](docs/RELEASE-NOTES-0.6.143.md). Its final source, CI, client and deployment evidence is pending.
+T144 addresses the client's four duplicate board input boxes and reported board-text displacement. See [the repair scope](docs/RELEASE-NOTES-0.6.144.md); rendered input, focus and placement still require human confirmation.
 
 # Kaleidoscope Tavern (Unofficial)
 

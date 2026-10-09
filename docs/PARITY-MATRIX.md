@@ -1,6 +1,6 @@
-## 當前 T142／W119；下一輪 T143 板面修補
+## 當前板面用戶端修補：T144
 
-已合併 T142／G123／W119 的完整 CI、原生首次／保存／重啟、完整家族與 LIVE 開發部署結果見 [當前 baseline](../family/BASELINE-STATUS.md)。真人 client／production acceptance 仍待驗；以下歷史段落保留原證據身份。新板面容量修補尚未凍結，見 [T143 說明](RELEASE-NOTES-0.6.143.md)。
+實際部署來源、CI、原生／存檔證據統一見[當前基線](../family/BASELINE-STATUS.md)。T143 四個重複輸入框與板外文字是已確認真人缺陷；T144 修補見[發版說明](RELEASE-NOTES-0.6.144.md)，仍需真人確認。以下歷史段落保留原證據身份。
 
 | 範圍 | 本輪 source 修補 | 未完成／待驗 |
 | --- | --- | --- |

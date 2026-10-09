@@ -7880,6 +7880,31 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.144",
+      "files": {
+        "runtime/BP/scripts/bedrock/board-text.js": {
+          "before": "bbb7fc2ea3470f1ad3b9f0750e434cedcbfe1f6c672274577a62e2b173cd70eb",
+          "after": "77d722824b3b1f7114ecbe81a1b211c202aa99fbac1e7920e60a5e3caf62fa32",
+          "reason": "T144 positive actor-yaw inverse for board-centred glyph translation; fix east/west text displacement and reversed visual order reported by a real client. Signature61 causes normal maintenance to replace old glyph helpers while retaining original raw board data, Java face/pen positions, geometry/font, ink/outline and native-root distance. Existing four-face literal rectangle/order and saved glyph refresh regressions; rendered client pending.",
+          "reviewedPredecessorCommit": "f2e61dd4d9cb8d6eabbcdc7e9dd5c758daddda41",
+          "reviewedSourceCommit": "f73e6c5a5f6ecdb000ebc934a4ec486ee051b18d",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.144.md",
+          "reverseOps": [
+            [
+              44,
+              45,
+              "   // distance culling. Inverse of Bedrock's X reflection / entity-yaw transform;\n"
+            ],
+            [
+              46,
+              48,
+              "   const localOffset=[-(Math.cos(f.r)*dx+Math.sin(f.r)*dz)/f.scale,dy/f.scale,(-Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];\n   const signature=JSON.stringify({version:60,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -8398,6 +8423,20 @@
           "reviewedSourceCommit": "956727d8ed71f4a766f8668b680d3e9720db53be",
           "reviewDocument": "docs/RELEASE-NOTES-0.6.143.md",
           "beforeGzipBase64": "H4sIAAAAAAACA2WQ3WqEMBCF730KybUpMbuJ2lcpRcbJ2IauUaIWiuy7N/4LezPMmZkvnJMpimNWt76Bofwl39vWsfdYJvP4m8CQD3IKKmgHDQXFOsCft0Uk68JQj952wwqv++tsOxtHa+Y9yqIQRgkusc64KkLJcw1c1NIIeRcmVXpnTk8fyyCORbI1em/SVC/d58Y01pXkvqyj8hVPd0oevBIrHupzCd60ZnxQf1DTdsiGv275AU99O3oMJ/sbRzh1pwoyWXCUWHB1y5FXGQLHVAHoWlN1w5N69XcJeIl4hlx9BqfRFpghdFDZhx3sxTLrKs/mk+gZ/QOYakyl5AEAAA=="
+        }
+      }
+    },
+    {
+      "release": "0.6.144",
+      "files": {
+        "runtime/RP/ui/server_form.json": {
+          "before": "881430befc8dba36a91c20399fc43c9c243ae51ddcc97f5317cc89e2317c9de2",
+          "after": "e4282e9528952fa69b5c9cfcbbf0e741d2c47160a901d34d1c085bdbe58314f0",
+          "reason": "T144 actual client four-field/unknown-modifications repair: direct native six-root bindings and private enabled/focus/visible aliases; retain child content/placeholder, factory collection storage, original foreign widget and exact three-language title/field capacities. Do not relabel source evaluation as rendered-client acceptance. Existing scoped forms and rejected old standalone-modifications regressions cover the concrete failure.",
+          "reviewedPredecessorCommit": "f2e61dd4d9cb8d6eabbcdc7e9dd5c758daddda41",
+          "reviewedSourceCommit": "f73e6c5a5f6ecdb000ebc934a4ec486ee051b18d",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.144.md",
+          "beforeGzipBase64": "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"
         }
       }
     }

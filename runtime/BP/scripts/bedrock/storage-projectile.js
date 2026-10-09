@@ -7,6 +7,7 @@ import {check} from '../core/util.js';
 import {storageBottleItem} from '../core/holder.js';
 import {rollDrinkEffects} from '../core/drink-effects.js';
 import {applyCustomEffect} from './custom-effects.js';
+import {applyNativeStatusWithAura} from './status-aura.js';
 import {dispatchInstantHealth,captureInstantSplashPolicy} from './instant-effects.js';
 import {INSTANT_HEALTH_EFFECTS} from '../core/java-instant-effect.js';
 
@@ -59,7 +60,7 @@ function nativeRow(entity,row,factor,projectile,capturedSplashPolicy){
   entity.addEffect(row.bedrockId,1,{amplifier:row.amplifier,showParticles:true});
  }else{
   const ticks=splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
-  entity.addEffect(row.bedrockId,ticks,{amplifier:row.amplifier,showParticles:true});
+  applyNativeStatusWithAura(entity,row.bedrockId,ticks,{amplifier:row.amplifier,showParticles:true});
  }
  storageProjectileDiagnostics.nativeEffects++;return true;
 }

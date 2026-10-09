@@ -48,5 +48,8 @@ for frame in range(6):
     assert atlas.crop((x, y, x + 32, y + 32)).tobytes() == source.crop((0, frame * 32, 32, (frame + 1) * 32)).tobytes()
     texture = Image.open(RP / f'textures/kt_runtime/signature/frame_{frame}.png').convert('RGBA')
     assert texture.tobytes() == source.crop((0, frame * 32, 32, (frame + 1) * 32)).tobytes()
+from check_signature_rgb_geometry import check as check_rgb_geometry
+geometry_report = check_rgb_geometry(ROOT)
 print(json.dumps({'java_colors': 16, 'slot_controls': 51, 'slot_sprite_pixels': 'passed', 'signature_white_fallback_frames': 6,
-                  'external_rgb_overlay_contract': 'passed', 'external_texture_shading': 'flat_fallback_only', 'client_rendered': False}))
+                  'external_rgb_overlay_contract': 'passed', 'external_texture_shading': 'source_texel_geometry',
+                  'external_geometry': geometry_report, 'client_rendered': False}))

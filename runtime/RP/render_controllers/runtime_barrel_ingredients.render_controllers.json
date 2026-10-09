@@ -9,7 +9,7 @@
         }
       ],
       "textures": [
-        "Array.kind[q.property('kaleidoscope_tavern:kind')-1]"
+        "q.property('kaleidoscope_tavern:kind') == 48 ? Array.ice_grape_ticks[math.mod(math.floor(q.time_stamp), 24)] : Array.kind[q.property('kaleidoscope_tavern:kind')-1]"
       ],
       "arrays": {
         "textures": {
@@ -75,6 +75,32 @@
             "Texture.kind_59",
             "Texture.kind_60",
             "Texture.kind_61"
+          ],
+          "Array.ice_grape_ticks": [
+            "Texture.ice_tick_0",
+            "Texture.ice_tick_1",
+            "Texture.ice_tick_2",
+            "Texture.ice_tick_3",
+            "Texture.ice_tick_4",
+            "Texture.ice_tick_5",
+            "Texture.ice_tick_6",
+            "Texture.ice_tick_7",
+            "Texture.ice_tick_8",
+            "Texture.ice_tick_9",
+            "Texture.ice_tick_10",
+            "Texture.ice_tick_11",
+            "Texture.ice_tick_12",
+            "Texture.ice_tick_13",
+            "Texture.ice_tick_14",
+            "Texture.ice_tick_15",
+            "Texture.ice_tick_16",
+            "Texture.ice_tick_17",
+            "Texture.ice_tick_18",
+            "Texture.ice_tick_19",
+            "Texture.ice_tick_20",
+            "Texture.ice_tick_21",
+            "Texture.ice_tick_22",
+            "Texture.ice_tick_23"
           ]
         }
       },

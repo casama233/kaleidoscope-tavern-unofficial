@@ -5809,6 +5809,35 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.133",
+      "reviewedPredecessorCommit": "291212f58783b8a05a51fd5ac4792ccb000dc5d0",
+      "reviewedSourceCommit": "89c5ff9c52edc5829a5b860633df429229f348d9",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.133.md",
+      "files": {
+        "runtime/BP/scripts/core/native-item-storage.js": {
+          "before": "bbaf3c59d3dff483090608ed05cd82378c58556051805637b9aae3f3d0df2450",
+          "after": "c6d9450445f8c4c476fabc47f14945062edb7abd349ac4dccaef518bcf0d8c9d",
+          "reason": "A named placed shaker was rejected because equal native z/y/x and persisted x/y/z positions serialized differently. Compare finite XYZ numbers; retain ordered slot IDs, ownership/content guards and all T132 rollback changes. Client fix acceptance remains pending.",
+          "regressionTests": [
+            "tools/pickup/core.test.mjs",
+            "tools/shaker-item-retention.test.mjs"
+          ],
+          "reverseOps": [
+            [
+              11,
+              20,
+              ""
+            ],
+            [
+              34,
+              35,
+              "  check(required===1&&record?.schema===1&&record.key===key&&record.dimension===dimension.id&&same(record.position,position)&&same(record.ids,ids),'NATIVE_STORAGE_MISMATCH');\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

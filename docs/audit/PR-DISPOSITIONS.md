@@ -2,6 +2,24 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
+## T134／W111：保留並行修復後的整合候選
+
+本批來源及驗收範圍集中在 [T134 說明](../RELEASE-NOTES-0.6.134.md)。原料
+保存、機器交易、狀態粒子、草叢退出、微醺 opt-in、板面描邊、機器動畫
+與任意 RGB 明暗均進入同一候選；最終兩庫 PR／CI／archive 另補確切
+身分，不預先寫成已合併、已通過或已部署。
+
+| 承接來源 | 本輪處置 |
+| --- | --- |
+| [PR297／T132](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/297)，最終 reviewed source `727fd8853c44247ac8e2cf40faf70122b04e653b` | 保留最終修復與 XP orb／health_helper 原生觀察區分，不恢復舊的 health 假設。 |
+| [PR298／T133](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)，reviewed head `625ff769f4c656ff224314bba38d26a1ef5dacc0` | 保留有限 XYZ 逐軸比較、其餘身份／槽位守衛和回滾。整合時該 PR 仍 open／draft、尚未合入 main；原 T133 文案、notes 與歷史不改寫。 |
+| [World Liquor PR90／W110](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)，已合併來源 `387dc58ff342118d9817a8e02e9a35ffde496c62` | W111 保留作者新版 Dassai 效果、四款杯子模型／atlas、兩張物品圖及其原有歷史，再精確配對 T134。G119 內容不變。 |
+
+並行來源已佔用 T133／W110，本輪採 T134／W111，不重用版本或舊 archive。
+舊 witness 只追加後繼層。純 roll、穿牆輪廓、全身隱藏／清除仇恨、任意
+三份非堆疊原料、原生編輯器、掉落顯示上下文及 Luck 原生行為仍另追蹤。
+真人與私人完整家族／LIVE 驗收未完成；既有持續部署授權保持有效。
+
 ## T132／W109：多代理同步修復
 
 從已交付 T131 `e02c19da3a8e29d7574c5922e142ef99775dd643` 和 W108

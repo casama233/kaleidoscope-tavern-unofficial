@@ -3,6 +3,7 @@ import {parseBottle} from '../core/bottles.js';
 import {applyCustomEffect} from './custom-effects.js';
 import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
 import {dispatchInstantHealth} from './instant-effects.js';
+import {applyNativeStatusWithAura} from './status-aura.js';
 const EMPTY_BOTTLE='kaleidoscope_tavern:empty_bottle';
 export const JUICE_BUCKETS=new Set(['grape','ice_grape','gold_grape','green_grape','sweet_berries','glow_berries'].map(x=>'kaleidoscope_tavern:'+x+'_bucket'));
 const reported=new Set();
@@ -26,7 +27,7 @@ export function consumeDrink(event,rng=Math.random){
    if(!reported.has(row.effect)){reported.add(row.effect);console.warn('[Tavern C2] Not substituted: '+row.effect);}
    continue;
   }
-  try{entity.addEffect(row.bedrockId,row.ticks,{amplifier:row.amplifier,showParticles:true});effectDiagnostics.applied++;outcomes.push({effect:row.effect,status:'APPLIED',ticks:row.ticks});}
+  try{applyNativeStatusWithAura(entity,row.bedrockId,row.ticks,{amplifier:row.amplifier,showParticles:true});effectDiagnostics.applied++;outcomes.push({effect:row.effect,status:'APPLIED',ticks:row.ticks});}
   catch(error){effectDiagnostics.errors.push({effect:row.effect,error:String(error)});if(effectDiagnostics.errors.length>16)effectDiagnostics.errors.shift();outcomes.push({effect:row.effect,status:'ENGINE_REJECTED'});}
  }
  return outcomes;

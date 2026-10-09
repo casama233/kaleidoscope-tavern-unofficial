@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: c4fec47bdea93efd96e570078083730caaea8243
+          ref: 3a88ce9eb8d03124d84a43a425d8eb7800a7d949
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -198,7 +198,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: c4fec47bdea93efd96e570078083730caaea8243
+          ref: 3a88ce9eb8d03124d84a43a425d8eb7800a7d949
           path: world-liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -312,9 +312,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed World Liquor 0.1.109 pairs this Tavern 0.6.132 runtime.
+          # Reviewed World Liquor 0.1.111 pairs this Tavern 0.6.134 runtime.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: c4fec47bdea93efd96e570078083730caaea8243
+          ref: 3a88ce9eb8d03124d84a43a425d8eb7800a7d949
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -331,7 +331,7 @@ jobs:
           LIQUOR_SOURCE: ${{ github.workspace }}/liquor
         run: |
           set -o pipefail
-          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/furniture-interaction.test.mjs tools/board-farm-interaction.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/ardent-heat-adapter.test.mjs tools/bloody-mary-adapter.test.mjs tools/high-heels-adapter.test.mjs tools/vision-feedback-adapter.test.mjs tools/molotov-fire-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs tools/drink-source-labels.test.mjs tools/instant-effect-source.test.mjs tools/cocktail-effect-roll.test.mjs tools/cocktail-tooltip-adapter.test.mjs tools/drink-completion-lifecycle.test.mjs tools/java-instant-dispatch.test.mjs tools/instant-drink-completion.test.mjs tools/native-storage-pinning.test.mjs tools/shaker-item-retention.test.mjs tools/shaker-offhand.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
+          node --experimental-loader ./tools/foundation/mock-loader.mjs --test tools/foundation/foundation.test.mjs tools/creative-pick.test.mjs tools/pr-integration.test.mjs tools/break-feedback.test.mjs tools/furniture-interaction.test.mjs tools/board-farm-interaction.test.mjs tools/grass-stealth-adapter.test.mjs tools/java-parity-adapter.test.mjs tools/ardent-heat-adapter.test.mjs tools/bloody-mary-adapter.test.mjs tools/high-heels-adapter.test.mjs tools/vision-feedback-adapter.test.mjs tools/molotov-fire-adapter.test.mjs tools/barrel-materials.test.mjs tools/addon-mixology-tags.test.mjs tools/drink-source-labels.test.mjs tools/instant-effect-source.test.mjs tools/cocktail-effect-roll.test.mjs tools/cocktail-tooltip-adapter.test.mjs tools/drink-completion-lifecycle.test.mjs tools/java-instant-dispatch.test.mjs tools/instant-drink-completion.test.mjs tools/native-storage-pinning.test.mjs tools/shaker-item-retention.test.mjs tools/shaker-offhand.test.mjs tools/machine-native-ingredients.test.mjs tools/status-aura.test.mjs tools/tipsy-opt-in.test.mjs 2>&1 | tee ../evidence/foundation-and-pick-tests.tap
           python tools/test_pick_block.py 2>&1 | tee ../evidence/native-pick-tests.log
       - name: Simple effect bar and paired name checks (no client rendering)
         working-directory: tavern
@@ -362,7 +362,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: c4fec47bdea93efd96e570078083730caaea8243
+          ref: 3a88ce9eb8d03124d84a43a425d8eb7800a7d949
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -445,7 +445,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: c4fec47bdea93efd96e570078083730caaea8243
+          ref: 3a88ce9eb8d03124d84a43a425d8eb7800a7d949
           path: .source-check/world-liquor-native
           persist-credentials: false
       - name: Native isolated inventory save/restart, no player sessions
@@ -456,7 +456,7 @@ jobs:
             --engine "$RUNNER_TEMP/pickup-native" \
             --engine-provenance "$RUNNER_TEMP/pickup-native/native-storage-evidence.json" \
             --liquor .source-check/world-liquor-native \
-            --work "$RUNNER_TEMP/t132-paired-native" \
+            --work "$RUNNER_TEMP/t133-paired-native" \
             --probe tools/native/shaker-migration-probe.js \
             --port 27200
           git diff --exit-code -- runtime/
@@ -468,9 +468,9 @@ jobs:
             ${{ runner.temp }}/pickup-native/stage-*.log
             ${{ runner.temp }}/pickup-native/stage-*-runner-validation.json
             ${{ runner.temp }}/pickup-native/native-storage-evidence.json
-            ${{ runner.temp }}/t132-paired-native/first.log
-            ${{ runner.temp }}/t132-paired-native/restart.log
-            ${{ runner.temp }}/t132-paired-native/native-living-report.json
+            ${{ runner.temp }}/t133-paired-native/first.log
+            ${{ runner.temp }}/t133-paired-native/restart.log
+            ${{ runner.temp }}/t133-paired-native/native-living-report.json
   tap-carriers:
     needs: impact
     if: needs.impact.outputs.runtime == 'true'

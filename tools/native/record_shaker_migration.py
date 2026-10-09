@@ -25,7 +25,9 @@ def main():
    extras={}
    if label=='tavern' and kind=='BP':
     extras={'scripts/living-effects-probe.js':ROOT/'tools/native/shaker-migration-probe.js','entities/living-probe.json':ROOT/'tools/native/living-probe-entity.json',
-            'entities/health-helper-probe.json':ROOT/'tools/native/health-helper-entity.json'}
+            'entities/health-helper-probe.json':ROOT/'tools/native/health-helper-entity.json',
+            'scripts/machine-ingredients-probe.js':ROOT/'tools/native/machine-ingredients-probe.js',
+            'scripts/status-aura-probe.js':ROOT/'tools/native/status-aura-probe.js'}
    actual={f.relative_to(staged).as_posix() for f in staged.rglob('*') if f.is_file()}
    assert actual==set(rows)|set(extras),(label,kind,'staged file set differs')
    for name in rows:

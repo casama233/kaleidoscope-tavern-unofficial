@@ -1,4 +1,6 @@
-## Current maintained baseline: 0.6.132
+## Current maintained baseline: 0.6.134
+
+[T134 integration scope](docs/RELEASE-NOTES-0.6.134.md) covers complete machine ingredients, supported portable shaker metadata, source container exchanges, status particles, board outlines and source-shaded RGB. It preserves the final PR297 observer policy, the reviewed PR298 coordinate-order repair and W110 author updates in the paired W111 candidate. Final CI, native-client and LIVE acceptance remain separate and pending.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -7,7 +9,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 ## Current source and requirements
 
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.132**, World Liquor **0.1.109** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.134**, World Liquor **0.1.111** and Grilling **2.8.119**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -31,7 +33,13 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Exact player-camera roll is unimplemented; the current optional yaw adapter changes aim. Arbitrary signature colors, full internal ingredient ItemStacks, wall outlines, the native board editor and dropped-shaker geometry retain explicit differences. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
+Exact player-camera roll remains unimplemented; the optional yaw adapter now requires explicit opt-in and does not move aim by default. Machine ingredient clones and supported portable stackable metadata are implemented, while three arbitrary decorated nonstackable shaker inputs remain rejected intact. Source-shaded RGB, board outlines and status particles require actual client comparison. Through-wall outlines, native multiline editing, dropped-shaker display contexts, native reach/step-height/XP pickup, target clearing and some effect/event semantics remain incomplete. See the T134 notes and matrix for precise source, engine and client boundaries.
+
+## Retained T133 baseline statement
+
+The following statement records the earlier T133 candidate and its pairing. Current integration and PR status are recorded in the T134 scope above.
+
+- [T133 storage correction](docs/RELEASE-NOTES-0.6.133.md) compares finite XYZ coordinates independently of native object key order. It depends on PR297, retains its rollback repairs and awaits client acceptance; the reviewed family pairing below remains unchanged.
 
 ## Licensing and history
 

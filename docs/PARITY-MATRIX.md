@@ -1,6 +1,34 @@
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.132 / World Liquor 0.1.109
+## Current repair candidate: Tavern 0.6.134 / World Liquor 0.1.111
+
+[T134 integration scope](RELEASE-NOTES-0.6.134.md) preserves final PR297 source,
+reviewed PR298 head and W110 author updates. PR298 remains open/draft at
+integration; inclusion is not a claim that it has merged. Forge main `c4ec1880`
+and maintained NeoForge branches remain distinct references; Grilling G119 is
+unchanged. Final candidate CI, zero-player native evidence, actual Player input,
+rendered-client acceptance and LIVE deployment remain separate and pending.
+
+| Area | Current implementation | Remaining scope |
+| --- | --- | --- |
+| Machine ingredients | Complete counted native clones, metadata-sensitive merging, legacy adoption, original extraction and checked consumption/destruction rollback. | Exact paired native first/restart evidence and actual Player, crash/chunk/foreign-mutation scenarios remain separate. |
+| Portable shaker inputs and storage | Bounded self-contained stackable metadata with bidirectional native reconstruction checks before debit; T132 hand/echo/retry and T133 finite-XYZ identity repairs retained. | Three arbitrary decorated nonstackable items/potions remain unsupported and rejected intact; native input and saved-world acceptance remain pending. |
+| Machine operation | Source Creative fluid retention, direct-hand output, overflow delivery, Adventure ordinary use and doTileDrops protection. | Complete third-party FluidUtil capabilities and native input emission remain unproven. |
+| Board glow | Black foreground/cream outline, dark colored outline, source 0.5-pixel offsets, separate far foreground submission and board-center 48-block cull. | Colored outline camera-vs-feet 16-block boundary, first-person spyglass and native multiline editor remain different. |
+| Animated ingredients and cups | Original ice-grape tick images on four barrel/eight pressing paths; glass, atlas and RGB passes share the level clock across helper replacement. | Tick unit is supported by Mojang's cod sample; native terrain/atlas synchronization, long uptime, resource reload and actual rendering remain pending. |
+| Arbitrary signature RGB | Existing 336-color atlas plus original source-texel shading in the same helper, including W111 external colors; exact geometry allocations and source coverage checks. | Material output, distance filtering, transparency, PBR/Vibrant Visuals and all display contexts need actual client comparison. |
+| Status particles | Original custom colors, float32 weighting, source emission probability and spell resources; durable ownership only for provably host-created native effects. | Unknown external ambient/visibility is not inferred; mixed-source rendering remains unverified. |
+| Grass / Tipsy | One-tick non-overwriting invisibility lease; explicit yaw opt-in and no default aim movement. | Whole player renderer cancellation, equipment/name hiding, target clearing and pure camera roll remain unimplemented. |
+| Living policy and XP observer | Final PR297 distinguishes the observed health-less XP orb from an explicit health-bearing test helper. | It does not prove Java class reflection, Player event order or native XP pickup parity. |
+| World Liquor author data | W111 retains W110 Dassai Q3–Q6 amplifiers 1/3/5/7, four source cup meshes/atlases and two inventory sprites; existing geometry IDs and API1 admission remain valid. | Native Luck loot behavior, other branch/event semantics and rendered-client acceptance remain incomplete. |
+
+The private BSM/current quality checkpoint/LIVE world is unavailable in this
+workspace. Full-family assembly, stopped-world rehearsal, guard, backup and
+deployment/readback remain pending under the existing standing authorization.
+Historical sections below retain their original version scope; T134 notes
+record which source gaps are now repaired without upgrading old evidence.
+
+## Retained T132 / W109 repair scope
 
 [T132 release scope](RELEASE-NOTES-0.6.132.md) is the current source-repair entry.
 Forge main `c4ec1880` remains the original comparison target. The shared instant

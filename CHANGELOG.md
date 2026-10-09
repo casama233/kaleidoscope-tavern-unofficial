@@ -1,5 +1,14 @@
 # Maintained changes
 
+## 0.6.134
+
+- Preserve final PR297 source `727fd885` including the explicit XP-orb/health-helper observer distinction, and carry PR298 head `625ff769`'s finite-XYZ native storage comparison without rewriting T133 history or claiming that PR298 has merged.
+- Retain complete native machine ingredients, metadata-sensitive merging and rollback; preserve supported portable stackable shaker metadata and reject unprovable reconstruction before debit.
+- Restore source Creative fluid handling, direct-hand extraction, Adventure machine use and checked destruction drops.
+- Add source status particles, bounded native-effect appearance ownership, prompt grass-invisibility exit and explicit Tipsy yaw opt-in.
+- Restore separate board foreground/outlines, animated ice-grape ingredients and source-shaded arbitrary RGB; share texture clocks across recreated helpers and retain exact geometry allocations.
+- Pair with World Liquor 0.1.111, preserving W110's current-author Dassai amplitudes and four cocktail model/atlas repairs; optional Grilling remains 2.8.119. [T134 integration scope](docs/RELEASE-NOTES-0.6.134.md) records the retained sources and pending final CI, native/client and LIVE boundaries.
+
 ## 0.6.132
 
 - Share Java instant-health/harm dispatch with splash delivery, including source potion immunity, per-recipient policy snapshots, owner attribution and compatible addon declarations.

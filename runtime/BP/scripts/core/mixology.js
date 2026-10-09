@@ -3,6 +3,7 @@ import {check,id,integer,clone,utf8Bytes} from './util.js';
 import {parseBottle} from './bottles.js';
 import {validatePotionIdentity,POTION_ITEMS} from './potions.js';
 import {SHAKER_INPUTS,COCKTAILS} from '../data/mixology.js';
+import {validateIngredientMetadata} from './ingredient-metadata.js';
 export const NS='kaleidoscope_tavern',EMPTY_CUP=NS+':empty_glassware',SIGNATURE=NS+':signature_cocktail',MYSTERY=NS+':mystery_cocktail';
 export const SIGNATURE_DATA=NS+':cocktail_data';
 export function timingBand(ticks){integer(ticks,0,2147483647,'shake ticks');return ticks<19?'abort':ticks<69?'mystery':ticks<89?'signature':ticks<99?'recipe':'mystery';}
@@ -30,7 +31,7 @@ export function validateShaker(s){
  // The rejected nested-item experiment must not be reinterpreted as plain IDs.
  check(s.nativeItems===undefined,'NATIVE_SHAKER_NESTED_UNSUPPORTED');
  if(s.nativeCarrier!==undefined)check(s.nativeCarrier===1,'NATIVE_SHAKER_SCHEMA');
- for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);if(slot.potion){check(POTION_ITEMS.has(slot.item)&&slot.container==='minecraft:glass_bottle','BAD_POTION_SLOT');validatePotionIdentity(slot.potion);}}
+ for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);if(slot.potion){check(POTION_ITEMS.has(slot.item)&&slot.container==='minecraft:glass_bottle','BAD_POTION_SLOT');validatePotionIdentity(slot.potion);}if(slot.metadata!==undefined){check(!slot.potion,'INGREDIENT_METADATA_SCHEMA');validateIngredientMetadata(slot.metadata);}}
  if(s.result){check(s.slots.length===3,'CORRUPT_SHAKER');validateResult(s.result);}else check(s.result===null,'CORRUPT_SHAKER');
  check(utf8Bytes(JSON.stringify(s))<=20000,'STATE_TOO_LARGE');return s;
 }

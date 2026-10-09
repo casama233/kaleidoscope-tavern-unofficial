@@ -1,7 +1,5 @@
 /** Shared product information; source effects and current supported uses. */
 import {COCKTAILS} from './mixology.js';
-import {cocktailDuration} from '../core/cocktail-tooltip.js';
-import {effectLevel} from '../core/effect-bar.js';
 
 export const COCKTAIL_GUIDE_DETAILS={
   "kaleidoscope_tavern:high_heels": {
@@ -23,9 +21,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Long Reach"
     },
     "usage": {
-      "zh_CN": "延长部分酒馆物品对方块的操作距离。",
-      "zh_TW": "延長部分酒館物品對方塊的操作距離。",
-      "en_US": "Extends the block-use reach of supported Tavern items."
+      "zh_CN": "可从更远处放置酒瓶、雪克杯或倒酒。",
+      "zh_TW": "可從更遠處放置酒瓶、雪克杯或倒酒。",
+      "en_US": "Place bottles and shakers, or pour a drink, from farther away."
     }
   },
   "kaleidoscope_tavern:ardent_heat": {
@@ -35,9 +33,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Ardent Heat"
     },
     "usage": {
-      "zh_CN": "冲撞可撞碎前方指定方块，并消耗体力。护甲会磨损；没有护甲时会受伤。",
-      "zh_TW": "衝撞可撞碎前方指定方塊，並消耗體力。護甲會磨損；沒有護甲時會受傷。",
-      "en_US": "Charge through eligible blocks in front of you at an exhaustion cost. Armor wears down; charging without armor causes damage."
+      "zh_CN": "冲刺可撞碎石头、下界岩等方块，但会消耗体力、磨损护甲；没有护甲时会受伤。",
+      "zh_TW": "衝刺可撞碎石頭、地獄岩等方塊，但會消耗體力、磨損護甲；沒有護甲時會受傷。",
+      "en_US": "Sprint through blocks such as stone and netherrack at a stamina and armor cost; charging without armor causes damage."
     }
   },
   "kaleidoscope_tavern:zenith": {
@@ -83,9 +81,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Spirit Vision"
     },
     "usage": {
-      "zh_CN": "此版本尚未提供可见的穿墙轮廓。",
-      "zh_TW": "此版本尚未提供可見的穿牆輪廓。",
-      "en_US": "Visible outlines through walls are not available in this version."
+      "zh_CN": "感知附近新出现的生物时有声音提示；本版没有穿墙轮廓。",
+      "zh_TW": "感知附近新出現的生物時有聲音提示；本版沒有穿牆輪廓。",
+      "en_US": "Sounds a cue when it senses newly nearby creatures. This version has no outlines through walls."
     }
   },
   "kaleidoscope_tavern:xp_drain": {
@@ -95,9 +93,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "XP Drain"
     },
     "usage": {
-      "zh_CN": "吸引周围经验球；拾取仍受原生拾取间隔影响。",
-      "zh_TW": "吸引周圍經驗球；拾取仍受原生拾取間隔影響。",
-      "en_US": "Pulls nearby experience orbs toward you; collection still follows the native pickup interval."
+      "zh_CN": "把周围经验球吸向自己，方便收集经验。",
+      "zh_TW": "把周圍經驗球吸向自己，方便收集經驗。",
+      "en_US": "Pulls nearby experience orbs toward you for easier collection."
     }
   },
   "kaleidoscope_tavern:slightly_tipsy": {
@@ -107,9 +105,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Slightly Tipsy"
     },
     "usage": {
-      "zh_CN": "饮用后产生微醺。",
-      "zh_TW": "飲用後產生微醺。",
-      "en_US": "Drinking this cocktail makes you slightly tipsy."
+      "zh_CN": "饮用后视角会轻轻摇晃。",
+      "zh_TW": "飲用後視角會輕輕搖晃。",
+      "en_US": "Your view sways gently after drinking."
     }
   },
   "kaleidoscope_tavern:bloody_mary": {
@@ -119,9 +117,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Bloody Mary"
     },
     "usage": {
-      "zh_CN": "击杀目标时，按目标最大生命值的三分之一向下取整恢复生命。",
-      "zh_TW": "擊殺目標時，按目標最大生命值的三分之一向下取整恢復生命。",
-      "en_US": "On a credited kill, restores health equal to one third of the target's maximum health, rounded down."
+      "zh_CN": "击杀目标时恢复生命，恢复量随目标变化。",
+      "zh_TW": "擊殺目標時恢復生命，恢復量隨目標變化。",
+      "en_US": "Defeating a target restores health; the amount depends on the target."
     }
   },
   "kaleidoscope_tavern:tomb_raider": {
@@ -131,9 +129,9 @@ export const COCKTAIL_GUIDE_DETAILS={
       "en_US": "Tomb Raider"
     },
     "usage": {
-      "zh_CN": "攻击指定怪物时，有30%机会卸下其武器。掉落武器的剩余耐久为1，短时间后才可拾取。",
-      "zh_TW": "攻擊指定怪物時，有30%機會卸下其武器。掉落武器的剩餘耐久為1，短時間後才可拾取。",
-      "en_US": "Attacks against eligible mobs have a 30% chance to disarm them. The dropped weapon has one durability remaining and a short pickup delay."
+      "zh_CN": "原作中用于缴械；本版原版怪物的武器卸除仍未可用。",
+      "zh_TW": "原作中用來繳械；本版原版怪物的武器卸除仍未可用。",
+      "en_US": "An effect for disarming enemies in the original game. Disarming vanilla mobs is not available in this version."
     }
   },
   "kaleidoscope_tavern:shriek_attack": {
@@ -154,11 +152,9 @@ export function cocktailGuideNotes(item,locale='en_US'){
  const effects=COCKTAILS[item]?.effects;
  if(!effects)return [];
  const prefix=locale==='en_US'?'Effect: ':locale==='zh_CN'?'效果：':'效果：';
- const instant=locale==='en_US'?'instant':locale==='zh_CN'?'立即触发':'立即觸發';
  return effects.flatMap(effect=>{
   const details=COCKTAIL_GUIDE_DETAILS[effect.effect];if(!details)return [];
   const label=details.names[locale]??details.names.en_US;
-  const time=effect.duration>0?cocktailDuration(effect.duration):instant;
-  return [prefix+label+effectLevel(effect.amplifier)+' ('+time+')',details.usage[locale]??details.usage.en_US];
+  return [prefix+label+' — '+(details.usage[locale]??details.usage.en_US)];
  });
 }

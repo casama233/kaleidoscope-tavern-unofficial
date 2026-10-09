@@ -1,6 +1,6 @@
 /** View data only. Both guide entrances use buildCookeryGuidePayload(registry). */
 import {GUIDE_ROOTS} from '../data/guide-navigation.js';
-import {preparationText} from './guide-preparation-text.js';
+import {preparationText,guideDuration} from './guide-preparation-text.js';
 import {guideItemName} from '../data/guide-native-names.js';
 export {guideItemName};
 import {GUIDE_LANGUAGES,guideLocale} from './presentation-settings.js';
@@ -22,16 +22,27 @@ function pageButtons(rows,node,text){
  if(page+1<pages)buttons.push({label:text.next,action:{type:'page',node:{...node,page:page+1}}});
  return {buttons,page,pages};
 }
-export function standaloneGuideView(payload,locale,node={type:'root'}){
+/** Minecraft text formatting, with one blank line between meaningful paragraphs. */
+export function formatGuideParagraph(value){
+ const paragraphs=String(value??'').trim().split(/\n\n+/);
+ if(paragraphs.length>1)return paragraphs.map(formatGuideParagraph).filter(Boolean).join('\n\n');
+ const lines=paragraphs[0].split('\n');
+ if(!lines[0])return '';
+ if(lines.some(line=>line.includes('§')))return lines.join('\n')+'§r';
+ return lines.length>1?'§l§6'+lines[0]+'§r\n§7'+lines.slice(1).join('\n')+'§r':'§7'+lines[0]+'§r';
+}
+export function standaloneGuideView(payload,locale,node={type:'root'},options={}){
  if(!payload||!Array.isArray(payload.entries)||!Array.isArray(payload.categories))throw new TypeError('Guide payload unavailable');
  locale=guideLocale(locale);const text=TEXT[locale],back={label:text.back,action:{type:'back'}},entryButton=e=>({label:guideItemName(payload,locale,e.id),icon:e.icon,action:{type:'entry',id:e.id}});
  if(node.type==='root'){
   const buttons=GUIDE_ROOTS.map(id=>payload.categories.find(c=>c.id===id)).filter(Boolean).map(c=>({label:catName(payload,locale,c),icon:c.icon,action:{type:'category',id:c.id}}));
-  buttons.push({label:text.settings,action:{type:'language'}},{label:text.close,action:{type:'close'}});
-  return {node,title:word(payload,locale,payload.titleKey??'title','Tavern'),body:word(payload,locale,payload.introKey??'intro'),buttons};
+  buttons.push({label:text.settings,action:{type:'language'}});
+  if(options.hostBack)buttons.push({label:{zh_TW:'返回料理指南',zh_CN:'返回料理指南',en_US:'Back to Cookery Guide'}[locale],action:{type:'host-back'}});
+  buttons.push({label:text.close,action:{type:'close'}});
+  return {node,title:word(payload,locale,payload.titleKey??'title','Tavern'),body:formatGuideParagraph(word(payload,locale,payload.introKey??'intro')),buttons};
  }
  if(node.type==='category'){
-  const category=payload.categories.find(c=>c.id===node.id);if(!category)return standaloneGuideView(payload,locale);
+  const category=payload.categories.find(c=>c.id===node.id);if(!category)return standaloneGuideView(payload,locale,{type:'root'},options);
   const rows=[];
   for(const child of payload.categories.filter(c=>c.parent===node.id)){
    const items=entriesIn(payload,child.id);if(!items.length)continue;
@@ -41,22 +52,22 @@ export function standaloneGuideView(payload,locale,node={type:'root'}){
   const result=pageButtons(rows,node,text);result.buttons.push(back);
   return {node:{...node,page:result.page},title:catName(payload,locale,category),body:rows.length?'':text.empty,buttons:result.buttons};
  }
- const entry=payload.entries.find(e=>e.id===node.id);if(!entry)return standaloneGuideView(payload,locale);
+ const entry=payload.entries.find(e=>e.id===node.id);if(!entry)return standaloneGuideView(payload,locale,{type:'root'},options);
  if(node.type==='recipe'){
-  const recipe=entry.recipes?.[node.index];if(!recipe)return standaloneGuideView(payload,locale,{type:'entry',id:entry.id});
+  const recipe=entry.recipes?.[node.index];if(!recipe)return standaloneGuideView(payload,locale,{type:'entry',id:entry.id},options);
   const method=text.methods[recipe.method]??recipe.method,{sections,heading}=preparationText(recipe,locale,id=>guideItemName(payload,locale,id));
   sections.push(heading(text.result,[guideItemName(payload,locale,recipe.result??entry.id)+' ×'+(recipe.count??1)]));
-  if(recipe.time>0)sections.push(heading(text.time,[(recipe.time/20)+' s']));
-  if(recipe.method==='Crafting Table')sections.push(text.craftNote);
-  return {node,title:'§l'+guideItemName(payload,locale,entry.id)+' · '+method,body:sections.join('\n\n'),buttons:[back]};
+  if(recipe.time>0)sections.push(heading(text.time,[guideDuration(recipe.time/20,locale)]));
+  if(recipe.method==='Crafting Table')sections.push(formatGuideParagraph(text.craftNote));
+  return {node,title:'§l§6'+guideItemName(payload,locale,entry.id)+' · '+method+'§r',body:sections.join('\n\n'),buttons:[back]};
  }
  const lines=[...(entry.mechanicsByLocale?.[locale]??entry.mechanicsByLocale?.en_US??entry.mechanics??[])];
- if(Number.isFinite(entry.stack))lines.push(text.stack+': '+entry.stack);
- if(entry.placeable)lines.push(text.placeable+': '+text.yes);
- if(entry.food?.eatFromInventory)lines.push(text.inventory+': '+text.yes);
- if(entry.food?.returns)lines.push(text.returns+': '+guideItemName(payload,locale,entry.food.returns));
+ const facts=[];
+ if(entry.placeable)facts.push(text.placeable);
+ if(entry.food?.returns)facts.push(text.returns+': '+guideItemName(payload,locale,entry.food.returns));
+ if(facts.length)lines.push(facts.join(' · '));
  const rows=(entry.recipes??[]).map((r,index)=>({label:text.recipe+' '+(index+1)+' · '+(text.methods[r.method]??r.method),action:{type:'recipe',id:entry.id,index}}));
  for(const id of entry.usedBy??[]){const target=payload.entries.find(e=>e.id===id);if(target)rows.push({...entryButton(target),label:text.usedBy+': '+guideItemName(payload,locale,id)});}
  const result=pageButtons(rows,node,text);result.buttons.push(back);
- return {node:{...node,page:result.page},title:'§l'+guideItemName(payload,locale,entry.id),body:lines.join('\n\n'),buttons:result.buttons};
+ return {node:{...node,page:result.page},title:'§l§6'+guideItemName(payload,locale,entry.id)+'§r',body:lines.map(formatGuideParagraph).filter(Boolean).join('\n\n'),buttons:result.buttons};
 }

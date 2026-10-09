@@ -21,7 +21,7 @@ export function paginate(entries,page=0,size=8){check(Number.isInteger(size)&&si
 /** Shared workstation instructions for core drinks and data-only extensions. */
 export function workstationUsage(kind,locale){
  const text={
- barrel:{en_US:'Sneak-use the Tavern barrel to open it. Add the listed fluid FIRST, then the ingredients. Close it to brew and age; open it and use an empty bottle to collect. Higher quality takes more time in the barrel.',zh_CN:'潜行操作酒馆酒桶开盖，先加入所列液体，再加入原料，关盖酿造、熟成；开盖后用空酒瓶取酒。继续留在桶中可提升品质。',zh_TW:'潛行操作酒館酒桶開蓋，先加入所列液體，再加入原料，關蓋釀造、熟成；開蓋後用空酒瓶取酒。繼續留在桶中可提升品質。'},
+ barrel:{en_US:'Sneak-use the Tavern barrel to open it. Add the listed fluid FIRST, then the ingredients. Close it to brew and age; keep it closed and use an empty bottle on its top to collect. Higher quality takes more time in the barrel.',zh_CN:'潜行操作酒馆酒桶开盖，先加入所列液体，再加入原料，关盖酿造、熟成；保持关盖，用空酒瓶点击桶顶取酒。继续留在桶中可提升品质。',zh_TW:'潛行操作酒館酒桶開蓋，先加入所列液體，再加入原料，關蓋釀造、熟成；保持關蓋，用空酒瓶點擊桶頂取酒。繼續留在桶中可提升品質。'},
  shaker:{en_US:'Place the Tavern shaker and fill each of its three slots with one listed ingredient. Pick it up with an empty hand, hold use while aiming into air, and release in the recipe window. Use the filled shaker on a placed empty glass; pick up the drink with an empty hand.',zh_CN:'摆放酒馆雪克杯，三槽各投入一份所列原料。空手取回，朝空气按住使用，在配方区间松手。持调好的雪克杯对准已摆放的空玻璃杯倒酒，最后空手取走成品。',zh_TW:'擺放酒館雪克杯，三槽各投入一份所列原料。空手取回，朝空氣按住使用，在配方區間鬆手。持調好的雪克杯對準已擺放的空玻璃杯倒酒，最後空手取走成品。'}
  };
  return text[kind]?.[locale]??text[kind]?.en_US;

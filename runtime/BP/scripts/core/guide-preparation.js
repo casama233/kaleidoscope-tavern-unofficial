@@ -10,7 +10,7 @@ export function preparationRecipes(recipe,names={}){
    const id=recipe.id+'/ingredient_'+index;
    const colors={black:['黑色','黑色','Black'],dark_green:['深绿色','深綠色','Dark Green'],gray:['浅灰色','淺灰色','Gray'],dark_gray:['深灰色','深灰色','Dark Gray'],brown:['棕色','棕色','Brown'],orange:['橙色','橙色','Orange'],light_blue:['浅蓝色','淺藍色','Light Blue'],pink:['粉色','粉色','Pink'],dark_blue:['深蓝色','深藍色','Dark Blue'],dark_purple:['深紫色','深紫色','Dark Purple'],aqua:['水蓝色','水藍色','Aqua'],dark_aqua:['深青色','深青色','Dark Aqua'],gold:['金色','金色','Gold'],light_purple:['淡紫色','淺紫色','Light Purple'],white:['白色','白色','White'],yellow:['黄色','黃色','Yellow'],red:['红色','紅色','Red'],green:['绿色','綠色','Green'],blue:['蓝色','藍色','Blue'],purple:['紫色','紫色','Purple'],dark_red:['深红色','深紅色','Dark Red']};
    for(const [i,locale] of ['zh_CN','zh_TW','en_US'].entries()){
-    (names[locale]??={})[id]=(names[locale]?.['#'+recipe.ingredientTags[index]]??colors[color]?.[i]??['自定颜色','自訂顏色','Custom colour'][i])+['调酒材料（酒品品质 ≥4）','調酒材料（酒品品質 ≥4）',' shaker ingredient (bottled drinks: quality ≥4)'][i];
+    (names[locale]??={})[id]=(names[locale]?.['#'+recipe.ingredientTags[index]]??colors[color]?.[i]??['自定颜色','自訂顏色','Custom colour'][i])+['调酒材料','調酒材料',' shaker ingredient'][i];
    }
    return id;
   }

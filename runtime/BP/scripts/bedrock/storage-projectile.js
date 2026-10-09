@@ -1,12 +1,14 @@
 import {drinkImpactFeedback} from './interaction-particles.js';
 import {externalVisual,isExternalVisual,externalEffectDefinition} from '../core/extension-content.js';
 import {livingEffectEntity} from '../core/living-effect-entity.js';
-import {EntityDamageCause,world} from '@minecraft/server';
-import {splashFactor,splashTicks,instantHealthDelta} from '../core/projectile-parity.js';
+import {world} from '@minecraft/server';
+import {splashFactor,splashTicks} from '../core/projectile-parity.js';
 import {check} from '../core/util.js';
 import {storageBottleItem} from '../core/holder.js';
 import {rollDrinkEffects} from '../core/drink-effects.js';
 import {applyCustomEffect} from './custom-effects.js';
+import {dispatchInstantHealth,captureInstantSplashPolicy} from './instant-effects.js';
+import {INSTANT_HEALTH_EFFECTS} from '../core/java-instant-effect.js';
 
 const NS='kaleidoscope_tavern';
 export const THROWN_DRINK=NS+':thrown_drink';
@@ -48,12 +50,10 @@ export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.ra
   return entity;
  }catch(e){try{entity?.remove();}catch{}throw e;}
 }
-function nativeRow(entity,row,factor){
- if(row.effect==='minecraft:instant_health'||row.effect==='minecraft:instant_damage'){
-  const undead=entity.matches({families:['undead']}),delta=instantHealthDelta(row.effect,row.amplifier,factor,undead);
-  if(!delta)return false;
-  if(delta>0){const h=entity.getComponent('minecraft:health');if(!h)return false;h.setCurrentValue(Math.min(h.effectiveMax,h.currentValue+delta));}
-  else entity.applyDamage(-delta,{cause:EntityDamageCause.magic});
+function nativeRow(entity,row,factor,projectile,capturedSplashPolicy){
+ if(INSTANT_HEALTH_EFFECTS.has(row.effect)){
+  const result=dispatchInstantHealth(entity,row,{intensity:factor,delivery:'splash',direct:projectile,indirect:projectile.getComponent('minecraft:projectile')?.owner,capturedSplashPolicy});
+  if(result?.status!=='APPLIED_NATIVE_INSTANT')return false;
  }else if(row.effect==='minecraft:saturation'){
   // Java's other instantaneous effects delegate to applyEffectTick, not a duration.
   entity.addEffect(row.bedrockId,1,{amplifier:row.amplifier,showParticles:true});
@@ -87,12 +87,21 @@ export function resolveThrownDrinkImpact(event){
   const min={x:box.center.x-box.extent.x-4,y:box.center.y-box.extent.y-2,z:box.center.z-box.extent.z-4},volume={x:2*box.extent.x+8,y:2*box.extent.y+4,z:2*box.extent.z+8};
   const candidates=projectile.dimension.getEntities({location:min,volume});let affected=0;
   for(const entity of candidates)try{
-   if(entity.id===projectile.id||!living(entity))continue;
+   if(entity.id===projectile.id||entity.isValid===false)continue;
+   const nativeLiving=living(entity);
+   const capturedSplashPolicy=captureInstantSplashPolicy(entity);
+   // Known source immunity gates every row, including timed/custom effects.
+   // Unknown addon policy retains the older timed/custom family adapter only;
+   // instant rows stay fail-closed inside the shared dispatcher.
+   if(capturedSplashPolicy==='NOT_SOURCE_LIVING'||capturedSplashPolicy==='SOURCE_SPLASH_REJECTED')continue;
    const dist=centerDistanceSq(entity.location,at);if(dist>=16)continue;
    const factor=splashFactor(dist,entity.id===direct?.id);if(factor<=0)continue;
    let any=false;
    for(const row of rows){
-    if(row?.bedrockId)any=nativeRow(entity,row,factor)||any;
+    // Instant class/profile checks belong to the shared dispatcher. Native mob
+    // families still gate the unrelated timed/custom adapters as before.
+    if(!nativeLiving&&!INSTANT_HEALTH_EFFECTS.has(row?.effect))continue;
+    if(row?.bedrockId)any=nativeRow(entity,row,factor,projectile,capturedSplashPolicy)||any;
     else any=customRow(entity,row,factor)||any;
    }
    if(any)affected++;

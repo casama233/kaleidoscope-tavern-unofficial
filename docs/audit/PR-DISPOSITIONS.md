@@ -2,6 +2,22 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
+## T132／W109：多代理同步修復
+
+從已交付 T131 `e02c19da3a8e29d7574c5922e142ef99775dd643` 和 W108
+`e8fa8c91606f1fc2d9cc0e54df801aa7c45c3d8c` 接續。
+[T132 範圍](../RELEASE-NOTES-0.6.132.md) 集中記錄濺射 dispatcher／免疫政策、
+雪克杯回呼及重試、原生保存回滾、感知類別／查詢順序、指南動畫、板面 escape
+與 HUD 尾巴。三代理實作後互相及由主代理審查，來源反例補入同一候選。
+W109 只同步 T132 相依與本包身分，G119 維持既有來源。
+
+完整必要 CI 與本批 T/W 零玩家首次／重啟結果，以配套 PR 的確切提交為準；
+原生 observer 明列測試 event envelope 和 API acknowledgement 邊界。
+新版仍沒有宣稱 native multiline、through-wall outline、全域動畫相位、
+完整 ItemStack、RGB／camera／drop geometry 或真人輸入全部一比一。
+正式版本及互相依賴由 baseline/history、family lock 和不可變 CI pins 定義。
+私人 BSM／LIVE 連線與完整家族保存演練仍不可用，既有部署授權繼續有效。
+
 ## T131／W108：原版體驗查核後的逐步修補
 
 從已合併 T130 main `c4453491e2f52d4b4515dda0385db204aa892c97` 接續。

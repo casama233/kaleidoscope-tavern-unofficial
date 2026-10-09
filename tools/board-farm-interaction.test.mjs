@@ -10,6 +10,7 @@ import {installFurnitureEvents} from '../runtime/BP/scripts/bedrock/furniture.js
 import {installJavaItemUseOnEvents,JAVA_PLACEMENT_TEST} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
 import {exchangeBlocks,exchangeBlocksToWorld,air} from '../runtime/BP/scripts/bedrock/transactions.js';
 import {BOARD_HALF,BOARD_ROTATION,CHALK_POSITION,boardRuntimeKey} from '../runtime/BP/scripts/core/boards.js';
+import {encodeBoardInput} from '../runtime/BP/scripts/core/board-layout.js';
 
 const NS='kaleidoscope_tavern:',d=world.getDimension('overworld'),blocks=new Map(),items=new Map();let serial=0;
 registerFixtureItem('minecraft:ink_sac');
@@ -53,6 +54,16 @@ test('Adventure ModalForm edits retain escaped newlines and alignments, with exa
  // The old clicked-block-centre check would accept this point outside Java's radius.
  p.location={...lower.location,x:lower.location.x+8.1};const opened=ui.forms.length;
  const logs=capture(()=>{assert.equal(interact(p,upper).cancel,false);system.advance(1);});assert.deepEqual(logs,[]);assert.equal(ui.forms.length,opened);assert.deepEqual(p.messages,[]);
+});
+
+test('opening and saving existing literal backslashes does not change board paragraphs',async()=>{
+ const {p,lower,key}=setup();
+ const text=String.raw`Tea\n`+'\n'+String.raw`C:\new`;
+ save(key,{text,alignment:'distributed',verticalAlignment:'middle'});
+ ui.responses.push({canceled:false,formValues:[encodeBoardInput(text),4,1]});
+ interact(p,lower);system.advance(1);await flush();
+ assert.equal(ui.forms.at(-1).fields[0].args[2].defaultValue,encodeBoardInput(text));
+ assert.deepEqual(read(key),{...defaults,text,alignment:'distributed',verticalAlignment:'middle'});
 });
 
 test('large chalkboard roots share one form and form submission rechecks mode, range and stale data',async()=>{

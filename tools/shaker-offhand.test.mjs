@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {world,system,Player,ItemStack,BlockPermutation,EquipmentSlot} from '@minecraft/server';
-import {nativeStart,nativeStop,placeShaker,pourHeldShakerNow,installMixologyEvents,setMixologyRegistry,readPortableItem} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {nativeStart,nativeStop,placeShaker,pourHeldShakerNow,installMixologyEvents,setMixologyRegistry,readPortableItem,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {installJavaItemUseOnEvents} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
 import {ExtensionRegistry} from '../runtime/BP/scripts/core/registry.js';
 import {emptyShaker,addInput,cupKey,shakerKey} from '../runtime/BP/scripts/core/mixology.js';
@@ -13,6 +13,7 @@ import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {SHAKER_ID,PORTABLE_DATA,encodePortable} from '../runtime/BP/scripts/core/immersion.js';
 
 const registry=new ExtensionRegistry({recipes:SHAKER_RECIPES,itemExists:()=>true});setMixologyRegistry(registry);
+const blockComponents=new Map();registerMixologyComponents({blockComponentRegistry:{registerCustomComponent:(id,c)=>blockComponents.set(id,c)},itemComponentRegistry:{registerCustomComponent(){}}});
 installMixologyEvents();installJavaItemUseOnEvents();
 let sequence=0;
 function fixture(){
@@ -165,4 +166,52 @@ test('a rejected off-hand write permits the next fresh native click to retry imm
  click();system.advance(1);assert.deepEqual(f.current(),before);assert.equal(f.block.typeId,'kaleidoscope_tavern:cup_empty_glassware');
  click();system.advance(1);
  assert.equal(f.block.typeId,'kaleidoscope_tavern:cup_signature_cocktail');
+});
+
+function stationFixture(amount=1){
+ const f=fixture();f.replace(undefined);
+ f.block.setPermutation(BlockPermutation.resolve('kaleidoscope_tavern:shaker_station',{'kaleidoscope_tavern:facing':0}));
+ f.player.inventory.setItem(0,new ItemStack('kaleidoscope_tavern:plum_wine_q4',amount));
+ const click=(first=true)=>{const e={player:f.player,block:f.block,itemStack:f.main(),blockFace:'Up',isFirstEvent:first,cancel:false};world.beforeEvents.playerInteractWithBlock.emit(e);return e;};
+ const native=face=>blockComponents.get('kaleidoscope_tavern:shaker_station').onPlayerInteract({player:f.player,block:f.block,face:face??'Up',faceLocation:{x:.5,y:1,z:.5}});
+ const state=()=>JSON.parse(world.getDynamicProperty(shakerKey(f.block.dimension.id,f.block.location))??'null');
+ return {...f,click,native,state};
+}
+test('native held station callback inserts one main-hand ingredient without needing an itemUse ray',()=>{
+ const f=stationFixture(2);f.player.getBlockFromViewDirection=()=>{throw Error('native target must not require a ray');};
+ assert.equal(f.native(),true);system.advance(1);
+ assert.equal(f.state().slots.length,1);assert.equal(f.main().amount,1);assert.equal(f.block.typeId,'kaleidoscope_tavern:shaker_station');
+ assert.equal(f.player.inventory.items.filter(item=>item?.typeId==='kaleidoscope_tavern:empty_bottle').reduce((n,item)=>n+item.amount,0),1);
+});
+test('last ingredient native after callback cannot reinterpret the now-empty hand as station pickup',()=>{
+ const f=stationFixture(1);assert.equal(f.click().cancel,true);system.advance(1);assert.equal(f.main(),undefined);
+ f.native('East');assert.equal(f.click(false).cancel,true);system.advance(1);
+ assert.equal(f.block.typeId,'kaleidoscope_tavern:shaker_station');assert.equal(f.state().slots.length,1);assert.equal(f.main(),undefined);
+ // An authoritative new empty-hand press still picks up immediately.
+ assert.equal(f.click().cancel,true);system.advance(1);assert.equal(f.block.typeId,'minecraft:air');assert.equal(readPortableItem(f.main()).state.slots.length,1);
+});
+test('native after callback on a just-placed off-hand station does not immediately pick it up',()=>{
+ const f=fixture();f.player.inventory.setItem(0,undefined);f.player.isSneaking=true;
+ const target=f.block.dimension.getBlock({...f.block.location,y:f.block.location.y+1});
+ world.beforeEvents.playerInteractWithBlock.emit({player:f.player,block:f.block,itemStack:f.current(),blockFace:'Up',isFirstEvent:true,cancel:false});system.advance(1);
+ assert.equal(target.typeId,'kaleidoscope_tavern:shaker_station');assert.equal(f.current(),undefined);
+ blockComponents.get('kaleidoscope_tavern:shaker_station').onPlayerInteract({player:f.player,block:target,face:'East'});system.advance(1);
+ assert.equal(target.typeId,'kaleidoscope_tavern:shaker_station');assert.equal(f.main(),undefined);
+});
+function captureWarnings(fn){const logs=[],warn=console.warn;console.warn=value=>logs.push(String(value));try{fn();return logs;}finally{console.warn=warn;}}
+test('native station fallback preserves secondary use, foreign cancellation and decorated-ingredient protection',()=>{
+ const f=stationFixture(2),original=f.main();f.player.isSneaking=true;
+ assert.equal(f.native(),false);system.advance(1);assert.equal(f.state(),null);assert.deepEqual(f.main(),original);
+ f.player.isSneaking=false;world.beforeEvents.playerInteractWithBlock.emit({player:f.player,block:f.block,itemStack:f.main(),blockFace:'North',isFirstEvent:true,cancel:true});
+ assert.equal(f.native('East'),false);system.advance(1);assert.equal(f.state(),null);assert.deepEqual(f.main(),original);
+ const g=stationFixture(2),decorated=g.main();decorated.nameTag='Keep this bottle';decorated.setLore(['Original note']);decorated.keepOnDeath=true;g.player.inventory.setItem(0,decorated);
+ const logs=captureWarnings(()=>{assert.equal(g.native(),true);system.advance(1);});assert.ok(logs.some(line=>line.includes('METADATA_ITEM_REJECTED')));
+ assert.equal(g.state(),null);assert.deepEqual(g.main(),decorated);
+ g.player.inventory.setItem(0,new ItemStack('kaleidoscope_tavern:plum_wine_q4',2));assert.equal(g.native(),true);system.advance(1);assert.equal(g.state().slots.length,1);
+});
+test('a failed fresh insertion clears the prior native echo and permits immediate native retry',()=>{
+ const f=stationFixture(3);f.native();system.advance(1);const before=f.main(),saved=f.state();
+ world.failSet=true;const logs=captureWarnings(()=>{f.click();system.advance(1);});assert.ok(logs.some(line=>line.includes('INJECTED_SAVE_FAILURE')));
+ assert.deepEqual(f.state(),saved);assert.deepEqual(f.main(),before);
+ assert.equal(f.native(),true);system.advance(1);assert.equal(f.state().slots.length,2);assert.equal(f.main().amount,1);
 });

@@ -1,4 +1,4 @@
-/** Real ItemStack/container and placed PUT recovery observer, without players.
+/** Real ItemStack/container, effect recipients and placed PUT recovery, without players.
  * Imported only by the disposable run_living_effects.py host overlay.
  */
 import {world,system,ItemStack,ItemLockMode,BlockPermutation} from '@minecraft/server';
@@ -7,12 +7,15 @@ import {migrateShakerSlot} from './bedrock/mixology.js';
 import {emptyShaker} from './core/mixology.js';
 import {SHAKER_ID,ACTIVE_SHAKER,POURING_SHAKER,PORTABLE_DATA,encodePortable} from './core/immersion.js';
 import {canonical} from './core/util.js';
+import {pulseVision,customEffectDiagnostics} from './bedrock/custom-effects.js';
+import {declareInstantEntityProfile,instantEffectDiagnostics} from './bedrock/instant-effects.js';
+import {spawnThrownDrink,resolveThrownDrinkImpact,THROWN_EFFECTS,storageProjectileDiagnostics} from './bedrock/storage-projectile.js';
 
 const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const out=(kind,data)=>console.log('[LIVING_EFFECT_QA] '+JSON.stringify({kind,...data}));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
-// This paired probe is deliberately pinned to the W108 checkout used by CI.
-const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.108';
+// This paired probe is deliberately pinned to the W109 checkout used by CI.
+const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.109';
 function addonRegistration(){
  const row=runtimeRegistry()?.list().find(entry=>entry.source===ADDON_SOURCE);
  check(row,'real World Liquor addon registration absent');
@@ -23,6 +26,81 @@ let playerSessions=0;world.afterEvents.playerSpawn.subscribe(()=>{playerSessions
 function observed(item){
  return canonical({name:item.nameTag,lore:item.getRawLore(),destroy:item.getCanDestroy(),place:item.getCanPlaceOn(),
   keep:item.keepOnDeath,lock:item.lockMode,properties:Object.fromEntries(item.getDynamicPropertyIds().map(id=>[id,item.getDynamicProperty(id)]))});
+}
+async function effectRecipients(d,phase){
+ // Production functions operate on real native entities, components, queries
+ // and damage events. Impact event envelopes/exceptional payloads below are
+ // observer inputs, not a physical projectile collision or player-use test.
+ const owned=[],at={x:24,y:300,z:24},health=e=>e.getComponent('minecraft:health');
+ const spawn=(type,pos=at)=>{const entity=d.spawnEntity(type,pos);owned.push(entity);return entity;};
+ const sourceType='living_effect_qa:mob';
+ if(phase==='first')declareInstantEntityProfile(world,{schema:1,owner:'living_effect_qa',revision:'splash-native-1',type:sourceType,sourceType,
+  living:true,affectedByPotions:'alive',inverted:false,healHook:{mode:'scale_add',multiply:1,add:3},damagePolicy:'native'});
+ const owner=spawn(sourceType,{x:4,y:300,z:24}),hurtEvents=[];
+ const capture=world.afterEvents.entityHurt.subscribe(event=>hurtEvents.push({target:event.hurtEntity.id,damage:event.damage,
+  cause:event.damageSource.cause,owner:event.damageSource.damagingEntity?.id??null}));
+ let cancelledId;
+ const cancel=world.beforeEvents.entityHurt.subscribe(event=>{if(event.hurtEntity.id===cancelledId)event.cancel=true;});
+ function impact(target,rows,actor){
+  const projectile=spawnThrownDrink(d,'kaleidoscope_tavern:carignan_q3',{...target.location},{x:0,y:0,z:0},{rng:()=>0,owner:actor});
+  if(rows)projectile.setDynamicProperty(THROWN_EFFECTS,JSON.stringify(rows));
+  const count=storageProjectileDiagnostics.nativeEffects;
+  check(resolveThrownDrinkImpact({projectile,getEntityHit:()=>({entity:target})}),'native impact adapter rejected');
+  return {count:storageProjectileDiagnostics.nativeEffects-count,result:instantEffectDiagnostics.last};
+ }
+ try{
+  // Keep the short-lived vanilla actors above a real floor during the one-tick
+  // native damage-event observation. No entity prototype or API is replaced.
+  for(let x=23;x<=31;x++)for(let z=23;z<=25;z++)d.getBlock({x,y:299,z}).setType('minecraft:stone');
+  let target=spawn('minecraft:cow');health(target).setCurrentValue(2);
+  let result=impact(target,undefined,owner);
+  check(health(target).currentValue===6&&result.count===1,'rolled Carignan instant heal did not use shared dispatch');
+  out('case',{mode:'native-splash-rolled-heal',phase,health:health(target).currentValue,effects:result.count,eventEnvelope:'observer',physicalImpact:false});target.remove();
+
+  target=spawn(sourceType);health(target).setCurrentValue(2);
+  result=impact(target,[{effect:'minecraft:instant_health',bedrockId:'instant_health',amplifier:30,duration:0}],owner);
+  check(health(target).currentValue===5&&result.count===1&&result.result.amount===0,'zero raw amount lost the persisted declared heal hook');
+  out('case',{mode:'native-splash-persisted-hook',phase,health:health(target).currentValue,rawAmount:result.result.amount,healAmount:result.result.healAmount,declaredThisPhase:phase==='first'});target.remove();
+
+  target=spawn('minecraft:armor_stand');health(target).setCurrentValue(2);
+  result=impact(target,[{effect:'minecraft:instant_health',bedrockId:'instant_health',amplifier:0,duration:0},
+   {effect:'minecraft:speed',bedrockId:'speed',amplifier:0,ticks:100,duration:5}],owner);
+  check(health(target).currentValue===2&&result.count===0&&!target.getEffect('speed'),'source ArmorStand splash immunity was bypassed');
+  out('case',{mode:'native-splash-armor-stand-immunity',phase,health:health(target).currentValue,effects:result.count});target.remove();
+
+  for(const actor of [owner,undefined]){
+   target=spawn('minecraft:cow');const id=target.id,before=health(target).currentValue;
+   result=impact(target,[{effect:'minecraft:instant_damage',bedrockId:'instant_damage',amplifier:0,duration:0}],actor);
+   check(health(target).currentValue===before-6&&result.count===1,'native splash harm amount/acceptance mismatch');
+   await pause(1);
+   const event=hurtEvents.find(row=>row.target===id);
+   check(event?.damage===6&&event.cause==='magic'&&event.owner===(actor?.id??null),'native magic owner mapping mismatch');
+   check(result.result.sourceMapping==='magic_owner_only','partial source mapping is not explicit');
+   out('case',{mode:'native-splash-hurt-source',phase,owned:!!actor,health:health(target).currentValue,event,sourceMapping:result.result.sourceMapping,directProjectileRepresented:false});target.remove();
+  }
+  target=spawn('minecraft:cow');cancelledId=target.id;const before=health(target).currentValue;
+  result=impact(target,[{effect:'minecraft:instant_damage',bedrockId:'instant_damage',amplifier:0,duration:0}],owner);
+  await pause(1);
+  check(health(target).currentValue===before&&!hurtEvents.some(event=>event.target===cancelledId),'native hurt cancellation was bypassed');
+  // Prior native evidence shows applyDamage can acknowledge the request before
+  // a later beforeHurt cancellation. Its return is not final delivered damage.
+  check(['APPLIED_NATIVE_INSTANT','NATIVE_HURT_REJECTED'].includes(result.result.status)&&
+   result.count===(result.result.status==='APPLIED_NATIVE_INSTANT'?1:0),'native acknowledgement counter/status mismatch');
+  out('case',{mode:'native-splash-cancelled-hurt',phase,health:before,apiAcknowledgements:result.count,status:result.result.status,actualHurtEvents:0,acknowledgementIsDeliveredDamage:false});target.remove();cancelledId=undefined;
+
+  owner.remove();
+  const viewer=spawn(sourceType),boat=spawn('minecraft:boat',{x:26,y:300,z:24}),cow=spawn('minecraft:cow',{x:28,y:300,z:24}),stand=spawn('minecraft:armor_stand',{x:30,y:300,z:24}),cod=spawn('minecraft:cod',{x:26,y:300,z:25});
+  check(health(boat)?.currentValue>0,'boat is not the required native health-bearing nonliving witness');
+  check(health(cod)?.currentValue>0&&!cod.getComponent('minecraft:type_family')?.hasTypeFamily('mob'),'cod is not the required living witness without the Native mob family');
+  const sounds=customEffectDiagnostics.visionSounds;
+  check(pulseVision(viewer,0)===3,'Vision did not select exactly the native cow, armor stand and familyless cod');
+  check(pulseVision(viewer,0)===3&&customEffectDiagnostics.visionSounds===sounds+1,'Vision shared-target feedback repeated');
+  out('case',{mode:'native-vision-living-class',phase,excluded:boat.typeId,excludedHasHealth:true,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
+   outline:customEffectDiagnostics.visionOutline,recipientFunctionOnly:true,playerEffectEntrance:false,client:false});
+ }finally{
+  world.afterEvents.entityHurt.unsubscribe(capture);world.beforeEvents.entityHurt.unsubscribe(cancel);
+  for(const entity of owned)try{if(entity.isValid)entity.remove();}catch{}
+ }
 }
 world.afterEvents.worldLoad.subscribe(()=>system.runTimeout(async()=>{try{
  const d=world.getDimension('overworld');d.runCommand('tickingarea add circle 0 300 0 2 migration_qa true');
@@ -67,6 +145,7 @@ world.afterEvents.worldLoad.subscribe(()=>system.runTimeout(async()=>{try{
   await pause(18);check(station.permutation.getState(put)===0,'stale PUT did not recover/rearm');
  }
  out('case',{mode:'native-put-recovery',phase,activations:2,idleCallbacksMeasured:false});
+ await effectRecipients(d,phase);
  if(phase==='first')world.setDynamicProperty('qa:migration_phase','saved');
  check(playerSessions===0&&world.getAllPlayers().length===0,'player sessions occurred');
  out('done',{phase,players:0,playerSessions:0,client:false,crossPackPrivateData:false,addon_registration:addonRegistration()});

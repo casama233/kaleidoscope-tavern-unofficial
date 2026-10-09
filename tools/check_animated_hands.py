@@ -57,3 +57,10 @@ for p in boards:
  texture=terrain[visual['material_instances']['*']['texture']]['textures']
  with Image.open(RP/(texture+'.png')) as im:assert im.convert('RGBA').getchannel('A').getbbox(),p.name
 print(f'{len(boards)} sandwich-board native geometry routes verified; unbound hand override absent.')
+
+# The same original animated sprites must also reach the native guide images.
+# Keep this source-pixel/routing gate in the established CI entry point.
+import unittest
+from test_tavern_forms import TavernForms
+result=unittest.TextTestRunner().run(unittest.defaultTestLoader.loadTestsFromTestCase(TavernForms))
+assert result.wasSuccessful(),'Tavern guide animation source or foreign-form isolation drift'

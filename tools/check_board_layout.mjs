@@ -27,3 +27,4 @@ console.log('Board capacity, five horizontal alignments, three vertical alignmen
 
 assert.equal(decodeBoardInput(encodeBoardInput('first\n第二行')),'first\n第二行');
 assert.equal(splitBoardLines(decodeBoardInput(String.raw`first\n第二行`),small).lineCount,2);
+for(const text of ['first\n第二行',String.raw`C:\new\notes`,String.raw`literal \\n`,'line\n\nnext'])assert.equal(decodeBoardInput(encodeBoardInput(text)),text);

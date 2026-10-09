@@ -145,11 +145,22 @@ function nativeVisionType(){
 }
 export function pulseVision(p,amplifier){
  const radius=visionRadius(amplifier),source=p.getAABB(),min={x:source.center.x-source.extent.x-radius,y:source.center.y-source.extent.y-radius,z:source.center.z-source.extent.z-radius},volume={x:2*(source.extent.x+radius),y:2*(source.extent.y+radius),z:2*(source.extent.z+radius)};
- const nativeType=nativeVisionType(),now=system.currentTick;let targets=0,newTarget=false;
+ // Java completes getEntitiesOfClass(LivingEntity, range, alive) before any
+ // addEffect hook. Health-bearing vehicles are not living recipients, and an
+ // earlier effect must not change membership of the already selected list.
+ const selected=[];
  for(const entity of p.dimension.getEntities({location:min,volume}))try{
   if(entity.id===p.id||entity.typeId.startsWith('kaleidoscope_tavern:seat_')||entity.hasTag?.('kaleidoscope_tavern:visual_helper'))continue;
-  const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
+  if(!livingEffectEntity(entity))continue;
+  // The shared class adapter admits Player independently of its health row.
+  if(entity.typeId==='minecraft:player'){
+   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;
+  }
   if(!inflatedAabbIntersects(source,entity.getAABB(),radius))continue;
+  selected.push(entity);
+ }catch(e){error(e);}
+ const nativeType=selected.length?nativeVisionType():undefined,now=system.currentTick;let targets=0,newTarget=false;
+ for(const entity of selected)try{
   let wasGlowing=false;
   if(nativeType)try{
    wasGlowing=!!entity.getEffect(nativeType);

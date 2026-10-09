@@ -102,9 +102,19 @@ export class NativeItemStorage {
    },
    rollback:()=>{
     if(!applied)return;let failed=false;
-    if(created){try{if(container)for(let i=0;i<SIZE;i++)container.setItem(i,undefined);entity?.remove();}catch{failed=true;}}
+    if(created){
+     // A failed slot cleanup must not skip other slots or leave the staged
+     // entity alive with a second copy of the restored input. A retry after
+     // successful removal must not write through its now-invalid container.
+     if(entity?.isValid!==false){
+      if(container)for(let i=0;i<SIZE;i++)try{container.setItem(i,undefined);}catch{failed=true;}
+      try{entity?.remove();}catch{failed=true;}
+     }
+    }
     else if(container)for(let i=0;i<SIZE;i++)try{container.setItem(i,before.items[i]);}catch{failed=true;}
-    try{this.backend.setDynamicProperty(nativeItemKey(key),before.raw);this.backend.setDynamicProperty(requiredKey(key),before.required);}catch{failed=true;}
+    // These are independent durable writes; attempt both even when one fails.
+    try{this.backend.setDynamicProperty(nativeItemKey(key),before.raw);}catch{failed=true;}
+    try{this.backend.setDynamicProperty(requiredKey(key),before.required);}catch{failed=true;}
     check(!failed,'NATIVE_STORAGE_ROLLBACK_FAILED');applied=false;
    },
    finish:()=>{if(applied&&!occupied&&entity){try{entity.remove();}catch{/* Empty retired helper: never recreate or re-emit contents. */}}}

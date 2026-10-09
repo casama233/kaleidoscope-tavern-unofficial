@@ -14,7 +14,7 @@ own effectAdd 已在同 tick 正確消耗，沒有外部 event，實體 valid、
 新增核對場景：自有原生效果在倒數暫停、正常遞減、同強度外部刷新、
 不同強度效果、清除及正常保存重啟時，各自核對 lease、原生 duration
 與可見粒子。既有 T135 12 jobs 成功、三份原料 portable equality／clone
-及 machine first 六個 case 完成保留原範圍；完整 paired restart 未完成。
+及 paired flow 前六個 case（其中兩個 machine writes）完成保留原範圍；完整 paired restart 未完成。
 T136／W113 新 CI、完整原生 first／restart、發布、真人及 LIVE 均 pending。
 
 [隔離 multiline 診斷](../tools/client-parity/README.md) 可產生独立身份的

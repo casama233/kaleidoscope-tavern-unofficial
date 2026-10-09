@@ -10,5 +10,7 @@
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "T135 canonical BDS exposed native effect duration pausing while system.currentTick advanced. Its failure and diagnostic evidence are retained. T136 tracks owned native remaining duration and must pass its own exact W113 paired first/restart and source-bound evidence checks. No current client, private saved-world, full-family or LIVE success is asserted by this pre-CI request."
+  "native_evidence_scope": "T135 canonical BDS exposed native effect duration pausing while system.currentTick advanced. Its failure and diagnostic evidence are retained. T136 tracks owned native remaining duration and must pass its own exact W113 paired first/restart and source-bound evidence checks. No current client, private saved-world, full-family or LIVE success is asserted by this pre-CI request.",
+  "expected_archive_sha256": "f7ad780ec8c14cb438c725012ff06aceb68e8d5b85486ffbc3a6d6be043a46bd",
+  "reviewed_runtime_source": "c169a2072373b1feda12b08fdd741ed4ecdbc1ec"
 }

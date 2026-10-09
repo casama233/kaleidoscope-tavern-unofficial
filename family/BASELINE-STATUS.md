@@ -17,7 +17,7 @@ first／restart、archive／發布、真人與 LIVE 均 pending。T135 canonical
 的 aura 失敗保留：system ticks 145／146／147 的 speed 均剩 600，舊倒算
 598 誤撤外觀所有權；own effectAdd 正確消耗、無外部 event、health 8／valid。
 新修正使用 native 剩餘時計，不放寬 tolerance、不延後斷言。T135 既有
-12 jobs、portable 三份原料 equality／clone、machine first 六 case 的成功
+12 jobs、portable 三份原料 equality／clone、paired flow 前六 case（其中兩個 machine writes） 的成功
 各保留原範圍，未完成的 paired restart 不繼承。
 
 [隔離 multiline 診斷](../tools/client-parity/README.md) 未改 production，

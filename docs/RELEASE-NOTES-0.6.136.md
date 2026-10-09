@@ -4,7 +4,7 @@ T136 retains the complete [T134 implementation](RELEASE-NOTES-0.6.134.md) and
 [T135 corrections](RELEASE-NOTES-0.6.135.md). It addresses a runtime aura-clock
 defect exposed by the complete native scene, rather than changing the observer's
 expected outcome. W113 will pair with the exact T136 dependency; Grilling remains
-G119. Final source/peer commits, new CI and publication references are pending.
+G119. The frozen functional source is recorded below; final peer, new CI and publication references are pending.
 T134/T135 release notes, failures, frozen identities, witnesses and history remain
 unchanged.
 
@@ -47,6 +47,20 @@ or does not advance. Evidence records `nativeTicksObserved` and
 not longer gameplay invisibility or a delayed aura-acquisition assertion. Its
 new full native first/restart result remains pending.
 
+## Reviewed source and local checks
+
+- Frozen functional source: [`c169a2072373b1feda12b08fdd741ed4ecdbc1ec`](https://github.com/casama233/kaleidoscope-tavern-unofficial/commit/c169a2072373b1feda12b08fdd741ed4ecdbc1ec).
+- Archive: `Kaleidoscope_Tavern_Unofficial_0.6.136_baseline1.mcaddon`, 5,864,677 bytes;
+  SHA256 `f7ad780ec8c14cb438c725012ff06aceb68e8d5b85486ffbc3a6d6be043a46bd`. Built from the clean source tree with release identity enforced.
+- T136's appended reconciliation layer covers the single functional runtime delta
+  in `bedrock/status-aura.js`; previous layers, additions and visual allocation
+  witnesses remain unchanged. BP/RP identity version projections are retained.
+- The focused aura regression run passed 26/26 cases, including eight new
+  paused-clock, foreign-change, fresh-save, failed-revocation and repeated-restore
+  counterexamples. Independent code review found no blocker. The closed native
+  recorder regression passed 7/7. These are script/tool tests, not BDS or client
+  acceptance.
+
 ## Evidence that remains bounded
 
 - The earlier T135 [run 37871245685](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37871245685)
@@ -55,14 +69,16 @@ new full native first/restart result remains pending.
   their original source and scope; they do not certify T136.
 - In the corrected T135 complete native flow, the portable case with three
   accepted stackable ingredients completed native-equality and independent-clone
-  checks, and the six machine first-phase cases completed. The later aura failure
+  checks. The first six paired-flow cases completed: addon readiness, two cross-ID
+  remaps, the three-input portable transaction and two machine writes. The later aura failure
   prevented a complete paired first/restart result. No unfinished restart or
   unreachable case is inherited as passed.
 - W112 [run 37871248554](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/actions/runs/37871248554)
   passed its four jobs, including the exact paired 1,343-model allocation gate.
   W113's new T136 dependency requires its own exact-source CI.
-- T136/W113 canonical CI, complete paired native first/restart, release archive
-  verification and publication are pending. Actual client and private full-family
+- T136/W113 canonical CI, complete paired native first/restart, canonical release archive
+  verification and publication are pending. The local clean-commit archive was built
+  successfully as recorded below. Actual client and private full-family
   saved-world/LIVE acceptance remain separately pending under existing standing
   deployment authorization.
 

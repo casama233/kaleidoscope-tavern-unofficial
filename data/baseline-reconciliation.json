@@ -7019,6 +7019,81 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.136",
+      "files": {
+        "runtime/BP/scripts/bedrock/status-aura.js": {
+          "before": "430fa28aecf9a547284b17dfe10877de529cadd2772cdfc6df62a522f01b3a25",
+          "after": "c8dc5782303f7e9effff401fcb22c28255c2a11d670c1aa97785b9037a558b24",
+          "reason": "T136 appended exact source review. Track acquired native aura ownership by observed nonincreasing remaining duration instead of assuming native and script clocks advance together. Preserve strict own-write tickets, immediate readback, external event handoff, amplifier/extension rejection and durable rollback fences. Persist current readbacks of other owned effects, refresh accepted schema-1 restorations and fence any failed stale-claim revocation. Focused paused-clock, foreign-change, save-failure and repeated-restore regressions distinguish the correction; actual client particles remain unverified.",
+          "reviewedPredecessorCommit": "26626bdc39e687dbb465e33c7f0e10083fe80e95",
+          "reviewedSourceCommit": "c169a2072373b1feda12b08fdd741ed4ecdbc1ec",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.136.md",
+          "reverseOps": [
+            [
+              21,
+              31,
+              "function matches(row,e,now){return !!e&&e.amplifier===row.amplifier&&Math.abs(e.ticks-(row.until-now))<=1;}\n"
+            ],
+            [
+              68,
+              89,
+              "function save(track){\n const now=system.currentTick,rows=[...track.native.values()].filter(row=>row.until>now).map(row=>({id:row.id,ticks:row.until-now,amplifier:row.amplifier}));\n const raw=rows.length?JSON.stringify({schema:1,rows}):undefined;\n writeLease(track,raw);\n track.savedAt=now;\n"
+            ],
+            [
+              95,
+              96,
+              " track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked};let rejected=false;\n"
+            ],
+            [
+              106,
+              110,
+              "    if(observed&&observed.amplifier===row.amplifier&&observed.ticks<=row.ticks&&row.ticks-observed.ticks<=5)track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});\n    else{rejected=true;statusAuraDiagnostics.nativeHandoffs++;}\n"
+            ],
+            [
+              116,
+              119,
+              " if(rejected)try{save(track);}catch(e){blockOwnership(track,e);}\n"
+            ],
+            [
+              139,
+              140,
+              "  if(owned&&!matches(owned,before,system.currentTick)){forgetNative(track,key);owned=undefined;}\n"
+            ],
+            [
+              151,
+              152,
+              " const previous=owned&&{...owned},row={id:key,amplifier,until:system.currentTick+Math.max(ticks,before?.ticks??0)};\n"
+            ],
+            [
+              153,
+              154,
+              " try{save(track);}catch(e){if(previous&&!track.blocked)track.native.set(key,previous);else track.native.delete(key);error(e);return entity.addEffect(id,ticks,options);}\n"
+            ],
+            [
+              158,
+              159,
+              " if(!matches(row,observed,system.currentTick)){\n"
+            ],
+            [
+              165,
+              166,
+              " row.until=system.currentTick+observed.ticks;statusAuraDiagnostics.nativeAcquired++;return result;\n"
+            ],
+            [
+              175,
+              176,
+              "  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;\n"
+            ],
+            [
+              204,
+              205,
+              "   if(!matches(row,observed,now)){forgetNative(track,nativeId);continue;}\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

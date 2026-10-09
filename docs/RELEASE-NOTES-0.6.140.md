@@ -70,6 +70,19 @@ Grilling 保留 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery
 helper 0.2.9 的 descriptor、作者 patch 與 copied helpers 須整組驗證。
 既有 release history、失敗候選及 geometry source witnesses 不改寫。
 
+## 固定功能來源與實際打包
+
+功能來源固定為 `c564075fbba02e1a1636f9d258c0694ae8a2bb32`，
+完整 Git tree `b52ee31448a942aab2a0110aabeedc2a89516072` 與本輪審查來源
+完全相同。測試用反向投影只追加兩個 aura 功能檔，不改舊 witness
+或正式 runtime；本輪六個變更路徑的既有投影鏈均通過。
+
+實際正式產物 `Kaleidoscope_Tavern_Unofficial_0.6.140_baseline1.mcaddon`
+為 5,883,330 bytes，SHA256：
+`bc3abf83e9bb6942cadcfadafb9467348caebf04b0413b242ab75be33edf1834`。
+後續來源與 CI peer metadata 不改已凍結的輸出內容；發布時仍由正式
+工作流核對本次 archive 全部 bytes，不能用名稱或版號代替。
+
 ## 一比一還原的實際界線
 
 回呼反例證明程式處理方式，零玩家 BDS 證明限定原生場景；兩者均未

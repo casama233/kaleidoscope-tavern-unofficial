@@ -7019,6 +7019,56 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.136",
+      "files": {
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "2e5d55b8f0157517887e8b8957c98cc0851c772116adac50aa75a9c45341336a",
+          "after": "8214f8c7acac685fe1e091c297796cfeba59dbc2ecd024197c1b9e502e82cc09",
+          "reason": "T136 appended exact source review. Upside Down snapshots the complete alive source Mob list inside the inflated AABB before any name callback, including source fish and a Mob caster while excluding players and armor stands. The change preserves existing effect routing and does not claim native name-visibility or rendered-client parity. Focused regressions: tools/java-parity-adapter.test.mjs [Upside Down includes alive source fish while excluding players, armor stands and health-only displays; Upside Down keeps the complete alive AABB selection when an earlier name callback changes another target; a living Mob casting Upside Down is itself part of the source Mob list].",
+          "reviewedPredecessorCommit": "6dc43f3bd589a370782f7005c9d672e141de0be3",
+          "reviewedSourceCommit": "721414648d08c17d78db6bb3d5a08f27080acbc4",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.136.md",
+          "reverseOps": [
+            [
+              12,
+              13,
+              "import {livingEffectEntity} from '../core/living-effect-entity.js';\n"
+            ],
+            [
+              52,
+              60,
+              "  // Java uses user.getBoundingBox().inflate(16) and only living Mob entities.\n  // Bedrock family=mob is the closest class filter; exact AABB overlap is rechecked below.\n  const sourceBox=p.getAABB();let renamed=0;\n  for(const entity of p.dimension.getEntities({families:['mob']}))try{\n   if(entity.typeId==='minecraft:player')continue;\n   const health=entity.getComponent?.('minecraft:health');if(!health||health.currentValue<=0)continue;\n"
+            ],
+            [
+              61,
+              62,
+              "   entity.nameTag='Grumm';renamed++;\n"
+            ],
+            [
+              63,
+              64,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/living-effect-entity.js": {
+          "before": "96b59a53f4cd2ed3c62010b3be7f5b669cc9caadc14d179e753ed4a021bbc597",
+          "after": "5ffed0483c22af6aa6e56a57ab040bde8a07abcaf963da34a8f30ee55ae32931",
+          "reason": "T136 appended exact source review. The dedicated Mob predicate excludes players and armor stands, retains reviewed vanilla living classification including fish without a Native mob family, and preserves the existing health plus mob-family adapter for unknown addon entities. This is source classification coverage, not rendered-client acceptance. Focused regressions: tools/java-parity-adapter.test.mjs [Upside Down includes alive source fish while excluding players, armor stands and health-only displays; Upside Down keeps the complete alive AABB selection when an earlier name callback changes another target; a living Mob casting Upside Down is itself part of the source Mob list].",
+          "reviewedPredecessorCommit": "6dc43f3bd589a370782f7005c9d672e141de0be3",
+          "reviewedSourceCommit": "721414648d08c17d78db6bb3d5a08f27080acbc4",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.136.md",
+          "reverseOps": [
+            [
+              17,
+              25,
+              ""
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

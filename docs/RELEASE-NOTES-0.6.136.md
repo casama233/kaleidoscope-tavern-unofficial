@@ -88,3 +88,19 @@ step-height／XP pickup、多行板面編輯器、彩色字腳位距離／望遠
 私人 BSM、當前 quality checkpoint 與 LIVE 世界連線在本工作區不可用。
 完整家族組裝、fresh stopped-world 演練、備份、准入、部署及讀回保持未執行；
 既有持續授權不變。client=false、production_ready=false、live_deployment=false。
+
+## 本機確切配套重啟結果：未通過
+
+[原始原生報告](native/T136-W113-20261009.json) 記錄 T136／W113 的完整
+frozen runtime 與顯式 observer hashes。T 本機實測 commit `96668b8b` 的
+完整 tree 與公開 functional source `721414648d08c17d78db6bb3d5a08f27080acbc4`
+相同；W 為公開 `a5b22dfb05176f626b89de3f46f1ecc1806e8f62`。
+這是隔離診斷，沒有把本機 commit 重新標成正式 CI 或部署准入。
+
+首次啟動通過，包括三種原料、機器原生資料、aura 取得、PUT 恢復、即時
+治療／傷害與取消、Vision 和 Upside Down 真實 Mob／鱈魚／排除對象。
+正常停止後的重啟通過兩種雪克杯 ID 保存、三種原料資料與兩種機器回收，
+但在 `saved appearance lease not restored` 失敗。兩階段均正常停止，
+沒有玩家連線或內容 ERROR；失敗不能被後續版本或只看首次 done 覆蓋。
+停止後世界副本的狼仍有 speed 效果，光效 dynamic property 已空，根因
+及修補仍待獨立原生事件追蹤確認。T136／W113 不因此聲稱可部署或完整通過。

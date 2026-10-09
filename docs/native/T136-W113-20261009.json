@@ -1,0 +1,477 @@
+{
+  "native_script_behavior": false,
+  "client": false,
+  "full_family": false,
+  "live": false,
+  "test_only_host_overlay": true,
+  "engine": {
+    "executable_sha256": "0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+    "download": "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip",
+    "archive_sha256": "f6348d84fa714d04ca194f207e89453ca6bba0a1359396475271a52a150471c6",
+    "reused_successful_save_restart_receipt_sha256": "3eb36b2828d66a12fd4c67a59885c6f02dfe1385409e3561493f697d9338ad0d"
+  },
+  "sources": {
+    "tavern": {
+      "commit": "96668b8bc84314a8f9c59671f08c62c016457833",
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "version": [
+        0,
+        6,
+        136
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "24b9794f39e5be5e088d1bfce7dc1c246bd819fac7eeb35bae2a7d240edb549b",
+          "files": 827
+        },
+        "RP": {
+          "sha256": "ac311d2498d79229bb068739c2e5fcc6e81d0e0df507b6eff1b57a6cbf2ea2cd",
+          "files": 3222
+        }
+      }
+    },
+    "liquor": {
+      "commit": "a5b22dfb05176f626b89de3f46f1ecc1806e8f62",
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "version": [
+        0,
+        1,
+        113
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "451552c0146712701d4a1820dba810b1ea7e8396f02d0117fd573235dd3d97a1",
+          "files": 339
+        },
+        "RP": {
+          "sha256": "4ace28dcc210a8c4cd879234f5f3d7fce4a0a19c6b29b2320ff4e4e272c56baa",
+          "files": 549
+        }
+      }
+    }
+  },
+  "copied_runtime_matches_frozen_source": true,
+  "test_only_overlays": {
+    "scripts/living-effects-probe.js": "be34ba687b047a97295b605246dc84029ca073557170131b1974ee609272e203",
+    "entities/living-probe.json": "bdc56e29b59f80c3fd017f2e75581562ac1ca1ba4a272c101294fc48f533d789",
+    "entities/health-helper-probe.json": "c45525baae1359d21a4a38df13e1758ce7f8340ea36845817f3fd7844503cb16",
+    "scripts/main.js": "Append only the declared disposable observer import after verifying the complete copied runtime.",
+    "scripts/machine-ingredients-probe.js": "e6d62b96653034282d738b44edb4d3b3be71b78ae0f609391aaa120e4e4d2ce5",
+    "scripts/status-aura-probe.js": "916a093369ebefa3a67dc05ec662a3b333fe1a448a4dc4a4ec8462b0f2de5f99"
+  },
+  "reports": [
+    {
+      "phase": "first",
+      "ok": true,
+      "normal_stop": true,
+      "player_connections": 0,
+      "errors": [],
+      "observations": [
+        {
+          "kind": "case",
+          "mode": "addon_registration",
+          "phase": "first",
+          "source": "kaleidoscope_world_liquor",
+          "version": "0.1.113",
+          "recipes": 34,
+          "pages": 67,
+          "shakerInputs": 56
+        },
+        {
+          "kind": "case",
+          "mode": "native-cross-id",
+          "source": "kaleidoscope_tavern:shaker_active",
+          "target": "kaleidoscope_tavern:shaker",
+          "lock": "inventory",
+          "adventureLists": 10,
+          "rawLore": true,
+          "hostScopeDynamicTypes": 4
+        },
+        {
+          "kind": "case",
+          "mode": "native-cross-id",
+          "source": "kaleidoscope_tavern:shaker_pouring",
+          "target": "kaleidoscope_tavern:shaker",
+          "lock": "slot",
+          "adventureLists": 10,
+          "rawLore": true,
+          "hostScopeDynamicTypes": 4
+        },
+        {
+          "kind": "case",
+          "mode": "portable-stackable-ingredient-metadata",
+          "phase": "first",
+          "ingredients": 3,
+          "rowTypes": [
+            "kaleidoscope_tavern:plum_wine_q4",
+            "kaleidoscope_tavern:whiskey_q4",
+            "kaleidoscope_tavern:honey_wine_q4"
+          ],
+          "nativeEquality": true,
+          "independentClone": true,
+          "fullArbitraryNBT": false
+        },
+        {
+          "kind": "pressing_tub",
+          "mode": "native-machine-write",
+          "phase": "first",
+          "slots": 1,
+          "counts": [
+            11
+          ],
+          "schema": 2,
+          "hostScopeMetadata": true
+        },
+        {
+          "kind": "barrel",
+          "mode": "native-machine-write",
+          "phase": "first",
+          "slots": 4,
+          "counts": [
+            3,
+            5,
+            1,
+            1
+          ],
+          "schema": 2,
+          "hostScopeMetadata": true
+        },
+        {
+          "kind": "case",
+          "mode": "native-aura-chunk-readiness",
+          "phase": "first",
+          "area": "status_aura_qa",
+          "readableChunks": 4,
+          "waitedTicks": 5,
+          "preload": true
+        },
+        {
+          "kind": "case",
+          "mode": "native-aura-acquisition",
+          "phase": "first",
+          "duration": 597,
+          "ownLease": true,
+          "nativeParticleFlagsReadable": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-one-tick-invisibility-expiry",
+          "phase": "first",
+          "playerConcealmentVerified": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-outline-registry",
+          "phase": "first",
+          "glowing": false,
+          "client": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-put-recovery",
+          "phase": "first",
+          "activations": 2,
+          "idleCallbacksMeasured": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-rolled-heal",
+          "phase": "first",
+          "health": 6,
+          "effects": 1,
+          "eventEnvelope": "observer",
+          "physicalImpact": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-persisted-hook",
+          "phase": "first",
+          "health": 5,
+          "rawAmount": 0,
+          "healAmount": 3,
+          "declaredThisPhase": true
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-armor-stand-immunity",
+          "phase": "first",
+          "health": 2,
+          "effects": 0
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-hurt-source",
+          "phase": "first",
+          "owned": true,
+          "health": 4,
+          "event": {
+            "target": "-4294967284",
+            "damage": 6,
+            "cause": "magic",
+            "owner": "-4294967291"
+          },
+          "sourceMapping": "magic_owner_only",
+          "directProjectileRepresented": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-hurt-source",
+          "phase": "first",
+          "owned": false,
+          "health": 4,
+          "event": {
+            "target": "-4294967282",
+            "damage": 6,
+            "cause": "magic",
+            "owner": null
+          },
+          "sourceMapping": "magic_owner_only",
+          "directProjectileRepresented": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-splash-cancelled-hurt",
+          "phase": "first",
+          "health": 10,
+          "apiAcknowledgements": 1,
+          "status": "APPLIED_NATIVE_INSTANT",
+          "actualHurtEvents": 0,
+          "acknowledgementIsDeliveredDamage": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-vision-recipient-components",
+          "phase": "first",
+          "immediateXp": {
+            "type": "minecraft:xp_orb",
+            "valid": true,
+            "componentIds": [
+              "minecraft:type_family"
+            ],
+            "healthAvailable": false,
+            "health": null,
+            "families": [
+              "inanimate"
+            ],
+            "inanimate": true,
+            "mob": false,
+            "errors": {}
+          },
+          "settledXp": {
+            "type": "minecraft:xp_orb",
+            "valid": true,
+            "componentIds": [
+              "minecraft:type_family"
+            ],
+            "healthAvailable": false,
+            "health": null,
+            "families": [
+              "inanimate"
+            ],
+            "inanimate": true,
+            "mob": false,
+            "errors": {}
+          },
+          "testOnlyHealthHelper": {
+            "type": "living_effect_qa:health_helper",
+            "valid": true,
+            "componentIds": [
+              "minecraft:health",
+              "minecraft:lava_movement",
+              "minecraft:movement",
+              "minecraft:type_family",
+              "minecraft:underwater_movement"
+            ],
+            "healthAvailable": true,
+            "health": {
+              "currentValue": 100,
+              "effectiveMin": 0,
+              "effectiveMax": 100
+            },
+            "families": [
+              "living_effect_health_helper",
+              "inanimate"
+            ],
+            "inanimate": true,
+            "mob": false,
+            "errors": {}
+          },
+          "cod": {
+            "type": "minecraft:cod",
+            "valid": true,
+            "componentIds": [
+              "minecraft:breathable",
+              "minecraft:health",
+              "minecraft:is_hidden_when_invisible",
+              "minecraft:lava_movement",
+              "minecraft:movement",
+              "minecraft:movement.sway",
+              "minecraft:navigation.generic",
+              "minecraft:scale",
+              "minecraft:type_family",
+              "minecraft:underwater_movement"
+            ],
+            "healthAvailable": true,
+            "health": {
+              "currentValue": 3,
+              "effectiveMin": 0,
+              "effectiveMax": 3
+            },
+            "families": [
+              "cod",
+              "aquatic",
+              "fish"
+            ],
+            "inanimate": false,
+            "mob": false,
+            "errors": {}
+          }
+        },
+        {
+          "kind": "case",
+          "mode": "native-vision-living-class",
+          "phase": "first",
+          "excluded": "living_effect_qa:health_helper",
+          "excludedHasHealth": true,
+          "excludedHealth": 100,
+          "excludedHasMobFamily": false,
+          "testOnlyHealthWitness": true,
+          "additionalExcluded": "minecraft:xp_orb",
+          "xpHealthApiAvailable": false,
+          "admitted": [
+            "minecraft:cow",
+            "minecraft:armor_stand",
+            "minecraft:cod"
+          ],
+          "codHasMobFamily": false,
+          "targets": 3,
+          "newTargetSounds": 1,
+          "outline": "unavailable",
+          "recipientFunctionOnly": true,
+          "playerEffectEntrance": false,
+          "client": false
+        },
+        {
+          "kind": "case",
+          "mode": "native-upside-down-mob-class",
+          "phase": "first",
+          "renamed": [
+            "living_effect_qa:mob",
+            "minecraft:cow",
+            "minecraft:cod"
+          ],
+          "excluded": [
+            "minecraft:armor_stand",
+            "living_effect_qa:health_helper",
+            "minecraft:xp_orb"
+          ],
+          "codHasMobFamily": false,
+          "renames": 3,
+          "recipientFunctionOnly": true,
+          "playerEffectEntrance": false,
+          "nameVisibilityParity": false,
+          "client": false
+        },
+        {
+          "kind": "done",
+          "phase": "first",
+          "players": 0,
+          "playerSessions": 0,
+          "client": false,
+          "crossPackPrivateData": false,
+          "addon_registration": {
+            "source": "kaleidoscope_world_liquor",
+            "version": "0.1.113",
+            "recipes": 34,
+            "pages": 67,
+            "shakerInputs": 56
+          }
+        }
+      ]
+    },
+    {
+      "phase": "restart",
+      "ok": false,
+      "normal_stop": true,
+      "player_connections": 0,
+      "errors": [],
+      "observations": [
+        {
+          "kind": "case",
+          "mode": "addon_registration",
+          "phase": "restart",
+          "source": "kaleidoscope_world_liquor",
+          "version": "0.1.113",
+          "recipes": 34,
+          "pages": 67,
+          "shakerInputs": 56
+        },
+        {
+          "kind": "case",
+          "mode": "saved-metadata",
+          "slot": 0,
+          "lock": "inventory"
+        },
+        {
+          "kind": "case",
+          "mode": "saved-metadata",
+          "slot": 1,
+          "lock": "slot"
+        },
+        {
+          "kind": "case",
+          "mode": "portable-stackable-ingredient-metadata",
+          "phase": "restart",
+          "ingredients": 3,
+          "rowTypes": [
+            "kaleidoscope_tavern:plum_wine_q4",
+            "kaleidoscope_tavern:whiskey_q4",
+            "kaleidoscope_tavern:honey_wine_q4"
+          ],
+          "nativeEquality": true,
+          "independentClone": true,
+          "fullArbitraryNBT": false
+        },
+        {
+          "kind": "pressing_tub",
+          "mode": "native-machine-restart-recovery",
+          "phase": "restart",
+          "slots": 1,
+          "counts": [
+            11
+          ],
+          "schema": 2,
+          "completeNativeSlots": true
+        },
+        {
+          "kind": "barrel",
+          "mode": "native-machine-restart-recovery",
+          "phase": "restart",
+          "slots": 4,
+          "counts": [
+            3,
+            5,
+            1,
+            1
+          ],
+          "schema": 2,
+          "completeNativeSlots": true
+        },
+        {
+          "kind": "case",
+          "mode": "native-aura-chunk-readiness",
+          "phase": "restart",
+          "area": "status_aura_qa",
+          "readableChunks": 4,
+          "waitedTicks": 5,
+          "preload": true
+        },
+        {
+          "kind": "failure",
+          "error": "Error: saved appearance lease not restored",
+          "stack": "    at check (status-aura-probe.js:8)\n    at runStatusAuraProbe (status-aura-probe.js:48)\n"
+        }
+      ]
+    }
+  ]
+}

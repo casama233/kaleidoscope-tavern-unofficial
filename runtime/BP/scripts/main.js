@@ -1,4 +1,5 @@
-import {showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics} from './bedrock/standalone-guide.js';
+import {showStandaloneGuide,clearStandaloneGuideSession,hasStandaloneGuideSession,standaloneGuideDiagnostics} from './bedrock/standalone-guide.js';
+import {installCookeryGuideEntry} from './core/cookery-guide-entry.js';
 import {installEffectIcons,showEffectDetails,effectIconDiagnostics} from './bedrock/effect-icons.js';
 import {BUILD_VERSION} from './data/build-version.js';
 import {installPickupOverflowEvents} from './bedrock/pickup-overflow.js';
@@ -58,6 +59,11 @@ let registry;let cookeryReady=false,cookeryCapabilities=[];
 installNativeStoragePinning(()=>registry);
 const LEGACY_GUIDES=new Set(['kaleidoscope_tavern:guidebook','kaleidoscope_tavern:recipe_book']);
 const cookeryGuidePublisher=installCookeryGuidePublisher(system,()=>buildCookeryGuidePayload(registry));
+installCookeryGuideEntry({system,world,
+ available:player=>!!registry&&!hasStandaloneGuideSession(player.id),
+ show:(player,options)=>showStandaloneGuide(player,()=>registry?buildCookeryGuidePayload(registry):null,options),
+ warn:error=>console.warn('[Tavern guide entrance] '+error),
+});
 
 // Phase 1 — custom component registration, run inside system.beforeEvents.startup.
 // Each entry takes the startup event. Order matters only if a component depends on

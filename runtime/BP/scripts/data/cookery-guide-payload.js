@@ -7,7 +7,7 @@ import { EFFECT_PAGES } from "./effect-pages.js";
 export const COOKERY_GUIDE_PAYLOAD={
   "api": 1,
   "id": "kaleidoscope_tavern:tavern",
-  "version": "0.6.132",
+  "version": "0.6.136",
   "order": 250,
   "icon": "textures/ui/guidebook_icons/kt_tavern",
   "titleKey": "title",
@@ -5899,7 +5899,8 @@ export function buildCookeryGuidePayload(registry){
   const mechanicsByLocale=Object.fromEntries(GUIDE_LOCALES.map(lc=>{
    const body=String(page.body?.[lc]??page.body?.en_US??firstText(page.body,page.id));
    // Actual registered recipe slots are authoritative, never inferred from prose.
-   return [lc,body.split(/\n+/).filter(Boolean)];
+   // Keep each short heading with its paragraph; the shared renderer styles it.
+   return [lc,body.split(/\n\n+/).filter(Boolean)];
   }));
   payload.entries.push({id:item,category,icon:page.icon??'textures/kaleidoscope_tavern_jar/item/empty_bottle',kinds:[],mechanics:mechanicsByLocale.zh_TW,mechanicsByLocale,...(linked.length?{recipes:linked.flatMap(r=>preparationRecipes(r,payload.names)),food:preparationFood(linked[0]),kinds:['item'],placeable:true}:page.preparations?.length?{recipes:copy(page.preparations),food:copy(page.food??{eatFromInventory:true}),kinds:['item']}:{})});
   addLocalizedName(payload,item,page.title,item);

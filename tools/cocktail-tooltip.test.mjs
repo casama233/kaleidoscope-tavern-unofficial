@@ -73,9 +73,9 @@ test('shaker lore uses source colors and resolved potion names, wrapping long na
 test('the actual shared guide includes cocktail effects in all three languages and keeps seven entrances',()=>{
  const registry={list:()=>[{source:'kaleidoscope_tavern'}],allRecipes:()=>SHAKER_RECIPES.map(row=>({...row,source:'kaleidoscope_tavern'})),allPages:()=>[]};
  const payload=buildCookeryGuidePayload(registry),emerald=payload.entries.find(row=>row.id==='kaleidoscope_tavern:emerald');
- assert(emerald.mechanicsByLocale.zh_TW.some(line=>line.includes('長臂')&&line.includes('45:00')));
- assert(emerald.mechanicsByLocale.zh_CN.some(line=>line.includes('长臂')&&line.includes('45:00')));
- assert(emerald.mechanicsByLocale.en_US.some(line=>line.includes('Long Reach')&&line.includes('45:00')));
+ assert(emerald.mechanicsByLocale.zh_TW.some(line=>line.includes('長臂')&&line.includes('放置酒瓶、雪克杯或倒酒')));
+ assert(emerald.mechanicsByLocale.zh_CN.some(line=>line.includes('长臂')&&line.includes('放置酒瓶、雪克杯或倒酒')));
+ assert(emerald.mechanicsByLocale.en_US.some(line=>line.includes('Long Reach')&&line.includes('Place bottles and shakers, or pour a drink')));
  assert.equal(payload.categories.filter(row=>!row.parent).length,7);
  const shaker=payload.entries.find(row=>row.id==='kaleidoscope_tavern:shaker');
  assert(shaker.mechanicsByLocale.en_US.some(line=>line.includes('swing into air')));

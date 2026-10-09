@@ -83,7 +83,7 @@ export function organizeGuideNavigation(payload){
   category(id,'',[cn,tw,en],icon),
   ...LEAVES.filter(([parent,leaf])=>parent===id&&used.has(leaf)).map(([parent,leaf,...labels])=>category(leaf,parent,labels.slice(0,3),labels[3]))
  ]);
- const body=['蹲下使用本书可查看当前酒效。选择项目查看用法与制作方法；多个条目的分类会展开列表。酿酒和调酒先列酒馆本体，再列附属配方。','蹲下使用本書可查看目前酒效。選擇項目查看用法與製作方法；多個條目的分類會展開列表。釀酒和調酒先列酒館本體，再列附屬配方。','Sneak-use this book to view active drink effects. Choose an entry for its use and preparation; groups with several entries open a list. Tavern brewing and cocktail recipes appear before addon recipes.'];
+ const body=['从一桶果汁开始，慢慢布置自己的酒馆。选择物品了解用法，制作时再打开配方；蹲下使用本书可查看当前酒效。','從一桶果汁開始，慢慢布置自己的酒館。選擇物品了解用法，製作時再打開配方；蹲下使用本書可查看目前酒效。','Start with a bucket of juice and make the tavern your own. Choose an item to learn how to use it, then open its recipe when you are ready. Sneak-use this book to view active drink effects.'];
  LOCALES.forEach((lc,i)=>{payload.text[lc].intro=body[i];payload.text[lc].food_groups_body=body[i];});
  const index=new Map(payload.categories.map((c,i)=>[c.id,i]));
  payload.entries.sort((a,b)=>index.get(a.category)-index.get(b.category));

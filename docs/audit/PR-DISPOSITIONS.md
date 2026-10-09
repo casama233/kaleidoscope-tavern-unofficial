@@ -2,6 +2,25 @@
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
+## 當前指南候選與保留來源
+
+本輪候選為 **T136／W113／G121**。T136 凍結來源 `496ce702` 以已部署的
+T132 玩法重修指南；W113 `92168bec` 保留 W110 玩法並重寫 67 個三語條目；
+G121 `2b422458` 保留已合併 G120 `8dc3e9d4`，提供可選 Cookery 酒館章節交接。
+七入口、完整製作方法與三語呈現規則見 [GUIDE-EDITORIAL.md](../GUIDE-EDITORIAL.md)
+及 [T136 release notes](../RELEASE-NOTES-0.6.136.md)。
+
+| 來源 | 本輪處置 |
+| --- | --- |
+| [T135 PR302](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/302) | 尚未合併並保留來源。原生重啟的 `effectAdd` 重播撤銷保存的外觀 lease，完整 native-persistence 未通過；其 runtime 不納入 T136，未豁免失敗或以指南驗證代替。 |
+| [T133 PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298) | 草稿與 reviewed source 繼續保留，未納入本候選。 |
+| [G120 main](https://github.com/casama233/kaleidoscope-grilling-unofficial/commit/8dc3e9d440577cd70501c377722f8e27b0913d44) | 已合併內容由 G121 承接，不回退到 G119 來源。 |
+
+LIVE 仍為 **T132／G119／W110**。新候選須完成確切來源 PR／CI 與完整家族
+static、BDS、停服存檔演練、准入及部署讀回，才更新 LIVE。
+`client=false`、`production_ready=false`、`pending_client_acceptance` 繼續保持；
+兩入口共用顯示與文字檢查不能當作真人排版／操作驗收。
+
 ## T132／W109：多代理同步修復
 
 從已交付 T131 `e02c19da3a8e29d7574c5922e142ef99775dd643` 和 W108

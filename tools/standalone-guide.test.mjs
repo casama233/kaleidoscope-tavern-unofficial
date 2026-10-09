@@ -7,7 +7,7 @@ import {GUIDE_ROOTS} from '../runtime/BP/scripts/data/guide-navigation.js';
 const N='kaleidoscope_tavern:',registry={list:()=>[],allPages:()=>[],allRecipes:()=>[...BUILTIN_RECIPES,...SHAKER_RECIPES].map(r=>({...r,source:'kaleidoscope_tavern'}))},payload=buildCookeryGuidePayload(registry);
 for(const locale of GUIDE_LANGUAGES){
  test(locale+' retains every root including empty Food',()=>{const view=standaloneGuideView(payload,locale);assert.deepEqual(view.buttons.slice(0,7).map(x=>x.action.id),GUIDE_ROOTS);const food=standaloneGuideView(payload,locale,{type:'category',id:'food'});assert.equal(food.body,guideText(locale,'empty'));});
- test(locale+' all source mechanics and every preparation remain available',()=>{let count=0;for(const entry of payload.entries){const view=standaloneGuideView(payload,locale,{type:'entry',id:entry.id});for(const line of entry.mechanicsByLocale[locale]??[])assert.ok(view.body.includes(line),entry.id);assert.equal(view.buttons.filter(x=>x.action.type==='recipe').length,entry.recipes?.length??0,entry.id);for(let i=0;i<(entry.recipes?.length??0);i++){const r=entry.recipes[i],v=standaloneGuideView(payload,locale,{type:'recipe',id:entry.id,index:i});for(const id of r.ingredients)assert.ok(v.body.includes(payload.names[locale][id]??payload.names.en_US[id]??id),id);count++;}}assert.equal(count,42);});
+ test(locale+' all source mechanics and every preparation remain available',()=>{let count=0;for(const entry of payload.entries){const view=standaloneGuideView(payload,locale,{type:'entry',id:entry.id});for(const line of entry.mechanicsByLocale[locale]??[])assert.ok(view.body.replace(/§./g,'').includes(line.replace(/§./g,'')),entry.id);assert.equal(view.buttons.filter(x=>x.action.type==='recipe').length,entry.recipes?.length??0,entry.id);for(let i=0;i<(entry.recipes?.length??0);i++){const r=entry.recipes[i],v=standaloneGuideView(payload,locale,{type:'recipe',id:entry.id,index:i});for(const id of r.ingredients)assert.ok(v.body.includes(payload.names[locale][id]??payload.names.en_US[id]??id),id);count++;}}assert.equal(count,42);});
  test(locale+' single-entry leaf opens item directly with its icon',()=>{const view=standaloneGuideView(payload,locale,{type:'category',id:'equipment'});const barrel=payload.entries.find(x=>x.id===N+'barrel');assert.ok(view.buttons.some(x=>x.action.type==='entry'&&x.action.id===barrel.id&&x.icon===barrel.icon&&x.label===payload.names[locale][barrel.id]));});
 }
 test('native crafting records never invent a shaped grid',()=>{const p=structuredClone(payload),e=p.entries[0];e.recipes=[{method:'Crafting Table',ingredients:['minecraft:cookie','minecraft:gold_nugget'],result:e.id,count:1,time:0}];const v=standaloneGuideView(p,'en_US',{type:'recipe',id:e.id,index:0});assert.ok(v.body.includes('does not specify crafting-grid positions'));});
@@ -22,13 +22,13 @@ const withIce=buildCookeryGuidePayload({list:()=>[{source:sourceId}],allPages:()
 for(const locale of GUIDE_LANGUAGES){
  test(locale+' reported ice tea shows one fluid section, full names, bottling and aging',()=>{
   const view=standaloneGuideView(withIce,locale,{type:'recipe',id:iceId,index:0}),text=view.body.replace(/§./g,'');
-  assert.ok(text.includes('4000 mB (4 '));
+  assert.ok(text.includes('×4 (4000 mB)'));
   assert.equal(text.split(guideItemName(withIce,locale,'minecraft:water_bucket')).length-1,1);
   assert.ok(text.includes(guideItemName(withIce,locale,N+'empty_bottle')));
-  assert.ok(text.includes('120 '));assert.ok(text.includes('6'));
+  assert.ok(text.includes(locale==='en_US'?'2 min':locale==='zh_TW'?'2 分鐘':'2 分钟'));assert.ok(text.includes('6'));
   for(const id of ['minecraft:crimson_roots','minecraft:sugar','minecraft:ice'])assert.ok(text.includes(guideItemName(withIce,locale,id)+' ×1'));
   assert.ok(!/minecraft:|kaleidoscope_tavern:/.test(text));
-  const entry=standaloneGuideView(withIce,locale,{type:'entry',id:iceId});assert.ok(entry.body.includes('4000 mB'));
+  const entry=standaloneGuideView(withIce,locale,{type:'entry',id:iceId});assert.ok(!entry.body.includes('4000 mB'),'full preparation opens on demand rather than repeating in the item introduction');
   for(const id of ['minecraft:water_bucket','minecraft:lava_bucket','minecraft:milk_bucket','minecraft:ink_sac','minecraft:blue_dye','minecraft:slime_ball','minecraft:cookie'])assert.ok(withIce.names[locale][id]&&!withIce.names[locale][id].includes(':'));
  });
 }
@@ -43,7 +43,7 @@ test('shared Cookery wire preserves machine semantics and names without mutating
  const {cookery106WirePayload,encodeCookeryGuideMessages}=await import('../runtime/BP/scripts/core/cookery-guide-publisher.js');
  const before=JSON.stringify(withIce),wire=cookery106WirePayload(withIce),entry=wire.entries.find(e=>e.id===iceId);
  assert.deepEqual(entry.recipes,withIce.entries.find(e=>e.id===iceId).recipes);
- for(const locale of GUIDE_LANGUAGES){assert.ok(wire.names[locale]['minecraft:water_bucket']);assert.ok(wire.names[locale]['minecraft:water']);assert.ok(entry.mechanicsByLocale[locale].join('\n').includes('4000 mB'));}
+ for(const locale of GUIDE_LANGUAGES){assert.ok(wire.names[locale]['minecraft:water_bucket']);assert.ok(wire.names[locale]['minecraft:water']);assert.equal(entry.recipes[0].preparation.amount,4000);assert.ok(!entry.mechanicsByLocale[locale].join('\n').includes('4000 mB'));}
  assert.ok(encodeCookeryGuideMessages(withIce).length<=514);assert.equal(JSON.stringify(withIce),before);
 });
 test('a different world can register its own fluid and still get localized volume and container names',async()=>{
@@ -56,10 +56,10 @@ test('a different world can register its own fluid and still get localized volum
 });
 // UI SDK call doubles exercise controller flow; no game/player simulation.
 const source=fs.readFileSync(new URL('../runtime/BP/scripts/bedrock/standalone-guide.js',import.meta.url),'utf8').replace(/^import .*;\s*$/gm,'').replace(/export /g,'');
-function ui(responses,provider=()=>payload){const shown=[],properties=new Map(),messages=[];let writes=0,fail=false;class Form{title(v){this.t=v;return this}body(v){this.b=v;return this}button(v){(this.buttons??=[]).push(v);return this}dropdown(...v){(this.fields??=[]).push(v);return this}async show(){shown.push(this);const next=responses.shift();if(next instanceof Error)throw next;return typeof next==='function'?next():next??{canceled:true};}}
- const ctx=vm.createContext({ActionFormData:Form,ModalFormData:Form,GUIDE_LANGUAGES,guideLocale,guideText,standaloneGuideView,getGuideLocale,getShakerSoundLevel,SHAKER_SOUND_LEVELS,savePresentationSettings,console:{warn(){}}});vm.runInContext(source+'\nthis.api={showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics};',ctx);
+function ui(responses,provider=()=>payload,options={}){const shown=[],properties=new Map(),messages=[];let writes=0,fail=false;class Form{title(v){this.t=v;return this}body(v){this.b=v;return this}button(v){(this.buttons??=[]).push(v);return this}dropdown(...v){(this.fields??=[]).push(v);return this}async show(){shown.push(this);const next=responses.shift();if(next instanceof Error)throw next;return typeof next==='function'?next():next??{canceled:true};}}
+ const ctx=vm.createContext({ActionFormData:Form,ModalFormData:Form,GUIDE_LANGUAGES,guideLocale,guideText,standaloneGuideView,getGuideLocale,getShakerSoundLevel,SHAKER_SOUND_LEVELS,savePresentationSettings,console:{warn(){}}});vm.runInContext(source+'\nthis.api={showStandaloneGuide,clearStandaloneGuideSession,hasStandaloneGuideSession,standaloneGuideDiagnostics};',ctx);
  const holder={id:'ui-adapter',isValid:true,getDynamicProperty:k=>properties.get(k),setDynamicProperty(k,v){writes++;if(fail)throw Error('storage');if(v===undefined)properties.delete(k);else properties.set(k,v)},sendMessage:m=>messages.push(m)};
- return {shown,properties,messages,api:ctx.api,holder,run:()=>ctx.api.showStandaloneGuide(holder,provider),get writes(){return writes},set fail(v){fail=v}};
+ return {shown,properties,messages,api:ctx.api,holder,run:()=>ctx.api.showStandaloneGuide(holder,provider,options),get writes(){return writes},set fail(v){fail=v}};
 }
 test('Close and cancel terminate without consuming a book or changing preferences',async()=>{for(const response of [{selection:8},{canceled:true}]){const f=ui([response]);assert.equal(await f.run(),true);assert.equal(f.shown.length,1);assert.equal(f.writes,0);}});
 test('Back returns from a single-entry item to its parent root category',async()=>{const f=ui([{selection:0},{selection:0},{selection:0},{canceled:true}]);await f.run();assert.equal(f.shown.length,4);assert.equal(f.shown[1].t,f.shown[3].t);});
@@ -121,4 +121,41 @@ test('guide preparation waits for the host, yields, and reuses packets until con
  assert.ok(sent.every(x=>Buffer.byteLength(x.message)<=2048));
  publisher.refresh();advance(2);publisher.dispose();const count=sent.length;advance(500);
  assert.equal(sent.length,count,'dispose must cancel unfinished work');assert.equal(pending.size,0);
+});
+
+// Optional host uses the identical view; its context is temporary, not a setting write.
+test('Cookery entrance shares the view, returns only on explicit Back and preserves stored locale',async()=>{
+ for(const [response,outcome] of [[{selection:8},'back'],[{selection:9},'closed'],[{canceled:true},'closed']]){
+  const finished=[],f=ui([response],()=>payload,{locale:'en_US',onFinish:v=>finished.push(v)});
+  f.properties.set(GUIDE_LANGUAGE_KEY,'zh_CN');await f.run();
+  assert.equal(f.shown[0].t,payload.text.en_US.title);assert.deepEqual(finished,[outcome]);
+  assert.equal(f.properties.get(GUIDE_LANGUAGE_KEY),'zh_CN');assert.equal(f.writes,0);
+ }
+});
+
+test('Cookery handoff opens only after a matching player start and echoes return context',async()=>{
+ const {installCookeryGuideEntry}=await import('../runtime/BP/scripts/core/cookery-guide-entry.js');
+ // Event/scheduler and UI SDK doubles only; no game world or bot.
+ function adapter(responses){
+  let receive,leave,next=0,ready=true;const tasks=new Map(),sent=[],f=ui(responses);
+  const system={currentTick:10,afterEvents:{scriptEventReceive:{subscribe(fn){receive=fn}}},runTimeout(fn,ticks){const id=++next;tasks.set(id,{fn,at:this.currentTick+ticks});return id},run(fn){return this.runTimeout(fn,1)}};
+  f.holder.typeId='minecraft:player';f.holder.runCommand=command=>{const [verb,id,...rest]=command.split(' ');assert.equal(verb,'scriptevent');sent.push({id,row:JSON.parse(rest.join(' '))});};
+  const entry=installCookeryGuideEntry({system,world:{afterEvents:{playerLeave:{subscribe(fn){leave=fn}}}},available:p=>ready&&!f.api.hasStandaloneGuideSession(p.id),show:(p,options)=>f.api.showStandaloneGuide(p,()=>payload,options)});
+  const advance=async n=>{for(let i=0;i<n;i++){system.currentTick++;for(const [id,row]of [...tasks])if(row.at<=system.currentTick){tasks.delete(id);row.fn();}await Promise.resolve();await Promise.resolve();}};
+  return {f,sent,entry,system,advance,receive:(id,row,source=f.holder)=>receive({id,message:JSON.stringify(row),sourceEntity:source}),leave:()=>leave({playerId:f.holder.id}),set ready(value){ready=value}};
+ }
+ const row={api:1,chapter:'kaleidoscope_tavern:tavern',playerId:'ui-adapter',locale:'en_US',nonce:'host-context',expiresTick:50},event=kind=>'kaleidoscope_tavern:guidebook_'+kind;
+ const a=adapter([{selection:8}]);a.f.properties.set(GUIDE_LANGUAGE_KEY,'zh_CN');
+ assert.doesNotThrow(()=>a.receive(event('open'),null));
+ a.receive(event('open'),row,{id:'other',typeId:'minecraft:player'});assert.equal(a.sent.length,0);
+ a.receive(event('open'),row);assert.deepEqual(a.sent,[{id:event('ack'),row:{...row,ok:true}}]);assert.equal(a.f.shown.length,0);
+ a.receive(event('start'),{...row,nonce:'stale'});a.receive(event('start'),{...row,locale:'zh_TW'});await a.advance(1);assert.equal(a.f.shown.length,0);
+ a.receive(event('start'),row);a.receive(event('start'),row);await a.advance(1);
+ assert.equal(a.f.shown.length,1);assert.equal(a.f.shown[0].t,payload.text.en_US.title);assert.deepEqual(a.sent.at(-1),{id:event('return'),row:{...row,outcome:'back'}});assert.equal(a.f.properties.get(GUIDE_LANGUAGE_KEY),'zh_CN');assert.equal(a.f.writes,0);
+ const lastTick=adapter([{canceled:true}]);lastTick.receive(event('open'),row);await lastTick.advance(39);assert.equal(lastTick.system.currentTick,row.expiresTick-1);assert.equal(lastTick.f.shown.length,0);await lastTick.advance(1);lastTick.receive(event('start'),row);await lastTick.advance(1);assert.equal(lastTick.f.shown.length,1);assert.deepEqual(lastTick.sent.at(-1),{id:event('return'),row:{...row,outcome:'closed'}});
+ const expired=adapter([]);expired.receive(event('open'),row);await expired.advance(43);expired.receive(event('start'),row);await expired.advance(1);assert.equal(expired.entry.pending(),0);assert.equal(expired.f.shown.length,0);
+ const absent=adapter([]);absent.ready=false;absent.receive(event('open'),row);assert.equal(absent.sent[0].row.ok,false);assert.equal(absent.entry.pending(),0);
+ const lost=adapter([]);lost.receive(event('open'),row);lost.leave();lost.receive(event('start'),row);await lost.advance(1);assert.equal(lost.f.shown.length,0);
+ for(const [responses,outcome]of [[[{canceled:true}],'closed'],[[{selection:9}],'closed']]){const closed=adapter(responses);closed.receive(event('open'),row);closed.receive(event('start'),row);await closed.advance(1);assert.deepEqual(closed.sent.at(-1),{id:event('return'),row:{...row,outcome}});}
+ const unavailable=adapter([]);unavailable.receive(event('open'),row);unavailable.receive(event('start'),row);unavailable.ready=false;await unavailable.advance(1);assert.deepEqual(unavailable.sent.at(-1),{id:event('return'),row:{...row,outcome:'unavailable'}});
 });

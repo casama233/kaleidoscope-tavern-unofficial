@@ -4,6 +4,27 @@
 不代替 BSM 當前政策、逐候選部署收據或真人驗收。
 完整更新走 [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md)。
 
+## 本輪指南候選：T136／W113／G121
+
+| 候選 | 凍結來源 | 本輪範圍 |
+| --- | --- | --- |
+| 酒館 0.6.136 | `496ce702161fb48ab6f67ea6645ad1e4d41b2a12` | 以已部署 T132 玩法為基礎，全面整理三語指南與兩入口共用呈現；見 [指南文案規則](../docs/GUIDE-EDITORIAL.md) 及 [T136 說明](../docs/RELEASE-NOTES-0.6.136.md) |
+| 世界名酒 0.1.113 | `92168bec36d396b3eca2d71558863a4955ddc2e8` | 重寫 67 個三語條目，保留 W110 玩法、配方、效果與資源；W112 的版本／配對來源不引入未合併的 T135 功能；見 [W113 說明](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/blob/92168bec36d396b3eca2d71558863a4955ddc2e8/docs/RELEASE-NOTES-0.1.113.md) |
+| 煙火／燒烤 2.8.121 | `2b422458ebfdd3831bc7a57af30c24cfa211d23a` | 保留已合併 G120 `8dc3e9d440577cd70501c377722f8e27b0913d44`，加入可選 Cookery 酒館章節交接；完整作者腳本不進公開來源 |
+
+目前 LIVE 仍為 **T132／G119／W110**，新候選尚待本次 PR／CI、完整家族
+static、BDS、存檔演練與准入部署流程。指南文字／投影檢查不代表真人閱讀、
+排版或輸入驗收；維持 `client=false`、`production_ready=false`、
+`pending_client_acceptance`。
+
+另行保留的 [T135 PR302](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/302)
+尚未合併，原生重啟時的 `effectAdd` 重播會撤銷保存的外觀 lease；該失敗
+未豁免，T135 runtime 不納入本候選。既有
+[T133 draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)
+及其來源／提交繼續保留。
+
+## 已交付來源與 LIVE 起點
+
 | 自有來源 | 目前版本 | 已交付來源 | 目前主要差距 |
 | --- | --- | --- | --- |
 | 酒館 | 0.6.132 | [PR297](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/297)；承接 T131，補濺射、雪克杯交易／保存及指南動畫 | 任意三份 ItemStack、穿牆輪廓、相機 roll、部分原生效果與實際聲畫／輸入 |

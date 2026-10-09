@@ -1,4 +1,8 @@
-## 當前 T141／W118
+## 當前 T142／W119
+
+完整保留 canonical T141 的板面分隔符換行、雪克杯原生 clone／新手勢修復、最新指南正文與 W 的 LivingEntity 魚類入口，再整合已測的光效所有權和 recorder 修補。[PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…` 的完整 CI、原生首次 20／重啟 21 項成功保留原身份，不改名沿用。本輪 T142／W119 另需包含魚類傷害案例的首次 21／重啟 22 項及完整 CI，目前 pending；真人、私人完整家族與 LIVE 仍未驗收。 範圍見 [T142 說明](RELEASE-NOTES-0.6.142.md)。任意 RGB 的原作 texel 明暗與透明覆蓋已實作；材質、PBR、透明排序及遠距濾波仍需真人比較。下方平面 RGB 舊紀錄只描述其當時版本。
+
+## 保留 canonical T141／W118 的修補與證據
 
 完整承接已發布 T140 的 Kirsch、Kriek、酸櫻桃與酸櫻桃汁桶四頁 AMW 指南、三語七入口與 Cookery 共用投影，再加入下列修補。來源回歸及原始證據範圍見 [T141 說明](RELEASE-NOTES-0.6.141.md)；新 T141／W118 paired native 首次 21／重啟 22 項和嚴格 recorder 已通過，完整 CI 由修補 PR 執行；真人、私人完整家族與 LIVE 均 pending。舊分支同名 T140 修補試驗的 21／22 原生成功不得改名沿用。
 
@@ -21,11 +25,11 @@
 新的零玩家原生首次／正常停止／重啟已通過，並確認來源光效恢復後，外部同 amplifier 刷新恰好交還一次控制。完整 recorder 綁定實際凍結輸入；真正 Player 與真人畫面仍需分別驗證，見 [本版說明](RELEASE-NOTES-0.6.137.md)。
 
 
-## 保留 0.6.136
+## 保留 alternate 0.6.136
 
 倒轉效果：同場放鱈魚、鮭魚、熱帶魚、牛與盔甲架，核對有效 Mob 名單及 Grumm；玩家與盔甲架不得更名。名稱可見性與實際魚類倒轉仍需真人比較。配套 W113 原生錨場景見其 release notes。
 
-來源與可分辨回歸見 [本版說明](RELEASE-NOTES-0.6.136.md)；下方舊版段落保留歷史範圍。
+來源與可分辨回歸見 [未合併 alternate T136 的固定說明](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md)；它不是目前同名的公開 T136 指南版本。下方舊版段落保留歷史範圍。
 
 ## 保留 T135／W112：真實 CI 缺口修復
 

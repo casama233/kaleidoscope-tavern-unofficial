@@ -1,4 +1,10 @@
-## 當前整合：T139／W116
+## 當前整合：T142／W119
+
+基底為 Tavern canonical `ebca0bbf6efc5459ed30a9a4a1c264477c274453` 與 World Liquor canonical `bd022a205a317a0fe813041dcc5b99152d07bdf5`；保留新主線指南、板面換行、雪克杯 clone／手勢與 LivingEntity 魚類入口。光效與 recorder 修補承接 [PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…`，其完整 CI、原生首次 20／重啟 21 項成功只屬原身份；不合併舊 PR 的同版本內容覆蓋新主線。本輪完整 PR／CI 與首次 21／重啟 22 項原生結果另行確認，舊 PR 收束依實際處置，不預先稱已合併或關閉。
+
+G123 family-lock 候選保留；W 檢查仍固定 G122 的相同 entity definitions，不宣稱 G123 合併、發布或私人家族成功。見 [T142 說明](../RELEASE-NOTES-0.6.142.md)。真人與 LIVE 仍 pending；以下「本輪／當前」及部署記錄保留各歷史段落當時的語境。
+
+## 歷史整合：T139／W116
 
 整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
 
@@ -8,14 +14,14 @@
 
 # 森羅家族：當前修補與 PR 處置
 
-## 當前 T137／W114：修復原生重啟光效
+## 歷史 T137／W114：修復原生重啟光效
 
 [本版說明](../RELEASE-NOTES-0.6.137.md) 保留 T136/W113 exact source 與首次通過／重啟失敗證據。新增同 entityLoad tick 的一次原生 EffectAdd 載入見證；PR302 後續完整 observer recorder 一起承接。最終 CI／發布依實際結果，不改寫舊失敗。
 
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
-## 當前指南候選與保留來源
+## 歷史指南候選與保留來源
 
 本輪候選為 **T136／W113／G121**。T136 凍結來源 `496ce702` 以已部署的
 T132 玩法重修指南；W113 `92168bec` 保留 W110 玩法並重寫 67 個三語條目；
@@ -33,9 +39,9 @@ LIVE 仍為 **T132／G119／W110**。新候選須完成確切來源 PR／CI 與�
 static、BDS、停服存檔演練、准入及部署讀回，才更新 LIVE。
 `client=false`、`production_ready=false`、`pending_client_acceptance` 繼續保持；
 兩入口共用顯示與文字檢查不能當作真人排版／操作驗收。
-## 當前 T136／W113：接續 Mob／重生錨修復
+## 歷史 alternate T136／W113：接續 Mob／重生錨修復
 
-[本版範圍](../RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
+[固定 alternate T136 範圍](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
 `6dc43f3bd589a370782f7005c9d672e141de0be3` 與 PR91 的 W112 reviewed
 `ed78beed3204a8a9e3c3a83d48350fb0e84ba516` 接續，保留原提交與 freeze。
 新增倒轉 Mob snapshot、確認的錨點 metadata；原生 observer 改合法原料、

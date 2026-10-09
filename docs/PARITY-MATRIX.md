@@ -1,4 +1,10 @@
-## 當前 T141／W118
+## 當前 T142／W119
+
+完整保留 canonical T141 的板面分隔符換行、雪克杯原生 clone／新手勢修復、最新指南正文與 W 的 LivingEntity 魚類入口，再整合已測的光效所有權和 recorder 修補。[PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…` 的完整 CI、原生首次 20／重啟 21 項成功保留原身份，不改名沿用。本輪 T142／W119 另需包含魚類傷害案例的首次 21／重啟 22 項及完整 CI，目前 pending；真人、私人完整家族與 LIVE 仍未驗收。 精確來源見 [T142 說明](RELEASE-NOTES-0.6.142.md)。G123 family-lock 候選保留；W CI 的 G122 pin 僅核對未變的 entity definitions，不等於 G123 合併、發布或完整家族成功。
+
+任意 RGB 已實作原作 texel 明暗與透明覆蓋；實際材質、PBR／透明排序及遠距濾波仍待真人。下方 T105／T126 等 flat RGB 紀錄保留歷史畫面範圍，不代表目前 source 仍未實作；舊 T137／W114 與 alternate T136 的原生結果也不作本候選驗收。
+
+## 保留 canonical T141／W118 的修補與證據
 
 精確 predecessor 為已發布主線 `79e2ad0fb9f5a59f93be41aee002ddf2a809d71b`。完整承接四頁 AMW 指南、三語七入口、共用 Cookery 入口及全部既有修補，配套 W118／G122。[T141 說明](RELEASE-NOTES-0.6.141.md)記錄相同功能檔案的來源回歸；新 paired native 首次 21／重啟 22 項與嚴格 recorder 已通過，完整 CI 由修補 PR 執行；舊分支 T140 試驗保持原身份。
 
@@ -16,14 +22,14 @@
 
 [T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The frozen T138/W115 pair passed its own complete zero-player native first/save/restart and source-bound recorder. Final canonical CI is separate; isolated multiline tooling has no human-client acceptance.
 
-## Retained T137 / W114 (scoped native restart passed)
+## Historical T137 / W114 (scoped native restart passed)
 
 [T137](RELEASE-NOTES-0.6.137.md) retains the Mob and confirmed-anchor repairs and corrects the native reload EffectAdd notification that revoked a valid saved aura lease. Only a genuine entityLoad, exact same-tick snapshot can consume one notification witness; foreign refresh and existing saved-duration checks remain. The frozen T137/W114 pair passed a new zero-player native first/normal-save/restart run and the complete source-bound recorder, including one reload acknowledgement followed by one foreign handoff. Final canonical CI and actual Player/client/private LIVE acceptance remain separate.
 
 
-## Retained T136 / W113 scope (native restart failed)
+## Historical alternate T136 / W113 scope (native restart failed)
 
-[T136 scope](RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
+[Immutable alternate T136 scope](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
 query-first alive Mob selection for Upside Down, including fish without the
 Native mob family while excluding Player/ArmorStand. Target membership is
 fixed before nameTag callbacks. Java name visibility and rendered inversion

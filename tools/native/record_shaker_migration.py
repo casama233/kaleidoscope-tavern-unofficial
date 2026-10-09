@@ -5,7 +5,7 @@ Only the declared observer overlays, generated input binding and main.js import
 are allowed in the staged host. Re-run after changed inputs instead of relabeling old proof.
 Write new evidence beside the run; never replace historical repository proof.
 """
-import argparse,collections,hashlib,json,math,pathlib,re,sys
+import argparse,collections,hashlib,json,math,pathlib,re,subprocess,sys
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools'))
 from baseline_gate import fingerprint
@@ -15,6 +15,7 @@ APPEND=b"\n// Disposable native observer; not release content.\nimport './living
 PREFIX='[LIVING_EFFECT_QA] '
 EVIDENCE_NAME='native-shaker-migration-evidence.json'
 LOG_NAME='native-shaker-migration-evidence.log'
+MAIN_OVERLAY_NOTE='Append only the declared disposable observer import after verifying the complete copied runtime.'
 def digest(data):return hashlib.sha256(data).hexdigest()
 
 def fields(row,names):
@@ -156,6 +157,20 @@ def validate_phase(row,raw,version):
  same(row['observations'],observed)
  return validate_observations(observed,phase,version)
 
+def validate_recorded_inputs(report,current_sources,overlays):
+ """Bind current/staged byte equality to the snapshots taken before native run."""
+ fields(current_sources,'tavern liquor')
+ expected={}
+ for label,source in current_sources.items():
+  baseline=source['baseline'];trees=source['source_trees']
+  same(trees,baseline['source_trees'])
+  expected[label]={'commit':source['commit'],'repository':baseline['repository'],
+                   'version':baseline['version'],'source_trees':trees}
+ # Whole-object equality rejects missing/extra packs, fields and overlay keys.
+ # Matching both source and stage after a run cannot replace its recorded input.
+ same(report.get('sources'),expected)
+ same(report.get('test_only_overlays'),overlays)
+
 def write_evidence(work,evidence,logs):
  target,log=work/EVIDENCE_NAME,work/LOG_NAME
  assert not target.exists() and not log.exists(),'Retain prior evidence; output files must be new'
@@ -169,12 +184,16 @@ def main():
  assert report['native_script_behavior'] is True and report['client'] is False
  assert report['live'] is False and report['full_family'] is False and report['test_only_host_overlay'] is True and report['copied_runtime_matches_frozen_source'] is True
  assert [r['phase']for r in report['reports']]==['first','restart']
- source_trees={};versions={};inputs={}
+ source_trees={};versions={};inputs={};current_sources={}
+ overlays={'scripts/main.js':MAIN_OVERLAY_NOTE}
  liquor_source=a.liquor.resolve();liquor_baseline=json.loads((liquor_source/'baseline.json').read_text())
  liquor_headers={kind:json.loads((liquor_source/'runtime'/kind/'manifest.json').read_text())['header']for kind in ['BP','RP']}
  probe_inputs=render_world_liquor_probe_inputs(liquor_baseline,liquor_headers).encode()
  for label,source in [('tavern',ROOT),('liquor',a.liquor.resolve())]:
-  versions[label]='.'.join(map(str,json.loads((source/'baseline.json').read_text())['version']));source_trees[label]={}
+  baseline=json.loads((source/'baseline.json').read_text())
+  versions[label]='.'.join(map(str,baseline['version']));source_trees[label]={}
+  current_sources[label]={'baseline':baseline,'source_trees':source_trees[label],
+                         'commit':subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()}
   for kind,folder in [('BP','behavior_packs'),('RP','resource_packs')]:
    original=source/'runtime'/kind;staged=work/'worlds/living-effect-qa'/folder/label
    tree,rows=fingerprint(original);source_trees[label][kind]=tree
@@ -192,12 +211,14 @@ def main():
     if label=='tavern' and kind=='BP' and name=='scripts/main.js':expected+=APPEND
     assert (staged/name).read_bytes()==expected,(label,kind,name,'current source differs from native input')
    for name,original_file in extras.items():
-    assert (staged/name).read_bytes()==original_file.read_bytes(),name
-    inputs[original_file.relative_to(ROOT).as_posix()]=digest(original_file.read_bytes())
+    data=original_file.read_bytes();assert (staged/name).read_bytes()==data,name
+    overlays[name]=digest(data)
+    inputs[original_file.relative_to(ROOT).as_posix()]=overlays[name]
    for name,data in generated.items():
     assert (staged/name).read_bytes()==data,name
-    assert report['test_only_overlays'][name]==digest(data),name
-    inputs['generated/'+name]=digest(data)
+    overlays[name]=digest(data)
+    inputs['generated/'+name]=overlays[name]
+ validate_recorded_inputs(report,current_sources,overlays)
  summaries=[];logs=[];registrations=[]
  for row in report['reports']:
   phase=row['phase'];raw=(work/(phase+'.log')).read_bytes();text=raw.decode('utf8')

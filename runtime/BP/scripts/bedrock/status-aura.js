@@ -11,7 +11,8 @@ import {NATIVE_AURA_COLORS,nativeAuraId,customAuraRows,sampleStatusAura} from '.
 export const STATUS_AURA_KEY='kaleidoscope_tavern:status_aura';
 export const STATUS_AURA_BLOCKED_KEY='kaleidoscope_tavern:status_aura_blocked';
 const tracks=new Map(),pending=new Map(),syntheticInvisibility=new Map(),blockedNative=new Set();
-let installed=false,updateRun;
+const loadContexts=new Map();
+let installed=false,updateRun,beforeSubscribed=false,afterSubscribed=false;
 export const statusAuraDiagnostics={mode:'source_owned_aura',clientConfirmed:false,emissions:0,nativeAcquired:0,nativeHandoffs:0,nativeReloadWitnesses:0,nativeReloadAcknowledgements:0,lastNativeReloadAcknowledgement:null,nativeReadbackFallbacks:0,unknownNativeSnapshots:0,nativeOwnershipBlocks:0,durableBlockFailures:0,foreignVisibilityKnown:false,errors:[]};
 function error(e){statusAuraDiagnostics.errors.push(String(e));if(statusAuraDiagnostics.errors.length>12)statusAuraDiagnostics.errors.shift();}
 function view(effect){
@@ -30,7 +31,73 @@ function observeOwned(row,e,now){
  row.lastObservedTicks=e.ticks;row.until=now+e.ticks;return true;
 }
 function exactEffect(a,b){return !!a&&!!b&&a.id===b.id&&a.ticks===b.ticks&&a.amplifier===b.amplifier;}
-function retireReloadWitness(track,id){track?.reloadWitnesses?.delete(id);track?.loadedNative?.delete(id);}
+function retireReloadWitness(track,id,keepVerified=false){
+ track?.reloadWitnesses?.delete(id);track?.loadedNative?.delete(id);
+ if(!keepVerified&&track)loadContexts.get(track.entity.id)?.verified?.delete(id);
+}
+/** BDS 1.26.52.3 rehydrates saved effects as invalid-entity before-add,
+ * entityLoad, then after-add in one script tick. A normal valid-entity before
+ * is a veto, even for an identical refresh reentrant in entityLoad. This
+ * restricted callback only changes memory, never the lease or gameplay.
+ */
+function observeStatusAuraBeforeEffect(event){
+ let entityId;
+ try{
+  const entity=event.entity,id=entity.id,now=system.currentTick;entityId=id;
+  let context=loadContexts.get(id);
+  if(context?.tick!==now){context={tick:now,claimed:false,veto:false,witnesses:[]};loadContexts.set(id,context);}
+  const type=event.effectType;
+  if(typeof type!=='string'||!type){context.veto=true;tracks.get(id)?.reloadWitnesses.clear();return;}
+  if(entity.isValid!==false){
+   const matches=context.witnesses.filter(row=>row.type===type||row.aliases?.includes(type));
+   if(matches.length===1){
+    const witness=matches[0];witness.veto=true;
+    const track=tracks.get(id);
+    for(const [effect,proof]of track?.reloadWitnesses??[])if(proof.before===witness)retireReloadWitness(track,effect);
+   }else if(matches.length===0&&!context.veto&&tracks.get(id)?.reloadWitnesses.size&&event.cancel!==true&&
+    Number.isInteger(event.duration)&&event.duration>0&&event.duration<=20000000&&(context.unresolved?.length??0)<32){
+    // An absent new own effect has no displayName until after native add. Pause
+    // only already-issued permissions; never guess its name or its producer.
+    (context.unresolved??=[]).push({type,proofs:[...tracks.get(id).reloadWitnesses.values()]});
+   }else{context.veto=true;tracks.get(id)?.reloadWitnesses.clear();}
+   return;
+  }
+  if(context.claimed||event.cancel===true){context.veto=true;tracks.get(id)?.reloadWitnesses.clear();return;}
+  if(!Number.isInteger(event.duration)||event.duration<1||event.duration>20000000||context.witnesses.length>=32){context.veto=true;context.witnesses=[];return;}
+  if(!context.veto)context.witnesses.push({type,ticks:event.duration});
+ }catch(e){
+  if(entityId){const context=loadContexts.get(entityId);if(context)context.veto=true;tracks.get(entityId)?.reloadWitnesses.clear();}
+  error(e);
+ }
+}
+function claimLoadContext(entity){
+ const now=system.currentTick;let context=loadContexts.get(entity.id);
+ if(context?.tick!==now){loadContexts.set(entity.id,{tick:now,claimed:true,veto:true,witnesses:[]});return;}
+ if(context.claimed)return;
+ context.claimed=true;return context.veto?undefined:context;
+}
+function matchesLoadProof(track,witness,now,initialSpawn=false){
+ const owned=track?.native.get(witness.id);
+ if(witness.at!==now||witness.context.tick!==now||witness.context.veto||witness.context.unresolved?.length||witness.before.veto||owned!==witness.nativeRow||owned?.until-now!==witness.ticks)return false;
+ // An initial spawn may follow consumption and a verified internal save of
+ // another row. Require current ledger/row equality without reminting a ticket.
+ if(!reloadLeaseCurrent(track,initialSpawn?track.raw:witness.raw))return false;
+ const saved=JSON.parse(track.raw),rows=saved.rows.filter(row=>row.id===witness.id);
+ return saved.schema===1&&rows.length===1&&exactEffect(rows[0],witness)&&
+  owned.amplifier===witness.amplifier&&owned.lastObservedTicks===witness.ticks&&exactEffect(witness,current(track.entity,witness.id));
+}
+function resolveOwnBeforeName(entity,effect,observed,ticket,now){
+ const context=loadContexts.get(entity.id),track=tracks.get(entity.id);
+ if(ticket.at!==now||context?.tick!==now||context.veto||!context.unresolved?.length)return;
+ const matches=context.unresolved.filter(row=>row.type===effect.typeId||row.type===effect.displayName);
+ if(matches.length!==1||!exactEffect(observed,current(entity,observed.id)))return;
+ const row=matches[0];
+ // Actual after/readback identifies this own write as different from every
+ // suspended saved effect. Only lift its pause: no ticket is minted or revived.
+ if(row.proofs.some(proof=>proof.id===observed.id))return;
+ if(!row.proofs.some(proof=>track?.reloadWitnesses.get(proof.id)===proof&&!proof.before.veto))return;
+ context.unresolved.splice(context.unresolved.indexOf(row),1);
+}
 /** A failed revocation/rollback cannot leave duration matching as proof of
  * ownership. Keep a separate durable fence, and retain the in-memory fence even
  * across unload/reload callbacks if the entity rejects every property write.
@@ -40,6 +107,7 @@ function blockOwnership(track,cause){
  if(!blockedNative.has(entity.id))statusAuraDiagnostics.nativeOwnershipBlocks++;
  blockedNative.add(entity.id);track.blocked=true;track.native.clear();
  track.reloadWitnesses?.clear();track.loadedNative?.clear();
+ loadContexts.delete(entity.id);
  for(const key of pending.keys())if(key.startsWith(entity.id+'\0'))pending.delete(key);
  error(cause);
  let durable=false;
@@ -204,11 +272,13 @@ export function observeStatusAuraEffect(event){
   const key=ticketKey(entity,id),list=pending.get(key),now=system.currentTick;
   const track=tracks.get(entity.id);
   const at=list?.findIndex(row=>now-row.at<=2&&matchesWrite(row,observed,now))??-1;
-  if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);retireReloadWitness(track,id);return;}
-  const witness=track?.reloadWitnesses.get(id),owned=track?.native.get(id);
-  if(entity.isValid!==false&&witness?.at===now&&reloadLeaseCurrent(track,witness.raw)&&owned?.until-now===witness.ticks&&
-   exactEffect(witness,observed)&&exactEffect(witness,current(entity,id))){
-   retireReloadWitness(track,id);statusAuraDiagnostics.nativeReloadAcknowledgements++;
+  if(at>=0){
+   const [ticket]=list.splice(at,1);if(!list.length)pending.delete(key);
+   resolveOwnBeforeName(entity,event.effect,observed,ticket,now);retireReloadWitness(track,id);return;
+  }
+  const witness=track?.reloadWitnesses.get(id);
+  if(entity.isValid!==false&&witness&&exactEffect(witness,observed)&&matchesLoadProof(track,witness,now)){
+   retireReloadWitness(track,id,true);statusAuraDiagnostics.nativeReloadAcknowledgements++;
    statusAuraDiagnostics.lastNativeReloadAcknowledgement={entity:entity.id,id,ticks:observed.ticks,amplifier:observed.amplifier,tick:now};return;
   }
   if(track)forgetNative(track,id);
@@ -227,24 +297,65 @@ export function indexStatusAura(entity,entries){
  }catch(e){error(e);}
 }
 export function restoreStatusAura(entity){try{const track=load(entity);if(!track.custom.length&&!track.native.size)tracks.delete(entity.id);}catch(e){error(e);}}
-/** Only the actual entityLoad callback may acknowledge native rehydration.
- * BDS 1.26.52.3 emits entityLoad then effectAdd in the same tick for a saved
- * native effect. Generic restoration and startup/player scans never mint this
- * one-use witness, and repeated restoration cannot mint it again.
+/** Only the actual entityLoad callback after an invalid-before witness may
+ * acknowledge native rehydration. Match real typeId/displayName, never a guessed
+ * transformation of before.effectType. Duplicate load cannot mint another use.
  */
 export function restoreLoadedStatusAura(entity){
  try{
-  const track=load(entity),now=system.currentTick;
+  const context=claimLoadContext(entity),track=load(entity),now=system.currentTick;
   if(!track.blocked&&track.loadedAt===now&&!track.reloadWitnessIssued){
    track.reloadWitnessIssued=true;
-   if(track.loadedNative.size&&reloadLeaseCurrent(track))for(const [id,snapshot]of track.loadedNative)if(track.native.has(id)&&exactEffect(snapshot,current(entity,id))){
-    track.reloadWitnesses.set(id,{...snapshot,at:now,raw:track.raw});statusAuraDiagnostics.nativeReloadWitnesses++;
+   if(context&&!context.veto&&track.loadedNative.size&&reloadLeaseCurrent(track)){
+    const saved=JSON.parse(track.raw),candidates=[];
+    for(const [id,snapshot]of track.loadedNative){
+     const nativeRow=track.native.get(id),effect=entity.getEffect(id),observed=view(effect);
+     if(!nativeRow||!exactEffect(snapshot,observed))continue;
+     const rows=saved.rows.filter(row=>row.id===id);
+     if(saved.schema!==1||rows.length!==1||!exactEffect(rows[0],snapshot))continue;
+     const matches=context.witnesses.filter(row=>!row.veto&&row.ticks===observed.ticks&&(row.type===effect.typeId||row.type===effect.displayName));
+     if(matches.length===1){
+      const before=matches[0];before.aliases=[effect.typeId,effect.displayName];
+      candidates.push({...snapshot,at:now,raw:track.raw,nativeRow,before,context});
+     }
+    }
+    for(const proof of candidates)if(candidates.filter(row=>row.before===proof.before).length===1){
+     track.reloadWitnesses.set(proof.id,proof);(context.verified??=new Map()).set(proof.id,proof);statusAuraDiagnostics.nativeReloadWitnesses++;
+    }
    }
   }
   if(!track.custom.length&&!track.native.size)tracks.delete(entity.id);
  }catch(e){error(e);}
 }
-export function forgetStatusAura(entityId){tracks.delete(entityId);syntheticInvisibility.delete(entityId);for(const key of pending.keys())if(key.startsWith(entityId+'\0'))pending.delete(key);}
+export function forgetStatusAura(entityId){tracks.delete(entityId);loadContexts.delete(entityId);syntheticInvisibility.delete(entityId);for(const key of pending.keys())if(key.startsWith(entityId+'\0'))pending.delete(key);}
+/** Initial spawn can interleave with the same native load callbacks. Keep only
+ * exact verified rows, including already-consumed proof without a new ticket.
+ * Rejected rows must be retired durably; respawn still clears every cache.
+ */
+export function resetStatusAuraOnSpawn(entity,initialSpawn){
+ const context=loadContexts.get(entity.id),now=system.currentTick;
+ if(!initialSpawn||context?.tick!==now||!context.witnesses.length){
+  forgetStatusAura(entity.id);if(initialSpawn)restoreStatusAura(entity);return;
+ }
+ if(!context.claimed){
+  forgetStatusAura(entity.id);loadContexts.set(entity.id,context);restoreStatusAura(entity);return;
+ }
+ let track;
+ try{
+  track=tracks.get(entity.id)??load(entity);track.entity=entity;
+  const retained=new Map(),replays=new Map(),loaded=new Map();
+  for(const [id,proof]of context.verified??[])if(matchesLoadProof(track,proof,now,true)){
+   retained.set(id,proof.nativeRow);
+   if(track.reloadWitnesses.get(id)===proof){replays.set(id,proof);loaded.set(id,track.loadedNative.get(id));}
+  }
+  if(track.blocked)return;
+  const removed=track.native.size-retained.size;
+  forgetStatusAura(entity.id);loadContexts.set(entity.id,context);
+  track.native=retained;track.custom=[];track.at=now;track.reloadWitnesses=replays;track.loadedNative=loaded;
+  track.reloadWitnessIssued=true;tracks.set(entity.id,track);statusAuraDiagnostics.nativeHandoffs+=removed;
+  save(track);
+ }catch(e){blockOwnership(track??{entity,native:new Map()},e);}
+}
 export function noteSyntheticAuraInvisibility(entity){syntheticInvisibility.set(entity.id,system.currentTick+1);}
 export function tickStatusAura(random=Math.random){
  const now=system.currentTick;
@@ -276,12 +387,15 @@ export function tickStatusAura(random=Math.random){
   entity.dimension.spawnParticle('kaleidoscope_tavern:fx_status_aura',emission.position,vars);statusAuraDiagnostics.emissions++;
  }catch(e){error(e);}
  for(const [key,list]of pending){const alive=list.filter(row=>now-row.at<=2);if(alive.length)pending.set(key,alive);else pending.delete(key);}
+ for(const [id,context]of loadContexts)if(context.tick!==now)loadContexts.delete(id);
  for(const [id,until]of syntheticInvisibility)if(until<now)syntheticInvisibility.delete(id);
 }
 export function installStatusAura(){
  if(installed)return;
- // No native particle takeover without the refresh/handoff observation signal.
- if(world.afterEvents.effectAdd?.subscribe){world.afterEvents.effectAdd.subscribe(observeStatusAuraEffect);installed=true;}
+ // No particle takeover without both refresh attribution and handoff signals.
+ if(!beforeSubscribed&&world.beforeEvents.effectAdd?.subscribe){world.beforeEvents.effectAdd.subscribe(observeStatusAuraBeforeEffect);beforeSubscribed=true;}
+ if(!afterSubscribed&&world.afterEvents.effectAdd?.subscribe){world.afterEvents.effectAdd.subscribe(observeStatusAuraEffect);afterSubscribed=true;}
+ installed=beforeSubscribed&&afterSubscribed;
  if(updateRun===undefined)updateRun=system.runInterval(tickStatusAura,1);
 }
-export const STATUS_AURA_TEST={tracks,pending,syntheticInvisibility,blockedNative};
+export const STATUS_AURA_TEST={tracks,pending,syntheticInvisibility,blockedNative,loadContexts};

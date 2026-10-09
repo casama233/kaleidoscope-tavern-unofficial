@@ -1,16 +1,13 @@
 {
-  "version": "0.6.141",
-  "tag": "v0.6.141-beta.1",
-  "title": "森羅物語：酒館 0.6.141 測試版｜板面換行與雪克杯物品辨識修復",
+  "version": "0.6.142",
+  "tag": "v0.6.142-beta.1",
+  "title": "森羅物語：酒館 0.6.142 測試版｜整合板面、雪克杯與載入光效修復",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.141.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.142.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": true,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "Fresh exact T141/W118 paired BDS 1.26.52.3 passed first 21 and normal-save/restart 22 strict cases, zero players and errors, normal stops. Proof docs/native/T141-W118-20261009.json retains measured sources T824ec6d1697716cf77dc0fbbf9b0ab9fe7a644d4 and Wd02af8c9876d8e376fe592404dab9052fc5ad410. Each phase newly creates cod and applies MultiJump through the normal timed effect and public snapshot: API fall control health 3 to 2 with one afterHurt versus protected 3 to 3 with zero afterHurt. Existing machine counts/item metadata and aura save/countdown/reload acknowledgement/foreign handoff also passed. This does not verify natural fall height, MultiJump persistence, actual Player input, rendered/audio client, full private family or LIVE. Those acceptance and fresh saved-world deployment gates remain pending.",
-  "expected_archive_sha256": "2b3496b47721a284dde81040d399d4816e6804b5ff572b84567da3aa17776b33",
-  "reviewed_runtime_source": "824ec6d1697716cf77dc0fbbf9b0ab9fe7a644d4"
+  "native_evidence_scope": "This complete T142/W119 integration requires its own actual canonical CI and strict source/overlay-bound native first 21/restart 22 cases, retaining the familyless-fall observer. Prior T141/W118 board/shaker evidence and the separate PR310 aura candidate 20/21 evidence retain their original source identities. Player/client, G123/Cookery private family, saved-world and LIVE acceptance remain separate."
 }

@@ -15,11 +15,17 @@ export function splitBoardLines(text,{width,maxLines,bold=false,smallChalk=false
    let end=0,used=0,units=0,lastSpace=-1;
    while(end<pending.length){
     const ch=pending[end],next=used+boardAdvance(ch,bold),capacity=units+(fullwidth(ch)?10:7);
+    // Java StringSplitter records the separator before checking width. A
+    // space that itself overflows ends this row and is consumed below; it must
+    // not indent the next row or send an earlier word there instead.
+    if(ch===' ')lastSpace=end;
     if(next>width||(smallChalk&&capacity>70))break;
-    if(ch===' ')lastSpace=end;used=next;units=capacity;end++;
+    used=next;units=capacity;end++;
    }
    if(end===0)end=1;
-   if(end<pending.length&&lastSpace>0){all.push({chars:pending.slice(0,lastSpace),paragraphEnd:false});pending=pending.slice(lastSpace+1);}
+   // Index zero is also a Java break point: consume leading whitespace and
+   // keep the following word together on the next row instead of splitting it.
+   if(end<pending.length&&lastSpace>=0){all.push({chars:pending.slice(0,lastSpace),paragraphEnd:lastSpace+1===pending.length});pending=pending.slice(lastSpace+1);}
    else{all.push({chars:pending.slice(0,end),paragraphEnd:end===pending.length});pending=pending.slice(end);}
   }
  }

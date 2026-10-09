@@ -19,7 +19,7 @@ import {configureBottleCategories} from '../core/quality-tooltip.js';
 import {normalizeCocktailStack,rawItemLore,shakerContentsLore} from '../core/cocktail-tooltip.js';
 import {potionInput,potionIdentity,restorePotion} from './potions.js';
 import {SHAKER_ID,SHAKER_ITEMS,PORTABLE_DATA,encodePortable,decodePortable} from '../core/immersion.js';
-import {makeStack,hand,inventory,handSnapshot,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach,playerInteractionReach} from './transactions.js';
+import {makeStack,hand,inventory,sameHand,canWrite,canInteract,placementTake,pickupOutputs,commitPickupInventory,pickupFeedback,blockAt,plus,requireBlockReach,playerInteractionReach} from './transactions.js';
 import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js';
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {javaRandomFloat} from '../core/java-random.js';
@@ -30,7 +30,7 @@ import {dispatchInstantHealth} from './instant-effects.js';
 import {faceOffset} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
-import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeBlockUse,settleJavaBlockUse} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaBlockUseWitness,registerJavaItemUseOnRoute,nativeBlockUse,settleJavaBlockUse} from './java-placement-router.js';
 import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,cocktailEffect} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
@@ -416,10 +416,53 @@ function tick(){
   }
  });
 }
-function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot(player),data:item?.getDynamicProperty(PORTABLE_DATA),potion:POTION_ITEMS.has(item?.typeId)?canonical(potionIdentity(item)):undefined};}
-function verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}
+function itemSnapshot(player){
+ const snapshot={basic:{slot:player.selectedSlotIndex,id:'',amount:0},readable:false};
+ try{
+  const item=hand(player);snapshot.basic={slot:player.selectedSlotIndex,id:item?.typeId??'',amount:item?.amount??0};
+  if(item){
+   snapshot.data=item.getDynamicProperty(PORTABLE_DATA);
+   snapshot.potion=POTION_ITEMS.has(item.typeId)?canonical(potionIdentity(item)):undefined;
+   snapshot.stack=item.clone();
+   const lore=item.getRawLore?.()??item.getLore?.(),destroy=item.getCanDestroy(),place=item.getCanPlaceOn(),propertyIds=item.getDynamicPropertyIds();
+   check([lore,destroy,place,propertyIds].every(Array.isArray),'STALE_HAND');
+   snapshot.visible=canonical({name:item.nameTag,lore,keep:item.keepOnDeath,lock:item.lockMode,
+    destroy,place,dynamic:propertyIds.sort().map(key=>[key,item.getDynamicProperty(key)])});
+   snapshot.comparable=item.maxAmount>1&&item.isStackableWith(snapshot.stack)===true&&snapshot.stack.isStackableWith(item)===true;
+   if(item.maxAmount>1)check(snapshot.comparable,'STALE_HAND');
+   snapshot.plain=item.maxAmount===1&&!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack);
+  }
+  snapshot.readable=true;
+ }catch{/* A failed native read cannot authorize a debit or release an echo. */}
+ return snapshot;
+}
+// Native clones only witness this short event transaction. They are never
+// serialized as portable ingredients or used to reconstruct a missing stack.
+const snapshotSignature=(snapshot,ignoreAmount=false)=>canonical({basic:ignoreAmount?{...snapshot.basic,amount:0}:snapshot.basic,data:snapshot.data,potion:snapshot.potion});
+function compareItemSnapshot(left,right,{ignoreAmount=false}={}){
+ try{
+  if(!left?.readable||!right?.readable)return undefined;
+  if(snapshotSignature(left,ignoreAmount)!==snapshotSignature(right,ignoreAmount))return false;
+  const a=left.stack,b=right.stack;if(!a||!b)return !a&&!b;
+  if(left.comparable&&right.comparable){
+   const forward=a.isStackableWith(b),reverse=b.isStackableWith(a);
+   return typeof forward==='boolean'&&typeof reverse==='boolean'?forward&&reverse:undefined;
+  }
+  if(left.visible!==right.visible)return false;
+  // Non-stackable native comparison cannot prove arbitrary data equality.
+  // Retain the existing readable plain-input class (including exact native
+  // potion identity above); decorated/unreadable data is never an echo witness.
+  return left.plain&&right.plain?true:undefined;
+ }catch{return undefined;}
+}
+const sameItemSnapshot=(left,right)=>compareItemSnapshot(left,right)===true;
+function verifySnapshot(player,snapshot){
+ sameHand(player,snapshot.basic);const current=itemSnapshot(player);
+ if(snapshot.potion!==undefined)check(current.potion===snapshot.potion,'STALE_POTION');
+ check(sameItemSnapshot(snapshot,current),'STALE_HAND');
+}
 const mixologyUseKey=(player,block)=>player.id+'/'+shakerKey(block.dimension.id,block.location);
-function nativeEchoHand(player){try{return canonical(itemSnapshot(player));}catch{return undefined;}}
+function nativeEchoHand(player){try{return itemSnapshot(player);}catch{return undefined;}}
 function rememberNativeMixologyUse(event,blocks,beforeHand){
  const player=event.player;
  const afterHand=nativeEchoHand(player),tick=system.currentTick;
@@ -429,7 +472,7 @@ function rememberNativeMixologyUse(event,blocks,beforeHand){
 function completedMixologyEcho(player,block,current=nativeEchoHand(player)){
  const key=mixologyUseKey(player,block),previous=completedBlockUses.get(key);
  if(previous&&system.currentTick-previous.tick>2){completedBlockUses.delete(key);return undefined;}
- return previous&&current!==undefined&&(current===previous.beforeHand||current===previous.afterHand)?previous:undefined;
+ return previous&&(sameItemSnapshot(current,previous.beforeHand)||sameItemSnapshot(current,previous.afterHand))?previous:undefined;
 }
 function nativeMixologyBlockUse(event){
  const player=event?.player,block=event?.block;if(event?.cancel||!player||!block)return false;
@@ -475,15 +518,16 @@ export function beforeShakerUse(event){
   }
  }catch{event.cancel=true;}
 }
-function queueMixologyBlockUse(event,signature,work,{echoTarget}={}){
+function queueMixologyBlockUse(event,signature,work,{echoTarget,snapshot}={}){
  event.cancel=true;
  const key=event.player.id+'/'+shakerKey(event.block.dimension.id,event.block.location),previous=pendingBlockUses.get(key);
- if(previous?.signature===signature){event._javaUseClaim=previous.event._javaUseClaim;return;}
+ if(previous?.signature===signature&&(snapshot===undefined?previous.snapshot===undefined:sameItemSnapshot(snapshot,previous.snapshot))){event._javaUseClaim=previous.event._javaUseClaim;return;}
  completedBlockUses.delete(key);
- const pending={event,signature},beforeHand=nativeEchoHand(event.player);pendingBlockUses.set(key,pending);
+ const pending={event,signature,snapshot};pendingBlockUses.set(key,pending);
  system.run(()=>safely(event.player,()=>{
   let succeeded=false;
   try{
+   const beforeHand=nativeEchoHand(event.player);
    const result=work();succeeded=true;
    try{rememberNativeMixologyUse(event,[event.block,echoTarget?.()],beforeHand);}catch(error){log(error);}
    return result;
@@ -514,6 +558,8 @@ export function offhandShakerUseOn(event){
 }
 export function installMixologyEvents(){
  registerJavaBlockUseFallback(candidate);
+ registerJavaBlockUseWitness({matches:(block,itemId)=>block?.typeId===STATION&&candidate(itemId),
+  capture:itemSnapshot,compare:(left,right,{exactAmount=false}={})=>compareItemSnapshot(left,right,{ignoreAmount:!exactAmount})});
  registerJavaBlockUseHandler(event=>{
   const block=event.block;if(event.cancel||!(block.typeId===STATION||isCupBlock(block.typeId)))return;
   if(event._javaRawFirstEvent===false){
@@ -525,11 +571,11 @@ export function installMixologyEvents(){
   if(block.typeId===STATION&&held&&!candidate(held))return;
   if(block.typeId!==STATION&&held)return;
   const dimension=block.dimension,location={...block.location},id=block.typeId;
-  queueMixologyBlockUse(event,'main/'+canonical(snapshot),()=>{
+  queueMixologyBlockUse(event,'main/'+snapshotSignature(snapshot),()=>{
    check(event.player.dimension.id===dimension.id,'DIMENSION_CHANGED');verifySnapshot(event.player,snapshot);const current=blockAt(dimension,location);check(current?.typeId===id,'BLOCK_CHANGED');
    if(id!==STATION)return takeCup(event.player,current);
    return held?pourIngredient(event.player,current):pickupShaker(event.player,current);
-  });
+  },{snapshot});
  });
  registerJavaOffhandUseOnHandler(offhandShakerUseOn);
  registerJavaItemUseOnRoute({id:'shaker-v22',matches:id=>id===SHAKER,

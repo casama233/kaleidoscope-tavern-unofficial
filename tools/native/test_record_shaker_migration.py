@@ -65,6 +65,10 @@ def transcript(phase):
     case('native-upside-down-mob-class', renamed=['living_effect_qa:mob', 'minecraft:cow', 'minecraft:cod'],
          excluded=['minecraft:armor_stand', 'living_effect_qa:health_helper', 'minecraft:xp_orb'], codHasMobFamily=False,
          renames=3, recipientFunctionOnly=True, playerEffectEntrance=False, nameVisibilityParity=False, client=False)
+    case('native-liquor-familyless-fall', target='minecraft:cod', nativeMobFamily=False,
+         sourceEffect='kaleidoscope_world_liquor:multi_jump', controlHealth=[3, 2], controlHurtEvents=1,
+         protectedHealth=[3, 3], protectedHurtEvents=0, snapshotObserved=True, snapshotWaitedTicks=5,
+         nativeAcknowledgement=True, playerEffectEntrance=False, client=False)
     rows.append(dict(kind='done', phase=phase, players=0, playerSessions=0, client=False, crossPackPrivateData=False, addon_registration=addon))
     return dict(phase=phase, ok=True, normal_stop=True, errors=[], player_connections=0, observations=rows)
 
@@ -106,11 +110,28 @@ class RecorderTests(unittest.TestCase):
                 self.reject(row)
 
         for phase in ('first', 'restart'):
-            for missing in ('native-aura-chunk-readiness', 'native-upside-down-mob-class'):
+            for missing in ('native-aura-chunk-readiness', 'native-upside-down-mob-class', 'native-liquor-familyless-fall'):
                 with self.subTest(phase=phase, missing=missing):
                     row = transcript(phase)
                     row['observations'].remove(mode(row, missing))
                     self.reject(row)
+
+    def test_familyless_fall_requires_real_control_damage_and_public_snapshot(self):
+        for key, value in [('target', 'minecraft:cow'), ('nativeMobFamily', True),
+                           ('sourceEffect', 'kaleidoscope_world_liquor:reverse_gravity'),
+                           ('controlHealth', [3, 3]), ('controlHurtEvents', 0),
+                           ('protectedHealth', [3, 2]), ('protectedHurtEvents', 1),
+                           ('snapshotObserved', False), ('snapshotWaitedTicks', 21),
+                           ('nativeAcknowledgement', 1), ('playerEffectEntrance', True), ('client', True)]:
+            with self.subTest(key=key):
+                row = transcript('first')
+                mode(row, 'native-liquor-familyless-fall')[key] = value
+                self.reject(row)
+        # An API return may acknowledge a subsequently cancelled native hurt.
+        # Both return values are acceptable only with the same delivered outcome.
+        row = transcript('restart')
+        mode(row, 'native-liquor-familyless-fall')['nativeAcknowledgement'] = False
+        validate_phase(row, raw_log(row), VERSION)
 
     def test_portable_ingredient_types_must_match_all_three_quality_four_rows(self):
         for mutation in ('missing', 'wrong-quality', 'duplicate', 'reordered'):

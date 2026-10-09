@@ -290,6 +290,22 @@ test('placement preserves the complete outer carrier while held copies stay inde
  pourHeldShakerNow(f.player,cup(f));assert.deepEqual(readPortableItem(f.current()).state.slots,[]);
  assert.deepEqual(metadata(f.current()),metadata(item));assert.equal(independent.getDynamicProperty(PORTABLE_DATA),unchanged);assert.equal(readPortableItem(independent).state.result,null);
 });
+test('a named placed shaker accepts its first water with native z-y-x block coordinates',()=>{
+ const f=fixture();f.stop(18);const item=f.current(),carried=readPortableItem(item);
+ item.setDynamicProperty(PORTABLE_DATA,encodePortable({...emptyShaker(),revision:5},carried.token));f.player.inventory.setItem(0,item);
+ const target={...f.player.location,z:88};f.player.location={...target};placeShaker(f.player,target);
+ const block=f.player.dimension.getBlock(target),key=shakerKey(block.dimension.id,target);
+ block.location={z:target.z,y:target.y,x:target.x};
+ assert.deepEqual(Object.keys(JSON.parse(world.getDynamicProperty(nativeItemKey(key))).position),['x','y','z']);
+ assert.deepEqual(Object.keys(block.location),['z','y','x']);
+ const water=Potions.resolve(Potions.getEffectType('minecraft:water'),Potions.getDeliveryType('Consume'));f.player.inventory.setItem(0,water);
+ const next=pourIngredient(f.player,block);
+ assert.equal(next.revision,6);assert.deepEqual(next.slots,[potionInput(water)]);assert.equal(f.current(),undefined);
+ assert.equal(f.player.inventory.items.filter(x=>x?.typeId==='minecraft:glass_bottle').reduce((n,x)=>n+x.amount,0),1);
+ pickupShaker(f.player,block);assert.deepEqual(metadata(f.current()),metadata(item));
+ assert.equal(readPortableItem(f.current()).token,carried.token);assert.deepEqual(readPortableItem(f.current()).state.slots,[potionInput(water)]);
+ assert.equal(world.getDynamicProperty(nativeItemKey(key)),undefined);
+});
 test('native placement and pickup failures retain the complete source stack and are retryable',()=>{
  const f=fixture();f.stop(69);const before=f.current(),target={...f.player.location,z:96};f.player.location={...target};const block=f.player.dimension.getBlock(target),key=shakerKey(block.dimension.id,target);
  f.player.dimension.failSpawn=true;try{assert.throws(()=>placeShaker(f.player,target),/INJECTED_ENTITY_SPAWN_FAILURE/);}finally{f.player.dimension.failSpawn=false;}
@@ -300,6 +316,7 @@ test('native placement and pickup failures retain the complete source stack and 
 });
 test('a failed replacement ledger write restores the old carrier payload and the new ingredient',()=>{
  const f=stationFixture(2);pourIngredient(f.player,f.block);const state=world.getDynamicProperty(f.key),ledger=world.getDynamicProperty(nativeItemKey(f.key)),input=f.player.inventory.getItem(0);
+ const {x,y,z}=f.block.location;f.block.location={z,y,x};
  const write=world.setDynamicProperty;let failed=false;
  world.setDynamicProperty=function(key,value){if(key===nativeItemKey(f.key)&&!failed){failed=true;throw Error('NATIVE_LEDGER_FAILURE');}return write.call(this,key,value);};
  try{assert.throws(()=>pourIngredient(f.player,f.block),/NATIVE_LEDGER_FAILURE/);}finally{world.setDynamicProperty=write;}

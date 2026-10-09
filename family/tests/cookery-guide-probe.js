@@ -5,6 +5,8 @@ import {getGuidebookExtension} from './api/guidebookExtensionRegistry.js';
 const ID='kaleidoscope_tavern:tavern';
 const ROOTS=['equipment','barrel','cocktail','cultivation','storage','decor','food'];
 const LOCALES=['zh_CN','zh_TW','en_US'];
+// Four reviewed AMW pages are mounted in the complete 42-pack family.
+const AMW_IDS=['amw:kirsch','amw:kriek','amw:sour_cherry','amw:sour_cherry_bucket'];
 const wait=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const text=value=>typeof value==='string'&&value.trim().length>0;
@@ -14,10 +16,10 @@ system.runTimeout(async()=>{
  try{
   for(let attempt=0;attempt<120;attempt++){
    chapter=getGuidebookExtension(ID);
-   if(chapter?.entries?.length===223&&chapter?.categories?.length===31)break;
+   if(chapter?.entries?.length===227&&chapter?.categories?.length===31)break;
    await wait(10);
   }
-  assert(chapter?.entries?.length===223,'Actual Cookery registry must receive 223 entries');
+  assert(chapter?.entries?.length===227,'Actual Cookery registry must receive 227 reviewed family entries');
   assert(chapter.categories.length===31,'Actual Cookery registry must retain 31 categories');
   const roots=chapter.categories.filter(category=>!category.parent).map(category=>category.id);
   assert(JSON.stringify(roots)===JSON.stringify(ROOTS),'Seven ordered parent categories');
@@ -27,8 +29,9 @@ system.runTimeout(async()=>{
    assert(ROOTS.includes(category.parent),'One-level child category: '+category.id);
   }
   const entryIds=chapter.entries.map(entry=>entry.id);
-  assert(new Set(entryIds).size===223,'Unique received entry IDs');
-  const sources={kaleidoscope_tavern:0,kaleidoscope_world_liquor:0};
+  assert(new Set(entryIds).size===227,'Unique received entry IDs');
+  assert(JSON.stringify(entryIds.filter(id=>id.startsWith('amw:')).sort())===JSON.stringify(AMW_IDS),'Exactly four reviewed AMW entry IDs');
+  const sources={kaleidoscope_tavern:0,kaleidoscope_world_liquor:0,amw:0};
   for(const entry of chapter.entries){
    const source=entry.id.split(':')[0];
    assert(Object.prototype.hasOwnProperty.call(sources,source),'Unexpected guide source: '+entry.id);
@@ -37,12 +40,16 @@ system.runTimeout(async()=>{
    assert(entry.categories.every(id=>categories.get(id)?.parent),'No flattened category override: '+entry.id);
    assert(text(entry.icon),'Received entry icon: '+entry.id);
    for(const locale of LOCALES){
-    assert(text(chapter.names?.[locale]?.[entry.id]),'Received item name '+locale+': '+entry.id);
+    const name=chapter.names?.[locale]?.[entry.id];
+    assert(text(name),'Received item name '+locale+': '+entry.id);
+    if(locale==='en_US'&&source==='amw')assert(!/[\u4e00-\u9fff]/u.test(name),'Reviewed AMW English name: '+entry.id);
     const rows=entry.mechanicsByLocale?.[locale];
     assert(Array.isArray(rows)&&rows.length>0&&rows.every(text),'Received instructions '+locale+': '+entry.id);
    }
   }
-  assert(sources.kaleidoscope_tavern===156&&sources.kaleidoscope_world_liquor===67,'Actual registered family entry sources');
+  assert(sources.kaleidoscope_tavern===156&&sources.kaleidoscope_world_liquor===67&&sources.amw===4,'Actual registered family entry sources');
+  const amwCategories={kirsch:'barrel_addons',kriek:'barrel_addons',sour_cherry:'plants',sour_cherry_bucket:'juices'};
+  for(const [short,category] of Object.entries(amwCategories))assert(chapter.entries.find(entry=>entry.id==='amw:'+short)?.category===category,'Reviewed AMW navigation: '+short);
   for(const locale of LOCALES){
    for(const category of chapter.categories){
     assert(text(chapter.text?.[locale]?.[category.labelKey]),'Received category name '+locale+': '+category.id);
@@ -51,7 +58,7 @@ system.runTimeout(async()=>{
     assert(text(chapter.text?.[locale]?.[key]),'Received navigation text '+locale+': '+key);
    }
   }
-  console.log('BASELINE_COOKERY_GUIDE_PASS '+JSON.stringify({accepted:true,receiver:'actual Cookery registry',id:chapter.id,version:chapter.version,entries:223,categories:31,roots,children:24,sources,locales:LOCALES,localizedEntries:669,entryIds:entryIds.sort(),client:false,simulatedPlayers:false,testOnly:true}));
+  console.log('BASELINE_COOKERY_GUIDE_PASS '+JSON.stringify({accepted:true,receiver:'actual Cookery registry',id:chapter.id,version:chapter.version,entries:227,categories:31,roots,children:24,sources,reviewedAmwIds:AMW_IDS,locales:LOCALES,localizedEntries:681,entryIds:entryIds.sort(),client:false,simulatedPlayers:false,testOnly:true}));
  }catch(error){
   console.error('BASELINE_COOKERY_GUIDE_FAIL '+JSON.stringify({accepted:false,receiver:'actual Cookery registry',error:String(error),entries:chapter?.entries?.length??0,categories:chapter?.categories?.length??0,client:false,simulatedPlayers:false,testOnly:true}));
  }

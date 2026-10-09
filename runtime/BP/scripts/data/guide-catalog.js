@@ -1,6 +1,6 @@
 import {GUIDE_ENTRY_ICONS} from './guide-icons.js';
 import {organizeGuideNavigation} from './guide-navigation.js';
-import {applyTavernGuideCopy} from './guide-copy.js';
+import {applyTavernGuideCopy,applyReviewedAddonGuideCopy} from './guide-copy.js';
 import {DRINK_EFFECTS} from './drink-effects.js';
 import {cocktailGuideNotes} from './cocktail-guide.js';
 /** One encyclopedia page per product, using Cookery's native entry renderer. */
@@ -141,7 +141,7 @@ export function consolidateGuide(payload,recipes=[],effectPages=[],items={}){
   const id='kaleidoscope_tavern:pressing/'+fruit+'_bucket';
   if(payload.entries.some(e=>e.id===id))LOCALES.forEach((lc,i)=>payload.names[lc][id]=labels[i]);
  }
- const result=applyTavernGuideCopy(organizeGuideNavigation(payload));
+ const result=applyTavernGuideCopy(organizeGuideNavigation(applyReviewedAddonGuideCopy(payload)));
  for(const entry of result.entries){
   // Workbench recipes already belong to the native crafting book. Guide entries
   // explain use; preparation recipes belong to the resulting drink/food.

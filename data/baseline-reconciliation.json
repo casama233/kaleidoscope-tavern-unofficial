@@ -7579,6 +7579,42 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.140",
+      "reviewedPredecessorCommit": "ada02bfd5dd708d0d733ca7ad6593672ca3ad2f7",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.140.md",
+      "files": {
+        "runtime/BP/scripts/data/guide-copy.js": {
+          "before": "413497e76579b9f183eb82f66bd84d0e8a2b2731f932e90b6550d35db8f7ac8e",
+          "after": "d84a31ecc049932988782ab457e09d2b79114702259b4c84aaeb3e6e45feb2e9",
+          "reason": "T140 owned concise three-language prose, names and aliases for exactly four AMW guide entries, restored onto current T139; private author source, gameplay recipes and effects stay unchanged. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.140.md.",
+          "reverseOps": [
+            [
+              7,
+              42,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/guide-catalog.js": {
+          "before": "672a6a9d959e7adc467fb308f4e35d87054c3a0a8b6016b9823849fc3a1226ba",
+          "after": "ec5ad2b06727b19c87c1cc970072f15383ba248c3cbf12f5e3114a1ddaf0b7f2",
+          "reason": "T140 admits the four exact reviewed addon guide entries through the existing shared projection before navigation, retaining T139 gameplay and existing recipe, icon, food and preparation records. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.140.md.",
+          "reverseOps": [
+            [
+              2,
+              3,
+              "import {applyTavernGuideCopy} from './guide-copy.js';\n"
+            ],
+            [
+              143,
+              144,
+              " const result=applyTavernGuideCopy(organizeGuideNavigation(payload));\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

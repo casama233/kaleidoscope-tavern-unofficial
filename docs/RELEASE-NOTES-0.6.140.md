@@ -9,3 +9,5 @@
 T139 的原料數量／原生 metadata 保存、重啟及回滾、Q4 雪克杯原料、原生光效 lease 和外部所有權邊界、完整 Mob／AABB 選取，以及既有靜默操作、動畫、粒子與 PBR 修補全部保留；詳細範圍與原版證據見 [T139 說明](RELEASE-NOTES-0.6.139.md)。本版沒有重新標記舊候選的成功或失敗證據。
 
 完整 canonical CI、家族 static／BDS、fresh 停服一致備份與存檔演練、准入和 LIVE 部署尚待本次實際結果。保留持續部署授權；目前 `client=false`、`production_ready=false`、`live_deployment=false`。無玩家接收檢查不代表真人排版、按鍵、聲畫或 Java 一比一驗收。
+
+凍結功能來源：`e45d1fd1e466de5a8e41e55210894f35fd506c19`。正式生成器核對輸出封存 SHA256：`33569e2f6ca8bbb60454706d0f0d01362d5d5b6909b334bc52b6eb1ca0d4f1e5`；後續配套 CI metadata 不改 runtime。

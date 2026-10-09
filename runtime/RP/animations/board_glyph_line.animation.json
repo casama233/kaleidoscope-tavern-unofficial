@@ -4,6 +4,13 @@
     "animation.kt_runtime.board_glyph_line": {
       "loop": true,
       "bones": {
+        "anchor": {
+          "position": [
+            "q.property('kaleidoscope_tavern:x_0')",
+            "q.property('kaleidoscope_tavern:x_1')",
+            "q.property('kaleidoscope_tavern:x_2')"
+          ]
+        },
         "ink": {
           "rotation": [
             "q.property('kaleidoscope_tavern:tilt')",
@@ -12,6 +19,118 @@
           ]
         },
         "bold": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_0": {
+          "position": [
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_0": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_1": {
+          "position": [
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "0 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_1": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_2": {
+          "position": [
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_2": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_3": {
+          "position": [
+            "0 * q.property('kaleidoscope_tavern:bold_offset')",
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_3": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_4": {
+          "position": [
+            "0 * q.property('kaleidoscope_tavern:bold_offset')",
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_4": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_5": {
+          "position": [
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "-1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_5": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_6": {
+          "position": [
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "0 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_6": {
+          "position": [
+            "-q.property('kaleidoscope_tavern:bold_offset')",
+            0,
+            0
+          ]
+        },
+        "outline_7": {
+          "position": [
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            "1 * q.property('kaleidoscope_tavern:bold_offset')",
+            0
+          ]
+        },
+        "outline_bold_7": {
           "position": [
             "-q.property('kaleidoscope_tavern:bold_offset')",
             0,

@@ -28,7 +28,7 @@ def main():
  uid=str(uuid.uuid4());version=[1,0,0]
  manifest={'format_version':2,'header':{'name':'Pickup native persistence probe','description':'Isolated no-player save/restart probe','uuid':uid,'version':version,'min_engine_version':[1,26,50]},'modules':[{'type':'data','uuid':str(uuid.uuid4()),'version':version},{'type':'script','language':'javascript','entry':'scripts/main.js','uuid':str(uuid.uuid4()),'version':version}],'dependencies':[{'module_name':'@minecraft/server','version':'2.7.0'}]}
  (pack/'manifest.json').write_text(json.dumps(manifest));sources={}
- scripts=['core/native-item-storage.js','core/util.js','core/immersion.js','core/mixology.js','core/bottles.js','core/potions.js','core/extension-content.js','bedrock/potions.js','data/mixology.js','data/bottles.js','data/drink-effects.js']
+ scripts=['core/native-item-storage.js','core/util.js','core/immersion.js','core/mixology.js','core/ingredient-metadata.js','core/bottles.js','core/potions.js','core/extension-content.js','bedrock/potions.js','data/mixology.js','data/bottles.js','data/drink-effects.js']
  copies=[('runtime/BP/entities/stored_items.json','entities/stored_items.json'),('runtime/BP/items/shaker.json','items/shaker.json'),('runtime/BP/item_catalog/crafting_item_catalog.json','item_catalog/crafting_item_catalog.json'),('tools/pickup/native-storage-smoke.js','scripts/main.js')]+[('runtime/BP/scripts/'+p,'scripts/'+p) for p in scripts]
  for src,dst in copies:
   (pack/dst).parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/src,pack/dst);sources[src]=hashlib.sha256((pack/dst).read_bytes()).hexdigest()
@@ -36,6 +36,8 @@ def main():
  (work/'server.properties').write_text('server-name=Pickup Native Probe\nlevel-name=pickup-smoke\nallow-cheats=true\nonline-mode=false\ntransport=nethernet\nenable-lan-visibility=false\nserver-port=19192\nserver-portv6=19193\ntick-distance=4\nmax-players=1\ncontent-log-file-enabled=true\n')
  stage_results={}
  for stage in [1,2]:
+  # Keep the same extracted archive executable launchable for each phase.
+  executable.chmod(0o755)
   env={**os.environ,'LD_LIBRARY_PATH':str(work)};proc=subprocess.Popen([str(executable)],cwd=work,env=env,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1);lines=[];q=queue.Queue()
   def reader():
    for line in proc.stdout:lines.append(line);q.put(line)

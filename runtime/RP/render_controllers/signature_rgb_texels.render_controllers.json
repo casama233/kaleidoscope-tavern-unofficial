@@ -1,0 +1,295 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_runtime.signature_rgb_5d6062": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_5d6062_0",
+            "Geometry.rgb_5d6062_1",
+            "Geometry.rgb_5d6062_2",
+            "Geometry.rgb_5d6062_3",
+            "Geometry.rgb_5d6062_4",
+            "Geometry.rgb_5d6062_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 93 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 96 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 98 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_82c5d9": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_82c5d9_0",
+            "Geometry.rgb_82c5d9_1",
+            "Geometry.rgb_82c5d9_2",
+            "Geometry.rgb_82c5d9_3",
+            "Geometry.rgb_82c5d9_4",
+            "Geometry.rgb_82c5d9_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 130 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 197 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 217 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_88c9dc": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_88c9dc_0",
+            "Geometry.rgb_88c9dc_1",
+            "Geometry.rgb_88c9dc_2",
+            "Geometry.rgb_88c9dc_3",
+            "Geometry.rgb_88c9dc_4",
+            "Geometry.rgb_88c9dc_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 136 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 201 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 220 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_999999": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_999999_0",
+            "Geometry.rgb_999999_1",
+            "Geometry.rgb_999999_2",
+            "Geometry.rgb_999999_3",
+            "Geometry.rgb_999999_4",
+            "Geometry.rgb_999999_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 153 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 153 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 153 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_a1a4a6": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_a1a4a6_0",
+            "Geometry.rgb_a1a4a6_1",
+            "Geometry.rgb_a1a4a6_2",
+            "Geometry.rgb_a1a4a6_3",
+            "Geometry.rgb_a1a4a6_4",
+            "Geometry.rgb_a1a4a6_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 161 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 164 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 166 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_a8dae4": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_a8dae4_0",
+            "Geometry.rgb_a8dae4_1",
+            "Geometry.rgb_a8dae4_2",
+            "Geometry.rgb_a8dae4_3",
+            "Geometry.rgb_a8dae4_4",
+            "Geometry.rgb_a8dae4_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 168 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 218 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 228 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_d1d8dd": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_d1d8dd_0",
+            "Geometry.rgb_d1d8dd_1",
+            "Geometry.rgb_d1d8dd_2",
+            "Geometry.rgb_d1d8dd_3",
+            "Geometry.rgb_d1d8dd_4",
+            "Geometry.rgb_d1d8dd_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 209 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 216 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 221 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_d8efef": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_d8efef_0",
+            "Geometry.rgb_d8efef_1",
+            "Geometry.rgb_d8efef_2",
+            "Geometry.rgb_d8efef_3",
+            "Geometry.rgb_d8efef_4",
+            "Geometry.rgb_d8efef_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 216 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 239 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 239 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_fafeff": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_fafeff_0",
+            "Geometry.rgb_fafeff_1",
+            "Geometry.rgb_fafeff_2",
+            "Geometry.rgb_fafeff_3",
+            "Geometry.rgb_fafeff_4",
+            "Geometry.rgb_fafeff_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 250 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 254 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 255 / 255) / 255",
+        "a": 1
+      }
+    },
+    "controller.render.kt_runtime.signature_rgb_ffffff": {
+      "arrays": {
+        "geometries": {
+          "Array.frames": [
+            "Geometry.rgb_ffffff_0",
+            "Geometry.rgb_ffffff_1",
+            "Geometry.rgb_ffffff_2",
+            "Geometry.rgb_ffffff_3",
+            "Geometry.rgb_ffffff_4",
+            "Geometry.rgb_ffffff_5"
+          ]
+        }
+      },
+      "geometry": "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]",
+      "materials": [
+        {
+          "*": "Material.liquid_rgb"
+        }
+      ],
+      "textures": [
+        "Texture.rgb_opaque"
+      ],
+      "overlay_color": {
+        "r": "math.floor(query.property('kt_art:red') * 255 / 255) / 255",
+        "g": "math.floor(query.property('kt_art:green') * 255 / 255) / 255",
+        "b": "math.floor(query.property('kt_art:blue') * 255 / 255) / 255",
+        "a": 1
+      }
+    }
+  }
+}

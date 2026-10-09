@@ -39,7 +39,8 @@ export function spawnRejectedIngredients(block,outputs){
    const directions=Math.min(8,output.count),base=Math.floor(output.count/directions),remainder=output.count%directions;
    for(let i=0;i<directions;i++){
     const angle=i*Math.PI/4,dx=Math.cos(angle),dz=Math.sin(angle);
-    const e=block.dimension.spawnItem(new ItemStack(output.id,base+(i<remainder?1:0)),{x:block.location.x+.5+dx*.3,y:block.location.y+.55,z:block.location.z+.5+dz*.3});
+    const stack=output.stack?.clone()??new ItemStack(output.id,1);stack.amount=base+(i<remainder?1:0);
+    const e=block.dimension.spawnItem(stack,{x:block.location.x+.5+dx*.3,y:block.location.y+.55,z:block.location.z+.5+dz*.3});
     spawned.push(e);e.applyImpulse({x:dx*.15,y:.1,z:dz*.15});
    }
   }

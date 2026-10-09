@@ -97,10 +97,18 @@ def main():
                 'entities/living-probe.json': hashlib.sha256((ROOT/'tools/native/living-probe-entity.json').read_bytes()).hexdigest(),
                 'entities/health-helper-probe.json': hashlib.sha256((ROOT/'tools/native/health-helper-entity.json').read_bytes()).hexdigest(),
                 'scripts/main.js': 'Append only the declared disposable observer import after verifying the complete copied runtime.'}
+    if args.probe.resolve() == (ROOT/'tools/native/shaker-migration-probe.js').resolve():
+        for support_name in ('machine-ingredients-probe.js', 'status-aura-probe.js'):
+            support = ROOT/'tools/native'/support_name
+            shutil.copy2(support, host/'scripts'/support_name)
+            overlays['scripts/'+support_name] = hashlib.sha256(support.read_bytes()).hexdigest()
     for kind, filename in [('BP', 'world_behavior_packs.json'), ('RP', 'world_resource_packs.json')]:
         (world/filename).write_text(json.dumps(manifests[kind], indent=2)+'\n')
     reports = []
     for phase in args.phases:
+        # Keep the same extracted engine executable for each launch. Its bytes
+        # remain bound to engine_identity; no source pack or world is rewritten.
+        (engine/'bedrock_server').chmod(0o755)
         log = work/f'{phase}.log'
         with log.open('w') as output:
             process = subprocess.Popen(['./bedrock_server'], cwd=work, env={**os.environ, 'LD_LIBRARY_PATH': os.pathsep.join((str(work), str(engine)))}, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True)

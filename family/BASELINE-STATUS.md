@@ -1,8 +1,16 @@
+## 當前配套：T139／W116／G122
+
+整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../docs/RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
+
+## 先前固定 T138／W115／G120
+
+整合 native countdown 與已驗證的 reload acknowledgement；來源以新 release notes 與 data/parallel-source-review-20261009.json 為準。舊候選歷史及 scoped native 結果保留；G120 不回退。新候選完整 CI、native 與 client／私人 LIVE 各自驗證。
+
 # 家族現行來源基線
 
-查核日期：2026-10-09。這份入口說明已合併的開發來源與作者參考，
-不代替 BSM 當前政策、逐候選部署收據或真人驗收。
-完整更新走 [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md)。
+查核日期：2026-10-09。當前修復入口為 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)，
+版本／內容以各 canonical baseline 及 family lock 為準；PR、CI、原生與 LIVE
+各自依實際結果，不由版號或資源存在推定完成。
 
 ## 本輪指南候選：T136／W113／G121
 
@@ -26,19 +34,18 @@ static、BDS、存檔演練與准入部署流程。指南文字／投影檢查�
 ## 已交付來源與 LIVE 起點
 
 | 自有來源 | 目前版本 | 已交付來源 | 目前主要差距 |
+| 自有來源 | 當前候選 | 這批內容 | 尚待完成 |
 | --- | --- | --- | --- |
-| 酒館 | 0.6.132 | [PR297](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/297)；承接 T131，補濺射、雪克杯交易／保存及指南動畫 | 任意三份 ItemStack、穿牆輪廓、相機 roll、部分原生效果與實際聲畫／輸入 |
-| 煙火／燒烤 | 2.8.119 | [PR184](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/184)；餐盤內容、植物及重金屬結算 | 任意秘製串背包圖示、正常 Cookery producer、調料 registry、實際操作／聲畫 |
-| 世界名酒 | 0.1.110 | [PR90](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)；最新 Forge／NeoForge 獺祭 Luck 資料與四款雞尾酒模型／貼圖更新；精確配對 T132、保留 87 個無碰撞家族 helper | 各分支事件時序、斬首／SkullOwner、Elbow production、CaptainGift、跨模組整合與真人驗收 |
-| 私有料理整合 | 1.0.30 | 保持已核驗 private canonical；不在公開倉庫保存作者私有完整腳本 | 原生與真人證據按功能 scope，不能用公開包 CI 代替 |
+| 酒館 | 0.6.137 | 保留 T135 全部原料／視覺／沉浸修正；追加 Upside Down 完整 Mob 名單、魚類分類、原生保存與重啟光效修復 | 名稱可見性、真人倒轉、roll／outline／多行編輯器等既有差距 |
+| 世界名酒 | 0.1.114 | 保留 W110 作者更新與 W112 全部內容；確認新原生錨 metadata 及 repeat／取消／lifecycle | 原生 Player、舊／未知錨、部分效果與聲畫 |
+| 煙火／燒烤 | 2.8.120 | 已合併 PR185 `8dc3e9d4`；helper／guide transport 與 T/W 相容；料理保存、植物與重金屬修復 | 完整 Cookery 0.2.7 descriptor／作者 patch／copied helper 須成組驗證 |
+| 私有料理整合 | 沿用既有鎖 | 本輪沒有私人連線及重新驗證；不在公開倉庫保存完整私人作者腳本 | 完整家族、當前保存演練及 LIVE |
 
-版本號不同不能直接比較還原度。各包完整差距以自己的
-`docs/PARITY-MATRIX.md`、`docs/BUGS.md` 和當前 release notes 為準。
-未完成調料原型及其他唯一差異保留，不能混入已凍結來源。
-T133 原生儲存 XYZ 修補仍為 [draft PR298](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)，
-尚未合併或納入本次家族候選。舊失敗和更新後來源的 CI 各自保留，
-現態以 PR 的 exact head 證據為準；不把草稿宣稱已交付。
-衝突的兩份 W109 提交／claim 已分別保留，新作者適配使用獨立 W110 身份。
+T134/W111、T135/W112 和 PR298 草稿的歷史提交、freeze、witness 與實際
+CI 成敗保留；新候選不改寫舊內容身份。兩個上輪來源在本輪接續時仍為
+開放 PR，承接來源不等於其已合併。新候選使用自己的精確 CI 與發布紀錄。
+G120 僅更新已審查 owned／source pin，沒有修改 G runtime 或解除部署門檻。
+完整更新遵守 [UPDATE-WORKFLOW.md](UPDATE-WORKFLOW.md)。
 
 ## 作者版本與分支
 
@@ -47,7 +54,7 @@ T133 原生儲存 XYZ 修補仍為 [draft PR298](https://github.com/casama233/ka
 | Tavern Forge 1.20.1 | 1.2.0／CF8350841 | 已釘選；原作 main `c4ec1880` 與 T131 核對來源相同，完整一比一仍待完成 |
 | Tavern NeoForge 1.21.1 | 1.2.0／CF8350856 | 已釘選；原作 `a1afba34` 與 T131 核對來源相同，保持分支差異 |
 | Tavern NeoForge 26.1.2 | 尚未找到正式發行 | 來源 `9b8f165a` 宣告 1.1.2；T131 局部核對，不冒充已發布或整分支已移植 |
-| Grilling Forge 1.20.1／NeoForge 1.21.1 | 1.1.1／CF8726006、CF8726014 | 沒有新發行，保留 G119，不為相同內容另升版本 |
+| Grilling Forge 1.20.1／NeoForge 1.21.1 | 1.1.1／CF8726006、CF8726014 | 作者參考不變；採用已合併 G120 自有修復，保留其原發行身份 |
 | World Liquor Forge 1.20.1 | 1.1.12／CF9066402 | 配方、25 個飲品效果資料檔及共用聲畫已比對；W110 承接四款雞尾酒模型／貼圖與兩個背包圖示更新，並修正獺祭 Q3–Q6 amplifier；原生 Luck 掉落仍未完成；事件階段、酒櫃自動化及 Create／Jade／SMC 等仍待適配 |
 | World Liquor NeoForge 1.21.1 | 1.1.11／CF9066406 | 現行主要玩法參考；已承接五個冰櫃配方及相關保存修補，完整玩法尚未閉合 |
 | World Liquor NeoForge 26.1.2 | 1.1.6／CF9087098 | 已有分支差異審查；Luck／BlockDrops 等不同，不直接替換 1.21.1 玩法，仍待適配 |

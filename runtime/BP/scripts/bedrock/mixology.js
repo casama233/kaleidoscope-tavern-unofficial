@@ -7,10 +7,11 @@ import {cupBlock,cupItem,isCupBlock} from '../core/extension-content.js';
  * station. UI and animation observe that session and never mutate recipes.
  * Existing world/item storage schemas are retained for lossless migration.
  */
-import {world,system,BlockPermutation,ItemTypes,EntitySwingSource} from '@minecraft/server';
+import {world,system,BlockPermutation,ItemStack,ItemTypes,EntitySwingSource} from '@minecraft/server';
 import {check,clone,canonical} from '../core/util.js';
 import {Locks} from '../core/storage.js';
 import {planInventory,commitInventory,isPlainIngredient} from '../core/inventory.js';
+import {captureStackableIngredient,restoreStackableIngredient} from '../core/ingredient-metadata.js';
 import {NS,EMPTY_CUP,SIGNATURE,SIGNATURE_DATA,emptyShaker,validateShaker,validateCup,validatePayload,addInput,addResolvedInput,finishShake,serveShaker,isCupItem,cupKey,shakerKey,MixStore} from '../core/mixology.js';
 import {COCKTAILS} from '../data/mixology.js';
 import {POTION_ITEMS} from '../core/potions.js';
@@ -23,6 +24,7 @@ import {waterSnapshot,waterAt,setWithWater,restoreWater} from './waterlogging.js
 import {NATIVE_EFFECTS} from '../core/drink-effects.js';
 import {javaRandomFloat} from '../core/java-random.js';
 import {applyCustomEffect} from './custom-effects.js';
+import {applyNativeStatusWithAura} from './status-aura.js';
 import {captureDrinkUse,settleDrinkUse} from './drink-completion.js';
 import {dispatchInstantHealth} from './instant-effects.js';
 import {faceOffset} from '../core/furniture.js';
@@ -77,10 +79,10 @@ function itemDisplayName(item,id){
  return {translate:typeof key==='string'&&key?key:`item.${id}.name`};
 }
 function portableLore(state,item,resolveColor=id=>registry?.ingredientColor?.(id)){
- // Accepted ingredients use the self-contained plain identity schema.
- // Reconstruct only the display identity; outer carrier metadata stays native.
+ // Both plain identities and native-equality-checked metadata are self-contained.
+ // The original custom ingredient name survives a carried copy or world reload.
  const rows=state.result?[state.result]:state.slots;
- const contents=rows.map(slot=>slot.potion?restorePotion(slot):makeStack(slot.item,1));
+ const contents=rows.map(slot=>slot.potion?restorePotion(slot):slot.metadata?restoreStackableIngredient(slot.item,slot.metadata,makeStack):makeStack(slot.item,1));
  return shakerContentsLore(state,(slot,index)=>itemDisplayName(contents[index],slot.item),resolveColor);
 }
 function ownsPortableLore(item,previous){
@@ -95,8 +97,8 @@ function ownsPortableLore(item,previous){
  }catch{return false;}
 }
 function portable(state,id,current,previous){
- // Same-ID transitions clone all outer data. Ingredient descriptors contain
- // only accepted plain items and native potion identities, not item metadata.
+ // Same-ID transitions clone all outer data. Ingredient metadata stays in the
+ // portable payload; no carried copy depends on a world entity or escrow key.
  if(current)check(current.typeId===SHAKER&&current.amount===1,'NOT_PORTABLE_SHAKER');
  const item=current?current.clone():makeStack(SHAKER,1);
  item.setDynamicProperty(PORTABLE_DATA,encodePortable(portableShakerState(state),id));
@@ -163,7 +165,14 @@ export function pourIngredient(player,block){
   const item=hand(player);check(item,'NO_INGREDIENT');let next;
   check(candidate(item.typeId),'NOT_SHAKER_INGREDIENT');
   if(POTION_ITEMS.has(item.typeId))next=addResolvedInput(old,potionInput(item));
-  else{check(!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}
+  else{
+   check(!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory'),'METADATA_ITEM_REJECTED');
+   // Check Java ingredient/quality rules before taking the exact item snapshot.
+   next=addInput(old,item.typeId,registry);
+   if(item.maxAmount>1)next.slots.at(-1).metadata=captureStackableIngredient(item,(id,count)=>new ItemStack(id,count));
+   else check(isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');
+   validateShaker(next);
+  }
   next=nativeShakerState(next);
   const current=placedShaker(block,old),carried=readPortableItem(current),stack=portable(next,carried.token,current,carried.state);
   const native=planPlacedShaker(block,old,next,{stack,legacyStack:current});
@@ -347,7 +356,7 @@ export function completeCocktail(event,rng=Math.random){
      continue;
     }
     const native=NATIVE_EFFECTS[effect.effect];
-    if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
+    if(native)applyNativeStatusWithAura(player,native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});
     else if(!applyCustomEffect(player,effect))mixologyDiagnostics.unsupportedEffects[effect.effect]=true;
    }catch(error){
     // A Bedrock API rejection must not leave earlier granted effects on an

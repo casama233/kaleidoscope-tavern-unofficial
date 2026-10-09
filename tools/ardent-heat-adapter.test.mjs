@@ -5,7 +5,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {system,world} from '@minecraft/server';
-import {pulseArdentHeat,tickArdentHeat,tickCustomEffects,applyCustomEffect,statusNow,clearCustomEffects,CUSTOM_TEST,ARDENT_COLLISION_COUNT} from '../runtime/BP/scripts/bedrock/custom-effects.js';
+import {pulseArdentHeat,tickArdentHeat,tickCustomEffects,tickGrassStealth,applyCustomEffect,statusNow,clearCustomEffects,customEffectDiagnostics,CUSTOM_TEST,ARDENT_COLLISION_COUNT} from '../runtime/BP/scripts/bedrock/custom-effects.js';
 const ARDENT='kaleidoscope_tavern:ardent_heat';
 let sequence=0;
 
@@ -34,6 +34,11 @@ function fixture(rows,{command=()=>1,sprinting=true}={}){
   getRotation:()=>({x:0,y:0}),
   getComponent:id=>({'minecraft:player.exhaustion':exhaustion,'minecraft:player.hunger':hunger,'minecraft:player.saturation':saturation}[id]),
   getDynamicProperty:k=>dp.get(k),setDynamicProperty:(k,v)=>dp.set(k,v),
+  getEffect(id){
+   const effect=effects.findLast(row=>row.id===id);if(!effect)return undefined;
+   const duration=effect.ticks-(system.currentTick-effect.at);
+   return duration>0?{typeId:id,amplifier:effect.options?.amplifier??0,duration}:undefined;
+  },
   addEffect(id,ticks,options){effects.push({id,ticks,options,at:system.currentTick});events.push(id);},
   applyDamage(){assert.fail('one collision must not apply the fifth naked collision damage');}
  };
@@ -175,7 +180,7 @@ test('early Ardent save preserves a crossed Vision pulse and the five-tick pass 
  }finally{clearCustomEffects(f.actor);world.getAllPlayers=previousPlayers;}
 });
 
-test('early Ardent save preserves Grass pulse, including either same-tick scheduler order',()=>{
+test('early Ardent save preserves the Grass exhaustion pulse independently of per-tick visibility, in either scheduler order',()=>{
  const previousPlayers=world.getAllPlayers;
  for(const normalPassFirst of [false,true]){
   const f=fixture([],{sprinting:false});f.actor.isSneaking=true;
@@ -184,13 +189,22 @@ test('early Ardent save preserves Grass pulse, including either same-tick schedu
   try{
    system.currentTick=700;applyCustomEffect(f.actor,{effect:'kaleidoscope_tavern:grass_stealth',ticks:12,amplifier:0});
    applyCustomEffect(f.actor,{effect:ARDENT,ticks:4,amplifier:0});
-   system.currentTick=701;tickArdentHeat();system.currentTick=702;tickArdentHeat();system.currentTick=703;
+   const pulses=customEffectDiagnostics.grassStealthPulses;
+   // Native Invisibility lasts one tick in this adapter. Visibility consumers
+   // can run before/after a persistence pass without becoming hunger ticks.
+   for(let tick=701;tick<=702;tick++){system.currentTick=tick;tickGrassStealth();tickArdentHeat();}
+   assert.equal(f.exhaustion.currentValue,0);assert.equal(customEffectDiagnostics.grassStealthPulses,pulses);
+   system.currentTick=703;tickGrassStealth();
    if(normalPassFirst)tickCustomEffects();
-   tickArdentHeat();
-   assert.equal(f.effects.filter(e=>e.id==='invisibility').length,1,'the 12 -> 9 boundary must survive early finalization');
+   tickArdentHeat();tickGrassStealth();
+   assert.equal(customEffectDiagnostics.grassStealthPulses,pulses+1,'the 12 -> 9 exhaustion boundary must survive early finalization');
    assert.equal(f.exhaustion.currentValue,.1);
-   system.currentTick=705;tickCustomEffects();tickArdentHeat();
-   assert.equal(f.effects.filter(e=>e.id==='invisibility').length,1);assert.equal(f.exhaustion.currentValue,.1);
+   assert.equal(f.effects.filter(e=>e.id==='invisibility'&&e.at===703).length,1,'pulse and visual poll share this tick without replacing the lease');
+   system.currentTick=704;tickArdentHeat();tickGrassStealth();
+   system.currentTick=705;tickCustomEffects();tickArdentHeat();tickGrassStealth();
+   assert.equal(customEffectDiagnostics.grassStealthPulses,pulses+1,'later saves must not replay a consumed exhaustion pulse');
+   assert.equal(f.exhaustion.currentValue,.1);
+   assert.deepEqual(f.effects.filter(e=>e.id==='invisibility').map(e=>[e.at,e.ticks]),[[701,1],[702,1],[703,1],[704,1],[705,1]]);
   }finally{clearCustomEffects(f.actor);world.getAllPlayers=previousPlayers;}
  }
 });

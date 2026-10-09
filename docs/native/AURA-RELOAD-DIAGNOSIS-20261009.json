@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "scope": "Read-only native lifecycle trace in a new isolated world with complete unchanged T136/W113 runtime and explicit observer; not Player/client/full-family/LIVE evidence.",
+  "source_report_sha256": "3b47729574f433e40e4d0412f1ff2301e132c012c2bec510e6637217966814bc",
+  "sources": {
+    "tavern": {
+      "commit": "edc9e464f8ea987fa07927182a2b741720c82430",
+      "repository": "casama233/kaleidoscope-tavern-unofficial",
+      "version": [
+        0,
+        6,
+        136
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "24b9794f39e5be5e088d1bfce7dc1c246bd819fac7eeb35bae2a7d240edb549b",
+          "files": 827
+        },
+        "RP": {
+          "sha256": "ac311d2498d79229bb068739c2e5fcc6e81d0e0df507b6eff1b57a6cbf2ea2cd",
+          "files": 3222
+        }
+      }
+    },
+    "liquor": {
+      "commit": "7e1a6ad96916c18c783ae0cf4c63c2de57035dbc",
+      "repository": "casama233/kaleidoscope-world-liquor-unofficial",
+      "version": [
+        0,
+        1,
+        113
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "451552c0146712701d4a1820dba810b1ea7e8396f02d0117fd573235dd3d97a1",
+          "files": 339
+        },
+        "RP": {
+          "sha256": "4ace28dcc210a8c4cd879234f5f3d7fce4a0a19c6b29b2320ff4e4e272c56baa",
+          "files": 549
+        }
+      }
+    }
+  },
+  "engine": {
+    "executable_sha256": "0a490c711d4a2ce075debcd979e8862b7eaba008373f9970f0edbb67f98f9207",
+    "download": "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.26.52.3.zip",
+    "archive_sha256": "f6348d84fa714d04ca194f207e89453ca6bba0a1359396475271a52a150471c6",
+    "reused_successful_save_restart_receipt_sha256": "3eb36b2828d66a12fd4c67a59885c6f02dfe1385409e3561493f697d9338ad0d"
+  },
+  "test_only_overlays": {
+    "scripts/living-effects-probe.js": "f62823810e70ee10e7175bc03b64de720b1b288d84ade740c23994bf189b7e2c",
+    "entities/living-probe.json": "bdc56e29b59f80c3fd017f2e75581562ac1ca1ba4a272c101294fc48f533d789",
+    "entities/health-helper-probe.json": "c45525baae1359d21a4a38df13e1758ce7f8340ea36845817f3fd7844503cb16",
+    "scripts/main.js": "Append only the declared disposable observer import after verifying the complete copied runtime."
+  },
+  "complete_log_sha256": {
+    "first.log": "0a71c8c659410a8d9ac2dc4cdbe8618d8dfd76779838aaadfeb7be3e53044ca1",
+    "restart.log": "62ee68e0d123e243672036421c3a0f2aef3aafbb3b8492b3f6772d7d5be9e826"
+  },
+  "phases": [
+    {
+      "phase": "first",
+      "ok": true,
+      "normal_stop": true,
+      "errors": [],
+      "player_connections": 0
+    },
+    {
+      "phase": "restart",
+      "ok": false,
+      "normal_stop": true,
+      "errors": [],
+      "player_connections": 0
+    }
+  ],
+  "measured_restart_sequence": [
+    {
+      "kind": "entityLoad-before-runtime",
+      "id": "-4294967295",
+      "type": "minecraft:wolf",
+      "tick": 239,
+      "phase": "restart",
+      "absolute": 240,
+      "tagged": true,
+      "valid": true,
+      "position": {
+        "z": -16.5,
+        "y": 300,
+        "x": -16.5
+      },
+      "raw": "{\"schema\":1,\"rows\":[{\"id\":\"speed\",\"ticks\":550,\"amplifier\":0}]}",
+      "blocked": null,
+      "native": [
+        {
+          "id": "minecraft:speed",
+          "ticks": 549,
+          "amplifier": 0
+        }
+      ],
+      "track": null,
+      "pending": [],
+      "diagnostics": {
+        "mode": "source_owned_aura",
+        "clientConfirmed": false,
+        "emissions": 0,
+        "nativeAcquired": 0,
+        "nativeHandoffs": 0,
+        "nativeReadbackFallbacks": 0,
+        "unknownNativeSnapshots": 0,
+        "nativeOwnershipBlocks": 0,
+        "durableBlockFailures": 0,
+        "foreignVisibilityKnown": false,
+        "errors": []
+      }
+    },
+    {
+      "kind": "effectAdd-before-runtime",
+      "id": "-4294967295",
+      "type": "minecraft:wolf",
+      "tick": 239,
+      "phase": "restart",
+      "absolute": 240,
+      "tagged": true,
+      "valid": true,
+      "position": {
+        "z": -16.5,
+        "y": 300,
+        "x": -16.5
+      },
+      "raw": "{\"schema\":1,\"rows\":[{\"id\":\"speed\",\"ticks\":550,\"amplifier\":0}]}",
+      "blocked": null,
+      "native": [
+        {
+          "id": "minecraft:speed",
+          "ticks": 549,
+          "amplifier": 0
+        }
+      ],
+      "track": {
+        "raw": "{\"schema\":1,\"rows\":[{\"id\":\"speed\",\"ticks\":550,\"amplifier\":0}]}",
+        "savedAt": 239,
+        "at": 239,
+        "blocked": false,
+        "native": [
+          {
+            "id": "speed",
+            "amplifier": 0,
+            "until": 788,
+            "predicted": 549
+          }
+        ]
+      },
+      "pending": [],
+      "diagnostics": {
+        "mode": "source_owned_aura",
+        "clientConfirmed": false,
+        "emissions": 0,
+        "nativeAcquired": 0,
+        "nativeHandoffs": 0,
+        "nativeReadbackFallbacks": 0,
+        "unknownNativeSnapshots": 0,
+        "nativeOwnershipBlocks": 0,
+        "durableBlockFailures": 0,
+        "foreignVisibilityKnown": false,
+        "errors": []
+      },
+      "eventEffect": {
+        "id": "minecraft:speed",
+        "ticks": 549,
+        "amplifier": 0
+      }
+    },
+    {
+      "kind": "effectAdd-next-turn",
+      "id": "-4294967295",
+      "type": "minecraft:wolf",
+      "tick": 239,
+      "phase": "restart",
+      "absolute": 240,
+      "tagged": true,
+      "valid": true,
+      "position": {
+        "z": -16.5,
+        "y": 300,
+        "x": -16.5
+      },
+      "raw": null,
+      "blocked": null,
+      "native": [
+        {
+          "id": "minecraft:speed",
+          "ticks": 549,
+          "amplifier": 0
+        }
+      ],
+      "track": {
+        "raw": null,
+        "savedAt": 239,
+        "at": 239,
+        "blocked": false,
+        "native": []
+      },
+      "pending": [],
+      "diagnostics": {
+        "mode": "source_owned_aura",
+        "clientConfirmed": false,
+        "emissions": 0,
+        "nativeAcquired": 0,
+        "nativeHandoffs": 1,
+        "nativeReadbackFallbacks": 0,
+        "unknownNativeSnapshots": 0,
+        "nativeOwnershipBlocks": 0,
+        "durableBlockFailures": 0,
+        "foreignVisibilityKnown": false,
+        "errors": []
+      }
+    }
+  ],
+  "finding": "A valid saved lease is loaded during entityLoad, then native same-tick EffectAdd rehydration without a host-write ticket is mistaken for foreign handoff and clears it. The saved/native duration difference is one tick; no wider clock tolerance is needed."
+}

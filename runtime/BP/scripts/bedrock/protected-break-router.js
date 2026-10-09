@@ -39,11 +39,11 @@ function pureAddedDrops(before,after){
 
 /**
  * Run scripted recovery against a scoped output sink instead of the player's real inventory.
- * Survival outputs become world drops; Creative outputs are discarded. Spawn failure occurs
+ * Survival outputs obey doTileDrops; Creative outputs are discarded. Spawn failure occurs
  * before the domain save() commit and therefore uses the existing transaction rollback.
  */
 export function finishPlayerBreak(player,dimension,location,blockId,recover){
- const mode=player.getGameMode()===GameMode.Survival?'drop':'discard';
+ const mode=player.getGameMode()===GameMode.Survival&&world.gameRules.doTileDrops!==false?'drop':'discard';
  return feedback.transaction(blockAt(dimension,location),()=>withBreakInventory(player,dimension,location,mode,recover));
 }
 

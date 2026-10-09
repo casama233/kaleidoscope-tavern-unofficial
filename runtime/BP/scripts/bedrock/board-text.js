@@ -25,7 +25,8 @@ function buildLayout(info,data,key){
  boardTextDiagnostics.layoutBuilds++;
  const f=frame(info),lines=splitBoardLines(data.text,boardLayoutOptions(info.kind,info.large)).lines,expected=[];
  const rgb=INK[data.color]??0xffffff;
- const color=data.glowing?(data.color==='black'?0xf0ebcc:rgb):
+ // Java keeps black foreground ink. Cream is its separate glowing outline.
+ const color=data.glowing?rgb:
   ((Math.floor((rgb>>16&255)*.6)<<16)|(Math.floor((rgb>>8&255)*.6)<<8)|Math.floor((rgb&255)*.6));
  for(let row=0;row<lines.length;row++){
   const chars=lines[row].chars,offsets=boardGlyphOffsets(lines[row],data.alignment,f.width,f.bold);
@@ -38,8 +39,14 @@ function buildLayout(info,data,key){
    if(ch===' '||cp===0x200c)continue;
    const glyphLocation={x:location.x+Math.cos(f.r)*offset*f.scale,y:location.y,z:location.z+Math.sin(f.r)*offset*f.scale};
    const anchor=`${key}|${row}|${index}`;
-   const signature=JSON.stringify({version:59,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
-   expected.push({anchor,signature,cp,location:glyphLocation});
+   const origin={x:info.root.x+.5,y:info.root.y+.5,z:info.root.z+.5};
+   const dx=glyphLocation.x-origin.x,dy=glyphLocation.y-origin.y,dz=glyphLocation.z-origin.z;
+   // Keep every glyph's native root at the block centre for client-local
+   // distance culling. Inverse of Bedrock's X reflection / entity-yaw transform;
+   // the existing x_0..x_2 properties carry the local model-pixel translation.
+   const localOffset=[-(Math.cos(f.r)*dx+Math.sin(f.r)*dz)/f.scale,dy/f.scale,(-Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];
+   const signature=JSON.stringify({version:60,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});
+   expected.push({anchor,signature,cp,location:origin,offset:localOffset});
   }
  }
  return {f,color,expected};
@@ -71,6 +78,7 @@ export function renderBoardText(d,info,data,unused,key){
   // Publish the signature LAST. A partially initialized glyph must be retried.
   e.setDynamicProperty(ANCHOR,row.anchor);
   e.setProperty(NS+':font_scale',f.scale*16);e.setProperty(NS+':tilt',-f.tilt);e.setProperty(NS+':bold',f.bold?1:0);
+  row.offset.forEach((value,index)=>e.setProperty(NS+':x_'+index,value));
   e.setProperty(NS+':char_0',row.cp);e.setProperty(NS+':bold_offset',FONT_BOLD_OFFSETS[row.cp]);
   for(const [name,shift]of [['red',16],['green',8],['blue',0]])e.setProperty(NS+':'+name,(color>>shift)&255);
   e.setProperty(NS+':glowing',data.glowing?1:0);e.addTag(NS+':visual_helper');

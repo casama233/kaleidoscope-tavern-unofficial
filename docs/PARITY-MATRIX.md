@@ -1,6 +1,84 @@
+## 當前 T139／W116
+
+已保留發布主線的三語指南與七入口，並合入固定原料／光效／Mob／確認重生錨修補。新配套完整 native first 20／restart 21 案例及嚴格來源 recorder 已通過；G122 完整家族、原生 Player、畫面音效與私人 LIVE 仍未驗收。詳見 [本版說明](RELEASE-NOTES-0.6.139.md)。以下保留各功能的原始來源與範圍。
+
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.132 / World Liquor 0.1.109
+## Current repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
+
+[T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The frozen T138/W115 pair passed its own complete zero-player native first/save/restart and source-bound recorder. Final canonical CI is separate; isolated multiline tooling has no human-client acceptance.
+
+## Retained T137 / W114 (scoped native restart passed)
+
+[T137](RELEASE-NOTES-0.6.137.md) retains the Mob and confirmed-anchor repairs and corrects the native reload EffectAdd notification that revoked a valid saved aura lease. Only a genuine entityLoad, exact same-tick snapshot can consume one notification witness; foreign refresh and existing saved-duration checks remain. The frozen T137/W114 pair passed a new zero-player native first/normal-save/restart run and the complete source-bound recorder, including one reload acknowledgement followed by one foreign handoff. Final canonical CI and actual Player/client/private LIVE acceptance remain separate.
+
+
+## Retained T136 / W113 scope (native restart failed)
+
+[T136 scope](RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
+query-first alive Mob selection for Upside Down, including fish without the
+Native mob family while excluding Player/ArmorStand. Target membership is
+fixed before nameTag callbacks. Java name visibility and rendered inversion
+remain unverified. W113 records only confirmed changed Nether anchor points,
+with source yaw=0/forced=false, repeat/cancel guards and pending lifecycle cleanup.
+Original resolver settlement, author assets and helper exclusions remain intact.
+
+Source/API counterexamples and cross-review passed. Exact T136/W113 native
+first/restart and CI must supply their own results; actual Player, rendering,
+full private family and LIVE remain pending. G120 source/helper compatibility
+is reviewed, with its complete Cookery 0.2.7 host adaptation still required.
+The historical sections below retain their original evidence scope.
+
+
+## Retained T135 / W112 repair scope
+
+[T135 repair scope](RELEASE-NOTES-0.6.135.md) retains the T134 implementation
+and limitations below. Actual T134 CI run `37869770416` exposed two runtime
+gaps and one test-fixture gap; its failure and frozen history remain intact.
+
+| Area | T135 correction | Evidence boundary |
+| --- | --- | --- |
+| Generated visual surfaces | Add the 24 ice-grape frame texture sets and one RGB opaque texture set using the existing canonical 215/170 roughness profiles; both generators reproduce them. | The full `check_visuals.py` file passes with 460 surfaces and zero audit errors. Native PBR output and rendered-client comparison remain pending. |
+| Portable Adventure metadata | Validate native bare vanilla block IDs as vanilla IDs, preserving original strings, order and bidirectional reconstruction checks. | Native setter/getter format portable regression passes; the final paired native first/restart run and actual Player acceptance remain separate. |
+| Ardent test fixture | Supply duration-aware `getEffect` to the test double without changing production code or weakening assertions. | All 13 existing targeted cases pass; this is test-fixture evidence. |
+
+W111 CI succeeded for its own candidate. W112 now declares the exact T135
+dependency; final T135/W112 CI is pending and does not inherit that result.
+G119 is unchanged. Pure camera roll, through-wall outlines, native multiline
+editing, arbitrary decorated nonstackable shaker inputs, dropped-item display
+contexts, native reach/step-height/XP pickup, target clearing and remaining
+effect semantics retain their documented limits. Client, private complete-family
+and LIVE acceptance remain pending under the existing standing authorization.
+
+## Retained T134 / W111 integration scope
+
+[T134 integration scope](RELEASE-NOTES-0.6.134.md) preserves final PR297 source,
+reviewed PR298 head and W110 author updates. PR298 remains open/draft at
+integration; inclusion is not a claim that it has merged. Forge main `c4ec1880`
+and maintained NeoForge branches remain distinct references; Grilling G119 is
+unchanged. Final candidate CI, zero-player native evidence, actual Player input,
+rendered-client acceptance and LIVE deployment remain separate and pending.
+
+| Area | Current implementation | Remaining scope |
+| --- | --- | --- |
+| Machine ingredients | Complete counted native clones, metadata-sensitive merging, legacy adoption, original extraction and checked consumption/destruction rollback. | Exact paired native first/restart evidence and actual Player, crash/chunk/foreign-mutation scenarios remain separate. |
+| Portable shaker inputs and storage | Bounded self-contained stackable metadata with bidirectional native reconstruction checks before debit; T132 hand/echo/retry and T133 finite-XYZ identity repairs retained. | Three arbitrary decorated nonstackable items/potions remain unsupported and rejected intact; native input and saved-world acceptance remain pending. |
+| Machine operation | Source Creative fluid retention, direct-hand output, overflow delivery, Adventure ordinary use and doTileDrops protection. | Complete third-party FluidUtil capabilities and native input emission remain unproven. |
+| Board glow | Black foreground/cream outline, dark colored outline, source 0.5-pixel offsets, separate far foreground submission and board-center 48-block cull. | Colored outline camera-vs-feet 16-block boundary, first-person spyglass and native multiline editor remain different. |
+| Animated ingredients and cups | Original ice-grape tick images on four barrel/eight pressing paths; glass, atlas and RGB passes share the level clock across helper replacement. | Tick unit is supported by Mojang's cod sample; native terrain/atlas synchronization, long uptime, resource reload and actual rendering remain pending. |
+| Arbitrary signature RGB | Existing 336-color atlas plus original source-texel shading in the same helper, including W111 external colors; exact geometry allocations and source coverage checks. | Material output, distance filtering, transparency, PBR/Vibrant Visuals and all display contexts need actual client comparison. |
+| Status particles | Original custom colors, float32 weighting, source emission probability and spell resources; durable ownership only for provably host-created native effects. | Unknown external ambient/visibility is not inferred; mixed-source rendering remains unverified. |
+| Grass / Tipsy | One-tick non-overwriting invisibility lease; explicit yaw opt-in and no default aim movement. | Whole player renderer cancellation, equipment/name hiding, target clearing and pure camera roll remain unimplemented. |
+| Living policy and XP observer | Final PR297 distinguishes the observed health-less XP orb from an explicit health-bearing test helper. | It does not prove Java class reflection, Player event order or native XP pickup parity. |
+| World Liquor author data | W111 retains W110 Dassai Q3–Q6 amplifiers 1/3/5/7, four source cup meshes/atlases and two inventory sprites; existing geometry IDs and API1 admission remain valid. | Native Luck loot behavior, other branch/event semantics and rendered-client acceptance remain incomplete. |
+
+The private BSM/current quality checkpoint/LIVE world is unavailable in this
+workspace. Full-family assembly, stopped-world rehearsal, guard, backup and
+deployment/readback remain pending under the existing standing authorization.
+Historical sections below retain their original version scope; T134 notes
+record which source gaps are now repaired without upgrading old evidence.
+
+## Retained T132 / W109 repair scope
 
 [T132 release scope](RELEASE-NOTES-0.6.132.md) is the current source-repair entry.
 Forge main `c4ec1880` remains the original comparison target. The shared instant

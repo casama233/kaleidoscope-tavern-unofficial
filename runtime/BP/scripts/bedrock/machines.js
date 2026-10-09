@@ -12,7 +12,9 @@ import {feedback} from './immersion.js';
 import {pressFeedback,spawnRejectedIngredients,ingredientFeedback} from './pressing-feedback.js';
 import {barrelIngredientVisuals,configureBarrelIngredients} from './barrel-ingredients.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
-import {inventory as sharedInventory} from './transactions.js';
+import {inventory as sharedInventory,canInteract,commitPickupInventory} from './transactions.js';
+import {machineIngredientCompatibility,machineIngredientPlan,machineIngredientOutputs,requireUnadoptedMachine} from './machine-item-storage.js';
+import {inventoryPickupFeedback} from './pickup-feedback.js';
 import {world,system,ItemStack,ItemTypes,BlockPermutation,GameMode} from '@minecraft/server';
 import {MachineStore,Locks,machineKey} from '../core/storage.js';
 import {newMachine,interact,advanceBarrel,machineEmpty,barrelCells,statusText,filledItem,NS,BARREL_CHECK_INTERVAL} from '../core/machines.js';
@@ -107,17 +109,22 @@ export function syncVisuals(core,state){
 function safeVisuals(core,state){try{syncVisuals(core,state);}catch(e){warn(e,'visual:'+keyFor(core));}}
 function removeVisuals(core){const key=keyFor(core);for(const e of nearbyVisuals(core))if(e.getDynamicProperty('kt:anchor')===key)e.remove();}
 export function initializeTub(block){
- check(block.typeId===TUB,'NOT_A_PRESS');const key=keyFor(block);check(store.raw(key)===undefined,'STORAGE_CONFLICT');const state=newMachine('pressing_tub',`${system.currentTick}-${++serial}`);store.save(key,state,-1);return state;
+ check(block.typeId===TUB,'NOT_A_PRESS');const key=keyFor(block);check(store.raw(key)===undefined,'STORAGE_CONFLICT');requireUnadoptedMachine(block);const state=newMachine('pressing_tub',`${system.currentTick}-${++serial}`);store.save(key,state,-1);return state;
 }
 export function createBarrel(player,target){
  writable(player);check(registry,'STARTING');const dimension=player.dimension;
  const key=machineKey(dimension.id,target);
  return locks.with([key,player.id],()=>{
-  const h=held(player);check(h?.typeId===NS+':barrel','STALE_HAND');check(store.raw(key)===undefined,'STORAGE_CONFLICT');
+  const h=held(player);check(h?.typeId===NS+':barrel','STALE_HAND');check(store.raw(key)===undefined,'STORAGE_CONFLICT');requireUnadoptedMachine({dimension,location:target});
   const positions=barrelCells(target),blocks=positions.map(p=>blockAt(dimension,p));check(blocks.every(b=>b?.isAir),'SPACE_NOT_CLEAR');
   const original=blocks.map(b=>b.permutation),cardinal=barrelCardinalForYaw(player.getRotation?.().y??0);const state=newMachine('barrel',`${system.currentTick}-${++serial}`);let touched=0;
   const plan=planInventory(inv(player),player.selectedSlotIndex,player.getGameMode()===GameMode.Creative?0:1,[],make);
-  const rollback=()=>{for(let i=0;i<touched;i++)blocks[i].setPermutation(original[i]);store.restoreRaw(key,undefined);};
+  const rollback=()=>{
+   let failed=false;
+   for(let i=0;i<touched;i++)try{blocks[i].setPermutation(original[i]);}catch{failed=true;}
+   try{store.restoreRaw(key,undefined);}catch{failed=true;}
+   check(!failed,'ROLLBACK_FAILED');
+  };
   commitInventory(plan,inv(player),()=>{
    for(let i=0;i<blocks.length;i++){const p=positions[i],states=p.core?{[CARDINAL]:cardinal}:{[NS+':dx']:p.dx,[NS+':dy']:p.dy,[NS+':dz']:p.dz,[CARDINAL]:cardinal};touched=i+1;blocks[i].setPermutation(BlockPermutation.resolve(p.core?CORE:PART,states));}
    store.save(key,state,-1);
@@ -126,21 +133,26 @@ export function createBarrel(player,target){
  });
 }
 export function operate(player,block,action,expected){
- writable(player);check(registry,'STARTING');const core=requireCore(block),key=keyFor(core);
+ canInteract(player);check(registry,'STARTING');const core=requireCore(block),key=keyFor(core);
  return locks.with([key,player.id],()=>{
   check(intact(core),'STRUCTURE_DAMAGED');const h=held(player);
   if(expected)check(expected.slot===player.selectedSlotIndex&&expected.id===(h?.typeId??'')&&expected.count===(h?.amount??0),'STALE_HAND');
   const state=store.load(key);check(state,'MISSING_STATE');
-  if(['use','extract'].includes(action)&&h)check(isPlainIngredient(h,make),'METADATA_ITEM_REJECTED');
-  const command={action,held:h?{id:h.typeId,count:h.amount,maxAmount:h.maxAmount}:undefined};
+  const command={action,held:h?{id:h.typeId,count:h.amount,maxAmount:h.maxAmount}:undefined,creative:player.getGameMode()===GameMode.Creative};
+  if(action==='use')command.compatibleSlots=machineIngredientCompatibility(core,state,h);
   if(action==='remove_ingredient'&&state.kind==='pressing_tub')command.removeCount=player.isSneaking?64:1;
   const tx=interact(state,command,registry,registry.allFluids());
   if(action==='inspect'){tell(player,tx.message);return tx;}
+  // Native ingredient storage may accept arbitrary original stacks. Changing a
+  // fluid/carrier type still uses a generated output and retains its own guard.
+  if((tx.fluidTransfer||action==='extract')&&h)check(isPlainIngredient(h,make),'METADATA_ITEM_REJECTED');
   for(const out of tx.give)check(ItemTypes.get(out.id),'UNKNOWN_ITEM',out.id);
+  const native=machineIngredientPlan(core,state,tx.state,h);
+  if(action==='remove_ingredient')tx.give=machineIngredientOutputs(native,tx.give,tx.ingredientSlot);
   const c=inv(player),plan=planInventory(c,player.selectedSlotIndex,tx.take,tx.give,make),original=store.raw(key);
-  // All material transactions consume even in creative to prevent returning extra containers each click.
-  // Free creative placement is the only exemption; the policy is explicit in the guide.
-  commitInventory(plan,c,()=>store.save(key,tx.state,state.revision),()=>store.restoreRaw(key,original));
+  commitPickupInventory(plan,c,player,()=>{native.apply();store.save(key,tx.state,state.revision);},()=>{try{native.rollback();}finally{store.restoreRaw(key,original);}});
+  native.finish();
+  if(plan.received>0&&(action==='remove_ingredient'||tx.fluidTransfer))inventoryPickupFeedback(player);
   safeVisuals(core,tx.state);if(action==='remove_ingredient'||action==='use'&&tx.state.slots.some((v,i)=>v?.count!==(state.slots[i]?.count)))ingredientFeedback(core,action==='remove_ingredient');else feedback(core,action==='lid'?(tx.state.open?'open':'close'):action==='remove_ingredient'?'take':action==='extract'?'fill':tx.state.amount>state.amount?'empty':'fill',tx.state.revision);return tx;
  });
 }
@@ -148,17 +160,22 @@ export function tubTilted(block){return ['north','east','south','west'].includes
 export function press(block,entity,fallDistance){
  const player=entity?.typeId==='minecraft:player';
  if(!entity||!player&&!entity.getComponent?.('minecraft:health')||fallDistance<.5||tubTilted(block)||pendingFalls.has(entity.id))return;
- return guarded(player?entity:undefined,()=>{if(player)writable(entity);const key=keyFor(block);return locks.with([key],()=>{
+ return guarded(player?entity:undefined,()=>{if(player)canInteract(entity);const key=keyFor(block);return locks.with([key],()=>{
   const state=store.load(key);check(state,'MISSING_STATE');const tx=interact(state,{action:'press'},registry,registry.allFluids());
-  const drops=spawnRejectedIngredients(block,tx.eject);
-  try{store.save(key,tx.state,state.revision);}catch(error){for(const e of drops)try{e.remove();}catch{}throw error;}
+  const native=machineIngredientPlan(block,state,tx.state),original=store.raw(key);let drops=[];
+  if(tx.eject)tx.eject=machineIngredientOutputs(native,tx.eject,0);
+  try{native.apply();store.save(key,tx.state,state.revision);drops=spawnRejectedIngredients(block,tx.eject);}
+  catch(error){let failed=false;for(const e of drops)try{e.remove();}catch{failed=true;}try{native.rollback();}catch{failed=true;}try{store.restoreRaw(key,original);}catch{failed=true;}check(!failed,'ROLLBACK_FAILED');throw error;}
+  native.finish();
   pressedFalls.set(entity.id,{tick:system.currentTick,pressed:tx.pressed});if(pressedFalls.size>256)for(const[id,v]of pressedFalls)if(system.currentTick-v.tick>2)pressedFalls.delete(id);safeVisuals(block,tx.state);pressFeedback(block,tx);return tx;
  });});
 }
 export function tickBarrel(block,elapsed=97){
  return guarded(undefined,()=>{if(!registry)return;const key=keyFor(block);return locks.with([key],()=>{
   const s=store.load(key);check(s,'MISSING_STATE');check(intact(block),'STRUCTURE_DAMAGED');const next=advanceBarrel(s,registry,elapsed);
-  if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;
+  if(next!==s){const native=machineIngredientPlan(block,s,next),original=store.raw(key);
+   try{native.apply();store.save(key,next,s.revision);}catch(error){try{native.rollback();}finally{store.restoreRaw(key,original);}throw error;}native.finish();
+  }safeVisuals(block,next);return next;
  });});
 }
 export function tapCardinal(tap){
@@ -344,16 +361,26 @@ export function dismantle(player,block){
   const positions=state.kind==='barrel'?barrelCells(core.location):[core.location];const blocks=positions.map(p=>blockAt(core.dimension,p));check(blocks.every(Boolean),'CORE_UNAVAILABLE');
   // Java drops the barrel itself; pressing tubs additionally drop their item
   // slot. Uncontained liquid is lost on destruction, as in the Java blocks.
-  const give=player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1},...(state.kind==='pressing_tub'?state.slots.filter(Boolean):[])];
+  const native=machineIngredientPlan(core,state,undefined);
+  const give=player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1},...(state.kind==='pressing_tub'?native.before.filter(Boolean).map(stack=>({stack,count:stack.amount,exact:true})):[])];
   const old=blocks.map(waterSnapshot),raw=store.raw(key);const plan=planInventory(inv(player),player.selectedSlotIndex,0,give,make);
-  let touched=0;commitInventory(plan,inv(player),()=>{for(let i=0;i<blocks.length;i++){touched=i+1;setWithWater(blocks[i],BlockPermutation.resolve('minecraft:air'));}store.remove(key,state.revision);},()=>{for(let i=0;i<touched;i++)restoreWater(blocks[i],old[i]);store.restoreRaw(key,raw);});
+  let touched=0;
+  commitInventory(plan,inv(player),()=>{native.apply();for(let i=0;i<blocks.length;i++){touched=i+1;setWithWater(blocks[i],BlockPermutation.resolve('minecraft:air'));}store.remove(key,state.revision);},()=>{
+   let failed=false;
+   try{native.rollback();}catch{failed=true;}
+   for(let i=0;i<touched;i++)try{restoreWater(blocks[i],old[i]);}catch{failed=true;}
+   // A blocked cell must not suppress recovery of the other cells or the
+   // saved source record. Report incomplete recovery after every attempt.
+   try{store.restoreRaw(key,raw);}catch{failed=true;}
+   check(!failed,'ROLLBACK_FAILED');
+  });native.finish();
   try{removeVisuals(core);}catch(e){warn(e,key);}
  });
 }
 export function setRegistry(value){registry=value;}
 export function registerMachineComponents({blockComponentRegistry:b,itemComponentRegistry:i}){
  b.registerCustomComponent(NS+':pressing_tub',{onPlayerInteract:nativeEmptyHandBlockUse,
-  beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
+  beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');requireUnadoptedMachine(ev.block);}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},
   onPlace:ev=>guarded(undefined,()=>initializeTub(ev.block)),onEntityFallOn:ev=>press(ev.block,ev.entity,ev.fallDistance),onTick:ev=>guarded(undefined,()=>{const s=store.load(keyFor(ev.block));if(s)safeVisuals(ev.block,s);})});
  b.registerCustomComponent(NS+':barrel_core',{onPlayerInteract:nativeEmptyHandBlockUse,onTick:ev=>tickBarrel(ev.block,BARREL_CHECK_INTERVAL)});b.registerCustomComponent(NS+':barrel_part',{onPlayerInteract:nativeEmptyHandBlockUse,});b.registerCustomComponent(NS+':tap',{
   onTick:ev=>guarded(undefined,()=>repairTap(ev.block)),onRedstoneUpdate:tapRedstoneUpdate,
@@ -365,12 +392,12 @@ export function registerMachineComponents({blockComponentRegistry:b,itemComponen
  i.registerCustomComponent(NS+':place_barrel',{onUseOn:ev=>guarded(ev.source,()=>{const d=DIRECTIONS[ev.blockFace];check(d,'UNKNOWN_FACE');return createBarrel(ev.source,offset(ev.block.location,d));})});
 }
 function machineUsePlan(block,item){
- const type=block.typeId,heldItem=item?{id:item.typeId,count:item.amount}:undefined;
+ const type=block.typeId,heldItem=item?{id:item.typeId,count:item.amount,maxAmount:item.maxAmount}:undefined;
  if(type===TAP)return {kind:'tap'};
  if(type===TUB){
   const state=store.load(keyFor(block));if(!state)return undefined;
   const action=!heldItem?(state.slots.some(Boolean)?'remove_ingredient':undefined):'use';if(!action)return undefined;
-  try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
+  try{interact(state,{action,held:heldItem,...(action==='use'?{compatibleSlots:machineIngredientCompatibility(block,state,item)}:{})},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
  }
  if(type!==PART)return undefined;
  const dy=block.permutation.getState(NS+':dy'),dx=block.permutation.getState(NS+':dx'),dz=block.permutation.getState(NS+':dz');
@@ -381,7 +408,7 @@ function machineUsePlan(block,item){
  else if(dx===0&&dz===0)action=heldItem?'use':state.slots.some(Boolean)?'remove_ingredient':undefined;
  else if(!heldItem)action='lid';
  if(!action)return undefined;
- try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
+ try{interact(state,{action,held:heldItem,...(action==='use'?{compatibleSlots:machineIngredientCompatibility(core,state,item)}:{})},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}
 }
 /** Native hurt cancellation is scoped to a successful Java-style press only. */
 function protectPressFall(event){
@@ -389,7 +416,7 @@ function protectPressFall(event){
  const last=pressedFalls.get(entity.id);if(last&&system.currentTick-last.tick<=1){if(last.pressed)event.cancel=true;return;}
  const p=entity.location,block=blockAt(entity.dimension,{x:Math.floor(p.x),y:Math.floor(p.y-.01),z:Math.floor(p.z)});
  if(block?.typeId!==TUB||tubTilted(block)||!registry)return;
- if(entity.typeId==='minecraft:player'&&[GameMode.Adventure,GameMode.Spectator].includes(entity.getGameMode()))return;
+ if(entity.typeId==='minecraft:player'&&entity.getGameMode()===GameMode.Spectator)return;
  let s;try{s=store.load(keyFor(block));}catch{return;}
  const r=s?.slots[0]?registry.findPress(s.slots[0].id):undefined;
  if(!r||s.amount>=1000||s.fluid&&s.fluid!==r.fluid)return;

@@ -1,5 +1,43 @@
 # Maintained changes
 
+## 0.6.139
+
+整合已發布的三語指南／共享 Cookery 入口與固定 T138 的光效時計、重啟、原料保存、倒轉及視覺沉浸修補；配套 W116／G122。歷史相同版號的不同 trial 原值保留，使用新身份。 見 [本版說明](docs/RELEASE-NOTES-0.6.139.md)。
+
+## 0.6.138
+
+- Integrate observed native effect countdowns and fresh save readbacks with the exact T137 entityLoad acknowledgement repair.
+- Preserve all Mob, anchor, ingredient, source visual and quiet immersion fixes; pair W115 and retain G120.
+- Keep parallel T136/W113 identity histories separate and retain scoped historical native evidence.
+- Add only isolated pending-client multiline tools; require current-candidate native and canonical CI.
+
+## 0.6.137
+
+- 修正已保存原生光效被重啟 EffectAdd 誤判為外部刷新；保留本輪倒轉 Mob 與 W114 重生錨修復。
+- [本版驗證與限制](docs/RELEASE-NOTES-0.6.137.md)。
+
+
+## 0.6.136
+
+- 修正 Upside Down 的完整 Mob 名單與魚類分類；配對 W113 重生錨觀察；保留 T135 全部功能，修正原生 observer 原料及地形隔離。
+- 詳細範圍及驗收限制見 [本版說明](docs/RELEASE-NOTES-0.6.136.md)。
+
+## 0.6.135
+
+- Retain T134's complete ingredient, transaction, visual and immersion scope, including the reviewed PR297/PR298 repairs and W110 author updates.
+- Repair both runtime gaps exposed by T134 CI run `37869770416`: add 24 ice-grape and one RGB PBR companion with reproducible canonical profiles, and accept native bare vanilla Adventure-list IDs while preserving their original strings, order and reconstruction checks.
+- Give the Ardent test fixture a duration-aware `getEffect` implementation; preserve production behavior and the existing assertions.
+- Pair with World Liquor 0.1.112 and retain G119. Preserve the failed T134 run, its frozen identity/history and successful W111 CI; final T135/W112 CI and native/client/LIVE acceptance remain pending. [T135 scope](docs/RELEASE-NOTES-0.6.135.md) records the focused repair and verification boundaries.
+
+## 0.6.134
+
+- Preserve final PR297 source `727fd885` including the explicit XP-orb/health-helper observer distinction, and carry PR298 head `625ff769`'s finite-XYZ native storage comparison without rewriting T133 history or claiming that PR298 has merged.
+- Retain complete native machine ingredients, metadata-sensitive merging and rollback; preserve supported portable stackable shaker metadata and reject unprovable reconstruction before debit.
+- Restore source Creative fluid handling, direct-hand extraction, Adventure machine use and checked destruction drops.
+- Add source status particles, bounded native-effect appearance ownership, prompt grass-invisibility exit and explicit Tipsy yaw opt-in.
+- Restore separate board foreground/outlines, animated ice-grape ingredients and source-shaded arbitrary RGB; share texture clocks across recreated helpers and retain exact geometry allocations.
+- Pair with World Liquor 0.1.111, preserving W110's current-author Dassai amplitudes and four cocktail model/atlas repairs; optional Grilling remains 2.8.119. [T134 integration scope](docs/RELEASE-NOTES-0.6.134.md) records the retained sources and pending final CI, native/client and LIVE boundaries.
+
 ## 0.6.132
 
 - Share Java instant-health/harm dispatch with splash delivery, including source potion immunity, per-recipient policy snapshots, owner attribution and compatible addon declarations.

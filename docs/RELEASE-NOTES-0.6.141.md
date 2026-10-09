@@ -3,8 +3,8 @@
 精確 predecessor 為已發布主線
 `79e2ad0fb9f5a59f93be41aee002ddf2a809d71b`，配套 W118／G122。
 完整承接 T140 的 Kirsch、Kriek、酸櫻桃與酸櫻桃汁桶四頁 AMW 指南，
-保留三語七入口、兩個指南共用投影、分類與品質 4 門檻；原登記資料、
-配方及包身份不改。T139 以前的保存、光效／重啟及靜默操作修補保留。
+保留三語七入口、兩個指南共用投影、分類與品質 4 門檻；原登記 ID、
+配方及包 UUID 保留，發版版本更新為 T141。T139 以前的保存、光效／重啟及靜默操作修補保留。
 
 - **板面：** 當前空格先記錄再判斷溢出，消耗該分隔符，不回退較早空格；index 0 也可換行，完整長詞移至下一行。小板 70 units、明確換行及 Word 對齊不變；保留黑字 cream outline、八向描邊、遠距 foreground 和板心 48 格 cull。
 - **雪克杯：** 短交易以原生 clone／雙向相容及可讀 metadata 核對，扣料必須證明同一份來源，只有已證明不同才解除 owned 防重。2 瓶點擊排隊後改為 3 瓶再正式點擊，舊手勢拒絕、新手勢只加入 1 瓶；native／false／itemUse echo、最後空手防誤拾取及 foreign cancel 保留。
@@ -25,8 +25,17 @@ station witness 案例、W kill-credit／combat-source 26 項及獨立
 
 舊分支的 T140／W117 修補試驗及 native first 21／restart 22 成功保留
 原身份；不覆寫主線已發布 T140 note／history，也不改名為本版證據。
-新 T141／W118 paired native **pending**，完整 CI 另跑；實際結果由
-本候選的首次／保存／重啟與嚴格 recorder 證據補入。
+新 T141／W118 paired BDS 1.26.52.3 的首次 21 項、正常保存／重啟
+22 項及嚴格 recorder 已通過，兩次 0 玩家連線、0 錯誤、正常停止。
+[本候選原生證據](native/T141-W118-20261009.json)綁定實測功能來源
+T `824ec6d1697716cf77dc0fbbf9b0ab9fe7a644d4`、W
+`d02af8c9876d8e376fe592404dab9052fc5ad410`，完整 CI 由修補 PR 執行。
+
+每個 phase 重新建立 cod，再經引擎 API 施加 1 點 fall 傷害：control
+3→2／一次 afterHurt，經正常 timed effect 與公開 snapshot 套用
+MultiJump 後 3→3／零 afterHurt。這證明正式橋接和原生傷害取消，
+未測自然墜落高度、真人飲用／操作或 MultiJump 自身跨重啟保存。
+既有機器數量／物品資料、aura 保存／倒數／載入確認／外部交接亦通過。
 
 彩字 per-viewer feet-versus-camera 16 格／第一人稱 spyglass、純 roll、
 多行 editor、任意 NBT／三份任意裝飾非堆疊原料及其他既有差距未完成。

@@ -1,6 +1,6 @@
 ## Current maintained baseline: 0.6.141
 
-T141/W118 retains the published T140 guide, including all four reviewed AMW pages, seven sections and both shared entrances. It repairs board separator wrapping, native metadata and fresh-quantity shaker gestures, and World Liquor's familyless living-entity classification. Earlier native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.141.md); new paired native, complete CI, client, private full-family and LIVE verification remain pending.
+T141/W118 retains the published T140 guide, including all four reviewed AMW pages, seven sections and both shared entrances. It repairs board separator wrapping, native metadata and fresh-quantity shaker gestures, and World Liquor's familyless living-entity classification. Earlier native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.141.md); the fresh integrated native first/save/restart and strict recorder passed. Full CI runs with this repair PR; client, private full-family and LIVE verification remain pending.
 
 # Kaleidoscope Tavern (Unofficial)
 

@@ -1,10 +1,10 @@
 ## 當前 T141／W118
 
-完整承接已發布 T140 的 Kirsch、Kriek、酸櫻桃與酸櫻桃汁桶四頁 AMW 指南、三語七入口與 Cookery 共用投影，再加入下列修補。來源回歸及原始證據範圍見 [T141 說明](RELEASE-NOTES-0.6.141.md)；新 T141／W118 paired native、完整 CI、真人、私人完整家族與 LIVE 均 pending。舊分支同名 T140 修補試驗的 21／22 原生成功不得改名沿用。
+完整承接已發布 T140 的 Kirsch、Kriek、酸櫻桃與酸櫻桃汁桶四頁 AMW 指南、三語七入口與 Cookery 共用投影，再加入下列修補。來源回歸及原始證據範圍見 [T141 說明](RELEASE-NOTES-0.6.141.md)；新 T141／W118 paired native 首次 21／重啟 22 項和嚴格 recorder 已通過，完整 CI 由修補 PR 執行；真人、私人完整家族與 LIVE 均 pending。舊分支同名 T140 修補試驗的 21／22 原生成功不得改名沿用。
 
 1. 板面填滿首行後接空格與 `B`：應消耗溢出空格，下一行不多縮排，也不回退較早分隔符。行首空格加可獨立放入一行的長詞，應保留空白行並將完整詞移到下一行；小板 70 units、明確換行和 Word 對齊不變。
 2. 雪克杯點擊後換成同 ID／數量、不同 metadata 的原料，舊手勢不得扣新物品；2 瓶點擊排隊後換成 3 瓶再正式點擊，僅新手勢加入 1 瓶。native／false echo 不重複加入，最後空手 echo 不拾回站台；讀取不確定或外部取消不放行。
-3. W 的無 mob family 魚類適用既有 MultiJump／Tequila／instant／credit，船、XP orb 及僅有 health 的 helper 排除；死亡不改類別，但後續 mob credit 仍須存活。正式回呼回歸已通過，新配套原生墜落 control／效果場景另驗。
+3. W 的無 mob family 魚類適用既有 MultiJump／Tequila／instant／credit，船、XP orb 及僅有 health 的 helper 排除；死亡不改類別，但後續 mob credit 仍須存活。正式回呼回歸已通過，新配套原生 API fall 對照首次／重啟皆通過：control 3→2／一次 afterHurt，公開效果 snapshot 下 MultiJump 3→3／零 afterHurt；未測自然墜落或 Player 操作。
 
 彩字 per-viewer feet／camera 16 格及第一人稱 spyglass、純 roll、任意 NBT／三份任意裝飾非堆疊原料、多行 editor 與其他既有缺口未完成。以下保留原版本證據範圍。
 

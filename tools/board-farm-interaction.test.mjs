@@ -66,6 +66,21 @@ test('opening and saving existing literal backslashes does not change board para
  assert.deepEqual(read(key),{...defaults,text,alignment:'distributed',verticalAlignment:'middle'});
 });
 
+test('all three board editors keep complete escaped seeds beyond the old native 100-character cap',async()=>{
+ for(const [kind,lines,width]of [['sandwich',8,13],['small',11,10],['large',11,75]]){
+  const {p,lower,key}=setup(),pos=lower.location;
+  const board=kind==='sandwich'?lower:at({...pos,x:pos.x-(kind==='large'?1:0)},NS+'chalkboard',{[BOARD_HALF]:0,[CHALK_POSITION]:kind==='large'?1:0,'minecraft:cardinal_direction':'north'});
+  const text=Array(lines).fill('i'.repeat(width)).join('\n');
+  assert.ok(text.length>100);save(key,{text,alignment:'left'});
+  ui.responses.push({canceled:false,formValues:[encodeBoardInput(text),0,0]});
+  interact(p,board);system.advance(1);await flush();
+  const form=ui.forms.at(-1);
+  assert.deepEqual(form.heading,{rawtext:[{text:'§r§0§r'},{translate:'kt.board.'+(kind==='sandwich'?'sandwich':'chalk')}]});
+  assert.equal(form.fields[0].args[2].defaultValue,encodeBoardInput(text));
+  assert.equal(form.fields.length,3);assert.equal(read(key).text,text);
+ }
+});
+
 test('large chalkboard roots share one form and form submission rechecks mode, range and stale data',async()=>{
  const {p,lower,key}=setup(),pos=lower.location;
  const left=at({...pos,x:pos.x-1},NS+'chalkboard',{[BOARD_HALF]:0,[CHALK_POSITION]:1,'minecraft:cardinal_direction':'north'});

@@ -53,8 +53,13 @@ def candidate_ui(root=ROOT):
     original_key = "custom_input@settings_common.option_text_edit"
     # Copy the exact factory target and change only the public control-name hook.
     # generated_contents, custom_form, both dropdowns and submit stay native.
-    if original_key in ui or "custom_input" in ui:
-        raise ValueError("Canonical custom_input now exists; review before overlaying")
+    if "custom_input" in ui:
+        raise ValueError("Unexpected canonical custom_input; review before overlaying")
+    if original_key in ui:
+        expected=copy.deepcopy(reference["files"]["server_form.json"]["nodes"][original_key])
+        expected["$control_name"]="server_form.kt_board_input_branches"
+        if ui[original_key]!=expected:
+            raise ValueError("Canonical native input contract changed; review before overlaying")
     ui[original_key] = copy.deepcopy(reference["files"]["server_form.json"]["nodes"][original_key])
     ui[original_key]["$control_name"] = "server_form.kt_probe_input_branches"
     owned = "(" + " or ".join(predicate(kind) for kind in KINDS) + ")"

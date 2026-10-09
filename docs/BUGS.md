@@ -1,6 +1,8 @@
-## 當前 T142／W119
+## 當前 T142／W119；下一輪 T143 板面修補
 
-完整保留 canonical T141 的板面分隔符換行、雪克杯原生 clone／新手勢修復、最新指南正文與 W 的 LivingEntity 魚類入口，再整合已測的光效所有權和 recorder 修補。[PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) 舊 head `e831804…` 的完整 CI、原生首次 20／重啟 21 項成功保留原身份，不改名沿用。本輪 T142／W119 另需包含魚類傷害案例的首次 21／重啟 22 項及完整 CI，目前 pending；真人、私人完整家族與 LIVE 仍未驗收。 範圍見 [T142 說明](RELEASE-NOTES-0.6.142.md)。任意 RGB 的原作 texel 明暗與透明覆蓋已實作；材質、PBR、透明排序及遠距濾波仍需真人比較。下方平面 RGB 舊紀錄只描述其當時版本。
+T142／G123／W119 的實際來源、完整 CI、原生／保存及 LIVE 開發部署結果見 [當前 baseline](../family/BASELINE-STATUS.md)；真人 client／production acceptance 仍待驗。以下各版歷史證據不改標。
+
+本輪修正單行原生輸入框 100 字上限與板面保存容量失配：限酒館三語完整 title＋field，保留 RAW 長度、像素／行數與提交前保護，外部表單仍維持原容量。新路由 controller／焦點與真正输入仍需client核對；正式多行尚未完成。詳細修補、剩餘玩法／平台差距與冗餘判別見 [T143 說明](RELEASE-NOTES-0.6.143.md)。
 
 ## 保留 canonical T141／W118 的修補與證據
 

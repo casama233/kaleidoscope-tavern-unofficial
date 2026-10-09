@@ -3612,6 +3612,16 @@
       "reviewedPredecessorCommit": "e02c19da3a8e29d7574c5922e142ef99775dd643",
       "reviewedSourceCommit": "054897478be3c358f8b39317627aace943681a10",
       "reviewDocument": "docs/RELEASE-NOTES-0.6.132.md"
+    },
+    "runtime/BP/scripts/core/cookery-guide-entry.js": {
+      "before": null,
+      "after": "2920207486b18526038b69e38b0d37d744bd000a1ed8b8f018751ad14cd5a866",
+      "reason": "T136 owned player-origin Cookery chapter handshake with exact actor/chapter/locale/nonce/deadline validation, optional-host fallback and distinct Back/Close handling. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md."
+    },
+    "runtime/BP/scripts/data/guide-copy.js": {
+      "before": null,
+      "after": "413497e76579b9f183eb82f66bd84d0e8a2b2731f932e90b6550d35db8f7ac8e",
+      "reason": "T136 owned three-language concise operating copy, reviewed against the T132 runtime and author guide presentation; no author scripts or gameplay changes. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md."
     }
   },
   "reviewedFunctionalDeltas": {
@@ -5805,6 +5815,321 @@
               10,
               13,
               "export const VANILLA_INSTANT_ENTITIES=Object.freeze(Object.fromEntries([...normal.map(name=>[name,false]),...inverted.map(name=>[name,true])].map(([name,inverted])=>['minecraft:'+name,Object.freeze({sourceType:'minecraft:'+(sourceAliases[name]??name),living:true,inverted,healHook:Object.freeze({mode:'passthrough'}),damagePolicy:name==='armor_stand'?'reject':name==='ender_dragon'?'unknown':'native'})])));\n"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "release": "0.6.136",
+      "reviewedPredecessorCommit": "dcebb6d3b772ba4666308c9991431180475ed53e",
+      "reviewedSourceCommit": "496ce702161fb48ab6f67ea6645ad1e4d41b2a12",
+      "reviewDocument": "docs/GUIDE-EDITORIAL.md",
+      "files": {
+        "runtime/BP/scripts/bedrock/standalone-guide.js": {
+          "before": "823a435b43625a3917bb9c77c64ee10685b72663f1a1287794bbdc529bc71acc",
+          "after": "3bce30fcd893a452c4ddfe8aff488f487a443c17e74877ac111ad7defb603591",
+          "reason": "Render the same localized chapter from both entrances, preserve saved preferences and close/back outcomes, and use the scoped player-origin Cookery handoff. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              2,
+              3,
+              "import {GUIDE_LANGUAGES,guideText,standaloneGuideView} from '../core/standalone-guide-model.js';\n"
+            ],
+            [
+              8,
+              10,
+              "export async function showStandaloneGuide(player,payloadProvider){\n"
+            ],
+            [
+              11,
+              12,
+              " const token={};sessions.set(player.id,token);let locale=localeOf(player);const history=[];let node={type:'root'};\n"
+            ],
+            [
+              13,
+              14,
+              "  if(!payloadProvider()){standaloneGuideDiagnostics.notReady++;notify(player,guideText(locale,'initializing'));return false;}\n"
+            ],
+            [
+              16,
+              18,
+              "   const payload=payloadProvider();if(!payload){notify(player,guideText(locale,'initializing'));break;}\n   const view=standaloneGuideView(payload,locale,node);if(view.node.type==='root'&&node.type!=='root')history.length=0;else if(view.node.type!==node.type||view.node.id!==node.id){while(history.length&&history.at(-1).type===view.node.type&&history.at(-1).id===view.node.id)history.pop();}node=view.node;\n"
+            ],
+            [
+              24,
+              25,
+              ""
+            ],
+            [
+              41,
+              43,
+              " }catch(error){standaloneGuideDiagnostics.errors++;console.warn('[Tavern standalone guide] '+error);notify(player,guideText(locale,'error'));return false;}\n finally{if(sessions.get(player.id)===token)sessions.delete(player.id);standaloneGuideDiagnostics.closed++;}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/guide-preparation-text.js": {
+          "before": "898d16fd40b1a33ddfdf2c59881180773242e5970bbf5a6c89cff45e0102d06b",
+          "after": "5b2088df21508b78548253ccc11a67aab7e09b80398cf10bc521d73ab0884f17",
+          "reason": "Keep full recipe quantities, slot alternatives, carriers and loaded-area timing in preparation views; replace introductory formulas with source-backed readable timing. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              2,
+              5,
+              " zh_TW:{liquid:'釀造液體',buckets:'桶',materials:'材料',empty:'不需額外材料',slots:'雪克杯材料',slot:'槽位',result:'成品',carrier:'裝瓶／盛裝容器',operation:'操作方法',aging:'熟成',seconds:'秒',base:'熟成基礎時間',maximum:'最高品質',barrel:['打開酒桶蓋，加入所列液體與材料。','關上桶蓋開始釀造；以所列空容器取出成品。'],quality:'關蓋後先得到品質 1；保持關蓋可繼續熟成，下一品質所需時間為基礎時間乘目前品質。',shaker:['每個槽位各放一份符合條件的材料。','按住使用搖酒，在配方時機鬆手，再倒入已擺放的空容器。'],press:['將材料放入壓榨桶，跳躍壓榨至液體滿一桶。','使用空桶收集果汁。']},\n zh_CN:{liquid:'酿造液体',buckets:'桶',materials:'材料',empty:'不需额外材料',slots:'雪克杯材料',slot:'槽位',result:'成品',carrier:'装瓶／盛装容器',operation:'操作方法',aging:'熟成',seconds:'秒',base:'熟成基础时间',maximum:'最高品质',barrel:['打开酒桶盖，加入所列液体与材料。','关上桶盖开始酿造；以所列空容器取出成品。'],quality:'关盖后先得到品质 1；保持关盖可继续熟成，下一品质所需时间为基础时间乘当前品质。',shaker:['每个槽位各放一份符合条件的材料。','按住使用摇酒，在配方时机松手，再倒入已摆放的空容器。'],press:['将材料放入压榨桶，跳跃压榨至液体满一桶。','使用空桶收集果汁。']},\n en_US:{liquid:'Brewing liquid',buckets:'buckets',materials:'Ingredients',empty:'No additional ingredients',slots:'Shaker ingredients',slot:'Slot',result:'Result',carrier:'Bottling / serving container',operation:'How to prepare',aging:'Aging',seconds:'s',base:'Aging base time',maximum:'Maximum quality',barrel:['Open the barrel lid and add the listed liquid and ingredients.','Close the lid to brew; collect the result with the listed empty container.'],quality:'Closing the lid first produces Quality 1. Keep it closed to age; each next stage takes the base time multiplied by the current quality.',shaker:['Add one matching ingredient to each slot.','Hold use to shake, release at the recipe timing, then pour into a placed empty container.'],press:['Add the ingredients to the pressing tub and jump to press a full bucket of juice.','Use an empty bucket to collect the juice.']}\n"
+            ],
+            [
+              7,
+              8,
+              " const t=TEXT[locale]??TEXT.en_US,p=recipe.preparation,sections=[],heading=(label,rows)=>'§l§6'+label+'§r\\n'+rows.join('\\n');\n"
+            ],
+            [
+              10,
+              11,
+              "  sections.push(heading(t.liquid,[name(p.fluid)+' — '+p.amount+' mB ('+p.amount/1000+' '+t.buckets+')',name(p.fluidItem)+' ×'+p.amount/1000]));\n"
+            ],
+            [
+              23,
+              33,
+              "  if(p.qualities>1&&Number.isFinite(p.unitTime)&&p.unitTime>0)sections.push(heading(t.aging,[t.quality,t.base+': '+p.unitTime/20+' '+t.seconds,t.maximum+': '+p.qualities]));\n }else if(p?.kind==='shaker')sections.push(heading(t.operation,t.shaker.map((line,i)=>(i+1)+'. '+line)));\n"
+            ],
+            [
+              35,
+              41,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/guide-preparation.js": {
+          "before": "b303adbe72411f00496fc31b6fdf42d1934ff7f7177046a821ec2efa9e546202",
+          "after": "19c810778d991d896ce3ccba8304f1a33348dc04afdbea09047537d77b337a4d",
+          "reason": "Preserve the full preparation records while avoiding duplicated workstation and aging prose in item introductions. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              12,
+              13,
+              "    (names[locale]??={})[id]=(names[locale]?.['#'+recipe.ingredientTags[index]]??colors[color]?.[i]??['自定颜色','自訂顏色','Custom colour'][i])+['调酒材料（酒品品质 ≥4）','調酒材料（酒品品質 ≥4）',' shaker ingredient (bottled drinks: quality ≥4)'][i];\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/guide.js": {
+          "before": "2b22bae4d6ece690462cbf56eff81f1ceafae5160f4ae78e1c6b4c431e2d94a2",
+          "after": "11903b683205602bbe2d55edde752b8756fa0dbf6411c7fb076db5a8453196b8",
+          "reason": "Project the reviewed multiline paragraphs without flattening headings, truncating copy or changing preparation records. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              23,
+              24,
+              " barrel:{en_US:'Sneak-use the Tavern barrel to open it. Add the listed fluid FIRST, then the ingredients. Close it to brew and age; open it and use an empty bottle to collect. Higher quality takes more time in the barrel.',zh_CN:'潜行操作酒馆酒桶开盖，先加入所列液体，再加入原料，关盖酿造、熟成；开盖后用空酒瓶取酒。继续留在桶中可提升品质。',zh_TW:'潛行操作酒館酒桶開蓋，先加入所列液體，再加入原料，關蓋釀造、熟成；開蓋後用空酒瓶取酒。繼續留在桶中可提升品質。'},\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/standalone-guide-model.js": {
+          "before": "57589407f5954b1334b46c50a724ec4fd070d0573174030aa8055cdc0bb9ad3c",
+          "after": "61be2e00d567869861eed5841f3f6773f9388664e01aaaf20874cd8c43a82b34",
+          "reason": "Apply heading/body formatting and reset colors, retain complete preparation buttons, and return the optional chapter to its host without reopening on Close. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              2,
+              3,
+              "import {preparationText} from './guide-preparation-text.js';\n"
+            ],
+            [
+              24,
+              34,
+              "export function standaloneGuideView(payload,locale,node={type:'root'}){\n"
+            ],
+            [
+              38,
+              42,
+              "  buttons.push({label:text.settings,action:{type:'language'}},{label:text.close,action:{type:'close'}});\n  return {node,title:word(payload,locale,payload.titleKey??'title','Tavern'),body:word(payload,locale,payload.introKey??'intro'),buttons};\n"
+            ],
+            [
+              44,
+              45,
+              "  const category=payload.categories.find(c=>c.id===node.id);if(!category)return standaloneGuideView(payload,locale);\n"
+            ],
+            [
+              54,
+              55,
+              " const entry=payload.entries.find(e=>e.id===node.id);if(!entry)return standaloneGuideView(payload,locale);\n"
+            ],
+            [
+              56,
+              57,
+              "  const recipe=entry.recipes?.[node.index];if(!recipe)return standaloneGuideView(payload,locale,{type:'entry',id:entry.id});\n"
+            ],
+            [
+              59,
+              62,
+              "  if(recipe.time>0)sections.push(heading(text.time,[(recipe.time/20)+' s']));\n  if(recipe.method==='Crafting Table')sections.push(text.craftNote);\n  return {node,title:'§l'+guideItemName(payload,locale,entry.id)+' · '+method,body:sections.join('\\n\\n'),buttons:[back]};\n"
+            ],
+            [
+              64,
+              68,
+              " if(Number.isFinite(entry.stack))lines.push(text.stack+': '+entry.stack);\n if(entry.placeable)lines.push(text.placeable+': '+text.yes);\n if(entry.food?.eatFromInventory)lines.push(text.inventory+': '+text.yes);\n if(entry.food?.returns)lines.push(text.returns+': '+guideItemName(payload,locale,entry.food.returns));\n"
+            ],
+            [
+              71,
+              72,
+              " return {node:{...node,page:result.page},title:'§l'+guideItemName(payload,locale,entry.id),body:lines.join('\\n\\n'),buttons:result.buttons};\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/cocktail-guide.js": {
+          "before": "4b3a48001a96391f1d6b0c3c020851dc76a34f686860a6024b3a2193ba3abe2a",
+          "after": "6b2377246a89326c5f4603e8ad4b6d65a5405b331ed64568e1589b8bf7839417",
+          "reason": "Replace long per-cocktail effect/detail repetition with three-language purpose and actual interaction hints; keep necessary limitations explicit. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              2,
+              2,
+              "import {cocktailDuration} from '../core/cocktail-tooltip.js';\nimport {effectLevel} from '../core/effect-bar.js';\n"
+            ],
+            [
+              23,
+              26,
+              "      \"zh_CN\": \"延长部分酒馆物品对方块的操作距离。\",\n      \"zh_TW\": \"延長部分酒館物品對方塊的操作距離。\",\n      \"en_US\": \"Extends the block-use reach of supported Tavern items.\"\n"
+            ],
+            [
+              35,
+              38,
+              "      \"zh_CN\": \"冲撞可撞碎前方指定方块，并消耗体力。护甲会磨损；没有护甲时会受伤。\",\n      \"zh_TW\": \"衝撞可撞碎前方指定方塊，並消耗體力。護甲會磨損；沒有護甲時會受傷。\",\n      \"en_US\": \"Charge through eligible blocks in front of you at an exhaustion cost. Armor wears down; charging without armor causes damage.\"\n"
+            ],
+            [
+              83,
+              86,
+              "      \"zh_CN\": \"此版本尚未提供可见的穿墙轮廓。\",\n      \"zh_TW\": \"此版本尚未提供可見的穿牆輪廓。\",\n      \"en_US\": \"Visible outlines through walls are not available in this version.\"\n"
+            ],
+            [
+              95,
+              98,
+              "      \"zh_CN\": \"吸引周围经验球；拾取仍受原生拾取间隔影响。\",\n      \"zh_TW\": \"吸引周圍經驗球；拾取仍受原生拾取間隔影響。\",\n      \"en_US\": \"Pulls nearby experience orbs toward you; collection still follows the native pickup interval.\"\n"
+            ],
+            [
+              107,
+              110,
+              "      \"zh_CN\": \"饮用后产生微醺。\",\n      \"zh_TW\": \"飲用後產生微醺。\",\n      \"en_US\": \"Drinking this cocktail makes you slightly tipsy.\"\n"
+            ],
+            [
+              119,
+              122,
+              "      \"zh_CN\": \"击杀目标时，按目标最大生命值的三分之一向下取整恢复生命。\",\n      \"zh_TW\": \"擊殺目標時，按目標最大生命值的三分之一向下取整恢復生命。\",\n      \"en_US\": \"On a credited kill, restores health equal to one third of the target's maximum health, rounded down.\"\n"
+            ],
+            [
+              131,
+              134,
+              "      \"zh_CN\": \"攻击指定怪物时，有30%机会卸下其武器。掉落武器的剩余耐久为1，短时间后才可拾取。\",\n      \"zh_TW\": \"攻擊指定怪物時，有30%機會卸下其武器。掉落武器的剩餘耐久為1，短時間後才可拾取。\",\n      \"en_US\": \"Attacks against eligible mobs have a 30% chance to disarm them. The dropped weapon has one durability remaining and a short pickup delay.\"\n"
+            ],
+            [
+              154,
+              154,
+              " const instant=locale==='en_US'?'instant':locale==='zh_CN'?'立即触发':'立即觸發';\n"
+            ],
+            [
+              157,
+              158,
+              "  const time=effect.duration>0?cocktailDuration(effect.duration):instant;\n  return [prefix+label+effectLevel(effect.amplifier)+' ('+time+')',details.usage[locale]??details.usage.en_US];\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/cookery-guide-payload.js": {
+          "before": "66262290ea68909c2750366ccd4ff774f719f9a7df68d6cdc7c5838408fa488d",
+          "after": "6d9cb451b95e4eb58accf2f192c15d612c76a47cbf8fcc02795f0c9edc9ce858",
+          "reason": "Project source-backed concise guide paragraphs and localized preparation links from the same complete recipe data used by both entrances. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              5901,
+              5903,
+              "   return [lc,body.split(/\\n+/).filter(Boolean)];\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/guide-catalog.js": {
+          "before": "708063af6e503c957017dfd0fc751862044d678cf15c0f7c702dd731c7ddecd9",
+          "after": "672a6a9d959e7adc467fb308f4e35d87054c3a0a8b6016b9823849fc3a1226ba",
+          "reason": "Consolidate individual product pages, apply owned concise copy and retain fixed seven-section navigation with complete recipes. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              2,
+              4,
+              "import {preparationNotes} from '../core/guide-preparation-text.js';\nimport {guideItemName} from './guide-native-names.js';\n"
+            ],
+            [
+              10,
+              53,
+              ""
+            ],
+            [
+              97,
+              100,
+              " if(recipes.length)for(const [short,names,usage] of [\n  ['signature_cocktail',['特调鸡尾酒','特調雞尾酒','Signature Cocktail'],[\n    '加入三份有效材料，在特调时机松开雪克杯，再倒入放好的空玻璃杯。颜色按有效材料颜色平均混合。同种酒效的时间相加后乘以1.2，等级和概率各取最高值；悬停查看这杯特调的必定触发效果。',\n    '加入三份有效材料，在特調時機鬆開雪克杯，再倒入放好的空玻璃杯。顏色按有效材料顏色平均混合。同種酒效的時間相加後乘以1.2，等級和機率各取最高值；懸停查看這杯特調的必定觸發效果。',\n    'Add three valid ingredients, release in the signature timing range, then pour into a placed empty glass. Valid ingredient colors are averaged. Durations of matching effects are added and multiplied by 1.2; the highest level and probability are retained. Hover over the finished cup to see its guaranteed effects.']],\n  ['mystery_cocktail',['神秘鸡尾酒','神秘雞尾酒','Mystery Cocktail'],[\n   '加入三份有效材料后，在特调或配方时机以外完成摇酒会得到神秘鸡尾酒；摇晃过短则取消。倒入空玻璃杯后取用。',\n   '加入三份有效材料後，在特調或配方時機以外完成搖酒會得到神秘雞尾酒；搖晃過短則取消。倒入空玻璃杯後取用。',\n   'With three valid ingredients, finishing outside the signature/recipe timing range makes a mystery cocktail; releasing too early cancels. Pour into an empty glass to serve.']]\n"
+            ],
+            [
+              104,
+              105,
+              "   mechanics:[usage[1]],mechanicsByLocale:Object.fromEntries(LOCALES.map((lc,i)=>[lc,[usage[i]]]))});\n"
+            ],
+            [
+              129,
+              129,
+              " const molotov=payload.entries.find(e=>e.id==='kaleidoscope_tavern:molotov');\n if(molotov)append(molotov,{mechanicsByLocale:{\n  zh_TW:['這是燃燒彈，不能飲用。對空按住使用至少半秒，鬆手投擲；擊中後會在落點周圍點火。','酒桶加入 4000 mB 熔岩，關蓋釀製，以空酒瓶取出；也可在裝有熔岩的鍋上接酒嘴，於嘴下擺空酒瓶取用。','對方塊使用可擺放；空手取回。可存入單瓶架、傾斜酒架、圓形酒架及酒櫃，紅石上升沿會發射燃燒瓶。'],\n  zh_CN:['这是燃烧弹，不能饮用。对空按住使用至少半秒，松手投掷；击中后会在落点周围点火。','酒桶加入 4000 mB 熔岩，关盖酿制，以空酒瓶取出；也可在装有熔岩的炼药锅上接酒嘴，于嘴下摆空酒瓶取用。','对方块使用可摆放；空手取回。可存入单瓶架、倾斜酒架、圆形酒架及酒柜，红石上升沿会发射燃烧瓶。'],\n  en_US:['An incendiary projectile, not a drink. Hold use while aiming into air for at least half a second, then release to throw. It ignites the area around its impact.','Fill a barrel with 4000 mB of lava, close the lid, then collect the brewed result with empty bottles. Alternatively, fit a tap to a lava cauldron and place an empty bottle below the tap.','Use on a block to place it; collect with an empty hand. Holders, tilted/circular racks and cabinets accept it. A rising redstone edge launches it as an incendiary projectile.']\n }});\n"
+            ],
+            [
+              143,
+              144,
+              " const result=organizeGuideNavigation(payload);\n"
+            ],
+            [
+              149,
+              155,
+              "   const name=id=>guideItemName(result,lc,id);\n   const notes=(entry.recipes??[]).flatMap(recipe=>preparationNotes(recipe,lc,name));\n    entry.mechanicsByLocale[lc]=[...new Set([...entry.mechanicsByLocale[lc],...cocktailGuideNotes(entry.id,lc),...notes])];\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/guide-native-names.js": {
+          "before": "5a00e151f162787de81018efc412e692571ce0fbd0323e3980d4279d85a965b8",
+          "after": "273cba96d5ad6ca252961adb9b5fa8cd38a78890a4cabe6fbd7b06841a096e7a",
+          "reason": "Complete player-facing native item names for the reviewed three-language guide projection, without leaking internal identifiers. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              0,
+              1,
+              "/** Native ingredients missing from the shared guide's original name table. */\n"
+            ],
+            [
+              9,
+              23,
+              " 'minecraft:cookie':['曲奇','餅乾','Cookie']\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/data/guide-navigation.js": {
+          "before": "cfa502617f916153151b5a0ff21fd83461cf1a2859bef774d10dd01b1b337ccb",
+          "after": "c296612d010aff0769a32479591a6f9c1faac6317f461e83e02b9b648936a149",
+          "reason": "Keep the fixed seven roots, parent/child groups, per-item navigation and installed-addon hiding rules while sharing the chapter view. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              85,
+              86,
+              " const body=['蹲下使用本书可查看当前酒效。选择项目查看用法与制作方法；多个条目的分类会展开列表。酿酒和调酒先列酒馆本体，再列附属配方。','蹲下使用本書可查看目前酒效。選擇項目查看用法與製作方法；多個條目的分類會展開列表。釀酒和調酒先列酒館本體，再列附屬配方。','Sneak-use this book to view active drink effects. Choose an entry for its use and preparation; groups with several entries open a list. Tavern brewing and cocktail recipes appear before addon recipes.'];\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/main.js": {
+          "before": "67e893d3a2891387df6de6c51deb3429819463ad56b4b5d08fe25a811861a66d",
+          "after": "ee92d096a15f4ba9613b44a10bb1e3fdde8d61015d7f249f77aa3dccf4803e94",
+          "reason": "Register only the scoped optional Cookery chapter entry controller and shared standalone view; existing gameplay installers and registry data remain unchanged. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md.",
+          "reverseOps": [
+            [
+              0,
+              2,
+              "import {showStandaloneGuide,clearStandaloneGuideSession,standaloneGuideDiagnostics} from './bedrock/standalone-guide.js';\n"
+            ],
+            [
+              61,
+              66,
+              ""
             ]
           ]
         }

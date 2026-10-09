@@ -11,6 +11,19 @@ sys.path.insert(0, str(ROOT/'tools'))
 from baseline_gate import fingerprint
 
 
+def render_world_liquor_probe_inputs(baseline, headers):
+    """Bind the observer to the exact frozen packs copied by this invocation."""
+    assert baseline['repository'] == 'casama233/kaleidoscope-world-liquor-unofficial'
+    version = baseline['version']
+    assert isinstance(version, list) and len(version) == 3 and all(type(value) is int and value >= 0 for value in version)
+    for kind in ('BP', 'RP'):
+        assert headers[kind]['version'] == version, f'{kind} probe version differs from canonical baseline'
+        assert headers[kind]['uuid'] == baseline['packs'][kind]['uuid'], f'{kind} probe UUID differs from canonical baseline'
+    row = {'source': 'kaleidoscope_world_liquor', 'version': '.'.join(map(str, version)),
+           'behavior_uuid': headers['BP']['uuid'], 'resource_uuid': headers['RP']['uuid']}
+    return 'export const WORLD_LIQUOR_PROBE_INPUTS=Object.freeze(' + json.dumps(row, separators=(',', ':')) + ');\n'
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--engine', type=pathlib.Path, required=True)
@@ -53,8 +66,10 @@ def main():
     world.mkdir(parents=True)
     manifests = {'BP': [], 'RP': []}
     sources = {}
+    probe_inputs = None
     for label, source in [('tavern', ROOT), ('liquor', liquor)]:
         baseline = json.loads((source/'baseline.json').read_text())
+        headers = {}
         source_record = {'commit': subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
                          'repository': baseline['repository'], 'version': baseline['version'], 'source_trees': {}}
         for kind, folder in [('BP', 'behavior_packs'), ('RP', 'resource_packs')]:
@@ -64,15 +79,21 @@ def main():
             assert tree == baseline['source_trees'][kind], f'{label} {kind} copied runtime differs from frozen source'
             source_record['source_trees'][kind] = tree
             header = json.loads((target/'manifest.json').read_text())['header']
+            headers[kind] = header
             manifests[kind].append({'pack_id': header['uuid'], 'version': header['version']})
         sources[label] = source_record
+        if label == 'liquor':
+            probe_inputs = render_world_liquor_probe_inputs(baseline, headers)
     host = world/'behavior_packs/tavern'
+    assert probe_inputs is not None
+    (host/'scripts/native-probe-inputs.js').write_text(probe_inputs)
     shutil.copy2(args.probe, host/'scripts/living-effects-probe.js')
     shutil.copy2(ROOT/'tools/native/living-probe-entity.json', host/'entities/living-probe.json')
     shutil.copy2(ROOT/'tools/native/health-helper-entity.json', host/'entities/health-helper-probe.json')
     with (host/'scripts/main.js').open('a') as output:
         output.write("\n// Disposable native observer; not release content.\nimport './living-effects-probe.js';\n")
     overlays = {'scripts/living-effects-probe.js': hashlib.sha256(args.probe.read_bytes()).hexdigest(),
+                'scripts/native-probe-inputs.js': hashlib.sha256(probe_inputs.encode()).hexdigest(),
                 'entities/living-probe.json': hashlib.sha256((ROOT/'tools/native/living-probe-entity.json').read_bytes()).hexdigest(),
                 'entities/health-helper-probe.json': hashlib.sha256((ROOT/'tools/native/health-helper-entity.json').read_bytes()).hexdigest(),
                 'scripts/main.js': 'Append only the declared disposable observer import after verifying the complete copied runtime.'}

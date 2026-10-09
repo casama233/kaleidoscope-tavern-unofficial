@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Bind a completed zero-player native probe to the exact current source packs.
 
-Only the two documented observer additions and main.js import are allowed in
+Only the documented observer additions, generated input binding and main.js import are allowed in
 the staged host. Re-run after a runtime change instead of relabeling old proof.
 """
 import argparse,hashlib,json,pathlib,re,sys
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools'))
 from baseline_gate import fingerprint
+from run_living_effects import render_world_liquor_probe_inputs
 
 APPEND=b"\n// Disposable native observer; not release content.\nimport './living-effects-probe.js';\n"
 def digest(data):return hashlib.sha256(data).hexdigest()
@@ -17,6 +18,9 @@ def main():
  assert report['native_script_behavior'] is True and report['client'] is False
  assert [r['phase']for r in report['reports']]==['first','restart']
  source_trees={};versions={};inputs={}
+ liquor_source=a.liquor.resolve();liquor_baseline=json.loads((liquor_source/'baseline.json').read_text())
+ liquor_headers={kind:json.loads((liquor_source/'runtime'/kind/'manifest.json').read_text())['header']for kind in ['BP','RP']}
+ probe_inputs=render_world_liquor_probe_inputs(liquor_baseline,liquor_headers).encode()
  for label,source in [('tavern',ROOT),('liquor',a.liquor.resolve())]:
   versions[label]='.'.join(map(str,json.loads((source/'baseline.json').read_text())['version']));source_trees[label]={}
   for kind,folder in [('BP','behavior_packs'),('RP','resource_packs')]:
@@ -26,8 +30,9 @@ def main():
    if label=='tavern' and kind=='BP':
     extras={'scripts/living-effects-probe.js':ROOT/'tools/native/shaker-migration-probe.js','entities/living-probe.json':ROOT/'tools/native/living-probe-entity.json',
             'entities/health-helper-probe.json':ROOT/'tools/native/health-helper-entity.json'}
+   generated={'scripts/native-probe-inputs.js':probe_inputs}if label=='tavern' and kind=='BP'else {}
    actual={f.relative_to(staged).as_posix() for f in staged.rglob('*') if f.is_file()}
-   assert actual==set(rows)|set(extras),(label,kind,'staged file set differs')
+   assert actual==set(rows)|set(extras)|set(generated),(label,kind,'staged file set differs')
    for name in rows:
     expected=(original/name).read_bytes()
     if label=='tavern' and kind=='BP' and name=='scripts/main.js':expected+=APPEND
@@ -35,6 +40,10 @@ def main():
    for name,original_file in extras.items():
     assert (staged/name).read_bytes()==original_file.read_bytes(),name
     inputs[original_file.relative_to(ROOT).as_posix()]=digest(original_file.read_bytes())
+   for name,data in generated.items():
+    assert (staged/name).read_bytes()==data,name
+    assert report['test_only_overlays'][name]==digest(data),name
+    inputs['generated/'+name]=digest(data)
  summaries=[];logs=[]
  for row in report['reports']:
   assert row['ok'] is True and row['normal_stop'] is True and not row['errors'] and row['player_connections']==0

@@ -10,12 +10,13 @@ import {canonical} from './core/util.js';
 import {pulseVision,customEffectDiagnostics} from './bedrock/custom-effects.js';
 import {declareInstantEntityProfile,instantEffectDiagnostics} from './bedrock/instant-effects.js';
 import {spawnThrownDrink,resolveThrownDrinkImpact,THROWN_EFFECTS,storageProjectileDiagnostics} from './bedrock/storage-projectile.js';
+import {WORLD_LIQUOR_PROBE_INPUTS} from './native-probe-inputs.js';
 
 const pause=ticks=>new Promise(resolve=>system.runTimeout(resolve,ticks));
 const out=(kind,data)=>console.log('[LIVING_EFFECT_QA] '+JSON.stringify({kind,...data}));
 const check=(ok,message)=>{if(!ok)throw Error(message);};
-// This paired probe is deliberately pinned to the W109 checkout used by CI.
-const ADDON_SOURCE='kaleidoscope_world_liquor',ADDON_VERSION='0.1.109';
+// The disposable runner binds the copied canonical BP/RP and frozen baseline.
+const ADDON_SOURCE=WORLD_LIQUOR_PROBE_INPUTS.source,ADDON_VERSION=WORLD_LIQUOR_PROBE_INPUTS.version;
 function addonRegistration(){
  const row=runtimeRegistry()?.list().find(entry=>entry.source===ADDON_SOURCE);
  check(row,'real World Liquor addon registration absent');

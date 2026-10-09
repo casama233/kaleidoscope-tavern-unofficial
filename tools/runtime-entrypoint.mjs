@@ -7,8 +7,8 @@ import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import vm from 'node:vm';
 
-// Reviewed order before PR 284 (T127 main). The body may change formatting or
-// dispatch style without changing this component/event initialization contract.
+// Reviewed T127 order plus T136's registered shared-guide entrance after its
+// publisher. Formatting changes do not change this initialization contract.
 const COMPONENTS=[
  ['registerNaturalBreak','natural-break'],
  ['registerExtensionFurnitureComponents','extension-furniture'],
@@ -87,17 +87,22 @@ export function checkRuntimeEntrypoint(source=runtimeEntrypointSource()){
  assert.deepEqual(load.map(row=>row.key),[
   'call:./bedrock/native-storage-pinning.js:installNativeStoragePinning',
   'call:./core/cookery-guide-publisher.js:installCookeryGuidePublisher',
+  'call:./core/cookery-guide-entry.js:installCookeryGuideEntry',
   'subscribe:playerLeave','subscribe:startup',
   ...INSTALLERS.map(importedCall),
   'subscribe:scriptEventReceive','defer:bootstrap',
  ],'Entrypoint load order or installation count changed');
  for(const row of load.filter(row=>INSTALLERS.some(spec=>importedCall(spec)===row.key)))
   assert.equal(row.args.length,0,`${row.key} must install without a startup event`);
- const [pinning,publisher]=load;
+ const [pinning,publisher,guideEntry]=load;
  assert.equal(pinning.args.length,1);assert.equal(typeof pinning.args[0],'function');
  assert.equal(pinning.args[0](),undefined,'Storage pinning keeps the deferred registry getter');
  assert.equal(publisher.args.length,2);assert.equal(publisher.args[0],context.system);
  assert.equal(typeof publisher.args[1],'function');
+ assert.equal(guideEntry.args.length,1);
+ assert.equal(guideEntry.args[0].system,context.system);
+ assert.equal(guideEntry.args[0].world,context.world);
+ for(const key of ['available','show','warn'])assert.equal(typeof guideEntry.args[0][key],'function');
  const scriptEvent=load.find(row=>row.key==='subscribe:scriptEventReceive');
  assert.deepEqual(JSON.parse(JSON.stringify(scriptEvent.args[1])),{namespaces:['kaleidoscope_cookery']});
  assert.equal(startup.length,1);assert.equal(deferred.length,1);

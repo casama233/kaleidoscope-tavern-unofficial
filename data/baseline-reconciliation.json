@@ -7069,6 +7069,111 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.137",
+      "files": {
+        "runtime/BP/scripts/bedrock/status-aura.js": {
+          "before": "430fa28aecf9a547284b17dfe10877de529cadd2772cdfc6df62a522f01b3a25",
+          "after": "8a08571a86b2abddf031f13e2fb3c82579f80c9d1aff25a26e00dbc1402150db",
+          "reason": "T137 exact source review fixes the recorded BDS 1.26.52.3 restart loss. A real entityLoad can issue one same-tick acknowledgement for a validated saved native effect, with unchanged raw lease, current ownership fences and exact event/current duration and amplifier. New writes, foreign handoff, unload and expiration retire it. The existing schema and five-tick saved duration bound remain unchanged; gameplay effects are never reapplied to repair appearance. Stable effect-origin visibility and rendered client acceptance remain incomplete. Focused regressions: tools/status-aura.test.mjs [native entityLoad preserves one exact same-tick saved-effect acknowledgement without reapplying gameplay; repeat restore cannot mint a second reload acknowledgement or hide a same-amplifier foreign refresh; generic restore and playerSpawn do not grant an entityLoad acknowledgement; reload acknowledgement rejects another tick, duration or amplifier and keeps the native effect unchanged; reload still rejects saved rows beyond five ticks or with a different native amplifier; a host write before hydration retires the old reload witness before its own ticket is consumed; reload acknowledgement requires unchanged saved bytes and the current durable ownership fence; native-only death retires the loaded aura before a later same-tick effect acknowledgement].",
+          "reviewedPredecessorCommit": "edc9e464f8ea987fa07927182a2b741720c82430",
+          "reviewedSourceCommit": "e7dc05f621f97758b2fe46886cfc7dd9186cd606",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              14,
+              15,
+              "export const statusAuraDiagnostics={mode:'source_owned_aura',clientConfirmed:false,emissions:0,nativeAcquired:0,nativeHandoffs:0,nativeReadbackFallbacks:0,unknownNativeSnapshots:0,nativeOwnershipBlocks:0,durableBlockFailures:0,foreignVisibilityKnown:false,errors:[]};\n"
+            ],
+            [
+              22,
+              24,
+              ""
+            ],
+            [
+              32,
+              33,
+              ""
+            ],
+            [
+              43,
+              54,
+              ""
+            ],
+            [
+              84,
+              85,
+              " track={entity,custom:[],at:now,native:new Map(),raw,savedAt:now,blocked};let rejected=false;\n"
+            ],
+            [
+              95,
+              98,
+              "    if(observed&&observed.amplifier===row.amplifier&&observed.ticks<=row.ticks&&row.ticks-observed.ticks<=5)track.native.set(row.id,{id:row.id,amplifier:row.amplifier,until:now+observed.ticks});\n"
+            ],
+            [
+              100,
+              101,
+              "  }catch(e){track.native.clear();rejected=true;error(e);}\n"
+            ],
+            [
+              108,
+              109,
+              "function forgetNative(track,id){if(track.native.delete(id)){statusAuraDiagnostics.nativeHandoffs++;try{save(track);}catch(e){blockOwnership(track,e);}}}\n"
+            ],
+            [
+              122,
+              125,
+              ""
+            ],
+            [
+              157,
+              158,
+              "/** Every effectAdd without a matching in-flight own write hands appearance\n"
+            ],
+            [
+              165,
+              165,
+              "  const at=list?.findIndex(row=>now-row.at<=2&&matches(row,observed,now))??-1;\n  if(at>=0){list.splice(at,1);if(!list.length)pending.delete(key);return;}\n"
+            ],
+            [
+              166,
+              174,
+              ""
+            ],
+            [
+              190,
+              207,
+              ""
+            ],
+            [
+              214,
+              215,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "8214f8c7acac685fe1e091c297796cfeba59dbc2ecd024197c1b9e502e82cc09",
+          "after": "68cc2f9106f535f460d2f4790dd8e3e275a777e583e1f1d529e4858c10e78eca",
+          "reason": "T137 exact source review routes only the actual entityLoad callback through the dedicated saved native appearance restoration entry before the existing custom-effect Mob gate. Generic restoration and playerSpawn do not mint reload acknowledgements. Native-only aura state is forgotten immediately on entityDie. Existing T136 complete Mob selection and all custom effect gameplay remain intact. SDK Player-shaped entry regressions do not claim a tested native Player lifecycle. Focused regressions: tools/status-aura.test.mjs [native entityLoad preserves one exact same-tick saved-effect acknowledgement without reapplying gameplay; repeat restore cannot mint a second reload acknowledgement or hide a same-amplifier foreign refresh; generic restore and playerSpawn do not grant an entityLoad acknowledgement; reload acknowledgement rejects another tick, duration or amplifier and keeps the native effect unchanged; reload still rejects saved rows beyond five ticks or with a different native amplifier; a host write before hydration retires the old reload witness before its own ticket is consumed; reload acknowledgement requires unchanged saved bytes and the current durable ownership fence; native-only death retires the loaded aura before a later same-tick effect acknowledgement].",
+          "reviewedPredecessorCommit": "edc9e464f8ea987fa07927182a2b741720c82430",
+          "reviewedSourceCommit": "e7dc05f621f97758b2fe46886cfc7dd9186cd606",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              6,
+              7,
+              "import {applyNativeStatusWithAura,indexStatusAura,restoreStatusAura,forgetStatusAura,noteSyntheticAuraInvisibility,installStatusAura,statusAuraDiagnostics} from './status-aura.js';\n"
+            ],
+            [
+              407,
+              415,
+              " world.afterEvents.entityDie.subscribe(e=>{handleKill(e);if(tracks.has(e.deadEntity?.id)||e.deadEntity?.typeId==='minecraft:player')try{clearCustomEffects(e.deadEntity);}catch(x){error(x);}});\n world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));\n"
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [

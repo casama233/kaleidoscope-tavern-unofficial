@@ -1,6 +1,8 @@
-## Current maintained baseline: 0.6.141
+## Current maintained baseline: 0.6.142
 
-T141/W118 retains the published T140 guide, including all four reviewed AMW pages, seven sections and both shared entrances. It repairs board separator wrapping, native metadata and fresh-quantity shaker gestures, and World Liquor's familyless living-entity classification. Earlier native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.141.md); the fresh integrated native first/save/restart and strict recorder passed. Full CI runs with this repair PR; client, private full-family and LIVE verification remain pending.
+T142/W119 preserves canonical T141 board wrapping, native shaker clone/gesture handling, World Liquor living-entity fish support and the complete published guide. It integrates the aura and recorder repairs tested at [PR310](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/310) head `e831804…`; that full CI and native 20-first/21-restart success keeps its original identity. This integrated candidate requires fresh CI and 21 first/22 restart native cases, including fish damage, all pending. See [T142 notes](docs/RELEASE-NOTES-0.6.142.md). Human client, private full-family and LIVE acceptance remain pending.
+
+Retained canonical T141/W118 scope: T141/W118 retains the published T140 guide, including all four reviewed AMW pages, seven sections and both shared entrances. It repairs board separator wrapping, native metadata and fresh-quantity shaker gestures, and World Liquor's familyless living-entity classification. Earlier native parity repairs and G122 integration remain intact. See the [release notes](docs/RELEASE-NOTES-0.6.141.md); the fresh integrated native first/save/restart and strict recorder passed. Full CI runs with this repair PR; client, private full-family and LIVE verification remain pending.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -10,7 +12,7 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 - [T140 guide revision](docs/RELEASE-NOTES-0.6.140.md) retains all three languages and preparation details on demand, adds four reviewed AMW pages and shares the view through the optional Cookery entrance. T141 preserves this published guide and T139's native clock/reload, machine ingredient, Mob selection and immersion repairs.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.141**, World Liquor **0.1.118** and Grilling **2.8.122**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current candidate is Tavern **0.6.142** and World Liquor **0.1.119**. The [family lock](family/upstream.lock.json) retains the G123 candidate; World Liquor CI still pins G122 for unchanged entity definitions. This does not establish G123 merge/publication or private full-family acceptance. The index preserves earlier evidence and remaining work.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.

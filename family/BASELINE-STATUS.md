@@ -1,4 +1,10 @@
-## 當前配套：T139／W116／G122
+## 當前配套：T142／W119；保留 G123 家族候選
+
+T142／W119 基於 canonical T `ebca0bbf6efc5459ed30a9a4a1c264477c274453`／W `bd022a205a317a0fe813041dcc5b99152d07bdf5`，保留最新指南、板面換行、雪克杯 clone／手勢與 LivingEntity 魚類入口，整合光效和 recorder 修補。PR310 舊 head `e831804…` 的完整 CI、首次 20／重啟 21 項原生成功保留原身份；本候選完整 CI、首次 21／重啟 22 項原生驗證仍 pending，見 [T142 說明](../docs/RELEASE-NOTES-0.6.142.md)。
+
+[Family lock](upstream.lock.json) 保留 G123 候選；W CI 仍 pin G122 的相同 entity definitions，兩者證據範圍分開。G123 合併／公開發布、私人完整家族、真人與 LIVE 驗收均不在此預先宣稱；維持 `client=false`、`production_ready=false` 與 `pending_client_acceptance`。下方均為原版本歷史記錄。
+
+## 歷史配套：T139／W116／G122
 
 整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../docs/RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
 
@@ -6,13 +12,13 @@
 
 整合 native countdown 與已驗證的 reload acknowledgement；來源以新 release notes 與 data/parallel-source-review-20261009.json 為準。舊候選歷史及 scoped native 結果保留；G120 不回退。新候選完整 CI、native 與 client／私人 LIVE 各自驗證。
 
-# 家族現行來源基線
+# 保留的家族來源基線記錄
 
-查核日期：2026-10-09。當前修復入口為 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)，
+歷史查核日期：2026-10-09。以下保留 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md) 當時的來源與驗收範圍，並非目前候選或 LIVE 狀態；
 版本／內容以各 canonical baseline 及 family lock 為準；PR、CI、原生與 LIVE
 各自依實際結果，不由版號或資源存在推定完成。
 
-## 本輪指南候選：T136／W113／G121
+## 歷史指南候選：T136／W113／G121
 
 | 候選 | 凍結來源 | 本輪範圍 |
 | --- | --- | --- |

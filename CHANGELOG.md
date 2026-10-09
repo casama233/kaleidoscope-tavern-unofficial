@@ -1,5 +1,9 @@
 # Maintained changes
 
+## 0.6.142
+
+保留 canonical T141 板面换行、雪克杯來源辨識與最新指南，加入已測載入／initialSpawn 光效修復及嚴格原生來源綁定；配對 W119。 見[本版說明](docs/RELEASE-NOTES-0.6.142.md)。
+
 ## 0.6.141
 
 完整承接已發布 T140 的四頁 AMW 指南、三語七入口及共用 Cookery 投影；修正板面溢出／index 0 空格換行、雪克杯原生 metadata 與 fresh amount 手勢，配套 W118 LivingEntity 類別修補及 G122。既有試驗來源回歸保留，新候選原生首次／重啟與嚴格 recorder 通過，完整 CI 由修補 PR 執行；真人、私人家族與 LIVE 分別待驗證；不覆寫主線 T140 note／history。見 [本版說明](docs/RELEASE-NOTES-0.6.141.md)。

@@ -70,7 +70,8 @@ def main():
     assert not any('minecraft:instant_despawn' in x for x in definition.get('component_groups',{}).values())
     projectile=(ROOT/'runtime/BP/scripts/bedrock/storage-projectile.js').read_text()
     assert projectile.count('.shoot(velocity,{uncertainty:0})')==2 and 'runTimeout' not in projectile
-    assert 'getAABB()' in projectile and 'splashTicks' in projectile and 'instantHealthDelta' in projectile
+    assert 'getAABB()' in projectile and 'splashTicks' in projectile and 'dispatchInstantHealth' in projectile
+    assert 'instantHealthDelta' not in projectile
     assert projectile.count('rowsPayload(itemId,rng)')==2 # definition and one launch call
     assert 'rowsPayload(itemId,rng)' not in projectile[projectile.index('export function resolveThrownDrinkImpact'):]
     for filename,family in [('holder.js','holder'),('tilted-rack.js','tilted_rack')]:

@@ -1,0 +1,20 @@
+{
+  "minecraftVersion": "1.20.1",
+  "clientJarSha1": "0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838",
+  "class": "fup$c",
+  "classSha256": "3da1a2bee3575a30551e8552f2f08dcf3ad755c31bc77a1dd299d2181a3a82ed",
+  "method": "SpriteContents$InterpolationData.uploadInterpolatedFrame (a(int,int,fup$d))",
+  "scope": "Unmodified original interpolation class invoked with memory-only pixel/animation containers; no game, renderer, BDS or simulated player. Stream order: frame then row then column, RGBA.",
+  "sources": {
+    "nether_special": {
+      "ticks": 80,
+      "sourceRgbaSha256": "5861bcba90d785250f6714e7d750f9ccfc525a89bd4a7a65efabb42d05166416",
+      "tickRgbaSha256": "ceaf37d4c64572711a4394c3c6e9a0a9af2551fc6109406ea5a43889b2651904"
+    },
+    "ice_grape": {
+      "ticks": 24,
+      "sourceRgbaSha256": "316b64177f3300631bf3dec664c7956162fc574875ebea9904b35c48618f0516",
+      "tickRgbaSha256": "19d524aed01b851f6d961ba87a566a351c63888e2215b5fb71d839147f94f799"
+    }
+  }
+}

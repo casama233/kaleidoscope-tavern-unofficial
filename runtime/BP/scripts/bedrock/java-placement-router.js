@@ -32,7 +32,14 @@ function claim(player,itemId,block,source='owned',face,reportedItemId){
 // event may immediately retry. Failed work owns no echo and must be retryable.
 export function settleJavaBlockUse(event,succeeded){
  const row=event._javaUseClaim;if(!row)return;row.pending=false;
- if(!succeeded&&blockUses.get(event.player.id)===row){blockUses.delete(event.player.id);if(event._javaNativeAfter)nativeEmptyCallbacks.delete(event.player.id);}
+ if(!succeeded&&blockUses.get(event.player.id)===row){
+  blockUses.delete(event.player.id);
+  // A fresh before-event can fail after an earlier native callback succeeded.
+  // Release only that transaction's callback, so an immediate native retry is
+  // possible without reopening another target or a newer completed gesture.
+  const callback=nativeEmptyCallbacks.get(event.player.id);
+  if(callback&&callback.itemId===row.itemId&&callback.slot===row.slot&&callback.block===row.block)nativeEmptyCallbacks.delete(event.player.id);
+ }
 }
 function ownedItemUseEcho(player,itemId){
  const row=blockUses.get(player.id);
@@ -141,7 +148,7 @@ function nativeAfterBlockUse(e,allowHeld){
  if(previous?.source==='owned'&&blockUseClaimed(player,itemId,block))return false;
  const gesture=`${itemId}/${held.slot}/${player.isSneaking===true}/${blockKey(block)??''}/${faceKey(e.face??e.blockFace)??''}`,now=system.currentTick,last=nativeEmptyCallbacks.get(player.id);
  if(last?.gesture===gesture&&now-last.tick<=2)return false;
- nativeEmptyCallbacks.set(player.id,{gesture,tick:now});
+ nativeEmptyCallbacks.set(player.id,{gesture,tick:now,itemId,slot:held.slot,block:blockKey(block)});
  const synthetic={player,block,blockFace:e.face??e.blockFace,face:e.face??e.blockFace,
   faceLocation:e.faceLocation?{...e.faceLocation}:undefined,isFirstEvent:true,cancel:false};
  dispatch(synthetic,{blockOnly:true});return !!synthetic.cancel;

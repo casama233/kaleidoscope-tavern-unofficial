@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {world,system,Player,GameMode,ItemStack,BlockPermutation} from '@minecraft/server';
-import {installJavaItemUseOnEvents} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
+import {installJavaItemUseOnEvents,registerJavaBlockUseHandler,nativeBlockUse,settleJavaBlockUse,JAVA_PLACEMENT_TEST} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
 import {installMixologyEvents,completeCocktail,pickCupItem} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {installHolderEvents,holderDiagnostics} from '../runtime/BP/scripts/bedrock/holder.js';
 import {installStatefulStorageRoutes} from '../runtime/BP/scripts/bedrock/stateful-storage-router.js';
@@ -194,4 +194,24 @@ test('break claim cleanup also runs if a domain guard does not invoke recovery',
  const {p,at}=setup(undefined),b=block(at);b.guardProbe=true;let guards=0,recovered=0;
  registerProtectedBreakRoute({id:'pending-guard-probe',isBlock:x=>x.guardProbe===true,guard:(player,fn)=>{if(++guards>1)return fn();},recover:({block:x})=>{recovered++;x.setPermutation(BlockPermutation.resolve('minecraft:air'));}});
  capture(()=>{breakBlock(p,b);system.advance(1);breakBlock(p,b);system.advance(1);});assert.equal(guards,2);assert.equal(recovered,1);
+});
+
+const settlementCalls=[];
+registerJavaBlockUseHandler(e=>{if(e.block?.settlementProbe){e.cancel=true;settlementCalls.push(e);}});
+test('failed settlement preserves a native echo belonging to a different target',()=>{
+ const {p,at}=setup('minecraft:stick',1),A=block(at),B=block({...at,z:2});A.settlementProbe=B.settlementProbe=true;
+ assert.equal(nativeBlockUse({player:p,block:A,face:'Up'}),true);settleJavaBlockUse(settlementCalls.at(-1),true);
+ assert.equal(interact(p,B).cancel,true);settleJavaBlockUse(settlementCalls.at(-1),false);
+ assert.equal(JAVA_PLACEMENT_TEST.blockUses.has(p.id),false);
+ const calls=settlementCalls.length;
+ assert.equal(nativeBlockUse({player:p,block:A,face:'Up'}),false);assert.equal(settlementCalls.length,calls);
+});
+test('older failed settlement cannot release a newer completed transaction or its native echo',()=>{
+ const {p,at}=setup('minecraft:stick',1),A=block(at),B=block({...at,z:2});A.settlementProbe=B.settlementProbe=true;
+ assert.equal(interact(p,A).cancel,true);const older=settlementCalls.at(-1);
+ assert.equal(nativeBlockUse({player:p,block:B,face:'Up'}),true);const completed=settlementCalls.at(-1);settleJavaBlockUse(completed,true);
+ settleJavaBlockUse(older,false);
+ assert.equal(JAVA_PLACEMENT_TEST.blockUses.get(p.id),completed._javaUseClaim);assert.equal(completed._javaUseClaim.pending,false);
+ const calls=settlementCalls.length;
+ assert.equal(nativeBlockUse({player:p,block:B,face:'Up'}),false);assert.equal(settlementCalls.length,calls);
 });

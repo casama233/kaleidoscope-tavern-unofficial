@@ -1,0 +1,218 @@
+{
+  "namespace": "server_form",
+  "dynamic_button/panel_name/image": {
+    "bindings": [
+      {
+        "binding_name": "#form_button_texture",
+        "binding_name_override": "#texture",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      },
+      {
+        "binding_name": "#form_button_texture_file_system",
+        "binding_name_override": "#texture_file_system",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((not ((#texture = '') or (#texture = 'loading'))) and (not ((#texture_file_system = 'InUserPackage') and ((#texture = 'textures/ui/tavern_entries/depth_charge') or (#texture = 'textures/ui/tavern_entries/mystery_cocktail') or (#texture = 'textures/ui/tavern_entries/nether_special') or (#texture = 'textures/ui/tavern_entries/ice_grape')))))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+  "kt_guide_depth_charge_animation": {
+    "anim_type": "flip_book",
+    "initial_uv": [
+      0,
+      0
+    ],
+    "frame_count": 10,
+    "frame_step": 16,
+    "fps": 20
+  },
+  "kt_guide_mystery_cocktail_animation": {
+    "anim_type": "flip_book",
+    "initial_uv": [
+      0,
+      0
+    ],
+    "frame_count": 18,
+    "frame_step": 16,
+    "fps": 20
+  },
+  "kt_guide_nether_special_animation": {
+    "anim_type": "flip_book",
+    "initial_uv": [
+      0,
+      0
+    ],
+    "frame_count": 80,
+    "frame_step": 16,
+    "fps": 20
+  },
+  "kt_guide_ice_grape_animation": {
+    "anim_type": "flip_book",
+    "initial_uv": [
+      0,
+      0
+    ],
+    "frame_count": 24,
+    "frame_step": 16,
+    "fps": 20
+  },
+  "dynamic_button/panel_name": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_back",
+        "value": [
+          {
+            "kt_guide_depth_charge": {
+              "type": "image",
+              "size": [
+                32,
+                32
+              ],
+              "layer": 2,
+              "texture": "textures/ui/kt_guide_animated/depth_charge",
+              "uv_size": [
+                16,
+                16
+              ],
+              "uv": "@server_form.kt_guide_depth_charge_animation",
+              "bilinear": false,
+              "bindings": [
+                {
+                  "binding_name": "#form_button_texture",
+                  "binding_name_override": "#kt_guide_texture",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_name": "#form_button_texture_file_system",
+                  "binding_name_override": "#kt_guide_file_system",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#kt_guide_file_system = 'InUserPackage') and (#kt_guide_texture = 'textures/ui/tavern_entries/depth_charge'))",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          },
+          {
+            "kt_guide_mystery_cocktail": {
+              "type": "image",
+              "size": [
+                32,
+                32
+              ],
+              "layer": 2,
+              "texture": "textures/ui/kt_guide_animated/mystery_cocktail",
+              "uv_size": [
+                16,
+                16
+              ],
+              "uv": "@server_form.kt_guide_mystery_cocktail_animation",
+              "bilinear": false,
+              "bindings": [
+                {
+                  "binding_name": "#form_button_texture",
+                  "binding_name_override": "#kt_guide_texture",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_name": "#form_button_texture_file_system",
+                  "binding_name_override": "#kt_guide_file_system",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#kt_guide_file_system = 'InUserPackage') and (#kt_guide_texture = 'textures/ui/tavern_entries/mystery_cocktail'))",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          },
+          {
+            "kt_guide_nether_special": {
+              "type": "image",
+              "size": [
+                32,
+                32
+              ],
+              "layer": 2,
+              "texture": "textures/ui/kt_guide_animated/nether_special",
+              "uv_size": [
+                16,
+                16
+              ],
+              "uv": "@server_form.kt_guide_nether_special_animation",
+              "bilinear": false,
+              "bindings": [
+                {
+                  "binding_name": "#form_button_texture",
+                  "binding_name_override": "#kt_guide_texture",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_name": "#form_button_texture_file_system",
+                  "binding_name_override": "#kt_guide_file_system",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#kt_guide_file_system = 'InUserPackage') and (#kt_guide_texture = 'textures/ui/tavern_entries/nether_special'))",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          },
+          {
+            "kt_guide_ice_grape": {
+              "type": "image",
+              "size": [
+                32,
+                32
+              ],
+              "layer": 2,
+              "texture": "textures/ui/kt_guide_animated/ice_grape",
+              "uv_size": [
+                16,
+                16
+              ],
+              "uv": "@server_form.kt_guide_ice_grape_animation",
+              "bilinear": false,
+              "bindings": [
+                {
+                  "binding_name": "#form_button_texture",
+                  "binding_name_override": "#kt_guide_texture",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_name": "#form_button_texture_file_system",
+                  "binding_name_override": "#kt_guide_file_system",
+                  "binding_type": "collection",
+                  "binding_collection_name": "form_buttons"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#kt_guide_file_system = 'InUserPackage') and (#kt_guide_texture = 'textures/ui/tavern_entries/ice_grape'))",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

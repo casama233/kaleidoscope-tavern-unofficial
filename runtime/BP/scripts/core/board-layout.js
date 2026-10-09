@@ -40,6 +40,8 @@ export function boardGlyphOffsets(line,alignment,width,bold=false){
  return chars.map((_,i)=>{const x=cursor;cursor+=advances[i]+(gaps.includes(i)?extra:0);return x;});
 }
 export function boardVerticalOffset(alignment,lineCount,maxLines,lineHeight){return Math.max(0,maxLines-lineCount)*lineHeight*(alignment==='bottom'?1:alignment==='middle'?.5:0);}
-// Bedrock's text field is single-line: expose saved paragraph breaks explicitly.
-export function encodeBoardInput(text){return text.replace(/\n/g,'\\n');}
-export function decodeBoardInput(text){return text.replace(/\\n/g,'\n');}
+// The native form remains single-line. Escape the escape character first so
+// opening/saving a board cannot turn a literal backslash+n into a paragraph.
+// Persisted board data has always been raw text; this is only the form codec.
+export function encodeBoardInput(text){return text.replace(/\\/g,'\\\\').replace(/\n/g,'\\n');}
+export function decodeBoardInput(text){return text.replace(/\\(\\|n)/g,(_,next)=>next==='n'?'\n':'\\');}

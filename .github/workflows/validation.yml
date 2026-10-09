@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: dbef4eb3b0be3d42463df03d3dba9cd2e20a6cef
+          ref: c4fec47bdea93efd96e570078083730caaea8243
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -198,7 +198,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: dbef4eb3b0be3d42463df03d3dba9cd2e20a6cef
+          ref: c4fec47bdea93efd96e570078083730caaea8243
           path: world-liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -312,9 +312,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed World Liquor 0.1.108 pairs this Tavern 0.6.131 runtime.
+          # Reviewed World Liquor 0.1.109 pairs this Tavern 0.6.132 runtime.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: dbef4eb3b0be3d42463df03d3dba9cd2e20a6cef
+          ref: c4fec47bdea93efd96e570078083730caaea8243
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -362,7 +362,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: dbef4eb3b0be3d42463df03d3dba9cd2e20a6cef
+          ref: c4fec47bdea93efd96e570078083730caaea8243
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -445,18 +445,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: dbef4eb3b0be3d42463df03d3dba9cd2e20a6cef
+          ref: c4fec47bdea93efd96e570078083730caaea8243
           path: .source-check/world-liquor-native
           persist-credentials: false
       - name: Native isolated inventory save/restart, no player sessions
         run: python tools/pickup/run_native_smoke.py --work "$RUNNER_TEMP/pickup-native"
-      - name: Complete Tavern and World Liquor load, migration and restart, zero players
+      - name: Complete Tavern and World Liquor load, migration, effects and restart, zero players
         run: |
           python tools/native/run_living_effects.py \
             --engine "$RUNNER_TEMP/pickup-native" \
             --engine-provenance "$RUNNER_TEMP/pickup-native/native-storage-evidence.json" \
             --liquor .source-check/world-liquor-native \
-            --work "$RUNNER_TEMP/t131-paired-native" \
+            --work "$RUNNER_TEMP/t132-paired-native" \
             --probe tools/native/shaker-migration-probe.js \
             --port 27200
           git diff --exit-code -- runtime/
@@ -468,9 +468,9 @@ jobs:
             ${{ runner.temp }}/pickup-native/stage-*.log
             ${{ runner.temp }}/pickup-native/stage-*-runner-validation.json
             ${{ runner.temp }}/pickup-native/native-storage-evidence.json
-            ${{ runner.temp }}/t131-paired-native/first.log
-            ${{ runner.temp }}/t131-paired-native/restart.log
-            ${{ runner.temp }}/t131-paired-native/native-living-report.json
+            ${{ runner.temp }}/t132-paired-native/first.log
+            ${{ runner.temp }}/t132-paired-native/restart.log
+            ${{ runner.temp }}/t132-paired-native/native-living-report.json
   tap-carriers:
     needs: impact
     if: needs.impact.outputs.runtime == 'true'

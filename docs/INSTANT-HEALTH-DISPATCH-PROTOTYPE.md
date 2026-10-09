@@ -29,8 +29,8 @@ double-to-int narrowing, and int-to-float conversion. Shift distances wrap modul
 32. Overflow may produce negative amounts; that does not change heal into hurt.
 The instantaneous method differs from the timed tick method's nonnegative heal
 clamp. The helper implements saturating `d2i` and NaN-to-zero rather than using
-JavaScript rounding or powers of two. The existing projectile signed-delta
-helper has not been upgraded by this prototype and is a separate delivery gap.
+JavaScript rounding or powers of two. The projectile signed-delta path remained
+a separate gap at T122; the T132 extension below replaces that runtime path.
 
 Heal calls process the explicitly declared heal rule, then obtain fresh readable
 health attributes. In the NeoForge 1.21.1 maintained branch,
@@ -60,6 +60,53 @@ unknown rather than a guessed generic Native hit. Neither fact excludes their
 separate heal branch. Nonpositive hurt amounts still attempt the declared hurt
 policy/API; source zero/negative hurt hooks and animations remain unverified.
 
+## T132: splash delivery and source potion policy
+
+`storage-projectile.js` now invokes the same dispatcher for instant health/harm.
+It retains the actual impact intensity, direct-hit potency and resolved latch.
+Source selection and operation no longer come from a Native undead family or
+the sign of a computed delta. Damage maps to Native magic with the available
+owner, or with no attacker when ownerless. `sourceMapping=magic_owner_only`
+explicitly records that the stable API does not also represent the direct
+projectile under a chosen magic cause. It does not certify Java damage tags,
+knockback or final damage after all event cancellations.
+
+The potion gate is independent of class, heal inversion and the drink entry.
+`captureInstantSplashPolicy` snapshots it once before each target's full row
+loop. Known source nonliving/immune targets reject all rows, including timed
+and custom effects. An earlier row killing the target does not recapture this
+gate or suppress the remaining source row calls. Healing still runs its
+declared hook before its own positive-health gate and does not resurrect.
+
+The optional profile field `affectedByPotions` accepts `false`, `true` or
+`"alive"`. In the maintained NeoForge 1.21.1 policy, vanilla living targets use
+`"alive"`, while ArmorStand uses false. An explicitly constant custom override
+can use true or false. Existing schema-1 profiles lacking the field still load
+and work for drinking; their instant splash policy is unknown until the same
+owner updates it. Unknown custom timed/custom recipients retain the earlier
+Native family adapter; this compatibility boundary is not complete Java class
+or override parity.
+
+The two source branches actually differ. Read-only bytecode from the official
+[1.20.1 metadata](https://piston-meta.mojang.com/v1/packages/760a390e336b2b6202ec5906757cee3a929a7c85/1.20.1.json)
+and [1.21.1 metadata](https://piston-meta.mojang.com/v1/packages/cedfc3b6dcbca34e2b478d498bf1d56a8fa2f404/1.21.1.json)
+was checked against Mojang's SHA-1. The client JAR hashes are respectively
+`0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838` and
+`30c73b1c5da787909b2f73340419fdf13b9def88`; the 1.21.1 mappings hash is
+`2244b6f072256667bcd9a73df124d6c58de77992`. The 1.20.1 LivingEntity `ft`
+returns true, whereas 1.21.1 LivingEntity `btn.fC` (source line 3401) tests
+`!isDeadOrDying`. ArmorStand returns false in both. In 1.21.1,
+`cob.applySplash` (133–166) evaluates that gate before the row loop and passes
+the projectile, owner, target, amplifier and intensity to the instant call.
+No original JAR is distributed in this repository. These source observations
+do not imply that the Forge and NeoForge policies are identical.
+
+The current zero-player paired observer exercises real native entities,
+rolled Carignan healing, a saved declared zero-amount hook, ArmorStand immunity,
+owned/ownerless damage events and cancellation. The impact envelope is an
+explicit observer input, not an observed physical collision or Player use.
+Its exact engine/source and first/restart results belong to the current CI.
+
 ## Reachable addon declarations
 
 After world load, a producer sends the Server script event
@@ -73,6 +120,7 @@ After world load, a producer sends the Server script event
   "type": "example_addon:undead_actor",
   "sourceType": "example_addon:undead_actor",
   "living": true,
+  "affectedByPotions": "alive",
   "inverted": true,
   "healHook": {"mode": "passthrough"},
   "damagePolicy": "native"

@@ -126,6 +126,21 @@ test('failed first native pointer save removes staged helper and restores both l
  const f=fixture(),plan=f.plan({nextIds:[wine],incoming:named(0)});f.failSave(nativeItemKey(f.key));
  assert.throws(()=>plan.apply(),/BACKEND_FAILURE/);plan.rollback();assert.equal(f.entities.size,0);assert.equal(f.map.size,0);
 });
+test('rollback still removes a newly staged helper when clearing one native slot fails',()=>{
+ const f=fixture(),plan=f.plan({nextIds:[wine],incoming:named(0)});plan.apply();
+ const entity=[...f.entities.values()][0];entity.container.failAt=entity.container.writes;
+ assert.throws(()=>plan.rollback(),/NATIVE_STORAGE_ROLLBACK_FAILED/);
+ assert.equal(f.entities.size,0,'failed slot cleanup must not skip entity removal');assert.equal(f.map.size,0);
+ // A completed removal makes a subsequent rollback retry safe, even if its
+ // retired container no longer accepts writes like a real native container.
+ entity.container.setItem=()=>{throw Error('RETIRED_CONTAINER');};assert.doesNotThrow(()=>plan.rollback());
+});
+test('rollback attempts both durable ledger keys after a pointer restore failure and can retry',()=>{
+ const f=fixture(),plan=f.plan({nextIds:[wine],incoming:named(0)});plan.apply();f.failSave(nativeItemKey(f.key));
+ assert.throws(()=>plan.rollback(),/NATIVE_STORAGE_ROLLBACK_FAILED/);
+ assert.equal(f.backend.getDynamicProperty('kt:native_required/'+f.key),undefined,'pointer failure must not skip restoring the required marker');
+ assert.equal(f.entities.size,0);plan.rollback();assert.equal(f.map.size,0);
+});
 test('failed existing-container save restores exact previous stacks',()=>{
  const f=fixture(),ids=fill(f,2),before=new Map(f.map),plan=f.plan({oldIds:ids,nextIds:[null,wine]});f.failSave(nativeItemKey(f.key));
  assert.throws(()=>plan.apply(),/BACKEND_FAILURE/);plan.rollback();assert.deepEqual(f.map,before);

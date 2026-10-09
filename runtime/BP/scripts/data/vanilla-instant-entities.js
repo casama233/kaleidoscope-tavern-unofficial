@@ -8,4 +8,6 @@ const inverted=['skeleton','stray','wither_skeleton','skeleton_horse','bogged','
 const sourceAliases={evocation_illager:'evoker',tropicalfish:'tropical_fish',villager_v2:'villager',zombie_villager_v2:'zombie_villager',zombie_pigman:'zombified_piglin'};
 // ArmorStand rejects this source damage type. EnderDragon routes hurt through
 // its body/phase implementation; those source facts are not a generic hurt call.
-export const VANILLA_INSTANT_ENTITIES=Object.freeze(Object.fromEntries([...normal.map(name=>[name,false]),...inverted.map(name=>[name,true])].map(([name,inverted])=>['minecraft:'+name,Object.freeze({sourceType:'minecraft:'+(sourceAliases[name]??name),living:true,inverted,healHook:Object.freeze({mode:'passthrough'}),damagePolicy:name==='armor_stand'?'reject':name==='ender_dragon'?'unknown':'native'})])));
+// 1.21.1 isAffectedByPotions defaults to !isDeadOrDying (unlike 1.20.1's true).
+// ArmorStand overrides false. Neither gate changes direct drink healing.
+export const VANILLA_INSTANT_ENTITIES=Object.freeze(Object.fromEntries([...normal.map(name=>[name,false]),...inverted.map(name=>[name,true])].map(([name,inverted])=>['minecraft:'+name,Object.freeze({sourceType:'minecraft:'+(sourceAliases[name]??name),living:true,inverted,affectedByPotions:name==='armor_stand'?false:'alive',healHook:Object.freeze({mode:'passthrough'}),damagePolicy:name==='armor_stand'?'reject':name==='ender_dragon'?'unknown':'native'})])));

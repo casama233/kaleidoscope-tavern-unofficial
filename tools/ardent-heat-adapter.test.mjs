@@ -158,7 +158,7 @@ test('early Ardent save preserves a crossed Vision pulse and the five-tick pass 
  // sound cache must not hide a missing pulse or a replay of the same target.
  f.actor.dimension.getEntities=()=>{
   queries.push(system.currentTick);
-  return [{id:f.actor.id+'-vision-target',typeId:'minecraft:cow',getComponent:()=>({currentValue:10}),getAABB:f.actor.getAABB}];
+  return [{id:f.actor.id+'-vision-target',typeId:'minecraft:cow',getComponent:id=>id==='minecraft:health'?{currentValue:10}:id==='minecraft:type_family'?{hasTypeFamily:family=>family==='mob'}:undefined,getAABB:f.actor.getAABB}];
  };
  f.actor.dimension.playSound=()=>{};world.getAllPlayers=()=>[f.actor];
  try{

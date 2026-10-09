@@ -17,11 +17,12 @@ function hook(value){
  check(value.multiply===undefined&&value.add===undefined,'BAD_INSTANT_HEAL_HOOK');return {mode:value.mode};
 }
 function profile(value){
- check(only(value,['schema','owner','revision','type','sourceType','living','inverted','healHook','damagePolicy']),'BAD_INSTANT_ENTITY_PROFILE');
+ check(only(value,['schema','owner','revision','type','sourceType','living','inverted','healHook','damagePolicy','affectedByPotions']),'BAD_INSTANT_ENTITY_PROFILE');
  check(value.schema===1&&typeof value.owner==='string'&&/^[a-z0-9_.-]{1,64}$/.test(value.owner)&&typeof value.revision==='string'&&value.revision.length>0&&value.revision.length<=128,'BAD_INSTANT_PROFILE_IDENTITY');
  id(value.type);id(value.sourceType);check(typeof value.living==='boolean'&&typeof value.inverted==='boolean','BAD_INSTANT_ENTITY_FACT');
+ check(value.affectedByPotions===undefined||typeof value.affectedByPotions==='boolean'||value.affectedByPotions==='alive','BAD_INSTANT_SPLASH_POLICY');
  check(['native','reject','unknown'].includes(value.damagePolicy),'BAD_INSTANT_DAMAGE_POLICY');
- return {schema:1,owner:value.owner,revision:value.revision,type:value.type,sourceType:value.sourceType,living:value.living,inverted:value.inverted,healHook:hook(value.healHook),damagePolicy:value.damagePolicy};
+ return {schema:1,owner:value.owner,revision:value.revision,type:value.type,sourceType:value.sourceType,living:value.living,inverted:value.inverted,healHook:hook(value.healHook),damagePolicy:value.damagePolicy,...(value.affectedByPotions===undefined?{}:{affectedByPotions:value.affectedByPotions})};
 }
 function store(targetWorld){
  if(stores.has(targetWorld))return stores.get(targetWorld);
@@ -53,26 +54,56 @@ function finish(effect,status,detail){
  if(status.startsWith('UNRESOLVED')||status==='ENGINE_REJECTED'){instantEffectDiagnostics.errors.push(result);if(instantEffectDiagnostics.errors.length>16)instantEffectDiagnostics.errors.shift();}
  return result;
 }
-/** Uniform drink dispatch. Native pipeline delegation is an explicit adaptation,
+/** Capture the source potion gate once per recipient, before its row loop.
+ * NeoForge 1.21.1 inherits !isDeadOrDying; explicit custom overrides may be
+ * constant true/false. Undefined legacy policy remains unknown for splash.
+ */
+export function captureInstantSplashPolicy(entity,{targetWorld=world}={}){
+ try{
+  const state=store(targetWorld);if(!state.known)return 'UNRESOLVED_PROFILE_STORE';
+  const facts=state.profiles.get(entity.typeId)??VANILLA_INSTANT_ENTITIES[entity.typeId];
+  if(!facts)return 'UNRESOLVED_ENTITY_CLASS';
+  if(!facts.living)return 'NOT_SOURCE_LIVING';
+  if(facts.affectedByPotions===undefined)return 'UNRESOLVED_SPLASH_POLICY';
+  if(facts.affectedByPotions===false)return 'SOURCE_SPLASH_REJECTED';
+  if(facts.affectedByPotions==='alive'){
+   const health=entity.getComponent('minecraft:health')?.currentValue;
+   if(!Number.isFinite(health))return 'UNRESOLVED_SPLASH_HEALTH';
+   if(health<=0)return 'SOURCE_SPLASH_REJECTED';
+  }
+  return 'SOURCE_SPLASH_ELIGIBLE';
+ }catch{return 'UNRESOLVED_SPLASH_POLICY';}
+}
+/** Uniform drink/splash dispatch. Native pipeline delegation is an explicit adaptation,
  * not proof of Java indirect_magic tags, hurt frames, knockback or mod hooks.
  * No queued instant effect, health subtraction, retry or mode reversal fallback.
  */
-export function dispatchInstantHealth(entity,row,{targetWorld=world,intensity=1,direct=entity,indirect=entity}={}){
+export function dispatchInstantHealth(entity,row,{targetWorld=world,intensity=1,delivery='drink',direct=entity,indirect=delivery==='splash'?undefined:entity,capturedSplashPolicy}={}){
  if(!INSTANT_HEALTH_EFFECTS.has(row.effect))return undefined;
  try{
   const state=store(targetWorld);if(!state.known)return finish(row.effect,'UNRESOLVED_PROFILE_STORE');
   const facts=state.profiles.get(entity.typeId)??VANILLA_INSTANT_ENTITIES[entity.typeId];
   if(!facts)return finish(row.effect,'UNRESOLVED_ENTITY_CLASS');
   if(!facts.living)return finish(row.effect,'NOT_SOURCE_LIVING');
+  // Once a recipient enters the source row loop, later rows still execute even
+  // if an earlier row kills it. Preserve the heal hook before its health gate.
+  if(delivery==='splash'){
+   const policy=capturedSplashPolicy??captureInstantSplashPolicy(entity,{targetWorld});
+   if(policy!=='SOURCE_SPLASH_ELIGIBLE')return finish(row.effect,policy);
+  }
   const operation=javaInstantOperation(row.effect,row.amplifier,facts.inverted,intensity);
   if(operation.operation==='hurt'){
    if(facts.damagePolicy==='unknown')return finish(row.effect,'UNRESOLVED_HURT_POLICY',operation);
    if(facts.damagePolicy==='reject')return finish(row.effect,'SOURCE_HURT_REJECTED',operation);
-   // Drinking passes self as both Java direct and indirect source. The stable
-   // API can represent the causing actor, but not a Java damage-type Holder.
-   if(direct!==indirect)return finish(row.effect,'UNRESOLVED_DAMAGE_SOURCE',operation);
-   const accepted=entity.applyDamage(operation.amount,{cause:EntityDamageCause.magic,...(direct?{damagingEntity:direct}:{})});
-   return finish(row.effect,accepted?'APPLIED_NATIVE_INSTANT':'NATIVE_HURT_REJECTED',operation);
+   // Stable magic options expose a causing actor, but no direct projectile.
+   // Projectile options expose that projectile, but cannot select magic. Keep
+   // the magic pipeline and explicitly record this partial source mapping;
+   // never turn an ownerless splash into target-attributed self damage.
+   const splash=delivery==='splash';
+   if((splash&&!direct)||(!splash&&(delivery!=='drink'||direct!==indirect)))return finish(row.effect,'UNRESOLVED_DAMAGE_SOURCE',operation);
+   const source=splash?{sourceMapping:'magic_owner_only',directSourceId:direct.id,indirectSourceId:indirect?.id??null}:{};
+   const accepted=entity.applyDamage(operation.amount,{cause:EntityDamageCause.magic,...(indirect?{damagingEntity:indirect}:{})});
+   return finish(row.effect,accepted?'APPLIED_NATIVE_INSTANT':'NATIVE_HURT_REJECTED',{...operation,...source});
   }
   const amount=declaredHealAmount(operation.amount,facts.healHook);
   if(amount===undefined)return finish(row.effect,'UNRESOLVED_HEAL_HOOK',operation);

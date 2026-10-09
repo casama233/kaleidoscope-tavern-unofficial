@@ -28,7 +28,7 @@ import {dispatchInstantHealth} from './instant-effects.js';
 import {faceOffset} from '../core/furniture.js';
 import {javaSecondaryBypass} from '../core/java-use-order.js';
 import {registerProtectedBreakRoute} from './protected-break-router.js';
-import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeEmptyHandBlockUse,settleJavaBlockUse} from './java-placement-router.js';
+import {registerJavaBlockUseHandler,registerJavaOffhandUseOnHandler,registerJavaBlockUseFallback,registerJavaItemUseOnRoute,nativeBlockUse,settleJavaBlockUse} from './java-placement-router.js';
 import {shakerPut,syncShakerVisual,repairShakerPutVisual,installImmersionCleanup,shakeAudio,finished,feedback,startShakerHands,stopShakerHands,cocktailEffect} from './immersion.js';
 import {showShakerSlots,showShakerProgress,hideShakerHud,showShakerMessage,clearShakerPlayer,showBarrelHud} from './shaker-screen.js';
 import {lookedAtBarrelStatus} from './machines.js';
@@ -41,7 +41,7 @@ import {mainShakerHand,shakerHandItem,captureShakerHand,verifyShakerHand,shakerH
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
 const shakerStore=new MixStore(world,validateShaker),cupStore=new MixStore(world,validateCup);
-const locks=new Locks(),uses=new Map(),releaseGuards=new Map(),pendingBlockUses=new Map();
+const locks=new Locks(),uses=new Map(),releaseGuards=new Map(),pendingBlockUses=new Map(),completedBlockUses=new Map();
 let registry,sequence=0;
 export const MIX_BLOCKS=new Set([STATION,...['empty_glassware',...Object.values(COCKTAILS).map(x=>x.name)].map(x=>NS+':cup_'+x)]);
 export const mixologyDiagnostics={implementation:'java_lifecycle_v22',completed:0,cancelled:0,errors:[],effectErrors:[],unsupportedEffects:{}};
@@ -409,11 +409,35 @@ function tick(){
 }
 function itemSnapshot(player){const item=hand(player);return {basic:handSnapshot(player),data:item?.getDynamicProperty(PORTABLE_DATA),potion:POTION_ITEMS.has(item?.typeId)?canonical(potionIdentity(item)):undefined};}
 function verifySnapshot(player,snapshot){sameHand(player,snapshot.basic);if(snapshot.data!==undefined)check(hand(player)?.getDynamicProperty(PORTABLE_DATA)===snapshot.data,'STALE_HAND');if(snapshot.potion!==undefined)check(canonical(potionIdentity(hand(player)))===snapshot.potion,'STALE_POTION');}
+const mixologyUseKey=(player,block)=>player.id+'/'+shakerKey(block.dimension.id,block.location);
+function nativeEchoHand(player){try{return canonical(itemSnapshot(player));}catch{return undefined;}}
+function rememberNativeMixologyUse(event,blocks,beforeHand){
+ const player=event.player;
+ const afterHand=nativeEchoHand(player),tick=system.currentTick;
+ for(const block of blocks)if(block)completedBlockUses.set(mixologyUseKey(player,block),{playerId:player.id,event,beforeHand,afterHand,tick});
+ if(completedBlockUses.size>128)for(const [key,row]of completedBlockUses)if(tick-row.tick>2)completedBlockUses.delete(key);
+}
+function completedMixologyEcho(player,block,current=nativeEchoHand(player)){
+ const key=mixologyUseKey(player,block),previous=completedBlockUses.get(key);
+ if(previous&&system.currentTick-previous.tick>2){completedBlockUses.delete(key);return undefined;}
+ return previous&&current!==undefined&&(current===previous.beforeHand||current===previous.afterHand)?previous:undefined;
+}
+function nativeMixologyBlockUse(event){
+ const player=event?.player,block=event?.block;if(event?.cancel||!player||!block)return false;
+ const current=nativeEchoHand(player);
+ if(current===undefined)return false;
+ // A completed insertion may consume the final ingredient, and an off-hand
+ // placement may leave both hands empty. The same press must not become pickup.
+ // A new authoritative before gesture stays free; native after callbacks and
+ // false continuations below retain the completed gesture's ownership.
+ if(completedMixologyEcho(player,block,current))return false;
+ return nativeBlockUse(event);
+}
 export function registerMixologyComponents({blockComponentRegistry:blocks,itemComponentRegistry:items}){
- blocks.registerCustomComponent(NS+':shaker_station',{onPlayerInteract:nativeEmptyHandBlockUse});
+ blocks.registerCustomComponent(NS+':shaker_station',{onPlayerInteract:nativeMixologyBlockUse});
  blocks.registerCustomComponent(NS+':shaker_put_recovery',{onTick:event=>repairShakerPutVisual(event.block)});
  blocks.registerCustomComponent(NS+':cocktail_cup',{
-  onPlayerInteract:nativeEmptyHandBlockUse,
+  onPlayerInteract:nativeMixologyBlockUse,
   onPlace:({block})=>{
    const dimension=block.dimension,location={...block.location},type=block.typeId;
    // Scripted placement commits its payload synchronously before this runs.
@@ -442,14 +466,19 @@ export function beforeShakerUse(event){
   }
  }catch{event.cancel=true;}
 }
-function queueMixologyBlockUse(event,signature,work){
+function queueMixologyBlockUse(event,signature,work,{echoTarget}={}){
  event.cancel=true;
  const key=event.player.id+'/'+shakerKey(event.block.dimension.id,event.block.location),previous=pendingBlockUses.get(key);
  if(previous?.signature===signature){event._javaUseClaim=previous.event._javaUseClaim;return;}
- const pending={event,signature};pendingBlockUses.set(key,pending);
+ completedBlockUses.delete(key);
+ const pending={event,signature},beforeHand=nativeEchoHand(event.player);pendingBlockUses.set(key,pending);
  system.run(()=>safely(event.player,()=>{
   let succeeded=false;
-  try{const result=work();succeeded=true;return result;}
+  try{
+   const result=work();succeeded=true;
+   try{rememberNativeMixologyUse(event,[event.block,echoTarget?.()],beforeHand);}catch(error){log(error);}
+   return result;
+  }
   finally{if(pendingBlockUses.get(key)===pending)pendingBlockUses.delete(key);settleJavaBlockUse(event,succeeded);}
  }));
 }
@@ -464,18 +493,24 @@ export function offhandShakerUseOn(event){
  try{reference=captureShakerHand(event.player,event.itemStack);}catch{return;}
  if(reference.side!=='off')return;
  const expected=event.itemStack.clone(),dimension=event.block.dimension,location={...event.block.location},typeId=event.block.typeId,face=event.blockFace??event.face;
+ let placement;
  queueMixologyBlockUse(event,'off/'+expected.getDynamicProperty(PORTABLE_DATA),()=>{
   check(event.player.dimension.id===dimension.id,'DIMENSION_CHANGED');verifyShakerHand(event.player,reference,expected);
   const block=blockAt(dimension,location);check(block?.typeId===typeId,'BLOCK_CHANGED');
   const carried=readPortableItem(expected);
-  return block.typeId===NS+':cup_empty_glassware'&&carried.state.result?
-   pourHeldShakerNow(event.player,block,reference):placeShaker(event.player,plus(location,faceOffset(face)),reference);
- });
+  if(block.typeId===NS+':cup_empty_glassware'&&carried.state.result)return pourHeldShakerNow(event.player,block,reference);
+  placement={dimension,location:plus(location,faceOffset(face))};
+  return placeShaker(event.player,placement.location,reference);
+ },{echoTarget:()=>placement});
 }
 export function installMixologyEvents(){
  registerJavaBlockUseFallback(candidate);
  registerJavaBlockUseHandler(event=>{
   const block=event.block;if(event.cancel||!(block.typeId===STATION||isCupBlock(block.typeId)))return;
+  if(event._javaRawFirstEvent===false){
+   const completed=completedMixologyEcho(event.player,block);
+   if(completed){event.cancel=true;event._javaUseClaim=completed.event._javaUseClaim;return;}
+  }
   const snapshot=itemSnapshot(event.player),held=snapshot.basic.id;
   if(javaSecondaryBypass(event.player,held))return;
   if(block.typeId===STATION&&held&&!candidate(held))return;
@@ -501,7 +536,7 @@ export function installMixologyEvents(){
  world.afterEvents.itemStopUse.subscribe(nativeStop);
  world.afterEvents.playerSwingStart.subscribe(clearShakerOnSwing,{swingSource:EntitySwingSource.Attack});
  world.afterEvents.playerSpawn.subscribe(({player})=>system.run(()=>{cancelUse(player.id);releaseGuards.delete(player.id);clearShakerPlayer(player);migrateShakerInventory(player);}));
- world.afterEvents.playerLeave.subscribe(({playerId})=>{uses.delete(playerId);releaseGuards.delete(playerId);clearShakerPlayer(playerId);});
+ world.afterEvents.playerLeave.subscribe(({playerId})=>{uses.delete(playerId);releaseGuards.delete(playerId);for(const [key,row]of completedBlockUses)if(row.playerId===playerId)completedBlockUses.delete(key);clearShakerPlayer(playerId);});
  world.afterEvents.entityDie.subscribe(({deadEntity})=>cancelUse(deadEntity.id));
  world.beforeEvents.itemUse.subscribe(beforeShakerUse);
  installImmersionCleanup();system.runInterval(tick,1);

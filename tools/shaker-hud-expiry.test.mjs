@@ -18,7 +18,7 @@ const slotSprites=images(slots),progressSprites=images(progress);
 test('slot and progress sprites own finite expiry matched to their refresh cadence',()=>{
  assert.equal(slotSprites.length,51);assert.equal(progressSprites.length,113);
  const groups=[
-  {sprites:slotSprites,waitName:'kt_mixology_sprite_wait',fadeName:'kt_mixology_sprite_fade',refresh:HUD_REFRESH_TICKS/20,fadeSeconds:0.1},
+  {sprites:slotSprites,waitName:'kt_mixology_sprite_wait',fadeName:'kt_mixology_sprite_fade',refresh:HUD_REFRESH_TICKS/20,fadeSeconds:0},
   {sprites:progressSprites,waitName:'kt_mixology_progress_wait',fadeName:'kt_mixology_progress_fade',refresh:1/20,fadeSeconds:0}
  ];
  for(const {sprites,waitName,fadeName,refresh,fadeSeconds} of groups){
@@ -48,6 +48,14 @@ test('stopped progress becomes transparent after its one-tick interpolation, ind
  for(const seconds of [0,0.025,0.049])assert.equal(alphaAt(seconds),1);
  for(const seconds of [0.05,0.075,0.1,0.15,0.6,1,30,600])assert.equal(alphaAt(seconds),0);
  assert.equal(hud.kt_mixology_sprite_wait.duration,HUD_REFRESH_TICKS/20);
+});
+
+test('stopped target slots keep their refresh wait but have no extra fade tail',()=>{
+ assert.equal(hud.kt_mixology_sprite_wait.duration,0.5);
+ assert.equal(hud.kt_mixology_sprite_fade.duration,0);
+ assert.equal(hud.kt_mixology_sprite_fade.to,0);
+ // This is a bounded half-second expiry, not a client-local hit-result query.
+ assert.equal(hud.kt_mixology_sprite_wait.duration+hud.kt_mixology_sprite_fade.duration,0.5);
 });
 
 test('expiry remains confined to owned images and leaves the native factory protocol intact',()=>{

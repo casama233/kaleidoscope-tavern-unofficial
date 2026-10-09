@@ -1,5 +1,13 @@
 # Maintained changes
 
+## 0.6.132
+
+- Share Java instant-health/harm dispatch with splash delivery, including source potion immunity, per-recipient policy snapshots, owner attribution and compatible addon declarations.
+- Repair native held-item shaker interaction, post-consumption/offhand-placement pickup echoes, immediate retry after rollback, and independent native storage cleanup.
+- Preserve Vision's query-time living recipients and include reviewed vanilla fish without the Native mob family.
+- Add four source-derived guide flipbooks with foreign-image fallback, preserve literal board escapes and remove the extra slot HUD fade.
+- Pair with World Liquor 0.1.109 and optional Grilling 2.8.119; [source and verification scope](docs/RELEASE-NOTES-0.6.132.md) retains explicit native/client and branch differences.
+
 ## 0.6.131
 
 - Preserve direct-touch glassware hits, restore empty-seat orientation and transactional seat switching, and allow Java ordinary use in Adventure mode.

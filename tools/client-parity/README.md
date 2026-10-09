@@ -24,10 +24,14 @@ python tools/client-parity/generate_board_probe.py --output /absolute/new/kt-boa
 | --- | --- | --- |
 | 單一 factory、原生 submit、`custom_form` input collection | [server_form.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/server_form.json) 的 `generated_contents`、`custom_form_scrolling_content`、`custom_input` | 不覆寫 factory、form root、submit 或 dropdown；複製原 `custom_input` 參數，僅改 `$control_name`。 |
 | 原生 template hook | [settings_common.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/settings_sections/settings_common.json) 的 `option_text_edit` 與 `option_generic_core` | 原 `$control_name@$control_name` 插槽接四個互斥 sibling。foreign 分支仍繼承原 `option_text_edit_control`。 |
-| 多行按鍵、scroll、enabled/focus、可見時文字 binding | [ui_common.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/ui_common.json) 的 `text_edit_box`、`text_edit_box_label`、`scrollable_multiline_text_edit_box` | 使用原 multiline primitive 與按鍵；保留原 binding 陣列再追加 guards。文字 binding 使用原生 `visible` condition。 |
+| 多行按鍵、scroll、enabled/focus、可見時文字 binding | [ui_common.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/ui_common.json) 的 `text_edit_box`、`text_edit_box_label`、`scrollable_multiline_text_edit_box` | 使用原 multiline primitive 與按鍵；直接寫入完整六條原 root bindings、native alias 及互斥 gate。保留 scroll 子控件與 native `visible` 文字 binding。 |
 | collection 上的 multiline 實例 | [book_screen.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/book_screen.json) 的 `page_text_edit` | 支持 multiline 與 collection 可組合，不證明 server-form controller 也完全相同。 |
 | 同 textbox name 的 normal/maximized 控制及啟用互斥 | [command_block_screen.json](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/resource_pack/ui/command_block_screen.json) | 提供互斥 sibling 的原始模式。該原生 controller 有自己的 focus 邏輯，不能直接當成 server-form 的驗收。 |
 | textField options 沒有 multiline 選項 | [server-ui 2.0.0 metadata](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/metadata/script_modules/%40minecraft/server-ui-bindings_2.0.0.json) | 診斷不傳入虛構 API 參數。 |
+
+2026-10-09 真人 T143 content log 已確認：新 edit-box definition 中的 `modifications` 未套用，被報為未知 property，造成四個輸入框同時可見。production 與本 probe 現共用純標準庫 `native_input_bindings.py`，以 direct `bindings` 保留 pin 的六條原 root binding，再複製 enabled／focus／visible 來源至私有 alias，最後合成互斥 gate；不在新定義中留下 unapplied patch。單行與 scrollable 的 root 都繼承同六條，但 scrollable 的 controls／按鍵及子 label／placeholder binding 保持自己的原值。
+
+Native enabled 的符號 source 與 option control 原 variables 不改：option enabled 名稱為空或 `$enabled=false` 時，原 option 控制選用 `none`，alias 使用原 `$enabled` fallback；有效原生 source 的 false 仍透過 alias 拒絕輸入。multiline 的 common 基底保留自己的 global source，不強套 option 的 `none` 規則，也不以猜測的固定 collection `#custom_input_enabled` 取代它。Gate 不讀自己的 `#enabled`／`#focus_enabled` target；初始 visibility fail-closed，enabled／focus 初始值沿用原生，最後 gate 都核對 nativeVisible，focus 另核對 nativeFocus。這是來源與結構修正，尚未證明新 controller 在真人 client 上正確。
 
 **真正待驗證的是原生 server-form controller：** 它是否容許同 collection slot／`text_box_name=custom_input` 的四個 sibling，只由可見、啟用、有焦點資格的那一個讀寫。此候選沒有證據可宣稱「隱藏 sibling 絕不回寫」，也不把 UI JSON 解析成功當成可用。若 Enter 提交整張表單、文字不回傳、hidden sibling 覆蓋、焦點不正確，記錄失敗，不能直接推進 production。
 
@@ -68,4 +72,4 @@ python tools/client-parity/generate_board_probe.py --output /absolute/new/kt-boa
 python tools/client-parity/test_board_probe.py
 ```
 
-它只檢查全新隔離輸出／拒絕覆寫、身份隔離、canonical UI 與 guide bytes 保留、native template contract 及生成 JS 語法。不啟動 client/BDS，不跑 release suite，不聲稱 multiline 已可用。
+它只檢查全新隔離輸出／拒絕覆寫、身份隔離、canonical UI 與 guide bytes 保留、完整 native edit-box 繼承與 direct binding contract、拒絕真人回報的 unapplied-modifications 形態及生成 JS 語法。不啟動 client/BDS，不跑 release suite，不聲稱 multiline 已可用。

@@ -1,8 +1,8 @@
-## 當前 T142／W119；下一輪 T143 板面修補
+## 當前板面用戶端修補：T144
 
-T142／G123／W119 的實際來源、完整 CI、原生／保存及 LIVE 開發部署結果見 [當前 baseline](../family/BASELINE-STATUS.md)；真人 client／production acceptance 仍待驗。以下各版歷史證據不改標。
+實際來源、CI、原生／保存及 LIVE 版本統一見[當前基線](../family/BASELINE-STATUS.md)；真人驗收仍待完成。以下歷史證據不改標。
 
-本輪修正單行原生輸入框 100 字上限與板面保存容量失配：限酒館三語完整 title＋field，保留 RAW 長度、像素／行數與提交前保護，外部表單仍維持原容量。新路由 controller／焦點與真正输入仍需client核對；正式多行尚未完成。詳細修補、剩餘玩法／平台差距與冗餘判別見 [T143 說明](RELEASE-NOTES-0.6.143.md)。
+T143 真人回報：四個繼承 edit_box 的 `modifications` 被客戶端視為未知屬性，四個文字框同時出現；板面文字也偏到板外。T144 修補範圍見[發版說明](RELEASE-NOTES-0.6.144.md)。正式多行、焦點／回傳及文字實際定位仍需真人確認。`header.version: invalid string` 尚缺包名或路徑，當前42包及五個原包的 manifest 欄位均合法，不將未知來源誤標為已修。
 
 ## 保留 canonical T141／W118 的修補與證據
 

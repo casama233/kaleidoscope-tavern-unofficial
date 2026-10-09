@@ -15,13 +15,14 @@ import io
 import json
 from pathlib import Path
 from PIL import Image
+from native_input_bindings import scoped_input
 
 ROOT=Path(__file__).resolve().parents[1]
 NAMES=('depth_charge','mystery_cocktail','nether_special','ice_grape')
 BOARD_TITLE_PREFIX='§r§0§r'
 BOARD_INPUT_LIMITS={'sandwich':640,'small':700,'large':3000}
 
-def board_input_ui(root,vanilla):
+def board_input_ui(root,vanilla,reference):
     # Keep the native single-line edit control and its controller. The raw board
     # limits are unchanged; escaped newlines/backslashes can use two code units.
     # The exact title AND field must match, including the invisible owned prefix.
@@ -41,18 +42,7 @@ def board_input_ui(root,vanilla):
     controls=[]
     for kind in ('foreign',*BOARD_INPUT_LIMITS):
         expression=f'(not {owned})' if kind=='foreign' else selected[kind]
-        bindings=[{'binding_name':'#title_text','binding_name_override':'#kt_board_title'},
-                  {'binding_type':'collection','binding_collection_name':'custom_form',
-                   'binding_name':'#custom_text','binding_name_override':'#kt_board_field'},
-                  {'binding_type':'collection','binding_collection_name':'custom_form',
-                   'binding_name':vanilla[original]['$text_box_enabled_binding_name'],
-                   'binding_name_override':'#kt_board_native_enabled'}]
-        for target in ('#visible','#enabled','#focus_enabled'):
-            guard=expression if target=='#visible' else f'({expression} and $enabled and #kt_board_native_enabled)'
-            bindings.append({'binding_type':'view','source_property_name':guard,'target_property_name':target})
-        node={'visible':'#visible','enabled':'#enabled','focus_enabled':'#focus_enabled',
-              '$text_edit_box_binding_condition':'visible',
-              'modifications':[{'array_name':'bindings','operation':'insert_back','value':bindings}]}
+        node=scoped_input(reference,'settings_common.option_text_edit_control',expression,'#kt_board')
         if kind!='foreign':node['max_length']=BOARD_INPUT_LIMITS[kind]
         # Every branch inherits the ORIGINAL edit widget, bindings, placeholder,
         # collection name, textbox name and button mappings. No multiline swap.
@@ -69,7 +59,7 @@ def binding(expression):
 def generated(root=ROOT):
     reference=json.loads((root/'tools/fixtures/mojang-server-form-reference.json').read_text())
     vanilla=reference['files']['server_form.json']['nodes']
-    ui={'namespace':'server_form',**board_input_ui(root,vanilla)}
+    ui={'namespace':'server_form',**board_input_ui(root,vanilla,reference)}
     # Match only the four existing Tavern icon routes. Keep their static PNGs
     # and shared addon payload untouched for other hosts/resource-pack stacks.
     image=vanilla['dynamic_button']['controls'][0]['panel_name']['controls'][0]['image']

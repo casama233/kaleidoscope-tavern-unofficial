@@ -7,6 +7,8 @@ import tempfile
 import unittest
 
 import generate_board_probe as probe
+from native_input_bindings import resolve_control
+from check_effect_ui_contract import typed_controls
 
 
 class IsolatedProbeTests(unittest.TestCase):
@@ -69,18 +71,36 @@ class IsolatedProbeTests(unittest.TestCase):
             node = ui[f"kt_probe_{kind}@common.scrollable_multiline_text_edit_box"]
             self.assertEqual(node["max_length"], limit)
             self.assertEqual(node["$text_edit_box_binding_condition"], "visible")
-            bindings = node["modifications"][0]["value"]
-            self.assertEqual([b["target_property_name"] for b in bindings[2:]],
+            base='common.scrollable_multiline_text_edit_box'
+            native=resolve_control(fixture,base);resolved=resolve_control(fixture,base,node)
+            typed_controls(resolved);self.assertEqual(resolved['type'],'edit_box')
+            bindings = node['bindings']
+            self.assertEqual(bindings[:6],native['bindings'])
+            self.assertEqual(resolved['controls'],native['controls'])
+            self.assertEqual(resolved['button_mappings'],native['button_mappings'])
+            self.assertEqual([b["target_property_name"] for b in bindings[-3:]],
                              ["#visible", "#enabled", "#focus_enabled"])
-            for binding in bindings[2:]:
+            for binding in bindings[-3:]:
                 self.assertIn(probe.predicate(kind), binding["source_property_name"])
+                self.assertNotIn(binding['target_property_name'],binding['source_property_name'])
+            self.assertEqual(node['property_bag'],{'#kt_probe_native_enabled':True,'#kt_probe_native_focus':True,'#kt_probe_native_visible':True})
+            self.assertEqual([node[key] for key in ('visible','enabled','focus_enabled')],[False,native['enabled'],native['focus_enabled']])
+            self.assertNotIn('modifications',node)
         foreign = ui["kt_probe_foreign@settings_common.option_text_edit_control"]
+        native=resolve_control(fixture,'settings_common.option_text_edit_control')
+        resolved=resolve_control(fixture,'settings_common.option_text_edit_control',foreign)
+        typed_controls(resolved);self.assertEqual(foreign['bindings'][:6],native['bindings'])
+        self.assertEqual(foreign['property_bag']['#kt_probe_native_enabled'],'$enabled')
         self.assertNotIn("max_length", foreign)
         self.assertNotIn("enabled_newline", foreign)
-        guard = foreign["modifications"][0]["value"][2]["source_property_name"]
-        self.assertTrue(guard.startswith("(not "))
+        guard = foreign['bindings'][-3]['source_property_name']
+        self.assertTrue(guard.startswith("((not "))
         for kind in probe.KINDS:
             self.assertIn(probe.predicate(kind), guard)
+        # Reproduce the reported new-definition failure through the same base.
+        invalid={'modifications':[{'array_name':'bindings','operation':'insert_back','value':foreign['bindings'][6:]}]}
+        with self.assertRaisesRegex(ValueError,'Unapplied modifications'):
+            typed_controls(resolve_control(fixture,'common.scrollable_multiline_text_edit_box',invalid))
 
 
 if __name__ == "__main__":

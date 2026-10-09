@@ -1,16 +1,17 @@
-## 當前配套：T139／W116／G122
+## 當前配套：T140／W117／G122
 
-整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../docs/RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
+以已合併 T139／W116 為基礎補齊載入光效與玩家 initialSpawn 順序，並恢復 native report 的精確當時輸入綁定；全部既有修補與指南保留。Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及本輪 CI／原生結果入口見 [本版說明](../docs/RELEASE-NOTES-0.6.140.md)；舊原生證據及下方歷史來源保持原範圍，不代表目前 LIVE 狀態。
 
 ## 先前固定 T138／W115／G120
 
 整合 native countdown 與已驗證的 reload acknowledgement；來源以新 release notes 與 data/parallel-source-review-20261009.json 為準。舊候選歷史及 scoped native 結果保留；G120 不回退。新候選完整 CI、native 與 client／私人 LIVE 各自驗證。
 
-# 家族現行來源基線
+# 保留的家族來源基線記錄
 
-查核日期：2026-10-09。當前修復入口為 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)，
-版本／內容以各 canonical baseline 及 family lock 為準；PR、CI、原生與 LIVE
-各自依實際結果，不由版號或資源存在推定完成。
+歷史查核日期：2026-10-09。以下保留 [T137／W114](../docs/RELEASE-NOTES-0.6.137.md)
+及更早候選當時的來源與驗收範圍，不是當前配套或 LIVE 狀態。
+當前版本／內容以頁首、各 canonical baseline 及 family lock 為準；PR、CI、
+原生與 LIVE 各自依實際結果，不由版號或資源存在推定完成。
 
 ## 本輪指南候選：T136／W113／G121
 

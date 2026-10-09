@@ -1,5 +1,9 @@
 # Maintained changes
 
+## 0.6.140
+
+修正有效實體外部等值刷新被誤認為載入確認，以及 initialSpawn 交錯遺失或重發光效票券；補回 native recorder 的當時來源、凍結內容與完整 overlay 綁定。保留 canonical T139 全部玩法、視覺與指南，配對 W117／G122。 見[本版說明](docs/RELEASE-NOTES-0.6.140.md)。
+
 ## 0.6.139
 
 整合已發布的三語指南／共享 Cookery 入口與固定 T138 的光效時計、重啟、原料保存、倒轉及視覺沉浸修補；配套 W116／G122。歷史相同版號的不同 trial 原值保留，使用新身份。 見 [本版說明](docs/RELEASE-NOTES-0.6.139.md)。

@@ -1,10 +1,10 @@
-## 當前 T139／W116
+## 當前 T140／W117
 
-已保留發布主線的三語指南與七入口，並合入固定原料／光效／Mob／確認重生錨修補。新配套完整 native first 20／restart 21 案例及嚴格來源 recorder 已通過；G122 完整家族、原生 Player、畫面音效與私人 LIVE 仍未驗收。詳見 [本版說明](RELEASE-NOTES-0.6.139.md)。以下保留各功能的原始來源與範圍。
+完整承接 canonical T139／W116，補上 invalid-before／entityLoad／after 的精確光效來源約束、initialSpawn proof 保存與完整 native 輸入綁定。T139 的原生成功保留原身份；本輪正式 CI／首次／重啟以固定 PR Actions 為準，G122 完整家族、原生 Player、畫面音效與私人 LIVE 仍未驗收。詳見 [本版說明](RELEASE-NOTES-0.6.140.md)。以下保留各功能的原始來源與範圍。
 
 # Java / Bedrock parity matrix
 
-## Current repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
+## Retained repair candidate: Tavern 0.6.138 / World Liquor 0.1.115
 
 [T138](RELEASE-NOTES-0.6.138.md) combines observed native countdown persistence with the exact reload acknowledgement repair, retaining all source gameplay and visual work. The parallel source review preserves conflicting historical candidates without rewriting their identities. The frozen T138/W115 pair passed its own complete zero-player native first/save/restart and source-bound recorder. Final canonical CI is separate; isolated multiline tooling has no human-client acceptance.
 
@@ -13,9 +13,11 @@
 [T137](RELEASE-NOTES-0.6.137.md) retains the Mob and confirmed-anchor repairs and corrects the native reload EffectAdd notification that revoked a valid saved aura lease. Only a genuine entityLoad, exact same-tick snapshot can consume one notification witness; foreign refresh and existing saved-duration checks remain. The frozen T137/W114 pair passed a new zero-player native first/normal-save/restart run and the complete source-bound recorder, including one reload acknowledgement followed by one foreign handoff. Final canonical CI and actual Player/client/private LIVE acceptance remain separate.
 
 
-## Retained T136 / W113 scope (native restart failed)
+## Retained alternate T136 / W113 scope (native restart failed)
 
-[T136 scope](RELEASE-NOTES-0.6.136.md) preserves all T135 repairs and adds
+[Alternate T136 scope at preserved trial commit d9e7bcc6](https://github.com/casama233/kaleidoscope-tavern-unofficial/blob/d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813/docs/RELEASE-NOTES-0.6.136.md)
+is distinct from the [published T136 guide revision](RELEASE-NOTES-0.6.136.md).
+That historical repair candidate preserves all T135 repairs and adds
 query-first alive Mob selection for Upside Down, including fish without the
 Native mob family while excluding Player/ArmorStand. Target membership is
 fixed before nameTag callbacks. Java name visibility and rendered inversion

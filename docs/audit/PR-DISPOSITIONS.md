@@ -1,6 +1,8 @@
-## 當前整合：T139／W116
+## 當前修補：T140／W117
 
-整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
+Canonical [T139 PR304](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/304) 與 [W116 PR93](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/93) 已合併，完整承接先前功能與公開指南。T140／W117 只補新重現的 aura ownership／initialSpawn 邊界及 native recorder 綁定；G122 保持 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`。新固定 PR 的完整 CI／原生結果另行驗證，見 [本版說明](../RELEASE-NOTES-0.6.140.md)。
+
+較早未發布的 T137 來源 `d6bfb01451cfb016630b756dca15cc4c0bdda830` 與 [W115 PR94](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/94)（`ed8ab654d8669c76082d81d7e99e2893150528ef`）已被 canonical T139／W116 的完整合流取代，保留來源與原版號聲明，不能合回造成指南／錨點／版本退步。下方是各先前來源當時的處置記錄；當前 GitHub 狀態、LIVE 與真人驗收不能由舊段落推定。
 
 ## 先前固定 T138／W115 整合
 

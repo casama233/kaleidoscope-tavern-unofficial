@@ -1,16 +1,13 @@
 {
-  "version": "0.6.139",
-  "tag": "v0.6.139-beta.1",
-  "title": "森羅物語：酒館 0.6.139 測試版｜指南與原生修復整合",
+  "version": "0.6.140",
+  "tag": "v0.6.140-beta.1",
+  "title": "森羅物語：酒館 0.6.140 測試版｜載入光效與登入順序修復",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.139.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.140.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": true,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "native_evidence_scope": "The frozen T139/W116 pair passed a fresh complete zero-player native first/save/restart with strict exact-source and generated peer-input binding. First 20 and restart 21 required cases passed, including saved aura acknowledgement, native-clock expiry, foreign handoff, machine counts/metadata, stackable ingredients and Mob selection. Canonical CI is separate. Actual Player, rendered client, G122 full private-family migration and LIVE remain pending.",
-  "expected_archive_sha256": "232173376267e2ddfa044094e9bb00dcaf5597bc7de79f943d726b60e558e3d1",
-  "reviewed_runtime_source": "3df197150c00ef0818d2f393e365ef8a4b93d72c"
+  "native_evidence_scope": "The completed T140/W117 candidate requires its own canonical native-persistence CI, including all 20 first and 21 restart cases and exact run-time source/overlay binding. Prior T139/W116 results retain their original identities. The final PR Actions run is authoritative for this candidate; no actual Player, rendered client, G122 full private-family, saved-world migration or LIVE acceptance is inferred."
 }

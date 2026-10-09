@@ -1,4 +1,6 @@
-## Current maintained baseline: 0.6.136
+## Current maintained baseline: 0.6.139
+
+T139/W116 retains the published three-language guide, seven sections and shared Cookery entrance while integrating the fixed T138/W115 aura, ingredient persistence, Mob selection and confirmed-anchor repairs with G122. See the [release notes](docs/RELEASE-NOTES-0.6.139.md) for exact source composition and verification boundaries.
 
 # Kaleidoscope Tavern (Unofficial)
 
@@ -6,9 +8,9 @@ A Bedrock port of [Kaleidoscope Tavern](https://github.com/KaleidoscopeMods/Kale
 
 ## Current source and requirements
 
-- [T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) rewrites all three languages, keeps complete preparation details on demand and shares the same view through the optional Cookery entrance. Pending PR302 gameplay is preserved separately and is not included.
+- [T136 guide revision](docs/RELEASE-NOTES-0.6.136.md) rewrites all three languages, keeps complete preparation details on demand and shares the same view through the optional Cookery entrance. T139 also integrates the reviewed T138 native clock/reload, machine ingredient, Mob selection and immersion repairs; its source composition is recorded separately.
 - [T132 repairs](docs/RELEASE-NOTES-0.6.132.md) share instant splash dispatch and source immunity, repair shaker input echoes and storage rollback, preserve Vision's living recipients and query order, and add scoped guide flipbooks, board escaping and shorter HUD expiry. [Current PR disposition](docs/audit/PR-DISPOSITIONS.md) is the single backlog index; native/client/live acceptance remains separate.
-- The current public-family candidate is Tavern **0.6.136**, World Liquor **0.1.113** and Grilling **2.8.121**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
+- The current public-family candidate is Tavern **0.6.139**, World Liquor **0.1.116** and Grilling **2.8.122**. The [family lock](family/upstream.lock.json) and immutable CI peer commits define the candidate; the index preserves remaining workstreams and earlier evidence.
 - [baseline.json](baseline.json) owns package identity and exact dependencies; [CHANGELOG.md](CHANGELOG.md) records changes.
 - Bedrock 1.26.50 or newer; current load target BDS 1.26.52.3.
 - Enable both Tavern BP and RP. Cookery is optional; the reviewed family target is author Cookery1.6.0. World Liquor uses its exact paired Tavern version.
@@ -32,7 +34,7 @@ Package/source integrity and BDS loading do not certify client visuals, sound or
 
 ## Known limits
 
-Exact player-camera roll is unimplemented; the current optional yaw adapter changes aim. Arbitrary signature colors, full internal ingredient ItemStacks, wall outlines, the native board editor and dropped-shaker geometry retain explicit differences. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
+Pure additive first-person camera roll remains unimplemented; the yaw adapter is explicit opt-in. Native machine counts and supported stackable ingredient metadata, source RGB texels, board outlines and effect appearance ownership have reviewed repairs. Arbitrary three decorated nonstackable shaker inputs, wall outlines, the multiline board editor and dropped-shaker display contexts remain incomplete. Native reach, mob-target clearing, step-height, XP pickup and some instant-effect delivery semantics remain incomplete. All new hand, item-render, material and input paths need paired client review. See the release notes and matrix for source and engine boundaries.
 
 ## Licensing and history
 

@@ -1,4 +1,17 @@
+## 當前整合：T139／W116
+
+整合已發布主線指南與固定 T138／W115 的功能修補；已發布 T136／W113 歷史原值、未發布 trial 的原始 commits／witness／native 結果皆保留。當前 Grilling 固定 G122 `8002da0086544cd18c9854e7fe79e8ccb2f9f982`，Cookery helper 0.2.9 整組尚待完整家族驗證。精確配套及新候選驗證見 [本版說明](../RELEASE-NOTES-0.6.139.md)；下方保留各先前來源當時的範圍，不代表目前 LIVE 狀態。
+
+## 先前固定 T138／W115 整合
+
+以 af25ecf9／787e0774 為前身，審查並行 71e5c372／f73f6e71，整合 native-clock 與 reload 修復，保留所有 Mob／anchor／素材變更。舊衝突版本歷史不改寫；新 candidate PR/CI 與發布另行確認，不宣稱舊 PR 已合併。
+
 # 森羅家族：當前修補與 PR 處置
+
+## 當前 T137／W114：修復原生重啟光效
+
+[本版說明](../RELEASE-NOTES-0.6.137.md) 保留 T136/W113 exact source 與首次通過／重啟失敗證據。新增同 entityLoad tick 的一次原生 EffectAdd 載入見證；PR302 後續完整 observer recorder 一起承接。最終 CI／發布依實際結果，不改寫舊失敗。
+
 
 更新：2026-10-09。本頁是本輪家族修補與舊 PR 承接的當前入口，版本及內容身分仍由各庫 baseline 和 [family lock](../../family/upstream.lock.json) 決定。歷史 PR 的來源保留為固定證據，不作新包輸入；真正 GitHub 狀態以各 PR 的合併／收束紀錄為準。
 
@@ -20,6 +33,48 @@ LIVE 仍為 **T132／G119／W110**。新候選須完成確切來源 PR／CI 與�
 static、BDS、停服存檔演練、准入及部署讀回，才更新 LIVE。
 `client=false`、`production_ready=false`、`pending_client_acceptance` 繼續保持；
 兩入口共用顯示與文字檢查不能當作真人排版／操作驗收。
+## 當前 T136／W113：接續 Mob／重生錨修復
+
+[本版範圍](../RELEASE-NOTES-0.6.136.md) 從 PR302 的 T135 reviewed
+`6dc43f3bd589a370782f7005c9d672e141de0be3` 與 PR91 的 W112 reviewed
+`ed78beed3204a8a9e3c3a83d48350fb0e84ba516` 接續，保留原提交與 freeze。
+新增倒轉 Mob snapshot、確認的錨點 metadata；原生 observer 改合法原料、
+封閉掉落場景及嚴格重啟證據。T135 的 NOT_SHAKER_INGREDIENT 失敗保留。
+新 PR、CI、發布與 LIVE 分開依確切來源回報；不把既有草稿視為已交付。
+
+
+## 保留 T135／W112：承接真實 CI 修復
+
+[T135 說明](../RELEASE-NOTES-0.6.135.md) 是當前差異與驗收入口，完整承接
+下方 T134 的原料、交易、視覺、沉浸修復及原作來源，不複製或改寫舊歷史。
+
+| 候選／證據 | 當前處置 |
+| --- | --- |
+| [T134 PR302](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/302)／[CI run 37869770416](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37869770416) | 失敗保留。25 份缺失 PBR companions 與原生 bare Adventure ID 是 runtime 缺口，使用新 T135 身分修復；Ardent fixture 缺少 `getEffect` 則只修替身，不放寬既有斷言。T134 notes、witness、freeze 與 history 不覆寫。 |
+| W111 CI | 已成功，保留其原配對及來源範圍；不視為 T135 的驗收結果。 |
+| T135／W112／G119 | T135 承接全部修復，W112 精確依賴 T135，G119 不變。新兩庫 PR、確切提交及最終 CI 結果待補；尚不宣稱已合併、發布或部署。 |
+
+本版 `check_visuals.py` 窄檢查通過，真人畫面、原生配對保存重啟與私人
+完整家族／LIVE 仍需各自證據。下方未完成能力保持追蹤，既有持續部署
+授權不變。
+
+## 保留 T134／W111：並行修復整合範圍
+
+本批來源及驗收範圍集中在 [T134 說明](../RELEASE-NOTES-0.6.134.md)。原料
+保存、機器交易、狀態粒子、草叢退出、微醺 opt-in、板面描邊、機器動畫
+與任意 RGB 明暗均進入同一候選；最終兩庫 PR／CI／archive 另補確切
+身分，不預先寫成已合併、已通過或已部署。
+
+| 承接來源 | 本輪處置 |
+| --- | --- |
+| [PR297／T132](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/297)，最終 reviewed source `727fd8853c44247ac8e2cf40faf70122b04e653b` | 保留最終修復與 XP orb／health_helper 原生觀察區分，不恢復舊的 health 假設。 |
+| [PR298／T133](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/298)，reviewed head `625ff769f4c656ff224314bba38d26a1ef5dacc0` | 保留有限 XYZ 逐軸比較、其餘身份／槽位守衛和回滾。整合時該 PR 仍 open／draft、尚未合入 main；原 T133 文案、notes 與歷史不改寫。 |
+| [World Liquor PR90／W110](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/90)，已合併來源 `387dc58ff342118d9817a8e02e9a35ffde496c62` | W111 保留作者新版 Dassai 效果、四款杯子模型／atlas、兩張物品圖及其原有歷史，再精確配對 T134。G119 內容不變。 |
+
+並行來源已佔用 T133／W110，本輪採 T134／W111，不重用版本或舊 archive。
+舊 witness 只追加後繼層。純 roll、穿牆輪廓、全身隱藏／清除仇恨、任意
+三份非堆疊原料、原生編輯器、掉落顯示上下文及 Luck 原生行為仍另追蹤。
+真人與私人完整家族／LIVE 驗收未完成；既有持續部署授權保持有效。
 
 ## T132／W109：多代理同步修復
 

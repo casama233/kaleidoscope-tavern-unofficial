@@ -2,13 +2,14 @@
 """Keep optional pinned source validation intact in the aggregate release CLI."""
 from pathlib import Path
 import copy
+import hashlib
 import json
 import subprocess
 import sys
 import tempfile
 import unittest
 
-from check_release import ROOT, REVIEWED_ITEM_GEOMETRIES, check_combined_geometry_budget, parse_args, source_check_commands
+from check_release import ROOT, REVIEWED_ITEM_GEOMETRIES, REVIEWED_VISUAL_GEOMETRIES, REVIEWED_VISUAL_SOURCE, REVIEWED_VISUAL_RELEASE, check_combined_geometry_budget, parse_args, source_check_commands
 
 
 class ReleaseSourceArguments(unittest.TestCase):
@@ -55,20 +56,29 @@ class GeometryBudgetTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name)
         ledger=json.loads((ROOT/'data/baseline-reconciliation.json').read_text())
-        for name in REVIEWED_ITEM_GEOMETRIES.values():
+        allocation_files=set(REVIEWED_ITEM_GEOMETRIES.values())|set(REVIEWED_VISUAL_GEOMETRIES.values())
+        for name in allocation_files:
             path=self.root/name;path.parent.mkdir(parents=True,exist_ok=True)
             path.write_bytes((ROOT/name).read_bytes())
+        witnesses={name:ledger['files'][name] for name in REVIEWED_ITEM_GEOMETRIES.values()}
+        witnesses.update({name:{'before':None,'after':hashlib.sha256((ROOT/name).read_bytes()).hexdigest(),
+                               'release':REVIEWED_VISUAL_RELEASE,'reviewedSourceCommit':REVIEWED_VISUAL_SOURCE} for name in REVIEWED_VISUAL_GEOMETRIES.values()})
         for name,value in {
-            'data/baseline-reconciliation.json':{'files':{name:ledger['files'][name] for name in REVIEWED_ITEM_GEOMETRIES.values()}},
+            'data/baseline-reconciliation.json':{'files':witnesses},
             'art/interfaces/animated-item-java-reference.json':json.loads((ROOT/'art/interfaces/animated-item-java-reference.json').read_text()),
         }.items():
             path=self.root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(value))
         self.inventory={f'geometry.original_{i}':[self.root/f'original_{i}.json'] for i in range(1023)}
         self.inventory.update({identifier:[self.root/name] for identifier,name in REVIEWED_ITEM_GEOMETRIES.items()})
+        self.inventory.update({identifier:[self.root/name] for identifier,name in REVIEWED_VISUAL_GEOMETRIES.items()})
 
-    def test_exact_four_allocations_preserve_the_original_base_ceiling(self):
+    def test_exact_source_allocations_preserve_the_original_base_ceiling(self):
         result=check_combined_geometry_budget(self.inventory,self.root)
-        self.assertEqual((result['geometries'],result['base_geometries']),(1027,1023))
+        self.assertEqual((result['geometries'],result['base_geometries']),(1343,1023))
+        self.assertEqual(result['reviewed_item_geometries'],4)
+        self.assertEqual(result['reviewed_visual_geometries'],316)
+        self.assertEqual(result['visual_allocations']['runtime/RP/models/entity/board_glyph_outline.geo.json']['max_allocated_vertices'],384)
+        self.assertEqual(result['visual_allocations']['runtime/RP/models/entity/signature_rgb_texels.geo.json']['max_allocated_vertices'],672)
         self.inventory['geometry.unreviewed_fifth']=[self.root/'fifth.geo.json']
         with self.assertRaisesRegex(AssertionError,'base geometry budget exceeded'):
             check_combined_geometry_budget(self.inventory,self.root)
@@ -76,7 +86,7 @@ class GeometryBudgetTests(unittest.TestCase):
     def test_same_total_cannot_replace_a_reviewed_id_with_an_arbitrary_model(self):
         self.inventory.pop(next(iter(REVIEWED_ITEM_GEOMETRIES)))
         self.inventory['geometry.unreviewed_replacement']=[self.root/'replacement.geo.json']
-        self.assertEqual(len(self.inventory),1027)
+        self.assertEqual(len(self.inventory),1343)
         with self.assertRaisesRegex(AssertionError,'one exact Tavern owner/path'):
             check_combined_geometry_budget(self.inventory,self.root)
 
@@ -101,6 +111,29 @@ class GeometryBudgetTests(unittest.TestCase):
         next(iter(ledger['files'].values()))['reviewedSourceCommit']='0'*40
         path.write_text(json.dumps(ledger))
         with self.assertRaisesRegex(AssertionError,'allocation source changed'):
+            check_combined_geometry_budget(self.inventory,self.root)
+
+    def test_visual_allocation_rejects_missing_duplicate_or_moved_mesh(self):
+        identifier=next(iter(REVIEWED_VISUAL_GEOMETRIES));original=self.inventory[identifier]
+        for paths in [[],original+[self.root/'peer/duplicate.geo.json'],[self.root/'moved.geo.json']]:
+            self.inventory[identifier]=paths
+            with self.assertRaisesRegex(AssertionError,'one exact Tavern owner/path'):
+                check_combined_geometry_budget(self.inventory,self.root)
+
+    def test_visual_allocation_rejects_unreviewed_source_and_extra_cubes(self):
+        name=next(iter(REVIEWED_VISUAL_GEOMETRIES.values()));path=self.root/name
+        ledger_path=self.root/'data/baseline-reconciliation.json';ledger=json.loads(ledger_path.read_text())
+        ledger['files'][name]['reviewedSourceCommit']='0'*40;ledger_path.write_text(json.dumps(ledger))
+        with self.assertRaisesRegex(AssertionError,'Visual geometry allocation source changed'):
+            check_combined_geometry_budget(self.inventory,self.root)
+        ledger['files'][name]['reviewedSourceCommit']=REVIEWED_VISUAL_SOURCE;ledger_path.write_text(json.dumps(ledger))
+        geometry=json.loads(path.read_text());bones=geometry['minecraft:geometry'][0]['bones'];cube=next(b['cubes'][0] for b in bones if b.get('cubes'))
+        bones[-1].setdefault('cubes',[]).append(copy.deepcopy(cube));path.write_text(json.dumps(geometry))
+        with self.assertRaisesRegex(AssertionError,'Reviewed visual geometry changed'):
+            check_combined_geometry_budget(self.inventory,self.root)
+        # Even an updated digest cannot enlarge the source-reviewed allocation.
+        ledger['files'][name]['after']=hashlib.sha256(path.read_bytes()).hexdigest();ledger_path.write_text(json.dumps(ledger))
+        with self.assertRaisesRegex(AssertionError,'Visual allocation cube budget exceeded'):
             check_combined_geometry_budget(self.inventory,self.root)
 
 

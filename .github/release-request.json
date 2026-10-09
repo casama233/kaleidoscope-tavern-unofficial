@@ -1,16 +1,15 @@
 {
-  "version": "0.6.136",
-  "tag": "v0.6.136-beta.1",
-  "title": "森羅物語：酒館 0.6.136 測試版｜三語指南全面重修",
+  "version": "0.6.139",
+  "tag": "v0.6.139-beta.1",
+  "title": "森羅物語：酒館 0.6.139 測試版｜指南與原生修復整合",
   "prerelease": true,
-  "validation_evidence": "docs/RELEASE-NOTES-0.6.136.md",
+  "validation_evidence": "docs/RELEASE-NOTES-0.6.139.md",
   "client_acceptance": "pending",
   "full_client_acceptance": "pending",
-  "new_bds_test": false,
+  "new_bds_test": true,
   "saved_world_migration": "pending",
   "production_ready": false,
   "live_deployment": false,
-  "expected_archive_sha256": "2a1561f4aa0345e535c6d25e8199e7332f50411c1deb4f5118f625a7e568a292",
-  "reviewed_runtime_source": "496ce702161fb48ab6f67ea6645ad1e4d41b2a12",
-  "native_evidence_scope": "Guide-only revision on the deployed T132 gameplay source, paired with W113 and registered G121 Cookery bridge. Focused projection/SDK controller checks pass; exact CI and full-family native/saved-world/deployment evidence remain required. No Player simulation, rendered client acceptance or failed PR302 lease-work acceptance is asserted."
+  "native_evidence_scope": "The frozen T139/W116 pair passed a fresh complete zero-player native first/save/restart with strict exact-source and generated peer-input binding. First 20 and restart 21 required cases passed, including saved aura acknowledgement, native-clock expiry, foreign handoff, machine counts/metadata, stackable ingredients and Mob selection. Canonical CI is separate. Actual Player, rendered client, G122 full private-family migration and LIVE remain pending.",
+  "expected_archive_sha256": "232173376267e2ddfa044094e9bb00dcaf5597bc7de79f943d726b60e558e3d1"
 }

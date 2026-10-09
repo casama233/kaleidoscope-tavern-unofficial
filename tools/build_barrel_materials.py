@@ -7,6 +7,7 @@ Textures remain owned by the vanilla/family resource packs; no art is copied.
 import argparse
 import json
 from pathlib import Path
+from machine_ingredient_animation import bindings as animation_bindings, controller as animate_ingredient, outputs as animation_outputs
 
 ROOT = Path(__file__).resolve().parents[1]
 NS = 'kaleidoscope_tavern'
@@ -29,13 +30,16 @@ def outputs():
         rp = f'runtime/RP/entity/runtime_barrel_ingredients_{slot}.entity.json'
         data = json.loads((ROOT / rp).read_text())
         data['minecraft:client_entity']['description']['textures'] = {f'kind_{i}': row['texture'] for i, row in enumerate(entries, 1)}
+        data['minecraft:client_entity']['description']['textures'].update(animation_bindings())
         result[rp] = json.dumps(data, indent=2) + '\n'
     path = 'runtime/RP/render_controllers/runtime_barrel_ingredients.render_controllers.json'
     data = json.loads((ROOT / path).read_text())
     rc = data['render_controllers']['controller.render.kt_runtime.barrel_ingredients']
     rc['geometry'] = '(' + ' || '.join(f"q.property('{NS}:kind') == {i}" for i, row in enumerate(entries, 1) if row['model'] == 'cube') + ') ? Geometry.cube : Geometry.card'
     rc['arrays']['textures']['Array.kind'] = [f'Texture.kind_{i}' for i in range(1, len(entries) + 1)]
+    animate_ingredient(rc, 'kind', kinds[NS + ':ice_grape'])
     result[path] = json.dumps(data, indent=2) + '\n'
+    result.update(animation_outputs(ROOT))
     return result
 
 if __name__ == '__main__':
@@ -44,8 +48,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
     for name, text in outputs().items():
         path = ROOT / name
+        content = text if isinstance(text, bytes) else text.encode()
         if args.check:
-            assert path.read_text() == text, 'Stale barrel material output: ' + name
+            assert path.read_bytes() == content, 'Stale barrel material output: ' + name
         else:
-            path.write_text(text)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
     print('Barrel material resources ' + ('verified' if args.check else 'generated'))

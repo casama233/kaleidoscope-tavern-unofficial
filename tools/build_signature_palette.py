@@ -9,6 +9,7 @@ import itertools
 import json
 from pathlib import Path
 from PIL import Image, ImageChops
+from build_signature_rgb_geometry import FRAME, write_outputs as write_rgb_geometry
 
 ROOT = Path(__file__).resolve().parents[1]
 RP = ROOT / 'runtime/RP'
@@ -74,14 +75,15 @@ for name in ('runtime_signature_cup', 'rig_signature_color'):
 
 p = RP / 'render_controllers/signature_tint.json'
 j = read(p)
+j['render_controllers']['controller.render.kt_assets_a17.signature_glass']['textures'] = [f'Array.frames[{FRAME}]']
 c = j['render_controllers']['controller.render.kt_assets_a17.signature_tint']
 c.pop('color', None)
 c['arrays'] = {'materials': {'Array.liquid_materials': ['Material.liquid', 'Material.liquid_rgb']},
                'textures': {'Array.source_frames': [f'Texture.frame_{i}' for i in range(6)]}}
 c['materials'] = [{'*': "Array.liquid_materials[query.property('kt_art:palette') < 0]"}]
 fallback = "query.property('kt_art:palette') < 0"
-c['textures'] = [f'{fallback} ? Array.source_frames[math.mod(math.floor(q.life_time * 10), 6)] : Texture.mixtures']
-index = "(math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6))"
+c['textures'] = [f'{fallback} ? Array.source_frames[{FRAME}] : Texture.mixtures']
+index = f"(math.max(0, query.property('kt_art:palette')) * 6 + {FRAME})"
 # The built-in tint route uses full source-frame textures and identity UVs. It
 # does not depend on adding USE_UV_ANIM to a custom masked material. Exact Java
 # mixtures keep the same atlas material and sampling coordinates as before.
@@ -89,7 +91,8 @@ c['uv_anim'] = {'scale': [f'{fallback} ? 1 : {32 / atlas.width}', f'{fallback} ?
     f'{fallback} ? 0 : (math.mod({index}, {cols}) * {tile} + 1) / {atlas.width}',
     f'{fallback} ? 0 : (math.floor({index} / {cols}) * {tile} + 1) / {atlas.height}']}
 # The tested client binds query overlay, but not controller color. Keep it off
-# for the exact baked domain; external arbitrary RGB is explicitly flat-shaded.
+# for the exact baked domain. Both active client entities gate this legacy
+# fallback off; arbitrary RGB uses the source-texel controllers generated below.
 c['overlay_color'] = {channel: f"query.property('kt_art:palette') < 0 ? query.property('kt_art:{name}') / 255 : 1"
                       for channel, name in [('r', 'red'), ('g', 'green'), ('b', 'blue')]}
 c['overlay_color']['a'] = f'{fallback} ? 1 : 0'
@@ -108,3 +111,6 @@ for event in j['minecraft:entity']['events'].values():
     props['kt_art:palette'] = palette.index(rgb) if rgb in palette else -1
 write(p, j)
 print(f'Generated {len(palette)} exact Java RGB mixtures, six frames each.')
+# Complete the active out-of-atlas route with source-texel surfaces. Kept here
+# so a source palette rebuild cannot silently restore the old flat fallback.
+write_rgb_geometry(ROOT)

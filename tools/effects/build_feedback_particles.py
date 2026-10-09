@@ -94,6 +94,12 @@ def build():
  init=super_velocity({'x':'0.5-math.random(0,1)','y':PACK['y'],'z':'0.5-math.random(0,1)'})+'variable.kt_dy=variable.kt_dy*(0.2);'
  init+='variable.kt_slow=((variable.kt_vx ?? 0)==0 && (variable.kt_vz ?? 0)==0)?0.1:1;variable.kt_dx=variable.kt_dx*(variable.kt_slow);variable.kt_dz=variable.kt_dz*(variable.kt_slow);'
  save('fx_spell',motion(p,init,gravity=-.004,friction=.96))
+ # LivingEntity's ENTITY_EFFECT uses the same SpellParticle motion, with RGB
+ # both as provider color and constructor input. Ambient starts at alpha .15
+ # and the original tick() then approaches one by a factor of .05 per tick.
+ aura=copy.deepcopy(p);e=aura['particle_effect'];e['description']['identifier']='kaleidoscope_tavern:fx_status_aura'
+ e['components']['minecraft:particle_appearance_tinting']['color']=[f'variable.kt_{k} ?? 1' for k in ('red','green','blue')]+['(variable.kt_ambient ?? 0)?1-0.85*math.pow(0.95,variable.kt_age):1']
+ save('fx_status_aura',aura)
  p=particle('cloud','cloud','math.max(1,math.floor(math.floor(8/(math.random(0,1)*0.8+0.3))*2.5))',BASESIZE+'*1.875',['variable.kt_gray']*3+[1])
  c=p['particle_effect']['components'];c['minecraft:particle_appearance_billboard']['size']=['variable.kt_size*math.clamp(variable.particle_age*20/variable.kt_life*32,0,1)']*2
  init=super_velocity()+''.join(f'variable.kt_d{a}=variable.kt_d{a}*0.1+({PACK[a]});' for a in 'xyz')

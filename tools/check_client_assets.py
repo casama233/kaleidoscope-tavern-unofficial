@@ -28,6 +28,12 @@ for name in ['painting_wall','painting_ceiling']:
 for g in read(RT/'RP/models/entity/board_glyph_line.geo.json')['minecraft:geometry']:
  for b in g['bones']:
   for c in b.get('cubes',[]):assert c['origin'][0]==0,'glyph origin must equal layout pen origin'
+from build_board_rendering import check as check_board_rendering
+check_board_rendering(ROOT)
+from check_machine_ingredient_animation import check as check_machine_animation
+check_machine_animation(ROOT)
+from check_texture_animation_clock import check as check_texture_clock
+check_texture_clock(ROOT)
 for p in (RT/'RP/textures').rglob('*.texture_set.json'):
  t=read(p)['minecraft:texture_set']
  for key in ['color','metalness_emissive_roughness']:

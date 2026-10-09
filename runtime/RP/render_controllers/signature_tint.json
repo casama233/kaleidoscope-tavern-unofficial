@@ -9,7 +9,7 @@
         }
       ],
       "textures": [
-        "Array.frames[math.mod(math.floor(q.life_time * 10), 6)]"
+        "Array.frames[math.mod(math.floor(q.time_stamp / 2), 6)]"
       ],
       "arrays": {
         "textures": {
@@ -32,7 +32,7 @@
         }
       ],
       "textures": [
-        "query.property('kt_art:palette') < 0 ? Array.source_frames[math.mod(math.floor(q.life_time * 10), 6)] : Texture.mixtures"
+        "query.property('kt_art:palette') < 0 ? Array.source_frames[math.mod(math.floor(q.time_stamp / 2), 6)] : Texture.mixtures"
       ],
       "uv_anim": {
         "scale": [
@@ -40,8 +40,8 @@
           "query.property('kt_art:palette') < 0 ? 1 : 0.022408963585434174"
         ],
         "offset": [
-          "query.property('kt_art:palette') < 0 ? 0 : (math.mod((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)), 48) * 34 + 1) / 1632",
-          "query.property('kt_art:palette') < 0 ? 0 : (math.floor((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.life_time * 10), 6)) / 48) * 34 + 1) / 1428"
+          "query.property('kt_art:palette') < 0 ? 0 : (math.mod((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.time_stamp / 2), 6)), 48) * 34 + 1) / 1632",
+          "query.property('kt_art:palette') < 0 ? 0 : (math.floor((math.max(0, query.property('kt_art:palette')) * 6 + math.mod(math.floor(q.time_stamp / 2), 6)) / 48) * 34 + 1) / 1428"
         ]
       },
       "arrays": {

@@ -89,13 +89,17 @@ async function effectRecipients(d,phase){
   out('case',{mode:'native-splash-cancelled-hurt',phase,health:before,apiAcknowledgements:result.count,status:result.result.status,actualHurtEvents:0,acknowledgementIsDeliveredDamage:false});target.remove();cancelledId=undefined;
 
   owner.remove();
-  const viewer=spawn(sourceType),boat=spawn('minecraft:boat',{x:26,y:300,z:24}),cow=spawn('minecraft:cow',{x:28,y:300,z:24}),stand=spawn('minecraft:armor_stand',{x:30,y:300,z:24}),cod=spawn('minecraft:cod',{x:26,y:300,z:25});
-  check(health(boat)?.currentValue>0,'boat is not the required native health-bearing nonliving witness');
+  // Mojang/bedrock-samples@46ba6ea985fb5a92d79a9419198f10dda14c199d
+  // defines xp_orb as summonable, health=5 and family=inanimate. Verify the
+  // actual engine still supplies the health-bearing nonliving counterexample.
+  const viewer=spawn(sourceType),orb=spawn('minecraft:xp_orb',{x:26,y:300,z:24}),cow=spawn('minecraft:cow',{x:28,y:300,z:24}),stand=spawn('minecraft:armor_stand',{x:30,y:300,z:24}),cod=spawn('minecraft:cod',{x:26,y:300,z:25});
+  check(health(orb)?.currentValue>0&&orb.getComponent('minecraft:type_family')?.hasTypeFamily('inanimate')===true&&
+   !orb.getComponent('minecraft:type_family')?.hasTypeFamily('mob'),'xp orb is not the required native health-bearing nonliving witness');
   check(health(cod)?.currentValue>0&&!cod.getComponent('minecraft:type_family')?.hasTypeFamily('mob'),'cod is not the required living witness without the Native mob family');
   const sounds=customEffectDiagnostics.visionSounds;
   check(pulseVision(viewer,0)===3,'Vision did not select exactly the native cow, armor stand and familyless cod');
   check(pulseVision(viewer,0)===3&&customEffectDiagnostics.visionSounds===sounds+1,'Vision shared-target feedback repeated');
-  out('case',{mode:'native-vision-living-class',phase,excluded:boat.typeId,excludedHasHealth:true,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
+  out('case',{mode:'native-vision-living-class',phase,excluded:orb.typeId,excludedHasHealth:true,excludedHealth:health(orb).currentValue,excludedHasMobFamily:false,admitted:[cow.typeId,stand.typeId,cod.typeId],codHasMobFamily:false,targets:3,newTargetSounds:1,
    outline:customEffectDiagnostics.visionOutline,recipientFunctionOnly:true,playerEffectEntrance:false,client:false});
  }finally{
   world.afterEvents.entityHurt.unsubscribe(capture);world.beforeEvents.entityHurt.unsubscribe(cancel);

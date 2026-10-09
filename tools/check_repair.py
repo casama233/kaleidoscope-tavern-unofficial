@@ -63,11 +63,23 @@ source=(ROOT/'runtime/BP/scripts/bedrock/decorations.js').read_text()
 assert "emit('plume',1)" in source and "emit('ambient',5)" in source
 assert 'Math.floor(Math.random()*3)===0' in source
 assert 'registerJavaAmbient(block,emitIncenseSample)' in source
-# The registered component must retain native empty-hand callbacks and absence-only repair.
+# The registered cup retains native empty-hand use and absence-only repair.
+# T132's shared adapter additionally accepts station ingredients and suppresses
+# post-consumption echoes; the cup's own block handler still refuses held use.
 source=(ROOT/'runtime/BP/scripts/bedrock/mixology.js').read_text()
 assert "cupStore.raw(key)===undefined" in source
 assert "cupBlock(saved.item)===block.typeId" in source
-assert "cocktail_cup',{\n  onPlayerInteract:nativeEmptyHandBlockUse" in source
+components=source.split('export function registerMixologyComponents(',1)[1].split('export function beforeShakerUse(',1)[0]
+assert "cocktail_cup',{\n  onPlayerInteract:nativeMixologyBlockUse" in components
+assert "shaker_station',{onPlayerInteract:nativeMixologyBlockUse}" in components
+native_use=source.split('function nativeMixologyBlockUse(event){',1)[1].split('\n}',1)[0]
+assert 'if(event?.cancel||!player||!block)return false;' in native_use
+assert 'if(current===undefined)return false;' in native_use
+assert native_use.index('if(completedMixologyEcho(player,block,current))return false;') < native_use.index('return nativeBlockUse(event);')
+block_use=source.split('registerJavaBlockUseHandler(event=>{',1)[1].split('registerJavaOffhandUseOnHandler(',1)[0]
+assert 'if(javaSecondaryBypass(event.player,held))return;' in block_use
+assert 'if(block.typeId!==STATION&&held)return;' in block_use
+assert 'if(id!==STATION)return takeCup(event.player,current);' in block_use
 assert "locks.with([key,player.id]" in source
 assert "id:'mixology-v22',guard:safely" in source
 assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()

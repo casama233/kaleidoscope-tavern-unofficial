@@ -66,6 +66,15 @@ BP/RP，核對實際附屬註冊、原生雪克杯 metadata migration、PUT 恢�
 原生報告分開記錄引擎、兩庫來源、凍結包、測試 overlay、API acknowledgement、
 實際 HP／事件、零玩家和正常退出。結果由 CI 產出，不預先宣告通過。
 
+首輪 [CI 37865527379](https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37865527379)
+保留原始失敗：封裝 guard 仍指向舊 callback 名稱；原生 observer 誤把船當作
+帶生命值的排除見證。修正只涉及檢查與 observer，凍結 runtime 不變。
+感知改用[官方固定來源的原版經驗球](https://github.com/Mojang/bedrock-samples/blob/46ba6ea985fb5a92d79a9419198f10dda14c199d/behavior_pack/entities/xp_orb.json)，
+在實際引擎要求真正 Native health、`inanimate` family 且沒有 `mob`；
+原版鱈魚仍驗證無 `mob` family 的生物會入選。Java 1.21.1 的官方 bytecode
+亦確認 `ExperienceOrb` 直接繼承 `Entity`；測試沿用原生實體與既有 observer。
+修正後的完整首次／重啟結果以 PR 最新提交的 CI 為準。
+
 W109 只同步 BP/RP、module、payload 和 T132 相依身分，保留其既有玩法與
 G119 helper 修復。兩庫互用不可變提交；版本、全包 digest 與發布讀回由
 baseline/history、family lock 和 release request 約束。

@@ -4,8 +4,16 @@
 以公開 T136 三語指南 main 為基底，重新整合本輪機器原料、可攜雪克杯、
 操作交易、板面描邊、酒液 RGB、動畫與狀態粒子修復，並完成原生效果
 剩餘時計及重啟外觀重播守衛。**41 個 aura 定向案例已通過；本候選 exact
-canonical CI、配對原生首次／重啟及 archive 證據仍 pending。** 沒有新的
+canonical CI 及配對原生首次／重啟仍 pending；凍結來源與實際建置如下。** 沒有新的
 真人 client 或 LIVE 成功；程式、資源與 CI 各自只證明其實際範圍。
+
+## 不可變來源與實際建置
+
+- 本輪功能 source：[a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5](https://github.com/casama233/kaleidoscope-tavern-unofficial/tree/a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5)。它與本機乾淨建置提交的完整 Git tree 相等；後續 metadata／peer pin 不改 runtime。
+- BP：829 檔，`ebad55d2207433a3f5ac7b90f73ec1d9c15b30091340b3e2f641e96382fbdf07`。
+- RP：3222 檔，`82696862dd594026716d0638cc742a94906e9873bff9a3216443debac2ae3f23`。
+- 實際 archive：`Kaleidoscope_Tavern_Unofficial_0.6.137_baseline1.mcaddon`，5,882,274 bytes，SHA256 `83dae1880765f62d4870b7ce972ae91881c5de7d274265f3b8f4bd5bbdf0402a`。乾淨提交建置、完整 export 與 frozen identity 核對成功；這不是 native／client 成功。
+- 新 T137 review layer 對公共 T136 精確 preimage 附加 17 個 script、23 個既有資產／command 及 59 個新增檔見證；既有所有 review rows／layers 與公共 release-history 保留。兩個 T134 geometry allocation row 維持原身份。
 
 ## 來源與保留的公開指南
 
@@ -131,8 +139,8 @@ visible／enabled／focus／text binding；保留 foreign 分支、兩個 dropdo
 或互動，不等於動畫鏡頭自動追隨原生瞄準。實際 hand rendering 和其他
 camera owner 的保全仍需獨立 client 證據。
 
-本候選最後 source、archive、兩庫 PR／CI 和 paired native 結果以精確
-提交補入；舊候選與舊配套成功不繼承為新組合成功。完整私人家族／BSM
+本候選的 source／archive 如上；兩庫最終 PR／CI 和 paired native 結果另以精確
+提交記錄；舊候選與舊配套成功不繼承為新組合成功。完整私人家族／BSM
 checkpoint、停服一致備份、存檔演練、准入部署及讀回尚待本次完成。
 最後記錄的 LIVE T132／G119／W110 不是本次新讀回。既有 LIVE 持續授權
 不變；保留 client=false、production_ready=false、pending_client_acceptance，

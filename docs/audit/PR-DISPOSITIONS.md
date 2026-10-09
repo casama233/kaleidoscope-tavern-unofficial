@@ -7,8 +7,8 @@
 以公開 main `c461a8e643a08304587ef468ff7f8051369a2dd5` 的三語指南為基底，
 重新整合 PR302 的原料／交易／視覺／沉浸修復與新的 aura 重播守衛。
 [本輪完整範圍](../RELEASE-NOTES-0.6.137.md) 自包含修復、失敗診斷及剩餘差距；
-41 個 aura 定向案例已通過，最終 source／archive／配套 PR 和 exact CI
-證據仍待本輪補齊，未預先宣稱 native、client 或 LIVE 成功。
+41 個 aura 定向案例已通過；凍結 source `a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5`
+及實際 archive 已列入本輪說明。配套 PR 和 exact CI 證據仍待補齊，未预先宣稱 native、client 或 LIVE 成功。
 
 | 來源 | 當前處置 |
 | --- | --- |

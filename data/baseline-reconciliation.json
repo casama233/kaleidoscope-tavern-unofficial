@@ -3622,6 +3622,537 @@
       "before": null,
       "after": "413497e76579b9f183eb82f66bd84d0e8a2b2731f932e90b6550d35db8f7ac8e",
       "reason": "T136 owned three-language concise operating copy, reviewed against the T132 runtime and author guide presentation; no author scripts or gameplay changes. See docs/GUIDE-EDITORIAL.md and docs/RELEASE-NOTES-0.6.136.md."
+    },
+    "runtime/BP/scripts/bedrock/machine-item-storage.js": {
+      "before": null,
+      "after": "7e0c2592631196d9f96d264d2515543fbcd4769ca84be5d4dafd127273e3fa72",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/BP/scripts/bedrock/status-aura.js": {
+      "before": null,
+      "after": "ac947f212810964bd2f9b954d38997cd48731e6c83dbc9dfafc2d780049c1c8c",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Aggregate only known custom and acquired native rows; hidden native particles require durable ownership, and observed native remaining ticks may pause independently of system ticks. InitialSpawn may retain verified row proof but cannot remint consumed tickets. Recognize only the observed native saved-effect load sequence: invalid-entity before-add, verified same-tick entityLoad with a valid saved/current native lease, and one exact same-tick after-add. Bind native typeId/displayName and duration without name guessing; valid external before-add vetoes the matching replay permission. Preserve original own-write tickets, native-clock tracking, foreign handoff, durable save/rollback fences and schema-1 restoration limits. Production callback counterexamples cover replay, same-tick equal foreign refresh, duplicate load, invalid witnesses and independent native effects; API source identity and actual client rendering remain bounded.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/BP/scripts/core/ingredient-metadata.js": {
+      "before": null,
+      "after": "fab2643a790a850c0639177b323118b74ccf5ed284d010684a7c59687d369f73",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Accept the native API bare-vanilla adventure block identifiers observed in actual BDS while preserving original strings/order, strict shared ID validation, reconstruction readback and bidirectional native stackability. A namespaced-setter/bare-getter complete portable transaction regression covers the source change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/BP/scripts/core/native-machine-storage.js": {
+      "before": null,
+      "after": "5fc756d7d7d8994c9cf98066dbcd27df4a36c11443f9aec11c1e6b0ced3d8d08",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/BP/scripts/core/status-aura.js": {
+      "before": null,
+      "after": "d1db733bc369b64e77e8f90fc7e49dd1520d7f06f1556147eda1f8da4a980a6b",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Declare original Tavern/Mojang effect colors and select the strongest active custom rows. Preserve amplifier+1 weighted Java float/truncation color mixing, visible/ambient filtering, entity AABB sampling and original 1/2, 1/15 and 1/5 emission gates. Unknown foreign native visibility is never inferred.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/models/entity/board_glyph_outline.geo.json": {
+      "before": null,
+      "after": "a4c80b346c1b08684a497fd851b658fbbd35fca0c6dae592d22ee6f6fe5b9aee",
+      "release": "0.6.134",
+      "reason": "T134 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+      "reviewedPredecessorCommit": "625ff769f4c656ff224314bba38d26a1ef5dacc0",
+      "reviewedSourceCommit": "37ff9f12e74c6a4f3bb3a5fc40502d7e70e68c83",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.134.md"
+    },
+    "runtime/RP/models/entity/signature_rgb_texels.geo.json": {
+      "before": null,
+      "after": "a4252c78a9473e1f28c6e87a46d4923434111fdb51ef21e53a5cb442a2fa72ac",
+      "release": "0.6.134",
+      "reason": "T134 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+      "reviewedPredecessorCommit": "625ff769f4c656ff224314bba38d26a1ef5dacc0",
+      "reviewedSourceCommit": "37ff9f12e74c6a4f3bb3a5fc40502d7e70e68c83",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.134.md"
+    },
+    "runtime/RP/particles/fx_status_aura.json": {
+      "before": null,
+      "after": "14b300b7524d6303a2935bcf151c74d8c180adda378c8b2152849398424065cc",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Add original spell/mob sprite animation, sampled lifetime/size, source-channel initial velocity, tick-stepped drag/upward motion and ambient alpha through the existing feedback atlas. Each emitter produces one particle, with no gameplay or ownership decisions; rendered client comparison remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/render_controllers/signature_rgb_texels.render_controllers.json": {
+      "before": null,
+      "after": "a2bb67628acffee4dc81e36d7a195ddd8854b38dead8f1eb91d728c5b00133b9",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_00.png": {
+      "before": null,
+      "after": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_00.texture_set.json": {
+      "before": null,
+      "after": "dddbd62c665242ec695f9bc04419afd34e99657ebaba1e83b0c5cdb637f8eaae",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_01.png": {
+      "before": null,
+      "after": "d2bbfa865c7a900ee6747f02b9ae2ca236c0245095b434549671d829c716a1a8",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_01.texture_set.json": {
+      "before": null,
+      "after": "635a32c9c6e4374663089571fc15a8108f3640cdfc352a6da90834fd5fd62b78",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_02.png": {
+      "before": null,
+      "after": "71f8e8dc5e54058657c677227979227bc2eb39a389d895481431cb4f760f937a",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_02.texture_set.json": {
+      "before": null,
+      "after": "00fc206a47dc9a09e4c51d40a44b184b2b796b49bf29d4d6dbb77782bfcbee06",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_03.png": {
+      "before": null,
+      "after": "0183524eb400b1585683f8c48fbba0504c820291df82b65787951b62019189c2",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_03.texture_set.json": {
+      "before": null,
+      "after": "e365e1aeb764416b6f637dced63ab48a9c88b888b9c6d392d6714f7320b89c5c",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_04.png": {
+      "before": null,
+      "after": "a6bd2ba3251e7e94ca7465d3626cffa9828d38e6ff0975894b614815bda185c8",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_04.texture_set.json": {
+      "before": null,
+      "after": "ec9d17a44f01a13d9e69d69ab486ae07ecf04e7ca6fa2ade6e2f90842a645b87",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_05.png": {
+      "before": null,
+      "after": "73c5b215934723261e5fd4195737c18bca6653ff7344c72f77b39cf433c5fb89",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_05.texture_set.json": {
+      "before": null,
+      "after": "718209964c50294bd951fe88efd4410c12ee0dcebd14ef7908239bfbdfe4943d",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_06.png": {
+      "before": null,
+      "after": "2cb7e6a4e6e8f1aaa6320f864370a46b14efbb9cf9f9b25dcbad87be26d4d4de",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_06.texture_set.json": {
+      "before": null,
+      "after": "deed94ea93ed9bcac2d97599571a759107ede5f827ca2ab4c85ca66d768ea208",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_07.png": {
+      "before": null,
+      "after": "8dcfd404e4e39f8e51e3a89cd1827e6c71a8d96cb334dc87e55ea06ea8e971b4",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_07.texture_set.json": {
+      "before": null,
+      "after": "7299a80853ee6fc7b49482bfeacece1d78f75afeb0602b04d82da642dbf94eda",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_08.png": {
+      "before": null,
+      "after": "d47e8c41e706bd3c7da20daba3d6445f741cbcf3814c5a494dfd448c2769a026",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_08.texture_set.json": {
+      "before": null,
+      "after": "17c7658a359dfd8ad538c9f6996773a5e821d63e7d865c22d32e355a63470922",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_09.png": {
+      "before": null,
+      "after": "f5f56a210fc4b800f3076e48099c5d5f16a31364111cdd43aa1d890f476cf796",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_09.texture_set.json": {
+      "before": null,
+      "after": "b89205cfcc089b0330fb302570bdcd17d353191adb39d4954d652779f597ec8c",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_10.png": {
+      "before": null,
+      "after": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_10.texture_set.json": {
+      "before": null,
+      "after": "b630edc7f4a10dc394af94c971fdf646c0738bad971b4fbe0074b1a7c45fbd3e",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_11.png": {
+      "before": null,
+      "after": "53d547ad012ca96a3ea96bea47acb84f945a4171a36b999d53a4665ea04d4509",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_11.texture_set.json": {
+      "before": null,
+      "after": "f4f9fd58931b5dcdb256fde83a8d31db270a2c09912f17307b1f9bc08e831cc8",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_12.png": {
+      "before": null,
+      "after": "0b5b0567223ce4c88a4b56b65c40efb003d884540757832547ba5f58883456c3",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_12.texture_set.json": {
+      "before": null,
+      "after": "f3d27fcc4936a901310952deb0c7c8c13105e56006a26795b7f1a32cc777d12a",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_13.png": {
+      "before": null,
+      "after": "bb75fabe62564b45a9f547178c262d732de28af65084aba4f227452eff920460",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_13.texture_set.json": {
+      "before": null,
+      "after": "456e436c9ab71a7bd592e0b6d04589fa294bea8c670e9689d9d26e4dc28c863a",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_14.png": {
+      "before": null,
+      "after": "401ebffaf9bfa4b98baedc9c73f6eb79d57d68ecb24f1e4cc25e9d8ad3a182ed",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_14.texture_set.json": {
+      "before": null,
+      "after": "ba9b8ec25395430bcc6bd6a53c4355c85107e8928ff2ace09f92b4a06ea8a396",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_15.png": {
+      "before": null,
+      "after": "cb1f7de27622e86fc17da17f17a113b256df3298c4d2e719c8777658381425d6",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_15.texture_set.json": {
+      "before": null,
+      "after": "c936b2b34bb6d2152ca4dd883bbb1c8187dfeca59495bcf05bca8f506ce2e81d",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_16.png": {
+      "before": null,
+      "after": "340850ddc50e6ecd61d0818645b1152786feb51d032b124e09b0b76c7cd706f7",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_16.texture_set.json": {
+      "before": null,
+      "after": "81e536a73f21577f4a0f87924092530d7e8fb47647cd61c5efc7fbb10dc1d6f8",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_17.png": {
+      "before": null,
+      "after": "444a26636dfd44b05ce8a6c239fbc039ad2c212f7cbcd811f3f159cae8928ae8",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_17.texture_set.json": {
+      "before": null,
+      "after": "dfed48c37c0699210c6e448b7e020d77870f679c41f24786402d2263b8ee299b",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_18.png": {
+      "before": null,
+      "after": "ccaadf65c55e265a6833f4b3d2c82f25bb33c8d45aa661c40d1218537a76c853",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_18.texture_set.json": {
+      "before": null,
+      "after": "60ec9f7874d1dcf2e3f06e91e466315bd7d4583393f724f0344fb5e2abd6d5e5",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_19.png": {
+      "before": null,
+      "after": "eee5f67e2e2117ca869f0e3f9472cfbb7b5ad468e0194f42c1cdd9487abda16a",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_19.texture_set.json": {
+      "before": null,
+      "after": "e730ccd6b21650453429881bb625645ed4d67065dcddc3f000b58cc998848246",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_20.png": {
+      "before": null,
+      "after": "6245b5465897519b419b0aa5d241fcdea60b7b7b6ff3a9482714cbdd524d44e9",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_20.texture_set.json": {
+      "before": null,
+      "after": "474a6cfe230d66d4e0cb92ab2c7773d49efac8c046f6f3d37be922222419a0ef",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_21.png": {
+      "before": null,
+      "after": "b8f0cb79c80003e61bbc136e369d9bbd8d3580f10485ca22fd486b0e305c9e09",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_21.texture_set.json": {
+      "before": null,
+      "after": "d08d17415a47dfd456f596d37fc19bac24b2c735068ccfdd39e6706177bf18d5",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_22.png": {
+      "before": null,
+      "after": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_22.texture_set.json": {
+      "before": null,
+      "after": "076d871f67cb784079d52094062cdc19172f1446e8cf6ef8174d5d741d98178f",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_23.png": {
+      "before": null,
+      "after": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_23.texture_set.json": {
+      "before": null,
+      "after": "f043a9ba6770d217efbf47b4f754de7f75cafc2c191fbedb56b57acbf7477cdf",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/signature/rgb_opaque.png": {
+      "before": null,
+      "after": "168b8b2e81aec05759d67532d962380f5df5006429479777dea01a0b7296e4bf",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
+    },
+    "runtime/RP/textures/kt_runtime/signature/rgb_opaque.texture_set.json": {
+      "before": null,
+      "after": "1eae0e74c151f3d02250761808bbfc01ee9bd71dabdaa365321aa8da01b40b54",
+      "release": "0.6.137",
+      "reason": "T137 appended exact source review. Complete the required canonical PBR companion for newly source-derived animation/RGB textures. Original machine-ingredient roughness 215 and signature roughness 170 are generated through the existing profile, without changing PNGs, geometry, shaders or admission checks; rendered client appearance remains pending.",
+      "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+      "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md"
     }
   },
   "reviewedFunctionalDeltas": {
@@ -6134,6 +6665,656 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.137",
+      "files": {
+        "runtime/BP/scripts/bedrock/board-text.js": {
+          "before": "69c20a7204c33e3908e79997e8133272643d79f7c3ddae84e6fee244362e6300",
+          "after": "bbb7fc2ea3470f1ad3b9f0750e434cedcbfe1f6c672274577a62e2b173cd70eb",
+          "reason": "T137 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              27,
+              29,
+              " const color=data.glowing?(data.color==='black'?0xf0ebcc:rgb):\n"
+            ],
+            [
+              41,
+              49,
+              "   const signature=JSON.stringify({version:59,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});\n   expected.push({anchor,signature,cp,location:glyphLocation});\n"
+            ],
+            [
+              80,
+              81,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/custom-effects.js": {
+          "before": "29c3bc7fa19274fc35d159d4912fb875eaf7445e4ef87c23cda4ecaf17704170",
+          "after": "418ed2f8e874dbf5a6f6b701cd76e79280d6c892136eb810a518321f049a8cd3",
+          "reason": "T137 appended exact source review. Bind source-owned aura and timed native effect ownership, per-tick one-native-tick grass invisibility without replacing foreign effects, and source Ardent cadence. Only actual entityLoad may grant the strictly witnessed native replay ticket, including conditional player initialSpawn proof preservation without reminting consumed permissions; rejected rows are retired durably. Direct/startup restore cannot mint native-load replay permission, and ordinary respawn clears it. Preserve living-recipient/Vision policy and explicit platform limitations; production callback regressions exercise the installer, not only direct helpers.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              6,
+              7,
+              ""
+            ],
+            [
+              19,
+              20,
+              "export const customEffectDiagnostics={applied:0,killHeals:0,orbMoves:0,teleports:0,upsideDownRenames:0,visionPulses:0,visionTargets:0,visionSounds:0,visionOutline:'unchecked',grassStealthPulses:0,grassStealthEligible:0,longReachRays:0,tombAttempts:0,tombDisarms:0,tombRollbackFailures:0,tombPickupBlocks:0,ardentPulses:0,ardentBlocks:0,ardentArmorDamage:0,ardentBareHits:0,ardentHungerEnds:0,ardentRollbackFailures:0,highHeelsChecks:0,highHeelsSteps:0,highHeelsRejected:0,tipsyVisual:tipsyVisualDiagnostics,errors:[],supported:CUSTOM_IMPLEMENTED};\n"
+            ],
+            [
+              24,
+              25,
+              " if(state.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'||row.id==='kaleidoscope_tavern:high_heels')||before.entries.some(row=>row.id==='kaleidoscope_tavern:ardent_heat'))fastPlayers.set(p.id,p);\n"
+            ],
+            [
+              33,
+              34,
+              " statusSnapshots.set(p.id,{player:p,tick:now,raw,before:state,state,isPlayer});indexFastPlayer(p,state);\n"
+            ],
+            [
+              40,
+              41,
+              " const snapshot={player:p,tick:now,raw,before,state,isPlayer:p.typeId==='minecraft:player'};statusSnapshots.set(p.id,snapshot);indexFastPlayer(p,state,before);return snapshot;\n"
+            ],
+            [
+              73,
+              74,
+              "  p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.teleports++;return true;\n"
+            ],
+            [
+              104,
+              106,
+              "function restoreLivingEffectTrack(entity){\n if(entity?.typeId==='minecraft:player'||!livingEffectEntity(entity))return;\n"
+            ],
+            [
+              107,
+              109,
+              ""
+            ],
+            [
+              122,
+              129,
+              "export function pulseGrassStealth(p){\n"
+            ],
+            [
+              130,
+              131,
+              "  if(p?.typeId!=='minecraft:player'||p.isSneaking!==true||!activeStatus(statusNow(p),'kaleidoscope_tavern:grass_stealth'))return false;\n"
+            ],
+            [
+              133,
+              144,
+              ""
+            ],
+            [
+              146,
+              146,
+              "  // Native invisibility reduces new mob acquisition while the player is concealed.\n  // Current Entity.target is documented read-only and pre-release, not a stable\n  // setter for clearing existing targets. This remains an invisibility adapter.\n  p.addEffect('invisibility',12,{amplifier:0,showParticles:false});\n"
+            ],
+            [
+              298,
+              299,
+              "function finishArdentHunger(p){try{p.addEffect('hunger',600,{amplifier:0,showParticles:true});customEffectDiagnostics.ardentHungerEnds++;}catch(e){error(e);}}\n"
+            ],
+            [
+              386,
+              387,
+              " for(const [id,snapshot] of statusSnapshots)if(snapshot.isPlayer&&!seen.has(id)){statusSnapshots.delete(id);fastPlayers.delete(id);heelsSteps.delete(id);}\n"
+            ],
+            [
+              390,
+              391,
+              ""
+            ],
+            [
+              406,
+              408,
+              " world.afterEvents.entityLoad?.subscribe(e=>restoreLivingEffectTrack(e.entity));\n world.afterEvents.entityRemove?.subscribe(e=>{tracks.delete(e.removedEntityId);statusSnapshots.delete(e.removedEntityId);fastPlayers.delete(e.removedEntityId);heelsSteps.delete(e.removedEntityId);visionFeedback.forget(e.removedEntityId);});\n"
+            ],
+            [
+              411,
+              413,
+              " world.afterEvents.playerSpawn.subscribe(e=>{forgetTipsyVisual(e.player.id);tracks.delete(e.player.id);heelsSteps.delete(e.player.id);statusSnapshots.delete(e.player.id);fastPlayers.delete(e.player.id);try{if(!e.initialSpawn)clearCustomEffects(e.player);else statusNow(e.player);}catch(x){error(x);}});\n world.afterEvents.playerLeave.subscribe(e=>{forgetTipsyVisual(e.playerId);const t=tracks.get(e.playerId);if(t)try{write(t.player,statusNow(t.player));}catch(x){error(x);}tracks.delete(e.playerId);heelsSteps.delete(e.playerId);statusSnapshots.delete(e.playerId);fastPlayers.delete(e.playerId);});\n"
+            ],
+            [
+              415,
+              416,
+              "  for(const p of world.getAllPlayers())try{statusNow(p);}catch(e){error(e);}\n"
+            ],
+            [
+              426,
+              427,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/drink-effects.js": {
+          "before": "21bf2568db98e0484219ebd1bc00bc4d60f3f94a4a02695a44e8933439695458",
+          "after": "52ef8553a6fab4c907f3390d1d29e46fa10db709f46c165fd4e765bc86c96603",
+          "reason": "T137 appended exact source review. Route host-created timed native drink/splash effects through checked appearance ownership while retaining instantaneous source dispatch, effect order, target policy and original requested gameplay duration/options.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              5,
+              6,
+              ""
+            ],
+            [
+              29,
+              30,
+              "  try{entity.addEffect(row.bedrockId,row.ticks,{amplifier:row.amplifier,showParticles:true});effectDiagnostics.applied++;outcomes.push({effect:row.effect,status:'APPLIED',ticks:row.ticks});}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/machines.js": {
+          "before": "4036587005b4914255f6e466a69d1074ddbf0573e642ace3aa639d47ae50f9c4",
+          "after": "0582134f127b0cfa58dbcd72530a6d7bac698f829b2f5a7f934ed78857f29bc0",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              14,
+              17,
+              "import {inventory as sharedInventory} from './transactions.js';\n"
+            ],
+            [
+              111,
+              112,
+              " check(block.typeId===TUB,'NOT_A_PRESS');const key=keyFor(block);check(store.raw(key)===undefined,'STORAGE_CONFLICT');const state=newMachine('pressing_tub',`${system.currentTick}-${++serial}`);store.save(key,state,-1);return state;\n"
+            ],
+            [
+              117,
+              118,
+              "  const h=held(player);check(h?.typeId===NS+':barrel','STALE_HAND');check(store.raw(key)===undefined,'STORAGE_CONFLICT');\n"
+            ],
+            [
+              121,
+              127,
+              "  const rollback=()=>{for(let i=0;i<touched;i++)blocks[i].setPermutation(original[i]);store.restoreRaw(key,undefined);};\n"
+            ],
+            [
+              135,
+              136,
+              " writable(player);check(registry,'STARTING');const core=requireCore(block),key=keyFor(core);\n"
+            ],
+            [
+              140,
+              142,
+              "  if(['use','extract'].includes(action)&&h)check(isPlainIngredient(h,make),'METADATA_ITEM_REJECTED');\n  const command={action,held:h?{id:h.typeId,count:h.amount,maxAmount:h.maxAmount}:undefined};\n"
+            ],
+            [
+              145,
+              148,
+              ""
+            ],
+            [
+              149,
+              151,
+              ""
+            ],
+            [
+              152,
+              155,
+              "  // All material transactions consume even in creative to prevent returning extra containers each click.\n  // Free creative placement is the only exemption; the policy is explicit in the guide.\n  commitInventory(plan,c,()=>store.save(key,tx.state,state.revision),()=>store.restoreRaw(key,original));\n"
+            ],
+            [
+              162,
+              163,
+              " return guarded(player?entity:undefined,()=>{if(player)writable(entity);const key=keyFor(block);return locks.with([key],()=>{\n"
+            ],
+            [
+              164,
+              169,
+              "  const drops=spawnRejectedIngredients(block,tx.eject);\n  try{store.save(key,tx.state,state.revision);}catch(error){for(const e of drops)try{e.remove();}catch{}throw error;}\n"
+            ],
+            [
+              175,
+              178,
+              "  if(next!==s)store.save(key,next,s.revision);safeVisuals(block,next);return next;\n"
+            ],
+            [
+              363,
+              365,
+              "  const give=player.getGameMode()===GameMode.Creative?[]:[{id:state.kind==='barrel'?NS+':barrel':TUB,count:1},...(state.kind==='pressing_tub'?state.slots.filter(Boolean):[])];\n"
+            ],
+            [
+              366,
+              376,
+              "  let touched=0;commitInventory(plan,inv(player),()=>{for(let i=0;i<blocks.length;i++){touched=i+1;setWithWater(blocks[i],BlockPermutation.resolve('minecraft:air'));}store.remove(key,state.revision);},()=>{for(let i=0;i<touched;i++)restoreWater(blocks[i],old[i]);store.restoreRaw(key,raw);});\n"
+            ],
+            [
+              382,
+              383,
+              "  beforeOnPlayerPlace:ev=>{try{check(store.raw(machineKey(ev.block.dimension.id,ev.block.location))===undefined,'STORAGE_CONFLICT');}catch(e){ev.cancel=true;system.run(()=>tell(ev.player,'§e'+(CN[e.code]??e.code)));}},\n"
+            ],
+            [
+              394,
+              395,
+              " const type=block.typeId,heldItem=item?{id:item.typeId,count:item.amount}:undefined;\n"
+            ],
+            [
+              399,
+              400,
+              "  try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}\n"
+            ],
+            [
+              410,
+              411,
+              " try{interact(state,{action,held:heldItem},registry,registry.allFluids());return {kind:'machine',action};}catch{return undefined;}\n"
+            ],
+            [
+              418,
+              419,
+              " if(entity.typeId==='minecraft:player'&&[GameMode.Adventure,GameMode.Spectator].includes(entity.getGameMode()))return;\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "736574cbdda4d0fa2c72b7f8aa922fa4bb439e86c81964fc6d1eea573dea771e",
+          "after": "45219ed49a89cc15cc93fa8f6dfa048f90ae88591360e76ddf560ff0949c5aa0",
+          "reason": "T137 appended exact source review. Use self-contained bounded portable stackable metadata with reconstruction and bidirectional native equality before every input debit, preserving names/raw lore and guarded unsupported native data. Retain current shaker hand/echo/rollback rules and use the owned aura for timed drink effects.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              9,
+              10,
+              "import {world,system,BlockPermutation,ItemTypes,EntitySwingSource} from '@minecraft/server';\n"
+            ],
+            [
+              13,
+              14,
+              ""
+            ],
+            [
+              26,
+              27,
+              ""
+            ],
+            [
+              81,
+              83,
+              " // Accepted ingredients use the self-contained plain identity schema.\n // Reconstruct only the display identity; outer carrier metadata stays native.\n"
+            ],
+            [
+              84,
+              85,
+              " const contents=rows.map(slot=>slot.potion?restorePotion(slot):makeStack(slot.item,1));\n"
+            ],
+            [
+              99,
+              101,
+              " // Same-ID transitions clone all outer data. Ingredient descriptors contain\n // only accepted plain items and native potion identities, not item metadata.\n"
+            ],
+            [
+              167,
+              175,
+              "  else{check(!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack),'METADATA_ITEM_REJECTED');next=addInput(old,item.typeId,registry);}\n"
+            ],
+            [
+              358,
+              359,
+              "    if(native)player.addEffect(native,['minecraft:instant_health','minecraft:instant_damage'].includes(effect.effect)?1:effect.duration*20,{amplifier:effect.amplifier,showParticles:true});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/native-storage-pinning.js": {
+          "before": "ea6ab3128765b92a1e28fa6acda4f11296794c8c10feac78a3fd237763921bae",
+          "after": "a87b47d69804952930233bd1724b4dcaa68fea65eb015714affa87f0a10a75e0",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              3,
+              4,
+              ""
+            ],
+            [
+              9,
+              10,
+              ""
+            ],
+            [
+              14,
+              16,
+              " const key=entity.getDynamicProperty(NATIVE_STORAGE_OWNER),anchor=nativeStorageAnchor(key,registry,k=>storage.backend.getDynamicProperty(k));\n"
+            ],
+            [
+              19,
+              20,
+              " const block=dimension.getBlock(anchor.position);checkNativeStorageOwner(anchor,block,proof.ids);\n"
+            ],
+            [
+              27,
+              28,
+              " checkNativeStorageOwner(anchor,dimension.getBlock(anchor.position),after.ids);\n"
+            ],
+            [
+              40,
+              42,
+              "    const raw=storage.backend.getDynamicProperty(nativeItemKey(key));check(typeof raw==='string','NATIVE_STORAGE_MISSING');\n    const record=JSON.parse(raw),entity=storage.findEntity(record.entity);\n"
+            ],
+            [
+              47,
+              48,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/natural-break.js": {
+          "before": "f00f038de226424f3b44d37ed23fed81ceb22f7246f3112901bacd345471ff42",
+          "after": "264707d0c7315d8436c9aff15c7e5cd616785eecce144371ac2bf64db0ef8a39",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              1,
+              2,
+              ""
+            ],
+            [
+              10,
+              11,
+              "import {barrelCells} from '../core/machines.js';\n"
+            ],
+            [
+              63,
+              95,
+              ""
+            ],
+            [
+              115,
+              117,
+              " if(cells.length){const key=d.id+'/'+at(root)+'/'+drop;if(seen.get(key)===system.currentTick)return;seen.set(key,system.currentTick);for(const [k,t]of seen)if(t<system.currentTick-1)seen.delete(k);}\n"
+            ],
+            [
+              121,
+              122,
+              "  data=record('kt:machine/'+suffix);if(data?.kind==='pressing_tub')for(const row of data.slots.filter(Boolean))add(row.id,row.count);\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/pressing-feedback.js": {
+          "before": "acff3cf0ebf1535bc91fdaac4a012b70bfefd48dfe1022515c8da63b26c08881",
+          "after": "0ed0098faf533d43e16954b110073d96d923c4ef55445026066d9881a929814e",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              41,
+              43,
+              "    const e=block.dimension.spawnItem(new ItemStack(output.id,base+(i<remainder?1:0)),{x:block.location.x+.5+dx*.3,y:block.location.y+.55,z:block.location.z+.5+dz*.3});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/protected-break-router.js": {
+          "before": "70a60f6bd33162d18c66bd48f7b618eb5f80dbd481c87208a8751501035198b3",
+          "after": "b7d01d8a6960c291c6a737d72ddb0e9e655b6a14bf84a4ccf1ac3880bf232ab8",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              41,
+              42,
+              " * Survival outputs become world drops; Creative outputs are discarded. Spawn failure occurs\n"
+            ],
+            [
+              45,
+              46,
+              " const mode=player.getGameMode()===GameMode.Survival?'drop':'discard';\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/storage-projectile.js": {
+          "before": "0000401b9d1340c1ee92ed5d1605cc19110dc4a6dcb07ab0bf1aee261655dac3",
+          "after": "95d3092655158822abacf927ba5e9d813d2fc0e12176ddce6f4c6440deace0d4",
+          "reason": "T137 appended exact source review. Route host-created timed native drink/splash effects through checked appearance ownership while retaining instantaneous source dispatch, effect order, target policy and original requested gameplay duration/options.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              9,
+              10,
+              ""
+            ],
+            [
+              62,
+              63,
+              "  entity.addEffect(row.bedrockId,ticks,{amplifier:row.amplifier,showParticles:true});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/tipsy-visual.js": {
+          "before": "fe5856ffef01f03c0e5c4a5cbf6fdbf312f6b5b34e17b579b3e2fda0444b1426",
+          "after": "5e7cb2b1ba06c086fd53f11e1ad8a898b50283c8bb5ffece288f290b4466feb0",
+          "reason": "T137 appended exact source review. Stop default actor-yaw movement; preserve the explicit opt-out and require a positive opt-in for the historical yaw adapter. Pure camera roll remains unimplemented, with actual input/diagnostic source regressions.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              1,
+              2,
+              "import {TIPSY_OPT_OUT_TAG,tipsyYawOffset,tipsyYawStep} from '../core/tipsy-visual.js';\n"
+            ],
+            [
+              5,
+              6,
+              "// The yaw adapter affects aim slightly; disable per player with the opt-out tag.\n"
+            ],
+            [
+              8,
+              9,
+              "export const tipsyVisualDiagnostics={mode:'yaw_adapter_unverified',exactJavaRoll:false,clientConfirmed:false,updates:0,skipped:0,failures:0,serverReadbacks:0,readbackMisses:0,lastError:''};\n"
+            ],
+            [
+              22,
+              23,
+              " if(!status||!Number.isFinite(status.ticks)||status.ticks<=0||player.hasTag(TIPSY_OPT_OUT_TAG)){\n"
+            ],
+            [
+              43,
+              44,
+              "   if(!p.isValid||p.dimension.id!==track.dimension||p.hasTag(TIPSY_OPT_OUT_TAG)||p.getComponent('minecraft:health')?.currentValue<=0){\n"
+            ],
+            [
+              80,
+              81,
+              "  statusTicks:status?.ticks??0,optedOut:player.hasTag(TIPSY_OPT_OUT_TAG),\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/custom-effects.js": {
+          "before": "0ab7aaf1bf2dd5cf4238367e4939645a6a7ef9af56d56bb22993fd2d3b8507b2",
+          "after": "aa013defd6a103c91d943d7552e7be8db5b29b620271b33fd7c665b477807ed7",
+          "reason": "T137 appended exact source review. Label the non-original actor-yaw approximation as opt_in_yaw_adapter_unverified. The bedrock adapter requires explicit opt-in and keeps the prior opt-out; pure additive native-first-person camera roll remains unimplemented.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              16,
+              17,
+              " 'kaleidoscope_tavern:slightly_tipsy':'yaw_adapter_unverified'\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/machines.js": {
+          "before": "2c4c1a9ce2c50d3444a6363e679db4b00169db5eb80c31cf873e97caa284fd26",
+          "after": "e881d792539b8b53734c103793006d5d50ec3142362acc04a0d67e4b03daaed8",
+          "reason": "T137 appended exact source review. Preserve counted complete native machine inputs and exact source outputs/adoption, metadata-sensitive merging, quantities and mode/game-rule handling. Rollback attempts each native slot/carrier, marker, block and public record independently; targeted production failure/retention regressions prevent duplication or plain-ID fallback.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              11,
+              12,
+              ""
+            ],
+            [
+              45,
+              46,
+              "  tx.give=[{id:item.id,count}];item.count-=count;if(item.count===0)s.slots[index]=null;\n"
+            ],
+            [
+              52,
+              53,
+              "   s.fluid=inbound.id;s.amount+=1000;tx.take=1;tx.give=[{id:inbound.empty,count:1}];\n"
+            ],
+            [
+              55,
+              56,
+              "   const f=fluids.find(f=>f.id===s.fluid);check(f,'FLUID_UNAVAILABLE');tx.take=1;tx.give=[{id:f.filled,count:1}];s.amount-=1000;if(!s.amount)s.fluid='';\n"
+            ],
+            [
+              58,
+              60,
+              "   // Do not turn the recipe index into an input whitelist. Metadata checks remain\n   // the adapter's responsibility so ID-only slots never erase native item data.\n"
+            ],
+            [
+              61,
+              64,
+              "   const cap=s.kind==='barrel'?16:Math.min(64,held.maxAmount??64);\n   let slot=s.slots.findIndex(x=>x?.id===held.id&&x.count<cap);if(slot<0)slot=s.slots.findIndex(x=>!x);\n"
+            ],
+            [
+              65,
+              66,
+              "   s.slots[slot]={id:held.id,count:(s.slots[slot]?.count??0)+n};tx.take=n;\n"
+            ],
+            [
+              69,
+              70,
+              ""
+            ],
+            [
+              81,
+              82,
+              "  s.fluid='';s.amount=0;s.slots.fill(null);\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/mixology.js": {
+          "before": "f44978c57325018e8b36e8d00bec89cd63681d1cd3583ab242bfafb758ba2bae",
+          "after": "1a6fbd4f2625d3f33cf19604c8ef1339431b68d0b220614780b3635ea884d92c",
+          "reason": "T137 appended exact source review. Use self-contained bounded portable stackable metadata with reconstruction and bidirectional native equality before every input debit, preserving names/raw lore and guarded unsupported native data. Retain current shaker hand/echo/rollback rules and use the owned aura for timed drink effects.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              5,
+              6,
+              ""
+            ],
+            [
+              33,
+              34,
+              " for(const slot of s.slots){id(slot.item);if(slot.container!==null)id(slot.container);integer(slot.color,0,0xffffff);check(Array.isArray(slot.effects)&&slot.effects.length<=32,'BAD_INPUT_EFFECTS');slot.effects.forEach(validateEffect);if(slot.potion){check(POTION_ITEMS.has(slot.item)&&slot.container==='minecraft:glass_bottle','BAD_POTION_SLOT');validatePotionIdentity(slot.potion);}}\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/native-item-storage.js": {
+          "before": "bbaf3c59d3dff483090608ed05cd82378c58556051805637b9aae3f3d0df2450",
+          "after": "c6d9450445f8c4c476fabc47f14945062edb7abd349ac4dccaef518bcf0d8c9d",
+          "reason": "T137 appended exact source review. Compare x/y/z as finite numeric coordinates independent of object insertion order. Retain required marker/schema/key/dimension, exact padded slot order, entity/token/container and native metadata guards; this coordinate equivalence fix does not relax inventory ownership.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              11,
+              20,
+              ""
+            ],
+            [
+              34,
+              35,
+              "  check(required===1&&record?.schema===1&&record.key===key&&record.dimension===dimension.id&&same(record.position,position)&&same(record.ids,ids),'NATIVE_STORAGE_MISMATCH');\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/native-storage-anchor.js": {
+          "before": "d817d6e112866c1fa0caaaf7efec757d4e0ee4c9e8d05460bd340a258751dd05",
+          "after": "612f3b6138ab2375466e0de45b2c63720fa43ffa4528295a3810d61cad82e935",
+          "reason": "T137 appended exact source review. Recognize only validated kt:machine/<dimension>/<safe integer x_y_z> public state with nativeItems===1. Bind barrel_core/pressing_tub owner block, capacity, padded IDs and exact counts to the counted carrier; retain existing world/block/three-axis ownership checks.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              5,
+              6,
+              ""
+            ],
+            [
+              12,
+              13,
+              ""
+            ],
+            [
+              22,
+              28,
+              ""
+            ],
+            [
+              36,
+              37,
+              "export function checkNativeStorageOwner(anchor,block,ids){\n"
+            ],
+            [
+              40,
+              41,
+              ""
+            ]
+          ]
+        },
+        "runtime/BP/scripts/core/tipsy-visual.js": {
+          "before": "2545a1729c78a38f45882c613e0384372cc8866f8bd22fc50830bca818ee20cb",
+          "after": "c0c40eb38a25d4f7a4d7a05ce273a9d0150950fd18d77d4326f183714b495407",
+          "reason": "T137 appended exact source review. Stop default actor-yaw movement; preserve the explicit opt-out and require a positive opt-in for the historical yaw adapter. Pure camera roll remains unimplemented, with actual input/diagnostic source regressions.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "reverseOps": [
+            [
+              4,
+              6,
+              " * This adapter keeps the source waveform but applies a small yaw delta instead.\n * It therefore also changes aim slightly; it is NOT exact Java camera-only roll.\n"
+            ],
+            [
+              12,
+              14,
+              ""
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -6412,6 +7593,218 @@
           "after": "a1603cade9d9f516755f5266415c1a924a8e2b6f053822e4d032ff5672659886",
           "reason": "Remove only the extra 0.1-second slot fade; preserve the 0.5-second local expiry, progress transport, native root and foreign HUD controls.",
           "beforeGzipBase64": "H4sIAAAAAAACA+3d3W7byJIH8Pt9Cq9mDjJZ6CRkfzPAAeZ+b/duEAi0RTs6I0teSc7EO5vX2Otzl/fIo+yTLKkPW3az033SxWIFW8AAk0iyutT6qVj5g6b+nKzq22Z7V181k3eTD/fzyXTy+252u/i0Xq5vHmbNp7vFpr3rz0m9WtzOdg933ePq5d2Hun1kU28Xq5v2huVi1dSb9pb5/abeLdarybvijZlOrjfr28m7cjrZrff/mzfb3Wb9MKt3s2Y1b3/wfK22iN+b3eTztO/WtoLj4nf1qlm2S/3cPmrXfGrvmvxcX3WLXtabwy3TyXbxX+1jf5uURfGX9q/7/72fTj4utovLZfcsv6zWu4tffjk9ycVfL159/bL57d//4/3Fq9cXf7s43fH6dfvjh9f7bvJru0FverZnOrnbrO/qm3rXzI6P3W3um+nkar1qX+9y25by52S7XO+2PS/kWKs209K0Ndarqw/rzeywdZOrZrVrup093txtZLubd20N8/myW3p9fb3tNui3YipF+/PL+qH9gXeqiLzc8t3XL/5LfVZxe0dX9KyYFd5L7+7oXszZ8kW7+v3Hxz92z3nf4Tn9afv2fvH27Dne7nfkbVEUk4Ra7V/bN+hlwZ8/T8/LLAcss0wrc/6///OPeKFiwEJFWqFVUqFywEJlWqEmqVA1YKEqrdA6qVA9YKE6rdAmqVAzYKEmrdCrpELtgIXatEKvkwp1Axb6qXBppRZJpVaDllqllVomlVoOeXD6VCYenkRareWgtSYeo2RarWLQWhMPUyqtVjlorYlHKp1Wqxq01sSDlU2rVQ9aa+LxyqXVagatNfGQdZlQa5kyT4uzWgX4RC2SJuoyZaLOKbRMKnSetKdi2FJFUqlVUqly2FJlUqkmqVQ1bKkqqdQ6qVQ9bKk6qdQmqVQzbKkmqdSrpFLtsKXapFKvk0p1w5bajdgpxRZJxVZDF1slFVsmFVsOfMD6VKYdskRateXQ1aYdt2RatWLoatMOXSqtWjl0tWlHL51WrRq62rQDmE2rVg9dbdoxzKVVa4auNu0wljJxi5SJW50Vq8Anbpk0cYuUiTur0DKl0HnSnoqBSxUppVZJpcqBS5UppZqkUtXApaqUUuukUvXApeqUUpukUs3ApZqUUq+SSrUDl2pTSr1OKtUNXGo7cqcUWyQVWw1ebJVSbJlUbDn0AetTmXTIEmnVloNXm3TckmnVisGrTTp0qbRq5eDVJh29dFq1avBqkw5gNq1aPXi1Sccwl1atGbzapMNYcOJ+vy/4brO+aRf5xrkupSunQuad7CLM85Ndnp25cllvzlZf3NY3zfPVS+ut3i20bK53Pesfbz5b3STt62knZpf7s6MuF8cTpd5d18tt83hiUTndn17Vle6fY/T4HH/Ui93ksMNX95ttW59/iDjc0b30szfx8e3729NJTu2b2P6b5eLtRVmW+7fyeEbV8ZkPW/Jb8eYg6Oyebk9+K9/o9vbzUsrMUspYKYcl/VLkvsTzUkRmKSJWigzsivJ2RWaWImOlqMCuGG9XVGYpKlaKCeyK9XZFZ5aiY6XYwK5U3q6YzFJMrJQq9AkqvG2xmbXY6EeoCOxLKbyNcZnFuGgxIrQz0tuZKrOYKlqMDO2M9namzOy6ZbTrHhftqcb4fTez8ZbxxmtCe+P8vcnsvWW09x4X7amm8vcms/2W0fZ7XNSvRpT+3mR24DLagY+L9lQj/L3JbMJltAkfF+2pRvl7k9mHy2gfPi7aU4329yazE5fRTnxctKca6+9NZisuo634uGhPNc7fm8xeXEZ78XHRnkmv8Ee9zF4sor1YhkZg6c/AIrMXi2gvlsEpuGcMzuzFIj4HhwZh6U/CIrMXi2gvlqFZWPrDsMjsxSLai2VoHJb+PCwye7GI9mIZmoilPxKLzF4sor1YhoZi5Q/FIrMXi2gvVqGpWPlTscjsxSLai1VoLFb+WCwye7GI9mIVmouVPxfLzF4so71YheZi5c/FMrMXy2gvVqG5WPlzsczsxTLai1VoLlb+XCwze7GMxxKhuVj7c7HM7MUy2ot1aC7W/lwsM3uxjPZiHZqLtT8Xy8xeLKO9WIfmYu3PxTKzF8toL9ahuVj7c7HM7MUy2ot1aC7W/lwsM3uxjPZiHZqLjT8Xq8xerKK92ITmYuPPxSqzF6toLzahudj4c7HK7MUq2otNaC42/lysMnuxivZiE8yIe0LizF6s4ilxaC42/lysMnuxivZiE5qLjT8Xq8xerKK92ITmYuvPxSqzF6toL7ahudj6c7HK7MUq2ottaC62/lysMnuxivZiG5qLrT8X68xerKO92IbmYuvPxTqzF+toL7ahudj6c7HO7MU62ottaC62/lysM3uxjvZiG5qLnT8X68xerKO92IXmYufPxTqzF+toL3ahudj5c7HO7MU62otdaC52/lysM3uxjvZiF5qLnT8X68xerKO92IXmYufPxTqzF+toL3ahubjy52KT2YtNtBdXobm48udik9mLTbQXV6G5uPLnYpPZi020F1ehubjy52KT2YtNtBdXobm48udik9mLTbQXV6G5uPLnYpPZi020F1fBMyh6TqHI7MUmfg5F+CQKfzA2mc3YJJxGETyPovBHY5PZjk38TIoieCpF4Q/HJrMhm/jJFEXwbIrCH49tZku28dMpiuD5FIU/INvMpmzjJ1QUwTMqCn9Etplt2cZPqSiC51QU/pBsMxuzjZ9UUYSm5PbH/P3JbM022ppPq/bV4w/KNrM5Wx2vRwT3xx+VbWZ7tiZejwrujz8s28z+bOP9udTB/fHHZZvZn228P5c2uD/+wGwz+7ON9+fSBc8D9Edml9mfXbw/i+BpxsIfml1mf3bx/izK4P74Y7PL7M8u3p+FDO6PPzi7zP7s4v1ZqOD++KOzy+zPLt6fhQnujz88u8z+7OL9Wdjg/vjjs8vszy7en0Vwfpb+/Owy+7OL92cZnJ9lz4nImf3ZxfuzDJ+K7M/PLrM/u4STkYPzs/Tn5yqzP1fx/iyD87P05+cqsz9X8f4sg/Oz9OfnKrM/V/H+LIPzs/Tn5yqzP1fx/iyD87Py5+cqsz9X8f6sgvOz8ufnKrM/V/H+rILzs/Ln5yqzP1fx/qyC87Py5+cqsz9X8f6sgvOz8ufnKrM/V/H+rILzs/Ln5yqzP1fx/qyC87Muen5dJK9Bl0XC74sEB2jd85t6RZlZULxD6+AErWXPDonMguItWgdHaK16dkhmFhTv0To4Q2vTs0Mqs6B4k9bBIVrbnh3SmQXFu7QOTtG66tkhk1lQvE3r4Bhtip4dspkFxfu0Cc7RRvTskMssKN6oTXCQNrJnh6rMguKd2gQnadPzi32Zv9lXJvxmnwn/al/f7/ZlduqUX+4LztKPBcW+N+NsDf96AM+/zOO6vtqtNw/hCwO8/MKOsx/ovqjk8B0ls+df9/H4rI/XAJgt5vuLD/iP7f3KEf9X7o/fRNK+GZPNer2bHapsn/F2PV9cL67233FyuNJAvdnUD7NjcY/XIJhO1nfN6atQJovVttnsZpft03aXV6iX983p+zVOa3o1PL3y/TZmL9RcXzdXu9mi/cntabHz244LvXzHnrwFrqVQTkv5HZdS+CeunXAsoefyCcerP5TfdSGFp8s5TAKfstl219y9/D6a0wU3AtvR+yUu3Wt+uobF+Y48v+f+4+zF83zXFSO2d5vFrjldL2La+zH4c/+B9z4c/jfpnH30Dx/75484/+KcZ98o8/xhry/q1fwi9gRtz/r2zx+az6u/vFHbVxf/1vu4tgX+69+3b1697hpQ32t/+/TX21ZD9/b9v9kN/zMfukCLKaauyLlEiprq7tuIXn6f0HH5eb2rw6sfDpHddyq13eyhbWc33WN/evrx05dCTboXdblYzRerm+OFXw5/OfXJn7r3f7fYLZvDoWK723TfWNX107RHTp89brb+2Gw2i/n+B7xynh7bvur54tiT92Taj3H7Qq4+1KubZv5s+eMOfFw0f3QbsL7fXDWzx5d+LO7wVveX2L7HXiknYK2N0u1x9P/s6+PE8PXL/OuX5uuXev+H9kDeTQu7enPT7Lxafjp9Bo5X+3lau5iVPZ2xp9P/Xi+bxXy9vWqfebar2z1dzf5eb97eri+Pz/W23syb1W72oal35xfumZbu/fTl5fz/WaPfOI48fr6P92QZ7H1rTyPKcTdffCTaeaPZrpcfm1lXR/ck+006fZ9YgEcfxdC75z30OzH+4j3ToXcVp/8eJ0Jf53fqEmC6Lpfr9fxhdlvvp0bW9ePpEuC6JJium03dTpnt8Fgvdx/Y1w/pS4L7UmC+PixuPrRHxmb/zz/G9ePhUuC4NBiu5bp9sZumvuLO9WPi0uC4DBiu7bJtXbvlQ/svkbstj14/JjADDsyCAdutby9nm7r9F/qGdf2Quiy4Lgemq1tkvWJYPyQsBw6rAoP16W42b7sW0/oxaVXAtEr0IFUwL4q8ykGS1BI9SWVehHkJcF74USoDIwxMggNDzlJZF2FdClwXcpjKugjr0uC6RkhTWRhhYQZcGHacyrwI87LgvBDzVJZFWJYDl4UaqLItwragE1WBnqgq5kWRlxgkURXoiSrzIsxLgPPCT1QZGGFgEhwYcqLKugjrUuC6kBNV1kVYlwbXNUKiysIICzPgwrATVeZFmJcF54WYqLIswrIcuCzURJVtEbYFnahK9ETVMC+KvOQgiapET1SZF2FeApwXfqLKwAgDk+DAkBNV1kVYlwLXhZyosi7CujS4rhESVRZGWJgBF4adqDIvwrwsOC/ERJVlEZblwGWhJqpsi7At6ERVoSeqjnlR5KUGSVQVeqLKvAjzEuC88BNVBkYYmAQHhpyosi7CuhS4LuRElXUR1qXBdY2QqLIwwsIMuDDsRJV5EeZlwXkhJqosi7AsBy4LNVFlW4RtQSeqGj1RLQv2RdGXHiRS1eiRKvui7EuA+8LPVFkYZWESXBhyqMq8KPNS4LyQU1XmRZmXBuc1QqzKxCgTM+DEsHNV9kXZlwX3hRisMi3KtBw4LdRklXFRxgUdrRr8aJUv2EvSlxkkWjX40Sr7IuxLgPsaIVplYYSFSXBh2NEq8yLMS4Hzwo5WmRdhXhqc1xjRKhMjTMyAE0OPVtkXYV8W3BdmtMq0CNNy4LRwo1XGRRgXdLRq8aNVvnIvSV92kGjV4ker7IuwLwHua4RolYURFibBhWFHq8yLMC8Fzgs7WmVehHlpcF5jRKtMjDAxA04MPVplX4R9WXBfmNEq0yJMy4HTwo1WGRdhXNDRqkOPVoupYF70eLlBklWHnqwyL8K8BDgv/GCVgREGJsGBIeeqrIuwLgWuCzlWZV2EdWlwXSOkqiyMsDADLgw7VGVehHlZcF6ImSrLIizLgctCjVTZFmFb0IlqhZ6oCvZF0lc1SKRaoUeq7IuyLwHuCz9TZWGUhUlwYcihKvOizEuB80JOVZkXZV4anNcIsSoTo0zMgBPDzlXZF2VfFtwXYrDKtCjTcuC0UJNVxkUZF3S0Whbo2apiYCSB1YNkqy0w7HCVgVEGJuCB4aerTIwyMQlPDDleZV+UfSl4X8j5Kvui7EvD+xohYGVjlI0ZeGPYCSsDowzMwgNDjFjZFmVbDt4WasbKuijrAs9YS/SM1TAwksAuh8lYS/SMlYFRBibggeFnrEyMMjEJTww5Y2VflH0peF/IGSv7ouxLw/saIWNlY5SNGXhj2BkrA6MMzMIDQ8xY2RZlWw7eFmrGyroo6wLPWAV6xuoYGElgV8NkrAI9Y2VglIEJeGD4GSsTo0xMwhNDzljZF2VfCt4XcsbKvij70vC+RshY2RhlYwbeGHbGysAoA7PwwBAzVrZF2ZaDt4WasbIuyrrAM1aJnrGWBQsjKWw+TMgq0UNWFkZamIAXhp+ysjHSxiS8MeSYlYGRBqbggSHnrAyMNDAND2yEoJWRkUZm4JFhJ60sjLQwCy8MMWplXKRxOXhcqFkr8yLNCzxsVfhhK1/6l6awZpiwVeGHrSyMsjABL2yEsJWNUTYm4Y1hh60MjDIwBQ8MO2xlYJSBaXhgY4StjIwyMgOPDD1sZWGUhVl4YZhhK+OijMvB48INW5kXZV7gYavGD1v5GsA0hV0PE7Zq/LCVhVEWJuCFjRC2sjHKxiS8MeywlYFRBqbggWGHrQyMMjAND2yMsJWRUUZm4JGhh60sjLIwCy8MM2xlXJRxOXhcuGEr86LMCzxsNehhazFV7IuYr3KPa4io1aBHreyLsC8B7ws/aGVhhIVJeGHIMSvzIsxLwfNCDlmZF2FeGp7XCBErEyNMzMATww5Y2RdhXxbeF2K8yrQI03LwtFDDVcZFGBd4tGrRo1XBwEgCK4fJVi16tsrAKAMT8MDww1UmRpmYhCeGnK6yL8q+FLwv5HiVfVH2peF9jZCvsjHKxgy8MeyAlYFRBmbhgSEmrGyLsi0Hbws1YmVdlHWBZ6wOPWNVDIwkMDFMxurQM1YGRhmYgAeGn7EyMcrEJDwx5IyVfVH2peB9IWes7IuyLw3va4SMlY1RNmbgjWFnrAyMMjALDwwxY2VblG05eFuoGSvroqwLPGOt0DNWw8BIApPDZKwVesbKwCgDE/DA8DNWJkaZmIQnhpyxsi/KvhS8L+SMlX1R9qXhfY2QsbIxysYMvDHsjJWBUQZm4YEhZqxsi7ItB28LNWNlXZR1QWesokDPWB0DIwlMDZKxtsCwM1YGRhmYgAeGn7EyMcrEJDwx5IyVfVH2peB9IWes7IuyLw3va4SMlY1RNmbgjWFnrAyMMjALDwwxY2VblG05eFuoGSvroqwLPGMt0TPWsmBhJIXpYULWEj1kZWGkhQl4YfgpKxsjbUzCG0OOWRkYaWAKHhhyzsrASAPT8MBGCFoZGWlkBh4ZdtLKwkgLs/DCEKNWxkUal4PHhZq1Mi/SvMDDVoEftvKlf2kKM8OErQI/bGVhlIUJeGEjhK1sjLIxCW8MO2xlYJSBKXhg2GErA6MMTMMDGyNsZWSUkRl4ZOhhKwujLMzCC8MMWxkXZVwOHhdu2Mq8KPMCD1slftjK1wCmKcwOE7ZK/LCVhVEWJuCFjRC2sjHKxiS8MeywlYFRBqbggWGHrQyMMjAND2yMsJWRUUZm4JGhh60sjLIwCy8MM2xlXJRxOXhcuGEr86LMCzxsVehhazE17IueLzdM1KrQo1b2RdiXgPeFH7SyMMLCJLww5JiVeRHmpeB5IYeszIswLw3Pa4SIlYkRJmbgiWEHrOyLsC8L7wsxXmVahGk5eFqo4SrjIowLPFrV6NGqYGAkgVXDZKsaPVtlYJSBCXhg+OEqE6NMTMITQ05X2RdlXwreF3K8yr4o+9LwvkbIV9kYZWMG3hh2wMrAKAOz8MAQE1a2RdmWg7eFGrGyLsq6wDNWg56xKgZGElg9TMZq0DNWBkYZmIAHhp+xMjHKxCQ8MeSMlX1R9qXgfSFnrOyLsi8N72uEjJWNUTZm4I1hZ6wMjDIwCw8MMWNlW5RtOXhbqBkr66KsCzxjtegZq2FgJIFdDpOxWvSMlYFRBibggeFnrEyMMjEJTww5Y2VflH0peF/IGSv7ouxLw/saIWNlY5SNGXhj2BkrA6MMzMIDQ8xY2RZlWw7eFmrGyroo6wLPWB16xuoYGElgV8NkrA49Y2VglIEJeGD4GSsTo0xMwhNDzljZF2VfCt4XcsbKvij70vC+RshY2RhlYwbeGHbGysAoA7PwwBAzVrZF2ZaDt4WasbIuyrrAM9YKPWMtCxZGUth8mJC1Qg9ZWRhpYQJeGH7KysZIG5PwxpBjVgZGGpiCB4acszIw0sA0PLARglZGRhqZgUeGnbSyMNLCLLwwxKiVcZHG5eBxoWatzIs0L+iwVRb4YStf+pemsGaQsLUVhh62sjDKwgS8sBHCVjZG2ZiEN4YdtjIwysAUPDDssJWBUQam4YGNEbYyMsrIDDwy9LCVhVEWZuGFYYatjIsyLgePCzdsZV6UeYGHrSV+2MrXAKYp7HqYsLXED1tZGGVhAl7YCGErG6NsTMIbww5bGRhlYAoeGHbYysAoA9PwwMYIWxkZZWQGHhl62MrCKAuz8MIww1bGRRmXg8eFG7YyL8q8wMLW9d2u7TP1cvbHerOczxbtDm5//bm94/D35eI/79s3+XGFVbNs36nPn1sY33zQf8+b6/p+2b2DH+7nb56KbG7vdg/dm/rypifbh1UeaRbT4v3h8beLT+vl+uZhtr3bLHbN7I96set+rl4tbk+7u79tOpnfb+ruhU3eFW/0dLJqPxztnb8ea3n5RNf1vJn0r7G/68Ua9fLuQ6epqbft+9recBT/fNkW/OFD0/6h+5AULxa4ut9s213b7pq7lwscP4WxFQp9WmL/ZhyfcH/LYcnzm9u/vyig1XHTfiC2qftYfGMjH5+rbyuf3/k9m+lt5ed/+T/OalYeJRsDAA=="
+        }
+      }
+    },
+    {
+      "release": "0.6.137",
+      "files": {
+        "runtime/BP/functions/kt_tipsy_motion_off.mcfunction": {
+          "before": "b103856ae3bd853f0cecdeb3a27af4c2912337f87a0c705dbd149e0882015dc3",
+          "after": "40267c4f6c6e7b5c6cd5f66b37b6bbedbc8bb01d664d72f4043b087c82d3de53",
+          "reason": "T137 appended exact source review. Stop default actor-yaw movement; preserve the explicit opt-out and require a positive opt-in for the historical yaw adapter. Pure camera roll remains unimplemented, with actual input/diagnostic source regressions.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACAytJTFdwKFZITElRyC6Jz8uPL8ksKK6Mz80vyczP4wIA4XxG4R4AAAA="
+        },
+        "runtime/BP/functions/kt_tipsy_motion_on.mcfunction": {
+          "before": "6b857963458b64011dd520df269f2ff7ac7ef8dc6636c5ccc1a6944fb00dc1d2",
+          "after": "478b1f683da54cdc8021c4ff0b042a6335eaf49ad76e936d6522c1ca0c2316c6",
+          "reason": "T137 appended exact source review. Stop default actor-yaw movement; preserve the explicit opt-out and require a positive opt-in for the historical yaw adapter. Pure camera roll remains unimplemented, with actual input/diagnostic source regressions.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACAytJTFdwKFYoSs3NL0tVyC6Jz8uPL8ksKK6Mz80vyczP4wIAPqcEZSEAAAA="
+        },
+        "runtime/RP/animations/board_glyph_line.animation.json": {
+          "before": "8d4dabfe60e37e30d06582cbdd018828541a166496d0b4bf68ccca2a2514f2d6",
+          "after": "5043abb588b00d156241f9eb96d88c218f9362060d3621fed8430bbe0e130d07",
+          "reason": "T137 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA52PUQvCIBSF3/crhi8rWLLeYn8lQlxzJTOv6V0wxv57d0HLjSDoRT3fOVePQ5KmrAF/kygeygcNlpUp2/MDL1g+mdJqMokHMgYiMeMtCt9Z1DfFK5C+FhfTu6sw2qo5TgMGwJFG36n8zSqwKkQhQtq2C0DIA75eIn6MODl37jw45bHfZK00StcQzgQESvqJLVEbzLYsX0wVKxmp03wePyFqaep1JwdBf++0+1Vquk5A0wT1b7ck3qd1TMbkCe71f6bHAQAA"
+        },
+        "runtime/RP/entity/board_glyph_visual.entity.json": {
+          "before": "855711ba649839ae58c53bfd604bb27b92f8138c0943f85e477ce9d362b99ae3",
+          "after": "1b8ce8460a008dbbf1dcfa47956b2c6280396a43e1eb36dccec1dfef7009b5b9",
+          "reason": "T137 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/entity/rig_signature_color.entity.json": {
+          "before": "754a53ddb40b310a6aca5002c1dfe79a1dbf8ecb2fa06de5adee98351cbeb31d",
+          "after": "831993c6fe9bb56c5a0b66a50ae1be761614c0909a040a8a214bd5c3c6897239",
+          "reason": "T137 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA42T226DMBBE3/MVEc8RCbmoUn6lqiwXFrKqsZP1UjWK+PeuIZALUesHhOSdMzPCy2U2nyelo1qz+gby6GyynydZmq3SVbII0xot5KRL3ucGwbKSB/kssouMRVCAzwmP3LP9oRxjEYQlAgXHL1bae2CvdPa2J6yUx8pqbghU7oyjLqwDpQsQauPv3LqYUjeGg1nfQGlzPIjWs3IWxK+AYnQRwOCpweIafkvTFkPCC6mi6vOlfX7Qthp6Xql27MvwE4yf6paka1Cr4DcIltKDGjGvYTn2WQ7CxTObxbLZlF3Hsuspu4llN1N2G8tup+wult3dszWOX/8feFRObrACVwPT+fEGKyMbG2yHcfqwxOnjEvfql+sXxV/lk24EtgCS3bNMzhj5R8Xy/RZzG6S99Cnlj4bxKKPlodpH925n4Wlnv91YpVtBBAAA"
+        },
+        "runtime/RP/entity/runtime_barrel_ingredients_0.entity.json": {
+          "before": "614627a8e8e5972dad50b0fe79f3b0284f4991d501c6738ccf3d03bba47dbc45",
+          "after": "b64369d3c538da5fa5b4618856d5295e3282b5da120487cf08294747a529cd26",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA5VX227iMBB971dUPK8ggQRKf2W1spx4knhx7Mh2Stmq/77jBOiCJ2H7gFo558zFc/XH0/PzojK25Z69gXXS6MXr8yJdpskyWfwIX1upobS88q+lkqA9w5/0J4R94GcECHCllZ0fueMhHksRgJUEGyQeuAIpjCtNB8xz1KVfC24tKCZ1bUEE0Y4l7E26nqtB9SAGLQMruXL/yB6UVrxXPoge7WFcdQ1inV+cUZ9XGR7efW/hTsRBasHSIOHyfSU9tG7Fu07B1YILck0gC8X/AOvMUaCX94QNQRCnC5zVyhwjTkZwAtB5o4GJHr27p+QUxSjBdF/XEOO3FL7XE07sCHSDtpxK0xYR+oVAS2v0lC17At8Zz72JoGlCYDFvZm4mpYLr+prHbqZrUjqKj6FUXN0RwLMCrJVAUKiwHhvghM1UOK3xHjSrFLgmZtwGtFCmPIQ/PTBZxmmc7ig4iXyZQLKOlwcQMWFPEYS0sZvrhIIOsYyxVBg7qQ+sAx8aQ0RYU8IrLCMsO66U7NuYs5nhNKYPpkke06jIFrwtTJzBayq0BeaNNYa4oe2MQUN0jS0bGUdhTZVsYYETUKpeS+zKlD37GXtKY/X4b9wFyUjjwGgd9oXgehzATTqjS3AtQIVhE9HIuAvTFwpzVnGcXe5kcdxw5k0X0+dSQEl1YqZivgH2hjkEp5ifzfB9r2SHIeO6jjN8k88wzTvg0BBcOkLl9qHHHYeQubTHu4cWhzqLeWRn6KQvm5AM1nRBHXOe14AjLaLPpZI1Lr6gLHloqCUaUpY+vJ6gjryb7D+SqT8nPatwxsUlk5EJ5UPdThRLRrUTF8YQo8dFlj+8mGODYmLiXHs5St9MhuI2Z4i9jv3mdjB9VVveERJus+eAQehxhWthxbUM655g580BR80gYlVZ3gJLkljW/hvWhKWINilPvuMU4CyekEONqkPJsFEryUIgY8qapoxqBmLM2dAcBd73xCTPs1n8hGE5TcJCmzJrO8Ggtot8Nw3GpqVlSezg+QtN8qaldsZ8Pwen3d4mNOcoMXtIT7bp5O4YvURqMC0O/NPtSwRHrggyLl+XXzWxJB5JA/wfK8q+gO/QAzyybKw9HKt3ryRsCXx4Zl0B8+KXIyGSP74R74SfCx4Pf14PrzqvJ78iYRa0GNYOjcsTDmPrbkQsvj4sR+i8zRdVo6LPp/D7fPoLn9ICeRwPAAA="
+        },
+        "runtime/RP/entity/runtime_barrel_ingredients_1.entity.json": {
+          "before": "34f14c8a8fcbb621cfce5d9daa83fed3aeb13b50e402788081e60c1c3dfe47cf",
+          "after": "c2c84b2689ad261184359a60a884cc9992fbe22fc00398977527a0aafd0fe678",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA5VX227iMBB971dUPK8ggQRKf2W1spx4knhx7Mh2Stmq/77jBOiCJ2H7gFo558zFc/XH0/PzojK25Z69gXXS6MXr8yJdpskyWfwIX1upobS88q+lkqA9w5/0J4R94GcECHCllZ0fueMhHksRgJUEGyQeuAIpjCtNB8xz1KVfC24tKCZ1bUEE0Y6l7E26nqtB9SAGLQMruXL/yB6UVrxXPoge7WFcdQ1inV+cUZ9XGR7efW/hTsRBasHSIOHyfSU9tG7Fu07B1YILck0gC8X/AOvMUaCX94QNQRCnC5zVyhwjTkZwAtB5o4GJHr27p+QUxSjBdF/XEOO3FL7XE07sCHSDtpxK0xYR+oVAS2v0lC17At8Zz72JoGlCYDFvZm4mpYLr+prHbqZrUjqKj6FUXN0RwLMCrJVAUKiwHhvghM1UOK3xHjSrFLgmZtwGtFCmPIQ/PTBZxmmc7ig4iXyZQLKOlwcQMWFPEYS0sZvrhIIOsYyxVBg7qQ+sAx8aQ0RYU8IrLCMsO66U7NuYs5nhNKYPpkke06jIFrwtTJzBayq0BeaNNYa4oe2MQUN0jS0bGUdhTZVsYYETUKpeS+zKlD37GXtKY/X4b9wFyUjjwGgd9oXgehzATTqjS3AtQIVhE9HIuAvTFwpzVnGcXe5kcdxw5k0X0+dSQEl1YqZivgH2hjkEp5ifzfB9r2SHIeO6jjN8k88wzTvg0BBcOkLl9qHHHYeQubTHu4cWhzqLeWRn6KQvm5AM1nRBHXOe14AjLaLPpZI1Lr6gLHloqCUaUpY+vJ6gjryb7D+SqT8nPatwxsUlk5EJ5UPdThRLRrUTF8YQo8dFlj+8mGODYmLiXHs5St9MhuI2Z4i9jv3mdjB9VVveERJus+eAQehxhWthxbUM655g580BR80gYlVZ3gJLkljW/hvWhKWINilPvuMU4CyekEONqkPJsFEryUIgY8qapoxqBmLM2dAcBd73xCTPs1n8hGE5TcJCmzJrO8Ggtot8Nw3GpqVlSezg+QtN8qaldsZ8Pwen3d4mNOcoMXtIT7bp5O4YvURqMC0O/NPtSwRHrggyLl+XXzWxJB5JA/wfK8q+gO/QAzyybKw9HKt3ryRsCXx4Zl0B8+KXIyGSP74R74SfCx4Pf14PrzqvJ78iYRa0GNYOjcsTDmPrbkQsvj4sR+i8zRdVo6LPp/D7fPoLJw5gYRwPAAA="
+        },
+        "runtime/RP/entity/runtime_barrel_ingredients_2.entity.json": {
+          "before": "b57a7603c071f1cd73a0ae03b114ab2d6f578019d9ac4afce073f59be1f689f7",
+          "after": "e1886464bbff19e0ec4dee2ce118ac1158580be4b8f6b77753946a237ac1eaf4",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA5VX227iMBB971dUPK8ggQRKf2W1spx4knhx7Mh2Stmq/77jBOiCJ2H7gFo558zFc/XH0/PzojK25Z69gXXS6MXr8yJdpskyWfwIX1upobS88q+lkqA9w5/0J4R94GcECHCllZ0fueMhHksRgJUEGyQeuAIpjCtNB8xz1KVfC24tKCZ1bUEE0Y6t2Zt0PVeD6kEMWgZWcuX+kT0orXivfBA92sO46hrEOr84oz6vMjy8+97CnYiD1IKlQcLl+0p6aN2Kd52CqwUX5JpAFor/AdaZo0Av7wkbgiBOFzirlTlGnIzgBKDzRgMTPXp3T8kpilGC6b6uIcZvKXyvJ5zYEegGbTmVpi0i9AuBltboKVv2BL4znnsTQdOEwGLezNxMSgXX9TWP3UzXpHQUH0OpuLojgGcFWCuBoFBhPTbACZupcFrjPWhWKXBNzLgNaKFMeQh/emCyjNM43VFwEvkygWQdLw8gYsKeIghpYzfXCQUdYhljqTB2Uh9YBz40hoiwpoRXWEZYdlwp2bcxZzPDaUwfTJM8plGRLXhbmDiD11RoC8wbawxxQ9sZg4boGls2Mo7CmirZwgInoFS9ltiVKXv2M/aUxurx37gLkpHGgdE67AvB9TiAm3RGl+BagArDJqKRcRemLxTmrOI4u9zJ4rjhzJsups+lgJLqxEzFfAPsDXMITjE/m+H7XskOQ8Z1HWf4Jp9hmnfAoSG4dITK7UOPOw4hc2mPdw8tDnUW88jO0ElfNiEZrOmCOuY8rwFHWkSfSyVrXHxBWfLQUEs0pCx9eD1BHXk32X8kU39OelbhjItLJiMTyoe6nSiWjGonLowhRo+LLH94MccGxcTEufZylL6ZDMVtzhB7HfvN7WD6qra8IyTcZs8Bg9DjCtfCimsZ1j3BzpsDjppBxKqyvAWWJLGs/TesCUsRbVKefMcpwFk8IYcaVYeSYaNWkoVAxpQ1TRnVDMSYs6E5CrzviUmeZ7P4CcNymoSFNmXWdoJBbRf5bhqMTUvLktjB8xea5E1L7Yz5fg5Ou71NaM5RYvaQnmzTyd0xeonUYFoc+KfblwiOXBFkXL4uv2piSTySBvg/VpR9Ad+hB3hk2Vh7OFbvXknYEvjwzLoC5sUvR0Ikf3wj3gk/Fzwe/rweXnVeT35FwixoMawdGpcnHMbW3YhYfH1YjtB5my+qRkWfT+H3+fQX72vHSRwPAAA="
+        },
+        "runtime/RP/entity/runtime_barrel_ingredients_3.entity.json": {
+          "before": "05da006e6b1c7d45da1896d293593a68ede4e2e2be7061409b3b884401d016c7",
+          "after": "0dd247a1a5ba477f796afb9699671e254e59e05e13526fbf89fdab207947994c",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA5VX227iMBB971dUPK8ggQRKf2W1spx4knhx7Mh2Stmq/77jBOiCJ2H7gFo558zFc/XH0/PzojK25Z69gXXS6MXr8yJdpskyWfwIX1upobS88q+lkqA9w5/0J4R94GcECHCllZ0fueMhHksRgJUEGyQeuAIpjCtNB8xz1KVfC24tKCZ1bUEE0Y5t2Jt0PVeD6kEMWgZWcuX+kT0orXivfBA92sO46hrEOr84oz6vMjy8+97CnYiD1IKlQcLl+0p6aN2Kd52CqwUX5JpAFor/AdaZo0Av7wkbgiBOFzirlTlGnIzgBKDzRgMTPXp3T8kpilGC6b6uIcZvKXyvJ5zYEegGbTmVpi0i9AuBltboKVv2BL4znnsTQdOEwGLezNxMSgXX9TWP3UzXpHQUH0OpuLojgGcFWCuBoFBhPTbACZupcFrjPWhWKXBNzLgNaKFMeQh/emCyjNM43VFwEvkygWQdLw8gYsKeIghpYzfXCQUdYhljqTB2Uh9YBz40hoiwpoRXWEZYdlwp2bcxZzPDaUwfTJM8plGRLXhbmDiD11RoC8wbawxxQ9sZg4boGls2Mo7CmirZwgInoFS9ltiVKXv2M/aUxurx37gLkpHGgdE67AvB9TiAm3RGl+BagArDJqKRcRemLxTmrOI4u9zJ4rjhzJsups+lgJLqxEzFfAPsDXMITjE/m+H7XskOQ8Z1HWf4Jp9hmnfAoSG4dITK7UOPOw4hc2mPdw8tDnUW88jO0ElfNiEZrOmCOuY8rwFHWkSfSyVrXHxBWfLQUEs0pCx9eD1BHXk32X8kU39OelbhjItLJiMTyoe6nSiWjGonLowhRo+LLH94MccGxcTEufZylL6ZDMVtzhB7HfvN7WD6qra8IyTcZs8Bg9DjCtfCimsZ1j3BzpsDjppBxKqyvAWWJLGs/TesCUsRbVKefMcpwFk8IYcaVYeSYaNWkoVAxpQ1TRnVDMSYs6E5CrzviUmeZ7P4CcNymoSFNmXWdoJBbRf5bhqMTUvLktjB8xea5E1L7Yz5fg5Ou71NaM5RYvaQnmzTyd0xeonUYFoc+KfblwiOXBFkXL4uv2piSTySBvg/VpR9Ad+hB3hk2Vh7OFbvXknYEvjwzLoC5sUvR0Ikf3wj3gk/Fzwe/rweXnVeT35FwixoMawdGpcnHMbW3YhYfH1YjtB5my+qRkWfT+H3+fQXV7elURwPAAA="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients.entity.json": {
+          "before": "5623d0c92a65fad005858f0fd6d3c38ba73fffc45ccca39e3f82d4a689d6e7ba",
+          "after": "f6a287e84fbc6a6320fc4420dea49928aac0e4fa0d85281f64052dff8561641a",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB851egPFeBANe78leqynLiJVg4tuUPKD3x37tOjhzBm/YeIkv2zOzY64zfF8tlcTCu44GdwXlpdLFfFlVZrct18S2tdlJD4/gh7BslQQeGnwxXhL3jMgIE+MZJGwbuMInTUiTgQYJLiieuQArjG2OBBY619N468F7qloVYMxwdiFTAs7P0kau+fC+F7sBJrvyDfl/4wKMKSX7wxLiyR8T6UHygbqNGgN8hYsGpxElqwaqkcF9fEU5XMkC3ah23MJq6kzdTcmACrZ5BrHj1upKN0Uw2wGju9ouFjRIzCruvWgfQMxIvE4kE9yt/AQisBuckntgz4zvBaJW5zBJeCQK3VuVm3ghkrfgfYNZc8GQzwg+CIK53OEu2Mk61ntmAD0YDExHvT8apKE5qjI5tCwRhQxGintlHtSXgR7RzbUxX5/AdAZcOb9ucHarN1gQeTI6lGow/57+Oh2qxjy0ndvpGqqN8DqW6ezkCzw1sqJ46EwLe+4MCf8wZ047WyjSnNERIf2wO31BwErmdQTLLmxOInLCjCEI6YpsvFLRvTI6l2milPjELIYVplpEtmA6Cu04zsuFOJKX7aokh5yIGbgflGOE96MFBE2v4PymBMhdcSwx8fE2eslrxq4l92o8ISrX8wGW6wyv1JDpIJas/x8nPWuPUr0zNgU4BgwEfnFEK386JRvG5UA5Q8gQeXr17saHUbZG+2+Iv+RcnTqEHAAA="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_1.entity.json": {
+          "before": "76495574941e093f22046ebeabc6d8ca496cee1989d756ca2d7c98f4f108bec1",
+          "after": "ef7f1e50a7fa5677caa918ee701e39d5629045b9eecb7a31f97df4971de1e1f3",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB851egPFeBANe78leqynLiJVg4tuUPKD3x37tOjhzBm/YeIkv2zOzY64zfF8tlcTCu44GdwXlpdLFfFlVZrct18S2tdlJD4/gh7BslQQeGnwxXhL3jMgIE+MZJGwbuMInTUiTgQYJLiieuQArjG2OBBY619N468F7qloVYMxwdiFTAs4qdpY9c9QZ6MfQHTnLlHyr0pQ88qpAKDK4YV/aIWB+KD9Rt1AjwO0QsOZU4SS1YlRTu6yvC60oG6Fat4xZGU3fyZkoOTKDVM4gVr15XsjGayQYYzd1+sbBRYkZh91XrAHpG4mUikeB+5S8AgdXgnMQTe2Z8JxitMpdZwitB4Naq3MwbgawV/wPMmguebEb4QRDE9Q5nyVbGqdYzG/DBaGAi4v3JOBXFSY3RsW2BIGwoQtQz+6i2BPyIdq6N6eocviPg0uFtm7NDtdmawIPJsVSD8ff81/FQLfax5cRO30h1lM+hVHcvR+C5gQ3VU2dCwHt/UOCPOWPa0VqZ5pSGCOmPzeEbCk4itzNIZnlzApETdhRBSEds84WC9o3JsVQbrdQnZiGkMM0ysgXTQXDXaUY23ImkdF8tMeRcxMDtoBxDvAc9OGhiDf8nJVDmgmuJgY/vyVNWK341sU/7EUGplh+4THd4p55EB6lk9ec4+VlrnPqVqTnQKWAw4IMzSuHrOdEoPhfKAUqewMO7dy82lLot0ndb/AUn+3o2owcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_2.entity.json": {
+          "before": "470275d9420639b60d498ded33e4e1bf7ec48c933684c0eab5ad4ba643680069",
+          "after": "a0fdb8f193affa6af24cf9fafdbc313fbde01b0dca30e75789e991f00db016a6",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB851egPFeBANe78leqynLiJVg4tuUPKD3x37tOjhzBm/YeIkv2zOzY64zfF8tlcTCu44GdwXlpdLFfFlVZrct18S2tdlJD4/gh7BslQQeGnwxXhL3jMgIE+MZJGwbuMInTUiTgQYJLiieuQArjG2OBBY619N468F7qloVYMxwdiFTAsw07Sx+56g30YugPnOTKP1ToSx94VCEVGFwxruwRsT4UH6jbqBHgd4hYcipxklqwKinc11eE15UM0K1axy2Mpu7kzZQcmECrZxArXr2uZGM0kw0wmrv9YmGjxIzC7qvWAfSMxMtEIsH9yl8AAqvBOYkn9sz4TjBaZS6zhFeCwK1VuZk3Alkr/geYNRc82YzwgyCI6x3Okq2MU61nNuCD0cBExPuTcSqKkxqjY9sCQdhQhKhn9lFtCfgR7Vwb09U5fEfApcPbNmeHarM1gQeTY6kG4+/5r+OhWuxjy4mdvpHqKJ9Dqe5ejsBzAxuqp86EgPf+oMAfc8a0o7UyzSkNEdIfm8M3FJxEbmeQzPLmBCIn7CiCkI7Y5gsF7RuTY6k2WqlPzEJIYZplZAumg+Cu04xsuBNJ6b5aYsi5iIHbQTmGeA96cNDEGv5PSqDMBdcSAx/fk6esVvxqYp/2I4JSLT9wme7wTj2JDlLJ6s9x8rPWOPUrU3OgU8BgwAdnlMLXc6JRfC6UA5Q8gYd3715sKHVbpO+2+AsD/23uowcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_3.entity.json": {
+          "before": "4b12bad2abb6d01f71d48533a66881aa63760d7710e22e989f29a2c0b210b164",
+          "after": "6b5aeb8ae386ccd6e49f781a1431ac75dec1ba75ea8c9bb6842e30573d5b225e",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB851egPFeBANe78leqynLiJVg4tuUPKD3x37tOjhzBm/YeIkv2zOzY64zfF8tlcTCu44GdwXlpdLFfFlVZrct18S2tdlJD4/gh7BslQQeGnwxXhL3jMgIE+MZJGwbuMInTUiTgQYJLiieuQArjG2OBBY619N468F7qloVYMxwdiFTAsy07Sx+56g30YugPnOTKP1ToSx94VCEVGFwxruwRsT4UH6jbqBHgd4hYcipxklqwKinc11eE15UM0K1axy2Mpu7kzZQcmECrZxArXr2uZGM0kw0wmrv9YmGjxIzC7qvWAfSMxMtEIsH9yl8AAqvBOYkn9sz4TjBaZS6zhFeCwK1VuZk3Alkr/geYNRc82YzwgyCI6x3Okq2MU61nNuCD0cBExPuTcSqKkxqjY9sCQdhQhKhn9lFtCfgR7Vwb09U5fEfApcPbNmeHarM1gQeTY6kG4+/5r+OhWuxjy4mdvpHqKJ9Dqe5ejsBzAxuqp86EgPf+oMAfc8a0o7UyzSkNEdIfm8M3FJxEbmeQzPLmBCIn7CiCkI7Y5gsF7RuTY6k2WqlPzEJIYZplZAumg+Cu04xsuBNJ6b5aYsi5iIHbQTmGeA96cNDEGv5PSqDMBdcSAx/fk6esVvxqYp/2I4JSLT9wme7wTj2JDlLJ6s9x8rPWOPUrU3OgU8BgwAdnlMLXc6JRfC6UA5Q8gYd3715sKHVbpO+2+AsgAbAQowcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_4.entity.json": {
+          "before": "e952fbe872d516c46790a51c5dfb82a72923c106c6196ec9921923d6dbf21962",
+          "after": "dd93506f0753555d75ad375361ebc0b3e0dc52ca66827bb51dee35226a39d41c",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB851egPFeBANe78leqynLiJVg4tuUPKD3x37tOjhzBm/YeIkv2zOzY64zfF8tlcTCu44GdwXlpdLFfFlVZrct18S2tdlJD4/gh7BslQQeGnwxXhL3jMgIE+MZJGwbuMInTUiTgQYJLiieuQArjG2OBBY619N468F7qloVYMxwdiFTAsx07Sx+56g30YugPnOTKP1ToSx94VCEVGFwxruwRsT4UH6jbqBHgd4hYcipxklqwKinc11eE15UM0K1axy2Mpu7kzZQcmECrZxArXr2uZGM0kw0wmrv9YmGjxIzC7qvWAfSMxMtEIsH9yl8AAqvBOYkn9sz4TjBaZS6zhFeCwK1VuZk3Alkr/geYNRc82YzwgyCI6x3Okq2MU61nNuCD0cBExPuTcSqKkxqjY9sCQdhQhKhn9lFtCfgR7Vwb09U5fEfApcPbNmeHarM1gQeTY6kG4+/5r+OhWuxjy4mdvpHqKJ9Dqe5ejsBzAxuqp86EgPf+oMAfc8a0o7UyzSkNEdIfm8M3FJxEbmeQzPLmBCIn7CiCkI7Y5gsF7RuTY6k2WqlPzEJIYZplZAumg+Cu04xsuBNJ6b5aYsi5iIHbQTmGeA96cNDEGv5PSqDMBdcSAx/fk6esVvxqYp/2I4JSLT9wme7wTj2JDlLJ6s9x8rPWOPUrU3OgU8BgwAdnlMLXc6JRfC6UA5Q8gYd3715sKHVbpO+2+AsK8TKFowcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_5.entity.json": {
+          "before": "400e9de5dad674771f27eca9211dec68a0c575a381a827223ae39e3ae7d5c3b2",
+          "after": "b4a06569e03dc68f555d87bb154931029d25379fe3310fa5fd57b4b459cafcfe",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41V247bIBR836+I/FzZcS7dbX6lqhA2Jw4KBsQlabrKv/dgb7JxOG73wUKCmTkDBw/vL4tFsTeu54GdwHlpdLFbFHVZL8tl8S2t9lJD6/g+7FolQQeGnwwXhL3jMgIE+NZJG0buOInTUiTgXoJLikeuQArjW2OBBY619M468F7qjoXYMBwdiFTAsy07SR+5GgwMYugPnOTKP1QYSu95VCEVGF0xruwBsT4UH6jrXSPA7xCx5FTiKLVgdVK4rVeE10oG6KvOcQt3UzfyakoOTKDVE4iK16+VbI1msgVGc9dfLGyUmFHYfNU6gJ6R2E4kEtxX/gwQWAPOSTyxZ8Z3gtEpc54lvBIEbq3KzbwRyEbxP8CsOePJZoQfBEFcbnCWbGWcejmzAR+MBiYi3p+MU1Oc1Bgduw4IwooiRD2zj3pNwA9o59KavsnhGwIuHd62OTtUm60JPJgcSzUYf89/HQ/VYh87Tuz0jVRH+RxKdfd8AJ4bWFE9dSYEvPd7Bf6QM6YdbZRpj2mIkP7YHL6i4CRyPYNklrdHEDlhQxGEdMQ2txR0aEyOpdpopT4yCyGFaZaRHZgegrtMM7LlTiSl22qJIeciBm4P5T3EB9CDgzY28H9SAmUuuJYY+PiePGW14hcTh7S/IyjV8gOX6Y7v1JPoKJWs/rxPfta6T/3K1BzoFDAY8MEZpfD1nGgUnwvlCCVP4OHduxUbS11f0nd9+QspD+97owcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_6.entity.json": {
+          "before": "278c2b426b375aa975f68b1648477dddb00e224dc4f941839c44a2316626087e",
+          "after": "3a300dc19eacb579fa830cafdb9eda9a3956321c023cf4dd10e8405c1763be7b",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41Vy47jIBC8z1dEPq/sOMm88iurFcKm46BgQDySzY7y79vYk0wc2rtzsJCgqrqgcfHxtFgUO+N6HtgRnJdGF9tFUZf1slwWP9JqLzW0ju/CtlUSdGD4yXBG2AcuI0CAb520YeSOkzgtRQLuJLikeOAKpDC+NRZY4FhLb60D76XuWIgNw9GBSAU8e2FH6SNXg4FBDP2Bk1z5uwpD6R2PKqQCoyvGld0j1ofiE3W5aQT4HSKWnEocpBasTgrX9YrwWskAfdU5buFm6kpeTcmBCbR6BFHx+rWSrdFMtsBo7vqbhY0SMwqb71oH0DMSzxOJBPeVPwEE1oBzEk/skfFCMDplTrOEV4LArVW5mTcC2Sj+B5g1JzzZjPBOEMT5CmfJVsaplzMb8MFoYCLi/ck4NcVJjdGx64AgrChC1DP7qNcEfI92zq3pmxy+IeDS4W2bs0O12ZrAg8mxVIPx9/zX8VAt9rHjxE7fSHWUz6FUd0974LmBFdVTZ0LAe79T4Pc5Y9rRRpn2kIYI6Y/N4SsKTiLXM0hmeXsAkRM2FEFIR2zzmYIOjcmxVBut1AdmIaQwzTKyA9NDcOdpRrbciaR0XS0x5FzEwO2hvIX4ALpz0MYG/k9KoMwF1xIDH9+Th6xW/GzikPY3BKVafuIy3fGdehAdpZLVn7fJr1q3qV+ZmgOdAgYDPjijFL6eE43ia6EcoeQJ3L1712JjqctT+i5PfwENC/ijowcAAA=="
+        },
+        "runtime/RP/entity/runtime_pressing_tub_ingredients_7.entity.json": {
+          "before": "6be44df4709020442b2c3911eecb76bf22f155d327afcc0cc2bde545cd8616a2",
+          "after": "841f0bf799b4dbb2ce7770452e717db71e1eabcc9341595d811ec3ec88d11ffe",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA41VXY/aMBB8v1+B8lwlBLhy5a9UleXES7BwbMsfUHriv3edHBzBm/YeIkv2zOzY64zfXxaLYm9czwM7gfPS6GK3KOqyXpbL4lta7aWG1vF92LVKgg4MPxkuCHvHZQQI8K2TNozccRKnpUjAvQSXFI9cgRTGt8YCCxxr6Z114L3UHQuxYTg6EKmAZ1t2kj5yNRgYxNAfOMmVf6gwlN7zqEIqMLpiXNkDYn0oPlDXu0aA3yFiyanEUWrB6qRwW68Ir5UM0Fed4xbupm7k1ZQcmECrJxAVr7eVbI1msgVGc9dfLGyUmFHYfNU6gJ6ReJ1IJLiv/BkgsAack3hiz4zvBKNT5jxL2BIEbq3KzbwRyEbxP8CsOePJZoQfBEFcbnCWbGWcejmzAR+MBiYi3p+MU1Oc1Bgduw4IwooiRD2zj3pNwA9o59KavsnhGwIuHd62OTtUm60JPJgcSzUYf89/HQ/VYh87Tuz0jVRH+RxKdfd8AJ4bWFE9dSYEvPd7Bf6QM6YdbZRpj2mIkP7YHL6i4CRyPYNklrdHEDlhQxGEdMQ2Xyno0JgcS7XRSn1kFkIK0ywjOzA9BHeZZmTLnUhKt9USQ85FDNweynuID6AHB21s4P+kBMpccC0x8PE9ecpqxS8mDml/R1Cq5Qcu0x3fqSfRUSpZ/Xmf/Kx1n/qVqTnQKWAw4IMzSuHrOdEoPhfKEUqewMO7dys2lrq+pO/68hcu9SVdowcAAA=="
+        },
+        "runtime/RP/entity/runtime_signature_cup.entity.json": {
+          "before": "d0f053482da68b3eafce31be30973365bd3d3225a714f1966729ce90f93cbdd8",
+          "after": "64163409e0140bb867b5b749b9e1b5d563997dd89ffa560da1748eade5b10ec1",
+          "reason": "T137 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA42TzW7CMBCE7zwFyhkFwo8q8SpVZbnJJqzq2GG9QUWId+86IYES1PpgRfLONzOynctsPk9KR7VmdQLy6GyynydZmq3SVbII0xot5KRL3ucGwbKShXwW2UXGIijA54QN92y/KdtYBGGJQMHxSxvAwvncNaBYS5bde6ys5pZA5W2jTuhbbbrMjpdKQKiNfzDt0krdGg6efRGlTXMQrWflLCgvucXoIoDBY4tF14HVPVJbDAkvpIqqz5f2+UHbSso64yi5UdexL8N3MH6qW5KuQa2C3yBYSg9qxbyG5dhnOQgXz2wWy2ZTdh3LrqfsJpbdTNltLLudsrtYdvfI1jie/j/wqJzcYAWuBqbz7xusjPad7TBOxVa2gL3S2VtKWD08q1798vlF8Tf5pBuBLYDk7VkmZ4z8qmL5fo+5D9Je+pTyR8N4lNHyUO2j+15nYV1nP8RHiFNIBAAA"
+        },
+        "runtime/RP/models/entity/board_glyph_line.geo.json": {
+          "before": "7c581c9639a38def8a169c1f15761fe0b7bf316c5d6142687a849ad31c264b30",
+          "after": "64956e3b98187541f6513e20bf05a304b091f0a4935f2e640bec1cb52c6b09fa",
+          "reason": "T137 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/render_controllers/board_glyph_visual.render_controllers.json": {
+          "before": "f51e5c5d66720a91b4adef0b53e4a093f1dad1ff15f561e5a4d8364622d1dbf7",
+          "after": "1c3dd14982fa5f3e8de87de63e6375357f5e99610f3af5c273ec90b900f62b61",
+          "reason": "T137 appended exact source review. Original black foreground/cream or dark eight-offset glow outlines, Unihex shadow offsets, board-root range and separate foreground submission; preserve all existing glyph/layout extensions. Checked by the source board generator and 360 world-position/alignment cases; camera-feet/spyglass and native-client gaps remain explicit.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "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"
+        },
+        "runtime/RP/render_controllers/runtime_barrel_ingredients.render_controllers.json": {
+          "before": "8309d601a846acf61b2c02f78d2b5fe312049f4725bf8a3a1d1f68ec0dac6c56",
+          "after": "6dfaee7e16b9d1cec7b6d2208beb207ba29ea02ada022fac1cbc9326c7758cb9",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA5XWS2/aQBQF4D2/YuRNkiodeV7GQUqqrrrqrrsIWQOeRCOMTYahKkr47x071ICSHnt24HN9bD5e93VCSPLUuLX2xW/jtrapkxlJGM1pmty2oTN1aVyxbGrvmqoKM2HgNSQhOx2k72N05Qu3q71dG7rQzpmqsPWzM6U1tT+dGE59Ns3aeLdvr3b9Qjeu2Rjn99dXK10ZWzbbZThQeB1uqp6tbF1e3ZD7e8Iy8vZGIuankfN55Pxd3DxPb8g38uP44ulytzBkdvZcu7Jj74zCm2Kc1VUL93g8SHrCbuRL6/fzOEdL86R3lU/6icPx0bzv9OaP3zlzWZl8d07vaXubj+Ney1c2Tz5067bl/F2+vN7FjZ+ueHEnXfbr/ZwuLVjv8VnKYSpgKmGqYJrBdArTHKZ3MGUpjrEWw1wMezEMxrAYw2QMmzGMxrAax2p84DOG1ThW41iNYzWO1ThW41iNYzWB1QRWEwNfTawmsJrAagKrCawmsJrAahKrSawmsZoc+EXDahKrSawmsZrEahKrKaymsJrCagqrqYE/AqymsJrCagqrKayWYbWMJWfp/MNWcOj/uTfahf3Pbu3CVtbv/79vWG/WRdouHUN7wrIJe2BYeh5IeraP3IJaFlfLRtbyuFo+slbE1YqRtTKuVo6sVXG1amRtFlebjaydxtVOR9bmcbX5J3v05N+zw+Qw+Qv8PII3PQ0AAA=="
+        },
+        "runtime/RP/render_controllers/runtime_pressing_ingredients.render_controllers.json": {
+          "before": "7e4f13400b31cf6eb42e91ef0bf173b3721386f3e65a14d3f6377189aa6897b9",
+          "after": "92432e5cb6e5df9b7fd0d14ffbb8b5a98b6abb3e5a17038375c19352c8ac4260",
+          "reason": "T137 appended exact source review. Bind all existing barrel/pressing ice-grape displays to the original twelve-frame/two-tick sprite with Java RGB interpolation/current-frame alpha and a common level clock. Existing catalogue, models and helper counts retained; source pixel and actual selector checks cover the change.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA52Vz2+CMBTH7/wVDRd1cYQWQWfilp122m03Y0iVShoRXCnLiPK/rzDGj+ieoQcS2u97/T4+bR9nAyFzn4gjlf4XEylPYnOJTGwtLNuclqJgccCEv0tiKZIoUjEq4KwUpbWT1m+YdZC+yGLJj8w6CZamPA599QgWcBbLNlUlhyw5Miny0m/8qcKTExMyH48ONGI8SNKdmvAlVWXFy1BQNTjwOBhN0GqFCEaXCxqcRbSyHK2smVaWO0Ev6K1GY+2yLUPLzpiKoNqWiqDaNCY4jUqs63oSNYCrkIeS7nsdZwVsT7NImk1EUb9tmjUl+5aZ2rnekuarEDS3yjLXQ77oEW/MKwdartU9CX3XXvmtb6+eSvv4zalUHzdUbqkEVB1QnYGqC6oeqM5BdQGqT6CKbViGaWEYF4Z5YRgYholhGBmGmWEYGoapEZgauXPGYGoEpkZgagSmRjyzo26urnfRXL4TFarR85RvecRl/n/jaJu2b5c95N613/Mo8lNJQ6Ya2TOyOz1metcBazjgQQ5Ew4EMcnA0HJxBDjMNh9kgB1fDwR3k4Gk4eIMc5hoO8xt/RONvVBiF8QNxmzc4JwkAAA=="
+        },
+        "runtime/RP/render_controllers/signature_tint.json": {
+          "before": "aba974e60d2bc1a0919883e2d249efdadae716ce525a564f2a3935cfa1c7eb69",
+          "after": "60e382c0576eff4c6f6b26e3196eee0aeaf0537d1afc164d10611e881c8c58e8",
+          "reason": "T137 appended exact source review. Preserve the 336-color atlas while routing arbitrary RGB through exact source texel rectangles, six shared-clock frames and opaque source-channel shading in the existing helper. Original face/UV/alpha coverage, source multiplication, selectors and bounded geometry allocations are checked; native rendering remains pending.",
+          "reviewedPredecessorCommit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "reviewedSourceCommit": "a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.137.md",
+          "beforeGzipBase64": "H4sIAAAAAAACA91VTY/aMBC98yssX4DdyM03AVWqeuqpt94QsgxM0qhODI6zWrTiv9cmISR8LdlVLz0ATt7Mm8f4efw2QAjHQmZM0ReQRSpyPEPYIRGxsWVACfkaJF2JXEnBuY7RAW8a0djpJanCyB9FWVGAKihzJqRIk5ypUgJNuH7dJOrUBEQGSu5MtR/1mlRR1jFGiwKZMm4S5/VL1FAcQp5M/s86jqwhZiVXuInY16tFw6ng1QjqUuLvUrIdiSXLoJjrsr9JJtajwyLmQsjRlvA0BqrSDNATcuyxhcLxAl/QM0PU/qPdkh3t7aIdOQf0V5VV4dRuunIVdu7D7n3Yuw/79+EAt9DFReur373V1zEqzdW7huHptkzX/R1Ttb7Kpk3SfFuCJt1IsQGpdqOh0SbVbMM4KAXDMfqK7EV/dz1Ci76hSlQhSrkC2tuLaIaO+5KltYoLfeULZXmadf1ZrLSQMwM+qtnRZW1iO9PQnkS+53gTN/CnHcP0pHJd346moRdEge/5zsQ/9XtxosUijrVpPqja1qVGTWvrFXsd2RZ6j2GsWx6iZ/TwxugvPzJZnq/TnDH6gpzQcz/UopPuquA/Vq6lXkj33ai1Icczfnf+tQ/llQF4fgovR2Ez38+O+3WYymR5YyRZjw7lziH8j2dzs29CX/6c7fQ1z4Xsbp95fNSgN8IkrIfGPW4QaAe3G4KTz7MnEiC/xb/8PP+Sl3CLnvWgPww43L0WB+azH/wFov5UrocJAAA="
         }
       }
     }

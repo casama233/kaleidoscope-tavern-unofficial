@@ -8,7 +8,7 @@
 
 | 候選 | 整合來源與範圍 | 本輪證據狀態 |
 | --- | --- | --- |
-| 酒館 0.6.137 | 公開 T136 main `c461a8e643a08304587ef468ff7f8051369a2dd5` 三語指南，整合機器／可攜原料、交易、板面／RGB／粒子與 aura 原生剩餘時計、事件重播守衛；[完整範圍](../docs/RELEASE-NOTES-0.6.137.md) | 41 個 aura 定向案例通過；精確來源／archive／新 canonical CI 和 native 首次／重啟待本候選完成。 |
+| 酒館 0.6.137 | 公開 T136 main `c461a8e643a08304587ef468ff7f8051369a2dd5` 三語指南，整合機器／可攜原料、交易、板面／RGB／粒子與 aura 原生剩餘時計、事件重播守衛；[完整範圍](../docs/RELEASE-NOTES-0.6.137.md) | 41 個 aura 定向案例通過；凍結 source `a360fe0e2970c65ee0cfad6ad8d08f86f6cbcbf5` 的實際 archive 已建置，新 canonical CI 和 native 首次／重啟待完成。 |
 | 世界名酒 0.1.115 | 保留公共指南及 W110 的作者 Dassai／四款杯模型適配，精確配對 T137 | 本輪 exact peer／archive／CI 待補；舊配套成功不移給新組合。 |
 | 煙火／燒烤 2.8.121 | 保留公開 G121 與已合併 G120，繼續使用同一 Tavern guide projection／Cookery handoff | 未退回 G119；完整家族與實際 client 驗收仍各自待完成。 |
 

@@ -80,7 +80,7 @@ class EngineInputCleanup(unittest.TestCase):
                  'textures/items/icon.png': hashlib.sha256(b'original image').hexdigest(),
                  'sounds/unique.ogg': hashlib.sha256(b'original sound').hexdigest()}
         self.reference.return_value = (self.root / 'receipt.json', self.root / 'retained',
-                                       {'uuid': {'files': files}})
+                                       {('resource', 'uuid'): {'files': files}})
         cache = {}
         plan = cleanup.plan(self.root, self.context, cache)
         result = cleanup.execute(plan, lambda: self.context, cache)
@@ -91,6 +91,61 @@ class EngineInputCleanup(unittest.TestCase):
         self.assertEqual((source / 'textures/items/icon.png').read_bytes(), b'original image')
         self.assertTrue((copied / 'manifest.json').exists())
         self.assertTrue((self.engine / 'worlds/probe-source.js').exists())
+
+    def structure_copy(self):
+        source = self.root / 'retained/behavior_packs/uuid'
+        copied = self.engine / 'worlds/QA/behavior_packs/uuid'
+        structure = 'structures/reusable/hall.mcstructure'
+        original = b'original binary structure'
+        for pack in [source, copied]:
+            (pack / structure).parent.mkdir(parents=True)
+            (pack / structure).write_bytes(original)
+        (copied / 'manifest.json').write_text(json.dumps({'header': {'uuid': 'uuid'}}))
+        self.reference.return_value = (self.root / 'receipt.json', self.root / 'retained',
+                                       {('behavior', 'uuid'): {'files': {structure: hashlib.sha256(original).hexdigest()}}})
+        return source, copied, structure
+
+    def test_reconstructible_bp_structures_retire_with_db_scripts_json_and_foreign_side_preserved(self):
+        source, copied, structure = self.structure_copy()
+        # Even a receipt-backed JSON copy stays outside the binary asset scope.
+        for pack in [source, copied]:
+            (pack / 'structures/metadata.json').write_bytes(b'original metadata')
+        self.reference.return_value[2][('behavior', 'uuid')]['files']['structures/metadata.json'] = hashlib.sha256(b'original metadata').hexdigest()
+        (copied / 'scripts').mkdir()
+        (copied / 'scripts/observer.js').write_text('unique observer script')
+        (copied / 'models').mkdir()
+        (copied / 'models/unique.json').write_text('unique diagnostic model')
+        db = copied.parents[1] / 'db'
+        db.mkdir();(db / 'CURRENT').write_bytes(b'original world database')
+        foreign = copied.parent / 'foreign'
+        (foreign / structure).parent.mkdir(parents=True)
+        (foreign / structure).write_bytes((source / structure).read_bytes())
+        (foreign / 'manifest.json').write_text(json.dumps({'header': {'uuid': 'foreign'}}))
+        # An admitted RP with the same UUID cannot authorize a BP deletion.
+        self.reference.return_value[2][('resource', 'foreign')] = self.reference.return_value[2][('behavior', 'uuid')]
+        cache = {}
+        plan = cleanup.plan(self.root, self.context, cache)
+        result = cleanup.execute(plan, lambda: self.context, cache)
+        self.assertEqual(result['state'], 'completed')
+        self.assertFalse((copied / 'structures/reusable').exists())
+        self.assertEqual((source / structure).read_bytes(), b'original binary structure')
+        self.assertEqual((copied / 'structures/metadata.json').read_bytes(), b'original metadata')
+        self.assertEqual((copied / 'scripts/observer.js').read_text(), 'unique observer script')
+        self.assertEqual((copied / 'models/unique.json').read_text(), 'unique diagnostic model')
+        self.assertEqual((db / 'CURRENT').read_bytes(), b'original world database')
+        self.assertTrue((copied / 'manifest.json').exists())
+        self.assertTrue((foreign / structure).exists())
+        self.assertTrue(self.report.exists())
+
+    def test_changed_admitted_structure_source_prevents_retirement(self):
+        source, copied, structure = self.structure_copy()
+        cache = {}
+        plan = cleanup.plan(self.root, self.context, cache)
+        self.assertTrue(any('asset_reference' in t for r in plan['selected'] for t in r['targets']))
+        (source / structure).write_bytes(b'changed source is outside the admitted receipt')
+        result = cleanup.execute(plan, lambda: self.context, cache)
+        self.assertEqual(result['deleted'], [])
+        self.assertEqual((copied / structure).read_bytes(), b'original binary structure')
 
     def test_symlink_payload_rejected_and_active_lease_preserved(self):
         (self.engine / 'definitions/link').symlink_to(self.root / 'outside')

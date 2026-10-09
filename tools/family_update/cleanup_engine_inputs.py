@@ -79,7 +79,9 @@ def asset_reference(comparison_cache):
             raise ValueError('Retained asset receipt identity changed')
         reviewed = c.read(receipt)
         candidate = Path(reviewed['assembled_receipt']['path']).parent
-        comparison_cache[key] = (receipt, candidate, {p['uuid']: p for p in reviewed['packs'] if p['side'] == 'resource'})
+        comparison_cache[key] = (receipt, candidate,
+                                 {(p['side'], p['uuid']): p for p in reviewed['packs']
+                                  if p['side'] in {'resource', 'behavior'}})
     return comparison_cache[key]
 
 
@@ -92,8 +94,11 @@ def asset_targets(engine, root, mounts, comparison_cache):
     worlds = engine / 'worlds'
     if not worlds.is_dir() or worlds.is_symlink():
         return []
-    for world in worlds.iterdir():
-        pack_root = world / 'resource_packs'
+    pack_roots = ((world / (side + '_packs'), side, names)
+                  for world in worlds.iterdir()
+                  for side, names in (('resource', ('textures', 'sounds')),
+                                      ('behavior', ('structures',))))
+    for pack_root, side, names in pack_roots:
         if not pack_root.is_dir() or pack_root.is_symlink():
             continue
         for pack in pack_root.iterdir():
@@ -101,17 +106,23 @@ def asset_targets(engine, root, mounts, comparison_cache):
                 continue
             retention._safe_path(pack, root, mounts)
             uid = c.read(pack / 'manifest.json')['header']['uuid']
-            if uid not in packs:
+            if (side, uid) not in packs:
                 continue
-            for name in ('textures', 'sounds'):
+            for name in names:
                 pending = [pack / name]
                 while pending:
                     target = pending.pop()
                     if not target.is_dir() or target.is_symlink():
                         continue
                     metadata = target_metadata(target, root, mounts)
+                    # A structures copy may contain unique observer metadata.
+                    # Only binary .mcstructure asset directories are eligible.
+                    if side == 'behavior' and any(Path(rel).suffix != '.mcstructure'
+                                                  for rel in metadata['files']):
+                        pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
+                        continue
                     prefix = target.relative_to(pack).as_posix()
-                    source_root = candidate / 'resource_packs' / uid / prefix
+                    source_root = candidate / (side + '_packs') / uid / prefix
                     if not source_root.is_dir():
                         pending.extend(child for child in target.iterdir() if child.is_dir() and not child.is_symlink())
                         continue
@@ -122,8 +133,8 @@ def asset_targets(engine, root, mounts, comparison_cache):
                     checks = {}
                     for rel in metadata['files']:
                         copy = target / rel
-                        source = candidate / 'resource_packs' / uid / prefix / rel
-                        digest = packs[uid]['files'].get(prefix + '/' + rel)
+                        source = source_root / rel
+                        digest = packs[(side, uid)]['files'].get(prefix + '/' + rel)
                         if not digest or not source.is_file() or source.is_symlink():
                             break
                         identities = [retention._stat(copy), retention._stat(source)]
@@ -138,7 +149,7 @@ def asset_targets(engine, root, mounts, comparison_cache):
                         checks[rel] = identities
                     else:
                         if checks:
-                            metadata['asset_reference'] = {'receipt': str(receipt), 'source': str(candidate / 'resource_packs' / uid / prefix), 'files': checks}
+                            metadata['asset_reference'] = {'receipt': str(receipt), 'source': str(source_root), 'files': checks}
                             targets.append(metadata)
                         continue
                     # Preserve the differing directory's direct files; independently

@@ -1,3 +1,7 @@
+## 當前調酒修補：T145
+
+live 2026-10-10 記錄 11 次 `[Tavern Mixology] STALE_HAND`（前幾日 0 次）；酒館 BP 與 T143 收據逐檔相同。T145 在 native use 事件副本未回報雪克杯動態屬性值時改以實際手持物品辨識，見[發版說明](RELEASE-NOTES-0.6.145.md)。其實機事件語意、真人搖晃畫面與放置情境的 `SPACE_NOT_CLEAR` 尚待確認。
+
 ## 當前板面用戶端修補：T144
 
 實際來源、CI、原生／保存及 LIVE 版本統一見[當前基線](../family/BASELINE-STATUS.md)；真人驗收仍待完成。以下歷史證據不改標。

@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {world,system,Player,ItemStack,BlockPermutation,EquipmentSlot,Potions} from '@minecraft/server';
-import {nativeStart,nativeStop,placeShaker,pourHeldShakerNow,installMixologyEvents,setMixologyRegistry,readPortableItem,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
+import {nativeStart,nativeStop,placeShaker,pourHeldShakerNow,clearHeldShaker,beforeShakerUse,installMixologyEvents,setMixologyRegistry,readPortableItem,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
 import {installJavaItemUseOnEvents} from '../runtime/BP/scripts/bedrock/java-placement-router.js';
 import {ExtensionRegistry} from '../runtime/BP/scripts/core/registry.js';
 import {emptyShaker,addInput,cupKey,shakerKey} from '../runtime/BP/scripts/core/mixology.js';
@@ -311,4 +311,68 @@ test('station witness metadata changes never bypass a foreign cancellation',()=>
  world.beforeEvents.playerInteractWithBlock.emit({player:f.player,block:f.block,itemStack:f.main(),blockFace:'North',isFirstEvent:true,cancel:true});
  const replacement=f.main();replacement.nameTag='Changed after foreign denial';f.player.inventory.setItem(0,replacement);
  assert.equal(f.native('East'),false);system.advance(1);assert.equal(f.state(),null);assert.deepEqual(f.main(),replacement);
+});
+
+/** A native use event can report the shaker stack without its dynamic-property
+ * value. These fixtures hand the handlers exactly that copy. */
+function mainHandFixture(){
+ const player=new Player('reported-'+(++sequence),world.getDimension('overworld'));player.location={x:sequence*16,y:64,z:0};
+ let state=emptyShaker();for(let i=0;i<3;i++)state=addInput(state,'kaleidoscope_tavern:plum_wine_q4',registry);
+ const stack=new ItemStack(SHAKER_ID);stack.setDynamicProperty(PORTABLE_DATA,encodePortable(state,'main_'+sequence));
+ player.inventory.setItem(0,stack);player.inventory.setItem(1,new ItemStack('minecraft:stick',3));
+ player.getBlockFromViewDirection=()=>({});
+ return {player,held:()=>player.inventory.getItem(0),reported:()=>new ItemStack(SHAKER_ID)};
+}
+test('a native copy without the shaker property still shakes the live main hand',()=>{
+ const f=mainHandFixture(),before=readPortableItem(f.held()).state;
+ assert.equal(nativeStart({source:f.player,itemStack:f.reported()}),undefined);
+ assert.deepEqual(readPortableItem(f.held()).state,before);
+ const time=system.currentTick;system.currentTick=time+69;
+ nativeStop({source:f.player,itemStack:f.reported()});
+ const shaken=readPortableItem(f.held()).state;
+ assert.equal(shaken.result.item,'kaleidoscope_tavern:signature_cocktail');
+ assert.equal(shaken.slots.length,3,'Java keeps the ingredients until the result is poured');
+});
+test('an omitted native value never guesses between two shaker hands',()=>{
+ const f=mainHandFixture();const off=new ItemStack(SHAKER_ID);off.setDynamicProperty(PORTABLE_DATA,encodePortable(emptyShaker(),'off_'+sequence));
+ let equipment=off.clone();
+ f.player.equippable={getEquipment:slot=>slot===EquipmentSlot.Offhand?equipment?.clone():f.held(),setEquipment:(slot,item)=>{equipment=item?.clone();return true;}};
+ const before=readPortableItem(f.held()).state,time=system.currentTick;
+ const logs=captureWarnings(()=>nativeStart({source:f.player,itemStack:f.reported()}));
+ assert.ok(logs.some(line=>line.includes('AMBIGUOUS_SHAKER_HAND')));
+ system.currentTick=time+69;nativeStop({source:f.player,itemStack:f.reported()});
+ assert.deepEqual(readPortableItem(f.held()).state,before);
+ assert.deepEqual(readPortableItem(equipment).state.slots.length,0);
+});
+test('a replaced live hand still cancels settlement when the copy omitted the value',()=>{
+ const f=mainHandFixture();
+ nativeStart({source:f.player,itemStack:f.reported()});
+ f.player.inventory.setItem(0,new ItemStack(SHAKER_ID));
+ const time=system.currentTick;system.currentTick=time+69;
+ nativeStop({source:f.player,itemStack:f.reported()});
+ const replacement=readPortableItem(f.player.inventory.getItem(0)).state;
+ assert.ok(!replacement.result,'A replaced live hand must not settle a result');
+ assert.equal(replacement.slots.length,0);
+});
+test('a sneak-scoped clear whose copy omitted the value clears the live held shaker',()=>{
+ const f=mainHandFixture();
+ assert.equal(clearHeldShaker(f.player,new ItemStack(SHAKER_ID)),true);
+ const state=readPortableItem(f.held()).state;
+ assert.equal(state.slots.length,0);assert.ok(!state.result);
+});
+test('beforeShakerUse trusts the live hand when the copy omitted the value',()=>{
+ const f=mainHandFixture();
+ const loaded={source:f.player,itemStack:new ItemStack(SHAKER_ID),cancel:false};
+ beforeShakerUse(loaded);assert.equal(loaded.cancel,false,'A loaded live shaker was cancelled from a value-less copy');
+ const g=mainHandFixture();g.player.inventory.setItem(0,new ItemStack(SHAKER_ID));
+ const empty={source:g.player,itemStack:new ItemStack(SHAKER_ID),cancel:false};
+ beforeShakerUse(empty);assert.equal(empty.cancel,true,'An empty live shaker must not start a shake');
+});
+test('a reported value still has to match the live hand exactly',()=>{
+ const f=mainHandFixture();const other=new ItemStack(SHAKER_ID);other.setDynamicProperty(PORTABLE_DATA,encodePortable(emptyShaker(),'other_'+sequence));
+ const logs=captureWarnings(()=>nativeStart({source:f.player,itemStack:other}));
+ assert.ok(logs.some(line=>line.includes('STALE_HAND')));
+ const before=readPortableItem(f.held()).state;
+ const time=system.currentTick;system.currentTick=time+69;nativeStop({source:f.player,itemStack:other});
+ assert.deepEqual(readPortableItem(f.held()).state,before);
 });

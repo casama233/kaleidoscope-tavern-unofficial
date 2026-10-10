@@ -19,14 +19,15 @@ def validate_delta(before,after,pins):
     digest=lambda files:{n:hashlib.sha256(raw).hexdigest() for n,raw in files.items()}
     a,b=digest(before),digest(after)
     delta={n for n in set(a)|set(b) if a.get(n)!=b.get(n)}
-    assert delta==set(pins), 'AMW25 delta exceeds the independently reviewed paths'
+    assert delta==set(pins), 'AMW review delta exceeds the independently reviewed paths'
     for name,row in pins.items():
-        assert row=={'before':a.get(name),'after':b.get(name)}, 'AMW25 changed bytes differ from reviewed source: '+name
+        assert row=={'before':a.get(name),'after':b.get(name)}, 'AMW review changed bytes differ from reviewed source: '+name
     return a,b,delta
 
 
 def dependency_versions(uid,pins):
-    """Only this reviewed pair may move24→25; old profiles keep their own scope."""
+    """Reviewed pair transitions only; old profiles keep their own scope."""
+    if uid in AMW and pins.get(uid)==[2,6,27]:return [[2,6,26],[2,6,27]]
     if uid in AMW and pins.get(uid)==[2,6,25]:return [[2,6,24],[2,6,25]]
     return [[2,4,18],[2,4,19],pins[uid]]
 

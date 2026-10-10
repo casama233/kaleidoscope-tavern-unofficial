@@ -21,6 +21,9 @@ def reconcile(inventory,expected):
     path=c.CONFIG.get('preserved_reconciliation')
     if not path:return expected,{}
     proof=c.read(Path(path))
+    if proof.get('profile')=='amw-server-2627':
+        from family_update.amw27_reconciliation import reconcile_amw27
+        return reconcile_amw27(inventory,expected,proof,path)
     if proof.get('profile')=='amw-server-2625':
         from family_update.amw25_reconciliation import reconcile_amw25
         return reconcile_amw25(inventory,expected,proof,path)

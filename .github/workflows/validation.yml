@@ -164,11 +164,19 @@ jobs:
         working-directory: tavern-src
         run: |
           python - <<'PYPAIR'
-          import json,sys,tempfile
+          import json,os,subprocess,sys,tempfile
           from pathlib import Path
           sys.path.insert(0,'tools')
           from family_bundle import assemble
           root=Path('.').resolve();peer=Path('../world-liquor-src').resolve()
+          # These public repository IDs are independent expectations, not read
+          # from the peer baseline that the child gate must verify.
+          identities={
+              'tavern':{'repository':'casama233/kaleidoscope-tavern-unofficial','repository_id':1377171148},
+              'world-liquor':{'repository':'casama233/kaleidoscope-world-liquor-unofficial','repository_id':1385218112}}
+          assert os.environ['GITHUB_REPOSITORY']==identities['tavern']['repository']
+          assert os.environ['GITHUB_REPOSITORY_ID']==str(identities['tavern']['repository_id'])
+          assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=peer,text=True).strip()=='d605518f6ff91265070751ab70ff491ccfcb10b6'
           lock=json.loads((root/'family/upstream.lock.json').read_text())
           lock['owned']=[row for row in lock['owned'] if row['key'] in {'tavern','world-liquor'}]
           assert len(lock['owned'])==2 and {row['key'] for row in lock['owned']}=={'tavern','world-liquor'}
@@ -181,7 +189,7 @@ jobs:
           with tempfile.TemporaryDirectory(prefix='tavern-liquor-exact-') as tmp:
               # Strict committed-source gates and the original exact-dependency
               # resolver are mandatory. This is a focused pair, not full-family admission.
-              receipt=assemble(lock,{'tavern':root,'world-liquor':peer},[],Path(tmp)/'candidate')
+              receipt=assemble(lock,{'tavern':root,'world-liquor':peer},[],Path(tmp)/'candidate',source_identities=identities)
               assert len(receipt['packs'])==4 and receipt['acceptance']['static'] is True
               assert receipt['production_ready'] is False
               receipt['scope']='Tavern/World Liquor four-pack exact dependencies only; no full-family, BDS, saved-world or client admission'

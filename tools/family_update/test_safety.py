@@ -155,6 +155,7 @@ class BindingTests(unittest.TestCase):
                 patch.object(deploy_live, 'summary', return_value={'status': 'RUNNING'}),
                 patch.object(deploy_live, 'verify_predeploy', return_value=receipt),
                 patch.object(deploy_live, 'verify_candidate_sources', return_value=receipt),
+                patch.object(workflow, 'same_runtime', return_value=False),
                 patch.object(deploy_live, 'sha', return_value='same-reviewed-guard'),
                 patch.object(workflow, 'record_static') as static,
                 patch.object(workflow, 'verify_native') as native,

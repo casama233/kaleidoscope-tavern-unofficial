@@ -15,7 +15,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from family_update import common, workflow
+from family_update import common, deploy_live, workflow
 from family_bundle import audit as audit_bundle, files_hash
 from family_guard import atomic as atomic_json
 
@@ -101,12 +101,13 @@ class ResumeTests(unittest.TestCase):
         # process launch, real source checkout read or server state mutation.
         for name in ('run', 'check_output', 'Popen'):
             self.enterContext(patch.object(subprocess, name, side_effect=AssertionError('External process forbidden in resume tests')))
-        for module in (common, workflow):
-            for name, value in {'R': self.r, 'C': self.c, 'B': self.b, 'T': self.t, 'Q': self.q, 'CONFIG_PATH': self.config}.items():
+        for module in (common, deploy_live, workflow):
+            for name, value in {'R': self.r, 'C': self.c, 'B': self.b, 'T': self.t, 'Q': self.q, 'CONFIG_PATH': self.config, 'LOCK': self.root / 'maintenance.lock'}.items():
                 self.enterContext(patch.object(module, name, value))
             for name in ('api', 'git'):
                 self.enterContext(patch.object(module, name, side_effect=AssertionError('External I/O forbidden in resume tests')))
         self.enterContext(patch.object(common, 'G', {'hashes': files_hash, 'atomic': atomic_json}))
+        self.real_run_stage = workflow.run_stage
         self.stages = self.enterContext(patch.object(workflow, 'run_stage', side_effect=AssertionError('Completed stages must not rerun')))
         self.lease = self.enterContext(patch.object(workflow, 'lease_available', return_value={}))
         self.static = self.enterContext(patch.object(workflow, 'record_static', return_value={'ok': True}))
@@ -268,13 +269,23 @@ class ResumeTests(unittest.TestCase):
         (self.r / 'exact-engine/native-report.json').write_text('invalid unused evidence')
         with patch.object(workflow, 'verify_native', side_effect=AssertionError('No native work for identical runtime')):
             prepared = workflow.prepare()
-            deployed = workflow.deploy()
+            self.stages.assert_not_called()
+            self.stages.side_effect = self.real_run_stage
+            self.source_state.reset_mock()
+            self.audit.reset_mock()
+            self.live.reset_mock()
+            with patch.object(deploy_live, 'lease_available', return_value={}), patch.object(deploy_live, 'summary', return_value={'status': 'RUNNING'}), patch.object(deploy_live, 'action') as action:
+                deployed = workflow.deploy()
+                action.assert_not_called()
         self.assertEqual(prepared['state'], 'no_runtime_changes')
         self.assertEqual(deployed['state'], 'no_runtime_changes')
         self.assertFalse(prepared['live_mutated'])
         self.assertFalse(prepared['client'])
         self.assertFalse(prepared['production_ready'])
-        self.stages.assert_not_called()
+        self.stages.assert_called_once_with('deploy_live')
+        self.source_state.assert_called_once_with()
+        self.audit.assert_called_once()
+        self.live.assert_called_once_with()
         self.static.assert_not_called()
         self.ci.assert_not_called()
 
@@ -332,7 +343,8 @@ class ResumeTests(unittest.TestCase):
         self.assertEqual(result['verified_at'], 'completed-before-cleanup')
         self.assertFalse(result['client'])
         self.assertFalse(result['production_ready'])
-        self.source_state.assert_called_once_with()
+        # The stage owns its locked preflight; the wrapper does not rescan.
+        self.source_state.assert_not_called()
 
 
 if __name__ == '__main__':

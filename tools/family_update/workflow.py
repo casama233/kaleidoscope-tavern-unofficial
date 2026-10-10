@@ -7,8 +7,9 @@ from ci_impact import classify_path
 def run_stage(name, argv=None):
     module = importlib.import_module('family_update.' + name)
     result = module.main(argv or ['--execute'])
-    if result not in [None, 0]:
+    if result not in [None, 0] and not isinstance(result, dict):
         raise RuntimeError(f'{name} failed with exit code {result}')
+    return result
 
 
 def same_runtime(receipt, inventory):
@@ -324,10 +325,12 @@ def verify_deployed():
 def deploy():
     if (R / 'deployment-result.json').exists():
         return verify_deployed()
-    receipt = verify_candidate_sources()
-    if same_runtime(receipt, verify_predeploy()):
-        return {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}
-    run_stage('deploy_live')
+    # The locked deployment preflight owns the candidate/live scan and no-op
+    # decision. An extra scan here repeats that work before acquiring the lock.
+    result = run_stage('deploy_live')
+    if result is not None:
+        assert result == {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}, 'Unexpected deployment stage result'
+        return result
     # deploy_live already verified installed files/order, guard, startup and
     # live status under its lease. After it releases that lease, cleanup may
     # take minutes and another reviewed source may advance. Report this

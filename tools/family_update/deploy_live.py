@@ -9,6 +9,9 @@ def preflight():
     assert summary()['status'] == 'RUNNING', 'Live must initially be RUNNING; never start an intentionally stopped server during recovery'
     original = verify_predeploy()
     receipt = verify_candidate_sources()
+    from family_update.workflow import same_runtime
+    if same_runtime(receipt, original):
+        return original, receipt
     assert sha(Q / 'family_guard.py') == sha(T / 'tools/family_guard.py'), 'BSM guard differs from canonical; investigate, never silently replace'
     # Every entry point uses the same evidence validator; share the already
     # verified immutable candidate within this preflight instead of rescanning.
@@ -229,41 +232,45 @@ def main(argv=None):
         print(json.dumps({'execute':False,'lease':read(LEASE) if LEASE.exists() else {},'live':summary(),'candidate':str(C),'fresh_backup':str(R/'production-snapshot'),'required_reports':[str(R/p) for p in ['production-before/inventory.json','build-evidence.json','static-evidence.json','compatibility-report.json','exact-engine/native-report.json']],'authorization_source':str(AUTHORIZATION),'client':False,'production_ready':False},ensure_ascii=False,indent=2)); return
     # A separate advisory lock protects cooperating helpers; the visible lease
     # also protects against other existing deployment scripts and must be free.
-    lock=open(str(LOCK),'a+'); fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-    lease_available(); original,receipt=preflight()
-    for path in [R/name for name in ['previous-maintenance.json','handoff-authorization.json','live-authorization-AGENTS.md','reviewed-family-receipt.json','admission-policy.json','admission-report.json','deployment-result.json','deployment-recovery.json','rollback-map.json','production-snapshot','production-staged','production-rollback','saved-world-engine','saved-world-report.json']]:
-        assert not path.exists(), 'Existing report or deployment state must be preserved: ' + str(path)
-    acquire_lease(receipt)
-    changed=False; retired=[]; installed=[]
-    try:
-        verify_predeploy()
-        instruction=Path(str(AUTHORIZATION)).read_text()
-        shutil.copy2(str(AUTHORIZATION),R/'live-authorization-AGENTS.md')
-        atomic(R/'handoff-authorization.json',{'source':'explicit_user_instruction','instruction':instruction,'recorded_at':now(),'source_file':str(AUTHORIZATION),'source_sha256':sha(str(AUTHORIZATION)),'snapshot':report_ref(R/'live-authorization-AGENTS.md'),'scope':'Continuing authorization for per-candidate live development updates after merged PR/static/BDS/saved-world gates; human client acceptance remains pending.'})
-        print(f'Stopping {SERVER} for a fresh backup and saved-world rehearsal',flush=True)
-        action('stop'); assert summary()['status']=='STOPPED'; verify_predeploy()
-        snapshot=R/'production-snapshot'; assert not snapshot.exists(); shutil.copytree(W,snapshot)
-        before=hashes(W); copied=hashes(snapshot); assert before==copied, 'Stopped snapshot copy mismatch'
-        atomic(R/'production-before/backup-receipt.json',{'recorded_at':now(),'world':str(W),'consistent_stopped_snapshot':str(snapshot),'files':copied,'packs':len(original['packs']),'status':'consistent_stopped_backup','lease_owner':OWNER,'level_dat_sha256':sha(W/'level.dat'),'live_status':'STOPPED'})
-        command([PY,ENTRY,'--config',CONFIG_PATH,'saved-world','--execute'],R/'saved-world-summary.log')
-        receipt=finalize_receipt(); retired,installed=install(receipt,original); changed=True
-        shutil.copy2(B/'server_output.txt',R/'production-before/server-output-before-start.txt')
-        action('start')
-        command([PY,ENTRY,'--config',CONFIG_PATH,'verify-live','--execute'],R/'poststart-summary.log')
-        result=read(R/'deployment-result.json'); result.update(state='deployed_running',poststart_report=str(R/'poststart-verification.json'),completed_at=now()); atomic(R/'deployment-result.json',result)
-        lease=read(LEASE); lease.update(state='completed',completed_at=now(),receipt=str(R/'reviewed-family-receipt.json'),status='running_for_user_acceptance'); atomic(LEASE,lease)
-        print('LIVE_DEVELOPMENT_DEPLOYED_PENDING_CLIENT',flush=True)
-    except BaseException as failure:
-        traceback.print_exc()
+    with open(str(LOCK), 'a+') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        lease_available(); original,receipt=preflight()
+        from family_update.workflow import same_runtime
+        if same_runtime(receipt, original):
+            return {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}
+        for path in [R/name for name in ['previous-maintenance.json','handoff-authorization.json','live-authorization-AGENTS.md','reviewed-family-receipt.json','admission-policy.json','admission-report.json','deployment-result.json','deployment-recovery.json','rollback-map.json','production-snapshot','production-staged','production-rollback','saved-world-engine','saved-world-report.json']]:
+            assert not path.exists(), 'Existing report or deployment state must be preserved: ' + str(path)
+        acquire_lease(receipt)
+        changed=False; retired=[]; installed=[]
         try:
-            restored=recover_after_failure(original,changed,retired,installed,rollback_failed=isinstance(failure,RecoveryRequired))
-            if changed and restored:
-                atomic(R/'deployment-result.json',{'state':'rolled_back_after_candidate_start','save_database_restored':False,'note':'Original package inventory and policy verified before restart. Newest database retained; stopped backup is available for explicit data recovery.','client':False,'production_ready':False})
-        except BaseException:
+            verify_predeploy()
+            instruction=Path(str(AUTHORIZATION)).read_text()
+            shutil.copy2(str(AUTHORIZATION),R/'live-authorization-AGENTS.md')
+            atomic(R/'handoff-authorization.json',{'source':'explicit_user_instruction','instruction':instruction,'recorded_at':now(),'source_file':str(AUTHORIZATION),'source_sha256':sha(str(AUTHORIZATION)),'snapshot':report_ref(R/'live-authorization-AGENTS.md'),'scope':'Continuing authorization for per-candidate live development updates after merged PR/static/BDS/saved-world gates; human client acceptance remains pending.'})
+            print(f'Stopping {SERVER} for a fresh backup and saved-world rehearsal',flush=True)
+            action('stop'); assert summary()['status']=='STOPPED'; verify_predeploy()
+            snapshot=R/'production-snapshot'; assert not snapshot.exists(); shutil.copytree(W,snapshot)
+            before=hashes(W); copied=hashes(snapshot); assert before==copied, 'Stopped snapshot copy mismatch'
+            atomic(R/'production-before/backup-receipt.json',{'recorded_at':now(),'world':str(W),'consistent_stopped_snapshot':str(snapshot),'files':copied,'packs':len(original['packs']),'status':'consistent_stopped_backup','lease_owner':OWNER,'level_dat_sha256':sha(W/'level.dat'),'live_status':'STOPPED'})
+            command([PY,ENTRY,'--config',CONFIG_PATH,'saved-world','--execute'],R/'saved-world-summary.log')
+            receipt=finalize_receipt(); retired,installed=install(receipt,original); changed=True
+            shutil.copy2(B/'server_output.txt',R/'production-before/server-output-before-start.txt')
+            action('start')
+            command([PY,ENTRY,'--config',CONFIG_PATH,'verify-live','--execute'],R/'poststart-summary.log')
+            result=read(R/'deployment-result.json'); result.update(state='deployed_running',poststart_report=str(R/'poststart-verification.json'),completed_at=now()); atomic(R/'deployment-result.json',result)
+            lease=read(LEASE); lease.update(state='completed',completed_at=now(),receipt=str(R/'reviewed-family-receipt.json'),status='running_for_user_acceptance'); atomic(LEASE,lease)
+            print('LIVE_DEVELOPMENT_DEPLOYED_PENDING_CLIENT',flush=True)
+        except BaseException as failure:
             traceback.print_exc()
-        raise
-    finally:
-        fcntl.flock(lock,fcntl.LOCK_UN); lock.close()
+            try:
+                restored=recover_after_failure(original,changed,retired,installed,rollback_failed=isinstance(failure,RecoveryRequired))
+                if changed and restored:
+                    atomic(R/'deployment-result.json',{'state':'rolled_back_after_candidate_start','save_database_restored':False,'note':'Original package inventory and policy verified before restart. Newest database retained; stopped backup is available for explicit data recovery.','client':False,'production_ready':False})
+            except BaseException:
+                traceback.print_exc()
+            raise
+        finally:
+            fcntl.flock(lock,fcntl.LOCK_UN)
     # The live transaction has completed. Cleanup has its own lock and cannot
     # enter this function's recovery path, including on interruption or ENOSPC.
     from family_update.cleanup_copies import after_deployment

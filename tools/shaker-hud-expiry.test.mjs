@@ -15,13 +15,13 @@ function resolve(name,value){
 const images=rows=>rows.flatMap(row=>Object.entries(row).map(([name,value])=>({name,...resolve(name,value)})));
 const slotSprites=images(slots),progressSprites=images(progress);
 
-test('slot and progress sprites own finite expiry matched to their refresh cadence',()=>{
+test('slot and progress sprites own finite expiry covering their refresh cadence',()=>{
  assert.equal(slotSprites.length,51);assert.equal(progressSprites.length,113);
  const groups=[
-  {sprites:slotSprites,waitName:'kt_mixology_sprite_wait',fadeName:'kt_mixology_sprite_fade',refresh:HUD_REFRESH_TICKS/20,fadeSeconds:0},
-  {sprites:progressSprites,waitName:'kt_mixology_progress_wait',fadeName:'kt_mixology_progress_fade',refresh:1/20,fadeSeconds:0}
+  {sprites:slotSprites,waitName:'kt_mixology_sprite_wait',fadeName:'kt_mixology_sprite_fade',refresh:HUD_REFRESH_TICKS/20,holdSeconds:0.5,fadeSeconds:0},
+  {sprites:progressSprites,waitName:'kt_mixology_progress_wait',fadeName:'kt_mixology_progress_fade',refresh:1/20,holdSeconds:0.1,fadeSeconds:0}
  ];
- for(const {sprites,waitName,fadeName,refresh,fadeSeconds} of groups){
+ for(const {sprites,waitName,fadeName,refresh,holdSeconds,fadeSeconds} of groups){
   for(const sprite of sprites){
    assert.equal(sprite.type,'image',sprite.name);
    assert.equal(sprite.alpha,1,sprite.name);
@@ -29,7 +29,8 @@ test('slot and progress sprites own finite expiry matched to their refresh caden
   }
   const wait=hud[waitName],fade=hud[fadeName];
   assert.equal(wait.anim_type,'wait');
-  assert.equal(wait.duration,refresh,'Keep sprites opaque through their next expected refresh');
+  assert.equal(wait.duration,holdSeconds);
+  assert(wait.duration>=refresh,'Keep sprites opaque through their next expected refresh');
   assert.equal(wait.next,`@hud.${fadeName}`);
   assert.deepEqual(fade,{anim_type:'alpha',easing:'linear',duration:fadeSeconds,from:1,to:0});
   assert(wait.duration+fade.duration<=hud.kt_mixology_expire.duration);
@@ -37,16 +38,18 @@ test('slot and progress sprites own finite expiry matched to their refresh caden
   assert(!('destroy_at_end' in wait));assert(!('destroy_at_end' in fade));
   assert(!('next' in fade));assert(!('loop' in wait));assert(!('loop' in fade));
  }
+ assert.equal(hud.kt_mixology_expire.duration,0.6);
  assert.equal(hud.kt_mixology_expire.destroy_at_end,'kt_mixology_packet');
 });
 
-test('stopped progress becomes transparent after its one-tick interpolation, independently of slot lifetime',()=>{
+test('progress stays opaque through a delayed refresh then expires at a bounded 100 ms',()=>{
  const wait=hud.kt_mixology_progress_wait,fade=hud.kt_mixology_progress_fade;
  const alphaAt=seconds=>seconds<wait.duration?1:fade.duration===0?fade.to:
   fade.from+(fade.to-fade.from)*Math.min(1,(seconds-wait.duration)/fade.duration);
- assert.equal(wait.duration+fade.duration,1/20);
- for(const seconds of [0,0.025,0.049])assert.equal(alphaAt(seconds),1);
- for(const seconds of [0.05,0.075,0.1,0.15,0.6,1,30,600])assert.equal(alphaAt(seconds),0);
+ // Structural lifetime samples only: actual packet arrivals and rendering need client QA.
+ assert.equal(wait.duration+fade.duration,0.1);
+ for(const seconds of [0,0.025,0.049,0.05,0.075,0.099])assert.equal(alphaAt(seconds),1);
+ for(const seconds of [0.1,0.15,0.6,1,30,600])assert.equal(alphaAt(seconds),0);
  assert.equal(hud.kt_mixology_sprite_wait.duration,HUD_REFRESH_TICKS/20);
 });
 

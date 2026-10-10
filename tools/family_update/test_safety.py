@@ -141,11 +141,23 @@ class BindingTests(unittest.TestCase):
                     self.binding()
                 self.responses = saved
 
-    def test_stopped_server_is_rejected_before_preflight_work(self):
-        with patch.object(deploy_live, 'summary', return_value={'status': 'STOPPED'}), patch.object(deploy_live, 'verify_predeploy') as inventory:
+    def test_stopped_changed_runtime_is_rejected_before_validation_or_server_actions(self):
+        with (
+            patch.object(deploy_live, 'summary', return_value={'status': 'STOPPED'}),
+            patch.object(deploy_live, 'verify_predeploy') as inventory,
+            patch.object(deploy_live, 'verify_candidate_sources') as candidate,
+            patch.object(workflow, 'same_runtime', return_value=False),
+            patch.object(workflow, 'record_static') as static,
+            patch.object(workflow, 'verify_native') as native,
+            patch.object(deploy_live, 'action') as action,
+        ):
             with self.assertRaisesRegex(AssertionError, 'initially be RUNNING'):
                 deploy_live.preflight()
-            inventory.assert_not_called()
+            inventory.assert_called_once_with()
+            candidate.assert_called_once_with()
+            static.assert_not_called()
+            native.assert_not_called()
+            action.assert_not_called()
 
     def test_preflight_propagates_each_central_validator_failure_without_local_fallback(self):
         receipt = {'packs': [{'uuid': 'fixture-pack'}]}
@@ -155,6 +167,7 @@ class BindingTests(unittest.TestCase):
                 patch.object(deploy_live, 'summary', return_value={'status': 'RUNNING'}),
                 patch.object(deploy_live, 'verify_predeploy', return_value=receipt),
                 patch.object(deploy_live, 'verify_candidate_sources', return_value=receipt),
+                patch.object(workflow, 'same_runtime', return_value=False),
                 patch.object(deploy_live, 'sha', return_value='same-reviewed-guard'),
                 patch.object(workflow, 'record_static') as static,
                 patch.object(workflow, 'verify_native') as native,

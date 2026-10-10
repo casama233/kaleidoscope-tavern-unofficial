@@ -38,7 +38,7 @@ import {barrelHudEnabled} from '../core/shaker-hud.js';
 import {signaturePaletteIndex} from '../data/signature-palette.js';
 import {nativeShakerState,portableShakerState,readPlacedShaker,planPlacedShaker} from './shaker-storage.js';
 import {migrateLegacyShakerSlot} from '../core/legacy-shaker-migration.js';
-import {mainShakerHand,shakerHandItem,captureShakerHand,verifyShakerHand,shakerHandContainer} from './shaker-hands.js';
+import {mainShakerHand,shakerHandItem,liveShakerStack,reportedShakerData,captureShakerHand,verifyShakerHand,shakerHandContainer} from './shaker-hands.js';
 
 const SHAKER=SHAKER_ID,STATION=NS+':shaker_station',FACING=NS+':facing';
 const CUP_HELPER=NS+':signature_cup_visual',CUP_ANCHOR=NS+':cup_anchor';
@@ -241,6 +241,9 @@ export function nativeStop(event){
  const use=uses.get(player.id),guard=releaseGuards.get(player.id),item=event.itemStack;
  if(use&&!sameUse(player,use)){cancelUse(player.id);releaseGuards.delete(player.id);return;}
  let raw;try{raw=item?.getDynamicProperty(PORTABLE_DATA);}catch{return;}
+ // A native copy can omit dynamic properties. sameUse already verified the live
+ // hand, so its value identifies the same stack without guessing another hand.
+ if(raw===undefined&&item?.typeId===SHAKER)raw=reportedShakerData(player,use?.reference??guard?.reference??mainShakerHand(player),item);
  if(guard&&(!item||(item.typeId===SHAKER&&(raw===guard.raw||raw===guard.afterRaw))))releaseGuards.delete(player.id);
  if(!use)return;
  // Native Stop can omit its item during a dimension change. An unidentified
@@ -262,7 +265,9 @@ export function nativeStop(event){
 export function clearHeldShaker(player,expected=hand(player)){
  canInteract(player);
  return locks.with([player.id],()=>{
-  const current=hand(player);check(current?.typeId===SHAKER&&expected?.typeId===SHAKER&&current.getDynamicProperty(PORTABLE_DATA)===expected.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');
+  const current=hand(player),reported=expected?.getDynamicProperty?.(PORTABLE_DATA);
+  // A swing-event copy can omit the property; the live hand stays the authority.
+  check(current?.typeId===SHAKER&&expected?.typeId===SHAKER&&(reported===undefined||current.getDynamicProperty(PORTABLE_DATA)===reported),'STALE_HAND');
   const carried=readPortableItem(current);if(!carried.state.slots.length&&!carried.state.result)return false;
   const next={...emptyShaker(),revision:carried.state.revision+1};
   replaceHeld(player,current,portable(next,carried.token,current,carried.state));
@@ -511,7 +516,8 @@ export function beforeShakerUse(event){
  if(event.cancel||event.itemStack?.typeId!==SHAKER)return;
  // Allow the Java use-on router to place/pour first. Air use alone starts shaking.
  const hit=event.source.getBlockFromViewDirection({maxDistance:6});if(hit?.block)return;
- try{const state=readPortableItem(event.itemStack).state;
+ try{const stack=event.itemStack.getDynamicProperty(PORTABLE_DATA)===undefined?liveShakerStack(event.source)??event.itemStack:event.itemStack;
+  const state=readPortableItem(stack).state;
   if(state.result||state.slots.length!==3){
    event.cancel=true;
    if(!state.result&&state.slots.length>0)system.run(()=>showShakerMessage(event.source,'NEED_THREE_INGREDIENTS'));

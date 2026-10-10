@@ -1,8 +1,8 @@
-## Current maintained baseline: 0.6.144
+## Current maintained baseline: 0.6.145
 
 The actual deployed family and its source, CI, native and saved-world evidence are indexed in [family/BASELINE-STATUS.md](family/BASELINE-STATUS.md). Human client acceptance remains pending; historical notes keep their original scope.
 
-T144 addresses the client's four duplicate board input boxes and reported board-text displacement. See [the repair scope](docs/RELEASE-NOTES-0.6.144.md); rendered input, focus and placement still require human confirmation.
+T144 addresses the client's four duplicate board input boxes and reported board-text displacement (deployed 2026-10-10); rendered input, focus and placement still require human confirmation. T145 identifies the held shaker from the live hand when a native use event copy omits its dynamic-property value. See [the repair scope](docs/RELEASE-NOTES-0.6.145.md); real-client shaking still requires human confirmation.
 
 # Kaleidoscope Tavern (Unofficial)
 

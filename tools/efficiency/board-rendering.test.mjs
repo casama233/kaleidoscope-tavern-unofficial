@@ -11,13 +11,14 @@ const definition=read('runtime/BP/entities/board_glyph_visual.json')['minecraft:
 const base={kind:'chalk',large:false,facing:'north',root:{x:20,y:-2,z:40}};
 const data={text:'A',color:'black',glowing:true,alignment:'left',verticalAlignment:'top'};
 const close=(got,wanted)=>got.forEach((v,i)=>assert.ok(Math.abs(v-wanted[i])<1e-10,`${got} != ${wanted}`));
-// Apply model X reflection and positive native entity yaw to the emitted pose.
-// Literal Java face/pen expectations below keep this separate from a round trip.
-// Algebraic resource checks still do not prove rendered-client acceptance.
+// Model front is -Z; native yaw0 faces south, yaw90 west. Thus the actor
+// frame is Ry(180-yaw) after model-X reflection, not Ry(yaw). This convention
+// is checked against literal Java positions and the saved north-board case.
+// These model checks remain distinct from native rendered-client acceptance.
 function glyphPoint(e,vertex=[0,0,0]){
  const scale=e.getProperty(N+':font_scale')/16;
  const [x,y,z]=[0,1,2].map(i=>(e.getProperty(N+':x_'+i)+vertex[i])*scale);
- const theta=e.rotation.y*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
+ const theta=(180-e.rotation.y)*Math.PI/180,c=Math.cos(theta),s=Math.sin(theta);
  return [e.location.x+c*-x+s*z,e.location.y+y,e.location.z-s*-x+c*z];
 }
 test('four chalk faces keep ordered 酸梅湯 inside their original board rectangles',()=>{
@@ -51,15 +52,20 @@ test('four chalk faces keep ordered 酸梅湯 inside their original board rectan
   });
  }
 });
-test('the next board maintenance rebuilds saved version60 glyphs with the corrected pose',()=>{
- const d=new Dimension(),info={...base,facing:'east'},text={...data,text:'酸梅湯',color:'white',glowing:false,alignment:'center',verticalAlignment:'middle'};
- const old=d.spawnEntity(N+':board_glyph_visual',{x:20.5,y:-1.5,z:40.5},{initialRotation:-90});
- old.setDynamicProperty('kt:writingBoard/anchor','upgrade|0|0');
- old.setDynamicProperty('kt:writingBoard/signature',JSON.stringify({version:60,cp:37240,location:{x:20.08,y:-.957,z:40.662},yaw:-90,scale:.012,color:10066329,glowing:false}));
- assert.equal(renderBoardText(d,info,text,null,'upgrade'),true);
- assert.equal(old.isValid,false);assert.equal(d.entities.size,3);
- for(const e of d.entities.values())assert.equal(JSON.parse(e.getDynamicProperty('kt:writingBoard/signature')).version,61);
- assert.equal(renderBoardText(d,info,text,null,'upgrade'),false,'the corrected glyphs settle without repeated replacement');
+test('board maintenance rebuilds both saved version60 and version61 glyphs once',()=>{
+ for(const version of [60,61]){
+  const d=new Dimension(),info={...base,facing:'east'},text={...data,text:'酸梅湯',color:'white',glowing:false,alignment:'center',verticalAlignment:'middle'};
+  renderBoardText(d,info,text,null,'upgrade');
+  const old=[...d.entities.values()];
+  for(const e of old){
+   const exact=JSON.parse(e.getDynamicProperty('kt:writingBoard/signature'));
+   exact.version=version;e.setDynamicProperty('kt:writingBoard/signature',JSON.stringify(exact));
+  }
+  assert.equal(renderBoardText(d,info,text,null,'upgrade'),true);
+  assert.ok(old.every(e=>!e.isValid));assert.equal(d.entities.size,3);
+  for(const e of d.entities.values())assert.equal(JSON.parse(e.getDynamicProperty('kt:writingBoard/signature')).version,62);
+  assert.equal(renderBoardText(d,info,text,null,'upgrade'),false,'the corrected glyphs settle without repeated replacement');
+ }
 });
 test('a first overflowing separator is consumed without moving an earlier word or indenting the next row',()=>{
  const options=boardLayoutOptions('chalk',true);
@@ -136,4 +142,60 @@ test('glowing colour, cream black outline and 48/16 client gates remain separate
  const anim=read('runtime/RP/animations/board_glyph_line.animation.json').animations['animation.kt_runtime.board_glyph_line'].bones;
  const offsets=Object.entries(anim).filter(([name])=>/^outline_\d$/.test(name)).map(([,bone])=>bone.position.slice(0,2).map(x=>Function('return '+x.replace("q.property('kaleidoscope_tavern:bold_offset')",'.5'))()));
  assert.equal(new Set(offsets.map(JSON.stringify)).size,8);assert.ok(offsets.every(p=>Math.max(...p.map(Math.abs))===.5));
+});
+
+// Recorded after normal save/close, 2026-10-10, receipt SHA256
+// a33f22337652b6cfea034e03621f9b0769bc5b55d8497ad8fbb52ea8862977db.
+// Independent raw-SST/WAL/NBT read found one north small board, these six
+// active-indexed glyphs, and unchanged ABC123/center/top data. The source
+// signature's intended position was right; native local offsets were wrong.
+test('saved native north ABC123 rebuilds without editing text and keeps top Y',()=>{
+ const d=new Dimension(),key='kt:writingBoard/minecraft_overworld/0_-59_-1';
+ const info={kind:'chalk',large:false,facing:'north',root:{x:0,y:-59,z:-1}};
+ const text={text:'ABC123',color:'white',glowing:false,alignment:'center',verticalAlignment:'top'};
+ const savedSignatures=["{\"version\":61,\"cp\":65,\"location\":{\"x\":0.638,\"y\":-57.237,\"z\":-0.08000000000000008},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}","{\"version\":61,\"cp\":66,\"location\":{\"x\":0.59,\"y\":-57.237,\"z\":-0.08000000000000008},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}","{\"version\":61,\"cp\":67,\"location\":{\"x\":0.542,\"y\":-57.237,\"z\":-0.08000000000000007},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}","{\"version\":61,\"cp\":49,\"location\":{\"x\":0.494,\"y\":-57.237,\"z\":-0.08000000000000007},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}","{\"version\":61,\"cp\":50,\"location\":{\"x\":0.458,\"y\":-57.237,\"z\":-0.08000000000000007},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}","{\"version\":61,\"cp\":51,\"location\":{\"x\":0.41000000000000003,\"y\":-57.237,\"z\":-0.08000000000000006},\"yaw\":180,\"scale\":0.012,\"color\":10066329,\"glowing\":false}"];
+ const oldXs=[11.5,7.5,3.5,-.5,-3.5,-7.5],worldXs=[.638,.59,.542,.494,.458,.41],old=[];
+ [...text.text].forEach((ch,i)=>{
+  const e=d.spawnEntity(N+':board_glyph_visual',{x:.5,y:-58.5,z:-.5},{initialRotation:-180});
+  e.setProperty(N+':font_scale',.192);
+  [oldXs[i],105.25,-35].forEach((v,j)=>e.setProperty(N+':x_'+j,v));
+  e.setProperty(N+':char_0',ch.codePointAt(0));
+  e.setDynamicProperty('kt:writingBoard/anchor',key+'|0|'+i);
+  e.setDynamicProperty('kt:writingBoard/signature',savedSignatures[i]);
+  old.push(e);
+ });
+ close(glyphPoint(old[0]),[.362,-57.237,-.92]);
+ assert.equal(renderBoardText(d,info,text,null,key),true,'maintenance migrates saved offsets without new form input');
+ assert.ok(old.every(e=>!e.isValid));assert.equal(d.entities.size,6);
+ const glyphs=[...d.entities.values()].sort((a,b)=>a.getDynamicProperty('kt:writingBoard/anchor').localeCompare(b.getDynamicProperty('kt:writingBoard/anchor')));
+ assert.equal(glyphs.map(e=>String.fromCodePoint(e.getProperty(N+':char_0'))).join(''),'ABC123');
+ glyphs.forEach((e,i)=>{
+  close(glyphPoint(e),[worldXs[i],-57.237,-.08]);
+  close([0,1,2].map(j=>e.getProperty(N+':x_'+j)),[-oldXs[i],105.25,35]);
+  const pen=glyphPoint(e),right=glyphPoint(e,[8,0,0]);
+  assert.ok(right[0]<pen[0],'asymmetric glyph right edge follows reading direction on the north face');
+  assert.equal(JSON.parse(e.getDynamicProperty('kt:writingBoard/signature')).version,62);
+ });
+ resetCounters();assert.equal(renderBoardText(d,info,text,null,key),false);
+ assert.equal(counters.propertyWrites+counters.spawns+counters.removes,0,'migrated glyphs settle');
+});
+
+test('chalk local text frame is independent of the four entity headings',()=>{
+ const expected=[[-11.5,105.25,35],[-7.5,105.25,35],[-3.5,105.25,35],[.5,105.25,35],[3.5,105.25,35],[7.5,105.25,35]];
+ for(const facing of ['north','east','south','west']){
+  const d=new Dimension();renderBoardText(d,{...base,facing},{...data,text:'ABC123',alignment:'center',verticalAlignment:'top'},null,'covariant');
+  const glyphs=[...d.entities.values()].sort((a,b)=>a.getDynamicProperty('kt:writingBoard/anchor').localeCompare(b.getDynamicProperty('kt:writingBoard/anchor')));
+  glyphs.forEach((e,i)=>close([0,1,2].map(j=>e.getProperty(N+':x_'+j)),expected[i]));
+ }
+});
+
+test('sandwich local frame stays fixed through all sixteen actor headings',()=>{
+ const t=22.5*Math.PI/180,down=-19*.01;
+ const y=(1.06-Math.cos(t)*down-.5)/.01,z=-(.06+Math.sin(t)*down)/.01;
+ const xs=[-13,-8.5,-4,.5,4,8.5];
+ for(let rotation=0;rotation<16;rotation++){
+  const d=new Dimension();renderBoardText(d,{...base,kind:'sandwich',rotation},{...data,text:'ABC123',alignment:'center',verticalAlignment:'top'},null,'sandwich-covariant');
+  const glyphs=[...d.entities.values()].sort((a,b)=>a.getDynamicProperty('kt:writingBoard/anchor').localeCompare(b.getDynamicProperty('kt:writingBoard/anchor')));
+  glyphs.forEach((e,i)=>close([0,1,2].map(j=>e.getProperty(N+':x_'+j)),[xs[i],y,z]));
+ }
 });

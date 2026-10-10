@@ -3,6 +3,7 @@ import copy,hashlib,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from family_update.amw25_reconciliation import validate_delta,dependency_versions,AMW
+from family_update.amw27_reconciliation import conserved_after
 class ScopedAMW25Review(unittest.TestCase):
     def setUp(self):
         self.before={'keep':b'keep','changed':b'old','deleted':b'old'}
@@ -12,9 +13,20 @@ class ScopedAMW25Review(unittest.TestCase):
     def test_reviewed_add_change_remove_are_exact(self):
         a,b,delta=validate_delta(self.before,self.after,self.pins)
         self.assertEqual(delta,set(self.pins));self.assertIn('keep',a);self.assertNotIn('deleted',b)
+        # AMW27 stores only its exact changed/additional bytes; the reviewed26
+        # source supplies every untouched file without another complete copy.
+        pins={n:p for n,p in self.pins.items() if n!='deleted'}
+        sparse={n:self.after[n] for n in pins}
+        restored,a,b,delta=conserved_after(self.before,sparse,pins)
+        self.assertEqual(restored,{**self.before,**sparse})
+        self.assertEqual(delta,set(pins))
+        self.assertEqual(a['keep'],b['keep'])
     def test_unrelated_drift_cannot_be_approved_by_expanding_external_proof(self):
         after={**self.after,'keep':b'foreign modification'}
         with self.assertRaisesRegex(AssertionError,'paths'):validate_delta(self.before,after,self.pins)
+        pins={n:p for n,p in self.pins.items() if n!='deleted'}
+        with self.assertRaisesRegex(AssertionError,'sparse'):
+            conserved_after(self.before,{**{n:self.after[n] for n in pins},'keep':b'foreign modification'},pins)
     def test_both_original_and_reviewed_bytes_are_enforced(self):
         for which in ['before','after']:
             pins=copy.deepcopy(self.pins);pins['changed'][which]='wrong'
@@ -23,4 +35,6 @@ class ScopedAMW25Review(unittest.TestCase):
         uid=next(iter(AMW));self.assertEqual(dependency_versions(uid,{uid:[2,6,25]}),[[2,6,24],[2,6,25]])
         self.assertEqual(dependency_versions(uid,{uid:[2,4,20]}),[[2,4,18],[2,4,19],[2,4,20]])
         self.assertNotIn([2,6,23],dependency_versions(uid,{uid:[2,6,25]}))
+        self.assertEqual(dependency_versions(uid,{uid:[2,6,27]}),[[2,6,26],[2,6,27]])
+        self.assertNotIn([2,6,25],dependency_versions(uid,{uid:[2,6,27]}))
 if __name__=='__main__':unittest.main()

@@ -1,4 +1,6 @@
-## Current maintained baseline: 0.6.145
+## Current maintained baseline: 0.6.146
+
+T146 combines the native board inverse, restricted-safe ingredient snapshots and bounded 100 ms shaker HUD hold on canonical T145. Five recorded standalone HUD scenes are positive within their stated scope; while-held slot switching is inconclusive and same-second rapid restart remains untested. Earlier unpublished candidates stay frozen as evidence. No full-family or LIVE acceptance is claimed. See [scope and validation](docs/RELEASE-NOTES-0.6.146.md).
 
 The actual deployed family and its source, CI, native and saved-world evidence are indexed in [family/BASELINE-STATUS.md](family/BASELINE-STATUS.md). Human client acceptance remains pending; historical notes keep their original scope.
 

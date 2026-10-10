@@ -7940,6 +7940,66 @@
           ]
         }
       }
+    },
+    {
+      "release": "0.6.146",
+      "files": {
+        "runtime/BP/scripts/bedrock/board-text.js": {
+          "before": "77d722824b3b1f7114ecbe81a1b211c202aa99fbac1e7920e60a5e3caf62fa32",
+          "after": "d197e291f549e5a84d9bfc108519d205a245666a6e1c1ff91f08f7ca107c0416",
+          "reason": "T146 corrects the local glyph inverse to the sampled native actor frame Ry(180-yaw) after the model X reflection, changes the migration signature to 62, and preserves stored text, Java pen layout and top Y. The saved north ABC123 source regression and heading covariance tests retain the exact reviewable before/after delta. Earlier sampled client board observations are recorded separately; no all-board or all-rotation acceptance is inferred. This witness was regenerated from exact public c183 and 076 source after an executor replacement; no historical witness is changed.",
+          "reviewedPredecessorCommit": "c18339024c5f3e45d54e521f08bc331d27c804c5",
+          "reviewedSourceCommit": "076ae8fd27d5158cc7572241f5b8c0d91e501f18",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.146.md",
+          "reverseOps": [
+            [
+              44,
+              49,
+              "   // distance culling. Inverse of the model X reflection and positive entity yaw;\n   // the existing x_0..x_2 properties carry the local model-pixel translation.\n   const localOffset=[-(Math.cos(f.r)*dx-Math.sin(f.r)*dz)/f.scale,dy/f.scale,(Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];\n   const signature=JSON.stringify({version:61,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});\n"
+            ]
+          ]
+        },
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "f4e8bf2781ce3d95a39979eb42200b0aeb35ed7d8e4368ad4efc4d7844af4aca",
+          "after": "b67480856db0756bb08b51c6c14086f965091976ecbc5939baeef34bc58de71f",
+          "reason": "T146 captures a restricted-safe original native ItemStack clone and defers Adventure-list and non-stackable plain-input reads to writable execution on that captured clone. Preserve exact slot/type/amount/metadata verification, conservative duplicate guards, foreign cancellation, bottle returns and rollback. T145 omitted-value event-copy handling remains unchanged. Existing restricted-event and adversarial regressions cover source behavior; earlier sampled standalone client observations remain separate. This witness was regenerated from exact public c183 and 076 source after an executor replacement; no historical witness is changed.",
+          "reviewedPredecessorCommit": "c18339024c5f3e45d54e521f08bc331d27c804c5",
+          "reviewedSourceCommit": "076ae8fd27d5158cc7572241f5b8c0d91e501f18",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.146.md",
+          "reverseOps": [
+            [
+              431,
+              436,
+              "   const lore=item.getRawLore?.()??item.getLore?.(),destroy=item.getCanDestroy(),place=item.getCanPlaceOn(),propertyIds=item.getDynamicPropertyIds();\n   check([lore,destroy,place,propertyIds].every(Array.isArray),'STALE_HAND');\n"
+            ],
+            [
+              437,
+              438,
+              "    destroy,place,dynamic:propertyIds.sort().map(key=>[key,item.getDynamicProperty(key)])});\n"
+            ],
+            [
+              440,
+              440,
+              "   snapshot.plain=item.maxAmount===1&&!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack);\n"
+            ],
+            [
+              444,
+              456,
+              ""
+            ],
+            [
+              470,
+              471,
+              ""
+            ],
+            [
+              481,
+              482,
+              ""
+            ]
+          ]
+        }
+      }
     }
   ],
   "reviewedAssetDeltaLayers": [
@@ -8472,6 +8532,20 @@
           "reviewedSourceCommit": "f73e6c5a5f6ecdb000ebc934a4ec486ee051b18d",
           "reviewDocument": "docs/RELEASE-NOTES-0.6.144.md",
           "beforeGzipBase64": "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"
+        }
+      }
+    },
+    {
+      "release": "0.6.146",
+      "files": {
+        "runtime/RP/ui/hud_screen.json": {
+          "before": "a1603cade9d9f516755f5266415c1a924a8e2b6f053822e4d032ff5672659886",
+          "after": "6cfd5370ae0bcaeee72eb9c7fae8c74789fe8c279625de4b3da4664c3174e553",
+          "reason": "Exact progress bar/cursor opaque lifetime scalar 0.05 to 0.1 seconds. Keep 0.05-second bounded cursor interpolation, 0.5-second slots, 0.6-second parent, zero fade and all other HUD bytes. Five standalone native recordings total 2250 captured frames; 259 active frames showed no missing HUD or visible duplicate cursor, with bounded exit tails. Natural completion, finished/empty repeat, short-release retained ingredients and ordinary restart after 112.8 seconds were observed; while-held slot switching is INCONCLUSIVE and same-second rapid restart is NOT_TESTED. No general/full-family rendering acceptance is inferred.",
+          "reviewedPredecessorCommit": "c18339024c5f3e45d54e521f08bc331d27c804c5",
+          "reviewedSourceCommit": "076ae8fd27d5158cc7572241f5b8c0d91e501f18",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.146.md",
+          "beforeGzipBase64": "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"
         }
       }
     }

@@ -6,12 +6,13 @@ class RecoveryRequired(RuntimeError):
     """A failed rollback must retain the stopped server and active lease."""
 
 def preflight():
-    assert summary()['status'] == 'RUNNING', 'Live must initially be RUNNING; never start an intentionally stopped server during recovery'
+    initial_status = summary()['status']
     original = verify_predeploy()
     receipt = verify_candidate_sources()
     from family_update.workflow import same_runtime
     if same_runtime(receipt, original):
         return original, receipt
+    assert initial_status == 'RUNNING', 'Live must initially be RUNNING; never start an intentionally stopped server during recovery'
     assert sha(Q / 'family_guard.py') == sha(T / 'tools/family_guard.py'), 'BSM guard differs from canonical; investigate, never silently replace'
     # Every entry point uses the same evidence validator; share the already
     # verified immutable candidate within this preflight instead of rescanning.
@@ -237,6 +238,7 @@ def main(argv=None):
         lease_available(); original,receipt=preflight()
         from family_update.workflow import same_runtime
         if same_runtime(receipt, original):
+            print('NO_RUNTIME_CHANGES: full live bytes and order already match; no restart', flush=True)
             return {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}
         for path in [R/name for name in ['previous-maintenance.json','handoff-authorization.json','live-authorization-AGENTS.md','reviewed-family-receipt.json','admission-policy.json','admission-report.json','deployment-result.json','deployment-recovery.json','rollback-map.json','production-snapshot','production-staged','production-rollback','saved-world-engine','saved-world-report.json']]:
             assert not path.exists(), 'Existing report or deployment state must be preserved: ' + str(path)

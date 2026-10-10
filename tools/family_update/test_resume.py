@@ -274,7 +274,7 @@ class ResumeTests(unittest.TestCase):
             self.source_state.reset_mock()
             self.audit.reset_mock()
             self.live.reset_mock()
-            with patch.object(deploy_live, 'lease_available', return_value={}), patch.object(deploy_live, 'summary', return_value={'status': 'RUNNING'}), patch.object(deploy_live, 'action') as action:
+            with patch.object(deploy_live, 'lease_available', return_value={}), patch.object(deploy_live, 'summary', return_value={'status': 'STOPPED'}), patch.object(deploy_live, 'action') as action:
                 deployed = workflow.deploy()
                 action.assert_not_called()
         self.assertEqual(prepared['state'], 'no_runtime_changes')

@@ -149,7 +149,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a
+          ref: d605518f6ff91265070751ab70ff491ccfcb10b6
           path: world-liquor-src
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -160,6 +160,33 @@ jobs:
           mkdir -p evidence
           git -C tavern-src rev-parse HEAD > evidence/TAVERN_COMMIT
           git -C world-liquor-src rev-parse HEAD > evidence/LIQUOR_COMMIT
+      - name: Verify exact Tavern and World Liquor four-pack dependencies
+        working-directory: tavern-src
+        run: |
+          python - <<'PYPAIR'
+          import json,sys,tempfile
+          from pathlib import Path
+          sys.path.insert(0,'tools')
+          from family_bundle import assemble
+          root=Path('.').resolve();peer=Path('../world-liquor-src').resolve()
+          lock=json.loads((root/'family/upstream.lock.json').read_text())
+          lock['owned']=[row for row in lock['owned'] if row['key'] in {'tavern','world-liquor'}]
+          assert len(lock['owned'])==2 and {row['key'] for row in lock['owned']}=={'tavern','world-liquor'}
+          lock['upstream']=[]
+          uuids={json.loads((repo/'runtime'/side/'manifest.json').read_text())['header']['uuid']
+                 for repo in [root,peer] for side in ['BP','RP']}
+          assert len(uuids)==4
+          lock['order']={side:[uid for uid in lock['order'][side] if uid in uuids]
+                         for side in ['behavior','resource']}
+          with tempfile.TemporaryDirectory(prefix='tavern-liquor-exact-') as tmp:
+              # Strict committed-source gates and the original exact-dependency
+              # resolver are mandatory. This is a focused pair, not full-family admission.
+              receipt=assemble(lock,{'tavern':root,'world-liquor':peer},[],Path(tmp)/'candidate')
+              assert len(receipt['packs'])==4 and receipt['acceptance']['static'] is True
+              assert receipt['production_ready'] is False
+              receipt['scope']='Tavern/World Liquor four-pack exact dependencies only; no full-family, BDS, saved-world or client admission'
+              Path('../evidence/exact-tavern-liquor-pair.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          PYPAIR
       - name: Paired creative catalog checks (not client rendering)
         working-directory: tavern-src
         env:
@@ -198,7 +225,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a
+          ref: d605518f6ff91265070751ab70ff491ccfcb10b6
           path: world-liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -312,9 +339,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          # Reviewed World Liquor 0.1.120 pairs this Tavern 0.6.143 runtime.
+          # Reviewed World Liquor 0.1.123 requires this Tavern 0.6.146 runtime.
           # Pin exact peer bytes, not an obsolete release or a moving branch.
-          ref: 5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a
+          ref: d605518f6ff91265070751ab70ff491ccfcb10b6
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -362,7 +389,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a
+          ref: d605518f6ff91265070751ab70ff491ccfcb10b6
           path: liquor
           persist-credentials: false
       - uses: actions/setup-node@v4
@@ -445,7 +472,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 5c09f0375e5ea2f7dbaf5b69d01bf8227e86816a
+          ref: d605518f6ff91265070751ab70ff491ccfcb10b6
           path: .source-check/world-liquor-native
           persist-credentials: false
       - name: Reject incomplete or relabeled native evidence

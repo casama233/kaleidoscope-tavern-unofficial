@@ -1,7 +1,7 @@
 /** Actual native-event subscribers with copy-based equipment doubles.
  * This verifies slot ownership and rollback, not physical off-hand input support.
  */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import {world,system,Player,ItemStack,BlockPermutation,EquipmentSlot,Potions} from '@minecraft/server';
 import {nativeStart,nativeStop,placeShaker,pourHeldShakerNow,clearHeldShaker,beforeShakerUse,installMixologyEvents,setMixologyRegistry,readPortableItem,registerMixologyComponents} from '../runtime/BP/scripts/bedrock/mixology.js';
@@ -11,6 +11,20 @@ import {emptyShaker,addInput,cupKey,shakerKey} from '../runtime/BP/scripts/core/
 import {nativeItemKey} from '../runtime/BP/scripts/core/native-item-storage.js';
 import {SHAKER_RECIPES} from '../runtime/BP/scripts/data/mixology.js';
 import {SHAKER_ID,PORTABLE_DATA,encodePortable} from '../runtime/BP/scripts/core/immersion.js';
+
+// Microsoft documents both adventure-list getters as unavailable in restricted
+// execution, including before-events. The archived API double omits this rule.
+// https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/itemstack#getcandestroy
+let restricted=false;const restrictedReads=[];
+for(const signal of Object.values(world.beforeEvents)){
+ const emit=signal.emit;
+ signal.emit=function(event){const previous=restricted;restricted=true;try{return emit.call(this,event);}finally{restricted=previous;}};
+}
+for(const method of ['getCanDestroy','getCanPlaceOn']){
+ const read=ItemStack.prototype[method];
+ ItemStack.prototype[method]=function(...args){if(restricted){restrictedReads.push(method);throw Error('RESTRICTED_EXECUTION:'+method);}return read.apply(this,args);};
+}
+after(()=>assert.deepEqual(restrictedReads,[],'Shaker before-events attempted a forbidden adventure-list read'));
 
 const registry=new ExtensionRegistry({recipes:SHAKER_RECIPES,itemExists:()=>true});setMixologyRegistry(registry);
 const blockComponents=new Map();registerMixologyComponents({blockComponentRegistry:{registerCustomComponent:(id,c)=>blockComponents.set(id,c)},itemComponentRegistry:{registerCustomComponent(){}}});
@@ -177,6 +191,35 @@ function stationFixture(amount=1){
  const state=()=>JSON.parse(world.getDynamicProperty(shakerKey(f.block.dimension.id,f.block.location))??'null');
  return {...f,click,native,state};
 }
+test('restricted before-event captures an unchanged input and defers its exact one-item insertion',()=>{
+ const f=stationFixture(2),before=f.main(),writes=f.player.inventory.writes;
+ assert.equal(f.click().cancel,true);assert.deepEqual(f.main(),before);assert.equal(f.state(),null);assert.equal(f.player.inventory.writes,writes);
+ const logs=captureWarnings(()=>system.advance(1));
+ assert.deepEqual(logs,[]);assert.equal(f.state().slots.length,1);assert.equal(f.main().amount,1);
+});
+test('deferred station verification rejects slot, item and quantity changes without inventory writes',()=>{
+ for(const change of [f=>{f.player.selectedSlotIndex=1;},f=>f.player.inventory.setItem(0,new ItemStack('minecraft:sugar',2)),f=>f.player.inventory.setItem(0,new ItemStack('kaleidoscope_tavern:plum_wine_q4',3))]){
+  const f=stationFixture(2);f.click();change(f);
+  const before=f.player.inventory.items.map(item=>item?.clone()),writes=f.player.inventory.writes;
+  const logs=captureWarnings(()=>system.advance(1));
+  assert.ok(logs.some(line=>line.includes('STALE_HAND')));assert.equal(f.state(),null);assert.deepEqual(f.player.inventory.items,before);assert.equal(f.player.inventory.writes,writes);
+ }
+});
+test('non-stackable adventure metadata is checked on the captured clone before any debit',()=>{
+ const f=stationFixture(),earlier=Potions.resolve(Potions.getEffectType('minecraft:water'),Potions.getDeliveryType('Consume'));
+ earlier.setCanDestroy(['minecraft:stone']);f.player.inventory.setItem(0,earlier);f.click();
+ const replacement=Potions.resolve(Potions.getEffectType('minecraft:water'),Potions.getDeliveryType('Consume'));f.player.inventory.setItem(0,replacement);
+ const writes=f.player.inventory.writes,logs=captureWarnings(()=>system.advance(1));
+ assert.ok(logs.some(line=>line.includes('STALE_HAND')));assert.equal(f.state(),null);assert.deepEqual(f.main(),replacement);assert.equal(f.player.inventory.writes,writes);
+});
+test('failed deferred non-stackable metadata reads stay fail-closed and permit a fresh retry',()=>{
+ const f=stationFixture(),potion=Potions.resolve(Potions.getEffectType('minecraft:water'),Potions.getDeliveryType('Consume'));
+ f.player.inventory.setItem(0,potion);f.click();const writes=f.player.inventory.writes,read=ItemStack.prototype.getCanDestroy;
+ ItemStack.prototype.getCanDestroy=function(){if(this.typeId==='minecraft:potion')throw Error('INJECTED_ADVENTURE_READ');return read.call(this);};
+ try{const logs=captureWarnings(()=>system.advance(1));assert.ok(logs.some(line=>line.includes('STALE_HAND')));assert.equal(f.state(),null);assert.deepEqual(f.main(),potion);assert.equal(f.player.inventory.writes,writes);}
+ finally{ItemStack.prototype.getCanDestroy=read;}
+ f.click();system.advance(1);assert.equal(f.state().slots.length,1);
+});
 test('native held station callback inserts one main-hand ingredient without needing an itemUse ray',()=>{
  const f=stationFixture(2);f.player.getBlockFromViewDirection=()=>{throw Error('native target must not require a ray');};
  assert.equal(f.native(),true);system.advance(1);

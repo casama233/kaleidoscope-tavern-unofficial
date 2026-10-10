@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Assemble exact owned runtimes plus hash-pinned upstream archives and declared canonical host extensions."""
 from pathlib import Path,PurePosixPath
-import argparse,hashlib,io,json,re,shutil,subprocess,zipfile
+import argparse,hashlib,io,json,os,re,shutil,subprocess,zipfile
 from host_extensions import apply_host_extension
 ROOT=Path(__file__).resolve().parents[1]
 def fail(message):raise SystemExit('FAMILY: '+message)
@@ -38,7 +38,17 @@ def packs(z):
   data={x[len(pre):]:z.read(x) for x in names if x.startswith(pre) and not x.endswith('/') and not x.endswith('.mcpack')}
   yield m,data
 
-def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),reviewed_order=None,held_sources=()):
+def source_gate_environment(own,identities):
+ # A multi-repository CI caller may supply independently verified identities.
+ # Never derive the expected identity from the source config being checked.
+ # Default callers retain their original inherited-environment gate semantics.
+ if identities is None:return None
+ expected=identities.get(own['key']) if isinstance(identities,dict) else None
+ if not isinstance(expected,dict) or expected.get('repository')!=own['repository'] or type(expected.get('repository_id')) is not int or expected['repository_id']<=0:
+  fail('invalid expected gate repository identity: '+own['key'])
+ return {**os.environ,'GITHUB_REPOSITORY':expected['repository'],'GITHUB_REPOSITORY_ID':str(expected['repository_id'])}
+
+def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),reviewed_order=None,held_sources=(),source_identities=None):
  from family_update.source_holds import selected,effective
  holds=selected(lock,list(held_sources));lock=effective(lock,list(held_sources))
  lock=json.loads(json.dumps(lock))
@@ -59,6 +69,11 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),
    if reviewed_order is None:
     if uid in lock['order'][label]:fail('extension collides with locked pack')
     lock['order'][label].insert(0,uid)
+ if source_identities is not None:
+  if working:fail('expected gate repository identities require strict committed sources')
+  if not isinstance(source_identities,dict) or set(source_identities)!={own['key'] for own in lock['owned']}:
+   fail('expected gate repository identities must cover exactly the selected owned sources')
+  for own in lock['owned']:source_gate_environment(own,source_identities)
  if out.exists():fail('output exists; never replace another candidate')
  out.mkdir(parents=True);records=[];by_uuid={}
  # Index every candidate archive once. Read and recheck the selected bytes at
@@ -83,7 +98,7 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),
   repo=sources[own['key']]
   config=read(repo/'baseline.json')
   if own.get('version')!=config['version'] or own.get('source_trees')!=config['source_trees']:fail('owned source differs from family lock')
-  if not working:subprocess.run(['python3',str(repo/'tools/baseline_gate.py'),'check','--release'],check=True)
+  if not working:subprocess.run(['python3',str(repo/'tools/baseline_gate.py'),'check','--release'],check=True,env=source_gate_environment(own,source_identities))
   if config['repository']!=own['repository']:fail('wrong owned repository')
   for side,relative in config['runtime'].items():
    root=repo/relative;m=read(root/'manifest.json');source={'owner':'owned','repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'working_candidate':working}

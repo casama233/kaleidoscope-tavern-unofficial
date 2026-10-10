@@ -1,3 +1,7 @@
+## T146 integrated candidate: bounded native scope
+
+Canonical T145 plus restricted-safe shaker snapshots, board signature 62 inverse and 100 ms HUD visibility. Five standalone recordings show no missing HUD in 259 active captured frames; finished/empty repeat and short-release retained ingredients are positive. While-held slot switching is INCONCLUSIVE and same-second rapid restart is NOT_TESTED. W122/T146 is a rejected negative control; selected W123/T146 still requires separate complete-family admission. LIVE deployment remains pending. See [scope](RELEASE-NOTES-0.6.146.md).
+
 ## 當前調酒修補：T145
 
 live 2026-10-10 記錄 11 次 `[Tavern Mixology] STALE_HAND`（前幾日 0 次）；酒館 BP 與 T143 收據逐檔相同。T145 在 native use 事件副本未回報雪克杯動態屬性值時改以實際手持物品辨識，見[發版說明](RELEASE-NOTES-0.6.145.md)。其實機事件語意、真人搖晃畫面與放置情境的 `SPACE_NOT_CLEAR` 尚待確認。

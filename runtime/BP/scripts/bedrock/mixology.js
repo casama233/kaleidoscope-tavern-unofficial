@@ -429,17 +429,31 @@ function itemSnapshot(player){
    snapshot.data=item.getDynamicProperty(PORTABLE_DATA);
    snapshot.potion=POTION_ITEMS.has(item.typeId)?canonical(potionIdentity(item)):undefined;
    snapshot.stack=item.clone();
-   const lore=item.getRawLore?.()??item.getLore?.(),destroy=item.getCanDestroy(),place=item.getCanPlaceOn(),propertyIds=item.getDynamicPropertyIds();
-   check([lore,destroy,place,propertyIds].every(Array.isArray),'STALE_HAND');
+   // These snapshots also run in before-events. Adventure-list getters are
+   // forbidden there even on a clone; native stack equality already covers
+   // their data for stackable inputs. Keep non-stackable detail reads deferred.
+   const lore=item.getRawLore?.()??item.getLore?.(),propertyIds=item.getDynamicPropertyIds();
+   check([lore,propertyIds].every(Array.isArray),'STALE_HAND');
    snapshot.visible=canonical({name:item.nameTag,lore,keep:item.keepOnDeath,lock:item.lockMode,
-    destroy,place,dynamic:propertyIds.sort().map(key=>[key,item.getDynamicProperty(key)])});
+    dynamic:propertyIds.sort().map(key=>[key,item.getDynamicProperty(key)])});
    snapshot.comparable=item.maxAmount>1&&item.isStackableWith(snapshot.stack)===true&&snapshot.stack.isStackableWith(item)===true;
    if(item.maxAmount>1)check(snapshot.comparable,'STALE_HAND');
-   snapshot.plain=item.maxAmount===1&&!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack);
   }
   snapshot.readable=true;
  }catch{/* A failed native read cannot authorize a debit or release an echo. */}
  return snapshot;
+}
+function completeItemSnapshot(snapshot){
+ // Inspect the original captured clone, never a replacement in the live slot.
+ // Called only at the deferred mutation boundary. Before-event comparisons of
+ // non-stackable items stay indeterminate and cannot release duplicate guards.
+ const item=snapshot.stack;if(!snapshot.readable||!item||item.maxAmount>1)return;
+ try{
+  const destroy=item.getCanDestroy(),place=item.getCanPlaceOn();
+  check([destroy,place].every(Array.isArray),'STALE_HAND');
+  snapshot.adventure=canonical({destroy,place});
+  snapshot.plain=!item.keepOnDeath&&(!item.lockMode||item.lockMode==='none')&&!item.getComponent('minecraft:inventory')&&isPlainIngredient(item,makeStack);
+ }catch{snapshot.readable=false;}
 }
 // Native clones only witness this short event transaction. They are never
 // serialized as portable ingredients or used to reconstruct a missing stack.
@@ -454,6 +468,7 @@ function compareItemSnapshot(left,right,{ignoreAmount=false}={}){
    return typeof forward==='boolean'&&typeof reverse==='boolean'?forward&&reverse:undefined;
   }
   if(left.visible!==right.visible)return false;
+  if(left.adventure!==undefined&&right.adventure!==undefined&&left.adventure!==right.adventure)return false;
   // Non-stackable native comparison cannot prove arbitrary data equality.
   // Retain the existing readable plain-input class (including exact native
   // potion identity above); decorated/unreadable data is never an echo witness.
@@ -464,6 +479,7 @@ const sameItemSnapshot=(left,right)=>compareItemSnapshot(left,right)===true;
 function verifySnapshot(player,snapshot){
  sameHand(player,snapshot.basic);const current=itemSnapshot(player);
  if(snapshot.potion!==undefined)check(current.potion===snapshot.potion,'STALE_POTION');
+ completeItemSnapshot(snapshot);completeItemSnapshot(current);
  check(sameItemSnapshot(snapshot,current),'STALE_HAND');
 }
 const mixologyUseKey=(player,block)=>player.id+'/'+shakerKey(block.dimension.id,block.location);

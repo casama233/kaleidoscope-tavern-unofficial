@@ -1,3 +1,7 @@
+## T146 integrated candidate: bounded native scope
+
+Canonical T145 plus restricted-safe shaker snapshots, board signature 62 inverse and 100 ms HUD visibility. Five standalone recordings show no missing HUD in 259 active captured frames; finished/empty repeat and short-release retained ingredients are positive. While-held slot switching is INCONCLUSIVE and same-second rapid restart is NOT_TESTED. W122/T146 is a rejected negative control; selected W123/T146 still requires separate complete-family admission. LIVE deployment remains pending. See [scope](RELEASE-NOTES-0.6.146.md).
+
 ## 當前板面用戶端修補：T144
 
 實際部署來源、CI、原生／存檔證據統一見[當前基線](../family/BASELINE-STATUS.md)。T143 四個重複輸入框與板外文字是已確認真人缺陷；T144 修補見[發版說明](RELEASE-NOTES-0.6.144.md)，仍需真人確認。 live 2026-10-10 的調酒 `STALE_HAND` 由 T145 事件副本辨識修補承接，見[發版說明](RELEASE-NOTES-0.6.145.md)。以下歷史段落保留原證據身份。

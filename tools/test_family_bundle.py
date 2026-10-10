@@ -2,6 +2,38 @@ import contextlib,io,json,tempfile,unittest
 from pathlib import Path
 from family_bundle import assemble,files_hash,read_definition
 
+class SourceGateEnvironmentTests(unittest.TestCase):
+ def test_default_preserves_inherited_identity_semantics(self):
+  from family_bundle import source_gate_environment
+  self.assertIsNone(source_gate_environment({'key':'peer'},None))
+ def test_explicit_peer_identity_is_isolated_and_other_environment_preserved(self):
+  import os
+  from unittest.mock import patch
+  from family_bundle import source_gate_environment
+  own={'key':'peer','repository':'owner/peer'}
+  with patch.dict(os.environ,{'GITHUB_REPOSITORY':'owner/parent','GITHUB_REPOSITORY_ID':'10','KEEP':'yes'},clear=True):
+   env=source_gate_environment(own,{'peer':{'repository':'owner/peer','repository_id':20}})
+   self.assertEqual(env,{'GITHUB_REPOSITORY':'owner/peer','GITHUB_REPOSITORY_ID':'20','KEEP':'yes'})
+   self.assertEqual(os.environ['GITHUB_REPOSITORY'],'owner/parent')
+   self.assertEqual(os.environ['GITHUB_REPOSITORY_ID'],'10')
+ def test_missing_wrong_or_empty_expected_identity_cannot_disable_child_gate(self):
+  from family_bundle import source_gate_environment
+  own={'key':'peer','repository':'owner/peer'}
+  cases=[{},[],{'peer':{}},{'peer':{'repository':'owner/wrong','repository_id':20}}]
+  cases += [{'peer':{'repository':'owner/peer','repository_id':value}} for value in [None,'',0,-1,True,'20']]
+  for identities in cases:
+   with self.subTest(identities=identities),self.assertRaisesRegex(SystemExit,'invalid expected gate repository identity'):
+    source_gate_environment(own,identities)
+
+ def test_explicit_identities_require_exact_source_set_and_strict_mode(self):
+  lock={'owned':[{'key':'peer','repository':'owner/peer'}],'upstream':[],'order':{'behavior':[],'resource':[]}}
+  with tempfile.TemporaryDirectory() as tmp:
+   for identities,working in [({},False),({'extra':{}},False),({'peer':{'repository':'owner/peer','repository_id':20}},True)]:
+    out=Path(tmp)/'out'
+    with self.subTest(identities=identities,working=working),self.assertRaisesRegex(SystemExit,'expected gate repository identities'):
+     assemble(lock,{},[],out,working=working,source_identities=identities)
+    self.assertFalse(out.exists())
+
 class PreservedDependencyTests(unittest.TestCase):
  def test_reviewed_interleaving_controls_world_refs_receipt_and_effective_priority(self):
   import zipfile,hashlib

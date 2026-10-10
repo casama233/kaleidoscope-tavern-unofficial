@@ -3506,13 +3506,14 @@
       "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
     },
     "runtime/BP/scripts/bedrock/shaker-hands.js": {
-      "before": null,
-      "after": "5e5e5384aefc4479ed29a7c74c508394684cf7026cbaa9276dd8c70a6a5b4627",
-      "reason": "T131 appended reviewed runtime addition. Captured main/offhand native shaker slot adapter with exact metadata comparison and checked inventory transaction behavior; no alternate active item identity or portable escrow.",
-      "release": "0.6.131",
-      "reviewedPredecessorCommit": "c4453491e2f52d4b4515dda0385db204aa892c97",
-      "reviewedSourceCommit": "f08714307ea331be52a9240d8aa6473752325d1c",
-      "reviewDocument": "docs/RELEASE-NOTES-0.6.131.md"
+      "before": "5e5e5384aefc4479ed29a7c74c508394684cf7026cbaa9276dd8c70a6a5b4627",
+      "after": "4f6bb47ad9ecb7e74fff371b7a5040b530f3ffce83643f32f78040985e863f64",
+      "reason": "T131 appended reviewed runtime addition. Captured main/offhand native shaker slot adapter with exact metadata comparison and checked inventory transaction behavior; no alternate active item identity or portable escrow. T145 modification review: the reported-copy fallback for main/off-hand shaker identification (see docs/RELEASE-NOTES-0.6.145.md); predecessor bytes retained for the T131 addition view, mock regressions in tools/shaker-offhand.test.mjs, real-client pending.",
+      "release": "0.6.145",
+      "reviewedPredecessorCommit": "27580b0e2809a5454398a07f875c4c360565db79",
+      "reviewedSourceCommit": "26e53c6a99093503622af87f890d8c61624e5df9",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.145.md",
+      "beforeGzipBase64": "H4sIAO8vymoC/51W23LiRhB95ys6LxZyKWL3FYoQ2ZBYFds4BlceqbFomVlLI2VmZFvL8u/pGV0QxpfaPKI+fTt9ppvB6Smcs1wXEkFvELjGFFikC5YkJUjMM6lxDfclMBBM8yeEQiHgEwrt9+AUZv8WPE/pFzxLclbkoxkXNliUpXmCGkFpFj2OQJCbBPXMcsoDXOjMwlKD3zCxtgGXmzo8BDchfVYgMmuFmGOy9kBlwNdk5xFLKEXOKSkFuM/0xuIUMGpGYkyFrk1EySiLpFRMwEOBSnHxAM8bHm2Me2lrQPHABbWvqD0ym0oGPZ6a9mHb9rhIMr2DWGYpOL+n5BBJFuuBQkmNOaPWIdpg9NgAfX8QZRIHheaJ/011YIuL4K/Z7Sqcejfz22VwdjlbTYNl8NqRpylKxTNx6M2FYSmTZYsfaMmEoukRVlXgHr5YdERftGV6sWGPKC+IqHGesBLl+Lf+VhGjQ8eYHU9Rk8PK5CtMMCIBmMZDscaXnTvqxYWwKQAbXvoV3N1WaZ5YUmAd3X9AfU46yITBOS1pQ+ucs/sEHXdkCetbP8+5nq9mf9+FN1ez6yXZSFCFFFXQ0a5pqC1Ctf2EpN26Eo/GjxJFhOPDnptK3W0P6sAt1DcsjMdjJ4tjZ3LUnOmkVUL/QBP+PI6N9NxhO5Suly2sk4Y8iMbdnsiUaWJA9c3r86hBy7m7rQs0Xye+LnMM11Req5qTE2PxWZoVQpPh68lJ4/sBnOqZloKlPLqRWY5Sl/0D9bnk04T5HPzGQKJqnRxx3mms19HjOwPyzGdD3PjtARszkVgHoolZ7E9obnIwz4n/zkTbFFxcVdVWo2rK23flcUFOLaAuaW83kazMf+lXsWggxsP1nODqLPzzbn63WNXTugiup87eo8L/+GHxnrNYBsR/jWlEYiETU9awfs5Gxjujs9cTomXF4/J4QK1ED0bF4/7xE7Grwq2qe29XEO5Q9K8qb5iNCkkYPf7kJTdboiG4dusM4E1iathbPOwTnmfCXC2UP7M/PiCmzm32YRX3eDGQXIij4SFDNC4YDOAWzZG1d+mFK23uVesPnSUPFEtQdDDnUWZJck93Fp45XULjTPq34ap7bh7Jr/aQmkw+BLT5vlnmmsuuOg/CnEIGMeMJ2e1p99uNua1K/+Lt2yPJfcfhV68H0Cw8C3K3jYIrQXzxnLNgulpczjur/X+t2tHOJFPdZJ79n/Fxysp2nFF9mrGOTiqr3mh7o1b/3IbL2eqPILycGeHterCz7+4/nXqlt10JAAA="
     },
     "runtime/BP/scripts/core/molotov-fire.js": {
       "before": null,
@@ -7901,6 +7902,41 @@
               46,
               48,
               "   const localOffset=[-(Math.cos(f.r)*dx+Math.sin(f.r)*dz)/f.scale,dy/f.scale,(-Math.sin(f.r)*dx+Math.cos(f.r)*dz)/f.scale];\n   const signature=JSON.stringify({version:60,cp,location:glyphLocation,yaw:f.yaw,scale:f.scale,color,glowing:data.glowing});\n"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "release": "0.6.145",
+      "files": {
+        "runtime/BP/scripts/bedrock/mixology.js": {
+          "before": "7bba75780daa2ef456bea7417b9fb59ed1b4890e73162eb3d6918e6fa04250d3",
+          "after": "f4e8bf2781ce3d95a39979eb42200b0aeb35ed7d8e4368ad4efc4d7844af4aca",
+          "reason": "T145 identifies the held shaker from the live hand when a native use event copy omits its dynamic-property value (live luosen 2026-10-10 [Tavern Mixology] STALE_HAND with a byte-identical deployed pack; T131 hand capture is the only failing check on that path). A reported value is still compared exactly, both-shaker ambiguity still refuses, and the T141 witness/echo guards are unchanged. Mock regressions cover the omitted-value start, stop, clear and before-use reads; real-client shaking, the reported-value mismatch case and placement SPACE_NOT_CLEAR remain unverified.",
+          "reviewedPredecessorCommit": "27580b0e2809a5454398a07f875c4c360565db79",
+          "reviewedSourceCommit": "26e53c6a99093503622af87f890d8c61624e5df9",
+          "reviewDocument": "docs/RELEASE-NOTES-0.6.145.md",
+          "reverseOps": [
+            [
+              40,
+              41,
+              "import {mainShakerHand,shakerHandItem,captureShakerHand,verifyShakerHand,shakerHandContainer} from './shaker-hands.js';\n"
+            ],
+            [
+              243,
+              246,
+              ""
+            ],
+            [
+              267,
+              270,
+              "  const current=hand(player);check(current?.typeId===SHAKER&&expected?.typeId===SHAKER&&current.getDynamicProperty(PORTABLE_DATA)===expected.getDynamicProperty(PORTABLE_DATA),'STALE_HAND');\n"
+            ],
+            [
+              518,
+              520,
+              " try{const state=readPortableItem(event.itemStack).state;\n"
             ]
           ]
         }

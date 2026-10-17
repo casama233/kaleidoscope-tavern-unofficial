@@ -1,0 +1,49 @@
+{
+  "editor": "Blockbench 5.2.2",
+  "route": "bedrock_block native display slots",
+  "tested_y_lifts": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    10
+  ],
+  "selected_y_lift": 6,
+  "selection": "Smallest tested whole-unit lift with complete rack silhouette in both hands in this editor setup; +5 still clips right support at bottom.",
+  "unchanged": [
+    "geometry",
+    "texture",
+    "rotation",
+    "scale",
+    "non-first-person transforms"
+  ],
+  "helper_sha256": "c9614f3af8ebb0228c4e85d1a5f0ef5934f39f53d64ce3973c2250ed3c2d7e15",
+  "helper_modified": false,
+  "minecraft_client_acceptance": false,
+  "runtime_file": "runtime/RP/models/entity/item_display_tilted_rack.geo.json",
+  "runtime_sha256": "93030bd4f8289be846eea898052b36ed81c33626355c8e42fbcac95a73968ff7",
+  "captures": [
+    {
+      "name": "T175_rack_lift_candidates_00000_rack_y0__fp_main.png",
+      "sha256": "be81bfc11c560c641baf0dbdac502eba557d1422d8817c5298304b8c6bb4d62d"
+    },
+    {
+      "name": "T175_rack_lift_candidates_00000_rack_y0__fp_off.png",
+      "sha256": "c386ed3125cf8f5e67a07c83a20d9857fc7fbbb01b9601fd5da6796065346f52"
+    },
+    {
+      "name": "T175_rack_lift_visibility_00001_rack_y6__fp_main.png",
+      "sha256": "c0715349cafcdc726c7644c47d711035c80e68daa9f4f4ed750e35e24265948d"
+    },
+    {
+      "name": "T175_rack_lift_visibility_00001_rack_y6__fp_off.png",
+      "sha256": "ff297261efcb4149fb9bf8cb4357080a89c2f86deed22fd07f7d5d5fef0f85ed"
+    }
+  ],
+  "java_client_visibility": "Not established by editor captures; no claim that original Java client rendering is invisible or clipped.",
+  "java_source_trace": "java-item-trace.json"
+}

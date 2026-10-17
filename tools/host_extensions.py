@@ -64,6 +64,12 @@ def validate_guide_startup_profile(spec,source):
   raise ValueError('guide startup repair lacks the unchanged recipe cache receipt')
 
 def apply_host_extension(spec,owned_root,host_root,source):
+ if spec.get('kind')=='cookery-held-geometry-canonicalization':
+  from held_geometry_extension import apply_held_geometry_extension
+  return apply_held_geometry_extension(spec,owned_root,host_root,source)
+ if spec.get('kind')=='cookery-millstone-extension-admission':
+  from millstone_extension import apply_millstone_extension
+  return apply_millstone_extension(spec,owned_root,host_root,source)
  if spec.get('kind')=='cookery-enamel-basin-lid-repair':
   from enamel_basin_extension import apply_enamel_basin_extension
   return apply_enamel_basin_extension(spec,owned_root,host_root,source)

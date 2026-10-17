@@ -1,3 +1,15 @@
+## 0.6.175
+
+- Apply the approved tilted-rack first-person-only +6 Y usability adjustment; preserve its geometry, texture and other views. Editor framing does not establish original Java-client clipping.
+- Retain T174 animated-shell and XP material repairs, reconcile exact API 0.2.12 and P53 build-tool admission, and preserve previous release histories.
+- Publication, full-family and actual client acceptance remain gated; no LIVE deployment. See [release notes](docs/RELEASE-NOTES-0.6.175.md).
+
+## 0.6.174
+
+- Correct four animated held sprite shells with an independent affine-face regression oracle.
+- Cull the hidden XP bottle item shell without changing placed blocks or source geometry.
+- Preserve Java rack poses; client and full-family acceptance remain pending.
+
 ## 0.6.170
 
 - Normalize the negative offhand shaker coefficient spelling for editor conversion and adjacent-operator validation; preserve sampled values and all existing poses, gates, clocks, resources and gameplay.

@@ -158,9 +158,24 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),
      row.update(version=manifest['header']['version'],dependencies=manifest.get('dependencies',[]),files=files_hash(root))
      row['source']={**row['source'],'owner':'upstream_extended','reviewed_extensions':[*row['source'].get('reviewed_extensions',[]),proof]}
     continue
+   retained=None
+   if config.get('version') in ([1,0,51],[1,0,52],[1,0,53]) and spec.get('kind') in ('cookery-held-geometry-canonicalization','cookery-millstone-extension-admission'):
+    try:retained=retained_host_source(config,spec,path)
+    except ValueError as e:fail('host retention rejected: '+str(e))
+   component_config={**config,'version':retained['owner_version']} if retained else config
+   if spec.get('kind')=='cookery-held-geometry-canonicalization':
+    from held_geometry_extension import validate_held_geometry_owner
+    try:validate_held_geometry_owner(component_config,spec)
+    except ValueError as e:fail('host extension owner rejected: '+str(e))
+   if spec.get('kind')=='cookery-millstone-extension-admission':
+    from millstone_extension import validate_millstone_owner
+    try:validate_millstone_owner(component_config,spec)
+    except ValueError as e:fail('host extension owner rejected: '+str(e))
    if spec.get('kind')=='cookery-enamel-basin-lid-repair':
     from enamel_basin_extension import validate_enamel_basin_owner
-    try:validate_enamel_basin_owner(config,spec)
+    try:
+     retained=retained_host_source(config,spec,path) if config.get('version') in ([1,0,50],[1,0,51],[1,0,52],[1,0,53]) else None
+     validate_enamel_basin_owner({**config,'version':retained['owner_version']} if retained else config,spec)
     except ValueError as e:fail('host extension owner rejected: '+str(e))
    host=by_uuid.get(spec['host_uuid'])
    if host is None:fail('host extension target missing')
@@ -168,6 +183,8 @@ def assemble(lock,sources,archives,out,working=False,extensions=(),preserved=(),
    try:proof=apply_host_extension(spec,owned_root,host_root,host['source'])
    except (ValueError,KeyError) as e:fail('host extension rejected: '+str(e))
    proof.update({'repository':config['repository'],'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),'owner_version':config['version'],'spec_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'working_candidate':working})
+   if retained:
+    proof.update(owner_version=retained['owner_version'],source_package_version=config['version'],retained_host_profile=retained)
    host['source']={**host['source'],'owner':'upstream_extended','reviewed_extensions':[*host['source'].get('reviewed_extensions',[]),proof]};host['files']=files_hash(host_root)
  for root in preserved:
   manifest=read(root/'manifest.json');uid=manifest['header']['uuid']

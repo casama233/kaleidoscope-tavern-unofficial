@@ -57,13 +57,11 @@ def sprite_geometry(name,frames,display):
             # Java vertical spans have reversed Y bounds. Normalize their V
             # endpoints together with the positive Bedrock cube dimensions.
             uv=[anchor,low,anchor+1,high+1]
-        # The retained front maps U to +X in Bedrock. Java span conversion
-        # previously reflected X only on the sides, disconnecting the shell.
-        # Up and down also have opposite U origins in Bedrock's UV schema.
+        # Bedrock parseCube reflects raw X. Export side spans in the same
+        # coordinate convention as the retained front/back; do not reflect UV
+        # a second time. Up/down rectangles already reverse both corners.
+        origin[0]=-origin[0]-size[0]
         surface=face(uv,direction in ('up','down'))
-        if direction=='up':
-            surface['uv'][0]+=surface['uv_size'][0]
-            surface['uv_size'][0]*=-1
         facing={'east':'west','west':'east'}.get(direction,direction)
         cubes.append({'origin':origin,'size':size,'uv':{facing:surface}})
     transforms={}

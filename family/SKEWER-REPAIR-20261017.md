@@ -1,5 +1,7 @@
 # G152 串流程修補的家族配套
 
+> 歷史來源記錄：本文保留 Tavern PR399（`d9bcc0fb503ae36eb0940e224318fc89a6802924`）的 G152 配套說明。後續 T175／G153／W152／P53 組合仍在本機驗證，尚未由本記錄宣告發布；最終身份以完成驗證後的家族鎖為準。以下表格描述原批次，並非後續組合的現行鎖定值。
+
 2026-10-17 玩家回報串配方匹配、已穿食材不顯示與空內容進食。本批由三代理修補 [Grilling PR231](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/231)，Tavern 承接完整家族組裝所需的精確 public API 准入。Grilling 的[完整來源修補](https://github.com/casama233/kaleidoscope-grilling-unofficial/blob/main/docs/evidence/skewer-repair-20261017.md)和[原料生產證據](https://github.com/casama233/kaleidoscope-grilling-unofficial/blob/main/docs/evidence/skewer-input-repair-20261017.md)持有玩法細節。
 
 ## 配套身份

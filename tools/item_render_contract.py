@@ -50,6 +50,11 @@ def planned(root=ROOT):
                 source=e['java_display'].get(context,e['java_display'].get(context.replace('_lefthand','_righthand'),{}) if context.endswith('_lefthand') else {})
                 transforms[context]={key:copy.deepcopy(source.get(key,default)) for key,default in [('rotation',[0,0,0]),('translation',[0,0,0]),('scale',[1,1,1])]}
                 if context=='gui': transforms[context]['fit_to_frame']=False
+                # T175 owner-approved usability exception: source geometry/rotation/scale
+                # remain exact; +6 is the smallest tested whole-unit Y lift with
+                # the full rack silhouette visible in both native editor FP slots.
+                if short=='tilted_rack' and context.startswith('firstperson_'):
+                    transforms[context]['translation'][1]+=6
             geo['minecraft:geometry'][0]['item_display_transforms']=transforms
             result[gp]=geo
             key='kt_assets_a17_'+e['asset'];assert key in terrain,(ident,key)
@@ -64,6 +69,11 @@ def planned(root=ROOT):
                 assert c['minecraft:block_placer']['block']==target
                 result[items[ident]]=item
             report.append({'id':ident,'route':'native_geometry','block':target,'source':e['source'],'contexts':list(CONTEXTS)})
+    # Hidden vanilla-bottle block route is not in the normal item art map.
+    xp_path=bp/'blocks/xp_bottle.json';xp=read(xp_path)
+    for material in xp['minecraft:block']['components']['minecraft:item_visual']['material_instances'].values():
+        material['render_method']='alpha_test_single_sided'
+    result[xp_path]=xp
     return result,report
 
 def check_or_write(write=False,root=ROOT):

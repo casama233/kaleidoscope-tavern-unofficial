@@ -248,9 +248,16 @@ class StableAuthorSourceChainTests(unittest.TestCase):
 class PublicApiPredecessorTests(unittest.TestCase):
  def test_previous_public_and_private_profiles_are_retained_exactly(self):
   from stable_host_profiles import CATALOG,declaration_sha
-  self.assertEqual(declaration_sha(CATALOG['profiles']),'fb34f46ab2d3e107fb104c27b6987b2567d0e422ff4d1382d28ae2ae254c01e7')
+  self.assertEqual(declaration_sha({k:v for k,v in CATALOG['profiles'].items() if k not in ('cookery-millstone-extension-admission-p50','cookery-held-geometry-canonicalization-p50')}),'fb34f46ab2d3e107fb104c27b6987b2567d0e422ff4d1382d28ae2ae254c01e7')
   self.assertEqual(declaration_sha(CATALOG['public_api']),'5041cab6e01b97dec00794cb9d9fb69842fd930d86f21d1a5a6ae6c5e371207c')
   self.assertEqual(declaration_sha(CATALOG['public_api_profile']),'a0c4a77c65b4faca822ae01f71020bb5553ee57bc5029eb5027b880cb80c3939')
+  self.assertEqual(declaration_sha(CATALOG['profiles']['cookery-millstone-extension-admission-p50']),'5e29bfc8058016d58d3751ed579743104bbfe0d67c685d028a186a4a723d51d6')
+  self.assertEqual(declaration_sha(CATALOG['profiles']['cookery-held-geometry-canonicalization-p50']),'acbb312e00c509e1c5a8b8eefecd98081830cf8563e777c76155dc174ef7ec56')
+ def test_millstone_predecessor_has_disjoint_host_writes(self):
+  from stable_host_profiles import CATALOG
+  mill=CATALOG['profiles']['cookery-millstone-extension-admission-p50']
+  api=CATALOG['public_api_profiles']['public-api-0.2.12']
+  self.assertFalse(set(mill['original_files']) & (set(api['original_files']) | set(api['patched_files']) | set(api['copies'])))
  def sources(self):
   import copy
   from stable_host_profiles import CATALOG,PROFILES,receipt

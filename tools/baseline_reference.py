@@ -164,7 +164,7 @@ def asset_layers(root):
  for layer in layers:
   assert isinstance(layer.get('release'),str) and layer['release'].strip()
   assert isinstance(layer.get('files'),dict) and layer['files']
-  assert set(layer['files'])<=(COCKTAIL_ASSET_PATHS|INCENSE_ASSET_PATHS|ANIMATED_SPRITE_ASSET_PATHS|FREEZER_SURFACE_ASSET_PATHS|LIQUID_SURFACE_ASSET_PATHS),'Unsupported reviewed asset path'
+  assert set(layer['files'])<=(COCKTAIL_ASSET_PATHS|INCENSE_ASSET_PATHS|ANIMATED_SPRITE_ASSET_PATHS|frozenset({'runtime/BP/blocks/xp_bottle.json','runtime/RP/models/entity/item_display_tilted_rack.geo.json'})|FREEZER_SURFACE_ASSET_PATHS|LIQUID_SURFACE_ASSET_PATHS),'Unsupported reviewed asset path'
   if layer['release']=='0.6.169':
    assert set(layer['files'])=={T169_PATH},'T169 review scope differs'
    assert layer['reviewedPredecessorCommit']==T169_BEFORE and layer['reviewedSourceCommit']==T169_AFTER,'T169 immutable review commits differ'

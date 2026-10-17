@@ -679,6 +679,62 @@
       "required_extensions": [
         "public-api"
       ]
+    },
+    "cookery-millstone-extension-admission-p50": {
+      "id": "senluo:cookery-millstone-extension-admission",
+      "version": [
+        1,
+        0,
+        1
+      ],
+      "host_uuid": "d0ca7a68-2877-4bd5-bc82-6c7b325cccf2",
+      "archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+      "owner_version": [
+        1,
+        0,
+        50
+      ],
+      "original_files": {
+        "scripts/custom_components/blocks/millstone.js": "56a991ed57479f12d9700f9bcdb7811b072bf205f5851c7c5cbb7428188f598c"
+      },
+      "patched_files": {
+        "scripts/custom_components/blocks/millstone.js": "f15034d22998ca38155b24358e8f9ba1da952fe5d219b4ce9e577bb5fbc9e91a"
+      },
+      "copies": {},
+      "spec_sha256": "544db50adb3ddae712ce82b4a53d03059153651aa7e48fb33900067e8fedfe74",
+      "source_owner": "upstream_extended",
+      "required_extensions": [
+        "public-api"
+      ]
+    },
+    "cookery-held-geometry-canonicalization-p50": {
+      "id": "senluo:cookery-held-geometry-canonicalization",
+      "version": [
+        1,
+        0,
+        1
+      ],
+      "host_uuid": "c9df2982-d72e-4bbf-a72c-b77de4ea915b",
+      "archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+      "owner_version": [
+        1,
+        0,
+        50
+      ],
+      "original_files": {
+        "models/blocks/java16/red_lantern.geo.json": "f08af9dd73bea109cac446e7d4677895e1073ced30a1c48e01758d449b6ba13c",
+        "models/blocks/java16/bamboo_tray_base.geo.json": "07e50759d745d47f759ce2132c3e40a87e5bbf22c06969da252116f2be0ecda9",
+        "models/blocks/java16/bamboo_tray_stand.geo.json": "964239f06be1871dc8498cbe7f0ba8bc699f337204145fff34f9cb582245c6de"
+      },
+      "patched_files": {
+        "models/blocks/java16/red_lantern.geo.json": "8c5e5f9b5560a445db192a78ba6edc7986c07800fc2928259b9bf769d023127f",
+        "models/blocks/java16/bamboo_tray_base.geo.json": "7a730724b6da34ba40e3d55cb9d7fec5670f8dd5ee329f6ac2de357b139b0c50",
+        "models/blocks/java16/bamboo_tray_stand.geo.json": "332acdf52c4ea72ab556f209079780aa629fe70b73c73c0d8284b4e69822fe31"
+      },
+      "copies": {},
+      "spec_sha256": "a53c61dba1f76c2aae34e1e96bf4602c562fddb14eb8c4a07a96cca0191623c0",
+      "source_owner": "upstream",
+      "required_extensions": []
     }
   },
   "public_api_profile": {
@@ -867,6 +923,10 @@
       "public-api-0.2.12"
     ],
     "cookery-enamel-basin-lid-repair-p49": [
+      "public-api",
+      "public-api-0.2.12"
+    ],
+    "cookery-millstone-extension-admission-p50": [
       "public-api",
       "public-api-0.2.12"
     ]

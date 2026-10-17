@@ -39,16 +39,14 @@ for name in ('mystery_cocktail','depth_charge','nether_special','ice_grape'):
   # checked independently against every animation frame's alpha boundaries.
   prior=copy.deepcopy(cubes)
   for cube in prior[1:]:
-   cube['origin'][0]=-cube['origin'][0]-cube['size'][0]
    face,uv=next(iter(cube['uv'].items()))
-   if face=='up':uv['uv'][0]+=uv['uv_size'][0];uv['uv_size'][0]*=-1
    cube['uv']={{'east':'west','west':'east'}.get(face,face):uv}
   assert hashlib.sha256(json.dumps(numeric_reference(prior),sort_keys=True,separators=(',',':')).encode()).hexdigest()==proof['converted_cubes_sha256'],(name,'Unreviewed Java mesh/UV change')
-  from check_animated_item_depth import check_geometry
+  from check_animated_item_depth import check_geometry, valid
   with Image.open(ROOT/proof['texture']) as source_image:sheet=source_image.convert('RGBA')
   frames=[sheet.crop((0,y,16,y+16)) for y in range(0,sheet.height,16)]
-  assert not check_geometry(cubes,frames)[1],(name,'Open/misaligned animated alpha edge')
-  assert check_geometry(prior,frames)[1],(name,'Former conversion must reproduce the reported missing depth')
+  assert valid(check_geometry(cubes,frames)[1]),(name,'Open/misaligned animated alpha edge')
+  assert not valid(check_geometry(prior,frames)[1]),(name,'Former conversion must reproduce the reported missing depth')
   if name!='ice_grape':assert visual['geometry']!=block['minecraft:geometry'],(name,'World cup geometry must not replace the native sprite')
   assert visual['material_instances']['*']['texture']==TILES[name]
   texture=json.loads((RP/'textures/terrain_texture.json').read_text())['texture_data'][TILES[name]]['textures']

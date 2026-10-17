@@ -9932,6 +9932,58 @@
           "reason": "Align progress expiry with the existing 600 ms slots/ten-tick unchanged-value heartbeat and explicitly opt the packet and cursor out of animation fast-forward. Preserve all remaining UI fields, Java cursor steps, textures, pruning, namespace, factory capacity and END. Exact immutable T168/T169 Git bytes bind this test-only reversal; it is never installed. Native cause and client recovery remain unverified."
         }
       }
+    },
+    {
+      "release": "0.6.174",
+      "reviewedPredecessorCommit": "e213fcef7241bd485c371053607778c464a79b07",
+      "reviewedSourceCommit": "e31bac59b8f891a2ae79a62b7365416278332fad",
+      "reviewDocument": "docs/RELEASE-NOTES-0.6.174.md",
+      "regressionTest": "tools/test_animated_item_depth.py",
+      "files": {
+        "runtime/RP/models/entity/item_sprite_depth_charge.geo.json": {
+          "before": "83c8180531f3df67e7172f86eb7ca5576fad12f7a2d0d954d47bf4a743aedfe7",
+          "after": "14ff7f80892ae15bc7ecb44ab174f0282f57821e160cfd686d8919a607c8f92f",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1c23KqMBR95yscnitDQFD6Kx2HQQmSOUqcJNj2dPrvB6h6NCZWacBo6oOaC0lYa69cdggf1mBgZ5isEhZvIKEIF/bzwAaOBxzXfqpTV6iAc5Jk7HkB8Qoy8l7leKlSBoOP5rvKk0I6J2jNvi7fRVcJKIUFQxmCpC52V4Dzh8WkrBJW0EEMrmK6JtVvnMI1y+N5npAFbCrflsLgGysJjF9RyvKqIBAKEnOIFjnjUzeIotkSxjNcFindl+DJs+zLOZMHZxmFbI/D18d9Ogw4wVFw/3+6/fe5S7ZnuID0qKyPgyvtIlnBGjyCMbMPy7TXaIP5RnDNGAwmx0H3IDQ9Km1ezrhm8E1psmGCFqg4yVd/hlxdgtY02SpsuMgpn8um6C8UVnLI7tm4b6soN0e2+h9wTBobOU3aXfQiSBG3godc2ppt4bH0vhvkZFWAUFTHSdzn6dU2xWWru3W7vtmf3qt1LswhcZWVi4zNV23m0UVSam/k5boF556YkZEyzqMnid1rSLlqxkX0eiopf4WUqSPdVyd0ic69G5PuX0aIetZVkg6TVqSPbkX6bTl3H4HyljqfmEm5/whde0uVA9fUvl00oCunXQSv0klcil+LNrRLhvRA4ULF1XQm18ugPtZx8h50TfpYU8q9PrSu6Twu6HrFpuegPgSPwHnLidzYTM5HBsscAEN1HvTgcXYvM6zede53PaDLODdiQAc6zuEkLvGwa8q1dMC6RlAuWauNH55yQdce3dtCre0C3e2a9KGuizXBLG5iyCTOv5HSNXTJTAxZqgVmUu6aK/KxmYwDczUeGdqtBz1QDrScsksG8kgd45rO2QWrtD52z0MdPHAS0iddyzzUbvs8vLd1ueJtVKDygU89hS5Ypfk9CN3XYDjvgXVwxVMZN1W6b4QHTjbagtGj++D8HsZzX9POfdQ56UPf4KedI01pl2ld4bNR0f043F3DHe4gfHiPu3ejHXQN1mxR51o32DWjKeeeod64kbkO2JGZlHvmMt79/nmXlFuia3ex++bazcH5FNH1MnmPGUkKWp/jp8fn7xcl4vCzCWbJ9qD+2YPj7qUHx5u6l2rLpPNkeYo+hzoflJaWIRYzHGfk6yh9liwptAQSsxekPt+vE2LezxDjXkMgjhAb3AEsGXqDrVEBk/u2JCEiOUw0A4TfgBj3jEiGCGVrSCguYlK/QSNP2itpGPEyCFphBBweFt/hFFVnuVpUIf9WDWHMVZgtYfYL2feQsRyRVJWZdaFD/9JBSdphn3bQgpirgPqpbT0cTtbhb/09tT6tf9KP2CwMSQAA",
+          "reason": "Independent Blockbench-coordinate shell correction; retain texels, animation, displays and gameplay."
+        },
+        "runtime/RP/models/entity/item_sprite_mystery_cocktail.geo.json": {
+          "before": "3d1946bc655067a7419c0eb706829885bd83e1105021e4810495f038f903ae0e",
+          "after": "1cca24269ccb188bc4c519c3170936e33105201919963bc336c3461a0bb5dcc7",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1cbZOqIBT+3q9o/Lw14nv7V3YaxwqL2ZIGsN3uzv73q251i7AtQkW9fagEPODzcA7ngPA1GA6NGJNNxMIdJBThxHgdGmBsgbFpvOS5G5TAOYli9rqEeAMZ2Wcl3rKc4fCr+M7KLCCdE7RlP7cfk7MMtIAJQzGCJBd7FDB+ZyFJs4wNHCMGNyHdkuw33Owpg2QfzvH8nUVoXTTgIInBT5YSGH6gBVtlwoAnyFxBtFwxPneHKJqtYTjDabKgJwlWeZGTnBtlcBxTyE5Y/HzMl/OLsXtxefo/Pfz7PmYbM5xAeiHr6+xOI4k2MAeQYMyMc5nGFu0w3wiuGcNhcHlpnl1NL6TN0xnXDL4pRTFM0BIlV+Xyz4irS9CaoliGDZc45UsZFP2BwkrO2b2Z9msV6e6iv/4DHJOij1xnHW96E+SIW8FDXtqag/Cw9LkL5MqqAJ6ojqu07+u7DYpTqac1q37YZ591cOuaQ+KhXm7f1wGf6+b3qZJ8J0+3Epy7JYwo4zx4Ken3GlLuto3yBf5IZMyaXTXrI01pBwL0gWrWBRS7Kln/gJRJsD6p3LyLK3CbpdwSQG/VQLmjknIYtYpyp1nKnS5QLqnlogftA+cCCzupgXJfAy1vjHK/YR9OFCPayqNToKPfbj2ghHKUA00dd68O41456Yo9d0fhhESviReRrMGoXqLudtUWXsMoPWhbuCY5qjsNUd5wuDaymqE80EDLvYb8uKBZys0OMC6p5H4/GR85d9lcvaM1SSV3Kvfc9QzW7DrcN69FayyuMsY9TT12t47ZdmDqyHlJnOap03KzPaTXMRFnaWDa7aoVvcS0Wz2gvHI1Vzwj4yuckdFU1bsQnMuusoB+RucN+e0A6LDMAhoK1kAfZuHa5LlPOu+516Hnur4cZT2ihZ16O0qk6E7bFF2W9jLja6mj3WsP7WYdo7qngSfnNjWoe9o577VwbuvgyZlNLafaDWs6uGviRHP/XVLT/aZI1++d51o41+EF2KAp6+7oN6T3erEFdH+1pY4RvW3Ou9dL5x0oD9r8Fqm6ugHdbxHlds/3rtndn52xurB5TdKRc/u5ea0b21RVWner6zuTzR5vXgv6uXfN6vN+RbPNnA9E9x5TT801ilNxFohu19E+ZCRKaH5ID708XGeZIg4/g2AWHU7huXkijHnviTBF3Wu1Muk8Wl+jz6HOX5ZKixELGQ5j8nNGThytKRwIdMxYkvzgHp0Qs55DjDtfSJwg7nBnsMToE0qjAoJ29yQhIisYaQYIH8P4NSMSI0LZFhKKk5DkR2OtInlNGk14NXClMAJjHhZ7zGlUXuRhpfL447KEKQ9htobxf8h+h4ytEFmo6mZV6KF976BUarCvDbQg5SGgnu1bncNpcP6bf08H34O/Eu8g+OlQAAA=",
+          "reason": "Independent Blockbench-coordinate shell correction; retain texels, animation, displays and gameplay."
+        },
+        "runtime/RP/models/entity/item_sprite_nether_special.geo.json": {
+          "before": "cbec5a83f4a37629572b8fcd13497bcf40dc887b852cdc3620e87a67ebf3c5a5",
+          "after": "c6653cda7bc5ade3e20f95dddaaab22a7ec96cd15107432d2f8ead902f7a696e",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1b25KiMBB99ysonmcowk2cX5myKNQgqVViJcGZ2an59wVGXYzBlQyXAOuDkgud0KdPdyeYz5mm6REm+5AFR0gowon+ounAsIBh6k956x4lcE3CiL1sId5DRj6yHq9Zi6Z9Ft9Znw2ka4IO7Pv2c3XWgDYwYShCkORizwKMXywgadawhwZicB/QA8l+gwSyGJKsBNco3BXDn+Qw+M5SAoM3tGFxJgp4gsYYom3M+NYjomi1g8EKp8mGXiRY1V0ucu70wVFEIbto4vtjPpULhntVvFwvT1df52Z9hRNIr2R9lu7Uk3APc/URjJlelqkf0BHzk+CmoWn+ddEslZZX0tbpipsGP5WiGyZoi5KbfvnnmRtLMJuiW6YbrnLJ99Ip+g2Fg5TRvVv3zyHS45W1/lU4JoWN3Dadb3oVtIhnwau8cjYn4UHlcxeaqxoCeKIxbuq+bu/WKU6lntZs+2F/+qyze2VOE7WsXGRsTtNm/hiV5I08PUhgbokRsRvD3H+qsHsFIbcb92wtQ77Bb4kE6HbboD+DKaMugrhJ1N8gZc1R3WrOvVd4954xd8aAOQylMLcnirlgWlYXkFsK8HzeF+ZWv6BbE+b5YqI8dx/j4CizOEcMiTP+LE6A+qIDojsKOPfWU3dQw6rGlsQBU8Uleus8B6aiPBcA7HfAc1eBgO70xHO3Z8itLgK6ogt0ryfMe6a5aE8GdAC5pQDNQV/x3FIvnrsdYD5XgObtx3PxAHP1ovnw1mpSGZxbI9Y2iXjfCZzbhWdXdHUOnLZBH9LyfHiwSxG9Ipp7EyT6YioZnNWTc7cmsAnX+oaMrHO3a6RYks5d0U2ZnvZkVFifA9A26mou0HtaqzkqePe+IHcmsPXqDWittmgMcE/RrL0LlvuKhvOKHA6A5uK5P5x3LM7QiC4Le60/ssjB7g0HdnNor9Yk0zi3dbKr+W5tDJDLpnHmRDHv6X+QKmzM+K07d0U3ZuwOMB9S6g7c0efuXbj2oSVx3kCSuJno3nPtZcJ6cax2g+hhF34EjIQJzU/50uvTudsUcSrUCWbh6Rjv3UOl5qOHSouxd83KpOtwd6t/Dlm+WCktQixgOIjI9zHbKNxROBPQTN+S/OyvShqzfqYx7oiyuEJscCW1ROgdSmsF+MO2JKFGYhgqphD+DcS8Y41EiFB2gITiJCD56fo4lGfS84KngSulI2DwarENjlF5l9qk8vgT98KaWjrbwei/yv6tMhYjsmnKzNrgof1oUKp02LcOWlBTS1E/ta3R6WlW/s2/l7Ov2R9Gsy/+KkUAAA==",
+          "reason": "Independent Blockbench-coordinate shell correction; retain texels, animation, displays and gameplay."
+        },
+        "runtime/RP/models/entity/item_sprite_ice_grape.geo.json": {
+          "before": "234515d640d1d71c3d5637dfdac830f29aa4c2c2db25fce6193c8b8e6fb86128",
+          "after": "f86bbea64a6d75424994b3bf8468cffe169343cc9a573067a0044e48379eed05",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1cUXOiMBB+91c4PBcHAij2r3QcBjVo5hScJNr2Ov3vB1Y9jaGHaSALnA8qSUjCfvk2u5uQj8FwaCUZ3cY8OmDKSJZaz0PLHSF35FhPRe6WpHhB44Q/r3C2xZy+5yVe8pzh8OP4nZdZYragZMe/bj8n5xlkiVNOEoJpUe25gtEvHtF9nrHFI8LxNmI7mv9GZIGjFY13+NjyqQqO3/ie4uiVLPk6r8UdSzLXmKzWXMw9EEbmGxzNs326ZJcaUHmRSz3flMmShGF+EcLXx3m6vhgFN5eX/7PTv89ztjXPUsxu6vq4utNK4y0uJEezjFvXdVo7csjETgjdGA7D20vn6mp2U9tiPxe6IXblWCyjZEXSu3LFxxbakvTmWCyXjZA4E0tZjPzG0kau0f027Z9N7A83A/WvwDN6HCP3WeebXiQ58l6IIi/tzanyqPS5j5Ira8Idy9q4S/u8v9ti2V7paZ26H/anzzr47lqQxEOjXDbYfO3D3KvEJfVRvt8pgI7kkHj6QPeeSkY+QNA93aAHNWO+zF5TBdQndaNuB0BRR02gLoNYJ+qvmHEF1EvUL9LH9RL9bhbzTkCOYyXIp/2EXDLSgwYQnwIgucxwaQTyqVnIJx2AXJHkfYXclnQLNaHYIUzmtZtwZZq9F3a7i1rkrPn6MEcwzXavknWln+gIgnZ3TDEdmQU9qAZIJ121sqiJ13HDXardUetCcYphGTeoW8HbYMNxYSeAV5rWSxR80P0YrF/NuO6kivdrN+ZganhkyGlzANhygSnMHYDaXTvRZXEQENO6X7eCt8uasOEFYsMGyO5D8Ns8Q2T3AZrwbtsWVnXGZ8baEIe6qhpUCoxrp7kHwIwzxXLPLOR+JTS0Ix5CUOxu7f6avIEQoGJ3eh15n3Q+8i4DXbtqd1sEeVg3y0FujGvCQYcwmyNT+2UMT+f2pAFHrXb/XInnj+xtUIMcqG8uw7x9kTjVBba+RuIkoI97s77mPwJKtxbYAjMOmwfBYUO1ww7TSW9iG6zbrqV0+fY1RarDZLpfKR7eTdS9R7YydQp12cTu98JRf8il6pSnjhqY0yctY7rGd9gmPfbbZE4aCNzL2K5zj5wDE3hTrzsAMOFDUzq+D8HYacuornHfzBSoijf1wgMAqvu1K3igVA8MbYaFEKIxte7i9WJJHaZ+9+reLQXWVQ97vO3d6em293EXMFcNwPcU80mPMe8pz5EZwx1BWFJ3TDnpCBzmqB+Rd6d2D71WE24gu/eceumvdTzNdEnYbhO/R5zGKSsOV2W3h6Ku9kSQoEUzHp9OT/32QE+n6oGex7Y3eutki3hzL35B7OJlaW0J4RHPooR+HXGaxBuGBxKKWStanLsKSWLoZxITjoeVJ8gH3JVYEvKGlaXihu0eSVKJrHEMTCDi0tOkYYkkhDK+w5RlaUSLk43XsTqT7KlIg0BJRu5IFIs3EhhVFHmYVGPxtGNpykMy2+Dkv8j+LTK+JnSpa5jVwUOv6qRUqrDvFbQk5SFB/XRsdU5Og+vf4ns2+Bz8AdlEpn6hXgAA",
+          "reason": "Independent Blockbench-coordinate shell correction; retain texels, animation, displays and gameplay."
+        },
+        "runtime/BP/blocks/xp_bottle.json": {
+          "before": "7870387b3b61d7a2304dccce8add8ee070c37629392cc1fbc7ce5ec499ba0f90",
+          "after": "686aa4e99fe2b06ace2c58cdb4196e327bc0ae2a9026c9e02bd6cc3ef64dd75f",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1XbW/aMBD+zq9A+cI2lQxajW6V+kumyjLOBTwcO7UdCqv47zvnpTgmpFBNbT/wCTU+P3f33OO76/NgOIxSpTNqyRq04UpGd8NoGl/P4h+T6ModZ1wC0zS1d3Oh2ArPn/EzHiRgmOa5rS5VH/EzT0BannLQDmpFBfBEGaZyIJaiE3m3yclcWSugdFBesppyazyYluNcUAYZwpKEa2CBx9IYJJ0LSIix1IID+u2dtsAY1QmXVHhYnunDlY+6JVohINoQlaYGLAJPf07iyYvRbuD/7qrbEVNZriQG7KfkxbAAlYHV23bCbeYam3hlCTXo2xA6vY335DWerw7xsZ6gOebIJRIiGQTUfgvps7CxhYayYr47clir0l6DTEATDHCpEneLinxJCVJv24Y0m3NXOMWYKGp9IX8tmxSri9XIMP4FHltdwJ7fvWVUSLOkCSSfOfiUCgOH6uioEbeQkTU3BRXt4nSK483yaFP4ijA6pHE+v2cwfBrHr0ikleFxmXzKRNpy2QumXzpMCcGdC4x606B02BkQVYer7TyRKc0XXAZ9cnzjR9sKfXwz6GiRkeF/IQCZ+demLZDZHqMnO5wrWF+MGxs6mW8JnlRkeeEbYEomhlhFSnO1LdmenQELm1woE46S6OUz0WB49Ugcdl+3VWs3fILppdbVyLLbvFQc1ry264ESSrkZE7lfHJdobb5Dlttt/MdgpF03+GKJc5FmOdQ0TTqtHgueIFe2Y3xGL5+JLsTB9AweUQ3VpPXkOkr4FhiVBAtkKZeksq8fbWCnmmMsZMGWpeuoXDNcKoFxYaCxZoLneXcr6JFY1y4iKXYE7IdzDXQVsKJV7uLZs4jawO4JqIgTZjDmLz1W29iUMcix+eyNDEm1ypw/iZtD1LlWoPesqPYRv0gernsVvC5w9BiXVFY70ZdR3wo0+jq8vx+OpNJ2OfKI795kgkxxeZOm2iIPNzPXROsd6mArC3pM94fW3w9Hu/7Jy8+RKfeW8XDWgDh1RLw67YLM+ybeJ04qnHz+0+2dg/9P7UCN/VCxj39d5H6R+3vJ3ajig5v7GP93vgj+Ivh3EvwTfHR/v7696P2i9269D5r67wa7wT+T4PxviRUAAA==",
+          "reason": "Cull source-inverted opaque yellow shell only in hidden XP item_visual; preserve world and geometry."
+        }
+      }
+    },
+    {
+      "release": "0.6.175",
+      "reviewedPredecessorCommit": "10417ca8462aad40a88e1ea751f64cdd225b552e",
+      "reviewedSourceCommit": "2ee23110cc3d349f8487342f41eb646821444582",
+      "files": {
+        "runtime/RP/models/entity/item_display_tilted_rack.geo.json": {
+          "before": "1b3f1b0992ea604d6e4918c71b7d6e4a69d27bd8fd5a20d7fb9f6a2837673622",
+          "after": "93030bd4f8289be846eea898052b36ed81c33626355c8e42fbcac95a73968ff7",
+          "beforeGzipBase64": "H4sIAAAAAAACA+1a3XKqMBC+9ykcrmuGBMJPX6XTYVCCZqrESaJtT6fvfsCqB8NyVETEc+TCyibZny+72V2br8FwaKVCLmIdrZlUXGTW89DCiGBkW0/F6IJnbCLjVD9PmVgwLT/zGS/5yHD4tfnM5yRMTSRf6p/lO3I+wBOWaZ5yJgu2OwboTUexUkyrKMY+4potooSr5Tz+jDSfa5ZEMp68beRvGWn2oVeSRe880bOcl0OAwRnj05k2R9dc8fGcRWOxyhK15xDUT9nz8erniDTNDdhD8fPYT6UXjGj51d5/f91++94NW2ORMXXA66u00sriBSvwk0Joq8zTWvK1MJUw1BiWLT1UJFflgNtkNTbUMFXZTBOST3lWmVc8I0NW8VDkOdSh1QEH+YT4oUF/NSdaiv9ioDTsQUztKpEg+6gUGEoAzg2kyHcphQQ5vusGR4VJoeNttAAgEoIA3oAax61arQ8C8o9LCbmJgurQbtELMFJADuFbPF4FY1CjrYCodlM3CNSLGTnnySkhjYPqyu/qOovFSjeAxq5T2WkRGdKSkAawKLFq5DKd4FLvMDVSTjL5nbXrCV4XnjC6xOLVstVDgXZ0KJALTE7Ee/YvGd005Ad/ezeAu7QmGOUhggEyQYS6ttduSYAhBCnqPnnWnguEdHIU4r6mThx0g0xLEVsCJrxR7rytx1wzeeKwE5tHV3AG4tu3SLLE7yjh0D5l2Vtb3bs0C2Q+GxHPhRKti9zAD9zmeZZUeYJx23Lf7SEfNshH4UkG/bXx7nPfXZshMe6iqQgvCP3Wi4JWTbavYXLTfH/P29w039/xNjdL5PUGO10YfEHfeGqB0zTZ3y8y4a0b6jxWiINd6AdxikPPabelDtrO9SPw/wPU9wIP6t1PM+luf2Wv9VDcTdsX3CD13Y3N1wpr91G/P+r3R/3+qN8f9fujfn/U732v3weQs+2oe5HW4eUmGWequG6lDq9JTVfcgLs+0TmG8SNs3q2pv+CzkT+H+RpJ2TmVp5rE8+pe2Sg0tQIptWxTriMtolT+3H1K47liA8BnraksLmSdDJ+Bnt0GdHbL0JEKUBAFdsASMin/YL0Cxr4UmAoKVcJRVGYs7hUo2AV216dnYmNEr/l6gq9IpZdMKpFFsrj9OIubB5VL++g87tNRwlkwzVl6EUptHdx9xEnPuEwau5NPO/CnSq94PlKOXwlcmHQWXmf71X8C16D8t/h8HXwPfgMLP1W3wS4AAA==",
+          "reason": "Owner-approved first-person-only usability lift: translation Y +6 for both hands; preserve every other source transform, geometry coordinate and texture."
+        }
+      }
     }
   ]
 }

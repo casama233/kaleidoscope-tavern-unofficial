@@ -1,5 +1,16 @@
 # 家族現行基線與修復主線
 
+## 2026-10-17 修復候選更新（尚未合併／發布／部署）
+
+本次候選鎖定 **T175／G153／W152／私有 P53**。下文舊來源、下載及部署表保留為前次核對記錄，不代表新候選已公開發布或已部署。
+
+- Tavern 來源錨點：[a67c7968](https://github.com/casama233/kaleidoscope-tavern-unofficial/commit/a67c796810d338e473bd09460373f802a8bce92b)，[draft PR400](https://github.com/casama233/kaleidoscope-tavern-unofficial/pull/400)。本次工具／鎖更新不改動其凍結 T175 runtime。
+- Grilling 凍結來源：[686cde55](https://github.com/casama233/kaleidoscope-grilling-unofficial/commit/686cde5578ae5ddc66632b8e0d24fa9d6d89b656)，[draft PR232](https://github.com/casama233/kaleidoscope-grilling-unofficial/pull/232)；family API 0.2.12，BP 790、RP 3762 檔案。
+- World Liquor 凍結來源：[5efa46e8](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/commit/5efa46e85cf2449cd1d0f7be105546119374368d)，[draft PR138](https://github.com/casama233/kaleidoscope-world-liquor-unofficial/pull/138)；W152 精確依賴 T175。後續 CI 來源鎖更新不改動 W152 runtime。
+- [家族鎖](upstream.lock.json)保存三個公開包的精確版本及 BP／RP 雜湊；公開工具接受 P53 保留的原 P48／P49／P50 修補聲明，私有實作仍留在私有倉庫。
+- 本機嚴格公開 16 包組裝已通過，並保留 23 項定義重疊報告；這不是完整私有／保留包組合、存檔遷移或玩家驗收。完整候選仍須後續來源／CI／配套 gate，`publication_request=false`、`client=false`、`production_ready=false`、`live_deployment=false`。
+- PR399 的串修補來源記錄保留於 [G152 歷史配套說明](SKEWER-REPAIR-20261017.md)，G153 已承接其 API 與修補。
+
 更新：**2026-10-17，香港時間**。本頁是三個移植倉庫的共用現況入口；按玩家行為追蹤工作，各庫矩陣保留具體來源與場景。本頁承接三庫來源／發布／部署盤點；本批三代理實作 Grilling 配方原料、秘製串內容顯示與進食資料修補，G152 接續同步三語遊戲內砧板指南，Tavern 同步精確家族 API 准入。詳見[G152 家族配套](SKEWER-REPAIR-20261017.md)。本批未重新連線 LIVE、啟動 BDS、操作 Blockbench 或進行真人驗收。
 
 **目前公開來源為 T173／G152／W151；公開下載為 T170／G149／W148；倉庫最後記錄直接核驗的部署為 T169／G144／W147／私有42。完整 Java 一比一與現行全物品客戶端驗收均未完成。**

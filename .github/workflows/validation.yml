@@ -47,7 +47,11 @@ jobs:
       - run: python tools/test_doll_renderer_extension.py
       - run: python tools/test_nether_placeable_extension.py
       - run: python tools/test_enamel_basin_extension.py
+      - run: python tools/test_millstone_extension.py
+      - run: python tools/test_held_geometry_extension.py
       - run: python tools/test_retained_host_profiles.py
+      - run: python tools/test_p51_retention.py
+      - run: python tools/test_tilted_rack_lift.py
       - run: python tools/test_family_archive_index.py
       - run: python -m pip install nbtlib==2.0.4
       - run: python tools/test_family_saved_world.py
@@ -157,7 +161,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: casama233/kaleidoscope-world-liquor-unofficial
-          ref: 3e27340b2e5e84a07cc7156b336cadb0991125af
+          ref: 5efa46e85cf2449cd1d0f7be105546119374368d
           path: world-liquor-src
           fetch-depth: 0
           persist-credentials: false
@@ -185,7 +189,7 @@ jobs:
               'world-liquor':{'repository':'casama233/kaleidoscope-world-liquor-unofficial','repository_id':1385218112}}
           assert os.environ['GITHUB_REPOSITORY']==identities['tavern']['repository']
           assert os.environ['GITHUB_REPOSITORY_ID']==str(identities['tavern']['repository_id'])
-          assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=peer,text=True).strip()=='3e27340b2e5e84a07cc7156b336cadb0991125af'
+          assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=peer,text=True).strip()=='5efa46e85cf2449cd1d0f7be105546119374368d'
           lock=json.loads((root/'family/upstream.lock.json').read_text())
           lock['owned']=[row for row in lock['owned'] if row['key'] in {'tavern','world-liquor'}]
           assert len(lock['owned'])==2 and {row['key'] for row in lock['owned']}=={'tavern','world-liquor'}

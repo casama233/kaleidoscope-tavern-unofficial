@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "kind": "chinesefood-doll-renderer-cleanup",
+  "id": "senluo:chinesefood-doll-renderer-cleanup",
+  "host_uuid": "fdb6b8c4-6fe3-44bb-af7a-08bcb976377c",
+  "behavior_uuid": "d7aa2725-a2a2-4e82-9a6e-192d2e04617c",
+  "owner_version": [
+    1,
+    0,
+    48
+  ],
+  "local_pack_version": [
+    1,
+    0,
+    10548
+  ],
+  "archive_sha256": "6e424b1df6d933e4aa699023208d05e6a702431ed4c33dcca439c2cd0c2c9251",
+  "expires": "2026-11-04",
+  "removal_condition": "Remove after the author resource pack drops all six incompatible legacy doll texture declarations and passes the original model/material regression.",
+  "feedback": "docs/CHINESEFOOD-DOLL-RENDERER-20261004.md (clean original source reproduction; author feedback delivery remains pending)",
+  "authorization": "User supplied repeated doll_1..6 client geometry warnings during canonical latest-live repair, 2026-10-04; /root/AGENTS.md authorizes per-candidate canonical full-family development updates.",
+  "original_files": {
+    "BP/manifest.json": "be5fdf74df79a32e120ba9c701b7c06adb6e955a6e9a723fce90490f593effa7",
+    "RP/manifest.json": "9e86ad5c017b462e5d0f47206d5279a3ca3e37e90d4b038c1f3f19f6fafe8ba4",
+    "RP/blocks.json": "a66b3053dfbb173ce12a7bd53beb9827bdd1d952c6b92a83d37d2d15387c0fe4"
+  },
+  "patched_files": {
+    "BP/manifest.json": "43716b5b10d15651ceab7addbab220a81c95ad55ae41131da411f174bc45a544",
+    "RP/manifest.json": "0a3fc735bf4258be7c24f031242919ee0abbd79bbef4583d9f9f038d2d65aaf2",
+    "RP/blocks.json": "51756e55a09a2896a801fcfce599ee53272e1722821fb447c54de8e744dd1fc3"
+  }
+}

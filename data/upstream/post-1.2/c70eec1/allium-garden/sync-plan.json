@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "allium_garden",
+      "visual_key": "allium_garden",
+      "baseline": "baseline/allium_garden.json",
+      "updated": "updated/allium_garden.json",
+      "baseline_blob": "8b9d1580ecb55c347d2a4fcb8201840e36a2d25a",
+      "updated_blob": "179aeda05570a47f7b292fdba400b577c8a1d759",
+      "shade_elements": [
+        3
+      ],
+      "unshaded_cubes": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "uv_changes": [
+        {
+          "element": 12,
+          "face": "north",
+          "baseline": [
+            7.5,
+            10.5,
+            13,
+            15.5
+          ],
+          "updated": [
+            7.5,
+            10,
+            13,
+            15
+          ],
+          "geo_cube": 18,
+          "geo_face": "north",
+          "bedrock_uv": [
+            15,
+            20
+          ],
+          "bedrock_uv_size": [
+            11,
+            10
+          ]
+        }
+      ],
+      "geo": "runtime/RP/models/entity/allium_garden.geo.json",
+      "block": "runtime/BP/blocks/cup_allium_garden.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "allium_garden_block",
+      "baseline": "baseline/allium_garden.png",
+      "updated": "updated/allium_garden.png",
+      "baseline_blob": "39a25d464bf350af5ae464e27c7f57fc5688f9eb",
+      "updated_blob": "42d41bb699d7c5f31aa38d4ec0faee55309379a8",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/allium_garden.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/allium_garden.png"
+      ]
+    }
+  ]
+}

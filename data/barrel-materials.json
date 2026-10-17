@@ -1,0 +1,388 @@
+{
+  "schema": 1,
+  "scope": "All current Tavern/World Liquor barrel recipe options plus four Tavern grapes and ten pinned Cookery crops. Not arbitrary third-party item rendering.",
+  "java_model_reference": "Minecraft Java 1.20.1 item/generated and item/handheld FIXED display; barrel half scale.",
+  "materials": [
+    {
+      "id": "minecraft:apple",
+      "texture": "textures/items/apple",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:blaze_powder",
+      "texture": "textures/items/blaze_powder",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:glow_ink_sac",
+      "texture": "textures/items/dye_powder_glow",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:glowstone_dust",
+      "texture": "textures/items/glowstone_dust",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:gold_nugget",
+      "texture": "textures/items/gold_nugget",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:gunpowder",
+      "texture": "textures/items/gunpowder",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:honeycomb",
+      "texture": "textures/items/honeycomb",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:iron_nugget",
+      "texture": "textures/items/iron_nugget",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:potato",
+      "texture": "textures/items/potato",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:redstone",
+      "texture": "textures/items/redstone_dust",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:sugar",
+      "texture": "textures/items/sugar",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:sugar_cane",
+      "texture": "textures/items/reeds",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:sweet_berries",
+      "texture": "textures/items/sweet_berries",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:wheat",
+      "texture": "textures/items/wheat",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:rotten_flesh",
+      "texture": "textures/items/rotten_flesh",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:blue_ice",
+      "texture": "textures/blocks/blue_ice",
+      "model": "cube",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:ice",
+      "texture": "textures/blocks/ice",
+      "model": "cube",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:packed_ice",
+      "texture": "textures/blocks/ice_packed",
+      "model": "cube",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:dirt",
+      "texture": "textures/blocks/dirt",
+      "model": "cube",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:stone",
+      "texture": "textures/blocks/stone",
+      "model": "cube",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:pink_petals",
+      "texture": "textures/items/pink_petals",
+      "model": "card",
+      "source": "existing-reviewed-runtime"
+    },
+    {
+      "id": "minecraft:allium",
+      "texture": "textures/blocks/flower_allium",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:azure_bluet",
+      "texture": "textures/blocks/flower_houstonia",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:bamboo",
+      "texture": "textures/items/bamboo",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:beetroot",
+      "texture": "textures/items/beetroot",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:blue_orchid",
+      "texture": "textures/blocks/flower_blue_orchid",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:bread",
+      "texture": "textures/items/bread",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:carrot",
+      "texture": "textures/items/carrot",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:cornflower",
+      "texture": "textures/blocks/flower_cornflower",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:crimson_roots",
+      "texture": "textures/blocks/crimson_roots",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:dandelion",
+      "texture": "textures/blocks/flower_dandelion",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:lilac",
+      "texture": "textures/blocks/double_plant_syringa_top",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:lily_of_the_valley",
+      "texture": "textures/blocks/flower_lily_of_the_valley",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:orange_tulip",
+      "texture": "textures/blocks/flower_tulip_orange",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:oxeye_daisy",
+      "texture": "textures/blocks/flower_oxeye_daisy",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:peony",
+      "texture": "textures/blocks/double_plant_paeonia_top",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:pink_tulip",
+      "texture": "textures/blocks/flower_tulip_pink",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:pitcher_plant",
+      "texture": "textures/blocks/pitcher_crop_top_stage_4",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:poppy",
+      "texture": "textures/blocks/flower_rose",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:red_tulip",
+      "texture": "textures/blocks/flower_tulip_red",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:rose_bush",
+      "texture": "textures/blocks/double_plant_rose_top",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:sunflower",
+      "texture": "textures/blocks/double_plant_sunflower_front",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:torchflower",
+      "texture": "textures/blocks/torchflower",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:wheat_seeds",
+      "texture": "textures/items/seeds_wheat",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:white_tulip",
+      "texture": "textures/blocks/flower_tulip_white",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "minecraft:wither_rose",
+      "texture": "textures/blocks/flower_wither_rose",
+      "model": "card",
+      "source": "mojang-bedrock-samples"
+    },
+    {
+      "id": "kaleidoscope_tavern:grape",
+      "texture": "textures/kaleidoscope_tavern_jar/item/grape",
+      "model": "card",
+      "source": "canonical-tavern-icon"
+    },
+    {
+      "id": "kaleidoscope_tavern:ice_grape",
+      "texture": "textures/kt_runtime/animated_items/ice_grape/frame_00",
+      "model": "card",
+      "source": "canonical-tavern-icon"
+    },
+    {
+      "id": "kaleidoscope_tavern:gold_grape",
+      "texture": "textures/kaleidoscope_tavern_jar/item/gold_grape",
+      "model": "card",
+      "source": "canonical-tavern-icon"
+    },
+    {
+      "id": "kaleidoscope_tavern:green_grape",
+      "texture": "textures/kaleidoscope_tavern_jar/item/green_grape",
+      "model": "card",
+      "source": "canonical-tavern-icon"
+    },
+    {
+      "id": "kaleidoscope_cookery:chili_seed",
+      "texture": "textures/items/kc_chili_seed",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "bd15207cd7e283a40bb4dc38568e3e4902658b64398f26772e9193d51c1e908d"
+    },
+    {
+      "id": "kaleidoscope_cookery:green_chili",
+      "texture": "textures/items/kc_green_chili",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "9f190daabb194b9ca2b023fe155478719c399cb92a4f22daf6c1ecb93cfd9571"
+    },
+    {
+      "id": "kaleidoscope_cookery:lettuce",
+      "texture": "textures/items/kc_lettuce",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "f7f6617960637a0d4e23b2eadb131934d1fe978f9fb467686249977aafaf5b81"
+    },
+    {
+      "id": "kaleidoscope_cookery:lettuce_seed",
+      "texture": "textures/items/kc_lettuce_seed",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "3315263f8f3caa2b26a805def01abb27d64e2afbdd50bd6388b31a29d3842d9f"
+    },
+    {
+      "id": "kaleidoscope_cookery:red_chili",
+      "texture": "textures/items/kc_red_chili",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "0eb6f7fe0ff343d847912513cfad4260655f350f9fb2eb4294d4d95307e4cab3"
+    },
+    {
+      "id": "kaleidoscope_cookery:rice",
+      "texture": "textures/items/kc_rice",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "e5ba53f5d861a220578dd081af8f3baf2e1886362a53703fd1ae12865201ac80"
+    },
+    {
+      "id": "kaleidoscope_cookery:rice_panicle",
+      "texture": "textures/items/kc_rice_panicle",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "26a51c6d4f27f53012e8077db4f6a76768f7726c811337019615db22d319f830"
+    },
+    {
+      "id": "kaleidoscope_cookery:tomato",
+      "texture": "textures/items/kc_tomato",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "072a9a07c31b6c2c89fcfce58135ce8dd267e667128107e0ad08c1a35dfa0b65"
+    },
+    {
+      "id": "kaleidoscope_cookery:tomato_seed",
+      "texture": "textures/items/kc_tomato_seed",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "2ccd697bf78743fbcf778526468760319d9ed974ef7ff1284fd658b5993094ab"
+    },
+    {
+      "id": "kaleidoscope_cookery:wild_rice",
+      "texture": "textures/items/kc_wild_rice",
+      "model": "card",
+      "source": "cookery-1.0.8-file8983314",
+      "texture_sha256": "6bd518cb41db510ec639b0f1382ee8201309e136e8436851102984d397cf9e16"
+    },
+    {
+      "id": "minecraft:reeds",
+      "texture": "textures/items/reeds",
+      "model": "card",
+      "source": "native-sugar-cane-alias"
+    }
+  ],
+  "sources": {
+    "mojang_blocks_tree": "398e3f9adbf42f115f7ccd686062efc3b9fb692d",
+    "mojang_items_tree": "0a26f2ee1a445bef54a9c1eaf74fbc6075eec493",
+    "cookery_archive_sha256": "9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5"
+  }
+}

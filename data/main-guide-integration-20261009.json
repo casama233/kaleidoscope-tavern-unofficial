@@ -1,0 +1,935 @@
+{
+  "schema": 1,
+  "date": "2026-10-09",
+  "candidate": "0.6.139",
+  "published_main_commit": "c461a8e643a08304587ef468ff7f8051369a2dd5",
+  "preserved_trial_commit": "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813",
+  "published_main_tags": [
+    "v0.6.136-beta.1"
+  ],
+  "history_policy": "Keep every published main key unchanged; append only nonconflicting trial identities. Same-version trial claims, sources, witnesses and native evidence remain immutable at their original commits and local checkpoints. Never republish a conflicting old identity.",
+  "history_conflicts": {
+    "0.6.136": {
+      "published_main": {
+        "BP": {
+          "sha256": "381c79dc5616279e5c8e97f115e3c7b0062bcce696635e94bc3c31b6f385eb77",
+          "files": 824
+        },
+        "RP": {
+          "sha256": "59ec6843e2732f8d1f062bff99829515ee97443eac9a42214461bc2e8b359592",
+          "files": 3168
+        }
+      },
+      "preserved_trial": {
+        "BP": {
+          "sha256": "24b9794f39e5be5e088d1bfce7dc1c246bd819fac7eeb35bae2a7d240edb549b",
+          "files": 827
+        },
+        "RP": {
+          "sha256": "ac311d2498d79229bb068739c2e5fcc6e81d0e0df507b6eff1b57a6cbf2ea2cd",
+          "files": 3222
+        }
+      }
+    }
+  },
+  "main_history_sha256": "38462e750490ae80da43b2c56dc481ed1e05bb4bd99066f7cc8de261d47612a2",
+  "trial_history_sha256": "41abba039482d969b979c4691e5b5587556b3fcd26996387ff64e02bb0e5382b",
+  "main_ledger_sha256": "f661ceb17108d5511d7efb78c7f62cbe17b889bd74d6209b256732e2d23ea271",
+  "trial_ledger_sha256": "870a0fbd065649cd503ac2505422bbc82be8e049a6661eb68931ce9896843044",
+  "witness_join": {
+    "reviewedFunctionalDeltaLayers": {
+      "common_prefix": 13,
+      "main_count": 14,
+      "trial_count": 19,
+      "joined_count": 20
+    },
+    "reviewedAssetDeltaLayers": {
+      "common_prefix": 4,
+      "main_count": 4,
+      "trial_count": 5,
+      "joined_count": 5
+    }
+  },
+  "review_document_resolution": "Historical reviewedSourceCommit fields bind runtime source bytes. reviewDocument is resolved at that source when present; explicitly recorded later documentation sources are separate. Published main keeps the shared same-version release-note pathname; trial documents remain in immutable ancestors.",
+  "runtime_composition": {
+    "counts": {
+      "both_exact": 3935,
+      "main_exact": 12,
+      "trial_exact": 100,
+      "identity_only": 4
+    },
+    "paths_differing_between_reviewed_sources": {
+      "runtime/BP/functions/kt_tipsy_motion_off.mcfunction": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "40267c4f6c6e7b5c6cd5f66b37b6bbedbc8bb01d664d72f4043b087c82d3de53"
+      },
+      "runtime/BP/functions/kt_tipsy_motion_on.mcfunction": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "478b1f683da54cdc8021c4ff0b042a6335eaf49ad76e936d6522c1ca0c2316c6"
+      },
+      "runtime/BP/manifest.json": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "identity_only",
+        "sha256": "02548ca01cfd1cc83cb3f95e663495f348d12b04320696812bc055cabed78f0f"
+      },
+      "runtime/BP/scripts/bedrock/board-text.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "bbb7fc2ea3470f1ad3b9f0750e434cedcbfe1f6c672274577a62e2b173cd70eb"
+      },
+      "runtime/BP/scripts/bedrock/custom-effects.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "68cc2f9106f535f460d2f4790dd8e3e275a777e583e1f1d529e4858c10e78eca"
+      },
+      "runtime/BP/scripts/bedrock/drink-effects.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "52ef8553a6fab4c907f3390d1d29e46fa10db709f46c165fd4e765bc86c96603"
+      },
+      "runtime/BP/scripts/bedrock/machine-item-storage.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "7e0c2592631196d9f96d264d2515543fbcd4769ca84be5d4dafd127273e3fa72"
+      },
+      "runtime/BP/scripts/bedrock/machines.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "0582134f127b0cfa58dbcd72530a6d7bac698f829b2f5a7f934ed78857f29bc0"
+      },
+      "runtime/BP/scripts/bedrock/mixology.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "45219ed49a89cc15cc93fa8f6dfa048f90ae88591360e76ddf560ff0949c5aa0"
+      },
+      "runtime/BP/scripts/bedrock/native-storage-pinning.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a87b47d69804952930233bd1724b4dcaa68fea65eb015714affa87f0a10a75e0"
+      },
+      "runtime/BP/scripts/bedrock/natural-break.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "264707d0c7315d8436c9aff15c7e5cd616785eecce144371ac2bf64db0ef8a39"
+      },
+      "runtime/BP/scripts/bedrock/pressing-feedback.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "0ed0098faf533d43e16954b110073d96d923c4ef55445026066d9881a929814e"
+      },
+      "runtime/BP/scripts/bedrock/protected-break-router.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b7d01d8a6960c291c6a737d72ddb0e9e655b6a14bf84a4ccf1ac3880bf232ab8"
+      },
+      "runtime/BP/scripts/bedrock/standalone-guide.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "3bce30fcd893a452c4ddfe8aff488f487a443c17e74877ac111ad7defb603591"
+      },
+      "runtime/BP/scripts/bedrock/status-aura.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b37611ca6ab49f56e144a77d77e0d6cb6064685dc4fe3efc6574fc35c3219756"
+      },
+      "runtime/BP/scripts/bedrock/storage-projectile.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "95d3092655158822abacf927ba5e9d813d2fc0e12176ddce6f4c6440deace0d4"
+      },
+      "runtime/BP/scripts/bedrock/tipsy-visual.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "5e7cb2b1ba06c086fd53f11e1ad8a898b50283c8bb5ffece288f290b4466feb0"
+      },
+      "runtime/BP/scripts/core/cookery-guide-entry.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "2920207486b18526038b69e38b0d37d744bd000a1ed8b8f018751ad14cd5a866"
+      },
+      "runtime/BP/scripts/core/custom-effects.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "aa013defd6a103c91d943d7552e7be8db5b29b620271b33fd7c665b477807ed7"
+      },
+      "runtime/BP/scripts/core/guide-preparation-text.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "5b2088df21508b78548253ccc11a67aab7e09b80398cf10bc521d73ab0884f17"
+      },
+      "runtime/BP/scripts/core/guide-preparation.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "19c810778d991d896ce3ccba8304f1a33348dc04afdbea09047537d77b337a4d"
+      },
+      "runtime/BP/scripts/core/guide.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "11903b683205602bbe2d55edde752b8756fa0dbf6411c7fb076db5a8453196b8"
+      },
+      "runtime/BP/scripts/core/ingredient-metadata.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "fab2643a790a850c0639177b323118b74ccf5ed284d010684a7c59687d369f73"
+      },
+      "runtime/BP/scripts/core/living-effect-entity.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "5ffed0483c22af6aa6e56a57ab040bde8a07abcaf963da34a8f30ee55ae32931"
+      },
+      "runtime/BP/scripts/core/machines.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "e881d792539b8b53734c103793006d5d50ec3142362acc04a0d67e4b03daaed8"
+      },
+      "runtime/BP/scripts/core/mixology.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "1a6fbd4f2625d3f33cf19604c8ef1339431b68d0b220614780b3635ea884d92c"
+      },
+      "runtime/BP/scripts/core/native-item-storage.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "c6d9450445f8c4c476fabc47f14945062edb7abd349ac4dccaef518bcf0d8c9d"
+      },
+      "runtime/BP/scripts/core/native-machine-storage.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "5fc756d7d7d8994c9cf98066dbcd27df4a36c11443f9aec11c1e6b0ced3d8d08"
+      },
+      "runtime/BP/scripts/core/native-storage-anchor.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "612f3b6138ab2375466e0de45b2c63720fa43ffa4528295a3810d61cad82e935"
+      },
+      "runtime/BP/scripts/core/standalone-guide-model.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "61be2e00d567869861eed5841f3f6773f9388664e01aaaf20874cd8c43a82b34"
+      },
+      "runtime/BP/scripts/core/status-aura.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "d1db733bc369b64e77e8f90fc7e49dd1520d7f06f1556147eda1f8da4a980a6b"
+      },
+      "runtime/BP/scripts/core/tipsy-visual.js": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "c0c40eb38a25d4f7a4d7a05ce273a9d0150950fd18d77d4326f183714b495407"
+      },
+      "runtime/BP/scripts/data/build-version.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "identity_only",
+        "sha256": "e65c1fbed10dd7ae241bff87d82ece3d00bdb1dc86936df28b8d25cc30300444"
+      },
+      "runtime/BP/scripts/data/cocktail-guide.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "6b2377246a89326c5f4603e8ad4b6d65a5405b331ed64568e1589b8bf7839417"
+      },
+      "runtime/BP/scripts/data/cookery-guide-payload.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "identity_only",
+        "sha256": "9a678225e96638a820878b7dde169de17a4b2d5d2defdb55fff5070dad36b1f7"
+      },
+      "runtime/BP/scripts/data/guide-catalog.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "672a6a9d959e7adc467fb308f4e35d87054c3a0a8b6016b9823849fc3a1226ba"
+      },
+      "runtime/BP/scripts/data/guide-copy.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "413497e76579b9f183eb82f66bd84d0e8a2b2731f932e90b6550d35db8f7ac8e"
+      },
+      "runtime/BP/scripts/data/guide-native-names.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "273cba96d5ad6ca252961adb9b5fa8cd38a78890a4cabe6fbd7b06841a096e7a"
+      },
+      "runtime/BP/scripts/data/guide-navigation.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "c296612d010aff0769a32479591a6f9c1faac6317f461e83e02b9b648936a149"
+      },
+      "runtime/BP/scripts/main.js": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5"
+        ],
+        "composition": "main_exact",
+        "sha256": "ee92d096a15f4ba9613b44a10bb1e3fdde8d61015d7f249f77aa3dccf4803e94"
+      },
+      "runtime/RP/animations/board_glyph_line.animation.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "5043abb588b00d156241f9eb96d88c218f9362060d3621fed8430bbe0e130d07"
+      },
+      "runtime/RP/entity/board_glyph_visual.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "1b8ce8460a008dbbf1dcfa47956b2c6280396a43e1eb36dccec1dfef7009b5b9"
+      },
+      "runtime/RP/entity/rig_signature_color.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "831993c6fe9bb56c5a0b66a50ae1be761614c0909a040a8a214bd5c3c6897239"
+      },
+      "runtime/RP/entity/runtime_barrel_ingredients_0.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b64369d3c538da5fa5b4618856d5295e3282b5da120487cf08294747a529cd26"
+      },
+      "runtime/RP/entity/runtime_barrel_ingredients_1.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "c2c84b2689ad261184359a60a884cc9992fbe22fc00398977527a0aafd0fe678"
+      },
+      "runtime/RP/entity/runtime_barrel_ingredients_2.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "e1886464bbff19e0ec4dee2ce118ac1158580be4b8f6b77753946a237ac1eaf4"
+      },
+      "runtime/RP/entity/runtime_barrel_ingredients_3.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "0dd247a1a5ba477f796afb9699671e254e59e05e13526fbf89fdab207947994c"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "f6a287e84fbc6a6320fc4420dea49928aac0e4fa0d85281f64052dff8561641a"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_1.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "ef7f1e50a7fa5677caa918ee701e39d5629045b9eecb7a31f97df4971de1e1f3"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_2.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a0fdb8f193affa6af24cf9fafdbc313fbde01b0dca30e75789e991f00db016a6"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_3.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "6b5aeb8ae386ccd6e49f781a1431ac75dec1ba75ea8c9bb6842e30573d5b225e"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_4.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "dd93506f0753555d75ad375361ebc0b3e0dc52ca66827bb51dee35226a39d41c"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_5.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b4a06569e03dc68f555d87bb154931029d25379fe3310fa5fd57b4b459cafcfe"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_6.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "3a300dc19eacb579fa830cafdb9eda9a3956321c023cf4dd10e8405c1763be7b"
+      },
+      "runtime/RP/entity/runtime_pressing_tub_ingredients_7.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "841f0bf799b4dbb2ce7770452e717db71e1eabcc9341595d811ec3ec88d11ffe"
+      },
+      "runtime/RP/entity/runtime_signature_cup.entity.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "64163409e0140bb867b5b749b9e1b5d563997dd89ffa560da1748eade5b10ec1"
+      },
+      "runtime/RP/manifest.json": {
+        "source_commits": [
+          "c461a8e643a08304587ef468ff7f8051369a2dd5",
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "identity_only",
+        "sha256": "84278370ff0f7cf423401643c68a728005736f7d0bed563391d82d923297aeb8"
+      },
+      "runtime/RP/models/entity/board_glyph_line.geo.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "64956e3b98187541f6513e20bf05a304b091f0a4935f2e640bec1cb52c6b09fa"
+      },
+      "runtime/RP/models/entity/board_glyph_outline.geo.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a4c80b346c1b08684a497fd851b658fbbd35fca0c6dae592d22ee6f6fe5b9aee"
+      },
+      "runtime/RP/models/entity/signature_rgb_texels.geo.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a4252c78a9473e1f28c6e87a46d4923434111fdb51ef21e53a5cb442a2fa72ac"
+      },
+      "runtime/RP/particles/fx_status_aura.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "14b300b7524d6303a2935bcf151c74d8c180adda378c8b2152849398424065cc"
+      },
+      "runtime/RP/render_controllers/board_glyph_visual.render_controllers.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "1c3dd14982fa5f3e8de87de63e6375357f5e99610f3af5c273ec90b900f62b61"
+      },
+      "runtime/RP/render_controllers/runtime_barrel_ingredients.render_controllers.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "6dfaee7e16b9d1cec7b6d2208beb207ba29ea02ada022fac1cbc9326c7758cb9"
+      },
+      "runtime/RP/render_controllers/runtime_pressing_ingredients.render_controllers.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "92432e5cb6e5df9b7fd0d14ffbb8b5a98b6abb3e5a17038375c19352c8ac4260"
+      },
+      "runtime/RP/render_controllers/signature_rgb_texels.render_controllers.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a2bb67628acffee4dc81e36d7a195ddd8854b38dead8f1eb91d728c5b00133b9"
+      },
+      "runtime/RP/render_controllers/signature_tint.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "60e382c0576eff4c6f6b26e3196eee0aeaf0537d1afc164d10611e881c8c58e8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_00.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_00.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "dddbd62c665242ec695f9bc04419afd34e99657ebaba1e83b0c5cdb637f8eaae"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_01.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "d2bbfa865c7a900ee6747f02b9ae2ca236c0245095b434549671d829c716a1a8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_01.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "635a32c9c6e4374663089571fc15a8108f3640cdfc352a6da90834fd5fd62b78"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_02.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "71f8e8dc5e54058657c677227979227bc2eb39a389d895481431cb4f760f937a"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_02.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "00fc206a47dc9a09e4c51d40a44b184b2b796b49bf29d4d6dbb77782bfcbee06"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_03.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "0183524eb400b1585683f8c48fbba0504c820291df82b65787951b62019189c2"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_03.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "e365e1aeb764416b6f637dced63ab48a9c88b888b9c6d392d6714f7320b89c5c"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_04.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "a6bd2ba3251e7e94ca7465d3626cffa9828d38e6ff0975894b614815bda185c8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_04.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "ec9d17a44f01a13d9e69d69ab486ae07ecf04e7ca6fa2ade6e2f90842a645b87"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_05.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "73c5b215934723261e5fd4195737c18bca6653ff7344c72f77b39cf433c5fb89"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_05.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "718209964c50294bd951fe88efd4410c12ee0dcebd14ef7908239bfbdfe4943d"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_06.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "2cb7e6a4e6e8f1aaa6320f864370a46b14efbb9cf9f9b25dcbad87be26d4d4de"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_06.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "deed94ea93ed9bcac2d97599571a759107ede5f827ca2ab4c85ca66d768ea208"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_07.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "8dcfd404e4e39f8e51e3a89cd1827e6c71a8d96cb334dc87e55ea06ea8e971b4"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_07.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "7299a80853ee6fc7b49482bfeacece1d78f75afeb0602b04d82da642dbf94eda"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_08.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "d47e8c41e706bd3c7da20daba3d6445f741cbcf3814c5a494dfd448c2769a026"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_08.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "17c7658a359dfd8ad538c9f6996773a5e821d63e7d865c22d32e355a63470922"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_09.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "f5f56a210fc4b800f3076e48099c5d5f16a31364111cdd43aa1d890f476cf796"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_09.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b89205cfcc089b0330fb302570bdcd17d353191adb39d4954d652779f597ec8c"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_10.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_10.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b630edc7f4a10dc394af94c971fdf646c0738bad971b4fbe0074b1a7c45fbd3e"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_11.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "53d547ad012ca96a3ea96bea47acb84f945a4171a36b999d53a4665ea04d4509"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_11.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "f4f9fd58931b5dcdb256fde83a8d31db270a2c09912f17307b1f9bc08e831cc8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_12.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "0b5b0567223ce4c88a4b56b65c40efb003d884540757832547ba5f58883456c3"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_12.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "f3d27fcc4936a901310952deb0c7c8c13105e56006a26795b7f1a32cc777d12a"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_13.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "bb75fabe62564b45a9f547178c262d732de28af65084aba4f227452eff920460"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_13.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "456e436c9ab71a7bd592e0b6d04589fa294bea8c670e9689d9d26e4dc28c863a"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_14.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "401ebffaf9bfa4b98baedc9c73f6eb79d57d68ecb24f1e4cc25e9d8ad3a182ed"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_14.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "ba9b8ec25395430bcc6bd6a53c4355c85107e8928ff2ace09f92b4a06ea8a396"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_15.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "cb1f7de27622e86fc17da17f17a113b256df3298c4d2e719c8777658381425d6"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_15.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "c936b2b34bb6d2152ca4dd883bbb1c8187dfeca59495bcf05bca8f506ce2e81d"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_16.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "340850ddc50e6ecd61d0818645b1152786feb51d032b124e09b0b76c7cd706f7"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_16.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "81e536a73f21577f4a0f87924092530d7e8fb47647cd61c5efc7fbb10dc1d6f8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_17.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "444a26636dfd44b05ce8a6c239fbc039ad2c212f7cbcd811f3f159cae8928ae8"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_17.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "dfed48c37c0699210c6e448b7e020d77870f679c41f24786402d2263b8ee299b"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_18.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "ccaadf65c55e265a6833f4b3d2c82f25bb33c8d45aa661c40d1218537a76c853"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_18.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "60ec9f7874d1dcf2e3f06e91e466315bd7d4583393f724f0344fb5e2abd6d5e5"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_19.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "eee5f67e2e2117ca869f0e3f9472cfbb7b5ad468e0194f42c1cdd9487abda16a"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_19.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "e730ccd6b21650453429881bb625645ed4d67065dcddc3f000b58cc998848246"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_20.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "6245b5465897519b419b0aa5d241fcdea60b7b7b6ff3a9482714cbdd524d44e9"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_20.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "474a6cfe230d66d4e0cb92ab2c7773d49efac8c046f6f3d37be922222419a0ef"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_21.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b8f0cb79c80003e61bbc136e369d9bbd8d3580f10485ca22fd486b0e305c9e09"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_21.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "d08d17415a47dfd456f596d37fc19bac24b2c735068ccfdd39e6706177bf18d5"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_22.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_22.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "076d871f67cb784079d52094062cdc19172f1446e8cf6ef8174d5d741d98178f"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_23.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "b4222e9fb20d1d110372c8cec62abf6731f150d165887c791f30a9396fd40e5f"
+      },
+      "runtime/RP/textures/kt_runtime/machine_ingredients/ice_grape/tick_23.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "f043a9ba6770d217efbf47b4f754de7f75cafc2c191fbedb56b57acbf7477cdf"
+      },
+      "runtime/RP/textures/kt_runtime/signature/rgb_opaque.png": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "168b8b2e81aec05759d67532d962380f5df5006429479777dea01a0b7296e4bf"
+      },
+      "runtime/RP/textures/kt_runtime/signature/rgb_opaque.texture_set.json": {
+        "source_commits": [
+          "d9e7bcc6dd9d00beca0bbf76f0fff50b6eca0813"
+        ],
+        "composition": "trial_exact",
+        "sha256": "1eae0e74c151f3d02250761808bbfc01ee9bd71dabdaa365321aa8da01b40b54"
+      }
+    },
+    "unexpected_combined_paths": [],
+    "historical_projection": {
+      "bound_paths": 683,
+      "result": "pass: all exact historical reverse projections and identity guards"
+    }
+  },
+  "native_evidence": {
+    "result": "pass",
+    "pair": "T139/W116",
+    "document": "docs/native/T139-W116-20261009.json",
+    "evidence_sha256": "ba235b99e33d43fceb3295ca2339a82c509af2349e2ea113bfd80621bf060de0",
+    "phases": [
+      "first",
+      "restart"
+    ],
+    "required_cases": [
+      20,
+      21
+    ],
+    "normal_stop": true,
+    "player_sessions": 0,
+    "content_errors": 0,
+    "client": false,
+    "full_family": false,
+    "live": false,
+    "driver_note": "The first recorder invocation redirected stdout to its reserved evidence log pathname and was correctly refused before output. That failed driver log is retained separately; only the invocation output path was corrected. Native input files/logs and the runner report were unchanged; the strict recorder then passed."
+  },
+  "client_tested": false,
+  "production_ready": false,
+  "live_deployment": false,
+  "grilling_source": {
+    "commit": "8002da0086544cd18c9854e7fe79e8ccb2f9f982",
+    "version": "2.8.122",
+    "source_trees": {
+      "BP": {
+        "sha256": "65da2e167bba12c0a7b69f5f60c543c0f75b33cffd44bdd093646ce9baee8b1b",
+        "files": 765
+      },
+      "RP": {
+        "sha256": "18b733fe62cd926babedf435a226454263ebba22ddcea7c45431fd25ea69b510",
+        "files": 3511
+      }
+    },
+    "shared_guide_bridge_preserved_from": "2b422458ebfdd3831bc7a57af30c24cfa211d23a",
+    "cookery_family_helper": "0.2.9",
+    "full_family_native_tested": false,
+    "deployment_requirement": "G122 descriptor, author patch and all copied helper files must be assembled and validated together; earlier helper output is not reused."
+  },
+  "later_review_documents": [
+    {
+      "release": "0.6.133",
+      "runtime_source_commit": "89c5ff9c52edc5829a5b860633df429229f348d9",
+      "document_source_commit": "d6dd97bc8e0488dc02d6b3bee34cb91ccd7d505b",
+      "path": "docs/RELEASE-NOTES-0.6.133.md",
+      "reason": "Original runtime source predates the release note; preserve the unchanged historical layer and bind the later note separately."
+    }
+  ]
+}

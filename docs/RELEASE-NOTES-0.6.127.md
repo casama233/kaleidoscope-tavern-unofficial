@@ -1,0 +1,7 @@
+# 0.6.127: current-source shaker framing and arm yaw
+
+Restores the bounded PR247 main-hand framing on current source in both idle and use. The native camera adapter moves the cup outward/downward and closer while retaining the original half-scale, display rotation and exact use-wave coefficients. PR167’s arm-Y repair preserves incoming third-person yaw instead of subtracting it to zero; original X/Z use pose and item binding remain.
+
+The existing selector test now reads the actual shipped animate conditions instead of comparing with its generator and asserting a Boolean tautology. One bounded in-memory always-on-idle mutation fails the same checker. Existing matrix/native-socket and source pose checks are retained. These are source/numerical checks, not client rendering acceptance. Historical PR247 observations were one animation on T122 with a skin confound; full current first/third-person, FOV, hand and shake-trajectory acceptance remains pending.
+
+Fresh package/module/pair/guide identity 0.6.127. The animation historical review appends an exact seven-field delta without replacing earlier preimages. Current README/build guidance is separated from historical snapshots. Recipes, timing, UUIDs and all other gameplay stay on current canonical source. Full family/static/BDS/fresh stopped-save/guard precede the owner-authorized live development update. client=false; production_ready=false.

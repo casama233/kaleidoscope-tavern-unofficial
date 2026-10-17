@@ -1,0 +1,101 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:rig_liquid_barrel_sweet_berries_visual",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "kt_art:amount": {
+          "type": "int",
+          "range": [
+            0,
+            4000
+          ],
+          "default": 4000,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0,
+        "height": 0
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:persistent": {},
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:type_family": {
+        "family": [
+          "kt_runtime_visual"
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      }
+    },
+    "events": {
+      "kt_art:level_0": {
+        "set_property": {
+          "kt_art:amount": 0
+        }
+      },
+      "kt_art:level_1": {
+        "set_property": {
+          "kt_art:amount": 500
+        }
+      },
+      "kt_art:level_2": {
+        "set_property": {
+          "kt_art:amount": 1000
+        }
+      },
+      "kt_art:level_3": {
+        "set_property": {
+          "kt_art:amount": 1500
+        }
+      },
+      "kt_art:level_4": {
+        "set_property": {
+          "kt_art:amount": 2000
+        }
+      },
+      "kt_art:level_5": {
+        "set_property": {
+          "kt_art:amount": 2500
+        }
+      },
+      "kt_art:level_6": {
+        "set_property": {
+          "kt_art:amount": 3000
+        }
+      },
+      "kt_art:level_7": {
+        "set_property": {
+          "kt_art:amount": 3500
+        }
+      },
+      "kt_art:level_8": {
+        "set_property": {
+          "kt_art:amount": 4000
+        }
+      }
+    }
+  }
+}

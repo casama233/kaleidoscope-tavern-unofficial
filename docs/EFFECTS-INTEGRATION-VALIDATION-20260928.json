@@ -1,0 +1,30 @@
+{
+  "runtimeSourceCommit": "e3af075667e7826b99a6fb1fff1fd330155611d1",
+  "testedFixtureCommit": "4fd0b2580afcf0e96b108d9ef181bf0c8ed801ac",
+  "runtimeSha256": "74e690371b0f2dbf09c7111acedf81ea25d113537230b2dcc38874269937a058",
+  "pairedWorldLiquorCommit": "ce8c41e48c731985221945479650de121e4d477c",
+  "pairedWorldLiquorVersion": "0.1.27",
+  "ciRunId": 36455181601,
+  "ciRunUrl": "https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/36455181601",
+  "ciConclusion": "success",
+  "checks": {
+    "foundationCreativePickAndPrIntegration": "PASS",
+    "nativePickImmutableBaseline": "PASS",
+    "sharedCreativeCatalog": "PASS",
+    "pairedEffectNames": "PASS",
+    "effectBar": "PASS",
+    "noRuntimeOrArchivedFixtureChanges": "PASS"
+  },
+  "corrections": [
+    "Live JS fixtures now use native potion delivery IDs Consume, ThrownSplash and ThrownLingering; obsolete guessed IDs are explicitly rejected",
+    "Live fixture validity getters match production Entity.isValid guards; archived fake-server remains byte-identical",
+    "Empty-hand collection expectations preserve the existing production empty-hand inventory policy",
+    "Original pick baseline hashes remain unchanged; only exact reviewed presentation and prior pickup edits are reversed before assertions",
+    "CI pairs current Tavern with World Liquor 0.1.27, not the old 0.1.7 snapshot predating shared creative taxonomy"
+  ],
+  "bedrockDedicatedServer": "NOT_RUN",
+  "minecraftSimulatedPlayer": "NOT_RUN",
+  "clientVisualComparison": "NOT_RUN",
+  "exactVisualParityAccepted": false,
+  "note": "The successful run tested the fixture edits before committing them. This record and removal of one-time migration tools do not alter runtime. The full effects source audit remains recorded separately in EFFECTS-VALIDATION-20260928.json."
+}

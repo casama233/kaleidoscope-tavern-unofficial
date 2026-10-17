@@ -1,0 +1,239 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.kt_runtime.pressing.layout": {
+      "loop": true,
+      "bones": {
+        "tilt_yaw": {
+          "rotation": [
+            0,
+            "q.property('kaleidoscope_tavern:tilt') ? q.property('kaleidoscope_tavern:facing')*90 : 0",
+            0
+          ]
+        },
+        "tilt": {
+          "rotation": [
+            "q.property('kaleidoscope_tavern:tilt') ? (math.mod(q.property('kaleidoscope_tavern:facing'),2) ? 45 : -45) : 0",
+            0,
+            0
+          ]
+        },
+        "offset": {
+          "position": [
+            0,
+            "q.property('kaleidoscope_tavern:tilt') ? (math.mod(q.property('kaleidoscope_tavern:facing'),2) ? 8 : -4) : 0",
+            "q.property('kaleidoscope_tavern:tilt') ? (math.mod(q.property('kaleidoscope_tavern:facing'),2) ? -8 : 4) : 0"
+          ]
+        },
+        "ingredient_0": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz0')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y0')",
+            "math.mod(q.property('kaleidoscope_tavern:xz0'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_0": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot0')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_0": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot0'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_1": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz1')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y1')",
+            "math.mod(q.property('kaleidoscope_tavern:xz1'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_1": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot1')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_1": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot1'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_2": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz2')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y2')",
+            "math.mod(q.property('kaleidoscope_tavern:xz2'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_2": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot2')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_2": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot2'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_3": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz3')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y3')",
+            "math.mod(q.property('kaleidoscope_tavern:xz3'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_3": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot3')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_3": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot3'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_4": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz4')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y4')",
+            "math.mod(q.property('kaleidoscope_tavern:xz4'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_4": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot4')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_4": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot4'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_5": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz5')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y5')",
+            "math.mod(q.property('kaleidoscope_tavern:xz5'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_5": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot5')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_5": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot5'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_6": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz6')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y6')",
+            "math.mod(q.property('kaleidoscope_tavern:xz6'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_6": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot6')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_6": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot6'),7201)*.1-360)"
+          ]
+        },
+        "ingredient_7": {
+          "position": [
+            "math.floor(q.property('kaleidoscope_tavern:xz7')/1024)/128-4",
+            "q.property('kaleidoscope_tavern:y7')",
+            "math.mod(q.property('kaleidoscope_tavern:xz7'),1024)/128-4"
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ]
+        },
+        "item_y_7": {
+          "rotation": [
+            0,
+            "-(math.floor(q.property('kaleidoscope_tavern:rot7')/7201)*.01-6.4)",
+            0
+          ]
+        },
+        "item_z_7": {
+          "rotation": [
+            0,
+            0,
+            "-(math.mod(q.property('kaleidoscope_tavern:rot7'),7201)*.1-360)"
+          ]
+        }
+      }
+    }
+  }
+}

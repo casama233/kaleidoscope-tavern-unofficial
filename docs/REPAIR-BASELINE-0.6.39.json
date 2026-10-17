@@ -1,0 +1,86 @@
+{
+  "upstreamCommit": "1b9b46a98d3be2efef19715226eb90252ab2c2bb",
+  "unchangedSha256": {
+    "runtime/BP/scripts/core/inventory.js": "243bb0e2669f6b5e4dfc374b8fb0311830c7277831af20fa1ff92b7580ee60dc",
+    "runtime/BP/scripts/core/mixology.js": "ee528deaf752c43e94e49995474c84c835516ce80eae7ed8c974697d5118f58e",
+    "runtime/BP/scripts/core/storage.js": "07b7ee337a8649d4a0791882bd84049c61ab6c80e9ea6c235874272545795058",
+    "runtime/RP/animation_controllers/runtime_shaker.controller.json": "d110c28d328ba86b8800e1f3ae85bd7eaf7653b4c21cff0a0343ef95be31a40d",
+    "runtime/RP/animation_controllers/runtime_shaker_put.controller.json": "256f6f7f58b890593cb9213a5fcb847c429f4e65440558691b1da0e16a289fe0",
+    "runtime/RP/animations/runtime_shaker_pour.animation.json": "963a3cef2ffdb34bc3dc0710a6c53f6ee772cfc2d1db2104121712f3eeecb4ee",
+    "runtime/RP/animations/shaker.animation.json": "cabc41987866e1eed81a8ee4e0ba0ef17ba0ad64c210a110f7c541e7fdb07e2b",
+    "runtime/RP/animations/shaker_hand_source.animation.json": "8b532b6af0046d585dd33bfd08585281f0b767654461871de16d19cab8cfba6d",
+    "runtime/RP/attachables/shaker.attachable.json": "6bc4392c433ae8060fec245ff63fbea1afe2671b3d6188fa43d651e262a95170",
+    "runtime/RP/attachables/shaker_active.attachable.json": "e8268d9f17310a07bf96e1ad1ef5f4b58c463a87e525eaa5879393de294da9be",
+    "runtime/RP/attachables/shaker_pouring.attachable.json": "12052766347e35d76270528bfa23d06e7818364ef9bb34ecdf487c666a692bb7",
+    "runtime/RP/entity/runtime_shaker.entity.json": "e7af1c0e2c8c7c22d53605e9b7756903b8edade3ea77a641a05dda55364d724d",
+    "runtime/RP/entity/shaker_animation_rig.entity.json": "1e7ddaad26bd33d0f88178c000039c7da472b54ac960318525e4716915bdbf56",
+    "runtime/RP/models/entity/item_display_shaker.geo.json": "d1eb7dee1f657d7031b97f608cce04a82e6163edd085e9820fd2657820f48d3b",
+    "runtime/RP/models/entity/item_display_shaker_3d.geo.json": "f28133f64f4f2bef93a6ad745fe8c4ef4f7bdd3d6c23c0253a3796d299026eaf",
+    "runtime/RP/models/entity/runtime_shaker_held.geo.json": "800ead78afb5e6de1950749231b1f841b29222305ba21705f79fee425add6a3f",
+    "runtime/RP/models/entity/runtime_shaker_put_hidden.geo.json": "a12747f48cfb910e49ef8f928fa8f99be7bd28ef5cd6a414deebb2e88a321f07",
+    "runtime/RP/models/entity/shaker.geo.json": "5b4cc2b4acb585297ac2cde88a4dce9c50fd62be5cddb377ba1347c9538fbc0e"
+  },
+  "unchangedShakerAnimations": {
+    "animation.kt_mixology.player_idle": {
+      "animation_length": 0.05,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.kt_mixology.hold_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            27,
+            -39,
+            -159
+          ],
+          "scale": 0.625
+        }
+      }
+    },
+    "animation.kt_mixology.shake_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            0,
+            "-2.4 * math.sin(q.life_time * 1718.87338539247)",
+            0
+          ],
+          "rotation": [
+            15,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.kt_mixology.player_shake": {
+      "loop": true,
+      "override_previous_animation": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "-112.5 - 45 * math.sin(q.life_time * 1718.87338539247)",
+            0,
+            -9
+          ]
+        }
+      }
+    }
+  },
+  "repairPatchBaseline": "1446518661ee36d9b4f3eaa4008291642821c9c0"
+}

@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "status": "bounded_pass_with_known_issues",
+  "verified_at_utc": "2026-10-05T23:45:00Z",
+  "pair": {
+    "tavern": {
+      "version": "0.6.105",
+      "source_commit": "d0f6f480691a024994d76f60d286aef15439d4bc",
+      "archive_sha256": "196c04453fd35a85ea0c6b05ec1981694d677ab59a898fc0356449e313369471",
+      "bytes": 5405399,
+      "entries": 3955
+    },
+    "world_liquor": {
+      "version": "0.1.66",
+      "source_commit": "5e8967ebcfa16f80637efdf08cf2ff8d2270b16b",
+      "archive_sha256": "ec5bd4c2a971c934b170e6fbbdb89c12d00e22133b0590b4d86096903458862d",
+      "bytes": 6774754,
+      "entries": 816
+    }
+  },
+  "ci": {
+    "tavern": {
+      "all_jobs_passed": 13,
+      "url": "https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37389187596"
+    },
+    "world_liquor": {
+      "all_jobs_passed": 4,
+      "url": "https://github.com/casama233/kaleidoscope-world-liquor-unofficial/actions/runs/37389243802"
+    }
+  },
+  "native_client": {
+    "version": "Minecraft 1.26.52.3 x86_64 Linux",
+    "mode": "Creative flat test world",
+    "simulated_players": false,
+    "passed": [
+      "The exact paired packs loaded",
+      "Java-red atlas liquid was visibly red and textured, with unchanged glass",
+      "External pure-red RGB fallback rendered red with the disclosed flat shading",
+      "Colored ingredient sprites and progress bar/cursor appeared and then expired",
+      "Three actual wine inputs were shaken and served as a shaded magenta signature drink",
+      "World Liquor ice_tea_q4 displayed dark red, red_queen_q4 red and vodka_q4 white; actual shaking, serving and pickup produced a Bloody Mary identified by its hotbar name"
+    ],
+    "known_issues": [
+      "First-person shaker and arm were invisible at rest and while using in the tested 0.6.105. Relevant source is unchanged from main 0.6.95; a native 0.6.95 comparison was not run, so causality is unproven",
+      "SPACE_NOT_CLEAR and STALE_HAND placement warnings were observed while placements also succeeded; their cause is unproven",
+      "External RGB outside the Java atlas domain uses flat overlay shading",
+      "Audio could not be tested because the environment had no ALSA device"
+    ],
+    "limits": [
+      "Not every recipe or first/third-person state was tested",
+      "No exact expiry-deadline or full-frame video claim",
+      "No clean-client-log claim",
+      "Full Java parity is pending; exact camera-only Slightly Tipsy roll remains unimplemented"
+    ],
+    "installed_pack_byte_verification": {
+      "all_four_packs_match_frozen_archives": true,
+      "tavern_bp_files": 802,
+      "tavern_rp_files": 3153,
+      "world_liquor_bp_files": 305,
+      "world_liquor_rp_files": 511,
+      "world_pack_references_match_exact_versions": true
+    }
+  },
+  "native_bds": {
+    "version": "1.26.52.3",
+    "isolated_pair_only": true,
+    "passed": [
+      "Fresh cold load",
+      "Normal stop and restart of the same new test world",
+      "Exit code zero in both cycles",
+      "Persisted scoreboard recovered",
+      "Exact behavior/resource pack versions and file trees unchanged",
+      "No console or content errors"
+    ],
+    "simulated_players": false,
+    "existing_saved_world_migration": false,
+    "full_family_admission": false
+  },
+  "release": {
+    "kind": "public test prerelease",
+    "full_client_acceptance": "pending",
+    "production_ready": false,
+    "live_deployment": false
+  }
+}

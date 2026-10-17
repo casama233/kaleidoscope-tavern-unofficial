@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "scope": "Canonical exact export native matrix; no actors or simulated players. BDS does not render UI.",
+  "version": "0.6.88",
+  "archive_sha256": "71fbfa23b0065c47bd444a1fb94246bad0801c7d36f6061488d7fd06fa53be1e",
+  "static": true,
+  "bds": true,
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "engine_version": "1.26.51.1",
+  "experiments": [],
+  "test_only_overlays": [],
+  "cases": [
+    {
+      "case": "tavern-only",
+      "packs": 2,
+      "transport": "standalone",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "d21c47aaf3d6a7594df0bd7a3cf6c4bfad87faa4595962585779952a31716dbb",
+        "caf56d83e211ac1c0f99b4c1283d6b5d9bbd50ef82c5174e921506156a585d8a"
+      ]
+    },
+    {
+      "case": "tavern-and-world-liquor",
+      "packs": 4,
+      "transport": "standalone",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "ecd4f9745bcd149f9f57f844d312ca328dc2a8e7cbd555d1bd28b2d8c11c98d8",
+        "7b019e612dfdca4fafa7a2c3c9aa7e4573b07b0259e586ea657e9aa42eeda62b"
+      ]
+    },
+    {
+      "case": "luosen-full",
+      "packs": 41,
+      "transport": "ui_queue",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "76a79519e2a91ae47071bf9ea101a951ba04b05a66149ec834bf6e96ae700b49",
+        "d4216d91e77df3f5054217ef34225bda48353d41b755355c94ea66a7f1b6189e"
+      ]
+    },
+    {
+      "case": "luosen-without-ui-queue",
+      "packs": 40,
+      "transport": "embedded_queue",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "da9f4677618281ec5aaa917cf97e0b49c58f63da1545742ca5fdd4230b29b0e7",
+        "1a61119f32591804ce535be469f8c5bec5ffb447af2d28c87cf05295f3e823a8"
+      ]
+    }
+  ],
+  "routing_checks": {
+    "schema": 1,
+    "ok": true,
+    "active_packs": 41,
+    "routing_targets": 2,
+    "queue_replays": 12,
+    "foreign_queue_work_preserved": true,
+    "standalone_adapter_verified": true,
+    "embedded_amw_adapter_verified": true,
+    "optional_rp_definitions_separate": true,
+    "optional_panel_mount_verified": true,
+    "registered_native_root_redefinitions": 0,
+    "visible_transport_glyphs": 0,
+    "amw_cache_filters_checked": 19,
+    "actionbar_writes": 0,
+    "native_effect_control_replacements": 0,
+    "queue_adapter_verified": true,
+    "missing_world_sprites": [],
+    "client": false,
+    "simulated_players": false,
+    "scope": "Static active-stack audit, self-contained transport and installed external/embedded router execution with display handles; no rendered client claim."
+  },
+  "ui_contract": {
+    "ok": true,
+    "standalone": {
+      "ok": true,
+      "native_root_type_preserved": true,
+      "native_root_controls_preserved": 29,
+      "selected_optional_panel": "hud.kt_effect_empty",
+      "registered_native_root_redefinitions": 0,
+      "resource_order_independent": true,
+      "client": false,
+      "scope": "Pinned Mojang root preservation and typed optional-control resolution; no rendered-client claim."
+    },
+    "paired": {
+      "ok": true,
+      "native_root_type_preserved": true,
+      "native_root_controls_preserved": 29,
+      "selected_optional_panel": "kaleidoscope_world_liquor_effects.effect_panel",
+      "registered_native_root_redefinitions": 0,
+      "resource_order_independent": true,
+      "client": false,
+      "scope": "Pinned Mojang root preservation and typed optional-control resolution; no rendered-client claim."
+    },
+    "client": false
+  },
+  "earlier_client_failure": "Tavern 0.6.87 / World Liquor 0.1.51 paired native-root override rejected by a real client.",
+  "client_limit": "Actual client must confirm restored HUD and effect icon rendering after resource reload. Unattributed version error and original ChineseFood warnings remain separate."
+}

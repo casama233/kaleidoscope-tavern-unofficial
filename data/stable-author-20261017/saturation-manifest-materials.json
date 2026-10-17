@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "scope": "Only actual manifest metadata; no author scripts, archives, world contents or credentials. Clean author lacks the stack compatibility declaration; the admitted local bridge retains it.",
+  "provenance": {
+    "clean_author": {
+      "file_id": 9071891,
+      "archive_sha256": "42084b762ef1508a1918dcd9d39f17fb418fd02887e589d47c6e3cc8936d3434",
+      "member": "Java Saturation RE/manifest.json"
+    },
+    "admitted_live": {
+      "reviewed_receipt_sha256": "c563149cea7e4413e67da2a37777ed583aa1ed0d739b3160b7e9130bc9f91bd3",
+      "resource_uuid": "9071b6bc-915d-4d26-8486-05bb8db48762",
+      "version": [
+        1,
+        5,
+        6
+      ]
+    },
+    "failed_p45": {
+      "candidate": "20261016-stable-t173-g150-w151-private45",
+      "static_failure": "RP missing PBR declaration (stack policy)",
+      "never_installed": true
+    },
+    "prospective_p46": {
+      "profile": "senluo-stable-saturation-20261017-p46",
+      "recipe_sha256": "f7f22b3314d901ae068e56c4fda53ef65bdb07626cb4a8b48af0a6b6a609e383",
+      "version": [
+        1,
+        6,
+        10046
+      ],
+      "scope": "Actual compiler output manifest metadata, not a native/client acceptance claim"
+    }
+  },
+  "manifests": {
+    "clean_author": {
+      "sha256": "9c57becfc98caedb7978afb5bda9495e831fe82514881d1544540f217dcb09f4",
+      "raw": "{\n   \"format_version\": 2,\n   \"header\": {\n      \"description\": \"By Raiyon\",\n      \"name\": \"§c§cJava Saturation [v1.6] §71.21-V26+\",\n      \"uuid\": \"9071b6bc-915d-4d26-8486-05bb8db48762\",\n      \"version\": [1, 6, 0],\n      \"min_engine_version\": [1, 21, 10]\n   },\n   \"metadata\": {\n      \"product_type\": \"addon\"\n   },\n   \"dependencies\": [\n      {\n         \"uuid\": \"f65e943a-2128-4da8-9196-e9bf5b86739d\",\n         \"version\": [1, 6, 0]\n      }\n   ],\n   \"modules\": [\n      {\n         \"type\": \"resources\",\n         \"uuid\": \"7fe0bd9a-633e-4ded-88e7-64508079b881\",\n         \"version\": [1, 6, 0]\n      }\n   ]\n}\n//"
+    },
+    "admitted_live": {
+      "sha256": "e1cd222cece4fc328cba1c76962820fc3de8e6f46bff56d570541809754d77b7",
+      "raw": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"description\": \"By Raiyon\",\n    \"name\": \"§c§cJava Saturation [V1.5] §71.21-V26+ [Senluo HUD 1.5.6]\",\n    \"uuid\": \"9071b6bc-915d-4d26-8486-05bb8db48762\",\n    \"version\": [\n      1,\n      5,\n      6\n    ],\n    \"min_engine_version\": [\n      1,\n      21,\n      120\n    ]\n  },\n  \"metadata\": {\n    \"product_type\": \"addon\"\n  },\n  \"dependencies\": [\n    {\n      \"uuid\": \"f65e943a-2128-4da8-9196-e9bf5b86739d\",\n      \"version\": [\n        1,\n        5,\n        6\n      ]\n    }\n  ],\n  \"modules\": [\n    {\n      \"type\": \"resources\",\n      \"uuid\": \"7fe0bd9a-633e-4ded-88e7-64508079b881\",\n      \"version\": [\n        1,\n        5,\n        6\n      ]\n    }\n  ],\n  \"capabilities\": [\n    \"pbr\"\n  ]\n}\n"
+    },
+    "failed_p45": {
+      "sha256": "ac2e28bc66898dd65b5fb694caf67ed13349dae687ef3d50ff726f1537d0fc33",
+      "raw": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"description\": \"By Raiyon\",\n    \"name\": \"§c§cJava Saturation [v1.6] §71.21-V26+ [Senluo HUD 1.6.10045]\",\n    \"uuid\": \"9071b6bc-915d-4d26-8486-05bb8db48762\",\n    \"version\": [\n      1,\n      6,\n      10045\n    ],\n    \"min_engine_version\": [\n      1,\n      21,\n      10\n    ]\n  },\n  \"metadata\": {\n    \"product_type\": \"addon\"\n  },\n  \"dependencies\": [\n    {\n      \"uuid\": \"f65e943a-2128-4da8-9196-e9bf5b86739d\",\n      \"version\": [\n        1,\n        6,\n        10045\n      ]\n    }\n  ],\n  \"modules\": [\n    {\n      \"type\": \"resources\",\n      \"uuid\": \"7fe0bd9a-633e-4ded-88e7-64508079b881\",\n      \"version\": [\n        1,\n        6,\n        10045\n      ]\n    }\n  ]\n}\n"
+    },
+    "prospective_p46": {
+      "sha256": "596a41e4cb81bd87f12f18b249cfc22aadcbebb357fcb0e1b2893664487787d1",
+      "raw": "{\n  \"format_version\": 2,\n  \"header\": {\n    \"description\": \"By Raiyon\",\n    \"name\": \"§c§cJava Saturation [v1.6] §71.21-V26+ [Senluo HUD 1.6.10046]\",\n    \"uuid\": \"9071b6bc-915d-4d26-8486-05bb8db48762\",\n    \"version\": [\n      1,\n      6,\n      10046\n    ],\n    \"min_engine_version\": [\n      1,\n      21,\n      10\n    ]\n  },\n  \"metadata\": {\n    \"product_type\": \"addon\"\n  },\n  \"dependencies\": [\n    {\n      \"uuid\": \"f65e943a-2128-4da8-9196-e9bf5b86739d\",\n      \"version\": [\n        1,\n        6,\n        10046\n      ]\n    }\n  ],\n  \"modules\": [\n    {\n      \"type\": \"resources\",\n      \"uuid\": \"7fe0bd9a-633e-4ded-88e7-64508079b881\",\n      \"version\": [\n        1,\n        6,\n        10046\n      ]\n    }\n  ],\n  \"capabilities\": [\n    \"pbr\"\n  ]\n}\n"
+    }
+  }
+}

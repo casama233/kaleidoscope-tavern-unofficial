@@ -1,0 +1,28 @@
+{
+  "version": "0.6.34-beta.1",
+  "static": {
+    "json_files": 1514,
+    "geometry_identifiers": 929,
+    "guide_entries": 140,
+    "exact_entry_icons": 140,
+    "languages": [
+      "en_US",
+      "zh_CN",
+      "zh_TW"
+    ],
+    "language_keys_each": 1656,
+    "pbr_emission_masks": 28,
+    "java_luminous_block_variants": 23,
+    "interaction_simulations": false
+  },
+  "bds_load": {
+    "engine": "1.26.51.1",
+    "cookery": "1.0.6",
+    "server_started": true,
+    "script_initialized": true,
+    "error_lines": 0,
+    "fixed_during_load": "Holder block state kept at the engine maximum of 16 values; Molotov identity resides in stored data and renderer kind."
+  },
+  "client_visual_acceptance": "pending device feedback; BDS does not render client assets",
+  "archive_sha256": "dc9032663dfc3c0f1bd610fe84bb98b24d72f5284e111e85ad758324ea64575b"
+}

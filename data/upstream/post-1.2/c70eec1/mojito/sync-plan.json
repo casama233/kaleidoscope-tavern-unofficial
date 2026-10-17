@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "mojito",
+      "visual_key": "mojito",
+      "baseline": "baseline/mojito.json",
+      "updated": "updated/mojito.json",
+      "baseline_blob": "008eca38fd3679539971fc9582de6a767099b840",
+      "updated_blob": "9ca2831e3542ec95af7530ad0b56f4e0f2b1ee96",
+      "baseline_geo": "baseline/mojito.geo.json",
+      "baseline_geo_blob": "c7be635be38537a6208fc44847b8d15ecc163bec",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "updated_element": 0,
+          "cube": 0
+        },
+        {
+          "element": 1,
+          "updated_element": 1,
+          "faces": [
+            [
+              "south",
+              1
+            ],
+            [
+              "east",
+              2
+            ],
+            [
+              "north",
+              3
+            ],
+            [
+              "west",
+              4
+            ]
+          ]
+        },
+        {
+          "element": 2,
+          "updated_element": 2,
+          "cube": 5
+        },
+        {
+          "element": 3,
+          "updated_element": 3,
+          "cube": 6
+        },
+        {
+          "element": 4,
+          "updated_element": 4,
+          "cube": 7
+        },
+        {
+          "element": 5,
+          "updated_element": 5,
+          "cube": 8
+        },
+        {
+          "element": 6,
+          "updated_element": 6,
+          "cube": 9
+        },
+        {
+          "element": 7,
+          "updated_element": 7,
+          "faces": [
+            [
+              "south",
+              10
+            ],
+            [
+              "east",
+              11
+            ],
+            [
+              "north",
+              12
+            ],
+            [
+              "west",
+              13
+            ]
+          ]
+        },
+        {
+          "element": 8,
+          "updated_element": 8,
+          "cube": 14
+        },
+        {
+          "element": 9,
+          "updated_element": 9,
+          "cube": 15
+        },
+        {
+          "element": 10,
+          "updated_element": null,
+          "cube": 16
+        },
+        {
+          "element": 11,
+          "updated_element": 10,
+          "cube": 17
+        },
+        {
+          "element": 12,
+          "updated_element": 11,
+          "cube": 18
+        },
+        {
+          "element": 13,
+          "updated_element": 13,
+          "cube": 19
+        },
+        {
+          "element": 14,
+          "updated_element": 12,
+          "cube": 20
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/mojito.geo.json",
+      "block": "runtime/BP/blocks/cup_mojito.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "mojito_block",
+      "baseline": "baseline/mojito.png",
+      "updated": "updated/mojito.png",
+      "baseline_blob": "db879ba67959610ae87e75b0f4a678ff85a3e546",
+      "updated_blob": "ed3b8944a1624b14a0905c77a46d23b0399e956e",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/mojito.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/mojito.png"
+      ]
+    }
+  ]
+}

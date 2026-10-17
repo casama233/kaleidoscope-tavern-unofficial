@@ -1,0 +1,30 @@
+{
+  "version": "0.6.30-rc.1",
+  "static": {
+    "json_files": 1483,
+    "geometry_identifiers": 928,
+    "guide_entries": 140,
+    "categories": 11,
+    "interaction_simulations": false
+  },
+  "signature_assets": {
+    "exact_rgb_mixtures": 336,
+    "animation_frames_per_mixture": 6,
+    "atlas_size": [
+      1632,
+      1428
+    ],
+    "source_alpha_preserved": true,
+    "uv_animation_define": "USE_UV_ANIM",
+    "liquid_base_material": "entity_alphatest_one_sided"
+  },
+  "load": {
+    "engine": "1.26.51.1",
+    "cookery": "1.0.6",
+    "server_started": true,
+    "script_initialized": true,
+    "error_lines": 0
+  },
+  "android_visual_acceptance": "pending",
+  "archive_sha256": "39bb8f084605cee558a2dad67a6a1de3dc38c40dfe7e8f612342d4f340a9b553"
+}

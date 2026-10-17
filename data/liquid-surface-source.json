@@ -1,0 +1,37 @@
+{
+  "minecraft": "1.21.1",
+  "source": "Official Mojang client JAR",
+  "archive_url": "https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
+  "archive_sha1": "30c73b1c5da787909b2f73340419fdf13b9def88",
+  "scope": "Original water/lava sprite bytes and animation metadata for the maintained NeoForge1.21.1 visual reference. No client acceptance.",
+  "water_vertex_alpha": {
+    "value": 1,
+    "tint_argb": "0xFF3F76E4",
+    "reason": "Both maintained Tavern barrel and pressing-tub renderers call RenderUtils.renderFluid. renderSurface submits the fluid tint without an additional opacity multiplier; the vanilla water client extension tint has alpha FF. Preserve the original PNG alpha exactly once; retain the existing RGB adapter.",
+    "tavern_source": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/a1afba34981a00e89d57130d3dc8f1e64f1820a2/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/util/RenderUtils.java",
+    "forge_source": "https://github.com/MinecraftForge/MinecraftForge/blob/1.20.x/src/main/java/net/minecraftforge/common/ForgeMod.java",
+    "neoforge_source": "https://github.com/neoforged/NeoForge/blob/00c6a3fd23d80ce54ec834a7e25d09fba37927e9/src/main/java/net/neoforged/neoforge/client/ClientNeoForgeMod.java"
+  },
+  "textures": {
+    "water": {
+      "source_path": "assets/minecraft/textures/block/water_still.png",
+      "runtime_texture": "runtime/RP/textures/repair/water.png",
+      "sha256": "5843e8826507c484dfc15d5d255843d041804bcaa2036ed137320610d7fb9af7",
+      "dimensions": [
+        16,
+        512
+      ],
+      "animation_metadata": "data/liquid-surface-source/water.png.mcmeta"
+    },
+    "lava": {
+      "source_path": "assets/minecraft/textures/block/lava_still.png",
+      "runtime_texture": "runtime/RP/textures/repair/lava.png",
+      "sha256": "7ba546bb9093670f1277ad39d4e973a693ce362f1854a9db00fdb7ab3e434c3c",
+      "dimensions": [
+        16,
+        320
+      ],
+      "animation_metadata": "data/liquid-surface-source/lava.png.mcmeta"
+    }
+  }
+}

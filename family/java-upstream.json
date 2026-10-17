@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "poll_hours": 6,
+  "rule": "Latest available author release per Minecraft/loader branch; parity never inferred from version/hash. Update gaps and canonical adapters before claiming latest gameplay.",
+  "projects": [
+    {
+      "name": "Tavern",
+      "project_id": 1475175,
+      "author_id": 23495783,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8350841
+          ],
+          "source_scope": "Author1.2.0; reviewed Forge1.20.1 sourcec4ec1880. Current implementation and open/native/client scopes are maintained in Tavern docs/PARITY-MATRIX.md; deployed full-family evidence in family/BASELINE-STATUS.md. Separate unpublished26.1.2 source9b8f165a remains partially reviewed. Version/hash equality does not establish Java gameplay or rendered-client parity."
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [
+            8350856
+          ],
+          "source_scope": "Author1.2.0; reviewed NeoForge1.21.1 sourcea1afba34. Current implementation and open/native/client scopes are maintained in Tavern docs/PARITY-MATRIX.md; deployed full-family evidence in family/BASELINE-STATUS.md. Separate unpublished26.1.2 source9b8f165a remains partially reviewed. Version/hash equality does not establish Java gameplay or rendered-client parity."
+        }
+      ]
+    },
+    {
+      "name": "Grilling",
+      "project_id": 1666863,
+      "author_id": 136871129,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8726006
+          ],
+          "source_scope": "Author1.1.1; maintained Forge1.20.1 reference. Source-backed producer, seasoning, persistence and platform/client scopes are maintained in Grilling docs/PARITY-MATRIX.md; current full-family deployment in Tavern family/BASELINE-STATUS.md. No complete Java or client parity claimed."
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [
+            8726014
+          ],
+          "source_scope": "Author1.1.1; maintained NeoForge1.21.1 reference. Source-backed producer, seasoning, persistence and platform/client scopes are maintained in Grilling docs/PARITY-MATRIX.md; current full-family deployment in Tavern family/BASELINE-STATUS.md. No complete Java or client parity claimed."
+        }
+      ]
+    },
+    {
+      "name": "World Liquor",
+      "project_id": 1502365,
+      "author_id": 138592347,
+      "branches": [
+        {
+          "minecraft": "1.20.1",
+          "loader": "Forge",
+          "source_reference_file_ids": [
+            8947050,
+            9066402
+          ],
+          "source_scope": "Author1.1.12; maintained Forge1.20.1 reference. Current author bytes, recipes/effects/assets review is World Liquor data/current-author-review-20261009.json; implementation/open/event/platform/client scopes in docs/PARITY-MATRIX.md. Full-family deployment evidence is Tavern family/BASELINE-STATUS.md. No complete branch or client parity claimed."
+        },
+        {
+          "minecraft": "1.21.1",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [
+            8704187,
+            8947041,
+            9066406
+          ],
+          "source_scope": "Author1.1.11; maintained NeoForge1.21.1 reference. Current author bytes, recipes/effects/assets review is World Liquor data/current-author-review-20261009.json; implementation/open/event/platform/client scopes in docs/PARITY-MATRIX.md. Full-family deployment evidence is Tavern family/BASELINE-STATUS.md. No complete branch or client parity claimed."
+        },
+        {
+          "minecraft": "26.1.2",
+          "loader": "NeoForge",
+          "source_reference_file_ids": [],
+          "source_scope": "Separate author1.1.6 CF9087098. Branch divergence is reviewed in World Liquor family/world-liquor-26.1.2-1.1.6-review.json; Luck/BlockDrops/own registration adaptation remains incomplete. Does not replace the maintained1.21.1 gameplay reference; no full branch/client parity claimed."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "kind": "author_uuid_owner_migration",
+  "project_id": 1673664,
+  "old_file_id": 8983314,
+  "new_file_id": 9054164,
+  "old_archive_sha256": "9e5b617cc4c7a08ecd429fb9e42ec10e8d40a1ed5fc1f6f6687c3aff8a45a5d5",
+  "new_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+  "packs": [
+    {
+      "side": "behavior",
+      "old_uuid": "d322809c-a51e-4742-bfc4-16d3c1491c9d",
+      "new_uuid": "5df753c9-3436-4fba-87f1-a2da3651cfcf",
+      "old_version": [
+        1,
+        0,
+        8
+      ],
+      "new_version": [
+        1,
+        6,
+        0
+      ],
+      "old_manifest_sha256": "1c667c5af1a69d26ad0fcc3bcd615eb933424e3b726856b80049a7d15590748b"
+    },
+    {
+      "side": "resource",
+      "old_uuid": "8e2c6318-2f5f-4907-aad0-31d10610e405",
+      "new_uuid": "f1d333ca-2d6b-4566-8005-e6c309816324",
+      "old_version": [
+        1,
+        0,
+        8
+      ],
+      "new_version": [
+        1,
+        6,
+        0
+      ],
+      "old_manifest_sha256": "70cea91f02cb8c844ed087f8b58546f109f0254a5c782ae5aa42dbe0c5fcd3ee"
+    }
+  ],
+  "dynamic_property_owners": {
+    "d322809c-a51e-4742-bfc4-16d3c1491c9d": "5df753c9-3436-4fba-87f1-a2da3651cfcf"
+  },
+  "authorization": "User 2026-10-06 explicitly requires author Cookery 1.6.0 adaptation and complete live deployment with saved-world preservation."
+}

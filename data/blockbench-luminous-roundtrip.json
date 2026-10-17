@@ -1,0 +1,26 @@
+{
+  "editor": "Blockbench",
+  "version": "5.2.1",
+  "official_binary_sha256": "d6329fd8db35a6e1ffb86c3f61b77ff193c6526418e6454e1cac863a0e384003",
+  "method": "Native desktop File > Export > Export Bedrock Geometry; no injected editor scripts or third-party plugins",
+  "export": "art/blockbench/luminous-bride/blockbench_5.2.1_export.geo.json",
+  "export_sha256": "276f2fa1d9b7b25e2edd9bf177c644b159191869ead9d6fd7a2889c343f6b7f7",
+  "geometry_uv_pivots_bounds_equal_to_runtime": true,
+  "wrapper_version_only_difference": [
+    "1.12.0",
+    "1.21.0"
+  ],
+  "source": "art/blockbench/luminous-bride/luminous_bride_1.bbmodel",
+  "minecraft_client_acceptance": false,
+  "native_turntable": {
+    "format": "GIF",
+    "frames": 609,
+    "frame_duration_ms": 50,
+    "width": 504,
+    "height": 716,
+    "sha256": "a531352c9ebe8ca72e4f54a7ea0e848abf817638f4f4fca0a6a6dff5957418ec",
+    "render_mode": "Blockbench default double-sided preview, deliberately stressing reverse-face overlap",
+    "source_is_native_blockbench_capture": true,
+    "not_minecraft_capture": true
+  }
+}

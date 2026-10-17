@@ -1,0 +1,48 @@
+{
+  "bsm": "3.10.6",
+  "bds": "1.26.52.3",
+  "candidate_receipt_sha256": "3824b1857b8039ffa61bc436a43f1dbae6642de880e39b7708cd1792ee8881fc",
+  "cycles": [
+    {
+      "ready": true,
+      "errors": [],
+      "warnings": [
+        "[2026-10-01 22:28:15:564 WARN] ================ ALLOW LIST WARNING ===================",
+        "[2026-10-01 22:28:15:564 WARN] Allow list is enabled but contains no entries. ",
+        "[2026-10-01 22:28:15:564 WARN] Use allowlist add <playername> for you and your friends so that they can access the server, or modify allowlist.json manually.",
+        "[2026-10-01 22:28:15:564 WARN] ",
+        "[2026-10-01 22:28:15:564 WARN] =======================================================",
+        "[2026-10-01 22:28:15:565 WARN] [Scripting] Block custom component 'kaleidoscope_tavern:external_cellar_redstone' is not being used by a block",
+        "[2026-10-01 22:28:15:847 WARN] [Scripting] [Tavern C6] Standalone Tavern guide and optional Cookery chapter initialized. Public beta 0.6.83-baseline.1."
+      ],
+      "persistence_marker_seen": false,
+      "guide_probe": [],
+      "cookery_probe": []
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "warnings": [
+        "[2026-10-01 22:28:45:071 WARN] ================ ALLOW LIST WARNING ===================",
+        "[2026-10-01 22:28:45:071 WARN] Allow list is enabled but contains no entries. ",
+        "[2026-10-01 22:28:45:071 WARN] Use allowlist add <playername> for you and your friends so that they can access the server, or modify allowlist.json manually.",
+        "[2026-10-01 22:28:45:071 WARN] ",
+        "[2026-10-01 22:28:45:071 WARN] =======================================================",
+        "[2026-10-01 22:28:45:074 WARN] [Scripting] Block custom component 'kaleidoscope_tavern:external_cellar_redstone' is not being used by a block",
+        "[2026-10-01 22:28:45:281 WARN] [Scripting] [Tavern C6] Standalone Tavern guide and optional Cookery chapter initialized. Public beta 0.6.83-baseline.1."
+      ],
+      "persistence_marker_seen": true,
+      "guide_probe": [],
+      "cookery_probe": []
+    }
+  ],
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "test_kind": "exact unmodified load/restart",
+  "scenario": "solo",
+  "pack_count": 2,
+  "experimental_creator_features": false,
+  "bds_loading_passed": true,
+  "native_guide_passed": false
+}

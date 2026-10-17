@@ -1,0 +1,14 @@
+{
+  "tavernVersion": "0.6.49",
+  "worldLiquorVersion": "0.1.12",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "staticChecks": "passed",
+  "bdsLoad": "passed; scripts initialized and addon registered; clean shutdown",
+  "simulatedPlayers": false,
+  "clientVisuals": "NOT_TESTED",
+  "nativeHeldTextureAnimation": "NOT_RESTORED; complete original frame zero",
+  "heldAndDrinkAnimation": "native components retained; custom fixed-pose attachables removed; client acceptance pending",
+  "barrelHud": "native actionbar only; no duplicate expiring label; clear once on leave",
+  "logSha256": "b95afdb78953e6cef1cd89fb139bf204721186107049d83e1ecb677202cbda74"
+}

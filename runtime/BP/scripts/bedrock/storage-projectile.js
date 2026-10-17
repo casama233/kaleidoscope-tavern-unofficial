@@ -1,0 +1,119 @@
+import {drinkImpactFeedback} from './interaction-particles.js';
+import {externalVisual,isExternalVisual,externalEffectDefinition} from '../core/extension-content.js';
+import {livingEffectEntity} from '../core/living-effect-entity.js';
+import {world} from '@minecraft/server';
+import {splashFactor,splashTicks} from '../core/projectile-parity.js';
+import {check} from '../core/util.js';
+import {storageBottleItem} from '../core/holder.js';
+import {rollDrinkEffects} from '../core/drink-effects.js';
+import {applyCustomEffect} from './custom-effects.js';
+import {applyNativeStatusWithAura} from './status-aura.js';
+import {dispatchInstantHealth,captureInstantSplashPolicy} from './instant-effects.js';
+import {INSTANT_HEALTH_EFFECTS} from '../core/java-instant-effect.js';
+
+const NS='kaleidoscope_tavern';
+export const THROWN_DRINK=NS+':thrown_drink';
+export const THROWN_ITEM=NS+':thrown_drink_item';
+export const THROWN_EFFECTS=NS+':thrown_drink_effects';
+export const THROWN_RESOLVED=NS+':thrown_drink_resolved';
+export const STORAGE_KIND=NS+':storage_kind';
+const MAX_EFFECT_PAYLOAD=8192;
+const CUSTOM_INSTANT=new Set(['shriek_attack','upside_down','zenith'].map(x=>NS+':'+x));
+let installed=false;
+export const storageProjectileDiagnostics={spawned:0,impacts:0,targets:0,nativeEffects:0,customEffects:0,errors:[]};
+function error(e){storageProjectileDiagnostics.errors.push(String(e?.code??e));if(storageProjectileDiagnostics.errors.length>16)storageProjectileDiagnostics.errors.shift();}
+function validRng(rng){const n=rng();check(Number.isFinite(n)&&n>=0&&n<1,'INVALID_RNG');return n;}
+function living(entity){return livingEffectEntity(entity);}
+function centerDistanceSq(a,b){const dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z;return dx*dx+dy*dy+dz*dz;}
+function rowsPayload(itemId,rng){
+ const rows=rollDrinkEffects(itemId,()=>validRng(rng));
+ const raw=JSON.stringify(rows);check(raw.length<=MAX_EFFECT_PAYLOAD,'THROWN_EFFECT_PAYLOAD_TOO_LARGE');return raw;
+}
+export function spawnThrownDrink(dimension,itemId,position,velocity,{rng=Math.random,owner}={}){
+ const bottle=storageBottleItem(itemId);check(bottle&&bottle.base!=='empty_bottle','NOT_THROWABLE_DRINK');
+ check(dimension&&position&&velocity&&['x','y','z'].every(k=>Number.isFinite(position[k])&&Number.isFinite(velocity[k])),'INVALID_PROJECTILE_VECTOR');
+ let entity;
+ // Java storage dispatches MolotovBlockItem to its incendiary projectile.
+ if(bottle.base==='molotov'){
+  try{entity=dimension.spawnEntity(NS+':thrown_molotov',position);entity.getComponent('minecraft:projectile').shoot(velocity,{uncertainty:0});storageProjectileDiagnostics.spawned++;return entity;}
+  catch(error){try{entity?.remove();}catch{}throw error;}
+ }
+ try{
+  entity=dimension.spawnEntity(externalVisual(THROWN_DRINK,itemId),position);
+  entity.setProperty(STORAGE_KIND,bottle.kind);
+  entity.setDynamicProperty(THROWN_ITEM,itemId);
+  entity.setDynamicProperty(THROWN_EFFECTS,rowsPayload(itemId,rng));
+  entity.setDynamicProperty(THROWN_RESOLVED,false);
+  const projectile=entity.getComponent?.('minecraft:projectile');check(projectile?.shoot,'PROJECTILE_COMPONENT_MISSING');
+  if(owner)projectile.owner=owner;
+  projectile.shoot(velocity,{uncertainty:0});
+  storageProjectileDiagnostics.spawned++;
+  return entity;
+ }catch(e){try{entity?.remove();}catch{}throw e;}
+}
+function nativeRow(entity,row,factor,projectile,capturedSplashPolicy){
+ if(INSTANT_HEALTH_EFFECTS.has(row.effect)){
+  const result=dispatchInstantHealth(entity,row,{intensity:factor,delivery:'splash',direct:projectile,indirect:projectile.getComponent('minecraft:projectile')?.owner,capturedSplashPolicy});
+  if(result?.status!=='APPLIED_NATIVE_INSTANT')return false;
+ }else if(row.effect==='minecraft:saturation'){
+  // Java's other instantaneous effects delegate to applyEffectTick, not a duration.
+  entity.addEffect(row.bedrockId,1,{amplifier:row.amplifier,showParticles:true});
+ }else{
+  const ticks=splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
+  applyNativeStatusWithAura(entity,row.bedrockId,ticks,{amplifier:row.amplifier,showParticles:true});
+ }
+ storageProjectileDiagnostics.nativeEffects++;return true;
+}
+function customRow(entity,row,factor){
+ const instantaneous=CUSTOM_INSTANT.has(row.effect)||externalEffectDefinition(row.effect)?.mode==='instant';
+ const ticks=instantaneous?1:splashTicks(row.ticks??row.duration*20,factor);if(!ticks)return false;
+ if(!applyCustomEffect(entity,{...row,duration:ticks/20,ticks}))return false;
+ storageProjectileDiagnostics.customEffects++;return true;
+}
+function impactEntity(event){try{return event.getEntityHit?.()?.entity;}catch{return undefined;}}
+export function resolveThrownDrinkImpact(event){
+ const projectile=event?.projectile;if(!isExternalVisual(projectile?.typeId,THROWN_DRINK))return false;
+ try{
+  if(projectile.getDynamicProperty(THROWN_RESOLVED)===true)return false;
+  projectile.setDynamicProperty(THROWN_RESOLVED,true);
+  const raw=projectile.getDynamicProperty(THROWN_EFFECTS),itemId=projectile.getDynamicProperty(THROWN_ITEM);
+  check(typeof itemId==='string'&&storageBottleItem(itemId),'THROWN_ITEM_CORRUPT');check(typeof raw==='string','THROWN_EFFECTS_MISSING');
+  const rows=JSON.parse(raw);check(Array.isArray(rows),'THROWN_EFFECTS_CORRUPT');
+  // Java expands the projectile AABB (not a zero-size point) by (4,2,4).
+  const at={...projectile.location};
+  // Always show a collision, including an empty rolled-effect list. The latch above
+  // prevents block/entity hit callbacks from duplicating the 8+100 particle event.
+  drinkImpactFeedback(projectile.dimension,at);
+  const direct=impactEntity(event),box=projectile.getAABB();
+  const min={x:box.center.x-box.extent.x-4,y:box.center.y-box.extent.y-2,z:box.center.z-box.extent.z-4},volume={x:2*box.extent.x+8,y:2*box.extent.y+4,z:2*box.extent.z+8};
+  const candidates=projectile.dimension.getEntities({location:min,volume});let affected=0;
+  for(const entity of candidates)try{
+   if(entity.id===projectile.id||entity.isValid===false)continue;
+   const nativeLiving=living(entity);
+   const capturedSplashPolicy=captureInstantSplashPolicy(entity);
+   // Known source immunity gates every row, including timed/custom effects.
+   // Unknown addon policy retains the older timed/custom family adapter only;
+   // instant rows stay fail-closed inside the shared dispatcher.
+   if(capturedSplashPolicy==='NOT_SOURCE_LIVING'||capturedSplashPolicy==='SOURCE_SPLASH_REJECTED')continue;
+   const dist=centerDistanceSq(entity.location,at);if(dist>=16)continue;
+   const factor=splashFactor(dist,entity.id===direct?.id);if(factor<=0)continue;
+   let any=false;
+   for(const row of rows){
+    // Instant class/profile checks belong to the shared dispatcher. Native mob
+    // families still gate the unrelated timed/custom adapters as before.
+    if(!nativeLiving&&!INSTANT_HEALTH_EFFECTS.has(row?.effect))continue;
+    if(row?.bedrockId)any=nativeRow(entity,row,factor,projectile,capturedSplashPolicy)||any;
+    else any=customRow(entity,row,factor)||any;
+   }
+   if(any)affected++;
+  }catch(e){error(e);}
+  storageProjectileDiagnostics.impacts++;storageProjectileDiagnostics.targets+=affected;return true;
+ }catch(e){error(e);return false;}
+ finally{try{projectile.remove();}catch{}}
+}
+export function installStorageProjectileEvents(){
+ if(installed)return;installed=true;
+ world.afterEvents.projectileHitEntity?.subscribe(resolveThrownDrinkImpact);
+ world.afterEvents.projectileHitBlock?.subscribe(resolveThrownDrinkImpact);
+}
+export const STORAGE_PROJECTILE_TEST={living,centerDistanceSq};

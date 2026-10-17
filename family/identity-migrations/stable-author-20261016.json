@@ -1,0 +1,2134 @@
+{
+  "schema": 2,
+  "kind": "author_family_uuid_and_state_migration",
+  "projects": [
+    {
+      "name": "Cookery",
+      "project_id": 1673664,
+      "old_file_id": 9054164,
+      "new_file_id": 9123386,
+      "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+      "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+      "packs": [
+        {
+          "side": "behavior",
+          "old_uuid": "5df753c9-3436-4fba-87f1-a2da3651cfcf",
+          "new_uuid": "d0ca7a68-2877-4bd5-bc82-6c7b325cccf2",
+          "old_version": [
+            1,
+            6,
+            0
+          ],
+          "new_version": [
+            1,
+            6,
+            1
+          ],
+          "old_manifest_sha256": "23c864d2fcc6552435f9bde6af09b53603412a503582ca505b3ee2621d8531a6"
+        },
+        {
+          "side": "resource",
+          "old_uuid": "f1d333ca-2d6b-4566-8005-e6c309816324",
+          "new_uuid": "c9df2982-d72e-4bbf-a72c-b77de4ea915b",
+          "old_version": [
+            1,
+            6,
+            0
+          ],
+          "new_version": [
+            1,
+            6,
+            1
+          ],
+          "old_manifest_sha256": "ba2de8a399cfacd7004866adc4015fced85140a2d0531ae24fbc28352056ebc0"
+        }
+      ]
+    },
+    {
+      "name": "ChineseFood",
+      "project_id": 1683300,
+      "old_file_id": 8983356,
+      "new_file_id": 9123382,
+      "old_archive_sha256": "63bd2eb2ee2819c985d7c484df633c913cbb995abf3162aa68c997c24ef607f2",
+      "new_archive_sha256": "6e424b1df6d933e4aa699023208d05e6a702431ed4c33dcca439c2cd0c2c9251",
+      "packs": [
+        {
+          "side": "behavior",
+          "old_uuid": "b3c9db76-4ae6-4986-a380-90a4025d95a9",
+          "new_uuid": "d7aa2725-a2a2-4e82-9a6e-192d2e04617c",
+          "old_version": [
+            1,
+            0,
+            10442
+          ],
+          "new_version": [
+            1,
+            0,
+            10548
+          ],
+          "old_manifest_sha256": "c53ecdbd9c29e9afc8e6deb133a4f03f25037bfb1b886f365a817cf1cfc32ae5"
+        },
+        {
+          "side": "resource",
+          "old_uuid": "b20a91d2-f099-4293-8a7f-46bf7fbc6017",
+          "new_uuid": "fdb6b8c4-6fe3-44bb-af7a-08bcb976377c",
+          "old_version": [
+            1,
+            0,
+            10442
+          ],
+          "new_version": [
+            1,
+            0,
+            10548
+          ],
+          "old_manifest_sha256": "19b3e6c960e36a62da6d6b9a8c715ae154857cc95e006cc61b90568aaf8bf6e7"
+        }
+      ]
+    },
+    {
+      "name": "Nether",
+      "project_id": 1710501,
+      "old_file_id": 8990975,
+      "new_file_id": 9123379,
+      "old_archive_sha256": "b22c1f51f4941d73198d038e72f7e0e51093e32397c9086f991ae4a68cce781d",
+      "new_archive_sha256": "85533af5fe733b1943e8058bb665a6b2bca4f3259c458496e624272e4e7d3733",
+      "packs": [
+        {
+          "side": "behavior",
+          "old_uuid": "5a59f9ad-d78c-4706-838c-1dc52a364d3d",
+          "new_uuid": "36cbd4fe-5677-495e-9caf-c267a83d116d",
+          "old_version": [
+            1,
+            0,
+            1
+          ],
+          "new_version": [
+            1,
+            0,
+            10248
+          ],
+          "old_manifest_sha256": "5ab347275d34b2bf69e6d20e759e72a3a1b37fe9ac55cac354cc0caaa2bede06"
+        },
+        {
+          "side": "resource",
+          "old_uuid": "7325f2c3-7c44-4b94-ae6d-5df64d82e8e4",
+          "new_uuid": "2b53ecef-9319-4ee5-9808-1b9fb0f260dc",
+          "old_version": [
+            1,
+            0,
+            1
+          ],
+          "new_version": [
+            1,
+            0,
+            10248
+          ],
+          "old_manifest_sha256": "cafb304fc537fd6eb03d4f778eeb8562a9c6513526bc10046bd84058dcf3e739"
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "project_id": 1710505,
+      "old_file_id": 8990981,
+      "new_file_id": 9123371,
+      "old_archive_sha256": "3966a6f37ad26d71931dde5c719ad166fce0f8459f7f1b450a3f731c08751398",
+      "new_archive_sha256": "f3fbe135101aa2168e2c7534e9751f600300714f4dc5a9cd20aaa44fd4e47b1d",
+      "packs": [
+        {
+          "side": "behavior",
+          "old_uuid": "f47ef2bf-48f1-47cb-9934-fa08946d48d4",
+          "new_uuid": "b960ea25-a3f1-4632-beb3-589cc3aa9156",
+          "old_version": [
+            1,
+            0,
+            1
+          ],
+          "new_version": [
+            1,
+            0,
+            2
+          ],
+          "old_manifest_sha256": "debd7049467f43e015dd2a218ce5f981de9e086facb0d1ecce4d4b80ecc6f484"
+        },
+        {
+          "side": "resource",
+          "old_uuid": "0da8920e-18c4-45c0-a5c8-8da21c4caefd",
+          "new_uuid": "55437a37-083a-4f42-8469-bd99e2168e34",
+          "old_version": [
+            1,
+            0,
+            1
+          ],
+          "new_version": [
+            1,
+            0,
+            2
+          ],
+          "old_manifest_sha256": "1fc514fb94f1ff7f5fdc287cb81497836a6ed1fb3315877cc746edcfd49e83b5"
+        }
+      ]
+    }
+  ],
+  "dynamic_property_owners": {
+    "5df753c9-3436-4fba-87f1-a2da3651cfcf": "d0ca7a68-2877-4bd5-bc82-6c7b325cccf2",
+    "b3c9db76-4ae6-4986-a380-90a4025d95a9": "d7aa2725-a2a2-4e82-9a6e-192d2e04617c",
+    "5a59f9ad-d78c-4706-838c-1dc52a364d3d": "36cbd4fe-5677-495e-9caf-c267a83d116d",
+    "f47ef2bf-48f1-47cb-9934-fa08946d48d4": "b960ea25-a3f1-4632-beb3-589cc3aa9156"
+  },
+  "block_states": {
+    "schema": 1,
+    "kind": "cookery161_nether102_states",
+    "encoding_source_hashes": [
+      {
+        "path": "BP/scripts/custom_components/blocks/chair.js",
+        "before_sha256": "afb36de5a1670c2084164102e8b2b4910ac1be4c9295b5866ac6222d652dce4f",
+        "after_sha256": "f7e30ae255b63281be0d8a6673442110f01ccc96680a72b6cbdd0d46757705b5"
+      },
+      {
+        "path": "BP/scripts/custom_components/blocks/table.js",
+        "before_sha256": "09269ab439b27dda4bbe339fa676baa0fbe5f4fd747717f90c85c46167e6e254",
+        "after_sha256": "20f06b11f2119233533fe1e0a0f0a69a2c5fb49ab6d71dc048ebc0ad46b1edc6"
+      },
+      {
+        "path": "BP/scripts/custom_components/blocks/enamelBasin.js",
+        "before_sha256": "6b5d348b4ed78e47d466fcfb93b5d7c1893a5741c45e48f57f54aa39f5314ce6",
+        "after_sha256": "299b014e902938cee0b0e8164452bfde9e8e943cb588346c58e77f91015be330"
+      },
+      {
+        "path": "BP/scripts/custom_components/blocks/directStation.js",
+        "before_sha256": "19207a023a04da532ff9e34cd95413f09cf000fc672255c03633a7bcb2744ad4",
+        "after_sha256": "630d3587c43240256a3f89575b197e2f76ffc738b25a700a5352f78c9de94f15"
+      }
+    ],
+    "blocks": [
+      {
+        "path": "BP/blocks/furniture/chair_acacia.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "a1f2acb2733947defd470a8d8620dbd77825b40c42443431d8c9dc384cb1c6b1",
+        "after_sha256": "b5d26335cb41f759172aa0b381431f4afc62c6fb9aa9b0ca7abee9a0c3e55b49",
+        "identifier": "kaleidoscope_cookery:chair_acacia",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_bamboo.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "876eb67569b8b8063536e2af1192ed826ee3d4bcb776caee43933c1e9dba4eee",
+        "after_sha256": "d4c2f82538485eb6c3f7a19f3a93abeabd7d8e1376b61a887093164a2331601b",
+        "identifier": "kaleidoscope_cookery:chair_bamboo",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_birch.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "8fa5c95e8ea150c710b943dc1f24b655e80f0f77264e56452f8f48041359713a",
+        "after_sha256": "2e01f6c606f4c5ae9ef8dacbb4282496cf8e14db2758e011f65aa1557397a74d",
+        "identifier": "kaleidoscope_cookery:chair_birch",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_cherry.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "8930b93052e359a75f0a8bbe74156e20abbff94ac5428107e139c97ae79b8228",
+        "after_sha256": "52e0f7cd70631950af53e572232243dd85a9d6d276ef7881dfc4658b5700b1da",
+        "identifier": "kaleidoscope_cookery:chair_cherry",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_crimson.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "19e2db98bcd367120e20e07b3f9ea06f681140265034215bc29785ebcfc23218",
+        "after_sha256": "775ba3b36d6d0160032255c42a177781da92ac575a5cd1afd732b2336bd8e351",
+        "identifier": "kaleidoscope_cookery:chair_crimson",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_dark_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "8f54cc2d345573b8fdbc37430da8dead243d9ca643f14844f837d98b55a768d8",
+        "after_sha256": "37dfeccc139c135c0d5d8b786e88f262fcdb7733cb16d3e019b2dd1563e9a38c",
+        "identifier": "kaleidoscope_cookery:chair_dark_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_jungle.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "e07affebc04724164814ba321ae70da97b4eb9f94376c3de570e47bfcd1607b5",
+        "after_sha256": "047c94cce301e20be2d1dd4b76e255be449ad034ed63e45a9110d70ffbe4274a",
+        "identifier": "kaleidoscope_cookery:chair_jungle",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_mangrove.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "d274d62f4176880c534bbbb9a00ef43de17a7aea156fa17c60d2e10929c1ce67",
+        "after_sha256": "388cbd8df0897e2f6a4a0a17ebd07956cbac830246161149cb0155141f3151f5",
+        "identifier": "kaleidoscope_cookery:chair_mangrove",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "8e3d3ac3b30a4b3cbe30dfbb65740e89cb7779633f64d5cbb38d0214aa73c469",
+        "after_sha256": "e85c9dea43981d0a2eefeab24617622a70b83b67cbb3c99abf2b16c5580cdaad",
+        "identifier": "kaleidoscope_cookery:chair_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_pale_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "5d130ad6b7092f62efc5b838f0bfd23104fb23cad17b754ba4c047c065b24c59",
+        "after_sha256": "75eb80032313e25d0b155cef8241683fabfe817eec99b8f51e5dc6727da04140",
+        "identifier": "kaleidoscope_cookery:chair_pale_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_spruce.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "afb802de1b1540c06bec5635cd236ec959dd6af6dbbd50ea63f6c8e2b599dba1",
+        "after_sha256": "f6c7bf36df7be712b18181e294d664b6205708ac397d75e2705bb04adce1a2bf",
+        "identifier": "kaleidoscope_cookery:chair_spruce",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/chair_warped.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "87dcc30d1bd6397aeb03316685cdfa80c239a070b0f36bce12e9c11e536b31c1",
+        "after_sha256": "718cd9f1ba4963943f4a12d2353b45aa98e61f7fb0697aee5c4d51ff4e80617d",
+        "identifier": "kaleidoscope_cookery:chair_warped",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_acacia.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "4df0eeed46e9143e658825994126fd3b3a8faa89058b4b52ded598e2db18f8f5",
+        "after_sha256": "21f852699d681eeb52fa2c0d0b9fc91d8d2f35ff1b88456ca79cd521b181e91b",
+        "identifier": "kaleidoscope_cookery:table_acacia",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_bamboo.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "1fc7055e27a999f66c8272929b2d37db16fbc43243bc8843eb1e546c6c724d17",
+        "after_sha256": "55bb5c1c67377d7b1b3e39d5bb295a9a6221a5c6cb334ecfff5569d7dc7f320b",
+        "identifier": "kaleidoscope_cookery:table_bamboo",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_birch.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "346447c758a402065ece0be4d7518fb891a11ac3540bdf143138f8e208030044",
+        "after_sha256": "daf56881708b9a1d59992f98048580d6d50d74596d4452382a5a8f73c320668b",
+        "identifier": "kaleidoscope_cookery:table_birch",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_cherry.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "32909597325c6b1ddc45bde2c69e5d434caf2c4e693c7b92cb170500f03662d6",
+        "after_sha256": "4ed2db440822bba13de41b2e4ff6698a24594d3c2f280366347729475edb32dd",
+        "identifier": "kaleidoscope_cookery:table_cherry",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_crimson.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "be64d8b7186d845385f519dd66a4b2e403cf52c4ecb87cb8f69fc18e6615b526",
+        "after_sha256": "92b02082206565b72024195bf941d0ce2b852ab8072e52e32f2ff4816ad8f7a6",
+        "identifier": "kaleidoscope_cookery:table_crimson",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_dark_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "ee1332f3f3d2ae83347bb93bad0a61e2fda95a44eda91de26013edc3412be81b",
+        "after_sha256": "81c04411a54c9a73e7ff66daf126999d84b87a3de550d64658d5b946f4364fa4",
+        "identifier": "kaleidoscope_cookery:table_dark_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_jungle.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "74543430167606e731afad0d8438b6e4d1818fa6ad0543df47cccb542f202258",
+        "after_sha256": "df74a5a49dfc6203a9792cdbc3812f7b6a76ddb5d68890d7132779e636444bc2",
+        "identifier": "kaleidoscope_cookery:table_jungle",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_mangrove.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "db97fb4369710c510ec9fbb4eae86ac55d80100a53c32cc0d173b2d417011f37",
+        "after_sha256": "0dfc1c6334eac6d41d6a8364d41fe721263f5f9c2f6b9f3322beea8e59a81a05",
+        "identifier": "kaleidoscope_cookery:table_mangrove",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "b342989bc26312ce2ec65707ceb9d2e73c975d1ec20c974b81fe64d72b7e6052",
+        "after_sha256": "4ff73749bddcf56e12f476af456473790d0343a1e19252a507374bf3dc9ab814",
+        "identifier": "kaleidoscope_cookery:table_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_pale_oak.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "00d2aadec8434bd96324a8fc9179cb787e92aa1da251b80dad5cca738b3644cc",
+        "after_sha256": "9e076b315ab546e80e0a4b79aed28ad330b042ba859c4c29299f135e6f4734a5",
+        "identifier": "kaleidoscope_cookery:table_pale_oak",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_spruce.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "9f6343ae0e84e66ff7b18ce9f7559dd870bf37902ec2ccf756c49f6c31a2dd3a",
+        "after_sha256": "5ebb5cd20ce038add4218b3f503822be626e938ed47cd7c39e755f858f2795bf",
+        "identifier": "kaleidoscope_cookery:table_spruce",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/table_warped.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "before_sha256": "285107934f4c7e8828a2bc149aee43a4da4d2fdcad972b76f24f2625b5748464",
+        "after_sha256": "713580900239d910f65f72df34f775765f07e1146312782120e9983294b10b3b",
+        "identifier": "kaleidoscope_cookery:table_warped",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "table_carpet"
+      },
+      {
+        "path": "BP/blocks/kitchen/chopping_board.json",
+        "before_states": {
+          "kaleidoscope_cookery:board_has_food": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:board_model": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "kaleidoscope_cookery:cut_stage": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "kaleidoscope_cookery:extension_board_model": [
+            0,
+            1,
+            2
+          ],
+          "kaleidoscope_cookery:extension_board_recovery": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:board_model": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "kaleidoscope_cookery:cut_stage": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "kaleidoscope_cookery:extension_board_model": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:extension_board_recovery": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "before_sha256": "a52abe770cc8d2954cf899f391b6fedae29260efddcd4fd2ba957d90b2d3017f",
+        "after_sha256": "4f270c9a0a9a0c9d848cf9d65e4189c24a1c5a4cef9a81a6b0aac53ee97bfd63",
+        "identifier": "kaleidoscope_cookery:chopping_board",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "board_mode"
+      },
+      {
+        "path": "BP/blocks/kitchen/enamel_basin.json",
+        "before_states": {
+          "kaleidoscope_cookery:has_lid": [
+            true,
+            false
+          ],
+          "kaleidoscope_cookery:oil_low": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "kaleidoscope_cookery:oil_high": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:oil_full": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:has_lid": [
+            true,
+            false
+          ],
+          "kaleidoscope_cookery:oil_low": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "kaleidoscope_cookery:oil_high": [
+            0,
+            1,
+            2
+          ]
+        },
+        "before_sha256": "14f7e61c083e57dee7af134405dfd41493f36567bebf86425607605ac0b61f9a",
+        "after_sha256": "c8d09a76dc06316c61010568539a4e791c1d20e2d92e11e79d425a988458faab",
+        "identifier": "kaleidoscope_cookery:enamel_basin",
+        "project_id": 1673664,
+        "old_archive_sha256": "da12fe6d39d7514aff1de3c963d69899324d771be5ca0fc3da1ccb759c7ad458",
+        "new_archive_sha256": "5b01865d4dd9a455cd80dae4ddc94dc45964e074025f7d24c6f0c5e35f0fbe52",
+        "conversion": "basin_oil"
+      },
+      {
+        "path": "BP/blocks/furniture/wart_chair.json",
+        "before_states": {
+          "kaleidoscope_cookery:carpet_color": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:chair_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:chair_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "29aedad859a81c273efe56f00a7774236d6d1397c5e5cdbf14e804affc69323a",
+        "after_sha256": "fa24e495595861e285331236e2616db70369e2a5916688c9bcfe20ccb5c34266",
+        "identifier": "kaleidoscope_nether:wart_chair",
+        "project_id": 1710501,
+        "old_archive_sha256": "b22c1f51f4941d73198d038e72f7e0e51093e32397c9086f991ae4a68cce781d",
+        "new_archive_sha256": "85533af5fe733b1943e8058bb665a6b2bca4f3259c458496e624272e4e7d3733",
+        "conversion": "chair_carpet"
+      },
+      {
+        "path": "BP/blocks/furniture/wart_table.json",
+        "before_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet": [
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black"
+          ],
+          "kaleidoscope_cookery:has_carpet": [
+            false,
+            true
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "after_states": {
+          "kaleidoscope_cookery:table_axis": [
+            "x",
+            "z"
+          ],
+          "kaleidoscope_cookery:table_position": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_perpendicular": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "kaleidoscope_cookery:table_carpet_slot": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "kaleidoscope_cookery:table_carpet_bank": [
+            0,
+            1
+          ]
+        },
+        "before_sha256": "8520e041b1418b1a5a4b3d7a4eaa21e39a890b0d2ab36679624ee7b7491dc3fa",
+        "after_sha256": "92327a9ce3721ecbd3dd83ca5570435bd036fef1e0f2f58c52856e79c12ba04a",
+        "identifier": "kaleidoscope_nether:wart_table",
+        "project_id": 1710501,
+        "old_archive_sha256": "b22c1f51f4941d73198d038e72f7e0e51093e32397c9086f991ae4a68cce781d",
+        "new_archive_sha256": "85533af5fe733b1943e8058bb665a6b2bca4f3259c458496e624272e4e7d3733",
+        "conversion": "table_carpet"
+      }
+    ]
+  },
+  "authorization": "Owner 2026-10-16 explicitly requires latest stable author adaptations, game-experience/collision repair and LIVE deployment with saved data preserved; 2026-10-03 standing maintenance deployment authorization remains in force."
+}

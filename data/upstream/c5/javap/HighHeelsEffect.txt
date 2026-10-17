@@ -1,0 +1,17 @@
+Compiled from "HighHeelsEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.HighHeelsEffect extends com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect {
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.HighHeelsEffect(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       5: aload_0
+       6: getstatic     #7                  // Field net/minecraft/world/entity/ai/attributes/Attributes.STEP_HEIGHT:Lnet/minecraft/core/Holder;
+       9: ldc           #13                 // String high_heels_step_height
+      11: invokestatic  #15                 // Method com/github/ysbbbbbb/kaleidoscopetavern/KaleidoscopeTavern.modLoc:(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;
+      14: ldc2_w        #21                 // double 0.5d
+      17: getstatic     #23                 // Field net/minecraft/world/entity/ai/attributes/AttributeModifier$Operation.ADD_VALUE:Lnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;
+      20: invokevirtual #29                 // Method addAttributeModifier:(Lnet/minecraft/core/Holder;Lnet/minecraft/resources/ResourceLocation;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)Lnet/minecraft/world/effect/MobEffect;
+      23: pop
+      24: return
+}

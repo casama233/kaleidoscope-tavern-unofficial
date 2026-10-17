@@ -1,0 +1,181 @@
+{
+  "source_units": "seconds; timed effects converted to ticks x20; instant_health uses a one-tick native instant effect",
+  "quality_index": "q-1, including q1",
+  "native_effects": [
+    "minecraft:bad_omen",
+    "minecraft:blindness",
+    "minecraft:fire_resistance",
+    "minecraft:haste",
+    "minecraft:instant_health",
+    "minecraft:jump_boost",
+    "minecraft:mining_fatigue",
+    "minecraft:nausea",
+    "minecraft:night_vision",
+    "minecraft:regeneration",
+    "minecraft:resistance",
+    "minecraft:speed",
+    "minecraft:strength",
+    "minecraft:water_breathing"
+  ],
+  "custom_unimplemented": [
+    "kaleidoscope_tavern:bloody_mary",
+    "kaleidoscope_tavern:grass_stealth",
+    "kaleidoscope_tavern:high_heels",
+    "kaleidoscope_tavern:slightly_tipsy",
+    "kaleidoscope_tavern:vision"
+  ],
+  "families": {
+    "brandy": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:high_heels",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "carignan": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "champagne": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:high_heels",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "glowflower_brew": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy",
+        "kaleidoscope_tavern:vision"
+      ]
+    },
+    "honey_wine": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "ice_wine": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "luminous_bride": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "madame_shexiang": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "miners_star": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "mother_snow": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "plum_wine": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "polaris_sweet_white": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "red_queen": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:bloody_mary",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "riesling_dry_white": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:grass_stealth",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "rum": {
+      "native_entries": 6,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "sakura_wine": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "sauvignon_blanc_dry_white": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:grass_stealth",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "sherry": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "sunset_glow": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "sweet_berry_wine": {
+      "native_entries": 1,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:bloody_mary",
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "vinegar": {
+      "native_entries": 21,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "vodka": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "whiskey": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    },
+    "wine": {
+      "native_entries": 5,
+      "unsupported_custom_effects": [
+        "kaleidoscope_tavern:slightly_tipsy"
+      ]
+    }
+  },
+  "engine_acceptance": "NOT_RUN"
+}

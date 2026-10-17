@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""Compare motion resources to source-derived dimensions; no game emulation."""
+from pathlib import Path
+from reviewed_changes import historical_digest,changes,reviewed_additions,historical_files
+import hashlib,json
+from creative.historical import LegacyMenuProjection
+ROOT=Path(__file__).resolve().parents[1]
+def read(name):return json.loads((ROOT/name).read_text(encoding='utf-8-sig'))
+projection=LegacyMenuProjection(ROOT)
+def digest_group(dirname):
+    rows=[]
+    for p in historical_files(dirname):
+        rows.append(p.relative_to(ROOT).as_posix()+'\0'+historical_digest(p,projected=True)+'\n')
+    return {'files':len(rows),'sha256':hashlib.sha256(''.join(rows).encode()).hexdigest()}
+ref=read('data/motion-source-reference.json')
+for name,expected in ref['preservedGroups'].items():assert digest_group(name)==expected,('Preserved asset group changed',name)
+for name,expected in ref['preservedFiles'].items():assert historical_digest(ROOT/name)==expected,('Preserved source changed',name)
+java=ref['java']
+assert java['expectedCubeEdgePixels']==16*java['barrelRendererScale']*java['blockFixedScale']==4
+assert java['expectedCardWidthPixels']==16*java['barrelRendererScale']*java['generatedItemFixedScale']==8
+cube=read('runtime/RP/models/entity/runtime_barrel_ingredients_cube.geo.json')['minecraft:geometry'][0]
+assert cube['description']['identifier']=='geometry.kt_runtime.barrel_ingredients_cube'
+assert len(cube['bones'])==9
+for i,bone in enumerate(cube['bones']):
+    assert bone['name']==f'item_{i}' and bone['pivot']==[0,0,0]
+    assert len(bone['cubes'])==1
+    box=bone['cubes'][0];assert box['origin']==[-2,-2,-2] and box['size']==[4,4,4]
+    assert len(box['uv'])==6
+    assert all(face=={'uv':[0,0],'uv_size':[16,16]} for face in box['uv'].values())
+card=read('runtime/RP/models/entity/runtime_barrel_ingredients_card.geo.json')['minecraft:geometry'][0]
+assert all(b['cubes'][0]['size']==[8,8,.5] for b in card['bones'])
+anim=read('runtime/RP/animations/runtime_shaker.animation.json')['animations']
+old=read('docs/REPAIR-BASELINE-0.6.39.json')['unchangedShakerAnimations']
+assert all(anim[k]==v for k,v in old.items() if k not in {'animation.kt_mixology.player_shake','animation.kt_mixology.hold_first','animation.kt_mixology.hold_third','animation.kt_mixology.shake_first'}),'Unrelated first-person/shake animation changed'
+from check_shaker_first_person import check as check_shaker_first_person
+check_shaker_first_person(ROOT)
+from shaker_held_frames import expected
+for name,body in expected().items():assert anim[name]==body,name
+assert not (ROOT/'runtime/RP/entity/player.entity.json').exists()
+version=read('release.json')['version']
+report={'version':version,'baselineCommit':ref['baselineCommit'],'checks':'passed','cubeEdgePixels':4,'cardWidthPixels':8,'barrelFloatUnchanged':True,'shakerThirdLocalY':-3,'firstPersonAttachableUnchanged':False,'shakerJavaFrameConversion':True,'thirdPersonShakeIsolated':True,'preservedGroups':ref['preservedGroups'],'creativeMenuProjectionFiles':len(projection.menus),'tipsyMode':'yaw_adapter_unverified','exactJavaRoll':False,'aimChangesSlightly':True,'clientTested':False,'bdsTested':False,'simulatedPlayerTests':False}
+(ROOT/f'docs/MOTION-STATIC-{version}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps(report,ensure_ascii=False))

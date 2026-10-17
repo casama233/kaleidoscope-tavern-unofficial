@@ -1,0 +1,519 @@
+{
+  "schema": 1,
+  "source_scope": "Tavern NeoForge1.2.0 / Minecraft1.21.1 self instant health/harm",
+  "candidate": "0.6.122",
+  "native_engine": "BDS1.26.51.1",
+  "base_family": {
+    "tavern": "0.6.121",
+    "grilling": "2.8.101",
+    "world_liquor": "0.1.88"
+  },
+  "prototype_script_inputs": {
+    "bedrock/instant-effects.js": "bba018f063314c5fcbe583b1074a1b98a1db5ea2ee49934d6d06692643550f2a",
+    "core/java-instant-effect.js": "9ca5fb62dcefbe36ef8e94e2ac10b591e05eead2ae650086af788180b7e2f11b",
+    "core/util.js": "94b1710e50a970dcdff7f86dce3c0ff3db9cd8a829c35c7ff13cacda58047fbb",
+    "data/vanilla-instant-entities.js": "b2de4e0275cce73374ca6186377fdabe21de409559c225f883689de32e53120e"
+  },
+  "actual_mob_observations": [
+    {
+      "case": "cow_heal",
+      "before": 6,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_health",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "heal",
+        "amount": 4,
+        "healAmount": 4,
+        "before": 6,
+        "after": 10
+      },
+      "expected": 10,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "cow_harm",
+      "before": 10,
+      "firstHealth": 4,
+      "immediate": 4,
+      "nextTick": 4,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 4,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "skeleton_heal_inverted",
+      "before": 20,
+      "firstHealth": 14,
+      "immediate": 14,
+      "nextTick": 14,
+      "result": {
+        "effect": "minecraft:instant_health",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 14,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "skeleton_harm_inverted",
+      "before": 10,
+      "firstHealth": 14,
+      "immediate": 14,
+      "nextTick": 14,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "heal",
+        "amount": 4,
+        "healAmount": 4,
+        "before": 10,
+        "after": 14
+      },
+      "expected": 14,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "heal_clamp",
+      "before": 9,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_health",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "heal",
+        "amount": 4,
+        "healAmount": 4,
+        "before": 9,
+        "after": 10
+      },
+      "expected": 10,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "resistance_same_tick",
+      "before": 10,
+      "firstHealth": 5.199999809265137,
+      "immediate": 5.199999809265137,
+      "nextTick": 5.199999809265137,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 5.2,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "resistance_after_tick",
+      "before": 10,
+      "firstHealth": 5.199999809265137,
+      "immediate": 5.199999809265137,
+      "nextTick": 5.199999809265137,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 5.2,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": -0.07840728759765625,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": -0.07840728759765625,
+        "x": 0
+      }
+    },
+    {
+      "case": "absorption",
+      "before": 10,
+      "firstHealth": 8,
+      "immediate": 8,
+      "nextTick": 8,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 8,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": -0.07840728759765625,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": -0.07840728759765625,
+        "x": 0
+      }
+    },
+    {
+      "case": "repeat_harm_same_tick",
+      "before": 16,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "second": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 10,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "larger_harm_same_tick",
+      "before": 16,
+      "firstHealth": 10,
+      "immediate": 4,
+      "nextTick": 4,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "second": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 12
+      },
+      "expected": 4,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "cancelled_harm",
+      "before": 10,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 10,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "lethal_harm",
+      "before": 2,
+      "firstHealth": 0,
+      "immediate": 0,
+      "nextTick": 0,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 0,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "negative_harm",
+      "before": 10,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "NATIVE_HURT_REJECTED",
+        "operation": "hurt",
+        "amount": -1073741824
+      },
+      "sourceHealthMatches": null,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "zero_harm",
+      "before": 10,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "NATIVE_HURT_REJECTED",
+        "operation": "hurt",
+        "amount": 0
+      },
+      "sourceHealthMatches": null,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "health_boost_then_heal",
+      "before": 9,
+      "firstHealth": 13,
+      "immediate": 13,
+      "nextTick": 13,
+      "result": {
+        "effect": "minecraft:instant_health",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "heal",
+        "amount": 4,
+        "healAmount": 4,
+        "before": 9,
+        "after": 13
+      },
+      "expected": 13,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "armor_harm",
+      "before": 16,
+      "firstHealth": 10,
+      "immediate": 10,
+      "nextTick": 10,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 10,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "protection_harm",
+      "before": 16,
+      "firstHealth": 10.960000038146973,
+      "immediate": 10.960000038146973,
+      "nextTick": 10.960000038146973,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 6
+      },
+      "expected": 10.96,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    },
+    {
+      "case": "totem_lethal_harm",
+      "before": 16,
+      "firstHealth": 1,
+      "immediate": 1,
+      "nextTick": 2,
+      "result": {
+        "effect": "minecraft:instant_damage",
+        "status": "APPLIED_NATIVE_INSTANT",
+        "operation": "hurt",
+        "amount": 24
+      },
+      "expected": 1,
+      "sourceHealthMatches": true,
+      "velocityBefore": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      },
+      "velocityAfter": {
+        "z": 0,
+        "y": 0,
+        "x": 0
+      }
+    }
+  ],
+  "observation_count": 18,
+  "valid_source_health_cases": 16,
+  "negative_zero_hurt_source_phase_unverified": true,
+  "equipment_stopped_nbt_verified": true,
+  "armor_durability_after": 0,
+  "protection_enchantment": {
+    "id": 0,
+    "level": 4
+  },
+  "totem_consumed_and_immediate_health": 1,
+  "normal_player_use_verified": false,
+  "client": false,
+  "simulated_players": false,
+  "live_mutated_by_observer": false,
+  "full_java_parity_verified": false,
+  "known_gaps": [
+    "Java indirect_magic knockback; observed Native magic horizontal velocity0",
+    "Native afterHurt/death callback after caller return",
+    "Native applyDamage true does not prove accepted hurt",
+    "arbitrary mutable executable heal hooks/classes",
+    "nonpositive Java hurt hooks/frames",
+    "Player death dropped-stack alias and rendered consumption lifecycle"
+  ],
+  "supersession_notes": [
+    "First observer incorrectly used Cow20 rather than source Cow10; failed scene retained",
+    "Second observer completed fifteen useful cases but terminated at unloaded final scene; complete-run flag stays false",
+    "Third observer only added missing equipment/totem cases; earlier useful cases were not rerun"
+  ]
+}

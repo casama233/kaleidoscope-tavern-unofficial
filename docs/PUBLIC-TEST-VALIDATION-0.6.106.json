@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "status": "bounded_pass_with_known_issues",
+  "verified_at_utc": "2026-10-06T00:26:23Z",
+  "pair": {
+    "tavern": {
+      "version": "0.6.106",
+      "source_commit": "898aee05f57d051627b8a00314250d35343e5309",
+      "archive": "Kaleidoscope_Tavern_Unofficial_0.6.106_baseline1.mcaddon",
+      "archive_sha256": "2129d6d9c3758aac728cd371db8a391528232590d17116e1a08c5546713a6a71",
+      "bytes": 5405393,
+      "entries": 3955,
+      "baseline_receipt_sha256": "cf9f0078524eb2676f4fbfaf62ba79b358cbefaeb628e18c2dd2c684c7082b5e"
+    },
+    "world_liquor": {
+      "version": "0.1.67",
+      "source_commit": "68d53e4901b0d09d58844ea9135602d86a57e1de",
+      "archive": "Kaleidoscope_World_Liquor_Unofficial_0.1.67_preview1.mcaddon",
+      "archive_sha256": "92fa4f16682078739fd0d44e7ad1b368bad89f06feb06b57105c46f377ebc25e",
+      "bytes": 6774753,
+      "entries": 816,
+      "baseline_receipt_sha256": "8de6369863b86aab861f8d66873269333edd4a75df55e11624bce107c28c9d0e"
+    }
+  },
+  "runtime_change_scope": {
+    "tavern": "Restore only historical native-socket first-person rest/use shaker poses; immutable 0.6.105 remains unchanged",
+    "world_liquor": "Dependency-only identity and guide payload version update; 813 of 816 runtime files are byte-identical to 0.1.66; all 56 descriptors and 14 shaker recipes are preserved"
+  },
+  "ci": {
+    "tavern": {
+      "source_commit": "898aee05f57d051627b8a00314250d35343e5309",
+      "all_jobs_passed": 13,
+      "url": "https://github.com/casama233/kaleidoscope-tavern-unofficial/actions/runs/37392379579"
+    },
+    "world_liquor": {
+      "source_commit": "68d53e4901b0d09d58844ea9135602d86a57e1de",
+      "all_jobs_passed": 4,
+      "url": "https://github.com/casama233/kaleidoscope-world-liquor-unofficial/actions/runs/37393117417"
+    }
+  },
+  "native_client": {
+    "version": "Minecraft 1.26.52.3 x86_64 Linux",
+    "mode": "Creative test world, Efe",
+    "simulated_players": false,
+    "standalone_tavern_106": {
+      "status": "bounded_visibility_pass",
+      "passed": [
+        "Empty first-person resting shaker is visible within frame",
+        "Placed shaker accepted three actual wine inputs; picked-up filled shaker is visible in first-person rest",
+        "After actual 3900 ms use/release, cup and progress are visible in the immediate post-release snapshot",
+        "After the progress display expires, the cup remains visible",
+        "Third-person front-view held model is visible"
+      ],
+      "installed_pack_byte_verification": {
+        "bp_files": 802,
+        "rp_files": 3153,
+        "all_runtime_files_match_frozen_archive": true,
+        "world_pack_references_match_exact_versions": true
+      }
+    },
+    "exact_pair": {
+      "status": "bounded_pass",
+      "tested_at_utc": "2026-10-06T00:26:23Z",
+      "passed": [
+        "Cold-loaded final paired world successfully",
+        "Filled shaker remains fully visible to right of crosshair in first person after paired cold load",
+        "L67 ice_tea_q4 successfully given; Iced Black Tea name, icon and held bottle visible",
+        "Returned to slot 8; shaker remains visible",
+        "All four installed BP/RP trees exactly match frozen archives; world references exact versions 0.6.106 and 0.1.67"
+      ],
+      "normal_save_and_quit": true,
+      "installed_pack_byte_verification": {
+        "all_four_packs_match_frozen_archives": true,
+        "tavern_bp_files": 802,
+        "tavern_rp_files": 3153,
+        "world_liquor_bp_files": 305,
+        "world_liquor_rp_files": 511,
+        "world_pack_references_match_exact_versions": true
+      }
+    },
+    "known_issues": [
+      "STALE_HAND was observed while placement succeeded; its cause is unproven. Earlier SPACE_NOT_CLEAR warnings are not claimed to be resolved",
+      "External RGB outside the existing Java atlas domain uses disclosed flat overlay shading",
+      "Audio acceptance is unavailable in the tested environment",
+      "Exact Java camera-only Slightly Tipsy roll remains unimplemented"
+    ],
+    "limits": [
+      "No complete video-frame or all-waveform acceptance",
+      "No all-FOV or all-skin coverage",
+      "No Java rendered-client acceptance or full Java animation/pixel parity",
+      "No clean-client-log or exact expiry-deadline claim",
+      "Existing saved-world migration and full-family admission remain unverified"
+    ]
+  },
+  "java_first_person_arm": {
+    "status": "source_verified_separate_skin_arm_not_drawn_for_ordinary_nonempty_shaker",
+    "scope": "Minecraft 1.20.1 vanilla bytecode, Forge renderer hook and original Tavern shaker source; no Java rendered-client test",
+    "finding": "The ordinary nonempty item branch draws the item without a separate player skin arm. The absent separate first-person arm is consistent with the checked Java source and is not itself an unresolved shaker bug",
+    "primary_sources": {
+      "metadata": "https://piston-meta.mojang.com/v1/packages/c0a00f47b3dae01d83e21be9a646c9232379d9ab/1.20.1.json",
+      "client_sha1": "0c3ec587af28e5a785c0b4a7b8a30f9a8f78f838",
+      "mappings_sha1": "6c48521eed01fe2e8ecdadbd5ae348415f3c47da",
+      "shaker_source": "https://github.com/KaleidoscopeMods/KaleidoscopeTavern/blob/c4ec1880bd44cf3139d3ba744ab30bb379cf1416/src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "forge_contract": "https://github.com/MinecraftForge/MinecraftForge/blob/0ec923d7307eb15bef70d6916329642b733a21ed/src/main/java/net/minecraftforge/client/extensions/common/IClientItemExtensions.java",
+      "forge_renderer_patch": "https://github.com/MinecraftForge/MinecraftForge/blob/0ec923d7307eb15bef70d6916329642b733a21ed/patches/minecraft/net/minecraft/client/renderer/ItemInHandRenderer.java.patch"
+    }
+  },
+  "native_bds": {
+    "status": "not_run_for_0.6.106_0.1.67",
+    "prior_0.6.105_0.1.66": "Prior pair cold-load/restart evidence is separate and not represented as a new BDS run for this pair"
+  },
+  "release": {
+    "kind": "public test prerelease",
+    "full_client_acceptance": "pending",
+    "production_ready": false,
+    "live_deployment": false
+  }
+}

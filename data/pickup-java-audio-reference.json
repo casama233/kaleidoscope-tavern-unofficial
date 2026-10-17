@@ -1,0 +1,121 @@
+{
+  "version": "1.20.1",
+  "assetIndex": {
+    "id": "5",
+    "sha1": "e1e23f09e9f518f5b8f76dac10524ebf07691d86",
+    "size": 413067,
+    "totalSize": 650564794,
+    "url": "https://piston-meta.mojang.com/v1/packages/e1e23f09e9f518f5b8f76dac10524ebf07691d86/5.json"
+  },
+  "events": {
+    "entity.item_frame.remove_item": {
+      "sounds": [
+        "entity/itemframe/remove_item1",
+        "entity/itemframe/remove_item2",
+        "entity/itemframe/remove_item3",
+        "entity/itemframe/remove_item4"
+      ],
+      "subtitle": "subtitles.entity.item_frame.remove_item"
+    },
+    "block.glass.place": {
+      "sounds": [
+        "dig/stone1",
+        "dig/stone2",
+        "dig/stone3",
+        "dig/stone4"
+      ],
+      "subtitle": "subtitles.block.generic.place"
+    },
+    "block.stone.place": {
+      "sounds": [
+        "dig/stone1",
+        "dig/stone2",
+        "dig/stone3",
+        "dig/stone4"
+      ],
+      "subtitle": "subtitles.block.generic.place"
+    },
+    "block.amethyst_block.place": {
+      "sounds": [
+        "block/amethyst/place1",
+        "block/amethyst/place2",
+        "block/amethyst/place3",
+        "block/amethyst/place4"
+      ],
+      "subtitle": "subtitles.block.generic.place"
+    },
+    "entity.item.pickup": {
+      "sounds": [
+        "random/pop"
+      ],
+      "subtitle": "subtitles.entity.item.pickup"
+    }
+  },
+  "assets": {
+    "sounds/kt_pickup/entity/itemframe/remove_item1.ogg": {
+      "source": "minecraft/sounds/entity/itemframe/remove_item1.ogg",
+      "sha1": "83c8daabf4016b4a69a0aff792629776e646477a",
+      "sha256": "8dac5bc8df9d4157b32849f4d79f58daa78b3da52ff3976ad27f89d9595210be"
+    },
+    "sounds/kt_pickup/entity/itemframe/remove_item2.ogg": {
+      "source": "minecraft/sounds/entity/itemframe/remove_item2.ogg",
+      "sha1": "35a5c6a402a0f0091c1221a245ea9cc180975cc8",
+      "sha256": "acdf8a4812136ea960753036b764866fe1d8d690bb76ef21a768d424cb6b1e47"
+    },
+    "sounds/kt_pickup/entity/itemframe/remove_item3.ogg": {
+      "source": "minecraft/sounds/entity/itemframe/remove_item3.ogg",
+      "sha1": "54ae8bae3da40ea9a80739d7b36106bffaf8854c",
+      "sha256": "81e88fcb46b1f960d3f2c93cb2a80a684324b4921a518e0a447687dee19836b7"
+    },
+    "sounds/kt_pickup/entity/itemframe/remove_item4.ogg": {
+      "source": "minecraft/sounds/entity/itemframe/remove_item4.ogg",
+      "sha1": "7c58d79a33c20c776c6f592b80e96305034c6dbe",
+      "sha256": "9bba0de4f6bed39bbb2b9c5ecc134bcd25876a18006a23a68faf66c8e4c27358"
+    },
+    "sounds/kt_pickup/dig/stone1.ogg": {
+      "source": "minecraft/sounds/dig/stone1.ogg",
+      "sha1": "4e094ed8dfa98656d8fec52a7d20c5ee6098b6ad",
+      "sha256": "97f2a8a73b6f577b85c1a162c31810c7aff1ad1f34564dfdacebb64b26d1c7c6"
+    },
+    "sounds/kt_pickup/dig/stone2.ogg": {
+      "source": "minecraft/sounds/dig/stone2.ogg",
+      "sha1": "9c92f697142ae320584bf64c0d54381d59703528",
+      "sha256": "98a5c3197845526e6ca9e8a669ffda843cfae3f5c7ac842ee6aac8896bae03b2"
+    },
+    "sounds/kt_pickup/dig/stone3.ogg": {
+      "source": "minecraft/sounds/dig/stone3.ogg",
+      "sha1": "8f23c02475d388b23e5faa680eafe6b991d7a9d4",
+      "sha256": "19273f0e7e25b459ea29511dcbc4f7f209c04cea2fd1c34a16250737469ca51c"
+    },
+    "sounds/kt_pickup/dig/stone4.ogg": {
+      "source": "minecraft/sounds/dig/stone4.ogg",
+      "sha1": "363545a76277e5e47538b2dd3a0d6aa4f7a87d34",
+      "sha256": "b164e7324510480abac9518090e48439123ea05ebc48970e48fc59406729a197"
+    },
+    "sounds/kt_pickup/block/amethyst/place1.ogg": {
+      "source": "minecraft/sounds/block/amethyst/place1.ogg",
+      "sha1": "271f0b289d320620d5f8b4742867a4d0b1d24643",
+      "sha256": "3cbca4f7736b096aeedefa34857206c59e4814441895d799ec8dffe508fc17fc"
+    },
+    "sounds/kt_pickup/block/amethyst/place2.ogg": {
+      "source": "minecraft/sounds/block/amethyst/place2.ogg",
+      "sha1": "ece0b0833c26076209e1c1395571f8a5da5fa012",
+      "sha256": "f3d48829db5489266424b928b8274b1135de254f666cb3391f94cd2c342a09e7"
+    },
+    "sounds/kt_pickup/block/amethyst/place3.ogg": {
+      "source": "minecraft/sounds/block/amethyst/place3.ogg",
+      "sha1": "fd8e2fbd111d5f4f2a07650a37163cb956566777",
+      "sha256": "3847f95710e476f3877f76a9aa0874e17856e96fac63c52e18d099c55a2d0d99"
+    },
+    "sounds/kt_pickup/block/amethyst/place4.ogg": {
+      "source": "minecraft/sounds/block/amethyst/place4.ogg",
+      "sha1": "f5da4e2f7a3ef17e713e302190f63ad51f6e1654",
+      "sha256": "668024c8e7986817e6e068bcc211bf3a72a3a1faa04a00850d30c2c1f1ab2b64"
+    },
+    "sounds/kt_pickup/random/pop.ogg": {
+      "source": "minecraft/sounds/random/pop.ogg",
+      "sha1": "8f45b5faf6dfae2065846d26612f7552b73640dd",
+      "sha256": "5e3baf518a0104760dc06a2e0088b377433997b46511c1730db0e3ba6f2b0ca7"
+    }
+  }
+}

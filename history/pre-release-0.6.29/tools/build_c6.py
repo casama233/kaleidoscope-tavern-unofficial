@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+"""C6: source-mesh native stools, seventeen lights and sonic-effect guidance. No network/JAR execution."""
+from pathlib import Path
+import json,copy,hashlib,importlib.util,re,subprocess,sys
+from PIL import Image
+R=Path(__file__).resolve().parents[1];BP=R/'runtime/BP';RP=R/'runtime/RP';A=R/'art';N='kaleidoscope_tavern';V=[0,6,0]
+COLORS=['white','light_gray','gray','black','brown','red','orange','yellow','lime','green','cyan','light_blue','blue','purple','magenta','pink']
+TC=['白','淺灰','灰','黑','棕','紅','橙','黃','淺綠','綠','青','淺藍','藍','紫','洋紅','粉紅'];SC=['白','浅灰','灰','黑','棕','红','橙','黄','浅绿','绿','青','浅蓝','蓝','紫','洋红','粉红'];TW=dict(zip(COLORS,TC));CN=dict(zip(COLORS,SC));TW['colorless']='無';CN['colorless']='无'
+def load(p):return json.loads(p.read_text(encoding='utf-8'))
+def dump(p,d):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def dedupe_lang(p,keep_last=False):
+ lines=p.read_text(encoding='utf-8-sig').splitlines();chosen={}
+ seq=range(len(lines)-1,-1,-1) if keep_last else range(len(lines))
+ for i in seq:
+  s=lines[i].strip()
+  if s and not s.startswith('#') and '=' in s:
+   key=s.split('=',1)[0]
+   if key not in chosen:chosen[key]=i
+ out=[]
+ for i,line in enumerate(lines):
+  s=line.strip()
+  if s and not s.startswith('#') and '=' in s and chosen.get(s.split('=',1)[0])!=i:continue
+  out.append(line)
+ p.write_text('\n'.join(out).rstrip()+'\n',encoding='utf-8')
+def mod(p):return json.loads(p.read_text(encoding='utf-8').split(' = ',1)[1].rsplit(';',1)[0])
+def main():
+ vis={v['key']:v for v in load(A/'interfaces/asset-registry.json')['visuals']};terrain=load(RP/'textures/terrain_texture.json');icons=load(RP/'textures/item_texture.json');names=mod(BP/'scripts/data/names.js')
+ spec=importlib.util.spec_from_file_location('c6_original_renderer',A/'tools/render_preview.py');renderer=importlib.util.module_from_spec(spec);spec.loader.exec_module(renderer)
+ icon_records=[];bindings=[];source_records=[]
+ def protect(p,kind):source_records.append({'path':str(p.relative_to(R)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'kind':kind})
+ def components(geometry,materials):return {'minecraft:geometry':geometry,'minecraft:material_instances':materials,'minecraft:destructible_by_mining':{'seconds_to_destroy':.5},'minecraft:destructible_by_explosion':{'explosion_resistance':3600000},'minecraft:movable':{'movement_type':'immovable'},'minecraft:loot':'loot_tables/empty.json','minecraft:light_dampening':0}
+ def glassware_holder_geometry():
+  holder=copy.deepcopy(load(RP/'models/entity/glassware_holder.geo.json')['minecraft:geometry'][0]);glass=copy.deepcopy(load(RP/'models/entity/empty_glassware.geo.json')['minecraft:geometry'][0])
+  holder['description']['identifier']='geometry.kt_runtime.glassware_holder';root=copy.deepcopy(holder['bones'][0]);root['name']='holder'
+  def remap(cube,prefix,scale=1,offset=None):
+   cube=copy.deepcopy(cube)
+   if offset:
+    for key in ['origin','pivot']:
+     if key in cube:cube[key]=[cube[key][0]+offset[0],cube[key][1]+offset[1],cube[key][2]+offset[2]]
+   uv=cube.get('uv',{})
+   if isinstance(uv,dict):
+    for face in uv.values():
+     if not isinstance(face,dict):continue
+     face['material_instance']=prefix+'_unshaded' if face.get('material_instance')=='unshaded' else prefix
+     if scale!=1:
+      if 'uv'in face:face['uv']=[v*scale for v in face['uv']]
+      if 'uv_size'in face:face['uv_size']=[v*scale for v in face['uv_size']]
+   return cube
+  root['cubes']=[remap(c,'holder')for c in root['cubes']];bones=[root]
+  # Java renders block-model coordinates in 0..16 space, then translates
+  # (-4, 12.16, 12 + row*8) and rotates 180 degrees around X. The Bedrock
+  # source mesh uses centered X/Z coordinates but bottom-origin Y, so convert
+  # the Java Z translation by -8 while leaving its Y translation unchanged.
+  for i,(x,z) in enumerate([(-4,-4),(4,-4),(-4,4),(4,4)]):
+   offset=[x,12.16,z];bones.append({'name':f'slot_{i}','pivot':offset,'rotation':[180,0,0],'cubes':[remap(c,'glass',2,offset)for c in glass['bones'][0]['cubes']]})
+  holder['bones']=bones
+  def clean(v):
+   if isinstance(v,float)and v.is_integer():return int(v)
+   if isinstance(v,list):return [clean(x)for x in v]
+   if isinstance(v,dict):return {k:clean(x)for k,x in v.items()}
+   return v
+  return clean({'format_version':'1.21.0','minecraft:geometry':[holder]})
+ def item(short,visual):
+  # Rasterized original model/texture icon: explicitly derived, NOT an untouched original GUI sprite.
+  geom=load(A/visual['geometry']['file']);tex=A/visual['textures'][0]['file'];teximg=Image.open(tex).convert('RGBA')
+  image=renderer.raster(renderer.all_faces(renderer.decode_geo(geom)),teximg,size=64,yaw=35,pitch=25,cull=True)
+  target=RP/f'textures/kt_runtime/icons/{short}.png';target.parent.mkdir(parents=True,exist_ok=True);image.save(target)
+  key='kt_c6_'+short;icons['texture_data'][key]={'textures':'textures/kt_runtime/icons/'+short}
+  dump(BP/f'items/{short}.json',{'format_version':'1.26.50','minecraft:item':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'}},'components':{'minecraft:icon':key,'minecraft:max_stack_size':64,'minecraft:display_name':{'value':'item.'+N+':'+short+'.name'},'minecraft:interact_button':'action.interact.kt_furniture'}}})
+  icon_records.append({'item':N+':'+short,'file':str(target.relative_to(R)),'source_geometry':visual['geometry']['file'],'source_texture':str(tex.relative_to(A)),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'kind':'derived64px_model_render','engine_gui_parity':False})
+ def recipe_ingredient(val):
+  if 'item'in val:return {'item':val['item']}
+  tag=val.get('tag')
+  if tag=='c:ingots/iron':return {'item':'minecraft:iron_ingot'}
+  if tag=='c:nuggets/gold':return {'item':'minecraft:gold_nugget'}
+  if tag=='c:nuggets/iron':return {'item':'minecraft:iron_nugget'}
+  if tag=='c:glass_panes':return {'item':'minecraft:glass_pane'}
+  if tag=='minecraft:trapdoors':return {'item':'minecraft:trapdoor'}
+  if tag=='minecraft:fences':return {'item':'minecraft:oak_fence'}
+  if tag=='c:gems/diamond':return {'item':'minecraft:diamond'}
+  if isinstance(tag,str)and tag.startswith('c:dyes/'):return {'item':'minecraft:'+tag.split('/')[-1]+'_dye'}
+  assert tag=='minecraft:planks';return {'tag':tag}
+ def recipe(short,record=True):
+  src=R/f'data/upstream/recipes/{short}.json';d=load(src);result={'item':d['result']['id'],'count':d['result']['count']}
+  if d['type']=='minecraft:crafting_shaped':
+   key={letter:recipe_ingredient(val)for letter,val in d['key'].items()}
+   dump(BP/f'recipes/{short}.json',{'format_version':'1.20.10','minecraft:recipe_shaped':{'description':{'identifier':N+':'+short},'tags':['crafting_table'],'pattern':d['pattern'],'key':key,'result':result}})
+  elif d['type']=='minecraft:crafting_shapeless':
+   dump(BP/f'recipes/{short}.json',{'format_version':'1.20.10','minecraft:recipe_shapeless':{'description':{'identifier':N+':'+short},'tags':['crafting_table'],'ingredients':[recipe_ingredient(x)for x in d['ingredients']],'result':result}})
+  else:raise AssertionError('unsupported crafting type '+str(d['type']))
+  if record:protect(src,'original JAR recipe; c:ingots/iron mapped explicitly to vanilla iron_ingot')
+ def labels(short,color,family):
+  for lc in ['zh_TW','zh_CN','en_US']:
+   label=(color.replace('_',' ').title()+(' Bar Stool'if family=='stool'else' String Lights'))if lc=='en_US'else (TW[color]+'色'+('高腳凳'if family=='stool'else'彩燈') if lc=='zh_TW' else CN[color]+'色'+('高脚凳'if family=='stool'else'彩灯'))
+   names[lc][N+':'+short]=label
+ for color in COLORS:
+  visual=vis['bar_stool_'+color];short=color+'_bar_stool';block='stool_'+color;entity='seat_'+color
+  item(short,visual);labels(short,color,'stool');recipe(short)
+  atlas=visual['binding']['texture_aliases']['default'];texkey='kt_c6_stool_'+color;terrain['texture_data'][texkey]={'textures':atlas}
+  c=components({'identifier':'geometry.kt_runtime.invisible'},{'*':{'texture':texkey,'render_method':'alpha_test'}})
+  c.update({'minecraft:collision_box':{'origin':[-5,0,-5],'size':[10,14,10]},'minecraft:selection_box':{'origin':[-6,0,-6],'size':[12,16,12]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':stool':{},'minecraft:item_visual':{'geometry':{'identifier':visual['geometry']['identifier']},'material_instances':{'*':{'texture':texkey,'render_method':'alpha_test'}}}})
+  dump(BP/f'blocks/{block}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+block,'states':{N+':facing':[0,1,2,3]}},'components':c}})
+  ent={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':'+entity,'is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':seat_yaw':{'type':'int','range':[-180,180],'default':0,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]},'minecraft:rideable':{'seat_count':1,'family_types':['player'],'pull_in_entities':False,'crouching_skip_interact':True,'rider_can_interact':False,'interact_text':'action.interact.kt_sit','dismount_mode':'default','seats':[{'position':[0,.8125,0]}]}}}}
+  dump(BP/f'entities/{entity}.json',ent)
+  client={'identifier':N+':'+entity,'materials':{'default':'entity_alphatest'},'textures':{'default':atlas},'geometry':{'default':visual['geometry']['identifier']},'animations':{'seat_turn':'animation.kt_runtime.stool.turn'},'scripts':{'initialize':["v.kt_seat_angle = 0;"],'pre_animation':["v.kt_seat_angle = math.lerprotate(v.kt_seat_angle, q.property('kaleidoscope_tavern:seat_yaw'), math.clamp(q.delta_time * 12, 0, 1));"],'animate':['seat_turn']},'render_controllers':['controller.render.kt_runtime.furniture']}
+  dump(RP/f'entity/runtime_{entity}.entity.json',{'format_version':'1.10.0','minecraft:client_entity':{'description':client}})
+  bindings.append({'kind':'stool','color':color,'item':N+':'+short,'block':N+':'+block,'helper':N+':'+entity,'source_visual':visual['key'],'geometry':visual['geometry']['identifier'],'texture':atlas,'source_anchor_y':.875,'source_explicit_rider_offset':-.25,'native_seat_y':.8125,'full_collision_parity':False})
+ for color in ['colorless',*COLORS]:
+  short='string_lights_'+color;block='light_'+color;visual=vis[short];item(short,visual);labels(short,color,'light');recipe(short)
+  c=components(copy.deepcopy(visual['binding']['geometry']),copy.deepcopy(visual['binding']['materials']))
+  c.update({'minecraft:collision_box':False,'minecraft:selection_box':{'origin':[-8,4,2],'size':[16,12,6]},'minecraft:light_emission':15,N+':string_light':{},'minecraft:item_visual':copy.deepcopy(visual['binding']['item_visual'])})
+  perms=[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+  dump(BP/f'blocks/{block}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+block,'states':{N+':facing':[0,1,2,3]}},'components':c,'permutations':perms}})
+  bindings.append({'kind':'light','color':color,'item':N+':'+short,'block':N+':'+block,'source_visual':visual['key'],'geometry':visual['geometry']['identifier'],'light_emission':15,'waterlogged':False})
+ sofa_geo={'single':'geometry.kt_assets_a4.sofa_single','left':'geometry.kt_assets_a4.sofa_left','right':'geometry.kt_assets_a4.sofa_right','middle':'geometry.kt_assets_a4.sofa_middle','left_corner':'geometry.kt_assets_a4.sofa_left_corner','right_corner':'geometry.kt_assets_a4.sofa_right_corner'}
+ connection_names=['single','left','right','middle','left_corner','right_corner']
+ for color in COLORS:
+  short=color+'_sofa';recipe(short,False);texkey='kt_assets_a4_block_deco_sofa_'+color;itemtex='kt_assets_a17_item_display_'+color+'_sofa';itemgeo=load(RP/f'models/entity/item_display_{color}_sofa.geo.json')['minecraft:geometry'][0]['description']['identifier']
+  c=components({'identifier':sofa_geo['single']},{'*':{'texture':texkey,'render_method':'alpha_test'}})
+  c.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,8,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':sofa':{},'minecraft:item_visual':{'geometry':{'identifier':itemgeo},'material_instances':{'*':{'texture':itemtex,'render_method':'alpha_test'}}}})
+  perms=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':sofa_geo[name]}}}for i,name in enumerate(connection_names)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]}},'components':c,'permutations':perms}})
+  bindings.append({'kind':'sofa','color':color,'item':N+':'+short,'block':N+':'+short,'helper':N+':sofa_seat','geometry_by_connection':sofa_geo,'world_texture':texkey,'item_geometry':itemgeo,'item_texture':itemtex,'source_anchor_y':.5125,'source_explicit_rider_offset':-.25,'native_seat_y':.45,'connection_states':6,'waterlogged':False,'full_collision_parity':False})
+ sofa_ent={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':sofa_seat','is_spawnable':False,'is_summonable':True,'is_experimental':False},'components':{'minecraft:type_family':{'family':['kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]},'minecraft:rideable':{'seat_count':1,'family_types':['player'],'pull_in_entities':False,'crouching_skip_interact':True,'rider_can_interact':False,'interact_text':'action.interact.kt_sit','dismount_mode':'default','seats':[{'position':[0,.45,0]}]}}}}
+ dump(BP/'entities/sofa_seat.json',sofa_ent)
+ sofa_client={'identifier':N+':sofa_seat','materials':{'default':'entity_alphatest'},'textures':{'default':'textures/kaleidoscope_tavern/block/deco/sofa/blue'},'geometry':{'default':'geometry.kt_runtime.invisible'},'render_controllers':['controller.render.kt_runtime.furniture']}
+ dump(RP/'entity/runtime_sofa_seat.entity.json',{'format_version':'1.10.0','minecraft:client_entity':{'description':sofa_client}})
+ table_geo={'single':'geometry.kt_assets_a12.table_single','left':'geometry.kt_assets_a12.table_left','middle':'geometry.kt_assets_a12.table_middle','right':'geometry.kt_assets_a12.table_right','left_rot':'geometry.kt_assets_a12.table_left_rot','middle_rot':'geometry.kt_assets_a12.table_middle_rot','right_rot':'geometry.kt_assets_a12.table_right_rot'}
+ recipe('table',False)
+ # Bedrock has no minecraft:fences recipe tag. The upstream tagged fence slot is
+ # expanded into twelve concrete vanilla fence recipes; the Java tag itself never
+ # appears in a Bedrock recipe.
+ table_fences=['oak','spruce','birch','jungle','acacia','dark_oak','mangrove','cherry','bamboo','crimson','warped','nether_brick']
+ table_template=load(BP/'recipes/table.json')
+ for wood in table_fences:
+  table_recipe=copy.deepcopy(table_template);table_obj=table_recipe['minecraft:recipe_shaped']
+  recipe_name='table' if wood=='oak' else 'table_fence_'+wood
+  fence_id='minecraft:'+wood+'_fence'
+  table_obj['description']['identifier']=N+':'+recipe_name;table_obj['key']['F']={'item':fence_id}
+  table_obj['unlock']=[{'item':fence_id},{'item':'minecraft:iron_ingot'},{'tag':'minecraft:planks'}]
+  dump(BP/'recipes'/f'{recipe_name}.json',table_recipe)
+ table_itemgeo=load(RP/'models/entity/item_display_table.geo.json')['minecraft:geometry'][0]['description']['identifier']
+ tc=components({'identifier':table_geo['single']},{'*':{'texture':'kt_assets_a12_block_table','render_method':'alpha_test'}})
+ tc.update({'minecraft:collision_box':{'origin':[-8,13,-8],'size':[16,3,16]},'minecraft:selection_box':{'origin':[-8,13,-8],'size':[16,3,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':table':{},'minecraft:item_visual':{'geometry':{'identifier':table_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_table','render_method':'alpha_test'}}}})
+ tp=[{'condition':f"q.block_state('{N}:position') == 0",'components':{'minecraft:geometry':{'identifier':table_geo['single']}}}]
+ for directions,suffix in [(('north','south'),''),(('east','west'),'_rot')]:
+  axis_cond=' || '.join([f"q.block_state('minecraft:cardinal_direction') == '{d}'" for d in directions])
+  for pos,name in [(1,'right'),(2,'middle'),(3,'left')]:tp.append({'condition':f"({axis_cond}) && q.block_state('{N}:position') == {pos}",'components':{'minecraft:geometry':{'identifier':table_geo[name+suffix]}}})
+ dump(BP/'blocks/table.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':table','menu_category':{'category':'construction'},'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction']}},'states':{N+':axis':[0,1],N+':position':[0,1,2,3]}},'components':tc,'permutations':tp}})
+ bindings.append({'kind':'table','item':N+':table','block':N+':table','geometry_by_state':table_geo,'world_texture':'kt_assets_a12_block_table','item_geometry':table_itemgeo,'item_texture':'kt_assets_a17_item_display_table','engine_axis_state':'minecraft:cardinal_direction','legacy_axis_state':N+':axis','axis_states':2,'position_states':4,'source_collision':{'origin':[-8,13,-8],'size':[16,3,16]},'waterlogged':False,'exact_collision_parity':True})
+ bar_geo={name:'geometry.kt_assets_a10.bar_counter_'+name for name in connection_names}
+ recipe('bar_counter',False);bar_itemgeo=load(RP/'models/entity/item_display_bar_counter.geo.json')['minecraft:geometry'][0]['description']['identifier']
+ bc=components({'identifier':bar_geo['single']},{'*':{'texture':'kt_assets_a10_block_deco_bar_counter','render_method':'alpha_test'}})
+ bc.update({'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':bar_counter':{},'minecraft:item_visual':{'geometry':{'identifier':bar_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_bar_counter','render_method':'alpha_test'}}}})
+ bp=[{'condition':f"q.block_state('{N}:connection') == {i}",'components':{'minecraft:geometry':{'identifier':bar_geo[name]}}}for i,name in enumerate(connection_names)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+ dump(BP/'blocks/bar_counter.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':bar_counter','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':connection':[0,1,2,3,4,5]},'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180}}},'components':bc,'permutations':bp}})
+ bindings.append({'kind':'bar_counter','item':N+':bar_counter','block':N+':bar_counter','geometry_by_connection':bar_geo,'world_texture':'kt_assets_a10_block_deco_bar_counter','item_geometry':bar_itemgeo,'item_texture':'kt_assets_a17_item_display_bar_counter','connection_states':6,'waterlogged':False,'exact_collision_parity':True,'native_placement':'implicit_block_item+placement_direction'})
+ dump(RP/'models/entity/runtime_glassware_holder.geo.json',glassware_holder_geometry());recipe('glassware_holder',False);holder_itemgeo=load(RP/'models/entity/item_display_glassware_holder.geo.json')['minecraft:geometry'][0]['description']['identifier'];slot_states=[N+':glass_slot_'+str(i)for i in range(4)]
+ bone_visibility={f'slot_{i}':f"q.block_state('{slot_states[i]}') == 1"for i in range(4)}
+ hm={'*':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'blend'},'holder':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'blend','face_dimming':True},'holder_unshaded':{'texture':'kt_assets_a6_block_deco_glassware_holder','render_method':'blend','ambient_occlusion':0,'face_dimming':False},'glass':{'texture':'kt_assets_a7_block_mixology_empty_glassware','render_method':'blend','ambient_occlusion':0,'face_dimming':True},'glass_unshaded':{'texture':'kt_assets_a7_block_mixology_empty_glassware','render_method':'blend','ambient_occlusion':0,'face_dimming':False}}
+ hc=components({'identifier':'geometry.kt_runtime.glassware_holder','bone_visibility':bone_visibility},hm);hc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':.8},'minecraft:destructible_by_explosion':{'explosion_resistance':.8},'minecraft:collision_box':{'origin':[-8,11,-7],'size':[16,5,14]},'minecraft:selection_box':{'origin':[-8,11,-7],'size':[16,5,14]},'minecraft:light_emission':8,'minecraft:item_visual':{'geometry':{'identifier':holder_itemgeo},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_glassware_holder','render_method':'alpha_test'},'unshaded':{'texture':'kt_assets_a17_item_display_glassware_holder','render_method':'alpha_test','ambient_occlusion':0,'face_dimming':False}}},N+':glassware_holder':{}})
+ hp=[]
+ for i in range(4):
+  pc={'minecraft:transformation':{'rotation':[0,-90*i,0]}}
+  if i%2==1:pc.update({'minecraft:collision_box':{'origin':[-7,11,-8],'size':[14,5,16]},'minecraft:selection_box':{'origin':[-7,11,-8],'size':[14,5,16]}})
+  hp.append({'condition':f"q.block_state('{N}:facing') == {i}",'components':pc})
+ dump(BP/'blocks/glassware_holder.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':glassware_holder','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],**{state:[0,1]for state in slot_states}},'traits':{'minecraft:placement_direction':{'enabled_states':['minecraft:cardinal_direction'],'y_rotation_offset':180}}},'components':hc,'permutations':hp}})
+ bindings.append({'kind':'glassware_holder','item':N+':glassware_holder','block':N+':glassware_holder','geometry':'geometry.kt_runtime.glassware_holder','source_geometry':'geometry.kt_assets_a6.glassware_holder','item_geometry':holder_itemgeo,'slot_states':slot_states,'slot_count':4,'light_emission':8,'source_collision_ns':{'origin':[-8,11,-7],'size':[16,5,14]},'source_collision_ew':{'origin':[-7,11,-8],'size':[14,5,16]},'display_helpers':0,'metadata_items_supported':False,'exact_collision_parity':True,'native_placement':'implicit_block_item+placement_direction'})
+ holder_bases=['champagne','glowflower_brew','honey_wine','ice_wine','luminous_bride','plum_wine','polaris_sweet_white','red_queen','sakura_wine','sauvignon_blanc_dry_white','sherry','vinegar','whiskey','wine'];holder_blocked=['brandy','carignan','mother_snow','miners_star','madame_shexiang','sunset_glow','riesling_dry_white','sweet_berry_wine','vodka','rum'];holder_kinds=['empty_bottle',*holder_bases];storage_kinds=['empty_bottle',*holder_bases,*holder_blocked]
+ recipe('holder',False)
+ holder_components=components({'identifier':'geometry.kt_assets_a10.holder'},{'*':{'texture':'kt_assets_a10_block_deco_holder','render_method':'alpha_test'}})
+ holder_components.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2.5},'minecraft:destructible_by_explosion':{'explosion_resistance':2.5},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:collision_box':{'origin':[-3,0,-6],'size':[6,16,12]},'minecraft:selection_box':{'origin':[-3,0,-6],'size':[6,16,12]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':holder':{},'minecraft:item_visual':{'geometry':{'identifier':'geometry.kt_assets_a10.holder'},'material_instances':{'*':{'texture':'kt_assets_a10_block_deco_holder','render_method':'alpha_test'}}}})
+ holder_perms=[]
+ for i in range(4):
+  pc={'minecraft:transformation':{'rotation':[0,-90*i,0]}}
+  if i%2==1:pc.update({'minecraft:collision_box':{'origin':[-6,0,-3],'size':[12,16,6]},'minecraft:selection_box':{'origin':[-6,0,-3],'size':[12,16,6]}})
+  holder_perms.append({'condition':f"q.block_state('{N}:facing') == {i}",'components':pc})
+ dump(BP/'blocks/holder.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':holder','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':holder_kind':list(range(16))}},'components':holder_components,'permutations':holder_perms}})
+ holder_geometries={'empty_bottle':'geometry.kt_assets_a3.empty_bottle_faces'};holder_textures={'empty_bottle':terrain['texture_data']['kt_assets_a3_empty_bottle_faces']['textures']}
+ for base in [*holder_bases,*holder_blocked]:
+  bottle=load(BP/f'blocks/bottle_{base}.json')['minecraft:block'];holder_geometries[base]=bottle['components']['minecraft:geometry']['identifier'];texkey=bottle['components']['minecraft:material_instances']['*']['texture'];holder_textures[base]=terrain['texture_data'][texkey]['textures']
+ helper={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':holder_bottle_visual','is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':holder_kind':{'type':'int','range':[1,15],'default':1,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_holder_visual','kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]}}}}
+ dump(BP/'entities/holder_bottle_visual.json',helper)
+ geom_map={f'kind_{i+1}':holder_geometries[k]for i,k in enumerate(holder_kinds)};tex_map={f'kind_{i+1}':holder_textures[k]for i,k in enumerate(holder_kinds)}
+ client={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':holder_bottle_visual','materials':{'default':'entity_alphatest'},'textures':tex_map,'geometry':geom_map,'scripts':{'scale':'0.95'},'render_controllers':['controller.render.kt_runtime.holder_bottle']}}}
+ dump(RP/'entity/runtime_holder_bottle_visual.entity.json',client)
+ ga=[f'Geometry.kind_{i+1}'for i in range(15)];ta=[f'Texture.kind_{i+1}'for i in range(15)]
+ dump(RP/'render_controllers/runtime_holder.render_controllers.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.holder_bottle':{'arrays':{'geometries':{'Array.kind':ga},'textures':{'Array.kind':ta}},'geometry':f"Array.kind[q.property('{N}:holder_kind') - 1]",'materials':[{'*':'Material.default'}],'textures':[f"Array.kind[q.property('{N}:holder_kind') - 1]"]}}})
+ bindings.append({'kind':'holder','item':N+':holder','block':N+':holder','helper':N+':holder_bottle_visual','source_geometry':'geometry.kt_assets_a10.holder','display_kinds':holder_kinds,'allowed_bases':holder_bases,'blocked_bases':holder_blocked,'state_exact_item_id':True,'source_collision_ns':{'origin':[-3,0,-6],'size':[6,16,12]},'source_collision_ew':{'origin':[-6,0,-3],'size':[12,16,6]},'redstone_pop':'ADAPTED_DRINKS','molotov':'PENDING_PROJECTILE_TYPE','engine_accepted':False})
+ tilted_blocked=['brandy','carignan'];tilted_allowed=[x for x in holder_bases+holder_blocked if x not in tilted_blocked]
+ recipe('tilted_rack',False)
+ trc=components({'identifier':'geometry.kt_assets_a6.tilted_rack'},{'*':{'texture':'kt_assets_a6_block_deco_tilted_rack','render_method':'alpha_test'}})
+ trc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2.5},'minecraft:destructible_by_explosion':{'explosion_resistance':2.5},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:collision_box':{'origin':[-8,0,-3],'size':[16,14,10]},'minecraft:selection_box':{'origin':[-8,0,-3],'size':[16,14,10]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':tilted_rack':{},'minecraft:item_visual':{'geometry':{'identifier':'geometry.kt_assets_a17.item_display_tilted_rack'},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_tilted_rack','render_method':'alpha_test'}}}})
+ trp=[
+  {'condition':f"q.block_state('{N}:facing') == 0",'components':{'minecraft:transformation':{'rotation':[0,0,0]}}},
+  {'condition':f"q.block_state('{N}:facing') == 1",'components':{'minecraft:transformation':{'rotation':[0,-90,0]},'minecraft:collision_box':{'origin':[-7,0,-8],'size':[10,14,16]},'minecraft:selection_box':{'origin':[-7,0,-8],'size':[10,14,16]}}},
+  {'condition':f"q.block_state('{N}:facing') == 2",'components':{'minecraft:transformation':{'rotation':[0,-180,0]},'minecraft:collision_box':{'origin':[-8,0,-7],'size':[16,14,10]},'minecraft:selection_box':{'origin':[-8,0,-7],'size':[16,14,10]}}},
+  {'condition':f"q.block_state('{N}:facing') == 3",'components':{'minecraft:transformation':{'rotation':[0,-270,0]},'minecraft:collision_box':{'origin':[-3,0,-8],'size':[10,14,16]},'minecraft:selection_box':{'origin':[-3,0,-8],'size':[10,14,16]}}}
+ ]
+ dump(BP/'blocks/tilted_rack.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':tilted_rack','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3]}},'components':trc,'permutations':trp}})
+ trhelper={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':tilted_rack_bottle_visual','is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':storage_kind':{'type':'int','range':[1,25],'default':1,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_tilted_rack_visual','kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]}}}}
+ dump(BP/'entities/tilted_rack_bottle_visual.json',trhelper)
+ tg={f'kind_{i+1}':holder_geometries[k]for i,k in enumerate(storage_kinds)};tt={f'kind_{i+1}':holder_textures[k]for i,k in enumerate(storage_kinds)}
+ tc={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':tilted_rack_bottle_visual','materials':{'default':'entity_alphatest'},'textures':tt,'geometry':tg,'animations':{'rest':'animation.kt_runtime.storage_bottle.tilted'},'scripts':{'scale':'0.9','animate':['rest']},'render_controllers':['controller.render.kt_runtime.tilted_rack_bottle']}}}
+ dump(RP/'entity/runtime_tilted_rack_bottle_visual.entity.json',tc)
+ tga=[f'Geometry.kind_{i+1}'for i in range(25)];tta=[f'Texture.kind_{i+1}'for i in range(25)]
+ dump(RP/'render_controllers/runtime_tilted_rack.render_controllers.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.tilted_rack_bottle':{'arrays':{'geometries':{'Array.kind':tga},'textures':{'Array.kind':tta}},'geometry':f"Array.kind[q.property('{N}:storage_kind') - 1]",'materials':[{'*':'Material.default'}],'textures':[f"Array.kind[q.property('{N}:storage_kind') - 1]"]}}})
+ bindings.append({'kind':'tilted_rack','item':N+':tilted_rack','block':N+':tilted_rack','helper':N+':tilted_rack_bottle_visual','source_geometry':'geometry.kt_assets_a6.tilted_rack','item_geometry':'geometry.kt_assets_a17.item_display_tilted_rack','slots':3,'display_kinds':storage_kinds,'allowed_bases':tilted_allowed,'blocked_bases':tilted_blocked,'state_exact_item_id':True,'source_collision_north':{'origin':[-8,0,-3],'size':[16,14,10]},'source_collision_south':{'origin':[-8,0,-7],'size':[16,14,10]},'source_collision_east':{'origin':[-7,0,-8],'size':[10,14,16]},'source_collision_west':{'origin':[-3,0,-8],'size':[10,14,16]},'redstone_pop':'ADAPTED_DRINKS','molotov':'PENDING_PROJECTILE_TYPE','engine_accepted':False})
+ recipe('circular_rack',False)
+ crc=components({'identifier':'geometry.kt_assets_a6.circular_rack'},{'*':{'texture':'kt_assets_a6_block_deco_circular_rack','render_method':'alpha_test'}})
+ crc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2.5},'minecraft:destructible_by_explosion':{'explosion_resistance':2.5},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:light_emission':14,'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,2,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,2,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':circular_rack':{},'minecraft:item_visual':{'geometry':{'identifier':'geometry.kt_assets_a17.item_display_circular_rack'},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_circular_rack','render_method':'alpha_test'}}}})
+ crp=[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+ dump(BP/'blocks/circular_rack.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':circular_rack','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3]}},'components':crc,'permutations':crp}})
+ crhelper={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':circular_rack_bottle_visual','is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':storage_kind':{'type':'int','range':[1,25],'default':1,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_circular_rack_visual','kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]}}}}
+ dump(BP/'entities/circular_rack_bottle_visual.json',crhelper)
+ cg={f'kind_{i+1}':holder_geometries[k]for i,k in enumerate(storage_kinds)};ct={f'kind_{i+1}':holder_textures[k]for i,k in enumerate(storage_kinds)}
+ cc={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':circular_rack_bottle_visual','materials':{'default':'entity_alphatest'},'textures':ct,'geometry':cg,'scripts':{'scale':'0.82'},'render_controllers':['controller.render.kt_runtime.circular_rack_bottle']}}}
+ dump(RP/'entity/runtime_circular_rack_bottle_visual.entity.json',cc)
+ cga=[f'Geometry.kind_{i+1}'for i in range(25)];cta=[f'Texture.kind_{i+1}'for i in range(25)]
+ dump(RP/'render_controllers/runtime_circular_rack.render_controllers.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.circular_rack_bottle':{'arrays':{'geometries':{'Array.kind':cga},'textures':{'Array.kind':cta}},'geometry':f"Array.kind[q.property('{N}:storage_kind') - 1]",'materials':[{'*':'Material.default'}],'textures':[f"Array.kind[q.property('{N}:storage_kind') - 1]"]}}})
+ thrown={'format_version':'1.26.50','minecraft:entity':{'description':{'identifier':N+':thrown_drink','is_spawnable':False,'is_summonable':True,'spawn_category':'misc','properties':{N+':storage_kind':{'type':'int','range':[1,25],'default':2,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['projectile','kt_thrown_drink']},'minecraft:collision_box':{'height':.25,'width':.25},'minecraft:physics':{},'minecraft:projectile':{'anchor':'middle','gravity':.05,'inertia':.99,'liquid_inertia':.8,'power':1.0,'uncertainty_base':0,'uncertainty_multiplier':0,'hit_sound':'glass'},'minecraft:pushable_by_entity':{},'minecraft:pushable_by_block':{}}}}
+ dump(BP/'entities/thrown_drink.json',thrown)
+ thrown_client={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':thrown_drink','materials':{'default':'entity_alphatest'},'textures':ct,'geometry':cg,'scripts':{'scale':'0.6'},'render_controllers':['controller.render.kt_runtime.circular_rack_bottle']}}}
+ dump(RP/'entity/runtime_thrown_drink.entity.json',thrown_client)
+ bindings.append({'kind':'circular_rack','item':N+':circular_rack','block':N+':circular_rack','helper':N+':circular_rack_bottle_visual','source_geometry':'geometry.kt_assets_a6.circular_rack','item_geometry':'geometry.kt_assets_a17.item_display_circular_rack','slots':6,'display_kinds':storage_kinds,'allowed_bases':holder_bases+holder_blocked,'blocked_bases':[],'state_exact_item_id':True,'source_collision':{'origin':[-8,0,-8],'size':[16,2,16]},'light_emission':14,'particle':'minecraft:endrod','particle_cadence':'20-tick Bedrock adapter; source Java client animateTick 1/8 chance','redstone_pop':'ADAPTED_DRINKS','molotov':'PENDING_PROJECTILE_TYPE','engine_accepted':False})
+ cabinet_specs={'bar_cabinet':('kt_assets_a6_block_brew_bar_cabinet','kt_assets_a17_item_display_bar_cabinet'),'glass_bar_cabinet':('kt_assets_a6_block_brew_glass_bar_cabinet','kt_assets_a17_item_display_glass_bar_cabinet')}
+ recipe('bar_cabinet',False);recipe('glass_bar_cabinet',False)
+ glass_panes=['white','orange','magenta','light_blue','yellow','lime','pink','gray','light_gray','cyan','purple','blue','brown','green','red','black']
+ canonical=load(BP/'recipes/glass_bar_cabinet.json')['minecraft:recipe_shaped']
+ for color in glass_panes:
+  x=copy.deepcopy(canonical);x['description']['identifier']=N+':glass_bar_cabinet_'+color;x['key']['P']={'item':f'minecraft:{color}_stained_glass_pane'};dump(BP/f'recipes/glass_bar_cabinet_{color}.json',{'format_version':'1.20.10','minecraft:recipe_shaped':x})
+ for short,(tex,itemtex) in cabinet_specs.items():
+  geos={0:f'geometry.kt_assets_a6.{short}_single',1:f'geometry.kt_assets_a6.{short}_left',2:f'geometry.kt_assets_a6.{short}_middle',3:f'geometry.kt_assets_a6.{short}_right'}
+  cc=components({'identifier':geos[0]},{'*':{'texture':tex,'render_method':'alpha_test'}})
+  cc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2.5},'minecraft:destructible_by_explosion':{'explosion_resistance':2.5},'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':bar_cabinet':{},'minecraft:item_visual':{'geometry':{'identifier':f'geometry.kt_assets_a17.item_display_{short}'},'material_instances':{'*':{'texture':itemtex,'render_method':'alpha_test'}}}})
+  cp=[{'condition':f"q.block_state('{N}:position') == {p}",'components':{'minecraft:geometry':{'identifier':geos[p]}}}for p in range(4)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':position':[0,1,2,3]}},'components':cc,'permutations':cp}})
+  bindings.append({'kind':'bar_cabinet','style':'glass' if short.startswith('glass_') else 'wood','item':N+':'+short,'block':N+':'+short,'helper':N+':bar_cabinet_bottle_visual','geometry_by_position':{'single':geos[0],'left':geos[1],'middle':geos[2],'right':geos[3]},'item_geometry':f'geometry.kt_assets_a17.item_display_{short}','slots':2,'irregular_bases':['brandy','carignan'],'single_mode':True,'connection_states':4,'same_type_connect_only':True,'display_kinds':storage_kinds,'state_exact_item_id':True,'source_collision':{'origin':[-8,0,-8],'size':[16,16,16]},'engine_accepted':False})
+ helper={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':bar_cabinet_bottle_visual','is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':storage_kind':{'type':'int','range':[1,25],'default':1,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_bar_cabinet_visual','kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]}}}}
+ dump(BP/'entities/bar_cabinet_bottle_visual.json',helper)
+ bg={f'kind_{i+1}':holder_geometries[k]for i,k in enumerate(storage_kinds)};bt={f'kind_{i+1}':holder_textures[k]for i,k in enumerate(storage_kinds)}
+ bc={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':bar_cabinet_bottle_visual','materials':{'default':'entity_alphatest'},'textures':bt,'geometry':bg,'scripts':{'scale':'0.9'},'render_controllers':['controller.render.kt_runtime.bar_cabinet_bottle']}}}
+ dump(RP/'entity/runtime_bar_cabinet_bottle_visual.entity.json',bc)
+ bga=[f'Geometry.kind_{i+1}'for i in range(25)];bta=[f'Texture.kind_{i+1}'for i in range(25)]
+ dump(RP/'render_controllers/runtime_bar_cabinet.render_controllers.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.bar_cabinet_bottle':{'arrays':{'geometries':{'Array.kind':bga},'textures':{'Array.kind':bta}},'geometry':f"Array.kind[q.property('{N}:storage_kind') - 1]",'materials':[{'*':'Material.default'}],'textures':[f"Array.kind[q.property('{N}:storage_kind') - 1]"]}}})
+ cellar_blocked=holder_blocked
+ recipe('cellar_cabinet',False)
+ cellar_trapdoors=['trapdoor','spruce_trapdoor','birch_trapdoor','jungle_trapdoor','acacia_trapdoor','dark_oak_trapdoor','mangrove_trapdoor','cherry_trapdoor','bamboo_trapdoor','crimson_trapdoor','warped_trapdoor','iron_trapdoor','copper_trapdoor','exposed_copper_trapdoor','weathered_copper_trapdoor','oxidized_copper_trapdoor','waxed_copper_trapdoor','waxed_exposed_copper_trapdoor','waxed_weathered_copper_trapdoor','waxed_oxidized_copper_trapdoor']
+ cellar_canonical=load(BP/'recipes/cellar_cabinet.json')['minecraft:recipe_shaped']
+ cellar_canonical['key']['T']={'item':'minecraft:trapdoor'}
+ cellar_canonical['unlock']=[{'item':'kaleidoscope_tavern:grapevine'},{'item':'minecraft:trapdoor'}]
+ dump(BP/'recipes/cellar_cabinet.json',{'format_version':'1.20.10','minecraft:recipe_shaped':cellar_canonical})
+ for trap in cellar_trapdoors[1:]:
+  x=copy.deepcopy(cellar_canonical);x['description']['identifier']=N+':cellar_cabinet_'+trap;x['key']['T']={'item':'minecraft:'+trap};x['unlock']=[{'item':'kaleidoscope_tavern:grapevine'},{'item':'minecraft:'+trap}];dump(BP/f'recipes/cellar_cabinet_{trap}.json',{'format_version':'1.20.10','minecraft:recipe_shaped':x})
+ cgeos={0:'geometry.kt_assets_a6.cellar_cabinet_single',1:'geometry.kt_assets_a6.cellar_cabinet_left',2:'geometry.kt_assets_a6.cellar_cabinet_middle',3:'geometry.kt_assets_a6.cellar_cabinet_right'}
+ ccc=components({'identifier':cgeos[0]},{'*':{'texture':'kt_assets_a6_block_brew_bar_cabinet','render_method':'alpha_test'}})
+ ccc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':2.5},'minecraft:destructible_by_explosion':{'explosion_resistance':2.5},'minecraft:redstone_consumer':{'min_power':0,'propagates_power':False},'minecraft:collision_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:selection_box':{'origin':[-8,0,-8],'size':[16,16,16]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':cellar_cabinet':{},'minecraft:item_visual':{'geometry':{'identifier':'geometry.kt_assets_a17.item_display_cellar_cabinet'},'material_instances':{'*':{'texture':'kt_assets_a17_item_display_cellar_cabinet','render_method':'alpha_test'}}}})
+ ccp=[{'condition':f"q.block_state('{N}:position') == {p}",'components':{'minecraft:geometry':{'identifier':cgeos[p]}}}for p in range(4)]+[{'condition':f"q.block_state('{N}:facing') == {i}",'components':{'minecraft:transformation':{'rotation':[0,-90*i,0]}}}for i in range(4)]
+ dump(BP/'blocks/cellar_cabinet.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':cellar_cabinet','menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':position':[0,1,2,3]}},'components':ccc,'permutations':ccp}})
+ chelper={'format_version':'1.21.80','minecraft:entity':{'description':{'identifier':N+':cellar_cabinet_bottle_visual','is_spawnable':False,'is_summonable':True,'is_experimental':False,'properties':{N+':storage_kind':{'type':'int','range':[1,15],'default':1,'client_sync':True}}},'components':{'minecraft:type_family':{'family':['kt_cellar_cabinet_visual','kt_furniture_helper']},'minecraft:physics':{'has_gravity':False,'has_collision':False},'minecraft:collision_box':{'width':0,'height':0},'minecraft:persistent':{},'minecraft:pushable':{'is_pushable':False,'is_pushable_by_piston':False},'minecraft:health':{'value':1,'max':1},'minecraft:damage_sensor':{'triggers':[{'cause':'all','deals_damage':'no'}]}}}}
+ dump(BP/'entities/cellar_cabinet_bottle_visual.json',chelper)
+ chg={f'kind_{i+1}':holder_geometries[k]for i,k in enumerate(holder_kinds)};cht={f'kind_{i+1}':holder_textures[k]for i,k in enumerate(holder_kinds)}
+ chc={'format_version':'1.10.0','minecraft:client_entity':{'description':{'identifier':N+':cellar_cabinet_bottle_visual','materials':{'default':'entity_alphatest'},'textures':cht,'geometry':chg,'animations':{'rest':'animation.kt_runtime.storage_bottle.cellar'},'scripts':{'scale':'1.0','animate':['rest']},'render_controllers':['controller.render.kt_runtime.cellar_cabinet_bottle']}}}
+ dump(RP/'animations/runtime_storage_bottle.animation.json',{'format_version':'1.8.0','animations':{'animation.kt_runtime.storage_bottle.cellar':{'loop':True,'bones':{'root':{'rotation':[-90,0,0]}}},'animation.kt_runtime.storage_bottle.tilted':{'loop':True,'bones':{'root':{'rotation':[67.5,0,0]}}}}})
+ dump(RP/'entity/runtime_cellar_cabinet_bottle_visual.entity.json',chc)
+ chga=[f'Geometry.kind_{i+1}'for i in range(15)];chta=[f'Texture.kind_{i+1}'for i in range(15)]
+ dump(RP/'render_controllers/runtime_cellar_cabinet.render_controllers.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.cellar_cabinet_bottle':{'arrays':{'geometries':{'Array.kind':chga},'textures':{'Array.kind':chta}},'geometry':f"Array.kind[q.property('{N}:storage_kind') - 1]",'materials':[{'*':'Material.default'}],'textures':[f"Array.kind[q.property('{N}:storage_kind') - 1]"]}}})
+ bindings.append({'kind':'cellar_cabinet','item':N+':cellar_cabinet','block':N+':cellar_cabinet','helper':N+':cellar_cabinet_bottle_visual','geometry_by_position':{'single':cgeos[0],'left':cgeos[1],'middle':cgeos[2],'right':cgeos[3]},'item_geometry':'geometry.kt_assets_a17.item_display_cellar_cabinet','slots':9,'allowed_bases':holder_bases,'blocked_bases':cellar_blocked,'front_face_only':True,'connection_states':4,'display_kinds':holder_kinds,'state_exact_item_id':True,'source_collision':{'origin':[-8,0,-8],'size':[16,16,16]},'source_shade_brightness':0.2,'shade_brightness':'NOT_ADAPTED','powered_state':'NATIVE_REDSTONE_CONSUMER_EDGE_EVENT','redstone_pop':'ADAPTED_DRINKS','molotov':'PENDING_PROJECTILE_TYPE','trapdoor_recipes':20,'engine_accepted':False})
+ pendant_specs={'bell_pendant_lamp':('bell_pendant_lamp_top','bell_pendant_lamp_bottom'),'blue_pendant_lamp':('blue_pendant_lamp_top','blue_pendant_lamp_bottom'),'yellow_pendant_lamp':('yellow_pendant_lamp_top','yellow_pendant_lamp_bottom')}
+ for short,(top_key,bottom_key) in pendant_specs.items():
+  recipe(short,False);top=vis[top_key];bottom=vis[bottom_key]
+  pc=components(copy.deepcopy(top['binding']['geometry']),copy.deepcopy(top['binding']['materials']))
+  pc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':.8},'minecraft:destructible_by_explosion':{'explosion_resistance':.8},'minecraft:collision_box':False,'minecraft:selection_box':{'origin':[-7,0,-3],'size':[14,16,6]},'minecraft:tick':{'interval_range':[20,20],'looping':True},N+':pendant_lamp':{},'minecraft:item_visual':copy.deepcopy(bottom['binding']['item_visual'])})
+  pp=[]
+  for half,visual in [(0,top),(1,bottom)]:
+   for facing in range(4):
+    ew=facing%2==1
+    selection={'origin':([-3,1,-7] if ew else [-7,1,-3]) if half==1 else ([-3,0,-7] if ew else [-7,0,-3]),'size':([6,15,14] if ew else [14,15,6]) if half==1 else ([6,16,14] if ew else [14,16,6])}
+    pp.append({'condition':f"q.block_state('{N}:half') == {half} && q.block_state('{N}:facing') == {facing}",'components':{'minecraft:geometry':copy.deepcopy(visual['binding']['geometry']),'minecraft:material_instances':copy.deepcopy(visual['binding']['materials']),'minecraft:transformation':{'rotation':[0,-90*facing,0]},'minecraft:selection_box':selection,'minecraft:light_emission':13 if half==1 else 0}})
+  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':half':[0,1]}},'components':pc,'permutations':pp}})
+  bindings.append({'kind':'pendant_lamp','style':short.removesuffix('_pendant_lamp'),'item':N+':'+short,'block':N+':'+short,'top_geometry':top['geometry']['identifier'],'bottom_geometry':bottom['geometry']['identifier'],'light_emission_upper':0,'light_emission_lower':13,'half_states':2,'collision':False,'source_selection_ns':{'upper':{'origin':[-7,0,-3],'size':[14,16,6]},'lower':{'origin':[-7,1,-3],'size':[14,15,6]}},'source_selection_ew':{'upper':{'origin':[-3,0,-7],'size':[6,16,14]},'lower':{'origin':[-3,1,-7],'size':[6,15,14]}},'waterlogged':False,'engine_accepted':False})
+ painting_titles={
+  'ysbb':{'en_US':'YSBB','zh_CN':'药水棒冰','zh_TW':'藥水棒冰'},'tartaric_acid':{'en_US':'Tartaric Acid','zh_CN':'酒石酸菌','zh_TW':'酒石酸菌'},
+  'cr019':{'en_US':'CR019','zh_CN':'CR019','zh_TW':'CR019'},'unknown':{'en_US':'Unknown','zh_CN':'Unknown','zh_TW':'Unknown'},
+  'master_marisa':{'en_US':'Master Marisa','zh_CN':'摸里傻','zh_TW':'摸里傻'},'son_of_man':{'en_US':'Son of Man','zh_CN':'人类之子','zh_TW':'人類之子'},
+  'david':{'en_US':'David','zh_CN':'大卫','zh_TW':'大衛'},'girl_with_pearl_earring':{'en_US':'Girl with a Pearl Earring','zh_CN':'戴珍珠耳环的少女','zh_TW':'戴珍珠耳環的少女'},
+  'starry_night':{'en_US':'Starry Night','zh_CN':'星夜','zh_TW':'星夜'},'van_gogh_self_portrait':{'en_US':'Van Gogh Self-Portrait','zh_CN':'梵高自画像','zh_TW':'梵谷自畫像'},
+  'father':{'en_US':'Father','zh_CN':'父亲','zh_TW':'父親'},'great_wave':{'en_US':'The Great Wave off Kanagawa','zh_CN':'神奈川冲浪里','zh_TW':'神奈川沖浪裏'},
+  'mona_lisa':{'en_US':'Mona Lisa','zh_CN':'蒙娜丽莎','zh_TW':'蒙娜麗莎'},'mondrian':{'en_US':'Mondrian','zh_CN':'蒙德里安','zh_TW':'蒙德里安'}
+ }
+ painting_wall_boxes={0:{'origin':[-7,1,7],'size':[14,14,1]},1:{'origin':[-8,1,-7],'size':[1,14,14]},2:{'origin':[-7,1,-8],'size':[14,14,1]},3:{'origin':[7,1,-7],'size':[1,14,14]}}
+ for style,title in painting_titles.items():
+  short=style+'_painting';visual=vis['painting_'+style];recipe(short,False)
+  for lc in ['en_US','zh_CN','zh_TW']:names[lc][N+':'+short]=('Painting · '+title[lc])if lc=='en_US'else(('挂画・'+title[lc])if lc=='zh_CN'else('掛畫・'+title[lc]))
+  pc=components(copy.deepcopy(visual['binding']['geometry']),copy.deepcopy(visual['binding']['materials']))
+  pc.update({'minecraft:destructible_by_mining':{'seconds_to_destroy':.8},'minecraft:destructible_by_explosion':{'explosion_resistance':.8},'minecraft:collision_box':painting_wall_boxes[0],'minecraft:selection_box':painting_wall_boxes[0],'minecraft:item_visual':copy.deepcopy(visual['binding']['item_visual'])})
+  pp=[]
+  for attach in range(3):
+   for facing in range(4):
+    if attach==0:rot=[90,-90*facing,0];box=painting_wall_boxes[facing]
+    elif attach==1:rot=[0,-90*facing,0];box={'origin':[-7,0,-7],'size':[14,1,14]}
+    else:source_y=(180+90*facing)%360;rot=[180,-source_y,0];box={'origin':[-7,15,-7],'size':[14,1,14]}
+    pp.append({'condition':f"q.block_state('{N}:attach_face') == {attach} && q.block_state('{N}:facing') == {facing}",'components':{'minecraft:transformation':{'rotation':rot},'minecraft:collision_box':box,'minecraft:selection_box':box}})
+  dump(BP/f'blocks/{short}.json',{'format_version':'1.26.50','minecraft:block':{'description':{'identifier':N+':'+short,'menu_category':{'category':'construction'},'states':{N+':facing':[0,1,2,3],N+':attach_face':[0,1,2]}},'components':pc,'permutations':pp}})
+  bindings.append({'kind':'painting','style':style,'item':N+':'+short,'block':N+':'+short,'geometry':visual['geometry']['identifier'],'texture':visual['binding']['materials']['*']['texture'],'attach_states':3,'facing_states':4,'source_shapes':{'north':painting_wall_boxes[0],'east':painting_wall_boxes[1],'south':painting_wall_boxes[2],'west':painting_wall_boxes[3],'floor':{'origin':[-7,0,-7],'size':[14,1,14]},'ceiling':{'origin':[-7,15,-7],'size':[14,1,14]}},'waterlogged':False,'exact_collision_parity':True,'java_item_sprite_replaced_by_block_visual':True,'engine_accepted':False})
+ dump(RP/'render_controllers/runtime_furniture.json',{'format_version':'1.8.0','render_controllers':{'controller.render.kt_runtime.furniture':{'geometry':'Geometry.default','materials':[{'*':'Material.default'}],'textures':['Texture.default']}}})
+ dump(RP/'animations/runtime_furniture.animation.json',{'format_version':'1.8.0','animations':{'animation.kt_runtime.stool.turn':{'loop':True,'bones':{'bone':{'rotation':[0,'v.kt_seat_angle',0]}}}}})
+ dump(RP/'textures/terrain_texture.json',terrain);dump(RP/'textures/item_texture.json',icons)
+ (BP/'scripts/data/names.js').write_text('export const NAMES = '+json.dumps(names,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
+ for lc in ['zh_TW','zh_CN','en_US']:
+  p=RP/f'texts/{lc}.lang';s=p.read_text(encoding='utf-8').split('## C6 ADDITIONS')[0].rstrip()+'\n## C6 ADDITIONS\n'
+  for b in bindings:
+   if b['kind'] in ['sofa','table','bar_counter','glassware_holder','holder','tilted_rack','circular_rack','bar_cabinet','cellar_cabinet']:continue
+   s+='item.'+b['item']+'.name='+names[lc][b['item']]+'\n'+'tile.'+b['block']+'.name='+names[lc][b['item']]+'\n'
+  s+='action.interact.kt_sit='+('Sit'if lc=='en_US'else'坐下')+'\n'+'action.interact.kt_furniture='+('Place / interact'if lc=='en_US'else'放置／互动'if lc=='zh_CN'else'放置／互動')+'\n';p.write_text(s,encoding='utf-8')
+ # Native all-player inventory/book APIs are never edited. These pages belong to Tavern alone.
+ p=BP/'scripts/data/mixology-pages.js';pages=mod(p)
+ for page in pages:
+  if page['id']==N+':cocktail_effects/sculk_special':
+   page['body']={lc:body.replace('未實作','聲波 PvE 適配已接入').replace('not implemented','sonic PvE adapter implemented')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_effects/screwdriver':
+   page['body']={lc:body.replace('[未實作]','[C6 Grumm 倒立适配已接入；名称牌待实机]' if lc=='zh_CN' else '[C6 Grumm 倒立適配已接入；名稱牌待實機]').replace('[not implemented]','[C6 Grumm adapter implemented; nameplate engine test pending]')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_effects/mojito':
+   page['body']={lc:body.replace('[未實作]','[C6 灵视发光适配已接入；引擎验收待执行]' if lc=='zh_CN' else '[C6 靈視發光適配已接入；引擎驗收待執行]').replace('[not implemented]','[C6 Vision glowing adapter implemented; engine test pending]')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_effects/white_lady':
+   page['body']={lc:body.replace('[未實作]','[C6 高跟鞋一格自動跨步適配已接入；碰撞/手機待實機]' if lc=='zh_TW' else '[C6 高跟鞋一格自动跨步适配已接入；碰撞/手机待实机]' if lc=='zh_CN' else '[C6 High Heels one-block auto-step adapter implemented; collision/mobile engine test pending]').replace('[not implemented]','[C6 High Heels one-block auto-step adapter implemented; collision/mobile engine test pending]')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_limits':
+   page['body']={lc:body.replace('其餘Java專屬效果仍不生效。','C6另已接入聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配；尚餘3項Java專屬效果未實作。').replace('Remaining Java-only effects are still inactive.','C6 also enables Shriek, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters; three Java-only effects remain inactive.')for lc,body in page['body'].items()}
+  if page['id']==N+':cocktail_effects/nether_special':
+   page['body']={lc:body.replace('[未實作]','[C6 摸金校尉卸装适配已接入；致死时序待实机]' if lc=='zh_CN' else '[C6 摸金校尉卸裝適配已接入；致死時序待實機]').replace('[not implemented]','[C6 Tomb Raider disarm adapter implemented; lethal-hit engine timing pending]')for lc,body in page['body'].items()}
+  if page['id'] in [N+':cocktail_effects/depth_charge',N+':cocktail_effects/brass_heart']:
+   page['body']={lc:body.replace('[未實作]','[C6 醇热冲撞适配已接入；掉落/饥饿待实机]' if lc=='zh_CN' else '[C6 醇熱衝撞適配已接入；掉落／飢餓待實機]').replace('[not implemented]','[C6 Ardent Heat sprint-break adapter implemented; loot/hunger engine test pending]')for lc,body in page['body'].items()}
+ pages.extend([
+ {'id':N+':c6_furniture','title':{'zh_TW':'高腳凳與彩燈：完整種類','zh_CN':'高脚凳与彩灯：完整种类','en_US':'Stools and string lights'},'body':{'zh_TW':'16色高腳凳與17款彩燈全部可合成並依 Java/方塊標準正常放置，不要求潛行。空座椅普通點擊即可坐下，即使手持一般物品；潛行且手持方塊物品時依 Java secondary-use 順序跳過座椅互動並執行 item-useOn。Java座位實體錨點：高腳凳0.875、沙發0.5125；SitEntity乘客offset實際為-0.25。Bedrock目前0.8125／0.45僅是原生rideable候選值，不宣稱是Java數值直接換算，實機位置仍待驗收。Survival放置消耗1件；Creative按BlockItem/DrinkBlockItem慣例不消耗。彩燈維持亮度15與染料切換原模型。','zh_CN':'16色高脚凳与17款彩灯按 Java/方块标准正常放置，不要求潜行。空座椅普通点击即可坐下，即使手持一般物品；潜行并手持方块物品时按 Java secondary-use 顺序跳过座椅交互并执行 item-useOn。Java座位实体锚点：高脚凳0.875、沙发0.5125；SitEntity乘客offset实际为-0.25。Bedrock目前0.8125／0.45只是原生rideable候选值，仍待实机校准。Survival放置消耗1件；Creative按BlockItem/DrinkBlockItem惯例不消耗。','en_US':'All 16 stool colors and 17 string-light designs place through the Java/vanilla block-use then item-useOn order without a generic sneak-placement rule. Normal use sits on an empty seat even while holding an ordinary item; secondary-use with a held block item bypasses seat block-use and continues to item-useOn. Java seat anchors are .875 for stools and .5125 for sofas, and SitEntity passenger offset is actually -0.25. Bedrock .8125/.45 remain native rideable candidate values, not a claimed direct conversion. Survival placement consumes one item; Creative follows BlockItem/DrinkBlockItem free-placement semantics. Lights keep level 15 and dye design switching.'}},
+ {'id':N+':c6_sonic','title':{'zh_TW':'幽匿特調：聲波規則與差異','en_US':'Sculk Special: sonic rules and limits'},'body':{'zh_TW':'飲用完成時沿視線發射32格声波；傷害採目前生命×Java float1.2，判定半徑為1格加目標半寬。命中後追加水平0.63、垂直0.28速度；每2格一個原生聲波粒子。採原生sonicBoom傷害，不直接覆寫目標HP。明示安全適配：不傷害玩家，不打自己的視覺helper；單次最多256個命中目標，無敵/保護拒傷時也不擊退。也可能命中動物與寵物，請勿對準它們測試。不檢查牆遮擋，與原作穿牆聲波相同；沒有爆炸/破壞方塊。新效果不重扣第二杯，回杯仍由原生food完成。以上仍未在遊戲驗收。','en_US':'On completed drinking, a 32-block view ray deals current health × Java float1.2; hit radius is 1 + half target width. Adds horizontal .63 / vertical .28 impulse, with 16 native sonic particles. Uses native sonicBoom damage, never overwrites target HP. Explicit PvE-only adaptation: all players and Tavern helpers excluded; at most 256 hit targets; rejected damage has no knockback. May also hit animals and pets. Passes walls as the source does. No block destruction or second cup consumption. Engine testing is still required.'}}
+ ])
+ p.write_text('export const MIXOLOGY_PAGES = '+json.dumps(pages,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
+ # Preserve historical page/bookmark IDs but point their old completion counts to the current report.
+ for page in pages:
+  if page['id']==N+':c6_furniture':
+   page['title']={'zh_TW':'酒館家具、酒架與九槽窖藏酒櫃','zh_CN':'酒馆家具、酒架与九槽窖藏酒柜','en_US':'Tavern furniture, racks and nine-slot Cellar Cabinet'}
+   page['body']={'zh_TW':'Batch 16完成Cellar Cabinet九槽窖藏酒櫃。它只允許點正面，依Java getLocalX與點擊Y把正面切成3×3九宮格；world DP保存9個獨立精確*_q1..q6 ID。來源cellar_cabinet_blocklist與Holder相同，拒絕10種大瓶型，因此支援empty_bottle+14種品質飲品base。櫃體同款同朝向連成single/left/middle/right四態，九個非空槽各最多1個無碰撞helper，按來源3×3位置、scale1與X -90°展示。來源櫃體沒有自訂shape，因此完整方塊碰撞。Java配方中央minecraft:trapdoors展開為11種木／菌木活板門、iron trapdoor與8種copper/waxed trapdoor，共20份Bedrock配方。來源POWERED只服務紅石彈射且所有powered模型相同；現以原生redstone_consumer的powerLevel/previousPowerLevel上升沿觸發共用投瓶路由，不額外增加只為模型存在的powered state。品質飲品會生成真正projectile並保留精確品質；Molotov仍待其本體移植。Batch 14掛畫與Batch 15雙槽Bar Cabinets全部保留。實機九瓶位置、正面觸控、多人重連仍待驗收。','zh_CN':'Batch 16完成Cellar Cabinet九槽窖藏酒柜。只允许点击正面，按Java局部X和Y切成3×3九宫格；world DP保存9个独立精确品质ID。来源blocklist与Holder相同，支持empty_bottle+14种品质酒瓶。柜体同款同朝向形成四态连接，每个非空槽最多1个无碰撞helper。Java minecraft:trapdoors配方展开为20份Bedrock活板门等价配方。POWERED只服务红石投掷；现以原生redstone_consumer上升沿触发共用投瓶路由，不额外增加只为模型存在的powered state。品质饮品生成真实projectile并保留精确品质；Molotov仍待本体移植。实机多人/触控仍待验收。','en_US':'Batch 16 ports the nine-slot Cellar Cabinet. Interaction is front-face only; Java getLocalX plus hit Y divides the front into an exact 3×3 grid, with nine independent exact *_q1..q6 IDs in world DP. The source blocklist matches Holder, rejecting ten large bottle bases, so empty_bottle plus 14 regular quality-drink bases are accepted. Same-facing Cellar Cabinets connect through single/left/middle/right states. Each occupied slot has at most one collisionless helper at the source 3×3 renderer position, scale 1 and X -90°. The cabinet has default full-block collision. Java minecraft:trapdoors is expanded to 20 Bedrock recipes covering 11 wood/fungus trapdoors, iron, and eight copper/waxed variants. Source POWERED only drives projectile ejection and does not change the model. The Bedrock adapter now uses native redstone_consumer power-level edges to trigger the shared storage launcher without adding a model-only powered state; quality drinks launch as real projectiles with exact item identity, while Molotov remains pending its own port. Batch 14 Paintings and Batch 15 Bar Cabinets remain intact. Real-client nine-bottle placement, front-face touch and multiplayer reconnect remain NOT_RUN.'}
+   page['body']['zh_TW']+='\n\n②③⑤審查補償：#59 已統一 Java block-use→item-useOn 順序；本批補齊 Creative BlockItem/DrinkBlockItem 放置不扣料、CHAIN 材質及共享放置聲。Java SitEntity 乘客 offset 已校正為 -0.25；Bedrock rideable 坐點仍待實機校準。'
+   page['body']['zh_CN']+='\n\n②③⑤审查补偿：#59 已统一 Java block-use→item-useOn 顺序；本批补齐 Creative BlockItem/DrinkBlockItem 放置不扣料、CHAIN 材质及共享放置声。Java SitEntity 乘客 offset 已校正为 -0.25；Bedrock rideable 坐点仍待实机校准。'
+   page['body']['en_US']+='\n\n②③⑤ parity compensation: #59 already owns Java block-use → item-useOn ordering; this batch fills the remaining Creative BlockItem/DrinkBlockItem placement cost, CHAIN material, and shared placement feedback gaps. Java SitEntity passenger offset is corrected to -0.25; Bedrock rideable seat positions still require engine calibration.'
+  if page['id']==N+':c5_effects':
+   page['title']={'zh_TW':'專屬酒效 C6','zh_CN':'专属酒效 C6','en_US':'C6 custom effects'}
+   for lc in page['body']:page['body'][lc]+=('\nC6: Shriek Attack PvE, Upside Down, Vision, Tomb Raider, Ardent Heat and High Heels adapters are now enabled. Three other types remain pending.'if lc=='en_US'else'\nC6更新：幽匿特調聲波、倒立、靈視、摸金校尉、醇熱與高跟鞋適配已接入，其他3種效果仍待實作。')
+   for lc in page['body']:page['body'][lc]=page['body'][lc].replace('其餘9種','其餘3種').replace('Other 9','Other 3')
+ p.write_text('export const MIXOLOGY_PAGES = '+json.dumps(pages,ensure_ascii=False,indent=2)+';\n',encoding='utf-8')
+ for p in [BP/'manifest.json',RP/'manifest.json',R/'examples/Tavern-Extension-Demo/BP/manifest.json',R/'examples/Tavern-Mixology-Demo/BP/manifest.json']:
+  d=load(p);d['header']['version']=V;d['header']['name']=d['header']['name'].replace('C5','C6')
+  for m in d['modules']:m['version']=V
+  own={load(BP/'manifest.json')['header']['uuid'],load(RP/'manifest.json')['header']['uuid']}
+  for dep in d.get('dependencies',[]):
+   if dep.get('uuid')in own:dep['version']=V
+  dump(p,d)
+ config=load(R/'config.json');config['name']='Kaleidoscope Tavern C6';dump(R/'config.json',config)
+ # Keep kits small, only give; never place mobs/blocks or fire the sonic effect automatically.
+ (BP/'functions/kt_c6_kit.mcfunction').write_text('# C6 give-only focused kit. Leaves existing builds/world untouched.\ngive @s kaleidoscope_cookery:guidebook 1\ngive @s kaleidoscope_tavern:blue_bar_stool 2\ngive @s kaleidoscope_tavern:red_bar_stool 2\ngive @s kaleidoscope_tavern:string_lights_colorless 4\ngive @s minecraft:green_dye 4\ngive @s minecraft:red_dye 4\ngive @s kaleidoscope_tavern:sculk_special 2\ngive @s kaleidoscope_tavern:screwdriver 2\ngive @s kaleidoscope_tavern:mojito 2\ngive @s kaleidoscope_tavern:nether_special 2\ngive @s kaleidoscope_tavern:depth_charge 2\ngive @s kaleidoscope_tavern:brass_heart 2\ngive @s kaleidoscope_tavern:white_lady 2\ngive @s kaleidoscope_tavern:blue_sofa 2\ngive @s kaleidoscope_tavern:red_sofa 2\ngive @s kaleidoscope_tavern:table 3\ngive @s kaleidoscope_tavern:bar_counter 3\ngive @s kaleidoscope_tavern:glassware_holder 2\ngive @s kaleidoscope_tavern:bell_pendant_lamp 2\ngive @s kaleidoscope_tavern:blue_pendant_lamp 2\ngive @s kaleidoscope_tavern:yellow_pendant_lamp 2\ngive @s kaleidoscope_tavern:empty_glassware 8\ngive @s kaleidoscope_tavern:holder 2\ngive @s kaleidoscope_tavern:wine_q5 2\ngive @s kaleidoscope_tavern:empty_bottle 2\ngive @s kaleidoscope_tavern:tilted_rack 2\ngive @s kaleidoscope_tavern:vodka_q6 2\ngive @s kaleidoscope_tavern:mother_snow_q2 2\ngive @s kaleidoscope_tavern:circular_rack 2\ngive @s kaleidoscope_tavern:mona_lisa_painting 1\ngive @s kaleidoscope_tavern:great_wave_painting 1\ngive @s kaleidoscope_tavern:brandy_q6 2\ngive @s kaleidoscope_tavern:carignan_q3 2\ngive @s kaleidoscope_tavern:bar_cabinet 2\ngive @s kaleidoscope_tavern:glass_bar_cabinet 2\ngive @s kaleidoscope_tavern:cellar_cabinet 2\n')
+ (BP/'functions/kt_c6_all_stools.mcfunction').write_text('# 16 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':'+c+'_bar_stool 1'for c in COLORS)+'\n')
+ (BP/'functions/kt_c6_all_lights.mcfunction').write_text('# 17 items, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':string_lights_'+c+' 1'for c in ['colorless',*COLORS])+'\n')
+ (BP/'functions/kt_c6_all_sofas.mcfunction').write_text('# 16 sofas, give-only. Reserve inventory slots.\n'+'\n'.join('give @s '+N+':'+c+'_sofa 1'for c in COLORS)+'\n')
+ for p in sorted((R/'data/upstream/c6/javap').glob('*.txt')):protect(p,'read-only javap; source JAR not executed')
+ protect(R/'data/upstream/c5/javap/ShriekAttackEffect.txt','read-only source bytecode, already locked in C5')
+ dump(R/'docs/C6-SOURCE-AUDIT.json',{'jar_sha256':'03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff','files':source_records,'jar_executed':False,'original_art_modified':False,'post_1_2_official_visual_sync':['c4ec1880bd44cf3139d3ba744ab30bb379cf1416:string_lights_magenta','b30f34a2e340fed1528954104f93cf2c7e90fd79:gold_grape_bucket','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_model_only_1','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_model_only_2','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_allium_garden','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_grasshopper','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_bloody_mary','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_screwdriver','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_white_lady','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_mojito','c70eec14b4d8cede23f7274910b8424a8fd49f89:cocktail_depth_charge']})
+ dump(R/'docs/C6-FURNITURE-BINDINGS.json',{'bindings':bindings,'derived_icons':icon_records,'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'glassware_holders':1,'holders':1,'pendant_lamps':3,'tilted_racks':1,'circular_racks':1,'paintings':14,'bar_cabinets':2,'cellar_cabinets':1,'engine_accepted':False})
+ coverage=load(R/'docs/C5-EFFECT-COVERAGE.json')
+ for effect in ['shriek_attack','upside_down','vision','tomb_raider','ardent_heat','high_heels']:
+  if effect not in coverage['adaptations_implemented']:coverage['adaptations_implemented'].append(effect)
+  if effect in coverage['not_implemented']:coverage['not_implemented'].remove(effect)
+ coverage['scope']='Players as custom-effect owners; Shriek/Upside Down/Vision/Tomb Raider/Ardent Heat/High Heels use explicit Bedrock adapters; remaining timed effects as C5'
+ coverage['shriek_limits']=['players excluded','max256 hit targets','reject damage = no impulse','not engine tested']
+ coverage['upside_down']={'source':'Java 1.2.0: living Mob entities intersecting user AABB inflated by 16 are custom-named Grumm','adapter':"Bedrock mob-family query, living health check, exact getAABB overlap against source box inflated by 16, set Entity.nameTag='Grumm'",'divergence':'Bedrock Script API exposes nameTag but no generic equivalent of Java setCustomNameVisible(false); visual/nameplate behavior requires engine acceptance','engine_tested':False}
+ coverage['vision']={'source':'Java 1.2.0: every 50 ticks, radius=min(amplifier+1,3)*6; other living entities get Glowing for 60 ticks; sound only when at least one target was not already Glowing','adapter':'Timed custom status; 5-tick scheduler detects crossed 50-tick countdown boundaries, applies native glowing for 60 ticks after exact AABB overlap, and plays kt_assets_a17.effect.vision only for newly glowing targets','divergence':'Pulse execution may occur within the existing 5-tick adapter cadence rather than on the exact Java entity tick; Bedrock health-component filtering plus explicit Tavern-helper exclusion approximates Java LivingEntity; engine audio/effect rendering remains untested','engine_tested':False}
+ coverage['tomb_raider']={'source':'Java 1.2.0 EffectEvent.onLivingHurt: attacker with Tomb Raider, target in tomb_raider_disarmable, target RNG nextFloat < 0.3F, mainhand required, damageable item set to maxDamage-1, drop with pickup delay 40','adapter':'Bedrock player-owned timed status; afterEvents.entityHurt; exact 15-source target mapping with zombified piglin -> zombie_pigman; EquipmentSlot.Mainhand; native spawnItem; item-entity dynamic property blocks entityItemPickup for 40 ticks; spawn/property failure restores original mainhand','divergence':'Bedrock safe mutation uses entityHurt after-event whereas Java LivingHurtEvent occurs earlier in the damage pipeline; lethal-hit ordering and arbitrary non-player LivingEntity attackers are not claimed equivalent','engine_tested':False}
+ coverage['ardent_heat']={'source':'Java 1.2.0: every tick while sprinting, break the front 3x3 plane of BASE_STONE_OVERWORLD + BASE_STONE_NETHER + END_STONE; if any broke, add 1.2 exhaustion and damage one random worn armor item by 1, or with no armor deal 1 generic damage every fifth successful collision; natural expiry or zero hunger+saturation adds 600-tick Hunger','adapter':'Bedrock exact 10-block source tag expansion; one-tick sprint adapter; transactional set-air + explicit vanilla no-silk drop mapping (stone->cobblestone, deepslate->cobbled_deepslate); player exhaustion attribute +1.2 capped to component max; one random armor durability step or persistent bare collision counter; 5-tick status layer handles expiry/starvation Hunger','divergence':'Block loot is an explicit source-tag drop mapping rather than Java loot-table execution; exhaustion overflow/food conversion is delegated to Bedrock player exhaustion; Hunger end detection may occur within the 5-tick status window','engine_tested':False}
+ coverage['high_heels']={'source':'Java 1.2.0 HighHeelsEffect: STEP_HEIGHT_ADDITION +0.5; all source drink/datamap uses are amplifier 0','adapter':'Bedrock 2.7.0 grounded blocked-movement auto-step: raw movement input + yaw choose the cardinal obstacle; only near the collision edge with low horizontal velocity and two clear blocks above; tryTeleport raises exactly 1 block and carries 0.2 forward with checkForBlocks','divergence':'Bedrock stable Script API has no writable player step-height attribute, so this is a collision-triggered movement adapter rather than native attribute parity; partial/custom collision shapes and touch/controller feel require engine acceptance','engine_tested':False}
+ dump(R/'docs/C6-EFFECT-COVERAGE.json',coverage)
+ build=load(R/'docs/C5-BUILD.json');build.update({'phase':'C6','version':V,'native_crafting_recipes':118,'effect_hooks':'native + BloodyMary + XPDrain/Zenith/Shriek/UpsideDown/Vision/TombRaider/ArdentHeat/HighHeels adapters','custom_effect_types_pending':coverage['not_implemented'],'furniture':{'stools':16,'lights':17,'sofas':16,'tables':1,'bar_counters':1,'glassware_holders':1,'holders':1,'pendant_lamps':3,'tilted_racks':1,'circular_racks':1,'paintings':14,'bar_cabinets':2,'cellar_cabinets':1,'new_shaped_recipes':97,'new_shapeless_recipes':13,'source_anchor_y':.875,'source_explicit_rider_offset':-.25,'native_seat_y':.8125,'sofa_source_anchor_y':.5125,'sofa_native_seat_y':.45,'sofa_connection_states':6,'bar_counter_connection_states':6,'glassware_holder_slots':4,'glassware_holder_light':8,'holder_allowed_bases':14,'holder_display_kinds':15,'holder_redstone':'ADAPTED_DRINKS_MOLOTOV_PENDING','tilted_rack_slots':3,'tilted_rack_allowed_bases':22,'tilted_rack_display_kinds':25,'tilted_rack_redstone':'ADAPTED_DRINKS_MOLOTOV_PENDING','circular_rack_slots':6,'circular_rack_allowed_bases':24,'circular_rack_display_kinds':25,'circular_rack_light':14,'circular_rack_particle':'minecraft:endrod / 20-tick Bedrock cadence','circular_rack_redstone':'ADAPTED_DRINKS_MOLOTOV_PENDING','bar_cabinet_slots':2,'bar_cabinet_irregular_bases':2,'bar_cabinet_connection_states':4,'glass_bar_cabinet_pane_recipes':17,'cellar_cabinet_slots':9,'cellar_cabinet_allowed_bases':14,'cellar_cabinet_display_kinds':15,'cellar_cabinet_trapdoor_recipes':20,'cellar_cabinet_powered_state':'NATIVE_REDSTONE_CONSUMER_EDGE_EVENT','cellar_cabinet_redstone':'ADAPTED_DRINKS_MOLOTOV_PENDING','table_axis_states':2,'table_position_states':4,'table_collision_y':[13,16],'light_emission':15},'custom_effects':dict(build['custom_effects'],shriek_attack='native sonicBoom/PvE-only ray adapter',upside_down='Grumm naming adapter over Java 16-block inflated AABB using Bedrock mob-family query',vision='native Glowing radius adapter on Java 50-tick countdown cadence',tomb_raider='30% disarm/drop adapter with 40-tick pickup lock',ardent_heat='per-tick sprint 3x3 source-stone breaking adapter with exhaustion/armor/bare-collision costs',high_heels='grounded blocked-movement one-block auto-step adapter for source +0.5 step-height intent'),'upstream_visual_sync':[{'commit':'c4ec1880bd44cf3139d3ba744ab30bb379cf1416','asset':'string_lights_magenta','fix':'12 rotated zero-thickness planes now have reverse faces; no texture change','engine_acceptance':'NOT_RUN'},{'commit':'b30f34a2e340fed1528954104f93cf2c7e90fd79','asset':'gold_grape_bucket','fix':'official item texture color correction; exact upstream Git blob 7d2452dc5a07f82fd114db6df9e1fb5998878fef / SHA-256 ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_model_only_1','fix':'Brass Heart/Emerald/Godfather/Nether Special: translucent->cutout plus source shade=false faces; automated by sync-plan','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_model_only_2','fix':'Empty Glassware/Mystery Cocktail/Sculk Special/Signature Cocktail: translucent->cutout only; no geometry edits; automated by sync-plan','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_allium_garden','fix':'Allium Garden: translucent->cutout, source shade=false on element3, one north-face UV correction, and exact official block PNG blob 42d41bb699d7c5f31aa38d4ec0faee55309379a8; automated by extended sync-plan','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_grasshopper','fix':'Grasshopper: source-driven regeneration of 11 changed Java elements into 17 mapped Bedrock cubes plus exact official block PNG blob ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_bloody_mary','fix':'Bloody Mary: source-driven regeneration of 9 changed Java elements into 18 mapped Bedrock cubes, including explicit down->up face remap with 180-degree UV rotation, plus exact official block PNG blob 07f47d76f7b9e5ede07eeee3a968471b1ee59a2d','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_screwdriver','fix':'Screwdriver: source-driven regeneration of all 10 changed Java elements into 13 mapped Bedrock cubes plus exact official block PNG blob 125669746daa8b7db1049c698757b788423da014; no new converter exception','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_white_lady','fix':'White Lady: source-driven regeneration with explicit old->updated element mapping; baseline element 6 / Bedrock cube 9 is deleted, reducing 17 cubes to 16, plus exact official block PNG blob c3796b7eaa62fcf34515eee8ad0227f7392c4c7c','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_mojito','fix':'Mojito: source-driven 15->14 element remap and 21->20 Bedrock cube regeneration, including locked Java rescale:true compatibility and updated-element ordering, plus exact official block PNG blob ed3b8944a1624b14a0905c77a46d23b0399e956e','engine_acceptance':'NOT_RUN'},{'commit':'c70eec14b4d8cede23f7274910b8424a8fd49f89','asset':'cocktail_depth_charge','fix':'Depth Charge: source-driven 12->13 element remap with explicit added_elements and 18->19 Bedrock cube regeneration; old handle element expands with new elements 6/7, old crossed planes collapse via old8->new11 and old9 deletion; exact official block PNG blob 962980356fbecf1548ec5991feac3facee10db00 and item PNG blob 25703204a0c40bb8cf4bcce59211e50fd8b6594e','engine_acceptance':'NOT_RUN'}],'engine_acceptance':'NOT_RUN'})
+ for exclusion in build.get('planned_recipe_exclusions',[]):exclusion['reason']=exclusion['reason'].replace('C5','C6')
+ dump(R/'docs/C6-BUILD.json',build)
+ # Final runtime locale pass: no duplicate keys. Preserve upstream en/zh_CN wording; prefer curated zh_TW overrides.
+ for lc in ['en_US','zh_CN']:dedupe_lang(RP/f'texts/{lc}.lang',False)
+ dedupe_lang(RP/'texts/zh_TW.lang',True)
+ import pressing_tub_visual
+ pressing_tub_visual.main(R/'runtime')
+ # Keep the shaker attachables generated by C4/C5. They bind the held shaker
+ # mesh to the item slot and provide the source first/third-person motion;
+ # native use components below still own the item's use lifecycle.
+ for short in ['shaker','shaker_active','shaker_pouring']:
+  p=BP/'items'/f'{short}.json';item=load(p);c=item['minecraft:item']['components']
+  c['minecraft:hand_equipped']=False;c['minecraft:use_animation']='drink';dump(p,item)
+ subprocess.run([sys.executable,str(R/'tools/build_animated_item_attachables.py')],check=True)
+ subprocess.run([sys.executable,str(R/'tools/prepare_placed_models.py'),str(R/'runtime')],check=True)
+ print('C6 generated: furniture, Holders/Racks, Paintings, Bar Cabinets, nine-slot Cellar Cabinet and Pendant Lamps; official post-1.2 visual syncs retained.')
+if __name__=='__main__':main()

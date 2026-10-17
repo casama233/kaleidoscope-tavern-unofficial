@@ -1,0 +1,200 @@
+Compiled from "SitEntity.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity extends net.minecraft.world.entity.Entity {
+  public static final net.minecraft.world.entity.EntityType<com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity> TYPE;
+
+  private int passengerTick;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity(net.minecraft.world.entity.EntityType<?>, net.minecraft.world.level.Level);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #1                  // Method net/minecraft/world/entity/Entity."<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       6: aload_0
+       7: iconst_0
+       8: putfield      #7                  // Field passengerTick:I
+      11: return
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity(net.minecraft.world.level.Level, net.minecraft.core.BlockPos);
+    Code:
+       0: aload_0
+       1: getstatic     #13                 // Field TYPE:Lnet/minecraft/world/entity/EntityType;
+       4: aload_1
+       5: invokespecial #17                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: aload_0
+       9: aload_2
+      10: invokevirtual #18                 // Method net/minecraft/core/BlockPos.getX:()I
+      13: i2d
+      14: ldc2_w        #24                 // double 0.5d
+      17: dadd
+      18: aload_2
+      19: invokevirtual #26                 // Method net/minecraft/core/BlockPos.getY:()I
+      22: i2d
+      23: ldc2_w        #29                 // double 0.4375d
+      26: dadd
+      27: aload_2
+      28: invokevirtual #31                 // Method net/minecraft/core/BlockPos.getZ:()I
+      31: i2d
+      32: ldc2_w        #24                 // double 0.5d
+      35: dadd
+      36: invokevirtual #34                 // Method setPos:(DDD)V
+      39: return
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.entity.SitEntity(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, double);
+    Code:
+       0: aload_0
+       1: getstatic     #13                 // Field TYPE:Lnet/minecraft/world/entity/EntityType;
+       4: aload_1
+       5: invokespecial #17                 // Method "<init>":(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V
+       8: aload_0
+       9: aload_2
+      10: invokevirtual #18                 // Method net/minecraft/core/BlockPos.getX:()I
+      13: i2d
+      14: ldc2_w        #24                 // double 0.5d
+      17: dadd
+      18: aload_2
+      19: invokevirtual #26                 // Method net/minecraft/core/BlockPos.getY:()I
+      22: i2d
+      23: dload_3
+      24: dadd
+      25: aload_2
+      26: invokevirtual #31                 // Method net/minecraft/core/BlockPos.getZ:()I
+      29: i2d
+      30: ldc2_w        #24                 // double 0.5d
+      33: dadd
+      34: invokevirtual #34                 // Method setPos:(DDD)V
+      37: return
+
+  public net.minecraft.world.phys.Vec3 getPassengerRidingPosition(net.minecraft.world.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #38                 // Method net/minecraft/world/entity/Entity.getPassengerRidingPosition:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/Vec3;
+       5: dconst_0
+       6: ldc2_w        #42                 // double -0.0625d
+       9: dconst_0
+      10: invokevirtual #44                 // Method net/minecraft/world/phys/Vec3.add:(DDD)Lnet/minecraft/world/phys/Vec3;
+      13: areturn
+
+  protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData$Builder);
+    Code:
+       0: return
+
+  protected void readAdditionalSaveData(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: return
+
+  protected void addAdditionalSaveData(net.minecraft.nbt.CompoundTag);
+    Code:
+       0: return
+
+  public void tick();
+    Code:
+       0: aload_0
+       1: invokevirtual #50                 // Method level:()Lnet/minecraft/world/level/Level;
+       4: getfield      #54                 // Field net/minecraft/world/level/Level.isClientSide:Z
+       7: ifne          54
+      10: aload_0
+      11: invokevirtual #60                 // Method checkBelowWorld:()V
+      14: aload_0
+      15: invokevirtual #64                 // Method checkPassengers:()V
+      18: aload_0
+      19: getfield      #67                 // Field tickCount:I
+      22: bipush        20
+      24: irem
+      25: ifne          54
+      28: aload_0
+      29: invokevirtual #50                 // Method level:()Lnet/minecraft/world/level/Level;
+      32: aload_0
+      33: invokevirtual #70                 // Method blockPosition:()Lnet/minecraft/core/BlockPos;
+      36: invokevirtual #74                 // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      39: astore_1
+      40: aload_1
+      41: getstatic     #78                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.SITTABLE:Lnet/minecraft/tags/TagKey;
+      44: invokevirtual #84                 // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/tags/TagKey;)Z
+      47: ifne          54
+      50: aload_0
+      51: invokevirtual #90                 // Method discard:()V
+      54: return
+
+  private void checkPassengers();
+    Code:
+       0: aload_0
+       1: invokevirtual #93                 // Method getPassengers:()Ljava/util/List;
+       4: invokeinterface #97,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+       9: ifeq          25
+      12: aload_0
+      13: dup
+      14: getfield      #7                  // Field passengerTick:I
+      17: iconst_1
+      18: iadd
+      19: putfield      #7                  // Field passengerTick:I
+      22: goto          30
+      25: aload_0
+      26: iconst_0
+      27: putfield      #7                  // Field passengerTick:I
+      30: aload_0
+      31: getfield      #7                  // Field passengerTick:I
+      34: bipush        10
+      36: if_icmple     43
+      39: aload_0
+      40: invokevirtual #90                 // Method discard:()V
+      43: return
+
+  public boolean skipAttackInteraction(net.minecraft.world.entity.Entity);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public boolean hurt(net.minecraft.world.damagesource.DamageSource, float);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public void move(net.minecraft.world.entity.MoverType, net.minecraft.world.phys.Vec3);
+    Code:
+       0: return
+
+  public void push(net.minecraft.world.entity.Entity);
+    Code:
+       0: return
+
+  public void push(double, double, double);
+    Code:
+       0: return
+
+  protected boolean repositionEntityAfterLoad();
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public void thunderHit(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.LightningBolt);
+    Code:
+       0: return
+
+  public void refreshDimensions();
+    Code:
+       0: return
+
+  public boolean canCollideWith(net.minecraft.world.entity.Entity);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  static {};
+    Code:
+       0: invokedynamic #103,  0            // InvokeDynamic #0:create:()Lnet/minecraft/world/entity/EntityType$EntityFactory;
+       5: getstatic     #107                // Field net/minecraft/world/entity/MobCategory.MISC:Lnet/minecraft/world/entity/MobCategory;
+       8: invokestatic  #113                // Method net/minecraft/world/entity/EntityType$Builder.of:(Lnet/minecraft/world/entity/EntityType$EntityFactory;Lnet/minecraft/world/entity/MobCategory;)Lnet/minecraft/world/entity/EntityType$Builder;
+      11: ldc           #119                // float 0.5f
+      13: ldc           #120                // float 0.1f
+      15: invokevirtual #121                // Method net/minecraft/world/entity/EntityType$Builder.sized:(FF)Lnet/minecraft/world/entity/EntityType$Builder;
+      18: bipush        10
+      20: invokevirtual #125                // Method net/minecraft/world/entity/EntityType$Builder.clientTrackingRange:(I)Lnet/minecraft/world/entity/EntityType$Builder;
+      23: invokevirtual #129                // Method net/minecraft/world/entity/EntityType$Builder.noSave:()Lnet/minecraft/world/entity/EntityType$Builder;
+      26: invokevirtual #133                // Method net/minecraft/world/entity/EntityType$Builder.noSummon:()Lnet/minecraft/world/entity/EntityType$Builder;
+      29: ldc           #136                // String sit
+      31: invokevirtual #138                // Method net/minecraft/world/entity/EntityType$Builder.build:(Ljava/lang/String;)Lnet/minecraft/world/entity/EntityType;
+      34: putstatic     #13                 // Field TYPE:Lnet/minecraft/world/entity/EntityType;
+      37: return
+}

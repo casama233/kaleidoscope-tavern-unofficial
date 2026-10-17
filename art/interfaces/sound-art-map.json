@@ -1,0 +1,43 @@
+{
+  "events": [
+    {
+      "source_event": "kaleidoscope_tavern:block.holder.pop",
+      "event": "kt_assets_a17.block.holder.pop",
+      "subtitle_key": "subtitles.kaleidoscope_tavern.block.holder.pop",
+      "clips": [
+        "sounds/kaleidoscope_tavern/block/holder_pop.ogg"
+      ],
+      "engine_accepted": false
+    },
+    {
+      "source_event": "kaleidoscope_tavern:effect.vision",
+      "event": "kt_assets_a17.effect.vision",
+      "subtitle_key": "subtitles.kaleidoscope_tavern.effect.vision",
+      "clips": [
+        "sounds/kaleidoscope_tavern/effect/vision.ogg"
+      ],
+      "engine_accepted": false
+    },
+    {
+      "source_event": "kaleidoscope_tavern:item.shaker.end",
+      "event": "kt_assets_a17.item.shaker.end",
+      "subtitle_key": "subtitles.kaleidoscope_tavern.item.shaker.end",
+      "clips": [
+        "sounds/kaleidoscope_tavern/item/shaker/end.ogg"
+      ],
+      "engine_accepted": false
+    },
+    {
+      "source_event": "kaleidoscope_tavern:item.shaker.shaking",
+      "event": "kt_assets_a17.item.shaker.shaking",
+      "subtitle_key": "subtitles.kaleidoscope_tavern.item.shaker.shaking",
+      "clips": [
+        "sounds/kaleidoscope_tavern/item/shaker/shaking_1.ogg",
+        "sounds/kaleidoscope_tavern/item/shaker/shaking_2.ogg",
+        "sounds/kaleidoscope_tavern/item/shaker/shaking_3.ogg"
+      ],
+      "engine_accepted": false
+    }
+  ],
+  "source": "upstream/uploaded-jar/assets/kaleidoscope_tavern/sounds.json"
+}

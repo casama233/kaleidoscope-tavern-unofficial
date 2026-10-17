@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "scope": "Canonical exact export native matrix; no actors or simulated players. BDS does not render UI.",
+  "version": "0.6.87",
+  "archive_sha256": "dd36a73e43164ed3891104d67e7e9bab4719fa14ad910cb48d4933c317e50492",
+  "static": true,
+  "bds": true,
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "engine_version": "1.26.51.1",
+  "experiments": [],
+  "test_only_overlays": [],
+  "cases": [
+    {
+      "case": "tavern-only",
+      "packs": 2,
+      "transport": "standalone",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "0c0c2f8136f114b177a99b8568fe745376d5c08843bada30ae15940093b3a234",
+        "f75174777edadf12fef8441a752085a545dfffad5cd6a4eacc46737f7315e7d2"
+      ]
+    },
+    {
+      "case": "tavern-and-world-liquor",
+      "packs": 4,
+      "transport": "standalone",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "cbc6b6fef7f7104916466d1070a35e188fad293baba052439262da143d87e928",
+        "60c6627cb80f9ea5fd1936b736a4f3bafcca5034e8bf9ddf66baa21dc55e0ca5"
+      ]
+    },
+    {
+      "case": "luosen-full",
+      "packs": 41,
+      "transport": "ui_queue",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "0b00bbeebf9fafbd51168d039123246e5a87db4f66ed42450d2e47739be1858a",
+        "db521aec9ea7d4900769357801b417e26de91970e1c04b97a4855b78e23a21cf"
+      ]
+    },
+    {
+      "case": "luosen-without-ui-queue",
+      "packs": 40,
+      "transport": "embedded_queue",
+      "cold_start_and_restart": true,
+      "log_sha256": [
+        "03968e8ee64a1fae7bf51391483be671975c5df5925d3cabcbf362b559210fb2",
+        "491422ecfb33c0a3102c237ab709ff4253a56e3bcdce90863d1237e1dafd6bd8"
+      ]
+    }
+  ],
+  "routing_checks": {
+    "schema": 1,
+    "ok": true,
+    "active_packs": 41,
+    "routing_targets": 2,
+    "queue_replays": 12,
+    "foreign_queue_work_preserved": true,
+    "standalone_adapter_verified": true,
+    "embedded_amw_adapter_verified": true,
+    "optional_rp_definitions_separate": true,
+    "visible_transport_glyphs": 0,
+    "amw_cache_filters_checked": 19,
+    "actionbar_writes": 0,
+    "native_effect_control_replacements": 0,
+    "queue_adapter_verified": true,
+    "missing_world_sprites": [],
+    "client": false,
+    "simulated_players": false,
+    "scope": "Static active-stack audit, self-contained transport and installed external/embedded router execution with display handles; no rendered client claim."
+  },
+  "client_limit": "Shared native title channels and third-party HUD replacements need human rendering acceptance."
+}

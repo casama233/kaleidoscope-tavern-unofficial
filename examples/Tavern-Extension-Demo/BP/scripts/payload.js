@@ -1,0 +1,54 @@
+export const payload = {
+  "api": 1,
+  "source": "tavern_demo",
+  "version": "1.0.0",
+  "title": {
+    "zh_TW": "酒館附屬示範",
+    "en_US": "Tavern extension demo"
+  },
+  "recipes": [
+    {
+      "id": "tavern_demo:berry_test",
+      "kind": "barrel",
+      "fluid": "minecraft:water",
+      "ingredients": [
+        [
+          "minecraft:glow_berries"
+        ]
+      ],
+      "carrier": "kaleidoscope_tavern:empty_bottle",
+      "unitTime": 100,
+      "noIngredientCount": 16,
+      "output": {
+        "byQuality": [
+          "kaleidoscope_tavern:wine_q1",
+          "kaleidoscope_tavern:wine_q2",
+          "kaleidoscope_tavern:wine_q3",
+          "kaleidoscope_tavern:wine_q4",
+          "kaleidoscope_tavern:wine_q5",
+          "kaleidoscope_tavern:wine_q6"
+        ]
+      },
+      "title": {
+        "zh_TW": "附屬示範：螢光莓實驗釀造",
+        "en_US": "DEMO: Glow-berry test brew"
+      }
+    }
+  ],
+  "pages": [
+    {
+      "id": "tavern_demo:introduction",
+      "title": {
+        "zh_TW": "附屬已成功接入",
+        "en_US": "Extension is connected"
+      },
+      "body": {
+        "zh_TW": "這頁與示範配方來自獨立行為包，不修改酒館核心或廚房指南。\n示範：4桶水＋螢光莓→酒館葡萄酒。每级100 tick×目前品質，僅供接口測試，不是原版平衡配方。移除示範包並重載世界後，這頁與配方不再註冊。",
+        "en_US": "This page and recipe come from a separate BP without editing Tavern or Cookery. Demo: 4 water buckets + glow berries produce Tavern wine at 100 ticks x quality. This is an API test, not a source/balanced recipe. Removing this optional BP and reloading removes the registration."
+      },
+      "recipeIds": [
+        "tavern_demo:berry_test"
+      ]
+    }
+  ]
+};

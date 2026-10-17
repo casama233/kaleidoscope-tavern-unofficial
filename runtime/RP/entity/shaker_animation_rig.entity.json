@@ -1,0 +1,23 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kt_assets_a8:shaker_animation_rig",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/mixology/shaker"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a8.shaker"
+      },
+      "animations": {
+        "put": "animation.kt_assets_a8.shaker.put"
+      },
+      "render_controllers": [
+        "controller.render.kt_assets_a1.static"
+      ]
+    }
+  }
+}

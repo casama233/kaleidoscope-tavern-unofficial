@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "version": "0.6.89",
+  "evidence": "deterministic_node_algorithm_benchmark",
+  "client": false,
+  "bds": false,
+  "seed": 71349,
+  "scenes": [
+    {
+      "emitters": 1,
+      "strategy": "exact_sparse",
+      "before": {
+        "ticks": 10000,
+        "randomDraws": 80040000,
+        "visited": 13340000,
+        "hits": 1507,
+        "elapsedMs": 2764.852,
+        "meanRandomDrawsPerTick": 8004
+      },
+      "after": {
+        "ticks": 10000,
+        "randomDraws": 23036,
+        "visited": 1518,
+        "hits": 1518,
+        "elapsedMs": 9.079,
+        "meanRandomDrawsPerTick": 2.3036
+      }
+    },
+    {
+      "emitters": 8,
+      "strategy": "exact_sparse",
+      "before": {
+        "ticks": 10000,
+        "randomDraws": 80040000,
+        "visited": 13340000,
+        "hits": 12985,
+        "elapsedMs": 3333.126,
+        "meanRandomDrawsPerTick": 8004
+      },
+      "after": {
+        "ticks": 10000,
+        "randomDraws": 46550,
+        "visited": 13275,
+        "hits": 13275,
+        "elapsedMs": 12.031,
+        "meanRandomDrawsPerTick": 4.655
+      }
+    },
+    {
+      "emitters": 32,
+      "strategy": "exact_sparse",
+      "before": {
+        "ticks": 10000,
+        "randomDraws": 80040000,
+        "visited": 13340000,
+        "hits": 47290,
+        "elapsedMs": 3406.772,
+        "meanRandomDrawsPerTick": 8004
+      },
+      "after": {
+        "ticks": 10000,
+        "randomDraws": 114544,
+        "visited": 47272,
+        "hits": 47272,
+        "elapsedMs": 8.162,
+        "meanRandomDrawsPerTick": 11.4544
+      }
+    },
+    {
+      "emitters": 33,
+      "strategy": "unchanged_dense",
+      "before": {
+        "ticks": 10000,
+        "randomDraws": 80040000,
+        "visited": 13340000,
+        "hits": 48658,
+        "elapsedMs": 3307.789,
+        "meanRandomDrawsPerTick": 8004
+      },
+      "after": {
+        "ticks": 10000,
+        "randomDraws": 80040000,
+        "visited": 13340000,
+        "hits": 48658,
+        "elapsedMs": 3363.33,
+        "meanRandomDrawsPerTick": 8004
+      }
+    }
+  ]
+}

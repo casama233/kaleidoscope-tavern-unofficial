@@ -1,0 +1,37 @@
+{
+  "source_version": "1.2.0-neoforge+mc1.21.1",
+  "source_file": {
+    "id": "Hy0W1pGu",
+    "hashes": {
+      "sha512": "711be986a6e20675804f1fb950ae7da3c0e811016924ed16580193e98b675129d11f986820b54e949af04732863bcf3cb4c48944a524f8afae6eb6b86843af39",
+      "sha1": "9814bd6d884249f6ce05510973bde3bdb733ea19"
+    },
+    "url": "https://cdn.modrinth.com/data/r9RZvhiJ/versions/W9ILsQt7/kaleidoscopetavern-1.2.0-neoforge%2Bmc1.21.1-sources.jar",
+    "filename": "kaleidoscopetavern-1.2.0-neoforge+mc1.21.1-sources.jar",
+    "primary": false,
+    "size": 1356660,
+    "file_type": "sources-jar"
+  },
+  "class_references": [
+    "ShriekAttackEffect",
+    "UpsideDownEffect",
+    "ZenithEffect"
+  ],
+  "java_class_scope": "Current released NeoForge1.21.1 author sources; class/API/render equivalents remain separately verified",
+  "runtime_stage": "Before release identity bump; exact final family gate follows Git merge",
+  "full_parity": false,
+  "source_members": [
+    {
+      "path": "com/github/ysbbbbbb/kaleidoscopetavern/effect/ShriekAttackEffect.java",
+      "sha256": "1bd4aa0f96e426344fc8b0294df35489097823f512fd5be328f3b6048a12f945"
+    },
+    {
+      "path": "com/github/ysbbbbbb/kaleidoscopetavern/effect/UpsideDownEffect.java",
+      "sha256": "a730278d63612a74e9a94c5eddddd8ce0cc35da47fa780cc2b969e3b8cc4688b"
+    },
+    {
+      "path": "com/github/ysbbbbbb/kaleidoscopetavern/effect/ZenithEffect.java",
+      "sha256": "652dcf7bd21c089d20e539603286011c9b86ed1a1aff1f8c4d5146833be8846a"
+    }
+  ]
+}

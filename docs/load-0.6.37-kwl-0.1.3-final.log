@@ -1,0 +1,46 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-24 20:10:29:632 INFO] Starting Server
+[2026-09-24 20:10:29:632 INFO] Version: 1.26.51.1
+[2026-09-24 20:10:29:632 INFO] Session ID: 0c1d22ab-9640-481b-807a-596434073b74
+[2026-09-24 20:10:29:632 INFO] Build ID: 51061372
+[2026-09-24 20:10:29:632 INFO] Branch: r/26_u5
+[2026-09-24 20:10:29:632 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-24 20:10:29:632 INFO] Configuration: Publish
+[2026-09-24 20:10:29:632 INFO] Contents of server.properties: {}
+[2026-09-24 20:10:29:632 INFO] Level Name: Release Check
+[2026-09-24 20:10:29:632 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-24 20:10:29:634 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-24 20:10:29:634 INFO] Game mode: 0 Survival
+[2026-09-24 20:10:29:634 INFO] Difficulty: 1 EASY
+[2026-09-24 20:10:29:637 INFO] Content logging to console is enabled.
+[2026-09-24 20:10:29:639 INFO]
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-24 20:10:30:260 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-24_20-10-30
+[2026-09-24 20:10:30:261 INFO] Opening level 'worlds/Release Check/db'
+[2026-09-24 20:10:30:289 INFO] Accepting clients on [::]:19372
+[2026-09-24 20:10:30:356 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Release Check/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-24 20:10:30:356 INFO] Pack Stack - [01] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.3) @ worlds/Release Check/behavior_packs/355ffdfc-50e6-5a33-a126-4d78ab955b2b
+[2026-09-24 20:10:30:356 INFO] Pack Stack - [02] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.37) @ worlds/Release Check/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-24 20:10:32:494 INFO] Signed in to signaling service successfully
+[2026-09-24 20:10:32:710 INFO] Server started.
+[2026-09-24 20:10:32:710 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-24 20:10:32:710 INFO] Server Telemetry is currently not enabled.
+[2026-09-24 20:10:32:710 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-24 20:10:32:710 INFO]
+[2026-09-24 20:10:32:710 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-24 20:10:32:710 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-24 20:10:32:710 INFO] ======================================================
+[2026-09-24 20:10:32:955 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.37-beta.1.
+
+[2026-09-24 20:10:33:882 WARN] [Scripting] [World Liquor] 0.1.3 preview: 24 drink descriptors, 32 recipes. Client visuals require device review.
+
+[2026-09-24 20:10:36:425 WARN] [Scripting] [Tavern SDK] Registered kaleidoscope_world_liquor
+
+[2026-09-24 20:10:41:631 INFO] Server stop requested.
+[2026-09-24 20:10:41:680 INFO] Stopping server...
+Quit correctly

@@ -1,0 +1,850 @@
+TAP version 13
+# Subtest: source health multiplier uses Java float32 and current HP
+ok 1 - source health multiplier uses Java float32 and current HP
+  ---
+  duration_ms: 2.518595
+  type: 'test'
+  ...
+# Subtest: ray hit boundaries are inclusive at 0 and 32, excludes rear/beyond
+ok 2 - ray hit boundaries are inclusive at 0 and 32, excludes rear/beyond
+  ---
+  duration_ms: 0.574659
+  type: 'test'
+  ...
+# Subtest: halfwidth-aware corridor is Euclidean, not axis-aligned damage cube
+ok 3 - halfwidth-aware corridor is Euclidean, not axis-aligned damage cube
+  ---
+  duration_ms: 0.220646
+  type: 'test'
+  ...
+# Subtest: ray can look vertically or diagonally, no horizontal-only accidental hits
+ok 4 - ray can look vertically or diagonally, no horizontal-only accidental hits
+  ---
+  duration_ms: 0.345487
+  type: 'test'
+  ...
+# Subtest: source knockback threshold and additive vector are exact
+ok 5 - source knockback threshold and additive vector are exact
+  ---
+  duration_ms: 0.905841
+  type: 'test'
+  ...
+# Subtest: exactly16 visual points at2..32 along full normalized direction
+ok 6 - exactly16 visual points at2..32 along full normalized direction
+  ---
+  duration_ms: 0.294923
+  type: 'test'
+  ...
+# Subtest: invalid vectors/negative AABB extents rejected, not guessed
+ok 7 - invalid vectors/negative AABB extents rejected, not guessed
+  ---
+  duration_ms: 0.332232
+  type: 'test'
+  ...
+# Subtest: instant custom effects never become persisted ticking effects
+ok 8 - instant custom effects never become persisted ticking effects
+  ---
+  duration_ms: 0.51723
+  type: 'test'
+  ...
+# Subtest: upside-down Java-style inflated AABB uses strict overlap and target extents
+ok 9 - upside-down Java-style inflated AABB uses strict overlap and target extents
+  ---
+  duration_ms: 0.685945
+  type: 'test'
+  ...
+# Subtest: source stool color contract: white
+ok 10 - source stool color contract: white
+  ---
+  duration_ms: 1.310813
+  type: 'test'
+  ...
+# Subtest: source stool color contract: light_gray
+ok 11 - source stool color contract: light_gray
+  ---
+  duration_ms: 0.377608
+  type: 'test'
+  ...
+# Subtest: source stool color contract: gray
+ok 12 - source stool color contract: gray
+  ---
+  duration_ms: 0.346448
+  type: 'test'
+  ...
+# Subtest: source stool color contract: black
+ok 13 - source stool color contract: black
+  ---
+  duration_ms: 0.259442
+  type: 'test'
+  ...
+# Subtest: source stool color contract: brown
+ok 14 - source stool color contract: brown
+  ---
+  duration_ms: 0.317379
+  type: 'test'
+  ...
+# Subtest: source stool color contract: red
+ok 15 - source stool color contract: red
+  ---
+  duration_ms: 0.357907
+  type: 'test'
+  ...
+# Subtest: source stool color contract: orange
+ok 16 - source stool color contract: orange
+  ---
+  duration_ms: 0.26438
+  type: 'test'
+  ...
+# Subtest: source stool color contract: yellow
+ok 17 - source stool color contract: yellow
+  ---
+  duration_ms: 0.245847
+  type: 'test'
+  ...
+# Subtest: source stool color contract: lime
+ok 18 - source stool color contract: lime
+  ---
+  duration_ms: 0.239458
+  type: 'test'
+  ...
+# Subtest: source stool color contract: green
+ok 19 - source stool color contract: green
+  ---
+  duration_ms: 0.432092
+  type: 'test'
+  ...
+# Subtest: source stool color contract: cyan
+ok 20 - source stool color contract: cyan
+  ---
+  duration_ms: 0.260505
+  type: 'test'
+  ...
+# Subtest: source stool color contract: light_blue
+ok 21 - source stool color contract: light_blue
+  ---
+  duration_ms: 0.22217
+  type: 'test'
+  ...
+# Subtest: source stool color contract: blue
+ok 22 - source stool color contract: blue
+  ---
+  duration_ms: 0.220307
+  type: 'test'
+  ...
+# Subtest: source stool color contract: purple
+ok 23 - source stool color contract: purple
+  ---
+  duration_ms: 0.295006
+  type: 'test'
+  ...
+# Subtest: source stool color contract: magenta
+ok 24 - source stool color contract: magenta
+  ---
+  duration_ms: 0.238906
+  type: 'test'
+  ...
+# Subtest: source stool color contract: pink
+ok 25 - source stool color contract: pink
+  ---
+  duration_ms: 0.199193
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: colorless
+ok 26 - distinct source light and level15: colorless
+  ---
+  duration_ms: 0.315349
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: white
+ok 27 - distinct source light and level15: white
+  ---
+  duration_ms: 0.20654
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: light_gray
+ok 28 - distinct source light and level15: light_gray
+  ---
+  duration_ms: 0.195269
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: gray
+ok 29 - distinct source light and level15: gray
+  ---
+  duration_ms: 0.197013
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: black
+ok 30 - distinct source light and level15: black
+  ---
+  duration_ms: 0.186218
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: brown
+ok 31 - distinct source light and level15: brown
+  ---
+  duration_ms: 0.179028
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: red
+ok 32 - distinct source light and level15: red
+  ---
+  duration_ms: 0.197741
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: orange
+ok 33 - distinct source light and level15: orange
+  ---
+  duration_ms: 0.193354
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: yellow
+ok 34 - distinct source light and level15: yellow
+  ---
+  duration_ms: 0.177852
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: lime
+ok 35 - distinct source light and level15: lime
+  ---
+  duration_ms: 0.273534
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: green
+ok 36 - distinct source light and level15: green
+  ---
+  duration_ms: 0.19702
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: cyan
+ok 37 - distinct source light and level15: cyan
+  ---
+  duration_ms: 0.184722
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: light_blue
+ok 38 - distinct source light and level15: light_blue
+  ---
+  duration_ms: 0.175952
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: blue
+ok 39 - distinct source light and level15: blue
+  ---
+  duration_ms: 0.172724
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: purple
+ok 40 - distinct source light and level15: purple
+  ---
+  duration_ms: 0.193715
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: magenta
+ok 41 - distinct source light and level15: magenta
+  ---
+  duration_ms: 0.193277
+  type: 'test'
+  ...
+# Subtest: distinct source light and level15: pink
+ok 42 - distinct source light and level15: pink
+  ---
+  duration_ms: 0.195887
+  type: 'test'
+  ...
+# Subtest: vertical double helper is symmetric and rejects unknown half
+ok 43 - vertical double helper is symmetric and rejects unknown half
+  ---
+  duration_ms: 0.241889
+  type: 'test'
+  ...
+# Subtest: source two-block Pendant Lamp contract: bell
+ok 44 - source two-block Pendant Lamp contract: bell
+  ---
+  duration_ms: 0.465899
+  type: 'test'
+  ...
+# Subtest: source two-block Pendant Lamp contract: blue
+ok 45 - source two-block Pendant Lamp contract: blue
+  ---
+  duration_ms: 0.284057
+  type: 'test'
+  ...
+# Subtest: source two-block Pendant Lamp contract: yellow
+ok 46 - source two-block Pendant Lamp contract: yellow
+  ---
+  duration_ms: 0.268274
+  type: 'test'
+  ...
+# Subtest: Painting Java placement state preserves wall/floor/ceiling facing rules
+ok 47 - Painting Java placement state preserves wall/floor/ceiling facing rules
+  ---
+  duration_ms: 0.283365
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: ysbb
+ok 48 - source attachable Painting contract: ysbb
+  ---
+  duration_ms: 0.440917
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: tartaric_acid
+ok 49 - source attachable Painting contract: tartaric_acid
+  ---
+  duration_ms: 0.28135
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: cr019
+ok 50 - source attachable Painting contract: cr019
+  ---
+  duration_ms: 0.280346
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: unknown
+ok 51 - source attachable Painting contract: unknown
+  ---
+  duration_ms: 0.266975
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: master_marisa
+ok 52 - source attachable Painting contract: master_marisa
+  ---
+  duration_ms: 0.274595
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: son_of_man
+ok 53 - source attachable Painting contract: son_of_man
+  ---
+  duration_ms: 0.273551
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: david
+ok 54 - source attachable Painting contract: david
+  ---
+  duration_ms: 0.287633
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: girl_with_pearl_earring
+ok 55 - source attachable Painting contract: girl_with_pearl_earring
+  ---
+  duration_ms: 0.268001
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: starry_night
+ok 56 - source attachable Painting contract: starry_night
+  ---
+  duration_ms: 0.2736
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: van_gogh_self_portrait
+ok 57 - source attachable Painting contract: van_gogh_self_portrait
+  ---
+  duration_ms: 0.331794
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: father
+ok 58 - source attachable Painting contract: father
+  ---
+  duration_ms: 0.266235
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: great_wave
+ok 59 - source attachable Painting contract: great_wave
+  ---
+  duration_ms: 1.201295
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: mona_lisa
+ok 60 - source attachable Painting contract: mona_lisa
+  ---
+  duration_ms: 0.271319
+  type: 'test'
+  ...
+# Subtest: source attachable Painting contract: mondrian
+ok 61 - source attachable Painting contract: mondrian
+  ---
+  duration_ms: 0.264887
+  type: 'test'
+  ...
+# Subtest: all14 Painting block placements match Java facing rotations and collision boxes
+ok 62 - all14 Painting block placements match Java facing rotations and collision boxes
+  ---
+  duration_ms: 2.84307
+  type: 'test'
+  ...
+# Subtest: Painting family stays exactly the14 Java 1.2.0 variants
+ok 63 - Painting family stays exactly the14 Java 1.2.0 variants
+  ---
+  duration_ms: 0.14861
+  type: 'test'
+  ...
+# Subtest: Painting item transforms preserve all Java display contexts for all14 block items
+ok 64 - Painting item transforms preserve all Java display contexts for all14 block items
+  ---
+  duration_ms: 1.382671
+  type: 'test'
+  ...
+# Subtest: all source color families remain complete without inventing twentieth colors
+ok 65 - all source color families remain complete without inventing twentieth colors
+  ---
+  duration_ms: 0.245093
+  type: 'test'
+  ...
+# Subtest: anchor roundtrip separates dimensions and supports negative coordinates
+ok 66 - anchor roundtrip separates dimensions and supports negative coordinates
+  ---
+  duration_ms: 0.559214
+  type: 'test'
+  ...
+# Subtest: all4 cardinal directions and seat angles wrap predictably
+ok 67 - all4 cardinal directions and seat angles wrap predictably
+  ---
+  duration_ms: 0.280675
+  type: 'test'
+  ...
+# Subtest: turn animation affects cushion only, not base_root
+ok 68 - turn animation affects cushion only, not base_root
+  ---
+  duration_ms: 0.257629
+  type: 'test'
+  ...
+# Subtest: all33 recipe ingredients and sources are recorded with bytes hash
+ok 69 - all33 recipe ingredients and sources are recorded with bytes hash
+  ---
+  duration_ms: 0.330865
+  type: 'test'
+  ...
+# Subtest: Vision source radius is 6/12/18 and caps at amplifier2
+ok 70 - Vision source radius is 6/12/18 and caps at amplifier2
+  ---
+  duration_ms: 0.204886
+  type: 'test'
+  ...
+# Subtest: Vision 50-tick countdown pulse detects crossed Java modulo boundaries
+ok 71 - Vision 50-tick countdown pulse detects crossed Java modulo boundaries
+  ---
+  duration_ms: 0.188715
+  type: 'test'
+  ...
+# Subtest: Tomb Raider maps exact Java disarmable families to Bedrock IDs
+ok 72 - Tomb Raider maps exact Java disarmable families to Bedrock IDs
+  ---
+  duration_ms: 0.154255
+  type: 'test'
+  ...
+# Subtest: Tomb Raider 30 percent roll preserves Java float32 boundary
+ok 73 - Tomb Raider 30 percent roll preserves Java float32 boundary
+  ---
+  duration_ms: 0.217277
+  type: 'test'
+  ...
+# Subtest: Ardent Heat expands exact Java base-stone tags without fuzzy matching
+ok 74 - Ardent Heat expands exact Java base-stone tags without fuzzy matching
+  ---
+  duration_ms: 0.201299
+  type: 'test'
+  ...
+# Subtest: Ardent Heat front plane is source 3x3 at feet through +2 for four cardinal yaws
+ok 75 - Ardent Heat front plane is source 3x3 at feet through +2 for four cardinal yaws
+  ---
+  duration_ms: 0.606666
+  type: 'test'
+  ...
+# Subtest: official c4ec188 magenta string-light culling fix keeps all12 rotated thin planes double-sided
+ok 76 - official c4ec188 magenta string-light culling fix keeps all12 rotated thin planes double-sided
+  ---
+  duration_ms: 0.759091
+  type: 'test'
+  ...
+# Subtest: official b30f34a gold grape bucket texture is byte-exact in locked source and both runtime copies
+ok 77 - official b30f34a gold grape bucket texture is byte-exact in locked source and both runtime copies
+  ---
+  duration_ms: 1.30893
+  type: 'test'
+  ...
+# Subtest: High Heels maps raw movement to yaw-relative cardinal travel
+ok 78 - High Heels maps raw movement to yaw-relative cardinal travel
+  ---
+  duration_ms: 0.235081
+  type: 'test'
+  ...
+# Subtest: High Heels only arms when movement input is strong but horizontal motion is blocked
+ok 79 - High Heels only arms when movement input is strong but horizontal motion is blocked
+  ---
+  duration_ms: 0.227034
+  type: 'test'
+  ...
+# Subtest: High Heels waits for the collision edge and raises one block with small forward carry
+ok 80 - High Heels waits for the collision edge and raises one block with small forward carry
+  ---
+  duration_ms: 0.315322
+  type: 'test'
+  ...
+# Subtest: source sofa contract: white
+ok 81 - source sofa contract: white
+  ---
+  duration_ms: 0.419726
+  type: 'test'
+  ...
+# Subtest: source sofa contract: light_gray
+ok 82 - source sofa contract: light_gray
+  ---
+  duration_ms: 0.247454
+  type: 'test'
+  ...
+# Subtest: source sofa contract: gray
+ok 83 - source sofa contract: gray
+  ---
+  duration_ms: 0.237183
+  type: 'test'
+  ...
+# Subtest: source sofa contract: black
+ok 84 - source sofa contract: black
+  ---
+  duration_ms: 0.233604
+  type: 'test'
+  ...
+# Subtest: source sofa contract: brown
+ok 85 - source sofa contract: brown
+  ---
+  duration_ms: 0.221509
+  type: 'test'
+  ...
+# Subtest: source sofa contract: red
+ok 86 - source sofa contract: red
+  ---
+  duration_ms: 0.252542
+  type: 'test'
+  ...
+# Subtest: source sofa contract: orange
+ok 87 - source sofa contract: orange
+  ---
+  duration_ms: 0.224227
+  type: 'test'
+  ...
+# Subtest: source sofa contract: yellow
+ok 88 - source sofa contract: yellow
+  ---
+  duration_ms: 0.225511
+  type: 'test'
+  ...
+# Subtest: source sofa contract: lime
+ok 89 - source sofa contract: lime
+  ---
+  duration_ms: 0.287617
+  type: 'test'
+  ...
+# Subtest: source sofa contract: green
+ok 90 - source sofa contract: green
+  ---
+  duration_ms: 0.272943
+  type: 'test'
+  ...
+# Subtest: source sofa contract: cyan
+ok 91 - source sofa contract: cyan
+  ---
+  duration_ms: 0.227948
+  type: 'test'
+  ...
+# Subtest: source sofa contract: light_blue
+ok 92 - source sofa contract: light_blue
+  ---
+  duration_ms: 0.218596
+  type: 'test'
+  ...
+# Subtest: source sofa contract: blue
+ok 93 - source sofa contract: blue
+  ---
+  duration_ms: 0.216457
+  type: 'test'
+  ...
+# Subtest: source sofa contract: purple
+ok 94 - source sofa contract: purple
+  ---
+  duration_ms: 0.241036
+  type: 'test'
+  ...
+# Subtest: source sofa contract: magenta
+ok 95 - source sofa contract: magenta
+  ---
+  duration_ms: 0.227005
+  type: 'test'
+  ...
+# Subtest: source sofa contract: pink
+ok 96 - source sofa contract: pink
+  ---
+  duration_ms: 0.21227
+  type: 'test'
+  ...
+# Subtest: Sofa Java IConnectionBlock priority and cross-color-compatible states are preserved
+ok 97 - Sofa Java IConnectionBlock priority and cross-color-compatible states are preserved
+  ---
+  duration_ms: 0.392376
+  type: 'test'
+  ...
+# Subtest: Bar Counter and Sofa are thin wrappers over one Java IConnectionBlock core
+ok 98 - Bar Counter and Sofa are thin wrappers over one Java IConnectionBlock core
+  ---
+  duration_ms: 0.311477
+  type: 'test'
+  ...
+# Subtest: source Bar Counter block, identity and recipe use existing assets without a second item definition
+ok 99 - source Bar Counter block, identity and recipe use existing assets without a second item definition
+  ---
+  duration_ms: 0.461833
+  type: 'test'
+  ...
+# Subtest: Sofa helper is one invisible native seat at candidate source-adapted height
+ok 100 - Sofa helper is one invisible native seat at candidate source-adapted height
+  ---
+  duration_ms: 0.28325
+  type: 'test'
+  ...
+# Subtest: c70eec model-only sync plan is source-locked and applied to all four cocktails
+ok 101 - c70eec model-only sync plan is source-locked and applied to all four cocktails
+  ---
+  duration_ms: 2.84399
+  type: 'test'
+  ...
+# Subtest: source TableBlock link predicate only lets a perpendicular correction steal a SINGLE neighbor
+ok 102 - source TableBlock link predicate only lets a perpendicular correction steal a SINGLE neighbor
+  ---
+  duration_ms: 0.209484
+  type: 'test'
+  ...
+# Subtest: source TableBlock east-west and north-south state machines preserve axis locking
+ok 103 - source TableBlock east-west and north-south state machines preserve axis locking
+  ---
+  duration_ms: 0.321326
+  type: 'test'
+  ...
+# Subtest: table world serialization maps logical axes onto native cardinal direction
+ok 104 - table world serialization maps logical axes onto native cardinal direction
+  ---
+  duration_ms: 0.192115
+  type: 'test'
+  ...
+# Subtest: table placement follows player axis while repair can connect a standalone table on either axis
+ok 105 - table placement follows player axis while repair can connect a standalone table on either axis
+  ---
+  duration_ms: 0.247207
+  type: 'test'
+  ...
+# Subtest: source table block/recipe bind exact seven geometries, top-slab collision and native plank/fence tags
+ok 106 - source table block/recipe bind exact seven geometries, top-slab collision and native plank/fence tags
+  ---
+  duration_ms: 0.674416
+  type: 'test'
+  ...
+# Subtest: Glassware Holder source quadrant mapping is raw block-local X/Z
+ok 107 - Glassware Holder source quadrant mapping is raw block-local X/Z
+  ---
+  duration_ms: 0.20451
+  type: 'test'
+  ...
+# Subtest: Glassware Holder four states reproduce Java-rendered cup coordinates
+ok 108 - Glassware Holder four states reproduce Java-rendered cup coordinates
+  ---
+  duration_ms: 0.818655
+  type: 'test'
+  ...
+# Subtest: Glassware Holder source recipe keeps chain and maps iron nugget tag
+ok 109 - Glassware Holder source recipe keeps chain and maps iron nugget tag
+  ---
+  duration_ms: 0.182457
+  type: 'test'
+  ...
+# Subtest: Holder source allow/block lists map BottleBlockItem bases without admitting cocktails or Molotov
+ok 110 - Holder source allow/block lists map BottleBlockItem bases without admitting cocktails or Molotov
+  ---
+  duration_ms: 0.466225
+  type: 'test'
+  ...
+# Subtest: Holder state stores exact quality ID while display kind stores only source bottle shape
+ok 111 - Holder state stores exact quality ID while display kind stores only source bottle shape
+  ---
+  duration_ms: 0.478682
+  type: 'test'
+  ...
+# Subtest: Holder source renderer pose maps bottle to front side, -45 pitch and 0.95 client scale
+ok 112 - Holder source renderer pose maps bottle to front side, -45 pitch and 0.95 client scale
+  ---
+  duration_ms: 0.373144
+  type: 'test'
+  ...
+# Subtest: Holder block keeps exact source directional collision and source recipe
+ok 113 - Holder block keeps exact source directional collision and source recipe
+  ---
+  duration_ms: 0.322503
+  type: 'test'
+  ...
+# Subtest: Tilted Rack source scope blocks only brandy/carignan while shared bottle kinds preserve Holder first15 ids
+ok 114 - Tilted Rack source scope blocks only brandy/carignan while shared bottle kinds preserve Holder first15 ids
+  ---
+  duration_ms: 0.317553
+  type: 'test'
+  ...
+# Subtest: Tilted Rack source local-X slot mapping rotates with facing
+ok 115 - Tilted Rack source local-X slot mapping rotates with facing
+  ---
+  duration_ms: 0.180532
+  type: 'test'
+  ...
+# Subtest: Tilted Rack state preserves three independent exact-quality ids
+ok 116 - Tilted Rack state preserves three independent exact-quality ids
+  ---
+  duration_ms: 0.681964
+  type: 'test'
+  ...
+# Subtest: Tilted Rack source renderer pose adapts scale .9 and +22.5 tilt
+ok 117 - Tilted Rack source renderer pose adapts scale .9 and +22.5 tilt
+  ---
+  duration_ms: 0.373039
+  type: 'test'
+  ...
+# Subtest: cellar, tilted and single holders rotate bottle mesh bones by Java angles
+ok 118 - cellar, tilted and single holders rotate bottle mesh bones by Java angles
+  ---
+  duration_ms: 0.397941
+  type: 'test'
+  ...
+# Subtest: Tilted Rack block keeps four source directional shapes and source recipe count3
+ok 119 - Tilted Rack block keeps four source directional shapes and source recipe count3
+  ---
+  duration_ms: 0.337011
+  type: 'test'
+  ...
+# Subtest: Circular Rack source scope has empty blocklist and accepts every shared bottle kind except excluded non-bottles
+ok 120 - Circular Rack source scope has empty blocklist and accepts every shared bottle kind except excluded non-bottles
+  ---
+  duration_ms: 0.168405
+  type: 'test'
+  ...
+# Subtest: Circular Rack exact Java angle sectors map six positions and rotate with facing
+ok 121 - Circular Rack exact Java angle sectors map six positions and rotate with facing
+  ---
+  duration_ms: 0.232375
+  type: 'test'
+  ...
+# Subtest: Circular Rack state preserves six independent exact-quality IDs
+ok 122 - Circular Rack state preserves six independent exact-quality IDs
+  ---
+  duration_ms: 0.819908
+  type: 'test'
+  ...
+# Subtest: Circular Rack visual pose keeps six source positions, scale .82 and source yaw fan
+ok 123 - Circular Rack visual pose keeps six source positions, scale .82 and source yaw fan
+  ---
+  duration_ms: 0.349594
+  type: 'test'
+  ...
+# Subtest: Circular Rack base and upper pole have separate collision, light14 and recipe output2
+ok 124 - Circular Rack base and upper pole have separate collision, light14 and recipe output2
+  ---
+  duration_ms: 0.337434
+  type: 'test'
+  ...
+# Subtest: Circular Rack particle point remains on Java edge bands and within one block height
+ok 125 - Circular Rack particle point remains on Java edge bands and within one block height
+  ---
+  duration_ms: 0.231549
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet source irregular tag is exactly brandy/carignan and all BottleBlock shapes remain admissible
+ok 126 - Bar Cabinet source irregular tag is exactly brandy/carignan and all BottleBlock shapes remain admissible
+  ---
+  duration_ms: 0.216982
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet two-slot Java redirection and irregular single mode are exact
+ok 127 - Bar Cabinet two-slot Java redirection and irregular single mode are exact
+  ---
+  duration_ms: 0.52552
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet clicked left side follows Java facing rule and line connection preserves same-type only
+ok 128 - Bar Cabinet clicked left side follows Java facing rule and line connection preserves same-type only
+  ---
+  duration_ms: 0.300964
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet state keys/visual pose preserve source center single and split regular bottles
+ok 129 - Bar Cabinet state keys/visual pose preserve source center single and split regular bottles
+  ---
+  duration_ms: 0.622971
+  type: 'test'
+  ...
+# Subtest: Bar Cabinet and Glass Bar Cabinet use source four connection geometries and full-block collision
+ok 130 - Bar Cabinet and Glass Bar Cabinet use source four connection geometries and full-block collision
+  ---
+  duration_ms: 0.40277
+  type: 'test'
+  ...
+# Subtest: Glass Bar Cabinet expands Java c:glass_panes to clear plus sixteen stained pane recipes
+ok 131 - Glass Bar Cabinet expands Java c:glass_panes to clear plus sixteen stained pane recipes
+  ---
+  duration_ms: 0.974965
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet source blocklist matches Holder and accepts only empty bottle plus14 regular quality bases
+ok 132 - Cellar Cabinet source blocklist matches Holder and accepts only empty bottle plus14 regular quality bases
+  ---
+  duration_ms: 0.188537
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet front-only Java3x3 hit mapping is exact for all facings
+ok 133 - Cellar Cabinet front-only Java3x3 hit mapping is exact for all facings
+  ---
+  duration_ms: 0.252118
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet state preserves nine independent exact-quality IDs
+ok 134 - Cellar Cabinet state preserves nine independent exact-quality IDs
+  ---
+  duration_ms: 0.78931
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet same-facing line connection uses source single-left-middle-right states
+ok 135 - Cellar Cabinet same-facing line connection uses source single-left-middle-right states
+  ---
+  duration_ms: 0.24354
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet source renderer positions form3x3 shelf with scale1 and -90 X rotation
+ok 136 - Cellar Cabinet source renderer positions form3x3 shelf with scale1 and -90 X rotation
+  ---
+  duration_ms: 0.351244
+  type: 'test'
+  ...
+# Subtest: Cellar Cabinet uses source four geometries, full block collision and20 trapdoor-expanded recipes
+ok 137 - Cellar Cabinet uses source four geometries, full block collision and20 trapdoor-expanded recipes
+  ---
+  duration_ms: 1.134786
+  type: 'test'
+  ...
+# Subtest: Cookery guide payload is one organized Tavern family chapter
+ok 138 - Cookery guide payload is one organized Tavern family chapter
+  ---
+  duration_ms: 0.868265
+  type: 'test'
+  ...
+# Subtest: Tavern extension pages and auto recipe pages are projected into the Cookery family guide
+ok 139 - Tavern extension pages and auto recipe pages are projected into the Cookery family guide
+  ---
+  duration_ms: 6.102976
+  type: 'test'
+  ...
+# Subtest: Cookery guide publisher uses bounded ASCII begin/chunk/end packets and roundtrips payload
+ok 140 - Cookery guide publisher uses bounded ASCII begin/chunk/end packets and roundtrips payload
+  ---
+  duration_ms: 13.056404
+  type: 'test'
+  ...
+1..140
+# tests 140
+# suites 0
+# pass 140
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 260.729961

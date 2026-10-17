@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "scope": "Native effect API phase capabilities only; no player/client or complete parity claim",
+  "engine_version": "1.26.51.1",
+  "script_api": "@minecraft/server 2.7.0",
+  "simulated_players": false,
+  "real_players": 0,
+  "production_instant_adapter_installed": false,
+  "runs": [
+    {
+      "name": "queued_effects",
+      "source": "tools/fixtures/drink-phase-queued_effects-probe.js",
+      "ok": true,
+      "normal_exit": true,
+      "native_errors": [],
+      "cases": [
+        {
+          "kind": "case",
+          "case": "instant_damage_lethal",
+          "effect": "instant_damage",
+          "before": 2,
+          "immediate": 2,
+          "validImmediate": true,
+          "nextTick": 0,
+          "validNextTick": true,
+          "secondTick": 0,
+          "validSecondTick": true,
+          "relativeTick": 0,
+          "nextRelativeTick": 1
+        },
+        {
+          "kind": "case",
+          "case": "instant_damage_surviving",
+          "effect": "instant_damage",
+          "before": 10,
+          "immediate": 10,
+          "validImmediate": true,
+          "nextTick": 4,
+          "validNextTick": true,
+          "secondTick": 4,
+          "validSecondTick": true,
+          "relativeTick": 2,
+          "nextRelativeTick": 3
+        },
+        {
+          "kind": "case",
+          "case": "instant_health",
+          "effect": "instant_health",
+          "before": 2,
+          "immediate": 2,
+          "validImmediate": true,
+          "nextTick": 6,
+          "validNextTick": true,
+          "secondTick": 6,
+          "validSecondTick": true,
+          "relativeTick": 4,
+          "nextRelativeTick": 5
+        },
+        {
+          "kind": "case",
+          "case": "poison",
+          "effect": "poison",
+          "before": 2,
+          "immediate": 2,
+          "validImmediate": true,
+          "nextTick": 2,
+          "validNextTick": true,
+          "secondTick": 2,
+          "validSecondTick": true,
+          "relativeTick": 6,
+          "nextRelativeTick": 7
+        }
+      ],
+      "events": [
+        {
+          "kind": "hurt",
+          "case": "instant_damage_lethal",
+          "phase": "instant_damage_lethal:returned",
+          "damage": 6,
+          "relativeTick": 1
+        },
+        {
+          "kind": "death",
+          "case": "instant_damage_lethal",
+          "phase": "instant_damage_lethal:returned",
+          "relativeTick": 1
+        },
+        {
+          "kind": "hurt",
+          "case": "instant_damage_surviving",
+          "phase": "instant_damage_surviving:returned",
+          "damage": 6,
+          "relativeTick": 3
+        }
+      ]
+    },
+    {
+      "name": "direct_and_zero_effects",
+      "source": "tools/fixtures/drink-phase-direct_and_zero_effects-probe.js",
+      "ok": true,
+      "normal_exit": true,
+      "native_errors": [],
+      "cases": [
+        {
+          "kind": "case",
+          "case": "speed_zero",
+          "effect": "speed",
+          "before": 2,
+          "apiError": "ArgumentOutOfBoundsError: Unsupported or out of bounds value passed to function argument [1]. Value: 0, Argument bounds: [1, 20000000]",
+          "immediate": 2,
+          "validImmediate": true,
+          "nextTick": 2,
+          "validNextTick": true,
+          "secondTick": 2,
+          "validSecondTick": true,
+          "relativeTick": 0,
+          "nextRelativeTick": 1
+        },
+        {
+          "kind": "case",
+          "case": "poison_zero",
+          "effect": "poison",
+          "before": 2,
+          "apiError": "ArgumentOutOfBoundsError: Unsupported or out of bounds value passed to function argument [1]. Value: 0, Argument bounds: [1, 20000000]",
+          "immediate": 2,
+          "validImmediate": true,
+          "nextTick": 2,
+          "validNextTick": true,
+          "secondTick": 2,
+          "validSecondTick": true,
+          "relativeTick": 2,
+          "nextRelativeTick": 3
+        },
+        {
+          "kind": "case",
+          "case": "magic_damage_lethal",
+          "before": 2,
+          "apiResult": true,
+          "immediate": 0,
+          "validImmediate": true,
+          "nextTick": 0,
+          "validNextTick": true,
+          "secondTick": 0,
+          "validSecondTick": true,
+          "relativeTick": 4,
+          "nextRelativeTick": 5
+        },
+        {
+          "kind": "case",
+          "case": "direct_heal",
+          "before": 2,
+          "immediate": 6,
+          "validImmediate": true,
+          "nextTick": 6,
+          "validNextTick": true,
+          "secondTick": 6,
+          "validSecondTick": true,
+          "relativeTick": 6,
+          "nextRelativeTick": 7
+        }
+      ],
+      "events": [
+        {
+          "kind": "hurt",
+          "case": "magic_damage_lethal",
+          "phase": "magic_damage_lethal:returned",
+          "damage": 6,
+          "relativeTick": 4
+        },
+        {
+          "kind": "death",
+          "case": "magic_damage_lethal",
+          "phase": "magic_damage_lethal:returned",
+          "relativeTick": 4
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    "Player lifecycle and death/drop aliases",
+    "Native armor/resistance/absorption and undead conversion for direct damage",
+    "Java heal hooks and shared RNG state",
+    "Zero-duration timed effect attribute lifecycle"
+  ]
+}

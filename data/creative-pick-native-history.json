@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "review": "Only native same-ID pick mapping; placement behaviours retained. Script-only registration is restricted to Molang false.",
+  "items": {
+    "runtime/BP/items/molotov.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:molotov",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/grass_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:grass_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/pitcher_plant_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:pitcher_plant_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/spore_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:spore_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:spore_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/butterfly_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:butterfly_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:butterfly_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/stepladder.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:stepladder",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/sunflower_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:sunflower_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/poppy_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:poppy_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/allium_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:allium_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/firefly_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:firefly_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:firefly_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/tulip_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:tulip_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/base_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:base_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/wither_rose_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:wither_rose_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/sakura_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:sakura_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:sakura_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/chalkboard.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:chalkboard",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/peony_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:peony_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/catnip_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:catnip_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:catnip_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/orchid_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:orchid_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/azure_bluet_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:azure_bluet_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/torchflower_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:torchflower_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/snow_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:snow_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:snow_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/ginkgo_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:ginkgo_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:ginkgo_incense",
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/cornflower_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:cornflower_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/pink_petals_sandwich_board.json": {
+      "before": null,
+      "after": {
+        "block": "kaleidoscope_tavern:pink_petals_sandwich_board",
+        "use_on": [
+          {
+            "tags": "0"
+          }
+        ],
+        "replace_block_item": true
+      }
+    },
+    "runtime/BP/items/pine_incense.json": {
+      "before": {
+        "block": "kaleidoscope_tavern:pine_incense"
+      },
+      "after": {
+        "block": "kaleidoscope_tavern:pine_incense",
+        "replace_block_item": true
+      }
+    }
+  }
+}

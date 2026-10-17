@@ -1,0 +1,103 @@
+{
+  "baseline": "4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7",
+  "kind": "mock_api_counts_not_native_performance",
+  "before": {
+    "kind": "mock_api_counts_not_native_performance",
+    "cellars": [
+      {
+        "count": 1,
+        "full": false,
+        "helpers": 0,
+        "queries": 9,
+        "mutationCalls": 0
+      },
+      {
+        "count": 1,
+        "full": true,
+        "helpers": 9,
+        "queries": 90,
+        "mutationCalls": 270
+      },
+      {
+        "count": 10,
+        "full": true,
+        "helpers": 90,
+        "queries": 900,
+        "mutationCalls": 2700
+      },
+      {
+        "count": 100,
+        "full": true,
+        "helpers": 900,
+        "queries": 2052,
+        "mutationCalls": 6156
+      }
+    ],
+    "boardEdit": {
+      "glyphs": 300,
+      "spawned": 300,
+      "removed": 300
+    },
+    "unrelatedAmbient": {
+      "players": 2,
+      "randomCallsPerTick": 16008
+    },
+    "idleEffects": {
+      "ticks": 20,
+      "reads": 44,
+      "writes": 4,
+      "playerLists": 44
+    }
+  },
+  "after": {
+    "kind": "mock_api_counts_not_native_performance",
+    "cellars": [
+      {
+        "count": 1,
+        "full": false,
+        "helpers": 0,
+        "queries": 1,
+        "mutationCalls": 0
+      },
+      {
+        "count": 1,
+        "full": true,
+        "helpers": 9,
+        "queries": 2,
+        "mutationCalls": 0
+      },
+      {
+        "count": 10,
+        "full": true,
+        "helpers": 90,
+        "queries": 20,
+        "mutationCalls": 0
+      },
+      {
+        "count": 100,
+        "full": true,
+        "helpers": 900,
+        "queries": 115,
+        "mutationCalls": 0
+      }
+    ],
+    "boardEdit": {
+      "glyphs": 300,
+      "spawned": 1,
+      "removed": 1
+    },
+    "unrelatedAmbient": {
+      "players": 2,
+      "randomCallsPerTick": 0
+    },
+    "idleEffects": {
+      "ticks": 20,
+      "reads": 4,
+      "writes": 0,
+      "playerLists": 4
+    }
+  },
+  "nativeBds": "NOT_RUN",
+  "client": "NOT_RUN",
+  "power": "NOT_MEASURED"
+}

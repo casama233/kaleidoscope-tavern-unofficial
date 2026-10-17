@@ -1,0 +1,422 @@
+TAP version 13
+# (node:1788410) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/20_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/40_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/60_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/80_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"FOREIGN_CANCEL"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/100_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"FOREIGN_CANCEL"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/100_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/120_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/140_64_0","itemId":"kaleidoscope_tavern:wine_q3","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/140_64_0","itemId":"kaleidoscope_tavern:wine_q3","cancelled":true,"handled":true,"rejection":"QUALITY_TOO_LOW"}
+# [Tavern C2] TavernError: QUALITY_TOO_LOW
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/160_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/160_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"SHAKER_FULL"}
+# [Tavern C2] TavernError: SHAKER_FULL
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/180_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/180_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"RESULT_PENDING"}
+# [Tavern C2] TavernError: RESULT_PENDING
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/200_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/200_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"SHAKER_BUSY"}
+# [Tavern C2] TavernError: SHAKER_BUSY
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/220_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/220_64_0","itemId":"kaleidoscope_tavern:red_queen_q6","cancelled":true,"handled":true,"rejection":"SHAKER_NOT_READY"}
+# [Tavern C2] SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/1060_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# [Tavern ShakerRoute] {"block":"minecraft:overworld/1320_64_0","itemId":"","cancelled":true,"handled":true,"rejection":"NONE"}
+# Subtest: Java block-use route accepts the exact Red Queen q6 held item through the packaged dispatcher
+ok 1 - Java block-use route accepts the exact Red Queen q6 held item through the packaged dispatcher
+  ---
+  duration_ms: 8.820305
+  type: 'test'
+  ...
+# Subtest: native touch-only first press with isFirstEvent=false schedules the q6 transaction once
+ok 2 - native touch-only first press with isFirstEvent=false schedules the q6 transaction once
+  ---
+  duration_ms: 1.507394
+  type: 'test'
+  ...
+# Subtest: native successful empty-hand after-interaction falls through the protected Java block-use dispatcher once
+ok 3 - native successful empty-hand after-interaction falls through the protected Java block-use dispatcher once
+  ---
+  duration_ms: 2.214751
+  type: 'test'
+  ...
+# Subtest: a foreign-cancelled empty-hand station event cannot be replayed by the after-interaction fallback
+ok 4 - a foreign-cancelled empty-hand station event cannot be replayed by the after-interaction fallback
+  ---
+  duration_ms: 0.80737
+  type: 'test'
+  ...
+# Subtest: foreign cancellation blocks its matching item-use fallback without touching shaker or wine
+ok 5 - foreign cancellation blocks its matching item-use fallback without touching shaker or wine
+  ---
+  duration_ms: 3.734426
+  type: 'test'
+  ...
+# Subtest: exact Red Queen q6 item-use-only fallback targets the visible shaker
+ok 6 - exact Red Queen q6 item-use-only fallback targets the visible shaker
+  ---
+  duration_ms: 1.691954
+  type: 'test'
+  ...
+# Subtest: recognized low-quality wine is stopped with a reason and left in the selected slot
+ok 7 - recognized low-quality wine is stopped with a reason and left in the selected slot
+  ---
+  duration_ms: 1.354208
+  type: 'test'
+  ...
+# Subtest: full station reports capacity instead of silently passing a valid drink
+ok 8 - full station reports capacity instead of silently passing a valid drink
+  ---
+  duration_ms: 2.677228
+  type: 'test'
+  ...
+# Subtest: finished station reports its pending result without consuming the held drink
+ok 9 - finished station reports its pending result without consuming the held drink
+  ---
+  duration_ms: 2.54406
+  type: 'test'
+  ...
+# Subtest: station in an active shake reports busy and preserves a valid held ingredient
+ok 10 - station in an active shake reports busy and preserves a valid held ingredient
+  ---
+  duration_ms: 3.03789
+  type: 'test'
+  ...
+# Subtest: unreadable shaker state reports not ready without consuming the held drink
+ok 11 - unreadable shaker state reports not ready without consuming the held drink
+  ---
+  duration_ms: 0.796269
+  type: 'test'
+  ...
+# Subtest: shaker actionbar HUD uses the actual Red Queen icon and Java progress texture glyphs
+ok 12 - shaker actionbar HUD uses the actual Red Queen icon and Java progress texture glyphs
+  ---
+  duration_ms: 0.644832
+  type: 'test'
+  ...
+# Subtest: live held-shaker HUD clears its startup text before drawing the Java progress strip
+ok 13 - live held-shaker HUD clears its startup text before drawing the Java progress strip
+  ---
+  duration_ms: 13.822087
+  type: 'test'
+  ...
+# Subtest: custom component registers portable use without consumption callback
+ok 14 - custom component registers portable use without consumption callback
+  ---
+  duration_ms: 0.180334
+  type: 'test'
+  ...
+# Subtest: loaded pickup moves all3 quality inputs from world to exactly one item
+ok 15 - loaded pickup moves all3 quality inputs from world to exactly one item
+  ---
+  duration_ms: 1.551636
+  type: 'test'
+  ...
+# Subtest: replacing a carried loaded shaker restores all slot snapshots
+ok 16 - replacing a carried loaded shaker restores all slot snapshots
+  ---
+  duration_ms: 1.706868
+  type: 'test'
+  ...
+# Subtest: finished signature carries all effects/RGB and result through placement
+ok 17 - finished signature carries all effects/RGB and result through placement
+  ---
+  duration_ms: 3.207638
+  type: 'test'
+  ...
+# Subtest: world save failure during pickup rolls back block and original contents
+ok 18 - world save failure during pickup rolls back block and original contents
+  ---
+  duration_ms: 1.782945
+  type: 'test'
+  ...
+# Subtest: pickup does not require discarding loaded contents but does require an empty hand
+ok 19 - pickup does not require discarding loaded contents but does require an empty hand
+  ---
+  duration_ms: 1.168362
+  type: 'test'
+  ...
+# Subtest: foreign metadata on a carried shaker is rejected without stripping data
+ok 20 - foreign metadata on a carried shaker is rejected without stripping data
+  ---
+  duration_ms: 1.496361
+  type: 'test'
+  ...
+# Subtest: placement exception returns the exact loaded item payload
+ok 21 - placement exception returns the exact loaded item payload
+  ---
+  duration_ms: 1.924363
+  type: 'test'
+  ...
+# Subtest: incomplete tool never starts an animated session
+ok 22 - incomplete tool never starts an animated session
+  ---
+  duration_ms: 0.61522
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 18 preserves expected output
+ok 23 - handheld source timing boundary 18 preserves expected output
+  ---
+  duration_ms: 2.524754
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 19 preserves expected output
+ok 24 - handheld source timing boundary 19 preserves expected output
+  ---
+  duration_ms: 2.629917
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 68 preserves expected output
+ok 25 - handheld source timing boundary 68 preserves expected output
+  ---
+  duration_ms: 2.305637
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 69 preserves expected output
+ok 26 - handheld source timing boundary 69 preserves expected output
+  ---
+  duration_ms: 2.297835
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 88 preserves expected output
+ok 27 - handheld source timing boundary 88 preserves expected output
+  ---
+  duration_ms: 2.278525
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 89 preserves expected output
+ok 28 - handheld source timing boundary 89 preserves expected output
+  ---
+  duration_ms: 2.309526
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 98 preserves expected output
+ok 29 - handheld source timing boundary 98 preserves expected output
+  ---
+  duration_ms: 2.129162
+  type: 'test'
+  ...
+# Subtest: handheld source timing boundary 99 preserves expected output
+ok 30 - handheld source timing boundary 99 preserves expected output
+  ---
+  duration_ms: 2.146458
+  type: 'test'
+  ...
+# Subtest: 111tick watchdog finalizes ONCE and renderer-owned arm animation needs no server playAnimation
+ok 31 - 111tick watchdog finalizes ONCE and renderer-owned arm animation needs no server playAnimation
+  ---
+  duration_ms: 21.349054
+  type: 'test'
+  ...
+# Subtest: same-tick repeated use never accidentally finishes
+ok 32 - same-tick repeated use never accidentally finishes
+  ---
+  duration_ms: 1.734464
+  type: 'test'
+  ...
+# Subtest: switching hotbar cancels without writing over new selected item
+ok 33 - switching hotbar cancels without writing over new selected item
+  ---
+  duration_ms: 2.150318
+  type: 'test'
+  ...
+# Subtest: switch to different capsule with same item ID cancels instead of overwriting
+ok 34 - switch to different capsule with same item ID cancels instead of overwriting
+  ---
+  duration_ms: 3.300963
+  type: 'test'
+  ...
+# Subtest: dimension change preserves original ingredients without producing a result
+ok 35 - dimension change preserves original ingredients without producing a result
+  ---
+  duration_ms: 2.237355
+  type: 'test'
+  ...
+# Subtest: death cancels immediately and does not resurrect missing items
+ok 36 - death cancels immediately and does not resurrect missing items
+  ---
+  duration_ms: 1.837517
+  type: 'test'
+  ...
+# Subtest: orphan active item after restart recovers to ordinary data without fabrication
+ok 37 - orphan active item after restart recovers to ordinary data without fabrication
+  ---
+  duration_ms: 1.76446
+  type: 'test'
+  ...
+# Subtest: dropped active payload can be recovered by receiver without copying another item
+ok 38 - dropped active payload can be recovered by receiver without copying another item
+  ---
+  duration_ms: 1.923046
+  type: 'test'
+  ...
+# Subtest: explicit compatibility onUse toggles and sneak-use cancels
+ok 39 - explicit compatibility onUse toggles and sneak-use cancels
+  ---
+  duration_ms: 5.219907
+  type: 'test'
+  ...
+# Subtest: hand operation works in Creative but cannot double-copy items
+ok 40 - hand operation works in Creative but cannot double-copy items
+  ---
+  duration_ms: 1.88501
+  type: 'test'
+  ...
+# Subtest: adventure and spectator do not start a carried session
+ok 41 - adventure and spectator do not start a carried session
+  ---
+  duration_ms: 2.724852
+  type: 'test'
+  ...
+# Subtest: portable recipe snapshot survives extension removal while shaking
+ok 42 - portable recipe snapshot survives extension removal while shaking
+  ---
+  duration_ms: 3.161245
+  type: 'test'
+  ...
+# Subtest: pour does not commit before12ticks; uses already placed glass, not another
+ok 43 - pour does not commit before12ticks; uses already placed glass, not another
+  ---
+  duration_ms: 5.506271
+  type: 'test'
+  ...
+# Subtest: interrupted pour cancels before spending a result or the placed glass
+ok 44 - interrupted pour cancels before spending a result or the placed glass
+  ---
+  duration_ms: 3.196964
+  type: 'test'
+  ...
+# Subtest: walking away during pour cancels instead of filling from afar
+ok 45 - walking away during pour cancels instead of filling from afar
+  ---
+  duration_ms: 2.656597
+  type: 'test'
+  ...
+# Subtest: unloaded cup cancels without clearing portable contents
+ok 46 - unloaded cup cancels without clearing portable contents
+  ---
+  duration_ms: 2.49843
+  type: 'test'
+  ...
+# Subtest: two pourers cannot reserve same glass and takeCup cannot bypass reservation
+ok 47 - two pourers cannot reserve same glass and takeCup cannot bypass reservation
+  ---
+  duration_ms: 5.19303
+  type: 'test'
+  ...
+# Subtest: pour commit storage exception rolls back both hand result and glass
+ok 48 - pour commit storage exception rolls back both hand result and glass
+  ---
+  duration_ms: 3.74446
+  type: 'test'
+  ...
+# Subtest: full-inventory pouring still succeeds because it fills existing glass and same tool slot
+ok 49 - full-inventory pouring still succeeds because it fills existing glass and same tool slot
+  ---
+  duration_ms: 4.009584
+  type: 'test'
+  ...
+# Subtest: Java ShakerItem useOn fills placed empty glass immediately instead of starting the optional timed-pour adapter
+ok 50 - Java ShakerItem useOn fills placed empty glass immediately instead of starting the optional timed-pour adapter
+  ---
+  duration_ms: 3.549225
+  type: 'test'
+  ...
+# Subtest: sneak-empty table event picks up loaded machine rather than returning free containers
+ok 51 - sneak-empty table event picks up loaded machine rather than returning free containers
+  ---
+  duration_ms: 1.454134
+  type: 'test'
+  ...
+# Subtest: placed shaker uses its native model and removes legacy helper entities
+ok 52 - placed shaker uses its native model and removes legacy helper entities
+  ---
+  duration_ms: 0.563387
+  type: 'test'
+  ...
+# Subtest: PUT animates the helper while hiding the block mesh, then restores exactly one mesh after eight ticks
+ok 53 - PUT animates the helper while hiding the block mesh, then restores exactly one mesh after eight ticks
+  ---
+  duration_ms: 0.702527
+  type: 'test'
+  ...
+# Subtest: PUT spawn or hide failure rolls back the transient entity and leaves the native block mesh visible
+ok 54 - PUT spawn or hide failure rolls back the transient entity and leaves the native block mesh visible
+  ---
+  duration_ms: 0.453673
+  type: 'test'
+  ...
+# Subtest: a hidden shaker after script reload is restored and its anchored transient entity is removed
+ok 55 - a hidden shaker after script reload is restored and its anchored transient entity is removed
+  ---
+  duration_ms: 0.414269
+  type: 'test'
+  ...
+# Subtest: audio/particle exceptions never cancel a successful material transaction
+ok 56 - audio/particle exceptions never cancel a successful material transaction
+  ---
+  duration_ms: 0.524377
+  type: 'test'
+  ...
+# Subtest: cup pour particle rendering may fail but commit still completes
+ok 57 - cup pour particle rendering may fail but commit still completes
+  ---
+  duration_ms: 4.424271
+  type: 'test'
+  ...
+# Subtest: shaking world sound ticks are10 apart and not a per-frame spam
+ok 58 - shaking world sound ticks are10 apart and not a per-frame spam
+  ---
+  duration_ms: 4.668779
+  type: 'test'
+  ...
+# Subtest: immersive HUD hides bands by default, precise assistance is opt-in
+ok 59 - immersive HUD hides bands by default, precise assistance is opt-in
+  ---
+  duration_ms: 4.412336
+  type: 'test'
+  ...
+# Subtest: the shaking progress strip appears before the first 19 tick finish window
+ok 60 - the shaking progress strip appears before the first 19 tick finish window
+  ---
+  duration_ms: 2.644603
+  type: 'test'
+  ...
+# Subtest: timing preference remains Tavern-owned while Cookery owns guide presentation
+ok 61 - timing preference remains Tavern-owned while Cookery owns guide presentation
+  ---
+  duration_ms: 0.645882
+  type: 'test'
+  ...
+# Subtest: barrel lid transaction uses actual lid action and only its matching sound
+ok 62 - barrel lid transaction uses actual lid action and only its matching sound
+  ---
+  duration_ms: 3.636589
+  type: 'test'
+  ...
+# Subtest: failed barrel lid save emits no successful-action cue
+ok 63 - failed barrel lid save emits no successful-action cue
+  ---
+  duration_ms: 0.877504
+  type: 'test'
+  ...
+# Subtest: Java ShakerBlock empty-hand use picks up containerless extension ingredients without inventing returned containers
+ok 64 - Java ShakerBlock empty-hand use picks up containerless extension ingredients without inventing returned containers
+  ---
+  duration_ms: 1.652496
+  type: 'test'
+  ...
+1..64
+# tests 64
+# suites 0
+# pass 64
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 572.564529

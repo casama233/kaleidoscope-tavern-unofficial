@@ -1,0 +1,38 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:item_display_ice_grape"
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_runtime.item_sprite_ice_grape"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_assets_a17_animation_item_ice_grape",
+          "render_method": "alpha_test_single_sided",
+          "ambient_occlusion": 0.0,
+          "face_dimming": false
+        }
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": false,
+      "minecraft:light_dampening": 0,
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_runtime.item_sprite_ice_grape"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a17_animation_item_ice_grape",
+            "render_method": "alpha_test_single_sided",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      }
+    }
+  }
+}

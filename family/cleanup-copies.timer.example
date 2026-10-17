@@ -1,0 +1,11 @@
+[Unit]
+Description=Limit retained Senluo deployment copies
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=2min
+Persistent=true
+Unit=cleanup-copies.service
+
+[Install]
+WantedBy=timers.target

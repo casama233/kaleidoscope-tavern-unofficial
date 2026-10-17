@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:stored_items",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern/block/brew/empty_bottle"
+      },
+      "geometry": {
+        "default": "geometry.kt_stored_items"
+      },
+      "render_controllers": [
+        "controller.render.kt_stored_items"
+      ]
+    }
+  }
+}

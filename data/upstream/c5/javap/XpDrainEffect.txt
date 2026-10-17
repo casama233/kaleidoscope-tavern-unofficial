@@ -1,0 +1,115 @@
+Compiled from "XpDrainEffect.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.effect.XpDrainEffect extends com.github.ysbbbbbb.kaleidoscopetavern.effect.BaseEffect {
+  private static final double PULL_RADIUS;
+
+  private static final double TOUCH_DISTANCE;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.effect.XpDrainEffect(int);
+    Code:
+       0: aload_0
+       1: iload_1
+       2: invokespecial #1                  // Method com/github/ysbbbbbb/kaleidoscopetavern/effect/BaseEffect."<init>":(I)V
+       5: return
+
+  public boolean shouldApplyEffectTickThisTick(int, int);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public boolean applyEffectTick(net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: aload_1
+       1: instanceof    #7                  // class net/minecraft/world/entity/player/Player
+       4: ifeq          15
+       7: aload_1
+       8: checkcast     #7                  // class net/minecraft/world/entity/player/Player
+      11: astore_3
+      12: goto          17
+      15: iconst_1
+      16: ireturn
+      17: aload_3
+      18: invokevirtual #9                  // Method net/minecraft/world/entity/player/Player.level:()Lnet/minecraft/world/level/Level;
+      21: astore        4
+      23: aload         4
+      25: invokevirtual #13                 // Method net/minecraft/world/level/Level.isClientSide:()Z
+      28: ifeq          33
+      31: iconst_1
+      32: ireturn
+      33: aload_3
+      34: iconst_0
+      35: putfield      #19                 // Field net/minecraft/world/entity/player/Player.takeXpDelay:I
+      38: aload_3
+      39: getfield      #23                 // Field net/minecraft/world/entity/player/Player.tickCount:I
+      42: iconst_5
+      43: irem
+      44: ifeq          49
+      47: iconst_1
+      48: ireturn
+      49: aload_3
+      50: invokevirtual #26                 // Method net/minecraft/world/entity/player/Player.getBoundingBox:()Lnet/minecraft/world/phys/AABB;
+      53: ldc2_w        #32                 // double 8.0d
+      56: invokevirtual #34                 // Method net/minecraft/world/phys/AABB.inflate:(D)Lnet/minecraft/world/phys/AABB;
+      59: astore        5
+      61: aload         4
+      63: ldc           #40                 // class net/minecraft/world/entity/ExperienceOrb
+      65: aload         5
+      67: invokevirtual #42                 // Method net/minecraft/world/level/Level.getEntitiesOfClass:(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;
+      70: astore        6
+      72: aload         6
+      74: invokeinterface #46,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      79: astore        7
+      81: aload         7
+      83: invokeinterface #52,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      88: ifeq          202
+      91: aload         7
+      93: invokeinterface #57,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      98: checkcast     #40                 // class net/minecraft/world/entity/ExperienceOrb
+     101: astore        8
+     103: aload         8
+     105: invokevirtual #61                 // Method net/minecraft/world/entity/ExperienceOrb.isAlive:()Z
+     108: ifne          114
+     111: goto          81
+     114: aload         8
+     116: aload_3
+     117: invokevirtual #64                 // Method net/minecraft/world/entity/ExperienceOrb.distanceTo:(Lnet/minecraft/world/entity/Entity;)F
+     120: f2d
+     121: dstore        9
+     123: dload         9
+     125: ldc2_w        #68                 // double 1.5d
+     128: dcmpg
+     129: ifge          146
+     132: aload         8
+     134: aload_3
+     135: invokevirtual #70                 // Method net/minecraft/world/entity/ExperienceOrb.playerTouch:(Lnet/minecraft/world/entity/player/Player;)V
+     138: aload_3
+     139: iconst_0
+     140: putfield      #19                 // Field net/minecraft/world/entity/player/Player.takeXpDelay:I
+     143: goto          199
+     146: aload_3
+     147: invokevirtual #74                 // Method net/minecraft/world/entity/player/Player.position:()Lnet/minecraft/world/phys/Vec3;
+     150: dconst_0
+     151: ldc2_w        #78                 // double 0.5d
+     154: dconst_0
+     155: invokevirtual #80                 // Method net/minecraft/world/phys/Vec3.add:(DDD)Lnet/minecraft/world/phys/Vec3;
+     158: aload         8
+     160: invokevirtual #86                 // Method net/minecraft/world/entity/ExperienceOrb.position:()Lnet/minecraft/world/phys/Vec3;
+     163: invokevirtual #87                 // Method net/minecraft/world/phys/Vec3.subtract:(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+     166: invokevirtual #91                 // Method net/minecraft/world/phys/Vec3.normalize:()Lnet/minecraft/world/phys/Vec3;
+     169: astore        11
+     171: ldc2_w        #78                 // double 0.5d
+     174: dconst_1
+     175: dload         9
+     177: ddiv
+     178: dadd
+     179: ldc2_w        #68                 // double 1.5d
+     182: invokestatic  #94                 // Method java/lang/Math.min:(DD)D
+     185: dstore        12
+     187: aload         8
+     189: aload         11
+     191: dload         12
+     193: invokevirtual #100                // Method net/minecraft/world/phys/Vec3.scale:(D)Lnet/minecraft/world/phys/Vec3;
+     196: invokevirtual #104                // Method net/minecraft/world/entity/ExperienceOrb.setDeltaMovement:(Lnet/minecraft/world/phys/Vec3;)V
+     199: goto          81
+     202: iconst_1
+     203: ireturn
+}

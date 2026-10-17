@@ -1,0 +1,13 @@
+{
+  "review_date": "2026-09-19",
+  "references": [
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/block?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/itemdurabilitycomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/itemcustomcomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/blockcustomcomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference/examples/blockcomponents/minecraftblock_tick?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference/examples/traits/placement_position?view=minecraft-bedrock-stable"
+  ],
+  "not_executed_in_engine": true,
+  "important": "isSolid/canPlace were pre-release in reference and are NOT used. onConsume never performs inventory mutation. onRandomTick replaces deprecated random_ticking. Reading current docs is not an official type check against installed @minecraft/server2.7.0."
+}

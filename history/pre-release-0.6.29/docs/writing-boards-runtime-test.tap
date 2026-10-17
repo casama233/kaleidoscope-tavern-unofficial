@@ -1,0 +1,51 @@
+TAP version 13
+# (node:1788510) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# Subtest: native onPlayerInteract component edits and renders board text without a before-event
+ok 1 - native onPlayerInteract component edits and renders board text without a before-event
+  ---
+  duration_ms: 17.692056
+  type: 'test'
+  ...
+# Subtest: chalkboard trio merges along perpendicular left/right, edits from a side through center key, and recovers all six blocks
+ok 2 - chalkboard trio merges along perpendicular left/right, edits from a side through center key, and recovers all six blocks
+  ---
+  duration_ms: 8.147181
+  type: 'test'
+  ...
+# Subtest: legacy board data defaults to centered text; saved left, center, and right alignment updates real glyph offsets
+ok 3 - legacy board data defaults to centered text; saved left, center, and right alignment updates real glyph offsets
+  ---
+  duration_ms: 6.747469
+  type: 'test'
+  ...
+# [Tavern C2] TavernError: BOARD_CHANGED
+# Subtest: English guide language opens English board editor and stores Latin glyphs at their own offsets
+ok 4 - English guide language opens English board editor and stores Latin glyphs at their own offsets
+  ---
+  duration_ms: 1.721638
+  type: 'test'
+  ...
+# Subtest: writing-board form rejects stale edits and fake server-ui enforces v2 option objects
+ok 5 - writing-board form rejects stale edits and fake server-ui enforces v2 option objects
+  ---
+  duration_ms: 2.777739
+  type: 'test'
+  ...
+# Subtest: native board callback respects Adventure and held editing ingredients are not consumed by no-op edit
+ok 6 - native board callback respects Adventure and held editing ingredients are not consumed by no-op edit
+  ---
+  duration_ms: 0.413138
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 368.927026

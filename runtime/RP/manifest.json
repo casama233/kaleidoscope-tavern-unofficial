@@ -1,0 +1,33 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+    "version": [
+      0,
+      6,
+      173
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      50
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "54eba729-c2c9-538c-b7ca-c15aa6f6eb3c",
+      "version": [
+        0,
+        6,
+        173
+      ]
+    }
+  ],
+  "capabilities": [
+    "pbr"
+  ],
+  "dependencies": []
+}

@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "grasshopper",
+      "visual_key": "grasshopper",
+      "baseline": "baseline/grasshopper.json",
+      "updated": "updated/grasshopper.json",
+      "baseline_blob": "de8e596c20c20dcaf990b66f588edd6832aaf633",
+      "updated_blob": "458016486a3f9714ce0cc8f63d9a4c4807f473a4",
+      "baseline_geo": "baseline/grasshopper.geo.json",
+      "baseline_geo_blob": "87393074bf6bd1460cf46eaa749b6511ee23f18f",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "cube": 0
+        },
+        {
+          "element": 1,
+          "cube": 1
+        },
+        {
+          "element": 2,
+          "cube": 2
+        },
+        {
+          "element": 3,
+          "faces": [
+            [
+              "south",
+              3
+            ],
+            [
+              "east",
+              4
+            ],
+            [
+              "north",
+              5
+            ],
+            [
+              "west",
+              6
+            ]
+          ]
+        },
+        {
+          "element": 4,
+          "cube": 7
+        },
+        {
+          "element": 5,
+          "cube": 8
+        },
+        {
+          "element": 6,
+          "cube": 9
+        },
+        {
+          "element": 7,
+          "cube": 10
+        },
+        {
+          "element": 8,
+          "cube": 11
+        },
+        {
+          "element": 9,
+          "cube": 12
+        },
+        {
+          "element": 10,
+          "cube": 13
+        },
+        {
+          "element": 11,
+          "cube": 14
+        },
+        {
+          "element": 12,
+          "cube": 15
+        },
+        {
+          "element": 13,
+          "cube": 16
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/grasshopper.geo.json",
+      "block": "runtime/BP/blocks/cup_grasshopper.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "grasshopper_block",
+      "baseline": "baseline/grasshopper.png",
+      "updated": "updated/grasshopper.png",
+      "baseline_blob": "75794e7e5eda9d6cf98496b21b8fdb95b8bf0bf2",
+      "updated_blob": "ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/grasshopper.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/grasshopper.png"
+      ]
+    }
+  ]
+}

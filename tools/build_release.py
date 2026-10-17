@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""Package the committed runtime, without private server paths or old patches.
+
+Every installable archive, including ordinary CI output, must match the frozen
+baseline and release history. Development structure checks do not export packs.
+"""
+import argparse, hashlib, json, shutil, tempfile, zipfile
+from pathlib import Path
+from baseline_gate import check as baseline_check, read as baseline_read
+from vibrant_audit import audit, source_records, verify_export
+ROOT=Path(__file__).resolve().parents[1]
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,default=ROOT/'dist')
+    parser.add_argument('--identity',action='store_true',help='compatibility option: every build already enforces release identity')
+    args=parser.parse_args();out=args.output.resolve()
+    baseline_check(baseline_read(ROOT/'baseline.json'),release=True)
+    if out==ROOT or ROOT/'runtime'==out or (ROOT/'runtime') in out.parents:
+        raise SystemExit('Output must not replace source runtime')
+    # Gate the standalone build, not just CI. A declaration cannot disappear
+    # in an exported package while only the source manifest is checked.
+    report=audit(source_records([ROOT/'runtime']))
+    if not report['ok']:raise SystemExit('\n'.join(report['errors']))
+    out.mkdir(parents=True,exist_ok=True)
+    config=json.loads((ROOT/'release.json').read_text())
+    name=f"Kaleidoscope_Tavern_Unofficial_{config['version']}_{config.get('artifact_suffix','rc1')}.mcaddon"
+    target=out/name
+    with tempfile.NamedTemporaryFile(dir=out,suffix='.mcaddon.tmp',delete=False) as f:
+        staged=Path(f.name)
+    try:
+        with zipfile.ZipFile(staged,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+            for p in sorted((ROOT/'runtime').rglob('*')):
+                if not p.is_file():continue
+                if p.is_symlink():raise SystemExit(f'Symlink in runtime: {p}')
+                info=zipfile.ZipInfo(p.relative_to(ROOT/'runtime').as_posix(),(2026,9,24,0,0,0))
+                info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
+                z.writestr(info,p.read_bytes())
+        verify_export([ROOT/'runtime'],staged)
+        baseline_check(baseline_read(ROOT/'baseline.json'),archive=staged)
+        staged.replace(target)
+    finally:
+        staged.unlink(missing_ok=True)
+    sha=hashlib.sha256(target.read_bytes()).hexdigest()
+    (out/'SHA256SUMS').write_text(f'{sha}  {name}\n')
+    request=json.loads((ROOT/'.github/release-request.json').read_text())
+    if request.get('prerelease') is False:
+        from release_publication import public_notes_text
+        notes=public_notes_text(ROOT,request)
+        if notes is None:raise SystemExit('Stable release requires an existing public notes source')
+        (out/'RELEASE-NOTES.md').write_text(notes,encoding='utf-8')
+    else:
+        notes=ROOT/f"docs/RELEASE-NOTES-{config['version']}.md"
+        shutil.copy2(notes,out/'RELEASE-NOTES.md')
+    print(json.dumps({'archive':str(target),'sha256':sha,'bytes':target.stat().st_size,'vibrant_manifest_export_checked':True,'release_identity_enforced':True}))
+if __name__=='__main__':main()

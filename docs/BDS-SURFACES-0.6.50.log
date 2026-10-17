@@ -1,0 +1,54 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-27 11:56:51:606 INFO] Starting Server
+[2026-09-27 11:56:51:606 INFO] Version: 1.26.51.1
+[2026-09-27 11:56:51:606 INFO] Session ID: 06835f1e-ee0e-4123-b389-dee8a0d4d47f
+[2026-09-27 11:56:51:606 INFO] Build ID: 51061372
+[2026-09-27 11:56:51:606 INFO] Branch: r/26_u5
+[2026-09-27 11:56:51:606 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-27 11:56:51:606 INFO] Configuration: Publish
+[2026-09-27 11:56:51:606 INFO] Contents of server.properties: {}
+[2026-09-27 11:56:51:606 INFO] Level Name: Release Check
+[2026-09-27 11:56:51:606 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-27 11:56:51:608 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-27 11:56:51:608 INFO] Game mode: 0 Survival
+[2026-09-27 11:56:51:608 INFO] Difficulty: 1 EASY
+[2026-09-27 11:56:51:611 INFO] Content logging to console is enabled.
+[2026-09-27 11:56:51:612 INFO] 
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-27 11:56:52:229 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-27_11-56-52
+[2026-09-27 11:56:52:229 INFO] Opening level 'worlds/Release Check/db'
+[2026-09-27 11:56:52:265 INFO] Accepting clients on [::]:19372
+[2026-09-27 11:56:52:342 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Release Check/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-27 11:56:52:342 INFO] Pack Stack - [01] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.13) @ worlds/Release Check/behavior_packs/355ffdfc-50e6-5a33-a126-4d78ab955b2b
+[2026-09-27 11:56:52:342 INFO] Pack Stack - [02] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.50) @ worlds/Release Check/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-27 11:56:54:715 INFO] Signed in to signaling service successfully
+[2026-09-27 11:56:54:927 INFO] Server started.
+[2026-09-27 11:56:54:928 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-27 11:56:54:928 INFO] Server Telemetry is currently not enabled. 
+[2026-09-27 11:56:54:928 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-27 11:56:54:928 INFO] 
+[2026-09-27 11:56:54:928 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-27 11:56:54:928 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-27 11:56:54:928 INFO] ======================================================
+[2026-09-27 11:56:55:162 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.50-beta.1.
+
+[2026-09-27 11:56:56:140 WARN] [Scripting] [World Liquor] 0.1.13 preview: 24 drink descriptors, 32 recipes. Client visuals require device review.
+
+[2026-09-27 11:56:59:329 WARN] [Scripting] [Tavern SDK] Registered kaleidoscope_world_liquor
+
+[2026-09-27 11:57:03:753 WARN] [Scripting] SURFACE_RAY_PASS 36
+
+[2026-09-27 11:57:09:521 WARN] [Scripting] SURFACE_COLLISION_OBSERVATION [{"f":0,"c":4,"sx":-1,"sz":-1,"y":0.5,"actualFacing":0,"actualState":4},{"f":0,"c":4,"sx":-1,"sz":1,"y":1.125,"actualFacing":0,"actualState":4},{"f":0,"c":4,"sx":1,"sz":-1,"y":1.125,"actualFacing":0,"actualState":4},{"f":0,"c":4,"sx":1,"sz":1,"y":1.125,"actualFacing":0,"actualState":4},{"f":0,"c":5,"sx":-1,"sz":-1,"y":1.125,"actualFacing":0,"actualState":5},{"f":0,"c":5,"sx":-1,"sz":1,"y":1.125,"actualFacing":0,"actualState":5},{"f":0,"c":5,"sx":1,"sz":-1,"y":0.5,"actualFacing":0,"actualState":5},{"f":0,"c":5,"sx":1,"sz":1,"y":1.125,"actualFacing":0,"actualState":5},{"f":1,"c":4,"sx":-1,"sz":-1,"y":0.5,"actualFacing":1,"actualState":4},{"f":1,"c":4,"sx":-1,"sz":1,"y":1.125,"actualFacing":1,"actualState":4},{"f":1,"c":4,"sx":1,"sz":-1,"y":1.125,"actualFacing":1,"actualState":4},{"f":1,"c":4,"sx":1,"sz":1,"y":1.125,"actualFacing":1,"actualState":4},{"f":1,"c":5,"sx":-1,"sz":-1,"y":1.125,"actualFacing":1,"actualState":5},{"f":1,"c":5,"sx":-1,"sz":1,"y":1.125,"actualFacing":1,"actualState":5},{"f":1,"c":5,"sx":1,"sz":-1,"y":0.5,"actualFacing":1,"actualState":5},{"f":1,"c":5,"sx":1,"sz":1,"y":1.125,"actualFacing":1,"actualState":5},{"f":2,"c":4,"sx":-1,"sz":-1,"y":0.5,"actualFacing":2,"actualState":4},{"f":2,"c":4,"sx":-1,"sz":1,"y":1.125,"actualFacing":2,"actualState":4},{"f":2,"c":4,"sx":1,"sz":-1,"y":1.125,"actualFacing":2,"actualState":4},{"f":2,"c":4,"sx":1,"sz":1,"y":1.125,"actualFacing":2,"actualState":4},{"f":2,"c":5,"sx":-1,"sz":-1,"y":1.125,"actualFacing":2,"actualState":5},{"f":2,"c":5,"sx":-1,"sz":1,"y":1.125,"actualFacing":2,"actualState":5},{"f":2,"c":5,"sx":1,"sz":-1,"y":0.5,"actualFacing":2,"actualState":5},{"f":2,"c":5,"sx":1,"sz":1,"y":1.125,"actualFacing":2,"actualState":5},{"f":3,"c":4,"sx":-1,"sz":-1,"y":0.5,"actualFacing":3,"actualState":4},{"f":3,"c":4,"sx":-1,"sz":1,"y":1.125,"actualFacing":3,"actualState":4},{"f":3,"c":4,"sx":1,"sz":-1,"y":1.125,"actualFacing":3,"actualState":4},{"f":3,"c":4,"sx":1,"sz":1,"y":1.125,"actualFacing":3,"actualState":4},{"f":3,"c":5,"sx":-1,"sz":-1,"y":1.125,"actualFacing":3,"actualState":5},{"f":3,"c":5,"sx":-1,"sz":1,"y":1.125,"actualFacing":3,"actualState":5},{"f":3,"c":5,"sx":1,"sz":-1,"y":0.5,"actualFacing":3,"actualState":5},{"f":3,"c":5,"sx":1,"sz":1,"y":1.125,"actualFacing":3,"actualState":5}]
+
+[2026-09-27 11:57:09:523 WARN] [Scripting] SURFACE_COLLISION_PASS 32
+
+[2026-09-27 11:57:09:523 WARN] [Scripting] SURFACE_PROBE_DONE
+
+[2026-09-27 11:57:19:633 INFO] Server stop requested.
+[2026-09-27 11:57:19:682 INFO] Stopping server...
+Quit correctly

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "kt_assets_a17:rig_liquid_barrel_glow_berries",
+      "materials": {
+        "default": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/kaleidoscope_tavern_jar/block/glow_berries_juice_still"
+      },
+      "geometry": {
+        "default": "geometry.kt_assets_a17.liquid_barrel"
+      },
+      "animations": {
+        "level": "animation.kt_assets_a17.liquid_barrel"
+      },
+      "scripts": {
+        "animate": [
+          "level"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.kt_assets_a1.static"
+      ]
+    }
+  }
+}

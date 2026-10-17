@@ -1,0 +1,58 @@
+{
+  "phase": "C1_CODE_IMPLEMENTATION",
+  "version": [
+    0,
+    1,
+    0
+  ],
+  "art_baseline": "A17_SOURCE_ART_READY_RENDER_ACCEPTANCE_PENDING",
+  "cookery_dependency": "BOUND_TO_UPLOADED_1.0.6_HEADERS",
+  "independent_guidebook": true,
+  "independent_recipe_book": true,
+  "runtime_extension_api": 1,
+  "native_crafting_recipes": 6,
+  "barrel_recipes": 23,
+  "pressing_recipes": 6,
+  "vinegar_fallback": true,
+  "quality_items": 144,
+  "guide_features": [
+    "own_items",
+    "search",
+    "pagination",
+    "bookmarks",
+    "language_preference",
+    "current_recipe_registry",
+    "extension_pages",
+    "diagnostics"
+  ],
+  "functional_code": [
+    "safe_container_exchange",
+    "world_DP_schema1_storage",
+    "revision_and_synchronous_locks",
+    "barrel_27_cells",
+    "pressing",
+    "fermentation",
+    "manual_tap",
+    "six_juice_visual_helpers",
+    "native_drink_remainder_configuration"
+  ],
+  "pending": [
+    "engine_loading_and_schemas",
+    "native_drinking_actual_stack_remainder",
+    "real_world_reload_and_multiplayer",
+    "crops_and_worldgen",
+    "original_effects",
+    "shaker_cocktails",
+    "furniture_connections_seating",
+    "world_text",
+    "placed_multi_bottles",
+    "auto_tap_carrier",
+    "full_pose_particle_parity",
+    "Realm_BDS_mobile_acceptance"
+  ],
+  "all_art_runtime_parity_verified": false,
+  "is_production_release": false,
+  "engine_acceptance": "NOT_RUN",
+  "bridge_interactive_test": "NOT_RUN",
+  "Cookery_mock_bus_scope": "Two actual uploaded API modules only, no full Cookery/game launch."
+}

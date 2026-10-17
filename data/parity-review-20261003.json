@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "against_commit": "98fe4d7351c719c3705daeeae09788845e5c78c9",
+  "version": "0.6.89",
+  "java_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "xp_source_sha256": "47e35dce03adf62c35db713ffca519f34d928b892d0b5be6d6ba9fc06ab7212a",
+  "changes": {
+    "runtime/BP/manifest.json": {
+      "before": "e9d59dfef47c315e928dc2756f997a444055d7bed91933eadab501b574927cdb",
+      "after": "2028d910e4b492732eb44e92e5cda58329220f5bb8f75a3f884a298b71c9b2fe",
+      "reason": "Tavern 0.6.89 source review: Synchronize unique release identity, own BP/RP dependencies and shared guide payload."
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "before": "468d73d9593addd5ee02fe09b188cb5857419b98a4cf0960db26aa027129f5b2",
+      "after": "360de483acd44723daa5aa31cf2fa2677f1c906382bcc266edb3740b575196de",
+      "reason": "Tavern 0.6.89 source review: Java XP feet-distance speed and inflated AABB query; see tools/efficiency/xp-parity.test.mjs."
+    },
+    "runtime/BP/scripts/bedrock/java-ambient.js": {
+      "before": "4d2f96b214a8abe9b2f9602cc103e52a78f17d259db8c3d5f1432f8af308a13d",
+      "after": "aad430777698482fb0483387b91db1829d6460eab07726d22be82d2015483763",
+      "reason": "Tavern 0.6.89 source review: Java exact sparse ambient distribution and bounded dense fallback; see tools/ambient-sparse.test.mjs."
+    },
+    "runtime/BP/scripts/core/custom-effects.js": {
+      "before": "d611761e8a18585d0f545a1cb080260393e7e1a43465e61db36efa718d4dde67",
+      "after": "64fc45165341663c4f7deeef184fe362eae7f7c20b2ca9f87c73b0f3c7ee7810",
+      "reason": "Tavern 0.6.89 source review: Java XP feet-distance speed and inflated AABB query; see tools/efficiency/xp-parity.test.mjs."
+    },
+    "runtime/BP/scripts/core/java-ambient-sampling.js": {
+      "before": "c511635e865cce8e7f51a0868e83949d92b073d2c32ff663f1915ade51f81190",
+      "after": "e147dc0aed978e1f18fee60efdf2f9265bef6506f1a727fccaa15d76209dedb3",
+      "reason": "Tavern 0.6.89 source review: Java exact sparse ambient distribution and bounded dense fallback; see tools/ambient-sparse.test.mjs."
+    },
+    "runtime/BP/scripts/data/build-version.js": {
+      "before": "4dceb7a04dab9ad4a51a96f68a833742c833ac537d3c8ce8977f0569c13e4a1e",
+      "after": "5de384eafbdf2e201774211590d06fa761760a3c5269a2539402e3ff5bb763b7",
+      "reason": "Tavern 0.6.89 source review: Synchronize unique release identity, own BP/RP dependencies and shared guide payload."
+    },
+    "runtime/BP/scripts/data/cookery-guide-payload.js": {
+      "before": "46a2e076531b4ccde3f3e3466b1444be02df9c3f4ef033a60ae06795e32e6273",
+      "after": "f265ad3e289f4a59ad60c74c6d82a62fc31aaef00c5f020454efc8ee6e85c52b",
+      "reason": "Tavern 0.6.89 source review: Synchronize unique release identity, own BP/RP dependencies and shared guide payload."
+    },
+    "runtime/RP/manifest.json": {
+      "before": "f44cdc84e4c689a3dacbdf35fb2a39dca8ec9a2c86fe02a52cbe00b202a1dbeb",
+      "after": "95789485d8d1fe3c8f501ecd7b5da8c05e958b4dd373ad3175027a69d34cb520",
+      "reason": "Tavern 0.6.89 source review: Synchronize unique release identity, own BP/RP dependencies and shared guide payload."
+    }
+  },
+  "client": false,
+  "bds": false,
+  "simulated_players": false
+}

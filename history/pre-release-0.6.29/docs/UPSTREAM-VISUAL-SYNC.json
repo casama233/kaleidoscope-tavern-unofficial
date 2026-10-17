@@ -1,0 +1,189 @@
+{
+  "schema": 1,
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "syncs": [
+    {
+      "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+      "message": "修复品红色小灯的模型面剔除问题",
+      "source_path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/string_lights/magenta.json",
+      "locked_copy": "data/upstream/post-1.2/c4ec1880/string_lights_magenta.json",
+      "bedrock_paths": [
+        "art/RP/models/entity/string_lights_magenta.geo.json",
+        "runtime/RP/models/entity/string_lights_magenta.geo.json"
+      ],
+      "semantic_diff": "Same 19 elements/positions/rotations as previous model; adds the missing down face to all 12 rotated zero-thickness light planes so single-sided rendering no longer culls them from the reverse view.",
+      "texture_changed": false,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "b30f34a2e340fed1528954104f93cf2c7e90fd79",
+      "message": "校正金色果汁颜色",
+      "source_path": "src/main/resources/assets/kaleidoscope_tavern/textures/item/gold_grape_bucket.png",
+      "locked_copy": "data/upstream/post-1.2/b30f34a/gold_grape_bucket.png",
+      "bedrock_paths": [
+        "runtime/RP/textures/kaleidoscope_tavern/item/gold_grape_bucket.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/item/gold_grape_bucket.png"
+      ],
+      "previous_git_blob": "90836790746091ae951b03035e2d0f2fbe84d771",
+      "upstream_git_blob": "7d2452dc5a07f82fd114db6df9e1fb5998878fef",
+      "sha256": "ae8dd1d9802fa02568c3eb457b9e1bacf25d92047faf67bf3dd78bb7ae5691d0",
+      "previous_size": 245,
+      "size": 388,
+      "semantic_diff": "Official upstream changes only the gold grape bucket item PNG; the Bedrock pre-sync bytes exactly matched the previous upstream Git blob, and both runtime copies are replaced byte-for-byte with b30f34a.",
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "model-only-1",
+      "assets": [
+        "brass_heart",
+        "emerald",
+        "godfather",
+        "nether_special"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/model-only-1/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "semantic_diff": "For these four models, element count/coordinates/UV/display are unchanged. Official changes are translucent->cutout plus shade true->false on the plan-listed elements; Bedrock maps cutout to alpha_test_single_sided and marks the corresponding plan-listed cube faces unshaded.",
+      "texture_changed": false,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "model-only-2",
+      "assets": [
+        "empty_glassware",
+        "mystery_cocktail",
+        "sculk_special",
+        "signature_cocktail"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/model-only-2/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "semantic_diff": "For these four models, element count/coordinates/UV/display/shade are unchanged. Official change is translucent->cutout only; Bedrock maps cutout to alpha_test_single_sided with no geometry edits.",
+      "texture_changed": false,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "allium-garden",
+      "assets": [
+        "allium_garden"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/allium-garden/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "8b9d1580ecb55c347d2a4fcb8201840e36a2d25a",
+      "model_updated_blob": "179aeda05570a47f7b292fdba400b577c8a1d759",
+      "texture_baseline_blob": "39a25d464bf350af5ae464e27c7f57fc5688f9eb",
+      "texture_updated_blob": "42d41bb699d7c5f31aa38d4ec0faee55309379a8",
+      "semantic_diff": "Allium Garden keeps the same 14 elements and display transforms. Official changes are translucent->cutout, element 3 shade true->false, element 12 north UV [7.5,10.5,13,15.5] -> [7.5,10,13,15], and a revised block PNG. Bedrock maps element 3 to cubes 3-6 as unshaded, maps the UV change to cube 18 north [15,21] -> [15,20], and copies the official updated PNG byte-for-byte to both runtime block-texture copies.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "grasshopper",
+      "assets": [
+        "grasshopper"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/grasshopper/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "de8e596c20c20dcaf990b66f588edd6832aaf633",
+      "model_updated_blob": "458016486a3f9714ce0cc8f63d9a4c4807f473a4",
+      "texture_baseline_blob": "75794e7e5eda9d6cf98496b21b8fdb95b8bf0bf2",
+      "texture_updated_blob": "ba65d8604f6ba2515a72b3d3bdf30c5c4aa243a0",
+      "semantic_diff": "Grasshopper keeps 14 Java elements but 11 change geometry/face content. A locked old Bedrock geo proves the source-driven converter reproduces the historical 17-cube mapping before regenerating only changed elements from the updated Java model; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "bloody-mary",
+      "assets": [
+        "bloody_mary"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/bloody-mary/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "4f4fa1f54ea19eaa39fdd54929a53ee9db01355f",
+      "model_updated_blob": "f2efeedade97c31dd8f15bddda9d3c3652ded624",
+      "texture_baseline_blob": "6b389971a45f53606d7fff96197d50ed74bb9246",
+      "texture_updated_blob": "07f47d76f7b9e5ede07eeee3a968471b1ee59a2d",
+      "semantic_diff": "Bloody Mary keeps 14 Java elements but 9 change geometry/UV. The locked old Bedrock geo proves the 14-to-18 source-driven mapping. One reversed-X source element maps four side faces plus Java down -> Bedrock up with explicit 180-degree UV rotation. Only changed elements are regenerated; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "screwdriver",
+      "assets": [
+        "screwdriver"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/screwdriver/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "b1fdb0d34432078aa7c702b6122671d612a3d178",
+      "model_updated_blob": "e9055a754d690ba17fecd2dd35e4bd5b3c0486f6",
+      "texture_baseline_blob": "3fb9e5995929620f04a60bce85db127d2d39ee4d",
+      "texture_updated_blob": "125669746daa8b7db1049c698757b788423da014",
+      "semantic_diff": "Screwdriver keeps 10 Java elements but all 10 change. The locked old Bedrock geo proves the 10-to-13 mapping: source element 0 splits into four side-face cubes, while elements 1-9 map one-to-one. The existing source-driven converter regenerates every changed element without new conversion exceptions; the official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "white-lady",
+      "assets": [
+        "white_lady"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/white-lady/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "3b8c42d6e6abd568e8e5bd5219b68b335c322d6f",
+      "model_updated_blob": "23d0635b163b871cdcc22fb4a35242ba878b28c3",
+      "texture_baseline_blob": "3da7ad25918346745807da46c23c2d11b50d99cf",
+      "texture_updated_blob": "c3796b7eaa62fcf34515eee8ad0227f7392c4c7c",
+      "semantic_diff": "White Lady changes from 14 to 13 Java elements. The locked baseline proves the old 14-to-17 mapping; old element 6 / Bedrock cube 9 is explicitly deleted, old elements 7-13 remap to updated elements 6-12, and the runtime becomes 16 cubes. The official block PNG is copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "mojito",
+      "assets": [
+        "mojito"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/mojito/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "008eca38fd3679539971fc9582de6a767099b840",
+      "model_updated_blob": "9ca2831e3542ec95af7530ad0b56f4e0f2b1ee96",
+      "texture_baseline_blob": "db879ba67959610ae87e75b0f4a678ff85a3e546",
+      "texture_updated_blob": "ed3b8944a1624b14a0905c77a46d23b0399e956e",
+      "semantic_diff": "Mojito changes from 15 to 14 Java elements and from 21 to 20 Bedrock cubes. The locked baseline proves both historical rescale:true 45-degree elements. The updated mapping deletes old element 10, remaps old 11->new10, old12->new11, old14->new12, and reuses the old one-cube element13 slot to materialize the new element13 zero-thickness garnish plane, while output order follows updated source indices.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    },
+    {
+      "commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+      "message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+      "scope": "depth-charge",
+      "assets": [
+        "depth_charge"
+      ],
+      "plan": "data/upstream/post-1.2/c70eec1/depth-charge/sync-plan.json",
+      "tool": "tools/sync_post12_visuals.py",
+      "model_baseline_blob": "aacc9949b355c6412129774ddac9bdf5a5fcf62b",
+      "model_updated_blob": "4b79a1dc8ea8f1f36135ba2b5803e7a569a11095",
+      "texture_baseline_blob": "5ee0738a935f880bf9d643e0500cee182cd761a7",
+      "texture_updated_blob": "962980356fbecf1548ec5991feac3facee10db00",
+      "item_texture_baseline_blob": "30a9abbeb4176a96d0ab0f7375df7495efab23e4",
+      "item_texture_updated_blob": "25703204a0c40bb8cf4bcce59211e50fd8b6594e",
+      "semantic_diff": "Depth Charge changes from 12 to 13 Java elements and from 18 to 19 Bedrock cubes. Baseline elements 0/2 are split-face cup walls; old element 6 maps to updated 5 while updated elements 6/7 are explicitly added to form the revised three-piece handle. Old element 8 maps to updated 11, old element 9 is deleted, old element 4 remaps to updated 12, and target cube order follows updated source-element order. Both official block and item PNGs are copied byte-for-byte.",
+      "texture_changed": true,
+      "engine_acceptance": "NOT_RUN"
+    }
+  ]
+}

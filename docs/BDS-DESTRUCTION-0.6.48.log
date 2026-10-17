@@ -1,0 +1,50 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-27 11:09:36:046 INFO] Starting Server
+[2026-09-27 11:09:36:046 INFO] Version: 1.26.51.1
+[2026-09-27 11:09:36:046 INFO] Session ID: d358f205-7d38-4b58-9278-0dcdbf7a4bd8
+[2026-09-27 11:09:36:046 INFO] Build ID: 51061372
+[2026-09-27 11:09:36:046 INFO] Branch: r/26_u5
+[2026-09-27 11:09:36:046 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-27 11:09:36:046 INFO] Configuration: Publish
+[2026-09-27 11:09:36:046 INFO] Contents of server.properties: {}
+[2026-09-27 11:09:36:046 INFO] Level Name: Release Check
+[2026-09-27 11:09:36:046 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-27 11:09:36:047 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-27 11:09:36:047 INFO] Game mode: 0 Survival
+[2026-09-27 11:09:36:047 INFO] Difficulty: 1 EASY
+[2026-09-27 11:09:36:050 INFO] Content logging to console is enabled.
+[2026-09-27 11:09:36:052 INFO] 
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-27 11:09:36:670 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-27_11-09-36
+[2026-09-27 11:09:36:670 INFO] Opening level 'worlds/Release Check/db'
+[2026-09-27 11:09:36:704 INFO] Accepting clients on [::]:19372
+[2026-09-27 11:09:36:778 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Release Check/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-27 11:09:36:778 INFO] Pack Stack - [01] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.11) @ worlds/Release Check/behavior_packs/355ffdfc-50e6-5a33-a126-4d78ab955b2b
+[2026-09-27 11:09:36:778 INFO] Pack Stack - [02] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.48) @ worlds/Release Check/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-27 11:09:39:325 INFO] Signed in to signaling service successfully
+[2026-09-27 11:09:39:548 INFO] Server started.
+[2026-09-27 11:09:39:548 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-27 11:09:39:548 INFO] Server Telemetry is currently not enabled. 
+[2026-09-27 11:09:39:548 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-27 11:09:39:548 INFO] 
+[2026-09-27 11:09:39:548 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-27 11:09:39:548 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-27 11:09:39:548 INFO] ======================================================
+[2026-09-27 11:09:39:792 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.48-beta.1.
+
+[2026-09-27 11:09:40:743 WARN] [Scripting] [World Liquor] 0.1.11 preview: 24 drink descriptors, 32 recipes. Client visuals require device review.
+
+[2026-09-27 11:09:43:559 WARN] [Scripting] [POTION PROBE] {"recognizedEffects":["minecraft:water","minecraft:mundane","minecraft:long_mundane","minecraft:thick","minecraft:awkward","minecraft:nightvision","minecraft:long_nightvision","minecraft:invisibility","minecraft:long_invisibility","minecraft:leaping","minecraft:long_leaping","minecraft:strong_leaping","minecraft:fire_resistance","minecraft:long_fire_resistance","minecraft:swiftness","minecraft:long_swiftness","minecraft:strong_swiftness","minecraft:slowness","minecraft:long_slowness","minecraft:water_breathing","minecraft:long_water_breathing","minecraft:healing","minecraft:strong_healing","minecraft:harming","minecraft:strong_harming","minecraft:poison","minecraft:long_poison","minecraft:strong_poison","minecraft:regeneration","minecraft:long_regeneration","minecraft:strong_regeneration","minecraft:strength","minecraft:long_strength","minecraft:strong_strength","minecraft:weakness","minecraft:long_weakness","minecraft:wither","minecraft:turtle_master","minecraft:long_turtle_master","minecraft:strong_turtle_master","minecraft:slow_falling","minecraft:long_slow_falling","minecraft:strong_slowness"],"unrecognizedEffects":["minecraft:wind_charged","minecraft:weaving","minecraft:oozing","minecraft:infested"],"deliveryTypes":["Consume","ThrownSplash","ThrownLingering"]}
+
+[2026-09-27 11:09:43:933 WARN] [Scripting] [Tavern SDK] Registered kaleidoscope_world_liquor
+
+[2026-09-27 11:09:53:381 WARN] [Scripting] [DESTRUCTION PROBE PASS] real explosion: rack+2 quality bottles+helper cleanup; all 27 barrel cells+one drop; addon cabinet+contents+tombstone; native water potion. No players.
+
+[2026-09-27 11:10:04:049 INFO] Server stop requested.
+[2026-09-27 11:10:04:098 INFO] Stopping server...
+Quit correctly

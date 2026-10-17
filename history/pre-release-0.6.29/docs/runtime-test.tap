@@ -1,0 +1,322 @@
+TAP version 13
+# (node:1788069) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+# --import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tests/mock-loader.mjs", pathToFileURL("./"));'
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Development build: engine/visual acceptance required.
+# [Tavern] tester29: STALE_HAND
+# [Tavern] machine: STRUCTURE_DAMAGED
+# [Tavern] tester77: BLOCK_CHANGED
+# Subtest: entrypoint registers one legacy-guide migrator and42 recipes
+ok 1 - entrypoint registers one legacy-guide migrator and42 recipes
+  ---
+  duration_ms: 31.586523
+  type: 'test'
+  ...
+# Subtest: barrel placement writes one Java source facing across all27 cells and rotates its visual
+ok 2 - barrel placement writes one Java source facing across all27 cells and rotates its visual
+  ---
+  duration_ms: 5.91987
+  type: 'test'
+  ...
+# Subtest: creative display block initializes Java max quality without replacing scripted bottle quality
+ok 3 - creative display block initializes Java max quality without replacing scripted bottle quality
+  ---
+  duration_ms: 3.310974
+  type: 'test'
+  ...
+# Subtest: Tap only resolves Java middle-front center when Tap and Barrel facing match
+ok 4 - Tap only resolves Java middle-front center when Tap and Barrel facing match
+  ---
+  duration_ms: 1.608913
+  type: 'test'
+  ...
+# Subtest: item useOn placement uses clicked face offset
+ok 5 - item useOn placement uses clicked face offset
+  ---
+  duration_ms: 2.508496
+  type: 'test'
+  ...
+# Subtest: occupied or unloaded placement volume makes no state/inventory changes
+ok 6 - occupied or unloaded placement volume makes no state/inventory changes
+  ---
+  duration_ms: 1.331179
+  type: 'test'
+  ...
+# Subtest: placement state-write exception restores all cells and original inventory
+ok 7 - placement state-write exception restores all cells and original inventory
+  ---
+  duration_ms: 1.158179
+  type: 'test'
+  ...
+# Subtest: tub input/press events preserve original count; only living entities and adequate fall press
+ok 8 - tub input/press events preserve original count; only living entities and adequate fall press
+  ---
+  duration_ms: 10.144015
+  type: 'test'
+  ...
+# Subtest: tilted Pressing Tub follows Java fallOn and refuses stomping until placed flat
+ok 9 - tilted Pressing Tub follows Java fallOn and refuses stomping until placed flat
+  ---
+  duration_ms: 1.446799
+  type: 'test'
+  ...
+# Subtest: actual empty-hand tub route removes one item normally and the remaining stack while sneaking
+ok 10 - actual empty-hand tub route removes one item normally and the remaining stack while sneaking
+  ---
+  duration_ms: 4.182487
+  type: 'test'
+  ...
+# Subtest: native Pressing Tub after-interact takes one ingredient once and respects foreign cancellation without a before event
+ok 11 - native Pressing Tub after-interact takes one ingredient once and respects foreign cancellation without a before event
+  ---
+  duration_ms: 1.81643
+  type: 'test'
+  ...
+# Subtest: actual event route cancels vanilla bucket interaction and keeps15 empty buckets
+ok 12 - actual event route cancels vanilla bucket interaction and keeps15 empty buckets
+  ---
+  duration_ms: 3.26648
+  type: 'test'
+  ...
+# Subtest: holding item changed between event and deferred mutation prevents stale hand loss
+ok 13 - holding item changed between event and deferred mutation prevents stale hand loss
+  ---
+  duration_ms: 0.857514
+  type: 'test'
+  ...
+# Subtest: full inventory fails before decrementing stored liquid
+ok 14 - full inventory fails before decrementing stored liquid
+  ---
+  duration_ms: 2.312579
+  type: 'test'
+  ...
+# Subtest: state-save failure rolls bucket exchange and liquid back together
+ok 15 - state-save failure rolls bucket exchange and liquid back together
+  ---
+  duration_ms: 1.770067
+  type: 'test'
+  ...
+# Subtest: real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16 bottles
+ok 16 - real adapter chain:32 grapes→four juice buckets→4000mB→quality2→16 bottles
+  ---
+  duration_ms: 30.725918
+  type: 'test'
+  ...
+# Subtest: all four-input barrel adapters preserve minimum stack output and reject metadata
+ok 17 - all four-input barrel adapters preserve minimum stack output and reject metadata
+  ---
+  duration_ms: 3.72574
+  type: 'test'
+  ...
+# Subtest: Water Cauldron Tap fills a placed empty bottle after30 ticks without consuming source water
+ok 18 - Water Cauldron Tap fills a placed empty bottle after30 ticks without consuming source water
+  ---
+  duration_ms: 1.2233
+  type: 'test'
+  ...
+# Subtest: touch-style false first event opens tap once and a new gesture closes it
+ok 19 - touch-style false first event opens tap once and a new gesture closes it
+  ---
+  duration_ms: 1.005906
+  type: 'test'
+  ...
+# Subtest: tap custom interaction handles empty hand and deduplicates the before event
+ok 20 - tap custom interaction handles empty hand and deduplicates the before event
+  ---
+  duration_ms: 0.521405
+  type: 'test'
+  ...
+# Subtest: Water Cauldron Tap fills a partial water cauldron to Bedrock full level6 and leaves source unchanged
+ok 21 - Water Cauldron Tap fills a partial water cauldron to Bedrock full level6 and leaves source unchanged
+  ---
+  duration_ms: 0.858682
+  type: 'test'
+  ...
+# Subtest: empty water cauldron stays an empty open while lava cauldron fills a bottle into a Molotov
+ok 22 - empty water cauldron stays an empty open while lava cauldron fills a bottle into a Molotov
+  ---
+  duration_ms: 1.645384
+  type: 'test'
+  ...
+# Subtest: Tap completion revalidates the same Barrel-facing front connection after30 ticks
+ok 23 - Tap completion revalidates the same Barrel-facing front connection after30 ticks
+  ---
+  duration_ms: 3.011163
+  type: 'test'
+  ...
+# Subtest: Tap second manual click closes immediately and cancels the scheduled extraction
+ok 24 - Tap second manual click closes immediately and cancels the scheduled extraction
+  ---
+  duration_ms: 2.937569
+  type: 'test'
+  ...
+# Subtest: Tap redstone rising edge opens once and extracts after30 ticks; sustained high power does not restart
+ok 25 - Tap redstone rising edge opens once and extracts after30 ticks; sustained high power does not restart
+  ---
+  duration_ms: 3.317885
+  type: 'test'
+  ...
+# Subtest: Tap converts a placed empty-bottle carrier in place and preserves its facing and exact quality
+ok 26 - Tap converts a placed empty-bottle carrier in place and preserves its facing and exact quality
+  ---
+  duration_ms: 7.916367
+  type: 'test'
+  ...
+# Subtest: Tap barrel-save failure restores carrier and removes half-created output without decrementing batch
+ok 27 - Tap barrel-save failure restores carrier and removes half-created output without decrementing batch
+  ---
+  duration_ms: 2.571825
+  type: 'test'
+  ...
+# Subtest: saved batch can be loaded by a fresh storage object without recomputing recipe
+ok 28 - saved batch can be loaded by a fresh storage object without recomputing recipe
+  ---
+  duration_ms: 1.795198
+  type: 'test'
+  ...
+# Subtest: broken or unloaded barrel stops progressing and never erases state
+ok 29 - broken or unloaded barrel stops progressing and never erases state
+  ---
+  duration_ms: 1.881088
+  type: 'test'
+  ...
+# Subtest: filled barrel dismantles as Java; duplicate destruction drops only one
+ok 30 - filled barrel dismantles as Java; duplicate destruction drops only one
+  ---
+  duration_ms: 5.367966
+  type: 'test'
+  ...
+# Subtest: visual synchronization reuses ingredient and liquid helpers and removes duplicates
+ok 31 - visual synchronization reuses ingredient and liquid helpers and removes duplicates
+  ---
+  duration_ms: 1.233795
+  type: 'test'
+  ...
+# Subtest: orphan visual is cleaned after load; foreign entities not touched
+ok 32 - orphan visual is cleaned after load; foreign entities not touched
+  ---
+  duration_ms: 0.73948
+  type: 'test'
+  ...
+# Subtest: explosions exclude runtime machine blocks but retain unrelated blocks
+ok 33 - explosions exclude runtime machine blocks but retain unrelated blocks
+  ---
+  duration_ms: 0.990845
+  type: 'test'
+  ...
+# Subtest: creative placement is free but ingredient exchanges still conserve containers
+ok 34 - creative placement is free but ingredient exchanges still conserve containers
+  ---
+  duration_ms: 0.823941
+  type: 'test'
+  ...
+# Subtest: legacy Tavern guide items migrate to the required Cookery guide instead of opening a second UI
+ok 35 - legacy Tavern guide items migrate to the required Cookery guide instead of opening a second UI
+  ---
+  duration_ms: 0.391219
+  type: 'test'
+  ...
+# Subtest: server-only extension registration ignores entity and command-block sources
+ok 36 - server-only extension registration ignores entity and command-block sources
+  ---
+  duration_ms: 15.259694
+  type: 'test'
+  ...
+# [Tavern SDK] Registered tavern_demo
+# [Tavern Extension] Error: PACKET_TOO_LARGE
+# [Tavern] tester93: DIMENSION_CHANGED
+# [Tavern] tester99: Error: INJECTED_SAVE_FAILURE
+# [Tavern] tester101: BLOCK_CHANGED
+# Subtest: separate example add-on receives handshake, sends chunks and receivesack
+ok 37 - separate example add-on receives handshake, sends chunks and receivesack
+  ---
+  duration_ms: 65.011192
+  type: 'test'
+  ...
+# Subtest: registered extension recipe is actually processed by the barrel adapter
+ok 38 - registered extension recipe is actually processed by the barrel adapter
+  ---
+  duration_ms: 2.478179
+  type: 'test'
+  ...
+# Subtest: SDK disposal before registration does not falsely claim successful registration
+ok 39 - SDK disposal before registration does not falsely claim successful registration
+  ---
+  duration_ms: 2.316792
+  type: 'test'
+  ...
+# Subtest: oversized extension messages cannot partially register data
+ok 40 - oversized extension messages cannot partially register data
+  ---
+  duration_ms: 0.394132
+  type: 'test'
+  ...
+# Subtest: extension can use an actually observed Cookery material without modifying Cookery
+ok 41 - extension can use an actually observed Cookery material without modifying Cookery
+  ---
+  duration_ms: 3.584963
+  type: 'test'
+  ...
+# Subtest: extension pressing recipe and guide appear together and output correct measured liquid
+ok 42 - extension pressing recipe and guide appear together and output correct measured liquid
+  ---
+  duration_ms: 2.979911
+  type: 'test'
+  ...
+# Subtest: optional real Cookery API modules keep recipes intact and accept one Tavern guide chapter
+ok 43 - optional real Cookery API modules keep recipes intact and accept one Tavern guide chapter # SKIP
+  ---
+  duration_ms: 0.133119
+  type: 'test'
+  ...
+# Subtest: already-cancelled event cannot dismantle a machine and dimension-switch cancels deferred action
+ok 44 - already-cancelled event cannot dismantle a machine and dimension-switch cancels deferred action
+  ---
+  duration_ms: 0.778497
+  type: 'test'
+  ...
+# Subtest: a living mob presses, an item entity does not, and rejected contents eject once
+ok 45 - a living mob presses, an item entity does not, and rejected contents eject once
+  ---
+  duration_ms: 1.748661
+  type: 'test'
+  ...
+# Subtest: rejected-ingredient save failure removes staged drops and preserves the complete tub slot
+ok 46 - rejected-ingredient save failure removes staged drops and preserves the complete tub slot
+  ---
+  duration_ms: 1.05842
+  type: 'test'
+  ...
+# Subtest: breaking a full tub drops its remaining fruit once through the shared break route
+ok 47 - breaking a full tub drops its remaining fruit once through the shared break route
+  ---
+  duration_ms: 2.041597
+  type: 'test'
+  ...
+# Subtest: barrel opening renders four independent ingredient counts, closes all contents and rebuilds after reopening
+ok 48 - barrel opening renders four independent ingredient counts, closes all contents and rebuilds after reopening
+  ---
+  duration_ms: 2.762638
+  type: 'test'
+  ...
+# Subtest: fruit layout shows exact 1–64 counts, persists per-position scatter, and removes excess groups
+ok 49 - fruit layout shows exact 1–64 counts, persists per-position scatter, and removes excess groups
+  ---
+  duration_ms: 6.582915
+  type: 'test'
+  ...
+# Subtest: successful pressing cancels fall damage in either event order without double consumption
+ok 50 - successful pressing cancels fall damage in either event order without double consumption
+  ---
+  duration_ms: 1.497821
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 49
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 616.213426

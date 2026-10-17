@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "path": "art/interfaces/shaker-hand-source.json",
+      "sha256": "7cc9af436afd476447679edd7687b9cedeecf87a829f57721bcb16548be47869"
+    },
+    {
+      "path": "art/RP/animations/shaker.animation.json",
+      "sha256": "cabc41987866e1eed81a8ee4e0ba0ef17ba0ad64c210a110f7c541e7fdb07e2b"
+    },
+    {
+      "path": "art/RP/models/entity/shaker.geo.json",
+      "sha256": "5b4cc2b4acb585297ac2cde88a4dce9c50fd62be5cddb377ba1347c9538fbc0e"
+    },
+    {
+      "path": "art/interfaces/sound-art-map.json",
+      "sha256": "3ddd796b12142d56d898e3a07b636a3464c232eff46d936d8e3b6f2085812620"
+    }
+  ],
+  "PUT": "Original track bytes retained and invoked on commit.",
+  "hand_wave": "Original frequency/amplitude with radians-to-degrees conversion. Wrist rig anchoring is a Bedrock adaptation, not source-exact engine parity.",
+  "pour": "12tick interpolation/stream is new cross-platform feedback; never claimed as original animation.",
+  "food_workaround": false,
+  "player_json_overridden": false,
+  "engine_accepted": false
+}

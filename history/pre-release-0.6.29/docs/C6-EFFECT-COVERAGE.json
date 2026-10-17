@@ -1,0 +1,58 @@
+{
+  "rules_implemented": [
+    "bloody_mary"
+  ],
+  "adaptations_implemented": [
+    "xp_drain",
+    "zenith",
+    "shriek_attack",
+    "upside_down",
+    "vision",
+    "tomb_raider",
+    "ardent_heat",
+    "high_heels"
+  ],
+  "not_implemented": [
+    "slightly_tipsy",
+    "grass_stealth",
+    "long_reach"
+  ],
+  "scope": "Players as custom-effect owners; Shriek/Upside Down/Vision/Tomb Raider/Ardent Heat/High Heels use explicit Bedrock adapters; remaining timed effects as C5",
+  "engine_accepted": false,
+  "shriek_limits": [
+    "players excluded",
+    "max256 hit targets",
+    "reject damage = no impulse",
+    "not engine tested"
+  ],
+  "upside_down": {
+    "source": "Java 1.2.0: living Mob entities intersecting user AABB inflated by 16 are custom-named Grumm",
+    "adapter": "Bedrock mob-family query, living health check, exact getAABB overlap against source box inflated by 16, set Entity.nameTag='Grumm'",
+    "divergence": "Bedrock Script API exposes nameTag but no generic equivalent of Java setCustomNameVisible(false); visual/nameplate behavior requires engine acceptance",
+    "engine_tested": false
+  },
+  "vision": {
+    "source": "Java 1.2.0: every 50 ticks, radius=min(amplifier+1,3)*6; other living entities get Glowing for 60 ticks; sound only when at least one target was not already Glowing",
+    "adapter": "Timed custom status; 5-tick scheduler detects crossed 50-tick countdown boundaries, applies native glowing for 60 ticks after exact AABB overlap, and plays kt_assets_a17.effect.vision only for newly glowing targets",
+    "divergence": "Pulse execution may occur within the existing 5-tick adapter cadence rather than on the exact Java entity tick; Bedrock health-component filtering plus explicit Tavern-helper exclusion approximates Java LivingEntity; engine audio/effect rendering remains untested",
+    "engine_tested": false
+  },
+  "tomb_raider": {
+    "source": "Java 1.2.0 EffectEvent.onLivingHurt: attacker with Tomb Raider, target in tomb_raider_disarmable, target RNG nextFloat < 0.3F, mainhand required, damageable item set to maxDamage-1, drop with pickup delay 40",
+    "adapter": "Bedrock player-owned timed status; afterEvents.entityHurt; exact 15-source target mapping with zombified piglin -> zombie_pigman; EquipmentSlot.Mainhand; native spawnItem; item-entity dynamic property blocks entityItemPickup for 40 ticks; spawn/property failure restores original mainhand",
+    "divergence": "Bedrock safe mutation uses entityHurt after-event whereas Java LivingHurtEvent occurs earlier in the damage pipeline; lethal-hit ordering and arbitrary non-player LivingEntity attackers are not claimed equivalent",
+    "engine_tested": false
+  },
+  "ardent_heat": {
+    "source": "Java 1.2.0: every tick while sprinting, break the front 3x3 plane of BASE_STONE_OVERWORLD + BASE_STONE_NETHER + END_STONE; if any broke, add 1.2 exhaustion and damage one random worn armor item by 1, or with no armor deal 1 generic damage every fifth successful collision; natural expiry or zero hunger+saturation adds 600-tick Hunger",
+    "adapter": "Bedrock exact 10-block source tag expansion; one-tick sprint adapter; transactional set-air + explicit vanilla no-silk drop mapping (stone->cobblestone, deepslate->cobbled_deepslate); player exhaustion attribute +1.2 capped to component max; one random armor durability step or persistent bare collision counter; 5-tick status layer handles expiry/starvation Hunger",
+    "divergence": "Block loot is an explicit source-tag drop mapping rather than Java loot-table execution; exhaustion overflow/food conversion is delegated to Bedrock player exhaustion; Hunger end detection may occur within the 5-tick status window",
+    "engine_tested": false
+  },
+  "high_heels": {
+    "source": "Java 1.2.0 HighHeelsEffect: STEP_HEIGHT_ADDITION +0.5; all source drink/datamap uses are amplifier 0",
+    "adapter": "Bedrock 2.7.0 grounded blocked-movement auto-step: raw movement input + yaw choose the cardinal obstacle; only near the collision edge with low horizontal velocity and two clear blocks above; tryTeleport raises exactly 1 block and carries 0.2 forward with checkForBlocks",
+    "divergence": "Bedrock stable Script API has no writable player step-height attribute, so this is a collision-triggered movement adapter rather than native attribute parity; partial/custom collision shapes and touch/controller feel require engine acceptance",
+    "engine_tested": false
+  }
+}

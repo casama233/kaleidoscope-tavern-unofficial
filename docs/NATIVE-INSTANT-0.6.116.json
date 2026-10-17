@@ -1,0 +1,120 @@
+{
+  "native_script_behavior": true,
+  "client": false,
+  "test_only_host_overlay": true,
+  "reports": [
+    {
+      "phase": "first",
+      "ok": true,
+      "normal_stop": true,
+      "player_connections": 0,
+      "errors": [],
+      "observations": [
+        {
+          "kind": "case",
+          "mode": "zenith",
+          "type": "minecraft:stone",
+          "at": {
+            "z": 0.5,
+            "y": 301,
+            "x": 0.5
+          },
+          "velocityPreserved": true,
+          "hungerTicks": 600
+        },
+        {
+          "kind": "case",
+          "mode": "zenith",
+          "type": "minecraft:water",
+          "at": {
+            "z": 0.5,
+            "y": 301,
+            "x": 4.5
+          },
+          "velocityPreserved": true,
+          "hungerTicks": 600
+        },
+        {
+          "kind": "case",
+          "mode": "zenith",
+          "type": "minecraft:oak_leaves",
+          "at": {
+            "z": 0.5,
+            "y": 301,
+            "x": 8.5
+          },
+          "velocityPreserved": true,
+          "hungerTicks": 600
+        },
+        {
+          "kind": "case",
+          "mode": "zenith",
+          "type": "minecraft:oak_fence",
+          "at": {
+            "z": 0.5,
+            "y": 301,
+            "x": 12.5
+          },
+          "velocityPreserved": true,
+          "hungerTicks": 600
+        },
+        {
+          "kind": "case",
+          "mode": "zenith",
+          "type": "minecraft:smooth_stone_slab",
+          "at": {
+            "z": 0.5,
+            "y": 301,
+            "x": 16.5
+          },
+          "velocityPreserved": true,
+          "hungerTicks": 600
+        },
+        {
+          "kind": "case",
+          "mode": "mob-upside-down",
+          "self": "Grumm",
+          "near": "Grumm",
+          "outside": ""
+        },
+        {
+          "kind": "case",
+          "mode": "uncapped-shriek",
+          "targets": 270,
+          "damage": 24
+        },
+        {
+          "kind": "case",
+          "mode": "same-tick-and-rejected-hurt",
+          "casts": 2,
+          "health": 100,
+          "velocity": {
+            "z": 1.260000228881836,
+            "y": 0.55999755859375,
+            "x": 1.1920928955078125e-07
+          }
+        },
+        {
+          "kind": "case",
+          "mode": "fall-class",
+          "effect": "reverse_gravity",
+          "health": 96
+        },
+        {
+          "kind": "case",
+          "mode": "fall-class",
+          "effect": "multi_jump",
+          "health": 100
+        },
+        {
+          "kind": "done",
+          "phase": "first",
+          "players": 0
+        }
+      ]
+    }
+  ],
+  "bds": "1.26.51.1",
+  "source": "Released Tavern1.2.0 NeoForge MC1.21.1/World Liquor1.1.11",
+  "stage": "Explicit observer in actual copied packs before identity bump; no normal gameplay or client acceptance"
+}

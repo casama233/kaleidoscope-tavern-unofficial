@@ -1,0 +1,30 @@
+{
+  "bsm": "3.10.6",
+  "bds": "1.26.52.3",
+  "candidate_receipt_sha256": "b531fa7f1898001aa70e7ce6e2584b3744566978762054ea20b7152b910e07da",
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "test_kind": "exact unmodified family loading; no native probes",
+  "experimental_creator_features": false,
+  "bds_loading_passed": true,
+  "cycles": [
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": false
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": true
+    }
+  ],
+  "packs": 16,
+  "instance_stopped": true,
+  "owned_versions": {
+    "tavern": "0.6.78",
+    "world-liquor": "0.1.43",
+    "grilling": "2.8.20"
+  }
+}

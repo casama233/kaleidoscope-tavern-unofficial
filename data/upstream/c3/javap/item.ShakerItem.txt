@@ -1,0 +1,640 @@
+Compiled from "ShakerItem.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.item.ShakerItem extends net.minecraft.world.item.BlockItem {
+  private static final int STORAGE_SIZE = 3;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.item.ShakerItem();
+    Code:
+       0: aload_0
+       1: getstatic     #1                  // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.SHAKER:Lnet/neoforged/neoforge/registries/DeferredBlock;
+       4: invokevirtual #7                  // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+       7: checkcast     #13                 // class net/minecraft/world/level/block/Block
+      10: new           #15                 // class net/minecraft/world/item/Item$Properties
+      13: dup
+      14: invokespecial #17                 // Method net/minecraft/world/item/Item$Properties."<init>":()V
+      17: iconst_1
+      18: invokevirtual #21                 // Method net/minecraft/world/item/Item$Properties.stacksTo:(I)Lnet/minecraft/world/item/Item$Properties;
+      21: invokespecial #25                 // Method net/minecraft/world/item/BlockItem."<init>":(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item$Properties;)V
+      24: return
+
+  public static net.neoforged.neoforge.items.ItemStackHandler getStorage(net.minecraft.world.item.ItemStack);
+    Code:
+       0: new           #30                 // class net/neoforged/neoforge/items/ItemStackHandler
+       3: dup
+       4: iconst_3
+       5: invokespecial #34                 // Method net/neoforged/neoforge/items/ItemStackHandler."<init>":(I)V
+       8: astore_1
+       9: aload_0
+      10: getstatic     #37                 // Field net/minecraft/core/component/DataComponents.CONTAINER:Lnet/minecraft/core/component/DataComponentType;
+      13: getstatic     #43                 // Field net/minecraft/world/item/component/ItemContainerContents.EMPTY:Lnet/minecraft/world/item/component/ItemContainerContents;
+      16: invokevirtual #49                 // Method net/minecraft/world/item/ItemStack.getOrDefault:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+      19: checkcast     #44                 // class net/minecraft/world/item/component/ItemContainerContents
+      22: astore_2
+      23: iconst_0
+      24: istore_3
+      25: iload_3
+      26: aload_1
+      27: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      30: aload_2
+      31: invokevirtual #59                 // Method net/minecraft/world/item/component/ItemContainerContents.getSlots:()I
+      34: invokestatic  #60                 // Method java/lang/Math.min:(II)I
+      37: if_icmpge     56
+      40: aload_1
+      41: iload_3
+      42: aload_2
+      43: iload_3
+      44: invokevirtual #66                 // Method net/minecraft/world/item/component/ItemContainerContents.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      47: invokevirtual #70                 // Method net/neoforged/neoforge/items/ItemStackHandler.setStackInSlot:(ILnet/minecraft/world/item/ItemStack;)V
+      50: iinc          3, 1
+      53: goto          25
+      56: aload_1
+      57: areturn
+
+  public static void setStorage(net.minecraft.world.item.ItemStack, net.neoforged.neoforge.items.ItemStackHandler);
+    Code:
+       0: invokestatic  #74                 // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+       3: astore_2
+       4: iconst_0
+       5: istore_3
+       6: iload_3
+       7: aload_1
+       8: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      11: if_icmpge     32
+      14: aload_2
+      15: aload_1
+      16: iload_3
+      17: invokevirtual #80                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      20: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      25: pop
+      26: iinc          3, 1
+      29: goto          6
+      32: aload_0
+      33: getstatic     #37                 // Field net/minecraft/core/component/DataComponents.CONTAINER:Lnet/minecraft/core/component/DataComponentType;
+      36: aload_2
+      37: invokestatic  #87                 // Method net/minecraft/world/item/component/ItemContainerContents.fromItems:(Ljava/util/List;)Lnet/minecraft/world/item/component/ItemContainerContents;
+      40: invokevirtual #91                 // Method net/minecraft/world/item/ItemStack.set:(Lnet/minecraft/core/component/DataComponentType;Ljava/lang/Object;)Ljava/lang/Object;
+      43: pop
+      44: return
+
+  public static boolean hasStorage(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #37                 // Field net/minecraft/core/component/DataComponents.CONTAINER:Lnet/minecraft/core/component/DataComponentType;
+       4: invokevirtual #94                 // Method net/minecraft/world/item/ItemStack.has:(Lnet/minecraft/core/component/DataComponentType;)Z
+       7: ireturn
+
+  public static net.minecraft.world.item.ItemStack getResult(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #98                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SHAKER_RESULT:Ljava/util/function/Supplier;
+       4: getstatic     #104                // Field com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result.EMPTY:Lcom/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result;
+       7: invokevirtual #109                // Method net/minecraft/world/item/ItemStack.getOrDefault:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #105                // class com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result
+      13: invokevirtual #112                // Method com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result.stack:()Lnet/minecraft/world/item/ItemStack;
+      16: areturn
+
+  public static void setResult(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #98                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SHAKER_RESULT:Ljava/util/function/Supplier;
+       4: new           #105                // class com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result
+       7: dup
+       8: aload_1
+       9: invokevirtual #116                // Method net/minecraft/world/item/ItemStack.copy:()Lnet/minecraft/world/item/ItemStack;
+      12: invokespecial #119                // Method com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem$Result."<init>":(Lnet/minecraft/world/item/ItemStack;)V
+      15: invokevirtual #122                // Method net/minecraft/world/item/ItemStack.set:(Ljava/util/function/Supplier;Ljava/lang/Object;)Ljava/lang/Object;
+      18: pop
+      19: return
+
+  public static boolean hasResult(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #98                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SHAKER_RESULT:Ljava/util/function/Supplier;
+       4: invokevirtual #124                // Method net/minecraft/world/item/ItemStack.has:(Ljava/util/function/Supplier;)Z
+       7: ifeq          24
+      10: aload_0
+      11: invokestatic  #127                // Method getResult:(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;
+      14: invokevirtual #131                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      17: ifne          24
+      20: iconst_1
+      21: goto          25
+      24: iconst_0
+      25: ireturn
+
+  public static void removeAll(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: getstatic     #98                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModDataComponents.SHAKER_RESULT:Ljava/util/function/Supplier;
+       4: invokevirtual #135                // Method net/minecraft/world/item/ItemStack.remove:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+       7: pop
+       8: aload_0
+       9: getstatic     #37                 // Field net/minecraft/core/component/DataComponents.CONTAINER:Lnet/minecraft/core/component/DataComponentType;
+      12: invokevirtual #139                // Method net/minecraft/world/item/ItemStack.remove:(Lnet/minecraft/core/component/DataComponentType;)Ljava/lang/Object;
+      15: pop
+      16: return
+
+  public net.minecraft.world.InteractionResult useOn(net.minecraft.world.item.context.UseOnContext);
+    Code:
+       0: aload_1
+       1: invokevirtual #142                // Method net/minecraft/world/item/context/UseOnContext.getLevel:()Lnet/minecraft/world/level/Level;
+       4: astore_2
+       5: aload_1
+       6: invokevirtual #148                // Method net/minecraft/world/item/context/UseOnContext.getItemInHand:()Lnet/minecraft/world/item/ItemStack;
+       9: astore_3
+      10: aload_1
+      11: invokevirtual #151                // Method net/minecraft/world/item/context/UseOnContext.getClickedPos:()Lnet/minecraft/core/BlockPos;
+      14: astore        4
+      16: aload_2
+      17: aload         4
+      19: invokevirtual #155                // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      22: astore        5
+      24: aload_3
+      25: invokestatic  #161                // Method hasResult:(Lnet/minecraft/world/item/ItemStack;)Z
+      28: ifeq          62
+      31: aload         5
+      33: getstatic     #165                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.EMPTY_GLASSWARE:Lnet/neoforged/neoforge/registries/DeferredBlock;
+      36: invokevirtual #7                  // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+      39: checkcast     #13                 // class net/minecraft/world/level/block/Block
+      42: invokevirtual #168                // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/world/level/block/Block;)Z
+      45: ifeq          62
+      48: aload_0
+      49: aload_2
+      50: aload_3
+      51: aload         4
+      53: aload         5
+      55: invokevirtual #174                // Method pourResult:(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+      58: getstatic     #178                // Field net/minecraft/world/InteractionResult.SUCCESS:Lnet/minecraft/world/InteractionResult;
+      61: areturn
+      62: aload_0
+      63: aload_1
+      64: invokespecial #184                // Method net/minecraft/world/item/BlockItem.useOn:(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult;
+      67: areturn
+
+  private void pourResult(net.minecraft.world.level.Level, net.minecraft.world.item.ItemStack, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    Code:
+       0: aload_2
+       1: invokestatic  #127                // Method getResult:(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;
+       4: astore        5
+       6: aload         5
+       8: invokevirtual #188                // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+      11: astore        7
+      13: aload         7
+      15: instanceof    #26                 // class net/minecraft/world/item/BlockItem
+      18: ifeq          81
+      21: aload         7
+      23: checkcast     #26                 // class net/minecraft/world/item/BlockItem
+      26: astore        6
+      28: aload         6
+      30: invokevirtual #192                // Method net/minecraft/world/item/BlockItem.getBlock:()Lnet/minecraft/world/level/block/Block;
+      33: invokevirtual #196                // Method net/minecraft/world/level/block/Block.defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      36: astore        7
+      38: aload         7
+      40: getstatic     #200                // Field com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/GlasswareBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      43: invokevirtual #206                // Method net/minecraft/world/level/block/state/BlockState.hasProperty:(Lnet/minecraft/world/level/block/state/properties/Property;)Z
+      46: ifeq          73
+      49: aload         7
+      51: getstatic     #200                // Field com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/GlasswareBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      54: aload         4
+      56: getstatic     #200                // Field com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/GlasswareBlock.FACING:Lnet/minecraft/world/level/block/state/properties/DirectionProperty;
+      59: invokevirtual #210                // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      62: checkcast     #214                // class net/minecraft/core/Direction
+      65: invokevirtual #216                // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      68: checkcast     #169                // class net/minecraft/world/level/block/state/BlockState
+      71: astore        7
+      73: aload_1
+      74: aload_3
+      75: aload         7
+      77: invokevirtual #220                // Method net/minecraft/world/level/Level.setBlockAndUpdate:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z
+      80: pop
+      81: aload_1
+      82: aload_3
+      83: invokevirtual #224                // Method net/minecraft/world/level/Level.getBlockEntity:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/entity/BlockEntity;
+      86: astore        7
+      88: aload         7
+      90: instanceof    #228                // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/SignatureCocktailBlockEntity
+      93: ifeq          155
+      96: aload         7
+      98: checkcast     #228                // class com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/SignatureCocktailBlockEntity
+     101: astore        6
+     103: aload_2
+     104: invokestatic  #230                // Method getStorage:(Lnet/minecraft/world/item/ItemStack;)Lnet/neoforged/neoforge/items/ItemStackHandler;
+     107: astore        7
+     109: aload         7
+     111: invokestatic  #234                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/CocktailEffectHelper.collectFromStorage:(Lnet/neoforged/neoforge/items/ItemStackHandler;)Lcom/github/ysbbbbbb/kaleidoscopetavern/util/CocktailEffectHelper$CollectedData;
+     114: astore        8
+     116: aload         8
+     118: invokevirtual #240                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/CocktailEffectHelper$CollectedData.effects:()Ljava/util/List;
+     121: invokestatic  #246                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/CocktailEffectHelper.mergeEffects:(Ljava/util/List;)Ljava/util/List;
+     124: astore        9
+     126: aload         8
+     128: invokevirtual #250                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/CocktailEffectHelper$CollectedData.colors:()Ljava/util/List;
+     131: invokestatic  #253                // Method com/github/ysbbbbbb/kaleidoscopetavern/util/ColorUtils.mixColors:(Ljava/util/List;)I
+     134: istore        10
+     136: aload         6
+     138: iload         10
+     140: invokevirtual #259                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/SignatureCocktailBlockEntity.setColor:(I)V
+     143: aload         6
+     145: aload         9
+     147: invokevirtual #262                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/SignatureCocktailBlockEntity.setEffects:(Ljava/util/List;)V
+     150: aload         6
+     152: invokevirtual #266                // Method com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/SignatureCocktailBlockEntity.refresh:()V
+     155: aload_2
+     156: invokestatic  #269                // Method removeAll:(Lnet/minecraft/world/item/ItemStack;)V
+     159: aload_1
+     160: instanceof    #272                // class net/minecraft/server/level/ServerLevel
+     163: ifeq          237
+     166: aload_1
+     167: checkcast     #272                // class net/minecraft/server/level/ServerLevel
+     170: astore        6
+     172: aload         6
+     174: getstatic     #274                // Field net/minecraft/core/particles/ParticleTypes.EFFECT:Lnet/minecraft/core/particles/SimpleParticleType;
+     177: aload_3
+     178: invokevirtual #280                // Method net/minecraft/core/BlockPos.getX:()I
+     181: i2d
+     182: ldc2_w        #285                // double 0.5d
+     185: dadd
+     186: aload_3
+     187: invokevirtual #287                // Method net/minecraft/core/BlockPos.getY:()I
+     190: i2d
+     191: ldc2_w        #285                // double 0.5d
+     194: dadd
+     195: aload_3
+     196: invokevirtual #290                // Method net/minecraft/core/BlockPos.getZ:()I
+     199: i2d
+     200: ldc2_w        #285                // double 0.5d
+     203: dadd
+     204: bipush        20
+     206: ldc2_w        #293                // double 0.1d
+     209: ldc2_w        #293                // double 0.1d
+     212: ldc2_w        #293                // double 0.1d
+     215: ldc2_w        #285                // double 0.5d
+     218: invokevirtual #295                // Method net/minecraft/server/level/ServerLevel.sendParticles:(Lnet/minecraft/core/particles/ParticleOptions;DDDIDDDD)I
+     221: pop
+     222: aload         6
+     224: aconst_null
+     225: aload_3
+     226: getstatic     #299                // Field net/minecraft/sounds/SoundEvents.BOTTLE_FILL:Lnet/minecraft/sounds/SoundEvent;
+     229: getstatic     #305                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     232: fconst_1
+     233: fconst_1
+     234: invokevirtual #311                // Method net/minecraft/server/level/ServerLevel.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V
+     237: return
+
+  public net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack> use(net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+    Code:
+       0: aload_2
+       1: aload_3
+       2: invokevirtual #315                // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+       5: astore        4
+       7: aload         4
+       9: invokestatic  #161                // Method hasResult:(Lnet/minecraft/world/item/ItemStack;)Z
+      12: ifeq          21
+      15: aload         4
+      17: invokestatic  #320                // Method net/minecraft/world/InteractionResultHolder.pass:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+      20: areturn
+      21: aload_0
+      22: aload         4
+      24: invokevirtual #326                // Method hasStorageItem:(Lnet/minecraft/world/item/ItemStack;)Z
+      27: ifne          36
+      30: aload         4
+      32: invokestatic  #320                // Method net/minecraft/world/InteractionResultHolder.pass:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+      35: areturn
+      36: aload         4
+      38: invokestatic  #230                // Method getStorage:(Lnet/minecraft/world/item/ItemStack;)Lnet/neoforged/neoforge/items/ItemStackHandler;
+      41: astore        5
+      43: iconst_0
+      44: istore        6
+      46: iload         6
+      48: aload         5
+      50: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      53: if_icmpge     126
+      56: aload         5
+      58: iload         6
+      60: invokevirtual #80                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      63: astore        7
+      65: aload         7
+      67: invokevirtual #131                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      70: ifne          76
+      73: goto          120
+      76: aload_2
+      77: instanceof    #329                // class net/minecraft/server/level/ServerPlayer
+      80: ifeq          114
+      83: aload_2
+      84: checkcast     #329                // class net/minecraft/server/level/ServerPlayer
+      87: astore        8
+      89: ldc_w         #331                // String message.kaleidoscope_tavern.shaker.amount_too_low
+      92: invokestatic  #333                // InterfaceMethod net/minecraft/network/chat/Component.translatable:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      95: astore        9
+      97: aload         8
+      99: getfield      #339                // Field net/minecraft/server/level/ServerPlayer.connection:Lnet/minecraft/server/network/ServerGamePacketListenerImpl;
+     102: new           #343                // class net/minecraft/network/protocol/game/ClientboundSetActionBarTextPacket
+     105: dup
+     106: aload         9
+     108: invokespecial #345                // Method net/minecraft/network/protocol/game/ClientboundSetActionBarTextPacket."<init>":(Lnet/minecraft/network/chat/Component;)V
+     111: invokevirtual #348                // Method net/minecraft/server/network/ServerGamePacketListenerImpl.send:(Lnet/minecraft/network/protocol/Packet;)V
+     114: aload         4
+     116: invokestatic  #320                // Method net/minecraft/world/InteractionResultHolder.pass:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+     119: areturn
+     120: iinc          6, 1
+     123: goto          46
+     126: aload_2
+     127: aload_3
+     128: invokevirtual #354                // Method net/minecraft/world/entity/player/Player.startUsingItem:(Lnet/minecraft/world/InteractionHand;)V
+     131: aload         4
+     133: invokestatic  #358                // Method net/minecraft/world/InteractionResultHolder.consume:(Ljava/lang/Object;)Lnet/minecraft/world/InteractionResultHolder;
+     136: areturn
+
+  private boolean hasStorageItem(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_1
+       1: invokestatic  #361                // Method hasStorage:(Lnet/minecraft/world/item/ItemStack;)Z
+       4: ifne          9
+       7: iconst_0
+       8: ireturn
+       9: aload_1
+      10: invokestatic  #230                // Method getStorage:(Lnet/minecraft/world/item/ItemStack;)Lnet/neoforged/neoforge/items/ItemStackHandler;
+      13: astore_2
+      14: iconst_0
+      15: istore_3
+      16: iload_3
+      17: aload_2
+      18: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      21: if_icmpge     47
+      24: aload_2
+      25: iload_3
+      26: invokevirtual #80                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      29: astore        4
+      31: aload         4
+      33: invokevirtual #131                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      36: ifne          41
+      39: iconst_1
+      40: ireturn
+      41: iinc          3, 1
+      44: goto          16
+      47: iconst_0
+      48: ireturn
+
+  public void onUseTick(net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int);
+    Code:
+       0: iload         4
+       2: bipush        10
+       4: irem
+       5: ifne          57
+       8: aload_2
+       9: getstatic     #364                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModSounds.SHAKER_SHAKING:Ljava/util/function/Supplier;
+      12: invokeinterface #369,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+      17: checkcast     #372                // class net/minecraft/sounds/SoundEvent
+      20: aload_1
+      21: getfield      #374                // Field net/minecraft/world/level/Level.random:Lnet/minecraft/util/RandomSource;
+      24: invokeinterface #378,  1          // InterfaceMethod net/minecraft/util/RandomSource.nextFloat:()F
+      29: ldc_w         #384                // float 0.2f
+      32: fmul
+      33: ldc_w         #385                // float 0.75f
+      36: fadd
+      37: aload_1
+      38: getfield      #374                // Field net/minecraft/world/level/Level.random:Lnet/minecraft/util/RandomSource;
+      41: invokeinterface #378,  1          // InterfaceMethod net/minecraft/util/RandomSource.nextFloat:()F
+      46: ldc_w         #384                // float 0.2f
+      49: fmul
+      50: ldc_w         #386                // float 0.8f
+      53: fadd
+      54: invokevirtual #387                // Method net/minecraft/world/entity/LivingEntity.playSound:(Lnet/minecraft/sounds/SoundEvent;FF)V
+      57: aload_2
+      58: invokevirtual #392                // Method net/minecraft/world/entity/LivingEntity.getTicksUsingItem:()I
+      61: bipush        110
+      63: if_icmple     70
+      66: aload_2
+      67: invokevirtual #395                // Method net/minecraft/world/entity/LivingEntity.releaseUsingItem:()V
+      70: return
+
+  public void releaseUsing(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, int);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_3
+       3: invokevirtual #398                // Method getUseDuration:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;)I
+       6: iload         4
+       8: isub
+       9: istore        5
+      11: iload         5
+      13: bipush        19
+      15: if_icmpge     19
+      18: return
+      19: aload_2
+      20: getfield      #402                // Field net/minecraft/world/level/Level.isClientSide:Z
+      23: ifne          122
+      26: iload         5
+      28: bipush        69
+      30: if_icmpge     56
+      33: aload_1
+      34: new           #50                 // class net/minecraft/world/item/ItemStack
+      37: dup
+      38: getstatic     #406                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.MYSTERY_COCKTAIL:Lnet/neoforged/neoforge/registries/DeferredItem;
+      41: invokevirtual #412                // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+      44: checkcast     #415                // class net/minecraft/world/level/ItemLike
+      47: invokespecial #417                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      50: invokestatic  #420                // Method setResult:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+      53: goto          122
+      56: iload         5
+      58: bipush        89
+      60: if_icmpge     86
+      63: aload_1
+      64: new           #50                 // class net/minecraft/world/item/ItemStack
+      67: dup
+      68: getstatic     #424                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.SIGNATURE_COCKTAIL:Lnet/neoforged/neoforge/registries/DeferredItem;
+      71: invokevirtual #412                // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+      74: checkcast     #415                // class net/minecraft/world/level/ItemLike
+      77: invokespecial #417                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      80: invokestatic  #420                // Method setResult:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+      83: goto          122
+      86: iload         5
+      88: bipush        99
+      90: if_icmpge     102
+      93: aload_0
+      94: aload_2
+      95: aload_1
+      96: invokevirtual #427                // Method handRecipe:(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)V
+      99: goto          122
+     102: aload_1
+     103: new           #50                 // class net/minecraft/world/item/ItemStack
+     106: dup
+     107: getstatic     #406                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.MYSTERY_COCKTAIL:Lnet/neoforged/neoforge/registries/DeferredItem;
+     110: invokevirtual #412                // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+     113: checkcast     #415                // class net/minecraft/world/level/ItemLike
+     116: invokespecial #417                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+     119: invokestatic  #420                // Method setResult:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+     122: aload_3
+     123: getstatic     #431                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModSounds.SHAKER_END:Ljava/util/function/Supplier;
+     126: invokeinterface #369,  1          // InterfaceMethod java/util/function/Supplier.get:()Ljava/lang/Object;
+     131: checkcast     #372                // class net/minecraft/sounds/SoundEvent
+     134: invokevirtual #434                // Method net/minecraft/world/entity/LivingEntity.playSound:(Lnet/minecraft/sounds/SoundEvent;)V
+     137: return
+
+  private void handRecipe(net.minecraft.world.level.Level, net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_2
+       1: invokestatic  #230                // Method getStorage:(Lnet/minecraft/world/item/ItemStack;)Lnet/neoforged/neoforge/items/ItemStackHandler;
+       4: astore_3
+       5: invokestatic  #74                 // Method com/google/common/collect/Lists.newArrayList:()Ljava/util/ArrayList;
+       8: astore        4
+      10: iconst_0
+      11: istore        5
+      13: iload         5
+      15: aload_3
+      16: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      19: if_icmpge     57
+      22: aload_3
+      23: iload         5
+      25: invokevirtual #80                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+      28: astore        6
+      30: aload         6
+      32: invokevirtual #131                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+      35: ifeq          41
+      38: goto          51
+      41: aload         4
+      43: aload         6
+      45: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      50: pop
+      51: iinc          5, 1
+      54: goto          13
+      57: new           #437                // class com/github/ysbbbbbb/kaleidoscopetavern/crafting/container/SimpleInput
+      60: dup
+      61: aload         4
+      63: invokespecial #439                // Method com/github/ysbbbbbb/kaleidoscopetavern/crafting/container/SimpleInput."<init>":(Ljava/util/List;)V
+      66: astore        5
+      68: aload_1
+      69: invokevirtual #441                // Method net/minecraft/world/level/Level.getRecipeManager:()Lnet/minecraft/world/item/crafting/RecipeManager;
+      72: astore        6
+      74: aload_1
+      75: invokevirtual #445                // Method net/minecraft/world/level/Level.registryAccess:()Lnet/minecraft/core/RegistryAccess;
+      78: astore        7
+      80: aload         6
+      82: getstatic     #449                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModRecipes.SHAKER_RECIPE:Lnet/minecraft/world/item/crafting/RecipeType;
+      85: aload         5
+      87: aload_1
+      88: invokevirtual #455                // Method net/minecraft/world/item/crafting/RecipeManager.getRecipeFor:(Lnet/minecraft/world/item/crafting/RecipeType;Lnet/minecraft/world/item/crafting/RecipeInput;Lnet/minecraft/world/level/Level;)Ljava/util/Optional;
+      91: aload_2
+      92: aload         5
+      94: aload         7
+      96: invokedynamic #461,  0            // InvokeDynamic #0:accept:(Lnet/minecraft/world/item/ItemStack;Lcom/github/ysbbbbbb/kaleidoscopetavern/crafting/container/SimpleInput;Lnet/minecraft/core/RegistryAccess;)Ljava/util/function/Consumer;
+     101: aload_2
+     102: invokedynamic #465,  0            // InvokeDynamic #1:run:(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/Runnable;
+     107: invokevirtual #469                // Method java/util/Optional.ifPresentOrElse:(Ljava/util/function/Consumer;Ljava/lang/Runnable;)V
+     110: return
+
+  public int getUseDuration(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.LivingEntity);
+    Code:
+       0: ldc_w         #475                // int 72000
+       3: ireturn
+
+  public void appendHoverText(net.minecraft.world.item.ItemStack, net.minecraft.world.item.Item$TooltipContext, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+    Code:
+       0: aload_1
+       1: invokestatic  #161                // Method hasResult:(Lnet/minecraft/world/item/ItemStack;)Z
+       4: ifeq          72
+       7: aload_1
+       8: invokestatic  #127                // Method getResult:(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;
+      11: astore        5
+      13: aload         5
+      15: invokevirtual #476                // Method net/minecraft/world/item/ItemStack.getHoverName:()Lnet/minecraft/network/chat/Component;
+      18: astore        7
+      20: aload         7
+      22: instanceof    #480                // class net/minecraft/network/chat/MutableComponent
+      25: ifeq          69
+      28: aload         7
+      30: checkcast     #480                // class net/minecraft/network/chat/MutableComponent
+      33: astore        6
+      35: aload         6
+      37: getstatic     #482                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+      40: invokevirtual #488                // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;
+      43: astore        7
+      45: aload_3
+      46: ldc_w         #492                // String ▶
+      49: invokestatic  #494                // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+      52: getstatic     #482                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+      55: invokevirtual #488                // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;
+      58: aload         7
+      60: invokevirtual #497                // Method net/minecraft/network/chat/MutableComponent.append:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;
+      63: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      68: pop
+      69: goto          210
+      72: aload_1
+      73: invokestatic  #361                // Method hasStorage:(Lnet/minecraft/world/item/ItemStack;)Z
+      76: ifeq          210
+      79: aload_1
+      80: invokestatic  #230                // Method getStorage:(Lnet/minecraft/world/item/ItemStack;)Lnet/neoforged/neoforge/items/ItemStackHandler;
+      83: astore        5
+      85: iconst_0
+      86: istore        6
+      88: iload         6
+      90: aload         5
+      92: invokevirtual #55                 // Method net/neoforged/neoforge/items/ItemStackHandler.getSlots:()I
+      95: if_icmpge     210
+      98: aload         5
+     100: iload         6
+     102: invokevirtual #80                 // Method net/neoforged/neoforge/items/ItemStackHandler.getStackInSlot:(I)Lnet/minecraft/world/item/ItemStack;
+     105: astore        7
+     107: aload         7
+     109: invokevirtual #131                // Method net/minecraft/world/item/ItemStack.isEmpty:()Z
+     112: ifeq          118
+     115: goto          204
+     118: aload         7
+     120: invokevirtual #476                // Method net/minecraft/world/item/ItemStack.getHoverName:()Lnet/minecraft/network/chat/Component;
+     123: astore        9
+     125: aload         9
+     127: instanceof    #480                // class net/minecraft/network/chat/MutableComponent
+     130: ifeq          204
+     133: aload         9
+     135: checkcast     #480                // class net/minecraft/network/chat/MutableComponent
+     138: astore        8
+     140: getstatic     #501                // Field com/github/ysbbbbbb/kaleidoscopetavern/util/ColorUtils.ITEM_COLOR_CACHE:Ljava/util/function/Function;
+     143: aload         7
+     145: invokevirtual #188                // Method net/minecraft/world/item/ItemStack.getItem:()Lnet/minecraft/world/item/Item;
+     148: invokeinterface #505,  2          // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+     153: checkcast     #483                // class net/minecraft/ChatFormatting
+     156: astore        9
+     158: aload         9
+     160: getstatic     #511                // Field net/minecraft/ChatFormatting.RESET:Lnet/minecraft/ChatFormatting;
+     163: if_acmpne     171
+     166: getstatic     #482                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+     169: astore        9
+     171: aload         8
+     173: aload         9
+     175: invokevirtual #488                // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;
+     178: astore        10
+     180: aload_3
+     181: ldc_w         #492                // String ▶
+     184: invokestatic  #494                // InterfaceMethod net/minecraft/network/chat/Component.literal:(Ljava/lang/String;)Lnet/minecraft/network/chat/MutableComponent;
+     187: getstatic     #482                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+     190: invokevirtual #488                // Method net/minecraft/network/chat/MutableComponent.withStyle:(Lnet/minecraft/ChatFormatting;)Lnet/minecraft/network/chat/MutableComponent;
+     193: aload         10
+     195: invokevirtual #497                // Method net/minecraft/network/chat/MutableComponent.append:(Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/MutableComponent;
+     198: invokeinterface #81,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+     203: pop
+     204: iinc          6, 1
+     207: goto          88
+     210: return
+
+  private static void lambda$handRecipe$1(net.minecraft.world.item.ItemStack);
+    Code:
+       0: aload_0
+       1: new           #50                 // class net/minecraft/world/item/ItemStack
+       4: dup
+       5: getstatic     #424                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModItems.SIGNATURE_COCKTAIL:Lnet/neoforged/neoforge/registries/DeferredItem;
+       8: invokevirtual #412                // Method net/neoforged/neoforge/registries/DeferredItem.get:()Ljava/lang/Object;
+      11: checkcast     #415                // class net/minecraft/world/level/ItemLike
+      14: invokespecial #417                // Method net/minecraft/world/item/ItemStack."<init>":(Lnet/minecraft/world/level/ItemLike;)V
+      17: invokestatic  #420                // Method setResult:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+      20: return
+
+  private static void lambda$handRecipe$0(net.minecraft.world.item.ItemStack, com.github.ysbbbbbb.kaleidoscopetavern.crafting.container.SimpleInput, net.minecraft.core.RegistryAccess, net.minecraft.world.item.crafting.RecipeHolder);
+    Code:
+       0: aload_0
+       1: aload_3
+       2: invokevirtual #514                // Method net/minecraft/world/item/crafting/RecipeHolder.value:()Lnet/minecraft/world/item/crafting/Recipe;
+       5: checkcast     #520                // class com/github/ysbbbbbb/kaleidoscopetavern/crafting/recipe/ShakerRecipe
+       8: aload_1
+       9: aload_2
+      10: invokevirtual #522                // Method com/github/ysbbbbbb/kaleidoscopetavern/crafting/recipe/ShakerRecipe.assemble:(Lcom/github/ysbbbbbb/kaleidoscopetavern/crafting/container/SimpleInput;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/ItemStack;
+      13: invokestatic  #420                // Method setResult:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V
+      16: return
+}

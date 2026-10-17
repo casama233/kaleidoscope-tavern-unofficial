@@ -1,0 +1,185 @@
+{
+  "sources": {
+    "animations/player_firstperson.animation.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/v1.26.50.4/resource_pack/animations/player_firstperson.animation.json",
+      "sha256": "be55737455e163a4983d2315b46df3d6815d9365363c295776251287a70b664e"
+    },
+    "models/entity/player_armor.json": {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/v1.26.50.4/resource_pack/models/entity/player_armor.json",
+      "sha256": "f05bb7de47c09eab411e8f9778768c3110d176ca6c224a8c76c9488da353b78b"
+    }
+  },
+  "player_bones": {
+    "body": {
+      "parent": "waist",
+      "pivot": [
+        0.0,
+        24.0,
+        0.0
+      ]
+    },
+    "head": {
+      "parent": "body",
+      "pivot": [
+        0.0,
+        24.0,
+        0.0
+      ]
+    },
+    "rightarm": {
+      "parent": "body",
+      "pivot": [
+        -5.0,
+        22.0,
+        0.0
+      ]
+    },
+    "rightitem": {
+      "parent": "rightArm",
+      "pivot": [
+        -6,
+        15,
+        1
+      ]
+    },
+    "leftarm": {
+      "parent": "body",
+      "pivot": [
+        5.0,
+        22.0,
+        0.0
+      ]
+    }
+  },
+  "empty_hand": {
+    "rightarm": {
+      "position": [
+        13.5,
+        -10.0,
+        12.0
+      ],
+      "rotation": [
+        "95.0 + variable.is_using_vr * 7.5",
+        "-45.0 + variable.is_using_vr * 7.5",
+        "115.0 + variable.is_using_vr * -2.5"
+      ]
+    },
+    "rightitem": {
+      "position": [
+        0.0,
+        "q.get_default_bone_pivot('rightarm',1) - q.get_default_bone_pivot('rightitem',1) - 7.0",
+        "-q.get_default_bone_pivot('rightitem',2)"
+      ]
+    },
+    "leftitem": {
+      "position": [
+        0.0,
+        "q.get_default_bone_pivot('leftarm',1) - q.get_default_bone_pivot('leftitem',1) - 7.0",
+        "-q.get_default_bone_pivot('leftitem',2)"
+      ]
+    }
+  },
+  "native_camera_model": {
+    "pivot": [
+      0,
+      24,
+      0
+    ],
+    "rotation": [
+      0,
+      180,
+      0
+    ],
+    "note": "Head-centered mathematical view; actual client FOV, engine eye offset, skin and rendering remain separate acceptance."
+  },
+  "previous_shaker_animations": {
+    "animation.kt_mixology.player_idle": {
+      "animation_length": 0.05,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.kt_mixology.hold_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            -11.72773087,
+            5.51584842,
+            -3.81765858
+          ],
+          "rotation": [
+            86.92524805,
+            61.26036072,
+            -51.57420591
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.hold_third": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            -0.0,
+            -3.0,
+            -2.75
+          ],
+          "rotation": [
+            90.0,
+            0.0,
+            0.0
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.shake_first": {
+      "loop": true,
+      "bones": {
+        "grip": {
+          "position": [
+            "-12.24425722 + 1.40682495 * math.sin(q.life_time * 1718.87338539247)",
+            "6.12859977 + 1.56619803 * math.sin(q.life_time * 1718.87338539247)",
+            "-3.82055554 + 1.15233126 * math.sin(q.life_time * 1718.87338539247)"
+          ],
+          "rotation": [
+            71.92524805,
+            61.26036072,
+            -51.57420591
+          ],
+          "scale": 0.5
+        }
+      }
+    },
+    "animation.kt_mixology.player_shake": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [
+            "v.is_first_person ? 0 : (-112.5 - 45 * math.sin(q.life_time * 1718.87338539247) - this)",
+            "v.is_first_person ? 0 : -this",
+            "v.is_first_person ? 0 : (-9 - this)"
+          ]
+        }
+      }
+    }
+  },
+  "framing_adapter": {
+    "camera_offset": [
+      -3,
+      6.5,
+      -6.5
+    ],
+    "same_idle_and_use_depth": true,
+    "source_commit": "bba84a194dca850c9ffe3189e4824433ccc794d6",
+    "native_rendered_candidate_verified": false
+  }
+}

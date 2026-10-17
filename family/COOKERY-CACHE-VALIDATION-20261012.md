@@ -1,0 +1,11 @@
+# Cache-only private-integration evidence
+
+The owner's live client logs identify recurring Cookery recipe-cache work and watchdog stalls. The clean author160 and latest161 registry reproduce repeated full pot catalog builds. private-integration adds one bounded registry repair, while keeping every existing private script, model, recipe and storage schema byte-identical to32. Two owned manifests advance paired identity.
+
+The exact renderer32 component is retained independently: private-integration baseline declares the previous canonical commit and unchanged spec digest, and the assembler only recognizes this particular cache-only33 profile. Its existing ChineseFood10432 output remains unchanged; the source package version and retained component version are recorded separately. No historical artifact or live drift is injected.
+
+The new static path accepts only this scoped source: original32 manifest-only identity projection, one new cache spec, unchanged other exported files, exact current33 baseline/full Git tree, actual merged private PR and private functional CI, and the untouched JSON/TAP produced by executing original author modules against the declared repair. Registration ACK/order/overwrites, all eleven kinds and all five first readers must agree; 75 eager builds reduce to7 in six batches. Source adapters are not Minecraft players or native performance measurements.
+
+The common canonical update then normally stops live, makes one consistent rollback, and loads/restarts this exact complete candidate on that stopped save. Only after the existing complete-native/source/save checks pass does the cache validator bind33 to those fresh results. No32 native report is presented as33 acceptance, no separate new world or unrelated freezer operation suite is added, and family_guard/BSM admission remain mandatory. Client and production readiness remain false.
+
+This path rejects other private releases, additional gameplay/storage/export changes, renderer drift, missing private CI, different author/API bytes, changed source reports, stale candidate receipts, incomplete native phases or client claims. Existing freezer/native schemas remain unchanged for their original scopes.

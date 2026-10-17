@@ -1,0 +1,286 @@
+TAP version 13
+# Subtest: exact production recipe counts include one fixed-output Molotov
+ok 1 - exact production recipe counts include one fixed-output Molotov
+  ---
+  duration_ms: 2.870431
+  type: 'test'
+  ...
+# Subtest: all 24 recipes match their concrete ingredients and correct output shape
+ok 2 - all 24 recipes match their concrete ingredients and correct output shape
+  ---
+  duration_ms: 1.830695
+  type: 'test'
+  ...
+# Subtest: alternative matching uses backtracking and duplicate counts
+ok 3 - alternative matching uses backtracking and duplicate counts
+  ---
+  duration_ms: 0.34578
+  type: 'test'
+  ...
+# Subtest: eight stomps yield exactly 1000mB and consume eight grapes
+ok 4 - eight stomps yield exactly 1000mB and consume eight grapes
+  ---
+  duration_ms: 8.22684
+  type: 'test'
+  ...
+# Subtest: Java pressing-tub removal takes one normally and up to64 when sneaking; barrel still returns the whole slot
+ok 5 - Java pressing-tub removal takes one normally and up to64 when sneaking; barrel still returns the whole slot
+  ---
+  duration_ms: 1.749505
+  type: 'test'
+  ...
+# Subtest: all six pressing recipes resolve to their own fluid
+ok 6 - all six pressing recipes resolve to their own fluid
+  ---
+  duration_ms: 5.790935
+  type: 'test'
+  ...
+# Subtest: Java tub accepts a mismatched fruit then ejects it on pressing without mixing fluid
+ok 7 - Java tub accepts a mismatched fruit then ejects it on pressing without mixing fluid
+  ---
+  duration_ms: 1.385062
+  type: 'test'
+  ...
+# Subtest: 16 empty buckets retain 15 plus one filled bucket
+ok 8 - 16 empty buckets retain 15 plus one filled bucket
+  ---
+  duration_ms: 1.246904
+  type: 'test'
+  ...
+# Subtest: full inventory rejects exchange; no machine mutation
+ok 9 - full inventory rejects exchange; no machine mutation
+  ---
+  duration_ms: 1.254137
+  type: 'test'
+  ...
+# Subtest: last empty bucket frees its own slot even when inventory is otherwise full
+ok 10 - last empty bucket frees its own slot even when inventory is otherwise full
+  ---
+  duration_ms: 0.845853
+  type: 'test'
+  ...
+# Subtest: inventory write exception restores already written slots
+ok 11 - inventory write exception restores already written slots
+  ---
+  duration_ms: 0.583556
+  type: 'test'
+  ...
+# Subtest: storage failure rolls inventory back
+ok 12 - storage failure rolls inventory back
+  ---
+  duration_ms: 0.569655
+  type: 'test'
+  ...
+# Subtest: rollback failure is reported, not swallowed
+ok 13 - rollback failure is reported, not swallowed
+  ---
+  duration_ms: 0.387441
+  type: 'test'
+  ...
+# Subtest: named, lore, dynamic and durability ingredients rejected; plain filled bucket accepted
+ok 14 - named, lore, dynamic and durability ingredients rejected; plain filled bucket accepted
+  ---
+  duration_ms: 0.774666
+  type: 'test'
+  ...
+# Subtest: untouched metadata survives transactions
+ok 15 - untouched metadata survives transactions
+  ---
+  duration_ms: 1.077217
+  type: 'test'
+  ...
+# Subtest: randomized bucket conservation for 500 deterministic inventories
+ok 16 - randomized bucket conservation for 500 deterministic inventories
+  ---
+  duration_ms: 24.453496
+  type: 'test'
+  ...
+# Subtest: four slots cap at16 and filled-before-ingredients enforcement
+ok 17 - four slots cap at16 and filled-before-ingredients enforcement
+  ---
+  duration_ms: 1.689124
+  type: 'test'
+  ...
+# Subtest: fermentation uses snapshot output and minimum ingredient count
+ok 18 - fermentation uses snapshot output and minimum ingredient count
+  ---
+  duration_ms: 0.860056
+  type: 'test'
+  ...
+# Subtest: no ingredient and invalid mixtures yield16, invalid→vinegar
+ok 19 - no ingredient and invalid mixtures yield16, invalid→vinegar
+  ---
+  duration_ms: 1.100545
+  type: 'test'
+  ...
+# Subtest: open/empty barrel does not advance and source97 cadence stays capped
+ok 20 - open/empty barrel does not advance and source97 cadence stays capped
+  ---
+  duration_ms: 137.353431
+  type: 'test'
+  ...
+# Subtest: serving consumes one bottle and exactly one output; final serving resets while the Java lid stays closed
+ok 21 - serving consumes one bottle and exactly one output; final serving resets while the Java lid stays closed
+  ---
+  duration_ms: 4.971599
+  type: 'test'
+  ...
+# Subtest: state roundtrip, revision conflict and malformed data fail closed
+ok 22 - state roundtrip, revision conflict and malformed data fail closed
+  ---
+  duration_ms: 0.626042
+  type: 'test'
+  ...
+# Subtest: unsupported future state version is not reset
+ok 23 - unsupported future state version is not reset
+  ---
+  duration_ms: 0.189358
+  type: 'test'
+  ...
+# Subtest: reentrancy locks stop double claim and release after failure
+ok 24 - reentrancy locks stop double claim and release after failure
+  ---
+  duration_ms: 0.348826
+  type: 'test'
+  ...
+# Subtest: barrel structure has27 unique cells and correct single origin
+ok 25 - barrel structure has27 unique cells and correct single origin
+  ---
+  duration_ms: 0.27515
+  type: 'test'
+  ...
+# Subtest: Tap uses native source placement traits, water containment and rotated source-sized selection
+ok 26 - Tap uses native source placement traits, water containment and rotated source-sized selection
+  ---
+  duration_ms: 0.460644
+  type: 'test'
+  ...
+# Subtest: Pressing Tub uses native placement traits, source tilt model and stable water containment
+ok 27 - Pressing Tub uses native placement traits, source tilt model and stable water containment
+  ---
+  duration_ms: 0.539887
+  type: 'test'
+  ...
+# Subtest: Tap water-bottle display reuses source geometry and Java simple-bottle shape without inventing an item
+ok 28 - Tap water-bottle display reuses source geometry and Java simple-bottle shape without inventing an item
+  ---
+  duration_ms: 0.373064
+  type: 'test'
+  ...
+# Subtest: empty BottleBlock uses Mojang native block_placer/cardinal/waterlogging instead of a second script placement stack
+ok 29 - empty BottleBlock uses Mojang native block_placer/cardinal/waterlogging instead of a second script placement stack
+  ---
+  duration_ms: 0.337266
+  type: 'test'
+  ...
+# Subtest: extension install idempotent; core recipes remain first
+ok 30 - extension install idempotent; core recipes remain first
+  ---
+  duration_ms: 1.71438
+  type: 'test'
+  ...
+# Subtest: extension ordering does not depend on load order
+ok 31 - extension ordering does not depend on load order
+  ---
+  duration_ms: 1.491963
+  type: 'test'
+  ...
+# Subtest: bad bundle cannot overwrite valid previous extension
+ok 32 - bad bundle cannot overwrite valid previous extension
+  ---
+  duration_ms: 1.91912
+  type: 'test'
+  ...
+# Subtest: reserved and foreign namespaces reject
+ok 33 - reserved and foreign namespaces reject
+  ---
+  duration_ms: 0.515794
+  type: 'test'
+  ...
+# Subtest: unknown kind, fluid, item and API version are rejected
+ok 34 - unknown kind, fluid, item and API version are rejected
+  ---
+  duration_ms: 1.584503
+  type: 'test'
+  ...
+# Subtest: registry subscribers observe atomic install/remove rebuilds without owning recipe semantics
+ok 35 - registry subscribers observe atomic install/remove rebuilds without owning recipe semantics
+  ---
+  duration_ms: 0.762805
+  type: 'test'
+  ...
+# Subtest: session reload removes extensions; stored batch snapshot remains usable
+ok 36 - session reload removes extensions; stored batch snapshot remains usable
+  ---
+  duration_ms: 0.820617
+  type: 'test'
+  ...
+# Subtest: out-of-order chunks, duplicate exact chunks and unicode roundtrip
+ok 37 - out-of-order chunks, duplicate exact chunks and unicode roundtrip
+  ---
+  duration_ms: 18.22855
+  type: 'test'
+  ...
+# Subtest: incomplete or corrupt transmission never partially installs
+ok 38 - incomplete or corrupt transmission never partially installs
+  ---
+  duration_ms: 8.338296
+  type: 'test'
+  ...
+# Subtest: oversize, expiry, pending limit and conflicting duplicate chunk guarded
+ok 39 - oversize, expiry, pending limit and conflicting duplicate chunk guarded
+  ---
+  duration_ms: 8.214859
+  type: 'test'
+  ...
+# Subtest: guide recipes are generated from registry not a second recipe table
+ok 40 - guide recipes are generated from registry not a second recipe table
+  ---
+  duration_ms: 1.261994
+  type: 'test'
+  ...
+# Subtest: guide pagination respects8 items and removed add-on pages disappear
+ok 41 - guide pagination respects8 items and removed add-on pages disappear
+  ---
+  duration_ms: 0.715962
+  type: 'test'
+  ...
+# Subtest: source correction: all Q1–Q6 use one complete-use drink lifecycle without food competition
+ok 42 - source correction: all Q1–Q6 use one complete-use drink lifecycle without food competition
+  ---
+  duration_ms: 0.466956
+  type: 'test'
+  ...
+# Subtest: ack retains caller transfer revision distinct from registry counter
+ok 43 - ack retains caller transfer revision distinct from registry counter
+  ---
+  duration_ms: 7.746372
+  type: 'test'
+  ...
+# Subtest: guide and recipe IDs cannot collide within one extension
+ok 44 - guide and recipe IDs cannot collide within one extension
+  ---
+  duration_ms: 0.519737
+  type: 'test'
+  ...
+# Subtest: World Liquor-style external shaker input descriptor is explicit, snapshotted and removable
+ok 45 - World Liquor-style external shaker input descriptor is explicit, snapshotted and removable
+  ---
+  duration_ms: 0.555834
+  type: 'test'
+  ...
+# Subtest: external shaker descriptors cannot claim another add-on namespace or partially replace a valid bundle
+ok 46 - external shaker descriptors cannot claim another add-on namespace or partially replace a valid bundle
+  ---
+  duration_ms: 0.299968
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 442.454474

@@ -1,0 +1,70 @@
+Compiled from "IceGrapePlant.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.game.grape.IceGrapePlant {
+  public com.github.ysbbbbbb.kaleidoscopetavern.game.grape.IceGrapePlant();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void onPlant(com.github.ysbbbbbb.kaleidoscopetavern.api.event.PlantGrapeEvent);
+    Code:
+       0: aload_0
+       1: invokevirtual #7                  // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.level:()Lnet/minecraft/world/level/Level;
+       4: astore_1
+       5: aload_0
+       6: invokevirtual #13                 // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.pos:()Lnet/minecraft/core/BlockPos;
+       9: astore_2
+      10: aload_0
+      11: invokevirtual #17                 // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.player:()Lnet/minecraft/world/entity/player/Player;
+      14: astore_3
+      15: aload_3
+      16: aload_0
+      17: invokevirtual #21                 // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.hand:()Lnet/minecraft/world/InteractionHand;
+      20: invokevirtual #25                 // Method net/minecraft/world/entity/player/Player.getItemInHand:(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;
+      23: astore        4
+      25: aload_0
+      26: invokevirtual #31                 // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.state:()Lnet/minecraft/world/level/block/state/BlockState;
+      29: astore        5
+      31: aload_1
+      32: aload_2
+      33: invokevirtual #35                 // Method net/minecraft/core/BlockPos.below:()Lnet/minecraft/core/BlockPos;
+      36: invokevirtual #40                 // Method net/minecraft/world/level/Level.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      39: astore        6
+      41: aload         6
+      43: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.CAN_GROW_ICE_GRAPE:Lnet/minecraft/tags/TagKey;
+      46: invokevirtual #52                 // Method net/minecraft/world/level/block/state/BlockState.is:(Lnet/minecraft/tags/TagKey;)Z
+      49: ifeq          124
+      52: getstatic     #58                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/ModBlocks.ICE_GRAPEVINE_TRELLIS:Lnet/neoforged/neoforge/registries/DeferredBlock;
+      55: invokevirtual #64                 // Method net/neoforged/neoforge/registries/DeferredBlock.get:()Ljava/lang/Object;
+      58: checkcast     #70                 // class net/minecraft/world/level/block/Block
+      61: invokevirtual #72                 // Method net/minecraft/world/level/block/Block.defaultBlockState:()Lnet/minecraft/world/level/block/state/BlockState;
+      64: getstatic     #75                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/TrellisBlock.WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      67: aload         5
+      69: getstatic     #75                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/TrellisBlock.WATERLOGGED:Lnet/minecraft/world/level/block/state/properties/BooleanProperty;
+      72: invokevirtual #81                 // Method net/minecraft/world/level/block/state/BlockState.getValue:(Lnet/minecraft/world/level/block/state/properties/Property;)Ljava/lang/Comparable;
+      75: checkcast     #85                 // class java/lang/Boolean
+      78: invokevirtual #87                 // Method net/minecraft/world/level/block/state/BlockState.setValue:(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;
+      81: checkcast     #53                 // class net/minecraft/world/level/block/state/BlockState
+      84: astore        7
+      86: aload_1
+      87: aload_2
+      88: aload         7
+      90: invokevirtual #91                 // Method net/minecraft/world/level/Level.setBlockAndUpdate:(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z
+      93: pop
+      94: aload_1
+      95: aconst_null
+      96: aload_2
+      97: getstatic     #95                 // Field net/minecraft/sounds/SoundEvents.CROP_PLANTED:Lnet/minecraft/sounds/SoundEvent;
+     100: getstatic     #101                // Field net/minecraft/sounds/SoundSource.BLOCKS:Lnet/minecraft/sounds/SoundSource;
+     103: invokevirtual #107                // Method net/minecraft/world/level/Level.playSound:(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;)V
+     106: aload_3
+     107: invokevirtual #111                // Method net/minecraft/world/entity/player/Player.isCreative:()Z
+     110: ifne          119
+     113: aload         4
+     115: iconst_1
+     116: invokevirtual #115                // Method net/minecraft/world/item/ItemStack.shrink:(I)V
+     119: aload_0
+     120: iconst_1
+     121: invokevirtual #121                // Method com/github/ysbbbbbb/kaleidoscopetavern/api/event/PlantGrapeEvent.setCanceled:(Z)V
+     124: return
+}

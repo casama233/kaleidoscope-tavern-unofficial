@@ -1,0 +1,34 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:item": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:shaker",
+      "menu_category": {
+        "category": "equipment",
+        "group": "kaleidoscope_tavern:itemGroup.name.tavern_brewing"
+      }
+    },
+    "components": {
+      "minecraft:icon": "kt_c3_shaker",
+      "minecraft:display_name": {
+        "value": "item.kaleidoscope_tavern:shaker.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "kaleidoscope_tavern:portable_shaker": {},
+      "minecraft:interact_button": "action.interact.kt_hold_shaker",
+      "minecraft:allow_off_hand": true,
+      "minecraft:hand_equipped": true,
+      "minecraft:food": {
+        "nutrition": 0,
+        "saturation_modifier": 0.0,
+        "can_always_eat": true
+      },
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 0.35,
+        "start_using": "always"
+      },
+      "minecraft:use_animation": "none"
+    }
+  }
+}

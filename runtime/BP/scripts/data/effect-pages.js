@@ -1,0 +1,408 @@
+export const EFFECT_PAGES = [
+  {
+    "id": "kaleidoscope_tavern:effects/brandy",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：白蘭地",
+      "zh_CN": "酒效：白兰地",
+      "en_US": "Effects: Brandy"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [待移植]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [待移植]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [not implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [not implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [not implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [not implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/brandy"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/carignan",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：佳麗釀",
+      "zh_CN": "酒效：佳丽私酿",
+      "en_US": "Effects: Carignan"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 瞬間治療 Lv1, 0s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 瞬間治療 Lv2, 0s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 瞬間治療 Lv3, 0s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 瞬間治療 Lv4, 0s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 瞬間治療 Lv1, 0s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 瞬間治療 Lv2, 0s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 瞬間治療 Lv3, 0s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 瞬間治療 Lv4, 0s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:instant_health Lv1, 0s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:instant_health Lv2, 0s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:instant_health Lv3, 0s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:instant_health Lv4, 0s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/carignan"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/champagne",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：香檳",
+      "zh_CN": "酒效：香槟",
+      "en_US": "Effects: Champagne"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [待移植]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [待移植]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 80s, 100% [not implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 240s, 100% [not implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 720s, 100% [not implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:high_heels Lv1, 2160s, 100% [not implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/champagne"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/glowflower_brew",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：螢花釀",
+      "zh_CN": "酒效：萤花酿",
+      "en_US": "Effects: Glowflower Brew"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:vision Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:vision Lv2, 180s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:vision Lv2, 360s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:vision Lv3, 720s, 100% [待移植]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:vision Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:vision Lv2, 180s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:vision Lv2, 360s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:vision Lv3, 720s, 100% [待移植]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:vision Lv1, 80s, 100% [not implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:vision Lv2, 180s, 100% [not implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:vision Lv2, 360s, 100% [not implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:vision Lv3, 720s, 100% [not implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/glowflower_brew"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/honey_wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：蜂蜜葡萄酒",
+      "zh_CN": "酒效：蜂蜜葡萄酒",
+      "en_US": "Effects: Honey Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:resistance Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:resistance Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/honey_wine"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/ice_wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：冰葡萄酒",
+      "zh_CN": "酒效：冰葡萄酒",
+      "en_US": "Effects: Ice Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:fire_resistance Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:fire_resistance Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/ice_wine"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/luminous_bride",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：流明新娘",
+      "zh_CN": "酒效：夜光新娘",
+      "en_US": "Effects: Luminous Bride"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 夜視 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 夜視 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 夜視 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 夜視 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 夜視 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 夜視 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 夜視 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 夜視 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:night_vision Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:night_vision Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:night_vision Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:night_vision Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/luminous_bride"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/madame_shexiang",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：麝香夫人",
+      "zh_CN": "酒效：奢香夫人",
+      "en_US": "Effects: Madame Shexiang"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:resistance Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:resistance Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/madame_shexiang"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/miners_star",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：礦工之星",
+      "zh_CN": "酒效：矿工之星",
+      "en_US": "Effects: Miner's Star"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 挖掘加速 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 挖掘加速 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 挖掘加速 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 挖掘加速 Lv2, 720s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 挖掘加速 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 挖掘加速 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 挖掘加速 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 挖掘加速 Lv2, 720s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:haste Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:haste Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:haste Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:haste Lv2, 720s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/miners_star"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/mother_snow",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：雪之母",
+      "zh_CN": "酒效：雪婆婆",
+      "en_US": "Effects: Mother Snow"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:fire_resistance Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:fire_resistance Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/mother_snow"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/plum_wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：梅酒",
+      "zh_CN": "酒效：梅酒",
+      "en_US": "Effects: Plum Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 水下呼吸 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 水下呼吸 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 水下呼吸 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 水下呼吸 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 水下呼吸 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 水下呼吸 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 水下呼吸 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 水下呼吸 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:water_breathing Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:water_breathing Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:water_breathing Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:water_breathing Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/plum_wine"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/polaris_sweet_white",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：北極星甜白",
+      "zh_CN": "酒效：北极星甜白",
+      "en_US": "Effects: Polaris Sweet White"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:fire_resistance Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:fire_resistance Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/polaris_sweet_white"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/red_queen",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：紅皇后",
+      "zh_CN": "酒效：红皇后",
+      "en_US": "Effects: Red Queen"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/red_queen"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/riesling_dry_white",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：雷司令乾白",
+      "zh_CN": "酒效：雷司令干白",
+      "en_US": "Effects: Riesling Dry White"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [待移植]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [待移植]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [not implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [not implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [not implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [not implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/riesling_dry_white"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/rum",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：朗姆酒",
+      "zh_CN": "酒效：朗姆酒",
+      "en_US": "Effects: Rum"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]; 不祥之兆 Lv1, 1200s, 100%\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 不祥之兆 Lv2, 1200s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 不祥之兆 Lv3, 1200s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 不祥之兆 Lv4, 1200s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 不祥之兆 Lv5, 1200s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]; 不祥之兆 Lv1, 1200s, 100%\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 不祥之兆 Lv2, 1200s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 不祥之兆 Lv3, 1200s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 不祥之兆 Lv4, 1200s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 不祥之兆 Lv5, 1200s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]; minecraft:bad_omen Lv1, 1200s, 100%\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:bad_omen Lv2, 1200s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:bad_omen Lv3, 1200s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:bad_omen Lv4, 1200s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:bad_omen Lv5, 1200s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/rum"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/sakura_wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：櫻花酒",
+      "zh_CN": "酒效：樱花葡萄酒",
+      "en_US": "Effects: Sakura Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 生命恢復 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 生命恢復 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 生命恢復 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 生命恢復 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:regeneration Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:regeneration Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:regeneration Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:regeneration Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/sakura_wine"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/sauvignon_blanc_dry_white",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：長相思乾白",
+      "zh_CN": "酒效：长相思干白",
+      "en_US": "Effects: Sauvignon Blanc Dry White"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [待移植]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [待移植]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [待移植]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [待移植]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [待移植]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 80s, 100% [not implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 160s, 100% [not implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 240s, 100% [not implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:grass_stealth Lv1, 480s, 100% [not implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/sauvignon_blanc_dry_white"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/sherry",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：雪莉",
+      "zh_CN": "酒效：雪莉",
+      "en_US": "Effects: Sherry"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗火 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗火 Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗火 Lv1, 2160s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:fire_resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:fire_resistance Lv1, 720s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:fire_resistance Lv1, 2160s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/sherry"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/sunset_glow",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：落日餘暉",
+      "zh_CN": "酒效：落日余晖",
+      "en_US": "Effects: Sunset Glow"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 抗性 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 抗性 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 抗性 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:resistance Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:resistance Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:resistance Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/sunset_glow"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/sweet_berry_wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：甜莓酒",
+      "zh_CN": "酒效：甜浆果酒",
+      "en_US": "Effects: Sweet Berry Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 40s, 100% [已實作 / implemented]\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 120s, 100% [已實作 / implemented]\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 240s, 100% [已實作 / implemented]\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; kaleidoscope_tavern:bloody_mary Lv1, 480s, 100% [已實作 / implemented]"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/sweet_berry_wine"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/vinegar",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：醋",
+      "zh_CN": "酒效：醋",
+      "en_US": "Effects: Vinegar"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 失明 Lv1, 10s, 15%; 挖掘疲勞 Lv1, 10s, 15%; 速度 Lv1, 10s, 15%; 跳躍提升 Lv1, 10s, 15%; 挖掘加速 Lv1, 10s, 15%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 失明 Lv2, 30s, 15%; 挖掘疲勞 Lv2, 30s, 15%; 速度 Lv2, 30s, 15%; 跳躍提升 Lv2, 30s, 15%; 挖掘加速 Lv2, 30s, 15%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 失明 Lv3, 60s, 15%; 挖掘疲勞 Lv3, 60s, 15%; 速度 Lv3, 60s, 15%; 跳躍提升 Lv3, 60s, 15%; 挖掘加速 Lv3, 60s, 15%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 失明 Lv3, 100s, 15%; 挖掘疲勞 Lv3, 100s, 15%; 速度 Lv3, 100s, 15%; 跳躍提升 Lv3, 100s, 15%; 挖掘加速 Lv3, 100s, 15%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 失明 Lv1, 10s, 15%; 挖掘疲勞 Lv1, 10s, 15%; 速度 Lv1, 10s, 15%; 跳躍提升 Lv1, 10s, 15%; 挖掘加速 Lv1, 10s, 15%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 失明 Lv2, 30s, 15%; 挖掘疲勞 Lv2, 30s, 15%; 速度 Lv2, 30s, 15%; 跳躍提升 Lv2, 30s, 15%; 挖掘加速 Lv2, 30s, 15%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 失明 Lv3, 60s, 15%; 挖掘疲勞 Lv3, 60s, 15%; 速度 Lv3, 60s, 15%; 跳躍提升 Lv3, 60s, 15%; 挖掘加速 Lv3, 60s, 15%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 失明 Lv3, 100s, 15%; 挖掘疲勞 Lv3, 100s, 15%; 速度 Lv3, 100s, 15%; 跳躍提升 Lv3, 100s, 15%; 挖掘加速 Lv3, 100s, 15%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:blindness Lv1, 10s, 15%; minecraft:mining_fatigue Lv1, 10s, 15%; minecraft:speed Lv1, 10s, 15%; minecraft:jump_boost Lv1, 10s, 15%; minecraft:haste Lv1, 10s, 15%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:blindness Lv2, 30s, 15%; minecraft:mining_fatigue Lv2, 30s, 15%; minecraft:speed Lv2, 30s, 15%; minecraft:jump_boost Lv2, 30s, 15%; minecraft:haste Lv2, 30s, 15%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:blindness Lv3, 60s, 15%; minecraft:mining_fatigue Lv3, 60s, 15%; minecraft:speed Lv3, 60s, 15%; minecraft:jump_boost Lv3, 60s, 15%; minecraft:haste Lv3, 60s, 15%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:blindness Lv3, 100s, 15%; minecraft:mining_fatigue Lv3, 100s, 15%; minecraft:speed Lv3, 100s, 15%; minecraft:jump_boost Lv3, 100s, 15%; minecraft:haste Lv3, 100s, 15%"
+    },
+    "recipeIds": []
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/vodka",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：伏特加",
+      "zh_CN": "酒效：伏特加",
+      "en_US": "Effects: Vodka"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 力量 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 力量 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 力量 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 力量 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:strength Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:strength Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:strength Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:strength Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/vodka"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/whiskey",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：威士忌",
+      "zh_CN": "酒效：威士忌",
+      "en_US": "Effects: Whiskey"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 力量 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 力量 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 力量 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 力量 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 力量 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:strength Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:strength Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:strength Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:strength Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/whiskey"
+    ]
+  },
+  {
+    "id": "kaleidoscope_tavern:effects/wine",
+    "source": "kaleidoscope_tavern",
+    "title": {
+      "zh_TW": "酒效：葡萄酒",
+      "zh_CN": "酒效：葡萄酒",
+      "en_US": "Effects: Wine"
+    },
+    "body": {
+      "zh_TW": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 生命恢復 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 生命恢復 Lv2, 540s, 100%",
+      "zh_CN": "效果依每次飲用獨立抽選；秒×20轉為tick。\nQ1: 噁心 Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [待移植]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [待移植]; 生命恢復 Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [待移植]; 生命恢復 Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [待移植]; 生命恢復 Lv2, 540s, 100%",
+      "en_US": "Each entry rolls independently on consume. Seconds are converted to ticks.\nQ1: minecraft:nausea Lv1, 30s, 100%\nQ2: kaleidoscope_tavern:slightly_tipsy Lv1, 45s, 100% [not implemented]\nQ3: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:regeneration Lv1, 80s, 100%\nQ4: kaleidoscope_tavern:slightly_tipsy Lv1, 30s, 100% [not implemented]; minecraft:regeneration Lv1, 240s, 100%\nQ5: kaleidoscope_tavern:slightly_tipsy Lv1, 20s, 100% [not implemented]; minecraft:regeneration Lv2, 240s, 100%\nQ6: kaleidoscope_tavern:slightly_tipsy Lv1, 10s, 100% [not implemented]; minecraft:regeneration Lv2, 540s, 100%"
+    },
+    "recipeIds": [
+      "kaleidoscope_tavern:barrel/wine"
+    ]
+  }
+];

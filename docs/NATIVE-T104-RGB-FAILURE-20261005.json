@@ -1,0 +1,45 @@
+{
+  "utc": "2026-10-05T17:16:00Z",
+  "source_commit": "bc3694e9d4ecab22ab13087e3763165584ef6acf",
+  "version": [
+    0,
+    6,
+    104
+  ],
+  "archive_sha256": "e65c07048f38a980f70c0acfc2a1ffeafc811b185ab243744d16a448b8ddb41e",
+  "status": "failed",
+  "observation": "Explicit color_red succeeded but cup sides appeared opaque pale cyan with whitegray top, no red. color_white restored transparent sides/whitegray interior. Runtime palette route responds, RGB tint still absent.",
+  "limits": [
+    "Not gameplay acceptance",
+    "No full frame-animation acceptance",
+    "No audio acceptance",
+    "World backup private"
+  ],
+  "world_refs": {
+    "behavior": [
+      {
+        "pack_id": "f54f37f9-485a-55bf-8f89-6558aca988c5",
+        "version": [
+          0,
+          6,
+          104
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "pack_id": "c2990d50-2cf7-59f7-886a-0f2d0240d156",
+        "version": [
+          0,
+          6,
+          104
+        ]
+      }
+    ]
+  },
+  "scope": "Bounded native material/route observation on exact public 0.6.104",
+  "client": "Minecraft 1.26.52.3 x86_64 via Linux launcher",
+  "simulated_players": false,
+  "private_world_included": false,
+  "final_aggregate_client_acceptance": false
+}

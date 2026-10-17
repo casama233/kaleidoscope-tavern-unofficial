@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "mode": "shade_cutout",
+  "upstream_repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "baseline_commit": "6b0d619145316492f055e03d70427107cd73efa8",
+  "update_commit": "c70eec14b4d8cede23f7274910b8424a8fd49f89",
+  "update_message": "整体优化一遍鸡尾酒模型，将渲染方式改为cutout、减少混素感",
+  "render_method": "alpha_test_single_sided",
+  "models": [
+    {
+      "id": "white_lady",
+      "visual_key": "white_lady",
+      "baseline": "baseline/white_lady.json",
+      "updated": "updated/white_lady.json",
+      "baseline_blob": "3b8c42d6e6abd568e8e5bd5219b68b335c322d6f",
+      "updated_blob": "23d0635b163b871cdcc22fb4a35242ba878b28c3",
+      "baseline_geo": "baseline/white_lady.geo.json",
+      "baseline_geo_blob": "290005c943d0fad7e9f2708d9e48e84c6f78e668",
+      "uv_scale": 2,
+      "regenerate_elements": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "element_map": [
+        {
+          "element": 0,
+          "updated_element": 0,
+          "faces": [
+            [
+              "south",
+              0
+            ],
+            [
+              "east",
+              1
+            ],
+            [
+              "north",
+              2
+            ],
+            [
+              "west",
+              3
+            ]
+          ]
+        },
+        {
+          "element": 1,
+          "updated_element": 1,
+          "cube": 4
+        },
+        {
+          "element": 2,
+          "updated_element": 2,
+          "cube": 5
+        },
+        {
+          "element": 3,
+          "updated_element": 3,
+          "cube": 6
+        },
+        {
+          "element": 4,
+          "updated_element": 4,
+          "cube": 7
+        },
+        {
+          "element": 5,
+          "updated_element": 5,
+          "cube": 8
+        },
+        {
+          "element": 6,
+          "updated_element": null,
+          "cube": 9
+        },
+        {
+          "element": 7,
+          "updated_element": 6,
+          "cube": 10
+        },
+        {
+          "element": 8,
+          "updated_element": 7,
+          "cube": 11
+        },
+        {
+          "element": 9,
+          "updated_element": 8,
+          "cube": 12
+        },
+        {
+          "element": 10,
+          "updated_element": 9,
+          "cube": 13
+        },
+        {
+          "element": 11,
+          "updated_element": 10,
+          "cube": 14
+        },
+        {
+          "element": 12,
+          "updated_element": 11,
+          "cube": 15
+        },
+        {
+          "element": 13,
+          "updated_element": 12,
+          "cube": 16
+        }
+      ],
+      "shade_elements": [],
+      "unshaded_cubes": [],
+      "uv_changes": [],
+      "geo": "runtime/RP/models/entity/white_lady.geo.json",
+      "block": "runtime/BP/blocks/cup_white_lady.json"
+    }
+  ],
+  "textures": [
+    {
+      "id": "white_lady_block",
+      "baseline": "baseline/white_lady.png",
+      "updated": "updated/white_lady.png",
+      "baseline_blob": "3da7ad25918346745807da46c23c2d11b50d99cf",
+      "updated_blob": "c3796b7eaa62fcf34515eee8ad0227f7392c4c7c",
+      "targets": [
+        "runtime/RP/textures/kaleidoscope_tavern/block/mixology/white_lady.png",
+        "runtime/RP/textures/kaleidoscope_tavern_jar/block/mixology/white_lady.png"
+      ]
+    }
+  ]
+}

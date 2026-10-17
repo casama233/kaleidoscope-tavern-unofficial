@@ -1,0 +1,378 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:stool_pink",
+      "states": {
+        "kaleidoscope_tavern:facing": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation_offset": 180
+        }
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "geometry.kt_block.empty_cell"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_runtime_transparent",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.5
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 0.8
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:light_dampening": 0,
+      "minecraft:collision_box": [
+        {
+          "origin": [
+            -3,
+            0,
+            -3
+          ],
+          "size": [
+            6,
+            2,
+            6
+          ]
+        },
+        {
+          "origin": [
+            -1,
+            1,
+            -1
+          ],
+          "size": [
+            2,
+            11,
+            2
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            12,
+            -5
+          ],
+          "size": [
+            12,
+            3,
+            11
+          ]
+        },
+        {
+          "origin": [
+            -6,
+            15,
+            3
+          ],
+          "size": [
+            12,
+            6,
+            3
+          ]
+        }
+      ],
+      "minecraft:selection_box": {
+        "origin": [
+          -6,
+          0,
+          -6
+        ],
+        "size": [
+          12,
+          16,
+          12
+        ]
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          20,
+          20
+        ],
+        "looping": true
+      },
+      "kaleidoscope_tavern:stool": {},
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a17.item_display_pink_bar_stool"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a17_item_display_pink_bar_stool",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_pink_bar_stool",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      },
+      "minecraft:liquid_detection": {
+        "detection_rules": [
+          {
+            "liquid_type": "water",
+            "can_contain_liquid": true,
+            "on_liquid_touches": "blocking",
+            "use_liquid_clipping": true
+          }
+        ]
+      },
+      "kaleidoscope_tavern:natural_break": {
+        "drop": "kaleidoscope_tavern:pink_bar_stool"
+      },
+      "minecraft:connection_rule": {
+        "accepts_connections_from": "none"
+      },
+      "minecraft:destruction_particles": {
+        "texture": "kt_c6_stool_pink",
+        "particle_count": 32,
+        "tint_method": "none"
+      }
+    },
+    "permutations": [
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 0",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -5
+              ],
+              "size": [
+                12,
+                3,
+                11
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                3
+              ],
+              "size": [
+                12,
+                6,
+                3
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 1",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -6
+              ],
+              "size": [
+                11,
+                3,
+                12
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                -6
+              ],
+              "size": [
+                3,
+                6,
+                12
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 2",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                12,
+                -6
+              ],
+              "size": [
+                12,
+                3,
+                11
+              ]
+            },
+            {
+              "origin": [
+                -6,
+                15,
+                -6
+              ],
+              "size": [
+                12,
+                6,
+                3
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "condition": "q.block_state('kaleidoscope_tavern:facing') == 3",
+        "components": {
+          "minecraft:collision_box": [
+            {
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "size": [
+                6,
+                2,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "size": [
+                2,
+                11,
+                2
+              ]
+            },
+            {
+              "origin": [
+                -5,
+                12,
+                -6
+              ],
+              "size": [
+                11,
+                3,
+                12
+              ]
+            },
+            {
+              "origin": [
+                3,
+                15,
+                -6
+              ],
+              "size": [
+                3,
+                6,
+                12
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

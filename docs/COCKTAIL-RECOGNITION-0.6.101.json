@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "version": "0.6.101",
+  "first_public_checkpoint": "46c9928ff452f75c09e3402cb893142ca5ed4922",
+  "runtime_tree_git_sha": "5139dbbf7fbd546b94c19854204cc586f7ec3f5a",
+  "primary_java_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "liquor_commit": "c2b7fe5646a9136dc4c53c0f2b7f3fd9f5bfdbcf",
+  "focused_tests": {
+    "passed": 218,
+    "failed": 0,
+    "skipped": 0,
+    "existing_regressions": 185,
+    "source_driven_regressions": 33
+  },
+  "coverage": {
+    "declared_recipes": 26,
+    "core_recipes": 12,
+    "addon_recipes": 14,
+    "addon_input_descriptors": 56,
+    "core_color_tag_files": 16,
+    "orderings_per_candidate": 6,
+    "exact_item_slots_preserved": true,
+    "q1_q3_rejected": true,
+    "stale_category_options_rejected": true,
+    "managed_legacy_no_color_lore_checked": true
+  },
+  "launch_source_check": {
+    "passed": true,
+    "baseline": "cedfaedf6140bae61b24afb658869b1d0e6ea1a9",
+    "unchanged_existing_runtime_files": 3271
+  },
+  "not_claimed": [
+    "native Bedrock loading",
+    "rendered client acceptance",
+    "saved-world migration",
+    "lost T98 exact bytes",
+    "merge/release/live deployment"
+  ],
+  "runtime_changed_after_first_checkpoint": false,
+  "repository_source_static_check": {
+    "passed": true,
+    "json_files": 2025,
+    "geometries": 930
+  }
+}

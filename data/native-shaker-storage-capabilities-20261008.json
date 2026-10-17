@@ -1,0 +1,589 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "engine": "BDS1.26.52.3",
+  "engine_build_id": "51798919",
+  "engine_commit": "54116bb5ee0b7aee0b5591efbcc8bc3cf64f168a",
+  "bds_archive_sha256": "f6348d84fa714d04ca194f207e89453ca6bba0a1359396475271a52a150471c6",
+  "script_api": "@minecraft/server 2.7.0",
+  "scope": "Native no-player activation and clone diagnostics for a rejected nested-shaker candidate; no successful persistence or player-interaction claim",
+  "real_player_connections": 0,
+  "simulated_players": false,
+  "client": false,
+  "full_family_acceptance": false,
+  "production_runtime_modified": false,
+  "resource_pack_included": false,
+  "native_save_restart_verified": false,
+  "raw_evidence": [
+    {
+      "id": "activation",
+      "artifact": "audit_work/native-shaker-diagnostic-20261008/activation-diagnostic-evidence.json",
+      "sha256": "5356088c9713ccb89af02fbd5ef536c2d0ffe8d9e095d593402365fb64c00c57",
+      "log_artifact": "audit_work/native-shaker-diagnostic-20261008/activation-diagnostic.log",
+      "log_sha256": "a645fdef9f5e7eed99f4fb7d23e9ca6c1b8c7de59f2e489ee3c8a6e24f645040",
+      "script_sha256": "17e824ecb784c59f016051c60931f985172150a2969f95fb4e6a99b5bf346644",
+      "world_name": "shaker-diagnostic"
+    },
+    {
+      "id": "clone_dependencies",
+      "artifact": "audit_work/native-shaker-diagnostic-20261008/native-diagnostic-evidence.json",
+      "sha256": "6d0ce3ef74a4a58b4c168ec66772354bf43f43c913109c938fb77817e1a17dc4",
+      "log_artifact": "audit_work/native-shaker-diagnostic-20261008/native-diagnostic.log",
+      "log_sha256": "fe884554836a1c258d5afe1e39424c99014cdbd9cc29e60567c6ee9a7099a907",
+      "script_sha256": "88c44477c19f8de1ab122498984f19234c95169f3e80a10fc33384f36ac0fd1f",
+      "world_name": "shaker-clone-diagnostic"
+    }
+  ],
+  "definitions": [
+    {
+      "id": "kaleidoscope_tavern:shaker",
+      "definition_sha256": "9550f63b8f433c6a81f50222a9039f8b31e0a0ddd9e517bbb223560052110c20",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": null,
+      "storage_weight_modifier": null,
+      "bundle_interaction": null,
+      "food": true,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:weight_only",
+      "definition_sha256": "dacfb526a35eb6479ebd8d498be6b0e2a4f78f6289a1e4d817d4e7d2b4602898",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": null,
+      "bundle_interaction": null,
+      "food": true,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:bundle_only",
+      "definition_sha256": "1695e9fc3fd53b9679bb6452a54fcb23c3349b0c54cadc698566c7a176c3b480",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": null,
+      "storage_weight_modifier": null,
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": true,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:weight_and_bundle",
+      "definition_sha256": "5481e4e2fdbc2644cf81d2283df15e304acae7e10cdbb5dad328b5111d380e39",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": null,
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": true,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:full_components",
+      "definition_sha256": "5a70f755e39cf32071390b383b607ae8e66eb015319115c3ea78c213710c19d2",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": {
+        "weight_in_storage_item": 4
+      },
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": true,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:without_food",
+      "definition_sha256": "7e69e19ff6fa25ca5b799593e0cf8170c2253892dfc1763bb26bb62239dd50a6",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": {
+        "weight_in_storage_item": 4
+      },
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": false,
+      "use_modifiers": true
+    },
+    {
+      "id": "kt_diagnostic:minimal_bundle",
+      "definition_sha256": "da8848cd3ddd63df7d69466c6283b82f2d172984a1b0d14800a9a2b9045a6bf6",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": {
+        "weight_in_storage_item": 4
+      },
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": false,
+      "use_modifiers": false
+    },
+    {
+      "id": "kt_diagnostic:minimal_no_modifier",
+      "definition_sha256": "f77043eb2a574627696f7f532c896b4eb0c8853cb6ea3e6a95c989e58ec8e402",
+      "storage_item": {
+        "max_slots": 3,
+        "allow_nested_storage_items": false
+      },
+      "storage_weight_limit": {
+        "max_weight_limit": 64
+      },
+      "storage_weight_modifier": null,
+      "bundle_interaction": {
+        "num_viewable_slots": 3
+      },
+      "food": false,
+      "use_modifiers": false
+    }
+  ],
+  "potion_inputs": [
+    {
+      "effect": "minecraft:healing",
+      "localization_key": "%potion.heal.name",
+      "amount": 1,
+      "max_amount": 1,
+      "weight": 64
+    },
+    {
+      "effect": "minecraft:swiftness",
+      "localization_key": "%potion.moveSpeed.name",
+      "amount": 1,
+      "max_amount": 1,
+      "weight": 64
+    },
+    {
+      "effect": "minecraft:poison",
+      "localization_key": "%potion.poison.name",
+      "amount": 1,
+      "max_amount": 1,
+      "weight": 64
+    }
+  ],
+  "cases": [
+    {
+      "source": "activation",
+      "variant": "kaleidoscope_tavern:shaker",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": false,
+      "failed_phase": "container_getter",
+      "activation_error": "InvalidContainerError: Invalid Container during call for container. Inventory does not have Container Component.",
+      "potion_insertions": null,
+      "all_three_potions_inserted": null,
+      "clone_first_potion_retained": null,
+      "clone_independent": null
+    },
+    {
+      "source": "activation",
+      "variant": "kaleidoscope_tavern:shaker",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": false,
+      "failed_phase": "container_getter",
+      "activation_error": "InvalidContainerError: Invalid Container during call for container. Inventory does not have Container Component.",
+      "potion_insertions": null,
+      "all_three_potions_inserted": null,
+      "clone_first_potion_retained": null,
+      "clone_independent": null
+    },
+    {
+      "source": "activation",
+      "variant": "minecraft:bundle",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 64,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "activation",
+      "variant": "minecraft:bundle",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 64,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:weight_only",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:weight_only",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:bundle_only",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": false,
+      "failed_phase": "container_getter",
+      "activation_error": "InvalidContainerError: Invalid Container during call for container. Inventory does not have Container Component.",
+      "potion_insertions": null,
+      "all_three_potions_inserted": null,
+      "clone_first_potion_retained": null,
+      "clone_independent": null
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:bundle_only",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": false,
+      "failed_phase": "container_getter",
+      "activation_error": "InvalidContainerError: Invalid Container during call for container. Inventory does not have Container Component.",
+      "potion_insertions": null,
+      "all_three_potions_inserted": null,
+      "clone_first_potion_retained": null,
+      "clone_independent": null
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:weight_and_bundle",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    },
+    {
+      "source": "activation",
+      "variant": "kt_diagnostic:weight_and_bundle",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "minecraft:bundle",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 64,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "minecraft:bundle",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 64,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:full_components",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:full_components",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:without_food",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:without_food",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:minimal_bundle",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:minimal_bundle",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": true,
+      "clone_independent": true
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:minimal_no_modifier",
+      "path": "detached",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    },
+    {
+      "source": "clone_dependencies",
+      "variant": "kt_diagnostic:minimal_no_modifier",
+      "path": "entity_get_item",
+      "item_registered": true,
+      "inventory_component_present": true,
+      "native_container_activated": true,
+      "size": 3,
+      "weight_limit": 64,
+      "potion_insertions": [
+        true,
+        false,
+        false
+      ],
+      "insertion_failure_reason": "OverWeightLimit",
+      "all_three_potions_inserted": false,
+      "clone_first_potion_retained": false,
+      "clone_independent": false
+    }
+  ],
+  "conclusion": {
+    "three_native_potion_carrier_supported_by_tested_legal_definitions": false,
+    "reject_candidate": "storage_item alone does not create a usable native inventory; adding legal weight limits cannot hold three non-stackable potions",
+    "activation": "Both detached ItemStacks and items retrieved from a real entity inventory fail without storage_weight_limit; adding bundle_interaction alone does not help",
+    "clone": "Adding storage_weight_modifier with weight_in_storage_item 4 preserves the first potion in clone; food and use_modifiers were not the cause of clone loss",
+    "capacity": "Every tested active container reports weightLimit 64; each Consume potion weighs 64, so the second and third setItem calls throw OverWeightLimit",
+    "documented_max_weight_limit": 64,
+    "weight_above_documented_max_tested": false,
+    "player_bundle_interaction_acceptable_for_shaker": false,
+    "clone_result_interpretation": "Clone retention is derived from cloneContents, not the first diagnostic optional-chaining independence flag: an empty clone is a failure",
+    "release_boundary": "Do not describe this rejected candidate as preserving three complete native ingredients or as a passing server-restart gate"
+  },
+  "official_sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/iteminventorycomponent?view=minecraft-bedrock-stable",
+      "purpose": "Actual ItemStack inventory component and InvalidContainerError contract"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/itemreference/examples/itemcomponents/minecraft_storage_weight_limit?view=minecraft-bedrock-stable",
+      "purpose": "Documented max_weight_limit maximum of 64"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/itemreference/examples/itemcomponents/minecraft_storage_weight_modifier?view=minecraft-bedrock-stable",
+      "purpose": "Documented weight_in_storage_item component"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Mojang/bedrock-samples/preview/behavior_pack/items/black_bundle.json",
+      "retrieved_sha256": "dc75c04ac45a808036f478623f3d921562db833daf5b6437617dcac74e77fb7d",
+      "purpose": "Official complete bundle component reference; retrieved during this diagnostic"
+    }
+  ]
+}

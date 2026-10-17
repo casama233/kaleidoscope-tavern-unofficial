@@ -1,0 +1,49 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-27 14:58:46:757 INFO] Starting Server
+[2026-09-27 14:58:46:757 INFO] Version: 1.26.51.1
+[2026-09-27 14:58:46:757 INFO] Session ID: 34740ce5-eaf7-49f7-9c1d-0f29633b97a6
+[2026-09-27 14:58:46:757 INFO] Build ID: 51061372
+[2026-09-27 14:58:46:757 INFO] Branch: r/26_u5
+[2026-09-27 14:58:46:757 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-27 14:58:46:757 INFO] Configuration: Publish
+[2026-09-27 14:58:46:757 INFO] Contents of server.properties: {}
+[2026-09-27 14:58:46:757 INFO] Level Name: Parity Test
+[2026-09-27 14:58:46:758 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-27 14:58:46:759 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-27 14:58:46:759 INFO] Game mode: 0 Survival
+[2026-09-27 14:58:46:759 INFO] Difficulty: 1 EASY
+[2026-09-27 14:58:46:762 INFO] Content logging to console is enabled.
+[2026-09-27 14:58:46:764 INFO]
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-27 14:58:47:332 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-27_14-58-47
+[2026-09-27 14:58:47:333 INFO] Opening level 'worlds/Parity Test/db'
+[2026-09-27 14:58:47:362 INFO] Accepting clients on [::]:19572
+[2026-09-27 14:58:47:436 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Parity Test/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-27 14:58:47:436 INFO] Pack Stack - [01] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.59) @ worlds/Parity Test/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-27 14:58:50:038 INFO] Signed in to signaling service successfully
+[2026-09-27 14:58:50:041 INFO] Server started.
+[2026-09-27 14:58:50:041 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-27 14:58:50:041 INFO] Server Telemetry is currently not enabled.
+[2026-09-27 14:58:50:041 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-27 14:58:50:041 INFO]
+[2026-09-27 14:58:50:041 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-27 14:58:50:041 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-27 14:58:50:041 INFO] ======================================================
+[2026-09-27 14:58:50:275 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.59-beta.1.
+
+[2026-09-27 14:58:52:462 WARN] [Scripting] [Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.
+
+[2026-09-27 14:58:57:858 WARN] [Scripting] INTERACTION_INVENTORY_PASS 12 scenarios; native ItemStacks and chest container
+
+[2026-09-27 14:58:57:950 WARN] [Scripting] INTERACTION_BOARD_PASS 15 alignment combinations; native glyph entities
+
+[2026-09-27 14:58:57:950 WARN] [Scripting] PARITY_DONE interaction repair
+
+[2026-09-27 14:58:59:672 INFO] Server stop requested.
+[2026-09-27 14:58:59:712 INFO] Stopping server...
+Quit correctly

@@ -1,0 +1,76 @@
+{
+  "version": "1.20.1",
+  "aliases": {
+    "kaleidoscope_tavern:glow_ink_use": "item.glow_ink_sac.use",
+    "kaleidoscope_tavern:incense_click_on": "block.stone_button.click_on",
+    "kaleidoscope_tavern:incense_click_off": "block.stone_button.click_off"
+  },
+  "assets": [
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac1.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1.ogg",
+      "sha256": "80746fec1f7d05853b6c03470d5ff4d45c911adbcfed50b88fd1e739d6b11a2e"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac1.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1.ogg",
+      "sha256": "80746fec1f7d05853b6c03470d5ff4d45c911adbcfed50b88fd1e739d6b11a2e"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac1.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac1.ogg",
+      "sha256": "80746fec1f7d05853b6c03470d5ff4d45c911adbcfed50b88fd1e739d6b11a2e"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac2.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2.ogg",
+      "sha256": "96f82e1105f81d5138c962f3943c77da928379b3754d36c5f87b33af0f2cfeef"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac2.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2.ogg",
+      "sha256": "96f82e1105f81d5138c962f3943c77da928379b3754d36c5f87b33af0f2cfeef"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac2.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac2.ogg",
+      "sha256": "96f82e1105f81d5138c962f3943c77da928379b3754d36c5f87b33af0f2cfeef"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac3.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3.ogg",
+      "sha256": "34eedece8a3999150f24ad730568e60e372e8a2a6d46ea877324754c863a9990"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac3.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3.ogg",
+      "sha256": "34eedece8a3999150f24ad730568e60e372e8a2a6d46ea877324754c863a9990"
+    },
+    {
+      "event": "item.glow_ink_sac.use",
+      "source": "minecraft/sounds/item/ink_sac/ink_sac3.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/item/ink_sac/ink_sac3.ogg",
+      "sha256": "34eedece8a3999150f24ad730568e60e372e8a2a6d46ea877324754c863a9990"
+    },
+    {
+      "event": "block.stone_button.click_on",
+      "source": "minecraft/sounds/random/click.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/random/click.ogg",
+      "sha256": "c8e78aea3a020d743189fd4d5b0636b791b557b608c62f6474d0f16abcfcc0d8"
+    },
+    {
+      "event": "block.stone_button.click_off",
+      "source": "minecraft/sounds/random/click.ogg",
+      "target": "runtime/RP/sounds/kaleidoscope_tavern/feedback/random/click.ogg",
+      "sha256": "c8e78aea3a020d743189fd4d5b0636b791b557b608c62f6474d0f16abcfcc0d8"
+    }
+  ]
+}

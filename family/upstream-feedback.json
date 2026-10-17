@@ -1,0 +1,1153 @@
+{
+  "schema": 1,
+  "author": "Loyallay",
+  "latest_clean_family_bds_errors": 0,
+  "legacy_runtime_overrides": [
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/data/guidebook_languages/zh_CN.js",
+      "legacy_original_sha256": "64c7ed0852a288268af23f8f3c036d2fb671ca3a617f1d52a7d1b722681c1d8e",
+      "legacy_replacement_sha256": "ce303db28f41c6442a0a3f926f4ccd1d0bff609d601e482b17927f30714cd22c",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/data/guidebook_languages/zh_TW.js",
+      "legacy_original_sha256": "b24ec65b87c1e2bc45dfab94646ae9567b3d68be506503934bb5d9a16a6561bd",
+      "legacy_replacement_sha256": "3a060863371bd6cfb54ac4ac7c74fa37c01352d455747cf169f100aa634fdb57",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/data/guidebook/guidebookData.js",
+      "legacy_original_sha256": "a2aab5d13b75da00ce41ca5807fa1ffe4d6ffc7f4e65d4a71918e400518314da",
+      "legacy_replacement_sha256": "4b6b16b1c622431c2f1d884d66b01398d7e84af35773b0bc698ca0b9b43fb983",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/guidebookPublish.js",
+      "legacy_original_sha256": "68420f832463a2dd26291a3f4d2b370a33190dba6ead8fbadf86a6c5f99b1545",
+      "legacy_replacement_sha256": "73a225fecd5a4f64bb72d18b25353ed8e2e9bec39a44e12c1e18544468978473",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/events/guidebook.js",
+      "legacy_original_sha256": "acff33eec87add1c149aff3789b1b9ec62dd1ef642a5bc7d2b2f1b70dd6332ff",
+      "legacy_replacement_sha256": "121a70dd4137e81f066e7988c0e42113c681994801d8ee8b4b29180833af24ca",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/events/freeGuidebook.js",
+      "legacy_original_sha256": "98c1396475168b51dde3337ca4c13a04e18ce6c6a396b79f74c64666b7a91533",
+      "legacy_replacement_sha256": "fcee3f8dd4d18616b1d17fdabe6060fd48e3204e0a94be583deedb7d7cc5beab",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/pickleJar.js",
+      "legacy_original_sha256": "034ef6b9e1c090434d99e833a02d7bff58c03551fff93fc3d5300191de1dd3e1",
+      "legacy_replacement_sha256": "3d5f227c86c00dc57d065a7b24eb681a4b0be899076c13438dc81037378d5fd1",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/utils/hintLocalization.js",
+      "legacy_original_sha256": "1c1a72357c8fe70ead709a794fbebcff72840c822c8a8fcc1af4eac3e07a8966",
+      "legacy_replacement_sha256": "8862a055c63d87d1a52c4a264ec778e383390e166b329db538d01ae3f48d3c3f",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/foodBite.js",
+      "legacy_original_sha256": "6a42f2d78ad976be1ec5426228cb926bb67e50c6c2c0f90f02fff06a672c01da",
+      "legacy_replacement_sha256": "78f9e78f9b13cdfece1289349afafa530e60106113e7fe9693f0ca11f621ba83",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/mooncakeStack.js",
+      "legacy_original_sha256": "9c924dde2c659ec64054ddfc11f924ba26d52857295b4e9939018caed13eb0ac",
+      "legacy_replacement_sha256": "84e04cb6b9c04f968e3dfb3f71e3b262e2eab8d88f816f530935455cc167a485",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/api/guidebookExtensionRegistry.js",
+      "legacy_original_sha256": "b0ee101e8ef2b208dfe646463aff4a05c23387e6d1af9df3b5df766684e575d3",
+      "legacy_replacement_sha256": "5abe2e1343c89aa3a57f6ed94f1150a9603df92ae091f3e813fbd4701c718877",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/hamPlatter.js",
+      "legacy_original_sha256": "2d8b1c6bf24e4862d93111abd17b3b539351b23ac1edd0f876509dfa97903822",
+      "legacy_replacement_sha256": "b1955be245d9dd76f127d77c7314b91ff5bb2b0268b3cf4f09bbb4eb8a94fc25",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/oneByTwoFood.js",
+      "legacy_original_sha256": "9f27bedd0f690a87ffc138bb2466518632527f4091e9ef4325f6daaa6822d712",
+      "legacy_replacement_sha256": "166b7bc9319f033446f9e00a75dafc99441c8ad29810eae9298e91d9f2b67801",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/placeableFood.js",
+      "legacy_original_sha256": "a7e1b47322832d884d611354935a406702d14acc9fdc143eac6ec52ff1e013f9",
+      "legacy_replacement_sha256": "5cdaae5dc1bb185460aa10ff8d418a8aff9bcfab097dc002348fa011691bfd87",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/data/guidebookFoods.js",
+      "legacy_original_sha256": "8f839a519780bfd8c097d22e0d8aaa182a176def8a465f4d9b3027742d1fd55f",
+      "legacy_replacement_sha256": "c567530a1cc0c1f8a6c7947f92e21195de213882d389fa3244f23c397c7023be",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/events/replaceablePlacement.js",
+      "legacy_original_sha256": "02398bd2f5688aac745ab0e68138b7c76681109ebf69cbb9d8b3f61fd623c215",
+      "legacy_replacement_sha256": "dee173b26158f4e6b3413e2945b3497c6ff4ce901352ad693be199f290a68c82",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "blocks/placeable_food/oil_splashed_fish.json",
+      "legacy_original_sha256": "5cede2d7294926f301310e7a46dee4aa8cecb6a7b9663855d58550fcd4a6ffd3",
+      "legacy_replacement_sha256": "0d832a1ae275f28005523487a5adbbdf779dc019b7a2b62d4a999acb23e933ff",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/data/guidebook/guidebookDetails.js",
+      "legacy_original_sha256": "061d831ffa0a78bdee83f352b969b960a1c63b67c866dec415eff1eb14235665",
+      "legacy_replacement_sha256": "60afc54a5e7a9dbbc0e7bef2ce00fde4ab8b73c93853fc119ea0c3cc79d0b32d",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/data/recipes/stationRecipes.js",
+      "legacy_original_sha256": "10949f9f69863333d443d6f57e67afdee4bbf062040a13c84c3f59b64b6f65c6",
+      "legacy_replacement_sha256": "4567e16041925b4d5573a05b93ed3c996da9948e78510afc9801c827f5f9f616",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/directStation.js",
+      "legacy_original_sha256": "669f4660bf0d86a58141ea4b0696d9e455817ed747d1b0682a601432090fb5a1",
+      "legacy_replacement_sha256": "d1a38402ba0c075e528621b3a633262a554d03dfa5de4b39e7d6c5621c1126da",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/enamelBasin.js",
+      "legacy_original_sha256": "6b5d348b4ed78e47d466fcfb93b5d7c1893a5741c45e48f57f54aa39f5314ce6",
+      "legacy_replacement_sha256": "4c85c17c8f3215e78a31b37327e1efb5521fc3aaae29e21e8724114e18970ad3",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/fruitBasket.js",
+      "legacy_original_sha256": "57b0ca4bbabaf168722b10111049ccf273a587d9dc9268dc6796f49da0ee3523",
+      "legacy_replacement_sha256": "39a0bcf1069493cc9f6daec5500d13567a4486ff3e2bd8b735d43de957ea1367",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/kitchenwareRacks.js",
+      "legacy_original_sha256": "db07831c77e3ef56c042f894c50d269eba7630a453cc2dec695a5ae7b0e2efc2",
+      "legacy_replacement_sha256": "076dca403c4ae45716ec9ff512c45aa7f724fea3728c1feb5d03c894c7a90c21",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/oilPot.js",
+      "legacy_original_sha256": "80edf892e8c6c3733d036b526b54fdbb41fd19f1997f7ce3f2a4219dac717f92",
+      "legacy_replacement_sha256": "6be4416024c31947890b02f010514f14922feaa3f25614c364e75694e98f7879",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/table.js",
+      "legacy_original_sha256": "78dd8ef075c395a24fd1367b7ffdaa67d13f6940c5c5cd82af429e382608d529",
+      "legacy_replacement_sha256": "4d9a4c2f9991b640f62022d9c8054b519c7faf252324a2b462d2ece9adac5280",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/custom_components/blocks/trashCan.js",
+      "legacy_original_sha256": "5b8fd3eb60fd8af57f2ee289cb4ec3ea6520d95a6d634c248964b50ed21ac94a",
+      "legacy_replacement_sha256": "5f600009c22ba62a3ae6292eaac6ca751639ce92127b86c038b1b0c9c2563fba",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/events/kitchenShovelUse.js",
+      "legacy_original_sha256": "1c83695f037c27930ef1cfe42073cc8f4bc50b7d90d2a9b019c87a6398faa2b0",
+      "legacy_replacement_sha256": "3f0a222f0fab334e0948f060406b2b6ad603228f3c432f63b39086c31658821f",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/events/teapotItem.js",
+      "legacy_original_sha256": "d317ca321477885f5c3ea683734424ec2b18b43406c5fdba4089658e410ed7b4",
+      "legacy_replacement_sha256": "06a9fc90325527e2ee5616c064e807236e4afe5372a524a6050f4141fa48bd6b",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/freezer.js",
+      "legacy_original_sha256": "86561def4cb3ba7a7339aefabadd08c2853e6bf139646e516f68d1c340835fe3",
+      "legacy_replacement_sha256": "27b74f06c0e386c572a0fba49358db885a947a01d3e9e0497b7d2d3c424aeddf",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer_pink.json",
+      "legacy_original_sha256": "bde53da7c2e3d28a5666212869c455a36ab4d611265cb6e23c61157f769b5d76",
+      "legacy_replacement_sha256": "dc88735bc2f43b342704c9a8e793baf5d06c1bdcf227656934f7250e352068fa",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer_green.json",
+      "legacy_original_sha256": "99453b0191ed18a70ec39f09fd2008b6be1a39fb67a644467efb3b135a495c98",
+      "legacy_replacement_sha256": "cbae40c056b0d5d92ef74df71b1fa6afeb969dc1e893a911cfb5d3e9312aed25",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer.json",
+      "legacy_original_sha256": "6f5b5877ff866978662dc7f0966bc8995c0f53372072ad1d1134f2f086fd41ed",
+      "legacy_replacement_sha256": "d7b690e3635277afe8df9e28be7d7e6e72ff460229c2c3cfc30a562d46a1e66d",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer_yellow.json",
+      "legacy_original_sha256": "4d715b5a13456680a9895ed088c79ea5f9fe8117876158a90e798ed60e18c389",
+      "legacy_replacement_sha256": "37df3ed47edc253ac2107923a7ad47c2d04a1a1afcd8701599db5fc0520b075f",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer_orange.json",
+      "legacy_original_sha256": "0e2e9715f385adb7128bb4f338a7091125b1f7bcfd140a016350930c03cd940f",
+      "legacy_replacement_sha256": "c39414e11a9cc710719fb8ac169f8ae87a1fafff853802a98437d15f1a71685a",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/freezer_light_blue.json",
+      "legacy_original_sha256": "73fcadf9b1917dc805e8dde0b80d13e872eb53275766700d5405f23c27e9f0ab",
+      "legacy_replacement_sha256": "f60ab1f0a1d1d5cf7d3edbc4f66648edff53dcf24adb3311a41813a65291df80",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "items/stuffed_dough_food.json",
+      "legacy_original_sha256": "c7055f8df7a53012f713fb3d004c2bc5c37aaec2412ea106852832e8bf4f6b3a",
+      "legacy_replacement_sha256": "52fe8a4bcc6a118a2a726b0d4ea64e1ee09f7c1eb9ede7f601441dbed800e3c2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "scripts/api/extensionRegistry.js",
+      "legacy_original_sha256": "0cf75df138af92ae1129e862baf8d55cd76914b4f09787bce5a241052b75df92",
+      "legacy_replacement_sha256": "5dad2fa6c5e0d726f594494ce8b4253bee325ed4db2ed2433647df975f0c887a",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/utils/blockData.js",
+      "legacy_original_sha256": "ac04daebc70b2a21b9c1d7f58c96116f9dd936ee1d90b086a1fbb2893ff0f3a2",
+      "legacy_replacement_sha256": "1f552c73247041323d844fc6e12ef6dcbfe266345f416390beb2849fb2420028",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/teaCupReturn.js",
+      "legacy_original_sha256": "67a170daef7a07c9f90999e511bba6fbb9d69df5e8342fe622854567cad183a1",
+      "legacy_replacement_sha256": "f5cebaf6bd9cb3b7c25074633721c67fc7c7b295fb4cd562b043f8e7aa162233",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/cookeryStationCompat.js",
+      "legacy_original_sha256": "078880d1b876a3383696565ffa9314f669590a245c81b036827c1deea3060def",
+      "legacy_replacement_sha256": "9c6709741a65690076c7a7011480a455c6edbf45e53f65c7795400974db45dc7",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/mooncakeBehavior.js",
+      "legacy_original_sha256": "5b925bff2ad3ccae5ab67b420efe947e6093d948f9cd8a16d777405c144e190c",
+      "legacy_replacement_sha256": "ece6b8a474927453f7590467fb97130fd6906b7a2a50a19f2c8c74406e8ba794",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/yellowCroakerDrop.js",
+      "legacy_original_sha256": "9728835e6e240361d118f232773279cf4335baa4bae3f8dd49a8c6e36bc8a5dd",
+      "legacy_replacement_sha256": "525b2e7bac4f8c79081ef9bc4f5df97988f4ff039e6ce0e1258e471c4e842c8b",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/kongmingLanternFlight.js",
+      "legacy_original_sha256": "3b4911f2fd24cb94b8775b2b4c9859a353f884ea65b7fa073e44bd9bab0bb7fa",
+      "legacy_replacement_sha256": "c061748f2aa4dedaf652911fdf3a59a3bf3ca48f676659811d4124665a75c457",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/events/eggplantSeedDrops.js",
+      "legacy_original_sha256": "8f76db003ecd09ab60628cba6d418a50586efa2e360e462301412caaaae73717",
+      "legacy_replacement_sha256": "4c8867a6f5be036ff0cb329c0240a02077fd7550bf66f8442259e8512d6ac2be",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/data/recipes/pickleRecipes.js",
+      "legacy_original_sha256": "244ef5f279aef9ffd5d82640d8997df621de938b93e5d53d35c1ab7ade97bc30",
+      "legacy_replacement_sha256": "9eb0ca805beb62f082ebd9c6b60caff764ec5330db412a25541799e3e4d30deb",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/cropGrowth.js",
+      "legacy_original_sha256": "e2a1afb93bc35e7f649fc5217f6db0c336d75117c43063347832da677eece307",
+      "legacy_replacement_sha256": "0bd76d53daa88d479fe7070646063e5b70677a9c423f849c644394c0a4d517ab",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/saltStack.js",
+      "legacy_original_sha256": "7edc0cd8f8a23ed07b9865338ebdd4e0d44fc4e6a2c2150c46a085ca3d4570e4",
+      "legacy_replacement_sha256": "72be55a14c059f8f4a649447d2c8d7c30fa55971d166772505ddbbc72b3134a6",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/couplet.js",
+      "legacy_original_sha256": "a1eabe4de010f4b2734237fdaefbd186ebf9769eb93aca4f95e65f2b6ccc37c6",
+      "legacy_replacement_sha256": "9800d0ff39c53351b81a6564ecbb1007414e29a534d5cc27a00385aae1b95ef1",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/bowlStack.js",
+      "legacy_original_sha256": "682cfe60a0af5e14d8f4fda4fac4076bbbeba9d2a8b12892df77c294ec9cfb3a",
+      "legacy_replacement_sha256": "1fc262521f6fb90baa8ea063c0fe2a5029cfd8865520f49b77f698bb7c66c812",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/horizontalBanner.js",
+      "legacy_original_sha256": "00dbd27736f31cd79b5159a8fca969a7e2bc39119647c939ec5621e79f893dc8",
+      "legacy_replacement_sha256": "0926f034be0e920b06a6d5efcb9d353486d210c700428373293585e52741c88d",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "scripts/custom_components/blocks/firecracker.js",
+      "legacy_original_sha256": "020db30e1099c227ec02e9cb4870f8c5652d46eb9540e0e967dca75f35fa5743",
+      "legacy_replacement_sha256": "7ed7c7f1948c234c23fa0e313ff8412c1e566cd653845777a94dc99a5646e8e5",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/decor/bowl_stack.json",
+      "legacy_original_sha256": "e91d65510a040ba588f083a237855b831b643081b40aeac4dc0e9a4167467580",
+      "legacy_replacement_sha256": "fba266ddd801a54246eb016c41af11ed8d63b2bd0e12766e3a86dbf283459bb4",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/decor/firecracker.json",
+      "legacy_original_sha256": "07e117d660d23e987416a202d2c334421fdadec1d50956052f334fb56ee149c7",
+      "legacy_replacement_sha256": "0d14fc5852de33f010200f3e91b2576b70e9a48e9bd060481e633915e409ba8a",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/misc/salt.json",
+      "legacy_original_sha256": "10ed9d15f1ba25e97e23de5d85567ea62b9222b58339dadc588afc83993fa5fb",
+      "legacy_replacement_sha256": "469878efeea221f6aa21b6efd3626b7b8d6cd83b331fcd75e0d4e303d89410c1",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/kitchen/pickle_jar.json",
+      "legacy_original_sha256": "9326d87cde2c9640e699587e02130c78bd4c5374ee0e7400b3dc1352f765f585",
+      "legacy_replacement_sha256": "6fe0f577f9e9da5a6c377a27e8c39670988b26c45ce3ff497163a6b97a036085",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/sichuan_boiled_pork_slices.json",
+      "legacy_original_sha256": "c6f1662ca08ef696f622f5cabfdcb0264d94347dc73c667d9537ba53b9c36d8b",
+      "legacy_replacement_sha256": "278191c9b1111e091533f4a6f466e67c8ee54a2ec398f2ac89a114cf752486be",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/yellow_croaker_tofu_soup.json",
+      "legacy_original_sha256": "5d64d8e901a233175f019ee1e727bd62d3d948666240cc076ababbdc303b804c",
+      "legacy_replacement_sha256": "d79b57e74efc63c85c53dd8c4d5b9df5070dfaaf7f7e4b25d5bedd049f566bd0",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/sichuan_boiled_fish.json",
+      "legacy_original_sha256": "eebdc7c19625bd28f3fa2594439e0b3893acf0a43289851c38c120f8a49e803b",
+      "legacy_replacement_sha256": "5bdf3944586af1111cf2bb98fbe7ad21675662e371f3a10acc766c79ee611696",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/mooncake.json",
+      "legacy_original_sha256": "237ea02f319e369bdebca8a3f26e4dace3397f68b1db2f7b6277d6cbe345db8e",
+      "legacy_replacement_sha256": "f5acbf9a45db1df3381e8e57246a3decf989f8b970113d3a8bfd4c09011a932c",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/red_rice_roll.json",
+      "legacy_original_sha256": "a69eb5ef83ba2ebfe7812c204ccac7e3b823fcae3a63534690a6d40275799c6a",
+      "legacy_replacement_sha256": "ffc795c0a1c62af91810a183514a1c41d5062e432c80695355057f74353feec3",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "blocks/placeable_food/yellow_croaker_soup.json",
+      "legacy_original_sha256": "e9a36af63da3a2d2f896dd044b6ea5ac93f7925ba874f7816a4206066a286f29",
+      "legacy_replacement_sha256": "ce6920a429bc74831a138f6c17d54c6b01d761c24164d79749ff6704716a35b9",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "recipes/crafting/kitchen/mooncake_mold.json",
+      "legacy_original_sha256": "b69283edbe405d382f9cc7aceab93009ce21a1948f92891c730c9cb4c98a6de4",
+      "legacy_replacement_sha256": "cba82ec9a14359b7a1338b3390e560e7bec7b372dbee2df7c2fe9cd2e38e4182",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "recipes/crafting/food/twice_cooked_pork_rice.json",
+      "legacy_original_sha256": "505fbd95fc196257b61b50af6b3bca198c22563fcd04d7c8decbd7aca01ba9b2",
+      "legacy_replacement_sha256": "d32668c996157cc499116854e8d8ead17150e42dc9b2c6b1c13844b9fc5a6d44",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "recipes/crafting/food/beef_with_scrambled_eggs_rice.json",
+      "legacy_original_sha256": "684365c27a47bfe31a5ebce7bb50e0874b7e47efad894fab6685cee2331716d7",
+      "legacy_replacement_sha256": "7776cf39db85ac3845ca5bb3439c5df2b3b63e46810cb80bb091903c2533971c",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "recipes/crafting/food/stir_fried_yellow_beef_rice.json",
+      "legacy_original_sha256": "7c8ec873dcca7448a74f945d31b34653b833d5acab388e55a027eaaeb701320f",
+      "legacy_replacement_sha256": "08443d82b2fd1e4bd1d34e770eba4369b5779ebb256e285c588b7ce1aa50f177",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "recipes/crafting/food/stir_fried_three_fresh_vegetables_rice.json",
+      "legacy_original_sha256": "af1ba53e718940cfc97760b585a865a91e02433a639add5462c31a54bfa6f7a0",
+      "legacy_replacement_sha256": "2b3ee22200cd88dce958365d0f78ec6950654e8ee67ce0847eab0855b318d3c5",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "loot_tables/kaleidoscope_chinesefood/blocks/crops/eggplant_crop_mature.json",
+      "legacy_original_sha256": "56d61cf376285b8b850cec615eae8a950d8766a116462021952d0b63ee5f8185",
+      "legacy_replacement_sha256": "3b2ead5ca900b82f9dca181756fe6102d69ba6454a65e6f399a7164f29fd1519",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/drinks/douzhi.json",
+      "legacy_original_sha256": "59a55119f511a43f7d32accd8392a0f628a09c464aa7fe7ceb144720b04352e3",
+      "legacy_replacement_sha256": "173d0a6dde8a0337d420311e526bfa9c9ff5550dc2ca1e7e4acd917f2cb97607",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/drinks/hk_milk_tea.json",
+      "legacy_original_sha256": "0c0959488e46a0bda6d4263befeb6775b9800c998081a2743584e5a91bd1d02e",
+      "legacy_replacement_sha256": "34ececc4b990c48d53499c9d0c1c0acadbce5770058f37de5a84dcd4143fcfbb",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/drinks/lapsang.json",
+      "legacy_original_sha256": "c7c33c7da2ee40f266f6dd58bcd06f9791bbaddf83f7234e67d5a1badfe5a1d9",
+      "legacy_replacement_sha256": "1bc9e14a74eeaab532f2a1fa27ea647d6cd768436ba7a5646ede93651abe5e01",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/ingredients/yellow_croaker.json",
+      "legacy_original_sha256": "1029d7bc11d92762ba6187f0a89200aabbb76ae71f24d1d56b0eabf08c0f1b15",
+      "legacy_replacement_sha256": "46eeb587742c033b2d2aec0fe7845c4311425be2f36bd332507e4289bf375082",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/ingredients/chinese_sauerkraut.json",
+      "legacy_original_sha256": "72a61fca654b7c1ae29e9016a221defc054991b6681fc0cc83f10848e51fb380",
+      "legacy_replacement_sha256": "0a514e10abd748e59c2cab3874d59e0a432f2c161875412e640795ce11a17409",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/ingredients/century_egg.json",
+      "legacy_original_sha256": "97ba61dc13e91277b1df78fa2115a1f4ac232bd37b9e059be9b0af009cf14904",
+      "legacy_replacement_sha256": "9fa1c50908e87f448163219eb33ec76318d0940313aa08f2cabbd249073143b6",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/ingredients/eggplant.json",
+      "legacy_original_sha256": "ebfacf3c6cdf555e557c5ed00f68b171d7cb067f8bd9391c9078bc7e751e04c9",
+      "legacy_replacement_sha256": "5e9bd0d3a831d46b83e209ba3d83aeec59abfba99b2449f71771d6229fa8f5ee",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/ingredients/salted_egg.json",
+      "legacy_original_sha256": "9823de9a06051a096e5175013b1a095b8bc56992eb9c86c3e18c772f0d923a4c",
+      "legacy_replacement_sha256": "6671f0a972e6023171471a4be89057d4a71491f9e450d0208ceb44999d59437d",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/twice_cooked_pork.json",
+      "legacy_original_sha256": "ede625a43f2e358fded17e1ae0c925f9245260365a4601ed36bca40577ab0e9c",
+      "legacy_replacement_sha256": "b3689d173231b30f2b93ab2e631d4d0b60749ce4b43356ebd000f9d1e48ef678",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/yangzhou_fried_rice.json",
+      "legacy_original_sha256": "fe4f978a9fe98935fb9ecfc8f99f6adfbba29db2f05c672ffb59e5574db5e675",
+      "legacy_replacement_sha256": "b62afbec438e957b93d7b339472c815eb5be9641b1da2e3adb4a09dd41ca59f2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/tomato_egg_drop_soup.json",
+      "legacy_original_sha256": "386ceab60ab6e0649b2ea6d019cdc81741cdcae0e5019cb2c379627ea3771940",
+      "legacy_replacement_sha256": "bf2e57a78a40a9e73baab5a84d4209bf22569c31e1c3e251b561f2c12c081ec9",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/beef_with_scrambled_eggs.json",
+      "legacy_original_sha256": "52766243e1a5f6fdd815765ef57dbae362f9438907a1ad96cc7bd5f7782377a8",
+      "legacy_replacement_sha256": "ed4353bde3b355e69dfb8bad8722165c1acb191b65dcb60038f672cbfed82dd1",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/tomato_egg_noodles.json",
+      "legacy_original_sha256": "d74bb28f2dd84ed69658721fb71aa38ada32cebc8b297e917acb3ec2a849ade6",
+      "legacy_replacement_sha256": "ea87650160fcef05f453c30b7357eb843a399b0cb5860da6e5946be424de1666",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/pork_chili_noodles.json",
+      "legacy_original_sha256": "470ba706d8c35fd716efaf05e48fce6aee39bbeb68462bf273fa63b7cd842718",
+      "legacy_replacement_sha256": "406d06a8aa83eeaf25bc46364c3a9ee905faef9ee6f462b55b2b5780a7885bfc",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/dry_pot_chicken.json",
+      "legacy_original_sha256": "a2d9f37585ed1652ffa81c946c184d8f2087a8551015bd35d804e13ee4e42398",
+      "legacy_replacement_sha256": "4861607055ffbbd60aedc4eefe0877c3a6e6d6e0337086fb009f3cdda3c4efb3",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/big_plate_chicken_noodles.json",
+      "legacy_original_sha256": "75ee55c6b37932927b3ec051227b2f5caac275376e0280fa03b2bb943e9a7c2d",
+      "legacy_replacement_sha256": "00d23ae4c97aabe4ab79a760a0476ec344eacb8d32875b7c75b7ea76248b5ad7",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/twice_cooked_pork_rice.json",
+      "legacy_original_sha256": "76b6f05c9caf79e7ceda801f1348b075c67a3a96734c46eeba6d9ffc3ac18b05",
+      "legacy_replacement_sha256": "3e5b074e3de6fc40836a85480d2537a7c9795913496be7d7b8a4aa0c4d6f3d43",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/century_egg_congee.json",
+      "legacy_original_sha256": "5d2d54dd6d2c92833b4f53683fb72e3c872aac4b22c1846296399d9b26a08f53",
+      "legacy_replacement_sha256": "685520a8a71942abb81464efb9999f69580d644d8dd03e7209e394f7f3e28905",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/stuffed_eggplant.json",
+      "legacy_original_sha256": "6df066d8612aeca302ef81aa0c8a8e75a7f5dbfa1d822bb9d755628fac678b88",
+      "legacy_replacement_sha256": "7b68a3a5e8eea89c62678c4f295f5f9b38fd96e1c0593de952dcaf14f9c77597",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/lamb_pilaf.json",
+      "legacy_original_sha256": "18ab40522f1f885ba0950a2743543cc49d5791eaaa7358fa4de238b764709f5b",
+      "legacy_replacement_sha256": "b01ce3b436f488f2d2c8f77b157bf5d301720e728dd325f365d39bda0a3a201e",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/wonton_noodles.json",
+      "legacy_original_sha256": "184448fe9f8f31d063fbce7e27cc0b21a5328583da6c5d971fcbfca9a56a54b1",
+      "legacy_replacement_sha256": "85f41da682102b27d6a06b25aa04b81ffa30f64c2d2f4941db3169da9d0621f3",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/big_plate_chicken.json",
+      "legacy_original_sha256": "2fa8b40f5753990c034f2676a9ee03aea596f6ba8a3d5238da1e9465256e6ae0",
+      "legacy_replacement_sha256": "69ae5bb10b5dde2770ce2c1207ee5c17ae7162996614f4645bce082f751f4222",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/stir_fried_three_fresh_vegetables.json",
+      "legacy_original_sha256": "04799f17ccb0dc41c8141326ee5a0869de57b6b1cca20f22cb1d0bfabdcf2e32",
+      "legacy_replacement_sha256": "069d099e655f45ab51a15f84df44b00020436b1b5f64c2bce3cc251ee296b1dc",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/sichuan_wonton.json",
+      "legacy_original_sha256": "d5993ff3119256ffaf4630c444070c8d9b79402d6828db0271bdfdf2c02ab5e8",
+      "legacy_replacement_sha256": "14203ceb976804d640e2d6c697910ca4c11fe9290756c709bdf146d4a72b962b",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/beef_with_scrambled_eggs_rice.json",
+      "legacy_original_sha256": "da559a731f3b9851c19d8d4ad1318e8e5239f24d993450c9e41fe093fb85f2c9",
+      "legacy_replacement_sha256": "2745cfe54b6cc258b0b6bce81906e401c990ff15e78404a7e0857381cbee22b5",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/stir_fried_yellow_beef_rice.json",
+      "legacy_original_sha256": "6a875dd327a9b239ac0f054481e3f978dc5e7bfa2d771550725b5a0a7bd40c93",
+      "legacy_replacement_sha256": "53d77f4919c46ef8ed5043c4e72cfb9b7f43c14a012b3b92054bcce4bb52f465",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/stir_fried_three_fresh_vegetables_rice.json",
+      "legacy_original_sha256": "d46bcd4b56cbcb5e45f306366b1cfbcb208bcca9ed8b22c12d5bf36e07213d90",
+      "legacy_replacement_sha256": "cbc8bbbf6664030d0f7cba029b03195bd7c199c4b7954a7f7e2a652a472096f2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/frozen_bun.json",
+      "legacy_original_sha256": "194589d577f8cbbd4e3dbd85ff2ccca3565416ba9948926ab54e00531b7de1fe",
+      "legacy_replacement_sha256": "04668b4f1c84a7e116a7323c4c2d08c402bf4fd951378c2c0e59d5f19aef39fc",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/sauerkraut_beef_noodles.json",
+      "legacy_original_sha256": "da922515bf802221c24bce9f0bdfb72f4f0021c8b56021a545eda2bd369ac6de",
+      "legacy_replacement_sha256": "69a97a30333497a926165a2adeead764ac743de93776a9b47e69e228f56cb2ba",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/steamed_rice_rolls.json",
+      "legacy_original_sha256": "ae975a5b55741b0123f30e51a94df1b2adc86e46cfd24ec328370d0eb25d438d",
+      "legacy_replacement_sha256": "aa4a950ea599b4d519b8786ed69423ab6250fda7cc44ee4c038f8a76233de84f",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/pumpkin_porridge.json",
+      "legacy_original_sha256": "dc1e794347a5bcef16e45efa6d47cf15499bfbff1f05cd93e78e520eba4d590d",
+      "legacy_replacement_sha256": "e012115efc2c807722cdd2135f00691c64bc2bbe08b8faf7e4d2cf0e6a413f4d",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/four_joy_meatballs.json",
+      "legacy_original_sha256": "bc409e3f18ef7fab09af0e167fc2fda6a145c6f0a16f6eaa423143c29bde4b31",
+      "legacy_replacement_sha256": "7741e7070e5f442daed30cffaa9634143639dd7bceb30e76eb701acb4676c5b2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/maocai.json",
+      "legacy_original_sha256": "715f54cabb641b43c408ed08c45e71a864ce01c84cc3b88fcd8c3e59330fef41",
+      "legacy_replacement_sha256": "6e0e6f8e1c628de1e8ac0a940c88ed3920e42397ea8f04118a989a82d1506321",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/dry_pot_spare_ribs.json",
+      "legacy_original_sha256": "9206be5245adc2aa9e9d80ca923d0cb677e55c62d6ba573452953c6979a825a3",
+      "legacy_replacement_sha256": "ef5439577b75635ce0c980bfcc2eed1baf473c6f4dec142f640bdbd2bc12a0f9",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/stir_fried_yellow_beef.json",
+      "legacy_original_sha256": "a9cd9b30e0a9e1d0a9492960eeddcefee8c2a6a6a19720e92bb52afaedf92d69",
+      "legacy_replacement_sha256": "5c8d30c3fae19b636d39123e02ebfa0c07621efefd75497ebce2dce01adcb052",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/dry_pot_potatoes.json",
+      "legacy_original_sha256": "a28756a8fd2e98ead515abfb35c6ca7221928e3e0193851ee7380617139e0389",
+      "legacy_replacement_sha256": "87200ba4a46ede902f32df24e697dd3e91dfcf8c33c4dc0debafaaa4d49022d2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/seaweed_egg_drop_soup.json",
+      "legacy_original_sha256": "7bdb0721c2f2ea66aad0d1311366b394fa94d28a4d0a62217bfb947360872005",
+      "legacy_replacement_sha256": "1a6a14185cb6668a2b2dddf1a0ffa092d2cd9f9a7e37a20a8bf44cf6dcce784e",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/foods/yangrou_paomo.json",
+      "legacy_original_sha256": "b4ab1634237bbea5982ed2479f503ada397e435e702d5829b07e619a4279d290",
+      "legacy_replacement_sha256": "2ae64fed5ebb126152c0ec83786e570a78ff9dc22daf7dd742a010b9667369c3",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/decor/firecracker.json",
+      "legacy_original_sha256": "ca1fea6b57e34a46760394ae17b693a6fdbd352cc29dada2fe194959701b49d5",
+      "legacy_replacement_sha256": "87d145dd8f5dabbff119f99df05b1a1c5a80a60d5ef66bb53a7828703e7d67ef",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/kitchen/mooncake_mold.json",
+      "legacy_original_sha256": "f8939c01cfad8344c2256f73e72011db705c7bc9a3fbb84f30c0d4c163a4ff7e",
+      "legacy_replacement_sha256": "0ca5385c6395707f8b6c5e7f5968041b4ac8363e67bc306c2f40273f6886fc5e",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "items/placeable_food/mooncake.json",
+      "legacy_original_sha256": "f2d96b9f151758f5d4d2d4cc81e07e43e3aaf99a0f2d7325138a1fe159361f4e",
+      "legacy_replacement_sha256": "fa07f5c7ecac5ba84e00b4b5b9b3adce72781c349b38aaebd86403919c3dedc2",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "entities/firecracker_projectile.json",
+      "legacy_original_sha256": "089d448a03fc975e4aef5b7b73acddbff15b6fe258ffdccf9efbf7c5c85dbb13",
+      "legacy_replacement_sha256": "c239a9f0825e6110166fbd89935c298c3c3cc3ddd8b85475c35a0ca38d91d089",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1673664,
+      "latest_file_id": 8983314,
+      "path": "recipes/crafting/kitchen/shawarma_spit_0.json",
+      "legacy_original_sha256": "6798c2efd5e7d43183f8812579e4cb5a18752b9a6029b439c37a3ea52309dc69",
+      "legacy_replacement_sha256": "288e9c272a4e128f876e47939fe1f19dc5a32a22babe5406aa8d4073273e76bb",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1710501,
+      "latest_file_id": 8990975,
+      "path": "scripts/data/guidebook.js",
+      "legacy_original_sha256": "39d99060b0fd630c1a8e09a462a2b5085e53ae1398241d24b26ff9d546c6c058",
+      "legacy_replacement_sha256": "5768f77b178441e4d0ed9162a6c6336efa7a98cbe250640242f40363e6be7753",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1683300,
+      "latest_file_id": 8983356,
+      "path": "item_catalog/crafting_item_catalog.json",
+      "legacy_original_sha256": "0aa9288009658c839ec3e0a4426b6dfdce00ff358463373991158b6db6789765",
+      "legacy_replacement_sha256": "a9a91c6a6a961f5202598917b5f957ff14decb7e43abf4a268620fadff7c6043",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1710501,
+      "latest_file_id": 8990975,
+      "path": "item_catalog/crafting_item_catalog.json",
+      "legacy_original_sha256": "f88e98b992d84ac2b667075a28607165e7854ef055703815f34df33119c71944",
+      "legacy_replacement_sha256": "a2e40148def32ecf853905b673768d3f2511a8097c0e62d818a42af68eaad8b0",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    },
+    {
+      "project_id": 1710505,
+      "latest_file_id": 8990981,
+      "path": "item_catalog/crafting_item_catalog.json",
+      "legacy_original_sha256": "c20f0e9ace8275b1d4ad21f2fecf4e49cc43149bd3072cdd21b9d994f3538929",
+      "legacy_replacement_sha256": "18bd8660df620c4efcc1ea2d4a6b793d50d92860c265e616f64473bf15bd7cf0",
+      "status": "await_clean_latest_reproduction",
+      "feedback_sent": false,
+      "removal_condition": "Remove when the original latest file satisfies the acceptance case, or a reviewed author update replaces it. Never carry a legacy whole-file replacement into a new upstream release."
+    }
+  ],
+  "feedback_channel": "Official CurseForge project pages; no issuesUrl/sourceUrl is declared by these projects. Do not report Bedrock defects to the Java author by guessing a repository.",
+  "feedback_policy": "Send only a minimal reproduction on the latest unmodified author release, with engine/client version and pack order. Existing historical client logs are not a current reproduction.",
+  "resolved_in_latest": [
+    "Immersive Eating 1.0 contains variable.melee_spear_equipped initialization; the older accumulated log is not evidence of a current missing initializer."
+  ],
+  "production_migration_pending": true
+}

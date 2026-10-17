@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "againstCommit": "4aeb47d6856c4cfaa50277cd45dd409f67c2e7d7",
+  "reviewedChanges": {
+    "runtime/BP/scripts/bedrock/board-text.js": {
+      "before": "4632975e0fa8b5f56f01dad452c25f69fb7c0068d44a4587fbbc687c54f45314",
+      "after": "69c20a7204c33e3908e79997e8133272643d79f7c3ddae84e6fee244362e6300",
+      "reason": "Cache bounded immutable layout and reconcile glyphs by anchor/signature. Preserve layout formulas and per-tick missing/duplicate repair; publish signatures only after successful initialization."
+    },
+    "runtime/BP/scripts/bedrock/cellar-cabinet.js": {
+      "before": "3af9f7d6640736cb477ffc4d0a7869958d9b9d155aac3f2e020d3f2eb3ea5ab8",
+      "after": "2241b9a400c305fed82367d49e799e5f842c4522c28568903d53ea613b16fad7",
+      "reason": "One helper query per cabinet, group helper sweeps by cabinet, and update actual pose/property differences only. Preserve all inventory, slot, transaction and redstone code. Unloaded blocks are not air."
+    },
+    "runtime/BP/scripts/bedrock/circular-rack.js": {
+      "before": "97f91a5a4b3f81b7ed54ef4d48eb18bbc33122b8b875da46ade3780012405d5a",
+      "after": "d06b616619a3294d1b4ad170ac0d3a7b88c7f3370fb2d138988de7edf07efdd5",
+      "reason": "One helper query per rack, group sweeps, actual-state delta setters and no ambient registration for empty racks. Preserve pose, pop rules and 1/8 particle test."
+    },
+    "runtime/BP/scripts/bedrock/custom-effects.js": {
+      "before": "68facc19e370fca2f1052b3d4b2beedbcdd0261ce3279ba9aa5c4c8cbc976d38",
+      "after": "0d143e4c0e4f344e47e838232deb56b30ed83a925e61ce55ab85f9ba8dc69057",
+      "reason": "Share same-tick status windows; skip unchanged writes and enumerate only active fast-effect players each tick. Preserve 5-tick discovery/persistence, expiry side effects, migration receipts and disconnect semantics."
+    },
+    "runtime/BP/scripts/bedrock/extension-furniture.js": {
+      "before": "e3ed4b0869cb0a60928d4ce4c3228cb26ce8ac2d9bf48b64022b3c5a482c9177",
+      "after": "ceff6646a47417705d55a9fca9ba420549ec3b6baeb7121c6db12dd8358c65d9",
+      "reason": "Group helper sweeps by external cabinet and skip unchanged actual pose/property setters. Preserve migration handshake, receipts, definitions and slot transactions."
+    },
+    "runtime/BP/scripts/bedrock/java-ambient.js": {
+      "before": "788b4c328d58d5d2dd6581a54d2bfa9452846fe207b42f7543708672efc86421",
+      "after": "4d2f96b214a8abe9b2f9602cc103e52a78f17d259db8c3d5f1432f8af308a13d",
+      "reason": "Exact dimension/cube-support broad phase before the unchanged Java sampler. Expiry/unregister keep buckets consistent and stop empty timer. Incense registration and closed smoke are unchanged."
+    },
+    "runtime/BP/scripts/bedrock/stateful-storage-router.js": {
+      "before": "0d370c09edcb921af513045bdca1ff20af4dcd0f52e3ad18863b5b4855d433d7",
+      "after": "251fd95b6b727ecef87349908a539b3a00ab4b40f035e6e6b6fc59bdce8d78ce",
+      "reason": "Re-export bounded cosmetic helper scanning. Everything outside the old maintenance function, including schema-2 touch aim and transaction/pop routing, is byte-identical."
+    }
+  },
+  "newRuntimeFiles": {
+    "runtime/BP/scripts/bedrock/storage-visual-maintenance.js": {
+      "after": "e08548dab33a8103b8926160baa9504ba211697289c6d2302183dd1c8c813bf2",
+      "reason": "Budget-bounded iterator snapshots, optional per-cabinet grouping, anchor-query grouping, and actual-state cosmetic delta setters. No inventory or aim caching."
+    }
+  }
+}

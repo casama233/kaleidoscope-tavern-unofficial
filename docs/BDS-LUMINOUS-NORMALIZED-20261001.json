@@ -1,0 +1,29 @@
+{
+  "scope": "Exact unmodified Tavern 0.6.74 + World Liquor 0.1.39 + Grilling 2.8.15 with pinned public vendors",
+  "bsm": "3.10.6",
+  "bds": "1.26.52.3",
+  "bds_loading_passed": true,
+  "cycles": [
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": false
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": true
+    }
+  ],
+  "candidate_receipt_sha256": "2dc0d09bcb57dad8194174677c2d1942f47e88d321f7a765e07cc3f5675df182",
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "static_foundation_tests": 245,
+  "blockbench_roundtrip": "data/blockbench-luminous-roundtrip.json",
+  "geometry_variants_checked": 4,
+  "opposite_facing_overlaps_removed": 20,
+  "hidden_shell_strips_cropped": 40,
+  "native_functional_probe_passed": true,
+  "native_probe_scope": "Test-only overlays for cellar, record, freezer, grilling and host survival recipes; not Minecraft client rendering"
+}

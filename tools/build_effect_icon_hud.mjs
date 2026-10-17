@@ -1,0 +1,49 @@
+/** Generate literal image controls. Never accept resource paths from a packet. */
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {Buffer} from 'node:buffer';
+import {resolve,dirname} from 'node:path';
+import {EFFECT_ICONS} from '../runtime/BP/scripts/data/effect-icons.js';
+import {EFFECT_ICON_PREFIX,EFFECT_ICON_SLOTS,effectIconToken} from '../runtime/BP/scripts/core/effect-icons.js';
+import {canonical} from '../runtime/BP/scripts/core/util.js';
+const addonIndex=process.argv.indexOf('--world-liquor');
+const extension=addonIndex>=0;
+const path=extension?resolve(process.argv[addonIndex+1],'runtime/RP/ui/kt_world_liquor_effects.json'):new URL('../runtime/RP/ui/kt_tavern_hud.json',import.meta.url);
+const hud=extension?{namespace:'kaleidoscope_world_liquor_effects'}:JSON.parse(readFileSync(path,'utf8'));
+// The native capture probe accepts all 18 UTF-8 bytes of this header; JS length
+// is 12 and truncates the six formatting pairs before their comparison.
+const prefix=`(('%.${Buffer.byteLength(EFFECT_ICON_PREFIX,'utf8')}s' * #hud_title_text_string) = '${EFFECT_ICON_PREFIX}')`;
+const panel={type:'panel',size:[160,80],anchor_from:'top_left',anchor_to:'top_left',offset:[4,52],controls:[
+ {kt_effect_data:{type:'panel',size:[0,0],property_bag:{'#kt_effect_packet':''},bindings:[
+  {binding_name:'#hud_title_text_string'},
+  {binding_name:'#hud_title_text_string',binding_name_override:'#kt_effect_packet',binding_condition:'visibility_changed'},
+  {binding_type:'view',source_property_name:`(not (#hud_title_text_string = #kt_effect_packet) and ${prefix})`,target_property_name:'#visible'}
+ ]}}
+]};
+const rows=EFFECT_ICONS.filter(row=>row.id.startsWith(extension?'kaleidoscope_world_liquor:':'kaleidoscope_tavern:'));
+for(let slot=0;slot<EFFECT_ICON_SLOTS;slot++)for(const row of rows)panel.controls.push({['kt_effect_'+slot+'_'+row.code]:{
+ type:'image',texture:row.texture,size:[18,18],offset:[(slot%8)*20,Math.floor(slot/8)*20],anchor_from:'top_left',anchor_to:'top_left',bilinear:false,layer:1,visible:false,
+ property_bag:{'#kt_effect_packet':''},bindings:[
+  {binding_type:'view',source_control_name:'kt_effect_data',resolve_sibling_scope:true,source_property_name:'#kt_effect_packet',target_property_name:'#kt_effect_packet'},
+  {binding_type:'view',source_property_name:`(not ((#kt_effect_packet - '${effectIconToken(slot,row.code)}') = #kt_effect_packet))`,target_property_name:'#visible'}
+ ]
+}});
+// A registered definition file creates definitions; it is not a second patch
+// to vanilla hud.root_panel. Only the host's original hud_screen patch mounts UI.
+if(extension){
+ panel.offset=[0,0];
+ hud.effect_panel=JSON.parse(JSON.stringify(panel).replaceAll('kt_effect_data','kwl_effect_data').replaceAll('kt_effect_packet','kwl_effect_packet').replaceAll('"kt_effect_','"kwl_effect_'));
+}else{
+ // The absent-addon fallback lives in the global catalog, not this local scope.
+ panel.controls.push({'kt_optional_world_icons@$kt_world_liquor_effect_panel':{}});
+ hud.kt_effect_empty={type:'panel',size:[0,0]};
+ hud.kt_effect_icons=panel;
+ const controls=hud.root.controls;
+ if(!controls.some(v=>'kt_effect_icons@kaleidoscope_tavern_hud.kt_effect_icons' in v))
+  controls.push({'kt_effect_icons@kaleidoscope_tavern_hud.kt_effect_icons':{}});
+}
+const expected=JSON.stringify(hud)+'\n';
+if(process.argv.includes('--check')){
+ // Compare every parsed field and array entry. JSON number spelling, object
+ // key order and whitespace do not change the authored controls' semantics.
+ if(canonical(JSON.parse(readFileSync(path,'utf8')))!==canonical(JSON.parse(expected)))throw Error('Effect icon HUD differs from its authored generator');
+}else {if(extension)mkdirSync(dirname(path),{recursive:true});writeFileSync(path,expected);}

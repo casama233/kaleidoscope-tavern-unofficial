@@ -1,0 +1,33 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:stepladder"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "L  ",
+      "LL ",
+      "LLL"
+    ],
+    "key": {
+      "L": {
+        "item": "minecraft:ladder"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:stepladder",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:ladder"
+      },
+      {
+        "item": "kaleidoscope_tavern:stepladder"
+      }
+    ]
+  }
+}

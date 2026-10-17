@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "scope": "Original author getShape executed with minimal state/box stubs; not native Minecraft collision or client acceptance",
+  "sources": [
+    {
+      "repository": "KaleidoscopeMods/KaleidoscopeTavern",
+      "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+      "minecraft": "1.20.1",
+      "loader": "Forge",
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BarrelBlock.java",
+      "sha256": "c14d27d72a46a963e756f9820c0c4cbe79c6152327970113d638e7556f78ec29"
+    },
+    {
+      "repository": "KaleidoscopeMods/KaleidoscopeTavern",
+      "commit": "a1afba34981a00e89d57130d3dc8f1e64f1820a2",
+      "minecraft": "1.21.1",
+      "loader": "NeoForge",
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BarrelBlock.java",
+      "sha256": "64353bb54b53bb471349ce555e863d0207114e896fba9862636ce66d60d41cbe"
+    }
+  ],
+  "author_constants_java": "private static final VoxelShape SHAPE_FULL = Block.box(0, 0, 0, 16, 16, 16);\n    private static final VoxelShape SHAPE_CUT_LEFT = Block.box(4, 0, 0, 16, 16, 16);\n    private static final VoxelShape SHAPE_CUT_RIGHT = Block.box(0, 0, 0, 12, 16, 16);\n    private static final VoxelShape SHAPE_CUT_NEAR = Block.box(0, 0, 4, 16, 16, 16);\n    private static final VoxelShape SHAPE_CUT_FAR = Block.box(0, 0, 0, 16, 16, 12);",
+  "author_get_shape_java": "public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {\n        Direction facing = state.getValue(FACING);\n        int index = state.getValue(INDEX);\n        int col = index % 3;\n        int row = index / 3;\n        return switch (facing) {\n            case NORTH, SOUTH -> col == 0 ? SHAPE_CUT_LEFT : col == 2 ? SHAPE_CUT_RIGHT : SHAPE_FULL;\n            case WEST, EAST -> row == 0 ? SHAPE_CUT_NEAR : row == 2 ? SHAPE_CUT_FAR : SHAPE_FULL;\n            default -> SHAPE_FULL;\n        };\n    }",
+  "coordinate_contract": {
+    "source": "BarrelBlock.setPlacedBy targetPos=pos.offset(col-1,y,row-1); Bedrock core/machines.barrelCells and bedrock/machines.createBarrel",
+    "column": "kaleidoscope_tavern:dx + 1",
+    "row": "kaleidoscope_tavern:dz + 1",
+    "layers": "All three dy layers share the same shape; only bottom center is barrel_core",
+    "axes": "world absolute; do not rotate dx/dz with facing"
+  },
+  "client": false
+}

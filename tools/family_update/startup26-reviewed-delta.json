@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "profile": "amw-startup-2626-private29",
+  "snapshot_commit": "92d0b2b8905e441e4b27836830e91e6f444f4f07",
+  "private28_commit": "2589c77577175812510870f4ed6735c089ddaf76",
+  "prefix": "companion-sources/amw2626-startup-reconciliation",
+  "packs": {
+    "cd107d2a-333f-4347-ab54-6917142be0d7": {
+      "side": "BP",
+      "snapshot": "companion-sources/amw2626-startup-reconciliation/observed26/BP",
+      "before_version": [
+        2,
+        6,
+        25
+      ],
+      "observed_version": [
+        2,
+        6,
+        26
+      ],
+      "changed": {
+        "scripts/spell_book_database.js": {
+          "before": "4eba671c11f4b375ee1c9c82fb10d74b89f580794f8cde38b6bff724f158ff5e",
+          "after": "e1bbe3db7bf3a749fc76f730690ba632fdec401dd5769e30b5779deeb7b49f7c"
+        },
+        "AMW_RUNTIME_BUILD.txt": {
+          "before": null,
+          "after": "ee11f8f634a330de05e31774744baeb893c81186931ccc3723ff007b6c4035d0"
+        },
+        "scripts/custom_item_handler.js": {
+          "before": "1c52b44c840d94c64eca1a9daae998545bb6c91ca971ee4bb4b82157a341d121",
+          "after": "3bc6a2ef77b6ea6883c84d95642da595e9dbbf0dee92800051aded64997b3cbc"
+        },
+        "manifest.json": {
+          "before": "eba92657052d0588c2dfc457138d827f23e13be02574c6702b0e96d2cfb25265",
+          "after": "efb1c544827d09a96065a7c6b5e765895ac6c3e38af7951d13934a5548c5f38e"
+        },
+        "scripts/main.bundle.js": {
+          "before": null,
+          "after": "9f1e93694a3bfcd1e647cf5fd5a1b969c16c4fcc010ea7ad09581efe6f304016"
+        },
+        "AMW_RUNTIME_BUILD.json": {
+          "before": null,
+          "after": "e4f103b98a8ddbd43d2af7e09dbaf88f10e5e0adee5b3e7d1696529b764305bf"
+        },
+        "scripts/tavern_sdk/tavern-extension-client.js": {
+          "before": "150fd9945ef34352adfccf648f041ab205d63b52032bc621a563a523da6ceaca",
+          "after": "a87009fb5ae0ab7c16729dde9e33ef45d7f871674317dec55ef5b3a59d943905"
+        },
+        "scripts/lib/bootstrap/spellbook-matrices.js": {
+          "before": null,
+          "after": "cd788a469b1296c8dac50b390ae403c2bdb5bbbd31dc846dc3a42b521b2f8164"
+        },
+        "scripts/tavern_sdk/protocol.js": {
+          "before": "8d69d2bbd0a65fd3d619e83eb26ccdafcadccedfddf8cae1abdb692bb7abfb72",
+          "after": "503e513e81aa358144530fdf70cd6142f422047524c421640c2e9edaf7a7e135"
+        },
+        "scripts/lib/bootstrap/item-registration.js": {
+          "before": "a6d2792d56347476a07ea0cdebf5bf8b94bb8a40cdfa98125c89553b9020cca8",
+          "after": "c238249d9352a008cff03a4684aab8a8f1a1bb7089b1e3f41d12b9836f3ddb69"
+        }
+      }
+    },
+    "994f73a2-05ec-41ce-876c-d388a526d9f5": {
+      "side": "RP",
+      "snapshot": "companion-sources/amw2626-startup-reconciliation/observed26/RP",
+      "before_version": [
+        2,
+        6,
+        25
+      ],
+      "observed_version": [
+        2,
+        6,
+        26
+      ],
+      "changed": {
+        "manifest.json": {
+          "before": "7b9cfcf33ecb6aabedc6e51745cbef5253f7a82c3227bc53b2f440f4f873cba9",
+          "after": "7c95b4bd28132899fc99f811b218619776b66c52a1392c464be9b940f1a973c4"
+        }
+      }
+    },
+    "5754f5c4-4086-5fa8-9126-fad18bbdfb59": {
+      "side": "BP",
+      "snapshot": "companion-sources/amw2626-startup-reconciliation/observed-private29/BP",
+      "before_version": [
+        1,
+        0,
+        28
+      ],
+      "observed_version": [
+        1,
+        0,
+        29
+      ],
+      "changed": {
+        "AMW_RUNTIME_BUILD.txt": {
+          "before": null,
+          "after": "ee11f8f634a330de05e31774744baeb893c81186931ccc3723ff007b6c4035d0"
+        },
+        "manifest.json": {
+          "before": "a824b6d510c7adf842791c3447115707f29fab66c891ccae3acb302fb167f326",
+          "after": "cbaee8b8275362cc0088025e8ccb33daba2bd36e19e54daeccb6feb9dbfc8fb4"
+        },
+        "scripts/main.bundle.js": {
+          "before": null,
+          "after": "312488d5d330167cb63ce6861d2226dec44990ae4e1734bf354081aaed24f0b7"
+        },
+        "scripts/fauna-kitchen.js": {
+          "before": "0be6711db18707ea6cdb8e7afb290ecb23d1daab9abe964d5b449a2778bcef6c",
+          "after": "fc823edc250cdf520027ec01fc89cd026f602a07bbd4f1f1f88b9e0ea925c64c"
+        },
+        "scripts/lib/guide-packets.js": {
+          "before": null,
+          "after": "78ff97dfe2c7f96a0e80943c17cc5e74bde372244e2c9fb26d6edbbb51ff0282"
+        },
+        "AMW_RUNTIME_BUILD.json": {
+          "before": null,
+          "after": "b8c8d64df4308eaa0ef3cb92bddb422b94a60583915ec47cee11112d1c43d1d4"
+        }
+      }
+    },
+    "70f0e591-9b99-51b8-b319-fc8b2315315d": {
+      "side": "RP",
+      "snapshot": "companion-sources/amw2626-startup-reconciliation/observed-private29/RP",
+      "before_version": [
+        1,
+        0,
+        28
+      ],
+      "observed_version": [
+        1,
+        0,
+        29
+      ],
+      "changed": {
+        "manifest.json": {
+          "before": "8441902a5bf47928ad14e9c3b46b579d200014db33e5ba4d8eb9eb0f71af83ea",
+          "after": "9a8804abd6ad8d366a476a6c86ed2468e7eaf736254fd48a0d3cfee64ef5a9cf"
+        }
+      }
+    }
+  },
+  "review": "Exact independently reviewed cooperative startup/bundle delta; no author release, old-drift approval or client parity claim",
+  "client": false
+}

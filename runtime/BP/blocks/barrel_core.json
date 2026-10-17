@@ -1,0 +1,96 @@
+{
+  "format_version": "1.26.50",
+  "minecraft:block": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:barrel_core",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:geometry": {
+        "identifier": "minecraft:geometry.full_block"
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "kt_runtime_transparent",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          16,
+          16
+        ]
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          97,
+          97
+        ],
+        "looping": true
+      },
+      "kaleidoscope_tavern:barrel_core": {},
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 2.5
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      },
+      "minecraft:loot": "loot_tables/empty.json",
+      "minecraft:light_dampening": 0,
+      "kaleidoscope_tavern:natural_break": {
+        "drop": "kaleidoscope_tavern:barrel_core"
+      },
+      "minecraft:destruction_particles": {
+        "texture": "kt_assets_a17_item_display_barrel",
+        "particle_count": 32,
+        "tint_method": "none"
+      },
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.kt_assets_a17.item_display_barrel"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "kt_assets_a17_item_display_barrel",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": true
+          },
+          "unshaded": {
+            "texture": "kt_assets_a17_item_display_barrel",
+            "render_method": "alpha_test",
+            "ambient_occlusion": 0.0,
+            "face_dimming": false
+          }
+        }
+      }
+    }
+  }
+}

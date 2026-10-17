@@ -1,0 +1,307 @@
+Compiled from "ColorUtils.java"
+public class com.github.ysbbbbbb.kaleidoscopetavern.util.ColorUtils {
+  public static final java.lang.String[] COLORS;
+
+  public static final java.util.Map<net.minecraft.tags.TagKey<net.minecraft.world.item.Item>, net.minecraft.ChatFormatting> COCKTAIL_INGREDIENT_COLORS;
+
+  public static final java.util.function.Function<net.minecraft.world.item.Item, net.minecraft.ChatFormatting> ITEM_COLOR_CACHE;
+
+  public com.github.ysbbbbbb.kaleidoscopetavern.util.ColorUtils();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static int mixColors(java.util.List<net.minecraft.ChatFormatting>);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: anewarray     #7                  // class net/minecraft/ChatFormatting
+       5: invokeinterface #9,  2            // InterfaceMethod java/util/List.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+      10: checkcast     #15                 // class "[Lnet/minecraft/ChatFormatting;"
+      13: invokestatic  #17                 // Method mixColors:([Lnet/minecraft/ChatFormatting;)I
+      16: ireturn
+
+  public static int mixColors(net.minecraft.ChatFormatting...);
+    Code:
+       0: aload_0
+       1: ifnull        9
+       4: aload_0
+       5: arraylength
+       6: ifne          12
+       9: ldc           #23                 // int 16777215
+      11: ireturn
+      12: iconst_0
+      13: istore_1
+      14: iconst_0
+      15: istore_2
+      16: iconst_0
+      17: istore_3
+      18: iconst_0
+      19: istore        4
+      21: aload_0
+      22: astore        5
+      24: aload         5
+      26: arraylength
+      27: istore        6
+      29: iconst_0
+      30: istore        7
+      32: iload         7
+      34: iload         6
+      36: if_icmpge     114
+      39: aload         5
+      41: iload         7
+      43: aaload
+      44: astore        8
+      46: aload         8
+      48: getstatic     #24                 // Field net/minecraft/ChatFormatting.RESET:Lnet/minecraft/ChatFormatting;
+      51: if_acmpeq     108
+      54: aload         8
+      56: invokevirtual #28                 // Method net/minecraft/ChatFormatting.getColor:()Ljava/lang/Integer;
+      59: ifnull        108
+      62: aload         8
+      64: invokevirtual #28                 // Method net/minecraft/ChatFormatting.getColor:()Ljava/lang/Integer;
+      67: invokevirtual #32                 // Method java/lang/Integer.intValue:()I
+      70: istore        9
+      72: iload_1
+      73: iload         9
+      75: bipush        16
+      77: ishr
+      78: sipush        255
+      81: iand
+      82: iadd
+      83: istore_1
+      84: iload_2
+      85: iload         9
+      87: bipush        8
+      89: ishr
+      90: sipush        255
+      93: iand
+      94: iadd
+      95: istore_2
+      96: iload_3
+      97: iload         9
+      99: sipush        255
+     102: iand
+     103: iadd
+     104: istore_3
+     105: iinc          4, 1
+     108: iinc          7, 1
+     111: goto          32
+     114: iload         4
+     116: ifne          122
+     119: ldc           #23                 // int 16777215
+     121: ireturn
+     122: iload_1
+     123: iload         4
+     125: idiv
+     126: istore        5
+     128: iload_2
+     129: iload         4
+     131: idiv
+     132: istore        6
+     134: iload_3
+     135: iload         4
+     137: idiv
+     138: istore        7
+     140: iload         5
+     142: bipush        16
+     144: ishl
+     145: iload         6
+     147: bipush        8
+     149: ishl
+     150: ior
+     151: iload         7
+     153: ior
+     154: ireturn
+
+  private static net.minecraft.ChatFormatting lambda$static$1(net.minecraft.world.item.Item);
+    Code:
+       0: getstatic     #38                 // Field COCKTAIL_INGREDIENT_COLORS:Ljava/util/Map;
+       3: invokeinterface #42,  1           // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+       8: invokeinterface #48,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      13: astore_1
+      14: aload_1
+      15: invokeinterface #54,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      20: ifeq          60
+      23: aload_1
+      24: invokeinterface #60,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      29: checkcast     #64                 // class net/minecraft/tags/TagKey
+      32: astore_2
+      33: aload_0
+      34: invokevirtual #66                 // Method net/minecraft/world/item/Item.builtInRegistryHolder:()Lnet/minecraft/core/Holder$Reference;
+      37: aload_2
+      38: invokevirtual #72                 // Method net/minecraft/core/Holder$Reference.is:(Lnet/minecraft/tags/TagKey;)Z
+      41: ifeq          57
+      44: getstatic     #38                 // Field COCKTAIL_INGREDIENT_COLORS:Ljava/util/Map;
+      47: aload_2
+      48: invokeinterface #78,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      53: checkcast     #7                  // class net/minecraft/ChatFormatting
+      56: areturn
+      57: goto          14
+      60: getstatic     #24                 // Field net/minecraft/ChatFormatting.RESET:Lnet/minecraft/ChatFormatting;
+      63: areturn
+
+  private static void lambda$static$0(java.util.HashMap);
+    Code:
+       0: aload_0
+       1: getstatic     #82                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_BLACK:Lnet/minecraft/tags/TagKey;
+       4: getstatic     #88                 // Field net/minecraft/ChatFormatting.BLACK:Lnet/minecraft/ChatFormatting;
+       7: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      10: pop
+      11: aload_0
+      12: getstatic     #97                 // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_BLUE:Lnet/minecraft/tags/TagKey;
+      15: getstatic     #100                // Field net/minecraft/ChatFormatting.DARK_BLUE:Lnet/minecraft/ChatFormatting;
+      18: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      21: pop
+      22: aload_0
+      23: getstatic     #103                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_GREEN:Lnet/minecraft/tags/TagKey;
+      26: getstatic     #106                // Field net/minecraft/ChatFormatting.DARK_GREEN:Lnet/minecraft/ChatFormatting;
+      29: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      32: pop
+      33: aload_0
+      34: getstatic     #109                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_AQUA:Lnet/minecraft/tags/TagKey;
+      37: getstatic     #112                // Field net/minecraft/ChatFormatting.DARK_AQUA:Lnet/minecraft/ChatFormatting;
+      40: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      43: pop
+      44: aload_0
+      45: getstatic     #115                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_RED:Lnet/minecraft/tags/TagKey;
+      48: getstatic     #118                // Field net/minecraft/ChatFormatting.DARK_RED:Lnet/minecraft/ChatFormatting;
+      51: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      54: pop
+      55: aload_0
+      56: getstatic     #121                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_PURPLE:Lnet/minecraft/tags/TagKey;
+      59: getstatic     #124                // Field net/minecraft/ChatFormatting.DARK_PURPLE:Lnet/minecraft/ChatFormatting;
+      62: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      65: pop
+      66: aload_0
+      67: getstatic     #127                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_GOLD:Lnet/minecraft/tags/TagKey;
+      70: getstatic     #130                // Field net/minecraft/ChatFormatting.GOLD:Lnet/minecraft/ChatFormatting;
+      73: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      76: pop
+      77: aload_0
+      78: getstatic     #133                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_GRAY:Lnet/minecraft/tags/TagKey;
+      81: getstatic     #136                // Field net/minecraft/ChatFormatting.GRAY:Lnet/minecraft/ChatFormatting;
+      84: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      87: pop
+      88: aload_0
+      89: getstatic     #139                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_DARK_GRAY:Lnet/minecraft/tags/TagKey;
+      92: getstatic     #142                // Field net/minecraft/ChatFormatting.DARK_GRAY:Lnet/minecraft/ChatFormatting;
+      95: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      98: pop
+      99: aload_0
+     100: getstatic     #145                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_BLUE:Lnet/minecraft/tags/TagKey;
+     103: getstatic     #148                // Field net/minecraft/ChatFormatting.BLUE:Lnet/minecraft/ChatFormatting;
+     106: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     109: pop
+     110: aload_0
+     111: getstatic     #151                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_GREEN:Lnet/minecraft/tags/TagKey;
+     114: getstatic     #154                // Field net/minecraft/ChatFormatting.GREEN:Lnet/minecraft/ChatFormatting;
+     117: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     120: pop
+     121: aload_0
+     122: getstatic     #157                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_AQUA:Lnet/minecraft/tags/TagKey;
+     125: getstatic     #160                // Field net/minecraft/ChatFormatting.AQUA:Lnet/minecraft/ChatFormatting;
+     128: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     131: pop
+     132: aload_0
+     133: getstatic     #163                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_RED:Lnet/minecraft/tags/TagKey;
+     136: getstatic     #166                // Field net/minecraft/ChatFormatting.RED:Lnet/minecraft/ChatFormatting;
+     139: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     142: pop
+     143: aload_0
+     144: getstatic     #169                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_LIGHT_PURPLE:Lnet/minecraft/tags/TagKey;
+     147: getstatic     #172                // Field net/minecraft/ChatFormatting.LIGHT_PURPLE:Lnet/minecraft/ChatFormatting;
+     150: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     153: pop
+     154: aload_0
+     155: getstatic     #175                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_YELLOW:Lnet/minecraft/tags/TagKey;
+     158: getstatic     #178                // Field net/minecraft/ChatFormatting.YELLOW:Lnet/minecraft/ChatFormatting;
+     161: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     164: pop
+     165: aload_0
+     166: getstatic     #181                // Field com/github/ysbbbbbb/kaleidoscopetavern/init/tag/TagMod.COCKTAIL_INGREDIENT_WHITE:Lnet/minecraft/tags/TagKey;
+     169: getstatic     #184                // Field net/minecraft/ChatFormatting.WHITE:Lnet/minecraft/ChatFormatting;
+     172: invokevirtual #91                 // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     175: pop
+     176: return
+
+  static {};
+    Code:
+       0: bipush        16
+       2: anewarray     #187                // class java/lang/String
+       5: dup
+       6: iconst_0
+       7: ldc           #189                // String white
+       9: aastore
+      10: dup
+      11: iconst_1
+      12: ldc           #191                // String light_gray
+      14: aastore
+      15: dup
+      16: iconst_2
+      17: ldc           #193                // String gray
+      19: aastore
+      20: dup
+      21: iconst_3
+      22: ldc           #195                // String black
+      24: aastore
+      25: dup
+      26: iconst_4
+      27: ldc           #197                // String brown
+      29: aastore
+      30: dup
+      31: iconst_5
+      32: ldc           #199                // String red
+      34: aastore
+      35: dup
+      36: bipush        6
+      38: ldc           #201                // String orange
+      40: aastore
+      41: dup
+      42: bipush        7
+      44: ldc           #203                // String yellow
+      46: aastore
+      47: dup
+      48: bipush        8
+      50: ldc           #205                // String lime
+      52: aastore
+      53: dup
+      54: bipush        9
+      56: ldc           #207                // String green
+      58: aastore
+      59: dup
+      60: bipush        10
+      62: ldc           #209                // String cyan
+      64: aastore
+      65: dup
+      66: bipush        11
+      68: ldc           #211                // String light_blue
+      70: aastore
+      71: dup
+      72: bipush        12
+      74: ldc           #213                // String blue
+      76: aastore
+      77: dup
+      78: bipush        13
+      80: ldc           #215                // String purple
+      82: aastore
+      83: dup
+      84: bipush        14
+      86: ldc           #217                // String magenta
+      88: aastore
+      89: dup
+      90: bipush        15
+      92: ldc           #219                // String pink
+      94: aastore
+      95: putstatic     #221                // Field COLORS:[Ljava/lang/String;
+      98: invokestatic  #225                // Method com/google/common/collect/Maps.newHashMap:()Ljava/util/HashMap;
+     101: invokedynamic #231,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+     106: invokestatic  #235                // Method net/minecraft/Util.make:(Ljava/lang/Object;Ljava/util/function/Consumer;)Ljava/lang/Object;
+     109: checkcast     #43                 // class java/util/Map
+     112: putstatic     #38                 // Field COCKTAIL_INGREDIENT_COLORS:Ljava/util/Map;
+     115: invokedynamic #241,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     120: invokestatic  #245                // Method net/minecraft/Util.memoize:(Ljava/util/function/Function;)Ljava/util/function/Function;
+     123: putstatic     #249                // Field ITEM_COLOR_CACHE:Ljava/util/function/Function;
+     126: return
+}

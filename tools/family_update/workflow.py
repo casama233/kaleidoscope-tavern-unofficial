@@ -1,0 +1,380 @@
+"""Idempotent stage orchestration. Cache hits verify bytes, never just flags."""
+import importlib
+from family_update.common import *
+from ci_impact import classify_path
+
+
+def run_stage(name, argv=None):
+    module = importlib.import_module('family_update.' + name)
+    result = module.main(argv or ['--execute'])
+    if result not in [None, 0] and not isinstance(result, dict):
+        raise RuntimeError(f'{name} failed with exit code {result}')
+    return result
+
+
+def same_runtime(receipt, inventory):
+    expected = {pack['uuid']: pack for pack in receipt['packs']}
+    actual = {pack['uuid']: pack for pack in inventory['packs']}
+    if len(expected) != len(receipt['packs']) or len(actual) != len(inventory['packs']):
+        return False
+    if set(expected) != set(actual):
+        return False
+    for uid, pack in expected.items():
+        if any(pack[key] != actual[uid][key] for key in ['side', 'version', 'files']):
+            return False
+    return all(inventory['refs'].get(side) == [
+        {'pack_id': uid, 'version': expected[uid]['version']} for uid in order
+    ] for side, order in receipt['order'].items())
+
+
+def verify_native(verified_candidate=None):
+    """The fresh saved-world rehearsal supplies both native and save evidence."""
+    receipt = verify_candidate_sources() if verified_candidate is None else verified_candidate
+    evidence = read(R / 'saved-world-report.json')
+    assert evidence['native_acceptance_source'] == 'saved_world', 'Require this deployment\'s combined native rehearsal'
+    assert evidence['candidate_receipt_sha256'] == sha(C / 'family-receipt.json')
+    assert evidence['engine_sha256'] == sha(B / 'bedrock_server'), 'Native engine changed'
+    assert evidence['engine_inputs'] == engine_inputs(), 'Native engine builtin packs or configuration changed'
+    assert evidence['backup_receipt'] == report_ref(R / 'production-before/backup-receipt.json'), 'Fresh stopped backup evidence changed'
+    assert evidence['snapshot_source'] == str(R / 'production-snapshot'), 'Rehearsal used a different snapshot'
+    assert evidence['fresh_stopped_backup'] and evidence['existing_world_loaded'] and evidence['saved_world_migration']
+    assert evidence['bds'] is True and evidence['client'] is False and evidence['players'] == 0
+    assert evidence['test_only_overlays'] == [] and evidence['simulated_players'] is False and evidence['exact_files_checked'] is True
+    assert evidence['packs'] == len(receipt['packs']) and evidence['versions'] == versions(receipt)
+    assert [run['phase'] for run in evidence['runs']] == ['first', 'restart'], 'Native first/start and restart are distinct required scenes'
+    for run in evidence['runs']:
+        assert run['ok'] and run['started'] and run['family_initialized'] and run['exit_code'] == 0 and not run['errors']
+        assert run['real_player_connections'] == 0
+        assert run['player_records_unchanged'] and run['custom_container_inventories_retained'] and run['native_freezer_inputs_retained']
+        assert run['log_sha256'] == sha(R / 'saved-world-engine' / (run['phase'] + '.log')), 'Native log changed'
+    assert evidence['player_records_before'] == evidence['player_records_after']
+    if CONFIG.get('identity_migration') and read(Path(CONFIG['identity_migration'])).get('block_states'):
+        states=read(R/'saved-world-author-states.json')
+        assert states['ok'] and states['identity_spec']==report_ref(Path(CONFIG['identity_migration']))
+        assert states['client'] is False and states['simulated_players'] is False and states['test_world_only'] is True
+        assert [row['phase'] for row in states['runs']]==['first','restart'] and all(row['ok'] and row['complete_existing_position_states_retained'] and row['console_probe_passed'] for row in states['runs'])
+    from family_update.stable_author_validation import bind_native as bind_stable_author
+    bind_stable_author(receipt,evidence)
+    from family_update.cookery_cache_validation import bind_native
+    bind_native(receipt,evidence)
+    from family_update.explicit_hud_validation import bind_native as bind_explicit_hud
+    bind_explicit_hud(receipt,evidence)
+    from family_update.freezer_performance_validation import bind_native as bind_freezer_performance
+    bind_freezer_performance(receipt,evidence)
+    from family_update.preserved_hud_inputs import bind_native as bind_hud_native
+    bind_hud_native(receipt,evidence)
+    from family_update.preserved_ribbits_inputs import bind_native as bind_ribbits_native
+    bind_ribbits_native(receipt,evidence)
+    from family_update.preserved_saturation_inputs import bind_native as bind_saturation_native
+    bind_saturation_native(receipt,evidence)
+    return evidence
+
+
+def gh_json(endpoint):
+    # Credentials remain in gh's normal authenticated environment. No token or
+    # private BSM adapter content is printed or copied into a public repository.
+    from family_update.github_reads import api_json
+    return api_json(endpoint)
+
+
+def required_ci_checks(key):
+    profiles = {
+        'tavern': {'impact', 'baseline'},
+        'grilling': {'baseline', 'bridge', 'canonical', 'candidate'},
+        'world-liquor': {'baseline', 'bridge', 'package', 'wall-record'},
+    }
+    required = set(profiles[key])
+    if key == 'tavern':
+        candidate = read(C / 'family-receipt.json')
+        original = {pack['uuid']: pack for pack in read(R / 'production-before/inventory.json')['packs']}
+        repository = read(SOURCES[key] / 'baseline.json')['repository']
+        changed = any(pack['source'].get('repository') == repository and (pack['uuid'] not in original or any(pack[field] != original[pack['uuid']][field] for field in ['files', 'version'])) for pack in candidate['packs'])
+        if changed:
+            required.update(['bridge', 'package', 'catalog', 'audit', 'efficiency', 'foundation', 'glassware-hit-basis', 'mechanics', 'native-persistence', 'scripts', 'tap-carriers'])
+    return required
+
+
+def runtime_ci_conservation(key, source, merge):
+    """Reuse gameplay only across classified family/prose inputs, never exports."""
+    assert key in {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
+    root = SOURCES[key]
+    assert git(root, 'merge-base', merge, source['commit']) == merge, 'Runtime CI PR is not an ancestor'
+    protected = ['baseline.json', 'tools/ci_impact.py'] if key == 'tavern' else ['baseline.json', 'tools', '.github/workflows']
+    for path in protected:
+        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), f'Runtime CI protected input changed: {path}'
+    baseline = json.loads(git(root, 'show', source['commit']+':baseline.json'))
+    for path in baseline['runtime'].values():
+        assert git(root, 'rev-parse', merge+':'+path) == git(root, 'rev-parse', source['commit']+':'+path), 'Runtime exports changed after successful CI'
+    paths = git(root, 'diff', '--no-renames', '--name-only', merge, source['commit'], '--').splitlines()
+    if key == 'tavern':
+        assert all(classify_path(path) in ['family', 'docs'] for path in paths), 'Runtime CI inputs changed after successful CI'
+        return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_impact_classifier': True}
+    allowed = {'README.md', 'README.zh-TW.md', 'docs/PARITY-MATRIX.md', 'docs/BUGS.md'}
+    assert set(paths) <= allowed, 'Only current status prose may reuse Grilling or World Liquor runtime CI'
+    return {'runtime_merge': merge, 'current_commit': source['commit'], 'changed_paths': paths, 'unchanged_runtime': True, 'unchanged_baseline': True, 'unchanged_tools': True, 'unchanged_workflows': True}
+
+
+def runtime_ci_current_checks(key):
+    """The current documentation PR must pass its own existing required jobs."""
+    return {
+        'tavern': {'impact', 'baseline'},
+        'grilling': {'baseline', 'bridge'},
+        'world-liquor': {'baseline', 'bridge', 'package', 'wall-record'},
+    }[key]
+
+
+def actual_ci_records(repository, head):
+    response = gh_json(f'repos/{repository}/commits/{head}/check-runs?per_page=100')
+    assert response['total_count'] <= 100, 'More than 100 check runs require explicit pagination review'
+    latest = {}
+    for check in response['check_runs']:
+        identity = (check['name'], check['app']['id'])
+        if identity not in latest or latest[identity]['id'] < check['id']:
+            latest[identity] = check
+    checks = list(latest.values())
+    assert checks and any(check['conclusion'] == 'success' for check in checks), 'No successful CI checks found'
+    assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), 'CI checks are incomplete or failed'
+    statuses = gh_json(f'repos/{repository}/commits/{head}/status')
+    assert not statuses['statuses'] or statuses['state'] == 'success', 'Commit status failed'
+    return ([{**{field: c.get(field) for field in ['id', 'name', 'status', 'conclusion', 'html_url', 'completed_at', 'head_sha']}, 'app_slug': c['app']['slug']} for c in checks],
+            [{field: status.get(field) for field in ['context', 'state', 'target_url']} for status in statuses['statuses']])
+
+
+def runtime_ci_result(key, number, source):
+    assert key in {'tavern', 'grilling', 'world-liquor'} and type(number) is int and number > 0
+    repository = source['repository']
+    pr = gh_json(f'repos/{repository}/pulls/{number}')
+    assert pr['merged'] is True and pr['base']['repo']['full_name'] == repository and pr['base']['ref'] == 'main', 'Runtime CI PR must be merged on canonical main'
+    assert pr['head']['repo']['full_name'] == repository, 'Unexpected runtime CI repository'
+    merge = pr['merge_commit_sha']
+    conservation = runtime_ci_conservation(key, source, merge)
+    tree = git(SOURCES[key], 'rev-parse', merge+'^{tree}')
+    revision, kind = ci_revision({'commit':merge, 'tree':tree}, {**pr, '_source':key})
+    checks, statuses = actual_ci_records(repository, revision)
+    successful = {c['name'] for c in checks if c['conclusion'] == 'success' and c['app_slug'] == 'github-actions'}
+    assert not (required_ci_checks(key) - successful), 'Reused runtime CI omits successful required checks'
+    return {'source':key, 'repository':repository, 'number':number, 'url':pr['html_url'], 'head':revision, 'ci_revision_kind':kind, 'merge_commit':merge, 'source_tree':tree, 'checks':checks, 'statuses':statuses, 'conservation':conservation, 'scope':'Unchanged own runtime only; current full source metadata CI is separate'}
+
+
+def validate_ci_rows(rows, sources, runtime_ci_references=None):
+    if runtime_ci_references is None:
+        runtime_ci_references = CONFIG.get('runtime_ci_pull_requests', {})
+    assert set(runtime_ci_references) <= {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
+    assert len(rows) == len(SOURCES) and {row['source'] for row in rows} == set(SOURCES), 'CI evidence omits or duplicates a source'
+    for row in rows:
+        key = row['source']
+        assert row['repository'] == sources[key]['repository'] and row['source_tree'] == sources[key]['tree']
+        checks = row['checks']
+        assert all(check['status'] == 'completed' and check['conclusion'] in ['success', 'skipped', 'neutral'] for check in checks), f'{key} checks failed or are incomplete'
+        successful = {check['name'] for check in checks if check['conclusion'] == 'success' and check['app_slug'] == 'github-actions'}
+        reused = row.get('runtime_ci')
+        if reused is not None:
+            assert key in {'tavern', 'grilling', 'world-liquor'} and type(reused['number']) is int and reused['number'] > 0 and reused['number'] == runtime_ci_references.get(key), 'Unconfigured runtime CI proof'
+            assert reused['source'] == key and reused['repository'] == sources[key]['repository'], 'Wrong runtime CI source'
+            assert reused['conservation'] == runtime_ci_conservation(key, sources[key], reused['merge_commit']), 'Runtime conservation evidence changed'
+            assert git(SOURCES[key], 'rev-parse', reused['merge_commit']+'^{tree}') == reused['source_tree'] == git(SOURCES[key], 'rev-parse', reused['head']+'^{tree}'), 'Reused CI tree differs from the runtime merge'
+            assert runtime_ci_current_checks(key) <= successful, 'Current metadata checks must succeed independently'
+            prior = reused['checks']
+            if key != 'tavern':
+                assert git(SOURCES[key], 'rev-parse', row['head']+'^{tree}') == sources[key]['tree'], 'Current documentation CI tree differs from the source'
+                assert all(c.get('head_sha') == row['head'] for c in checks), 'Current documentation CI head changed'
+                assert all(c.get('head_sha') == reused['head'] for c in prior), 'Reused runtime CI head changed'
+            assert all(c['status'] == 'completed' and c['conclusion'] in ['success', 'skipped', 'neutral'] for c in prior), 'Reused runtime checks failed or incomplete'
+            prior_success = {c['name'] for c in prior if c['conclusion'] == 'success' and c['app_slug'] == 'github-actions'}
+            assert not (required_ci_checks(key) - prior_success), 'Reused runtime checks missing required success'
+            assert all(status['state'] == 'success' for status in reused['statuses']), 'Reused runtime commit status failed'
+            successful |= prior_success
+        missing = required_ci_checks(key) - successful
+        assert not missing, f'{key} required checks did not succeed: {sorted(missing)}'
+        assert all(status['state'] == 'success' for status in row['statuses']), f'{key} commit status failed'
+
+
+def validate_admitted_ci_rows(rows, sources):
+    """Only for immutable CI already bound by an approved receipt's checked refs."""
+    references = {row['source']: row['runtime_ci']['number'] for row in rows if row.get('runtime_ci') is not None}
+    validate_ci_rows(rows, sources, runtime_ci_references=references)
+
+
+def ci_revision(source,pr):
+    """An advanced PR base requires checks on the exact resulting merge tree."""
+    head=pr['head']['sha']
+    if git(SOURCES[pr['_source']], 'rev-parse', head+'^{tree}')==source['tree']:
+        return head,'reviewed_head_tree'
+    merged=pr['merge_commit_sha']
+    assert merged==source['commit'], 'Advanced source needs its own current merged PR'
+    assert git(SOURCES[pr['_source']], 'rev-parse', merged+'^{tree}')==source['tree'], 'PR merged tree differs from canonical source'
+    return merged,'exact_postmerge_tree'
+
+
+def verify_ci():
+    """Record actual merged PR checks for the exact canonical source trees.
+
+    A merge commit may differ from its PR head commit, but the complete Git
+    tree must be identical. When the PR base advanced, require actual checks on
+    its exact resulting current merge commit; head checks cannot certify it.
+    """
+    build = read(R / 'build-evidence.json')
+    configured = CONFIG.get('pull_requests', {})
+    assert set(configured) == set(SOURCES), 'Configure one current merged PR for each canonical public source'
+    assert set(CONFIG.get('runtime_ci_pull_requests', {})) <= {'tavern', 'grilling', 'world-liquor'}, 'Unsupported runtime CI reuse source'
+    path = R / 'ci-evidence.json'
+    if path.exists():
+        proof = read(path)
+        assert proof['candidate_receipt_sha256'] == sha(C / 'family-receipt.json')
+        assert proof['sources'] == build['sources'] and proof['pull_requests'] == configured
+        assert proof.get('runtime_ci_pull_requests', {}) == CONFIG.get('runtime_ci_pull_requests', {}), 'Current runtime CI references changed'
+        assert proof['ok'] is True
+        validate_ci_rows(proof['results'], build['sources'])
+        # The source tree and runner/config are verified by the caller. The
+        # signed-in API response was recorded for these exact immutable heads.
+        return proof
+    rows = []
+    for key, number in configured.items():
+        assert type(number) is int and number > 0
+        source = build['sources'][key]
+        repository = source['repository']
+        pr = gh_json(f'repos/{repository}/pulls/{number}')
+        assert pr['merged'] is True, f'{key} PR #{number} has not merged'
+        assert pr['base']['repo']['full_name'] == repository and pr['base']['ref'] == 'main'
+        assert pr['head']['repo']['full_name'] == repository, 'Unexpected PR source repository'
+        reviewed_head=pr['head']['sha']
+        head,revision_kind=ci_revision(source,{**pr,'_source':key})
+        ancestor = subprocess.run(['git', '-C', str(SOURCES[key]), 'merge-base', '--is-ancestor', pr['merge_commit_sha'], source['commit']], capture_output=True)
+        assert ancestor.returncode == 0, f'{key} PR merge is not on canonical main'
+        checks, statuses = actual_ci_records(repository, head)
+        row = {'source':key, 'repository':repository, 'number':number, 'url':pr['html_url'], 'head':head, 'reviewed_pull_request_head':reviewed_head, 'ci_revision_kind':revision_kind, 'merge_commit':pr['merge_commit_sha'], 'source_tree':source['tree'], 'checks':checks, 'statuses':statuses}
+        runtime_number = CONFIG.get('runtime_ci_pull_requests', {}).get(key)
+        if runtime_number is not None:
+            row['runtime_ci'] = runtime_ci_result(key, runtime_number, source)
+        rows.append(row)
+    validate_ci_rows(rows, build['sources'])
+    proof = {'schema': 1, 'recorded_at': now(), 'ok': True, 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'sources': build['sources'], 'pull_requests': configured, 'runtime_ci_pull_requests': CONFIG.get('runtime_ci_pull_requests', {}), 'results': rows, 'reused_actual_github_checks': True, 'local_functional_suites_rerun': False}
+    atomic(path, proof)
+    return proof
+
+
+def record_static(verified_candidate=None):
+    if verified_candidate is None:
+        verify_candidate_sources()
+    candidate = read(C / 'family-receipt.json')
+    prior = {pack['uuid']: pack for pack in read(R / 'production-before/inventory.json')['packs']}
+    known = {row['repository'] for key, row in read(R / 'build-evidence.json')['sources'].items() if key in SOURCES}
+    from family_update.extension_validation import verify_extension
+    extension_reports=verify_extension(candidate,prior)
+    for pack in candidate['packs']:
+        if pack['source']['owner'] == 'owned' and pack['source']['repository'] not in known:
+            assert (pack['source']['repository']=='local/senluo-amw-cuisine' and extension_reports) or (pack['uuid'] in prior and all(pack[key] == prior[pack['uuid']][key] for key in ['files', 'version'])), 'A changed private extension needs its own reviewed functional evidence; public PR checks cannot certify it'
+    proof = verify_ci()
+    build = read(R / 'build-evidence.json')
+    target = R / 'static-evidence.json'
+    if target.exists():
+        existing = read(target)
+        assert existing['candidate_receipt_sha256'] == build['candidate_receipt_sha256'] and existing['sources'] == build['sources']
+        for check in existing['checks']:
+            assert check['exit_code'] == 0 and sha(check['log']) == check['sha256']
+        for report in existing['reports']:
+            assert sha(report['path']) == report['sha256']
+        return existing
+    # CI output itself is the evidence of executed functional checks. Never
+    # label API doubles as native/client tests or invent a local test log.
+    ci_path = R / 'ci-evidence.json'
+    evidence = {'schema': 1, 'recorded_at': now(), 'ok': proof['ok'], 'candidate_receipt_sha256': build['candidate_receipt_sha256'], 'pr_checks_verified': True, 'sources': build['sources'], 'checks': [{'name': 'Merged PR checks for exact canonical trees', 'kind': 'actual_github_ci', 'exit_code': 0, 'log': str(ci_path), 'sha256': sha(ci_path)}], 'reports': [report_ref(ci_path), report_ref(R / 'build-evidence.json'), report_ref(R / 'compatibility-report.json')], 'local_functional_suites_rerun': False, 'client': False}
+    evidence['reports'].extend(extension_reports)
+    retention = build.get('approved_runtime_retention')
+    if retention:
+        evidence['approved_runtime_retention'] = retention
+        evidence['reports'].extend([retention['control'], retention['approved_receipt'], retention['approved_build'], retention['approved_static'], retention['approved_ci']])
+    if CONFIG.get('prospective_preserved_inputs'):
+        selected=read(R/'prospective-preserved-inputs-check.json')
+        evidence['reports'].extend([report_ref(Path(CONFIG['prospective_preserved_inputs'])), report_ref(R/'prospective-preserved-inputs-check.json'), selected['recipe']])
+        from family_update.preserved_hud_inputs import is_profile
+        if is_profile(selected):evidence['reports'].extend([selected['source_validation'], selected['hud_differential']])
+        from family_update.preserved_ribbits_inputs import is_profile as is_ribbits
+        if is_ribbits(selected):evidence['reports'].extend([selected['source_validation'], selected['differential']])
+        from family_update.preserved_saturation_inputs import is_profile as is_saturation
+        if is_saturation(selected):evidence['reports'].extend([selected['source_validation'], selected['source_log'], selected['source_diagnosis'], selected['author_file_boundary']])
+    if CONFIG.get('preserved_additions'):
+        evidence['reports'].extend([report_ref(Path(CONFIG['preserved_additions'])),report_ref(R/'preserved-additions-check.json')])
+    if CONFIG.get('preserved_reconciliation'):
+        review=read(Path(CONFIG['preserved_reconciliation']))
+        evidence['reports'].extend([report_ref(Path(CONFIG['preserved_reconciliation'])),report_ref(R/'preserved-reconciliation-check.json'),review['tested_family_receipt'],review['native_report'],*review['native_logs']])
+    atomic(target, evidence)
+    return evidence
+
+
+def prepare(include_ci=True):
+    lease_available()
+    R.mkdir(parents=True, exist_ok=True)
+    if (R / 'production-before/capture.json').exists():
+        verify_predeploy()
+        print('REUSED verified live inventory', flush=True)
+    else:
+        run_stage('capture_predeploy')
+    if (R / 'build-evidence.json').exists():
+        receipt = verify_candidate_sources()
+        print('REUSED exact family candidate', flush=True)
+    else:
+        run_stage('build_candidate')
+        receipt = verify_candidate_sources()
+    inventory = verify_predeploy()
+    if same_runtime(receipt, inventory):
+        result = {'schema': 1, 'recorded_at': now(), 'state': 'no_runtime_changes', 'candidate_receipt_sha256': sha(C / 'family-receipt.json'), 'complete_files_versions_and_order_verified': True, 'live_mutated': False, 'native_rerun': False, 'saved_world_rerun': False, 'client': False, 'production_ready': False}
+        target = R / 'no-runtime-changes.json'
+        if not target.exists():
+            atomic(target, result)
+        print('NO_RUNTIME_CHANGES: full live bytes and order already match; no restart', flush=True)
+        return result
+    if include_ci:
+        record_static(verified_candidate=receipt)
+    # One fresh stopped-world rehearsal exercises the exact family, startup,
+    # normal save/restart and existing data together during deployment.
+    return {'state': 'ready_for_fresh_saved_world_and_deploy', 'client': False}
+
+
+def verify_deployed():
+    result = read(R / 'deployment-result.json')
+    assert result['state'] == 'deployed_running', 'Previous deployment needs recovery; do not automatically retry it'
+    verify_candidate_sources()
+    receipt = read(R / 'reviewed-family-receipt.json')
+    assert sha(R / 'reviewed-family-receipt.json') == result['receipt_sha256']
+    current = live_inventory()
+    assert same_runtime(receipt, current), 'Live has changed since this deployment'
+    check_live_against_policy(current)
+    policy = read(Q / 'senluo-policy.json')
+    assert policy['approved_receipt'] == str(R / 'reviewed-family-receipt.json'), 'Another deployment owns the current policy'
+    assert summary()['status'] == 'RUNNING'
+    return {'state': 'already_deployed', 'live_mutated': False, 'client': False}
+
+
+def deploy():
+    if (R / 'deployment-result.json').exists():
+        return verify_deployed()
+    # The locked deployment preflight owns the candidate/live scan and no-op
+    # decision. An extra scan here repeats that work before acquiring the lock.
+    result = run_stage('deploy_live')
+    if result is not None:
+        assert result == {'state': 'no_runtime_changes', 'live_mutated': False, 'client': False}, 'Unexpected deployment stage result'
+        return result
+    # deploy_live already verified installed files/order, guard, startup and
+    # live status under its lease. After it releases that lease, cleanup may
+    # take minutes and another reviewed source may advance. Report this
+    # completed transaction; do not re-audit it against a newer source tree.
+    # A separate resume call still enters verify_deployed above.
+    result = read(R / 'deployment-result.json')
+    verified = read(R / 'poststart-verification.json')
+    assert result['state'] == 'deployed_running', 'Deployment did not complete'
+    assert result['poststart_report'] == str(R / 'poststart-verification.json')
+    assert verified['receipt_sha256'] == result['receipt_sha256'], 'Deployment readback receipt differs'
+    assert verified['ok'] and verified['summary']['status'] == 'RUNNING' and not verified['errors'], 'Deployment readback failed'
+    return {'state': 'deployed_running', 'live_mutated': True,
+            'verified_at': verified['recorded_at'], 'poststart_report': result['poststart_report'],
+            'client': False, 'production_ready': False}
+
+
+def plan():
+    files = {
+        'capture': 'production-before/capture.json', 'assemble': 'build-evidence.json',
+        'static_ci': 'static-evidence.json',
+        'native_and_saved_world': 'saved-world-report.json', 'deploy': 'deployment-result.json',
+    }
+    return {'schema': 1, 'execute': False, 'output': str(R), 'server': SERVER, 'live': summary(), 'lease': read(LEASE) if LEASE.exists() else {}, 'stages': {key: {'report': str(R / relative), 'exists': (R / relative).exists()} for key, relative in files.items()}, 'reuse_rule': 'Revalidate source/config/tool/file/log hashes before reusing a completed stage; incomplete or mismatched outputs are preserved and rejected.', 'fresh_rule': 'Each new live deployment creates a stopped-world backup and rehearses that exact backup. Never reuse saved-world/client evidence from another deployment.', 'client': False}

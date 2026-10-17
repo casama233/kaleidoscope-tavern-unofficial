@@ -1,0 +1,38 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "kaleidoscope_tavern:base_sandwich_board"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "I",
+      "S"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:ink_sac"
+      },
+      "S": {
+        "tag": "minecraft:wooden_slabs"
+      }
+    },
+    "result": {
+      "item": "kaleidoscope_tavern:base_sandwich_board",
+      "count": 1
+    },
+    "unlock": [
+      {
+        "item": "minecraft:ink_sac"
+      },
+      {
+        "item": "minecraft:oak_slab"
+      },
+      {
+        "item": "kaleidoscope_tavern:base_sandwich_board"
+      }
+    ]
+  }
+}

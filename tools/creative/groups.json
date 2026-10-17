@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "retired_groups": [
+    "kaleidoscope_tavern:itemGroup.name.tavern_decor",
+    "kaleidoscope_tavern:itemGroup.name.tavern_storage",
+    "kaleidoscope_tavern:itemGroup.name.tavern_cabinets",
+    "kaleidoscope_tavern:itemGroup.name.tavern_racks",
+    "kaleidoscope_tavern:itemGroup.name.tavern_tables",
+    "kaleidoscope_tavern:itemGroup.name.tavern_sofas",
+    "kaleidoscope_tavern:itemGroup.name.tavern_stools",
+    "kaleidoscope_tavern:itemGroup.name.tavern_string_lights",
+    "kaleidoscope_tavern:itemGroup.name.tavern_pendant_lamps",
+    "kaleidoscope_tavern:itemGroup.name.tavern_boards",
+    "kaleidoscope_tavern:itemGroup.name.tavern_paintings",
+    "kaleidoscope_tavern:itemGroup.name.tavern_incense",
+    "kaleidoscope_tavern:itemGroup.name.tavern_utilities",
+    "kaleidoscope_tavern:itemGroup.name.tavern_music"
+  ],
+  "groups": {
+    "cabinets": {
+      "name": "kaleidoscope_tavern:itemGroup.name.storage",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bar_cabinet",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Storage",
+        "zh_CN": "森罗物语酒馆：收纳",
+        "zh_TW": "森羅物語酒館：收納"
+      }
+    },
+    "racks": {
+      "name": "kaleidoscope_tavern:itemGroup.name.storage",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bar_cabinet",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Storage",
+        "zh_CN": "森罗物语酒馆：收纳",
+        "zh_TW": "森羅物語酒館：收納"
+      }
+    },
+    "tables": {
+      "name": "kaleidoscope_tavern:itemGroup.name.furniture",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_bar_stool",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Furniture",
+        "zh_CN": "森罗物语酒馆：家具",
+        "zh_TW": "森羅物語酒館：家具"
+      }
+    },
+    "sofas": {
+      "name": "kaleidoscope_tavern:itemGroup.name.furniture",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_bar_stool",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Furniture",
+        "zh_CN": "森罗物语酒馆：家具",
+        "zh_TW": "森羅物語酒館：家具"
+      }
+    },
+    "stools": {
+      "name": "kaleidoscope_tavern:itemGroup.name.furniture",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_bar_stool",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Furniture",
+        "zh_CN": "森罗物语酒馆：家具",
+        "zh_TW": "森羅物語酒館：家具"
+      }
+    },
+    "string_lights": {
+      "name": "kaleidoscope_tavern:itemGroup.name.lighting",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bell_pendant_lamp",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Lighting",
+        "zh_CN": "森罗物语酒馆：灯饰",
+        "zh_TW": "森羅物語酒館：燈飾"
+      }
+    },
+    "pendant_lamps": {
+      "name": "kaleidoscope_tavern:itemGroup.name.lighting",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:bell_pendant_lamp",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Lighting",
+        "zh_CN": "森罗物语酒馆：灯饰",
+        "zh_TW": "森羅物語酒館：燈飾"
+      }
+    },
+    "boards": {
+      "name": "kaleidoscope_tavern:itemGroup.name.decoration",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:ysbb_painting",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Decorations",
+        "zh_CN": "森罗物语酒馆：装饰",
+        "zh_TW": "森羅物語酒館：裝飾"
+      }
+    },
+    "paintings": {
+      "name": "kaleidoscope_tavern:itemGroup.name.decoration",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:ysbb_painting",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Decorations",
+        "zh_CN": "森罗物语酒馆：装饰",
+        "zh_TW": "森羅物語酒館：裝飾"
+      }
+    },
+    "incense": {
+      "name": "kaleidoscope_tavern:itemGroup.name.decoration",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:ysbb_painting",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Decorations",
+        "zh_CN": "森罗物语酒馆：装饰",
+        "zh_TW": "森羅物語酒館：裝飾"
+      }
+    },
+    "utilities": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tools",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:stepladder",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Tools",
+        "zh_CN": "森罗物语酒馆：工具",
+        "zh_TW": "森羅物語酒館：工具"
+      }
+    },
+    "music": {
+      "name": "kaleidoscope_tavern:itemGroup.name.decoration",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:ysbb_painting",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Decorations",
+        "zh_CN": "森罗物语酒馆：装饰",
+        "zh_TW": "森羅物語酒館：裝飾"
+      }
+    },
+    "ingredients": {
+      "name": "kaleidoscope_tavern:itemGroup.name.ingredients",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:grape_bucket",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Ingredients & Mixers",
+        "zh_CN": "森罗物语酒馆：原料与调酒材料",
+        "zh_TW": "森羅物語酒館：原料與調酒材料"
+      }
+    }
+  },
+  "existing_groups": {
+    "cultivation": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_cultivation",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:grape",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Crops",
+        "zh_CN": "森罗物语酒馆：作物",
+        "zh_TW": "森羅物語酒館：作物"
+      }
+    },
+    "brewing": {
+      "name": "kaleidoscope_tavern:itemGroup.name.tavern_brewing",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:barrel",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Brewing & Mixing Equipment",
+        "zh_CN": "森罗物语酒馆：酿造与调酒设备",
+        "zh_TW": "森羅物語酒館：釀造與調酒設備"
+      }
+    },
+    "wines": {
+      "name": "kaleidoscope_tavern:itemGroup.name.wines",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:wine_q6",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Drinks",
+        "zh_CN": "森罗物语酒馆：酒饮",
+        "zh_TW": "森羅物語酒館：酒飲"
+      }
+    },
+    "cocktails": {
+      "name": "kaleidoscope_tavern:itemGroup.name.cocktails",
+      "category": "equipment",
+      "icon": "kaleidoscope_tavern:white_lady",
+      "labels": {
+        "en_US": "Kaleidoscope Tavern: Cocktails",
+        "zh_CN": "森罗物语酒馆：鸡尾酒",
+        "zh_TW": "森羅物語酒館：雞尾酒"
+      }
+    }
+  },
+  "order": [
+    "kaleidoscope_tavern:itemGroup.name.tavern_cultivation",
+    "kaleidoscope_tavern:itemGroup.name.ingredients",
+    "kaleidoscope_tavern:itemGroup.name.tavern_brewing",
+    "kaleidoscope_tavern:itemGroup.name.wines",
+    "kaleidoscope_tavern:itemGroup.name.cocktails",
+    "kaleidoscope_tavern:itemGroup.name.storage",
+    "kaleidoscope_tavern:itemGroup.name.furniture",
+    "kaleidoscope_tavern:itemGroup.name.lighting",
+    "kaleidoscope_tavern:itemGroup.name.decoration",
+    "kaleidoscope_tavern:itemGroup.name.tools",
+    "kaleidoscope_cookery:itemGroup.name.foods"
+  ]
+}

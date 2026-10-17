@@ -1,0 +1,80 @@
+{
+  "bsm": "3.10.6",
+  "bds": "1.26.52.3",
+  "candidate_receipt_sha256": "bca46f4885e9400ccf595b4d49499697828da3cdda120eac5c0f9116db3b4aa6",
+  "cycles": [
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": false
+    },
+    {
+      "ready": true,
+      "errors": [],
+      "persistence_marker_seen": true
+    }
+  ],
+  "client": false,
+  "saved_world_migration": false,
+  "production_ready": false,
+  "test_kind": "exact unmodified family loading; no native probes",
+  "experimental_creator_features": false,
+  "bds_loading_passed": true,
+  "upstream_archives_modified": false,
+  "packs": 16,
+  "native_probes": false,
+  "instance_stopped": true,
+  "owned": {
+    "tavern": {
+      "version": [
+        0,
+        6,
+        76
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "7e6a3d7c4c83c0b02ea09f70cfd965c397ce895f48e67e1f6ec72d36939f7e75",
+          "files": 769
+        },
+        "RP": {
+          "sha256": "bddbead33f2093742ad270bb90fa00f6521bdb8fb81196a99e177053575cbb64",
+          "files": 3127
+        }
+      }
+    },
+    "liquor": {
+      "version": [
+        0,
+        1,
+        41
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "c0254ddaf36f3b8247da12c73d3c979ae1dd09ac3ca3336cbfdc2bcade51147d",
+          "files": 304
+        },
+        "RP": {
+          "sha256": "cda25df36896964530f14bf32da6def672209df2c25147abf20b0b045c679d18",
+          "files": 493
+        }
+      }
+    },
+    "grilling": {
+      "version": [
+        2,
+        8,
+        19
+      ],
+      "source_trees": {
+        "BP": {
+          "sha256": "6679985c43f2ee9df20ebea9d34d3e4751de2268a3cdf0171afb5e31bfa484dd",
+          "files": 467
+        },
+        "RP": {
+          "sha256": "7b49fb25bd220b29295cf12cd395db0be9201b54343c1dea701b04ebf16ace1b",
+          "files": 1476
+        }
+      }
+    }
+  }
+}

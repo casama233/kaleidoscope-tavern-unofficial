@@ -1,0 +1,17 @@
+{
+  "repository": "KaleidoscopeMods/KaleidoscopeTavern",
+  "commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "release": "1.2.0 Forge 1.20.1",
+  "files": {
+    "java-closed.json": {
+      "path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense/sakura_incense.json",
+      "sha256": "e915b252c035f8b300265ddde21a72a21e9a13159e3fc70db2653ccd6a24a25a"
+    },
+    "java-open.json": {
+      "path": "src/main/resources/assets/kaleidoscope_tavern/models/block/deco/incense_open/sakura_incense.json",
+      "sha256": "c0ec24baef6a694f820981de48243d0e3ea738c8e24499ca4ab4e5f852fc52e5"
+    }
+  },
+  "material_reference": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/blockreference/examples/blockcomponents/minecraftblock_material_instances?view=minecraft-bedrock-stable",
+  "client": false
+}

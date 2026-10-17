@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "source": "https://github.com/Mojang/bedrock-samples/blob/main/resource_pack/entity/cod.entity.json",
+  "sourceBlobSha": "8b8413668638e2dfbf4154ac9ae194466b5ffb16",
+  "sourceExpression": "Math.cos((query.time_stamp + query.frame_alpha) * 14.32) * 90",
+  "tickFractionDocumentation": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/examples/molangconcepts/queryfunctions/query_frame_alpha?view=minecraft-bedrock-stable",
+  "levelClockDocumentation": "https://learn.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/examples/molangconcepts/queryfunctions/query_time_stamp?view=minecraft-bedrock-stable",
+  "inference": "The official cod animation adds the documented fraction between AI ticks to the level timestamp, supporting a tick-valued shared clock. Use its integer tick for discrete texture frames; helper lifetime is unrelated to a global animated sprite.",
+  "javaReference": "Mojang 1.20.1 SpriteContents.Ticker advances each texture at a global atlas tick, rather than restarting for every block or helper instance.",
+  "nativeClientVerified": false,
+  "remainingCheck": "Confirm frame cadence and phase against native terrain flipbooks and after long world uptime, resource reload, reconnect and helper replacement on the target Bedrock client."
+}

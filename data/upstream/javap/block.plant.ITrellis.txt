@@ -1,0 +1,543 @@
+Compiled from "ITrellis.java"
+public interface com.github.ysbbbbbb.kaleidoscopetavern.block.plant.ITrellis {
+  public static final net.minecraft.world.level.block.state.properties.EnumProperty<com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType> TYPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape SINGLE_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape NORTH_SOUTH_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape EAST_WEST_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_NORTH_SOUTH_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_EAST_WEST_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_UP_DOWN_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape SIX_DIRECTION_SHAPE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape SINGLE_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape NORTH_SOUTH_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape EAST_WEST_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_NORTH_SOUTH_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_EAST_WEST_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape CROSS_UP_DOWN_OUTLINE;
+
+  public static final net.minecraft.world.phys.shapes.VoxelShape SIX_DIRECTION_OUTLINE;
+
+  public static boolean axisHasTrellis(net.minecraft.world.level.LevelAccessor, net.minecraft.core.BlockPos, net.minecraft.core.Direction$Axis);
+    Code:
+       0: aload_2
+       1: getstatic     #1                  // Field net/minecraft/core/Direction$AxisDirection.POSITIVE:Lnet/minecraft/core/Direction$AxisDirection;
+       4: invokestatic  #7                  // Method net/minecraft/core/Direction.fromAxisAndDirection:(Lnet/minecraft/core/Direction$Axis;Lnet/minecraft/core/Direction$AxisDirection;)Lnet/minecraft/core/Direction;
+       7: astore_3
+       8: aload_0
+       9: aload_1
+      10: aload_3
+      11: invokevirtual #13                 // Method net/minecraft/core/BlockPos.relative:(Lnet/minecraft/core/Direction;)Lnet/minecraft/core/BlockPos;
+      14: invokeinterface #19,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      19: astore        4
+      21: aload         4
+      23: invokevirtual #25                 // Method net/minecraft/world/level/block/state/BlockState.getBlock:()Lnet/minecraft/world/level/block/Block;
+      26: astore        6
+      28: aload         6
+      30: instanceof    #31                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis
+      33: ifeq          53
+      36: aload         6
+      38: checkcast     #31                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis
+      41: astore        5
+      43: aload         5
+      45: aload         4
+      47: invokeinterface #33,  2           // InterfaceMethod sameType:(Lnet/minecraft/world/level/block/state/BlockState;)Z
+      52: ireturn
+      53: aload_2
+      54: getstatic     #37                 // Field net/minecraft/core/Direction$AxisDirection.NEGATIVE:Lnet/minecraft/core/Direction$AxisDirection;
+      57: invokestatic  #7                  // Method net/minecraft/core/Direction.fromAxisAndDirection:(Lnet/minecraft/core/Direction$Axis;Lnet/minecraft/core/Direction$AxisDirection;)Lnet/minecraft/core/Direction;
+      60: astore        5
+      62: aload_0
+      63: aload_1
+      64: aload         5
+      66: invokevirtual #13                 // Method net/minecraft/core/BlockPos.relative:(Lnet/minecraft/core/Direction;)Lnet/minecraft/core/BlockPos;
+      69: invokeinterface #19,  2           // InterfaceMethod net/minecraft/world/level/LevelAccessor.getBlockState:(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+      74: astore        6
+      76: aload         6
+      78: invokevirtual #25                 // Method net/minecraft/world/level/block/state/BlockState.getBlock:()Lnet/minecraft/world/level/block/Block;
+      81: astore        8
+      83: aload         8
+      85: instanceof    #31                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis
+      88: ifeq          108
+      91: aload         8
+      93: checkcast     #31                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis
+      96: astore        7
+      98: aload         7
+     100: aload         6
+     102: invokeinterface #33,  2           // InterfaceMethod sameType:(Lnet/minecraft/world/level/block/state/BlockState;)Z
+     107: ireturn
+     108: iconst_0
+     109: ireturn
+
+  public static com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType getTypeForPlacement(boolean, boolean, boolean, net.minecraft.core.Direction$Axis);
+    Code:
+       0: iload_0
+       1: ifeq          16
+       4: iload_1
+       5: ifeq          16
+       8: iload_2
+       9: ifeq          16
+      12: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      15: areturn
+      16: iload_0
+      17: ifeq          28
+      20: iload_1
+      21: ifeq          28
+      24: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      27: areturn
+      28: iload_1
+      29: ifeq          40
+      32: iload_2
+      33: ifeq          40
+      36: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      39: areturn
+      40: iload_0
+      41: ifeq          52
+      44: iload_2
+      45: ifeq          52
+      48: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      51: areturn
+      52: iload_0
+      53: ifeq          118
+      56: getstatic     #55                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$net$minecraft$core$Direction$Axis:[I
+      59: aload_3
+      60: invokevirtual #61                 // Method net/minecraft/core/Direction$Axis.ordinal:()I
+      63: iaload
+      64: tableswitch   { // 1 to 3
+                     1: 102
+                     2: 108
+                     3: 114
+               default: 92
+          }
+      92: new           #67                 // class java/lang/MatchException
+      95: dup
+      96: aconst_null
+      97: aconst_null
+      98: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     101: athrow
+     102: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     105: goto          117
+     108: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     111: goto          117
+     114: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     117: areturn
+     118: iload_1
+     119: ifeq          182
+     122: getstatic     #55                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$net$minecraft$core$Direction$Axis:[I
+     125: aload_3
+     126: invokevirtual #61                 // Method net/minecraft/core/Direction$Axis.ordinal:()I
+     129: iaload
+     130: tableswitch   { // 1 to 3
+                     1: 166
+                     2: 172
+                     3: 178
+               default: 156
+          }
+     156: new           #67                 // class java/lang/MatchException
+     159: dup
+     160: aconst_null
+     161: aconst_null
+     162: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     165: athrow
+     166: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     169: goto          181
+     172: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     175: goto          181
+     178: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     181: areturn
+     182: iload_2
+     183: ifeq          246
+     186: getstatic     #55                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$net$minecraft$core$Direction$Axis:[I
+     189: aload_3
+     190: invokevirtual #61                 // Method net/minecraft/core/Direction$Axis.ordinal:()I
+     193: iaload
+     194: tableswitch   { // 1 to 3
+                     1: 230
+                     2: 236
+                     3: 242
+               default: 220
+          }
+     220: new           #67                 // class java/lang/MatchException
+     223: dup
+     224: aconst_null
+     225: aconst_null
+     226: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     229: athrow
+     230: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     233: goto          245
+     236: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     239: goto          245
+     242: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     245: areturn
+     246: getstatic     #55                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$net$minecraft$core$Direction$Axis:[I
+     249: aload_3
+     250: invokevirtual #61                 // Method net/minecraft/core/Direction$Axis.ordinal:()I
+     253: iaload
+     254: tableswitch   { // 1 to 3
+                     1: 290
+                     2: 296
+                     3: 302
+               default: 280
+          }
+     280: new           #67                 // class java/lang/MatchException
+     283: dup
+     284: aconst_null
+     285: aconst_null
+     286: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     289: athrow
+     290: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     293: goto          305
+     296: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     299: goto          305
+     302: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     305: areturn
+
+  public static com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType updateType(com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType, boolean, boolean, boolean);
+    Code:
+       0: getstatic     #82                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$com$github$ysbbbbbb$kaleidoscopetavern$block$properties$TrellisType:[I
+       3: aload_0
+       4: invokevirtual #85                 // Method com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 7
+                     1: 62
+                     2: 102
+                     3: 142
+                     4: 182
+                     5: 222
+                     6: 262
+                     7: 302
+               default: 52
+          }
+      52: new           #67                 // class java/lang/MatchException
+      55: dup
+      56: aconst_null
+      57: aconst_null
+      58: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      61: athrow
+      62: iload_1
+      63: ifeq          76
+      66: iload_3
+      67: ifeq          76
+      70: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      73: goto          385
+      76: iload_1
+      77: ifeq          86
+      80: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      83: goto          385
+      86: iload_3
+      87: ifeq          96
+      90: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      93: goto          385
+      96: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+      99: goto          385
+     102: iload_1
+     103: ifeq          116
+     106: iload_2
+     107: ifeq          116
+     110: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     113: goto          385
+     116: iload_1
+     117: ifeq          126
+     120: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     123: goto          385
+     126: iload_2
+     127: ifeq          136
+     130: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     133: goto          385
+     136: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     139: goto          385
+     142: iload_2
+     143: ifeq          156
+     146: iload_3
+     147: ifeq          156
+     150: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     153: goto          385
+     156: iload_2
+     157: ifeq          166
+     160: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     163: goto          385
+     166: iload_3
+     167: ifeq          176
+     170: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     173: goto          385
+     176: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     179: goto          385
+     182: iload_1
+     183: ifeq          192
+     186: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     189: goto          385
+     192: iload_3
+     193: ifeq          206
+     196: iload_2
+     197: ifeq          206
+     200: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     203: goto          385
+     206: iload_3
+     207: ifeq          216
+     210: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     213: goto          385
+     216: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     219: goto          385
+     222: iload_3
+     223: ifeq          232
+     226: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     229: goto          385
+     232: iload_1
+     233: ifeq          246
+     236: iload_2
+     237: ifeq          246
+     240: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     243: goto          385
+     246: iload_1
+     247: ifeq          256
+     250: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     253: goto          385
+     256: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     259: goto          385
+     262: iload_2
+     263: ifeq          272
+     266: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     269: goto          385
+     272: iload_1
+     273: ifeq          286
+     276: iload_3
+     277: ifeq          286
+     280: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     283: goto          385
+     286: iload_1
+     287: ifeq          296
+     290: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     293: goto          385
+     296: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     299: goto          385
+     302: iload_1
+     303: ifeq          320
+     306: iload_2
+     307: ifeq          320
+     310: iload_3
+     311: ifeq          320
+     314: getstatic     #40                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SIX_DIRECTION:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     317: goto          385
+     320: iload_1
+     321: ifeq          334
+     324: iload_2
+     325: ifeq          334
+     328: getstatic     #46                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     331: goto          385
+     334: iload_2
+     335: ifeq          348
+     338: iload_3
+     339: ifeq          348
+     342: getstatic     #49                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     345: goto          385
+     348: iload_1
+     349: ifeq          362
+     352: iload_3
+     353: ifeq          362
+     356: getstatic     #52                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.CROSS_UP_DOWN:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     359: goto          385
+     362: iload_1
+     363: ifeq          372
+     366: getstatic     #73                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.EAST_WEST:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     369: goto          385
+     372: iload_3
+     373: ifeq          382
+     376: getstatic     #79                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.NORTH_SOUTH:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     379: goto          385
+     382: getstatic     #76                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.SINGLE:Lcom/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType;
+     385: areturn
+
+  public abstract boolean sameType(net.minecraft.world.level.block.state.BlockState);
+
+  public default net.minecraft.world.phys.shapes.VoxelShape collisionShape(com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType);
+    Code:
+       0: getstatic     #82                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$com$github$ysbbbbbb$kaleidoscopetavern$block$properties$TrellisType:[I
+       3: aload_1
+       4: invokevirtual #85                 // Method com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 7
+                     1: 62
+                     2: 68
+                     3: 74
+                     4: 80
+                     5: 86
+                     6: 92
+                     7: 98
+               default: 52
+          }
+      52: new           #67                 // class java/lang/MatchException
+      55: dup
+      56: aconst_null
+      57: aconst_null
+      58: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      61: athrow
+      62: getstatic     #86                 // Field SINGLE_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      65: goto          101
+      68: getstatic     #90                 // Field NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      71: goto          101
+      74: getstatic     #93                 // Field EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      77: goto          101
+      80: getstatic     #96                 // Field CROSS_NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      83: goto          101
+      86: getstatic     #99                 // Field CROSS_EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      89: goto          101
+      92: getstatic     #102                // Field CROSS_UP_DOWN_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      95: goto          101
+      98: getstatic     #105                // Field SIX_DIRECTION_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     101: areturn
+
+  public default net.minecraft.world.phys.shapes.VoxelShape selectShape(com.github.ysbbbbbb.kaleidoscopetavern.block.properties.TrellisType);
+    Code:
+       0: getstatic     #82                 // Field com/github/ysbbbbbb/kaleidoscopetavern/block/plant/ITrellis$1.$SwitchMap$com$github$ysbbbbbb$kaleidoscopetavern$block$properties$TrellisType:[I
+       3: aload_1
+       4: invokevirtual #85                 // Method com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType.ordinal:()I
+       7: iaload
+       8: tableswitch   { // 1 to 7
+                     1: 62
+                     2: 68
+                     3: 74
+                     4: 80
+                     5: 86
+                     6: 92
+                     7: 98
+               default: 52
+          }
+      52: new           #67                 // class java/lang/MatchException
+      55: dup
+      56: aconst_null
+      57: aconst_null
+      58: invokespecial #69                 // Method java/lang/MatchException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      61: athrow
+      62: getstatic     #108                // Field SINGLE_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      65: goto          101
+      68: getstatic     #111                // Field NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      71: goto          101
+      74: getstatic     #114                // Field EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      77: goto          101
+      80: getstatic     #117                // Field CROSS_NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      83: goto          101
+      86: getstatic     #120                // Field CROSS_EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      89: goto          101
+      92: getstatic     #123                // Field CROSS_UP_DOWN_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      95: goto          101
+      98: getstatic     #126                // Field SIX_DIRECTION_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     101: areturn
+
+  static {};
+    Code:
+       0: ldc           #129                // String type
+       2: ldc           #41                 // class com/github/ysbbbbbb/kaleidoscopetavern/block/properties/TrellisType
+       4: invokestatic  #131                // Method net/minecraft/world/level/block/state/properties/EnumProperty.create:(Ljava/lang/String;Ljava/lang/Class;)Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+       7: putstatic     #137                // Field TYPE:Lnet/minecraft/world/level/block/state/properties/EnumProperty;
+      10: ldc2_w        #141                // double 6.0d
+      13: dconst_0
+      14: ldc2_w        #141                // double 6.0d
+      17: ldc2_w        #143                // double 10.0d
+      20: ldc2_w        #145                // double 16.0d
+      23: ldc2_w        #143                // double 10.0d
+      26: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      29: putstatic     #86                 // Field SINGLE_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      32: ldc2_w        #141                // double 6.0d
+      35: ldc2_w        #141                // double 6.0d
+      38: dconst_0
+      39: ldc2_w        #143                // double 10.0d
+      42: ldc2_w        #143                // double 10.0d
+      45: ldc2_w        #145                // double 16.0d
+      48: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      51: putstatic     #90                 // Field NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      54: dconst_0
+      55: ldc2_w        #141                // double 6.0d
+      58: ldc2_w        #141                // double 6.0d
+      61: ldc2_w        #145                // double 16.0d
+      64: ldc2_w        #143                // double 10.0d
+      67: ldc2_w        #143                // double 10.0d
+      70: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      73: putstatic     #93                 // Field EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      76: getstatic     #86                 // Field SINGLE_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      79: getstatic     #90                 // Field NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      82: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      85: putstatic     #96                 // Field CROSS_NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      88: getstatic     #86                 // Field SINGLE_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      91: getstatic     #93                 // Field EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+      94: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+      97: putstatic     #99                 // Field CROSS_EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     100: getstatic     #90                 // Field NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     103: getstatic     #93                 // Field EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     106: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     109: putstatic     #102                // Field CROSS_UP_DOWN_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     112: getstatic     #86                 // Field SINGLE_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     115: iconst_2
+     116: anewarray     #159                // class net/minecraft/world/phys/shapes/VoxelShape
+     119: dup
+     120: iconst_0
+     121: getstatic     #90                 // Field NORTH_SOUTH_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     124: aastore
+     125: dup
+     126: iconst_1
+     127: getstatic     #93                 // Field EAST_WEST_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     130: aastore
+     131: invokestatic  #161                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;[Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     134: putstatic     #105                // Field SIX_DIRECTION_SHAPE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     137: ldc2_w        #164                // double 4.0d
+     140: dconst_0
+     141: ldc2_w        #164                // double 4.0d
+     144: ldc2_w        #166                // double 12.0d
+     147: ldc2_w        #145                // double 16.0d
+     150: ldc2_w        #166                // double 12.0d
+     153: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     156: putstatic     #108                // Field SINGLE_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     159: ldc2_w        #164                // double 4.0d
+     162: ldc2_w        #164                // double 4.0d
+     165: dconst_0
+     166: ldc2_w        #166                // double 12.0d
+     169: ldc2_w        #166                // double 12.0d
+     172: ldc2_w        #145                // double 16.0d
+     175: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     178: putstatic     #111                // Field NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     181: dconst_0
+     182: ldc2_w        #164                // double 4.0d
+     185: ldc2_w        #164                // double 4.0d
+     188: ldc2_w        #145                // double 16.0d
+     191: ldc2_w        #166                // double 12.0d
+     194: ldc2_w        #166                // double 12.0d
+     197: invokestatic  #147                // Method net/minecraft/world/level/block/Block.box:(DDDDDD)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     200: putstatic     #114                // Field EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     203: getstatic     #108                // Field SINGLE_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     206: getstatic     #111                // Field NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     209: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     212: putstatic     #117                // Field CROSS_NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     215: getstatic     #108                // Field SINGLE_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     218: getstatic     #114                // Field EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     221: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     224: putstatic     #120                // Field CROSS_EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     227: getstatic     #111                // Field NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     230: getstatic     #114                // Field EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     233: invokestatic  #153                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     236: putstatic     #123                // Field CROSS_UP_DOWN_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     239: getstatic     #108                // Field SINGLE_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     242: iconst_2
+     243: anewarray     #159                // class net/minecraft/world/phys/shapes/VoxelShape
+     246: dup
+     247: iconst_0
+     248: getstatic     #111                // Field NORTH_SOUTH_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     251: aastore
+     252: dup
+     253: iconst_1
+     254: getstatic     #114                // Field EAST_WEST_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     257: aastore
+     258: invokestatic  #161                // Method net/minecraft/world/phys/shapes/Shapes.or:(Lnet/minecraft/world/phys/shapes/VoxelShape;[Lnet/minecraft/world/phys/shapes/VoxelShape;)Lnet/minecraft/world/phys/shapes/VoxelShape;
+     261: putstatic     #126                // Field SIX_DIRECTION_OUTLINE:Lnet/minecraft/world/phys/shapes/VoxelShape;
+     264: return
+}

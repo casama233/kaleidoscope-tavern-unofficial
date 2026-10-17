@@ -1,0 +1,32 @@
+{
+  "phase": "C3",
+  "is_production": false,
+  "source_art_modified": false,
+  "new_features": {
+    "shaker_station": "IMPLEMENTED_ADAPTED_GESTURE",
+    "fixed_shaker_recipes": 12,
+    "signature_snapshot": "IMPLEMENTED",
+    "mystery_result": "IMPLEMENTED",
+    "native_signature_effects": "IMPLEMENTED",
+    "fixed_cocktail_custom_effects": "NOT_IMPLEMENTED",
+    "cup_placement_retrieval": "IMPLEMENTED",
+    "signature_world_RGB_helper": "IMPLEMENTED_NOT_ENGINE_ACCEPTED",
+    "hand_held_charge_and_portable_filled_shaker": "NOT_IMPLEMENTED",
+    "native_potion_inputs": "REJECTED_NO_DATA_LOSS",
+    "independent_guide_and_recipe_book": "PRESERVED_EXTENDED",
+    "shaker_extension_api": "IMPLEMENTED_ADDITIVE_V1",
+    "real_Cookery_dependency": "PRESERVED_EXACT_MANIFEST"
+  },
+  "local_test_cases": {
+    "pure_logic": 99,
+    "event_adapter": 141,
+    "total": 240,
+    "engine_tests": 0
+  },
+  "limits": [
+    "Native food consumption and empty-cup return are configured, not engine-tested.",
+    "All twelve fixed cocktails and Mystery use original custom effects which are not executed in C3.",
+    "Two-click placed shaking is an explicit control adaptation, not original held animation.",
+    "No claims of Realms, BDS, mobile, achievement compatibility or production readiness."
+  ]
+}

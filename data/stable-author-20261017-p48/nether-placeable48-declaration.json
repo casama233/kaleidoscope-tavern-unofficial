@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "kind": "nether-placeable-drinks-schema-repair",
+  "id": "senluo:nether-placeable-drinks-schema-repair",
+  "version": [
+    1,
+    0,
+    1
+  ],
+  "host_uuid": "36cbd4fe-5677-495e-9caf-c267a83d116d",
+  "behavior_uuid": "36cbd4fe-5677-495e-9caf-c267a83d116d",
+  "resource_uuid": "2b53ecef-9319-4ee5-9808-1b9fb0f260dc",
+  "owner_version": [
+    1,
+    0,
+    48
+  ],
+  "local_pack_version": [
+    1,
+    0,
+    10248
+  ],
+  "archive_sha256": "85533af5fe733b1943e8058bb665a6b2bca4f3259c458496e624272e4e7d3733",
+  "official_author_release": false,
+  "expires": "2026-11-04",
+  "authorization": "Owner 2026-10-17 requires repair of the actual stable-family saved-world startup failure and a fresh paired local release before canonical deployment.",
+  "feedback": "docs/NETHER-PLACEABLE-GUARD-20261017.md; maintainer feedback prepared, not sent.",
+  "removal_condition": "Remove when a clean author Nether stable release removes the unregistered placeable-drink guard reference or provides a reviewed working implementation.",
+  "original_files": {
+    "BP/manifest.json": "3f765d50ffdbde863f0dec37bbfd854f8c142d7cbe9bf1ce8c89a04d4425fb1a",
+    "RP/manifest.json": "8e8928c93680ad893b22ff814cc72836a7c188e0ed944cba03d30378529e9910",
+    "BP/blocks/placeable/soul_brandy.json": "bd2f804a008f19cd1fb7a8d92d3617fdadb310040fd58f04e09a4bcf784c74f6",
+    "BP/blocks/placeable/warped_conny.json": "a25cabd26bc559ec5360b65187a818e2fc032f509d8e2875e26a0ca6d0cf9baa"
+  },
+  "patched_files": {
+    "BP/manifest.json": "b14c5553a421120008b405375c998bb3193cdb96e4d82447f73727b81d19c36f",
+    "RP/manifest.json": "9e694e27840525b022d2d893f6dd36209a631bd55c8f5c2f35a53e35f5351486",
+    "BP/blocks/placeable/soul_brandy.json": "69b9ed34eac99d7aa96fffd86b5f83680e68c24856cc31c11b8a7006823fef24",
+    "BP/blocks/placeable/warped_conny.json": "897ae82503e0428c8a5e23f7975ef0359e5b8f1dc1e2b33e31942c1e39dc2496"
+  },
+  "imports": {},
+  "insertions": [],
+  "copies": {},
+  "json_updates": [
+    {
+      "path": "BP/blocks/placeable/soul_brandy.json",
+      "mode": "reviewed_remove",
+      "pointer": [
+        "minecraft:block",
+        "components",
+        "kaleidoscope_tavern:placeable_drink_placement_guard"
+      ],
+      "value": {}
+    },
+    {
+      "path": "BP/blocks/placeable/warped_conny.json",
+      "mode": "reviewed_remove",
+      "pointer": [
+        "minecraft:block",
+        "components",
+        "kaleidoscope_tavern:placeable_drink_placement_guard"
+      ],
+      "value": {}
+    }
+  ]
+}

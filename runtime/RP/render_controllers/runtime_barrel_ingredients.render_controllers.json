@@ -1,0 +1,138 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.kt_runtime.barrel_ingredients": {
+      "geometry": "(q.property('kaleidoscope_tavern:kind') == 16 || q.property('kaleidoscope_tavern:kind') == 17 || q.property('kaleidoscope_tavern:kind') == 18 || q.property('kaleidoscope_tavern:kind') == 19 || q.property('kaleidoscope_tavern:kind') == 20) ? Geometry.cube : Geometry.card",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "q.property('kaleidoscope_tavern:kind') == 48 ? Array.ice_grape_ticks[math.mod(math.floor(q.time_stamp), 24)] : Array.kind[q.property('kaleidoscope_tavern:kind')-1]"
+      ],
+      "arrays": {
+        "textures": {
+          "Array.kind": [
+            "Texture.kind_1",
+            "Texture.kind_2",
+            "Texture.kind_3",
+            "Texture.kind_4",
+            "Texture.kind_5",
+            "Texture.kind_6",
+            "Texture.kind_7",
+            "Texture.kind_8",
+            "Texture.kind_9",
+            "Texture.kind_10",
+            "Texture.kind_11",
+            "Texture.kind_12",
+            "Texture.kind_13",
+            "Texture.kind_14",
+            "Texture.kind_15",
+            "Texture.kind_16",
+            "Texture.kind_17",
+            "Texture.kind_18",
+            "Texture.kind_19",
+            "Texture.kind_20",
+            "Texture.kind_21",
+            "Texture.kind_22",
+            "Texture.kind_23",
+            "Texture.kind_24",
+            "Texture.kind_25",
+            "Texture.kind_26",
+            "Texture.kind_27",
+            "Texture.kind_28",
+            "Texture.kind_29",
+            "Texture.kind_30",
+            "Texture.kind_31",
+            "Texture.kind_32",
+            "Texture.kind_33",
+            "Texture.kind_34",
+            "Texture.kind_35",
+            "Texture.kind_36",
+            "Texture.kind_37",
+            "Texture.kind_38",
+            "Texture.kind_39",
+            "Texture.kind_40",
+            "Texture.kind_41",
+            "Texture.kind_42",
+            "Texture.kind_43",
+            "Texture.kind_44",
+            "Texture.kind_45",
+            "Texture.kind_46",
+            "Texture.kind_47",
+            "Texture.kind_48",
+            "Texture.kind_49",
+            "Texture.kind_50",
+            "Texture.kind_51",
+            "Texture.kind_52",
+            "Texture.kind_53",
+            "Texture.kind_54",
+            "Texture.kind_55",
+            "Texture.kind_56",
+            "Texture.kind_57",
+            "Texture.kind_58",
+            "Texture.kind_59",
+            "Texture.kind_60",
+            "Texture.kind_61"
+          ],
+          "Array.ice_grape_ticks": [
+            "Texture.ice_tick_0",
+            "Texture.ice_tick_1",
+            "Texture.ice_tick_2",
+            "Texture.ice_tick_3",
+            "Texture.ice_tick_4",
+            "Texture.ice_tick_5",
+            "Texture.ice_tick_6",
+            "Texture.ice_tick_7",
+            "Texture.ice_tick_8",
+            "Texture.ice_tick_9",
+            "Texture.ice_tick_10",
+            "Texture.ice_tick_11",
+            "Texture.ice_tick_12",
+            "Texture.ice_tick_13",
+            "Texture.ice_tick_14",
+            "Texture.ice_tick_15",
+            "Texture.ice_tick_16",
+            "Texture.ice_tick_17",
+            "Texture.ice_tick_18",
+            "Texture.ice_tick_19",
+            "Texture.ice_tick_20",
+            "Texture.ice_tick_21",
+            "Texture.ice_tick_22",
+            "Texture.ice_tick_23"
+          ]
+        }
+      },
+      "part_visibility": [
+        {
+          "item_0": "q.property('kaleidoscope_tavern:count') > 0"
+        },
+        {
+          "item_1": "q.property('kaleidoscope_tavern:count') > 1"
+        },
+        {
+          "item_2": "q.property('kaleidoscope_tavern:count') > 2"
+        },
+        {
+          "item_3": "q.property('kaleidoscope_tavern:count') > 3"
+        },
+        {
+          "item_4": "q.property('kaleidoscope_tavern:count') > 4"
+        },
+        {
+          "item_5": "q.property('kaleidoscope_tavern:count') > 5"
+        },
+        {
+          "item_6": "q.property('kaleidoscope_tavern:count') > 6"
+        },
+        {
+          "item_7": "q.property('kaleidoscope_tavern:count') > 7"
+        },
+        {
+          "item_8": "q.property('kaleidoscope_tavern:count') > 8"
+        }
+      ]
+    }
+  }
+}

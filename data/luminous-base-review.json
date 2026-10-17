@@ -1,0 +1,42 @@
+{
+  "source_commit": "0449114546d8dd08660c082ed6e9250b04d4d4e0",
+  "reason": "Crop only shell strips y=.1..1.1 hidden by solid bases, keeping top-anchored UV scale and all textures. Cover opposite-facing overlap missed by the former same-facing-only audit.",
+  "files": {
+    "runtime/RP/models/entity/luminous_bride_1.geo.json": {
+      "before": "f9a374d87d14b746e02bdd6cc4c333d8cf2a68d4bc62d0318a9ec87d3b879be0",
+      "beforeGzipBase64": "H4sIAAAAAAACA+1a3Y7iIBS+9ymaXivpj1YzrzIxTauoZMZigOruGt99qVpH28Nuh2k7UwsXRjiH8wMfnHLgOLAse0XZNhLhHjNOaGK/WLaLPBc59jCjbkmCFyxaiZc1plss2G/J8SoplnU8/0qeJeYLRnbi0j1vlgSyxIkgK4JZJjYXgN5EGHGOBQ+jGXpPpQqa8jBmkj10z2qv/QX+JVKGwwNZio0U4QYAcYPJeiOK1D3hJH7HYUzTZMlvEjw1y02Or+ahq5W0+zYCl+IM7yto8lC9/Z9f/51ysh3TBPMHWce7nnYSbXE2bIxSYd/LtHdkT4tGFMwoV+9q8wdpizQumFE05cxGGVmTpMSXlZGHCtouI+EOQdZC47zIZXPyB4OKxpAe1wW1/1cLPIrA0GVlipyJjhJGRXRdF5X0jMZaatL9w8L7GEmanmFfJuWdXgGKakyzMinNH2jRVUGonErldObqIS2lttPgX/XTsA1IG0S3ieiEMoNoPURX3qK/AGcAzNCQjA2WG8Gy2w6Yq2K53N3GERc9c7n+IPzzfT7g3k1zutNwWG1JUKO/I6WajKLt8ZIeEp1JdjrjdGPB2EVB2bYZCvwpEGEybv2Y7CM48nuAJslbb2QOUNDFyGzW8tP53OZ3dRbG4JVc77e1YhWbr2vtNdyh2GQCcs0BeVLx8Hrm/Uo89qE1Np2YlE+9SUwl3LwaQe2rlMy+G9LtIdqpimcJfYNo/SRIzwH9mT3abNGdyGQaRJs9+odCWjOD2XtEg6dhD8KzPpgBcWM0A65m27+a8VRT49Q4/94n7zIbvZnprsfaFzPddVn3Xqa7HuulgVrZxkdKh0feN2SBOuNzU8FLGhBA+dQGXrJVfvUzRuaEYTXxbqBHD9kMqJ/rjPEkoB5AffPWS0tWmw9Og79KP4V7qS4AAA==",
+      "after": "6557407955161cc933db87557a62dee08eb43cd638a6e2176b893a0c7da3d2a9",
+      "croppedStrips": 4,
+      "oppositeOverlapsBefore": 2,
+      "eitherSidedOverlapsAfter": 0,
+      "removedLegacyWallBiases": 2
+    },
+    "runtime/RP/models/entity/luminous_bride_2.geo.json": {
+      "before": "c101c1938fdeff20d1510a9f84c0c44968d4ba09aaa55af9ebe5c99c93b09f1d",
+      "beforeGzipBase64": "H4sIAAAAAAACA+1c25KiMBB99yssniXFXZ1fmbIo1OikdiQWBN1dy3/foOIqNLuYQUageZgyt+50cjrd6SRzGAyH2opHm0D4OxrFjIfa21AziWUSQxulpRsW0kUUrMTbmvINFdEvWeNdlgyHh9NfWWdJ40XEtuLcPMuWBWxJQ8FWjEYp2YwA+SH8II6piP1gQj4TyYInsT+PZHXfOrG9tBf0p0gi6u/ZUnxIEqYHFH5Qtv4Q+dIdi9n8k/pznoTL+ErBKq9ypWOX1+Grlez3dQTOnzG6TRD3Lnn9Pbv8OmbF2pyHNL6jdbhpqYXBhqbDFnEutFua2pbteL4TuW4Ukzep2R21RTLPdSPflVM1HrE1Cwv10s8iOWbngTCLmbqsmsuc5WtpMftNQT4OxMc0Qe7/5QIP4olNkdyYGK4Kk4iL4KIWRT5At3VHiU2yu9O7vyPJkxPqi0VZo3egpGxM088tzB/YowsDv3QqS6czYw9xKeQdB/9KH0cNIBoB3SSgQx4hoJUAXXmB/gKaASxDI+IglJ8CZbMZLFeFcrG5RoNY9Ezk+k3w68u8p72b5mSrIHB5T7wa5dVL2aQlyhIv+T5UmWSjNUI/z7m03YqmUjeJ56pbZJvYkL0cu+hf1rthKkWbVSOm7TImk+9GtCtR2gyijap4ltBHRKu7XD0H9ANLNK7Qrdg2IaBxhX5NRCvulvoOaDhwakNIqzmoZRDTcjGsBaNZaSPcok0h7oRrVGIbVGILsknqGgyQc8gEOMlpPpRrlU2NUSMArAePPp4ayW2vxMqB3PaKrBrHba/EatarEVdMLxVYt77BeLVG5mfZLt1F44XGC40XGi80Xmi82ma8vE6FT3SMn2D8pIfxE725g9eGDqp0vEvQ88C+3rmjKh1vE/Qc0g8s07hKN4tovE/w6p4HrtKPYhpvFNS1J27lGxlcnfGRTLtExkcyvRAZH8lgaKu6Ne7WPxXAwBY+wn4A0wjplvuZfYG0Szxrak2L/ZsQbwKFCNJoQM0BrpITxS/GA2wyhSXziDed9uVosY/ul4NPlIk9NsZm97RajiwsGCo1KnXHlVrK6UEa9YRNVWX/0yH4rPUpQb+e+J8mmYJ31hDTrT2Gwj1V90CNV2AQ1d1zP/DKQEdQPYDaZrnnnDQ1GxwHfwDoakQDM1sAAA==",
+      "after": "875291d461cbfba1e7e6f918301df84f91c8c0cd0c3f7a5705eb328bd2ac6b76",
+      "croppedStrips": 8,
+      "oppositeOverlapsBefore": 4,
+      "eitherSidedOverlapsAfter": 0,
+      "removedLegacyWallBiases": 4
+    },
+    "runtime/RP/models/entity/luminous_bride_3.geo.json": {
+      "before": "5de3a7837988117c2b576a8c33bf0d41e188918568b9868ab52a92c32be24662",
+      "beforeGzipBase64": "H4sIAAAAAAACA+1dW3OqMBB+91c4PJsMhIvav9JxGK2xZU6FDhfbczr+9wPejkJyihQogc8HR0jIZpNvd5PNLn6OxmNtE4TbZezueBh5ga89jDWDMoPq2iQr3Xo+fwqXm/jhmQdbHoe/0xqPacl4/Hn4TuusefQUem/x8fHz7bTAW3M/9jYeD7Nmzw3QX7G7jCIeR+5yRl+TlESQRO4qTKu75oHs6fmYf8RJyN13bx2/pE0YjqDwhXvPL3G+dOdF3uqVu6sg8dfRpQUmr3Jpx5TXCTabtN+XETh+9Mn1BbVvLi+/F6df+3Oxtgp8Ht209Xn1pOYvtzwbtjAIYu26Te3N2wX5TuS6Uby8ulrctPaUrHLdyHflUC0IvWfPL9TLPozmiB0HwpiIaubuLfKVtMj7w4VkLBEZwxAS/5KKeAwPZIrNTaluF+9aXxIJg3h5kooiHUG3iWVX4SXZ3Yjdv5EMkgPoi0Xnhx4FJbIxzT52Yf6EPToRcKVTKZ3OM3kRlcK9/eh/1/tJC4B2AOgWAe0HIQBdCdBl9fM3wCyAsmhALCC5ESQb7UC5LJKLj2t8GcUDY7l+C9x9nt/54KY5eavAsLwnTo38EimZrKQyx+vg3a8yyboyTDe3tjTtkqYyq1rdIJvUFJnLqY3VZb3bJSnYWI2QNmVEZj8NaJs67QBaLwvnFPkAdPUF18DxfIeCzqAPBd35TRMADQXdSUBX3CoNHc9ip6kpQlq9Di2dGsyGS0sM5kqbYIU2hNgF1yjDplCGBZJtVhdgQWsWnVXREbV7cZlsZvQa55/deejRqBNXXY4r+3DVZbmqC1ddjqsZr1YWYkTKMGE/YLuU4bkp00Vs2C7YLtgu2C7YLtguxWyX0yffCYHzBM6TATpPSGtHri0dUREEEQzcp0/6dkhFEEYwcETfoaSViCMgCCQApB0o6W5CGqEEde2HVUyMgW5GZoxaLCMzZhAsIzMGbq3yxrhX7xGAUwt513dA2gGk1V5mDgXS5V+OQVTAtF4W0gRqGpgWneED09DTXcR0aS3dbd8WwAzfFnxb8G3BtwXflrq+LaP80SlRIhwA+6ahH562B+mWwgF6BGnEbDWupZWIrMXmCZiGmu4sphG1VZdrS5rFVLN7q4E0ph7hGWlM2BPfYZnKJtITG5n0yKT/UY6RST8AjpFJ3zuem9xWsTmbF/s3o85MtOPKNlc1+wski9Fvbq+oPtWnwgg1Zz4fzKp0iAc1FtakFp0zZszKizVLpYLN5ipINjEpEzMnEe20fineIN+QbzXkm1FTbNzk4m2pINrWnUYbNhsy3ReZTvl0RBJVf+ZQ6eBdi+IfG8ZNBP8NJHjXoHPhYQYgreqRHeLRe4dpvOIJoO7d2gOvxMGfRd+D6e/leLYEagR2QlMD1VDVHUX1SPTs+e7xTna1GO1HfwGHECnssocAAA==",
+      "after": "dda179a9b3615e69c220787d32d37e2bc961a41289d7aa0efc615b6728498fa7",
+      "croppedStrips": 12,
+      "oppositeOverlapsBefore": 6,
+      "eitherSidedOverlapsAfter": 0,
+      "removedLegacyWallBiases": 6
+    },
+    "runtime/RP/models/entity/luminous_bride_4.geo.json": {
+      "before": "69251ef9a8b73cdb29cf51f4e2281a36602d248c687065c00152af9ea27188cf",
+      "beforeGzipBase64": "H4sIAAAAAAACA+1d226jMBB9z1dEPMcWmEuT/koVoaRxWrQNVFzS3a3y7wu5bQJmFwgh2Jw8VAUb2wNnZuzjGfgejcfaOgg3i9jd8jDyAl97HmsGZQbVtUlWuvF8/hou1vHzGw82PA5/pTVe0pLx+Hv/N62z4tFr6H3Gh8tPp9MCb8X92Ft7PMyaPTVAf8TuIop4HLmLKf1I0i6CJHKXYVrdtfbdHq+P+c84Cbn75a3i97QJwxEUvnPv7T3Ol269yFt+cHcZJP4qOrfAyquc2zHL6wTrdTru8x04/PTJ5QG1rw7P/8+P/+1Oxdoy8Hl01db3xZWav9jw7LaFQRBrl21qn942yA8iN4zi4cXR/Kq112SZG0Z+KPtqQei9eX6hXvZjNNfZ4UYYE1HN3Ll5vpIWeb+5sBtL1I1hCDv/by/ie7jvptjcE9Xt4lnrv52EQbw4akWxH8GwiWU3kSXZXqnd3zsZJHvQF4tOF70ISsruafazC89POKJjB27poyx9nKfuRb0Uzu1G/zreTToAtANAdwhoPwgB6EaArmqfbwCzAMqiG2IByXdBstENlKsiuXi5xhdRPDCR2/fA/Zf5iw/uMSefDQQuH4nToryktJuspLHEq+DLb/KQdWmEvt/c0rQrusqsanOHbFJT5C6fbMwu210ulYKNtQhps6yT6aMBbVOnG0DrVeGcIh+Abj7hGjieaxjoDPow0L1fNAHQMNC9BHTDpdLQ8SwmTU0R0toltHRqMBuUlhjMjRbBEi0IsQpuUYdNoQ4LNNtsrsCC1iw6bWIjWmdxWdmT0Vt8/qzmpsddSVx5JW7M4corclMKV16JmzmvTiZipFRgwh7gu6SR+V6ui9jwXfBd8F3wXfBd8F2S+S5HJe6EgDwBeTJA8oR0tuXa0RYVQRDBwDl9otomFUEYwcARXcNISxFHQBBIAEg7MNL9hDRCCdpaD8uYGAPbjMwYuURGZswgREZmDGit6s5YqfcIgNRC3nUNSDuAtNzTTEBaVFUhTBPYaYBatIkPUMNS9xLUle20KuwWAb0Fegv0Fugt0Fugt/pGb9XYPSWKRQQQxG3dAms14rZuBHXvYgIIIrfUxHQdQ61YfC1B7BZADUPdNagRvdUWwVWazdQyyfXQdCaCfCasjFVaGVfNqCc2UuqRUv9QiZFSPwCJkVKvnMwPf5MZfBd8F3wXfBd8F3xXT3wXU4o/AX0C+mSI9El3W7B9+2IBwgoUZfaV26xCUAE+wqFWTAFCCgBpE0a6p5BGQEFL62EpE2Zgm5EvI5fIyJcZhMjIlwGtVX16qdR7BkBqISObqfWWAUwzAWlGzSf9SYDgKXWmIhI3owJaJrdK9hJvJAOoLhbMoc5sNphNxSFOvixEZFt0xpgxra7WLNUKNp3JoNnEpEwsXIlqp/UryQb9hn7Lsraq6bUZtVR02vDZ0GllfHY6sU791Ey9qXjqsGdiyTAXh16rrtepnI5Ip9p/MXZl0siindBGqoZCDZ40MuhMGGMOSMsaOIKXrSqHaXzBEKBWbu6BL74B1LUs9W2xBb1DNYGthq0GrGGtZYG1eqiGrQb/odwMBJZaEVCPRNeezh7OZEfz0W70BwimEm8+tAAA",
+      "after": "15e239ae88d508f87d2e17be52a8a6ed5409598c1b7705efcb999d391ef0ffe3",
+      "croppedStrips": 16,
+      "oppositeOverlapsBefore": 8,
+      "eitherSidedOverlapsAfter": 0,
+      "removedLegacyWallBiases": 8
+    }
+  }
+}

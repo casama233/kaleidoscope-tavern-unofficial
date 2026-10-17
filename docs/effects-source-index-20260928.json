@@ -1,0 +1,791 @@
+{
+  "java_commit": "c4ec1880bd44cf3139d3ba744ab30bb379cf1416",
+  "port_main_commit": "f793a98a0180e1948f98e69a8ca879a028884e38",
+  "port_dependency_commit": "1d0be5cf24ce3fb2da1e5b1797df017bb9cbd3cb",
+  "scope": "Explicit particle/sound call sites plus client renderer/particle classes. Counts are not distinct effects and do not certify native rendering. Vanilla inherited sounds/materials and addon-only sources require separate review.",
+  "call_sites": [
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/api/blockentity/ITapBehavior.java",
+      "line": 30,
+      "excerpt": "        if (level instanceof ServerLevel serverLevel) {\n            serverLevel.sendParticles(\n                    ParticleTypes.WAX_OFF,\n                    tapPos.getX() + 0.5,\n                    tapPos.getY() - 0.5,\n                    tapPos.getZ() + 0.5,\n                    10, 0.25, 0.25, 0.25, 0.1\n            );"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java",
+      "line": 153,
+      "excerpt": "\n            level.playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS);\n            return InteractionResult.SUCCESS;\n        }\n\n        return InteractionResult.PASS;\n    }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java",
+      "line": 172,
+      "excerpt": "\n            level.playSound(null, pos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS);\n            return InteractionResult.SUCCESS;\n        }\n\n        return InteractionResult.PASS;\n    }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/AbstractStorageBlock.java",
+      "line": 239,
+      "excerpt": "            drink.makeThrownPotion(level, shootPos.x(), shootPos.y(), shootPos.z(), brewLevel, null, movement);\n            level.playSound(null, pos, ModSounds.HOLDER_POP.get(), SoundSource.BLOCKS, 0.9F, 1.0F);\n            return;\n        }\n\n        if (stack.getItem() instanceof MolotovBlockItem) {\n            items.setStackInSlot(slot, ItemStack.EMPTY);\n            storage.refresh();"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BarCabinetBlock.java",
+      "line": 72,
+      "excerpt": "            float pitch = stack.isEmpty() ? level.random.nextFloat() * 0.2F + 0.8F : level.random.nextFloat() * 0.2F + 0.2F;\n            level.playSound(null, pos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS,\n                    level.random.nextFloat() * 0.2F + 0.8F, pitch);\n            return InteractionResult.SUCCESS;\n        }\n\n        return super.use(state, level, pos, player, hand, hitResult);\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/BottleBlock.java",
+      "line": 88,
+      "excerpt": "                level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);\n                level.playSound(null, pos, SoundType.STONE.getPlaceSound(), player.getSoundSource(), 1.0F, 1.0F);\n            }\n            return InteractionResult.SUCCESS;\n        }\n        return InteractionResult.PASS;\n    }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/DrinkBlock.java",
+      "line": 96,
+      "excerpt": "                // 播放放置的音效\n                level.playSound(null, pos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS);\n            }\n        }\n\n        int count = state.getValue(this.countProperty);\n        if (count > 1) {\n            // 如果数量大于 1，那么就减少数量"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/TapBlock.java",
+      "line": 95,
+      "excerpt": "\n                level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 0.8F);\n                return InteractionResult.SUCCESS;\n            }\n\n            this.tryOpen(state, level, pos, player);\n            return InteractionResult.SUCCESS;\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/TapBlock.java",
+      "line": 134,
+      "excerpt": "            level.setBlockAndUpdate(pos, state);\n            level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_OPEN, SoundSource.BLOCKS, 1.0F, 0.8F);\n            level.scheduleTick(pos, this, TAKE_DRINK_TICKS);\n            return;\n        }\n\n        this.emptyOpen(level, pos, state);\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/TapBlock.java",
+      "line": 148,
+      "excerpt": "        level.setBlockAndUpdate(pos, blockState.setValue(OPEN, true));\n        level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_OPEN, SoundSource.BLOCKS, 1.0F, 0.8F);\n\n        // 将 BE 设置为此状态\n        if (level.getBlockEntity(pos) instanceof TapBlockEntity tapEntity) {\n            tapEntity.setState(EMPTY_OPEN_STATE);\n        }\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/brew/TapBlock.java",
+      "line": 170,
+      "excerpt": "        // 关闭音效\n        level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 0.8F);\n        if (level.getBlockEntity(pos) instanceof TapBlockEntity tapEntity) {\n            tapEntity.setParticle(null);\n            tapEntity.setState(DEFAULT_STATE);\n        }\n\n        if (!TapBehaviorManager.contains(sourceState)) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/CircularRackBlock.java",
+      "line": 92,
+      "excerpt": "    @Override\n    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {\n        if (random.nextInt(8) != 0) {\n            return;\n        }\n        if (level.getBlockEntity(pos) instanceof CircularRackBlockEntity rack && rack.hasAnyItem()) {\n            // 让粒子在边线飘动\n            double x = pos.getX();"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/CircularRackBlock.java",
+      "line": 106,
+      "excerpt": "\n            level.addParticle(ParticleTypes.END_ROD, x, y, z, 0.01, 0.01, 0.01);\n        }\n    }\n\n    @Override\n    @Nullable\n    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/GlasswareHolderBlock.java",
+      "line": 89,
+      "excerpt": "            be.refresh();\n            level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_PLACE, SoundSource.BLOCKS);\n        }\n\n        return InteractionResult.sidedSuccess(level.isClientSide());\n    }\n\n    private InteractionResult putOn(Level level, BlockPos pos, Player player, GlasswareHolderBlockEntity be,"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/GlasswareHolderBlock.java",
+      "line": 110,
+      "excerpt": "            be.refresh();\n            level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_PLACE, SoundSource.BLOCKS);\n        }\n\n        return InteractionResult.sidedSuccess(level.isClientSide());\n    }\n\n    private int getSlotFromHit(BlockHitResult hitResult, BlockPos pos) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/IncenseBlock.java",
+      "line": 109,
+      "excerpt": "        SoundEvent event = state.getValue(OPEN) ? STONE_BUTTON_CLICK_ON : STONE_BUTTON_CLICK_OFF;\n        level.playSound(null, pos, event, SoundSource.BLOCKS);\n    }\n\n    @Override\n    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {\n        builder.add(FACING, OPEN, POWERED);\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/IncenseBlock.java",
+      "line": 136,
+      "excerpt": "                state = state.setValue(OPEN, powered);\n                this.playSound(state, level, pos);\n            }\n            level.setBlock(pos, state.setValue(POWERED, powered), Block.UPDATE_CLIENTS);\n        }\n    }\n\n    @Override"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/IncenseBlock.java",
+      "line": 148,
+      "excerpt": "    @Override\n    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {\n        boolean open = state.getValue(OPEN);\n\n        double x = pos.getX() + 0.5;\n        double y = pos.getY() + 0.5;\n        double z = pos.getZ() + 0.5;\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/IncenseBlock.java",
+      "line": 161,
+      "excerpt": "\n            level.addParticle(smallParticle.get(), x, y, z, dx, dy, dz);\n        }\n\n        if (!open) {\n            return;\n        }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/IncenseBlock.java",
+      "line": 174,
+      "excerpt": "\n            level.addParticle(largeParticle.get(), ox, oy, oz, 0, 0, 0);\n        }\n    }\n\n    @Override\n    public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {\n        return new IncenseBlockEntity(pPos, pState);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/SandwichBoardBlock.java",
+      "line": 104,
+      "excerpt": "\n                level.playSound(null, pos, SoundType.GRASS.getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);\n                if (!player.isCreative()) {\n                    player.getItemInHand(hand).shrink(1);\n                }\n\n                return InteractionResult.SUCCESS;\n            } else {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/deco/StringLightsBlock.java",
+      "line": 84,
+      "excerpt": "            level.setBlockAndUpdate(pos, transform);\n            level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS);\n            level.levelEvent(player, LevelEvent.PARTICLES_PLANT_GROWTH, pos, 0);\n            if (!player.isCreative()) {\n                player.getItemInHand(hand).shrink(1);\n            }\n            return InteractionResult.SUCCESS;\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/GlasswareBlock.java",
+      "line": 60,
+      "excerpt": "            level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);\n            level.playSound(null, pos, SoundType.STONE.getPlaceSound(), player.getSoundSource(), 1.0F, 1.0F);\n        }\n        return InteractionResult.SUCCESS;\n    }\n\n    @Override\n    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/MysteryCocktailBlock.java",
+      "line": 11,
+      "excerpt": "    @Override\n    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {\n        double x = pos.getX() + 0.5;\n        double y = pos.getY() + 0.5;\n        double z = pos.getZ() + 0.5;\n\n        double xSpeed = random.nextDouble();\n        double ySpeed = random.nextDouble();"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/MysteryCocktailBlock.java",
+      "line": 20,
+      "excerpt": "\n        level.addParticle(ParticleTypes.EFFECT,\n                x + random.nextDouble() / 5 * (random.nextBoolean() ? 1 : -1),\n                y + random.nextDouble() / 5,\n                z + random.nextDouble() / 5 * (random.nextBoolean() ? 1 : -1),\n                xSpeed, ySpeed, zSpeed\n        );\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/mixology/ShakerBlock.java",
+      "line": 68,
+      "excerpt": "            level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_SUPPRESS_DROPS | Block.UPDATE_ALL);\n            level.playSound(null, pos, SoundEvents.LANTERN_BREAK, SoundSource.BLOCKS);\n            return InteractionResult.SUCCESS;\n        }\n\n        if (itemInHand.is(COCKTAIL_INGREDIENT)) {\n            shaker.addIngredient(itemInHand, player);\n            return InteractionResult.SUCCESS;"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/GrapeCropBlock.java",
+      "line": 91,
+      "excerpt": "            heldItem.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));\n            player.playSound(SoundEvents.BEEHIVE_SHEAR);\n            return InteractionResult.SUCCESS;\n        }\n        return super.use(state, level, pos, player, hand, hitResult);\n    }\n\n    @Override"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/GrapevineTrellisBlock.java",
+      "line": 106,
+      "excerpt": "        itemInHand.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));\n        player.playSound(SoundEvents.BEEHIVE_SHEAR);\n        return InteractionResult.SUCCESS;\n    }\n\n    @Override\n    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,\n                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/TrellisBlock.java",
+      "line": 67,
+      "excerpt": "            level.setBlockAndUpdate(pos, state.setValue(WAXED, false));\n            level.playSound(player, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);\n            level.levelEvent(player, LevelEvent.PARTICLES_WAX_OFF, pos, 0);\n            return InteractionResult.SUCCESS;\n        } else if (!waxed && player.getItemInHand(hand).is(Items.HONEYCOMB)) {\n            level.setBlockAndUpdate(pos, state.setValue(WAXED, true));\n            level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);\n            level.levelEvent(player, LevelEvent.PARTICLES_AND_SOUND_WAX_ON, pos, 0);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/TrellisBlock.java",
+      "line": 72,
+      "excerpt": "            level.setBlockAndUpdate(pos, state.setValue(WAXED, true));\n            level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);\n            level.levelEvent(player, LevelEvent.PARTICLES_AND_SOUND_WAX_ON, pos, 0);\n            return InteractionResult.SUCCESS;\n        }\n\n        // 玩家手持的是葡萄藤\n        ItemStack itemInHand = player.getItemInHand(hand);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/block/plant/WildGrapevineBlock.java",
+      "line": 63,
+      "excerpt": "                item.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));\n                player.playSound(SoundEvents.SHEEP_SHEAR);\n                return InteractionResult.SUCCESS;\n            }\n        }\n        return super.use(state, level, pos, player, hand, hitResult);\n    }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.java",
+      "line": 196,
+      "excerpt": "            BlockPos pos = this.getBlockPos().above(2);\n            this.level.playSound(null, pos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS);\n        }\n        return true;\n    }\n\n    @Override\n    public boolean closeLid(@Nullable LivingEntity user) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.java",
+      "line": 209,
+      "excerpt": "            BlockPos pos = this.getBlockPos().above(2);\n            this.level.playSound(null, pos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS);\n        }\n        return true;\n    }\n\n    @Override\n    public boolean addIngredient(@Nullable LivingEntity user, ItemStack stack) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.java",
+      "line": 236,
+      "excerpt": "            if (user != null) {\n                user.playSound(SoundEvents.ITEM_FRAME_ADD_ITEM);\n            }\n            stack.shrink(count - remaining.getCount());\n            this.refresh();\n            return true;\n        }\n        this.tip(user, \"add_ingredient_no_space\");"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/BarrelBlockEntity.java",
+      "line": 305,
+      "excerpt": "                ItemStack removed = this.ingredient.extractItem(i, stack.getCount(), false);\n                user.playSound(SoundEvents.ITEM_FRAME_REMOVE_ITEM);\n                ItemUtils.getItemToLivingEntity(user, removed);\n                this.refresh();\n                return true;\n            }\n        }\n        return false;"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 106,
+      "excerpt": "        if (this.level instanceof ServerLevel) {\n            this.level.playSound(null,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    SoundEvents.ITEM_FRAME_ADD_ITEM,\n                    SoundSource.BLOCKS,\n                    0.5F + this.level.random.nextFloat(),"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 126,
+      "excerpt": "        if (this.level instanceof ServerLevel) {\n            this.level.playSound(null,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    SoundEvents.ITEM_FRAME_REMOVE_ITEM,\n                    SoundSource.BLOCKS,\n                    0.5F + this.level.random.nextFloat(),"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 209,
+      "excerpt": "        if (this.level instanceof ServerLevel serverLevel) {\n            this.level.playSound(null,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    SoundEvents.SLIME_BLOCK_FALL,\n                    SoundSource.BLOCKS,\n                    0.5F + this.level.random.nextFloat(),"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 219,
+      "excerpt": "            if (stack == null) {\n                serverLevel.sendParticles(ParticleTypes.RAIN,\n                        worldPosition.getX() + 0.5,\n                        worldPosition.getY() + 0.5,\n                        worldPosition.getZ() + 0.5,\n                        10, 0.25, 0.2, 0.25, 0.05);\n            } else {\n                ItemParticleOption option = new ItemParticleOption(ParticleTypes.ITEM, stack);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 226,
+      "excerpt": "                ItemParticleOption option = new ItemParticleOption(ParticleTypes.ITEM, stack);\n                serverLevel.sendParticles(option,\n                        worldPosition.getX() + 0.5,\n                        worldPosition.getY() + 0.5,\n                        worldPosition.getZ() + 0.5,\n                        10, 0.25, 0.2, 0.25, 0.05);\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 240,
+      "excerpt": "        if (this.level instanceof ServerLevel serverLevel) {\n            this.level.playSound(null,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    SoundEvents.WOOD_FALL,\n                    SoundSource.BLOCKS,\n                    0.5F + this.level.random.nextFloat(),"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 252,
+      "excerpt": "                BlockParticleOption option = new BlockParticleOption(ParticleTypes.BLOCK, state);\n                serverLevel.sendParticles(option,\n                        worldPosition.getX() + 0.5,\n                        worldPosition.getY() + 0.5,\n                        worldPosition.getZ() + 0.5,\n                        10, 0.25, 0.2, 0.25, 0.05);\n            } else {\n                ItemParticleOption option = new ItemParticleOption(ParticleTypes.ITEM, stack);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 259,
+      "excerpt": "                ItemParticleOption option = new ItemParticleOption(ParticleTypes.ITEM, stack);\n                serverLevel.sendParticles(option,\n                        worldPosition.getX() + 0.5,\n                        worldPosition.getY() + 0.5,\n                        worldPosition.getZ() + 0.5,\n                        10, 0.25, 0.2, 0.25, 0.05);\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 273,
+      "excerpt": "        if (this.level instanceof ServerLevel serverLevel) {\n            this.level.playSound(null,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    SoundEvents.HONEY_BLOCK_HIT,\n                    SoundSource.BLOCKS,\n                    0.5F + this.level.random.nextFloat(),"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/PressingTubBlockEntity.java",
+      "line": 282,
+      "excerpt": "\n            serverLevel.sendParticles(ParticleTypes.RAIN,\n                    worldPosition.getX() + 0.5,\n                    worldPosition.getY() + 0.5,\n                    worldPosition.getZ() + 0.5,\n                    10, 0.25, 0.2, 0.25, 0.05);\n        }\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/TapBlockEntity.java",
+      "line": 77,
+      "excerpt": "            BlockPos pos = this.getBlockPos();\n            serverLevel.sendParticles(particle,\n                    pos.getX() + 0.5, pos.getY() + 0.25, pos.getZ() + 0.5,\n                    1, 0, 0, 0, 0);\n        }\n    }\n\n    private void onEmptyOpen(Level level) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/TapBlockEntity.java",
+      "line": 86,
+      "excerpt": "        if (level instanceof ServerLevel serverLevel && this.tickCounter % 2 == 0) {\n            serverLevel.sendParticles(ParticleTypes.CLOUD,\n                    pos.getX() + 0.5, pos.getY() + 0.25, pos.getZ() + 0.5,\n                    1, 0.1, 0.1, 0.1, 0.01);\n        }\n        // 空拧状态持续 EMPTY_OPEN_TICKS tick 就切回默认状态\n        if (this.tickCounter > EMPTY_OPEN_TICKS) {\n            this.state = DEFAULT_STATE;"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/brew/TapBlockEntity.java",
+      "line": 99,
+      "excerpt": "            level.setBlockAndUpdate(pos, blockState);\n            level.playSound(null, pos, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 0.8F);\n        }\n    }\n\n    public void setParticle(@Nullable ParticleOptions particle) {\n        this.particle = particle;\n        this.tickCounter = 0;"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 72,
+      "excerpt": "        if (textBlock.isWaxed()) {\n            level.playSound(null, pos, SoundEvents.WAXED_SIGN_INTERACT_FAIL, SoundSource.BLOCKS);\n            return InteractionResult.PASS;\n        }\n\n        ItemStack itemInHand = player.getItemInHand(hand);\n\n        // 染料"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 84,
+      "excerpt": "                textBlock.refresh();\n                level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS);\n                if (!player.isCreative()) {\n                    itemInHand.shrink(1);\n                }\n                return InteractionResult.SUCCESS;\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 97,
+      "excerpt": "                textBlock.refresh();\n                level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS);\n                if (!player.isCreative()) {\n                    itemInHand.shrink(1);\n                }\n                return InteractionResult.SUCCESS;\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 110,
+      "excerpt": "                textBlock.refresh();\n                level.playSound(null, pos, SoundEvents.INK_SAC_USE, SoundSource.BLOCKS);\n                if (!player.isCreative()) {\n                    itemInHand.shrink(1);\n                }\n                return InteractionResult.SUCCESS;\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 123,
+      "excerpt": "            if (level instanceof ServerLevel serverLevel) {\n                serverLevel.sendParticles(ParticleTypes.WAX_ON,\n                        pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,\n                        10, 0.5, 0.2, 0.5, 0.1\n                );\n                serverLevel.playSound(null, pos, SoundEvents.HONEYCOMB_WAX_ON,\n                        SoundSource.BLOCKS, 1.0F, 1.0F\n                );"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/deco/TextBlockEntity.java",
+      "line": 127,
+      "excerpt": "                );\n                serverLevel.playSound(null, pos, SoundEvents.HONEYCOMB_WAX_ON,\n                        SoundSource.BLOCKS, 1.0F, 1.0F\n                );\n            }\n            if (!player.isCreative()) {\n                itemInHand.shrink(1);\n            }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.java",
+      "line": 70,
+      "excerpt": "            }\n            level.playSound(null, worldPosition, SoundEvents.BOTTLE_EMPTY,\n                    SoundSource.BLOCKS, 0.75F, 1.0F\n            );\n        } else if (stack.getItem() instanceof PotionItem && user != null && level != null) {\n            // 药水倒入后返还玻璃瓶\n            ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);\n            if (user instanceof Player player) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.java",
+      "line": 82,
+      "excerpt": "            }\n            level.playSound(null, worldPosition, SoundEvents.BOTTLE_EMPTY,\n                    SoundSource.BLOCKS, 0.75F, 1.0F\n            );\n        } else if (level != null) {\n            level.playSound(null, worldPosition, SoundEvents.ITEM_FRAME_ADD_ITEM,\n                    SoundSource.BLOCKS, 0.75F, 1.0F\n            );"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.java",
+      "line": 86,
+      "excerpt": "        } else if (level != null) {\n            level.playSound(null, worldPosition, SoundEvents.ITEM_FRAME_ADD_ITEM,\n                    SoundSource.BLOCKS, 0.75F, 1.0F\n            );\n        }\n\n        stack.shrink(1);\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/blockentity/mixology/ShakerBlockEntity.java",
+      "line": 99,
+      "excerpt": "        if (this.level instanceof ServerLevel serverLevel) {\n            serverLevel.sendParticles(\n                    net.minecraft.core.particles.ParticleTypes.BUBBLE_POP,\n                    worldPosition.getX() + 0.5, worldPosition.getY() + 0.75, worldPosition.getZ() + 0.5,\n                    8, 0.2, 0.3, 0.2, 0\n            );\n        }\n"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/TapDripParticle.java",
+      "line": 43,
+      "excerpt": "        super.preMoveUpdate();\n        this.level.addParticle(this.fallingParticle, this.x, this.y, this.z, this.xd, this.yd, this.zd);\n    }\n\n    @Override\n    protected void postMoveUpdate() {\n        this.xd *= 0.02;\n        this.yd *= 0.02;"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/ShriekAttackEffect.java",
+      "line": 60,
+      "excerpt": "        // 播放音波音效\n        level.playSound(null, user.getX(), user.getY(), user.getZ(),\n                SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 1.0F, 1.0F);\n\n        // 搜索音波路径上的所有生物\n        AABB searchArea = user.getBoundingBox().inflate(MAX_DISTANCE);\n        List<LivingEntity> targets = level.getEntitiesOfClass(LivingEntity.class, searchArea,\n                e -> e != user && e.isAlive());"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/ShriekAttackEffect.java",
+      "line": 112,
+      "excerpt": "                particlePos = particlePos.add(lookVec.scale(2));\n                serverLevel.sendParticles(\n                        ParticleTypes.SONIC_BOOM,\n                        particlePos.x, particlePos.y, particlePos.z,\n                        1, 0, 0, 0, 0\n                );\n            }\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/VisionEffect.java",
+      "line": 43,
+      "excerpt": "        if (apply) {\n            living.playSound(ModSounds.EFFECT_VISION.get());\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/ZenithEffect.java",
+      "line": 58,
+      "excerpt": "        // 传送前播放音效\n        level.playSound(null, user.getX(), user.getY(), user.getZ(),\n                SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);\n\n        user.teleportTo(targetX, surfaceY, targetZ);\n        user.fallDistance = 0.0F;\n\n        // 传送后在目标位置播放音效"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/effect/ZenithEffect.java",
+      "line": 65,
+      "excerpt": "        // 传送后在目标位置播放音效\n        level.playSound(null, targetX, surfaceY, targetZ,\n                SoundEvents.CHORUS_FRUIT_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);\n\n        // 给予 30s 饥饿 buff\n        user.addEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0));\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java",
+      "line": 82,
+      "excerpt": "            // 播放音效和粒子\n            this.level().playSound(null, this.getX(), this.getY(), this.getZ(),\n                    SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2.0F, 1.0F);\n            this.level().playSound(null, this.getX(), this.getY(), this.getZ(),\n                    SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 2.0F, 1.0F);\n\n            if (this.level() instanceof ServerLevel serverLevel) {\n                serverLevel.sendParticles(ParticleTypes.FLAME,"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java",
+      "line": 84,
+      "excerpt": "                    SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 2.0F, 1.0F);\n            this.level().playSound(null, this.getX(), this.getY(), this.getZ(),\n                    SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 2.0F, 1.0F);\n\n            if (this.level() instanceof ServerLevel serverLevel) {\n                serverLevel.sendParticles(ParticleTypes.FLAME,\n                        this.getX(), this.getY() + 0.5, this.getZ(),\n                        30, radius, 1, radius, 0.1);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java",
+      "line": 88,
+      "excerpt": "            if (this.level() instanceof ServerLevel serverLevel) {\n                serverLevel.sendParticles(ParticleTypes.FLAME,\n                        this.getX(), this.getY() + 0.5, this.getZ(),\n                        30, radius, 1, radius, 0.1);\n                serverLevel.sendParticles(ParticleTypes.SMOKE,\n                        this.getX(), this.getY() + 0.5, this.getZ(),\n                        20, radius, 1, radius, 0.1);\n            }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/entity/ThrownMolotovEntity.java",
+      "line": 91,
+      "excerpt": "                        30, radius, 1, radius, 0.1);\n                serverLevel.sendParticles(ParticleTypes.SMOKE,\n                        this.getX(), this.getY() + 0.5, this.getZ(),\n                        20, radius, 1, radius, 0.1);\n            }\n\n            this.discard();\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/event/VanillaBottlePlaceEvent.java",
+      "line": 73,
+      "excerpt": "\n        level.playSound(null, placePos, SoundEvents.GLASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);\n        if (!player.getAbilities().instabuild) {\n            stack.shrink(1);\n        }\n    }\n\n    private static Placement getPlacement(ItemStack stack) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/grape/GoldGrapePlant.java",
+      "line": 34,
+      "excerpt": "            level.setBlockAndUpdate(pos, plantedState);\n            level.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS);\n            if (!player.isCreative()) {\n                itemInHand.shrink(1);\n            }\n            // 不再触发后续事件\n            event.setCanceled(true);\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/grape/IceGrapePlant.java",
+      "line": 34,
+      "excerpt": "            level.setBlockAndUpdate(pos, plantedState);\n            level.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS);\n            if (!player.isCreative()) {\n                itemInHand.shrink(1);\n            }\n            // 不再触发后续事件\n            event.setCanceled(true);\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/grape/NormalGrapePlant.java",
+      "line": 34,
+      "excerpt": "            level.setBlockAndUpdate(pos, plantedState);\n            level.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS);\n            if (!player.isCreative()) {\n                itemInHand.shrink(1);\n            }\n            // 不再触发后续事件\n            event.setCanceled(true);\n        }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/BarrelTapBehavior.java",
+      "line": 82,
+      "excerpt": "        // 播放酒瓶转化效果\n        level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n        ITapBehavior.sendParticles(level, tapPos);\n    }\n\n    private boolean isValidConnection(BlockState barrelState, Direction tapFacing) {\n        Direction barrelFacing = barrelState.getValue(BarrelBlock.FACING);\n        AttachFace layer = barrelState.getValue(BarrelBlock.LAYER);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/BarrelTapBehavior.java",
+      "line": 83,
+      "excerpt": "        level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n        ITapBehavior.sendParticles(level, tapPos);\n    }\n\n    private boolean isValidConnection(BlockState barrelState, Direction tapFacing) {\n        Direction barrelFacing = barrelState.getValue(BarrelBlock.FACING);\n        AttachFace layer = barrelState.getValue(BarrelBlock.LAYER);\n        int index = barrelState.getValue(BarrelBlock.INDEX);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/BeehiveTapBehavior.java",
+      "line": 57,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), ModBlocks.HONEY_BOTTLE.get().defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/BeehiveTapBehavior.java",
+      "line": 58,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/DragonHeadTapBehavior.java",
+      "line": 44,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), ModBlocks.DRAGON_BREATH_BOTTLE.get().defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/DragonHeadTapBehavior.java",
+      "line": 45,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/LavaCauldronTapBehavior.java",
+      "line": 51,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), Blocks.LAVA_CAULDRON.defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/LavaCauldronTapBehavior.java",
+      "line": 52,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.LAVA_POP, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {\n            level.setBlockAndUpdate(tapPos.below(), ModBlocks.MOLOTOV.get().defaultBlockState());"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/LavaCauldronTapBehavior.java",
+      "line": 59,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), ModBlocks.MOLOTOV.get().defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/LavaCauldronTapBehavior.java",
+      "line": 60,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterCauldronTapBehavior.java",
+      "line": 56,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), state);\n            level.playSound(null, tapPos.below(), SoundEvents.AXOLOTL_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterCauldronTapBehavior.java",
+      "line": 57,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.AXOLOTL_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {\n            level.setBlockAndUpdate(tapPos.below(), ModBlocks.WATER_BOTTLE.get().defaultBlockState());"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterCauldronTapBehavior.java",
+      "line": 64,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), ModBlocks.WATER_BOTTLE.get().defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterCauldronTapBehavior.java",
+      "line": 65,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterloggedBehavior.java",
+      "line": 65,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), state);\n            level.playSound(null, tapPos.below(), SoundEvents.AXOLOTL_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterloggedBehavior.java",
+      "line": 66,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.AXOLOTL_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n            return;\n        }\n\n        // 下方是空瓶\n        if (destinationState.is(ModBlocks.EMPTY_BOTTLE.get())) {\n            level.setBlockAndUpdate(tapPos.below(), ModBlocks.WATER_BOTTLE.get().defaultBlockState());"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterloggedBehavior.java",
+      "line": 73,
+      "excerpt": "            level.setBlockAndUpdate(tapPos.below(), ModBlocks.WATER_BOTTLE.get().defaultBlockState());\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WaterloggedBehavior.java",
+      "line": 74,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WatermelonTapBehavior.java",
+      "line": 51,
+      "excerpt": "            }\n            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/game/tap/impl/WatermelonTapBehavior.java",
+      "line": 52,
+      "excerpt": "            level.playSound(null, tapPos.below(), SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0F, 1.0F);\n            ITapBehavior.sendParticles(level, tapPos);\n        }\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/DrinkBlockItem.java",
+      "line": 87,
+      "excerpt": "            SoundEvent sound = this.getPlaceSound(state, level, pos, player);\n            level.playSound(\n                    player, pos, sound, SoundSource.BLOCKS,\n                    (soundType.getVolume() + 1) / 2f,\n                    soundType.getPitch() * 0.8f\n            );\n            if (!player.isCreative()) {\n                stack.shrink(1);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/MolotovBlockItem.java",
+      "line": 37,
+      "excerpt": "\n            level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),\n                    SoundEvents.SNOWBALL_THROW, SoundSource.PLAYERS, 0.5F,\n                    0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));\n\n            if (!(entity instanceof Player player) || !player.isCreative()) {\n                stack.shrink(1);\n            }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem.java",
+      "line": 146,
+      "excerpt": "        if (level instanceof ServerLevel serverLevel) {\n            serverLevel.sendParticles(\n                    ParticleTypes.EFFECT,\n                    pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,\n                    20, 0.1, 0.1, 0.1, 0.5\n            );\n            serverLevel.playSound(null, pos, SoundEvents.BOTTLE_FILL,\n                    SoundSource.BLOCKS, 1.0F, 1.0F);"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem.java",
+      "line": 151,
+      "excerpt": "            );\n            serverLevel.playSound(null, pos, SoundEvents.BOTTLE_FILL,\n                    SoundSource.BLOCKS, 1.0F, 1.0F);\n        }\n    }\n\n    @Override\n    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem.java",
+      "line": 205,
+      "excerpt": "        if (remainingUseDuration % 10 == 0) {\n            entity.playSound(ModSounds.SHAKER_SHAKING.get(),\n                    level.random.nextFloat() * 0.2F + 0.75F,\n                    level.random.nextFloat() * 0.2F + 0.8F\n            );\n        }\n        // 超出时长，强制中断\n        if (entity.getTicksUsingItem() > 110) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/item/ShakerItem.java",
+      "line": 241,
+      "excerpt": "        }\n        entity.playSound(ModSounds.SHAKER_END.get());\n    }\n\n    private void handRecipe(Level level, ItemStack stack) {\n        ItemStackHandler handler = getStorage(stack);\n        List<ItemStack> stacks = Lists.newArrayList();\n        for (int i = 0; i < handler.getSlots(); i++) {"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/network/message/ClearShakerC2SMessage.java",
+      "line": 33,
+      "excerpt": "                    ShakerItem.removeAll(stack);\n                    sender.level().playSound(null, sender.blockPosition(), SoundEvents.BOTTLE_FILL, SoundSource.PLAYERS);\n                }\n            });\n        }\n        context.setPacketHandled(true);\n    }\n}"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/util/FluidUtils.java",
+      "line": 44,
+      "excerpt": "                if (sound != null) {\n                    user.playSound(sound);\n                }\n                return true;\n            }\n            return false;\n        }).orElse(false);\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/util/FluidUtils.java",
+      "line": 85,
+      "excerpt": "                if (sound != null) {\n                    user.playSound(sound);\n                }\n                return true;\n            }\n            return false;\n        }).orElse(false);\n    }"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/util/ItemUtils.java",
+      "line": 26,
+      "excerpt": "            entity.setItemInHand(InteractionHand.MAIN_HAND, stack);\n            entity.playSound(SoundEvents.ITEM_PICKUP, 0.2F, ((random.nextFloat() - random.nextFloat()) * 0.7F + 1.0F) * 2.0F);\n        } else if (entity instanceof Player player) {\n            ItemHandlerHelper.giveItemToPlayer(player, stack, preferredSlot);\n        } else {\n            // 否则直接在实体所处位置生成物品\n            ItemEntity dropItem = entity.spawnAtLocation(stack);\n            if (dropItem != null) {"
+    }
+  ],
+  "client_classes": [
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/animation/ShakerAnimation.java",
+      "sha256": "2e8ab801255e7983aaa9a558f2f41b4169e3edeb0ca8da2137e3d6980baa7e3c"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/CameraAnglesEvent.java",
+      "sha256": "7740f4222a1b21ba1d7ef99b751214867669bc365e866eed26acedaca137e29d"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/event/PlayerRenderEvent.java",
+      "sha256": "cb5554c57a12cd1306c2798ced526c474204c9640746be3e40c4d05f69809466"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/gui/overlay/ShakerOverlay.java",
+      "sha256": "925f746d75057742f3bdb94d8b7e7b8106bb9611c4ab93724d34b8bff1064466"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/ButterflyIncenseLargeParticle.java",
+      "sha256": "81095fa49a8239152cef15b93454a9002caf999b631021864c11971ccdf812b6"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/FireflyIncenseLargeParticle.java",
+      "sha256": "1fb594d532cc39189d5e6619148eac35024e16d20dc91b2c608af1fe19f19387"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/IncenseParticle.java",
+      "sha256": "de0bcfecf81ddb8b422f57260bfb7336318631b1f3376b266c36e2c5fc407e54"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/IncenseSuspendedParticle.java",
+      "sha256": "aab5e22bf33dfe38e1fd9a3f7b2b219ef37a739e33f6bc8d5587111b517882a6"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/particle/TapDripParticle.java",
+      "sha256": "dd79cff7eef6ee7d798db30d0b1f6388a29e3be4ae51d8fd0556d1091f9b8c64"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/BarCabinetBlockEntityRender.java",
+      "sha256": "4d922d8b265f736f462f94f3015e75a2e8219e8993bb12ff865c024983642b9a"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/BarStoolBlockEntityRender.java",
+      "sha256": "2dd956f0b2f01579d1a9b06b19d2954b788a72fabd31ce936da45aaaecd29093"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/BarrelBlockEntityRender.java",
+      "sha256": "50dba2502fd8cc17c776765abfb475d8e877bf4606ed297b97026cde2b9f44e8"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/CellarCabinetBlockEntityRender.java",
+      "sha256": "f24b0ecb482461306d825221aea74baa6cf7545c5298e7704fe2176be4261c00"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/ChalkboardBlockEntityRender.java",
+      "sha256": "5d1f26800045209793fbfcdcf0172eb4f88ad2b7b483a870d7d6877142824661"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/CircularRackBlockEntityRender.java",
+      "sha256": "96c0746f757c30be813e2dd82a0a4eda6caf83f3edee550d34d59d44e936fcbd"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/GlasswareHolderBlockEntityRender.java",
+      "sha256": "1a43602d03186178de2b0022b7ba5aba9090ee605cc75ddb05e76ccd135f1fde"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/HolderBlockEntityRender.java",
+      "sha256": "d18eca7633075fd026cef558a6a3d5156526b67a5a2d451505649a88fb57c350"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/PressingTubBlockEntityRender.java",
+      "sha256": "f413b5a425cea8bab16e0f205eb5bd0c40f09120f422d6b9842777b806d62d7f"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/SandwichBlockEntityRender.java",
+      "sha256": "0dd99b6a031063e0024193dfec3a923cacf1abc9af9f071295c1ec2434a2df2f"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/ShakerBlockEntityRender.java",
+      "sha256": "73e35240cafe39bd3649d2e20e20a41da21d2b185804362de4655721b399e3e4"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/StorageBlockEntityRender.java",
+      "sha256": "03802d1a22ca7e900fc213c2588a03a8ef58a37b88093cc0daf65c58a726d7c5"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/TextBlockEntityRender.java",
+      "sha256": "7cd9a6d986493e213ff563b70138a9cfffb61eb3dfd404c71f55e112569c0678"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/TiltedRackBlockEntityRender.java",
+      "sha256": "cbddce298db0645728e7d8c16f57e8ff110a5cf5ed08a8faa5cb32ae365de032"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/block/package-info.java",
+      "sha256": "76dc019a1ddcd1277c3e91ac270bfa5153df46a1ab2ca54cd3b528243309861e"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/entity/SitRenderer.java",
+      "sha256": "794cc792881c60e3caab9a7cff7c3e8bfdb760c936602b33ba117364ac8ee630"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/entity/StringLightsLayer.java",
+      "sha256": "308a7bf973e30d07339099687f2c6c3642c26f381db4b2c5383181c8613f7b84"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/entity/ThrownMolotovRenderer.java",
+      "sha256": "1080298f7c7a437ba7e4314614b831400865b0e23584e1890e4120094eebe8ec"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/entity/package-info.java",
+      "sha256": "1114767ad7c79d020e90f7a6891b23260890da37a15ff74dbf13a7b3e4a6ed8b"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/misc/PotionBottleColor.java",
+      "sha256": "45a789e8342d93b522176d0100cf165c4bd2973cfb87c067c40e027ba8c108b6"
+    },
+    {
+      "path": "src/main/java/com/github/ysbbbbbb/kaleidoscopetavern/client/render/misc/SignatureCocktailColor.java",
+      "sha256": "56504ea7baa6f38f079124ffa4e78d04e6d342a450c0296b261690a9c11f640c"
+    }
+  ],
+  "custom_particle_definitions": [
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/butterfly_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:butterfly"
+        ]
+      },
+      "sha256": "6df69401174a158d243f7c725b760a409c8b3bde46fc2f5b5e437fb7a744442d"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/butterfly_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:butterfly_large/1",
+          "kaleidoscope_tavern:butterfly_large/2",
+          "kaleidoscope_tavern:butterfly_large/3"
+        ]
+      },
+      "sha256": "c464e0fe8ea0c42119b3fc67d1eb7cfd015331597dbe09fa46bdbadc10b92936"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/catnip_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:catnip"
+        ]
+      },
+      "sha256": "9469a306c00e729909101b1c70d038348b1fed7dd9dfb4ee4b9104654c69e0f4"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/catnip_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:catnip_large"
+        ]
+      },
+      "sha256": "b2ad08d2809028c0d8c8dce439c8d9e1f29c327734e9a2f52ec3f7bac2657349"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/firefly_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:firefly"
+        ]
+      },
+      "sha256": "5721860d723b97210ebed48d4e6ef8419415753eb8c07dbc0f23ca5d7c7a1046"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/firefly_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:firefly_large"
+        ]
+      },
+      "sha256": "2a35e8e2d474e16c55f22848a859917326e5a3467c5996c7fee9e7c19a9e14d2"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/ginkgo_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:ginkgo"
+        ]
+      },
+      "sha256": "48d1428d56fc0af2ec1abdb240ad372c86ab34162e76809ef6556f2bc3d0f0c9"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/ginkgo_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:ginkgo_large"
+        ]
+      },
+      "sha256": "cc4edff135b8f40190aad69e9ee5aa58b998f0ccffaef80cb958fd00267b00bc"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/lava_tap_drip.json",
+      "definition": {
+        "textures": [
+          "minecraft:drip_hang"
+        ]
+      },
+      "sha256": "23e4b92ace8b4031f28e7ff8444563c1e2a0f7a47e5968f92285cb4b549d82a5"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/pine_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:pine"
+        ]
+      },
+      "sha256": "f1263fca76940438a919ecefd4c5a105d9508aa28ea586d47825357f0f21b3ce"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/pine_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:pine_large/1",
+          "kaleidoscope_tavern:pine_large/2",
+          "kaleidoscope_tavern:pine_large/3"
+        ]
+      },
+      "sha256": "5511c8880b1506becadde9d7276e62aa1fa7e0310c44cdffabaddf368fea2350"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/sakura_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:sakura"
+        ]
+      },
+      "sha256": "aa48e944f5e33ec276225ede2fa1ff96a3e007ba5cf37fd56af9ec6ce1b11e99"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/snow_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:snow_incense"
+        ]
+      },
+      "sha256": "2735e0732d5a0320165874253afec8b49903fa5b0314aec6b9f2c8e5f87e3f4b"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/snow_incense_large.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:snow_incense_large/1",
+          "kaleidoscope_tavern:snow_incense_large/2"
+        ]
+      },
+      "sha256": "1d22f9cb2acc7336c5289101d4ce47f6e7b7910e93d79ea0102056a226a8c6ea"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/spore_incense.json",
+      "definition": {
+        "textures": [
+          "kaleidoscope_tavern:spore"
+        ]
+      },
+      "sha256": "0407a8d90bf9376c6b68f73d528979f030b72f24f7c468a0dd33d23bf62efc1c"
+    },
+    {
+      "path": "src/generated/resources/assets/kaleidoscope_tavern/particles/water_tap_drip.json",
+      "definition": {
+        "textures": [
+          "minecraft:drip_hang"
+        ]
+      },
+      "sha256": "23e4b92ace8b4031f28e7ff8444563c1e2a0f7a47e5968f92285cb4b549d82a5"
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "engine": "BDS1.26.52.3",
+  "engine_build_id": "51798919",
+  "engine_commit": "54116bb5ee0b7aee0b5591efbcc8bc3cf64f168a",
+  "script_api": "@minecraft/server 2.7.0",
+  "base_commit": "9752aaee5cb6f0d0460cb9f9c8ab3424f975c1e4",
+  "scope": "Unreleased effect repair: native wolf Bloody Mary attributed-death callback and six vanilla mob-equippable capability queries; one isolated first-world stage",
+  "inputs_sha256": {
+    "runtime/BP/scripts/bedrock/custom-effects.js": "8ac6eceadf72c117cd18b546377a1bd488fe44339ba86d43cf5f8fc920664ccd",
+    "runtime/BP/scripts/core/custom-effects.js": "0ab7aaf1bf2dd5cf4238367e4939645a6a7ef9af56d56bb22993fd2d3b8507b2",
+    "runtime/BP/scripts/core/living-effect-entity.js": "3f090f3233d2d3706724ad3e1399d293fd964d19e704ddb64fb9811b809e7b9c",
+    "tools/native/cocktail-effects-api-probe.js": "5a7cf6572ba2f9a2f5ccb27586b3f08705039f11310e934307cb40ced52df147",
+    "tools/native/run_living_effects.py": "3d8014bb61bfa13a2d7480001f4760d2da19d6ee59193a48d348fd4af0471f6c"
+  },
+  "raw_evidence": [
+    {
+      "artifact": "audit_work/native-bloody-equippable-20261008-final/first.log",
+      "sha256": "7564bbf9bba2040410ca9a05c300e22751e1fb2faeb96ec58898bb9599767ef6"
+    },
+    {
+      "artifact": "audit_work/native-bloody-equippable-20261008-final/native-living-report.json",
+      "sha256": "0900f10c80f80f7f350864c79ac26a01ffadb01617996804098b0ad9788ff9f1"
+    }
+  ],
+  "committed_log_excerpt": {
+    "artifact": "docs/evidence/native-cocktail-effects-api-20261008.log",
+    "sha256": "489f6097fba8a85154eb31bd5ab46c10c64d80d03665c988493f1f79162434a5",
+    "selection": "Engine version/build/commit, every observer line, and every normal-stop/quit line; complete original log retained separately"
+  },
+  "execution": {
+    "normal_stop": true,
+    "exit_code": 0,
+    "real_player_connections": 0,
+    "engine_content_errors": [],
+    "observer_failures": 0,
+    "simulated_players": false,
+    "client": false,
+    "whole_family_acceptance": false,
+    "native_save_restart_verified": false,
+    "ardent_player_behavior_native_verified": false,
+    "live_changed": false
+  },
+  "observations": [
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:skeleton",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:movement.basic",
+        "minecraft:navigation.walk",
+        "minecraft:health",
+        "minecraft:type_family",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:is_hidden_when_invisible",
+        "minecraft:breathable",
+        "minecraft:can_climb"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:zombie",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:movement.basic",
+        "minecraft:navigation.walk",
+        "minecraft:health",
+        "minecraft:rideable",
+        "minecraft:type_family",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:is_hidden_when_invisible",
+        "minecraft:breathable",
+        "minecraft:can_climb"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:pillager",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:movement.basic",
+        "minecraft:navigation.walk",
+        "minecraft:health",
+        "minecraft:type_family",
+        "minecraft:variant",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:is_hidden_when_invisible",
+        "minecraft:breathable"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:piglin",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:movement.basic",
+        "minecraft:inventory",
+        "minecraft:navigation.walk",
+        "minecraft:health",
+        "minecraft:type_family",
+        "minecraft:variant",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:is_hidden_when_invisible",
+        "minecraft:breathable"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:wolf",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:movement.basic",
+        "minecraft:navigation.walk",
+        "minecraft:health",
+        "minecraft:rideable",
+        "minecraft:leashable",
+        "minecraft:type_family",
+        "minecraft:tameable",
+        "minecraft:variant",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:healable",
+        "minecraft:is_hidden_when_invisible",
+        "minecraft:breathable",
+        "minecraft:can_climb"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-mob-equipment",
+      "type": "minecraft:armor_stand",
+      "equippable": false,
+      "components": [
+        "minecraft:movement",
+        "minecraft:health",
+        "minecraft:type_family",
+        "minecraft:underwater_movement",
+        "minecraft:lava_movement",
+        "minecraft:is_hidden_when_invisible"
+      ]
+    },
+    {
+      "kind": "case",
+      "mode": "native-bloody-mary-kill",
+      "actual": 5,
+      "expected": 5,
+      "victimMaximum": 10,
+      "remaining": [
+        {
+          "id": "kaleidoscope_tavern:bloody_mary",
+          "ticks": 597,
+          "amplifier": 0
+        }
+      ],
+      "events": [
+        {
+          "victim": "minecraft:cow",
+          "source": "minecraft:wolf",
+          "victimValid": true,
+          "victimHealth": 0,
+          "sourceHealth": 2
+        }
+      ]
+    },
+    {
+      "kind": "done",
+      "phase": "first",
+      "players": 0
+    }
+  ],
+  "conclusions": {
+    "bloody_mary_wolf_health": {
+      "before": 2,
+      "victim_maximum": 10,
+      "expected_after": 5,
+      "actual_after": 5,
+      "scope": "Production entityDie subscription handles native attributed kill; observer event subscription precedes host heal callback, final independent native read is 5"
+    },
+    "tomb_raider_equippable_available_on_tested_mobs": false,
+    "tomb_raider_full_parity": false,
+    "limits": [
+      "No player consumption, natural wolf AI combat or rendered acceptance",
+      "No stored-world/restart claim in this single-stage capability observation",
+      "No Java executable heal-hook equivalence",
+      "Missing mob equippable cannot be replaced by guessed drops or destructive metadata conversion"
+    ]
+  },
+  "official_sources": [
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entityattributecomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entityhungercomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entitysaturationcomponent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entitydieafterevent?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entitydamagesource?view=minecraft-bedrock-stable",
+    "https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/entityequippablecomponent?view=minecraft-bedrock-stable"
+  ],
+  "prior_observation": {
+    "reason": "The same bounded native case was repeated after the reviewed Ardent pulse/hidden-row repair changed the full custom-effects.js input; earlier successful raw evidence remains unchanged",
+    "raw_evidence": [
+      {
+        "artifact": "audit_work/native-bloody-equippable-20261008/first.log",
+        "sha256": "bf8852adc3d4137494f128f1ff6767c1d3eaee4b8da4518a00489c05ed51504e"
+      },
+      {
+        "artifact": "audit_work/native-bloody-equippable-20261008/native-living-report.json",
+        "sha256": "8f42683968b1b9ef5533465b446e737b06fba6a871e9b49419b8de32bd00975c"
+      }
+    ],
+    "inputs_sha256": {
+      "runtime/BP/scripts/bedrock/custom-effects.js": "85e0a37f8b707d92d4f27ebecfc75afc46c4a71e207a4a79ebec8fb93fc82bbe",
+      "runtime/BP/scripts/core/custom-effects.js": "0ab7aaf1bf2dd5cf4238367e4939645a6a7ef9af56d56bb22993fd2d3b8507b2",
+      "runtime/BP/scripts/core/living-effect-entity.js": "3f090f3233d2d3706724ad3e1399d293fd964d19e704ddb64fb9811b809e7b9c",
+      "tools/native/cocktail-effects-api-probe.js": "5a7cf6572ba2f9a2f5ccb27586b3f08705039f11310e934307cb40ced52df147",
+      "tools/native/run_living_effects.py": "3d8014bb61bfa13a2d7480001f4760d2da19d6ee59193a48d348fd4af0471f6c"
+    }
+  }
+}

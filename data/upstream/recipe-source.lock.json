@@ -1,0 +1,786 @@
+{
+  "jar_sha256": "03f35e1e614953b22cd1f5e34345613f3a6a283bf1b1c99659b57d58970edeff",
+  "source": "user_upload",
+  "records": [
+    {
+      "member": "data/kaleidoscope_tavern/recipe/allium_sandwich_board_from_allium.json",
+      "path": "data/upstream/recipes/allium_sandwich_board_from_allium.json",
+      "sha256": "4c9532555691a42fae095d1647e03102b663dce7c2c3ee8036f4d868d8b28e69"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/azure_bluet_sandwich_board_from_azure_bluet.json",
+      "path": "data/upstream/recipes/azure_bluet_sandwich_board_from_azure_bluet.json",
+      "sha256": "7ca03f32d3bec1aef2a78ec8cefca295d4694223ae7c0c0dbd41a2386054b2ae"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/azure_bluet_sandwich_board_from_lily_of_the_valley.json",
+      "path": "data/upstream/recipes/azure_bluet_sandwich_board_from_lily_of_the_valley.json",
+      "sha256": "983bbc76966286deaf3acf13a5b3f6b16c345b086a80294fe80c5867f459c924"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/azure_bluet_sandwich_board_from_oxeye_daisy.json",
+      "path": "data/upstream/recipes/azure_bluet_sandwich_board_from_oxeye_daisy.json",
+      "sha256": "9a92f72ed4d30e7036c26173bc10fe09d289857443bec601a2318e8f7b4a544e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/bar_cabinet.json",
+      "path": "data/upstream/recipes/bar_cabinet.json",
+      "sha256": "373b1557df2096e4ce0700269c41bd450cfb4b72a83266f8c3ce1606f35943ac"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/bar_counter.json",
+      "path": "data/upstream/recipes/bar_counter.json",
+      "sha256": "f11a4497f4d76e9becacf13e3067031e34c44009e1c1c22852a78e20bb3565f5"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel.json",
+      "path": "data/upstream/recipes/barrel.json",
+      "sha256": "805d2399867f90807892d442026a8b47b8888c76500c90892c18f359f942f620"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/base_sandwich_board.json",
+      "path": "data/upstream/recipes/base_sandwich_board.json",
+      "sha256": "31c2da3d8042eabc368dcd7255ea8150b8fcae4b608f84e7ba1c4c50836fb50a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/bell_pendant_lamp.json",
+      "path": "data/upstream/recipes/bell_pendant_lamp.json",
+      "sha256": "1ceca2b94fa0af9b807bd64fdfeb753b2395eb24c87a1c078256a862ec5848d0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/black_bar_stool.json",
+      "path": "data/upstream/recipes/black_bar_stool.json",
+      "sha256": "a26450faccf9d60999c74c3a58941cf2903067a8de3a47700dc7f935ec834e43"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/black_sofa.json",
+      "path": "data/upstream/recipes/black_sofa.json",
+      "sha256": "6d0177ac50ecfc2486d72ba5538df12bff8e1379acf2aa273d45f9b5e0bee86c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/blue_bar_stool.json",
+      "path": "data/upstream/recipes/blue_bar_stool.json",
+      "sha256": "48dd7a2aa0b581ca623ecfbe0325e56cea05b4b3bbe9b87df4827702c0564146"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/blue_pendant_lamp.json",
+      "path": "data/upstream/recipes/blue_pendant_lamp.json",
+      "sha256": "c532598d6fcc5acd3f3cb9947a8fef0c70db9047f299b1e399ec9293a0b7e3b9"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/blue_sofa.json",
+      "path": "data/upstream/recipes/blue_sofa.json",
+      "sha256": "80d7ad85abaf6f85abb29d473f7aa0a35a9b3d7aae009875b482e52f216cbe48"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/brown_bar_stool.json",
+      "path": "data/upstream/recipes/brown_bar_stool.json",
+      "sha256": "32d4a34ddcb53f44cf73a85ee8bb4f30cb8ec42d08459bf7550d94adbdd1964c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/brown_sofa.json",
+      "path": "data/upstream/recipes/brown_sofa.json",
+      "sha256": "e5a41afa9fed3d443358c7b75ba31698e2e5acf3e3f4c3c2212b4162b3754bd0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/butterfly_incense.json",
+      "path": "data/upstream/recipes/butterfly_incense.json",
+      "sha256": "7a157df03a7ff88e0fe879fd915519f03a09fc896f37a5025cc25777cd2c006b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/catnip_incense.json",
+      "path": "data/upstream/recipes/catnip_incense.json",
+      "sha256": "5ed8d24a36e16a71ce596c3e13c241ce7f29e5a20440f5c9d03d6ad3a1325d57"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/cellar_cabinet.json",
+      "path": "data/upstream/recipes/cellar_cabinet.json",
+      "sha256": "049f95467691374471c69813a386afb5b5ce89a8fe9f9dd3b1b5b280c16c46fd"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/chalkboard.json",
+      "path": "data/upstream/recipes/chalkboard.json",
+      "sha256": "691bad311b9ae3733ea7e2d9107dc7f4b9b97e57f6b47773638f68a9bbd8c907"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/circular_rack.json",
+      "path": "data/upstream/recipes/circular_rack.json",
+      "sha256": "c10448529208cb587c028f6cfd801afd876ed6f4fa75ea186d96c2d02232f6bd"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/cornflower_sandwich_board_from_cornflower.json",
+      "path": "data/upstream/recipes/cornflower_sandwich_board_from_cornflower.json",
+      "sha256": "e9d6823e0ec8b13dfac329d8c65f3aa2c31d25108f37733c6fe690511d421515"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/cr019_painting.json",
+      "path": "data/upstream/recipes/cr019_painting.json",
+      "sha256": "bf70143a3e3a826de0dd6a70add802b63d9dc7de8c43f1aa706b4cca056d1705"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/cyan_bar_stool.json",
+      "path": "data/upstream/recipes/cyan_bar_stool.json",
+      "sha256": "a2db0f4e08537cb3b5d958aabc45b8a780d2b52db1a3b7802f4b9848bb36d71f"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/cyan_sofa.json",
+      "path": "data/upstream/recipes/cyan_sofa.json",
+      "sha256": "7a072b9f697c89c2ec40cf9930f5c95194d5cefa3b274ddae61cd84f57c229a8"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/david_painting.json",
+      "path": "data/upstream/recipes/david_painting.json",
+      "sha256": "a8dfc10ce5715440094b8830a4f4ffeda52467793f10e47638ed1270809d9682"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/empty_bottle.json",
+      "path": "data/upstream/recipes/empty_bottle.json",
+      "sha256": "949a980fdf94ac1555030f10bc631890090c53a251357536a143392eafaaa262"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/empty_glassware.json",
+      "path": "data/upstream/recipes/empty_glassware.json",
+      "sha256": "e8920f6762d40889bc86723343a578b484fede8b6026e6d5843811cfd3aabe7e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/father_painting.json",
+      "path": "data/upstream/recipes/father_painting.json",
+      "sha256": "f05af056fcbead6e675f25e979c69d0e30c7fe00b1dce21215cca14cce952523"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/firefly_incense.json",
+      "path": "data/upstream/recipes/firefly_incense.json",
+      "sha256": "c1e34f4eff7825603ff8010107554b8afbf3df3d43b7b3e6cc562914ca0fdb53"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/ginkgo_incense.json",
+      "path": "data/upstream/recipes/ginkgo_incense.json",
+      "sha256": "03a5e2d4766a2d455730849c23a9e10b9ac3fd914eaf352342f0f52932995449"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/girl_with_pearl_earring_painting.json",
+      "path": "data/upstream/recipes/girl_with_pearl_earring_painting.json",
+      "sha256": "5ff5fa2486a1f29d8fe9938fef325454581a851a2ed8107ef02009dde76c7822"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/glass_bar_cabinet.json",
+      "path": "data/upstream/recipes/glass_bar_cabinet.json",
+      "sha256": "74f6f707c0fe5f47ea9b144960e5457a1583d94640b9792039a3c5b356640314"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/glassware_holder.json",
+      "path": "data/upstream/recipes/glassware_holder.json",
+      "sha256": "b489009efb3c4363c731db701c811139a0ca77e2a3c41d9e88a70e5aa248b3dc"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/grass_sandwich_board_from_short_grass.json",
+      "path": "data/upstream/recipes/grass_sandwich_board_from_short_grass.json",
+      "sha256": "12965c954cb277a0c3b94285ca8df4dbf26d5f5148b5fc5b2b22daa816a54f15"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/gray_bar_stool.json",
+      "path": "data/upstream/recipes/gray_bar_stool.json",
+      "sha256": "13e39a690d293f4dbeca0b63e415c500960f6f1c21d89648946919020b00f620"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/gray_sofa.json",
+      "path": "data/upstream/recipes/gray_sofa.json",
+      "sha256": "612086b6cb5daf38397361c87c13bdd8fc6f7c991ed824a303d0e97127228f58"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/great_wave_painting.json",
+      "path": "data/upstream/recipes/great_wave_painting.json",
+      "sha256": "3f89a3c95a40749a75fd6f7b5cd8721aeaf85fb0c1c8ec645aca358ab9995e09"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/green_bar_stool.json",
+      "path": "data/upstream/recipes/green_bar_stool.json",
+      "sha256": "7ed0f248efaded229f905922ecca0d4c5adc4124f3879e0cd82934cf63123beb"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/green_sofa.json",
+      "path": "data/upstream/recipes/green_sofa.json",
+      "sha256": "86ae1b12ee5a3e83ec895ba02bf3fce0bd30a25abb51a355361da8c373b04d4e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/holder.json",
+      "path": "data/upstream/recipes/holder.json",
+      "sha256": "68b3958bacccb37a1d58f9d1ef7b20d752be2a1291fd7814b7b57215e352d39b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/light_blue_bar_stool.json",
+      "path": "data/upstream/recipes/light_blue_bar_stool.json",
+      "sha256": "8ede584fb63569f1c056e164e429e2ad3f40926080e01c9f038549e95e5b2436"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/light_blue_sofa.json",
+      "path": "data/upstream/recipes/light_blue_sofa.json",
+      "sha256": "4bc6cc08c91a9db23b903ecdd0f2ad618d00e16a9784c821fb8acd85aa47479c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/light_gray_bar_stool.json",
+      "path": "data/upstream/recipes/light_gray_bar_stool.json",
+      "sha256": "6fb321a49ae392d03f551e44507f32c2a72e4151d78480db5ec87b44cf4b4120"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/light_gray_sofa.json",
+      "path": "data/upstream/recipes/light_gray_sofa.json",
+      "sha256": "de048b0751cae85de50fb8f3854c205a9844fbe96456b2d2f4fe27e6cd7cfdbe"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/lime_bar_stool.json",
+      "path": "data/upstream/recipes/lime_bar_stool.json",
+      "sha256": "d904a93babe9e15e0614c4e56aa5e6904a09c408ab9533db5eb607d16232f2d9"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/lime_sofa.json",
+      "path": "data/upstream/recipes/lime_sofa.json",
+      "sha256": "de5877786abf0cac8bf926b55978b8d3d29b4e2173fc5e0e50777ac0407d89c7"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/magenta_bar_stool.json",
+      "path": "data/upstream/recipes/magenta_bar_stool.json",
+      "sha256": "9640cf13a93730cb2f8a20086bb7e200d4b34de0e26b2f83979c147f61436ef2"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/magenta_sofa.json",
+      "path": "data/upstream/recipes/magenta_sofa.json",
+      "sha256": "6bf04f8b5b28ad932500088aaf3eccb3bfb40d28722b95e77bdd8854b2651709"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/master_marisa_painting.json",
+      "path": "data/upstream/recipes/master_marisa_painting.json",
+      "sha256": "6f175949e37a48115e39a79d2960eacc33f567ef2c64c50c29fde35156985eb2"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/mona_lisa_painting.json",
+      "path": "data/upstream/recipes/mona_lisa_painting.json",
+      "sha256": "df4d953136b90a51f1f4d357e850e0f5324636c526c958441d9e14cb07d2a2c7"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/mondrian_painting.json",
+      "path": "data/upstream/recipes/mondrian_painting.json",
+      "sha256": "076e34dd2fdafa38d844ef195861a642b9611cac2f7ec77a9c6abc8ea00f7a84"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/orange_bar_stool.json",
+      "path": "data/upstream/recipes/orange_bar_stool.json",
+      "sha256": "e5ba65f649fe5dccba56f9021d9a6667dd579fa3ed7dcde3a74c58523403ca3a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/orange_sofa.json",
+      "path": "data/upstream/recipes/orange_sofa.json",
+      "sha256": "f4075d858385daaf7ae2836bfbaa9b43a5fdc7d82976a17302dca8d485a1f956"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/orchid_sandwich_board_from_blue_orchid.json",
+      "path": "data/upstream/recipes/orchid_sandwich_board_from_blue_orchid.json",
+      "sha256": "8524f5d7c21129d25b80ad3d9e0b79a41a6dc5cf50644a7b20f65e6b0da89b0c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/peony_sandwich_board_from_lilac.json",
+      "path": "data/upstream/recipes/peony_sandwich_board_from_lilac.json",
+      "sha256": "97a57cab9d7d73d940f32ebabac412875ae9f08e701e0eff0e7ccb27d2292704"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/peony_sandwich_board_from_peony.json",
+      "path": "data/upstream/recipes/peony_sandwich_board_from_peony.json",
+      "sha256": "16b4be511f697ca965733b5718286e4986033f827e9ddd760aea72956f100c68"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pine_incense.json",
+      "path": "data/upstream/recipes/pine_incense.json",
+      "sha256": "8287eff8bb5712af8c59f38c5e72ba1086073415d8c6f2e86616fd5b7584661f"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pink_bar_stool.json",
+      "path": "data/upstream/recipes/pink_bar_stool.json",
+      "sha256": "3364bbd26f2e1b09b1e778a8f54538a1efb1fd3707abea151521d23de2ba2d00"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pink_petals_sandwich_board_from_pink_petals.json",
+      "path": "data/upstream/recipes/pink_petals_sandwich_board_from_pink_petals.json",
+      "sha256": "bc530cf4c78f6fe90f135498cb093d28f980424c672c5fa4ee633bc6217388ee"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pink_sofa.json",
+      "path": "data/upstream/recipes/pink_sofa.json",
+      "sha256": "78726910f13ba07aa30a3ffcf637bd09b784b813fbb9620df2db3b5ec372685a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pitcher_plant_sandwich_board_from_pitcher_plant.json",
+      "path": "data/upstream/recipes/pitcher_plant_sandwich_board_from_pitcher_plant.json",
+      "sha256": "e4a6bb83f4356d64e5019ab6b9bb85a6edebc9216d04676e435ad88b0a13f8a0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/poppy_sandwich_board_from_poppy.json",
+      "path": "data/upstream/recipes/poppy_sandwich_board_from_poppy.json",
+      "sha256": "1c5912fcf384fb2cb5512e30a3e51883e5133a5934ba8aa10f51902c1020b949"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/poppy_sandwich_board_from_rose_bush.json",
+      "path": "data/upstream/recipes/poppy_sandwich_board_from_rose_bush.json",
+      "sha256": "215ac0268ca4d5c97060e150ce6df990b4d468b85d0a98758aa19f22a4d52819"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub.json",
+      "path": "data/upstream/recipes/pressing_tub.json",
+      "sha256": "8bb3890c3353370716e6c2d7504e174fb27e787f1307073bd6d3bfb370123343"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/purple_bar_stool.json",
+      "path": "data/upstream/recipes/purple_bar_stool.json",
+      "sha256": "8120ab5f6852c8a79714f0483a39f97dc595722f21dcfe89bed9338f77c55165"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/purple_sofa.json",
+      "path": "data/upstream/recipes/purple_sofa.json",
+      "sha256": "6b097335d30e3e65bceb6e275373d19b1cde007ec7d4a371ff9bfa0ba61fd237"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/red_bar_stool.json",
+      "path": "data/upstream/recipes/red_bar_stool.json",
+      "sha256": "fbf1e11957d0d970db89da26fb4e96870624cd5846874ec53605ddc2d3e2e36b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/red_sofa.json",
+      "path": "data/upstream/recipes/red_sofa.json",
+      "sha256": "5d1dff634fd74a0fc42d14af648e16638d5c92f0aeb20d191ba17827b02ea8c4"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/sakura_incense.json",
+      "path": "data/upstream/recipes/sakura_incense.json",
+      "sha256": "e025481660b3b838f00b37e1775afd7173a6627ba7e99bfe7d06fa34a8dabe01"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker.json",
+      "path": "data/upstream/recipes/shaker.json",
+      "sha256": "9f2932777564a02a37f88ed2370d0f0b76835aeb87a145c47395b0ac5cc7028d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/snow_incense.json",
+      "path": "data/upstream/recipes/snow_incense.json",
+      "sha256": "45e2c51c61bff42f3736e287fba7c70b76656045bb6d5be030def8fa7ad08bb5"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/son_of_man_painting.json",
+      "path": "data/upstream/recipes/son_of_man_painting.json",
+      "sha256": "13ca3fbab81cc863fa5fc16a673d8d7a0aa12a7a8373e5696aa0755f130875e4"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/spore_incense.json",
+      "path": "data/upstream/recipes/spore_incense.json",
+      "sha256": "7c4f90a56f44014c79e9f3e28b4a0c4231e00f4c09ccfce0db940417b778c160"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/starry_night_painting.json",
+      "path": "data/upstream/recipes/starry_night_painting.json",
+      "sha256": "548883711b56e0bd515826c72016718a1c5a19bcd6bfa5850ad91995fefaa26d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/stepladder.json",
+      "path": "data/upstream/recipes/stepladder.json",
+      "sha256": "cbee42fe5ff85992d235661d268b005e32c8ad5baa0811ea2a5298575f5cab5b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_black.json",
+      "path": "data/upstream/recipes/string_lights_black.json",
+      "sha256": "ee08fde3c7e23ee3719b33b9f54a093bc95923808c0471598567abd371f14c6d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_blue.json",
+      "path": "data/upstream/recipes/string_lights_blue.json",
+      "sha256": "7358aa17e9452fa7b4ae23d2d9f9f2eadcb2c09c7351dfcfbdf3348c66836741"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_brown.json",
+      "path": "data/upstream/recipes/string_lights_brown.json",
+      "sha256": "d0fddafa2e1e71baff131aae94a98b075d0f4e8d17aca1a241136de66925c35b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_colorless.json",
+      "path": "data/upstream/recipes/string_lights_colorless.json",
+      "sha256": "523b723d4a0559611e8640e148a96f4c403e2d126717de21cc12112c25623645"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_cyan.json",
+      "path": "data/upstream/recipes/string_lights_cyan.json",
+      "sha256": "c5601627e707a31482ce317225eae98a35103b0d48e18bdaf4478cf47645ea02"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_gray.json",
+      "path": "data/upstream/recipes/string_lights_gray.json",
+      "sha256": "c5af8982d04795af1bb0e4f5ead9769391dec9313e3eac336d231f2c8e19ab90"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_green.json",
+      "path": "data/upstream/recipes/string_lights_green.json",
+      "sha256": "194b19c679e5ffab6eb845bcf86c6f8218c816318963199ad439084450cac937"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_light_blue.json",
+      "path": "data/upstream/recipes/string_lights_light_blue.json",
+      "sha256": "9dd2107597af76972c66d91f7e145eb003cf2f0fd32d29faf2430f543aca4638"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_light_gray.json",
+      "path": "data/upstream/recipes/string_lights_light_gray.json",
+      "sha256": "6becee259f4a76d72d7b78c61ea52191772b089d1678500695b2a1488eed9ca5"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_lime.json",
+      "path": "data/upstream/recipes/string_lights_lime.json",
+      "sha256": "e688199b77364152d24fd3689f230c1646711ed2a6708bc640c95d1986b01ce9"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_magenta.json",
+      "path": "data/upstream/recipes/string_lights_magenta.json",
+      "sha256": "d6570c69986d51896366ca06826326aaa4fb0cc49d7956b3a563c15370ac8fa0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_orange.json",
+      "path": "data/upstream/recipes/string_lights_orange.json",
+      "sha256": "957b3770ef1d4b713270b9839869cafa7d79e1314ba9af07b1e75253c612ed61"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_pink.json",
+      "path": "data/upstream/recipes/string_lights_pink.json",
+      "sha256": "ed4f56b191445e94b14a875c138d177bac289203e16e6fd6dab88b077f262752"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_purple.json",
+      "path": "data/upstream/recipes/string_lights_purple.json",
+      "sha256": "7f001091c2eee20838fbe9e8fc05edc10fd92e84683961b1c6dde869a1a07dad"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_red.json",
+      "path": "data/upstream/recipes/string_lights_red.json",
+      "sha256": "c9719744eb6c7470b678e416c11cf8f45557cf4c04729cab8a110265fd9c298d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_white.json",
+      "path": "data/upstream/recipes/string_lights_white.json",
+      "sha256": "b4fd73fb5608a76782b1431f6b34e91666dd40f7a0ac317d98f364012968085d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/string_lights_yellow.json",
+      "path": "data/upstream/recipes/string_lights_yellow.json",
+      "sha256": "92ef943000064d782bb3333de8236fae246d5edc55d0b703cfb89002d961eecf"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/sunflower_sandwich_board_from_dandelion.json",
+      "path": "data/upstream/recipes/sunflower_sandwich_board_from_dandelion.json",
+      "sha256": "d06d6afbcca3ae07d513d143a035fc2b2710ebed7366c79dea45a6cbe2e9b2d1"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/sunflower_sandwich_board_from_sunflower.json",
+      "path": "data/upstream/recipes/sunflower_sandwich_board_from_sunflower.json",
+      "sha256": "d8e2aed5201edd84938067fab823bdcca58d625af534f219ee8dd8b5fb47ca3e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/table.json",
+      "path": "data/upstream/recipes/table.json",
+      "sha256": "dc37b3fae31da88a9bac82d2d17bc40990d682a1340bfff2689d77317d7d4002"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tap.json",
+      "path": "data/upstream/recipes/tap.json",
+      "sha256": "2fc866066774139215e59b25981bc4a2e2762da60eb2c9078cff6ec01452b48f"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tartaric_acid_painting.json",
+      "path": "data/upstream/recipes/tartaric_acid_painting.json",
+      "sha256": "2a52fbcd122734681879cc28435acf842a7ade22273506b7132f05d11431878c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tilted_rack.json",
+      "path": "data/upstream/recipes/tilted_rack.json",
+      "sha256": "f9e52bb8cf8f099d3e7d49d47ed5244f79095ab94107837f9022a7ad7b8de8c8"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/torchflower_sandwich_board_from_torchflower.json",
+      "path": "data/upstream/recipes/torchflower_sandwich_board_from_torchflower.json",
+      "sha256": "e038020c9fc1534e9b6a91b390ff5eeba31519afe7116b6d17165609ce56abbd"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/trellis.json",
+      "path": "data/upstream/recipes/trellis.json",
+      "sha256": "c1d6f763b3d78872ef21126c0d76724a8d14af3aa904e90d57e390bee571a79b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tulip_sandwich_board_from_orange_tulip.json",
+      "path": "data/upstream/recipes/tulip_sandwich_board_from_orange_tulip.json",
+      "sha256": "8a5b7cafee8ec856e56afc094d20ad3c7328d4edbc788699a5895b9d574f7c68"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tulip_sandwich_board_from_pink_tulip.json",
+      "path": "data/upstream/recipes/tulip_sandwich_board_from_pink_tulip.json",
+      "sha256": "3a3ffd66c26acc55a43abfb05076bf26d1628f54e7024063b93d3c9262ec34c0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tulip_sandwich_board_from_red_tulip.json",
+      "path": "data/upstream/recipes/tulip_sandwich_board_from_red_tulip.json",
+      "sha256": "1513ae427778f72a25a69774d7f59efe409363b83377904a304342e79f22f80b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/tulip_sandwich_board_from_white_tulip.json",
+      "path": "data/upstream/recipes/tulip_sandwich_board_from_white_tulip.json",
+      "sha256": "eb5af07ef4fa078e8afaafb0ead15a6bae4c2b238a09f57f1a6bbd9c1224925c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/unknown_painting.json",
+      "path": "data/upstream/recipes/unknown_painting.json",
+      "sha256": "52ac9bb6679100c065bd11becbc52c0ba8be55c7f752dd4d63062089f1807e1e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/van_gogh_self_portrait_painting.json",
+      "path": "data/upstream/recipes/van_gogh_self_portrait_painting.json",
+      "sha256": "bbaada013ffb892b327121be0b0e2c34256f9015fa5ae5278dd0d4e886049c8d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/white_bar_stool.json",
+      "path": "data/upstream/recipes/white_bar_stool.json",
+      "sha256": "bd379697faf1fa9a9e30fa017cb2a7ff68f5f3dfd3fedd66cf92b420443ca4c4"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/white_sofa.json",
+      "path": "data/upstream/recipes/white_sofa.json",
+      "sha256": "be7400aeed9941107026f469b41ee1fa182de9bbc44ceffc6237503009d3ea55"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/wither_rose_sandwich_board_from_wither_rose.json",
+      "path": "data/upstream/recipes/wither_rose_sandwich_board_from_wither_rose.json",
+      "sha256": "835e428c33d81fdef51c150a74768be182ea57daf5081c2fb9959efd519edc4f"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/yellow_bar_stool.json",
+      "path": "data/upstream/recipes/yellow_bar_stool.json",
+      "sha256": "deec24ad27af09ca736b077ceaaabafd254284132753646e2acd88924c336c71"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/yellow_pendant_lamp.json",
+      "path": "data/upstream/recipes/yellow_pendant_lamp.json",
+      "sha256": "ea0458aba6d6a18d14ba92e1282ad1eca467053d539169343bc69e4577d816b9"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/yellow_sofa.json",
+      "path": "data/upstream/recipes/yellow_sofa.json",
+      "sha256": "2612d3073bd64039b6bcf20524821b7f0515b6045e69478bfe72576dd0fcc20c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/ysbb_painting.json",
+      "path": "data/upstream/recipes/ysbb_painting.json",
+      "sha256": "835eae771ce778d0e23dbb1d111485b9f1442f478808d97848ba28aee3eb7cd9"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/brandy.json",
+      "path": "data/upstream/recipes/barrel/brandy.json",
+      "sha256": "7087ccdbab74269e157516abc46f0905052ec84c0625bdb4289bbdd6c20c6e4e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/carignan.json",
+      "path": "data/upstream/recipes/barrel/carignan.json",
+      "sha256": "fbe604be4ae905bd1d297c95d6b5f900f21505f008aea0ebad6daa69cf8246c1"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/champagne.json",
+      "path": "data/upstream/recipes/barrel/champagne.json",
+      "sha256": "f07475d9a074f9d9c0827db98aec61f819da79553d5903f87fc876de7e1f5c76"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/glowflower_brew.json",
+      "path": "data/upstream/recipes/barrel/glowflower_brew.json",
+      "sha256": "127eb7051cfcb2e6273f934f3acd1f5772d069a032d028422caff3b449a9f312"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/honey_wine.json",
+      "path": "data/upstream/recipes/barrel/honey_wine.json",
+      "sha256": "d99b40bc3b814ad31f51923e4fdee658a9c3cbbc78a9e0a9b1a0ad21440005a6"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/ice_wine.json",
+      "path": "data/upstream/recipes/barrel/ice_wine.json",
+      "sha256": "104106e848346c36816c68bdf6c75ee84ab814029461a1392aad6fabc000abe1"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/luminous_bride.json",
+      "path": "data/upstream/recipes/barrel/luminous_bride.json",
+      "sha256": "7a8471874ab741ca4c08d95e94697602e0604699f2bc545622fa9daa57a6a36e"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/madame_shexiang.json",
+      "path": "data/upstream/recipes/barrel/madame_shexiang.json",
+      "sha256": "2ba2ec2067be959c0de5860791ed1348589e4ace14e96cacd97ecde5c4db2cab"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/miners_star.json",
+      "path": "data/upstream/recipes/barrel/miners_star.json",
+      "sha256": "f57716e641b7b7c8d3e362fcbfc5e787eb48806c44cff2455cd5994f4b08baf1"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/molotov.json",
+      "path": "data/upstream/recipes/barrel/molotov.json",
+      "sha256": "67d201ccf41ec439b3732864f8c2fba82877de4e1dd3227afd9d6a3402555873"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/mother_snow.json",
+      "path": "data/upstream/recipes/barrel/mother_snow.json",
+      "sha256": "c9a66e89c923edb5bd59d0b62638326103619d452a15a532a4d932b25307eceb"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/plum_wine.json",
+      "path": "data/upstream/recipes/barrel/plum_wine.json",
+      "sha256": "6bee553043dc22d15d54d47b119bb8cba04792dc30bb81d09b189715dbb6e0e8"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/polaris_sweet_white.json",
+      "path": "data/upstream/recipes/barrel/polaris_sweet_white.json",
+      "sha256": "f07f6fd8e9c5370ab16c4cd908e1a7f1059163b6f5c875a58c7f0fceb71004ef"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/red_queen.json",
+      "path": "data/upstream/recipes/barrel/red_queen.json",
+      "sha256": "2f3e5dcdf81646f22f2d301f5ba4b0a87aef92b81b997463358098a0346d03d3"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/riesling_dry_white.json",
+      "path": "data/upstream/recipes/barrel/riesling_dry_white.json",
+      "sha256": "8d799f30d0c4a96a051cbf617f625efae430d4aef0e80a10dcdf572e65e6ea11"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/rum.json",
+      "path": "data/upstream/recipes/barrel/rum.json",
+      "sha256": "53b0f16bc8ee9682a22c5e1b9ee5a472258ec8a8c48255f12033a2e02e59d4c0"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/sakura_wine.json",
+      "path": "data/upstream/recipes/barrel/sakura_wine.json",
+      "sha256": "9cc145f041f367fc2fac4df639b5011c837c8ef59b13ab5cb1f3580bd5a489a1"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/sauvignon_blanc_dry_white.json",
+      "path": "data/upstream/recipes/barrel/sauvignon_blanc_dry_white.json",
+      "sha256": "b67145e14fe3bded8d530578fcfb39fa0574cce3d9f90bff383f7a3d6ce8c479"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/sherry.json",
+      "path": "data/upstream/recipes/barrel/sherry.json",
+      "sha256": "346d97e2d03a90e61fd1f52b7be959908dfbe95de303429e6ed724a210930efc"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/sunset_glow.json",
+      "path": "data/upstream/recipes/barrel/sunset_glow.json",
+      "sha256": "133af84878889a5c9d5c22d4e9d1d7a5583a87c2533fbdd45ed8698b3cd9cd37"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/sweet_berry_wine.json",
+      "path": "data/upstream/recipes/barrel/sweet_berry_wine.json",
+      "sha256": "7e648358ef106cf606c53774934967fe6cc07d0d4ad685b129e8865abb8fee6b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/vodka.json",
+      "path": "data/upstream/recipes/barrel/vodka.json",
+      "sha256": "20c744aa2664b171d7146dbf88ad1bb6aebe897c06eed88780eb96d53d6d1b38"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/whiskey.json",
+      "path": "data/upstream/recipes/barrel/whiskey.json",
+      "sha256": "5af278a4ca28220566422e2fc1dbc1e937b505ab13cc84490a7f93601fbcaeff"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/barrel/wine.json",
+      "path": "data/upstream/recipes/barrel/wine.json",
+      "sha256": "d400886d9262fd25157572a276e76c738a8eeab12733c047c6a65e0acb55f74b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/glow_berries_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/glow_berries_bucket.json",
+      "sha256": "d3522cc726ac07cf122986767b6d582f63b60d1d22a98f237d5d7ab78d492cb2"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/gold_grape_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/gold_grape_bucket.json",
+      "sha256": "964fd8a8a9e585692b46ba62a6c067cf7de95ed60a694b9c60d4209e5c248d2b"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/grape_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/grape_bucket.json",
+      "sha256": "64622f6b796a42095b049dc8c7555610efc2b84442ab543b133a7932682b6b9a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/green_grape_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/green_grape_bucket.json",
+      "sha256": "c59456e741bcf478ed82fd01476c987a82c53382ca2d9a8e271d884a86d1b27c"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/ice_grape_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/ice_grape_bucket.json",
+      "sha256": "6135fbb4bfc6f60c70f8b3e58fa8339432a032cf00e75ccaf560f1f4156ed249"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/pressing_tub/sweet_berries_bucket.json",
+      "path": "data/upstream/recipes/pressing_tub/sweet_berries_bucket.json",
+      "sha256": "f3fa9d8f764f1fb7b4833bf69c8bf730f10e48405618d377f66b4f958cb7bd67"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/allium_garden.json",
+      "path": "data/upstream/recipes/shaker/allium_garden.json",
+      "sha256": "4125552f40087a11a7a8ca16b6546066d572db34c3ea963e58ba7d826b1d34c4"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/bloody_mary.json",
+      "path": "data/upstream/recipes/shaker/bloody_mary.json",
+      "sha256": "2fe99694f3161ff2024f4795d2ecaeb599d508cbb2557f22cc9c198e369c7a53"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/brass_heart.json",
+      "path": "data/upstream/recipes/shaker/brass_heart.json",
+      "sha256": "e506a5fd00f0241d5645ed8f252ab1de4875179a62deea2a65bc343901a4e111"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/depth_charge.json",
+      "path": "data/upstream/recipes/shaker/depth_charge.json",
+      "sha256": "5560819248e6478ed20b0ca8a87cb7b956658e122b4e45d5dc6dad6d112cfcc8"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/emerald.json",
+      "path": "data/upstream/recipes/shaker/emerald.json",
+      "sha256": "472597a44707e8aca27e2b122a5ab107925964915ec4c292772c2fe7b5c65d3a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/godfather.json",
+      "path": "data/upstream/recipes/shaker/godfather.json",
+      "sha256": "487b73ecaed3290c9af75a78e74412b5fbcb78559ffc4f8646c8183c75439da2"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/grasshopper.json",
+      "path": "data/upstream/recipes/shaker/grasshopper.json",
+      "sha256": "43ea6512c0d813f9699a8800a00e89c44fe7fac9ca41e9791103976224a4bc03"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/mojito.json",
+      "path": "data/upstream/recipes/shaker/mojito.json",
+      "sha256": "1edd2c6c18377446b85a2837a286841badd57db06b26c2973df2990bd460cf5d"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/nether_special.json",
+      "path": "data/upstream/recipes/shaker/nether_special.json",
+      "sha256": "072b8f9c8bf0e419ae1ea09d9111117f5ade4e9100772adbffb1c1f3053749f4"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/screwdriver.json",
+      "path": "data/upstream/recipes/shaker/screwdriver.json",
+      "sha256": "616556842b6677f2b3bb6fb4eaa919d7b3d8438836ea12287f50c0e884d3bd3a"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/sculk_special.json",
+      "path": "data/upstream/recipes/shaker/sculk_special.json",
+      "sha256": "fcba637144310ee3c8aa20de2f3d29262f31e1a01500842bae97d034c32662be"
+    },
+    {
+      "member": "data/kaleidoscope_tavern/recipe/shaker/white_lady.json",
+      "path": "data/upstream/recipes/shaker/white_lady.json",
+      "sha256": "d65c2718a336583f06927e2f6be1029184fd52d8909e9683d5db7fafadbd5cb1"
+    }
+  ]
+}

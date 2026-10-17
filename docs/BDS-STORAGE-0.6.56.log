@@ -1,0 +1,51 @@
+NO LOG FILE! - setting up server logging...
+[2026-09-27 14:09:49:057 INFO] Starting Server
+[2026-09-27 14:09:49:057 INFO] Version: 1.26.51.1
+[2026-09-27 14:09:49:057 INFO] Session ID: e94009ed-2079-4809-a508-7c11ef3339b5
+[2026-09-27 14:09:49:057 INFO] Build ID: 51061372
+[2026-09-27 14:09:49:057 INFO] Branch: r/26_u5
+[2026-09-27 14:09:49:057 INFO] Commit ID: 0559ac59aa24e42d30e238bc55cdb306232a6507
+[2026-09-27 14:09:49:057 INFO] Configuration: Publish
+[2026-09-27 14:09:49:057 INFO] Contents of server.properties: {}
+[2026-09-27 14:09:49:057 INFO] Level Name: Release Check
+[2026-09-27 14:09:49:057 INFO] Profiler config ('bootstrap.json') load result: success=1, errorMessage=(null)
+[2026-09-27 14:09:49:059 INFO] No CDN config file found at: cdn_config.json for dedicated server
+[2026-09-27 14:09:49:059 INFO] Game mode: 0 Survival
+[2026-09-27 14:09:49:059 INFO] Difficulty: 1 EASY
+[2026-09-27 14:09:49:062 INFO] Content logging to console is enabled.
+[2026-09-27 14:09:49:064 INFO] 
+
+#####################################################
+#                                                   #
+#               LOADING VANILLA WORLD               #
+#                                                   #
+#####################################################
+[2026-09-27 14:09:49:639 INFO] Content logging to disk is enabled. Writing log to: ContentLog2026-09-27_14-09-49
+[2026-09-27 14:09:49:640 INFO] Opening level 'worlds/Release Check/db'
+[2026-09-27 14:09:49:673 INFO] Accepting clients on [::]:19372
+[2026-09-27 14:09:49:748 INFO] Pack Stack - [00] Kaleidoscope Cookery v1.0.6 [BP] (id: 10f37ae2-9ccf-435f-b34b-0eec8191cd94, version: 1.0.6) @ worlds/Release Check/behavior_packs/10f37ae2-9ccf-435f-b34b-0eec8191cd94
+[2026-09-27 14:09:49:748 INFO] Pack Stack - [01] §c§cJava Saturation [V1.5] §71.21-V26+ (id: f65e943a-2128-4da8-9196-e9bf5b86739d, version: 1.5.2) @ worlds/Release Check/behavior_packs/f65e943a-2128-4da8-9196-e9bf5b86739d
+[2026-09-27 14:09:49:748 INFO] Pack Stack - [02] Kaleidoscope World Liquor (Unofficial) BP (id: 355ffdfc-50e6-5a33-a126-4d78ab955b2b, version: 0.1.19) @ worlds/Release Check/behavior_packs/355ffdfc-50e6-5a33-a126-4d78ab955b2b
+[2026-09-27 14:09:49:748 INFO] Pack Stack - [03] Kaleidoscope Tavern (Unofficial) BP (id: f54f37f9-485a-55bf-8f89-6558aca988c5, version: 0.6.56) @ worlds/Release Check/behavior_packs/f54f37f9-485a-55bf-8f89-6558aca988c5
+[2026-09-27 14:09:52:443 INFO] Signed in to signaling service successfully
+[2026-09-27 14:09:52:444 INFO] Server started.
+[2026-09-27 14:09:52:444 INFO] ================ TELEMETRY MESSAGE ===================
+[2026-09-27 14:09:52:444 INFO] Server Telemetry is currently not enabled. 
+[2026-09-27 14:09:52:444 INFO] Enabling this telemetry helps us improve the game.
+[2026-09-27 14:09:52:444 INFO] 
+[2026-09-27 14:09:52:444 INFO] To enable this feature, add the line 'emit-server-telemetry=true'
+[2026-09-27 14:09:52:444 INFO] to the server.properties file in the handheld/src-server directory
+[2026-09-27 14:09:52:444 INFO] ======================================================
+[2026-09-27 14:09:52:674 WARN] [Scripting] [Tavern C6] Cookery guide chapter and Tavern extension v1 initialized. Public beta 0.6.56-beta.1.
+
+[2026-09-27 14:09:53:660 WARN] [Scripting] [World Liquor] 0.1.19 preview: 24 drink descriptors, 32 recipes. Client visuals require device review.
+
+[2026-09-27 14:09:55:772 WARN] [Scripting] [Tavern guide] Chapter sent; host receipt and client display are not acknowledged by Cookery API v1.
+
+[2026-09-27 14:09:56:848 WARN] [Scripting] [Tavern SDK] Registered kaleidoscope_world_liquor
+
+[2026-09-27 14:10:08:012 WARN] [Scripting] [NATIVE-STORAGE-LIFECYCLE] {"pass":true,"cases":[{"kind":"bar","facing":0,"pass":true},{"kind":"bar","facing":1,"pass":true},{"kind":"bar","facing":2,"pass":true},{"kind":"bar","facing":3,"pass":true},{"kind":"cellar","facing":0,"pass":true},{"kind":"cellar","facing":1,"pass":true},{"kind":"cellar","facing":2,"pass":true},{"kind":"cellar","facing":3,"pass":true}],"queue":{"pass":true,"calls":1,"remaining":0},"simulatedPlayers":false,"clientUI":false}
+
+[2026-09-27 14:10:17:046 INFO] Server stop requested.
+[2026-09-27 14:10:17:096 INFO] Stopping server...
+Quit correctly

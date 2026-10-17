@@ -1,0 +1,24 @@
+{
+  "tavernVersion": "0.6.52",
+  "worldLiquorVersion": "0.1.15",
+  "bdsVersion": "1.26.51.1",
+  "cookeryVersion": "1.0.6",
+  "staticChecks": "passed",
+  "bdsLoad": "passed with isolated diagnostic script; clean shutdown",
+  "engineInputInfoContract": {
+    "lastInputModeUsed": "present",
+    "lastInputMode": "absent"
+  },
+  "nativeStorageRayCases": 108,
+  "families": [
+    "core cellar cabinet",
+    "tilted rack",
+    "circular rack",
+    "addon oak cellar cabinet"
+  ],
+  "facings": 4,
+  "simulatedPlayers": false,
+  "actualPlayerClick": "NOT_TESTED; needs east/west client acceptance",
+  "clientVisuals": "NOT_TESTED",
+  "logSha256": "679e023a35fb30cc4cffa421e98ecf7550ccaa6e43c4fe23f559b899832d1ac6"
+}
